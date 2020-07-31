@@ -49,8 +49,6 @@ final class KeyboardViewController: UIInputViewController {
                 traitCollection.userInterfaceStyle == .dark
         }
         
-        var isDarkModeOn: Bool = false
-        
         var appearance: Appearance {
                 switch traitCollection.userInterfaceStyle {
                 case .light:
@@ -92,6 +90,8 @@ final class KeyboardViewController: UIInputViewController {
                         return .lightModeDarkAppearance
                 }
         }
+        
+        var isCapsLocked: Bool = false
         
         var keyboardLayout: KeyboardLayout = .jyutping {
                 didSet {

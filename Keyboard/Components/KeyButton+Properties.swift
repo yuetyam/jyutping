@@ -117,7 +117,7 @@ extension KeyButton {
                 case .shiftUp:
                         return UIImage(systemName: "shift")
                 case .shiftDown:
-                        return UIImage(systemName: "shift.fill")
+                        return UIImage(systemName: viewController.isCapsLocked ? "capslock.fill" : "shift.fill")
                 default:
                         return nil
                 }

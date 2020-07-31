@@ -3,9 +3,14 @@ import UIKit
 extension KeyButton {
         
         func setupKeyActions() {
-                if keyboardEvent == .backspace {
+                switch keyboardEvent {
+                case .backspace:
                         addTarget(self, action: #selector(handleBackspace), for: .touchDown)
-                } else if keyboardEvent != .space {
+                case .shiftUp, .shiftDown:
+                        addTarget(self, action: #selector(handleShift(_:event:)), for: .touchUpInside)
+                case .space, .none:
+                        break
+                default:
                         addTarget(self, action: #selector(handleTap), for: .touchUpInside)
                 }
         }
@@ -17,7 +22,7 @@ extension KeyButton {
                         } else {
                                 viewController.textDocumentProxy.insertText(text)
                         }
-                        if viewController.keyboardLayout == .alphabetUppercase {
+                        if viewController.keyboardLayout == .alphabetUppercase && !viewController.isCapsLocked {
                                 viewController.keyboardLayout = .alphabetLowercase
                         }
                 case .newLine:
@@ -29,15 +34,37 @@ extension KeyButton {
                         }
                 case .switchTo(let layout):
                         viewController.keyboardLayout = layout
-                case .shiftUp:
-                        viewController.keyboardLayout = .alphabetUppercase
-                case .shiftDown:
-                        viewController.keyboardLayout = .alphabetLowercase
                 default:
                         break
                 }
                 DispatchQueue.global().async {
                         AudioFeedback.play(for: self.keyboardEvent)
+                }
+        }
+        @objc private func handleShift(_ sender: UIButton, event: UIEvent) {
+                guard let touchEvent: UITouch = event.allTouches?.first else { return }
+                if touchEvent.tapCount == 2 {
+                        if keyboardEvent == .shiftUp {
+                                viewController.isCapsLocked = true
+                                viewController.keyboardLayout = .alphabetUppercase
+                        } else {// keyboardEvent == .shiftDown
+                                if viewController.isCapsLocked {
+                                        viewController.isCapsLocked = false
+                                        viewController.keyboardLayout = .alphabetLowercase
+                                } else {
+                                        viewController.isCapsLocked = true
+                                        viewController.setupKeyboard()
+                                }
+                        }
+                } else if touchEvent.tapCount == 1 {
+                        if keyboardEvent == .shiftUp {
+                                viewController.keyboardLayout = .alphabetUppercase
+                        } else { // keyboardEvent == .shiftDown
+                                if viewController.isCapsLocked {
+                                        viewController.isCapsLocked = false
+                                }
+                                viewController.keyboardLayout = .alphabetLowercase
+                        }
                 }
         }
         @objc private func handleBackspace() {
