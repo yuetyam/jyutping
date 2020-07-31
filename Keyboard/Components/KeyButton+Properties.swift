@@ -90,15 +90,15 @@ extension KeyButton {
                         } else {
                                 return "粵  拼"
                         }
-                case .switchTo(let type):
-                        return keyText(for: type)
+                case .switchTo(let destinationLayout):
+                        return keyText(for: destinationLayout)
                 default:
                         return nil
                 }
         }
         
-        private func keyText(for keyboardType: KeyboardLayout) -> String {
-                switch keyboardType {
+        private func keyText(for destination: KeyboardLayout) -> String {
+                switch destination {
                 case .numericJyutping, .numericAlphabet:
                         return "123"
                 case .symbolicJyutping, .symbolicAlphabet:
