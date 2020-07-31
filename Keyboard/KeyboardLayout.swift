@@ -75,7 +75,7 @@ private extension KeyboardLayout {
                 eventRows[1].insert(.none, at: 0)
                 eventRows[1].append(.none)
                 eventRows[1].append(.none)
-                eventRows[2].insert(.shiftUp, at: 0)
+                eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)

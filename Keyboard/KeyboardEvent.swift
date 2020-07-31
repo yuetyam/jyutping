@@ -5,7 +5,7 @@ enum KeyboardEvent: Equatable {
         backspace,
         newLine, // return, enter
         space,
-        shiftUp,
+        shift,
         shiftDown,
         
         // Represent  UIInputViewController().dismissKeyboard()

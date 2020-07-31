@@ -27,7 +27,7 @@ enum AudioFeedback: Equatable {
                         perform(audioFeedback: .input)
                 case .backspace:
                         perform(audioFeedback: .delete)
-                case .switchTo(_), .newLine, .shiftUp, .shiftDown:
+                case .switchTo(_), .newLine, .shift, .shiftDown:
                         perform(audioFeedback: .modify)
                 case .none:
                         break

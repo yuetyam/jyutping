@@ -6,7 +6,7 @@ extension KeyButton {
                 switch keyboardEvent {
                 case .none:
                         return 10
-                case .backspace, .shiftUp, .shiftDown, .switchTo(_), .switchInputMethod:
+                case .backspace, .shift, .shiftDown, .switchTo(_), .switchInputMethod:
                         return 50
                 case .newLine:
                         return 80
@@ -114,7 +114,7 @@ extension KeyButton {
                         return UIImage(systemName: "delete.left")
                 case .newLine:
                         return UIImage(systemName: "return")
-                case .shiftUp:
+                case .shift:
                         return UIImage(systemName: "shift")
                 case .shiftDown:
                         return UIImage(systemName: viewController.isCapsLocked ? "capslock.fill" : "shift.fill")

@@ -6,7 +6,7 @@ extension KeyButton {
                 switch keyboardEvent {
                 case .backspace:
                         addTarget(self, action: #selector(handleBackspace), for: .touchDown)
-                case .shiftUp, .shiftDown:
+                case .shift, .shiftDown:
                         addTarget(self, action: #selector(handleShift(_:event:)), for: .touchUpInside)
                 case .space, .none:
                         break
@@ -44,7 +44,7 @@ extension KeyButton {
         @objc private func handleShift(_ sender: UIButton, event: UIEvent) {
                 guard let touchEvent: UITouch = event.allTouches?.first else { return }
                 if touchEvent.tapCount == 2 {
-                        if keyboardEvent == .shiftUp {
+                        if keyboardEvent == .shift {
                                 viewController.isCapsLocked = true
                                 viewController.keyboardLayout = .alphabetUppercase
                         } else {// keyboardEvent == .shiftDown
@@ -57,7 +57,7 @@ extension KeyButton {
                                 }
                         }
                 } else if touchEvent.tapCount == 1 {
-                        if keyboardEvent == .shiftUp {
+                        if keyboardEvent == .shift {
                                 viewController.keyboardLayout = .alphabetUppercase
                         } else { // keyboardEvent == .shiftDown
                                 if viewController.isCapsLocked {
