@@ -22,10 +22,18 @@ extension KeyButton {
                 case .phone:
                         if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
                                 // iPhone landscape
-                                return 40
+                                
+                                if UIScreen.main.bounds.width < 570 {
+                                        return 36 // iPhone SE1, iPod touch 7
+                                } else {
+                                        return 40
+                                }
                         } else {
-                                if UIScreen.main.bounds.height < 700 {
-                                        // iPhone 7, 8, SE2
+                                if UIScreen.main.bounds.height < 570 {
+                                        // iPhone SE1, iPod touch 7
+                                        return 48
+                                } else if UIScreen.main.bounds.height < 700 {
+                                        // iPhone 6s, 7, 8, SE2
                                         return 53
                                 } else {
                                         return 55
@@ -35,12 +43,12 @@ extension KeyButton {
                         if viewController.view.bounds.width < 500 {
                                 // floating
                                 return 50
-                        }
-                        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+                        } else if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
                                 // landscape
                                 return 80
+                        } else {
+                                return 70
                         }
-                        return 70
                 default:
                         return 55
                 }
