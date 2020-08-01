@@ -49,8 +49,6 @@ final class KeyButton: UIButton {
         private var previewLabel: UILabel = UILabel()
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
-                previewLabel.text = nil
-                previewLabel.removeFromSuperview()
                 switch keyboardEvent {
                 case .text(_):
                         if traitCollection.userInterfaceIdiom == .phone && UIScreen.main.bounds.height > UIScreen.main.bounds.width {

@@ -128,6 +128,9 @@ extension KeyButton {
         }
         */
         
+        
+        // TODO: - Fix width
+        
         func previewBezierPath(origin: CGPoint, end: CGPoint, height: CGFloat, cornerRadius: CGFloat) -> UIBezierPath {
                 let minWidth = end.x - origin.x
                 let distance: CGFloat = (height - minWidth) / 2
