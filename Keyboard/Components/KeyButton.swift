@@ -46,16 +46,14 @@ final class KeyButton: UIButton {
         }
         
         private let shapeLayer: CAShapeLayer = CAShapeLayer()
-        private var previewMask: UIView = UIView()
         private var previewLabel: UILabel = UILabel()
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
                 previewLabel.text = nil
                 previewLabel.removeFromSuperview()
-                previewMask.removeFromSuperview()
                 switch keyboardEvent {
                 case .text(_):
-                        if traitCollection.userInterfaceIdiom == .phone {
+                        if traitCollection.userInterfaceIdiom == .phone && UIScreen.main.bounds.height > UIScreen.main.bounds.width {
                                 let shapeWidth: CGFloat = keyButtonView.frame.width
                                 let previewHeight: CGFloat = height + 7
                                 
@@ -76,16 +74,13 @@ final class KeyButton: UIButton {
                                 shapeLayer.add(animation, forKey: animation.keyPath)
                                 layer.addSublayer(shapeLayer)
                                 
-                                previewMask = UIView(frame: CGRect(x: origin.x, y: keyButtonView.frame.origin.y, width: shapeWidth, height: 10))
-                                previewMask.backgroundColor = buttonColor
-                                addSubview(previewMask)
-                                
                                 previewLabel = UILabel(frame: CGRect(x: origin.x, y: keyButtonView.frame.origin.y - previewHeight, width: shapeWidth, height: previewHeight))
                                 previewLabel.textAlignment = .center
                                 previewLabel.adjustsFontForContentSizeCategory = true
                                 previewLabel.font = .preferredFont(forTextStyle: .largeTitle)
                                 previewLabel.textColor = buttonTintColor
                                 addSubview(previewLabel)
+                                
                                 showPreviewText()
                         } else {
                                 keyButtonView.backgroundColor = self.highlightButtonColor
@@ -135,7 +130,7 @@ final class KeyButton: UIButton {
                 case .backspace:
                         changeColorToNormal()
                 case .text(_):
-                        if traitCollection.userInterfaceIdiom == .phone {
+                        if traitCollection.userInterfaceIdiom == .phone && UIScreen.main.bounds.height > UIScreen.main.bounds.width {
                                 removePreview()
                         } else {
                                 changeColorToNormal()
@@ -191,10 +186,9 @@ final class KeyButton: UIButton {
         private func showPreviewText() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
                         self.previewLabel.text = self.keyText
-                        self.shapeLayer.shadowColor = UIColor.black.cgColor
-                        self.shapeLayer.shadowOpacity = 0.5
+                        self.shapeLayer.shadowOpacity = 0.2
                         self.shapeLayer.shadowRadius = 2
-                        self.shapeLayer.shadowOffset = CGSize(width: 0, height: 0)
+                        self.shapeLayer.shadowColor = UIColor.black.cgColor
                 }
         }
         private func removePreview() {
@@ -202,7 +196,6 @@ final class KeyButton: UIButton {
                         self.previewLabel.text = nil
                         self.previewLabel.removeFromSuperview()
                         self.shapeLayer.removeFromSuperlayer()
-                        self.previewMask.removeFromSuperview()
                 }
         }
         

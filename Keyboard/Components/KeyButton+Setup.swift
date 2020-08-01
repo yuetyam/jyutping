@@ -136,16 +136,28 @@ extension KeyButton {
                 
                 let path: UIBezierPath = UIBezierPath()
                 path.move(to: origin)
-                path.addCurve(to: CGPoint(x: origin.x - distance, y: origin.y - curveDistance), controlPoint1: CGPoint(x: origin.x, y: origin.y - controlDistance), controlPoint2: CGPoint(x: origin.x - distance, y: origin.y - controlDistance))
+                path.addCurve(to: CGPoint(x: origin.x - distance, y: origin.y - curveDistance),
+                              controlPoint1: CGPoint(x: origin.x, y: origin.y - controlDistance),
+                              controlPoint2: CGPoint(x: origin.x - distance, y: origin.y - controlDistance))
                 
                 path.addLine(to: CGPoint(x: origin.x - distance, y: origin.y - height + cornerRadius))
-                path.addArc(withCenter: CGPoint(x: origin.x - distance + cornerRadius, y: origin.y - height + cornerRadius), radius: cornerRadius, startAngle: CGFloat.pi, endAngle: (3 * CGFloat.pi / 2), clockwise: true)
+                path.addArc(withCenter: CGPoint(x: origin.x - distance + cornerRadius, y: origin.y - height + cornerRadius),
+                            radius: cornerRadius,
+                            startAngle: CGFloat.pi,
+                            endAngle: (3 * CGFloat.pi / 2),
+                            clockwise: true)
                 
                 path.addLine(to: CGPoint(x: origin.x - distance + height - cornerRadius, y: origin.y - height))
-                path.addArc(withCenter: CGPoint(x: origin.x - distance + height - cornerRadius, y: origin.y - height + cornerRadius), radius: cornerRadius, startAngle: (3 * CGFloat.pi / 2), endAngle: 0, clockwise: true)
+                path.addArc(withCenter: CGPoint(x: origin.x - distance + height - cornerRadius, y: origin.y - height + cornerRadius),
+                            radius: cornerRadius,
+                            startAngle: (3 * CGFloat.pi / 2),
+                            endAngle: 0,
+                            clockwise: true)
                 
                 path.addLine(to: CGPoint(x: end.x + distance, y: end.y - curveDistance))
-                path.addCurve(to: end, controlPoint1: CGPoint(x: end.x + distance, y: end.y - controlDistance), controlPoint2: CGPoint(x: end.x, y: end.y - controlDistance))
+                path.addCurve(to: end,
+                              controlPoint1: CGPoint(x: end.x + distance, y: end.y - controlDistance),
+                              controlPoint2: CGPoint(x: end.x, y: end.y - controlDistance))
                 
                 path.close()
                 return path
