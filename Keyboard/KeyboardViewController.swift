@@ -91,7 +91,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        var isCapsLocked: Bool = false
+        lazy var isCapsLocked: Bool = false
         
         var keyboardLayout: KeyboardLayout = .jyutping {
                 didSet {
@@ -115,7 +115,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        var candidates: [Candidate] = [] {
+        lazy var candidates: [Candidate] = [] {
                 didSet {
                         DispatchQueue.main.async {
                                 self.collectionView.reloadData()
@@ -126,7 +126,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        private let engine: Engine = Engine()
+        private lazy var engine: Engine = Engine()
         func requestSuggestion() {
                 candidates = engine.suggest(for: currentInputText)
         }
