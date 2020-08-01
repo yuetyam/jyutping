@@ -115,7 +115,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        lazy var candidates: [Candidate] = [] {
+        var candidates: [Candidate] = [] {
                 didSet {
                         DispatchQueue.main.async {
                                 self.collectionView.reloadData()
