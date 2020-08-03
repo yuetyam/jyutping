@@ -22,22 +22,30 @@ struct JyutpingProvider {
                 if !matches.isEmpty {
                         return matches
                 } else {
+                        var chars: String = text
                         var suggestion: String = ""
-                        _ = words.map { char in
-                                let jyutpings: [String] = match(for: String(char))
-                                if !jyutpings.isEmpty {
-                                        suggestion += (jyutpings[0] + " ")
-                                }
+                        while !chars.isEmpty {
+                                let firstMatch = fetchLeadingJyutping(for: chars)
+                                suggestion += firstMatch.jyutping + " "
+                                chars = String(chars.dropFirst(firstMatch.charCount))
                         }
-                        if !suggestion.isEmpty {
-                                return [suggestion]
-                        } else {
-                                return []
-                        }
+                        suggestion = String(suggestion.dropLast())
+                        return suggestion.isEmpty ? [] : [suggestion]
                 }
         }
+        private static func fetchLeadingJyutping(for words: String) -> (jyutping: String, charCount: Int) {
+                var chars: String = words
+                var jyutpings: [String] = []
+                var matchedCount: Int = 0
+                while !chars.isEmpty && jyutpings.isEmpty {
+                        jyutpings = match(for: chars)
+                        matchedCount = chars.count
+                        chars = String(chars.dropLast())
+                }
+                return (jyutpings.first ?? "?", matchedCount)
+        }
         
-        static func match(for text: String) -> [String] {
+        private static func match(for text: String) -> [String] {
                 var jyutpings: [String] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE word = '\(text)\';"
                 var queryStatement: OpaquePointer? = nil
