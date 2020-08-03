@@ -38,7 +38,9 @@ struct JyutpingView: View {
                                                         
                                                         ForEach(jyutpings) { (jyutping) in
                                                                 HStack {
-                                                                        Text(jyutping).font(.system(.body, design: .monospaced))
+                                                                        Text(jyutping)
+                                                                                .font(.system(.body, design: .monospaced))
+                                                                                .fixedSize(horizontal: false, vertical: true)
                                                                         Spacer()
                                                                 }.padding(.horizontal)
                                                                 
