@@ -102,7 +102,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        private let candidateQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim.candidate", qos: .userInitiated)
+        private lazy var candidateQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim.candidate", qos: .userInitiated)
         var currentInputText: String = "" {
                 didSet {
                         DispatchQueue.main.async {
