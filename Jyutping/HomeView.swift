@@ -8,23 +8,13 @@ struct HomeView: View {
                 Text("•  Tap ") + Text("Keyboards").fontWeight(.medium) + Text("\n") +
                 Text("•  Turn on ") + Text("Jyutping").fontWeight(.medium) + Text(" ") + Text("Keyboard")
         
-        
-        // FIXME: - iOS 14 bug?
-        // workaround
-        private var editingKeyboards: Text {
-                if #available(iOS 14.0, *) {
-                        return Text("Settings App   →   General   →   Keyboard   →   Keyboards   →   Add New Keyboards... or Edit")
-                } else {
-                        return editKeyboard
-                }
-        }
-        private let editKeyboard: Text = Text("Go to ") +
+        private let editingKeyboards: Text = Text("Go to ") +
                 Text("Settings").fontWeight(.medium) + Text(" App   →   ") +
                 Text("General").fontWeight(.medium) + Text("   →   ") +
                 Text("Keyboard").fontWeight(.medium) + Text("   →   ") +
                 Text("Keyboards").fontWeight(.medium) + Text(", then ") +
                 Text("Add New Keyboards...").fontWeight(.medium) + Text(" or ") +
-                Text("Edit").fontWeight(.medium) + Text("\n")
+                Text("Edit").fontWeight(.medium)
         
         var body: some View {
                 NavigationView {
@@ -35,8 +25,23 @@ struct HomeView: View {
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .padding()
                                 
-                                CardView(headline: Text("How to enable this Keyboard"), content: enableKeyboard)
-                                        .padding()
+                                VStack {
+                                        HStack {
+                                                Text("How to enable this Keyboard")
+                                                        .lineLimit(1)
+                                                        .font(.system(size: 20, weight: .medium, design: .default))
+                                                Spacer()
+                                        }
+                                        .padding(.bottom)
+                                        
+                                        HStack {
+                                                enableKeyboard.fixedSize(horizontal: false, vertical: true)
+                                                Spacer()
+                                        }
+                                }
+                                .padding()
+                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .padding()
                                 
                                 Button(action: {
                                         let url: URL = URL(string: UIApplication.openSettingsURLString)!
@@ -52,10 +57,24 @@ struct HomeView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
                                 .padding(.horizontal)
                                 
-                                CardView(headline: Text("How to add or edit keyboards"), content: editingKeyboards)
-                                        .padding()
-                                        .padding(.top, 85)
-                                        .padding(.bottom, 80)
+                                VStack {
+                                        HStack {
+                                                Text("How to add or edit keyboards")
+                                                        .lineLimit(1)
+                                                        .font(.system(size: 20, weight: .medium, design: .default))
+                                                Spacer()
+                                        }
+                                        .padding(.bottom)
+                                        
+                                        HStack {
+                                                editingKeyboards.fixedSize(horizontal: false, vertical: true)
+                                                Spacer()
+                                        }
+                                }
+                                .padding()
+                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .padding()
+                                .padding(.vertical, 85)
                         }
                         .navigationBarTitle(Text("Home"))
                 }

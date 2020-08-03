@@ -24,7 +24,6 @@
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
 		3741063423E30D7100639EF4 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ArrowButton.swift */; };
 		3741063623E30DA800639EF4 /* WordsBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063523E30DA800639EF4 /* WordsBoard.swift */; };
-		37441B38239E6BAC00ECADD3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37441B37239E6BAC00ECADD3 /* CardView.swift */; };
 		3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */; };
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
@@ -101,7 +100,6 @@
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
 		3741063323E30D7100639EF4 /* ArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
 		3741063523E30DA800639EF4 /* WordsBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBoard.swift; sourceTree = "<group>"; };
-		37441B37239E6BAC00ECADD3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Properties.swift"; sourceTree = "<group>"; };
 		3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Setup.swift"; sourceTree = "<group>"; };
 		3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Handlers.swift"; sourceTree = "<group>"; };
@@ -217,7 +215,6 @@
 			children = (
 				37336F79239A9317006A59A7 /* SafariView.swift */,
 				3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */,
-				37441B37239E6BAC00ECADD3 /* CardView.swift */,
 				37336F80239ABE05006A59A7 /* LinkButton.swift */,
 				37336F7E239ABDC4006A59A7 /* MessageView.swift */,
 				37336F7C239ABB30006A59A7 /* ShareSheetView.swift */,
@@ -430,7 +427,6 @@
 				3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */,
 				377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */,
 				37336F7A239A9317006A59A7 /* SafariView.swift in Sources */,
-				37441B38239E6BAC00ECADD3 /* CardView.swift in Sources */,
 				374AC0C1246A2AB3004B70ED /* AcknowledgementsView.swift in Sources */,
 				37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */,
 				3756602123C5601C009FCA23 /* JyutpingProvider.swift in Sources */,
