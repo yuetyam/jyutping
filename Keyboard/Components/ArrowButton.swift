@@ -1,7 +1,7 @@
 import UIKit
 
 final class ArrowButton: UIButton {
-        convenience init(imageName: String, topInset: CGFloat = 4, leftInset: CGFloat = 10, bottomInset: CGFloat = 8, rightInset: CGFloat = 10) {
+        convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 8, rightInset: CGFloat = 8) {
                 self.init(frame: .zero)
                 let arrowImageView: UIImageView = UIImageView()
                 addSubview(arrowImageView)

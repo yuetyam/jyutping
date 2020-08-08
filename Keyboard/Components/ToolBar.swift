@@ -36,12 +36,11 @@ final class ToolBar: UIView {
         
         let inputLabel: UILabel = UILabel()
         
-        let settingsButton: ArrowButton = ArrowButton(imageName: "gear")
-        let keyboardDownButton: ArrowButton = ArrowButton(imageName: "keyboard.chevron.compact.down", leftInset: 9, rightInset: 9)
-        let downArrowButton: ArrowButton = ArrowButton(imageName: "chevron.down")
+        let settingsButton: ArrowButton = ArrowButton(imageName: "gear", leftInset: 12)
+        let keyboardDownButton: ArrowButton = ArrowButton(imageName: "keyboard.chevron.compact.down", rightInset: 12)
+        let downArrowButton: ArrowButton = ArrowButton(imageName: "chevron.down", rightInset: 12)
         private var isDownArrowSetup: Bool = false
         private var isKeyboardDownSetup: Bool { !isDownArrowSetup }
-        
         func setupSettingButton() {
                 inputLabel.removeFromSuperview()
                 viewController.collectionView.removeFromSuperview()
@@ -50,7 +49,7 @@ final class ToolBar: UIView {
                 settingsButton.translatesAutoresizingMaskIntoConstraints = false
                 settingsButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 settingsButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-                settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+                settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 settingsButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
         }
         func setupCandidatesCollectionView() {
@@ -103,7 +102,7 @@ final class ToolBar: UIView {
                 keyboardDownButton.translatesAutoresizingMaskIntoConstraints = false
                 keyboardDownButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 keyboardDownButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-                keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2).isActive = true
+                keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
                 keyboardDownButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
         }
 }

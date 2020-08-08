@@ -37,7 +37,7 @@ final class SettingsView: UIView {
                 }
         }
         
-        let upArrowButton: ArrowButton = ArrowButton(imageName: "chevron.up")
+        let upArrowButton: ArrowButton = ArrowButton(imageName: "chevron.up", leftInset: 12, rightInset: 12)
         
         init() {
                 super.init(frame: .zero)
@@ -53,7 +53,7 @@ final class SettingsView: UIView {
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
                 upArrowButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
-                upArrowButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+                upArrowButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 upArrowButton.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 60).isActive = true
         }
 }
