@@ -71,7 +71,7 @@ final class ToolBar: UIView {
                 addSubview(viewController.collectionView)
                 viewController.collectionView.translatesAutoresizingMaskIntoConstraints = false
                 
-                viewController.collectionView.topAnchor.constraint(equalTo: topAnchor,constant: 8).isActive = true
+                viewController.collectionView.topAnchor.constraint(equalTo: topAnchor,constant: 10).isActive = true
                 viewController.collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
                 viewController.collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 viewController.collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45).isActive = true
