@@ -24,7 +24,7 @@ final class WordsBoard: UIView {
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
                 upArrowButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 upArrowButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-                upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 55).isActive = true
+                upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
                 upArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45).isActive = true
         }
 }
@@ -52,8 +52,8 @@ final class SettingsView: UIView {
                 addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
                 upArrowButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
-                upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 55).isActive = true
+                upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
                 upArrowButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-                upArrowButton.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 55).isActive = true
+                upArrowButton.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 60).isActive = true
         }
 }

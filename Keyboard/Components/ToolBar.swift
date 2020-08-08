@@ -51,7 +51,7 @@ final class ToolBar: UIView {
                 settingsButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 settingsButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
                 settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
-                settingsButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
+                settingsButton.widthAnchor.constraint(equalToConstant: 48).isActive = true
         }
         func setupCandidatesCollectionView() {
                 settingsButton.removeFromSuperview()
@@ -103,7 +103,7 @@ final class ToolBar: UIView {
                 keyboardDownButton.translatesAutoresizingMaskIntoConstraints = false
                 keyboardDownButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 keyboardDownButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-                keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-                keyboardDownButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45).isActive = true
+                keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2).isActive = true
+                keyboardDownButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -50).isActive = true
         }
 }
