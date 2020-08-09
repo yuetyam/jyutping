@@ -140,6 +140,7 @@ final class KeyboardViewController: UIInputViewController {
         
         private func setupToolBarActions() {
                 toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .allTouchEvents)
+                toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .valueChanged)
                 toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .allTouchEvents)
                 toolBar.keyboardDownButton.addTarget(self, action: #selector(handleDismissKeyboard), for: .allTouchEvents)
         }
@@ -153,6 +154,17 @@ final class KeyboardViewController: UIInputViewController {
         @objc private func handleSettingsButtonEvent() {
                 settingsView.height = view.bounds.height
                 keyboardLayout = .settingsView
+        }
+        @objc private func handleYueEngSwitch() {
+                switch toolBar.yueEngSwitch.selectedSegmentIndex {
+                case 0:
+                        keyboardLayout = .jyutping
+                case 1:
+                        isCapsLocked = false
+                        keyboardLayout = .alphabetLowercase
+                default:
+                        break
+                }
         }
 }
 

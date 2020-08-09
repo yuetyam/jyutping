@@ -9,9 +9,9 @@ extension KeyButton {
                 case .backspace, .shift, .shiftDown, .switchTo(_), .switchInputMethod:
                         return 50
                 case .newLine:
-                        return 80
+                        return 70
                 case .space:
-                        return 200
+                        return 190
                 default:
                         return 40
                 }
@@ -107,8 +107,8 @@ extension KeyButton {
                         return "粵"
                 case .cantoneseSymbolic:
                         return "符"
-                case .alphabetLowercase:
-                        return "EN"
+                case .alphabetLowercase, .alphabetUppercase:
+                        return "ABC"
                 default:
                         return "??"
                 }
