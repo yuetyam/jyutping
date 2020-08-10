@@ -6,12 +6,20 @@ extension KeyButton {
                 switch keyboardEvent {
                 case .none:
                         return 10
-                case .backspace, .shift, .shiftDown, .switchTo(_), .switchInputMethod:
+                case .backspace, .shift, .shiftDown, .switchTo(_):
                         return 50
+                case .switchInputMethod:
+                        return 45
                 case .newLine:
-                        return 70
+                        return 72
                 case .space:
                         return 190
+                case .text("."):
+                        if viewController.keyboardLayout == .alphabetLowercase || viewController.keyboardLayout == .alphabetUppercase {
+                                return 35
+                        } else {
+                                return 40
+                        }
                 default:
                         return 40
                 }

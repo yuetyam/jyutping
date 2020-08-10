@@ -80,8 +80,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericAlphabet), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.numericAlphabet), .space, .newLine]
+                        [.switchTo(.numericAlphabet), .switchInputMethod, .space, .text("."), .newLine] :
+                        [.switchTo(.numericAlphabet), .text("."), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -101,8 +101,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericAlphabet), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.numericAlphabet), .space, .newLine]
+                        [.switchTo(.numericAlphabet), .switchInputMethod, .space, .text("."), .newLine] :
+                        [.switchTo(.numericAlphabet), .text("."), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
