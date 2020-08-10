@@ -74,9 +74,6 @@ extension KeyButton {
                 }
         }
         @objc private func performBackspace() {
-                
-                guard !viewController.currentInputText.isEmpty || viewController.textDocumentProxy.hasText else { return }
-                
                 if viewController.currentInputText.isEmpty {
                         viewController.textDocumentProxy.deleteBackward()
                 } else {
