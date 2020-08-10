@@ -13,12 +13,9 @@ struct JyutpingProvider {
                 }
         }()
         
-        private static let specials: String = #"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ_0123456789-:;.,?~!@#$%^&*/\<>{}[]()+='"•。，；？！、：～（）《》「」【】"#
         static func search(for text: String) -> [String] {
-                let words: String = text.filter { !specials.contains($0) }
-                guard !words.isEmpty else { return [] }
-                
-                let matches: [String] = match(for: words)
+                guard !text.isEmpty else { return [] }
+                let matches: [String] = match(for: text)
                 if !matches.isEmpty {
                         return matches
                 } else {

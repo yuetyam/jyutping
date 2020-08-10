@@ -2,10 +2,13 @@ import SwiftUI
 
 struct JyutpingView: View {
         
-        @State private var inputText: String = String()
-        private var jyutpings: [String] { JyutpingProvider.search(for: inputText) }
-        
         private let placeholdText: String = NSLocalizedString("Search the Jyutping of Cantonese word", comment: "")
+        
+        @State private var inputText: String = String()
+        
+        private let specials: String = #"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ_0123456789-:;.,?~!@#$%^&*/\<>{}[]()+='"•。，；？！、：～（）《》「」【】"#
+        private var rawCantonese: String { inputText.filter { !specials.contains($0) } }
+        private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
         
         var body: some View {
                 NavigationView {
@@ -29,7 +32,7 @@ struct JyutpingView: View {
                                         } else {
                                                 VStack {
                                                         HStack {
-                                                                Text(inputText).font(.headline)
+                                                                Text(rawCantonese).font(.headline)
                                                         }
                                                         .padding(.top)
                                                         .padding(.horizontal)
