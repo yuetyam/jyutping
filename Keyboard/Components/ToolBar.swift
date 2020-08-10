@@ -64,7 +64,7 @@ final class ToolBar: UIView {
                 yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset).isActive = true
                 yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset).isActive = true
                 yueEngSwitch.leadingAnchor.constraint(equalTo: settingsButton.trailingAnchor, constant: 8).isActive = true
-                yueEngSwitch.widthAnchor.constraint(equalToConstant: isPhoneInterface ? 65 : 85).isActive = true
+                yueEngSwitch.widthAnchor.constraint(equalToConstant: isPhoneInterface ? 70 : 88).isActive = true
                 if viewController.keyboardLayout == .jyutping {
                         yueEngSwitch.selectedSegmentIndex = 0
                 }
