@@ -52,6 +52,9 @@ final class KeyButton: UIButton {
                 switch keyboardEvent {
                 case .text(_):
                         if traitCollection.userInterfaceIdiom == .phone && UIScreen.main.bounds.height > UIScreen.main.bounds.width {
+                                self.previewLabel.text = nil
+                                self.previewLabel.removeFromSuperview()
+                                
                                 let shapeWidth: CGFloat = keyButtonView.frame.width
                                 let previewHeight: CGFloat = height + 7
                                 
@@ -64,7 +67,7 @@ final class KeyButton: UIButton {
                                 shapeLayer.fillColor = buttonColor.cgColor
                                 
                                 let animation = CABasicAnimation(keyPath: "path")
-                                animation.duration = 0.03
+                                animation.duration = 0.02
                                 animation.toValue = previewPath
                                 animation.fillMode = .forwards
                                 animation.isRemovedOnCompletion = false
@@ -182,7 +185,7 @@ final class KeyButton: UIButton {
         }
         
         private func showPreviewText() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
                         self.previewLabel.text = self.keyText
                         self.shapeLayer.shadowOpacity = 0.2
                         self.shapeLayer.shadowRadius = 2
