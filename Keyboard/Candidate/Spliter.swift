@@ -112,5 +112,5 @@ struct Spliter {
         "kwaak", "kwang", "la", "lan", "lang", "lem", "leu", "meng", "mi",
         "nak", "ne", "neng", "ngaap", "ngam", "ngang", "nge", "ngit", "ngot", "ni",
         "nit", "noek", "nuk", "paat", "pe", "peng", "pet", "poi", "soe", "tap",
-        "teot", "wak", "wet", "zem", "zep", "zoe", "zoet"]
+        "teot", "wak", "wet", "zem", "zep", "zoe", "zoet", "m"]
 }
