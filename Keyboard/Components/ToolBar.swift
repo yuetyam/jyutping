@@ -56,11 +56,11 @@ final class ToolBar: UIView {
                 settingsButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 settingsButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
                 settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-                settingsButton.widthAnchor.constraint(equalToConstant: isPhoneInterface ? 48 : 55).isActive = true
+                settingsButton.widthAnchor.constraint(equalToConstant: isPhoneInterface ? 50 : 55).isActive = true
                 
                 addSubview(yueEngSwitch)
                 yueEngSwitch.translatesAutoresizingMaskIntoConstraints = false
-                let topBottomInset: CGFloat = isPhoneInterface ? 18 : 16
+                let topBottomInset: CGFloat = isPhoneInterface ? 17 : 15
                 yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset).isActive = true
                 yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset).isActive = true
                 yueEngSwitch.leadingAnchor.constraint(equalTo: settingsButton.trailingAnchor, constant: 8).isActive = true
