@@ -8,5 +8,3 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build Jyutping
       run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 11 Pro Max" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
-    - name: Build Keyboard
-      run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 11 Pro Max" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
