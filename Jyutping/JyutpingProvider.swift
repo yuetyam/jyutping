@@ -4,7 +4,7 @@ import SQLite3
 struct JyutpingProvider {
         
         private static let database: OpaquePointer? = {
-                let path: String = Bundle.main.path(forResource: "jyut6ping3", ofType: "sqlite3")!
+                guard let path: String = Bundle.main.path(forResource: "jyut6ping3", ofType: "sqlite3") else { return nil }
                 var db: OpaquePointer?
                 if sqlite3_open(path, &db) == SQLITE_OK {
                         return db
