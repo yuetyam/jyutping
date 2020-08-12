@@ -78,6 +78,7 @@ struct Engine {
                         }
                         return combine.deduplicated()
                 } else {
+                        var combine = fullMatch + matchRawPrefix(for: text, characterCount: jyutpings.count + 1, count: 10)
                         var matches: [Candidate] = matchRaw(for: rawJyutping)
                         var firstMatchedJyutpingCount: Int = matches.isEmpty ? 0 : jyutpings.count
                         if jyutpings.count > 1 {
@@ -121,7 +122,8 @@ struct Engine {
                                         }
                                 }
                         }
-                        return (fullMatch + matches).deduplicated()
+                        combine += matches
+                        return combine.deduplicated()
                 }
         }
         
