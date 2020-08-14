@@ -127,7 +127,7 @@ private extension KeyboardLayout {
                 let arrayWithTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""],
-                        [".", ",", "?", "!", "´"]
+                        [".", ",", "?", "!", "'"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.symbolicJyutping), at: 0)
@@ -144,7 +144,7 @@ private extension KeyboardLayout {
                 let arrayWithTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""],
-                        [".", ",", "?", "!", "´"]
+                        [".", ",", "?", "!", "'"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.symbolicAlphabet), at: 0)
@@ -161,7 +161,7 @@ private extension KeyboardLayout {
                 let arrayWithTextArray: [[String]] = [
                         ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
-                        [".", ",", "?", "!", "´"]
+                        [".", ",", "?", "!", "'"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.numericJyutping), at: 0)
@@ -178,7 +178,7 @@ private extension KeyboardLayout {
                 let arrayWithTextArray: [[String]] = [
                         ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
-                        [".", ",", "?", "!", "´"]
+                        [".", ",", "?", "!", "'"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.numericAlphabet), at: 0)
