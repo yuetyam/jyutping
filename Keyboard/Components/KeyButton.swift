@@ -87,11 +87,12 @@ final class KeyButton: UIButton {
                                 keyButtonView.backgroundColor = self.highlightButtonColor
                         }
                 case .space:
+                        keyButtonView.backgroundColor = self.highlightButtonColor
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         performedDraggingOnSpace = false
-                        keyButtonView.backgroundColor = self.highlightButtonColor
                 case .backspace:
                         keyButtonView.backgroundColor = self.highlightButtonColor
+                        backspaceTouchPoint = touches.first?.location(in: self) ?? .zero
                 default:
                         break
                 }
@@ -143,7 +144,7 @@ final class KeyButton: UIButton {
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)
                 if keyboardEvent == .space {
-                        let location: CGPoint = touches.first?.location(in: self) ?? .zero
+                        guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 8 else { return }
                         if distance > 0 {
@@ -153,6 +154,13 @@ final class KeyButton: UIButton {
                         }
                         spaceTouchPoint = location
                         performedDraggingOnSpace = true
+                }
+                if keyboardEvent == .backspace {
+                        guard viewController.keyboardLayout == .jyutping else { return }
+                        guard let location: CGPoint = touches.first?.location(in: self) else { return }
+                        let distance: CGFloat = location.x - backspaceTouchPoint.x
+                        guard distance < -44 else { return }
+                        viewController.currentInputText = ""
                 }
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -209,4 +217,5 @@ final class KeyButton: UIButton {
         
         private var performedDraggingOnSpace: Bool = false
         private var spaceTouchPoint: CGPoint = .zero
+        private var backspaceTouchPoint: CGPoint = .zero
 }
