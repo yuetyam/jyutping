@@ -126,9 +126,12 @@ struct Engine {
                         return combine.deduplicated()
                 }
         }
+}
+
+private extension Engine {
         
         // MATCH:  initial = text
-        private func matchInitial(for text: String, count: Int = 100) -> [Candidate] {
+        func matchInitial(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE initial = '\(text)\' LIMIT \(count);"
@@ -146,7 +149,7 @@ struct Engine {
         }
         
         // MATCH:  rawjyutping == text
-        private func match(for text: String, count: Int = 200) -> [Candidate] {
+        func match(for text: String, count: Int = 200) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE rawjyutping = '\(text)\' LIMIT \(count);"
@@ -164,7 +167,7 @@ struct Engine {
         }
         
         // MATCH:  text == rawjyutping[0..<text.count] && word.count = characterCount
-        private func matchPrefix(for text: String, characterCount: Int, count: Int = 100) -> [Candidate] {
+        func matchPrefix(for text: String, characterCount: Int, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE length(word) = \(characterCount) AND substr(rawjyutping, 1, \(text.count)) = \'\(text)\' LIMIT \(count);"
@@ -182,7 +185,7 @@ struct Engine {
         }
         
         // MATCH:  text == rawjyutping[0..<text.count]
-        private func suggestPrefix(for text: String, count: Int) -> [Candidate] {
+        func suggestPrefix(for text: String, count: Int) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE substr(rawjyutping, 1, \(text.count)) = \'\(text)\' LIMIT \(count);"
