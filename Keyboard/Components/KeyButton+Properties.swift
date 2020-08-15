@@ -28,7 +28,7 @@ extension KeyButton {
         var height: CGFloat {
                 switch traitCollection.userInterfaceIdiom {
                 case .phone:
-                        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+                        if traitCollection.verticalSizeClass == .compact {
                                 // iPhone landscape
                                 
                                 if UIScreen.main.bounds.width < 570 {

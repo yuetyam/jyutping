@@ -14,7 +14,7 @@ extension KeyButton {
                         }
                 }
                 var verticalConstant: CGFloat {
-                        if traitCollection.userInterfaceIdiom == .phone && UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+                        if traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .compact {
                                 return 3
                         } else {
                                 return 5
@@ -68,7 +68,7 @@ extension KeyButton {
                                 constant += 5
                         }
                 } else {
-                        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+                        if traitCollection.verticalSizeClass == .compact {
                                 // iPhone landscape
                                 constant -= 3
                         }
