@@ -67,7 +67,7 @@ final class KeyButton: UIButton {
                                 shapeLayer.fillColor = buttonColor.cgColor
                                 
                                 let animation = CABasicAnimation(keyPath: "path")
-                                animation.duration = 0.02
+                                animation.duration = 0.01
                                 animation.toValue = previewPath
                                 animation.fillMode = .forwards
                                 animation.isRemovedOnCompletion = false
@@ -187,13 +187,13 @@ final class KeyButton: UIButton {
         
         private func changeColorToNormal() {
                 UIView.animate(withDuration: 0,
-                               delay: 0.1,
+                               delay: 0.08,
                                animations: { self.keyButtonView.backgroundColor = self.buttonColor }
                 )
         }
         
         private func showPreviewText() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                         self.previewLabel.text = self.keyText
                         self.shapeLayer.shadowOpacity = 0.2
                         self.shapeLayer.shadowRadius = 2
@@ -201,7 +201,7 @@ final class KeyButton: UIButton {
                 }
         }
         private func removePreview() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.11) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.07) {
                         self.previewLabel.text = nil
                         self.previewLabel.removeFromSuperview()
                         self.shapeLayer.removeFromSuperlayer()
