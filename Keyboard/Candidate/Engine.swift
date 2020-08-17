@@ -36,7 +36,7 @@ struct Engine {
         
         private func fetch(for text: String) -> [Candidate] {
                 let fullMatch: [Candidate] = match(for: text)
-                guard fullMatch.count < 10 else { return fullMatch }
+                guard fullMatch.count < 10 else { return fullMatch.deduplicated() }
                 
                 guard canSpilt else {
                         var combine: [Candidate] = fullMatch + matchInitial(for: text)
