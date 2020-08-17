@@ -18,7 +18,7 @@ struct Engine {
                 case 0:
                         return []
                 case 1:
-                        return matchInitial(for: text)
+                        return matchInitial(for: text).deduplicated()
                 case 2:
                         canSpilt = Spliter.canSplit(text)
                         return fetch(for: text)
