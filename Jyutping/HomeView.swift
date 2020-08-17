@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
         
+        private let placeholder: String = NSLocalizedString("Type here to test keyboards", comment: "")
         @State private var placeholdText: String = ""
         
         private let enableKeyboard: Text = Text("•  Jump to ") + Text("Settings").fontWeight(.medium) + Text("\n") +
@@ -20,9 +21,14 @@ struct HomeView: View {
                 NavigationView {
                         ScrollView {
                                 Divider()
-                                
+                                /*
                                 TextField("Type here to test keyboards", text: $placeholdText)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .padding()
+                                */
+                                EnhancedTextField(placeholder: placeholder, text: $placeholdText, returnKeyType: .default)
+                                        .padding(8)
+                                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary).opacity(0.5))
                                         .padding()
                                 
                                 VStack {

@@ -15,7 +15,7 @@ struct JyutpingView: View {
                         ScrollView {
                                 Divider()
                                 
-                                EnhancedTextField(placeholder: placeholdText, text: $inputText)
+                                EnhancedTextField(placeholder: placeholdText, text: $inputText, returnKeyType: .search)
                                         .padding(8)
                                         .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary).opacity(0.5))
                                         .padding()

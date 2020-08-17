@@ -4,12 +4,14 @@ struct  EnhancedTextField: UIViewRepresentable {
         
         let placeholder: String
         @Binding var text: String
+        let returnKeyType: UIReturnKeyType
         
         func makeUIView(context: Context) -> UITextField {
                 let textField = UITextField(frame: .zero)
                 textField.placeholder = placeholder
                 textField.delegate = context.coordinator
-                textField.returnKeyType = .search
+                textField.returnKeyType = returnKeyType
+                textField.clearButtonMode = .always
                 return textField
         }
         func updateUIView(_ uiView: UITextField, context: Context) {}
