@@ -187,7 +187,7 @@ final class KeyButton: UIButton {
         
         private func changeColorToNormal() {
                 UIView.animate(withDuration: 0,
-                               delay: 0.08,
+                               delay: 0.05,
                                animations: { self.keyButtonView.backgroundColor = self.buttonColor }
                 )
         }
@@ -201,7 +201,7 @@ final class KeyButton: UIButton {
                 }
         }
         private func removePreview() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) {
                         self.previewLabel.text = nil
                         self.previewLabel.removeFromSuperview()
                         self.shapeLayer.removeFromSuperlayer()
