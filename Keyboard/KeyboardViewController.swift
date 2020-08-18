@@ -65,11 +65,7 @@ final class KeyboardViewController: UIInputViewController {
                         case .light, .default:
                                 return .darkModeLightAppearance
                         case .dark:
-                                if UIScreen.main.traitCollection.userInterfaceStyle == .dark {
-                                        return .darkModeDarkAppearance
-                                } else {
-                                        return .lightModeDarkAppearance
-                                }
+                                return .darkModeDarkAppearance
                         default:
                                 return .darkModeLightAppearance
                         }
@@ -78,13 +74,9 @@ final class KeyboardViewController: UIInputViewController {
                         case .light, .default:
                                 return .lightModeLightAppearance
                         case .dark:
-                                if UIScreen.main.traitCollection.userInterfaceStyle == .dark {
-                                        return .darkModeDarkAppearance
-                                } else {
-                                        return .lightModeDarkAppearance
-                                }
+                                return .darkModeDarkAppearance
                         default:
-                                return .lightModeLightAppearance
+                                return .lightModeDarkAppearance
                         }
                 @unknown default:
                         return .lightModeDarkAppearance
