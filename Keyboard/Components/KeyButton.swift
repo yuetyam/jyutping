@@ -201,7 +201,7 @@ final class KeyButton: UIButton {
                 }
         }
         private func removePreview() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.07) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                         self.previewLabel.text = nil
                         self.previewLabel.removeFromSuperview()
                         self.shapeLayer.removeFromSuperlayer()
