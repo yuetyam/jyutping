@@ -13,6 +13,8 @@
 		37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D5D23541EE4007E1D68 /* Assets.xcassets */; };
 		37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6023541EE4007E1D68 /* Preview Assets.xcassets */; };
 		37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */; };
+		37329B2924EBD47600905E34 /* jyut6ping3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 37329B2824EBD47600905E34 /* jyut6ping3.sqlite3 */; };
+		37329B2B24EBD47F00905E34 /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 37329B2A24EBD47E00905E34 /* jyutping.sqlite3 */; };
 		37336F7A239A9317006A59A7 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F79239A9317006A59A7 /* SafariView.swift */; };
 		37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7C239ABB30006A59A7 /* ShareSheetView.swift */; };
 		37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7E239ABDC4006A59A7 /* MessageView.swift */; };
@@ -32,8 +34,6 @@
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
 		377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4E2471129000B42D30 /* EnhancedTextField.swift */; };
-		3799B6D924E3F5410083504F /* jyut6ping3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3799B6D824E3F5410083504F /* jyut6ping3.sqlite3 */; };
-		3799B6DB24E3F5560083504F /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3799B6DA24E3F5560083504F /* jyutping.sqlite3 */; };
 		37AA501C24502D3F003E7921 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA501E24502D3F003E7921 /* Localizable.strings */; };
 		37AE5BE323546454008A8E4B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BE223546454008A8E4B /* HomeView.swift */; };
 		37AE5BEF2354AAF8008A8E4B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */; };
@@ -89,6 +89,8 @@
 		372D4A6F23E08C720096F41D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		372D4A7023E08C830096F41D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		372D4A7123E08C940096F41D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37329B2824EBD47600905E34 /* jyut6ping3.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyut6ping3.sqlite3; sourceTree = "<group>"; };
+		37329B2A24EBD47E00905E34 /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		37336F79239A9317006A59A7 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		37336F7C239ABB30006A59A7 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		37336F7E239ABDC4006A59A7 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
@@ -112,8 +114,6 @@
 		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
 		377EAD4E2471129000B42D30 /* EnhancedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
-		3799B6D824E3F5410083504F /* jyut6ping3.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyut6ping3.sqlite3; sourceTree = "<group>"; };
-		3799B6DA24E3F5560083504F /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		37AA501D24502D3F003E7921 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37AA501F24502DAA003E7921 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37AA502024502DAD003E7921 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 				37C18EB2237A8FDB00F92482 /* Localization */,
 				37211D5D23541EE4007E1D68 /* Assets.xcassets */,
 				37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */,
-				3799B6D824E3F5410083504F /* jyut6ping3.sqlite3 */,
+				37329B2824EBD47600905E34 /* jyut6ping3.sqlite3 */,
 				37211D6523541EE4007E1D68 /* Info.plist */,
 				37B3401D23EBD23400A8D3BB /* Settings.bundle */,
 				37211D5F23541EE4007E1D68 /* Preview Content */,
@@ -270,7 +270,7 @@
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
-				3799B6DA24E3F5560083504F /* jyutping.sqlite3 */,
+				37329B2A24EBD47E00905E34 /* jyutping.sqlite3 */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 				37C18EB5237A904000F92482 /* Localizable.strings in Resources */,
 				37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */,
 				37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */,
-				3799B6D924E3F5410083504F /* jyut6ping3.sqlite3 in Resources */,
+				37329B2924EBD47600905E34 /* jyut6ping3.sqlite3 in Resources */,
 				37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */,
 				37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */,
 				37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */,
@@ -409,7 +409,7 @@
 			files = (
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
-				3799B6DB24E3F5560083504F /* jyutping.sqlite3 in Resources */,
+				37329B2B24EBD47F00905E34 /* jyutping.sqlite3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
