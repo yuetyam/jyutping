@@ -47,7 +47,9 @@ extension KeyButton {
                         if keyboardEvent == .shift {
                                 viewController.isCapsLocked = true
                                 viewController.keyboardLayout = .alphabetUppercase
-                        } else {// keyboardEvent == .shiftDown
+                        } else {
+                                // keyboardEvent == .shiftDown
+                                
                                 if viewController.isCapsLocked {
                                         viewController.isCapsLocked = false
                                         viewController.keyboardLayout = .alphabetLowercase
@@ -59,7 +61,9 @@ extension KeyButton {
                 } else if touchEvent.tapCount == 1 {
                         if keyboardEvent == .shift {
                                 viewController.keyboardLayout = .alphabetUppercase
-                        } else { // keyboardEvent == .shiftDown
+                        } else {
+                                // keyboardEvent == .shiftDown
+                                
                                 if viewController.isCapsLocked {
                                         viewController.isCapsLocked = false
                                 }
@@ -68,7 +72,9 @@ extension KeyButton {
                 }
         }
         @objc private func handleBackspace() {
-                performBackspace()
+                DispatchQueue.main.async {
+                        self.performBackspace()
+                }
                 slowBackspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
                         self.fastBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
                 }
