@@ -187,7 +187,7 @@ final class KeyButton: UIButton {
         
         private func changeColorToNormal() {
                 UIView.animate(withDuration: 0,
-                               delay: 0.05,
+                               delay: 0.07,
                                animations: { self.keyButtonView.backgroundColor = self.buttonColor }
                 )
         }
