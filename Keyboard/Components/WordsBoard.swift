@@ -37,7 +37,7 @@ final class SettingsView: UIView {
                 }
         }
         
-        let upArrowButton: ArrowButton = ArrowButton(imageName: "chevron.up", leftInset: 12, rightInset: 12)
+        let upArrowButton: ArrowButton = ArrowButton(imageName: "chevron.up", leftInset: 14, rightInset: 14)
         
         init() {
                 super.init(frame: .zero)
@@ -54,6 +54,6 @@ final class SettingsView: UIView {
                 upArrowButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
                 upArrowButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-                upArrowButton.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 60).isActive = true
+                upArrowButton.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 67).isActive = true
         }
 }
