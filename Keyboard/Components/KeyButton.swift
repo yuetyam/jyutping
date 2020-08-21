@@ -17,7 +17,7 @@ final class KeyButton: UIButton {
                 backgroundColor = .clearTappable
                 
                 switch keyboardEvent {
-                case .backspace, .newLine, .shift, .shiftDown:
+                case .backspace, .shift, .shiftDown:
                         setupKeyButtonView()
                         setupKeyImageView(constant: 11)
                 case .switchInputMethod:

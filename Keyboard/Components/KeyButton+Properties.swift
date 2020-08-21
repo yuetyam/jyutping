@@ -100,6 +100,8 @@ extension KeyButton {
                         }
                 case .switchTo(let destinationLayout):
                         return keyText(for: destinationLayout)
+                case .newLine:
+                        return newLineKeyText
                 default:
                         return nil
                 }
@@ -122,14 +124,44 @@ extension KeyButton {
                 }
         }
         
+        private var newLineKeyText: String {
+                guard let returnKeyType: UIReturnKeyType = viewController.textDocumentProxy.returnKeyType else { return "return" }
+                switch returnKeyType {
+                case .continue:
+                        return "繼續"
+                case .default:
+                        return "換行"
+                case .done:
+                        return "完成"
+                case .emergencyCall:
+                        return "緊急Call"
+                case .go:
+                        return "前往"
+                case .google:
+                        return "Google"
+                case .join:
+                        return "加入"
+                case .next:
+                        return "下一個"
+                case .route:
+                        return "Route"
+                case .search:
+                        return "搜索"
+                case .send:
+                        return "發送"
+                case .yahoo:
+                        return "Yahoo"
+                @unknown default:
+                        return "return"
+                }
+        }
+        
         var keyImage: UIImage? {
                 switch keyboardEvent {
                 case .switchInputMethod:
                         return UIImage(systemName: "globe")
                 case .backspace:
                         return UIImage(systemName: "delete.left")
-                case .newLine:
-                        return UIImage(systemName: "return")
                 case .shift:
                         return UIImage(systemName: "shift")
                 case .shiftDown:
