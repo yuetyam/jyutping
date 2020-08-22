@@ -89,15 +89,7 @@ extension KeyButton {
                 case .text(let text):
                         return text
                 case .space:
-                        let currentLayout = viewController.keyboardLayout
-                        if currentLayout == .alphabetLowercase ||
-                                currentLayout == .alphabetUppercase ||
-                                currentLayout == .numericAlphabet ||
-                                currentLayout == .symbolicAlphabet {
-                                return "English"
-                        } else {
-                                return "粵  拼"
-                        }
+                        return viewController.keyboardLayout.isEnglish ? "English" : "粵  拼"
                 case .switchTo(let destinationLayout):
                         return keyText(for: destinationLayout)
                 case .newLine:

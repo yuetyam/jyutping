@@ -40,6 +40,17 @@ enum KeyboardLayout: Equatable {
                 }
         }
         
+        var isEnglish: Bool {
+                switch self {
+                case .alphabetLowercase,
+                     .alphabetUppercase,
+                     .numericAlphabet,
+                     .symbolicAlphabet:
+                        return true
+                default:
+                        return false
+                }
+        }
 }
 
 private extension KeyboardLayout {
