@@ -108,7 +108,7 @@ final class KeyButton: UIButton {
                                 if viewController.keyboardLayout == .jyutping && !viewController.candidates.isEmpty {
                                         let candidate: Candidate = viewController.candidates[0]
                                         viewController.textDocumentProxy.insertText(candidate.text)
-                                        viewController.currentInputText = String(viewController.currentInputText.dropFirst(candidate.input?.count ?? 0))
+                                        viewController.currentInputText = String(viewController.currentInputText.dropFirst(candidate.input.count))
                                         DispatchQueue.global().async {
                                                 AudioFeedback.perform(audioFeedback: .modify)
                                         }

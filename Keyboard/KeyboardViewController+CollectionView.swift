@@ -29,7 +29,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 let candidate: Candidate = candidates[indexPath.row]
                 textDocumentProxy.insertText(candidate.text)
-                currentInputText = String(currentInputText.dropFirst(candidate.input?.count ?? 0))
+                currentInputText = String(currentInputText.dropFirst(candidate.input.count))
                 if keyboardLayout == .wordsBoard {
                         keyboardLayout = .jyutping
                 }

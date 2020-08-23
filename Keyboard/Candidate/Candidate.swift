@@ -2,7 +2,7 @@ struct Candidate: Hashable, CustomStringConvertible {
         
         let text: String
         let footnote: String
-        let input: String?
+        let input: String
         
         var count: Int {
                 return text.count
@@ -12,7 +12,7 @@ struct Candidate: Hashable, CustomStringConvertible {
                 return text
         }
         
-        init(text: String, footnote: String = "", input: String? = nil) {
+        init(text: String, footnote: String, input: String) {
                 self.text = text
                 self.footnote = footnote
                 self.input = input
@@ -31,7 +31,7 @@ struct Candidate: Hashable, CustomStringConvertible {
         static func + (lhs: Candidate, rhs: Candidate) -> Candidate {
                 let newText: String = lhs.text + rhs.text
                 let newFootnote: String = lhs.footnote + " " + rhs.footnote
-                let newInput: String = (lhs.input ?? "") + (rhs.input ?? "")
+                let newInput: String = lhs.input + rhs.input
                 let newCandidate: Candidate = Candidate(text: newText, footnote: newFootnote, input: newInput)
                 return newCandidate
         }

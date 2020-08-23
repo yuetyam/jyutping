@@ -94,7 +94,7 @@ struct Engine {
                         if !matches.isEmpty {
                                 var hasTailCandidate: Bool = false
                                 
-                                let tailText: String = String(text.dropFirst(matches.first!.input?.count ?? 0))
+                                let tailText: String = String(text.dropFirst(matches.first!.input.count))
                                 let tailJyutpings: [String] = Array(jyutpings.dropFirst(firstMatchedJyutpingCount))
                                 if let tailOne: Candidate = matchPrefix(for: tailText, characterCount: tailJyutpings.count + 1, count: 1).first {
                                         let newCandidate: Candidate = matches.first! + tailOne
