@@ -1,4 +1,4 @@
-struct Candidate: Hashable, CustomStringConvertible {
+struct Candidate: Hashable {
         
         let text: String
         let footnote: String
@@ -6,10 +6,6 @@ struct Candidate: Hashable, CustomStringConvertible {
         
         var count: Int {
                 return text.count
-        }
-        
-        var description: String {
-                return text
         }
         
         // Equatable
