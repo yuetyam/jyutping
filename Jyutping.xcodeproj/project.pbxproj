@@ -22,7 +22,7 @@
 		3741062D23E2191200639EF4 /* WordsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* WordsCollectionViewCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
-		3741063423E30D7100639EF4 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ArrowButton.swift */; };
+		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
 		3741063623E30DA800639EF4 /* WordsBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063523E30DA800639EF4 /* WordsBoard.swift */; };
 		3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */; };
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
@@ -98,7 +98,7 @@
 		3741062C23E2191200639EF4 /* WordsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
-		3741063323E30D7100639EF4 /* ArrowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
+		3741063323E30D7100639EF4 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		3741063523E30DA800639EF4 /* WordsBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBoard.swift; sourceTree = "<group>"; };
 		3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Properties.swift"; sourceTree = "<group>"; };
 		3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Setup.swift"; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 				3741063523E30DA800639EF4 /* WordsBoard.swift */,
 				3741062C23E2191200639EF4 /* WordsCollectionViewCell.swift */,
 				3715203323B22ACF007EAB60 /* ToolBar.swift */,
-				3741063323E30D7100639EF4 /* ArrowButton.swift */,
+				3741063323E30D7100639EF4 /* ToolButton.swift */,
 				37C05F9923E339C90061C992 /* KeyButton.swift */,
 				3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */,
 				3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */,
@@ -442,7 +442,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37E004F823E49B6700E413BD /* KeyboardLayout.swift in Sources */,
-				3741063423E30D7100639EF4 /* ArrowButton.swift in Sources */,
+				3741063423E30D7100639EF4 /* ToolButton.swift in Sources */,
 				3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */,
 				3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */,
 				3741063623E30DA800639EF4 /* WordsBoard.swift in Sources */,

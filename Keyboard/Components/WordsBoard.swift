@@ -8,7 +8,7 @@ final class WordsBoard: UIView {
                 }
         }
         
-        let upArrowButton: ArrowButton = ArrowButton(imageName: "chevron.up")
+        let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up")
         
         init() {
                 super.init(frame: .zero)
@@ -37,7 +37,7 @@ final class SettingsView: UIView {
                 }
         }
         
-        let upArrowButton: ArrowButton = ArrowButton(imageName: "chevron.up", leftInset: 14, rightInset: 14)
+        let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", leftInset: 14, rightInset: 14)
         
         init() {
                 super.init(frame: .zero)

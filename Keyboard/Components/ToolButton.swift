@@ -1,6 +1,6 @@
 import UIKit
 
-final class ArrowButton: UIButton {
+final class ToolButton: UIButton {
         convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 8, rightInset: CGFloat = 8) {
                 self.init(frame: .zero)
                 let arrowImageView: UIImageView = UIImageView()
