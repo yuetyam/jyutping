@@ -23,9 +23,9 @@ enum AudioFeedback: Equatable {
         static func play(for keyboardEvent: KeyboardEvent) {
                 guard UserDefaults.standard.bool(forKey: "audio_feedback") else { return }
                 switch keyboardEvent {
-                case .text(_):
+                case .text(_), .keyALeft, .keyLRight, .keyZLeft:
                         perform(audioFeedback: .input)
-                case .backspace:
+                case .backspace, .keyBackspaceLeft:
                         perform(audioFeedback: .delete)
                 case .switchTo(_), .newLine, .shift, .shiftDown:
                         perform(audioFeedback: .modify)

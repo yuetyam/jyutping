@@ -8,5 +8,10 @@ enum KeyboardEvent: Equatable {
         shift,
         shiftDown,
         switchInputMethod,
-        switchTo(KeyboardLayout)
+        switchTo(KeyboardLayout),
+        
+        keyALeft,
+        keyLRight,
+        keyZLeft,
+        keyBackspaceLeft
 }

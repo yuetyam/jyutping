@@ -61,13 +61,13 @@ private extension KeyboardLayout {
                         ["z", "x", "c", "v", "b", "n", "m"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[1].insert(.none, at: 0)
-                eventRows[1].insert(.none, at: 0)
-                eventRows[1].append(.none)
-                eventRows[1].append(.none)
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].append(.keyLRight)
+                eventRows[1].append(.keyLRight)
                 eventRows[2].insert(.switchTo(.cantoneseSymbolic), at: 0)
-                eventRows[2].insert(.none, at: 1)
-                eventRows[2].append(.none)
+                eventRows[2].insert(.keyZLeft, at: 1)
+                eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
                         [.switchTo(.numericJyutping), .switchInputMethod, .space, .newLine] :
@@ -82,13 +82,13 @@ private extension KeyboardLayout {
                         ["z", "x", "c", "v", "b", "n", "m"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[1].insert(.none, at: 0)
-                eventRows[1].insert(.none, at: 0)
-                eventRows[1].append(.none)
-                eventRows[1].append(.none)
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].append(.keyLRight)
+                eventRows[1].append(.keyLRight)
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.none, at: 1)
-                eventRows[2].append(.none)
+                eventRows[2].insert(.keyZLeft, at: 1)
+                eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
                         [.switchTo(.numericAlphabet), .switchInputMethod, .space, .text("."), .newLine] :
@@ -103,13 +103,13 @@ private extension KeyboardLayout {
                         ["Z", "X", "C", "V", "B", "N", "M"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[1].insert(.none, at: 0)
-                eventRows[1].insert(.none, at: 0)
-                eventRows[1].append(.none)
-                eventRows[1].append(.none)
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].append(.keyLRight)
+                eventRows[1].append(.keyLRight)
                 eventRows[2].insert(.shiftDown, at: 0)
-                eventRows[2].insert(.none, at: 1)
-                eventRows[2].append(.none)
+                eventRows[2].insert(.keyZLeft, at: 1)
+                eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
                         [.switchTo(.numericAlphabet), .switchInputMethod, .space, .text("."), .newLine] :

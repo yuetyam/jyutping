@@ -4,7 +4,7 @@ extension KeyButton {
         
         func setupKeyActions() {
                 switch keyboardEvent {
-                case .backspace:
+                case .backspace, .keyBackspaceLeft:
                         addTarget(self, action: #selector(handleBackspace), for: .touchDown)
                 case .shift, .shiftDown:
                         addTarget(self, action: #selector(handleShift(_:event:)), for: .touchUpInside)
@@ -34,6 +34,48 @@ extension KeyButton {
                         }
                 case .switchTo(let layout):
                         viewController.keyboardLayout = layout
+                case .keyALeft:
+                        switch viewController.keyboardLayout {
+                        case .jyutping:
+                                viewController.currentInputText += "a"
+                        case .alphabetLowercase:
+                                viewController.textDocumentProxy.insertText("a")
+                        case .alphabetUppercase:
+                                viewController.textDocumentProxy.insertText("A")
+                                if !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .alphabetLowercase
+                                }
+                        default:
+                                break
+                        }
+                case .keyLRight:
+                        switch viewController.keyboardLayout {
+                        case .jyutping:
+                                viewController.currentInputText += "l"
+                        case .alphabetLowercase:
+                                viewController.textDocumentProxy.insertText("l")
+                        case .alphabetUppercase:
+                                viewController.textDocumentProxy.insertText("L")
+                                if !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .alphabetLowercase
+                                }
+                        default:
+                                break
+                        }
+                case .keyZLeft:
+                        switch viewController.keyboardLayout {
+                        case .jyutping:
+                                viewController.currentInputText += "z"
+                        case .alphabetLowercase:
+                                viewController.textDocumentProxy.insertText("z")
+                        case .alphabetUppercase:
+                                viewController.textDocumentProxy.insertText("Z")
+                                if !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .alphabetLowercase
+                                }
+                        default:
+                                break
+                        }
                 default:
                         break
                 }
