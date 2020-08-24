@@ -28,19 +28,7 @@ struct Spliter {
         }
         
         static func canSplit(_ text: String) -> Bool {
-                let maxLength: Int = text.count < 6 ? text.count : 6
-                let startIndex: String.Index = text.startIndex
-                
-                var canSplit: Bool = false
-                for index in 0..<maxLength {
-                        let end: String.Index = text.index(startIndex, offsetBy: index)
-                        let part: String = String(text[startIndex...end])
-                        if jyutpings.contains(part) {
-                                canSplit = true
-                                break
-                        }
-                }
-                return canSplit
+                return jyutpings.reduce(false) { $0 || text.hasPrefix($1) }
         }
         
         private static let jyutpings: Set<String> = ["ngo", "nei", "keoi", "ge", "aa", "gam", "dou", "zau", "hai", "hou",
