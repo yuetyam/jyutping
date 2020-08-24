@@ -1,6 +1,6 @@
 import UIKit
 
-final class WordsBoard: UIView {
+final class CandidateBoard: UIView {
         
         var height: CGFloat = 270 {
                 didSet {

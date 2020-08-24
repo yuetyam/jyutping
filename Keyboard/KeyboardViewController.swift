@@ -4,7 +4,7 @@ final class KeyboardViewController: UIInputViewController {
         
         lazy var toolBar: ToolBar = ToolBar(viewController: self)
         lazy var settingsView: SettingsView = SettingsView()
-        lazy var wordsBoard: WordsBoard = WordsBoard()
+        lazy var candidateBoard: CandidateBoard = CandidateBoard()
         lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         lazy var keyboardStackView: UIStackView = {
@@ -138,7 +138,7 @@ final class KeyboardViewController: UIInputViewController {
                 toolBar.keyboardDownButton.addTarget(self, action: #selector(handleDismissKeyboard), for: .allTouchEvents)
         }
         @objc private func handleDownArrowEvent() {
-                wordsBoard.height = view.bounds.height
+                candidateBoard.height = view.bounds.height
                 keyboardLayout = .wordsBoard
         }
         @objc private func handleDismissKeyboard() {

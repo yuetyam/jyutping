@@ -12,7 +12,7 @@ extension KeyboardViewController {
                 keyboardStackView.removeAllArrangedSubviews()
                 switch keyboardLayout {
                 case .wordsBoard:
-                        setupWordsBoard()
+                        setupCandidateBoard()
                 case .settingsView:
                         setupSettingsView()
                 default:
@@ -27,21 +27,21 @@ extension KeyboardViewController {
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
         }
         
-        private func setupWordsBoard() {
-                wordsBoard.addSubview(collectionView)
+        private func setupCandidateBoard() {
+                candidateBoard.addSubview(collectionView)
                 collectionView.translatesAutoresizingMaskIntoConstraints = false
-                collectionView.bottomAnchor.constraint(equalTo: wordsBoard.bottomAnchor).isActive = true
-                collectionView.leadingAnchor.constraint(equalTo: wordsBoard.leadingAnchor).isActive = true
-                collectionView.trailingAnchor.constraint(equalTo: wordsBoard.upArrowButton.leadingAnchor).isActive = true
-                collectionView.topAnchor.constraint(equalTo: wordsBoard.topAnchor).isActive = true
+                collectionView.bottomAnchor.constraint(equalTo: candidateBoard.bottomAnchor).isActive = true
+                collectionView.leadingAnchor.constraint(equalTo: candidateBoard.leadingAnchor).isActive = true
+                collectionView.trailingAnchor.constraint(equalTo: candidateBoard.upArrowButton.leadingAnchor).isActive = true
+                collectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor).isActive = true
                 let collectionViewFlowLayout = UICollectionViewFlowLayout()
                 collectionViewFlowLayout.scrollDirection = .vertical
                 collectionView.collectionViewLayout = collectionViewFlowLayout
                 
-                wordsBoard.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
-                wordsBoard.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
+                candidateBoard.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
+                candidateBoard.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
                 
-                keyboardStackView.addArrangedSubview(wordsBoard)
+                keyboardStackView.addArrangedSubview(candidateBoard)
         }
         private func setupSettingsView() {
                 settingsView.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
