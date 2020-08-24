@@ -30,7 +30,6 @@ final class KeyboardViewController: UIInputViewController {
                 keyboardStackView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
                 keyboardStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
                 
-                ensurePreferences()
                 setupToolBarActions()
         }
         
@@ -127,13 +126,6 @@ final class KeyboardViewController: UIInputViewController {
                 let userDBCandidates: [Candidate] = userPhraseManager.match(for: currentInputText) + userPhraseManager.matchShortcut(for: currentInputText)
                 let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
                 candidates = (userDBCandidates + engineCandidates).deduplicated()
-        }
-        
-        private func ensurePreferences() {
-                if !UserDefaults.standard.bool(forKey: "has_preferences") {
-                        UserDefaults.standard.set(true, forKey: "has_preferences")
-                        UserDefaults.standard.set(false, forKey: "audio_feedback")
-                }
         }
         
         private func setupToolBarActions() {
