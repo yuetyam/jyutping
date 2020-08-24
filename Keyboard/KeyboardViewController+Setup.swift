@@ -38,50 +38,24 @@ extension KeyboardViewController {
                 collectionViewFlowLayout.scrollDirection = .vertical
                 collectionView.collectionViewLayout = collectionViewFlowLayout
                 
-                let tintColor: UIColor = isDarkAppearance ? .darkButtonText : .lightButtonText
-                wordsBoard.upArrowButton.tintColor = tintColor
+                wordsBoard.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
                 wordsBoard.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
                 
                 keyboardStackView.addArrangedSubview(wordsBoard)
         }
         private func setupSettingsView() {
-                let audioFeedbackTextLabel: UILabel = UILabel()
-                settingsView.addSubview(audioFeedbackTextLabel)
-                audioFeedbackTextLabel.translatesAutoresizingMaskIntoConstraints = false
-                audioFeedbackTextLabel.centerXAnchor.constraint(equalTo: settingsView.centerXAnchor, constant: -30).isActive = true
-                audioFeedbackTextLabel.centerYAnchor.constraint(equalTo: settingsView.centerYAnchor, constant: -30).isActive = true
-                audioFeedbackTextLabel.text = NSLocalizedString("Audio feedback on click", comment: "")
-                
-                let audioFeedbackSwitch: UISwitch = UISwitch()
-                settingsView.addSubview(audioFeedbackSwitch)
-                audioFeedbackSwitch.translatesAutoresizingMaskIntoConstraints = false
-                audioFeedbackSwitch.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.trailingAnchor, constant: 16).isActive = true
-                audioFeedbackSwitch.centerYAnchor.constraint(equalTo: settingsView.centerYAnchor, constant: -30).isActive = true
-                audioFeedbackSwitch.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
-                audioFeedbackSwitch.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
+                settingsView.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
+                settingsView.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
                 
                 let bgColor: UIColor = isDarkAppearance ?
                         UIColor(displayP3Red: 35.0 / 255, green: 35.0 / 255, blue: 35.0 / 255, alpha: 1) :
                         UIColor(displayP3Red: 208.0 / 255, green: 211.0 / 255, blue: 216.0 / 255, alpha: 1)
-                audioFeedbackSwitch.backgroundColor = bgColor
-                audioFeedbackSwitch.layer.cornerRadius = 15
+                settingsView.audioFeedbackSwitch.backgroundColor = bgColor
+                settingsView.audioFeedbackSwitch.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
+                settingsView.audioFeedbackSwitch.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
                 
-                let userdbResetButton = UIButton()
-                settingsView.addSubview(userdbResetButton)
-                userdbResetButton.translatesAutoresizingMaskIntoConstraints = false
-                userdbResetButton.topAnchor.constraint(equalTo: audioFeedbackTextLabel.bottomAnchor, constant: 60).isActive = true
-                userdbResetButton.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.leadingAnchor).isActive = true
-                userdbResetButton.trailingAnchor.constraint(equalTo: audioFeedbackSwitch.trailingAnchor).isActive = true
-                userdbResetButton.setTitle(NSLocalizedString("Clear user's phrases", comment: ""), for: .normal)
-                userdbResetButton.setTitleColor(.systemBlue, for: .normal)
-                userdbResetButton.setTitleColor(.systemGreen, for: .highlighted)
-                userdbResetButton.backgroundColor = isDarkAppearance ? .black : .white
-                userdbResetButton.layer.cornerRadius = 8
-                userdbResetButton.layer.cornerCurve = .continuous
-                userdbResetButton.addTarget(self, action: #selector(resetUserDB(_:)), for: .touchUpInside)
-                
-                settingsView.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
-                settingsView.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
+                settingsView.userdbResetButton.backgroundColor = isDarkAppearance ? .black : .white
+                settingsView.userdbResetButton.addTarget(self, action: #selector(resetUserDB(_:)), for: .touchUpInside)
                 
                 keyboardStackView.addArrangedSubview(settingsView)
         }
