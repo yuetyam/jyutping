@@ -122,7 +122,10 @@ final class KeyboardViewController: UIInputViewController {
         let userPhraseManager: UserPhraseManager = UserPhraseManager()
         private lazy var engine: Engine = Engine()
         private func requestSuggestion() {
-                guard !currentInputText.isEmpty else { return }
+                guard !currentInputText.isEmpty else {
+                        candidates = []
+                        return
+                }
                 let userDBCandidates: [Candidate] = userPhraseManager.match(for: currentInputText) + userPhraseManager.matchShortcut(for: currentInputText)
                 let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
                 candidates = (userDBCandidates + engineCandidates).deduplicated()
