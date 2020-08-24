@@ -13,33 +13,21 @@ struct Engine {
                 }
         }()
         
-        mutating func suggest(for text: String) -> [Candidate] {
+        func suggest(for text: String) -> [Candidate] {
                 switch text.count {
                 case 0:
                         return []
                 case 1:
                         return matchInitial(for: text)
-                case 2:
-                        canSpilt = Spliter.canSplit(text)
-                        return fetch(for: text)
-                case 3, 4, 5, 6:
-                        // FIXME: - Wrong way
-                        if !canSpilt {
-                                canSpilt = Spliter.canSplit(text)
-                        }
-                        return fetch(for: text)
                 default:
                         return fetch(for: text)
                 }
         }
         
-        private var canSpilt: Bool = false
-        
         private func fetch(for text: String) -> [Candidate] {
                 let fullMatch: [Candidate] = match(for: text)
-                guard fullMatch.count < 10 else { return fullMatch }
                 
-                guard canSpilt else {
+                guard Spliter.canSplit(text) else {
                         var combine: [Candidate] = fullMatch + matchInitial(for: text)
                         for number in 1..<text.count {
                                 combine += matchInitial(for: String(text.dropLast(number)))
