@@ -1,12 +1,6 @@
 import Foundation
 import SQLite3
 
-// For logging
-import os
-
-@available(iOSApplicationExtension 14.0, *)
-private let logger: Logger = Logger(subsystem: "im.cantonese.cantoneseim", category: "userdb")
-
 struct UserPhraseManager {
         
         private var userdb: OpaquePointer? = {
@@ -16,10 +10,8 @@ struct UserPhraseManager {
                 if sqlite3_open_v2(userdbUrl.path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK {
                         return db
                 } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("sqlite3_open_v2 failed.")
-                                logger.debug("userdb url: \(userdbUrl)")
-                        }
+                        debugPrint("sqlite3_open_v2 failed.")
+                        debugPrint(userdbUrl)
                         return nil
                 }
         }()
@@ -36,14 +28,10 @@ struct UserPhraseManager {
                 var createTableStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
                         if sqlite3_step(createTableStatement) != SQLITE_DONE {
-                                if #available(iOSApplicationExtension 14.0, *) {
-                                        logger.debug("User phrase table could not be created.")
-                                }
+                                consolePrint("User phrase table could not be created.")
                         }
                 } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("CREATE TABLE statement could not be prepared.")
-                        }
+                        consolePrint("CREATE TABLE statement could not be prepared.")
                 }
                 sqlite3_finalize(createTableStatement)
         }
@@ -61,14 +49,10 @@ struct UserPhraseManager {
                         sqlite3_bind_text(insertStatement, 6, (phrase.jyutping as NSString).utf8String, -1, nil)
                         
                         if sqlite3_step(insertStatement) != SQLITE_DONE {
-                                if #available(iOSApplicationExtension 14.0, *) {
-                                        logger.debug("Could not insert row.")
-                                }
+                                consolePrint("Could not insert row.")
                         }
                 } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("INSERT statement could not be prepared.")
-                        }
+                        consolePrint("INSERT statement could not be prepared.")
                 }
                 sqlite3_finalize(insertStatement)
         }
@@ -79,13 +63,11 @@ struct UserPhraseManager {
                 if sqlite3_prepare_v2(userdb, updateStatementString, -1, &updateStatement, nil) == SQLITE_OK {
                         if sqlite3_step(updateStatement) != SQLITE_DONE {
                                 if #available(iOSApplicationExtension 14.0, *) {
-                                        logger.debug("Could not update row.")
+                                        consolePrint("Could not update row.")
                                 }
                         }
                 } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("UPDATE statement is not prepared.")
-                        }
+                        consolePrint("UPDATE statement is not prepared.")
                 }
                 sqlite3_finalize(updateStatement)
         }
@@ -105,9 +87,7 @@ struct UserPhraseManager {
                                 phrase = Phrase(id: id, token: token, shortcut: shortcut, frequency: frequency, word: word, jyutping: jyutping)
                         }
                 } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("SELECT statement could not be prepared.")
-                        }
+                        consolePrint("SELECT statement could not be prepared.")
                 }
                 sqlite3_finalize(queryStatement)
                 return phrase
@@ -131,9 +111,7 @@ struct UserPhraseManager {
                                 candidates.append(candidate)
                         }
                 } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("SELECT statement could not be prepared.")
-                        }
+                        consolePrint("SELECT statement could not be prepared.")
                 }
                 sqlite3_finalize(queryStatement)
                 return candidates
@@ -144,16 +122,18 @@ struct UserPhraseManager {
                 var deleteStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
                         if sqlite3_step(deleteStatement) != SQLITE_DONE {
-                                if #available(iOSApplicationExtension 14.0, *) {
-                                        logger.debug("Could not delete all rows.")
-                                }
+                                consolePrint("Could not delete all rows.")
                         }
                 } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("DELETE ALL statement could not be prepared.")
-                        }
+                        consolePrint("DELETE ALL statement could not be prepared.")
                 }
                 sqlite3_finalize(deleteStatement)
+        }
+        
+        private func consolePrint(_ text: String) {
+                #if DEBUG
+                debugPrint(text)
+                #endif
         }
         
         /*
