@@ -11,7 +11,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-                guard let cell: WordsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WordsCell", for: indexPath) as? WordsCollectionViewCell else {
+                guard let cell: WordsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as? WordsCollectionViewCell else {
                         return UICollectionViewCell()
                 }
                 cell.textLabel.text = candidates[indexPath.row].text
