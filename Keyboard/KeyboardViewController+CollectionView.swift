@@ -51,7 +51,6 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                         let newPhrase: Phrase = Phrase(id: id, token: Int64(combinedCandidate.input.hash), shortcut: combinedCandidate.footnote.shortcut, frequency: 1, word: combinedCandidate.text, jyutping: combinedCandidate.footnote)
                                         self.userPhraseManager.insert(phrase: newPhrase)
                                 }
-                                let _ = self.userPhraseManager.fetchAll().map { debugPrint($0) }
                         }
                 }
         }

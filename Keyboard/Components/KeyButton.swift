@@ -127,7 +127,6 @@ final class KeyButton: UIButton {
                                                                 let newPhrase: Phrase = Phrase(id: id, token: Int64(combinedCandidate.input.hash), shortcut: combinedCandidate.footnote.shortcut, frequency: 1, word: combinedCandidate.text, jyutping: combinedCandidate.footnote)
                                                                 self.viewController.userPhraseManager.insert(phrase: newPhrase)
                                                         }
-                                                        let _ = self.viewController.userPhraseManager.fetchAll().map { debugPrint($0) }
                                                 }
                                         }
                                 } else if viewController.keyboardLayout == .jyutping && !viewController.currentInputText.isEmpty {

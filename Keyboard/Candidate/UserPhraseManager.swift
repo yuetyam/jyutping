@@ -1,6 +1,12 @@
 import Foundation
 import SQLite3
 
+// For logging
+import os
+
+@available(iOSApplicationExtension 14.0, *)
+private let logger: Logger = Logger(subsystem: "im.cantonese.cantoneseim", category: "userdb")
+
 struct UserPhraseManager {
         
         private var userdb: OpaquePointer? = {
@@ -8,11 +14,12 @@ struct UserPhraseManager {
                 let userdbUrl: URL = libraryDirectoryUrl.appendingPathComponent("userdb.sqlite3", isDirectory: false)
                 var db: OpaquePointer? = nil
                 if sqlite3_open_v2(userdbUrl.path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK {
-                        debugPrint("sqlite3_open_v2 == .ok")
-                        debugPrint(userdbUrl)
                         return db
                 } else {
-                        debugPrint("sqlite3_open_v2 failed.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("sqlite3_open_v2 failed.")
+                                logger.debug("userdb url: \(userdbUrl)")
+                        }
                         return nil
                 }
         }()
@@ -28,13 +35,15 @@ struct UserPhraseManager {
                 let createTableString = "CREATE TABLE IF NOT EXISTS phrase(id INTEGER NOT NULL PRIMARY KEY,token INTEGER NOT NULL,shortcut INTEGER NOT NULL,frequency INTEGER NOT NULL,word TEXT NOT NULL,jyutping TEXT NOT NULL);"
                 var createTableStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
-                        if sqlite3_step(createTableStatement) == SQLITE_DONE {
-                                debugPrint("Ensured phrase table.")
-                        } else {
-                                debugPrint("User phrase table could not be created.")
+                        if sqlite3_step(createTableStatement) != SQLITE_DONE {
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        logger.debug("User phrase table could not be created.")
+                                }
                         }
                 } else {
-                        debugPrint("CREATE TABLE statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("CREATE TABLE statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(createTableStatement)
         }
@@ -43,6 +52,7 @@ struct UserPhraseManager {
                 let insertStatementString = "INSERT INTO phrase (id, token, shortcut, frequency, word, jyutping) VALUES (?, ?, ?, ?, ?, ?);"
                 var insertStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
+                        
                         sqlite3_bind_int64(insertStatement, 1, phrase.id)
                         sqlite3_bind_int64(insertStatement, 2, phrase.token)
                         sqlite3_bind_int64(insertStatement, 3, phrase.shortcut)
@@ -50,13 +60,15 @@ struct UserPhraseManager {
                         sqlite3_bind_text(insertStatement, 5, (phrase.word as NSString).utf8String, -1, nil)
                         sqlite3_bind_text(insertStatement, 6, (phrase.jyutping as NSString).utf8String, -1, nil)
                         
-                        if sqlite3_step(insertStatement) == SQLITE_DONE {
-                                debugPrint("Successfully inserted row.")
-                        } else {
-                                debugPrint("Could not insert row.")
+                        if sqlite3_step(insertStatement) != SQLITE_DONE {
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        logger.debug("Could not insert row.")
+                                }
                         }
                 } else {
-                        debugPrint("INSERT statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("INSERT statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(insertStatement)
         }
@@ -65,13 +77,15 @@ struct UserPhraseManager {
                 let updateStatementString = "UPDATE phrase SET frequency = \(frequency) WHERE id = \(id);"
                 var updateStatement: OpaquePointer?
                 if sqlite3_prepare_v2(userdb, updateStatementString, -1, &updateStatement, nil) == SQLITE_OK {
-                        if sqlite3_step(updateStatement) == SQLITE_DONE {
-                                debugPrint("Successfully updated row.")
-                        } else {
-                                debugPrint("Could not update row.")
+                        if sqlite3_step(updateStatement) != SQLITE_DONE {
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        logger.debug("Could not update row.")
+                                }
                         }
                 } else {
-                        debugPrint("UPDATE statement is not prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("UPDATE statement is not prepared.")
+                        }
                 }
                 sqlite3_finalize(updateStatement)
         }
@@ -92,7 +106,9 @@ struct UserPhraseManager {
                                 phrases.append(phrase)
                         }
                 } else {
-                        debugPrint("SELECT statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("SELECT statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(queryStatement)
                 return phrases
@@ -113,7 +129,9 @@ struct UserPhraseManager {
                                 phrase = Phrase(id: id, token: token, shortcut: shortcut, frequency: frequency, word: word, jyutping: jyutping)
                         }
                 } else {
-                        debugPrint("SELECT statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("SELECT statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(queryStatement)
                 return phrase
@@ -137,7 +155,9 @@ struct UserPhraseManager {
                                 candidates.append(candidate)
                         }
                 } else {
-                        debugPrint("SELECT statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("SELECT statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(queryStatement)
                 return candidates
@@ -160,7 +180,9 @@ struct UserPhraseManager {
                                 candidates.append(candidate)
                         }
                 } else {
-                        debugPrint("SELECT statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("SELECT statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(queryStatement)
                 return candidates
@@ -171,13 +193,15 @@ struct UserPhraseManager {
                 var deleteStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
                         sqlite3_bind_int64(deleteStatement, 1, id)
-                        if sqlite3_step(deleteStatement) == SQLITE_DONE {
-                                debugPrint("Successfully deleted row. id = \(id)")
-                        } else {
-                                debugPrint("Could not delete row.")
+                        if sqlite3_step(deleteStatement) != SQLITE_DONE {
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        logger.debug("Could not delete row.")
+                                }
                         }
                 } else {
-                        debugPrint("DELETE statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("DELETE statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(deleteStatement)
         }
@@ -186,13 +210,15 @@ struct UserPhraseManager {
                 let deleteStatementStirng = "DELETE FROM phrase;"
                 var deleteStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
-                        if sqlite3_step(deleteStatement) == SQLITE_DONE {
-                                debugPrint("Successfully deleted all rows.")
-                        } else {
-                                debugPrint("Could not delete all rows.")
+                        if sqlite3_step(deleteStatement) != SQLITE_DONE {
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        logger.debug("Could not delete all rows.")
+                                }
                         }
                 } else {
-                        debugPrint("DELETE ALL statement could not be prepared.")
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("DELETE ALL statement could not be prepared.")
+                        }
                 }
                 sqlite3_finalize(deleteStatement)
         }
