@@ -20,7 +20,7 @@ final class KeyboardViewController: UIInputViewController {
                 
                 collectionView.dataSource = self
                 collectionView.delegate = self
-                collectionView.register(WordsCollectionViewCell.self, forCellWithReuseIdentifier: "CandidateCell")
+                collectionView.register(CandidateCollectionViewCell.self, forCellWithReuseIdentifier: "CandidateCell")
                 collectionView.backgroundColor = self.view.backgroundColor
                 
                 view.addSubview(keyboardStackView)

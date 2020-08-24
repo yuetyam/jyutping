@@ -19,7 +19,7 @@
 		37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7C239ABB30006A59A7 /* ShareSheetView.swift */; };
 		37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7E239ABDC4006A59A7 /* MessageView.swift */; };
 		37336F81239ABE05006A59A7 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F80239ABE05006A59A7 /* LinkButton.swift */; };
-		3741062D23E2191200639EF4 /* WordsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* WordsCollectionViewCell.swift */; };
+		3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
 		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
@@ -100,7 +100,7 @@
 		37336F7C239ABB30006A59A7 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		37336F7E239ABDC4006A59A7 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		37336F80239ABE05006A59A7 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		3741062C23E2191200639EF4 /* WordsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCollectionViewCell.swift; sourceTree = "<group>"; };
 		3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
 		3741063323E30D7100639EF4 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 			children = (
 				3741063523E30DA800639EF4 /* CandidateBoard.swift */,
 				37F9542F24F40E1200042F14 /* SettingsView.swift */,
-				3741062C23E2191200639EF4 /* WordsCollectionViewCell.swift */,
+				3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */,
 				3715203323B22ACF007EAB60 /* ToolBar.swift */,
 				3741063323E30D7100639EF4 /* ToolButton.swift */,
 				37C05F9923E339C90061C992 /* KeyButton.swift */,
@@ -479,7 +479,7 @@
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
 				3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */,
 				3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */,
-				3741062D23E2191200639EF4 /* WordsCollectionViewCell.swift in Sources */,
+				3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
