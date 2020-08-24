@@ -36,9 +36,31 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 DispatchQueue.global().async {
                         AudioFeedback.perform(audioFeedback: .modify)
                 }
+                combinedPhrase.append(candidate)
+                if currentInputText.isEmpty {
+                        var combinedCandidate: Candidate = combinedPhrase[0]
+                        _ = combinedPhrase.dropFirst().map { oneCandidate in
+                                combinedCandidate += oneCandidate
+                        }
+                        combinedPhrase = []
+                        candidateQueue.async {
+                                let id: Int64 = Int64((combinedCandidate.input + combinedCandidate.text + combinedCandidate.footnote).hash)
+                                if let existPhrase: Phrase = self.userPhraseManager.fetch(by: id) {
+                                        self.userPhraseManager.update(id: existPhrase.id, frequency: existPhrase.frequency + 1)
+                                } else {
+                                        let newPhrase: Phrase = Phrase(id: id, token: Int64(combinedCandidate.input.hash), shortcut: combinedCandidate.footnote.shortcut, frequency: 1, word: combinedCandidate.text, jyutping: combinedCandidate.footnote)
+                                        self.userPhraseManager.insert(phrase: newPhrase)
+                                }
+                                let _ = self.userPhraseManager.fetchAll().map { debugPrint($0) }
+                        }
+                }
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+                
+                // FIXME: - don't know why
+                guard candidates.count > indexPath.row else { return CGSize(width: 55, height: 55) }
+                
                 let characterCount: Int = candidates[indexPath.row].count
                 if self.keyboardLayout == .wordsBoard {
                         let fullWidth: CGFloat = collectionView.bounds.size.width

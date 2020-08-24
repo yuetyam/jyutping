@@ -126,6 +126,7 @@ extension KeyButton {
                         viewController.textDocumentProxy.deleteBackward()
                 } else {
                         viewController.currentInputText = String(viewController.currentInputText.dropLast())
+                        viewController.combinedPhrase = []
                 }
                 DispatchQueue.global().async {
                         AudioFeedback.play(for: .backspace)

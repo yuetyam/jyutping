@@ -94,7 +94,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        private lazy var candidateQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim.candidate", qos: .userInitiated)
+        private(set) lazy var candidateQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim.candidate", qos: .userInitiated)
         var currentInputText: String = "" {
                 didSet {
                         DispatchQueue.main.async {
@@ -107,6 +107,8 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
+        lazy var combinedPhrase: [Candidate] = []
+        
         var candidates: [Candidate] = [] {
                 didSet {
                         DispatchQueue.main.async {
@@ -118,9 +120,13 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
+        let userPhraseManager: UserPhraseManager = UserPhraseManager()
         private lazy var engine: Engine = Engine()
-        func requestSuggestion() {
-                candidates = engine.suggest(for: currentInputText)
+        private func requestSuggestion() {
+                guard !currentInputText.isEmpty else { return }
+                let userDBCandidates: [Candidate] = userPhraseManager.match(for: currentInputText) + userPhraseManager.matchShortcut(for: currentInputText)
+                let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
+                candidates = (userDBCandidates + engineCandidates).deduplicated()
         }
         
         private func ensurePreferences() {

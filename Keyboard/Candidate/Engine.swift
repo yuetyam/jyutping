@@ -18,11 +18,12 @@ struct Engine {
                 case 0:
                         return []
                 case 1:
-                        return matchInitial(for: text).deduplicated()
+                        return matchInitial(for: text)
                 case 2:
                         canSpilt = Spliter.canSplit(text)
                         return fetch(for: text)
                 case 3, 4, 5, 6:
+                        // FIXME: - Wrong way
                         if !canSpilt {
                                 canSpilt = Spliter.canSplit(text)
                         }
@@ -36,14 +37,14 @@ struct Engine {
         
         private func fetch(for text: String) -> [Candidate] {
                 let fullMatch: [Candidate] = match(for: text)
-                guard fullMatch.count < 10 else { return fullMatch.deduplicated() }
+                guard fullMatch.count < 10 else { return fullMatch }
                 
                 guard canSpilt else {
                         var combine: [Candidate] = fullMatch + matchInitial(for: text)
                         for number in 1..<text.count {
                                 combine += matchInitial(for: String(text.dropLast(number)))
                         }
-                        return combine.deduplicated()
+                        return combine
                 }
                 
                 let jyutpings: [String] = Spliter.split(text)
@@ -76,7 +77,7 @@ struct Engine {
                                         }
                                 }
                         }
-                        return combine.deduplicated()
+                        return combine
                 } else {
                         var combine = fullMatch + matchPrefix(for: text, characterCount: jyutpings.count + 1, count: 10)
                         var matches: [Candidate] = match(for: rawJyutping)
@@ -123,7 +124,7 @@ struct Engine {
                                 }
                         }
                         combine += matches
-                        return combine.deduplicated()
+                        return combine
                 }
         }
 }
@@ -200,13 +201,6 @@ private extension Engine {
                 }
                 sqlite3_finalize(queryStatement)
                 return candidates
-        }
-}
-
-private extension Array where Element: Hashable {
-        func deduplicated() -> [Element] {
-                var set: Set<Element> = Set<Element>()
-                return filter { set.insert($0).inserted }
         }
 }
 

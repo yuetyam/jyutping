@@ -48,15 +48,15 @@ extension KeyboardViewController {
                 let audioFeedbackTextLabel: UILabel = UILabel()
                 settingsView.addSubview(audioFeedbackTextLabel)
                 audioFeedbackTextLabel.translatesAutoresizingMaskIntoConstraints = false
-                audioFeedbackTextLabel.centerXAnchor.constraint(equalTo: settingsView.centerXAnchor , constant: -30).isActive = true
-                audioFeedbackTextLabel.centerYAnchor.constraint(equalTo: settingsView.centerYAnchor).isActive = true
+                audioFeedbackTextLabel.centerXAnchor.constraint(equalTo: settingsView.centerXAnchor, constant: -30).isActive = true
+                audioFeedbackTextLabel.centerYAnchor.constraint(equalTo: settingsView.centerYAnchor, constant: -30).isActive = true
                 audioFeedbackTextLabel.text = NSLocalizedString("Audio feedback on click", comment: "")
                 
                 let audioFeedbackSwitch: UISwitch = UISwitch()
                 settingsView.addSubview(audioFeedbackSwitch)
                 audioFeedbackSwitch.translatesAutoresizingMaskIntoConstraints = false
                 audioFeedbackSwitch.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.trailingAnchor, constant: 16).isActive = true
-                audioFeedbackSwitch.centerYAnchor.constraint(equalTo: settingsView.centerYAnchor).isActive = true
+                audioFeedbackSwitch.centerYAnchor.constraint(equalTo: settingsView.centerYAnchor, constant: -30).isActive = true
                 audioFeedbackSwitch.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
                 audioFeedbackSwitch.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
                 
@@ -66,8 +66,21 @@ extension KeyboardViewController {
                 audioFeedbackSwitch.backgroundColor = bgColor
                 audioFeedbackSwitch.layer.cornerRadius = 15
                 
-                let tintColor: UIColor = isDarkAppearance ? .darkButtonText : .lightButtonText
-                settingsView.upArrowButton.tintColor = tintColor
+                let userdbResetButton = UIButton()
+                settingsView.addSubview(userdbResetButton)
+                userdbResetButton.translatesAutoresizingMaskIntoConstraints = false
+                userdbResetButton.topAnchor.constraint(equalTo: audioFeedbackTextLabel.bottomAnchor, constant: 60).isActive = true
+                userdbResetButton.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.leadingAnchor).isActive = true
+                userdbResetButton.trailingAnchor.constraint(equalTo: audioFeedbackSwitch.trailingAnchor).isActive = true
+                userdbResetButton.setTitle(NSLocalizedString("Clear user's phrases", comment: ""), for: .normal)
+                userdbResetButton.setTitleColor(.systemBlue, for: .normal)
+                userdbResetButton.setTitleColor(.systemGreen, for: .highlighted)
+                userdbResetButton.backgroundColor = isDarkAppearance ? .black : .white
+                userdbResetButton.layer.cornerRadius = 8
+                userdbResetButton.layer.cornerCurve = .continuous
+                userdbResetButton.addTarget(self, action: #selector(resetUserDB(_:)), for: .touchUpInside)
+                
+                settingsView.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
                 settingsView.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
                 
                 keyboardStackView.addArrangedSubview(settingsView)
@@ -83,6 +96,23 @@ extension KeyboardViewController {
                 } else {
                         UserDefaults.standard.set(true, forKey: "audio_feedback")
                 }
+        }
+        @objc private func resetUserDB(_ sender: UIButton) {
+                candidateQueue.async {
+                        self.userPhraseManager.deleteAll()
+                }
+                let progressLayer: CAShapeLayer = CAShapeLayer()
+                progressLayer.path = CGPath(rect: CGRect(x: 10, y: 0, width: sender.frame.width - 20, height: sender.frame.height), transform: nil)
+                progressLayer.fillColor = UIColor.clear.cgColor
+                progressLayer.strokeColor = UIColor.systemBlue.cgColor
+                progressLayer.strokeEnd = 0.0
+                progressLayer.lineWidth = 2
+                sender.layer.addSublayer(progressLayer)
+                let animation: CABasicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+                animation.fromValue = 0.0
+                animation.toValue = 0.4
+                animation.duration = 1
+                progressLayer.add(animation, forKey: nil)
         }
         
         private func makeKeysRows(for eventsRows: [[KeyboardEvent]], distribution: UIStackView.Distribution = .fillProportionally) -> [UIStackView] {

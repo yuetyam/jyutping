@@ -25,4 +25,8 @@ struct Candidate: Hashable {
                 let newCandidate: Candidate = Candidate(text: newText, footnote: newFootnote, input: newInput)
                 return newCandidate
         }
+        
+        static func += (lhs: inout Candidate, rhs: Candidate) {
+                return lhs = lhs + rhs
+        }
 }

@@ -112,6 +112,24 @@ final class KeyButton: UIButton {
                                         DispatchQueue.global().async {
                                                 AudioFeedback.perform(audioFeedback: .modify)
                                         }
+                                        viewController.combinedPhrase.append(candidate)
+                                        if viewController.currentInputText.isEmpty {
+                                                var combinedCandidate: Candidate = viewController.combinedPhrase[0]
+                                                _ = viewController.combinedPhrase.dropFirst().map { oneCandidate in
+                                                        combinedCandidate += oneCandidate
+                                                }
+                                                viewController.combinedPhrase = []
+                                                viewController.candidateQueue.async {
+                                                        let id: Int64 = Int64((combinedCandidate.input + combinedCandidate.text + combinedCandidate.footnote).hash)
+                                                        if let existPhrase: Phrase = self.viewController.userPhraseManager.fetch(by: id) {
+                                                                self.viewController.userPhraseManager.update(id: existPhrase.id, frequency: existPhrase.frequency + 1)
+                                                        } else {
+                                                                let newPhrase: Phrase = Phrase(id: id, token: Int64(combinedCandidate.input.hash), shortcut: combinedCandidate.footnote.shortcut, frequency: 1, word: combinedCandidate.text, jyutping: combinedCandidate.footnote)
+                                                                self.viewController.userPhraseManager.insert(phrase: newPhrase)
+                                                        }
+                                                        let _ = self.viewController.userPhraseManager.fetchAll().map { debugPrint($0) }
+                                                }
+                                        }
                                 } else if viewController.keyboardLayout == .jyutping && !viewController.currentInputText.isEmpty {
                                         viewController.textDocumentProxy.insertText(viewController.currentInputText)
                                         viewController.currentInputText = ""
