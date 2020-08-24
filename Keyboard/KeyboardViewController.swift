@@ -100,8 +100,12 @@ final class KeyboardViewController: UIInputViewController {
                                 self.toolBar.update()
                                 self.toolBar.inputLabel.text = self.currentInputText
                         }
-                        candidateQueue.async {
-                                self.requestSuggestion()
+                        if currentInputText.isEmpty {
+                                candidates = []
+                        } else {
+                                candidateQueue.async {
+                                        self.requestSuggestion()
+                                }
                         }
                 }
         }
@@ -122,13 +126,9 @@ final class KeyboardViewController: UIInputViewController {
         let userPhraseManager: UserPhraseManager = UserPhraseManager()
         private lazy var engine: Engine = Engine()
         private func requestSuggestion() {
-                guard !currentInputText.isEmpty else {
-                        candidates = []
-                        return
-                }
-                let userDBCandidates: [Candidate] = userPhraseManager.match(for: currentInputText) + userPhraseManager.matchShortcut(for: currentInputText)
+                let userdbCandidates: [Candidate] = userPhraseManager.suggest(for: currentInputText)
                 let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
-                candidates = (userDBCandidates + engineCandidates).deduplicated()
+                candidates = (userdbCandidates + engineCandidates).deduplicated()
         }
         
         private func setupToolBarActions() {

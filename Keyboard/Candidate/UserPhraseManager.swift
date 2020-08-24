@@ -90,30 +90,6 @@ struct UserPhraseManager {
                 sqlite3_finalize(updateStatement)
         }
         
-        func fetchAll() -> [Phrase] {
-                let queryStatementString = "SELECT * FROM phrase;"
-                var queryStatement: OpaquePointer? = nil
-                var phrases: [Phrase] = []
-                if sqlite3_prepare_v2(userdb, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let id = sqlite3_column_int64(queryStatement, 0)
-                                let token = sqlite3_column_int64(queryStatement, 1)
-                                let shortcut = sqlite3_column_int64(queryStatement, 2)
-                                let frequency = sqlite3_column_int64(queryStatement, 3)
-                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
-                                let phrase = Phrase(id: id, token: token, shortcut: shortcut, frequency: frequency, word: word, jyutping: jyutping)
-                                phrases.append(phrase)
-                        }
-                } else {
-                        if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("SELECT statement could not be prepared.")
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return phrases
-        }
-        
         func fetch(by id: Int64) -> Phrase? {
                 let queryStatementString = "SELECT * FROM phrase WHERE id = \(id) LIMIT 1;"
                 var queryStatement: OpaquePointer? = nil
@@ -137,6 +113,50 @@ struct UserPhraseManager {
                 return phrase
         }
         
+        func suggest(for text: String) -> [Candidate] {
+                let textHash: Int64 = Int64(text.hash)
+                let queryStatementString = "SELECT * FROM phrase WHERE token = \(textHash) OR shortcut = \(textHash) ORDER BY frequency DESC LIMIT 5;"
+                var queryStatement: OpaquePointer? = nil
+                var candidates: [Candidate] = []
+                if sqlite3_prepare_v2(userdb, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                // let id = sqlite3_column_int64(queryStatement, 0)
+                                // let token = sqlite3_column_int64(queryStatement, 1)
+                                // let shortcut = sqlite3_column_int64(queryStatement, 2)
+                                // let frequency = sqlite3_column_int64(queryStatement, 3)
+                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
+                                
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                candidates.append(candidate)
+                        }
+                } else {
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("SELECT statement could not be prepared.")
+                        }
+                }
+                sqlite3_finalize(queryStatement)
+                return candidates
+        }
+        
+        func deleteAll() {
+                let deleteStatementStirng = "DELETE FROM phrase;"
+                var deleteStatement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(userdb, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
+                        if sqlite3_step(deleteStatement) != SQLITE_DONE {
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        logger.debug("Could not delete all rows.")
+                                }
+                        }
+                } else {
+                        if #available(iOSApplicationExtension 14.0, *) {
+                                logger.debug("DELETE ALL statement could not be prepared.")
+                        }
+                }
+                sqlite3_finalize(deleteStatement)
+        }
+        
+        /*
         func match(for text: String) -> [Candidate] {
                 let token: Int64 = Int64(text.hash)
                 let queryStatementString = "SELECT * FROM phrase WHERE token = \(token) ORDER BY frequency DESC LIMIT 5;"
@@ -162,7 +182,10 @@ struct UserPhraseManager {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        func matchShortcut(for text: String) -> [Candidate] {
+        */
+        
+        /*
+        func matchShortcut(_ text: String) -> [Candidate] {
                 let shortcut: Int64 = Int64(text.hash)
                 let queryStatementString = "SELECT * FROM phrase WHERE shortcut = \(shortcut) ORDER BY frequency DESC LIMIT 5;"
                 var queryStatement: OpaquePointer? = nil
@@ -187,7 +210,9 @@ struct UserPhraseManager {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
+        */
         
+        /*
         func deleteRow(id: Int64) {
                 let deleteStatementStirng = "DELETE FROM phrase WHERE id = ?;"
                 var deleteStatement: OpaquePointer? = nil
@@ -205,21 +230,31 @@ struct UserPhraseManager {
                 }
                 sqlite3_finalize(deleteStatement)
         }
+        */
         
-        func deleteAll() {
-                let deleteStatementStirng = "DELETE FROM phrase;"
-                var deleteStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(userdb, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
-                        if sqlite3_step(deleteStatement) != SQLITE_DONE {
-                                if #available(iOSApplicationExtension 14.0, *) {
-                                        logger.debug("Could not delete all rows.")
-                                }
+        /*
+        func fetchAll() -> [Phrase] {
+                let queryStatementString = "SELECT * FROM phrase;"
+                var queryStatement: OpaquePointer? = nil
+                var phrases: [Phrase] = []
+                if sqlite3_prepare_v2(userdb, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                let id = sqlite3_column_int64(queryStatement, 0)
+                                let token = sqlite3_column_int64(queryStatement, 1)
+                                let shortcut = sqlite3_column_int64(queryStatement, 2)
+                                let frequency = sqlite3_column_int64(queryStatement, 3)
+                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
+                                let phrase = Phrase(id: id, token: token, shortcut: shortcut, frequency: frequency, word: word, jyutping: jyutping)
+                                phrases.append(phrase)
                         }
                 } else {
                         if #available(iOSApplicationExtension 14.0, *) {
-                                logger.debug("DELETE ALL statement could not be prepared.")
+                                logger.debug("SELECT statement could not be prepared.")
                         }
                 }
-                sqlite3_finalize(deleteStatement)
+                sqlite3_finalize(queryStatement)
+                return phrases
         }
+        */
 }
