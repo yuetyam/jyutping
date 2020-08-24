@@ -46,9 +46,9 @@ final class SettingsView: UIView {
                 addSubview(userdbResetButton)
                 userdbResetButton.translatesAutoresizingMaskIntoConstraints = false
                 userdbResetButton.topAnchor.constraint(equalTo: audioFeedbackTextLabel.bottomAnchor, constant: 60).isActive = true
-                userdbResetButton.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.leadingAnchor).isActive = true
-                userdbResetButton.trailingAnchor.constraint(equalTo: audioFeedbackSwitch.trailingAnchor).isActive = true
-                userdbResetButton.setTitle(NSLocalizedString("Clear user's phrases", comment: ""), for: .normal)
+                userdbResetButton.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.leadingAnchor, constant: -4).isActive = true
+                userdbResetButton.trailingAnchor.constraint(equalTo: audioFeedbackSwitch.trailingAnchor, constant: 4).isActive = true
+                userdbResetButton.setTitle(NSLocalizedString("Clear user phrases", comment: ""), for: .normal)
                 userdbResetButton.setTitleColor(.systemBlue, for: .normal)
                 userdbResetButton.setTitleColor(.systemGreen, for: .highlighted)
                 userdbResetButton.layer.cornerRadius = 8
