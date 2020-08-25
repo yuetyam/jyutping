@@ -110,7 +110,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        lazy var combinedPhrase: [Candidate] = []
+        lazy var candidateSequence: [Candidate] = []
         
         var candidates: [Candidate] = [] {
                 didSet {

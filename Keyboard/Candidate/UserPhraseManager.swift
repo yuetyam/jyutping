@@ -36,7 +36,22 @@ struct UserPhraseManager {
                 sqlite3_finalize(createTableStatement)
         }
         
-        func insert(phrase: Phrase) {
+        func handle(candidate: Candidate) {
+                let id: Int64 = Int64((candidate.input + candidate.text + candidate.footnote).hash)
+                if let existingPhrase: Phrase = fetch(by: id) {
+                        update(id: existingPhrase.id, frequency: existingPhrase.frequency + 1)
+                } else {
+                        let newPhrase: Phrase = Phrase(id: id,
+                                                       token: Int64(candidate.input.hash),
+                                                       shortcut: candidate.footnote.shortcut,
+                                                       frequency: 1,
+                                                       word: candidate.text,
+                                                       jyutping: candidate.footnote)
+                        insert(phrase: newPhrase)
+                }
+        }
+        
+        private func insert(phrase: Phrase) {
                 let insertStatementString = "INSERT INTO phrase (id, token, shortcut, frequency, word, jyutping) VALUES (?, ?, ?, ?, ?, ?);"
                 var insertStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
@@ -57,7 +72,7 @@ struct UserPhraseManager {
                 sqlite3_finalize(insertStatement)
         }
         
-        func update(id: Int64, frequency: Int64) {
+        private func update(id: Int64, frequency: Int64) {
                 let updateStatementString = "UPDATE phrase SET frequency = \(frequency) WHERE id = \(id);"
                 var updateStatement: OpaquePointer?
                 if sqlite3_prepare_v2(userdb, updateStatementString, -1, &updateStatement, nil) == SQLITE_OK {
@@ -72,7 +87,7 @@ struct UserPhraseManager {
                 sqlite3_finalize(updateStatement)
         }
         
-        func fetch(by id: Int64) -> Phrase? {
+        private func fetch(by id: Int64) -> Phrase? {
                 let queryStatementString = "SELECT * FROM phrase WHERE id = \(id) LIMIT 1;"
                 var queryStatement: OpaquePointer? = nil
                 var phrase: Phrase?
