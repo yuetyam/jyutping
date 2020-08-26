@@ -133,7 +133,7 @@ final class ToolBar: UIView {
                  downArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
         }
         private var keyboardDownButtonConstaints: [NSLayoutConstraint] {
-                let width: CGFloat = traitCollection.userInterfaceIdiom == .phone ? 58 : 64
+                let width: CGFloat = isPhoneInterface ? 58 : 64
                 return [keyboardDownButton.topAnchor.constraint(equalTo: topAnchor),
                         keyboardDownButton.bottomAnchor.constraint(equalTo: bottomAnchor),
                         keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor),

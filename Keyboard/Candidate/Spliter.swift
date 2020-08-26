@@ -28,7 +28,12 @@ struct Spliter {
         }
         
         static func canSplit(_ text: String) -> Bool {
-                return jyutpings.reduce(false) { $0 || text.hasPrefix($1) }
+                for jyutping in jyutpings {
+                        if text.hasPrefix(jyutping) {
+                                return true
+                        }
+                }
+                return false
         }
         
         private static let jyutpings: Set<String> = ["ngo", "nei", "keoi", "ge", "aa", "gam", "dou", "zau", "hai", "hou",

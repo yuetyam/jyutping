@@ -18,7 +18,7 @@ final class CandidateBoard: UIView {
         required init?(coder: NSCoder) {
                 fatalError("init(coder:) has not been implemented")
         }
-                
+        
         private func setupSubViews() {
                 addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
