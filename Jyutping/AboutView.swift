@@ -96,7 +96,7 @@ struct AboutView: View {
                         Image(systemName: "info.circle")
                         Text("About")
                 }
-                .tag(3)
+                .tag(2)
                 .navigationViewStyle(StackNavigationViewStyle())
         }
 }

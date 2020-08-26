@@ -83,7 +83,7 @@ struct JyutpingView: View {
                         Image(systemName: "doc.text.magnifyingglass")
                         Text("Jyutping")
                 }
-                .tag(2)
+                .tag(1)
                 .navigationViewStyle(StackNavigationViewStyle())
         }
 }
