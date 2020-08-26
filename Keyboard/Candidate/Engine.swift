@@ -18,7 +18,7 @@ struct Engine {
                 case 0:
                         return []
                 case 1:
-                        return matchInitial(for: text)
+                        return shortcut(for: text)
                 default:
                         return fetch(for: text)
                 }
@@ -28,9 +28,9 @@ struct Engine {
                 let fullMatch: [Candidate] = match(for: text)
                 
                 guard Spliter.canSplit(text) else {
-                        var combine: [Candidate] = fullMatch + matchInitial(for: text)
+                        var combine: [Candidate] = fullMatch + shortcut(for: text)
                         for number in 1..<text.count {
-                                combine += matchInitial(for: String(text.dropLast(number)))
+                                combine += shortcut(for: String(text.dropLast(number)))
                         }
                         return combine
                 }
@@ -67,7 +67,7 @@ struct Engine {
                         }
                         return combine
                 } else {
-                        var combine = fullMatch + matchPrefix(for: text, characterCount: jyutpings.count + 1, count: 10)
+                        var combine = fullMatch + predict(for: text, characterCount: jyutpings.count + 1, count: 10)
                         var matches: [Candidate] = match(for: rawJyutping)
                         var firstMatchedJyutpingCount: Int = matches.isEmpty ? 0 : jyutpings.count
                         if jyutpings.count > 1 {
@@ -85,7 +85,7 @@ struct Engine {
                                 
                                 let tailText: String = String(text.dropFirst(matches.first!.input.count))
                                 let tailJyutpings: [String] = Array(jyutpings.dropFirst(firstMatchedJyutpingCount))
-                                if let tailOne: Candidate = matchPrefix(for: tailText, characterCount: tailJyutpings.count + 1, count: 1).first {
+                                if let tailOne: Candidate = predict(for: tailText, characterCount: tailJyutpings.count + 1, count: 1).first {
                                         let newCandidate: Candidate = matches.first! + tailOne
                                         matches.insert(newCandidate, at: 0)
                                         hasTailCandidate = true
@@ -93,7 +93,7 @@ struct Engine {
                                         let tailRawJyutping: String = tailJyutpings.reduce("", +)
                                         if tailText.count - tailRawJyutping.count > 1 {
                                                 let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - tailRawJyutping.count - 1))
-                                                if let one = matchPrefix(for: tailRawJPPlusOne, characterCount: tailJyutpings.count + 1, count: 1).first {
+                                                if let one = predict(for: tailRawJPPlusOne, characterCount: tailJyutpings.count + 1, count: 1).first {
                                                         let newCandidate: Candidate = matches.first! + one
                                                         matches.insert(newCandidate, at: 0)
                                                         hasTailCandidate = true
@@ -119,17 +119,21 @@ struct Engine {
 
 private extension Engine {
         
-        // MATCH:  initial = text
-        func matchInitial(for text: String, count: Int = 100) -> [Candidate] {
+        func shortcut(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
+                let hashed: Int64 = Int64(text.hash)
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE initial = '\(text)\' LIMIT \(count);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE shortcut = \(hashed) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                // ping = sqlite3_column_int64(queryStatement, 0)
+                                // shortcut = sqlite3_column_int64(queryStatement, 1)
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                                let jyut6ping3: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                                // rawjyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                
+                                let candidate: Candidate = Candidate(text: word, footnote: jyut6ping3, input: text)
                                 candidates.append(candidate)
                         }
                 }
@@ -137,17 +141,21 @@ private extension Engine {
                 return candidates
         }
         
-        // MATCH:  rawjyutping == text
         func match(for text: String, count: Int = 200) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
+                let hashed: Int64 = Int64(text.hash)
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE rawjyutping = '\(text)\' LIMIT \(count);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(hashed) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                // ping = sqlite3_column_int64(queryStatement, 0)
+                                // shortcut = sqlite3_column_int64(queryStatement, 1)
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                                let jyut6ping3: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                                // rawjyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                
+                                let candidate: Candidate = Candidate(text: word, footnote: jyut6ping3, input: text)
                                 candidates.append(candidate)
                         }
                 }
@@ -155,35 +163,20 @@ private extension Engine {
                 return candidates
         }
         
-        // MATCH:  text == rawjyutping[0..<text.count] && word.count = characterCount
-        func matchPrefix(for text: String, characterCount: Int, count: Int = 100) -> [Candidate] {
+        func predict(for text: String, characterCount: Int, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE length(word) = \(characterCount) AND substr(rawjyutping, 1, \(text.count)) = \'\(text)\' LIMIT \(count);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE length(word) = \(characterCount) AND substr(rawjyutping, 1, \(text.count)) = '\(text)' LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-        
-        // MATCH:  text == rawjyutping[0..<text.count]
-        func suggestPrefix(for text: String, count: Int) -> [Candidate] {
-                guard !text.isEmpty else { return [] }
-                var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE substr(rawjyutping, 1, \(text.count)) = \'\(text)\' LIMIT \(count);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                // ping = sqlite3_column_int64(queryStatement, 0)
+                                // shortcut = sqlite3_column_int64(queryStatement, 1)
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                                let jyut6ping3: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                                // rawjyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                
+                                let candidate: Candidate = Candidate(text: word, footnote: jyut6ping3, input: text)
                                 candidates.append(candidate)
                         }
                 }
@@ -191,49 +184,3 @@ private extension Engine {
                 return candidates
         }
 }
-
-/*
-struct OldEngine {
-        
-        // MATCH:  word.count == text.count && text == jyutping.initials
-        private func matchInitials(for text: String, count: Int = 100) -> [Candidate] {
-                guard !text.isEmpty else { return [] }
-                var like: String = ""
-                for letter in text {
-                        like += "\(letter)% "
-                }
-                like = String(like.dropLast())
-                var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE length(word) = \(text.count) AND jyutping LIKE \'\(like)\';"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while candidates.count < count && sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-        
-        // MATCH:  text == jyutpingWithOutSpaces[0..<text.count]
-        private func suggestRawPrefix(for text: String, count: Int) -> [Candidate] {
-                guard !text.isEmpty else { return [] }
-                var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE substr(REPLACE(jyutping, \' \', \'\'), 1, \(text.count)) = \'\(text)\';"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while candidates.count < count && sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-}
-*/

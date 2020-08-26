@@ -22,9 +22,9 @@ struct JyutpingProvider {
                         var chars: String = text
                         var suggestion: String = ""
                         while !chars.isEmpty {
-                                let firstMatch = fetchLeadingJyutping(for: chars)
-                                suggestion += firstMatch.jyutping + " "
-                                chars = String(chars.dropFirst(firstMatch.charCount))
+                                let leadingMatch = fetchLeadingJyutping(for: chars)
+                                suggestion += leadingMatch.jyutping + " "
+                                chars = String(chars.dropFirst(leadingMatch.charCount))
                         }
                         suggestion = String(suggestion.dropLast())
                         return suggestion.isEmpty ? [] : [suggestion]
@@ -43,16 +43,25 @@ struct JyutpingProvider {
         }
         
         private static func match(for text: String) -> [String] {
+                let token: Int64 = Int64(text.hash)
                 var jyutpings: [String] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE word = '\(text)\';"
+                let queryString = "SELECT * FROM jyutpingtable WHERE token = \(token);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                // token = sqlite3_column_int64(queryStatement, 0)
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 jyutpings.append(jyutping)
                         }
                 }
                 sqlite3_finalize(queryStatement)
-                return jyutpings
+                return jyutpings.deduplicated()
+        }
+}
+
+private extension Array where Element: Hashable {
+        func deduplicated() -> [Element] {
+                var set: Set<Element> = Set<Element>()
+                return filter { set.insert($0).inserted }
         }
 }
