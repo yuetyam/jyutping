@@ -103,7 +103,7 @@ final class KeyboardViewController: UIInputViewController {
                                 candidates = []
                         } else {
                                 candidateQueue.async {
-                                        self.requestSuggestion()
+                                        self.suggestCandidates()
                                 }
                         }
                 }
@@ -124,7 +124,7 @@ final class KeyboardViewController: UIInputViewController {
         
         let userPhraseManager: UserPhraseManager = UserPhraseManager()
         private lazy var engine: Engine = Engine()
-        private func requestSuggestion() {
+        private func suggestCandidates() {
                 let userdbCandidates: [Candidate] = userPhraseManager.suggest(for: currentInputText)
                 let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
                 candidates = (userdbCandidates + engineCandidates).deduplicated()
@@ -134,13 +134,13 @@ final class KeyboardViewController: UIInputViewController {
                 toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .allTouchEvents)
                 toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .valueChanged)
                 toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .allTouchEvents)
-                toolBar.keyboardDownButton.addTarget(self, action: #selector(handleDismissKeyboard), for: .allTouchEvents)
+                toolBar.keyboardDownButton.addTarget(self, action: #selector(dismissInputMethod), for: .allTouchEvents)
         }
         @objc private func handleDownArrowEvent() {
                 candidateBoard.height = view.bounds.height
                 keyboardLayout = .wordsBoard
         }
-        @objc private func handleDismissKeyboard() {
+        @objc private func dismissInputMethod() {
                 dismissKeyboard()
         }
         @objc private func handleSettingsButtonEvent() {

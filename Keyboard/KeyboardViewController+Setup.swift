@@ -57,7 +57,7 @@ extension KeyboardViewController {
         
         private func setupSettingsView() {
                 settingsView.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
-                settingsView.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
+                settingsView.upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .allTouchEvents)
                 
                 let bgColor: UIColor = isDarkAppearance ?
                         UIColor(displayP3Red: 35.0 / 255, green: 35.0 / 255, blue: 35.0 / 255, alpha: 1) :
@@ -71,7 +71,7 @@ extension KeyboardViewController {
                 
                 keyboardStackView.addArrangedSubview(settingsView)
         }
-        @objc private func handleUpArrowEvent() {
+        @objc private func dismissSettingsView() {
                 keyboardLayout = .jyutping
         }
         @objc private func handleAudioFeedbackSwitch() {
