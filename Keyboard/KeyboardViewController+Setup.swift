@@ -87,18 +87,18 @@ extension KeyboardViewController {
                 progressLayer.add(animation, forKey: nil)
         }
         
-        private func makeKeysRows(for eventsRows: [[KeyboardEvent]], distribution: UIStackView.Distribution = .fillProportionally) -> [UIStackView] {
-                let keysRows: [UIStackView] = eventsRows.map { makeKeysRow(for: $0, distribution: distribution) }
+        private func makeKeysRows(for eventsRows: [[KeyboardEvent]]) -> [UIStackView] {
+                let keysRows: [UIStackView] = eventsRows.map { makeKeysRow(for: $0) }
                 return keysRows
         }
-        private func makeKeysRow(for events: [KeyboardEvent], distribution: UIStackView.Distribution) -> UIStackView {
+        private func makeKeysRow(for events: [KeyboardEvent]) -> UIStackView {
                 let stackView: UIStackView = UIStackView()
                 stackView.axis = .horizontal
-                stackView.distribution = distribution
-                stackView.addMultipleArrangedSubviews(events.map { makeKey(for: $0, distribution: distribution) })
+                stackView.distribution = .fillProportionally
+                stackView.addMultipleArrangedSubviews(events.map { makeKey(for: $0) })
                 return stackView
         }
-        private func makeKey(for event: KeyboardEvent, distribution: UIStackView.Distribution) -> UIView {
+        private func makeKey(for event: KeyboardEvent) -> UIView {
                 let keyView: KeyButton = KeyButton(keyboardEvent: event, viewController: self)
                 if event == .switchInputMethod {
                         keyView.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
