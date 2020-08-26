@@ -98,7 +98,6 @@ final class KeyboardViewController: UIInputViewController {
                 didSet {
                         DispatchQueue.main.async {
                                 self.toolBar.update()
-                                self.toolBar.inputLabel.text = self.currentInputText
                         }
                         if currentInputText.isEmpty {
                                 candidates = []

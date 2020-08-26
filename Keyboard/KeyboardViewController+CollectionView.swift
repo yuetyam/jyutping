@@ -31,6 +31,9 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 textDocumentProxy.insertText(candidate.text)
                 currentInputText = String(currentInputText.dropFirst(candidate.input.count))
                 if keyboardLayout == .wordsBoard {
+                        collectionView.removeFromSuperview()
+                        NSLayoutConstraint.deactivate(candidateBoardcollectionViewConstraints)
+                        toolBar.reinit()
                         keyboardLayout = .jyutping
                 }
                 DispatchQueue.global().async {

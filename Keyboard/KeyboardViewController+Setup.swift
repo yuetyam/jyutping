@@ -22,25 +22,39 @@ extension KeyboardViewController {
         
         private func setup(layout: KeyboardLayout) {
                 toolBar.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
+                toolBar.update()
                 keyboardStackView.addArrangedSubview(toolBar)
                 let keysRows: [UIStackView] = makeKeysRows(for: layout.keys(for: self))
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
         }
         
+        var candidateBoardcollectionViewConstraints: [NSLayoutConstraint] {
+                [collectionView.bottomAnchor.constraint(equalTo: candidateBoard.bottomAnchor),
+                 collectionView.leadingAnchor.constraint(equalTo: candidateBoard.leadingAnchor),
+                 collectionView.trailingAnchor.constraint(equalTo: candidateBoard.upArrowButton.leadingAnchor),
+                 collectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor)]
+        }
         private func setupCandidateBoard() {
+                collectionView.removeFromSuperview()
+                NSLayoutConstraint.deactivate(toolBar.collectionViewConstraints)
+                
                 candidateBoard.addSubview(collectionView)
                 collectionView.translatesAutoresizingMaskIntoConstraints = false
-                collectionView.bottomAnchor.constraint(equalTo: candidateBoard.bottomAnchor).isActive = true
-                collectionView.leadingAnchor.constraint(equalTo: candidateBoard.leadingAnchor).isActive = true
-                collectionView.trailingAnchor.constraint(equalTo: candidateBoard.upArrowButton.leadingAnchor).isActive = true
-                collectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor).isActive = true
+                NSLayoutConstraint.activate(candidateBoardcollectionViewConstraints)
                 (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
                 
                 candidateBoard.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
-                candidateBoard.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
+                candidateBoard.upArrowButton.addTarget(self, action: #selector(dismissCandidateBoard), for: .allTouchEvents)
                 
                 keyboardStackView.addArrangedSubview(candidateBoard)
         }
+        @objc private func dismissCandidateBoard() {
+                collectionView.removeFromSuperview()
+                NSLayoutConstraint.deactivate(candidateBoardcollectionViewConstraints)
+                toolBar.reinit()
+                keyboardLayout = .jyutping
+        }
+        
         private func setupSettingsView() {
                 settingsView.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
                 settingsView.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
@@ -59,8 +73,6 @@ extension KeyboardViewController {
         }
         @objc private func handleUpArrowEvent() {
                 keyboardLayout = .jyutping
-                toolBar.update()
-                collectionView.setContentOffset(.zero, animated: false)
         }
         @objc private func handleAudioFeedbackSwitch() {
                 if UserDefaults.standard.bool(forKey: "audio_feedback") {
