@@ -94,10 +94,7 @@ final class ToolBar: UIView {
                 viewController.collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
                 viewController.collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 viewController.collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45).isActive = true
-                
-                let collectionViewFlowLayout = UICollectionViewFlowLayout()
-                collectionViewFlowLayout.scrollDirection = .horizontal
-                viewController.collectionView.collectionViewLayout = collectionViewFlowLayout
+                (viewController.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
         }
         
         func setupDownArrow() {

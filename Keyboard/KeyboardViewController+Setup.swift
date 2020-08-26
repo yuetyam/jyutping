@@ -34,9 +34,7 @@ extension KeyboardViewController {
                 collectionView.leadingAnchor.constraint(equalTo: candidateBoard.leadingAnchor).isActive = true
                 collectionView.trailingAnchor.constraint(equalTo: candidateBoard.upArrowButton.leadingAnchor).isActive = true
                 collectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor).isActive = true
-                let collectionViewFlowLayout = UICollectionViewFlowLayout()
-                collectionViewFlowLayout.scrollDirection = .vertical
-                collectionView.collectionViewLayout = collectionViewFlowLayout
+                (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
                 
                 candidateBoard.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
                 candidateBoard.upArrowButton.addTarget(self, action: #selector(handleUpArrowEvent), for: .allTouchEvents)
