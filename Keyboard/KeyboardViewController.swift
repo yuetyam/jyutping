@@ -93,7 +93,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        private(set) lazy var candidateQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim.candidate", qos: .userInitiated)
+        private(set) lazy var imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim.candidate", qos: .userInitiated)
         var currentInputText: String = "" {
                 didSet {
                         DispatchQueue.main.async {
@@ -102,7 +102,7 @@ final class KeyboardViewController: UIInputViewController {
                         if currentInputText.isEmpty {
                                 candidates = []
                         } else {
-                                candidateQueue.async {
+                                imeQueue.async {
                                         self.suggestCandidates()
                                 }
                         }
@@ -122,10 +122,10 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        let userPhraseManager: UserPhraseManager = UserPhraseManager()
+        let lexiconManager: LexiconManager = LexiconManager()
         private lazy var engine: Engine = Engine()
         private func suggestCandidates() {
-                let userdbCandidates: [Candidate] = userPhraseManager.suggest(for: currentInputText)
+                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: currentInputText)
                 let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
                 candidates = (userdbCandidates + engineCandidates).deduplicated()
         }

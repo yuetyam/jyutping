@@ -66,8 +66,8 @@ extension KeyboardViewController {
                 settingsView.audioFeedbackSwitch.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
                 settingsView.audioFeedbackSwitch.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
                 
-                settingsView.userdbResetButton.backgroundColor = isDarkAppearance ? .black : .white
-                settingsView.userdbResetButton.addTarget(self, action: #selector(resetUserDB(_:)), for: .touchUpInside)
+                settingsView.lexiconResetButton.backgroundColor = isDarkAppearance ? .black : .white
+                settingsView.lexiconResetButton.addTarget(self, action: #selector(resetLexicon(sender:)), for: .touchUpInside)
                 
                 keyboardStackView.addArrangedSubview(settingsView)
         }
@@ -81,9 +81,9 @@ extension KeyboardViewController {
                         UserDefaults.standard.set(true, forKey: "audio_feedback")
                 }
         }
-        @objc private func resetUserDB(_ sender: UIButton) {
-                candidateQueue.async {
-                        self.userPhraseManager.deleteAll()
+        @objc private func resetLexicon(sender: UIButton) {
+                imeQueue.async {
+                        self.lexiconManager.deleteAll()
                 }
                 let progressLayer: CAShapeLayer = CAShapeLayer()
                 progressLayer.path = CGPath(rect: CGRect(x: 10, y: 0, width: sender.frame.width - 20, height: sender.frame.height), transform: nil)

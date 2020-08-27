@@ -46,8 +46,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 combinedCandidate += oneCandidate
                         }
                         candidateSequence = []
-                        candidateQueue.async {
-                                self.userPhraseManager.handle(candidate: combinedCandidate)
+                        imeQueue.async {
+                                self.lexiconManager.handle(candidate: combinedCandidate)
                         }
                 }
         }

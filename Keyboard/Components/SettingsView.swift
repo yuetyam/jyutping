@@ -11,7 +11,7 @@ final class SettingsView: UIView {
         let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", leftInset: 14, rightInset: 14)
         let audioFeedbackTextLabel: UILabel = UILabel()
         let audioFeedbackSwitch: UISwitch = UISwitch()
-        let userdbResetButton = UIButton()
+        let lexiconResetButton = UIButton()
         
         init() {
                 super.init(frame: .zero)
@@ -43,15 +43,15 @@ final class SettingsView: UIView {
                 audioFeedbackSwitch.layer.cornerRadius = 15
                 audioFeedbackSwitch.layer.cornerCurve = .continuous
                 
-                addSubview(userdbResetButton)
-                userdbResetButton.translatesAutoresizingMaskIntoConstraints = false
-                userdbResetButton.topAnchor.constraint(equalTo: audioFeedbackTextLabel.bottomAnchor, constant: 60).isActive = true
-                userdbResetButton.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.leadingAnchor).isActive = true
-                userdbResetButton.trailingAnchor.constraint(equalTo: audioFeedbackSwitch.trailingAnchor).isActive = true
-                userdbResetButton.setTitle(NSLocalizedString("Clear user phrases", comment: ""), for: .normal)
-                userdbResetButton.setTitleColor(.systemBlue, for: .normal)
-                userdbResetButton.setTitleColor(.systemGreen, for: .highlighted)
-                userdbResetButton.layer.cornerRadius = 8
-                userdbResetButton.layer.cornerCurve = .continuous
+                addSubview(lexiconResetButton)
+                lexiconResetButton.translatesAutoresizingMaskIntoConstraints = false
+                lexiconResetButton.topAnchor.constraint(equalTo: audioFeedbackTextLabel.bottomAnchor, constant: 60).isActive = true
+                lexiconResetButton.leadingAnchor.constraint(equalTo: audioFeedbackTextLabel.leadingAnchor).isActive = true
+                lexiconResetButton.trailingAnchor.constraint(equalTo: audioFeedbackSwitch.trailingAnchor).isActive = true
+                lexiconResetButton.setTitle(NSLocalizedString("Clear user lexicon", comment: ""), for: .normal)
+                lexiconResetButton.setTitleColor(.systemBlue, for: .normal)
+                lexiconResetButton.setTitleColor(.systemGreen, for: .highlighted)
+                lexiconResetButton.layer.cornerRadius = 8
+                lexiconResetButton.layer.cornerCurve = .continuous
         }
 }

@@ -30,8 +30,8 @@
 		3756602123C5601C009FCA23 /* JyutpingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756602023C5601C009FCA23 /* JyutpingProvider.swift */; };
 		37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6524F310E100856B8A /* Array+deduplicated.swift */; };
 		37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6724F3112D00856B8A /* String+shortcut.swift */; };
-		37573F6A24F3120300856B8A /* Phrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Phrase.swift */; };
-		37573F6C24F3123500856B8A /* UserPhraseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6B24F3123500856B8A /* UserPhraseManager.swift */; };
+		37573F6A24F3120300856B8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Entry.swift */; };
+		37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6B24F3123500856B8A /* LexiconManager.swift */; };
 		3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */; };
 		377B83AF24F641E4009B5C4B /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 377B83AE24F641E4009B5C4B /* jyutping.sqlite3 */; };
 		377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */; };
@@ -111,8 +111,8 @@
 		3756602023C5601C009FCA23 /* JyutpingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingProvider.swift; sourceTree = "<group>"; };
 		37573F6524F310E100856B8A /* Array+deduplicated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+deduplicated.swift"; sourceTree = "<group>"; };
 		37573F6724F3112D00856B8A /* String+shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+shortcut.swift"; sourceTree = "<group>"; };
-		37573F6924F3120300856B8A /* Phrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phrase.swift; sourceTree = "<group>"; };
-		37573F6B24F3123500856B8A /* UserPhraseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhraseManager.swift; sourceTree = "<group>"; };
+		37573F6924F3120300856B8A /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		37573F6B24F3123500856B8A /* LexiconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconManager.swift; sourceTree = "<group>"; };
 		3764EB6E24D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3764EB6F24D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3764EB7024D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -254,9 +254,9 @@
 			isa = PBXGroup;
 			children = (
 				37FF2A2E23E8F80400B86C74 /* Engine.swift */,
-				37573F6B24F3123500856B8A /* UserPhraseManager.swift */,
+				37573F6B24F3123500856B8A /* LexiconManager.swift */,
 				377EAD4924708ACD00B42D30 /* Spliter.swift */,
-				37573F6924F3120300856B8A /* Phrase.swift */,
+				37573F6924F3120300856B8A /* Entry.swift */,
 				37FF2A2C23E8F51500B86C74 /* Candidate.swift */,
 			);
 			path = Candidate;
@@ -460,9 +460,9 @@
 				3741063423E30D7100639EF4 /* ToolButton.swift in Sources */,
 				3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */,
 				3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */,
-				37573F6A24F3120300856B8A /* Phrase.swift in Sources */,
+				37573F6A24F3120300856B8A /* Entry.swift in Sources */,
 				3741063623E30DA800639EF4 /* CandidateBoard.swift in Sources */,
-				37573F6C24F3123500856B8A /* UserPhraseManager.swift in Sources */,
+				37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */,
 				37C05F9A23E339C90061C992 /* KeyButton.swift in Sources */,
 				37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */,
 				37F9543024F40E1200042F14 /* SettingsView.swift in Sources */,
