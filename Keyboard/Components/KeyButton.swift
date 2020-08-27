@@ -71,7 +71,7 @@ final class KeyButton: UIButton {
                                 animation.toValue = previewPath
                                 animation.fillMode = .forwards
                                 animation.isRemovedOnCompletion = false
-                                animation.timingFunction = .init(name: .default)
+                                animation.timingFunction = CAMediaTimingFunction(name: .default)
                                 shapeLayer.add(animation, forKey: animation.keyPath)
                                 layer.addSublayer(shapeLayer)
                                 
@@ -212,7 +212,7 @@ final class KeyButton: UIButton {
                 }
         }
         private func removePreview() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
                         self.previewLabel.text = nil
                         self.previewLabel.removeFromSuperview()
                         self.shapeLayer.removeFromSuperlayer()

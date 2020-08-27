@@ -96,6 +96,7 @@ extension KeyboardViewController {
                 animation.fromValue = 0.0
                 animation.toValue = 0.4
                 animation.duration = 1
+                animation.timingFunction = CAMediaTimingFunction(name: .default)
                 progressLayer.add(animation, forKey: nil)
         }
         
