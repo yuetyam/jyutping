@@ -17,6 +17,7 @@ struct VersionLabel: View {
                         Spacer().frame(width: 16)
                         Image(systemName: "doc.on.doc").font(.footnote)
                 }
+                .contentShape(Rectangle())
                 .padding()
                 .onTapGesture {
                         UIPasteboard.general.string = self.versionString
