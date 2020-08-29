@@ -107,8 +107,6 @@ extension KeyButton {
                         return "#+="
                 case .jyutping:
                         return "拼"
-                case .cantoneseSymbolic:
-                        return "符"
                 case .alphabetLowercase, .alphabetUppercase:
                         return "ABC"
                 default:

@@ -4,7 +4,6 @@ enum KeyboardLayout: Equatable {
         case
         jyutping,
         jyutpingUppercase,
-        cantoneseSymbolic,
         
         alphabetLowercase,
         alphabetUppercase,
@@ -24,8 +23,6 @@ enum KeyboardLayout: Equatable {
                         return jyutpingKeys(for: viewController)
                 case .jyutpingUppercase:
                         return jyutpingUppercaseKeys(for: viewController)
-                case .cantoneseSymbolic:
-                        return cantoneseSymbolicKeys(for: viewController)
                 case .alphabetLowercase:
                         return alphabetLowercaseKeys(for: viewController)
                 case .alphabetUppercase:
@@ -33,11 +30,11 @@ enum KeyboardLayout: Equatable {
                 case .numericJyutping:
                         return numericJyutpingKeys(for: viewController)
                 case .symbolicJyutping:
-                        return symbolicJyutping(for: viewController)
+                        return symbolicJyutpingKeys(for: viewController)
                 case .numericAlphabet:
                         return numericAlphabetKeys(for: viewController)
                 case .symbolicAlphabet:
-                        return symbolicAlphabet(for: viewController)
+                        return symbolicAlphabetKeys(for: viewController)
                 default:
                         return []
                 }
@@ -99,7 +96,6 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        
         func alphabetLowercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -142,28 +138,11 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func cantoneseSymbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
-                let arrayWithTextArray: [[String]] = [
-                        ["（",    "）",    "〖",    "〗",    "～",    "【",    "】",    "〔",    "〕"],
-                        ["《",    "》",    "「",    "」",    "：",    "『",    "』",    "\u{00B7}",     "、"],
-                        ["。",    "，",    "；",    "？",    "！"]
-                ]
-                var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[2].insert(.switchTo(.jyutping), at: 0)
-                eventRows[2].insert(.none, at: 1)
-                eventRows[2].append(.none)
-                eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericJyutping), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.numericJyutping), .space, .newLine]
-                eventRows.append(bottomEvents)
-                return eventRows
-        }
         func numericJyutpingKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
-                        ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""],
-                        [".", ",", "?", "!", "'"]
+                        ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"],
+                        ["。", "，", "、", "？", "！", "."]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.symbolicJyutping), at: 0)
@@ -193,11 +172,11 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func symbolicJyutping(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func symbolicJyutpingKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
-                        ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
-                        ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
-                        [".", ",", "?", "!", "'"]
+                        ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="],
+                        ["_", "—", "＼", "｜", "～", "《", "》", "€", "&", "\u{00B7}"],
+                        ["⋯", "【", "】", "〔", "〕", "¥"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.numericJyutping), at: 0)
@@ -210,7 +189,7 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func symbolicAlphabet(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func symbolicAlphabetKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
@@ -227,6 +206,26 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
+        
+        /*
+        func cantoneseSymbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+                let arrayWithTextArray: [[String]] = [
+                        ["（",    "）",    "〖",    "〗",    "～",    "【",    "】",    "〔",    "〕"],
+                        ["《",    "》",    "「",    "」",    "：",    "『",    "』",    "\u{00B7}",     "、"],
+                        ["。",    "，",    "；",    "？",    "！"]
+                ]
+                var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
+                eventRows[2].insert(.switchTo(.jyutping), at: 0)
+                eventRows[2].insert(.none, at: 1)
+                eventRows[2].append(.none)
+                eventRows[2].append(.backspace)
+                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                        [.switchTo(.numericJyutping), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.numericJyutping), .space, .newLine]
+                eventRows.append(bottomEvents)
+                return eventRows
+        }
+        */
 }
 
 private extension Array where Element == [String] {
