@@ -115,9 +115,7 @@ final class KeyboardViewController: UIInputViewController {
                 didSet {
                         DispatchQueue.main.async {
                                 self.collectionView.reloadData()
-                                if self.collectionView.contentOffset.x > 1 {
-                                        self.collectionView.setContentOffset(.zero, animated: false)
-                                }
+                                self.collectionView.setContentOffset(.zero, animated: true)
                         }
                 }
         }

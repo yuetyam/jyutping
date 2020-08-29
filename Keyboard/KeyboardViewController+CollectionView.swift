@@ -29,17 +29,17 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 let candidate: Candidate = candidates[indexPath.row]
                 textDocumentProxy.insertText(candidate.text)
+                DispatchQueue.global().async {
+                        AudioFeedback.perform(audioFeedback: .modify)
+                }
+                candidateSequence.append(candidate)
                 currentInputText = String(currentInputText.dropFirst(candidate.input.count))
-                if keyboardLayout == .wordsBoard {
+                if keyboardLayout == .wordsBoard && currentInputText.isEmpty {
                         collectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardcollectionViewConstraints)
                         toolBar.reinit()
                         keyboardLayout = .jyutping
                 }
-                DispatchQueue.global().async {
-                        AudioFeedback.perform(audioFeedback: .modify)
-                }
-                candidateSequence.append(candidate)
                 if currentInputText.isEmpty {
                         var combinedCandidate: Candidate = candidateSequence[0]
                         _ = candidateSequence.dropFirst().map { oneCandidate in
