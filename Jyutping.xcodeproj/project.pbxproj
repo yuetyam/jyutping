@@ -242,10 +242,6 @@
 				3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */,
 				3715203323B22ACF007EAB60 /* ToolBar.swift */,
 				3741063323E30D7100639EF4 /* ToolButton.swift */,
-				37C05F9923E339C90061C992 /* KeyButton.swift */,
-				3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */,
-				3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */,
-				3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -262,6 +258,17 @@
 			path = Candidate;
 			sourceTree = "<group>";
 		};
+		3791975724FA43DC00F9D946 /* KeyButton */ = {
+			isa = PBXGroup;
+			children = (
+				37C05F9923E339C90061C992 /* KeyButton.swift */,
+				3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */,
+				3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */,
+				3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */,
+			);
+			path = KeyButton;
+			sourceTree = "<group>";
+		};
 		3798ACFF2358157C00FF1EEE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				3741063223E30D3200639EF4 /* Components */,
+				3791975724FA43DC00F9D946 /* KeyButton */,
 				37E004F923E4BAA000E413BD /* KeyboardEvent.swift */,
 				37E004F723E49B6700E413BD /* KeyboardLayout.swift */,
 				37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */,
