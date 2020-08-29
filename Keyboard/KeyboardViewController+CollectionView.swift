@@ -34,7 +34,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
                 candidateSequence.append(candidate)
                 currentInputText = String(currentInputText.dropFirst(candidate.input.count))
-                if keyboardLayout == .wordsBoard && currentInputText.isEmpty {
+                if keyboardLayout == .candidateBoard && currentInputText.isEmpty {
                         collectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardcollectionViewConstraints)
                         toolBar.reinit()
@@ -58,7 +58,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 guard candidates.count > indexPath.row else { return CGSize(width: 55, height: 55) }
                 
                 let characterCount: Int = candidates[indexPath.row].count
-                if self.keyboardLayout == .wordsBoard {
+                if self.keyboardLayout == .candidateBoard {
                         let fullWidth: CGFloat = collectionView.bounds.size.width
                         var itemCount: Int {
                                 switch characterCount {

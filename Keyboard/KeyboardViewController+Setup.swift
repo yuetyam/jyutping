@@ -11,7 +11,7 @@ extension KeyboardViewController {
         private func setupKeyboards() {
                 keyboardStackView.removeAllArrangedSubviews()
                 switch keyboardLayout {
-                case .wordsBoard:
+                case .candidateBoard:
                         setupCandidateBoard()
                 case .settingsView:
                         setupSettingsView()

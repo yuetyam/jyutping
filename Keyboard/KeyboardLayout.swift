@@ -14,7 +14,7 @@ enum KeyboardLayout: Equatable {
         numericAlphabet,
         symbolicAlphabet,
         
-        wordsBoard,
+        candidateBoard,
         settingsView
         
         func keys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {

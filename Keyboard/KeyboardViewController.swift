@@ -89,7 +89,7 @@ final class KeyboardViewController: UIInputViewController {
                         setupKeyboard()
                         if keyboardLayout != .jyutping &&
                                 keyboardLayout != .jyutpingUppercase &&
-                                keyboardLayout != .wordsBoard {
+                                keyboardLayout != .candidateBoard {
                                 currentInputText = ""
                         }
                 }
@@ -138,7 +138,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         @objc private func handleDownArrowEvent() {
                 candidateBoard.height = view.bounds.height
-                keyboardLayout = .wordsBoard
+                keyboardLayout = .candidateBoard
         }
         @objc private func dismissInputMethod() {
                 dismissKeyboard()
