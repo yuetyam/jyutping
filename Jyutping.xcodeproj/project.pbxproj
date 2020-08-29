@@ -279,15 +279,15 @@
 		37AE5BED2354AAF8008A8E4B /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				3741063223E30D3200639EF4 /* Components */,
-				3791975724FA43DC00F9D946 /* KeyButton */,
-				37E004F923E4BAA000E413BD /* KeyboardEvent.swift */,
-				37E004F723E49B6700E413BD /* KeyboardLayout.swift */,
 				37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */,
 				3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */,
 				3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */,
-				377EAD4B24708D5000B42D30 /* Candidate */,
+				37E004F723E49B6700E413BD /* KeyboardLayout.swift */,
+				37E004F923E4BAA000E413BD /* KeyboardEvent.swift */,
 				370B631423E96E1000912B9A /* AudioFeedback.swift */,
+				377EAD4B24708D5000B42D30 /* Candidate */,
+				3791975724FA43DC00F9D946 /* KeyButton */,
+				3741063223E30D3200639EF4 /* Components */,
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
