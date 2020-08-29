@@ -7,7 +7,7 @@ extension KeyButton {
                 case .backspace, .keyBackspaceLeft:
                         addTarget(self, action: #selector(handleBackspace), for: .touchDown)
                 case .shift, .shiftDown:
-                        addTarget(self, action: #selector(handleShift(_:event:)), for: .touchUpInside)
+                        addTarget(self, action: #selector(handleShift(sender:event:)), for: .touchUpInside)
                 case .space, .none:
                         break
                 default:
@@ -17,13 +17,16 @@ extension KeyButton {
         @objc private func handleTap() {
                 switch keyboardEvent {
                 case .text(let text):
-                        if viewController.keyboardLayout == .jyutping {
+                        if viewController.keyboardLayout == .jyutping || viewController.keyboardLayout == .jyutpingUppercase {
                                 viewController.currentInputText += text
                         } else {
                                 viewController.textDocumentProxy.insertText(text)
                         }
                         if viewController.keyboardLayout == .alphabetUppercase && !viewController.isCapsLocked {
                                 viewController.keyboardLayout = .alphabetLowercase
+                        }
+                        if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
+                                viewController.keyboardLayout = .jyutping
                         }
                 case .newLine:
                         if viewController.currentInputText.isEmpty {
@@ -38,6 +41,11 @@ extension KeyButton {
                         switch viewController.keyboardLayout {
                         case .jyutping:
                                 viewController.currentInputText += "a"
+                        case .jyutpingUppercase:
+                                viewController.currentInputText += "A"
+                                if !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .jyutping
+                                }
                         case .alphabetLowercase:
                                 viewController.textDocumentProxy.insertText("a")
                         case .alphabetUppercase:
@@ -52,6 +60,11 @@ extension KeyButton {
                         switch viewController.keyboardLayout {
                         case .jyutping:
                                 viewController.currentInputText += "l"
+                        case .jyutpingUppercase:
+                                viewController.currentInputText += "L"
+                                if !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .jyutping
+                                }
                         case .alphabetLowercase:
                                 viewController.textDocumentProxy.insertText("l")
                         case .alphabetUppercase:
@@ -66,6 +79,11 @@ extension KeyButton {
                         switch viewController.keyboardLayout {
                         case .jyutping:
                                 viewController.currentInputText += "z"
+                        case .jyutpingUppercase:
+                                viewController.currentInputText += "Z"
+                                if !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .jyutping
+                                }
                         case .alphabetLowercase:
                                 viewController.textDocumentProxy.insertText("z")
                         case .alphabetUppercase:
@@ -83,33 +101,20 @@ extension KeyButton {
                         AudioFeedback.play(for: self.keyboardEvent)
                 }
         }
-        @objc private func handleShift(_ sender: UIButton, event: UIEvent) {
+        @objc private func handleShift(sender: UIButton, event: UIEvent) {
                 guard let touchEvent: UITouch = event.allTouches?.first else { return }
                 if touchEvent.tapCount == 2 {
-                        if keyboardEvent == .shift {
-                                viewController.isCapsLocked = true
-                                viewController.keyboardLayout = .alphabetUppercase
-                        } else {
-                                // keyboardEvent == .shiftDown
-                                
-                                if viewController.isCapsLocked {
-                                        viewController.isCapsLocked = false
-                                        viewController.keyboardLayout = .alphabetLowercase
-                                } else {
-                                        viewController.isCapsLocked = true
-                                        viewController.setupKeyboard()
-                                }
-                        }
+                        viewController.isCapsLocked = true
+                        viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
+                                .alphabetUppercase : .jyutpingUppercase
                 } else if touchEvent.tapCount == 1 {
                         if keyboardEvent == .shift {
-                                viewController.keyboardLayout = .alphabetUppercase
+                                viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
+                                        .alphabetUppercase : .jyutpingUppercase
                         } else {
-                                // keyboardEvent == .shiftDown
-                                
-                                if viewController.isCapsLocked {
-                                        viewController.isCapsLocked = false
-                                }
-                                viewController.keyboardLayout = .alphabetLowercase
+                                viewController.isCapsLocked = false
+                                viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
+                                        .alphabetLowercase : .jyutping
                         }
                 }
         }

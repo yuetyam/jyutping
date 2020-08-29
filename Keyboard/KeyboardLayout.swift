@@ -3,6 +3,7 @@ import UIKit
 enum KeyboardLayout: Equatable {
         case
         jyutping,
+        jyutpingUppercase,
         cantoneseSymbolic,
         
         alphabetLowercase,
@@ -21,6 +22,8 @@ enum KeyboardLayout: Equatable {
                 switch self {
                 case .jyutping:
                         return jyutpingKeys(for: viewController)
+                case .jyutpingUppercase:
+                        return jyutpingUppercaseKeys(for: viewController)
                 case .cantoneseSymbolic:
                         return cantoneseSymbolicKeys(for: viewController)
                 case .alphabetLowercase:
@@ -65,7 +68,7 @@ private extension KeyboardLayout {
                 eventRows[1].insert(.keyALeft, at: 0)
                 eventRows[1].append(.keyLRight)
                 eventRows[1].append(.keyLRight)
-                eventRows[2].insert(.switchTo(.cantoneseSymbolic), at: 0)
+                eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.keyZLeft, at: 1)
                 eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
@@ -75,6 +78,28 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
+        func jyutpingUppercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+                let arrayWithTextArray: [[String]] = [
+                        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+                        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+                        ["Z", "X", "C", "V", "B", "N", "M"]
+                ]
+                var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].insert(.keyALeft, at: 0)
+                eventRows[1].append(.keyLRight)
+                eventRows[1].append(.keyLRight)
+                eventRows[2].insert(.shiftDown, at: 0)
+                eventRows[2].insert(.keyZLeft, at: 1)
+                eventRows[2].append(.keyBackspaceLeft)
+                eventRows[2].append(.backspace)
+                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                        [.switchTo(.numericJyutping), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.numericJyutping), .space, .newLine]
+                eventRows.append(bottomEvents)
+                return eventRows
+        }
+        
         func alphabetLowercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],

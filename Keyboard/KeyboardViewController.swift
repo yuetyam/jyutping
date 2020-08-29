@@ -87,7 +87,9 @@ final class KeyboardViewController: UIInputViewController {
         var keyboardLayout: KeyboardLayout = .jyutping {
                 didSet {
                         setupKeyboard()
-                        if keyboardLayout != .jyutping && keyboardLayout != .wordsBoard {
+                        if keyboardLayout != .jyutping &&
+                                keyboardLayout != .jyutpingUppercase &&
+                                keyboardLayout != .wordsBoard {
                                 currentInputText = ""
                         }
                 }
