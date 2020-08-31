@@ -3,21 +3,13 @@ import SwiftUI
 struct AcknowledgementsView: View {
         var body: some View {
                 ScrollView {
-                        LinkButton(url: URL(string: "https://github.com/danielsaidi/KeyboardKit")!,
+                        LinkButton(url: URL(string: "https://github.com/ddddxxx/SwiftyOpenCC")!,
                                    content: MessageView(icon: "briefcase",
-                                                        text: Text("KeyboardKit"),
+                                                        text: Text("SwiftyOpenCC"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
                                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
                                 .padding()
-                        
-                        LinkButton(url: URL(string: "https://github.com/stephencelis/SQLite.swift")!,
-                                   content: MessageView(icon: "briefcase",
-                                                        text: Text("SQLite.swift"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://github.com/rime/rime-cantonese")!,
                                    content: MessageView(icon: "book",
@@ -25,7 +17,7 @@ struct AcknowledgementsView: View {
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
                                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding()
+                                .padding(.horizontal)
                         
                 }
                 .foregroundColor(.primary)
