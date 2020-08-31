@@ -6,8 +6,8 @@ Chinese, Traditional
 
 "Characters" = "字形";
 "Traditional" = "傳統漢字";
-"Traditional, Hong Kong" = "傳統漢字香港";
-"Traditional, Taiwan" = "傳統漢字臺灣";
+"Traditional, Hong Kong" = "傳統漢字香港字形";
+"Traditional, Taiwan" = "傳統漢字臺灣字形";
 "Simplified" = "大陸簡化字";
 
 "Clear user lexicon" = "清空用戶詞庫";
