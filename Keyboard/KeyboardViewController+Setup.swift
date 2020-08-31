@@ -27,7 +27,7 @@ extension KeyboardViewController {
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
         }
         
-        var candidateBoardcollectionViewConstraints: [NSLayoutConstraint] {
+        var candidateBoardCollectionViewConstraints: [NSLayoutConstraint] {
                 [collectionView.bottomAnchor.constraint(equalTo: candidateBoard.bottomAnchor),
                  collectionView.leadingAnchor.constraint(equalTo: candidateBoard.leadingAnchor),
                  collectionView.trailingAnchor.constraint(equalTo: candidateBoard.upArrowButton.leadingAnchor),
@@ -41,7 +41,7 @@ extension KeyboardViewController {
                 
                 candidateBoard.addSubview(collectionView)
                 collectionView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate(candidateBoardcollectionViewConstraints)
+                NSLayoutConstraint.activate(candidateBoardCollectionViewConstraints)
                 (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
                 
                 candidateBoard.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
@@ -51,7 +51,7 @@ extension KeyboardViewController {
         }
         @objc private func dismissCandidateBoard() {
                 collectionView.removeFromSuperview()
-                NSLayoutConstraint.deactivate(candidateBoardcollectionViewConstraints)
+                NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                 toolBar.reinit()
                 keyboardLayout = .jyutping
         }

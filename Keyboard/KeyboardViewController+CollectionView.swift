@@ -36,7 +36,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 currentInputText = String(currentInputText.dropFirst(candidate.input.count))
                 if keyboardLayout == .candidateBoard && currentInputText.isEmpty {
                         collectionView.removeFromSuperview()
-                        NSLayoutConstraint.deactivate(candidateBoardcollectionViewConstraints)
+                        NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reinit()
                         keyboardLayout = .jyutping
                 }
