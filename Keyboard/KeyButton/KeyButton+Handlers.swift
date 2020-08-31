@@ -117,6 +117,9 @@ extension KeyButton {
                                         .alphabetic : .jyutping
                         }
                 }
+                DispatchQueue.global().async {
+                        AudioFeedback.play(for: self.keyboardEvent)
+                }
         }
         @objc private func handleBackspace() {
                 DispatchQueue.main.async {
