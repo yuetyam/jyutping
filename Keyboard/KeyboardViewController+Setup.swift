@@ -7,9 +7,7 @@ extension KeyboardViewController {
                         self.setupKeyboards()
                 }
         }
-        
         private func setupKeyboards() {
-                keyboardStackView.removeAllArrangedSubviews()
                 switch keyboardLayout {
                 case .candidateBoard:
                         setupCandidateBoard()
@@ -21,6 +19,7 @@ extension KeyboardViewController {
         }
         
         private func setup(layout: KeyboardLayout) {
+                keyboardStackView.removeAllArrangedSubviews()
                 toolBar.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
                 toolBar.update()
                 keyboardStackView.addArrangedSubview(toolBar)
@@ -35,6 +34,8 @@ extension KeyboardViewController {
                  collectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor)]
         }
         private func setupCandidateBoard() {
+                candidateBoard.height = view.bounds.height
+                keyboardStackView.removeAllArrangedSubviews()
                 collectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(toolBar.collectionViewConstraints)
                 
@@ -56,48 +57,31 @@ extension KeyboardViewController {
         }
         
         private func setupSettingsView() {
-                settingsView.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
-                settingsView.upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .allTouchEvents)
-                
-                let bgColor: UIColor = isDarkAppearance ?
-                        UIColor(displayP3Red: 35.0 / 255, green: 35.0 / 255, blue: 35.0 / 255, alpha: 1) :
-                        UIColor(displayP3Red: 208.0 / 255, green: 211.0 / 255, blue: 216.0 / 255, alpha: 1)
-                settingsView.audioFeedbackSwitch.backgroundColor = bgColor
-                settingsView.audioFeedbackSwitch.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
-                settingsView.audioFeedbackSwitch.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
-                
-                settingsView.lexiconResetButton.backgroundColor = isDarkAppearance ? .black : .white
-                settingsView.lexiconResetButton.addTarget(self, action: #selector(resetLexicon(sender:)), for: .touchUpInside)
-                
+                settingsView.heightAnchor.constraint(equalToConstant: view.bounds.height + 50).isActive = true
+                settingsView.addSubview(settingsTableView)
+                settingsTableView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate(
+                        [settingsTableView.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor),
+                         settingsTableView.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
+                         settingsTableView.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
+                         settingsTableView.heightAnchor.constraint(equalToConstant: view.bounds.height)]
+                )
+                let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 10, bottomInset: 10, leftInset: 12)
+                settingsView.addSubview(upArrowButton)
+                upArrowButton.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate(
+                        [upArrowButton.bottomAnchor.constraint(equalTo: settingsTableView.topAnchor),
+                         upArrowButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
+                         upArrowButton.trailingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 70),
+                         upArrowButton.heightAnchor.constraint(equalToConstant: 50)]
+                )
+                upArrowButton.tintColor = isDarkAppearance ? .white : .black
+                upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .allTouchEvents)
+                keyboardStackView.removeAllArrangedSubviews()
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
                 keyboardLayout = .jyutping
-        }
-        @objc private func handleAudioFeedbackSwitch() {
-                if UserDefaults.standard.bool(forKey: "audio_feedback") {
-                        UserDefaults.standard.set(false, forKey: "audio_feedback")
-                } else {
-                        UserDefaults.standard.set(true, forKey: "audio_feedback")
-                }
-        }
-        @objc private func resetLexicon(sender: UIButton) {
-                imeQueue.async {
-                        self.lexiconManager.deleteAll()
-                }
-                let progressLayer: CAShapeLayer = CAShapeLayer()
-                progressLayer.path = CGPath(rect: CGRect(x: 10, y: 0, width: sender.frame.width - 20, height: sender.frame.height), transform: nil)
-                progressLayer.fillColor = UIColor.clear.cgColor
-                progressLayer.strokeColor = UIColor.systemBlue.cgColor
-                progressLayer.strokeEnd = 0.0
-                progressLayer.lineWidth = 2
-                sender.layer.addSublayer(progressLayer)
-                let animation: CABasicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-                animation.fromValue = 0.0
-                animation.toValue = 0.4
-                animation.duration = 1
-                animation.timingFunction = CAMediaTimingFunction(name: .default)
-                progressLayer.add(animation, forKey: nil)
         }
         
         private func makeKeysRows(for eventsRows: [[KeyboardEvent]]) -> [UIStackView] {

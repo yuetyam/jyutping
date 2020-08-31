@@ -27,6 +27,9 @@
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
 		374AC0C1246A2AB3004B70ED /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */; };
+		374DC54624FB43C5003BEAE7 /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 374DC54524FB43C5003BEAE7 /* OpenCC */; };
+		374DC58B24FBF8D8003BEAE7 /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 374DC58A24FBF8D8003BEAE7 /* OpenCC.bundle */; };
+		374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */; };
 		3756602123C5601C009FCA23 /* JyutpingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756602023C5601C009FCA23 /* JyutpingProvider.swift */; };
 		37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6524F310E100856B8A /* Array+deduplicated.swift */; };
 		37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6724F3112D00856B8A /* String+shortcut.swift */; };
@@ -52,7 +55,6 @@
 		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
 		37E1874F24CB766900602C03 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1874E24CB766900602C03 /* InitialsTable.swift */; };
 		37F1C028235C3EB700CDDA31 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F1C027235C3EB700CDDA31 /* AboutView.swift */; };
-		37F9543024F40E1200042F14 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9542F24F40E1200042F14 /* SettingsView.swift */; };
 		37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA443423A8510A001E7DBC /* ColorExtension.swift */; };
 		37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF2A2C23E8F51500B86C74 /* Candidate.swift */; };
 		37FF2A2F23E8F80400B86C74 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF2A2E23E8F80400B86C74 /* Engine.swift */; };
@@ -108,6 +110,8 @@
 		3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Setup.swift"; sourceTree = "<group>"; };
 		3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Handlers.swift"; sourceTree = "<group>"; };
 		374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
+		374DC58A24FBF8D8003BEAE7 /* OpenCC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OpenCC.bundle; sourceTree = "<group>"; };
+		374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+TableView.swift"; sourceTree = "<group>"; };
 		3756602023C5601C009FCA23 /* JyutpingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingProvider.swift; sourceTree = "<group>"; };
 		37573F6524F310E100856B8A /* Array+deduplicated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+deduplicated.swift"; sourceTree = "<group>"; };
 		37573F6724F3112D00856B8A /* String+shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+shortcut.swift"; sourceTree = "<group>"; };
@@ -147,7 +151,6 @@
 		37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subviews.swift"; sourceTree = "<group>"; };
 		37E1874E24CB766900602C03 /* InitialsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
 		37F1C027235C3EB700CDDA31 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		37F9542F24F40E1200042F14 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		37FA443423A8510A001E7DBC /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		37FF2A2C23E8F51500B86C74 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
 		37FF2A2E23E8F80400B86C74 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374DC54624FB43C5003BEAE7 /* OpenCC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				3741063523E30DA800639EF4 /* CandidateBoard.swift */,
-				37F9542F24F40E1200042F14 /* SettingsView.swift */,
 				3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */,
 				3715203323B22ACF007EAB60 /* ToolBar.swift */,
 				3741063323E30D7100639EF4 /* ToolButton.swift */,
@@ -282,6 +285,7 @@
 				37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */,
 				3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */,
 				3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */,
+				374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */,
 				37E004F723E49B6700E413BD /* KeyboardLayout.swift */,
 				37E004F923E4BAA000E413BD /* KeyboardEvent.swift */,
 				370B631423E96E1000912B9A /* AudioFeedback.swift */,
@@ -292,6 +296,7 @@
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
 				377B83AE24F641E4009B5C4B /* jyutping.sqlite3 */,
+				374DC58A24FBF8D8003BEAE7 /* OpenCC.bundle */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
+				374DC54524FB43C5003BEAE7 /* OpenCC */,
 			);
 			productName = Keyboard;
 			productReference = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */;
@@ -400,6 +406,7 @@
 			);
 			mainGroup = 37211D4B23541EE3007E1D68;
 			packageReferences = (
+				374DC54424FB43C5003BEAE7 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -431,6 +438,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
+				374DC58B24FBF8D8003BEAE7 /* OpenCC.bundle in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
 				377B83AF24F641E4009B5C4B /* jyutping.sqlite3 in Resources */,
 			);
@@ -473,8 +481,8 @@
 				37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */,
 				37C05F9A23E339C90061C992 /* KeyButton.swift in Sources */,
 				37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */,
-				37F9543024F40E1200042F14 /* SettingsView.swift in Sources */,
 				37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */,
+				374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */,
 				377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */,
 				3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */,
 				37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */,
@@ -804,6 +812,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		374DC54424FB43C5003BEAE7 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ddddxxx/SwiftyOpenCC.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		374DC54524FB43C5003BEAE7 /* OpenCC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 374DC54424FB43C5003BEAE7 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */;
+			productName = OpenCC;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 37211D4C23541EE3007E1D68 /* Project object */;
 }
