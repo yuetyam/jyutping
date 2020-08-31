@@ -30,6 +30,5 @@ iOS 13.0+
 Xcode 11.4+
 
 ## Credits
-- [SwiftyOpenCC](https://github.com/ddddxxx/SwiftyOpenCC)
-
+- [SwiftyOpenCC](https://github.com/ddddxxx/SwiftyOpenCC)  
 - [rime-cantonese](https://github.com/rime/rime-cantonese)
