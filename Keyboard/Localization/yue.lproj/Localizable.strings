@@ -3,4 +3,11 @@ Cantonese
 */
 
 "Audio feedback on click" = "按鍵聲音反饋";
+
+"Characters" = "字形";
+"Traditional" = "傳統漢字";
+"Traditional, Hong Kong" = "傳統漢字香港";
+"Traditional, Taiwan" = "傳統漢字臺灣";
+"Simplified" = "大陸簡化字";
+
 "Clear user lexicon" = "清空用戶詞庫";

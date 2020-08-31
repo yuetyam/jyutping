@@ -3,4 +3,11 @@ English
 */
 
 "Audio feedback on click" = "Audio feedback on click";
+
+"Characters" = "Characters";
+"Traditional" = "Traditional";
+"Traditional, Hong Kong" = "Traditional, Hong Kong";
+"Traditional, Taiwan" = "Traditional, Taiwan";
+"Simplified" = "Simplified";
+
 "Clear user lexicon" = "Clear user lexicon";
