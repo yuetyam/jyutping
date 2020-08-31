@@ -50,45 +50,6 @@ final class KeyboardViewController: UIInputViewController {
                 setupKeyboard()
         }
         
-        var isDarkAppearance: Bool {
-                textDocumentProxy.keyboardAppearance == .dark ||
-                traitCollection.userInterfaceStyle == .dark
-        }
-        
-        var appearance: Appearance {
-                switch traitCollection.userInterfaceStyle {
-                case .light:
-                        switch textDocumentProxy.keyboardAppearance {
-                        case .light, .default:
-                                return .lightModeLightAppearance
-                        case .dark:
-                                return .lightModeDarkAppearance
-                        default:
-                                return .lightModeDarkAppearance
-                        }
-                case .dark:
-                        switch textDocumentProxy.keyboardAppearance {
-                        case .light, .default:
-                                return .darkModeLightAppearance
-                        case .dark:
-                                return .darkModeDarkAppearance
-                        default:
-                                return .darkModeLightAppearance
-                        }
-                case .unspecified:
-                        switch textDocumentProxy.keyboardAppearance {
-                        case .light, .default:
-                                return .lightModeLightAppearance
-                        case .dark:
-                                return .darkModeDarkAppearance
-                        default:
-                                return .lightModeDarkAppearance
-                        }
-                @unknown default:
-                        return .lightModeDarkAppearance
-                }
-        }
-        
         lazy var isCapsLocked: Bool = false
         
         var keyboardLayout: KeyboardLayout = .jyutping {
@@ -193,6 +154,45 @@ final class KeyboardViewController: UIInputViewController {
                 let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
                 let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, option: options)
                 return converter
+        }
+        
+        var isDarkAppearance: Bool {
+                textDocumentProxy.keyboardAppearance == .dark ||
+                traitCollection.userInterfaceStyle == .dark
+        }
+        
+        var appearance: Appearance {
+                switch traitCollection.userInterfaceStyle {
+                case .light:
+                        switch textDocumentProxy.keyboardAppearance {
+                        case .light, .default:
+                                return .lightModeLightAppearance
+                        case .dark:
+                                return .lightModeDarkAppearance
+                        default:
+                                return .lightModeDarkAppearance
+                        }
+                case .dark:
+                        switch textDocumentProxy.keyboardAppearance {
+                        case .light, .default:
+                                return .darkModeLightAppearance
+                        case .dark:
+                                return .darkModeDarkAppearance
+                        default:
+                                return .darkModeLightAppearance
+                        }
+                case .unspecified:
+                        switch textDocumentProxy.keyboardAppearance {
+                        case .light, .default:
+                                return .lightModeLightAppearance
+                        case .dark:
+                                return .darkModeDarkAppearance
+                        default:
+                                return .lightModeDarkAppearance
+                        }
+                @unknown default:
+                        return .lightModeDarkAppearance
+                }
         }
 }
 
