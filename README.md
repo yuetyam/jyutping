@@ -26,9 +26,10 @@ Jyutping Keyboard for iOS.
 ## Running compatibility
 iOS 13.0+
 
-## How to build
-### Requirements
-- Xcode 11.4+
+## Build requirements
+Xcode 11.4+
 
-### Build
-Just open in Xcode and build
+## Credits
+- [SwiftyOpenCC](https://github.com/ddddxxx/SwiftyOpenCC)
+
+- [rime-cantonese](https://github.com/rime/rime-cantonese)
