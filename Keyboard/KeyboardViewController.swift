@@ -162,7 +162,7 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardLayout = .jyutping
                 case 1:
                         isCapsLocked = false
-                        keyboardLayout = .alphabetLowercase
+                        keyboardLayout = .alphabetic
                 default:
                         break
                 }

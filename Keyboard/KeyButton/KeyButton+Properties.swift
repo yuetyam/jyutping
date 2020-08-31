@@ -15,7 +15,7 @@ extension KeyButton {
                 case .space:
                         return 190
                 case .text("."):
-                        if viewController.keyboardLayout == .alphabetLowercase || viewController.keyboardLayout == .alphabetUppercase {
+                        if viewController.keyboardLayout == .alphabetic || viewController.keyboardLayout == .alphabeticUppercase {
                                 return 35
                         } else {
                                 return 40
@@ -101,13 +101,13 @@ extension KeyButton {
         
         private func keyText(for destination: KeyboardLayout) -> String {
                 switch destination {
-                case .numericJyutping, .numericAlphabet:
+                case .cantoneseNumeric, .numeric:
                         return "123"
-                case .symbolicJyutping, .symbolicAlphabet:
+                case .cantoneseSymbolic, .symbolic:
                         return "#+="
                 case .jyutping:
                         return "拼"
-                case .alphabetLowercase, .alphabetUppercase:
+                case .alphabetic, .alphabeticUppercase:
                         return "ABC"
                 default:
                         return "??"

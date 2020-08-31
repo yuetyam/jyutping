@@ -22,8 +22,8 @@ extension KeyButton {
                         } else {
                                 viewController.textDocumentProxy.insertText(text)
                         }
-                        if viewController.keyboardLayout == .alphabetUppercase && !viewController.isCapsLocked {
-                                viewController.keyboardLayout = .alphabetLowercase
+                        if viewController.keyboardLayout == .alphabeticUppercase && !viewController.isCapsLocked {
+                                viewController.keyboardLayout = .alphabetic
                         }
                         if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
                                 viewController.keyboardLayout = .jyutping
@@ -46,12 +46,12 @@ extension KeyButton {
                                 if !viewController.isCapsLocked {
                                         viewController.keyboardLayout = .jyutping
                                 }
-                        case .alphabetLowercase:
+                        case .alphabetic:
                                 viewController.textDocumentProxy.insertText("a")
-                        case .alphabetUppercase:
+                        case .alphabeticUppercase:
                                 viewController.textDocumentProxy.insertText("A")
                                 if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetLowercase
+                                        viewController.keyboardLayout = .alphabetic
                                 }
                         default:
                                 break
@@ -65,12 +65,12 @@ extension KeyButton {
                                 if !viewController.isCapsLocked {
                                         viewController.keyboardLayout = .jyutping
                                 }
-                        case .alphabetLowercase:
+                        case .alphabetic:
                                 viewController.textDocumentProxy.insertText("l")
-                        case .alphabetUppercase:
+                        case .alphabeticUppercase:
                                 viewController.textDocumentProxy.insertText("L")
                                 if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetLowercase
+                                        viewController.keyboardLayout = .alphabetic
                                 }
                         default:
                                 break
@@ -84,12 +84,12 @@ extension KeyButton {
                                 if !viewController.isCapsLocked {
                                         viewController.keyboardLayout = .jyutping
                                 }
-                        case .alphabetLowercase:
+                        case .alphabetic:
                                 viewController.textDocumentProxy.insertText("z")
-                        case .alphabetUppercase:
+                        case .alphabeticUppercase:
                                 viewController.textDocumentProxy.insertText("Z")
                                 if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetLowercase
+                                        viewController.keyboardLayout = .alphabetic
                                 }
                         default:
                                 break
@@ -106,15 +106,15 @@ extension KeyButton {
                 if touchEvent.tapCount == 2 {
                         viewController.isCapsLocked = true
                         viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
-                                .alphabetUppercase : .jyutpingUppercase
+                                .alphabeticUppercase : .jyutpingUppercase
                 } else if touchEvent.tapCount == 1 {
                         if keyboardEvent == .shift {
                                 viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
-                                        .alphabetUppercase : .jyutpingUppercase
+                                        .alphabeticUppercase : .jyutpingUppercase
                         } else {
                                 viewController.isCapsLocked = false
                                 viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
-                                        .alphabetLowercase : .jyutping
+                                        .alphabetic : .jyutping
                         }
                 }
         }

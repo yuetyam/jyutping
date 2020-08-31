@@ -5,14 +5,14 @@ enum KeyboardLayout: Equatable {
         jyutping,
         jyutpingUppercase,
         
-        alphabetLowercase,
-        alphabetUppercase,
+        alphabetic,
+        alphabeticUppercase,
         
-        numericJyutping,
-        symbolicJyutping,
+        cantoneseNumeric,
+        cantoneseSymbolic,
         
-        numericAlphabet,
-        symbolicAlphabet,
+        numeric,
+        symbolic,
         
         candidateBoard,
         settingsView
@@ -23,17 +23,17 @@ enum KeyboardLayout: Equatable {
                         return jyutpingKeys(for: viewController)
                 case .jyutpingUppercase:
                         return jyutpingUppercaseKeys(for: viewController)
-                case .alphabetLowercase:
+                case .alphabetic:
                         return alphabetLowercaseKeys(for: viewController)
-                case .alphabetUppercase:
+                case .alphabeticUppercase:
                         return alphabetUppercaseKeys(for: viewController)
-                case .numericJyutping:
+                case .cantoneseNumeric:
                         return numericJyutpingKeys(for: viewController)
-                case .symbolicJyutping:
+                case .cantoneseSymbolic:
                         return symbolicJyutpingKeys(for: viewController)
-                case .numericAlphabet:
+                case .numeric:
                         return numericAlphabetKeys(for: viewController)
-                case .symbolicAlphabet:
+                case .symbolic:
                         return symbolicAlphabetKeys(for: viewController)
                 default:
                         return []
@@ -42,10 +42,10 @@ enum KeyboardLayout: Equatable {
         
         var isEnglish: Bool {
                 switch self {
-                case .alphabetLowercase,
-                     .alphabetUppercase,
-                     .numericAlphabet,
-                     .symbolicAlphabet:
+                case .alphabetic,
+                     .alphabeticUppercase,
+                     .numeric,
+                     .symbolic:
                         return true
                 default:
                         return false
@@ -70,8 +70,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericJyutping), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.numericJyutping), .space, .newLine]
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.cantoneseNumeric), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -91,8 +91,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericJyutping), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.numericJyutping), .space, .newLine]
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.cantoneseNumeric), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -112,8 +112,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericAlphabet), .switchInputMethod, .space, .text("."), .newLine] :
-                        [.switchTo(.numericAlphabet), .text("."), .space, .newLine]
+                        [.switchTo(.numeric), .switchInputMethod, .space, .text("."), .newLine] :
+                        [.switchTo(.numeric), .text("."), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -133,8 +133,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.keyBackspaceLeft)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericAlphabet), .switchInputMethod, .space, .text("."), .newLine] :
-                        [.switchTo(.numericAlphabet), .text("."), .space, .newLine]
+                        [.switchTo(.numeric), .switchInputMethod, .space, .text("."), .newLine] :
+                        [.switchTo(.numeric), .text("."), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -145,7 +145,7 @@ private extension KeyboardLayout {
                         ["。", "，", "、", "？", "！", "."]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[2].insert(.switchTo(.symbolicJyutping), at: 0)
+                eventRows[2].insert(.switchTo(.cantoneseSymbolic), at: 0)
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
@@ -162,13 +162,13 @@ private extension KeyboardLayout {
                         [".", ",", "?", "!", "'"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[2].insert(.switchTo(.symbolicAlphabet), at: 0)
+                eventRows[2].insert(.switchTo(.symbolic), at: 0)
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.alphabetLowercase), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.alphabetLowercase), .space, .newLine]
+                        [.switchTo(.alphabetic), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.alphabetic), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -179,7 +179,7 @@ private extension KeyboardLayout {
                         ["⋯", "【", "】", "〔", "〕", "¥"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[2].insert(.switchTo(.numericJyutping), at: 0)
+                eventRows[2].insert(.switchTo(.cantoneseNumeric), at: 0)
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
@@ -196,13 +196,13 @@ private extension KeyboardLayout {
                         [".", ",", "?", "!", "'"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[2].insert(.switchTo(.numericAlphabet), at: 0)
+                eventRows[2].insert(.switchTo(.numeric), at: 0)
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.alphabetLowercase), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.alphabetLowercase), .space, .newLine]
+                        [.switchTo(.alphabetic), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.alphabetic), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
