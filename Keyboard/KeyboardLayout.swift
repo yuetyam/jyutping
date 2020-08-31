@@ -24,17 +24,17 @@ enum KeyboardLayout: Equatable {
                 case .jyutpingUppercase:
                         return jyutpingUppercaseKeys(for: viewController)
                 case .alphabetic:
-                        return alphabetLowercaseKeys(for: viewController)
+                        return alphabeticLowercaseKeys(for: viewController)
                 case .alphabeticUppercase:
-                        return alphabetUppercaseKeys(for: viewController)
+                        return alphabeticUppercaseKeys(for: viewController)
                 case .cantoneseNumeric:
-                        return numericJyutpingKeys(for: viewController)
+                        return cantoneseNumericKeys(for: viewController)
                 case .cantoneseSymbolic:
-                        return symbolicJyutpingKeys(for: viewController)
+                        return cantoneseSymbolicKeys(for: viewController)
                 case .numeric:
-                        return numericAlphabetKeys(for: viewController)
+                        return numericKeys(for: viewController)
                 case .symbolic:
-                        return symbolicAlphabetKeys(for: viewController)
+                        return symbolicKeys(for: viewController)
                 default:
                         return []
                 }
@@ -96,7 +96,7 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func alphabetLowercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func alphabeticLowercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -117,7 +117,7 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func alphabetUppercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func alphabeticUppercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -138,7 +138,7 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func numericJyutpingKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func cantoneseNumericKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"],
@@ -155,7 +155,7 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func numericAlphabetKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func numericKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""],
@@ -172,7 +172,7 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func symbolicJyutpingKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func cantoneseSymbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="],
                         ["_", "—", "＼", "｜", "～", "《", "》", "€", "&", "\u{00B7}"],
@@ -189,7 +189,7 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func symbolicAlphabetKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func symbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
