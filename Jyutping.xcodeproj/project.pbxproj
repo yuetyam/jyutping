@@ -17,6 +17,7 @@
 		37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7C239ABB30006A59A7 /* ShareSheetView.swift */; };
 		37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7E239ABDC4006A59A7 /* MessageView.swift */; };
 		37336F81239ABE05006A59A7 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F80239ABE05006A59A7 /* LinkButton.swift */; };
+		37386D7024FEC056008A3188 /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 37386D6F24FEC056008A3188 /* OpenCC */; };
 		3739E58524FE556C006368BD /* jyut6ping3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3739E58424FE556C006368BD /* jyut6ping3.sqlite3 */; };
 		3739E58724FE5585006368BD /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3739E58624FE5585006368BD /* jyutping.sqlite3 */; };
 		3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */; };
@@ -28,7 +29,6 @@
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
 		374AC0C1246A2AB3004B70ED /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */; };
-		374DC54624FB43C5003BEAE7 /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 374DC54524FB43C5003BEAE7 /* OpenCC */; };
 		374DC58B24FBF8D8003BEAE7 /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 374DC58A24FBF8D8003BEAE7 /* OpenCC.bundle */; };
 		374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */; };
 		3756602123C5601C009FCA23 /* JyutpingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756602023C5601C009FCA23 /* JyutpingProvider.swift */; };
@@ -168,7 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				374DC54624FB43C5003BEAE7 /* OpenCC in Frameworks */,
+				37386D7024FEC056008A3188 /* OpenCC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +368,7 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
-				374DC54524FB43C5003BEAE7 /* OpenCC */,
+				37386D6F24FEC056008A3188 /* OpenCC */,
 			);
 			productName = Keyboard;
 			productReference = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */;
@@ -406,7 +406,7 @@
 			);
 			mainGroup = 37211D4B23541EE3007E1D68;
 			packageReferences = (
-				374DC54424FB43C5003BEAE7 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */,
+				37386D6E24FEC056008A3188 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -814,20 +814,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		374DC54424FB43C5003BEAE7 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */ = {
+		37386D6E24FEC056008A3188 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ddddxxx/SwiftyOpenCC.git";
+			repositoryURL = "https://github.com/ososoio/SwiftyOpenCC.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
+				minimumVersion = 1.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		374DC54524FB43C5003BEAE7 /* OpenCC */ = {
+		37386D6F24FEC056008A3188 /* OpenCC */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 374DC54424FB43C5003BEAE7 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */;
+			package = 37386D6E24FEC056008A3188 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */;
 			productName = OpenCC;
 		};
 /* End XCSwiftPackageProductDependency section */

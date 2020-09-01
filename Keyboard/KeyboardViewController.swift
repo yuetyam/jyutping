@@ -144,9 +144,9 @@ final class KeyboardViewController: UIInputViewController {
                         let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         switch logogram {
                         case 2:
-                                return [.traditionalize, .HKStandard]
+                                return [.traditionalize, .hkStandard]
                         case 3:
-                                return [.traditionalize, .TWStandard]
+                                return [.traditionalize, .twStandard]
                         case 4:
                                 return [.simplify]
                         default:
