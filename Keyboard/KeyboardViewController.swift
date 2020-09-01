@@ -42,12 +42,10 @@ final class KeyboardViewController: UIInputViewController {
                 setupKeyboard()
         }
         
-        /*
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
                 setupKeyboard()
         }
-        */
         
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
