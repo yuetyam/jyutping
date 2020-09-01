@@ -136,7 +136,7 @@ extension KeyButton {
                 case .route:
                         return "Route"
                 case .search:
-                        return "搜索"
+                        return "搜尋"
                 case .send:
                         return "發送"
                 case .yahoo:
