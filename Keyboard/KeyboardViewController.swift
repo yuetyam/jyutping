@@ -38,12 +38,16 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.delegate = self
                 settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "NormalTableViewCell")
+                
+                setupKeyboard()
         }
         
+        /*
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
                 setupKeyboard()
         }
+        */
         
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
