@@ -108,11 +108,9 @@ final class KeyButton: UIButton {
                                 if viewController.keyboardLayout == .jyutping && !viewController.candidates.isEmpty {
                                         let candidate: Candidate = viewController.candidates[0]
                                         viewController.textDocumentProxy.insertText(candidate.text)
-                                        viewController.currentInputText = String(viewController.currentInputText.dropFirst(candidate.input.count))
-                                        DispatchQueue.global().async {
-                                                AudioFeedback.perform(audioFeedback: .modify)
-                                        }
+                                        AudioFeedback.perform(audioFeedback: .modify)
                                         viewController.candidateSequence.append(candidate)
+                                        viewController.currentInputText = String(viewController.currentInputText.dropFirst(candidate.input.count))
                                         if viewController.currentInputText.isEmpty {
                                                 var combinedCandidate: Candidate = viewController.candidateSequence[0]
                                                 _ = viewController.candidateSequence.dropFirst().map { oneCandidate in
@@ -126,14 +124,10 @@ final class KeyButton: UIButton {
                                 } else if viewController.keyboardLayout == .jyutping && !viewController.currentInputText.isEmpty {
                                         viewController.textDocumentProxy.insertText(viewController.currentInputText)
                                         viewController.currentInputText = ""
-                                        DispatchQueue.global().async {
-                                                AudioFeedback.perform(audioFeedback: .modify)
-                                        }
+                                        AudioFeedback.perform(audioFeedback: .modify)
                                 } else {
                                         viewController.textDocumentProxy.insertText(" ")
-                                        DispatchQueue.global().async {
-                                                AudioFeedback.play(for: .space)
-                                        }
+                                        AudioFeedback.play(for: .space)
                                 }
                         }
                         spaceTouchPoint = .zero

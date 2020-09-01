@@ -97,9 +97,7 @@ extension KeyButton {
                 default:
                         break
                 }
-                DispatchQueue.global().async {
-                        AudioFeedback.play(for: self.keyboardEvent)
-                }
+                AudioFeedback.play(for: self.keyboardEvent)
         }
         @objc private func handleShift(sender: UIButton, event: UIEvent) {
                 guard let touchEvent: UITouch = event.allTouches?.first else { return }
@@ -117,9 +115,7 @@ extension KeyButton {
                                         .alphabetic : .jyutping
                         }
                 }
-                DispatchQueue.global().async {
-                        AudioFeedback.play(for: self.keyboardEvent)
-                }
+                AudioFeedback.play(for: self.keyboardEvent)
         }
         @objc private func handleBackspace() {
                 DispatchQueue.main.async {
@@ -136,8 +132,6 @@ extension KeyButton {
                         viewController.currentInputText = String(viewController.currentInputText.dropLast())
                         viewController.candidateSequence = []
                 }
-                DispatchQueue.global().async {
-                        AudioFeedback.play(for: .backspace)
-                }
+                AudioFeedback.play(for: .backspace)
         }
 }

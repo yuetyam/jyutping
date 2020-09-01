@@ -29,9 +29,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 let candidate: Candidate = candidates[indexPath.row]
                 textDocumentProxy.insertText(candidate.text)
-                DispatchQueue.global().async {
-                        AudioFeedback.perform(audioFeedback: .modify)
-                }
+                AudioFeedback.perform(audioFeedback: .modify)
                 candidateSequence.append(candidate)
                 currentInputText = String(currentInputText.dropFirst(candidate.input.count))
                 if keyboardLayout == .candidateBoard && currentInputText.isEmpty {
