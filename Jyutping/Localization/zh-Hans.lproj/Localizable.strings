@@ -1,0 +1,63 @@
+/*
+Chinese, Simplified
+*/
+
+// System
+"Settings" = "設置";
+"General" = "通用";
+"Keyboards" = "鍵盤";
+"Add New Keyboards..." = "新增鍵盤 ··· ";
+"Edit" = "編輯";
+
+
+// Tab Bar
+"Home" = "首頁";
+"Keyboard" = "鍵盤";
+"Jyutping" = "粵拼";
+"Search" = "檢索";
+"About" = "關於";
+
+
+// Home
+"Type here to test keyboards" = "試下鍵盤";
+
+"How to enable this Keyboard" = "如何啓用鍵盤";
+"•  Jump to " = "•  跳轉至 ";
+"•  Tap " = "•  點選 ";
+"•  Turn on " = "•  啓用 ";
+
+"Open " = "啓動 ";
+
+"How to add or edit keyboards" = "新增或編輯鍵盤一般步驟";
+"Go to " = "前往 ";
+" App   →   " = " App   →   ";
+", then " = "， 之後 ";
+" or " = " 或者 ";
+
+
+// Search
+"Search the Jyutping of Cantonese word" = "鍵入粵語字詞檢索其粵拼";
+"No results." = "無結果";
+"Common Cantonese words only." = "只可檢索常見粵語字詞";
+"Search on other places (websites)" = "其它可供檢索嘅網站";
+"Jyutping resources" = "粵拼資源網站";
+
+
+// About
+"Version" = "版本";
+"Copied" = "已拷貝";
+
+"Source Code" = "源碼";
+"Acknowledgements" = "致謝";
+"Privacy Policy" = "私隱政策";
+
+"Join Telegram Group" = "Telegram 羣組";
+"Follow us on Twitter" = "Twitter 推特";
+
+"Email Feedback" = "郵件反饋";
+"Unable to compose mail" = "無法編寫郵件";
+"Mail Unavailable" = "郵件不可用";
+"OK" = "好";
+
+"Review this App" = "點評本應用程式";
+"Share this App" = "分享本應用程式";
