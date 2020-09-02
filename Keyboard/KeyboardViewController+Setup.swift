@@ -5,6 +5,7 @@ extension KeyboardViewController {
         func setupKeyboard() {
                 DispatchQueue.main.async {
                         self.setupKeyboards()
+                        self.view.layoutIfNeeded()
                 }
         }
         private func setupKeyboards() {
