@@ -47,7 +47,33 @@ final class KeyboardViewController: UIInputViewController {
         
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
+                isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+                appearance = detectAppearance()
                 setupKeyboard()
+        }
+        
+        override func textDidChange(_ textInput: UITextInput?) {
+                super.textDidChange(textInput)
+                if answeredKeyboardLayout != askedKeyboardLayout {
+                        answeredKeyboardLayout = askedKeyboardLayout
+                        keyboardLayout = askedKeyboardLayout
+                }
+        }
+        private lazy var answeredKeyboardLayout: KeyboardLayout = .jyutping
+        
+        var askedKeyboardLayout: KeyboardLayout {
+                switch textDocumentProxy.keyboardType {
+                case .numberPad, .asciiCapableNumberPad:
+                        return traitCollection.userInterfaceIdiom == .pad ? .numeric : .numberPad
+                case .decimalPad:
+                        return traitCollection.userInterfaceIdiom == .pad ? .numeric : .decimalPad
+                case .asciiCapable, .emailAddress, .twitter, .URL:
+                        return .alphabetic
+                case .numbersAndPunctuation:
+                        return .numeric
+                default:
+                        return .jyutping
+                }
         }
         
         lazy var isCapsLocked: Bool = false
@@ -118,11 +144,11 @@ final class KeyboardViewController: UIInputViewController {
                 keyboardLayout = .settingsView
         }
         @objc private func handleYueEngSwitch() {
+                isCapsLocked = false
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
                 case 0:
                         keyboardLayout = .jyutping
                 case 1:
-                        isCapsLocked = false
                         keyboardLayout = .alphabetic
                 default:
                         break
@@ -156,12 +182,11 @@ final class KeyboardViewController: UIInputViewController {
                 return converter
         }
         
-        var isDarkAppearance: Bool {
-                textDocumentProxy.keyboardAppearance == .dark ||
-                traitCollection.userInterfaceStyle == .dark
-        }
+        private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
         
-        var appearance: Appearance {
+        private(set) lazy var appearance: Appearance = detectAppearance()
+        
+        private func detectAppearance() -> Appearance {
                 switch traitCollection.userInterfaceStyle {
                 case .light:
                         switch textDocumentProxy.keyboardAppearance {

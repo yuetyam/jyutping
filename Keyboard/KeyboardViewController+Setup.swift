@@ -4,20 +4,25 @@ extension KeyboardViewController {
         
         func setupKeyboard() {
                 DispatchQueue.main.async {
-                        self.setupKeyboards()
+                        self.setupKeyboardLayout()
                         self.view.layoutIfNeeded()
                 }
         }
-        private func setupKeyboards() {
+        private func setupKeyboardLayout() {
                 switch keyboardLayout {
                 case .candidateBoard:
                         setupCandidateBoard()
                 case .settingsView:
                         setupSettingsView()
+                case .numberPad, .decimalPad:
+                        setupNumberPad()
                 default:
                         setup(layout: keyboardLayout)
                 }
         }
+        
+        
+        // MARK: - Normal Layouts
         
         private func setup(layout: KeyboardLayout) {
                 keyboardStackView.removeAllArrangedSubviews()
@@ -26,7 +31,41 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(toolBar)
                 let keysRows: [UIStackView] = makeKeysRows(for: layout.keys(for: self))
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
+                toolBar.yueEngSwitch.selectedSegmentIndex = keyboardLayout.isEnglish ? 1 : 0
         }
+        
+        
+        // MARK: - NumberPad & DecimalPad
+        
+        private func setupNumberPad() {
+                keyboardStackView.removeAllArrangedSubviews()
+                let digits: [[Int]] = [[1, 2, 3],
+                                       [4, 5, 6],
+                                       [7, 8, 9]]
+                let keysRows: [UIStackView] = digits.map { makeDigitsRow(for: $0) }
+                keyboardStackView.addMultipleArrangedSubviews(keysRows)
+                
+                let bottomStackView: UIStackView = UIStackView()
+                bottomStackView.distribution = .fillProportionally
+                if keyboardLayout == .numberPad {
+                        bottomStackView.addArrangedSubview(NumberPadEmptyKey())
+                } else {
+                        bottomStackView.addArrangedSubview(PeriodButton(viewController: self))
+                }
+                bottomStackView.addArrangedSubview(NumberButton(digit: 0, viewController: self))
+                bottomStackView.addArrangedSubview(BackspaceButton(viewController: self))
+                
+                keyboardStackView.addArrangedSubview(bottomStackView)
+        }
+        private func makeDigitsRow(for digits: [Int]) -> UIStackView {
+                let stackView: UIStackView = UIStackView()
+                stackView.distribution = .fillProportionally
+                stackView.addMultipleArrangedSubviews(digits.map { NumberButton(digit: $0, viewController: self) })
+                return stackView
+        }
+        
+        
+        // MARK: - CandidateBoard
         
         var candidateBoardCollectionViewConstraints: [NSLayoutConstraint] {
                 [collectionView.bottomAnchor.constraint(equalTo: candidateBoard.bottomAnchor),
@@ -57,6 +96,9 @@ extension KeyboardViewController {
                 keyboardLayout = .jyutping
         }
         
+        
+        // MARK: - SettingsView
+        
         private func setupSettingsView() {
                 settingsView.heightAnchor.constraint(equalToConstant: view.bounds.height + 50).isActive = true
                 settingsView.addSubview(settingsTableView)
@@ -82,8 +124,11 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
-                keyboardLayout = .jyutping
+                keyboardLayout = askedKeyboardLayout
         }
+        
+        
+        // MARK: - Make Keys
         
         private func makeKeysRows(for eventsRows: [[KeyboardEvent]]) -> [UIStackView] {
                 let keysRows: [UIStackView] = eventsRows.map { makeKeysRow(for: $0) }

@@ -14,6 +14,9 @@ enum KeyboardLayout: Equatable {
         numeric,
         symbolic,
         
+        numberPad,
+        decimalPad,
+        
         candidateBoard,
         settingsView
         

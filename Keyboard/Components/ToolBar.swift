@@ -52,7 +52,7 @@ final class ToolBar: UIView {
         
         let inputLabel: UILabel = UILabel()
         let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", rightInset: 12)
-                
+        
         private func setupToolButtons() {
                 inputLabel.removeFromSuperview()
                 viewController.collectionView.removeFromSuperview()
@@ -68,9 +68,6 @@ final class ToolBar: UIView {
                 addSubview(yueEngSwitch)
                 yueEngSwitch.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(yueEngSwitchConstraints)
-                if viewController.keyboardLayout == .jyutping {
-                        yueEngSwitch.selectedSegmentIndex = 0
-                }
                 
                 addSubview(keyboardDownButton)
                 keyboardDownButton.translatesAutoresizingMaskIntoConstraints = false
