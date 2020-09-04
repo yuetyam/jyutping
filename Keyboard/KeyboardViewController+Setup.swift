@@ -5,7 +5,14 @@ extension KeyboardViewController {
         func setupKeyboard() {
                 DispatchQueue.main.async {
                         self.setupKeyboardLayout()
-                        self.view.layoutIfNeeded()
+                        
+                        // FIXME: - crash on iPad floating if no check
+                        if self.traitCollection.userInterfaceIdiom == .pad &&
+                                (self.traitCollection.horizontalSizeClass == .compact || self.view.frame.width < 500) {
+                                self.view.setNeedsLayout()
+                        } else {
+                                self.view.layoutIfNeeded()
+                        }
                 }
         }
         private func setupKeyboardLayout() {
@@ -100,27 +107,33 @@ extension KeyboardViewController {
         // MARK: - SettingsView
         
         private func setupSettingsView() {
-                settingsView.heightAnchor.constraint(equalToConstant: view.bounds.height + 50).isActive = true
-                settingsView.addSubview(settingsTableView)
-                settingsTableView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate(
-                        [settingsTableView.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor),
-                         settingsTableView.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
-                         settingsTableView.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
-                         settingsTableView.heightAnchor.constraint(equalToConstant: view.bounds.height)]
-                )
+                let height: CGFloat = view.frame.height
+                keyboardStackView.removeAllArrangedSubviews()
+                
+                // FIXME: - Unable to simultaneously satisfy constraints
+                settingsView.heightAnchor.constraint(equalToConstant: height + 50).isActive = true
+                
                 let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 10, bottomInset: 10, leftInset: 12)
                 settingsView.addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(
-                        [upArrowButton.bottomAnchor.constraint(equalTo: settingsTableView.topAnchor),
+                        [upArrowButton.topAnchor.constraint(equalTo: settingsView.topAnchor),
                          upArrowButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
                          upArrowButton.trailingAnchor.constraint(equalTo: settingsView.leadingAnchor, constant: 70),
                          upArrowButton.heightAnchor.constraint(equalToConstant: 50)]
                 )
                 upArrowButton.tintColor = isDarkAppearance ? .white : .black
                 upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .allTouchEvents)
-                keyboardStackView.removeAllArrangedSubviews()
+                
+                settingsView.addSubview(settingsTableView)
+                settingsTableView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate(
+                        [settingsTableView.topAnchor.constraint(equalTo: upArrowButton.bottomAnchor),
+                         settingsTableView.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
+                         settingsTableView.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
+                         settingsTableView.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor)]
+                )
+                
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {

@@ -3,18 +3,23 @@ import UIKit
 extension KeyButton {
         func setupKeyButtonView() {
                 var horizontalConstant: CGFloat {
-                        switch traitCollection.userInterfaceIdiom {
+                        switch viewController.traitCollection.userInterfaceIdiom {
                         case .phone:
                                 return 3
                         case .pad:
                                 // Keyboard is floating if width ≈ iPhone screen
-                                return viewController.view.bounds.width < 500 ? 2 : 5
+                                // .compact <==> floating
+                                if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
+                                        return 2
+                                } else {
+                                        return 5
+                                }
                         default:
                                 return 3
                         }
                 }
                 var verticalConstant: CGFloat {
-                        if traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .compact {
+                        if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .compact {
                                 return 3
                         } else {
                                 return 5
@@ -57,18 +62,18 @@ extension KeyButton {
         
         func setupKeyImageView(constant: CGFloat = 10) {
                 var constant: CGFloat = constant
-                if traitCollection.userInterfaceIdiom == .pad {
-                        if viewController.view.bounds.width < 500 {
-                                // floating, same as iPhone
+                if viewController.traitCollection.userInterfaceIdiom == .pad {
+                        if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
+                                // Floating on iPad, same as iPhone
                                 
                         } else if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-                                // landscape
+                                // iPad landscape
                                 constant = constant * 2
                         } else {
                                 constant += 5
                         }
                 } else {
-                        if traitCollection.verticalSizeClass == .compact {
+                        if viewController.traitCollection.verticalSizeClass == .compact {
                                 // iPhone landscape
                                 constant -= 3
                         }

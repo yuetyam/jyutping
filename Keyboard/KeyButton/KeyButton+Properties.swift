@@ -26,9 +26,9 @@ extension KeyButton {
         }
         
         var height: CGFloat {
-                switch traitCollection.userInterfaceIdiom {
+                switch viewController.traitCollection.userInterfaceIdiom {
                 case .phone:
-                        if traitCollection.verticalSizeClass == .compact {
+                        if viewController.traitCollection.verticalSizeClass == .compact {
                                 // iPhone landscape
                                 
                                 if UIScreen.main.bounds.width < 570 {
@@ -48,7 +48,7 @@ extension KeyButton {
                                 }
                         }
                 case .pad:
-                        if viewController.view.bounds.width < 500 {
+                        if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
                                 // floating
                                 return 50
                         } else if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
@@ -66,18 +66,27 @@ extension KeyButton {
                 // Font sizes reference: https://www.iosfontsizes.com
                 switch keyboardEvent {
                 case .text:
-                        if traitCollection.userInterfaceIdiom == .pad && viewController.view.bounds.width > 500 {
-                                if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-                                        return UIFontMetrics(forTextStyle: .title1).scaledFont(for: .systemFont(ofSize: 30))
+                        switch viewController.traitCollection.userInterfaceIdiom {
+                        case .pad:
+                                if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
+                                        return UIFontMetrics(forTextStyle: .title2).scaledFont(for: .systemFont(ofSize: 24))
                                 } else {
-                                        return .preferredFont(forTextStyle: .title1)
+                                        if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
+                                                return UIFontMetrics(forTextStyle: .title1).scaledFont(for: .systemFont(ofSize: 30))
+                                        } else {
+                                                return .preferredFont(forTextStyle: .title1)
+                                        }
                                 }
-                        } else {
+                        default:
                                 return UIFontMetrics(forTextStyle: .title2).scaledFont(for: .systemFont(ofSize: 24))
                         }
                 default:
-                        if traitCollection.userInterfaceIdiom == .pad && viewController.view.bounds.width > 500 {
-                                return .preferredFont(forTextStyle: .title2)
+                        if viewController.traitCollection.userInterfaceIdiom == .pad {
+                                if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
+                                        return .preferredFont(forTextStyle: .body)
+                                } else {
+                                        return .preferredFont(forTextStyle: .title2)
+                                }
                         } else {
                                 return .preferredFont(forTextStyle: .body)
                         }

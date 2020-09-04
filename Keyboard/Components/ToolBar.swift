@@ -100,22 +100,30 @@ final class ToolBar: UIView {
                 downArrowButton.layer.addSublayer(splitLine)
         }
         
-        
         // FIXME: - iPad Floating Keyboard
-        private var isPhoneInterface: Bool { traitCollection.userInterfaceIdiom == .phone }
+        private var isPhoneInterface: Bool {
+                switch viewController.traitCollection.userInterfaceIdiom {
+                case .pad:
+                        return viewController.traitCollection.horizontalSizeClass == .compact
+                default:
+                        return true
+                }
+        }
         
         private var settingsButtonConstraints: [NSLayoutConstraint] {
-                [settingsButton.topAnchor.constraint(equalTo: topAnchor),
-                 settingsButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-                 settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor),
-                 settingsButton.widthAnchor.constraint(equalToConstant: isPhoneInterface ? 55 : 60)]
+                let width: CGFloat = isPhoneInterface ? 55 : 60
+                return [settingsButton.topAnchor.constraint(equalTo: topAnchor),
+                        settingsButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+                        settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        settingsButton.widthAnchor.constraint(equalToConstant: width)]
         }
         private var yueEngSwitchConstraints: [NSLayoutConstraint] {
                 let topBottomInset: CGFloat = isPhoneInterface ? 16 : 13
+                let width: CGFloat = isPhoneInterface ? 105 : 120
                 return [yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
                         yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
                         yueEngSwitch.leadingAnchor.constraint(equalTo: settingsButton.trailingAnchor, constant: 16),
-                        yueEngSwitch.widthAnchor.constraint(equalToConstant: isPhoneInterface ? 105 : 115)]
+                        yueEngSwitch.widthAnchor.constraint(equalToConstant: width)]
         }
         private var inputLabelConstaints: [NSLayoutConstraint] {
                 [inputLabel.topAnchor.constraint(equalTo: topAnchor),
