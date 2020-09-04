@@ -6,11 +6,8 @@ extension KeyboardViewController {
                 DispatchQueue.main.async {
                         self.setupKeyboardLayout()
                         
-                        // FIXME: - crash on iPad floating if no check
-                        if self.traitCollection.userInterfaceIdiom == .pad &&
-                                (self.traitCollection.horizontalSizeClass == .compact || self.view.frame.width < 500) {
-                                self.view.setNeedsLayout()
-                        } else {
+                        // FIXME: - iPad floating keyboard
+                        if !(self.traitCollection.userInterfaceIdiom == .pad && (self.traitCollection.horizontalSizeClass == .compact || self.view.frame.width < 500)) {
                                 self.view.layoutIfNeeded()
                         }
                 }
@@ -33,7 +30,7 @@ extension KeyboardViewController {
         
         private func setup(layout: KeyboardLayout) {
                 keyboardStackView.removeAllArrangedSubviews()
-                toolBar.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
+                toolBar.tintColor = isDarkAppearance ? .white : .black
                 toolBar.update()
                 keyboardStackView.addArrangedSubview(toolBar)
                 let keysRows: [UIStackView] = makeKeysRows(for: layout.keys(for: self))

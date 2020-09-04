@@ -56,7 +56,7 @@ final class KeyboardViewController: UIInputViewController {
                 super.textDidChange(textInput)
                 if answeredKeyboardLayout != askedKeyboardLayout {
                         answeredKeyboardLayout = askedKeyboardLayout
-                        keyboardLayout = askedKeyboardLayout
+                        keyboardLayout = answeredKeyboardLayout
                 }
         }
         private lazy var answeredKeyboardLayout: KeyboardLayout = .jyutping
@@ -80,12 +80,12 @@ final class KeyboardViewController: UIInputViewController {
         
         var keyboardLayout: KeyboardLayout = .jyutping {
                 didSet {
-                        setupKeyboard()
                         if keyboardLayout != .jyutping &&
                                 keyboardLayout != .jyutpingUppercase &&
                                 keyboardLayout != .candidateBoard {
                                 currentInputText = ""
                         }
+                        setupKeyboard()
                 }
         }
         
