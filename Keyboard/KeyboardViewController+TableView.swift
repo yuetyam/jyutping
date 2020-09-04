@@ -85,7 +85,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        converter = makeConverter()
+                        updateConverter()
                 case 2:
                         imeQueue.async {
                                 self.lexiconManager.deleteAll()

@@ -89,7 +89,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        private(set) lazy var imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim", qos: .userInitiated)
+        let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.cantoneseim", qos: .userInitiated)
         var currentInputText: String = "" {
                 didSet {
                         DispatchQueue.main.async {
@@ -117,7 +117,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         
         let lexiconManager: LexiconManager = LexiconManager()
-        private lazy var engine: Engine = Engine()
+        private let engine: Engine = Engine()
         private func suggestCandidates() {
                 let userdbCandidates: [Candidate] = lexiconManager.suggest(for: currentInputText)
                 let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
@@ -155,10 +155,8 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        lazy var converter: ChineseConverter = makeConverter()
-        
-        func makeConverter() -> ChineseConverter {
-                let options: ChineseConverter.Options = {
+        private var converter: ChineseConverter = {
+           let options: ChineseConverter.Options = {
                         
                         // 0: The key "logogram" doesn‘t exist.
                         // 1: 傳統漢字
@@ -180,6 +178,24 @@ final class KeyboardViewController: UIInputViewController {
                 let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
                 let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, option: options)
                 return converter
+        }()
+        func updateConverter() {
+                let options: ChineseConverter.Options = {
+                        let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
+                        switch logogram {
+                        case 2:
+                                return [.traditionalize, .hkStandard]
+                        case 3:
+                                return [.traditionalize, .twStandard]
+                        case 4:
+                                return [.simplify]
+                        default:
+                                return [.traditionalize]
+                        }
+                }()
+                let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
+                let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, option: options)
+                self.converter = converter
         }
         
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
