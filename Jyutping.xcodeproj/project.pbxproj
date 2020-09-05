@@ -10,6 +10,7 @@
 		370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B631423E96E1000912B9A /* AudioFeedback.swift */; };
 		370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37211D5723541EE3007E1D68 /* AppDelegate.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
+		371E80832503933800D2C0FB /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 371E80822503933800D2C0FB /* jyutping.sqlite3 */; };
 		37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D5D23541EE4007E1D68 /* Assets.xcassets */; };
 		37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6023541EE4007E1D68 /* Preview Assets.xcassets */; };
 		37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */; };
@@ -20,7 +21,6 @@
 		37336F81239ABE05006A59A7 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F80239ABE05006A59A7 /* LinkButton.swift */; };
 		37386D7024FEC056008A3188 /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 37386D6F24FEC056008A3188 /* OpenCC */; };
 		3739E58524FE556C006368BD /* jyut6ping3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3739E58424FE556C006368BD /* jyut6ping3.sqlite3 */; };
-		3739E58724FE5585006368BD /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3739E58624FE5585006368BD /* jyutping.sqlite3 */; };
 		3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
@@ -88,6 +88,7 @@
 /* Begin PBXFileReference section */
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
+		371E80822503933800D2C0FB /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37211D5723541EE3007E1D68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37211D5D23541EE4007E1D68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		37336F7E239ABDC4006A59A7 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		37336F80239ABE05006A59A7 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		3739E58424FE556C006368BD /* jyut6ping3.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyut6ping3.sqlite3; sourceTree = "<group>"; };
-		3739E58624FE5585006368BD /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCollectionViewCell.swift; sourceTree = "<group>"; };
 		3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
@@ -298,7 +298,7 @@
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
-				3739E58624FE5585006368BD /* jyutping.sqlite3 */,
+				371E80822503933800D2C0FB /* jyutping.sqlite3 */,
 				374DC58A24FBF8D8003BEAE7 /* OpenCC.bundle */,
 			);
 			path = Keyboard;
@@ -441,7 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
-				3739E58724FE5585006368BD /* jyutping.sqlite3 in Resources */,
+				371E80832503933800D2C0FB /* jyutping.sqlite3 in Resources */,
 				374DC58B24FBF8D8003BEAE7 /* OpenCC.bundle in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
 			);
