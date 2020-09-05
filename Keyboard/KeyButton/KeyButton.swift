@@ -51,7 +51,7 @@ final class KeyButton: UIButton {
                 super.touchesBegan(touches, with: event)
                 switch keyboardEvent {
                 case .text(_):
-                        if traitCollection.userInterfaceIdiom == .phone && UIScreen.main.bounds.height > UIScreen.main.bounds.width {
+                        if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.horizontalSizeClass == .compact {
                                 self.previewLabel.text = nil
                                 self.previewLabel.removeFromSuperview()
                                 
@@ -137,7 +137,7 @@ final class KeyButton: UIButton {
                 case .backspace:
                         changeColorToNormal()
                 case .text(_):
-                        if traitCollection.userInterfaceIdiom == .phone && UIScreen.main.bounds.height > UIScreen.main.bounds.width {
+                        if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.horizontalSizeClass == .compact {
                                 removePreview()
                         } else {
                                 changeColorToNormal()
