@@ -55,7 +55,7 @@ struct Engine {
                 let shortcutFirst: [Candidate] = shortcut(for: String(text.first!))
                 
                 let head: [Candidate] = exactlyMatched + prefixMatches + shortcutThree + combine
-                let tail: [Candidate] = matchTwoChars + shortcutTwo + shortcutFirst
+                let tail: [Candidate] = shortcutTwo + matchTwoChars + shortcutFirst
                 return head + tail
         }
         
