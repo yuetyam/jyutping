@@ -2,12 +2,12 @@
 Chinese, Simplified
 */
 
-"Audio feedback on click" = "按键声音反馈";
+"Audio feedback on click" = "按鍵聲音反饋";
 
 "Characters" = "字形";
-"Traditional" = "传统汉字";
-"Traditional, Hong Kong" = "传统汉字香港字形";
-"Traditional, Taiwan" = "传统汉字台湾字形";
-"Simplified" = "大陆简化字";
+"Traditional" = "傳統漢字";
+"Traditional, Hong Kong" = "傳統漢字香港字形";
+"Traditional, Taiwan" = "傳統漢字臺灣字形";
+"Simplified" = "大陸簡化字";
 
-"Clear user lexicon" = "清空用户词库";
+"Clear user lexicon" = "清空用戶詞庫";

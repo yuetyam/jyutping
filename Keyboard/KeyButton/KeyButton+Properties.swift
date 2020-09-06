@@ -133,7 +133,7 @@ extension KeyButton {
                 case .done:
                         return "完成"
                 case .emergencyCall:
-                        return "緊急Call"
+                        return "緊急"
                 case .go:
                         return "前往"
                 case .google:
@@ -143,7 +143,7 @@ extension KeyButton {
                 case .next:
                         return "下一個"
                 case .route:
-                        return "Route"
+                        return "route"
                 case .search:
                         return "搜尋"
                 case .send:
