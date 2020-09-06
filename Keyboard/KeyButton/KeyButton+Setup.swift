@@ -107,75 +107,126 @@ extension KeyButton {
         }
         */
         
-        /*
-        func previewPath(minWidth: CGFloat, height: CGFloat, cornerRadius: CGFloat) -> UIBezierPath {
+        func previewBezierPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> UIBezierPath {
                 
-                let distance: CGFloat = (height - minWidth) / 2
-                let curveDistance: CGFloat = distance * 3 / 2
-                let squareHeight: CGFloat = height - curveDistance
+                //    +-------------------G---+
+                //    +   |               |   +
+                //    E...F               H...+
+                //    +                       +
+                //    +                       +
+                //    D                       J
+                //     .                     .
+                //       .                 .
+                //        C               K
+                //        +               +
+                //        +               +
+                //        +...B       M...L
+                //        +   |       |   +
+                //        +---A---o-------+
+                
+                
+                // TODO: - More details
+                let expansionWidth: CGFloat = keyWidth / 2.5
+                let curveDistance: CGFloat = expansionWidth * 1.5
                 let controlDistance: CGFloat = curveDistance / 3
                 
-                let path: UIBezierPath = UIBezierPath()
-                path.move(to: CGPoint(x: distance, y: height))
-                path.addCurve(to: CGPoint(x: 0, y: squareHeight), controlPoint1: CGPoint(x: distance, y: height - controlDistance), controlPoint2: CGPoint(x: 0, y: height - controlDistance))
+                let pointA: CGPoint = CGPoint(x: origin.x - (keyWidth / 2) + keyCornerRadius, y: origin.y)
+                let pointBArcCenter: CGPoint = CGPoint(x: pointA.x, y: pointA.y - keyCornerRadius)
+                let pointC: CGPoint = CGPoint(x: origin.x - (keyWidth / 2), y: origin.y - keyHeight)
                 
-                path.addLine(to: CGPoint(x: 0, y: cornerRadius))
-                path.addArc(withCenter: CGPoint(x: cornerRadius, y: cornerRadius), radius: cornerRadius, startAngle: CGFloat.pi, endAngle: (3 * CGFloat.pi / 2), clockwise: true)
+                let pointD: CGPoint = CGPoint(x: pointC.x - expansionWidth, y: pointC.y - curveDistance)
+                let curve1Control1: CGPoint = CGPoint(x: pointC.x, y: pointC.y - controlDistance)
+                let curve1Control2: CGPoint = CGPoint(x: pointD.x, y: curve1Control1.y)
                 
-                path.addLine(to: CGPoint(x: height - cornerRadius, y: 0))
-                path.addArc(withCenter: CGPoint(x: height - cornerRadius, y: cornerRadius), radius: cornerRadius, startAngle: (3 * CGFloat.pi / 2), endAngle: 0, clockwise: true)
+                let pointE: CGPoint = CGPoint(x: pointD.x, y: pointD.y - keyHeight + previewCornerRadius + 5)
+                let pointFArcCenter: CGPoint = CGPoint(x: pointE.x + previewCornerRadius, y: pointE.y)
                 
-                path.addLine(to: CGPoint(x: height, y: squareHeight))
-                path.addCurve(to: CGPoint(x: minWidth + distance, y: height), controlPoint1: CGPoint(x: height, y: height - controlDistance), controlPoint2: CGPoint(x: minWidth + distance, y: height - controlDistance))
+                let maxWidth: CGFloat = keyWidth + (expansionWidth * 2)
+                let pointG: CGPoint = CGPoint(x: pointFArcCenter.x + (maxWidth - previewCornerRadius * 2), y: pointFArcCenter.y - previewCornerRadius)
+                let pointHArcCenter: CGPoint = CGPoint(x: pointG.x, y: pointFArcCenter.y)
                 
-                path.close()
-                return path
-        }
-        */
-        
-        
-        // TODO: - Fix width
-        
-        func previewBezierPath(origin: CGPoint, end: CGPoint, height: CGFloat, cornerRadius: CGFloat) -> UIBezierPath {
-                let minWidth = end.x - origin.x
-                let distance: CGFloat = (height - minWidth) / 2
-                let curveDistance: CGFloat = distance * 3 / 2
-                let controlDistance: CGFloat = curveDistance / 3
+                let pointJ: CGPoint = CGPoint(x: pointHArcCenter.x + previewCornerRadius, y: pointD.y)
+                let pointK: CGPoint = CGPoint(x: pointC.x + keyWidth, y: pointC.y)
+                let curve2Control1: CGPoint = CGPoint(x: pointJ.x, y: curve1Control1.y)
+                let curve2Control2: CGPoint = CGPoint(x: pointK.x, y: curve2Control1.y)
+                
+                let pointL: CGPoint = CGPoint(x: origin.x + (keyWidth / 2), y: pointBArcCenter.y)
+                let pointMArcCenter: CGPoint = CGPoint(x: pointL.x - keyCornerRadius, y: pointL.y)
                 
                 let path: UIBezierPath = UIBezierPath()
                 path.move(to: origin)
-                path.addCurve(to: CGPoint(x: origin.x - distance, y: origin.y - curveDistance),
-                              controlPoint1: CGPoint(x: origin.x, y: origin.y - controlDistance),
-                              controlPoint2: CGPoint(x: origin.x - distance, y: origin.y - controlDistance))
                 
-                path.addLine(to: CGPoint(x: origin.x - distance, y: origin.y - height + cornerRadius))
-                path.addArc(withCenter: CGPoint(x: origin.x - distance + cornerRadius, y: origin.y - height + cornerRadius),
-                            radius: cornerRadius,
-                            startAngle: CGFloat.pi,
-                            endAngle: (3 * CGFloat.pi / 2),
-                            clockwise: true)
+                path.addLine(to: pointA)
+                path.addArc(withCenter: pointBArcCenter, radius: keyCornerRadius, startAngle: (3 * CGFloat.pi / 2), endAngle: CGFloat.pi, clockwise: true)
                 
-                path.addLine(to: CGPoint(x: origin.x - distance + height - cornerRadius, y: origin.y - height))
-                path.addArc(withCenter: CGPoint(x: origin.x - distance + height - cornerRadius, y: origin.y - height + cornerRadius),
-                            radius: cornerRadius,
-                            startAngle: (3 * CGFloat.pi / 2),
-                            endAngle: 0,
-                            clockwise: true)
+                path.addLine(to: pointC)
+                path.addCurve(to: pointD, controlPoint1: curve1Control1, controlPoint2: curve1Control2)
                 
-                path.addLine(to: CGPoint(x: end.x + distance, y: end.y - curveDistance))
-                path.addCurve(to: end,
-                              controlPoint1: CGPoint(x: end.x + distance, y: end.y - controlDistance),
-                              controlPoint2: CGPoint(x: end.x, y: end.y - controlDistance))
+                path.addLine(to: pointE)
+                path.addArc(withCenter: pointFArcCenter, radius: previewCornerRadius, startAngle: CGFloat.pi, endAngle: (3 * CGFloat.pi / 2), clockwise: true)
+                
+                path.addLine(to: pointG)
+                path.addArc(withCenter: pointHArcCenter, radius: previewCornerRadius, startAngle: (CGFloat.pi / 2), endAngle: 0, clockwise: true)
+                
+                path.addLine(to: pointJ)
+                path.addCurve(to: pointK, controlPoint1: curve2Control1, controlPoint2: curve2Control2)
+                
+                path.addLine(to: pointL)
+                path.addArc(withCenter: pointMArcCenter, radius: keyCornerRadius, startAngle: 0, endAngle: (CGFloat.pi / 2), clockwise: true)
                 
                 path.close()
                 return path
         }
-        func previewStartPath(rect: CGRect) -> UIBezierPath {
+        
+        func startBezierPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> UIBezierPath {
+                
+                //    +-----------E---+
+                //    +   |       |   +
+                //    C...D       F...+
+                //    +               +
+                //    +               +
+                //    +...B       H...G
+                //    +   |       |   +
+                //    +---A---o-------+
+                
+                let pointA: CGPoint = CGPoint(x: origin.x - (keyWidth / 2) + keyCornerRadius, y: origin.y)
+                let pointBArcCenter: CGPoint = CGPoint(x: pointA.x, y: pointA.y - keyCornerRadius)
+                let pointC: CGPoint = CGPoint(x: pointA.x - keyCornerRadius, y: origin.y - keyHeight + keyCornerRadius)
+                let pointDArcCenter: CGPoint = CGPoint(x: pointA.x, y: pointC.y)
+                let pointFArcCenter: CGPoint = CGPoint(x: origin.x + (keyWidth / 2) - keyCornerRadius, y: pointDArcCenter.y)
+                let pointE: CGPoint = CGPoint(x: pointFArcCenter.x, y: pointFArcCenter.y - keyCornerRadius)
+                let pointG: CGPoint = CGPoint(x: pointFArcCenter.x + keyCornerRadius, y: pointBArcCenter.y)
+                let pointHArcCenter: CGPoint = CGPoint(x: pointFArcCenter.x, y: pointG.y)
+                
+                let stepWidth: CGFloat = (pointBArcCenter.y - pointC.y) / 4
+                let pointB1C: CGPoint = CGPoint(x: pointC.x, y: pointBArcCenter.y - stepWidth)
+                let pointB2C: CGPoint = CGPoint(x: pointC.x, y: pointB1C.y - stepWidth)
+                let pointB3C: CGPoint = CGPoint(x: pointC.x, y: pointB2C.y - stepWidth)
+                let pointF1G: CGPoint = CGPoint(x: pointG.x, y: pointFArcCenter.y + stepWidth)
+                let pointF2G: CGPoint = CGPoint(x: pointG.x, y: pointF1G.y + stepWidth)
+                let pointF3G: CGPoint = CGPoint(x: pointG.x, y: pointF2G.y + stepWidth)
+                
                 let path: UIBezierPath = UIBezierPath()
-                path.move(to: rect.origin)
-                path.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y))
-                path.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y + rect.height))
-                path.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.height))
+                path.move(to: origin)
+                path.addLine(to: pointA)
+                path.addArc(withCenter: pointBArcCenter, radius: keyCornerRadius, startAngle: (3 * CGFloat.pi / 2), endAngle: CGFloat.pi, clockwise: true)
+                
+                path.addLine(to: pointB1C)
+                path.addLine(to: pointB2C)
+                path.addLine(to: pointB3C)
+                
+                path.addLine(to: pointC)
+                path.addArc(withCenter: pointDArcCenter, radius: keyCornerRadius, startAngle: CGFloat.pi, endAngle: (3 * CGFloat.pi / 2), clockwise: true)
+                path.addLine(to: pointE)
+                path.addArc(withCenter: pointFArcCenter, radius: keyCornerRadius, startAngle: (3 * CGFloat.pi / 2), endAngle: 0, clockwise: true)
+                
+                path.addLine(to: pointF1G)
+                path.addLine(to: pointF2G)
+                path.addLine(to: pointF3G)
+                
+                path.addLine(to: pointG)
+                path.addArc(withCenter: pointHArcCenter, radius: keyCornerRadius, startAngle: 0, endAngle: (CGFloat.pi / 2), clockwise: true)
+                
                 path.close()
                 return path
         }
