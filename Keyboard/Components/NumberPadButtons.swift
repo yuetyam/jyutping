@@ -30,7 +30,7 @@ final class NumberButton: UIButton {
                 AudioFeedback.perform(audioFeedback: .input)
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-                UIView.animate(withDuration: 0, delay: 0.05, animations: {
+                UIView.animate(withDuration: 0, delay: 0.04, animations: {
                         self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? DarkMode.darkButton : .white
                 })
         }
