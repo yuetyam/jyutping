@@ -47,7 +47,7 @@ final class KeyButton: UIButton {
         
         private var shapeLayer: CAShapeLayer = {
                 let caLayer: CAShapeLayer = CAShapeLayer()
-                caLayer.shadowOpacity = 0.7
+                caLayer.shadowOpacity = 0.5
                 caLayer.shadowRadius = 1
                 caLayer.shadowOffset = .zero
                 caLayer.shadowColor = UIColor.black.cgColor
