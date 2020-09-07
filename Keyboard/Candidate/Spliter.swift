@@ -28,7 +28,7 @@ struct Spliter {
         }
         
         static func canSplit(_ text: String) -> Bool {
-                if invalidFirstCharacter.contains(text.first!) {
+                if invalidFirst.contains(text.first!) {
                         return false
                 }
                 
@@ -41,7 +41,7 @@ struct Spliter {
                 return false
         }
         
-        private static let invalidFirstCharacter: String = "qryixv"
+        private static let invalidFirst: String = "qryixv"
         
         private static let jyutpings: Set<String> = ["ngo", "nei", "keoi", "ge", "aa", "gam", "dou", "zau", "hai", "hou",
         "heoi", "ng", "go", "jau", "tung", "laa", "gong", "zo", "jiu",
