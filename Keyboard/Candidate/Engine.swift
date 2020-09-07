@@ -4,7 +4,7 @@ import SQLite3
 struct Engine {
         
         private let database: OpaquePointer? = {
-                guard let path: String = Bundle.main.path(forResource: "jyutping", ofType: "sqlite3") else { return nil }
+                guard let path: String = Bundle.main.path(forResource: "keyboard", ofType: "sqlite3") else { return nil }
                 var db: OpaquePointer?
                 if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK {
                         return db
@@ -170,9 +170,9 @@ private extension Engine {
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
                                 // prefix = sqlite3_column_int64(queryStatement, 2)
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyut6ping3: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyut6ping3, input: text)
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
                                 candidates.append(candidate)
                         }
                 }
@@ -191,9 +191,9 @@ private extension Engine {
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
                                 // prefix = sqlite3_column_int64(queryStatement, 2)
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyut6ping3: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyut6ping3, input: text)
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
                                 candidates.append(candidate)
                         }
                 }

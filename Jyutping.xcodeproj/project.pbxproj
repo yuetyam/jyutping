@@ -10,7 +10,6 @@
 		370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B631423E96E1000912B9A /* AudioFeedback.swift */; };
 		370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37211D5723541EE3007E1D68 /* AppDelegate.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
-		371E80832503933800D2C0FB /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 371E80822503933800D2C0FB /* jyutping.sqlite3 */; };
 		37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D5D23541EE4007E1D68 /* Assets.xcassets */; };
 		37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6023541EE4007E1D68 /* Preview Assets.xcassets */; };
 		37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */; };
@@ -20,7 +19,6 @@
 		37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7E239ABDC4006A59A7 /* MessageView.swift */; };
 		37336F81239ABE05006A59A7 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F80239ABE05006A59A7 /* LinkButton.swift */; };
 		37386D7024FEC056008A3188 /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 37386D6F24FEC056008A3188 /* OpenCC */; };
-		3739E58524FE556C006368BD /* jyut6ping3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 3739E58424FE556C006368BD /* jyut6ping3.sqlite3 */; };
 		3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
@@ -51,6 +49,8 @@
 		37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB0237A8F0800F92482 /* InfoPlist.strings */; };
 		37C18EB5237A904000F92482 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB7237A904000F92482 /* Localizable.strings */; };
 		37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EC2237A942800F92482 /* InfoPlist.strings */; };
+		37C267B025063D8100F0EC7F /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 37C267AF25063D8100F0EC7F /* jyutping.sqlite3 */; };
+		37C267B225063D9400F0EC7F /* keyboard.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 37C267B125063D9400F0EC7F /* keyboard.sqlite3 */; };
 		37E004F823E49B6700E413BD /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F723E49B6700E413BD /* KeyboardLayout.swift */; };
 		37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F923E4BAA000E413BD /* KeyboardEvent.swift */; };
 		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
@@ -88,7 +88,6 @@
 /* Begin PBXFileReference section */
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
-		371E80822503933800D2C0FB /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37211D5723541EE3007E1D68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37211D5D23541EE4007E1D68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 		37336F7C239ABB30006A59A7 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		37336F7E239ABDC4006A59A7 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		37336F80239ABE05006A59A7 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		3739E58424FE556C006368BD /* jyut6ping3.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyut6ping3.sqlite3; sourceTree = "<group>"; };
 		3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCollectionViewCell.swift; sourceTree = "<group>"; };
 		3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
@@ -148,6 +146,8 @@
 		37C18EC9237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37C18ECA237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37C18ECB237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37C267AF25063D8100F0EC7F /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
+		37C267B125063D9400F0EC7F /* keyboard.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = keyboard.sqlite3; sourceTree = "<group>"; };
 		37E004F723E49B6700E413BD /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		37E004F923E4BAA000E413BD /* KeyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
 		37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subviews.swift"; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				37C18EB2237A8FDB00F92482 /* Localization */,
 				37211D5D23541EE4007E1D68 /* Assets.xcassets */,
 				37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */,
-				3739E58424FE556C006368BD /* jyut6ping3.sqlite3 */,
+				37C267AF25063D8100F0EC7F /* jyutping.sqlite3 */,
 				37211D6523541EE4007E1D68 /* Info.plist */,
 				37B3401D23EBD23400A8D3BB /* Settings.bundle */,
 				37211D5F23541EE4007E1D68 /* Preview Content */,
@@ -298,7 +298,7 @@
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
-				371E80822503933800D2C0FB /* jyutping.sqlite3 */,
+				37C267B125063D9400F0EC7F /* keyboard.sqlite3 */,
 				374DC58A24FBF8D8003BEAE7 /* OpenCC.bundle */,
 			);
 			path = Keyboard;
@@ -429,8 +429,8 @@
 				37C18EB5237A904000F92482 /* Localizable.strings in Resources */,
 				37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */,
 				37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */,
-				3739E58524FE556C006368BD /* jyut6ping3.sqlite3 in Resources */,
 				37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */,
+				37C267B025063D8100F0EC7F /* jyutping.sqlite3 in Resources */,
 				37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */,
 				37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */,
 			);
@@ -440,8 +440,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37C267B225063D9400F0EC7F /* keyboard.sqlite3 in Resources */,
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
-				371E80832503933800D2C0FB /* jyutping.sqlite3 in Resources */,
 				374DC58B24FBF8D8003BEAE7 /* OpenCC.bundle in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
 			);

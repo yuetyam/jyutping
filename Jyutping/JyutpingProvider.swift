@@ -4,7 +4,7 @@ import SQLite3
 struct JyutpingProvider {
         
         private static let database: OpaquePointer? = {
-                guard let path: String = Bundle.main.path(forResource: "jyut6ping3", ofType: "sqlite3") else { return nil }
+                guard let path: String = Bundle.main.path(forResource: "jyutping", ofType: "sqlite3") else { return nil }
                 var db: OpaquePointer?
                 if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK {
                         return db
@@ -43,9 +43,8 @@ struct JyutpingProvider {
         }
         
         private static func match(for text: String) -> [String] {
-                let token: Int64 = Int64(text.hash)
                 var jyutpings: [String] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE token = \(token);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE token = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
