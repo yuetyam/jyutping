@@ -34,7 +34,7 @@ final class NumberButton: UIButton {
                 AudioFeedback.perform(audioFeedback: .input)
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-                UIView.animate(withDuration: 0, delay: 0.04, animations: {
+                UIView.animate(withDuration: 0, delay: 0.03, animations: {
                         self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? DarkMode.darkButton : .white
                 })
         }
@@ -275,45 +275,3 @@ final class NumberPadEmptyKey: UIView {
                 }
         }
 }
-
-/*
-final class TopBar: UIView {
-        
-        private let viewController: KeyboardViewController
-        init(viewController: KeyboardViewController) {
-                self.viewController = viewController
-                super.init(frame: .zero)
-                heightAnchor.constraint(equalToConstant: 40).isActive = true
-                
-                let doneButton: UIButton = UIButton()
-                addSubview(doneButton)
-                doneButton.translatesAutoresizingMaskIntoConstraints = false
-                doneButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
-                doneButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-                doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
-                doneButton.setTitleColor(.systemBlue, for: .normal)
-                doneButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
-                
-                let backButton: UIButton = UIButton()
-                addSubview(backButton)
-                backButton.translatesAutoresizingMaskIntoConstraints = false
-                backButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
-                backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-                backButton.setTitle(NSLocalizedString("← Keyboard", comment: ""), for: .normal)
-                backButton.setTitleColor(.systemBlue, for: .normal)
-                backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
-        }
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-        
-        @objc private func dismissKeyboard() {
-                viewController.resignFirstResponder()
-                viewController.dismissKeyboard()
-        }
-        
-        @objc private func back() {
-                viewController.keyboardLayout = .numeric
-        }
-}
-*/
