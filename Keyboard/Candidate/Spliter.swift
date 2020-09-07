@@ -9,11 +9,12 @@ struct Spliter {
                         let maxLength: Int = input.count < 6 ? input.count : 6
                         let startIndex: String.Index = input.startIndex
                         
-                        for index in 0..<maxLength {
+                        for index in (0..<maxLength).reversed() {
                                 let end: String.Index = input.index(startIndex, offsetBy: index)
                                 let part: String = String(input[startIndex...end])
                                 if jyutpings.contains(part) {
                                         token = part
+                                        break
                                 }
                         }
                         if !token.isEmpty {
