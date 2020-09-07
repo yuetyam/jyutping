@@ -21,7 +21,11 @@ final class NumberButton: UIButton {
         }
         
         override var intrinsicContentSize: CGSize {
-                return CGSize(width: 50, height: 60)
+                if viewController.traitCollection.verticalSizeClass == .compact {
+                        return CGSize(width: 50, height: 25)
+                } else {
+                        return CGSize(width: 50, height: 60)
+                }
         }
         
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -135,7 +139,11 @@ final class PeriodButton: UIButton {
         }
         
         override var intrinsicContentSize: CGSize {
-                return CGSize(width: 50, height: 60)
+                if viewController.traitCollection.verticalSizeClass == .compact {
+                        return CGSize(width: 50, height: 25)
+                } else {
+                        return CGSize(width: 50, height: 60)
+                }
         }
         
         private func setupKeyButtonView() {
@@ -191,7 +199,11 @@ final class BackspaceButton: UIButton {
         }
         
         override var intrinsicContentSize: CGSize {
-                return CGSize(width: 50, height: 60)
+                if viewController.traitCollection.verticalSizeClass == .compact {
+                        return CGSize(width: 50, height: 25)
+                } else {
+                        return CGSize(width: 50, height: 60)
+                }
         }
         
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -256,7 +268,11 @@ final class BackspaceButton: UIButton {
 
 final class NumberPadEmptyKey: UIView {
         override var intrinsicContentSize: CGSize {
-                return CGSize(width: 50, height: 60)
+                if traitCollection.verticalSizeClass == .compact {
+                        return CGSize(width: 50, height: 25)
+                } else {
+                        return CGSize(width: 50, height: 60)
+                }
         }
 }
 
