@@ -156,7 +156,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         
         private var converter: ChineseConverter = {
-           let options: ChineseConverter.Options = {
+                let options: ChineseConverter.Options = {
                         
                         // 0: The key "logogram" doesn‘t exist.
                         // 1: 傳統漢字
