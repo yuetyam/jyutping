@@ -51,6 +51,8 @@ final class KeyButton: UIButton {
                 caLayer.shadowRadius = 1
                 caLayer.shadowOffset = .zero
                 caLayer.shadowColor = UIColor.black.cgColor
+                caLayer.shouldRasterize = true
+                caLayer.rasterizationScale = UIScreen.main.scale
                 return caLayer
         }()
         private var previewLabel: UILabel = UILabel()

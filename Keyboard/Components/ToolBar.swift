@@ -146,7 +146,7 @@ final class ToolBar: UIView {
         }
         
         var collectionViewConstraints: [NSLayoutConstraint] {
-                [viewController.collectionView.topAnchor.constraint(equalTo: topAnchor,constant: 10),
+                [viewController.collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
                  viewController.collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
                  viewController.collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
                  viewController.collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
