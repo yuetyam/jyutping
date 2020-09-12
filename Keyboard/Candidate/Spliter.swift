@@ -29,20 +29,13 @@ struct Spliter {
         }
         
         static func canSplit(_ text: String) -> Bool {
-                if invalidFirst.contains(text.first!) {
-                        return false
-                }
-                
                 for jyutping in jyutpings {
                         if text.hasPrefix(jyutping) {
                                 return true
                         }
                 }
-                
                 return false
         }
-        
-        private static let invalidFirst: String = "qryixv"
         
         private static let jyutpings: Set<String> = ["ngo", "nei", "keoi", "ge", "aa", "gam", "dou", "zau", "hai", "hou",
         "heoi", "ng", "go", "jau", "tung", "laa", "gong", "zo", "jiu",
