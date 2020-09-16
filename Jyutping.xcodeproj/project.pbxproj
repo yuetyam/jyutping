@@ -18,7 +18,6 @@
 		37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7C239ABB30006A59A7 /* ShareSheetView.swift */; };
 		37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7E239ABDC4006A59A7 /* MessageView.swift */; };
 		37336F81239ABE05006A59A7 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F80239ABE05006A59A7 /* LinkButton.swift */; };
-		37386D7024FEC056008A3188 /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 37386D6F24FEC056008A3188 /* OpenCC */; };
 		3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
@@ -45,6 +44,7 @@
 		37AE5BEF2354AAF8008A8E4B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */; };
 		37AE5BF32354AAF8008A8E4B /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37B3401D23EBD23400A8D3BB /* Settings.bundle */; };
+		37B384B62512D85F0051A4CA /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 37B384B52512D85F0051A4CA /* OpenCC */; };
 		37C05F9A23E339C90061C992 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C05F9923E339C90061C992 /* KeyButton.swift */; };
 		37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB0237A8F0800F92482 /* InfoPlist.strings */; };
 		37C18EB5237A904000F92482 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB7237A904000F92482 /* Localizable.strings */; };
@@ -170,7 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37386D7024FEC056008A3188 /* OpenCC in Frameworks */,
+				37B384B62512D85F0051A4CA /* OpenCC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +371,7 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
-				37386D6F24FEC056008A3188 /* OpenCC */,
+				37B384B52512D85F0051A4CA /* OpenCC */,
 			);
 			productName = Keyboard;
 			productReference = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */;
@@ -409,7 +409,7 @@
 			);
 			mainGroup = 37211D4B23541EE3007E1D68;
 			packageReferences = (
-				37386D6E24FEC056008A3188 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */,
+				37B384B42512D85F0051A4CA /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -820,20 +820,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		37386D6E24FEC056008A3188 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */ = {
+		37B384B42512D85F0051A4CA /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ososoio/SwiftyOpenCC.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.2;
+				minimumVersion = 1.0.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		37386D6F24FEC056008A3188 /* OpenCC */ = {
+		37B384B52512D85F0051A4CA /* OpenCC */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 37386D6E24FEC056008A3188 /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */;
+			package = 37B384B42512D85F0051A4CA /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */;
 			productName = OpenCC;
 		};
 /* End XCSwiftPackageProductDependency section */

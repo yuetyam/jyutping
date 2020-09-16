@@ -157,13 +157,12 @@ final class KeyboardViewController: UIInputViewController {
         
         private var converter: ChineseConverter = {
                 let options: ChineseConverter.Options = {
-                        
+                        let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         // 0: The key "logogram" doesn‘t exist.
                         // 1: 傳統漢字
                         // 2: 傳統漢字香港字形
                         // 3: 傳統漢字臺灣字形
                         // 4: 大陸簡化字
-                        let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         switch logogram {
                         case 2:
                                 return [.traditionalize, .hkStandard]
@@ -176,7 +175,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }()
                 let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
-                let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, option: options)
+                let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
                 return converter
         }()
         func updateConverter() {
@@ -194,7 +193,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }()
                 let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
-                let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, option: options)
+                let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
                 self.converter = converter
         }
         
