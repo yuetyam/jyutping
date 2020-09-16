@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -396,7 +396,7 @@
 				};
 			};
 			buildConfigurationList = 37211D4F23541EE3007E1D68 /* Build configuration list for PBXProject "Jyutping" */;
-			compatibilityVersion = "Xcode 11.4";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
