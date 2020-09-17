@@ -55,7 +55,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 // FIXME: - don't know why
                 guard candidates.count > indexPath.row else { return CGSize(width: 55, height: 55) }
                 
-                let characterCount: Int = candidates[indexPath.row].count
+                let characterCount: Int = candidates[indexPath.row].text.count
                 if self.keyboardLayout == .candidateBoard {
                         let fullWidth: CGFloat = collectionView.bounds.size.width
                         var itemCount: Int {

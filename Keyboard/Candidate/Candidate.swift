@@ -23,11 +23,6 @@ struct Candidate: Hashable {
                 self.lexiconText = lexiconText.isEmpty ? text : lexiconText
         }
         
-        // TODO: - Remove this property, replace it with text.count
-        var count: Int {
-                return text.count
-        }
-        
         // Equatable
         static func == (lhs: Candidate, rhs: Candidate) -> Bool {
                 return lhs.text == rhs.text

@@ -99,7 +99,7 @@ struct Engine {
                                 if let one: Candidate = match(for: rawTailJyutpings, count: 1).first {
                                         let newCandidate: Candidate = combine.first! + one
                                         combine.insert(newCandidate, at: 0)
-                                        if combine[1].count == combine[2].count {
+                                        if combine[1].text.count == combine[2].text.count {
                                                 let secondCandidate: Candidate = combine[2] + one
                                                 combine.insert(secondCandidate, at: 1)
                                         }
