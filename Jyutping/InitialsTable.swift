@@ -15,7 +15,7 @@ struct InitialsTable: View {
                                 .foregroundColor(.clear)
                                 .padding(.bottom, 80)
                 }
-                .navigationBarTitle("粵拼聲母表", displayMode: .inline)
+                .navigationBarTitle("Jyutping Initials", displayMode: .inline)
         }
         
         private var lines: [String] { content.components(separatedBy: "\n") }
@@ -89,7 +89,7 @@ struct FinalsTable: View {
                                 .foregroundColor(.clear)
                                 .padding(.bottom, 80)
                 }
-                .navigationBarTitle(Text("粵拼韻母表"), displayMode: .inline)
+                .navigationBarTitle(Text("Jyutping Finals"), displayMode: .inline)
         }
         
         private var lines: [String] { content.components(separatedBy: "\n") }
@@ -181,7 +181,7 @@ struct TonesTable: View {
                                 .foregroundColor(.clear)
                                 .padding(.bottom, 80)
                 }
-                .navigationBarTitle(Text("粵拼聲調表"), displayMode: .inline)
+                .navigationBarTitle(Text("Jyutping Tones"), displayMode: .inline)
         }
         
         private var lines: [String] { content.components(separatedBy: "\n") }

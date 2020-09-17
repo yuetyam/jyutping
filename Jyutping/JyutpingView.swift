@@ -105,7 +105,7 @@ private struct JyutpingTable: View {
                 VStack {
                         NavigationLink(destination: InitialsTable()) {
                                 HStack {
-                                        Text("粵拼聲母表")
+                                        Text("Jyutping Initials")
                                         Spacer()
                                         Image(systemName: "chevron.right").opacity(0.5)
                                 }
@@ -115,7 +115,7 @@ private struct JyutpingTable: View {
                         Divider()
                         NavigationLink(destination: FinalsTable()) {
                                 HStack {
-                                        Text("粵拼韻母表")
+                                        Text("Jyutping Finals")
                                         Spacer()
                                         Image(systemName: "chevron.right").opacity(0.5)
                                 }
@@ -124,7 +124,7 @@ private struct JyutpingTable: View {
                         Divider()
                         NavigationLink(destination: TonesTable()) {
                                 HStack {
-                                        Text("粵拼聲調表")
+                                        Text("Jyutping Tones")
                                         Spacer()
                                         Image(systemName: "chevron.right").opacity(0.5)
                                 }
