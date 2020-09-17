@@ -1,9 +1,29 @@
 struct Candidate: Hashable {
         
+        /// Displaying Cantonese word.
+        ///
+        /// Cloud be traditional or simplified characters, depends on `logogram` setting.
         let text: String
+        
+        /// Jyutping
         let footnote: String
+        
+        /// User input
         let input: String
         
+        /// Lexicon Entry Cantonese word.
+        ///
+        /// Always be traditional characters. User invisible.
+        let lexiconText: String
+        
+        init(text: String, footnote: String, input: String, lexiconText: String = "") {
+                self.text = text
+                self.footnote = footnote
+                self.input = input
+                self.lexiconText = lexiconText.isEmpty ? text : lexiconText
+        }
+        
+        // TODO: - Remove this property, replace it with text.count
         var count: Int {
                 return text.count
         }

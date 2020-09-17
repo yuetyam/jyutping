@@ -21,9 +21,9 @@ struct LexiconManager {
         }
         
         private func ensureTable() {
-                // id = (input + word + jyutping).hash
-                // token = input.hash
-                // shortcut = jyutping.initials.hash
+                // id = (candidate.input + candidate.lexiconText + candidate.footnote).hash
+                // token = candidate.input.hash
+                // shortcut = candidate.footnote.shortcut = candidate.footnote.initials.hash
                 let createTableString = "CREATE TABLE IF NOT EXISTS lexicon(id INTEGER NOT NULL PRIMARY KEY,token INTEGER NOT NULL,shortcut INTEGER NOT NULL,frequency INTEGER NOT NULL,word TEXT NOT NULL,jyutping TEXT NOT NULL);"
                 var createTableStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
@@ -37,7 +37,7 @@ struct LexiconManager {
         }
         
         func handle(candidate: Candidate) {
-                let id: Int64 = Int64((candidate.input + candidate.text + candidate.footnote).hash)
+                let id: Int64 = Int64((candidate.input + candidate.lexiconText + candidate.footnote).hash)
                 if let existingEntry: Entry = fetch(by: id) {
                         update(id: existingEntry.id, frequency: existingEntry.frequency + 1)
                 } else {
@@ -45,7 +45,7 @@ struct LexiconManager {
                                                     token: Int64(candidate.input.hash),
                                                     shortcut: candidate.footnote.shortcut,
                                                     frequency: 1,
-                                                    word: candidate.text,
+                                                    word: candidate.lexiconText,
                                                     jyutping: candidate.footnote)
                         insert(entry: newEntry)
                 }
@@ -77,9 +77,7 @@ struct LexiconManager {
                 var updateStatement: OpaquePointer?
                 if sqlite3_prepare_v2(userdb, updateStatementString, -1, &updateStatement, nil) == SQLITE_OK {
                         if sqlite3_step(updateStatement) != SQLITE_DONE {
-                                if #available(iOSApplicationExtension 14.0, *) {
-                                        consolePrint("Could not update row.")
-                                }
+                                consolePrint("Could not update row.")
                         }
                 } else {
                         consolePrint("UPDATE statement is not prepared.")
@@ -109,7 +107,7 @@ struct LexiconManager {
         }
         
         func suggest(for text: String) -> [Candidate] {
-                let textHash: Int64 = Int64(text.hash)
+                let textHash: Int = text.hash
                 let queryStatementString = "SELECT * FROM lexicon WHERE token = \(textHash) OR shortcut = \(textHash) ORDER BY frequency DESC LIMIT 5;"
                 var queryStatement: OpaquePointer? = nil
                 var candidates: [Candidate] = []
