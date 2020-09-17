@@ -14,14 +14,16 @@ struct VersionLabel: View {
                         Text("Version")
                         Spacer()
                         Text(versionString)
-                        Spacer().frame(width: 16)
-                        Image(systemName: "doc.on.doc").font(.footnote)
                 }
                 .contentShape(Rectangle())
                 .padding()
                 .onTapGesture {
-                        UIPasteboard.general.string = self.versionString
-                        self.isBannerPresented = true
+                        UIPasteboard.general.string = versionString
+                        isBannerPresented = true
+                }
+                .onLongPressGesture {
+                        UIPasteboard.general.string = versionString
+                        isBannerPresented = true
                 }
                 .banner(isPresented: $isBannerPresented)
         }
