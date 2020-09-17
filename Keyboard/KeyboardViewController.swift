@@ -119,13 +119,17 @@ final class KeyboardViewController: UIInputViewController {
         let lexiconManager: LexiconManager = LexiconManager()
         private let engine: Engine = Engine()
         private func suggestCandidates() {
-                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: currentInputText)
+                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: currentInputText).map { Candidate(text: userLexiconConverter.convert($0.text), footnote: $0.footnote, input: $0.input) }
                 let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
-                let combined: [Candidate] = userdbCandidates + engineCandidates
-                let converted: [Candidate] = combined.map {
-                        Candidate(text: converter.convert($0.text), footnote: $0.footnote, input: $0.input)
+                                
+                if logogram > 1 {
+                        let converted: [Candidate] = engineCandidates.map { Candidate(text: converter.convert($0.text), footnote: $0.footnote, input: $0.input) }
+                        let combined: [Candidate] = userdbCandidates + converted
+                        candidates = combined.deduplicated()
+                } else {
+                        let combined: [Candidate] = userdbCandidates + engineCandidates
+                        candidates = combined.deduplicated()
                 }
-                candidates = converted.deduplicated()
         }
         
         private func setupToolBarActions() {
@@ -165,9 +169,9 @@ final class KeyboardViewController: UIInputViewController {
                         // 4: 大陸簡化字
                         switch logogram {
                         case 2:
-                                return [.traditionalize, .hkStandard]
+                                return [.hkStandard]
                         case 3:
-                                return [.traditionalize, .twStandard]
+                                return [.twStandard]
                         case 4:
                                 return [.simplify]
                         default:
@@ -178,7 +182,7 @@ final class KeyboardViewController: UIInputViewController {
                 let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
                 return converter
         }()
-        func updateConverter() {
+        private var userLexiconConverter: ChineseConverter = {
                 let options: ChineseConverter.Options = {
                         let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         switch logogram {
@@ -194,7 +198,43 @@ final class KeyboardViewController: UIInputViewController {
                 }()
                 let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
                 let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
-                self.converter = converter
+                return converter
+        }()
+        
+        private lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
+        func updateConverters() {
+                logogram = UserDefaults.standard.integer(forKey: "logogram")
+                
+                let userLexiconOptions: ChineseConverter.Options = {
+                        switch logogram {
+                        case 2:
+                                return [.traditionalize, .hkStandard]
+                        case 3:
+                                return [.traditionalize, .twStandard]
+                        case 4:
+                                return [.simplify]
+                        default:
+                                return [.traditionalize]
+                        }
+                }()
+                let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
+                let userLexiconConverter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: userLexiconOptions)
+                self.userLexiconConverter = userLexiconConverter
+                
+                let dictionaryOptions: ChineseConverter.Options = {
+                        switch logogram {
+                        case 2:
+                                return [.hkStandard]
+                        case 3:
+                                return [.twStandard]
+                        case 4:
+                                return [.simplify]
+                        default:
+                                return [.traditionalize]
+                        }
+                }()
+                let dictionaryConverter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: dictionaryOptions)
+                self.converter = dictionaryConverter
         }
         
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
