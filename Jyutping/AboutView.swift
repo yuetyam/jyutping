@@ -1,5 +1,4 @@
 import SwiftUI
-import StoreKit
 import MessageUI
 
 struct AboutView: View {
