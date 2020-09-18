@@ -75,8 +75,12 @@ struct AboutView: View {
                                 // MARK: - Review & Share
                                 
                                 VStack {
-                                        Button(action: { SKStoreReviewController.requestReview() }) {
-                                                MessageView(icon: "heart", text: Text("Review this App"))
+                                        Button(action: {
+                                                if let url: URL = URL(string: "itms-apps://apple.com/app/id1509367629") {
+                                                        UIApplication.shared.open(url)
+                                                }
+                                        }) {
+                                                MessageView(icon: "heart", text: Text("Review in App Store"))
                                         }.padding(.top)
                                         
                                         Divider()
