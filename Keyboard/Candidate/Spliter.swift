@@ -1,34 +1,67 @@
 struct Spliter {
         
-        static func split(_ text: String) -> [String] {
-                var input: String = text
-                var token: String = ""
-                var matches: [String] = []
+        static func split(_ text: String) -> [[String]] {
+                let leadingJyutpings: [String] = splitLeading(text)
+                guard !leadingJyutpings.isEmpty else { return [] }
                 
-                while input.count > 1 {
-                        let maxLength: Int = input.count < 6 ? input.count : 6
-                        let startIndex: String.Index = input.startIndex
-                        
-                        for index in (0..<maxLength).reversed() {
-                                let end: String.Index = input.index(startIndex, offsetBy: index)
-                                let part: String = String(input[startIndex...end])
-                                if jyutpings.contains(part) {
-                                        token = part
-                                        break
-                                }
+                var sequences: [[String]] = leadingJyutpings.map { [$0] }
+                var leadingLength: Int = 0
+                var shouldContinue: Bool = true
+                var latestGeneration: [[String]] = sequences
+                while shouldContinue {
+                        var cache: [[String]] = []
+                        for sequence in latestGeneration {
+                                leadingLength = max(leadingLength, sequence.reduce(0) { $0 + $1.count })
+                                let lastPart: String = String(text.dropFirst(leadingLength))
+                                let nextTokens: [String] = splitLeading(lastPart)
+                                let newGenSequences: [[String]] = nextTokens.map { sequence + [$0] }
+                                cache += newGenSequences
                         }
-                        if !token.isEmpty {
-                                matches.append(token)
-                                input = String(input.dropFirst(token.count))
-                                token = ""
+                        if let _ = cache.first?.first {
+                                sequences += cache
+                                latestGeneration = cache
                         } else {
+                                shouldContinue = false
+                                break
+                        }
+                        
+                        if leadingLength == text.count {
+                                shouldContinue = false
+                                break
+                        }
+                        if !canSplit(String(text.dropFirst(leadingLength))) {
+                                shouldContinue = false
                                 break
                         }
                 }
-                return matches
+                sequences.sort {
+                        let leftCharCount: Int = $0.reduce("", +).count
+                        let rightCharCount: Int = $1.reduce("", +).count
+                        if leftCharCount == rightCharCount {
+                                return $0.count < $1.count
+                        } else {
+                                return leftCharCount > rightCharCount
+                        }
+                }
+                return sequences.deduplicated()
         }
         
-        static func canSplit(_ text: String) -> Bool {
+        private static func splitLeading(_ text: String) -> [String] {
+                guard !text.isEmpty else { return [] }
+                var tokens: [String] = []
+                let maxLength: Int = min(text.count, 6)
+                for number in 0..<maxLength {
+                        let dropCount: Int = (text.count - 1) - number
+                        let part: String = String(text.dropLast(dropCount))
+                        if jyutpings.contains(part) {
+                                tokens.append(part)
+                        }
+                }
+                return tokens
+        }
+        
+        private static func canSplit(_ text: String) -> Bool {
+                guard !text.isEmpty else { return false }
                 for jyutping in jyutpings {
                         if text.hasPrefix(jyutping) {
                                 return true

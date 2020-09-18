@@ -60,17 +60,17 @@ struct Engine {
         }
         
         private func fetch(for text: String) -> [Candidate] {
-                guard Spliter.canSplit(text) else {
+                let jyutpingsSequences: [[String]] = Spliter.split(text)
+                guard let firstSequence: [String] = jyutpingsSequences.first, !firstSequence.isEmpty else {
                         return processUnsplitable(text)
                 }
-                let jyutpings: [String] = Spliter.split(text)
-                let rawJyutpings: String = jyutpings.reduce("", +)
-                if text == rawJyutpings {
-                        return processJyutping(text: text, jyutpings: jyutpings)
+                if firstSequence.reduce(0, { $0 + $1.count }) == text.count {
+                        return process(text: text, sequences: jyutpingsSequences)
                 } else {
-                        return processPartialJyutping(text: text, jyutpings: jyutpings, rawJyutpings: rawJyutpings)
+                        return processPartial(text: text, sequences: jyutpingsSequences)
                 }
         }
+        
         private func processUnsplitable(_ text: String) -> [Candidate] {
                 var combine: [Candidate] = match(for: text) + prefix(match: text) + shortcut(for: text)
                 for number in 1..<text.count {
@@ -78,68 +78,55 @@ struct Engine {
                 }
                 return combine
         }
-        private func processJyutping(text: String, jyutpings: [String]) -> [Candidate] {
-                let fullMatch: [Candidate] = match(for: text)
-                var combine: [Candidate] = [Candidate]()
-                var firstMatchedJyutpingCount: Int = fullMatch.isEmpty ? 0 : jyutpings.count
-                if jyutpings.count > 1 {
-                        for (number, _) in jyutpings.enumerated().reversed() {
-                                let prefix: String = jyutpings[0..<number].reduce("", +)
-                                let matched: [Candidate] = match(for: prefix)
-                                if firstMatchedJyutpingCount == 0 && !matched.isEmpty {
-                                        firstMatchedJyutpingCount = number
+        private func process(text: String, sequences: [[String]]) -> [Candidate] {
+                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +))}
+                let candidates: [Candidate] = matches.reduce([], +)
+                guard candidates[0].input.count != text.count && candidates.count > 1 else {
+                        return candidates
+                }
+                let tailText: String = String(text.dropFirst(candidates[0].input.count))
+                let jyutpingsSequences: [[String]] = Spliter.split(tailText)
+                guard let tailJyutpings: [String] = jyutpingsSequences.first, !tailJyutpings.isEmpty else {
+                        return candidates
+                }
+                var combine: [Candidate] = []
+                for (index, _) in tailJyutpings.enumerated().reversed() {
+                        let tail: String = tailJyutpings[0...index].reduce("", +)
+                        if let one: Candidate = match(for: tail, count: 1).first {
+                                let firstCandidate: Candidate = candidates[0] + one
+                                combine.append(firstCandidate)
+                                if candidates[0].input.count == candidates[1].input.count && candidates[0].text.count == candidates[1].text.count {
+                                        let secondCandidate: Candidate = candidates[1] + one
+                                        combine.append(secondCandidate)
                                 }
-                                combine += matched
+                                break
                         }
                 }
-                if fullMatch.isEmpty && combine.count > 2 {
-                        let tailJyutpings: [String] = Array(jyutpings.dropFirst(firstMatchedJyutpingCount))
-                        for (index, _) in tailJyutpings.enumerated().reversed() {
-                                let rawTailJyutpings: String = tailJyutpings[0...index].reduce("", +)
-                                if let one: Candidate = match(for: rawTailJyutpings, count: 1).first {
+                return combine + candidates
+        }
+        private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
+                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +))}
+                var combine: [Candidate] = matches.reduce([], +)
+                guard !combine.isEmpty else {
+                        return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
+                }
+                var hasTailCandidate: Bool = false
+                let tailText: String = String(text.dropFirst(combine.first!.input.count))
+                if let tailOne: Candidate = prefix(match: tailText, count: 1).first {
+                        let newCandidate: Candidate = combine.first! + tailOne
+                        combine.insert(newCandidate, at: 0)
+                } else {
+                        let jyutpingsSequences: [[String]] = Spliter.split(tailText)
+                        guard let tailJyutpings: [String] = jyutpingsSequences.first, !tailJyutpings.isEmpty else {
+                                return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
+                        }
+                        let rawTailJyutpings: String = tailJyutpings.reduce("", +)
+                        if tailText.count - rawTailJyutpings.count > 1 {
+                                let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - rawTailJyutpings.count - 1))
+                                if let one: Candidate = prefix(match: tailRawJPPlusOne, count: 1).first {
                                         let newCandidate: Candidate = combine.first! + one
                                         combine.insert(newCandidate, at: 0)
-                                        if combine[1].text.count == combine[2].text.count {
-                                                let secondCandidate: Candidate = combine[2] + one
-                                                combine.insert(secondCandidate, at: 1)
-                                        }
-                                        break
-                                }
-                        }
-                }
-                return fullMatch + prefix(match: text, count: 10) + combine + shortcut(for: text)
-        }
-        private func processPartialJyutping(text: String, jyutpings: [String], rawJyutpings: String) -> [Candidate] {
-                var combine: [Candidate] = match(for: rawJyutpings)
-                var firstMatchedJyutpingCount: Int = combine.isEmpty ? 0 : jyutpings.count
-                if jyutpings.count > 1 {
-                        for (number, _) in jyutpings.enumerated().reversed() {
-                                let prefix: String = jyutpings[0..<number].reduce("", +)
-                                let matched: [Candidate] = match(for: prefix)
-                                if firstMatchedJyutpingCount == 0 && !matched.isEmpty {
-                                        firstMatchedJyutpingCount = number
-                                }
-                                combine += matched
-                        }
-                }
-                if !combine.isEmpty {
-                        var hasTailCandidate: Bool = false
-                        
-                        let tailText: String = String(text.dropFirst(combine.first!.input.count))
-                        let tailJyutpings: [String] = Array(jyutpings.dropFirst(firstMatchedJyutpingCount))
-                        if let tailOne: Candidate = prefix(match: tailText, count: 1).first {
-                                let newCandidate: Candidate = combine.first! + tailOne
-                                combine.insert(newCandidate, at: 0)
-                                hasTailCandidate = true
-                        } else {
-                                let rawTailJyutpings: String = tailJyutpings.reduce("", +)
-                                if tailText.count - rawTailJyutpings.count > 1 {
-                                        let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - rawTailJyutpings.count - 1))
-                                        if let one: Candidate = prefix(match: tailRawJPPlusOne, count: 1).first {
-                                                let newCandidate: Candidate = combine.first! + one
-                                                combine.insert(newCandidate, at: 0)
-                                                hasTailCandidate = true
-                                        }
+                                        hasTailCandidate = true
                                 }
                         }
                         if !hasTailCandidate {
@@ -153,7 +140,7 @@ struct Engine {
                                 }
                         }
                 }
-                return match(for: text) + prefix(match: text, count: 10) + combine + shortcut(for: text)
+                return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
         }
 }
 
@@ -222,6 +209,88 @@ private extension Engine {
                 return candidates
         }
 }
+
+
+
+/* old functions 20200918
+private func processJyutpingV1(text: String, jyutpings: [String]) -> [Candidate] {
+        let fullMatch: [Candidate] = match(for: text)
+        var combine: [Candidate] = [Candidate]()
+        var firstMatchedJyutpingCount: Int = fullMatch.isEmpty ? 0 : jyutpings.count
+        if jyutpings.count > 1 {
+                for (number, _) in jyutpings.enumerated().reversed() {
+                        let prefix: String = jyutpings[0..<number].reduce("", +)
+                        let matched: [Candidate] = match(for: prefix)
+                        if firstMatchedJyutpingCount == 0 && !matched.isEmpty {
+                                firstMatchedJyutpingCount = number
+                        }
+                        combine += matched
+                }
+        }
+        if fullMatch.isEmpty && combine.count > 2 {
+                let tailJyutpings: [String] = Array(jyutpings.dropFirst(firstMatchedJyutpingCount))
+                for (index, _) in tailJyutpings.enumerated().reversed() {
+                        let rawTailJyutpings: String = tailJyutpings[0...index].reduce("", +)
+                        if let one: Candidate = match(for: rawTailJyutpings, count: 1).first {
+                                let newCandidate: Candidate = combine.first! + one
+                                combine.insert(newCandidate, at: 0)
+                                if combine[1].text.count == combine[2].text.count {
+                                        let secondCandidate: Candidate = combine[2] + one
+                                        combine.insert(secondCandidate, at: 1)
+                                }
+                                break
+                        }
+                }
+        }
+        return fullMatch + prefix(match: text, count: 10) + combine + shortcut(for: text)
+}
+private func processPartialJyutpingV1(text: String, jyutpings: [String], rawJyutpings: String) -> [Candidate] {
+        var combine: [Candidate] = match(for: rawJyutpings)
+        var firstMatchedJyutpingCount: Int = combine.isEmpty ? 0 : jyutpings.count
+        if jyutpings.count > 1 {
+                for (number, _) in jyutpings.enumerated().reversed() {
+                        let prefix: String = jyutpings[0..<number].reduce("", +)
+                        let matched: [Candidate] = match(for: prefix)
+                        if firstMatchedJyutpingCount == 0 && !matched.isEmpty {
+                                firstMatchedJyutpingCount = number
+                        }
+                        combine += matched
+                }
+        }
+        if !combine.isEmpty {
+                var hasTailCandidate: Bool = false
+                
+                let tailText: String = String(text.dropFirst(combine.first!.input.count))
+                let tailJyutpings: [String] = Array(jyutpings.dropFirst(firstMatchedJyutpingCount))
+                if let tailOne: Candidate = prefix(match: tailText, count: 1).first {
+                        let newCandidate: Candidate = combine.first! + tailOne
+                        combine.insert(newCandidate, at: 0)
+                        hasTailCandidate = true
+                } else {
+                        let rawTailJyutpings: String = tailJyutpings.reduce("", +)
+                        if tailText.count - rawTailJyutpings.count > 1 {
+                                let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - rawTailJyutpings.count - 1))
+                                if let one: Candidate = prefix(match: tailRawJPPlusOne, count: 1).first {
+                                        let newCandidate: Candidate = combine.first! + one
+                                        combine.insert(newCandidate, at: 0)
+                                        hasTailCandidate = true
+                                }
+                        }
+                }
+                if !hasTailCandidate {
+                        for (index, _) in tailJyutpings.enumerated().reversed() {
+                                let someJPs: String = tailJyutpings[0...index].reduce("", +)
+                                if let one: Candidate = match(for: someJPs, count: 1).first {
+                                        let newCandidate: Candidate = combine.first! + one
+                                        combine.insert(newCandidate, at: 0)
+                                        break
+                                }
+                        }
+                }
+        }
+        return match(for: text) + prefix(match: text, count: 10) + combine + shortcut(for: text)
+}
+*/
 
 
 /*
