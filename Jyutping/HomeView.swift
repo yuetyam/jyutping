@@ -50,8 +50,9 @@ struct HomeView: View {
                                 .padding()
                                 
                                 Button(action: {
-                                        let url: URL = URL(string: UIApplication.openSettingsURLString)!
-                                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                                        if let url: URL = URL(string: UIApplication.openSettingsURLString) {
+                                                UIApplication.shared.open(url)
+                                        }
                                 }) {
                                         HStack{
                                                 Spacer()
