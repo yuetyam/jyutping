@@ -5,11 +5,6 @@ extension KeyboardViewController {
         func setupKeyboard() {
                 DispatchQueue.main.async {
                         self.setupKeyboardLayout()
-                        
-                        // FIXME: - iPad floating keyboard
-                        if !(self.traitCollection.userInterfaceIdiom == .pad && (self.traitCollection.horizontalSizeClass == .compact || self.view.frame.width < 500)) {
-                                self.view.layoutIfNeeded()
-                        }
                 }
         }
         private func setupKeyboardLayout() {
@@ -31,7 +26,6 @@ extension KeyboardViewController {
         private func setup(layout: KeyboardLayout) {
                 keyboardStackView.removeAllArrangedSubviews()
                 toolBar.tintColor = isDarkAppearance ? .white : .black
-                toolBar.update()
                 keyboardStackView.addArrangedSubview(toolBar)
                 let keysRows: [UIStackView] = makeKeysRows(for: layout.keys(for: self))
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)

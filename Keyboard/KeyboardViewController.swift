@@ -42,23 +42,38 @@ final class KeyboardViewController: UIInputViewController {
         
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
-                setupKeyboard()
+                if askingDifferentKeyboardLayout {
+                        keyboardLayout = answeredKeyboardLayout
+                } else {
+                        setupKeyboard()
+                        didKeyboardEstablished = true
+                }
         }
         
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
                 appearance = detectAppearance()
-                setupKeyboard()
+                if didKeyboardEstablished {
+                        setupKeyboard()
+                }
         }
+        
+        private lazy var didKeyboardEstablished: Bool = false
+        private lazy var askingDifferentKeyboardLayout: Bool = false
         
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
-                if answeredKeyboardLayout != askedKeyboardLayout {
-                        answeredKeyboardLayout = askedKeyboardLayout
-                        keyboardLayout = answeredKeyboardLayout
+                let asked: KeyboardLayout = askedKeyboardLayout
+                if answeredKeyboardLayout != asked {
+                        answeredKeyboardLayout = asked
+                        askingDifferentKeyboardLayout = true
+                        if didKeyboardEstablished {
+                                keyboardLayout = answeredKeyboardLayout
+                        }
                 }
         }
+        
         private lazy var answeredKeyboardLayout: KeyboardLayout = .jyutping
         
         var askedKeyboardLayout: KeyboardLayout {
@@ -80,12 +95,16 @@ final class KeyboardViewController: UIInputViewController {
         
         var keyboardLayout: KeyboardLayout = .jyutping {
                 didSet {
-                        if keyboardLayout != .jyutping &&
-                                keyboardLayout != .jyutpingUppercase &&
-                                keyboardLayout != .candidateBoard {
-                                currentInputText = ""
-                        }
                         setupKeyboard()
+                        if didKeyboardEstablished {
+                                if keyboardLayout != .jyutping &&
+                                        keyboardLayout != .jyutpingUppercase &&
+                                        keyboardLayout != .candidateBoard {
+                                        currentInputText = ""
+                                }
+                        } else {
+                                didKeyboardEstablished = true
+                        }
                 }
         }
         
@@ -97,7 +116,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         if currentInputText.isEmpty {
                                 candidates = []
-                        } else {
+                        } else if keyboardLayout == .jyutping {
                                 imeQueue.async {
                                         self.suggestCandidates()
                                 }

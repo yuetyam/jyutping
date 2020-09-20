@@ -11,7 +11,6 @@ extension UIStackView {
         /// Remove all arranged subviews from the stack.
         func removeAllArrangedSubviews() {
                 _ = arrangedSubviews.map {
-                        removeArrangedSubview($0)
                         $0.removeFromSuperview()
                 }
         }
