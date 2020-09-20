@@ -172,6 +172,14 @@ struct SearchWebsitesView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
                                 .padding(.horizontal)
                         
+                        LinkButton(url: URL(string: "https://shyyp.net/hant")!,
+                                   content: MessageView(icon: "doc.text.magnifyingglass",
+                                                        text: Text("羊羊粵語"),
+                                                        symbol: Image(systemName: "safari")))
+                                .padding(.vertical)
+                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .padding(.horizontal)
+                        
                         LinkButton(url: URL(string: "https://open-dict-data.github.io/ipa-lookup/yue")!,
                                    content: MessageView(icon: "doc.text.magnifyingglass",
                                                         text: Text("粵語國際音標查詢"),
