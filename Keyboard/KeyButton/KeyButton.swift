@@ -111,8 +111,14 @@ final class KeyButton: UIButton {
                 invalidateBackspaceTimers()
                 
                 if keyboardEvent == .space {
-                        if !performedDraggingOnSpace {
-                                if viewController.keyboardLayout == .jyutping && !viewController.candidates.isEmpty {
+                        guard !performedDraggingOnSpace else {
+                                spaceTouchPoint = .zero
+                                changeColorToNormal()
+                                return
+                        }
+                        switch viewController.keyboardLayout {
+                        case .jyutping, .jyutpingUppercase:
+                                if !viewController.candidates.isEmpty {
                                         let candidate: Candidate = viewController.candidates[0]
                                         viewController.textDocumentProxy.insertText(candidate.text)
                                         AudioFeedback.perform(audioFeedback: .modify)
@@ -128,13 +134,19 @@ final class KeyButton: UIButton {
                                                         self.viewController.lexiconManager.handle(candidate: combinedCandidate)
                                                 }
                                         }
-                                } else if viewController.keyboardLayout == .jyutping && !viewController.currentInputText.isEmpty {
+                                } else if !viewController.currentInputText.isEmpty {
                                         viewController.textDocumentProxy.insertText(viewController.currentInputText)
                                         viewController.currentInputText = ""
                                         AudioFeedback.perform(audioFeedback: .modify)
-                                } else {
-                                        viewController.textDocumentProxy.insertText(" ")
-                                        AudioFeedback.play(for: .space)
+                                }
+                                if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .jyutping
+                                }
+                        default:
+                                viewController.textDocumentProxy.insertText(" ")
+                                AudioFeedback.play(for: .space)
+                                if viewController.keyboardLayout == .alphabeticUppercase && !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .alphabetic
                                 }
                         }
                         spaceTouchPoint = .zero
