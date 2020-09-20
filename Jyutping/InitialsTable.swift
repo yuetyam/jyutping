@@ -5,11 +5,11 @@ struct InitialsTable: View {
         var body: some View {
                 ScrollView {
                         CellView(content: "例字,IPA,粵拼")
-                                .padding(.vertical, 6)
+                                .padding(.vertical)
                         
-                        ForEach(lines, id: \.self) { item in
-                                CellView(content: item)
-                                        .overlay(Rectangle().stroke(Color.secondary, lineWidth: 0.2))
+                        ForEach(lines, id: \.self) {
+                                Divider()
+                                CellView(content: $0)
                         }
                         Spacer().frame(width: 1, height: 1)
                                 .foregroundColor(.clear)
@@ -80,10 +80,12 @@ private struct CellView: View {
 struct FinalsTable: View {
         var body: some View {
                 ScrollView {
-                        CellView(content: "例字,IPA,粵拼").padding(.vertical, 10)
-                        ForEach(lines, id: \.self) { item in
-                                CellView(content: item)
-                                        .overlay(Rectangle().stroke(Color.secondary, lineWidth: 0.2))
+                        CellView(content: "例字,IPA,粵拼")
+                                .padding(.vertical)
+                        
+                        ForEach(lines, id: \.self) {
+                                Divider()
+                                CellView(content: $0)
                         }
                         Spacer().frame(width: 1, height: 1)
                                 .foregroundColor(.clear)
@@ -171,11 +173,11 @@ struct TonesTable: View {
         var body: some View {
                 ScrollView {
                         ToneCellView(content: "例字,調值,聲調,粵拼")
-                                .padding(.vertical, 6)
+                                .padding(.vertical)
                         
-                        ForEach(lines, id: \.self) { item in
-                                ToneCellView(content: item)
-                                        .overlay(Rectangle().stroke(Color.secondary, lineWidth: 0.2))
+                        ForEach(lines, id: \.self) {
+                                Divider()
+                                ToneCellView(content: $0)
                         }
                         Spacer().frame(width: 1, height: 1)
                                 .foregroundColor(.clear)
