@@ -61,8 +61,8 @@ struct JyutpingView: View {
                                         Text("Search on other places (websites)").font(.headline)
                                         Spacer()
                                 }
-                                .padding(.horizontal, 24)
-                                .padding(.top, 24)
+                                .padding(.horizontal, 16)
+                                .padding(.top, 40)
                                 
                                 SearchWebsitesView()
                                 
@@ -70,8 +70,8 @@ struct JyutpingView: View {
                                         Text("Jyutping resources").font(.headline)
                                         Spacer()
                                 }
-                                .padding(.horizontal, 24)
-                                .padding(.top, 32)
+                                .padding(.horizontal, 16)
+                                .padding(.top, 40)
                                 
                                 JyutpingWebsitesView()
                                         .padding(.bottom, 80)
@@ -188,7 +188,6 @@ struct SearchWebsitesView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
                                 .padding(.horizontal)
                 }
-                .padding(.bottom, 16)
         }
 }
 
@@ -235,6 +234,5 @@ struct JyutpingWebsitesView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
                                 .padding(.horizontal)
                 }
-                .padding(.bottom, 16)
         }
 }
