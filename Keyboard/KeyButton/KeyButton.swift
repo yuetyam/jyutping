@@ -138,6 +138,9 @@ final class KeyButton: UIButton {
                                         viewController.textDocumentProxy.insertText(viewController.currentInputText)
                                         viewController.currentInputText = ""
                                         AudioFeedback.perform(audioFeedback: .modify)
+                                } else {
+                                        viewController.textDocumentProxy.insertText(" ")
+                                        AudioFeedback.play(for: .space)
                                 }
                                 if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
                                         viewController.keyboardLayout = .jyutping
