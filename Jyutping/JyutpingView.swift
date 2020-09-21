@@ -2,7 +2,7 @@ import SwiftUI
 
 struct JyutpingView: View {
         
-        private let placeholdText: String = NSLocalizedString("Search the Jyutping of Cantonese word", comment: "")
+        private let placeholdText: String = NSLocalizedString("Search for Jyutping", comment: "")
         
         @State private var inputText: String = String()
         
@@ -18,6 +18,7 @@ struct JyutpingView: View {
                                 EnhancedTextField(placeholder: placeholdText, text: $inputText, returnKeyType: .search)
                                         .padding(8)
                                         .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary).opacity(0.5))
+                                        .frame(maxHeight: 38)
                                         .padding()
                                 
                                 if !inputText.isEmpty {
