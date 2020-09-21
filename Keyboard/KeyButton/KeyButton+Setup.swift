@@ -198,36 +198,33 @@ extension KeyButton {
                 let pointG: CGPoint = CGPoint(x: pointFArcCenter.x + keyCornerRadius, y: pointBArcCenter.y)
                 let pointHArcCenter: CGPoint = CGPoint(x: pointFArcCenter.x, y: pointG.y)
                 
-                let stepWidth: CGFloat = (pointBArcCenter.y - pointC.y) / 4
-                let pointB1C: CGPoint = CGPoint(x: pointC.x, y: pointBArcCenter.y - stepWidth)
-                let pointB2C: CGPoint = CGPoint(x: pointC.x, y: pointB1C.y - stepWidth)
-                let pointB3C: CGPoint = CGPoint(x: pointC.x, y: pointB2C.y - stepWidth)
-                let pointF1G: CGPoint = CGPoint(x: pointG.x, y: pointFArcCenter.y + stepWidth)
-                let pointF2G: CGPoint = CGPoint(x: pointG.x, y: pointF1G.y + stepWidth)
-                let pointF3G: CGPoint = CGPoint(x: pointG.x, y: pointF2G.y + stepWidth)
+                let stepHeight: CGFloat = (pointBArcCenter.y - pointC.y) / 3
+                let pointB1C: CGPoint = CGPoint(x: pointC.x, y: pointBArcCenter.y - stepHeight)
+                let pointB2C: CGPoint = CGPoint(x: pointC.x, y: pointB1C.y - stepHeight)
+                let pointF1G: CGPoint = CGPoint(x: pointG.x, y: pointFArcCenter.y + stepHeight)
+                let pointF2G: CGPoint = CGPoint(x: pointG.x, y: pointF1G.y + stepHeight)
+                let stepWidth: CGFloat = (pointE.x - pointDArcCenter.x) / 3
+                let pointD1E: CGPoint = CGPoint(x: pointDArcCenter.x + stepWidth, y: pointE.y)
+                let pointD2E: CGPoint = CGPoint(x: pointD1E.x + stepWidth, y: pointE.y)
                 
                 let path: UIBezierPath = UIBezierPath()
                 path.move(to: origin)
                 path.addLine(to: pointA)
                 path.addArc(withCenter: pointBArcCenter, radius: keyCornerRadius, startAngle: (3 * CGFloat.pi / 2), endAngle: CGFloat.pi, clockwise: true)
-                
                 path.addLine(to: pointB1C)
                 path.addLine(to: pointB2C)
-                path.addLine(to: pointB3C)
-                
                 path.addLine(to: pointC)
                 path.addArc(withCenter: pointDArcCenter, radius: keyCornerRadius, startAngle: CGFloat.pi, endAngle: (3 * CGFloat.pi / 2), clockwise: true)
+                path.addLine(to: pointD1E)
+                path.addLine(to: pointD2E)
                 path.addLine(to: pointE)
                 path.addArc(withCenter: pointFArcCenter, radius: keyCornerRadius, startAngle: (3 * CGFloat.pi / 2), endAngle: 0, clockwise: true)
-                
                 path.addLine(to: pointF1G)
                 path.addLine(to: pointF2G)
-                path.addLine(to: pointF3G)
-                
                 path.addLine(to: pointG)
                 path.addArc(withCenter: pointHArcCenter, radius: keyCornerRadius, startAngle: 0, endAngle: (CGFloat.pi / 2), clockwise: true)
-                
                 path.close()
+                
                 return path
         }
 }
