@@ -30,8 +30,8 @@ struct JyutpingProvider {
                         return suggestion.isEmpty ? [] : [suggestion]
                 }
         }
-        private static func fetchLeadingJyutping(for words: String) -> (jyutping: String, charCount: Int) {
-                var chars: String = words
+        private static func fetchLeadingJyutping(for word: String) -> (jyutping: String, charCount: Int) {
+                var chars: String = word
                 var jyutpings: [String] = []
                 var matchedCount: Int = 0
                 while !chars.isEmpty && jyutpings.isEmpty {
@@ -44,11 +44,11 @@ struct JyutpingProvider {
         
         private static func match(for text: String) -> [String] {
                 var jyutpings: [String] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE token = \(text.hash);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE word = '\(text)';"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // token = sqlite3_column_int64(queryStatement, 0)
+                                // let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 jyutpings.append(jyutping)
                         }
