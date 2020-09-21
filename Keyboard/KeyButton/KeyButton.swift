@@ -142,12 +142,15 @@ final class KeyButton: UIButton {
                                 if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
                                         viewController.keyboardLayout = .jyutping
                                 }
+                        case .alphabeticUppercase:
+                                viewController.textDocumentProxy.insertText(" ")
+                                AudioFeedback.play(for: .space)
+                                if !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .alphabetic
+                                }
                         default:
                                 viewController.textDocumentProxy.insertText(" ")
                                 AudioFeedback.play(for: .space)
-                                if viewController.keyboardLayout == .alphabeticUppercase && !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetic
-                                }
                         }
                         spaceTouchPoint = .zero
                         changeColorToNormal()

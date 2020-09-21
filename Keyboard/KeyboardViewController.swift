@@ -97,9 +97,7 @@ final class KeyboardViewController: UIInputViewController {
                 didSet {
                         setupKeyboard()
                         if didKeyboardEstablished {
-                                if keyboardLayout != .jyutping &&
-                                        keyboardLayout != .jyutpingUppercase &&
-                                        keyboardLayout != .candidateBoard {
+                                if !keyboardLayout.isJyutpingMode {
                                         currentInputText = ""
                                 }
                         } else {
@@ -116,7 +114,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         if currentInputText.isEmpty {
                                 candidates = []
-                        } else if keyboardLayout == .jyutping {
+                        } else {
                                 imeQueue.async {
                                         self.suggestCandidates()
                                 }

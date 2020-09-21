@@ -34,6 +34,9 @@ extension KeyButton {
                         } else {
                                 viewController.textDocumentProxy.insertText(viewController.currentInputText)
                                 viewController.currentInputText = ""
+                                if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
+                                        viewController.keyboardLayout = .jyutping
+                                }
                         }
                 case .switchTo(let layout):
                         viewController.keyboardLayout = layout

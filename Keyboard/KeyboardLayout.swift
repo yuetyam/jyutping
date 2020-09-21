@@ -54,6 +54,17 @@ enum KeyboardLayout: Equatable {
                         return false
                 }
         }
+        
+        var isJyutpingMode: Bool {
+                switch self {
+                case .jyutping,
+                     .jyutpingUppercase,
+                     .candidateBoard:
+                        return true
+                default:
+                        return false
+                }
+        }
 }
 
 private extension KeyboardLayout {
