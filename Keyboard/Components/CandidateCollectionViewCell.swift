@@ -15,7 +15,7 @@ final class CandidateCollectionViewCell: UICollectionViewCell {
                 textLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
                 textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
                 textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-                textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
+                textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
                 
                 footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(footnoteLabel)
