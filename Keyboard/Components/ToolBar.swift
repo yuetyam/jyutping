@@ -8,11 +8,6 @@ final class ToolBar: UIView {
                 self.viewController = viewController
                 super.init(frame: .zero)
                 heightAnchor.constraint(equalToConstant: 65).isActive = true
-                
-                inputLabel.adjustsFontForContentSizeCategory = true
-                inputLabel.font = .preferredFont(forTextStyle: .callout)
-                inputLabel.textAlignment = .left
-                
                 setupToolButtons()
         }
         
@@ -22,7 +17,6 @@ final class ToolBar: UIView {
         
         private var showingToolButtons: Bool = true
         func update() {
-                inputLabel.text = viewController.currentInputText
                 if viewController.currentInputText.isEmpty {
                         if !showingToolButtons {
                                 setupToolButtons()
@@ -38,7 +32,6 @@ final class ToolBar: UIView {
                 }
         }
         func reinit() {
-                inputLabel.text = viewController.currentInputText
                 if viewController.currentInputText.isEmpty {
                         setupToolButtons()
                         showingToolButtons = true
@@ -63,8 +56,6 @@ final class ToolBar: UIView {
         let yueEngSwitch: UISegmentedControl = UISegmentedControl(items: ["粵", "EN"])
         let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 18, bottomInset: 18)
         let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", rightInset: 15)
-        
-        let inputLabel: UILabel = UILabel()
         let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", rightInset: 12)
         
         private func setupToolButtons() {
@@ -77,10 +68,8 @@ final class ToolBar: UIView {
         }
         
         private func setupToolButtonsOnPhone() {
-                inputLabel.removeFromSuperview()
                 viewController.collectionView.removeFromSuperview()
                 downArrowButton.removeFromSuperview()
-                NSLayoutConstraint.deactivate(inputLabelConstaints)
                 NSLayoutConstraint.deactivate(collectionViewConstraints)
                 NSLayoutConstraint.deactivate(downArrowButtonConstaints)
                 
@@ -99,10 +88,8 @@ final class ToolBar: UIView {
                 NSLayoutConstraint.activate(keyboardDownButtonConstaints)
         }
         private func setupToolButtonsOnPad() {
-                inputLabel.removeFromSuperview()
                 viewController.collectionView.removeFromSuperview()
                 downArrowButton.removeFromSuperview()
-                NSLayoutConstraint.deactivate(inputLabelConstaints)
                 NSLayoutConstraint.deactivate(collectionViewConstraints)
                 NSLayoutConstraint.deactivate(downArrowButtonConstaints)
                 
@@ -128,10 +115,6 @@ final class ToolBar: UIView {
                 NSLayoutConstraint.deactivate(yueEngSwitchAndPasteButtonConstraintsOnPhone)
                 NSLayoutConstraint.deactivate(yueEngSwitchConstraintsOnPad)
                 NSLayoutConstraint.deactivate(keyboardDownButtonConstaints)
-                
-                addSubview(inputLabel)
-                inputLabel.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate(inputLabelConstaints)
                 
                 addSubview(viewController.collectionView)
                 viewController.collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -204,12 +187,6 @@ final class ToolBar: UIView {
                         keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor),
                         keyboardDownButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -width)]
         }
-        private var inputLabelConstaints: [NSLayoutConstraint] {
-                [inputLabel.topAnchor.constraint(equalTo: topAnchor),
-                 inputLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-                 inputLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-                 inputLabel.bottomAnchor.constraint(equalTo: topAnchor, constant: 18)]
-        }
         private var downArrowButtonConstaints: [NSLayoutConstraint] {
                 [downArrowButton.topAnchor.constraint(equalTo: topAnchor),
                  downArrowButton.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -217,7 +194,7 @@ final class ToolBar: UIView {
                  downArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
         }
         var collectionViewConstraints: [NSLayoutConstraint] {
-                [viewController.collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+                [viewController.collectionView.topAnchor.constraint(equalTo: topAnchor),
                  viewController.collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
                  viewController.collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
                  viewController.collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
