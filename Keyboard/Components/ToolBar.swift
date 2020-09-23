@@ -48,12 +48,30 @@ final class ToolBar: UIView {
         
         let settingsButton: ToolButton = ToolButton(imageName: "gear", leftInset: 15)
         let yueEngSwitch: UISegmentedControl = UISegmentedControl(items: ["粵", "EN"])
+        let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 18, bottomInset: 18)
         let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", rightInset: 15)
         
         let inputLabel: UILabel = UILabel()
         let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", rightInset: 12)
         
         private func setupToolButtons() {
+                if viewController.traitCollection.userInterfaceIdiom == .phone {
+                        setupToolButtonsOnPhone()
+                } else {
+                        setupToolButtonsOnPad()
+                }
+                if UIPasteboard.general.hasStrings {
+                        pasteButton.isEnabled = true
+                        pasteButton.isUserInteractionEnabled = true
+                        pasteButton.alpha = 1.0
+                } else {
+                        pasteButton.isEnabled = false
+                        pasteButton.isUserInteractionEnabled = false
+                        pasteButton.alpha = 0.3
+                }
+        }
+        
+        private func setupToolButtonsOnPhone() {
                 inputLabel.removeFromSuperview()
                 viewController.collectionView.removeFromSuperview()
                 downArrowButton.removeFromSuperview()
@@ -67,7 +85,29 @@ final class ToolBar: UIView {
                 
                 addSubview(yueEngSwitch)
                 yueEngSwitch.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate(yueEngSwitchConstraints)
+                addSubview(pasteButton)
+                pasteButton.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate(yueEngSwitchAndPasteButtonConstraintsOnPhone)
+                
+                addSubview(keyboardDownButton)
+                keyboardDownButton.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate(keyboardDownButtonConstaints)
+        }
+        private func setupToolButtonsOnPad() {
+                inputLabel.removeFromSuperview()
+                viewController.collectionView.removeFromSuperview()
+                downArrowButton.removeFromSuperview()
+                NSLayoutConstraint.deactivate(inputLabelConstaints)
+                NSLayoutConstraint.deactivate(collectionViewConstraints)
+                NSLayoutConstraint.deactivate(downArrowButtonConstaints)
+                
+                addSubview(settingsButton)
+                settingsButton.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate(settingsButtonConstraints)
+                
+                addSubview(yueEngSwitch)
+                yueEngSwitch.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate(yueEngSwitchConstraintsOnPad)
                 
                 addSubview(keyboardDownButton)
                 keyboardDownButton.translatesAutoresizingMaskIntoConstraints = false
@@ -77,9 +117,11 @@ final class ToolBar: UIView {
         private func setupInputMode() {
                 settingsButton.removeFromSuperview()
                 yueEngSwitch.removeFromSuperview()
+                pasteButton.removeFromSuperview()
                 keyboardDownButton.removeFromSuperview()
                 NSLayoutConstraint.deactivate(settingsButtonConstraints)
-                NSLayoutConstraint.deactivate(yueEngSwitchConstraints)
+                NSLayoutConstraint.deactivate(yueEngSwitchAndPasteButtonConstraintsOnPhone)
+                NSLayoutConstraint.deactivate(yueEngSwitchConstraintsOnPad)
                 NSLayoutConstraint.deactivate(keyboardDownButtonConstaints)
                 
                 addSubview(inputLabel)
@@ -117,13 +159,45 @@ final class ToolBar: UIView {
                         settingsButton.leadingAnchor.constraint(equalTo: leadingAnchor),
                         settingsButton.widthAnchor.constraint(equalToConstant: width)]
         }
-        private var yueEngSwitchConstraints: [NSLayoutConstraint] {
+        private var yueEngSwitchConstraintsOnPad: [NSLayoutConstraint] {
                 let topBottomInset: CGFloat = isPhoneInterface ? 16 : 13
+                let leading: CGFloat = 55 + 32
                 let width: CGFloat = isPhoneInterface ? 105 : 120
                 return [yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
                         yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
-                        yueEngSwitch.leadingAnchor.constraint(equalTo: settingsButton.trailingAnchor, constant: 16),
+                        yueEngSwitch.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leading),
                         yueEngSwitch.widthAnchor.constraint(equalToConstant: width)]
+        }
+        private var yueEngSwitchAndPasteButtonConstraintsOnPhone: [NSLayoutConstraint] {
+                let keyboardWidth: CGFloat = UIScreen.main.bounds.width - self.safeAreaInsets.left - self.safeAreaInsets.right
+                let settingsWidth: CGFloat = 55
+                let keyboardDownWidth: CGFloat = 58
+                let midleSpace: CGFloat = keyboardWidth - settingsWidth - keyboardDownWidth
+                let switchWidth: CGFloat = 105
+                let pasteButtonWidth: CGFloat = 55
+                let space: CGFloat = (midleSpace - switchWidth - pasteButtonWidth) / 3
+                
+                let switchPortaitLeading: CGFloat = settingsWidth + space
+                let switchLandscapeLeading: CGFloat = settingsWidth + 32
+                let switchLeading: CGFloat = traitCollection.horizontalSizeClass == .compact ? switchPortaitLeading : switchLandscapeLeading
+                let pastePortaitLeading: CGFloat = settingsWidth + space + switchWidth + space
+                let pasteLandscapeLeading: CGFloat = settingsWidth + 32 + switchWidth + 32
+                let pasteLeading: CGFloat = traitCollection.horizontalSizeClass == .compact ? pastePortaitLeading : pasteLandscapeLeading
+                return [yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+                        yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+                        yueEngSwitch.leadingAnchor.constraint(equalTo: leadingAnchor, constant: switchLeading),
+                        yueEngSwitch.widthAnchor.constraint(equalToConstant: 105),
+                        pasteButton.topAnchor.constraint(equalTo: topAnchor),
+                        pasteButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+                        pasteButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: pasteLeading),
+                        pasteButton.widthAnchor.constraint(equalToConstant: 55)]
+        }
+        private var keyboardDownButtonConstaints: [NSLayoutConstraint] {
+                let width: CGFloat = isPhoneInterface ? 58 : 64
+                return [keyboardDownButton.topAnchor.constraint(equalTo: topAnchor),
+                        keyboardDownButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+                        keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+                        keyboardDownButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -width)]
         }
         private var inputLabelConstaints: [NSLayoutConstraint] {
                 [inputLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -137,14 +211,6 @@ final class ToolBar: UIView {
                  downArrowButton.trailingAnchor.constraint(equalTo: trailingAnchor),
                  downArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
         }
-        private var keyboardDownButtonConstaints: [NSLayoutConstraint] {
-                let width: CGFloat = isPhoneInterface ? 58 : 64
-                return [keyboardDownButton.topAnchor.constraint(equalTo: topAnchor),
-                        keyboardDownButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-                        keyboardDownButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-                        keyboardDownButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -width)]
-        }
-        
         var collectionViewConstraints: [NSLayoutConstraint] {
                 [viewController.collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
                  viewController.collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
