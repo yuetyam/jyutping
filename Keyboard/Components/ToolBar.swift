@@ -27,6 +27,8 @@ final class ToolBar: UIView {
                         if !showingToolButtons {
                                 setupToolButtons()
                                 showingToolButtons = true
+                        } else {
+                                refreshPasteButtonState()
                         }
                 } else {
                         if showingToolButtons {
@@ -45,6 +47,17 @@ final class ToolBar: UIView {
                         showingToolButtons = false
                 }
         }
+        private func refreshPasteButtonState() {
+                if UIPasteboard.general.hasStrings {
+                        pasteButton.isEnabled = true
+                        pasteButton.isUserInteractionEnabled = true
+                        pasteButton.alpha = 1.0
+                } else {
+                        pasteButton.isEnabled = false
+                        pasteButton.isUserInteractionEnabled = false
+                        pasteButton.alpha = 0.2
+                }
+        }
         
         let settingsButton: ToolButton = ToolButton(imageName: "gear", leftInset: 15)
         let yueEngSwitch: UISegmentedControl = UISegmentedControl(items: ["粵", "EN"])
@@ -61,17 +74,6 @@ final class ToolBar: UIView {
                         setupToolButtonsOnPad()
                 }
                 refreshPasteButtonState()
-        }
-        func refreshPasteButtonState() {
-                if UIPasteboard.general.hasStrings {
-                        pasteButton.isEnabled = true
-                        pasteButton.isUserInteractionEnabled = true
-                        pasteButton.alpha = 1.0
-                } else {
-                        pasteButton.isEnabled = false
-                        pasteButton.isUserInteractionEnabled = false
-                        pasteButton.alpha = 0.2
-                }
         }
         
         private func setupToolButtonsOnPhone() {
