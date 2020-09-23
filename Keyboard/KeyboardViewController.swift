@@ -118,9 +118,9 @@ final class KeyboardViewController: UIInputViewController {
                                 imeQueue.async {
                                         self.suggestCandidates()
                                 }
-                                let range: NSRange = NSRange(location: currentInputText.count, length: 0)
-                                textDocumentProxy.setMarkedText(currentInputText, selectedRange: range)
                         }
+                        let range: NSRange = NSRange(location: currentInputText.count, length: 0)
+                        textDocumentProxy.setMarkedText(currentInputText, selectedRange: range)
                 }
         }
         
