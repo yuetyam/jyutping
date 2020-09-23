@@ -60,6 +60,9 @@ final class ToolBar: UIView {
                 } else {
                         setupToolButtonsOnPad()
                 }
+                refreshPasteButtonState()
+        }
+        func refreshPasteButtonState() {
                 if UIPasteboard.general.hasStrings {
                         pasteButton.isEnabled = true
                         pasteButton.isUserInteractionEnabled = true
@@ -67,7 +70,7 @@ final class ToolBar: UIView {
                 } else {
                         pasteButton.isEnabled = false
                         pasteButton.isUserInteractionEnabled = false
-                        pasteButton.alpha = 0.3
+                        pasteButton.alpha = 0.2
                 }
         }
         
