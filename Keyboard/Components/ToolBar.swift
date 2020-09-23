@@ -7,7 +7,7 @@ final class ToolBar: UIView {
         init(viewController: KeyboardViewController) {
                 self.viewController = viewController
                 super.init(frame: .zero)
-                heightAnchor.constraint(equalToConstant: 65).isActive = true
+                heightAnchor.constraint(equalToConstant: 60).isActive = true
                 setupToolButtons()
         }
         
@@ -54,7 +54,7 @@ final class ToolBar: UIView {
         
         let settingsButton: ToolButton = ToolButton(imageName: "gear", leftInset: 15)
         let yueEngSwitch: UISegmentedControl = UISegmentedControl(items: ["粵", "EN"])
-        let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 18, bottomInset: 18)
+        let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 17, bottomInset: 16)
         let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", rightInset: 15)
         let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", rightInset: 12)
         
@@ -148,7 +148,7 @@ final class ToolBar: UIView {
                         settingsButton.widthAnchor.constraint(equalToConstant: width)]
         }
         private var yueEngSwitchConstraintsOnPad: [NSLayoutConstraint] {
-                let topBottomInset: CGFloat = isPhoneInterface ? 16 : 13
+                let topBottomInset: CGFloat = isPhoneInterface ? 14 : 11
                 let leading: CGFloat = 55 + 32
                 let width: CGFloat = isPhoneInterface ? 105 : 120
                 return [yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
@@ -171,8 +171,8 @@ final class ToolBar: UIView {
                 let pastePortaitLeading: CGFloat = settingsWidth + space + switchWidth + space
                 let pasteLandscapeLeading: CGFloat = settingsWidth + 32 + switchWidth + 32
                 let pasteLeading: CGFloat = traitCollection.horizontalSizeClass == .compact ? pastePortaitLeading : pasteLandscapeLeading
-                return [yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-                        yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+                return [yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: 14),
+                        yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14),
                         yueEngSwitch.leadingAnchor.constraint(equalTo: leadingAnchor, constant: switchLeading),
                         yueEngSwitch.widthAnchor.constraint(equalToConstant: 105),
                         pasteButton.topAnchor.constraint(equalTo: topAnchor),
