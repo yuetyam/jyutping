@@ -97,14 +97,7 @@ final class ToolBar: UIView {
                 addSubview(keyboardDownButton)
                 keyboardDownButton.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(keyboardDownButtonConstaints)
-                
-                pasteButton.addTarget(self, action: #selector(pasteText), for: .touchUpInside)
         }
-        @objc private func pasteText() {
-                guard let textToPaste: String = UIPasteboard.general.string else { return }
-                viewController.textDocumentProxy.insertText(textToPaste)
-        }
-        
         private func setupToolButtonsOnPad() {
                 inputLabel.removeFromSuperview()
                 viewController.collectionView.removeFromSuperview()
