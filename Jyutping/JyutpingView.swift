@@ -33,6 +33,7 @@ struct JyutpingView: View {
                                                         .padding()
                                                         .fillBackground()
                                                         .padding(.horizontal)
+                                                        .fixedSize(horizontal: false, vertical: true)
                                                 } else {
                                                         VStack {
                                                                 HStack {
