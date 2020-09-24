@@ -13,7 +13,7 @@ struct JyutpingView: View {
         var body: some View {
                 NavigationView {
                         ZStack {
-                                Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all)
+                                GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 ScrollView {
                                         HStack {
                                                 Image(systemName: "magnifyingglass").opacity(0.5).padding(.leading, 8)

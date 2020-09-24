@@ -20,8 +20,7 @@ struct HomeView: View {
         var body: some View {
                 NavigationView {
                         ZStack {
-                                Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all)
-                                
+                                GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 ScrollView {
                                         /*
                                          TextField("Type here to test keyboards", text: $placeholdText)

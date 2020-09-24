@@ -3,7 +3,7 @@ import SwiftUI
 struct AcknowledgementsView: View {
         var body: some View {
                 ZStack {
-                        Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all)
+                        GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                         ScrollView {
                                 LinkButton(url: URL(string: "https://github.com/ddddxxx/SwiftyOpenCC")!,
                                            content: MessageView(icon: "briefcase",

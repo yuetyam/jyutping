@@ -8,8 +8,7 @@ struct AboutView: View {
         var body: some View {
                 NavigationView {
                         ZStack {
-                                Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all)
-                                
+                                GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 ScrollView {
                                         
                                         // MARK: - Version

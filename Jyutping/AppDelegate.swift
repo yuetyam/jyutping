@@ -34,6 +34,36 @@ struct ContentView_Previews: PreviewProvider {
 
 extension View {
         func fillBackground() -> some View {
-                self.background(RoundedRectangle(cornerRadius: 7).fill(Color(UIColor.systemBackground)))
+                modifier(FillBackgroundColor())
+        }
+}
+private struct FillBackgroundColor: ViewModifier {
+        @Environment (\.colorScheme) var colorScheme: ColorScheme
+        func body(content: Content) -> some View {
+                let backgroundColor: Color = {
+                        switch colorScheme {
+                        case .light:
+                                return Color(UIColor.systemBackground)
+                        case .dark:
+                                return Color(UIColor.secondarySystemBackground)
+                        @unknown default:
+                                return Color(UIColor.systemBackground)
+                        }
+                }()
+                return content.background(RoundedRectangle(cornerRadius: 7).fill(backgroundColor))
+        }
+}
+
+struct GlobalBackgroundColor: View {
+        @Environment (\.colorScheme) var colorScheme: ColorScheme
+        var body: some View {
+                switch colorScheme {
+                case .light:
+                        return Color(UIColor.secondarySystemBackground)
+                case .dark:
+                        return Color(UIColor.systemBackground)
+                @unknown default:
+                        return Color(UIColor.secondarySystemBackground)
+                }
         }
 }
