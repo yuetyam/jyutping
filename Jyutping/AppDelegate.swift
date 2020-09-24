@@ -31,3 +31,9 @@ struct ContentView_Previews: PreviewProvider {
                 ContentView()
         }
 }
+
+extension View {
+        func fillBackground() -> some View {
+                self.background(RoundedRectangle(cornerRadius: 7).fill(Color(UIColor.systemBackground)))
+        }
+}

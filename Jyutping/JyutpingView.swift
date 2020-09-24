@@ -12,73 +12,73 @@ struct JyutpingView: View {
         
         var body: some View {
                 NavigationView {
-                        ScrollView {
-                                Divider()
-                                
-                                EnhancedTextField(placeholder: placeholdText, text: $inputText, returnKeyType: .search)
-                                        .padding(8)
-                                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary).opacity(0.5))
-                                        .frame(maxHeight: 38)
-                                        .padding()
-                                
-                                if !inputText.isEmpty {
-                                        if jyutpings.isEmpty {
-                                                HStack {
-                                                        Text("No results.") + Text("\n") + Text("Common Cantonese words only.").font(.footnote)
-                                                        Spacer()
-                                                }
-                                                .padding()
-                                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                                .padding(.horizontal)
-                                        } else {
-                                                VStack {
-                                                        HStack {
-                                                                Text(rawCantonese).font(.headline)
-                                                        }
-                                                        .padding(.top)
-                                                        .padding(.horizontal)
-                                                        
-                                                        Divider()
-                                                        
-                                                        ForEach(jyutpings) { (jyutping) in
-                                                                HStack {
-                                                                        Text(jyutping)
-                                                                                .font(.system(.body, design: .monospaced))
-                                                                                .fixedSize(horizontal: false, vertical: true)
-                                                                        Spacer()
-                                                                }.padding(.horizontal)
-                                                                
-                                                                Divider()
-                                                        }
-                                                }
-                                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                                .padding(.horizontal)
+                        ZStack {
+                                Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all)
+                                ScrollView {
+                                        HStack {
+                                                Image(systemName: "magnifyingglass").opacity(0.5).padding(.leading, 8)
+                                                EnhancedTextField(placeholder: placeholdText, text: $inputText, returnKeyType: .search)
+                                                        .padding(.vertical, 8)
+                                                        .frame(maxHeight: 38)
                                         }
+                                        .fillBackground()
+                                        .padding()
+                                        
+                                        if !inputText.isEmpty {
+                                                if jyutpings.isEmpty {
+                                                        HStack {
+                                                                Text("No results.") + Text("\n") + Text("Common Cantonese words only.").font(.footnote)
+                                                                Spacer()
+                                                        }
+                                                        .padding()
+                                                        .fillBackground()
+                                                        .padding(.horizontal)
+                                                } else {
+                                                        VStack {
+                                                                HStack {
+                                                                        Text(rawCantonese).font(.headline)
+                                                                }
+                                                                
+                                                                ForEach(jyutpings) { jyutping in
+                                                                        Divider()
+                                                                        HStack {
+                                                                                Text(jyutping)
+                                                                                        .font(.system(.body, design: .monospaced))
+                                                                                        .fixedSize(horizontal: false, vertical: true)
+                                                                                Spacer()
+                                                                        }.padding(.horizontal)
+                                                                }
+                                                        }
+                                                        .padding(.vertical)
+                                                        .fillBackground()
+                                                        .padding(.horizontal)
+                                                }
+                                        }
+                                        
+                                        JyutpingTable().padding(.top, 30)
+                                        
+                                        HStack {
+                                                Text("Search on other places (websites)").font(.headline)
+                                                Spacer()
+                                        }
+                                        .padding(.horizontal, 16)
+                                        .padding(.top, 40)
+                                        
+                                        SearchWebsitesView()
+                                        
+                                        HStack {
+                                                Text("Jyutping resources").font(.headline)
+                                                Spacer()
+                                        }
+                                        .padding(.horizontal, 16)
+                                        .padding(.top, 40)
+                                        
+                                        JyutpingWebsitesView()
+                                                .padding(.bottom, 80)
                                 }
-                                
-                                JyutpingTable().padding(.top, 30)
-                                
-                                HStack {
-                                        Text("Search on other places (websites)").font(.headline)
-                                        Spacer()
-                                }
-                                .padding(.horizontal, 16)
-                                .padding(.top, 40)
-                                
-                                SearchWebsitesView()
-                                
-                                HStack {
-                                        Text("Jyutping resources").font(.headline)
-                                        Spacer()
-                                }
-                                .padding(.horizontal, 16)
-                                .padding(.top, 40)
-                                
-                                JyutpingWebsitesView()
-                                        .padding(.bottom, 80)
+                                .foregroundColor(.primary)
+                                .navigationBarTitle(Text("Jyutping"))
                         }
-                        .foregroundColor(.primary)
-                        .navigationBarTitle(Text("Jyutping"))
                 }
                 .tabItem {
                         Image(systemName: "doc.text.magnifyingglass")
@@ -133,7 +133,7 @@ private struct JyutpingTable: View {
                                 .padding(.bottom)
                         }
                 }
-                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                .fillBackground()
                 .padding()
         }
 }
@@ -146,7 +146,7 @@ struct SearchWebsitesView: View {
                                                         text: Text("粵音資料集叢"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://words.hk")!,
@@ -154,7 +154,7 @@ struct SearchWebsitesView: View {
                                                         text: Text("粵典"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")!,
@@ -162,7 +162,7 @@ struct SearchWebsitesView: View {
                                                         text: Text("粵語審音配詞字庫"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://www.jyutdict.org")!,
@@ -170,7 +170,7 @@ struct SearchWebsitesView: View {
                                                         text: Text("泛粵大典"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://shyyp.net/hant")!,
@@ -178,7 +178,7 @@ struct SearchWebsitesView: View {
                                                         text: Text("羊羊粵語"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://open-dict-data.github.io/ipa-lookup/yue")!,
@@ -186,7 +186,7 @@ struct SearchWebsitesView: View {
                                                         text: Text("粵語國際音標查詢"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                 }
         }
@@ -200,7 +200,7 @@ struct JyutpingWebsitesView: View {
                                                         text: Text("粵拼 jyutping.org"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://www.lshk.org/jyutping")!,
@@ -208,7 +208,7 @@ struct JyutpingWebsitesView: View {
                                                         text: Text("LSHK Jyutping 粵拼"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!,
@@ -216,7 +216,7 @@ struct JyutpingWebsitesView: View {
                                                         text: Text("粵拼視頻教學 - YouTube"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "http://jyutping.lt.cityu.edu.hk")!,
@@ -224,7 +224,7 @@ struct JyutpingWebsitesView: View {
                                                         text: Text("粵語拼音資源站 - CityU"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                         
                         LinkButton(url: URL(string: "http://www.iso10646hk.net/jp")!,
@@ -232,7 +232,7 @@ struct JyutpingWebsitesView: View {
                                                         text: Text("粵拼 - iso10646hk.net"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
+                                .fillBackground()
                                 .padding(.horizontal)
                 }
         }

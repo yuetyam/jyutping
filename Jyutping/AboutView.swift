@@ -7,93 +7,95 @@ struct AboutView: View {
         
         var body: some View {
                 NavigationView {
-                        ScrollView {
-                                Divider()
+                        ZStack {
+                                Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all)
                                 
-                                
-                                // MARK: - Version
-                                
-                                VersionLabel()
-                                        .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                        .padding()
-                                
-                                
-                                // MARK: - Source Code & Privacy
-                                
-                                VStack {
-                                        LinkButton(url: URL(string: "https://github.com/yuetyam/jyutping")!,
-                                                   content: MessageView(icon: "number.circle", text: Text("Source Code"), symbol: Image(systemName: "safari")))
-                                                .padding(.top)
+                                ScrollView {
                                         
-                                        Divider()
+                                        // MARK: - Version
                                         
-                                        NavigationLink(destination: AcknowledgementsView()) {
-                                                MessageView(icon: "wand.and.stars",
-                                                            text: Text("Acknowledgements"),
-                                                            symbol: Image(systemName: "chevron.right"))
-                                        }
+                                        VersionLabel()
+                                                .fillBackground()
+                                                .padding()
                                         
-                                        Divider()
                                         
-                                        LinkButton(url: URL(string: "https://yuetyam.github.io/jyutping/privacy/privacy-policy-ios")!,
-                                                   content: MessageView(icon: "lock.circle", text: Text("Privacy Policy"), symbol: Image(systemName: "safari")))
-                                                .padding(.bottom)
-                                }
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding()
-                                
-                                
-                                // MARK: - Contact & Feedback
-                                
-                                VStack {
-                                        Button(action: {
-                                                let telegramUrl: URL = URL(string: "https://t.me/jyutping")!
-                                                UIApplication.shared.open(telegramUrl, options: [:], completionHandler: nil)
-                                        }) {
-                                                MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.right.square"))
-                                        }.padding(.top)
+                                        // MARK: - Source Code & Privacy
                                         
-                                        Divider()
-                                        
-                                        Button(action: {
-                                                let twitterUrl: URL = URL(string: "https://twitter.com/_cantonese")!
-                                                UIApplication.shared.open(twitterUrl, options: [:], completionHandler: nil)
-                                        }) {
-                                                MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.right.square"))
-                                        }
-                                        
-                                        Divider()
-                                        
-                                        MailFeedbackButton(mailComposeDelegate: mailComposeDelegate)
-                                                .padding(.bottom)
-                                }
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding()
-                                
-                                
-                                // MARK: - Review & Share
-                                
-                                VStack {
-                                        Button(action: {
-                                                if let url: URL = URL(string: "itms-apps://apple.com/app/id1509367629") {
-                                                        UIApplication.shared.open(url)
+                                        VStack {
+                                                LinkButton(url: URL(string: "https://github.com/yuetyam/jyutping")!,
+                                                           content: MessageView(icon: "number.circle", text: Text("Source Code"), symbol: Image(systemName: "safari")))
+                                                        .padding(.top)
+                                                
+                                                Divider()
+                                                
+                                                NavigationLink(destination: AcknowledgementsView()) {
+                                                        MessageView(icon: "wand.and.stars",
+                                                                    text: Text("Acknowledgements"),
+                                                                    symbol: Image(systemName: "chevron.right"))
                                                 }
-                                        }) {
-                                                MessageView(icon: "heart", text: Text("Review in App Store"))
-                                        }.padding(.top)
+                                                
+                                                Divider()
+                                                
+                                                LinkButton(url: URL(string: "https://yuetyam.github.io/jyutping/privacy/privacy-policy-ios")!,
+                                                           content: MessageView(icon: "lock.circle", text: Text("Privacy Policy"), symbol: Image(systemName: "safari")))
+                                                        .padding(.bottom)
+                                        }
+                                        .fillBackground()
+                                        .padding()
                                         
-                                        Divider()
                                         
-                                        ShareSheetView(content: MessageView(icon: "square.and.arrow.up", text: Text("Share this App")),
-                                                       activityItems: [URL(string: "https://apps.apple.com/app/id1509367629")!])
-                                                .padding(.bottom)
+                                        // MARK: - Contact & Feedback
+                                        
+                                        VStack {
+                                                Button(action: {
+                                                        let telegramUrl: URL = URL(string: "https://t.me/jyutping")!
+                                                        UIApplication.shared.open(telegramUrl, options: [:], completionHandler: nil)
+                                                }) {
+                                                        MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.right.square"))
+                                                }.padding(.top)
+                                                
+                                                Divider()
+                                                
+                                                Button(action: {
+                                                        let twitterUrl: URL = URL(string: "https://twitter.com/_cantonese")!
+                                                        UIApplication.shared.open(twitterUrl, options: [:], completionHandler: nil)
+                                                }) {
+                                                        MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.right.square"))
+                                                }
+                                                
+                                                Divider()
+                                                
+                                                MailFeedbackButton(mailComposeDelegate: mailComposeDelegate)
+                                                        .padding(.bottom)
+                                        }
+                                        .fillBackground()
+                                        .padding()
+                                        
+                                        
+                                        // MARK: - Review & Share
+                                        
+                                        VStack {
+                                                Button(action: {
+                                                        if let url: URL = URL(string: "itms-apps://apple.com/app/id1509367629") {
+                                                                UIApplication.shared.open(url)
+                                                        }
+                                                }) {
+                                                        MessageView(icon: "heart", text: Text("Review in App Store"))
+                                                }.padding(.top)
+                                                
+                                                Divider()
+                                                
+                                                ShareSheetView(content: MessageView(icon: "square.and.arrow.up", text: Text("Share this App")),
+                                                               activityItems: [URL(string: "https://apps.apple.com/app/id1509367629")!])
+                                                        .padding(.bottom)
+                                        }
+                                        .fillBackground()
+                                        .padding()
+                                        .padding(.bottom, 80)
                                 }
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding()
-                                .padding(.bottom, 80)
+                                .foregroundColor(.primary)
+                                .navigationBarTitle(Text("About"))
                         }
-                        .foregroundColor(.primary)
-                        .navigationBarTitle(Text("About"))
                 }
                 .tabItem {
                         Image(systemName: "info.circle")

@@ -19,71 +19,74 @@ struct HomeView: View {
         
         var body: some View {
                 NavigationView {
-                        ScrollView {
-                                Divider()
-                                /*
-                                TextField("Type here to test keyboards", text: $placeholdText)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .padding()
-                                */
-                                EnhancedTextField(placeholder: placeholder, text: $placeholdText, returnKeyType: .default)
-                                        .padding(8)
-                                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary).opacity(0.5))
-                                        .padding()
+                        ZStack {
+                                Color(UIColor.secondarySystemBackground).edgesIgnoringSafeArea(.all)
                                 
-                                VStack {
-                                        HStack {
-                                                Text("How to enable this Keyboard")
-                                                        .lineLimit(1)
-                                                        .font(.system(size: 20, weight: .medium, design: .default))
-                                                Spacer()
-                                        }
-                                        .padding(.bottom)
+                                ScrollView {
+                                        /*
+                                         TextField("Type here to test keyboards", text: $placeholdText)
+                                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                                         .padding()
+                                         */
+                                        EnhancedTextField(placeholder: placeholder, text: $placeholdText, returnKeyType: .default)
+                                                .padding(8)
+                                                .fillBackground()
+                                                .padding()
                                         
-                                        HStack {
-                                                enableKeyboard.fixedSize(horizontal: false, vertical: true)
-                                                Spacer()
+                                        VStack {
+                                                HStack {
+                                                        Text("How to enable this Keyboard")
+                                                                .lineLimit(1)
+                                                                .font(.system(size: 20, weight: .medium, design: .default))
+                                                        Spacer()
+                                                }
+                                                .padding(.bottom)
+                                                
+                                                HStack {
+                                                        enableKeyboard.fixedSize(horizontal: false, vertical: true)
+                                                        Spacer()
+                                                }
                                         }
-                                }
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding()
-                                
-                                Button(action: {
-                                        if let url: URL = URL(string: UIApplication.openSettingsURLString) {
-                                                UIApplication.shared.open(url)
-                                        }
-                                }) {
-                                        HStack{
-                                                Spacer()
-                                                Text("Open ") + Text("Settings").fontWeight(.medium) + Text(" App")
-                                                Spacer()
-                                        }
-                                }
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding(.horizontal)
-                                
-                                VStack {
-                                        HStack {
-                                                Text("How to add or edit keyboards")
-                                                        .lineLimit(1)
-                                                        .font(.system(size: 20, weight: .medium, design: .default))
-                                                Spacer()
-                                        }
-                                        .padding(.bottom)
+                                        .padding()
+                                        .fillBackground()
+                                        .padding()
                                         
-                                        HStack {
-                                                editingKeyboards.fixedSize(horizontal: false, vertical: true)
-                                                Spacer()
+                                        Button(action: {
+                                                if let url: URL = URL(string: UIApplication.openSettingsURLString) {
+                                                        UIApplication.shared.open(url)
+                                                }
+                                        }) {
+                                                HStack{
+                                                        Spacer()
+                                                        Text("Open ") + Text("Settings").fontWeight(.medium) + Text(" App")
+                                                        Spacer()
+                                                }
                                         }
+                                        .padding()
+                                        .fillBackground()
+                                        .padding(.horizontal)
+                                        
+                                        VStack {
+                                                HStack {
+                                                        Text("How to add or edit keyboards")
+                                                                .lineLimit(1)
+                                                                .font(.system(size: 20, weight: .medium, design: .default))
+                                                        Spacer()
+                                                }
+                                                .padding(.bottom)
+                                                
+                                                HStack {
+                                                        editingKeyboards.fixedSize(horizontal: false, vertical: true)
+                                                        Spacer()
+                                                }
+                                        }
+                                        .padding()
+                                        .fillBackground()
+                                        .padding()
+                                        .padding(.vertical, 85)
                                 }
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 7).stroke(Color.secondary))
-                                .padding()
-                                .padding(.vertical, 85)
+                                .navigationBarTitle(Text("Home"))
                         }
-                        .navigationBarTitle(Text("Home"))
                 }
                 .tabItem {
                         Image(systemName: "house")
