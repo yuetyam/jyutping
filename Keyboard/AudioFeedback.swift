@@ -10,7 +10,7 @@ enum AudioFeedback: Equatable {
         private var systemSoundId: SystemSoundID {
                 switch self {
                 case .input:
-                        return 1104
+                        return 1123 // Used to be 1104
                 case .click:
                         return 1123
                 case .delete:
