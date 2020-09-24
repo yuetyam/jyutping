@@ -152,7 +152,6 @@ final class KeyboardViewController: UIInputViewController {
         private func setupToolBarActions() {
                 toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .allTouchEvents)
                 toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .valueChanged)
-                toolBar.pasteButton.addTarget(self, action: #selector(pasteText), for: .touchUpInside)
                 toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .allTouchEvents)
                 toolBar.keyboardDownButton.addTarget(self, action: #selector(dismissInputMethod), for: .allTouchEvents)
         }
@@ -175,10 +174,6 @@ final class KeyboardViewController: UIInputViewController {
                 default:
                         break
                 }
-        }
-        @objc private func pasteText() {
-                guard let textToPaste: String = UIPasteboard.general.string else { return }
-                textDocumentProxy.insertText(textToPaste)
         }
         
         private var converter: ChineseConverter = {
