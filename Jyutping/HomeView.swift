@@ -17,6 +17,13 @@ struct HomeView: View {
                 Text("Add New Keyboards...").fontWeight(.medium) + Text(" or ") +
                 Text("Edit").fontWeight(.medium)
         
+        /*
+        private var isJyutpingKeyboardEnabled: Bool {
+                guard let keyboards = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return false }
+                return keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
+        }
+        */
+        
         var body: some View {
                 NavigationView {
                         ZStack {
