@@ -186,9 +186,9 @@ extension KeyButton {
         var buttonTintColor: UIColor {
                 switch viewController.appearance {
                 case .lightModeLightAppearance:
-                        return .lightButtonText
+                        return .black
                 default:
-                        return .darkButtonText
+                        return .white
                 }
         }
         

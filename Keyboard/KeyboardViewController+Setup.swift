@@ -82,7 +82,7 @@ extension KeyboardViewController {
                 NSLayoutConstraint.activate(candidateBoardCollectionViewConstraints)
                 (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
                 
-                candidateBoard.upArrowButton.tintColor = isDarkAppearance ? .darkButtonText : .lightButtonText
+                candidateBoard.upArrowButton.tintColor = isDarkAppearance ? .white : .black
                 candidateBoard.upArrowButton.addTarget(self, action: #selector(dismissCandidateBoard), for: .allTouchEvents)
                 
                 keyboardStackView.addArrangedSubview(candidateBoard)
