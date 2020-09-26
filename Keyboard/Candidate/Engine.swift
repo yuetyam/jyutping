@@ -159,7 +159,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -180,7 +180,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -201,7 +201,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }

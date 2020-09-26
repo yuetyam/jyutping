@@ -120,7 +120,7 @@ struct LexiconManager {
                                 let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text)
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 } else {

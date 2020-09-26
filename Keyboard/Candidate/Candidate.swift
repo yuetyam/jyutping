@@ -16,11 +16,11 @@ struct Candidate: Hashable {
         /// Always be traditional characters. User invisible.
         let lexiconText: String
         
-        init(text: String, footnote: String, input: String, lexiconText: String = "") {
+        init(text: String, footnote: String, input: String, lexiconText: String) {
                 self.text = text
                 self.footnote = footnote
                 self.input = input
-                self.lexiconText = lexiconText.isEmpty ? text : lexiconText
+                self.lexiconText = lexiconText
         }
         
         // Equatable
