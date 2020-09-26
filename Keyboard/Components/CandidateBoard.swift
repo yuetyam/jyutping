@@ -2,12 +2,6 @@ import UIKit
 
 final class CandidateBoard: UIView {
         
-        var height: CGFloat = 270 {
-                didSet {
-                        heightAnchor.constraint(equalToConstant: height).isActive = true
-                }
-        }
-        
         let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up")
         
         init() {

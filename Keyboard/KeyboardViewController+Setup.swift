@@ -72,11 +72,12 @@ extension KeyboardViewController {
                  collectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor)]
         }
         private func setupCandidateBoard() {
-                candidateBoard.height = view.bounds.height
+                let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
                 collectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(toolBar.collectionViewConstraints)
                 
+                candidateBoard.heightAnchor.constraint(equalToConstant: height).isActive = true
                 candidateBoard.addSubview(collectionView)
                 collectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(candidateBoardCollectionViewConstraints)
