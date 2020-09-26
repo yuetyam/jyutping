@@ -36,8 +36,10 @@ final class KeyboardViewController: UIInputViewController {
                 
                 settingsTableView.dataSource = self
                 settingsTableView.delegate = self
-                settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")
-                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "NormalTableViewCell")
+                settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")                
+                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "CharactersTableViewCell")
+                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
+                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
         }
         
         override func viewDidAppear(_ animated: Bool) {
@@ -144,7 +146,7 @@ final class KeyboardViewController: UIInputViewController {
                 if logogram < 2 {
                         candidates = combined.deduplicated()
                 } else {
-                        let converted: [Candidate] = combined.map { Candidate(text: converter.convert($0.text), footnote: $0.footnote, input: $0.input, lexiconText: $0.text) }
+                        let converted: [Candidate] = combined.map { Candidate(text: converter.convert($0.text), footnote: $0.footnote, input: $0.input, lexiconText: $0.lexiconText) }
                         candidates = converted.deduplicated()
                 }
         }
@@ -218,6 +220,16 @@ final class KeyboardViewController: UIInputViewController {
                 self.converter = converter
         }
         private lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
+        private(set) lazy var toneStyle: Int = UserDefaults.standard.integer(forKey: "tone_style")
+        func updateToneStyle() {
+                // 0: The key "tone_style" doesn‘t exist.
+                // 1: Normal
+                // 2: No tones
+                // 3: Superscript
+                // 4: Subscript
+                // 4: Mixed Yam Yeung
+                toneStyle = UserDefaults.standard.integer(forKey: "tone_style")
+        }
         
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
         
