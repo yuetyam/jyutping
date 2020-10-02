@@ -103,11 +103,11 @@ final class ToolBar: UIView {
                         settingsButton.widthAnchor.constraint(equalToConstant: width)]
         }
         private var yueEngSwitchConstraints: [NSLayoutConstraint] {
-                let topBottomInset: CGFloat = isPhoneInterface ? 14 : 11
-                let width: CGFloat = isPhoneInterface ? 105 : 120
+                let topBottomInset: CGFloat = isPhoneInterface ? 13 : 11
+                let width: CGFloat = isPhoneInterface ? 110 : 120
                 return [yueEngSwitch.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
                         yueEngSwitch.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
-                        yueEngSwitch.leadingAnchor.constraint(equalTo: settingsButton.trailingAnchor, constant: 16),
+                        yueEngSwitch.leadingAnchor.constraint(equalTo: settingsButton.trailingAnchor, constant: 20),
                         yueEngSwitch.widthAnchor.constraint(equalToConstant: width)]
         }
         private var keyboardDownButtonConstaints: [NSLayoutConstraint] {
