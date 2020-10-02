@@ -98,12 +98,15 @@ final class KeyboardViewController: UIInputViewController {
         var keyboardLayout: KeyboardLayout = .jyutping {
                 didSet {
                         setupKeyboard()
-                        if didKeyboardEstablished {
-                                if !keyboardLayout.isJyutpingMode {
-                                        currentInputText = ""
-                                }
-                        } else {
+                        guard didKeyboardEstablished else {
                                 didKeyboardEstablished = true
+                                return
+                        }
+                        if !keyboardLayout.isJyutpingMode {
+                                if !currentInputText.isEmpty {
+                                        textDocumentProxy.insertText(currentInputText)
+                                }
+                                currentInputText = ""
                         }
                 }
         }
