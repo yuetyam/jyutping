@@ -118,7 +118,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         updateConverter()
-                        tableView.reloadData()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                tableView.reloadData()
+                        }
                 case 2:
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
@@ -136,7 +138,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         updateToneStyle()
-                        tableView.reloadData()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                tableView.reloadData()
+                        }
                 case 3:
                         imeQueue.async {
                                 self.lexiconManager.deleteAll()
