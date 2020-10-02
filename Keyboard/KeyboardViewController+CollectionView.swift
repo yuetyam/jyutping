@@ -19,40 +19,48 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 case 2:
                         let toneDigits: String = "123456"
                         cell.footnoteLabel.text = candidates[indexPath.row].footnote.filter { !toneDigits.contains($0) }
-                case 3:
-                        cell.footnoteLabel.text = superscriptText(from: candidates[indexPath.row].footnote)
-                case 4:
-                        cell.footnoteLabel.text = subscriptText(from: candidates[indexPath.row].footnote)
-                case 5:
-                        cell.footnoteLabel.text = mixYamYeung(from: candidates[indexPath.row].footnote)
+                case 3, 4, 5:
+                        let footnote: String = candidates[indexPath.row].footnote
+                        let attributed: NSAttributedString = attribute(text: footnote, toneStyle: toneStyle)
+                        cell.footnoteLabel.attributedText = attributed
                 default:
                         cell.footnoteLabel.text = candidates[indexPath.row].footnote
                 }
                 return cell
         }
-        private func superscriptText(from text: String) -> String {
-                return text.replacingOccurrences(of: "1", with: "¹")
-                        .replacingOccurrences(of: "2", with: "²")
-                        .replacingOccurrences(of: "3", with: "³")
-                        .replacingOccurrences(of: "4", with: "⁴")
-                        .replacingOccurrences(of: "5", with: "⁵")
-                        .replacingOccurrences(of: "6", with: "⁶")
-        }
-        private func subscriptText(from text: String) -> String {
-                return text.replacingOccurrences(of: "1", with: "₁")
-                        .replacingOccurrences(of: "2", with: "₂")
-                        .replacingOccurrences(of: "3", with: "₃")
-                        .replacingOccurrences(of: "4", with: "₄")
-                        .replacingOccurrences(of: "5", with: "₅")
-                        .replacingOccurrences(of: "6", with: "₆")
-        }
-        private func mixYamYeung(from text: String) -> String {
-                return text.replacingOccurrences(of: "1", with: "¹")
-                        .replacingOccurrences(of: "2", with: "²")
-                        .replacingOccurrences(of: "3", with: "³")
-                        .replacingOccurrences(of: "4", with: "₄")
-                        .replacingOccurrences(of: "5", with: "₅")
-                        .replacingOccurrences(of: "6", with: "₆")
+        private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
+                let jyutpings: [String] = text.components(separatedBy: " ")
+                let attributed: [NSMutableAttributedString] = jyutpings.map { (jyutping) -> NSMutableAttributedString in
+                        guard let tone = jyutping.last else { return NSMutableAttributedString(string: jyutping) }
+                        let offset: NSNumber = {
+                                switch toneStyle {
+                                case 3:
+                                        return 3
+                                case 4:
+                                        return -3
+                                default:
+                                        return ("123".contains(tone)) ? 3 : -3
+                                }
+                        }()
+                        let font: UIFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: .systemFont(ofSize: 10))
+                        let newText = NSMutableAttributedString(string: jyutping)
+                        newText.addAttribute(NSAttributedString.Key.font,
+                                             value: font,
+                                             range: NSRange(location: jyutping.count - 1, length: 1))
+                        newText.addAttribute(NSAttributedString.Key.baselineOffset,
+                                             value: offset,
+                                             range: NSRange(location: jyutping.count - 1, length: 1))
+                        return newText
+                }
+                guard !attributed.isEmpty else { return NSAttributedString(string: text) }
+                let combined: NSMutableAttributedString = attributed[0]
+                if attributed.count > 1 {
+                        for number in 1..<attributed.count {
+                                combined.append(NSAttributedString(string: " "))
+                                combined.append(attributed[number])
+                        }
+                }
+                return combined
         }
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
