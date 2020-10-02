@@ -92,7 +92,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 case 0:
                                         return 1
                                 case 1:
-                                        return Int(fullWidth) / 60
+                                        return Int(fullWidth) / 50
                                 case 2:
                                         return Int(fullWidth) / 80
                                 case 3:
@@ -110,13 +110,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 } else {
                         switch characterCount {
                         case 1:
-                                return CGSize(width: 60, height: 55)
+                                return CGSize(width: 50, height: 55)
                         case 2:
-                                return CGSize(width: 85, height: 55)
+                                return CGSize(width: 80, height: 55)
                         case 3:
-                                return CGSize(width: 125, height: 55)
+                                return CGSize(width: 120, height: 55)
                         case 4:
-                                return CGSize(width: 145, height: 55)
+                                return CGSize(width: 140, height: 55)
                         default:
                                 return CGSize(width: characterCount * 35, height: 55)
                         }
