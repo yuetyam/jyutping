@@ -11,7 +11,7 @@ final class CandidateCollectionViewCell: UICollectionViewCell {
                 contentView.addSubview(textLabel)
                 textLabel.textAlignment = .center
                 textLabel.adjustsFontForContentSizeCategory = true
-                textLabel.font = .preferredFont(forTextStyle: .title2)
+                textLabel.font = .preferredFont(forTextStyle: .title3)
                 textLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
                 textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
                 textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
@@ -21,7 +21,7 @@ final class CandidateCollectionViewCell: UICollectionViewCell {
                 contentView.addSubview(footnoteLabel)
                 footnoteLabel.textAlignment = .center
                 footnoteLabel.adjustsFontForContentSizeCategory = true
-                footnoteLabel.font = .preferredFont(forTextStyle: .subheadline)
+                footnoteLabel.font = .preferredFont(forTextStyle: .footnote)
                 footnoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
                 footnoteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
                 footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20).isActive = true

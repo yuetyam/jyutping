@@ -17,20 +17,15 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 cell.textLabel.text = candidates[indexPath.row].text
                 switch toneStyle {
                 case 2:
-                        cell.footnoteLabel.font = .preferredFont(forTextStyle: .footnote)
                         let toneDigits: String = "123456"
                         cell.footnoteLabel.text = candidates[indexPath.row].footnote.filter { !toneDigits.contains($0) }
                 case 3:
-                        cell.footnoteLabel.font = .preferredFont(forTextStyle: .subheadline)
                         cell.footnoteLabel.text = superscriptText(from: candidates[indexPath.row].footnote)
                 case 4:
-                        cell.footnoteLabel.font = .preferredFont(forTextStyle: .subheadline)
                         cell.footnoteLabel.text = subscriptText(from: candidates[indexPath.row].footnote)
                 case 5:
-                        cell.footnoteLabel.font = .preferredFont(forTextStyle: .subheadline)
                         cell.footnoteLabel.text = mixYamYeung(from: candidates[indexPath.row].footnote)
                 default:
-                        cell.footnoteLabel.font = .preferredFont(forTextStyle: .footnote)
                         cell.footnoteLabel.text = candidates[indexPath.row].footnote
                 }
                 return cell
