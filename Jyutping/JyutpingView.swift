@@ -181,14 +181,6 @@ struct SearchWebsitesView: View {
                                 .padding(.vertical)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://open-dict-data.github.io/ipa-lookup/yue")!,
-                                   content: MessageView(icon: "doc.text.magnifyingglass",
-                                                        text: Text("粵語國際音標查詢"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
-                                .fillBackground()
-                                .padding(.horizontal)
                 }
         }
 }
@@ -214,15 +206,7 @@ struct JyutpingWebsitesView: View {
                         
                         LinkButton(url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!,
                                    content: MessageView(icon: "link.circle",
-                                                        text: Text("粵拼視頻教學 - YouTube"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
-                                .fillBackground()
-                                .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "http://jyutping.lt.cityu.edu.hk")!,
-                                   content: MessageView(icon: "link.circle",
-                                                        text: Text("粵語拼音資源站 - CityU"),
+                                                        text: Text("粵拼教學 - YouTube"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
                                 .fillBackground()
@@ -231,6 +215,14 @@ struct JyutpingWebsitesView: View {
                         LinkButton(url: URL(string: "http://www.iso10646hk.net/jp")!,
                                    content: MessageView(icon: "link.circle",
                                                         text: Text("粵拼 - iso10646hk.net"),
+                                                        symbol: Image(systemName: "safari")))
+                                .padding(.vertical)
+                                .fillBackground()
+                                .padding(.horizontal)
+                        
+                        LinkButton(url: URL(string: "https://www.jyut6.com")!,
+                                   content: MessageView(icon: "link.circle",
+                                                        text: Text("粵拼歌詞網"),
                                                         symbol: Image(systemName: "safari")))
                                 .padding(.vertical)
                                 .fillBackground()
