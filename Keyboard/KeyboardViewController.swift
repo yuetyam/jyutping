@@ -74,6 +74,10 @@ final class KeyboardViewController: UIInputViewController {
                                 keyboardLayout = answeredKeyboardLayout
                         }
                 }
+                if !textDocumentProxy.hasText && !currentInputText.isEmpty {
+                        // User just tapped Clear Button in TextField
+                        currentInputText = ""
+                }
         }
         
         private lazy var answeredKeyboardLayout: KeyboardLayout = .jyutping
