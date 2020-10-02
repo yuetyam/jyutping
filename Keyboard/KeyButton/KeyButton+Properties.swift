@@ -124,7 +124,7 @@ extension KeyButton {
         }
         
         private var newLineKeyText: String {
-                guard let returnKeyType: UIReturnKeyType = viewController.textDocumentProxy.returnKeyType else { return "return" }
+                guard let returnKeyType: UIReturnKeyType = viewController.textDocumentProxy.returnKeyType else { return "換行" }
                 switch returnKeyType {
                 case .continue:
                         return "繼續"
@@ -137,21 +137,21 @@ extension KeyButton {
                 case .go:
                         return "前往"
                 case .google:
-                        return "Google"
+                        return "谷歌"
                 case .join:
                         return "加入"
                 case .next:
                         return "下一個"
                 case .route:
-                        return "route"
+                        return "路線"
                 case .search:
                         return "搜尋"
                 case .send:
                         return "發送"
                 case .yahoo:
-                        return "Yahoo"
+                        return "雅虎"
                 @unknown default:
-                        return "return"
+                        return "換行"
                 }
         }
         
