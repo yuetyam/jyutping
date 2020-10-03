@@ -50,7 +50,7 @@ private struct FillBackgroundColor: ViewModifier {
                                 return Color(UIColor.systemBackground)
                         }
                 }()
-                return content.background(RoundedRectangle(cornerRadius: 7).fill(backgroundColor))
+                return content.background(RoundedRectangle(cornerRadius: 8).fill(backgroundColor))
         }
 }
 
