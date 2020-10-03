@@ -45,7 +45,7 @@ final class KeyButton: UIButton {
                 return CGSize(width: width, height: height)
         }
         
-        private var shapeLayer: CAShapeLayer = {
+        private lazy var shapeLayer: CAShapeLayer = {
                 let caLayer: CAShapeLayer = CAShapeLayer()
                 caLayer.shadowOpacity = 0.5
                 caLayer.shadowRadius = 1
@@ -55,7 +55,7 @@ final class KeyButton: UIButton {
                 caLayer.rasterizationScale = UIScreen.main.scale
                 return caLayer
         }()
-        private var previewLabel: UILabel = UILabel()
+        private lazy var previewLabel: UILabel = UILabel()
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
                 switch keyboardEvent {
@@ -177,6 +177,7 @@ final class KeyButton: UIButton {
                         guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 8 else { return }
+                        viewController.currentInputText = ""
                         if distance > 0 {
                                 viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
                         } else {
@@ -242,7 +243,7 @@ final class KeyButton: UIButton {
                 fastBackspaceTimer?.invalidate()
         }
         
-        private var performedDraggingOnSpace: Bool = false
-        private var spaceTouchPoint: CGPoint = .zero
-        private var backspaceTouchPoint: CGPoint = .zero
+        private lazy var performedDraggingOnSpace: Bool = false
+        private lazy var spaceTouchPoint: CGPoint = .zero
+        private lazy var backspaceTouchPoint: CGPoint = .zero
 }
