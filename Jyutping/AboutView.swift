@@ -52,20 +52,17 @@ struct AboutView: View {
                                                 }) {
                                                         MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.right.square"))
                                                 }.padding(.top)
-                                                
                                                 Divider()
                                                 
                                                 Button(action: {
-                                                        let twitterUrl: URL = URL(string: "https://twitter.com/_cantonese")!
-                                                        UIApplication.shared.open(twitterUrl, options: [:], completionHandler: nil)
+                                                        let githubIssueUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues/new")!
+                                                        UIApplication.shared.open(githubIssueUrl, options: [:], completionHandler: nil)
                                                 }) {
-                                                        MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.right.square"))
+                                                        MessageView(icon: "info.circle", text: Text("Create a GitHub issue"), symbol: Image(systemName: "arrow.right.square"))
                                                 }
-                                                
                                                 Divider()
                                                 
-                                                MailFeedbackButton(mailComposeDelegate: mailComposeDelegate)
-                                                        .padding(.bottom)
+                                                MailFeedbackButton(mailComposeDelegate: mailComposeDelegate).padding(.bottom)
                                         }
                                         .fillBackground()
                                         .padding()
