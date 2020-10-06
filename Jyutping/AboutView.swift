@@ -47,16 +47,23 @@ struct AboutView: View {
                                         
                                         VStack {
                                                 Button(action: {
-                                                        let telegramUrl: URL = URL(string: "https://t.me/jyutping")!
-                                                        UIApplication.shared.open(telegramUrl, options: [:], completionHandler: nil)
+                                                        // Telegram App doesn't support Universal Links
+                                                        let appUrl: URL = URL(string: "tg://resolve?domain=jyutping")!
+                                                        let webUrl: URL = URL(string: "https://t.me/jyutping")!
+                                                        UIApplication.shared.open(appUrl) { success in
+                                                                if !success {
+                                                                        UIApplication.shared.open(webUrl)
+                                                                }
+                                                        }
                                                 }) {
                                                         MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.right.square"))
                                                 }.padding(.top)
                                                 Divider()
                                                 
                                                 Button(action: {
-                                                        let githubIssueUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues/new")!
-                                                        UIApplication.shared.open(githubIssueUrl, options: [:], completionHandler: nil)
+                                                        // GitHub App supports Universal Links
+                                                        let githubUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues/new")!
+                                                        UIApplication.shared.open(githubUrl)
                                                 }) {
                                                         MessageView(icon: "info.circle", text: Text("Create a GitHub issue"), symbol: Image(systemName: "arrow.right.square"))
                                                 }
