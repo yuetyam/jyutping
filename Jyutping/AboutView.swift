@@ -171,7 +171,30 @@ private struct ComposeMailView: UIViewControllerRepresentable {
                 mailCompose.title = "User Feedback"
                 mailCompose.setSubject("User Feedback")
                 mailCompose.setToRecipients(["bing@ososo.io"])
-                mailCompose.setMessageBody("Enter your feedback here", isHTML: true)
+                
+                let deviceIdentifier: String = {
+                        var systemInfo = utsname()
+                        uname(&systemInfo)
+                        let machineMirror = Mirror(reflecting: systemInfo.machine)
+                        let modelIdentifier: String = machineMirror.children.reduce("") { identifier, element in
+                                guard let value: Int8 = element.value as? Int8, value != 0 else { return identifier }
+                                return identifier + String(UnicodeScalar(UInt8(value)))
+                        }
+                        return modelIdentifier
+                }()
+                let system: String = UIDevice.current.systemName + " " + UIDevice.current.systemVersion
+                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "__ERROR__"
+                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "__ERROR__"
+                let messageBody: String = """
+                Enter your feedback here.
+                
+                
+                App Version: \(version), build: \(build)
+                Platform: \(deviceIdentifier) - \(system)
+                
+                """
+                mailCompose.setMessageBody(messageBody, isHTML: false)
+                
                 mailCompose.mailComposeDelegate = mailComposeDelegate
                 return mailCompose
         }
