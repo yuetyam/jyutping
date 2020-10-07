@@ -59,20 +59,30 @@ struct AboutView: View {
                                                         MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.right.square"))
                                                 }.padding(.top)
                                                 Divider()
-                                                
                                                 Button(action: {
-                                                        // GitHub App supports Universal Links
-                                                        let githubUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues/new")!
-                                                        UIApplication.shared.open(githubUrl)
+                                                        // Twitter App supports Universal Links
+                                                        let twitterUrl: URL = URL(string: "https://twitter.com/_cantonese")!
+                                                        UIApplication.shared.open(twitterUrl)
                                                 }) {
-                                                        MessageView(icon: "info.circle", text: Text("Create a GitHub issue"), symbol: Image(systemName: "arrow.right.square"))
+                                                        MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.right.square"))
                                                 }
                                                 Divider()
-                                                
-                                                MailFeedbackButton(mailComposeDelegate: mailComposeDelegate).padding(.bottom)
+                                                Button(action: {
+                                                        // GitHub App supports Universal Links
+                                                        let githubUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues")!
+                                                        UIApplication.shared.open(githubUrl)
+                                                }) {
+                                                        MessageView(icon: "info.circle", text: Text("GitHub Issues"), symbol: Image(systemName: "arrow.right.square"))
+                                                }
+                                                .padding(.bottom)
                                         }
                                         .fillBackground()
                                         .padding()
+                                        
+                                        MailFeedbackButton(mailComposeDelegate: mailComposeDelegate)
+                                                .padding(.vertical)
+                                                .fillBackground()
+                                                .padding()
                                         
                                         
                                         // MARK: - Review & Share
