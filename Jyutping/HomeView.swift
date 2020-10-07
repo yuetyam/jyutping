@@ -41,9 +41,7 @@ struct HomeView: View {
                                         
                                         VStack {
                                                 HStack {
-                                                        Text("How to enable this Keyboard")
-                                                                .lineLimit(1)
-                                                                .font(.system(size: 20, weight: .medium, design: .default))
+                                                        Text("How to enable this Keyboard").font(.system(size: 20, weight: .medium))
                                                         Spacer()
                                                 }
                                                 .padding(.bottom)
@@ -74,9 +72,7 @@ struct HomeView: View {
                                         
                                         VStack {
                                                 HStack {
-                                                        Text("How to add or edit keyboards")
-                                                                .lineLimit(1)
-                                                                .font(.system(size: 20, weight: .medium, design: .default))
+                                                        Text("How to add or edit keyboards").font(.system(size: 20, weight: .medium))
                                                         Spacer()
                                                 }
                                                 .padding(.bottom)
