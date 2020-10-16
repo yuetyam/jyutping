@@ -59,14 +59,18 @@ struct AboutView: View {
                                                         MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.right.square"))
                                                 }.padding(.top)
                                                 Divider()
+                                                
+                                                // FIXME: - URL can't handle #
+                                                /*
                                                 Button(action: {
-                                                        // Twitter App supports Universal Links
-                                                        let twitterUrl: URL = URL(string: "https://twitter.com/_cantonese")!
-                                                        UIApplication.shared.open(twitterUrl)
+                                                        let address: String = "https://matrix.to/#/#yuet:matrix.org"
+                                                        guard let matrixRoomLink: URL = URL(string: address) else { return }
+                                                        UIApplication.shared.open(matrixRoomLink)
                                                 }) {
-                                                        MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.right.square"))
+                                                        MessageView(icon: "m.square", text: Text("Join Matrix Room"), symbol: Image(systemName: "arrow.right.square"))
                                                 }
-                                                Divider()
+                                                */
+                                                
                                                 Button(action: {
                                                         // GitHub App supports Universal Links
                                                         let githubUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues")!
@@ -74,16 +78,13 @@ struct AboutView: View {
                                                 }) {
                                                         MessageView(icon: "info.circle", text: Text("GitHub Issues"), symbol: Image(systemName: "arrow.right.square"))
                                                 }
-                                                .padding(.bottom)
+                                                Divider()
+                                                
+                                                MailFeedbackButton(mailComposeDelegate: mailComposeDelegate)
+                                                        .padding(.bottom)
                                         }
                                         .fillBackground()
                                         .padding()
-                                        
-                                        MailFeedbackButton(mailComposeDelegate: mailComposeDelegate)
-                                                .padding(.vertical)
-                                                .fillBackground()
-                                                .padding()
-                                        
                                         
                                         // MARK: - Review & Share
                                         
