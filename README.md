@@ -5,7 +5,6 @@ Jyutping Keyboard for iOS.
 [![GitHub workflow](https://img.shields.io/github/workflow/status/yuetyam/jyutping/build?logo=github&style=for-the-badge)](https://github.com/yuetyam/jyutping/actions)
 [![GitHub release](https://img.shields.io/github/v/release/yuetyam/jyutping?logo=git&style=for-the-badge)](https://github.com/yuetyam/jyutping/releases)
 [![Telegram](https://img.shields.io/badge/TG-@jyutping-blue?style=for-the-badge&logo=telegram)](https://t.me/jyutping)
-[![Twitter](https://img.shields.io/badge/TWTTR-@__cantonese-blue?style=for-the-badge&logo=twitter)](https://twitter.com/_cantonese)
 
 ## Now available on the App Store
 
