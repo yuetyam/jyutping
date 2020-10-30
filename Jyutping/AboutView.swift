@@ -60,17 +60,6 @@ struct AboutView: View {
                                                 }.padding(.top)
                                                 Divider()
                                                 
-                                                // FIXME: - URL can't handle #
-                                                /*
-                                                Button(action: {
-                                                        let address: String = "https://matrix.to/#/#yuet:matrix.org"
-                                                        guard let matrixRoomLink: URL = URL(string: address) else { return }
-                                                        UIApplication.shared.open(matrixRoomLink)
-                                                }) {
-                                                        MessageView(icon: "m.square", text: Text("Join Matrix Room"), symbol: Image(systemName: "arrow.right.square"))
-                                                }
-                                                */
-                                                
                                                 Button(action: {
                                                         // GitHub App supports Universal Links
                                                         let githubUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues")!
