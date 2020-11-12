@@ -79,9 +79,9 @@ struct Engine {
                 return combine
         }
         private func process(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +))}
-                let candidates: [Candidate] = matches.reduce([], +)
-                guard candidates[0].input.count != text.count && candidates.count > 1 else {
+                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +)) }
+                let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 20000 }
+                guard candidates.count > 1 && candidates[0].input.count != text.count else {
                         return candidates
                 }
                 let tailText: String = String(text.dropFirst(candidates[0].input.count))
@@ -105,8 +105,8 @@ struct Engine {
                 return combine + candidates
         }
         private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +))}
-                var combine: [Candidate] = matches.reduce([], +)
+                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +)) }
+                var combine: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 20000 }
                 guard !combine.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
                 }
@@ -179,8 +179,9 @@ private extension Engine {
                                 // prefix = sqlite3_column_int64(queryStatement, 2)
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                let ranking: Int = Int(sqlite3_column_int64(queryStatement, 5))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word, ranking: ranking)
                                 candidates.append(candidate)
                         }
                 }

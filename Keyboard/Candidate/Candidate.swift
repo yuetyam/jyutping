@@ -16,11 +16,22 @@ struct Candidate: Hashable {
         /// Always be traditional characters. User invisible.
         let lexiconText: String
         
-        init(text: String, footnote: String, input: String, lexiconText: String) {
+        /// Row number in database
+        let ranking: Int
+        
+        /// Candidate
+        /// - Parameters:
+        ///   - text: Displaying Cantonese word.
+        ///   - footnote: Word's Jyutping.
+        ///   - input: User input for this Candidate.
+        ///   - lexiconText: Lexicon Entry Cantonese word. User invisible.
+        ///   - ranking: Row number in database.
+        init(text: String, footnote: String, input: String, lexiconText: String, ranking: Int = 0) {
                 self.text = text
                 self.footnote = footnote
                 self.input = input
                 self.lexiconText = lexiconText
+                self.ranking = ranking
         }
         
         // Equatable
@@ -38,6 +49,7 @@ struct Candidate: Hashable {
                 let newFootnote: String = lhs.footnote + " " + rhs.footnote
                 let newInput: String = lhs.input + rhs.input
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
+                // let newRanking: Int = min(lhs.ranking, rhs.ranking)
                 
                 let newCandidate: Candidate = Candidate(text: newText,
                                                         footnote: newFootnote,
