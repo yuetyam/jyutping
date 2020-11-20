@@ -36,8 +36,8 @@ struct InitialsTable: View {
 瓜 gwaa1,[kʷ],gw
 夸 kwaa1,[kʷʰ],kw
 娃 waa1,[w],w
-渣 zaa1,[ts],z
-叉 caa1,[tsʰ],c
+渣 zaa1,[t͡ʃ],z
+叉 caa1,[t͡ʃʰ],c
 沙 saa1,[s],s
 也 jaa5,[j],j
 """
@@ -195,8 +195,8 @@ struct TonesTable: View {
 焚 fan4,11/21,陽平,4
 奮 fan5,23,陽上,5
 份 fan6,22,陽去,6
-忽 fat1,5,高陰入,1
-法 faat3,3,低陰入,3
+忽 fat1,5,上陰入,1
+法 faat3,3,下陰入,3
 佛 fat6,2,陽入,6
 """
 }
