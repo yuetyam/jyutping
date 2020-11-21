@@ -58,15 +58,15 @@ private struct CellView: View {
                 if UITraitCollection.current.userInterfaceIdiom == .phone {
                         return (UIScreen.main.bounds.width - 32) / 3
                 } else {
-                        return min(120, (UIScreen.main.bounds.width - 32) / 3)
+                        return 120
                 }
         }
         
         var body: some View {
                 HStack {
-                        Text(components[0]).frame(width: exampleSize, alignment: .leading)
+                        Text(components[0]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
                         
-                        Text(components[1]).frame(width: exampleSize, alignment: .leading)
+                        Text(components[1]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
                         
                         Text(components[2])
                         Spacer()
@@ -210,17 +210,17 @@ private struct ToneCellView: View {
                 if UITraitCollection.current.userInterfaceIdiom == .phone {
                         return (UIScreen.main.bounds.width - 32) / 4
                 } else {
-                        return min(120, (UIScreen.main.bounds.width - 32) / 4)
+                        return 120
                 }
         }
         
         var body: some View {
                 HStack {
-                        Text(components[0]).frame(width: exampleSize, alignment: .leading)
+                        Text(components[0]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
                         
-                        Text(components[1]).frame(width: exampleSize, alignment: .leading)
+                        Text(components[1]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
                         
-                        Text(components[2]).frame(width: exampleSize, alignment: .leading)
+                        Text(components[2]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
                         
                         Text(components[3])
                         Spacer()
