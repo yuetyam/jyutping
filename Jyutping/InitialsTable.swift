@@ -36,9 +36,9 @@ struct InitialsTable: View {
 瓜 gwaa1,[kʷ],gw
 夸 kwaa1,[kʷʰ],kw
 娃 waa1,[w],w
-渣 zaa1,[t͡ʃ],z
-叉 caa1,[t͡ʃʰ],c
-沙 saa1,[s],s
+渣 zaa1,t͡s~t͡ʃ,z
+叉 caa1,t͡sʰ~t͡ʃʰ,c
+沙 saa1,s~ʃ,s
 也 jaa5,[j],j
 """
 }
