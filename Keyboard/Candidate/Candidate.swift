@@ -36,12 +36,14 @@ struct Candidate: Hashable {
         
         // Equatable
         static func == (lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.text == rhs.text
+                return lhs.text == rhs.text &&
+                        lhs.footnote.filter({!$0.isNumber}) == rhs.footnote.filter({!$0.isNumber})
         }
         
         // Hashable
         func hash(into hasher: inout Hasher) {
                 hasher.combine(text)
+                hasher.combine(footnote.filter({!$0.isNumber}))
         }
         
         static func + (lhs: Candidate, rhs: Candidate) -> Candidate {
