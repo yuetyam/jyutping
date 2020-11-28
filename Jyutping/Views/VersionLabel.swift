@@ -15,8 +15,8 @@ struct VersionLabel: View {
                         Spacer()
                         Text(versionString)
                 }
-                .contentShape(Rectangle())
                 .padding()
+                .contentShape(Rectangle())
                 .onTapGesture {
                         UIPasteboard.general.string = versionString
                         isBannerPresented = true
