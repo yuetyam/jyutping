@@ -19,9 +19,20 @@ struct ContentView: View {
         @State private var selection = 0
         var body: some View {
                 TabView(selection: $selection){
-                        HomeView()
-                        JyutpingView()
-                        AboutView()
+                        HomeView().tabItem {
+                                Image(systemName: "house")
+                                Text("Home")
+                        }.tag(0)
+                        
+                        JyutpingView().tabItem {
+                                Image(systemName: "doc.text.magnifyingglass")
+                                Text("Jyutping")
+                        }.tag(1)
+                        
+                        AboutView().tabItem {
+                                Image(systemName: "info.circle")
+                                Text("About")
+                        }.tag(2)
                 }
         }
 }

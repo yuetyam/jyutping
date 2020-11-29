@@ -81,11 +81,6 @@ struct JyutpingView: View {
                                 .navigationBarTitle(Text("Jyutping"))
                         }
                 }
-                .tabItem {
-                        Image(systemName: "doc.text.magnifyingglass")
-                        Text("Jyutping")
-                }
-                .tag(1)
                 .navigationViewStyle(StackNavigationViewStyle())
         }
 }

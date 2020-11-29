@@ -90,11 +90,6 @@ struct HomeView: View {
                                 .navigationBarTitle(Text("Home"))
                         }
                 }
-                .tabItem {
-                        Image(systemName: "house")
-                        Text("Home")
-                }
-                .tag(0)
                 .navigationViewStyle(StackNavigationViewStyle())
         }
 }

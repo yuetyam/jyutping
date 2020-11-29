@@ -100,11 +100,6 @@ struct AboutView: View {
                                 .navigationBarTitle(Text("About"))
                         }
                 }
-                .tabItem {
-                        Image(systemName: "info.circle")
-                        Text("About")
-                }
-                .tag(2)
                 .navigationViewStyle(StackNavigationViewStyle())
         }
 }
