@@ -6,7 +6,7 @@ struct JyutpingView: View {
         
         @State private var inputText: String = String()
         
-        private let specials: String = #"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ_0123456789-:;.,?~!@#$%^&*/\<>{}[]()+='"•。，；？！、：～（）《》「」【】"#
+        private let specials: String = #"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ_0123456789-:;.,?~!@#$%^&*/\<>{}[]()+=`'"’“•。，；？！、：～（）〈〉《》「」『』〔〕〖〗【】"#
         private var rawCantonese: String { inputText.filter { !specials.contains($0) } }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
         
