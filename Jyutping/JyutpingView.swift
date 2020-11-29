@@ -75,7 +75,7 @@ struct JyutpingView: View {
                                         .padding(.top, 40)
                                         
                                         JyutpingWebsitesView()
-                                                .padding(.bottom, 80)
+                                                .padding(.bottom, 100)
                                 }
                                 .foregroundColor(.primary)
                                 .navigationBarTitle(Text("Jyutping"))

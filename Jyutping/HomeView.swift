@@ -69,6 +69,7 @@ struct HomeView: View {
                                         .padding()
                                         .fillBackground()
                                         .padding(.horizontal)
+                                        .padding(.bottom)
                                         
                                         VStack {
                                                 HStack {
@@ -85,7 +86,6 @@ struct HomeView: View {
                                         .padding()
                                         .fillBackground()
                                         .padding()
-                                        .padding(.vertical, 85)
                                 }
                                 .navigationBarTitle(Text("Home"))
                         }

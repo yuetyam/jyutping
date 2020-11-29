@@ -94,7 +94,7 @@ struct AboutView: View {
                                         }
                                         .fillBackground()
                                         .padding()
-                                        .padding(.bottom, 80)
+                                        .padding(.bottom, 100)
                                 }
                                 .foregroundColor(.primary)
                                 .navigationBarTitle(Text("About"))
