@@ -34,7 +34,7 @@ struct HomeView: View {
                                          .textFieldStyle(RoundedBorderTextFieldStyle())
                                          .padding()
                                          */
-                                        EnhancedTextField(placeholder: placeholder, text: $placeholdText, returnKeyType: .default)
+                                        EnhancedTextField(placeholder: placeholder, text: $placeholdText)
                                                 .padding(8)
                                                 .fillBackground()
                                                 .padding()

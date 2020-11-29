@@ -1,16 +1,43 @@
 import SwiftUI
 
-struct  EnhancedTextField: UIViewRepresentable {
+struct EnhancedTextField: UIViewRepresentable {
         
-        let placeholder: String
-        @Binding var text: String
-        let returnKeyType: UIReturnKeyType
+        private let placeholder: String
+        @Binding private var text: String
+        
+        private let font: UIFont?
+        private let returnKey: UIReturnKeyType?
+        private let autocorrection: UITextAutocorrectionType?
+        private let autocapitalization: UITextAutocapitalizationType?
+        
+        init(placeholder: String,
+             text: Binding<String>,
+             font: UIFont? = nil,
+             returnKey: UIReturnKeyType? = nil,
+             autocorrection: UITextAutocorrectionType? = nil,
+             autocapitalization: UITextAutocapitalizationType? = nil) {
+                self.placeholder = placeholder
+                self._text = text
+                self.font = font
+                self.returnKey = returnKey
+                self.autocorrection = autocorrection
+                self.autocapitalization = autocapitalization
+        }
         
         func makeUIView(context: Context) -> UITextField {
                 let textField = UITextField(frame: .zero)
-                textField.placeholder = placeholder
                 textField.delegate = context.coordinator
-                textField.returnKeyType = returnKeyType
+                textField.placeholder = placeholder
+                textField.font = font
+                if let returnKeyType = returnKey {
+                        textField.returnKeyType = returnKeyType
+                }
+                if let autocorrectionType = autocorrection {
+                        textField.autocorrectionType = autocorrectionType
+                }
+                if let autocapitalizationType = autocapitalization {
+                        textField.autocapitalizationType = autocapitalizationType
+                }
                 textField.clearButtonMode = .always
                 return textField
         }
