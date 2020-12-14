@@ -15,7 +15,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return UICollectionViewCell()
                 }
                 switch logogram {
-                case 2:
+                case 0, 1, 2:
                         cell.textLabel.font = UIFont(name: "PingFang HK", size: 20)
                 case 3:
                         cell.textLabel.font = UIFont(name: "PingFang TC", size: 20)
