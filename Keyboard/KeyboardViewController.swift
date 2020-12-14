@@ -185,14 +185,21 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
+        /// 候選詞字形
+        ///
+        /// 0: The key "logogram" doesn‘t exist.
+        ///
+        /// 1: 傳統漢字
+        ///
+        /// 2: 傳統漢字（香港）
+        ///
+        /// 3: 傳統漢字（臺灣）
+        ///
+        /// 4: 簡化字
+        private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
         private var converter: ChineseConverter = {
                 let options: ChineseConverter.Options = {
                         let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
-                        // 0: The key "logogram" doesn‘t exist.
-                        // 1: 傳統漢字
-                        // 2: 傳統漢字香港字形
-                        // 3: 傳統漢字臺灣字形
-                        // 4: 大陸簡化字
                         switch logogram {
                         case 2:
                                 return [.hkStandard]
@@ -226,15 +233,22 @@ final class KeyboardViewController: UIInputViewController {
                 let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
                 self.converter = converter
         }
-        private lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
+        
+        /// 粵拼聲調樣式
+        ///
+        /// 0: The key "tone_style" doesn‘t exist.
+        ///
+        /// 1: 普通
+        ///
+        /// 2: 無聲調
+        ///
+        /// 3: 上標
+        ///
+        /// 4: 下標
+        ///
+        /// 4: 陰上陽下
         private(set) lazy var toneStyle: Int = UserDefaults.standard.integer(forKey: "tone_style")
         func updateToneStyle() {
-                // 0: The key "tone_style" doesn‘t exist.
-                // 1: Normal
-                // 2: No tones
-                // 3: Superscript
-                // 4: Subscript
-                // 4: Mixed Yam Yeung
                 toneStyle = UserDefaults.standard.integer(forKey: "tone_style")
         }
         
