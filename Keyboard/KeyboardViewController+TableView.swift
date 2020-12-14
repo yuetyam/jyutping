@@ -145,7 +145,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         imeQueue.async {
                                 self.lexiconManager.deleteAll()
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)
                         }
                         guard let cell = tableView.cellForRow(at: indexPath) else { return }
@@ -159,7 +159,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         let animation: CABasicAnimation = CABasicAnimation(keyPath: "strokeEnd")
                         animation.fromValue = 0.0
                         animation.toValue = cell.frame.width / ((cell.frame.width + cell.frame.height) * 2)
-                        animation.duration = 1
+                        animation.duration = 1.5
                         animation.timingFunction = CAMediaTimingFunction(name: .default)
                         progressLayer.add(animation, forKey: nil)
                 default:
