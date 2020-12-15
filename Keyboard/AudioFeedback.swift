@@ -21,7 +21,7 @@ enum AudioFeedback: Equatable {
         }
         
         static func play(for keyboardEvent: KeyboardEvent) {
-                guard UserDefaults.standard.bool(forKey: "audio_feedback") else { return }
+                guard isAudioFeedbackEnable else { return }
                 switch keyboardEvent {
                 case .text(_), .keyALeft, .keyLRight, .keyZLeft:
                         perform(audioFeedback: .input)
@@ -37,7 +37,14 @@ enum AudioFeedback: Equatable {
         }
         
         static func perform(audioFeedback: AudioFeedback) {
-                guard UserDefaults.standard.bool(forKey: "audio_feedback") else { return }
+                guard isAudioFeedbackEnable else { return }
                 AudioServicesPlaySystemSound(audioFeedback.systemSoundId)
+        }
+        
+        private static var isAudioFeedbackEnable: Bool = {
+                return UserDefaults.standard.bool(forKey: "audio_feedback")
+        }()
+        static func updateAudioFeedbackStatus() {
+                isAudioFeedbackEnable = UserDefaults.standard.bool(forKey: "audio_feedback")
         }
 }

@@ -173,6 +173,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 } else {
                         UserDefaults.standard.set(true, forKey: "audio_feedback")
                 }
+                AudioFeedback.updateAudioFeedbackStatus()
         }
 }
 
