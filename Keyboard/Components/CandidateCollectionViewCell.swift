@@ -11,8 +11,7 @@ final class CandidateCollectionViewCell: UICollectionViewCell {
                 contentView.addSubview(textLabel)
                 textLabel.textAlignment = .center
                 textLabel.adjustsFontForContentSizeCategory = true
-                // textLabel.font = .preferredFont(forTextStyle: .title3)
-                textLabel.font = UIFont(name: "PingFang HK", size: 20)
+                textLabel.font = .preferredFont(forTextStyle: .title3)
                 textLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
                 textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
                 textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true

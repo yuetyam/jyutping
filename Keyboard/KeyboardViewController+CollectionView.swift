@@ -20,7 +20,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 case 4:
                         cell.textLabel.font = UIFont(name: "PingFang SC", size: 20)
                 default:
-                        break
+                        cell.textLabel.font = UIFont(name: "PingFang HK", size: 20)
                 }
                 cell.textLabel.text = candidates[indexPath.row].text
                 switch toneStyle {
