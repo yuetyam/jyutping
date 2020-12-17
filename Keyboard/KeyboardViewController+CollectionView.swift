@@ -16,11 +16,14 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
                 switch logogram {
                 case 3:
-                        cell.textLabel.font = UIFont(name: "PingFang TC", size: 20)
+                        let pingFangTC: UIFont = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
+                        cell.textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangTC)
                 case 4:
-                        cell.textLabel.font = UIFont(name: "PingFang SC", size: 20)
+                        let pingFangSC: UIFont = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
+                        cell.textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangSC)
                 default:
-                        cell.textLabel.font = UIFont(name: "PingFang HK", size: 20)
+                        let pingFangHK: UIFont = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
+                        cell.textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangHK)
                 }
                 cell.textLabel.text = candidates[indexPath.row].text
                 switch toneStyle {
