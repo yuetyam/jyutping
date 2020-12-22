@@ -168,13 +168,13 @@ private struct ComposeMailView: UIViewControllerRepresentable {
                         return modelIdentifier
                 }()
                 let system: String = UIDevice.current.systemName + " " + UIDevice.current.systemVersion
-                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "__ERROR__"
-                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "__ERROR__"
+                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
+                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
                 let messageBody: String = """
-                Enter your feedback here.
+                [ Enter your feedback here. ]
                 
                 
-                App Version: \(version), build: \(build)
+                App version: \(version), build: \(build)
                 Platform: \(deviceIdentifier) - \(system)
                 
                 """
