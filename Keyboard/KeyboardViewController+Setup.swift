@@ -29,9 +29,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(toolBar)
                 let keysRows: [UIStackView] = makeKeysRows(for: layout.keys(for: self))
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
-                if toolBar.yueEngSwitch.selectedSegmentIndex == UISegmentedControl.noSegment {
-                        toolBar.yueEngSwitch.selectedSegmentIndex = keyboardLayout.isEnglish ? 1 : 0
-                }
+                toolBar.yueEngSwitch.selectedSegmentIndex = keyboardLayout.isEnglish ? 1 : 0
         }
         
         
