@@ -147,7 +147,7 @@ extension KeyButton {
                 case .search:
                         return "搜尋"
                 case .send:
-                        return "發送"
+                        return "傳送"
                 case .yahoo:
                         return "雅虎"
                 @unknown default:
