@@ -24,16 +24,19 @@ enum AudioFeedback: Equatable {
                 guard isAudioFeedbackOn else { return }
                 switch keyboardEvent {
                 case .text(_), .keyALeft, .keyLRight, .keyZLeft:
-                        perform(audioFeedback: .input)
+                        feedback(.input)
                 case .backspace, .keyBackspaceLeft:
-                        perform(audioFeedback: .delete)
+                        feedback(.delete)
                 case .switchTo(_), .newLine, .shift, .shiftDown:
-                        perform(audioFeedback: .modify)
+                        feedback(.modify)
                 case .none:
                         break
                 default:
-                        perform(audioFeedback: .click)
+                        feedback(.click)
                 }
+        }
+        private static func feedback(_ audioFeedback: AudioFeedback) {
+                AudioServicesPlaySystemSound(audioFeedback.systemSoundId)
         }
         
         static func perform(audioFeedback: AudioFeedback) {
