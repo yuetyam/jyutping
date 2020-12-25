@@ -30,10 +30,10 @@ struct HomeView: View {
                                 GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 ScrollView {
                                         /*
-                                         TextField("Type here to test keyboards", text: $placeholdText)
-                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                         .padding()
-                                         */
+                                        TextField("Type here to test keyboards", text: $placeholdText)
+                                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                                .padding()
+                                        */
                                         EnhancedTextField(placeholder: placeholder, text: $placeholdText)
                                                 .padding(8)
                                                 .fillBackground()
