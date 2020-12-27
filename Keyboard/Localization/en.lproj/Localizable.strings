@@ -10,6 +10,11 @@ English
 "Traditional, Taiwan" = "Traditional, Taiwan";
 "Simplified" = "Simplified";
 
+"Jyutping Display" = "Jyutping Display";
+"Above Candidates" = "Above Candidates";
+"Below Candidates" = "Below Candidates";
+"No Jyutpings" = "None";
+
 "Jyutping Tones Display" = "Jyutping Tones Display";
 "Normal : jyut6 ping3"      = "Normal          :  jyut6 ping3";
 "No Tones : jyut ping"      = "No Tones      :  jyut ping";

@@ -10,6 +10,11 @@ Cantonese
 "Traditional, Taiwan" = "傳統漢字（臺灣）";
 "Simplified" = "簡化字";
 
+"Jyutping Display" = "粵拼顯示";
+"Above Candidates" = "候選詞之上";
+"Below Candidates" = "候選詞之下";
+"No Jyutpings" = "無";
+
 "Jyutping Tones Display" = "粵拼聲調顯示";
 "Normal : jyut6 ping3"      = "普通          :  jyut6 ping3";
 "No Tones : jyut ping"      = "無聲調      :  jyut ping";
