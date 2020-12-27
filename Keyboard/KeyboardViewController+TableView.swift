@@ -3,18 +3,25 @@ import UIKit
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         
         func numberOfSections(in tableView: UITableView) -> Int {
-                4
+                5
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 switch section {
                 case 0:
+                        // Audio Feedback
                         return 1
                 case 1:
+                        // Characters / Logogram / Fonts
                         return 4
                 case 2:
-                        return 5
+                        // Jyutping Display
+                        return 3
                 case 3:
+                        // Jyutping Tones Display
+                        return 5
+                case 4:
+                        // Clear User Lexicon
                         return 1
                 default:
                         return 1
@@ -26,8 +33,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 1:
                         return NSLocalizedString("Characters", comment: "")
                 case 2:
-                        return NSLocalizedString("Jyutping Tones Display", comment: "")
+                        return NSLocalizedString("Jyutping Display", comment: "")
                 case 3:
+                        return NSLocalizedString("Jyutping Tones Display", comment: "")
+                case 4:
                         // Zero-width space
                         return "\u{200B}"
                 default:
@@ -46,7 +55,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 1:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                                 switch indexPath.row {
                                 case 0:
                                         cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
@@ -66,6 +74,23 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 return cell
                         }
                 case 2:
+                        if let cell = tableView.dequeueReusableCell(withIdentifier: "JyutpingTableViewCell", for: indexPath) as? NormalTableViewCell {
+                                switch indexPath.row {
+                                case 0:
+                                        cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: "")
+                                        cell.accessoryType = (jyutpingDisplay == 0 || jyutpingDisplay == 1) ? .checkmark : .none
+                                case 1:
+                                        cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: "")
+                                        cell.accessoryType = jyutpingDisplay == 2 ? .checkmark : .none
+                                case 2:
+                                        cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: "")
+                                        cell.accessoryType = jyutpingDisplay == 3 ? .checkmark : .none
+                                default:
+                                        cell.textLabel?.text = "__error__"
+                                }
+                                return cell
+                        }
+                case 3:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell {
                                 switch indexPath.row {
                                 case 0:
@@ -88,7 +113,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 }
                                 return cell
                         }
-                case 3:
+                case 4:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell {
                                 cell.textLabel?.text = NSLocalizedString("Clear user lexicon", comment: "")
                                 cell.textLabel?.textColor = .systemRed
@@ -125,6 +150,22 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
+                                UserDefaults.standard.set(1, forKey: "jyutping_display")
+                        case 1:
+                                UserDefaults.standard.set(2, forKey: "jyutping_display")
+                        case 2:
+                                UserDefaults.standard.set(3, forKey: "jyutping_display")
+                        default:
+                                break
+                        }
+                        updateJyutpingDisplay()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                tableView.reloadData()
+                        }
+                case 3:
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        switch indexPath.row {
+                        case 0:
                                 UserDefaults.standard.set(1, forKey: "tone_style")
                         case 1:
                                 UserDefaults.standard.set(2, forKey: "tone_style")
@@ -141,7 +182,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 3:
+                case 4:
                         imeQueue.async {
                                 self.lexiconManager.deleteAll()
                         }

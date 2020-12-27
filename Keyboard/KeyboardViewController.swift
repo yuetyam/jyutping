@@ -38,6 +38,7 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.delegate = self
                 settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")                
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "CharactersTableViewCell")
+                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "JyutpingTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
         }
@@ -232,6 +233,21 @@ final class KeyboardViewController: UIInputViewController {
                 let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
                 let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
                 self.converter = converter
+        }
+        
+        /// 粵拼顯示
+        ///
+        /// 0: The key "jyutping_display" doesn‘t exist.
+        ///
+        /// 1: 喺候選詞上邊
+        ///
+        /// 2: 喺候選詞下邊
+        ///
+        /// 3: 唔顯示
+        ///
+        private(set) lazy var jyutpingDisplay: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
+        func updateJyutpingDisplay() {
+                jyutpingDisplay = UserDefaults.standard.integer(forKey: "jyutping_display")
         }
         
         /// 粵拼聲調樣式

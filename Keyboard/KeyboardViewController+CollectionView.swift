@@ -14,16 +14,11 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 guard let cell: CandidateCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as? CandidateCollectionViewCell else {
                         return UICollectionViewCell()
                 }
-                switch logogram {
-                case 3:
-                        let pingFangTC: UIFont = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
-                        cell.textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangTC)
-                case 4:
-                        let pingFangSC: UIFont = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
-                        cell.textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangSC)
-                default:
-                        let pingFangHK: UIFont = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
-                        cell.textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangHK)
+                if cell.jyutpingDisplay != self.jyutpingDisplay {
+                        cell.shouldUpdateSubviews = true
+                }
+                if cell.logogram != self.logogram {
+                        cell.shouldUpdateFonts = true
                 }
                 cell.textLabel.text = candidates[indexPath.row].text
                 switch toneStyle {
