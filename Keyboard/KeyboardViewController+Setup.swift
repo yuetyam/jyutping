@@ -102,8 +102,16 @@ extension KeyboardViewController {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
                 
+                let extend: CGFloat = {
+                        if traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .compact {
+                                return 50
+                        } else {
+                                return 100
+                        }
+                }()
+                
                 // FIXME: - Unable to simultaneously satisfy constraints
-                settingsView.heightAnchor.constraint(equalToConstant: height + 60).isActive = true
+                settingsView.heightAnchor.constraint(equalToConstant: height + extend).isActive = true
                 
                 let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 10, bottomInset: 10, leftInset: 12)
                 settingsView.addSubview(upArrowButton)
