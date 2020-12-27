@@ -3,8 +3,7 @@ Jyutping
 
 Jyutping Keyboard for iOS.
 
-[![GitHub workflow](https://img.shields.io/github/workflow/status/yuetyam/jyutping/build?logo=github&style=for-the-badge)](https://github.com/yuetyam/jyutping/actions)
-[![GitHub release](https://img.shields.io/github/v/release/yuetyam/jyutping?logo=git&style=for-the-badge)](https://github.com/yuetyam/jyutping/releases)
+[![Build status](https://img.shields.io/github/workflow/status/yuetyam/jyutping/build?logo=github&style=for-the-badge)](https://github.com/yuetyam/jyutping/actions)
 [![Telegram](https://img.shields.io/badge/Telegram-@jyutping-blue?style=for-the-badge&logo=telegram)](https://t.me/jyutping)
 
 ## Now available on the App Store
