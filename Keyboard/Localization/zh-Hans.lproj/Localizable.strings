@@ -2,7 +2,7 @@
 Chinese, Simplified
 */
 
-"Audio feedback on click" = "按鍵聲音反饋";
+"Audio Feedback on Click" = "按鍵聲音反饋";
 
 "Characters" = "字形";
 "Traditional" = "傳統漢字";
@@ -17,4 +17,4 @@ Chinese, Simplified
 "Subscript : jyut₆ ping₃"   = "下標          :  jyut₆ ping₃";
 "Mix : jyut₆ ping³"         = "陰上陽下  :  jyut₆ ping³";
 
-"Clear user lexicon" = "清空用戶詞庫";
+"Clear User Lexicon" = "清空用戶詞庫";

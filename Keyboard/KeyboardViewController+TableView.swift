@@ -50,7 +50,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as? SwitchTableViewCell {
                                 cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
                                 cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
-                                cell.textLabel?.text = NSLocalizedString("Audio feedback on click", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: "")
                                 return cell
                         }
                 case 1:
@@ -115,7 +115,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 4:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                cell.textLabel?.text = NSLocalizedString("Clear user lexicon", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: "")
                                 cell.textLabel?.textColor = .systemRed
                                 cell.textLabel?.textAlignment = .center
                                 return cell
