@@ -39,9 +39,9 @@ final class ToolBar: UIView {
                 }
         }
         
-        let settingsButton: ToolButton = ToolButton(imageName: "gear", leftInset: 15)
+        let settingsButton: ToolButton = ToolButton(imageName: "gear", leftInset: 15, rightInset: 15)
         let yueEngSwitch: UISegmentedControl = UISegmentedControl(items: ["粵", "EN"])
-        let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", rightInset: 15)
+        let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", bottomInset: 4, leftInset: 17, rightInset: 15)
         let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", rightInset: 12)
         
         private func loadToolButtons() {
