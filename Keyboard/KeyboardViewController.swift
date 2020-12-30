@@ -153,8 +153,11 @@ final class KeyboardViewController: UIInputViewController {
                 let combined: [Candidate] = userdbCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
+                } else if converter == nil {
+                        candidates = combined.deduplicated()
+                        updateConverter()
                 } else {
-                        let converted: [Candidate] = combined.map { Candidate(text: converter.convert($0.text), footnote: $0.footnote, input: $0.input, lexiconText: $0.lexiconText) }
+                        let converted: [Candidate] = combined.map { Candidate(text: converter!.convert($0.text), footnote: $0.footnote, input: $0.input, lexiconText: $0.lexiconText) }
                         candidates = converted.deduplicated()
                 }
         }
@@ -198,7 +201,7 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 4: 簡化字
         private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
-        private var converter: ChineseConverter = {
+        private var converter: ChineseConverter? = {
                 let options: ChineseConverter.Options = {
                         let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         switch logogram {
@@ -212,8 +215,8 @@ final class KeyboardViewController: UIInputViewController {
                                 return [.traditionalize]
                         }
                 }()
-                let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
-                let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
+                guard let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle")) else { return nil }
+                let converter: ChineseConverter? = try? ChineseConverter(bundle: openccBundle, options: options)
                 return converter
         }()
         func updateConverter() {
@@ -230,8 +233,8 @@ final class KeyboardViewController: UIInputViewController {
                                 return [.traditionalize]
                         }
                 }()
-                let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle"))!
-                let converter: ChineseConverter = try! ChineseConverter(bundle: openccBundle, options: options)
+                guard let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle")) else { return }
+                let converter: ChineseConverter? = try? ChineseConverter(bundle: openccBundle, options: options)
                 self.converter = converter
         }
         
