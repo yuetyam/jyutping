@@ -3,6 +3,8 @@ English
 */
 
 "Audio Feedback on Click" = "Audio Feedback on Click";
+"Haptic Feedback on Click" = "Haptic Feedback on Click";
+"Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
 
 "Characters" = "Characters";
 "Traditional" = "Traditional";
