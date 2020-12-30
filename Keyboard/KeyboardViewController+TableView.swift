@@ -9,8 +9,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 switch section {
                 case 0:
-                        // Audio Feedback
-                        return 1
+                        // Audio Feedback & Haptic Feedback
+                        // iPad does not support haptic feedback
+                        return traitCollection.userInterfaceIdiom == .phone ? 2 : 1
                 case 1:
                         // Characters / Logogram / Fonts
                         return 4
@@ -43,14 +44,43 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return nil
                 }
         }
+        func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+                switch section {
+                case 0:
+                        guard traitCollection.userInterfaceIdiom == .phone else { return nil }
+                        if hasFullAccess {
+                                return nil
+                        } else {
+                                return NSLocalizedString("Haptic Feedback requires Full Access", comment: "")
+                        }
+                default:
+                        return nil
+                }
+        }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 switch indexPath.section {
                 case 0:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as? SwitchTableViewCell {
-                                cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
-                                cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
-                                cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: "")
+                                switch indexPath.row {
+                                case 0:
+                                        cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: "")
+                                        cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
+                                        cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
+                                case 1:
+                                        cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: "")
+                                        if hasFullAccess {
+                                                cell.switchView.isOn = UserDefaults.standard.bool(forKey: "haptic_feedback")
+                                                cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .allTouchEvents)
+                                        } else {
+                                                cell.switchView.isOn = false
+                                                cell.switchView.isEnabled = false
+                                                cell.textLabel?.isEnabled = false
+                                                cell.isUserInteractionEnabled = false
+                                        }
+                                default:
+                                        cell.textLabel?.text = "__error__"
+                                }
                                 return cell
                         }
                 case 1:
@@ -215,6 +245,14 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         UserDefaults.standard.set(true, forKey: "audio_feedback")
                 }
                 AudioFeedback.updateAudioFeedbackStatus()
+        }
+        @objc private func handleHapticFeedbackSwitch() {
+                if UserDefaults.standard.bool(forKey: "haptic_feedback") {
+                        UserDefaults.standard.set(false, forKey: "haptic_feedback")
+                } else {
+                        UserDefaults.standard.set(true, forKey: "haptic_feedback")
+                }
+                // FIXME: - Update haptic status
         }
 }
 
