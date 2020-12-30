@@ -74,7 +74,7 @@ final class CandidateCollectionViewCell: UICollectionViewCell {
                 [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
                  textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                  footnoteLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-                 footnoteLabel.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 25)]
+                 footnoteLabel.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 22)]
         }()
         private lazy var BottomJyutpingConstraints: [NSLayoutConstraint] = {
                 [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
