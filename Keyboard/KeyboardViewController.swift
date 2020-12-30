@@ -173,10 +173,11 @@ final class KeyboardViewController: UIInputViewController {
         }
         
         private func setupToolBarActions() {
-                toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .allTouchEvents)
+                toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .touchUpInside)
                 toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .valueChanged)
-                toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .allTouchEvents)
-                toolBar.keyboardDownButton.addTarget(self, action: #selector(dismissInputMethod), for: .allTouchEvents)
+                toolBar.pasteButton.addTarget(self, action: #selector(handlePaste), for: .touchUpInside)
+                toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .touchUpInside)
+                toolBar.keyboardDownButton.addTarget(self, action: #selector(dismissInputMethod), for: .touchUpInside)
         }
         @objc private func handleDownArrowEvent() {
                 keyboardLayout = .candidateBoard
@@ -198,6 +199,13 @@ final class KeyboardViewController: UIInputViewController {
                 default:
                         break
                 }
+        }
+        @objc private func handlePaste() {
+                guard UIPasteboard.general.hasStrings else { return }
+                guard let copied: String = UIPasteboard.general.string else { return }
+                lightImpactFeedback?.impactOccurred()
+                AudioFeedback.perform(audioFeedback: .modify)
+                textDocumentProxy.insertText(copied)
         }
         
         /// 候選詞字形
