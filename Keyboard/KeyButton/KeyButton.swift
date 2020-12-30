@@ -58,6 +58,7 @@ final class KeyButton: UIButton {
         private lazy var previewLabel: UILabel = UILabel()
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
+                viewController.lightImpactFeedback?.impactOccurred()
                 switch keyboardEvent {
                 case .text(_):
                         if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
@@ -170,6 +171,7 @@ final class KeyButton: UIButton {
                 default:
                         break
                 }
+                viewController.lightImpactFeedback?.prepare()
         }
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)

@@ -51,6 +51,16 @@ final class KeyboardViewController: UIInputViewController {
                         setupKeyboard()
                         didKeyboardEstablished = true
                 }
+                if lightImpactFeedback == nil && UserDefaults.standard.bool(forKey: "haptic_feedback") {
+                        lightImpactFeedback = UIImpactFeedbackGenerator(style: .light)
+                }
+        }
+        
+        var lightImpactFeedback: UIImpactFeedbackGenerator?
+        
+        override func viewWillDisappear(_ animated: Bool) {
+                super.viewWillDisappear(animated)
+                lightImpactFeedback = nil
         }
         
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -178,6 +188,7 @@ final class KeyboardViewController: UIInputViewController {
                 keyboardLayout = .settingsView
         }
         @objc private func handleYueEngSwitch() {
+                lightImpactFeedback?.impactOccurred()
                 isCapsLocked = false
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
                 case 0:
