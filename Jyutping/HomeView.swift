@@ -19,10 +19,12 @@ struct HomeView: View {
                                                 .padding(8)
                                                 .fillBackground()
                                                 .padding()
-                                        
+                                        /* TODO
                                         if !isJyutpingKeyboardEnabled {
                                                 GuideView()
                                         }
+                                        */
+                                        GuideView()
                                 }
                                 .navigationBarTitle(Text("Home"))
                         }
