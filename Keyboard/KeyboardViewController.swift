@@ -195,7 +195,7 @@ final class KeyboardViewController: UIInputViewController {
                 keyboardLayout = .settingsView
         }
         @objc private func handleYueEngSwitch() {
-                lightImpactFeedback?.impactOccurred()
+                selectionFeedback?.selectionChanged()
                 isCapsLocked = false
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
                 case 0:
