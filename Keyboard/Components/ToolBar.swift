@@ -41,7 +41,7 @@ final class ToolBar: UIView {
         
         let settingsButton: ToolButton = ToolButton(imageName: "gear", leftInset: 14, rightInset: 14)
         let yueEngSwitch: UISegmentedControl = UISegmentedControl(items: ["粵", "EN"])
-        let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 18, bottomInset: 17)
+        let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 18, bottomInset: 18)
         let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", bottomInset: 4, leftInset: 16, rightInset: 14)
         let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", rightInset: 12)
         
