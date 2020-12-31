@@ -26,7 +26,9 @@ extension KeyboardViewController {
         private func setup(layout: KeyboardLayout) {
                 keyboardStackView.removeAllArrangedSubviews()
                 toolBar.tintColor = isDarkAppearance ? .white : .black
-                toolBar.pasteButton.tintColor = UIPasteboard.general.hasStrings ? .black : .systemGray
+                if !UIPasteboard.general.hasStrings {
+                        toolBar.pasteButton.tintColor = .systemGray
+                }
                 keyboardStackView.addArrangedSubview(toolBar)
                 let keysRows: [UIStackView] = makeKeysRows(for: layout.keys(for: self))
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
