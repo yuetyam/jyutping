@@ -73,7 +73,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 let candidate: Candidate = candidates[indexPath.row]
                 textDocumentProxy.insertText(candidate.text)
                 AudioFeedback.perform(audioFeedback: .modify)
-                lightImpactFeedback?.impactOccurred()
+                selectionFeedback?.selectionChanged()
                 candidateSequence.append(candidate)
                 currentInputText = String(currentInputText.dropFirst(candidate.input.count))
                 if keyboardLayout == .candidateBoard && currentInputText.isEmpty {

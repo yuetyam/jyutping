@@ -51,16 +51,22 @@ final class KeyboardViewController: UIInputViewController {
                         setupKeyboard()
                         didKeyboardEstablished = true
                 }
-                if lightImpactFeedback == nil && UserDefaults.standard.bool(forKey: "haptic_feedback") {
+                let isHapticFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "haptic_feedback")
+                if lightImpactFeedback == nil && isHapticFeedbackOn {
                         lightImpactFeedback = UIImpactFeedbackGenerator(style: .light)
+                }
+                if selectionFeedback == nil && isHapticFeedbackOn {
+                        selectionFeedback = UISelectionFeedbackGenerator()
                 }
         }
         
         var lightImpactFeedback: UIImpactFeedbackGenerator?
+        var selectionFeedback: UISelectionFeedbackGenerator?
         
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 lightImpactFeedback = nil
+                selectionFeedback = nil
         }
         
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
