@@ -825,7 +825,7 @@
 			repositoryURL = "https://github.com/ososoio/SwiftyOpenCC.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
+				minimumVersion = 1.0.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
