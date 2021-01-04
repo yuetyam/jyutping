@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 struct JyutpingView: View {
         
@@ -33,12 +34,19 @@ struct JyutpingView: View {
                                                         .padding()
                                                         .fillBackground()
                                                         .padding(.horizontal)
-                                                        .fixedSize(horizontal: false, vertical: true)
                                                 } else {
                                                         VStack {
                                                                 HStack {
                                                                         Text(rawCantonese).font(.headline)
+                                                                        Spacer()
+                                                                        Button(action: {
+                                                                                speak(rawCantonese)
+                                                                        }) {
+                                                                                Image(systemName: "speaker.wave.2")
+                                                                        }
+                                                                        .foregroundColor(.blue)
                                                                 }
+                                                                .padding(.horizontal)
                                                                 
                                                                 ForEach(jyutpings) { jyutping in
                                                                         Divider()
@@ -47,7 +55,14 @@ struct JyutpingView: View {
                                                                                         .font(.system(.body, design: .monospaced))
                                                                                         .fixedSize(horizontal: false, vertical: true)
                                                                                 Spacer()
-                                                                        }.padding(.horizontal)
+                                                                                Button(action: {
+                                                                                        speak(jyutping)
+                                                                                }) {
+                                                                                        Image(systemName: "speaker.wave.2")
+                                                                                }
+                                                                                .foregroundColor(.blue)
+                                                                        }
+                                                                        .padding(.horizontal)
                                                                 }
                                                         }
                                                         .padding(.vertical)
@@ -82,6 +97,13 @@ struct JyutpingView: View {
                         }
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
+        }
+        
+        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        private func speak(_ text: String) {
+                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
+                synthesizer.speak(utterance)
         }
 }
 
