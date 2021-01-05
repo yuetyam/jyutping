@@ -42,7 +42,12 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
         }
-        
+
+        override func didReceiveMemoryWarning() {
+                debugPrint("didReceiveMemoryWarning()")
+                super.didReceiveMemoryWarning()
+        }
+
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
                 if askingDifferentKeyboardLayout {
