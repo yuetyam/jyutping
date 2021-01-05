@@ -1,0 +1,27 @@
+/*
+Chinese (Hong Kong)
+*/
+
+"Audio Feedback on Click" = "按鍵聲音反饋";
+"Haptic Feedback on Click" = "按鍵振動反饋";
+"Haptic Feedback requires Full Access" = "振動反饋需啓用「全權取用」";
+
+"Characters" = "字形";
+"Traditional" = "傳統漢字";
+"Traditional, Hong Kong" = "傳統漢字（香港）";
+"Traditional, Taiwan" = "傳統漢字（台灣）";
+"Simplified" = "簡化字";
+
+"Jyutping Display" = "粵拼顯示";
+"Above Candidates" = "候選詞之上";
+"Below Candidates" = "候選詞之下";
+"No Jyutpings" = "無";
+
+"Jyutping Tones Display" = "粵拼聲調顯示";
+"Normal : jyut6 ping3"      = "普通          :  jyut6 ping3";
+"No Tones : jyut ping"      = "無聲調      :  jyut ping";
+"Superscript : jyut⁶ ping³" = "上標          :  jyut⁶ ping³";
+"Subscript : jyut₆ ping₃"   = "下標          :  jyut₆ ping₃";
+"Mix : jyut₆ ping³"         = "陰上陽下  :  jyut₆ ping³";
+
+"Clear User Lexicon" = "清空用户詞庫";

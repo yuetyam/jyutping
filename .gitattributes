@@ -1,0 +1,4 @@
+*.sqlite3 binary
+*.ocd binary
+*.ocd2 binary
+*.png binary
