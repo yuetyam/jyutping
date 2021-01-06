@@ -10,7 +10,15 @@ struct JyutpingView: View {
         private let specials: String = #"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ_0123456789-:;.,?~!@#$%^&*/\<>{}[]()+=`'"’“•。，；？！、：～（）〈〉《》「」『』〔〕〖〗【】"#
         private var rawCantonese: String { inputText.filter { !specials.contains($0) } }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
-        
+
+        private let speakerImageName: String = {
+                if #available(iOS 14, *) {
+                        return "speaker.wave.2"
+                } else {
+                        return "speaker.2"
+                }
+        }()
+
         var body: some View {
                 NavigationView {
                         ZStack {
@@ -42,7 +50,7 @@ struct JyutpingView: View {
                                                                         Button(action: {
                                                                                 speak(rawCantonese)
                                                                         }) {
-                                                                                Image(systemName: "speaker.wave.2")
+                                                                                Image(systemName: speakerImageName)
                                                                         }
                                                                         .foregroundColor(.blue)
                                                                 }
@@ -58,7 +66,7 @@ struct JyutpingView: View {
                                                                                 Button(action: {
                                                                                         speak(jyutping)
                                                                                 }) {
-                                                                                        Image(systemName: "speaker.wave.2")
+                                                                                        Image(systemName: speakerImageName)
                                                                                 }
                                                                                 .foregroundColor(.blue)
                                                                         }
