@@ -25,8 +25,8 @@ extension KeyButton {
                                 return 5
                         }
                 }
-                keyButtonView.translatesAutoresizingMaskIntoConstraints = false
                 addSubview(keyButtonView)
+                keyButtonView.translatesAutoresizingMaskIntoConstraints = false
                 keyButtonView.topAnchor.constraint(equalTo: topAnchor, constant: verticalConstant).isActive = true
                 keyButtonView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalConstant).isActive = true
                 keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant).isActive = true
@@ -47,8 +47,8 @@ extension KeyButton {
         }
         
         func setupKeyTextLabel() {
-                keyTextLabel.translatesAutoresizingMaskIntoConstraints = false
                 keyButtonView.addSubview(keyTextLabel)
+                keyTextLabel.translatesAutoresizingMaskIntoConstraints = false
                 keyTextLabel.topAnchor.constraint(equalTo: keyButtonView.topAnchor).isActive = true
                 keyTextLabel.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor).isActive = true
                 keyTextLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor).isActive = true
@@ -79,8 +79,8 @@ extension KeyButton {
                         }
                 }
                 
-                keyImageView.translatesAutoresizingMaskIntoConstraints = false
                 keyButtonView.addSubview(keyImageView)
+                keyImageView.translatesAutoresizingMaskIntoConstraints = false
                 keyImageView.topAnchor.constraint(equalTo: keyButtonView.topAnchor, constant: constant).isActive = true
                 keyImageView.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -constant).isActive = true
                 keyImageView.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor).isActive = true
