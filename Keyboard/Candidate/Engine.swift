@@ -18,7 +18,18 @@ struct Engine {
                 case 0:
                         return []
                 case 1:
-                        return shortcut(for: text)
+                        switch text {
+                        case "q":
+                                return shortcut(for: "c")
+                        case "r", "y":
+                                return shortcut(for: "j")
+                        case "v":
+                                return shortcut(for: "w")
+                        case "x":
+                                return shortcut(for: "s")
+                        default:
+                                return shortcut(for: text)
+                        }
                 case 2:
                         return fetchTwoChars(text)
                 case 3:
