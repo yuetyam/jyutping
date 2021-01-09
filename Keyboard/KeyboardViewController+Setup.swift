@@ -15,6 +15,8 @@ extension KeyboardViewController {
                         setupSettingsView()
                 case .numberPad, .decimalPad:
                         setupNumberPad()
+                case .emoji:
+                        setupEmojiKeyboard()
                 default:
                         setup(layout: keyboardLayout)
                 }
@@ -64,27 +66,46 @@ extension KeyboardViewController {
                 stackView.addMultipleArrangedSubviews(digits.map { NumberButton(digit: $0, viewController: self) })
                 return stackView
         }
-        
+
+
+        // MARK: - Emoji Keyboard
+        func setupEmojiKeyboard() {
+                let height: CGFloat = view.frame.height
+                keyboardStackView.removeAllArrangedSubviews()
+                let emojiKeyboard = EmojiBoard(viewController: self)
+                emojiKeyboard.heightAnchor.constraint(equalToConstant: height).isActive = true
+                emojiKeyboard.addSubview(emojiCollectionView)
+                emojiCollectionView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        emojiCollectionView.bottomAnchor.constraint(equalTo: emojiKeyboard.bottomStackView.topAnchor),
+                        emojiCollectionView.leadingAnchor.constraint(equalTo: emojiKeyboard.leadingAnchor),
+                        emojiCollectionView.trailingAnchor.constraint(equalTo: emojiKeyboard.trailingAnchor),
+                        emojiCollectionView.topAnchor.constraint(equalTo: emojiKeyboard.topAnchor)
+                ])
+                (emojiCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
+                emojiCollectionView.setContentOffset(.zero, animated: false)
+                keyboardStackView.addArrangedSubview(emojiKeyboard)
+        }
         
         // MARK: - CandidateBoard
         
         var candidateBoardCollectionViewConstraints: [NSLayoutConstraint] {
-                [collectionView.bottomAnchor.constraint(equalTo: candidateBoard.bottomAnchor),
-                 collectionView.leadingAnchor.constraint(equalTo: candidateBoard.leadingAnchor),
-                 collectionView.trailingAnchor.constraint(equalTo: candidateBoard.upArrowButton.leadingAnchor),
-                 collectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor)]
+                [candidateCollectionView.bottomAnchor.constraint(equalTo: candidateBoard.bottomAnchor),
+                 candidateCollectionView.leadingAnchor.constraint(equalTo: candidateBoard.leadingAnchor),
+                 candidateCollectionView.trailingAnchor.constraint(equalTo: candidateBoard.upArrowButton.leadingAnchor),
+                 candidateCollectionView.topAnchor.constraint(equalTo: candidateBoard.topAnchor)]
         }
         private func setupCandidateBoard() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
-                collectionView.removeFromSuperview()
+                candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(toolBar.collectionViewConstraints)
                 
                 candidateBoard.heightAnchor.constraint(equalToConstant: height).isActive = true
-                candidateBoard.addSubview(collectionView)
-                collectionView.translatesAutoresizingMaskIntoConstraints = false
+                candidateBoard.addSubview(candidateCollectionView)
+                candidateCollectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(candidateBoardCollectionViewConstraints)
-                (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
+                (candidateCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
                 
                 candidateBoard.upArrowButton.tintColor = isDarkAppearance ? .white : .black
                 candidateBoard.upArrowButton.addTarget(self, action: #selector(dismissCandidateBoard), for: .allTouchEvents)
@@ -92,7 +113,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(candidateBoard)
         }
         @objc private func dismissCandidateBoard() {
-                collectionView.removeFromSuperview()
+                candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                 toolBar.reinit()
                 keyboardLayout = .jyutping

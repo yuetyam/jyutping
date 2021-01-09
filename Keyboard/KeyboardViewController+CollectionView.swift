@@ -3,15 +3,52 @@ import UIKit
 extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
         
         func numberOfSections(in collectionView: UICollectionView) -> Int {
-                return 1
+                if collectionView == candidateCollectionView {
+                        return 1
+                } else {
+                        return 9
+                }
         }
         
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-                return candidates.count
+                if collectionView == candidateCollectionView {
+                        return candidates.count
+                } else {
+                        switch section {
+                        case 0:
+                                return 151 // Smileys & Emotion
+                        case 1:
+                                return 347 // People & Body
+                        case 2:
+                                return 140 // Animals & Nature
+                        case 3:
+                                return 129 // Food & Drink
+                        case 4:
+                                return 215 // Travel & Places
+                        case 5:
+                                return 84  // Activities
+                        case 6:
+                                return 250 // Objects
+                        case 7:
+                                return 220 // Symbols
+                        case 8:
+                                return 269 // Flags
+                        default:
+                                return 0
+                        }
+                }
         }
-        
+
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-                guard let cell: CandidateCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as? CandidateCollectionViewCell else {
+                guard collectionView == candidateCollectionView else {
+                        guard let cell: EmojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmojiCell", for: indexPath) as? EmojiCell else {
+                                return UICollectionViewCell()
+                        }
+                        cell.emojiLabel.text = String(emojis[indexPath.section][indexPath.row])
+                        return cell
+                }
+
+                guard let cell: CandidateCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as? CandidateCell else {
                         return UICollectionViewCell()
                 }
                 if cell.jyutpingDisplay != self.jyutpingDisplay {
@@ -70,6 +107,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         }
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+                guard collectionView == candidateCollectionView else {
+                        textDocumentProxy.insertText(String(emojis[indexPath.section][indexPath.row]))
+                        AudioFeedback.perform(audioFeedback: .input)
+                        selectionFeedback?.selectionChanged()
+                        return
+                }
+
                 let candidate: Candidate = candidates[indexPath.row]
                 textDocumentProxy.insertText(candidate.text)
                 AudioFeedback.perform(audioFeedback: .modify)
@@ -95,7 +139,10 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-                
+                guard collectionView == candidateCollectionView else {
+                        return CGSize(width: 35, height: 35)
+                }
+
                 // FIXME: - don't know why
                 guard candidates.count > indexPath.row else { return CGSize(width: 55, height: 55) }
                 
@@ -147,6 +194,10 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-                return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                if collectionView == self.emojiCollectionView {
+                        return UIEdgeInsets(top: 8, left: 8, bottom: 4, right: 8)
+                } else {
+                        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                }
         }
 }

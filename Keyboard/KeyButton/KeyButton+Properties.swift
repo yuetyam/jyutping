@@ -115,7 +115,11 @@ extension KeyButton {
                 case .cantoneseSymbolic, .symbolic:
                         return "#+="
                 case .jyutping:
-                        return "拼"
+                        if viewController.keyboardLayout == .emoji {
+                                return "返回"
+                        } else {
+                                return "拼"
+                        }
                 case .alphabetic, .alphabeticUppercase:
                         return "ABC"
                 default:

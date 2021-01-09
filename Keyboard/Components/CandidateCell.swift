@@ -1,6 +1,6 @@
 import UIKit
 
-final class CandidateCollectionViewCell: UICollectionViewCell {
+final class CandidateCell: UICollectionViewCell {
         
         let textLabel: UILabel = UILabel()
         let footnoteLabel: UILabel = UILabel()

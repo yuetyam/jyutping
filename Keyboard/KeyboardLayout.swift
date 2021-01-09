@@ -1,24 +1,24 @@
 import UIKit
 
-enum KeyboardLayout: Equatable {
-        case
-        jyutping,
-        jyutpingUppercase,
-        
-        alphabetic,
-        alphabeticUppercase,
-        
-        cantoneseNumeric,
-        cantoneseSymbolic,
-        
-        numeric,
-        symbolic,
-        
-        numberPad,
-        decimalPad,
-        
-        candidateBoard,
-        settingsView
+enum KeyboardLayout {
+        case jyutping,
+             jyutpingUppercase,
+
+             alphabetic,
+             alphabeticUppercase,
+
+             cantoneseNumeric,
+             cantoneseSymbolic,
+
+             numeric,
+             symbolic,
+
+             emoji,
+             numberPad,
+             decimalPad,
+
+             candidateBoard,
+             settingsView
         
         func keys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 switch self {

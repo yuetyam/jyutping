@@ -20,7 +20,7 @@
 		37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7C239ABB30006A59A7 /* ShareSheetView.swift */; };
 		37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7E239ABDC4006A59A7 /* MessageView.swift */; };
 		37336F81239ABE05006A59A7 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F80239ABE05006A59A7 /* LinkButton.swift */; };
-		3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */; };
+		3741062D23E2191200639EF4 /* CandidateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
 		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
@@ -40,6 +40,8 @@
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
 		377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4E2471129000B42D30 /* EnhancedTextField.swift */; };
+		379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */; };
+		379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */; };
 		37AA501C24502D3F003E7921 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA501E24502D3F003E7921 /* Localizable.strings */; };
 		37AE5BE323546454008A8E4B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BE223546454008A8E4B /* HomeView.swift */; };
 		37AE5BEF2354AAF8008A8E4B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */; };
@@ -104,7 +106,7 @@
 		37336F7C239ABB30006A59A7 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		37336F7E239ABDC4006A59A7 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		37336F80239ABE05006A59A7 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCollectionViewCell.swift; sourceTree = "<group>"; };
+		3741062C23E2191200639EF4 /* CandidateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCell.swift; sourceTree = "<group>"; };
 		3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
 		3741063323E30D7100639EF4 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
@@ -128,6 +130,8 @@
 		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
 		377EAD4E2471129000B42D30 /* EnhancedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
+		379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
+		379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		37AA501D24502D3F003E7921 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37AA501F24502DAA003E7921 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37AA502024502DAD003E7921 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -244,10 +248,12 @@
 			isa = PBXGroup;
 			children = (
 				3741063523E30DA800639EF4 /* CandidateBoard.swift */,
-				3722B850250129F900E33ADB /* NumberPadButtons.swift */,
-				3741062C23E2191200639EF4 /* CandidateCollectionViewCell.swift */,
+				379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */,
+				3741062C23E2191200639EF4 /* CandidateCell.swift */,
+				379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */,
 				3715203323B22ACF007EAB60 /* ToolBar.swift */,
 				3741063323E30D7100639EF4 /* ToolButton.swift */,
+				3722B850250129F900E33ADB /* NumberPadButtons.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -484,6 +490,8 @@
 				37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */,
 				37C05F9A23E339C90061C992 /* KeyButton.swift in Sources */,
 				37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */,
+				379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */,
+				379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */,
 				37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */,
 				374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */,
 				377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */,
@@ -499,7 +507,7 @@
 				3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */,
 				3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */,
 				3722B851250129F900E33ADB /* NumberPadButtons.swift in Sources */,
-				3741062D23E2191200639EF4 /* CandidateCollectionViewCell.swift in Sources */,
+				3741062D23E2191200639EF4 /* CandidateCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
