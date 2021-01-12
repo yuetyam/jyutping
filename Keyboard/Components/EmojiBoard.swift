@@ -5,19 +5,16 @@ final class EmojiBoard: UIView {
         let bottomStackView: UIStackView = UIStackView()
         let indicatorsStackView: UIStackView = UIStackView()
 
-        private let viewController: KeyboardViewController
-
         init(viewController: KeyboardViewController) {
-                self.viewController = viewController
                 super.init(frame: .zero)
-                setupSubViews()
+                setupSubViews(viewController: viewController)
         }
 
         required init?(coder: NSCoder) {
                 fatalError("init(coder:) has not been implemented")
         }
 
-        private func setupSubViews() {
+        private func setupSubViews(viewController: KeyboardViewController) {
                 let switchBackButton: KeyButton = KeyButton(keyboardEvent: .switchTo(.jyutping), viewController: viewController)
                 let spaceButton: KeyButton = KeyButton(keyboardEvent: .space, viewController: viewController)
                 let backspaceButton: KeyButton = KeyButton(keyboardEvent: .backspace, viewController: viewController)
@@ -41,25 +38,16 @@ final class EmojiBoard: UIView {
                         bottomStackView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
 
-                let indicator_0: Indicator = Indicator(0)
-                let indicator_1: Indicator = Indicator(1)
-                let indicator_2: Indicator = Indicator(2)
-                let indicator_3: Indicator = Indicator(3)
-                let indicator_4: Indicator = Indicator(4)
-                let indicator_5: Indicator = Indicator(5)
-                let indicator_6: Indicator = Indicator(6)
-                let indicator_7: Indicator = Indicator(7)
-                let indicator_8: Indicator = Indicator(8)
-                // mostLeftIndicator.indicatorImageView.image = UIImage(systemName: "clock")
-                indicator_0.indicatorImageView.image = UIImage(systemName: "face.smiling")
-                indicator_1.indicatorImageView.image = UIImage(systemName: "hand.thumbsup")
-                indicator_2.indicatorImageView.image = UIImage(systemName: "tortoise")
-                indicator_3.indicatorImageView.image = UIImage(systemName: "leaf")
-                indicator_4.indicatorImageView.image = UIImage(systemName: "car")
-                indicator_5.indicatorImageView.image = UIImage(systemName: "ticket")
-                indicator_6.indicatorImageView.image = UIImage(systemName: "lightbulb")
-                indicator_7.indicatorImageView.image = UIImage(systemName: "number.circle")
-                indicator_8.indicatorImageView.image = UIImage(systemName: "flag")
+                // let mostLeftIndicator: Indicator = Indicator(index: 0, imageName: "clock")
+                let indicator_0: Indicator = Indicator(index: 0, imageName: "face.smiling")
+                let indicator_1: Indicator = Indicator(index: 1, imageName: "hand.thumbsup")
+                let indicator_2: Indicator = Indicator(index: 2, imageName: "tortoise")
+                let indicator_3: Indicator = Indicator(index: 3, imageName: "leaf")
+                let indicator_4: Indicator = Indicator(index: 4, imageName: "car")
+                let indicator_5: Indicator = Indicator(index: 5, imageName: "ticket")
+                let indicator_6: Indicator = Indicator(index: 6, imageName: "lightbulb")
+                let indicator_7: Indicator = Indicator(index: 7, imageName: "number.circle")
+                let indicator_8: Indicator = Indicator(index: 8, imageName: "flag")
                 
                 indicatorsStackView.distribution = .fillProportionally
                 indicatorsStackView.addMultipleArrangedSubviews([indicator_0, indicator_1, indicator_2, indicator_3, indicator_4, indicator_5, indicator_6, indicator_7, indicator_8])
@@ -75,23 +63,24 @@ final class EmojiBoard: UIView {
 
 final class Indicator: UIButton {
 
-        let indicatorImageView: UIImageView = UIImageView()
         let index: Int
 
-        init(_ index: Int, topInset: CGFloat = 10, bottomInset: CGFloat = 10, leftInset: CGFloat = 2, rightInset: CGFloat = 2) {
+        init(index: Int, imageName: String, topInset: CGFloat = 10, bottomInset: CGFloat = 10) {
                 self.index = index
                 super.init(frame: .zero)
-                self.backgroundColor = .clearTappable
+                backgroundColor = .clearTappable
                 tintColor = .systemGray
+                let indicatorImageView: UIImageView = UIImageView()
                 addSubview(indicatorImageView)
-                indicatorImageView.contentMode = .scaleAspectFit
                 indicatorImageView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                         indicatorImageView.topAnchor.constraint(equalTo: topAnchor, constant: topInset),
                         indicatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomInset),
-                        indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leftInset),
-                        indicatorImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -rightInset)
+                        indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        indicatorImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
+                indicatorImageView.contentMode = .scaleAspectFit
+                indicatorImageView.image = UIImage(systemName: imageName)
         }
 
         required init?(coder: NSCoder) {
