@@ -72,21 +72,27 @@ extension KeyboardViewController {
         func setupEmojiKeyboard() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
-                let emojiKeyboard = EmojiBoard(viewController: self)
-                emojiKeyboard.heightAnchor.constraint(equalToConstant: height).isActive = true
-                emojiKeyboard.addSubview(emojiCollectionView)
+                emojiBoard.heightAnchor.constraint(equalToConstant: height + 50).isActive = true
+                emojiBoard.addSubview(emojiCollectionView)
                 emojiCollectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                        emojiCollectionView.bottomAnchor.constraint(equalTo: emojiKeyboard.bottomStackView.topAnchor),
-                        emojiCollectionView.leadingAnchor.constraint(equalTo: emojiKeyboard.leadingAnchor),
-                        emojiCollectionView.trailingAnchor.constraint(equalTo: emojiKeyboard.trailingAnchor),
-                        emojiCollectionView.topAnchor.constraint(equalTo: emojiKeyboard.topAnchor)
+                        emojiCollectionView.bottomAnchor.constraint(equalTo: emojiBoard.indicatorsStackView.topAnchor),
+                        emojiCollectionView.leadingAnchor.constraint(equalTo: emojiBoard.leadingAnchor),
+                        emojiCollectionView.trailingAnchor.constraint(equalTo: emojiBoard.trailingAnchor),
+                        emojiCollectionView.topAnchor.constraint(equalTo: emojiBoard.topAnchor)
                 ])
                 (emojiCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
-                emojiCollectionView.setContentOffset(.zero, animated: false)
-                keyboardStackView.addArrangedSubview(emojiKeyboard)
+                keyboardStackView.addArrangedSubview(emojiBoard)
+                _ = emojiBoard.indicatorsStackView.arrangedSubviews.map({ ($0 as? Indicator)?.addTarget(self, action: #selector(handleIndicator(_:)), for: .touchDown) })
         }
-        
+        @objc func handleIndicator(_ sender: Indicator) {
+                lightImpactFeedback?.impactOccurred()
+                AudioFeedback.perform(audioFeedback: .modify)
+                let indexPath: IndexPath = IndexPath(row: 0, section: sender.index)
+                emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+
+
         // MARK: - CandidateBoard
         
         var candidateBoardCollectionViewConstraints: [NSLayoutConstraint] {

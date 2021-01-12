@@ -140,7 +140,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
                 guard collectionView == candidateCollectionView else {
-                        return CGSize(width: 35, height: 35)
+                        return CGSize(width: 40, height: 40)
                 }
 
                 // FIXME: - don't know why
@@ -199,5 +199,15 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 } else {
                         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 }
+        }
+
+        func scrollViewDidScroll(_ scrollView: UIScrollView) {
+                let visibleCount: Int = emojiCollectionView.visibleCells.count
+                guard visibleCount > 0 else { return }
+                let medium: Int = visibleCount / 2
+                let mediumCell = emojiCollectionView.visibleCells[medium]
+                guard let indexPath = emojiCollectionView.indexPath(for: mediumCell) else { return }
+                _ = emojiBoard.indicatorsStackView.arrangedSubviews.map({ $0.tintColor = .systemGray })
+                emojiBoard.indicatorsStackView.arrangedSubviews[indexPath.section].tintColor = isDarkAppearance ? .white : .black
         }
 }
