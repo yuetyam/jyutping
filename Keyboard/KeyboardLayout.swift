@@ -189,8 +189,8 @@ private extension KeyboardLayout {
         func cantoneseSymbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 let arrayWithTextArray: [[String]] = [
                         ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="],
-                        ["_", "—", "＼", "｜", "～", "《", "》", "€", "&", "\u{00B7}"],
-                        ["⋯", "【", "】", "〔", "〕", "¥"]
+                        ["_", "—", "＼", "｜", "～", "《", "》", "¥", "&", "\u{00B7}"],
+                        ["⋯", "【", "】", "〔", "〕", "\u{00A3}"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.cantoneseNumeric), at: 0)
