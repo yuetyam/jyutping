@@ -143,17 +143,17 @@ extension KeyboardViewController {
                 // FIXME: - Unable to simultaneously satisfy constraints
                 settingsView.heightAnchor.constraint(equalToConstant: height + extend).isActive = true
                 
-                let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 8, bottomInset: 8, leftInset: 12)
+                let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 10, bottomInset: 10, leftInset: 15, rightInset: 55)
                 settingsView.addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(
                         [upArrowButton.topAnchor.constraint(equalTo: settingsView.topAnchor),
                          upArrowButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
-                         upArrowButton.widthAnchor.constraint(equalToConstant: 60),
-                         upArrowButton.heightAnchor.constraint(equalToConstant: 42)]
+                         upArrowButton.widthAnchor.constraint(equalToConstant: 100),
+                         upArrowButton.heightAnchor.constraint(equalToConstant: 50)]
                 )
                 upArrowButton.tintColor = isDarkAppearance ? .white : .black
-                upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .allTouchEvents)
+                upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .touchUpInside)
                 
                 settingsView.addSubview(settingsTableView)
                 settingsTableView.translatesAutoresizingMaskIntoConstraints = false
