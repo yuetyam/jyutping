@@ -38,13 +38,34 @@ final class EmojiBoard: UIView {
                         bottomStackView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
 
+                let imageName_0: String = {
+                        if #available(iOS 14, *) {
+                                return "face.smiling"
+                        } else {
+                                return "smiley"
+                        }
+                }()
+                let imageName_3: String = {
+                        if #available(iOS 14, *) {
+                                return "leaf"
+                        } else {
+                                return "flame"
+                        }
+                }()
+                let imageName_5: String = {
+                        if #available(iOS 14, *) {
+                                return "ticket"
+                        } else {
+                                return "circle"
+                        }
+                }()
                 // let mostLeftIndicator: Indicator = Indicator(index: 0, imageName: "clock")
-                let indicator_0: Indicator = Indicator(index: 0, imageName: "face.smiling")
+                let indicator_0: Indicator = Indicator(index: 0, imageName: imageName_0)
                 let indicator_1: Indicator = Indicator(index: 1, imageName: "hand.thumbsup")
                 let indicator_2: Indicator = Indicator(index: 2, imageName: "tortoise")
-                let indicator_3: Indicator = Indicator(index: 3, imageName: "leaf")
+                let indicator_3: Indicator = Indicator(index: 3, imageName: imageName_3)
                 let indicator_4: Indicator = Indicator(index: 4, imageName: "car")
-                let indicator_5: Indicator = Indicator(index: 5, imageName: "ticket")
+                let indicator_5: Indicator = Indicator(index: 5, imageName: imageName_5)
                 let indicator_6: Indicator = Indicator(index: 6, imageName: "lightbulb")
                 let indicator_7: Indicator = Indicator(index: 7, imageName: "number.circle")
                 let indicator_8: Indicator = Indicator(index: 8, imageName: "flag")
