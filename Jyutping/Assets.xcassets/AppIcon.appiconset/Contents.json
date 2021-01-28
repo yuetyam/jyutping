@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "jyutping40px-1.png",
+      "filename" : "jyutping40px-2.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -55,7 +55,7 @@
       "size" : "20x20"
     },
     {
-      "filename" : "jyutping40px-2.png",
+      "filename" : "jyutping40px-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
