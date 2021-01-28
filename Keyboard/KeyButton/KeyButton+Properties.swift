@@ -13,7 +13,7 @@ extension KeyButton {
                 case .newLine:
                         return 72
                 case .space:
-                        return 190
+                        return 180
                 case .text("."):
                         if viewController.keyboardLayout == .alphabetic || viewController.keyboardLayout == .alphabeticUppercase {
                                 return 35
