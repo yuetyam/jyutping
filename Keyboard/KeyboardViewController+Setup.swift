@@ -136,7 +136,7 @@ extension KeyboardViewController {
                         if traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .compact {
                                 return 50
                         } else {
-                                return 100
+                                return 120
                         }
                 }()
                 
