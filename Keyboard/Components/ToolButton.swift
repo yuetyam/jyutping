@@ -1,7 +1,7 @@
 import UIKit
 
 final class ToolButton: UIButton {
-        convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 8, rightInset: CGFloat = 8) {
+        convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
                 self.init(frame: .zero)
                 let buttonImageView: UIImageView = UIImageView()
                 addSubview(buttonImageView)
