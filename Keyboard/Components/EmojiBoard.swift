@@ -39,21 +39,21 @@ final class EmojiBoard: UIView {
                 ])
 
                 let imageName_0: String = {
-                        if #available(iOS 14, *) {
+                        if #available(iOSApplicationExtension 14, *) {
                                 return "face.smiling"
                         } else {
                                 return "smiley"
                         }
                 }()
                 let imageName_3: String = {
-                        if #available(iOS 14, *) {
+                        if #available(iOSApplicationExtension 14, *) {
                                 return "leaf"
                         } else {
                                 return "flame"
                         }
                 }()
                 let imageName_5: String = {
-                        if #available(iOS 14, *) {
+                        if #available(iOSApplicationExtension 14, *) {
                                 return "ticket"
                         } else {
                                 return "circle"

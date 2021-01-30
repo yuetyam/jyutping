@@ -62,8 +62,7 @@ final class ToolBar: UIView {
         let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 19, bottomInset: 18)
         let emojiSwitch: ToolButton = {
                 let smilingEmojiName: String = {
-                        // FIXME: iOSApplicationExtension
-                        if #available(iOS 14, *) {
+                        if #available(iOSApplicationExtension 14, *) {
                                 return "face.smiling"
                         } else {
                                 return "smiley"
