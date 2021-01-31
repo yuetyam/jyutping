@@ -119,13 +119,20 @@ final class KeyButton: UIButton {
                         }
                         switch viewController.keyboardLayout {
                         case .jyutping, .jyutpingUppercase:
-                                if !viewController.candidates.isEmpty {
-                                        let candidate: Candidate = viewController.candidates[0]
-                                        viewController.textDocumentProxy.insertText(candidate.text)
+                                if let firstCandidate: Candidate = viewController.candidates.first {
+                                        viewController.textDocumentProxy.insertText(firstCandidate.text)
                                         AudioFeedback.perform(audioFeedback: .modify)
-                                        viewController.candidateSequence.append(candidate)
-                                        viewController.currentInputText = String(viewController.currentInputText.dropFirst(candidate.input.count))
-                                        if viewController.currentInputText.isEmpty {
+                                        if viewController.currentInputText.hasPrefix("r") {
+                                                if viewController.currentInputText == "r" + firstCandidate.input {
+                                                        viewController.currentInputText = ""
+                                                } else {
+                                                        viewController.currentInputText = "r" + viewController.currentInputText.dropFirst(firstCandidate.input.count + 1)
+                                                }
+                                        } else {
+                                                viewController.candidateSequence.append(firstCandidate)
+                                                viewController.currentInputText = String(viewController.currentInputText.dropFirst(firstCandidate.input.count))
+                                        }
+                                        if viewController.currentInputText.isEmpty && !(viewController.candidateSequence.isEmpty) {
                                                 var combinedCandidate: Candidate = viewController.candidateSequence[0]
                                                 _ = viewController.candidateSequence.dropFirst().map { oneCandidate in
                                                         combinedCandidate += oneCandidate
@@ -135,10 +142,10 @@ final class KeyButton: UIButton {
                                                         self.viewController.lexiconManager.handle(candidate: combinedCandidate)
                                                 }
                                         }
-                                } else if !viewController.currentInputText.isEmpty {
+                                } else if !(viewController.currentInputText.isEmpty) {
                                         viewController.textDocumentProxy.insertText(viewController.currentInputText)
-                                        viewController.currentInputText = ""
                                         AudioFeedback.perform(audioFeedback: .modify)
+                                        viewController.currentInputText = ""
                                 } else {
                                         viewController.textDocumentProxy.insertText(" ")
                                         AudioFeedback.play(for: .space)

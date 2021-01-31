@@ -118,15 +118,23 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 textDocumentProxy.insertText(candidate.text)
                 AudioFeedback.perform(audioFeedback: .modify)
                 selectionFeedback?.selectionChanged()
-                candidateSequence.append(candidate)
-                currentInputText = String(currentInputText.dropFirst(candidate.input.count))
+                if currentInputText.hasPrefix("r" ) {
+                        if currentInputText == "r" + candidate.input {
+                                currentInputText = ""
+                        } else {
+                                currentInputText = "r" + currentInputText.dropFirst(candidate.input.count + 1)
+                        }
+                } else {
+                        candidateSequence.append(candidate)
+                        currentInputText = String(currentInputText.dropFirst(candidate.input.count))
+                }
                 if keyboardLayout == .candidateBoard && currentInputText.isEmpty {
                         collectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reinit()
                         keyboardLayout = .jyutping
                 }
-                if currentInputText.isEmpty {
+                if currentInputText.isEmpty && !candidateSequence.isEmpty {
                         var combinedCandidate: Candidate = candidateSequence[0]
                         _ = candidateSequence.dropFirst().map { oneCandidate in
                                 combinedCandidate += oneCandidate

@@ -14,6 +14,10 @@ struct Engine {
         }()
         
         func suggest(for text: String) -> [Candidate] {
+                guard !text.hasPrefix("r") else {
+                        let pinyin: String = String(text.dropFirst())
+                        return pinyin.isEmpty ? [] : matchPinyin(for: pinyin)
+                }
                 switch text.count {
                 case 0:
                         return []
@@ -21,7 +25,7 @@ struct Engine {
                         switch text {
                         case "q":
                                 return shortcut(for: "c")
-                        case "r", "y":
+                        case "y":
                                 return shortcut(for: "j")
                         case "v":
                                 return shortcut(for: "w")
@@ -91,7 +95,7 @@ struct Engine {
         }
         private func process(text: String, sequences: [[String]]) -> [Candidate] {
                 let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +)) }
-                let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 20000 }
+                let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 25000 }
                 guard candidates.count > 1 && candidates[0].input.count != text.count else {
                         return candidates
                 }
@@ -213,6 +217,28 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                candidates.append(candidate)
+                        }
+                }
+                sqlite3_finalize(queryStatement)
+                return candidates
+        }
+
+        func matchPinyin(for text: String) -> [Candidate] {
+                var candidates: [Candidate] = []
+                let queryString = "SELECT * FROM jyutpingtable WHERE pinyin = \(text.hash);"
+                var queryStatement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                // ping = sqlite3_column_int64(queryStatement, 0)
+                                // shortcut = sqlite3_column_int64(queryStatement, 1)
+                                // prefix = sqlite3_column_int64(queryStatement, 2)
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                // let ranking: Int = Int(sqlite3_column_int64(queryStatement, 5))
+                                // pinyin = sqlite3_column_int64(queryStatement, 6)
+
                                 let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
