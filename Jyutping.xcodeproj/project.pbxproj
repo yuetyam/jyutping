@@ -53,6 +53,7 @@
 		37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB0237A8F0800F92482 /* InfoPlist.strings */; };
 		37C18EB5237A904000F92482 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB7237A904000F92482 /* Localizable.strings */; };
 		37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EC2237A942800F92482 /* InfoPlist.strings */; };
+		37CBC6C225C7078100C21526 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBC6C125C7078100C21526 /* LinkView.swift */; };
 		37E004F823E49B6700E413BD /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F723E49B6700E413BD /* KeyboardLayout.swift */; };
 		37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F923E4BAA000E413BD /* KeyboardEvent.swift */; };
 		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
@@ -152,6 +153,7 @@
 		37C18EC9237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37C18ECA237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37C18ECB237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37CBC6C125C7078100C21526 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		37E004F723E49B6700E413BD /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		37E004F923E4BAA000E413BD /* KeyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
 		37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subviews.swift"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				37336F79239A9317006A59A7 /* SafariView.swift */,
 				3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */,
 				37336F80239ABE05006A59A7 /* LinkButton.swift */,
+				37CBC6C125C7078100C21526 /* LinkView.swift */,
 				37336F7E239ABDC4006A59A7 /* MessageView.swift */,
 				37336F7C239ABB30006A59A7 /* ShareSheetView.swift */,
 				377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */,
@@ -464,6 +467,7 @@
 				377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */,
 				37E1874F24CB766900602C03 /* InitialsTable.swift in Sources */,
 				370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */,
+				37CBC6C225C7078100C21526 /* LinkView.swift in Sources */,
 				3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */,
 				377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */,
 				37336F7A239A9317006A59A7 /* SafariView.swift in Sources */,
