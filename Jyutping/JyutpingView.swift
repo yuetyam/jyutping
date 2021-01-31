@@ -214,7 +214,7 @@ struct JyutpingWebsitesView: View {
         var body: some View {
                 VStack {
                         LinkView(iconName: "link.circle",
-                                 text: Text("粵拼"),
+                                 text: Text("Jyutping"),
                                  footnote: Text("www.jyutping.org"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.jyutping.org")!)
@@ -222,7 +222,7 @@ struct JyutpingWebsitesView: View {
                                 .padding(.horizontal)
 
                         LinkView(iconName: "link.circle",
-                                 text: Text("Jyutping 粵拼"),
+                                 text: Text("Jyutping - LSHK"),
                                  footnote: Text("www.lshk.org/jyutping"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.lshk.org/jyutping")!)
@@ -230,7 +230,7 @@ struct JyutpingWebsitesView: View {
                                 .padding(.horizontal)
 
                         LinkView(iconName: "link.circle",
-                                 text: Text("粵拼教學影片"),
+                                 text: Text("Learn Jyutping"),
                                  footnote: Text("www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!)
