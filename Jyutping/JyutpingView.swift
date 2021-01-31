@@ -167,43 +167,43 @@ private struct JyutpingTable: View {
 struct SearchWebsitesView: View {
         var body: some View {
                 VStack {
-                        LinkButton(url: URL(string: "https://jyut.net")!,
-                                   content: MessageView(icon: "doc.text.magnifyingglass",
-                                                        text: Text("粵音資料集叢"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+                        LinkView(iconName: "doc.text.magnifyingglass",
+                                 text: Text("粵音資料集叢"),
+                                 footnote: Text("jyut.net"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://jyut.net")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://words.hk")!,
-                                   content: MessageView(icon: "doc.text.magnifyingglass",
-                                                        text: Text("粵典"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "doc.text.magnifyingglass",
+                                 text: Text("粵典"),
+                                 footnote: Text("words.hk"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://words.hk")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")!,
-                                   content: MessageView(icon: "doc.text.magnifyingglass",
-                                                        text: Text("粵語審音配詞字庫"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "doc.text.magnifyingglass",
+                                 text: Text("粵語審音配詞字庫"),
+                                 footnote: Text("humanum.arts.cuhk.edu.hk/Lexis/lexi-can"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://www.jyutdict.org")!,
-                                   content: MessageView(icon: "doc.text.magnifyingglass",
-                                                        text: Text("泛粵大典"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "doc.text.magnifyingglass",
+                                 text: Text("泛粵大典"),
+                                 footnote: Text("www.jyutdict.org"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://www.jyutdict.org")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://shyyp.net/hant")!,
-                                   content: MessageView(icon: "doc.text.magnifyingglass",
-                                                        text: Text("羊羊粵語"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "doc.text.magnifyingglass",
+                                 text: Text("羊羊粵語"),
+                                 footnote: Text("shyyp.net/hant"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://shyyp.net/hant")!)
                                 .fillBackground()
                                 .padding(.horizontal)
                 }
@@ -213,43 +213,43 @@ struct SearchWebsitesView: View {
 struct JyutpingWebsitesView: View {
         var body: some View {
                 VStack {
-                        LinkButton(url: URL(string: "https://www.jyutping.org")!,
-                                   content: MessageView(icon: "link.circle",
-                                                        text: Text("粵拼 jyutping.org"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+                        LinkView(iconName: "link.circle",
+                                 text: Text("粵拼"),
+                                 footnote: Text("www.jyutping.org"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://www.jyutping.org")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://www.lshk.org/jyutping")!,
-                                   content: MessageView(icon: "link.circle",
-                                                        text: Text("LSHK Jyutping 粵拼"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "link.circle",
+                                 text: Text("Jyutping 粵拼"),
+                                 footnote: Text("www.lshk.org/jyutping"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://www.lshk.org/jyutping")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!,
-                                   content: MessageView(icon: "link.circle",
-                                                        text: Text("粵拼教學 - YouTube"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "link.circle",
+                                 text: Text("粵拼教學影片"),
+                                 footnote: Text("www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "http://www.iso10646hk.net/jp")!,
-                                   content: MessageView(icon: "link.circle",
-                                                        text: Text("粵拼 - iso10646hk.net"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "link.circle",
+                                 text: Text("粵拼"),
+                                 footnote: Text("www.iso10646hk.net/jp"),
+                                 symbolName: "safari",
+                                 url: URL(string: "http://www.iso10646hk.net/jp")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-                        
-                        LinkButton(url: URL(string: "https://www.jyut6.com")!,
-                                   content: MessageView(icon: "link.circle",
-                                                        text: Text("粵拼歌詞網"),
-                                                        symbol: Image(systemName: "safari")))
-                                .padding(.vertical)
+
+                        LinkView(iconName: "link.circle",
+                                 text: Text("粵拼歌詞網"),
+                                 footnote: Text("www.jyut6.com"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://www.jyut6.com")!)
                                 .fillBackground()
                                 .padding(.horizontal)
                 }
