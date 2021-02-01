@@ -238,10 +238,10 @@ struct JyutpingWebsitesView: View {
                                 .padding(.horizontal)
 
                         LinkView(iconName: "link.circle",
-                                 text: Text("粵拼"),
+                                 text: Text("Jyutping"),
                                  footnote: Text("www.iso10646hk.net/jp"),
                                  symbolName: "safari",
-                                 url: URL(string: "http://www.iso10646hk.net/jp")!)
+                                 url: URL(string: "https://www.iso10646hk.net/jp")!)
                                 .fillBackground()
                                 .padding(.horizontal)
 
