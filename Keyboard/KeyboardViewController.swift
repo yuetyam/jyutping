@@ -80,11 +80,13 @@ final class KeyboardViewController: UIInputViewController {
                 lightImpactFeedback = nil
                 selectionFeedback = nil
         }
+
+        private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
         
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-                appearance = detectAppearance()
+                // appearance = detectAppearance()
                 if didKeyboardEstablished {
                         setupKeyboard()
                 }
@@ -313,44 +315,6 @@ final class KeyboardViewController: UIInputViewController {
         func updateToneStyle() {
                 toneStyle = UserDefaults.standard.integer(forKey: "tone_style")
         }
-        
-        private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-        
-        private(set) lazy var appearance: Appearance = detectAppearance()
-        
-        private func detectAppearance() -> Appearance {
-                switch traitCollection.userInterfaceStyle {
-                case .light:
-                        switch textDocumentProxy.keyboardAppearance {
-                        case .light, .default:
-                                return .lightModeLightAppearance
-                        case .dark:
-                                return .lightModeDarkAppearance
-                        default:
-                                return .lightModeDarkAppearance
-                        }
-                case .dark:
-                        switch textDocumentProxy.keyboardAppearance {
-                        case .light, .default:
-                                return .darkModeLightAppearance
-                        case .dark:
-                                return .darkModeDarkAppearance
-                        default:
-                                return .darkModeLightAppearance
-                        }
-                case .unspecified:
-                        switch textDocumentProxy.keyboardAppearance {
-                        case .light, .default:
-                                return .lightModeLightAppearance
-                        case .dark:
-                                return .darkModeDarkAppearance
-                        default:
-                                return .lightModeDarkAppearance
-                        }
-                @unknown default:
-                        return .lightModeDarkAppearance
-                }
-        }
 
 private(set) lazy var emojis: [[String.Element]] = {
 
@@ -393,11 +357,4 @@ let group_8: [String.Element] = """
 return [group_0, group_1, group_2, group_3, group_4, group_5, group_6, group_7, group_8]
 }()
 
-}
-
-enum Appearance {
-        case lightModeLightAppearance
-        case lightModeDarkAppearance
-        case darkModeLightAppearance
-        case darkModeDarkAppearance
 }

@@ -30,12 +30,12 @@ final class NumberButton: UIButton {
         
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 viewController.textDocumentProxy.insertText(String(digit))
-                keyButtonView.backgroundColor = viewController.isDarkAppearance ? DarkMode.darkActionButton : LightMode.lightActionButton
+                keyButtonView.backgroundColor = viewController.isDarkAppearance ? .darkActionButton : .lightActionButton
                 AudioFeedback.perform(audioFeedback: .input)
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 UIView.animate(withDuration: 0, delay: 0.03, animations: {
-                        self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? DarkMode.darkButton : .white
+                        self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .darkButton : .white
                 })
         }
         
@@ -49,7 +49,7 @@ final class NumberButton: UIButton {
                 keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant).isActive = true
                 keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant).isActive = true
                 keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.backgroundColor = viewController.isDarkAppearance ? DarkMode.darkButton : .white
+                keyButtonView.backgroundColor = viewController.isDarkAppearance ? .darkButton : .white
                 keyButtonView.tintColor = viewController.isDarkAppearance ? .white : .black
                 
                 keyButtonView.layer.cornerRadius = 5
@@ -154,7 +154,7 @@ final class PeriodButton: UIButton {
                 keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
                 keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.backgroundColor = .clearTappable
+                keyButtonView.backgroundColor = .interactableClear
                 keyButtonView.tintColor = viewController.isDarkAppearance ? .white : .black
         }
         private func setupPeriodLabel() {
@@ -250,7 +250,7 @@ final class BackspaceButton: UIButton {
                 keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
                 keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.backgroundColor = .clearTappable
+                keyButtonView.backgroundColor = .interactableClear
                 keyButtonView.tintColor = viewController.isDarkAppearance ? .white : .black
         }
         private func setupKeyImageView() {

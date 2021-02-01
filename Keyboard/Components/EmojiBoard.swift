@@ -89,7 +89,7 @@ final class Indicator: UIButton {
         init(index: Int, imageName: String, topInset: CGFloat = 10, bottomInset: CGFloat = 10) {
                 self.index = index
                 super.init(frame: .zero)
-                backgroundColor = .clearTappable
+                backgroundColor = .interactableClear
                 tintColor = .systemGray
                 let indicatorImageView: UIImageView = UIImageView()
                 addSubview(indicatorImageView)

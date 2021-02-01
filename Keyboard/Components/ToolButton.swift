@@ -12,6 +12,6 @@ final class ToolButton: UIButton {
                 buttonImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -rightInset).isActive = true
                 buttonImageView.contentMode = .scaleAspectFit
                 buttonImageView.image = UIImage(systemName: imageName)
-                backgroundColor = .clearTappable
+                backgroundColor = .interactableClear
         }
 }

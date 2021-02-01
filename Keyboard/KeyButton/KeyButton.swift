@@ -1,20 +1,20 @@
 import UIKit
 
 final class KeyButton: UIButton {
-        
+
         let keyButtonView: UIView = UIView()
         let keyTextLabel: UILabel = UILabel()
         let keyImageView: UIImageView = UIImageView()
         
         let keyboardEvent: KeyboardEvent
         let viewController: KeyboardViewController
-        
+
         init(keyboardEvent: KeyboardEvent, viewController: KeyboardViewController) {
                 self.keyboardEvent = keyboardEvent
                 self.viewController = viewController
                 
                 super.init(frame: .zero)
-                backgroundColor = .clearTappable
+                backgroundColor = .interactableClear
                 
                 switch keyboardEvent {
                 case .backspace, .shift, .shiftDown:
@@ -226,9 +226,12 @@ final class KeyButton: UIButton {
         }
         
         private func changeColorToNormal() {
-                UIView.animate(withDuration: 0,
-                               delay: 0.03,
-                               animations: { self.keyButtonView.backgroundColor = self.buttonColor }
+                UIView.animate(
+                        withDuration: 0,
+                        delay: 0.03,
+                        animations: {
+                                self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .clear : self.buttonColor
+                        }
                 )
         }
         

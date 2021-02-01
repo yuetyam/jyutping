@@ -1,5 +1,34 @@
 import UIKit
 
+final class BlurEffectView: UIVisualEffectView {
+
+        private var fraction: CGFloat = 0.5
+        private var effectStyle: UIBlurEffect.Style = .light
+
+        override func didMoveToSuperview() {
+                backgroundColor = .clear
+                setupBlur()
+        }
+        private let animator: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+        private func setupBlur() {
+                animator.stopAnimation(true)
+                effect = nil
+                animator.addAnimations { [weak self] in
+                        self?.effect = UIBlurEffect(style: self?.effectStyle ?? .light)
+                }
+                animator.fractionComplete = fraction   // blur intensity in range 0 - 1
+        }
+
+        convenience init(fraction: CGFloat, effectStyle: UIBlurEffect.Style) {
+                self.init()
+                self.fraction = fraction
+                self.effectStyle = effectStyle
+        }
+        deinit {
+                animator.stopAnimation(true)
+        }
+}
+
 extension KeyButton {
         func setupKeyButtonView() {
                 var horizontalConstant: CGFloat {
@@ -32,9 +61,7 @@ extension KeyButton {
                 keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant).isActive = true
                 keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant).isActive = true
                 keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.backgroundColor = buttonColor
                 keyButtonView.tintColor = buttonTintColor
-                
                 keyButtonView.layer.cornerRadius = 5
                 keyButtonView.layer.cornerCurve = .continuous
                 keyButtonView.layer.shadowColor = UIColor.black.cgColor
@@ -43,7 +70,27 @@ extension KeyButton {
                 keyButtonView.layer.shadowRadius = 0.5
                 keyButtonView.layer.shouldRasterize = true
                 keyButtonView.layer.rasterizationScale = UIScreen.main.scale
-                keyButtonView.layer.shadowPath = nil
+                // keyButtonView.layer.shadowPath = nil
+
+                guard viewController.isDarkAppearance else {
+                        keyButtonView.backgroundColor = buttonColor
+                        return
+                }
+                let effectView: BlurEffectView = {
+                        switch keyboardEvent {
+                        case .text, .space:
+                                return BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
+                        default:
+                                return BlurEffectView(fraction: 0.48, effectStyle: .light)
+                        }
+                }()
+                let blurEffectView: UIVisualEffectView = effectView
+                blurEffectView.frame = keyButtonView.bounds
+                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                blurEffectView.layer.cornerRadius = 5
+                blurEffectView.layer.cornerCurve = .continuous
+                blurEffectView.clipsToBounds = true
+                keyButtonView.addSubview(blurEffectView)
         }
         
         func setupKeyTextLabel() {

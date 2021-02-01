@@ -173,41 +173,23 @@ extension KeyButton {
                         return nil
                 }
         }
-        
-        
+
         /// Key Button View background color
         var buttonColor: UIColor {
-                switch viewController.appearance {
-                case .lightModeLightAppearance:
-                        return shouldBeDarker ? LightMode.lightActionButton : LightMode.lightButton
-                case .lightModeDarkAppearance, .darkModeLightAppearance:
-                        return shouldBeDarker ? LightMode.darkActionButton : LightMode.darkButton
-                case .darkModeDarkAppearance:
-                        return shouldBeDarker ? DarkMode.darkActionButton : DarkMode.darkButton
+                if viewController.isDarkAppearance {
+                        return shouldBeDarker ? .darkActionButton : .darkButton
+                } else {
+                        return shouldBeDarker ? .lightActionButton : .lightButton
                 }
         }
-        
-        var buttonTintColor: UIColor {
-                switch viewController.appearance {
-                case .lightModeLightAppearance:
-                        return .black
-                default:
-                        return .white
-                }
-        }
-        
         var highlightButtonColor: UIColor {
                 // action <=> non-action
-                switch viewController.appearance {
-                case .lightModeLightAppearance:
-                        return shouldBeDarker ? LightMode.lightButton : LightMode.lightActionButton
-                case .lightModeDarkAppearance, .darkModeLightAppearance:
-                        return shouldBeDarker ? LightMode.darkButton : LightMode.darkActionButton
-                case .darkModeDarkAppearance:
-                        return shouldBeDarker ? DarkMode.darkButton : DarkMode.darkActionButton
+                if viewController.isDarkAppearance {
+                        return shouldBeDarker ? .darkButton : .black
+                } else {
+                        return shouldBeDarker ? .lightButton : .lightActionButton
                 }
         }
-        
         private var shouldBeDarker: Bool {
                 switch keyboardEvent {
                 case .text, .space:
@@ -215,5 +197,8 @@ extension KeyButton {
                 default:
                         return true
                 }
+        }
+        var buttonTintColor: UIColor {
+                return viewController.isDarkAppearance ? .white : .black
         }
 }
