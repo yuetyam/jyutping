@@ -6,19 +6,22 @@ struct EnhancedTextField: UIViewRepresentable {
         @Binding private var text: String
         
         private let font: UIFont?
+        private let keyboardAppearance: UIKeyboardAppearance?
         private let returnKey: UIReturnKeyType?
         private let autocorrection: UITextAutocorrectionType?
         private let autocapitalization: UITextAutocapitalizationType?
-        
+
         init(placeholder: String,
              text: Binding<String>,
              font: UIFont? = nil,
+             keyboardAppearance: UIKeyboardAppearance? = nil,
              returnKey: UIReturnKeyType? = nil,
              autocorrection: UITextAutocorrectionType? = nil,
              autocapitalization: UITextAutocapitalizationType? = nil) {
                 self.placeholder = placeholder
                 self._text = text
                 self.font = font
+                self.keyboardAppearance = keyboardAppearance
                 self.returnKey = returnKey
                 self.autocorrection = autocorrection
                 self.autocapitalization = autocapitalization
@@ -29,6 +32,9 @@ struct EnhancedTextField: UIViewRepresentable {
                 textField.delegate = context.coordinator
                 textField.placeholder = placeholder
                 textField.font = font
+                if let keyboardAppearance = keyboardAppearance {
+                        textField.keyboardAppearance = keyboardAppearance
+                }
                 if let returnKeyType = returnKey {
                         textField.returnKeyType = returnKeyType
                 }
@@ -47,8 +53,8 @@ struct EnhancedTextField: UIViewRepresentable {
                 Coordinator(self)
         }
         final class Coordinator: NSObject, UITextFieldDelegate {
-                var parent:  EnhancedTextField
-                init(_ view:  EnhancedTextField) {
+                var parent: EnhancedTextField
+                init(_ view: EnhancedTextField) {
                         parent = view
                 }
                 func textFieldShouldReturn(_ textField: UITextField) -> Bool {
