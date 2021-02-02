@@ -24,7 +24,7 @@ final class ToolBar: UIView {
                 stackView.distribution = .equalSpacing
                 stackView.addArrangedSubview(settingsButton)
                 stackView.addArrangedSubview(yueEngSwitch)
-                if traitCollection.userInterfaceIdiom == .phone && viewController.hasFullAccess {
+                if viewController.hasFullAccess {
                         stackView.addArrangedSubview(pasteButton)
                 }
                 stackView.addArrangedSubview(emojiSwitch)
