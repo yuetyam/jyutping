@@ -15,7 +15,7 @@ struct AcknowledgementsView: View {
 
                                 LinkView(iconName: "book",
                                          text: Text("rime-cantonese"),
-                                         footnote: Text("© CanCLID. CC-BY 4.0"),
+                                         footnote: Text("© CanCLID. CC BY 4.0"), // CC: \u{1F16D}, BY: \u{1F16F}, iOS can't display these characters.
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/rime/rime-cantonese")!)
                                         .fillBackground()
