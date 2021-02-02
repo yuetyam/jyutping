@@ -30,20 +30,25 @@ extension KeyButton {
                 case .phone:
                         if viewController.traitCollection.verticalSizeClass == .compact {
                                 // iPhone landscape
-                                
-                                if UIScreen.main.bounds.width < 570 {
-                                        return 36 // iPhone SE1, iPod touch 7
+
+                                if UIScreen.main.bounds.height < 350 {
+                                        return 36 // iPhone SE1, iPod touch 7. (320 x 480)
                                 } else {
                                         return 40
                                 }
                         } else {
-                                if UIScreen.main.bounds.height < 570 {
-                                        // iPhone SE1, iPod touch 7
+                                if UIScreen.main.bounds.width < 350 {
+                                        // iPhone SE1, iPod touch 7. (320 x 480)
                                         return 48
-                                } else if UIScreen.main.bounds.height < 700 {
-                                        // iPhone 6s, 7, 8, SE2
+                                } else if UIScreen.main.bounds.width < 400 {
+                                        // iPhone 6s, 7, 8, SE2. (375 x 667)
+                                        // iPhone X, Xs, 11 Pro, 12 mini. (375 x 812)
+                                        // iPhone 12 Pro, 12. (390 x 844)
                                         return 53
                                 } else {
+                                        // iPhone 6s Plus, 7 Plus, 8 Plus. (414 x 836)
+                                        // iPhone Xs Max, Xr, 11 Pro Max, 11. (414 x 896)
+                                        // iPhone 12 Pro Max. (428 x 926)
                                         return 55
                                 }
                         }
