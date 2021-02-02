@@ -128,6 +128,12 @@ final class KeyButton: UIButton {
                                                 } else {
                                                         viewController.currentInputText = "r" + viewController.currentInputText.dropFirst(firstCandidate.input.count + 1)
                                                 }
+                                        } else if viewController.currentInputText.hasPrefix("v") {
+                                                if viewController.currentInputText == "v" + firstCandidate.input {
+                                                        viewController.currentInputText = ""
+                                                } else {
+                                                        viewController.currentInputText = "v" + viewController.currentInputText.dropFirst(firstCandidate.input.count + 1)
+                                                }
                                         } else {
                                                 viewController.candidateSequence.append(firstCandidate)
                                                 viewController.currentInputText = String(viewController.currentInputText.dropFirst(firstCandidate.input.count))

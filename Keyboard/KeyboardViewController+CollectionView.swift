@@ -118,11 +118,17 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 textDocumentProxy.insertText(candidate.text)
                 AudioFeedback.perform(audioFeedback: .modify)
                 selectionFeedback?.selectionChanged()
-                if currentInputText.hasPrefix("r" ) {
+                if currentInputText.hasPrefix("r") {
                         if currentInputText == "r" + candidate.input {
                                 currentInputText = ""
                         } else {
                                 currentInputText = "r" + currentInputText.dropFirst(candidate.input.count + 1)
+                        }
+                } else if currentInputText.hasPrefix("v") {
+                        if currentInputText == "v" + candidate.input {
+                                currentInputText = ""
+                        } else {
+                                currentInputText = "v" + currentInputText.dropFirst(candidate.input.count + 1)
                         }
                 } else {
                         candidateSequence.append(candidate)

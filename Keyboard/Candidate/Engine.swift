@@ -18,6 +18,10 @@ struct Engine {
                         let pinyin: String = String(text.dropFirst())
                         return pinyin.isEmpty ? [] : matchPinyin(for: pinyin)
                 }
+                guard !text.hasPrefix("v") else {
+                        let cangjie: String = String(text.dropFirst())
+                        return cangjie.isEmpty ? [] : matchCangjie(for: cangjie)
+                }
                 switch text.count {
                 case 0:
                         return []
@@ -27,8 +31,6 @@ struct Engine {
                                 return shortcut(for: "c")
                         case "y":
                                 return shortcut(for: "j")
-                        case "v":
-                                return shortcut(for: "w")
                         case "x":
                                 return shortcut(for: "s")
                         default:
@@ -238,6 +240,29 @@ private extension Engine {
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 // let ranking: Int = Int(sqlite3_column_int64(queryStatement, 5))
                                 // pinyin = sqlite3_column_int64(queryStatement, 6)
+                                // cangjie = sqlite3_column_int64(queryStatement, 7)
+
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                candidates.append(candidate)
+                        }
+                }
+                sqlite3_finalize(queryStatement)
+                return candidates
+        }
+        func matchCangjie(for text: String) -> [Candidate] {
+                var candidates: [Candidate] = []
+                let queryString = "SELECT * FROM jyutpingtable WHERE cangjie = \(text.hash);"
+                var queryStatement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                // ping = sqlite3_column_int64(queryStatement, 0)
+                                // shortcut = sqlite3_column_int64(queryStatement, 1)
+                                // prefix = sqlite3_column_int64(queryStatement, 2)
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                // let ranking: Int = Int(sqlite3_column_int64(queryStatement, 5))
+                                // pinyin = sqlite3_column_int64(queryStatement, 6)
+                                // cangjie = sqlite3_column_int64(queryStatement, 7)
 
                                 let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
