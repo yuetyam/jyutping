@@ -54,6 +54,7 @@
 		37C18EB5237A904000F92482 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB7237A904000F92482 /* Localizable.strings */; };
 		37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EC2237A942800F92482 /* InfoPlist.strings */; };
 		37CBC6C225C7078100C21526 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBC6C125C7078100C21526 /* LinkView.swift */; };
+		37CBC6D025C8F8F700C21526 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */; };
 		37E004F823E49B6700E413BD /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F723E49B6700E413BD /* KeyboardLayout.swift */; };
 		37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F923E4BAA000E413BD /* KeyboardEvent.swift */; };
 		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
@@ -154,6 +155,7 @@
 		37C18ECA237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37C18ECB237A970300F92482 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37CBC6C125C7078100C21526 /* LinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		37E004F723E49B6700E413BD /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		37E004F923E4BAA000E413BD /* KeyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
 		37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subviews.swift"; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */,
 				3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */,
 				3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */,
+				37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */,
 			);
 			path = KeyButton;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */,
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
 				3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */,
+				37CBC6D025C8F8F700C21526 /* BlurEffectView.swift in Sources */,
 				3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */,
 				3722B851250129F900E33ADB /* NumberPadButtons.swift in Sources */,
 				3741062D23E2191200639EF4 /* CandidateCell.swift in Sources */,
