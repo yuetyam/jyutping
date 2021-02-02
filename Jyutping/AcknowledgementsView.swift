@@ -5,22 +5,21 @@ struct AcknowledgementsView: View {
                 ZStack {
                         GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                         ScrollView {
-                                LinkButton(url: URL(string: "https://github.com/ddddxxx/SwiftyOpenCC")!,
-                                           content: MessageView(icon: "briefcase",
-                                                                text: Text("SwiftyOpenCC"),
-                                                                symbol: Image(systemName: "safari")))
-                                        .padding(.vertical)
+                                LinkView(iconName: "briefcase",
+                                         text: Text("SwiftyOpenCC"),
+                                         footnote: Text("© 2017 DengXiang. MIT License"),
+                                         symbolName: "safari",
+                                         url: URL(string: "https://github.com/ddddxxx/SwiftyOpenCC")!)
                                         .fillBackground()
                                         .padding()
-                                
-                                LinkButton(url: URL(string: "https://github.com/rime/rime-cantonese")!,
-                                           content: MessageView(icon: "book",
-                                                                text: Text("rime-cantonese"),
-                                                                symbol: Image(systemName: "safari")))
-                                        .padding(.vertical)
+
+                                LinkView(iconName: "book",
+                                         text: Text("rime-cantonese"),
+                                         footnote: Text("© CanCLID. CC-BY 4.0"),
+                                         symbolName: "safari",
+                                         url: URL(string: "https://github.com/rime/rime-cantonese")!)
                                         .fillBackground()
                                         .padding(.horizontal)
-                                
                         }
                         .foregroundColor(.primary)
                         .navigationBarTitle(Text("Acknowledgements"), displayMode: .inline)
