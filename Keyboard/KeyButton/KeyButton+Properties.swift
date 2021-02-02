@@ -37,10 +37,11 @@ extension KeyButton {
                                         return 40
                                 }
                         } else {
-                                if UIScreen.main.bounds.width < 350 {
+                                let widthPoints: CGFloat =  UIScreen.main.bounds.width
+                                if widthPoints < 350 {
                                         // iPhone SE1, iPod touch 7. (320 x 480)
                                         return 48
-                                } else if UIScreen.main.bounds.width < 400 {
+                                } else if widthPoints < 400 {
                                         // iPhone 6s, 7, 8, SE2. (375 x 667)
                                         // iPhone X, Xs, 11 Pro, 12 mini. (375 x 812)
                                         // iPhone 12 Pro, 12. (390 x 844)
