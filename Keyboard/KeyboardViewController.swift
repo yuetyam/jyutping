@@ -21,14 +21,16 @@ final class KeyboardViewController: UIInputViewController {
         
         override func viewDidLoad() {
                 super.viewDidLoad()
-                
+
                 view.addSubview(keyboardStackView)
                 keyboardStackView.translatesAutoresizingMaskIntoConstraints = false
-                keyboardStackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-                keyboardStackView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-                keyboardStackView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-                keyboardStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-                
+                NSLayoutConstraint.activate([
+                        keyboardStackView.topAnchor.constraint(equalTo: view.topAnchor),
+                        keyboardStackView.leftAnchor.constraint(equalTo: view.leftAnchor),
+                        keyboardStackView.rightAnchor.constraint(equalTo: view.rightAnchor),
+                        keyboardStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                ])
+
                 setupToolBarActions()
 
                 candidateCollectionView.delegate = self
@@ -40,7 +42,7 @@ final class KeyboardViewController: UIInputViewController {
                 emojiCollectionView.dataSource = self
                 emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: "EmojiCell")
                 emojiCollectionView.backgroundColor = self.view.backgroundColor
-
+                
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
                 settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")                
@@ -86,7 +88,6 @@ final class KeyboardViewController: UIInputViewController {
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-                // appearance = detectAppearance()
                 if didKeyboardEstablished {
                         setupKeyboard()
                 }
