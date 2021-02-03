@@ -12,7 +12,8 @@ struct Engine {
                         return nil
                 }
         }()
-        
+
+        // FIXME: - Add Cangejie reverse lookup
         func suggest(for text: String) -> [Candidate] {
                 guard !text.hasPrefix("r") else {
                         let pinyin: String = String(text.dropFirst())
@@ -20,7 +21,7 @@ struct Engine {
                 }
                 guard !text.hasPrefix("v") else {
                         let cangjie: String = String(text.dropFirst())
-                        return cangjie.isEmpty ? [] : matchCangjie(for: cangjie)
+                        return cangjie.isEmpty ? [] : matchPinyin(for: cangjie)
                 }
                 switch text.count {
                 case 0:
