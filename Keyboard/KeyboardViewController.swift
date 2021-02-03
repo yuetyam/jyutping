@@ -153,12 +153,12 @@ final class KeyboardViewController: UIInputViewController {
                         DispatchQueue.main.async {
                                 self.toolBar.update()
                         }
+                        let range: NSRange = NSRange(location: currentInputText.count, length: 0)
+                        textDocumentProxy.setMarkedText(currentInputText, selectedRange: range)
                         if currentInputText.isEmpty {
                                 textDocumentProxy.unmarkText()
                                 candidates = []
                         } else {
-                                let range: NSRange = NSRange(location: currentInputText.count, length: 0)
-                                textDocumentProxy.setMarkedText(currentInputText, selectedRange: range)
                                 imeQueue.async {
                                         self.suggestCandidates()
                                 }
