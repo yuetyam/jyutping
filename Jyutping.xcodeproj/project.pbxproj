@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		370AE80925A3B980007078B0 /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 370AE80825A3B980007078B0 /* jyutping.sqlite3 */; };
-		370AE80F25A3B994007078B0 /* keyboard.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 370AE80E25A3B994007078B0 /* keyboard.sqlite3 */; };
 		370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B631423E96E1000912B9A /* AudioFeedback.swift */; };
 		370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37211D5723541EE3007E1D68 /* AppDelegate.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
@@ -40,6 +38,8 @@
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
 		377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4E2471129000B42D30 /* EnhancedTextField.swift */; };
+		378C13AE25CA84670053D905 /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 378C13AD25CA84670053D905 /* jyutping.sqlite3 */; };
+		378C13D425CAF8A10053D905 /* keyboard.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 378C13D325CAF8A10053D905 /* keyboard.sqlite3 */; };
 		379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */; };
 		379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */; };
 		37AA501C24502D3F003E7921 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA501E24502D3F003E7921 /* Localizable.strings */; };
@@ -90,8 +90,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		370AE80825A3B980007078B0 /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
-		370AE80E25A3B994007078B0 /* keyboard.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = keyboard.sqlite3; sourceTree = "<group>"; };
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +130,8 @@
 		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
 		377EAD4E2471129000B42D30 /* EnhancedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
+		378C13AD25CA84670053D905 /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
+		378C13D325CAF8A10053D905 /* keyboard.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = keyboard.sqlite3; sourceTree = "<group>"; };
 		379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
 		379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		37AA501D24502D3F003E7921 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 				37C18EB2237A8FDB00F92482 /* Localization */,
 				37211D5D23541EE4007E1D68 /* Assets.xcassets */,
 				37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */,
-				370AE80825A3B980007078B0 /* jyutping.sqlite3 */,
+				378C13AD25CA84670053D905 /* jyutping.sqlite3 */,
 				37211D6523541EE4007E1D68 /* Info.plist */,
 				37B3401D23EBD23400A8D3BB /* Settings.bundle */,
 				37211D5F23541EE4007E1D68 /* Preview Content */,
@@ -310,7 +310,7 @@
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
-				370AE80E25A3B994007078B0 /* keyboard.sqlite3 */,
+				378C13D325CAF8A10053D905 /* keyboard.sqlite3 */,
 				37B5F6072513AD8E003E79B7 /* OpenCC.bundle */,
 			);
 			path = Keyboard;
@@ -442,7 +442,7 @@
 				37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */,
 				37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */,
 				37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */,
-				370AE80925A3B980007078B0 /* jyutping.sqlite3 in Resources */,
+				378C13AE25CA84670053D905 /* jyutping.sqlite3 in Resources */,
 				37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */,
 				37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */,
 			);
@@ -452,7 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				370AE80F25A3B994007078B0 /* keyboard.sqlite3 in Resources */,
+				378C13D425CAF8A10053D905 /* keyboard.sqlite3 in Resources */,
 				37B5F6082513AD8E003E79B7 /* OpenCC.bundle in Resources */,
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
