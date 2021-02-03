@@ -92,15 +92,17 @@ final class KeyButton: UIButton {
                                 
                                 showPreviewText()
                         } else {
-                                keyButtonView.backgroundColor = self.highlightButtonColor
+                                keyButtonView.backgroundColor = highlightButtonColor
                         }
                 case .space:
-                        keyButtonView.backgroundColor = self.highlightButtonColor
+                        keyButtonView.backgroundColor = highlightButtonColor
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         performedDraggingOnSpace = false
                 case .backspace:
-                        keyButtonView.backgroundColor = self.highlightButtonColor
+                        keyButtonView.backgroundColor = highlightButtonColor
                         backspaceTouchPoint = touches.first?.location(in: self) ?? .zero
+                case .newLine:
+                        keyButtonView.backgroundColor = highlightButtonColor
                 default:
                         break
                 }
@@ -173,7 +175,7 @@ final class KeyButton: UIButton {
                         changeColorToNormal()
                 }
                 switch keyboardEvent {
-                case .backspace:
+                case .backspace, .newLine:
                         changeColorToNormal()
                 case .text(_):
                         if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
@@ -215,7 +217,7 @@ final class KeyButton: UIButton {
                 invalidateBackspaceTimers()
                 
                 switch keyboardEvent {
-                case .backspace:
+                case .backspace, .newLine:
                         changeColorToNormal()
                 case .space:
                         spaceTouchPoint = .zero
