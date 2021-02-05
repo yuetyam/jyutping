@@ -36,13 +36,13 @@ final class KeyboardViewController: UIInputViewController {
                 candidateCollectionView.delegate = self
                 candidateCollectionView.dataSource = self
                 candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: "CandidateCell")
-                candidateCollectionView.backgroundColor = self.view.backgroundColor
-
+                candidateCollectionView.backgroundColor = view.backgroundColor
+                
                 emojiCollectionView.delegate = self
                 emojiCollectionView.dataSource = self
                 emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: "EmojiCell")
-                emojiCollectionView.backgroundColor = self.view.backgroundColor
-                
+                emojiCollectionView.backgroundColor = view.backgroundColor
+
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
                 settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")                
