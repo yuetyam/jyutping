@@ -7,7 +7,7 @@ struct AcknowledgementsView: View {
                         ScrollView {
                                 LinkView(iconName: "briefcase",
                                          text: Text("SwiftyOpenCC"),
-                                         footnote: Text("© 2017 DengXiang. MIT License"),
+                                         footnote: Text("© DengXiang. MIT License"),
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/ddddxxx/SwiftyOpenCC")!)
                                         .fillBackground()
