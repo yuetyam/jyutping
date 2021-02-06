@@ -69,6 +69,7 @@ extension KeyboardViewController {
 
 
         // MARK: - Emoji Keyboard
+
         func setupEmojiKeyboard() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
@@ -143,14 +144,14 @@ extension KeyboardViewController {
                 // FIXME: - Unable to simultaneously satisfy constraints
                 settingsView.heightAnchor.constraint(equalToConstant: height + extend).isActive = true
                 
-                let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 10, bottomInset: 10, leftInset: 15, rightInset: 55)
+                let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 5, bottomInset: 5, leftInset: 15, rightInset: 55)
                 settingsView.addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(
                         [upArrowButton.topAnchor.constraint(equalTo: settingsView.topAnchor),
                          upArrowButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
                          upArrowButton.widthAnchor.constraint(equalToConstant: 100),
-                         upArrowButton.heightAnchor.constraint(equalToConstant: 50)]
+                         upArrowButton.heightAnchor.constraint(equalToConstant: 40)]
                 )
                 upArrowButton.tintColor = isDarkAppearance ? .white : .black
                 upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .touchUpInside)
