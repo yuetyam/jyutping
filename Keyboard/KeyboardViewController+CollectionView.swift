@@ -6,7 +6,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 if collectionView == candidateCollectionView {
                         return 1
                 } else {
-                        return 9
+                        return 8
                 }
         }
         
@@ -16,23 +16,21 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 } else {
                         switch section {
                         case 0:
-                                return 151 // Smileys & Emotion
+                                return 454 // Smileys & People
                         case 1:
-                                return 347 // People & Body
+                                return 199 // Animals & Nature
                         case 2:
-                                return 140 // Animals & Nature
+                                return 123 // Food & Drink
                         case 3:
-                                return 129 // Food & Drink
+                                return 117 // Activity
                         case 4:
-                                return 215 // Travel & Places
+                                return 128 // Travel & Places
                         case 5:
-                                return 84  // Activities
+                                return 217  // Objects
                         case 6:
-                                return 250 // Objects
+                                return 290 // Symbols
                         case 7:
-                                return 220 // Symbols
-                        case 8:
-                                return 269 // Flags
+                                return 259 // Flags
                         default:
                                 return 0
                         }
