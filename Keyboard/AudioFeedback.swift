@@ -44,9 +44,7 @@ enum AudioFeedback: Equatable {
                 AudioServicesPlaySystemSound(audioFeedback.systemSoundId)
         }
         
-        private static var isAudioFeedbackOn: Bool = {
-                return UserDefaults.standard.bool(forKey: "audio_feedback")
-        }()
+        private static var isAudioFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "audio_feedback")
         static func updateAudioFeedbackStatus() {
                 isAudioFeedbackOn = UserDefaults.standard.bool(forKey: "audio_feedback")
         }
