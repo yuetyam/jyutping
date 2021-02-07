@@ -66,10 +66,10 @@ final class KeyboardViewController: UIInputViewController {
                         didKeyboardEstablished = true
                 }
                 let isHapticFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "haptic_feedback")
-                if lightImpactFeedback == nil && isHapticFeedbackOn {
+                if isHapticFeedbackOn && lightImpactFeedback == nil {
                         lightImpactFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
-                if selectionFeedback == nil && isHapticFeedbackOn {
+                if isHapticFeedbackOn && lightImpactFeedback == nil {
                         selectionFeedback = UISelectionFeedbackGenerator()
                 }
         }
