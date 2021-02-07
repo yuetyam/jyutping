@@ -7,6 +7,7 @@ struct EnhancedTextField: UIViewRepresentable {
         
         private let font: UIFont?
         private let keyboardAppearance: UIKeyboardAppearance?
+        private let keyboardType: UIKeyboardType?
         private let returnKey: UIReturnKeyType?
         private let autocorrection: UITextAutocorrectionType?
         private let autocapitalization: UITextAutocapitalizationType?
@@ -15,6 +16,7 @@ struct EnhancedTextField: UIViewRepresentable {
              text: Binding<String>,
              font: UIFont? = nil,
              keyboardAppearance: UIKeyboardAppearance? = nil,
+             keyboardType: UIKeyboardType? = nil,
              returnKey: UIReturnKeyType? = nil,
              autocorrection: UITextAutocorrectionType? = nil,
              autocapitalization: UITextAutocapitalizationType? = nil) {
@@ -22,6 +24,7 @@ struct EnhancedTextField: UIViewRepresentable {
                 self._text = text
                 self.font = font
                 self.keyboardAppearance = keyboardAppearance
+                self.keyboardType = keyboardType
                 self.returnKey = returnKey
                 self.autocorrection = autocorrection
                 self.autocapitalization = autocapitalization
@@ -34,6 +37,9 @@ struct EnhancedTextField: UIViewRepresentable {
                 textField.font = font
                 if let keyboardAppearance = keyboardAppearance {
                         textField.keyboardAppearance = keyboardAppearance
+                }
+                if let keyboardType = keyboardType {
+                        textField.keyboardType = keyboardType
                 }
                 if let returnKeyType = returnKey {
                         textField.returnKeyType = returnKeyType
