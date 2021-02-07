@@ -225,6 +225,7 @@ final class BackspaceButton: UIButton {
                 DispatchQueue.main.async {
                         self.keyImageView.image = UIImage(systemName: "delete.left.fill")
                 }
+                viewController.lightImpactFeedback?.impactOccurred()
                 handleBackspace()
         }
         private func handleBackspace() {
@@ -238,7 +239,6 @@ final class BackspaceButton: UIButton {
         @objc private func performBackspace() {
                 viewController.textDocumentProxy.deleteBackward()
                 AudioFeedback.perform(audioFeedback: .delete)
-                viewController.lightImpactFeedback?.impactOccurred()
         }
         
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
