@@ -79,11 +79,11 @@ struct AboutView: View {
                                         
                                         VStack {
                                                 Button(action: {
-                                                        if let url: URL = URL(string: "itms-apps://apple.com/app/id1509367629") {
-                                                                UIApplication.shared.open(url)
+                                                        if let appStoreUrl: URL = URL(string: "itms-apps://apple.com/app/id1509367629") {
+                                                                UIApplication.shared.open(appStoreUrl)
                                                         }
                                                 }) {
-                                                        MessageView(icon: "heart", text: Text("Review in App Store"))
+                                                        MessageView(icon: "heart", text: Text("Review in App Store"), symbol: Image(systemName: "arrow.right.square"))
                                                 }.padding(.top)
                                                 
                                                 Divider()
