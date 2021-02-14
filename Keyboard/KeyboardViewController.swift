@@ -304,7 +304,7 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 0: The key "tone_style" doesn‘t exist.
         ///
-        /// 1: 普通
+        /// 1: 正常
         ///
         /// 2: 無聲調
         ///
