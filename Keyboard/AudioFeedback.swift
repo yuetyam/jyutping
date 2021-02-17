@@ -3,15 +3,12 @@ import AudioToolbox
 enum AudioFeedback: Equatable {
         case
         input,
-        click,
         delete,
         modify
         
         private var systemSoundId: SystemSoundID {
                 switch self {
                 case .input:
-                        return 1123 // Used to be 1104
-                case .click:
                         return 1123
                 case .delete:
                         return 1155
@@ -32,7 +29,7 @@ enum AudioFeedback: Equatable {
                 case .none:
                         break
                 default:
-                        feedback(.click)
+                        feedback(.input)
                 }
         }
         private static func feedback(_ audioFeedback: AudioFeedback) {
