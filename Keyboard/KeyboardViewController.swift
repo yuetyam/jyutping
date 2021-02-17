@@ -213,6 +213,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         @objc private func handleYueEngSwitch() {
                 selectionFeedback?.selectionChanged()
+                AudioFeedback.perform(audioFeedback: .modify)
                 isCapsLocked = false
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
                 case 0:
@@ -227,7 +228,7 @@ final class KeyboardViewController: UIInputViewController {
                 guard UIPasteboard.general.hasStrings else { return }
                 guard let copied: String = UIPasteboard.general.string else { return }
                 lightImpactFeedback?.impactOccurred()
-                AudioFeedback.perform(audioFeedback: .modify)
+                AudioFeedback.perform(audioFeedback: .input)
                 textDocumentProxy.insertText(copied)
         }
         @objc private func handleEmojiSwitch() {
