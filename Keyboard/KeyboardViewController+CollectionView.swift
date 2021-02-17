@@ -73,7 +73,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                         return ("123".contains(tone)) ? 3 : -3
                                 }
                         }()
-                        let font: UIFont = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: .systemFont(ofSize: 10))
+                        let font: UIFont = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: .systemFont(ofSize: 10))
                         let newText = NSMutableAttributedString(string: jyutping)
                         newText.addAttribute(NSAttributedString.Key.font,
                                              value: font,
