@@ -97,7 +97,7 @@ struct Engine {
                 return combine
         }
         private func process(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +)) }
+                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.reduce("", +)) }
                 let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 25000 }
                 guard candidates.count > 1 && candidates[0].input.count != text.count else {
                         return candidates
@@ -110,7 +110,7 @@ struct Engine {
                 var combine: [Candidate] = []
                 for (index, _) in tailJyutpings.enumerated().reversed() {
                         let tail: String = tailJyutpings[0...index].reduce("", +)
-                        if let one: Candidate = match(for: tail, count: 1).first {
+                        if let one: Candidate = matchWithLimitCount(for: tail, count: 1).first {
                                 let firstCandidate: Candidate = candidates[0] + one
                                 combine.append(firstCandidate)
                                 if candidates[0].input.count == candidates[1].input.count && candidates[0].text.count == candidates[1].text.count {
@@ -123,7 +123,7 @@ struct Engine {
                 return combine + candidates
         }
         private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { match(for: $0.reduce("", +)) }
+                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.reduce("", +)) }
                 var combine: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 20000 }
                 guard !combine.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
@@ -150,7 +150,7 @@ struct Engine {
                         if !hasTailCandidate {
                                 for (index, _) in tailJyutpings.enumerated().reversed() {
                                         let someJPs: String = tailJyutpings[0...index].reduce("", +)
-                                        if let one: Candidate = match(for: someJPs, count: 1).first {
+                                        if let one: Candidate = matchWithLimitCount(for: someJPs, count: 1).first {
                                                 let newCandidate: Candidate = combine.first! + one
                                                 combine.insert(newCandidate, at: 0)
                                                 break
@@ -185,7 +185,27 @@ private extension Engine {
                 return candidates
         }
         
-        func match(for text: String, count: Int = 200) -> [Candidate] {
+        func match(for text: String) -> [Candidate] {
+                guard !text.isEmpty else { return [] }
+                var candidates: [Candidate] = []
+                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.hash);"
+                var queryStatement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                // ping = sqlite3_column_int64(queryStatement, 0)
+                                // shortcut = sqlite3_column_int64(queryStatement, 1)
+                                // prefix = sqlite3_column_int64(queryStatement, 2)
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                candidates.append(candidate)
+                        }
+                }
+                sqlite3_finalize(queryStatement)
+                return candidates
+        }
+        func matchWithLimitCount(for text: String, count: Int) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.hash) LIMIT \(count);"
@@ -197,9 +217,29 @@ private extension Engine {
                                 // prefix = sqlite3_column_int64(queryStatement, 2)
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                let ranking: Int = Int(sqlite3_column_int64(queryStatement, 5))
-                                
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word, ranking: ranking)
+
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                candidates.append(candidate)
+                        }
+                }
+                sqlite3_finalize(queryStatement)
+                return candidates
+        }
+        func matchWithRanking(for text: String) -> [Candidate] {
+                guard !text.isEmpty else { return [] }
+                var candidates: [Candidate] = []
+                let queryString = "SELECT rowid, * FROM jyutpingtable WHERE ping = \(text.hash);"
+                var queryStatement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
+                                // ping = sqlite3_column_int64(queryStatement, 1)
+                                // shortcut = sqlite3_column_int64(queryStatement, 2)
+                                // prefix = sqlite3_column_int64(queryStatement, 3)
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
+
+                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word, ranking: rowid)
                                 candidates.append(candidate)
                         }
                 }
@@ -239,9 +279,8 @@ private extension Engine {
                                 // prefix = sqlite3_column_int64(queryStatement, 2)
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                // let ranking: Int = Int(sqlite3_column_int64(queryStatement, 5))
-                                // pinyin = sqlite3_column_int64(queryStatement, 6)
-                                // cangjie = sqlite3_column_int64(queryStatement, 7)
+                                // pinyin = sqlite3_column_int64(queryStatement, 5)
+                                // cangjie = sqlite3_column_int64(queryStatement, 6)
 
                                 let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
@@ -261,9 +300,8 @@ private extension Engine {
                                 // prefix = sqlite3_column_int64(queryStatement, 2)
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                // let ranking: Int = Int(sqlite3_column_int64(queryStatement, 5))
-                                // pinyin = sqlite3_column_int64(queryStatement, 6)
-                                // cangjie = sqlite3_column_int64(queryStatement, 7)
+                                // pinyin = sqlite3_column_int64(queryStatement, 5)
+                                // cangjie = sqlite3_column_int64(queryStatement, 6)
 
                                 let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
