@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B631423E96E1000912B9A /* AudioFeedback.swift */; };
 		370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37211D5723541EE3007E1D68 /* AppDelegate.swift */; };
+		3715176E25DD123B00F4EA95 /* String+code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715176D25DD123B00F4EA95 /* String+code.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
 		37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D5D23541EE4007E1D68 /* Assets.xcassets */; };
 		37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6023541EE4007E1D68 /* Preview Assets.xcassets */; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
+		3715176D25DD123B00F4EA95 /* String+code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+code.swift"; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37211D5723541EE3007E1D68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				37FA443423A8510A001E7DBC /* ColorExtension.swift */,
 				37573F6524F310E100856B8A /* Array+deduplicated.swift */,
 				37573F6724F3112D00856B8A /* String+shortcut.swift */,
+				3715176D25DD123B00F4EA95 /* String+code.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */,
 				370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */,
 				37FF2A2F23E8F80400B86C74 /* Engine.swift in Sources */,
+				3715176E25DD123B00F4EA95 /* String+code.swift in Sources */,
 				3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */,
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
 				3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */,
