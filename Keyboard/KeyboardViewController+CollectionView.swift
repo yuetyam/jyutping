@@ -15,24 +15,15 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return candidates.count
                 } else {
                         switch section {
-                        case 0:
-                                return 454 // Smileys & People
-                        case 1:
-                                return 199 // Animals & Nature
-                        case 2:
-                                return 123 // Food & Drink
-                        case 3:
-                                return 117 // Activity
-                        case 4:
-                                return 128 // Travel & Places
-                        case 5:
-                                return 217  // Objects
-                        case 6:
-                                return 290 // Symbols
-                        case 7:
-                                return 259 // Flags
-                        default:
-                                return 0
+                        case 0: return 454  // Smileys & People
+                        case 1: return 199  // Animals & Nature
+                        case 2: return 123  // Food & Drink
+                        case 3: return 117  // Activity
+                        case 4: return 128  // Travel & Places
+                        case 5: return 217  // Objects
+                        case 6: return 290  // Symbols
+                        case 7: return 259  // Flags
+                        default: return 0
                         }
                 }
         }
@@ -58,8 +49,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 cell.textLabel.text = candidates[indexPath.row].text
                 switch toneStyle {
                 case 2:
-                        let toneDigits: String = "123456"
-                        cell.footnoteLabel.text = candidates[indexPath.row].footnote.filter { !toneDigits.contains($0) }
+                        cell.footnoteLabel.text = candidates[indexPath.row].footnote.filter { !$0.isNumber }
                 case 3, 4, 5:
                         let footnote: String = candidates[indexPath.row].footnote
                         let attributed: NSAttributedString = attribute(text: footnote, toneStyle: toneStyle)
