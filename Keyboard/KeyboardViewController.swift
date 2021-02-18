@@ -3,15 +3,15 @@ import OpenCC
 
 final class KeyboardViewController: UIInputViewController {
         
-        lazy var toolBar: ToolBar = ToolBar(viewController: self)
-        lazy var settingsView: UIView = UIView()
-        lazy var candidateBoard: CandidateBoard = CandidateBoard()
-        lazy var candidateCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        lazy var emojiBoard: EmojiBoard = EmojiBoard(viewController: self)
-        lazy var emojiCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        lazy var settingsTableView: UITableView = UITableView(frame: .zero, style: .grouped)
+        private(set) lazy var toolBar: ToolBar = ToolBar(viewController: self)
+        private(set) lazy var settingsView: UIView = UIView()
+        private(set) lazy var candidateBoard: CandidateBoard = CandidateBoard()
+        private(set) lazy var candidateCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        private(set) lazy var emojiBoard: EmojiBoard = EmojiBoard(viewController: self)
+        private(set) lazy var emojiCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        private(set) lazy var settingsTableView: UITableView = UITableView(frame: .zero, style: .grouped)
         
-        lazy var keyboardStackView: UIStackView = {
+        private(set) lazy var keyboardStackView: UIStackView = {
                 let stackView = UIStackView(frame: .zero)
                 stackView.axis = .vertical
                 stackView.alignment = .fill
