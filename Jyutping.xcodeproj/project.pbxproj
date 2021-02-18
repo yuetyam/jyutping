@@ -35,6 +35,7 @@
 		37573F6A24F3120300856B8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Entry.swift */; };
 		37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6B24F3123500856B8A /* LexiconManager.swift */; };
 		3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */; };
+		377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AF90925DE328F00EED1FD /* Emoji.swift */; };
 		377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */; };
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
@@ -128,6 +129,7 @@
 		3764EB7024D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3764EB7124D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionLabel.swift; sourceTree = "<group>"; };
+		377AF90925DE328F00EED1FD /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */,
 				3741062C23E2191200639EF4 /* CandidateCell.swift */,
 				379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */,
+				377AF90925DE328F00EED1FD /* Emoji.swift */,
 				3715203323B22ACF007EAB60 /* ToolBar.swift */,
 				3741063323E30D7100639EF4 /* ToolButton.swift */,
 				3722B850250129F900E33ADB /* NumberPadButtons.swift */,
@@ -491,6 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */,
 				37E004F823E49B6700E413BD /* KeyboardLayout.swift in Sources */,
 				3741063423E30D7100639EF4 /* ToolButton.swift in Sources */,
 				3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */,

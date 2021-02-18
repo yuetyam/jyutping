@@ -33,7 +33,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         guard let cell: EmojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmojiCell", for: indexPath) as? EmojiCell else {
                                 return UICollectionViewCell()
                         }
-                        cell.emojiLabel.text = String(emojis[indexPath.section][indexPath.row])
+                        cell.emojiLabel.text = String(Emoji.emojis[indexPath.section][indexPath.row])
                         return cell
                 }
 
@@ -96,7 +96,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 guard collectionView == candidateCollectionView else {
-                        textDocumentProxy.insertText(String(emojis[indexPath.section][indexPath.row]))
+                        textDocumentProxy.insertText(String(Emoji.emojis[indexPath.section][indexPath.row]))
                         AudioFeedback.perform(audioFeedback: .input)
                         selectionFeedback?.selectionChanged()
                         return
