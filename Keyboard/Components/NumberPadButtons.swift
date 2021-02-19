@@ -28,7 +28,7 @@ final class NumberButton: UIButton {
                 viewController.textDocumentProxy.insertText(String(digit))
                 keyButtonView.backgroundColor = viewController.isDarkAppearance ? .black : .lightActionButton
                 AudioFeedback.perform(audioFeedback: .input)
-                viewController.lightImpactFeedback?.impactOccurred()
+                viewController.hapticFeedback?.impactOccurred()
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 UIView.animate(withDuration: 0, delay: 0.03, animations: {
@@ -150,7 +150,7 @@ final class PeriodButton: UIButton {
         @objc private func handleTap() {
                 viewController.textDocumentProxy.insertText(".")
                 AudioFeedback.perform(audioFeedback: .input)
-                viewController.lightImpactFeedback?.impactOccurred()
+                viewController.hapticFeedback?.impactOccurred()
         }
         
         required init?(coder: NSCoder) {
@@ -225,7 +225,7 @@ final class BackspaceButton: UIButton {
                 DispatchQueue.main.async {
                         self.keyImageView.image = UIImage(systemName: "delete.left.fill")
                 }
-                viewController.lightImpactFeedback?.impactOccurred()
+                viewController.hapticFeedback?.impactOccurred()
                 handleBackspace()
         }
         private func handleBackspace() {

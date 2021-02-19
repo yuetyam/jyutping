@@ -66,21 +66,16 @@ final class KeyboardViewController: UIInputViewController {
                         didKeyboardEstablished = true
                 }
                 let isHapticFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "haptic_feedback")
-                if isHapticFeedbackOn && lightImpactFeedback == nil {
-                        lightImpactFeedback = UIImpactFeedbackGenerator(style: .light)
-                }
-                if isHapticFeedbackOn && lightImpactFeedback == nil {
-                        selectionFeedback = UISelectionFeedbackGenerator()
+                if isHapticFeedbackOn && hapticFeedback == nil {
+                        hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
         }
         
-        var lightImpactFeedback: UIImpactFeedbackGenerator?
-        var selectionFeedback: UISelectionFeedbackGenerator?
-        
+        var hapticFeedback: UIImpactFeedbackGenerator?
+
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
-                lightImpactFeedback = nil
-                selectionFeedback = nil
+                hapticFeedback = nil
         }
 
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
@@ -212,7 +207,7 @@ final class KeyboardViewController: UIInputViewController {
                 keyboardLayout = .settingsView
         }
         @objc private func handleYueEngSwitch() {
-                selectionFeedback?.selectionChanged()
+                hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(audioFeedback: .modify)
                 isCapsLocked = false
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
@@ -227,12 +222,12 @@ final class KeyboardViewController: UIInputViewController {
         @objc private func handlePaste() {
                 guard UIPasteboard.general.hasStrings else { return }
                 guard let copied: String = UIPasteboard.general.string else { return }
-                lightImpactFeedback?.impactOccurred()
+                hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(audioFeedback: .input)
                 textDocumentProxy.insertText(copied)
         }
         @objc private func handleEmojiSwitch() {
-                lightImpactFeedback?.impactOccurred()
+                hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(audioFeedback: .modify)
                 keyboardLayout = .emoji
         }

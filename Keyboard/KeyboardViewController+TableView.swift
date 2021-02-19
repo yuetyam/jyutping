@@ -157,7 +157,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                selectionFeedback?.prepare()
                 switch indexPath.section {
                 case 1:
                         tableView.deselectRow(at: indexPath, animated: true)
@@ -174,7 +173,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         updateConverter()
-                        selectionFeedback?.selectionChanged()
+                        hapticFeedback?.impactOccurred()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
@@ -191,7 +190,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         updateJyutpingDisplay()
-                        selectionFeedback?.selectionChanged()
+                        hapticFeedback?.impactOccurred()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
@@ -212,7 +211,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         updateToneStyle()
-                        selectionFeedback?.selectionChanged()
+                        hapticFeedback?.impactOccurred()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
@@ -253,15 +252,11 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         @objc private func handleHapticFeedbackSwitch() {
                 if UserDefaults.standard.bool(forKey: "haptic_feedback") {
                         UserDefaults.standard.set(false, forKey: "haptic_feedback")
-                        lightImpactFeedback = nil
-                        selectionFeedback = nil
+                        hapticFeedback = nil
                 } else {
                         UserDefaults.standard.set(true, forKey: "haptic_feedback")
-                        if lightImpactFeedback == nil {
-                                lightImpactFeedback = UIImpactFeedbackGenerator(style: .light)
-                        }
-                        if selectionFeedback == nil {
-                                selectionFeedback = UISelectionFeedbackGenerator()
+                        if hapticFeedback == nil {
+                                hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                         }
                 }
         }

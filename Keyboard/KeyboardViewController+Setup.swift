@@ -87,7 +87,7 @@ extension KeyboardViewController {
                 _ = emojiBoard.indicatorsStackView.arrangedSubviews.map({ ($0 as? Indicator)?.addTarget(self, action: #selector(handleIndicator(_:)), for: .touchDown) })
         }
         @objc func handleIndicator(_ sender: Indicator) {
-                lightImpactFeedback?.impactOccurred()
+                hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(audioFeedback: .modify)
                 let indexPath: IndexPath = IndexPath(row: 15, section: sender.index)
                 emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)

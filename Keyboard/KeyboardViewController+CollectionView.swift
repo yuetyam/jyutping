@@ -97,15 +97,14 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 guard collectionView == candidateCollectionView else {
                         textDocumentProxy.insertText(String(Emoji.emojis[indexPath.section][indexPath.row]))
+                        hapticFeedback?.impactOccurred()
                         AudioFeedback.perform(audioFeedback: .input)
-                        selectionFeedback?.selectionChanged()
                         return
                 }
 
                 let candidate: Candidate = candidates[indexPath.row]
                 textDocumentProxy.insertText(candidate.text)
                 AudioFeedback.perform(audioFeedback: .modify)
-                selectionFeedback?.selectionChanged()
                 if currentInputText.hasPrefix("r") {
                         if currentInputText == "r" + candidate.input {
                                 currentInputText = ""
