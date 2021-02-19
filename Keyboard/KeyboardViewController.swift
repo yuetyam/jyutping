@@ -255,9 +255,10 @@ final class KeyboardViewController: UIInputViewController {
                         case 4:
                                 return [.simplify]
                         default:
-                                return [.traditionalize]
+                                return []
                         }
                 }()
+                guard !options.isEmpty else { return nil }
                 guard let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle")) else { return nil }
                 let converter: ChineseConverter? = try? ChineseConverter(bundle: openccBundle, options: options)
                 return converter
@@ -273,9 +274,10 @@ final class KeyboardViewController: UIInputViewController {
                         case 4:
                                 return [.simplify]
                         default:
-                                return [.traditionalize]
+                                return []
                         }
                 }()
+                guard !options.isEmpty else { converter = nil; return }
                 guard let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle")) else { return }
                 let converter: ChineseConverter? = try? ChineseConverter(bundle: openccBundle, options: options)
                 self.converter = converter
