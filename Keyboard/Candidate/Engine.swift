@@ -13,7 +13,6 @@ struct Engine {
                 }
         }()
 
-        // FIXME: - Add Cangejie reverse lookup
         func suggest(for text: String) -> [Candidate] {
                 guard !text.hasPrefix("r") else {
                         let pinyin: String = String(text.dropFirst())
@@ -21,7 +20,7 @@ struct Engine {
                 }
                 guard !text.hasPrefix("v") else {
                         let cangjie: String = String(text.dropFirst())
-                        return cangjie.isEmpty ? [] : matchPinyin(for: cangjie)
+                        return cangjie.isEmpty ? [] : matchCangjie(for: cangjie)
                 }
                 switch text.count {
                 case 0:
@@ -167,7 +166,7 @@ private extension Engine {
         func shortcut(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE shortcut = \(text.hash) LIMIT \(count);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE shortcut = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -188,7 +187,7 @@ private extension Engine {
         func match(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.hash);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -208,7 +207,7 @@ private extension Engine {
         func matchWithLimitCount(for text: String, count: Int) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.hash) LIMIT \(count);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -228,7 +227,7 @@ private extension Engine {
         func matchWithRanking(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT rowid, * FROM jyutpingtable WHERE ping = \(text.hash);"
+                let queryString = "SELECT rowid, * FROM jyutpingtable WHERE ping = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -250,7 +249,7 @@ private extension Engine {
         func prefix(match text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE prefix = \(text.hash) LIMIT \(count);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE prefix = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -270,7 +269,7 @@ private extension Engine {
 
         func matchPinyin(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE pinyin = \(text.hash);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE pinyin = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -291,7 +290,7 @@ private extension Engine {
         }
         func matchCangjie(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE cangjie = \(text.hash);"
+                let queryString = "SELECT * FROM jyutpingtable WHERE cangjie = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {

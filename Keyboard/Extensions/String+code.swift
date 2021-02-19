@@ -4,17 +4,7 @@ import BLAKE3
 extension String {
         var code: Int {
                 let data: Data = self.data(using: .utf8)!
-                let count: Int = {
-                        switch self.count {
-                        case 0...4:
-                                return 4
-                        case 5...9:
-                                return 5
-                        default:
-                                return 6
-                        }
-                }()
-                let codes: [UInt8] = BLAKE3.hash(data, count: count)
+                let codes: [UInt8] = BLAKE3.hash(data, count: 6)
                 let codeString: String = codes.map({ String($0) }).joined()
                 return Int(codeString) ?? 1
         }
