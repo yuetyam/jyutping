@@ -97,7 +97,7 @@ struct Engine {
                 return combine
         }
         private func process(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.reduce("", +)) }
+                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.joined()) }
                 let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 25000 }
                 guard candidates.count > 1 && candidates[0].input.count != text.count else {
                         return candidates
@@ -109,7 +109,7 @@ struct Engine {
                 }
                 var combine: [Candidate] = []
                 for (index, _) in tailJyutpings.enumerated().reversed() {
-                        let tail: String = tailJyutpings[0...index].reduce("", +)
+                        let tail: String = tailJyutpings[0...index].joined()
                         if let one: Candidate = matchWithLimitCount(for: tail, count: 1).first {
                                 let firstCandidate: Candidate = candidates[0] + one
                                 combine.append(firstCandidate)
@@ -123,7 +123,7 @@ struct Engine {
                 return combine + candidates
         }
         private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.reduce("", +)) }
+                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.joined()) }
                 var combine: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 20000 }
                 guard !combine.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
@@ -138,7 +138,7 @@ struct Engine {
                         guard let tailJyutpings: [String] = jyutpingsSequences.first, !tailJyutpings.isEmpty else {
                                 return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
                         }
-                        let rawTailJyutpings: String = tailJyutpings.reduce("", +)
+                        let rawTailJyutpings: String = tailJyutpings.joined()
                         if tailText.count - rawTailJyutpings.count > 1 {
                                 let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - rawTailJyutpings.count - 1))
                                 if let one: Candidate = prefix(match: tailRawJPPlusOne, count: 1).first {
@@ -149,7 +149,7 @@ struct Engine {
                         }
                         if !hasTailCandidate {
                                 for (index, _) in tailJyutpings.enumerated().reversed() {
-                                        let someJPs: String = tailJyutpings[0...index].reduce("", +)
+                                        let someJPs: String = tailJyutpings[0...index].joined()
                                         if let one: Candidate = matchWithLimitCount(for: someJPs, count: 1).first {
                                                 let newCandidate: Candidate = combine.first! + one
                                                 combine.insert(newCandidate, at: 0)

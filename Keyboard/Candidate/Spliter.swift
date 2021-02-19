@@ -35,8 +35,8 @@ struct Spliter {
                         }
                 }
                 sequences.sort {
-                        let leftCharCount: Int = $0.reduce("", +).count
-                        let rightCharCount: Int = $1.reduce("", +).count
+                        let leftCharCount: Int = $0.joined().count
+                        let rightCharCount: Int = $1.joined().count
                         if leftCharCount == rightCharCount {
                                 return $0.count < $1.count
                         } else {

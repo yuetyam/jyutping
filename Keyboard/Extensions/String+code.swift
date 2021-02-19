@@ -95,7 +95,7 @@ extension String {
                         default: return 50
                         }
                 }
-                let codeString: String = codes.reduce("") { $0 + String($1) }
+                let codeString: String = codes.map({ String($0) }).joined()
                 return Int(codeString) ?? 50
         }
 }
