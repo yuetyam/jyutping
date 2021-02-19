@@ -39,6 +39,7 @@
 		377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */ = {isa = PBXBuildFile; productRef = 377AF92825DEDB0A00EED1FD /* BLAKE3 */; };
 		377AF93925DFC55200EED1FD /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 377AF93825DFC55200EED1FD /* jyutping.sqlite3 */; };
 		377AF93F25DFC56E00EED1FD /* keyboard.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */; };
+		377AF95E25E0250C00EED1FD /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 377AF95D25E0250C00EED1FD /* OpenCC.bundle */; };
 		377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */; };
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
@@ -51,7 +52,6 @@
 		37AE5BF32354AAF8008A8E4B /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37B3401D23EBD23400A8D3BB /* Settings.bundle */; };
 		37B384B62512D85F0051A4CA /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 37B384B52512D85F0051A4CA /* OpenCC */; };
-		37B5F6082513AD8E003E79B7 /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37B5F6072513AD8E003E79B7 /* OpenCC.bundle */; };
 		37C05F9A23E339C90061C992 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C05F9923E339C90061C992 /* KeyButton.swift */; };
 		37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB0237A8F0800F92482 /* InfoPlist.strings */; };
 		37C18EB5237A904000F92482 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB7237A904000F92482 /* Localizable.strings */; };
@@ -133,6 +133,7 @@
 		377AF90925DE328F00EED1FD /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		377AF93825DFC55200EED1FD /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = keyboard.sqlite3; sourceTree = "<group>"; };
+		377AF95D25E0250C00EED1FD /* OpenCC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OpenCC.bundle; sourceTree = "<group>"; };
 		377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		37AE5BF02354AAF8008A8E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37B3401D23EBD23400A8D3BB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		37B5F6072513AD8E003E79B7 /* OpenCC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OpenCC.bundle; sourceTree = "<group>"; };
 		37C05F9923E339C90061C992 /* KeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
 		37C18EB1237A8F0B00F92482 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C18EB8237A904100F92482 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
 				377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */,
-				37B5F6072513AD8E003E79B7 /* OpenCC.bundle */,
+				377AF95D25E0250C00EED1FD /* OpenCC.bundle */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -463,7 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				377AF93F25DFC56E00EED1FD /* keyboard.sqlite3 in Resources */,
-				37B5F6082513AD8E003E79B7 /* OpenCC.bundle in Resources */,
+				377AF95E25E0250C00EED1FD /* OpenCC.bundle in Resources */,
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
 			);
