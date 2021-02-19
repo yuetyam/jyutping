@@ -11,7 +11,7 @@ struct Spliter {
                 while shouldContinue {
                         var cache: [[String]] = []
                         for sequence in latestGeneration {
-                                leadingLength = max(leadingLength, sequence.reduce(0) { $0 + $1.count })
+                                leadingLength = max(leadingLength, sequence.reduce(0, { $0 + $1.count }))
                                 let lastPart: String = String(text.dropFirst(leadingLength))
                                 let nextTokens: [String] = splitLeading(lastPart)
                                 let newGenSequences: [[String]] = nextTokens.map { sequence + [$0] }
