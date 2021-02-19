@@ -56,7 +56,7 @@ struct AboutView: View {
                                                                 }
                                                         }
                                                 }) {
-                                                        MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.right.square"))
+                                                        MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.up.right"))
                                                 }.padding(.top)
                                                 Divider()
                                                 
@@ -65,7 +65,7 @@ struct AboutView: View {
                                                         let githubUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues")!
                                                         UIApplication.shared.open(githubUrl)
                                                 }) {
-                                                        MessageView(icon: "info.circle", text: Text("GitHub Issues"), symbol: Image(systemName: "arrow.right.square"))
+                                                        MessageView(icon: "info.circle", text: Text("GitHub Issues"), symbol: Image(systemName: "arrow.up.right"))
                                                 }
                                                 Divider()
                                                 
@@ -83,7 +83,7 @@ struct AboutView: View {
                                                                 UIApplication.shared.open(appStoreUrl)
                                                         }
                                                 }) {
-                                                        MessageView(icon: "heart", text: Text("Review in App Store"), symbol: Image(systemName: "arrow.right.square"))
+                                                        MessageView(icon: "heart", text: Text("Review in App Store"), symbol: Image(systemName: "arrow.up.right"))
                                                 }.padding(.top)
                                                 
                                                 Divider()
