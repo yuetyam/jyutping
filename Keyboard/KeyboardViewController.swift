@@ -69,6 +69,9 @@ final class KeyboardViewController: UIInputViewController {
                 if isHapticFeedbackOn && hapticFeedback == nil {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
+                if logogram > 1 && converter == nil {
+                        updateConverter()
+                }
         }
         
         var hapticFeedback: UIImpactFeedbackGenerator?
@@ -76,6 +79,7 @@ final class KeyboardViewController: UIInputViewController {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
+                converter = nil
         }
 
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
