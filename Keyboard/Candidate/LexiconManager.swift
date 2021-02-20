@@ -15,6 +15,9 @@ struct LexiconManager {
                         return nil
                 }
         }()
+        func close() {
+                sqlite3_close_v2(userdb)
+        }
         
         init() {
                 ensureTable()

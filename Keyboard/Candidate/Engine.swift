@@ -12,6 +12,9 @@ struct Engine {
                         return nil
                 }
         }()
+        func close() {
+                sqlite3_close_v2(database)
+        }
 
         func suggest(for text: String) -> [Candidate] {
                 guard !text.hasPrefix("r") else {

@@ -212,7 +212,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 4:
                         imeQueue.async {
-                                self.lexiconManager.deleteAll()
+                                self.lexiconManager?.deleteAll()
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)

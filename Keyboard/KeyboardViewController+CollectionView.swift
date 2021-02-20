@@ -123,7 +123,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                         candidateSequence = []
                         imeQueue.async {
-                                self.lexiconManager.handle(candidate: combinedCandidate)
+                                self.lexiconManager?.handle(candidate: combinedCandidate)
                         }
                 }
         }

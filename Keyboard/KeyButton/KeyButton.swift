@@ -147,7 +147,7 @@ final class KeyButton: UIButton {
                                                 }
                                                 viewController.candidateSequence = []
                                                 viewController.imeQueue.async {
-                                                        self.viewController.lexiconManager.handle(candidate: combinedCandidate)
+                                                        self.viewController.lexiconManager?.handle(candidate: combinedCandidate)
                                                 }
                                         }
                                 } else if !(viewController.currentInputText.isEmpty) {

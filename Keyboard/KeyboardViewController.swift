@@ -72,6 +72,12 @@ final class KeyboardViewController: UIInputViewController {
                 if logogram > 1 && converter == nil {
                         updateConverter()
                 }
+                if engine == nil {
+                        engine = Engine()
+                }
+                if lexiconManager == nil {
+                        lexiconManager = LexiconManager()
+                }
         }
         
         var hapticFeedback: UIImpactFeedbackGenerator?
@@ -80,6 +86,10 @@ final class KeyboardViewController: UIInputViewController {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
                 converter = nil
+                engine?.close()
+                engine = nil
+                lexiconManager?.close()
+                lexiconManager = nil
         }
 
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
@@ -176,11 +186,11 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        let lexiconManager: LexiconManager = LexiconManager()
-        private let engine: Engine = Engine()
+        private(set) var lexiconManager: LexiconManager? = LexiconManager()
+        private var engine: Engine? = Engine()
         private func suggestCandidates() {
-                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: currentInputText)
-                let engineCandidates: [Candidate] = engine.suggest(for: currentInputText)
+                let userdbCandidates: [Candidate] = lexiconManager?.suggest(for: currentInputText) ?? []
+                let engineCandidates: [Candidate] = engine?.suggest(for: currentInputText) ?? []
                 let combined: [Candidate] = userdbCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
