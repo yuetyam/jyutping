@@ -106,15 +106,15 @@ extension KeyButton {
                 guard let touchEvent: UITouch = event.allTouches?.first else { return }
                 if touchEvent.tapCount == 2 {
                         viewController.isCapsLocked = true
-                        viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
+                        viewController.keyboardLayout = viewController.keyboardLayout.isEnglishLayout ?
                                 .alphabeticUppercase : .jyutpingUppercase
                 } else if touchEvent.tapCount == 1 {
                         if keyboardEvent == .shift {
-                                viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
+                                viewController.keyboardLayout = viewController.keyboardLayout.isEnglishLayout ?
                                         .alphabeticUppercase : .jyutpingUppercase
                         } else {
                                 viewController.isCapsLocked = false
-                                viewController.keyboardLayout = viewController.keyboardLayout.isEnglish ?
+                                viewController.keyboardLayout = viewController.keyboardLayout.isEnglishLayout ?
                                         .alphabetic : .jyutping
                         }
                 }

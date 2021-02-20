@@ -43,7 +43,7 @@ enum KeyboardLayout {
                 }
         }
         
-        var isEnglish: Bool {
+        var isEnglishLayout: Bool {
                 switch self {
                 case .alphabetic,
                      .alphabeticUppercase,
@@ -190,7 +190,7 @@ private extension KeyboardLayout {
                 let arrayWithTextArray: [[String]] = [
                         ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="],
                         ["_", "—", "＼", "｜", "～", "《", "》", "¥", "&", "\u{00B7}"],
-                        ["⋯", "【", "】", "〔", "〕", "\u{00A3}"]
+                        ["⋯", "【", "】", "〔", "〕", "£"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
                 eventRows[2].insert(.switchTo(.cantoneseNumeric), at: 0)
@@ -220,26 +220,6 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        
-        /*
-        func cantoneseSymbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
-                let arrayWithTextArray: [[String]] = [
-                        ["（",    "）",    "〖",    "〗",    "～",    "【",    "】",    "〔",    "〕"],
-                        ["《",    "》",    "「",    "」",    "：",    "『",    "』",    "\u{00B7}",     "、"],
-                        ["。",    "，",    "；",    "？",    "！"]
-                ]
-                var eventRows: [[KeyboardEvent]] = arrayWithTextArray.keysRows
-                eventRows[2].insert(.switchTo(.jyutping), at: 0)
-                eventRows[2].insert(.none, at: 1)
-                eventRows[2].append(.none)
-                eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numericJyutping), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.numericJyutping), .space, .newLine]
-                eventRows.append(bottomEvents)
-                return eventRows
-        }
-        */
 }
 
 private extension Array where Element == [String] {
