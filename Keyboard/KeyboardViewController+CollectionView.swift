@@ -50,7 +50,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 switch toneStyle {
                 case 2:
                         cell.footnoteLabel.text = candidates[indexPath.row].footnote.filter { !$0.isNumber }
-                case 3, 4, 5:
+                case 3, 4:
                         let footnote: String = candidates[indexPath.row].footnote
                         let attributed: NSAttributedString = attribute(text: footnote, toneStyle: toneStyle)
                         cell.footnoteLabel.attributedText = attributed
@@ -62,24 +62,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
                 let jyutpings: [String] = text.components(separatedBy: " ")
                 let attributed: [NSMutableAttributedString] = jyutpings.map { (jyutping) -> NSMutableAttributedString in
-                        guard let tone = jyutping.last else { return NSMutableAttributedString(string: jyutping) }
-                        let offset: NSNumber = {
-                                switch toneStyle {
-                                case 3:
-                                        return 3
-                                case 4:
-                                        return -3
-                                default:
-                                        return ("123".contains(tone)) ? 3 : -3
-                                }
-                        }()
                         let font: UIFont = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: .systemFont(ofSize: 10))
                         let newText = NSMutableAttributedString(string: jyutping)
                         newText.addAttribute(NSAttributedString.Key.font,
                                              value: font,
                                              range: NSRange(location: jyutping.count - 1, length: 1))
                         newText.addAttribute(NSAttributedString.Key.baselineOffset,
-                                             value: offset,
+                                             value: toneStyle == 3 ? 3 : -3,
                                              range: NSRange(location: jyutping.count - 1, length: 1))
                         return newText
                 }

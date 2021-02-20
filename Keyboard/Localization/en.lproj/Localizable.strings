@@ -18,10 +18,9 @@ English
 "No Jyutpings" = "None";
 
 "Jyutping Tones Display" = "Jyutping Tones Display";
-"Normal : jyut6 ping3"      = "Normal          :  jyut6 ping3";
-"No Tones : jyut ping"      = "No Tones      :  jyut ping";
-"Superscript : jyut⁶ ping³" = "Superscript  :  jyut⁶ ping³";
-"Subscript : jyut₆ ping₃"   = "Subscript     :  jyut₆ ping₃";
-"Mix : jyut₆ ping³"         = "Mix                :  jyut₆ ping³";
+"Normal : jyut6 ping3"      = "Normal         :  jyut6 ping3";
+"No Tones : jyut ping"      = "No Tones     :  jyut ping";
+"Superscript : jyut⁶ ping³" = "Superscript :  jyut⁶ ping³";
+"Subscript : jyut₆ ping₃"   = "Subscript    :  jyut₆ ping₃";
 
 "Clear User Lexicon" = "Clear User Lexicon";

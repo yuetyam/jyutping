@@ -292,7 +292,6 @@ final class KeyboardViewController: UIInputViewController {
         /// 2: 喺候選詞下邊
         ///
         /// 3: 唔顯示
-        ///
         private(set) lazy var jyutpingDisplay: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
         func updateJyutpingDisplay() {
                 jyutpingDisplay = UserDefaults.standard.integer(forKey: "jyutping_display")
@@ -309,8 +308,6 @@ final class KeyboardViewController: UIInputViewController {
         /// 3: 上標
         ///
         /// 4: 下標
-        ///
-        /// 4: 陰上陽下
         private(set) lazy var toneStyle: Int = UserDefaults.standard.integer(forKey: "tone_style")
         func updateToneStyle() {
                 toneStyle = UserDefaults.standard.integer(forKey: "tone_style")

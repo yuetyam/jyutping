@@ -20,7 +20,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return 3
                 case 3:
                         // Jyutping Tones Display
-                        return 5
+                        return 4
                 case 4:
                         // Clear User Lexicon
                         return 1
@@ -135,9 +135,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 case 3:
                                         cell.textLabel?.text = NSLocalizedString("Subscript : jyut₆ ping₃", comment: "")
                                         cell.accessoryType = (toneStyle == 4) ? .checkmark : .none
-                                case 4:
-                                        cell.textLabel?.text = NSLocalizedString("Mix : jyut₆ ping³", comment: "")
-                                        cell.accessoryType = (toneStyle == 5) ? .checkmark : .none
                                 default:
                                         cell.textLabel?.text = "__error__"
                                 }
@@ -205,8 +202,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 UserDefaults.standard.set(3, forKey: "tone_style")
                         case 3:
                                 UserDefaults.standard.set(4, forKey: "tone_style")
-                        case 4:
-                                UserDefaults.standard.set(5, forKey: "tone_style")
                         default:
                                 break
                         }
