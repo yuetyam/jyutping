@@ -6,10 +6,12 @@ final class ToolButton: UIButton {
                 let buttonImageView: UIImageView = UIImageView()
                 addSubview(buttonImageView)
                 buttonImageView.translatesAutoresizingMaskIntoConstraints = false
-                buttonImageView.topAnchor.constraint(equalTo: topAnchor, constant: topInset).isActive = true
-                buttonImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomInset).isActive = true
-                buttonImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leftInset).isActive = true
-                buttonImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -rightInset).isActive = true
+                NSLayoutConstraint.activate([
+                        buttonImageView.topAnchor.constraint(equalTo: topAnchor, constant: topInset),
+                        buttonImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomInset),
+                        buttonImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leftInset),
+                        buttonImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -rightInset)
+                ])
                 buttonImageView.contentMode = .scaleAspectFit
                 buttonImageView.image = UIImage(systemName: imageName)
                 backgroundColor = .interactableClear

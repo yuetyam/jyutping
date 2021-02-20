@@ -16,9 +16,11 @@ final class CandidateBoard: UIView {
         private func setupSubViews() {
                 addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
-                upArrowButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
-                upArrowButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-                upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 60).isActive = true
-                upArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45).isActive = true
+                NSLayoutConstraint.activate([
+                        upArrowButton.topAnchor.constraint(equalTo: topAnchor),
+                        upArrowButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+                        upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 60),
+                        upArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)
+                ])
         }
 }

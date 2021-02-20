@@ -18,17 +18,19 @@ final class CandidateCell: UICollectionViewCell {
                 textLabel.textAlignment = .center
                 textLabel.adjustsFontForContentSizeCategory = true
                 // textLabel.font = .preferredFont(forTextStyle: .title3)
-                textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-                textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-                
+                NSLayoutConstraint.activate([
+                        textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                        textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+                ])
                 footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(footnoteLabel)
                 footnoteLabel.textAlignment = .center
                 footnoteLabel.adjustsFontForContentSizeCategory = true
                 footnoteLabel.font = .preferredFont(forTextStyle: .footnote)
-                footnoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-                footnoteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-                
+                NSLayoutConstraint.activate([
+                        footnoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                        footnoteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+                ])
                 updateSubviews()
                 updateFonts()
         }

@@ -27,10 +27,12 @@ extension KeyButton {
                 }
                 addSubview(keyButtonView)
                 keyButtonView.translatesAutoresizingMaskIntoConstraints = false
-                keyButtonView.topAnchor.constraint(equalTo: topAnchor, constant: verticalConstant).isActive = true
-                keyButtonView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalConstant).isActive = true
-                keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant).isActive = true
-                keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant).isActive = true
+                NSLayoutConstraint.activate([
+                        keyButtonView.topAnchor.constraint(equalTo: topAnchor, constant: verticalConstant),
+                        keyButtonView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalConstant),
+                        keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant),
+                        keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant)
+                ])
                 keyButtonView.isUserInteractionEnabled = false
                 keyButtonView.tintColor = buttonTintColor
                 keyButtonView.layer.cornerRadius = 5
@@ -67,10 +69,12 @@ extension KeyButton {
         func setupKeyTextLabel() {
                 keyButtonView.addSubview(keyTextLabel)
                 keyTextLabel.translatesAutoresizingMaskIntoConstraints = false
-                keyTextLabel.topAnchor.constraint(equalTo: keyButtonView.topAnchor).isActive = true
-                keyTextLabel.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor).isActive = true
-                keyTextLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor).isActive = true
-                keyTextLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor).isActive = true
+                NSLayoutConstraint.activate([
+                        keyTextLabel.topAnchor.constraint(equalTo: keyButtonView.topAnchor),
+                        keyTextLabel.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor),
+                        keyTextLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor),
+                        keyTextLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
+                ])
                 keyTextLabel.textAlignment = .center
                 keyTextLabel.adjustsFontForContentSizeCategory = true
                 keyTextLabel.font = styledFont
@@ -99,10 +103,12 @@ extension KeyButton {
                 
                 keyButtonView.addSubview(keyImageView)
                 keyImageView.translatesAutoresizingMaskIntoConstraints = false
-                keyImageView.topAnchor.constraint(equalTo: keyButtonView.topAnchor, constant: constant).isActive = true
-                keyImageView.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -constant).isActive = true
-                keyImageView.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor).isActive = true
-                keyImageView.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor).isActive = true
+                NSLayoutConstraint.activate([
+                        keyImageView.topAnchor.constraint(equalTo: keyButtonView.topAnchor, constant: constant),
+                        keyImageView.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -constant),
+                        keyImageView.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor),
+                        keyImageView.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
+                ])
                 keyImageView.contentMode = .scaleAspectFit
                 keyImageView.image = keyImage?.withTintColor(buttonTintColor)
         }
