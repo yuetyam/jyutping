@@ -35,12 +35,12 @@ struct Spliter {
                         }
                 }
                 sequences.sort {
-                        let leftCharCount: Int = $0.joined().count
-                        let rightCharCount: Int = $1.joined().count
-                        if leftCharCount == rightCharCount {
+                        let lhsCount: Int = $0.joined().count
+                        let rhsCount: Int = $1.joined().count
+                        if lhsCount == rhsCount {
                                 return $0.count < $1.count
                         } else {
-                                return leftCharCount > rightCharCount
+                                return lhsCount > rhsCount
                         }
                 }
                 return sequences.deduplicated()
