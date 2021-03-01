@@ -43,7 +43,8 @@ private struct GuideView: View {
         
         private let enableKeyboard: Text = Text("•  Jump to ") + Text("Settings").fontWeight(.medium) + Text("\n") +
                 Text("•  Tap ") + Text("Keyboards").fontWeight(.medium) + Text("\n") +
-                Text("•  Turn on ") + Text("Jyutping").fontWeight(.medium) + Text(" ") + Text("Keyboard")
+                Text("•  Turn on ") + Text("Jyutping").fontWeight(.medium) + Text(" ") + Text("Keyboard") + Text("\n") +
+                Text("•  Turn on ") + Text("Allow Full Access").fontWeight(.medium)
         
         private let editingKeyboards: Text = Text("Go to ") +
                 Text("Settings").fontWeight(.medium) + Text(" App   →   ") +
