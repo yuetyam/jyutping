@@ -130,7 +130,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
                 guard collectionView == candidateCollectionView else {
-                        return CGSize(width: 40, height: 40)
+                        return CGSize(width: 42, height: 42)
                 }
                 let characterCount: Int = candidates[indexPath.row].text.count
                 if self.keyboardLayout == .candidateBoard {
@@ -181,7 +181,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
                 if collectionView == self.emojiCollectionView {
-                        return UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
+                        return UIEdgeInsets(top: 4, left: 8, bottom: 0, right: 8)
                 } else {
                         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 }
