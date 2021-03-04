@@ -8,7 +8,7 @@ final class EmojiCell: UICollectionViewCell {
                 super.init(frame: frame)
                 self.addSubview(emojiLabel)
                 emojiLabel.translatesAutoresizingMaskIntoConstraints = false
-                emojiLabel.font = UIFont.systemFont(ofSize: 34)
+                emojiLabel.font = .systemFont(ofSize: 34)
                 NSLayoutConstraint.activate([
                         emojiLabel.topAnchor.constraint(equalTo: topAnchor),
                         emojiLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
