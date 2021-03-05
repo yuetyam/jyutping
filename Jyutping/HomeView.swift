@@ -40,37 +40,28 @@ struct HomeView_Previews: PreviewProvider {
 }
 
 private struct GuideView: View {
-        
+
         private let enableKeyboard: Text = Text("•  Jump to ") + Text("Settings").fontWeight(.medium) + Text("\n") +
                 Text("•  Tap ") + Text("Keyboards").fontWeight(.medium) + Text("\n") +
                 Text("•  Turn on ") + Text("Jyutping").fontWeight(.medium) + Text(" ") + Text("Keyboard") + Text("\n") +
                 Text("•  Turn on ") + Text("Allow Full Access").fontWeight(.medium)
-        
-        private let editingKeyboards: Text = Text("Go to ") +
-                Text("Settings").fontWeight(.medium) + Text(" App   →   ") +
-                Text("General").fontWeight(.medium) + Text("   →   ") +
-                Text("Keyboard").fontWeight(.medium) + Text("   →   ") +
-                Text("Keyboards").fontWeight(.medium) + Text(", then ") +
-                Text("Add New Keyboards...").fontWeight(.medium) + Text(" or ") +
-                Text("Edit").fontWeight(.medium)
-        
+
         var body: some View {
                 VStack {
                         HStack {
-                                Text("How to enable this Keyboard").font(.system(size: 20, weight: .medium))
+                                Text("How to enable this Keyboard").font(.headline)
                                 Spacer()
                         }
-                        .padding(.bottom)
-                        
                         HStack {
                                 enableKeyboard.fixedSize(horizontal: false, vertical: true)
                                 Spacer()
                         }
+                        .padding(.vertical, 4)
                 }
                 .padding()
                 .fillBackground()
                 .padding()
-                
+
                 Button(action: {
                         if let url: URL = URL(string: UIApplication.openSettingsURLString) {
                                 UIApplication.shared.open(url)
@@ -78,24 +69,7 @@ private struct GuideView: View {
                 }) {
                         HStack{
                                 Spacer()
-                                Text("Open ") + Text("Settings").fontWeight(.medium) + Text(" App")
-                                Spacer()
-                        }
-                }
-                .padding()
-                .fillBackground()
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-                VStack {
-                        HStack {
-                                Text("How to add or edit keyboards").font(.system(size: 20, weight: .medium))
-                                Spacer()
-                        }
-                        .padding(.bottom)
-                        
-                        HStack {
-                                editingKeyboards.fixedSize(horizontal: false, vertical: true)
+                                Text("Go to ") + Text("Settings").fontWeight(.medium)
                                 Spacer()
                         }
                 }
