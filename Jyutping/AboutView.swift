@@ -1,10 +1,8 @@
 import SwiftUI
-import MessageUI
+// import MessageUI
 
 struct AboutView: View {
-        
-        private let mailComposeDelegate: MailComposeDelegate = MailComposeDelegate()
-        
+
         var body: some View {
                 NavigationView {
                         ZStack {
@@ -68,8 +66,7 @@ struct AboutView: View {
                                                         MessageView(icon: "info.circle", text: Text("GitHub Issues"), symbol: Image(systemName: "arrow.up.right"))
                                                 }
                                                 Divider()
-                                                
-                                                MailFeedbackButton(mailComposeDelegate: mailComposeDelegate)
+                                                EmailFeedbackButton()
                                                         .padding(.bottom)
                                         }
                                         .fillBackground()
@@ -110,6 +107,70 @@ struct AboutView_Previews: PreviewProvider {
         }
 }
 
+
+private struct EmailFeedbackButton: View {
+
+        @State private var isMailOnPhoneUnavailable: Bool = false
+        @State private var isMailOnPadUnavailable: Bool = false
+
+        var body: some View {
+                Button(action: {
+                        if UIApplication.shared.canOpenURL(mailtoUrl) {
+                                UIApplication.shared.open(mailtoUrl)
+                        } else if UITraitCollection.current.userInterfaceIdiom == .phone {
+                                self.isMailOnPhoneUnavailable.toggle()
+                                UINotificationFeedbackGenerator().notificationOccurred(.warning)
+                        } else {
+                                self.isMailOnPadUnavailable.toggle()
+                        }
+                }) {
+                        MessageView(icon: "envelope",
+                                    text: Text("Email Feedback"),
+                                    symbol: Image(systemName: "square.and.pencil"))
+                }
+                .actionSheet(isPresented: $isMailOnPhoneUnavailable) {
+                        ActionSheet(title: Text("Unable to compose mail"),
+                                    message: Text("Mail Unavailable"),
+                                    buttons: [.cancel(Text("OK"))])
+                }
+                .alert(isPresented: $isMailOnPadUnavailable) {
+                        Alert(title: Text("Unable to compose mail"),
+                              message: Text("Mail Unavailable"),
+                              dismissButton: .cancel(Text("OK"))
+                        )
+                }
+        }
+
+        private let mailtoUrl: URL = {
+                let deviceIdentifier: String = {
+                        var systemInfo = utsname()
+                        uname(&systemInfo)
+                        let machineMirror = Mirror(reflecting: systemInfo.machine)
+                        let modelIdentifier: String = machineMirror.children.reduce("") { identifier, element in
+                                guard let value: Int8 = element.value as? Int8, value != 0 else { return identifier }
+                                return identifier + String(UnicodeScalar(UInt8(value)))
+                        }
+                        return modelIdentifier
+                }()
+                let system: String = UIDevice.current.systemName + " " + UIDevice.current.systemVersion
+                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
+                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
+                let messageBody: String = """
+                [ Enter your feedback here. ]
+
+                
+                App version: \(version), build: \(build)
+                Platform: \(deviceIdentifier) - \(system)
+                """
+                let address: String = "bing@ososo.io"
+                let subject: String = "User Feedback"
+                let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                return URL(string: scheme)!
+        }()
+}
+
+
+/*
 private struct MailFeedbackButton: View {
         
         @State private var isPresented: Bool = false
@@ -117,11 +178,18 @@ private struct MailFeedbackButton: View {
         @State private var isMailOnPadUnavailable: Bool = false
         
         let mailComposeDelegate: MailComposeDelegate
-        
+
+        private let mailtoUrl: URL = {
+                let scheme: String = "mailto:bing@ososo.io?subject=User%20Feedback&body=Enter%20your%20feedback%20here"
+                return URL(string: scheme)!
+        }()
+
         var body: some View {
                 Button(action: {
                         if MFMailComposeViewController.canSendMail() {
                                 self.isPresented.toggle()
+                        } else if UIApplication.shared.canOpenURL(mailtoUrl) {
+                                UIApplication.shared.open(mailtoUrl)
                         } else if UITraitCollection.current.userInterfaceIdiom == .phone {
                                 self.isMailOnPhoneUnavailable.toggle()
                                 UINotificationFeedbackGenerator().notificationOccurred(.warning)
@@ -192,3 +260,4 @@ private final class MailComposeDelegate: NSObject, MFMailComposeViewControllerDe
                 controller.dismiss(animated: true, completion: nil)
         }
 }
+*/
