@@ -24,6 +24,7 @@
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
 		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
 		3741063623E30DA800639EF4 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063523E30DA800639EF4 /* CandidateBoard.swift */; };
+		374879F225F2ADD900BBB3F4 /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 374879F125F2ADD900BBB3F4 /* OpenCC.bundle */; };
 		3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */; };
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
@@ -39,7 +40,6 @@
 		377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */ = {isa = PBXBuildFile; productRef = 377AF92825DEDB0A00EED1FD /* BLAKE3 */; };
 		377AF93925DFC55200EED1FD /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 377AF93825DFC55200EED1FD /* jyutping.sqlite3 */; };
 		377AF93F25DFC56E00EED1FD /* keyboard.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */; };
-		377AF95E25E0250C00EED1FD /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 377AF95D25E0250C00EED1FD /* OpenCC.bundle */; };
 		377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */; };
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
@@ -115,6 +115,7 @@
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
 		3741063323E30D7100639EF4 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		3741063523E30DA800639EF4 /* CandidateBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
+		374879F125F2ADD900BBB3F4 /* OpenCC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OpenCC.bundle; sourceTree = "<group>"; };
 		3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Properties.swift"; sourceTree = "<group>"; };
 		3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Setup.swift"; sourceTree = "<group>"; };
 		3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Handlers.swift"; sourceTree = "<group>"; };
@@ -133,7 +134,6 @@
 		377AF90925DE328F00EED1FD /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		377AF93825DFC55200EED1FD /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = keyboard.sqlite3; sourceTree = "<group>"; };
-		377AF95D25E0250C00EED1FD /* OpenCC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OpenCC.bundle; sourceTree = "<group>"; };
 		377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
@@ -318,7 +318,7 @@
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
 				377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */,
-				377AF95D25E0250C00EED1FD /* OpenCC.bundle */,
+				374879F125F2ADD900BBB3F4 /* OpenCC.bundle */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -463,7 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				377AF93F25DFC56E00EED1FD /* keyboard.sqlite3 in Resources */,
-				377AF95E25E0250C00EED1FD /* OpenCC.bundle in Resources */,
+				374879F225F2ADD900BBB3F4 /* OpenCC.bundle in Resources */,
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
 			);
