@@ -844,8 +844,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
 			requirement = {
-				kind = exactVersion;
-				version = 0.1.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
 			};
 		};
 		374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */ = {
