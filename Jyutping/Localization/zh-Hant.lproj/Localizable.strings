@@ -1,5 +1,5 @@
 /*
-Chinese
+Chinese, Traditional
 */
 
 // System
@@ -21,10 +21,10 @@ Chinese
 // Home
 "Type here to test keyboards" = "試下鍵盤";
 
-"How to enable this Keyboard" = "如何啓用鍵盤";
+"How to enable this Keyboard" = "如何啟用鍵盤";
 "•  Jump to " = "•  跳轉至 ";
 "•  Tap " = "•  點選 ";
-"•  Turn on " = "•  開啓 ";
+"•  Turn on " = "•  開啟 ";
 "Allow Full Access" = "允許完整取用";
 
 "Go to " = "前往 ";
@@ -54,7 +54,7 @@ Chinese
 "Acknowledgements" = "致謝";
 "Privacy Policy" = "私隱政策";
 
-"Join Telegram Group" = "加入 Telegram 羣組";
+"Join Telegram Group" = "加入 Telegram 群組";
 "Follow us on Twitter" = "跟隨 Twitter 推特";
 "GitHub Issues" = "GitHub Issues";
 
