@@ -1,19 +1,12 @@
 import Foundation
 import SQLite3
+import DataProvider
 
 struct Engine {
-        
-        private let database: OpaquePointer? = {
-                guard let path: String = Bundle.main.path(forResource: "keyboard", ofType: "sqlite3") else { return nil }
-                var db: OpaquePointer?
-                if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK {
-                        return db
-                } else {
-                        return nil
-                }
-        }()
+
+        private let dataProvider = DataProvider()
         func close() {
-                sqlite3_close_v2(database)
+                dataProvider.close()
         }
 
         func suggest(for text: String) -> [Candidate] {
@@ -171,7 +164,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE shortcut = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(dataProvider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 // ping = sqlite3_column_int64(queryStatement, 0)
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
@@ -192,7 +185,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(dataProvider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 // ping = sqlite3_column_int64(queryStatement, 0)
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
@@ -212,7 +205,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(dataProvider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 // ping = sqlite3_column_int64(queryStatement, 0)
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
@@ -232,7 +225,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let queryString = "SELECT rowid, * FROM jyutpingtable WHERE ping = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(dataProvider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
                                 // ping = sqlite3_column_int64(queryStatement, 1)
@@ -254,7 +247,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE prefix = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(dataProvider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 // ping = sqlite3_column_int64(queryStatement, 0)
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
@@ -274,7 +267,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE pinyin = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(dataProvider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 // ping = sqlite3_column_int64(queryStatement, 0)
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
@@ -295,7 +288,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let queryString = "SELECT * FROM jyutpingtable WHERE cangjie = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(dataProvider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 // ping = sqlite3_column_int64(queryStatement, 0)
                                 // shortcut = sqlite3_column_int64(queryStatement, 1)
