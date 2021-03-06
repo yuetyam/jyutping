@@ -1,5 +1,6 @@
 import SwiftUI
 import AVFoundation
+import JyutpingProvider
 
 struct JyutpingView: View {
         

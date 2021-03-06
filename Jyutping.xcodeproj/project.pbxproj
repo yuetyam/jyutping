@@ -25,12 +25,12 @@
 		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
 		3741063623E30DA800639EF4 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063523E30DA800639EF4 /* CandidateBoard.swift */; };
 		374879F225F2ADD900BBB3F4 /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 374879F125F2ADD900BBB3F4 /* OpenCC.bundle */; };
+		374879FB25F330D600BBB3F4 /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 374879FA25F330D600BBB3F4 /* JyutpingProvider */; };
 		3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */; };
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
 		374AC0C1246A2AB3004B70ED /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */; };
 		374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */; };
-		3756602123C5601C009FCA23 /* JyutpingProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3756602023C5601C009FCA23 /* JyutpingProvider.swift */; };
 		37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6524F310E100856B8A /* Array+deduplicated.swift */; };
 		37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6724F3112D00856B8A /* String+shortcut.swift */; };
 		37573F6A24F3120300856B8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Entry.swift */; };
@@ -38,7 +38,6 @@
 		3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */; };
 		377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AF90925DE328F00EED1FD /* Emoji.swift */; };
 		377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */ = {isa = PBXBuildFile; productRef = 377AF92825DEDB0A00EED1FD /* BLAKE3 */; };
-		377AF93925DFC55200EED1FD /* jyutping.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 377AF93825DFC55200EED1FD /* jyutping.sqlite3 */; };
 		377AF93F25DFC56E00EED1FD /* keyboard.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */; };
 		377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */; };
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
@@ -121,7 +120,6 @@
 		3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Handlers.swift"; sourceTree = "<group>"; };
 		374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+TableView.swift"; sourceTree = "<group>"; };
-		3756602023C5601C009FCA23 /* JyutpingProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingProvider.swift; sourceTree = "<group>"; };
 		37573F6524F310E100856B8A /* Array+deduplicated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+deduplicated.swift"; sourceTree = "<group>"; };
 		37573F6724F3112D00856B8A /* String+shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+shortcut.swift"; sourceTree = "<group>"; };
 		37573F6924F3120300856B8A /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 		3764EB7124D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionLabel.swift; sourceTree = "<group>"; };
 		377AF90925DE328F00EED1FD /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
-		377AF93825DFC55200EED1FD /* jyutping.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = jyutping.sqlite3; sourceTree = "<group>"; };
 		377AF93E25DFC56E00EED1FD /* keyboard.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = keyboard.sqlite3; sourceTree = "<group>"; };
 		377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
@@ -176,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374879FB25F330D600BBB3F4 /* JyutpingProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,11 +218,9 @@
 				37F1C027235C3EB700CDDA31 /* AboutView.swift */,
 				374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */,
 				37336F7B239ABB1C006A59A7 /* Views */,
-				3756602023C5601C009FCA23 /* JyutpingProvider.swift */,
 				37C18EB2237A8FDB00F92482 /* Localization */,
 				37211D5D23541EE4007E1D68 /* Assets.xcassets */,
 				37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */,
-				377AF93825DFC55200EED1FD /* jyutping.sqlite3 */,
 				37211D6523541EE4007E1D68 /* Info.plist */,
 				37B3401D23EBD23400A8D3BB /* Settings.bundle */,
 				37211D5F23541EE4007E1D68 /* Preview Content */,
@@ -372,6 +368,7 @@
 			);
 			name = Jyutping;
 			packageProductDependencies = (
+				374879FA25F330D600BBB3F4 /* JyutpingProvider */,
 			);
 			productName = Jyutping;
 			productReference = 37211D5423541EE3007E1D68 /* Jyutping.app */;
@@ -432,6 +429,7 @@
 			packageReferences = (
 				37B384B42512D85F0051A4CA /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */,
 				377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */,
+				374879F925F330D600BBB3F4 /* XCRemoteSwiftPackageReference "JyutpingProvider" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -452,7 +450,6 @@
 				37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */,
 				37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */,
 				37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */,
-				377AF93925DFC55200EED1FD /* jyutping.sqlite3 in Resources */,
 				37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */,
 				37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */,
 			);
@@ -486,7 +483,6 @@
 				37336F7A239A9317006A59A7 /* SafariView.swift in Sources */,
 				374AC0C1246A2AB3004B70ED /* AcknowledgementsView.swift in Sources */,
 				37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */,
-				3756602123C5601C009FCA23 /* JyutpingProvider.swift in Sources */,
 				37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */,
 				37AE5BE323546454008A8E4B /* HomeView.swift in Sources */,
 				377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */,
@@ -848,6 +844,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		374879F925F330D600BBB3F4 /* XCRemoteSwiftPackageReference "JyutpingProvider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nixberg/blake3-swift.git";
@@ -867,6 +871,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		374879FA25F330D600BBB3F4 /* JyutpingProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 374879F925F330D600BBB3F4 /* XCRemoteSwiftPackageReference "JyutpingProvider" */;
+			productName = JyutpingProvider;
+		};
 		377AF92825DEDB0A00EED1FD /* BLAKE3 */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */;
