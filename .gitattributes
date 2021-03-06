@@ -2,3 +2,6 @@
 *.ocd binary
 *.ocd2 binary
 *.png binary
+*.jpg binary
+*.gif binary
+*.mp4 binary
