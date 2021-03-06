@@ -24,9 +24,9 @@
 		3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */; };
 		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
 		3741063623E30DA800639EF4 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063523E30DA800639EF4 /* CandidateBoard.swift */; };
-		374879F225F2ADD900BBB3F4 /* OpenCC.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 374879F125F2ADD900BBB3F4 /* OpenCC.bundle */; };
 		374879FB25F330D600BBB3F4 /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 374879FA25F330D600BBB3F4 /* JyutpingProvider */; };
 		37487A0125F3516700BBB3F4 /* DataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37487A0025F3516700BBB3F4 /* DataProvider */; };
+		37487A0425F3F4F100BBB3F4 /* OpenCCLite in Frameworks */ = {isa = PBXBuildFile; productRef = 37487A0325F3F4F100BBB3F4 /* OpenCCLite */; };
 		3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */; };
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
@@ -50,7 +50,6 @@
 		37AE5BEF2354AAF8008A8E4B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */; };
 		37AE5BF32354AAF8008A8E4B /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37B3401D23EBD23400A8D3BB /* Settings.bundle */; };
-		37B384B62512D85F0051A4CA /* OpenCC in Frameworks */ = {isa = PBXBuildFile; productRef = 37B384B52512D85F0051A4CA /* OpenCC */; };
 		37C05F9A23E339C90061C992 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C05F9923E339C90061C992 /* KeyButton.swift */; };
 		37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB0237A8F0800F92482 /* InfoPlist.strings */; };
 		37C18EB5237A904000F92482 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB7237A904000F92482 /* Localizable.strings */; };
@@ -114,7 +113,6 @@
 		3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+Setup.swift"; sourceTree = "<group>"; };
 		3741063323E30D7100639EF4 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		3741063523E30DA800639EF4 /* CandidateBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
-		374879F125F2ADD900BBB3F4 /* OpenCC.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = OpenCC.bundle; sourceTree = "<group>"; };
 		3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Properties.swift"; sourceTree = "<group>"; };
 		3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Setup.swift"; sourceTree = "<group>"; };
 		3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Handlers.swift"; sourceTree = "<group>"; };
@@ -180,9 +178,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37487A0425F3F4F100BBB3F4 /* OpenCCLite in Frameworks */,
 				37487A0125F3516700BBB3F4 /* DataProvider in Frameworks */,
 				377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */,
-				37B384B62512D85F0051A4CA /* OpenCC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,7 +311,6 @@
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
-				374879F125F2ADD900BBB3F4 /* OpenCC.bundle */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -387,9 +384,9 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
-				37B384B52512D85F0051A4CA /* OpenCC */,
 				377AF92825DEDB0A00EED1FD /* BLAKE3 */,
 				37487A0025F3516700BBB3F4 /* DataProvider */,
+				37487A0325F3F4F100BBB3F4 /* OpenCCLite */,
 			);
 			productName = Keyboard;
 			productReference = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */;
@@ -427,10 +424,10 @@
 			);
 			mainGroup = 37211D4B23541EE3007E1D68;
 			packageReferences = (
-				37B384B42512D85F0051A4CA /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */,
 				377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */,
 				374879F925F330D600BBB3F4 /* XCRemoteSwiftPackageReference "JyutpingProvider" */,
 				374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */,
+				37487A0225F3F4F100BBB3F4 /* XCRemoteSwiftPackageReference "OpenCCLite" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -460,7 +457,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				374879F225F2ADD900BBB3F4 /* OpenCC.bundle in Resources */,
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
 			);
@@ -860,20 +856,20 @@
 				version = 0.1.0;
 			};
 		};
+		37487A0225F3F4F100BBB3F4 /* XCRemoteSwiftPackageReference "OpenCCLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ososoio/OpenCCLite.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nixberg/blake3-swift.git";
 			requirement = {
 				kind = exactVersion;
 				version = 0.1.0;
-			};
-		};
-		37B384B42512D85F0051A4CA /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ososoio/SwiftyOpenCC.git";
-			requirement = {
-				kind = exactVersion;
-				version = 1.0.7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -889,15 +885,15 @@
 			package = 374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */;
 			productName = DataProvider;
 		};
+		37487A0325F3F4F100BBB3F4 /* OpenCCLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37487A0225F3F4F100BBB3F4 /* XCRemoteSwiftPackageReference "OpenCCLite" */;
+			productName = OpenCCLite;
+		};
 		377AF92825DEDB0A00EED1FD /* BLAKE3 */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */;
 			productName = BLAKE3;
-		};
-		37B384B52512D85F0051A4CA /* OpenCC */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 37B384B42512D85F0051A4CA /* XCRemoteSwiftPackageReference "SwiftyOpenCC" */;
-			productName = OpenCC;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

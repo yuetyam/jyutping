@@ -1,5 +1,5 @@
 import UIKit
-import OpenCC
+import OpenCCLite
 
 final class KeyboardViewController: UIInputViewController {
         
@@ -258,8 +258,8 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 4: 簡化字
         private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
-        private var converter: ChineseConverter? = {
-                let options: ChineseConverter.Options = {
+        private var converter: Converter? = {
+                let options: Converter.Options = {
                         let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         switch logogram {
                         case 2:
@@ -273,13 +273,12 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }()
                 guard !options.isEmpty else { return nil }
-                guard let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle")) else { return nil }
-                let converter: ChineseConverter? = try? ChineseConverter(bundle: openccBundle, options: options)
+                let converter: Converter? = try? Converter(options: options)
                 return converter
         }()
         func updateConverter() {
                 logogram = UserDefaults.standard.integer(forKey: "logogram")
-                let options: ChineseConverter.Options = {
+                let options: Converter.Options = {
                         switch logogram {
                         case 2:
                                 return [.hkStandard]
@@ -292,8 +291,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }()
                 guard !options.isEmpty else { converter = nil; return }
-                guard let openccBundle: Bundle = Bundle(url: Bundle.main.bundleURL.appendingPathComponent("OpenCC.bundle")) else { return }
-                let converter: ChineseConverter? = try? ChineseConverter(bundle: openccBundle, options: options)
+                let converter: Converter? = try? Converter(options: options)
                 self.converter = converter
         }
         
