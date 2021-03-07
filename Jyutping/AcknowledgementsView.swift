@@ -13,10 +13,10 @@ struct AcknowledgementsView: View {
                                         .fillBackground()
                                         .padding()
                                 LinkView(iconName: "briefcase",
-                                         text: Text("SwiftyOpenCC"),
-                                         footnote: Text("© DengXiang. MIT License"),
+                                         text: Text("OpenCC"),
+                                         footnote: Text("© Carbo Kuo. Apache 2.0"),
                                          symbolName: "safari",
-                                         url: URL(string: "https://github.com/ddddxxx/SwiftyOpenCC")!)
+                                         url: URL(string: "https://github.com/BYVoid/OpenCC")!)
                                         .fillBackground()
                                         .padding(.horizontal)
                                 LinkView(iconName: "briefcase",
