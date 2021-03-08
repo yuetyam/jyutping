@@ -115,13 +115,15 @@ private struct EmailFeedbackButton: View {
 
         var body: some View {
                 Button(action: {
-                        if UIApplication.shared.canOpenURL(mailtoUrl) {
-                                UIApplication.shared.open(mailtoUrl)
-                        } else if UITraitCollection.current.userInterfaceIdiom == .phone {
-                                self.isMailOnPhoneUnavailable.toggle()
-                                UINotificationFeedbackGenerator().notificationOccurred(.warning)
-                        } else {
-                                self.isMailOnPadUnavailable.toggle()
+                        UIApplication.shared.open(mailtoUrl) { success in
+                                if !success {
+                                        if UITraitCollection.current.userInterfaceIdiom == .phone {
+                                                self.isMailOnPhoneUnavailable.toggle()
+                                                UINotificationFeedbackGenerator().notificationOccurred(.warning)
+                                        } else {
+                                                self.isMailOnPadUnavailable.toggle()
+                                        }
+                                }
                         }
                 }) {
                         MessageView(icon: "envelope",

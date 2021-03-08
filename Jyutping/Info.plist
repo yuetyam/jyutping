@@ -71,9 +71,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-        <key>LSApplicationQueriesSchemes</key>
-        <array>
-                <string>mailto</string>
-        </array>
 </dict>
 </plist>
