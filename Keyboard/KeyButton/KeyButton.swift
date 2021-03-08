@@ -141,13 +141,10 @@ final class KeyButton: UIButton {
                                                 viewController.currentInputText = String(viewController.currentInputText.dropFirst(firstCandidate.input.count))
                                         }
                                         if viewController.currentInputText.isEmpty && !(viewController.candidateSequence.isEmpty) {
-                                                var combinedCandidate: Candidate = viewController.candidateSequence[0]
-                                                _ = viewController.candidateSequence.dropFirst().map { oneCandidate in
-                                                        combinedCandidate += oneCandidate
-                                                }
+                                                let concatenatedCandidate: Candidate = viewController.candidateSequence.joined()
                                                 viewController.candidateSequence = []
                                                 viewController.imeQueue.async {
-                                                        self.viewController.lexiconManager?.handle(candidate: combinedCandidate)
+                                                        self.viewController.lexiconManager?.handle(candidate: concatenatedCandidate)
                                                 }
                                         }
                                 } else if !(viewController.currentInputText.isEmpty) {

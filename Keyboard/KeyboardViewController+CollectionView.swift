@@ -117,13 +117,10 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         keyboardLayout = .jyutping
                 }
                 if currentInputText.isEmpty && !candidateSequence.isEmpty {
-                        var combinedCandidate: Candidate = candidateSequence[0]
-                        _ = candidateSequence.dropFirst().map { oneCandidate in
-                                combinedCandidate += oneCandidate
-                        }
+                        let concatenatedCandidate: Candidate = candidateSequence.joined()
                         candidateSequence = []
                         imeQueue.async {
-                                self.lexiconManager?.handle(candidate: combinedCandidate)
+                                self.lexiconManager?.handle(candidate: concatenatedCandidate)
                         }
                 }
         }
