@@ -1,8 +1,8 @@
 struct Candidate: Hashable {
 
-        /// Displaying Cantonese word.
+        /// Candidate word.
         ///
-        /// Cloud be traditional or simplified characters, depends on `logogram` setting.
+        /// Cloud be traditional or simplified characters, depends on `logogram` settings.
         let text: String
 
         /// Jyutping
@@ -21,7 +21,7 @@ struct Candidate: Hashable {
 
         /// Candidate
         /// - Parameters:
-        ///   - text: Displaying Cantonese word.
+        ///   - text: Candidate word.
         ///   - footnote: Word's Jyutping.
         ///   - input: User input for this Candidate.
         ///   - lexiconText: Lexicon Entry Cantonese word. User invisible.
@@ -51,7 +51,6 @@ struct Candidate: Hashable {
                 let newFootnote: String = lhs.footnote + " " + rhs.footnote
                 let newInput: String = lhs.input + rhs.input
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
-                // let newRanking: Int = min(lhs.ranking, rhs.ranking)
 
                 let newCandidate: Candidate = Candidate(text: newText,
                                                         footnote: newFootnote,
@@ -64,7 +63,6 @@ struct Candidate: Hashable {
                 return lhs = lhs + rhs
         }
 }
-
 
 extension Array where Element == Candidate {
 
