@@ -28,6 +28,6 @@ iOS 13.0+
 Xcode 12.0+
 
 ## Credits
-- [rime-cantonese](https://github.com/rime/rime-cantonese)  
+- [Rime Cantonese](https://github.com/rime/rime-cantonese)  
 - [OpenCC](https://github.com/BYVoid/OpenCC)  
 - [BLAKE3](https://github.com/nixberg/blake3-swift)
