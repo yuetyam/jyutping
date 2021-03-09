@@ -6,7 +6,7 @@ struct AcknowledgementsView: View {
                         GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                         ScrollView {
                                 LinkView(iconName: "book",
-                                         text: Text("rime-cantonese"),
+                                         text: Text("Rime Cantonese"),
                                          footnote: Text("© CanCLID. CC BY 4.0"), // CC: \u{1F16D}, BY: \u{1F16F}, iOS can't display these characters.
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/rime/rime-cantonese")!)
