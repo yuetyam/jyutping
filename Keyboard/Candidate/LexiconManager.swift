@@ -24,9 +24,9 @@ struct LexiconManager {
         }
         
         private func ensureTable() {
-                // id = (candidate.input + candidate.lexiconText + candidate.footnote).hash
+                // id = (candidate.input + candidate.lexiconText + candidate.jyutping).hash
                 // token = candidate.input.hash
-                // shortcut = candidate.footnote.shortcut = candidate.footnote.initials.hash
+                // shortcut = candidate.jyutping.shortcut = candidate.jyutping.initials.hash
                 let createTableString = "CREATE TABLE IF NOT EXISTS lexicon(id INTEGER NOT NULL PRIMARY KEY,token INTEGER NOT NULL,shortcut INTEGER NOT NULL,frequency INTEGER NOT NULL,word TEXT NOT NULL,jyutping TEXT NOT NULL);"
                 var createTableStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(userdb, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
@@ -40,16 +40,16 @@ struct LexiconManager {
         }
         
         func handle(candidate: Candidate) {
-                let id: Int64 = Int64((candidate.input + candidate.lexiconText + candidate.footnote).hash)
+                let id: Int64 = Int64((candidate.input + candidate.lexiconText + candidate.jyutping).hash)
                 if let existingEntry: Entry = fetch(by: id) {
                         update(id: existingEntry.id, frequency: existingEntry.frequency + 1)
                 } else {
                         let newEntry: Entry = Entry(id: id,
                                                     token: Int64(candidate.input.hash),
-                                                    shortcut: candidate.footnote.shortcut,
+                                                    shortcut: candidate.jyutping.shortcut,
                                                     frequency: 1,
                                                     word: candidate.lexiconText,
-                                                    jyutping: candidate.footnote)
+                                                    jyutping: candidate.jyutping)
                         insert(entry: newEntry)
                 }
         }
@@ -123,7 +123,7 @@ struct LexiconManager {
                                 let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 } else {

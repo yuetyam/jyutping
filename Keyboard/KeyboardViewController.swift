@@ -198,7 +198,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = combined.deduplicated()
                         updateConverter()
                 } else {
-                        let converted: [Candidate] = combined.map { Candidate(text: converter!.convert($0.text), footnote: $0.footnote, input: $0.input, lexiconText: $0.lexiconText) }
+                        let converted: [Candidate] = combined.map { Candidate(text: converter!.convert($0.text), jyutping: $0.jyutping, input: $0.input, lexiconText: $0.lexiconText) }
                         candidates = converted.deduplicated()
                 }
         }

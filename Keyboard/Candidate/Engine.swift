@@ -172,7 +172,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -193,7 +193,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -213,7 +213,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -234,7 +234,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word, ranking: rowid)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word, ranking: rowid)
                                 candidates.append(candidate)
                         }
                 }
@@ -255,7 +255,7 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
                                 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -277,7 +277,7 @@ private extension Engine {
                                 // pinyin = sqlite3_column_int64(queryStatement, 5)
                                 // cangjie = sqlite3_column_int64(queryStatement, 6)
 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -298,7 +298,7 @@ private extension Engine {
                                 // pinyin = sqlite3_column_int64(queryStatement, 5)
                                 // cangjie = sqlite3_column_int64(queryStatement, 6)
 
-                                let candidate: Candidate = Candidate(text: word, footnote: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
