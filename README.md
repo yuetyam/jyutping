@@ -8,12 +8,12 @@ Jyutping Keyboard for iOS
 ## Now available on the App Store
 
 <a href="https://apps.apple.com/app/id1509367629">
-<img src="images/app-store-badge.png" alt="App Store badge" width="160"/>
+<img src="images/app-store-badge.png" alt="App Store badge" width="150"/>
 </a>
 <br><br>
 
 <a href="https://apps.apple.com/app/id1509367629">
-<img src="images/app-store-link-qrcode.png" alt="App Store QR Code" width="160"/>
+<img src="images/app-store-link-qrcode.png" alt="App Store QR Code" width="150"/>
 </a>
 <br>
 
