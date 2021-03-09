@@ -112,7 +112,7 @@ final class ToolBar: UIView {
                 return [settingsButton.widthAnchor.constraint(equalToConstant: width),
                         settingsButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
                         yueEngSwitch.widthAnchor.constraint(equalToConstant: 100),
-                        yueEngSwitch.heightAnchor.constraint(equalToConstant: 30),
+                        yueEngSwitch.heightAnchor.constraint(equalToConstant: 32),
                         pasteButton.widthAnchor.constraint(equalToConstant: width),
                         pasteButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
                         emojiSwitch.widthAnchor.constraint(equalToConstant: width),
