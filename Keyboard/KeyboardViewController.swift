@@ -85,6 +85,7 @@ final class KeyboardViewController: UIInputViewController {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
+                converter?.destroy()
                 converter = nil
                 engine?.close()
                 engine = nil
@@ -259,39 +260,39 @@ final class KeyboardViewController: UIInputViewController {
         /// 4: 簡化字
         private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
         private var converter: Converter? = {
-                let options: Converter.Options = {
+                let conversion: Converter.Conversion? = {
                         let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         switch logogram {
                         case 2:
-                                return [.hkStandard]
+                                return .hkStandard
                         case 3:
-                                return [.twStandard]
+                                return .twStandard
                         case 4:
-                                return [.simplify]
+                                return .simplify
                         default:
-                                return []
+                                return nil
                         }
                 }()
-                guard !options.isEmpty else { return nil }
-                let converter: Converter? = try? Converter(options: options)
+                guard conversion != nil else { return nil }
+                let converter: Converter? = try? Converter(conversion!)
                 return converter
         }()
         func updateConverter() {
                 logogram = UserDefaults.standard.integer(forKey: "logogram")
-                let options: Converter.Options = {
+                let conversion: Converter.Conversion? = {
                         switch logogram {
                         case 2:
-                                return [.hkStandard]
+                                return .hkStandard
                         case 3:
-                                return [.twStandard]
+                                return .twStandard
                         case 4:
-                                return [.simplify]
+                                return .simplify
                         default:
-                                return []
+                                return nil
                         }
                 }()
-                guard !options.isEmpty else { converter = nil; return }
-                let converter: Converter? = try? Converter(options: options)
+                guard conversion != nil else { converter = nil; return }
+                let converter: Converter? = try? Converter(conversion!)
                 self.converter = converter
         }
         
