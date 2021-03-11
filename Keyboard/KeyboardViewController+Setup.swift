@@ -88,7 +88,7 @@ extension KeyboardViewController {
         }
         @objc func handleIndicator(_ sender: Indicator) {
                 hapticFeedback?.impactOccurred()
-                AudioFeedback.perform(audioFeedback: .modify)
+                AudioFeedback.perform(.modify)
                 let indexPath: IndexPath = IndexPath(row: 15, section: sender.index)
                 emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }

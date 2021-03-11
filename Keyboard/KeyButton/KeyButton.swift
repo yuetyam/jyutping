@@ -122,7 +122,7 @@ final class KeyButton: UIButton {
                         case .jyutping, .jyutpingUppercase:
                                 if let firstCandidate: Candidate = viewController.candidates.first {
                                         viewController.textDocumentProxy.insertText(firstCandidate.text)
-                                        AudioFeedback.perform(audioFeedback: .modify)
+                                        AudioFeedback.perform(.modify)
                                         if viewController.currentInputText.hasPrefix("r") {
                                                 if viewController.currentInputText == "r" + firstCandidate.input {
                                                         viewController.currentInputText = ""
@@ -148,7 +148,7 @@ final class KeyButton: UIButton {
                                         }
                                 } else if !(viewController.currentInputText.isEmpty) {
                                         viewController.textDocumentProxy.insertText(viewController.currentInputText)
-                                        AudioFeedback.perform(audioFeedback: .modify)
+                                        AudioFeedback.perform(.modify)
                                         viewController.currentInputText = ""
                                 } else {
                                         viewController.textDocumentProxy.insertText(" ")

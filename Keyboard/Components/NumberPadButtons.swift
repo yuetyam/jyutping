@@ -27,7 +27,7 @@ final class NumberButton: UIButton {
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 viewController.textDocumentProxy.insertText(String(digit))
                 keyButtonView.backgroundColor = viewController.isDarkAppearance ? .black : .lightActionButton
-                AudioFeedback.perform(audioFeedback: .input)
+                AudioFeedback.perform(.input)
                 viewController.hapticFeedback?.impactOccurred()
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -147,7 +147,7 @@ final class PeriodButton: UIButton {
         
         @objc private func handleTap() {
                 viewController.textDocumentProxy.insertText(".")
-                AudioFeedback.perform(audioFeedback: .input)
+                AudioFeedback.perform(.input)
                 viewController.hapticFeedback?.impactOccurred()
         }
         
@@ -235,7 +235,7 @@ final class BackspaceButton: UIButton {
         }
         @objc private func performBackspace() {
                 viewController.textDocumentProxy.deleteBackward()
-                AudioFeedback.perform(audioFeedback: .delete)
+                AudioFeedback.perform(.delete)
         }
         
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

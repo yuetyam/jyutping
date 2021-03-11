@@ -223,7 +223,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         @objc private func handleYueEngSwitch() {
                 hapticFeedback?.impactOccurred()
-                AudioFeedback.perform(audioFeedback: .modify)
+                AudioFeedback.perform(.modify)
                 isCapsLocked = false
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
                 case 0:
@@ -238,12 +238,12 @@ final class KeyboardViewController: UIInputViewController {
                 guard UIPasteboard.general.hasStrings else { return }
                 guard let copied: String = UIPasteboard.general.string else { return }
                 hapticFeedback?.impactOccurred()
-                AudioFeedback.perform(audioFeedback: .input)
+                AudioFeedback.perform(.input)
                 textDocumentProxy.insertText(copied)
         }
         @objc private func handleEmojiSwitch() {
                 hapticFeedback?.impactOccurred()
-                AudioFeedback.perform(audioFeedback: .modify)
+                AudioFeedback.perform(.modify)
                 keyboardLayout = .emoji
         }
         

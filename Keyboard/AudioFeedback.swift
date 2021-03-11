@@ -36,7 +36,7 @@ enum AudioFeedback: Equatable {
                 AudioServicesPlaySystemSound(audioFeedback.systemSoundId)
         }
         
-        static func perform(audioFeedback: AudioFeedback) {
+        static func perform(_ audioFeedback: AudioFeedback) {
                 guard isAudioFeedbackOn else { return }
                 AudioServicesPlaySystemSound(audioFeedback.systemSoundId)
         }
