@@ -18,7 +18,7 @@ Jyutping Keyboard for iOS
 <br>
 
 ## Screenshots
-<img src="images/screenshot.png" alt="screenshots" width="500"/>
+<img src="images/screenshot.png" alt="screenshots" width="480"/>
 <br><br>
 
 ## Running compatibility
