@@ -76,7 +76,6 @@ extension KeyButton {
                         keyTextLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
                 ])
                 keyTextLabel.textAlignment = .center
-                keyTextLabel.adjustsFontForContentSizeCategory = true
                 keyTextLabel.font = styledFont
                 keyTextLabel.text = keyText
                 keyTextLabel.textColor = buttonTintColor

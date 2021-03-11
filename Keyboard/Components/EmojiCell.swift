@@ -29,8 +29,7 @@ final class EmojiCollectionViewHeader: UICollectionReusableView {
 
         override init(frame: CGRect) {
                 super.init(frame: frame)
-                textLabel.adjustsFontForContentSizeCategory = true
-                textLabel.font = .preferredFont(forTextStyle: .body)
+                textLabel.font = .systemFont(ofSize: 17)
                 addSubview(textLabel)
                 textLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([

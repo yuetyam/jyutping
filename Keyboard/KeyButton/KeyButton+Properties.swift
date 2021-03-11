@@ -73,29 +73,28 @@ extension KeyButton {
                 // Font sizes reference: https://www.iosfontsizes.com
                 switch keyboardEvent {
                 case .text:
-                        switch viewController.traitCollection.userInterfaceIdiom {
-                        case .pad:
+                        if viewController.traitCollection.userInterfaceIdiom == .pad {
                                 if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
-                                        return UIFontMetrics(forTextStyle: .title2).scaledFont(for: .systemFont(ofSize: 24))
+                                        return .systemFont(ofSize: 24)
                                 } else {
                                         if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
-                                                return UIFontMetrics(forTextStyle: .title1).scaledFont(for: .systemFont(ofSize: 30))
+                                                return .systemFont(ofSize: 30)
                                         } else {
-                                                return .preferredFont(forTextStyle: .title1)
+                                                return .systemFont(ofSize: 28)
                                         }
                                 }
-                        default:
-                                return UIFontMetrics(forTextStyle: .title2).scaledFont(for: .systemFont(ofSize: 24))
+                        } else {
+                                return .systemFont(ofSize: 24)
                         }
                 default:
                         if viewController.traitCollection.userInterfaceIdiom == .pad {
                                 if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
-                                        return .preferredFont(forTextStyle: .body)
+                                        return .systemFont(ofSize: 17)
                                 } else {
-                                        return .preferredFont(forTextStyle: .title2)
+                                        return .systemFont(ofSize: 22)
                                 }
                         } else {
-                                return .preferredFont(forTextStyle: .body)
+                                return .systemFont(ofSize: 17)
                         }
                 }
         }

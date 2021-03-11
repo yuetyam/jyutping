@@ -87,8 +87,7 @@ final class NumberButton: UIButton {
                         digitLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
                 ])
                 digitLabel.textAlignment = .center
-                digitLabel.adjustsFontForContentSizeCategory = true
-                digitLabel.font = UIFontMetrics(forTextStyle: .title1).scaledFont(for: .systemFont(ofSize: 25))
+                digitLabel.font = .systemFont(ofSize: 25)
                 digitLabel.text = String(digit)
                 digitLabel.textColor = viewController.isDarkAppearance ? .white : .black
         }
@@ -103,8 +102,7 @@ final class NumberButton: UIButton {
                         footnoteLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
                 ])
                 footnoteLabel.textAlignment = .center
-                footnoteLabel.adjustsFontForContentSizeCategory = true
-                footnoteLabel.font = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: .boldSystemFont(ofSize: 10))
+                footnoteLabel.font = .boldSystemFont(ofSize: 10)
                 footnoteLabel.text = footnote
                 footnoteLabel.textColor = viewController.isDarkAppearance ? .white : .black
         }
@@ -184,8 +182,7 @@ final class PeriodButton: UIButton {
                         periodLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
                 ])
                 periodLabel.textAlignment = .center
-                periodLabel.adjustsFontForContentSizeCategory = true
-                periodLabel.font = .preferredFont(forTextStyle: .title1)
+                periodLabel.font = .systemFont(ofSize: 28)
                 periodLabel.text = "."
                 periodLabel.textColor = viewController.isDarkAppearance ? .white : .black
         }

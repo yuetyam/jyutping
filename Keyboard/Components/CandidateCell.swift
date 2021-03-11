@@ -16,8 +16,6 @@ final class CandidateCell: UICollectionViewCell {
                 textLabel.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(textLabel)
                 textLabel.textAlignment = .center
-                textLabel.adjustsFontForContentSizeCategory = true
-                // textLabel.font = .preferredFont(forTextStyle: .title3)
                 NSLayoutConstraint.activate([
                         textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                         textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
@@ -25,8 +23,7 @@ final class CandidateCell: UICollectionViewCell {
                 footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(footnoteLabel)
                 footnoteLabel.textAlignment = .center
-                footnoteLabel.adjustsFontForContentSizeCategory = true
-                footnoteLabel.font = .preferredFont(forTextStyle: .footnote)
+                footnoteLabel.font = .systemFont(ofSize: 13)
                 NSLayoutConstraint.activate([
                         footnoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                         footnoteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
@@ -94,14 +91,11 @@ final class CandidateCell: UICollectionViewCell {
         private func updateFonts() {
                 switch logogram {
                 case 3:
-                        let pingFangTC: UIFont = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
-                        textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangTC)
+                        textLabel.font = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
                 case 4:
-                        let pingFangSC: UIFont = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
-                        textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangSC)
+                        textLabel.font = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
                 default:
-                        let pingFangHK: UIFont = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
-                        textLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: pingFangHK)
+                        textLabel.font = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
                 }
         }
 }

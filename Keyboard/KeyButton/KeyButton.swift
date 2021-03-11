@@ -85,8 +85,7 @@ final class KeyButton: UIButton {
                                 let labelHeight: CGFloat = previewPath.bounds.height - keyHeight - 8
                                 previewLabel = UILabel(frame: CGRect(x: keyButtonView.frame.origin.x - 5, y: keyButtonView.frame.origin.y - labelHeight - 8, width: keyWidth + 10, height: labelHeight))
                                 previewLabel.textAlignment = .center
-                                previewLabel.adjustsFontForContentSizeCategory = true
-                                previewLabel.font = .preferredFont(forTextStyle: .largeTitle)
+                                previewLabel.font = .systemFont(ofSize: 34)
                                 previewLabel.textColor = buttonTintColor
                                 addSubview(previewLabel)
                                 
