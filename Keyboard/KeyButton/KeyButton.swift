@@ -74,7 +74,7 @@ final class KeyButton: UIButton {
                                 shapeLayer.fillColor = buttonColor.cgColor
                                 
                                 let animation = CABasicAnimation(keyPath: "path")
-                                animation.duration = 0.01
+                                animation.duration = 0.005
                                 animation.toValue = previewPath.cgPath
                                 animation.fillMode = .forwards
                                 animation.isRemovedOnCompletion = false
@@ -240,12 +240,12 @@ final class KeyButton: UIButton {
         }
         
         private func showPreviewText() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) {
                         self.previewLabel.text = self.keyText
                 }
         }
         private func removePreview() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
                         self.previewLabel.text = nil
                         self.previewLabel.removeFromSuperview()
                         self.shapeLayer.removeFromSuperlayer()
