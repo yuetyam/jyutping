@@ -121,9 +121,7 @@ extension KeyButton {
                 AudioFeedback.play(for: self.keyboardEvent)
         }
         @objc private func handleBackspace() {
-                DispatchQueue.main.async {
-                        self.performBackspace()
-                }
+                performBackspace()
                 slowBackspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
                         self.fastBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
                 }
