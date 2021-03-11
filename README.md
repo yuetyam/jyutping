@@ -25,7 +25,7 @@ Jyutping Keyboard for iOS
 iOS 13.0+
 
 ## Build requirements
-Xcode 12.0+
+Xcode 12.4+
 
 ## Credits
 - [Rime Cantonese](https://github.com/rime/rime-cantonese)  
