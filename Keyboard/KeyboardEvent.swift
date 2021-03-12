@@ -1,17 +1,14 @@
 enum KeyboardEvent: Equatable {
-        case
-        none,
-        text(String),
-        backspace,
-        newLine, // return, enter
-        space,
-        shift,
-        shiftDown,
-        switchInputMethod,
-        switchTo(KeyboardLayout),
-        
-        keyALeft,
-        keyLRight,
-        keyZLeft,
-        keyBackspaceLeft
+        case text(String),
+             space,
+             backspace,
+             newLine, // return, enter
+             shift,
+             shiftDown,
+             switchInputMethod,
+             switchTo(KeyboardLayout),
+
+             shadowKey(String),
+             shadowBackspace,
+             none
 }

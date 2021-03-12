@@ -20,9 +20,9 @@ enum AudioFeedback: Equatable {
         static func play(for keyboardEvent: KeyboardEvent) {
                 guard isAudioFeedbackOn else { return }
                 switch keyboardEvent {
-                case .text(_), .keyALeft, .keyLRight, .keyZLeft:
+                case .text(_), .shadowKey(_):
                         feedback(.input)
-                case .backspace, .keyBackspaceLeft:
+                case .backspace, .shadowBackspace:
                         feedback(.delete)
                 case .switchTo(_), .newLine, .shift, .shiftDown:
                         feedback(.modify)

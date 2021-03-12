@@ -4,7 +4,7 @@ extension KeyButton {
         
         func setupKeyActions() {
                 switch keyboardEvent {
-                case .backspace, .keyBackspaceLeft:
+                case .backspace, .shadowBackspace:
                         addTarget(self, action: #selector(handleBackspace), for: .touchDown)
                 case .shift, .shiftDown:
                         addTarget(self, action: #selector(handleShift(sender:event:)), for: .touchUpInside)
@@ -16,8 +16,8 @@ extension KeyButton {
         }
         @objc private func handleTap() {
                 switch keyboardEvent {
-                case .text(let text):
-                        if viewController.keyboardLayout == .jyutping || viewController.keyboardLayout == .jyutpingUppercase {
+                case .text(let text), .shadowKey(let text):
+                        if viewController.keyboardLayout.isJyutpingMode {
                                 viewController.currentInputText += text
                         } else {
                                 viewController.textDocumentProxy.insertText(text)
@@ -40,63 +40,6 @@ extension KeyButton {
                         }
                 case .switchTo(let layout):
                         viewController.keyboardLayout = layout
-                case .keyALeft:
-                        switch viewController.keyboardLayout {
-                        case .jyutping:
-                                viewController.currentInputText += "a"
-                        case .jyutpingUppercase:
-                                viewController.currentInputText += "A"
-                                if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .jyutping
-                                }
-                        case .alphabetic:
-                                viewController.textDocumentProxy.insertText("a")
-                        case .alphabeticUppercase:
-                                viewController.textDocumentProxy.insertText("A")
-                                if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetic
-                                }
-                        default:
-                                break
-                        }
-                case .keyLRight:
-                        switch viewController.keyboardLayout {
-                        case .jyutping:
-                                viewController.currentInputText += "l"
-                        case .jyutpingUppercase:
-                                viewController.currentInputText += "L"
-                                if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .jyutping
-                                }
-                        case .alphabetic:
-                                viewController.textDocumentProxy.insertText("l")
-                        case .alphabeticUppercase:
-                                viewController.textDocumentProxy.insertText("L")
-                                if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetic
-                                }
-                        default:
-                                break
-                        }
-                case .keyZLeft:
-                        switch viewController.keyboardLayout {
-                        case .jyutping:
-                                viewController.currentInputText += "z"
-                        case .jyutpingUppercase:
-                                viewController.currentInputText += "Z"
-                                if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .jyutping
-                                }
-                        case .alphabetic:
-                                viewController.textDocumentProxy.insertText("z")
-                        case .alphabeticUppercase:
-                                viewController.textDocumentProxy.insertText("Z")
-                                if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetic
-                                }
-                        default:
-                                break
-                        }
                 default:
                         break
                 }

@@ -4,7 +4,7 @@ extension KeyButton {
         
         var width: CGFloat {
                 switch keyboardEvent {
-                case .none, .keyALeft, .keyLRight, .keyZLeft, .keyBackspaceLeft:
+                case .none, .shadowKey(_), .shadowBackspace:
                         return 10
                 case .backspace, .shift, .shiftDown, .switchTo(_):
                         return 50

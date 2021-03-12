@@ -23,7 +23,7 @@ final class KeyButton: UIButton {
                 case .switchInputMethod:
                         setupKeyButtonView()
                         setupKeyImageView()
-                case .none, .keyALeft, .keyLRight, .keyZLeft, .keyBackspaceLeft:
+                case .none, .shadowKey(_), .shadowBackspace:
                         break
                 default:
                         setupKeyButtonView()
