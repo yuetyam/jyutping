@@ -200,7 +200,7 @@ final class KeyButton: UIButton {
                         performedDraggingOnSpace = true
                 }
                 if keyboardEvent == .backspace {
-                        guard viewController.keyboardLayout == .jyutping else { return }
+                        guard viewController.keyboardLayout.isJyutpingMode else { return }
                         guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { return }
