@@ -31,6 +31,7 @@
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
 		374AC0C1246A2AB3004B70ED /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */; };
 		374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */; };
+		3756888D25FB0C050024730A /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3756888C25FB0C050024730A /* JyutpingProvider */; };
 		37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6524F310E100856B8A /* Array+deduplicated.swift */; };
 		37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6724F3112D00856B8A /* String+shortcut.swift */; };
 		37573F6A24F3120300856B8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Entry.swift */; };
@@ -60,7 +61,6 @@
 		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
 		37E1874F24CB766900602C03 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1874E24CB766900602C03 /* InitialsTable.swift */; };
 		37F1C028235C3EB700CDDA31 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F1C027235C3EB700CDDA31 /* AboutView.swift */; };
-		37F4AA1B25F9B64C002C9AB9 /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37F4AA1A25F9B64C002C9AB9 /* JyutpingProvider */; };
 		37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA443423A8510A001E7DBC /* ColorExtension.swift */; };
 		37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF2A2C23E8F51500B86C74 /* Candidate.swift */; };
 		37FF2A2F23E8F80400B86C74 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF2A2E23E8F80400B86C74 /* Engine.swift */; };
@@ -170,7 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37F4AA1B25F9B64C002C9AB9 /* JyutpingProvider in Frameworks */,
+				3756888D25FB0C050024730A /* JyutpingProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +364,7 @@
 			);
 			name = Jyutping;
 			packageProductDependencies = (
-				37F4AA1A25F9B64C002C9AB9 /* JyutpingProvider */,
+				3756888C25FB0C050024730A /* JyutpingProvider */,
 			);
 			productName = Jyutping;
 			productReference = 37211D5423541EE3007E1D68 /* Jyutping.app */;
@@ -427,7 +427,7 @@
 				377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */,
 				374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */,
 				3742A50425F9AFBA009D5CBB /* XCRemoteSwiftPackageReference "OpenCCLite" */,
-				37F4AA1925F9B64C002C9AB9 /* XCRemoteSwiftPackageReference "JyutpingProvider" */,
+				3756888B25FB0C050024730A /* XCRemoteSwiftPackageReference "JyutpingProvider" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -856,17 +856,17 @@
 				version = 0.1.0;
 			};
 		};
-		377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */ = {
+		3756888B25FB0C050024730A /* XCRemoteSwiftPackageReference "JyutpingProvider" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nixberg/blake3-swift.git";
+			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
 			requirement = {
 				kind = exactVersion;
 				version = 0.1.0;
 			};
 		};
-		37F4AA1925F9B64C002C9AB9 /* XCRemoteSwiftPackageReference "JyutpingProvider" */ = {
+		377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
+			repositoryURL = "https://github.com/nixberg/blake3-swift.git";
 			requirement = {
 				kind = exactVersion;
 				version = 0.1.0;
@@ -885,15 +885,15 @@
 			package = 374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */;
 			productName = DataProvider;
 		};
+		3756888C25FB0C050024730A /* JyutpingProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3756888B25FB0C050024730A /* XCRemoteSwiftPackageReference "JyutpingProvider" */;
+			productName = JyutpingProvider;
+		};
 		377AF92825DEDB0A00EED1FD /* BLAKE3 */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */;
 			productName = BLAKE3;
-		};
-		37F4AA1A25F9B64C002C9AB9 /* JyutpingProvider */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 37F4AA1925F9B64C002C9AB9 /* XCRemoteSwiftPackageReference "JyutpingProvider" */;
-			productName = JyutpingProvider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
