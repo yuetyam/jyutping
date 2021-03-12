@@ -3,13 +3,12 @@ import AVFoundation
 import JyutpingProvider
 
 struct JyutpingView: View {
-        
-        private let placeholdText: String = NSLocalizedString("Search for Jyutping", comment: "")
-        
+
+        private let placeholder: String = NSLocalizedString("Search for Jyutping", comment: "")
         @State private var inputText: String = String()
-        
-        private let specials: String = #"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ_0123456789-:;.,?~!@#$%^&*/\<>{}[]()+=`'"’“•。，；？！、：～（）〈〉《》「」『』〔〕〖〗【】"#
-        private var rawCantonese: String { inputText.filter { !specials.contains($0) } }
+
+        private let specials: String =  #"。，；？！、：～`’“（）〈〉《》「」『』〔〕〖〗【】⋯•"#
+        private var rawCantonese: String { inputText.filter { !$0.isASCII && !specials.contains($0) } }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
 
         private let speakerImageName: String = {
@@ -27,7 +26,7 @@ struct JyutpingView: View {
                                 ScrollView {
                                         HStack {
                                                 Image(systemName: "magnifyingglass").opacity(0.5).padding(.leading, 8)
-                                                EnhancedTextField(placeholder: placeholdText, text: $inputText, returnKey: .search)
+                                                EnhancedTextField(placeholder: placeholder, text: $inputText, returnKey: .search)
                                                         .padding(.vertical, 8)
                                                         .frame(maxHeight: 38)
                                         }
