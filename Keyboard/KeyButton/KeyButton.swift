@@ -60,7 +60,7 @@ final class KeyButton: UIButton {
                 super.touchesBegan(touches, with: event)
                 viewController.hapticFeedback?.impactOccurred()
                 switch keyboardEvent {
-                case .text(_):
+                case .key:
                         if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
                                 self.previewLabel.text = nil
                                 self.previewLabel.removeFromSuperview()
@@ -173,7 +173,7 @@ final class KeyButton: UIButton {
                 switch keyboardEvent {
                 case .backspace, .newLine:
                         changeColorToNormal()
-                case .text(_):
+                case .key:
                         if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
                                 removePreview()
                         } else {
@@ -218,7 +218,7 @@ final class KeyButton: UIButton {
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
-                case .text(_):
+                case .key:
                         if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
                                 removePreview()
                         } else {

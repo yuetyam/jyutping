@@ -125,9 +125,10 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
+                let period: KeyboardEvent = KeyboardEvent.key(KeySeat(primary: KeyElement(text: ".")))
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numeric), .switchInputMethod, .space, .text("."), .newLine] :
-                        [.switchTo(.numeric), .text("."), .space, .newLine]
+                        [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
+                        [.switchTo(.numeric), period, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -146,9 +147,10 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
+                let period: KeyboardEvent = KeyboardEvent.key(KeySeat(primary: KeyElement(text: ".")))
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.numeric), .switchInputMethod, .space, .text("."), .newLine] :
-                        [.switchTo(.numeric), .text("."), .space, .newLine]
+                        [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
+                        [.switchTo(.numeric), period, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -224,6 +226,6 @@ private extension KeyboardLayout {
 
 private extension Array where Element == [String] {
         var keysRows: [[KeyboardEvent]] {
-                return self.map { $0.map { KeyboardEvent.text($0) } }
+                return map { $0.map { KeyboardEvent.key(KeySeat(primary: KeyElement(text: $0))) } }
         }
 }

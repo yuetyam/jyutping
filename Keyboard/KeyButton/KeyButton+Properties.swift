@@ -14,7 +14,7 @@ extension KeyButton {
                         return 72
                 case .space:
                         return 180
-                case .text("."):
+                case .key(KeySeat(primary: KeyElement(text: "."))):
                         let currentLayout = viewController.keyboardLayout
                         if currentLayout == .alphabetic || currentLayout == .alphabeticUppercase {
                                 return viewController.needsInputModeSwitchKey ? 37 : 33
@@ -72,7 +72,7 @@ extension KeyButton {
         var styledFont: UIFont {
                 // Font sizes reference: https://www.iosfontsizes.com
                 switch keyboardEvent {
-                case .text:
+                case .key:
                         if viewController.traitCollection.userInterfaceIdiom == .pad {
                                 if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
                                         return .systemFont(ofSize: 24)
@@ -101,8 +101,8 @@ extension KeyButton {
         
         var keyText: String? {
                 switch keyboardEvent {
-                case .text(let text):
-                        return text
+                case .key(let keySeat):
+                        return keySeat.primary.text
                 case .space:
                         return viewController.keyboardLayout.isEnglishLayout ? "English" : "粵拼"
                 case .switchTo(let destinationLayout):
@@ -194,7 +194,7 @@ extension KeyButton {
         }
         private var shouldBeDarker: Bool {
                 switch keyboardEvent {
-                case .text, .space:
+                case .key, .space:
                         return false
                 default:
                         return true

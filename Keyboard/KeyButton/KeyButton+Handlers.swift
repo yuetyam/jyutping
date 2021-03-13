@@ -16,7 +16,20 @@ extension KeyButton {
         }
         @objc private func handleTap() {
                 switch keyboardEvent {
-                case .text(let text), .shadowKey(let text):
+                case .key(let keySeat):
+                        let text: String = keySeat.primary.text
+                        if viewController.keyboardLayout.isJyutpingMode {
+                                viewController.currentInputText += text
+                        } else {
+                                viewController.textDocumentProxy.insertText(text)
+                        }
+                        if viewController.keyboardLayout == .alphabeticUppercase && !viewController.isCapsLocked {
+                                viewController.keyboardLayout = .alphabetic
+                        }
+                        if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
+                                viewController.keyboardLayout = .jyutping
+                        }
+                case .shadowKey(let text):
                         if viewController.keyboardLayout.isJyutpingMode {
                                 viewController.currentInputText += text
                         } else {

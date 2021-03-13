@@ -51,7 +51,7 @@ extension KeyButton {
                 }
                 let effectView: BlurEffectView = {
                         switch keyboardEvent {
-                        case .text, .space:
+                        case .key, .space:
                                 return BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
                         default:
                                 return BlurEffectView(fraction: 0.48, effectStyle: .light)
