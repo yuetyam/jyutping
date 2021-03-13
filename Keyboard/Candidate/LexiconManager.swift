@@ -41,8 +41,8 @@ struct LexiconManager {
         
         func handle(candidate: Candidate) {
                 let id: Int64 = Int64((candidate.input + candidate.lexiconText + candidate.jyutping).hash)
-                if let existingEntry: Entry = fetch(by: id) {
-                        update(id: existingEntry.id, frequency: existingEntry.frequency + 1)
+                if let existingFrequency: Int64 = find(by: id) {
+                        update(id: id, frequency: existingFrequency + 1)
                 } else {
                         let newEntry: Entry = Entry(id: id,
                                                     token: Int64(candidate.input.hash),
@@ -87,42 +87,31 @@ struct LexiconManager {
                 }
                 sqlite3_finalize(updateStatement)
         }
-        
-        private func fetch(by id: Int64) -> Entry? {
-                let queryStatementString = "SELECT * FROM lexicon WHERE id = \(id) LIMIT 1;"
+
+        private func find(by id: Int64) -> Int64? {
+                let queryStatementString = "SELECT frequency FROM lexicon WHERE id = \(id) LIMIT 1;"
                 var queryStatement: OpaquePointer? = nil
-                var entry: Entry?
+                var frequency: Int64?
                 if sqlite3_prepare_v2(userdb, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // let id = sqlite3_column_int64(queryStatement, 0)
-                                let token = sqlite3_column_int64(queryStatement, 1)
-                                let shortcut = sqlite3_column_int64(queryStatement, 2)
-                                let frequency = sqlite3_column_int64(queryStatement, 3)
-                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
-                                entry = Entry(id: id, token: token, shortcut: shortcut, frequency: frequency, word: word, jyutping: jyutping)
+                                frequency = sqlite3_column_int64(queryStatement, 0)
                         }
                 } else {
                         consolePrint("SELECT statement could not be prepared.")
                 }
                 sqlite3_finalize(queryStatement)
-                return entry
+                return frequency
         }
         
         func suggest(for text: String) -> [Candidate] {
                 let textHash: Int = text.hash
-                let queryStatementString = "SELECT * FROM lexicon WHERE token = \(textHash) OR shortcut = \(textHash) ORDER BY frequency DESC LIMIT 5;"
+                let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE token = \(textHash) OR shortcut = \(textHash) ORDER BY frequency DESC LIMIT 5;"
                 var queryStatement: OpaquePointer? = nil
                 var candidates: [Candidate] = []
                 if sqlite3_prepare_v2(userdb, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // let id = sqlite3_column_int64(queryStatement, 0)
-                                // let token = sqlite3_column_int64(queryStatement, 1)
-                                // let shortcut = sqlite3_column_int64(queryStatement, 2)
-                                // let frequency = sqlite3_column_int64(queryStatement, 3)
-                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
-                                
+                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }

@@ -158,20 +158,18 @@ struct Engine {
 }
 
 private extension Engine {
-        
+
+        // CREATE TABLE jyutpingtable(ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL, word TEXT NOT NULL, jyutping TEXT NOT NULL, pinyin INTEGER NOT NULL, cangjie INTEGER NOT NULL);
+
         func shortcut(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE shortcut = \(text.code) LIMIT \(count);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE shortcut = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // ping = sqlite3_column_int64(queryStatement, 0)
-                                // shortcut = sqlite3_column_int64(queryStatement, 1)
-                                // prefix = sqlite3_column_int64(queryStatement, 2)
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
@@ -183,16 +181,12 @@ private extension Engine {
         func match(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.code);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // ping = sqlite3_column_int64(queryStatement, 0)
-                                // shortcut = sqlite3_column_int64(queryStatement, 1)
-                                // prefix = sqlite3_column_int64(queryStatement, 2)
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
@@ -203,16 +197,12 @@ private extension Engine {
         func matchWithLimitCount(for text: String, count: Int) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE ping = \(text.code) LIMIT \(count);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // ping = sqlite3_column_int64(queryStatement, 0)
-                                // shortcut = sqlite3_column_int64(queryStatement, 1)
-                                // prefix = sqlite3_column_int64(queryStatement, 2)
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
@@ -223,17 +213,13 @@ private extension Engine {
         func matchWithRanking(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT rowid, * FROM jyutpingtable WHERE ping = \(text.code);"
+                let queryString = "SELECT rowid, word, jyutping FROM jyutpingtable WHERE ping = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                // ping = sqlite3_column_int64(queryStatement, 1)
-                                // shortcut = sqlite3_column_int64(queryStatement, 2)
-                                // prefix = sqlite3_column_int64(queryStatement, 3)
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
-
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word, ranking: rowid)
                                 candidates.append(candidate)
                         }
@@ -245,16 +231,12 @@ private extension Engine {
         func prefix(match text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE prefix = \(text.code) LIMIT \(count);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE prefix = \(text.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // ping = sqlite3_column_int64(queryStatement, 0)
-                                // shortcut = sqlite3_column_int64(queryStatement, 1)
-                                // prefix = sqlite3_column_int64(queryStatement, 2)
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
@@ -265,18 +247,12 @@ private extension Engine {
 
         func matchPinyin(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE pinyin = \(text.code);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE pinyin = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // ping = sqlite3_column_int64(queryStatement, 0)
-                                // shortcut = sqlite3_column_int64(queryStatement, 1)
-                                // prefix = sqlite3_column_int64(queryStatement, 2)
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                // pinyin = sqlite3_column_int64(queryStatement, 5)
-                                // cangjie = sqlite3_column_int64(queryStatement, 6)
-
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
@@ -286,18 +262,12 @@ private extension Engine {
         }
         func matchCangjie(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let queryString = "SELECT * FROM jyutpingtable WHERE cangjie = \(text.code);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE cangjie = \(text.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // ping = sqlite3_column_int64(queryStatement, 0)
-                                // shortcut = sqlite3_column_int64(queryStatement, 1)
-                                // prefix = sqlite3_column_int64(queryStatement, 2)
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 3)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
-                                // pinyin = sqlite3_column_int64(queryStatement, 5)
-                                // cangjie = sqlite3_column_int64(queryStatement, 6)
-
+                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
+                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
