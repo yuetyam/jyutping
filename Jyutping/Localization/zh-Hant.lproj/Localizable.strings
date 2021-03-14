@@ -1,0 +1,67 @@
+/*
+Chinese, Traditional
+*/
+
+// System
+"Settings" = "設定";
+"General" = "一般";
+"Keyboards" = "鍵盤";
+"Add New Keyboards..." = "新增鍵盤 ··· ";
+"Edit" = "編輯";
+
+
+// Tab Bar
+"Home" = "首頁";
+"Keyboard" = "鍵盤";
+"Jyutping" = "粵拼";
+"Search" = "檢索";
+"About" = "關於";
+
+
+// Home
+"Type here to test keyboards" = "試下鍵盤";
+
+"How to enable this Keyboard" = "如何啟用鍵盤";
+"•  Jump to " = "•  跳轉至 ";
+"•  Tap " = "•  點選 ";
+"•  Turn on " = "•  開啟 ";
+"Allow Full Access" = "允許完整取用";
+
+"Go to " = "前往 ";
+
+
+// Search
+"Search the Jyutping of Cantonese word" = "鍵入粵語字詞檢索其粵拼";
+"Search for Jyutping" = "鍵入粵語字詞檢索其粵拼";
+"No results." = "無結果";
+"Common Cantonese words only." = "只可檢索常見粵語字詞";
+
+"Jyutping Initials" = "粵拼聲母表";
+"Jyutping Finals" = "粵拼韻母表";
+"Jyutping Tones" = "粵拼聲調表";
+
+"Search on other places (websites)" = "其它可供檢索嘅網站";
+"Jyutping resources" = "粵拼資源網站";
+"Jyutping - LSHK" = "粵拼 - LSHK";
+"Learn Jyutping" = "學粵拼";
+
+
+// About
+"Version" = "版本";
+"Copied" = "已拷貝";
+
+"Source Code" = "源碼";
+"Acknowledgements" = "致謝";
+"Privacy Policy" = "私隱政策";
+
+"Join Telegram Group" = "加入 Telegram 群組";
+"Follow us on Twitter" = "跟隨 Twitter 推特";
+"GitHub Issues" = "GitHub Issues";
+
+"Email Feedback" = "郵件反饋";
+"Unable to compose mail" = "無法編寫郵件";
+"Mail Unavailable" = "郵件不可用";
+"OK" = "好";
+
+"Review in App Store" = "前往 App Store 點評";
+"Share this App" = "分享本應用程式";

@@ -1,0 +1,67 @@
+/*
+English
+*/
+
+// System
+"Settings" = "Settings";
+"General" = "General";
+"Keyboards" = "Keyboards";
+"Add New Keyboards..." = "Add New Keyboards...";
+"Edit" = "Edit";
+
+
+// Tab Bar
+"Home" = "Home";
+"Keyboard" = "Keyboard";
+"Jyutping" = "Jyutping";
+"Search" = "Search";
+"About" = "About";
+
+
+// Home
+"Type here to test keyboards" = "Type here to test keyboards";
+
+"How to enable this Keyboard" = "How to enable this Keyboard";
+"•  Jump to " = "•  Jump to ";
+"•  Tap " = "•  Tap ";
+"•  Turn on " = "•  Turn on ";
+"Allow Full Access" = "Allow Full Access";
+
+"Go to " = "Go to ";
+
+
+// Search
+"Search the Jyutping of Cantonese word" = "Search the Jyutping of Cantonese word";
+"Search for Jyutping" = "Search for Jyutping";
+"No results." = "No results.";
+"Common Cantonese words only." = "Common Cantonese words only.";
+
+"Jyutping Initials" = "Jyutping Initials";
+"Jyutping Finals" = "Jyutping Finals";
+"Jyutping Tones" = "Jyutping Tones";
+
+"Search on other places (websites)" = "Search on other places (websites)";
+"Jyutping resources" = "Jyutping resources";
+"Jyutping - LSHK" = "Jyutping - LSHK";
+"Learn Jyutping" = "Learn Jyutping";
+
+
+// About
+"Version" = "Version";
+"Copied" = "Copied";
+
+"Source Code" = "Source Code";
+"Acknowledgements" = "Acknowledgements";
+"Privacy Policy" = "Privacy Policy";
+
+"Join Telegram Group" = "Join Telegram Group";
+"Follow us on Twitter" = "Follow us on Twitter";
+"GitHub Issues" = "GitHub Issues";
+
+"Email Feedback" = "Email Feedback";
+"Unable to compose mail" = "Unable to compose mail";
+"Mail Unavailable" = "Mail Unavailable";
+"OK" = "OK";
+
+"Review in App Store" = "Review in App Store";
+"Share this App" = "Share this App";
