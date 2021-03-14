@@ -25,13 +25,11 @@
 		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
 		3741063623E30DA800639EF4 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063523E30DA800639EF4 /* CandidateBoard.swift */; };
 		3742A50625F9AFBA009D5CBB /* OpenCCLite in Frameworks */ = {isa = PBXBuildFile; productRef = 3742A50525F9AFBA009D5CBB /* OpenCCLite */; };
-		37487A0125F3516700BBB3F4 /* DataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37487A0025F3516700BBB3F4 /* DataProvider */; };
 		3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */; };
 		3748E26B23F9FA2400A37A45 /* KeyButton+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */; };
 		3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */; };
 		374AC0C1246A2AB3004B70ED /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */; };
 		374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */; };
-		3756888D25FB0C050024730A /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3756888C25FB0C050024730A /* JyutpingProvider */; };
 		37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6524F310E100856B8A /* Array+deduplicated.swift */; };
 		37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6724F3112D00856B8A /* String+shortcut.swift */; };
 		37573F6A24F3120300856B8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Entry.swift */; };
@@ -43,6 +41,7 @@
 		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
 		377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4E2471129000B42D30 /* EnhancedTextField.swift */; };
+		3784A8CF25FDF1C100C68356 /* JyutpingDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3784A8CE25FDF1C100C68356 /* JyutpingDataProvider */; };
 		379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */; };
 		379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */; };
 		37AA501C24502D3F003E7921 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA501E24502D3F003E7921 /* Localizable.strings */; };
@@ -60,6 +59,7 @@
 		37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F923E4BAA000E413BD /* KeyboardEvent.swift */; };
 		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
 		37E1874F24CB766900602C03 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1874E24CB766900602C03 /* InitialsTable.swift */; };
+		37E8B41D25FDD3B60039D3FD /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37E8B41C25FDD3B60039D3FD /* JyutpingProvider */; };
 		37F1C028235C3EB700CDDA31 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F1C027235C3EB700CDDA31 /* AboutView.swift */; };
 		37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA443423A8510A001E7DBC /* ColorExtension.swift */; };
 		37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF2A2C23E8F51500B86C74 /* Candidate.swift */; };
@@ -170,7 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3756888D25FB0C050024730A /* JyutpingProvider in Frameworks */,
+				37E8B41D25FDD3B60039D3FD /* JyutpingProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,8 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3742A50625F9AFBA009D5CBB /* OpenCCLite in Frameworks */,
-				37487A0125F3516700BBB3F4 /* DataProvider in Frameworks */,
 				377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */,
+				3784A8CF25FDF1C100C68356 /* JyutpingDataProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,7 +364,7 @@
 			);
 			name = Jyutping;
 			packageProductDependencies = (
-				3756888C25FB0C050024730A /* JyutpingProvider */,
+				37E8B41C25FDD3B60039D3FD /* JyutpingProvider */,
 			);
 			productName = Jyutping;
 			productReference = 37211D5423541EE3007E1D68 /* Jyutping.app */;
@@ -385,8 +385,8 @@
 			name = Keyboard;
 			packageProductDependencies = (
 				377AF92825DEDB0A00EED1FD /* BLAKE3 */,
-				37487A0025F3516700BBB3F4 /* DataProvider */,
 				3742A50525F9AFBA009D5CBB /* OpenCCLite */,
+				3784A8CE25FDF1C100C68356 /* JyutpingDataProvider */,
 			);
 			productName = Keyboard;
 			productReference = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */;
@@ -425,9 +425,9 @@
 			mainGroup = 37211D4B23541EE3007E1D68;
 			packageReferences = (
 				377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */,
-				374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */,
 				3742A50425F9AFBA009D5CBB /* XCRemoteSwiftPackageReference "OpenCCLite" */,
-				3756888B25FB0C050024730A /* XCRemoteSwiftPackageReference "JyutpingProvider" */,
+				37E8B41B25FDD3B60039D3FD /* XCRemoteSwiftPackageReference "JyutpingProvider" */,
+				3784A8CD25FDF1C100C68356 /* XCRemoteSwiftPackageReference "JyutpingDataProvider" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -848,25 +848,25 @@
 				version = 0.1.0;
 			};
 		};
-		374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ososoio/DataProvider.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.0;
-			};
-		};
-		3756888B25FB0C050024730A /* XCRemoteSwiftPackageReference "JyutpingProvider" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.0;
-			};
-		};
 		377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nixberg/blake3-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.0;
+			};
+		};
+		3784A8CD25FDF1C100C68356 /* XCRemoteSwiftPackageReference "JyutpingDataProvider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ososoio/JyutpingDataProvider.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.0;
+			};
+		};
+		37E8B41B25FDD3B60039D3FD /* XCRemoteSwiftPackageReference "JyutpingProvider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
 			requirement = {
 				kind = exactVersion;
 				version = 0.1.0;
@@ -880,20 +880,20 @@
 			package = 3742A50425F9AFBA009D5CBB /* XCRemoteSwiftPackageReference "OpenCCLite" */;
 			productName = OpenCCLite;
 		};
-		37487A0025F3516700BBB3F4 /* DataProvider */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 374879FF25F3516700BBB3F4 /* XCRemoteSwiftPackageReference "DataProvider" */;
-			productName = DataProvider;
-		};
-		3756888C25FB0C050024730A /* JyutpingProvider */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3756888B25FB0C050024730A /* XCRemoteSwiftPackageReference "JyutpingProvider" */;
-			productName = JyutpingProvider;
-		};
 		377AF92825DEDB0A00EED1FD /* BLAKE3 */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */;
 			productName = BLAKE3;
+		};
+		3784A8CE25FDF1C100C68356 /* JyutpingDataProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3784A8CD25FDF1C100C68356 /* XCRemoteSwiftPackageReference "JyutpingDataProvider" */;
+			productName = JyutpingDataProvider;
+		};
+		37E8B41C25FDD3B60039D3FD /* JyutpingProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37E8B41B25FDD3B60039D3FD /* XCRemoteSwiftPackageReference "JyutpingProvider" */;
+			productName = JyutpingProvider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
