@@ -138,7 +138,7 @@ final class KeyboardViewController: UIInputViewController {
                         return .jyutping(.lowercased)
                 }
         }
-        
+
         var keyboardLayout: KeyboardLayout = .jyutping(.lowercased) {
                 didSet {
                         setupKeyboard()
@@ -224,9 +224,35 @@ final class KeyboardViewController: UIInputViewController {
                 AudioFeedback.perform(.modify)
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
                 case 0:
-                        keyboardLayout = .jyutping(.lowercased)
+                        switch keyboardLayout {
+                        case .alphabetic(.lowercased):
+                                keyboardLayout = .jyutping(.lowercased)
+                        case .alphabetic(.uppercased):
+                                keyboardLayout = .jyutping(.uppercased)
+                        case .alphabetic(.capsLocked):
+                                keyboardLayout = .jyutping(.capsLocked)
+                        case .numeric:
+                                keyboardLayout = .cantoneseNumeric
+                        case .symbolic:
+                                keyboardLayout = .cantoneseSymbolic
+                        default:
+                                break
+                        }
                 case 1:
-                        keyboardLayout = .alphabetic(.lowercased)
+                        switch keyboardLayout {
+                        case .jyutping(.lowercased):
+                                keyboardLayout = .alphabetic(.lowercased)
+                        case .jyutping(.uppercased):
+                                keyboardLayout = .alphabetic(.uppercased)
+                        case .jyutping(.capsLocked):
+                                keyboardLayout = .alphabetic(.capsLocked)
+                        case .cantoneseNumeric:
+                                keyboardLayout = .numeric
+                        case .cantoneseSymbolic:
+                                keyboardLayout = .symbolic
+                        default:
+                                break
+                        }
                 default:
                         break
                 }
