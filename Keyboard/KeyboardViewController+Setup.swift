@@ -168,7 +168,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
-                keyboardLayout = askedKeyboardLayout
+                keyboardLayout = requestedKeyboardLayout
         }
         
         

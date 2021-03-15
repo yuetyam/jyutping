@@ -59,8 +59,8 @@ final class KeyboardViewController: UIInputViewController {
 
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
-                if askingDifferentKeyboardLayout {
-                        keyboardLayout = answeredKeyboardLayout
+                if needsDifferentKeyboardLayout {
+                        keyboardLayout = respondingKeyboardLayout
                 } else {
                         setupKeyboard()
                         didKeyboardEstablished = true
@@ -102,18 +102,18 @@ final class KeyboardViewController: UIInputViewController {
                         setupKeyboard()
                 }
         }
-        
+
         private lazy var didKeyboardEstablished: Bool = false
-        private lazy var askingDifferentKeyboardLayout: Bool = false
-        
+        private lazy var needsDifferentKeyboardLayout: Bool = false
+
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
-                let asked: KeyboardLayout = askedKeyboardLayout
-                if answeredKeyboardLayout != asked {
-                        answeredKeyboardLayout = asked
-                        askingDifferentKeyboardLayout = true
+                let requested: KeyboardLayout = requestedKeyboardLayout
+                if respondingKeyboardLayout != requested {
+                        respondingKeyboardLayout = requested
+                        needsDifferentKeyboardLayout = true
                         if didKeyboardEstablished {
-                                keyboardLayout = answeredKeyboardLayout
+                                keyboardLayout = respondingKeyboardLayout
                         }
                 }
                 if !textDocumentProxy.hasText && !currentInputText.isEmpty {
@@ -121,10 +121,10 @@ final class KeyboardViewController: UIInputViewController {
                         currentInputText = ""
                 }
         }
-        
-        private lazy var answeredKeyboardLayout: KeyboardLayout = .jyutping(.lowercased)
-        
-        var askedKeyboardLayout: KeyboardLayout {
+
+        private lazy var respondingKeyboardLayout: KeyboardLayout = .jyutping(.lowercased)
+
+        var requestedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
                         return traitCollection.userInterfaceIdiom == .pad ? .numeric : .numberPad
