@@ -176,7 +176,7 @@ extension KeyButton {
                 if viewController.isDarkAppearance {
                         return shouldBeDarker ? .darkActionButton : .darkButton
                 } else {
-                        return shouldBeDarker ? .lightActionButton : .lightButton
+                        return shouldBeDarker ? .lightActionButton : .white
                 }
         }
         var highlightButtonColor: UIColor {
@@ -184,7 +184,7 @@ extension KeyButton {
                 if viewController.isDarkAppearance {
                         return shouldBeDarker ? .darkButton : .black
                 } else {
-                        return shouldBeDarker ? .lightButton : .lightActionButton
+                        return shouldBeDarker ? .white : .lightActionButton
                 }
         }
         private var shouldBeDarker: Bool {
