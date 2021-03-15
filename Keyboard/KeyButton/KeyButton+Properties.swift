@@ -14,13 +14,8 @@ extension KeyButton {
                         return 72
                 case .space:
                         return 180
-                case .key(KeySeat(primary: KeyElement(text: "."))):
-                        let currentLayout = viewController.keyboardLayout
-                        if currentLayout == .alphabetic || currentLayout == .alphabeticUppercase {
-                                return viewController.needsInputModeSwitchKey ? 37 : 33
-                        } else {
-                                return 40
-                        }
+                case .key(.periodSeat):
+                        return viewController.needsInputModeSwitchKey ? 37 : 33
                 default:
                         return 40
                 }

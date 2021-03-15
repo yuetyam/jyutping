@@ -22,6 +22,8 @@ struct KeySeat: Hashable {
                 self.primary = primary
                 self.keys = keys
         }
+
+        static let periodSeat: KeySeat = KeySeat(primary: .period, keys: [.comma, .dotCOM, .dotORG, .dotIO])
 }
 
 struct KeyElement: Hashable {
@@ -51,6 +53,12 @@ struct KeyElement: Hashable {
                 hasher.combine(header)
                 hasher.combine(footer)
         }
+
+        static let period: KeyElement = KeyElement(text: ".")
+        static let comma: KeyElement = KeyElement(text: ",")
+        static let dotCOM: KeyElement = KeyElement(text: ".com")
+        static let dotORG: KeyElement = KeyElement(text: ".org")
+        static let dotIO: KeyElement = KeyElement(text: ".io")
 }
 
 enum Alignment: Hashable {

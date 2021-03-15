@@ -125,7 +125,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = KeyboardEvent.key(KeySeat(primary: KeyElement(text: ".")))
+                let period: KeyboardEvent = KeyboardEvent.key(.periodSeat)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
@@ -147,7 +147,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = KeyboardEvent.key(KeySeat(primary: KeyElement(text: ".")))
+                let period: KeyboardEvent = KeyboardEvent.key(.periodSeat)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
