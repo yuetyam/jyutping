@@ -61,7 +61,7 @@ struct KeyElement: Hashable {
         static let dotIO: KeyElement = KeyElement(text: ".io")
 }
 
-enum Alignment: Hashable {
+enum Alignment {
         case center,
              left,
              right

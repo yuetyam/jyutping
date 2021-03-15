@@ -1,6 +1,6 @@
 import AudioToolbox
 
-enum AudioFeedback: Equatable {
+enum AudioFeedback {
         case
         input,
         delete,
