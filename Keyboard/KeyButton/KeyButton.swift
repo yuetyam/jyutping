@@ -109,67 +109,12 @@ final class KeyButton: UIButton {
         
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesEnded(touches, with: event)
-                
                 invalidateBackspaceTimers()
-                
-                if keyboardEvent == .space {
-                        guard !performedDraggingOnSpace else {
-                                spaceTouchPoint = .zero
-                                changeColorToNormal()
-                                return
-                        }
-                        switch viewController.keyboardLayout {
-                        case .jyutping:
-                                if let firstCandidate: Candidate = viewController.candidates.first {
-                                        viewController.textDocumentProxy.insertText(firstCandidate.text)
-                                        AudioFeedback.perform(.modify)
-                                        if viewController.currentInputText.hasPrefix("r") {
-                                                if viewController.currentInputText == "r" + firstCandidate.input {
-                                                        viewController.currentInputText = ""
-                                                } else {
-                                                        viewController.currentInputText = "r" + viewController.currentInputText.dropFirst(firstCandidate.input.count + 1)
-                                                }
-                                        } else if viewController.currentInputText.hasPrefix("v") {
-                                                if viewController.currentInputText == "v" + firstCandidate.input {
-                                                        viewController.currentInputText = ""
-                                                } else {
-                                                        viewController.currentInputText = "v" + viewController.currentInputText.dropFirst(firstCandidate.input.count + 1)
-                                                }
-                                        } else {
-                                                viewController.candidateSequence.append(firstCandidate)
-                                                viewController.currentInputText = String(viewController.currentInputText.dropFirst(firstCandidate.input.count))
-                                        }
-                                        if viewController.currentInputText.isEmpty && !(viewController.candidateSequence.isEmpty) {
-                                                let concatenatedCandidate: Candidate = viewController.candidateSequence.joined()
-                                                viewController.candidateSequence = []
-                                                viewController.imeQueue.async {
-                                                        self.viewController.lexiconManager?.handle(candidate: concatenatedCandidate)
-                                                }
-                                        }
-                                } else if !(viewController.currentInputText.isEmpty) {
-                                        viewController.textDocumentProxy.insertText(viewController.currentInputText)
-                                        AudioFeedback.perform(.modify)
-                                        viewController.currentInputText = ""
-                                } else {
-                                        viewController.textDocumentProxy.insertText(" ")
-                                        AudioFeedback.play(for: .space)
-                                }
-                                if viewController.keyboardLayout == .jyutping(.uppercased) {
-                                        viewController.keyboardLayout = .jyutping(.lowercased)
-                                }
-                        case .alphabetic(.uppercased):
-                                viewController.textDocumentProxy.insertText(" ")
-                                AudioFeedback.play(for: .space)
-                                viewController.keyboardLayout = .alphabetic(.lowercased)
-                        default:
-                                viewController.textDocumentProxy.insertText(" ")
-                                AudioFeedback.play(for: .space)
-                        }
-                        spaceTouchPoint = .zero
-                        changeColorToNormal()
-                }
                 switch keyboardEvent {
                 case .backspace, .newLine:
+                        changeColorToNormal()
+                case .space:
+                        spaceTouchPoint = .zero
                         changeColorToNormal()
                 case .key:
                         if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
@@ -189,11 +134,8 @@ final class KeyButton: UIButton {
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 8 else { return }
                         viewController.currentInputText = ""
-                        if distance > 0 {
-                                viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-                        } else {
-                                viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
-                        }
+                        let offset: Int = distance > 0 ? 1 : -1
+                        viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location
                         performedDraggingOnSpace = true
                 }
@@ -207,9 +149,7 @@ final class KeyButton: UIButton {
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesCancelled(touches, with: event)
-                
                 invalidateBackspaceTimers()
-                
                 switch keyboardEvent {
                 case .backspace, .newLine:
                         changeColorToNormal()
@@ -257,7 +197,7 @@ final class KeyButton: UIButton {
                 fastBackspaceTimer?.invalidate()
         }
         
-        private lazy var performedDraggingOnSpace: Bool = false
+        private(set) lazy var performedDraggingOnSpace: Bool = false
         private lazy var spaceTouchPoint: CGPoint = .zero
         private lazy var backspaceTouchPoint: CGPoint = .zero
 }
