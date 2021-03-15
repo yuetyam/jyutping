@@ -114,7 +114,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         collectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reinit()
-                        keyboardLayout = .jyutping
+                        keyboardLayout = .jyutping(.lowercased)
                 }
                 if currentInputText.isEmpty && !candidateSequence.isEmpty {
                         let concatenatedCandidate: Candidate = candidateSequence.joined()

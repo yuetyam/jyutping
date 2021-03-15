@@ -123,7 +123,7 @@ extension KeyboardViewController {
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                 toolBar.reinit()
-                keyboardLayout = .jyutping
+                keyboardLayout = .jyutping(.lowercased)
         }
         
         

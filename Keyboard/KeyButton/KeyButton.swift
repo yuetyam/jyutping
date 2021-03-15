@@ -17,7 +17,7 @@ final class KeyButton: UIButton {
                 backgroundColor = .interactableClear
                 
                 switch keyboardEvent {
-                case .backspace, .shift, .shiftDown:
+                case .backspace, .shift:
                         setupKeyButtonView()
                         setupKeyImageView(constant: 11)
                 case .switchInputMethod:
@@ -119,7 +119,7 @@ final class KeyButton: UIButton {
                                 return
                         }
                         switch viewController.keyboardLayout {
-                        case .jyutping, .jyutpingUppercase:
+                        case .jyutping:
                                 if let firstCandidate: Candidate = viewController.candidates.first {
                                         viewController.textDocumentProxy.insertText(firstCandidate.text)
                                         AudioFeedback.perform(.modify)
@@ -154,15 +154,13 @@ final class KeyButton: UIButton {
                                         viewController.textDocumentProxy.insertText(" ")
                                         AudioFeedback.play(for: .space)
                                 }
-                                if viewController.keyboardLayout == .jyutpingUppercase && !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .jyutping
+                                if viewController.keyboardLayout == .jyutping(.uppercased) {
+                                        viewController.keyboardLayout = .jyutping(.lowercased)
                                 }
-                        case .alphabeticUppercase:
+                        case .alphabetic(.uppercased):
                                 viewController.textDocumentProxy.insertText(" ")
                                 AudioFeedback.play(for: .space)
-                                if !viewController.isCapsLocked {
-                                        viewController.keyboardLayout = .alphabetic
-                                }
+                                viewController.keyboardLayout = .alphabetic(.lowercased)
                         default:
                                 viewController.textDocumentProxy.insertText(" ")
                                 AudioFeedback.play(for: .space)

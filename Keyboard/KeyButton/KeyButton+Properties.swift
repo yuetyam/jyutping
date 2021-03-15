@@ -6,7 +6,7 @@ extension KeyButton {
                 switch keyboardEvent {
                 case .none, .shadowKey(_), .shadowBackspace:
                         return 10
-                case .backspace, .shift, .shiftDown, .switchTo(_):
+                case .backspace, .shift, .switchTo(_):
                         return 50
                 case .switchInputMethod:
                         return 45
@@ -117,7 +117,7 @@ extension KeyButton {
                         return "#+="
                 case .jyutping:
                         return "拼"
-                case .alphabetic, .alphabeticUppercase:
+                case .alphabetic:
                         return "ABC"
                 default:
                         return "??"
@@ -163,9 +163,16 @@ extension KeyButton {
                 case .backspace:
                         return UIImage(systemName: "delete.left")
                 case .shift:
-                        return UIImage(systemName: "shift")
-                case .shiftDown:
-                        return UIImage(systemName: viewController.isCapsLocked ? "capslock.fill" : "shift.fill")
+                        switch viewController.keyboardLayout {
+                        case .jyutping(.lowercased), .alphabetic(.lowercased):
+                                return UIImage(systemName: "shift")
+                        case .jyutping(.uppercased), .alphabetic(.uppercased):
+                                return UIImage(systemName: "shift.fill")
+                        case .jyutping(.capsLocked), .alphabetic(.capsLocked):
+                                return UIImage(systemName: "capslock.fill")
+                        default:
+                                return nil
+                        }
                 default:
                         return nil
                 }

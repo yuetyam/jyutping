@@ -15,7 +15,7 @@ final class EmojiBoard: UIView {
         }
 
         private func setupSubViews(viewController: KeyboardViewController) {
-                let switchBackButton: KeyButton = KeyButton(keyboardEvent: .switchTo(.jyutping), viewController: viewController)
+                let switchBackButton: KeyButton = KeyButton(keyboardEvent: .switchTo(.jyutping(.lowercased)), viewController: viewController)
                 let spaceButton: KeyButton = KeyButton(keyboardEvent: .space, viewController: viewController)
                 let backspaceButton: KeyButton = KeyButton(keyboardEvent: .backspace, viewController: viewController)
                 let returnButton: KeyButton = KeyButton(keyboardEvent: .newLine, viewController: viewController)

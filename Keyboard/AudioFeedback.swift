@@ -24,7 +24,7 @@ enum AudioFeedback {
                         feedback(.input)
                 case .backspace, .shadowBackspace:
                         feedback(.delete)
-                case .switchTo(_), .newLine, .shift, .shiftDown:
+                case .switchTo(_), .newLine, .shift:
                         feedback(.modify)
                 case .none:
                         break

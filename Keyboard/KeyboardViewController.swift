@@ -122,7 +122,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        private lazy var answeredKeyboardLayout: KeyboardLayout = .jyutping
+        private lazy var answeredKeyboardLayout: KeyboardLayout = .jyutping(.lowercased)
         
         var askedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
@@ -131,17 +131,15 @@ final class KeyboardViewController: UIInputViewController {
                 case .decimalPad:
                         return traitCollection.userInterfaceIdiom == .pad ? .numeric : .decimalPad
                 case .asciiCapable, .emailAddress, .twitter, .URL:
-                        return .alphabetic
+                        return .alphabetic(.lowercased)
                 case .numbersAndPunctuation:
                         return .numeric
                 default:
-                        return .jyutping
+                        return .jyutping(.lowercased)
                 }
         }
         
-        lazy var isCapsLocked: Bool = false
-        
-        var keyboardLayout: KeyboardLayout = .jyutping {
+        var keyboardLayout: KeyboardLayout = .jyutping(.lowercased) {
                 didSet {
                         setupKeyboard()
                         guard didKeyboardEstablished else {
@@ -224,12 +222,11 @@ final class KeyboardViewController: UIInputViewController {
         @objc private func handleYueEngSwitch() {
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.modify)
-                isCapsLocked = false
                 switch toolBar.yueEngSwitch.selectedSegmentIndex {
                 case 0:
-                        keyboardLayout = .jyutping
+                        keyboardLayout = .jyutping(.lowercased)
                 case 1:
-                        keyboardLayout = .alphabetic
+                        keyboardLayout = .alphabetic(.lowercased)
                 default:
                         break
                 }

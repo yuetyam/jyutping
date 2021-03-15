@@ -4,7 +4,6 @@ enum KeyboardEvent: Hashable {
              backspace,
              newLine, // return, enter
              shift,
-             shiftDown,
              switchInputMethod,
              switchTo(KeyboardLayout),
 
