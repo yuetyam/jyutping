@@ -174,20 +174,20 @@ extension KeyButton {
         /// Key Button View background color
         var buttonColor: UIColor {
                 if viewController.isDarkAppearance {
-                        return shouldBeDarker ? .darkActionButton : .darkButton
+                        return deepDarkFantasy ? .darkActionButton : .darkButton
                 } else {
-                        return shouldBeDarker ? .lightActionButton : .white
+                        return deepDarkFantasy ? .lightActionButton : .white
                 }
         }
         var highlightButtonColor: UIColor {
                 // action <=> non-action
                 if viewController.isDarkAppearance {
-                        return shouldBeDarker ? .darkButton : .black
+                        return deepDarkFantasy ? .darkButton : .black
                 } else {
-                        return shouldBeDarker ? .white : .lightActionButton
+                        return deepDarkFantasy ? .white : .lightActionButton
                 }
         }
-        private var shouldBeDarker: Bool {
+        private var deepDarkFantasy: Bool {
                 switch keyboardEvent {
                 case .key, .space:
                         return false
