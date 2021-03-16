@@ -156,15 +156,46 @@ final class KeyboardViewController: UIInputViewController {
         }
         
         let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInitiated)
+
         var currentInputText: String = "" {
+                didSet {
+                        inputText = currentInputText
+                }
+        }
+        var inputText: String = "" {
                 didSet {
                         DispatchQueue.main.async {
                                 self.toolBar.update()
                         }
-                        let range: NSRange = NSRange(location: currentInputText.count, length: 0)
-                        textDocumentProxy.setMarkedText(currentInputText, selectedRange: range)
-                        if currentInputText.isEmpty {
-                                textDocumentProxy.unmarkText()
+                        processingText = inputText
+                        /*
+                        if inputText.isEmpty || inputText.hasPrefix("v") || inputText.hasPrefix("r") {
+                                processingText = inputText
+                        } else {
+                                processingText = inputText.replacingOccurrences(of: "vv", with: "4")
+                                        .replacingOccurrences(of: "xx", with: "5")
+                                        .replacingOccurrences(of: "qq", with: "6")
+                                        .replacingOccurrences(of: "v", with: "1")
+                                        .replacingOccurrences(of: "x", with: "2")
+                                        .replacingOccurrences(of: "q", with: "3")
+                        }
+                        */
+                }
+        }
+        var processingText: String = "" {
+                didSet {
+                        if let syllables: [String] = Spliter.split(processingText).first {
+                                let splittable: String = syllables.joined()
+                                if splittable.count == processingText.count {
+                                        markedText = syllables.joined(separator: " ")
+                                } else {
+                                        let tail = processingText.dropFirst(splittable.count)
+                                        markedText = syllables.joined(separator: " ") + " " + tail
+                                }
+                        } else {
+                                markedText = processingText
+                        }
+                        if processingText.isEmpty {
                                 candidates = []
                         } else {
                                 imeQueue.async {
@@ -173,7 +204,14 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        
+        var markedText: String = "" {
+                didSet {
+                        let range: NSRange = NSRange(location: markedText.count, length: 0)
+                        textDocumentProxy.setMarkedText(markedText, selectedRange: range)
+                        if markedText.isEmpty { textDocumentProxy.unmarkText() }
+                }
+        }
+
         lazy var candidateSequence: [Candidate] = []
         
         var candidates: [Candidate] = [] {
