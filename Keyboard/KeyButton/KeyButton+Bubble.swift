@@ -1,7 +1,7 @@
 import UIKit
 
 extension KeyButton {
-        
+
         var keyShapePath: UIBezierPath {
                 let keyWidth: CGFloat = keyButtonView.frame.width
                 let keyHeight: CGFloat = keyButtonView.frame.height
@@ -34,8 +34,6 @@ extension KeyButton {
                 //        +   |       |   +
                 //        +---A---o-------+
 
-
-                // TODO: - More details
                 let expansionWidth: CGFloat = keyWidth / 2.5
                 let curveDistance: CGFloat = expansionWidth * 1.5
                 let controlDistance: CGFloat = curveDistance / 3
