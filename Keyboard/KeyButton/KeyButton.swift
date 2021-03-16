@@ -232,7 +232,7 @@ final class CalloutKeyView: UIView {
                 ])
                 headerLabel.font = .systemFont(ofSize: 11)
                 headerLabel.text = header
-                headerLabel.textColor = isDarkAppearance ? .white.withAlphaComponent(0.8) : .gray
+                headerLabel.textColor = isDarkAppearance ? UIColor.white.withAlphaComponent(0.8) : .gray
                 switch alignments.header {
                 case .center:
                         headerLabel.textAlignment = .center
@@ -253,7 +253,7 @@ final class CalloutKeyView: UIView {
                 ])
                 footerLabel.font = .systemFont(ofSize: 9)
                 footerLabel.text = footer
-                footerLabel.textColor = isDarkAppearance ? .white.withAlphaComponent(0.7) : .gray
+                footerLabel.textColor = isDarkAppearance ? UIColor.white.withAlphaComponent(0.7) : .gray
                 switch alignments.footer {
                 case .center:
                         footerLabel.textAlignment = .center
