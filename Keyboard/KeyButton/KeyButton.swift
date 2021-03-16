@@ -166,6 +166,7 @@ final class KeyButton: UIButton {
                 layer.shadowColor = UIColor.black.cgColor
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
+                let keyShapePath: UIBezierPath = keyShapeBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
                 layer.path = keyShapePath.cgPath
                 layer.fillColor = buttonColor.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
@@ -178,8 +179,6 @@ final class KeyButton: UIButton {
                 return layer
         }()
         private lazy var previewLabel: UILabel = {
-                let keyWidth: CGFloat = keyButtonView.frame.width
-                let keyHeight: CGFloat = keyButtonView.frame.height
                 let labelHeight: CGFloat = previewPath.bounds.height - keyHeight - 8
                 let originPoint: CGPoint = keyButtonView.frame.origin
                 let label = UILabel(frame: CGRect(x: originPoint.x - 5, y: originPoint.y - labelHeight - 8, width: keyWidth + 10, height: labelHeight))
@@ -188,4 +187,93 @@ final class KeyButton: UIButton {
                 label.textColor = buttonTintColor
                 return label
         }()
+        private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
+        private lazy var keyWidth: CGFloat = keyButtonView.frame.width
+        private lazy var keyHeight: CGFloat = keyButtonView.frame.height
+        private lazy var bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.origin.x + keyWidth / 2, y: keyButtonView.frame.maxY)
+}
+
+final class CalloutKeyView: UIView {
+
+        let text: String
+        private let header: String?
+        private let footer: String?
+        private let alignments: (header: Alignment, footer: Alignment)
+        private let isDarkAppearance: Bool
+
+        init(frame: CGRect,
+             text: String,
+             header: String? = nil,
+             footer: String? = nil,
+             alignments: (header: Alignment, footer: Alignment) = (header: .center, footer: .center), isDarkAppearance: Bool) {
+                self.text = text
+                self.header = header
+                self.footer = footer
+                self.alignments = alignments
+                self.isDarkAppearance = isDarkAppearance
+                super.init(frame: frame)
+                layer.cornerRadius = 3
+                layer.cornerCurve = .continuous
+                setupHeader()
+                setupFooter()
+                setupText()
+        }
+        required init?(coder: NSCoder) {
+                fatalError("init(coder:) has not been implemented")
+        }
+        private func setupHeader() {
+                let headerLabel: UILabel = UILabel()
+                addSubview(headerLabel)
+                headerLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        headerLabel.topAnchor.constraint(equalTo: topAnchor),
+                        headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        headerLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+                ])
+                headerLabel.font = .systemFont(ofSize: 11)
+                headerLabel.text = header
+                headerLabel.textColor = isDarkAppearance ? .white.withAlphaComponent(0.8) : .gray
+                switch alignments.header {
+                case .center:
+                        headerLabel.textAlignment = .center
+                case .left:
+                        headerLabel.textAlignment = .left
+                case .right:
+                        headerLabel.textAlignment = .right
+                }
+        }
+        private func setupFooter() {
+                let footerLabel: UILabel = UILabel()
+                addSubview(footerLabel)
+                footerLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        footerLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+                        footerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        footerLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+                ])
+                footerLabel.font = .systemFont(ofSize: 9)
+                footerLabel.text = footer
+                footerLabel.textColor = isDarkAppearance ? .white.withAlphaComponent(0.7) : .gray
+                switch alignments.footer {
+                case .center:
+                        footerLabel.textAlignment = .center
+                case .left:
+                        footerLabel.textAlignment = .left
+                case .right:
+                        footerLabel.textAlignment = .right
+                }
+        }
+        private func setupText() {
+                let textLabel: UILabel = UILabel()
+                addSubview(textLabel)
+                textLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        textLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+                        textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        textLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+                ])
+                textLabel.font = .systemFont(ofSize: 17)
+                textLabel.text = text
+                textLabel.textAlignment = .center
+        }
 }
