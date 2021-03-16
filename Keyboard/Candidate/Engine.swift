@@ -73,9 +73,9 @@ struct Engine {
         }
         
         private func fetch(for text: String) -> [Candidate] {
-                let jyutpingsSequences: [[String]] = Spliter.split(text)
+                let jyutpingsSequences: [[String]] = Splitter.split(text)
                 guard let firstSequence: [String] = jyutpingsSequences.first, !firstSequence.isEmpty else {
-                        return processUnsplitable(text)
+                        return processUnsplittable(text)
                 }
                 if firstSequence.reduce(0, { $0 + $1.count }) == text.count {
                         return process(text: text, sequences: jyutpingsSequences)
@@ -84,7 +84,7 @@ struct Engine {
                 }
         }
         
-        private func processUnsplitable(_ text: String) -> [Candidate] {
+        private func processUnsplittable(_ text: String) -> [Candidate] {
                 var combine: [Candidate] = match(for: text) + prefix(match: text) + shortcut(for: text)
                 for number in 1..<text.count {
                         combine += shortcut(for: String(text.dropLast(number)))
@@ -98,7 +98,7 @@ struct Engine {
                         return candidates
                 }
                 let tailText: String = String(text.dropFirst(candidates[0].input.count))
-                let jyutpingsSequences: [[String]] = Spliter.split(tailText)
+                let jyutpingsSequences: [[String]] = Splitter.split(tailText)
                 guard let tailJyutpings: [String] = jyutpingsSequences.first, !tailJyutpings.isEmpty else {
                         return candidates
                 }
@@ -129,7 +129,7 @@ struct Engine {
                         let newCandidate: Candidate = combine.first! + tailOne
                         combine.insert(newCandidate, at: 0)
                 } else {
-                        let jyutpingsSequences: [[String]] = Spliter.split(tailText)
+                        let jyutpingsSequences: [[String]] = Splitter.split(tailText)
                         guard let tailJyutpings: [String] = jyutpingsSequences.first, !tailJyutpings.isEmpty else {
                                 return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
                         }

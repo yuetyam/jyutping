@@ -184,7 +184,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         var processingText: String = "" {
                 didSet {
-                        if let syllables: [String] = Spliter.split(processingText).first {
+                        if let syllables: [String] = Splitter.split(processingText).first {
                                 let splittable: String = syllables.joined()
                                 if splittable.count == processingText.count {
                                         markedText = syllables.joined(separator: " ")
@@ -204,7 +204,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        var markedText: String = "" {
+        private var markedText: String = "" {
                 didSet {
                         let range: NSRange = NSRange(location: markedText.count, length: 0)
                         textDocumentProxy.setMarkedText(markedText, selectedRange: range)

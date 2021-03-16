@@ -38,7 +38,7 @@
 		377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AF90925DE328F00EED1FD /* Emoji.swift */; };
 		377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */ = {isa = PBXBuildFile; productRef = 377AF92825DEDB0A00EED1FD /* BLAKE3 */; };
 		377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */; };
-		377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Spliter.swift */; };
+		377EAD4A24708ACD00B42D30 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Splitter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
 		377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4E2471129000B42D30 /* EnhancedTextField.swift */; };
 		3784A8CF25FDF1C100C68356 /* JyutpingDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3784A8CE25FDF1C100C68356 /* JyutpingDataProvider */; };
@@ -130,7 +130,7 @@
 		3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionLabel.swift; sourceTree = "<group>"; };
 		377AF90925DE328F00EED1FD /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		377EAD4924708ACD00B42D30 /* Spliter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spliter.swift; sourceTree = "<group>"; };
+		377EAD4924708ACD00B42D30 /* Splitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splitter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
 		377EAD4E2471129000B42D30 /* EnhancedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
 		379568282600471700F7A642 /* KeyButton+Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+Bubble.swift"; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 			children = (
 				37FF2A2E23E8F80400B86C74 /* Engine.swift */,
 				37573F6B24F3123500856B8A /* LexiconManager.swift */,
-				377EAD4924708ACD00B42D30 /* Spliter.swift */,
+				377EAD4924708ACD00B42D30 /* Splitter.swift */,
 				37573F6924F3120300856B8A /* Entry.swift */,
 				37FF2A2C23E8F51500B86C74 /* Candidate.swift */,
 			);
@@ -508,7 +508,7 @@
 				379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */,
 				37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */,
 				374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */,
-				377EAD4A24708ACD00B42D30 /* Spliter.swift in Sources */,
+				377EAD4A24708ACD00B42D30 /* Splitter.swift in Sources */,
 				3748E26923F9F9AF00A37A45 /* KeyButton+Properties.swift in Sources */,
 				37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */,
 				37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */,
