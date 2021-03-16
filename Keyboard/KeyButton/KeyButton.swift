@@ -12,10 +12,8 @@ final class KeyButton: UIButton {
         init(keyboardEvent: KeyboardEvent, viewController: KeyboardViewController) {
                 self.keyboardEvent = keyboardEvent
                 self.viewController = viewController
-                
                 super.init(frame: .zero)
                 backgroundColor = .interactableClear
-                
                 switch keyboardEvent {
                 case .backspace, .shift:
                         setupKeyButtonView()
@@ -29,7 +27,6 @@ final class KeyButton: UIButton {
                         setupKeyButtonView()
                         setupKeyTextLabel()
                 }
-                
                 setupKeyActions()
         }
         
@@ -44,52 +41,16 @@ final class KeyButton: UIButton {
         override var intrinsicContentSize: CGSize {
                 return CGSize(width: width, height: height)
         }
-        
-        private lazy var shapeLayer: CAShapeLayer = {
-                let caLayer: CAShapeLayer = CAShapeLayer()
-                caLayer.shadowOpacity = 0.5
-                caLayer.shadowRadius = 1
-                caLayer.shadowOffset = .zero
-                caLayer.shadowColor = UIColor.black.cgColor
-                caLayer.shouldRasterize = true
-                caLayer.rasterizationScale = UIScreen.main.scale
-                return caLayer
-        }()
-        private lazy var previewLabel: UILabel = UILabel()
+
+        private lazy var isPhonePortrait: Bool = { traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular }()
+
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
                 viewController.hapticFeedback?.impactOccurred()
                 switch keyboardEvent {
                 case .key:
-                        if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
-                                self.previewLabel.text = nil
-                                self.previewLabel.removeFromSuperview()
-                                
-                                let keyWidth: CGFloat = keyButtonView.frame.width
-                                let keyHeight: CGFloat = keyButtonView.frame.height
-                                let bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.origin.x + keyWidth / 2, y: keyButtonView.frame.maxY)
-                                let startPath: UIBezierPath = startBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
-                                let previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
-                                shapeLayer.path = startPath.cgPath
-                                shapeLayer.fillColor = buttonColor.cgColor
-                                
-                                let animation = CABasicAnimation(keyPath: "path")
-                                animation.duration = 0.005
-                                animation.toValue = previewPath.cgPath
-                                animation.fillMode = .forwards
-                                animation.isRemovedOnCompletion = false
-                                animation.timingFunction = CAMediaTimingFunction(name: .default)
-                                shapeLayer.add(animation, forKey: animation.keyPath)
-                                layer.addSublayer(shapeLayer)
-                                
-                                let labelHeight: CGFloat = previewPath.bounds.height - keyHeight - 8
-                                previewLabel = UILabel(frame: CGRect(x: keyButtonView.frame.origin.x - 5, y: keyButtonView.frame.origin.y - labelHeight - 8, width: keyWidth + 10, height: labelHeight))
-                                previewLabel.textAlignment = .center
-                                previewLabel.font = .systemFont(ofSize: 34)
-                                previewLabel.textColor = buttonTintColor
-                                addSubview(previewLabel)
-                                
-                                showPreviewText()
+                        if isPhonePortrait {
+                                displayPreview()
                         } else {
                                 keyButtonView.backgroundColor = highlightButtonColor
                         }
@@ -106,7 +67,6 @@ final class KeyButton: UIButton {
                         break
                 }
         }
-        
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesEnded(touches, with: event)
                 invalidateBackspaceTimers()
@@ -117,7 +77,7 @@ final class KeyButton: UIButton {
                         spaceTouchPoint = .zero
                         changeColorToNormal()
                 case .key:
-                        if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
+                        if isPhonePortrait {
                                 removePreview()
                         } else {
                                 changeColorToNormal()
@@ -157,7 +117,7 @@ final class KeyButton: UIButton {
                         spaceTouchPoint = .zero
                         changeColorToNormal()
                 case .key:
-                        if viewController.traitCollection.userInterfaceIdiom == .phone && viewController.traitCollection.verticalSizeClass == .regular {
+                        if isPhonePortrait {
                                 removePreview()
                         } else {
                                 changeColorToNormal()
@@ -166,18 +126,23 @@ final class KeyButton: UIButton {
                         break
                 }
         }
-        
-        private func changeColorToNormal() {
-                UIView.animate(
-                        withDuration: 0,
-                        delay: 0.03,
-                        animations: {
-                                self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .clear : self.buttonColor
-                        }
-                )
+
+        var slowBackspaceTimer: Timer?
+        var fastBackspaceTimer: Timer?
+        private func invalidateBackspaceTimers() {
+                slowBackspaceTimer?.invalidate()
+                fastBackspaceTimer?.invalidate()
         }
-        
-        private func showPreviewText() {
+        private(set) lazy var performedDraggingOnSpace: Bool = false
+        private lazy var spaceTouchPoint: CGPoint = .zero
+        private lazy var backspaceTouchPoint: CGPoint = .zero
+
+
+        // MARK: - Preview
+
+        private func displayPreview() {
+                layer.addSublayer(shapeLayer)
+                addSubview(previewLabel)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) {
                         self.previewLabel.text = self.keyText
                 }
@@ -189,15 +154,56 @@ final class KeyButton: UIButton {
                         self.shapeLayer.removeFromSuperlayer()
                 }
         }
-        
-        var slowBackspaceTimer: Timer?
-        var fastBackspaceTimer: Timer?
-        private func invalidateBackspaceTimers() {
-                slowBackspaceTimer?.invalidate()
-                fastBackspaceTimer?.invalidate()
+        private func changeColorToNormal() {
+                UIView.animate(withDuration: 0, delay: 0.03) {
+                        self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .clear : self.buttonColor
+                }
         }
-        
-        private(set) lazy var performedDraggingOnSpace: Bool = false
-        private lazy var spaceTouchPoint: CGPoint = .zero
-        private lazy var backspaceTouchPoint: CGPoint = .zero
+        private lazy var shapeLayer: CAShapeLayer = {
+                let layer = CAShapeLayer()
+                layer.shadowOpacity = 0.5
+                layer.shadowRadius = 1
+                layer.shadowOffset = .zero
+                layer.shadowColor = UIColor.black.cgColor
+                layer.shouldRasterize = true
+                layer.rasterizationScale = UIScreen.main.scale
+                layer.path = originPath.cgPath
+                layer.fillColor = buttonColor.cgColor
+                let animation = CABasicAnimation(keyPath: "path")
+                animation.duration = 0.005
+                animation.toValue = previewPath.cgPath
+                animation.fillMode = .forwards
+                animation.isRemovedOnCompletion = false
+                animation.timingFunction = CAMediaTimingFunction(name: .default)
+                layer.add(animation, forKey: animation.keyPath)
+                return layer
+        }()
+        private lazy var previewLabel: UILabel = {
+                let keyWidth: CGFloat = keyButtonView.frame.width
+                let keyHeight: CGFloat = keyButtonView.frame.height
+                let labelHeight: CGFloat = previewPath.bounds.height - keyHeight - 8
+                let originPoint: CGPoint = keyButtonView.frame.origin
+                let label = UILabel(frame: CGRect(x: originPoint.x - 5, y: originPoint.y - labelHeight - 8, width: keyWidth + 10, height: labelHeight))
+                label.textAlignment = .center
+                label.font = .systemFont(ofSize: 34)
+                label.textColor = buttonTintColor
+                return label
+        }()
+}
+
+private extension KeyButton {
+        var originPath: UIBezierPath {
+                let keyWidth: CGFloat = keyButtonView.frame.width
+                let keyHeight: CGFloat = keyButtonView.frame.height
+                let bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.origin.x + keyWidth / 2, y: keyButtonView.frame.maxY)
+                let path: UIBezierPath = startBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
+                return path
+        }
+        var previewPath: UIBezierPath {
+                let keyWidth: CGFloat = keyButtonView.frame.width
+                let keyHeight: CGFloat = keyButtonView.frame.height
+                let bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.origin.x + keyWidth / 2, y: keyButtonView.frame.maxY)
+                let path: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
+                return path
+        }
 }
