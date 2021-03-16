@@ -5,7 +5,7 @@ final class KeyButton: UIButton {
         let keyButtonView: UIView = UIView()
         let keyTextLabel: UILabel = UILabel()
         let keyImageView: UIImageView = UIImageView()
-        
+
         let keyboardEvent: KeyboardEvent
         let viewController: KeyboardViewController
 
@@ -29,15 +29,11 @@ final class KeyButton: UIButton {
                 }
                 setupKeyActions()
         }
-        
-        deinit {
-                invalidateBackspaceTimers()
-        }
-        
+
         required init?(coder: NSCoder) {
                 fatalError("init(coder:) has not been implemented")
         }
-        
+
         override var intrinsicContentSize: CGSize {
                 return CGSize(width: width, height: height)
         }
@@ -133,6 +129,9 @@ final class KeyButton: UIButton {
                 slowBackspaceTimer?.invalidate()
                 fastBackspaceTimer?.invalidate()
         }
+        deinit {
+                invalidateBackspaceTimers()
+        }
         private(set) lazy var performedDraggingOnSpace: Bool = false
         private lazy var spaceTouchPoint: CGPoint = .zero
         private lazy var backspaceTouchPoint: CGPoint = .zero
@@ -141,7 +140,7 @@ final class KeyButton: UIButton {
         // MARK: - Preview
 
         private func displayPreview() {
-                layer.addSublayer(shapeLayer)
+                layer.addSublayer(previewShapeLayer)
                 addSubview(previewLabel)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) {
                         self.previewLabel.text = self.keyText
@@ -151,7 +150,7 @@ final class KeyButton: UIButton {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
                         self.previewLabel.text = nil
                         self.previewLabel.removeFromSuperview()
-                        self.shapeLayer.removeFromSuperlayer()
+                        self.previewShapeLayer.removeFromSuperlayer()
                 }
         }
         private func changeColorToNormal() {
@@ -159,7 +158,7 @@ final class KeyButton: UIButton {
                         self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .clear : self.buttonColor
                 }
         }
-        private lazy var shapeLayer: CAShapeLayer = {
+        private lazy var previewShapeLayer: CAShapeLayer = {
                 let layer = CAShapeLayer()
                 layer.shadowOpacity = 0.5
                 layer.shadowRadius = 1
@@ -167,7 +166,7 @@ final class KeyButton: UIButton {
                 layer.shadowColor = UIColor.black.cgColor
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
-                layer.path = originPath.cgPath
+                layer.path = keyShapePath.cgPath
                 layer.fillColor = buttonColor.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
                 animation.duration = 0.005
@@ -189,21 +188,4 @@ final class KeyButton: UIButton {
                 label.textColor = buttonTintColor
                 return label
         }()
-}
-
-private extension KeyButton {
-        var originPath: UIBezierPath {
-                let keyWidth: CGFloat = keyButtonView.frame.width
-                let keyHeight: CGFloat = keyButtonView.frame.height
-                let bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.origin.x + keyWidth / 2, y: keyButtonView.frame.maxY)
-                let path: UIBezierPath = startBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
-                return path
-        }
-        var previewPath: UIBezierPath {
-                let keyWidth: CGFloat = keyButtonView.frame.width
-                let keyHeight: CGFloat = keyButtonView.frame.height
-                let bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.origin.x + keyWidth / 2, y: keyButtonView.frame.maxY)
-                let path: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
-                return path
-        }
 }
