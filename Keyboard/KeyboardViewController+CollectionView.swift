@@ -98,17 +98,17 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         if currentInputText == "r" + candidate.input {
                                 currentInputText = ""
                         } else {
-                                currentInputText = "r" + currentInputText.dropFirst(candidate.input.count + 1)
+                                currentInputText = "r" + processingText.dropFirst(candidate.input.count + 1)
                         }
                 } else if currentInputText.hasPrefix("v") {
                         if currentInputText == "v" + candidate.input {
                                 currentInputText = ""
                         } else {
-                                currentInputText = "v" + currentInputText.dropFirst(candidate.input.count + 1)
+                                currentInputText = "v" + processingText.dropFirst(candidate.input.count + 1)
                         }
                 } else {
                         candidateSequence.append(candidate)
-                        currentInputText = String(currentInputText.dropFirst(candidate.input.count))
+                        currentInputText = String(processingText.dropFirst(candidate.input.count))
                 }
                 if keyboardLayout == .candidateBoard && currentInputText.isEmpty {
                         collectionView.removeFromSuperview()

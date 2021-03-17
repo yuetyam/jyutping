@@ -47,7 +47,7 @@ extension KeyButton {
                         if viewController.currentInputText.isEmpty {
                                 viewController.textDocumentProxy.insertText("\n")
                         } else {
-                                viewController.textDocumentProxy.insertText(viewController.currentInputText)
+                                viewController.textDocumentProxy.insertText(viewController.processingText)
                                 viewController.currentInputText = ""
                                 if viewController.keyboardLayout == .jyutping(.uppercased) {
                                         viewController.keyboardLayout = .jyutping(.lowercased)
@@ -70,7 +70,7 @@ extension KeyButton {
                 if viewController.currentInputText.isEmpty {
                         viewController.textDocumentProxy.deleteBackward()
                 } else {
-                        viewController.currentInputText = String(viewController.currentInputText.dropLast())
+                        viewController.currentInputText = String(viewController.processingText.dropLast())
                         viewController.candidateSequence = []
                 }
                 AudioFeedback.play(for: .backspace)
@@ -110,13 +110,14 @@ extension KeyButton {
                                 }
                         }
                         let inputText: String = viewController.currentInputText
+                        let processingText: String = viewController.processingText
                         guard !inputText.isEmpty else {
                                 viewController.textDocumentProxy.insertText(" ")
                                 AudioFeedback.play(for: .space)
                                 return
                         }
                         guard let firstCandidate: Candidate = viewController.candidates.first else {
-                                viewController.textDocumentProxy.insertText(inputText)
+                                viewController.textDocumentProxy.insertText(processingText)
                                 AudioFeedback.perform(.modify)
                                 viewController.currentInputText = ""
                                 return
@@ -127,17 +128,17 @@ extension KeyButton {
                                 if inputText.count == (firstCandidate.input.count + 1) {
                                         viewController.currentInputText = ""
                                 } else {
-                                        viewController.currentInputText = "r" + inputText.dropFirst(firstCandidate.input.count + 1)
+                                        viewController.currentInputText = "r" + processingText.dropFirst(firstCandidate.input.count + 1)
                                 }
                         } else if inputText.hasPrefix("v") {
                                 if inputText.count == (firstCandidate.input.count + 1) {
                                         viewController.currentInputText = ""
                                 } else {
-                                        viewController.currentInputText = "v" + inputText.dropFirst(firstCandidate.input.count + 1)
+                                        viewController.currentInputText = "v" + processingText.dropFirst(firstCandidate.input.count + 1)
                                 }
                         } else {
                                 viewController.candidateSequence.append(firstCandidate)
-                                viewController.currentInputText = String(inputText.dropFirst(firstCandidate.input.count))
+                                viewController.currentInputText = String(processingText.dropFirst(firstCandidate.input.count))
                         }
                         if viewController.currentInputText.isEmpty && !viewController.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = viewController.candidateSequence.joined()

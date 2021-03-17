@@ -159,31 +159,23 @@ final class KeyboardViewController: UIInputViewController {
 
         var currentInputText: String = "" {
                 didSet {
-                        inputText = currentInputText
-                }
-        }
-        var inputText: String = "" {
-                didSet {
-                        DispatchQueue.main.async {
-                                self.toolBar.update()
-                        }
-                        processingText = inputText
-                        /*
-                        if inputText.isEmpty || inputText.hasPrefix("v") || inputText.hasPrefix("r") {
-                                processingText = inputText
+                        if currentInputText.isEmpty || currentInputText.hasPrefix("v") || currentInputText.hasPrefix("r") {
+                                processingText = currentInputText
                         } else {
-                                processingText = inputText.replacingOccurrences(of: "vv", with: "4")
+                                processingText = currentInputText.replacingOccurrences(of: "vv", with: "4")
                                         .replacingOccurrences(of: "xx", with: "5")
                                         .replacingOccurrences(of: "qq", with: "6")
                                         .replacingOccurrences(of: "v", with: "1")
                                         .replacingOccurrences(of: "x", with: "2")
                                         .replacingOccurrences(of: "q", with: "3")
                         }
-                        */
                 }
         }
-        var processingText: String = "" {
+        private(set) var processingText: String = "" {
                 didSet {
+                        DispatchQueue.main.async {
+                                self.toolBar.update()
+                        }
                         if let syllables: [String] = Splitter.split(processingText).first {
                                 let splittable: String = syllables.joined()
                                 if splittable.count == processingText.count {
@@ -226,8 +218,8 @@ final class KeyboardViewController: UIInputViewController {
         private(set) var lexiconManager: LexiconManager? = LexiconManager()
         private var engine: Engine? = Engine()
         private func suggestCandidates() {
-                let userdbCandidates: [Candidate] = lexiconManager?.suggest(for: currentInputText) ?? []
-                let engineCandidates: [Candidate] = engine?.suggest(for: currentInputText) ?? []
+                let userdbCandidates: [Candidate] = lexiconManager?.suggest(for: processingText) ?? []
+                let engineCandidates: [Candidate] = engine?.suggest(for: processingText) ?? []
                 let combined: [Candidate] = userdbCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
