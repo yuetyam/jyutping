@@ -21,7 +21,7 @@ extension KeyButton {
                 case .key(let keySeat):
                         let text: String = keySeat.primary.text
                         if viewController.keyboardLayout.isJyutpingMode {
-                                viewController.currentInputText += text
+                                viewController.inputText += text
                         } else {
                                 viewController.textDocumentProxy.insertText(text)
                         }
@@ -33,7 +33,7 @@ extension KeyButton {
                         }
                 case .shadowKey(let text):
                         if viewController.keyboardLayout.isJyutpingMode {
-                                viewController.currentInputText += text
+                                viewController.inputText += text
                         } else {
                                 viewController.textDocumentProxy.insertText(text)
                         }
@@ -44,11 +44,11 @@ extension KeyButton {
                                 viewController.keyboardLayout = .jyutping(.lowercased)
                         }
                 case .newLine:
-                        if viewController.currentInputText.isEmpty {
+                        if viewController.inputText.isEmpty {
                                 viewController.textDocumentProxy.insertText("\n")
                         } else {
                                 viewController.textDocumentProxy.insertText(viewController.processingText)
-                                viewController.currentInputText = ""
+                                viewController.inputText = ""
                                 if viewController.keyboardLayout == .jyutping(.uppercased) {
                                         viewController.keyboardLayout = .jyutping(.lowercased)
                                 }
@@ -67,10 +67,10 @@ extension KeyButton {
                 }
         }
         @objc private func performBackspace() {
-                if viewController.currentInputText.isEmpty {
+                if viewController.inputText.isEmpty {
                         viewController.textDocumentProxy.deleteBackward()
                 } else {
-                        viewController.currentInputText = String(viewController.processingText.dropLast())
+                        viewController.inputText = String(viewController.processingText.dropLast())
                         viewController.candidateSequence = []
                 }
                 AudioFeedback.play(for: .backspace)
@@ -109,7 +109,7 @@ extension KeyButton {
                                         viewController.keyboardLayout = .jyutping(.lowercased)
                                 }
                         }
-                        let inputText: String = viewController.currentInputText
+                        let inputText: String = viewController.inputText
                         let processingText: String = viewController.processingText
                         guard !inputText.isEmpty else {
                                 viewController.textDocumentProxy.insertText(" ")
@@ -119,28 +119,28 @@ extension KeyButton {
                         guard let firstCandidate: Candidate = viewController.candidates.first else {
                                 viewController.textDocumentProxy.insertText(processingText)
                                 AudioFeedback.perform(.modify)
-                                viewController.currentInputText = ""
+                                viewController.inputText = ""
                                 return
                         }
                         viewController.textDocumentProxy.insertText(firstCandidate.text)
                         AudioFeedback.perform(.modify)
                         if inputText.hasPrefix("r") {
                                 if inputText.count == (firstCandidate.input.count + 1) {
-                                        viewController.currentInputText = ""
+                                        viewController.inputText = ""
                                 } else {
-                                        viewController.currentInputText = "r" + processingText.dropFirst(firstCandidate.input.count + 1)
+                                        viewController.inputText = "r" + processingText.dropFirst(firstCandidate.input.count + 1)
                                 }
                         } else if inputText.hasPrefix("v") {
                                 if inputText.count == (firstCandidate.input.count + 1) {
-                                        viewController.currentInputText = ""
+                                        viewController.inputText = ""
                                 } else {
-                                        viewController.currentInputText = "v" + processingText.dropFirst(firstCandidate.input.count + 1)
+                                        viewController.inputText = "v" + processingText.dropFirst(firstCandidate.input.count + 1)
                                 }
                         } else {
                                 viewController.candidateSequence.append(firstCandidate)
-                                viewController.currentInputText = String(processingText.dropFirst(firstCandidate.input.count))
+                                viewController.inputText = String(processingText.dropFirst(firstCandidate.input.count))
                         }
-                        if viewController.currentInputText.isEmpty && !viewController.candidateSequence.isEmpty {
+                        if viewController.inputText.isEmpty && !viewController.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = viewController.candidateSequence.joined()
                                 viewController.candidateSequence = []
                                 viewController.imeQueue.async {

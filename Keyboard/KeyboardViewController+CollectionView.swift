@@ -94,29 +94,29 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 let candidate: Candidate = candidates[indexPath.row]
                 textDocumentProxy.insertText(candidate.text)
                 AudioFeedback.perform(.modify)
-                if currentInputText.hasPrefix("r") {
-                        if currentInputText == "r" + candidate.input {
-                                currentInputText = ""
+                if inputText.hasPrefix("r") {
+                        if inputText == "r" + candidate.input {
+                                inputText = ""
                         } else {
-                                currentInputText = "r" + processingText.dropFirst(candidate.input.count + 1)
+                                inputText = "r" + processingText.dropFirst(candidate.input.count + 1)
                         }
-                } else if currentInputText.hasPrefix("v") {
-                        if currentInputText == "v" + candidate.input {
-                                currentInputText = ""
+                } else if inputText.hasPrefix("v") {
+                        if inputText == "v" + candidate.input {
+                                inputText = ""
                         } else {
-                                currentInputText = "v" + processingText.dropFirst(candidate.input.count + 1)
+                                inputText = "v" + processingText.dropFirst(candidate.input.count + 1)
                         }
                 } else {
                         candidateSequence.append(candidate)
-                        currentInputText = String(processingText.dropFirst(candidate.input.count))
+                        inputText = String(processingText.dropFirst(candidate.input.count))
                 }
-                if keyboardLayout == .candidateBoard && currentInputText.isEmpty {
+                if keyboardLayout == .candidateBoard && inputText.isEmpty {
                         collectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reinit()
                         keyboardLayout = .jyutping(.lowercased)
                 }
-                if currentInputText.isEmpty && !candidateSequence.isEmpty {
+                if inputText.isEmpty && !candidateSequence.isEmpty {
                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                         candidateSequence = []
                         imeQueue.async {

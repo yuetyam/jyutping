@@ -35,7 +35,7 @@ final class ToolBar: UIView {
 
         private var showingToolButtons: Bool = true
         func update() {
-                if viewController.currentInputText.isEmpty {
+                if viewController.inputText.isEmpty {
                         if !showingToolButtons {
                                 setupToolMode()
                                 showingToolButtons = true
@@ -48,7 +48,7 @@ final class ToolBar: UIView {
                 }
         }
         func reinit() {
-                if viewController.currentInputText.isEmpty {
+                if viewController.inputText.isEmpty {
                         setupToolMode()
                         showingToolButtons = true
                 } else {

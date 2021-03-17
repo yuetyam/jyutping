@@ -116,9 +116,9 @@ final class KeyboardViewController: UIInputViewController {
                                 keyboardLayout = respondingKeyboardLayout
                         }
                 }
-                if !textDocumentProxy.hasText && !currentInputText.isEmpty {
+                if !textDocumentProxy.hasText && !inputText.isEmpty {
                         // User just tapped Clear Button in TextField
-                        currentInputText = ""
+                        inputText = ""
                 }
         }
 
@@ -147,22 +147,22 @@ final class KeyboardViewController: UIInputViewController {
                                 return
                         }
                         if !keyboardLayout.isJyutpingMode {
-                                if !currentInputText.isEmpty {
+                                if !inputText.isEmpty {
                                         textDocumentProxy.insertText(processingText)
                                 }
-                                currentInputText = ""
+                                inputText = ""
                         }
                 }
         }
 
         let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInitiated)
 
-        var currentInputText: String = "" {
+        var inputText: String = "" {
                 didSet {
-                        if currentInputText.isEmpty || currentInputText.hasPrefix("v") || currentInputText.hasPrefix("r") {
-                                processingText = currentInputText
+                        if inputText.isEmpty || inputText.hasPrefix("v") || inputText.hasPrefix("r") {
+                                processingText = inputText
                         } else {
-                                processingText = currentInputText.replacingOccurrences(of: "vv", with: "4")
+                                processingText = inputText.replacingOccurrences(of: "vv", with: "4")
                                         .replacingOccurrences(of: "xx", with: "5")
                                         .replacingOccurrences(of: "qq", with: "6")
                                         .replacingOccurrences(of: "v", with: "1")

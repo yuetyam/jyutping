@@ -89,7 +89,7 @@ final class KeyButton: UIButton {
                         guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 8 else { return }
-                        viewController.currentInputText = ""
+                        viewController.inputText = ""
                         let offset: Int = distance > 0 ? 1 : -1
                         viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location
@@ -100,7 +100,7 @@ final class KeyButton: UIButton {
                         guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { return }
-                        viewController.currentInputText = ""
+                        viewController.inputText = ""
                 }
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
