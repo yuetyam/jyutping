@@ -148,13 +148,13 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         if !keyboardLayout.isJyutpingMode {
                                 if !currentInputText.isEmpty {
-                                        textDocumentProxy.insertText(currentInputText)
+                                        textDocumentProxy.insertText(processingText)
                                 }
                                 currentInputText = ""
                         }
                 }
         }
-        
+
         let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInitiated)
 
         var currentInputText: String = "" {
