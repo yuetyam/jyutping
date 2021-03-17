@@ -9,7 +9,7 @@ struct Engine {
                 provider.close()
         }
 
-        func suggest(for text: String) -> [Candidate] {
+        func suggest(for text: String, schemes: [[String]]) -> [Candidate] {
                 guard !text.hasPrefix("r") else {
                         let pinyin: String = String(text.dropFirst())
                         return pinyin.isEmpty ? [] : matchPinyin(for: pinyin)
@@ -33,17 +33,16 @@ struct Engine {
                 case 3:
                         return fetchThreeChars(text)
                 default:
-                        return fetch(for: text)
+                        return fetch(for: text, schemes: schemes)
                 }
         }
-        
+
         private func fetchTwoChars(_ text: String) -> [Candidate] {
                 let exactlyMatched: [Candidate] = match(for: text)
                 let shortcutTwo: [Candidate] = shortcut(for: text)
                 let shortcutFirst: [Candidate] = shortcut(for: String(text.first!))
                 return exactlyMatched + shortcutTwo + shortcutFirst
         }
-        
         private func fetchThreeChars(_ text: String) -> [Candidate] {
                 let exactlyMatched: [Candidate] = match(for: text)
                 let prefixMatches: [Candidate] = prefix(match: text)
@@ -67,16 +66,15 @@ struct Engine {
                 let tail: [Candidate] = shortcutTwo + matchTwoChars + shortcutFirst
                 return head + tail
         }
-        
-        private func fetch(for text: String) -> [Candidate] {
-                let jyutpingsSequences: [[String]] = Splitter.split(text)
-                guard let firstSequence: [String] = jyutpingsSequences.first, !firstSequence.isEmpty else {
+
+        private func fetch(for text: String, schemes: [[String]]) -> [Candidate] {
+                guard let bestScheme: [String] = schemes.first, !bestScheme.isEmpty else {
                         return processUnsplittable(text)
                 }
-                if firstSequence.reduce(0, { $0 + $1.count }) == text.count {
-                        return process(text: text, sequences: jyutpingsSequences)
+                if bestScheme.reduce(0, {$0 + $1.count}) == text.count {
+                        return process(text: text, sequences: schemes)
                 } else {
-                        return processPartial(text: text, sequences: jyutpingsSequences)
+                        return processPartial(text: text, sequences: schemes)
                 }
         }
         

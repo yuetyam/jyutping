@@ -176,7 +176,8 @@ final class KeyboardViewController: UIInputViewController {
                         DispatchQueue.main.async {
                                 self.toolBar.update()
                         }
-                        if let syllables: [String] = Splitter.split(processingText).first {
+                        syllablesSchemes = Splitter.split(processingText)
+                        if let syllables: [String] = syllablesSchemes.first {
                                 let splittable: String = syllables.joined()
                                 if splittable.count == processingText.count {
                                         markedText = syllables.joined(separator: " ")
@@ -203,6 +204,7 @@ final class KeyboardViewController: UIInputViewController {
                         if markedText.isEmpty { textDocumentProxy.unmarkText() }
                 }
         }
+        private lazy var syllablesSchemes: [[String]] = []
 
         lazy var candidateSequence: [Candidate] = []
         
@@ -219,7 +221,7 @@ final class KeyboardViewController: UIInputViewController {
         private var engine: Engine? = Engine()
         private func suggestCandidates() {
                 let userdbCandidates: [Candidate] = lexiconManager?.suggest(for: processingText) ?? []
-                let engineCandidates: [Candidate] = engine?.suggest(for: processingText) ?? []
+                let engineCandidates: [Candidate] = engine?.suggest(for: processingText, schemes: syllablesSchemes) ?? []
                 let combined: [Candidate] = userdbCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
