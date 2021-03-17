@@ -1,6 +1,46 @@
 struct Splitter {
 
+        private static func prepare(text: String) -> (text: String, raw: String, tones: String, syllables: [String]) {
+                let tones: String = text.filter({ $0.isNumber })
+                guard !tones.isEmpty else { return (text, text, tones, []) }
+                var unit: String = ""
+                var syllables: [String] = []
+                for character in text {
+                        unit.append(character)
+                        if character.isNumber {
+                                syllables.append(unit)
+                                unit = ""
+                        }
+                }
+                if !unit.isEmpty {
+                        syllables.append(unit)
+                }
+                let raw: String = text.filter({ !$0.isNumber })
+                return (text, raw, tones, syllables)
+        }
+
         static func split(_ text: String) -> [[String]] {
+                let prepared = prepare(text: text)
+                let schemes: [[String]] = performSplit(text: prepared.raw)
+                return prepared.tones.isEmpty ? schemes : [prepared.syllables]
+                /*
+                let tones: String = prepared.tones
+                guard !tones.isEmpty else { return schemes }
+                guard !schemes.isEmpty else { return [syllables] }
+                let syllables: [String] = prepared.syllables
+                let rawSyllables: [String] = syllables.map({ $0.filter({!$0.isNumber}) })
+                for scheme in schemes {
+                        if scheme.elementsEqual(rawSyllables) {
+                                return [syllables]
+                        } else {
+                                // combine scheme and syllables
+                        }
+                }
+                return []
+                */
+        }
+
+        private static func performSplit(text: String) -> [[String]] {
                 let leadingJyutpings: [String] = splitLeading(text)
                 guard !leadingJyutpings.isEmpty else { return [] }
 
