@@ -23,12 +23,8 @@ struct Engine {
                         return []
                 case 1:
                         switch text {
-                        case "q":
-                                return shortcut(for: "c")
                         case "y":
                                 return shortcut(for: "j")
-                        case "x":
-                                return shortcut(for: "s")
                         default:
                                 return shortcut(for: text)
                         }
