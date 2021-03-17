@@ -7,11 +7,11 @@ enum ShiftStatus {
 }
 
 enum KeyboardLayout: Hashable {
-        case jyutping(ShiftStatus),
-             alphabetic(ShiftStatus),
-
+        case cantonese(ShiftStatus),
              cantoneseNumeric,
              cantoneseSymbolic,
+
+             alphabetic(ShiftStatus),
              numeric,
              symbolic,
 
@@ -23,9 +23,9 @@ enum KeyboardLayout: Hashable {
         
         func keys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
                 switch self {
-                case .jyutping(.lowercased):
+                case .cantonese(.lowercased):
                         return jyutpingKeys(for: viewController)
-                case .jyutping(.uppercased), .jyutping(.capsLocked):
+                case .cantonese(.uppercased), .cantonese(.capsLocked):
                         return jyutpingUppercaseKeys(for: viewController)
                 case .alphabetic(.lowercased):
                         return alphabeticLowercaseKeys(for: viewController)
@@ -57,7 +57,7 @@ enum KeyboardLayout: Hashable {
         
         var isJyutpingMode: Bool {
                 switch self {
-                case .jyutping,
+                case .cantonese,
                      .candidateBoard:
                         return true
                 default:
@@ -165,8 +165,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.jyutping(.lowercased)), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.jyutping(.lowercased)), .space, .newLine]
+                        [.switchTo(.cantonese(.lowercased)), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.cantonese(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -199,8 +199,8 @@ private extension KeyboardLayout {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.jyutping(.lowercased)), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.jyutping(.lowercased)), .space, .newLine]
+                        [.switchTo(.cantonese(.lowercased)), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.cantonese(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }

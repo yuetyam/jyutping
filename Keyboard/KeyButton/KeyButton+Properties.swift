@@ -115,7 +115,7 @@ extension KeyButton {
                         return "123"
                 case .cantoneseSymbolic, .symbolic:
                         return "#+="
-                case .jyutping:
+                case .cantonese:
                         return "拼"
                 case .alphabetic:
                         return "ABC"
@@ -164,11 +164,11 @@ extension KeyButton {
                         return UIImage(systemName: "delete.left")
                 case .shift:
                         switch viewController.keyboardLayout {
-                        case .jyutping(.lowercased), .alphabetic(.lowercased):
+                        case .cantonese(.lowercased), .alphabetic(.lowercased):
                                 return UIImage(systemName: "shift")
-                        case .jyutping(.uppercased), .alphabetic(.uppercased):
+                        case .cantonese(.uppercased), .alphabetic(.uppercased):
                                 return UIImage(systemName: "shift.fill")
-                        case .jyutping(.capsLocked), .alphabetic(.capsLocked):
+                        case .cantonese(.capsLocked), .alphabetic(.capsLocked):
                                 return UIImage(systemName: "capslock.fill")
                         default:
                                 return nil

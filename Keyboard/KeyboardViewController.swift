@@ -122,7 +122,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
 
-        private lazy var respondingKeyboardLayout: KeyboardLayout = .jyutping(.lowercased)
+        private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
 
         var requestedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
@@ -135,11 +135,11 @@ final class KeyboardViewController: UIInputViewController {
                 case .numbersAndPunctuation:
                         return .numeric
                 default:
-                        return .jyutping(.lowercased)
+                        return .cantonese(.lowercased)
                 }
         }
 
-        var keyboardLayout: KeyboardLayout = .jyutping(.lowercased) {
+        var keyboardLayout: KeyboardLayout = .cantonese(.lowercased) {
                 didSet {
                         setupKeyboard()
                         guard didKeyboardEstablished else {
@@ -258,11 +258,11 @@ final class KeyboardViewController: UIInputViewController {
                 case 0:
                         switch keyboardLayout {
                         case .alphabetic(.lowercased):
-                                keyboardLayout = .jyutping(.lowercased)
+                                keyboardLayout = .cantonese(.lowercased)
                         case .alphabetic(.uppercased):
-                                keyboardLayout = .jyutping(.uppercased)
+                                keyboardLayout = .cantonese(.uppercased)
                         case .alphabetic(.capsLocked):
-                                keyboardLayout = .jyutping(.capsLocked)
+                                keyboardLayout = .cantonese(.capsLocked)
                         case .numeric:
                                 keyboardLayout = .cantoneseNumeric
                         case .symbolic:
@@ -272,11 +272,11 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 case 1:
                         switch keyboardLayout {
-                        case .jyutping(.lowercased):
+                        case .cantonese(.lowercased):
                                 keyboardLayout = .alphabetic(.lowercased)
-                        case .jyutping(.uppercased):
+                        case .cantonese(.uppercased):
                                 keyboardLayout = .alphabetic(.uppercased)
-                        case .jyutping(.capsLocked):
+                        case .cantonese(.capsLocked):
                                 keyboardLayout = .alphabetic(.capsLocked)
                         case .cantoneseNumeric:
                                 keyboardLayout = .numeric

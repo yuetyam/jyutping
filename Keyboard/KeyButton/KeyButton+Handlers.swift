@@ -28,8 +28,8 @@ extension KeyButton {
                         if viewController.keyboardLayout == .alphabetic(.uppercased) {
                                 viewController.keyboardLayout = .alphabetic(.lowercased)
                         }
-                        if viewController.keyboardLayout == .jyutping(.uppercased) {
-                                viewController.keyboardLayout = .jyutping(.lowercased)
+                        if viewController.keyboardLayout == .cantonese(.uppercased) {
+                                viewController.keyboardLayout = .cantonese(.lowercased)
                         }
                 case .shadowKey(let text):
                         if viewController.keyboardLayout.isJyutpingMode {
@@ -40,8 +40,8 @@ extension KeyButton {
                         if viewController.keyboardLayout == .alphabetic(.uppercased) {
                                 viewController.keyboardLayout = .alphabetic(.lowercased)
                         }
-                        if viewController.keyboardLayout == .jyutping(.uppercased) {
-                                viewController.keyboardLayout = .jyutping(.lowercased)
+                        if viewController.keyboardLayout == .cantonese(.uppercased) {
+                                viewController.keyboardLayout = .cantonese(.lowercased)
                         }
                 case .newLine:
                         if viewController.inputText.isEmpty {
@@ -49,8 +49,8 @@ extension KeyButton {
                         } else {
                                 viewController.textDocumentProxy.insertText(viewController.processingText)
                                 viewController.inputText = ""
-                                if viewController.keyboardLayout == .jyutping(.uppercased) {
-                                        viewController.keyboardLayout = .jyutping(.lowercased)
+                                if viewController.keyboardLayout == .cantonese(.uppercased) {
+                                        viewController.keyboardLayout = .cantonese(.lowercased)
                                 }
                         }
                 case .switchTo(let layout):
@@ -81,10 +81,10 @@ extension KeyButton {
                 switch touchEvent.tapCount {
                 case 1:
                         switch layout {
-                        case .jyutping(.lowercased):
-                                viewController.keyboardLayout = .jyutping(.uppercased)
-                        case .jyutping(.uppercased), .jyutping(.capsLocked):
-                                viewController.keyboardLayout = .jyutping(.lowercased)
+                        case .cantonese(.lowercased):
+                                viewController.keyboardLayout = .cantonese(.uppercased)
+                        case .cantonese(.uppercased), .cantonese(.capsLocked):
+                                viewController.keyboardLayout = .cantonese(.lowercased)
                         case .alphabetic(.lowercased):
                                 viewController.keyboardLayout = .alphabetic(.uppercased)
                         case .alphabetic(.uppercased), .alphabetic(.capsLocked):
@@ -93,7 +93,7 @@ extension KeyButton {
                                 break
                         }
                 case 2:
-                        viewController.keyboardLayout = layout.isEnglishLayout ? .alphabetic(.capsLocked) : .jyutping(.capsLocked)
+                        viewController.keyboardLayout = layout.isEnglishLayout ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
                 default:
                         break
                 }
@@ -103,10 +103,10 @@ extension KeyButton {
                 guard !performedDraggingOnSpace else { return }
                 let layout: KeyboardLayout = viewController.keyboardLayout
                 switch layout {
-                case .jyutping:
+                case .cantonese:
                         defer {
-                                if layout == .jyutping(.uppercased) {
-                                        viewController.keyboardLayout = .jyutping(.lowercased)
+                                if layout == .cantonese(.uppercased) {
+                                        viewController.keyboardLayout = .cantonese(.lowercased)
                                 }
                         }
                         let inputText: String = viewController.inputText
