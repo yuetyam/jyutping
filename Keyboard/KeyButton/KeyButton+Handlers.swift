@@ -47,7 +47,7 @@ extension KeyButton {
                         if viewController.inputText.isEmpty {
                                 viewController.textDocumentProxy.insertText("\n")
                         } else {
-                                viewController.textDocumentProxy.insertText(viewController.inputText)
+                                viewController.textDocumentProxy.insertText(viewController.processingText)
                                 viewController.inputText = ""
                                 if viewController.keyboardLayout == .cantonese(.uppercased) {
                                         viewController.keyboardLayout = .cantonese(.lowercased)
@@ -117,7 +117,7 @@ extension KeyButton {
                                 return
                         }
                         guard let firstCandidate: Candidate = viewController.candidates.first else {
-                                viewController.textDocumentProxy.insertText(inputText)
+                                viewController.textDocumentProxy.insertText(processingText)
                                 AudioFeedback.perform(.modify)
                                 viewController.inputText = ""
                                 return
