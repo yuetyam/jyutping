@@ -82,9 +82,10 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
+                let comma: KeyboardEvent = KeyboardEvent.key(.cantoneseCommaSeat)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.cantoneseNumeric), .space, .newLine]
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -103,9 +104,10 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
+                let comma: KeyboardEvent = KeyboardEvent.key(.cantoneseCommaSeat)
                 let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, .newLine] :
-                        [.switchTo(.cantoneseNumeric), .space, .newLine]
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }

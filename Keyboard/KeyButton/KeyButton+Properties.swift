@@ -14,7 +14,7 @@ extension KeyButton {
                         return 72
                 case .space:
                         return 180
-                case .key(.periodSeat):
+                case .key(.periodSeat), .key(.cantoneseCommaSeat):
                         return viewController.needsInputModeSwitchKey ? 37 : 33
                 default:
                         return 40

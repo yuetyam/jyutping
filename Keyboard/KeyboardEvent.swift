@@ -22,7 +22,8 @@ struct KeySeat: Hashable {
                 self.keys = keys
         }
 
-        static let periodSeat: KeySeat = KeySeat(primary: .period, keys: [.comma, .dotCOM, .dotORG, .dotIO])
+        static let periodSeat: KeySeat = KeySeat(primary: .period, keys: [.comma, .questionMark, .exclamationMark])
+        static let cantoneseCommaSeat: KeySeat = KeySeat(primary: .cantoneseComma, keys: [.cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark])
 }
 
 struct KeyElement: Hashable {
@@ -55,9 +56,13 @@ struct KeyElement: Hashable {
 
         static let period: KeyElement = KeyElement(text: ".")
         static let comma: KeyElement = KeyElement(text: ",")
-        static let dotCOM: KeyElement = KeyElement(text: ".com")
-        static let dotORG: KeyElement = KeyElement(text: ".org")
-        static let dotIO: KeyElement = KeyElement(text: ".io")
+        static let questionMark: KeyElement = KeyElement(text: "?")
+        static let exclamationMark: KeyElement = KeyElement(text: "!")
+
+        static let cantonesePeriod: KeyElement = KeyElement(text: "。")
+        static let cantoneseComma: KeyElement = KeyElement(text: "，")
+        static let cantoneseQuestionMark: KeyElement = KeyElement(text: "？")
+        static let cantoneseExclamationMark: KeyElement = KeyElement(text: "！")
 }
 
 enum Alignment {
