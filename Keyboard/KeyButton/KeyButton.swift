@@ -191,7 +191,7 @@ final class KeyButton: UIButton {
         private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
         private lazy var keyWidth: CGFloat = keyButtonView.frame.width
         private lazy var keyHeight: CGFloat = keyButtonView.frame.height
-        private lazy var bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.origin.x + keyWidth / 2, y: keyButtonView.frame.maxY)
+        private lazy var bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.midX, y: keyButtonView.frame.maxY)
 }
 
 final class CalloutKeyView: UIView {
