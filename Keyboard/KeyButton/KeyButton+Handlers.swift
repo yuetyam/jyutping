@@ -18,6 +18,14 @@ extension KeyButton {
         }
         @objc private func handleTap() {
                 switch keyboardEvent {
+                case .key(.cantoneseCommaSeat):
+                        if viewController.inputText.isEmpty {
+                                viewController.textDocumentProxy.insertText("，")
+                        } else {
+                                let text: String = viewController.processingText + "，"
+                                viewController.inputText = ""
+                                viewController.textDocumentProxy.insertText(text)
+                        }
                 case .key(let keySeat):
                         let text: String = keySeat.primary.text
                         if viewController.keyboardLayout.isJyutpingMode {
