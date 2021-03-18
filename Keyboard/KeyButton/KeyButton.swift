@@ -179,9 +179,10 @@ final class KeyButton: UIButton {
                 return layer
         }()
         private lazy var previewLabel: UILabel = {
-                let labelHeight: CGFloat = previewPath.bounds.height - keyHeight - 8
-                let originPoint: CGPoint = keyButtonView.frame.origin
-                let label = UILabel(frame: CGRect(x: originPoint.x - 5, y: originPoint.y - labelHeight - 8, width: keyWidth + 10, height: labelHeight))
+                let preview = previewPath.bounds
+                let height: CGFloat = preview.height - keyHeight - 8
+                let frame = CGRect(origin: preview.origin, size: CGSize(width: preview.width, height: height))
+                let label = UILabel(frame: frame)
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: 34)
                 label.textColor = buttonTintColor
@@ -212,7 +213,7 @@ final class CalloutKeyView: UIView {
                 self.alignments = alignments
                 self.isDarkAppearance = isDarkAppearance
                 super.init(frame: frame)
-                layer.cornerRadius = 3
+                layer.cornerRadius = 5
                 layer.cornerCurve = .continuous
                 setupHeader()
                 setupFooter()
@@ -221,6 +222,9 @@ final class CalloutKeyView: UIView {
         required init?(coder: NSCoder) {
                 fatalError("init(coder:) has not been implemented")
         }
+
+        override var intrinsicContentSize: CGSize { return CGSize(width: 40, height: 40) }
+
         private func setupHeader() {
                 let headerLabel: UILabel = UILabel()
                 addSubview(headerLabel)
