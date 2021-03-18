@@ -68,7 +68,7 @@ extension KeyButton {
                 //        +   |       |   +
                 //        +---A---o-------+
 
-                let expansionWidth: CGFloat = keyWidth / 2.5
+                let expansionWidth: CGFloat = keyWidth / 2.7
                 let curveDistance: CGFloat = expansionWidth * 1.5
                 let controlDistance: CGFloat = curveDistance / 3
 
@@ -138,7 +138,7 @@ extension KeyButton {
                 //        +   |       |   +
                 //        +---A---o-------+
 
-                let expansionWidth: CGFloat = keyWidth / 2.5
+                let expansionWidth: CGFloat = keyWidth / 2.7
                 let curveDistance: CGFloat = expansionWidth * 1.5
                 let controlDistance: CGFloat = curveDistance / 3
                 let maxWidth: CGFloat = keyWidth + (expansionWidth * 2)
@@ -215,7 +215,7 @@ extension KeyButton {
                 //                                  +   |       |   +
                 //                                  +---A---o-------+
 
-                let expansionWidth: CGFloat = keyWidth / 2.5
+                let expansionWidth: CGFloat = keyWidth / 2.7
                 let curveDistance: CGFloat = expansionWidth * 1.5
                 let controlDistance: CGFloat = curveDistance / 3
                 let maxWidth: CGFloat = keyWidth + (expansionWidth * 2)
