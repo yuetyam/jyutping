@@ -87,7 +87,7 @@ struct Engine {
         }
         private func process(text: String, sequences: [[String]]) -> [Candidate] {
                 let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.joined()) }
-                let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 25000 }
+                let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 27183 }
                 guard candidates.count > 1 && candidates[0].input.count != text.count else {
                         return candidates
                 }
@@ -113,7 +113,7 @@ struct Engine {
         }
         private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
                 let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.joined()) }
-                var combine: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 20000 }
+                var combine: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 27183 }
                 guard !combine.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
                 }
