@@ -175,14 +175,19 @@ private extension Engine {
         func match(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(text.code);"
+                let digits: String = text.filter({ $0.isNumber })
+                let isToneless: Bool = digits.isEmpty
+                let ping: String = isToneless ? text : text.filter({ !$0.isNumber })
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
-                                candidates.append(candidate)
+                                if isToneless || digits == jyutping.filter({ $0.isNumber }) {
+                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                        candidates.append(candidate)
+                                }
                         }
                 }
                 sqlite3_finalize(queryStatement)
@@ -191,14 +196,19 @@ private extension Engine {
         func matchWithLimitCount(for text: String, count: Int) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(text.code) LIMIT \(count);"
+                let digits: String = text.filter({ $0.isNumber })
+                let isToneless: Bool = digits.isEmpty
+                let ping: String = isToneless ? text : text.filter({ !$0.isNumber })
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.code) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
-                                candidates.append(candidate)
+                                if isToneless || digits == jyutping.filter({ $0.isNumber }) {
+                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                        candidates.append(candidate)
+                                }
                         }
                 }
                 sqlite3_finalize(queryStatement)
@@ -207,15 +217,20 @@ private extension Engine {
         func matchWithRanking(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT rowid, word, jyutping FROM jyutpingtable WHERE ping = \(text.code);"
+                let digits: String = text.filter({ $0.isNumber })
+                let isToneless: Bool = digits.isEmpty
+                let ping: String = isToneless ? text : text.filter({ !$0.isNumber })
+                let queryString = "SELECT rowid, word, jyutping FROM jyutpingtable WHERE ping = \(ping.code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word, ranking: rowid)
-                                candidates.append(candidate)
+                                if isToneless || digits == jyutping.filter({ $0.isNumber }) {
+                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word, ranking: rowid)
+                                        candidates.append(candidate)
+                                }
                         }
                 }
                 sqlite3_finalize(queryStatement)
