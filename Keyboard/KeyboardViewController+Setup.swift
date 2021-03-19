@@ -128,22 +128,15 @@ extension KeyboardViewController {
         
         
         // MARK: - SettingsView
-        
+
         private func setupSettingsView() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
-                
-                let extend: CGFloat = {
-                        if traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .compact {
-                                return 50
-                        } else {
-                                return 120
-                        }
-                }()
-                
+
+                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 50
                 // FIXME: - Unable to simultaneously satisfy constraints
-                settingsView.heightAnchor.constraint(equalToConstant: height + extend).isActive = true
-                
+                settingsView.heightAnchor.constraint(equalToConstant: extended).isActive = true
+
                 let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 6, bottomInset: 6, leftInset: 15, rightInset: 55)
                 settingsView.addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
@@ -155,7 +148,7 @@ extension KeyboardViewController {
                 )
                 upArrowButton.tintColor = isDarkAppearance ? .white : .black
                 upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .touchUpInside)
-                
+
                 settingsView.addSubview(settingsTableView)
                 settingsTableView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(
@@ -164,14 +157,14 @@ extension KeyboardViewController {
                          settingsTableView.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
                          settingsTableView.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor)]
                 )
-                
+
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
                 keyboardLayout = requestedKeyboardLayout
         }
-        
-        
+
+
         // MARK: - Make Keys
         
         private func makeKeysRows(for eventsRows: [[KeyboardEvent]]) -> [UIStackView] {
