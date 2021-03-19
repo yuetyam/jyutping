@@ -134,7 +134,7 @@ private struct CangjieReverseLookup: View {
 }
 private struct PinyinReverseLookup: View {
         private let content: String = """
-                以 r 開始，再輸入拼音即可
+                以 r 開始，再輸入普拼即可
                 例如輸入 rcha 就會出「查」等
                 候選詞會帶顯示對應嘅粵拼
                 """
