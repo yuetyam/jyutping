@@ -23,9 +23,10 @@ struct Splitter {
                 let prepared = prepare(text: text)
                 let schemes: [[String]] = performSplit(text: prepared.raw)
                 guard !prepared.tones.isEmpty else { return schemes }
-                guard !schemes.isEmpty else { return [prepared.syllables] }
 
                 let blocks: [String] = prepared.syllables
+                guard !schemes.isEmpty else { return sequences(for: blocks) }
+
                 var checked: [String] = []
                 for block in blocks {
                         let isToneless: Bool = !(block.last!.isNumber)
@@ -47,7 +48,14 @@ struct Splitter {
                         checked.append(contentsOf: splits.dropLast())
                         checked.append(last)
                 }
-                return [checked]
+                return sequences(for: checked)
+        }
+        private static func sequences(for blocks: [String]) -> [[String]] {
+                var schemes: [[String]] = []
+                for number in 0..<blocks.count {
+                        schemes.append(blocks.dropLast(number))
+                }
+                return schemes
         }
 
         private static func performSplit(text: String) -> [[String]] {
