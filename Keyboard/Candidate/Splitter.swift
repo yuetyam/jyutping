@@ -22,22 +22,32 @@ struct Splitter {
         static func split(_ text: String) -> [[String]] {
                 let prepared = prepare(text: text)
                 let schemes: [[String]] = performSplit(text: prepared.raw)
-                return prepared.tones.isEmpty ? schemes : [prepared.syllables]
-                /*
-                let tones: String = prepared.tones
-                guard !tones.isEmpty else { return schemes }
-                guard !schemes.isEmpty else { return [syllables] }
-                let syllables: [String] = prepared.syllables
-                let rawSyllables: [String] = syllables.map({ $0.filter({!$0.isNumber}) })
-                for scheme in schemes {
-                        if scheme.elementsEqual(rawSyllables) {
-                                return [syllables]
-                        } else {
-                                // combine scheme and syllables
+                guard !prepared.tones.isEmpty else { return schemes }
+                guard !schemes.isEmpty else { return [prepared.syllables] }
+
+                let blocks: [String] = prepared.syllables
+                var checked: [String] = []
+                for block in blocks {
+                        let isToneless: Bool = !(block.last!.isNumber)
+                        let raw = isToneless ? block : String(block.dropLast())
+                        guard !Splitter.syllables.contains(raw) else {
+                                checked.append(block)
+                                continue
                         }
+                        let splits: [String] = Splitter.performSplit(text: raw).first ?? []
+                        guard !splits.isEmpty else {
+                                checked.append(block)
+                                continue
+                        }
+                        guard !isToneless else {
+                                checked.append(contentsOf: splits)
+                                continue
+                        }
+                        let last: String = splits.last! + String(block.last!)
+                        checked.append(contentsOf: splits.dropLast())
+                        checked.append(last)
                 }
-                return []
-                */
+                return [checked]
         }
 
         private static func performSplit(text: String) -> [[String]] {
