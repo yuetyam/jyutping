@@ -57,6 +57,10 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 default:
                         cell.footnoteLabel.text = candidates[indexPath.row].jyutping
                 }
+
+                // REASON: In some apps (like QQ), may not showing the correct default colors
+                cell.textLabel.textColor = isDarkAppearance ? .white : .black
+
                 return cell
         }
         private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
