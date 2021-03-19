@@ -9,12 +9,12 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 switch section {
                 case 0:
-                        // Characters / Logogram / Fonts
-                        return 4
-                case 1:
                         // Audio Feedback & Haptic Feedback
                         // iPad does not support haptic feedback
                         return traitCollection.userInterfaceIdiom == .phone ? 2 : 1
+                case 1:
+                        // Characters / Logogram / Fonts
+                        return 4
                 case 2:
                         // Jyutping Display
                         return 3
@@ -31,7 +31,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
                 switch section {
-                case 0:
+                case 1:
                         return NSLocalizedString("Characters", comment: "")
                 case 2:
                         return NSLocalizedString("Jyutping Display", comment: "")
@@ -46,7 +46,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
         func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
                 switch section {
-                case 1:
+                case 0:
                         guard traitCollection.userInterfaceIdiom == .phone else { return nil }
                         if hasFullAccess {
                                 return nil
@@ -61,26 +61,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 switch indexPath.section {
                 case 0:
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                switch indexPath.row {
-                                case 0:
-                                        cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
-                                        cell.accessoryType = (logogram == 0 || logogram == 1) ? .checkmark : .none
-                                case 1:
-                                        cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: "")
-                                        cell.accessoryType = logogram == 2 ? .checkmark : .none
-                                case 2:
-                                        cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: "")
-                                        cell.accessoryType = logogram == 3 ? .checkmark : .none
-                                case 3:
-                                        cell.textLabel?.text = NSLocalizedString("Simplified", comment: "")
-                                        cell.accessoryType = logogram == 4 ? .checkmark : .none
-                                default:
-                                        cell.textLabel?.text = "__error__"
-                                }
-                                return cell
-                        }
-                case 1:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as? SwitchTableViewCell {
                                 switch indexPath.row {
                                 case 0:
@@ -98,6 +78,26 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                                 cell.textLabel?.isEnabled = false
                                                 cell.isUserInteractionEnabled = false
                                         }
+                                default:
+                                        cell.textLabel?.text = "__error__"
+                                }
+                                return cell
+                        }
+                case 1:
+                        if let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell {
+                                switch indexPath.row {
+                                case 0:
+                                        cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
+                                        cell.accessoryType = (logogram == 0 || logogram == 1) ? .checkmark : .none
+                                case 1:
+                                        cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: "")
+                                        cell.accessoryType = logogram == 2 ? .checkmark : .none
+                                case 2:
+                                        cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: "")
+                                        cell.accessoryType = logogram == 3 ? .checkmark : .none
+                                case 3:
+                                        cell.textLabel?.text = NSLocalizedString("Simplified", comment: "")
+                                        cell.accessoryType = logogram == 4 ? .checkmark : .none
                                 default:
                                         cell.textLabel?.text = "__error__"
                                 }
@@ -155,7 +155,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 switch indexPath.section {
-                case 0:
+                case 1:
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
