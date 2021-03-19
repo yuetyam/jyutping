@@ -133,7 +133,7 @@ extension KeyboardViewController {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
 
-                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 50
+                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 120
                 // FIXME: - Unable to simultaneously satisfy constraints
                 settingsView.heightAnchor.constraint(equalToConstant: extended).isActive = true
 
