@@ -849,7 +849,7 @@
 			repositoryURL = "https://github.com/ososoio/OpenCCLite.git";
 			requirement = {
 				kind = exactVersion;
-				version = 0.1.0;
+				version = 0.1.1;
 			};
 		};
 		377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */ = {
@@ -873,7 +873,7 @@
 			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
 			requirement = {
 				kind = exactVersion;
-				version = 0.1.0;
+				version = 0.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
