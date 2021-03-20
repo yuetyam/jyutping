@@ -73,7 +73,8 @@ extension KeyboardViewController {
         func setupEmojiKeyboard() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
-                emojiBoard.heightAnchor.constraint(equalToConstant: height + 50).isActive = true
+                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 50
+                emojiBoard.heightAnchor.constraint(equalToConstant: extended).isActive = true
                 emojiBoard.addSubview(emojiCollectionView)
                 emojiCollectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([

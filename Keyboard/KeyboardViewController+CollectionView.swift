@@ -91,7 +91,6 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 guard collectionView == candidateCollectionView else {
                         textDocumentProxy.insertText(String(Emoji.emojis[indexPath.section][indexPath.row]))
                         hapticFeedback?.impactOccurred()
-                        AudioFeedback.perform(.input)
                         return
                 }
 
