@@ -1,17 +1,17 @@
 import UIKit
 
-enum ShiftStatus {
+enum ShiftState {
         case lowercased,
              uppercased,
              capsLocked
 }
 
 enum KeyboardLayout: Hashable {
-        case cantonese(ShiftStatus),
+        case cantonese(ShiftState),
              cantoneseNumeric,
              cantoneseSymbolic,
 
-             alphabetic(ShiftStatus),
+             alphabetic(ShiftState),
              numeric,
              symbolic,
 
