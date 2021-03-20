@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B631423E96E1000912B9A /* AudioFeedback.swift */; };
 		370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37211D5723541EE3007E1D68 /* AppDelegate.swift */; };
+		370E369E2605DF0F003BC0CD /* JyutpingDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 370E369D2605DF0F003BC0CD /* JyutpingDataProvider */; };
+		370E36A12605DF46003BC0CD /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 370E36A02605DF46003BC0CD /* JyutpingProvider */; };
 		3715176E25DD123B00F4EA95 /* String+code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715176D25DD123B00F4EA95 /* String+code.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
 		37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D5D23541EE4007E1D68 /* Assets.xcassets */; };
@@ -41,7 +43,6 @@
 		377EAD4A24708ACD00B42D30 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Splitter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
 		377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4E2471129000B42D30 /* EnhancedTextField.swift */; };
-		3784A8CF25FDF1C100C68356 /* JyutpingDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3784A8CE25FDF1C100C68356 /* JyutpingDataProvider */; };
 		379568292600471700F7A642 /* KeyButton+Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379568282600471700F7A642 /* KeyButton+Bubble.swift */; };
 		379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */; };
 		379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */; };
@@ -60,7 +61,6 @@
 		37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F923E4BAA000E413BD /* KeyboardEvent.swift */; };
 		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
 		37E1874F24CB766900602C03 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1874E24CB766900602C03 /* InitialsTable.swift */; };
-		37E8B41D25FDD3B60039D3FD /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37E8B41C25FDD3B60039D3FD /* JyutpingProvider */; };
 		37F1C028235C3EB700CDDA31 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F1C027235C3EB700CDDA31 /* AboutView.swift */; };
 		37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA443423A8510A001E7DBC /* ColorExtension.swift */; };
 		37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF2A2C23E8F51500B86C74 /* Candidate.swift */; };
@@ -93,6 +93,8 @@
 
 /* Begin PBXFileReference section */
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
+		370E369C2605DF04003BC0CD /* JyutpingDataProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingDataProvider; path = ../JyutpingDataProvider; sourceTree = "<group>"; };
+		370E369F2605DF38003BC0CD /* JyutpingProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingProvider; path = ../JyutpingProvider; sourceTree = "<group>"; };
 		3715176D25DD123B00F4EA95 /* String+code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+code.swift"; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,7 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37E8B41D25FDD3B60039D3FD /* JyutpingProvider in Frameworks */,
+				370E36A12605DF46003BC0CD /* JyutpingProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +184,7 @@
 			files = (
 				3742A50625F9AFBA009D5CBB /* OpenCCLite in Frameworks */,
 				377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */,
-				3784A8CF25FDF1C100C68356 /* JyutpingDataProvider in Frameworks */,
+				370E369E2605DF0F003BC0CD /* JyutpingDataProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +194,8 @@
 		37211D4B23541EE3007E1D68 = {
 			isa = PBXGroup;
 			children = (
+				370E369F2605DF38003BC0CD /* JyutpingProvider */,
+				370E369C2605DF04003BC0CD /* JyutpingDataProvider */,
 				37211D5623541EE3007E1D68 /* Jyutping */,
 				37AE5BED2354AAF8008A8E4B /* Keyboard */,
 				37211D5523541EE3007E1D68 /* Products */,
@@ -367,7 +371,7 @@
 			);
 			name = Jyutping;
 			packageProductDependencies = (
-				37E8B41C25FDD3B60039D3FD /* JyutpingProvider */,
+				370E36A02605DF46003BC0CD /* JyutpingProvider */,
 			);
 			productName = Jyutping;
 			productReference = 37211D5423541EE3007E1D68 /* Jyutping.app */;
@@ -389,7 +393,7 @@
 			packageProductDependencies = (
 				377AF92825DEDB0A00EED1FD /* BLAKE3 */,
 				3742A50525F9AFBA009D5CBB /* OpenCCLite */,
-				3784A8CE25FDF1C100C68356 /* JyutpingDataProvider */,
+				370E369D2605DF0F003BC0CD /* JyutpingDataProvider */,
 			);
 			productName = Keyboard;
 			productReference = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */;
@@ -429,8 +433,6 @@
 			packageReferences = (
 				377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */,
 				3742A50425F9AFBA009D5CBB /* XCRemoteSwiftPackageReference "OpenCCLite" */,
-				37E8B41B25FDD3B60039D3FD /* XCRemoteSwiftPackageReference "JyutpingProvider" */,
-				3784A8CD25FDF1C100C68356 /* XCRemoteSwiftPackageReference "JyutpingDataProvider" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
 			projectDirPath = "";
@@ -860,25 +862,17 @@
 				version = 0.1.0;
 			};
 		};
-		3784A8CD25FDF1C100C68356 /* XCRemoteSwiftPackageReference "JyutpingDataProvider" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ososoio/JyutpingDataProvider.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.0;
-			};
-		};
-		37E8B41B25FDD3B60039D3FD /* XCRemoteSwiftPackageReference "JyutpingProvider" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ososoio/JyutpingProvider.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		370E369D2605DF0F003BC0CD /* JyutpingDataProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JyutpingDataProvider;
+		};
+		370E36A02605DF46003BC0CD /* JyutpingProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JyutpingProvider;
+		};
 		3742A50525F9AFBA009D5CBB /* OpenCCLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3742A50425F9AFBA009D5CBB /* XCRemoteSwiftPackageReference "OpenCCLite" */;
@@ -888,16 +882,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */;
 			productName = BLAKE3;
-		};
-		3784A8CE25FDF1C100C68356 /* JyutpingDataProvider */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3784A8CD25FDF1C100C68356 /* XCRemoteSwiftPackageReference "JyutpingDataProvider" */;
-			productName = JyutpingDataProvider;
-		};
-		37E8B41C25FDD3B60039D3FD /* JyutpingProvider */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 37E8B41B25FDD3B60039D3FD /* XCRemoteSwiftPackageReference "JyutpingProvider" */;
-			productName = JyutpingProvider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
