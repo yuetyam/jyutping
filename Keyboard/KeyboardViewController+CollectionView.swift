@@ -59,7 +59,9 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
 
                 // REASON: In some apps (like QQ), may not showing the correct default colors
-                cell.textLabel.textColor = isDarkAppearance ? .white : .black
+                let textColor: UIColor = isDarkAppearance ? .white : .black
+                cell.textLabel.textColor = textColor
+                cell.footnoteLabel.textColor = jyutpingDisplay == 3 ? .clear : textColor
 
                 return cell
         }
