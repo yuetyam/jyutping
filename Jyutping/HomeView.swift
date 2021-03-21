@@ -59,10 +59,12 @@ private struct GuideView: View {
                                 Spacer()
                         }
                         HStack {
-                                enableKeyboard.fixedSize(horizontal: false, vertical: true)
+                                enableKeyboard
+                                        .lineSpacing(5)
+                                        .fixedSize(horizontal: false, vertical: true)
                                 Spacer()
                         }
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 5)
                 }
                 .padding()
                 .fillBackground()
@@ -99,10 +101,11 @@ private struct InputTones: View {
                         HStack {
                                 Text(content)
                                         .font(.system(.body, design: .monospaced))
+                                        .lineSpacing(5)
                                         .fixedSize(horizontal: false, vertical: true)
                                 Spacer()
                         }
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 5)
                 }
                 .padding()
                 .fillBackground()
@@ -122,10 +125,12 @@ private struct CangjieReverseLookup: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content).fixedSize(horizontal: false, vertical: true)
+                                Text(content)
+                                        .lineSpacing(6)
+                                        .fixedSize(horizontal: false, vertical: true)
                                 Spacer()
                         }
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 6)
                 }
                 .padding()
                 .fillBackground()
@@ -145,10 +150,12 @@ private struct PinyinReverseLookup: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content).fixedSize(horizontal: false, vertical: true)
+                                Text(content)
+                                        .lineSpacing(6)
+                                        .fixedSize(horizontal: false, vertical: true)
                                 Spacer()
                         }
-                        .padding(.vertical, 4)
+                        .padding(.vertical, 6)
                 }
                 .padding()
                 .fillBackground()
