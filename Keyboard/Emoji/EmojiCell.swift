@@ -37,7 +37,7 @@ final class EmojiCell: UICollectionViewCell {
         private func displayPreview() {
                 layer.addSublayer(previewShapeLayer)
                 addSubview(previewLabel)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) {
                         self.previewLabel.text = self.emojiLabel.text
                 }
         }
@@ -59,7 +59,7 @@ final class EmojiCell: UICollectionViewCell {
                 layer.path = originPath.cgPath
                 layer.fillColor =  traitCollection.userInterfaceStyle == .dark ? UIColor.gray.cgColor : UIColor.white.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
-                animation.duration = 0.01
+                animation.duration = 0.005
                 animation.toValue = previewPath.cgPath
                 animation.fillMode = .forwards
                 animation.isRemovedOnCompletion = false
