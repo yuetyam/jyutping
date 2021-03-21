@@ -30,7 +30,9 @@ struct HomeView: View {
 
                                         InputTones().padding(.top)
                                         CangjieReverseLookup()
-                                        PinyinReverseLookup().padding(.bottom, 50)
+                                        PinyinReverseLookup()
+                                        PeriodShortcut()
+                                                .padding(.bottom, 50)
                                 }
                                 .navigationBarTitle(Text("Home"))
                         }
@@ -147,6 +149,30 @@ private struct PinyinReverseLookup: View {
                 VStack {
                         HStack {
                                 Text("用普通話拼音反查粵拼").font(.headline)
+                                Spacer()
+                        }
+                        HStack {
+                                Text(content)
+                                        .lineSpacing(6)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                Spacer()
+                        }
+                        .padding(.vertical, 6)
+                }
+                .padding()
+                .fillBackground()
+                .padding()
+        }
+}
+private struct PeriodShortcut: View {
+        private let content: String = """
+                雙擊空格鍵 (space)
+                即可輸入句號「。」
+                """
+        var body: some View {
+                VStack {
+                        HStack {
+                                Text("快捷輸入句號").font(.headline)
                                 Spacer()
                         }
                         HStack {
