@@ -1,7 +1,7 @@
 import UIKit
 
 extension KeyButton {
-        
+
         func setupKeyActions() {
                 switch keyboardEvent {
                 case .backspace, .shadowBackspace:
@@ -9,7 +9,7 @@ extension KeyButton {
                 case .shift:
                         addTarget(self, action: #selector(handleShift(sender:event:)), for: .touchUpInside)
                 case .space:
-                        addTarget(self, action: #selector(handleSpace), for: .touchUpInside)
+                        addTarget(self, action: #selector(handleSpace(sender:event:)), for: .touchUpInside)
                 case .none:
                         break
                 default:
@@ -107,7 +107,20 @@ extension KeyButton {
                 }
                 AudioFeedback.play(for: self.keyboardEvent)
         }
-        @objc private func handleSpace() {
+        @objc private func handleSpace(sender: UIButton, event: UIEvent) {
+                guard let touchEvent: UITouch = event.allTouches?.first else { return }
+                switch touchEvent.tapCount {
+                case 2:
+                        guard viewController.inputText.isEmpty else { return }
+                        viewController.textDocumentProxy.deleteBackward()
+                        let text: String = viewController.keyboardLayout.isEnglishLayout ? ". " : "。"
+                        viewController.textDocumentProxy.insertText(text)
+                        AudioFeedback.perform(.input)
+                default:
+                        tapOnSpace()
+                }
+        }
+        private func tapOnSpace() {
                 guard !performedDraggingOnSpace else { return }
                 let layout: KeyboardLayout = viewController.keyboardLayout
                 switch layout {
