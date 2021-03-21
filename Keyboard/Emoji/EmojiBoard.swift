@@ -52,18 +52,18 @@ final class EmojiBoard: UIView {
                                 return "flame"
                         }
                 }()
-                // let indicator_0: Indicator = Indicator(index: 0, imageName: "clock")
-                let indicator_1: Indicator = Indicator(index: 0, imageName: imageName_0)
-                let indicator_2: Indicator = Indicator(index: 1, imageName: "tortoise")
-                let indicator_3: Indicator = Indicator(index: 2, imageName: imageName_3) // fix: hamburger
-                let indicator_4: Indicator = Indicator(index: 3, imageName: "circle") // fix: football
-                let indicator_5: Indicator = Indicator(index: 4, imageName: "car")
-                let indicator_6: Indicator = Indicator(index: 5, imageName: "lightbulb")
-                let indicator_7: Indicator = Indicator(index: 6, imageName: "number.circle")
-                let indicator_8: Indicator = Indicator(index: 7, imageName: "flag")
+                let indicator_0: Indicator = Indicator(index: 0, imageName: "clock")
+                let indicator_1: Indicator = Indicator(index: 1, imageName: imageName_0)
+                let indicator_2: Indicator = Indicator(index: 2, imageName: "tortoise")
+                let indicator_3: Indicator = Indicator(index: 3, imageName: imageName_3) // fix: hamburger
+                let indicator_4: Indicator = Indicator(index: 4, imageName: "circle") // fix: football
+                let indicator_5: Indicator = Indicator(index: 5, imageName: "car")
+                let indicator_6: Indicator = Indicator(index: 6, imageName: "lightbulb")
+                let indicator_7: Indicator = Indicator(index: 7, imageName: "number.circle")
+                let indicator_8: Indicator = Indicator(index: 8, imageName: "flag")
                 
                 indicatorsStackView.distribution = .fillProportionally
-                indicatorsStackView.addMultipleArrangedSubviews([indicator_1, indicator_2, indicator_3, indicator_4, indicator_5, indicator_6, indicator_7, indicator_8])
+                indicatorsStackView.addMultipleArrangedSubviews([indicator_0, indicator_1, indicator_2, indicator_3, indicator_4, indicator_5, indicator_6, indicator_7, indicator_8])
                 addSubview(indicatorsStackView)
                 indicatorsStackView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([

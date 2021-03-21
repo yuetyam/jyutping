@@ -380,4 +380,13 @@ final class KeyboardViewController: UIInputViewController {
         func updateToneStyle() {
                 toneStyle = UserDefaults.standard.integer(forKey: "tone_style")
         }
+
+        private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? ""
+        func updateFrequentEmojis(latest emoji: String) {
+                let combined: String = emoji + frequentEmojis
+                let uniqued: [String] = combined.map({ String($0)} ).deduplicated()
+                let updated: [String] = uniqued.count < 31 ? uniqued : uniqued.dropLast(uniqued.count - 30)
+                frequentEmojis = updated.joined()
+                UserDefaults.standard.set(frequentEmojis, forKey: "emoji_frequent")
+        }
 }

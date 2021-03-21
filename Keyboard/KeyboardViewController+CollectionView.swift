@@ -6,7 +6,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 if collectionView == candidateCollectionView {
                         return 1
                 } else {
-                        return 8
+                        return 9
                 }
         }
         
@@ -15,14 +15,15 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return candidates.count
                 } else {
                         switch section {
-                        case 0: return 454  // Smileys & People
-                        case 1: return 199  // Animals & Nature
-                        case 2: return 123  // Food & Drink
-                        case 3: return 117  // Activity
-                        case 4: return 128  // Travel & Places
-                        case 5: return 217  // Objects
-                        case 6: return 290  // Symbols
-                        case 7: return 259  // Flags
+                        case 0: return frequentEmojis.count
+                        case 1: return 454  // Smileys & People
+                        case 2: return 199  // Animals & Nature
+                        case 3: return 123  // Food & Drink
+                        case 4: return 117  // Activity
+                        case 5: return 128  // Travel & Places
+                        case 6: return 217  // Objects
+                        case 7: return 290  // Symbols
+                        case 8: return 259  // Flags
                         default: return 0
                         }
                 }
@@ -33,7 +34,15 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         guard let cell: EmojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmojiCell", for: indexPath) as? EmojiCell else {
                                 return UICollectionViewCell()
                         }
-                        cell.emojiLabel.text = String(Emoji.emojis[indexPath.section][indexPath.row])
+                        switch indexPath.section {
+                        case 0:
+                                let start: String.Index = frequentEmojis.startIndex
+                                let index: String.Index = frequentEmojis.index(start, offsetBy: indexPath.row)
+                                cell.emojiLabel.text = String(frequentEmojis[index])
+                        default:
+                                let emoji: Character = Emoji.emojis[indexPath.section - 1][indexPath.row]
+                                cell.emojiLabel.text = String(emoji)
+                        }
                         return cell
                 }
 
@@ -91,8 +100,20 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 guard collectionView == candidateCollectionView else {
-                        textDocumentProxy.insertText(String(Emoji.emojis[indexPath.section][indexPath.row]))
+                        let emoji: String = {
+                                switch indexPath.section {
+                                case 0:
+                                        let start: String.Index = frequentEmojis.startIndex
+                                        let index: String.Index = frequentEmojis.index(start, offsetBy: indexPath.row)
+                                        return String(frequentEmojis[index])
+                                default:
+                                        let character: Character = Emoji.emojis[indexPath.section - 1][indexPath.row]
+                                        return String(character)
+                                }
+                        }()
+                        textDocumentProxy.insertText(emoji)
                         hapticFeedback?.impactOccurred()
+                        updateFrequentEmojis(latest: emoji)
                         return
                 }
 
