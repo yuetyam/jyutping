@@ -112,6 +112,11 @@ extension KeyButton {
                 switch touchEvent.tapCount {
                 case 2:
                         guard viewController.inputText.isEmpty else { return }
+                        guard let isSpaceAhead: Bool = viewController.textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
+                                viewController.textDocumentProxy.insertText(" ")
+                                AudioFeedback.perform(.input)
+                                return
+                        }
                         viewController.textDocumentProxy.deleteBackward()
                         let text: String = viewController.keyboardLayout.isEnglishLayout ? ". " : "。"
                         viewController.textDocumentProxy.insertText(text)
