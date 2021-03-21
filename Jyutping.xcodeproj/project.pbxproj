@@ -259,10 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				3741063523E30DA800639EF4 /* CandidateBoard.swift */,
-				379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */,
 				3741062C23E2191200639EF4 /* CandidateCell.swift */,
-				379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */,
-				377AF90925DE328F00EED1FD /* Emoji.swift */,
 				3715203323B22ACF007EAB60 /* ToolBar.swift */,
 				3741063323E30D7100639EF4 /* ToolButton.swift */,
 				3722B850250129F900E33ADB /* NumberPadButtons.swift */,
@@ -295,6 +292,16 @@
 			path = KeyButton;
 			sourceTree = "<group>";
 		};
+		37923B2D26071128000F5413 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */,
+				379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */,
+				377AF90925DE328F00EED1FD /* Emoji.swift */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
 		3798ACFF2358157C00FF1EEE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +322,7 @@
 				377EAD4B24708D5000B42D30 /* Candidate */,
 				3791975724FA43DC00F9D946 /* KeyButton */,
 				3741063223E30D3200639EF4 /* Components */,
+				37923B2D26071128000F5413 /* Emoji */,
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,

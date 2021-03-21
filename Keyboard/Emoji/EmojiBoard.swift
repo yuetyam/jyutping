@@ -2,7 +2,7 @@ import UIKit
 
 final class EmojiBoard: UIView {
 
-        let bottomStackView: UIStackView = UIStackView()
+        private let bottomStackView: UIStackView = UIStackView()
         let indicatorsStackView: UIStackView = UIStackView()
 
         init(viewController: KeyboardViewController) {
