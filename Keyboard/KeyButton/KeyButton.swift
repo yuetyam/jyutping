@@ -88,8 +88,11 @@ final class KeyButton: UIButton {
                 if keyboardEvent == .space {
                         guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
-                        guard abs(distance) > 8 else { return }
+                        guard abs(distance) > 10 else { return }
+
+                        // FIXME: Dragging in input text
                         viewController.inputText = ""
+
                         let offset: Int = distance > 0 ? 1 : -1
                         viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location
