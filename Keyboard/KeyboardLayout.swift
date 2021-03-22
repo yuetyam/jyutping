@@ -21,12 +21,22 @@ enum KeyboardLayout: Hashable {
              candidateBoard,
              settingsView
         
-        func keys(needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func keys(needsInputModeSwitchKey: Bool, arrangement: Int = 1) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
-                        return cantoneseLowercasedKeys(needsInputModeSwitchKey)
+                        switch arrangement {
+                        case 2:
+                                return saamPingLowercasedKeys(needsInputModeSwitchKey)
+                        default:
+                                return cantoneseLowercasedKeys(needsInputModeSwitchKey)
+                        }
                 case .cantonese(.uppercased), .cantonese(.capsLocked):
-                        return cantoneseUppercasedKeys(needsInputModeSwitchKey)
+                        switch arrangement {
+                        case 2:
+                                return saamPingUppercasedKeys(needsInputModeSwitchKey)
+                        default:
+                                return cantoneseUppercasedKeys(needsInputModeSwitchKey)
+                        }
                 case .alphabetic(.lowercased):
                         return alphabeticLowercasedKeys(needsInputModeSwitchKey)
                 case .alphabetic(.uppercased), .alphabetic(.capsLocked):
@@ -82,7 +92,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = KeyboardEvent.key(.cantoneseCommaSeat)
+                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
@@ -104,10 +114,60 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = KeyboardEvent.key(.cantoneseCommaSeat)
+                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
+                eventRows.append(bottomEvents)
+                return eventRows
+        }
+        func saamPingLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+                let arrayTextArray: [[String]] = [
+                        ["aa", "w", "e", "eo", "t", "yu", "u", "i", "o", "p"],
+                        ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+                        ["z", "oe", "c", "ng", "b", "n", "m"]
+                ]
+                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
+                eventRows[1].insert(.shadowKey("a"), at: 0)
+                eventRows[1].insert(.shadowKey("a"), at: 0)
+                eventRows[1].append(.shadowKey("l"))
+                eventRows[1].append(.shadowKey("l"))
+                eventRows[2].insert(.shift, at: 0)
+                eventRows[2].insert(.shadowKey("z"), at: 1)
+                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.backspace)
+                let gwKey: KeySeat = KeySeat(primary: KeyElement(text: "gw"), children: [.cantoneseComma, .cantoneseExclamationMark])
+                let kwKey: KeySeat = KeySeat(primary: KeyElement(text: "kw"), children: [.cantoneseQuestionMark, .cantonesePeriod])
+                let gw: KeyboardEvent = .key(gwKey)
+                let kw: KeyboardEvent = .key(kwKey)
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, gw, .space, kw, .newLine] :
+                        [.switchTo(.cantoneseNumeric), gw, .space, kw, .newLine]
+                eventRows.append(bottomEvents)
+                return eventRows
+        }
+        func saamPingUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+                let arrayTextArray: [[String]] = [
+                        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+                        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+                        ["Z", "X", "C", "V", "B", "N", "M"]
+                ]
+                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
+                eventRows[1].insert(.shadowKey("A"), at: 0)
+                eventRows[1].insert(.shadowKey("A"), at: 0)
+                eventRows[1].append(.shadowKey("L"))
+                eventRows[1].append(.shadowKey("L"))
+                eventRows[2].insert(.shift, at: 0)
+                eventRows[2].insert(.shadowKey("Z"), at: 1)
+                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.backspace)
+                let gwKey: KeySeat = KeySeat(primary: KeyElement(text: "GW"), children: [.cantoneseComma, .cantoneseExclamationMark])
+                let kwKey: KeySeat = KeySeat(primary: KeyElement(text: "KW"), children: [.cantoneseQuestionMark, .cantonesePeriod])
+                let gw: KeyboardEvent = .key(gwKey)
+                let kw: KeyboardEvent = .key(kwKey)
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, gw, .space, kw, .newLine] :
+                        [.switchTo(.cantoneseNumeric), gw, .space, kw, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -126,7 +186,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = KeyboardEvent.key(.periodSeat)
+                let period: KeyboardEvent = .key(.periodSeat)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
@@ -148,7 +208,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = KeyboardEvent.key(.periodSeat)
+                let period: KeyboardEvent = .key(.periodSeat)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
