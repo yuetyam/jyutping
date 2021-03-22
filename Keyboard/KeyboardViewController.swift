@@ -301,7 +301,24 @@ final class KeyboardViewController: UIInputViewController {
                 AudioFeedback.perform(.modify)
                 keyboardLayout = .emoji
         }
-        
+
+
+        // MARK: - Settings
+
+        /// 鍵盤佈局
+        ///
+        /// 0: The key "keyboard_layout" doesn‘t exist.
+        ///
+        /// 1: 粵拼 全鍵盤 QWERT
+        ///
+        /// 2: 粵拼 三拼
+        ///
+        /// 3: 粵拼 九宮格十鍵（未實現）
+        private(set) lazy var arrangement: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
+        func updateArrangement() {
+                arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
+        }
+
         /// 候選詞字形
         ///
         /// 0: The key "logogram" doesn‘t exist.
