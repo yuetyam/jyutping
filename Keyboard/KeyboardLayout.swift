@@ -21,24 +21,24 @@ enum KeyboardLayout: Hashable {
              candidateBoard,
              settingsView
         
-        func keys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func keys(needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
-                        return jyutpingKeys(for: viewController)
+                        return cantoneseLowercasedKeys(needsInputModeSwitchKey)
                 case .cantonese(.uppercased), .cantonese(.capsLocked):
-                        return jyutpingUppercaseKeys(for: viewController)
+                        return cantoneseUppercasedKeys(needsInputModeSwitchKey)
                 case .alphabetic(.lowercased):
-                        return alphabeticLowercaseKeys(for: viewController)
+                        return alphabeticLowercasedKeys(needsInputModeSwitchKey)
                 case .alphabetic(.uppercased), .alphabetic(.capsLocked):
-                        return alphabeticUppercaseKeys(for: viewController)
+                        return alphabeticUppercasedKeys(needsInputModeSwitchKey)
                 case .cantoneseNumeric:
-                        return cantoneseNumericKeys(for: viewController)
+                        return cantoneseNumericKeys(needsInputModeSwitchKey)
                 case .cantoneseSymbolic:
-                        return cantoneseSymbolicKeys(for: viewController)
+                        return cantoneseSymbolicKeys(needsInputModeSwitchKey)
                 case .numeric:
-                        return numericKeys(for: viewController)
+                        return numericKeys(needsInputModeSwitchKey)
                 case .symbolic:
-                        return symbolicKeys(for: viewController)
+                        return symbolicKeys(needsInputModeSwitchKey)
                 default:
                         return []
                 }
@@ -67,7 +67,7 @@ enum KeyboardLayout: Hashable {
 }
 
 private extension KeyboardLayout {
-        func jyutpingKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func cantoneseLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -83,13 +83,13 @@ private extension KeyboardLayout {
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = KeyboardEvent.key(.cantoneseCommaSeat)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func jyutpingUppercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func cantoneseUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -105,13 +105,13 @@ private extension KeyboardLayout {
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = KeyboardEvent.key(.cantoneseCommaSeat)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func alphabeticLowercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func alphabeticLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -127,13 +127,13 @@ private extension KeyboardLayout {
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = KeyboardEvent.key(.periodSeat)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func alphabeticUppercaseKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func alphabeticUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -149,13 +149,13 @@ private extension KeyboardLayout {
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = KeyboardEvent.key(.periodSeat)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func cantoneseNumericKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func cantoneseNumericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"],
@@ -166,13 +166,13 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantonese(.lowercased)), .switchInputMethod, .space, .newLine] :
                         [.switchTo(.cantonese(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func numericKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func numericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""],
@@ -183,13 +183,13 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.alphabetic(.lowercased)), .switchInputMethod, .space, .newLine] :
                         [.switchTo(.alphabetic(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func cantoneseSymbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func cantoneseSymbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="],
                         ["_", "—", "＼", "｜", "～", "《", "》", "¥", "&", "\u{00B7}"],
@@ -200,13 +200,13 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantonese(.lowercased)), .switchInputMethod, .space, .newLine] :
                         [.switchTo(.cantonese(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func symbolicKeys(for viewController: UIInputViewController) -> [[KeyboardEvent]] {
+        func symbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
@@ -217,7 +217,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = viewController.needsInputModeSwitchKey ?
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.alphabetic(.lowercased)), .switchInputMethod, .space, .newLine] :
                         [.switchTo(.alphabetic(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
