@@ -15,15 +15,18 @@ enum KeyboardEvent: Hashable {
 struct KeySeat: Hashable {
 
         let primary: KeyElement
-        let keys: [KeyElement]
+        let children: [KeyElement]
 
-        init(primary: KeyElement, keys: [KeyElement] = []) {
+        init(primary: KeyElement, children: [KeyElement] = []) {
                 self.primary = primary
-                self.keys = keys
+                self.children = children
         }
 
-        static let periodSeat: KeySeat = KeySeat(primary: .period, keys: [.comma, .questionMark, .exclamationMark])
-        static let cantoneseCommaSeat: KeySeat = KeySeat(primary: .cantoneseComma, keys: [.cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark])
+        static let periodSeat: KeySeat = KeySeat(primary: .period, children: [.comma, .questionMark, .exclamationMark])
+        static let cantoneseCommaSeat: KeySeat = {
+                let separator: KeyElement = KeyElement(text: "\u{0027}", header: "分隔")
+                return KeySeat(primary: .cantoneseComma, children: [.cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark, separator])
+        }()
 }
 
 struct KeyElement: Hashable {
@@ -36,7 +39,7 @@ struct KeyElement: Hashable {
         init(text: String,
              header: String? = nil,
              footer: String? = nil,
-             alignments: (header: Alignment, footer: Alignment) = (header: .right, footer: .center)) {
+             alignments: (header: Alignment, footer: Alignment) = (header: .center, footer: .center)) {
                 self.text = text
                 self.header = header
                 self.footer = footer
