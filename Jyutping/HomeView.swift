@@ -18,7 +18,7 @@ struct HomeView: View {
                                 GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 ScrollView {
                                         EnhancedTextField(placeholder: placeholder, text: $cacheText)
-                                                .padding(8)
+                                                .padding(10)
                                                 .fillBackground()
                                                 .padding()
                                         /*

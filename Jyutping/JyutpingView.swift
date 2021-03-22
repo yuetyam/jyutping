@@ -27,8 +27,8 @@ struct JyutpingView: View {
                                         HStack {
                                                 Image(systemName: "magnifyingglass").opacity(0.5).padding(.leading, 8)
                                                 EnhancedTextField(placeholder: placeholder, text: $inputText, returnKey: .search)
-                                                        .padding(.vertical, 8)
-                                                        .frame(maxHeight: 38)
+                                                        .padding(.vertical, 10)
+                                                        .frame(maxHeight: 42)
                                         }
                                         .fillBackground()
                                         .padding()
