@@ -67,10 +67,10 @@ extension KeyButton {
         var styledFont: UIFont {
                 // Font sizes reference: https://www.iosfontsizes.com
                 switch keyboardEvent {
-                case .key:
+                case .key(let seat):
                         if viewController.traitCollection.userInterfaceIdiom == .pad {
                                 if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
-                                        return .systemFont(ofSize: 24)
+                                        return seat.primary.text.count > 1 ? .systemFont(ofSize: 20) : .systemFont(ofSize: 24)
                                 } else {
                                         if UIScreen.main.bounds.width > UIScreen.main.bounds.height {
                                                 return .systemFont(ofSize: 30)
@@ -79,7 +79,7 @@ extension KeyButton {
                                         }
                                 }
                         } else {
-                                return .systemFont(ofSize: 24)
+                                return seat.primary.text.count > 1 ? .systemFont(ofSize: 20) : .systemFont(ofSize: 24)
                         }
                 default:
                         if viewController.traitCollection.userInterfaceIdiom == .pad {
