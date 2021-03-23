@@ -12,6 +12,10 @@ English
 "Traditional, Taiwan" = "Traditional, Taiwan";
 "Simplified" = "Simplified";
 
+"Keyboard Layout" = "Keyboard Layout";
+"QWERTY" = "QWERTY";
+"SaamPing" = "SaamPing (三拼)";
+
 "Jyutping Display" = "Jyutping Display";
 "Above Candidates" = "Above Candidates";
 "Below Candidates" = "Below Candidates";
