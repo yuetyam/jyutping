@@ -20,8 +20,8 @@ enum KeyboardLayout: Hashable {
              decimalPad,
              candidateBoard,
              settingsView
-        
-        func keys(needsInputModeSwitchKey: Bool, arrangement: Int = 1) -> [[KeyboardEvent]] {
+
+        func keys(needsInputModeSwitchKey: Bool, arrangement: Int) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
                         switch arrangement {
@@ -53,7 +53,7 @@ enum KeyboardLayout: Hashable {
                         return []
                 }
         }
-        
+
         var isEnglishLayout: Bool {
                 switch self {
                 case .alphabetic,
@@ -64,7 +64,7 @@ enum KeyboardLayout: Hashable {
                         return false
                 }
         }
-        
+
         var isJyutpingMode: Bool {
                 switch self {
                 case .cantonese,

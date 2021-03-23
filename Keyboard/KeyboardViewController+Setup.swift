@@ -32,7 +32,8 @@ extension KeyboardViewController {
                         toolBar.pasteButton.tintColor = .systemGray
                 }
                 keyboardStackView.addArrangedSubview(toolBar)
-                let keysRows: [UIStackView] = makeKeysRows(for: layout.keys(needsInputModeSwitchKey: self.needsInputModeSwitchKey))
+                let keys: [[KeyboardEvent]] = layout.keys(needsInputModeSwitchKey: needsInputModeSwitchKey, arrangement: arrangement)
+                let keysRows: [UIStackView] = makeKeysRows(for: keys)
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
                 toolBar.yueEngSwitch.selectedSegmentIndex = keyboardLayout.isEnglishLayout ? 1 : 0
         }

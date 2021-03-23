@@ -47,6 +47,7 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.dataSource = self
                 settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")                
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "CharactersTableViewCell")
+                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "KeyboardLayoutTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "JyutpingTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
@@ -309,7 +310,7 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 0: The key "keyboard_layout" doesn‘t exist.
         ///
-        /// 1: 粵拼 全鍵盤 QWERT
+        /// 1: 粵拼 全鍵盤 QWERTY
         ///
         /// 2: 粵拼 三拼
         ///

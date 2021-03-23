@@ -3,7 +3,7 @@ import UIKit
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         
         func numberOfSections(in tableView: UITableView) -> Int {
-                5
+                6
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -16,12 +16,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         // Characters / Logogram / Fonts
                         return 4
                 case 2:
+                        // Keyboard Arrangement ("keyboard_layout")
+                        return 2
+                case 3:
                         // Jyutping Display
                         return 3
-                case 3:
+                case 4:
                         // Jyutping Tones Display
                         return 4
-                case 4:
+                case 5:
                         // Clear User Lexicon
                         return 1
                 default:
@@ -34,10 +37,12 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 1:
                         return NSLocalizedString("Characters", comment: "")
                 case 2:
-                        return NSLocalizedString("Jyutping Display", comment: "")
+                        return NSLocalizedString("Keyboard Layout", comment: "")
                 case 3:
-                        return NSLocalizedString("Jyutping Tones Display", comment: "")
+                        return NSLocalizedString("Jyutping Display", comment: "")
                 case 4:
+                        return NSLocalizedString("Jyutping Tones Display", comment: "")
+                case 5:
                         // Zero-width space
                         return "\u{200B}"
                 default:
@@ -88,7 +93,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 switch indexPath.row {
                                 case 0:
                                         cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
-                                        cell.accessoryType = (logogram == 0 || logogram == 1) ? .checkmark : .none
+                                        cell.accessoryType = (logogram < 2) ? .checkmark : .none
                                 case 1:
                                         cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: "")
                                         cell.accessoryType = logogram == 2 ? .checkmark : .none
@@ -104,11 +109,25 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 return cell
                         }
                 case 2:
+                        if let cell = tableView.dequeueReusableCell(withIdentifier: "KeyboardLayoutTableViewCell", for: indexPath) as? NormalTableViewCell {
+                                switch indexPath.row {
+                                case 0:
+                                        cell.textLabel?.text = NSLocalizedString("QWERTY", comment: "")
+                                        cell.accessoryType = (arrangement < 2) ? .checkmark : .none
+                                case 1:
+                                        cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
+                                        cell.accessoryType = arrangement == 2 ? .checkmark : .none
+                                default:
+                                        cell.textLabel?.text = "__error__"
+                                }
+                                return cell
+                        }
+                case 3:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "JyutpingTableViewCell", for: indexPath) as? NormalTableViewCell {
                                 switch indexPath.row {
                                 case 0:
                                         cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: "")
-                                        cell.accessoryType = (jyutpingDisplay == 0 || jyutpingDisplay == 1) ? .checkmark : .none
+                                        cell.accessoryType = (jyutpingDisplay < 2) ? .checkmark : .none
                                 case 1:
                                         cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: "")
                                         cell.accessoryType = jyutpingDisplay == 2 ? .checkmark : .none
@@ -120,12 +139,12 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 }
                                 return cell
                         }
-                case 3:
+                case 4:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell {
                                 switch indexPath.row {
                                 case 0:
                                         cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: "")
-                                        cell.accessoryType = (toneStyle == 0 || toneStyle == 1) ? .checkmark : .none
+                                        cell.accessoryType = (toneStyle < 2) ? .checkmark : .none
                                 case 1:
                                         cell.textLabel?.text = NSLocalizedString("No Tones : jyut ping", comment: "")
                                         cell.accessoryType = (toneStyle == 2) ? .checkmark : .none
@@ -140,7 +159,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 }
                                 return cell
                         }
-                case 4:
+                case 5:
                         if let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell {
                                 cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: "")
                                 cell.textLabel?.textColor = .systemRed
@@ -169,12 +188,27 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        updateConverter()
                         hapticFeedback?.impactOccurred()
+                        updateConverter()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
                 case 2:
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        switch indexPath.row {
+                        case 0:
+                                UserDefaults.standard.set(1, forKey: "keyboard_layout")
+                        case 1:
+                                UserDefaults.standard.set(2, forKey: "keyboard_layout")
+                        default:
+                                break
+                        }
+                        hapticFeedback?.impactOccurred()
+                        updateArrangement()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                tableView.reloadData()
+                        }
+                case 3:
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
@@ -186,12 +220,12 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        updateJyutpingDisplay()
                         hapticFeedback?.impactOccurred()
+                        updateJyutpingDisplay()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 3:
+                case 4:
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
@@ -205,12 +239,12 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        updateToneStyle()
                         hapticFeedback?.impactOccurred()
+                        updateToneStyle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4:
+                case 5:
                         imeQueue.async {
                                 self.lexiconManager?.deleteAll()
                         }
