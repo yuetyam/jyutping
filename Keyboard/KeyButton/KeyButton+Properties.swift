@@ -99,8 +99,7 @@ extension KeyButton {
                 case .key(let keySeat):
                         return keySeat.primary.text
                 case .space:
-                        let cantonese: String = viewController.arrangement == 2 ? "粵拼\u{30FB}三拼" : "粵拼"
-                        return viewController.keyboardLayout.isEnglishLayout ? "English" : cantonese
+                        return viewController.keyboardLayout.isEnglishLayout ? "English" : "粵拼"
                 case .switchTo(let destinationLayout):
                         return keyText(for: destinationLayout)
                 case .newLine:
