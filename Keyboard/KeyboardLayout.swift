@@ -136,13 +136,10 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let gwKey: KeySeat = KeySeat(primary: KeyElement(text: "gw"), children: [.cantoneseComma, .cantoneseExclamationMark])
-                let kwKey: KeySeat = KeySeat(primary: KeyElement(text: "kw"), children: [.cantoneseQuestionMark, .cantonesePeriod])
-                let gw: KeyboardEvent = .key(gwKey)
-                let kw: KeyboardEvent = .key(kwKey)
+                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, gw, .space, kw, .newLine] :
-                        [.switchTo(.cantoneseNumeric), gw, .space, kw, .newLine]
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
@@ -161,13 +158,10 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let gwKey: KeySeat = KeySeat(primary: KeyElement(text: "GW"), children: [.cantoneseComma, .cantoneseExclamationMark])
-                let kwKey: KeySeat = KeySeat(primary: KeyElement(text: "KW"), children: [.cantoneseQuestionMark, .cantonesePeriod])
-                let gw: KeyboardEvent = .key(gwKey)
-                let kw: KeyboardEvent = .key(kwKey)
+                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, gw, .space, kw, .newLine] :
-                        [.switchTo(.cantoneseNumeric), gw, .space, kw, .newLine]
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
