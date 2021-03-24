@@ -12,13 +12,22 @@ extension KeyButton {
                         addTarget(self, action: #selector(handleSpace(sender:event:)), for: .touchUpInside)
                 case .none:
                         break
+                case .key(.cantoneseCommaSeat):
+                        addTarget(self, action: #selector(handleLongPress), for: .touchDown)
+                        addTarget(self, action: #selector(handleTap), for: .touchUpInside)
                 default:
                         addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+                }
+        }
+        @objc private func handleLongPress() {
+                longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { timer in
+                        self.displayCallout()
                 }
         }
         @objc private func handleTap() {
                 switch keyboardEvent {
                 case .key(.cantoneseCommaSeat):
+                        guard textToInput == nil else { return }
                         if viewController.inputText.isEmpty {
                                 viewController.textDocumentProxy.insertText("，")
                         } else {
