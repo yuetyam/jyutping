@@ -102,26 +102,32 @@ final class KeyButton: UIButton {
         }
         private(set) lazy var textToInput: String? = nil
         private lazy var distances: [CGFloat] = {
-                let leftest: CGFloat = bubblePath.bounds.minX
-                let rightest: CGFloat = bubblePath.bounds.maxX
-                let origin: CGFloat = isRightBubble ? leftest : rightest
-                let marks: [CGFloat] = calloutKeys.map({ $0.frame.midX })
-                let steps: [CGFloat] = marks.map({ $0 - origin })
-                let max: CGFloat = bubblePath.bounds.width
-                let maxStep: CGFloat = isRightBubble ? max : -max
-                return steps + [maxStep]
+                let max: CGFloat = calloutStackView.bounds.width
+                var blocks: [CGFloat] = []
+                let count: Int = calloutKeys.count
+                let step: CGFloat = max / CGFloat(count)
+                for number in 0..<count {
+                        let length: CGFloat = step * CGFloat(number)
+                        blocks.append(length)
+                }
+                blocks.append(max)
+                return blocks
         }()
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)
                 switch keyboardEvent {
                 case .key(.cantoneseCommaSeat):
                         guard let location: CGPoint = touches.first?.location(in: viewController.view) else { return }
-                        let distance: CGFloat = location.x - bottomCenter.x
+                        let distance: CGFloat = location.x - self.frame.midX
                         for index in 0..<(distances.count - 1) {
-                                if (distances[index] < distance) && (distance < distances[index + 1]) {
+                                let rightCondition: Bool = (distances[index] < distance) && (distance < distances[index + 1])
+                                let leftCondition: Bool = (distances[index] < -distance) && (-distance < distances[index + 1])
+                                let condition: Bool = isRightBubble ? rightCondition : leftCondition
+                                if condition {
+                                        let this: Int = isRightBubble ? index : (calloutKeys.count - 1 - index)
                                         _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
-                                        calloutKeys[index].backgroundColor = selectionColor
-                                        textToInput = calloutKeys[index].text
+                                        calloutKeys[this].backgroundColor = selectionColor
+                                        textToInput = calloutKeys[this].text
                                 }
                         }
                 case .space:
@@ -254,7 +260,7 @@ final class KeyButton: UIButton {
                                 let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, alignments: element.alignments)
                                 keys.append(callout)
                         }
-                        return keys
+                        return isRightBubble ? keys : keys.reversed()
                 default:
                         return []
                 }
@@ -270,7 +276,7 @@ final class KeyButton: UIButton {
                 calloutLayer.removeFromSuperlayer()
         }
         private lazy var calloutStackView: UIStackView = {
-                let expansion = isRightBubble ? (keyButtonView.bounds.minX - bubblePath.bounds.minX) : (bubblePath.bounds.maxX - keyButtonView.bounds.maxX)
+                let expansion = isRightBubble ? (keyButtonView.bounds.minX - bubblePath.bounds.minX) : (bubblePath.bounds.maxX - keyButtonView.bounds.maxX - 5)
                 let width = bubblePath.bounds.width - (expansion * 2)
                 let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
                 let size = CGSize(width: width, height: keyHeight)
