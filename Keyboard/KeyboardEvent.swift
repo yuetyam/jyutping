@@ -22,10 +22,10 @@ struct KeySeat: Hashable {
                 self.children = children
         }
 
-        static let periodSeat: KeySeat = KeySeat(primary: .period, children: [.comma, .questionMark, .exclamationMark])
+        static let periodSeat: KeySeat = KeySeat(primary: .period, children: [.period, .comma, .questionMark, .exclamationMark])
         static let cantoneseCommaSeat: KeySeat = {
                 let separator: KeyElement = KeyElement(text: "\u{0027}", header: "分隔")
-                return KeySeat(primary: .cantoneseComma, children: [.cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark, separator])
+                return KeySeat(primary: .cantoneseComma, children: [.cantoneseComma, .cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark, separator])
         }()
 }
 

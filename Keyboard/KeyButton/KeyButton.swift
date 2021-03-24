@@ -252,10 +252,12 @@ final class KeyButton: UIButton {
         private lazy var calloutKeys: [CalloutView] = {
                 switch keyboardEvent {
                 case .key(let seat):
-                        let primaryKey = CalloutView(text: seat.primary.text, header: seat.primary.header, footer: seat.primary.footer, alignments: seat.primary.alignments)
-                        primaryKey.backgroundColor = selectionColor
-                        var keys: [CalloutView] = [primaryKey]
-                        for index in 0..<seat.children.count {
+                        guard !seat.children.isEmpty else { return [] }
+                        let firstChild: KeyElement = seat.children.first!
+                        let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, alignments: firstChild.alignments)
+                        firstKey.backgroundColor = selectionColor
+                        var keys: [CalloutView] = [firstKey]
+                        for index in 1..<seat.children.count {
                                 let element: KeyElement = seat.children[index]
                                 let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, alignments: element.alignments)
                                 keys.append(callout)
