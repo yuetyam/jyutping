@@ -43,6 +43,7 @@ final class KeyButton: UIButton {
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
                 viewController.hapticFeedback?.impactOccurred()
+                textToInput = nil
                 switch keyboardEvent {
                 case .key:
                         if isPhonePortrait {
@@ -65,27 +66,65 @@ final class KeyButton: UIButton {
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesEnded(touches, with: event)
-                invalidateBackspaceTimers()
+                invalidateTimers()
                 switch keyboardEvent {
                 case .backspace, .newLine:
                         changeColorToNormal()
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
-                case .key:
+                case .key(let seat):
                         if isPhonePortrait {
                                 removePreview()
+                                removeCallout()
                         } else {
                                 changeColorToNormal()
+                        }
+                        if seat == .cantoneseCommaSeat {
+                                if let text: String = textToInput {
+                                        if text == "'" {
+                                                viewController.inputText += text
+                                        } else if viewController.inputText.isEmpty {
+                                                viewController.textDocumentProxy.insertText(text)
+                                        } else {
+                                                let combined: String = viewController.processingText + text
+                                                viewController.inputText = ""
+                                                viewController.textDocumentProxy.insertText(combined)
+                                        }
+                                        AudioFeedback.perform(.input)
+                                        viewController.hapticFeedback?.impactOccurred()
+                                }
                         }
                 default:
                         break
                 }
                 viewController.hapticFeedback?.prepare()
         }
+        private(set) lazy var textToInput: String? = nil
+        private lazy var distances: [CGFloat] = {
+                let leftest: CGFloat = bubblePath.bounds.minX
+                let rightest: CGFloat = bubblePath.bounds.maxX
+                let origin: CGFloat = isRightBubble ? leftest : rightest
+                let marks: [CGFloat] = calloutKeys.map({ $0.frame.midX })
+                let steps: [CGFloat] = marks.map({ $0 - origin })
+                let max: CGFloat = bubblePath.bounds.width
+                let maxStep: CGFloat = isRightBubble ? max : -max
+                return steps + [maxStep]
+        }()
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)
-                if keyboardEvent == .space {
+                switch keyboardEvent {
+                case .key(.cantoneseCommaSeat):
+                        guard let location: CGPoint = touches.first?.location(in: viewController.view) else { return }
+                        let distance: CGFloat = location.x - bottomCenter.x
+                        for index in 0..<(distances.count - 1) {
+                                if (distances[index] < distance) && (distance < distances[index + 1]) {
+                                        _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
+                                        calloutKeys[index].backgroundColor = selectionColor
+                                        textToInput = calloutKeys[index].text
+                                }
+                        }
+                case .space:
                         guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 10 else { return }
@@ -97,18 +136,19 @@ final class KeyButton: UIButton {
                         viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location
                         performedDraggingOnSpace = true
-                }
-                if keyboardEvent == .backspace {
+                case .backspace:
                         guard viewController.keyboardLayout.isJyutpingMode else { return }
                         guard let location: CGPoint = touches.first?.location(in: self) else { return }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { return }
                         viewController.inputText = ""
+                default:
+                        break
                 }
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesCancelled(touches, with: event)
-                invalidateBackspaceTimers()
+                invalidateTimers()
                 switch keyboardEvent {
                 case .backspace, .newLine:
                         changeColorToNormal()
@@ -118,6 +158,7 @@ final class KeyButton: UIButton {
                 case .key:
                         if isPhonePortrait {
                                 removePreview()
+                                removeCallout()
                         } else {
                                 changeColorToNormal()
                         }
@@ -128,12 +169,14 @@ final class KeyButton: UIButton {
 
         var slowBackspaceTimer: Timer?
         var fastBackspaceTimer: Timer?
-        private func invalidateBackspaceTimers() {
+        var longPressTimer: Timer?
+        private func invalidateTimers() {
                 slowBackspaceTimer?.invalidate()
                 fastBackspaceTimer?.invalidate()
+                longPressTimer?.invalidate()
         }
         deinit {
-                invalidateBackspaceTimers()
+                invalidateTimers()
         }
         private(set) lazy var performedDraggingOnSpace: Bool = false
         private lazy var spaceTouchPoint: CGPoint = .zero
@@ -195,27 +238,102 @@ final class KeyButton: UIButton {
         private lazy var keyWidth: CGFloat = keyButtonView.frame.width
         private lazy var keyHeight: CGFloat = keyButtonView.frame.height
         private lazy var bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.midX, y: keyButtonView.frame.maxY)
+
+
+        // MARK: - Callout
+
+        private lazy var selectionColor: UIColor =  UIColor(red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
+        private lazy var calloutKeys: [CalloutView] = {
+                switch keyboardEvent {
+                case .key(let seat):
+                        let primaryKey = CalloutView(text: seat.primary.text, header: seat.primary.header, footer: seat.primary.footer, alignments: seat.primary.alignments)
+                        primaryKey.backgroundColor = selectionColor
+                        var keys: [CalloutView] = [primaryKey]
+                        for index in 0..<seat.children.count {
+                                let element: KeyElement = seat.children[index]
+                                let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, alignments: element.alignments)
+                                keys.append(callout)
+                        }
+                        return keys
+                default:
+                        return []
+                }
+        }()
+        func displayCallout() {
+                guard isPhonePortrait else { return }
+                layer.addSublayer(calloutLayer)
+                addSubview(calloutStackView)
+        }
+        func removeCallout() {
+                _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
+                calloutStackView.removeFromSuperview()
+                calloutLayer.removeFromSuperlayer()
+        }
+        private lazy var calloutStackView: UIStackView = {
+                let expansion = isRightBubble ? (keyButtonView.bounds.minX - bubblePath.bounds.minX) : (bubblePath.bounds.maxX - keyButtonView.bounds.maxX)
+                let width = bubblePath.bounds.width - (expansion * 2)
+                let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
+                let size = CGSize(width: width, height: keyHeight)
+                let stackView: UIStackView = UIStackView(frame: CGRect(origin: origin, size: size))
+                stackView.distribution = .fillEqually
+                stackView.addMultipleArrangedSubviews(calloutKeys)
+                return stackView
+        }()
+        private lazy var calloutLayer: CAShapeLayer = {
+                let layer = CAShapeLayer()
+                layer.shadowOpacity = 0.5
+                layer.shadowRadius = 1
+                layer.shadowOffset = .zero
+                layer.shadowColor = UIColor.black.cgColor
+                layer.shouldRasterize = true
+                layer.rasterizationScale = UIScreen.main.scale
+                layer.path = previewPath.cgPath
+                layer.fillColor = buttonColor.cgColor
+                let animation = CABasicAnimation(keyPath: "path")
+                animation.duration = 0.01
+                animation.toValue = bubblePath.cgPath
+                animation.fillMode = .forwards
+                animation.isRemovedOnCompletion = false
+                animation.timingFunction = CAMediaTimingFunction(name: .default)
+                layer.add(animation, forKey: animation.keyPath)
+                return layer
+        }()
+        private lazy var isRightBubble: Bool = frame.midX < viewController.view.frame.midX
+        private lazy var bubblePath: UIBezierPath = {
+                if isRightBubble {
+                        return rightBubblePath(origin: bottomCenter,
+                                               previewCornerRadius: 10,
+                                               keyWidth: keyWidth,
+                                               keyHeight: keyHeight,
+                                               keyCornerRadius: 5,
+                                               count: calloutKeys.count - 1)
+                } else {
+                        return leftBubblePath(origin: bottomCenter,
+                                              previewCornerRadius: 10,
+                                              keyWidth: keyWidth,
+                                              keyHeight: keyHeight,
+                                              keyCornerRadius: 5,
+                                              count: calloutKeys.count - 1)
+                }
+        }()
 }
 
-final class CalloutKeyView: UIView {
+final class CalloutView: UIView {
 
         let text: String
         private let header: String?
         private let footer: String?
         private let alignments: (header: Alignment, footer: Alignment)
-        private let isDarkAppearance: Bool
 
-        init(frame: CGRect,
-             text: String,
+        init(text: String,
              header: String? = nil,
              footer: String? = nil,
-             alignments: (header: Alignment, footer: Alignment) = (header: .center, footer: .center), isDarkAppearance: Bool) {
+             alignments: (header: Alignment, footer: Alignment) = (header: .center, footer: .center)) {
                 self.text = text
                 self.header = header
                 self.footer = footer
                 self.alignments = alignments
-                self.isDarkAppearance = isDarkAppearance
-                super.init(frame: frame)
+                super.init(frame: .zero)
                 layer.cornerRadius = 5
                 layer.cornerCurve = .continuous
                 setupHeader()
@@ -239,7 +357,6 @@ final class CalloutKeyView: UIView {
                 ])
                 headerLabel.font = .systemFont(ofSize: 11)
                 headerLabel.text = header
-                headerLabel.textColor = isDarkAppearance ? UIColor.white.withAlphaComponent(0.8) : .gray
                 switch alignments.header {
                 case .center:
                         headerLabel.textAlignment = .center
@@ -260,7 +377,6 @@ final class CalloutKeyView: UIView {
                 ])
                 footerLabel.font = .systemFont(ofSize: 9)
                 footerLabel.text = footer
-                footerLabel.textColor = isDarkAppearance ? UIColor.white.withAlphaComponent(0.7) : .gray
                 switch alignments.footer {
                 case .center:
                         footerLabel.textAlignment = .center
@@ -280,7 +396,7 @@ final class CalloutKeyView: UIView {
                         textLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
                 textLabel.font = .systemFont(ofSize: 17)
-                textLabel.text = text
                 textLabel.textAlignment = .center
+                textLabel.text = text
         }
 }
