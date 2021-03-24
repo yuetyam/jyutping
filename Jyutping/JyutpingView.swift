@@ -244,14 +244,6 @@ struct JyutpingWebsitesView: View {
                                  url: URL(string: "https://www.iso10646hk.net/jp")!)
                                 .fillBackground()
                                 .padding(.horizontal)
-
-                        LinkView(iconName: "link.circle",
-                                 text: Text("粵拼歌詞網"),
-                                 footnote: Text("www.jyut6.com"),
-                                 symbolName: "safari",
-                                 url: URL(string: "https://www.jyut6.com")!)
-                                .fillBackground()
-                                .padding(.horizontal)
                 }
         }
 }
