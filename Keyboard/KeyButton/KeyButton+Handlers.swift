@@ -35,10 +35,8 @@ extension KeyButton {
                                 viewController.inputText = ""
                                 viewController.textDocumentProxy.insertText(text)
                         }
-                case .key(.periodSeat):
-                        guard textToInput == nil else { return }
-                        viewController.textDocumentProxy.insertText(".")
                 case .key(let keySeat):
+                        guard textToInput == nil else { return }
                         let text: String = keySeat.primary.text
                         if viewController.keyboardLayout.isJyutpingMode {
                                 viewController.inputText += text
