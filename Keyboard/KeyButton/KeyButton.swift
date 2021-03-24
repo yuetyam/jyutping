@@ -80,7 +80,7 @@ final class KeyButton: UIButton {
                         } else {
                                 changeColorToNormal()
                         }
-                        if seat == .cantoneseCommaSeat {
+                        if !seat.children.isEmpty {
                                 if let text: String = textToInput {
                                         if text == "'" {
                                                 viewController.inputText += text
@@ -116,7 +116,7 @@ final class KeyButton: UIButton {
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)
                 switch keyboardEvent {
-                case .key(.cantoneseCommaSeat):
+                case .key(let seat) where !seat.children.isEmpty:
                         guard let location: CGPoint = touches.first?.location(in: viewController.view) else { return }
                         let distance: CGFloat = location.x - self.frame.midX
                         for index in 0..<(distances.count - 1) {

@@ -12,7 +12,7 @@ extension KeyButton {
                         addTarget(self, action: #selector(handleSpace(sender:event:)), for: .touchUpInside)
                 case .none:
                         break
-                case .key(.cantoneseCommaSeat):
+                case .key(let seat) where !seat.children.isEmpty:
                         addTarget(self, action: #selector(handleLongPress), for: .touchDown)
                         addTarget(self, action: #selector(handleTap), for: .touchUpInside)
                 default:
@@ -35,6 +35,9 @@ extension KeyButton {
                                 viewController.inputText = ""
                                 viewController.textDocumentProxy.insertText(text)
                         }
+                case .key(.periodSeat):
+                        guard textToInput == nil else { return }
+                        viewController.textDocumentProxy.insertText(".")
                 case .key(let keySeat):
                         let text: String = keySeat.primary.text
                         if viewController.keyboardLayout.isJyutpingMode {
