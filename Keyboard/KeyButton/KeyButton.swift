@@ -312,14 +312,14 @@ final class KeyButton: UIButton {
                                                keyWidth: keyWidth,
                                                keyHeight: keyHeight,
                                                keyCornerRadius: 5,
-                                               count: calloutKeys.count - 1)
+                                               expansions: calloutKeys.count - 1)
                 } else {
                         return leftBubblePath(origin: bottomCenter,
                                               previewCornerRadius: 10,
                                               keyWidth: keyWidth,
                                               keyHeight: keyHeight,
                                               keyCornerRadius: 5,
-                                              count: calloutKeys.count - 1)
+                                              expansions: calloutKeys.count - 1)
                 }
         }()
 }
