@@ -120,7 +120,7 @@ extension KeyButton {
                 return path
         }
 
-        func rightBubblePath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, count: CGFloat = 1) -> UIBezierPath {
+        func rightBubblePath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, count: Int = 1) -> UIBezierPath {
 
                 //    +-----------------------e------------+------------a---+
                 //    +   |                   +            +            |   +
@@ -155,7 +155,7 @@ extension KeyButton {
                 let pointFArcCenter: CGPoint = CGPoint(x: pointE.x + previewCornerRadius, y: pointE.y)
 
                 let pointExtE: CGPoint = CGPoint(x: pointE.x + maxWidth, y: pointE.y - previewCornerRadius)
-                let extendWith: CGFloat = (keyWidth + 4) * count + previewCornerRadius
+                let extendWith: CGFloat = (keyWidth + 4) * CGFloat(count) + previewCornerRadius
                 let pointExtA: CGPoint = CGPoint(x: pointExtE.x + extendWith - previewCornerRadius, y: pointExtE.y)
                 let pointExtBArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointE.y)
                 let pointExtC: CGPoint = CGPoint(x: pointExtA.x + previewCornerRadius, y: pointD.y)
@@ -197,7 +197,7 @@ extension KeyButton {
                 return path
         }
 
-        func leftBubblePath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, count: CGFloat = 1) -> UIBezierPath {
+        func leftBubblePath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, count: Int = 1) -> UIBezierPath {
 
                 //    +-----------+-----------+-------------------G---+
                 //    +   |       +           +                   |   +
@@ -233,7 +233,7 @@ extension KeyButton {
                 let pointG: CGPoint = CGPoint(x: pointHArcCenter.x, y: pointHArcCenter.y - previewCornerRadius)
 
                 let pointD: CGPoint = CGPoint(x: pointJ.x - maxWidth, y: pointJ.y + previewCornerRadius)
-                let extendWith: CGFloat = (keyWidth + 4) * count + previewCornerRadius
+                let extendWith: CGFloat = (keyWidth + 4) * CGFloat(count) + previewCornerRadius
                 let pointExtA: CGPoint = CGPoint(x: pointD.x - extendWith + previewCornerRadius, y: pointD.y)
                 let pointExtBArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointExtA.y - previewCornerRadius)
                 let pointExtC: CGPoint = CGPoint(x: pointExtA.x - previewCornerRadius, y: pointHArcCenter.y)
