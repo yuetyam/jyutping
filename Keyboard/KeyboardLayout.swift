@@ -215,7 +215,144 @@ private extension KeyboardLayout {
                         ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"],
                         ["。", "，", "、", "？", "！", "."]
                 ]
-                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
+                let digits: [[String]] = [
+                        ["1", "壹", "１", "①"],
+                        ["2", "貳", "２", "②"],
+                        ["3", "叁", "３", "③"],
+                        ["4", "肆", "４", "④"],
+                        ["5", "伍", "５", "⑤"],
+                        ["6", "陸", "６", "⑥"],
+                        ["7", "柒", "７", "⑦"],
+                        ["8", "捌", "８", "⑧"],
+                        ["9", "玖", "９", "⑨"],
+                        ["0", "零", "０", "⓪"]
+                ]
+                let digitKeys: [KeyboardEvent] = {
+                        return digits.map { block -> KeyboardEvent in
+                                let primary = KeyElement(text: block[0])
+                                let child_0 = KeyElement(text: block[1])
+                                let child_1 = KeyElement(text: block[2], header: "全形")
+                                let child_2 = KeyElement(text: block[3])
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                                return KeyboardEvent.key(seat)
+                        }
+                }()
+                let second_0: KeyboardEvent = {
+                        let primary = KeyElement(text: "-")
+                        let child_0 = KeyElement(text: "-", footer: "002D")
+                        let child_1 = KeyElement(text: "－", header: "全形", footer: "FF0D")
+                        let child_2 = KeyElement(text: "—", footer: "2014")
+                        let child_3 = KeyElement(text: "–", footer: "2013")
+                        let child_4 = KeyElement(text: "•", footer: "2022")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_1: KeyboardEvent = {
+                        let primary = KeyElement(text: "\u{002F}")
+                        let child_0 = KeyElement(text: "\u{002F}", footer: "002F")
+                        let child_1 = KeyElement(text: "\u{FF0F}", header: "全形", footer: "FF0F")
+                        let child_2 = KeyElement(text: "\u{005C}", footer: "005C")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_2: KeyboardEvent = {
+                        let primary = KeyElement(text: "：")
+                        let child_0 = KeyElement(text: ":", header: "半形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_3: KeyboardEvent = {
+                        let primary = KeyElement(text: "；")
+                        let child_0 = KeyElement(text: ";", header: "半形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_4: KeyboardEvent = {
+                        let primary = KeyElement(text: "（")
+                        let child_0 = KeyElement(text: "(", header: "半形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_5: KeyboardEvent = {
+                        let primary = KeyElement(text: "）")
+                        let child_0 = KeyElement(text: ")", header: "半形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_6: KeyboardEvent = {
+                        let primary = KeyElement(text: "$")
+                        let child_0 = KeyElement(text: "€", footer: "20AC")
+                        let child_1 = KeyElement(text: "£", footer: "00A3")
+                        let child_2 = KeyElement(text: "¥", footer: "00A5")
+                        let child_3 = KeyElement(text: "₩")
+                        let child_4 = KeyElement(text: "₽")
+                        let child_5 = KeyElement(text: "¢")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3, child_4, child_5])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_7: KeyboardEvent = {
+                        let primary = KeyElement(text: "@")
+                        let child_0 = KeyElement(text: "＠", header: "全形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_8: KeyboardEvent = {
+                        let primary = KeyElement(text: "「")
+                        let child_0 = KeyElement(text: "『")
+                        let child_1 = KeyElement(text: "\u{201C}", footer: "201C")
+                        let child_2 = KeyElement(text: "\u{2018}", footer: "2018")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_9: KeyboardEvent = {
+                        let primary = KeyElement(text: "」")
+                        let child_0 = KeyElement(text: "』")
+                        let child_1 = KeyElement(text: "\u{201D}", footer: "201D")
+                        let child_2 = KeyElement(text: "\u{2019}", footer: "2019")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_0: KeyboardEvent = {
+                        let primary = KeyElement(text: "。")
+                        let child_0 = KeyElement(text: "⋯", footer: "22EF")
+                        let child_1 = KeyElement(text: "⋯⋯")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_1: KeyboardEvent = {
+                        let primary = KeyElement(text: "，")
+                        let child_0 = KeyElement(text: ",", header: "半形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_2: KeyboardEvent = {
+                        let primary = KeyElement(text: "、")
+                        let seat: KeySeat = KeySeat(primary: primary)
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_3: KeyboardEvent = {
+                        let primary = KeyElement(text: "？")
+                        let child_0 = KeyElement(text: "?", header: "半形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_4: KeyboardEvent = {
+                        let primary = KeyElement(text: "！")
+                        let child_0 = KeyElement(text: "!", header: "半形")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_5: KeyboardEvent = {
+                        let primary = KeyElement(text: ".")
+                        let child_0 = KeyElement(text: "．", header: "全形", footer: "FF0E")
+                        let child_1 = KeyElement(text: "…", footer: "2026")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                var eventRows: [[KeyboardEvent]] = arrayTextArray.placeholders
+                eventRows[0] = digitKeys
+                eventRows[1] = [second_0, second_1, second_2, second_3, second_4, second_5, second_6, second_7, second_8, second_9]
+                eventRows[2] = [third_0, third_1, third_2, third_3, third_4, third_5]
                 eventRows[2].insert(.switchTo(.cantoneseSymbolic), at: 0)
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
@@ -282,5 +419,8 @@ private extension KeyboardLayout {
 private extension Array where Element == [String] {
         var keysRows: [[KeyboardEvent]] {
                 return map { $0.map { KeyboardEvent.key(KeySeat(primary: KeyElement(text: $0))) } }
+        }
+        var placeholders: [[KeyboardEvent]] {
+                return map { $0.map { _ in KeyboardEvent.none } }
         }
 }
