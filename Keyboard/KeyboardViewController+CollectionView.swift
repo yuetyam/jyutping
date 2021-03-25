@@ -100,17 +100,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 guard collectionView == candidateCollectionView else {
-                        let emoji: String = {
-                                switch indexPath.section {
-                                case 0:
-                                        let start: String.Index = frequentEmojis.startIndex
-                                        let index: String.Index = frequentEmojis.index(start, offsetBy: indexPath.row)
-                                        return String(frequentEmojis[index])
-                                default:
-                                        let character: Character = Emoji.emojis[indexPath.section - 1][indexPath.row]
-                                        return String(character)
-                                }
-                        }()
+                        guard let cell: EmojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCell else { return }
+                        let emoji: String = cell.emojiLabel.text ?? "😀"
                         textDocumentProxy.insertText(emoji)
                         hapticFeedback?.impactOccurred()
                         updateFrequentEmojis(latest: emoji)
