@@ -38,7 +38,7 @@ final class KeyButton: UIButton {
                 return CGSize(width: width, height: height)
         }
 
-        private lazy var isPhonePortrait: Bool = { traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular }()
+        private lazy var isPhonePortrait: Bool = traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
@@ -114,6 +114,7 @@ final class KeyButton: UIButton {
                 super.touchesMoved(touches, with: event)
                 switch keyboardEvent {
                 case .key(let seat) where !seat.children.isEmpty:
+                        guard isCalloutDisplaying else { return }
                         guard let location: CGPoint = touches.first?.location(in: viewController.view) else { return }
                         let distance: CGFloat = location.x - self.frame.midX
                         for index in 0..<(distances.count - 1) {
@@ -268,11 +269,14 @@ final class KeyButton: UIButton {
                 guard isPhonePortrait else { return }
                 layer.addSublayer(calloutLayer)
                 addSubview(calloutStackView)
+                isCalloutDisplaying = true
         }
+        private lazy var isCalloutDisplaying: Bool = false
         func removeCallout() {
                 _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
                 calloutStackView.removeFromSuperview()
                 calloutLayer.removeFromSuperlayer()
+                isCalloutDisplaying = false
         }
         private lazy var calloutStackView: UIStackView = {
                 let expansion = isRightBubble ? (keyButtonView.bounds.minX - bubblePath.bounds.minX) : (bubblePath.bounds.maxX - keyButtonView.bounds.maxX - 5)
