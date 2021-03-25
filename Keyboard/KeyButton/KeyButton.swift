@@ -82,9 +82,7 @@ final class KeyButton: UIButton {
                         }
                         if !seat.children.isEmpty {
                                 if let text: String = textToInput {
-                                        if text == "'" {
-                                                viewController.inputText += text
-                                        } else if viewController.inputText.isEmpty {
+                                        if viewController.inputText.isEmpty {
                                                 viewController.textDocumentProxy.insertText(text)
                                         } else {
                                                 let combined: String = viewController.processingText + text
