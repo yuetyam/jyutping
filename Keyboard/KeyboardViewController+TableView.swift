@@ -113,10 +113,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 switch indexPath.row {
                                 case 0:
                                         cell.textLabel?.text = NSLocalizedString("QWERTY", comment: "")
-                                        cell.accessoryType = (arrangement < 2) ? .checkmark : .none
+                                        cell.accessoryType = arrangement != 3 ? .checkmark : .none
                                 case 1:
                                         cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
-                                        cell.accessoryType = arrangement == 2 ? .checkmark : .none
+                                        cell.accessoryType = arrangement == 3 ? .checkmark : .none
                                 default:
                                         cell.textLabel?.text = "__error__"
                                 }
@@ -199,7 +199,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         case 0:
                                 UserDefaults.standard.set(1, forKey: "keyboard_layout")
                         case 1:
-                                UserDefaults.standard.set(2, forKey: "keyboard_layout")
+                                UserDefaults.standard.set(3, forKey: "keyboard_layout")
                         default:
                                 break
                         }
