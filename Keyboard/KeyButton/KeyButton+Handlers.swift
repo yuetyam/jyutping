@@ -65,11 +65,14 @@ extension KeyButton {
                         if viewController.inputText.isEmpty {
                                 viewController.textDocumentProxy.insertText("\n")
                         } else {
-                                viewController.textDocumentProxy.insertText(viewController.processingText)
+                                let converted: String = viewController.processingText.replacingOccurrences(of: "4", with: "xx")
+                                        .replacingOccurrences(of: "5", with: "vv")
+                                        .replacingOccurrences(of: "6", with: "qq")
+                                        .replacingOccurrences(of: "1", with: "v")
+                                        .replacingOccurrences(of: "2", with: "x")
+                                        .replacingOccurrences(of: "3", with: "q")
                                 viewController.inputText = ""
-                                if viewController.keyboardLayout == .cantonese(.uppercased) {
-                                        viewController.keyboardLayout = .cantonese(.lowercased)
-                                }
+                                viewController.textDocumentProxy.insertText(converted)
                         }
                 case .switchTo(let layout):
                         viewController.keyboardLayout = layout
@@ -153,9 +156,15 @@ extension KeyButton {
                                 return
                         }
                         guard let firstCandidate: Candidate = viewController.candidates.first else {
-                                viewController.textDocumentProxy.insertText(processingText)
-                                AudioFeedback.perform(.modify)
+                                let converted: String = viewController.processingText.replacingOccurrences(of: "4", with: "xx")
+                                        .replacingOccurrences(of: "5", with: "vv")
+                                        .replacingOccurrences(of: "6", with: "qq")
+                                        .replacingOccurrences(of: "1", with: "v")
+                                        .replacingOccurrences(of: "2", with: "x")
+                                        .replacingOccurrences(of: "3", with: "q")
                                 viewController.inputText = ""
+                                viewController.textDocumentProxy.insertText(converted)
+                                AudioFeedback.perform(.modify)
                                 return
                         }
                         viewController.textDocumentProxy.insertText(firstCandidate.text)
