@@ -212,8 +212,8 @@ final class KeyButton: UIButton {
         }
         private lazy var previewShapeLayer: CAShapeLayer = {
                 let layer = CAShapeLayer()
-                layer.shadowOpacity = 0.5
-                layer.shadowRadius = 1
+                layer.shadowOpacity = 0.3
+                layer.shadowRadius = 0.5
                 layer.shadowOffset = .zero
                 layer.shadowColor = UIColor.black.cgColor
                 layer.shouldRasterize = true
@@ -289,8 +289,8 @@ final class KeyButton: UIButton {
         }()
         private lazy var calloutLayer: CAShapeLayer = {
                 let layer = CAShapeLayer()
-                layer.shadowOpacity = 0.5
-                layer.shadowRadius = 1
+                layer.shadowOpacity = 0.3
+                layer.shadowRadius = 0.5
                 layer.shadowOffset = .zero
                 layer.shadowColor = UIColor.black.cgColor
                 layer.shouldRasterize = true
