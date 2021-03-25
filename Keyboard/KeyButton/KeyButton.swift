@@ -102,13 +102,12 @@ final class KeyButton: UIButton {
         private lazy var distances: [CGFloat] = {
                 let max: CGFloat = calloutStackView.bounds.width
                 var blocks: [CGFloat] = []
-                let count: Int = calloutKeys.count
+                let count: Int = calloutKeys.count + 1
                 let step: CGFloat = max / CGFloat(count)
                 for number in 0..<count {
                         let length: CGFloat = step * CGFloat(number)
                         blocks.append(length)
                 }
-                blocks.append(max)
                 return blocks
         }()
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
