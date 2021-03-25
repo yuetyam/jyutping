@@ -249,9 +249,9 @@ private extension KeyboardLayout {
                 }()
                 let second_1: KeyboardEvent = {
                         let primary = KeyElement(text: "\u{002F}")
-                        let child_0 = KeyElement(text: "\u{002F}", footer: "002F")
-                        let child_1 = KeyElement(text: "\u{FF0F}", header: "全形", footer: "FF0F")
-                        let child_2 = KeyElement(text: "\u{005C}", footer: "005C")
+                        let child_0 = KeyElement(text: "\u{002F}")
+                        let child_1 = KeyElement(text: "\u{FF0F}", header: "全形")
+                        let child_2 = KeyElement(text: "\u{005C}")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
                         return KeyboardEvent.key(seat)
                 }()
