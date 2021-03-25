@@ -301,7 +301,9 @@ private extension KeyboardLayout {
                         let child_0 = KeyElement(text: "『")
                         let child_1 = KeyElement(text: "\u{201C}", footer: "201C")
                         let child_2 = KeyElement(text: "\u{2018}", footer: "2018")
-                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                        let child_3 = KeyElement(text: "\u{FE41}", footer: "FE41")
+                        let child_4 = KeyElement(text: "\u{FE43}", footer: "FE43")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3, child_4])
                         return KeyboardEvent.key(seat)
                 }()
                 let second_9: KeyboardEvent = {
@@ -309,7 +311,9 @@ private extension KeyboardLayout {
                         let child_0 = KeyElement(text: "』")
                         let child_1 = KeyElement(text: "\u{201D}", footer: "201D")
                         let child_2 = KeyElement(text: "\u{2019}", footer: "2019")
-                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                        let child_3 = KeyElement(text: "\u{FE42}", footer: "FE42")
+                        let child_4 = KeyElement(text: "\u{FE44}", footer: "FE44")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3, child_4])
                         return KeyboardEvent.key(seat)
                 }()
                 let third_0: KeyboardEvent = {
