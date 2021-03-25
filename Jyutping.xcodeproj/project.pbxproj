@@ -50,6 +50,7 @@
 		37AE5BE323546454008A8E4B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BE223546454008A8E4B /* HomeView.swift */; };
 		37AE5BEF2354AAF8008A8E4B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */; };
 		37AE5BF32354AAF8008A8E4B /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		37AFDAD6260C8B97002963B5 /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AFDAD5260C8B97002963B5 /* CalloutView.swift */; };
 		37B3401E23EBD23400A8D3BB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37B3401D23EBD23400A8D3BB /* Settings.bundle */; };
 		37C05F9A23E339C90061C992 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C05F9923E339C90061C992 /* KeyButton.swift */; };
 		37C18EAE237A8F0800F92482 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37C18EB0237A8F0800F92482 /* InfoPlist.strings */; };
@@ -146,6 +147,7 @@
 		37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		37AE5BF02354AAF8008A8E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37AFDAD5260C8B97002963B5 /* CalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
 		37B3401D23EBD23400A8D3BB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37C05F9923E339C90061C992 /* KeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
 		37C18EB1237A8F0B00F92482 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				379568282600471700F7A642 /* KeyButton+Bubble.swift */,
 				3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */,
 				3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */,
+				37AFDAD5260C8B97002963B5 /* CalloutView.swift */,
 				37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */,
 			);
 			path = KeyButton;
@@ -530,6 +533,7 @@
 				3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */,
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
 				3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */,
+				37AFDAD6260C8B97002963B5 /* CalloutView.swift in Sources */,
 				37CBC6D025C8F8F700C21526 /* BlurEffectView.swift in Sources */,
 				3741063123E30C4100639EF4 /* KeyboardViewController+Setup.swift in Sources */,
 				3722B851250129F900E33ADB /* NumberPadButtons.swift in Sources */,
