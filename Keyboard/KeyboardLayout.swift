@@ -25,14 +25,14 @@ enum KeyboardLayout: Hashable {
                 switch self {
                 case .cantonese(.lowercased):
                         switch arrangement {
-                        case 3:
+                        case 2:
                                 return saamPingLowercasedKeys(needsInputModeSwitchKey)
                         default:
                                 return cantoneseLowercasedKeys(needsInputModeSwitchKey)
                         }
                 case .cantonese(.uppercased), .cantonese(.capsLocked):
                         switch arrangement {
-                        case 3:
+                        case 2:
                                 return saamPingUppercasedKeys(needsInputModeSwitchKey)
                         default:
                                 return cantoneseUppercasedKeys(needsInputModeSwitchKey)
