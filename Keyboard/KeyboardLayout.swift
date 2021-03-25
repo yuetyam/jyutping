@@ -281,9 +281,9 @@ private extension KeyboardLayout {
                 }()
                 let second_6: KeyboardEvent = {
                         let primary = KeyElement(text: "$")
-                        let child_0 = KeyElement(text: "€", footer: "20AC")
-                        let child_1 = KeyElement(text: "£", footer: "00A3")
-                        let child_2 = KeyElement(text: "¥", footer: "00A5")
+                        let child_0 = KeyElement(text: "€")
+                        let child_1 = KeyElement(text: "£")
+                        let child_2 = KeyElement(text: "¥")
                         let child_3 = KeyElement(text: "₩")
                         let child_4 = KeyElement(text: "₽")
                         let child_5 = KeyElement(text: "¢")
