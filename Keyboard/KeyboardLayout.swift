@@ -677,7 +677,55 @@ private extension KeyboardLayout {
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
                         [".", ",", "?", "!", "'"]
                 ]
+                let first_5: KeyboardEvent = {
+                        let primary = KeyElement(text: "%")
+                        let child_0 = KeyElement(text: "‰")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let first_9: KeyboardEvent = {
+                        let primary = KeyElement(text: "=")
+                        let child_0 = KeyElement(text: "≠")
+                        let child_1 = KeyElement(text: "≈")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_0: KeyboardEvent = {
+                        let primary = KeyElement(text: ".")
+                        let child_0 = KeyElement(text: "…")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_1: KeyboardEvent = {
+                        let primary = KeyElement(text: ",")
+                        let seat: KeySeat = KeySeat(primary: primary)
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_2: KeyboardEvent = {
+                        let primary = KeyElement(text: "?")
+                        let child_0 = KeyElement(text: "¿")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_3: KeyboardEvent = {
+                        let primary = KeyElement(text: "!")
+                        let child_0 = KeyElement(text: "¡")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_4: KeyboardEvent = {
+                        let primary = KeyElement(text: "\u{0027}")
+                        let child_0 = KeyElement(text: "\u{0027}", footer: "0027")
+                        let child_1 = KeyElement(text: "\u{2018}", footer: "2018")
+                        let child_2 = KeyElement(text: "\u{2019}", footer: "2019")
+                        let child_3 = KeyElement(text: "\u{0060}", footer: "0060")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3])
+                        return KeyboardEvent.key(seat)
+                }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
+                eventRows[0][5] = first_5
+                eventRows[0][9] = first_9
+                eventRows[2] = [third_0, third_1, third_2, third_3, third_4]
                 eventRows[2].insert(.switchTo(.numeric), at: 0)
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
