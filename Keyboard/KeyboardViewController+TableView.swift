@@ -75,7 +75,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 case 1:
                                         cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: "")
                                         if hasFullAccess {
-                                                cell.switchView.isOn = UserDefaults.standard.bool(forKey: "haptic_feedback")
+                                                cell.switchView.isOn = isHapticFeedbackOn
                                                 cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .allTouchEvents)
                                         } else {
                                                 cell.switchView.isOn = false
@@ -279,7 +279,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 AudioFeedback.updateAudioFeedbackStatus()
         }
         @objc private func handleHapticFeedbackSwitch() {
-                if UserDefaults.standard.bool(forKey: "haptic_feedback") {
+                if isHapticFeedbackOn {
                         UserDefaults.standard.set(false, forKey: "haptic_feedback")
                         hapticFeedback = nil
                 } else {
@@ -288,6 +288,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                         }
                 }
+                updateHapticFeedbackStatus()
         }
 }
 

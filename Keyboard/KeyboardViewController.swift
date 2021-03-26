@@ -67,12 +67,11 @@ final class KeyboardViewController: UIInputViewController {
                         setupKeyboard()
                         didKeyboardEstablished = true
                 }
-                let isHapticFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "haptic_feedback")
                 if isHapticFeedbackOn && hapticFeedback == nil {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
         }
-        
+
         var hapticFeedback: UIImpactFeedbackGenerator?
 
         override func viewWillDisappear(_ animated: Bool) {
@@ -85,7 +84,7 @@ final class KeyboardViewController: UIInputViewController {
         }
 
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-        
+
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
@@ -295,6 +294,11 @@ final class KeyboardViewController: UIInputViewController {
 
 
         // MARK: - Settings
+
+        private(set) lazy var isHapticFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "haptic_feedback")
+        func updateHapticFeedbackStatus() {
+                isHapticFeedbackOn = UserDefaults.standard.bool(forKey: "haptic_feedback")
+        }
 
         /// 鍵盤佈局
         ///
