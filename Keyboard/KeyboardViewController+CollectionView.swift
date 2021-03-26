@@ -137,7 +137,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                         candidateSequence = []
                         imeQueue.async {
-                                self.lexiconManager?.handle(candidate: concatenatedCandidate)
+                                self.lexiconManager.handle(candidate: concatenatedCandidate)
                         }
                 }
         }

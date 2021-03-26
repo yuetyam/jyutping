@@ -189,7 +189,7 @@ extension KeyButton {
                                 let concatenatedCandidate: Candidate = viewController.candidateSequence.joined()
                                 viewController.candidateSequence = []
                                 viewController.imeQueue.async {
-                                        self.viewController.lexiconManager?.handle(candidate: concatenatedCandidate)
+                                        self.viewController.lexiconManager.handle(candidate: concatenatedCandidate)
                                 }
                         }
                 case .alphabetic(.uppercased):

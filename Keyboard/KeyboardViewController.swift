@@ -71,15 +71,6 @@ final class KeyboardViewController: UIInputViewController {
                 if isHapticFeedbackOn && hapticFeedback == nil {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
-                if logogram > 1 && converter == nil {
-                        updateConverter()
-                }
-                if engine == nil {
-                        engine = Engine()
-                }
-                if lexiconManager == nil {
-                        lexiconManager = LexiconManager()
-                }
         }
         
         var hapticFeedback: UIImpactFeedbackGenerator?
@@ -87,13 +78,8 @@ final class KeyboardViewController: UIInputViewController {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
-                converter?.destroy()
-                converter = nil
-                engine?.close()
-                engine = nil
-                lexiconManager?.close()
-                lexiconManager = nil
                 if didReceiveWarning {
+                        keyboardStackView.removeFromSuperview()
                         exit(0)
                 }
         }
@@ -196,7 +182,7 @@ final class KeyboardViewController: UIInputViewController {
                         if processingText.isEmpty {
                                 candidates = []
                         } else {
-                                imeQueue.async {
+                                imeQueue.async { [unowned self] in
                                         self.suggestCandidates()
                                 }
                         }
@@ -222,11 +208,11 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         
-        private(set) var lexiconManager: LexiconManager? = LexiconManager()
-        private var engine: Engine? = Engine()
+        private(set) var lexiconManager: LexiconManager = LexiconManager()
+        private lazy var engine: Engine = Engine()
         private func suggestCandidates() {
-                let userdbCandidates: [Candidate] = lexiconManager?.suggest(for: processingText) ?? []
-                let engineCandidates: [Candidate] = engine?.suggest(for: processingText, schemes: syllablesSchemes) ?? []
+                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: processingText)
+                let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: syllablesSchemes)
                 let combined: [Candidate] = userdbCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
@@ -336,7 +322,7 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 4: 簡化字
         private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
-        private var converter: Converter? = {
+        private lazy var converter: Converter? = {
                 let conversion: Converter.Conversion? = {
                         let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
                         switch logogram {
