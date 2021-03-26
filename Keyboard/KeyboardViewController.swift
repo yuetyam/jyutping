@@ -53,8 +53,9 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
         }
 
+        private lazy var didReceiveWarning: Bool = false
         override func didReceiveMemoryWarning() {
-                debugPrint("didReceiveMemoryWarning()")
+                didReceiveWarning = true
                 super.didReceiveMemoryWarning()
         }
 
@@ -92,6 +93,9 @@ final class KeyboardViewController: UIInputViewController {
                 engine = nil
                 lexiconManager?.close()
                 lexiconManager = nil
+                if didReceiveWarning {
+                        exit(0)
+                }
         }
 
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
