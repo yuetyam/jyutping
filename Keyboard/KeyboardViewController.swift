@@ -61,7 +61,7 @@ final class KeyboardViewController: UIInputViewController {
 
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
-                if needsDifferentKeyboardLayout {
+                if needsDifferentKeyboard {
                         keyboardLayout = respondingKeyboardLayout
                 } else {
                         setupKeyboard()
@@ -94,16 +94,16 @@ final class KeyboardViewController: UIInputViewController {
         }
 
         private lazy var didKeyboardEstablished: Bool = false
-        private lazy var needsDifferentKeyboardLayout: Bool = false
+        private lazy var needsDifferentKeyboard: Bool = false
 
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
                 let requested: KeyboardLayout = requestedKeyboardLayout
                 if respondingKeyboardLayout != requested {
                         respondingKeyboardLayout = requested
-                        needsDifferentKeyboardLayout = true
+                        needsDifferentKeyboard = true
                         if didKeyboardEstablished {
-                                keyboardLayout = respondingKeyboardLayout
+                                keyboardLayout = requested
                         }
                 }
                 if !textDocumentProxy.hasText && !inputText.isEmpty {
