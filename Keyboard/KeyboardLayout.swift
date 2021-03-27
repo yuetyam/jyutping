@@ -216,24 +216,27 @@ private extension KeyboardLayout {
                         ["。", "，", "、", "？", "！", "."]
                 ]
                 let digits: [[String]] = [
-                        ["1", "壹", "１", "①"],
-                        ["2", "貳", "２", "②"],
-                        ["3", "叁", "３", "③"],
-                        ["4", "肆", "４", "④"],
-                        ["5", "伍", "５", "⑤"],
-                        ["6", "陸", "６", "⑥"],
-                        ["7", "柒", "７", "⑦"],
-                        ["8", "捌", "８", "⑧"],
-                        ["9", "玖", "９", "⑨"],
-                        ["0", "零", "０", "⓪"]
+                        ["1", "壹", "１", "①", "¹", "₁"],
+                        ["2", "貳", "２", "②", "²", "₂"],
+                        ["3", "叁", "３", "③", "³", "₃"],
+                        ["4", "肆", "４", "④", "⁴", "₄"],
+                        ["5", "伍", "５", "⑤", "⁵", "₅"],
+                        ["6", "陸", "６", "⑥", "⁶", "₆"],
+                        ["7", "柒", "７", "⑦", "⁷", "₇"],
+                        ["8", "捌", "８", "⑧", "⁸", "₈"],
+                        ["9", "玖", "９", "⑨", "⁹", "₉"],
+                        ["0", "零", "０", "⓪", "⁰", "₀"]
                 ]
                 let digitKeys: [KeyboardEvent] = {
                         return digits.map { block -> KeyboardEvent in
                                 let primary = KeyElement(text: block[0])
-                                let child_0 = KeyElement(text: block[1])
-                                let child_1 = KeyElement(text: block[2], header: "全形")
-                                let child_2 = KeyElement(text: block[3])
-                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                                let child_0 = KeyElement(text: block[0])
+                                let child_1 = KeyElement(text: block[1])
+                                let child_2 = KeyElement(text: block[2], header: "全形")
+                                let child_3 = KeyElement(text: block[3])
+                                let child_4 = KeyElement(text: block[4], header: "上標")
+                                let child_5 = KeyElement(text: block[5], header: "下標")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5])
                                 return KeyboardEvent.key(seat)
                         }
                 }()
