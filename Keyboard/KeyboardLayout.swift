@@ -635,7 +635,8 @@ private extension KeyboardLayout {
                 }()
                 let third_2: KeyboardEvent = {
                         let primary = KeyElement(text: "。")
-                        let seat: KeySeat = KeySeat(primary: primary)
+                        let child_0 = KeyElement(text: "\u{F8FF}")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
                         return KeyboardEvent.key(seat)
                 }()
                 let third_3: KeyboardEvent = {
