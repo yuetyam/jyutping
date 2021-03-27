@@ -2,7 +2,7 @@ import UIKit
 import OpenCCLite
 
 final class KeyboardViewController: UIInputViewController {
-        
+
         private(set) lazy var toolBar: ToolBar = ToolBar(viewController: self)
         private(set) lazy var settingsView: UIView = UIView()
         private(set) lazy var candidateBoard: CandidateBoard = CandidateBoard()
@@ -10,7 +10,7 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var emojiBoard: EmojiBoard = EmojiBoard(viewController: self)
         private(set) lazy var emojiCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         private(set) lazy var settingsTableView: UITableView = UITableView(frame: .zero, style: .grouped)
-        
+
         private(set) lazy var keyboardStackView: UIStackView = {
                 let stackView = UIStackView(frame: .zero)
                 stackView.axis = .vertical
@@ -18,7 +18,7 @@ final class KeyboardViewController: UIInputViewController {
                 stackView.distribution = .equalSpacing
                 return stackView
         }()
-        
+
         override func viewDidLoad() {
                 super.viewDidLoad()
 
@@ -78,7 +78,6 @@ final class KeyboardViewController: UIInputViewController {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
                 if didReceiveWarning {
-                        keyboardStackView.removeFromSuperview()
                         exit(0)
                 }
         }
