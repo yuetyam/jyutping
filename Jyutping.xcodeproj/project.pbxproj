@@ -286,9 +286,9 @@
 			children = (
 				37C05F9923E339C90061C992 /* KeyButton.swift */,
 				3748E26A23F9FA2400A37A45 /* KeyButton+Setup.swift */,
-				379568282600471700F7A642 /* KeyButton+Bubble.swift */,
 				3748E26C23F9FA7200A37A45 /* KeyButton+Handlers.swift */,
 				3748E26823F9F9AF00A37A45 /* KeyButton+Properties.swift */,
+				379568282600471700F7A642 /* KeyButton+Bubble.swift */,
 				37AFDAD5260C8B97002963B5 /* CalloutView.swift */,
 				37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */,
 			);

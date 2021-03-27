@@ -20,7 +20,7 @@ extension KeyButton {
                 }
         }
         @objc private func handleLongPress() {
-                longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { timer in
+                longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
                         self.displayCallout()
                 }
         }

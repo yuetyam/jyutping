@@ -272,4 +272,119 @@ extension KeyButton {
                 path.close()
                 return path
         }
+
+        func rightSquareBubblePath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, cornerRadius: CGFloat, expansions: Int) -> UIBezierPath {
+
+                //    +---------------+---------------+------------a---+
+                //    +   |           +               +            |   +
+                //    E...F           +               +            b...+
+                //    +               +               +                +
+                //    +               +               +                +
+                //    +               +               +            d...c
+                //    +               +               +            |   +
+                //    C               K---------------+----------------+
+                //    +               +
+                //    +               +
+                //    +               +
+                //    +...B       M...L
+                //    +   |       |   +
+                //    +---A---o-------+
+
+                let extendHeight: CGFloat = keyHeight
+                let extendStep: CGFloat = keyWidth
+
+                let pointA: CGPoint = CGPoint(x: origin.x - (keyWidth / 2) + cornerRadius, y: origin.y)
+                let pointBArcCenter: CGPoint = CGPoint(x: pointA.x, y: pointA.y - cornerRadius)
+                let pointC: CGPoint = CGPoint(x: origin.x - (keyWidth / 2), y: origin.y - keyHeight - 4)
+
+                let pointE:CGPoint = CGPoint(x: pointC.x, y: pointC.y - extendHeight + cornerRadius)
+                let pointFArcCenter:CGPoint = CGPoint(x: pointA.x, y: pointE.y)
+
+                let extendWidth: CGFloat = extendStep * CGFloat(expansions)
+                let pointExtA: CGPoint = CGPoint(x: pointE.x + keyWidth + extendWidth - cornerRadius, y: pointE.y - cornerRadius)
+                let pointExtBArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointE.y)
+                let pointExtC: CGPoint = CGPoint(x: pointExtA.x + cornerRadius, y: pointC.y - cornerRadius)
+                let pointExtDArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointExtC.y)
+
+                let pointK: CGPoint = CGPoint(x: pointC.x + keyWidth, y: pointC.y)
+                let pointL: CGPoint = CGPoint(x: pointK.x, y: pointBArcCenter.y)
+                let pointMArcCenter: CGPoint = CGPoint(x: pointL.x - cornerRadius, y: pointL.y)
+
+
+                let path: UIBezierPath = UIBezierPath()
+                path.move(to: origin)
+                path.addLine(to: pointA)
+                path.addArc(withCenter: pointBArcCenter, radius: cornerRadius, startAngle: (CGFloat.pi * 3 / 2), endAngle: CGFloat.pi, clockwise: true)
+
+                path.addLine(to: pointE)
+                path.addArc(withCenter: pointFArcCenter, radius: cornerRadius, startAngle: CGFloat.pi, endAngle: (CGFloat.pi * 3 / 2), clockwise: true)
+
+                path.addLine(to: pointExtA)
+                path.addArc(withCenter: pointExtBArcCenter, radius: cornerRadius, startAngle: (CGFloat.pi / 2), endAngle: 0, clockwise: true)
+                path.addLine(to: pointExtC)
+                path.addArc(withCenter: pointExtDArcCenter, radius: cornerRadius, startAngle: 0, endAngle: (CGFloat.pi / 2), clockwise: true)
+
+                path.addLine(to: pointK)
+                path.addLine(to: pointL)
+                path.addArc(withCenter: pointMArcCenter, radius: cornerRadius, startAngle: 0, endAngle: (CGFloat.pi / 2), clockwise: true)
+
+                path.close()
+                return path
+        }
+        func leftSquareBubblePath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, cornerRadius: CGFloat, expansions: Int) -> UIBezierPath {
+
+                //    +---------------+---------------+-----------G---+
+                //    +   +           +               +           +   +
+                //    c...d           +               +           H...+
+                //    +               +               +               +
+                //    +               +               +               +
+                //    +...b           +               +               +
+                //    +   +           +               +               +
+                //    +---a-----------+---------------C               +
+                //                                    +               +
+                //                                    +               +
+                //                                    +               +
+                //                                    +...B       M...L
+                //                                    +   |       |   +
+                //                                    +---A---o-------+
+
+                let extendHeight: CGFloat = keyHeight
+                let extendStep: CGFloat = keyWidth
+
+                let pointA: CGPoint = CGPoint(x: origin.x - (keyWidth / 2) + cornerRadius, y: origin.y)
+                let pointBArcCenter: CGPoint = CGPoint(x: pointA.x, y: pointA.y - cornerRadius)
+                let pointC: CGPoint = CGPoint(x: origin.x - (keyWidth / 2), y: origin.y - keyHeight - 4)
+
+                let extendWidth: CGFloat = extendStep * CGFloat(expansions)
+                let pointExtA: CGPoint = CGPoint(x: pointC.x - extendWidth + cornerRadius, y: pointC.y)
+                let pointExtBArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointExtA.y - cornerRadius)
+                let pointExtC: CGPoint = CGPoint(x: pointExtA.x - cornerRadius, y: pointExtA.y - extendHeight + cornerRadius)
+                let pointExtDArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointExtC.y)
+
+                let pointG: CGPoint = CGPoint(x: origin.x + (keyWidth / 2) - cornerRadius, y: pointExtC.y - cornerRadius)
+                let pointHArcCenter: CGPoint = CGPoint(x: pointG.x, y: pointExtC.y)
+
+                let pointL: CGPoint = CGPoint(x: origin.x + keyWidth / 2, y: pointBArcCenter.y)
+                let pointMArcCenter: CGPoint = CGPoint(x: pointL.x - cornerRadius, y: pointL.y)
+
+                let path: UIBezierPath = UIBezierPath()
+                path.move(to: origin)
+                path.addLine(to: pointA)
+                path.addArc(withCenter: pointBArcCenter, radius: cornerRadius, startAngle: (CGFloat.pi * 3 / 2), endAngle: CGFloat.pi, clockwise: true)
+                path.addLine(to: pointC)
+
+                path.addLine(to: pointExtA)
+                path.addArc(withCenter: pointExtBArcCenter, radius: cornerRadius, startAngle: CGFloat.pi / 2, endAngle: CGFloat.pi, clockwise: true)
+                path.addLine(to: pointExtC)
+                path.addArc(withCenter: pointExtDArcCenter, radius: cornerRadius, startAngle: CGFloat.pi, endAngle: (CGFloat.pi * 3 / 2), clockwise: true)
+
+                path.addLine(to: pointG)
+                path.addArc(withCenter: pointHArcCenter, radius: cornerRadius, startAngle: (CGFloat.pi / 2), endAngle: 0, clockwise: true)
+
+                path.addLine(to: pointL)
+                path.addArc(withCenter: pointMArcCenter, radius: cornerRadius, startAngle: 0, endAngle: (CGFloat.pi / 2), clockwise: true)
+
+                path.close()
+                return path
+        }
 }

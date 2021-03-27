@@ -74,9 +74,9 @@ final class KeyButton: UIButton {
                         spaceTouchPoint = .zero
                         changeColorToNormal()
                 case .key(let seat):
+                        removeCallout()
                         if isPhonePortrait {
                                 removePreview()
-                                removeCallout()
                         } else {
                                 changeColorToNormal()
                         }
@@ -160,9 +160,9 @@ final class KeyButton: UIButton {
                         spaceTouchPoint = .zero
                         changeColorToNormal()
                 case .key:
+                        removeCallout()
                         if isPhonePortrait {
                                 removePreview()
-                                removeCallout()
                         } else {
                                 changeColorToNormal()
                         }
@@ -216,7 +216,6 @@ final class KeyButton: UIButton {
                 layer.shadowColor = UIColor.black.cgColor
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
-                let keyShapePath: UIBezierPath = keyShapeBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
                 layer.path = keyShapePath.cgPath
                 layer.fillColor = buttonColor.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
@@ -238,6 +237,7 @@ final class KeyButton: UIButton {
                 label.textColor = buttonTintColor
                 return label
         }()
+        private lazy var keyShapePath: UIBezierPath = keyShapeBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
         private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
         private lazy var keyWidth: CGFloat = keyButtonView.frame.width
         private lazy var keyHeight: CGFloat = keyButtonView.frame.height
@@ -246,7 +246,57 @@ final class KeyButton: UIButton {
 
         // MARK: - Callout
 
-        private lazy var selectionColor: UIColor =  UIColor(red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
+        func displayCallout() {
+                layer.addSublayer(calloutLayer)
+                addSubview(calloutStackView)
+                isCalloutDisplaying = true
+        }
+        private lazy var isCalloutDisplaying: Bool = false
+        private func removeCallout() {
+                _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
+                calloutStackView.removeFromSuperview()
+                calloutLayer.removeFromSuperlayer()
+                isCalloutDisplaying = false
+        }
+        private lazy var calloutStackView: UIStackView = {
+                let rect: CGRect = {
+                        if isPhonePortrait {
+                                let expansion = isRightBubble ? (keyButtonView.bounds.minX - bubblePath.bounds.minX) : (bubblePath.bounds.maxX - keyButtonView.bounds.maxX - 5)
+                                let width = bubblePath.bounds.width - (expansion * 2)
+                                let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
+                                let size = CGSize(width: width, height: keyHeight)
+                                return CGRect(origin: origin, size: size)
+                        } else {
+                                let origin = CGPoint(x: bubblePath.bounds.minX, y: bubblePath.bounds.minY)
+                                let width = bubblePath.bounds.width
+                                let size = CGSize(width: width, height: keyHeight)
+                                return CGRect(origin: origin, size: size)
+                        }
+                }()
+                let stackView: UIStackView = UIStackView(frame: rect)
+                stackView.distribution = .fillEqually
+                stackView.addMultipleArrangedSubviews(calloutKeys)
+                return stackView
+        }()
+        private lazy var calloutLayer: CAShapeLayer = {
+                let layer = CAShapeLayer()
+                layer.shadowOpacity = 0.3
+                layer.shadowRadius = 0.5
+                layer.shadowOffset = .zero
+                layer.shadowColor = UIColor.black.cgColor
+                layer.shouldRasterize = true
+                layer.rasterizationScale = UIScreen.main.scale
+                layer.path = isPhonePortrait ? previewPath.cgPath : keyShapePath.cgPath
+                layer.fillColor = buttonColor.cgColor
+                let animation = CABasicAnimation(keyPath: "path")
+                animation.duration = 0.01
+                animation.toValue = bubblePath.cgPath
+                animation.fillMode = .forwards
+                animation.isRemovedOnCompletion = false
+                animation.timingFunction = CAMediaTimingFunction(name: .default)
+                layer.add(animation, forKey: animation.keyPath)
+                return layer
+        }()
         private lazy var calloutKeys: [CalloutView] = {
                 switch keyboardEvent {
                 case .key(let seat):
@@ -265,64 +315,22 @@ final class KeyButton: UIButton {
                         return []
                 }
         }()
-        func displayCallout() {
-                guard isPhonePortrait else { return }
-                layer.addSublayer(calloutLayer)
-                addSubview(calloutStackView)
-                isCalloutDisplaying = true
-        }
-        private lazy var isCalloutDisplaying: Bool = false
-        func removeCallout() {
-                _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
-                calloutStackView.removeFromSuperview()
-                calloutLayer.removeFromSuperlayer()
-                isCalloutDisplaying = false
-        }
-        private lazy var calloutStackView: UIStackView = {
-                let expansion = isRightBubble ? (keyButtonView.bounds.minX - bubblePath.bounds.minX) : (bubblePath.bounds.maxX - keyButtonView.bounds.maxX - 5)
-                let width = bubblePath.bounds.width - (expansion * 2)
-                let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
-                let size = CGSize(width: width, height: keyHeight)
-                let stackView: UIStackView = UIStackView(frame: CGRect(origin: origin, size: size))
-                stackView.distribution = .fillEqually
-                stackView.addMultipleArrangedSubviews(calloutKeys)
-                return stackView
-        }()
-        private lazy var calloutLayer: CAShapeLayer = {
-                let layer = CAShapeLayer()
-                layer.shadowOpacity = 0.3
-                layer.shadowRadius = 0.5
-                layer.shadowOffset = .zero
-                layer.shadowColor = UIColor.black.cgColor
-                layer.shouldRasterize = true
-                layer.rasterizationScale = UIScreen.main.scale
-                layer.path = previewPath.cgPath
-                layer.fillColor = buttonColor.cgColor
-                let animation = CABasicAnimation(keyPath: "path")
-                animation.duration = 0.01
-                animation.toValue = bubblePath.cgPath
-                animation.fillMode = .forwards
-                animation.isRemovedOnCompletion = false
-                animation.timingFunction = CAMediaTimingFunction(name: .default)
-                layer.add(animation, forKey: animation.keyPath)
-                return layer
-        }()
+        private lazy var selectionColor: UIColor =  UIColor(red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
         private lazy var isRightBubble: Bool = frame.midX < viewController.view.frame.midX
         private lazy var bubblePath: UIBezierPath = {
-                if isRightBubble {
-                        return rightBubblePath(origin: bottomCenter,
-                                               previewCornerRadius: 10,
-                                               keyWidth: keyWidth,
-                                               keyHeight: keyHeight,
-                                               keyCornerRadius: 5,
-                                               expansions: calloutKeys.count - 1)
+                if isPhonePortrait {
+                        if isRightBubble {
+                                return rightBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
+                        } else {
+                                return leftBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
+                        }
                 } else {
-                        return leftBubblePath(origin: bottomCenter,
-                                              previewCornerRadius: 10,
-                                              keyWidth: keyWidth,
-                                              keyHeight: keyHeight,
-                                              keyCornerRadius: 5,
-                                              expansions: calloutKeys.count - 1)
+                        if isRightBubble {
+                                return rightSquareBubblePath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
+
+                        } else {
+                                return leftSquareBubblePath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
+                        }
                 }
         }()
 }
