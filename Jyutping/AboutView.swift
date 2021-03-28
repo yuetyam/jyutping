@@ -150,7 +150,6 @@ private struct EmailFeedbackButton: View {
                 let device: String = UIDevice.modelName
                 let system: String = UIDevice.current.systemName + " " + UIDevice.current.systemVersion
                 let messageBody: String = """
-                [ Enter your feedback here. ]
 
                 
                 Version: \(version)
