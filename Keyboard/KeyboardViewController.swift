@@ -170,6 +170,8 @@ final class KeyboardViewController: UIInputViewController {
                                 let splittable: String = syllables.joined()
                                 if splittable.count == processingText.count {
                                         markedText = syllables.joined(separator: " ")
+                                } else if processingText.contains("'") {
+                                        markedText = processingText.replacingOccurrences(of: "'", with: "' ")
                                 } else {
                                         let tail = processingText.dropFirst(splittable.count)
                                         markedText = syllables.joined(separator: " ") + " " + tail
@@ -205,12 +207,13 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        
+
         private(set) var lexiconManager: LexiconManager = LexiconManager()
         private lazy var engine: Engine = Engine()
         private func suggestCandidates() {
-                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: processingText)
-                let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: syllablesSchemes)
+                let text: String = processingText.replacingOccurrences(of: "'", with: "")
+                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: text)
+                let engineCandidates: [Candidate] = engine.suggest(for: text, schemes: syllablesSchemes)
                 let combined: [Candidate] = userdbCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()

@@ -24,8 +24,8 @@ struct KeySeat: Hashable {
 
         static let periodSeat: KeySeat = KeySeat(primary: .period, children: [.period, .comma, .questionMark, .exclamationMark])
         static let cantoneseCommaSeat: KeySeat = {
-                // let separator: KeyElement = KeyElement(text: "\u{0027}", header: "分隔")
-                return KeySeat(primary: .cantoneseComma, children: [.cantoneseComma, .cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark])
+                let separator: KeyElement = KeyElement(text: "\u{0027}", header: "分隔")
+                return KeySeat(primary: .cantoneseComma, children: [.cantoneseComma, .cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark, separator])
         }()
 }
 

@@ -73,25 +73,37 @@ final class KeyButton: UIButton {
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
-                case .key(let seat):
+                case .key(let seat) where !seat.children.isEmpty:
                         removeCallout()
                         if isPhonePortrait {
                                 removePreview()
                         } else {
                                 changeColorToNormal()
                         }
-                        if !seat.children.isEmpty {
-                                if let text: String = textToInput {
-                                        if viewController.inputText.isEmpty {
-                                                viewController.textDocumentProxy.insertText(text)
-                                        } else {
-                                                let combined: String = viewController.processingText + text
-                                                viewController.inputText = ""
-                                                viewController.textDocumentProxy.insertText(combined)
-                                        }
-                                        AudioFeedback.perform(.input)
-                                        viewController.hapticFeedback?.impactOccurred()
-                                }
+                        guard let text: String = textToInput else { break }
+                        AudioFeedback.perform(.input)
+                        viewController.hapticFeedback?.impactOccurred()
+                        guard viewController.keyboardLayout.isJyutpingMode else {
+                                viewController.textDocumentProxy.insertText(text)
+                                break
+                        }
+                        let punctuation: String = "，。？！"
+                        guard punctuation.contains(text) else {
+                                viewController.inputText += text
+                                break
+                        }
+                        if viewController.inputText.isEmpty {
+                                viewController.textDocumentProxy.insertText(text)
+                        } else {
+                                let combined: String = viewController.processingText + text
+                                viewController.inputText = ""
+                                viewController.textDocumentProxy.insertText(combined)
+                        }
+                case .key:
+                        if isPhonePortrait {
+                                removePreview()
+                        } else {
+                                changeColorToNormal()
                         }
                 default:
                         break

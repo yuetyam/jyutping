@@ -18,8 +18,10 @@ struct Splitter {
                 let raw: String = text.filter({ !$0.isNumber })
                 return (text, raw, tones, syllables)
         }
-
         static func split(_ text: String) -> [[String]] {
+                guard !text.contains("'") else {
+                        return separate(text: text)
+                }
                 let prepared = prepare(text: text)
                 let schemes: [[String]] = performSplit(text: prepared.raw)
                 guard !prepared.tones.isEmpty else { return schemes }
@@ -50,7 +52,15 @@ struct Splitter {
                 }
                 return sequences(for: checked)
         }
+        private static func separate(text: String) -> [[String]] {
+                let parts: [String] = text.split(separator: "'").map({ String($0) })
+                let schemes: [[String]] = Splitter.sequences(for: parts)
+                return schemes
+        }
         private static func sequences(for blocks: [String]) -> [[String]] {
+                guard blocks.count > 1 else {
+                        return [blocks]
+                }
                 var schemes: [[String]] = []
                 for number in 0..<blocks.count {
                         schemes.append(blocks.dropLast(number))
