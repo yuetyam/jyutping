@@ -26,7 +26,7 @@ extension KeyButton {
         }
         @objc private func handleTap() {
                 switch keyboardEvent {
-                case .key(.cantoneseCommaSeat):
+                case .key(.cantoneseComma):
                         guard textToInput == nil else { return }
                         if viewController.inputText.isEmpty {
                                 viewController.textDocumentProxy.insertText("，")

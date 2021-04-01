@@ -92,7 +92,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
+                let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
@@ -114,7 +114,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
+                let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
@@ -136,7 +136,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
+                let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
@@ -158,7 +158,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .key(.cantoneseCommaSeat)
+                let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
@@ -180,7 +180,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = .key(.periodSeat)
+                let period: KeyboardEvent = .key(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
@@ -202,7 +202,7 @@ private extension KeyboardLayout {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.shadowBackspace)
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = .key(.periodSeat)
+                let period: KeyboardEvent = .key(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]

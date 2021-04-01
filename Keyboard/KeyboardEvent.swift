@@ -22,10 +22,20 @@ struct KeySeat: Hashable {
                 self.children = children
         }
 
-        static let periodSeat: KeySeat = KeySeat(primary: .period, children: [.period, .comma, .questionMark, .exclamationMark])
-        static let cantoneseCommaSeat: KeySeat = {
+        static let period: KeySeat = {
+                let period: KeyElement = KeyElement(text: ".")
+                let comma: KeyElement = KeyElement(text: ",")
+                let questionMark: KeyElement = KeyElement(text: "?")
+                let exclamationMark: KeyElement = KeyElement(text: "!")
+                return KeySeat(primary: period, children: [period, comma, questionMark, exclamationMark])
+        }()
+        static let cantoneseComma: KeySeat = {
+                let comma: KeyElement = KeyElement(text: "，")
+                let period: KeyElement = KeyElement(text: "。")
+                let questionMark: KeyElement = KeyElement(text: "？")
+                let exclamationMark: KeyElement = KeyElement(text: "！")
                 let separator: KeyElement = KeyElement(text: "\u{0027}", header: "分隔")
-                return KeySeat(primary: .cantoneseComma, children: [.cantoneseComma, .cantonesePeriod, .cantoneseQuestionMark, .cantoneseExclamationMark, separator])
+                return KeySeat(primary: comma, children: [comma, period, questionMark, exclamationMark, separator])
         }()
 }
 
@@ -56,16 +66,6 @@ struct KeyElement: Hashable {
                 hasher.combine(header)
                 hasher.combine(footer)
         }
-
-        static let period: KeyElement = KeyElement(text: ".")
-        static let comma: KeyElement = KeyElement(text: ",")
-        static let questionMark: KeyElement = KeyElement(text: "?")
-        static let exclamationMark: KeyElement = KeyElement(text: "!")
-
-        static let cantonesePeriod: KeyElement = KeyElement(text: "。")
-        static let cantoneseComma: KeyElement = KeyElement(text: "，")
-        static let cantoneseQuestionMark: KeyElement = KeyElement(text: "？")
-        static let cantoneseExclamationMark: KeyElement = KeyElement(text: "！")
 }
 
 enum Alignment {
