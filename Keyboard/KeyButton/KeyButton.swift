@@ -3,9 +3,7 @@ import UIKit
 final class KeyButton: UIButton {
 
         let keyButtonView: UIView = UIView()
-        let keyTextLabel: UILabel = UILabel()
-        let keyImageView: UIImageView = UIImageView()
-
+        
         let keyboardEvent: KeyboardEvent
         let viewController: KeyboardViewController
 
@@ -23,6 +21,10 @@ final class KeyButton: UIButton {
                         setupKeyImageView()
                 case .none, .shadowKey, .shadowBackspace:
                         break
+                case .key(let seat) where seat.primary.header != nil:
+                        setupKeyButtonView()
+                        setupKeyTextLabel()
+                        setupKeyHeaderLabel(text: seat.primary.header)
                 default:
                         setupKeyButtonView()
                         setupKeyTextLabel()

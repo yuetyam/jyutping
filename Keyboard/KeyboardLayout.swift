@@ -127,7 +127,57 @@ private extension KeyboardLayout {
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
                         ["z", "oe", "c", "ng", "b", "n", "m"]
                 ]
+                let third_0: KeyboardEvent = {
+                        let primary = KeyElement(text: "z", header: "1")
+                        let child_0 = KeyElement(text: "z")
+                        let child_1 = KeyElement(text: "1", header: "聲調", footer: "陰平")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_1: KeyboardEvent = {
+                        let primary = KeyElement(text: "oe", header: "2")
+                        let child_0 = KeyElement(text: "oe")
+                        let child_1 = KeyElement(text: "2", header: "聲調", footer: "陰上")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_2: KeyboardEvent = {
+                        let primary = KeyElement(text: "c", header: "3")
+                        let child_0 = KeyElement(text: "c")
+                        let child_1 = KeyElement(text: "3", header: "聲調", footer: "陰去")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_3: KeyboardEvent = {
+                        let primary = KeyElement(text: "ng", header: "4")
+                        let child_0 = KeyElement(text: "ng")
+                        let child_1 = KeyElement(text: "4", header: "聲調", footer: "陽平")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_4: KeyboardEvent = {
+                        let primary = KeyElement(text: "b", header: "5")
+                        let child_0 = KeyElement(text: "b")
+                        let child_1 = KeyElement(text: "5", header: "聲調", footer: "陽上")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_5: KeyboardEvent = {
+                        let primary = KeyElement(text: "n", header: "6")
+                        let child_0 = KeyElement(text: "n")
+                        let child_1 = KeyElement(text: "6", header: "聲調", footer: "陽去")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
+                let third_6: KeyboardEvent = {
+                        let primary = KeyElement(text: "m", header: "'")
+                        let child_0 = KeyElement(text: "m")
+                        let child_1 = KeyElement(text: "'", header: "分隔")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        return KeyboardEvent.key(seat)
+                }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
+                eventRows[2] = [third_0, third_1, third_2, third_3, third_4, third_5, third_6]
                 eventRows[1].insert(.shadowKey("a"), at: 0)
                 eventRows[1].insert(.shadowKey("a"), at: 0)
                 eventRows[1].append(.shadowKey("l"))

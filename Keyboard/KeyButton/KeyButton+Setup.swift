@@ -67,6 +67,7 @@ extension KeyButton {
         }
         
         func setupKeyTextLabel() {
+                let keyTextLabel: UILabel = UILabel()
                 keyButtonView.addSubview(keyTextLabel)
                 keyTextLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -80,8 +81,36 @@ extension KeyButton {
                 keyTextLabel.text = keyText
                 keyTextLabel.textColor = buttonTintColor
         }
-        
+        func setupKeyHeaderLabel(text: String?) {
+                let keyHeaderLabel: UILabel = UILabel()
+                keyButtonView.addSubview(keyHeaderLabel)
+                keyHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        keyHeaderLabel.topAnchor.constraint(equalTo: keyButtonView.topAnchor, constant: 2),
+                        keyHeaderLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor,constant: 2),
+                        keyHeaderLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor, constant: -2)
+                ])
+                keyHeaderLabel.font = .systemFont(ofSize: 10)
+                keyHeaderLabel.textAlignment = .right
+                keyHeaderLabel.text = text
+                keyHeaderLabel.textColor = buttonTintColor.withAlphaComponent(0.7)
+        }
+        func setupKeyFooterLabel(text: String?) {
+                let keyFooterLabel: UILabel = UILabel()
+                keyButtonView.addSubview(keyFooterLabel)
+                keyFooterLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        keyFooterLabel.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -2),
+                        keyFooterLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor, constant: 2),
+                        keyFooterLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor, constant: -2)
+                ])
+                keyFooterLabel.font = .systemFont(ofSize: 10)
+                keyFooterLabel.textAlignment = .right
+                keyFooterLabel.text = text
+                keyFooterLabel.textColor = buttonTintColor.withAlphaComponent(0.7)
+        }
         func setupKeyImageView(constant: CGFloat = 10) {
+                let keyImageView: UIImageView = UIImageView()
                 var constant: CGFloat = constant
                 if viewController.traitCollection.userInterfaceIdiom == .pad {
                         if viewController.traitCollection.horizontalSizeClass == .compact || viewController.view.frame.width < 500 {
@@ -99,7 +128,6 @@ extension KeyButton {
                                 constant -= 3
                         }
                 }
-                
                 keyButtonView.addSubview(keyImageView)
                 keyImageView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
