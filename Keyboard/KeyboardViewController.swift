@@ -53,12 +53,6 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
         }
 
-        private lazy var didReceiveWarning: Bool = false
-        override func didReceiveMemoryWarning() {
-                didReceiveWarning = true
-                super.didReceiveMemoryWarning()
-        }
-
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
                 if needsDifferentKeyboard {
@@ -77,9 +71,6 @@ final class KeyboardViewController: UIInputViewController {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
-                if didReceiveWarning {
-                        exit(0)
-                }
         }
 
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
