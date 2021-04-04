@@ -28,20 +28,12 @@ Temporary Items
 
 
 ### Xcode ###
-# Xcode
-
 ## User settings
 xcuserdata/
 
 ## Xcode Patch
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
+*.xcworkspace/
 /*.gcno
-
-### Xcode Patch ###
-**/xcshareddata/WorkspaceSettings.xcsettings
 
 ## Other
 *.moved-aside
@@ -60,17 +52,15 @@ xcuserdata/
 timeline.xctimeline
 playground.xcworkspace
 
-# Swift Package Manager
+
+### Swift Package Manager ###
 Packages/
 Package.pins
 Package.resolved
 .build/
-
-# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
-# hence it is not needed unless you have added a package configuration file to your project
-.swiftpm
+.swiftpm/
 
 
-# Other IDEs and editors
-/.vscode
-/.idea
+### Other IDEs and editors ###
+.vscode/
+.idea/
