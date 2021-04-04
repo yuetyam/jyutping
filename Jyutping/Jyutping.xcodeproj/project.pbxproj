@@ -94,8 +94,6 @@
 
 /* Begin PBXFileReference section */
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
-		370E369C2605DF04003BC0CD /* JyutpingDataProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingDataProvider; path = ../JyutpingDataProvider; sourceTree = "<group>"; };
-		370E369F2605DF38003BC0CD /* JyutpingProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingProvider; path = ../JyutpingProvider; sourceTree = "<group>"; };
 		3715176D25DD123B00F4EA95 /* String+code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+code.swift"; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +163,8 @@
 		37E004F923E4BAA000E413BD /* KeyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
 		37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subviews.swift"; sourceTree = "<group>"; };
 		37E1874E24CB766900602C03 /* InitialsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
+		37E940AD261A2C7900D4FAE5 /* JyutpingProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingProvider; path = ../Helpers/JyutpingProvider; sourceTree = "<group>"; };
+		37E940AE261A2C8000D4FAE5 /* JyutpingDataProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingDataProvider; path = ../Helpers/JyutpingDataProvider; sourceTree = "<group>"; };
 		37F1C027235C3EB700CDDA31 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37FA443423A8510A001E7DBC /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		37FF2A2C23E8F51500B86C74 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
@@ -196,8 +196,8 @@
 		37211D4B23541EE3007E1D68 = {
 			isa = PBXGroup;
 			children = (
-				370E369F2605DF38003BC0CD /* JyutpingProvider */,
-				370E369C2605DF04003BC0CD /* JyutpingDataProvider */,
+				37E940AD261A2C7900D4FAE5 /* JyutpingProvider */,
+				37E940AE261A2C8000D4FAE5 /* JyutpingDataProvider */,
 				37211D5623541EE3007E1D68 /* Jyutping */,
 				37AE5BED2354AAF8008A8E4B /* Keyboard */,
 				37211D5523541EE3007E1D68 /* Products */,
