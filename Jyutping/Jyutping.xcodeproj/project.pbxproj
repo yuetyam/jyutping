@@ -13,6 +13,8 @@
 		370E36A12605DF46003BC0CD /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 370E36A02605DF46003BC0CD /* JyutpingProvider */; };
 		3715176E25DD123B00F4EA95 /* String+code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715176D25DD123B00F4EA95 /* String+code.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
+		371C5017261B4D3D00916D52 /* ShiftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C5016261B4D3D00916D52 /* ShiftState.swift */; };
+		371C5019261B4D8D00916D52 /* KeyboardLayout+keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */; };
 		37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D5D23541EE4007E1D68 /* Assets.xcassets */; };
 		37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6023541EE4007E1D68 /* Preview Assets.xcassets */; };
 		37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */; };
@@ -96,6 +98,8 @@
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
 		3715176D25DD123B00F4EA95 /* String+code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+code.swift"; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
+		371C5016261B4D3D00916D52 /* ShiftState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftState.swift; sourceTree = "<group>"; };
+		371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardLayout+keys.swift"; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37211D5723541EE3007E1D68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37211D5D23541EE4007E1D68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -193,6 +197,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		371C5015261B4D1F00916D52 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				37E004F723E49B6700E413BD /* KeyboardLayout.swift */,
+				371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */,
+				371C5016261B4D3D00916D52 /* ShiftState.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		37211D4B23541EE3007E1D68 = {
 			isa = PBXGroup;
 			children = (
@@ -319,9 +333,9 @@
 				3741063023E30C4100639EF4 /* KeyboardViewController+Setup.swift */,
 				3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */,
 				374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */,
-				37E004F723E49B6700E413BD /* KeyboardLayout.swift */,
 				37E004F923E4BAA000E413BD /* KeyboardEvent.swift */,
 				370B631423E96E1000912B9A /* AudioFeedback.swift */,
+				371C5015261B4D1F00916D52 /* Layout */,
 				377EAD4B24708D5000B42D30 /* Candidate */,
 				3791975724FA43DC00F9D946 /* KeyButton */,
 				3741063223E30D3200639EF4 /* Components */,
@@ -519,6 +533,7 @@
 				37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */,
 				379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */,
 				379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */,
+				371C5017261B4D3D00916D52 /* ShiftState.swift in Sources */,
 				37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */,
 				374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */,
 				377EAD4A24708ACD00B42D30 /* Splitter.swift in Sources */,
@@ -531,6 +546,7 @@
 				37FF2A2F23E8F80400B86C74 /* Engine.swift in Sources */,
 				3715176E25DD123B00F4EA95 /* String+code.swift in Sources */,
 				3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */,
+				371C5019261B4D8D00916D52 /* KeyboardLayout+keys.swift in Sources */,
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
 				3748E26D23F9FA7200A37A45 /* KeyButton+Handlers.swift in Sources */,
 				37AFDAD6260C8B97002963B5 /* CalloutView.swift in Sources */,
