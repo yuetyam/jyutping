@@ -38,7 +38,7 @@ final class CalloutView: UIView {
                         textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
                         textLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
-                textLabel.font = .systemFont(ofSize: 17)
+                textLabel.font = .systemFont(ofSize: 19)
                 textLabel.textAlignment = .center
                 textLabel.text = text
         }
