@@ -1,15 +1,14 @@
 enum KeyboardEvent: Hashable {
-        case key(KeySeat),
+        case none,
+             key(KeySeat),
              space,
              backspace,
-             newLine, // return, enter
+             newLine,
              shift,
-             switchInputMethod,
              switchTo(KeyboardLayout),
-
+             switchInputMethod,
              shadowKey(String),
-             shadowBackspace,
-             none
+             shadowBackspace
 }
 
 struct KeySeat: Hashable {
