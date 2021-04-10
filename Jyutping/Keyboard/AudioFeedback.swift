@@ -1,19 +1,16 @@
 import AudioToolbox
 
 enum AudioFeedback {
-        case
-        input,
-        delete,
-        modify
+
+        case input
+        case delete
+        case modify
         
-        private var systemSoundId: SystemSoundID {
+        private var soundID: SystemSoundID {
                 switch self {
-                case .input:
-                        return 1123
-                case .delete:
-                        return 1155
-                case .modify:
-                        return 1156
+                case .input : return 1123
+                case .delete: return 1155
+                case .modify: return 1156
                 }
         }
         
@@ -21,24 +18,21 @@ enum AudioFeedback {
                 guard isAudioFeedbackOn else { return }
                 switch keyboardEvent {
                 case .key, .shadowKey:
-                        feedback(.input)
+                        AudioServicesPlaySystemSound(Self.input.soundID)
                 case .backspace, .shadowBackspace:
-                        feedback(.delete)
+                        AudioServicesPlaySystemSound(Self.delete.soundID)
                 case .switchTo, .newLine, .shift:
-                        feedback(.modify)
+                        AudioServicesPlaySystemSound(Self.modify.soundID)
                 case .none:
                         break
                 default:
-                        feedback(.input)
+                        AudioServicesPlaySystemSound(Self.input.soundID)
                 }
         }
-        private static func feedback(_ audioFeedback: AudioFeedback) {
-                AudioServicesPlaySystemSound(audioFeedback.systemSoundId)
-        }
         
-        static func perform(_ audioFeedback: AudioFeedback) {
+        static func perform(_ feedback: AudioFeedback) {
                 guard isAudioFeedbackOn else { return }
-                AudioServicesPlaySystemSound(audioFeedback.systemSoundId)
+                AudioServicesPlaySystemSound(feedback.soundID)
         }
         
         private static var isAudioFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "audio_feedback")
