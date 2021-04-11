@@ -17,9 +17,11 @@ Jyutping Keyboard for iOS
 </a>
 <br>
 
+https://apps.apple.com/app/id1509367629
+
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="480"/>
-<br><br>
+<br>
 
 ## Running compatibility
 iOS 13.0+
