@@ -90,12 +90,14 @@ final class CandidateCell: UICollectionViewCell {
         
         private func updateFonts() {
                 switch logogram {
+                case 2:
+                        textLabel.font = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
                 case 3:
                         textLabel.font = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
                 case 4:
                         textLabel.font = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
                 default:
-                        textLabel.font = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
+                        textLabel.font = UIFont(name: "SourceHanSansK-Regular", size: 20) ?? .systemFont(ofSize: 20)
                 }
         }
 }

@@ -38,6 +38,7 @@
 		37573F6824F3112D00856B8A /* String+shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6724F3112D00856B8A /* String+shortcut.swift */; };
 		37573F6A24F3120300856B8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Entry.swift */; };
 		37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6B24F3123500856B8A /* LexiconManager.swift */; };
+		3757E67F2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3757E67E2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf */; };
 		3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */; };
 		377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AF90925DE328F00EED1FD /* Emoji.swift */; };
 		377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */ = {isa = PBXBuildFile; productRef = 377AF92825DEDB0A00EED1FD /* BLAKE3 */; };
@@ -128,6 +129,7 @@
 		37573F6724F3112D00856B8A /* String+shortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+shortcut.swift"; sourceTree = "<group>"; };
 		37573F6924F3120300856B8A /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		37573F6B24F3123500856B8A /* LexiconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconManager.swift; sourceTree = "<group>"; };
+		3757E67E2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansK-Regular.otf"; sourceTree = "<group>"; };
 		3764EB6E24D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3764EB6F24D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3764EB7024D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
 				37AE5BF02354AAF8008A8E4B /* Info.plist */,
+				3757E67E2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf */,
 			);
 			path = Keyboard;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 			files = (
 				37C18EC0237A942800F92482 /* InfoPlist.strings in Resources */,
 				37AA501C24502D3F003E7921 /* Localizable.strings in Resources */,
+				3757E67F2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
