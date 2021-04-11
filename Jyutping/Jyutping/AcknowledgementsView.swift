@@ -7,7 +7,7 @@ struct AcknowledgementsView: View {
                         ScrollView {
                                 LinkView(iconName: "book",
                                          text: Text("Rime Cantonese"),
-                                         footnote: Text("© CanCLID. CC BY 4.0"), // CC: \u{1F16D}, BY: \u{1F16F}, iOS can't display these characters.
+                                         footnote: Text("© CanCLID. CC BY 4.0"),
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/rime/rime-cantonese")!)
                                         .fillBackground()
@@ -17,13 +17,6 @@ struct AcknowledgementsView: View {
                                          footnote: Text("© Carbo Kuo. Apache 2.0"),
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/BYVoid/OpenCC")!)
-                                        .fillBackground()
-                                        .padding(.horizontal)
-                                LinkView(iconName: "briefcase",
-                                         text: Text("BLAKE3"),
-                                         footnote: Text("© nixberg. MIT License"),
-                                         symbolName: "safari",
-                                         url: URL(string: "https://github.com/nixberg/blake3-swift")!)
                                         .fillBackground()
                                         .padding()
                         }
