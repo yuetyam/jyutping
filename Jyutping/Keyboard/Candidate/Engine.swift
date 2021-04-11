@@ -1,10 +1,10 @@
 import Foundation
 import SQLite3
-import JyutpingDataProvider
+import KeyboardDataProvider
 
 struct Engine {
 
-        private let provider: JyutpingDataProvider = JyutpingDataProvider()
+        private let provider: KeyboardDataProvider = KeyboardDataProvider()
         func close() {
                 provider.close()
         }

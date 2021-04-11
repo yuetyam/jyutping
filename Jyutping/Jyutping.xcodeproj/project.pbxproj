@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B631423E96E1000912B9A /* AudioFeedback.swift */; };
 		370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37211D5723541EE3007E1D68 /* AppDelegate.swift */; };
-		370E369E2605DF0F003BC0CD /* JyutpingDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 370E369D2605DF0F003BC0CD /* JyutpingDataProvider */; };
 		370E36A12605DF46003BC0CD /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 370E36A02605DF46003BC0CD /* JyutpingProvider */; };
 		3715176E25DD123B00F4EA95 /* String+code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715176D25DD123B00F4EA95 /* String+code.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
@@ -39,6 +38,7 @@
 		37573F6A24F3120300856B8A /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6924F3120300856B8A /* Entry.swift */; };
 		37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37573F6B24F3123500856B8A /* LexiconManager.swift */; };
 		3757E67F2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3757E67E2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf */; };
+		3757E68526230BDE00FF0D68 /* KeyboardDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3757E68426230BDE00FF0D68 /* KeyboardDataProvider */; };
 		3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */; };
 		377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AF90925DE328F00EED1FD /* Emoji.swift */; };
 		377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */ = {isa = PBXBuildFile; productRef = 377AF92825DEDB0A00EED1FD /* BLAKE3 */; };
@@ -130,6 +130,7 @@
 		37573F6924F3120300856B8A /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		37573F6B24F3123500856B8A /* LexiconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconManager.swift; sourceTree = "<group>"; };
 		3757E67E2622E1AF00FF0D68 /* SourceHanSansK-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansK-Regular.otf"; sourceTree = "<group>"; };
+		3757E68326230BC100FF0D68 /* KeyboardDataProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = KeyboardDataProvider; path = ../Helpers/KeyboardDataProvider; sourceTree = "<group>"; };
 		3764EB6E24D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3764EB6F24D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3764EB7024D0F35D00A2A3AD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -170,7 +171,6 @@
 		37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subviews.swift"; sourceTree = "<group>"; };
 		37E1874E24CB766900602C03 /* InitialsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
 		37E940AD261A2C7900D4FAE5 /* JyutpingProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingProvider; path = ../Helpers/JyutpingProvider; sourceTree = "<group>"; };
-		37E940AE261A2C8000D4FAE5 /* JyutpingDataProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingDataProvider; path = ../Helpers/JyutpingDataProvider; sourceTree = "<group>"; };
 		37F1C027235C3EB700CDDA31 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37FA443423A8510A001E7DBC /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		37FF2A2C23E8F51500B86C74 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
@@ -191,8 +191,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3742A50625F9AFBA009D5CBB /* OpenCCLite in Frameworks */,
+				3757E68526230BDE00FF0D68 /* KeyboardDataProvider in Frameworks */,
 				377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */,
-				370E369E2605DF0F003BC0CD /* JyutpingDataProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				37E940AD261A2C7900D4FAE5 /* JyutpingProvider */,
-				37E940AE261A2C8000D4FAE5 /* JyutpingDataProvider */,
+				3757E68326230BC100FF0D68 /* KeyboardDataProvider */,
 				37211D5623541EE3007E1D68 /* Jyutping */,
 				37AE5BED2354AAF8008A8E4B /* Keyboard */,
 				37211D5523541EE3007E1D68 /* Products */,
@@ -421,7 +421,7 @@
 			packageProductDependencies = (
 				377AF92825DEDB0A00EED1FD /* BLAKE3 */,
 				3742A50525F9AFBA009D5CBB /* OpenCCLite */,
-				370E369D2605DF0F003BC0CD /* JyutpingDataProvider */,
+				3757E68426230BDE00FF0D68 /* KeyboardDataProvider */,
 			);
 			productName = Keyboard;
 			productReference = 37AE5BEC2354AAF8008A8E4B /* Keyboard.appex */;
@@ -897,10 +897,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		370E369D2605DF0F003BC0CD /* JyutpingDataProvider */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = JyutpingDataProvider;
-		};
 		370E36A02605DF46003BC0CD /* JyutpingProvider */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = JyutpingProvider;
@@ -909,6 +905,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3742A50425F9AFBA009D5CBB /* XCRemoteSwiftPackageReference "OpenCCLite" */;
 			productName = OpenCCLite;
+		};
+		3757E68426230BDE00FF0D68 /* KeyboardDataProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KeyboardDataProvider;
 		};
 		377AF92825DEDB0A00EED1FD /* BLAKE3 */ = {
 			isa = XCSwiftPackageProductDependency;
