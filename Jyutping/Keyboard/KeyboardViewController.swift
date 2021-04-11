@@ -202,9 +202,8 @@ final class KeyboardViewController: UIInputViewController {
         private(set) var lexiconManager: LexiconManager = LexiconManager()
         private lazy var engine: Engine = Engine()
         private func suggestCandidates() {
-                let text: String = processingText.replacingOccurrences(of: "'", with: "")
-                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: text)
-                let engineCandidates: [Candidate] = engine.suggest(for: text, schemes: syllablesSchemes)
+                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: processingText)
+                let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: syllablesSchemes)
                 let combined: [Candidate] = userdbCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()

@@ -33,22 +33,29 @@ struct Engine {
                 case 3:
                         return fetchThreeChars(text)
                 default:
-                        return fetch(for: text, schemes: schemes)
+                        let rawText: String = text.replacingOccurrences(of: "'", with: "")
+                        return fetch(for: rawText, schemes: schemes)
                 }
         }
 
         private func fetchTwoChars(_ text: String) -> [Candidate] {
-                let exactlyMatched: [Candidate] = match(for: text)
-                guard let hasTone: Bool = text.last?.isNumber, !hasTone else {
-                        return exactlyMatched
+                guard (text.last!) != "'" else {
+                        return match(for: String(text.dropLast()))
+                }
+                let matched: [Candidate] = match(for: text)
+                guard !(text.last!.isNumber) else {
+                        return matched
                 }
                 let shortcutTwo: [Candidate] = shortcut(for: text)
                 let shortcutFirst: [Candidate] = shortcut(for: String(text.first!))
-                return exactlyMatched + shortcutTwo + shortcutFirst
+                return matched + shortcutTwo + shortcutFirst
         }
         private func fetchThreeChars(_ text: String) -> [Candidate] {
+                guard (text.last!) != "'" else {
+                        return match(for: String(text.dropLast()))
+                }
                 let exactlyMatched: [Candidate] = match(for: text)
-                guard let lastIsTone: Bool = text.last?.isNumber, !lastIsTone else {
+                guard !(text.last!.isNumber) else {
                         return exactlyMatched
                 }
                 let prefixMatches: [Candidate] = prefix(match: text)
