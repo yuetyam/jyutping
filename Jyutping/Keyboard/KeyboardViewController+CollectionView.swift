@@ -125,7 +125,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                 } else {
                         candidateSequence.append(candidate)
-                        inputText = String(processingText.dropFirst(candidate.input.count))
+                        let left = processingText.dropFirst(candidate.input.count)
+                        inputText = (left == "'") ? "" : String(left)
                 }
                 if keyboardLayout == .candidateBoard && inputText.isEmpty {
                         collectionView.removeFromSuperview()

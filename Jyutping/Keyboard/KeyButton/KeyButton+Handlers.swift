@@ -183,7 +183,8 @@ extension KeyButton {
                                 }
                         } else {
                                 viewController.candidateSequence.append(firstCandidate)
-                                viewController.inputText = String(processingText.dropFirst(firstCandidate.input.count))
+                                let left = processingText.dropFirst(firstCandidate.input.count)
+                                viewController.inputText = (left == "'") ? "" : String(left)
                         }
                         if viewController.inputText.isEmpty && !viewController.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = viewController.candidateSequence.joined()
