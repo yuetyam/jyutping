@@ -174,7 +174,7 @@ private extension Engine {
         func shortcut(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE shortcut = \(text.code) LIMIT \(count);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE shortcut = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -194,7 +194,7 @@ private extension Engine {
                 let digits: String = text.filter({ $0.isNumber })
                 let isToneless: Bool = digits.isEmpty
                 let ping: String = isToneless ? text : text.filter({ !$0.isNumber })
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.code);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -215,7 +215,7 @@ private extension Engine {
                 let digits: String = text.filter({ $0.isNumber })
                 let isToneless: Bool = digits.isEmpty
                 let ping: String = isToneless ? text : text.filter({ !$0.isNumber })
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.code) LIMIT \(count);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -236,7 +236,7 @@ private extension Engine {
                 let digits: String = text.filter({ $0.isNumber })
                 let isToneless: Bool = digits.isEmpty
                 let ping: String = isToneless ? text : text.filter({ !$0.isNumber })
-                let queryString = "SELECT rowid, word, jyutping FROM jyutpingtable WHERE ping = \(ping.code);"
+                let queryString = "SELECT rowid, word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -256,7 +256,7 @@ private extension Engine {
         func prefix(match text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE prefix = \(text.code) LIMIT \(count);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE prefix = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -272,7 +272,7 @@ private extension Engine {
 
         func matchPinyin(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE pinyin = \(text.code);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE pinyin = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
@@ -287,7 +287,7 @@ private extension Engine {
         }
         func matchCangjie(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE cangjie = \(text.code);"
+                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE cangjie = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {

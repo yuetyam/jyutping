@@ -10,7 +10,6 @@
 		370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B631423E96E1000912B9A /* AudioFeedback.swift */; };
 		370B631C23E9796B00912B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37211D5723541EE3007E1D68 /* AppDelegate.swift */; };
 		370E36A12605DF46003BC0CD /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 370E36A02605DF46003BC0CD /* JyutpingProvider */; };
-		3715176E25DD123B00F4EA95 /* String+code.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715176D25DD123B00F4EA95 /* String+code.swift */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
 		371C5017261B4D3D00916D52 /* ShiftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C5016261B4D3D00916D52 /* ShiftState.swift */; };
 		371C5019261B4D8D00916D52 /* KeyboardLayout+keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */; };
@@ -41,7 +40,6 @@
 		3757E68526230BDE00FF0D68 /* KeyboardDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3757E68426230BDE00FF0D68 /* KeyboardDataProvider */; };
 		3764EB7324D0F91C00A2A3AD /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764EB7224D0F91C00A2A3AD /* VersionLabel.swift */; };
 		377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AF90925DE328F00EED1FD /* Emoji.swift */; };
-		377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */ = {isa = PBXBuildFile; productRef = 377AF92825DEDB0A00EED1FD /* BLAKE3 */; };
 		377DE9EB24D25ECA0026B6D2 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DE9EA24D25ECA0026B6D2 /* ActivityView.swift */; };
 		377EAD4A24708ACD00B42D30 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Splitter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
@@ -97,7 +95,6 @@
 
 /* Begin PBXFileReference section */
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
-		3715176D25DD123B00F4EA95 /* String+code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+code.swift"; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		371C5016261B4D3D00916D52 /* ShiftState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftState.swift; sourceTree = "<group>"; };
 		371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardLayout+keys.swift"; sourceTree = "<group>"; };
@@ -192,7 +189,6 @@
 			files = (
 				3742A50625F9AFBA009D5CBB /* OpenCCLite in Frameworks */,
 				3757E68526230BDE00FF0D68 /* KeyboardDataProvider in Frameworks */,
-				377AF92925DEDB0A00EED1FD /* BLAKE3 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +371,6 @@
 				37FA443423A8510A001E7DBC /* ColorExtension.swift */,
 				37573F6524F310E100856B8A /* Array+deduplicated.swift */,
 				37573F6724F3112D00856B8A /* String+shortcut.swift */,
-				3715176D25DD123B00F4EA95 /* String+code.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -419,7 +414,6 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
-				377AF92825DEDB0A00EED1FD /* BLAKE3 */,
 				3742A50525F9AFBA009D5CBB /* OpenCCLite */,
 				3757E68426230BDE00FF0D68 /* KeyboardDataProvider */,
 			);
@@ -459,7 +453,6 @@
 			);
 			mainGroup = 37211D4B23541EE3007E1D68;
 			packageReferences = (
-				377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */,
 				3742A50425F9AFBA009D5CBB /* XCRemoteSwiftPackageReference "OpenCCLite" */,
 			);
 			productRefGroup = 37211D5523541EE3007E1D68 /* Products */;
@@ -548,7 +541,6 @@
 				37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */,
 				370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */,
 				37FF2A2F23E8F80400B86C74 /* Engine.swift in Sources */,
-				3715176E25DD123B00F4EA95 /* String+code.swift in Sources */,
 				3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */,
 				371C5019261B4D8D00916D52 /* KeyboardLayout+keys.swift in Sources */,
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
@@ -886,14 +878,6 @@
 				version = 0.1.1;
 			};
 		};
-		377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nixberg/blake3-swift.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -909,11 +893,6 @@
 		3757E68426230BDE00FF0D68 /* KeyboardDataProvider */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = KeyboardDataProvider;
-		};
-		377AF92825DEDB0A00EED1FD /* BLAKE3 */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 377AF92725DEDB0A00EED1FD /* XCRemoteSwiftPackageReference "blake3-swift" */;
-			productName = BLAKE3;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
