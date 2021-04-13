@@ -46,6 +46,9 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return cell
                 }
 
+                // FIXME: - Don't know why
+                guard candidates.count > indexPath.row else { return UICollectionViewCell() }
+
                 guard let cell: CandidateCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as? CandidateCell else {
                         return UICollectionViewCell()
                 }
