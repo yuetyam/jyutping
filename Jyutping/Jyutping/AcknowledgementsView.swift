@@ -11,7 +11,8 @@ struct AcknowledgementsView: View {
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/rime/rime-cantonese")!)
                                         .fillBackground()
-                                        .padding()
+                                        .padding(.horizontal)
+                                        .padding(.top)
                                 LinkView(iconName: "briefcase",
                                          text: Text("OpenCC"),
                                          footnote: Text("© Carbo Kuo. Apache 2.0"),
