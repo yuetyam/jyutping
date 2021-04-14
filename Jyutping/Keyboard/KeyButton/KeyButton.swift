@@ -11,7 +11,7 @@ final class KeyButton: UIButton {
                 self.keyboardEvent = keyboardEvent
                 self.viewController = viewController
                 super.init(frame: .zero)
-                backgroundColor = .interactableClear
+                backgroundColor = .interactiveClear
                 switch keyboardEvent {
                 case .backspace, .shift:
                         setupKeyButtonView()

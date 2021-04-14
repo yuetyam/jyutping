@@ -14,6 +14,6 @@ final class ToolButton: UIButton {
                 ])
                 buttonImageView.contentMode = .scaleAspectFit
                 buttonImageView.image = UIImage(systemName: imageName)
-                backgroundColor = .interactableClear
+                backgroundColor = .interactiveClear
         }
 }

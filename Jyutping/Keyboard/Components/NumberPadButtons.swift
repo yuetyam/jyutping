@@ -10,7 +10,7 @@ final class NumberButton: UIButton {
                 self.digit = digit
                 self.viewController = viewController
                 super.init(frame: .zero)
-                backgroundColor = .interactableClear
+                backgroundColor = .interactiveClear
                 setupKeyButtonView()
                 setupDigitLabel()
                 setupFootnoteLabel()
@@ -139,7 +139,7 @@ final class PeriodButton: UIButton {
         init(viewController: KeyboardViewController) {
                 self.viewController = viewController
                 super.init(frame: .zero)
-                backgroundColor = .interactableClear
+                backgroundColor = .interactiveClear
                 setupKeyButtonView()
                 setupPeriodLabel()
                 addTarget(self, action: #selector(handleTap), for: .touchUpInside)
@@ -197,7 +197,7 @@ final class BackspaceButton: UIButton {
         init(viewController: KeyboardViewController) {
                 self.viewController = viewController
                 super.init(frame: .zero)
-                backgroundColor = .interactableClear
+                backgroundColor = .interactiveClear
                 setupKeyButtonView()
                 setupKeyImageView()
         }
