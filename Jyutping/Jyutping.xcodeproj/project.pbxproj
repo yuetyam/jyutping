@@ -61,7 +61,7 @@
 		37CBC6D025C8F8F700C21526 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */; };
 		37E004F823E49B6700E413BD /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F723E49B6700E413BD /* KeyboardLayout.swift */; };
 		37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F923E4BAA000E413BD /* KeyboardEvent.swift */; };
-		37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */; };
+		37E004FD23E4BB0900E413BD /* UIStackView+subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+subviews.swift */; };
 		37E1874F24CB766900602C03 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1874E24CB766900602C03 /* InitialsTable.swift */; };
 		37F1C028235C3EB700CDDA31 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F1C027235C3EB700CDDA31 /* AboutView.swift */; };
 		37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA443423A8510A001E7DBC /* ColorExtension.swift */; };
@@ -165,7 +165,7 @@
 		37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		37E004F723E49B6700E413BD /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		37E004F923E4BAA000E413BD /* KeyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
-		37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Subviews.swift"; sourceTree = "<group>"; };
+		37E004FC23E4BB0900E413BD /* UIStackView+subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+subviews.swift"; sourceTree = "<group>"; };
 		37E1874E24CB766900602C03 /* InitialsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
 		37E940AD261A2C7900D4FAE5 /* JyutpingProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingProvider; path = ../Helpers/JyutpingProvider; sourceTree = "<group>"; };
 		37F1C027235C3EB700CDDA31 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -367,7 +367,7 @@
 		37E004FB23E4BAC700E413BD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				37E004FC23E4BB0900E413BD /* UIStackView+Subviews.swift */,
+				37E004FC23E4BB0900E413BD /* UIStackView+subviews.swift */,
 				37FA443423A8510A001E7DBC /* ColorExtension.swift */,
 				37573F6524F310E100856B8A /* Array+deduplicated.swift */,
 				37573F6724F3112D00856B8A /* String+shortcut.swift */,
@@ -535,7 +535,7 @@
 				374DC58D24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift in Sources */,
 				377EAD4A24708ACD00B42D30 /* Splitter.swift in Sources */,
 				37573F6624F310E100856B8A /* Array+deduplicated.swift in Sources */,
-				37E004FD23E4BB0900E413BD /* UIStackView+Subviews.swift in Sources */,
+				37E004FD23E4BB0900E413BD /* UIStackView+subviews.swift in Sources */,
 				37AE5BEF2354AAF8008A8E4B /* KeyboardViewController.swift in Sources */,
 				37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */,
 				370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */,
