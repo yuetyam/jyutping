@@ -70,6 +70,8 @@ final class KeyButton: UIButton {
                         shape.backgroundColor = highlightingBackColor
                         backspaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         handleBackspace()
+                case .shadowBackspace:
+                        handleBackspace()
                 case .space:
                         shape.backgroundColor = highlightingBackColor
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
@@ -114,10 +116,7 @@ final class KeyButton: UIButton {
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 10 else { break }
-
-                        // FIXME: Dragging in input text
-                        controller.inputText = ""
-
+                        controller.inputText = "" // FIXME: Dragging in input text
                         let offset: Int = distance > 0 ? 1 : -1
                         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location
