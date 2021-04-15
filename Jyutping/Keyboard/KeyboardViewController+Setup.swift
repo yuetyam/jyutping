@@ -163,7 +163,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
-                keyboardLayout = requestedKeyboardLayout
+                keyboardLayout = askedKeyboardLayout
         }
 
 
@@ -181,7 +181,7 @@ extension KeyboardViewController {
                 return stackView
         }
         private func makeKey(for event: KeyboardEvent) -> UIView {
-                let keyView: KeyButton = KeyButton(keyboardEvent: event, viewController: self)
+                let keyView: KeyButton = KeyButton(event: event, controller: self)
                 if event == .switchInputMethod {
                         keyView.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
                 }

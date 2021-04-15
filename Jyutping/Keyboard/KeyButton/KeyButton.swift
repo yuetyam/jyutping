@@ -2,117 +2,85 @@ import UIKit
 
 final class KeyButton: UIButton {
 
-        let keyButtonView: UIView = UIView()
-        
-        let keyboardEvent: KeyboardEvent
-        let viewController: KeyboardViewController
+        let shape: UIView = UIView()
+        let event: KeyboardEvent
+        let controller: KeyboardViewController
+        let isDarkAppearance: Bool
+        let isPhonePortrait: Bool
+        let isPhoneInterface: Bool
+        let isPadLandscape: Bool
 
-        init(keyboardEvent: KeyboardEvent, viewController: KeyboardViewController) {
-                self.keyboardEvent = keyboardEvent
-                self.viewController = viewController
+        init(event: KeyboardEvent, controller: KeyboardViewController) {
+                self.event = event
+                self.controller = controller
+                isDarkAppearance = controller.isDarkAppearance
+                isPhonePortrait = controller.isPhonePortrait
+                isPhoneInterface = controller.isPhoneInterface
+                isPadLandscape = controller.isPadLandscape
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
-                switch keyboardEvent {
-                case .backspace, .shift:
-                        setupKeyButtonView()
-                        setupKeyImageView(constant: 11)
-                case .switchInputMethod:
-                        setupKeyButtonView()
-                        setupKeyImageView()
+                switch event {
                 case .none, .shadowKey, .shadowBackspace:
                         break
+                case .backspace, .shift:
+                        setupKeyShapeView()
+                        setupKeyImageView(constant: 11)
+                case .switchInputMethod:
+                        setupKeyShapeView()
+                        setupKeyImageView()
                 case .key(let seat) where seat.primary.header != nil:
-                        setupKeyButtonView()
+                        setupKeyShapeView()
                         setupKeyTextLabel()
                         setupKeyHeaderLabel(text: seat.primary.header)
                 default:
-                        setupKeyButtonView()
+                        setupKeyShapeView()
                         setupKeyTextLabel()
                 }
                 setupKeyActions()
         }
+        required init?(coder: NSCoder) { fatalError("KeyView.init(coder:) error") }
+        override var intrinsicContentSize: CGSize { CGSize(width: width, height: height) }
 
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
+        deinit {
+                backspaceTimer?.invalidate()
         }
-
-        override var intrinsicContentSize: CGSize {
-                return CGSize(width: width, height: height)
+        private(set) lazy var isInteracting: Bool = false {
+                didSet {
+                        if !isInteracting {
+                                backspaceTimer?.invalidate()
+                        }
+                }
         }
-
-        private lazy var isPhonePortrait: Bool = traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular
+        private(set) lazy var peekingText: String? = nil
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
-                viewController.hapticFeedback?.impactOccurred()
-                textToInput = nil
-                switch keyboardEvent {
-                case .key:
+                controller.hapticFeedback?.impactOccurred()
+                isInteracting = true
+                peekingText = nil
+                switch self.event {
+                case .key(let seat):
                         if isPhonePortrait {
                                 displayPreview()
                         } else {
-                                keyButtonView.backgroundColor = highlightButtonColor
+                                shape.backgroundColor = highlightingBackColor
                         }
-                case .space:
-                        keyButtonView.backgroundColor = highlightButtonColor
-                        spaceTouchPoint = touches.first?.location(in: self) ?? .zero
-                        performedDraggingOnSpace = false
+                        if !seat.children.isEmpty { handleLongPress() }
                 case .backspace:
-                        keyButtonView.backgroundColor = highlightButtonColor
+                        shape.backgroundColor = highlightingBackColor
                         backspaceTouchPoint = touches.first?.location(in: self) ?? .zero
-                case .newLine:
-                        keyButtonView.backgroundColor = highlightButtonColor
-                default:
-                        break
-                }
-        }
-        override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-                super.touchesEnded(touches, with: event)
-                invalidateTimers()
-                switch keyboardEvent {
-                case .backspace, .newLine:
-                        changeColorToNormal()
+                        handleBackspace()
                 case .space:
-                        spaceTouchPoint = .zero
-                        changeColorToNormal()
-                case .key(let seat) where !seat.children.isEmpty:
-                        removeCallout()
-                        if isPhonePortrait {
-                                removePreview()
-                        } else {
-                                changeColorToNormal()
-                        }
-                        guard let text: String = textToInput else { break }
-                        AudioFeedback.perform(.input)
-                        viewController.hapticFeedback?.impactOccurred()
-                        guard viewController.keyboardLayout.isJyutpingMode else {
-                                viewController.textDocumentProxy.insertText(text)
-                                break
-                        }
-                        let punctuation: String = "，。？！"
-                        guard punctuation.contains(text) else {
-                                viewController.inputText += text
-                                break
-                        }
-                        if viewController.inputText.isEmpty {
-                                viewController.textDocumentProxy.insertText(text)
-                        } else {
-                                let combined: String = viewController.processingText + text
-                                viewController.inputText = ""
-                                viewController.textDocumentProxy.insertText(combined)
-                        }
-                case .key:
-                        if isPhonePortrait {
-                                removePreview()
-                        } else {
-                                changeColorToNormal()
-                        }
+                        shape.backgroundColor = highlightingBackColor
+                        spaceTouchPoint = touches.first?.location(in: self) ?? .zero
+                        draggedOnSpace = false
+                case .newLine:
+                        shape.backgroundColor = highlightingBackColor
                 default:
                         break
                 }
-                viewController.hapticFeedback?.prepare()
         }
-        private(set) lazy var textToInput: String? = nil
+
         private lazy var distances: [CGFloat] = {
                 let max: CGFloat = calloutStackView.bounds.width
                 var blocks: [CGFloat] = []
@@ -126,55 +94,108 @@ final class KeyButton: UIButton {
         }()
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)
-                switch keyboardEvent {
+                switch self.event {
                 case .key(let seat) where !seat.children.isEmpty:
-                        guard isCalloutDisplaying else { return }
-                        guard let location: CGPoint = touches.first?.location(in: viewController.view) else { return }
+                        guard isCalloutDisplaying else { break }
+                        guard let location: CGPoint = touches.first?.location(in: controller.view) else { break }
                         let distance: CGFloat = location.x - self.frame.midX
                         for index in 0..<(distances.count - 1) {
                                 let rightCondition: Bool = (distances[index] < distance) && (distance < distances[index + 1])
                                 let leftCondition: Bool = (distances[index] < -distance) && (-distance < distances[index + 1])
-                                let condition: Bool = isRightBubble ? rightCondition : leftCondition
+                                let condition: Bool = greaterMidX ? leftCondition : rightCondition
                                 if condition {
-                                        let this: Int = isRightBubble ? index : (calloutKeys.count - 1 - index)
-                                        _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
+                                        let this: Int = greaterMidX ? (calloutKeys.count - 1 - index): index
+                                        _ = calloutKeys.map({ $0.backgroundColor = backColor })
                                         calloutKeys[this].backgroundColor = selectionColor
-                                        textToInput = calloutKeys[this].text
+                                        peekingText = calloutKeys[this].text
                                 }
                         }
                 case .space:
-                        guard let location: CGPoint = touches.first?.location(in: self) else { return }
+                        guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
-                        guard abs(distance) > 10 else { return }
+                        guard abs(distance) > 10 else { break }
 
                         // FIXME: Dragging in input text
-                        viewController.inputText = ""
+                        controller.inputText = ""
 
                         let offset: Int = distance > 0 ? 1 : -1
-                        viewController.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
+                        controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location
-                        performedDraggingOnSpace = true
+                        draggedOnSpace = true
                 case .backspace:
-                        guard viewController.keyboardLayout.isJyutpingMode else { return }
-                        guard let location: CGPoint = touches.first?.location(in: self) else { return }
+                        guard controller.keyboardLayout.isJyutpingMode else { break }
+                        guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
-                        guard distance < -44 else { return }
-                        viewController.inputText = ""
+                        guard distance < -44 else { break }
+                        controller.inputText = ""
                 default:
                         break
                 }
         }
-        override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-                super.touchesCancelled(touches, with: event)
-                invalidateTimers()
-                switch keyboardEvent {
-                case .backspace, .newLine:
+        override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+                super.touchesEnded(touches, with: event)
+                isInteracting = false
+                switch self.event {
+                case .newLine:
+                        changeColorToNormal()
+                case .backspace:
+                        backspaceTouchPoint = .zero
                         changeColorToNormal()
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
-                case .key:
+                case .key(let seat) where !seat.children.isEmpty:
                         removeCallout()
+                        if isPhonePortrait {
+                                removePreview()
+                        } else {
+                                changeColorToNormal()
+                        }
+                        guard let text: String = peekingText else { break }
+                        AudioFeedback.perform(.input)
+                        controller.hapticFeedback?.impactOccurred()
+                        guard controller.keyboardLayout.isJyutpingMode else {
+                                controller.textDocumentProxy.insertText(text)
+                                break
+                        }
+                        let punctuation: String = "，。？！"
+                        guard punctuation.contains(text) else {
+                                controller.inputText += text
+                                break
+                        }
+                        if controller.inputText.isEmpty {
+                                controller.textDocumentProxy.insertText(text)
+                        } else {
+                                let combined: String = controller.processingText + text
+                                controller.inputText = ""
+                                controller.textDocumentProxy.insertText(combined)
+                        }
+                case .key:
+                        if isPhonePortrait {
+                                removePreview()
+                        } else {
+                                changeColorToNormal()
+                        }
+                default:
+                        break
+                }
+                controller.hapticFeedback?.prepare()
+        }
+        override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+                super.touchesCancelled(touches, with: event)
+                isInteracting = false
+                peekingText = nil
+                switch self.event {
+                case .newLine:
+                        changeColorToNormal()
+                case .backspace:
+                        backspaceTouchPoint = .zero
+                        changeColorToNormal()
+                case .space:
+                        spaceTouchPoint = .zero
+                        changeColorToNormal()
+                case .key(let seat):
+                        if !seat.children.isEmpty { removeCallout() }
                         if isPhonePortrait {
                                 removePreview()
                         } else {
@@ -185,23 +206,17 @@ final class KeyButton: UIButton {
                 }
         }
 
-        var slowBackspaceTimer: Timer?
-        var fastBackspaceTimer: Timer?
-        var longPressTimer: Timer?
-        private func invalidateTimers() {
-                slowBackspaceTimer?.invalidate()
-                fastBackspaceTimer?.invalidate()
-                longPressTimer?.invalidate()
-        }
-        deinit {
-                invalidateTimers()
-        }
-        private(set) lazy var performedDraggingOnSpace: Bool = false
-        private lazy var spaceTouchPoint: CGPoint = .zero
-        private lazy var backspaceTouchPoint: CGPoint = .zero
+        var backspaceTimer: Timer?
+        private(set) lazy var backspaceTouchPoint: CGPoint = .zero
+        private(set) lazy var spaceTouchPoint: CGPoint = .zero
+        private(set) lazy var draggedOnSpace: Bool = false
+        private(set) lazy var greaterMidX: Bool = frame.midX > controller.view.frame.midX
 
-
-        // MARK: - Preview
+        private lazy var keyShapePath: UIBezierPath = keyShapeBezierPath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
+        private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
+        private lazy var shapeWidth: CGFloat = shape.frame.width
+        private lazy var shapeHeight: CGFloat = shape.frame.height
+        private lazy var bottomCenter: CGPoint = CGPoint(x: shape.frame.midX, y: shape.frame.maxY)
 
         private func displayPreview() {
                 layer.addSublayer(previewShapeLayer)
@@ -219,10 +234,10 @@ final class KeyButton: UIButton {
         }
         private func changeColorToNormal() {
                 UIView.animate(withDuration: 0, delay: 0.03) {
-                        self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .clear : self.buttonColor
+                        self.shape.backgroundColor = self.isDarkAppearance ? .clear : self.backColor
                 }
         }
-        private lazy var previewShapeLayer: CAShapeLayer = {
+        private(set) lazy var previewShapeLayer: CAShapeLayer = {
                 let layer = CAShapeLayer()
                 layer.shadowOpacity = 0.3
                 layer.shadowRadius = 0.5
@@ -231,7 +246,7 @@ final class KeyButton: UIButton {
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
                 layer.path = keyShapePath.cgPath
-                layer.fillColor = buttonColor.cgColor
+                layer.fillColor = backColor.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
                 animation.duration = 0.005
                 animation.toValue = previewPath.cgPath
@@ -241,24 +256,16 @@ final class KeyButton: UIButton {
                 layer.add(animation, forKey: animation.keyPath)
                 return layer
         }()
-        private lazy var previewLabel: UILabel = {
+        private(set) lazy var previewLabel: UILabel = {
                 let preview = previewPath.bounds
-                let height: CGFloat = preview.height - keyHeight - 8
+                let height: CGFloat = preview.height - shapeHeight - 8
                 let frame = CGRect(origin: preview.origin, size: CGSize(width: preview.width, height: height))
                 let label = UILabel(frame: frame)
                 label.textAlignment = .center
                 label.font = .systemFont(ofSize: 34)
-                label.textColor = buttonTintColor
+                label.textColor = foreColor
                 return label
         }()
-        private lazy var keyShapePath: UIBezierPath = keyShapeBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
-        private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
-        private lazy var keyWidth: CGFloat = keyButtonView.frame.width
-        private lazy var keyHeight: CGFloat = keyButtonView.frame.height
-        private lazy var bottomCenter: CGPoint = CGPoint(x: keyButtonView.frame.midX, y: keyButtonView.frame.maxY)
-
-
-        // MARK: - Callout
 
         func displayCallout() {
                 layer.addSublayer(calloutLayer)
@@ -267,7 +274,7 @@ final class KeyButton: UIButton {
         }
         private lazy var isCalloutDisplaying: Bool = false
         private func removeCallout() {
-                _ = calloutKeys.map({ $0.backgroundColor = buttonColor })
+                _ = calloutKeys.map({ $0.backgroundColor = backColor })
                 calloutStackView.removeFromSuperview()
                 calloutLayer.removeFromSuperlayer()
                 isCalloutDisplaying = false
@@ -275,15 +282,15 @@ final class KeyButton: UIButton {
         private lazy var calloutStackView: UIStackView = {
                 let rect: CGRect = {
                         if isPhonePortrait {
-                                let expansion = isRightBubble ? (keyButtonView.bounds.minX - bubblePath.bounds.minX) : (bubblePath.bounds.maxX - keyButtonView.bounds.maxX - 5)
+                                let expansion = greaterMidX ? (bubblePath.bounds.maxX - shape.bounds.maxX - 5) : (shape.bounds.minX - bubblePath.bounds.minX)
                                 let width = bubblePath.bounds.width - (expansion * 2)
                                 let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
-                                let size = CGSize(width: width, height: keyHeight)
+                                let size = CGSize(width: width, height: shapeHeight)
                                 return CGRect(origin: origin, size: size)
                         } else {
                                 let origin = CGPoint(x: bubblePath.bounds.minX, y: bubblePath.bounds.minY)
                                 let width = bubblePath.bounds.width
-                                let size = CGSize(width: width, height: keyHeight)
+                                let size = CGSize(width: width, height: shapeHeight)
                                 return CGRect(origin: origin, size: size)
                         }
                 }()
@@ -301,7 +308,7 @@ final class KeyButton: UIButton {
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
                 layer.path = isPhonePortrait ? previewPath.cgPath : keyShapePath.cgPath
-                layer.fillColor = buttonColor.cgColor
+                layer.fillColor = backColor.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
                 animation.duration = 0.01
                 animation.toValue = bubblePath.cgPath
@@ -312,7 +319,7 @@ final class KeyButton: UIButton {
                 return layer
         }()
         private lazy var calloutKeys: [CalloutView] = {
-                switch keyboardEvent {
+                switch event {
                 case .key(let seat):
                         guard !seat.children.isEmpty else { return [] }
                         let firstChild: KeyElement = seat.children.first!
@@ -324,26 +331,24 @@ final class KeyButton: UIButton {
                                 let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, alignments: element.alignments)
                                 keys.append(callout)
                         }
-                        return isRightBubble ? keys : keys.reversed()
+                        return greaterMidX ? keys.reversed() : keys
                 default:
                         return []
                 }
         }()
         private lazy var selectionColor: UIColor =  UIColor(red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
-        private lazy var isRightBubble: Bool = frame.midX < viewController.view.frame.midX
         private lazy var bubblePath: UIBezierPath = {
                 if isPhonePortrait {
-                        if isRightBubble {
-                                return rightBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
+                        if greaterMidX {
+                                return leftBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
                         } else {
-                                return leftBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
+                                return rightBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
                         }
                 } else {
-                        if isRightBubble {
-                                return rightSquareBubblePath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
-
+                        if greaterMidX {
+                                return leftSquareBubblePath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
                         } else {
-                                return leftSquareBubblePath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
+                                return rightSquareBubblePath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
                         }
                 }
         }()

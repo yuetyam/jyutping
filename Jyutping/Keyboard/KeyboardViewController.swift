@@ -67,14 +67,10 @@ final class KeyboardViewController: UIInputViewController {
         }
 
         var hapticFeedback: UIImpactFeedbackGenerator?
-
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
         }
-
-        private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
@@ -88,12 +84,12 @@ final class KeyboardViewController: UIInputViewController {
 
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
-                let requested: KeyboardLayout = requestedKeyboardLayout
-                if respondingKeyboardLayout != requested {
-                        respondingKeyboardLayout = requested
+                let asked: KeyboardLayout = askedKeyboardLayout
+                if respondingKeyboardLayout != asked {
+                        respondingKeyboardLayout = asked
                         needsDifferentKeyboard = true
                         if didKeyboardEstablished {
-                                keyboardLayout = requested
+                                keyboardLayout = asked
                         }
                 }
                 if !textDocumentProxy.hasText && !inputText.isEmpty {
@@ -104,7 +100,7 @@ final class KeyboardViewController: UIInputViewController {
 
         private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
 
-        var requestedKeyboardLayout: KeyboardLayout {
+        var askedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
                         return traitCollection.userInterfaceIdiom == .pad ? .numeric : .numberPad
@@ -283,6 +279,14 @@ final class KeyboardViewController: UIInputViewController {
                 AudioFeedback.perform(.modify)
                 keyboardLayout = .emoji
         }
+
+
+        // MARK: - Properties
+
+        private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+        private(set) lazy var isPhonePortrait: Bool = (traitCollection.userInterfaceIdiom == .phone) && (traitCollection.verticalSizeClass == .regular)
+        private(set) lazy var isPhoneInterface: Bool = (traitCollection.userInterfaceIdiom == .phone) || (traitCollection.horizontalSizeClass == .compact) || (view.frame.width < 500)
+        private(set) lazy var isPadLandscape: Bool = UIScreen.main.bounds.width > UIScreen.main.bounds.height
 
 
         // MARK: - Settings

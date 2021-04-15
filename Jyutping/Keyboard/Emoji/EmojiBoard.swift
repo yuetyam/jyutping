@@ -7,22 +7,22 @@ final class EmojiBoard: UIView {
 
         init(viewController: KeyboardViewController) {
                 super.init(frame: .zero)
-                setupSubViews(viewController: viewController)
+                setupSubViews(controller: viewController)
         }
 
         required init?(coder: NSCoder) {
                 fatalError("init(coder:) has not been implemented")
         }
 
-        private func setupSubViews(viewController: KeyboardViewController) {
-                let switchBackButton: KeyButton = KeyButton(keyboardEvent: .switchTo(.cantonese(.lowercased)), viewController: viewController)
-                let spaceButton: KeyButton = KeyButton(keyboardEvent: .space, viewController: viewController)
-                let backspaceButton: KeyButton = KeyButton(keyboardEvent: .backspace, viewController: viewController)
-                let returnButton: KeyButton = KeyButton(keyboardEvent: .newLine, viewController: viewController)
+        private func setupSubViews(controller: KeyboardViewController) {
+                let switchBackButton: KeyButton = KeyButton(event: .switchTo(.cantonese(.lowercased)), controller: controller)
+                let spaceButton: KeyButton = KeyButton(event: .space, controller: controller)
+                let backspaceButton: KeyButton = KeyButton(event: .backspace, controller: controller)
+                let returnButton: KeyButton = KeyButton(event: .newLine, controller: controller)
                 let buttons: [KeyButton] = {
-                        if viewController.needsInputModeSwitchKey {
-                                let switchInputMethodButton: KeyButton = KeyButton(keyboardEvent: .switchInputMethod, viewController: viewController)
-                                switchInputMethodButton.addTarget(viewController, action: #selector(viewController.handleInputModeList(from:with:)), for: .allTouchEvents)
+                        if controller.needsInputModeSwitchKey {
+                                let switchInputMethodButton: KeyButton = KeyButton(event: .switchInputMethod, controller: controller)
+                                switchInputMethodButton.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
                                 return [switchBackButton, switchInputMethodButton, spaceButton, backspaceButton, returnButton]
                         } else {
                                 return [switchBackButton, spaceButton, backspaceButton, returnButton]
