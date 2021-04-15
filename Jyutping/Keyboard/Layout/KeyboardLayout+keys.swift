@@ -1,6 +1,6 @@
 extension KeyboardLayout {
 
-        func keys(needsInputModeSwitchKey: Bool, arrangement: Int) -> [[KeyboardEvent]] {
+        func events(needsInputModeSwitchKey: Bool, arrangement: Int) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
                         switch arrangement {
@@ -344,12 +344,13 @@ extension KeyboardLayout {
                                 let primary = KeyElement(text: "0")
                                 let child_0 = KeyElement(text: "0")
                                 let child_1 = KeyElement(text: "零")
-                                let child_2 = KeyElement(text: "拾")
-                                let child_3 = KeyElement(text: "０", header: "全形")
-                                let child_4 = KeyElement(text: "⓪")
-                                let child_5 = KeyElement(text: "⁰", header: "上標")
-                                let child_6 = KeyElement(text: "₀", header: "下標")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6])
+                                let child_2 = KeyElement(text: "０", header: "全形")
+                                let child_3 = KeyElement(text: "⓪")
+                                let child_4 = KeyElement(text: "⁰", header: "上標")
+                                let child_5 = KeyElement(text: "₀", header: "下標")
+                                let child_6 = KeyElement(text: "拾")
+                                let child_7 = KeyElement(text: "°")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6, child_7])
                                 return KeyboardEvent.key(seat)
                         }()
                         return oneToNine + [zero]
