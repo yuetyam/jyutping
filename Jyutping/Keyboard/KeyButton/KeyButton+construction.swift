@@ -66,7 +66,7 @@ extension KeyButton {
                         keyTextLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor),
                         keyTextLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
-                keyTextLabel.font = font
+                keyTextLabel.font = keyFont
                 keyTextLabel.textAlignment = .center
                 keyTextLabel.textColor = foreColor
                 keyTextLabel.text = keyText

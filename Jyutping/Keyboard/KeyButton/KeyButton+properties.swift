@@ -56,7 +56,7 @@ extension KeyButton {
                 }
         }
 
-        var font: UIFont {
+        var keyFont: UIFont {
                 // https://www.iosfontsizes.com
                 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography
                 switch event {
