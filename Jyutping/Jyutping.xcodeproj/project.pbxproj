@@ -27,7 +27,7 @@
 		373B15612627568F005CC08C /* KeyButton+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B15602627568F005CC08C /* KeyButton+handlers.swift */; };
 		3741062D23E2191200639EF4 /* CandidateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
-		3741063123E30C4100639EF4 /* KeyboardViewController+construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+construction.swift */; };
+		3741063123E30C4100639EF4 /* KeyboardViewController+keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+keyboard.swift */; };
 		3741063423E30D7100639EF4 /* ToolButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063323E30D7100639EF4 /* ToolButton.swift */; };
 		3741063623E30DA800639EF4 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063523E30DA800639EF4 /* CandidateBoard.swift */; };
 		3742A50625F9AFBA009D5CBB /* OpenCCLite in Frameworks */ = {isa = PBXBuildFile; productRef = 3742A50525F9AFBA009D5CBB /* OpenCCLite */; };
@@ -118,7 +118,7 @@
 		373B15602627568F005CC08C /* KeyButton+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+handlers.swift"; sourceTree = "<group>"; };
 		3741062C23E2191200639EF4 /* CandidateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCell.swift; sourceTree = "<group>"; };
 		3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
-		3741063023E30C4100639EF4 /* KeyboardViewController+construction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+construction.swift"; sourceTree = "<group>"; };
+		3741063023E30C4100639EF4 /* KeyboardViewController+keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+keyboard.swift"; sourceTree = "<group>"; };
 		3741063323E30D7100639EF4 /* ToolButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolButton.swift; sourceTree = "<group>"; };
 		3741063523E30DA800639EF4 /* CandidateBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
 		374AC0C0246A2AB3004B70ED /* AcknowledgementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
@@ -328,7 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				37AE5BEE2354AAF8008A8E4B /* KeyboardViewController.swift */,
-				3741063023E30C4100639EF4 /* KeyboardViewController+construction.swift */,
+				3741063023E30C4100639EF4 /* KeyboardViewController+keyboard.swift */,
 				3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */,
 				374DC58C24FBFE6D003BEAE7 /* KeyboardViewController+TableView.swift */,
 				37E004F923E4BAA000E413BD /* KeyboardEvent.swift */,
@@ -546,7 +546,7 @@
 				37AFDAD6260C8B97002963B5 /* CalloutView.swift in Sources */,
 				373B15612627568F005CC08C /* KeyButton+handlers.swift in Sources */,
 				37CBC6D025C8F8F700C21526 /* BlurEffectView.swift in Sources */,
-				3741063123E30C4100639EF4 /* KeyboardViewController+construction.swift in Sources */,
+				3741063123E30C4100639EF4 /* KeyboardViewController+keyboard.swift in Sources */,
 				3722B851250129F900E33ADB /* NumberPadButtons.swift in Sources */,
 				3741062D23E2191200639EF4 /* CandidateCell.swift in Sources */,
 				373B155B2627509E005CC08C /* KeyButton+construction.swift in Sources */,
