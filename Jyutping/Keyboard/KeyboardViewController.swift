@@ -63,6 +63,7 @@ final class KeyboardViewController: UIInputViewController {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
         }
+        private lazy var didKeyboardEstablished: Bool = false
         var hapticFeedback: UIImpactFeedbackGenerator?
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
@@ -75,10 +76,6 @@ final class KeyboardViewController: UIInputViewController {
                         setupKeyboard()
                 }
         }
-
-        private lazy var didKeyboardEstablished: Bool = false
-        private lazy var needsDifferentKeyboard: Bool = false
-
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
                 let asked: KeyboardLayout = askedKeyboardLayout
@@ -90,13 +87,12 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
                 if !textDocumentProxy.hasText && !inputText.isEmpty {
-                        // User just tapped Clear Button in TextField
                         inputText = ""
                 }
         }
 
+        private lazy var needsDifferentKeyboard: Bool = false
         private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
-
         var askedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
@@ -111,7 +107,6 @@ final class KeyboardViewController: UIInputViewController {
                         return .cantonese(.lowercased)
                 }
         }
-
         var keyboardLayout: KeyboardLayout = .cantonese(.lowercased) {
                 didSet {
                         setupKeyboard()
@@ -130,7 +125,7 @@ final class KeyboardViewController: UIInputViewController {
 
         let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInitiated)
 
-        var inputText: String = "" {
+        lazy var inputText: String = "" {
                 didSet {
                         if inputText.isEmpty || inputText.hasPrefix("v") || inputText.hasPrefix("r") {
                                 processingText = inputText
@@ -144,7 +139,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        private(set) var processingText: String = "" {
+        private(set) lazy var processingText: String = "" {
                 didSet {
                         DispatchQueue.main.async {
                                 self.toolBar.update()
@@ -172,7 +167,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        private var markedText: String = "" {
+        private lazy var markedText: String = "" {
                 didSet {
                         let range: NSRange = NSRange(location: markedText.count, length: 0)
                         textDocumentProxy.setMarkedText(markedText, selectedRange: range)
@@ -182,8 +177,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var syllablesSchemes: [[String]] = []
 
         lazy var candidateSequence: [Candidate] = []
-        
-        var candidates: [Candidate] = [] {
+        private(set) lazy var candidates: [Candidate] = [] {
                 didSet {
                         DispatchQueue.main.async {
                                 self.candidateCollectionView.reloadData()
@@ -191,8 +185,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-
-        private(set) var lexiconManager: LexiconManager = LexiconManager()
+        private(set) lazy var lexiconManager: LexiconManager = LexiconManager()
         private lazy var engine: Engine = Engine()
         private func suggestCandidates() {
                 let userdbCandidates: [Candidate] = lexiconManager.suggest(for: processingText)
@@ -208,7 +201,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = converted.deduplicated()
                 }
         }
-        
+
         private func setupToolBarActions() {
                 toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .touchUpInside)
                 toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .valueChanged)
@@ -355,7 +348,7 @@ final class KeyboardViewController: UIInputViewController {
                 let converter: Converter? = try? Converter(conversion!)
                 self.converter = converter
         }
-        
+
         /// 粵拼顯示
         ///
         /// 0: The key "jyutping_display" doesn‘t exist.
@@ -369,7 +362,7 @@ final class KeyboardViewController: UIInputViewController {
         func updateJyutpingDisplay() {
                 jyutpingDisplay = UserDefaults.standard.integer(forKey: "jyutping_display")
         }
-        
+
         /// 粵拼聲調樣式
         ///
         /// 0: The key "tone_style" doesn‘t exist.
