@@ -166,18 +166,19 @@ extension KeyboardViewController {
         // MARK: - Make Keys
 
         private func makeKeysRows(for eventsRows: [[KeyboardEvent]]) -> [UIStackView] {
-                let keysRows: [UIStackView] = eventsRows.map { makeKeysRow(for: $0) }
+                let keysRows: [UIStackView] = eventsRows.map { [unowned self] in makeRow(for: $0) }
                 return keysRows
         }
-        private func makeKeysRow(for events: [KeyboardEvent]) -> UIStackView {
+        private func makeRow(for events: [KeyboardEvent]) -> UIStackView {
                 let stackView: UIStackView = UIStackView()
                 stackView.axis = .horizontal
                 stackView.distribution = .fillProportionally
-                stackView.addMultipleArrangedSubviews(events.map { makeKey(for: $0) })
+                let keys: [KeyButton] = events.map { [unowned self] in makeKey(for: $0, controller: self) }
+                stackView.addMultipleArrangedSubviews(keys)
                 return stackView
         }
-        private func makeKey(for event: KeyboardEvent) -> UIView {
-                let keyView: KeyButton = KeyButton(event: event, controller: self)
+        private func makeKey(for event: KeyboardEvent, controller: KeyboardViewController) -> KeyButton {
+                let keyView: KeyButton = KeyButton(event: event, controller: controller)
                 if event == .switchInputMethod {
                         keyView.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
                 }
