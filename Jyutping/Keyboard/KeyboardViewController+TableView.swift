@@ -245,7 +245,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 tableView.reloadData()
                         }
                 case 5:
-                        imeQueue.async {
+                        imeQueue.async { [unowned self] in
                                 self.lexiconManager.deleteAll()
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {

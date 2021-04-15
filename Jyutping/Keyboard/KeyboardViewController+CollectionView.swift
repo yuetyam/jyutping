@@ -140,7 +140,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 if inputText.isEmpty && !candidateSequence.isEmpty {
                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                         candidateSequence = []
-                        imeQueue.async {
+                        imeQueue.async { [unowned self] in
                                 self.lexiconManager.handle(candidate: concatenatedCandidate)
                         }
                 }
