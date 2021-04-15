@@ -28,7 +28,7 @@ extension KeyButton {
                 case .key(let keySeat):
                         guard peekingText == nil else { return }
                         let text: String = keySeat.primary.text
-                        if controller.keyboardLayout.isJyutpingMode {
+                        if controller.keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
                                 controller.textDocumentProxy.insertText(text)
@@ -40,7 +40,7 @@ extension KeyButton {
                                 controller.keyboardLayout = .cantonese(.lowercased)
                         }
                 case .shadowKey(let text):
-                        if controller.keyboardLayout.isJyutpingMode {
+                        if controller.keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
                                 controller.textDocumentProxy.insertText(text)
@@ -113,7 +113,7 @@ extension KeyButton {
                                 break
                         }
                 case 2:
-                        controller.keyboardLayout = layout.isEnglishLayout ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
+                        controller.keyboardLayout = layout.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
                 default:
                         break
                 }
@@ -130,7 +130,7 @@ extension KeyButton {
                                 return
                         }
                         controller.textDocumentProxy.deleteBackward()
-                        let text: String = controller.keyboardLayout.isEnglishLayout ? ". " : "。"
+                        let text: String = controller.keyboardLayout.isEnglishMode ? ". " : "。"
                         controller.textDocumentProxy.insertText(text)
                         AudioFeedback.perform(.input)
                 default:

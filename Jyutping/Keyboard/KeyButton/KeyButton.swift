@@ -123,7 +123,7 @@ final class KeyButton: UIButton {
                         spaceTouchPoint = location
                         draggedOnSpace = true
                 case .backspace:
-                        guard controller.keyboardLayout.isJyutpingMode else { break }
+                        guard controller.keyboardLayout.isCantoneseMode else { break }
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { break }
@@ -154,7 +154,7 @@ final class KeyButton: UIButton {
                         guard let text: String = peekingText else { break }
                         AudioFeedback.perform(.input)
                         controller.hapticFeedback?.impactOccurred()
-                        guard controller.keyboardLayout.isJyutpingMode else {
+                        guard controller.keyboardLayout.isCantoneseMode else {
                                 controller.textDocumentProxy.insertText(text)
                                 break
                         }

@@ -75,7 +75,7 @@ extension KeyButton {
                 case .key(let seat):
                         return seat.primary.text
                 case .space:
-                        return controller.keyboardLayout.isEnglishLayout ? "English" : "粵拼"
+                        return controller.keyboardLayout.isEnglishMode ? "English" : "粵拼"
                 case .newLine:
                         return newLineKeyText
                 case .switchTo(let newLayout):

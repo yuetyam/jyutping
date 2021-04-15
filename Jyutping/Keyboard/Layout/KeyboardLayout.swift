@@ -13,7 +13,7 @@ enum KeyboardLayout: Hashable {
              candidateBoard,
              settingsView
 
-        var isEnglishLayout: Bool {
+        var isEnglishMode: Bool {
                 switch self {
                 case .alphabetic,
                      .numeric,
@@ -23,7 +23,7 @@ enum KeyboardLayout: Hashable {
                         return false
                 }
         }
-        var isJyutpingMode: Bool {
+        var isCantoneseMode: Bool {
                 switch self {
                 case .cantonese,
                      .candidateBoard:

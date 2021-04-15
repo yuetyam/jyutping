@@ -21,7 +21,6 @@ final class KeyboardViewController: UIInputViewController {
 
         override func viewDidLoad() {
                 super.viewDidLoad()
-
                 view.addSubview(keyboardStackView)
                 keyboardStackView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -30,9 +29,6 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardStackView.rightAnchor.constraint(equalTo: view.rightAnchor),
                         keyboardStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                 ])
-
-                setupToolBarActions()
-
                 candidateCollectionView.delegate = self
                 candidateCollectionView.dataSource = self
                 candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: "CandidateCell")
@@ -51,6 +47,8 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "JyutpingTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
+
+                setupToolBarActions()
         }
 
         override func viewDidAppear(_ animated: Bool) {
@@ -65,7 +63,6 @@ final class KeyboardViewController: UIInputViewController {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
         }
-
         var hapticFeedback: UIImpactFeedbackGenerator?
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
@@ -122,7 +119,7 @@ final class KeyboardViewController: UIInputViewController {
                                 didKeyboardEstablished = true
                                 return
                         }
-                        if !keyboardLayout.isJyutpingMode {
+                        if !keyboardLayout.isCantoneseMode {
                                 if !inputText.isEmpty {
                                         textDocumentProxy.insertText(processingText)
                                 }
