@@ -79,9 +79,12 @@ extension KeyButton {
         }
         func handleBackspace() {
                 performBackspace()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        guard self.isInteracting else { return }
-                        self.backspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                        if self != nil {
+                                if !(self!.isInteracting) {
+                                        self!.backspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self!, selector: #selector(self!.performBackspace), userInfo: nil, repeats: true)
+                                }
+                        }
                 }
         }
         @objc private func performBackspace() {
