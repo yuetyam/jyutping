@@ -50,32 +50,6 @@ final class KeyboardViewController: UIInputViewController {
 
                 setupToolBarActions()
         }
-
-        override func viewDidAppear(_ animated: Bool) {
-                super.viewDidAppear(animated)
-                if needsDifferentKeyboard {
-                        keyboardLayout = respondingKeyboardLayout
-                } else {
-                        setupKeyboard()
-                        didKeyboardEstablished = true
-                }
-                if isHapticFeedbackOn && hapticFeedback == nil {
-                        hapticFeedback = UIImpactFeedbackGenerator(style: .light)
-                }
-        }
-        private lazy var didKeyboardEstablished: Bool = false
-        var hapticFeedback: UIImpactFeedbackGenerator?
-        override func viewWillDisappear(_ animated: Bool) {
-                super.viewWillDisappear(animated)
-                hapticFeedback = nil
-        }
-        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-                super.traitCollectionDidChange(previousTraitCollection)
-                isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-                if didKeyboardEstablished {
-                        setupKeyboard()
-                }
-        }
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
                 let asked: KeyboardLayout = askedKeyboardLayout
@@ -90,7 +64,30 @@ final class KeyboardViewController: UIInputViewController {
                         inputText = ""
                 }
         }
-
+        override func viewDidAppear(_ animated: Bool) {
+                super.viewDidAppear(animated)
+                if needsDifferentKeyboard {
+                        keyboardLayout = respondingKeyboardLayout
+                } else {
+                        setupKeyboard()
+                        didKeyboardEstablished = true
+                }
+                if isHapticFeedbackOn && hapticFeedback == nil {
+                        hapticFeedback = UIImpactFeedbackGenerator(style: .light)
+                }
+        }
+        override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+                super.traitCollectionDidChange(previousTraitCollection)
+                isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+                if didKeyboardEstablished {
+                        setupKeyboard()
+                }
+        }
+        override func viewWillDisappear(_ animated: Bool) {
+                super.viewWillDisappear(animated)
+                hapticFeedback = nil
+        }
+        private lazy var didKeyboardEstablished: Bool = false
         private lazy var needsDifferentKeyboard: Bool = false
         private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
         var askedKeyboardLayout: KeyboardLayout {
@@ -281,6 +278,7 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Settings
 
+        var hapticFeedback: UIImpactFeedbackGenerator?
         private(set) lazy var isHapticFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "haptic_feedback")
         func updateHapticFeedbackStatus() {
                 isHapticFeedbackOn = UserDefaults.standard.bool(forKey: "haptic_feedback")
