@@ -3,7 +3,7 @@ import UIKit
 extension KeyboardViewController {
 
         func setupKeyboard() {
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [unowned self] in
                         self.loadKeyboard()
                 }
         }

@@ -1,46 +1,41 @@
 import UIKit
 
 final class NumberButton: UIButton {
-        
+
         private let digit: Int
-        private let viewController: KeyboardViewController
+        private let controller: KeyboardViewController
         private let keyButtonView: UIView = UIView()
-        
+
         init(digit: Int, viewController: KeyboardViewController) {
                 self.digit = digit
-                self.viewController = viewController
+                self.controller = viewController
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
                 setupKeyButtonView()
                 setupDigitLabel()
                 setupFootnoteLabel()
         }
-        
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-        
-        override var intrinsicContentSize: CGSize {
-                CGSize(width: 50, height: 45)
-        }
-        
+
+        required init?(coder: NSCoder) { fatalError("NumberButton.init(coder:) error") }
+        override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
+
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-                viewController.textDocumentProxy.insertText(String(digit))
-                keyButtonView.backgroundColor = viewController.isDarkAppearance ? .black : .lightActionButton
+                controller.textDocumentProxy.insertText(String(digit))
+                keyButtonView.backgroundColor = controller.isDarkAppearance ? .black : .lightActionButton
                 AudioFeedback.perform(.input)
-                viewController.hapticFeedback?.impactOccurred()
+                controller.hapticFeedback?.impactOccurred()
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-                UIView.animate(withDuration: 0, delay: 0.03, animations: {
-                        self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .clear : .white
-                })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
+                        if self != nil {
+                                self!.keyButtonView.backgroundColor = self!.controller.isDarkAppearance ? .clear : .white
+                        }
+                }
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-                UIView.animate(withDuration: 0, delay: 0.03, animations: {
-                        self.keyButtonView.backgroundColor = self.viewController.isDarkAppearance ? .clear : .white
-                })
+                keyButtonView.backgroundColor = controller.isDarkAppearance ? .clear : .white
         }
-        
+
         private func setupKeyButtonView() {
                 addSubview(keyButtonView)
                 keyButtonView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +48,7 @@ final class NumberButton: UIButton {
                         keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant)
                 ])
                 keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.tintColor = viewController.isDarkAppearance ? .white : .black
+                keyButtonView.tintColor = controller.isDarkAppearance ? .white : .black
                 keyButtonView.layer.cornerRadius = 5
                 keyButtonView.layer.cornerCurve = .continuous
                 keyButtonView.layer.shadowColor = UIColor.black.cgColor
@@ -63,7 +58,7 @@ final class NumberButton: UIButton {
                 keyButtonView.layer.shouldRasterize = true
                 keyButtonView.layer.rasterizationScale = UIScreen.main.scale
 
-                guard viewController.isDarkAppearance else {
+                guard controller.isDarkAppearance else {
                         keyButtonView.backgroundColor = .white
                         return
                 }
@@ -75,7 +70,7 @@ final class NumberButton: UIButton {
                 blurEffectView.clipsToBounds = true
                 keyButtonView.addSubview(blurEffectView)
         }
-        
+
         private func setupDigitLabel() {
                 let digitLabel: UILabel = UILabel()
                 keyButtonView.addSubview(digitLabel)
@@ -89,7 +84,7 @@ final class NumberButton: UIButton {
                 digitLabel.textAlignment = .center
                 digitLabel.font = .systemFont(ofSize: 25)
                 digitLabel.text = String(digit)
-                digitLabel.textColor = viewController.isDarkAppearance ? .white : .black
+                digitLabel.textColor = controller.isDarkAppearance ? .white : .black
         }
         private func setupFootnoteLabel() {
                 let footnoteLabel: UILabel = UILabel()
@@ -104,9 +99,9 @@ final class NumberButton: UIButton {
                 footnoteLabel.textAlignment = .center
                 footnoteLabel.font = .boldSystemFont(ofSize: 10)
                 footnoteLabel.text = footnote
-                footnoteLabel.textColor = viewController.isDarkAppearance ? .white : .black
+                footnoteLabel.textColor = controller.isDarkAppearance ? .white : .black
         }
-        
+
         private var footnote: String? {
                 switch digit {
                 case 2:
@@ -132,33 +127,27 @@ final class NumberButton: UIButton {
 }
 
 final class PeriodButton: UIButton {
-        
-        private let viewController: KeyboardViewController
+
+        private let controller: KeyboardViewController
         private let keyButtonView: UIView = UIView()
-        
+
         init(viewController: KeyboardViewController) {
-                self.viewController = viewController
+                self.controller = viewController
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
                 setupKeyButtonView()
                 setupPeriodLabel()
                 addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         }
-        
         @objc private func handleTap() {
-                viewController.textDocumentProxy.insertText(".")
+                controller.textDocumentProxy.insertText(".")
                 AudioFeedback.perform(.input)
-                viewController.hapticFeedback?.impactOccurred()
+                controller.hapticFeedback?.impactOccurred()
         }
-        
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-        
-        override var intrinsicContentSize: CGSize {
-                return CGSize(width: 50, height: 45)
-        }
-        
+
+        required init?(coder: NSCoder) { fatalError("PeriodButton.init(coder:) error") }
+        override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
+
         private func setupKeyButtonView() {
                 addSubview(keyButtonView)
                 keyButtonView.translatesAutoresizingMaskIntoConstraints = false
@@ -169,7 +158,7 @@ final class PeriodButton: UIButton {
                         keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
                 keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.tintColor = viewController.isDarkAppearance ? .white : .black
+                keyButtonView.tintColor = controller.isDarkAppearance ? .white : .black
         }
         private func setupPeriodLabel() {
                 let periodLabel = UILabel()
@@ -184,77 +173,75 @@ final class PeriodButton: UIButton {
                 periodLabel.textAlignment = .center
                 periodLabel.font = .systemFont(ofSize: 28)
                 periodLabel.text = "."
-                periodLabel.textColor = viewController.isDarkAppearance ? .white : .black
+                periodLabel.textColor = controller.isDarkAppearance ? .white : .black
         }
 }
 
 final class BackspaceButton: UIButton {
-        
-        private let viewController: KeyboardViewController
+
+        private let controller: KeyboardViewController
         private let keyButtonView: UIView = UIView()
         private let keyImageView = UIImageView()
-        
+
         init(viewController: KeyboardViewController) {
-                self.viewController = viewController
+                self.controller = viewController
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
                 setupKeyButtonView()
                 setupKeyImageView()
         }
-        
+        required init?(coder: NSCoder) { fatalError("BackspaceButton.init(coder:) error") }
+        override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
         deinit {
-                fastBackspaceTimer?.invalidate()
-                slowBackspaceTimer?.invalidate()
+                backspaceTimer?.invalidate()
+                isInteracting = false
         }
-        
-        private var slowBackspaceTimer: Timer?
-        private var fastBackspaceTimer: Timer?
-        
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-        
-        override var intrinsicContentSize: CGSize {
-                return CGSize(width: 50, height: 45)
-        }
-        
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-                DispatchQueue.main.async {
-                        self.keyImageView.image = UIImage(systemName: "delete.left.fill")
+        private var backspaceTimer: Timer?
+        private lazy var isInteracting: Bool = false {
+                didSet {
+                        if !isInteracting {
+                                backspaceTimer?.invalidate()
+                        }
                 }
-                viewController.hapticFeedback?.impactOccurred()
+        }
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+                isInteracting = true
+                DispatchQueue.main.async { [weak self] in
+                        if self != nil {
+                                self!.keyImageView.image = UIImage(systemName: "delete.left.fill")
+                        }
+                }
+                controller.hapticFeedback?.impactOccurred()
                 handleBackspace()
         }
         private func handleBackspace() {
-                DispatchQueue.main.async {
-                        self.performBackspace()
-                }
-                slowBackspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
-                        self.fastBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
+                performBackspace()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                        if self != nil {
+                                if self!.isInteracting {
+                                        self!.backspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self!, selector: #selector(self!.performBackspace), userInfo: nil, repeats: true)
+                                }
+                        }
                 }
         }
         @objc private func performBackspace() {
-                viewController.textDocumentProxy.deleteBackward()
+                controller.textDocumentProxy.deleteBackward()
                 AudioFeedback.perform(.delete)
         }
-        
+
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-                fastBackspaceTimer?.invalidate()
-                slowBackspaceTimer?.invalidate()
-                
-                UIView.animate(withDuration: 0, delay: 0.03, animations: {
-                        self.keyImageView.image = UIImage(systemName: "delete.left")
-                })
+                isInteracting = false
+                keyImageView.image = UIImage(systemName: "delete.left")
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-                fastBackspaceTimer?.invalidate()
-                slowBackspaceTimer?.invalidate()
-                
-                UIView.animate(withDuration: 0, delay: 0.03, animations: {
-                        self.keyImageView.image = UIImage(systemName: "delete.left")
-                })
+                isInteracting = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
+                        if self != nil {
+                                self!.keyImageView.image = UIImage(systemName: "delete.left")
+                        }
+                }
         }
-        
+
         private func setupKeyButtonView() {
                 addSubview(keyButtonView)
                 keyButtonView.translatesAutoresizingMaskIntoConstraints = false
@@ -265,7 +252,7 @@ final class BackspaceButton: UIButton {
                         keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
                 keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.tintColor = viewController.isDarkAppearance ? .white : .black
+                keyButtonView.tintColor = controller.isDarkAppearance ? .white : .black
         }
         private func setupKeyImageView() {
                 keyButtonView.addSubview(keyImageView)

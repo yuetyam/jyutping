@@ -220,20 +220,26 @@ final class KeyButton: UIButton {
         private func displayPreview() {
                 layer.addSublayer(previewShapeLayer)
                 addSubview(previewLabel)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) {
-                        self.previewLabel.text = self.keyText
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) { [weak self] in
+                        if self != nil {
+                                self!.previewLabel.text = self!.keyText
+                        }
                 }
         }
         private func removePreview() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
-                        self.previewLabel.text = nil
-                        self.previewLabel.removeFromSuperview()
-                        self.previewShapeLayer.removeFromSuperlayer()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [weak self] in
+                        if self != nil {
+                                self!.previewLabel.text = nil
+                                self!.previewLabel.removeFromSuperview()
+                                self!.previewShapeLayer.removeFromSuperlayer()
+                        }
                 }
         }
         private func changeColorToNormal() {
-                UIView.animate(withDuration: 0, delay: 0.03) {
-                        self.shape.backgroundColor = self.isDarkAppearance ? .clear : self.backColor
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
+                        if self != nil {
+                                self!.shape.backgroundColor = self!.isDarkAppearance ? .clear : self!.backColor
+                        }
                 }
         }
         private(set) lazy var previewShapeLayer: CAShapeLayer = {

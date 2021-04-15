@@ -141,7 +141,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         private(set) lazy var processingText: String = "" {
                 didSet {
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [unowned self] in
                                 self.toolBar.update()
                         }
                         syllablesSchemes = Splitter.split(processingText)
@@ -179,7 +179,7 @@ final class KeyboardViewController: UIInputViewController {
         lazy var candidateSequence: [Candidate] = []
         private(set) lazy var candidates: [Candidate] = [] {
                 didSet {
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [unowned self] in
                                 self.candidateCollectionView.reloadData()
                                 self.candidateCollectionView.setContentOffset(.zero, animated: true)
                         }

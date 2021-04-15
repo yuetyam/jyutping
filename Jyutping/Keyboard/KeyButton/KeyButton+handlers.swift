@@ -72,16 +72,19 @@ extension KeyButton {
                 AudioFeedback.play(for: event)
         }
         func handleLongPress() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        guard self.isInteracting else { return }
-                        self.displayCallout()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                        if self != nil {
+                                if self!.isInteracting {
+                                        self!.displayCallout()
+                                }
+                        }
                 }
         }
         func handleBackspace() {
                 performBackspace()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
                         if self != nil {
-                                if !(self!.isInteracting) {
+                                if self!.isInteracting {
                                         self!.backspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self!, selector: #selector(self!.performBackspace), userInfo: nil, repeats: true)
                                 }
                         }
