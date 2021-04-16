@@ -179,7 +179,7 @@ final class KeyboardViewController: UIInputViewController {
         func insert(_ text: String) {
                 shouldMarkInput = false
                 defer {
-                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.02) { [unowned self] in
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.01) { [unowned self] in
                                 self.shouldMarkInput = true
                         }
                 }
