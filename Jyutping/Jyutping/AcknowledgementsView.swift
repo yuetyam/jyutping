@@ -11,13 +11,19 @@ struct AcknowledgementsView: View {
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/rime/rime-cantonese")!)
                                         .fillBackground()
-                                        .padding(.horizontal)
-                                        .padding(.top)
+                                        .padding()
                                 LinkView(iconName: "briefcase",
                                          text: Text("OpenCC"),
                                          footnote: Text("© Carbo Kuo. Apache 2.0"),
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/BYVoid/OpenCC")!)
+                                        .fillBackground()
+                                        .padding(.horizontal)
+                                LinkView(iconName: "textformat",
+                                         text: Text("Source Han Sans"),
+                                         footnote: Text("© Adobe. OFL 1.1"),
+                                         symbolName: "safari",
+                                         url: URL(string: "https://github.com/adobe-fonts/source-han-sans")!)
                                         .fillBackground()
                                         .padding()
                         }
