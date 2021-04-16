@@ -19,8 +19,9 @@ final class KeyboardViewController: UIInputViewController {
                 return stackView
         }()
 
-        override func viewDidLoad() {
-                super.viewDidLoad()
+        private lazy var didLoad: Bool = false
+        private func initialize() {
+                guard !didLoad else { return }
                 view.addSubview(keyboardStackView)
                 keyboardStackView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -31,24 +32,26 @@ final class KeyboardViewController: UIInputViewController {
                 ])
                 candidateCollectionView.delegate = self
                 candidateCollectionView.dataSource = self
-                candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: "CandidateCell")
                 candidateCollectionView.backgroundColor = view.backgroundColor
-                
+                candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: "CandidateCell")
                 emojiCollectionView.delegate = self
                 emojiCollectionView.dataSource = self
-                emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: "EmojiCell")
                 emojiCollectionView.backgroundColor = view.backgroundColor
-
+                emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: "EmojiCell")
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
-                settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")                
+                settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "CharactersTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "KeyboardLayoutTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "JyutpingTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
-
                 setupToolBarActions()
+                didLoad = true
+        }
+        override func viewDidLoad() {
+                super.viewDidLoad()
+                initialize()
         }
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
@@ -68,7 +71,7 @@ final class KeyboardViewController: UIInputViewController {
                 super.viewDidAppear(animated)
                 if needsDifferentKeyboard {
                         keyboardLayout = respondingKeyboardLayout
-                } else {
+                } else if !didKeyboardEstablished {
                         setupKeyboard()
                         didKeyboardEstablished = true
                 }
