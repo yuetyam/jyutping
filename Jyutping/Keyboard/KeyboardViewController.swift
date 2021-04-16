@@ -114,11 +114,11 @@ final class KeyboardViewController: UIInputViewController {
                                 didKeyboardEstablished = true
                                 return
                         }
-                        if !keyboardLayout.isCantoneseMode {
-                                if !inputText.isEmpty {
-                                        textDocumentProxy.insertText(processingText)
+                        if (!keyboardLayout.isCantoneseMode) && (!inputText.isEmpty) {
+                                insert(processingText)
+                                DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) { [unowned self] in
+                                        self.inputText = ""
                                 }
-                                inputText = ""
                         }
                 }
         }
@@ -169,11 +169,44 @@ final class KeyboardViewController: UIInputViewController {
         }
         private lazy var markedText: String = "" {
                 didSet {
-                        let range: NSRange = NSRange(location: markedText.count, length: 0)
-                        textDocumentProxy.setMarkedText(markedText, selectedRange: range)
-                        if markedText.isEmpty { textDocumentProxy.unmarkText() }
+                        guard shouldMarkInput else { return }
+                        handleMarkedText()
                 }
         }
+
+        /// some dumb apps just can't be compatible with `textDocumentProxy.insertText()`
+        /// - Parameter text: text to input
+        func insert(_ text: String) {
+                shouldMarkInput = false
+                defer {
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.02) { [unowned self] in
+                                self.shouldMarkInput = true
+                        }
+                }
+                guard text != "\n" else {
+                        textDocumentProxy.insertText(text)
+                        return
+                }
+                let range: NSRange = NSRange(location: text.count, length: 0)
+                textDocumentProxy.setMarkedText(text, selectedRange: range)
+                textDocumentProxy.unmarkText()
+        }
+        private lazy var shouldMarkInput: Bool = true {
+                didSet {
+                        guard shouldMarkInput else { return }
+                        handleMarkedText()
+                }
+        }
+        private func handleMarkedText() {
+                guard !(markedText.isEmpty) else {
+                        textDocumentProxy.setMarkedText("", selectedRange: NSRange(location: 0, length: 0))
+                        textDocumentProxy.unmarkText()
+                        return
+                }
+                let range: NSRange = NSRange(location: markedText.count, length: 0)
+                textDocumentProxy.setMarkedText(markedText, selectedRange: range)
+        }
+
         private lazy var syllablesSchemes: [[String]] = []
 
         lazy var candidateSequence: [Candidate] = []
@@ -262,7 +295,7 @@ final class KeyboardViewController: UIInputViewController {
                 guard let copied: String = UIPasteboard.general.string else { return }
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.input)
-                textDocumentProxy.insertText(copied)
+                insert(copied)
         }
         @objc private func handleEmojiSwitch() {
                 hapticFeedback?.impactOccurred()

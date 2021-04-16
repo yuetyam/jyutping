@@ -105,14 +105,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 guard collectionView == candidateCollectionView else {
                         guard let cell: EmojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCell else { return }
                         let emoji: String = cell.emojiLabel.text ?? "😀"
-                        textDocumentProxy.insertText(emoji)
+                        insert(emoji)
                         hapticFeedback?.impactOccurred()
                         updateFrequentEmojis(latest: emoji)
                         return
                 }
-
                 let candidate: Candidate = candidates[indexPath.row]
-                textDocumentProxy.insertText(candidate.text)
+                insert(candidate.text)
                 AudioFeedback.perform(.modify)
                 if inputText.hasPrefix("r") {
                         if inputText == "r" + candidate.input {
@@ -128,8 +127,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                 } else {
                         candidateSequence.append(candidate)
-                        let left = processingText.dropFirst(candidate.input.count)
-                        inputText = (left == "'") ? "" : String(left)
+                        let tail = processingText.dropFirst(candidate.input.count)
+                        inputText = (tail == "'") ? "" : String(tail)
                 }
                 if keyboardLayout == .candidateBoard && inputText.isEmpty {
                         collectionView.removeFromSuperview()

@@ -19,11 +19,11 @@ extension KeyButton {
                 case .key(.cantoneseComma):
                         guard peekingText == nil else { return }
                         if controller.inputText.isEmpty {
-                                controller.textDocumentProxy.insertText("，")
+                                controller.insert("，")
                         } else {
                                 let text: String = controller.processingText + "，"
+                                controller.insert(text)
                                 controller.inputText = ""
-                                controller.textDocumentProxy.insertText(text)
                         }
                 case .key(let keySeat):
                         guard peekingText == nil else { return }
@@ -31,7 +31,7 @@ extension KeyButton {
                         if controller.keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
-                                controller.textDocumentProxy.insertText(text)
+                                controller.insert(text)
                         }
                         if controller.keyboardLayout == .alphabetic(.uppercased) {
                                 controller.keyboardLayout = .alphabetic(.lowercased)
@@ -43,7 +43,7 @@ extension KeyButton {
                         if controller.keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
-                                controller.textDocumentProxy.insertText(text)
+                                controller.insert(text)
                         }
                         if controller.keyboardLayout == .alphabetic(.uppercased) {
                                 controller.keyboardLayout = .alphabetic(.lowercased)
@@ -53,7 +53,7 @@ extension KeyButton {
                         }
                 case .newLine:
                         if controller.inputText.isEmpty {
-                                controller.textDocumentProxy.insertText("\n")
+                                controller.insert("\n")
                         } else {
                                 let converted: String = controller.processingText.replacingOccurrences(of: "4", with: "xx")
                                         .replacingOccurrences(of: "5", with: "vv")
@@ -61,8 +61,8 @@ extension KeyButton {
                                         .replacingOccurrences(of: "1", with: "v")
                                         .replacingOccurrences(of: "2", with: "x")
                                         .replacingOccurrences(of: "3", with: "q")
+                                controller.insert(converted)
                                 controller.inputText = ""
-                                controller.textDocumentProxy.insertText(converted)
                         }
                 case .switchTo(let layout):
                         controller.keyboardLayout = layout
@@ -131,13 +131,13 @@ extension KeyButton {
                 case 2:
                         guard controller.inputText.isEmpty else { return }
                         guard let isSpaceAhead: Bool = controller.textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
-                                controller.textDocumentProxy.insertText(" ")
+                                controller.insert(" ")
                                 AudioFeedback.perform(.input)
                                 return
                         }
                         controller.textDocumentProxy.deleteBackward()
                         let text: String = controller.keyboardLayout.isEnglishMode ? ". " : "。"
-                        controller.textDocumentProxy.insertText(text)
+                        controller.insert(text)
                         AudioFeedback.perform(.input)
                 default:
                         tapOnSpace()
@@ -156,7 +156,7 @@ extension KeyButton {
                         let inputText: String = controller.inputText
                         let processingText: String = controller.processingText
                         guard !inputText.isEmpty else {
-                                controller.textDocumentProxy.insertText(" ")
+                                controller.insert(" ")
                                 AudioFeedback.play(for: .space)
                                 return
                         }
@@ -167,12 +167,12 @@ extension KeyButton {
                                         .replacingOccurrences(of: "1", with: "v")
                                         .replacingOccurrences(of: "2", with: "x")
                                         .replacingOccurrences(of: "3", with: "q")
-                                controller.inputText = ""
-                                controller.textDocumentProxy.insertText(converted)
+                                controller.insert(converted)
                                 AudioFeedback.perform(.modify)
+                                controller.inputText = ""
                                 return
                         }
-                        controller.textDocumentProxy.insertText(firstCandidate.text)
+                        controller.insert(firstCandidate.text)
                         AudioFeedback.perform(.modify)
                         if inputText.hasPrefix("r") {
                                 if inputText.count == (firstCandidate.input.count + 1) {
@@ -201,11 +201,11 @@ extension KeyButton {
                                 }
                         }
                 case .alphabetic(.uppercased):
-                        controller.textDocumentProxy.insertText(" ")
+                        controller.insert(" ")
                         AudioFeedback.play(for: .space)
                         controller.keyboardLayout = .alphabetic(.lowercased)
                 default:
-                        controller.textDocumentProxy.insertText(" ")
+                        controller.insert(" ")
                         AudioFeedback.play(for: .space)
                 }
         }
