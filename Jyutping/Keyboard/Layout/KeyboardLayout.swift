@@ -2,17 +2,17 @@ enum KeyboardLayout: Hashable {
         case cantonese(ShiftState),
              cantoneseNumeric,
              cantoneseSymbolic,
-
              alphabetic(ShiftState),
              numeric,
              symbolic,
-
-             emoji,
+             candidateBoard,
+             settingsView,
              numberPad,
              decimalPad,
-             candidateBoard,
-             settingsView
+             emoji
+}
 
+extension KeyboardLayout {
         var isEnglishMode: Bool {
                 switch self {
                 case .alphabetic,

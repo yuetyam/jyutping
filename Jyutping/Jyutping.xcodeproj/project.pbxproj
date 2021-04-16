@@ -12,7 +12,7 @@
 		370E36A12605DF46003BC0CD /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 370E36A02605DF46003BC0CD /* JyutpingProvider */; };
 		3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3715203323B22ACF007EAB60 /* ToolBar.swift */; };
 		371C5017261B4D3D00916D52 /* ShiftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C5016261B4D3D00916D52 /* ShiftState.swift */; };
-		371C5019261B4D8D00916D52 /* KeyboardLayout+keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */; };
+		371C5019261B4D8D00916D52 /* KeyboardLayout+events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C5018261B4D8D00916D52 /* KeyboardLayout+events.swift */; };
 		37211D5E23541EE4007E1D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D5D23541EE4007E1D68 /* Assets.xcassets */; };
 		37211D6123541EE4007E1D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6023541EE4007E1D68 /* Preview Assets.xcassets */; };
 		37211D6423541EE4007E1D68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37211D6223541EE4007E1D68 /* LaunchScreen.storyboard */; };
@@ -97,7 +97,7 @@
 		370B631423E96E1000912B9A /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
 		3715203323B22ACF007EAB60 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		371C5016261B4D3D00916D52 /* ShiftState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftState.swift; sourceTree = "<group>"; };
-		371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardLayout+keys.swift"; sourceTree = "<group>"; };
+		371C5018261B4D8D00916D52 /* KeyboardLayout+events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardLayout+events.swift"; sourceTree = "<group>"; };
 		37211D5423541EE3007E1D68 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37211D5723541EE3007E1D68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37211D5D23541EE4007E1D68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				37E004F723E49B6700E413BD /* KeyboardLayout.swift */,
-				371C5018261B4D8D00916D52 /* KeyboardLayout+keys.swift */,
+				371C5018261B4D8D00916D52 /* KeyboardLayout+events.swift */,
 				371C5016261B4D3D00916D52 /* ShiftState.swift */,
 			);
 			path = Layout;
@@ -541,7 +541,7 @@
 				370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */,
 				37FF2A2F23E8F80400B86C74 /* Engine.swift in Sources */,
 				3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */,
-				371C5019261B4D8D00916D52 /* KeyboardLayout+keys.swift in Sources */,
+				371C5019261B4D8D00916D52 /* KeyboardLayout+events.swift in Sources */,
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
 				37AFDAD6260C8B97002963B5 /* CalloutView.swift in Sources */,
 				373B15612627568F005CC08C /* KeyButton+handlers.swift in Sources */,

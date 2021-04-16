@@ -1,5 +1,4 @@
 extension KeyboardLayout {
-
         func events(needsInputModeSwitchKey: Bool, arrangement: Int) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
@@ -32,8 +31,10 @@ extension KeyboardLayout {
                         return []
                 }
         }
+}
 
-        private func cantoneseLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+private extension KeyboardLayout {
+        func cantoneseLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -55,7 +56,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func cantoneseUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func cantoneseUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -77,7 +78,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func saamPingLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func saamPingLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["aa", "w", "e", "eo", "t", "yu", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -172,7 +173,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func saamPingUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func saamPingUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["AA", "W", "E", "EO", "T", "YU", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -267,7 +268,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func alphabeticLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func alphabeticLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -289,7 +290,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func alphabeticUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func alphabeticUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -311,7 +312,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func cantoneseNumericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func cantoneseNumericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"],
@@ -487,7 +488,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func numericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func numericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""],
@@ -593,7 +594,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func cantoneseSymbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func cantoneseSymbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="],
                         ["_", "—", "＼", "｜", "～", "《", "》", "¥", "&", "\u{00B7}"],
@@ -793,7 +794,7 @@ extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        private func symbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func symbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
