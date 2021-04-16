@@ -8,17 +8,15 @@ final class EmojiCell: UICollectionViewCell {
                 super.init(frame: frame)
                 self.addSubview(emojiLabel)
                 emojiLabel.translatesAutoresizingMaskIntoConstraints = false
-                emojiLabel.font = .systemFont(ofSize: 34)
                 NSLayoutConstraint.activate([
                         emojiLabel.topAnchor.constraint(equalTo: topAnchor),
                         emojiLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
                         emojiLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
                         emojiLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
+                emojiLabel.font = .systemFont(ofSize: 34)
         }
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
+        required init?(coder: NSCoder) { fatalError("EmojiCell.init(coder:) error") }
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
@@ -61,7 +59,7 @@ final class EmojiCell: UICollectionViewCell {
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
                 layer.path = originPath.cgPath
-                layer.fillColor =  traitCollection.userInterfaceStyle == .dark ? UIColor.gray.cgColor : UIColor.white.cgColor
+                layer.fillColor = traitCollection.userInterfaceStyle == .dark ? UIColor.gray.cgColor : UIColor.white.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
                 animation.duration = 0.005
                 animation.toValue = previewPath.cgPath
@@ -80,13 +78,12 @@ final class EmojiCell: UICollectionViewCell {
                 label.font = .systemFont(ofSize: 34)
                 return label
         }()
-        private lazy var originPath: UIBezierPath = keyShapeBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
+        private lazy var originPath: UIBezierPath = shapeBezierPath(origin: bottomCenter, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
         private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: keyWidth, keyHeight: keyHeight, keyCornerRadius: 5)
         private lazy var keyWidth: CGFloat = 35
         private lazy var keyHeight: CGFloat = 35
         private lazy var bottomCenter: CGPoint = CGPoint(x: emojiLabel.frame.midX, y: emojiLabel.frame.maxY)
 }
-
 
 /*
 final class EmojiCollectionViewHeader: UICollectionReusableView {
@@ -112,10 +109,8 @@ final class EmojiCollectionViewHeader: UICollectionReusableView {
 }
 */
 
-
 private extension EmojiCell {
-
-        func keyShapeBezierPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> UIBezierPath {
+        func shapeBezierPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> UIBezierPath {
 
                 //    +-----------E---+
                 //    +   |       |   +
