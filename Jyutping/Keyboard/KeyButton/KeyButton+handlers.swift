@@ -188,8 +188,8 @@ extension KeyButton {
                                 }
                         } else {
                                 controller.candidateSequence.append(firstCandidate)
-                                let left = processingText.dropFirst(firstCandidate.input.count)
-                                controller.inputText = (left == "'") ? "" : String(left)
+                                let tail = processingText.dropFirst(firstCandidate.input.count)
+                                controller.inputText = (tail == "'") ? "" : String(tail)
                         }
                         if controller.inputText.isEmpty && !controller.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = controller.candidateSequence.joined()
