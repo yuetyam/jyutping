@@ -40,10 +40,13 @@ final class KeyButton: UIButton {
         }
         required init?(coder: NSCoder) { fatalError("KeyView.init(coder:) error") }
         override var intrinsicContentSize: CGSize { CGSize(width: width, height: height) }
-
         deinit {
                 backspaceTimer?.invalidate()
         }
+
+
+        // MARK: - Touches
+
         private(set) lazy var isInteracting: Bool = false {
                 didSet {
                         if !isInteracting {
@@ -86,7 +89,7 @@ final class KeyButton: UIButton {
         private lazy var distances: [CGFloat] = {
                 let max: CGFloat = calloutStackView.bounds.width
                 var blocks: [CGFloat] = []
-                let count: Int = calloutKeys.count + 1
+                let count: Int = calloutViews.count + 1
                 let step: CGFloat = max / CGFloat(count)
                 for number in 0..<count {
                         let length: CGFloat = step * CGFloat(number)
@@ -104,12 +107,12 @@ final class KeyButton: UIButton {
                         for index in 0..<(distances.count - 1) {
                                 let rightCondition: Bool = (distances[index] < distance) && (distance < distances[index + 1])
                                 let leftCondition: Bool = (distances[index] < -distance) && (-distance < distances[index + 1])
-                                let condition: Bool = greaterMidX ? leftCondition : rightCondition
+                                let condition: Bool = beyondMidX ? leftCondition : rightCondition
                                 if condition {
-                                        let this: Int = greaterMidX ? (calloutKeys.count - 1 - index): index
-                                        _ = calloutKeys.map({ $0.backgroundColor = backColor })
-                                        calloutKeys[this].backgroundColor = selectionColor
-                                        peekingText = calloutKeys[this].text
+                                        let this: Int = beyondMidX ? (calloutViews.count - 1 - index): index
+                                        _ = calloutViews.map({ $0.backgroundColor = backColor })
+                                        calloutViews[this].backgroundColor = selectionColor
+                                        peekingText = calloutViews[this].text
                                 }
                         }
                 case .space:
@@ -205,17 +208,23 @@ final class KeyButton: UIButton {
                 }
         }
 
+
+        // MARK: - Properties
+
         var backspaceTimer: Timer?
         private(set) lazy var backspaceTouchPoint: CGPoint = .zero
         private(set) lazy var spaceTouchPoint: CGPoint = .zero
         private(set) lazy var draggedOnSpace: Bool = false
-        private(set) lazy var greaterMidX: Bool = frame.midX > controller.view.frame.midX
-
-        private lazy var keyShapePath: UIBezierPath = keyShapeBezierPath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
+        private(set) lazy var beyondMidX: Bool = frame.midX > controller.view.frame.midX
+        private lazy var keyShapePath: UIBezierPath = shapeBezierPath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
         private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
         private lazy var shapeWidth: CGFloat = shape.frame.width
         private lazy var shapeHeight: CGFloat = shape.frame.height
         private lazy var bottomCenter: CGPoint = CGPoint(x: shape.frame.midX, y: shape.frame.maxY)
+        private lazy var selectionColor: UIColor =  UIColor(red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
+
+
+        // MARK: - Preview
 
         private func displayPreview() {
                 layer.addSublayer(previewShapeLayer)
@@ -272,6 +281,9 @@ final class KeyButton: UIButton {
                 return label
         }()
 
+
+        // MARK: - Callout
+
         func displayCallout() {
                 layer.addSublayer(calloutLayer)
                 addSubview(calloutStackView)
@@ -279,7 +291,7 @@ final class KeyButton: UIButton {
         }
         private lazy var isCalloutDisplaying: Bool = false
         private func removeCallout() {
-                _ = calloutKeys.map({ $0.backgroundColor = backColor })
+                _ = calloutViews.map({ $0.backgroundColor = backColor })
                 calloutStackView.removeFromSuperview()
                 calloutLayer.removeFromSuperlayer()
                 isCalloutDisplaying = false
@@ -287,7 +299,7 @@ final class KeyButton: UIButton {
         private lazy var calloutStackView: UIStackView = {
                 let rect: CGRect = {
                         if isPhonePortrait {
-                                let expansion = greaterMidX ? (bubblePath.bounds.maxX - shape.bounds.maxX - 5) : (shape.bounds.minX - bubblePath.bounds.minX)
+                                let expansion = beyondMidX ? (bubblePath.bounds.maxX - shape.bounds.maxX - 5) : (shape.bounds.minX - bubblePath.bounds.minX)
                                 let width = bubblePath.bounds.width - (expansion * 2)
                                 let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
                                 let size = CGSize(width: width, height: shapeHeight)
@@ -301,7 +313,7 @@ final class KeyButton: UIButton {
                 }()
                 let stackView: UIStackView = UIStackView(frame: rect)
                 stackView.distribution = .fillEqually
-                stackView.addMultipleArrangedSubviews(calloutKeys)
+                stackView.addMultipleArrangedSubviews(calloutViews)
                 return stackView
         }()
         private lazy var calloutLayer: CAShapeLayer = {
@@ -323,7 +335,7 @@ final class KeyButton: UIButton {
                 layer.add(animation, forKey: animation.keyPath)
                 return layer
         }()
-        private lazy var calloutKeys: [CalloutView] = {
+        private lazy var calloutViews: [CalloutView] = {
                 switch event {
                 case .key(let seat):
                         guard !seat.children.isEmpty else { return [] }
@@ -336,24 +348,23 @@ final class KeyButton: UIButton {
                                 let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, alignments: element.alignments)
                                 keys.append(callout)
                         }
-                        return greaterMidX ? keys.reversed() : keys
+                        return beyondMidX ? keys.reversed() : keys
                 default:
                         return []
                 }
         }()
-        private lazy var selectionColor: UIColor =  UIColor(red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
         private lazy var bubblePath: UIBezierPath = {
                 if isPhonePortrait {
-                        if greaterMidX {
-                                return leftBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
+                        if beyondMidX {
+                                return leftBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutViews.count - 1)
                         } else {
-                                return rightBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutKeys.count - 1)
+                                return rightBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutViews.count - 1)
                         }
                 } else {
-                        if greaterMidX {
-                                return leftSquareBubblePath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
+                        if beyondMidX {
+                                return leftSquareBubblePath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, cornerRadius: 5, expansions: calloutViews.count - 1)
                         } else {
-                                return rightSquareBubblePath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, cornerRadius: 5, expansions: calloutKeys.count - 1)
+                                return rightSquareBubblePath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, cornerRadius: 5, expansions: calloutViews.count - 1)
                         }
                 }
         }()

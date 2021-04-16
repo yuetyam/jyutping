@@ -2,7 +2,7 @@ import UIKit
 
 extension KeyButton {
 
-        func keyShapeBezierPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> UIBezierPath {
+        func shapeBezierPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> UIBezierPath {
 
                 //    +-----------E---+
                 //    +   |       |   +

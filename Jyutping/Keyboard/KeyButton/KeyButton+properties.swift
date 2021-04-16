@@ -127,7 +127,7 @@ extension KeyButton {
                 }
         }
 
-        var image: UIImage? {
+        var keyImage: UIImage? {
                 switch event {
                 case .switchInputMethod:
                         return UIImage(systemName: "globe")

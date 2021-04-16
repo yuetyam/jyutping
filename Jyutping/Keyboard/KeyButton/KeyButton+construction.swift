@@ -117,6 +117,6 @@ extension KeyButton {
                         keyImageView.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
                 keyImageView.contentMode = .scaleAspectFit
-                keyImageView.image = image?.withTintColor(foreColor)
+                keyImageView.image = keyImage?.withTintColor(foreColor)
         }
 }
