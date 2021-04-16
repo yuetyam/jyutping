@@ -81,7 +81,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
-                isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+                updateProperties()
                 if didKeyboardEstablished {
                         setupKeyboard()
                 }
@@ -277,7 +277,12 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var isPhonePortrait: Bool = (traitCollection.userInterfaceIdiom == .phone) && (traitCollection.verticalSizeClass == .regular)
         private(set) lazy var isPhoneInterface: Bool = (traitCollection.userInterfaceIdiom == .phone) || (traitCollection.horizontalSizeClass == .compact) || (view.frame.width < 500)
         private(set) lazy var isPadLandscape: Bool = UIScreen.main.bounds.width > UIScreen.main.bounds.height
-
+        private func updateProperties() {
+                isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+                isPhonePortrait = (traitCollection.userInterfaceIdiom == .phone) && (traitCollection.verticalSizeClass == .regular)
+                isPhoneInterface = (traitCollection.userInterfaceIdiom == .phone) || (traitCollection.horizontalSizeClass == .compact) || (view.frame.width < 500)
+                isPadLandscape = UIScreen.main.bounds.width > UIScreen.main.bounds.height
+        }
 
         // MARK: - Settings
 
