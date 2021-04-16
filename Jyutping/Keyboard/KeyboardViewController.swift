@@ -123,7 +123,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
 
-        let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInitiated)
+        let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInteractive)
 
         lazy var inputText: String = "" {
                 didSet {
