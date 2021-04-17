@@ -157,7 +157,7 @@ final class KeyButton: UIButton {
                         AudioFeedback.perform(.input)
                         controller.hapticFeedback?.impactOccurred()
                         guard controller.keyboardLayout.isCantoneseMode else {
-                                controller.insert(text)
+                                controller.textDocumentProxy.insertText(text)
                                 break
                         }
                         let punctuation: String = "，。？！"
@@ -166,7 +166,7 @@ final class KeyButton: UIButton {
                                 break
                         }
                         if controller.inputText.isEmpty {
-                                controller.insert(text)
+                                controller.textDocumentProxy.insertText(text)
                         } else {
                                 let combined: String = controller.processingText + text
                                 controller.insert(combined)

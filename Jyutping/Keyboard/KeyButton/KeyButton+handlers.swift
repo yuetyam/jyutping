@@ -19,7 +19,7 @@ extension KeyButton {
                 case .key(.cantoneseComma):
                         guard peekingText == nil else { return }
                         if controller.inputText.isEmpty {
-                                controller.insert("，")
+                                controller.textDocumentProxy.insertText("，")
                         } else {
                                 let text: String = controller.processingText + "，"
                                 controller.insert(text)
@@ -31,7 +31,7 @@ extension KeyButton {
                         if controller.keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
-                                controller.insert(text)
+                                controller.textDocumentProxy.insertText(text)
                         }
                         if controller.keyboardLayout == .alphabetic(.uppercased) {
                                 controller.keyboardLayout = .alphabetic(.lowercased)
@@ -43,7 +43,7 @@ extension KeyButton {
                         if controller.keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
-                                controller.insert(text)
+                                controller.textDocumentProxy.insertText(text)
                         }
                         if controller.keyboardLayout == .alphabetic(.uppercased) {
                                 controller.keyboardLayout = .alphabetic(.lowercased)
@@ -53,7 +53,7 @@ extension KeyButton {
                         }
                 case .newLine:
                         if controller.inputText.isEmpty {
-                                controller.insert("\n")
+                                controller.textDocumentProxy.insertText("\n")
                         } else {
                                 let converted: String = controller.processingText.replacingOccurrences(of: "4", with: "xx")
                                         .replacingOccurrences(of: "5", with: "vv")
@@ -131,13 +131,13 @@ extension KeyButton {
                 case 2:
                         guard controller.inputText.isEmpty else { return }
                         guard let isSpaceAhead: Bool = controller.textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
-                                controller.insert(" ")
+                                controller.textDocumentProxy.insertText(" ")
                                 AudioFeedback.perform(.input)
                                 return
                         }
                         controller.textDocumentProxy.deleteBackward()
                         let text: String = controller.keyboardLayout.isEnglishMode ? ". " : "。"
-                        controller.insert(text)
+                        controller.textDocumentProxy.insertText(text)
                         AudioFeedback.perform(.input)
                 default:
                         tapOnSpace()
@@ -156,8 +156,8 @@ extension KeyButton {
                         let inputText: String = controller.inputText
                         let processingText: String = controller.processingText
                         guard !inputText.isEmpty else {
-                                controller.insert(" ")
-                                AudioFeedback.play(for: .space)
+                                controller.textDocumentProxy.insertText(" ")
+                                AudioFeedback.perform(.input)
                                 return
                         }
                         guard let firstCandidate: Candidate = controller.candidates.first else {
@@ -201,12 +201,12 @@ extension KeyButton {
                                 }
                         }
                 case .alphabetic(.uppercased):
-                        controller.insert(" ")
-                        AudioFeedback.play(for: .space)
+                        controller.textDocumentProxy.insertText(" ")
+                        AudioFeedback.perform(.input)
                         controller.keyboardLayout = .alphabetic(.lowercased)
                 default:
-                        controller.insert(" ")
-                        AudioFeedback.play(for: .space)
+                        controller.textDocumentProxy.insertText(" ")
+                        AudioFeedback.perform(.input)
                 }
         }
 }

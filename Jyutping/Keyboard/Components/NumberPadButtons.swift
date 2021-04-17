@@ -20,7 +20,7 @@ final class NumberButton: UIButton {
         override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-                controller.insert(String(digit))
+                controller.textDocumentProxy.insertText(String(digit))
                 keyButtonView.backgroundColor = controller.isDarkAppearance ? .black : .lightActionButton
                 AudioFeedback.perform(.input)
                 controller.hapticFeedback?.impactOccurred()
@@ -140,7 +140,7 @@ final class PeriodButton: UIButton {
                 addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         }
         @objc private func handleTap() {
-                controller.insert(".")
+                controller.textDocumentProxy.insertText(".")
                 AudioFeedback.perform(.input)
                 controller.hapticFeedback?.impactOccurred()
         }

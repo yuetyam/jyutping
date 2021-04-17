@@ -174,7 +174,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
 
-        /// some dumb apps just can't be compatible with `textDocumentProxy.insertText()`
+        /// some dumb apps just can't be compatible with `setMarkedText() & insertText()`
         /// - Parameter text: text to input
         func insert(_ text: String) {
                 shouldMarkInput = false
@@ -182,10 +182,6 @@ final class KeyboardViewController: UIInputViewController {
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.02) { [unowned self] in
                                 self.shouldMarkInput = true
                         }
-                }
-                guard text != "\n" else {
-                        textDocumentProxy.insertText(text)
-                        return
                 }
                 let range: NSRange = NSRange(location: text.count, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
