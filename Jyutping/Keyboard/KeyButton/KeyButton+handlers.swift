@@ -91,6 +91,7 @@ extension KeyButton {
                 }
         }
         @objc private func performBackspace() {
+                guard isInteracting else { return }
                 if controller.inputText.isEmpty {
                         controller.textDocumentProxy.deleteBackward()
                 } else {
