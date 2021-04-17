@@ -3,6 +3,8 @@ import OpenCCLite
 
 final class KeyboardViewController: UIInputViewController {
 
+        // MARK: - SubViews
+
         private(set) lazy var toolBar: ToolBar = ToolBar(viewController: self)
         private(set) lazy var settingsView: UIView = UIView()
         private(set) lazy var candidateBoard: CandidateBoard = CandidateBoard()
@@ -18,6 +20,9 @@ final class KeyboardViewController: UIInputViewController {
                 stackView.distribution = .equalSpacing
                 return stackView
         }()
+
+
+        // MARK: - Keyboard Life Cycle
 
         private lazy var didLoad: Bool = false
         private func initialize() {
@@ -123,7 +128,8 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
 
-        let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInteractive)
+
+        // MARK: - Input
 
         lazy var inputText: String = "" {
                 didSet {
@@ -162,7 +168,7 @@ final class KeyboardViewController: UIInputViewController {
                                 candidates = []
                         } else {
                                 imeQueue.async { [unowned self] in
-                                        self.suggestCandidates()
+                                        self.suggest()
                                 }
                         }
                 }
@@ -173,6 +179,7 @@ final class KeyboardViewController: UIInputViewController {
                         handleMarkedText()
                 }
         }
+        private lazy var syllablesSchemes: [[String]] = []
 
         /// some dumb apps just can't be compatible with `setMarkedText() & insertText()`
         /// - Parameter text: text to input
@@ -203,23 +210,16 @@ final class KeyboardViewController: UIInputViewController {
                 textDocumentProxy.setMarkedText(markedText, selectedRange: range)
         }
 
-        private lazy var syllablesSchemes: [[String]] = []
 
-        lazy var candidateSequence: [Candidate] = []
-        private(set) lazy var candidates: [Candidate] = [] {
-                didSet {
-                        DispatchQueue.main.async { [unowned self] in
-                                self.candidateCollectionView.reloadData()
-                                self.candidateCollectionView.setContentOffset(.zero, animated: true)
-                        }
-                }
-        }
-        private(set) lazy var lexiconManager: LexiconManager = LexiconManager()
+        // MARK: - Engine
+
+        private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInteractive)
+        private lazy var lexiconManager: LexiconManager = LexiconManager()
         private lazy var engine: Engine = Engine()
-        private func suggestCandidates() {
-                let userdbCandidates: [Candidate] = lexiconManager.suggest(for: processingText)
+        private func suggest() {
+                let userLexicon: [Candidate] = lexiconManager.suggest(for: processingText)
                 let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: syllablesSchemes)
-                let combined: [Candidate] = userdbCandidates + engineCandidates
+                let combined: [Candidate] = userLexicon + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
                 } else if converter == nil {
@@ -230,6 +230,28 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = converted.deduplicated()
                 }
         }
+        private(set) lazy var candidates: [Candidate] = [] {
+                didSet {
+                        DispatchQueue.main.async { [unowned self] in
+                                self.candidateCollectionView.reloadData()
+                                self.candidateCollectionView.setContentOffset(.zero, animated: true)
+                        }
+                }
+        }
+        lazy var candidateSequence: [Candidate] = []
+        func handleLexicon(_ candidate: Candidate) {
+                imeQueue.async { [unowned self] in
+                        self.lexiconManager.handle(candidate: candidate)
+                }
+        }
+        func clearUserLexicon() {
+                imeQueue.async { [unowned self] in
+                        self.lexiconManager.deleteAll()
+                }
+        }
+
+
+        // MARK: - ToolBar Actions
 
         private func setupToolBarActions() {
                 toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .touchUpInside)

@@ -196,11 +196,7 @@ extension KeyButton {
                         if controller.inputText.isEmpty && !controller.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = controller.candidateSequence.joined()
                                 controller.candidateSequence = []
-                                controller.imeQueue.async { [weak self] in
-                                        if self != nil {
-                                                self!.controller.lexiconManager.handle(candidate: concatenatedCandidate)
-                                        }
-                                }
+                                controller.handleLexicon(concatenatedCandidate)
                         }
                 case .alphabetic(.uppercased):
                         controller.textDocumentProxy.insertText(" ")

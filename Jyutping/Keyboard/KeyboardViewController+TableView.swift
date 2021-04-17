@@ -245,9 +245,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 tableView.reloadData()
                         }
                 case 5:
-                        imeQueue.async { [unowned self] in
-                                self.lexiconManager.deleteAll()
-                        }
+                        clearUserLexicon()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)
                         }

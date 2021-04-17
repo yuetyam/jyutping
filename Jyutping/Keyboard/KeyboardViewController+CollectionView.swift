@@ -139,12 +139,10 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 if inputText.isEmpty && !candidateSequence.isEmpty {
                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                         candidateSequence = []
-                        imeQueue.async { [unowned self] in
-                                self.lexiconManager.handle(candidate: concatenatedCandidate)
-                        }
+                        handleLexicon(concatenatedCandidate)
                 }
         }
-        
+
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
                 guard collectionView == candidateCollectionView else {
                         return CGSize(width: 42, height: 42)
