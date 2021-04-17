@@ -4,6 +4,7 @@ final class EmojiBoard: UIView {
 
         private let bottomStackView: UIStackView = UIStackView()
         let indicatorsStackView: UIStackView = UIStackView()
+        let globeKey: UIButton = UIButton()
 
         init(viewController: KeyboardViewController) {
                 super.init(frame: .zero)
@@ -15,11 +16,26 @@ final class EmojiBoard: UIView {
         }
 
         private func setupSubViews(controller: KeyboardViewController) {
-                let switchBackButton: KeyButton = KeyButton(event: .switchTo(.cantonese(.lowercased)), controller: controller)
-                let spaceButton: KeyButton = KeyButton(event: .space, controller: controller)
-                let backspaceButton: KeyButton = KeyButton(event: .backspace, controller: controller)
-                let returnButton: KeyButton = KeyButton(event: .newLine, controller: controller)
-                let buttons: [KeyButton] = [switchBackButton, spaceButton, backspaceButton, returnButton]
+                let switchBack: KeyButton = KeyButton(event: .switchTo(.cantonese(.lowercased)), controller: controller)
+                let space: KeyButton = KeyButton(event: .space, controller: controller)
+                let backspace: KeyButton = KeyButton(event: .backspace, controller: controller)
+                let newLine: KeyButton = KeyButton(event: .newLine, controller: controller)
+                let buttons: [KeyButton] = {
+                        if controller.needsInputModeSwitchKey {
+                                let switchIME: KeyButton = KeyButton(event: .switchInputMethod, controller: controller)
+                                switchIME.addSubview(globeKey)
+                                globeKey.translatesAutoresizingMaskIntoConstraints = false
+                                NSLayoutConstraint.activate([
+                                        globeKey.topAnchor.constraint(equalTo: switchIME.topAnchor),
+                                        globeKey.bottomAnchor.constraint(equalTo: switchIME.bottomAnchor),
+                                        globeKey.leadingAnchor.constraint(equalTo: switchIME.leadingAnchor),
+                                        globeKey.trailingAnchor.constraint(equalTo: switchIME.trailingAnchor)
+                                ])
+                                return [switchBack, switchIME, space, backspace, newLine]
+                        } else {
+                                return [switchBack, space, backspace, newLine]
+                        }
+                }()
                 bottomStackView.distribution = .fillProportionally
                 bottomStackView.addMultipleArrangedSubviews(buttons)
                 addSubview(bottomStackView)

@@ -86,6 +86,7 @@ extension KeyboardViewController {
                 ])
                 (emojiCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
                 keyboardStackView.addArrangedSubview(emojiBoard)
+                emojiBoard.globeKey.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
                 _ = emojiBoard.indicatorsStackView.arrangedSubviews.map({ ($0 as? Indicator)?.addTarget(self, action: #selector(handleIndicator(_:)), for: .touchDown) })
         }
         @objc func handleIndicator(_ sender: Indicator) {

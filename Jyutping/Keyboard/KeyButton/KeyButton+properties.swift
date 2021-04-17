@@ -85,7 +85,7 @@ extension KeyButton {
                         case .cantoneseSymbolic, .symbolic:
                                 return "#+="
                         case .cantonese:
-                                return controller.keyboardLayout == .emoji ? "返回" : "拼"
+                                return "拼"
                         case .alphabetic:
                                 return "ABC"
                         default:
