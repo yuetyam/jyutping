@@ -222,7 +222,10 @@ final class BackspaceButton: UIButton {
                 }
         }
         @objc private func performBackspace() {
-                guard isInteracting else { return }
+                guard isInteracting else {
+                        backspaceTimer?.invalidate()
+                        return
+                }
                 controller.textDocumentProxy.deleteBackward()
                 AudioFeedback.perform(.delete)
         }
