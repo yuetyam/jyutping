@@ -1,6 +1,6 @@
 import UIKit
 
-final class KeyButton: UIButton {
+final class KeyButton: UIView {
 
         let shape: UIView = UIView()
         let event: KeyboardEvent
@@ -36,7 +36,6 @@ final class KeyButton: UIButton {
                         setupKeyShapeView()
                         setupKeyTextLabel()
                 }
-                setupKeyActions()
         }
         required init?(coder: NSCoder) { fatalError("KeyView.init(coder:) error") }
         override var intrinsicContentSize: CGSize { CGSize(width: width, height: height) }
@@ -59,7 +58,7 @@ final class KeyButton: UIButton {
                 }
         }
         private(set) lazy var peekingText: String? = nil
-
+        private lazy var timePoints: (first: Bool, second: Bool) = (false, false)
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
                 controller.hapticFeedback?.impactOccurred()
@@ -80,9 +79,13 @@ final class KeyButton: UIButton {
                 case .shadowBackspace:
                         handleBackspace()
                 case .space:
+                        timePoints = timePoints.first ? (true, true) : (true, false)
                         shape.backgroundColor = highlightingBackColor
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         draggedOnSpace = false
+                case .shift:
+                        timePoints = timePoints.first ? (true, true) : (true, false)
+                        AudioFeedback.perform(.modify)
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
                 default:
@@ -142,13 +145,38 @@ final class KeyButton: UIButton {
                 super.touchesEnded(touches, with: event)
                 isInteracting = false
                 switch self.event {
-                case .newLine:
+                case .shift:
+                        if !timePoints.second {
+                                // FIXME: - Not so good
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [unowned self] in
+                                        if (self.timePoints.first) && (!self.timePoints.second) {
+                                                self.tapOnShift()
+                                        }
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                        self.timePoints = (false, false)
+                                }
+                        } else {
+                                doubleTapShift()
+                                timePoints = (false, false)
+                        }
+                case .space:
+                        spaceTouchPoint = .zero
                         changeColorToNormal()
+                        if !timePoints.second {
+                                tapOnSpace()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                        self.timePoints = (false, false)
+                                }
+                        } else {
+                                doubleTapSpace()
+                                timePoints = (false, false)
+                        }
                 case .backspace:
                         backspaceTouchPoint = .zero
                         changeColorToNormal()
-                case .space:
-                        spaceTouchPoint = .zero
+                case .newLine:
+                        handleTap()
                         changeColorToNormal()
                 case .key(let seat) where !seat.children.isEmpty:
                         removeCallout()
@@ -157,7 +185,10 @@ final class KeyButton: UIButton {
                         } else {
                                 changeColorToNormal()
                         }
-                        guard let text: String = peekingText else { break }
+                        guard let text: String = peekingText else {
+                                handleTap()
+                                break
+                        }
                         AudioFeedback.perform(.input)
                         controller.hapticFeedback?.impactOccurred()
                         guard controller.keyboardLayout.isCantoneseMode else {
@@ -182,6 +213,7 @@ final class KeyButton: UIButton {
                         } else {
                                 changeColorToNormal()
                         }
+                        handleTap()
                 default:
                         break
                 }
@@ -200,6 +232,9 @@ final class KeyButton: UIButton {
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
+                        timePoints = (false, false)
+                case .shift:
+                        timePoints = (false, false)
                 case .key(let seat):
                         if !seat.children.isEmpty { removeCallout() }
                         if isPhonePortrait {

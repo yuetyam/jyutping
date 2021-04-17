@@ -29,22 +29,7 @@ extension KeyButton {
                 }
                 AudioFeedback.play(for: .backspace)
         }
-}
-
-extension KeyButton {
-        func setupKeyActions() {
-                switch event {
-                case .none, .backspace, .shadowBackspace:
-                        break
-                case .shift:
-                        addTarget(self, action: #selector(handleShift(sender:event:)), for: .touchUpInside)
-                case .space:
-                        addTarget(self, action: #selector(handleSpace(sender:event:)), for: .touchUpInside)
-                default:
-                        addTarget(self, action: #selector(handleTap), for: .touchUpInside)
-                }
-        }
-        @objc private func handleTap() {
+        func handleTap() {
                 switch event {
                 case .key(.cantoneseComma):
                         guard peekingText == nil else { return }
@@ -101,51 +86,40 @@ extension KeyButton {
                 }
                 AudioFeedback.play(for: event)
         }
-        @objc private func handleShift(sender: UIButton, event: UIEvent?) {
-                guard let touch: UITouch = event?.allTouches?.first else { return }
-                let layout: KeyboardLayout = controller.keyboardLayout
-                switch touch.tapCount {
-                case 1:
-                        switch layout {
-                        case .cantonese(.lowercased):
-                                controller.keyboardLayout = .cantonese(.uppercased)
-                        case .cantonese(.uppercased),
-                             .cantonese(.capsLocked):
-                                controller.keyboardLayout = .cantonese(.lowercased)
-                        case .alphabetic(.lowercased):
-                                controller.keyboardLayout = .alphabetic(.uppercased)
-                        case .alphabetic(.uppercased),
-                             .alphabetic(.capsLocked):
-                                controller.keyboardLayout = .alphabetic(.lowercased)
-                        default:
-                                break
-                        }
-                case 2:
-                        controller.keyboardLayout = layout.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
+        func doubleTapShift() {
+                let isEnglishMode: Bool = controller.keyboardLayout.isEnglishMode
+                controller.keyboardLayout = isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
+        }
+        func tapOnShift() {
+                let layout = controller.keyboardLayout
+                switch layout {
+                case .cantonese(.lowercased):
+                        controller.keyboardLayout = .cantonese(.uppercased)
+                case .cantonese(.uppercased),
+                     .cantonese(.capsLocked):
+                        controller.keyboardLayout = .cantonese(.lowercased)
+                case .alphabetic(.lowercased):
+                        controller.keyboardLayout = .alphabetic(.uppercased)
+                case .alphabetic(.uppercased),
+                     .alphabetic(.capsLocked):
+                        controller.keyboardLayout = .alphabetic(.lowercased)
                 default:
                         break
                 }
-                AudioFeedback.perform(.modify)
         }
-        @objc private func handleSpace(sender: UIButton, event: UIEvent) {
-                guard let touchEvent: UITouch = event.allTouches?.first else { return }
-                switch touchEvent.tapCount {
-                case 2:
-                        guard controller.inputText.isEmpty else { return }
-                        guard let isSpaceAhead: Bool = controller.textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
-                                controller.textDocumentProxy.insertText(" ")
-                                AudioFeedback.perform(.input)
-                                return
-                        }
-                        controller.textDocumentProxy.deleteBackward()
-                        let text: String = controller.keyboardLayout.isEnglishMode ? ". " : "。"
-                        controller.textDocumentProxy.insertText(text)
+        func doubleTapSpace() {
+                guard controller.inputText.isEmpty else { return }
+                guard let isSpaceAhead: Bool = controller.textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
+                        controller.textDocumentProxy.insertText(" ")
                         AudioFeedback.perform(.input)
-                default:
-                        tapOnSpace()
+                        return
                 }
+                controller.textDocumentProxy.deleteBackward()
+                let text: String = controller.keyboardLayout.isEnglishMode ? ". " : "。"
+                controller.textDocumentProxy.insertText(text)
+                AudioFeedback.perform(.input)
         }
-        private func tapOnSpace() {
+        func tapOnSpace() {
                 guard !draggedOnSpace else { return }
                 let layout: KeyboardLayout = controller.keyboardLayout
                 switch layout {

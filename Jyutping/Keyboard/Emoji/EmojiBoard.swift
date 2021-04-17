@@ -22,7 +22,7 @@ final class EmojiBoard: UIView {
                 let buttons: [KeyButton] = {
                         if controller.needsInputModeSwitchKey {
                                 let switchInputMethodButton: KeyButton = KeyButton(event: .switchInputMethod, controller: controller)
-                                switchInputMethodButton.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
+                                // switchInputMethodButton.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
                                 return [switchBackButton, switchInputMethodButton, spaceButton, backspaceButton, returnButton]
                         } else {
                                 return [switchBackButton, spaceButton, backspaceButton, returnButton]

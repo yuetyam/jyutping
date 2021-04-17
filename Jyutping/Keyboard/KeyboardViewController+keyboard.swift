@@ -180,7 +180,7 @@ extension KeyboardViewController {
         private func makeKey(for event: KeyboardEvent, controller: KeyboardViewController) -> KeyButton {
                 let keyView: KeyButton = KeyButton(event: event, controller: controller)
                 if event == .switchInputMethod {
-                        keyView.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+                        // keyView.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
                 }
                 return keyView
         }
