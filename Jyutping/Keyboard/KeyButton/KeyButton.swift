@@ -40,9 +40,6 @@ final class KeyButton: UIButton {
         }
         required init?(coder: NSCoder) { fatalError("KeyView.init(coder:) error") }
         override var intrinsicContentSize: CGSize { CGSize(width: width, height: height) }
-        deinit {
-                backspaceTimer?.invalidate()
-        }
 
 
         // MARK: - Touches

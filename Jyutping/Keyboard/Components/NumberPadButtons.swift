@@ -192,10 +192,7 @@ final class BackspaceButton: UIButton {
         }
         required init?(coder: NSCoder) { fatalError("BackspaceButton.init(coder:) error") }
         override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
-        deinit {
-                backspaceTimer?.invalidate()
-                isInteracting = false
-        }
+
         private var backspaceTimer: Timer?
         private lazy var isInteracting: Bool = false {
                 didSet {
