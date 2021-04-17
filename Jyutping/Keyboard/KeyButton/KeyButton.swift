@@ -178,6 +178,8 @@ final class KeyButton: UIView {
                 case .newLine:
                         handleTap()
                         changeColorToNormal()
+                case .switchTo:
+                        handleTap()
                 case .key(let seat) where !seat.children.isEmpty:
                         removeCallout()
                         if isPhonePortrait {

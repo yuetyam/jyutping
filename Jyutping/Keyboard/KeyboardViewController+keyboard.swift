@@ -180,7 +180,16 @@ extension KeyboardViewController {
         private func makeKey(for event: KeyboardEvent, controller: KeyboardViewController) -> KeyButton {
                 let keyView: KeyButton = KeyButton(event: event, controller: controller)
                 if event == .switchInputMethod {
-                        // keyView.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+                        let virtual = UIButton()
+                        virtual.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+                        keyView.addSubview(virtual)
+                        virtual.translatesAutoresizingMaskIntoConstraints = false
+                        NSLayoutConstraint.activate([
+                                virtual.topAnchor.constraint(equalTo: keyView.topAnchor),
+                                virtual.bottomAnchor.constraint(equalTo: keyView.bottomAnchor),
+                                virtual.leadingAnchor.constraint(equalTo: keyView.leadingAnchor),
+                                virtual.trailingAnchor.constraint(equalTo: keyView.trailingAnchor)
+                        ])
                 }
                 return keyView
         }

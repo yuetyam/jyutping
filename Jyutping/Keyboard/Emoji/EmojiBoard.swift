@@ -19,15 +19,7 @@ final class EmojiBoard: UIView {
                 let spaceButton: KeyButton = KeyButton(event: .space, controller: controller)
                 let backspaceButton: KeyButton = KeyButton(event: .backspace, controller: controller)
                 let returnButton: KeyButton = KeyButton(event: .newLine, controller: controller)
-                let buttons: [KeyButton] = {
-                        if controller.needsInputModeSwitchKey {
-                                let switchInputMethodButton: KeyButton = KeyButton(event: .switchInputMethod, controller: controller)
-                                // switchInputMethodButton.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
-                                return [switchBackButton, switchInputMethodButton, spaceButton, backspaceButton, returnButton]
-                        } else {
-                                return [switchBackButton, spaceButton, backspaceButton, returnButton]
-                        }
-                }()
+                let buttons: [KeyButton] = [switchBackButton, spaceButton, backspaceButton, returnButton]
                 bottomStackView.distribution = .fillProportionally
                 bottomStackView.addMultipleArrangedSubviews(buttons)
                 addSubview(bottomStackView)
