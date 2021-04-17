@@ -295,7 +295,7 @@ final class KeyboardViewController: UIInputViewController {
                 guard let copied: String = UIPasteboard.general.string else { return }
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.input)
-                insert(copied)
+                textDocumentProxy.insertText(copied)
         }
         @objc private func handleEmojiSwitch() {
                 hapticFeedback?.impactOccurred()
