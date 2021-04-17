@@ -1,7 +1,37 @@
 import UIKit
 
 extension KeyButton {
+        func handleLongPress() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                        if self != nil {
+                                if self!.isInteracting {
+                                        self!.displayCallout()
+                                }
+                        }
+                }
+        }
+        func handleBackspace() {
+                performBackspace()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                        if self != nil {
+                                if self!.isInteracting {
+                                        self!.backspaceTimer?.start()
+                                }
+                        }
+                }
+        }
+        func performBackspace() {
+                if controller.inputText.isEmpty {
+                        controller.textDocumentProxy.deleteBackward()
+                } else {
+                        controller.inputText = String(controller.processingText.dropLast())
+                        controller.candidateSequence = []
+                }
+                AudioFeedback.play(for: .backspace)
+        }
+}
 
+extension KeyButton {
         func setupKeyActions() {
                 switch event {
                 case .none, .backspace, .shadowBackspace:
@@ -70,38 +100,6 @@ extension KeyButton {
                         break
                 }
                 AudioFeedback.play(for: event)
-        }
-        func handleLongPress() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                        if self != nil {
-                                if self!.isInteracting {
-                                        self!.displayCallout()
-                                }
-                        }
-                }
-        }
-        func handleBackspace() {
-                performBackspace()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                        if self != nil {
-                                if self!.isInteracting {
-                                        self!.backspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self!, selector: #selector(self!.performBackspace), userInfo: nil, repeats: true)
-                                }
-                        }
-                }
-        }
-        @objc private func performBackspace() {
-                guard isInteracting else {
-                        backspaceTimer?.invalidate()
-                        return
-                }
-                if controller.inputText.isEmpty {
-                        controller.textDocumentProxy.deleteBackward()
-                } else {
-                        controller.inputText = String(controller.processingText.dropLast())
-                        controller.candidateSequence = []
-                }
-                AudioFeedback.play(for: .backspace)
         }
         @objc private func handleShift(sender: UIButton, event: UIEvent?) {
                 guard let touch: UITouch = event?.allTouches?.first else { return }

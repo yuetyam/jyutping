@@ -44,10 +44,17 @@ final class KeyButton: UIButton {
 
         // MARK: - Touches
 
+        private(set) lazy var backspaceTimer: GCDTimer? = GCDTimer(interval: .milliseconds(100)) { [weak self] _ in
+                if self != nil {
+                        if self!.isInteracting {
+                                self!.performBackspace()
+                        }
+                }
+        }
         private(set) lazy var isInteracting: Bool = false {
                 didSet {
                         if !isInteracting {
-                                backspaceTimer?.invalidate()
+                                backspaceTimer?.suspend()
                         }
                 }
         }
@@ -208,7 +215,6 @@ final class KeyButton: UIButton {
 
         // MARK: - Properties
 
-        var backspaceTimer: Timer?
         private(set) lazy var backspaceTouchPoint: CGPoint = .zero
         private(set) lazy var spaceTouchPoint: CGPoint = .zero
         private(set) lazy var draggedOnSpace: Bool = false

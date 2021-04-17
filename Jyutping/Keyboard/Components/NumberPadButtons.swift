@@ -193,11 +193,17 @@ final class BackspaceButton: UIButton {
         required init?(coder: NSCoder) { fatalError("BackspaceButton.init(coder:) error") }
         override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
 
-        private var backspaceTimer: Timer?
+        private lazy var backspaceTimer: GCDTimer? = GCDTimer(interval: .milliseconds(100)) { [weak self] _ in
+                if self != nil {
+                        if self!.isInteracting {
+                                self!.performBackspace()
+                        }
+                }
+        }
         private lazy var isInteracting: Bool = false {
                 didSet {
                         if !isInteracting {
-                                backspaceTimer?.invalidate()
+                                backspaceTimer?.suspend()
                         }
                 }
         }
@@ -211,25 +217,6 @@ final class BackspaceButton: UIButton {
                 controller.hapticFeedback?.impactOccurred()
                 handleBackspace()
         }
-        private func handleBackspace() {
-                performBackspace()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                        if self != nil {
-                                if self!.isInteracting {
-                                        self!.backspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self!, selector: #selector(self!.performBackspace), userInfo: nil, repeats: true)
-                                }
-                        }
-                }
-        }
-        @objc private func performBackspace() {
-                guard isInteracting else {
-                        backspaceTimer?.invalidate()
-                        return
-                }
-                controller.textDocumentProxy.deleteBackward()
-                AudioFeedback.perform(.delete)
-        }
-
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
                 isInteracting = false
                 keyImageView.image = UIImage(systemName: "delete.left")
@@ -241,6 +228,20 @@ final class BackspaceButton: UIButton {
                                 self!.keyImageView.image = UIImage(systemName: "delete.left")
                         }
                 }
+        }
+        private func handleBackspace() {
+                performBackspace()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                        if self != nil {
+                                if self!.isInteracting {
+                                        self!.backspaceTimer?.start()
+                                }
+                        }
+                }
+        }
+        private func performBackspace() {
+                controller.textDocumentProxy.deleteBackward()
+                AudioFeedback.perform(.delete)
         }
 
         private func setupKeyButtonView() {

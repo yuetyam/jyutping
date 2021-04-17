@@ -63,6 +63,7 @@
 		37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004F923E4BAA000E413BD /* KeyboardEvent.swift */; };
 		37E004FD23E4BB0900E413BD /* UIStackView+subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004FC23E4BB0900E413BD /* UIStackView+subviews.swift */; };
 		37E1874F24CB766900602C03 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1874E24CB766900602C03 /* InitialsTable.swift */; };
+		37E937C6262B42C1007172F4 /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E937C5262B42C1007172F4 /* GCDTimer.swift */; };
 		37F1C028235C3EB700CDDA31 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F1C027235C3EB700CDDA31 /* AboutView.swift */; };
 		37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FA443423A8510A001E7DBC /* ColorExtension.swift */; };
 		37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FF2A2C23E8F51500B86C74 /* Candidate.swift */; };
@@ -167,6 +168,7 @@
 		37E004F923E4BAA000E413BD /* KeyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
 		37E004FC23E4BB0900E413BD /* UIStackView+subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+subviews.swift"; sourceTree = "<group>"; };
 		37E1874E24CB766900602C03 /* InitialsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
+		37E937C5262B42C1007172F4 /* GCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
 		37E940AD261A2C7900D4FAE5 /* JyutpingProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingProvider; path = ../Helpers/JyutpingProvider; sourceTree = "<group>"; };
 		37F1C027235C3EB700CDDA31 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37FA443423A8510A001E7DBC /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				379568282600471700F7A642 /* KeyButton+paths.swift */,
 				37AFDAD5260C8B97002963B5 /* CalloutView.swift */,
 				37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */,
+				37E937C5262B42C1007172F4 /* GCDTimer.swift */,
 			);
 			path = KeyButton;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				37AE5BEF2354AAF8008A8E4B /* KeyboardViewController.swift in Sources */,
 				37FF2A2D23E8F51500B86C74 /* Candidate.swift in Sources */,
 				370B631523E96E1000912B9A /* AudioFeedback.swift in Sources */,
+				37E937C6262B42C1007172F4 /* GCDTimer.swift in Sources */,
 				37FF2A2F23E8F80400B86C74 /* Engine.swift in Sources */,
 				3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */,
 				371C5019261B4D8D00916D52 /* KeyboardLayout+events.swift in Sources */,
