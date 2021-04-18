@@ -29,6 +29,9 @@ Chinese (Hong Kong)
 
 "Go to " = "前往 ";
 
+"Tones Input" = "聲調輸入";
+"v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
+
 
 // Search
 "Search the Jyutping of Cantonese word" = "鍵入粵語字詞檢索其粵拼";

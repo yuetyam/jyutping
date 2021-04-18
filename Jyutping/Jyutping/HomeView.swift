@@ -89,15 +89,16 @@ private struct GuideView: View {
         }
 }
 private struct InputTones: View {
-        private let content: String = """
-                v = 1 陰平， vv = 4 陽平
-                x = 2 陰上， xx = 5 陽上
-                q = 3 陰去， qq = 6 陽去
-                """
+        /*
+        v = 1 陰平， vv = 4 陽平
+        x = 2 陰上， xx = 5 陽上
+        q = 3 陰去， qq = 6 陽去
+        */
+        private var content: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: "")
         var body: some View {
                 VStack {
                         HStack {
-                                Text("聲調輸入").font(.headline)
+                                Text("Tones Input").font(.headline)
                                 Spacer()
                         }
                         HStack {
