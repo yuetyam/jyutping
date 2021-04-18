@@ -91,7 +91,7 @@ struct JyutpingView: View {
                                         SearchWebsitesView()
                                         
                                         HStack {
-                                                Text("Jyutping resources").font(.headline)
+                                                Text("Jyutping Resources").font(.headline)
                                                 Spacer()
                                         }
                                         .padding(.horizontal, 16)
