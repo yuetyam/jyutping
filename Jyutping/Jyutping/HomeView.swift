@@ -165,7 +165,7 @@ private struct PinyinReverseLookup: View {
         }
 }
 private struct PeriodShortcut: View {
-        private let content: String = NSLocalizedString("Double tapping the space bar to insert a period followed by a space", comment: "")
+        private let content: String = NSLocalizedString("Double tapping the space bar will insert a period followed by a space", comment: "")
         var body: some View {
                 VStack {
                         HStack {

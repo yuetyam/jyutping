@@ -33,7 +33,7 @@ Chinese, Traditional
 "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
 
 "Period (Full Stop) Shortcut" = "快捷輸入句號";
-"Double tapping the space bar to insert a period followed by a space" = "雙擊空格鍵 (space)\n快捷輸入句號「。」";
+"Double tapping the space bar will insert a period followed by a space" = "雙擊空格鍵 (space)\n快捷輸入句號「。」";
 
 
 // Search
