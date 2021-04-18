@@ -157,13 +157,12 @@ final class KeyView: UIView {
                 case .shift:
                         if !timePoints.second {
                                 // FIXME: - Not so good
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [unowned self] in
-                                        if (self.timePoints.first) && (!self.timePoints.second) {
-                                                self.tapOnShift()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                                        if self != nil {
+                                                if self!.timePoints == (true, false) {
+                                                        self!.tapOnShift()
+                                                }
                                         }
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                                        self.timePoints = (false, false)
                                 }
                         } else {
                                 doubleTapShift()
@@ -174,7 +173,7 @@ final class KeyView: UIView {
                         changeColorToNormal()
                         if !timePoints.second {
                                 tapOnSpace()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [unowned self] in
                                         self.timePoints = (false, false)
                                 }
                         } else {
