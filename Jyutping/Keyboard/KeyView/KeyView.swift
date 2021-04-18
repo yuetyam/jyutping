@@ -92,7 +92,6 @@ final class KeyView: UIView {
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         draggedOnSpace = false
                 case .shift:
-                        timePoints = timePoints.first ? (true, true) : (true, false)
                         AudioFeedback.perform(.modify)
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
@@ -155,18 +154,13 @@ final class KeyView: UIView {
                 isInteracting = false
                 switch self.event {
                 case .shift:
-                        if !timePoints.second {
-                                // FIXME: - Not so good
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-                                        if self != nil {
-                                                if self!.timePoints == (true, false) {
-                                                        self!.tapOnShift()
-                                                }
-                                        }
-                                }
-                        } else {
+                        let now = Date.timeIntervalSinceReferenceDate
+                        let distance = now - ShiftState.timePoint
+                        ShiftState.timePoint = now
+                        if distance < 0.4 {
                                 doubleTapShift()
-                                timePoints = (false, false)
+                        } else {
+                                tapOnShift()
                         }
                 case .space:
                         spaceTouchPoint = .zero
