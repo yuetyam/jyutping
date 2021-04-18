@@ -1,6 +1,6 @@
 import UIKit
 
-extension KeyButton {
+extension KeyView {
         func setupKeyShapeView() {
                 let horizontalConstant: CGFloat = {
                         switch traitCollection.userInterfaceIdiom {

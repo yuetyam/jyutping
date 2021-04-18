@@ -174,24 +174,24 @@ extension KeyboardViewController {
                 let stackView: UIStackView = UIStackView()
                 stackView.axis = .horizontal
                 stackView.distribution = .fillProportionally
-                let keys: [KeyButton] = events.map { [unowned self] in makeKey(for: $0, controller: self) }
+                let keys: [KeyView] = events.map { [unowned self] in makeKey(for: $0, controller: self) }
                 stackView.addMultipleArrangedSubviews(keys)
                 return stackView
         }
-        private func makeKey(for event: KeyboardEvent, controller: KeyboardViewController) -> KeyButton {
-                let keyView: KeyButton = KeyButton(event: event, controller: controller)
+        private func makeKey(for event: KeyboardEvent, controller: KeyboardViewController) -> KeyView {
+                let key: KeyView = KeyView(event: event, controller: controller)
                 if event == .switchInputMethod {
                         let virtual = UIButton()
                         virtual.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-                        keyView.addSubview(virtual)
+                        key.addSubview(virtual)
                         virtual.translatesAutoresizingMaskIntoConstraints = false
                         NSLayoutConstraint.activate([
-                                virtual.topAnchor.constraint(equalTo: keyView.topAnchor),
-                                virtual.bottomAnchor.constraint(equalTo: keyView.bottomAnchor),
-                                virtual.leadingAnchor.constraint(equalTo: keyView.leadingAnchor),
-                                virtual.trailingAnchor.constraint(equalTo: keyView.trailingAnchor)
+                                virtual.topAnchor.constraint(equalTo: key.topAnchor),
+                                virtual.bottomAnchor.constraint(equalTo: key.bottomAnchor),
+                                virtual.leadingAnchor.constraint(equalTo: key.leadingAnchor),
+                                virtual.trailingAnchor.constraint(equalTo: key.trailingAnchor)
                         ])
                 }
-                return keyView
+                return key
         }
 }

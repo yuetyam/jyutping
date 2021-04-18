@@ -1,6 +1,6 @@
 import UIKit
 
-extension KeyButton {
+extension KeyView {
 
         var width: CGFloat {
                 switch event {

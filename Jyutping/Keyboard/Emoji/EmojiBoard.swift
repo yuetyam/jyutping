@@ -16,13 +16,13 @@ final class EmojiBoard: UIView {
         }
 
         private func setupSubViews(controller: KeyboardViewController) {
-                let switchBack: KeyButton = KeyButton(event: .switchTo(.cantonese(.lowercased)), controller: controller)
-                let space: KeyButton = KeyButton(event: .space, controller: controller)
-                let backspace: KeyButton = KeyButton(event: .backspace, controller: controller)
-                let newLine: KeyButton = KeyButton(event: .newLine, controller: controller)
-                let buttons: [KeyButton] = {
+                let switchBack: KeyView = KeyView(event: .switchTo(.cantonese(.lowercased)), controller: controller)
+                let space: KeyView = KeyView(event: .space, controller: controller)
+                let backspace: KeyView = KeyView(event: .backspace, controller: controller)
+                let newLine: KeyView = KeyView(event: .newLine, controller: controller)
+                let keys: [KeyView] = {
                         if controller.needsInputModeSwitchKey {
-                                let switchIME: KeyButton = KeyButton(event: .switchInputMethod, controller: controller)
+                                let switchIME: KeyView = KeyView(event: .switchInputMethod, controller: controller)
                                 switchIME.addSubview(globeKey)
                                 globeKey.translatesAutoresizingMaskIntoConstraints = false
                                 NSLayoutConstraint.activate([
@@ -37,7 +37,7 @@ final class EmojiBoard: UIView {
                         }
                 }()
                 bottomStackView.distribution = .fillProportionally
-                bottomStackView.addMultipleArrangedSubviews(buttons)
+                bottomStackView.addMultipleArrangedSubviews(keys)
                 addSubview(bottomStackView)
                 bottomStackView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([

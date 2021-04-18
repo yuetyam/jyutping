@@ -21,10 +21,10 @@
 		37336F7D239ABB30006A59A7 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7C239ABB30006A59A7 /* ShareSheetView.swift */; };
 		37336F7F239ABDC4006A59A7 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F7E239ABDC4006A59A7 /* MessageView.swift */; };
 		37336F81239ABE05006A59A7 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37336F80239ABE05006A59A7 /* LinkButton.swift */; };
-		373B155726273760005CC08C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B155626273760005CC08C /* KeyButton.swift */; };
-		373B155926274B24005CC08C /* KeyButton+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B155826274B24005CC08C /* KeyButton+properties.swift */; };
-		373B155B2627509E005CC08C /* KeyButton+construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B155A2627509E005CC08C /* KeyButton+construction.swift */; };
-		373B15612627568F005CC08C /* KeyButton+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B15602627568F005CC08C /* KeyButton+handlers.swift */; };
+		373B155726273760005CC08C /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B155626273760005CC08C /* KeyView.swift */; };
+		373B155926274B24005CC08C /* KeyView+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B155826274B24005CC08C /* KeyView+properties.swift */; };
+		373B155B2627509E005CC08C /* KeyView+construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B155A2627509E005CC08C /* KeyView+construction.swift */; };
+		373B15612627568F005CC08C /* KeyView+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B15602627568F005CC08C /* KeyView+handlers.swift */; };
 		3741062D23E2191200639EF4 /* CandidateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062C23E2191200639EF4 /* CandidateCell.swift */; };
 		3741062F23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */; };
 		3741063123E30C4100639EF4 /* KeyboardViewController+keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3741063023E30C4100639EF4 /* KeyboardViewController+keyboard.swift */; };
@@ -45,7 +45,7 @@
 		377EAD4A24708ACD00B42D30 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4924708ACD00B42D30 /* Splitter.swift */; };
 		377EAD4D24708EA000B42D30 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4C24708EA000B42D30 /* JyutpingView.swift */; };
 		377EAD4F2471129000B42D30 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377EAD4E2471129000B42D30 /* EnhancedTextField.swift */; };
-		379568292600471700F7A642 /* KeyButton+paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379568282600471700F7A642 /* KeyButton+paths.swift */; };
+		379568292600471700F7A642 /* KeyView+paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379568282600471700F7A642 /* KeyView+paths.swift */; };
 		379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */; };
 		379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */; };
 		37AA501C24502D3F003E7921 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37AA501E24502D3F003E7921 /* Localizable.strings */; };
@@ -113,10 +113,10 @@
 		37336F7C239ABB30006A59A7 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		37336F7E239ABDC4006A59A7 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		37336F80239ABE05006A59A7 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		373B155626273760005CC08C /* KeyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
-		373B155826274B24005CC08C /* KeyButton+properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+properties.swift"; sourceTree = "<group>"; };
-		373B155A2627509E005CC08C /* KeyButton+construction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+construction.swift"; sourceTree = "<group>"; };
-		373B15602627568F005CC08C /* KeyButton+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+handlers.swift"; sourceTree = "<group>"; };
+		373B155626273760005CC08C /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
+		373B155826274B24005CC08C /* KeyView+properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyView+properties.swift"; sourceTree = "<group>"; };
+		373B155A2627509E005CC08C /* KeyView+construction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyView+construction.swift"; sourceTree = "<group>"; };
+		373B15602627568F005CC08C /* KeyView+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyView+handlers.swift"; sourceTree = "<group>"; };
 		3741062C23E2191200639EF4 /* CandidateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCell.swift; sourceTree = "<group>"; };
 		3741062E23E30BE000639EF4 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		3741063023E30C4100639EF4 /* KeyboardViewController+keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+keyboard.swift"; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		377EAD4924708ACD00B42D30 /* Splitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splitter.swift; sourceTree = "<group>"; };
 		377EAD4C24708EA000B42D30 /* JyutpingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
 		377EAD4E2471129000B42D30 /* EnhancedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
-		379568282600471700F7A642 /* KeyButton+paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyButton+paths.swift"; sourceTree = "<group>"; };
+		379568282600471700F7A642 /* KeyView+paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyView+paths.swift"; sourceTree = "<group>"; };
 		379E4D3825A85D1800EBFF13 /* EmojiBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
 		379E4D3C25A85D6200EBFF13 /* EmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		37AA501D24502D3F003E7921 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -271,19 +271,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		373B155526273746005CC08C /* KeyButton */ = {
+		373B155526273746005CC08C /* KeyView */ = {
 			isa = PBXGroup;
 			children = (
-				373B155626273760005CC08C /* KeyButton.swift */,
-				373B15602627568F005CC08C /* KeyButton+handlers.swift */,
-				373B155826274B24005CC08C /* KeyButton+properties.swift */,
-				373B155A2627509E005CC08C /* KeyButton+construction.swift */,
-				379568282600471700F7A642 /* KeyButton+paths.swift */,
+				373B155626273760005CC08C /* KeyView.swift */,
+				373B15602627568F005CC08C /* KeyView+handlers.swift */,
+				373B155826274B24005CC08C /* KeyView+properties.swift */,
+				373B155A2627509E005CC08C /* KeyView+construction.swift */,
+				379568282600471700F7A642 /* KeyView+paths.swift */,
 				37AFDAD5260C8B97002963B5 /* CalloutView.swift */,
 				37CBC6CF25C8F8F700C21526 /* BlurEffectView.swift */,
 				37E937C5262B42C1007172F4 /* GCDTimer.swift */,
 			);
-			path = KeyButton;
+			path = KeyView;
 			sourceTree = "<group>";
 		};
 		3741063223E30D3200639EF4 /* Components */ = {
@@ -339,7 +339,7 @@
 				371C5015261B4D1F00916D52 /* Layout */,
 				377EAD4B24708D5000B42D30 /* Candidate */,
 				3741063223E30D3200639EF4 /* Components */,
-				373B155526273746005CC08C /* KeyButton */,
+				373B155526273746005CC08C /* KeyView */,
 				37923B2D26071128000F5413 /* Emoji */,
 				37E004FB23E4BAC700E413BD /* Extensions */,
 				37C18EBD237A93F600F92482 /* Localization */,
@@ -523,13 +523,13 @@
 				377AF90A25DE328F00EED1FD /* Emoji.swift in Sources */,
 				37E004F823E49B6700E413BD /* KeyboardLayout.swift in Sources */,
 				3741063423E30D7100639EF4 /* ToolButton.swift in Sources */,
-				379568292600471700F7A642 /* KeyButton+paths.swift in Sources */,
+				379568292600471700F7A642 /* KeyView+paths.swift in Sources */,
 				3715203423B22ACF007EAB60 /* ToolBar.swift in Sources */,
-				373B155726273760005CC08C /* KeyButton.swift in Sources */,
+				373B155726273760005CC08C /* KeyView.swift in Sources */,
 				37573F6A24F3120300856B8A /* Entry.swift in Sources */,
 				3741063623E30DA800639EF4 /* CandidateBoard.swift in Sources */,
 				37573F6C24F3123500856B8A /* LexiconManager.swift in Sources */,
-				373B155926274B24005CC08C /* KeyButton+properties.swift in Sources */,
+				373B155926274B24005CC08C /* KeyView+properties.swift in Sources */,
 				37FA443523A8510A001E7DBC /* ColorExtension.swift in Sources */,
 				379E4D3D25A85D6200EBFF13 /* EmojiCell.swift in Sources */,
 				379E4D3925A85D1800EBFF13 /* EmojiBoard.swift in Sources */,
@@ -548,12 +548,12 @@
 				371C5019261B4D8D00916D52 /* KeyboardLayout+events.swift in Sources */,
 				37E004FA23E4BAA000E413BD /* KeyboardEvent.swift in Sources */,
 				37AFDAD6260C8B97002963B5 /* CalloutView.swift in Sources */,
-				373B15612627568F005CC08C /* KeyButton+handlers.swift in Sources */,
+				373B15612627568F005CC08C /* KeyView+handlers.swift in Sources */,
 				37CBC6D025C8F8F700C21526 /* BlurEffectView.swift in Sources */,
 				3741063123E30C4100639EF4 /* KeyboardViewController+keyboard.swift in Sources */,
 				3722B851250129F900E33ADB /* NumberPadButtons.swift in Sources */,
 				3741062D23E2191200639EF4 /* CandidateCell.swift in Sources */,
-				373B155B2627509E005CC08C /* KeyButton+construction.swift in Sources */,
+				373B155B2627509E005CC08C /* KeyView+construction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

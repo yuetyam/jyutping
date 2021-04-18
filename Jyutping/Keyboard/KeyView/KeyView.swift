@@ -1,6 +1,6 @@
 import UIKit
 
-final class KeyButton: UIView {
+final class KeyView: UIView {
 
         let shape: UIView = UIView()
         let event: KeyboardEvent

@@ -1,6 +1,6 @@
 import UIKit
 
-extension KeyButton {
+extension KeyView {
         func handleLongPress() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
                         if self != nil {
