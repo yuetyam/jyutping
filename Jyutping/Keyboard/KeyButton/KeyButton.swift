@@ -65,13 +65,21 @@ final class KeyButton: UIView {
                 isInteracting = true
                 peekingText = nil
                 switch self.event {
-                case .key(let seat):
+                case .none, .shadowKey, .switchInputMethod:
+                        break
+                case .key(let seat) where !seat.children.isEmpty:
                         if isPhonePortrait {
                                 displayPreview()
                         } else {
                                 shape.backgroundColor = highlightingBackColor
                         }
-                        if !seat.children.isEmpty { handleLongPress() }
+                        handleLongPress()
+                case .key:
+                        if isPhonePortrait {
+                                displayPreview()
+                        } else {
+                                shape.backgroundColor = highlightingBackColor
+                        }
                 case .backspace:
                         shape.backgroundColor = highlightingBackColor
                         backspaceTouchPoint = touches.first?.location(in: self) ?? .zero
@@ -88,8 +96,9 @@ final class KeyButton: UIView {
                         AudioFeedback.perform(.modify)
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
-                default:
-                        break
+                case .switchTo(let newLayout):
+                        AudioFeedback.perform(.modify)
+                        controller.keyboardLayout = newLayout
                 }
         }
 
@@ -176,10 +185,8 @@ final class KeyButton: UIView {
                         backspaceTouchPoint = .zero
                         changeColorToNormal()
                 case .newLine:
-                        handleTap()
+                        handleNewLine()
                         changeColorToNormal()
-                case .switchTo:
-                        handleTap()
                 case .key(let seat) where !seat.children.isEmpty:
                         removeCallout()
                         if isPhonePortrait {
@@ -216,6 +223,8 @@ final class KeyButton: UIView {
                                 changeColorToNormal()
                         }
                         handleTap()
+                case .shadowKey(let text):
+                        handleShadowKey(text)
                 default:
                         break
                 }

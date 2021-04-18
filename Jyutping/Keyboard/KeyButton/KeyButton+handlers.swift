@@ -35,9 +35,11 @@ extension KeyButton {
                         guard peekingText == nil else { return }
                         if controller.inputText.isEmpty {
                                 controller.textDocumentProxy.insertText("，")
+                                AudioFeedback.perform(.input)
                         } else {
                                 let text: String = controller.processingText + "，"
                                 controller.insert(text)
+                                AudioFeedback.perform(.input)
                                 controller.inputText = ""
                         }
                 case .key(let keySeat):
@@ -48,43 +50,46 @@ extension KeyButton {
                         } else {
                                 controller.textDocumentProxy.insertText(text)
                         }
+                        AudioFeedback.perform(.input)
                         if controller.keyboardLayout == .alphabetic(.uppercased) {
                                 controller.keyboardLayout = .alphabetic(.lowercased)
                         }
                         if controller.keyboardLayout == .cantonese(.uppercased) {
                                 controller.keyboardLayout = .cantonese(.lowercased)
                         }
-                case .shadowKey(let text):
-                        if controller.keyboardLayout.isCantoneseMode {
-                                controller.inputText += text
-                        } else {
-                                controller.textDocumentProxy.insertText(text)
-                        }
-                        if controller.keyboardLayout == .alphabetic(.uppercased) {
-                                controller.keyboardLayout = .alphabetic(.lowercased)
-                        }
-                        if controller.keyboardLayout == .cantonese(.uppercased) {
-                                controller.keyboardLayout = .cantonese(.lowercased)
-                        }
-                case .newLine:
-                        if controller.inputText.isEmpty {
-                                controller.textDocumentProxy.insertText("\n")
-                        } else {
-                                let converted: String = controller.processingText.replacingOccurrences(of: "4", with: "xx")
-                                        .replacingOccurrences(of: "5", with: "vv")
-                                        .replacingOccurrences(of: "6", with: "qq")
-                                        .replacingOccurrences(of: "1", with: "v")
-                                        .replacingOccurrences(of: "2", with: "x")
-                                        .replacingOccurrences(of: "3", with: "q")
-                                controller.insert(converted)
-                                controller.inputText = ""
-                        }
-                case .switchTo(let layout):
-                        controller.keyboardLayout = layout
                 default:
                         break
                 }
-                AudioFeedback.play(for: event)
+        }
+        func handleShadowKey(_ text: String) {
+                if controller.keyboardLayout.isCantoneseMode {
+                        controller.inputText += text
+                } else {
+                        controller.textDocumentProxy.insertText(text)
+                }
+                if controller.keyboardLayout == .alphabetic(.uppercased) {
+                        controller.keyboardLayout = .alphabetic(.lowercased)
+                }
+                if controller.keyboardLayout == .cantonese(.uppercased) {
+                        controller.keyboardLayout = .cantonese(.lowercased)
+                }
+                AudioFeedback.perform(.input)
+        }
+        func handleNewLine() {
+                guard !(controller.inputText.isEmpty) else {
+                        controller.textDocumentProxy.insertText("\n")
+                        AudioFeedback.perform(.input)
+                        return
+                }
+                let converted: String = controller.processingText.replacingOccurrences(of: "4", with: "xx")
+                        .replacingOccurrences(of: "5", with: "vv")
+                        .replacingOccurrences(of: "6", with: "qq")
+                        .replacingOccurrences(of: "1", with: "v")
+                        .replacingOccurrences(of: "2", with: "x")
+                        .replacingOccurrences(of: "3", with: "q")
+                controller.insert(converted)
+                AudioFeedback.perform(.input)
+                controller.inputText = ""
         }
         func doubleTapShift() {
                 let isEnglishMode: Bool = controller.keyboardLayout.isEnglishMode
