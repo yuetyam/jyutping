@@ -1,22 +1,21 @@
 struct Splitter {
-
-        private static func prepare(text: String) -> (text: String, raw: String, tones: String, syllables: [String]) {
+        private static func prepare(text: String) -> (text: String, raw: String, tones: String, blocks: [String]) {
                 let tones: String = text.filter({ $0.isNumber })
                 guard !tones.isEmpty else { return (text, text, tones, []) }
                 var unit: String = ""
-                var syllables: [String] = []
+                var blocks: [String] = []
                 for character in text {
                         unit.append(character)
                         if character.isNumber {
-                                syllables.append(unit)
+                                blocks.append(unit)
                                 unit = ""
                         }
                 }
                 if !unit.isEmpty {
-                        syllables.append(unit)
+                        blocks.append(unit)
                 }
                 let raw: String = text.filter({ !$0.isNumber })
-                return (text, raw, tones, syllables)
+                return (text, raw, tones, blocks)
         }
         static func split(_ text: String) -> [[String]] {
                 guard !text.contains("'") else {
@@ -26,14 +25,14 @@ struct Splitter {
                 let schemes: [[String]] = performSplit(text: prepared.raw)
                 guard !prepared.tones.isEmpty else { return schemes }
 
-                let blocks: [String] = prepared.syllables
+                let blocks: [String] = prepared.blocks
                 guard !schemes.isEmpty else { return sequences(for: blocks) }
 
                 var checked: [String] = []
                 for block in blocks {
                         let isToneless: Bool = !(block.last!.isNumber)
                         let raw = isToneless ? block : String(block.dropLast())
-                        guard !Splitter.syllables.contains(raw) else {
+                        guard !syllables.contains(raw) else {
                                 checked.append(block)
                                 continue
                         }
