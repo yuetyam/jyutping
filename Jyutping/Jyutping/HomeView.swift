@@ -28,11 +28,10 @@ struct HomeView: View {
                                         */
                                         GuideView()
 
-                                        InputTones().padding(.top)
+                                        TonesInput().padding(.top)
                                         CangjieReverseLookup()
                                         PinyinReverseLookup()
-                                        PeriodShortcut()
-                                                .padding(.bottom, 50)
+                                        PeriodShortcut().padding(.bottom, 50)
                                 }
                                 .navigationBarTitle(Text("Home"))
                         }
@@ -88,7 +87,7 @@ private struct GuideView: View {
                 .padding()
         }
 }
-private struct InputTones: View {
+private struct TonesInput: View {
         /*
         v = 1 陰平， vv = 4 陽平
         x = 2 陰上， xx = 5 陽上
@@ -166,14 +165,11 @@ private struct PinyinReverseLookup: View {
         }
 }
 private struct PeriodShortcut: View {
-        private let content: String = """
-                雙擊空格鍵 (space)
-                即可輸入句號「。」
-                """
+        private let content: String = NSLocalizedString("Double tapping the space bar to insert a period followed by a space", comment: "")
         var body: some View {
                 VStack {
                         HStack {
-                                Text("快捷輸入句號").font(.headline)
+                                Text("Period (Full Stop) Shortcut").font(.headline)
                                 Spacer()
                         }
                         HStack {
