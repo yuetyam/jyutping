@@ -12,7 +12,7 @@ final class ToolBar: UIView {
                 heightAnchor.constraint(equalToConstant: toolBarHeight).isActive = true
                 setupStackView()
                 setupToolMode()
-                downArrowButton.layer.addSublayer(splitLine)
+                downArrow.layer.addSublayer(splitLine)
         }
         required init?(coder: NSCoder) { fatalError("ToolBar.init(coder:) error") }
 
@@ -25,7 +25,7 @@ final class ToolBar: UIView {
                         stackView.addArrangedSubview(pasteButton)
                 }
                 stackView.addArrangedSubview(emojiSwitch)
-                stackView.addArrangedSubview(keyboardDownButton)
+                stackView.addArrangedSubview(keyboardDown)
 
                 NSLayoutConstraint.activate(toolBarItemsConstraints)
         }
@@ -67,13 +67,13 @@ final class ToolBar: UIView {
                 }()
                 return ToolButton(imageName: smilingEmojiName, topInset: 17, bottomInset: 17)
         }()
-        let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 18, bottomInset: 19)
-        let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", topInset: 18, bottomInset: 18)
+        let keyboardDown: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 18, bottomInset: 19)
+        let downArrow: ToolButton = ToolButton(imageName: "chevron.down", topInset: 18, bottomInset: 18)
         private let splitLine: CALayer = CALayer()
 
         private func setupToolMode() {
                 controller.candidateCollectionView.removeFromSuperview()
-                downArrowButton.removeFromSuperview()
+                downArrow.removeFromSuperview()
                 NSLayoutConstraint.deactivate(collectionViewConstraints)
                 NSLayoutConstraint.deactivate(downArrowButtonConstraints)
 
@@ -90,11 +90,11 @@ final class ToolBar: UIView {
                 NSLayoutConstraint.activate(collectionViewConstraints)
                 (controller.candidateCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
 
-                addSubview(downArrowButton)
-                downArrowButton.translatesAutoresizingMaskIntoConstraints = false
+                addSubview(downArrow)
+                downArrow.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(downArrowButtonConstraints)
                 splitLine.backgroundColor = tintColor.withAlphaComponent(0.3).cgColor
-                splitLine.frame = CGRect(x: downArrowButton.bounds.origin.x, y: downArrowButton.bounds.origin.y + 20, width: 1, height: 25)
+                splitLine.frame = CGRect(x: downArrow.bounds.origin.x, y: downArrow.bounds.origin.y + 20, width: 1, height: 25)
         }
 
         private var stackViewConstraints: [NSLayoutConstraint] {
@@ -113,8 +113,8 @@ final class ToolBar: UIView {
                         pasteButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
                         emojiSwitch.widthAnchor.constraint(equalToConstant: width),
                         emojiSwitch.heightAnchor.constraint(equalToConstant: toolBarHeight),
-                        keyboardDownButton.widthAnchor.constraint(equalToConstant: width),
-                        keyboardDownButton.heightAnchor.constraint(equalToConstant: toolBarHeight)]
+                        keyboardDown.widthAnchor.constraint(equalToConstant: width),
+                        keyboardDown.heightAnchor.constraint(equalToConstant: toolBarHeight)]
         }
         var collectionViewConstraints: [NSLayoutConstraint] {
                 [controller.candidateCollectionView.topAnchor.constraint(equalTo: topAnchor),
@@ -123,9 +123,9 @@ final class ToolBar: UIView {
                  controller.candidateCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
         }
         private var downArrowButtonConstraints: [NSLayoutConstraint] {
-                [downArrowButton.topAnchor.constraint(equalTo: topAnchor),
-                 downArrowButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-                 downArrowButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-                 downArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
+                [downArrow.topAnchor.constraint(equalTo: topAnchor),
+                 downArrow.bottomAnchor.constraint(equalTo: bottomAnchor),
+                 downArrow.trailingAnchor.constraint(equalTo: trailingAnchor),
+                 downArrow.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
         }
 }

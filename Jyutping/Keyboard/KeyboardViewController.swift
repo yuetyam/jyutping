@@ -260,20 +260,14 @@ final class KeyboardViewController: UIInputViewController {
         // MARK: - ToolBar Actions
 
         private func setupToolBarActions() {
-                toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .touchUpInside)
+                toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
                 toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .touchDown)
                 toolBar.pasteButton.addTarget(self, action: #selector(handlePaste), for: .touchUpInside)
                 toolBar.emojiSwitch.addTarget(self, action: #selector(handleEmojiSwitch), for: .touchUpInside)
-                toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .touchUpInside)
-                toolBar.keyboardDownButton.addTarget(self, action: #selector(dismissInputMethod), for: .touchUpInside)
+                toolBar.keyboardDown.addTarget(self, action: #selector(dismissInputMethod), for: .touchUpInside)
+                toolBar.downArrow.addTarget(self, action: #selector(handleDownArrow), for: .touchUpInside)
         }
-        @objc private func handleDownArrowEvent() {
-                keyboardLayout = .candidateBoard
-        }
-        @objc private func dismissInputMethod() {
-                dismissKeyboard()
-        }
-        @objc private func handleSettingsButtonEvent() {
+        @objc private func handleSettingsButton() {
                 keyboardLayout = .settingsView
         }
         @objc private func handleYueEngSwitch() {
@@ -323,6 +317,12 @@ final class KeyboardViewController: UIInputViewController {
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.modify)
                 keyboardLayout = .emoji
+        }
+        @objc private func dismissInputMethod() {
+                dismissKeyboard()
+        }
+        @objc private func handleDownArrow() {
+                keyboardLayout = .candidateBoard
         }
 
 
