@@ -244,7 +244,6 @@ final class BackspaceButton: UIView {
         }
 }
 
-/// Placeholder of Point \ Dot button
 final class NumberPadEmptyKey: UIView {
         override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
 }

@@ -125,7 +125,7 @@ extension KeyboardViewController {
         @objc private func dismissCandidateBoard() {
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
-                toolBar.reinit()
+                toolBar.reset()
                 keyboardLayout = .cantonese(.lowercased)
         }
         

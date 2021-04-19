@@ -5,7 +5,7 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - SubViews
 
-        private(set) lazy var toolBar: ToolBar = ToolBar(viewController: self)
+        private(set) lazy var toolBar: ToolBar = ToolBar(controller: self)
         private(set) lazy var settingsView: UIView = UIView()
         private(set) lazy var candidateBoard: CandidateBoard = CandidateBoard()
         private(set) lazy var candidateCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

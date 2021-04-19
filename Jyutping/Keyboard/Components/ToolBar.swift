@@ -2,29 +2,26 @@ import UIKit
 
 final class ToolBar: UIView {
         
-        private let viewController: KeyboardViewController
+        private let controller: KeyboardViewController
         private let stackView: UIStackView =  UIStackView()
-
         private let toolBarHeight: CGFloat = 60
-        init(viewController: KeyboardViewController) {
-                self.viewController = viewController
+
+        init(controller: KeyboardViewController) {
+                self.controller = controller
                 super.init(frame: .zero)
                 heightAnchor.constraint(equalToConstant: toolBarHeight).isActive = true
                 setupStackView()
                 setupToolMode()
                 downArrowButton.layer.addSublayer(splitLine)
         }
-
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
+        required init?(coder: NSCoder) { fatalError("ToolBar.init(coder:) error") }
 
         private func setupStackView() {
                 stackView.alignment = .center
                 stackView.distribution = .equalSpacing
                 stackView.addArrangedSubview(settingsButton)
                 stackView.addArrangedSubview(yueEngSwitch)
-                if viewController.hasFullAccess {
+                if controller.hasFullAccess {
                         stackView.addArrangedSubview(pasteButton)
                 }
                 stackView.addArrangedSubview(emojiSwitch)
@@ -33,9 +30,9 @@ final class ToolBar: UIView {
                 NSLayoutConstraint.activate(toolBarItemsConstraints)
         }
 
-        private var showingToolButtons: Bool = true
+        private lazy var showingToolButtons: Bool = true
         func update() {
-                if viewController.inputText.isEmpty {
+                if controller.inputText.isEmpty {
                         if !showingToolButtons {
                                 setupToolMode()
                                 showingToolButtons = true
@@ -47,8 +44,8 @@ final class ToolBar: UIView {
                         }
                 }
         }
-        func reinit() {
-                if viewController.inputText.isEmpty {
+        func reset() {
+                if controller.inputText.isEmpty {
                         setupToolMode()
                         showingToolButtons = true
                 } else {
@@ -70,29 +67,28 @@ final class ToolBar: UIView {
                 }()
                 return ToolButton(imageName: smilingEmojiName, topInset: 17, bottomInset: 17)
         }()
-
         let keyboardDownButton: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 18, bottomInset: 19)
         let downArrowButton: ToolButton = ToolButton(imageName: "chevron.down", topInset: 18, bottomInset: 18)
         private let splitLine: CALayer = CALayer()
 
         private func setupToolMode() {
-                viewController.candidateCollectionView.removeFromSuperview()
+                controller.candidateCollectionView.removeFromSuperview()
                 downArrowButton.removeFromSuperview()
                 NSLayoutConstraint.deactivate(collectionViewConstraints)
                 NSLayoutConstraint.deactivate(downArrowButtonConstraints)
 
                 addSubview(stackView)
                 stackView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate(stackViewConstraits)
+                NSLayoutConstraint.activate(stackViewConstraints)
         }
         private func setupInputMode() {
                 stackView.removeFromSuperview()
-                NSLayoutConstraint.deactivate(stackViewConstraits)
+                NSLayoutConstraint.deactivate(stackViewConstraints)
 
-                addSubview(viewController.candidateCollectionView)
-                viewController.candidateCollectionView.translatesAutoresizingMaskIntoConstraints = false
+                addSubview(controller.candidateCollectionView)
+                controller.candidateCollectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(collectionViewConstraints)
-                (viewController.candidateCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
+                (controller.candidateCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
 
                 addSubview(downArrowButton)
                 downArrowButton.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +97,7 @@ final class ToolBar: UIView {
                 splitLine.frame = CGRect(x: downArrowButton.bounds.origin.x, y: downArrowButton.bounds.origin.y + 20, width: 1, height: 25)
         }
 
-        private var stackViewConstraits: [NSLayoutConstraint] {
+        private var stackViewConstraints: [NSLayoutConstraint] {
                 [stackView.topAnchor.constraint(equalTo: topAnchor),
                  stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
                  stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -121,10 +117,10 @@ final class ToolBar: UIView {
                         keyboardDownButton.heightAnchor.constraint(equalToConstant: toolBarHeight)]
         }
         var collectionViewConstraints: [NSLayoutConstraint] {
-                [viewController.candidateCollectionView.topAnchor.constraint(equalTo: topAnchor),
-                 viewController.candidateCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                 viewController.candidateCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                 viewController.candidateCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
+                [controller.candidateCollectionView.topAnchor.constraint(equalTo: topAnchor),
+                 controller.candidateCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                 controller.candidateCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                 controller.candidateCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
         }
         private var downArrowButtonConstraints: [NSLayoutConstraint] {
                 [downArrowButton.topAnchor.constraint(equalTo: topAnchor),

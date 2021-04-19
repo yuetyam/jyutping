@@ -1,8 +1,9 @@
 import UIKit
 
 final class ToolButton: UIButton {
-        convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
-                self.init(frame: .zero)
+        init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
+                super.init(frame: .zero)
+                backgroundColor = .interactiveClear
                 let buttonImageView: UIImageView = UIImageView()
                 addSubview(buttonImageView)
                 buttonImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -14,6 +15,6 @@ final class ToolButton: UIButton {
                 ])
                 buttonImageView.contentMode = .scaleAspectFit
                 buttonImageView.image = UIImage(systemName: imageName)
-                backgroundColor = .interactiveClear
         }
+        required init?(coder: NSCoder) { fatalError("ToolButton.init(coder:) error") }
 }
