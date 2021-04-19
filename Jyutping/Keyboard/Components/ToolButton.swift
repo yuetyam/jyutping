@@ -117,7 +117,7 @@ final class YueEngSwitch: UIButton {
                 yueLabel.translatesAutoresizingMaskIntoConstraints = false
                 yueLabel.textAlignment = .center
                 yueLabel.textColor = isDarkAppearance ? .white : .black
-                yueLabel.text = "粤"
+                yueLabel.text = "粵"
                 backView.addSubview(engLabel)
                 engLabel.translatesAutoresizingMaskIntoConstraints = false
                 engLabel.textAlignment = .center
