@@ -261,7 +261,7 @@ final class KeyboardViewController: UIInputViewController {
 
         private func setupToolBarActions() {
                 toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .touchUpInside)
-                toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .valueChanged)
+                toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .touchUpInside)
                 toolBar.pasteButton.addTarget(self, action: #selector(handlePaste), for: .touchUpInside)
                 toolBar.emojiSwitch.addTarget(self, action: #selector(handleEmojiSwitch), for: .touchUpInside)
                 toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .touchUpInside)
@@ -279,8 +279,8 @@ final class KeyboardViewController: UIInputViewController {
         @objc private func handleYueEngSwitch() {
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.modify)
-                switch toolBar.yueEngSwitch.selectedSegmentIndex {
-                case 0:
+                let switched: Bool = toolBar.yueEngSwitch.switched
+                if switched {
                         switch keyboardLayout {
                         case .alphabetic(.lowercased):
                                 keyboardLayout = .cantonese(.lowercased)
@@ -293,9 +293,9 @@ final class KeyboardViewController: UIInputViewController {
                         case .symbolic:
                                 keyboardLayout = .cantoneseSymbolic
                         default:
-                                break
+                                keyboardLayout = .cantonese(.lowercased)
                         }
-                case 1:
+                } else {
                         switch keyboardLayout {
                         case .cantonese(.lowercased):
                                 keyboardLayout = .alphabetic(.lowercased)
@@ -308,10 +308,8 @@ final class KeyboardViewController: UIInputViewController {
                         case .cantoneseSymbolic:
                                 keyboardLayout = .symbolic
                         default:
-                                break
+                                keyboardLayout = .alphabetic(.lowercased)
                         }
-                default:
-                        break
                 }
         }
         @objc private func handlePaste() {
