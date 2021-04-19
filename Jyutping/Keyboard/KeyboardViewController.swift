@@ -120,7 +120,7 @@ final class KeyboardViewController: UIInputViewController {
                                 return
                         }
                         if (!keyboardLayout.isCantoneseMode) && (!inputText.isEmpty) {
-                                insert(processingText)
+                                output(processingText)
                                 DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) { [unowned self] in
                                         self.inputText = ""
                                 }
@@ -182,8 +182,8 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var syllablesSchemes: [[String]] = []
 
         /// some dumb apps just can't be compatible with `setMarkedText() & insertText()`
-        /// - Parameter text: text to input
-        func insert(_ text: String) {
+        /// - Parameter text: text to output
+        func output(_ text: String) {
                 shouldMarkInput = false
                 defer {
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.02) { [unowned self] in
@@ -208,6 +208,12 @@ final class KeyboardViewController: UIInputViewController {
                 }
                 let range: NSRange = NSRange(location: markedText.count, length: 0)
                 textDocumentProxy.setMarkedText(markedText, selectedRange: range)
+        }
+
+        /// Calling `textDocumentProxy.insertText(_)`
+        /// - Parameter text: text to insert
+        func insert(_ text: String) {
+                textDocumentProxy.insertText(text)
         }
 
 
@@ -313,7 +319,7 @@ final class KeyboardViewController: UIInputViewController {
                 guard let copied: String = UIPasteboard.general.string else { return }
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.input)
-                textDocumentProxy.insertText(copied)
+                insert(copied)
         }
         @objc private func handleEmojiSwitch() {
                 hapticFeedback?.impactOccurred()

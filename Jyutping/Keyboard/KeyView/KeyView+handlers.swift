@@ -34,11 +34,11 @@ extension KeyView {
                 case .key(.cantoneseComma):
                         guard peekingText == nil else { return }
                         if controller.inputText.isEmpty {
-                                controller.textDocumentProxy.insertText("，")
+                                controller.insert("，")
                                 AudioFeedback.perform(.input)
                         } else {
                                 let text: String = controller.processingText + "，"
-                                controller.insert(text)
+                                controller.output(text)
                                 AudioFeedback.perform(.input)
                                 controller.inputText = ""
                         }
@@ -48,7 +48,7 @@ extension KeyView {
                         if controller.keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
-                                controller.textDocumentProxy.insertText(text)
+                                controller.insert(text)
                         }
                         AudioFeedback.perform(.input)
                         if controller.keyboardLayout == .alphabetic(.uppercased) {
@@ -65,7 +65,7 @@ extension KeyView {
                 if controller.keyboardLayout.isCantoneseMode {
                         controller.inputText += text
                 } else {
-                        controller.textDocumentProxy.insertText(text)
+                        controller.insert(text)
                 }
                 if controller.keyboardLayout == .alphabetic(.uppercased) {
                         controller.keyboardLayout = .alphabetic(.lowercased)
@@ -77,7 +77,7 @@ extension KeyView {
         }
         func handleNewLine() {
                 guard !(controller.inputText.isEmpty) else {
-                        controller.textDocumentProxy.insertText("\n")
+                        controller.insert("\n")
                         AudioFeedback.perform(.input)
                         return
                 }
@@ -87,7 +87,7 @@ extension KeyView {
                         .replacingOccurrences(of: "1", with: "v")
                         .replacingOccurrences(of: "2", with: "x")
                         .replacingOccurrences(of: "3", with: "q")
-                controller.insert(converted)
+                controller.output(converted)
                 AudioFeedback.perform(.input)
                 controller.inputText = ""
         }
@@ -115,13 +115,13 @@ extension KeyView {
         func doubleTapSpace() {
                 guard controller.inputText.isEmpty else { return }
                 guard let isSpaceAhead: Bool = controller.textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
-                        controller.textDocumentProxy.insertText(" ")
+                        controller.insert(" ")
                         AudioFeedback.perform(.input)
                         return
                 }
                 controller.textDocumentProxy.deleteBackward()
                 let text: String = controller.keyboardLayout.isEnglishMode ? ". " : "。"
-                controller.textDocumentProxy.insertText(text)
+                controller.insert(text)
                 AudioFeedback.perform(.input)
         }
         func tapOnSpace() {
@@ -137,7 +137,7 @@ extension KeyView {
                         let inputText: String = controller.inputText
                         let processingText: String = controller.processingText
                         guard !inputText.isEmpty else {
-                                controller.textDocumentProxy.insertText(" ")
+                                controller.insert(" ")
                                 AudioFeedback.perform(.input)
                                 return
                         }
@@ -148,12 +148,12 @@ extension KeyView {
                                         .replacingOccurrences(of: "1", with: "v")
                                         .replacingOccurrences(of: "2", with: "x")
                                         .replacingOccurrences(of: "3", with: "q")
-                                controller.insert(converted)
+                                controller.output(converted)
                                 AudioFeedback.perform(.modify)
                                 controller.inputText = ""
                                 return
                         }
-                        controller.insert(firstCandidate.text)
+                        controller.output(firstCandidate.text)
                         AudioFeedback.perform(.modify)
                         if inputText.hasPrefix("r") {
                                 if inputText.count == (firstCandidate.input.count + 1) {
@@ -178,11 +178,11 @@ extension KeyView {
                                 controller.handleLexicon(concatenatedCandidate)
                         }
                 case .alphabetic(.uppercased):
-                        controller.textDocumentProxy.insertText(" ")
+                        controller.insert(" ")
                         AudioFeedback.perform(.input)
                         controller.keyboardLayout = .alphabetic(.lowercased)
                 default:
-                        controller.textDocumentProxy.insertText(" ")
+                        controller.insert(" ")
                         AudioFeedback.perform(.input)
                 }
         }

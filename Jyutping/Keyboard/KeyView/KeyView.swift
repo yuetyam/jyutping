@@ -194,7 +194,7 @@ final class KeyView: UIView {
                         AudioFeedback.perform(.input)
                         controller.hapticFeedback?.impactOccurred()
                         guard controller.keyboardLayout.isCantoneseMode else {
-                                controller.textDocumentProxy.insertText(text)
+                                controller.insert(text)
                                 break
                         }
                         let punctuation: String = "，。？！"
@@ -203,10 +203,10 @@ final class KeyView: UIView {
                                 break
                         }
                         if controller.inputText.isEmpty {
-                                controller.textDocumentProxy.insertText(text)
+                                controller.insert(text)
                         } else {
                                 let combined: String = controller.processingText + text
-                                controller.insert(combined)
+                                controller.output(combined)
                                 controller.inputText = ""
                         }
                 case .key:

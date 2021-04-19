@@ -105,13 +105,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 guard collectionView == candidateCollectionView else {
                         guard let cell: EmojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCell else { return }
                         let emoji: String = cell.emojiLabel.text ?? "😀"
-                        insert(emoji)
+                        output(emoji)
                         hapticFeedback?.impactOccurred()
                         updateFrequentEmojis(latest: emoji)
                         return
                 }
                 let candidate: Candidate = candidates[indexPath.row]
-                insert(candidate.text)
+                output(candidate.text)
                 AudioFeedback.perform(.modify)
                 if inputText.hasPrefix("r") {
                         if inputText == "r" + candidate.input {
