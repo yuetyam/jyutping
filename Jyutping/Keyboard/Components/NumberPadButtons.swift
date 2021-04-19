@@ -1,105 +1,106 @@
 import UIKit
 
-final class NumberButton: UIButton {
+/// Number / Digit button for `.numberPad` and `.decimalPad`
+final class NumberButton: UIView {
 
         private let digit: Int
         private let controller: KeyboardViewController
-        private let keyButtonView: UIView = UIView()
+        private let foreColor: UIColor
+        private let shape: UIView = UIView()
 
-        init(digit: Int, viewController: KeyboardViewController) {
+        init(digit: Int, controller: KeyboardViewController) {
                 self.digit = digit
-                self.controller = viewController
+                self.controller = controller
+                self.foreColor = controller.isDarkAppearance ? .white : .black
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
-                setupKeyButtonView()
+                setupShapeView()
                 setupDigitLabel()
                 setupFootnoteLabel()
         }
-
         required init?(coder: NSCoder) { fatalError("NumberButton.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
+        override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 controller.insert(String(digit))
-                keyButtonView.backgroundColor = controller.isDarkAppearance ? .black : .lightActionButton
+                shape.backgroundColor = controller.isDarkAppearance ? .black : .lightActionButton
                 AudioFeedback.perform(.input)
                 controller.hapticFeedback?.impactOccurred()
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
                         if self != nil {
-                                self!.keyButtonView.backgroundColor = self!.controller.isDarkAppearance ? .clear : .white
+                                self!.shape.backgroundColor = self!.controller.isDarkAppearance ? .clear : .white
                         }
                 }
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-                keyButtonView.backgroundColor = controller.isDarkAppearance ? .clear : .white
+                shape.backgroundColor = controller.isDarkAppearance ? .clear : .white
         }
 
-        private func setupKeyButtonView() {
-                addSubview(keyButtonView)
-                keyButtonView.translatesAutoresizingMaskIntoConstraints = false
+        private func setupShapeView() {
+                addSubview(shape)
+                shape.translatesAutoresizingMaskIntoConstraints = false
                 let horizontalConstant: CGFloat = 4
                 let verticalConstant: CGFloat = 4
                 NSLayoutConstraint.activate([
-                        keyButtonView.topAnchor.constraint(equalTo: topAnchor, constant: verticalConstant),
-                        keyButtonView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalConstant),
-                        keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant),
-                        keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant)
+                        shape.topAnchor.constraint(equalTo: topAnchor, constant: verticalConstant),
+                        shape.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalConstant),
+                        shape.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant),
+                        shape.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant)
                 ])
-                keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.tintColor = controller.isDarkAppearance ? .white : .black
-                keyButtonView.layer.cornerRadius = 5
-                keyButtonView.layer.cornerCurve = .continuous
-                keyButtonView.layer.shadowColor = UIColor.black.cgColor
-                keyButtonView.layer.shadowOpacity = 0.3
-                keyButtonView.layer.shadowOffset = CGSize(width: 0, height: 1)
-                keyButtonView.layer.shadowRadius = 0.5
-                keyButtonView.layer.shouldRasterize = true
-                keyButtonView.layer.rasterizationScale = UIScreen.main.scale
+                shape.isUserInteractionEnabled = false
+                shape.tintColor = controller.isDarkAppearance ? .white : .black
+                shape.layer.cornerRadius = 5
+                shape.layer.cornerCurve = .continuous
+                shape.layer.shadowColor = UIColor.black.cgColor
+                shape.layer.shadowOpacity = 0.3
+                shape.layer.shadowOffset = CGSize(width: 0, height: 1)
+                shape.layer.shadowRadius = 0.5
+                shape.layer.shouldRasterize = true
+                shape.layer.rasterizationScale = UIScreen.main.scale
 
                 guard controller.isDarkAppearance else {
-                        keyButtonView.backgroundColor = .white
+                        shape.backgroundColor = .white
                         return
                 }
                 let blurEffectView: UIVisualEffectView = BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
-                blurEffectView.frame = keyButtonView.bounds
+                blurEffectView.frame = shape.bounds
                 blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 blurEffectView.layer.cornerRadius = 5
                 blurEffectView.layer.cornerCurve = .continuous
                 blurEffectView.clipsToBounds = true
-                keyButtonView.addSubview(blurEffectView)
+                shape.addSubview(blurEffectView)
         }
-
         private func setupDigitLabel() {
                 let digitLabel: UILabel = UILabel()
-                keyButtonView.addSubview(digitLabel)
+                shape.addSubview(digitLabel)
                 digitLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                        digitLabel.topAnchor.constraint(equalTo: keyButtonView.topAnchor),
-                        digitLabel.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -15),
-                        digitLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor),
-                        digitLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
+                        digitLabel.topAnchor.constraint(equalTo: shape.topAnchor),
+                        digitLabel.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -15),
+                        digitLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor),
+                        digitLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
                 digitLabel.textAlignment = .center
                 digitLabel.font = .systemFont(ofSize: 25)
                 digitLabel.text = String(digit)
-                digitLabel.textColor = controller.isDarkAppearance ? .white : .black
+                digitLabel.textColor = foreColor
         }
         private func setupFootnoteLabel() {
                 let footnoteLabel: UILabel = UILabel()
-                keyButtonView.addSubview(footnoteLabel)
+                shape.addSubview(footnoteLabel)
                 footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                        footnoteLabel.topAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -20),
-                        footnoteLabel.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor),
-                        footnoteLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor),
-                        footnoteLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
+                        footnoteLabel.topAnchor.constraint(equalTo: shape.bottomAnchor, constant: -20),
+                        footnoteLabel.bottomAnchor.constraint(equalTo: shape.bottomAnchor),
+                        footnoteLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor),
+                        footnoteLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
                 footnoteLabel.textAlignment = .center
                 footnoteLabel.font = .boldSystemFont(ofSize: 10)
                 footnoteLabel.text = footnote
-                footnoteLabel.textColor = controller.isDarkAppearance ? .white : .black
+                footnoteLabel.textColor = foreColor
         }
 
         private var footnote: String? {
@@ -126,72 +127,57 @@ final class NumberButton: UIButton {
         }
 }
 
-final class PeriodButton: UIButton {
+/// Point / Dot button for `.decimalPad`
+final class PointButton: UIButton {
 
         private let controller: KeyboardViewController
-        private let keyButtonView: UIView = UIView()
 
-        init(viewController: KeyboardViewController) {
-                self.controller = viewController
+        init(controller: KeyboardViewController) {
+                self.controller = controller
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
-                setupKeyButtonView()
-                setupPeriodLabel()
-                addTarget(self, action: #selector(handleTap), for: .touchUpInside)
+                setupTextLabel()
+                addTarget(self, action: #selector(insert), for: .touchUpInside)
         }
-        @objc private func handleTap() {
+        required init?(coder: NSCoder) { fatalError("PointButton.init(coder:) error") }
+        override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
+
+        @objc private func insert() {
                 controller.insert(".")
                 AudioFeedback.perform(.input)
                 controller.hapticFeedback?.impactOccurred()
         }
-
-        required init?(coder: NSCoder) { fatalError("PeriodButton.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
-
-        private func setupKeyButtonView() {
-                addSubview(keyButtonView)
-                keyButtonView.translatesAutoresizingMaskIntoConstraints = false
+        private func setupTextLabel() {
+                let label = UILabel()
+                addSubview(label)
+                label.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                        keyButtonView.topAnchor.constraint(equalTo: topAnchor),
-                        keyButtonView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                        keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                        keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                        label.topAnchor.constraint(equalTo: topAnchor),
+                        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+                        label.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        label.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
-                keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.tintColor = controller.isDarkAppearance ? .white : .black
-        }
-        private func setupPeriodLabel() {
-                let periodLabel = UILabel()
-                keyButtonView.addSubview(periodLabel)
-                periodLabel.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                        periodLabel.topAnchor.constraint(equalTo: keyButtonView.topAnchor),
-                        periodLabel.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -15),
-                        periodLabel.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor),
-                        periodLabel.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
-                ])
-                periodLabel.textAlignment = .center
-                periodLabel.font = .systemFont(ofSize: 28)
-                periodLabel.text = "."
-                periodLabel.textColor = controller.isDarkAppearance ? .white : .black
+                label.textAlignment = .center
+                label.font = .systemFont(ofSize: 28)
+                label.text = "."
+                label.textColor = controller.isDarkAppearance ? .white : .black
         }
 }
 
-final class BackspaceButton: UIButton {
+/// Backspace button for `.numberPad` and `.decimalPad`
+final class BackspaceButton: UIView {
 
         private let controller: KeyboardViewController
-        private let keyButtonView: UIView = UIView()
-        private let keyImageView = UIImageView()
+        private let keyImageView: UIImageView = UIImageView()
 
-        init(viewController: KeyboardViewController) {
-                self.controller = viewController
+        init(controller: KeyboardViewController) {
+                self.controller = controller
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
-                setupKeyButtonView()
                 setupKeyImageView()
         }
         required init?(coder: NSCoder) { fatalError("BackspaceButton.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { return CGSize(width: 50, height: 45) }
+        override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
 
         private lazy var backspaceTimer: GCDTimer? = GCDTimer(interval: .milliseconds(100)) { [weak self] _ in
                 if self != nil {
@@ -243,36 +229,22 @@ final class BackspaceButton: UIButton {
                 controller.textDocumentProxy.deleteBackward()
                 AudioFeedback.perform(.delete)
         }
-
-        private func setupKeyButtonView() {
-                addSubview(keyButtonView)
-                keyButtonView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                        keyButtonView.topAnchor.constraint(equalTo: topAnchor),
-                        keyButtonView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                        keyButtonView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                        keyButtonView.trailingAnchor.constraint(equalTo: trailingAnchor)
-                ])
-                keyButtonView.isUserInteractionEnabled = false
-                keyButtonView.tintColor = controller.isDarkAppearance ? .white : .black
-        }
         private func setupKeyImageView() {
-                keyButtonView.addSubview(keyImageView)
+                addSubview(keyImageView)
                 keyImageView.translatesAutoresizingMaskIntoConstraints = false
                 let topBottomInset: CGFloat = 15
                 NSLayoutConstraint.activate([
-                        keyImageView.topAnchor.constraint(equalTo: keyButtonView.topAnchor, constant: topBottomInset),
-                        keyImageView.bottomAnchor.constraint(equalTo: keyButtonView.bottomAnchor, constant: -topBottomInset),
-                        keyImageView.leadingAnchor.constraint(equalTo: keyButtonView.leadingAnchor),
-                        keyImageView.trailingAnchor.constraint(equalTo: keyButtonView.trailingAnchor)
+                        keyImageView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
+                        keyImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
+                        keyImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        keyImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
                 keyImageView.contentMode = .scaleAspectFit
                 keyImageView.image = UIImage(systemName: "delete.left")
         }
 }
 
+/// Placeholder of Point \ Dot button
 final class NumberPadEmptyKey: UIView {
-        override var intrinsicContentSize: CGSize {
-                return CGSize(width: 50, height: 45)
-        }
+        override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
 }

@@ -54,17 +54,17 @@ extension KeyboardViewController {
                 if keyboardLayout == .numberPad {
                         bottomStackView.addArrangedSubview(NumberPadEmptyKey())
                 } else {
-                        bottomStackView.addArrangedSubview(PeriodButton(viewController: self))
+                        bottomStackView.addArrangedSubview(PointButton(controller: self))
                 }
-                bottomStackView.addArrangedSubview(NumberButton(digit: 0, viewController: self))
-                bottomStackView.addArrangedSubview(BackspaceButton(viewController: self))
+                bottomStackView.addArrangedSubview(NumberButton(digit: 0, controller: self))
+                bottomStackView.addArrangedSubview(BackspaceButton(controller: self))
                 
                 keyboardStackView.addArrangedSubview(bottomStackView)
         }
         private func makeDigitsRow(for digits: [Int]) -> UIStackView {
                 let stackView: UIStackView = UIStackView()
                 stackView.distribution = .fillProportionally
-                stackView.addMultipleArrangedSubviews(digits.map { NumberButton(digit: $0, viewController: self) })
+                stackView.addMultipleArrangedSubviews(digits.map { NumberButton(digit: $0, controller: self) })
                 return stackView
         }
 
