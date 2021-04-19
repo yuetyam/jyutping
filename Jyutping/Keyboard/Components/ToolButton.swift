@@ -58,12 +58,12 @@ final class YueEngSwitch: UIButton {
                 if switched {
                         leftForeView.backgroundColor = .clear
                         rightForeView.backgroundColor = isDarkAppearance ? darkFore : .white
-                        yueLabel.font = .systemFont(ofSize: 11)
-                        engLabel.font = .systemFont(ofSize: 13)
+                        yueLabel.font = .systemFont(ofSize: 12)
+                        engLabel.font = .systemFont(ofSize: 14)
                 } else {
                         leftForeView.backgroundColor = isDarkAppearance ? darkFore : .white
                         rightForeView.backgroundColor = .clear
-                        yueLabel.font = .systemFont(ofSize: 13)
+                        yueLabel.font = .systemFont(ofSize: 15)
                         engLabel.font = .systemFont(ofSize: 10)
                 }
         }
@@ -124,10 +124,10 @@ final class YueEngSwitch: UIButton {
                 engLabel.textColor = isDarkAppearance ? .white : .black
                 engLabel.text = "EN"
                 if switched {
-                        yueLabel.font = .systemFont(ofSize: 11)
-                        engLabel.font = .systemFont(ofSize: 13)
+                        yueLabel.font = .systemFont(ofSize: 12)
+                        engLabel.font = .systemFont(ofSize: 14)
                 } else {
-                        yueLabel.font = .systemFont(ofSize: 13)
+                        yueLabel.font = .systemFont(ofSize: 15)
                         engLabel.font = .systemFont(ofSize: 10)
                 }
                 NSLayoutConstraint.activate([

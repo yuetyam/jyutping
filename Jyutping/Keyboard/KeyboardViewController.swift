@@ -261,7 +261,7 @@ final class KeyboardViewController: UIInputViewController {
 
         private func setupToolBarActions() {
                 toolBar.settingsButton.addTarget(self, action: #selector(handleSettingsButtonEvent), for: .touchUpInside)
-                toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .touchUpInside)
+                toolBar.yueEngSwitch.addTarget(self, action: #selector(handleYueEngSwitch), for: .touchDown)
                 toolBar.pasteButton.addTarget(self, action: #selector(handlePaste), for: .touchUpInside)
                 toolBar.emojiSwitch.addTarget(self, action: #selector(handleEmojiSwitch), for: .touchUpInside)
                 toolBar.downArrowButton.addTarget(self, action: #selector(handleDownArrowEvent), for: .touchUpInside)

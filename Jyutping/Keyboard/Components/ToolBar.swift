@@ -55,7 +55,7 @@ final class ToolBar: UIView {
         }
 
         let settingsButton: ToolButton = ToolButton(imageName: "gear", topInset: 17, bottomInset: 17)
-        let yueEngSwitch: YueEngSwitch = YueEngSwitch(width: 60, height: 60, isDarkAppearance: false, switched: false)
+        let yueEngSwitch: YueEngSwitch = YueEngSwitch(width: 88, height: 60, isDarkAppearance: false, switched: false)
         let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 19, bottomInset: 18)
         let emojiSwitch: ToolButton = {
                 let smilingEmojiName: String = {
@@ -107,7 +107,7 @@ final class ToolBar: UIView {
                 let width: CGFloat = 50
                 return [settingsButton.widthAnchor.constraint(equalToConstant: width),
                         settingsButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
-                        yueEngSwitch.widthAnchor.constraint(equalToConstant: toolBarHeight),
+                        yueEngSwitch.widthAnchor.constraint(equalToConstant: 88),
                         yueEngSwitch.heightAnchor.constraint(equalToConstant: toolBarHeight),
                         pasteButton.widthAnchor.constraint(equalToConstant: width),
                         pasteButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
