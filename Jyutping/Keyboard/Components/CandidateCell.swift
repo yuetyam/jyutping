@@ -1,41 +1,39 @@
 import UIKit
 
 final class CandidateCell: UICollectionViewCell {
-        
+
         let textLabel: UILabel = UILabel()
         let footnoteLabel: UILabel = UILabel()
-        
+
         private(set) lazy var jyutpingDisplay: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
         lazy var shouldUpdateSubviews: Bool = false
-        
+
         private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
         lazy var shouldUpdateFonts: Bool = false
-        
+
         override init(frame: CGRect) {
                 super.init(frame: frame)
-                textLabel.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(textLabel)
-                textLabel.textAlignment = .center
+                textLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                         textLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                         textLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
                 ])
-                footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
+                textLabel.textAlignment = .center
                 contentView.addSubview(footnoteLabel)
-                footnoteLabel.textAlignment = .center
+                footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
                 footnoteLabel.font = .systemFont(ofSize: 13)
                 NSLayoutConstraint.activate([
                         footnoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                         footnoteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
                 ])
+                footnoteLabel.textAlignment = .center
                 updateSubviews()
                 updateFonts()
         }
-        
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-        
+
+        required init?(coder: NSCoder) { fatalError("CandidateCell.init(coder:) error") }
+
         override func prepareForReuse() {
                 super.prepareForReuse()
                 if shouldUpdateSubviews {
@@ -49,7 +47,7 @@ final class CandidateCell: UICollectionViewCell {
                         shouldUpdateFonts = false
                 }
         }
-        
+
         private func updateSubviews() {
                 switch jyutpingDisplay {
                 case 2:
@@ -87,7 +85,7 @@ final class CandidateCell: UICollectionViewCell {
                  footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
                  footnoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)]
         }()
-        
+
         private func updateFonts() {
                 switch logogram {
                 case 2:

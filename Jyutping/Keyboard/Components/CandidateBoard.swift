@@ -1,19 +1,11 @@
 import UIKit
 
 final class CandidateBoard: UIView {
-        
+
         let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 18, bottomInset: 18)
-        
+
         init() {
                 super.init(frame: .zero)
-                setupSubViews()
-        }
-        
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-        
-        private func setupSubViews() {
                 addSubview(upArrowButton)
                 upArrowButton.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -23,4 +15,5 @@ final class CandidateBoard: UIView {
                         upArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)
                 ])
         }
+        required init?(coder: NSCoder) { fatalError("CandidateBoard.init(coder:) error") }
 }
