@@ -29,12 +29,14 @@ final class YueEngSwitch: UIButton {
 
         private let width: CGFloat
         private let height: CGFloat
+        private let isPhoneInterface: Bool
         private var isDarkAppearance: Bool
         private(set) var switched: Bool
 
-        init(width: CGFloat, height: CGFloat, isDarkAppearance: Bool, switched: Bool) {
+        init(width: CGFloat, height: CGFloat, isPhoneInterface: Bool, isDarkAppearance: Bool, switched: Bool) {
                 self.width = width
                 self.height = height
+                self.isPhoneInterface = isPhoneInterface
                 self.isDarkAppearance = isDarkAppearance
                 self.switched = switched
                 super.init(frame: .zero)
@@ -59,7 +61,7 @@ final class YueEngSwitch: UIButton {
                         leftForeView.backgroundColor = .clear
                         rightForeView.backgroundColor = isDarkAppearance ? darkFore : .white
                         yueLabel.font = .systemFont(ofSize: 12)
-                        engLabel.font = .systemFont(ofSize: 14)
+                        engLabel.font = .systemFont(ofSize: 13)
                 } else {
                         leftForeView.backgroundColor = isDarkAppearance ? darkFore : .white
                         rightForeView.backgroundColor = .clear
@@ -70,7 +72,7 @@ final class YueEngSwitch: UIButton {
         private func setupBackView() {
                 addSubview(backView)
                 backView.translatesAutoresizingMaskIntoConstraints = false
-                let topBottomInset: CGFloat = height / 4.0
+                let topBottomInset: CGFloat = isPhoneInterface ? (height / 4.0) : (height / 4.0 - 2)
                 NSLayoutConstraint.activate([
                         backView.leadingAnchor.constraint(equalTo: leadingAnchor),
                         backView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -86,12 +88,12 @@ final class YueEngSwitch: UIButton {
                 backView.addSubview(leftForeView)
                 leftForeView.translatesAutoresizingMaskIntoConstraints = false
                 let halfWidth: CGFloat = width / 2.0
-                let topBottomInset: CGFloat = height / 4.0
+                let topBottomInset: CGFloat = isPhoneInterface ? (height / 4.0) : (height / 4.0 - 2)
                 NSLayoutConstraint.activate([
-                        leftForeView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                        leftForeView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -halfWidth),
                         leftForeView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
-                        leftForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset)
+                        leftForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
+                        leftForeView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                        leftForeView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -halfWidth)
                 ])
                 leftForeView.layer.cornerRadius = 5
                 leftForeView.layer.cornerCurve = .continuous
@@ -101,12 +103,12 @@ final class YueEngSwitch: UIButton {
                 backView.addSubview(rightForeView)
                 rightForeView.translatesAutoresizingMaskIntoConstraints = false
                 let halfWidth: CGFloat = width / 2.0
-                let topBottomInset: CGFloat = height / 4.0
+                let topBottomInset: CGFloat = isPhoneInterface ? (height / 4.0) : (height / 4.0 - 2)
                 NSLayoutConstraint.activate([
-                        rightForeView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: halfWidth),
-                        rightForeView.trailingAnchor.constraint(equalTo: trailingAnchor),
                         rightForeView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
-                        rightForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset)
+                        rightForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
+                        rightForeView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                        rightForeView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: halfWidth)
                 ])
                 rightForeView.layer.cornerRadius = 5
                 rightForeView.layer.cornerCurve = .continuous
@@ -114,31 +116,31 @@ final class YueEngSwitch: UIButton {
         }
         private func setupText() {
                 backView.addSubview(yueLabel)
-                yueLabel.translatesAutoresizingMaskIntoConstraints = false
-                yueLabel.textAlignment = .center
-                yueLabel.textColor = isDarkAppearance ? .white : .black
-                yueLabel.text = "粵"
                 backView.addSubview(engLabel)
+                yueLabel.translatesAutoresizingMaskIntoConstraints = false
                 engLabel.translatesAutoresizingMaskIntoConstraints = false
+                yueLabel.textAlignment = .center
                 engLabel.textAlignment = .center
+                yueLabel.textColor = isDarkAppearance ? .white : .black
                 engLabel.textColor = isDarkAppearance ? .white : .black
+                yueLabel.text = "粵"
                 engLabel.text = "EN"
                 if switched {
                         yueLabel.font = .systemFont(ofSize: 12)
-                        engLabel.font = .systemFont(ofSize: 14)
+                        engLabel.font = .systemFont(ofSize: 13)
                 } else {
                         yueLabel.font = .systemFont(ofSize: 15)
                         engLabel.font = .systemFont(ofSize: 10)
                 }
                 NSLayoutConstraint.activate([
                         yueLabel.topAnchor.constraint(equalTo: topAnchor),
+                        yueLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
                         yueLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
                         yueLabel.trailingAnchor.constraint(equalTo: leadingAnchor, constant: width / 2.0),
-                        yueLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
                         engLabel.topAnchor.constraint(equalTo: topAnchor),
-                        engLabel.leadingAnchor.constraint(equalTo: yueLabel.trailingAnchor),
+                        engLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
                         engLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-                        engLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+                        engLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: width / 2.0)
                 ])
         }
         private let lightBack: UIColor = UIColor(displayP3Red: 201.0 / 255, green: 203.0 / 255, blue: 209.0 / 255, alpha: 1)
