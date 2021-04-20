@@ -157,7 +157,7 @@ final class KeyView: UIView {
                         let now = Date.timeIntervalSinceReferenceDate
                         let distance = now - ShiftState.timePoint
                         ShiftState.timePoint = now
-                        if distance < 0.4 {
+                        if distance < 0.3 {
                                 doubleTapShift()
                         } else {
                                 tapOnShift()
