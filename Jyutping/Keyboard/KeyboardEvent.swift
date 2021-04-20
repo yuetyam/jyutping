@@ -21,6 +21,8 @@ struct KeySeat: Hashable {
                 self.children = children
         }
 
+        var hasChildren: Bool { !children.isEmpty }
+
         static let period: KeySeat = {
                 let period: KeyElement = KeyElement(text: ".")
                 let comma: KeyElement = KeyElement(text: ",")

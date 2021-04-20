@@ -68,7 +68,7 @@ final class KeyView: UIView {
                 switch self.event {
                 case .none, .shadowKey, .switchInputMethod:
                         break
-                case .key(let seat) where !seat.children.isEmpty:
+                case .key(let seat) where seat.hasChildren:
                         if isPhonePortrait {
                                 displayPreview()
                         } else {
@@ -116,7 +116,7 @@ final class KeyView: UIView {
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)
                 switch self.event {
-                case .key(let seat) where !seat.children.isEmpty:
+                case .key(let seat) where seat.hasChildren:
                         guard isCalloutDisplaying else { break }
                         guard let location: CGPoint = touches.first?.location(in: controller.view) else { break }
                         let distance: CGFloat = location.x - self.frame.midX
@@ -181,7 +181,7 @@ final class KeyView: UIView {
                 case .newLine:
                         handleNewLine()
                         changeColorToNormal()
-                case .key(let seat) where !seat.children.isEmpty:
+                case .key(let seat) where seat.hasChildren:
                         removeCallout()
                         if isPhonePortrait {
                                 removePreview()
@@ -240,8 +240,14 @@ final class KeyView: UIView {
                         timePoints = (false, false)
                 case .shift:
                         timePoints = (false, false)
-                case .key(let seat):
-                        if !seat.children.isEmpty { removeCallout() }
+                case .key(let seat) where seat.hasChildren:
+                        removeCallout()
+                        if isPhonePortrait {
+                                removePreview()
+                        } else {
+                                changeColorToNormal()
+                        }
+                case .key:
                         if isPhonePortrait {
                                 removePreview()
                         } else {
@@ -380,8 +386,7 @@ final class KeyView: UIView {
         }()
         private lazy var calloutViews: [CalloutView] = {
                 switch event {
-                case .key(let seat):
-                        guard !seat.children.isEmpty else { return [] }
+                case .key(let seat) where seat.hasChildren:
                         let firstChild: KeyElement = seat.children.first!
                         let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, alignments: firstChild.alignments)
                         firstKey.backgroundColor = selectionColor
