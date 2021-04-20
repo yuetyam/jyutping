@@ -12,7 +12,7 @@ extension KeyView {
         }
         func handleBackspace() {
                 performBackspace()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         if self != nil {
                                 if self!.isInteracting {
                                         self!.backspaceTimer?.start()
