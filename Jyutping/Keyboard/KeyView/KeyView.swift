@@ -263,7 +263,7 @@ final class KeyView: UIView {
         private lazy var shapeWidth: CGFloat = shape.frame.width
         private lazy var shapeHeight: CGFloat = shape.frame.height
         private lazy var bottomCenter: CGPoint = CGPoint(x: shape.frame.midX, y: shape.frame.maxY)
-        private lazy var selectionColor: UIColor =  UIColor(red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
+        private lazy var selectionColor: UIColor =  UIColor(displayP3Red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
 
 
         // MARK: - Preview
