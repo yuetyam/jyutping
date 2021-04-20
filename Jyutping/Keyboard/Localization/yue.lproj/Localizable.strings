@@ -43,3 +43,19 @@ Cantonese
 "Expand Candidates board" = "展開更多候選詞";
 "Current mode: English" = "當前模式：英語";
 "Current mode: Cantonese" = "當前模式：粵語";
+
+// Keyboard Keys
+"space bar" = "空格鍵";
+"return key" = "換行";
+"backspace key" = "刪除";
+"shift key" = "shift";
+"Caps Locked" = "大寫鎖定";
+"Uppercased" = "大寫";
+"Lowercased" = "小寫";
+"Switch to Cantonese layout" = "粵拼";
+"Switch to English layout" = "英語";
+"Switch to Numbers layout" = "數字";
+"Switch to Symbols layout" = "符號";
+
+// Settings page
+"Switch back to Keyboard" = "返回";

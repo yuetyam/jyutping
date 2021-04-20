@@ -43,3 +43,19 @@ Chinese, Simplified
 "Expand Candidates board" = "展开更多候选词";
 "Current mode: English" = "当前模式：英语";
 "Current mode: Cantonese" = "当前模式：粤语";
+
+// Keyboard Keys
+"space bar" = "空格键";
+"return key" = "换行";
+"backspace key" = "删除";
+"shift key" = "shift";
+"Caps Locked" = "大写锁定";
+"Uppercased" = "大写";
+"Lowercased" = "小写";
+"Switch to Cantonese layout" = "粤拼";
+"Switch to English layout" = "英语";
+"Switch to Numbers layout" = "数字";
+"Switch to Symbols layout" = "符号";
+
+// Settings page
+"Switch back to Keyboard" = "返回";

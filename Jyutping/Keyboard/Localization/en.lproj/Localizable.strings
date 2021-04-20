@@ -43,3 +43,19 @@ English
 "Expand Candidates board" = "Expand Candidates board";
 "Current mode: English" = "Current mode: English";
 "Current mode: Cantonese" = "Current mode: Cantonese";
+
+// Keyboard Keys
+"space bar" = "space bar";
+"return key" = "return";
+"backspace key" = "delete";
+"shift key" = "shift";
+"Caps Locked" = "Caps Locked";
+"Uppercased" = "Uppercased";
+"Lowercased" = "Lowercased";
+"Switch to Cantonese layout" = "Cantonese";
+"Switch to English layout" = "English";
+"Switch to Numbers layout" = "Numbers";
+"Switch to Symbols layout" = "Symbols";
+
+// Settings page
+"Switch back to Keyboard" = "Back";

@@ -36,6 +36,7 @@ final class KeyView: UIView {
                         setupKeyShapeView()
                         setupKeyTextLabel()
                 }
+                improveAccessibility()
         }
         required init?(coder: NSCoder) { fatalError("KeyView.init(coder:) error") }
         override var intrinsicContentSize: CGSize { CGSize(width: width, height: height) }
@@ -410,4 +411,56 @@ final class KeyView: UIView {
                         }
                 }
         }()
+
+        private func improveAccessibility() {
+                switch event {
+                case .space:
+                        isAccessibilityElement = true
+                        accessibilityTraits = [.keyboardKey]
+                        accessibilityLabel = NSLocalizedString("space bar", comment: "")
+                case .newLine:
+                        isAccessibilityElement = true
+                        accessibilityTraits = [.keyboardKey]
+                        accessibilityLabel = NSLocalizedString("return key", comment: "")
+                case .backspace:
+                        isAccessibilityElement = true
+                        accessibilityTraits = [.keyboardKey]
+                        accessibilityLabel = NSLocalizedString("backspace key", comment: "")
+                case .shift:
+                        isAccessibilityElement = true
+                        accessibilityTraits = [.keyboardKey]
+                        accessibilityLabel = NSLocalizedString("shift key", comment: "")
+                        switch controller.keyboardLayout {
+                        case .cantonese(.capsLocked), .alphabetic(.capsLocked):
+                                accessibilityValue = NSLocalizedString("Caps Locked", comment: "")
+                        case .cantonese(.uppercased), .alphabetic(.uppercased):
+                                accessibilityValue = NSLocalizedString("Uppercased", comment: "")
+                        default:
+                                accessibilityValue = NSLocalizedString("Lowercased", comment: "")
+                        }
+                case .switchTo(let layout):
+                        switch layout {
+                        case .cantonese:
+                                isAccessibilityElement = true
+                                accessibilityTraits = [.keyboardKey]
+                                accessibilityLabel = NSLocalizedString("Switch to Cantonese layout", comment: "")
+                        case .alphabetic:
+                                isAccessibilityElement = true
+                                accessibilityTraits = [.keyboardKey]
+                                accessibilityLabel = NSLocalizedString("Switch to English layout", comment: "")
+                        case .numeric, .cantoneseNumeric:
+                                isAccessibilityElement = true
+                                accessibilityTraits = [.keyboardKey]
+                                accessibilityLabel = NSLocalizedString("Switch to Numbers layout", comment: "")
+                        case .symbolic, .cantoneseSymbolic:
+                                isAccessibilityElement = true
+                                accessibilityTraits = [.keyboardKey]
+                                accessibilityLabel = NSLocalizedString("Switch to Symbols layout", comment: "")
+                        default:
+                                break
+                        }
+                default:
+                        break
+                }
+        }
 }
