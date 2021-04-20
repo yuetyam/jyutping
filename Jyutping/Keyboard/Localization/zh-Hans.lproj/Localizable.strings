@@ -2,6 +2,8 @@
 Chinese, Simplified
 */
 
+// MARK: - Settings
+
 "Audio Feedback on Click" = "按鍵聲音反饋";
 "Haptic Feedback on Click" = "按鍵振動反饋";
 "Haptic Feedback requires Full Access" = "振動反饋需啓用「完全訪問」";
@@ -28,3 +30,16 @@ Chinese, Simplified
 "Subscript : jyut₆ ping₃"   = "下標     :  jyut₆ ping₃";
 
 "Clear User Lexicon" = "清空用戶詞庫";
+
+
+// MARK: - Accessibility
+
+// ToolBar
+"Keyboard Settings" = "键盘设置";
+"Keyboard Mode Switch" = "切换键盘模式";
+"Paste Clipboard content" = "粘贴";
+"Switch to Emoji layout" = "切换到 Emoji 布局";
+"Dismiss keyboard" = "收起键盘";
+"Expand Candidates board" = "展开更多候选词";
+"Current mode: English" = "当前模式：英语";
+"Current mode: Cantonese" = "当前模式：粤语";

@@ -15,6 +15,7 @@ final class ToolBar: UIView {
                 setupToolMode()
                 setupStackView()
                 downArrow.layer.addSublayer(splitLine)
+                setupAccessibility()
         }
         required init?(coder: NSCoder) { fatalError("ToolBar.init(coder:) error") }
 
@@ -149,5 +150,14 @@ final class ToolBar: UIView {
                  downArrow.bottomAnchor.constraint(equalTo: bottomAnchor),
                  downArrow.trailingAnchor.constraint(equalTo: trailingAnchor),
                  downArrow.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
+        }
+
+        private func setupAccessibility() {
+                settingsButton.accessibilityLabel = NSLocalizedString("Keyboard Settings", comment: "")
+                yueEngSwitch.accessibilityLabel = NSLocalizedString("Keyboard Mode Switch", comment: "")
+                pasteButton.accessibilityLabel = NSLocalizedString("Paste Clipboard content", comment: "")
+                emojiSwitch.accessibilityLabel = NSLocalizedString("Switch to Emoji layout", comment: "")
+                keyboardDown.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "")
+                downArrow.accessibilityLabel = NSLocalizedString("Expand Candidates board", comment: "")
         }
 }

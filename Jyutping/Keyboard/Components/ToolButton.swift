@@ -146,4 +146,11 @@ final class YueEngSwitch: UIButton {
         private let lightBack: UIColor = UIColor(displayP3Red: 201.0 / 255, green: 203.0 / 255, blue: 209.0 / 255, alpha: 1)
         private let darkBack: UIColor = UIColor(displayP3Red: 62.0 / 255, green: 62.0 / 255, blue: 66.0 / 255, alpha: 1)
         private let darkFore: UIColor = UIColor(displayP3Red: 115.0 / 255, green: 115.0 / 255, blue: 120.0 / 255, alpha: 1)
+
+        override var accessibilityValue: String? {
+                get {
+                        return switched ? NSLocalizedString("Current mode: English", comment: "") : NSLocalizedString("Current mode: Cantonese", comment: "")
+                }
+                set {}
+        }
 }

@@ -2,6 +2,8 @@
 English
 */
 
+// MARK: - Settings
+
 "Audio Feedback on Click" = "Audio Feedback on Click";
 "Haptic Feedback on Click" = "Haptic Feedback on Click";
 "Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
@@ -28,3 +30,16 @@ English
 "Subscript : jyut₆ ping₃"   = "Subscript    :  jyut₆ ping₃";
 
 "Clear User Lexicon" = "Clear User Lexicon";
+
+
+// MARK: - Accessibility
+
+// ToolBar
+"Keyboard Settings" = "Keyboard Settings";
+"Keyboard Mode Switch" = "Keyboard Mode Switch";
+"Paste Clipboard content" = "Paste Clipboard content";
+"Switch to Emoji layout" = "Switch to Emoji layout";
+"Dismiss keyboard" = "Dismiss keyboard";
+"Expand Candidates board" = "Expand Candidates board";
+"Current mode: English" = "Current mode: English";
+"Current mode: Cantonese" = "Current mode: Cantonese";

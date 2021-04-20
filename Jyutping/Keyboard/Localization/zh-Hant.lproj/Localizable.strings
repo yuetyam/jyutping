@@ -2,6 +2,8 @@
 Chinese, Traditional
 */
 
+// MARK: - Settings
+
 "Audio Feedback on Click" = "按鍵聲音反饋";
 "Haptic Feedback on Click" = "按鍵振動反饋";
 "Haptic Feedback requires Full Access" = "振動反饋需啟用「完整取用」";
@@ -28,3 +30,16 @@ Chinese, Traditional
 "Subscript : jyut₆ ping₃"   = "下標     :  jyut₆ ping₃";
 
 "Clear User Lexicon" = "清空用戶詞庫";
+
+
+// MARK: - Accessibility
+
+// ToolBar
+"Keyboard Settings" = "鍵盤設定";
+"Keyboard Mode Switch" = "切換鍵盤模式";
+"Paste Clipboard content" = "貼上";
+"Switch to Emoji layout" = "切換到 Emoji 佈局";
+"Dismiss keyboard" = "收起鍵盤";
+"Expand Candidates board" = "展開更多候選詞";
+"Current mode: English" = "當前模式：英語";
+"Current mode: Cantonese" = "當前模式：粵語";
