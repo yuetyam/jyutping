@@ -419,6 +419,9 @@ final class KeyView: UIView {
                 }
         }()
 
+
+        // MARK: - Accessibility
+
         private func improveAccessibility() {
                 switch event {
                 case .space:

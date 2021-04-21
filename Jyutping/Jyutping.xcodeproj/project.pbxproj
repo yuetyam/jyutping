@@ -367,10 +367,10 @@
 			isa = PBXGroup;
 			children = (
 				3759F49B262FC7E900266086 /* ToolBar.swift */,
-				3759F49C262FC7E900266086 /* CandidateBoard.swift */,
-				3759F49D262FC7E900266086 /* NumberPadButton.swift */,
 				3759F49E262FC7E900266086 /* ToolButton.swift */,
+				3759F49C262FC7E900266086 /* CandidateBoard.swift */,
 				3759F49F262FC7E900266086 /* CandidateCell.swift */,
+				3759F49D262FC7E900266086 /* NumberPadButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

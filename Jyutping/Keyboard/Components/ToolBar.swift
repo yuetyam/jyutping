@@ -13,7 +13,7 @@ final class ToolBar: UIView {
                 setupToolMode()
                 setupStackView()
                 downArrow.layer.addSublayer(splitLine)
-                setupAccessibility()
+                improveAccessibility()
         }
         required init?(coder: NSCoder) { fatalError("ToolBar.init(coder:) error") }
         override var intrinsicContentSize: CGSize { CGSize(width: 320, height: 60)}
@@ -131,7 +131,7 @@ final class ToolBar: UIView {
                  downArrow.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)]
         }
 
-        private func setupAccessibility() {
+        private func improveAccessibility() {
                 settingsButton.accessibilityLabel = NSLocalizedString("Keyboard Settings", comment: "")
                 yueEngSwitch.accessibilityLabel = NSLocalizedString("Keyboard Mode Switch", comment: "")
                 pasteButton.accessibilityLabel = NSLocalizedString("Paste Clipboard content", comment: "")
