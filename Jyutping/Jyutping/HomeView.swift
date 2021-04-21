@@ -93,7 +93,7 @@ private struct TonesInput: View {
         x = 2 陰上， xx = 5 陽上
         q = 3 陰去， qq = 6 陽去
         */
-        private var content: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: "")
+        private let content: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: "")
         var body: some View {
                 VStack {
                         HStack {
@@ -102,7 +102,7 @@ private struct TonesInput: View {
                         }
                         HStack {
                                 Text(content)
-                                        .font(.system(.body, design: .monospaced))
+                                        .font(.system(.callout, design: .monospaced))
                                         .lineSpacing(5)
                                         .fixedSize(horizontal: false, vertical: true)
                                 Spacer()
@@ -115,15 +115,11 @@ private struct TonesInput: View {
         }
 }
 private struct CangjieReverseLookup: View {
-        private let content: String = """
-                以 v 開始，再輸入倉頡碼即可
-                例如輸入 vdam 就會出「查」等
-                候選詞會帶顯示對應嘅粵拼
-                """
+        private let content: String = NSLocalizedString("以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼", comment: "")
         var body: some View {
                 VStack {
                         HStack {
-                                Text("用倉頡反查粵拼").font(.headline)
+                                Text("Lookup Jyutping with Cangjie").font(.headline)
                                 Spacer()
                         }
                         HStack {
@@ -140,15 +136,11 @@ private struct CangjieReverseLookup: View {
         }
 }
 private struct PinyinReverseLookup: View {
-        private let content: String = """
-                以 r 開始，再輸入普拼即可
-                例如輸入 rcha 就會出「查」等
-                候選詞會帶顯示對應嘅粵拼
-                """
+        private let content: String = NSLocalizedString("以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼", comment: "")
         var body: some View {
                 VStack {
                         HStack {
-                                Text("用普通話拼音反查粵拼").font(.headline)
+                                Text("Lookup Jyutping with Pinyin").font(.headline)
                                 Spacer()
                         }
                         HStack {
