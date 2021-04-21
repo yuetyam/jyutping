@@ -3,5 +3,6 @@
 *.ocd2 binary
 *.png binary
 *.jpg binary
+*.jpeg binary
 *.gif binary
 *.mp4 binary
