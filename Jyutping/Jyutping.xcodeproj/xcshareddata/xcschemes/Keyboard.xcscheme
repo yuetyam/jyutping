@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1200"
+   LastUpgradeVersion = "1250"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "37AE5BEB2354AAF8008A8E4B"
+               BlueprintIdentifier = "3759F44E262FBA0500266086"
                BuildableName = "Keyboard.appex"
                BlueprintName = "Keyboard"
                ReferencedContainer = "container:Jyutping.xcodeproj">
@@ -29,7 +29,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "37211D5323541EE3007E1D68"
+               BlueprintIdentifier = "3759F417262FB65C00266086"
                BuildableName = "Jyutping.app"
                BlueprintName = "Jyutping"
                ReferencedContainer = "container:Jyutping.xcodeproj">
@@ -61,7 +61,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "37211D5323541EE3007E1D68"
+            BlueprintIdentifier = "3759F417262FB65C00266086"
             BuildableName = "Jyutping.app"
             BlueprintName = "Jyutping"
             ReferencedContainer = "container:Jyutping.xcodeproj">
@@ -79,7 +79,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "37211D5323541EE3007E1D68"
+            BlueprintIdentifier = "3759F417262FB65C00266086"
             BuildableName = "Jyutping.app"
             BlueprintName = "Jyutping"
             ReferencedContainer = "container:Jyutping.xcodeproj">

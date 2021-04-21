@@ -1,80 +1,24 @@
-import SwiftUI
+import UIKit
 
-@UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate {}
+@main
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
-final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-        var window: UIWindow?
-        func scene(_ scene: UIScene,  willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-                if let windowScene = scene as? UIWindowScene {
-                        let window = UIWindow(windowScene: windowScene)
-                        window.rootViewController = UIHostingController(rootView: ContentView())
-                        self.window = window
-                        window.makeKeyAndVisible()
-                }
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+                // Override point for customization after application launch.
+                return true
         }
-}
 
-struct ContentView: View {
-        @State private var selection = 0
-        var body: some View {
-                TabView(selection: $selection){
-                        HomeView().tabItem {
-                                Image(systemName: "house")
-                                Text("Home")
-                        }.tag(0)
-                        
-                        JyutpingView().tabItem {
-                                Image(systemName: "doc.text.magnifyingglass")
-                                Text("Jyutping")
-                        }.tag(1)
-                        
-                        AboutView().tabItem {
-                                Image(systemName: "info.circle")
-                                Text("About")
-                        }.tag(2)
-                }
-        }
-}
+        // MARK: UISceneSession Lifecycle
 
-struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-                ContentView()
+        func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+                // Called when a new scene session is being created.
+                // Use this method to select a configuration to create the new scene with.
+                return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
         }
-}
 
-extension View {
-        func fillBackground() -> some View {
-                modifier(FillBackgroundColor())
-        }
-}
-private struct FillBackgroundColor: ViewModifier {
-        @Environment (\.colorScheme) var colorScheme: ColorScheme
-        func body(content: Content) -> some View {
-                let backgroundColor: Color = {
-                        switch colorScheme {
-                        case .light:
-                                return Color(UIColor.systemBackground)
-                        case .dark:
-                                return Color(UIColor.secondarySystemBackground)
-                        @unknown default:
-                                return Color(UIColor.systemBackground)
-                        }
-                }()
-                return content.background(RoundedRectangle(cornerRadius: 10).fill(backgroundColor))
-        }
-}
-
-struct GlobalBackgroundColor: View {
-        @Environment (\.colorScheme) var colorScheme: ColorScheme
-        var body: some View {
-                switch colorScheme {
-                case .light:
-                        return Color(UIColor.secondarySystemBackground)
-                case .dark:
-                        return Color(UIColor.systemBackground)
-                @unknown default:
-                        return Color(UIColor.secondarySystemBackground)
-                }
+        func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+                // Called when the user discards a scene session.
+                // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+                // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
         }
 }

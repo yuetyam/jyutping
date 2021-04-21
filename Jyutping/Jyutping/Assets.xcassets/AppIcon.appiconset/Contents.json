@@ -25,7 +25,7 @@
       "size" : "29x29"
     },
     {
-      "filename" : "jyutping80px.png",
+      "filename" : "jyutping80px-1.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -79,7 +79,7 @@
       "size" : "40x40"
     },
     {
-      "filename" : "jyutping80px-1.png",
+      "filename" : "jyutping80px.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
