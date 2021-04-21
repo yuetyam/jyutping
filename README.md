@@ -25,5 +25,6 @@ iOS 13.0+
 Xcode 12.5+
 
 ## Credits
-- [Rime Cantonese](https://github.com/rime/rime-cantonese)  
-- [OpenCC](https://github.com/BYVoid/OpenCC)  
+- [Rime Cantonese](https://github.com/rime/rime-cantonese)
+- [OpenCC](https://github.com/BYVoid/OpenCC)
+- [Source Han Sans](https://github.com/adobe-fonts/source-han-sans)
