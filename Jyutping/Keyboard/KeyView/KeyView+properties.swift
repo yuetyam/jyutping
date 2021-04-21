@@ -75,7 +75,7 @@ extension KeyView {
                 case .key(let seat):
                         return seat.primary.text
                 case .space:
-                        return controller.keyboardLayout.isEnglishMode ? "English" : "粵拼"
+                        return keyboardLayout.isEnglishMode ? "English" : "粵拼"
                 case .newLine:
                         return newLineKeyText
                 case .switchTo(let newLayout):
@@ -85,7 +85,7 @@ extension KeyView {
                         case .cantoneseSymbolic, .symbolic:
                                 return "#+="
                         case .cantonese:
-                                return "拼"
+                                return keyboardLayout == .emoji ? "返回" : "拼"
                         case .alphabetic:
                                 return "ABC"
                         default:
@@ -134,7 +134,7 @@ extension KeyView {
                 case .backspace:
                         return UIImage(systemName: "delete.left")
                 case .shift:
-                        switch controller.keyboardLayout {
+                        switch keyboardLayout {
                         case .cantonese(.uppercased), .alphabetic(.uppercased):
                                 return UIImage(systemName: "shift.fill")
                         case .cantonese(.capsLocked), .alphabetic(.capsLocked):

@@ -5,6 +5,7 @@ final class KeyView: UIView {
         let shape: UIView = UIView()
         let event: KeyboardEvent
         let controller: KeyboardViewController
+        let keyboardLayout: KeyboardLayout
         let isDarkAppearance: Bool
         let isPhonePortrait: Bool
         let isPhoneInterface: Bool
@@ -13,6 +14,7 @@ final class KeyView: UIView {
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
                 self.controller = controller
+                keyboardLayout = controller.keyboardLayout
                 isDarkAppearance = controller.isDarkAppearance
                 isPhonePortrait = controller.isPhonePortrait
                 isPhoneInterface = controller.isPhoneInterface
@@ -141,7 +143,7 @@ final class KeyView: UIView {
                         spaceTouchPoint = location
                         draggedOnSpace = true
                 case .backspace:
-                        guard controller.keyboardLayout.isCantoneseMode else { break }
+                        guard keyboardLayout.isCantoneseMode else { break }
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { break }
@@ -194,7 +196,7 @@ final class KeyView: UIView {
                         }
                         AudioFeedback.perform(.input)
                         controller.hapticFeedback?.impactOccurred()
-                        guard controller.keyboardLayout.isCantoneseMode else {
+                        guard keyboardLayout.isCantoneseMode else {
                                 controller.insert(text)
                                 break
                         }
@@ -435,7 +437,7 @@ final class KeyView: UIView {
                         isAccessibilityElement = true
                         accessibilityTraits = [.keyboardKey]
                         accessibilityLabel = NSLocalizedString("shift key", comment: "")
-                        switch controller.keyboardLayout {
+                        switch keyboardLayout {
                         case .cantonese(.capsLocked), .alphabetic(.capsLocked):
                                 accessibilityValue = NSLocalizedString("Caps Locked", comment: "")
                         case .cantonese(.uppercased), .alphabetic(.uppercased):

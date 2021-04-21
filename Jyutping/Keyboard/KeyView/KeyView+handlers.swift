@@ -45,16 +45,16 @@ extension KeyView {
                 case .key(let keySeat):
                         guard peekingText == nil else { return }
                         let text: String = keySeat.primary.text
-                        if controller.keyboardLayout.isCantoneseMode {
+                        if keyboardLayout.isCantoneseMode {
                                 controller.inputText += text
                         } else {
                                 controller.insert(text)
                         }
                         AudioFeedback.perform(.input)
-                        if controller.keyboardLayout == .alphabetic(.uppercased) {
+                        if keyboardLayout == .alphabetic(.uppercased) {
                                 controller.keyboardLayout = .alphabetic(.lowercased)
                         }
-                        if controller.keyboardLayout == .cantonese(.uppercased) {
+                        if keyboardLayout == .cantonese(.uppercased) {
                                 controller.keyboardLayout = .cantonese(.lowercased)
                         }
                 default:
@@ -62,15 +62,15 @@ extension KeyView {
                 }
         }
         func handleShadowKey(_ text: String) {
-                if controller.keyboardLayout.isCantoneseMode {
+                if keyboardLayout.isCantoneseMode {
                         controller.inputText += text
                 } else {
                         controller.insert(text)
                 }
-                if controller.keyboardLayout == .alphabetic(.uppercased) {
+                if keyboardLayout == .alphabetic(.uppercased) {
                         controller.keyboardLayout = .alphabetic(.lowercased)
                 }
-                if controller.keyboardLayout == .cantonese(.uppercased) {
+                if keyboardLayout == .cantonese(.uppercased) {
                         controller.keyboardLayout = .cantonese(.lowercased)
                 }
                 AudioFeedback.perform(.input)
@@ -92,12 +92,10 @@ extension KeyView {
                 controller.inputText = ""
         }
         func doubleTapShift() {
-                let isEnglishMode: Bool = controller.keyboardLayout.isEnglishMode
-                controller.keyboardLayout = isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
+                controller.keyboardLayout = keyboardLayout.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
         }
         func tapOnShift() {
-                let layout = controller.keyboardLayout
-                switch layout {
+                switch keyboardLayout {
                 case .cantonese(.lowercased):
                         controller.keyboardLayout = .cantonese(.uppercased)
                 case .cantonese(.uppercased),
@@ -120,17 +118,16 @@ extension KeyView {
                         return
                 }
                 controller.textDocumentProxy.deleteBackward()
-                let text: String = controller.keyboardLayout.isEnglishMode ? ". " : "。"
+                let text: String = keyboardLayout.isEnglishMode ? ". " : "。"
                 controller.insert(text)
                 AudioFeedback.perform(.input)
         }
         func tapOnSpace() {
                 guard !draggedOnSpace else { return }
-                let layout: KeyboardLayout = controller.keyboardLayout
-                switch layout {
+                switch keyboardLayout {
                 case .cantonese:
                         defer {
-                                if layout == .cantonese(.uppercased) {
+                                if keyboardLayout == .cantonese(.uppercased) {
                                         controller.keyboardLayout = .cantonese(.lowercased)
                                 }
                         }
