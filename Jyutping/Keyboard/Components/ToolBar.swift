@@ -1,15 +1,13 @@
 import UIKit
 
 final class ToolBar: UIView {
-        
+
         private let controller: KeyboardViewController
-        private let isPhoneInterface: Bool
         private let stackView: UIStackView =  UIStackView()
         private let toolBarHeight: CGFloat = 60
 
         init(controller: KeyboardViewController) {
                 self.controller = controller
-                self.isPhoneInterface = controller.isPhoneInterface
                 super.init(frame: .zero)
                 heightAnchor.constraint(equalToConstant: toolBarHeight).isActive = true
                 setupToolMode()
@@ -18,6 +16,7 @@ final class ToolBar: UIView {
                 setupAccessibility()
         }
         required init?(coder: NSCoder) { fatalError("ToolBar.init(coder:) error") }
+        override var intrinsicContentSize: CGSize { CGSize(width: 320, height: 60)}
 
         private func setupStackView() {
                 stackView.alignment = .center
@@ -57,21 +56,9 @@ final class ToolBar: UIView {
                 }
         }
 
-        private(set) lazy var settingsButton: ToolButton = {
-                let inset: CGFloat = isPhoneInterface ? 17 : 15
-                return ToolButton(imageName: "gear", topInset: inset, bottomInset: inset)
-        }()
-        private(set) lazy var yueEngSwitch: YueEngSwitch = {
-                let width: CGFloat = isPhoneInterface ? 88 : 108
-                return YueEngSwitch(width: width, height: toolBarHeight, isPhoneInterface: isPhoneInterface, isDarkAppearance: false, switched: false)
-        }()
-        private(set) lazy var pasteButton: ToolButton = {
-                if isPhoneInterface {
-                        return ToolButton(imageName: "doc.on.clipboard", topInset: 19, bottomInset: 18)
-                } else {
-                        return ToolButton(imageName: "doc.on.clipboard", topInset: 17, bottomInset: 16)
-                }
-        }()
+        let settingsButton: ToolButton = ToolButton(imageName: "gear", topInset: 17, bottomInset: 17)
+        let yueEngSwitch: YueEngSwitch = YueEngSwitch(width: 88, height: 60, isDarkAppearance: false, switched: false)
+        let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 19, bottomInset: 18)
         private(set) lazy var emojiSwitch: ToolButton = {
                 let name: String = {
                         if #available(iOSApplicationExtension 14, *) {
@@ -80,16 +67,9 @@ final class ToolBar: UIView {
                                 return "smiley"
                         }
                 }()
-                let inset: CGFloat = isPhoneInterface ? 17 : 15
-                return ToolButton(imageName: name, topInset: inset, bottomInset: inset)
+                return ToolButton(imageName: name, topInset: 17, bottomInset: 17)
         }()
-        private(set) lazy var keyboardDown: ToolButton = {
-                if isPhoneInterface {
-                        return ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 18, bottomInset: 19)
-                } else {
-                        return ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 16, bottomInset: 17)
-                }
-        }()
+        let keyboardDown: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 18, bottomInset: 19)
         let downArrow: ToolButton = ToolButton(imageName: "chevron.down", topInset: 18, bottomInset: 18)
         private let splitLine: CALayer = CALayer()
 
@@ -127,10 +107,9 @@ final class ToolBar: UIView {
         }
         private var toolBarItemsConstraints: [NSLayoutConstraint] {
                 let width: CGFloat = 50
-                let yueEngWidth: CGFloat = isPhoneInterface ? 88 : 108
                 return [settingsButton.widthAnchor.constraint(equalToConstant: width),
                         settingsButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
-                        yueEngSwitch.widthAnchor.constraint(equalToConstant: yueEngWidth),
+                        yueEngSwitch.widthAnchor.constraint(equalToConstant: 88),
                         yueEngSwitch.heightAnchor.constraint(equalToConstant: toolBarHeight),
                         pasteButton.widthAnchor.constraint(equalToConstant: width),
                         pasteButton.heightAnchor.constraint(equalToConstant: toolBarHeight),

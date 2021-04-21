@@ -29,14 +29,12 @@ final class YueEngSwitch: UIButton {
 
         private let width: CGFloat
         private let height: CGFloat
-        private let isPhoneInterface: Bool
         private var isDarkAppearance: Bool
         private(set) var switched: Bool
 
-        init(width: CGFloat, height: CGFloat, isPhoneInterface: Bool, isDarkAppearance: Bool, switched: Bool) {
+        init(width: CGFloat, height: CGFloat, isDarkAppearance: Bool, switched: Bool) {
                 self.width = width
                 self.height = height
-                self.isPhoneInterface = isPhoneInterface
                 self.isDarkAppearance = isDarkAppearance
                 self.switched = switched
                 super.init(frame: .zero)
@@ -72,7 +70,7 @@ final class YueEngSwitch: UIButton {
         private func setupBackView() {
                 addSubview(backView)
                 backView.translatesAutoresizingMaskIntoConstraints = false
-                let topBottomInset: CGFloat = isPhoneInterface ? (height / 4.0) : (height / 4.0 - 2)
+                let topBottomInset: CGFloat = height / 4.0
                 NSLayoutConstraint.activate([
                         backView.leadingAnchor.constraint(equalTo: leadingAnchor),
                         backView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -88,7 +86,7 @@ final class YueEngSwitch: UIButton {
                 backView.addSubview(leftForeView)
                 leftForeView.translatesAutoresizingMaskIntoConstraints = false
                 let halfWidth: CGFloat = width / 2.0
-                let topBottomInset: CGFloat = isPhoneInterface ? (height / 4.0) : (height / 4.0 - 2)
+                let topBottomInset: CGFloat = height / 4.0
                 NSLayoutConstraint.activate([
                         leftForeView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
                         leftForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
@@ -103,7 +101,7 @@ final class YueEngSwitch: UIButton {
                 backView.addSubview(rightForeView)
                 rightForeView.translatesAutoresizingMaskIntoConstraints = false
                 let halfWidth: CGFloat = width / 2.0
-                let topBottomInset: CGFloat = isPhoneInterface ? (height / 4.0) : (height / 4.0 - 2)
+                let topBottomInset: CGFloat = height / 4.0
                 NSLayoutConstraint.activate([
                         rightForeView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
                         rightForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
