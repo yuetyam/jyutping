@@ -1,0 +1,79 @@
+/*
+Chinese (Hong Kong)
+*/
+
+// System
+"Settings" = "設定";
+"General" = "一般";
+"Keyboards" = "鍵盤";
+"Add New Keyboards..." = "新增鍵盤 ··· ";
+"Edit" = "編輯";
+
+
+// Tab Bar
+"Home" = "首頁";
+"Keyboard" = "鍵盤";
+"Jyutping" = "粵拼";
+"Search" = "檢索";
+"About" = "關於";
+
+
+// Home
+"Type here to test keyboards" = "試下鍵盤";
+
+"How to enable this Keyboard" = "如何啓用鍵盤";
+"•  Jump to " = "•  跳轉至 ";
+"•  Tap " = "•  點選 ";
+"•  Turn on " = "•  開啓 ";
+"Allow Full Access" = "允許全權取用";
+
+"Go to " = "前往 ";
+
+"Tones Input" = "聲調輸入";
+"v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
+
+"Lookup Jyutping with Cangjie" = "用倉頡反查粵";
+"以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼";
+
+"Lookup Jyutping with Pinyin" = "用普通話拼音反查粵拼";
+"以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼";
+
+"Period (Full Stop) Shortcut" = "快捷輸入句號";
+"Double tapping the space bar will insert a period followed by a space" = "雙擊空格鍵 (space)\n快捷輸入句號「。」";
+
+
+// Search
+"Search the Jyutping of Cantonese word" = "鍵入粵語字詞檢索其粵拼";
+"Search for Jyutping" = "鍵入粵語字詞檢索其粵拼";
+"No results." = "無結果";
+"Common Cantonese words only." = "只可檢索常見粵語字詞";
+
+"Jyutping Initials" = "粵拼聲母表";
+"Jyutping Finals" = "粵拼韻母表";
+"Jyutping Tones" = "粵拼聲調表";
+
+"Search on other places (websites)" = "其它可供檢索嘅網站";
+"Jyutping Resources" = "粵拼資源網站";
+"Jyutping - LSHK" = "粵拼 - LSHK";
+"Learn Jyutping" = "學粵拼";
+
+
+// About
+"Version" = "版本";
+"Copied" = "已拷貝";
+
+"Source Code" = "源碼";
+"Acknowledgements" = "致謝";
+"Privacy Policy" = "私隱政策";
+
+"Join Telegram Group" = "加入 Telegram 羣組";
+"Follow us on Twitter" = "跟隨 Twitter 推特";
+"GitHub Issues" = "GitHub Issues";
+
+"Email Feedback" = "電郵反饋";
+"Unable to compose mail" = "無法編寫郵件";
+"Mail Unavailable" = "電郵不可用";
+"OK" = "好";
+
+"Review in App Store" = "前往 App Store 點評";
+"Share this App" = "分享本應用程式";

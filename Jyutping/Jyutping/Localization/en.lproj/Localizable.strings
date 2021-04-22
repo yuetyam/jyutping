@@ -1,0 +1,79 @@
+/*
+English
+*/
+
+// System
+"Settings" = "Settings";
+"General" = "General";
+"Keyboards" = "Keyboards";
+"Add New Keyboards..." = "Add New Keyboards...";
+"Edit" = "Edit";
+
+
+// Tab Bar
+"Home" = "Home";
+"Keyboard" = "Keyboard";
+"Jyutping" = "Jyutping";
+"Search" = "Search";
+"About" = "About";
+
+
+// Home
+"Type here to test keyboards" = "Type here to test keyboards";
+
+"How to enable this Keyboard" = "How to enable this Keyboard";
+"•  Jump to " = "•  Jump to ";
+"•  Tap " = "•  Tap ";
+"•  Turn on " = "•  Turn on ";
+"Allow Full Access" = "Allow Full Access";
+
+"Go to " = "Go to ";
+
+"Tones Input" = "Tones Input （聲調輸入）";
+"v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
+
+"Lookup Jyutping with Cangjie" = "Lookup Jyutping with Cangjie";
+"以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼";
+
+"Lookup Jyutping with Pinyin" = "Lookup Jyutping with Pinyin";
+"以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼";
+
+"Period (Full Stop) Shortcut" = "Period (Full Stop) Shortcut";
+"Double tapping the space bar will insert a period followed by a space" = "Double tapping the space bar will insert a period followed by a space";
+
+
+// Search
+"Search the Jyutping of Cantonese word" = "Search the Jyutping of Cantonese word";
+"Search for Jyutping" = "Search for Jyutping";
+"No results." = "No results.";
+"Common Cantonese words only." = "Common Cantonese words only.";
+
+"Jyutping Initials" = "Jyutping Initials";
+"Jyutping Finals" = "Jyutping Finals";
+"Jyutping Tones" = "Jyutping Tones";
+
+"Search on other places (websites)" = "Search on other places (websites)";
+"Jyutping Resources" = "Jyutping Resources";
+"Jyutping - LSHK" = "Jyutping - LSHK";
+"Learn Jyutping" = "Learn Jyutping";
+
+
+// About
+"Version" = "Version";
+"Copied" = "Copied";
+
+"Source Code" = "Source Code";
+"Acknowledgements" = "Acknowledgements";
+"Privacy Policy" = "Privacy Policy";
+
+"Join Telegram Group" = "Join Telegram Group";
+"Follow us on Twitter" = "Follow us on Twitter";
+"GitHub Issues" = "GitHub Issues";
+
+"Email Feedback" = "Email Feedback";
+"Unable to compose mail" = "Unable to compose mail";
+"Mail Unavailable" = "Mail Unavailable";
+"OK" = "OK";
+
+"Review in App Store" = "Review in App Store";
+"Share this App" = "Share this App";

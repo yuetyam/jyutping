@@ -1,0 +1,61 @@
+/*
+English
+*/
+
+// MARK: - Settings
+
+"Audio Feedback on Click" = "Audio Feedback on Click";
+"Haptic Feedback on Click" = "Haptic Feedback on Click";
+"Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
+
+"Characters" = "Characters";
+"Traditional" = "Traditional";
+"Traditional, Hong Kong" = "Traditional, Hong Kong";
+"Traditional, Taiwan" = "Traditional, Taiwan";
+"Simplified" = "Simplified";
+
+"Keyboard Layout" = "Keyboard Layout";
+"QWERTY" = "QWERTY";
+"SaamPing" = "SaamPing (三拼)";
+
+"Jyutping Display" = "Jyutping Display";
+"Above Candidates" = "Above Candidates";
+"Below Candidates" = "Below Candidates";
+"No Jyutpings" = "None";
+
+"Jyutping Tones Display" = "Jyutping Tones Display";
+"Normal : jyut6 ping3"      = "Normal         :  jyut6 ping3";
+"No Tones : jyut ping"      = "No Tones     :  jyut ping";
+"Superscript : jyut⁶ ping³" = "Superscript :  jyut⁶ ping³";
+"Subscript : jyut₆ ping₃"   = "Subscript    :  jyut₆ ping₃";
+
+"Clear User Lexicon" = "Clear User Lexicon";
+
+
+// MARK: - Accessibility
+
+// ToolBar
+"Keyboard Settings" = "Keyboard Settings";
+"Keyboard Mode Switch" = "Keyboard Mode Switch";
+"Paste Clipboard content" = "Paste Clipboard content";
+"Switch to Emoji layout" = "Switch to Emoji layout";
+"Dismiss keyboard" = "Dismiss keyboard";
+"Expand Candidates board" = "Expand Candidates board";
+"Current mode: English" = "Current mode: English";
+"Current mode: Cantonese" = "Current mode: Cantonese";
+
+// Keyboard Keys
+"space bar" = "space bar";
+"return key" = "return";
+"backspace key" = "delete";
+"shift key" = "shift";
+"Caps Locked" = "Caps Locked";
+"Uppercased" = "Uppercased";
+"Lowercased" = "Lowercased";
+"Switch to Cantonese layout" = "Cantonese";
+"Switch to English layout" = "English";
+"Switch to Numbers layout" = "Numbers";
+"Switch to Symbols layout" = "Symbols";
+
+// Settings page
+"Switch back to Keyboard" = "Back";
