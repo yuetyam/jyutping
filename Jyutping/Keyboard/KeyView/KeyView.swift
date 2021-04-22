@@ -46,25 +46,19 @@ final class KeyView: UIView {
 
         // MARK: - Touches
 
-        private(set) lazy var backspaceTimer: GCDTimer? = GCDTimer(interval: .milliseconds(100)) { [weak self] _ in
-                if self != nil {
-                        if self!.isInteracting {
-                                self!.performBackspace()
-                        }
-                }
+        var backspaceTimer: Timer?
+        var repeatingBackspaceTimer: Timer?
+        private func invalidateTimers() {
+                backspaceTimer?.invalidate()
+                repeatingBackspaceTimer?.invalidate()
         }
-        private(set) lazy var isInteracting: Bool = false {
-                didSet {
-                        if !isInteracting {
-                                backspaceTimer?.suspend()
-                        }
-                }
-        }
+        private(set) lazy var isInteracting: Bool = false
         private(set) lazy var peekingText: String? = nil
         private lazy var timePoints: (first: Bool, second: Bool) = (false, false)
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
                 controller.hapticFeedback?.impactOccurred()
+                invalidateTimers()
                 isInteracting = true
                 peekingText = nil
                 switch self.event {
@@ -154,6 +148,7 @@ final class KeyView: UIView {
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesEnded(touches, with: event)
+                invalidateTimers()
                 isInteracting = false
                 switch self.event {
                 case .shift:
@@ -228,6 +223,7 @@ final class KeyView: UIView {
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesCancelled(touches, with: event)
+                invalidateTimers()
                 isInteracting = false
                 peekingText = nil
                 switch self.event {

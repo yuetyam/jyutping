@@ -179,21 +179,15 @@ final class BackspaceButton: UIView {
         required init?(coder: NSCoder) { fatalError("BackspaceButton.init(coder:) error") }
         override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
 
-        private lazy var backspaceTimer: GCDTimer? = GCDTimer(interval: .milliseconds(100)) { [weak self] _ in
-                if self != nil {
-                        if self!.isInteracting {
-                                self!.performBackspace()
-                        }
-                }
+        var backspaceTimer: Timer?
+        var repeatingBackspaceTimer: Timer?
+        private func invalidateTimers() {
+                backspaceTimer?.invalidate()
+                repeatingBackspaceTimer?.invalidate()
         }
-        private lazy var isInteracting: Bool = false {
-                didSet {
-                        if !isInteracting {
-                                backspaceTimer?.suspend()
-                        }
-                }
-        }
+        private lazy var isInteracting: Bool = false
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+                invalidateTimers()
                 isInteracting = true
                 DispatchQueue.main.async { [weak self] in
                         if self != nil {
@@ -204,10 +198,12 @@ final class BackspaceButton: UIView {
                 handleBackspace()
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+                invalidateTimers()
                 isInteracting = false
                 keyImageView.image = UIImage(systemName: "delete.left")
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+                invalidateTimers()
                 isInteracting = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
                         if self != nil {
@@ -217,15 +213,11 @@ final class BackspaceButton: UIView {
         }
         private func handleBackspace() {
                 performBackspace()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                        if self != nil {
-                                if self!.isInteracting {
-                                        self!.backspaceTimer?.start()
-                                }
-                        }
+                backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
+                        self.repeatingBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
                 }
         }
-        private func performBackspace() {
+        @objc private func performBackspace() {
                 controller.textDocumentProxy.deleteBackward()
                 AudioFeedback.perform(.delete)
         }

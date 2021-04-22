@@ -181,7 +181,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         private lazy var syllablesSchemes: [[String]] = []
 
-        /// some dumb apps just can't be compatible with `setMarkedText() & insertText()`
+        /// some dumb apps just can't be compatible with `textDocumentProxy.setMarkedText() & textDocumentProxy.insertText()`
         /// - Parameter text: text to output
         func output(_ text: String) {
                 shouldMarkInput = false
@@ -210,7 +210,7 @@ final class KeyboardViewController: UIInputViewController {
                 textDocumentProxy.setMarkedText(markedText, selectedRange: range)
         }
 
-        /// Calling `textDocumentProxy.insertText(_)`
+        /// Calling `textDocumentProxy.insertText(_:)`
         /// - Parameter text: text to insert
         func insert(_ text: String) {
                 textDocumentProxy.insertText(text)

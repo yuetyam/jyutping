@@ -12,22 +12,18 @@ extension KeyView {
         }
         func handleBackspace() {
                 performBackspace()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                        if self != nil {
-                                if self!.isInteracting {
-                                        self!.backspaceTimer?.start()
-                                }
-                        }
+                backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
+                        self.repeatingBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
                 }
         }
-        func performBackspace() {
+        @objc private func performBackspace() {
                 if controller.inputText.isEmpty {
                         controller.textDocumentProxy.deleteBackward()
                 } else {
                         controller.inputText = String(controller.processingText.dropLast())
                         controller.candidateSequence = []
                 }
-                AudioFeedback.play(for: .backspace)
+                AudioFeedback.perform(.delete)
         }
         func handleTap() {
                 switch event {
