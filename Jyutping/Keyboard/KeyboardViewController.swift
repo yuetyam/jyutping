@@ -361,7 +361,7 @@ final class KeyboardViewController: UIInputViewController {
                 arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
         }
 
-        /// 候選詞字形
+        /// 候選詞字符標準
         ///
         /// 0: The key "logogram" doesn‘t exist.
         ///
