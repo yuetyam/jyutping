@@ -3,7 +3,7 @@ import OpenCCLite
 
 final class KeyboardViewController: UIInputViewController {
 
-        // MARK: - SubViews
+        // MARK: - Subviews
 
         private(set) lazy var toolBar: ToolBar = ToolBar(controller: self)
         private(set) lazy var settingsView: UIView = UIView()
@@ -98,7 +98,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var didKeyboardEstablished: Bool = false
         private lazy var needsDifferentKeyboard: Bool = false
         private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
-        var askedKeyboardLayout: KeyboardLayout {
+        private var askedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
                         return traitCollection.userInterfaceIdiom == .pad ? .numeric : .numberPad
@@ -329,15 +329,17 @@ final class KeyboardViewController: UIInputViewController {
         // MARK: - Properties
 
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-        private(set) lazy var isPhonePortrait: Bool = (traitCollection.userInterfaceIdiom == .phone) && (traitCollection.verticalSizeClass == .regular)
-        private(set) lazy var isPhoneInterface: Bool = (traitCollection.userInterfaceIdiom == .phone) || (traitCollection.horizontalSizeClass == .compact)
+        private(set) lazy var isPhonePortrait: Bool = traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular
+        private(set) lazy var isPhoneInterface: Bool = traitCollection.userInterfaceIdiom == .phone || traitCollection.horizontalSizeClass == .compact
         private(set) lazy var isPadLandscape: Bool = UIScreen.main.bounds.width > UIScreen.main.bounds.height
         private func updateProperties() {
+                let isPhone: Bool = traitCollection.userInterfaceIdiom == .phone
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-                isPhonePortrait = (traitCollection.userInterfaceIdiom == .phone) && (traitCollection.verticalSizeClass == .regular)
-                isPhoneInterface = (traitCollection.userInterfaceIdiom == .phone) || (traitCollection.horizontalSizeClass == .compact)
+                isPhonePortrait = isPhone && traitCollection.verticalSizeClass == .regular
+                isPhoneInterface = isPhone || traitCollection.horizontalSizeClass == .compact
                 isPadLandscape = UIScreen.main.bounds.width > UIScreen.main.bounds.height
         }
+
 
         // MARK: - Settings
 

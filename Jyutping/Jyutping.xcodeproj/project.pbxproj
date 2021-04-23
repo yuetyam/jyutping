@@ -312,8 +312,8 @@
 			isa = PBXGroup;
 			children = (
 				3759F4A0262FC7E900266086 /* KeyboardViewController.swift */,
-				3759F4A8262FC7E900266086 /* KeyboardViewController+CollectionView.swift */,
 				3759F4B9262FC7EA00266086 /* KeyboardViewController+keyboard.swift */,
+				3759F4A8262FC7E900266086 /* KeyboardViewController+CollectionView.swift */,
 				3759F4B8262FC7EA00266086 /* KeyboardViewController+TableView.swift */,
 				3759F4A7262FC7E900266086 /* KeyboardEvent.swift */,
 				3759F4B2262FC7E900266086 /* AudioFeedback.swift */,

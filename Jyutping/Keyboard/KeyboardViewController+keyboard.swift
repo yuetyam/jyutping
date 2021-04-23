@@ -136,24 +136,24 @@ extension KeyboardViewController {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
                 let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 120
-                let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 6, bottomInset: 6, leftInset: 15, rightInset: 55)
-                settingsView.addSubview(upArrowButton)
-                upArrowButton.translatesAutoresizingMaskIntoConstraints = false
+                let upArrow: ToolButton = ToolButton(imageName: "chevron.up", topInset: 6, bottomInset: 6, leftInset: 15, rightInset: 55)
+                settingsView.addSubview(upArrow)
+                upArrow.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                         // FIXME: - Unable to simultaneously satisfy constraints
                         settingsView.heightAnchor.constraint(equalToConstant: extended),
-                        upArrowButton.topAnchor.constraint(equalTo: settingsView.topAnchor),
-                        upArrowButton.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
-                        upArrowButton.widthAnchor.constraint(equalToConstant: 100),
-                        upArrowButton.heightAnchor.constraint(equalToConstant: 44)
+                        upArrow.topAnchor.constraint(equalTo: settingsView.topAnchor),
+                        upArrow.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
+                        upArrow.widthAnchor.constraint(equalToConstant: 100),
+                        upArrow.heightAnchor.constraint(equalToConstant: 44)
                 ])
-                upArrowButton.tintColor = isDarkAppearance ? .white : .black
-                upArrowButton.addTarget(self, action: #selector(dismissSettingsView), for: .touchUpInside)
-                upArrowButton.accessibilityLabel = NSLocalizedString("Switch back to Keyboard", comment: "")
+                upArrow.tintColor = isDarkAppearance ? .white : .black
+                upArrow.addTarget(self, action: #selector(dismissSettingsView), for: .touchUpInside)
+                upArrow.accessibilityLabel = NSLocalizedString("Switch back to Keyboard", comment: "")
                 settingsView.addSubview(settingsTableView)
                 settingsTableView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(
-                        [settingsTableView.topAnchor.constraint(equalTo: upArrowButton.bottomAnchor),
+                        [settingsTableView.topAnchor.constraint(equalTo: upArrow.bottomAnchor),
                          settingsTableView.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
                          settingsTableView.trailingAnchor.constraint(equalTo: settingsView.trailingAnchor),
                          settingsTableView.bottomAnchor.constraint(equalTo: settingsView.bottomAnchor)]
@@ -161,7 +161,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
-                keyboardLayout = askedKeyboardLayout
+                keyboardLayout = .cantonese(.lowercased)
         }
 
 
