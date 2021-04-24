@@ -389,8 +389,8 @@ final class KeyboardViewController: UIInputViewController {
                                 return nil
                         }
                 }()
-                guard conversion != nil else { return nil }
-                let converter: Converter? = try? Converter(conversion!)
+                guard let conversion = conversion else { return nil }
+                let converter: Converter? = try? Converter(conversion)
                 return converter
         }()
         func updateConverter() {
@@ -407,9 +407,8 @@ final class KeyboardViewController: UIInputViewController {
                                 return nil
                         }
                 }()
-                guard conversion != nil else { converter = nil; return }
-                let converter: Converter? = try? Converter(conversion!)
-                self.converter = converter
+                guard let conversion = conversion else { converter = nil; return }
+                converter = try? Converter(conversion)
         }
 
         /// 粵拼顯示
