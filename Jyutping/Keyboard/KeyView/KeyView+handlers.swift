@@ -47,11 +47,13 @@ extension KeyView {
                                 controller.insert(text)
                         }
                         AudioFeedback.perform(.input)
-                        if layout == .alphabetic(.uppercased) {
+                        switch layout {
+                        case .alphabetic(.uppercased):
                                 controller.keyboardLayout = .alphabetic(.lowercased)
-                        }
-                        if layout == .cantonese(.uppercased) {
+                        case .cantonese(.uppercased):
                                 controller.keyboardLayout = .cantonese(.lowercased)
+                        default:
+                                break
                         }
                 default:
                         break
