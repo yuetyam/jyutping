@@ -106,7 +106,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         guard let cell: EmojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCell else { return }
                         let emoji: String = cell.emojiLabel.text ?? "😀"
                         insert(emoji)
-                        hapticFeedback?.impactOccurred()
+                        triggerHapticFeedback()
                         updateFrequentEmojis(latest: emoji)
                         return
                 }

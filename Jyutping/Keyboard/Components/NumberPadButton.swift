@@ -25,7 +25,7 @@ final class NumberButton: UIView {
                 controller.insert(String(digit))
                 shape.backgroundColor = controller.isDarkAppearance ? .black : .lightActionButton
                 AudioFeedback.perform(.input)
-                controller.hapticFeedback?.impactOccurred()
+                controller.triggerHapticFeedback()
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
@@ -145,7 +145,7 @@ final class PointButton: UIButton {
         @objc private func insert() {
                 controller.insert(".")
                 AudioFeedback.perform(.input)
-                controller.hapticFeedback?.impactOccurred()
+                controller.triggerHapticFeedback()
         }
         private func setupTextLabel() {
                 let label = UILabel()
@@ -194,7 +194,7 @@ final class BackspaceButton: UIView {
                                 self!.keyImageView.image = UIImage(systemName: "delete.left.fill")
                         }
                 }
-                controller.hapticFeedback?.impactOccurred()
+                controller.triggerHapticFeedback()
                 handleBackspace()
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

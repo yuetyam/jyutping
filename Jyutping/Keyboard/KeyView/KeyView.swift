@@ -57,7 +57,7 @@ final class KeyView: UIView {
         private lazy var timePoints: (first: Bool, second: Bool) = (false, false)
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
-                controller.hapticFeedback?.impactOccurred()
+                controller.triggerHapticFeedback()
                 invalidateTimers()
                 isInteracting = true
                 peekingText = nil
@@ -190,7 +190,7 @@ final class KeyView: UIView {
                                 break
                         }
                         AudioFeedback.perform(.input)
-                        controller.hapticFeedback?.impactOccurred()
+                        controller.triggerHapticFeedback()
                         guard layout.isCantoneseMode else {
                                 controller.insert(text)
                                 break
@@ -219,7 +219,7 @@ final class KeyView: UIView {
                 default:
                         break
                 }
-                controller.hapticFeedback?.prepare()
+                controller.prepareHapticFeedback()
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesCancelled(touches, with: event)

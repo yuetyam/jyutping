@@ -188,7 +188,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        hapticFeedback?.impactOccurred()
+                        triggerHapticFeedback()
                         updateConverter()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
@@ -203,7 +203,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        hapticFeedback?.impactOccurred()
+                        triggerHapticFeedback()
                         updateArrangement()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
@@ -220,7 +220,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        hapticFeedback?.impactOccurred()
+                        triggerHapticFeedback()
                         updateJyutpingDisplay()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
@@ -239,7 +239,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         default:
                                 break
                         }
-                        hapticFeedback?.impactOccurred()
+                        triggerHapticFeedback()
                         updateToneStyle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
@@ -279,12 +279,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         @objc private func handleHapticFeedbackSwitch() {
                 if isHapticFeedbackOn {
                         UserDefaults.standard.set(false, forKey: "haptic_feedback")
-                        hapticFeedback = nil
                 } else {
                         UserDefaults.standard.set(true, forKey: "haptic_feedback")
-                        if hapticFeedback == nil {
-                                hapticFeedback = UIImpactFeedbackGenerator(style: .light)
-                        }
                 }
                 updateHapticFeedbackStatus()
         }

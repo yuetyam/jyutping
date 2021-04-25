@@ -343,10 +343,28 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Settings
 
-        var hapticFeedback: UIImpactFeedbackGenerator?
-        private(set) lazy var isHapticFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "haptic_feedback")
+        private var hapticFeedback: UIImpactFeedbackGenerator?
+        func triggerHapticFeedback() {
+                hapticFeedback?.impactOccurred()
+        }
+        func prepareHapticFeedback() {
+                hapticFeedback?.prepare()
+        }
+        private(set) lazy var isHapticFeedbackOn: Bool = hasFullAccess && UserDefaults.standard.bool(forKey: "haptic_feedback") {
+                didSet {
+                        if isHapticFeedbackOn {
+                                if hapticFeedback == nil {
+                                        hapticFeedback = UIImpactFeedbackGenerator(style: .light)
+                                }
+                        } else {
+                                if hapticFeedback != nil {
+                                        hapticFeedback = nil
+                                }
+                        }
+                }
+        }
         func updateHapticFeedbackStatus() {
-                isHapticFeedbackOn = UserDefaults.standard.bool(forKey: "haptic_feedback")
+                isHapticFeedbackOn = hasFullAccess && UserDefaults.standard.bool(forKey: "haptic_feedback")
         }
 
         /// 鍵盤佈局
