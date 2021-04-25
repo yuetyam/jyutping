@@ -71,12 +71,12 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 case 0:
                                         cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: "")
                                         cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
-                                        cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .allTouchEvents)
+                                        cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .valueChanged)
                                 case 1:
                                         cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: "")
                                         if hasFullAccess {
                                                 cell.switchView.isOn = isHapticFeedbackOn
-                                                cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .allTouchEvents)
+                                                cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .valueChanged)
                                         } else {
                                                 cell.switchView.isOn = false
                                                 cell.switchView.isEnabled = false
@@ -84,7 +84,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                                 cell.isUserInteractionEnabled = false
                                         }
                                 default:
-                                        cell.textLabel?.text = "__error__"
+                                        cell.textLabel?.text = "_error"
                                 }
                                 return cell
                         }
@@ -104,7 +104,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                         cell.textLabel?.text = NSLocalizedString("Simplified", comment: "")
                                         cell.accessoryType = logogram == 4 ? .checkmark : .none
                                 default:
-                                        cell.textLabel?.text = "__error__"
+                                        cell.textLabel?.text = "_error"
                                 }
                                 return cell
                         }
@@ -118,7 +118,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                         cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
                                         cell.accessoryType = arrangement == 2 ? .checkmark : .none
                                 default:
-                                        cell.textLabel?.text = "__error__"
+                                        cell.textLabel?.text = "_error"
                                 }
                                 return cell
                         }
@@ -135,7 +135,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                         cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: "")
                                         cell.accessoryType = jyutpingDisplay == 3 ? .checkmark : .none
                                 default:
-                                        cell.textLabel?.text = "__error__"
+                                        cell.textLabel?.text = "_error"
                                 }
                                 return cell
                         }
@@ -155,7 +155,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                         cell.textLabel?.text = NSLocalizedString("Subscript : jyut₆ ping₃", comment: "")
                                         cell.accessoryType = (toneStyle == 4) ? .checkmark : .none
                                 default:
-                                        cell.textLabel?.text = "__error__"
+                                        cell.textLabel?.text = "_error"
                                 }
                                 return cell
                         }
