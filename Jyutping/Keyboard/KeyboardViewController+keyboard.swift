@@ -168,14 +168,14 @@ extension KeyboardViewController {
         // MARK: - Make Keys
 
         private func makeKeysRows(for eventsRows: [[KeyboardEvent]]) -> [UIStackView] {
-                let keysRows: [UIStackView] = eventsRows.map { [unowned self] in makeRow(for: $0) }
+                let keysRows: [UIStackView] = eventsRows.map { [unowned self] in makeRow(for: $0, controller: self) }
                 return keysRows
         }
-        private func makeRow(for events: [KeyboardEvent]) -> UIStackView {
+        private func makeRow(for events: [KeyboardEvent], controller: KeyboardViewController) -> UIStackView {
                 let stackView: UIStackView = UIStackView()
                 stackView.axis = .horizontal
                 stackView.distribution = .fillProportionally
-                let keys: [KeyView] = events.map { [unowned self] in makeKey(for: $0, controller: self) }
+                let keys: [KeyView] = events.map { makeKey(for: $0, controller: controller) }
                 stackView.addMultipleArrangedSubviews(keys)
                 return stackView
         }
@@ -183,7 +183,6 @@ extension KeyboardViewController {
                 let key: KeyView = KeyView(event: event, controller: controller)
                 if event == .switchInputMethod {
                         let virtual = UIButton()
-                        virtual.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
                         key.addSubview(virtual)
                         virtual.translatesAutoresizingMaskIntoConstraints = false
                         NSLayoutConstraint.activate([
@@ -192,6 +191,7 @@ extension KeyboardViewController {
                                 virtual.leadingAnchor.constraint(equalTo: key.leadingAnchor),
                                 virtual.trailingAnchor.constraint(equalTo: key.trailingAnchor)
                         ])
+                        virtual.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
                 }
                 return key
         }
