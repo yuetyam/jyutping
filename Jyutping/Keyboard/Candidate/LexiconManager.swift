@@ -39,7 +39,7 @@ struct LexiconManager {
                 sqlite3_finalize(createTableStatement)
         }
         
-        func handle(candidate: Candidate) {
+        func handle(_ candidate: Candidate) {
                 let id: Int64 = Int64((candidate.input + candidate.lexiconText + candidate.jyutping).hash)
                 if let existingFrequency: Int64 = find(by: id) {
                         update(id: id, frequency: existingFrequency + 1)

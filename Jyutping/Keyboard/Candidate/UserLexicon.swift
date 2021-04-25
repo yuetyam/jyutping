@@ -34,7 +34,7 @@ struct UserLexicon {
 
         // MARK: - Handle Candidate
 
-        func handle(candidate: Candidate) {
+        func handle(_ candidate: Candidate) {
                 let id: Int64 = Int64((candidate.lexiconText + candidate.jyutping).hash)
                 if let frequency: Int64 = find(by: id) {
                         update(id: id, frequency: frequency + 1)

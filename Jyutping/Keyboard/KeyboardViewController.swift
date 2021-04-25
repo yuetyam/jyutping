@@ -220,12 +220,12 @@ final class KeyboardViewController: UIInputViewController {
         // MARK: - Engine
 
         private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInteractive)
-        private lazy var lexiconManager = UserLexicon()
+        private lazy var userLexicon: UserLexicon = UserLexicon()
         private lazy var engine: Engine = Engine()
         private func suggest() {
-                let userLexicon: [Candidate] = lexiconManager.suggest(for: processingText)
+                let lexiconCandidates: [Candidate] = userLexicon.suggest(for: processingText)
                 let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: syllablesSchemes)
-                let combined: [Candidate] = userLexicon + engineCandidates
+                let combined: [Candidate] = lexiconCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
                 } else if converter == nil {
@@ -247,12 +247,12 @@ final class KeyboardViewController: UIInputViewController {
         lazy var candidateSequence: [Candidate] = []
         func handleLexicon(_ candidate: Candidate) {
                 imeQueue.async { [unowned self] in
-                        self.lexiconManager.handle(candidate: candidate)
+                        self.userLexicon.handle(candidate)
                 }
         }
         func clearUserLexicon() {
                 imeQueue.async { [unowned self] in
-                        self.lexiconManager.deleteAll()
+                        self.userLexicon.deleteAll()
                 }
         }
 
