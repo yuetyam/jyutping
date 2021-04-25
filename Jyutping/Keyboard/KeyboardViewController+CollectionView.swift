@@ -1,7 +1,7 @@
 import UIKit
 
 extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-        
+
         func numberOfSections(in collectionView: UICollectionView) -> Int {
                 if collectionView == candidateCollectionView {
                         return 1
@@ -9,7 +9,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return 9
                 }
         }
-        
+
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
                 if collectionView == candidateCollectionView {
                         return candidates.count
@@ -70,7 +70,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         cell.footnoteLabel.text = candidates[indexPath.row].jyutping
                 }
 
-                // REASON: In some apps (like QQ), may not showing the correct default colors
+                // REASON: In some apps (like QQ), the cell may not showing the correct default colors
                 let textColor: UIColor = isDarkAppearance ? .white : .black
                 cell.textLabel.textColor = textColor
                 cell.footnoteLabel.textColor = jyutpingDisplay == 3 ? .clear : textColor
@@ -100,7 +100,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
                 return combined
         }
-        
+
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 guard collectionView == candidateCollectionView else {
                         guard let cell: EmojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCell else { return }
@@ -185,15 +185,15 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                 }
         }
-        
+
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
                 return 0
         }
-        
+
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
                 return 0
         }
-        
+
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
                 if collectionView == self.emojiCollectionView {
                         return UIEdgeInsets(top: 4, left: 8, bottom: 0, right: 8)
@@ -208,7 +208,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 let medium: Int = visibleCount / 2
                 let mediumCell = emojiCollectionView.visibleCells[medium]
                 guard let indexPath = emojiCollectionView.indexPath(for: mediumCell) else { return }
-                _ = emojiBoard.indicatorsStackView.arrangedSubviews.map({ $0.tintColor = .systemGray })
+                _ = emojiBoard.indicatorsStackView.arrangedSubviews.map { $0.tintColor = .systemGray }
                 emojiBoard.indicatorsStackView.arrangedSubviews[indexPath.section].tintColor = isDarkAppearance ? .white : .black
         }
 }

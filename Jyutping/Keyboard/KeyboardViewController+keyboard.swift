@@ -89,7 +89,7 @@ extension KeyboardViewController {
                 emojiBoard.globeKey.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
                 _ = emojiBoard.indicatorsStackView.arrangedSubviews.map({ ($0 as? Indicator)?.addTarget(self, action: #selector(handleIndicator(_:)), for: .touchDown) })
         }
-        @objc func handleIndicator(_ sender: Indicator) {
+        @objc private func handleIndicator(_ sender: Indicator) {
                 triggerHapticFeedback()
                 AudioFeedback.perform(.modify)
                 let indexPath: IndexPath = IndexPath(row: 15, section: sender.index)
@@ -173,7 +173,6 @@ extension KeyboardViewController {
         }
         private func makeRow(for events: [KeyboardEvent], controller: KeyboardViewController) -> UIStackView {
                 let stackView: UIStackView = UIStackView()
-                stackView.axis = .horizontal
                 stackView.distribution = .fillProportionally
                 let keys: [KeyView] = events.map { makeKey(for: $0, controller: controller) }
                 stackView.addMultipleArrangedSubviews(keys)

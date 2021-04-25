@@ -1,11 +1,11 @@
 import UIKit
 
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
-        
+
         func numberOfSections(in tableView: UITableView) -> Int {
                 6
         }
-        
+
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 switch section {
                 case 0:
@@ -13,7 +13,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         // iPad does not support haptic feedback
                         return traitCollection.userInterfaceIdiom == .phone ? 2 : 1
                 case 1:
-                        // Characters / Logogram / Fonts
+                        // Characters, Logogram, Fonts
                         return 4
                 case 2:
                         // Keyboard Arrangement ("keyboard_layout")
@@ -31,7 +31,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return 1
                 }
         }
-        
+
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
                 switch section {
                 case 1:
@@ -62,116 +62,115 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return nil
                 }
         }
-        
+
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 switch indexPath.section {
                 case 0:
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as? SwitchTableViewCell {
-                                switch indexPath.row {
-                                case 0:
-                                        cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: "")
-                                        cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
-                                        cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .valueChanged)
-                                case 1:
-                                        cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: "")
-                                        if hasFullAccess {
-                                                cell.switchView.isOn = isHapticFeedbackOn
-                                                cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .valueChanged)
-                                        } else {
-                                                cell.switchView.isOn = false
-                                                cell.switchView.isEnabled = false
-                                                cell.textLabel?.isEnabled = false
-                                                cell.isUserInteractionEnabled = false
-                                        }
-                                default:
-                                        cell.textLabel?.text = "_error"
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as? SwitchTableViewCell else { return UITableViewCell() }
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: "")
+                                cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
+                                cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .valueChanged)
+                        case 1:
+                                cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: "")
+                                if hasFullAccess {
+                                        cell.switchView.isOn = isHapticFeedbackOn
+                                        cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .valueChanged)
+                                } else {
+                                        cell.switchView.isOn = false
+                                        cell.switchView.isEnabled = false
+                                        cell.textLabel?.isEnabled = false
+                                        cell.isUserInteractionEnabled = false
                                 }
-                                return cell
+                        default:
+                                break
                         }
+                        return cell
+
                 case 1:
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                switch indexPath.row {
-                                case 0:
-                                        cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
-                                        cell.accessoryType = (logogram < 2) ? .checkmark : .none
-                                case 1:
-                                        cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: "")
-                                        cell.accessoryType = logogram == 2 ? .checkmark : .none
-                                case 2:
-                                        cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: "")
-                                        cell.accessoryType = logogram == 3 ? .checkmark : .none
-                                case 3:
-                                        cell.textLabel?.text = NSLocalizedString("Simplified", comment: "")
-                                        cell.accessoryType = logogram == 4 ? .checkmark : .none
-                                default:
-                                        cell.textLabel?.text = "_error"
-                                }
-                                return cell
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
+                                cell.accessoryType = logogram < 2 ? .checkmark : .none
+                        case 1:
+                                cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: "")
+                                cell.accessoryType = logogram == 2 ? .checkmark : .none
+                        case 2:
+                                cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: "")
+                                cell.accessoryType = logogram == 3 ? .checkmark : .none
+                        case 3:
+                                cell.textLabel?.text = NSLocalizedString("Simplified", comment: "")
+                                cell.accessoryType = logogram == 4 ? .checkmark : .none
+                        default:
+                                break
                         }
+                        return cell
+
                 case 2:
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "KeyboardLayoutTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                switch indexPath.row {
-                                case 0:
-                                        cell.textLabel?.text = NSLocalizedString("QWERTY", comment: "")
-                                        cell.accessoryType = arrangement != 2 ? .checkmark : .none
-                                case 1:
-                                        cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
-                                        cell.accessoryType = arrangement == 2 ? .checkmark : .none
-                                default:
-                                        cell.textLabel?.text = "_error"
-                                }
-                                return cell
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "KeyboardLayoutTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel?.text = NSLocalizedString("QWERTY", comment: "")
+                                cell.accessoryType = arrangement != 2 ? .checkmark : .none
+                        case 1:
+                                cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
+                                cell.accessoryType = arrangement == 2 ? .checkmark : .none
+                        default:
+                                break
                         }
+                        return cell
+
                 case 3:
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "JyutpingTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                switch indexPath.row {
-                                case 0:
-                                        cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: "")
-                                        cell.accessoryType = (jyutpingDisplay < 2) ? .checkmark : .none
-                                case 1:
-                                        cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: "")
-                                        cell.accessoryType = jyutpingDisplay == 2 ? .checkmark : .none
-                                case 2:
-                                        cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: "")
-                                        cell.accessoryType = jyutpingDisplay == 3 ? .checkmark : .none
-                                default:
-                                        cell.textLabel?.text = "_error"
-                                }
-                                return cell
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "JyutpingTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: "")
+                                cell.accessoryType = (jyutpingDisplay < 2) ? .checkmark : .none
+                        case 1:
+                                cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: "")
+                                cell.accessoryType = jyutpingDisplay == 2 ? .checkmark : .none
+                        case 2:
+                                cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: "")
+                                cell.accessoryType = jyutpingDisplay == 3 ? .checkmark : .none
+                        default:
+                                break
                         }
+                        return cell
+
                 case 4:
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                switch indexPath.row {
-                                case 0:
-                                        cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: "")
-                                        cell.accessoryType = (toneStyle < 2) ? .checkmark : .none
-                                case 1:
-                                        cell.textLabel?.text = NSLocalizedString("No Tones : jyut ping", comment: "")
-                                        cell.accessoryType = (toneStyle == 2) ? .checkmark : .none
-                                case 2:
-                                        cell.textLabel?.text = NSLocalizedString("Superscript : jyut⁶ ping³", comment: "")
-                                        cell.accessoryType = (toneStyle == 3) ? .checkmark : .none
-                                case 3:
-                                        cell.textLabel?.text = NSLocalizedString("Subscript : jyut₆ ping₃", comment: "")
-                                        cell.accessoryType = (toneStyle == 4) ? .checkmark : .none
-                                default:
-                                        cell.textLabel?.text = "_error"
-                                }
-                                return cell
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: "")
+                                cell.accessoryType = (toneStyle < 2) ? .checkmark : .none
+                        case 1:
+                                cell.textLabel?.text = NSLocalizedString("No Tones : jyut ping", comment: "")
+                                cell.accessoryType = (toneStyle == 2) ? .checkmark : .none
+                        case 2:
+                                cell.textLabel?.text = NSLocalizedString("Superscript : jyut⁶ ping³", comment: "")
+                                cell.accessoryType = (toneStyle == 3) ? .checkmark : .none
+                        case 3:
+                                cell.textLabel?.text = NSLocalizedString("Subscript : jyut₆ ping₃", comment: "")
+                                cell.accessoryType = (toneStyle == 4) ? .checkmark : .none
+                        default:
+                                break
                         }
+                        return cell
+
                 case 5:
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell {
-                                cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: "")
-                                cell.textLabel?.textColor = .systemRed
-                                cell.textLabel?.textAlignment = .center
-                                return cell
-                        }
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: "")
+                        cell.textLabel?.textColor = .systemRed
+                        cell.textLabel?.textAlignment = .center
+                        return cell
+
                 default:
                         return UITableViewCell()
                 }
-                return UITableViewCell()
         }
-        
+
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 switch indexPath.section {
                 case 1:
@@ -267,7 +266,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         break
                 }
         }
-        
+
         @objc private func handleAudioFeedbackSwitch() {
                 if UserDefaults.standard.bool(forKey: "audio_feedback") {
                         UserDefaults.standard.set(false, forKey: "audio_feedback")
@@ -287,26 +286,20 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 final class SwitchTableViewCell: UITableViewCell {
-        
+
         let switchView: UISwitch = UISwitch()
-        
+
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
                 super.init(style: .default, reuseIdentifier: "SwitchTableViewCell")
                 selectionStyle = .none
                 accessoryView = switchView
         }
-        
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
+        required init?(coder: NSCoder) { fatalError("SwitchTableViewCell.init(coder:) error") }
 }
 final class NormalTableViewCell: UITableViewCell {
-        
+
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
                 super.init(style: .default, reuseIdentifier: "NormalTableViewCell")
         }
-        
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
+        required init?(coder: NSCoder) { fatalError("NormalTableViewCell.init(coder:) error") }
 }
