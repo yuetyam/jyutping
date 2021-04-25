@@ -72,6 +72,7 @@
 		3759F4E8262FC86600266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4EA262FC86600266086 /* InfoPlist.strings */; };
 		3759F4F1262FC8A300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4F3262FC8A300266086 /* Localizable.strings */; };
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
+		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +201,7 @@
 		3759F4F6262FC8A700266086 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3759F4F7262FC8A800266086 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
+		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +385,7 @@
 				3759F4A3262FC7E900266086 /* Engine.swift */,
 				3759F4A4262FC7E900266086 /* Entry.swift */,
 				3759F4A5262FC7E900266086 /* LexiconManager.swift */,
+				3791B3002634E92B00562137 /* UserLexicon.swift */,
 				3759F4A6262FC7E900266086 /* Candidate.swift */,
 			);
 			path = Candidate;
@@ -664,6 +667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3759F4CC262FC7EA00266086 /* LexiconManager.swift in Sources */,
+				3791B3012634E92B00562137 /* UserLexicon.swift in Sources */,
 				3759F4D3262FC7EA00266086 /* KeyView+handlers.swift in Sources */,
 				3759F4C4262FC7EA00266086 /* CandidateBoard.swift in Sources */,
 				3759F4C8262FC7EA00266086 /* KeyboardViewController.swift in Sources */,

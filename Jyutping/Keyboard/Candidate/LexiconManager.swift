@@ -140,4 +140,33 @@ struct LexiconManager {
                 debugPrint(text)
                 #endif
         }
+
+        func fetchAll() -> [LexiconEntry] {
+                var entries: [LexiconEntry] = []
+                let queryStatementString = "SELECT * FROM lexicon;"
+                var queryStatement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(userdb, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                // let id = sqlite3_column_int64(queryStatement, 0)
+                                let token = sqlite3_column_int64(queryStatement, 1)
+                                // let shortcut = sqlite3_column_int64(queryStatement, 2)
+                                let frequency = sqlite3_column_int64(queryStatement, 3)
+                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 4)))
+                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 5)))
+
+                                let id = Int64((word + jyutping).hash)
+                                let lexiconEntry: LexiconEntry = LexiconEntry(id: id,
+                                                                              input: token,
+                                                                              ping: jyutping.ping,
+                                                                              prefix: jyutping.prefix,
+                                                                              shortcut: jyutping.shortcut,
+                                                                              frequency: frequency,
+                                                                              word: word,
+                                                                              jyutping: jyutping)
+                                entries.append(lexiconEntry)
+                        }
+                }
+                sqlite3_finalize(queryStatement)
+                return entries
+        }
 }

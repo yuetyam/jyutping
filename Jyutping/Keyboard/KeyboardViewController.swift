@@ -220,7 +220,7 @@ final class KeyboardViewController: UIInputViewController {
         // MARK: - Engine
 
         private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInteractive)
-        private lazy var lexiconManager: LexiconManager = LexiconManager()
+        private lazy var lexiconManager = UserLexicon()
         private lazy var engine: Engine = Engine()
         private func suggest() {
                 let userLexicon: [Candidate] = lexiconManager.suggest(for: processingText)
