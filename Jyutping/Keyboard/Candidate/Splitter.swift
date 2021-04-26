@@ -31,7 +31,8 @@ struct Splitter {
 
                 var checked: [String] = []
                 for block in blocks {
-                        let raw: String = String(block.dropLast())
+                        let hasTone: Bool = block.last!.isNumber
+                        let raw: String = hasTone ? String(block.dropLast()) : block
                         guard !syllables.contains(raw) else {
                                 checked.append(block)
                                 continue
@@ -43,9 +44,13 @@ struct Splitter {
                         }
                         let splittable: String = scheme.joined()
                         if splittable == raw {
-                                let last: String = scheme.last! + String(block.last!)
-                                checked.append(contentsOf: scheme.dropLast())
-                                checked.append(last)
+                                if hasTone {
+                                        let last: String = scheme.last! + String(block.last!)
+                                        checked.append(contentsOf: scheme.dropLast())
+                                        checked.append(last)
+                                } else {
+                                        checked.append(contentsOf: scheme)
+                                }
                         } else {
                                 let tail: String = String(block.dropFirst(splittable.count))
                                 checked.append(contentsOf: scheme)
