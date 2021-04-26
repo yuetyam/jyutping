@@ -37,7 +37,7 @@ struct Splitter {
                                 checked.append(block)
                                 continue
                         }
-                        let scheme: [String] = split(raw).first ?? []
+                        let scheme: [String] = performSplit(text: raw).first ?? []
                         guard !scheme.isEmpty else {
                                 checked.append(block)
                                 continue
