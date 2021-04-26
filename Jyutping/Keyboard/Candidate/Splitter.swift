@@ -18,6 +18,7 @@ struct Splitter {
                 return (text, raw, tones, blocks)
         }
         static func split(_ text: String) -> [[String]] {
+                guard !text.isEmpty else { return [] }
                 guard !text.contains("'") else {
                         return separate(text: text)
                 }
