@@ -31,24 +31,26 @@ struct Splitter {
 
                 var checked: [String] = []
                 for block in blocks {
-                        let isToneless: Bool = !(block.last!.isNumber)
-                        let raw = isToneless ? block : String(block.dropLast())
+                        let raw: String = String(block.dropLast())
                         guard !syllables.contains(raw) else {
                                 checked.append(block)
                                 continue
                         }
-                        let splits: [String] = Splitter.performSplit(text: raw).first ?? []
-                        guard !splits.isEmpty else {
+                        let scheme: [String] = split(raw).first ?? []
+                        guard !scheme.isEmpty else {
                                 checked.append(block)
                                 continue
                         }
-                        guard !isToneless else {
-                                checked.append(contentsOf: splits)
-                                continue
+                        let splittable: String = scheme.joined()
+                        if splittable == raw {
+                                let last: String = scheme.last! + String(block.last!)
+                                checked.append(contentsOf: scheme.dropLast())
+                                checked.append(last)
+                        } else {
+                                let tail: String = String(block.dropFirst(splittable.count))
+                                checked.append(contentsOf: scheme)
+                                checked.append(tail)
                         }
-                        let last: String = splits.last! + String(block.last!)
-                        checked.append(contentsOf: splits.dropLast())
-                        checked.append(last)
                 }
                 return sequences(for: checked)
         }
