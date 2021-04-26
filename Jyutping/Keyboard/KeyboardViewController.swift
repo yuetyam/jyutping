@@ -120,10 +120,14 @@ final class KeyboardViewController: UIInputViewController {
                                 return
                         }
                         if (!keyboardLayout.isCantoneseMode) && (!inputText.isEmpty) {
-                                output(processingText)
-                                DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) { [unowned self] in
-                                        self.inputText = ""
-                                }
+                                let converted: String = processingText.replacingOccurrences(of: "4", with: "xx")
+                                        .replacingOccurrences(of: "5", with: "vv")
+                                        .replacingOccurrences(of: "6", with: "qq")
+                                        .replacingOccurrences(of: "1", with: "v")
+                                        .replacingOccurrences(of: "2", with: "x")
+                                        .replacingOccurrences(of: "3", with: "q")
+                                inputText = ""
+                                insert(converted)
                         }
                 }
         }
