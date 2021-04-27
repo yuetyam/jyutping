@@ -17,10 +17,16 @@ extension KeyView {
                 }
         }
         @objc private func performBackspace() {
-                if controller.inputText.isEmpty {
+                let inputText: String = controller.inputText
+                if inputText.isEmpty {
                         controller.textDocumentProxy.deleteBackward()
                 } else {
-                        controller.inputText = String(controller.processingText.dropLast())
+                        let hasLightToneSuffix: Bool = inputText.hasSuffix("vv") || inputText.hasSuffix("xx") || inputText.hasSuffix("qq")
+                        if controller.arrangement < 2 && hasLightToneSuffix {
+                                controller.inputText = String(inputText.dropLast(2))
+                        } else {
+                                controller.inputText = String(inputText.dropLast())
+                        }
                         controller.candidateSequence = []
                 }
                 AudioFeedback.perform(.delete)
@@ -33,7 +39,7 @@ extension KeyView {
                                 controller.insert("，")
                                 AudioFeedback.perform(.input)
                         } else {
-                                let text: String = controller.processingText + "，"
+                                let text: String = controller.inputText + "，"
                                 controller.output(text)
                                 AudioFeedback.perform(.input)
                                 controller.inputText = ""
@@ -79,13 +85,7 @@ extension KeyView {
                         AudioFeedback.perform(.input)
                         return
                 }
-                let converted: String = controller.processingText.replacingOccurrences(of: "4", with: "xx")
-                        .replacingOccurrences(of: "5", with: "vv")
-                        .replacingOccurrences(of: "6", with: "qq")
-                        .replacingOccurrences(of: "1", with: "v")
-                        .replacingOccurrences(of: "2", with: "x")
-                        .replacingOccurrences(of: "3", with: "q")
-                controller.output(converted)
+                controller.output(controller.inputText)
                 AudioFeedback.perform(.input)
                 controller.inputText = ""
         }
@@ -130,20 +130,13 @@ extension KeyView {
                                 }
                         }
                         let inputText: String = controller.inputText
-                        let processingText: String = controller.processingText
                         guard !inputText.isEmpty else {
                                 controller.insert(" ")
                                 AudioFeedback.perform(.input)
                                 return
                         }
                         guard let firstCandidate: Candidate = controller.candidates.first else {
-                                let converted: String = controller.processingText.replacingOccurrences(of: "4", with: "xx")
-                                        .replacingOccurrences(of: "5", with: "vv")
-                                        .replacingOccurrences(of: "6", with: "qq")
-                                        .replacingOccurrences(of: "1", with: "v")
-                                        .replacingOccurrences(of: "2", with: "x")
-                                        .replacingOccurrences(of: "3", with: "q")
-                                controller.output(converted)
+                                controller.output(inputText)
                                 AudioFeedback.perform(.modify)
                                 controller.inputText = ""
                                 return
@@ -154,18 +147,26 @@ extension KeyView {
                                 if inputText.count == (firstCandidate.input.count + 1) {
                                         controller.inputText = ""
                                 } else {
-                                        controller.inputText = "r" + processingText.dropFirst(firstCandidate.input.count + 1)
+                                        let tail = inputText.dropFirst(firstCandidate.input.count + 1)
+                                        controller.inputText = "r" + tail
                                 }
                         } else if inputText.hasPrefix("v") {
                                 if inputText.count == (firstCandidate.input.count + 1) {
                                         controller.inputText = ""
                                 } else {
-                                        controller.inputText = "v" + processingText.dropFirst(firstCandidate.input.count + 1)
+                                        let tail = inputText.dropFirst(firstCandidate.input.count + 1)
+                                        controller.inputText = "v" + tail
                                 }
                         } else {
                                 controller.candidateSequence.append(firstCandidate)
-                                let tail = processingText.dropFirst(firstCandidate.input.count)
-                                controller.inputText = (tail == "'") ? "" : String(tail)
+                                if controller.arrangement < 2 {
+                                        let converted: String = firstCandidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
+                                        let tail = inputText.dropFirst(converted.count)
+                                        controller.inputText = (tail == "'") ? "" : String(tail)
+                                } else {
+                                        let tail = inputText.dropFirst(firstCandidate.input.count)
+                                        controller.inputText = (tail == "'") ? "" : String(tail)
+                                }
                         }
                         if controller.inputText.isEmpty && !controller.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = controller.candidateSequence.joined()

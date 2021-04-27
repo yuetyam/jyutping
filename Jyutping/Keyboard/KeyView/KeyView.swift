@@ -203,7 +203,7 @@ final class KeyView: UIView {
                         if controller.inputText.isEmpty {
                                 controller.insert(text)
                         } else {
-                                let combined: String = controller.processingText + text
+                                let combined: String = controller.inputText + text
                                 controller.output(combined)
                                 controller.inputText = ""
                         }

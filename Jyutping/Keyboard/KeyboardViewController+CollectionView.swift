@@ -117,18 +117,26 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         if inputText == "r" + candidate.input {
                                 inputText = ""
                         } else {
-                                inputText = "r" + processingText.dropFirst(candidate.input.count + 1)
+                                let tail = inputText.dropFirst(candidate.input.count + 1)
+                                inputText = "r" + tail
                         }
                 } else if inputText.hasPrefix("v") {
                         if inputText == "v" + candidate.input {
                                 inputText = ""
                         } else {
-                                inputText = "v" + processingText.dropFirst(candidate.input.count + 1)
+                                let tail = inputText.dropFirst(candidate.input.count + 1)
+                                inputText = "v" + tail
                         }
                 } else {
                         candidateSequence.append(candidate)
-                        let tail = processingText.dropFirst(candidate.input.count)
-                        inputText = (tail == "'") ? "" : String(tail)
+                        if arrangement < 2 {
+                                let converted: String = candidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
+                                let tail = inputText.dropFirst(converted.count)
+                                inputText = (tail == "'") ? "" : String(tail)
+                        } else {
+                                let tail = inputText.dropFirst(candidate.input.count)
+                                inputText = (tail == "'") ? "" : String(tail)
+                        }
                 }
                 if keyboardLayout == .candidateBoard && inputText.isEmpty {
                         collectionView.removeFromSuperview()

@@ -120,14 +120,9 @@ final class KeyboardViewController: UIInputViewController {
                                 return
                         }
                         if (!keyboardLayout.isCantoneseMode) && (!inputText.isEmpty) {
-                                let converted: String = processingText.replacingOccurrences(of: "4", with: "xx")
-                                        .replacingOccurrences(of: "5", with: "vv")
-                                        .replacingOccurrences(of: "6", with: "qq")
-                                        .replacingOccurrences(of: "1", with: "v")
-                                        .replacingOccurrences(of: "2", with: "x")
-                                        .replacingOccurrences(of: "3", with: "q")
+                                let text: String = inputText
                                 inputText = ""
-                                insert(converted)
+                                insert(text)
                         }
                 }
         }
@@ -137,7 +132,7 @@ final class KeyboardViewController: UIInputViewController {
 
         lazy var inputText: String = "" {
                 didSet {
-                        if inputText.isEmpty || inputText.hasPrefix("v") || inputText.hasPrefix("r") {
+                        if inputText.isEmpty || (arrangement > 1) || inputText.hasPrefix("v") || inputText.hasPrefix("r") {
                                 processingText = inputText
                         } else {
                                 processingText = inputText.replacingOccurrences(of: "vv", with: "4")
@@ -149,31 +144,38 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        private(set) lazy var processingText: String = "" {
+        private lazy var processingText: String = "" {
                 didSet {
                         DispatchQueue.main.async { [unowned self] in
                                 self.toolBar.update()
                         }
-                        syllablesSchemes = Splitter.split(processingText)
-                        if let syllables: [String] = syllablesSchemes.first {
-                                let splittable: String = syllables.joined()
-                                if splittable.count == processingText.count {
-                                        markedText = syllables.joined(separator: " ")
-                                } else if processingText.contains("'") {
-                                        markedText = processingText.replacingOccurrences(of: "'", with: "' ")
-                                } else {
-                                        let tail = processingText.dropFirst(splittable.count)
-                                        markedText = syllables.joined(separator: " ") + " " + tail
-                                }
-                        } else {
-                                markedText = processingText
-                        }
-                        if processingText.isEmpty {
+                        guard !processingText.isEmpty else {
+                                syllablesSchemes = []
+                                markedText = ""
                                 candidates = []
+                                return
+                        }
+                        if processingText.hasPrefix("v") || processingText.hasPrefix("r") {
+                                syllablesSchemes = []
+                                markedText = processingText
                         } else {
-                                imeQueue.async { [unowned self] in
-                                        self.suggest()
+                                syllablesSchemes = Splitter.split(processingText)
+                                if let syllables: [String] = syllablesSchemes.first {
+                                        let splittable: String = syllables.joined()
+                                        if splittable.count == processingText.count {
+                                                markedText = syllables.joined(separator: " ")
+                                        } else if processingText.contains("'") {
+                                                markedText = processingText.replacingOccurrences(of: "'", with: "' ")
+                                        } else {
+                                                let tail = processingText.dropFirst(splittable.count)
+                                                markedText = syllables.joined(separator: " ") + " " + tail
+                                        }
+                                } else {
+                                        markedText = processingText
                                 }
+                        }
+                        imeQueue.async { [unowned self] in
+                                self.suggest()
                         }
                 }
         }
