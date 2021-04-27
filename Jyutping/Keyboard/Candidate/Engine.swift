@@ -4,6 +4,8 @@ import KeyboardDataProvider
 
 struct Engine {
 
+        fileprivate typealias RowCandidate = (candidate: Candidate, row: Int)
+
         private let provider: KeyboardDataProvider = KeyboardDataProvider()
         func close() {
                 provider.close()
@@ -102,8 +104,9 @@ struct Engine {
                 return combine
         }
         private func process(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.joined()) }
-                let candidates: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 30000 }
+                let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
+                let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
+                let candidates: [Candidate] = sorted.map({ $0.candidate })
                 guard candidates.count > 1 && candidates[0].input.count != text.count else {
                         return candidates
                 }
@@ -128,8 +131,9 @@ struct Engine {
                 return combine + candidates
         }
         private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches: [[Candidate]] = sequences.map { matchWithRanking(for: $0.joined()) }
-                var combine: [Candidate] = matches.reduce([], +).sorted { ($0.text.count == $1.text.count) && ($1.ranking - $0.ranking) > 30000 }
+                let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
+                let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
+                var combine: [Candidate] = sorted.map({ $0.candidate })
                 guard !combine.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
                 }
@@ -230,9 +234,9 @@ private extension Engine {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        func matchWithRanking(for text: String) -> [Candidate] {
+        func matchWithRowID(for text: String) -> [RowCandidate] {
                 guard !text.isEmpty else { return [] }
-                var candidates: [Candidate] = []
+                var rowCandidates: [RowCandidate] = []
                 let digits: String = text.filter({ $0.isNumber })
                 let isToneless: Bool = digits.isEmpty
                 let ping: String = isToneless ? text : text.filter({ !$0.isNumber })
@@ -244,13 +248,14 @@ private extension Engine {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
                                 if isToneless || digits == jyutping.filter({ $0.isNumber }) {
-                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word, ranking: rowid)
-                                        candidates.append(candidate)
+                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                        let rowCandidate: RowCandidate = (candidate: candidate, row: rowid)
+                                        rowCandidates.append(rowCandidate)
                                 }
                         }
                 }
                 sqlite3_finalize(queryStatement)
-                return candidates
+                return rowCandidates
         }
         
         func prefix(match text: String, count: Int = 100) -> [Candidate] {

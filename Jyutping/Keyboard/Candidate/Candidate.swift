@@ -16,22 +16,17 @@ struct Candidate: Hashable {
         /// Always be traditional characters. User invisible.
         let lexiconText: String
 
-        /// Row number in database
-        let ranking: Int
-
         /// Candidate
         /// - Parameters:
         ///   - text: Candidate word.
         ///   - jyutping: Word's Jyutping.
         ///   - input: User input for this Candidate.
         ///   - lexiconText: Lexicon Entry Cantonese word. User invisible.
-        ///   - ranking: Row number in database.
-        init(text: String, jyutping: String, input: String, lexiconText: String, ranking: Int = 0) {
+        init(text: String, jyutping: String, input: String, lexiconText: String) {
                 self.text = text
                 self.jyutping = jyutping
                 self.input = input
                 self.lexiconText = lexiconText
-                self.ranking = ranking
         }
 
         // Equatable
