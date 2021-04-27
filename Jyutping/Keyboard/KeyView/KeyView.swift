@@ -165,8 +165,10 @@ final class KeyView: UIView {
                         changeColorToNormal()
                         if !timePoints.second {
                                 tapOnSpace()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [unowned self] in
-                                        self.timePoints = (false, false)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                                        if self != nil {
+                                                self!.timePoints = (false, false)
+                                        }
                                 }
                         } else {
                                 doubleTapSpace()
