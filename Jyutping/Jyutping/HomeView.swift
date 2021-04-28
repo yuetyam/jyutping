@@ -48,10 +48,12 @@ struct HomeView_Previews: PreviewProvider {
 
 private struct GuideView: View {
 
-        private let enableKeyboard: Text = Text("•  Jump to ") + Text("Settings").fontWeight(.medium) + Text("\n") +
-                Text("•  Tap ") + Text("Keyboards").fontWeight(.medium) + Text("\n") +
-                Text("•  Turn on ") + Text("Jyutping").fontWeight(.medium) + Text("\n") +
-                Text("•  Turn on ") + Text("Allow Full Access").fontWeight(.medium)
+        private let dotText: Text = Text("•")
+        private let line_0: Text = Text("Jump to ") + Text("Settings").fontWeight(.medium)
+        private let line_1: Text = Text("Tap ") + Text("Keyboards").fontWeight(.medium)
+        private let line_2: Text = Text("Turn on ") + Text("Jyutping").fontWeight(.medium)
+        private let line_3: Text = Text("Turn on ") + Text("Allow Full Access").fontWeight(.medium)
+        private let accessibilityText: Text = Text("How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access")
 
         var body: some View {
                 VStack {
@@ -59,16 +61,34 @@ private struct GuideView: View {
                                 Text("How to enable this Keyboard").font(.headline)
                                 Spacer()
                         }
-                        HStack {
-                                enableKeyboard
-                                        .lineSpacing(5)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                Spacer()
+                        VStack(spacing: 5){
+                                HStack {
+                                        dotText
+                                        line_0
+                                        Spacer()
+                                }
+                                HStack {
+                                        dotText
+                                        line_1
+                                        Spacer()
+                                }
+                                HStack {
+                                        dotText
+                                        line_2
+                                        Spacer()
+                                }
+                                HStack {
+                                        dotText
+                                        line_3
+                                        Spacer()
+                                }
                         }
                         .padding(.vertical, 5)
                 }
                 .padding()
                 .fillBackground()
+                .accessibilityElement()
+                .accessibility(label: accessibilityText)
                 .padding()
 
                 Button(action: {

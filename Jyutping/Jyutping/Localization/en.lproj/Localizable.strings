@@ -22,10 +22,11 @@ English
 "Type here to test keyboards" = "Type here to test keyboards";
 
 "How to enable this Keyboard" = "How to enable this Keyboard";
-"•  Jump to " = "•  Jump to ";
-"•  Tap " = "•  Tap ";
-"•  Turn on " = "•  Turn on ";
+"Jump to " = "Jump to ";
+"Tap " = "Tap ";
+"Turn on " = "Turn on ";
 "Allow Full Access" = "Allow Full Access";
+"How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access";
 
 "Go to " = "Go to ";
 

@@ -22,10 +22,11 @@ Cantonese
 "Type here to test keyboards" = "試下鍵盤";
 
 "How to enable this Keyboard" = "如何啓用鍵盤";
-"•  Jump to " = "•  跳轉至 ";
-"•  Tap " = "•  點選 ";
-"•  Turn on " = "•  開啓 ";
+"Jump to " = "跳轉至 ";
+"Tap " = "點選 ";
+"Turn on " = "開啓 ";
 "Allow Full Access" = "允許全權取用";
+"How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "如何啓用鍵盤。一：跳轉至「設定」，二：選擇「鍵盤」， 三：開啓「粵拼」，四：開啓「允許全權取用」";
 
 "Go to " = "前往 ";
 
