@@ -185,7 +185,20 @@ final class KeyboardViewController: UIInputViewController {
                         handleMarkedText()
                 }
         }
-        private lazy var syllablesSchemes: [[String]] = []
+        private lazy var syllablesSchemes: [[String]] = [] {
+                didSet {
+                        guard !syllablesSchemes.isEmpty else { schemes = syllablesSchemes; return }
+                        schemes = syllablesSchemes.map({ block -> [String] in
+                                let sequence: [String] = block.map { syllable -> String in
+                                        let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                                        return converted
+                                }
+                                return sequence
+                        })
+                }
+        }
+        private lazy var schemes: [[String]] = []
 
         /// some dumb apps just can't be compatible with `textDocumentProxy.setMarkedText() & textDocumentProxy.insertText()`
         /// - Parameter text: text to output
@@ -230,7 +243,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var engine: Engine = Engine()
         private func suggest() {
                 let lexiconCandidates: [Candidate] = userLexicon.suggest(for: processingText)
-                let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: syllablesSchemes)
+                let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: schemes.deduplicated())
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()

@@ -17,20 +17,16 @@ struct Splitter {
                 let raw: String = text.filter({ !$0.isNumber })
                 return (text, raw, tones, blocks)
         }
-        static func split(_ text: String) -> [[String]] {
-                let syllablesSchemes: [[String]] = handleSplit(text)
-                guard !syllablesSchemes.isEmpty else { return syllablesSchemes }
-                let schemes: [[String]] = syllablesSchemes.map({ block -> [String] in
-                        let sequence: [String] = block.map({ syllable -> String in
-                                let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
-                                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                                return converted
-                        })
-                        return sequence
+        static func engineSplit(_ text: String) -> [String] {
+                guard let sequence: [String] = split(text).first, !sequence.isEmpty else { return [] }
+                let scheme = sequence.map({ syllable -> String in
+                        let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                        return converted
                 })
-                return schemes.deduplicated()
+                return scheme
         }
-        private static func handleSplit(_ text: String) -> [[String]] {
+        static func split(_ text: String) -> [[String]] {
                 guard !text.isEmpty else { return [] }
                 guard !text.contains("'") else {
                         return separate(text: text)

@@ -111,10 +111,8 @@ struct Engine {
                         return candidates
                 }
                 let tailText: String = String(text.dropFirst(candidates[0].input.count))
-                let jyutpingsSequences: [[String]] = Splitter.split(tailText)
-                guard let tailJyutpings: [String] = jyutpingsSequences.first, !tailJyutpings.isEmpty else {
-                        return candidates
-                }
+                let tailJyutpings: [String] = Splitter.engineSplit(tailText)
+                guard !tailJyutpings.isEmpty else { return candidates }
                 var combine: [Candidate] = []
                 for (index, _) in tailJyutpings.enumerated().reversed() {
                         let tail: String = tailJyutpings[0...index].joined()
@@ -143,8 +141,8 @@ struct Engine {
                         let newCandidate: Candidate = combine.first! + tailOne
                         combine.insert(newCandidate, at: 0)
                 } else {
-                        let jyutpingsSequences: [[String]] = Splitter.split(tailText)
-                        guard let tailJyutpings: [String] = jyutpingsSequences.first, !tailJyutpings.isEmpty else {
+                        let tailJyutpings: [String] = Splitter.engineSplit(tailText)
+                        guard !tailJyutpings.isEmpty else {
                                 return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
                         }
                         let rawTailJyutpings: String = tailJyutpings.joined()
