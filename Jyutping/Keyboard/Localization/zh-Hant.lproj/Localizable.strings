@@ -15,10 +15,10 @@ Chinese, Traditional
 "Simplified" = "簡化字";
 
 "Keyboard Layout" = "鍵盤佈局";
-"QWERTY" = "全鍵盤・QWERTY";
-"QWERTY (Long Press for Tones)" = "全鍵盤・QWERTY・長撳輸入聲調";
+"QWERTY" = "全鍵盤";
+"QWERTY, Long Press for Tones" = "全鍵盤・聲調長撳";
 "SaamPing" = "三拼";
-"SaamPing (28 Keys)" = "三拼・28 鍵";
+"SaamPing, 28 Keys" = "三拼・28 鍵";
 
 "Jyutping Display" = "粵拼顯示";
 "Above Candidates" = "候選詞之上";
