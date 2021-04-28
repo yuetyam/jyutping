@@ -18,6 +18,19 @@ struct Splitter {
                 return (text, raw, tones, blocks)
         }
         static func split(_ text: String) -> [[String]] {
+                let syllablesSchemes: [[String]] = handleSplit(text)
+                guard !syllablesSchemes.isEmpty else { return syllablesSchemes }
+                let schemes: [[String]] = syllablesSchemes.map({ block -> [String] in
+                        let sequence: [String] = block.map({ syllable -> String in
+                                let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                                return converted
+                        })
+                        return sequence
+                })
+                return schemes.deduplicated()
+        }
+        private static func handleSplit(_ text: String) -> [[String]] {
                 guard !text.isEmpty else { return [] }
                 guard !text.contains("'") else {
                         return separate(text: text)
@@ -118,7 +131,7 @@ struct Splitter {
                                 return lhsCount > rhsCount
                         }
                 }
-                return sequences.deduplicated()
+                return sequences
         }
 
         private static func splitLeading(_ text: String) -> [String] {
@@ -145,7 +158,7 @@ struct Splitter {
                 return false
         }
 
-private static let syllables: [String] = [
+private static let syllables: Set<String> = [
 "ngo", "hai", "nei", "keoi", "m", "ge", "aa", "hou", "dou", "ne",
 "ni", "zau", "go", "heoi", "jau", "la", "laa", "gam", "di", "dit",
 "tung", "ga", "gaa", "gei", "gong", "zo", "me", "jiu", "mou", "waa",
@@ -216,5 +229,49 @@ private static let syllables: [String] = [
 "leu", "li", "mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
 "ngam", "ngang", "nge", "ngit", "ngot", "nit", "noek", "nuk", "ong",
 "paat", "pau", "pe", "peng", "pet", "poi", "saak", "tap", "teot", "ti",
-"toe", "tuk", "wak", "wet", "wi", "zem", "zep", "zoe", "zoet"]
+"toe", "tuk", "wak", "wet", "wi", "zem", "zep", "zoe", "zoet",
+"koei",
+"hoei",
+"doei",
+"coet",
+"zoei",
+"coei",
+"noei",
+"soei",
+"soen",
+"goei",
+"zoen",
+"loei",
+"toei",
+"coen",
+"loen",
+"zoet",
+"joen",
+"loet",
+"soet",
+"doen",
+"joei",
+"toen",
+"noet",
+"doet",
+"toet",
+"seong",
+"zeong",
+"heong",
+"leong",
+"jeong",
+"jeok",
+"geok",
+"ceong",
+"zeok",
+"keok",
+"keong",
+"neong",
+"leok",
+"geong",
+"ceok",
+"seok",
+"deok",
+"deong",
+"neok"]
 }
