@@ -32,7 +32,7 @@ Chinese (Hong Kong)
 "Tones Input" = "聲調輸入";
 "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
 
-"Lookup Jyutping with Cangjie" = "用倉頡反查粵";
+"Lookup Jyutping with Cangjie" = "用倉頡反查粵拼";
 "以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼";
 
 "Lookup Jyutping with Pinyin" = "用普通話拼音反查粵拼";
