@@ -418,9 +418,9 @@
 		3759F4BA262FC7EA00266086 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				3759F4BD262FC7EA00266086 /* KeyboardLayout.swift */,
 				3759F4BB262FC7EA00266086 /* KeyboardLayout+events.swift */,
 				3759F4BC262FC7EA00266086 /* ShiftState.swift */,
-				3759F4BD262FC7EA00266086 /* KeyboardLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";

@@ -17,7 +17,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return 4
                 case 2:
                         // Keyboard Arrangement ("keyboard_layout")
-                        return 2
+                        return 4
                 case 3:
                         // Jyutping Display
                         return 3
@@ -113,10 +113,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("QWERTY", comment: "")
-                                cell.accessoryType = arrangement != 2 ? .checkmark : .none
+                                cell.accessoryType = arrangement < 2 ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("QWERTY, Long Press for Tones", comment: "")
                                 cell.accessoryType = arrangement == 2 ? .checkmark : .none
+                        case 2:
+                                cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
+                                cell.accessoryType = arrangement == 3 ? .checkmark : .none
+                        case 3:
+                                cell.textLabel?.text = NSLocalizedString("SaamPing, 28 Keys", comment: "")
+                                cell.accessoryType = arrangement == 4 ? .checkmark : .none
                         default:
                                 break
                         }
@@ -199,6 +205,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 UserDefaults.standard.set(1, forKey: "keyboard_layout")
                         case 1:
                                 UserDefaults.standard.set(2, forKey: "keyboard_layout")
+                        case 2:
+                                UserDefaults.standard.set(3, forKey: "keyboard_layout")
+                        case 3:
+                                UserDefaults.standard.set(4, forKey: "keyboard_layout")
                         default:
                                 break
                         }

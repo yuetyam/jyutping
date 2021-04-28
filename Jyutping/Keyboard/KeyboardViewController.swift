@@ -390,11 +390,15 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 0: The key "keyboard_layout" doesn‘t exist.
         ///
-        /// 1: 粵拼 全鍵盤 QWERTY
+        /// 1: 全鍵盤 QWERTY
         ///
-        /// 2: 粵拼 三拼
+        /// 2: 全鍵盤 QWERTY 聲調長撳
         ///
-        /// 3: 粵拼 九宮格十鍵（未實現）
+        /// 3: 三拼
+        ///
+        /// 4: 三拼 28鍵
+        ///
+        /// 5: 九宮格十鍵（未實現）
         private(set) lazy var arrangement: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
         func updateArrangement() {
                 arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
