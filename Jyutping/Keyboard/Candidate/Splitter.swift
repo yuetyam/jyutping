@@ -1,12 +1,12 @@
 struct Splitter {
         private static func prepare(text: String) -> (text: String, raw: String, tones: String, blocks: [String]) {
-                let tones: String = text.filter({ $0.isNumber })
+                let tones: String = text.filter({ $0.isTone })
                 guard !tones.isEmpty else { return (text, text, tones, []) }
                 var unit: String = ""
                 var blocks: [String] = []
                 for character in text {
                         unit.append(character)
-                        if character.isNumber {
+                        if character.isTone {
                                 blocks.append(unit)
                                 unit = ""
                         }
@@ -14,7 +14,7 @@ struct Splitter {
                 if !unit.isEmpty {
                         blocks.append(unit)
                 }
-                let raw: String = text.filter({ !$0.isNumber })
+                let raw: String = text.filter({ !$0.isTone })
                 return (text, raw, tones, blocks)
         }
         static func engineSplit(_ text: String) -> [String] {
@@ -40,7 +40,7 @@ struct Splitter {
 
                 var checked: [String] = []
                 for block in blocks {
-                        let hasTone: Bool = block.last!.isNumber
+                        let hasTone: Bool = block.last!.isTone
                         let raw: String = hasTone ? String(block.dropLast()) : block
                         guard !syllables.contains(raw) else {
                                 checked.append(block)

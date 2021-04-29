@@ -68,9 +68,10 @@
 		3759F4E2262FC7EA00266086 /* UIStackView+subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BF262FC7EA00266086 /* UIStackView+subviews.swift */; };
 		3759F4E3262FC7EA00266086 /* Array+deduplicated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C0262FC7EA00266086 /* Array+deduplicated.swift */; };
 		3759F4E4262FC7EA00266086 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C1262FC7EA00266086 /* ColorExtension.swift */; };
-		3759F4E5262FC7EA00266086 /* String+shortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C2262FC7EA00266086 /* String+shortcut.swift */; };
+		3759F4E5262FC7EA00266086 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C2262FC7EA00266086 /* StringExtensions.swift */; };
 		3759F4E8262FC86600266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4EA262FC86600266086 /* InfoPlist.strings */; };
 		3759F4F1262FC8A300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4F3262FC8A300266086 /* Localizable.strings */; };
+		3775D53D263AF1D20024BF12 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */; };
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 /* End PBXBuildFile section */
@@ -189,7 +190,7 @@
 		3759F4BF262FC7EA00266086 /* UIStackView+subviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+subviews.swift"; sourceTree = "<group>"; };
 		3759F4C0262FC7EA00266086 /* Array+deduplicated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+deduplicated.swift"; sourceTree = "<group>"; };
 		3759F4C1262FC7EA00266086 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		3759F4C2262FC7EA00266086 /* String+shortcut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+shortcut.swift"; sourceTree = "<group>"; };
+		3759F4C2262FC7EA00266086 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3759F4E9262FC86600266086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3759F4EB262FC86800266086 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3759F4EC262FC86900266086 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -200,6 +201,7 @@
 		3759F4F5262FC8A600266086 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3759F4F6262FC8A700266086 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3759F4F7262FC8A800266086 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -429,9 +431,10 @@
 			isa = PBXGroup;
 			children = (
 				3759F4BF262FC7EA00266086 /* UIStackView+subviews.swift */,
-				3759F4C0262FC7EA00266086 /* Array+deduplicated.swift */,
 				3759F4C1262FC7EA00266086 /* ColorExtension.swift */,
-				3759F4C2262FC7EA00266086 /* String+shortcut.swift */,
+				3759F4C0262FC7EA00266086 /* Array+deduplicated.swift */,
+				3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */,
+				3759F4C2262FC7EA00266086 /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				3759F4C4262FC7EA00266086 /* CandidateBoard.swift in Sources */,
 				3759F4C8262FC7EA00266086 /* KeyboardViewController.swift in Sources */,
 				3759F4DC262FC7EA00266086 /* EmojiBoard.swift in Sources */,
+				3775D53D263AF1D20024BF12 /* CharacterExtensions.swift in Sources */,
 				3759F4E3262FC7EA00266086 /* Array+deduplicated.swift in Sources */,
 				3759F4C6262FC7EA00266086 /* ToolButton.swift in Sources */,
 				3759F4E2262FC7EA00266086 /* UIStackView+subviews.swift in Sources */,
@@ -687,7 +691,7 @@
 				3759F4CF262FC7EA00266086 /* KeyboardViewController+CollectionView.swift in Sources */,
 				3759F4D0262FC7EA00266086 /* KeyView+construction.swift in Sources */,
 				3759F4D6262FC7EA00266086 /* KeyView.swift in Sources */,
-				3759F4E5262FC7EA00266086 /* String+shortcut.swift in Sources */,
+				3759F4E5262FC7EA00266086 /* StringExtensions.swift in Sources */,
 				3759F4DE262FC7EA00266086 /* KeyboardViewController+keyboard.swift in Sources */,
 				3759F4D8262FC7EA00266086 /* AudioFeedback.swift in Sources */,
 				3759F4DA262FC7EA00266086 /* Emoji.swift in Sources */,
