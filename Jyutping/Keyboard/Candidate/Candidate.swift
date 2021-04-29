@@ -32,13 +32,13 @@ struct Candidate: Hashable {
         // Equatable
         static func == (lhs: Candidate, rhs: Candidate) -> Bool {
                 return lhs.text == rhs.text &&
-                        lhs.jyutping.filter({!$0.isTone}) == rhs.jyutping.filter({!$0.isTone})
+                        lhs.jyutping.removeTones() == rhs.jyutping.removeTones()
         }
 
         // Hashable
         func hash(into hasher: inout Hasher) {
                 hasher.combine(text)
-                hasher.combine(jyutping.filter({!$0.isTone}))
+                hasher.combine(jyutping.removeTones())
         }
 
         static func + (lhs: Candidate, rhs: Candidate) -> Candidate {

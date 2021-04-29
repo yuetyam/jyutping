@@ -1,6 +1,6 @@
 struct Splitter {
         private static func prepare(text: String) -> (text: String, raw: String, tones: String, blocks: [String]) {
-                let tones: String = text.filter({ $0.isTone })
+                let tones: String = text.tones
                 guard !tones.isEmpty else { return (text, text, tones, []) }
                 var unit: String = ""
                 var blocks: [String] = []
@@ -14,7 +14,7 @@ struct Splitter {
                 if !unit.isEmpty {
                         blocks.append(unit)
                 }
-                let raw: String = text.filter({ !$0.isTone })
+                let raw: String = text.removeTones()
                 return (text, raw, tones, blocks)
         }
         static func engineSplit(_ text: String) -> [String] {
