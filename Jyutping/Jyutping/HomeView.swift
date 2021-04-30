@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
 
-        private let placeholder: String = NSLocalizedString("Type here to test keyboards", comment: "")
+        private let placeholder: String = NSLocalizedString("Text Field", comment: "")
         @State private var cacheText: String = ""
 
         /*
