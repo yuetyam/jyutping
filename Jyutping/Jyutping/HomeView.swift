@@ -132,9 +132,7 @@ private struct TonesInput: View {
                 .padding()
                 .fillBackground()
                 .contextMenu {
-                        Button("Copy") {
-                                UIPasteboard.general.string = content
-                        }
+                        MenuCopyButton(content: content)
                 }
                 .padding()
         }
@@ -194,5 +192,20 @@ private struct PeriodShortcut: View {
                 .padding()
                 .fillBackground()
                 .padding()
+        }
+}
+
+struct MenuCopyButton: View {
+        let content: String
+        var body: some View {
+                Button(action: {
+                        UIPasteboard.general.string = content
+                }) {
+                        HStack {
+                                Text("Copy")
+                                Spacer()
+                                Image(systemName: "doc.on.doc")
+                        }
+                }
         }
 }
