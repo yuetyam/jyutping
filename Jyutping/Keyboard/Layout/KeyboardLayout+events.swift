@@ -4,22 +4,14 @@ extension KeyboardLayout {
                 case .cantonese(.lowercased):
                         switch arrangement {
                         case 2:
-                                return longPressLowercasedKeys(needsInputModeSwitchKey)
-                        case 3:
                                 return saamPingLowercasedKeys(needsInputModeSwitchKey)
-                        case 4:
-                                return saamPingLowercasedKeys(needsInputModeSwitchKey, needsGWKW: true)
                         default:
                                 return cantoneseLowercasedKeys(needsInputModeSwitchKey)
                         }
                 case .cantonese(.uppercased), .cantonese(.capsLocked):
                         switch arrangement {
                         case 2:
-                                return longPressUppercasedKeys(needsInputModeSwitchKey)
-                        case 3:
                                 return saamPingUppercasedKeys(needsInputModeSwitchKey)
-                        case 4:
-                                return saamPingUppercasedKeys(needsInputModeSwitchKey, needsGWKW: true)
                         default:
                                 return cantoneseUppercasedKeys(needsInputModeSwitchKey)
                         }

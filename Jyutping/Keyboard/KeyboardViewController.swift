@@ -392,13 +392,9 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 1: 全鍵盤 QWERTY
         ///
-        /// 2: 全鍵盤 QWERTY 聲調長撳
+        /// 2: 三拼
         ///
-        /// 3: 三拼
-        ///
-        /// 4: 三拼 28鍵
-        ///
-        /// 5: 九宮格十鍵（未實現）
+        /// 3: 九宮格（未實現）
         private(set) lazy var arrangement: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
         func updateArrangement() {
                 arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
