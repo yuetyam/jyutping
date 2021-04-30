@@ -8,6 +8,7 @@ English
 "Keyboards" = "Keyboards";
 "Add New Keyboards..." = "Add New Keyboards...";
 "Edit" = "Edit";
+"Copy" = "Copy";
 
 
 // Tab Bar
@@ -34,10 +35,10 @@ English
 "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
 
 "Lookup Jyutping with Cangjie" = "Lookup Jyutping with Cangjie";
-"以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼";
+"以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "Start with 'v', then enter the Cangjie code. For example, enter 'vdam', candidate '查' will appear. The candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Pinyin" = "Lookup Jyutping with Pinyin";
-"以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼";
+"以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼" = "Start with 'r', then enter the Pinyin code. For example, enter 'rcha', candidate '查' will appear. The candidates will be displayed with the corresponding Jyutping.";
 
 "Period (Full Stop) Shortcut" = "Period (Full Stop) Shortcut";
 "Double tapping the space bar will insert a period followed by a space" = "Double tapping the space bar will insert a period followed by a space";

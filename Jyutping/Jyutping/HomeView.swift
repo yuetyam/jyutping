@@ -124,13 +124,18 @@ private struct TonesInput: View {
                                 Text(content)
                                         .font(.system(.callout, design: .monospaced))
                                         .lineSpacing(5)
-                                        .fixedSize(horizontal: false, vertical: true)
+                                        .fixedSize(horizontal: true, vertical: false)
                                 Spacer()
                         }
                         .padding(.vertical, 5)
                 }
                 .padding()
                 .fillBackground()
+                .contextMenu {
+                        Button("Copy") {
+                                UIPasteboard.general.string = content
+                        }
+                }
                 .padding()
         }
 }
@@ -143,9 +148,7 @@ private struct CangjieReverseLookup: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content)
-                                        .lineSpacing(6)
-                                        .fixedSize(horizontal: false, vertical: true)
+                                Text(content).lineSpacing(6)
                                 Spacer()
                         }
                         .padding(.vertical, 6)
@@ -164,9 +167,7 @@ private struct PinyinReverseLookup: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content)
-                                        .lineSpacing(6)
-                                        .fixedSize(horizontal: false, vertical: true)
+                                Text(content).lineSpacing(6)
                                 Spacer()
                         }
                         .padding(.vertical, 6)
@@ -185,9 +186,7 @@ private struct PeriodShortcut: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content)
-                                        .lineSpacing(6)
-                                        .fixedSize(horizontal: false, vertical: true)
+                                Text(content).lineSpacing(6)
                                 Spacer()
                         }
                         .padding(.vertical, 6)
