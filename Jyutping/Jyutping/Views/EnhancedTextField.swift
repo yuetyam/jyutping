@@ -59,7 +59,7 @@ struct EnhancedTextField: UIViewRepresentable {
                 Coordinator(self)
         }
         final class Coordinator: NSObject, UITextFieldDelegate {
-                var parent: EnhancedTextField
+                private let parent: EnhancedTextField
                 init(_ view: EnhancedTextField) {
                         parent = view
                 }
