@@ -156,7 +156,45 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return CGSize(width: 42, height: 42)
                 }
                 let characterCount: Int = candidates[indexPath.row].text.count
-                if self.keyboardLayout == .candidateBoard {
+                guard jyutpingDisplay < 3 else {
+                        if keyboardLayout == .candidateBoard {
+                                let fullWidth: CGFloat = collectionView.bounds.size.width
+                                var itemCount: Int {
+                                        switch characterCount {
+                                        case 0:
+                                                return 1
+                                        case 1:
+                                                return Int(fullWidth) / 40
+                                        case 2:
+                                                return Int(fullWidth) / 60
+                                        case 3:
+                                                return Int(fullWidth) / 80
+                                        case 4:
+                                                return Int(fullWidth) / 100
+                                        default:
+                                                return Int(fullWidth) / (characterCount * 24)
+                                        }
+                                }
+                                guard itemCount > 1 else {
+                                        return CGSize(width: fullWidth - 4, height: 55)
+                                }
+                                return CGSize(width: fullWidth / CGFloat(itemCount), height: 55)
+                        } else {
+                                switch characterCount {
+                                case 1:
+                                        return CGSize(width: 40, height: 55)
+                                case 2:
+                                        return CGSize(width: 60, height: 55)
+                                case 3:
+                                        return CGSize(width: 80, height: 55)
+                                case 4:
+                                        return CGSize(width: 100, height: 55)
+                                default:
+                                        return CGSize(width: characterCount * 24, height: 55)
+                                }
+                        }
+                }
+                if keyboardLayout == .candidateBoard {
                         let fullWidth: CGFloat = collectionView.bounds.size.width
                         var itemCount: Int {
                                 switch characterCount {
