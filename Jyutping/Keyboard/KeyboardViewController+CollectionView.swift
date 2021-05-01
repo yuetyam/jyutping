@@ -176,21 +176,21 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                         }
                                 }
                                 guard itemCount > 1 else {
-                                        return CGSize(width: fullWidth - 4, height: 55)
+                                        return CGSize(width: fullWidth - 4, height: 60)
                                 }
-                                return CGSize(width: fullWidth / CGFloat(itemCount), height: 55)
+                                return CGSize(width: fullWidth / CGFloat(itemCount), height: 60)
                         } else {
                                 switch characterCount {
                                 case 1:
-                                        return CGSize(width: 40, height: 55)
+                                        return CGSize(width: 40, height: 60)
                                 case 2:
-                                        return CGSize(width: 60, height: 55)
+                                        return CGSize(width: 60, height: 60)
                                 case 3:
-                                        return CGSize(width: 80, height: 55)
+                                        return CGSize(width: 80, height: 60)
                                 case 4:
-                                        return CGSize(width: 100, height: 55)
+                                        return CGSize(width: 100, height: 60)
                                 default:
-                                        return CGSize(width: characterCount * 24, height: 55)
+                                        return CGSize(width: characterCount * 24, height: 60)
                                 }
                         }
                 }
@@ -213,21 +213,21 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 }
                         }
                         guard itemCount > 1 else {
-                                return CGSize(width: fullWidth - 4, height: 55)
+                                return CGSize(width: fullWidth - 4, height: 60)
                         }
-                        return CGSize(width: fullWidth / CGFloat(itemCount), height: 55)
+                        return CGSize(width: fullWidth / CGFloat(itemCount), height: 60)
                 } else {
                         switch characterCount {
                         case 1:
-                                return CGSize(width: 50, height: 55)
+                                return CGSize(width: 50, height: 60)
                         case 2:
-                                return CGSize(width: 80, height: 55)
+                                return CGSize(width: 80, height: 60)
                         case 3:
-                                return CGSize(width: 120, height: 55)
+                                return CGSize(width: 120, height: 60)
                         case 4:
-                                return CGSize(width: 140, height: 55)
+                                return CGSize(width: 140, height: 60)
                         default:
-                                return CGSize(width: characterCount * 35, height: 55)
+                                return CGSize(width: characterCount * 35, height: 60)
                         }
                 }
         }

@@ -68,21 +68,21 @@ final class CandidateCell: UICollectionViewCell {
                 }
         }
         private lazy var TopJyutpingConstraints: [NSLayoutConstraint] = {
-                [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+                [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
                  textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                  footnoteLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-                 footnoteLabel.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 22)]
+                 footnoteLabel.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 28)]
         }()
         private lazy var BottomJyutpingConstraints: [NSLayoutConstraint] = {
                 [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-                 textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-                 footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+                 textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -18),
+                 footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
                  footnoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)]
         }()
         private lazy var NoJyutpingConstraints: [NSLayoutConstraint] = {
                 [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
                  textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                 footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+                 footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
                  footnoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)]
         }()
 
