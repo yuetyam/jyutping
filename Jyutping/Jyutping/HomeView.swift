@@ -19,13 +19,10 @@ struct HomeView: View {
                                 ScrollView {
                                         EnhancedTextField(placeholder: placeholder, text: $cacheText)
                                                 .padding(10)
+                                                .frame(maxHeight: 42)
                                                 .fillBackground()
                                                 .padding()
-                                        /*
-                                        if !isJyutpingKeyboardEnabled {
-                                                GuideView()
-                                        }
-                                        */
+
                                         GuideView()
 
                                         TonesInput().padding(.top)
