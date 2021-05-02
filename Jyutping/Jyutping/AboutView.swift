@@ -3,19 +3,29 @@ import SwiftUI
 
 struct AboutView: View {
 
+        private let versionString: String = {
+                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
+                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
+                return version + " (" + build + ")"
+        }()
+
         var body: some View {
                 NavigationView {
                         ZStack {
                                 GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 ScrollView {
-                                        
+
                                         // MARK: - Version
-                                        
-                                        VersionLabel()
+
+                                        MessageView(icon: "info.circle", text: Text("Version"), message: Text(versionString))
+                                                .padding(.vertical)
                                                 .fillBackground()
+                                                .contextMenu(menuItems: {
+                                                        MenuCopyButton(content: versionString)
+                                                })
                                                 .padding()
-                                        
-                                        
+
+
                                         // MARK: - Source Code & Privacy
                                         
                                         VStack {

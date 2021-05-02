@@ -25,7 +25,6 @@
 		3759F486262FC27100266086 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F47E262FC27100266086 /* ActivityView.swift */; };
 		3759F487262FC27100266086 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F47F262FC27100266086 /* SafariView.swift */; };
 		3759F488262FC27100266086 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F480262FC27100266086 /* LinkView.swift */; };
-		3759F489262FC27100266086 /* VersionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F481262FC27100266086 /* VersionLabel.swift */; };
 		3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F482262FC27100266086 /* ShareSheetView.swift */; };
 		3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F483262FC27100266086 /* EnhancedTextField.swift */; };
 		3759F48C262FC27100266086 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F484262FC27100266086 /* LinkButton.swift */; };
@@ -148,7 +147,6 @@
 		3759F47E262FC27100266086 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		3759F47F262FC27100266086 /* SafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		3759F480262FC27100266086 /* LinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
-		3759F481262FC27100266086 /* VersionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionLabel.swift; sourceTree = "<group>"; };
 		3759F482262FC27100266086 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		3759F483262FC27100266086 /* EnhancedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
 		3759F484262FC27100266086 /* LinkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
@@ -363,7 +361,6 @@
 				3759F47D262FC27100266086 /* MessageView.swift */,
 				3759F47F262FC27100266086 /* SafariView.swift */,
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
-				3759F481262FC27100266086 /* VersionLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -638,7 +635,6 @@
 				3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */,
 				3759F41E262FB65C00266086 /* SceneDelegate.swift in Sources */,
 				3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */,
-				3759F489262FC27100266086 /* VersionLabel.swift in Sources */,
 				3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */,
 				3759F486262FC27100266086 /* ActivityView.swift in Sources */,
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
