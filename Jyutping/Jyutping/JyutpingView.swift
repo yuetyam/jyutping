@@ -7,17 +7,8 @@ struct JyutpingView: View {
         private let placeholder: String = NSLocalizedString("Search for Jyutping", comment: "")
         @State private var inputText: String = String()
 
-        private let specials: String =  #"。，；？！、：～`’“（）〈〉《》「」『』〔〕〖〗【】⋯•"#
-        private var rawCantonese: String { inputText.filter { !$0.isASCII && !specials.contains($0) } }
+        private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
-
-        private let speakerImageName: String = {
-                if #available(iOS 14, *) {
-                        return "speaker.wave.2"
-                } else {
-                        return "speaker.2"
-                }
-        }()
 
         var body: some View {
                 NavigationView {
@@ -113,6 +104,13 @@ struct JyutpingView: View {
                 utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
                 synthesizer.speak(utterance)
         }
+        private let speakerImageName: String = {
+                if #available(iOS 14, *) {
+                        return "speaker.wave.2"
+                } else {
+                        return "speaker.2"
+                }
+        }()
 }
 
 struct JyutpingView_Previews: PreviewProvider {
@@ -164,7 +162,7 @@ private struct JyutpingTable: View {
         }
 }
 
-struct SearchWebsitesView: View {
+private struct SearchWebsitesView: View {
         var body: some View {
                 VStack {
                         LinkView(iconName: "doc.text.magnifyingglass",
@@ -210,7 +208,7 @@ struct SearchWebsitesView: View {
         }
 }
 
-struct JyutpingWebsitesView: View {
+private struct JyutpingWebsitesView: View {
         var body: some View {
                 VStack {
                         LinkView(iconName: "link.circle",
