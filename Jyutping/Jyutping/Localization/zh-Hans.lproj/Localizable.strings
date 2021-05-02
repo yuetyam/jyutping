@@ -69,13 +69,16 @@ Chinese, Simplified
 "Privacy Policy" = "私隱政策";
 
 "Join Telegram Group" = "加入 Telegram 羣組";
-"Follow us on Twitter" = "跟隨 Twitter 推特";
 "GitHub Issues" = "GitHub Issues";
 
 "Email Feedback" = "郵件反饋";
 "Unable to compose mail" = "無法編寫郵件";
 "Mail Unavailable" = "郵箱不可用";
 "OK" = "好";
+
+"Copy Telegram URL" = "拷貝 Telegram 網址";
+"Copy GitHub URL" = "拷貝 GitHub 網址";
+"Copy Email Address" = "拷貝郵箱地址";
 
 "Review in App Store" = "前往 App Store 點評";
 "Share this App" = "分享本應用程式";

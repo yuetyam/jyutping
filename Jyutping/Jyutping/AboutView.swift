@@ -70,6 +70,35 @@ struct AboutView: View {
                                                         .padding(.bottom)
                                         }
                                         .fillBackground()
+                                        .contextMenu {
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://t.me/jyutping"
+                                                }) {
+                                                        HStack {
+                                                                Text("Copy Telegram URL")
+                                                                Spacer()
+                                                                Image(systemName: "doc.on.doc")
+                                                        }
+                                                }
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
+                                                }) {
+                                                        HStack {
+                                                                Text("Copy GitHub URL")
+                                                                Spacer()
+                                                                Image(systemName: "doc.on.doc")
+                                                        }
+                                                }
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "bing@ososo.io"
+                                                }) {
+                                                        HStack {
+                                                                Text("Copy Email Address")
+                                                                Spacer()
+                                                                Image(systemName: "doc.on.doc")
+                                                        }
+                                                }
+                                        }
                                         .padding()
                                         
                                         // MARK: - Review & Share

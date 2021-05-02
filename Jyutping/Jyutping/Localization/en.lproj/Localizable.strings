@@ -69,13 +69,16 @@ English
 "Privacy Policy" = "Privacy Policy";
 
 "Join Telegram Group" = "Join Telegram Group";
-"Follow us on Twitter" = "Follow us on Twitter";
 "GitHub Issues" = "GitHub Issues";
 
 "Email Feedback" = "Email Feedback";
 "Unable to compose mail" = "Unable to compose mail";
 "Mail Unavailable" = "Mail Unavailable";
 "OK" = "OK";
+
+"Copy Telegram URL" = "Copy Telegram URL";
+"Copy GitHub URL" = "Copy GitHub URL";
+"Copy Email Address" = "Copy Email Address";
 
 "Review in App Store" = "Review in App Store";
 "Share this App" = "Share this App";
