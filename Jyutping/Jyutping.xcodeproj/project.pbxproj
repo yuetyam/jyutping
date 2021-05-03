@@ -22,7 +22,6 @@
 		3759F472262FC07D00266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F474262FC07D00266086 /* InfoPlist.strings */; };
 		3759F47B262FC17C00266086 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3759F47A262FC17C00266086 /* Settings.bundle */; };
 		3759F485262FC27100266086 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F47D262FC27100266086 /* MessageView.swift */; };
-		3759F486262FC27100266086 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F47E262FC27100266086 /* ActivityView.swift */; };
 		3759F487262FC27100266086 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F47F262FC27100266086 /* SafariView.swift */; };
 		3759F488262FC27100266086 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F480262FC27100266086 /* LinkView.swift */; };
 		3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F482262FC27100266086 /* ShareSheetView.swift */; };
@@ -71,6 +70,7 @@
 		3759F4E8262FC86600266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4EA262FC86600266086 /* InfoPlist.strings */; };
 		3759F4F1262FC8A300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4F3262FC8A300266086 /* Localizable.strings */; };
 		3775D53D263AF1D20024BF12 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */; };
+		377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */; };
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 /* End PBXBuildFile section */
@@ -144,7 +144,6 @@
 		3759F478262FC09900266086 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3759F47A262FC17C00266086 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3759F47D262FC27100266086 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		3759F47E262FC27100266086 /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		3759F47F262FC27100266086 /* SafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		3759F480262FC27100266086 /* LinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
 		3759F482262FC27100266086 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
@@ -200,6 +199,7 @@
 		3759F4F6262FC8A700266086 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3759F4F7262FC8A800266086 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
+		377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -354,13 +354,13 @@
 		3759F47C262FC24800266086 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3759F47E262FC27100266086 /* ActivityView.swift */,
 				3759F483262FC27100266086 /* EnhancedTextField.swift */,
 				3759F484262FC27100266086 /* LinkButton.swift */,
 				3759F480262FC27100266086 /* LinkView.swift */,
 				3759F47D262FC27100266086 /* MessageView.swift */,
 				3759F47F262FC27100266086 /* SafariView.swift */,
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
+				377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -636,8 +636,8 @@
 				3759F41E262FB65C00266086 /* SceneDelegate.swift in Sources */,
 				3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */,
 				3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */,
-				3759F486262FC27100266086 /* ActivityView.swift in Sources */,
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
+				377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */,
 				3759F488262FC27100266086 /* LinkView.swift in Sources */,
 				3759F495262FC2B600266086 /* JyutpingView.swift in Sources */,
 				3759F48C262FC27100266086 /* LinkButton.swift in Sources */,
