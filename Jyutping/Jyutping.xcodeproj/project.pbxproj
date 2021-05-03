@@ -27,7 +27,7 @@
 		3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F482262FC27100266086 /* ShareSheetView.swift */; };
 		3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F483262FC27100266086 /* EnhancedTextField.swift */; };
 		3759F48C262FC27100266086 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F484262FC27100266086 /* LinkButton.swift */; };
-		3759F492262FC2B600266086 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* InitialsTable.swift */; };
+		3759F492262FC2B600266086 /* JyutpingTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* JyutpingTables.swift */; };
 		3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48E262FC2B600266086 /* AcknowledgementsView.swift */; };
 		3759F494262FC2B600266086 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48F262FC2B600266086 /* HomeView.swift */; };
 		3759F495262FC2B600266086 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F490262FC2B600266086 /* JyutpingView.swift */; };
@@ -149,7 +149,7 @@
 		3759F482262FC27100266086 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		3759F483262FC27100266086 /* EnhancedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
 		3759F484262FC27100266086 /* LinkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
-		3759F48D262FC2B600266086 /* InitialsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
+		3759F48D262FC2B600266086 /* JyutpingTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingTables.swift; sourceTree = "<group>"; };
 		3759F48E262FC2B600266086 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		3759F48F262FC2B600266086 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3759F490262FC2B600266086 /* JyutpingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
@@ -272,10 +272,10 @@
 				3759F41F262FB65C00266086 /* ContentView.swift */,
 				3759F48F262FC2B600266086 /* HomeView.swift */,
 				3759F490262FC2B600266086 /* JyutpingView.swift */,
+				3759F48D262FC2B600266086 /* JyutpingTables.swift */,
 				3759F491262FC2B600266086 /* AboutView.swift */,
 				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
 				3759F48E262FC2B600266086 /* AcknowledgementsView.swift */,
-				3759F48D262FC2B600266086 /* InitialsTable.swift */,
 				3759F47C262FC24800266086 /* Views */,
 				3759F421262FB65D00266086 /* Assets.xcassets */,
 				3759F426262FB65D00266086 /* LaunchScreen.storyboard */,
@@ -631,7 +631,7 @@
 				3759F494262FC2B600266086 /* HomeView.swift in Sources */,
 				3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */,
 				3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */,
-				3759F492262FC2B600266086 /* InitialsTable.swift in Sources */,
+				3759F492262FC2B600266086 /* JyutpingTables.swift in Sources */,
 				3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */,
 				3759F41E262FB65C00266086 /* SceneDelegate.swift in Sources */,
 				3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */,

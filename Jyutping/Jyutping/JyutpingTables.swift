@@ -1,12 +1,10 @@
 import SwiftUI
 
 struct InitialsTable: View {
-        
         var body: some View {
                 ScrollView {
-                        CellView(content: "例字,IPA,粵拼")
-                                .padding(.vertical)
-                        
+                        CellView(content: "例字,IPA,粵拼").padding(.vertical)
+
                         ForEach(lines, id: \.self) {
                                 Divider()
                                 CellView(content: $0)
@@ -17,9 +15,9 @@ struct InitialsTable: View {
                 }
                 .navigationBarTitle("Jyutping Initials", displayMode: .inline)
         }
-        
+
         private var lines: [String] { content.components(separatedBy: "\n") }
-        
+
         private let content: String = """
 巴 baa1,[p],b
 趴 paa1,[pʰ],p
@@ -43,30 +41,25 @@ struct InitialsTable: View {
 """
 }
 
-struct InitialsTable_Previews: PreviewProvider {
-        static var previews: some View {
-                InitialsTable()
-        }
-}
 
 private struct CellView: View {
-        
+
         let content: String
         private var components: [String] { content.components(separatedBy: ",") }
-        
-        private var exampleSize: CGFloat {
+
+        private var width: CGFloat {
                 if UITraitCollection.current.userInterfaceIdiom == .phone {
                         return (UIScreen.main.bounds.width - 32) / 3
                 } else {
                         return 120
                 }
         }
-        
+
         var body: some View {
                 HStack {
-                        Text(components[0]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
+                        Text(components[0]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
                         
-                        Text(components[1]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
+                        Text(components[1]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
                         
                         Text(components[2])
                         Spacer()
@@ -80,9 +73,8 @@ private struct CellView: View {
 struct FinalsTable: View {
         var body: some View {
                 ScrollView {
-                        CellView(content: "例字,IPA,粵拼")
-                                .padding(.vertical)
-                        
+                        CellView(content: "例字,IPA,粵拼").padding(.vertical)
+
                         ForEach(lines, id: \.self) {
                                 Divider()
                                 CellView(content: $0)
@@ -93,10 +85,10 @@ struct FinalsTable: View {
                 }
                 .navigationBarTitle(Text("Jyutping Finals"), displayMode: .inline)
         }
-        
+
         private var lines: [String] { content.components(separatedBy: "\n") }
-        
-        private var content: String = """
+
+        private let content: String = """
 渣 zaa1,[aː],aa
 齋 zaai1,[aːi],aai
 嘲 zaau1,[aːu],aau
@@ -172,9 +164,8 @@ struct FinalsTable: View {
 struct TonesTable: View {
         var body: some View {
                 ScrollView {
-                        ToneCellView(content: "例字,調值,聲調,粵拼")
-                                .padding(.vertical)
-                        
+                        ToneCellView(content: "例字,調值,聲調,粵拼").padding(.vertical)
+
                         ForEach(lines, id: \.self) {
                                 Divider()
                                 ToneCellView(content: $0)
@@ -185,9 +176,9 @@ struct TonesTable: View {
                 }
                 .navigationBarTitle(Text("Jyutping Tones"), displayMode: .inline)
         }
-        
+
         private var lines: [String] { content.components(separatedBy: "\n") }
-        
+
         private let content: String = """
 分 fan1,55/53,陰平,1
 粉 fan2,35,陰上,2
@@ -202,25 +193,25 @@ struct TonesTable: View {
 }
 
 private struct ToneCellView: View {
-        
+
         let content: String
         private var components: [String] { content.components(separatedBy: ",") }
-        
-        private var exampleSize: CGFloat {
+
+        private var width: CGFloat {
                 if UITraitCollection.current.userInterfaceIdiom == .phone {
                         return (UIScreen.main.bounds.width - 32) / 4
                 } else {
                         return 120
                 }
         }
-        
+
         var body: some View {
                 HStack {
-                        Text(components[0]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
+                        Text(components[0]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
                         
-                        Text(components[1]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
+                        Text(components[1]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
                         
-                        Text(components[2]).frame(minWidth: 50, idealWidth: exampleSize, maxWidth: exampleSize, alignment: .leading)
+                        Text(components[2]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
                         
                         Text(components[3])
                         Spacer()
