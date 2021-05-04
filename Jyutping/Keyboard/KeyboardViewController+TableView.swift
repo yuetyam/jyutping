@@ -3,7 +3,7 @@ import UIKit
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
         func numberOfSections(in tableView: UITableView) -> Int {
-                6
+                return jyutpingDisplay < 3 ? 6 : 5
         }
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -21,10 +21,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 3:
                         // Jyutping Display
                         return 3
-                case 4:
+                case 4 where jyutpingDisplay < 3:
                         // Jyutping Tones Display
                         return 4
-                case 5:
+                case 4, 5:
                         // Clear User Lexicon
                         return 1
                 default:
@@ -40,9 +40,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return NSLocalizedString("Keyboard Layout", comment: "")
                 case 3:
                         return NSLocalizedString("Jyutping Display", comment: "")
-                case 4:
+                case 4 where jyutpingDisplay < 3:
                         return NSLocalizedString("Jyutping Tones Display", comment: "")
-                case 5:
+                case 4, 5:
                         // Zero-width space
                         return "\u{200B}"
                 default:
@@ -139,7 +139,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
 
-                case 4:
+                case 4 where jyutpingDisplay < 3:
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
@@ -159,7 +159,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
 
-                case 5:
+                case 4, 5:
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: "")
                         cell.textLabel?.textColor = .systemRed
@@ -224,7 +224,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4:
+                case 4 where jyutpingDisplay < 3:
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
@@ -243,7 +243,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 5:
+                case 4, 5:
                         clearUserLexicon()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)
