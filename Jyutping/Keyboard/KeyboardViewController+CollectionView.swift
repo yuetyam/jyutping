@@ -52,7 +52,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 guard let cell: CandidateCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as? CandidateCell else {
                         return UICollectionViewCell()
                 }
-                if cell.jyutpingDisplay != self.jyutpingDisplay {
+                if cell.footnoteStyle != self.footnoteStyle {
                         cell.shouldUpdateSubviews = true
                 }
                 if cell.logogram != self.logogram {
@@ -73,7 +73,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 // REASON: In some apps (like QQ), the cell may not showing the correct default colors
                 let textColor: UIColor = isDarkAppearance ? .white : .black
                 cell.textLabel.textColor = textColor
-                cell.footnoteLabel.textColor = jyutpingDisplay == 3 ? .clear : textColor
+                cell.footnoteLabel.textColor = footnoteStyle == 3 ? .clear : textColor
 
                 return cell
         }
@@ -156,7 +156,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return CGSize(width: 42, height: 42)
                 }
                 let characterCount: Int = candidates[indexPath.row].text.count
-                guard jyutpingDisplay < 3 else {
+                guard footnoteStyle < 3 else {
                         if keyboardLayout == .candidateBoard {
                                 let fullWidth: CGFloat = collectionView.bounds.size.width
                                 var itemCount: Int {

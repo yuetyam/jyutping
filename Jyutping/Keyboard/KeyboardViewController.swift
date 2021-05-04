@@ -457,9 +457,9 @@ final class KeyboardViewController: UIInputViewController {
         /// 2: 喺候選詞下邊
         ///
         /// 3: 唔顯示
-        private(set) lazy var jyutpingDisplay: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
-        func updateJyutpingDisplay() {
-                jyutpingDisplay = UserDefaults.standard.integer(forKey: "jyutping_display")
+        private(set) lazy var footnoteStyle: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
+        func updateFootnoteStyle() {
+                footnoteStyle = UserDefaults.standard.integer(forKey: "jyutping_display")
         }
 
         /// 粵拼聲調樣式

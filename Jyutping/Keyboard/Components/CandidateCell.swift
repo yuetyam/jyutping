@@ -5,7 +5,7 @@ final class CandidateCell: UICollectionViewCell {
         let textLabel: UILabel = UILabel()
         let footnoteLabel: UILabel = UILabel()
 
-        private(set) lazy var jyutpingDisplay: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
+        private(set) lazy var footnoteStyle: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
         lazy var shouldUpdateSubviews: Bool = false
 
         private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
@@ -37,7 +37,7 @@ final class CandidateCell: UICollectionViewCell {
         override func prepareForReuse() {
                 super.prepareForReuse()
                 if shouldUpdateSubviews {
-                        jyutpingDisplay = UserDefaults.standard.integer(forKey: "jyutping_display")
+                        footnoteStyle = UserDefaults.standard.integer(forKey: "jyutping_display")
                         updateSubviews()
                         shouldUpdateSubviews = false
                 }
@@ -49,7 +49,7 @@ final class CandidateCell: UICollectionViewCell {
         }
 
         private func updateSubviews() {
-                switch jyutpingDisplay {
+                switch footnoteStyle {
                 case 2:
                         NSLayoutConstraint.deactivate(TopJyutpingConstraints)
                         NSLayoutConstraint.deactivate(NoJyutpingConstraints)

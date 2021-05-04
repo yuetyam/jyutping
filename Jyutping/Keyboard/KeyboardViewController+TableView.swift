@@ -3,7 +3,7 @@ import UIKit
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
         func numberOfSections(in tableView: UITableView) -> Int {
-                return jyutpingDisplay < 3 ? 6 : 5
+                return footnoteStyle < 3 ? 6 : 5
         }
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -21,7 +21,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 3:
                         // Jyutping Display
                         return 3
-                case 4 where jyutpingDisplay < 3:
+                case 4 where footnoteStyle < 3:
                         // Jyutping Tones Display
                         return 4
                 case 4, 5:
@@ -40,7 +40,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return NSLocalizedString("Keyboard Layout", comment: "")
                 case 3:
                         return NSLocalizedString("Jyutping Display", comment: "")
-                case 4 where jyutpingDisplay < 3:
+                case 4 where footnoteStyle < 3:
                         return NSLocalizedString("Jyutping Tones Display", comment: "")
                 case 4, 5:
                         // Zero-width space
@@ -127,19 +127,19 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: "")
-                                cell.accessoryType = (jyutpingDisplay < 2) ? .checkmark : .none
+                                cell.accessoryType = (footnoteStyle < 2) ? .checkmark : .none
                         case 1:
                                 cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: "")
-                                cell.accessoryType = jyutpingDisplay == 2 ? .checkmark : .none
+                                cell.accessoryType = footnoteStyle == 2 ? .checkmark : .none
                         case 2:
                                 cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: "")
-                                cell.accessoryType = jyutpingDisplay == 3 ? .checkmark : .none
+                                cell.accessoryType = footnoteStyle == 3 ? .checkmark : .none
                         default:
                                 break
                         }
                         return cell
 
-                case 4 where jyutpingDisplay < 3:
+                case 4 where footnoteStyle < 3:
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
@@ -220,11 +220,11 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         triggerHapticFeedback()
-                        updateJyutpingDisplay()
+                        updateFootnoteStyle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4 where jyutpingDisplay < 3:
+                case 4 where footnoteStyle < 3:
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
