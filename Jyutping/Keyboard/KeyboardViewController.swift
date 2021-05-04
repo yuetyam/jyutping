@@ -58,6 +58,7 @@ final class KeyboardViewController: UIInputViewController {
                 super.viewDidLoad()
                 initialize()
         }
+        private lazy var shouldKeepInputTextWhileTextDidChange: Bool = false
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
                 let asked: KeyboardLayout = askedKeyboardLayout
@@ -68,8 +69,13 @@ final class KeyboardViewController: UIInputViewController {
                                 keyboardLayout = asked
                         }
                 }
-                if !textDocumentProxy.hasText && !inputText.isEmpty {
-                        inputText = ""
+                if shouldKeepInputTextWhileTextDidChange {
+                        shouldKeepInputTextWhileTextDidChange = false
+                } else {
+                        if !inputText.isEmpty && !textDocumentProxy.hasText {
+                                // User just tapped the clear button in the text field
+                                inputText = ""
+                        }
                 }
         }
         override func viewDidAppear(_ animated: Bool) {
@@ -180,6 +186,15 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         private lazy var markedText: String = "" {
+
+                // REASON: Chrome
+                willSet {
+                        guard markedText.isEmpty && !newValue.isEmpty else { return }
+                        guard let type = textDocumentProxy.keyboardType, type == .webSearch else { return }
+                        shouldKeepInputTextWhileTextDidChange = true
+                        textDocumentProxy.insertText("")
+                }
+
                 didSet {
                         guard shouldMarkInput else { return }
                         handleMarkedText()
