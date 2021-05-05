@@ -43,7 +43,7 @@ struct AboutView: View {
                                                 
                                                 Divider()
                                                 
-                                                LinkButton(url: URL(string: "https://yuetyam.github.io/jyutping/privacy/privacy-policy-ios")!,
+                                                LinkButton(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!,
                                                            content: MessageView(icon: "lock.circle", text: Text("Privacy Policy"), symbol: Image(systemName: "safari")))
                                                         .padding(.bottom)
                                         }
