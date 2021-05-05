@@ -224,7 +224,8 @@ final class KeyboardViewController: UIInputViewController {
                                 self.shouldMarkInput = true
                         }
                 }
-                let range: NSRange = NSRange(location: text.count, length: 0)
+                let location: Int = NSString(string: text).length
+                let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
         }
@@ -240,7 +241,8 @@ final class KeyboardViewController: UIInputViewController {
                         textDocumentProxy.unmarkText()
                         return
                 }
-                let range: NSRange = NSRange(location: markedText.count, length: 0)
+                let location: Int = NSString(string: markedText).length
+                let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(markedText, selectedRange: range)
         }
 
