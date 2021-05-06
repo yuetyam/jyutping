@@ -23,13 +23,6 @@ struct AcknowledgementsView: View {
                                          url: URL(string: "https://github.com/BYVoid/OpenCC")!)
                                         .fillBackground()
                                         .padding(.horizontal)
-                                LinkView(iconName: "textformat",
-                                         text: Text("Source Han Sans"),
-                                         footnote: Text("© Adobe. OFL 1.1"),
-                                         symbolName: "safari",
-                                         url: URL(string: "https://github.com/adobe-fonts/source-han-sans")!)
-                                        .fillBackground()
-                                        .padding()
                         }
                         .foregroundColor(.primary)
                         .navigationBarTitle(Text("Acknowledgements"), displayMode: .inline)
