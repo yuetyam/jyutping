@@ -3,7 +3,11 @@ import SwiftUI
 struct AcknowledgementsView: View {
         var body: some View {
                 ZStack {
-                        GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
+                        if #available(iOS 14.0, *) {
+                                GlobalBackgroundColor().ignoresSafeArea()
+                        } else {
+                                GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
+                        }
                         ScrollView {
                                 LinkView(iconName: "book",
                                          text: Text("Rime Cantonese"),

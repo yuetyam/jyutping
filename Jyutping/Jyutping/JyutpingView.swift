@@ -13,7 +13,11 @@ struct JyutpingView: View {
         var body: some View {
                 NavigationView {
                         ZStack {
-                                GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
+                                if #available(iOS 14.0, *) {
+                                        GlobalBackgroundColor().ignoresSafeArea()
+                                } else {
+                                        GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
+                                }
                                 ScrollView {
                                         HStack {
                                                 Image(systemName: "magnifyingglass").opacity(0.5).padding(.leading, 8)
