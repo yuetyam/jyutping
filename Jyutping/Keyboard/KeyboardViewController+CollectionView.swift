@@ -78,20 +78,17 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 return cell
         }
         private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
+                let font: UIFont = .systemFont(ofSize: 10)
+                let offset: NSNumber = toneStyle == 3 ? 3 : -3
                 let jyutpings: [String] = text.components(separatedBy: " ")
                 let attributed: [NSMutableAttributedString] = jyutpings.map { (jyutping) -> NSMutableAttributedString in
-                        let font: UIFont = .systemFont(ofSize: 10)
-                        let newText = NSMutableAttributedString(string: jyutping)
-                        newText.addAttribute(NSAttributedString.Key.font,
-                                             value: font,
-                                             range: NSRange(location: jyutping.count - 1, length: 1))
-                        newText.addAttribute(NSAttributedString.Key.baselineOffset,
-                                             value: toneStyle == 3 ? 3 : -3,
-                                             range: NSRange(location: jyutping.count - 1, length: 1))
-                        return newText
+                        let newString: NSMutableAttributedString = NSMutableAttributedString(string: jyutping)
+                        let range: NSRange = NSRange(location: newString.length - 1, length: 1)
+                        newString.addAttribute(NSAttributedString.Key.font, value: font, range: range)
+                        newString.addAttribute(NSAttributedString.Key.baselineOffset, value: offset, range: range)
+                        return newString
                 }
-                guard !attributed.isEmpty else { return NSAttributedString(string: text) }
-                let combined: NSMutableAttributedString = attributed[0]
+                guard let combined: NSMutableAttributedString = attributed.first else { return NSAttributedString(string: text) }
                 if attributed.count > 1 {
                         for number in 1..<attributed.count {
                                 combined.append(NSAttributedString(string: " "))
