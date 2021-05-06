@@ -54,7 +54,6 @@
 		3759F4D5262FC7EA00266086 /* KeyView+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AF262FC7E900266086 /* KeyView+properties.swift */; };
 		3759F4D6262FC7EA00266086 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B0262FC7E900266086 /* KeyView.swift */; };
 		3759F4D8262FC7EA00266086 /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B2262FC7E900266086 /* AudioFeedback.swift */; };
-		3759F4D9262FC7EA00266086 /* SourceHanSansK-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4B3262FC7EA00266086 /* SourceHanSansK-Regular.otf */; };
 		3759F4DA262FC7EA00266086 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B5262FC7EA00266086 /* Emoji.swift */; };
 		3759F4DB262FC7EA00266086 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B6262FC7EA00266086 /* EmojiCell.swift */; };
 		3759F4DC262FC7EA00266086 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B7262FC7EA00266086 /* EmojiBoard.swift */; };
@@ -175,7 +174,6 @@
 		3759F4AF262FC7E900266086 /* KeyView+properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+properties.swift"; sourceTree = "<group>"; };
 		3759F4B0262FC7E900266086 /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		3759F4B2262FC7E900266086 /* AudioFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
-		3759F4B3262FC7EA00266086 /* SourceHanSansK-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansK-Regular.otf"; sourceTree = "<group>"; };
 		3759F4B5262FC7EA00266086 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		3759F4B6262FC7EA00266086 /* EmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		3759F4B7262FC7EA00266086 /* EmojiBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 				3759F4B4262FC7EA00266086 /* Emoji */,
 				3759F4BE262FC7EA00266086 /* Extensions */,
 				3759F453262FBA0500266086 /* Info.plist */,
-				3759F4B3262FC7EA00266086 /* SourceHanSansK-Regular.otf */,
 				3759F4F8262FC8B600266086 /* Localization */,
 			);
 			path = Keyboard;
@@ -613,7 +610,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3759F4D9262FC7EA00266086 /* SourceHanSansK-Regular.otf in Resources */,
 				3759F4F1262FC8A300266086 /* Localizable.strings in Resources */,
 				3759F4E8262FC86600266086 /* InfoPlist.strings in Resources */,
 			);

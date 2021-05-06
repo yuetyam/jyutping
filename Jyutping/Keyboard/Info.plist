@@ -40,9 +40,5 @@
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).KeyboardViewController</string>
 	</dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SourceHanSansK-Regular.otf</string>
-	</array>
 </dict>
 </plist>
