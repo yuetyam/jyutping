@@ -52,50 +52,42 @@ final class CandidateCell: UICollectionViewCell {
                 switch footnoteStyle {
                 case 2:
                         NSLayoutConstraint.deactivate(TopJyutpingConstraints)
-                        NSLayoutConstraint.deactivate(NoJyutpingConstraints)
+                        NSLayoutConstraint.deactivate(centerTextConstraints)
                         NSLayoutConstraint.activate(BottomJyutpingConstraints)
                         footnoteLabel.textColor = textLabel.textColor
                 case 3:
                         NSLayoutConstraint.deactivate(TopJyutpingConstraints)
                         NSLayoutConstraint.deactivate(BottomJyutpingConstraints)
-                        NSLayoutConstraint.activate(NoJyutpingConstraints)
+                        NSLayoutConstraint.activate(centerTextConstraints)
                         footnoteLabel.textColor = .clear
                 default:
                         NSLayoutConstraint.deactivate(BottomJyutpingConstraints)
-                        NSLayoutConstraint.deactivate(NoJyutpingConstraints)
+                        NSLayoutConstraint.deactivate(centerTextConstraints)
                         NSLayoutConstraint.activate(TopJyutpingConstraints)
                         footnoteLabel.textColor = textLabel.textColor
                 }
         }
-        private lazy var TopJyutpingConstraints: [NSLayoutConstraint] = {
-                [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-                 textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                 footnoteLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-                 footnoteLabel.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant: 28)]
-        }()
-        private lazy var BottomJyutpingConstraints: [NSLayoutConstraint] = {
-                [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-                 textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -18),
-                 footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
-                 footnoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)]
-        }()
-        private lazy var NoJyutpingConstraints: [NSLayoutConstraint] = {
-                [textLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-                 textLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-                 footnoteLabel.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
-                 footnoteLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)]
-        }()
+        private lazy var TopJyutpingConstraints: [NSLayoutConstraint] = [
+                textLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 6),
+                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -16)
+        ]
+        private lazy var BottomJyutpingConstraints: [NSLayoutConstraint] = [
+                textLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10),
+                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12)
+        ]
+        private lazy var centerTextConstraints: [NSLayoutConstraint] = [
+                textLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12)
+        ]
 
         private func updateFonts() {
                 switch logogram {
-                case 2:
-                        textLabel.font = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
                 case 3:
                         textLabel.font = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
                 case 4:
                         textLabel.font = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
                 default:
-                        textLabel.font = UIFont(name: "SourceHanSansK-Regular", size: 20) ?? .systemFont(ofSize: 20)
+                        textLabel.font = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
                 }
         }
 }
