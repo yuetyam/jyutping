@@ -127,20 +127,20 @@ extension KeyView {
                 }
         }
 
-        var keyImage: UIImage? {
+        var keyImageName: String? {
                 switch event {
                 case .switchInputMethod:
-                        return UIImage(systemName: "globe")
+                        return "globe"
                 case .backspace:
-                        return UIImage(systemName: "delete.left")
+                        return "delete.left"
                 case .shift:
                         switch layout {
                         case .cantonese(.uppercased), .alphabetic(.uppercased):
-                                return UIImage(systemName: "shift.fill")
+                                return "shift.fill"
                         case .cantonese(.capsLocked), .alphabetic(.capsLocked):
-                                return UIImage(systemName: "capslock.fill")
+                                return "capslock.fill"
                         default:
-                                return UIImage(systemName: "shift")
+                                return "shift"
                         }
                 default:
                         return nil

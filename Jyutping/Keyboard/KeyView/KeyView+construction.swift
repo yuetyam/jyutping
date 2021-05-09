@@ -117,6 +117,8 @@ extension KeyView {
                         keyImageView.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
                 keyImageView.contentMode = .scaleAspectFit
-                keyImageView.image = keyImage?.withTintColor(foreColor)
+                if let imageName: String = keyImageName {
+                        keyImageView.image = UIImage(systemName: imageName)?.withTintColor(foreColor)
+                }
         }
 }
