@@ -7,4 +7,6 @@ extension UIColor {
 
         /// .clear && isUserInteractionEnabled
         static let interactiveClear: UIColor = UIColor(white: 1, alpha: 0.001)
+
+        static let selection: UIColor =  UIColor(displayP3Red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
 }

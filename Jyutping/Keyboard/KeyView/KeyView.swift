@@ -123,7 +123,7 @@ final class KeyView: UIView {
                                 if condition {
                                         let this: Int = beyondMidX ? (calloutViews.count - 1 - index): index
                                         _ = calloutViews.map({ $0.backgroundColor = backColor })
-                                        calloutViews[this].backgroundColor = selectionColor
+                                        calloutViews[this].backgroundColor = .selection
                                         peekingText = calloutViews[this].text
                                 }
                         }
@@ -270,7 +270,6 @@ final class KeyView: UIView {
         private lazy var shapeWidth: CGFloat = shape.frame.width
         private lazy var shapeHeight: CGFloat = shape.frame.height
         private lazy var bottomCenter: CGPoint = CGPoint(x: shape.frame.midX, y: shape.frame.maxY)
-        private lazy var selectionColor: UIColor =  UIColor(displayP3Red: 52.0 / 255, green: 120.0 / 255, blue: 246.0 / 255, alpha: 1)
 
 
         // MARK: - Preview
@@ -389,7 +388,7 @@ final class KeyView: UIView {
                 case .key(let seat) where seat.hasChildren:
                         let firstChild: KeyElement = seat.children.first!
                         let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, alignments: firstChild.alignments)
-                        firstKey.backgroundColor = selectionColor
+                        firstKey.backgroundColor = .selection
                         var keys: [CalloutView] = [firstKey]
                         for index in 1..<seat.children.count {
                                 let element: KeyElement = seat.children[index]
