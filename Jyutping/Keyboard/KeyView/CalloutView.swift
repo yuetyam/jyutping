@@ -21,13 +21,14 @@ final class CalloutView: UIView {
                 layer.cornerRadius = 5
                 layer.cornerCurve = .continuous
                 setupText()
-                setupHeader()
-                setupFooter()
+                if header.hasContent {
+                        setupHeader()
+                }
+                if footer.hasContent {
+                        setupFooter()
+                }
         }
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-
+        required init?(coder: NSCoder) { fatalError("CalloutView.init(coder:) error") }
         override var intrinsicContentSize: CGSize { return CGSize(width: 40, height: 40) }
 
         private func setupText() {
