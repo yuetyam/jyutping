@@ -71,7 +71,14 @@ struct AboutView: View {
                                                         MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.up.right"))
                                                 }.padding(.top)
                                                 Divider()
-                                                
+                                                Button(action: {
+                                                        // Twitter App supports Universal Links
+                                                        let twitterUrl: URL = URL(string: "https://twitter.com/yuet_yam")!
+                                                        UIApplication.shared.open(twitterUrl)
+                                                }) {
+                                                        MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.up.right"))
+                                                }
+                                                Divider()
                                                 Button(action: {
                                                         // GitHub App supports Universal Links
                                                         let githubUrl: URL = URL(string: "https://github.com/yuetyam/jyutping/issues")!
@@ -90,6 +97,15 @@ struct AboutView: View {
                                                 }) {
                                                         HStack {
                                                                 Text("Copy Telegram URL")
+                                                                Spacer()
+                                                                Image(systemName: "doc.on.doc")
+                                                        }
+                                                }
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://twitter.com/yuet_yam"
+                                                }) {
+                                                        HStack {
+                                                                Text("Copy Twitter URL")
                                                                 Spacer()
                                                                 Image(systemName: "doc.on.doc")
                                                         }
