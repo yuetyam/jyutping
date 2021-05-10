@@ -8,6 +8,8 @@ final class CalloutView: UIView {
         private let alignments: (header: Alignment, footer: Alignment)
 
         private let textLabel: UILabel = UILabel()
+        private let headerLabel: UILabel = UILabel()
+        private let footerLabel: UILabel = UILabel()
 
         init(text: String,
              header: String? = nil,
@@ -31,6 +33,12 @@ final class CalloutView: UIView {
         required init?(coder: NSCoder) { fatalError("CalloutView.init(coder:) error") }
         override var intrinsicContentSize: CGSize { return CGSize(width: 40, height: 40) }
 
+        func setTextColor(color: UIColor) {
+                textLabel.textColor = color
+                headerLabel.textColor = color.withAlphaComponent(0.8)
+                footerLabel.textColor = color.withAlphaComponent(0.7)
+        }
+
         private func setupText() {
                 addSubview(textLabel)
                 textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -39,12 +47,11 @@ final class CalloutView: UIView {
                         textLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
                         textLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
-                textLabel.font = .systemFont(ofSize: 19)
+                textLabel.font = .systemFont(ofSize: 20)
                 textLabel.textAlignment = .center
                 textLabel.text = text
         }
         private func setupHeader() {
-                let headerLabel: UILabel = UILabel()
                 addSubview(headerLabel)
                 headerLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -65,7 +72,6 @@ final class CalloutView: UIView {
                 }
         }
         private func setupFooter() {
-                let footerLabel: UILabel = UILabel()
                 addSubview(footerLabel)
                 footerLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([

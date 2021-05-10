@@ -122,8 +122,12 @@ final class KeyView: UIView {
                                 let condition: Bool = beyondMidX ? leftCondition : rightCondition
                                 if condition {
                                         let this: Int = beyondMidX ? (calloutViews.count - 1 - index): index
-                                        _ = calloutViews.map({ $0.backgroundColor = backColor })
+                                        _ = calloutViews.map {
+                                                $0.backgroundColor = backColor
+                                                $0.setTextColor(foreColor)
+                                        }
                                         calloutViews[this].backgroundColor = .selection
+                                        calloutViews[this].setTextColor(.white)
                                         peekingText = calloutViews[this].text
                                 }
                         }
@@ -339,7 +343,10 @@ final class KeyView: UIView {
         }
         private lazy var isCalloutDisplaying: Bool = false
         private func removeCallout() {
-                _ = calloutViews.map({ $0.backgroundColor = backColor })
+                _ = calloutViews.map {
+                        $0.backgroundColor = backColor
+                        $0.setTextColor(foreColor)
+                }
                 calloutStackView.removeFromSuperview()
                 calloutLayer.removeFromSuperlayer()
                 isCalloutDisplaying = false
@@ -389,6 +396,7 @@ final class KeyView: UIView {
                         let firstChild: KeyElement = seat.children.first!
                         let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, alignments: firstChild.alignments)
                         firstKey.backgroundColor = .selection
+                        firstKey.setTextColor(.white)
                         var keys: [CalloutView] = [firstKey]
                         for index in 1..<seat.children.count {
                                 let element: KeyElement = seat.children[index]
