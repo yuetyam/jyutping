@@ -67,6 +67,8 @@ Chinese, Simplified
 "Source Code" = "源碼";
 "Acknowledgements" = "致謝";
 "Privacy Policy" = "私隱政策";
+"Copy Source Code URL" = "拷貝源碼地址";
+"Copy Privacy Policy URL" = "拷貝私隱政策地址";
 
 "Join Telegram Group" = "加入 Telegram 羣組";
 "Follow us on Twitter" = "關注 Twitter";
@@ -84,3 +86,4 @@ Chinese, Simplified
 
 "Review in App Store" = "前往 App Store 點評";
 "Share this App" = "分享本應用程式";
+"Copy App Store link" = "拷貝 App Store 鏈接";

@@ -67,6 +67,8 @@ English
 "Source Code" = "Source Code";
 "Acknowledgements" = "Acknowledgements";
 "Privacy Policy" = "Privacy Policy";
+"Copy Source Code URL" = "Copy Source Code URL";
+"Copy Privacy Policy URL" = "Copy Privacy Policy URL";
 
 "Join Telegram Group" = "Join Telegram Group";
 "Follow us on Twitter" = "Follow us on Twitter";
@@ -84,3 +86,4 @@ English
 
 "Review in App Store" = "Review in App Store";
 "Share this App" = "Share this App";
+"Copy App Store link" = "Copy App Store link";

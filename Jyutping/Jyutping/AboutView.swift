@@ -36,22 +36,30 @@ struct AboutView: View {
                                                 LinkButton(url: URL(string: "https://github.com/yuetyam/jyutping")!,
                                                            content: MessageView(icon: "number.circle", text: Text("Source Code"), symbol: Image(systemName: "safari")))
                                                         .padding(.top)
-                                                
                                                 Divider()
-                                                
                                                 NavigationLink(destination: AcknowledgementsView()) {
                                                         MessageView(icon: "wand.and.stars",
                                                                     text: Text("Acknowledgements"),
                                                                     symbol: Image(systemName: "chevron.right"))
                                                 }
-                                                
                                                 Divider()
-                                                
                                                 LinkButton(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!,
                                                            content: MessageView(icon: "lock.circle", text: Text("Privacy Policy"), symbol: Image(systemName: "safari")))
                                                         .padding(.bottom)
                                         }
                                         .fillBackground()
+                                        .contextMenu {
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
+                                                }) {
+                                                        MenuLabel(text: "Copy Source Code URL", image: "doc.on.doc")
+                                                }
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://yuetyam.github.io/jyutping/privacy"
+                                                }) {
+                                                        MenuLabel(text: "Copy Privacy Policy URL", image: "doc.on.doc")
+                                                }
+                                        }
                                         .padding()
                                         
                                         
@@ -95,60 +103,49 @@ struct AboutView: View {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://t.me/jyutping"
                                                 }) {
-                                                        HStack {
-                                                                Text("Copy Telegram URL")
-                                                                Spacer()
-                                                                Image(systemName: "doc.on.doc")
-                                                        }
+                                                        MenuLabel(text: "Copy Telegram URL", image: "doc.on.doc")
                                                 }
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://twitter.com/yuet_yam"
                                                 }) {
-                                                        HStack {
-                                                                Text("Copy Twitter URL")
-                                                                Spacer()
-                                                                Image(systemName: "doc.on.doc")
-                                                        }
+                                                        MenuLabel(text: "Copy Twitter URL", image: "doc.on.doc")
                                                 }
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
                                                 }) {
-                                                        HStack {
-                                                                Text("Copy GitHub URL")
-                                                                Spacer()
-                                                                Image(systemName: "doc.on.doc")
-                                                        }
+                                                        MenuLabel(text: "Copy GitHub URL", image: "doc.on.doc")
                                                 }
                                                 Button(action: {
                                                         UIPasteboard.general.string = "bing@ososo.io"
                                                 }) {
-                                                        HStack {
-                                                                Text("Copy Email Address")
-                                                                Spacer()
-                                                                Image(systemName: "doc.on.doc")
-                                                        }
+                                                        MenuLabel(text: "Copy Email Address", image: "doc.on.doc")
                                                 }
                                         }
                                         .padding()
-                                        
+
+
                                         // MARK: - Review & Share
-                                        
+
                                         VStack {
                                                 Button(action: {
-                                                        if let appStoreUrl: URL = URL(string: "itms-apps://apple.com/app/id1509367629") {
-                                                                UIApplication.shared.open(appStoreUrl)
-                                                        }
+                                                        let appStoreUrl: URL = URL(string: "itms-apps://apple.com/app/id1509367629")!
+                                                        UIApplication.shared.open(appStoreUrl)
                                                 }) {
                                                         MessageView(icon: "heart", text: Text("Review in App Store"), symbol: Image(systemName: "arrow.up.right"))
                                                 }.padding(.top)
-                                                
                                                 Divider()
-                                                
                                                 ShareSheetView(content: MessageView(icon: "square.and.arrow.up", text: Text("Share this App")),
                                                                activityItems: [URL(string: "https://apps.apple.com/app/id1509367629")!])
                                                         .padding(.bottom)
                                         }
                                         .fillBackground()
+                                        .contextMenu {
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://apps.apple.com/app/id1509367629"
+                                                }) {
+                                                        MenuLabel(text: "Copy App Store link", image: "doc.on.doc")
+                                                }
+                                        }
                                         .padding()
                                         .padding(.bottom, 100)
                                 }
