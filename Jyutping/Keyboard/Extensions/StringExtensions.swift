@@ -38,3 +38,16 @@ extension String {
                 return self.filter({ !$0.isSpaceOrTone })
         }
 }
+
+extension Optional where Wrapped == String {
+
+        /// Not nil && not empty
+        var hasContent: Bool {
+                switch self {
+                case .none:
+                        return false
+                case .some(let value):
+                        return !value.isEmpty
+                }
+        }
+}
