@@ -33,7 +33,7 @@ final class CalloutView: UIView {
         required init?(coder: NSCoder) { fatalError("CalloutView.init(coder:) error") }
         override var intrinsicContentSize: CGSize { return CGSize(width: 40, height: 40) }
 
-        func setTextColor(color: UIColor) {
+        func setTextColor(_ color: UIColor) {
                 textLabel.textColor = color
                 headerLabel.textColor = color.withAlphaComponent(0.8)
                 footerLabel.textColor = color.withAlphaComponent(0.7)
