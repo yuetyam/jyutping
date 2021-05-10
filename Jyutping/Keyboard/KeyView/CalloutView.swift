@@ -35,8 +35,8 @@ final class CalloutView: UIView {
 
         func setTextColor(_ color: UIColor) {
                 textLabel.textColor = color
-                headerLabel.textColor = color.withAlphaComponent(0.8)
-                footerLabel.textColor = color.withAlphaComponent(0.7)
+                headerLabel.textColor = color.withAlphaComponent(0.9)
+                footerLabel.textColor = color.withAlphaComponent(0.8)
         }
 
         private func setupText() {
@@ -61,7 +61,7 @@ final class CalloutView: UIView {
                 ])
                 headerLabel.font = .systemFont(ofSize: 10)
                 headerLabel.text = header
-                headerLabel.textColor = textLabel.textColor.withAlphaComponent(0.8)
+                headerLabel.textColor = textLabel.textColor.withAlphaComponent(0.9)
                 switch alignments.header {
                 case .center:
                         headerLabel.textAlignment = .center
@@ -81,7 +81,7 @@ final class CalloutView: UIView {
                 ])
                 footerLabel.font = .systemFont(ofSize: 9)
                 footerLabel.text = footer
-                footerLabel.textColor = textLabel.textColor.withAlphaComponent(0.7)
+                footerLabel.textColor = textLabel.textColor.withAlphaComponent(0.8)
                 switch alignments.footer {
                 case .center:
                         footerLabel.textAlignment = .center
