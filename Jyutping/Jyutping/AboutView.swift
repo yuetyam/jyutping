@@ -81,7 +81,7 @@ struct AboutView: View {
                                                 Divider()
                                                 Button(action: {
                                                         // Twitter App supports Universal Links
-                                                        let twitterUrl: URL = URL(string: "https://twitter.com/yuet_yam")!
+                                                        let twitterUrl: URL = URL(string: "https://twitter.com/JyutpingApp")!
                                                         UIApplication.shared.open(twitterUrl)
                                                 }) {
                                                         MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.up.right"))
@@ -106,7 +106,7 @@ struct AboutView: View {
                                                         MenuLabel(text: "Copy Telegram URL", image: "doc.on.doc")
                                                 }
                                                 Button(action: {
-                                                        UIPasteboard.general.string = "https://twitter.com/yuet_yam"
+                                                        UIPasteboard.general.string = "https://twitter.com/JyutpingApp"
                                                 }) {
                                                         MenuLabel(text: "Copy Twitter URL", image: "doc.on.doc")
                                                 }
