@@ -1,17 +1,19 @@
 import SwiftUI
 
 struct LinkView: View {
-        @State private var isPresented: Bool = false
 
         let iconName: String
         let text: Text
         let footnote: Text?
         let symbolName: String?
-
         let url: URL
 
+        @State private var isSheetPresented: Bool = false
+
         var body: some View {
-                Button(action: { isPresented = true }) {
+                Button(action: {
+                        isSheetPresented = true
+                }) {
                         HStack(spacing: 16) {
                                 Image(systemName: iconName)
                                 VStack {
@@ -38,7 +40,7 @@ struct LinkView: View {
                 .padding(.horizontal)
                 .padding(.top, 10)
                 .padding(.bottom, 6)
-                .sheet(isPresented: $isPresented) {
+                .sheet(isPresented: $isSheetPresented) {
                         SafariView(url: url)
                 }
         }
@@ -47,9 +49,9 @@ struct LinkView: View {
 struct LinkView_Previews: PreviewProvider {
         static var previews: some View {
                 LinkView(iconName: "link.circle",
-                         text: Text("粵拼"),
-                         footnote: Text("www.jyutping.org"),
+                         text: Text("Test"),
+                         footnote: Text("cantonese.im"),
                          symbolName: "safari",
-                         url: URL(string: "https://www.jyutping.org")!)
+                         url: URL(string: "https://cantonese.im")!)
         }
 }

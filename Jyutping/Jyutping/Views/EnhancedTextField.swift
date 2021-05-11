@@ -60,8 +60,8 @@ struct EnhancedTextField: UIViewRepresentable {
         }
         final class Coordinator: NSObject, UITextFieldDelegate {
                 private let parent: EnhancedTextField
-                init(_ view: EnhancedTextField) {
-                        parent = view
+                init(_ parent: EnhancedTextField) {
+                        self.parent = parent
                 }
                 func textFieldShouldReturn(_ textField: UITextField) -> Bool {
                         parent.text = textField.text ?? parent.placeholder

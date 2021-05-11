@@ -192,8 +192,7 @@ private struct EmailFeedbackButton: View {
                 .alert(isPresented: $isMailOnPadUnavailable) {
                         Alert(title: Text("Unable to compose mail"),
                               message: Text("Mail Unavailable"),
-                              dismissButton: .cancel(Text("OK"))
-                        )
+                              dismissButton: .cancel(Text("OK")))
                 }
         }
 
