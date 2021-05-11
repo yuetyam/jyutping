@@ -1,13 +1,20 @@
 import SwiftUI
 
 struct ShareSheetView: View {
-        @State private var isPresented: Bool = false
+
         let content: MessageView
         let activityItems: [Any]
+
+        @State private var isSheetPresented: Bool = false
+
         var body: some View {
-                Button(action: { self.isPresented.toggle() }) { content }
-                        .sheet(isPresented: $isPresented) {
-                                ActivityView(activityItems: self.activityItems)
+                Button {
+                        isSheetPresented = true
+                } label: {
+                        content
+                }
+                .sheet(isPresented: $isSheetPresented) {
+                        ActivityView(activityItems: activityItems)
                 }
         }
 }
@@ -17,7 +24,7 @@ struct ShareSheetView_Previews: PreviewProvider {
                 ShareSheetView(content: MessageView(icon: "link.circle",
                                                     text: Text("Test Text"),
                                                     message: Text("Test Message"),
-                                                    symbol: Image(systemName: "trash")),
+                                                    symbol: Image(systemName: "info.circle")),
                                activityItems: ["Test Item"])
         }
 }
