@@ -132,9 +132,9 @@ struct UserLexicon {
         // MARK: - Clear User Lexicon
 
         func deleteAll() {
-                let deleteStatementStirng = "DELETE FROM lexicon;"
+                let deleteStatementString = "DELETE FROM lexicon;"
                 var deleteStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, deleteStatementStirng, -1, &deleteStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(database, deleteStatementString, -1, &deleteStatement, nil) == SQLITE_OK {
                         if sqlite3_step(deleteStatement) == SQLITE_DONE {}
                 }
                 sqlite3_finalize(deleteStatement)
