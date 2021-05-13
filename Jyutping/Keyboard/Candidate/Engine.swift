@@ -99,7 +99,8 @@ struct Engine {
         private func processUnsplittable(_ text: String) -> [Candidate] {
                 var combine: [Candidate] = match(for: text) + prefix(match: text) + shortcut(for: text)
                 for number in 1..<text.count {
-                        combine += shortcut(for: String(text.dropLast(number)))
+                        let leading: String = String(text.dropLast(number))
+                        combine += shortcut(for: leading)
                 }
                 return combine
         }
@@ -107,21 +108,26 @@ struct Engine {
                 let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
                 let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
                 let candidates: [Candidate] = sorted.map({ $0.candidate })
-                guard candidates.count > 1 && candidates[0].input.count != text.count else {
+                guard candidates.count > 1 else {
                         return candidates
                 }
-                let tailText: String = String(text.dropFirst(candidates[0].input.count))
+                let firstCandidate: Candidate = candidates[0]
+                let secondCandidate: Candidate = candidates[1]
+                guard firstCandidate.input != text else {
+                        return candidates
+                }
+                let tailText: String = String(text.dropFirst(firstCandidate.input.count))
                 let tailJyutpings: [String] = Splitter.engineSplit(tailText)
                 guard !tailJyutpings.isEmpty else { return candidates }
                 var combine: [Candidate] = []
                 for (index, _) in tailJyutpings.enumerated().reversed() {
                         let tail: String = tailJyutpings[0...index].joined()
                         if let one: Candidate = matchWithLimitCount(for: tail, count: 1).first {
-                                let firstCandidate: Candidate = candidates[0] + one
-                                combine.append(firstCandidate)
-                                if candidates[0].input.count == candidates[1].input.count && candidates[0].text.count == candidates[1].text.count {
-                                        let secondCandidate: Candidate = candidates[1] + one
-                                        combine.append(secondCandidate)
+                                let newFirstCandidate: Candidate = firstCandidate + one
+                                combine.append(newFirstCandidate)
+                                if firstCandidate.input.count == secondCandidate.input.count && firstCandidate.text.count == secondCandidate.text.count {
+                                        let newSecondCandidate: Candidate = secondCandidate + one
+                                        combine.append(newSecondCandidate)
                                 }
                                 break
                         }
@@ -135,12 +141,16 @@ struct Engine {
                 guard !combine.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
                 }
-                var hasTailCandidate: Bool = false
-                let tailText: String = String(text.dropFirst(combine.first!.input.count))
+                let firstCandidate: Candidate = combine[0]
+                guard firstCandidate.input != text else {
+                        return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
+                }
+                let tailText: String = String(text.dropFirst(firstCandidate.input.count))
                 if let tailOne: Candidate = prefix(match: tailText, count: 1).first {
-                        let newCandidate: Candidate = combine.first! + tailOne
-                        combine.insert(newCandidate, at: 0)
+                        let newFirst: Candidate = firstCandidate + tailOne
+                        combine.insert(newFirst, at: 0)
                 } else {
+                        var hasTailCandidate: Bool = false
                         let tailJyutpings: [String] = Splitter.engineSplit(tailText)
                         guard !tailJyutpings.isEmpty else {
                                 return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
@@ -149,8 +159,8 @@ struct Engine {
                         if tailText.count - rawTailJyutpings.count > 1 {
                                 let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - rawTailJyutpings.count - 1))
                                 if let one: Candidate = prefix(match: tailRawJPPlusOne, count: 1).first {
-                                        let newCandidate: Candidate = combine.first! + one
-                                        combine.insert(newCandidate, at: 0)
+                                        let newFirst: Candidate = firstCandidate + one
+                                        combine.insert(newFirst, at: 0)
                                         hasTailCandidate = true
                                 }
                         }
@@ -158,8 +168,8 @@ struct Engine {
                                 for (index, _) in tailJyutpings.enumerated().reversed() {
                                         let someJPs: String = tailJyutpings[0...index].joined()
                                         if let one: Candidate = matchWithLimitCount(for: someJPs, count: 1).first {
-                                                let newCandidate: Candidate = combine.first! + one
-                                                combine.insert(newCandidate, at: 0)
+                                                let newFirst: Candidate = firstCandidate + one
+                                                combine.insert(newFirst, at: 0)
                                                 break
                                         }
                                 }
