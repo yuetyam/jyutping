@@ -137,30 +137,31 @@ struct Engine {
         private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
                 let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
                 let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
-                var combine: [Candidate] = sorted.map({ $0.candidate })
-                guard !combine.isEmpty else {
+                let candidates: [Candidate] = sorted.map({ $0.candidate })
+                guard !candidates.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
                 }
-                let firstCandidate: Candidate = combine[0]
+                let firstCandidate: Candidate = candidates[0]
                 guard firstCandidate.input != text else {
-                        return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
+                        return match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
                 }
                 let tailText: String = String(text.dropFirst(firstCandidate.input.count))
                 if let tailOne: Candidate = prefix(match: tailText, count: 1).first {
                         let newFirst: Candidate = firstCandidate + tailOne
-                        combine.insert(newFirst, at: 0)
+                        return match(for: text) + prefix(match: text, count: 5) + [newFirst] + candidates + shortcut(for: text)
                 } else {
-                        var hasTailCandidate: Bool = false
                         let tailJyutpings: [String] = Splitter.engineSplit(tailText)
                         guard !tailJyutpings.isEmpty else {
-                                return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
+                                return match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
                         }
+                        var concatenated: [Candidate] = []
+                        var hasTailCandidate: Bool = false
                         let rawTailJyutpings: String = tailJyutpings.joined()
                         if tailText.count - rawTailJyutpings.count > 1 {
                                 let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - rawTailJyutpings.count - 1))
                                 if let one: Candidate = prefix(match: tailRawJPPlusOne, count: 1).first {
                                         let newFirst: Candidate = firstCandidate + one
-                                        combine.insert(newFirst, at: 0)
+                                        concatenated.append(newFirst)
                                         hasTailCandidate = true
                                 }
                         }
@@ -169,13 +170,13 @@ struct Engine {
                                         let someJPs: String = tailJyutpings[0...index].joined()
                                         if let one: Candidate = matchWithLimitCount(for: someJPs, count: 1).first {
                                                 let newFirst: Candidate = firstCandidate + one
-                                                combine.insert(newFirst, at: 0)
+                                                concatenated.append(newFirst)
                                                 break
                                         }
                                 }
                         }
+                        return match(for: text) + prefix(match: text, count: 5) + concatenated + candidates + shortcut(for: text)
                 }
-                return match(for: text) + prefix(match: text, count: 5) + combine + shortcut(for: text)
         }
 }
 
