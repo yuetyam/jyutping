@@ -127,7 +127,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: "")
-                                cell.accessoryType = (footnoteStyle < 2) ? .checkmark : .none
+                                cell.accessoryType = footnoteStyle < 2 ? .checkmark : .none
                         case 1:
                                 cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: "")
                                 cell.accessoryType = footnoteStyle == 2 ? .checkmark : .none

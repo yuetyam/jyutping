@@ -73,7 +73,7 @@ final class KeyboardViewController: UIInputViewController {
                         shouldKeepInputTextWhileTextDidChange = false
                 } else {
                         if !inputText.isEmpty && !textDocumentProxy.hasText {
-                                // User just tapped the clear button in the text field
+                                // User just tapped the Clear button in the text field
                                 inputText = ""
                         }
                 }
@@ -469,11 +469,11 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 0: The key "jyutping_display" doesn‘t exist.
         ///
-        /// 1: 喺候選詞上邊
+        /// 1: 候選詞之上
         ///
-        /// 2: 喺候選詞下邊
+        /// 2: 候選詞之下
         ///
-        /// 3: 唔顯示
+        /// 3: 無
         private(set) lazy var footnoteStyle: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
         func updateFootnoteStyle() {
                 footnoteStyle = UserDefaults.standard.integer(forKey: "jyutping_display")
@@ -498,7 +498,7 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? ""
         func updateFrequentEmojis(latest emoji: String) {
                 let combined: String = emoji + frequentEmojis
-                let uniqued: [String] = combined.map({ String($0)} ).deduplicated()
+                let uniqued: [String] = combined.map({ String($0) }).deduplicated()
                 let updated: [String] = uniqued.count < 31 ? uniqued : uniqued.dropLast(uniqued.count - 30)
                 frequentEmojis = updated.joined()
                 UserDefaults.standard.set(frequentEmojis, forKey: "emoji_frequent")
