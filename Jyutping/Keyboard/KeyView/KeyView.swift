@@ -51,6 +51,8 @@ final class KeyView: UIView {
         private func invalidateTimers() {
                 backspaceTimer?.invalidate()
                 repeatingBackspaceTimer?.invalidate()
+                backspaceTimer = nil
+                repeatingBackspaceTimer = nil
         }
         private(set) lazy var isInteracting: Bool = false
         private(set) lazy var peekingText: String? = nil
