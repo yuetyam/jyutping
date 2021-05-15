@@ -3,17 +3,23 @@ import UIKit
 extension KeyView {
         func handleLongPress() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                        if self != nil {
-                                if self!.isInteracting {
-                                        self!.displayCallout()
-                                }
-                        }
+                        guard (self?.isInteracting ?? false) else { return }
+                        self!.displayCallout()
                 }
         }
         func handleBackspace() {
                 performBackspace()
-                backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
-                        self.repeatingBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
+                guard backspaceTimer == nil && repeatingBackspaceTimer == nil else {
+                        backspaceTimer?.invalidate()
+                        repeatingBackspaceTimer?.invalidate()
+                        backspaceTimer = nil
+                        repeatingBackspaceTimer = nil
+                        return
+                }
+                backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] timer in
+                        guard (self?.isInteracting ?? false) else { return }
+                        guard self?.backspaceTimer == timer else { return }
+                        self!.repeatingBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self!, selector: #selector(self!.performBackspace), userInfo: nil, repeats: true)
                 }
         }
         @objc private func performBackspace() {
