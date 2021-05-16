@@ -403,20 +403,6 @@ final class KeyboardViewController: UIInputViewController {
                 isHapticFeedbackOn = hasFullAccess && UserDefaults.standard.bool(forKey: "haptic_feedback")
         }
 
-        /// 鍵盤佈局
-        ///
-        /// 0: The key "keyboard_layout" doesn‘t exist.
-        ///
-        /// 1: 全鍵盤 QWERTY
-        ///
-        /// 2: 三拼
-        ///
-        /// 3: 九宮格（未實現）
-        private(set) lazy var arrangement: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
-        func updateArrangement() {
-                arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
-        }
-
         /// 候選詞字符標準
         ///
         /// 0: The key "logogram" doesn‘t exist.
@@ -463,6 +449,32 @@ final class KeyboardViewController: UIInputViewController {
                 }()
                 guard let conversion = conversion else { converter = nil; return }
                 converter = try? Converter(conversion)
+        }
+
+        /// 鍵盤佈局
+        ///
+        /// 0: The key "keyboard_layout" doesn‘t exist.
+        ///
+        /// 1: 全鍵盤 QWERTY
+        ///
+        /// 2: 三拼
+        ///
+        /// 3: 九宮格（未實現）
+        private(set) lazy var arrangement: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
+        func updateArrangement() {
+                arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
+        }
+
+        /// 雙擊空格鍵快捷動作
+        ///
+        /// 0: The key "double_space_shortcut" doesn‘t exist.
+        ///
+        /// 1: 無（輸入兩個空格）
+        ///
+        /// 2: 輸入句號「。」（英文鍵盤輸入一個句號「.」加一個空格）
+        private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")
+        func updateDoubleSpaceShortcut() {
+                doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         }
 
         /// 粵拼顯示
