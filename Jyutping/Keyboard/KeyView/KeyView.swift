@@ -56,7 +56,7 @@ final class KeyView: UIView {
         }
         private(set) lazy var isInteracting: Bool = false
         private(set) lazy var peekingText: String? = nil
-        private lazy var spacePoints: (first: Bool, second: Bool) = (false, false)
+        private lazy var spaceTouches: (first: Bool, second: Bool) = (false, false)
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
                 controller.triggerHapticFeedback()
@@ -86,7 +86,7 @@ final class KeyView: UIView {
                 case .shadowBackspace:
                         handleBackspace()
                 case .space:
-                        spacePoints = spacePoints.first ? (true, true) : (true, false)
+                        spaceTouches = spaceTouches.first ? (true, true) : (true, false)
                         shape.backgroundColor = highlightingBackColor
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         draggedOnSpace = false
@@ -169,14 +169,14 @@ final class KeyView: UIView {
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
-                        if !spacePoints.second {
+                        if !spaceTouches.second {
                                 tapOnSpace()
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
-                                        self?.spacePoints = (false, false)
+                                        self?.spaceTouches = (false, false)
                                 }
                         } else {
                                 doubleTapSpace()
-                                spacePoints = (false, false)
+                                spaceTouches = (false, false)
                         }
                 case .backspace:
                         backspaceTouchPoint = .zero
@@ -241,9 +241,9 @@ final class KeyView: UIView {
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
-                        spacePoints = (false, false)
+                        spaceTouches = (false, false)
                 case .shift:
-                        spacePoints = (false, false)
+                        spaceTouches = (false, false)
                 case .key(let seat) where seat.hasChildren:
                         removeCallout()
                         if isPhonePortrait {

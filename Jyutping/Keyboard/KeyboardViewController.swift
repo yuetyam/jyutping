@@ -465,6 +465,7 @@ final class KeyboardViewController: UIInputViewController {
                 arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
         }
 
+        /*
         /// 雙擊空格鍵快捷動作
         ///
         /// 0: The key "double_space_shortcut" doesn‘t exist.
@@ -476,6 +477,7 @@ final class KeyboardViewController: UIInputViewController {
         func updateDoubleSpaceShortcut() {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         }
+        */
 
         /// 粵拼顯示
         ///
