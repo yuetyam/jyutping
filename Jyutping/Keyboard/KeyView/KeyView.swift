@@ -336,7 +336,13 @@ final class KeyView: UIView {
 
         // MARK: - Callout
 
-        func displayCallout() {
+        private func handleLongPress() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+                        guard let self = self else { return }
+                        self.displayCallout()
+                }
+        }
+        private func displayCallout() {
                 layer.addSublayer(calloutLayer)
                 addSubview(calloutStackView)
                 isCalloutDisplaying = true

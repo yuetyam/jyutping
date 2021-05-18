@@ -1,12 +1,6 @@
 import UIKit
 
 extension KeyView {
-        func handleLongPress() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                        guard (self?.isInteracting ?? false) else { return }
-                        self!.displayCallout()
-                }
-        }
         func handleBackspace() {
                 performBackspace()
                 guard backspaceTimer == nil && repeatingBackspaceTimer == nil else {
