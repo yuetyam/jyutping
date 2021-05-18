@@ -36,18 +36,16 @@ final class EmojiCell: UICollectionViewCell {
                 layer.addSublayer(previewShapeLayer)
                 addSubview(previewLabel)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) { [weak self] in
-                        if self != nil {
-                                self!.previewLabel.text = self!.emojiLabel.text
-                        }
+                        guard let self = self else { return }
+                        self.previewLabel.text = self.emojiLabel.text
                 }
         }
         private func removePreview() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [weak self] in
-                        if self != nil {
-                                self!.previewLabel.text = nil
-                                self!.previewLabel.removeFromSuperview()
-                                self!.previewShapeLayer.removeFromSuperlayer()
-                        }
+                        guard let self = self else { return }
+                        self.previewLabel.text = nil
+                        self.previewLabel.removeFromSuperview()
+                        self.previewShapeLayer.removeFromSuperlayer()
                 }
         }
         private lazy var previewShapeLayer: CAShapeLayer = {

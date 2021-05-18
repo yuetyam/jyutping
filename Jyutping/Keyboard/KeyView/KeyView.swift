@@ -282,25 +282,22 @@ final class KeyView: UIView {
                 layer.addSublayer(previewShapeLayer)
                 addSubview(previewLabel)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.008) { [weak self] in
-                        if self != nil {
-                                self!.previewLabel.text = self!.keyText
-                        }
+                        guard let self = self else { return }
+                        self.previewLabel.text = self.keyText
                 }
         }
         private func removePreview() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [weak self] in
-                        if self != nil {
-                                self!.previewLabel.text = nil
-                                self!.previewLabel.removeFromSuperview()
-                                self!.previewShapeLayer.removeFromSuperlayer()
-                        }
+                        guard let self = self else { return }
+                        self.previewLabel.text = nil
+                        self.previewLabel.removeFromSuperview()
+                        self.previewShapeLayer.removeFromSuperlayer()
                 }
         }
         private func changeColorToNormal() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
-                        if self != nil {
-                                self!.shape.backgroundColor = self!.isDarkAppearance ? .clear : self!.backColor
-                        }
+                        guard let self = self else { return }
+                        self.shape.backgroundColor = self.isDarkAppearance ? .clear : self.backColor
                 }
         }
         private(set) lazy var previewShapeLayer: CAShapeLayer = {
