@@ -17,12 +17,24 @@ extension KeyView {
                         return
                 }
                 backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] timer in
-                        guard (self?.isInteracting ?? false) else { return }
-                        guard self?.backspaceTimer == timer else { return }
-                        self!.repeatingBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self!, selector: #selector(self!.performBackspace), userInfo: nil, repeats: true)
+                        guard let self = self else { return }
+                        guard self.isInteracting, self.backspaceTimer == timer else { return }
+                        self.repeatingBackspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
+                                guard let self = self else {
+                                        timer.invalidate()
+                                        return
+                                }
+                                guard self.isInteracting, self.repeatingBackspaceTimer == timer else {
+                                        self.repeatingBackspaceTimer?.invalidate()
+                                        self.repeatingBackspaceTimer = nil
+                                        timer.invalidate()
+                                        return
+                                }
+                                self.performBackspace()
+                        }
                 }
         }
-        @objc private func performBackspace() {
+        private func performBackspace() {
                 let inputText: String = controller.inputText
                 if inputText.isEmpty {
                         controller.textDocumentProxy.deleteBackward()
