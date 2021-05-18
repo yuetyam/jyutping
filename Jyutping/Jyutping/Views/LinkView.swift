@@ -21,7 +21,6 @@ struct LinkView: View {
                                                 text.lineLimit(1)
                                                 Spacer()
                                         }
-                                        Spacer().frame(height: 4)
                                         HStack {
                                                 if #available(iOS 14.0, *) {
                                                         footnote?.lineLimit(1).font(.system(.caption2, design: .monospaced)).opacity(0.7)
@@ -38,8 +37,6 @@ struct LinkView: View {
                         }
                 }
                 .padding(.horizontal)
-                .padding(.top, 10)
-                .padding(.bottom, 6)
                 .sheet(isPresented: $isSheetPresented) {
                         SafariView(url: url)
                 }
