@@ -45,16 +45,11 @@ struct KeyElement: Hashable {
         let text: String
         let header: String?
         let footer: String?
-        let alignments: (header: Alignment, footer: Alignment)
 
-        init(text: String,
-             header: String? = nil,
-             footer: String? = nil,
-             alignments: (header: Alignment, footer: Alignment) = (header: .center, footer: .center)) {
+        init(text: String, header: String? = nil, footer: String? = nil) {
                 self.text = text
                 self.header = header
                 self.footer = footer
-                self.alignments = alignments
         }
 
         static func == (lhs: KeyElement, rhs: KeyElement) -> Bool {
@@ -67,10 +62,4 @@ struct KeyElement: Hashable {
                 hasher.combine(header)
                 hasher.combine(footer)
         }
-}
-
-enum Alignment {
-        case center,
-             left,
-             right
 }

@@ -5,20 +5,15 @@ final class CalloutView: UIView {
         let text: String
         private let header: String?
         private let footer: String?
-        private let alignments: (header: Alignment, footer: Alignment)
 
         private let textLabel: UILabel = UILabel()
         private let headerLabel: UILabel = UILabel()
         private let footerLabel: UILabel = UILabel()
 
-        init(text: String,
-             header: String? = nil,
-             footer: String? = nil,
-             alignments: (header: Alignment, footer: Alignment) = (header: .center, footer: .center)) {
+        init(text: String, header: String? = nil, footer: String? = nil) {
                 self.text = text
                 self.header = header
                 self.footer = footer
-                self.alignments = alignments
                 super.init(frame: .zero)
                 layer.cornerRadius = 5
                 layer.cornerCurve = .continuous
@@ -62,14 +57,7 @@ final class CalloutView: UIView {
                 headerLabel.font = .systemFont(ofSize: 10)
                 headerLabel.text = header
                 headerLabel.textColor = textLabel.textColor.withAlphaComponent(0.9)
-                switch alignments.header {
-                case .center:
-                        headerLabel.textAlignment = .center
-                case .left:
-                        headerLabel.textAlignment = .left
-                case .right:
-                        headerLabel.textAlignment = .right
-                }
+                headerLabel.textAlignment = .center
         }
         private func setupFooter() {
                 addSubview(footerLabel)
@@ -82,13 +70,6 @@ final class CalloutView: UIView {
                 footerLabel.font = .systemFont(ofSize: 9)
                 footerLabel.text = footer
                 footerLabel.textColor = textLabel.textColor.withAlphaComponent(0.8)
-                switch alignments.footer {
-                case .center:
-                        footerLabel.textAlignment = .center
-                case .left:
-                        footerLabel.textAlignment = .left
-                case .right:
-                        footerLabel.textAlignment = .right
-                }
+                footerLabel.textAlignment = .center
         }
 }
