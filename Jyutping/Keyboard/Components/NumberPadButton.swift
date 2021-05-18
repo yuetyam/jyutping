@@ -179,20 +179,21 @@ final class BackspaceButton: UIView {
         required init?(coder: NSCoder) { fatalError("BackspaceButton.init(coder:) error") }
         override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
 
-        var backspaceTimer: Timer?
-        var repeatingBackspaceTimer: Timer?
+        private var backspaceTimer: Timer?
+        private var repeatingBackspaceTimer: Timer?
         private func invalidateTimers() {
                 backspaceTimer?.invalidate()
                 repeatingBackspaceTimer?.invalidate()
+                backspaceTimer = nil
+                repeatingBackspaceTimer = nil
         }
         private lazy var isInteracting: Bool = false
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 invalidateTimers()
                 isInteracting = true
                 DispatchQueue.main.async { [weak self] in
-                        if self != nil {
-                                self!.keyImageView.image = UIImage(systemName: "delete.left.fill")
-                        }
+                        guard let self = self else { return }
+                        self.keyImageView.image = UIImage(systemName: "delete.left.fill")
                 }
                 controller.triggerHapticFeedback()
                 handleBackspace()
@@ -206,18 +207,34 @@ final class BackspaceButton: UIView {
                 invalidateTimers()
                 isInteracting = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
-                        if self != nil {
-                                self!.keyImageView.image = UIImage(systemName: "delete.left")
-                        }
+                        guard let self = self else { return }
+                        self.keyImageView.image = UIImage(systemName: "delete.left")
                 }
         }
         private func handleBackspace() {
                 performBackspace()
-                backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { _ in
-                        self.repeatingBackspaceTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.performBackspace), userInfo: nil, repeats: true)
+                guard backspaceTimer == nil && repeatingBackspaceTimer == nil else {
+                        backspaceTimer?.invalidate()
+                        repeatingBackspaceTimer?.invalidate()
+                        backspaceTimer = nil
+                        repeatingBackspaceTimer = nil
+                        return
+                }
+                backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] timer in
+                        guard let self = self else { return }
+                        guard self.isInteracting, self.backspaceTimer == timer else { return }
+                        self.repeatingBackspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
+                                guard let self = self else { return }
+                                guard self.isInteracting, self.repeatingBackspaceTimer == timer else {
+                                        self.repeatingBackspaceTimer?.invalidate()
+                                        self.repeatingBackspaceTimer = nil
+                                        return
+                                }
+                                self.performBackspace()
+                        }
                 }
         }
-        @objc private func performBackspace() {
+        private func performBackspace() {
                 controller.textDocumentProxy.deleteBackward()
                 AudioFeedback.perform(.delete)
         }
