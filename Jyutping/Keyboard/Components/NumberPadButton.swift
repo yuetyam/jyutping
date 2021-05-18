@@ -225,10 +225,14 @@ final class BackspaceButton: UIView {
                         guard let self = self else { return }
                         guard self.isInteracting, self.backspaceTimer == timer else { return }
                         self.repeatingBackspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
-                                guard let self = self else { return }
+                                guard let self = self else {
+                                        timer.invalidate()
+                                        return
+                                }
                                 guard self.isInteracting, self.repeatingBackspaceTimer == timer else {
                                         self.repeatingBackspaceTimer?.invalidate()
                                         self.repeatingBackspaceTimer = nil
+                                        timer.invalidate()
                                         return
                                 }
                                 self.performBackspace()
