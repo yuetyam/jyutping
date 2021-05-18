@@ -336,6 +336,7 @@ final class KeyView: UIView {
         private func handleLongPress() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
                         guard let self = self else { return }
+                        guard self.isInteracting else { return }
                         self.displayCallout()
                 }
         }
