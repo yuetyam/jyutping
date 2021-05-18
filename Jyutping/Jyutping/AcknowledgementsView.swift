@@ -14,6 +14,7 @@ struct AcknowledgementsView: View {
                                          footnote: Text("© CanCLID. CC BY 4.0"),
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/rime/rime-cantonese")!)
+                                        .padding(.vertical, 8)
                                         .fillBackground()
                                         .padding()
                                 LinkView(iconName: "briefcase",
@@ -21,6 +22,7 @@ struct AcknowledgementsView: View {
                                          footnote: Text("© Carbo Kuo. Apache 2.0"),
                                          symbolName: "safari",
                                          url: URL(string: "https://github.com/BYVoid/OpenCC")!)
+                                        .padding(.vertical, 8)
                                         .fillBackground()
                                         .padding(.horizontal)
                         }
