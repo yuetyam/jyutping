@@ -5,12 +5,14 @@ final class NumberButton: UIView {
 
         private let digit: Int
         private let controller: KeyboardViewController
+        private let isDarkAppearance: Bool
         private let foreColor: UIColor
         private let shape: UIView = UIView()
 
         init(digit: Int, controller: KeyboardViewController) {
                 self.digit = digit
                 self.controller = controller
+                self.isDarkAppearance = controller.isDarkAppearance
                 self.foreColor = controller.isDarkAppearance ? .white : .black
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
@@ -23,19 +25,18 @@ final class NumberButton: UIView {
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 controller.insert(String(digit))
-                shape.backgroundColor = controller.isDarkAppearance ? .black : .lightActionButton
+                shape.backgroundColor = isDarkAppearance ? .black : .lightActionButton
                 AudioFeedback.perform(.input)
                 controller.triggerHapticFeedback()
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
-                        if self != nil {
-                                self!.shape.backgroundColor = self!.controller.isDarkAppearance ? .clear : .white
-                        }
+                        guard let self = self else { return }
+                        self.shape.backgroundColor = self.isDarkAppearance ? .clear : .white
                 }
         }
         override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-                shape.backgroundColor = controller.isDarkAppearance ? .clear : .white
+                shape.backgroundColor = isDarkAppearance ? .clear : .white
         }
 
         private func setupShapeView() {
@@ -50,7 +51,7 @@ final class NumberButton: UIView {
                         shape.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant)
                 ])
                 shape.isUserInteractionEnabled = false
-                shape.tintColor = controller.isDarkAppearance ? .white : .black
+                shape.tintColor = isDarkAppearance ? .white : .black
                 shape.layer.cornerRadius = 5
                 shape.layer.cornerCurve = .continuous
                 shape.layer.shadowColor = UIColor.black.cgColor
@@ -60,7 +61,7 @@ final class NumberButton: UIView {
                 shape.layer.shouldRasterize = true
                 shape.layer.rasterizationScale = UIScreen.main.scale
 
-                guard controller.isDarkAppearance else {
+                guard isDarkAppearance else {
                         shape.backgroundColor = .white
                         return
                 }
