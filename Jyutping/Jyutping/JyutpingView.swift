@@ -174,41 +174,34 @@ private struct SearchWebsitesView: View {
                                  footnote: Text("jyut.net"),
                                  symbolName: "safari",
                                  url: URL(string: "https://jyut.net")!)
-                                .fillBackground()
-                                .padding(.horizontal)
-
+                        Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
                                  text: Text("粵典"),
                                  footnote: Text("words.hk"),
                                  symbolName: "safari",
                                  url: URL(string: "https://words.hk")!)
-                                .fillBackground()
-                                .padding(.horizontal)
-
+                        Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
                                  text: Text("粵語審音配詞字庫"),
                                  footnote: Text("humanum.arts.cuhk.edu.hk/Lexis/lexi-can"),
                                  symbolName: "safari",
                                  url: URL(string: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")!)
-                                .fillBackground()
-                                .padding(.horizontal)
-
+                        Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
                                  text: Text("泛粵大典"),
                                  footnote: Text("www.jyutdict.org"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.jyutdict.org")!)
-                                .fillBackground()
-                                .padding(.horizontal)
-
+                        Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
                                  text: Text("羊羊粵語"),
                                  footnote: Text("shyyp.net/hant"),
                                  symbolName: "safari",
                                  url: URL(string: "https://shyyp.net/hant")!)
-                                .fillBackground()
-                                .padding(.horizontal)
                 }
+                .padding(.vertical)
+                .fillBackground()
+                .padding(.horizontal)
         }
 }
 
@@ -220,32 +213,27 @@ private struct JyutpingWebsitesView: View {
                                  footnote: Text("www.jyutping.org"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.jyutping.org")!)
-                                .fillBackground()
-                                .padding(.horizontal)
-
+                        Divider()
                         LinkView(iconName: "link.circle",
                                  text: Text("Jyutping - LSHK"),
                                  footnote: Text("www.lshk.org/jyutping"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.lshk.org/jyutping")!)
-                                .fillBackground()
-                                .padding(.horizontal)
-
+                        Divider()
                         LinkView(iconName: "link.circle",
                                  text: Text("Learn Jyutping"),
                                  footnote: Text("www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!)
-                                .fillBackground()
-                                .padding(.horizontal)
-
+                        Divider()
                         LinkView(iconName: "link.circle",
                                  text: Text("Jyutping"),
                                  footnote: Text("www.iso10646hk.net/jp"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.iso10646hk.net/jp")!)
-                                .fillBackground()
-                                .padding(.horizontal)
                 }
+                .padding(.vertical)
+                .fillBackground()
+                .padding(.horizontal)
         }
 }
