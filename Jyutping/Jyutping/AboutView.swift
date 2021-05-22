@@ -207,7 +207,7 @@ private struct EmailFeedbackButton: View {
                 System: \(system)
                 """
                 let address: String = "bing@ososo.io"
-                let subject: String = "Jyutping Feedback"
+                let subject: String = "Jyutping User Feedback"
                 let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
                 return URL(string: scheme)!
         }()
