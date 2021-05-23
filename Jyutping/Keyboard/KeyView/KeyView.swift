@@ -34,6 +34,10 @@ final class KeyView: UIView {
                         setupKeyShapeView()
                         setupKeyTextLabel()
                         setupKeyHeaderLabel(text: seat.primary.header)
+                case .key(.separator):
+                        setupKeyShapeView()
+                        setupKeyTextLabel()
+                        setupKeyFooterLabel(text: "分隔", alignment: .center)
                 default:
                         setupKeyShapeView()
                         setupKeyTextLabel()
