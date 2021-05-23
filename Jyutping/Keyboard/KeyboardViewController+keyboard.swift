@@ -22,6 +22,16 @@ extension KeyboardViewController {
                 }
         }
 
+        func updateKeyboard(newEvent: KeyboardEvent) {
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, newEvent, .newLine] :
+                        [.switchTo(.cantoneseNumeric), newEvent, .space, .newLine]
+                let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
+                        return makeKey(for: $0, controller: self)
+                }
+                bottomStackView.removeAllArrangedSubviews()
+                bottomStackView.addMultipleArrangedSubviews(bottomViews)
+        }
 
         // MARK: - Normal Layouts
 
@@ -34,8 +44,18 @@ extension KeyboardViewController {
                 }
                 keyboardStackView.addArrangedSubview(toolBar)
                 let events: [[KeyboardEvent]] = keyboardLayout.events(needsInputModeSwitchKey: needsInputModeSwitchKey, arrangement: arrangement)
-                let keysRows: [UIStackView] = makeKeysRows(for: events)
+                let keysRows: [UIStackView] = makeKeysRows(for: events.dropLast())
                 keyboardStackView.addMultipleArrangedSubviews(keysRows)
+                guard let bottomEvents: [KeyboardEvent] = events.last else { return }
+                let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
+                        if $0 == .key(.cantoneseComma) && !inputText.isEmpty {
+                                return KeyView(event: .key(.separator), controller: self)
+                        }
+                        return makeKey(for: $0, controller: self)
+                }
+                bottomStackView.removeAllArrangedSubviews()
+                bottomStackView.addMultipleArrangedSubviews(bottomViews)
+                keyboardStackView.addArrangedSubview(bottomStackView)
         }
 
 

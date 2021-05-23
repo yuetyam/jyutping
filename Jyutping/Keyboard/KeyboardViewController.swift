@@ -16,8 +16,12 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var keyboardStackView: UIStackView = {
                 let stackView = UIStackView(frame: .zero)
                 stackView.axis = .vertical
-                stackView.alignment = .fill
                 stackView.distribution = .equalSpacing
+                return stackView
+        }()
+        private(set) lazy var bottomStackView: UIStackView = {
+                let stackView = UIStackView(frame: .zero)
+                stackView.distribution = .fillProportionally
                 return stackView
         }()
 
@@ -147,6 +151,15 @@ final class KeyboardViewController: UIInputViewController {
                                         .replacingOccurrences(of: "v", with: "1")
                                         .replacingOccurrences(of: "x", with: "2")
                                         .replacingOccurrences(of: "q", with: "3")
+                        }
+                        if inputText.isEmpty && !oldValue.isEmpty {
+                                DispatchQueue.main.async { [unowned self] in
+                                        self.updateKeyboard(newEvent: .key(.cantoneseComma))
+                                }
+                        } else if !inputText.isEmpty && oldValue.isEmpty {
+                                DispatchQueue.main.async { [unowned self] in
+                                        self.updateKeyboard(newEvent: .key(.separator))
+                                }
                         }
                 }
         }
