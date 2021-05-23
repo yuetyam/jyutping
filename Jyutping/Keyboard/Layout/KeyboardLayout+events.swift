@@ -147,10 +147,8 @@ private extension KeyboardLayout {
                         return KeyboardEvent.key(seat)
                 }()
                 let third_6: KeyboardEvent = {
-                        let primary = KeyElement(text: "m", header: "'")
-                        let child_0 = KeyElement(text: "m")
-                        let child_1 = KeyElement(text: "'", header: "分隔")
-                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        let primary = KeyElement(text: "m")
+                        let seat = KeySeat(primary: primary)
                         return KeyboardEvent.key(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
@@ -259,10 +257,8 @@ private extension KeyboardLayout {
                         return KeyboardEvent.key(seat)
                 }()
                 let third_6: KeyboardEvent = {
-                        let primary = KeyElement(text: "M", header: "'")
-                        let child_0 = KeyElement(text: "M")
-                        let child_1 = KeyElement(text: "'", header: "分隔")
-                        let seat = KeySeat(primary: primary, children: [child_0, child_1])
+                        let primary = KeyElement(text: "M")
+                        let seat = KeySeat(primary: primary)
                         return KeyboardEvent.key(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
