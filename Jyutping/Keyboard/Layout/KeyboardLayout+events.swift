@@ -78,88 +78,6 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func longPressLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
-                let arrayTextArray: [[String]] = [
-                        ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-                        ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-                        ["z", "x", "c", "v", "b", "n", "m"]
-                ]
-                let third: [KeyboardEvent] = {
-                        let tones = [("z", "1", "陰平"), ("x", "2", "陰上"), ("c", "3", "陰去"), ("v", "4", "陽平"), ("b", "5", "陽上"), ("n", "6", "陽去")]
-                        let keys: [KeyboardEvent] = tones.map { tuple -> KeyboardEvent in
-                                let primary: KeyElement = KeyElement(text: tuple.0, header: tuple.1)
-                                let child_0: KeyElement = KeyElement(text: tuple.0)
-                                let child_1: KeyElement = KeyElement(text: tuple.1, header: "聲調", footer: tuple.2)
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.key(seat)
-                        }
-                        let last: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement(text: "m", header: "'")
-                                let child_0: KeyElement = KeyElement(text: "m")
-                                let child_1: KeyElement = KeyElement(text: "'", header: "分隔")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.key(seat)
-                        }()
-                        return keys + [last]
-                }()
-                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].append(.shadowKey("l"))
-                eventRows[1].append(.shadowKey("l"))
-                eventRows[2] = third
-                eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
-                eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .key(.cantoneseComma)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
-                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
-                eventRows.append(bottomEvents)
-                return eventRows
-        }
-        func longPressUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
-                let arrayTextArray: [[String]] = [
-                        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-                        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-                        ["Z", "X", "C", "V", "B", "N", "M"]
-                ]
-                let third: [KeyboardEvent] = {
-                        let tones = [("Z", "1", "陰平"), ("X", "2", "陰上"), ("C", "3", "陰去"), ("V", "4", "陽平"), ("B", "5", "陽上"), ("N", "6", "陽去")]
-                        let keys: [KeyboardEvent] = tones.map { tuple -> KeyboardEvent in
-                                let primary: KeyElement = KeyElement(text: tuple.0, header: tuple.1)
-                                let child_0: KeyElement = KeyElement(text: tuple.0)
-                                let child_1: KeyElement = KeyElement(text: tuple.1, header: "聲調", footer: tuple.2)
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.key(seat)
-                        }
-                        let last: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement(text: "M", header: "'")
-                                let child_0: KeyElement = KeyElement(text: "M")
-                                let child_1: KeyElement = KeyElement(text: "'", header: "分隔")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.key(seat)
-                        }()
-                        return keys + [last]
-                }()
-                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].append(.shadowKey("L"))
-                eventRows[1].append(.shadowKey("L"))
-                eventRows[2] = third
-                eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("Z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
-                eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .key(.cantoneseComma)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
-                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
-                eventRows.append(bottomEvents)
-                return eventRows
-        }
         func saamPingLowercasedKeys(_ needsInputModeSwitchKey: Bool, needsGWKW: Bool = false) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["aa", "w", "e", "eo", "t", "yu", "u", "i", "o", "p"],
@@ -975,6 +893,91 @@ private extension KeyboardLayout {
                 eventRows.append(bottomEvents)
                 return eventRows
         }
+
+        /*
+        func longPressLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+                let arrayTextArray: [[String]] = [
+                        ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+                        ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+                        ["z", "x", "c", "v", "b", "n", "m"]
+                ]
+                let third: [KeyboardEvent] = {
+                        let tones = [("z", "1", "陰平"), ("x", "2", "陰上"), ("c", "3", "陰去"), ("v", "4", "陽平"), ("b", "5", "陽上"), ("n", "6", "陽去")]
+                        let keys: [KeyboardEvent] = tones.map { tuple -> KeyboardEvent in
+                                let primary: KeyElement = KeyElement(text: tuple.0, header: tuple.1)
+                                let child_0: KeyElement = KeyElement(text: tuple.0)
+                                let child_1: KeyElement = KeyElement(text: tuple.1, header: "聲調", footer: tuple.2)
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
+                                return KeyboardEvent.key(seat)
+                        }
+                        let last: KeyboardEvent = {
+                                let primary: KeyElement = KeyElement(text: "m", header: "'")
+                                let child_0: KeyElement = KeyElement(text: "m")
+                                let child_1: KeyElement = KeyElement(text: "'", header: "分隔")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
+                                return KeyboardEvent.key(seat)
+                        }()
+                        return keys + [last]
+                }()
+                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
+                eventRows[1].insert(.shadowKey("a"), at: 0)
+                eventRows[1].insert(.shadowKey("a"), at: 0)
+                eventRows[1].append(.shadowKey("l"))
+                eventRows[1].append(.shadowKey("l"))
+                eventRows[2] = third
+                eventRows[2].insert(.shift, at: 0)
+                eventRows[2].insert(.shadowKey("z"), at: 1)
+                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.backspace)
+                let comma: KeyboardEvent = .key(.cantoneseComma)
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
+                eventRows.append(bottomEvents)
+                return eventRows
+        }
+        func longPressUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+                let arrayTextArray: [[String]] = [
+                        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+                        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+                        ["Z", "X", "C", "V", "B", "N", "M"]
+                ]
+                let third: [KeyboardEvent] = {
+                        let tones = [("Z", "1", "陰平"), ("X", "2", "陰上"), ("C", "3", "陰去"), ("V", "4", "陽平"), ("B", "5", "陽上"), ("N", "6", "陽去")]
+                        let keys: [KeyboardEvent] = tones.map { tuple -> KeyboardEvent in
+                                let primary: KeyElement = KeyElement(text: tuple.0, header: tuple.1)
+                                let child_0: KeyElement = KeyElement(text: tuple.0)
+                                let child_1: KeyElement = KeyElement(text: tuple.1, header: "聲調", footer: tuple.2)
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
+                                return KeyboardEvent.key(seat)
+                        }
+                        let last: KeyboardEvent = {
+                                let primary: KeyElement = KeyElement(text: "M", header: "'")
+                                let child_0: KeyElement = KeyElement(text: "M")
+                                let child_1: KeyElement = KeyElement(text: "'", header: "分隔")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
+                                return KeyboardEvent.key(seat)
+                        }()
+                        return keys + [last]
+                }()
+                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
+                eventRows[1].insert(.shadowKey("A"), at: 0)
+                eventRows[1].insert(.shadowKey("A"), at: 0)
+                eventRows[1].append(.shadowKey("L"))
+                eventRows[1].append(.shadowKey("L"))
+                eventRows[2] = third
+                eventRows[2].insert(.shift, at: 0)
+                eventRows[2].insert(.shadowKey("Z"), at: 1)
+                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.backspace)
+                let comma: KeyboardEvent = .key(.cantoneseComma)
+                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
+                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
+                eventRows.append(bottomEvents)
+                return eventRows
+        }
+        */
 }
 
 private extension Array where Element == [String] {
