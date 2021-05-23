@@ -33,10 +33,10 @@ struct KeySeat: Hashable {
         static let cantoneseComma: KeySeat = {
                 let comma: KeyElement = KeyElement(text: "，")
                 let period: KeyElement = KeyElement(text: "。")
-                let questionMark: KeyElement = KeyElement(text: "？")
-                let exclamationMark: KeyElement = KeyElement(text: "！")
+                // let questionMark: KeyElement = KeyElement(text: "？")
+                // let exclamationMark: KeyElement = KeyElement(text: "！")
                 let separator: KeyElement = KeyElement(text: "\u{0027}", header: "分隔")
-                return KeySeat(primary: comma, children: [comma, period, questionMark, exclamationMark, separator])
+                return KeySeat(primary: comma, children: [comma, period, separator])
         }()
 }
 
