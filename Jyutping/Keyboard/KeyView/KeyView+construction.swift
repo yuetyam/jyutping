@@ -71,7 +71,7 @@ extension KeyView {
                 keyTextLabel.textColor = foreColor
                 keyTextLabel.text = keyText
         }
-        func setupKeyHeaderLabel(text: String?) {
+        func setupKeyHeaderLabel(text: String?, alignment: NSTextAlignment = .right) {
                 let keyHeaderLabel: UILabel = UILabel()
                 shape.addSubview(keyHeaderLabel)
                 keyHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -81,9 +81,23 @@ extension KeyView {
                         keyHeaderLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -2)
                 ])
                 keyHeaderLabel.font = .systemFont(ofSize: 10)
-                keyHeaderLabel.textAlignment = .right
+                keyHeaderLabel.textAlignment = alignment
                 keyHeaderLabel.textColor = foreColor.withAlphaComponent(0.7)
                 keyHeaderLabel.text = text
+        }
+        func setupKeyFooterLabel(text: String?, alignment: NSTextAlignment = .right) {
+                let keyFooterLabel: UILabel = UILabel()
+                shape.addSubview(keyFooterLabel)
+                keyFooterLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        keyFooterLabel.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -2),
+                        keyFooterLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor, constant: 2),
+                        keyFooterLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -2)
+                ])
+                keyFooterLabel.font = .systemFont(ofSize: 10)
+                keyFooterLabel.textAlignment = alignment
+                keyFooterLabel.textColor = foreColor.withAlphaComponent(0.7)
+                keyFooterLabel.text = text
         }
         func setupKeyImageView(constant: CGFloat = 10) {
                 let keyImageView: UIImageView = UIImageView()
