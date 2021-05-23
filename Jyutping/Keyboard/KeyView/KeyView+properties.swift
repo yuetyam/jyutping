@@ -14,7 +14,7 @@ extension KeyView {
                         return 72
                 case .space:
                         return 180
-                case .key(.period), .key(.cantoneseComma):
+                case .key(.period), .key(.cantoneseComma), .key(.separator):
                         return controller.needsInputModeSwitchKey ? 37 : 33
                 default:
                         return 40
