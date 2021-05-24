@@ -35,8 +35,8 @@ struct Engine {
                 case 3:
                         return fetchThreeChars(text)
                 default:
-                        let rawText: String = text.replacingOccurrences(of: "'", with: "")
-                        return fetch(for: rawText, schemes: schemes)
+                        let filtered: String = text.replacingOccurrences(of: "'", with: "")
+                        return fetch(for: filtered, origin: text, schemes: schemes)
                 }
         }
 
@@ -85,12 +85,12 @@ struct Engine {
                 return head + tail
         }
 
-        private func fetch(for text: String, schemes: [[String]]) -> [Candidate] {
+        private func fetch(for text: String, origin: String, schemes: [[String]]) -> [Candidate] {
                 guard let bestScheme: [String] = schemes.first, !bestScheme.isEmpty else {
                         return processUnsplittable(text)
                 }
                 if bestScheme.reduce(0, {$0 + $1.count}) == text.count {
-                        return process(text: text, sequences: schemes)
+                        return process(text: text, origin: origin, sequences: schemes)
                 } else {
                         return processPartial(text: text, sequences: schemes)
                 }
@@ -104,10 +104,20 @@ struct Engine {
                 }
                 return combine
         }
-        private func process(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
-                let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
-                let candidates: [Candidate] = sorted.map({ $0.candidate })
+        private func process(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
+                let candidates: [Candidate] = {
+                        let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
+                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
+                        let candidates: [Candidate] = sorted.map({ $0.candidate })
+                        let hasSeparators: Bool = text.count != origin.count
+                        guard hasSeparators else { return candidates }
+                        let firstSyllable: String = sequences.first?.first ?? "X"
+                        let filtered: [Candidate] = candidates.filter { candidate in
+                                let firstJyutping: String = candidate.jyutping.components(separatedBy: " ").first ?? "Y"
+                                return firstSyllable == firstJyutping.removeTones()
+                        }
+                        return filtered
+                }()
                 guard candidates.count > 1 else {
                         return candidates
                 }
