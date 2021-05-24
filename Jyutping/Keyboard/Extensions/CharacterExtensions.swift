@@ -11,4 +11,9 @@ extension Character {
                 var charSet: Set<Character> = [" ", "1", "2", "3", "4", "5", "6"]
                 return !(charSet.insert(self).inserted)
         }
+
+        /// A Boolean value indicating whether this character is a separator( ' ).
+        var isSeparator: Bool {
+                return self == "'"
+        }
 }
