@@ -171,20 +171,28 @@ extension KeyView {
                                 }
                         } else {
                                 controller.candidateSequence.append(firstCandidate)
-                                if controller.arrangement < 2 {
-                                        let converted: String = firstCandidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
-                                        var tail = inputText.dropFirst(converted.count)
-                                        while tail.hasPrefix("'") {
-                                                tail = tail.dropFirst()
+                                let inputCount: Int = {
+                                        if controller.arrangement > 1 {
+                                                return firstCandidate.input.count
+                                        } else {
+                                                let converted: String = firstCandidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
+                                                return converted.count
                                         }
-                                        controller.inputText = String(tail)
-                                } else {
-                                        var tail = inputText.dropFirst(firstCandidate.input.count)
-                                        while tail.hasPrefix("'") {
-                                                tail = tail.dropFirst()
+                                }()
+                                let leading = inputText.dropLast(inputText.count - inputCount)
+                                let filtered = leading.replacingOccurrences(of: "'", with: "")
+                                var tail: String.SubSequence = {
+                                        if filtered.count == leading.count {
+                                                return inputText.dropFirst(inputCount)
+                                        } else {
+                                                let separatorsCount: Int = leading.count - filtered.count
+                                                return inputText.dropFirst(inputCount + separatorsCount)
                                         }
-                                        controller.inputText = String(tail)
+                                }()
+                                while tail.hasPrefix("'") {
+                                        tail = tail.dropFirst()
                                 }
+                                controller.inputText = String(tail)
                         }
                         if controller.inputText.isEmpty && !controller.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = controller.candidateSequence.joined()

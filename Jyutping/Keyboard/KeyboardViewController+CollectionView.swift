@@ -126,20 +126,28 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                 } else {
                         candidateSequence.append(candidate)
-                        if arrangement < 2 {
-                                let converted: String = candidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
-                                var tail = inputText.dropFirst(converted.count)
-                                while tail.hasPrefix("'") {
-                                        tail = tail.dropFirst()
+                        let inputCount: Int = {
+                                if arrangement > 1 {
+                                        return candidate.input.count
+                                } else {
+                                        let converted: String = candidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
+                                        return converted.count
                                 }
-                                inputText = String(tail)
-                        } else {
-                                var tail = inputText.dropFirst(candidate.input.count)
-                                while tail.hasPrefix("'") {
-                                        tail = tail.dropFirst()
+                        }()
+                        let leading = inputText.dropLast(inputText.count - inputCount)
+                        let filtered = leading.replacingOccurrences(of: "'", with: "")
+                        var tail: String.SubSequence = {
+                                if filtered.count == leading.count {
+                                        return inputText.dropFirst(inputCount)
+                                } else {
+                                        let separatorsCount: Int = leading.count - filtered.count
+                                        return inputText.dropFirst(inputCount + separatorsCount)
                                 }
-                                inputText = String(tail)
+                        }()
+                        while tail.hasPrefix("'") {
+                                tail = tail.dropFirst()
                         }
+                        inputText = String(tail)
                 }
                 if keyboardLayout == .candidateBoard && inputText.isEmpty {
                         collectionView.removeFromSuperview()
