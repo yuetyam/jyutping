@@ -41,15 +41,13 @@ struct Engine {
         }
 
         private func fetchTwoChars(_ text: String) -> [Candidate] {
-                guard (text.last!) != "'" else {
-                        return match(for: String(text.dropLast()))
-                }
+                guard let firstChar = text.first, let lastChar = text.last else { return [] }
+                guard !(firstChar.isSeparator || firstChar.isTone) else { return [] }
+                guard !lastChar.isSeparator else { return match(for: String(firstChar)) }
                 let matched: [Candidate] = match(for: text)
-                guard !(text.last!.isTone) else {
-                        return matched
-                }
+                guard !lastChar.isTone else { return matched }
                 let shortcutTwo: [Candidate] = shortcut(for: text)
-                let shortcutFirst: [Candidate] = shortcut(for: String(text.first!))
+                let shortcutFirst: [Candidate] = shortcut(for: String(firstChar))
                 return matched + shortcutTwo + shortcutFirst
         }
         private func fetchThreeChars(_ text: String) -> [Candidate] {
