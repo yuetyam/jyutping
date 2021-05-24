@@ -173,11 +173,17 @@ extension KeyView {
                                 controller.candidateSequence.append(firstCandidate)
                                 if controller.arrangement < 2 {
                                         let converted: String = firstCandidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
-                                        let tail = inputText.dropFirst(converted.count)
-                                        controller.inputText = (tail == "'") ? "" : String(tail)
+                                        var tail = inputText.dropFirst(converted.count)
+                                        while tail.hasPrefix("'") {
+                                                tail = tail.dropFirst()
+                                        }
+                                        controller.inputText = String(tail)
                                 } else {
-                                        let tail = inputText.dropFirst(firstCandidate.input.count)
-                                        controller.inputText = (tail == "'") ? "" : String(tail)
+                                        var tail = inputText.dropFirst(firstCandidate.input.count)
+                                        while tail.hasPrefix("'") {
+                                                tail = tail.dropFirst()
+                                        }
+                                        controller.inputText = String(tail)
                                 }
                         }
                         if controller.inputText.isEmpty && !controller.candidateSequence.isEmpty {

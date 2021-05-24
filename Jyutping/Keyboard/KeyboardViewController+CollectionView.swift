@@ -128,11 +128,17 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         candidateSequence.append(candidate)
                         if arrangement < 2 {
                                 let converted: String = candidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
-                                let tail = inputText.dropFirst(converted.count)
-                                inputText = (tail == "'") ? "" : String(tail)
+                                var tail = inputText.dropFirst(converted.count)
+                                while tail.hasPrefix("'") {
+                                        tail = tail.dropFirst()
+                                }
+                                inputText = String(tail)
                         } else {
-                                let tail = inputText.dropFirst(candidate.input.count)
-                                inputText = (tail == "'") ? "" : String(tail)
+                                var tail = inputText.dropFirst(candidate.input.count)
+                                while tail.hasPrefix("'") {
+                                        tail = tail.dropFirst()
+                                }
+                                inputText = String(tail)
                         }
                 }
                 if keyboardLayout == .candidateBoard && inputText.isEmpty {
