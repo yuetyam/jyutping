@@ -21,14 +21,11 @@ struct HomeView: View {
                                         GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 }
                                 ScrollView {
-                                        EnhancedTextField(placeholder: placeholder, text: $cacheText)
+                                        TextField(placeholder, text: $cacheText)
                                                 .padding(10)
-                                                .frame(maxHeight: 42)
                                                 .fillBackground()
                                                 .padding()
-
                                         GuideView()
-
                                         TonesInput().padding(.top)
                                         CangjieReverseLookup()
                                         PinyinReverseLookup()

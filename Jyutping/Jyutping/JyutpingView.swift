@@ -20,14 +20,15 @@ struct JyutpingView: View {
                                 }
                                 ScrollView {
                                         HStack {
-                                                Image(systemName: "magnifyingglass").opacity(0.5).padding(.leading, 8)
+                                                Image(systemName: "magnifyingglass").opacity(0.5)
                                                 EnhancedTextField(placeholder: placeholder, text: $inputText, returnKey: .search)
                                                         .padding(.vertical, 10)
                                                         .frame(maxHeight: 42)
                                         }
+                                        .padding(.horizontal, 8)
                                         .fillBackground()
                                         .padding()
-                                        
+
                                         if !inputText.isEmpty {
                                                 if jyutpings.isEmpty {
                                                         HStack {
