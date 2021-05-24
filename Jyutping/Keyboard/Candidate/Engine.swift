@@ -92,7 +92,7 @@ struct Engine {
                 if bestScheme.reduce(0, {$0 + $1.count}) == text.count {
                         return process(text: text, origin: origin, sequences: schemes)
                 } else {
-                        return processPartial(text: text, sequences: schemes)
+                        return processPartial(text: text, origin: origin, sequences: schemes)
                 }
         }
         
@@ -144,10 +144,20 @@ struct Engine {
                 }
                 return combine + candidates
         }
-        private func processPartial(text: String, sequences: [[String]]) -> [Candidate] {
-                let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
-                let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
-                let candidates: [Candidate] = sorted.map({ $0.candidate })
+        private func processPartial(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
+                let candidates: [Candidate] = {
+                        let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
+                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
+                        let candidates: [Candidate] = sorted.map({ $0.candidate })
+                        let hasSeparators: Bool = text.count != origin.count
+                        guard hasSeparators else { return candidates }
+                        let firstSyllable: String = sequences.first?.first ?? "X"
+                        let filtered: [Candidate] = candidates.filter { candidate in
+                                let firstJyutping: String = candidate.jyutping.components(separatedBy: " ").first ?? "Y"
+                                return firstSyllable == firstJyutping.removeTones()
+                        }
+                        return filtered
+                }()
                 guard !candidates.isEmpty else {
                         return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
                 }
