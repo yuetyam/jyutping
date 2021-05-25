@@ -1,18 +1,19 @@
 extension Character {
 
+        private static let tones: Set<Character> = ["1", "2", "3", "4", "5", "6"]
+        private static let spaceTones: Set<Character> = [" ", "1", "2", "3", "4", "5", "6"]
+
         /// A Boolean value indicating whether this character represents a tone number (1-6).
         var isTone: Bool {
-                var tones: Set<Character> = ["1", "2", "3", "4", "5", "6"]
-                return !(tones.insert(self).inserted)
+                return Character.tones.contains(self)
         }
 
         /// A Boolean value indicating whether this character represents a space or a tone number.
         var isSpaceOrTone: Bool {
-                var charSet: Set<Character> = [" ", "1", "2", "3", "4", "5", "6"]
-                return !(charSet.insert(self).inserted)
+                return Character.spaceTones.contains(self)
         }
 
-        /// A Boolean value indicating whether this character is a separator( ' ).
+        /// A Boolean value indicating whether this character represents a separator ( ' ).
         var isSeparator: Bool {
                 return self == "'"
         }
