@@ -249,7 +249,7 @@ private extension Engine {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                if !hasTones || tones == jyutping.tones {
+                                if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
                                         let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                         candidates.append(candidate)
                                 }
@@ -270,7 +270,7 @@ private extension Engine {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                if !hasTones || tones == jyutping.tones {
+                                if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
                                         let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                         candidates.append(candidate)
                                 }
@@ -292,7 +292,7 @@ private extension Engine {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
                                 let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
                                 let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
-                                if !hasTones || tones == jyutping.tones {
+                                if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
                                         let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                         let rowCandidate: RowCandidate = (candidate: candidate, row: rowid)
                                         rowCandidates.append(rowCandidate)
