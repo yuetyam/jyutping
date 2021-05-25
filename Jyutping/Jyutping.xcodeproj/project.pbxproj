@@ -41,8 +41,6 @@
 		3759F4C8262FC7EA00266086 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A0262FC7E900266086 /* KeyboardViewController.swift */; };
 		3759F4C9262FC7EA00266086 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A2262FC7E900266086 /* Splitter.swift */; };
 		3759F4CA262FC7EA00266086 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A3262FC7E900266086 /* Engine.swift */; };
-		3759F4CB262FC7EA00266086 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A4262FC7E900266086 /* Entry.swift */; };
-		3759F4CC262FC7EA00266086 /* LexiconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A5262FC7E900266086 /* LexiconManager.swift */; };
 		3759F4CD262FC7EA00266086 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A6262FC7E900266086 /* Candidate.swift */; };
 		3759F4CE262FC7EA00266086 /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A7262FC7E900266086 /* KeyboardEvent.swift */; };
 		3759F4CF262FC7EA00266086 /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4A8262FC7E900266086 /* KeyboardViewController+CollectionView.swift */; };
@@ -161,8 +159,6 @@
 		3759F4A0262FC7E900266086 /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		3759F4A2262FC7E900266086 /* Splitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splitter.swift; sourceTree = "<group>"; };
 		3759F4A3262FC7E900266086 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		3759F4A4262FC7E900266086 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
-		3759F4A5262FC7E900266086 /* LexiconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexiconManager.swift; sourceTree = "<group>"; };
 		3759F4A6262FC7E900266086 /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
 		3759F4A7262FC7E900266086 /* KeyboardEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
 		3759F4A8262FC7E900266086 /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
@@ -379,8 +375,6 @@
 			children = (
 				3759F4A2262FC7E900266086 /* Splitter.swift */,
 				3759F4A3262FC7E900266086 /* Engine.swift */,
-				3759F4A4262FC7E900266086 /* Entry.swift */,
-				3759F4A5262FC7E900266086 /* LexiconManager.swift */,
 				3791B3002634E92B00562137 /* UserLexicon.swift */,
 				3759F4A6262FC7E900266086 /* Candidate.swift */,
 			);
@@ -661,7 +655,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3759F4CC262FC7EA00266086 /* LexiconManager.swift in Sources */,
 				3791B3012634E92B00562137 /* UserLexicon.swift in Sources */,
 				3759F4D3262FC7EA00266086 /* KeyView+handlers.swift in Sources */,
 				3759F4C4262FC7EA00266086 /* CandidateBoard.swift in Sources */,
@@ -687,7 +680,6 @@
 				3759F4DE262FC7EA00266086 /* KeyboardViewController+keyboard.swift in Sources */,
 				3759F4D8262FC7EA00266086 /* AudioFeedback.swift in Sources */,
 				3759F4DA262FC7EA00266086 /* Emoji.swift in Sources */,
-				3759F4CB262FC7EA00266086 /* Entry.swift in Sources */,
 				3759F4DF262FC7EA00266086 /* KeyboardLayout+events.swift in Sources */,
 				3759F4D2262FC7EA00266086 /* BlurEffectView.swift in Sources */,
 				3759F4C7262FC7EA00266086 /* CandidateCell.swift in Sources */,

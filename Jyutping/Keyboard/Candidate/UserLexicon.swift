@@ -23,7 +23,6 @@ struct UserLexicon {
         }
         init() {
                 ensure()
-                prepare()
         }
         /*
         func close() {
@@ -138,32 +137,6 @@ struct UserLexicon {
                         if sqlite3_step(deleteStatement) == SQLITE_DONE {}
                 }
                 sqlite3_finalize(deleteStatement)
-        }
-
-
-        // MARK: - Transfer Data
-
-        private func prepare() {
-                let key: String = "is_user_lexicon_ready_v0.7"
-                let isUserLexiconReady: Bool = UserDefaults.standard.bool(forKey: key)
-                guard !isUserLexiconReady else { return }
-                defer {
-                        UserDefaults.standard.set(true, forKey: key)
-                }
-                guard let libraryDirectoryUrl: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first else { return }
-                let userdbUrl: URL = libraryDirectoryUrl.appendingPathComponent("userdb.sqlite3", isDirectory: false)
-                guard FileManager.default.fileExists(atPath: userdbUrl.path) else { return }
-                let manager = LexiconManager()
-                let oldEntries: [LexiconEntry] = manager.fetchAll()
-                manager.close()
-                guard !oldEntries.isEmpty else { return }
-                _ = oldEntries.map { item in
-                        if let frequency = find(by: item.id) {
-                                update(id: item.id, frequency: frequency + item.frequency)
-                        } else {
-                                insert(entry: item)
-                        }
-                }
         }
 }
 
