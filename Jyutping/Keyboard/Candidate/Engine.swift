@@ -51,35 +51,53 @@ struct Engine {
                 return matched + shortcutTwo + shortcutFirst
         }
         private func fetchThreeChars(_ text: String) -> [Candidate] {
-                guard (text.last!) != "'" else {
-                        return match(for: String(text.dropLast()))
+                guard let firstChar = text.first, let lastChar = text.last else { return [] }
+                guard !(firstChar.isSeparator || firstChar.isTone) else { return [] }
+                let medium = text[text.index(text.startIndex, offsetBy: 1)]
+                let leadingTwo: String = String([firstChar, medium])
+                let headTail: String = String([firstChar, lastChar])
+                if medium.isSeparator {
+                        if lastChar.isSeparator || lastChar.isTone {
+                                return match(for: String(firstChar))
+                        } else {
+                                return prefix(match: headTail)
+                        }
+                } else if medium.isTone {
+                        guard !(lastChar.isSeparator || lastChar.isTone) else {
+                                return match(for: leadingTwo)
+                        }
+                        let fetches: [Candidate] = prefix(match: headTail)
+                        let filtered: [Candidate] = fetches.filter {
+                                guard let first: String = $0.jyutping.components(separatedBy: " ").first else { return false }
+                                return first == leadingTwo
+                        }
+                        return filtered
                 }
-                let exactlyMatched: [Candidate] = match(for: text)
-                guard !(text.last!.isTone) else {
-                        return exactlyMatched
+                if lastChar.isSeparator {
+                        return match(for: leadingTwo)
+                } else if lastChar.isTone {
+                        return match(for: text)
                 }
-                let prefixMatches: [Candidate] = prefix(match: text)
+                let exactly: [Candidate] = match(for: text)
+                let prefixes: [Candidate] = prefix(match: text)
                 let shortcutThree: [Candidate] = shortcut(for: text)
+                let shortcutTwo: [Candidate] = shortcut(for: leadingTwo)
+                let matchTwo: [Candidate] = match(for: leadingTwo)
+                let shortcutFirst: [Candidate] = shortcut(for: String(firstChar))
 
-                let firstTwoChars: String = String(text.dropLast())
-                let matchTwoChars: [Candidate] = match(for:firstTwoChars)
-                let shortcutTwo: [Candidate] = shortcut(for: firstTwoChars)
-                guard let middleIsTone: Bool = firstTwoChars.last?.isTone, !middleIsTone else {
-                        return exactlyMatched + matchTwoChars
+                var combine: [Candidate] = []
+                if let shortcutLast1: Candidate = shortcut(for: String(lastChar), count: 1).first {
+                        if let firstMatchTwo: Candidate = matchTwo.first {
+                                let new: Candidate = firstMatchTwo + shortcutLast1
+                                combine.append(new)
+                        }
+                        if let firstShortcutTwo: Candidate = matchTwo.first {
+                                let new: Candidate = firstShortcutTwo + shortcutLast1
+                                combine.append(new)
+                        }
                 }
-
-                let shortcutLast: [Candidate] = shortcut(for: String(text.last!), count: 1)
-                var combine: [Candidate] = [Candidate]()
-                if !matchTwoChars.isEmpty && !shortcutLast.isEmpty {
-                        combine.append((matchTwoChars[0] + shortcutLast[0]))
-                }
-                if !shortcutTwo.isEmpty && !shortcutLast.isEmpty {
-                        combine.append((shortcutTwo[0] + shortcutLast[0]))
-                }
-                let shortcutFirst: [Candidate] = shortcut(for: String(text.first!))
-
-                let head: [Candidate] = exactlyMatched + prefixMatches + shortcutThree + combine
-                let tail: [Candidate] = shortcutTwo + matchTwoChars + shortcutFirst
+                let head: [Candidate] = exactly + prefixes + shortcutThree
+                let tail: [Candidate] = combine + shortcutTwo + matchTwo + shortcutFirst
                 return head + tail
         }
 
