@@ -22,7 +22,7 @@ extension KeyboardViewController {
                 }
         }
 
-        func updateKeyboard(newEvent: KeyboardEvent) {
+        func updateBottomStackView(with newEvent: KeyboardEvent) {
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, newEvent, .newLine] :
                         [.switchTo(.cantoneseNumeric), newEvent, .space, .newLine]

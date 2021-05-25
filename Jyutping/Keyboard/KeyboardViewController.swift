@@ -154,11 +154,11 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         if inputText.isEmpty && !oldValue.isEmpty {
                                 DispatchQueue.main.async { [unowned self] in
-                                        self.updateKeyboard(newEvent: .key(.cantoneseComma))
+                                        self.updateBottomStackView(with: .key(.cantoneseComma))
                                 }
                         } else if !inputText.isEmpty && oldValue.isEmpty {
                                 DispatchQueue.main.async { [unowned self] in
-                                        self.updateKeyboard(newEvent: .key(.separator))
+                                        self.updateBottomStackView(with: .key(.separator))
                                 }
                         }
                 }
