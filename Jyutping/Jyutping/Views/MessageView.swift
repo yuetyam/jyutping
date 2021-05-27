@@ -8,7 +8,7 @@ struct MessageView: View {
         let symbol: Image?
         
         var body: some View {
-                HStack(alignment: .center, spacing: 16) {
+                HStack(spacing: 16) {
                         Image(systemName: icon)
                         text
                         Spacer()
