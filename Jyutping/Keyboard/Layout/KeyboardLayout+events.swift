@@ -1,5 +1,5 @@
 extension KeyboardLayout {
-        func events(needsInputModeSwitchKey: Bool, arrangement: Int) -> [[KeyboardEvent]] {
+        func events(for arrangement: Int, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
                         switch arrangement {
