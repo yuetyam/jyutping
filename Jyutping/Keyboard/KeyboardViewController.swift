@@ -273,7 +273,16 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var engine: Engine = Engine()
         private func suggest() {
                 let lexiconCandidates: [Candidate] = userLexicon.suggest(for: processingText)
-                let engineCandidates: [Candidate] = engine.suggest(for: processingText, schemes: schemes.deduplicated())
+                let engineCandidates: [Candidate] = {
+                        let normal: [Candidate] = engine.suggest(for: processingText, schemes: schemes.deduplicated())
+                        if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
+                                let droppedSeparator: String = String(processingText.dropLast())
+                                let newSchemes: [[String]] = Splitter.split(droppedSeparator).deduplicated().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
+                                return engine.suggest(for: droppedSeparator, schemes: newSchemes)
+                        } else {
+                                return normal
+                        }
+                }()
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
                 if logogram < 2 {
                         candidates = combined.deduplicated()
