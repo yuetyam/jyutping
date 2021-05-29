@@ -75,10 +75,11 @@ extension KeyView {
                 let keyHeaderLabel: UILabel = UILabel()
                 shape.addSubview(keyHeaderLabel)
                 keyHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
+                let inset: CGFloat = isPhoneInterface ? 2 : 4
                 NSLayoutConstraint.activate([
-                        keyHeaderLabel.topAnchor.constraint(equalTo: shape.topAnchor, constant: 2),
-                        keyHeaderLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor,constant: 2),
-                        keyHeaderLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -2)
+                        keyHeaderLabel.topAnchor.constraint(equalTo: shape.topAnchor, constant: inset),
+                        keyHeaderLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor,constant: inset),
+                        keyHeaderLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -inset)
                 ])
                 keyHeaderLabel.font = .systemFont(ofSize: 10)
                 keyHeaderLabel.textAlignment = alignment
@@ -89,10 +90,11 @@ extension KeyView {
                 let keyFooterLabel: UILabel = UILabel()
                 shape.addSubview(keyFooterLabel)
                 keyFooterLabel.translatesAutoresizingMaskIntoConstraints = false
+                let inset: CGFloat = isPhoneInterface ? 2 : 4
                 NSLayoutConstraint.activate([
-                        keyFooterLabel.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -2),
-                        keyFooterLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor, constant: 2),
-                        keyFooterLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -2)
+                        keyFooterLabel.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -inset),
+                        keyFooterLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor, constant: inset),
+                        keyFooterLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -inset)
                 ])
                 keyFooterLabel.font = .systemFont(ofSize: 10)
                 keyFooterLabel.textAlignment = alignment
