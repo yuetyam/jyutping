@@ -402,13 +402,13 @@ final class KeyView: UIView {
                 switch event {
                 case .key(let seat) where seat.hasChildren:
                         let firstChild: KeyElement = seat.children.first!
-                        let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer)
+                        let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, isPhoneInterface: isPhoneInterface)
                         firstKey.backgroundColor = .selection
                         firstKey.setTextColor(.white)
                         var keys: [CalloutView] = [firstKey]
                         for index in 1..<seat.children.count {
                                 let element: KeyElement = seat.children[index]
-                                let callout = CalloutView(text: element.text, header: element.header, footer: element.footer)
+                                let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, isPhoneInterface: isPhoneInterface)
                                 keys.append(callout)
                         }
                         return beyondMidX ? keys.reversed() : keys
