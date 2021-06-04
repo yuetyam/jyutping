@@ -86,15 +86,25 @@ struct AboutView: View {
                                                 }
                                                 Divider()
                                                 Button(action: {
-                                                        // GitHub App supports Universal Links
-                                                        let url: URL = URL(string: "https://github.com/yuetyam/jyutping/issues")!
-                                                        UIApplication.shared.open(url)
+                                                        // Instagram App doesn't support Universal Links
+                                                        let appUrl: URL = URL(string: "instagram://user?username=jyutping")!
+                                                        let webUrl: URL = URL(string: "https://www.instagram.com/jyutping")!
+                                                        UIApplication.shared.open(appUrl) { success in
+                                                                if !success {
+                                                                        UIApplication.shared.open(webUrl)
+                                                                }
+                                                        }
                                                 }) {
-                                                        MessageView(icon: "info.circle", text: Text("GitHub Issues"), symbol: Image(systemName: "arrow.up.right"))
+                                                        let icon: String = {
+                                                                if #available(iOS 14, *) {
+                                                                        return "circle.square"
+                                                                } else {
+                                                                        return "dot.square"
+                                                                }
+                                                        }()
+                                                        MessageView(icon: icon, text: Text("Follow us on Instagram"), symbol: Image(systemName: "arrow.up.right"))
                                                 }
-                                                Divider()
-                                                EmailFeedbackButton()
-                                                        .padding(.bottom)
+                                                .padding(.bottom)
                                         }
                                         .fillBackground()
                                         .contextMenu {
@@ -108,6 +118,27 @@ struct AboutView: View {
                                                 }) {
                                                         MenuLabel(text: "Copy Twitter URL", image: "doc.on.doc")
                                                 }
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://www.instagram.com/jyutping"
+                                                }) {
+                                                        MenuLabel(text: "Copy Instagram URL", image: "doc.on.doc")
+                                                }
+                                        }
+                                        .padding()
+
+                                        VStack {
+                                                Button(action: {
+                                                        // GitHub App supports Universal Links
+                                                        let url: URL = URL(string: "https://github.com/yuetyam/jyutping/issues")!
+                                                        UIApplication.shared.open(url)
+                                                }) {
+                                                        MessageView(icon: "info.circle", text: Text("GitHub Issues"), symbol: Image(systemName: "arrow.up.right"))
+                                                }.padding(.top)
+                                                Divider()
+                                                EmailFeedbackButton().padding(.bottom)
+                                        }
+                                        .fillBackground()
+                                        .contextMenu {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
                                                 }) {
