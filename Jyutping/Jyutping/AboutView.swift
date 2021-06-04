@@ -87,8 +87,8 @@ struct AboutView: View {
                                                 Divider()
                                                 Button(action: {
                                                         // Instagram App doesn't support Universal Links
-                                                        let appUrl: URL = URL(string: "instagram://user?username=jyutping")!
-                                                        let webUrl: URL = URL(string: "https://www.instagram.com/jyutping")!
+                                                        let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
+                                                        let webUrl: URL = URL(string: "https://www.instagram.com/jyutping_app")!
                                                         UIApplication.shared.open(appUrl) { success in
                                                                 if !success {
                                                                         UIApplication.shared.open(webUrl)
@@ -119,7 +119,7 @@ struct AboutView: View {
                                                         MenuLabel(text: "Copy Twitter URL", image: "doc.on.doc")
                                                 }
                                                 Button(action: {
-                                                        UIPasteboard.general.string = "https://www.instagram.com/jyutping"
+                                                        UIPasteboard.general.string = "https://www.instagram.com/jyutping_app"
                                                 }) {
                                                         MenuLabel(text: "Copy Instagram URL", image: "doc.on.doc")
                                                 }
