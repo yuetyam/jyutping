@@ -23,9 +23,9 @@ struct JyutpingView: View {
                                                 Image(systemName: "magnifyingglass").opacity(0.5)
                                                 EnhancedTextField(placeholder: placeholder, text: $inputText, returnKey: .search)
                                                         .padding(.vertical, 10)
-                                                        .frame(maxHeight: 42)
                                         }
                                         .padding(.horizontal, 8)
+                                        .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: 42)
                                         .fillBackground()
                                         .padding()
 
