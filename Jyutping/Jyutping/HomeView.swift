@@ -21,8 +21,9 @@ struct HomeView: View {
                                         GlobalBackgroundColor().edgesIgnoringSafeArea(.all)
                                 }
                                 ScrollView {
-                                        TextField(placeholder, text: $cacheText)
+                                        EnhancedTextField(placeholder: placeholder, text: $cacheText)
                                                 .padding(10)
+                                                .frame(maxWidth: UIScreen.main.bounds.width - 32)
                                                 .fillBackground()
                                                 .padding()
                                         GuideView()
