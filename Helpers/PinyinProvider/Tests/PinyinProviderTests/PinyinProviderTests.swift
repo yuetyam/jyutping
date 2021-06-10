@@ -15,9 +15,9 @@ final class PinyinProviderTests: XCTestCase {
         }
 
         func testSuggestion() {
-                let candidates: [PinyinProvider.PinyinCandidate] = provider.suggest(for: "biang")
+                let candidates: [PinyinProvider.PinyinCandidate] = provider.suggest(for: "wo")
                 let first = candidates.first!
-                XCTAssertEqual(first.text, "𰻞")
+                XCTAssertEqual(first.text, "我")
         }
         func testLookup() {
                 let candidates: [PinyinProvider.JyutpingCandidate] = provider.search(for: "wo")
