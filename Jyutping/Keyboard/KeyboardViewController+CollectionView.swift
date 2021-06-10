@@ -110,21 +110,19 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 let candidate: Candidate = candidates[indexPath.row]
                 output(candidate.text)
                 AudioFeedback.perform(.modify)
-                if inputText.hasPrefix("r") {
-                        if inputText == "r" + candidate.input {
+
+                switch inputText.first {
+                case .none:
+                        break
+                case .some("r"), .some("v"), .some("x"):
+                        if inputText.count == candidate.input.count + 1 {
                                 inputText = ""
                         } else {
+                                let first: String = String(inputText.first!)
                                 let tail = inputText.dropFirst(candidate.input.count + 1)
-                                inputText = "r" + tail
+                                inputText = first + tail
                         }
-                } else if inputText.hasPrefix("v") {
-                        if inputText == "v" + candidate.input {
-                                inputText = ""
-                        } else {
-                                let tail = inputText.dropFirst(candidate.input.count + 1)
-                                inputText = "v" + tail
-                        }
-                } else {
+                default:
                         candidateSequence.append(candidate)
                         let inputCount: Int = {
                                 if arrangement > 1 {
@@ -149,6 +147,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                         inputText = String(tail)
                 }
+
                 if keyboardLayout == .candidateBoard && inputText.isEmpty {
                         collectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)

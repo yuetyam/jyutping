@@ -1,5 +1,7 @@
 import UIKit
 import OpenCCLite
+import PinyinProvider
+import StrokeProvider
 
 final class KeyboardViewController: UIInputViewController {
 
@@ -142,16 +144,24 @@ final class KeyboardViewController: UIInputViewController {
 
         lazy var inputText: String = "" {
                 didSet {
-                        if inputText.isEmpty || (arrangement > 1) || inputText.hasPrefix("v") || inputText.hasPrefix("r") {
+                        switch inputText.first {
+                        case .none:
+                                processingText = ""
+                        case .some("r"), .some("v"), .some("x"):
                                 processingText = inputText
-                        } else {
-                                processingText = inputText.replacingOccurrences(of: "vv", with: "4")
-                                        .replacingOccurrences(of: "xx", with: "5")
-                                        .replacingOccurrences(of: "qq", with: "6")
-                                        .replacingOccurrences(of: "v", with: "1")
-                                        .replacingOccurrences(of: "x", with: "2")
-                                        .replacingOccurrences(of: "q", with: "3")
+                        default:
+                                if arrangement > 1 {
+                                        processingText = inputText
+                                } else {
+                                        processingText = inputText.replacingOccurrences(of: "vv", with: "4")
+                                                .replacingOccurrences(of: "xx", with: "5")
+                                                .replacingOccurrences(of: "qq", with: "6")
+                                                .replacingOccurrences(of: "v", with: "1")
+                                                .replacingOccurrences(of: "x", with: "2")
+                                                .replacingOccurrences(of: "q", with: "3")
+                                }
                         }
+
                         if inputText.isEmpty && !oldValue.isEmpty {
                                 DispatchQueue.main.async { [unowned self] in
                                         self.updateBottomStackView(with: .key(.cantoneseComma))
@@ -168,16 +178,16 @@ final class KeyboardViewController: UIInputViewController {
                         DispatchQueue.main.async { [unowned self] in
                                 self.toolBar.update()
                         }
-                        guard !processingText.isEmpty else {
+
+                        switch processingText.first {
+                        case .none:
                                 syllablesSchemes = []
                                 markedText = ""
                                 candidates = []
-                                return
-                        }
-                        if processingText.hasPrefix("v") || processingText.hasPrefix("r") {
+                        case .some("r"), .some("v"), .some("x"):
                                 syllablesSchemes = []
                                 markedText = processingText
-                        } else {
+                        default:
                                 syllablesSchemes = Splitter.split(processingText)
                                 if let syllables: [String] = syllablesSchemes.first {
                                         let splittable: String = syllables.joined()
@@ -193,6 +203,8 @@ final class KeyboardViewController: UIInputViewController {
                                         markedText = processingText
                                 }
                         }
+
+                        guard !processingText.isEmpty else { return }
                         imeQueue.async { [unowned self] in
                                 self.suggest()
                         }
@@ -215,7 +227,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         private lazy var syllablesSchemes: [[String]] = [] {
                 didSet {
-                        guard !syllablesSchemes.isEmpty else { schemes = syllablesSchemes; return }
+                        guard !syllablesSchemes.isEmpty else { schemes = []; return }
                         schemes = syllablesSchemes.map({ block -> [String] in
                                 let sequence: [String] = block.map { syllable -> String in
                                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
@@ -268,10 +280,44 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Engine
 
-        private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.ime", qos: .userInteractive)
+        private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.Keyboard.ime", qos: .userInteractive)
         private lazy var userLexicon: UserLexicon = UserLexicon()
         private lazy var engine: Engine = Engine()
+        private lazy var pinyinProvider: PinyinProvider = PinyinProvider()
+        private lazy var strokeProvider: StrokeProvider = StrokeProvider()
         private func suggest() {
+                switch processingText.first {
+                case .none:
+                        break
+                case .some("r"):
+                        pinyinReverseLookup()
+                case .some("v"):
+                        cangjieReverseLookup()
+                case .some("x"):
+                        strokeReverseLookup()
+                default:
+                        imeSuggest()
+                }
+        }
+        private func pinyinReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                let searches: [PinyinProvider.JyutpingCandidate] = pinyinProvider.search(for: text)
+                let lookup: [Candidate] = searches.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
+                push(lookup)
+        }
+        private func cangjieReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                let cangjieCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider.matchCangjie(for: text)
+                let lookup: [Candidate] = cangjieCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
+                push(lookup)
+        }
+        private func strokeReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                let strokeCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider.matchStroke(for: text)
+                let lookup: [Candidate] = strokeCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
+                push(lookup)
+        }
+        private func imeSuggest() {
                 let lexiconCandidates: [Candidate] = userLexicon.suggest(for: processingText)
                 let engineCandidates: [Candidate] = {
                         let normal: [Candidate] = engine.suggest(for: processingText, schemes: schemes.deduplicated())
@@ -284,13 +330,16 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }()
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
+                push(combined)
+        }
+        private func push(_ origin: [Candidate]) {
                 if logogram < 2 {
-                        candidates = combined.deduplicated()
+                        candidates = origin.deduplicated()
                 } else if converter == nil {
-                        candidates = combined.deduplicated()
+                        candidates = origin.deduplicated()
                         updateConverter()
                 } else {
-                        let converted: [Candidate] = combined.map { Candidate(text: converter!.convert($0.text), jyutping: $0.jyutping, input: $0.input, lexiconText: $0.lexiconText) }
+                        let converted: [Candidate] = origin.map { Candidate(text: converter!.convert($0.text), jyutping: $0.jyutping, input: $0.input, lexiconText: $0.lexiconText) }
                         candidates = converted.deduplicated()
                 }
         }

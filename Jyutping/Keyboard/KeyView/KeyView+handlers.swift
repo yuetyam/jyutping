@@ -155,21 +155,19 @@ extension KeyView {
                         }
                         controller.output(firstCandidate.text)
                         AudioFeedback.perform(.modify)
-                        if inputText.hasPrefix("r") {
+
+                        switch inputText.first {
+                        case .none:
+                                break
+                        case .some("r"), .some("v"), .some("x"):
                                 if inputText.count == (firstCandidate.input.count + 1) {
                                         controller.inputText = ""
                                 } else {
+                                        let first: String = String(inputText.first!)
                                         let tail = inputText.dropFirst(firstCandidate.input.count + 1)
-                                        controller.inputText = "r" + tail
+                                        controller.inputText = first + tail
                                 }
-                        } else if inputText.hasPrefix("v") {
-                                if inputText.count == (firstCandidate.input.count + 1) {
-                                        controller.inputText = ""
-                                } else {
-                                        let tail = inputText.dropFirst(firstCandidate.input.count + 1)
-                                        controller.inputText = "v" + tail
-                                }
-                        } else {
+                        default:
                                 controller.candidateSequence.append(firstCandidate)
                                 let inputCount: Int = {
                                         if controller.arrangement > 1 {
@@ -194,6 +192,7 @@ extension KeyView {
                                 }
                                 controller.inputText = String(tail)
                         }
+
                         if controller.inputText.isEmpty && !controller.candidateSequence.isEmpty {
                                 let concatenatedCandidate: Candidate = controller.candidateSequence.joined()
                                 controller.candidateSequence = []

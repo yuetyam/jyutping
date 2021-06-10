@@ -14,14 +14,6 @@ struct Engine {
         */
 
         func suggest(for text: String, schemes: [[String]]) -> [Candidate] {
-                guard !text.hasPrefix("r") else {
-                        let pinyin: String = String(text.dropFirst())
-                        return pinyin.isEmpty ? [] : matchPinyin(for: pinyin)
-                }
-                guard !text.hasPrefix("v") else {
-                        let cangjie: String = String(text.dropFirst())
-                        return cangjie.isEmpty ? [] : matchCangjie(for: cangjie)
-                }
                 switch text.count {
                 case 0:
                         return []
@@ -309,37 +301,6 @@ private extension Engine {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE prefix = \(text.hash) LIMIT \(count);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-
-        func matchPinyin(for text: String) -> [Candidate] {
-                var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE pinyin = \(text.hash);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-        func matchCangjie(for text: String) -> [Candidate] {
-                var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE cangjie = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
