@@ -29,6 +29,7 @@ struct HomeView: View {
                                         GuideView()
                                         TonesInput().padding(.top)
                                         CangjieReverseLookup()
+                                        StrokeReverseLookup()
                                         PinyinReverseLookup()
                                         PeriodShortcut().padding(.bottom, 50)
                                 }
@@ -137,7 +138,6 @@ private struct TonesInput: View {
         }
 }
 private struct CangjieReverseLookup: View {
-        private let content: String = NSLocalizedString("以 v 開始，再輸入倉頡碼即可\n例如輸入 vdam 就會出「查」等\n候選詞會帶顯示對應嘅粵拼", comment: "")
         var body: some View {
                 VStack {
                         HStack {
@@ -145,7 +145,7 @@ private struct CangjieReverseLookup: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content).lineSpacing(6)
+                                Text("以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
                                 Spacer()
                         }
                         .padding(.vertical, 6)
@@ -155,8 +155,49 @@ private struct CangjieReverseLookup: View {
                 .padding()
         }
 }
+private struct StrokeReverseLookup: View {
+        var body: some View {
+                VStack {
+                        HStack {
+                                Text("Lookup Jyutping with Stroke").font(.headline)
+                                Spacer()
+                        }
+                        HStack {
+                                Text("以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
+                                Spacer()
+                        }
+                        .padding(.vertical, 6)
+                        VStack {
+                                HStack {
+                                        Text("w = 橫(waang)")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text("s = 豎(syu)")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text("a = 撇")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text("d = 點(dim)")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text("z = 折(zit)")
+                                        Spacer()
+                                }
+                        }
+                        .font(.system(.body, design: .monospaced))
+                        .lineSpacing(6)
+                }
+                .padding()
+                .fillBackground()
+                .padding()
+        }
+}
 private struct PinyinReverseLookup: View {
-        private let content: String = NSLocalizedString("以 r 開始，再輸入普拼即可\n例如輸入 rcha 就會出「查」等\n候選詞會帶顯示對應嘅粵拼", comment: "")
         var body: some View {
                 VStack {
                         HStack {
@@ -164,7 +205,7 @@ private struct PinyinReverseLookup: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content).lineSpacing(6)
+                                Text("以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
                                 Spacer()
                         }
                         .padding(.vertical, 6)
@@ -175,7 +216,6 @@ private struct PinyinReverseLookup: View {
         }
 }
 private struct PeriodShortcut: View {
-        private let content: String = NSLocalizedString("Double tapping the space bar will insert a period followed by a space", comment: "")
         var body: some View {
                 VStack {
                         HStack {
@@ -183,7 +223,7 @@ private struct PeriodShortcut: View {
                                 Spacer()
                         }
                         HStack {
-                                Text(content).lineSpacing(6)
+                                Text("Double tapping the space bar will insert a period followed by a space").lineSpacing(6)
                                 Spacer()
                         }
                         .padding(.vertical, 6)
