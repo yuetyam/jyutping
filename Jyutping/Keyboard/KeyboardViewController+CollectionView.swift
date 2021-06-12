@@ -16,13 +16,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 } else {
                         switch section {
                         case 0: return frequentEmojis.count
-                        case 1: return 454  // Smileys & People
+                        case 1: return 461  // Smileys & People
                         case 2: return 199  // Animals & Nature
                         case 3: return 123  // Food & Drink
                         case 4: return 117  // Activity
                         case 5: return 128  // Travel & Places
                         case 6: return 217  // Objects
-                        case 7: return 290  // Symbols
+                        case 7: return 292  // Symbols
                         case 8: return 259  // Flags
                         default: return 0
                         }
