@@ -122,7 +122,7 @@ private struct TonesInput: View {
                         }
                         HStack {
                                 Text(content)
-                                        .font(.system(.callout, design: .monospaced))
+                                        .font(.system(.body, design: .monospaced))
                                         .lineSpacing(5)
                                         .fixedSize(horizontal: true, vertical: false)
                                 Spacer()
