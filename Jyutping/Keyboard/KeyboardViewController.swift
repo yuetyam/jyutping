@@ -13,7 +13,7 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var candidateCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         private(set) lazy var emojiBoard: EmojiBoard = EmojiBoard(viewController: self)
         private(set) lazy var emojiCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        private(set) lazy var settingsTableView: UITableView = UITableView(frame: .zero, style: .grouped)
+        private(set) lazy var settingsTableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
 
         private(set) lazy var keyboardStackView: UIStackView = {
                 let stackView = UIStackView(frame: .zero)
