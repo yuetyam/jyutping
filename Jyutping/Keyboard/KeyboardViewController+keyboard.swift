@@ -101,7 +101,7 @@ extension KeyboardViewController {
                         emojiCollectionView.bottomAnchor.constraint(equalTo: emojiBoard.indicatorsStackView.topAnchor),
                         emojiCollectionView.leadingAnchor.constraint(equalTo: emojiBoard.leadingAnchor),
                         emojiCollectionView.trailingAnchor.constraint(equalTo: emojiBoard.trailingAnchor),
-                        emojiCollectionView.topAnchor.constraint(equalTo: emojiBoard.topAnchor, constant: 4)
+                        emojiCollectionView.topAnchor.constraint(equalTo: emojiBoard.topAnchor, constant: 2)
                 ])
                 (emojiCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
                 keyboardStackView.addArrangedSubview(emojiBoard)

@@ -32,7 +32,7 @@ final class EmojiBoard: UIView {
                 NSLayoutConstraint.activate([
                         backButton.leadingAnchor.constraint(equalTo: leadingAnchor),
                         backButton.bottomAnchor.constraint(equalTo: bottomAnchor),
-                        backButton.topAnchor.constraint(equalTo: bottomAnchor, constant: -35),
+                        backButton.topAnchor.constraint(equalTo: bottomAnchor, constant: -40),
                         backButton.trailingAnchor.constraint(equalTo: leadingAnchor, constant: 44)
                 ])
         }
@@ -42,7 +42,7 @@ final class EmojiBoard: UIView {
                 NSLayoutConstraint.activate([
                         backspaceKey.trailingAnchor.constraint(equalTo: trailingAnchor),
                         backspaceKey.bottomAnchor.constraint(equalTo: bottomAnchor),
-                        backspaceKey.topAnchor.constraint(equalTo: bottomAnchor, constant: -35),
+                        backspaceKey.topAnchor.constraint(equalTo: bottomAnchor, constant: -40),
                         backspaceKey.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -44)
                 ])
         }
@@ -64,7 +64,7 @@ final class EmojiBoard: UIView {
                         indicatorsStackView.leadingAnchor.constraint(equalTo: backButton.trailingAnchor),
                         indicatorsStackView.trailingAnchor.constraint(equalTo: backspaceKey.leadingAnchor),
                         indicatorsStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                        indicatorsStackView.topAnchor.constraint(equalTo: bottomAnchor, constant: -35)
+                        indicatorsStackView.topAnchor.constraint(equalTo: bottomAnchor, constant: -40)
                 ])
         }
 }
@@ -84,15 +84,15 @@ final class Indicator: UIButton {
                 let topInset: CGFloat = {
                         switch index {
                         case 4:
-                                return 9
+                                return 14
                         case 5:
-                                return 8
+                                return 13
                         case 7:
-                                return 10
+                                return 15
                         case 9:
-                                return 5
+                                return 10
                         default:
-                                return 6
+                                return 11
                         }
                 }()
                 NSLayoutConstraint.activate([
@@ -114,6 +114,6 @@ final class Indicator: UIButton {
         }
 
         override var intrinsicContentSize: CGSize {
-                return CGSize(width: 44, height: 35)
+                return CGSize(width: 40, height: 40)
         }
 }
