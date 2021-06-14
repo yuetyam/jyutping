@@ -59,16 +59,7 @@ final class ToolBar: UIView {
         let settingsButton: ToolButton = ToolButton(imageName: "gear", topInset: 17, bottomInset: 17)
         let yueEngSwitch: YueEngSwitch = YueEngSwitch(width: 88, height: 60, isDarkAppearance: false, switched: false)
         let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 19, bottomInset: 18)
-        private(set) lazy var emojiSwitch: ToolButton = {
-                let name: String = {
-                        if #available(iOSApplicationExtension 14, *) {
-                                return "face.smiling"
-                        } else {
-                                return "smiley"
-                        }
-                }()
-                return ToolButton(imageName: name, topInset: 17, bottomInset: 17)
-        }()
+        let emojiSwitch: ToolButton = ToolButton(imageName: "EmojiSmiley", topInset: 18, bottomInset: 18)
         let keyboardDown: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 18, bottomInset: 19)
         let downArrow: ToolButton = ToolButton(imageName: "chevron.down", topInset: 18, bottomInset: 18)
         private let splitLine: CALayer = CALayer()

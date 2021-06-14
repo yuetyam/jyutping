@@ -94,7 +94,8 @@ extension KeyboardViewController {
         private func loadEmojiKeyboard() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeAllArrangedSubviews()
-                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 50
+                // FIXME: - height
+                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height
                 emojiBoard.addSubview(emojiCollectionView)
                 emojiCollectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -102,18 +103,38 @@ extension KeyboardViewController {
                         emojiCollectionView.bottomAnchor.constraint(equalTo: emojiBoard.indicatorsStackView.topAnchor),
                         emojiCollectionView.leadingAnchor.constraint(equalTo: emojiBoard.leadingAnchor),
                         emojiCollectionView.trailingAnchor.constraint(equalTo: emojiBoard.trailingAnchor),
-                        emojiCollectionView.topAnchor.constraint(equalTo: emojiBoard.topAnchor)
+                        emojiCollectionView.topAnchor.constraint(equalTo: emojiBoard.topAnchor, constant: 4)
                 ])
                 (emojiCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .horizontal
                 keyboardStackView.addArrangedSubview(emojiBoard)
-                emojiBoard.globeKey.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+                let buttonTintColor: UIColor = isDarkAppearance ? .white : .black
+                emojiBoard.backButton.tintColor = buttonTintColor
+                emojiBoard.backspaceKey.tintColor = buttonTintColor
+                emojiBoard.backButton.addTarget(self, action: #selector(handleSwitchBack), for: .touchUpInside)
+                emojiBoard.backspaceKey.addTarget(self, action: #selector(handleBackspace), for: .touchDown)
                 _ = emojiBoard.indicatorsStackView.arrangedSubviews.map({ ($0 as? Indicator)?.addTarget(self, action: #selector(handleIndicator(_:)), for: .touchDown) })
+        }
+        @objc private func handleSwitchBack() {
+                triggerHapticFeedback()
+                AudioFeedback.perform(.modify)
+                keyboardLayout = .cantonese(.lowercased)
+        }
+        @objc private func handleBackspace() {
+                triggerHapticFeedback()
+                AudioFeedback.perform(.delete)
+                textDocumentProxy.deleteBackward()
         }
         @objc private func handleIndicator(_ sender: Indicator) {
                 triggerHapticFeedback()
                 AudioFeedback.perform(.modify)
-                let indexPath: IndexPath = IndexPath(row: 15, section: sender.index)
-                emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                if sender.index == 0 {
+                        guard !frequentEmojis.isEmpty else { return }
+                        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
+                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                } else {
+                        let indexPath: IndexPath = IndexPath(row: 15, section: sender.index)
+                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                }
         }
 
 

@@ -14,7 +14,11 @@ final class ToolButton: UIButton {
                         buttonImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -rightInset)
                 ])
                 buttonImageView.contentMode = .scaleAspectFit
-                buttonImageView.image = UIImage(systemName: imageName)
+                if imageName == "EmojiSmiley" {
+                        buttonImageView.image = UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate)
+                } else {
+                        buttonImageView.image = UIImage(systemName: imageName)
+                }
         }
         required init?(coder: NSCoder) { fatalError("ToolButton.init(coder:) error") }
 }
