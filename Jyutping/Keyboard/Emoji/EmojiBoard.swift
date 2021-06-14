@@ -84,20 +84,20 @@ final class Indicator: UIButton {
                 let topInset: CGFloat = {
                         switch index {
                         case 4:
-                                return 19
+                                return 9
                         case 5:
-                                return 18
+                                return 8
                         case 7:
-                                return 20
+                                return 10
                         case 9:
-                                return 15
+                                return 5
                         default:
-                                return 16
+                                return 6
                         }
                 }()
                 NSLayoutConstraint.activate([
                         indicatorImageView.topAnchor.constraint(equalTo: topAnchor, constant: topInset),
-                        indicatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                        indicatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
                         indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
                         indicatorImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
