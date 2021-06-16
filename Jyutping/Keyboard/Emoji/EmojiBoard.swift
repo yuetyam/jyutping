@@ -84,11 +84,11 @@ final class Indicator: UIButton {
                 let topInset: CGFloat = {
                         switch index {
                         case 4:
-                                return 14
-                        case 5:
                                 return 13
+                        case 5:
+                                return 12
                         case 7:
-                                return 15
+                                return 14
                         case 9:
                                 return 10
                         default:
