@@ -30,9 +30,15 @@ struct JyutpingView: View {
 
                                         if !inputText.isEmpty {
                                                 if jyutpings.isEmpty {
-                                                        HStack {
-                                                                Text("No results.") + Text("\n") + Text("Common Cantonese words only.").font(.footnote)
-                                                                Spacer()
+                                                        VStack(spacing: 8) {
+                                                                HStack {
+                                                                        Text("No results.")
+                                                                        Spacer()
+                                                                }
+                                                                HStack {
+                                                                        Text("Common Cantonese words only.").font(.footnote)
+                                                                        Spacer()
+                                                                }
                                                         }
                                                         .padding()
                                                         .fillBackground()
