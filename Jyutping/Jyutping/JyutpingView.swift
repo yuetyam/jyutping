@@ -25,7 +25,6 @@ struct JyutpingView: View {
                                                         .padding(.vertical, 10)
                                         }
                                         .padding(.horizontal, 8)
-                                        .frame(maxWidth: UIScreen.main.bounds.width - 32, maxHeight: 42)
                                         .fillBackground()
                                         .padding()
 

@@ -23,7 +23,6 @@ struct HomeView: View {
                                 ScrollView {
                                         EnhancedTextField(placeholder: placeholder, text: $cacheText)
                                                 .padding(10)
-                                                .frame(maxWidth: UIScreen.main.bounds.width - 32)
                                                 .fillBackground()
                                                 .padding()
                                         GuideView()

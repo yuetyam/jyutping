@@ -32,7 +32,6 @@ struct EnhancedTextField: UIViewRepresentable {
         
         func makeUIView(context: Context) -> UITextField {
                 let textField = UITextField(frame: .zero)
-                textField.delegate = context.coordinator
                 textField.placeholder = placeholder
                 textField.font = font
                 if let keyboardAppearance = keyboardAppearance {
@@ -51,6 +50,9 @@ struct EnhancedTextField: UIViewRepresentable {
                         textField.autocapitalizationType = autocapitalizationType
                 }
                 textField.clearButtonMode = .always
+                textField.delegate = context.coordinator
+                textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+                textField.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
                 return textField
         }
         func updateUIView(_ uiView: UITextField, context: Context) {}
