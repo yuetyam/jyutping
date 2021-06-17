@@ -4,7 +4,7 @@ import JyutpingProvider
 
 struct JyutpingView: View {
 
-        private let placeholder: String = NSLocalizedString("Search for Jyutping", comment: "")
+        private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: "")
         @State private var inputText: String = String()
 
         private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
@@ -32,11 +32,13 @@ struct JyutpingView: View {
                                                 if jyutpings.isEmpty {
                                                         VStack(spacing: 8) {
                                                                 HStack {
-                                                                        Text("No results.")
+                                                                        Text("No Results.")
                                                                         Spacer()
                                                                 }
                                                                 HStack {
-                                                                        Text("Common Cantonese words only.").font(.footnote)
+                                                                        Text("Common Cantonese words only.")
+                                                                                .font(.footnote)
+                                                                                .foregroundColor(.secondary)
                                                                         Spacer()
                                                                 }
                                                         }

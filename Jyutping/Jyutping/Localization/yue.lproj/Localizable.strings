@@ -48,9 +48,8 @@ Cantonese
 
 
 // Search
-"Search the Jyutping of Cantonese word" = "鍵入粵語字詞檢索其粵拼";
-"Search for Jyutping" = "鍵入粵語字詞檢索其粵拼";
-"No results." = "無結果";
+"Lookup Jyutping for Cantonese" = "鍵入粵語字詞檢索其粵拼";
+"No Results." = "無結果";
 "Common Cantonese words only." = "只可檢索常見粵語字詞";
 
 "Jyutping Initials" = "粵拼聲母表";
