@@ -160,7 +160,7 @@ struct AboutView: View {
                                                         let appStoreUrl: URL = URL(string: "itms-apps://apple.com/app/id1509367629")!
                                                         UIApplication.shared.open(appStoreUrl)
                                                 }) {
-                                                        MessageView(icon: "heart", text: Text("Rate & Review this App"), symbol: Image(systemName: "arrow.up.right"))
+                                                        MessageView(icon: "heart", text: Text("Review on the App Store"), symbol: Image(systemName: "arrow.up.right"))
                                                 }.padding(.top)
                                                 Divider()
                                                 ShareSheetView(content: MessageView(icon: "square.and.arrow.up", text: Text("Share this App")),
