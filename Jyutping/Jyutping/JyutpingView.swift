@@ -25,7 +25,7 @@ struct JyutpingView: View {
                                                         .padding(.vertical, 10)
                                         }
                                         .padding(.horizontal, 8)
-                                        .fillBackground()
+                                        .fillBackground(cornerRadius: 8)
                                         .padding()
 
                                         if !inputText.isEmpty {

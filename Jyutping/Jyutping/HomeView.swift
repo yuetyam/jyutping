@@ -23,7 +23,7 @@ struct HomeView: View {
                                 ScrollView {
                                         EnhancedTextField(placeholder: placeholder, text: $cacheText)
                                                 .padding(10)
-                                                .fillBackground()
+                                                .fillBackground(cornerRadius: 8)
                                                 .padding()
                                         GuideView()
                                         TonesInput().padding(.top)
