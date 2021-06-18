@@ -30,12 +30,15 @@ struct ContentView_Previews: PreviewProvider {
 
 
 extension View {
-        func fillBackground() -> some View {
-                modifier(FillBackgroundColor())
+        func fillBackground(cornerRadius: CGFloat = 10) -> some View {
+                modifier(BackgroundColorModifier(cornerRadius: cornerRadius))
         }
 }
-private struct FillBackgroundColor: ViewModifier {
+private struct BackgroundColorModifier: ViewModifier {
+
         @Environment (\.colorScheme) var colorScheme: ColorScheme
+        let cornerRadius: CGFloat
+
         func body(content: Content) -> some View {
                 let backgroundColor: Color = {
                         switch colorScheme {
@@ -47,7 +50,7 @@ private struct FillBackgroundColor: ViewModifier {
                                 return Color(UIColor.systemBackground)
                         }
                 }()
-                return content.background(RoundedRectangle(cornerRadius: 10).fill(backgroundColor))
+                return content.background(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous).fill(backgroundColor))
         }
 }
 
