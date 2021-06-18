@@ -21,7 +21,11 @@ struct JyutpingView: View {
                                 ScrollView {
                                         HStack {
                                                 Image(systemName: "magnifyingglass").opacity(0.5)
-                                                EnhancedTextField(placeholder: placeholder, text: $inputText, returnKey: .search)
+                                                EnhancedTextField(placeholder: placeholder,
+                                                                  text: $inputText,
+                                                                  returnKey: .search,
+                                                                  autocorrection: .no,
+                                                                  autocapitalization: UITextAutocapitalizationType.none)
                                                         .padding(.vertical, 10)
                                         }
                                         .padding(.horizontal, 8)
