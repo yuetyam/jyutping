@@ -251,8 +251,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         }
 
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-                if collectionView == self.emojiCollectionView {
-                        return UIEdgeInsets(top: 4, left: 8, bottom: 0, right: 8)
+                if collectionView == emojiCollectionView {
+                        return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
                 } else {
                         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 }
