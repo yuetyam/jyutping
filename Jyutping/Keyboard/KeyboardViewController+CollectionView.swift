@@ -78,7 +78,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 return cell
         }
         private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
-                let font: UIFont = .systemFont(ofSize: 9)
+                let font: UIFont = .systemFont(ofSize: 10)
                 let offset: NSNumber = toneStyle == 3 ? 2 : -2
                 let jyutpings: [String] = text.components(separatedBy: " ")
                 let attributed: [NSMutableAttributedString] = jyutpings.map { (jyutping) -> NSMutableAttributedString in

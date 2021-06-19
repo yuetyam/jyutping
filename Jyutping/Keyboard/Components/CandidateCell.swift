@@ -22,7 +22,7 @@ final class CandidateCell: UICollectionViewCell {
                 textLabel.textAlignment = .center
                 contentView.addSubview(footnoteLabel)
                 footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
-                footnoteLabel.font = .systemFont(ofSize: 11)
+                footnoteLabel.font = .systemFont(ofSize: 12)
                 NSLayoutConstraint.activate([
                         footnoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                         footnoteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
