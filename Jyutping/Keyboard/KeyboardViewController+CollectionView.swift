@@ -213,7 +213,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 case 1:
                                         return Int(fullWidth) / 45
                                 case 2:
-                                        return Int(fullWidth) / 72
+                                        return Int(fullWidth) / 75
                                 case 3:
                                         return Int(fullWidth) / 100
                                 case 4:
@@ -231,7 +231,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         case 1:
                                 return CGSize(width: 45, height: 60)
                         case 2:
-                                return CGSize(width: 72, height: 60)
+                                return CGSize(width: 75, height: 60)
                         case 3:
                                 return CGSize(width: 100, height: 60)
                         case 4:
