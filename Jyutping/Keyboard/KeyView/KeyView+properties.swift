@@ -61,7 +61,7 @@ extension KeyView {
                 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography
                 switch event {
                 case .key(let seat) where seat.primary.text.count > 1:
-                        guard !isPhoneInterface else { return .systemFont(ofSize: 20) }
+                        guard !isPhoneInterface else { return .systemFont(ofSize: 18) }
                         return isPadLandscape ? .systemFont(ofSize: 28) : .systemFont(ofSize: 26)
                 case .key:
                         guard !isPhoneInterface else { return .systemFont(ofSize: 24) }
