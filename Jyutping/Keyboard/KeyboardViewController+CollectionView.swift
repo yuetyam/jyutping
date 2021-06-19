@@ -78,8 +78,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 return cell
         }
         private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
-                let font: UIFont = .systemFont(ofSize: 10)
-                let offset: NSNumber = toneStyle == 3 ? 3 : -3
+                let font: UIFont = .systemFont(ofSize: 9)
+                let offset: NSNumber = toneStyle == 3 ? 2 : -2
                 let jyutpings: [String] = text.components(separatedBy: " ")
                 let attributed: [NSMutableAttributedString] = jyutpings.map { (jyutping) -> NSMutableAttributedString in
                         let newString: NSMutableAttributedString = NSMutableAttributedString(string: jyutping)
@@ -186,9 +186,9 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                         }
                                 }
                                 guard itemCount > 1 else {
-                                        return CGSize(width: fullWidth - 4, height: 60)
+                                        return CGSize(width: fullWidth - 4, height: 45)
                                 }
-                                return CGSize(width: fullWidth / CGFloat(itemCount), height: 60)
+                                return CGSize(width: fullWidth / CGFloat(itemCount), height: 45)
                         } else {
                                 switch characterCount {
                                 case 1:
@@ -211,33 +211,33 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 case 0:
                                         return 1
                                 case 1:
-                                        return Int(fullWidth) / 50
+                                        return Int(fullWidth) / 45
                                 case 2:
-                                        return Int(fullWidth) / 80
+                                        return Int(fullWidth) / 72
                                 case 3:
-                                        return Int(fullWidth) / 120
+                                        return Int(fullWidth) / 100
                                 case 4:
-                                        return Int(fullWidth) / 140
+                                        return Int(fullWidth) / 125
                                 default:
-                                        return Int(fullWidth) / (characterCount * 35)
+                                        return Int(fullWidth) / (characterCount * 30)
                                 }
                         }
                         guard itemCount > 1 else {
-                                return CGSize(width: fullWidth - 4, height: 60)
+                                return CGSize(width: fullWidth - 4, height: 55)
                         }
-                        return CGSize(width: fullWidth / CGFloat(itemCount), height: 60)
+                        return CGSize(width: fullWidth / CGFloat(itemCount), height: 55)
                 } else {
                         switch characterCount {
                         case 1:
-                                return CGSize(width: 50, height: 60)
+                                return CGSize(width: 45, height: 60)
                         case 2:
-                                return CGSize(width: 80, height: 60)
+                                return CGSize(width: 72, height: 60)
                         case 3:
-                                return CGSize(width: 120, height: 60)
+                                return CGSize(width: 100, height: 60)
                         case 4:
-                                return CGSize(width: 140, height: 60)
+                                return CGSize(width: 125, height: 60)
                         default:
-                                return CGSize(width: characterCount * 35, height: 60)
+                                return CGSize(width: characterCount * 30, height: 60)
                         }
                 }
         }

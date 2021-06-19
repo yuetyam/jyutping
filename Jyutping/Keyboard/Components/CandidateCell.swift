@@ -22,7 +22,7 @@ final class CandidateCell: UICollectionViewCell {
                 textLabel.textAlignment = .center
                 contentView.addSubview(footnoteLabel)
                 footnoteLabel.translatesAutoresizingMaskIntoConstraints = false
-                footnoteLabel.font = .systemFont(ofSize: 13)
+                footnoteLabel.font = .systemFont(ofSize: 11)
                 NSLayoutConstraint.activate([
                         footnoteLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                         footnoteLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
@@ -68,16 +68,16 @@ final class CandidateCell: UICollectionViewCell {
                 }
         }
         private lazy var TopJyutpingConstraints: [NSLayoutConstraint] = [
-                textLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 6),
-                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -16)
+                textLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 4),
+                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -18)
         ]
         private lazy var BottomJyutpingConstraints: [NSLayoutConstraint] = [
-                textLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -10),
-                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12)
+                textLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -8),
+                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 14)
         ]
         private lazy var centerTextConstraints: [NSLayoutConstraint] = [
                 textLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 12)
+                footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 14)
         ]
 
         private func updateFonts() {
