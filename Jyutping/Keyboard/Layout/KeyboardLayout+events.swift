@@ -91,9 +91,11 @@ private extension KeyboardLayout {
                         return KeyboardEvent.key(seat)
                 }()
                 let first_3: KeyboardEvent = {
-                        let primary = KeyElement(text: "eo")
-                        let child_0 = KeyElement(text: "r")
-                        let seat = KeySeat(primary: primary, children: [primary, child_0])
+                        let primary = KeyElement(text: "oe", header: "eo")
+                        let child_0 = KeyElement(text: "oe")
+                        let child_1 = KeyElement(text: "eo")
+                        let child_2 = KeyElement(text: "r")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
                         return KeyboardEvent.key(seat)
                 }()
                 let first_5: KeyboardEvent = {
@@ -102,6 +104,20 @@ private extension KeyboardLayout {
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
                         return KeyboardEvent.key(seat)
                 }()
+
+                let second_4: KeyboardEvent = {
+                        let primary = KeyElement(text: "g")
+                        let child_0 = KeyElement(text: "gw")
+                        let seat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+                let second_7: KeyboardEvent = {
+                        let primary = KeyElement(text: "k")
+                        let child_0 = KeyElement(text: "kw")
+                        let seat = KeySeat(primary: primary, children: [primary, child_0])
+                        return KeyboardEvent.key(seat)
+                }()
+
                 let third_0: KeyboardEvent = {
                         let primary = KeyElement(text: "z", header: "1")
                         let child_0 = KeyElement(text: "z")
@@ -110,11 +126,12 @@ private extension KeyboardLayout {
                         return KeyboardEvent.key(seat)
                 }()
                 let third_1: KeyboardEvent = {
-                        let primary = KeyElement(text: "oe", header: "2")
-                        let child_0 = KeyElement(text: "oe")
-                        let child_1 = KeyElement(text: "2", header: "聲調", footer: "陰上")
-                        let child_2 = KeyElement(text: "x")
-                        let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
+                        let primary = KeyElement(text: "gw", header: "2")
+                        let child_0 = KeyElement(text: "gw")
+                        let child_1 = KeyElement(text: "kw")
+                        let child_2 = KeyElement(text: "2", header: "聲調", footer: "陰上")
+                        let child_3 = KeyElement(text: "x")
+                        let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3])
                         return KeyboardEvent.key(seat)
                 }()
                 let third_2: KeyboardEvent = {
@@ -155,6 +172,8 @@ private extension KeyboardLayout {
                 eventRows[0][0] = first_0
                 eventRows[0][3] = first_3
                 eventRows[0][5] = first_5
+                eventRows[1][4] = second_4
+                eventRows[1][7] = second_7
                 eventRows[2] = [third_0, third_1, third_2, third_3, third_4, third_5, third_6]
                 eventRows[1].insert(.shadowKey("a"), at: 0)
                 eventRows[1].insert(.shadowKey("a"), at: 0)
