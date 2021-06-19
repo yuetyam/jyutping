@@ -272,7 +272,7 @@ final class KeyView: UIView {
         private(set) lazy var backspaceTouchPoint: CGPoint = .zero
         private(set) lazy var spaceTouchPoint: CGPoint = .zero
         private(set) lazy var draggedOnSpace: Bool = false
-        private(set) lazy var beyondMidX: Bool = frame.midX > controller.view.frame.midX
+        private(set) lazy var beyondMidX: Bool = frame.midX > controller.view.frame.midX + 10
         private lazy var keyShapePath: UIBezierPath = shapeBezierPath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
         private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
         private lazy var shapeWidth: CGFloat = shape.frame.width
