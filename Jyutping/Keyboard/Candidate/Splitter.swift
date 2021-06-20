@@ -22,6 +22,7 @@ struct Splitter {
                 let scheme = sequence.map({ syllable -> String in
                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                                .replacingOccurrences(of: "^([b-z]|ng)um$", with: "$1am", options: .regularExpression)
                         return converted
                 })
                 return scheme
@@ -269,5 +270,6 @@ private static let syllables: Set<String> = [
 "seok",
 "deok",
 "deong",
-"neok"]
+"neok",
+"bum", "cum", "dum", "gum", "hum", "jum", "kum", "lum", "mum", "num", "sum", "tum", "zum", "ngum"]
 }

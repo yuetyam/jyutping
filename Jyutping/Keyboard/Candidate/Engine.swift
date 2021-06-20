@@ -26,7 +26,7 @@ struct Engine {
                         }
                 case 2:
                         return fetchTwoChars(text)
-                case 3:
+                case 3 where !text.hasSuffix("um"):
                         return fetchThreeChars(text)
                 default:
                         let filtered: String = text.replacingOccurrences(of: "'", with: "")
