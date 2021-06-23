@@ -74,7 +74,7 @@ final class YueEngSwitch: UIButton {
         private func setupBackView() {
                 addSubview(backView)
                 backView.translatesAutoresizingMaskIntoConstraints = false
-                let topBottomInset: CGFloat = height / 4.0
+                let topBottomInset: CGFloat = 17
                 NSLayoutConstraint.activate([
                         backView.leadingAnchor.constraint(equalTo: leadingAnchor),
                         backView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -90,7 +90,7 @@ final class YueEngSwitch: UIButton {
                 backView.addSubview(leftForeView)
                 leftForeView.translatesAutoresizingMaskIntoConstraints = false
                 let halfWidth: CGFloat = width / 2.0
-                let topBottomInset: CGFloat = height / 4.0
+                let topBottomInset: CGFloat = 17
                 NSLayoutConstraint.activate([
                         leftForeView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
                         leftForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
@@ -105,7 +105,7 @@ final class YueEngSwitch: UIButton {
                 backView.addSubview(rightForeView)
                 rightForeView.translatesAutoresizingMaskIntoConstraints = false
                 let halfWidth: CGFloat = width / 2.0
-                let topBottomInset: CGFloat = height / 4.0
+                let topBottomInset: CGFloat = 17
                 NSLayoutConstraint.activate([
                         rightForeView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
                         rightForeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset),
