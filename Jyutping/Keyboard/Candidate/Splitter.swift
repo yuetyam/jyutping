@@ -147,12 +147,7 @@ struct Splitter {
 
         private static func canSplit(_ text: String) -> Bool {
                 guard !text.isEmpty else { return false }
-                for jyutping in syllables {
-                        if text.hasPrefix(jyutping) {
-                                return true
-                        }
-                }
-                return false
+                return syllables.first(where: { text.hasPrefix($0) }) != nil
         }
 
 private static let syllables: Set<String> = [
