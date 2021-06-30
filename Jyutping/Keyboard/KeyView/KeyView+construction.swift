@@ -81,9 +81,10 @@ extension KeyView {
                         keyHeaderLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor,constant: inset),
                         keyHeaderLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -inset)
                 ])
-                keyHeaderLabel.font = .systemFont(ofSize: 10)
+                let fontSize: CGFloat = isPhoneInterface ? 9 : 10
+                keyHeaderLabel.font = .systemFont(ofSize: fontSize)
                 keyHeaderLabel.textAlignment = alignment
-                keyHeaderLabel.textColor = foreColor.withAlphaComponent(0.7)
+                keyHeaderLabel.textColor = foreColor.withAlphaComponent(0.6)
                 keyHeaderLabel.text = text
         }
         func setupKeyFooterLabel(text: String?, alignment: NSTextAlignment = .right) {
@@ -96,9 +97,10 @@ extension KeyView {
                         keyFooterLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor, constant: inset),
                         keyFooterLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -inset)
                 ])
-                keyFooterLabel.font = .systemFont(ofSize: 10)
+                let fontSize: CGFloat = isPhoneInterface ? 9 : 10
+                keyFooterLabel.font = .systemFont(ofSize: fontSize)
                 keyFooterLabel.textAlignment = alignment
-                keyFooterLabel.textColor = foreColor.withAlphaComponent(0.7)
+                keyFooterLabel.textColor = foreColor.withAlphaComponent(0.6)
                 keyFooterLabel.text = text
         }
         func setupKeyImageView(constant: CGFloat = 10) {
