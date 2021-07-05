@@ -24,6 +24,7 @@ struct HomeView: View {
                                         EnhancedTextField(placeholder: placeholder, text: $cacheText)
                                                 .padding(10)
                                                 .fillBackground(cornerRadius: 8)
+                                                .fixedSize(horizontal: false, vertical: true)
                                                 .padding()
                                         GuideView()
                                         TonesInput().padding(.top)
