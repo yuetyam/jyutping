@@ -75,16 +75,37 @@ struct AboutView: View {
                                                         }
                                                 }) {
                                                         MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.up.right"))
+                                                }.padding(.top)
+                                                Divider()
+                                                Button(action: {
+                                                        // Twitter App supports Universal Links
+                                                        let url: URL = URL(string: "https://twitter.com/JyutpingApp")!
+                                                        UIApplication.shared.open(url)
+                                                }) {
+                                                        MessageView(icon: "at", text: Text("Follow us on Twitter"), symbol: Image(systemName: "arrow.up.right"))
                                                 }
                                                 Divider()
                                                 Button(action: {
-                                                        let url: URL = URL(string: "https://gettr.com/user/jyutping")!
-                                                        UIApplication.shared.open(url)
+                                                        // Instagram App doesn't support Universal Links
+                                                        let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
+                                                        let webUrl: URL = URL(string: "https://www.instagram.com/jyutping_app")!
+                                                        UIApplication.shared.open(appUrl) { success in
+                                                                if !success {
+                                                                        UIApplication.shared.open(webUrl)
+                                                                }
+                                                        }
                                                 }) {
-                                                        MessageView(icon: "at", text: Text("Follow us on GETTR"), symbol: Image(systemName: "arrow.up.right"))
+                                                        let icon: String = {
+                                                                if #available(iOS 14, *) {
+                                                                        return "circle.square"
+                                                                } else {
+                                                                        return "dot.square"
+                                                                }
+                                                        }()
+                                                        MessageView(icon: icon, text: Text("Follow us on Instagram"), symbol: Image(systemName: "arrow.up.right"))
                                                 }
+                                                .padding(.bottom)
                                         }
-                                        .padding(.vertical)
                                         .fillBackground()
                                         .contextMenu {
                                                 Button(action: {
@@ -93,9 +114,14 @@ struct AboutView: View {
                                                         MenuLabel(text: "Copy Telegram URL", image: "doc.on.doc")
                                                 }
                                                 Button(action: {
-                                                        UIPasteboard.general.string = "https://gettr.com/user/jyutping"
+                                                        UIPasteboard.general.string = "https://twitter.com/JyutpingApp"
                                                 }) {
-                                                        MenuLabel(text: "Copy GETTR URL", image: "doc.on.doc")
+                                                        MenuLabel(text: "Copy Twitter URL", image: "doc.on.doc")
+                                                }
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://www.instagram.com/jyutping_app"
+                                                }) {
+                                                        MenuLabel(text: "Copy Instagram URL", image: "doc.on.doc")
                                                 }
                                         }
                                         .padding()
