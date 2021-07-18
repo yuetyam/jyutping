@@ -75,7 +75,8 @@ struct AboutView: View {
                                                         }
                                                 }) {
                                                         MessageView(icon: "paperplane", text: Text("Join Telegram Group"), symbol: Image(systemName: "arrow.up.right"))
-                                                }.padding(.top)
+                                                }
+                                                .padding(.top)
                                                 Divider()
                                                 Button(action: {
                                                         // Twitter App supports Universal Links
