@@ -52,7 +52,7 @@ struct JyutpingView: View {
                                                 } else {
                                                         VStack {
                                                                 HStack {
-                                                                        Text(rawCantonese).font(.headline)
+                                                                        Text(verbatim: rawCantonese).font(.headline)
                                                                         Spacer()
                                                                         Button(action: {
                                                                                 speak(rawCantonese)
@@ -66,7 +66,7 @@ struct JyutpingView: View {
                                                                 ForEach(jyutpings) { jyutping in
                                                                         Divider()
                                                                         HStack {
-                                                                                Text(jyutping)
+                                                                                Text(verbatim: jyutping)
                                                                                         .font(.system(.body, design: .monospaced))
                                                                                         .fixedSize(horizontal: false, vertical: true)
                                                                                 Spacer()
@@ -182,32 +182,32 @@ private struct SearchWebsitesView: View {
         var body: some View {
                 VStack {
                         LinkView(iconName: "doc.text.magnifyingglass",
-                                 text: Text("粵音資料集叢"),
-                                 footnote: Text("jyut.net"),
+                                 text: Text(verbatim: "粵音資料集叢"),
+                                 footnote: Text(verbatim: "jyut.net"),
                                  symbolName: "safari",
                                  url: URL(string: "https://jyut.net")!)
                         Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
-                                 text: Text("粵典"),
-                                 footnote: Text("words.hk"),
+                                 text: Text(verbatim: "粵典"),
+                                 footnote: Text(verbatim: "words.hk"),
                                  symbolName: "safari",
                                  url: URL(string: "https://words.hk")!)
                         Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
-                                 text: Text("粵語審音配詞字庫"),
-                                 footnote: Text("humanum.arts.cuhk.edu.hk/Lexis/lexi-can"),
+                                 text: Text(verbatim: "粵語審音配詞字庫"),
+                                 footnote: Text(verbatim: "humanum.arts.cuhk.edu.hk/Lexis/lexi-can"),
                                  symbolName: "safari",
                                  url: URL(string: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")!)
                         Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
-                                 text: Text("泛粵大典"),
-                                 footnote: Text("www.jyutdict.org"),
+                                 text: Text(verbatim: "泛粵大典"),
+                                 footnote: Text(verbatim: "www.jyutdict.org"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.jyutdict.org")!)
                         Divider()
                         LinkView(iconName: "doc.text.magnifyingglass",
-                                 text: Text("羊羊粵語"),
-                                 footnote: Text("shyyp.net/hant"),
+                                 text: Text(verbatim: "羊羊粵語"),
+                                 footnote: Text(verbatim: "shyyp.net/hant"),
                                  symbolName: "safari",
                                  url: URL(string: "https://shyyp.net/hant")!)
                 }
@@ -222,25 +222,25 @@ private struct JyutpingWebsitesView: View {
                 VStack {
                         LinkView(iconName: "link.circle",
                                  text: Text("Jyutping"),
-                                 footnote: Text("www.jyutping.org"),
+                                 footnote: Text(verbatim: "www.jyutping.org"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.jyutping.org")!)
                         Divider()
                         LinkView(iconName: "link.circle",
                                  text: Text("Jyutping - LSHK"),
-                                 footnote: Text("www.lshk.org/jyutping"),
+                                 footnote: Text(verbatim: "www.lshk.org/jyutping"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.lshk.org/jyutping")!)
                         Divider()
                         LinkView(iconName: "link.circle",
                                  text: Text("Learn Jyutping"),
-                                 footnote: Text("www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw"),
+                                 footnote: Text(verbatim: "www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!)
                         Divider()
                         LinkView(iconName: "link.circle",
                                  text: Text("Jyutping"),
-                                 footnote: Text("www.iso10646hk.net/jp"),
+                                 footnote: Text(verbatim: "www.iso10646hk.net/jp"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.iso10646hk.net/jp")!)
                 }
