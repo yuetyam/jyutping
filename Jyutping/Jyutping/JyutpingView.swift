@@ -105,6 +105,15 @@ struct JyutpingView: View {
                                         .padding(.top, 40)
                                         
                                         JyutpingWebsitesView()
+
+                                        HStack {
+                                                Text("Cantonese Resources").font(.headline)
+                                                Spacer()
+                                        }
+                                        .padding(.horizontal, 16)
+                                        .padding(.top, 40)
+
+                                        CantoneseResourcesView()
                                                 .padding(.bottom, 100)
                                 }
                                 .foregroundColor(.primary)
@@ -243,6 +252,27 @@ private struct JyutpingWebsitesView: View {
                                  footnote: Text(verbatim: "www.iso10646hk.net/jp"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.iso10646hk.net/jp")!)
+                }
+                .padding(.vertical)
+                .fillBackground()
+                .padding(.horizontal)
+        }
+}
+
+private struct CantoneseResourcesView: View {
+        var body: some View {
+                VStack {
+                        LinkView(iconName: "link.circle",
+                                 text: Text("迴響（粵語文學期刊）"),
+                                 footnote: Text(verbatim: "resonate.hk"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://resonate.hk")!)
+                        Divider()
+                        LinkView(iconName: "link.circle",
+                                 text: Text("冚唪唥粵文"),
+                                 footnote: Text(verbatim: "hambaanglaang.hk"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://hambaanglaang.hk")!)
                 }
                 .padding(.vertical)
                 .fillBackground()
