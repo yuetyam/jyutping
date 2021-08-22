@@ -16,7 +16,7 @@ struct LinkView: View {
                 }) {
                         HStack(spacing: 16) {
                                 Image(systemName: iconName)
-                                VStack {
+                                VStack(spacing: 2) {
                                         HStack {
                                                 text.lineLimit(1)
                                                 Spacer()
