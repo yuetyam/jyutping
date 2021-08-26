@@ -263,7 +263,7 @@ private struct CantoneseResourcesView: View {
         var body: some View {
                 VStack {
                         LinkView(iconName: "link.circle",
-                                 text: Text("迴響（粵語文學期刊）"),
+                                 text: Text("迴響"),
                                  footnote: Text(verbatim: "resonate.hk"),
                                  symbolName: "safari",
                                  url: URL(string: "https://resonate.hk")!)
@@ -273,6 +273,12 @@ private struct CantoneseResourcesView: View {
                                  footnote: Text(verbatim: "hambaanglaang.hk"),
                                  symbolName: "safari",
                                  url: URL(string: "https://hambaanglaang.hk")!)
+                        Divider()
+                        LinkView(iconName: "link.circle",
+                                 text: Text("學識 Hok6"),
+                                 footnote: Text(verbatim: "www.hok6.com"),
+                                 symbolName: "safari",
+                                 url: URL(string: "https://www.hok6.com")!)
                 }
                 .padding(.vertical)
                 .fillBackground()
