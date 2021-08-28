@@ -246,12 +246,6 @@ private struct JyutpingWebsitesView: View {
                                  footnote: Text(verbatim: "www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw"),
                                  symbolName: "safari",
                                  url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!)
-                        Divider()
-                        LinkView(iconName: "link.circle",
-                                 text: Text("Jyutping"),
-                                 footnote: Text(verbatim: "www.iso10646hk.net/jp"),
-                                 symbolName: "safari",
-                                 url: URL(string: "https://www.iso10646hk.net/jp")!)
                 }
                 .padding(.vertical)
                 .fillBackground()
