@@ -6,10 +6,17 @@ import JyutpingProvider
 struct JyutpingView_iOS15: View {
 
         private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: "")
-        @State private var inputText: String = String()
+        @State private var inputText: String = ""
 
         private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
+
+        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        private func speak(_ text: String) {
+                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
+                synthesizer.speak(utterance)
+        }
 
         var body: some View {
                 NavigationView {
@@ -23,6 +30,44 @@ struct JyutpingView_iOS15: View {
                                                                   autocorrection: .no,
                                                                   autocapitalization: UITextAutocapitalizationType.none)
                                         }
+                                }
+                                if (!inputText.isEmpty) && (jyutpings.isEmpty) {
+                                        VStack(spacing: 8) {
+                                                HStack {
+                                                        Text("No Results.")
+                                                        Spacer()
+                                                }
+                                                HStack {
+                                                        Text("Common Cantonese words only.")
+                                                                .font(.footnote)
+                                                                .foregroundColor(.secondary)
+                                                        Spacer()
+                                                }
+                                        }
+                                } else if !inputText.isEmpty {
+                                        Section {
+                                                HStack {
+                                                        Text(verbatim: rawCantonese)
+                                                        Spacer()
+                                                        Button(action: {
+                                                                speak(rawCantonese)
+                                                        }) {
+                                                                Image(systemName: "speaker.wave.2")
+                                                        }
+                                                }
+                                                ForEach(jyutpings) { jyutping in
+                                                        HStack {
+                                                                Text(verbatim: jyutping).font(.system(.body, design: .monospaced))
+                                                                Spacer()
+                                                                Button(action: {
+                                                                        speak(jyutping)
+                                                                }) {
+                                                                        Image(systemName: "speaker.wave.2")
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                        .textSelection(.enabled)
                                 }
                                 Section {
                                         NavigationLink(destination: InitialsTable()) {
