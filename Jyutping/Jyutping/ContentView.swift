@@ -9,7 +9,7 @@ struct ContentView: View {
                                         Label("Home", systemImage: "house")
                                 }.tag(0)
 
-                                JyutpingView().tabItem {
+                                JyutpingView_iOS15().tabItem {
                                         Label("Jyutping", systemImage: "doc.text.magnifyingglass")
                                 }.tag(1)
 
