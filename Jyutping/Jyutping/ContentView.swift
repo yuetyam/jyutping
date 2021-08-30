@@ -4,11 +4,18 @@ struct ContentView: View {
         @State private var selection: Int = 0
         var body: some View {
                 TabView(selection: $selection){
-                        HomeView().tabItem {
-                                Image(systemName: "house")
-                                Text("Home")
-                        }.tag(0)
-
+                        if #available(iOS 15.0, *) {
+                                HomeView_iOS15()
+                                        .tabItem {
+                                                Label("Home", systemImage: "house")
+                                        }
+                                        .tag(0)
+                        } else {
+                                HomeView().tabItem {
+                                        Image(systemName: "house")
+                                        Text("Home")
+                                }.tag(0)
+                        }
                         JyutpingView().tabItem {
                                 Image(systemName: "doc.text.magnifyingglass")
                                 Text("Jyutping")
