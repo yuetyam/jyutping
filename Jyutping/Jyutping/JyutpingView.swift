@@ -2,6 +2,48 @@ import SwiftUI
 import AVFoundation
 import JyutpingProvider
 
+@available(iOS 15.0, *)
+struct JyutpingView_iOS15: View {
+
+        private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: "")
+        @State private var inputText: String = String()
+
+        private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
+        private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
+
+        var body: some View {
+                NavigationView {
+                        List {
+                                Section {
+                                        HStack {
+                                                Image(systemName: "magnifyingglass").opacity(0.5)
+                                                EnhancedTextField(placeholder: placeholder,
+                                                                  text: $inputText,
+                                                                  returnKey: .search,
+                                                                  autocorrection: .no,
+                                                                  autocapitalization: UITextAutocapitalizationType.none)
+                                        }
+                                }
+                                Section {
+                                        NavigationLink(destination: InitialsTable()) {
+                                                Label("Jyutping Initials", systemImage: "tablecells")
+                                        }
+                                        NavigationLink(destination: FinalsTable()) {
+                                                Label("Jyutping Finals", systemImage: "tablecells")
+                                        }
+                                        NavigationLink(destination: TonesTable()) {
+                                                Label("Jyutping Tones", systemImage: "tablecells")
+                                        }
+                                }
+                                .labelStyle(.titleOnly)
+                        }
+                        .navigationTitle("Jyutping")
+                }
+                .navigationViewStyle(.stack)
+        }
+}
+
+
 struct JyutpingView: View {
 
         private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: "")
