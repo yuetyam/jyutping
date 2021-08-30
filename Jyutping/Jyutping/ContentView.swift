@@ -5,26 +5,33 @@ struct ContentView: View {
         var body: some View {
                 TabView(selection: $selection){
                         if #available(iOS 15.0, *) {
-                                HomeView_iOS15()
-                                        .tabItem {
-                                                Label("Home", systemImage: "house")
-                                        }
-                                        .tag(0)
+                                HomeView_iOS15().tabItem {
+                                        Label("Home", systemImage: "house")
+                                }.tag(0)
+
+                                JyutpingView().tabItem {
+                                        Label("Jyutping", systemImage: "doc.text.magnifyingglass")
+                                }.tag(1)
+
+                                AboutView_iOS15().tabItem {
+                                        Label("About", systemImage: "info.circle")
+                                }.tag(2)
                         } else {
                                 HomeView().tabItem {
                                         Image(systemName: "house")
                                         Text("Home")
                                 }.tag(0)
-                        }
-                        JyutpingView().tabItem {
-                                Image(systemName: "doc.text.magnifyingglass")
-                                Text("Jyutping")
-                        }.tag(1)
 
-                        AboutView().tabItem {
-                                Image(systemName: "info.circle")
-                                Text("About")
-                        }.tag(2)
+                                JyutpingView().tabItem {
+                                        Image(systemName: "doc.text.magnifyingglass")
+                                        Text("Jyutping")
+                                }.tag(1)
+
+                                AboutView().tabItem {
+                                        Image(systemName: "info.circle")
+                                        Text("About")
+                                }.tag(2)
+                        }
                 }
         }
 }
