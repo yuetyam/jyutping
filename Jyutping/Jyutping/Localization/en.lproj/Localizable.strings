@@ -22,6 +22,13 @@ English
 // Home
 "Text Field" = "Text Field";
 
+// iOS 15
+"Jump to **Settings**" = "Jump to **Settings**";
+"Tap **Keyboards**" = "Tap **Keyboards**";
+"Turn on **Jyutping**" = "Turn on **Jyutping**";
+"Turn on **Allow Full Access**" = "Turn on **Allow Full Access**";
+"Go to **Settings**" = "Go to **Settings**";
+
 "How to enable this Keyboard" = "How to enable this Keyboard";
 "Jump to " = "Jump to ";
 "Tap " = "Tap ";
