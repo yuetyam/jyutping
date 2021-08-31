@@ -98,7 +98,7 @@ struct JyutpingView_iOS15: View {
                                                 FootnoteLabelView_iOS15(icon: "doc.text.magnifyingglass", title: Text(verbatim: "羊羊粵語"), footnote: "shyyp.net/hant")
                                         }
                                 } header: {
-                                        Text("Search on other places (websites)")
+                                        Text("Search on other places (websites)").textCase(.none)
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://www.jyutping.org")!) {
@@ -111,7 +111,7 @@ struct JyutpingView_iOS15: View {
                                                 FootnoteLabelView_iOS15(title: Text("Learn Jyutping"), footnote: "www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")
                                         }
                                 } header: {
-                                        Text("Jyutping Resources")
+                                        Text("Jyutping Resources").textCase(.none)
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://resonate.hk")!) {
@@ -124,7 +124,7 @@ struct JyutpingView_iOS15: View {
                                                 FootnoteLabelView_iOS15(title: Text(verbatim: "學識 Hok6"), footnote: "www.hok6.com")
                                         }
                                 } header: {
-                                        Text("Cantonese Resources")
+                                        Text("Cantonese Resources").textCase(.none)
                                 }
                         }
                         .navigationTitle("Jyutping")
