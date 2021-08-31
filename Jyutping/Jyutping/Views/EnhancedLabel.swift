@@ -68,3 +68,38 @@ struct EnhancedLabel_Previews: PreviewProvider {
                               symbol: Image(systemName: "plus"))
         }
 }
+
+
+@available(iOS 15.0, *)
+struct FootnoteLabelView_iOS15: View {
+
+        init(icon: String = "link.circle", title: Text, footnote: String, symbol: String = "safari") {
+                self.icon = icon
+                self.title = title
+                self.footnote = footnote
+                self.symbol = symbol
+        }
+
+        private let icon: String
+        private let title: Text
+        private let footnote: String
+        private let symbol: String
+
+        var body: some View {
+                HStack(spacing: 16) {
+                        Image(systemName: icon)
+                        VStack(spacing: 2) {
+                                HStack {
+                                        title.foregroundColor(.primary)
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text(verbatim: footnote).lineLimit(1).font(.caption2).foregroundColor(.secondary)
+                                        Spacer()
+                                }
+                        }
+                        Spacer()
+                        Image(systemName: symbol).foregroundColor(.secondary)
+                }
+        }
+}
