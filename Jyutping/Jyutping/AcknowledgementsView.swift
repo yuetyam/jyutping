@@ -1,5 +1,26 @@
 import SwiftUI
 
+@available(iOS 15.0, *)
+struct AcknowledgementsView_iOS15: View {
+        var body: some View {
+                List {
+                        Section {
+                                LinkSafariView(url: URL(string: "https://github.com/rime/rime-cantonese")!) {
+                                        FootnoteLabelView_iOS15(icon: "book", title: Text(verbatim: "Rime Cantonese"), footnote: "© CanCLID. CC BY 4.0")
+                                }
+                        }
+                        Section {
+                                LinkSafariView(url: URL(string: "https://github.com/BYVoid/OpenCC")!) {
+                                        FootnoteLabelView_iOS15(icon: "briefcase", title: Text(verbatim: "OpenCC"), footnote: "© Carbo Kuo. Apache 2.0")
+                                }
+                        }
+                }
+                .navigationTitle("Acknowledgements")
+                .navigationBarTitleDisplayMode(.inline)
+        }
+}
+
+
 struct AcknowledgementsView: View {
         var body: some View {
                 ZStack {

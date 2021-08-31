@@ -29,7 +29,7 @@ struct AboutView_iOS15: View {
                                                         Label("Copy Source Code URL", systemImage: "doc.on.doc")
                                                 }
                                         }
-                                        NavigationLink(destination: AcknowledgementsView()) {
+                                        NavigationLink(destination: AcknowledgementsView_iOS15()) {
                                                 Label("Acknowledgements", systemImage: "wand.and.stars")
                                         }
                                         LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
