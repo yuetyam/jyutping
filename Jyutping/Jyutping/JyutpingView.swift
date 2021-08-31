@@ -81,6 +81,51 @@ struct JyutpingView_iOS15: View {
                                         }
                                 }
                                 .labelStyle(.titleOnly)
+                                Section {
+                                        LinkSafariView(url: URL(string: "https://jyut.net")!) {
+                                                FootnoteLabelView_iOS15(icon: "doc.text.magnifyingglass", title: Text(verbatim: "粵音資料集叢"), footnote: "jyut.net")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://words.hk")!) {
+                                                FootnoteLabelView_iOS15(icon: "doc.text.magnifyingglass", title: Text(verbatim: "粵典"), footnote: "words.hk")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")!) {
+                                                FootnoteLabelView_iOS15(icon: "doc.text.magnifyingglass", title: Text(verbatim: "粵語審音配詞字庫"), footnote: "humanum.arts.cuhk.edu.hk/Lexis/lexi-can")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://www.jyutdict.org")!) {
+                                                FootnoteLabelView_iOS15(icon: "doc.text.magnifyingglass", title: Text(verbatim: "泛粵大典"), footnote: "www.jyutdict.org")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://shyyp.net/hant")!) {
+                                                FootnoteLabelView_iOS15(icon: "doc.text.magnifyingglass", title: Text(verbatim: "羊羊粵語"), footnote: "shyyp.net/hant")
+                                        }
+                                } header: {
+                                        Text("Search on other places (websites)")
+                                }
+                                Section {
+                                        LinkSafariView(url: URL(string: "https://www.jyutping.org")!) {
+                                                FootnoteLabelView_iOS15(title: Text("Jyutping"), footnote: "www.jyutping.org")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://www.lshk.org/jyutping")!) {
+                                                FootnoteLabelView_iOS15(title: Text("Jyutping - LSHK"), footnote: "www.lshk.org/jyutping")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!) {
+                                                FootnoteLabelView_iOS15(title: Text("Learn Jyutping"), footnote: "www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")
+                                        }
+                                } header: {
+                                        Text("Jyutping Resources")
+                                }
+                                Section {
+                                        LinkSafariView(url: URL(string: "https://resonate.hk")!) {
+                                                FootnoteLabelView_iOS15(title: Text(verbatim: "迴響"), footnote: "resonate.hk")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://hambaanglaang.hk")!) {
+                                                FootnoteLabelView_iOS15(title: Text(verbatim: "冚唪唥粵文"), footnote: "hambaanglaang.hk")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://www.hok6.com")!) {
+                                                FootnoteLabelView_iOS15(title: Text(verbatim: "學識 Hok6"), footnote: "www.hok6.com")
+                                        }
+                                } header: {
+                                        Text("Cantonese Resources")
+                                }
                         }
                         .navigationTitle("Jyutping")
                 }
