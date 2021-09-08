@@ -5,7 +5,7 @@ Jyutping Keyboard for iOS
 
 [![Telegram](https://img.shields.io/badge/Telegram-@jyutping-blue?style=for-the-badge&logo=telegram)](https://t.me/jyutping)
 
-## Now available on the App Store
+## Now Available on the App Store
 
 <a href="https://apps.apple.com/app/id1509367629">
         <img src="images/app-store-badge.svg" alt="App Store badge" width="150"/>
@@ -20,11 +20,11 @@ Jyutping Keyboard for iOS
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="480"/>
 
-## Running compatibility
+## Running Compatibility
 iOS 13.0+
 
-## Build requirements
-Xcode 12.5+
+## Build Requirements
+Xcode 13.0+
 
 ## Credits
 - [Rime Cantonese](https://github.com/rime/rime-cantonese)
