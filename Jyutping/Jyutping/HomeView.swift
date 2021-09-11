@@ -1,11 +1,22 @@
 import SwiftUI
+import AVFoundation
+import JyutpingProvider
 
 @available(iOS 15.0, *)
 struct HomeView_iOS15: View {
 
         private let placeholder: String = NSLocalizedString("Text Field", comment: "")
-        @State private var cacheText: String = ""
+        @State private var inputText: String = ""
+        private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
+        private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
+        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        private func speak(_ text: String) {
+                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
+                synthesizer.speak(utterance)
+        }
 
+        // Tones Input Section
         private let dotText: Text = Text(verbatim: "•")
         private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: "")
 
@@ -13,7 +24,32 @@ struct HomeView_iOS15: View {
                 NavigationView {
                         List {
                                 Section {
-                                        EnhancedTextField(placeholder: placeholder, text: $cacheText)
+                                        EnhancedTextField(placeholder: placeholder, text: $inputText)
+                                }
+                                if (!inputText.isEmpty) && (!jyutpings.isEmpty) {
+                                        Section {
+                                                HStack {
+                                                        Text(verbatim: rawCantonese)
+                                                        Spacer()
+                                                        Button(action: {
+                                                                speak(rawCantonese)
+                                                        }) {
+                                                                Image(systemName: "speaker.wave.2")
+                                                        }
+                                                }
+                                                ForEach(jyutpings) { jyutping in
+                                                        HStack {
+                                                                Text(verbatim: jyutping).font(.system(.body, design: .monospaced))
+                                                                Spacer()
+                                                                Button(action: {
+                                                                        speak(jyutping)
+                                                                }) {
+                                                                        Image(systemName: "speaker.wave.2")
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                        .textSelection(.enabled)
                                 }
                                 Section {
                                         HStack {
