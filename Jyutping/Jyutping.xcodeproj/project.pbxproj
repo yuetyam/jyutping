@@ -75,6 +75,8 @@
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 		37AF5C7D266E527000F5E017 /* PinyinProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37AF5C7C266E527000F5E017 /* PinyinProvider */; };
+		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
+		37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -206,6 +208,8 @@
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		37AF5C7B266E519B00F5E017 /* PinyinProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PinyinProvider; path = ../Helpers/PinyinProvider; sourceTree = "<group>"; };
+		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
+		37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,7 +282,7 @@
 				3759F41B262FB65C00266086 /* AppDelegate.swift */,
 				3759F41D262FB65C00266086 /* SceneDelegate.swift */,
 				3759F41F262FB65C00266086 /* ContentView.swift */,
-				3759F48F262FC2B600266086 /* HomeView.swift */,
+				37EDF18926F21C9D001A4F43 /* Home */,
 				3759F490262FC2B600266086 /* JyutpingView.swift */,
 				3759F48D262FC2B600266086 /* JyutpingTables.swift */,
 				3759F491262FC2B600266086 /* AboutView.swift */,
@@ -451,6 +455,16 @@
 				3759F4F3262FC8A300266086 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		37EDF18926F21C9D001A4F43 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3759F48F262FC2B600266086 /* HomeView.swift */,
+				37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */,
+				37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -650,7 +664,9 @@
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
 				377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */,
 				3759F488262FC27100266086 /* LinkView.swift in Sources */,
+				37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */,
 				3759F495262FC2B600266086 /* JyutpingView.swift in Sources */,
+				37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */,
 				3759F48C262FC27100266086 /* LinkButton.swift in Sources */,
 				3759F420262FB65C00266086 /* ContentView.swift in Sources */,
 			);
