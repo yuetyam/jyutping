@@ -16,6 +16,18 @@ struct ContentView: View {
                                 AboutView_iOS15().tabItem {
                                         Label("About", systemImage: "info.circle")
                                 }.tag(2)
+                        } else if #available(iOS 14.0, *) {
+                                HomeView_iOS14().tabItem {
+                                        Label("Home", systemImage: "house")
+                                }.tag(0)
+
+                                JyutpingView().tabItem {
+                                        Label("Jyutping", systemImage: "doc.text.magnifyingglass")
+                                }.tag(1)
+
+                                AboutView().tabItem {
+                                        Label("About", systemImage: "info.circle")
+                                }.tag(2)
                         } else {
                                 HomeView().tabItem {
                                         Image(systemName: "house")

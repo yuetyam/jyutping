@@ -30,13 +30,13 @@ Chinese, Simplified
 "Go to **Settings**" = "前往 **設置**";
 
 "How to enable this Keyboard" = "如何啓用鍵盤";
-"Jump to " = "跳轉至 ";
-"Tap " = "點選 ";
-"Turn on " = "開啓 ";
+"Jump to" = "跳轉至";
+"Tap" = "點選";
+"Turn on" = "開啓";
 "Allow Full Access" = "允許完全訪問";
 "How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "如何启用键盘。一：跳转至 设置，二：选择 键盘， 三：开启 粤拼，四：开启 允许完全访问";
 
-"Go to " = "前往 ";
+"Go to" = "前往";
 
 "Tones Input" = "聲調輸入";
 "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
