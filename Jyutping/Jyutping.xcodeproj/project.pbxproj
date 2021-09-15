@@ -285,9 +285,7 @@
 				37EDF18926F21C9D001A4F43 /* Home */,
 				3759F490262FC2B600266086 /* JyutpingView.swift */,
 				3759F48D262FC2B600266086 /* JyutpingTables.swift */,
-				3759F491262FC2B600266086 /* AboutView.swift */,
-				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
-				3759F48E262FC2B600266086 /* AcknowledgementsView.swift */,
+				37EDF18A26F22039001A4F43 /* About */,
 				3759F47C262FC24800266086 /* Views */,
 				3759F421262FB65D00266086 /* Assets.xcassets */,
 				3759F426262FB65D00266086 /* LaunchScreen.storyboard */,
@@ -465,6 +463,16 @@
 				37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		37EDF18A26F22039001A4F43 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				3759F491262FC2B600266086 /* AboutView.swift */,
+				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
+				3759F48E262FC2B600266086 /* AcknowledgementsView.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

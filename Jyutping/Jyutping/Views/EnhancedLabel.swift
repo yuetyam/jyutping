@@ -70,8 +70,7 @@ struct EnhancedLabel_Previews: PreviewProvider {
 }
 
 
-@available(iOS 15.0, *)
-struct FootnoteLabelView_iOS15: View {
+struct FootnoteLabelView: View {
 
         init(icon: String = "link.circle", title: Text, footnote: String, symbol: String = "safari") {
                 self.icon = icon
@@ -94,7 +93,11 @@ struct FootnoteLabelView_iOS15: View {
                                         Spacer()
                                 }
                                 HStack {
-                                        Text(verbatim: footnote).lineLimit(1).font(.caption2).foregroundColor(.secondary)
+                                        if #available(iOS 14.0, *) {
+                                                Text(verbatim: footnote).lineLimit(1).font(.caption2).foregroundColor(.secondary)
+                                        } else {
+                                                Text(verbatim: footnote).lineLimit(1).font(.caption).foregroundColor(.secondary)
+                                        }
                                         Spacer()
                                 }
                         }
