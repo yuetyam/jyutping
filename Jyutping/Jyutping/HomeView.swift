@@ -147,6 +147,20 @@ struct HomeView_iOS15: View {
                                         .font(.system(.body, design: .monospaced))
                                         .lineSpacing(6)
                                         .padding(.bottom)
+                                        .contextMenu {
+                                                Button(action: {
+                                                        let rules: String = """
+                                                        w = 橫(waang)
+                                                        s = 豎(syu)
+                                                        a = 撇
+                                                        d = 點(dim)
+                                                        z = 折(zit)
+                                                        """
+                                                        UIPasteboard.general.string = rules
+                                                }) {
+                                                        Label("Copy", systemImage: "doc.on.doc")
+                                                }
+                                        }
                                 }
                                 Section {
                                         HStack {
@@ -329,6 +343,20 @@ struct HomeView_iOS14: View {
                                         .font(.system(.body, design: .monospaced))
                                         .lineSpacing(6)
                                         .padding(.bottom)
+                                        .contextMenu {
+                                                Button(action: {
+                                                        let rules: String = """
+                                                        w = 橫(waang)
+                                                        s = 豎(syu)
+                                                        a = 撇
+                                                        d = 點(dim)
+                                                        z = 折(zit)
+                                                        """
+                                                        UIPasteboard.general.string = rules
+                                                }) {
+                                                        Label("Copy", systemImage: "doc.on.doc")
+                                                }
+                                        }
                                 }
                                 Section {
                                         HStack {
@@ -511,6 +539,24 @@ struct HomeView: View {
                                         .font(.system(.body, design: .monospaced))
                                         .lineSpacing(6)
                                         .padding(.bottom)
+                                        .contextMenu {
+                                                Button(action: {
+                                                        let rules: String = """
+                                                        w = 橫(waang)
+                                                        s = 豎(syu)
+                                                        a = 撇
+                                                        d = 點(dim)
+                                                        z = 折(zit)
+                                                        """
+                                                        UIPasteboard.general.string = rules
+                                                }) {
+                                                        HStack {
+                                                                Text("Copy")
+                                                                Spacer()
+                                                                Image(systemName: "doc.on.doc")
+                                                        }
+                                                }
+                                        }
                                 }
                                 Section {
                                         HStack {
