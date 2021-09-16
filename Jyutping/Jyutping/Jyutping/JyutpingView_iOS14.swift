@@ -2,7 +2,8 @@ import SwiftUI
 import AVFoundation
 import JyutpingProvider
 
-struct JyutpingView: View {
+@available(iOS 14.0, *)
+struct JyutpingView_iOS14: View {
 
         private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: "")
         @State private var inputText: String = ""
@@ -44,24 +45,50 @@ struct JyutpingView: View {
                                                 }
                                         }
                                 } else if !inputText.isEmpty {
-                                        Section {
-                                                HStack {
-                                                        Text(verbatim: rawCantonese)
-                                                        Spacer()
-                                                        Button(action: {
-                                                                speak(rawCantonese)
-                                                        }) {
-                                                                Image(systemName: "speaker.wave.2")
-                                                        }
-                                                }
-                                                ForEach(jyutpings, id: \.self) { jyutping in
+                                        if #available(iOS 15.0, *) {
+                                                Section {
                                                         HStack {
-                                                                Text(verbatim: jyutping).font(.system(.body, design: .monospaced))
+                                                                Text(verbatim: rawCantonese)
                                                                 Spacer()
                                                                 Button(action: {
-                                                                        speak(jyutping)
+                                                                        speak(rawCantonese)
                                                                 }) {
                                                                         Image(systemName: "speaker.wave.2")
+                                                                }
+                                                        }
+                                                        ForEach(jyutpings, id: \.self) { jyutping in
+                                                                HStack {
+                                                                        Text(verbatim: jyutping).font(.system(.body, design: .monospaced))
+                                                                        Spacer()
+                                                                        Button(action: {
+                                                                                speak(jyutping)
+                                                                        }) {
+                                                                                Image(systemName: "speaker.wave.2")
+                                                                        }
+                                                                }
+                                                        }
+                                                }
+                                                .textSelection(.enabled)
+                                        } else {
+                                                Section {
+                                                        HStack {
+                                                                Text(verbatim: rawCantonese)
+                                                                Spacer()
+                                                                Button(action: {
+                                                                        speak(rawCantonese)
+                                                                }) {
+                                                                        Image(systemName: "speaker.wave.2")
+                                                                }
+                                                        }
+                                                        ForEach(jyutpings, id: \.self) { jyutping in
+                                                                HStack {
+                                                                        Text(verbatim: jyutping).font(.system(.body, design: .monospaced))
+                                                                        Spacer()
+                                                                        Button(action: {
+                                                                                speak(jyutping)
+                                                                        }) {
+                                                                                Image(systemName: "speaker.wave.2")
+                                                                        }
                                                                 }
                                                         }
                                                 }
@@ -69,15 +96,16 @@ struct JyutpingView: View {
                                 }
                                 Section {
                                         NavigationLink(destination: InitialsTable()) {
-                                                Text("Jyutping Initials")
+                                                Label("Jyutping Initials", systemImage: "tablecells")
                                         }
                                         NavigationLink(destination: FinalsTable()) {
-                                                Text("Jyutping Finals")
+                                                Label("Jyutping Finals", systemImage: "tablecells")
                                         }
                                         NavigationLink(destination: TonesTable()) {
-                                                Text("Jyutping Tones")
+                                                Label("Jyutping Tones", systemImage: "tablecells")
                                         }
                                 }
+                                .labelStyle(.titleOnly)
                                 Section {
                                         LinkSafariView(url: URL(string: "https://jyut.net")!) {
                                                 FootnoteLabelView(icon: "doc.text.magnifyingglass", title: Text(verbatim: "粵音資料集叢"), footnote: "jyut.net")
@@ -95,7 +123,7 @@ struct JyutpingView: View {
                                                 FootnoteLabelView(icon: "doc.text.magnifyingglass", title: Text(verbatim: "羊羊粵語"), footnote: "shyyp.net/hant")
                                         }
                                 } header: {
-                                        Text("Search on other places (websites)")
+                                        Text("Search on other places (websites)").textCase(.none)
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://www.jyutping.org")!) {
@@ -108,7 +136,7 @@ struct JyutpingView: View {
                                                 FootnoteLabelView(title: Text("Learn Jyutping"), footnote: "www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")
                                         }
                                 } header: {
-                                        Text("Jyutping Resources")
+                                        Text("Jyutping Resources").textCase(.none)
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://resonate.hk")!) {
@@ -121,11 +149,11 @@ struct JyutpingView: View {
                                                 FootnoteLabelView(title: Text(verbatim: "學識 Hok6"), footnote: "www.hok6.com")
                                         }
                                 } header: {
-                                        Text("Cantonese Resources")
+                                        Text("Cantonese Resources").textCase(.none)
                                 }
                         }
-                        .listStyle(.grouped)
-                        .navigationBarTitle("Jyutping")
+                        .listStyle(.insetGrouped)
+                        .navigationTitle("Jyutping")
                 }
                 .navigationViewStyle(.stack)
         }

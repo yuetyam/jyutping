@@ -70,6 +70,7 @@
 		3759F4E8262FC86600266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4EA262FC86600266086 /* InfoPlist.strings */; };
 		3759F4F1262FC8A300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4F3262FC8A300266086 /* Localizable.strings */; };
 		375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375BB6E426DD088F00D6A36A /* EnhancedLabel.swift */; };
+		37718D1926F2E73800B68A5B /* JyutpingView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37718D1826F2E73800B68A5B /* JyutpingView_iOS14.swift */; };
 		3775D53D263AF1D20024BF12 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */; };
 		377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */; };
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
@@ -204,6 +205,7 @@
 		3759F4F6262FC8A700266086 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3759F4F7262FC8A800266086 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		375BB6E426DD088F00D6A36A /* EnhancedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedLabel.swift; sourceTree = "<group>"; };
+		37718D1826F2E73800B68A5B /* JyutpingView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView_iOS14.swift; sourceTree = "<group>"; };
 		3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
 		377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 			isa = PBXGroup;
 			children = (
 				3759F490262FC2B600266086 /* JyutpingView.swift */,
+				37718D1826F2E73800B68A5B /* JyutpingView_iOS14.swift */,
 				3759F48D262FC2B600266086 /* JyutpingTables.swift */,
 			);
 			path = Jyutping;
@@ -480,8 +483,8 @@
 			children = (
 				3759F491262FC2B600266086 /* AboutView.swift */,
 				37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */,
-				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
 				3759F48E262FC2B600266086 /* AcknowledgementsView.swift */,
+				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */,
 				3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */,
 				3759F492262FC2B600266086 /* JyutpingTables.swift in Sources */,
+				37718D1926F2E73800B68A5B /* JyutpingView_iOS14.swift in Sources */,
 				37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */,
 				3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */,
 				3759F41E262FB65C00266086 /* SceneDelegate.swift in Sources */,
