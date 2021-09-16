@@ -1,6 +1,5 @@
 import SwiftUI
 
-@available(iOS 15.0, *)
 struct EnhancedLabel: View {
 
         private let title: LocalizedStringKey
@@ -19,47 +18,82 @@ struct EnhancedLabel: View {
 
         var body: some View {
                 if message == nil && symbol == nil {
-                        Label {
-                                Text(title).tint(tintColor)
-                        } icon: {
-                                Image(systemName: icon)
+                        if #available(iOS 14.0, *) {
+                                Label {
+                                        Text(title).foregroundColor(tintColor)
+                                } icon: {
+                                        Image(systemName: icon)
+                                }
+                        } else {
+                                HStack(spacing: 16) {
+                                        Image(systemName: icon)
+                                        Text(title).foregroundColor(tintColor)
+                                        Spacer()
+                                }
                         }
                 } else if symbol == nil {
-                        HStack {
-                                Label {
-                                        Text(title).tint(tintColor)
-                                } icon: {
-                                        Image(systemName: icon)
+                        if #available(iOS 14.0, *) {
+                                HStack {
+                                        Label {
+                                                Text(title).foregroundColor(tintColor)
+                                        } icon: {
+                                                Image(systemName: icon)
+                                        }
+                                        Spacer()
+                                        message?.foregroundColor(tintColor)
                                 }
-                                Spacer()
-                                message.tint(tintColor)
+                        } else {
+                                HStack(spacing: 16) {
+                                        Image(systemName: icon)
+                                        Text(title).foregroundColor(tintColor)
+                                        Spacer()
+                                        message?.foregroundColor(tintColor)
+                                }
                         }
                 } else if message == nil {
-                        HStack {
-                                Label {
-                                        Text(title).tint(tintColor)
-                                } icon: {
-                                        Image(systemName: icon)
+                        if #available(iOS 14.0, *) {
+                                HStack {
+                                        Label {
+                                                Text(title).foregroundColor(tintColor)
+                                        } icon: {
+                                                Image(systemName: icon)
+                                        }
+                                        Spacer()
+                                        symbol?.foregroundColor(.secondary)
                                 }
-                                Spacer()
-                                symbol?.foregroundColor(.secondary)
+                        } else {
+                                HStack(spacing: 16) {
+                                        Image(systemName: icon)
+                                        Text(title).foregroundColor(tintColor)
+                                        Spacer()
+                                        symbol?.foregroundColor(.secondary)
+                                }
                         }
                 } else {
-                        HStack {
-                                Label {
-                                        Text(title).tint(tintColor)
-                                } icon: {
-                                        Image(systemName: icon)
+                        if #available(iOS 14.0, *) {
+                                HStack {
+                                        Label {
+                                                Text(title).foregroundColor(tintColor)
+                                        } icon: {
+                                                Image(systemName: icon)
+                                        }
+                                        Spacer()
+                                        message?.foregroundColor(tintColor)
+                                        symbol?.foregroundColor(.secondary)
                                 }
-                                Spacer()
-                                message?.tint(tintColor)
-                                symbol?.foregroundColor(.secondary)
+                        } else {
+                                HStack(spacing: 16) {
+                                        Image(systemName: icon)
+                                        Text(title).foregroundColor(tintColor)
+                                        Spacer()
+                                        message?.foregroundColor(tintColor)
+                                        symbol?.foregroundColor(.secondary)
+                                }
                         }
                 }
         }
 }
 
-@available(iOS 15.0, *)
 struct EnhancedLabel_Previews: PreviewProvider {
         static var previews: some View {
                 EnhancedLabel("Test Text",

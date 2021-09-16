@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct AboutView: View {
+@available(iOS 14.0, *)
+struct AboutView_iOS14: View {
 
         private let versionString: String = {
                 let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
@@ -12,15 +13,10 @@ struct AboutView: View {
                 NavigationView {
                         List {
                                 Section {
-                                        HStack(spacing: 16) {
-                                                Image(systemName: "info.circle").foregroundColor(.blue)
-                                                Text("Version")
-                                                Spacer()
-                                                Text(verbatim: versionString)
-                                        }
-                                        .contextMenu {
-                                                MenuCopyButton(content: versionString)
-                                        }
+                                        EnhancedLabel("Version", icon: "info.circle", message: Text(verbatim: versionString))
+                                                .contextMenu {
+                                                        MenuCopyButton(content: versionString)
+                                                }
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
@@ -30,15 +26,11 @@ struct AboutView: View {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
                                                 }) {
-                                                        EnhancedLabel("Copy Source Code URL", icon: "doc.on.doc")
+                                                        Label("Copy Source Code URL", systemImage: "doc.on.doc")
                                                 }
                                         }
                                         NavigationLink(destination: AcknowledgementsView()) {
-                                                HStack(spacing: 16) {
-                                                        Image(systemName: "wand.and.stars").foregroundColor(.blue)
-                                                        Text("Acknowledgements")
-                                                        Spacer()
-                                                }
+                                                Label("Acknowledgements", systemImage: "wand.and.stars")
                                         }
                                         LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: Image(systemName: "safari"))
@@ -47,7 +39,7 @@ struct AboutView: View {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://yuetyam.github.io/jyutping/privacy"
                                                 }) {
-                                                        EnhancedLabel("Copy Privacy Policy URL", icon: "doc.on.doc")
+                                                        Label("Copy Privacy Policy URL", systemImage: "doc.on.doc")
                                                 }
                                         }
                                 }
@@ -68,19 +60,17 @@ struct AboutView: View {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://t.me/jyutping"
                                                 }) {
-                                                        EnhancedLabel("Copy Telegram URL", icon: "doc.on.doc")
+                                                        Label("Copy Telegram URL", systemImage: "doc.on.doc")
                                                 }
                                         }
-                                        Button(action: {
-                                                UIApplication.shared.open(URL(string: "https://twitter.com/JyutpingApp")!)
-                                        }) {
+                                        Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
                                                 EnhancedLabel("Follow us on Twitter", icon: "at", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://twitter.com/JyutpingApp"
                                                 }) {
-                                                        EnhancedLabel("Copy Twitter URL", icon: "doc.on.doc")
+                                                        Label("Copy Twitter URL", systemImage: "doc.on.doc")
                                                 }
                                         }
                                         Button(action: {
@@ -93,28 +83,26 @@ struct AboutView: View {
                                                         }
                                                 }
                                         }) {
-                                                EnhancedLabel("Follow us on Instagram", icon: "dot.square", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("Follow us on Instagram", icon: "circle.square", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://www.instagram.com/jyutping_app"
                                                 }) {
-                                                        EnhancedLabel("Copy Instagram URL", icon: "doc.on.doc")
+                                                        Label("Copy Instagram URL", systemImage: "doc.on.doc")
                                                 }
                                         }
                                 }
                                 Section {
                                         // GitHub App supports Universal Links
-                                        Button(action: {
-                                                UIApplication.shared.open(URL(string: "https://github.com/yuetyam/jyutping/issues")!)
-                                        }) {
+                                        Link(destination: URL(string: "https://github.com/yuetyam/jyutping/issues")!) {
                                                 EnhancedLabel("GitHub Issues", icon: "info.circle", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
                                                 }) {
-                                                        EnhancedLabel("Copy GitHub URL", icon: "doc.on.doc")
+                                                        Label("Copy GitHub URL", systemImage: "doc.on.doc")
                                                 }
                                         }
                                         EmailFeedbackButton()
@@ -122,21 +110,19 @@ struct AboutView: View {
                                                         Button(action: {
                                                                 UIPasteboard.general.string = "bing@ososo.io"
                                                         }) {
-                                                                EnhancedLabel("Copy Email Address", icon: "doc.on.doc")
+                                                                Label("Copy Email Address", systemImage: "doc.on.doc")
                                                         }
                                                 }
                                 }
                                 Section {
-                                        Button(action: {
-                                                UIApplication.shared.open(URL(string: "itms-apps://apple.com/app/id1509367629")!)
-                                        }) {
+                                        Link(destination: URL(string: "itms-apps://apple.com/app/id1509367629")!) {
                                                 EnhancedLabel("Review on the App Store", icon: "heart", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://apps.apple.com/app/id1509367629"
                                                 }) {
-                                                        EnhancedLabel("Copy App Store link", icon: "doc.on.doc")
+                                                        Label("Copy App Store link", systemImage: "doc.on.doc")
                                                 }
                                         }
                                         ShareSheetView(activityItems: [URL(string: "https://apps.apple.com/app/id1509367629")!]) {
@@ -146,74 +132,14 @@ struct AboutView: View {
                                                 Button(action: {
                                                         UIPasteboard.general.string = "https://apps.apple.com/app/id1509367629"
                                                 }) {
-                                                        EnhancedLabel("Copy App Store link", icon: "doc.on.doc")
+                                                        Label("Copy App Store link", systemImage: "doc.on.doc")
                                                 }
                                         }
                                 }
                         }
-                        .listStyle(.grouped)
-                        .navigationBarTitle("About")
+                        .listStyle(.insetGrouped)
+                        .navigationTitle("About")
                 }
                 .navigationViewStyle(.stack)
         }
-}
-
-struct AboutView_Previews: PreviewProvider {
-        static var previews: some View {
-                AboutView()
-        }
-}
-
-
-struct EmailFeedbackButton: View {
-
-        @State private var isMailOnPhoneUnavailable: Bool = false
-        @State private var isMailOnPadUnavailable: Bool = false
-
-        var body: some View {
-                Button(action: {
-                        UIApplication.shared.open(mailtoUrl) { success in
-                                if !success {
-                                        if UITraitCollection.current.userInterfaceIdiom == .phone {
-                                                isMailOnPhoneUnavailable = true
-                                                UINotificationFeedbackGenerator().notificationOccurred(.warning)
-                                        } else {
-                                                isMailOnPadUnavailable = true
-                                        }
-                                }
-                        }
-                }) {
-                        EnhancedLabel("Email Feedback", icon: "envelope", symbol: Image(systemName: "square.and.pencil"))
-                }
-                .actionSheet(isPresented: $isMailOnPhoneUnavailable) {
-                        ActionSheet(title: Text("Unable to compose mail"),
-                                    message: Text("Mail Unavailable"),
-                                    buttons: [.cancel(Text("OK"))])
-                }
-                .alert(isPresented: $isMailOnPadUnavailable) {
-                        Alert(title: Text("Unable to compose mail"),
-                              message: Text("Mail Unavailable"),
-                              dismissButton: .cancel(Text("OK")))
-                }
-        }
-
-        private let mailtoUrl: URL = {
-                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
-                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
-                let version: String = versionString + " (" + buildString + ")"
-
-                let device: String = UIDevice.modelName
-                let system: String = UIDevice.current.systemName + " " + UIDevice.current.systemVersion
-                let messageBody: String = """
-
-
-                Version: \(version)
-                Device: \(device)
-                System: \(system)
-                """
-                let address: String = "bing@ososo.io"
-                let subject: String = "Jyutping Feedback"
-                let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                return URL(string: scheme)!
-        }()
 }

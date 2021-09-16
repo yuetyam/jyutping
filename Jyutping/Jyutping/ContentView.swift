@@ -13,7 +13,7 @@ struct ContentView: View {
                                         Label("Jyutping", systemImage: "doc.text.magnifyingglass")
                                 }.tag(1)
 
-                                AboutView_iOS15().tabItem {
+                                AboutView_iOS14().tabItem {
                                         Label("About", systemImage: "info.circle")
                                 }.tag(2)
                         } else if #available(iOS 14.0, *) {
@@ -25,7 +25,7 @@ struct ContentView: View {
                                         Label("Jyutping", systemImage: "doc.text.magnifyingglass")
                                 }.tag(1)
 
-                                AboutView().tabItem {
+                                AboutView_iOS14().tabItem {
                                         Label("About", systemImage: "info.circle")
                                 }.tag(2)
                         } else {
