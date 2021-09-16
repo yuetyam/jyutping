@@ -38,7 +38,7 @@ private struct CellView: View {
 
 struct InitialsTable: View {
         var body: some View {
-                List(content.components(separatedBy: .newlines)) {
+                List(content.components(separatedBy: .newlines), id: \.self) {
                         if #available(iOS 15.0, *) {
                                 CellView($0).textSelection(.enabled)
                         } else {
@@ -76,9 +76,9 @@ private let content: String = """
 struct FinalsTable: View {
         var body: some View {
                 List {
-                        ForEach(parts) { block in
+                        ForEach(parts, id: \.self) { block in
                                 Section {
-                                        ForEach(block.components(separatedBy: .newlines)) {
+                                        ForEach(block.components(separatedBy: .newlines), id: \.self) {
                                                 if #available(iOS 15.0, *) {
                                                         CellView($0).textSelection(.enabled)
                                                 } else {
@@ -174,7 +174,7 @@ let content: String = """
 
 struct TonesTable: View {
         var body: some View {
-                List(content.components(separatedBy: .newlines)) {
+                List(content.components(separatedBy: .newlines), id: \.self) {
                         if #available(iOS 15.0, *) {
                                 CellView($0).textSelection(.enabled)
                         } else {

@@ -36,7 +36,7 @@ struct HomeView: View {
                                                                 Image(systemName: "speaker.wave.2")
                                                         }
                                                 }
-                                                ForEach(jyutpings) { jyutping in
+                                                ForEach(jyutpings, id: \.self) { jyutping in
                                                         HStack {
                                                                 Text(verbatim: jyutping).font(.system(.body, design: .monospaced))
                                                                 Spacer()
