@@ -24,12 +24,10 @@
 		3759F469262FBFF300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F46B262FBFF300266086 /* Localizable.strings */; };
 		3759F472262FC07D00266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F474262FC07D00266086 /* InfoPlist.strings */; };
 		3759F47B262FC17C00266086 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3759F47A262FC17C00266086 /* Settings.bundle */; };
-		3759F485262FC27100266086 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F47D262FC27100266086 /* MessageView.swift */; };
 		3759F487262FC27100266086 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F47F262FC27100266086 /* SafariView.swift */; };
-		3759F488262FC27100266086 /* LinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F480262FC27100266086 /* LinkView.swift */; };
+		3759F488262FC27100266086 /* LinkSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F480262FC27100266086 /* LinkSafariView.swift */; };
 		3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F482262FC27100266086 /* ShareSheetView.swift */; };
 		3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F483262FC27100266086 /* EnhancedTextField.swift */; };
-		3759F48C262FC27100266086 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F484262FC27100266086 /* LinkButton.swift */; };
 		3759F492262FC2B600266086 /* JyutpingTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* JyutpingTables.swift */; };
 		3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48E262FC2B600266086 /* AcknowledgementsView.swift */; };
 		3759F494262FC2B600266086 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48F262FC2B600266086 /* HomeView.swift */; };
@@ -152,12 +150,10 @@
 		3759F477262FC09700266086 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3759F478262FC09900266086 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3759F47A262FC17C00266086 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		3759F47D262FC27100266086 /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		3759F47F262FC27100266086 /* SafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
-		3759F480262FC27100266086 /* LinkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkView.swift; sourceTree = "<group>"; };
+		3759F480262FC27100266086 /* LinkSafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkSafariView.swift; sourceTree = "<group>"; };
 		3759F482262FC27100266086 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		3759F483262FC27100266086 /* EnhancedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
-		3759F484262FC27100266086 /* LinkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		3759F48D262FC2B600266086 /* JyutpingTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingTables.swift; sourceTree = "<group>"; };
 		3759F48E262FC2B600266086 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		3759F48F262FC2B600266086 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -369,9 +365,7 @@
 			children = (
 				375BB6E426DD088F00D6A36A /* EnhancedLabel.swift */,
 				3759F483262FC27100266086 /* EnhancedTextField.swift */,
-				3759F484262FC27100266086 /* LinkButton.swift */,
-				3759F480262FC27100266086 /* LinkView.swift */,
-				3759F47D262FC27100266086 /* MessageView.swift */,
+				3759F480262FC27100266086 /* LinkSafariView.swift */,
 				3759F47F262FC27100266086 /* SafariView.swift */,
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
 				377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */,
@@ -673,7 +667,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3759F496262FC2B600266086 /* AboutView.swift in Sources */,
-				3759F485262FC27100266086 /* MessageView.swift in Sources */,
 				3759F494262FC2B600266086 /* HomeView.swift in Sources */,
 				3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */,
 				375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */,
@@ -687,11 +680,10 @@
 				3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */,
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
 				377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */,
-				3759F488262FC27100266086 /* LinkView.swift in Sources */,
+				3759F488262FC27100266086 /* LinkSafariView.swift in Sources */,
 				37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */,
 				3759F495262FC2B600266086 /* JyutpingView.swift in Sources */,
 				37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */,
-				3759F48C262FC27100266086 /* LinkButton.swift in Sources */,
 				3759F420262FB65C00266086 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
