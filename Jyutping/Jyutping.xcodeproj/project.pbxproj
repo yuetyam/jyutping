@@ -285,10 +285,9 @@
 				3759F41D262FB65C00266086 /* SceneDelegate.swift */,
 				3759F41F262FB65C00266086 /* ContentView.swift */,
 				37EDF18926F21C9D001A4F43 /* Home */,
-				3759F490262FC2B600266086 /* JyutpingView.swift */,
-				3759F48D262FC2B600266086 /* JyutpingTables.swift */,
+				37718D1726F2E5F700B68A5B /* Jyutping */,
 				37EDF18A26F22039001A4F43 /* About */,
-				3759F47C262FC24800266086 /* Views */,
+				3759F47C262FC24800266086 /* ViewComponents */,
 				3759F421262FB65D00266086 /* Assets.xcassets */,
 				3759F426262FB65D00266086 /* LaunchScreen.storyboard */,
 				3759F429262FB65D00266086 /* Info.plist */,
@@ -363,7 +362,7 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		3759F47C262FC24800266086 /* Views */ = {
+		3759F47C262FC24800266086 /* ViewComponents */ = {
 			isa = PBXGroup;
 			children = (
 				375BB6E426DD088F00D6A36A /* EnhancedLabel.swift */,
@@ -375,7 +374,7 @@
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
 				377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */,
 			);
-			path = Views;
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 		3759F49A262FC7E900266086 /* Components */ = {
@@ -455,6 +454,15 @@
 				3759F4F3262FC8A300266086 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		37718D1726F2E5F700B68A5B /* Jyutping */ = {
+			isa = PBXGroup;
+			children = (
+				3759F490262FC2B600266086 /* JyutpingView.swift */,
+				3759F48D262FC2B600266086 /* JyutpingTables.swift */,
+			);
+			path = Jyutping;
 			sourceTree = "<group>";
 		};
 		37EDF18926F21C9D001A4F43 /* Home */ = {
