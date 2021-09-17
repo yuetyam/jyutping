@@ -32,12 +32,17 @@ extension UIDevice {
                 case "iPhone13,2":                  return "iPhone 12"
                 case "iPhone13,3":                  return "iPhone 12 Pro"
                 case "iPhone13,4":                  return "iPhone 12 Pro Max"
+                case "iPhone14,4":                  return "iPhone 13 mini"
+                case "iPhone14,5":                  return "iPhone 13"
+                case "iPhone14,2":                  return "iPhone 13 Pro"
+                case "iPhone14,3":                  return "iPhone 13 Pro Max"
 
 
                 case "iPad6,11", "iPad6,12":        return "iPad (5th generation)"
                 case "iPad7,5", "iPad7,6":          return "iPad (6th generation)"
                 case "iPad7,11", "iPad7,12":        return "iPad (7th generation)"
                 case "iPad11,6", "iPad11,7":        return "iPad (8th generation)"
+                case "iPad12,1", "iPad12,2":        return "iPad (9th generation)"
 
 
                 case "iPad5,3", "iPad5,4":          return "iPad Air 2"
@@ -47,6 +52,7 @@ extension UIDevice {
 
                 case "iPad5,1", "iPad5,2":          return "iPad mini 4"
                 case "iPad11,1", "iPad11,2":        return "iPad mini (5th generation)"
+                case "iPad14,1", "iPad14,2":        return "iPad mini (6th generation)"
 
 
                 case "iPad6,3", "iPad6,4":          return "iPad Pro (9.7-inch)"
@@ -56,8 +62,8 @@ extension UIDevice {
                 case "iPad8,1", "iPad8,2",
                      "iPad8,3", "iPad8,4":          return "iPad Pro (11-inch) (1st generation)"
                 case "iPad8,9", "iPad8,10":         return "iPad Pro (11-inch) (2nd generation)"
-                case "iPad13.4", "iPad13.5",
-                     "iPad13.6", "iPad13.7":        return "iPad Pro (11-inch) (3rd generation)"
+                case "iPad13,4", "iPad13,5",
+                     "iPad13,6", "iPad13,7":        return "iPad Pro (11-inch) (3rd generation)"
 
 
                 case "iPad6,7", "iPad6,8":          return "iPad Pro (12.9-inch) (1st generation)"
@@ -65,8 +71,8 @@ extension UIDevice {
                 case "iPad8,5", "iPad8,6",
                      "iPad8,7", "iPad8,8":          return "iPad Pro (12.9-inch) (3rd generation)"
                 case "iPad8,11", "iPad8,12":        return "iPad Pro (12.9-inch) (4th generation)"
-                case "iPad13.8", "iPad13.9",
-                     "iPad13.10", "iPad13.11":      return "iPad Pro (12.9-inch) (5th generation)"
+                case "iPad13,8", "iPad13,9",
+                     "iPad13,10", "iPad13,11":      return "iPad Pro (12.9-inch) (5th generation)"
 
 
                 default:                            return identifier
