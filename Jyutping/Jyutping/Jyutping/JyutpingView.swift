@@ -51,7 +51,7 @@ struct JyutpingView: View {
                                                         Button(action: {
                                                                 speak(rawCantonese)
                                                         }) {
-                                                                Image(systemName: "speaker.wave.2")
+                                                                Image(systemName: "speaker.2")
                                                         }
                                                 }
                                                 ForEach(jyutpings, id: \.self) { jyutping in
@@ -61,7 +61,7 @@ struct JyutpingView: View {
                                                                 Button(action: {
                                                                         speak(jyutping)
                                                                 }) {
-                                                                        Image(systemName: "speaker.wave.2")
+                                                                        Image(systemName: "speaker.2")
                                                                 }
                                                         }
                                                 }
