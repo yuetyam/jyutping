@@ -108,7 +108,7 @@ struct AboutView: View {
                                         Button(action: {
                                                 UIApplication.shared.open(URL(string: "https://github.com/yuetyam/jyutping/issues")!)
                                         }) {
-                                                EnhancedLabel("GitHub Issues", icon: "info.circle", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("GitHub Issues", icon: "smallcircle.fill.circle", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
