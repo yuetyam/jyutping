@@ -49,13 +49,10 @@ struct HomeView_iOS14: View {
                                                         }
                                                 }
                                         }
+
                                 }
                                 Section {
-                                        HStack {
-                                                Text("How to enable this Keyboard")
-                                                Spacer()
-                                        }
-                                        .font(.headline)
+                                        Text("How to enable this Keyboard").font(.headline)
                                         VStack(spacing: 5) {
                                                 HStack {
                                                         dotText
@@ -81,7 +78,6 @@ struct HomeView_iOS14: View {
                                                         Text("Allow Full Access").fontWeight(.semibold)
                                                         Spacer()
                                                 }
-                                                .padding(.bottom)
                                         }
                                 }
                                 Section {
@@ -97,48 +93,24 @@ struct HomeView_iOS14: View {
                                                 }
                                         }
                                 }
-                                Section {
-                                        HStack {
-                                                Text("Tones Input")
-                                                Spacer()
-                                        }
-                                        .font(.headline)
-                                        HStack {
+                                Group {
+                                        Section {
+                                                Text("Tones Input").font(.headline)
                                                 Text(tonesInputContent)
                                                         .font(.system(.body, design: .monospaced))
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
-                                                Spacer()
+                                                        .contextMenu {
+                                                                MenuCopyButton(content: tonesInputContent)
+                                                        }
                                         }
-                                        .padding(.bottom)
-                                        .contextMenu {
-                                                MenuCopyButton(content: tonesInputContent)
-                                        }
-                                }
-                                Section {
-                                        HStack {
-                                                Text("Lookup Jyutping with Cangjie")
-                                                Spacer()
-                                        }
-                                        .font(.headline)
-                                        HStack {
+                                        Section {
+                                                Text("Lookup Jyutping with Cangjie").font(.headline)
                                                 Text("以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
-                                                Spacer()
                                         }
-                                        .padding(.bottom)
-                                }
-                                Section {
-                                        HStack {
-                                                Text("Lookup Jyutping with Stroke")
-                                                Spacer()
-                                        }
-                                        .font(.headline)
-                                        HStack {
+                                        Section {
+                                                Text("Lookup Jyutping with Stroke").font(.headline)
                                                 Text("以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
-                                                Spacer()
-                                        }
-                                        .padding(.bottom)
-                                        HStack {
                                                 Text("""
                                                 w = 橫(waang)
                                                 s = 豎(syu)
@@ -146,49 +118,35 @@ struct HomeView_iOS14: View {
                                                 d = 點(dim)
                                                 z = 折(zit)
                                                 """)
-                                                Spacer()
+                                                        .font(.system(.body, design: .monospaced))
+                                                        .lineSpacing(6)
+                                                        .contextMenu {
+                                                                Button(action: {
+                                                                        let rules: String = """
+                                                                        w = 橫(waang)
+                                                                        s = 豎(syu)
+                                                                        a = 撇
+                                                                        d = 點(dim)
+                                                                        z = 折(zit)
+                                                                        """
+                                                                        UIPasteboard.general.string = rules
+                                                                }) {
+                                                                        Label("Copy", systemImage: "doc.on.doc")
+                                                                }
+                                                        }
                                         }
-                                        .font(.system(.body, design: .monospaced))
-                                        .lineSpacing(6)
-                                        .padding(.bottom)
-                                        .contextMenu {
-                                                Button(action: {
-                                                        let rules: String = """
-                                                        w = 橫(waang)
-                                                        s = 豎(syu)
-                                                        a = 撇
-                                                        d = 點(dim)
-                                                        z = 折(zit)
-                                                        """
-                                                        UIPasteboard.general.string = rules
-                                                }) {
-                                                        Label("Copy", systemImage: "doc.on.doc")
-                                                }
-                                        }
-                                }
-                                Section {
-                                        HStack {
-                                                Text("Lookup Jyutping with Pinyin")
-                                                Spacer()
-                                        }
-                                        .font(.headline)
-                                        HStack {
+                                        Section {
+                                                Text("Lookup Jyutping with Pinyin").font(.headline)
                                                 Text("以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
-                                                Spacer()
                                         }
-                                        .padding(.bottom)
+                                        Section {
+                                                Text("Period (Full Stop) Shortcut").font(.headline)
+                                                Text("Double tapping the space bar will insert a period followed by a space").lineSpacing(6)
+                                        }
                                 }
                                 Section {
-                                        HStack {
-                                                Text("Period (Full Stop) Shortcut")
-                                                Spacer()
-                                        }
-                                        .font(.headline)
-                                        HStack {
-                                                Text("Double tapping the space bar will insert a period followed by a space").lineSpacing(6)
-                                                Spacer()
-                                        }
-                                        .padding(.bottom)
+                                        Text("Can I use with external keyboards?").font(.headline)
+                                        Text("Unfortunately not. Due to system limitations, third-party keyboard apps can't communicate with external keyboards.").lineSpacing(6)
                                 }
                         }
                         .listStyle(.insetGrouped)

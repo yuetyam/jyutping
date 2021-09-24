@@ -53,6 +53,9 @@ English
 "Period (Full Stop) Shortcut" = "Period (Full Stop) Shortcut";
 "Double tapping the space bar will insert a period followed by a space" = "Double tapping the space bar will insert a period followed by a space";
 
+"Can I use with external keyboards?" = "Can I use with external keyboards?";
+"Unfortunately not. Due to system limitations, third-party keyboard apps can't communicate with external keyboards." = "Unfortunately not. Due to system limitations, third-party keyboard apps can't communicate with external keyboards.";
+
 
 // Search
 "Lookup Jyutping for Cantonese" = "Lookup Jyutping for Cantonese";
