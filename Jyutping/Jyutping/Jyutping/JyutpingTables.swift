@@ -20,18 +20,34 @@ private struct CellView: View {
         private let width: CGFloat
 
         var body: some View {
-                HStack {
-                        Text(components[0]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
-                        Text(components[1]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
-                        if components.count < 4 {
-                                Text(components[2])
-                        } else {
-                                Text(components[2]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
-                                Text(components[3])
+                if #available(iOS 15.0, *) {
+                        HStack {
+                                Text(components[0]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
+                                Text(components[1]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
+                                if components.count < 4 {
+                                        Text(components[2])
+                                } else {
+                                        Text(components[2]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
+                                        Text(components[3])
+                                }
+                                Spacer()
                         }
-                        Spacer()
+                        .font(.system(.body, design: .monospaced))
+                        .textSelection(.enabled)
+                } else {
+                        HStack {
+                                Text(components[0]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
+                                Text(components[1]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
+                                if components.count < 4 {
+                                        Text(components[2])
+                                } else {
+                                        Text(components[2]).frame(minWidth: 50, idealWidth: width, maxWidth: width, alignment: .leading)
+                                        Text(components[3])
+                                }
+                                Spacer()
+                        }
+                        .font(.system(.body, design: .monospaced))
                 }
-                .font(.system(.body, design: .monospaced))
         }
 }
 
@@ -39,11 +55,7 @@ private struct CellView: View {
 struct InitialsTable: View {
         var body: some View {
                 List(content.components(separatedBy: .newlines), id: \.self) {
-                        if #available(iOS 15.0, *) {
-                                CellView($0).textSelection(.enabled)
-                        } else {
-                                CellView($0)
-                        }
+                        CellView($0)
                 }
                 .navigationBarTitle("Jyutping Initials", displayMode: .inline)
         }
@@ -79,11 +91,7 @@ struct FinalsTable: View {
                         ForEach(parts, id: \.self) { block in
                                 Section {
                                         ForEach(block.components(separatedBy: .newlines), id: \.self) {
-                                                if #available(iOS 15.0, *) {
-                                                        CellView($0).textSelection(.enabled)
-                                                } else {
-                                                        CellView($0)
-                                                }
+                                                CellView($0)
                                         }
                                 }
                         }
@@ -175,11 +183,7 @@ let content: String = """
 struct TonesTable: View {
         var body: some View {
                 List(content.components(separatedBy: .newlines), id: \.self) {
-                        if #available(iOS 15.0, *) {
-                                CellView($0).textSelection(.enabled)
-                        } else {
-                                CellView($0)
-                        }
+                        CellView($0)
                 }
                 .navigationBarTitle("Jyutping Tones", displayMode: .inline)
         }
