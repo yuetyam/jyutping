@@ -60,7 +60,12 @@ extension KeyView {
                         guard peekingText == nil else { return }
                         let text: String = keySeat.primary.text
                         if layout.isCantoneseMode {
-                                controller.inputText += text
+                                if text == "gw" && controller.arrangement == 2 {
+                                        let newInputText: String = controller.inputText + text
+                                        controller.inputText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
+                                } else {
+                                        controller.inputText += text
+                                }
                         } else {
                                 controller.insert(text)
                         }
