@@ -61,24 +61,29 @@ private struct CellView: View {
 
 struct InitialsTable: View {
 
-        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private func speak(_ text: String) {
-                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
-                synthesizer.speak(utterance)
-        }
+        @Environment(\.horizontalSizeClass) var horizontalSize
 
-        private let width: CGFloat = {
-                if UITraitCollection.current.userInterfaceIdiom == .pad {
-                        return 120
-                } else {
+        private var width: CGFloat {
+                guard UITraitCollection.current.userInterfaceIdiom == .pad else {
                         if #available(iOS 15.0, *) {
                                 return (UIScreen.main.bounds.width - 64) / 3.0
                         } else {
                                 return (UIScreen.main.bounds.width - 32) / 3.0
                         }
                 }
-        }()
+                if horizontalSize == .compact {
+                        return 90
+                } else {
+                        return 120
+                }
+        }
+
+        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        private func speak(_ text: String) {
+                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
+                synthesizer.speak(utterance)
+        }
 
         var body: some View {
                 List(content.components(separatedBy: .newlines), id: \.self) {
@@ -114,24 +119,29 @@ private let content: String = """
 
 struct FinalsTable: View {
 
-        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private func speak(_ text: String) {
-                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
-                synthesizer.speak(utterance)
-        }
+        @Environment(\.horizontalSizeClass) var horizontalSize
 
-        private let width: CGFloat = {
-                if UITraitCollection.current.userInterfaceIdiom == .pad {
-                        return 120
-                } else {
+        private var width: CGFloat {
+                guard UITraitCollection.current.userInterfaceIdiom == .pad else {
                         if #available(iOS 15.0, *) {
                                 return (UIScreen.main.bounds.width - 64) / 3.0
                         } else {
                                 return (UIScreen.main.bounds.width - 32) / 3.0
                         }
                 }
-        }()
+                if horizontalSize == .compact {
+                        return 100
+                } else {
+                        return 120
+                }
+        }
+
+        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        private func speak(_ text: String) {
+                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
+                synthesizer.speak(utterance)
+        }
 
         var body: some View {
                 List {

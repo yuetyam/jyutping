@@ -3,24 +3,29 @@ import AVFoundation
 
 struct TonesTable: View {
 
-        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private func speak(_ text: String) {
-                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
-                synthesizer.speak(utterance)
-        }
+        @Environment(\.horizontalSizeClass) var horizontalSize
 
-        private let width: CGFloat = {
-                if UITraitCollection.current.userInterfaceIdiom == .pad {
-                        return 120
-                } else {
+        private var width: CGFloat {
+                guard UITraitCollection.current.userInterfaceIdiom == .pad else {
                         if #available(iOS 15.0, *) {
                                 return (UIScreen.main.bounds.width - 64) / 4.0
                         } else {
                                 return (UIScreen.main.bounds.width - 32) / 4.0
                         }
                 }
-        }()
+                if horizontalSize == .compact {
+                        return 80
+                } else {
+                        return 120
+                }
+        }
+
+        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        private func speak(_ text: String) {
+                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
+                synthesizer.speak(utterance)
+        }
 
         var body: some View {
                 List(content.components(separatedBy: .newlines), id: \.self) {
