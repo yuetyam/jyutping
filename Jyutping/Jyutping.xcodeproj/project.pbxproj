@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		37290E94266F8FED00B96AD9 /* StrokeProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37290E93266F8FED00B96AD9 /* StrokeProvider */; };
+		3738EC002704CF9A00E75BDF /* TonesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3738EBFF2704CF9A00E75BDF /* TonesTable.swift */; };
 		373C0DD626766A2300EA52E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373C0DD526766A2300EA52E4 /* Images.xcassets */; };
 		373C0DD826771C9700EA52E4 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373C0DD726771C9700EA52E4 /* UIImageExtensions.swift */; };
 		3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F41B262FB65C00266086 /* AppDelegate.swift */; };
@@ -27,7 +28,7 @@
 		3759F488262FC27100266086 /* LinkSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F480262FC27100266086 /* LinkSafariView.swift */; };
 		3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F482262FC27100266086 /* ShareSheetView.swift */; };
 		3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F483262FC27100266086 /* EnhancedTextField.swift */; };
-		3759F492262FC2B600266086 /* JyutpingTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* JyutpingTables.swift */; };
+		3759F492262FC2B600266086 /* SyllablesTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* SyllablesTables.swift */; };
 		3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48E262FC2B600266086 /* AcknowledgementsView.swift */; };
 		3759F494262FC2B600266086 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48F262FC2B600266086 /* HomeView.swift */; };
 		3759F495262FC2B600266086 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F490262FC2B600266086 /* JyutpingView.swift */; };
@@ -118,6 +119,7 @@
 
 /* Begin PBXFileReference section */
 		37290E92266F8FD800B96AD9 /* StrokeProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StrokeProvider; path = ../Helpers/StrokeProvider; sourceTree = "<group>"; };
+		3738EBFF2704CF9A00E75BDF /* TonesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonesTable.swift; sourceTree = "<group>"; };
 		373C0DD526766A2300EA52E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		373C0DD726771C9700EA52E4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		3759F418262FB65C00266086 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,7 +154,7 @@
 		3759F480262FC27100266086 /* LinkSafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkSafariView.swift; sourceTree = "<group>"; };
 		3759F482262FC27100266086 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		3759F483262FC27100266086 /* EnhancedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
-		3759F48D262FC2B600266086 /* JyutpingTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingTables.swift; sourceTree = "<group>"; };
+		3759F48D262FC2B600266086 /* SyllablesTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllablesTables.swift; sourceTree = "<group>"; };
 		3759F48E262FC2B600266086 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		3759F48F262FC2B600266086 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3759F490262FC2B600266086 /* JyutpingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
@@ -454,7 +456,8 @@
 			children = (
 				3759F490262FC2B600266086 /* JyutpingView.swift */,
 				37718D1826F2E73800B68A5B /* JyutpingView_iOS14.swift */,
-				3759F48D262FC2B600266086 /* JyutpingTables.swift */,
+				3759F48D262FC2B600266086 /* SyllablesTables.swift */,
+				3738EBFF2704CF9A00E75BDF /* TonesTable.swift */,
 			);
 			path = Jyutping;
 			sourceTree = "<group>";
@@ -663,12 +666,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3738EC002704CF9A00E75BDF /* TonesTable.swift in Sources */,
 				3759F496262FC2B600266086 /* AboutView.swift in Sources */,
 				3759F494262FC2B600266086 /* HomeView.swift in Sources */,
 				3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */,
 				375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */,
 				3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */,
-				3759F492262FC2B600266086 /* JyutpingTables.swift in Sources */,
+				3759F492262FC2B600266086 /* SyllablesTables.swift in Sources */,
 				37718D1926F2E73800B68A5B /* JyutpingView_iOS14.swift in Sources */,
 				37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */,
 				3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */,
