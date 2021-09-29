@@ -146,7 +146,7 @@ struct HomeView_iOS14: View {
                                 }
                                 Section {
                                         Text("Can I use with external keyboards?").font(.headline)
-                                        Text("Unfortunately not. Due to system limitations, third-party keyboard apps can't communicate with external keyboards.").lineSpacing(6)
+                                        Text("Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.").lineSpacing(6)
                                 }
                         }
                         .listStyle(.insetGrouped)
