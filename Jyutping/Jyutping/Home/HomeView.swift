@@ -38,7 +38,7 @@ struct HomeView: View {
                                                 }
                                                 ForEach(jyutpings, id: \.self) { jyutping in
                                                         HStack {
-                                                                Text(verbatim: jyutping).font(.system(.body, design: .monospaced))
+                                                                Text(verbatim: jyutping)
                                                                 Spacer()
                                                                 Button(action: {
                                                                         speak(jyutping)
