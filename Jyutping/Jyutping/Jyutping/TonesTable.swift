@@ -40,7 +40,7 @@ private let content: String = """
 粉 fan2,35,陰上,2
 訓 fan3,33,陰去,3
 焚 fan4,11/21,陽平,4
-奮 fan5,23,陽上,5
+奮 fan5,13/23,陽上,5
 份 fan6,22,陽去,6
 忽 fat1,5,高陰入,1
 沷 fat3,3,低陰入,3
