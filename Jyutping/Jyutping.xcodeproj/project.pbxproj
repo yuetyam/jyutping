@@ -74,6 +74,7 @@
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 		37AF5C7D266E527000F5E017 /* PinyinProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37AF5C7C266E527000F5E017 /* PinyinProvider */; };
+		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
 		37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */; };
 		37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */; };
@@ -207,6 +208,7 @@
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		37AF5C7B266E519B00F5E017 /* PinyinProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PinyinProvider; path = ../Helpers/PinyinProvider; sourceTree = "<group>"; };
+		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
 		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
 		37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
 		37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView_iOS14.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 			children = (
 				3759F41B262FB65C00266086 /* AppDelegate.swift */,
 				3759F41F262FB65C00266086 /* ContentView.swift */,
+				37D154572706F5640002A24F /* Syllable2IPA.swift */,
 				37EDF18926F21C9D001A4F43 /* Home */,
 				37718D1726F2E5F700B68A5B /* Jyutping */,
 				37EDF18A26F22039001A4F43 /* About */,
@@ -679,6 +682,7 @@
 				3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */,
 				3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */,
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
+				37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */,
 				377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */,
 				3759F488262FC27100266086 /* LinkSafariView.swift in Sources */,
 				37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */,

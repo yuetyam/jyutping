@@ -38,8 +38,11 @@ struct HomeView_iOS15: View {
                                                         }
                                                 }
                                                 ForEach(jyutpings, id: \.self) { jyutping in
-                                                        HStack {
+                                                        HStack(spacing: 16) {
                                                                 Text(verbatim: jyutping)
+                                                                if rawCantonese.count == 1 {
+                                                                        Text(verbatim: Syllable2IPA.ipaText(jyutping)).foregroundColor(.secondary)
+                                                                }
                                                                 Spacer()
                                                                 Button(action: {
                                                                         speak(jyutping)
