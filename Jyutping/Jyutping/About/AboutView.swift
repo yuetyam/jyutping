@@ -24,7 +24,7 @@ struct AboutView: View {
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
-                                                EnhancedLabel("Source Code", icon: "number.circle", symbol: Image(systemName: "safari"))
+                                                EnhancedLabel("Source Code", icon: "chevron.left.slash.chevron.right", symbol: Image(systemName: "safari"))
                                         }
                                         .contextMenu {
                                                 Button(action: {

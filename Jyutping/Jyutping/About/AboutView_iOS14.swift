@@ -9,6 +9,14 @@ struct AboutView_iOS14: View {
                 return version + " (" + build + ")"
         }()
 
+        private let sourceCodeIconName: String = {
+                if #available(iOS 15.0, *) {
+                        return "chevron.left.forwardslash.chevron.right"
+                } else {
+                        return "chevron.left.slash.chevron.right"
+                }
+        }()
+
         var body: some View {
                 NavigationView {
                         List {
@@ -20,7 +28,7 @@ struct AboutView_iOS14: View {
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
-                                                EnhancedLabel("Source Code", icon: "number.circle", symbol: Image(systemName: "safari"))
+                                                EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: Image(systemName: "safari"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
