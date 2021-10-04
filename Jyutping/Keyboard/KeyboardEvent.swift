@@ -51,15 +51,4 @@ struct KeyElement: Hashable {
                 self.header = header
                 self.footer = footer
         }
-
-        static func == (lhs: KeyElement, rhs: KeyElement) -> Bool {
-                return lhs.text == rhs.text &&
-                        lhs.header == rhs.header &&
-                        lhs.footer == rhs.footer
-        }
-        func hash(into hasher: inout Hasher) {
-                hasher.combine(text)
-                hasher.combine(header)
-                hasher.combine(footer)
-        }
 }
