@@ -104,7 +104,7 @@ struct HomeView_iOS14: View {
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
                                                         .contextMenu {
-                                                                MenuCopyButton(content: tonesInputContent)
+                                                                MenuCopyButton(tonesInputContent)
                                                         }
                                         }
                                         Section {

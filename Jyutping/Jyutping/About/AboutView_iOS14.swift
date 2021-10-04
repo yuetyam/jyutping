@@ -23,7 +23,7 @@ struct AboutView_iOS14: View {
                                 Section {
                                         EnhancedLabel("Version", icon: "info.circle", message: Text(verbatim: versionString))
                                                 .contextMenu {
-                                                        MenuCopyButton(content: versionString)
+                                                        MenuCopyButton(versionString)
                                                 }
                                 }
                                 Section {

@@ -1,7 +1,13 @@
 import SwiftUI
 
 struct MenuCopyButton: View {
+
+        init(_ content: String) {
+                self.content = content
+        }
+
         let content: String
+
         var body: some View {
                 Button(action: {
                         UIPasteboard.general.string = content

@@ -19,7 +19,7 @@ struct AboutView: View {
                                                 Text(verbatim: versionString)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton(content: versionString)
+                                                MenuCopyButton(versionString)
                                         }
                                 }
                                 Section {
