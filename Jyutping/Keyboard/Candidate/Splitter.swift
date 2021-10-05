@@ -221,7 +221,7 @@ private static let syllables: Set<String> = [
 "leu", "li", "mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
 "ngam", "ngang", "nge", "ngit", "ngot", "nit", "noek", "nuk", "ong",
 "paat", "pau", "pe", "peng", "pet", "poi", "saak", "tap", "teot", "ti",
-"toe", "tuk", "wak", "wet", "wi", "zem", "zep", "zoe", "zoet",
+"toe", "tuk", "wak", "wet", "wi", "zep", "zoe", "zoet",
 
 "coei", "coen", "coet", "doei", "doen", "doet", "goei", "hoei", "joei", "joen",
 "koei", "loei", "loen", "loet", "noei", "noet", "soei", "soen", "soet", "toei",
