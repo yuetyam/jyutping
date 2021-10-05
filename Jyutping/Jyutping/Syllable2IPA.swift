@@ -1,17 +1,22 @@
 /// Jyutping syllable to IPA
 struct Syllable2IPA {
 
-        static func ipa(_ syllable: String) -> String {
-                guard syllable != "?" else { return String() }
-                return ipaWoTone(syllable) + ipaTone(syllable)
+        static func rawIPA(_ syllable: String) -> String {
+                guard syllable != "?" else { return syllable }
+                return IPASyllable(syllable) + IPATone(syllable)
         }
 
-        static func ipaText(_ syllable: String) -> String {
-                guard syllable != "?" else { return String() }
-                return "[ " + ipaWoTone(syllable) + " " + ipaTone(syllable) + " ]"
+        static func IPA(_ syllable: String) -> String {
+                guard syllable != "?" else { return "[?]" }
+                return "[" + IPASyllable(syllable) + IPATone(syllable) + "]"
         }
 
-        static func ipaTone(_ syllable: String) -> String {
+        static func IPAText(_ syllable: String) -> String {
+                guard syllable != "?" else { return "[ ? ]" }
+                return "[ " + IPASyllable(syllable) + " " + IPATone(syllable) + " ]"
+        }
+
+        static func IPATone(_ syllable: String) -> String {
                 guard let tone = syllable.last else { return String() }
                 switch tone {
                 case "1":
@@ -31,7 +36,7 @@ struct Syllable2IPA {
                 }
         }
 
-        static func ipaWoTone(_ syllable: String) -> String {
+        static func IPASyllable(_ syllable: String) -> String {
                 let withoutTone = syllable.dropLast()
                 guard !withoutTone.isEmpty else { return String() }
 

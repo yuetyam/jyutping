@@ -42,7 +42,7 @@ struct HomeView_iOS15: View {
                                                         HStack(spacing: 16) {
                                                                 Text(verbatim: romanization)
                                                                 if cantonese.count == 1 {
-                                                                        Text(verbatim: Syllable2IPA.ipaText(romanization)).foregroundColor(.secondary)
+                                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
                                                                 }
                                                                 Spacer()
                                                                 Button(action: {

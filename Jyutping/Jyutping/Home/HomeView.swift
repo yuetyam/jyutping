@@ -34,7 +34,7 @@ struct HomeView: View {
                                                         HStack(spacing: 16) {
                                                                 Text(verbatim: jyutping)
                                                                 if rawCantonese.count == 1 {
-                                                                        Text(verbatim: Syllable2IPA.ipaText(jyutping)).foregroundColor(.secondary)
+                                                                        Text(verbatim: Syllable2IPA.IPAText(jyutping)).foregroundColor(.secondary)
                                                                 }
                                                                 Spacer()
                                                                 Button(action: {
