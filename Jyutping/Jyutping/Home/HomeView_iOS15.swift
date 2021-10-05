@@ -1,15 +1,5 @@
 import SwiftUI
-import AVFoundation
 import JyutpingProvider
-
-struct Speaker {
-        private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        static func speak(_ text: String) {
-                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
-                synthesizer.speak(utterance)
-        }
-}
 
 @available(iOS 15.0, *)
 struct HomeView_iOS15: View {
