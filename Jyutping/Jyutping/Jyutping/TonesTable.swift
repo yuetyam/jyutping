@@ -20,16 +20,9 @@ struct TonesTable: View {
                 }
         }
 
-        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private func speak(_ text: String) {
-                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
-                synthesizer.speak(utterance)
-        }
-
         var body: some View {
                 List(content.components(separatedBy: .newlines), id: \.self) {
-                        ToneCell($0, width: width, speak: speak(_:))
+                        ToneCell($0, width: width)
                 }
                 .navigationBarTitle("Jyutping Tones", displayMode: .inline)
         }
@@ -58,23 +51,21 @@ struct TonesTable_Previews: PreviewProvider {
 
 private struct ToneCell: View {
 
-        init(_ content: String, width: CGFloat, speak: @escaping (String) -> Void) {
+        init(_ content: String, width: CGFloat) {
                 let parts: [String] = content.components(separatedBy: ",")
                 self.components = parts
                 self.width = width
                 self.syllable = String(parts[0].dropFirst(2))
-                self.speak = speak
         }
 
         private let components: [String]
         private let width: CGFloat
         private let syllable: String
-        private let speak: (String) -> Void
 
         var body: some View {
                 Button(action: {
                         if !syllable.isEmpty {
-                                speak(syllable)
+                                Speaker.speak(syllable)
                         }
                 }) {
                         if #available(iOS 15.0, *) {
