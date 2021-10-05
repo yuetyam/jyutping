@@ -24,17 +24,9 @@ struct JyutpingView: View {
                                         }
                                 }
                                 if !inputText.isEmpty && jyutpings.isEmpty {
-                                        VStack(spacing: 8) {
-                                                HStack {
-                                                        Text("No Results.")
-                                                        Spacer()
-                                                }
-                                                HStack {
-                                                        Text("Common Cantonese words only.")
-                                                                .font(.footnote)
-                                                                .foregroundColor(.secondary)
-                                                        Spacer()
-                                                }
+                                        Section {
+                                                Text("No Results.")
+                                                Text("Common Cantonese words only.").font(.footnote)
                                         }
                                 } else if !inputText.isEmpty {
                                         Section {

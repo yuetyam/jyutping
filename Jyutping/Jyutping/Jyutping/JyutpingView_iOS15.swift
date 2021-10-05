@@ -1,62 +1,64 @@
 import SwiftUI
-import AVFoundation
 import JyutpingProvider
 
-@available(iOS 14.0, *)
-struct JyutpingView_iOS14: View {
+@available(iOS 15.0, *)
+struct JyutpingView_iOS15: View {
 
-        private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: "")
         @State private var inputText: String = ""
-
-        private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
-        private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
+        @State private var submittedText: String = ""
+        @State private var cantonese: String = ""
+        @State private var pronunciations: [String] = []
 
         var body: some View {
                 NavigationView {
                         List {
                                 Section {
-                                        HStack {
-                                                Image(systemName: "magnifyingglass").opacity(0.5)
-                                                EnhancedTextField(placeholder: placeholder,
-                                                                  text: $inputText,
-                                                                  returnKey: .search,
-                                                                  autocorrection: .no,
-                                                                  autocapitalization: UITextAutocapitalizationType.none)
-                                        }
+                                        TextField("Lookup Jyutping for Cantonese", text: $inputText)
+                                                .autocapitalization(.none)
+                                                .disableAutocorrection(true)
+                                                .onSubmit {
+                                                        submittedText = inputText
+                                                        let newInput: String = inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
+                                                        if cantonese != newInput {
+                                                                cantonese = newInput
+                                                                pronunciations = newInput.isEmpty ? [] : JyutpingProvider.search(for: newInput)
+                                                        }
+                                                }
                                 }
-                                if !inputText.isEmpty && jyutpings.isEmpty {
+                                if !submittedText.isEmpty && pronunciations.isEmpty {
                                         Section {
                                                 Text("No Results.")
                                                 Text("Common Cantonese words only.").font(.footnote)
                                         }
-                                } else if !inputText.isEmpty {
+                                } else if !submittedText.isEmpty {
                                         Section {
                                                 HStack {
-                                                        Text(verbatim: rawCantonese)
+                                                        Text(verbatim: cantonese)
                                                         Spacer()
                                                         Button(action: {
-                                                                Speaker.speak(rawCantonese)
+                                                                Speaker.speak(cantonese)
                                                         }) {
                                                                 Image(systemName: "speaker.wave.2")
                                                         }
                                                 }
-                                                ForEach(jyutpings, id: \.self) { jyutping in
+                                                ForEach(pronunciations, id: \.self) { romanization in
                                                         HStack(spacing: 16) {
-                                                                Text(verbatim: jyutping)
-                                                                if rawCantonese.count == 1 {
-                                                                        Text(verbatim: Syllable2IPA.ipaText(jyutping)).foregroundColor(.secondary)
+                                                                Text(verbatim: romanization)
+                                                                if cantonese.count == 1 {
+                                                                        Text(verbatim: Syllable2IPA.ipaText(romanization)).foregroundColor(.secondary)
                                                                 }
                                                                 Spacer()
                                                                 Button(action: {
-                                                                        Speaker.speak(jyutping)
+                                                                        Speaker.speak(romanization)
                                                                 }) {
                                                                         Image(systemName: "speaker.wave.2")
                                                                 }
                                                         }
                                                 }
                                         }
+                                        .textSelection(.enabled)
                                 }
-                                
+
                                 Section {
                                         TableLinksView()
                                 }
@@ -80,9 +82,15 @@ struct JyutpingView_iOS14: View {
                                         Text("Cantonese Resources").textCase(.none)
                                 }
                         }
-                        .listStyle(.insetGrouped)
                         .navigationTitle("Jyutping")
                 }
                 .navigationViewStyle(.stack)
+        }
+}
+
+@available(iOS 15.0, *)
+struct JyutpingView_iOS15_Previews: PreviewProvider {
+        static var previews: some View {
+                JyutpingView_iOS15()
         }
 }
