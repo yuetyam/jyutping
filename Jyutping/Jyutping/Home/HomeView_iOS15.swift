@@ -2,19 +2,21 @@ import SwiftUI
 import AVFoundation
 import JyutpingProvider
 
-@available(iOS 15.0, *)
-struct HomeView_iOS15: View {
-
-        private let placeholder: String = NSLocalizedString("Text Field", comment: "")
-        @State private var inputText: String = ""
-        private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
-        private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
-        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private func speak(_ text: String) {
+struct Speaker {
+        private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        static func speak(_ text: String) {
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                 utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
                 synthesizer.speak(utterance)
         }
+}
+
+@available(iOS 15.0, *)
+struct HomeView_iOS15: View {
+
+        @State private var inputText: String = ""
+        @State private var cantonese: String = ""
+        @State private var pronunciations: [String] = []
 
         // Tones Input Section
         private let dotText: Text = Text(verbatim: "•")
@@ -24,28 +26,35 @@ struct HomeView_iOS15: View {
                 NavigationView {
                         List {
                                 Section {
-                                        EnhancedTextField(placeholder: placeholder, text: $inputText)
+                                        TextField("Text Field", text: $inputText)
+                                                .onSubmit {
+                                                        let newInput: String = inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
+                                                        if cantonese != newInput {
+                                                                cantonese = newInput
+                                                                pronunciations = newInput.isEmpty ? [] : JyutpingProvider.search(for: newInput)
+                                                        }
+                                                }
                                 }
-                                if (!inputText.isEmpty) && (!jyutpings.isEmpty) {
+                                if !cantonese.isEmpty && !pronunciations.isEmpty {
                                         Section {
                                                 HStack {
-                                                        Text(verbatim: rawCantonese)
+                                                        Text(verbatim: cantonese)
                                                         Spacer()
                                                         Button(action: {
-                                                                speak(rawCantonese)
+                                                                Speaker.speak(cantonese)
                                                         }) {
                                                                 Image(systemName: "speaker.wave.2")
                                                         }
                                                 }
-                                                ForEach(jyutpings, id: \.self) { jyutping in
+                                                ForEach(pronunciations, id: \.self) { romanization in
                                                         HStack(spacing: 16) {
-                                                                Text(verbatim: jyutping)
-                                                                if rawCantonese.count == 1 {
-                                                                        Text(verbatim: Syllable2IPA.ipaText(jyutping)).foregroundColor(.secondary)
+                                                                Text(verbatim: romanization)
+                                                                if cantonese.count == 1 {
+                                                                        Text(verbatim: Syllable2IPA.ipaText(romanization)).foregroundColor(.secondary)
                                                                 }
                                                                 Spacer()
                                                                 Button(action: {
-                                                                        speak(jyutping)
+                                                                        Speaker.speak(romanization)
                                                                 }) {
                                                                         Image(systemName: "speaker.wave.2")
                                                                 }
@@ -95,7 +104,7 @@ struct HomeView_iOS15: View {
                                         Section {
                                                 Text("Tones Input").font(.headline)
                                                 Text(tonesInputContent)
-                                                        .font(.system(.body, design: .monospaced))
+                                                        .font(.body.monospaced())
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
                                                         .contextMenu {
@@ -116,7 +125,7 @@ struct HomeView_iOS15: View {
                                                 d = 點(dim)
                                                 z = 折(zit)
                                                 """)
-                                                        .font(.system(.body, design: .monospaced))
+                                                        .font(.body.monospaced())
                                                         .lineSpacing(6)
                                                         .contextMenu {
                                                                 Button(action: {
