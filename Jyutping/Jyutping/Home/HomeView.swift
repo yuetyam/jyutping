@@ -8,12 +8,6 @@ struct HomeView: View {
         @State private var inputText: String = ""
         private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
-        private let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private func speak(_ text: String) {
-                let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
-                synthesizer.speak(utterance)
-        }
 
         // Tones Input Section
         private let dotText: Text = Text(verbatim: "•")
@@ -25,13 +19,13 @@ struct HomeView: View {
                                 Section {
                                         EnhancedTextField(placeholder: placeholder, text: $inputText)
                                 }
-                                if (!inputText.isEmpty) && (!jyutpings.isEmpty) {
+                                if !inputText.isEmpty && !jyutpings.isEmpty {
                                         Section {
                                                 HStack {
                                                         Text(verbatim: rawCantonese)
                                                         Spacer()
                                                         Button(action: {
-                                                                speak(rawCantonese)
+                                                                Speaker.speak(rawCantonese)
                                                         }) {
                                                                 Image(systemName: "speaker.2")
                                                         }
@@ -44,7 +38,7 @@ struct HomeView: View {
                                                                 }
                                                                 Spacer()
                                                                 Button(action: {
-                                                                        speak(jyutping)
+                                                                        Speaker.speak(jyutping)
                                                                 }) {
                                                                         Image(systemName: "speaker.2")
                                                                 }
