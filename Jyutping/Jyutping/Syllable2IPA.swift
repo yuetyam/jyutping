@@ -46,28 +46,28 @@ struct Syllable2IPA {
                 case "ng":
                         return "ŋ̩"
                 case let text where text.hasPrefix("ng"):
-                        let ipaInitial: String = "ŋ"
+                        let IPAInitial: String = "ŋ"
                         let final: String = String(text.dropFirst(2))
-                        let ipaFinal: String = FinalsMap[final] ?? "?"
-                        return ipaInitial + ipaFinal
+                        let IPAFinal: String = FinalsMap[final] ?? "?"
+                        return IPAInitial + IPAFinal
                 case let text where text.hasPrefix("gw"):
-                        let ipaInitial: String = "kʷ"
+                        let IPAInitial: String = "kʷ"
                         let final: String = String(text.dropFirst(2))
-                        let ipaFinal: String = FinalsMap[final] ?? "?"
-                        return ipaInitial + ipaFinal
+                        let IPAFinal: String = FinalsMap[final] ?? "?"
+                        return IPAInitial + IPAFinal
                 case let text where text.hasPrefix("kw"):
-                        let ipaInitial: String = "kʷʰ"
+                        let IPAInitial: String = "kʷʰ"
                         let final: String = String(text.dropFirst(2))
-                        let ipaFinal: String = FinalsMap[final] ?? "?"
-                        return ipaInitial + ipaFinal
+                        let IPAFinal: String = FinalsMap[final] ?? "?"
+                        return IPAInitial + IPAFinal
                 default:
-                        if let ipaInitial: String = InitialsMap[withoutTone.first!] {
+                        if let IPAInitial: String = InitialsMap[withoutTone.first!] {
                                 let final: String = String(withoutTone.dropFirst())
-                                let ipaFinal: String = FinalsMap[final] ?? "?"
-                                return ipaInitial + ipaFinal
+                                let IPAFinal: String = FinalsMap[final] ?? "?"
+                                return IPAInitial + IPAFinal
                         } else {
-                                let ipaText: String = FinalsMap[String(withoutTone)] ?? "?"
-                                return ipaText
+                                let IPAFinal: String = FinalsMap[String(withoutTone)] ?? "?"
+                                return IPAFinal
                         }
                 }
         }
