@@ -17,6 +17,8 @@ struct HomeView_iOS15: View {
                         List {
                                 Section {
                                         TextField("Text Field", text: $inputText)
+                                                .autocapitalization(.none)
+                                                .disableAutocorrection(true)
                                                 .onSubmit {
                                                         let newInput: String = inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
                                                         if cantonese != newInput {
