@@ -21,8 +21,30 @@ struct TonesTable: View {
         }
 
         var body: some View {
-                List(content.components(separatedBy: .newlines), id: \.self) {
-                        ToneCell($0, width: width)
+                List {
+                        Section {
+                                ForEach(content.components(separatedBy: .newlines), id: \.self) {
+                                        ToneCell($0, width: width)
+                                }
+                        }
+                        if #available(iOS 15.0, *) {
+                                if !(Speaker.isLanguagesEnabled) {
+                                        Section {
+                                                Button(action: {
+                                                        guard let url = URL(string: "App-Prefs:root=General&path=INTERNATIONAL/DEVICE_LANGUAGE") else { return }
+                                                        UIApplication.shared.open(url)
+                                                }) {
+                                                        HStack {
+                                                                Spacer()
+                                                                Text("Go to **Settings**")
+                                                                Spacer()
+                                                        }
+                                                }
+                                                Text("爲保證機器發音質素，推薦先到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言")
+                                        }
+                                        .font(.callout)
+                                }
+                        }
                 }
                 .navigationBarTitle("Jyutping Tones", displayMode: .inline)
         }

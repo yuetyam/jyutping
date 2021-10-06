@@ -65,6 +65,7 @@ Chinese (Hong Kong)
 "Jyutping Initials" = "粵拼聲母表";
 "Jyutping Finals" = "粵拼韻母表";
 "Jyutping Tones" = "粵拼聲調表";
+"爲保證機器發音質素，推薦先到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言" = "爲保證機器發音質素，推薦先到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言";
 
 "Search on other places (websites)" = "其它可供檢索嘅網站";
 "Jyutping Resources" = "粵拼資源網站";
