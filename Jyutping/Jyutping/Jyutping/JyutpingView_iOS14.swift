@@ -31,25 +31,25 @@ struct JyutpingView_iOS14: View {
                                         }
                                 } else if !inputText.isEmpty {
                                         Section {
-                                                HStack {
-                                                        Text(verbatim: rawCantonese)
-                                                        Spacer()
-                                                        Button(action: {
-                                                                Speaker.speak(rawCantonese)
-                                                        }) {
+                                                Button {
+                                                        Speaker.speak(rawCantonese)
+                                                } label: {
+                                                        HStack {
+                                                                Text(verbatim: rawCantonese).foregroundColor(.primary)
+                                                                Spacer()
                                                                 Image.speaker
                                                         }
                                                 }
                                                 ForEach(jyutpings, id: \.self) { jyutping in
-                                                        HStack(spacing: 16) {
-                                                                Text(verbatim: jyutping)
-                                                                if rawCantonese.count == 1 {
-                                                                        Text(verbatim: Syllable2IPA.IPAText(jyutping)).foregroundColor(.secondary)
-                                                                }
-                                                                Spacer()
-                                                                Button(action: {
-                                                                        Speaker.speak(jyutping)
-                                                                }) {
+                                                        Button {
+                                                                Speaker.speak(jyutping)
+                                                        } label: {
+                                                                HStack(spacing: 16) {
+                                                                        Text(verbatim: jyutping).foregroundColor(.primary)
+                                                                        if rawCantonese.count == 1 {
+                                                                                Text(verbatim: Syllable2IPA.IPAText(jyutping)).foregroundColor(.secondary)
+                                                                        }
+                                                                        Spacer()
                                                                         Image.speaker
                                                                 }
                                                         }
