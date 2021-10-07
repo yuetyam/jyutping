@@ -95,7 +95,7 @@ private struct ToneCell: View {
                                         HStack(spacing: 8) {
                                                 Text(verbatim: components[0])
                                                 if !syllable.isEmpty {
-                                                        Image(systemName: "speaker.wave.2").foregroundColor(.blue)
+                                                        Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
                                         .frame(width: width + 20, alignment: .leading)
@@ -111,7 +111,7 @@ private struct ToneCell: View {
                                         HStack(spacing: 8) {
                                                 Text(verbatim: components[0])
                                                 if !syllable.isEmpty {
-                                                        Image(systemName: "speaker.2").foregroundColor(.blue)
+                                                        Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
                                         .frame(width: width + 20, alignment: .leading)

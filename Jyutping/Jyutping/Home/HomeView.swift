@@ -27,7 +27,7 @@ struct HomeView: View {
                                                         Button(action: {
                                                                 Speaker.speak(rawCantonese)
                                                         }) {
-                                                                Image(systemName: "speaker.2")
+                                                                Image.speaker
                                                         }
                                                 }
                                                 ForEach(jyutpings, id: \.self) { jyutping in
@@ -40,7 +40,7 @@ struct HomeView: View {
                                                                 Button(action: {
                                                                         Speaker.speak(jyutping)
                                                                 }) {
-                                                                        Image(systemName: "speaker.2")
+                                                                        Image.speaker
                                                                 }
                                                         }
                                                 }

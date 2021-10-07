@@ -38,7 +38,7 @@ struct JyutpingView_iOS15: View {
                                                         Button(action: {
                                                                 Speaker.speak(cantonese)
                                                         }) {
-                                                                Image(systemName: "speaker.wave.2")
+                                                                Image.speaker
                                                         }
                                                 }
                                                 ForEach(pronunciations, id: \.self) { romanization in
@@ -51,7 +51,7 @@ struct JyutpingView_iOS15: View {
                                                                 Button(action: {
                                                                         Speaker.speak(romanization)
                                                                 }) {
-                                                                        Image(systemName: "speaker.wave.2")
+                                                                        Image.speaker
                                                                 }
                                                         }
                                                 }

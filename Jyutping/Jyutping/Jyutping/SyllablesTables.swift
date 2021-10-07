@@ -25,7 +25,7 @@ private struct CellView: View {
                                         HStack(spacing: 8) {
                                                 Text(components[0])
                                                 if !syllable.isEmpty {
-                                                        Image(systemName: "speaker.wave.2").foregroundColor(.blue)
+                                                        Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
                                         .frame(width: width + 25, alignment: .leading)
@@ -41,7 +41,7 @@ private struct CellView: View {
                                         HStack(spacing: 8) {
                                                 Text(components[0])
                                                 if !syllable.isEmpty {
-                                                        Image(systemName: "speaker.2").foregroundColor(.blue)
+                                                        Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
                                         .frame(width: width + 25, alignment: .leading)
