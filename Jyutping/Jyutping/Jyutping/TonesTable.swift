@@ -59,7 +59,7 @@ private let content: String = """
 份 fan6,22,陽去,6
 忽 fat1,5,高陰入,1
 沷 fat3,3,低陰入,3
-佛 fat6,2,陽入,6
+罰 fat6,2,陽入,6
 """
 }
 
