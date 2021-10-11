@@ -7,7 +7,7 @@ struct JyutpingView: View {
         private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: .empty)
         @State private var inputText: String = .empty
 
-        private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
+        private var rawCantonese: String { inputText.filtered() }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
 
         var body: some View {

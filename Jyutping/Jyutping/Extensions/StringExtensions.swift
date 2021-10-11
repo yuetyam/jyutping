@@ -2,12 +2,18 @@ extension String {
 
         /// Returns a new String made by removing `.whitespacesAndNewlines` from both ends of the String.
         /// - Returns: A new String made by removing `.whitespacesAndNewlines` from both ends of the String.
-        func trimming() -> String {
+        func trimmed() -> String {
                 return trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
         /// aka. `String.init()`
         static let empty: String = ""
+
+        /// aka. `removedIrrelevancies()`
+        /// - Returns: A new String made by removing irrelevant characters.
+        func filtered() -> String {
+                return filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
+        }
 }
 
 

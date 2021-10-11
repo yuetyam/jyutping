@@ -17,7 +17,7 @@ struct Syllable2IPA {
         }
 
         static func IPATone(_ syllable: String) -> String {
-                guard let tone = syllable.last else { return String() }
+                guard let tone = syllable.last else { return .empty }
                 switch tone {
                 case "1":
                         return "˥"
@@ -32,13 +32,13 @@ struct Syllable2IPA {
                 case "6":
                         return "˨"
                 default:
-                        return String()
+                        return .empty
                 }
         }
 
         static func IPASyllable(_ syllable: String) -> String {
                 let withoutTone = syllable.dropLast()
-                guard !withoutTone.isEmpty else { return String() }
+                guard !withoutTone.isEmpty else { return .empty }
 
                 switch withoutTone {
                 case "m":

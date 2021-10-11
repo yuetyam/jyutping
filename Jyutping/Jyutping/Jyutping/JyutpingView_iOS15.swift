@@ -18,7 +18,7 @@ struct JyutpingView_iOS15: View {
                                                 .disableAutocorrection(true)
                                                 .onSubmit {
                                                         submittedText = inputText
-                                                        let newInput: String = inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
+                                                        let newInput: String = inputText.filtered()
                                                         if cantonese != newInput {
                                                                 cantonese = newInput
                                                                 pronunciations = newInput.isEmpty ? [] : JyutpingProvider.search(for: newInput)
