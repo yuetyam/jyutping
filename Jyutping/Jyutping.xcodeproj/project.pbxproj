@@ -79,6 +79,7 @@
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 		37AF5C7D266E527000F5E017 /* PinyinProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37AF5C7C266E527000F5E017 /* PinyinProvider */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
+		37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E234ED271466B8005825A2 /* StringExtensions.swift */; };
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
 		37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */; };
 		37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */; };
@@ -217,6 +218,7 @@
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		37AF5C7B266E519B00F5E017 /* PinyinProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PinyinProvider; path = ../Helpers/PinyinProvider; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
+		37E234ED271466B8005825A2 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
 		37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
 		37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView_iOS14.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				37718D1726F2E5F700B68A5B /* Jyutping */,
 				37EDF18A26F22039001A4F43 /* About */,
 				3759F47C262FC24800266086 /* ViewComponents */,
+				37E234EC2714669A005825A2 /* Extensions */,
 				3759F421262FB65D00266086 /* Assets.xcassets */,
 				3759F426262FB65D00266086 /* LaunchScreen.storyboard */,
 				3759F429262FB65D00266086 /* Info.plist */,
@@ -380,7 +383,6 @@
 				3759F47F262FC27100266086 /* SafariView.swift */,
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
 				377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */,
-				377B86FA270F278B0065CBEF /* ImageExtensions.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -475,6 +477,15 @@
 				3738EBFF2704CF9A00E75BDF /* TonesTable.swift */,
 			);
 			path = Jyutping;
+			sourceTree = "<group>";
+		};
+		37E234EC2714669A005825A2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				37E234ED271466B8005825A2 /* StringExtensions.swift */,
+				377B86FA270F278B0065CBEF /* ImageExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		37EDF18926F21C9D001A4F43 /* Home */ = {
@@ -703,6 +714,7 @@
 				37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */,
 				3759F495262FC2B600266086 /* JyutpingView.swift in Sources */,
 				378FEA44270C14B200153488 /* Speaker.swift in Sources */,
+				37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */,
 				37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */,
 				3759F420262FB65C00266086 /* ContentView.swift in Sources */,
 			);
