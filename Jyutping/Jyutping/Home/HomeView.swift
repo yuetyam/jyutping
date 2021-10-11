@@ -4,14 +4,14 @@ import JyutpingProvider
 
 struct HomeView: View {
 
-        private let placeholder: String = NSLocalizedString("Text Field", comment: "")
-        @State private var inputText: String = ""
+        private let placeholder: String = NSLocalizedString("Text Field", comment: .empty)
+        @State private var inputText: String = .empty
         private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
 
         // Tones Input Section
         private let dotText: Text = Text(verbatim: "•")
-        private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: "")
+        private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: .empty)
 
         var body: some View {
                 NavigationView {

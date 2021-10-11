@@ -4,9 +4,9 @@ import JyutpingProvider
 @available(iOS 15.0, *)
 struct JyutpingView_iOS15: View {
 
-        @State private var inputText: String = ""
-        @State private var submittedText: String = ""
-        @State private var cantonese: String = ""
+        @State private var inputText: String = .empty
+        @State private var submittedText: String = .empty
+        @State private var cantonese: String = .empty
         @State private var pronunciations: [String] = []
 
         var body: some View {

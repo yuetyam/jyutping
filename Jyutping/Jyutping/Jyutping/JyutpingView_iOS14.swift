@@ -5,8 +5,8 @@ import JyutpingProvider
 @available(iOS 14.0, *)
 struct JyutpingView_iOS14: View {
 
-        private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: "")
-        @State private var inputText: String = ""
+        private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: .empty)
+        @State private var inputText: String = .empty
 
         private var rawCantonese: String { inputText.filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) }) }
         private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }

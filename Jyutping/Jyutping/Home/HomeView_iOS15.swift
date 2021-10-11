@@ -4,13 +4,13 @@ import JyutpingProvider
 @available(iOS 15.0, *)
 struct HomeView_iOS15: View {
 
-        @State private var inputText: String = ""
-        @State private var cantonese: String = ""
+        @State private var inputText: String = .empty
+        @State private var cantonese: String = .empty
         @State private var pronunciations: [String] = []
 
         // Tones Input Section
         private let dotText: Text = Text(verbatim: "•")
-        private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: "")
+        private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: .empty)
 
         var body: some View {
                 NavigationView {

@@ -26,3 +26,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
         }
 }
+
+
+extension String {
+
+        /// aka. `String.init()`
+        static let empty: String = ""
+}
