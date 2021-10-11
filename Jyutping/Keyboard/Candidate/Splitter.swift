@@ -14,7 +14,7 @@ struct Splitter {
                 if !unit.isEmpty {
                         blocks.append(unit)
                 }
-                let raw: String = text.removeTones()
+                let raw: String = text.removedTones()
                 return (text, raw, tones, blocks)
         }
         static func engineSplit(_ text: String) -> [String] {

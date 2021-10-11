@@ -124,7 +124,7 @@ struct Engine {
                         let firstSyllable: String = sequences.first?.first ?? "X"
                         let filtered: [Candidate] = candidates.filter { candidate in
                                 let firstJyutping: String = candidate.jyutping.components(separatedBy: " ").first ?? "Y"
-                                return firstSyllable == firstJyutping.removeTones()
+                                return firstSyllable == firstJyutping.removedTones()
                         }
                         return filtered
                 }()
@@ -164,7 +164,7 @@ struct Engine {
                         let firstSyllable: String = sequences.first?.first ?? "X"
                         let filtered: [Candidate] = candidates.filter { candidate in
                                 let firstJyutping: String = candidate.jyutping.components(separatedBy: " ").first ?? "Y"
-                                return firstSyllable == firstJyutping.removeTones()
+                                return firstSyllable == firstJyutping.removedTones()
                         }
                         return filtered
                 }()
@@ -236,7 +236,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
-                let ping: String = hasTones ? text.removeTones() : text
+                let ping: String = hasTones ? text.removedTones() : text
                 let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
@@ -257,7 +257,7 @@ private extension Engine {
                 var candidates: [Candidate] = []
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
-                let ping: String = hasTones ? text.removeTones() : text
+                let ping: String = hasTones ? text.removedTones() : text
                 let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
@@ -278,7 +278,7 @@ private extension Engine {
                 var rowCandidates: [RowCandidate] = []
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
-                let ping: String = hasTones ? text.removeTones() : text
+                let ping: String = hasTones ? text.removedTones() : text
                 let queryString = "SELECT rowid, word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
