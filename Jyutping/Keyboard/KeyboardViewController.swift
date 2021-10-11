@@ -321,10 +321,10 @@ final class KeyboardViewController: UIInputViewController {
         private func imeSuggest() {
                 let lexiconCandidates: [Candidate] = userLexicon.suggest(for: processingText)
                 let engineCandidates: [Candidate] = {
-                        let normal: [Candidate] = engine.suggest(for: processingText, schemes: schemes.deduplicated())
+                        let normal: [Candidate] = engine.suggest(for: processingText, schemes: schemes.uniqued())
                         if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
                                 let droppedSeparator: String = String(processingText.dropLast())
-                                let newSchemes: [[String]] = Splitter.split(droppedSeparator).deduplicated().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
+                                let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
                                 return engine.suggest(for: droppedSeparator, schemes: newSchemes)
                         } else {
                                 return normal
@@ -335,13 +335,13 @@ final class KeyboardViewController: UIInputViewController {
         }
         private func push(_ origin: [Candidate]) {
                 if logogram < 2 {
-                        candidates = origin.deduplicated()
+                        candidates = origin.uniqued()
                 } else if converter == nil {
-                        candidates = origin.deduplicated()
+                        candidates = origin.uniqued()
                         updateConverter()
                 } else {
                         let converted: [Candidate] = origin.map { Candidate(text: converter!.convert($0.text), jyutping: $0.jyutping, input: $0.input, lexiconText: $0.lexiconText) }
-                        candidates = converted.deduplicated()
+                        candidates = converted.uniqued()
                 }
         }
         private(set) lazy var candidates: [Candidate] = [] {
@@ -584,7 +584,7 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? ""
         func updateFrequentEmojis(latest emoji: String) {
                 let combined: String = emoji + frequentEmojis
-                let uniqued: [String] = combined.map({ String($0) }).deduplicated()
+                let uniqued: [String] = combined.map({ String($0) }).uniqued()
                 let updated: [String] = uniqued.count < 31 ? uniqued : uniqued.dropLast(uniqued.count - 30)
                 frequentEmojis = updated.joined()
                 UserDefaults.standard.set(frequentEmojis, forKey: "emoji_frequent")
