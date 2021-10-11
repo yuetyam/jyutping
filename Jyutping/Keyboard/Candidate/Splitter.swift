@@ -179,7 +179,7 @@ private static let syllables: Set<String> = [
 "nap", "zoek", "bo", "luk", "baat", "sek", "ngoi", "bui", "doi", "dung",
 "tou", "cat", "hung", "daam", "caat", "jin", "han", "kan", "taan", "hak",
 "zang", "gui", "juk", "ning", "saan", "fu", "caa", "caai", "zap", "kaau",
-"hng", "ma", "miu", "faat", "wun", "jit", "sat", "le", "kap", "lyun",
+"ma", "miu", "faat", "wun", "jit", "sat", "le", "kap", "lyun",
 "diu", "fo", "lim", "tek", "caan", "cau", "dam", "zeon", "faa", "sou",
 "zip", "leoi", "hon", "ngok", "koek", "bing", "beng", "caau", "zaam",
 "ngaa", "waai", "teoi", "baau", "hyut", "jai", "tong", "gwaa", "lat",
@@ -204,7 +204,7 @@ private static let syllables: Set<String> = [
 "fut", "nik", "kek", "lit", "ban", "pan", "bung", "hip", "laat", "sip",
 "cam", "leot", "seot", "kwaang", "mang", "kuk", "cik", "haang", "mak",
 "ang", "zeng", "loek", "gwaat", "maang", "hat", "bak", "waang", "pit",
-"hm", "but", "hin", "ngai", "jaak", "goeng", "dan", "gwang", "ngon",
+"but", "hin", "ngai", "jaak", "goeng", "dan", "gwang", "ngon",
 "ke", "lip", "dat", "fang", "fing", "we", "coek", "lyut", "fau", "deon",
 "tyut", "kong", "put", "soek", "cuk", "kwaa", "kwai", "goe", "dek", "pat",
 "bang", "kut", "ou", "kaai", "hoe", "seng", "buk", "gwaak", "hit", "saau",
@@ -212,25 +212,27 @@ private static let syllables: Set<String> = [
 "tang", "kang", "cap", "fe", "ngat", "nong", "bam", "cyut", "gwaang", "cip",
 "naap", "kwok", "nok", "kyut", "ap", "koe", "ngou", "zaang", "aang", "dap",
 "nip", "gep", "bek", "paan", "baang", "cak", "wik", "gwing", "teon", "kim",
-"tik", "lu", "mik", "kwik", "naat", "soe", "wang", "nat", "neot", "fik",
-"kui", "aam", "an", "at", "bau", "bi", "bon", "ceng", "coet", "daak", "deot",
-"deu", "doeng", "eot", "faak", "fit", "fiu", "gak", "gi", "gut", "gwak",
-"gwe", "gwei", "gwi", "gwik", "gwit", "gyut", "he", "heng", "hi", "hik",
-"jaai", "jaang", "jaap", "jaau", "jou", "kaak", "kaam", "kak", "kep",
-"keu", "kik", "kip", "ko", "kwaai", "kwaak", "kwang", "lan", "lang",
-"leu", "li", "mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
+"tik", "mik", "kwik", "naat", "soe", "wang", "nat", "neot", "fik",
+"kui", "aam", "an", "at", "bau", "ceng", "coet", "daak", "deot",
+"doeng", "eot", "faak", "fit", "gak", "gut", "gwak",
+"gwe", "gwei", "gwi", "gwik", "gwit", "gyut", "he", "heng", "hik",
+"jaai", "jaang", "jaap", "jaau", "kaak", "kaam", "kak", "kep",
+"kik", "kip", "ko", "kwaai", "kwaak", "kwang", "lan", "lang",
+"mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
 "ngam", "ngang", "nge", "ngit", "ngot", "nit", "noek", "nuk", "ong",
-"paat", "pau", "pe", "peng", "pet", "poi", "saak", "tap", "teot", "ti",
-"toe", "tuk", "wak", "wet", "wi", "zep", "zoe", "zoet",
+"paat", "pau", "pe", "peng", "pet", "saak", "tap", "teot",
+"toe", "tuk", "wak", "zoe",
 
-"coei", "coen", "coet", "doei", "doen", "doet", "goei", "hoei", "joei", "joen",
-"koei", "loei", "loen", "loet", "noei", "noet", "soei", "soen", "soet", "toei",
-"toen", "toet", "zoei", "zoen", "zoet",
+"coei", "doei", "goei", "hoei", "joei", "koei", "loei", "noei", "soei", "toei", "zoei",
+"coen", "doen", "joen", "loen", "soen", "toen", "zoen",
+"coet", "doet", "loet", "noet", "soet", "toet", "zoet",
 
-"ceok", "ceong", "deok", "deong", "geok", "geong", "heong", "jeok", "jeong", "keok",
-"keong", "leok", "leong", "neok", "neong", "seok", "seong", "zeok", "zeong",
+"ceong", "deong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
+"ceok", "deok", "geok", "jeok", "keok", "leok", "neok", "seok", "zeok",
 
-"bum", "cum", "dum", "gum", "hum", "jum", "kum", "lum", "mum", "num", "sum", "tum", "zum", "ngum",
-"bom", "com", "dom", "gom", "hom", "jom", "kom", "lom", "mom", "nom", "som", "tom", "zom", "ngom"
+"bum", "cum", "dum", "gum", "hum", "jum", "kum", "lum", "num", "sum", "tum", "zum", "ngum",
+"bom", "com", "dom", "gom", "hom", "jom", "kom", "lom", "nom", "som", "tom", "zom", "ngom"
 ]
+
 }
+
