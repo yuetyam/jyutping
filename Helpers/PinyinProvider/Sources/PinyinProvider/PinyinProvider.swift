@@ -15,8 +15,8 @@ public struct PinyinProvider {
         private let lookupProvider: LookupProvider = LookupProvider()
         public init() {}
         public func close() {
-                sqlite3_close_v2(database)
                 lookupProvider.close()
+                sqlite3_close_v2(database)
         }
 
         public func search(for text: String) -> [JyutpingCandidate] {
