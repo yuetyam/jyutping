@@ -30,9 +30,7 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Keyboard Life Cycle
 
-        private lazy var didLoad: Bool = false
         private func initialize() {
-                guard !didLoad else { return }
                 view.addSubview(keyboardStackView)
                 keyboardStackView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -58,8 +56,8 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
                 setupToolBarActions()
-                didLoad = true
         }
+
         override func viewDidLoad() {
                 super.viewDidLoad()
                 initialize()
@@ -121,6 +119,13 @@ final class KeyboardViewController: UIInputViewController {
                 userLexicon = nil
                 hapticFeedback = nil
         }
+        override func viewDidDisappear(_ animated: Bool) {
+                super.viewDidDisappear(animated)
+                DispatchQueue.main.async { [unowned self] in
+                        self.keyboardStackView.removeFromSuperview()
+                }
+        }
+
         private lazy var didKeyboardEstablished: Bool = false
         private lazy var needsDifferentKeyboard: Bool = false
         private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
