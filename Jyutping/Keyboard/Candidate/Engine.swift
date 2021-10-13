@@ -7,11 +7,10 @@ struct Engine {
         fileprivate typealias RowCandidate = (candidate: Candidate, row: Int)
 
         private let provider: KeyboardDataProvider = KeyboardDataProvider()
-        /*
+
         func close() {
                 provider.close()
         }
-        */
 
         func suggest(for text: String, schemes: [[String]]) -> [Candidate] {
                 switch text.count {

@@ -84,6 +84,19 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
+
+        override func viewWillAppear(_ animated: Bool) {
+                super.viewWillAppear(animated)
+                if userLexicon == nil {
+                        userLexicon = UserLexicon()
+                }
+                if engine == nil {
+                        engine = Engine()
+                }
+                if isHapticFeedbackOn && hapticFeedback == nil {
+                        hapticFeedback = UIImpactFeedbackGenerator(style: .light)
+                }
+        }
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
                 if needsDifferentKeyboard {
@@ -91,9 +104,6 @@ final class KeyboardViewController: UIInputViewController {
                 } else if !didKeyboardEstablished {
                         setupKeyboard()
                         didKeyboardEstablished = true
-                }
-                if isHapticFeedbackOn && hapticFeedback == nil {
-                        hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
         }
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -105,6 +115,10 @@ final class KeyboardViewController: UIInputViewController {
         }
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
+                engine?.close()
+                engine = nil
+                userLexicon?.close()
+                userLexicon = nil
                 hapticFeedback = nil
         }
         private lazy var didKeyboardEstablished: Bool = false
@@ -282,10 +296,8 @@ final class KeyboardViewController: UIInputViewController {
         // MARK: - Engine
 
         private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.Keyboard.ime", qos: .userInteractive)
-        private lazy var userLexicon: UserLexicon = UserLexicon()
-        private lazy var engine: Engine = Engine()
-        private lazy var pinyinProvider: PinyinProvider = PinyinProvider()
-        private lazy var strokeProvider: StrokeProvider = StrokeProvider()
+        private lazy var userLexicon: UserLexicon? = UserLexicon()
+        private lazy var engine: Engine? = Engine()
         private func suggest() {
                 switch processingText.first {
                 case .none:
@@ -302,30 +314,36 @@ final class KeyboardViewController: UIInputViewController {
         }
         private func pinyinReverseLookup() {
                 let text: String = String(processingText.dropFirst())
+                let pinyinProvider: PinyinProvider = PinyinProvider()
                 let searches: [PinyinProvider.JyutpingCandidate] = pinyinProvider.search(for: text)
+                pinyinProvider.close()
                 let lookup: [Candidate] = searches.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
                 push(lookup)
         }
         private func cangjieReverseLookup() {
                 let text: String = String(processingText.dropFirst())
+                let strokeProvider: StrokeProvider = StrokeProvider()
                 let cangjieCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider.matchCangjie(for: text)
+                strokeProvider.close()
                 let lookup: [Candidate] = cangjieCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
                 push(lookup)
         }
         private func strokeReverseLookup() {
                 let text: String = String(processingText.dropFirst())
+                let strokeProvider: StrokeProvider = StrokeProvider()
                 let strokeCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider.matchStroke(for: text)
+                strokeProvider.close()
                 let lookup: [Candidate] = strokeCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
                 push(lookup)
         }
         private func imeSuggest() {
-                let lexiconCandidates: [Candidate] = userLexicon.suggest(for: processingText)
+                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
-                        let normal: [Candidate] = engine.suggest(for: processingText, schemes: schemes.uniqued())
+                        let normal: [Candidate] = engine?.suggest(for: processingText, schemes: schemes.uniqued()) ?? []
                         if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
                                 let droppedSeparator: String = String(processingText.dropLast())
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return engine.suggest(for: droppedSeparator, schemes: newSchemes)
+                                return engine?.suggest(for: droppedSeparator, schemes: newSchemes) ?? []
                         } else {
                                 return normal
                         }
@@ -355,12 +373,12 @@ final class KeyboardViewController: UIInputViewController {
         lazy var candidateSequence: [Candidate] = []
         func handleLexicon(_ candidate: Candidate) {
                 imeQueue.async { [unowned self] in
-                        self.userLexicon.handle(candidate)
+                        self.userLexicon?.handle(candidate)
                 }
         }
         func clearUserLexicon() {
                 imeQueue.async { [unowned self] in
-                        self.userLexicon.deleteAll()
+                        self.userLexicon?.deleteAll()
                 }
         }
 

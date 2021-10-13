@@ -24,11 +24,9 @@ struct UserLexicon {
         init() {
                 ensure()
         }
-        /*
         func close() {
                 sqlite3_close_v2(database)
         }
-        */
 
 
         // MARK: - Handle Candidate
