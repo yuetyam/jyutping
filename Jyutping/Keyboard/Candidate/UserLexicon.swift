@@ -3,7 +3,7 @@ import SQLite3
 
 struct UserLexicon {
 
-        private var database: OpaquePointer? = {
+        private let database: OpaquePointer? = {
                 guard let libraryDirectoryUrl: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first else { return nil }
                 let userLexiconUrl: URL = libraryDirectoryUrl.appendingPathComponent("userlexicon.sqlite3", isDirectory: false)
                 var db: OpaquePointer? = nil
@@ -138,7 +138,7 @@ struct UserLexicon {
         }
 }
 
-struct LexiconEntry {
+private struct LexiconEntry {
 
         /// (Candidate.lexiconText + Candidate.jyutping).hash
         let id: Int64
