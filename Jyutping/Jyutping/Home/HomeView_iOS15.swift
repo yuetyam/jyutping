@@ -8,6 +8,12 @@ struct HomeView_iOS15: View {
         @State private var cantonese: String = .empty
         @State private var pronunciations: [String] = []
 
+        @State private var isKeyboardEnabled: Bool = {
+                guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return false }
+                return keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
+        }()
+        @State private var isGuideViewExpanded: Bool = false
+
         // Tones Input Section
         private let dotText: Text = Text(verbatim: "•")
         private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: .empty)
@@ -56,39 +62,59 @@ struct HomeView_iOS15: View {
                                         .textSelection(.enabled)
                                 }
                                 Section {
-                                        Text("How to enable this Keyboard").font(.headline)
-                                        VStack(spacing: 5) {
+                                        if isKeyboardEnabled {
                                                 HStack {
-                                                        dotText
-                                                        Text("Jump to **Settings**")
+                                                        Text("How to enable this Keyboard")
                                                         Spacer()
+                                                        if isGuideViewExpanded {
+                                                                Image(systemName: "chevron.down")
+                                                        } else {
+                                                                Image(systemName: "chevron.left")
+                                                        }
                                                 }
-                                                HStack {
-                                                        dotText
-                                                        Text("Tap **Keyboards**")
-                                                        Spacer()
+                                                .contentShape(Rectangle())
+                                                .onTapGesture {
+                                                        isGuideViewExpanded.toggle()
                                                 }
-                                                HStack {
-                                                        dotText
-                                                        Text("Turn on **Jyutping**")
-                                                        Spacer()
-                                                }
-                                                HStack {
-                                                        dotText
-                                                        Text("Turn on **Allow Full Access**")
-                                                        Spacer()
+                                        } else {
+                                                Text("How to enable this Keyboard").font(.headline)
+                                        }
+                                        if !isKeyboardEnabled || isGuideViewExpanded {
+                                                VStack(spacing: 5) {
+                                                        HStack {
+                                                                dotText
+                                                                Text("Jump to **Settings**")
+                                                                Spacer()
+                                                        }
+                                                        HStack {
+                                                                dotText
+                                                                Text("Tap **Keyboards**")
+                                                                Spacer()
+                                                        }
+                                                        HStack {
+                                                                dotText
+                                                                Text("Turn on **Jyutping**")
+                                                                Spacer()
+                                                        }
+                                                        HStack {
+                                                                dotText
+                                                                Text("Turn on **Allow Full Access**")
+                                                                Spacer()
+                                                        }
                                                 }
                                         }
                                 }
-                                Section {
-                                        Button(action: {
-                                                guard let url: URL = URL(string: UIApplication.openSettingsURLString) else { return }
-                                                UIApplication.shared.open(url)
-                                        }) {
-                                                HStack{
-                                                        Spacer()
-                                                        Text("Go to **Settings**")
-                                                        Spacer()
+                                if !isKeyboardEnabled || isGuideViewExpanded {
+                                        Section {
+                                                Button {
+                                                        guard let url: URL = URL(string: UIApplication.openSettingsURLString) else { return }
+                                                        UIApplication.shared.open(url)
+                                                } label: {
+                                                        HStack{
+                                                                Spacer()
+                                                                Text("Go to **Settings**")
+                                                                Spacer()
+                                                        }
                                                 }
                                         }
                                 }
@@ -146,6 +172,13 @@ struct HomeView_iOS15: View {
                                 Section {
                                         Text("Can I use with external keyboards?").font(.headline)
                                         Text("Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.").lineSpacing(6).textSelection(.enabled)
+                                }
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                                guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }
+                                let isContained: Bool =  keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
+                                if isKeyboardEnabled != isContained {
+                                        isKeyboardEnabled = isContained
                                 }
                         }
                         .navigationTitle("Home")
