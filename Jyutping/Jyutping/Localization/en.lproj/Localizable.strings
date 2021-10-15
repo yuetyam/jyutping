@@ -56,6 +56,13 @@ English
 "Can I use with external keyboards?" = "Can I use with external keyboards?";
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";
 
+"More Introductions" = "More Introductions";
+"title.introductions" = "Introductions";
+"Expressions Convention" = "Expressions Convention";
+"Expressions" = "Expressions";
+"Frequently Asked Questions" = "Frequently Asked Questions";
+"FAQ" = "FAQ";
+
 
 // Search
 "Lookup Jyutping for Cantonese" = "Lookup Jyutping for Cantonese";

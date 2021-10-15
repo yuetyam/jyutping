@@ -173,6 +173,28 @@ struct HomeView_iOS15: View {
                                         Text("Can I use with external keyboards?").font(.headline)
                                         Text("Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.").lineSpacing(6).textSelection(.enabled)
                                 }
+
+                                /*
+                                // MARK: - TODO
+
+                                Group {
+                                        Section {
+                                                NavigationLink(destination: IntroductionsView()) {
+                                                        Label("More Introductions", systemImage: "info.circle")
+                                                }
+                                        }
+                                        Section {
+                                                NavigationLink(destination: ExpressionsView()) {
+                                                        Label("Expressions Convention", systemImage: "checkmark.seal")
+                                                }
+                                        }
+                                        Section {
+                                                NavigationLink(destination: FAQView()) {
+                                                        Label("Frequently Asked Questions", systemImage: "questionmark.circle")
+                                                }
+                                        }
+                                }
+                                */
                         }
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }

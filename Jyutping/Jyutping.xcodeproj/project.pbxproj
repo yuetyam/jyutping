@@ -69,6 +69,9 @@
 		3759F4F1262FC8A300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4F3262FC8A300266086 /* Localizable.strings */; };
 		375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375BB6E426DD088F00D6A36A /* EnhancedLabel.swift */; };
 		37718D1926F2E73800B68A5B /* JyutpingView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37718D1826F2E73800B68A5B /* JyutpingView_iOS14.swift */; };
+		377236662719F9BF007F9AB9 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377236652719F9BF007F9AB9 /* FAQView.swift */; };
+		377236682719FB86007F9AB9 /* ExpressionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377236672719FB86007F9AB9 /* ExpressionsView.swift */; };
+		3772366A271A0018007F9AB9 /* IntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37723669271A0018007F9AB9 /* IntroductionsView.swift */; };
 		3775D53D263AF1D20024BF12 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */; };
 		377B86FB270F278B0065CBEF /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377B86FA270F278B0065CBEF /* ImageExtensions.swift */; };
 		377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */; };
@@ -208,6 +211,9 @@
 		3759F4F7262FC8A800266086 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		375BB6E426DD088F00D6A36A /* EnhancedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedLabel.swift; sourceTree = "<group>"; };
 		37718D1826F2E73800B68A5B /* JyutpingView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView_iOS14.swift; sourceTree = "<group>"; };
+		377236652719F9BF007F9AB9 /* FAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		377236672719FB86007F9AB9 /* ExpressionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionsView.swift; sourceTree = "<group>"; };
+		37723669271A0018007F9AB9 /* IntroductionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionsView.swift; sourceTree = "<group>"; };
 		3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
 		377B86FA270F278B0065CBEF /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
@@ -494,6 +500,9 @@
 				3759F48F262FC2B600266086 /* HomeView.swift */,
 				37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */,
 				37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */,
+				37723669271A0018007F9AB9 /* IntroductionsView.swift */,
+				377236672719FB86007F9AB9 /* ExpressionsView.swift */,
+				377236652719F9BF007F9AB9 /* FAQView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -695,12 +704,14 @@
 				3738EC002704CF9A00E75BDF /* TonesTable.swift in Sources */,
 				3759F496262FC2B600266086 /* AboutView.swift in Sources */,
 				3759F494262FC2B600266086 /* HomeView.swift in Sources */,
+				377236682719FB86007F9AB9 /* ExpressionsView.swift in Sources */,
 				377B86FB270F278B0065CBEF /* ImageExtensions.swift in Sources */,
 				3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */,
 				375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */,
 				3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */,
 				3759F492262FC2B600266086 /* SyllablesTables.swift in Sources */,
 				37718D1926F2E73800B68A5B /* JyutpingView_iOS14.swift in Sources */,
+				3772366A271A0018007F9AB9 /* IntroductionsView.swift in Sources */,
 				37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */,
 				3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */,
 				3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */,
@@ -715,6 +726,7 @@
 				3759F495262FC2B600266086 /* JyutpingView.swift in Sources */,
 				378FEA44270C14B200153488 /* Speaker.swift in Sources */,
 				37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */,
+				377236662719F9BF007F9AB9 /* FAQView.swift in Sources */,
 				37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */,
 				3759F420262FB65C00266086 /* ContentView.swift in Sources */,
 			);
