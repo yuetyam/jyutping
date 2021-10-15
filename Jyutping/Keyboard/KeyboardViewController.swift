@@ -113,11 +113,15 @@ final class KeyboardViewController: UIInputViewController {
         }
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
+                hapticFeedback = nil
                 engine?.close()
                 engine = nil
                 userLexicon?.close()
                 userLexicon = nil
-                hapticFeedback = nil
+                pinyinProvider?.close()
+                pinyinProvider = nil
+                strokeProvider?.close()
+                strokeProvider = nil
         }
         override func viewDidDisappear(_ animated: Bool) {
                 super.viewDidDisappear(animated)
@@ -303,6 +307,8 @@ final class KeyboardViewController: UIInputViewController {
         private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.Keyboard.ime", qos: .userInteractive)
         private lazy var userLexicon: UserLexicon? = UserLexicon()
         private lazy var engine: Engine? = Engine()
+        private lazy var pinyinProvider: PinyinProvider? = nil
+        private lazy var strokeProvider: StrokeProvider? = nil
         private func suggest() {
                 switch processingText.first {
                 case .none:
@@ -318,26 +324,29 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         private func pinyinReverseLookup() {
+                if pinyinProvider == nil {
+                        pinyinProvider = PinyinProvider()
+                }
                 let text: String = String(processingText.dropFirst())
-                let pinyinProvider: PinyinProvider = PinyinProvider()
-                let searches: [PinyinProvider.JyutpingCandidate] = pinyinProvider.search(for: text)
-                pinyinProvider.close()
+                let searches: [PinyinProvider.JyutpingCandidate] = pinyinProvider?.search(for: text) ?? []
                 let lookup: [Candidate] = searches.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
                 push(lookup)
         }
         private func cangjieReverseLookup() {
+                if strokeProvider == nil {
+                        strokeProvider = StrokeProvider()
+                }
                 let text: String = String(processingText.dropFirst())
-                let strokeProvider: StrokeProvider = StrokeProvider()
-                let cangjieCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider.matchCangjie(for: text)
-                strokeProvider.close()
+                let cangjieCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider?.matchCangjie(for: text) ?? []
                 let lookup: [Candidate] = cangjieCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
                 push(lookup)
         }
         private func strokeReverseLookup() {
+                if strokeProvider == nil {
+                        strokeProvider = StrokeProvider()
+                }
                 let text: String = String(processingText.dropFirst())
-                let strokeProvider: StrokeProvider = StrokeProvider()
-                let strokeCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider.matchStroke(for: text)
-                strokeProvider.close()
+                let strokeCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider?.matchStroke(for: text) ?? []
                 let lookup: [Candidate] = strokeCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
                 push(lookup)
         }
