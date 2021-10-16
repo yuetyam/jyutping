@@ -19,12 +19,12 @@ struct ExpressionsView: View {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "唔用〔您、您們〕。「您」係北京方言用字，好少見於其他漢語。粵語敬語一般用「閣下」")
+                                                Text(verbatim: "唔用〔您、您們〕。「您」係北京方言用字，好少見於其他漢語。如果要用敬語，粵語一般用「閣下」")
                                         } icon: {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
                                         Label {
-                                                Text(verbatim: "唔推薦用「妳」，冇必要")
+                                                Text(verbatim: "唔推薦用「妳」，冇必要畫蛇添足")
                                         } icon: {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
@@ -43,12 +43,12 @@ struct ExpressionsView: View {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "唔用 他、她、他們、她們")
+                                                Text(verbatim: "避免：他、她、它、他們、她們")
                                         } icon: {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
                                         Label {
-                                                Text(verbatim: "佢亦作渠、其")
+                                                Text(verbatim: "佢亦作渠、𠍲、其")
                                         } icon: {
                                                 Image(systemName: "info.circle").foregroundColor(.primary)
                                         }
@@ -110,34 +110,33 @@ struct ExpressionsView: View {
                                         } icon: {
                                                 Image(systemName: "info.circle").hidden()
                                         }
-                                        Label {
-                                                Text(verbatim: "簡化字環境，可以「嗮」代「晒」")
-                                        } icon: {
-                                                Image(systemName: "info.circle").foregroundColor(.primary)
-                                        }
                                 }
                                 .lineSpacing(5)
                         }
                         Group {
                                 Section {
                                         Label {
-                                                Text(verbatim: "用〔個／嘅・得・噉〕，唔用〔的・得・地〕")
+                                                Text(verbatim: "個／嘅・得・噉")
                                         } icon: {
                                                 Image(systemName: "6.circle")
                                         }
                                         .font(.headline)
-
+                                        Label {
+                                                Text(verbatim: "避免 的・得・地")
+                                        } icon: {
+                                                Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
+                                        }
                                         Label {
                                                 Text(verbatim: "例：我個細佬／我嘅細佬。\n例：做得好。\n例：細細聲噉講話。")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green).hidden()
+                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                 }
                                 .lineSpacing(5)
 
                                 Section {
                                         Label {
-                                                Text(verbatim: "用〔啩、啊嘛〕，唔用「吧」")
+                                                Text(verbatim: "用：啩、啊嘛。  避免：吧")
                                         } icon: {
                                                 Image(systemName: "7.circle")
                                         }
@@ -166,24 +165,45 @@ struct ExpressionsView: View {
                                 }
                                 Section {
                                         Label {
-                                                Text(verbatim: "用「使」，唔用〔駛、洗〕")
+                                                Text(verbatim: "用：使。  避免：駛、洗")
                                         } icon: {
                                                 Image(systemName: "8.circle")
                                         }
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "唔使驚")
+                                                Text(verbatim: "例：唔使驚")
                                         } icon: {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "唔駛驚")
+                                                Text(verbatim: "誤：唔駛驚")
                                         } icon: {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
                                         Label {
-                                                Text(verbatim: "唔洗驚")
+                                                Text(verbatim: "誤：唔洗驚")
+                                        } icon: {
+                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                        }
+                                }
+                        }
+                        Group {
+                                Section {
+                                        Label {
+                                                Text(verbatim: "推薦：而家／而今。  避免：宜家")
+                                        } icon: {
+                                                Image(systemName: "9.circle")
+                                        }
+                                        .font(.headline)
+
+                                        Label {
+                                                Text(verbatim: "例：我而家食緊飯。")
+                                        } icon: {
+                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "誤：我宜家食緊飯。")
                                         } icon: {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
