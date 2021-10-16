@@ -19,12 +19,12 @@ struct ExpressionsView: View {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "唔用〔您、您們〕。「您」係北京方言用字，好少見於其他漢語。如果要用敬語，粵語一般用「閣下」")
+                                                Text(verbatim: "毋用〔您、您們〕。「您」係北京方言用字，好少見於其他漢語。如果要用敬語，粵語一般用「閣下」")
                                         } icon: {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
                                         Label {
-                                                Text(verbatim: "唔推薦用「妳」，冇必要畫蛇添足")
+                                                Text(verbatim: "毋推薦用「妳」，冇必要畫蛇添足")
                                         } icon: {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
@@ -116,20 +116,15 @@ struct ExpressionsView: View {
                         Group {
                                 Section {
                                         Label {
-                                                Text(verbatim: "個／嘅・得・噉")
+                                                Text(verbatim: "用 个・得・噉。  避免 的・得・地")
                                         } icon: {
                                                 Image(systemName: "6.circle")
                                         }
                                         .font(.headline)
                                         Label {
-                                                Text(verbatim: "避免 的・得・地")
+                                                Text(verbatim: "例：我个細佬。\n例：做得好。\n例：細細聲噉講話。")
                                         } icon: {
-                                                Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
-                                        }
-                                        Label {
-                                                Text(verbatim: "例：我個細佬／我嘅細佬。\n例：做得好。\n例：細細聲噉講話。")
-                                        } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image(systemName: "checkmark.circle").foregroundColor(.green).hidden()
                                         }
                                 }
                                 .lineSpacing(5)
@@ -148,7 +143,7 @@ struct ExpressionsView: View {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "例：唔係啊嘛，真係冇？")
+                                                Text(verbatim: "例：毋係啊嘛，真係冇？")
                                         } icon: {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
@@ -158,7 +153,7 @@ struct ExpressionsView: View {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
                                         Label {
-                                                Text(verbatim: "誤：唔係吧，真係冇？")
+                                                Text(verbatim: "誤：毋係吧，真係冇？")
                                         } icon: {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
@@ -172,17 +167,17 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "例：唔使驚")
+                                                Text(verbatim: "例：毋使驚")
                                         } icon: {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "誤：唔駛驚")
+                                                Text(verbatim: "誤：毋駛驚")
                                         } icon: {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
                                         Label {
-                                                Text(verbatim: "誤：唔洗驚")
+                                                Text(verbatim: "誤：毋洗驚")
                                         } icon: {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
