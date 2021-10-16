@@ -146,7 +146,7 @@ struct HomeView_iOS14: View {
                                 }
                                 Section {
                                         NavigationLink(destination: ExpressionsView()) {
-                                                Label("Expressions Convention", systemImage: "checkmark.seal")
+                                                Label("Cantonese Expressions", systemImage: "checkmark.seal")
                                         }
                                 }
                         }

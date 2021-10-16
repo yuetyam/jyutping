@@ -14,7 +14,7 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "單數：你     複數：你哋／你等")
+                                                Text(verbatim: "單數：你      複數：你哋／你等")
                                         } icon: {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
@@ -38,7 +38,7 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "單數：佢     複數：佢哋／佢等")
+                                                Text(verbatim: "單數：佢      複數：佢哋／佢等")
                                         } icon: {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
@@ -64,7 +64,7 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "係 hai6，謂語，義同系、是。\n喺 hai2，表方位、時間，義同在。")
+                                                Text(verbatim: "係 hai6：謂語，義同系、是。\n喺 hai2：表方位、時間，義同在。")
                                         } icon: {
                                                 Image(systemName: "info.circle").hidden()
                                         }
@@ -85,7 +85,7 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "諗 nam2，想、思考、覺得。\n冧 lam3，表示倒塌、倒下。")
+                                                Text(verbatim: "諗 nam2：想、思考、覺得。\n冧 lam3：表示倒塌、倒下。")
                                         } icon: {
                                                 Image(systemName: "info.circle").hidden()
                                         }
@@ -106,7 +106,7 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "曬 saai3，曬太陽。\n晒 saai3，助詞，全部、所有、完。\n哂 can2，譏笑。")
+                                                Text(verbatim: "曬 saai3：曬太陽。\n晒 saai3：助詞，全部、所有、完。\n哂 can2：譏笑。")
                                         } icon: {
                                                 Image(systemName: "info.circle").hidden()
                                         }
@@ -158,6 +158,11 @@ struct ExpressionsView: View {
                                         } icon: {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
+                                        Label {
+                                                Text(verbatim: "誤：唔係吧，真係冇？")
+                                        } icon: {
+                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                        }
                                 }
                                 Section {
                                         Label {
@@ -186,7 +191,7 @@ struct ExpressionsView: View {
                         }
                 }
                 .listStyle(.insetGrouped)
-                .navigationTitle("Expressions")
+                .navigationTitle("title.expressions")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }
