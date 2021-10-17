@@ -43,6 +43,9 @@ struct JyutpingResourcesLinksView: View {
                 LinkSafariView(url: URL(string: "https://www.lshk.org/jyutping")!) {
                         FootnoteLabelView(title: Text("Jyutping - LSHK"), footnote: "www.lshk.org/jyutping")
                 }
+                LinkSafariView(url: URL(string: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")!) {
+                        FootnoteLabelView(title: Text(verbatim: "粵語拼音速遞 - CUHK"), footnote: "www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
+                }
                 LinkSafariView(url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!) {
                         FootnoteLabelView(title: Text("Learn Jyutping"), footnote: "www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")
                 }
