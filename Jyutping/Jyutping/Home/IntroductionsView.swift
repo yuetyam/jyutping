@@ -8,6 +8,10 @@ struct IntroductionsView: View {
                                 Text("Period (Full Stop) Shortcut").font(.headline)
                                 Text("Double tapping the space bar will insert a period followed by a space")
                         }
+                        Section {
+                                Text(verbatim: "一次過清除已輸入音節").font(.headline)
+                                Text(verbatim: "喺刪除掣(Delete)度向左滑，即可一次過刪晒已輸入个拼寫")
+                        }
                 }
                 .listStyle(.insetGrouped)
                 .navigationTitle("title.introductions")
