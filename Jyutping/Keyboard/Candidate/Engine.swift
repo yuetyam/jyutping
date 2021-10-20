@@ -18,9 +18,9 @@ struct Engine {
                         return []
                 case 1:
                         return shortcut(for: text)
-                case 2:
+                case 2 where !text.hasPrefix("y"):
                         return fetchTwoChars(text)
-                case 3 where !(text.hasSuffix("um") || text.hasSuffix("om")):
+                case 3 where !(text.hasSuffix("um") || text.hasSuffix("om") || text.hasPrefix("y")):
                         return fetchThreeChars(text)
                 default:
                         let filtered: String = text.replacingOccurrences(of: "'", with: "")

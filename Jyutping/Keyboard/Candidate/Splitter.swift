@@ -25,6 +25,7 @@ struct Splitter {
                                 .replacingOccurrences(of: "eoy", with: "eoi")
                                 .replacingOccurrences(of: "oey", with: "eoi")
                                 .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return converted
                 })
                 return scheme
@@ -213,21 +214,19 @@ private static let syllables: Set<String> = [
 "loe", "haap", "gaat", "cok", "saap", "jeoi", "ku", "kok", "doek", "fok",
 "tang", "kang", "cap", "fe", "ngat", "nong", "bam", "cyut", "gwaang", "cip",
 "naap", "kwok", "nok", "kyut", "ap", "koe", "ngou", "zaang", "aang", "dap",
-"nip", "gep", "bek", "paan", "baang", "cak", "wik", "gwing", "teon", "kim",
-"tik", "mik", "kwik", "naat", "soe", "wang", "nat", "neot", "fik",
-"kui", "aam", "an", "at", "bau", "ceng", "coet", "daak", "deot",
-"doeng", "eot", "faak", "fit", "gak", "gut", "gwak",
+"nip", "gep", "paan", "baang", "cak", "wik", "gwing", "teon", "kim",
+"tik", "mik", "kwik", "naat", "soe", "wang", "neot",
+"kui", "bau", "ceng", "daak", "doeng",
 "gwe", "gwei", "gwi", "gwik", "gwit", "gyut", "he", "heng", "hik",
-"jaai", "jaang", "jaap", "jaau", "kaak", "kaam", "kak", "kep",
+"jaai", "jaau", "kaak", "kaam", "kak",
 "kik", "kip", "ko", "kwaai", "kwaak", "kwang", "lan", "lang",
 "mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
 "ngam", "ngang", "nge", "ngit", "ngot", "nit", "noek", "nuk", "ong",
-"paat", "pau", "pe", "peng", "pet", "saak", "tap", "teot",
-"toe", "tuk", "wak", "zoe",
+"paat", "pau", "pe", "peng", "pet", "saak", "toe", "tuk", "wak",
 
 "coei", "doei", "goei", "hoei", "joei", "koei", "loei", "noei", "soei", "toei", "zoei",
 "coen", "doen", "joen", "loen", "soen", "toen", "zoen",
-"coet", "doet", "loet", "noet", "soet", "toet", "zoet",
+"coet", "loet", "noet", "soet", "zoet",
 
 "ceong", "deong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
 "ceok", "deok", "geok", "jeok", "keok", "leok", "neok", "seok", "zeok",
@@ -236,7 +235,11 @@ private static let syllables: Set<String> = [
 "coey", "doey", "goey", "hoey", "joey", "koey", "loey", "noey", "soey", "toey", "zoey",
 
 "bum", "cum", "dum", "gum", "hum", "jum", "kum", "lum", "num", "sum", "tum", "zum", "ngum",
-"bom", "com", "dom", "gom", "hom", "jom", "kom", "lom", "nom", "som", "tom", "zom", "ngom"
+"bom", "com", "dom", "gom", "hom", "jom", "kom", "lom", "nom", "som", "tom", "zom", "ngom",
+
+"ye", "yi", "yo", "yau", "yiu", "yat", "yan", "yap", "yam", "yik", "yaa", "yin", "yuk", "yit",
+"yai", "yip", "yim", "yum", "yung", "ying", "yeng", "yaak", "yaai", "yaau",
+"yeoi", "yeon", "yoek", "yoei", "yoen", "yeok", "yoeng", "yeong"
 ]
 
 }

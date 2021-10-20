@@ -258,6 +258,7 @@ final class KeyboardViewController: UIInputViewController {
                                                 .replacingOccurrences(of: "eoy", with: "eoi")
                                                 .replacingOccurrences(of: "oey", with: "eoi")
                                                 .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
                                         return converted
                                 }
                                 return sequence
