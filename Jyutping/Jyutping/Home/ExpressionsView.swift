@@ -157,14 +157,18 @@ struct ExpressionsView: View {
                         Group {
                                 Section {
                                         Label {
-                                                Text(verbatim: "用 个・得・噉。  避免 的・得・地")
+                                                HStack {
+                                                        Text(verbatim: "用").fontWeight(.medium)
+                                                        Text(verbatim: "个・得・噉。")
+                                                        Text(verbatim: "避免").fontWeight(.medium)
+                                                        Text(verbatim: "的・得・地")
+                                                }
                                         } icon: {
-                                                Image(systemName: "7.circle")
+                                                Image(systemName: "7.circle").font(.headline)
                                         }
-                                        .font(.headline)
                                         Label {
                                                 Text(verbatim: """
-                                                例：我个細佬。
+                                                例：我个睇法。
                                                 例：做得好。
                                                 例：細細聲噉講話。
                                                 """)
@@ -176,12 +180,15 @@ struct ExpressionsView: View {
 
                                 Section {
                                         Label {
-                                                Text(verbatim: "用：啩、啊嘛。  避免：吧")
+                                                HStack {
+                                                        Text(verbatim: "用").fontWeight(.medium)
+                                                        Text(verbatim: "啩、啊嘛。")
+                                                        Text(verbatim: "避免").fontWeight(.medium)
+                                                        Text(verbatim: "吧")
+                                                }
                                         } icon: {
-                                                Image(systemName: "8.circle")
+                                                Image(systemName: "8.circle").font(.headline)
                                         }
-                                        .font(.headline)
-
                                         Label {
                                                 Text(verbatim: "下個禮拜會出啩。")
                                         } icon: {
@@ -205,12 +212,15 @@ struct ExpressionsView: View {
                                 }
                                 Section {
                                         Label {
-                                                Text(verbatim: "用：使。  避免：駛、洗")
+                                                HStack {
+                                                        Text(verbatim: "用").fontWeight(.medium)
+                                                        Text(verbatim: "使。")
+                                                        Text(verbatim: "避免").fontWeight(.medium)
+                                                        Text(verbatim: "駛、洗")
+                                                }
                                         } icon: {
-                                                Image(systemName: "9.circle")
+                                                Image(systemName: "9.circle").font(.headline)
                                         }
-                                        .font(.headline)
-
                                         Label {
                                                 Text(verbatim: "毋使驚")
                                         } icon: {
@@ -231,12 +241,15 @@ struct ExpressionsView: View {
                         Group {
                                 Section {
                                         Label {
-                                                Text(verbatim: "推薦：而家／而今。  避免：宜家")
+                                                HStack {
+                                                        Text(verbatim: "推薦").fontWeight(.medium)
+                                                        Text(verbatim: "而家／而今。")
+                                                        Text(verbatim: "避免").fontWeight(.medium)
+                                                        Text(verbatim: "宜家")
+                                                }
                                         } icon: {
-                                                Image(systemName: "10.circle")
+                                                Image(systemName: "10.circle").font(.headline)
                                         }
-                                        .font(.headline)
-
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
                                         } icon: {
