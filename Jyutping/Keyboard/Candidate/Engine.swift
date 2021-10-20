@@ -17,12 +17,7 @@ struct Engine {
                 case 0:
                         return []
                 case 1:
-                        switch text {
-                        case "y":
-                                return shortcut(for: "j")
-                        default:
-                                return shortcut(for: text)
-                        }
+                        return shortcut(for: text)
                 case 2:
                         return fetchTwoChars(text)
                 case 3 where !(text.hasSuffix("um") || text.hasSuffix("om")):
@@ -215,6 +210,7 @@ private extension Engine {
 
         func shortcut(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
+                let text: String = text.replacingOccurrences(of: "y", with: "j")
                 var candidates: [Candidate] = []
                 let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE shortcut = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
