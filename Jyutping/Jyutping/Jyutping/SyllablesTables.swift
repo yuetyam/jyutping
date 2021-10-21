@@ -193,8 +193,10 @@ let content: String = """
 .
 夫 fu1,[uː],u
 灰 fui1,[uːi],ui
+?,[om],um
 寬 fun1,[uːn],un
 封 fung1,[oŋ],ung
+?,[op̚],up
 闊 fut3,[uːt̚],ut
 福 fuk1,[ok̚],uk
 .
