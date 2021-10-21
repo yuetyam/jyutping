@@ -23,15 +23,26 @@ struct TonesTable: View {
         var body: some View {
                 List {
                         Section {
-                                ForEach(content.components(separatedBy: .newlines), id: \.self) {
+                                ForEach(part_0.components(separatedBy: .newlines), id: \.self) {
                                         ToneCell($0, width: width)
                                 }
+                        } header: {
+                                Text("例一")
                         }
+
+                        Section {
+                                ForEach(part_1.components(separatedBy: .newlines), id: \.self) {
+                                        ToneCell($0, width: width)
+                                }
+                        } header: {
+                                Text("例二")
+                        }
+
                         if #available(iOS 15.0, *) {
                                 if !(Speaker.isLanguagesEnabled) {
                                         Group {
                                                 Section {
-                                                        Text("本應用程式使用系統提供嘅語音朗讀功能")
+                                                        Text("本應用程式使用系統提供个語音朗讀功能")
                                                 }
                                                 Section {
                                                         Text("爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言")
@@ -46,7 +57,7 @@ struct TonesTable: View {
                 .navigationBarTitle("Jyutping Tones", displayMode: .inline)
         }
 
-private let content: String = """
+private let part_0: String = """
 例字,調值,聲調,粵拼
 芬 fan1,55/53,陰平,1
 粉 fan2,35,陰上,2
@@ -58,6 +69,20 @@ private let content: String = """
 沷 fat3,3,低陰入,3
 罰 fat6,2,陽入,6
 """
+
+private let part_1: String = """
+例字,調值,聲調,粵拼
+威 wai1,55/53,陰平,1
+委 wai2,35,陰上,2
+餵 wai3,33,陰去,3
+圍 wai4,11/21,陽平,4
+偉 wai5,13/23,陽上,5
+惠 wai6,22,陽去,6
+鬱 wat1,5,高陰入,1
+挖 waat3,3,低陰入,3
+核 wat6,2,陽入,6
+"""
+
 }
 
 
@@ -95,7 +120,7 @@ private struct ToneCell: View {
                                                         Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
-                                        .frame(width: width + 20, alignment: .leading)
+                                        .frame(width: width + 24, alignment: .leading)
                                         Text(verbatim: components[1]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[2]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[3])
@@ -111,7 +136,7 @@ private struct ToneCell: View {
                                                         Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
-                                        .frame(width: width + 20, alignment: .leading)
+                                        .frame(width: width + 24, alignment: .leading)
                                         Text(verbatim: components[1]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[2]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[3])
