@@ -158,10 +158,10 @@ struct ExpressionsView: View {
                                 Section {
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "用").fontWeight(.medium)
-                                                        Text(verbatim: "个・得・噉。")
+                                                        Text(verbatim: "推薦").fontWeight(.medium)
+                                                        Text(verbatim: "个得噉。")
                                                         Text(verbatim: "避免").fontWeight(.medium)
-                                                        Text(verbatim: "的・得・地")
+                                                        Text(verbatim: "的得地")
                                                 }
                                         } icon: {
                                                 Image(systemName: "7.circle").font(.headline)
@@ -181,7 +181,7 @@ struct ExpressionsView: View {
                                 Section {
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "用").fontWeight(.medium)
+                                                        Text(verbatim: "推薦").fontWeight(.medium)
                                                         Text(verbatim: "啩、啊嘛。")
                                                         Text(verbatim: "避免").fontWeight(.medium)
                                                         Text(verbatim: "吧")
@@ -213,7 +213,7 @@ struct ExpressionsView: View {
                                 Section {
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "用").fontWeight(.medium)
+                                                        Text(verbatim: "推薦").fontWeight(.medium)
                                                         Text(verbatim: "使。")
                                                         Text(verbatim: "避免").fontWeight(.medium)
                                                         Text(verbatim: "駛、洗")
