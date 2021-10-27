@@ -10,7 +10,7 @@ struct IntroductionsView: View {
                         }
                         Section {
                                 Text(verbatim: "一次過清除已輸入音節").font(.headline)
-                                Text(verbatim: "喺刪除掣(Delete)度向左滑，即可一次過刪晒已輸入个拼寫")
+                                Text(verbatim: "喺刪除掣(Delete)度向左滑，即可一次過刪晒已輸入拼寫")
                         }
                 }
                 .listStyle(.insetGrouped)
