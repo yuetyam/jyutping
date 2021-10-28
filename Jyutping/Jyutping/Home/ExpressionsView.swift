@@ -48,7 +48,7 @@ struct ExpressionsView: View {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
                                         Label {
-                                                Text(verbatim: "佢亦作渠、𠍲、其")
+                                                Text(verbatim: "佢亦作渠、⿰亻渠、其")
                                         } icon: {
                                                 Image(systemName: "info.circle").foregroundColor(.primary)
                                         }
@@ -214,12 +214,44 @@ struct ExpressionsView: View {
                                         Label {
                                                 HStack {
                                                         Text(verbatim: "推薦").fontWeight(.medium)
+                                                        Text(verbatim: "啦、嘞。")
+                                                        Text(verbatim: "避免").fontWeight(.medium)
+                                                        Text(verbatim: "了")
+                                                }
+                                        } icon: {
+                                                Image(systemName: "9.circle").font(.headline)
+                                        }
+                                        Label {
+                                                Text(verbatim: "各位，我毋客氣啦。")
+                                        } icon: {
+                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "係嘞，你試過箇間餐廳未呀？")
+                                        } icon: {
+                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "各位，我毋客氣了。")
+                                        } icon: {
+                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                        }
+                                        Label {
+                                                Text(verbatim: "係了，你試過箇間餐廳未呀？")
+                                        } icon: {
+                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                        }
+                                }
+                                Section {
+                                        Label {
+                                                HStack {
+                                                        Text(verbatim: "推薦").fontWeight(.medium)
                                                         Text(verbatim: "使。")
                                                         Text(verbatim: "避免").fontWeight(.medium)
                                                         Text(verbatim: "駛、洗")
                                                 }
                                         } icon: {
-                                                Image(systemName: "9.circle").font(.headline)
+                                                Image(systemName: "10.circle").font(.headline)
                                         }
                                         Label {
                                                 Text(verbatim: "毋使驚")
@@ -237,8 +269,6 @@ struct ExpressionsView: View {
                                                 Image(systemName: "xmark.circle").foregroundColor(.red)
                                         }
                                 }
-                        }
-                        Group {
                                 Section {
                                         Label {
                                                 HStack {
@@ -248,7 +278,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "宜家")
                                                 }
                                         } icon: {
-                                                Image(systemName: "10.circle").font(.headline)
+                                                Image(systemName: "11.circle").font(.headline)
                                         }
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
