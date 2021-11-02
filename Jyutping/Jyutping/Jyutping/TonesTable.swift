@@ -26,6 +26,13 @@ struct TonesTable: View {
                                 ForEach(part_0.components(separatedBy: .newlines), id: \.self) {
                                         ToneCell($0, width: width)
                                 }
+                        }
+
+                        /*
+                        Section {
+                                ForEach(part_0.components(separatedBy: .newlines), id: \.self) {
+                                        ToneCell($0, width: width)
+                                }
                         } header: {
                                 Text("例一")
                         }
@@ -37,6 +44,7 @@ struct TonesTable: View {
                         } header: {
                                 Text("例二")
                         }
+                        */
 
                         if #available(iOS 15.0, *) {
                                 if !(Speaker.isLanguagesEnabled) {
