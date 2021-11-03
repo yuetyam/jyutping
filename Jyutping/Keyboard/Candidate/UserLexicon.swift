@@ -99,8 +99,8 @@ struct UserLexicon {
                 var candidates: [Candidate] = []
                 if sqlite3_prepare_v2(database, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                                let word = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let jyutping = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
@@ -115,8 +115,8 @@ struct UserLexicon {
                 var candidates: [Candidate] = []
                 if sqlite3_prepare_v2(database, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                                let word = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let jyutping = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }

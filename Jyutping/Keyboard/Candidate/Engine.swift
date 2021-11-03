@@ -216,8 +216,8 @@ private extension Engine {
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
@@ -236,8 +236,8 @@ private extension Engine {
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
                                         let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                         candidates.append(candidate)
@@ -257,8 +257,8 @@ private extension Engine {
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
                                         let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                         candidates.append(candidate)
@@ -279,8 +279,8 @@ private extension Engine {
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 2)))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 2))
                                 if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
                                         let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                         let rowCandidate: RowCandidate = (candidate: candidate, row: rowid)
@@ -299,8 +299,8 @@ private extension Engine {
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 0)))
-                                let jyutping: String = String(describing: String(cString: sqlite3_column_text(queryStatement, 1)))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
