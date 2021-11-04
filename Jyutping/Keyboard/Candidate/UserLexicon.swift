@@ -110,7 +110,8 @@ struct UserLexicon {
         }
         private func fetch(by text: String) -> [Candidate] {
                 let textHash: Int = text.hash
-                let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE input = \(textHash) OR prefix = \(textHash) OR shortcut = \(textHash) ORDER BY frequency DESC LIMIT 5;"
+                let shortcutHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
+                let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE input = \(textHash) OR prefix = \(textHash) OR shortcut = \(shortcutHash) ORDER BY frequency DESC LIMIT 5;"
                 var queryStatement: OpaquePointer? = nil
                 var candidates: [Candidate] = []
                 if sqlite3_prepare_v2(database, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
