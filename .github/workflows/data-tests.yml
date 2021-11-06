@@ -1,0 +1,21 @@
+name: Data Packages Tests
+on: [push, pull_request, release]
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.2.app/Contents/Developer
+jobs:
+  test_lookupdata:
+    name: LookupData Tests
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: LookupData SwiftTest
+        run: swift test
+        working-directory: ./LookupData
+  test_keyboarddata:
+    name: KeyboardData Tests
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: KeyboardData SwiftTest
+        run: swift test
+        working-directory: ./KeyboardData
