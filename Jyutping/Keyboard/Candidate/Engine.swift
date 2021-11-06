@@ -1,13 +1,12 @@
 import Foundation
 import SQLite3
-import KeyboardDataProvider
+import KeyboardData
 
 struct Engine {
 
         fileprivate typealias RowCandidate = (candidate: Candidate, row: Int)
 
-        private let provider: KeyboardDataProvider = KeyboardDataProvider()
-
+        private let provider: KeyboardData = KeyboardData()
         func close() {
                 provider.close()
         }
@@ -206,19 +205,20 @@ struct Engine {
 
 private extension Engine {
 
-        // CREATE TABLE jyutpingtable(ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL, word TEXT NOT NULL, jyutping TEXT NOT NULL, pinyin INTEGER NOT NULL, cangjie INTEGER NOT NULL);
+        // KeyboardData:
+        // CREATE TABLE keyboardtable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL);
 
         func shortcut(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
-                let text: String = text.replacingOccurrences(of: "y", with: "j")
+                let textHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE shortcut = \(text.hash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization FROM keyboardtable WHERE shortcut = \(textHash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -232,14 +232,14 @@ private extension Engine {
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash);"
+                let queryString = "SELECT word, romanization FROM keyboardtable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
-                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
+                                        let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
                                         candidates.append(candidate)
                                 }
                         }
@@ -253,14 +253,14 @@ private extension Engine {
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization FROM keyboardtable WHERE ping = \(ping.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
-                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
+                                        let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
                                         candidates.append(candidate)
                                 }
                         }
@@ -274,15 +274,15 @@ private extension Engine {
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT rowid, word, jyutping FROM jyutpingtable WHERE ping = \(ping.hash);"
+                let queryString = "SELECT rowid, word, romanization FROM keyboardtable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                if !hasTones || tones == jyutping.tones || (tones.count == 1 && text.last == jyutping.last) {
-                                        let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
+                                if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
+                                        let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
                                         let rowCandidate: RowCandidate = (candidate: candidate, row: rowid)
                                         rowCandidates.append(rowCandidate)
                                 }
@@ -295,13 +295,13 @@ private extension Engine {
         func prefix(match text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, jyutping FROM jyutpingtable WHERE prefix = \(text.hash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization FROM keyboardtable WHERE prefix = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }

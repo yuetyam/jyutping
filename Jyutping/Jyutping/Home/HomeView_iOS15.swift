@@ -1,5 +1,5 @@
 import SwiftUI
-import JyutpingProvider
+import LookupData
 
 @available(iOS 15.0, *)
 struct HomeView_iOS15: View {
@@ -33,10 +33,9 @@ struct HomeView_iOS15: View {
                                                 .disableAutocorrection(true)
                                                 .onSubmit {
                                                         let newInput: String = inputText.filtered()
-                                                        if cantonese != newInput {
-                                                                cantonese = newInput
-                                                                pronunciations = newInput.isEmpty ? [] : JyutpingProvider.search(for: newInput)
-                                                        }
+                                                        guard cantonese != newInput else { return }
+                                                        cantonese = newInput
+                                                        pronunciations = newInput.isEmpty ? [] : LookupData.search(for: newInput)
                                                 }
                                 }
                                 if !cantonese.isEmpty && !pronunciations.isEmpty {

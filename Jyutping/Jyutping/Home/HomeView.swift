@@ -1,13 +1,13 @@
 import SwiftUI
 import AVFoundation
-import JyutpingProvider
+import LookupData
 
 struct HomeView: View {
 
         private let placeholder: String = NSLocalizedString("Text Field", comment: .empty)
         @State private var inputText: String = .empty
         private var rawCantonese: String { inputText.filtered() }
-        private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
+        private var jyutpings: [String] { LookupData.search(for: rawCantonese) }
 
         // Tones Input Section
         private let dotText: Text = Text(verbatim: "•")

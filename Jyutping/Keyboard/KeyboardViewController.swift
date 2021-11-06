@@ -1,7 +1,7 @@
 import UIKit
 import OpenCCLite
-import PinyinProvider
-import StrokeProvider
+import KeyboardData
+import LookupData
 
 final class KeyboardViewController: UIInputViewController {
 
@@ -120,8 +120,8 @@ final class KeyboardViewController: UIInputViewController {
                 userLexicon = nil
                 pinyinProvider?.close()
                 pinyinProvider = nil
-                strokeProvider?.close()
-                strokeProvider = nil
+                shapeData?.close()
+                shapeData = nil
         }
         override func viewDidDisappear(_ animated: Bool) {
                 super.viewDidDisappear(animated)
@@ -311,7 +311,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var userLexicon: UserLexicon? = UserLexicon()
         private lazy var engine: Engine? = Engine()
         private lazy var pinyinProvider: PinyinProvider? = nil
-        private lazy var strokeProvider: StrokeProvider? = nil
+        private lazy var shapeData: ShapeData? = nil
         private func suggest() {
                 switch processingText.first {
                 case .none:
@@ -327,31 +327,58 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         private func pinyinReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
                 if pinyinProvider == nil {
                         pinyinProvider = PinyinProvider()
                 }
-                let text: String = String(processingText.dropFirst())
-                let searches: [PinyinProvider.JyutpingCandidate] = pinyinProvider?.search(for: text) ?? []
-                let lookup: [Candidate] = searches.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
-                push(lookup)
+                guard let searches = pinyinProvider?.search(for: text), !searches.isEmpty else { return }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                push(joined)
         }
         private func cangjieReverseLookup() {
-                if strokeProvider == nil {
-                        strokeProvider = StrokeProvider()
-                }
                 let text: String = String(processingText.dropFirst())
-                let cangjieCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider?.matchCangjie(for: text) ?? []
-                let lookup: [Candidate] = cangjieCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
-                push(lookup)
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
+                if shapeData == nil {
+                        shapeData = ShapeData()
+                }
+                guard let searches = shapeData?.match(cangjie: text), !searches.isEmpty else { return }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                push(joined)
         }
         private func strokeReverseLookup() {
-                if strokeProvider == nil {
-                        strokeProvider = StrokeProvider()
-                }
                 let text: String = String(processingText.dropFirst())
-                let strokeCandidates: [StrokeProvider.StrokeCandidate] = strokeProvider?.matchStroke(for: text) ?? []
-                let lookup: [Candidate] = strokeCandidates.map { Candidate(text: $0.text, jyutping: $0.jyutping, input: $0.input, lexiconText: $0.text) }
-                push(lookup)
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
+                if shapeData == nil {
+                        shapeData = ShapeData()
+                }
+                guard let searches = shapeData?.match(stroke: text), !searches.isEmpty else { return }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                push(joined)
         }
         private func imeSuggest() {
                 let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []

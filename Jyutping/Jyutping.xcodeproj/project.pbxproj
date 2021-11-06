@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37290E94266F8FED00B96AD9 /* StrokeProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37290E93266F8FED00B96AD9 /* StrokeProvider */; };
+		37309DE12733074000858162 /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 37309DE02733074000858162 /* LookupData */; };
+		37309DE42733D60600858162 /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 37309DE32733D60600858162 /* LookupData */; };
+		37309DE62733D61100858162 /* KeyboardData in Frameworks */ = {isa = PBXBuildFile; productRef = 37309DE52733D61100858162 /* KeyboardData */; };
 		3738EC002704CF9A00E75BDF /* TonesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3738EBFF2704CF9A00E75BDF /* TonesTable.swift */; };
 		373C0DD626766A2300EA52E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373C0DD526766A2300EA52E4 /* Images.xcassets */; };
 		373C0DD826771C9700EA52E4 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373C0DD726771C9700EA52E4 /* UIImageExtensions.swift */; };
@@ -19,8 +21,6 @@
 		3759F433262FB65D00266086 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F432262FB65D00266086 /* JyutpingTests.swift */; };
 		3759F43E262FB65D00266086 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F43D262FB65D00266086 /* JyutpingUITests.swift */; };
 		3759F456262FBA0500266086 /* Keyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3759F44F262FBA0500266086 /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3759F463262FBF3800266086 /* JyutpingProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3759F462262FBF3800266086 /* JyutpingProvider */; };
-		3759F466262FBF7100266086 /* KeyboardDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 3759F465262FBF7100266086 /* KeyboardDataProvider */; };
 		3759F469262FBFF300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F46B262FBFF300266086 /* Localizable.strings */; };
 		3759F472262FC07D00266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F474262FC07D00266086 /* InfoPlist.strings */; };
 		3759F47B262FC17C00266086 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3759F47A262FC17C00266086 /* Settings.bundle */; };
@@ -80,7 +80,6 @@
 		378FEA48270C17CC00153488 /* JyutpingView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378FEA47270C17CC00153488 /* JyutpingView_iOS15.swift */; };
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
-		37AF5C7D266E527000F5E017 /* PinyinProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 37AF5C7C266E527000F5E017 /* PinyinProvider */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
 		37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E234ED271466B8005825A2 /* StringExtensions.swift */; };
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
@@ -127,7 +126,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		37290E92266F8FD800B96AD9 /* StrokeProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StrokeProvider; path = ../Helpers/StrokeProvider; sourceTree = "<group>"; };
+		37309DDF273306FA00858162 /* LookupData */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LookupData; path = ../LookupData; sourceTree = "<group>"; };
+		37309DE22733D5F500858162 /* KeyboardData */ = {isa = PBXFileReference; lastKnownFileType = folder; name = KeyboardData; path = ../KeyboardData; sourceTree = "<group>"; };
 		3738EBFF2704CF9A00E75BDF /* TonesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonesTable.swift; sourceTree = "<group>"; };
 		373C0DD526766A2300EA52E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		373C0DD726771C9700EA52E4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -146,8 +146,6 @@
 		3759F43F262FB65D00266086 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3759F44F262FBA0500266086 /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3759F453262FBA0500266086 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3759F460262FBF1C00266086 /* JyutpingProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JyutpingProvider; path = ../Helpers/JyutpingProvider; sourceTree = "<group>"; };
-		3759F464262FBF4F00266086 /* KeyboardDataProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = KeyboardDataProvider; path = ../Helpers/KeyboardDataProvider; sourceTree = "<group>"; };
 		3759F46A262FBFF300266086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3759F46C262FC02700266086 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3759F46D262FC02B00266086 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -222,7 +220,6 @@
 		378FEA47270C17CC00153488 /* JyutpingView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView_iOS15.swift; sourceTree = "<group>"; };
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
-		37AF5C7B266E519B00F5E017 /* PinyinProvider */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PinyinProvider; path = ../Helpers/PinyinProvider; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
 		37E234ED271466B8005825A2 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
@@ -235,7 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3759F463262FBF3800266086 /* JyutpingProvider in Frameworks */,
+				37309DE12733074000858162 /* LookupData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,10 +254,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37290E94266F8FED00B96AD9 /* StrokeProvider in Frameworks */,
-				37AF5C7D266E527000F5E017 /* PinyinProvider in Frameworks */,
+				37309DE42733D60600858162 /* LookupData in Frameworks */,
+				37309DE62733D61100858162 /* KeyboardData in Frameworks */,
 				3759F499262FC6DB00266086 /* OpenCCLite in Frameworks */,
-				3759F466262FBF7100266086 /* KeyboardDataProvider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,10 +266,8 @@
 		3759F40F262FB65C00266086 = {
 			isa = PBXGroup;
 			children = (
-				37290E92266F8FD800B96AD9 /* StrokeProvider */,
-				37AF5C7B266E519B00F5E017 /* PinyinProvider */,
-				3759F460262FBF1C00266086 /* JyutpingProvider */,
-				3759F464262FBF4F00266086 /* KeyboardDataProvider */,
+				37309DDF273306FA00858162 /* LookupData */,
+				37309DE22733D5F500858162 /* KeyboardData */,
 				3759F41A262FB65C00266086 /* Jyutping */,
 				3759F431262FB65D00266086 /* JyutpingTests */,
 				3759F43C262FB65D00266086 /* JyutpingUITests */,
@@ -537,7 +531,7 @@
 			);
 			name = Jyutping;
 			packageProductDependencies = (
-				3759F462262FBF3800266086 /* JyutpingProvider */,
+				37309DE02733074000858162 /* LookupData */,
 			);
 			productName = Jyutping;
 			productReference = 3759F418262FB65C00266086 /* Jyutping.app */;
@@ -593,10 +587,9 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
-				3759F465262FBF7100266086 /* KeyboardDataProvider */,
 				3759F498262FC6DB00266086 /* OpenCCLite */,
-				37AF5C7C266E527000F5E017 /* PinyinProvider */,
-				37290E93266F8FED00B96AD9 /* StrokeProvider */,
+				37309DE32733D60600858162 /* LookupData */,
+				37309DE52733D61100858162 /* KeyboardData */,
 			);
 			productName = Keyboard;
 			productReference = 3759F44F262FBA0500266086 /* Keyboard.appex */;
@@ -1248,26 +1241,22 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		37290E93266F8FED00B96AD9 /* StrokeProvider */ = {
+		37309DE02733074000858162 /* LookupData */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = StrokeProvider;
+			productName = LookupData;
 		};
-		3759F462262FBF3800266086 /* JyutpingProvider */ = {
+		37309DE32733D60600858162 /* LookupData */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = JyutpingProvider;
+			productName = LookupData;
 		};
-		3759F465262FBF7100266086 /* KeyboardDataProvider */ = {
+		37309DE52733D61100858162 /* KeyboardData */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = KeyboardDataProvider;
+			productName = KeyboardData;
 		};
 		3759F498262FC6DB00266086 /* OpenCCLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3759F497262FC6DB00266086 /* XCRemoteSwiftPackageReference "OpenCCLite" */;
 			productName = OpenCCLite;
-		};
-		37AF5C7C266E527000F5E017 /* PinyinProvider */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PinyinProvider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

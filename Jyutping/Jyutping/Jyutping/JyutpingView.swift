@@ -1,6 +1,6 @@
 import SwiftUI
 import AVFoundation
-import JyutpingProvider
+import LookupData
 
 struct JyutpingView: View {
 
@@ -8,7 +8,7 @@ struct JyutpingView: View {
         @State private var inputText: String = .empty
 
         private var rawCantonese: String { inputText.filtered() }
-        private var jyutpings: [String] { JyutpingProvider.search(for: rawCantonese) }
+        private var jyutpings: [String] { LookupData.search(for: rawCantonese) }
 
         var body: some View {
                 NavigationView {
