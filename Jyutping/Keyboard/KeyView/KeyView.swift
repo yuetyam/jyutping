@@ -141,7 +141,7 @@ final class KeyView: UIView {
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 10 else { break }
-                        controller.inputText = "" // FIXME: Dragging in input text
+                        controller.inputText = .empty // FIXME: Dragging in input text
                         let offset: Int = distance > 0 ? 1 : -1
                         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location
@@ -151,7 +151,7 @@ final class KeyView: UIView {
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { break }
-                        controller.inputText = ""
+                        controller.inputText = .empty
                 default:
                         break
                 }
@@ -215,7 +215,7 @@ final class KeyView: UIView {
                         } else {
                                 let combined: String = controller.inputText + text
                                 controller.output(combined)
-                                controller.inputText = ""
+                                controller.inputText = .empty
                         }
                 case .key:
                         if isPhonePortrait {

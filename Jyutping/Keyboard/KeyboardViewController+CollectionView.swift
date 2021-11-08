@@ -116,7 +116,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         break
                 case .some("r"), .some("v"), .some("x"):
                         if inputText.count == candidate.input.count + 1 {
-                                inputText = ""
+                                inputText = .empty
                         } else {
                                 let first: String = String(inputText.first!)
                                 let tail = inputText.dropFirst(candidate.input.count + 1)

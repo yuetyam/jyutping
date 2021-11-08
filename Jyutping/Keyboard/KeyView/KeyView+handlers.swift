@@ -54,7 +54,7 @@ extension KeyView {
                                 let text: String = controller.inputText + "，"
                                 controller.output(text)
                                 AudioFeedback.perform(.input)
-                                controller.inputText = ""
+                                controller.inputText = .empty
                         }
                 case .key(let keySeat):
                         guard peekingText == nil else { return }
@@ -104,7 +104,7 @@ extension KeyView {
                 }
                 controller.output(controller.inputText)
                 AudioFeedback.perform(.input)
-                controller.inputText = ""
+                controller.inputText = .empty
         }
         func doubleTapShift() {
                 controller.keyboardLayout = layout.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
@@ -155,7 +155,7 @@ extension KeyView {
                         guard let firstCandidate: Candidate = controller.candidates.first else {
                                 controller.output(inputText)
                                 AudioFeedback.perform(.modify)
-                                controller.inputText = ""
+                                controller.inputText = .empty
                                 return
                         }
                         controller.output(firstCandidate.text)
@@ -166,7 +166,7 @@ extension KeyView {
                                 break
                         case .some("r"), .some("v"), .some("x"):
                                 if inputText.count == (firstCandidate.input.count + 1) {
-                                        controller.inputText = ""
+                                        controller.inputText = .empty
                                 } else {
                                         let first: String = String(inputText.first!)
                                         let tail = inputText.dropFirst(firstCandidate.input.count + 1)

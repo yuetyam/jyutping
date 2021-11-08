@@ -37,6 +37,9 @@ extension String {
         func removedSpacesTones() -> String {
                 return self.filter({ !$0.isSpaceOrTone })
         }
+
+        /// aka. `String.init()`
+        static let empty: String = ""
 }
 
 extension Optional where Wrapped == String {

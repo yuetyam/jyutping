@@ -78,7 +78,7 @@ final class KeyboardViewController: UIInputViewController {
                 } else {
                         if !inputText.isEmpty && !textDocumentProxy.hasText {
                                 // User just tapped the Clear button in the text field
-                                inputText = ""
+                                inputText = .empty
                         }
                 }
         }
@@ -156,7 +156,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         if (!keyboardLayout.isCantoneseMode) && (!inputText.isEmpty) {
                                 let text: String = inputText
-                                inputText = ""
+                                inputText = .empty
                                 insert(text)
                         }
                 }
@@ -165,11 +165,11 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Input
 
-        lazy var inputText: String = "" {
+        lazy var inputText: String = .empty {
                 didSet {
                         switch inputText.first {
                         case .none:
-                                processingText = ""
+                                processingText = .empty
                         case .some("r"), .some("v"), .some("x"):
                                 processingText = inputText
                         default:
@@ -196,7 +196,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        private lazy var processingText: String = "" {
+        private lazy var processingText: String = .empty {
                 didSet {
                         DispatchQueue.main.async { [unowned self] in
                                 self.toolBar.update()
@@ -205,7 +205,7 @@ final class KeyboardViewController: UIInputViewController {
                         switch processingText.first {
                         case .none:
                                 syllablesSchemes = []
-                                markedText = ""
+                                markedText = .empty
                                 candidates = []
                         case .some("r"), .some("v"), .some("x"):
                                 syllablesSchemes = []
@@ -233,7 +233,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        private lazy var markedText: String = "" {
+        private lazy var markedText: String = .empty {
 
                 // REASON: Chrome
                 willSet {
@@ -629,7 +629,7 @@ final class KeyboardViewController: UIInputViewController {
                 toneStyle = UserDefaults.standard.integer(forKey: "tone_style")
         }
 
-        private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? ""
+        private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty
         func updateFrequentEmojis(latest emoji: String) {
                 let combined: String = emoji + frequentEmojis
                 let uniqued: [String] = combined.map({ String($0) }).uniqued()

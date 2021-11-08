@@ -2,13 +2,13 @@ struct Splitter {
         private static func prepare(text: String) -> (text: String, raw: String, tones: String, blocks: [String]) {
                 let tones: String = text.tones
                 guard !tones.isEmpty else { return (text, text, tones, []) }
-                var unit: String = ""
+                var unit: String = .empty
                 var blocks: [String] = []
                 for character in text {
                         unit.append(character)
                         if character.isTone {
                                 blocks.append(unit)
-                                unit = ""
+                                unit = .empty
                         }
                 }
                 if !unit.isEmpty {
