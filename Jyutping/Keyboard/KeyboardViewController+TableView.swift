@@ -87,25 +87,21 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-
                 case 1:
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
-                                cell.accessoryType = logogram < 2 ? .checkmark : .none
                         case 1:
                                 cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: "")
-                                cell.accessoryType = logogram == 2 ? .checkmark : .none
                         case 2:
                                 cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: "")
-                                cell.accessoryType = logogram == 3 ? .checkmark : .none
                         case 3:
                                 cell.textLabel?.text = NSLocalizedString("Simplified", comment: "")
-                                cell.accessoryType = logogram == 4 ? .checkmark : .none
                         default:
                                 break
                         }
+                        cell.accessoryType = Logogram.current.rawValue == (indexPath.row + 1) ? .checkmark : .none
                         return cell
 
                 case 2:
@@ -177,16 +173,17 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
-                                UserDefaults.standard.set(1, forKey: "logogram")
+                                Logogram.changeCurent(to: .traditional)
                         case 1:
-                                UserDefaults.standard.set(2, forKey: "logogram")
+                                Logogram.changeCurent(to: .hongkong)
                         case 2:
-                                UserDefaults.standard.set(3, forKey: "logogram")
+                                Logogram.changeCurent(to: .taiwan)
                         case 3:
-                                UserDefaults.standard.set(4, forKey: "logogram")
+                                Logogram.changeCurent(to: .simplified)
                         default:
                                 break
                         }
+                        Logogram.updatePreference()
                         triggerHapticFeedback()
                         updateConverter()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {

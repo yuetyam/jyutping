@@ -75,7 +75,11 @@ extension KeyView {
                 case .key(let seat):
                         return seat.primary.text
                 case .space:
-                        return layout.isEnglishMode ? "English" : "粵拼"
+                        if layout.isEnglishMode {
+                                return "English"
+                        } else {
+                                return Logogram.current == .simplified ? "粤拼" : "粵拼"
+                        }
                 case .newLine:
                         return newLineKeyText
                 case .switchTo(let newLayout):
@@ -85,7 +89,7 @@ extension KeyView {
                         case .cantoneseSymbolic, .symbolic:
                                 return "#+="
                         case .cantonese:
-                                return layout == .emoji ? "返回" : "拼"
+                                return "拼"
                         case .alphabetic:
                                 return "ABC"
                         default:
@@ -96,6 +100,68 @@ extension KeyView {
                 }
         }
         private var newLineKeyText: String {
+                guard !layout.isEnglishMode else {
+                        guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return "return" }
+                        switch returnKeyType {
+                        case .continue:
+                                return "continue"
+                        case .default:
+                                return "return"
+                        case .done:
+                                return "done"
+                        case .emergencyCall:
+                                return "emergency"
+                        case .go:
+                                return "go"
+                        case .google:
+                                return "google"
+                        case .join:
+                                return "join"
+                        case .next:
+                                return "next"
+                        case .route:
+                                return "route"
+                        case .search:
+                                return "search"
+                        case .send:
+                                return "send"
+                        case .yahoo:
+                                return "yahoo"
+                        @unknown default:
+                                return "return"
+                        }
+                }
+                guard Logogram.current != .simplified else {
+                        guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return "换行" }
+                        switch returnKeyType {
+                        case .continue:
+                                return "继续"
+                        case .default:
+                                return "换行"
+                        case .done:
+                                return "完成"
+                        case .emergencyCall:
+                                return "紧急"
+                        case .go:
+                                return "前往"
+                        case .google:
+                                return "谷歌"
+                        case .join:
+                                return "加入"
+                        case .next:
+                                return "下一个"
+                        case .route:
+                                return "路线"
+                        case .search:
+                                return "搜寻"
+                        case .send:
+                                return "传送"
+                        case .yahoo:
+                                return "雅虎"
+                        @unknown default:
+                                return "换行"
+                        }
+                }
                 guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return "換行" }
                 switch returnKeyType {
                 case .continue:

@@ -396,7 +396,7 @@ final class KeyboardViewController: UIInputViewController {
                 push(combined)
         }
         private func push(_ origin: [Candidate]) {
-                if logogram < 2 {
+                if Logogram.current == .traditional {
                         candidates = origin.uniqued()
                 } else if converter == nil {
                         candidates = origin.uniqued()
@@ -537,27 +537,14 @@ final class KeyboardViewController: UIInputViewController {
                 isHapticFeedbackOn = hasFullAccess && UserDefaults.standard.bool(forKey: "haptic_feedback")
         }
 
-        /// 候選詞字符標準
-        ///
-        /// 0: The key "logogram" doesn‘t exist.
-        ///
-        /// 1: 傳統漢字
-        ///
-        /// 2: 傳統漢字（香港）
-        ///
-        /// 3: 傳統漢字（臺灣）
-        ///
-        /// 4: 簡化字
-        private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
         private lazy var converter: Converter? = {
                 let conversion: Converter.Conversion? = {
-                        let logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
-                        switch logogram {
-                        case 2:
+                        switch Logogram.current {
+                        case .hongkong:
                                 return .hkStandard
-                        case 3:
+                        case .taiwan:
                                 return .twStandard
-                        case 4:
+                        case .simplified:
                                 return .simplify
                         default:
                                 return nil
@@ -568,14 +555,13 @@ final class KeyboardViewController: UIInputViewController {
                 return converter
         }()
         func updateConverter() {
-                logogram = UserDefaults.standard.integer(forKey: "logogram")
                 let conversion: Converter.Conversion? = {
-                        switch logogram {
-                        case 2:
+                        switch Logogram.current {
+                        case .hongkong:
                                 return .hkStandard
-                        case 3:
+                        case .taiwan:
                                 return .twStandard
-                        case 4:
+                        case .simplified:
                                 return .simplify
                         default:
                                 return nil

@@ -55,7 +55,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 if cell.footnoteStyle != self.footnoteStyle {
                         cell.shouldUpdateSubviews = true
                 }
-                if cell.logogram != self.logogram {
+                if cell.logogram != Logogram.current {
                         cell.shouldUpdateFonts = true
                 }
                 cell.textLabel.text = candidates[indexPath.row].text

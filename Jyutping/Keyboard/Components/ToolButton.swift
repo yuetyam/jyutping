@@ -51,8 +51,9 @@ final class YueEngSwitch: UIButton {
         required init?(coder: NSCoder) { fatalError("YueEngSwitch.init(coder:) error") }
 
         func update(isDarkAppearance: Bool, switched: Bool) {
-                let same: Bool = self.isDarkAppearance == isDarkAppearance && self.switched == switched
-                guard !same else { return }
+                yueLabel.text = Logogram.current == .simplified ? "粤" : "粵"
+                let isSameState: Bool = self.isDarkAppearance == isDarkAppearance && self.switched == switched
+                guard !isSameState else { return }
                 self.isDarkAppearance = isDarkAppearance
                 self.switched = switched
 
@@ -125,7 +126,7 @@ final class YueEngSwitch: UIButton {
                 engLabel.textAlignment = .center
                 yueLabel.textColor = isDarkAppearance ? .white : .black
                 engLabel.textColor = isDarkAppearance ? .white : .black
-                yueLabel.text = "粵"
+                yueLabel.text = Logogram.current == .simplified ? "粤" : "粵"
                 engLabel.text = "EN"
                 if switched {
                         yueLabel.font = .systemFont(ofSize: 12)

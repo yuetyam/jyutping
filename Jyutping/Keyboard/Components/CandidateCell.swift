@@ -8,7 +8,7 @@ final class CandidateCell: UICollectionViewCell {
         private(set) lazy var footnoteStyle: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
         lazy var shouldUpdateSubviews: Bool = false
 
-        private(set) lazy var logogram: Int = UserDefaults.standard.integer(forKey: "logogram")
+        private(set) lazy var logogram: Logogram = Logogram.current
         lazy var shouldUpdateFonts: Bool = false
 
         override init(frame: CGRect) {
@@ -42,7 +42,7 @@ final class CandidateCell: UICollectionViewCell {
                         shouldUpdateSubviews = false
                 }
                 if shouldUpdateFonts {
-                        logogram = UserDefaults.standard.integer(forKey: "logogram")
+                        logogram = Logogram.current
                         updateFonts()
                         shouldUpdateFonts = false
                 }
@@ -82,9 +82,9 @@ final class CandidateCell: UICollectionViewCell {
 
         private func updateFonts() {
                 switch logogram {
-                case 3:
+                case .taiwan:
                         textLabel.font = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
-                case 4:
+                case .simplified:
                         textLabel.font = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
                 default:
                         textLabel.font = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
