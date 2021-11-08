@@ -16,6 +16,7 @@ struct JyutpingView_iOS15: View {
                                         TextField("Lookup Jyutping for Cantonese", text: $inputText)
                                                 .autocapitalization(.none)
                                                 .disableAutocorrection(true)
+                                                .submitLabel(.search)
                                                 .onSubmit {
                                                         submittedText = inputText
                                                         let newInput: String = inputText.filtered()
