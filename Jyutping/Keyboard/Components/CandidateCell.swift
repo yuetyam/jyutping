@@ -82,12 +82,16 @@ final class CandidateCell: UICollectionViewCell {
 
         private func updateFonts() {
                 switch logogram {
+                case .traditional:
+                        let preferSC: Bool = Locale.preferredLanguages.first?.hasPrefix("zh-Hans") ?? false
+                        let fontName: String = preferSC ? "PingFang SC" : "PingFang HK"
+                        textLabel.font = UIFont(name: fontName, size: 20)
+                case .hongkong:
+                        textLabel.font = UIFont(name: "PingFang HK", size: 20)
                 case .taiwan:
-                        textLabel.font = UIFont(name: "PingFang TC", size: 20) ?? .systemFont(ofSize: 20)
+                        textLabel.font = UIFont(name: "PingFang TC", size: 20)
                 case .simplified:
-                        textLabel.font = UIFont(name: "PingFang SC", size: 20) ?? .systemFont(ofSize: 20)
-                default:
-                        textLabel.font = UIFont(name: "PingFang HK", size: 20) ?? .systemFont(ofSize: 20)
+                        textLabel.font = UIFont(name: "PingFang SC", size: 20)
                 }
         }
 }
