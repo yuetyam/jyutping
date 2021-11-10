@@ -353,7 +353,7 @@ final class KeyboardViewController: UIInputViewController {
                 if shapeData == nil {
                         shapeData = ShapeData()
                 }
-                guard let searches = shapeData?.match(cangjie: text), !searches.isEmpty else { return }
+                guard let searches = shapeData?.search(cangjie: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
                         let romanizations: [String] = LookupData.search(for: lexicon.text)
                         let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })
@@ -371,7 +371,7 @@ final class KeyboardViewController: UIInputViewController {
                 if shapeData == nil {
                         shapeData = ShapeData()
                 }
-                guard let searches = shapeData?.match(stroke: text), !searches.isEmpty else { return }
+                guard let searches = shapeData?.search(stroke: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
                         let romanizations: [String] = LookupData.search(for: lexicon.text)
                         let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })

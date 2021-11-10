@@ -28,12 +28,12 @@ final class KeyboardDataTests: XCTestCase {
         }
 
         func testCangjie() throws {
-                let matches = shape.match(cangjie: "dam")
+                let matches = shape.search(cangjie: "dam")
                 let first = matches.first!
                 XCTAssertEqual(first.text, "查")
         }
         func testStroke() throws {
-                let matches = shape.match(stroke: "wsad")
+                let matches = shape.search(stroke: "wsad")
                 let first = matches.first!
                 XCTAssertEqual(first.text, "木")
         }
