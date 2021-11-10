@@ -128,7 +128,7 @@ private struct ToneCell: View {
                                                         Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
-                                        .frame(width: width + 24, alignment: .leading)
+                                        .frame(width: width + 20, alignment: .leading)
                                         Text(verbatim: components[1]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[2]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[3])
@@ -144,7 +144,7 @@ private struct ToneCell: View {
                                                         Image.speaker.foregroundColor(.blue)
                                                 }
                                         }
-                                        .frame(width: width + 24, alignment: .leading)
+                                        .frame(width: width + 20, alignment: .leading)
                                         Text(verbatim: components[1]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[2]).frame(width: width - 8, alignment: .leading)
                                         Text(verbatim: components[3])
