@@ -80,12 +80,11 @@ final class CandidateCell: UICollectionViewCell {
                 footnoteLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 14)
         ]
 
+        private static let preferSC: Bool = Locale.preferredLanguages.first?.hasPrefix("zh-Hans") ?? false
         private func updateFonts() {
                 switch logogram {
                 case .traditional:
-                        let preferSC: Bool = Locale.preferredLanguages.first?.hasPrefix("zh-Hans") ?? false
-                        let fontName: String = preferSC ? "PingFang SC" : "PingFang HK"
-                        textLabel.font = UIFont(name: fontName, size: 20)
+                        textLabel.font = Self.preferSC ? .systemFont(ofSize: 20) : UIFont(name: "PingFang HK", size: 20)
                 case .hongkong:
                         textLabel.font = UIFont(name: "PingFang HK", size: 20)
                 case .taiwan:
