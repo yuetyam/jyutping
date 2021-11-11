@@ -63,13 +63,13 @@ final class YueEngSwitch: UIButton {
                 if switched {
                         leftForeView.backgroundColor = .clear
                         rightForeView.backgroundColor = isDarkAppearance ? darkFore : .white
-                        yueLabel.font = .systemFont(ofSize: 12)
-                        engLabel.font = .systemFont(ofSize: 13)
+                        yueLabel.font = small
+                        engLabel.font = large
                 } else {
                         leftForeView.backgroundColor = isDarkAppearance ? darkFore : .white
                         rightForeView.backgroundColor = .clear
-                        yueLabel.font = .systemFont(ofSize: 15)
-                        engLabel.font = .systemFont(ofSize: 10)
+                        yueLabel.font = large
+                        engLabel.font = small
                 }
         }
         private func setupBackView() {
@@ -127,13 +127,13 @@ final class YueEngSwitch: UIButton {
                 yueLabel.textColor = isDarkAppearance ? .white : .black
                 engLabel.textColor = isDarkAppearance ? .white : .black
                 yueLabel.text = Logogram.current == .simplified ? "粤" : "粵"
-                engLabel.text = "EN"
+                engLabel.text = "A"
                 if switched {
-                        yueLabel.font = .systemFont(ofSize: 12)
-                        engLabel.font = .systemFont(ofSize: 13)
+                        yueLabel.font = small
+                        engLabel.font = large
                 } else {
-                        yueLabel.font = .systemFont(ofSize: 15)
-                        engLabel.font = .systemFont(ofSize: 10)
+                        yueLabel.font = large
+                        engLabel.font = small
                 }
                 NSLayoutConstraint.activate([
                         yueLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -149,10 +149,12 @@ final class YueEngSwitch: UIButton {
         private let lightBack: UIColor = UIColor(displayP3Red: 201.0 / 255, green: 203.0 / 255, blue: 209.0 / 255, alpha: 1)
         private let darkBack: UIColor = UIColor(displayP3Red: 62.0 / 255, green: 62.0 / 255, blue: 66.0 / 255, alpha: 1)
         private let darkFore: UIColor = UIColor(displayP3Red: 115.0 / 255, green: 115.0 / 255, blue: 120.0 / 255, alpha: 1)
+        private let large: UIFont = .systemFont(ofSize: 15)
+        private let small: UIFont = .systemFont(ofSize: 13)
 
         override var accessibilityValue: String? {
                 get {
-                        return switched ? NSLocalizedString("Current mode: English", comment: "") : NSLocalizedString("Current mode: Cantonese", comment: "")
+                        return switched ? NSLocalizedString("Current mode: English", comment: .empty) : NSLocalizedString("Current mode: Cantonese", comment: .empty)
                 }
                 set {}
         }
