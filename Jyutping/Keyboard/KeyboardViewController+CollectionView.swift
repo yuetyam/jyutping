@@ -258,6 +258,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
         }
 
+        // not well
+        /*
         func scrollViewDidScroll(_ scrollView: UIScrollView) {
                 let visibleCount: Int = emojiCollectionView.visibleCells.count
                 guard visibleCount > 0 else { return }
@@ -267,4 +269,5 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 _ = emojiBoard.indicatorsStackView.arrangedSubviews.map { $0.tintColor = .systemGray }
                 emojiBoard.indicatorsStackView.arrangedSubviews[indexPath.section].tintColor = isDarkAppearance ? .white : .black
         }
+        */
 }

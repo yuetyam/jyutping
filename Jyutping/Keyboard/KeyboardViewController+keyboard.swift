@@ -125,14 +125,18 @@ extension KeyboardViewController {
         @objc private func handleIndicator(_ sender: Indicator) {
                 triggerHapticFeedback()
                 AudioFeedback.perform(.modify)
-                if sender.index == 0 {
-                        guard !frequentEmojis.isEmpty else { return }
-                        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
-                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-                } else {
-                        let indexPath: IndexPath = IndexPath(row: 15, section: sender.index)
-                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-                }
+                _ = emojiBoard.indicatorsStackView.arrangedSubviews.filter({ $0.tintColor != .systemGray }).map({ $0.tintColor = .systemGray })
+                let indexPath: IndexPath = {
+                        if sender.index != 0 {
+                                return IndexPath(row: 15, section: sender.index)
+                        } else if frequentEmojis.isEmpty {
+                                return IndexPath(row: 0, section: 1)
+                        } else {
+                                return IndexPath(row: 0, section: 0)
+                        }
+                }()
+                emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+                emojiBoard.indicatorsStackView.arrangedSubviews[sender.index].tintColor = isDarkAppearance ? .white : .black
         }
 
 
