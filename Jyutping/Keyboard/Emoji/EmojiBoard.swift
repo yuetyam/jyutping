@@ -57,7 +57,7 @@ final class EmojiBoard: UIView {
                 let indicator_7: Indicator = Indicator(index: 7, imageName: "EmojiICategorySymbols")
                 let indicator_8: Indicator = Indicator(index: 8, imageName: "flag")
                 indicatorsStackView.distribution = .fillProportionally
-                indicatorsStackView.addMultipleArrangedSubviews([indicator_0, indicator_1, indicator_2, indicator_3, indicator_4, indicator_5, indicator_6, indicator_7, indicator_8])
+                indicatorsStackView.addArrangedSubviews([indicator_0, indicator_1, indicator_2, indicator_3, indicator_4, indicator_5, indicator_6, indicator_7, indicator_8])
                 addSubview(indicatorsStackView)
                 indicatorsStackView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([

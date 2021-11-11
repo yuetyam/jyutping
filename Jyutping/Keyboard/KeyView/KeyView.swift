@@ -386,7 +386,7 @@ final class KeyView: UIView {
                 }()
                 let stackView: UIStackView = UIStackView(frame: rect)
                 stackView.distribution = .fillEqually
-                stackView.addMultipleArrangedSubviews(calloutViews)
+                stackView.addArrangedSubviews(calloutViews)
                 return stackView
         }()
         private lazy var calloutLayer: CAShapeLayer = {

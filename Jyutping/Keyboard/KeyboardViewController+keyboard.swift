@@ -29,14 +29,14 @@ extension KeyboardViewController {
                 let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
                         return makeKey(for: $0, controller: self)
                 }
-                bottomStackView.removeAllArrangedSubviews()
-                bottomStackView.addMultipleArrangedSubviews(bottomViews)
+                bottomStackView.removeArrangedSubviews()
+                bottomStackView.addArrangedSubviews(bottomViews)
         }
 
         // MARK: - Normal Layouts
 
         private func loadKeys() {
-                keyboardStackView.removeAllArrangedSubviews()
+                keyboardStackView.removeArrangedSubviews()
                 toolBar.tintColor = isDarkAppearance ? .white : .black
                 toolBar.yueEngSwitch.update(isDarkAppearance: isDarkAppearance, switched: keyboardLayout.isEnglishMode)
                 if !UIPasteboard.general.hasStrings {
@@ -45,7 +45,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(toolBar)
                 let events: [[KeyboardEvent]] = keyboardLayout.events(for: arrangement, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 let keysRows: [UIStackView] = makeKeysRows(for: events.dropLast())
-                keyboardStackView.addMultipleArrangedSubviews(keysRows)
+                keyboardStackView.addArrangedSubviews(keysRows)
                 guard let bottomEvents: [KeyboardEvent] = events.last else { return }
                 let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
                         if $0 == .key(.cantoneseComma) && !inputText.isEmpty {
@@ -53,8 +53,8 @@ extension KeyboardViewController {
                         }
                         return makeKey(for: $0, controller: self)
                 }
-                bottomStackView.removeAllArrangedSubviews()
-                bottomStackView.addMultipleArrangedSubviews(bottomViews)
+                bottomStackView.removeArrangedSubviews()
+                bottomStackView.addArrangedSubviews(bottomViews)
                 keyboardStackView.addArrangedSubview(bottomStackView)
         }
 
@@ -62,12 +62,12 @@ extension KeyboardViewController {
         // MARK: - NumberPad & DecimalPad
 
         private func loadNumberPad() {
-                keyboardStackView.removeAllArrangedSubviews()
+                keyboardStackView.removeArrangedSubviews()
                 let digits: [[Int]] = [[1, 2, 3],
                                        [4, 5, 6],
                                        [7, 8, 9]]
                 let keysRows: [UIStackView] = digits.map { makeDigitsRow(for: $0) }
-                keyboardStackView.addMultipleArrangedSubviews(keysRows)
+                keyboardStackView.addArrangedSubviews(keysRows)
 
                 let bottomStackView: UIStackView = UIStackView()
                 bottomStackView.distribution = .fillProportionally
@@ -84,7 +84,7 @@ extension KeyboardViewController {
         private func makeDigitsRow(for digits: [Int]) -> UIStackView {
                 let stackView: UIStackView = UIStackView()
                 stackView.distribution = .fillProportionally
-                stackView.addMultipleArrangedSubviews(digits.map { NumberButton(digit: $0, controller: self) })
+                stackView.addArrangedSubviews(digits.map { NumberButton(digit: $0, controller: self) })
                 return stackView
         }
 
@@ -93,7 +93,7 @@ extension KeyboardViewController {
 
         private func loadEmojiKeyboard() {
                 let height: CGFloat = view.frame.height
-                keyboardStackView.removeAllArrangedSubviews()
+                keyboardStackView.removeArrangedSubviews()
                 emojiBoard.addSubview(emojiCollectionView)
                 emojiCollectionView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -150,7 +150,7 @@ extension KeyboardViewController {
         }
         private func loadCandidateBoard() {
                 let height: CGFloat = view.frame.height
-                keyboardStackView.removeAllArrangedSubviews()
+                keyboardStackView.removeArrangedSubviews()
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(toolBar.collectionViewConstraints)
 
@@ -177,7 +177,7 @@ extension KeyboardViewController {
 
         private func loadSettingsView() {
                 let height: CGFloat = view.frame.height
-                keyboardStackView.removeAllArrangedSubviews()
+                keyboardStackView.removeArrangedSubviews()
                 let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 128
                 let upArrow: ToolButton = ToolButton(imageName: "chevron.up", leftInset: 16, rightInset: 16)
                 settingsView.addSubview(upArrow)
@@ -218,7 +218,7 @@ extension KeyboardViewController {
                 let stackView: UIStackView = UIStackView()
                 stackView.distribution = .fillProportionally
                 let keys: [KeyView] = events.map { makeKey(for: $0, controller: controller) }
-                stackView.addMultipleArrangedSubviews(keys)
+                stackView.addArrangedSubviews(keys)
                 return stackView
         }
         private func makeKey(for event: KeyboardEvent, controller: KeyboardViewController) -> KeyView {
