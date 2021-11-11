@@ -7,8 +7,11 @@ final class KeyView: UIView {
         let controller: KeyboardViewController
         let layout: KeyboardLayout
         let isDarkAppearance: Bool
+        let isCompactInterface: Bool
         let isPhonePortrait: Bool
-        let isPhoneInterface: Bool
+        let isPhoneLandscape: Bool
+        let isPadFloating: Bool
+        let isPadPortrait: Bool
         let isPadLandscape: Bool
 
         init(event: KeyboardEvent, controller: KeyboardViewController) {
@@ -16,8 +19,11 @@ final class KeyView: UIView {
                 self.controller = controller
                 layout = controller.keyboardLayout
                 isDarkAppearance = controller.isDarkAppearance
+                isCompactInterface = controller.isCompactInterface
                 isPhonePortrait = controller.isPhonePortrait
-                isPhoneInterface = controller.isPhoneInterface
+                isPhoneLandscape = controller.isPhoneLandscape
+                isPadFloating = controller.isPadFloating
+                isPadPortrait = controller.isPadPortrait
                 isPadLandscape = controller.isPadLandscape
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
@@ -402,13 +408,13 @@ final class KeyView: UIView {
                 switch event {
                 case .key(let seat) where seat.hasChildren:
                         let firstChild: KeyElement = seat.children.first!
-                        let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, isPhoneInterface: isPhoneInterface)
+                        let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, isPhoneInterface: isCompactInterface)
                         firstKey.backgroundColor = .selection
                         firstKey.setTextColor(.white)
                         var keys: [CalloutView] = [firstKey]
                         for index in 1..<seat.children.count {
                                 let element: KeyElement = seat.children[index]
-                                let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, isPhoneInterface: isPhoneInterface)
+                                let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, isPhoneInterface: isCompactInterface)
                                 keys.append(callout)
                         }
                         return beyondMidX ? keys.reversed() : keys

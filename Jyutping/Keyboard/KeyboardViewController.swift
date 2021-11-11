@@ -498,16 +498,23 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Properties
 
+        private lazy var isPhone: Bool = traitCollection.userInterfaceIdiom == .phone
+        private lazy var isPad: Bool = traitCollection.userInterfaceIdiom == .pad
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-        private(set) lazy var isPhonePortrait: Bool = traitCollection.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular
-        private(set) lazy var isPhoneInterface: Bool = traitCollection.userInterfaceIdiom == .phone || traitCollection.horizontalSizeClass == .compact
-        private(set) lazy var isPadLandscape: Bool = UIScreen.main.bounds.width > UIScreen.main.bounds.height
+        private(set) lazy var isCompactInterface: Bool = isPhone || traitCollection.horizontalSizeClass == .compact
+        private(set) lazy var isPhonePortrait: Bool = isPhone && traitCollection.verticalSizeClass == .regular
+        private(set) lazy var isPhoneLandscape: Bool = isPhone && traitCollection.verticalSizeClass == .compact
+        private(set) lazy var isPadFloating: Bool = isPad && traitCollection.horizontalSizeClass == .compact
+        private(set) lazy var isPadPortrait: Bool = !isCompactInterface && UIScreen.main.bounds.width < UIScreen.main.bounds.height
+        private(set) lazy var isPadLandscape: Bool = !isCompactInterface && UIScreen.main.bounds.width > UIScreen.main.bounds.height
         private func updateProperties() {
-                let isPhone: Bool = traitCollection.userInterfaceIdiom == .phone
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+                isCompactInterface = isPhone || traitCollection.horizontalSizeClass == .compact
                 isPhonePortrait = isPhone && traitCollection.verticalSizeClass == .regular
-                isPhoneInterface = isPhone || traitCollection.horizontalSizeClass == .compact
-                isPadLandscape = UIScreen.main.bounds.width > UIScreen.main.bounds.height
+                isPhoneLandscape = isPhone && traitCollection.verticalSizeClass == .compact
+                isPadFloating = isPad && traitCollection.horizontalSizeClass == .compact
+                isPadPortrait = !isCompactInterface && UIScreen.main.bounds.width < UIScreen.main.bounds.height
+                isPadLandscape = !isCompactInterface && UIScreen.main.bounds.width > UIScreen.main.bounds.height
         }
 
 
