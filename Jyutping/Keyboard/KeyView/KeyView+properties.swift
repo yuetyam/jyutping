@@ -21,38 +21,30 @@ extension KeyView {
                 }
         }
         var height: CGFloat {
-                let widthPoints: CGFloat =  UIScreen.main.bounds.width
-                let heightPoints: CGFloat = UIScreen.main.bounds.height
-                switch traitCollection.userInterfaceIdiom {
-                case .phone:
-                        guard controller.traitCollection.verticalSizeClass != .compact else {
-                                // iPhone SE1, iPod touch 7. (w480 x h320) in landscape
-                                return heightPoints < 350 ? 36 : 40
-                        }
-                        if widthPoints < 350 {
-                                // iPhone SE1, iPod touch 7. (320 x 480)
+                if isPadPortrait {
+                        return 70
+                } else if isPadLandscape {
+                        return 80
+                } else if isPadFloating {
+                        return 48
+                } else if isPhoneLandscape {
+                        // iPhone SE1, iPod touch 7 (w480 x h320)
+                        return screenHeight < 350 ? 36 : 40
+                } else {
+                        if screenWidth < 350 {
+                                // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
-                        } else if widthPoints < 400 {
-                                // iPhone 6s, 7, 8, SE2. (375 x 667)
-                                // iPhone X, Xs, 11 Pro, 12 mini. (375 x 812)
-                                // iPhone 12 Pro, 12. (390 x 844)
+                        } else if screenWidth < 400 {
+                                // iPhone 6s, 7, 8, SE2 (375 x 667)
+                                // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
+                                // iPhone 12, 12 Pro, 13, 13 Pro (390 x 844)
                                 return 53
                         } else {
-                                // iPhone 6s Plus, 7 Plus, 8 Plus. (414 x 836)
-                                // iPhone Xs Max, Xr, 11 Pro Max, 11. (414 x 896)
-                                // iPhone 12 Pro Max. (428 x 926)
+                                // iPhone 6s Plus, 7 Plus, 8 Plus (414 x 836)
+                                // iPhone Xr, Xs Max, 11, 11 Pro Max (414 x 896)
+                                // iPhone 12 Pro Max, 13 Pro Max (428 x 926)
                                 return 55
                         }
-                case .pad:
-                        if isCompactInterface {
-                                return 48 // floating, same as iPhone SE1
-                        } else if isPadLandscape {
-                                return 80 // landscape
-                        } else {
-                                return 70 // portrait
-                        }
-                default:
-                        return 55
                 }
         }
 

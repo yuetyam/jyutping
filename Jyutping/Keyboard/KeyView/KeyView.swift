@@ -7,6 +7,8 @@ final class KeyView: UIView {
         let controller: KeyboardViewController
         let layout: KeyboardLayout
         let isDarkAppearance: Bool
+        let screenWidth: CGFloat
+        let screenHeight: CGFloat
         let isCompactInterface: Bool
         let isPhonePortrait: Bool
         let isPhoneLandscape: Bool
@@ -19,6 +21,8 @@ final class KeyView: UIView {
                 self.controller = controller
                 layout = controller.keyboardLayout
                 isDarkAppearance = controller.isDarkAppearance
+                screenWidth = controller.screenWidth
+                screenHeight = controller.screenHeight
                 isCompactInterface = controller.isCompactInterface
                 isPhonePortrait = controller.isPhonePortrait
                 isPhoneLandscape = controller.isPhoneLandscape
