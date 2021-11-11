@@ -128,10 +128,10 @@ extension KeyboardViewController {
                 if sender.index == 0 {
                         guard !frequentEmojis.isEmpty else { return }
                         let indexPath: IndexPath = IndexPath(row: 0, section: 0)
-                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
                 } else {
                         let indexPath: IndexPath = IndexPath(row: 15, section: sender.index)
-                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                        emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
                 }
         }
 
