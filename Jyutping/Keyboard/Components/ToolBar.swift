@@ -123,11 +123,11 @@ final class ToolBar: UIView {
         }
 
         private func improveAccessibility() {
-                settingsButton.accessibilityLabel = NSLocalizedString("Keyboard Settings", comment: "")
-                yueEngSwitch.accessibilityLabel = NSLocalizedString("Keyboard Mode Switch", comment: "")
-                pasteButton.accessibilityLabel = NSLocalizedString("Paste Clipboard content", comment: "")
-                emojiSwitch.accessibilityLabel = NSLocalizedString("Switch to Emoji layout", comment: "")
-                keyboardDown.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "")
-                downArrow.accessibilityLabel = NSLocalizedString("Expand Candidates board", comment: "")
+                settingsButton.accessibilityLabel = NSLocalizedString("Keyboard Settings", comment: .empty)
+                yueEngSwitch.accessibilityLabel = NSLocalizedString("Keyboard Mode Switch", comment: .empty)
+                pasteButton.accessibilityLabel = NSLocalizedString("Paste Clipboard content", comment: .empty)
+                emojiSwitch.accessibilityLabel = NSLocalizedString("Switch to Emoji layout", comment: .empty)
+                keyboardDown.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: .empty)
+                downArrow.accessibilityLabel = NSLocalizedString("Expand Candidates board", comment: .empty)
         }
 }

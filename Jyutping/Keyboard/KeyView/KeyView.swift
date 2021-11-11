@@ -450,45 +450,45 @@ final class KeyView: UIView {
                 case .space:
                         isAccessibilityElement = true
                         accessibilityTraits = [.keyboardKey]
-                        accessibilityLabel = NSLocalizedString("space bar", comment: "")
+                        accessibilityLabel = NSLocalizedString("space bar", comment: .empty)
                 case .newLine:
                         isAccessibilityElement = true
                         accessibilityTraits = [.keyboardKey]
-                        accessibilityLabel = NSLocalizedString("return key", comment: "")
+                        accessibilityLabel = NSLocalizedString("return key", comment: .empty)
                 case .backspace:
                         isAccessibilityElement = true
                         accessibilityTraits = [.keyboardKey]
-                        accessibilityLabel = NSLocalizedString("backspace key", comment: "")
+                        accessibilityLabel = NSLocalizedString("backspace key", comment: .empty)
                 case .shift:
                         isAccessibilityElement = true
                         accessibilityTraits = [.keyboardKey]
-                        accessibilityLabel = NSLocalizedString("shift key", comment: "")
+                        accessibilityLabel = NSLocalizedString("shift key", comment: .empty)
                         switch layout {
                         case .cantonese(.capsLocked), .alphabetic(.capsLocked):
-                                accessibilityValue = NSLocalizedString("Caps Locked", comment: "")
+                                accessibilityValue = NSLocalizedString("Caps Locked", comment: .empty)
                         case .cantonese(.uppercased), .alphabetic(.uppercased):
-                                accessibilityValue = NSLocalizedString("Uppercased", comment: "")
+                                accessibilityValue = NSLocalizedString("Uppercased", comment: .empty)
                         default:
-                                accessibilityValue = NSLocalizedString("Lowercased", comment: "")
+                                accessibilityValue = NSLocalizedString("Lowercased", comment: .empty)
                         }
                 case .switchTo(let layout):
                         switch layout {
                         case .cantonese:
                                 isAccessibilityElement = true
                                 accessibilityTraits = [.keyboardKey]
-                                accessibilityLabel = NSLocalizedString("Switch to Cantonese layout", comment: "")
+                                accessibilityLabel = NSLocalizedString("Switch to Cantonese layout", comment: .empty)
                         case .alphabetic:
                                 isAccessibilityElement = true
                                 accessibilityTraits = [.keyboardKey]
-                                accessibilityLabel = NSLocalizedString("Switch to English layout", comment: "")
+                                accessibilityLabel = NSLocalizedString("Switch to English layout", comment: .empty)
                         case .numeric, .cantoneseNumeric:
                                 isAccessibilityElement = true
                                 accessibilityTraits = [.keyboardKey]
-                                accessibilityLabel = NSLocalizedString("Switch to Numbers layout", comment: "")
+                                accessibilityLabel = NSLocalizedString("Switch to Numbers layout", comment: .empty)
                         case .symbolic, .cantoneseSymbolic:
                                 isAccessibilityElement = true
                                 accessibilityTraits = [.keyboardKey]
-                                accessibilityLabel = NSLocalizedString("Switch to Symbols layout", comment: "")
+                                accessibilityLabel = NSLocalizedString("Switch to Symbols layout", comment: .empty)
                         default:
                                 break
                         }

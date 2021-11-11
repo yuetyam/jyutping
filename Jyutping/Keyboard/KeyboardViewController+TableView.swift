@@ -35,13 +35,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
                 switch section {
                 case 1:
-                        return NSLocalizedString("Characters", comment: "")
+                        return NSLocalizedString("Characters", comment: .empty)
                 case 2:
-                        return NSLocalizedString("Keyboard Layout", comment: "")
+                        return NSLocalizedString("Keyboard Layout", comment: .empty)
                 case 3:
-                        return NSLocalizedString("Jyutping Display", comment: "")
+                        return NSLocalizedString("Jyutping Display", comment: .empty)
                 case 4 where footnoteStyle < 3:
-                        return NSLocalizedString("Jyutping Tones Display", comment: "")
+                        return NSLocalizedString("Jyutping Tones Display", comment: .empty)
                 case 4, 5:
                         // Zero-width space
                         return "\u{200B}"
@@ -56,7 +56,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         if hasFullAccess {
                                 return nil
                         } else {
-                                return NSLocalizedString("Haptic Feedback requires Full Access", comment: "")
+                                return NSLocalizedString("Haptic Feedback requires Full Access", comment: .empty)
                         }
                 default:
                         return nil
@@ -69,11 +69,11 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as? SwitchTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: .empty)
                                 cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
                                 cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .valueChanged)
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: .empty)
                                 if hasFullAccess {
                                         cell.switchView.isOn = isHapticFeedbackOn
                                         cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .valueChanged)
@@ -91,13 +91,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("Traditional", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Traditional", comment: .empty)
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: .empty)
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: .empty)
                         case 3:
-                                cell.textLabel?.text = NSLocalizedString("Simplified", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Simplified", comment: .empty)
                         default:
                                 break
                         }
@@ -108,10 +108,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "KeyboardLayoutTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("QWERTY", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("QWERTY", comment: .empty)
                                 cell.accessoryType = arrangement < 2 ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("SaamPing", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("SaamPing", comment: .empty)
                                 cell.accessoryType = arrangement == 2 ? .checkmark : .none
                         default:
                                 break
@@ -122,13 +122,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "JyutpingTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: .empty)
                                 cell.accessoryType = footnoteStyle < 2 ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: .empty)
                                 cell.accessoryType = footnoteStyle == 2 ? .checkmark : .none
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: .empty)
                                 cell.accessoryType = footnoteStyle == 3 ? .checkmark : .none
                         default:
                                 break
@@ -139,16 +139,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: .empty)
                                 cell.accessoryType = (toneStyle < 2) ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("No Tones : jyut ping", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("No Tones : jyut ping", comment: .empty)
                                 cell.accessoryType = (toneStyle == 2) ? .checkmark : .none
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("Superscript : jyut⁶ ping³", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Superscript : jyut⁶ ping³", comment: .empty)
                                 cell.accessoryType = (toneStyle == 3) ? .checkmark : .none
                         case 3:
-                                cell.textLabel?.text = NSLocalizedString("Subscript : jyut₆ ping₃", comment: "")
+                                cell.textLabel?.text = NSLocalizedString("Subscript : jyut₆ ping₃", comment: .empty)
                                 cell.accessoryType = (toneStyle == 4) ? .checkmark : .none
                         default:
                                 break
@@ -157,7 +157,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
                 case 4, 5:
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
-                        cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: "")
+                        cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: .empty)
                         cell.textLabel?.textColor = .systemRed
                         cell.textLabel?.textAlignment = .center
                         return cell

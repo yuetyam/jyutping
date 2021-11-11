@@ -192,7 +192,7 @@ extension KeyboardViewController {
                 ])
                 upArrow.tintColor = isDarkAppearance ? .white : .black
                 upArrow.addTarget(self, action: #selector(dismissSettingsView), for: .touchUpInside)
-                upArrow.accessibilityLabel = NSLocalizedString("Switch back to Keyboard", comment: "")
+                upArrow.accessibilityLabel = NSLocalizedString("Switch back to Keyboard", comment: .empty)
                 settingsView.addSubview(settingsTableView)
                 settingsTableView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate(

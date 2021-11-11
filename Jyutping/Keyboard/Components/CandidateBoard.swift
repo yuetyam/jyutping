@@ -14,7 +14,7 @@ final class CandidateBoard: UIView {
                         upArrowButton.bottomAnchor.constraint(equalTo: topAnchor, constant: 60),
                         upArrowButton.leadingAnchor.constraint(equalTo: trailingAnchor, constant: -45)
                 ])
-                upArrowButton.accessibilityLabel = NSLocalizedString("Switch back to Keyboard", comment: "")
+                upArrowButton.accessibilityLabel = NSLocalizedString("Switch back to Keyboard", comment: .empty)
         }
         required init?(coder: NSCoder) { fatalError("CandidateBoard.init(coder:) error") }
 }
