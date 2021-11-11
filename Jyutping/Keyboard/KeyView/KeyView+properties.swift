@@ -68,9 +68,11 @@ extension KeyView {
                         return seat.primary.text
                 case .space:
                         if layout.isEnglishMode {
-                                return "English"
+                                return "ABC"
+                        } else if Logogram.current == .simplified {
+                                return "粤拼"
                         } else {
-                                return Logogram.current == .simplified ? "粤拼" : "粵拼"
+                                return "粵拼"
                         }
                 case .newLine:
                         return newLineKeyText
