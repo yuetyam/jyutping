@@ -110,7 +110,7 @@ struct Engine {
         private func process(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
                 let candidates: [Candidate] = {
                         let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
-                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
+                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
                         let candidates: [Candidate] = sorted.map({ $0.candidate })
                         let hasSeparators: Bool = text.count != origin.count
                         guard hasSeparators else { return candidates }
@@ -150,7 +150,7 @@ struct Engine {
         private func processPartial(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
                 let candidates: [Candidate] = {
                         let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
-                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 30000 }
+                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
                         let candidates: [Candidate] = sorted.map({ $0.candidate })
                         let hasSeparators: Bool = text.count != origin.count
                         guard hasSeparators else { return candidates }
