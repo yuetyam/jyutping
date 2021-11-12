@@ -33,13 +33,6 @@ struct AboutView: View {
                                                         EnhancedLabel("Copy Source Code URL", icon: "doc.on.doc")
                                                 }
                                         }
-                                        NavigationLink(destination: AcknowledgementsView()) {
-                                                HStack(spacing: 16) {
-                                                        Image(systemName: "wand.and.stars").foregroundColor(.blue)
-                                                        Text("Acknowledgements")
-                                                        Spacer()
-                                                }
-                                        }
                                         LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: Image(systemName: "safari"))
                                         }
@@ -48,6 +41,13 @@ struct AboutView: View {
                                                         UIPasteboard.general.string = "https://yuetyam.github.io/jyutping/privacy"
                                                 }) {
                                                         EnhancedLabel("Copy Privacy Policy URL", icon: "doc.on.doc")
+                                                }
+                                        }
+                                        NavigationLink(destination: AcknowledgementsView()) {
+                                                HStack(spacing: 16) {
+                                                        Image(systemName: "wand.and.stars").foregroundColor(.blue)
+                                                        Text("Acknowledgements")
+                                                        Spacer()
                                                 }
                                         }
                                 }

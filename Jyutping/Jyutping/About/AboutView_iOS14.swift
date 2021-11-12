@@ -37,9 +37,6 @@ struct AboutView_iOS14: View {
                                                         Label("Copy Source Code URL", systemImage: "doc.on.doc")
                                                 }
                                         }
-                                        NavigationLink(destination: AcknowledgementsView()) {
-                                                Label("Acknowledgements", systemImage: "wand.and.stars")
-                                        }
                                         LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: Image(systemName: "safari"))
                                         }
@@ -49,6 +46,9 @@ struct AboutView_iOS14: View {
                                                 }) {
                                                         Label("Copy Privacy Policy URL", systemImage: "doc.on.doc")
                                                 }
+                                        }
+                                        NavigationLink(destination: AcknowledgementsView()) {
+                                                Label("Acknowledgements", systemImage: "wand.and.stars")
                                         }
                                 }
                                 Section {
