@@ -29,3 +29,8 @@ Xcode 13.0+
 ## Credits
 - [Rime Cantonese](https://github.com/rime/rime-cantonese)
 - [OpenCC](https://github.com/BYVoid/OpenCC)
+
+## Donate
+<a href="https://patreon.com/ososoio">
+        <img src="images/become-a-patron.png" alt="patreon" width="150"/>
+</a>
