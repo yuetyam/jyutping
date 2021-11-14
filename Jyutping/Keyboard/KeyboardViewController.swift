@@ -135,14 +135,14 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
         private var askedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
-                case .numberPad, .asciiCapableNumberPad:
-                        return traitCollection.userInterfaceIdiom == .pad ? .numeric : .numberPad
+                case .numberPad:
+                        return isPad ? .numeric : .numberPad
                 case .decimalPad:
-                        return traitCollection.userInterfaceIdiom == .pad ? .numeric : .decimalPad
-                case .asciiCapable, .emailAddress, .twitter, .URL:
-                        return .alphabetic(.lowercased)
-                case .numbersAndPunctuation:
+                        return isPad ? .numeric : .decimalPad
+                case .numbersAndPunctuation, .asciiCapableNumberPad:
                         return .numeric
+                case .emailAddress, .URL:
+                        return .alphabetic(.lowercased)
                 default:
                         return .cantonese(.lowercased)
                 }
