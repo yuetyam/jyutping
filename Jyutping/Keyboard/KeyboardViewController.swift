@@ -165,6 +165,164 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Input
 
+        func operate(_ operation: Operation) {
+                switch operation {
+                case .input(let text):
+                        if keyboardLayout.isCantoneseMode {
+                                if arrangement == 2 && text == "gw" {
+                                        let newInputText: String = inputText + text
+                                        inputText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
+                                } else {
+                                        inputText += text
+                                }
+                        } else {
+                                textDocumentProxy.insertText(text)
+                        }
+                        AudioFeedback.perform(.input)
+                        adjustKeyboardLayout()
+                case .separator:
+                        inputText += "'"
+                        AudioFeedback.perform(.input)
+                        adjustKeyboardLayout()
+                case .punctuation(let text):
+                        textDocumentProxy.insertText(text)
+                        AudioFeedback.perform(.input)
+                        adjustKeyboardLayout()
+                case .space:
+                        switch keyboardLayout {
+                        case .cantonese:
+                                defer {
+                                        AudioFeedback.perform(.input)
+                                }
+                                guard !inputText.isEmpty else {
+                                        textDocumentProxy.insertText(" ")
+                                        return
+                                }
+                                guard let firstCandidate: Candidate = candidates.first else {
+                                        output(inputText)
+                                        inputText = .empty
+                                        return
+                                }
+                                output(firstCandidate.text)
+                                switch inputText.first {
+                                case .none:
+                                        break
+                                case .some("r"), .some("v"), .some("x"):
+                                        if inputText.count == (firstCandidate.input.count + 1) {
+                                                inputText = .empty
+                                        } else {
+                                                let first: String = String(inputText.first!)
+                                                let tail = inputText.dropFirst(firstCandidate.input.count + 1)
+                                                inputText = first + tail
+                                        }
+                                default:
+                                        candidateSequence.append(firstCandidate)
+                                        let inputCount: Int = {
+                                                if arrangement > 1 {
+                                                        return firstCandidate.input.count
+                                                } else {
+                                                        let converted: String = firstCandidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
+                                                        return converted.count
+                                                }
+                                        }()
+                                        let leading = inputText.dropLast(inputText.count - inputCount)
+                                        let filtered = leading.replacingOccurrences(of: "'", with: "")
+                                        var tail: String.SubSequence = {
+                                                if filtered.count == leading.count {
+                                                        return inputText.dropFirst(inputCount)
+                                                } else {
+                                                        let separatorsCount: Int = leading.count - filtered.count
+                                                        return inputText.dropFirst(inputCount + separatorsCount)
+                                                }
+                                        }()
+                                        while tail.hasPrefix("'") {
+                                                tail = tail.dropFirst()
+                                        }
+                                        inputText = String(tail)
+                                }
+                                if inputText.isEmpty && !candidateSequence.isEmpty {
+                                        let concatenatedCandidate: Candidate = candidateSequence.joined()
+                                        candidateSequence = []
+                                        handleLexicon(concatenatedCandidate)
+                                }
+                        default:
+                                textDocumentProxy.insertText(" ")
+                                AudioFeedback.perform(.input)
+                        }
+                        adjustKeyboardLayout()
+                case .doubleSpace:
+                        guard inputText.isEmpty else { return }
+                        defer {
+                                AudioFeedback.perform(.input)
+                        }
+                        guard let isSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
+                                textDocumentProxy.insertText(" ")
+                                return
+                        }
+                        textDocumentProxy.deleteBackward()
+                        let text: String = keyboardLayout.isEnglishMode ? ". " : "。"
+                        textDocumentProxy.insertText(text)
+                case .backspace:
+                        if inputText.isEmpty {
+                                textDocumentProxy.deleteBackward()
+                        } else {
+                                lazy var hasLightToneSuffix: Bool = inputText.hasSuffix("vv") || inputText.hasSuffix("xx") || inputText.hasSuffix("qq")
+                                if arrangement < 2 && hasLightToneSuffix {
+                                        inputText = String(inputText.dropLast(2))
+                                } else {
+                                        inputText = String(inputText.dropLast())
+                                }
+                                candidateSequence = []
+                        }
+                        AudioFeedback.perform(.delete)
+                case .clear:
+                        guard !inputText.isEmpty else { return }
+                        inputText = .empty
+                        AudioFeedback.perform(.delete)
+                case .return:
+                        guard !inputText.isEmpty else {
+                                textDocumentProxy.insertText("\n")
+                                AudioFeedback.perform(.modify)
+                                return
+                        }
+                        output(inputText)
+                        AudioFeedback.perform(.input)
+                        inputText = .empty
+                case .shift:
+                        AudioFeedback.perform(.modify)
+                        switch keyboardLayout {
+                        case .cantonese(.lowercased):
+                                keyboardLayout = .cantonese(.uppercased)
+                        case .cantonese(.uppercased),
+                             .cantonese(.capsLocked):
+                                keyboardLayout = .cantonese(.lowercased)
+                        case .alphabetic(.lowercased):
+                                keyboardLayout = .alphabetic(.uppercased)
+                        case .alphabetic(.uppercased),
+                             .alphabetic(.capsLocked):
+                                keyboardLayout = .alphabetic(.lowercased)
+                        default:
+                                break
+                        }
+                case .doubleShift:
+                        AudioFeedback.perform(.modify)
+                        keyboardLayout = keyboardLayout.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
+                case .switchTo(let newLayout):
+                        AudioFeedback.perform(.modify)
+                        keyboardLayout = newLayout
+                }
+        }
+        private func adjustKeyboardLayout() {
+                switch keyboardLayout {
+                case .alphabetic(.uppercased):
+                        keyboardLayout = .alphabetic(.lowercased)
+                case .cantonese(.uppercased):
+                        keyboardLayout = .cantonese(.lowercased)
+                default:
+                        break
+                }
+        }
+
         lazy var inputText: String = .empty {
                 didSet {
                         switch inputText.first {

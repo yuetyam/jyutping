@@ -1,5 +1,19 @@
 import UIKit
 
+enum Operation: Hashable {
+        case input(String)
+        case separator
+        case punctuation(String)
+        case space
+        case doubleSpace
+        case backspace
+        case clear
+        case `return`
+        case shift
+        case doubleShift
+        case switchTo(KeyboardLayout)
+}
+
 final class KeyView: UIView {
 
         let shape: UIView = UIView()
@@ -60,16 +74,16 @@ final class KeyView: UIView {
 
         // MARK: - Touches
 
-        var backspaceTimer: Timer?
-        var repeatingBackspaceTimer: Timer?
+        private var backspaceTimer: Timer?
+        private var repeatingBackspaceTimer: Timer?
         private func invalidateTimers() {
                 backspaceTimer?.invalidate()
                 repeatingBackspaceTimer?.invalidate()
                 backspaceTimer = nil
                 repeatingBackspaceTimer = nil
         }
-        private(set) lazy var isInteracting: Bool = false
-        private(set) lazy var peekingText: String? = nil
+        private lazy var isInteracting: Bool = false
+        private lazy var peekingText: String? = nil
         private lazy var spaceTouches: (first: Bool, second: Bool) = (false, false)
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
@@ -105,12 +119,11 @@ final class KeyView: UIView {
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         draggedOnSpace = false
                 case .shift:
-                        AudioFeedback.perform(.modify)
+                        break
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
                 case .switchTo(let newLayout):
-                        AudioFeedback.perform(.modify)
-                        controller.keyboardLayout = newLayout
+                        controller.operate(.switchTo(newLayout))
                 }
         }
 
@@ -161,7 +174,7 @@ final class KeyView: UIView {
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { break }
-                        controller.inputText = .empty
+                        controller.operate(.clear)
                 default:
                         break
                 }
@@ -176,66 +189,59 @@ final class KeyView: UIView {
                         let distance = now - ShiftState.timePoint
                         ShiftState.timePoint = now
                         if distance < 0.3 {
-                                doubleTapShift()
+                                controller.operate(.doubleShift)
                         } else {
-                                tapOnShift()
+                                controller.operate(.shift)
                         }
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
                         if !spaceTouches.second {
-                                tapOnSpace()
+                                if !draggedOnSpace {
+                                        controller.operate(.space)
+                                }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
                                         self?.spaceTouches = (false, false)
                                 }
                         } else {
-                                doubleTapSpace()
+                                controller.operate(.doubleSpace)
                                 spaceTouches = (false, false)
                         }
                 case .backspace:
                         backspaceTouchPoint = .zero
                         changeColorToNormal()
                 case .newLine:
-                        handleNewLine()
+                        controller.operate(.return)
                         changeColorToNormal()
-                case .key(let seat) where seat.hasChildren:
+                case .key(.cantoneseComma):
                         removeCallout()
                         if isPhonePortrait {
                                 removePreview()
                         } else {
                                 changeColorToNormal()
                         }
-                        guard let text: String = peekingText else {
-                                handleTap()
-                                break
-                        }
-                        AudioFeedback.perform(.input)
-                        controller.triggerHapticFeedback()
-                        guard layout.isCantoneseMode else {
-                                controller.insert(text)
-                                break
-                        }
-                        let punctuation: String = "，。？！"
-                        guard punctuation.contains(text) else {
-                                controller.inputText += text
-                                break
-                        }
-                        if controller.inputText.isEmpty {
-                                controller.insert(text)
-                        } else {
-                                let combined: String = controller.inputText + text
-                                controller.output(combined)
-                                controller.inputText = .empty
-                        }
-                case .key:
+                        let punctuation: String = peekingText ?? KeySeat.cantoneseComma.primary.text
+                        controller.operate(.punctuation(punctuation))
+                case .key(.separator):
                         if isPhonePortrait {
                                 removePreview()
                         } else {
                                 changeColorToNormal()
                         }
-                        handleTap()
+                        controller.operate(.separator)
+                case .key(let seat):
+                        if seat.hasChildren {
+                                removeCallout()
+                        }
+                        if isPhonePortrait {
+                                removePreview()
+                        } else {
+                                changeColorToNormal()
+                        }
+                        let text: String = seat.hasChildren ? (peekingText ?? seat.primary.text) : seat.primary.text
+                        controller.operate(.input(text))
                 case .shadowKey(let text):
-                        handleShadowKey(text)
+                        controller.operate(.input(text))
                 default:
                         break
                 }
@@ -276,13 +282,41 @@ final class KeyView: UIView {
                 }
         }
 
+        private func handleBackspace() {
+                controller.operate(.backspace)
+                guard backspaceTimer == nil && repeatingBackspaceTimer == nil else {
+                        backspaceTimer?.invalidate()
+                        repeatingBackspaceTimer?.invalidate()
+                        backspaceTimer = nil
+                        repeatingBackspaceTimer = nil
+                        return
+                }
+                backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] timer in
+                        guard let self = self else { return }
+                        guard self.isInteracting, self.backspaceTimer == timer else { return }
+                        self.repeatingBackspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
+                                guard let self = self else {
+                                        timer.invalidate()
+                                        return
+                                }
+                                guard self.isInteracting, self.repeatingBackspaceTimer == timer else {
+                                        self.repeatingBackspaceTimer?.invalidate()
+                                        self.repeatingBackspaceTimer = nil
+                                        timer.invalidate()
+                                        return
+                                }
+                                self.controller.operate(.backspace)
+                        }
+                }
+        }
+
 
         // MARK: - Properties
 
-        private(set) lazy var backspaceTouchPoint: CGPoint = .zero
-        private(set) lazy var spaceTouchPoint: CGPoint = .zero
-        private(set) lazy var draggedOnSpace: Bool = false
-        private(set) lazy var beyondMidX: Bool = frame.midX > controller.view.frame.midX + 10
+        private lazy var backspaceTouchPoint: CGPoint = .zero
+        private lazy var spaceTouchPoint: CGPoint = .zero
+        private lazy var draggedOnSpace: Bool = false
+        private lazy var beyondMidX: Bool = frame.midX > controller.view.frame.midX + 10
         private lazy var keyShapePath: UIBezierPath = shapeBezierPath(origin: bottomCenter, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
         private lazy var previewPath: UIBezierPath = previewBezierPath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5)
         private lazy var shapeWidth: CGFloat = shape.frame.width
