@@ -163,7 +163,7 @@ final class KeyboardViewController: UIInputViewController {
         }
 
 
-        // MARK: - Input
+        // MARK: - Operations
 
         func operate(_ operation: Operation) {
                 switch operation {
@@ -322,6 +322,9 @@ final class KeyboardViewController: UIInputViewController {
                         break
                 }
         }
+
+
+        // MARK: - Input Texts
 
         lazy var inputText: String = .empty {
                 didSet {
@@ -807,17 +810,3 @@ final class KeyboardViewController: UIInputViewController {
                 UserDefaults.standard.set(frequentEmojis, forKey: "emoji_frequent")
         }
 }
-
-
-// MARK: - NOTES
-
-// Up to v0.7.3
-// User Lexicon was in Library/userdb.sqlite3
-
-// v0.7.4 - v0.7.6
-// transfer it to Library/userlexicon.sqlite3
-// add UserDefaults.standard.bool(forKey: "is_user_lexicon_ready_v0.7")
-
-// v0.7.7
-// abandon Library/userdb.sqlite3 and "is_user_lexicon_ready_v0.7"
-// commit: 41dc8dfeb175a26fb83b2f0972253f736d9c342d
