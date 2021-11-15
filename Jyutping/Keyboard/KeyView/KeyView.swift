@@ -201,29 +201,17 @@ final class KeyView: UIView {
                         changeColorToNormal()
                 case .key(.cantoneseComma):
                         removeCallout()
-                        if isPhonePortrait {
-                                removePreview()
-                        } else {
-                                changeColorToNormal()
-                        }
+                        normalize()
                         let punctuation: String = peekingText ?? KeySeat.cantoneseComma.primary.text
                         controller.operate(.punctuation(punctuation))
                 case .key(.separator):
-                        if isPhonePortrait {
-                                removePreview()
-                        } else {
-                                changeColorToNormal()
-                        }
+                        normalize()
                         controller.operate(.separator)
                 case .key(let seat):
                         if seat.hasChildren {
                                 removeCallout()
                         }
-                        if isPhonePortrait {
-                                removePreview()
-                        } else {
-                                changeColorToNormal()
-                        }
+                        normalize()
                         let text: String = seat.hasChildren ? (peekingText ?? seat.primary.text) : seat.primary.text
                         controller.operate(.input(text))
                 case .shadowKey(let text):
@@ -252,17 +240,9 @@ final class KeyView: UIView {
                         spaceTouches = (false, false)
                 case .key(let seat) where seat.hasChildren:
                         removeCallout()
-                        if isPhonePortrait {
-                                removePreview()
-                        } else {
-                                changeColorToNormal()
-                        }
+                        normalize()
                 case .key:
-                        if isPhonePortrait {
-                                removePreview()
-                        } else {
-                                changeColorToNormal()
-                        }
+                        normalize()
                 default:
                         break
                 }
@@ -309,6 +289,7 @@ final class KeyView: UIView {
 
         // MARK: - Preview
 
+        private func normalize() { isPhonePortrait ? removePreview() : changeColorToNormal() }
         private func displayPreview() {
                 layer.addSublayer(previewShapeLayer)
                 addSubview(previewLabel)
@@ -331,7 +312,7 @@ final class KeyView: UIView {
                         self.shape.backgroundColor = self.isDarkAppearance ? .clear : self.backColor
                 }
         }
-        private(set) lazy var previewShapeLayer: CAShapeLayer = {
+        private lazy var previewShapeLayer: CAShapeLayer = {
                 let layer = CAShapeLayer()
                 layer.shadowOpacity = 0.3
                 layer.shadowRadius = 0.5
@@ -350,7 +331,7 @@ final class KeyView: UIView {
                 layer.add(animation, forKey: animation.keyPath)
                 return layer
         }()
-        private(set) lazy var previewLabel: UILabel = {
+        private lazy var previewLabel: UILabel = {
                 let preview = previewPath.bounds
                 let height: CGFloat = preview.height - shapeHeight - 8
                 let frame = CGRect(origin: preview.origin, size: CGSize(width: preview.width, height: height))
