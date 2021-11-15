@@ -271,10 +271,7 @@ final class KeyView: UIView {
         private func handleBackspace() {
                 controller.operate(.backspace)
                 guard backspaceTimer == nil && repeatingBackspaceTimer == nil else {
-                        backspaceTimer?.invalidate()
-                        repeatingBackspaceTimer?.invalidate()
-                        backspaceTimer = nil
-                        repeatingBackspaceTimer = nil
+                        invalidateTimers()
                         return
                 }
                 backspaceTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { [weak self] timer in
