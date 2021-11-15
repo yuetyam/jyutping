@@ -48,7 +48,6 @@
 		3759F4D0262FC7EA00266086 /* KeyView+construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AA262FC7E900266086 /* KeyView+construction.swift */; };
 		3759F4D1262FC7EA00266086 /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AB262FC7E900266086 /* CalloutView.swift */; };
 		3759F4D2262FC7EA00266086 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AC262FC7E900266086 /* BlurEffectView.swift */; };
-		3759F4D3262FC7EA00266086 /* KeyView+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AD262FC7E900266086 /* KeyView+handlers.swift */; };
 		3759F4D4262FC7EA00266086 /* KeyView+paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AE262FC7E900266086 /* KeyView+paths.swift */; };
 		3759F4D5262FC7EA00266086 /* KeyView+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AF262FC7E900266086 /* KeyView+properties.swift */; };
 		3759F4D6262FC7EA00266086 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B0262FC7E900266086 /* KeyView.swift */; };
@@ -181,7 +180,6 @@
 		3759F4AA262FC7E900266086 /* KeyView+construction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+construction.swift"; sourceTree = "<group>"; };
 		3759F4AB262FC7E900266086 /* CalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
 		3759F4AC262FC7E900266086 /* BlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
-		3759F4AD262FC7E900266086 /* KeyView+handlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+handlers.swift"; sourceTree = "<group>"; };
 		3759F4AE262FC7E900266086 /* KeyView+paths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+paths.swift"; sourceTree = "<group>"; };
 		3759F4AF262FC7E900266086 /* KeyView+properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+properties.swift"; sourceTree = "<group>"; };
 		3759F4B0262FC7E900266086 /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
@@ -417,7 +415,6 @@
 			isa = PBXGroup;
 			children = (
 				3759F4B0262FC7E900266086 /* KeyView.swift */,
-				3759F4AD262FC7E900266086 /* KeyView+handlers.swift */,
 				3759F4AF262FC7E900266086 /* KeyView+properties.swift */,
 				3759F4AA262FC7E900266086 /* KeyView+construction.swift */,
 				3759F4AE262FC7E900266086 /* KeyView+paths.swift */,
@@ -749,7 +746,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3791B3012634E92B00562137 /* UserLexicon.swift in Sources */,
-				3759F4D3262FC7EA00266086 /* KeyView+handlers.swift in Sources */,
 				3759F4C4262FC7EA00266086 /* CandidateBoard.swift in Sources */,
 				3759F4C8262FC7EA00266086 /* KeyboardViewController.swift in Sources */,
 				3759F4DC262FC7EA00266086 /* EmojiBoard.swift in Sources */,
