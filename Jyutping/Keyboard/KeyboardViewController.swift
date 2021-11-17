@@ -677,24 +677,22 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var isPhone: Bool = traitCollection.userInterfaceIdiom == .phone
         private lazy var isPad: Bool = traitCollection.userInterfaceIdiom == .pad
         private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-        private(set) lazy var screenWidth: CGFloat = UIScreen.main.bounds.width
-        private(set) lazy var screenHeight: CGFloat = UIScreen.main.bounds.height
+        private(set) lazy var screenSize: CGSize = UIScreen.main.bounds.size
         private(set) lazy var isCompactInterface: Bool = isPhone || traitCollection.horizontalSizeClass == .compact
         private(set) lazy var isPhonePortrait: Bool = isPhone && traitCollection.verticalSizeClass == .regular
         private(set) lazy var isPhoneLandscape: Bool = isPhone && traitCollection.verticalSizeClass == .compact
         private(set) lazy var isPadFloating: Bool = isPad && traitCollection.horizontalSizeClass == .compact
-        private(set) lazy var isPadPortrait: Bool = !isCompactInterface && screenWidth < screenHeight
-        private(set) lazy var isPadLandscape: Bool = !isCompactInterface && screenWidth > screenHeight
+        private(set) lazy var isPadPortrait: Bool = !isCompactInterface && screenSize.width < screenSize.height
+        private(set) lazy var isPadLandscape: Bool = !isCompactInterface && screenSize.width > screenSize.height
         private func updateProperties() {
                 isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
-                screenWidth = UIScreen.main.bounds.width
-                screenHeight = UIScreen.main.bounds.height
+                screenSize = UIScreen.main.bounds.size
                 isCompactInterface = isPhone || traitCollection.horizontalSizeClass == .compact
                 isPhonePortrait = isPhone && traitCollection.verticalSizeClass == .regular
                 isPhoneLandscape = isPhone && traitCollection.verticalSizeClass == .compact
                 isPadFloating = isPad && traitCollection.horizontalSizeClass == .compact
-                isPadPortrait = !isCompactInterface && screenWidth < screenHeight
-                isPadLandscape = !isCompactInterface && screenWidth > screenHeight
+                isPadPortrait = !isCompactInterface && screenSize.width < screenSize.height
+                isPadLandscape = !isCompactInterface && screenSize.width > screenSize.height
         }
 
 

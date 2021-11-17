@@ -29,12 +29,12 @@ extension KeyView {
                         return 48
                 } else if isPhoneLandscape {
                         // iPhone SE1, iPod touch 7 (w480 x h320)
-                        return screenHeight < 350 ? 36 : 40
+                        return screenSize.height < 350 ? 36 : 40
                 } else {
-                        if screenWidth < 350 {
+                        if screenSize.width < 350 {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
-                        } else if screenWidth < 400 {
+                        } else if screenSize.width < 400 {
                                 // iPhone 6s, 7, 8, SE2 (375 x 667)
                                 // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
                                 // iPhone 12, 12 Pro, 13, 13 Pro (390 x 844)
