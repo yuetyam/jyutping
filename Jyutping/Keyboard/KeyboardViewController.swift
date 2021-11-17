@@ -136,11 +136,11 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
         private var askedKeyboardLayout: KeyboardLayout {
                 switch textDocumentProxy.keyboardType {
-                case .numberPad:
+                case .numberPad, .asciiCapableNumberPad:
                         return isPad ? .numeric : .numberPad
                 case .decimalPad:
                         return isPad ? .numeric : .decimalPad
-                case .numbersAndPunctuation, .asciiCapableNumberPad:
+                case .numbersAndPunctuation:
                         return .numeric
                 case .emailAddress, .URL:
                         return .alphabetic(.lowercased)
@@ -414,7 +414,7 @@ final class KeyboardViewController: UIInputViewController {
                 // REASON: Chrome
                 willSet {
                         guard markedText.isEmpty && !newValue.isEmpty else { return }
-                        guard let type = textDocumentProxy.keyboardType, type == .webSearch else { return }
+                        guard (textDocumentProxy.keyboardType ?? .default) == .webSearch else { return }
                         shouldKeepInputTextWhileTextDidChange = true
                         textDocumentProxy.insertText("")
                 }
