@@ -4,13 +4,13 @@ extension String {
         }
         var prefix: Int64 {
                 guard !self.isEmpty else { return Int64(self.hash) }
-                guard let lastSyllable: String = self.components(separatedBy: " ").last else { return Int64(self.hash) }
+                guard let lastSyllable: String = self.components(separatedBy: String.space).last else { return Int64(self.hash) }
                 let leading: String = String(self.dropLast(lastSyllable.count - 1))
                 let raw: String = leading.removedSpacesTones()
                 return Int64(raw.hash)
         }
         var shortcut: Int64 {
-                let syllables: [String] = self.components(separatedBy: " ")
+                let syllables: [String] = self.components(separatedBy: String.space)
                 let initials: String = syllables.reduce("") { (result, syllable) -> String in
                         if let first = syllable.first {
                                 return result + String(first)
@@ -40,6 +40,12 @@ extension String {
 
         /// aka. `String.init()`
         static let empty: String = ""
+
+        /// A space
+        static let space: String = " "
+
+        /// U+200B
+        static let zeroWidthSpace: String = "\u{200B}"
 }
 
 extension Optional where Wrapped == String {

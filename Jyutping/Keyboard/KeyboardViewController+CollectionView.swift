@@ -80,7 +80,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
                 let font: UIFont = .systemFont(ofSize: 10)
                 let offset: NSNumber = toneStyle == 3 ? 2 : -2
-                let jyutpings: [String] = text.components(separatedBy: " ")
+                let jyutpings: [String] = text.components(separatedBy: String.space)
                 let attributed: [NSMutableAttributedString] = jyutpings.map { (jyutping) -> NSMutableAttributedString in
                         let newString: NSMutableAttributedString = NSMutableAttributedString(string: jyutping)
                         let range: NSRange = NSRange(location: newString.length - 1, length: 1)
@@ -91,7 +91,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 guard let combined: NSMutableAttributedString = attributed.first else { return NSAttributedString(string: text) }
                 if attributed.count > 1 {
                         for number in 1..<attributed.count {
-                                combined.append(NSAttributedString(string: " "))
+                                combined.append(NSAttributedString(string: .space))
                                 combined.append(attributed[number])
                         }
                 }

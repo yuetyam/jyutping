@@ -48,7 +48,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
                         return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
                 case 5 where footnoteStyle >= 3, 6:
-                        return "\u{200B}" // zero-width space
+                        return .zeroWidthSpace
                 default:
                         return nil
                 }

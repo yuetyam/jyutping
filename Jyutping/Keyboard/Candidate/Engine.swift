@@ -55,7 +55,7 @@ struct Engine {
                         }
                         let fetches: [Candidate] = prefix(match: headTail)
                         let filtered: [Candidate] = fetches.filter {
-                                guard let first: String = $0.jyutping.components(separatedBy: " ").first else { return false }
+                                guard let first: String = $0.jyutping.components(separatedBy: String.space).first else { return false }
                                 return first == leadingTwo
                         }
                         return filtered
@@ -116,7 +116,7 @@ struct Engine {
                         guard hasSeparators else { return candidates }
                         let firstSyllable: String = sequences.first?.first ?? "X"
                         let filtered: [Candidate] = candidates.filter { candidate in
-                                let firstJyutping: String = candidate.jyutping.components(separatedBy: " ").first ?? "Y"
+                                let firstJyutping: String = candidate.jyutping.components(separatedBy: String.space).first ?? "Y"
                                 return firstSyllable == firstJyutping.removedTones()
                         }
                         return filtered
@@ -156,7 +156,7 @@ struct Engine {
                         guard hasSeparators else { return candidates }
                         let firstSyllable: String = sequences.first?.first ?? "X"
                         let filtered: [Candidate] = candidates.filter { candidate in
-                                let firstJyutping: String = candidate.jyutping.components(separatedBy: " ").first ?? "Y"
+                                let firstJyutping: String = candidate.jyutping.components(separatedBy: String.space).first ?? "Y"
                                 return firstSyllable == firstJyutping.removedTones()
                         }
                         return filtered

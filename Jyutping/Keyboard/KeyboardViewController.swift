@@ -196,7 +196,7 @@ final class KeyboardViewController: UIInputViewController {
                                         AudioFeedback.perform(.input)
                                 }
                                 guard !inputText.isEmpty else {
-                                        textDocumentProxy.insertText(" ")
+                                        textDocumentProxy.insertText(.space)
                                         return
                                 }
                                 guard let firstCandidate: Candidate = candidates.first else {
@@ -247,7 +247,7 @@ final class KeyboardViewController: UIInputViewController {
                                         handleLexicon(concatenatedCandidate)
                                 }
                         default:
-                                textDocumentProxy.insertText(" ")
+                                textDocumentProxy.insertText(.space)
                                 AudioFeedback.perform(.input)
                         }
                         adjustKeyboardLayout()
@@ -256,9 +256,9 @@ final class KeyboardViewController: UIInputViewController {
                         defer {
                                 AudioFeedback.perform(.input)
                         }
-                        let hasSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.hasSuffix(" ") ?? false
+                        let hasSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.hasSuffix(.space) ?? false
                         guard doubleSpaceShortcut != 2 && hasSpaceAhead else {
-                                textDocumentProxy.insertText(" ")
+                                textDocumentProxy.insertText(.space)
                                 return
                         }
                         textDocumentProxy.deleteBackward()
@@ -391,12 +391,12 @@ final class KeyboardViewController: UIInputViewController {
                                 if let syllables: [String] = syllablesSchemes.first {
                                         let splittable: String = syllables.joined()
                                         if splittable.count == processingText.count {
-                                                markedText = syllables.joined(separator: " ")
+                                                markedText = syllables.joined(separator: .space)
                                         } else if processingText.contains("'") {
                                                 markedText = processingText.replacingOccurrences(of: "'", with: "' ")
                                         } else {
                                                 let tail = processingText.dropFirst(splittable.count)
-                                                markedText = syllables.joined(separator: " ") + " " + tail
+                                                markedText = syllables.joined(separator: .space) + .space + tail
                                         }
                                 } else {
                                         markedText = processingText

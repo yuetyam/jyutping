@@ -43,7 +43,7 @@ struct Candidate: Hashable {
 
         static func + (lhs: Candidate, rhs: Candidate) -> Candidate {
                 let newText: String = lhs.text + rhs.text
-                let newJyutping: String = lhs.jyutping + " " + rhs.jyutping
+                let newJyutping: String = lhs.jyutping + .space + rhs.jyutping
                 let newInput: String = lhs.input + rhs.input
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
 
@@ -65,7 +65,7 @@ extension Array where Element == Candidate {
         /// - Returns: A single, concatenated Candidate.
         func joined() -> Candidate {
                 let text: String = map({ $0.text }).joined()
-                let jyutping: String = map({ $0.jyutping }).joined(separator: " ")
+                let jyutping: String = map({ $0.jyutping }).joined(separator: .space)
                 let input: String = map({ $0.input }).joined()
                 let lexiconText: String = map({ $0.lexiconText }).joined()
                 let candidate: Candidate = Candidate(text: text, jyutping: jyutping, input: input, lexiconText: lexiconText)
