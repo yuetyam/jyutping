@@ -54,6 +54,7 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "KeyboardLayoutTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "JyutpingTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
+                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "SpaceShortcutTableViewCell")
                 settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
                 setupToolBarActions()
         }
@@ -157,7 +158,7 @@ final class KeyboardViewController: UIInputViewController {
                         if (!keyboardLayout.isCantoneseMode) && (!inputText.isEmpty) {
                                 let text: String = inputText
                                 inputText = .empty
-                                insert(text)
+                                textDocumentProxy.insertText(text)
                         }
                 }
         }
@@ -255,12 +256,26 @@ final class KeyboardViewController: UIInputViewController {
                         defer {
                                 AudioFeedback.perform(.input)
                         }
-                        guard let isSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.last?.isWhitespace, isSpaceAhead else {
+                        let hasSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.hasSuffix(" ") ?? false
+                        guard doubleSpaceShortcut != 2 && hasSpaceAhead else {
                                 textDocumentProxy.insertText(" ")
                                 return
                         }
                         textDocumentProxy.deleteBackward()
-                        let text: String = keyboardLayout.isEnglishMode ? ". " : "。"
+                        let text: String = {
+                                switch (doubleSpaceShortcut, keyboardLayout.isEnglishMode) {
+                                case (0, false), (1, false):
+                                        return "。"
+                                case (3, false):
+                                        return "，"
+                                case (0, true), (1, true):
+                                        return ". "
+                                case (3, true):
+                                        return ", "
+                                default:
+                                        return "。"
+                                }
+                        }()
                         textDocumentProxy.insertText(text)
                 case .backspace:
                         if inputText.isEmpty {
@@ -757,20 +772,6 @@ final class KeyboardViewController: UIInputViewController {
                 arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
         }
 
-        /*
-        /// 雙擊空格鍵快捷動作
-        ///
-        /// 0: The key "double_space_shortcut" doesn‘t exist.
-        ///
-        /// 1: 無（輸入兩個空格）
-        ///
-        /// 2: 輸入句號「。」（英文鍵盤輸入一個句號「.」加一個空格）
-        private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")
-        func updateDoubleSpaceShortcut() {
-                doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
-        }
-        */
-
         /// 粵拼顯示
         ///
         /// 0: The key "jyutping_display" doesn‘t exist.
@@ -799,6 +800,20 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var toneStyle: Int = UserDefaults.standard.integer(forKey: "tone_style")
         func updateToneStyle() {
                 toneStyle = UserDefaults.standard.integer(forKey: "tone_style")
+        }
+
+        /// 雙擊空格鍵快捷動作
+        ///
+        /// 0: The key "double_space_shortcut" doesn‘t exist.
+        ///
+        /// 1: 輸入句號「。」（英文鍵盤輸入一個句號「.」加一個空格）
+        ///
+        /// 2: 無（輸入兩個空格）
+        ///
+        /// 3: 輸入逗號「，」（英文鍵盤輸入一個逗號「,」加一個空格）
+        private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")
+        func updateDoubleSpaceShortcut() {
+                doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         }
 
         private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty

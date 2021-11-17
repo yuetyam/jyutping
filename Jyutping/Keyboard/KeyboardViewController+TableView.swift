@@ -3,7 +3,7 @@ import UIKit
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
         func numberOfSections(in tableView: UITableView) -> Int {
-                return footnoteStyle < 3 ? 6 : 5
+                return footnoteStyle < 3 ? 7 : 6
         }
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -24,7 +24,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 4 where footnoteStyle < 3:
                         // Jyutping Tones Display
                         return 4
-                case 4, 5:
+                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                        // Space double tapping shortcut
+                        return 3
+                case 5 where footnoteStyle >= 3, 6:
                         // Clear User Lexicon
                         return 1
                 default:
@@ -42,9 +45,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return NSLocalizedString("Jyutping Display", comment: .empty)
                 case 4 where footnoteStyle < 3:
                         return NSLocalizedString("Jyutping Tones Display", comment: .empty)
-                case 4, 5:
-                        // Zero-width space
-                        return "\u{200B}"
+                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                        return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
+                case 5 where footnoteStyle >= 3, 6:
+                        return "\u{200B}" // zero-width space
                 default:
                         return nil
                 }
@@ -154,14 +158,28 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-
-                case 4, 5:
+                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpaceShortcutTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel?.text = NSLocalizedString("Insert a period", comment: .empty)
+                                cell.accessoryType = doubleSpaceShortcut < 2 ? .checkmark : .none
+                        case 1:
+                                cell.textLabel?.text = NSLocalizedString("Insert a comma", comment: .empty)
+                                cell.accessoryType = doubleSpaceShortcut == 3 ? .checkmark : .none
+                        case 2:
+                                cell.textLabel?.text = NSLocalizedString("No Double Space Shortcut", comment: .empty)
+                                cell.accessoryType = doubleSpaceShortcut == 2 ? .checkmark : .none
+                        default:
+                                break
+                        }
+                        return cell
+                case 5 where footnoteStyle >= 3, 6:
                         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
                         cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: .empty)
                         cell.textLabel?.textColor = .systemRed
                         cell.textLabel?.textAlignment = .center
                         return cell
-
                 default:
                         return UITableViewCell()
                 }
@@ -240,7 +258,24 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4, 5:
+                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                        tableView.deselectRow(at: indexPath, animated: true)
+                        switch indexPath.row {
+                        case 0:
+                                UserDefaults.standard.set(1, forKey: "double_space_shortcut")
+                        case 1:
+                                UserDefaults.standard.set(3, forKey: "double_space_shortcut")
+                        case 2:
+                                UserDefaults.standard.set(2, forKey: "double_space_shortcut")
+                        default:
+                                break
+                        }
+                        triggerHapticFeedback()
+                        updateDoubleSpaceShortcut()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                tableView.reloadData()
+                        }
+                case 5 where footnoteStyle >= 3, 6:
                         clearUserLexicon()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)
