@@ -300,9 +300,11 @@ final class KeyboardViewController: UIInputViewController {
                                 AudioFeedback.perform(.modify)
                                 return
                         }
-                        output(inputText)
-                        AudioFeedback.perform(.input)
+                        // TODO: - Test on real Apps
+                        let text: String = inputText
                         inputText = .empty
+                        AudioFeedback.perform(.input)
+                        textDocumentProxy.insertText(text)
                 case .shift:
                         AudioFeedback.perform(.modify)
                         switch keyboardLayout {
