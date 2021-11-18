@@ -300,11 +300,15 @@ final class KeyboardViewController: UIInputViewController {
                                 AudioFeedback.perform(.modify)
                                 return
                         }
-                        // TODO: - Test on real Apps
-                        let text: String = inputText
+                        output(inputText)
                         inputText = .empty
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                                DispatchQueue(label: "im.cantonese.fix.return").sync { [unowned self] in
+                                        self.textDocumentProxy.insertText(.zeroWidthSpace)
+                                        self.textDocumentProxy.deleteBackward()
+                                }
+                        }
                         AudioFeedback.perform(.input)
-                        textDocumentProxy.insertText(text)
                 case .shift:
                         AudioFeedback.perform(.modify)
                         switch keyboardLayout {
