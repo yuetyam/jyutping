@@ -200,11 +200,11 @@ final class KeyboardViewController: UIInputViewController {
                                         return
                                 }
                                 guard let firstCandidate: Candidate = candidates.first else {
-                                        output(inputText)
+                                        compose(inputText)
                                         inputText = .empty
                                         return
                                 }
-                                output(firstCandidate.text)
+                                compose(firstCandidate.text)
                                 switch inputText.first {
                                 case .none:
                                         break
@@ -300,7 +300,7 @@ final class KeyboardViewController: UIInputViewController {
                                 AudioFeedback.perform(.modify)
                                 return
                         }
-                        output(inputText)
+                        compose(inputText)
                         inputText = .empty
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
                                 DispatchQueue(label: "im.cantonese.fix.return").sync { [unowned self] in
@@ -416,15 +416,13 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         private lazy var markedText: String = .empty {
-
-                // REASON: Chrome
                 willSet {
+                        // REASON: Chrome address bar
                         guard markedText.isEmpty && !newValue.isEmpty else { return }
-                        guard (textDocumentProxy.keyboardType ?? .default) == .webSearch else { return }
+                        guard textDocumentProxy.keyboardType == .webSearch else { return }
                         shouldKeepInputTextWhileTextDidChange = true
-                        textDocumentProxy.insertText("")
+                        textDocumentProxy.insertText(.empty)
                 }
-
                 didSet {
                         guard shouldMarkInput else { return }
                         handleMarkedText()
@@ -449,9 +447,9 @@ final class KeyboardViewController: UIInputViewController {
         }
         private lazy var schemes: [[String]] = []
 
-        /// some dumb apps just can't be compatible with `textDocumentProxy.setMarkedText() & textDocumentProxy.insertText()`
-        /// - Parameter text: text to output
-        func output(_ text: String) {
+        /// some apps can't be compatible with `textDocumentProxy.setMarkedText() & textDocumentProxy.insertText()`
+        /// - Parameter text: text to insert
+        func compose(_ text: String) {
                 shouldMarkInput = false
                 defer {
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.02) { [unowned self] in
@@ -661,9 +659,9 @@ final class KeyboardViewController: UIInputViewController {
         @objc private func handlePaste() {
                 guard UIPasteboard.general.hasStrings else { return }
                 guard let copied: String = UIPasteboard.general.string else { return }
+                textDocumentProxy.insertText(copied)
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.input)
-                insert(copied)
         }
         @objc private func handleEmojiSwitch() {
                 hapticFeedback?.impactOccurred()
