@@ -61,13 +61,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 cell.textLabel.text = candidates[indexPath.row].text
                 switch toneStyle {
                 case 2:
-                        cell.footnoteLabel.text = candidates[indexPath.row].jyutping.removedTones()
+                        cell.footnoteLabel.text = candidates[indexPath.row].romanization.removedTones()
                 case 3, 4:
-                        let footnote: String = candidates[indexPath.row].jyutping
+                        let footnote: String = candidates[indexPath.row].romanization
                         let attributed: NSAttributedString = attribute(text: footnote, toneStyle: toneStyle)
                         cell.footnoteLabel.attributedText = attributed
                 default:
-                        cell.footnoteLabel.text = candidates[indexPath.row].jyutping
+                        cell.footnoteLabel.text = candidates[indexPath.row].romanization
                 }
 
                 // REASON: In some apps (like QQ), the cell may not showing the correct default colors

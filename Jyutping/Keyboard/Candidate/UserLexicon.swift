@@ -32,11 +32,11 @@ struct UserLexicon {
         // MARK: - Handle Candidate
 
         func handle(_ candidate: Candidate) {
-                let id: Int64 = Int64((candidate.lexiconText + candidate.jyutping).hash)
+                let id: Int64 = Int64((candidate.lexiconText + candidate.romanization).hash)
                 if let frequency: Int64 = find(by: id) {
                         update(id: id, frequency: frequency + 1)
                 } else {
-                        let jyutping: String = candidate.jyutping
+                        let jyutping: String = candidate.romanization
                         let newEntry: LexiconEntry = LexiconEntry(id: id,
                                                                   input: Int64(candidate.input.hash),
                                                                   ping: jyutping.ping,
@@ -101,7 +101,7 @@ struct UserLexicon {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let jyutping = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -118,7 +118,7 @@ struct UserLexicon {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let jyutping = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, jyutping: jyutping, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }

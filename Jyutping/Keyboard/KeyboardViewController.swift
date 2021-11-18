@@ -518,7 +518,7 @@ final class KeyboardViewController: UIInputViewController {
                 guard let searches = pinyinProvider?.search(for: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
                         let romanizations: [String] = LookupData.search(for: lexicon.text)
-                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
                         return candidates
                 }
                 let joined: [Candidate] = Array<Candidate>(lookup.joined())
@@ -536,7 +536,7 @@ final class KeyboardViewController: UIInputViewController {
                 guard let searches = shapeData?.search(cangjie: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
                         let romanizations: [String] = LookupData.search(for: lexicon.text)
-                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
                         return candidates
                 }
                 let joined: [Candidate] = Array<Candidate>(lookup.joined())
@@ -554,7 +554,7 @@ final class KeyboardViewController: UIInputViewController {
                 guard let searches = shapeData?.search(stroke: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
                         let romanizations: [String] = LookupData.search(for: lexicon.text)
-                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, jyutping: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
                         return candidates
                 }
                 let joined: [Candidate] = Array<Candidate>(lookup.joined())
@@ -582,7 +582,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = origin.uniqued()
                         updateConverter()
                 } else {
-                        let converted: [Candidate] = origin.map { Candidate(text: converter!.convert($0.text), jyutping: $0.jyutping, input: $0.input, lexiconText: $0.lexiconText) }
+                        let converted: [Candidate] = origin.map { Candidate(text: converter!.convert($0.text), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) }
                         candidates = converted.uniqued()
                 }
         }

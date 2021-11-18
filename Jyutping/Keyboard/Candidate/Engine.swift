@@ -55,7 +55,7 @@ struct Engine {
                         }
                         let fetches: [Candidate] = prefix(match: headTail)
                         let filtered: [Candidate] = fetches.filter {
-                                guard let first: String = $0.jyutping.components(separatedBy: String.space).first else { return false }
+                                guard let first: String = $0.romanization.components(separatedBy: String.space).first else { return false }
                                 return first == leadingTwo
                         }
                         return filtered
@@ -116,7 +116,7 @@ struct Engine {
                         guard hasSeparators else { return candidates }
                         let firstSyllable: String = sequences.first?.first ?? "X"
                         let filtered: [Candidate] = candidates.filter { candidate in
-                                let firstJyutping: String = candidate.jyutping.components(separatedBy: String.space).first ?? "Y"
+                                let firstJyutping: String = candidate.romanization.components(separatedBy: String.space).first ?? "Y"
                                 return firstSyllable == firstJyutping.removedTones()
                         }
                         return filtered
@@ -156,7 +156,7 @@ struct Engine {
                         guard hasSeparators else { return candidates }
                         let firstSyllable: String = sequences.first?.first ?? "X"
                         let filtered: [Candidate] = candidates.filter { candidate in
-                                let firstJyutping: String = candidate.jyutping.components(separatedBy: String.space).first ?? "Y"
+                                let firstJyutping: String = candidate.romanization.components(separatedBy: String.space).first ?? "Y"
                                 return firstSyllable == firstJyutping.removedTones()
                         }
                         return filtered
@@ -218,7 +218,7 @@ private extension Engine {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -239,7 +239,7 @@ private extension Engine {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
+                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
                                         candidates.append(candidate)
                                 }
                         }
@@ -260,7 +260,7 @@ private extension Engine {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
+                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
                                         candidates.append(candidate)
                                 }
                         }
@@ -282,7 +282,7 @@ private extension Engine {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
                                 if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
+                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
                                         let rowCandidate: RowCandidate = (candidate: candidate, row: rowid)
                                         rowCandidates.append(rowCandidate)
                                 }
@@ -301,7 +301,7 @@ private extension Engine {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, jyutping: romanization, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
                                 candidates.append(candidate)
                         }
                 }
