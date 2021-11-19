@@ -5,7 +5,7 @@ final class KeyView: UIView {
         let shape: UIView = UIView()
         let event: KeyboardEvent
         let controller: KeyboardViewController
-        let layout: KeyboardLayout
+        let layout: KeyboardIdiom
         let isDarkAppearance: Bool
         let screenSize: CGSize
         let isCompactInterface: Bool

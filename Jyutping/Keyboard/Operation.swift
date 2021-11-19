@@ -9,5 +9,5 @@ enum Operation: Hashable {
         case `return`
         case shift
         case doubleShift
-        case switchTo(KeyboardLayout)
+        case switchTo(KeyboardIdiom)
 }

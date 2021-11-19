@@ -5,7 +5,7 @@ enum KeyboardEvent: Hashable {
              backspace,
              newLine,
              shift,
-             switchTo(KeyboardLayout),
+             switchTo(KeyboardIdiom),
              switchInputMethod,
              shadowKey(String),
              shadowBackspace

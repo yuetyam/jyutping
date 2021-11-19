@@ -1,4 +1,4 @@
-extension KeyboardLayout {
+extension KeyboardIdiom {
         func events(for arrangement: Int, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
@@ -33,7 +33,7 @@ extension KeyboardLayout {
         }
 }
 
-private extension KeyboardLayout {
+private extension KeyboardIdiom {
         func cantoneseLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],

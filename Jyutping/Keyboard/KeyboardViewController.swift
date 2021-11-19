@@ -66,7 +66,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var shouldKeepInputTextWhileTextDidChange: Bool = false
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
-                let asked: KeyboardLayout = askedKeyboardLayout
+                let asked: KeyboardIdiom = askedKeyboardLayout
                 if respondingKeyboardLayout != asked {
                         respondingKeyboardLayout = asked
                         needsDifferentKeyboard = true
@@ -133,8 +133,8 @@ final class KeyboardViewController: UIInputViewController {
 
         private lazy var didKeyboardEstablished: Bool = false
         private lazy var needsDifferentKeyboard: Bool = false
-        private lazy var respondingKeyboardLayout: KeyboardLayout = .cantonese(.lowercased)
-        private var askedKeyboardLayout: KeyboardLayout {
+        private lazy var respondingKeyboardLayout: KeyboardIdiom = .cantonese(.lowercased)
+        private var askedKeyboardLayout: KeyboardIdiom {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
                         return isPad ? .numeric : .numberPad
@@ -148,7 +148,7 @@ final class KeyboardViewController: UIInputViewController {
                         return .cantonese(.lowercased)
                 }
         }
-        var keyboardLayout: KeyboardLayout = .cantonese(.lowercased) {
+        var keyboardLayout: KeyboardIdiom = .cantonese(.lowercased) {
                 didSet {
                         setupKeyboard()
                         guard didKeyboardEstablished else {

@@ -1,4 +1,4 @@
-enum KeyboardLayout: Hashable {
+enum KeyboardIdiom: Hashable {
         case cantonese(ShiftState),
              cantoneseNumeric,
              cantoneseSymbolic,
@@ -12,7 +12,7 @@ enum KeyboardLayout: Hashable {
              emoji
 }
 
-extension KeyboardLayout {
+extension KeyboardIdiom {
         var isEnglishMode: Bool {
                 switch self {
                 case .alphabetic,
