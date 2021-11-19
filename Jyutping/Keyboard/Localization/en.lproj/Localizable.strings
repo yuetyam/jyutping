@@ -30,8 +30,9 @@ English
 "Subscript : jyut₆ ping₃"   = "Subscript    :  jyut₆ ping₃";
 
 "Space Double Tapping Shortcut" = "Space Double Tapping Shortcut";
-"Insert a period" = "Insert a period";
-"Insert a comma" = "Insert a comma";
+"Insert a period" = "Insert a Period (Full Stop)";
+"Insert a comma" = "Insert a Comma";
+"Insert an ideographic space" = "Insert a Fullwidth Space (U+3000)";
 "No Double Space Shortcut" = "None";
 
 "Clear User Lexicon" = "Clear User Lexicon";

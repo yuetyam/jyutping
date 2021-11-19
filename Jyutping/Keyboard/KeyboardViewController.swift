@@ -273,7 +273,7 @@ final class KeyboardViewController: UIInputViewController {
                                 case (3, true):
                                         return ", "
                                 default:
-                                        return "。"
+                                        return .fullwidthSpace
                                 }
                         }()
                         textDocumentProxy.insertText(text)
@@ -808,11 +808,13 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 0: The key "double_space_shortcut" doesn‘t exist.
         ///
-        /// 1: 輸入句號「。」（英文鍵盤輸入一個句號「.」加一個空格）
+        /// 1: 輸入一個句號「。」（英文鍵盤輸入一個句號「.」加一個空格）
         ///
         /// 2: 無（輸入兩個空格）
         ///
-        /// 3: 輸入逗號「，」（英文鍵盤輸入一個逗號「,」加一個空格）
+        /// 3: 輸入一個逗號「，」（英文鍵盤輸入一個逗號「,」加一個空格）
+        ///
+        /// 4: 輸入一個全形空格（U+3000）
         private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         func updateDoubleSpaceShortcut() {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")

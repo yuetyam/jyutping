@@ -41,12 +41,16 @@ extension String {
         /// aka. `String.init()`
         static let empty: String = ""
 
-        /// A space
+        /// A Space. U+0020
         static let space: String = " "
 
         /// U+200B
         static let zeroWidthSpace: String = "\u{200B}"
+
+        /// U+3000. Ideographic Space.
+        static let fullwidthSpace: String = "\u{3000}"
 }
+
 
 extension Optional where Wrapped == String {
 

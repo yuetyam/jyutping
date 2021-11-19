@@ -30,8 +30,9 @@ Cantonese
 "Subscript : jyut₆ ping₃"   = "下標     :  jyut₆ ping₃";
 
 "Space Double Tapping Shortcut" = "雙擊空格鍵快捷動作";
-"Insert a period" = "輸入句號";
-"Insert a comma" = "輸入逗號";
+"Insert a period" = "輸入一個句號「。」";
+"Insert a comma" = "輸入一個逗號「，」";
+"Insert an ideographic space" = "輸入一個全形空格（U+3000）";
 "No Double Space Shortcut" = "無";
 
 "Clear User Lexicon" = "清空用戶詞庫";

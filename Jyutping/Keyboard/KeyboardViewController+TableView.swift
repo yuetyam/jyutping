@@ -26,7 +26,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return 4
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
                         // Space double tapping shortcut
-                        return 3
+                        return 4
                 case 5 where footnoteStyle >= 3, 6:
                         // Clear User Lexicon
                         return 1
@@ -168,6 +168,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 cell.textLabel?.text = NSLocalizedString("Insert a comma", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut == 3 ? .checkmark : .none
                         case 2:
+                                cell.textLabel?.text = NSLocalizedString("Insert an ideographic space", comment: .empty)
+                                cell.accessoryType = doubleSpaceShortcut == 4 ? .checkmark : .none
+                        case 3:
                                 cell.textLabel?.text = NSLocalizedString("No Double Space Shortcut", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut == 2 ? .checkmark : .none
                         default:
@@ -266,6 +269,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         case 1:
                                 UserDefaults.standard.set(3, forKey: "double_space_shortcut")
                         case 2:
+                                UserDefaults.standard.set(4, forKey: "double_space_shortcut")
+                        case 3:
                                 UserDefaults.standard.set(2, forKey: "double_space_shortcut")
                         default:
                                 break
