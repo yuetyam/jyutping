@@ -149,11 +149,11 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         inputText = String(tail)
                 }
 
-                if keyboardLayout == .candidateBoard && inputText.isEmpty {
+                if keyboardIdiom == .candidateBoard && inputText.isEmpty {
                         collectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reset()
-                        keyboardLayout = .cantonese(.lowercased)
+                        keyboardIdiom = .cantonese(.lowercased)
                 }
                 if inputText.isEmpty && !candidateSequence.isEmpty {
                         let concatenatedCandidate: Candidate = candidateSequence.joined()
@@ -168,7 +168,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
                 let characterCount: Int = candidates[indexPath.row].text.count
                 guard footnoteStyle < 3 else {
-                        if keyboardLayout == .candidateBoard {
+                        if keyboardIdiom == .candidateBoard {
                                 let fullWidth: CGFloat = collectionView.bounds.size.width
                                 var itemCount: Int {
                                         switch characterCount {
@@ -205,7 +205,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 }
                         }
                 }
-                if keyboardLayout == .candidateBoard {
+                if keyboardIdiom == .candidateBoard {
                         let fullWidth: CGFloat = collectionView.bounds.size.width
                         var itemCount: Int {
                                 switch characterCount {

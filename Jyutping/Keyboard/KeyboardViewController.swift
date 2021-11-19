@@ -66,12 +66,12 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var shouldKeepInputTextWhileTextDidChange: Bool = false
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
-                let asked: KeyboardIdiom = askedKeyboardLayout
-                if respondingKeyboardLayout != asked {
-                        respondingKeyboardLayout = asked
+                let asked: KeyboardIdiom = askedKeyboardIdiom
+                if respondingKeyboardIdiom != asked {
+                        respondingKeyboardIdiom = asked
                         needsDifferentKeyboard = true
                         if didKeyboardEstablished {
-                                keyboardLayout = asked
+                                keyboardIdiom = asked
                         }
                 }
                 if shouldKeepInputTextWhileTextDidChange {
@@ -99,7 +99,7 @@ final class KeyboardViewController: UIInputViewController {
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
                 if needsDifferentKeyboard {
-                        keyboardLayout = respondingKeyboardLayout
+                        keyboardIdiom = respondingKeyboardIdiom
                 } else if !didKeyboardEstablished {
                         setupKeyboard()
                         didKeyboardEstablished = true
@@ -133,8 +133,8 @@ final class KeyboardViewController: UIInputViewController {
 
         private lazy var didKeyboardEstablished: Bool = false
         private lazy var needsDifferentKeyboard: Bool = false
-        private lazy var respondingKeyboardLayout: KeyboardIdiom = .cantonese(.lowercased)
-        private var askedKeyboardLayout: KeyboardIdiom {
+        private lazy var respondingKeyboardIdiom: KeyboardIdiom = .cantonese(.lowercased)
+        private var askedKeyboardIdiom: KeyboardIdiom {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
                         return isPad ? .numeric : .numberPad
@@ -148,14 +148,14 @@ final class KeyboardViewController: UIInputViewController {
                         return .cantonese(.lowercased)
                 }
         }
-        var keyboardLayout: KeyboardIdiom = .cantonese(.lowercased) {
+        var keyboardIdiom: KeyboardIdiom = .cantonese(.lowercased) {
                 didSet {
                         setupKeyboard()
                         guard didKeyboardEstablished else {
                                 didKeyboardEstablished = true
                                 return
                         }
-                        if (!keyboardLayout.isCantoneseMode) && (!inputText.isEmpty) {
+                        if (!keyboardIdiom.isCantoneseMode) && (!inputText.isEmpty) {
                                 let text: String = inputText
                                 inputText = .empty
                                 textDocumentProxy.insertText(text)
@@ -169,7 +169,7 @@ final class KeyboardViewController: UIInputViewController {
         func operate(_ operation: Operation) {
                 switch operation {
                 case .input(let text):
-                        if keyboardLayout.isCantoneseMode {
+                        if keyboardIdiom.isCantoneseMode {
                                 if arrangement == 2 && text == "gw" {
                                         let newInputText: String = inputText + text
                                         inputText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
@@ -180,17 +180,17 @@ final class KeyboardViewController: UIInputViewController {
                                 textDocumentProxy.insertText(text)
                         }
                         AudioFeedback.perform(.input)
-                        adjustKeyboardLayout()
+                        adjustKeyboardIdiom()
                 case .separator:
                         inputText += "'"
                         AudioFeedback.perform(.input)
-                        adjustKeyboardLayout()
+                        adjustKeyboardIdiom()
                 case .punctuation(let text):
                         textDocumentProxy.insertText(text)
                         AudioFeedback.perform(.input)
-                        adjustKeyboardLayout()
+                        adjustKeyboardIdiom()
                 case .space:
-                        switch keyboardLayout {
+                        switch keyboardIdiom {
                         case .cantonese:
                                 defer {
                                         AudioFeedback.perform(.input)
@@ -250,7 +250,7 @@ final class KeyboardViewController: UIInputViewController {
                                 textDocumentProxy.insertText(.space)
                                 AudioFeedback.perform(.input)
                         }
-                        adjustKeyboardLayout()
+                        adjustKeyboardIdiom()
                 case .doubleSpace:
                         guard inputText.isEmpty else { return }
                         defer {
@@ -263,7 +263,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         textDocumentProxy.deleteBackward()
                         let text: String = {
-                                switch (doubleSpaceShortcut, keyboardLayout.isEnglishMode) {
+                                switch (doubleSpaceShortcut, keyboardIdiom.isEnglishMode) {
                                 case (0, false), (1, false):
                                         return "。"
                                 case (3, false):
@@ -311,34 +311,34 @@ final class KeyboardViewController: UIInputViewController {
                         AudioFeedback.perform(.input)
                 case .shift:
                         AudioFeedback.perform(.modify)
-                        switch keyboardLayout {
+                        switch keyboardIdiom {
                         case .cantonese(.lowercased):
-                                keyboardLayout = .cantonese(.uppercased)
+                                keyboardIdiom = .cantonese(.uppercased)
                         case .cantonese(.uppercased),
                              .cantonese(.capsLocked):
-                                keyboardLayout = .cantonese(.lowercased)
+                                keyboardIdiom = .cantonese(.lowercased)
                         case .alphabetic(.lowercased):
-                                keyboardLayout = .alphabetic(.uppercased)
+                                keyboardIdiom = .alphabetic(.uppercased)
                         case .alphabetic(.uppercased),
                              .alphabetic(.capsLocked):
-                                keyboardLayout = .alphabetic(.lowercased)
+                                keyboardIdiom = .alphabetic(.lowercased)
                         default:
                                 break
                         }
                 case .doubleShift:
                         AudioFeedback.perform(.modify)
-                        keyboardLayout = keyboardLayout.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
+                        keyboardIdiom = keyboardIdiom.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
                 case .switchTo(let newLayout):
                         AudioFeedback.perform(.modify)
-                        keyboardLayout = newLayout
+                        keyboardIdiom = newLayout
                 }
         }
-        private func adjustKeyboardLayout() {
-                switch keyboardLayout {
+        private func adjustKeyboardIdiom() {
+                switch keyboardIdiom {
                 case .alphabetic(.uppercased):
-                        keyboardLayout = .alphabetic(.lowercased)
+                        keyboardIdiom = .alphabetic(.lowercased)
                 case .cantonese(.uppercased):
-                        keyboardLayout = .cantonese(.lowercased)
+                        keyboardIdiom = .cantonese(.lowercased)
                 default:
                         break
                 }
@@ -618,41 +618,41 @@ final class KeyboardViewController: UIInputViewController {
                 toolBar.downArrow.addTarget(self, action: #selector(handleDownArrow), for: .touchUpInside)
         }
         @objc private func handleSettingsButton() {
-                keyboardLayout = .settingsView
+                keyboardIdiom = .settingsView
         }
         @objc private func handleYueEngSwitch() {
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.modify)
                 let switched: Bool = toolBar.yueEngSwitch.switched
                 if switched {
-                        switch keyboardLayout {
+                        switch keyboardIdiom {
                         case .alphabetic(.lowercased):
-                                keyboardLayout = .cantonese(.lowercased)
+                                keyboardIdiom = .cantonese(.lowercased)
                         case .alphabetic(.uppercased):
-                                keyboardLayout = .cantonese(.uppercased)
+                                keyboardIdiom = .cantonese(.uppercased)
                         case .alphabetic(.capsLocked):
-                                keyboardLayout = .cantonese(.capsLocked)
+                                keyboardIdiom = .cantonese(.capsLocked)
                         case .numeric:
-                                keyboardLayout = .cantoneseNumeric
+                                keyboardIdiom = .cantoneseNumeric
                         case .symbolic:
-                                keyboardLayout = .cantoneseSymbolic
+                                keyboardIdiom = .cantoneseSymbolic
                         default:
-                                keyboardLayout = .cantonese(.lowercased)
+                                keyboardIdiom = .cantonese(.lowercased)
                         }
                 } else {
-                        switch keyboardLayout {
+                        switch keyboardIdiom {
                         case .cantonese(.lowercased):
-                                keyboardLayout = .alphabetic(.lowercased)
+                                keyboardIdiom = .alphabetic(.lowercased)
                         case .cantonese(.uppercased):
-                                keyboardLayout = .alphabetic(.uppercased)
+                                keyboardIdiom = .alphabetic(.uppercased)
                         case .cantonese(.capsLocked):
-                                keyboardLayout = .alphabetic(.capsLocked)
+                                keyboardIdiom = .alphabetic(.capsLocked)
                         case .cantoneseNumeric:
-                                keyboardLayout = .numeric
+                                keyboardIdiom = .numeric
                         case .cantoneseSymbolic:
-                                keyboardLayout = .symbolic
+                                keyboardIdiom = .symbolic
                         default:
-                                keyboardLayout = .alphabetic(.lowercased)
+                                keyboardIdiom = .alphabetic(.lowercased)
                         }
                 }
         }
@@ -666,13 +666,13 @@ final class KeyboardViewController: UIInputViewController {
         @objc private func handleEmojiSwitch() {
                 hapticFeedback?.impactOccurred()
                 AudioFeedback.perform(.modify)
-                keyboardLayout = .emoji
+                keyboardIdiom = .emoji
         }
         @objc private func dismissInputMethod() {
                 dismissKeyboard()
         }
         @objc private func handleDownArrow() {
-                keyboardLayout = .candidateBoard
+                keyboardIdiom = .candidateBoard
         }
 
 

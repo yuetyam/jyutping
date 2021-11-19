@@ -18,7 +18,7 @@ final class KeyView: UIView {
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
                 self.controller = controller
-                layout = controller.keyboardLayout
+                layout = controller.keyboardIdiom
                 isDarkAppearance = controller.isDarkAppearance
                 screenSize = controller.screenSize
                 isCompactInterface = controller.isCompactInterface

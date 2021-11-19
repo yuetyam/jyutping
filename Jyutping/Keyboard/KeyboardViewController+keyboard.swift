@@ -8,7 +8,7 @@ extension KeyboardViewController {
                 }
         }
         private func loadKeyboard() {
-                switch keyboardLayout {
+                switch keyboardIdiom {
                 case .candidateBoard:
                         loadCandidateBoard()
                 case .settingsView:
@@ -38,12 +38,12 @@ extension KeyboardViewController {
         private func loadKeys() {
                 keyboardStackView.removeArrangedSubviews()
                 toolBar.tintColor = isDarkAppearance ? .white : .black
-                toolBar.yueEngSwitch.update(isDarkAppearance: isDarkAppearance, switched: keyboardLayout.isEnglishMode)
+                toolBar.yueEngSwitch.update(isDarkAppearance: isDarkAppearance, switched: keyboardIdiom.isEnglishMode)
                 if !UIPasteboard.general.hasStrings {
                         toolBar.pasteButton.tintColor = .systemGray
                 }
                 keyboardStackView.addArrangedSubview(toolBar)
-                let events: [[KeyboardEvent]] = keyboardLayout.events(for: arrangement, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                let events: [[KeyboardEvent]] = keyboardIdiom.events(for: arrangement, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 let keysRows: [UIStackView] = makeKeysRows(for: events.dropLast())
                 keyboardStackView.addArrangedSubviews(keysRows)
                 guard let bottomEvents: [KeyboardEvent] = events.last else { return }
@@ -71,7 +71,7 @@ extension KeyboardViewController {
 
                 let bottomStackView: UIStackView = UIStackView()
                 bottomStackView.distribution = .fillProportionally
-                if keyboardLayout == .numberPad {
+                if keyboardIdiom == .numberPad {
                         bottomStackView.addArrangedSubview(NumberPadEmptyKey())
                 } else {
                         bottomStackView.addArrangedSubview(PointButton(controller: self))
@@ -115,7 +115,7 @@ extension KeyboardViewController {
         @objc private func handleSwitchBack() {
                 triggerHapticFeedback()
                 AudioFeedback.perform(.modify)
-                keyboardLayout = .cantonese(.lowercased)
+                keyboardIdiom = .cantonese(.lowercased)
         }
         @objc private func handleBackspace() {
                 triggerHapticFeedback()
@@ -169,7 +169,7 @@ extension KeyboardViewController {
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                 toolBar.reset()
-                keyboardLayout = .cantonese(.lowercased)
+                keyboardIdiom = .cantonese(.lowercased)
         }
         
         
@@ -204,7 +204,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
-                keyboardLayout = .cantonese(.lowercased)
+                keyboardIdiom = .cantonese(.lowercased)
         }
 
 
