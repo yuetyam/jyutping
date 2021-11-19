@@ -103,7 +103,14 @@ final class KeyView: UIView {
                         spaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         draggedOnSpace = false
                 case .shift:
-                        break
+                        let now = Date.timeIntervalSinceReferenceDate
+                        let distance = now - ShiftState.timePoint
+                        ShiftState.timePoint = now
+                        if distance < 0.3 {
+                                controller.operate(.doubleShift)
+                        } else {
+                                controller.operate(.shift)
+                        }
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
                 case .switchTo(let newLayout):
@@ -169,14 +176,7 @@ final class KeyView: UIView {
                 isInteracting = false
                 switch self.event {
                 case .shift:
-                        let now = Date.timeIntervalSinceReferenceDate
-                        let distance = now - ShiftState.timePoint
-                        ShiftState.timePoint = now
-                        if distance < 0.3 {
-                                controller.operate(.doubleShift)
-                        } else {
-                                controller.operate(.shift)
-                        }
+                        break
                 case .space:
                         spaceTouchPoint = .zero
                         changeColorToNormal()
