@@ -126,7 +126,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 default:
                         candidateSequence.append(candidate)
                         let inputCount: Int = {
-                                if arrangement > 1 {
+                                if keyboardLayout > 1 {
                                         return candidate.input.count
                                 } else {
                                         let converted: String = candidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")

@@ -16,7 +16,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         // Characters, Logogram, Fonts
                         return 4
                 case 2:
-                        // Keyboard Arrangement ("keyboard_layout")
+                        // Keyboard Layouts
                         return 2
                 case 3:
                         // Jyutping Display
@@ -113,10 +113,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("QWERTY", comment: .empty)
-                                cell.accessoryType = arrangement < 2 ? .checkmark : .none
+                                cell.accessoryType = keyboardLayout < 2 ? .checkmark : .none
                         case 1:
                                 cell.textLabel?.text = NSLocalizedString("SaamPing", comment: .empty)
-                                cell.accessoryType = arrangement == 2 ? .checkmark : .none
+                                cell.accessoryType = keyboardLayout == 2 ? .checkmark : .none
                         default:
                                 break
                         }
@@ -221,7 +221,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         triggerHapticFeedback()
-                        updateArrangement()
+                        updateKeyboardLayout()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }

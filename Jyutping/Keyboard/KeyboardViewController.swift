@@ -170,7 +170,7 @@ final class KeyboardViewController: UIInputViewController {
                 switch operation {
                 case .input(let text):
                         if keyboardIdiom.isCantoneseMode {
-                                if arrangement == 2 && text == "gw" {
+                                if keyboardLayout == 2 && text == "gw" {
                                         let newInputText: String = inputText + text
                                         inputText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
                                 } else {
@@ -219,7 +219,7 @@ final class KeyboardViewController: UIInputViewController {
                                 default:
                                         candidateSequence.append(firstCandidate)
                                         let inputCount: Int = {
-                                                if arrangement > 1 {
+                                                if keyboardLayout > 1 {
                                                         return firstCandidate.input.count
                                                 } else {
                                                         let converted: String = firstCandidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
@@ -282,7 +282,7 @@ final class KeyboardViewController: UIInputViewController {
                                 textDocumentProxy.deleteBackward()
                         } else {
                                 lazy var hasLightToneSuffix: Bool = inputText.hasSuffix("vv") || inputText.hasSuffix("xx") || inputText.hasSuffix("qq")
-                                if arrangement < 2 && hasLightToneSuffix {
+                                if keyboardLayout < 2 && hasLightToneSuffix {
                                         inputText = String(inputText.dropLast(2))
                                 } else {
                                         inputText = String(inputText.dropLast())
@@ -355,7 +355,7 @@ final class KeyboardViewController: UIInputViewController {
                         case .some("r"), .some("v"), .some("x"):
                                 processingText = inputText
                         default:
-                                if arrangement > 1 {
+                                if keyboardLayout > 1 {
                                         processingText = inputText
                                 } else {
                                         processingText = inputText.replacingOccurrences(of: "vv", with: "4")
@@ -769,9 +769,9 @@ final class KeyboardViewController: UIInputViewController {
         /// 2: 三拼
         ///
         /// 3: 九宮格（未實現）
-        private(set) lazy var arrangement: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
-        func updateArrangement() {
-                arrangement = UserDefaults.standard.integer(forKey: "keyboard_layout")
+        private(set) lazy var keyboardLayout: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
+        func updateKeyboardLayout() {
+                keyboardLayout = UserDefaults.standard.integer(forKey: "keyboard_layout")
         }
 
         /// 粵拼顯示

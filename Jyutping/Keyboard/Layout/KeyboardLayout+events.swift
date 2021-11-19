@@ -1,15 +1,15 @@
 extension KeyboardIdiom {
-        func events(for arrangement: Int, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func events(for keyboardLayout: Int, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
-                        switch arrangement {
+                        switch keyboardLayout {
                         case 2:
                                 return saamPingLowercasedKeys(needsInputModeSwitchKey)
                         default:
                                 return cantoneseLowercasedKeys(needsInputModeSwitchKey)
                         }
                 case .cantonese(.uppercased), .cantonese(.capsLocked):
-                        switch arrangement {
+                        switch keyboardLayout {
                         case 2:
                                 return saamPingUppercasedKeys(needsInputModeSwitchKey)
                         default:
