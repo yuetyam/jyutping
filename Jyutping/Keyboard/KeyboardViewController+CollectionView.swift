@@ -31,7 +31,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
 
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
                 guard collectionView == candidateCollectionView else {
-                        guard let cell: EmojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmojiCell", for: indexPath) as? EmojiCell else {
+                        guard let cell: EmojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.EmojiCell, for: indexPath) as? EmojiCell else {
                                 return UICollectionViewCell()
                         }
                         switch indexPath.section {
@@ -49,7 +49,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 // FIXME: - Don't know why
                 guard candidates.count > indexPath.row else { return UICollectionViewCell() }
 
-                guard let cell: CandidateCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CandidateCell", for: indexPath) as? CandidateCell else {
+                guard let cell: CandidateCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.CandidateCell, for: indexPath) as? CandidateCell else {
                         return UICollectionViewCell()
                 }
                 if cell.footnoteStyle != self.footnoteStyle {

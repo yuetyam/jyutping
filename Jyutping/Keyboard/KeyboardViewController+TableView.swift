@@ -1,5 +1,19 @@
 import UIKit
 
+struct Identifiers {
+        static let CandidateCell: String = "CandidateCell"
+        static let EmojiCell: String = "EmojiCell"
+
+        static let feedbacksSettingsCell: String = "SettingsTableViewFeedbacksCell"
+        static let charactersSettingsCell: String = "SettingsTableViewCharactersCell"
+        static let keyboardLayoutSettingsCell: String = "SettingsTableViewKeyboardLayoutCell"
+        static let candidateFootnoteSettingsCell: String = "SettingsTableViewCandidateFootnoteCell"
+        static let candidateToneStyleSettingsCell: String = "SettingsTableViewCandidateToneStyleCell"
+        static let spaceShortcutSettingsCell: String = "SettingsTableViewSpaceShortcutCell"
+        static let clearLexiconSettingsCell: String = "SettingsTableViewClearLexiconCell"
+}
+
+
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
         func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,20 +84,22 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 switch indexPath.section {
                 case 0:
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as? SwitchTableViewCell else { return UITableViewCell() }
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.feedbacksSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: .empty)
-                                cell.switchView.isOn = UserDefaults.standard.bool(forKey: "audio_feedback")
-                                cell.switchView.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .valueChanged)
+                                cell.accessoryView = UISwitch()
+                                (cell.accessoryView as? UISwitch)?.isOn = AudioFeedback.isAudioFeedbackOn
+                                (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleAudioFeedbackSwitch), for: .valueChanged)
                         case 1:
                                 cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: .empty)
+                                cell.accessoryView = UISwitch()
                                 if hasFullAccess {
-                                        cell.switchView.isOn = isHapticFeedbackOn
-                                        cell.switchView.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .valueChanged)
+                                        (cell.accessoryView as? UISwitch)?.isOn = isHapticFeedbackOn
+                                        (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .valueChanged)
                                 } else {
-                                        cell.switchView.isOn = false
-                                        cell.switchView.isEnabled = false
+                                        (cell.accessoryView as? UISwitch)?.isOn = false
+                                        (cell.accessoryView as? UISwitch)?.isEnabled = false
                                         cell.textLabel?.isEnabled = false
                                         cell.isUserInteractionEnabled = false
                                 }
@@ -92,7 +108,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
                 case 1:
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CharactersTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.charactersSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Traditional", comment: .empty)
@@ -109,7 +125,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return cell
 
                 case 2:
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "KeyboardLayoutTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.keyboardLayoutSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("QWERTY", comment: .empty)
@@ -123,7 +139,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return cell
 
                 case 3:
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "JyutpingTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.candidateFootnoteSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: .empty)
@@ -140,7 +156,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return cell
 
                 case 4 where footnoteStyle < 3:
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ToneStyleTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.candidateToneStyleSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: .empty)
@@ -159,7 +175,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpaceShortcutTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.spaceShortcutSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Insert a period", comment: .empty)
@@ -178,7 +194,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
                 case 5 where footnoteStyle >= 3, 6:
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ClearLexiconTableViewCell", for: indexPath) as? NormalTableViewCell else { return UITableViewCell() }
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.clearLexiconSettingsCell, for: indexPath)
                         cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: .empty)
                         cell.textLabel?.textColor = .systemRed
                         cell.textLabel?.textAlignment = .center
@@ -320,23 +336,4 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 updateHapticFeedbackStatus()
         }
-}
-
-final class SwitchTableViewCell: UITableViewCell {
-
-        let switchView: UISwitch = UISwitch()
-
-        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-                super.init(style: .default, reuseIdentifier: "SwitchTableViewCell")
-                selectionStyle = .none
-                accessoryView = switchView
-        }
-        required init?(coder: NSCoder) { fatalError("SwitchTableViewCell.init(coder:) error") }
-}
-final class NormalTableViewCell: UITableViewCell {
-
-        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-                super.init(style: .default, reuseIdentifier: "NormalTableViewCell")
-        }
-        required init?(coder: NSCoder) { fatalError("NormalTableViewCell.init(coder:) error") }
 }

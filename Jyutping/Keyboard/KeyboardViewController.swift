@@ -42,20 +42,20 @@ final class KeyboardViewController: UIInputViewController {
                 candidateCollectionView.delegate = self
                 candidateCollectionView.dataSource = self
                 candidateCollectionView.backgroundColor = view.backgroundColor
-                candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: "CandidateCell")
+                candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: Identifiers.CandidateCell)
                 emojiCollectionView.delegate = self
                 emojiCollectionView.dataSource = self
                 emojiCollectionView.backgroundColor = view.backgroundColor
-                emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: "EmojiCell")
+                emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: Identifiers.EmojiCell)
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
-                settingsTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: "SwitchTableViewCell")
-                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "CharactersTableViewCell")
-                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "KeyboardLayoutTableViewCell")
-                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "JyutpingTableViewCell")
-                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ToneStyleTableViewCell")
-                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "SpaceShortcutTableViewCell")
-                settingsTableView.register(NormalTableViewCell.self, forCellReuseIdentifier: "ClearLexiconTableViewCell")
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.feedbacksSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.charactersSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.keyboardLayoutSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.candidateFootnoteSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.candidateToneStyleSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.spaceShortcutSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)
                 setupToolBarActions()
         }
 
