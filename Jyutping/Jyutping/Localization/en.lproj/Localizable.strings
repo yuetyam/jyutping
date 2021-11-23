@@ -50,18 +50,23 @@ English
 "Lookup Jyutping with Pinyin" = "Lookup Jyutping with Pinyin";
 "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。" = "Start with 'r', then enter the Pinyin code. For example, enter 'rcha', candidate '查' will appear. The candidates will be displayed with the corresponding Jyutping.";
 
+"More Introductions" = "More Introductions";
+"title.introductions" = "Introductions";
 "Period (Full Stop) Shortcut" = "Period (Full Stop) Shortcut";
 "Double tapping the space bar will insert a period followed by a space" = "Double tapping the space bar will insert a period followed by a space";
 
-"Can I use with external keyboards?" = "Can I use with external keyboards?";
-"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";
-
-"More Introductions" = "More Introductions";
-"title.introductions" = "Introductions";
 "Cantonese Expressions" = "Cantonese Expressions";
 "title.expressions" = "Expressions";
+
 "Frequently Asked Questions" = "Frequently Asked Questions";
 "FAQ" = "FAQ";
+"Can I use with external keyboards?" = "Can I use with external keyboards?";
+"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";
+"What does “Allow Full Access” do?" = "What does “Allow Full Access” do?";
+"Enable a button on the keyboard for pasting texts from Clipboard" = "Enable a button on the keyboard for pasting texts from Clipboard";
+"Haptic Feedback" = "Haptic Feedback";
+"Paste texts from Clipboard" = "Paste texts from Clipboard";
+"All other features don't require Full Access" = "All other features don't require Full Access";
 
 
 // Search
