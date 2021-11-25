@@ -19,7 +19,7 @@ struct ExpressionsView: View {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "毋用〔您、您們〕。「您」係北京方言用字，好少見於其他漢語。如果要用敬語，粵語一般用「閣下」")
+                                                Text(verbatim: "毋用〔您、您們〕。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」")
                                         } icon: {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
