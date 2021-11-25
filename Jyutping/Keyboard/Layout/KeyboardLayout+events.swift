@@ -367,43 +367,37 @@ private extension KeyboardIdiom {
                         ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"],
                         ["。", "，", "、", "？", "！", "."]
                 ]
-                let digitKeys: [KeyboardEvent] = {
+                let digitalKeys: [KeyboardEvent] = {
                         let digits: [[String]] = [
-                                ["1", "壹", "１", "①", "¹", "₁"],
-                                ["2", "貳", "２", "②", "²", "₂"],
-                                ["3", "叁", "３", "③", "³", "₃"],
-                                ["4", "肆", "４", "④", "⁴", "₄"],
-                                ["5", "伍", "５", "⑤", "⁵", "₅"],
-                                ["6", "陸", "６", "⑥", "⁶", "₆"],
-                                ["7", "柒", "７", "⑦", "⁷", "₇"],
-                                ["8", "捌", "８", "⑧", "⁸", "₈"],
-                                ["9", "玖", "９", "⑨", "⁹", "₉"]
+                                ["1", "１", "壹", "¹", "₁"],
+                                ["2", "２", "貳", "²", "₂"],
+                                ["3", "３", "叁", "³", "₃"],
+                                ["4", "４", "肆", "⁴", "₄"],
+                                ["5", "５", "伍", "⁵", "₅"],
+                                ["6", "６", "陸", "⁶", "₆"],
+                                ["7", "７", "柒", "⁷", "₇"],
+                                ["8", "８", "捌", "⁸", "₈"],
+                                ["9", "９", "玖", "⁹", "₉"],
+                                ["0", "０", "零", "⁰", "₀"]
                         ]
-                        let oneToNine: [KeyboardEvent] = digits.map { block -> KeyboardEvent in
+                        let keys: [KeyboardEvent] = digits.map { block -> KeyboardEvent in
                                 let primary = KeyElement(block[0])
                                 let child_0 = KeyElement(block[0])
-                                let child_1 = KeyElement(block[1])
-                                let child_2 = KeyElement(block[2], header: "全形")
-                                let child_3 = KeyElement(block[3])
-                                let child_4 = KeyElement(block[4], header: "上標")
-                                let child_5 = KeyElement(block[5], header: "下標")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5])
-                                return KeyboardEvent.key(seat)
+                                let child_1 = KeyElement(block[1], header: "全形")
+                                let child_2 = KeyElement(block[2])
+                                let child_3 = KeyElement(block[3], header: "上標")
+                                let child_4 = KeyElement(block[4], header: "下標")
+                                if block[0] == "0" {
+                                        let child_5 = KeyElement("拾")
+                                        let child_6 = KeyElement("°", footer: "00B0")
+                                        let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6])
+                                        return KeyboardEvent.key(seat)
+                                } else {
+                                        let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4])
+                                        return KeyboardEvent.key(seat)
+                                }
                         }
-                        let zero: KeyboardEvent = {
-                                let primary = KeyElement("0")
-                                let child_0 = KeyElement("0")
-                                let child_1 = KeyElement("零")
-                                let child_2 = KeyElement("０", header: "全形")
-                                let child_3 = KeyElement("⓪")
-                                let child_4 = KeyElement("⁰", header: "上標")
-                                let child_5 = KeyElement("₀", header: "下標")
-                                let child_6 = KeyElement("拾")
-                                let child_7 = KeyElement("°")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6, child_7])
-                                return KeyboardEvent.key(seat)
-                        }()
-                        return oneToNine + [zero]
+                        return keys
                 }()
                 let second_0: KeyboardEvent = {
                         let primary = KeyElement("-")
@@ -524,7 +518,7 @@ private extension KeyboardIdiom {
                         return KeyboardEvent.key(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.placeholders
-                eventRows[0] = digitKeys
+                eventRows[0] = digitalKeys
                 eventRows[1] = [second_0, second_1, second_2, second_3, second_4, second_5, second_6, second_7, second_8, second_9]
                 eventRows[2] = [third_0, third_1, third_2, third_3, third_4, third_5]
                 eventRows[2].insert(.switchTo(.cantoneseSymbolic), at: 0)
