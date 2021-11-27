@@ -126,9 +126,7 @@ final class KeyboardViewController: UIInputViewController {
         }
         override func viewDidDisappear(_ animated: Bool) {
                 super.viewDidDisappear(animated)
-                DispatchQueue.main.async { [unowned self] in
-                        self.keyboardStackView.removeFromSuperview()
-                }
+                keyboardStackView.removeFromSuperview()
         }
 
         private lazy var didKeyboardEstablished: Bool = false
@@ -366,24 +364,19 @@ final class KeyboardViewController: UIInputViewController {
                                                 .replacingOccurrences(of: "q", with: "3")
                                 }
                         }
-
-                        if inputText.isEmpty && !oldValue.isEmpty {
-                                DispatchQueue.main.async { [unowned self] in
-                                        self.updateBottomStackView(with: .key(.cantoneseComma))
-                                }
-                        } else if !inputText.isEmpty && oldValue.isEmpty {
-                                DispatchQueue.main.async { [unowned self] in
-                                        self.updateBottomStackView(with: .key(.separator))
-                                }
+                        switch (inputText.isEmpty, oldValue.isEmpty) {
+                        case (true, false):
+                                updateBottomStackView(with: .key(.cantoneseComma))
+                        case (false, true):
+                                updateBottomStackView(with: .key(.separator))
+                        default:
+                                break
                         }
                 }
         }
         private lazy var processingText: String = .empty {
                 didSet {
-                        DispatchQueue.main.async { [unowned self] in
-                                self.toolBar.update()
-                        }
-
+                        toolBar.update()
                         switch processingText.first {
                         case .none:
                                 syllablesSchemes = []
@@ -408,7 +401,6 @@ final class KeyboardViewController: UIInputViewController {
                                         markedText = processingText
                                 }
                         }
-
                         guard !processingText.isEmpty else { return }
                         imeQueue.async { [unowned self] in
                                 self.suggest()
@@ -680,7 +672,7 @@ final class KeyboardViewController: UIInputViewController {
 
         private lazy var isPhone: Bool = traitCollection.userInterfaceIdiom == .phone
         private lazy var isPad: Bool = traitCollection.userInterfaceIdiom == .pad
-        private(set) lazy var isDarkAppearance: Bool = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+        private(set) lazy var isDarkAppearance: Bool = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
         private(set) lazy var screenSize: CGSize = UIScreen.main.bounds.size
         private(set) lazy var isCompactInterface: Bool = isPhone || traitCollection.horizontalSizeClass == .compact
         private(set) lazy var isPhonePortrait: Bool = isPhone && traitCollection.verticalSizeClass == .regular
@@ -689,7 +681,7 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var isPadPortrait: Bool = !isCompactInterface && screenSize.width < screenSize.height
         private(set) lazy var isPadLandscape: Bool = !isCompactInterface && screenSize.width > screenSize.height
         private func updateProperties() {
-                isDarkAppearance = textDocumentProxy.keyboardAppearance == .dark || traitCollection.userInterfaceStyle == .dark
+                isDarkAppearance = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
                 screenSize = UIScreen.main.bounds.size
                 isCompactInterface = isPhone || traitCollection.horizontalSizeClass == .compact
                 isPhonePortrait = isPhone && traitCollection.verticalSizeClass == .regular

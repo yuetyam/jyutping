@@ -3,11 +3,6 @@ import UIKit
 extension KeyboardViewController {
 
         func setupKeyboard() {
-                DispatchQueue.main.async { [unowned self] in
-                        self.loadKeyboard()
-                }
-        }
-        private func loadKeyboard() {
                 switch keyboardIdiom {
                 case .candidateBoard:
                         loadCandidateBoard()
