@@ -148,7 +148,7 @@ final class KeyboardViewController: UIInputViewController {
                         return .cantonese(.lowercased)
                 }
         }
-        var keyboardIdiom: KeyboardIdiom = .cantonese(.lowercased) {
+        lazy var keyboardIdiom: KeyboardIdiom = .cantonese(.lowercased) {
                 didSet {
                         setupKeyboard()
                         guard didKeyboardEstablished else {
@@ -191,60 +191,15 @@ final class KeyboardViewController: UIInputViewController {
                         adjustKeyboardIdiom()
                 case .space:
                         switch keyboardIdiom {
-                        case .cantonese:
-                                defer {
-                                        AudioFeedback.perform(.input)
-                                }
-                                guard !inputText.isEmpty else {
-                                        textDocumentProxy.insertText(.space)
-                                        return
-                                }
-                                guard let firstCandidate: Candidate = candidates.first else {
+                        case .cantonese where !inputText.isEmpty:
+                                if let firstCandidate: Candidate = candidates.first {
+                                        compose(firstCandidate.text)
+                                        AudioFeedback.perform(.modify)
+                                        handleSelected(firstCandidate)
+                                } else {
                                         compose(inputText)
+                                        AudioFeedback.perform(.input)
                                         inputText = .empty
-                                        return
-                                }
-                                compose(firstCandidate.text)
-                                switch inputText.first {
-                                case .none:
-                                        break
-                                case .some("r"), .some("v"), .some("x"):
-                                        if inputText.count == (firstCandidate.input.count + 1) {
-                                                inputText = .empty
-                                        } else {
-                                                let first: String = String(inputText.first!)
-                                                let tail = inputText.dropFirst(firstCandidate.input.count + 1)
-                                                inputText = first + tail
-                                        }
-                                default:
-                                        candidateSequence.append(firstCandidate)
-                                        let inputCount: Int = {
-                                                if keyboardLayout > 1 {
-                                                        return firstCandidate.input.count
-                                                } else {
-                                                        let converted: String = firstCandidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
-                                                        return converted.count
-                                                }
-                                        }()
-                                        let leading = inputText.dropLast(inputText.count - inputCount)
-                                        let filtered = leading.replacingOccurrences(of: "'", with: "")
-                                        var tail: String.SubSequence = {
-                                                if filtered.count == leading.count {
-                                                        return inputText.dropFirst(inputCount)
-                                                } else {
-                                                        let separatorsCount: Int = leading.count - filtered.count
-                                                        return inputText.dropFirst(inputCount + separatorsCount)
-                                                }
-                                        }()
-                                        while tail.hasPrefix("'") {
-                                                tail = tail.dropFirst()
-                                        }
-                                        inputText = String(tail)
-                                }
-                                if inputText.isEmpty && !candidateSequence.isEmpty {
-                                        let concatenatedCandidate: Candidate = candidateSequence.joined()
-                                        candidateSequence = []
-                                        handleLexicon(concatenatedCandidate)
                                 }
                         default:
                                 textDocumentProxy.insertText(.space)
@@ -331,6 +286,12 @@ final class KeyboardViewController: UIInputViewController {
                 case .switchTo(let newLayout):
                         AudioFeedback.perform(.modify)
                         keyboardIdiom = newLayout
+                case .select(let candidate):
+                        compose(candidate.text)
+                        AudioFeedback.perform(.modify)
+                        triggerHapticFeedback()
+                        handleSelected(candidate)
+                        adjustKeyboardIdiom()
                 }
         }
         private func adjustKeyboardIdiom() {
@@ -339,8 +300,56 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardIdiom = .alphabetic(.lowercased)
                 case .cantonese(.uppercased):
                         keyboardIdiom = .cantonese(.lowercased)
+                case .candidateBoard where inputText.isEmpty:
+                        candidateCollectionView.removeFromSuperview()
+                        NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
+                        toolBar.reset()
+                        keyboardIdiom = .cantonese(.lowercased)
                 default:
                         break
+                }
+        }
+        private func handleSelected(_ candidate: Candidate) {
+                switch inputText.first {
+                case .none:
+                        break
+                case .some("r"), .some("v"), .some("x"):
+                        if inputText.count == candidate.input.count + 1 {
+                                inputText = .empty
+                        } else {
+                                let first: String = String(inputText.first!)
+                                let tail = inputText.dropFirst(candidate.input.count + 1)
+                                inputText = first + tail
+                        }
+                default:
+                        candidateSequence.append(candidate)
+                        let inputCount: Int = {
+                                if keyboardLayout > 1 {
+                                        return candidate.input.count
+                                } else {
+                                        let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "xx", options: .regularExpression)
+                                        return converted.count
+                                }
+                        }()
+                        let leading = inputText.dropLast(inputText.count - inputCount)
+                        let filtered = leading.replacingOccurrences(of: "'", with: "")
+                        var tail: String.SubSequence = {
+                                if filtered.count == leading.count {
+                                        return inputText.dropFirst(inputCount)
+                                } else {
+                                        let separatorsCount: Int = leading.count - filtered.count
+                                        return inputText.dropFirst(inputCount + separatorsCount)
+                                }
+                        }()
+                        while tail.hasPrefix("'") {
+                                tail = tail.dropFirst()
+                        }
+                        inputText = String(tail)
+                }
+                if inputText.isEmpty && !candidateSequence.isEmpty {
+                        let concatenatedCandidate: Candidate = candidateSequence.joined()
+                        candidateSequence = []
+                        handleLexicon(concatenatedCandidate)
                 }
         }
 
@@ -443,7 +452,7 @@ final class KeyboardViewController: UIInputViewController {
 
         /// some apps can't be compatible with `textDocumentProxy.setMarkedText() & textDocumentProxy.insertText()`
         /// - Parameter text: text to insert
-        func compose(_ text: String) {
+        private func compose(_ text: String) {
                 shouldMarkInput = false
                 defer {
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.02) { [unowned self] in

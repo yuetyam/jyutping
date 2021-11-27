@@ -109,57 +109,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return
                 }
                 let candidate: Candidate = candidates[indexPath.row]
-                compose(candidate.text)
-                AudioFeedback.perform(.modify)
-
-                switch inputText.first {
-                case .none:
-                        break
-                case .some("r"), .some("v"), .some("x"):
-                        if inputText.count == candidate.input.count + 1 {
-                                inputText = .empty
-                        } else {
-                                let first: String = String(inputText.first!)
-                                let tail = inputText.dropFirst(candidate.input.count + 1)
-                                inputText = first + tail
-                        }
-                default:
-                        candidateSequence.append(candidate)
-                        let inputCount: Int = {
-                                if keyboardLayout > 1 {
-                                        return candidate.input.count
-                                } else {
-                                        let converted: String = candidate.input.replacingOccurrences(of: "4", with: "vv").replacingOccurrences(of: "5", with: "xx").replacingOccurrences(of: "6", with: "qq")
-                                        return converted.count
-                                }
-                        }()
-                        let leading = inputText.dropLast(inputText.count - inputCount)
-                        let filtered = leading.replacingOccurrences(of: "'", with: "")
-                        var tail: String.SubSequence = {
-                                if filtered.count == leading.count {
-                                        return inputText.dropFirst(inputCount)
-                                } else {
-                                        let separatorsCount: Int = leading.count - filtered.count
-                                        return inputText.dropFirst(inputCount + separatorsCount)
-                                }
-                        }()
-                        while tail.hasPrefix("'") {
-                                tail = tail.dropFirst()
-                        }
-                        inputText = String(tail)
-                }
-
-                if keyboardIdiom == .candidateBoard && inputText.isEmpty {
-                        collectionView.removeFromSuperview()
-                        NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
-                        toolBar.reset()
-                        keyboardIdiom = .cantonese(.lowercased)
-                }
-                if inputText.isEmpty && !candidateSequence.isEmpty {
-                        let concatenatedCandidate: Candidate = candidateSequence.joined()
-                        candidateSequence = []
-                        handleLexicon(concatenatedCandidate)
-                }
+                operate(.select(candidate))
         }
 
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

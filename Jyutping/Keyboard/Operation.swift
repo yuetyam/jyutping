@@ -10,4 +10,5 @@ enum Operation: Hashable {
         case shift
         case doubleShift
         case switchTo(KeyboardIdiom)
+        case select(Candidate)
 }
