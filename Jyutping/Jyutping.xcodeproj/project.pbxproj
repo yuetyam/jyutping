@@ -80,6 +80,7 @@
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 		379E95922742CF1D00199A58 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E95912742CF1D00199A58 /* Operation.swift */; };
+		37A598C5275249B20025A008 /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A598C4275249B20025A008 /* KeyboardInterface.swift */; };
 		37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B19F2527395B6E00DD8A8E /* Logogram.swift */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
 		37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E234ED271466B8005825A2 /* StringExtensions.swift */; };
@@ -221,6 +222,7 @@
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		379E95912742CF1D00199A58 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		37A598C4275249B20025A008 /* KeyboardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
 		37B19F2527395B6E00DD8A8E /* Logogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
 		37E234ED271466B8005825A2 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				3759F4B9262FC7EA00266086 /* KeyboardViewController+keyboard.swift */,
 				3759F4A8262FC7E900266086 /* KeyboardViewController+CollectionView.swift */,
 				3759F4B8262FC7EA00266086 /* KeyboardViewController+TableView.swift */,
+				37A598C4275249B20025A008 /* KeyboardInterface.swift */,
 				3759F4A7262FC7E900266086 /* KeyboardEvent.swift */,
 				379E95912742CF1D00199A58 /* Operation.swift */,
 				3759F4B2262FC7E900266086 /* AudioFeedback.swift */,
@@ -756,6 +759,7 @@
 				3759F4E3262FC7EA00266086 /* Array+uniqued.swift in Sources */,
 				3759F4C6262FC7EA00266086 /* ToolButton.swift in Sources */,
 				3759F4E2262FC7EA00266086 /* UIStackViewExtensions.swift in Sources */,
+				37A598C5275249B20025A008 /* KeyboardInterface.swift in Sources */,
 				379E95922742CF1D00199A58 /* Operation.swift in Sources */,
 				3759F4C3262FC7EA00266086 /* ToolBar.swift in Sources */,
 				3759F4E4262FC7EA00266086 /* ColorExtension.swift in Sources */,
