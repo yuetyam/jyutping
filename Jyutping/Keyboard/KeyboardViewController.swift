@@ -136,11 +136,10 @@ final class KeyboardViewController: UIInputViewController {
         private var askedKeyboardIdiom: KeyboardIdiom {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
-                        let isPad: Bool = traitCollection.userInterfaceIdiom == .pad
-                        return isPad ? .numeric : .numberPad
+                        // TODO: - Test on .padFloating
+                        return keyboardInterface.isCompact ? .numberPad : .numeric
                 case .decimalPad:
-                        let isPad: Bool = traitCollection.userInterfaceIdiom == .pad
-                        return isPad ? .numeric : .decimalPad
+                        return keyboardInterface.isCompact ? .decimalPad : .numeric
                 case .numbersAndPunctuation:
                         return .numeric
                 case .emailAddress, .URL:
