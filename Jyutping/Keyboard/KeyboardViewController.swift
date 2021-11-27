@@ -673,11 +673,9 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var isPhone: Bool = traitCollection.userInterfaceIdiom == .phone
         private lazy var isPad: Bool = traitCollection.userInterfaceIdiom == .pad
         private(set) lazy var isDarkAppearance: Bool = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
-        private(set) lazy var screenSize: CGSize = UIScreen.main.bounds.size
         private(set) lazy var keyboardInterface: KeyboardInterface = matchInterface()
         private func updateProperties() {
                 isDarkAppearance = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
-                screenSize = UIScreen.main.bounds.size
                 keyboardInterface = matchInterface()
         }
         private func matchInterface() -> KeyboardInterface {

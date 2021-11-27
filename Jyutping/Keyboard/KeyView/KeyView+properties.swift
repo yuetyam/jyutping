@@ -30,12 +30,13 @@ extension KeyView {
                         return 48
                 case .phoneLandscape:
                         // iPhone SE1, iPod touch 7 (w480 x h320)
-                        return screenSize.height < 350 ? 36 : 40
+                        return UIScreen.main.bounds.height < 350 ? 36 : 40
                 case .phonePortrait:
-                        if screenSize.width < 350 {
+                        let screenWidth: CGFloat = UIScreen.main.bounds.width
+                        if screenWidth < 350 {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
-                        } else if screenSize.width < 400 {
+                        } else if screenWidth < 400 {
                                 // iPhone 6s, 7, 8, SE2 (375 x 667)
                                 // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
                                 // iPhone 12, 12 Pro, 13, 13 Pro (390 x 844)

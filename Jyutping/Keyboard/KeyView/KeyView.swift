@@ -7,7 +7,6 @@ final class KeyView: UIView {
         let controller: KeyboardViewController
         let layout: KeyboardIdiom
         let isDarkAppearance: Bool
-        let screenSize: CGSize
         let keyboardInterface: KeyboardInterface
 
         init(event: KeyboardEvent, controller: KeyboardViewController) {
@@ -15,7 +14,6 @@ final class KeyView: UIView {
                 self.controller = controller
                 layout = controller.keyboardIdiom
                 isDarkAppearance = controller.isDarkAppearance
-                screenSize = controller.screenSize
                 keyboardInterface = controller.keyboardInterface
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
