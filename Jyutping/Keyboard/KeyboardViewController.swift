@@ -674,21 +674,26 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var isPad: Bool = traitCollection.userInterfaceIdiom == .pad
         private(set) lazy var isDarkAppearance: Bool = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
         private(set) lazy var screenSize: CGSize = UIScreen.main.bounds.size
-        private(set) lazy var isCompactInterface: Bool = isPhone || traitCollection.horizontalSizeClass == .compact
-        private(set) lazy var isPhonePortrait: Bool = isPhone && traitCollection.verticalSizeClass == .regular
-        private(set) lazy var isPhoneLandscape: Bool = isPhone && traitCollection.verticalSizeClass == .compact
-        private(set) lazy var isPadFloating: Bool = isPad && traitCollection.horizontalSizeClass == .compact
-        private(set) lazy var isPadPortrait: Bool = !isCompactInterface && screenSize.width < screenSize.height
-        private(set) lazy var isPadLandscape: Bool = !isCompactInterface && screenSize.width > screenSize.height
+        private(set) lazy var keyboardInterface: KeyboardInterface = matchInterface()
         private func updateProperties() {
                 isDarkAppearance = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
                 screenSize = UIScreen.main.bounds.size
-                isCompactInterface = isPhone || traitCollection.horizontalSizeClass == .compact
-                isPhonePortrait = isPhone && traitCollection.verticalSizeClass == .regular
-                isPhoneLandscape = isPhone && traitCollection.verticalSizeClass == .compact
-                isPadFloating = isPad && traitCollection.horizontalSizeClass == .compact
-                isPadPortrait = !isCompactInterface && screenSize.width < screenSize.height
-                isPadLandscape = !isCompactInterface && screenSize.width > screenSize.height
+                keyboardInterface = matchInterface()
+        }
+        private func matchInterface() -> KeyboardInterface {
+                switch traitCollection.userInterfaceIdiom {
+                case .pad:
+                        guard traitCollection.horizontalSizeClass != .compact else { return .padFloating }
+                        let isPortrait: Bool = UIScreen.main.bounds.width < UIScreen.main.bounds.height
+                        return isPortrait ? .padPortrait : .padLandscape
+                default:
+                        switch traitCollection.verticalSizeClass {
+                        case .compact:
+                                return .phoneLandscape
+                        default:
+                                return .phonePortrait
+                        }
+                }
         }
 
 

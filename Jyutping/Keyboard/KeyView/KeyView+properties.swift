@@ -21,16 +21,17 @@ extension KeyView {
                 }
         }
         var height: CGFloat {
-                if isPadPortrait {
+                switch keyboardInterface {
+                case .padPortrait:
                         return 70
-                } else if isPadLandscape {
+                case .padLandscape:
                         return 80
-                } else if isPadFloating {
+                case .padFloating:
                         return 48
-                } else if isPhoneLandscape {
+                case .phoneLandscape:
                         // iPhone SE1, iPod touch 7 (w480 x h320)
                         return screenSize.height < 350 ? 36 : 40
-                } else {
+                case .phonePortrait:
                         if screenSize.width < 350 {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
@@ -53,13 +54,25 @@ extension KeyView {
                 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography
                 switch event {
                 case .key(let seat) where seat.primary.text.count > 1:
-                        guard !isCompactInterface else { return .systemFont(ofSize: 18) }
-                        return isPadLandscape ? .systemFont(ofSize: 28) : .systemFont(ofSize: 26)
+                        switch keyboardInterface {
+                        case .padLandscape:
+                                return .systemFont(ofSize: 28)
+                        case .padPortrait:
+                                return .systemFont(ofSize: 26)
+                        default:
+                                return .systemFont(ofSize: 18)
+                        }
                 case .key:
-                        guard !isCompactInterface else { return .systemFont(ofSize: 24) }
-                        return isPadLandscape ? .systemFont(ofSize: 30) : .systemFont(ofSize: 28)
+                        switch keyboardInterface {
+                        case .padLandscape:
+                                return .systemFont(ofSize: 30)
+                        case .padPortrait:
+                                return .systemFont(ofSize: 28)
+                        default:
+                                return .systemFont(ofSize: 24)
+                        }
                 default:
-                        return isCompactInterface ? .systemFont(ofSize: 17) : .systemFont(ofSize: 22)
+                        return keyboardInterface.isCompact ? .systemFont(ofSize: 17) : .systemFont(ofSize: 22)
                 }
         }
         var keyText: String? {

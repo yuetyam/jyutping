@@ -3,17 +3,18 @@ import UIKit
 extension KeyView {
         func setupKeyShapeView() {
                 let horizontalConstant: CGFloat = {
-                        if isPadFloating {
+                        switch keyboardInterface {
+                        case .padFloating:
                                 return 2
-                        } else if isPadPortrait {
+                        case .padPortrait:
                                 return 5
-                        } else if isPadLandscape {
+                        case .padLandscape:
                                 return 10
-                        } else {
+                        default:
                                 return 3
                         }
                 }()
-                let verticalConstant: CGFloat = isPhoneLandscape ? 3 : 5
+                let verticalConstant: CGFloat = (keyboardInterface == .phoneLandscape) ? 3 : 5
                 addSubview(shape)
                 shape.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -72,13 +73,13 @@ extension KeyView {
                 let keyHeaderLabel: UILabel = UILabel()
                 shape.addSubview(keyHeaderLabel)
                 keyHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
-                let inset: CGFloat = isCompactInterface ? 2 : 4
+                let inset: CGFloat = keyboardInterface.isCompact ? 2 : 4
                 NSLayoutConstraint.activate([
                         keyHeaderLabel.topAnchor.constraint(equalTo: shape.topAnchor, constant: inset),
                         keyHeaderLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor,constant: inset),
                         keyHeaderLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -inset)
                 ])
-                let fontSize: CGFloat = isCompactInterface ? 9 : 10
+                let fontSize: CGFloat = keyboardInterface.isCompact ? 9 : 10
                 keyHeaderLabel.font = .systemFont(ofSize: fontSize)
                 keyHeaderLabel.textAlignment = alignment
                 keyHeaderLabel.textColor = foreColor.withAlphaComponent(0.6)
@@ -88,13 +89,13 @@ extension KeyView {
                 let keyFooterLabel: UILabel = UILabel()
                 shape.addSubview(keyFooterLabel)
                 keyFooterLabel.translatesAutoresizingMaskIntoConstraints = false
-                let inset: CGFloat = isCompactInterface ? 2 : 4
+                let inset: CGFloat = keyboardInterface.isCompact ? 2 : 4
                 NSLayoutConstraint.activate([
                         keyFooterLabel.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -inset),
                         keyFooterLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor, constant: inset),
                         keyFooterLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor, constant: -inset)
                 ])
-                let fontSize: CGFloat = isCompactInterface ? 9 : 10
+                let fontSize: CGFloat = keyboardInterface.isCompact ? 9 : 10
                 keyFooterLabel.font = .systemFont(ofSize: fontSize)
                 keyFooterLabel.textAlignment = alignment
                 keyFooterLabel.textColor = foreColor.withAlphaComponent(0.6)
@@ -103,11 +104,16 @@ extension KeyView {
         func setupKeyImageView(constant: CGFloat = 10) {
                 let keyImageView: UIImageView = UIImageView()
                 let constantValue: CGFloat = {
-                        if !isCompactInterface {
-                                return isPadLandscape ? (constant * 2) : (constant + 5)
+                        switch keyboardInterface {
+                        case .padLandscape:
+                                return constant * 2
+                        case .padPortrait:
+                                return constant + 5
+                        case .phoneLandscape:
+                                return constant - 3
+                        case .phonePortrait, .padFloating:
+                                return constant
                         }
-                        if !isPhonePortrait { return constant - 3 }
-                        return constant
                 }()
                 shape.addSubview(keyImageView)
                 keyImageView.translatesAutoresizingMaskIntoConstraints = false

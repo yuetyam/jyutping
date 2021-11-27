@@ -8,12 +8,7 @@ final class KeyView: UIView {
         let layout: KeyboardIdiom
         let isDarkAppearance: Bool
         let screenSize: CGSize
-        let isCompactInterface: Bool
-        let isPhonePortrait: Bool
-        let isPhoneLandscape: Bool
-        let isPadFloating: Bool
-        let isPadPortrait: Bool
-        let isPadLandscape: Bool
+        let keyboardInterface: KeyboardInterface
 
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
@@ -21,12 +16,7 @@ final class KeyView: UIView {
                 layout = controller.keyboardIdiom
                 isDarkAppearance = controller.isDarkAppearance
                 screenSize = controller.screenSize
-                isCompactInterface = controller.isCompactInterface
-                isPhonePortrait = controller.isPhonePortrait
-                isPhoneLandscape = controller.isPhoneLandscape
-                isPadFloating = controller.isPadFloating
-                isPadPortrait = controller.isPadPortrait
-                isPadLandscape = controller.isPadLandscape
+                keyboardInterface = controller.keyboardInterface
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
                 switch event {
@@ -79,14 +69,14 @@ final class KeyView: UIView {
                 case .none, .shadowKey, .switchInputMethod:
                         break
                 case .key(let seat) where seat.hasChildren:
-                        if isPhonePortrait {
+                        if keyboardInterface == .phonePortrait {
                                 displayPreview()
                         } else {
                                 shape.backgroundColor = highlightingBackColor
                         }
                         handleLongPress()
                 case .key:
-                        if isPhonePortrait {
+                        if keyboardInterface == .phonePortrait {
                                 displayPreview()
                         } else {
                                 shape.backgroundColor = highlightingBackColor
@@ -287,7 +277,13 @@ final class KeyView: UIView {
 
         // MARK: - Preview
 
-        private func normalize() { isPhonePortrait ? removePreview() : changeColorToNormal() }
+        private func normalize() {
+                if keyboardInterface == .phonePortrait {
+                        removePreview()
+                } else {
+                        changeColorToNormal()
+                }
+        }
         private func displayPreview() {
                 layer.addSublayer(previewShapeLayer)
                 addSubview(previewLabel)
@@ -367,7 +363,7 @@ final class KeyView: UIView {
         }
         private lazy var calloutStackView: UIStackView = {
                 let rect: CGRect = {
-                        if isPhonePortrait {
+                        if keyboardInterface == .phonePortrait {
                                 let expansion = beyondMidX ? (bubblePath.bounds.maxX - shape.bounds.maxX - 5) : (shape.bounds.minX - bubblePath.bounds.minX)
                                 let width = bubblePath.bounds.width - (expansion * 2)
                                 let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
@@ -393,7 +389,7 @@ final class KeyView: UIView {
                 layer.shadowColor = UIColor.black.cgColor
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
-                layer.path = isPhonePortrait ? previewPath.cgPath : keyShapePath.cgPath
+                layer.path = (keyboardInterface == .phonePortrait) ? previewPath.cgPath : keyShapePath.cgPath
                 layer.fillColor = backColor.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
                 animation.duration = 0.01
@@ -408,13 +404,13 @@ final class KeyView: UIView {
                 switch event {
                 case .key(let seat) where seat.hasChildren:
                         let firstChild: KeyElement = seat.children.first!
-                        let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, isPhoneInterface: isCompactInterface)
+                        let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, isPhoneInterface: keyboardInterface.isCompact)
                         firstKey.backgroundColor = .selection
                         firstKey.setTextColor(.white)
                         var keys: [CalloutView] = [firstKey]
                         for index in 1..<seat.children.count {
                                 let element: KeyElement = seat.children[index]
-                                let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, isPhoneInterface: isCompactInterface)
+                                let callout = CalloutView(text: element.text, header: element.header, footer: element.footer, isPhoneInterface: keyboardInterface.isCompact)
                                 keys.append(callout)
                         }
                         return beyondMidX ? keys.reversed() : keys
@@ -423,7 +419,7 @@ final class KeyView: UIView {
                 }
         }()
         private lazy var bubblePath: UIBezierPath = {
-                if isPhonePortrait {
+                if keyboardInterface == .phonePortrait {
                         if beyondMidX {
                                 return leftBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutViews.count - 1)
                         } else {
