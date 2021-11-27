@@ -143,7 +143,11 @@ final class KeyView: UIView {
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 10 else { break }
-                        controller.inputText = .empty // FIXME: Dragging in input text
+                        guard controller.inputText.isEmpty else {
+                                // FIXME: - Dragging in input text
+                                controller.operate(.clear)
+                                return
+                        }
                         let offset: Int = distance > 0 ? 1 : -1
                         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         spaceTouchPoint = location

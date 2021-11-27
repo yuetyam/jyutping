@@ -356,7 +356,7 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Input Texts
 
-        lazy var inputText: String = .empty {
+        private(set) lazy var inputText: String = .empty {
                 didSet {
                         switch inputText.first {
                         case .none:
@@ -597,7 +597,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        lazy var candidateSequence: [Candidate] = []
+        private lazy var candidateSequence: [Candidate] = []
         func handleLexicon(_ candidate: Candidate) {
                 imeQueue.async { [unowned self] in
                         self.userLexicon?.handle(candidate)
