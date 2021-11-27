@@ -107,7 +107,8 @@ final class KeyboardViewController: UIInputViewController {
         }
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 super.traitCollectionDidChange(previousTraitCollection)
-                updateProperties()
+                isDarkAppearance = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
+                keyboardInterface = matchInterface()
                 if didKeyboardEstablished {
                         setupKeyboard()
                 }
@@ -135,8 +136,10 @@ final class KeyboardViewController: UIInputViewController {
         private var askedKeyboardIdiom: KeyboardIdiom {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
+                        let isPad: Bool = traitCollection.userInterfaceIdiom == .pad
                         return isPad ? .numeric : .numberPad
                 case .decimalPad:
+                        let isPad: Bool = traitCollection.userInterfaceIdiom == .pad
                         return isPad ? .numeric : .decimalPad
                 case .numbersAndPunctuation:
                         return .numeric
@@ -670,14 +673,8 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Properties
 
-        private lazy var isPhone: Bool = traitCollection.userInterfaceIdiom == .phone
-        private lazy var isPad: Bool = traitCollection.userInterfaceIdiom == .pad
         private(set) lazy var isDarkAppearance: Bool = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
         private(set) lazy var keyboardInterface: KeyboardInterface = matchInterface()
-        private func updateProperties() {
-                isDarkAppearance = traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark
-                keyboardInterface = matchInterface()
-        }
         private func matchInterface() -> KeyboardInterface {
                 switch traitCollection.userInterfaceIdiom {
                 case .pad:
