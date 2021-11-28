@@ -67,14 +67,14 @@ final class KeyView: UIView {
                 case .none, .shadowKey, .switchInputMethod:
                         break
                 case .key(let seat) where seat.hasChildren:
-                        if keyboardInterface == .phonePortrait {
+                        if keyboardInterface.isPhonePortrait {
                                 displayPreview()
                         } else {
                                 shape.backgroundColor = highlightingBackColor
                         }
                         handleLongPress()
                 case .key:
-                        if keyboardInterface == .phonePortrait {
+                        if keyboardInterface.isPhonePortrait {
                                 displayPreview()
                         } else {
                                 shape.backgroundColor = highlightingBackColor
@@ -280,7 +280,7 @@ final class KeyView: UIView {
         // MARK: - Preview
 
         private func normalize() {
-                if keyboardInterface == .phonePortrait {
+                if keyboardInterface.isPhonePortrait {
                         removePreview()
                 } else {
                         changeColorToNormal()
@@ -365,7 +365,7 @@ final class KeyView: UIView {
         }
         private lazy var calloutStackView: UIStackView = {
                 let rect: CGRect = {
-                        if keyboardInterface == .phonePortrait {
+                        if keyboardInterface.isPhonePortrait {
                                 let expansion = beyondMidX ? (bubblePath.bounds.maxX - shape.bounds.maxX - 5) : (shape.bounds.minX - bubblePath.bounds.minX)
                                 let width = bubblePath.bounds.width - (expansion * 2)
                                 let origin = CGPoint(x: bubblePath.bounds.minX + expansion, y: bubblePath.bounds.minY + 2)
@@ -391,7 +391,7 @@ final class KeyView: UIView {
                 layer.shadowColor = UIColor.black.cgColor
                 layer.shouldRasterize = true
                 layer.rasterizationScale = UIScreen.main.scale
-                layer.path = (keyboardInterface == .phonePortrait) ? previewPath.cgPath : keyShapePath.cgPath
+                layer.path = keyboardInterface.isPhonePortrait ? previewPath.cgPath : keyShapePath.cgPath
                 layer.fillColor = backColor.cgColor
                 let animation = CABasicAnimation(keyPath: "path")
                 animation.duration = 0.01
@@ -421,7 +421,7 @@ final class KeyView: UIView {
                 }
         }()
         private lazy var bubblePath: UIBezierPath = {
-                if keyboardInterface == .phonePortrait {
+                if keyboardInterface.isPhonePortrait {
                         if beyondMidX {
                                 return leftBubblePath(origin: bottomCenter, previewCornerRadius: 10, keyWidth: shapeWidth, keyHeight: shapeHeight, keyCornerRadius: 5, expansions: calloutViews.count - 1)
                         } else {

@@ -14,4 +14,8 @@ enum KeyboardInterface: Hashable {
                         return false
                 }
         }
+
+        var isPhonePortrait: Bool {
+                return self == .phonePortrait
+        }
 }
