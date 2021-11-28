@@ -111,7 +111,13 @@ extension KeyView {
                                 return constant + 5
                         case .phoneLandscape:
                                 return constant - 3
-                        case .phonePortrait, .padFloating:
+                        case .phonePortrait:
+                                return constant
+                        case .padFloating:
+                                return constant
+                        case .phoneAppOnPadPortrait:
+                                return constant
+                        case .phoneAppOnPadLandscape:
                                 return constant
                         }
                 }()
