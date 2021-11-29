@@ -455,8 +455,8 @@ final class KeyboardViewController: UIInputViewController {
         private func compose(_ text: String) {
                 shouldMarkInput = false
                 defer {
-                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.02) { [unowned self] in
-                                self.shouldMarkInput = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [unowned self] in
+                                shouldMarkInput = true
                         }
                 }
                 let location: Int = (text as NSString).length
