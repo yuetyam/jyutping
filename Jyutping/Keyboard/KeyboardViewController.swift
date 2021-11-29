@@ -195,7 +195,7 @@ final class KeyboardViewController: UIInputViewController {
                                 if let firstCandidate: Candidate = candidates.first {
                                         compose(firstCandidate.text)
                                         AudioFeedback.perform(.modify)
-                                        handleSelected(firstCandidate)
+                                        aftercareSelected(firstCandidate)
                                 } else {
                                         compose(inputText)
                                         AudioFeedback.perform(.input)
@@ -259,8 +259,8 @@ final class KeyboardViewController: UIInputViewController {
                         inputText = .empty
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
                                 DispatchQueue(label: "im.cantonese.fix.return").sync { [unowned self] in
-                                        self.textDocumentProxy.insertText(.zeroWidthSpace)
-                                        self.textDocumentProxy.deleteBackward()
+                                        textDocumentProxy.insertText(.zeroWidthSpace)
+                                        textDocumentProxy.deleteBackward()
                                 }
                         }
                         AudioFeedback.perform(.input)
@@ -290,7 +290,7 @@ final class KeyboardViewController: UIInputViewController {
                         compose(candidate.text)
                         AudioFeedback.perform(.modify)
                         triggerHapticFeedback()
-                        handleSelected(candidate)
+                        aftercareSelected(candidate)
                         adjustKeyboardIdiom()
                 }
         }
@@ -309,7 +309,7 @@ final class KeyboardViewController: UIInputViewController {
                         break
                 }
         }
-        private func handleSelected(_ candidate: Candidate) {
+        private func aftercareSelected(_ candidate: Candidate) {
                 switch inputText.first {
                 case .none:
                         break
@@ -414,7 +414,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         guard !processingText.isEmpty else { return }
                         imeQueue.async { [unowned self] in
-                                self.suggest()
+                                suggest()
                         }
                 }
         }
@@ -592,20 +592,20 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var candidates: [Candidate] = [] {
                 didSet {
                         DispatchQueue.main.async { [unowned self] in
-                                self.candidateCollectionView.reloadData()
-                                self.candidateCollectionView.setContentOffset(.zero, animated: true)
+                                candidateCollectionView.reloadData()
+                                candidateCollectionView.setContentOffset(.zero, animated: true)
                         }
                 }
         }
         private lazy var candidateSequence: [Candidate] = []
         func handleLexicon(_ candidate: Candidate) {
                 imeQueue.async { [unowned self] in
-                        self.userLexicon?.handle(candidate)
+                        userLexicon?.handle(candidate)
                 }
         }
         func clearUserLexicon() {
                 imeQueue.async { [unowned self] in
-                        self.userLexicon?.deleteAll()
+                        userLexicon?.deleteAll()
                 }
         }
 
