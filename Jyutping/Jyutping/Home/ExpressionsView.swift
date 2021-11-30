@@ -1,5 +1,6 @@
 import SwiftUI
 
+
 @available(iOS 14.0, *)
 struct ExpressionsView: View {
         var body: some View {
@@ -14,12 +15,17 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "單數：你      複數：你哋／你等")
+                                                Text(verbatim: "單數：你")
                                         } icon: {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "毋用〔您、您們〕。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」")
+                                                Text(verbatim: "複數：你哋／你等")
+                                        } icon: {
+                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "毋用「您」。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」")
                                         } icon: {
                                                 Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
                                         }
@@ -38,7 +44,12 @@ struct ExpressionsView: View {
                                         .font(.headline)
 
                                         Label {
-                                                Text(verbatim: "單數：佢      複數：佢哋／佢等")
+                                                Text(verbatim: "單數：佢")
+                                        } icon: {
+                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "複數：佢哋／佢等")
                                         } icon: {
                                                 Image(systemName: "checkmark.circle").foregroundColor(.green)
                                         }
@@ -159,7 +170,7 @@ struct ExpressionsView: View {
                                         Label {
                                                 HStack {
                                                         Text(verbatim: "推薦").fontWeight(.medium)
-                                                        Text(verbatim: "个得噉。")
+                                                        Text(verbatim: "嘅／個得噉。")
                                                         Text(verbatim: "避免").fontWeight(.medium)
                                                         Text(verbatim: "的得地")
                                                 }
@@ -168,8 +179,8 @@ struct ExpressionsView: View {
                                         }
                                         Label {
                                                 Text(verbatim: """
-                                                例：我个睇法。
-                                                例：做得好。
+                                                例：我嘅細佬／我個細佬。
+                                                例：講得好！
                                                 例：細細聲噉講話。
                                                 """)
                                         } icon: {
