@@ -15,6 +15,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         window.rootViewController = UIHostingController(rootView: ContentView())
                         self.window = window
                         window.makeKeyAndVisible()
+                        if #available(iOS 15.0, *) {
+                                UITextField.appearance().clearButtonMode = .always
+                        }
                 }
         }
 }
