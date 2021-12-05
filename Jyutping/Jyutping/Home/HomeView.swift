@@ -74,6 +74,8 @@ struct HomeView: View {
                                                         Spacer()
                                                 }
                                         }
+                                } footer: {
+                                        Text("Haptic Feedback requires Full Access")
                                 }
                                 Section {
                                         Button(action: {

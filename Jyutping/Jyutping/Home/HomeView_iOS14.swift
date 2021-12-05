@@ -81,6 +81,8 @@ struct HomeView_iOS14: View {
                                                         Spacer()
                                                 }
                                         }
+                                } footer: {
+                                        Text("Haptic Feedback requires Full Access").textCase(.none)
                                 }
                                 Section {
                                         Button(action: {
