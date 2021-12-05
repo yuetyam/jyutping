@@ -108,6 +108,12 @@ struct HomeView_iOS15: View {
                                                         }
                                                 }
                                         }
+                                } footer: {
+                                        if !isKeyboardEnabled || isGuideViewExpanded {
+                                                Text("Haptic Feedback requires Full Access").textCase(.none)
+                                        } else {
+                                                EmptyView()
+                                        }
                                 }
                                 if !isKeyboardEnabled || isGuideViewExpanded {
                                         Section {

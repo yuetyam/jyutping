@@ -27,6 +27,7 @@ Chinese, Simplified
 "Tap **Keyboards**" = "點選 **鍵盤**";
 "Turn on **Jyutping**" = "開啓 **粵拼**";
 "Turn on **Allow Full Access**" = "開啓 **允許完全訪問**";
+"Haptic Feedback requires Full Access" = "振動反饋(Haptic Feedback)需要「完全訪問」權限";
 "Go to **Settings**" = "前往 **設置**";
 
 "How to enable this Keyboard" = "如何啓用鍵盤";
