@@ -221,12 +221,14 @@ final class KeyboardViewController: UIInputViewController {
                                 switch (doubleSpaceShortcut, keyboardIdiom.isEnglishMode) {
                                 case (0, false), (1, false):
                                         return "。"
-                                case (3, false):
-                                        return "，"
                                 case (0, true), (1, true):
                                         return ". "
+                                case (3, false):
+                                        return "、"
                                 case (3, true):
                                         return ", "
+                                case (4, _):
+                                        return .fullwidthSpace
                                 default:
                                         return .fullwidthSpace
                                 }
@@ -812,7 +814,7 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 2: 無（輸入兩個空格）
         ///
-        /// 3: 輸入一個逗號「，」（英文鍵盤輸入一個逗號「,」加一個空格）
+        /// 3: 輸入一個頓號「、」（英文鍵盤輸入一個逗號「,」加一個空格）
         ///
         /// 4: 輸入一個全形空格（U+3000）
         private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")

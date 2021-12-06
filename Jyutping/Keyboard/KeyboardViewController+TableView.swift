@@ -181,7 +181,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 cell.textLabel?.text = NSLocalizedString("Insert a period", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut < 2 ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("Insert a comma", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("Insert an ideographic comma", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut == 3 ? .checkmark : .none
                         case 2:
                                 cell.textLabel?.text = NSLocalizedString("Insert an ideographic space", comment: .empty)
