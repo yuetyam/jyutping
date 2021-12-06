@@ -87,6 +87,7 @@
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
 		37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */; };
 		37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */; };
+		37FFCD74275E9BE9004F9D97 /* VariantConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FFCD73275E9BE9004F9D97 /* VariantConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +230,7 @@
 		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
 		37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
 		37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView_iOS14.swift; sourceTree = "<group>"; };
+		37FFCD73275E9BE9004F9D97 /* VariantConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,7 +353,7 @@
 				3759F4A7262FC7E900266086 /* KeyboardEvent.swift */,
 				379E95912742CF1D00199A58 /* Operation.swift */,
 				3759F4B2262FC7E900266086 /* AudioFeedback.swift */,
-				37B19F2527395B6E00DD8A8E /* Logogram.swift */,
+				37FFCD72275E9BD3004F9D97 /* Variants */,
 				3759F4BA262FC7EA00266086 /* Layout */,
 				3759F4A9262FC7E900266086 /* KeyView */,
 				3759F49A262FC7E900266086 /* Components */,
@@ -516,6 +518,15 @@
 				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
 			);
 			path = About;
+			sourceTree = "<group>";
+		};
+		37FFCD72275E9BD3004F9D97 /* Variants */ = {
+			isa = PBXGroup;
+			children = (
+				37B19F2527395B6E00DD8A8E /* Logogram.swift */,
+				37FFCD73275E9BE9004F9D97 /* VariantConverter.swift */,
+			);
+			path = Variants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -783,6 +794,7 @@
 				3759F4C7262FC7EA00266086 /* CandidateCell.swift in Sources */,
 				3759F4E0262FC7EA00266086 /* ShiftState.swift in Sources */,
 				3759F4D5262FC7EA00266086 /* KeyView+properties.swift in Sources */,
+				37FFCD74275E9BE9004F9D97 /* VariantConverter.swift in Sources */,
 				3759F4D4262FC7EA00266086 /* KeyView+paths.swift in Sources */,
 				3759F4CD262FC7EA00266086 /* Candidate.swift in Sources */,
 				3759F4C9262FC7EA00266086 /* Splitter.swift in Sources */,

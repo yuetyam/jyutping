@@ -581,14 +581,20 @@ final class KeyboardViewController: UIInputViewController {
                 push(combined)
         }
         private func push(_ origin: [Candidate]) {
-                if Logogram.current == .traditional {
+                switch Logogram.current {
+                case .traditional:
                         candidates = origin.uniqued()
-                } else if converter == nil {
-                        candidates = origin.uniqued()
-                        updateConverter()
-                } else {
-                        let converted: [Candidate] = origin.map { Candidate(text: converter!.convert($0.text), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) }
+                case .hongkong, .taiwan:
+                        let converted: [Candidate] = origin.map({ Candidate(text: VariantConverter.convert(text: $0.text, to: Logogram.current), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
                         candidates = converted.uniqued()
+                case .simplified:
+                        if converter == nil {
+                                candidates = origin.uniqued()
+                                updateConverter()
+                        } else {
+                                let converted: [Candidate] = origin.map { Candidate(text: converter!.convert($0.text), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) }
+                                candidates = converted.uniqued()
+                        }
                 }
         }
         private(set) lazy var candidates: [Candidate] = [] {
