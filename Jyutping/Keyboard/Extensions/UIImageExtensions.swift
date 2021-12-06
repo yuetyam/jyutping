@@ -15,4 +15,35 @@ extension UIImage {
                 guard let croppedCGImage = sourceCGImage.cropping(to: cropRect) else { return nil }
                 return UIImage(cgImage: croppedCGImage)
         }
+
+        static func chevron(_ direction: Direction) -> UIImage? {
+                let imageName: String = {
+                        switch direction {
+                        case .up:
+                                return "chevron.up"
+                        case .down:
+                                return "chevron.down"
+                        case .forward:
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        return "chevron.forward"
+                                } else {
+                                        return "chevron.right"
+                                }
+                        case .backward:
+                                if #available(iOSApplicationExtension 14.0, *) {
+                                        return "chevron.backward"
+                                } else {
+                                        return "chevron.left"
+                                }
+                        }
+                }()
+                return UIImage(systemName: imageName)
+        }
+}
+
+enum Direction {
+        case up
+        case down
+        case forward
+        case backward
 }

@@ -1,7 +1,7 @@
 import UIKit
 
 final class ToolButton: UIButton {
-        init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
+        init(image: UIImage?, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
                 let buttonImageView: UIImageView = UIImageView()
@@ -14,13 +14,25 @@ final class ToolButton: UIButton {
                         buttonImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -rightInset)
                 ])
                 buttonImageView.contentMode = .scaleAspectFit
-                if imageName == "EmojiSmiley" {
-                        buttonImageView.image = UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate)
-                } else {
-                        buttonImageView.image = UIImage(systemName: imageName)
-                }
+                buttonImageView.image = image
         }
         required init?(coder: NSCoder) { fatalError("ToolButton.init(coder:) error") }
+
+        convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
+                let image: UIImage? = {
+                        if imageName == "EmojiSmiley" {
+                                return UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate)
+                        } else {
+                                return UIImage(systemName: imageName)
+                        }
+                }()
+                self.init(image: image, topInset: topInset, bottomInset: bottomInset, leftInset: leftInset, rightInset: rightInset)
+        }
+
+        static func chevron(_ direction: Direction, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) -> ToolButton {
+                let image: UIImage? = UIImage.chevron(direction)
+                return ToolButton(image: image, topInset: topInset, bottomInset: bottomInset, leftInset: leftInset, rightInset: rightInset)
+        }
 }
 
 final class YueEngSwitch: UIButton {

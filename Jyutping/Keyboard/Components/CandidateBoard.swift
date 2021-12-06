@@ -2,7 +2,7 @@ import UIKit
 
 final class CandidateBoard: UIView {
 
-        let upArrowButton: ToolButton = ToolButton(imageName: "chevron.up", topInset: 18, bottomInset: 18)
+        let upArrowButton: ToolButton = .chevron(.up, topInset: 18, bottomInset: 18)
 
         init() {
                 super.init(frame: .zero)

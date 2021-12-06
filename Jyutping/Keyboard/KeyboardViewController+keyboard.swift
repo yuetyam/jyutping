@@ -174,7 +174,7 @@ extension KeyboardViewController {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeArrangedSubviews()
                 let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 128
-                let upArrow: ToolButton = ToolButton(imageName: "chevron.up", leftInset: 16, rightInset: 16)
+                let upArrow: ToolButton = .chevron(.up, leftInset: 16, rightInset: 16)
                 settingsView.addSubview(upArrow)
                 upArrow.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([

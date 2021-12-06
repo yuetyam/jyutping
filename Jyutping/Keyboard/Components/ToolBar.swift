@@ -61,7 +61,7 @@ final class ToolBar: UIView {
         let pasteButton: ToolButton = ToolButton(imageName: "doc.on.clipboard", topInset: 19, bottomInset: 18)
         let emojiSwitch: ToolButton = ToolButton(imageName: "EmojiSmiley", topInset: 18, bottomInset: 18)
         let keyboardDown: ToolButton = ToolButton(imageName: "keyboard.chevron.compact.down", topInset: 18, bottomInset: 19)
-        let downArrow: ToolButton = ToolButton(imageName: "chevron.down", topInset: 18, bottomInset: 18)
+        let downArrow: ToolButton = .chevron(.down, topInset: 18, bottomInset: 18)
         private let splitLine: CALayer = CALayer()
 
         private func setupToolMode() {
