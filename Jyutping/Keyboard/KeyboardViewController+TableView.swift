@@ -210,13 +210,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         tableView.deselectRow(at: indexPath, animated: true)
                         switch indexPath.row {
                         case 0:
-                                Logogram.changeCurent(to: .traditional)
+                                Logogram.changeCurrent(to: .traditional)
                         case 1:
-                                Logogram.changeCurent(to: .hongkong)
+                                Logogram.changeCurrent(to: .hongkong)
                         case 2:
-                                Logogram.changeCurent(to: .taiwan)
+                                Logogram.changeCurrent(to: .taiwan)
                         case 3:
-                                Logogram.changeCurent(to: .simplified)
+                                Logogram.changeCurrent(to: .simplified)
                         default:
                                 break
                         }

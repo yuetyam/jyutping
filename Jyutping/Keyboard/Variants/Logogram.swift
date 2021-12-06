@@ -35,7 +35,7 @@ enum Logogram: Int {
 
         /// Update `Logogram.current` to the new value
         /// - Parameter newLogogram: New value for `Logogram.current`
-        static func changeCurent(to newLogogram: Logogram) {
+        static func changeCurrent(to newLogogram: Logogram) {
                 current = newLogogram
         }
 
