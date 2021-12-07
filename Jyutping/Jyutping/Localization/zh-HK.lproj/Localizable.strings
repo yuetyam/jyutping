@@ -94,9 +94,10 @@ Chinese (Hong Kong)
 "Version" = "版本";
 "Copied" = "已複製";
 
+"Website" = "網站";
 "Source Code" = "源碼";
-"Acknowledgements" = "致謝";
 "Privacy Policy" = "私隱政策";
+"Copy Website URL" = "複製網站地址";
 "Copy Source Code URL" = "複製源碼網址";
 "Copy Privacy Policy URL" = "複製私隱政策網址";
 

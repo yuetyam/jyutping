@@ -9,6 +9,13 @@ struct AboutView_iOS14: View {
                 return version + " (" + build + ")"
         }()
 
+        private let websiteIconName: String = {
+                if #available(iOS 15.0, *) {
+                        return "globe.asia.australia"
+                } else {
+                        return "house"
+                }
+        }()
         private let sourceCodeIconName: String = {
                 if #available(iOS 15.0, *) {
                         return "chevron.left.forwardslash.chevron.right"
@@ -27,6 +34,16 @@ struct AboutView_iOS14: View {
                                                 }
                                 }
                                 Section {
+                                        LinkSafariView(url: URL(string: "https://ososo.io")!) {
+                                                EnhancedLabel("Website", icon: websiteIconName, symbol: Image(systemName: "safari"))
+                                        }
+                                        .contextMenu {
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://ososo.io"
+                                                }) {
+                                                        Label("Copy Website URL", systemImage: "doc.on.doc")
+                                                }
+                                        }
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
                                                 EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: Image(systemName: "safari"))
                                         }
@@ -37,12 +54,12 @@ struct AboutView_iOS14: View {
                                                         Label("Copy Source Code URL", systemImage: "doc.on.doc")
                                                 }
                                         }
-                                        LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
+                                        LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy-ios")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: Image(systemName: "safari"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
-                                                        UIPasteboard.general.string = "https://yuetyam.github.io/jyutping/privacy"
+                                                        UIPasteboard.general.string = "https://ososo.io/jyutping/privacy-ios"
                                                 }) {
                                                         Label("Copy Privacy Policy URL", systemImage: "doc.on.doc")
                                                 }

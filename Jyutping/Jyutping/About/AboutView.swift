@@ -23,6 +23,16 @@ struct AboutView: View {
                                         }
                                 }
                                 Section {
+                                        LinkSafariView(url: URL(string: "https://ososo.io")!) {
+                                                EnhancedLabel("Website", icon: "house", symbol: Image(systemName: "safari"))
+                                        }
+                                        .contextMenu {
+                                                Button(action: {
+                                                        UIPasteboard.general.string = "https://ososo.io"
+                                                }) {
+                                                        EnhancedLabel("Copy Website URL", icon: "doc.on.doc")
+                                                }
+                                        }
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
                                                 EnhancedLabel("Source Code", icon: "chevron.left.slash.chevron.right", symbol: Image(systemName: "safari"))
                                         }
@@ -33,12 +43,12 @@ struct AboutView: View {
                                                         EnhancedLabel("Copy Source Code URL", icon: "doc.on.doc")
                                                 }
                                         }
-                                        LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
+                                        LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy-ios")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: Image(systemName: "safari"))
                                         }
                                         .contextMenu {
                                                 Button(action: {
-                                                        UIPasteboard.general.string = "https://yuetyam.github.io/jyutping/privacy"
+                                                        UIPasteboard.general.string = "https://ososo.io/jyutping/privacy-ios"
                                                 }) {
                                                         EnhancedLabel("Copy Privacy Policy URL", icon: "doc.on.doc")
                                                 }

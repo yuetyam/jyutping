@@ -94,9 +94,10 @@ English
 "Version" = "Version";
 "Copied" = "Copied";
 
+"Website" = "Website";
 "Source Code" = "Source Code";
-"Acknowledgements" = "Acknowledgements";
 "Privacy Policy" = "Privacy Policy";
+"Copy Website URL" = "Copy Website URL";
 "Copy Source Code URL" = "Copy Source Code URL";
 "Copy Privacy Policy URL" = "Copy Privacy Policy URL";
 

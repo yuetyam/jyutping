@@ -94,10 +94,11 @@ Chinese, Traditional
 "Version" = "版本";
 "Copied" = "已拷貝";
 
+"Website" = "網站";
 "Source Code" = "原始碼";
-"Acknowledgements" = "致謝";
 "Privacy Policy" = "私隱政策";
-"Copy Source Code URL" = "拷貝源碼網址";
+"Copy Website URL" = "拷貝網站地址";
+"Copy Source Code URL" = "拷貝原始碼網址";
 "Copy Privacy Policy URL" = "拷貝私隱政策網址";
 
 "Join Telegram Group" = "加入 Telegram 群組";
