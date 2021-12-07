@@ -10,4 +10,6 @@ extension Image {
                         return Image(systemName: "speaker.2")
                 }
         }()
+
+        static let safari: Image = Image(systemName: "safari")
 }

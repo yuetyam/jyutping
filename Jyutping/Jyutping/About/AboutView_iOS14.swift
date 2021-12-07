@@ -35,7 +35,7 @@ struct AboutView_iOS14: View {
                                 }
                                 Section {
                                         LinkSafariView(url: URL(string: "https://ososo.io")!) {
-                                                EnhancedLabel("Website", icon: websiteIconName, symbol: Image(systemName: "safari"))
+                                                EnhancedLabel("Website", icon: websiteIconName, symbol: .safari)
                                         }
                                         .contextMenu {
                                                 Button(action: {
@@ -45,7 +45,7 @@ struct AboutView_iOS14: View {
                                                 }
                                         }
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
-                                                EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: Image(systemName: "safari"))
+                                                EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: .safari)
                                         }
                                         .contextMenu {
                                                 Button(action: {
@@ -55,7 +55,7 @@ struct AboutView_iOS14: View {
                                                 }
                                         }
                                         LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy-ios")!) {
-                                                EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: Image(systemName: "safari"))
+                                                EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
                                         .contextMenu {
                                                 Button(action: {
