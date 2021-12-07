@@ -5,18 +5,45 @@ struct VariantConverter {
                 case .traditional:
                         return text
                 case .hongkong:
-                        let converted: [Character] = text.map({ hongkongVariants[$0] ?? $0 })
-                        return String(converted)
+                        switch text.count {
+                        case 0:
+                                return text
+                        case 1:
+                                return hongkongVariants[text] ?? text
+                        default:
+                                let converted: [Character] = text.map({ hongkongCharacterVariants[$0] ?? $0 })
+                                return String(converted)
+                        }
                 case .taiwan:
-                        let converted: [Character] = text.map({ taiwanVariants[$0] ?? $0 })
-                        return String(converted)
+                        switch text.count {
+                        case 0:
+                                return text
+                        case 1:
+                                return taiwanVariants[text] ?? text
+                        default:
+                                let converted: [Character] = text.map({ taiwanCharacterVariants[$0] ?? $0 })
+                                return String(converted)
+                        }
                 case .simplified:
                         return text
                 }
         }
 
+        private static let hongkongVariants: [String: String] = {
+                let keys: [String] = hongkongCharacterVariants.keys.map({ String($0) })
+                let values: [String] = hongkongCharacterVariants.values.map({ String($0) })
+                let newDictionary: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, values))
+                return newDictionary
+        }()
+        private static let taiwanVariants: [String: String] = {
+                let keys: [String] = taiwanCharacterVariants.keys.map({ String($0) })
+                let values: [String] = taiwanCharacterVariants.values.map({ String($0) })
+                let newDictionary: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, values))
+                return newDictionary
+        }()
 
-private static let hongkongVariants: [Character: Character] = [
+
+private static let hongkongCharacterVariants: [Character: Character] = [
 "僞": "偽",
 "兌": "兑",
 "叄": "叁",
@@ -83,7 +110,7 @@ private static let hongkongVariants: [Character: Character] = [
 ]
 
 
-private static let taiwanVariants: [Character: Character] = [
+private static let taiwanCharacterVariants: [Character: Character] = [
 "僞": "偽",
 "啓": "啟",
 "喫": "吃",
