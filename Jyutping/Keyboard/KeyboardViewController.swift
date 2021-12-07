@@ -587,7 +587,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .traditional:
                         candidates = origin.uniqued()
                 case .hongkong, .taiwan:
-                        let converted: [Candidate] = origin.map({ Candidate(text: VariantConverter.convert(text: $0.text, to: Logogram.current), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
+                        let converted: [Candidate] = origin.map({ Candidate(text: VariantConverter.convert(text: $0.text, to: .current), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
                         candidates = converted.uniqued()
                 case .simplified:
                         if simplifier == nil {
