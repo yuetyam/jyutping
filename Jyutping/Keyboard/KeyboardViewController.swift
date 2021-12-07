@@ -1,5 +1,4 @@
 import UIKit
-import OpenCCLite
 import KeyboardData
 import LookupData
 
@@ -124,6 +123,8 @@ final class KeyboardViewController: UIInputViewController {
                 pinyinProvider = nil
                 shapeData?.close()
                 shapeData = nil
+                simplifier?.close()
+                simplifier = nil
         }
         override func viewDidDisappear(_ animated: Bool) {
                 super.viewDidDisappear(animated)
@@ -497,6 +498,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var engine: Engine? = Engine()
         private lazy var pinyinProvider: PinyinProvider? = nil
         private lazy var shapeData: ShapeData? = nil
+        private lazy var simplifier: Simplifier? = nil
         private func suggest() {
                 switch processingText.first {
                 case .none:
@@ -588,13 +590,11 @@ final class KeyboardViewController: UIInputViewController {
                         let converted: [Candidate] = origin.map({ Candidate(text: VariantConverter.convert(text: $0.text, to: Logogram.current), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
                         candidates = converted.uniqued()
                 case .simplified:
-                        if converter == nil {
-                                candidates = origin.uniqued()
-                                updateConverter()
-                        } else {
-                                let converted: [Candidate] = origin.map { Candidate(text: converter!.convert($0.text), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) }
-                                candidates = converted.uniqued()
+                        if simplifier == nil {
+                                simplifier = Simplifier()
                         }
+                        let converted: [Candidate] = origin.map({ Candidate(text: simplifier?.convert($0.text) ?? $0.text, romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText)})
+                        candidates = converted.uniqued()
                 }
         }
         private(set) lazy var candidates: [Candidate] = [] {
@@ -732,40 +732,6 @@ final class KeyboardViewController: UIInputViewController {
         }
         func updateHapticFeedbackStatus() {
                 isHapticFeedbackOn = hasFullAccess && UserDefaults.standard.bool(forKey: "haptic_feedback")
-        }
-
-        private lazy var converter: Converter? = {
-                let conversion: Converter.Conversion? = {
-                        switch Logogram.current {
-                        case .hongkong:
-                                return .hkStandard
-                        case .taiwan:
-                                return .twStandard
-                        case .simplified:
-                                return .simplify
-                        default:
-                                return nil
-                        }
-                }()
-                guard let conversion = conversion else { return nil }
-                let converter: Converter? = try? Converter(conversion)
-                return converter
-        }()
-        func updateConverter() {
-                let conversion: Converter.Conversion? = {
-                        switch Logogram.current {
-                        case .hongkong:
-                                return .hkStandard
-                        case .taiwan:
-                                return .twStandard
-                        case .simplified:
-                                return .simplify
-                        default:
-                                return nil
-                        }
-                }()
-                guard let conversion = conversion else { converter = nil; return }
-                converter = try? Converter(conversion)
         }
 
         /// 鍵盤佈局

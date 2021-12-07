@@ -222,7 +222,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         Logogram.updatePreference()
                         triggerHapticFeedback()
-                        updateConverter()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
