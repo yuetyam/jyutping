@@ -33,7 +33,6 @@
 		3759F494262FC2B600266086 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48F262FC2B600266086 /* HomeView.swift */; };
 		3759F495262FC2B600266086 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F490262FC2B600266086 /* JyutpingView.swift */; };
 		3759F496262FC2B600266086 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F491262FC2B600266086 /* AboutView.swift */; };
-		3759F499262FC6DB00266086 /* OpenCCLite in Frameworks */ = {isa = PBXBuildFile; productRef = 3759F498262FC6DB00266086 /* OpenCCLite */; };
 		3759F4C3262FC7EA00266086 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F49B262FC7E900266086 /* ToolBar.swift */; };
 		3759F4C4262FC7EA00266086 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F49C262FC7E900266086 /* CandidateBoard.swift */; };
 		3759F4C5262FC7EA00266086 /* NumberPadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F49D262FC7E900266086 /* NumberPadButton.swift */; };
@@ -262,7 +261,6 @@
 			files = (
 				37309DE42733D60600858162 /* LookupData in Frameworks */,
 				37309DE62733D61100858162 /* KeyboardData in Frameworks */,
-				3759F499262FC6DB00266086 /* OpenCCLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,7 +602,6 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
-				3759F498262FC6DB00266086 /* OpenCCLite */,
 				37309DE32733D60600858162 /* LookupData */,
 				37309DE52733D61100858162 /* KeyboardData */,
 			);
@@ -652,7 +649,6 @@
 			);
 			mainGroup = 3759F40F262FB65C00266086;
 			packageReferences = (
-				3759F497262FC6DB00266086 /* XCRemoteSwiftPackageReference "OpenCCLite" */,
 			);
 			productRefGroup = 3759F419262FB65C00266086 /* Products */;
 			projectDirPath = "";
@@ -1249,17 +1245,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		3759F497262FC6DB00266086 /* XCRemoteSwiftPackageReference "OpenCCLite" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ososoio/OpenCCLite.git";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.3;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		37309DE02733074000858162 /* LookupData */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1272,11 +1257,6 @@
 		37309DE52733D61100858162 /* KeyboardData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = KeyboardData;
-		};
-		3759F498262FC6DB00266086 /* OpenCCLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3759F497262FC6DB00266086 /* XCRemoteSwiftPackageReference "OpenCCLite" */;
-			productName = OpenCCLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
