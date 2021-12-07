@@ -47,9 +47,6 @@ struct AboutView_iOS14: View {
                                                         Label("Copy Privacy Policy URL", systemImage: "doc.on.doc")
                                                 }
                                         }
-                                        NavigationLink(destination: AcknowledgementsView()) {
-                                                Label("Acknowledgements", systemImage: "wand.and.stars")
-                                        }
                                 }
                                 Section {
                                         Button(action: {

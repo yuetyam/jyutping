@@ -43,13 +43,6 @@ struct AboutView: View {
                                                         EnhancedLabel("Copy Privacy Policy URL", icon: "doc.on.doc")
                                                 }
                                         }
-                                        NavigationLink(destination: AcknowledgementsView()) {
-                                                HStack(spacing: 16) {
-                                                        Image(systemName: "wand.and.stars").foregroundColor(.blue)
-                                                        Text("Acknowledgements")
-                                                        Spacer()
-                                                }
-                                        }
                                 }
                                 Section {
                                         Button(action: {

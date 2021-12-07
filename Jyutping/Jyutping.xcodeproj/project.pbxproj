@@ -29,7 +29,6 @@
 		3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F482262FC27100266086 /* ShareSheetView.swift */; };
 		3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F483262FC27100266086 /* EnhancedTextField.swift */; };
 		3759F492262FC2B600266086 /* SyllablesTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* SyllablesTables.swift */; };
-		3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48E262FC2B600266086 /* AcknowledgementsView.swift */; };
 		3759F494262FC2B600266086 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48F262FC2B600266086 /* HomeView.swift */; };
 		3759F495262FC2B600266086 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F490262FC2B600266086 /* JyutpingView.swift */; };
 		3759F496262FC2B600266086 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F491262FC2B600266086 /* AboutView.swift */; };
@@ -164,7 +163,6 @@
 		3759F482262FC27100266086 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		3759F483262FC27100266086 /* EnhancedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
 		3759F48D262FC2B600266086 /* SyllablesTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllablesTables.swift; sourceTree = "<group>"; };
-		3759F48E262FC2B600266086 /* AcknowledgementsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcknowledgementsView.swift; sourceTree = "<group>"; };
 		3759F48F262FC2B600266086 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3759F490262FC2B600266086 /* JyutpingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
 		3759F491262FC2B600266086 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -512,7 +510,6 @@
 			children = (
 				3759F491262FC2B600266086 /* AboutView.swift */,
 				37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */,
-				3759F48E262FC2B600266086 /* AcknowledgementsView.swift */,
 				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
 			);
 			path = About;
@@ -722,7 +719,6 @@
 				3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */,
 				3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */,
 				378FEA46270C15A200153488 /* Sections.swift in Sources */,
-				3759F493262FC2B600266086 /* AcknowledgementsView.swift in Sources */,
 				378FEA48270C17CC00153488 /* JyutpingView_iOS15.swift in Sources */,
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
 				37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */,
