@@ -14,11 +14,11 @@ public struct EmojiData {
         }
 
         private static func fetch(name: String, type: String = "txt") -> [String] {
-                guard let path: String = Bundle.module.path(forResource: name, ofType: type) else { return [] }
-                guard let content: String = try? String(contentsOfFile: path) else { return [] }
+                guard let path: String = Bundle.module.path(forResource: name, ofType: type) else { return fallback(name) }
+                guard let content: String = try? String(contentsOfFile: path) else { return fallback(name) }
                 let sourceLines: [String] = content.components(separatedBy: .newlines)
                 let transformed: [String] = sourceLines.map { line -> String in
-                        guard let codes: String = line.components(separatedBy: "#").first else { return "X" }
+                        guard let codes: String = line.components(separatedBy: "#").first else { return "?" }
                         if codes.contains(" ") {
                                 let characters: [Character] = codes.components(separatedBy: " ").map({ character(from: $0) })
                                 return String(characters)
@@ -34,10 +34,27 @@ public struct EmojiData {
         /// - Parameter codePoint: U+XXXX
         /// - Returns: A Character
         private static func character(from codePoint: String) -> Character {
-                lazy var fallback: Character = "X"
+                lazy var fallback: Character = "?"
                 let cropped = codePoint.dropFirst(2)
                 guard let u32 = UInt32(cropped, radix: 16) else { return fallback }
                 guard let scalar = Unicode.Scalar(u32) else { return fallback }
                 return Character(scalar)
+        }
+
+        private static func fallback(_ name: String) -> [String] {
+                let number: Int = {
+                        switch name {
+                        case "emoji_0": return 461  // Smileys & People
+                        case "emoji_1": return 199  // Animals & Nature
+                        case "emoji_2": return 123  // Food & Drink
+                        case "emoji_3": return 117  // Activity
+                        case "emoji_4": return 128  // Travel & Places
+                        case "emoji_5": return 217  // Objects
+                        case "emoji_6": return 292  // Symbols
+                        case "emoji_7": return 259  // Flags
+                        default: return 500
+                        }
+                }()
+                return Array(repeating: "?", count: number)
         }
 }
