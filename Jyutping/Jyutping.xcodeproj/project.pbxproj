@@ -50,7 +50,6 @@
 		3759F4D5262FC7EA00266086 /* KeyView+properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4AF262FC7E900266086 /* KeyView+properties.swift */; };
 		3759F4D6262FC7EA00266086 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B0262FC7E900266086 /* KeyView.swift */; };
 		3759F4D8262FC7EA00266086 /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B2262FC7E900266086 /* AudioFeedback.swift */; };
-		3759F4DA262FC7EA00266086 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B5262FC7EA00266086 /* Emoji.swift */; };
 		3759F4DB262FC7EA00266086 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B6262FC7EA00266086 /* EmojiCell.swift */; };
 		3759F4DC262FC7EA00266086 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B7262FC7EA00266086 /* EmojiBoard.swift */; };
 		3759F4DD262FC7EA00266086 /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B8262FC7EA00266086 /* KeyboardViewController+TableView.swift */; };
@@ -184,7 +183,6 @@
 		3759F4AF262FC7E900266086 /* KeyView+properties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+properties.swift"; sourceTree = "<group>"; };
 		3759F4B0262FC7E900266086 /* KeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		3759F4B2262FC7E900266086 /* AudioFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
-		3759F4B5262FC7EA00266086 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		3759F4B6262FC7EA00266086 /* EmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		3759F4B7262FC7EA00266086 /* EmojiBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
 		3759F4B8262FC7EA00266086 /* KeyboardViewController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -431,7 +429,6 @@
 		3759F4B4262FC7EA00266086 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
-				3759F4B5262FC7EA00266086 /* Emoji.swift */,
 				3759F4B6262FC7EA00266086 /* EmojiCell.swift */,
 				3759F4B7262FC7EA00266086 /* EmojiBoard.swift */,
 			);
@@ -780,7 +777,6 @@
 				3759F4E5262FC7EA00266086 /* StringExtensions.swift in Sources */,
 				3759F4DE262FC7EA00266086 /* KeyboardViewController+keyboard.swift in Sources */,
 				3759F4D8262FC7EA00266086 /* AudioFeedback.swift in Sources */,
-				3759F4DA262FC7EA00266086 /* Emoji.swift in Sources */,
 				3759F4DF262FC7EA00266086 /* KeyboardLayout+events.swift in Sources */,
 				3759F4D2262FC7EA00266086 /* BlurEffectView.swift in Sources */,
 				3759F4C7262FC7EA00266086 /* CandidateCell.swift in Sources */,
