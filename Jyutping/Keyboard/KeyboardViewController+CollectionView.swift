@@ -40,8 +40,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 let index: String.Index = frequentEmojis.index(start, offsetBy: indexPath.row)
                                 cell.emojiLabel.text = String(frequentEmojis[index])
                         default:
-                                let emoji: Character = Emoji.emojis[indexPath.section - 1][indexPath.row]
-                                cell.emojiLabel.text = String(emoji)
+                                let emoji: String = emojiData[indexPath.section - 1][indexPath.row]
+                                cell.emojiLabel.text = emoji
                         }
                         return cell
                 }

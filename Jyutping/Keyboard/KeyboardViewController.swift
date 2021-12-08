@@ -499,6 +499,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var pinyinProvider: PinyinProvider? = nil
         private lazy var shapeData: ShapeData? = nil
         private lazy var simplifier: Simplifier? = nil
+        private(set) lazy var emojiData: [[String]] = EmojiData.fetchAll()
         private func suggest() {
                 switch processingText.first {
                 case .none:
