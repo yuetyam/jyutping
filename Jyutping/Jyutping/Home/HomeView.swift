@@ -150,6 +150,7 @@ struct HomeView: View {
                                 }
                         }
                         .listStyle(.grouped)
+                        .animation(.default, value: jyutpings)
                         .navigationBarTitle("Home")
                 }
                 .navigationViewStyle(.stack)

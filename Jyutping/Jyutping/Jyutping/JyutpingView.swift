@@ -87,6 +87,7 @@ struct JyutpingView: View {
                                 }
                         }
                         .listStyle(.grouped)
+                        .animation(.default, value: jyutpings)
                         .navigationBarTitle("Jyutping")
                 }
                 .navigationViewStyle(.stack)
