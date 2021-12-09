@@ -172,6 +172,8 @@ struct HomeView_iOS15: View {
                                         }
                                 }
                         }
+                        .animation(.default, value: pronunciations)
+                        .animation(.default, value: isGuideViewExpanded)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }
                                 let isContained: Bool =  keyboards.contains("im.cantonese.CantoneseIM.Keyboard")

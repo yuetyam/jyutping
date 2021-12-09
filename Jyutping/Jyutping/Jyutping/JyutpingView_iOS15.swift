@@ -82,6 +82,7 @@ struct JyutpingView_iOS15: View {
                                         Text("Cantonese Resources").textCase(.none)
                                 }
                         }
+                        .animation(.default, value: pronunciations)
                         .navigationTitle("Jyutping")
                 }
                 .navigationViewStyle(.stack)
