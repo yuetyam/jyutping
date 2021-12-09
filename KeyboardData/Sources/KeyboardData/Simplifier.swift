@@ -55,44 +55,55 @@ public struct Simplifier {
                 case 1:
                         return match(text)
                 default:
-                        let replaced = replace(text)
-                        guard replaced.modified.count != 1 else { return replaced.matched }
-                        let newCharacters: [String] = replaced.modified.map({ matchCharacter($0) })
-                        let newText: String = newCharacters.joined()
-                        if replaced.matched.isEmpty {
-                                return newText
-                        } else {
-                                let replaceBacked: String = newText.replacingOccurrences(of: "X", with: replaced.matched)
-                                return replaced.step2.isEmpty ? replaceBacked : replaceBacked.replacingOccurrences(of: "Y", with: replaced.step2)
-                        }
+                        return transform(text)
                 }
         }
 
-        private func replace(_ text: String) -> (modified: String, matched: String, step2: String) {
+        private func transform(_ text: String) -> String {
+                let stepOne = replace(text, replacement: "X")
+                guard !(stepOne.matched.isEmpty) else {
+                        let newCharacters: [String] = text.map({ matchCharacter($0) })
+                        let transformed: String = newCharacters.joined()
+                        return transformed
+                }
+
+                let stepTwo = replace(stepOne.modified, replacement: "Y")
+                guard !(stepTwo.matched.isEmpty) else {
+                        let newCharacters: [String] = stepTwo.modified.map({ matchCharacter($0) })
+                        let transformed: String = newCharacters.joined()
+                        let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
+                        return reverted
+                }
+
+                let stepThree = replace(stepTwo.modified, replacement: "Z")
+                guard !(stepThree.matched.isEmpty) else {
+                        let newCharacters: [String] = stepTwo.modified.map({ matchCharacter($0) })
+                        let transformed: String = newCharacters.joined()
+                        let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
+                                .replacingOccurrences(of: stepTwo.replacement, with: stepTwo.matched)
+                        return reverted
+                }
+
+                let newCharacters: [String] = stepThree.modified.map({ matchCharacter($0) })
+                let transformed: String = newCharacters.joined()
+                let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
+                        .replacingOccurrences(of: stepTwo.replacement, with: stepTwo.matched)
+                        .replacingOccurrences(of: stepThree.replacement, with: stepThree.matched)
+                return reverted
+        }
+
+        private func replace(_ text: String, replacement: String) -> (modified: String, matched: String, replacement: String) {
                 let possibleKeys: [String] = Simplifier.phrases.keys.filter({ $0.count <= text.count }).sorted(by: { $0.count > $1.count })
-                lazy var replaced: String = text
+                lazy var modified: String = text
                 lazy var matched: String = ""
                 for item in possibleKeys {
                         if text.contains(item) {
-                                replaced = text.replacingOccurrences(of: item, with: "X")
+                                modified = text.replacingOccurrences(of: item, with: replacement)
                                 matched = Simplifier.phrases[item]!
                                 break
                         }
                 }
-                let isDone: Bool = matched.isEmpty || replaced.count == 1
-                guard !isDone else {
-                        return (replaced, matched, "")
-                }
-                lazy var step2Replaced: String = replaced
-                lazy var step2Matched: String = ""
-                for item in possibleKeys {
-                        if replaced.contains(item) {
-                                step2Replaced = replaced.replacingOccurrences(of: item, with: "Y")
-                                step2Matched = Simplifier.phrases[item]!
-                                break
-                        }
-                }
-                return (step2Replaced, matched, step2Matched)
+                return (modified, matched, replacement)
         }
 
 
