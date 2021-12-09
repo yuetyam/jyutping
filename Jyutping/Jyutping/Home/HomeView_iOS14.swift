@@ -140,6 +140,7 @@ struct HomeView_iOS14: View {
                                 }
                         }
                         .listStyle(.insetGrouped)
+                        .animation(.default, value: jyutpings)
                         .navigationTitle("Home")
                 }
                 .navigationViewStyle(.stack)

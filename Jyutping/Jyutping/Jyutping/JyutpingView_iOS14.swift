@@ -81,6 +81,7 @@ struct JyutpingView_iOS14: View {
                                 }
                         }
                         .listStyle(.insetGrouped)
+                        .animation(.default, value: jyutpings)
                         .navigationTitle("Jyutping")
                 }
                 .navigationViewStyle(.stack)
