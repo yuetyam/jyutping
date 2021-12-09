@@ -38,15 +38,13 @@ struct HomeView_iOS15: View {
                                                                 pronunciations = []
                                                                 return
                                                         }
-                                                        let fetches: [String] = LookupData.search(for: newInput)
-                                                        if fetches.isEmpty {
-                                                                let traditionalText: String = newInput.traditional
-                                                                let searches: [String] = LookupData.search(for: traditionalText)
-                                                                cantonese = searches.isEmpty ? newInput : traditionalText
-                                                                pronunciations = searches
-                                                        } else {
+                                                        let search = LookupData.advancedSearch(for: newInput)
+                                                        if search.romanizations.isEmpty {
                                                                 cantonese = newInput
-                                                                pronunciations = fetches
+                                                                pronunciations = []
+                                                        } else {
+                                                                cantonese = search.text
+                                                                pronunciations = search.romanizations
                                                         }
                                                 }
                                 }
