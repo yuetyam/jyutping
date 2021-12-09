@@ -32,9 +32,22 @@ struct HomeView_iOS15: View {
                                                 .disableAutocorrection(true)
                                                 .onSubmit {
                                                         let newInput: String = inputText.filtered()
-                                                        guard cantonese != newInput else { return }
-                                                        cantonese = newInput
-                                                        pronunciations = newInput.isEmpty ? [] : LookupData.search(for: newInput)
+                                                        guard newInput != cantonese else { return }
+                                                        guard !newInput.isEmpty else {
+                                                                cantonese = newInput
+                                                                pronunciations = []
+                                                                return
+                                                        }
+                                                        let fetches: [String] = LookupData.search(for: newInput)
+                                                        if fetches.isEmpty {
+                                                                let traditionalText: String = newInput.traditional
+                                                                let searches: [String] = LookupData.search(for: traditionalText)
+                                                                cantonese = searches.isEmpty ? newInput : traditionalText
+                                                                pronunciations = searches
+                                                        } else {
+                                                                cantonese = newInput
+                                                                pronunciations = fetches
+                                                        }
                                                 }
                                 }
                                 if !cantonese.isEmpty && !pronunciations.isEmpty {
