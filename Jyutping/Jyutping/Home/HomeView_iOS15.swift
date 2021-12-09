@@ -14,7 +14,6 @@ struct HomeView_iOS15: View {
         }()
         @State private var isGuideViewExpanded: Bool = false
 
-        private let dotText: Text = Text(verbatim: "•")
         private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: .empty)
         private let strokes: String = """
         w = 橫(waang)
@@ -87,22 +86,22 @@ struct HomeView_iOS15: View {
                                         if !isKeyboardEnabled || isGuideViewExpanded {
                                                 VStack(spacing: 5) {
                                                         HStack {
-                                                                dotText
+                                                                Text.dotMark
                                                                 Text("Jump to **Settings**")
                                                                 Spacer()
                                                         }
                                                         HStack {
-                                                                dotText
+                                                                Text.dotMark
                                                                 Text("Tap **Keyboards**")
                                                                 Spacer()
                                                         }
                                                         HStack {
-                                                                dotText
+                                                                Text.dotMark
                                                                 Text("Turn on **Jyutping**")
                                                                 Spacer()
                                                         }
                                                         HStack {
-                                                                dotText
+                                                                Text.dotMark
                                                                 Text("Turn on **Allow Full Access**")
                                                                 Spacer()
                                                         }

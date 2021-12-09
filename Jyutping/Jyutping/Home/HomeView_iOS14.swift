@@ -10,7 +10,6 @@ struct HomeView_iOS14: View {
         private var rawCantonese: String { inputText.filtered() }
         private var jyutpings: [String] { LookupData.search(for: rawCantonese) }
 
-        private let dotText: Text = Text(verbatim: "•")
         private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: .empty)
         private let strokes: String = """
         w = 橫(waang)
@@ -57,25 +56,25 @@ struct HomeView_iOS14: View {
                                         Text("How to enable this Keyboard").font(.headline)
                                         VStack(spacing: 5) {
                                                 HStack {
-                                                        dotText
+                                                        Text.dotMark
                                                         Text("Jump to")
                                                         Text("Settings").fontWeight(.semibold)
                                                         Spacer()
                                                 }
                                                 HStack {
-                                                        dotText
+                                                        Text.dotMark
                                                         Text("Tap")
                                                         Text("Keyboards").fontWeight(.semibold)
                                                         Spacer()
                                                 }
                                                 HStack {
-                                                        dotText
+                                                        Text.dotMark
                                                         Text("Turn on")
                                                         Text("Jyutping").fontWeight(.semibold)
                                                         Spacer()
                                                 }
                                                 HStack {
-                                                        dotText
+                                                        Text.dotMark
                                                         Text("Turn on")
                                                         Text("Allow Full Access").fontWeight(.semibold)
                                                         Spacer()
