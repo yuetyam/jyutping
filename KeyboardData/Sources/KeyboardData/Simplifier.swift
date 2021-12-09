@@ -97,6 +97,16 @@ public struct Simplifier {
                 lazy var modified: String = text
                 lazy var matched: String = ""
                 for item in possibleKeys {
+                        if text.hasPrefix(item) {
+                                modified = text.replacingOccurrences(of: item, with: replacement)
+                                matched = Simplifier.phrases[item]!
+                                break
+                        }
+                }
+                guard matched.isEmpty else {
+                        return (modified, matched, replacement)
+                }
+                for item in possibleKeys {
                         if text.contains(item) {
                                 modified = text.replacingOccurrences(of: item, with: replacement)
                                 matched = Simplifier.phrases[item]!
