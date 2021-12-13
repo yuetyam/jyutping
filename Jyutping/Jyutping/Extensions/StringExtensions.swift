@@ -16,11 +16,6 @@ extension String {
         func filtered() -> String {
                 return filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
         }
-
-        var traditional: String {
-                let transformed: String? = self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false)
-                return transformed ?? self
-        }
 }
 
 

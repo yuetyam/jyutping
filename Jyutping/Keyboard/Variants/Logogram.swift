@@ -17,7 +17,7 @@ enum Logogram: Int {
         /// Traditional, Hong Kong. 傳統漢字（香港）
         case hongkong = 2
 
-        /// Traditional,Taiwan. 傳統漢字（臺灣）
+        /// Traditional, Taiwan. 傳統漢字（臺灣）
         case taiwan = 3
 
         /// Simplified. 簡化字
