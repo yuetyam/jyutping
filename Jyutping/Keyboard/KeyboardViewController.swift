@@ -137,7 +137,6 @@ final class KeyboardViewController: UIInputViewController {
         private var askedKeyboardIdiom: KeyboardIdiom {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
-                        // TODO: - Test on .padFloating
                         return keyboardInterface.isCompact ? .numberPad : .numeric
                 case .decimalPad:
                         return keyboardInterface.isCompact ? .decimalPad : .numeric
