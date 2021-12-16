@@ -69,12 +69,8 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("Telegram Group", icon: "paperplane", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
+                                                UsernameCopyButton("jyutping")
                                                 URLCopyButton("https://t.me/jyutping")
-                                                Button {
-                                                        UIPasteboard.general.string = "jyutping"
-                                                } label: {
-                                                        Label("Copy Username", systemImage: "doc.on.doc")
-                                                }
                                         }
                                         Button {
                                                 let appUrl: URL = URL(string: "https://www.truthsocial.com")!
@@ -84,12 +80,8 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("TRUTH Social", icon: "at", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
+                                                UsernameCopyButton("username")
                                                 URLCopyButton("https://www.truthsocial.com")
-                                                Button {
-                                                        UIPasteboard.general.string = "username"
-                                                } label: {
-                                                        Label("Copy Username", systemImage: "doc.on.doc")
-                                                }
                                         }
                                         Button {
                                                 // Instagram App doesn't support Universal Links
@@ -100,12 +92,8 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("Instagram", icon: "circle.square", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
+                                                UsernameCopyButton("jyutping_app")
                                                 URLCopyButton("https://www.instagram.com/jyutping_app")
-                                                Button {
-                                                        UIPasteboard.general.string = "jyutping_app"
-                                                } label: {
-                                                        Label("Copy Username", systemImage: "doc.on.doc")
-                                                }
                                         }
                                 }
                                 Section {
