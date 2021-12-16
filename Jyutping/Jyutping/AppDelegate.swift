@@ -21,3 +21,14 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
         }
 }
+
+
+struct AppMaster {
+        static func open(appUrl: URL, webUrl: URL) {
+                UIApplication.shared.open(appUrl) { success in
+                        if !success {
+                                UIApplication.shared.open(webUrl)
+                        }
+                }
+        }
+}

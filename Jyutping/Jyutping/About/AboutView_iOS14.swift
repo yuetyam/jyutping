@@ -154,14 +154,3 @@ struct AboutView_iOS14: View {
                 .navigationViewStyle(.stack)
         }
 }
-
-
-struct AppMaster {
-        static func open(appUrl: URL, webUrl: URL) {
-                UIApplication.shared.open(appUrl) { success in
-                        if !success {
-                                UIApplication.shared.open(webUrl)
-                        }
-                }
-        }
-}
