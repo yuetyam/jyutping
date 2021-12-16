@@ -31,3 +31,29 @@ struct URLCopyButton_Previews: PreviewProvider {
                 URLCopyButton("URL")
         }
 }
+
+
+struct UsernameCopyButton: View {
+
+        init(_ username: String) {
+                self.username = username
+        }
+
+        private let username: String
+
+        var body: some View {
+                Button {
+                        UIPasteboard.general.string = username
+                } label: {
+                        if #available(iOS 14.0, *) {
+                                Label("Copy Username", systemImage: "doc.on.doc")
+                        } else {
+                                HStack {
+                                        Text("Copy Username")
+                                        Spacer()
+                                        Image(systemName: "doc.on.doc")
+                                }
+                        }
+                }
+        }
+}
