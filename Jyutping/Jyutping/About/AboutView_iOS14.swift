@@ -3,10 +3,10 @@ import SwiftUI
 @available(iOS 14.0, *)
 struct AboutView_iOS14: View {
 
-        private let versionString: String = {
-                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
-                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
-                return version + " (" + build + ")"
+        private let version: String = {
+                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
+                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
+                return versionString + " (" + buildString + ")"
         }()
 
         private let websiteIconName: String = {
@@ -28,9 +28,9 @@ struct AboutView_iOS14: View {
                 NavigationView {
                         List {
                                 Section {
-                                        EnhancedLabel("Version", icon: "info.circle", message: Text(verbatim: versionString))
+                                        EnhancedLabel("Version", icon: "info.circle", message: Text(verbatim: version))
                                                 .contextMenu {
-                                                        MenuCopyButton(versionString)
+                                                        MenuCopyButton(version)
                                                 }
                                 }
                                 Section {
@@ -38,80 +38,73 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("Website", icon: websiteIconName, symbol: .safari)
                                         }
                                         .contextMenu {
-                                                Button(action: {
-                                                        UIPasteboard.general.string = "https://ososo.io"
-                                                }) {
-                                                        Label("Copy Website URL", systemImage: "doc.on.doc")
-                                                }
+                                                URLCopyButton("https://ososo.io")
                                         }
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
                                                 EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: .safari)
                                         }
                                         .contextMenu {
-                                                Button(action: {
-                                                        UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
-                                                }) {
-                                                        Label("Copy Source Code URL", systemImage: "doc.on.doc")
-                                                }
+                                                URLCopyButton("https://github.com/yuetyam/jyutping")
+                                        }
+                                        LinkSafariView(url: URL(string: "https://ososo.io/jyutping/terms")!) {
+                                                EnhancedLabel("Terms of Use", icon: "text.alignleft", symbol: .safari)
+                                        }
+                                        .contextMenu {
+                                                URLCopyButton("https://ososo.io/jyutping/terms")
                                         }
                                         LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy-ios")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
                                         .contextMenu {
-                                                Button(action: {
-                                                        UIPasteboard.general.string = "https://ososo.io/jyutping/privacy-ios"
-                                                }) {
-                                                        Label("Copy Privacy Policy URL", systemImage: "doc.on.doc")
-                                                }
+                                                URLCopyButton("https://ososo.io/jyutping/privacy-ios")
                                         }
                                 }
                                 Section {
-                                        Button(action: {
+                                        Button {
                                                 // Telegram App doesn't support Universal Links
                                                 let appUrl: URL = URL(string: "tg://resolve?domain=jyutping")!
                                                 let webUrl: URL = URL(string: "https://t.me/jyutping")!
-                                                UIApplication.shared.open(appUrl) { success in
-                                                        if !success {
-                                                                UIApplication.shared.open(webUrl)
-                                                        }
-                                                }
-                                        }) {
-                                                EnhancedLabel("Join Telegram Group", icon: "paperplane", symbol: Image(systemName: "arrow.up.right"), tintColor: .primary)
+                                                AppMaster.open(appUrl: appUrl, webUrl: webUrl)
+                                        } label: {
+                                                EnhancedLabel("Telegram Group", icon: "paperplane", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
-                                                Button(action: {
-                                                        UIPasteboard.general.string = "https://t.me/jyutping"
-                                                }) {
-                                                        Label("Copy Telegram URL", systemImage: "doc.on.doc")
+                                                URLCopyButton("https://t.me/jyutping")
+                                                Button {
+                                                        UIPasteboard.general.string = "jyutping"
+                                                } label: {
+                                                        Label("Copy Username", systemImage: "doc.on.doc")
                                                 }
                                         }
-                                        Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
-                                                EnhancedLabel("Follow us on Twitter", icon: "at", symbol: Image(systemName: "arrow.up.right"))
+                                        Button {
+                                                let appUrl: URL = URL(string: "https://www.truthsocial.com")!
+                                                let webUrl: URL = URL(string: "https://www.truthsocial.com")!
+                                                AppMaster.open(appUrl: appUrl, webUrl: webUrl)
+                                        } label: {
+                                                EnhancedLabel("TRUTH Social", icon: "at", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
-                                                Button(action: {
-                                                        UIPasteboard.general.string = "https://twitter.com/JyutpingApp"
-                                                }) {
-                                                        Label("Copy Twitter URL", systemImage: "doc.on.doc")
+                                                URLCopyButton("https://www.truthsocial.com")
+                                                Button {
+                                                        UIPasteboard.general.string = "username"
+                                                } label: {
+                                                        Label("Copy Username", systemImage: "doc.on.doc")
                                                 }
                                         }
-                                        Button(action: {
+                                        Button {
                                                 // Instagram App doesn't support Universal Links
                                                 let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
                                                 let webUrl: URL = URL(string: "https://www.instagram.com/jyutping_app")!
-                                                UIApplication.shared.open(appUrl) { success in
-                                                        if !success {
-                                                                UIApplication.shared.open(webUrl)
-                                                        }
-                                                }
-                                        }) {
-                                                EnhancedLabel("Follow us on Instagram", icon: "circle.square", symbol: Image(systemName: "arrow.up.right"))
+                                                AppMaster.open(appUrl: appUrl, webUrl: webUrl)
+                                        } label: {
+                                                EnhancedLabel("Instagram", icon: "circle.square", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
-                                                Button(action: {
-                                                        UIPasteboard.general.string = "https://www.instagram.com/jyutping_app"
-                                                }) {
-                                                        Label("Copy Instagram URL", systemImage: "doc.on.doc")
+                                                URLCopyButton("https://www.instagram.com/jyutping_app")
+                                                Button {
+                                                        UIPasteboard.general.string = "jyutping_app"
+                                                } label: {
+                                                        Label("Copy Username", systemImage: "doc.on.doc")
                                                 }
                                         }
                                 }
@@ -121,17 +114,13 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("GitHub Issues", icon: "smallcircle.fill.circle", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
-                                                Button(action: {
-                                                        UIPasteboard.general.string = "https://github.com/yuetyam/jyutping"
-                                                }) {
-                                                        Label("Copy GitHub URL", systemImage: "doc.on.doc")
-                                                }
+                                                URLCopyButton("https://github.com/yuetyam/jyutping/issues")
                                         }
                                         EmailFeedbackButton()
                                                 .contextMenu {
-                                                        Button(action: {
+                                                        Button {
                                                                 UIPasteboard.general.string = "bing@ososo.io"
-                                                        }) {
+                                                        } label: {
                                                                 Label("Copy Email Address", systemImage: "doc.on.doc")
                                                         }
                                                 }
@@ -141,9 +130,9 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("Review on the App Store", icon: "heart", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
-                                                Button(action: {
+                                                Button {
                                                         UIPasteboard.general.string = "https://apps.apple.com/app/id1509367629"
-                                                }) {
+                                                } label: {
                                                         Label("Copy App Store link", systemImage: "doc.on.doc")
                                                 }
                                         }
@@ -151,9 +140,9 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("Share this App", icon: "square.and.arrow.up")
                                         }
                                         .contextMenu {
-                                                Button(action: {
+                                                Button {
                                                         UIPasteboard.general.string = "https://apps.apple.com/app/id1509367629"
-                                                }) {
+                                                } label: {
                                                         Label("Copy App Store link", systemImage: "doc.on.doc")
                                                 }
                                         }
@@ -163,5 +152,42 @@ struct AboutView_iOS14: View {
                         .navigationTitle("About")
                 }
                 .navigationViewStyle(.stack)
+        }
+}
+
+
+struct AppMaster {
+        static func open(appUrl: URL, webUrl: URL) {
+                UIApplication.shared.open(appUrl) { success in
+                        if !success {
+                                UIApplication.shared.open(webUrl)
+                        }
+                }
+        }
+}
+
+
+struct URLCopyButton: View {
+
+        init(_ url: String) {
+                self.url = url
+        }
+
+        private let url: String
+
+        var body: some View {
+                Button {
+                        UIPasteboard.general.string = url
+                } label: {
+                        if #available(iOS 14.0, *) {
+                                Label("Copy URL", systemImage: "doc.on.doc")
+                        } else {
+                                HStack {
+                                        Text("Copy URL")
+                                        Spacer()
+                                        Image(systemName: "doc.on.doc")
+                                }
+                        }
+                }
         }
 }
