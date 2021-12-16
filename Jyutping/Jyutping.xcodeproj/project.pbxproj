@@ -81,6 +81,7 @@
 		37A598C5275249B20025A008 /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A598C4275249B20025A008 /* KeyboardInterface.swift */; };
 		37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B19F2527395B6E00DD8A8E /* Logogram.swift */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
+		37D98D92276BA59000DF37EF /* URLCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D91276BA59000DF37EF /* URLCopyButton.swift */; };
 		37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E234ED271466B8005825A2 /* StringExtensions.swift */; };
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
 		37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */; };
@@ -223,6 +224,7 @@
 		37A598C4275249B20025A008 /* KeyboardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
 		37B19F2527395B6E00DD8A8E /* Logogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
+		37D98D91276BA59000DF37EF /* URLCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCopyButton.swift; sourceTree = "<group>"; };
 		37E234ED271466B8005825A2 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
 		37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				3759F47F262FC27100266086 /* SafariView.swift */,
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
 				377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */,
+				37D98D91276BA59000DF37EF /* URLCopyButton.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				378FEA46270C15A200153488 /* Sections.swift in Sources */,
 				378FEA48270C17CC00153488 /* JyutpingView_iOS15.swift in Sources */,
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
+				37D98D92276BA59000DF37EF /* URLCopyButton.swift in Sources */,
 				37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */,
 				377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */,
 				3759F488262FC27100266086 /* LinkSafariView.swift in Sources */,
