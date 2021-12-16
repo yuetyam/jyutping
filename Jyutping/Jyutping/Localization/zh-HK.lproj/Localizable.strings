@@ -92,29 +92,24 @@ Chinese (Hong Kong)
 
 // About
 "Version" = "版本";
-"Copied" = "已複製";
 
 "Website" = "網站";
 "Source Code" = "源碼";
+"Terms of Use" = "使用條款";
 "Privacy Policy" = "私隱政策";
-"Copy Website URL" = "複製網站地址";
-"Copy Source Code URL" = "複製源碼網址";
-"Copy Privacy Policy URL" = "複製私隱政策網址";
 
-"Join Telegram Group" = "加入 Telegram 交流羣";
-"Follow us on Twitter" = "關注 Twitter";
-"Follow us on Instagram" = "關注 Instagram";
+"Telegram Group" = "加入 Telegram 羣組";
+"TRUTH Social" = "關注 TRUTH Social";
+"Instagram" = "關注 Instagram";
 "GitHub Issues" = "GitHub Issues";
+
+"Copy URL" = "複製網址";
+"Copy Username" = "複製戶名";
 
 "Email Feedback" = "電郵反饋";
 "Unable to compose mail" = "無法編寫郵件";
 "Mail Unavailable" = "電郵不可用";
 "OK" = "好";
-
-"Copy Telegram URL" = "複製 Telegram 網址";
-"Copy Twitter URL" = "複製 Twitter 網址";
-"Copy Instagram URL" = "複製 Instagram 網址";
-"Copy GitHub URL" = "複製 GitHub 網址";
 "Copy Email Address" = "複製電郵地址";
 
 "Review on the App Store" = "前往 App Store 點評";

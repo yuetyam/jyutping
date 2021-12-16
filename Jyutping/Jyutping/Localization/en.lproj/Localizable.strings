@@ -92,29 +92,24 @@ English
 
 // About
 "Version" = "Version";
-"Copied" = "Copied";
 
 "Website" = "Website";
 "Source Code" = "Source Code";
+"Terms of Use" = "Terms of Use";
 "Privacy Policy" = "Privacy Policy";
-"Copy Website URL" = "Copy Website URL";
-"Copy Source Code URL" = "Copy Source Code URL";
-"Copy Privacy Policy URL" = "Copy Privacy Policy URL";
 
-"Join Telegram Group" = "Join Telegram Group";
-"Follow us on Twitter" = "Follow us on Twitter";
-"Follow us on Instagram" = "Follow us on Instagram";
+"Telegram Group" = "Telegram Group";
+"TRUTH Social" = "TRUTH Social";
+"Instagram" = "Instagram";
 "GitHub Issues" = "GitHub Issues";
+
+"Copy URL" = "Copy URL";
+"Copy Username" = "Copy Username";
 
 "Email Feedback" = "Email Feedback";
 "Unable to compose mail" = "Unable to compose mail";
 "Mail Unavailable" = "Mail Unavailable";
 "OK" = "OK";
-
-"Copy Telegram URL" = "Copy Telegram URL";
-"Copy Twitter URL" = "Copy Twitter URL";
-"Copy Instagram URL" = "Copy Instagram URL";
-"Copy GitHub URL" = "Copy GitHub URL";
 "Copy Email Address" = "Copy Email Address";
 
 "Review on the App Store" = "Review on the App Store";
