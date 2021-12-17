@@ -82,6 +82,7 @@
 		37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B19F2527395B6E00DD8A8E /* Logogram.swift */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
 		37D98D92276BA59000DF37EF /* URLCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D91276BA59000DF37EF /* URLCopyButton.swift */; };
+		37D98DA0276D2E1400DF37EF /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D9F276D2E1400DF37EF /* Speaker.swift */; };
 		37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E234ED271466B8005825A2 /* StringExtensions.swift */; };
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
 		37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */; };
@@ -237,6 +238,7 @@
 		37D98D9C276C337600DF37EF /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37D98D9D276C337600DF37EF /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37D98D9E276C337600DF37EF /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37D98D9F276D2E1400DF37EF /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		37E234ED271466B8005825A2 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
 		37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
 				377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */,
 				37D98D91276BA59000DF37EF /* URLCopyButton.swift */,
+				37D98D9F276D2E1400DF37EF /* Speaker.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				378FEA44270C14B200153488 /* Speech.swift in Sources */,
 				37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */,
 				377236662719F9BF007F9AB9 /* FAQView.swift in Sources */,
+				37D98DA0276D2E1400DF37EF /* Speaker.swift in Sources */,
 				37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */,
 				3759F420262FB65C00266086 /* ContentView.swift in Sources */,
 			);
