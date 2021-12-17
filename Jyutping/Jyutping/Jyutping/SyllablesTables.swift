@@ -17,7 +17,7 @@ private struct CellView: View {
         var body: some View {
                 Button(action: {
                         if !syllable.isEmpty {
-                                Speaker.speak(syllable)
+                                Speech.speak(syllable)
                         }
                 }) {
                         if #available(iOS 15.0, *) {

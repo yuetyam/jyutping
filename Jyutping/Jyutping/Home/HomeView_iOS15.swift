@@ -51,7 +51,7 @@ struct HomeView_iOS15: View {
                                 if !cantonese.isEmpty && !pronunciations.isEmpty {
                                         Section {
                                                 Button {
-                                                        Speaker.speak(cantonese)
+                                                        Speech.speak(cantonese)
                                                 } label: {
                                                         HStack {
                                                                 Text(verbatim: cantonese).foregroundColor(.primary)
@@ -61,7 +61,7 @@ struct HomeView_iOS15: View {
                                                 }
                                                 ForEach(pronunciations, id: \.self) { romanization in
                                                         Button {
-                                                                Speaker.speak(romanization)
+                                                                Speech.speak(romanization)
                                                         } label: {
                                                                 HStack(spacing: 16) {
                                                                         Text(verbatim: romanization).foregroundColor(.primary)

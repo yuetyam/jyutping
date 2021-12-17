@@ -44,7 +44,7 @@ struct JyutpingView_iOS15: View {
                                 } else if !submittedText.isEmpty {
                                         Section {
                                                 Button {
-                                                        Speaker.speak(cantonese)
+                                                        Speech.speak(cantonese)
                                                 } label: {
                                                         HStack {
                                                                 Text(verbatim: cantonese).foregroundColor(.primary)
@@ -54,7 +54,7 @@ struct JyutpingView_iOS15: View {
                                                 }
                                                 ForEach(pronunciations, id: \.self) { romanization in
                                                         Button {
-                                                                Speaker.speak(romanization)
+                                                                Speech.speak(romanization)
                                                         } label: {
                                                                 HStack(spacing: 16) {
                                                                         Text(verbatim: romanization).foregroundColor(.primary)

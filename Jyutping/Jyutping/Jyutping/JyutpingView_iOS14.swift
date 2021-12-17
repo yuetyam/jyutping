@@ -32,7 +32,7 @@ struct JyutpingView_iOS14: View {
                                 } else if !inputText.isEmpty {
                                         Section {
                                                 Button {
-                                                        Speaker.speak(rawCantonese)
+                                                        Speech.speak(rawCantonese)
                                                 } label: {
                                                         HStack {
                                                                 Text(verbatim: rawCantonese).foregroundColor(.primary)
@@ -42,7 +42,7 @@ struct JyutpingView_iOS14: View {
                                                 }
                                                 ForEach(jyutpings, id: \.self) { jyutping in
                                                         Button {
-                                                                Speaker.speak(jyutping)
+                                                                Speech.speak(jyutping)
                                                         } label: {
                                                                 HStack(spacing: 16) {
                                                                         Text(verbatim: jyutping).foregroundColor(.primary)

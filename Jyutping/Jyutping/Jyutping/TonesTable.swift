@@ -47,7 +47,7 @@ struct TonesTable: View {
                         */
 
                         if #available(iOS 15.0, *) {
-                                if !(Speaker.isLanguagesEnabled) {
+                                if !(Speech.isLanguagesEnabled) {
                                         Section {
                                                 Text("爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言").padding(.vertical, 4)
                                                 Text("爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音").padding(.vertical, 4)
@@ -112,7 +112,7 @@ private struct ToneCell: View {
         var body: some View {
                 Button(action: {
                         if !syllable.isEmpty {
-                                Speaker.speak(syllable)
+                                Speech.speak(syllable)
                         }
                 }) {
                         if #available(iOS 15.0, *) {

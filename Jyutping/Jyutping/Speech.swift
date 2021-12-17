@@ -1,6 +1,6 @@
 import AVFoundation
 
-struct Speaker {
+struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
         static func speak(_ text: String) {
