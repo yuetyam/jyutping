@@ -1,0 +1,115 @@
+// Traditional Chinese, Taiwan (zh-Hant-TW)
+
+// System
+"Settings" = "設定";
+"General" = "一般";
+"Keyboards" = "鍵盤";
+"Add New Keyboards..." = "新增鍵盤 ··· ";
+"Edit" = "編輯";
+"Copy" = "拷貝";
+
+
+// Tab Bar
+"Home" = "首䈎";
+"Keyboard" = "鍵盤";
+"Jyutping" = "粵拼";
+"Search" = "檢索";
+"About" = "關於";
+
+
+// Home
+"Text Field" = "輸入框";
+
+// iOS 15
+"Jump to **Settings**" = "跳轉至 **設定**";
+"Tap **Keyboards**" = "點選 **鍵盤**";
+"Turn on **Jyutping**" = "開啟 **粵拼**";
+"Turn on **Allow Full Access**" = "開啟 **允許完整取用**";
+"Haptic Feedback requires Full Access" = "振動反饋 Haptic Feedback 需要「完整取用」權限";
+"Go to **Settings**" = "前往 **設定**";
+
+"How to enable this Keyboard" = "如何啟用鍵盤";
+"Jump to" = "跳轉至";
+"Tap" = "點選";
+"Turn on" = "開啟";
+"Allow Full Access" = "允許完整取用";
+"How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "如何啓用鍵盤。一：跳轉至「設定」，二：選擇「鍵盤」， 三：開啟「粵拼」，四：開啟「允許完整取用」";
+
+"Go to" = "前往";
+
+"Tones Input" = "聲調輸入";
+"v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
+
+"Lookup Jyutping with Cangjie" = "用倉頡反查粵拼";
+"以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。" = "以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
+
+"Lookup Jyutping with Stroke" = "用筆畫輸入反查粵拼";
+"以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。" = "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。";
+
+"Lookup Jyutping with Pinyin" = "用普通話拼音反查粵拼";
+"以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
+
+"More Introductions" = "更多介紹";
+"title.introductions" = "更多介紹";
+"Period (Full Stop) Shortcut" = "快捷輸入句號";
+"Double tapping the space bar will insert a period followed by a space" = "雙擊空格鍵 (space)\n快捷輸入句號「。」";
+
+"Cantonese Expressions" = "粵語用字參考";
+"title.expressions" = "粵語用字參考";
+
+"Frequently Asked Questions" = "常問問題（FAQ）";
+"FAQ" = "常問問題";
+"Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
+"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，第三方輸入法係冇辦法使用外置鍵盤嘅，並非開發者有意爲之。";
+"What does “Allow Full Access” do?" = "開啟「完整取用」作何用？";
+"Enable a button on the keyboard for pasting texts from Clipboard" = "開啓之後，鍵盤上部會多一個「帖上」掣，方便一鍵帖上剪帖板內容";
+"Haptic Feedback" = "振動反饋（Haptic Feedback）";
+"Paste texts from Clipboard" = "鍵盤上部會有個「帖上」掣";
+"All other features don't require Full Access" = "毋開啟「完整取用」毋會影響使用其他功能";
+
+
+// Search
+"Lookup Jyutping for Cantonese" = "鍵入粵語字詞檢索其粵拼";
+"No Results." = "無結果";
+"Common Cantonese words only." = "只可檢索常見粵語字詞";
+
+"Jyutping Initials" = "粵拼聲母表";
+"Jyutping Finals" = "粵拼韻母表";
+"Jyutping Tones" = "粵拼聲調表";
+"本應用程式使用系統提供个語音朗讀功能" = "本應用程式使用系統提供个語音朗讀功能";
+"爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言";
+"爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音";
+
+"Search on other places (websites)" = "其它可供檢索嘅網站";
+"Jyutping Resources" = "粵拼資源網站";
+"Jyutping - LSHK" = "粵拼 - LSHK";
+"Learn Jyutping" = "學粵拼";
+
+"Cantonese Resources" = "粵語相關網站";
+
+
+// About
+"Version" = "版本";
+
+"Website" = "網站";
+"Source Code" = "原始碼";
+"Terms of Use" = "使用條款";
+"Privacy Policy" = "隱私政策";
+
+"Telegram Group" = "加入 Telegram 群組";
+"TRUTH Social" = "關注 TRUTH Social";
+"Instagram" = "關注 Instagram";
+"GitHub Issues" = "GitHub Issues";
+
+"Copy URL" = "拷貝網址";
+"Copy Username" = "拷貝戶名";
+
+"Email Feedback" = "郵件反饋";
+"Unable to compose mail" = "無法編寫郵件";
+"Mail Unavailable" = "郵件不可用";
+"OK" = "好";
+"Copy Email Address" = "拷貝郵件地址";
+
+"Review on the App Store" = "前往 App Store 點評";
+"Share this App" = "分享本應用程式";
+"Copy App Store link" = "拷貝 App Store 鏈結";
