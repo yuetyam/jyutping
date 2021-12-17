@@ -50,27 +50,19 @@ struct HomeView_iOS15: View {
                                 }
                                 if !cantonese.isEmpty && !pronunciations.isEmpty {
                                         Section {
-                                                Button {
-                                                        Speech.speak(cantonese)
-                                                } label: {
-                                                        HStack {
-                                                                Text(verbatim: cantonese).foregroundColor(.primary)
-                                                                Spacer()
-                                                                Image.speaker
-                                                        }
+                                                HStack {
+                                                        Text(verbatim: cantonese)
+                                                        Spacer()
+                                                        Speaker(cantonese)
                                                 }
                                                 ForEach(pronunciations, id: \.self) { romanization in
-                                                        Button {
-                                                                Speech.speak(romanization)
-                                                        } label: {
-                                                                HStack(spacing: 16) {
-                                                                        Text(verbatim: romanization).foregroundColor(.primary)
-                                                                        if cantonese.count == 1 {
-                                                                                Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
-                                                                        }
-                                                                        Spacer()
-                                                                        Image.speaker
+                                                        HStack(spacing: 16) {
+                                                                Text(verbatim: romanization)
+                                                                if cantonese.count == 1 {
+                                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
                                                                 }
+                                                                Spacer()
+                                                                Speaker(romanization)
                                                         }
                                                 }
                                         }
