@@ -1,5 +1,3 @@
-import Foundation
-
 extension String {
 
         /// Returns a new String made by removing `.whitespacesAndNewlines` from both ends of the String.
