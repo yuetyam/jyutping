@@ -30,17 +30,10 @@ struct Speaker: View {
 
         @State private var isSpeaking: Bool = false
         private let length: CGFloat = 30
-        private let speakingImageName: String = {
-                if #available(iOS 14.0, *) {
-                        return "speaker.wave.3.fill"
-                } else {
-                        return "speaker.3.fill"
-                }
-        }()
 
         var body: some View {
                 if isSpeaking {
-                        Image(systemName: speakingImageName)
+                        Image.speaking
                                 .resizable()
                                 .scaledToFit()
                                 .padding(.leading, 6)
