@@ -4,13 +4,16 @@ struct TonesTable: View {
 
         @Environment(\.horizontalSizeClass) var horizontalSize
         private let isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
+        private let offset: CGFloat = {
+                if #available(iOS 14.0, *) {
+                        return 64
+                } else {
+                        return 32
+                }
+        }()
         private var width: CGFloat {
                 guard isPad else {
-                        if #available(iOS 15.0, *) {
-                                return (UIScreen.main.bounds.width - 64) / 4.0
-                        } else {
-                                return (UIScreen.main.bounds.width - 32) / 4.0
-                        }
+                        return (UIScreen.main.bounds.width - offset) / 4.0
                 }
                 if horizontalSize == .compact {
                         return 80
@@ -20,13 +23,13 @@ struct TonesTable: View {
         }
 
         var body: some View {
-                List {
-                        Section {
-                                ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
-                                        ToneCell($0, width: width)
+                if #available(iOS 15.0, *) {
+                        List {
+                                Section {
+                                        ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
+                                                ToneCell($0, width: width).textSelection(.enabled)
+                                        }
                                 }
-                        }
-                        if #available(iOS 15.0, *) {
                                 if !(Speech.isLanguagesEnabled) {
                                         Section {
                                                 Text("爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言").padding(.vertical, 4)
@@ -36,9 +39,30 @@ struct TonesTable: View {
                                         }
                                 }
                         }
+                        .navigationTitle("Jyutping Tones")
+                        .navigationBarTitleDisplayMode(.inline)
+
+                } else if #available(iOS 14.0, *) {
+                        List {
+                                ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
+                                        ToneCell($0, width: width)
+                                }
+                        }
+                        .listStyle(.insetGrouped)
+                        .navigationTitle("Jyutping Tones")
+                        .navigationBarTitleDisplayMode(.inline)
+
+                } else {
+                        List {
+                                ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
+                                        ToneCell($0, width: width)
+                                }
+                        }
+                        .listStyle(.grouped)
+                        .navigationBarTitle("Jyutping Tones", displayMode: .inline)
                 }
-                .navigationBarTitle("Jyutping Tones", displayMode: .inline)
         }
+
 
 private let dataSource: String = """
 例字,調值,聲調,粵拼
@@ -77,35 +101,18 @@ private struct ToneCell: View {
         private let syllable: String
 
         var body: some View {
-                if #available(iOS 15.0, *) {
-                        HStack {
-                                HStack(spacing: 8) {
-                                        Text(verbatim: components[0])
-                                        if !syllable.isEmpty {
-                                                Speaker(syllable)
-                                        }
+                HStack {
+                        HStack(spacing: 8) {
+                                Text(verbatim: components[0])
+                                if !syllable.isEmpty {
+                                        Speaker(syllable)
                                 }
-                                .frame(width: width + 25, alignment: .leading)
-                                Text(verbatim: components[1]).frame(width: width - 14, alignment: .leading)
-                                Text(verbatim: components[2]).frame(width: width - 14, alignment: .leading)
-                                Text(verbatim: components[3])
-                                Spacer()
                         }
-                        .textSelection(.enabled)
-                } else {
-                        HStack {
-                                HStack(spacing: 8) {
-                                        Text(verbatim: components[0])
-                                        if !syllable.isEmpty {
-                                                Speaker(syllable)
-                                        }
-                                }
-                                .frame(width: width + 25, alignment: .leading)
-                                Text(verbatim: components[1]).frame(width: width - 14, alignment: .leading)
-                                Text(verbatim: components[2]).frame(width: width - 14, alignment: .leading)
-                                Text(verbatim: components[3])
-                                Spacer()
-                        }
+                        .frame(width: width + 25, alignment: .leading)
+                        Text(verbatim: components[1]).frame(width: width - 14, alignment: .leading)
+                        Text(verbatim: components[2]).frame(width: width - 14, alignment: .leading)
+                        Text(verbatim: components[3])
+                        Spacer()
                 }
         }
 }
