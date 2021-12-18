@@ -1,12 +1,11 @@
 import SwiftUI
-import AVFoundation
 
 struct TonesTable: View {
 
         @Environment(\.horizontalSizeClass) var horizontalSize
-
+        private let isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
         private var width: CGFloat {
-                guard UITraitCollection.current.userInterfaceIdiom == .pad else {
+                guard isPad else {
                         if #available(iOS 15.0, *) {
                                 return (UIScreen.main.bounds.width - 64) / 4.0
                         } else {
@@ -23,29 +22,10 @@ struct TonesTable: View {
         var body: some View {
                 List {
                         Section {
-                                ForEach(part_0.components(separatedBy: .newlines), id: \.self) {
+                                ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
                                         ToneCell($0, width: width)
                                 }
                         }
-
-                        /*
-                        Section {
-                                ForEach(part_0.components(separatedBy: .newlines), id: \.self) {
-                                        ToneCell($0, width: width)
-                                }
-                        } header: {
-                                Text("例一")
-                        }
-
-                        Section {
-                                ForEach(part_1.components(separatedBy: .newlines), id: \.self) {
-                                        ToneCell($0, width: width)
-                                }
-                        } header: {
-                                Text("例二")
-                        }
-                        */
-
                         if #available(iOS 15.0, *) {
                                 if !(Speech.isLanguagesEnabled) {
                                         Section {
@@ -60,7 +40,7 @@ struct TonesTable: View {
                 .navigationBarTitle("Jyutping Tones", displayMode: .inline)
         }
 
-private let part_0: String = """
+private let dataSource: String = """
 例字,調值,聲調,粵拼
 芬 fan1,55/53,陰平,1
 粉 fan2,35,陰上,2
@@ -71,19 +51,6 @@ private let part_0: String = """
 忽 fat1,5,高陰入,1
 沷 fat3,3,低陰入,3
 罰 fat6,2,陽入,6
-"""
-
-private let part_1: String = """
-例字,調值,聲調,粵拼
-威 wai1,55/53,陰平,1
-委 wai2,35,陰上,2
-餵 wai3,33,陰去,3
-圍 wai4,11/21,陽平,4
-偉 wai5,13/23,陽上,5
-惠 wai6,22,陽去,6
-鬱 wat1,5,高陰入,1
-挖 waat3,3,低陰入,3
-核 wat6,2,陽入,6
 """
 
 }
@@ -98,8 +65,8 @@ struct TonesTable_Previews: PreviewProvider {
 
 private struct ToneCell: View {
 
-        init(_ content: String, width: CGFloat) {
-                let parts: [String] = content.components(separatedBy: ",")
+        init(_ line: String, width: CGFloat) {
+                let parts: [String] = line.components(separatedBy: ",")
                 self.components = parts
                 self.width = width
                 self.syllable = String(parts[0].dropFirst(2))
@@ -110,42 +77,34 @@ private struct ToneCell: View {
         private let syllable: String
 
         var body: some View {
-                Button(action: {
-                        if !syllable.isEmpty {
-                                Speech.speak(syllable)
+                if #available(iOS 15.0, *) {
+                        HStack {
+                                HStack(spacing: 8) {
+                                        Text(verbatim: components[0])
+                                        if !syllable.isEmpty {
+                                                Speaker(syllable)
+                                        }
+                                }
+                                .frame(width: width + 25, alignment: .leading)
+                                Text(verbatim: components[1]).frame(width: width - 14, alignment: .leading)
+                                Text(verbatim: components[2]).frame(width: width - 14, alignment: .leading)
+                                Text(verbatim: components[3])
+                                Spacer()
                         }
-                }) {
-                        if #available(iOS 15.0, *) {
-                                HStack {
-                                        HStack(spacing: 8) {
-                                                Text(verbatim: components[0])
-                                                if !syllable.isEmpty {
-                                                        Image.speaker.foregroundColor(.blue)
-                                                }
+                        .textSelection(.enabled)
+                } else {
+                        HStack {
+                                HStack(spacing: 8) {
+                                        Text(verbatim: components[0])
+                                        if !syllable.isEmpty {
+                                                Speaker(syllable)
                                         }
-                                        .frame(width: width + 16, alignment: .leading)
-                                        Text(verbatim: components[1]).frame(width: width - 10, alignment: .leading)
-                                        Text(verbatim: components[2]).frame(width: width - 8, alignment: .leading)
-                                        Text(verbatim: components[3])
-                                        Spacer()
                                 }
-                                .foregroundColor(.primary)
-                                .textSelection(.enabled)
-                        } else {
-                                HStack {
-                                        HStack(spacing: 8) {
-                                                Text(verbatim: components[0])
-                                                if !syllable.isEmpty {
-                                                        Image.speaker.foregroundColor(.blue)
-                                                }
-                                        }
-                                        .frame(width: width + 16, alignment: .leading)
-                                        Text(verbatim: components[1]).frame(width: width - 10, alignment: .leading)
-                                        Text(verbatim: components[2]).frame(width: width - 8, alignment: .leading)
-                                        Text(verbatim: components[3])
-                                        Spacer()
-                                }
-                                .foregroundColor(.primary)
+                                .frame(width: width + 25, alignment: .leading)
+                                Text(verbatim: components[1]).frame(width: width - 14, alignment: .leading)
+                                Text(verbatim: components[2]).frame(width: width - 14, alignment: .leading)
+                                Text(verbatim: components[3])
+                                Spacer()
                         }
                 }
         }
