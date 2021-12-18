@@ -27,27 +27,25 @@ struct HomeView_iOS14: View {
                                 }
                                 if !inputText.isEmpty && !jyutpings.isEmpty {
                                         Section {
-                                                Button {
-                                                        Speech.speak(rawCantonese)
-                                                } label: {
-                                                        HStack {
-                                                                Text(verbatim: rawCantonese).foregroundColor(.primary)
-                                                                Spacer()
-                                                                Image.speaker
-                                                        }
+                                                HStack {
+                                                        Text(verbatim: rawCantonese)
+                                                        Spacer()
+                                                        Speaker(rawCantonese)
                                                 }
-                                                ForEach(jyutpings, id: \.self) { jyutping in
-                                                        Button {
-                                                                Speech.speak(jyutping)
-                                                        } label: {
-                                                                HStack(spacing: 16) {
-                                                                        Text(verbatim: jyutping).foregroundColor(.primary)
-                                                                        if rawCantonese.count == 1 {
-                                                                                Text(verbatim: Syllable2IPA.IPAText(jyutping)).foregroundColor(.secondary)
-                                                                        }
-                                                                        Spacer()
-                                                                        Image.speaker
+                                                .contextMenu {
+                                                        MenuCopyButton(rawCantonese)
+                                                }
+                                                ForEach(jyutpings, id: \.self) { romanization in
+                                                        HStack(spacing: 16) {
+                                                                Text(verbatim: romanization)
+                                                                if rawCantonese.count == 1 {
+                                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
                                                                 }
+                                                                Spacer()
+                                                                Speaker(romanization)
+                                                        }
+                                                        .contextMenu {
+                                                                MenuCopyButton(romanization)
                                                         }
                                                 }
                                         }
