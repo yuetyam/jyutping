@@ -28,7 +28,7 @@
 		3759F488262FC27100266086 /* LinkSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F480262FC27100266086 /* LinkSafariView.swift */; };
 		3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F482262FC27100266086 /* ShareSheetView.swift */; };
 		3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F483262FC27100266086 /* EnhancedTextField.swift */; };
-		3759F492262FC2B600266086 /* SyllablesTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* SyllablesTables.swift */; };
+		3759F492262FC2B600266086 /* FinalsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48D262FC2B600266086 /* FinalsTable.swift */; };
 		3759F494262FC2B600266086 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F48F262FC2B600266086 /* HomeView.swift */; };
 		3759F495262FC2B600266086 /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F490262FC2B600266086 /* JyutpingView.swift */; };
 		3759F496262FC2B600266086 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F491262FC2B600266086 /* AboutView.swift */; };
@@ -78,6 +78,8 @@
 		3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */; };
 		3791B3012634E92B00562137 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3791B3002634E92B00562137 /* UserLexicon.swift */; };
 		379E95922742CF1D00199A58 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E95912742CF1D00199A58 /* Operation.swift */; };
+		37A02AA7276DEC47001ED1E7 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A02AA6276DEC47001ED1E7 /* InitialsTable.swift */; };
+		37A02AA9276DF4EF001ED1E7 /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A02AA8276DF4EF001ED1E7 /* SyllableCell.swift */; };
 		37A598C5275249B20025A008 /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A598C4275249B20025A008 /* KeyboardInterface.swift */; };
 		37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B19F2527395B6E00DD8A8E /* Logogram.swift */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
@@ -164,7 +166,7 @@
 		3759F480262FC27100266086 /* LinkSafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkSafariView.swift; sourceTree = "<group>"; };
 		3759F482262FC27100266086 /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		3759F483262FC27100266086 /* EnhancedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
-		3759F48D262FC2B600266086 /* SyllablesTables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllablesTables.swift; sourceTree = "<group>"; };
+		3759F48D262FC2B600266086 /* FinalsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalsTable.swift; sourceTree = "<group>"; };
 		3759F48F262FC2B600266086 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		3759F490262FC2B600266086 /* JyutpingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
 		3759F491262FC2B600266086 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,8 @@
 		3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		3791B3002634E92B00562137 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		379E95912742CF1D00199A58 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		37A02AA6276DEC47001ED1E7 /* InitialsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
+		37A02AA8276DF4EF001ED1E7 /* SyllableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllableCell.swift; sourceTree = "<group>"; };
 		37A598C4275249B20025A008 /* KeyboardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
 		37B19F2527395B6E00DD8A8E /* Logogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
@@ -494,7 +498,9 @@
 				37718D1826F2E73800B68A5B /* JyutpingView_iOS14.swift */,
 				378FEA47270C17CC00153488 /* JyutpingView_iOS15.swift */,
 				378FEA45270C15A200153488 /* Sections.swift */,
-				3759F48D262FC2B600266086 /* SyllablesTables.swift */,
+				37A02AA6276DEC47001ED1E7 /* InitialsTable.swift */,
+				3759F48D262FC2B600266086 /* FinalsTable.swift */,
+				37A02AA8276DF4EF001ED1E7 /* SyllableCell.swift */,
 				3738EBFF2704CF9A00E75BDF /* TonesTable.swift */,
 			);
 			path = Jyutping;
@@ -730,13 +736,15 @@
 				3759F494262FC2B600266086 /* HomeView.swift in Sources */,
 				377236682719FB86007F9AB9 /* ExpressionsView.swift in Sources */,
 				377B86FB270F278B0065CBEF /* ImageExtensions.swift in Sources */,
+				37A02AA9276DF4EF001ED1E7 /* SyllableCell.swift in Sources */,
 				376140EE27622368008BAFDE /* TextExtensions.swift in Sources */,
 				3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */,
 				375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */,
 				3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */,
-				3759F492262FC2B600266086 /* SyllablesTables.swift in Sources */,
+				3759F492262FC2B600266086 /* FinalsTable.swift in Sources */,
 				37718D1926F2E73800B68A5B /* JyutpingView_iOS14.swift in Sources */,
 				3772366A271A0018007F9AB9 /* IntroductionsView.swift in Sources */,
+				37A02AA7276DEC47001ED1E7 /* InitialsTable.swift in Sources */,
 				37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */,
 				3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */,
 				3791B2FF2633B9DB00562137 /* UIDevice+modelName.swift in Sources */,
