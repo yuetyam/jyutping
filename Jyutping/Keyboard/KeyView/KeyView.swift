@@ -103,6 +103,8 @@ final class KeyView: UIView {
                         shape.backgroundColor = highlightingBackColor
                 case .switchTo(let newLayout):
                         controller.operate(.switchTo(newLayout))
+                default:
+                        break
                 }
         }
 

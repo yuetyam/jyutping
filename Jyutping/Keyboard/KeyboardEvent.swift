@@ -9,6 +9,20 @@ enum KeyboardEvent: Hashable {
              switchInputMethod,
              shadowKey(String),
              shadowBackspace
+
+        // case backspace
+        case capsLock
+        case emoji
+        case keyboard
+        case globe
+        // case none
+        case `return`
+        indirect case shadow(KeyboardEvent)
+        // case shift
+        // case space
+        case tab
+        case text(KeySeat)
+        case transform(KeyboardIdiom)
 }
 
 struct KeySeat: Hashable {
@@ -21,7 +35,9 @@ struct KeySeat: Hashable {
                 self.children = children
         }
 
-        var hasChildren: Bool { !children.isEmpty }
+        var hasChildren: Bool {
+                return !children.isEmpty
+        }
 
         static let period: KeySeat = {
                 let period: KeyElement = KeyElement(".")
