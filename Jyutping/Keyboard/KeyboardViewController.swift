@@ -285,7 +285,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .doubleShift:
                         AudioFeedback.perform(.modify)
                         keyboardIdiom = keyboardIdiom.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
-                case .switchTo(let newLayout):
+                case .transform(let newLayout):
                         AudioFeedback.perform(.modify)
                         keyboardIdiom = newLayout
                 case .select(let candidate):

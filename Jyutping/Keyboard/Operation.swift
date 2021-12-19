@@ -9,6 +9,6 @@ enum Operation: Hashable {
         case `return`
         case shift
         case doubleShift
-        case switchTo(KeyboardIdiom)
+        case transform(KeyboardIdiom)
         case select(Candidate)
 }

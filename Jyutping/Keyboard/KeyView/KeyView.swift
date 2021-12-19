@@ -109,7 +109,7 @@ final class KeyView: UIView {
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
                 case .transform(let newLayout):
-                        controller.operate(.switchTo(newLayout))
+                        controller.operate(.transform(newLayout))
                 default:
                         break
                 }
