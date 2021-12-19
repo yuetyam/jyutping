@@ -17,13 +17,13 @@ struct Speaker: View {
                         if #available(iOS 15.0, *) {
                                 return Color(uiColor: UIColor.systemBackground)
                         } else {
-                                return Color.black
+                                return Color(UIColor.systemBackground)
                         }
                 default:
                         if #available(iOS 15.0, *) {
                                 return Color(uiColor: UIColor.secondarySystemBackground)
                         } else {
-                                return Color(.displayP3, red: 242.0 / 255.0, green: 242.0 / 255.0, blue: 247.0 / 255.0)
+                                return Color(UIColor.secondarySystemBackground)
                         }
                 }
         }
