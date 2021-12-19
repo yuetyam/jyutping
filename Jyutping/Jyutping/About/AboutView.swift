@@ -180,8 +180,8 @@ struct EmailFeedbackButton: View {
                 let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
                 let version: String = versionString + " (" + buildString + ")"
 
-                let device: String = UIDevice.modelName
-                let system: String = UIDevice.current.systemName + " " + UIDevice.current.systemVersion
+                let device: String = Device.modelName
+                let system: String = Device.system
                 let messageBody: String = """
 
 
