@@ -17,14 +17,14 @@ enum AudioFeedback {
         static func play(for keyboardEvent: KeyboardEvent) {
                 guard isAudioFeedbackOn else { return }
                 switch keyboardEvent {
-                case .input, .hidden(.text):
+                case .none:
+                        break
+                case .input, .text, .hidden(.text), .space, .tab:
                         AudioServicesPlaySystemSound(Self.input.soundID)
                 case .backspace, .hidden(.backspace):
                         AudioServicesPlaySystemSound(Self.delete.soundID)
-                case .transform, .newLine, .shift:
+                case .capsLock, .emoji, .globe, .keyboard, .newLine, .shift, .transform:
                         AudioServicesPlaySystemSound(Self.modify.soundID)
-                case .none:
-                        break
                 default:
                         AudioServicesPlaySystemSound(Self.input.soundID)
                 }
