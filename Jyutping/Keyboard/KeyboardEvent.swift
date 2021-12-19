@@ -7,8 +7,8 @@ enum KeyboardEvent: Hashable {
              shift,
              transform(KeyboardIdiom),
              globe,
-             shadowKey(String),
-             shadowBackspace
+             shadowKey(String)
+             // shadowBackspace
 
         // case backspace
         case capsLock

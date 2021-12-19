@@ -47,7 +47,7 @@ private extension KeyboardIdiom {
                 eventRows[1].append(.shadowKey("l"))
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
@@ -69,7 +69,7 @@ private extension KeyboardIdiom {
                 eventRows[1].append(.shadowKey("L"))
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
@@ -181,7 +181,7 @@ private extension KeyboardIdiom {
                 eventRows[1].append(.shadowKey("l"))
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 if needsGWKW {
                         let keyGW: KeyboardEvent = {
@@ -291,7 +291,7 @@ private extension KeyboardIdiom {
                 eventRows[1].append(.shadowKey("L"))
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 if needsGWKW {
                         let keyGW: KeyboardEvent = {
@@ -330,7 +330,7 @@ private extension KeyboardIdiom {
                 eventRows[1].append(.shadowKey("l"))
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .key(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
@@ -352,7 +352,7 @@ private extension KeyboardIdiom {
                 eventRows[1].append(.shadowKey("L"))
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .key(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
@@ -936,7 +936,7 @@ private extension KeyboardIdiom {
                 eventRows[2] = third
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
@@ -977,7 +977,7 @@ private extension KeyboardIdiom {
                 eventRows[2] = third
                 eventRows[2].insert(.shift, at: 0)
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
-                eventRows[2].append(.shadowBackspace)
+                eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?

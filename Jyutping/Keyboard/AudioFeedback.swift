@@ -19,7 +19,7 @@ enum AudioFeedback {
                 switch keyboardEvent {
                 case .key, .shadowKey:
                         AudioServicesPlaySystemSound(Self.input.soundID)
-                case .backspace, .shadowBackspace:
+                case .backspace, .hidden(.backspace):
                         AudioServicesPlaySystemSound(Self.delete.soundID)
                 case .transform, .newLine, .shift:
                         AudioServicesPlaySystemSound(Self.modify.soundID)

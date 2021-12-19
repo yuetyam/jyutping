@@ -18,7 +18,7 @@ final class KeyView: UIView {
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
                 switch event {
-                case .none, .shadowKey, .shadowBackspace:
+                case .none, .shadowKey, .hidden(.backspace):
                         break
                 case .backspace, .shift:
                         setupKeyShapeView()
@@ -83,7 +83,7 @@ final class KeyView: UIView {
                         shape.backgroundColor = highlightingBackColor
                         backspaceTouchPoint = touches.first?.location(in: self) ?? .zero
                         handleBackspace()
-                case .shadowBackspace:
+                case .hidden(.backspace):
                         handleBackspace()
                 case .space:
                         spaceTouches = spaceTouches.first ? (true, true) : (true, false)
