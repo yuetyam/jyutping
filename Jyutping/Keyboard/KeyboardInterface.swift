@@ -8,12 +8,6 @@ enum KeyboardInterface: Hashable {
         /// Keyboard floating on iPad
         case padFloating
 
-        /// App for iPhone only, runs on iPad. iPad portrait mode
-        case phoneAppOnPadPortrait
-
-        /// App for iPhone only, runs on iPad. iPad landscape mode
-        case phoneAppOnPadLandscape
-
         /// `KeyboardInterface == .phonePortrait || .phoneLandscape || .padFloating`
         var isCompact: Bool {
                 switch self {

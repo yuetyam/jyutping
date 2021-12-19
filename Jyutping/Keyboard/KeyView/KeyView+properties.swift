@@ -47,10 +47,6 @@ extension KeyView {
                                 // iPhone 12 Pro Max, 13 Pro Max (428 x 926)
                                 return 55
                         }
-                case .phoneAppOnPadPortrait:
-                        return 55
-                case .phoneAppOnPadLandscape:
-                        return 55
                 }
         }
 

@@ -115,10 +115,6 @@ extension KeyView {
                                 return constant
                         case .padFloating:
                                 return constant
-                        case .phoneAppOnPadPortrait:
-                                return constant
-                        case .phoneAppOnPadLandscape:
-                                return constant
                         }
                 }()
                 shape.addSubview(keyImageView)
