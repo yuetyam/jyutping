@@ -107,7 +107,7 @@ extension KeyView {
                         return nil
                 }
         }
-        private var newLineKeyText: String {
+        private var newLineKeyText: String? {
                 guard !layout.isEnglishMode else {
                         guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return "return" }
                         switch returnKeyType {
@@ -140,12 +140,12 @@ extension KeyView {
                         }
                 }
                 guard Logogram.current != .simplified else {
-                        guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return "换行" }
+                        guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return nil }
                         switch returnKeyType {
                         case .continue:
                                 return "继续"
                         case .default:
-                                return "换行"
+                                return nil
                         case .done:
                                 return "完成"
                         case .emergencyCall:
@@ -167,15 +167,15 @@ extension KeyView {
                         case .yahoo:
                                 return "雅虎"
                         @unknown default:
-                                return "换行"
+                                return nil
                         }
                 }
-                guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return "換行" }
+                guard let returnKeyType: UIReturnKeyType = controller.textDocumentProxy.returnKeyType else { return nil }
                 switch returnKeyType {
                 case .continue:
                         return "繼續"
                 case .default:
-                        return "換行"
+                        return nil
                 case .done:
                         return "完成"
                 case .emergencyCall:
@@ -197,7 +197,7 @@ extension KeyView {
                 case .yahoo:
                         return "雅虎"
                 @unknown default:
-                        return "換行"
+                        return nil
                 }
         }
 
@@ -216,6 +216,8 @@ extension KeyView {
                         default:
                                 return "shift"
                         }
+                case .newLine:
+                        return "return"
                 default:
                         return nil
                 }

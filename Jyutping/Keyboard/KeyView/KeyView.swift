@@ -34,6 +34,13 @@ final class KeyView: UIView {
                         setupKeyShapeView()
                         setupKeyTextLabel()
                         setupKeyFooterLabel(text: "分隔", alignment: .center)
+                case .newLine:
+                        setupKeyShapeView()
+                        if keyText == nil {
+                                setupKeyImageView()
+                        } else {
+                                setupKeyTextLabel()
+                        }
                 default:
                         setupKeyShapeView()
                         setupKeyTextLabel()
