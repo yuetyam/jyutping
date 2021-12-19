@@ -4,7 +4,7 @@ extension KeyView {
 
         var width: CGFloat {
                 switch event {
-                case .none, .shadowKey, .hidden(.backspace):
+                case .none, .hidden(.text), .hidden(.backspace):
                         return 10
                 case .backspace, .shift, .transform:
                         return 50

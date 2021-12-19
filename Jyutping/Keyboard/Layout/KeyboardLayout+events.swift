@@ -41,12 +41,12 @@ private extension KeyboardIdiom {
                         ["z", "x", "c", "v", "b", "n", "m"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].append(.shadowKey("l"))
-                eventRows[1].append(.shadowKey("l"))
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].append(.hidden(.text("l")))
+                eventRows[1].append(.hidden(.text("l")))
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("z"), at: 1)
+                eventRows[2].insert(.hidden(.text("z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .input(.cantoneseComma)
@@ -63,12 +63,12 @@ private extension KeyboardIdiom {
                         ["Z", "X", "C", "V", "B", "N", "M"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].append(.shadowKey("L"))
-                eventRows[1].append(.shadowKey("L"))
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].append(.hidden(.text("L")))
+                eventRows[1].append(.hidden(.text("L")))
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("Z"), at: 1)
+                eventRows[2].insert(.hidden(.text("Z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .input(.cantoneseComma)
@@ -175,12 +175,12 @@ private extension KeyboardIdiom {
                 eventRows[1][4] = second_4
                 eventRows[1][7] = second_7
                 eventRows[2] = [third_0, third_1, third_2, third_3, third_4, third_5, third_6]
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].append(.shadowKey("l"))
-                eventRows[1].append(.shadowKey("l"))
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].append(.hidden(.text("l")))
+                eventRows[1].append(.hidden(.text("l")))
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("z"), at: 1)
+                eventRows[2].insert(.hidden(.text("z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 if needsGWKW {
@@ -285,12 +285,12 @@ private extension KeyboardIdiom {
                 eventRows[0][3] = first_3
                 eventRows[0][5] = first_5
                 eventRows[2] = [third_0, third_1, third_2, third_3, third_4, third_5, third_6]
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].append(.shadowKey("L"))
-                eventRows[1].append(.shadowKey("L"))
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].append(.hidden(.text("L")))
+                eventRows[1].append(.hidden(.text("L")))
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("Z"), at: 1)
+                eventRows[2].insert(.hidden(.text("Z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 if needsGWKW {
@@ -324,12 +324,12 @@ private extension KeyboardIdiom {
                         ["z", "x", "c", "v", "b", "n", "m"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].append(.shadowKey("l"))
-                eventRows[1].append(.shadowKey("l"))
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].append(.hidden(.text("l")))
+                eventRows[1].append(.hidden(.text("l")))
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("z"), at: 1)
+                eventRows[2].insert(.hidden(.text("z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .input(.period)
@@ -346,12 +346,12 @@ private extension KeyboardIdiom {
                         ["Z", "X", "C", "V", "B", "N", "M"]
                 ]
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].append(.shadowKey("L"))
-                eventRows[1].append(.shadowKey("L"))
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].append(.hidden(.text("L")))
+                eventRows[1].append(.hidden(.text("L")))
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("Z"), at: 1)
+                eventRows[2].insert(.hidden(.text("Z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .input(.period)
@@ -929,13 +929,13 @@ private extension KeyboardIdiom {
                         return keys + [last]
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].insert(.shadowKey("a"), at: 0)
-                eventRows[1].append(.shadowKey("l"))
-                eventRows[1].append(.shadowKey("l"))
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].insert(.hidden(.text("a")), at: 0)
+                eventRows[1].append(.hidden(.text("l")))
+                eventRows[1].append(.hidden(.text("l")))
                 eventRows[2] = third
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("z"), at: 1)
+                eventRows[2].insert(.hidden(.text("z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .input(.cantoneseComma)
@@ -970,13 +970,13 @@ private extension KeyboardIdiom {
                         return keys + [last]
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].insert(.shadowKey("A"), at: 0)
-                eventRows[1].append(.shadowKey("L"))
-                eventRows[1].append(.shadowKey("L"))
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].insert(.hidden(.text("A")), at: 0)
+                eventRows[1].append(.hidden(.text("L")))
+                eventRows[1].append(.hidden(.text("L")))
                 eventRows[2] = third
                 eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.shadowKey("Z"), at: 1)
+                eventRows[2].insert(.hidden(.text("Z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .input(.cantoneseComma)

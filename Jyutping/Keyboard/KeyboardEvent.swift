@@ -1,18 +1,17 @@
 enum KeyboardEvent: Hashable {
-        case shadowKey(String)
-
         case backspace
         case capsLock
         case emoji
-        case keyboard
         case globe
+        indirect case hidden(KeyboardEvent)
         case input(KeySeat)
+        case keyboard
         case newLine
         case none
-        indirect case hidden(KeyboardEvent)
         case shift
         case space
         case tab
+        case text(String)
         case transform(KeyboardIdiom)
 }
 

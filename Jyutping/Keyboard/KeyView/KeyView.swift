@@ -18,7 +18,7 @@ final class KeyView: UIView {
                 super.init(frame: .zero)
                 backgroundColor = .interactiveClear
                 switch event {
-                case .none, .shadowKey, .hidden(.backspace):
+                case .none, .hidden(.text), .hidden(.backspace):
                         break
                 case .backspace, .shift:
                         setupKeyShapeView()
@@ -64,7 +64,7 @@ final class KeyView: UIView {
                 isInteracting = true
                 peekingText = nil
                 switch self.event {
-                case .none, .shadowKey, .globe:
+                case .none, .hidden(.text), .globe:
                         break
                 case .input(let seat) where seat.hasChildren:
                         if keyboardInterface.isPhonePortrait {
@@ -206,8 +206,8 @@ final class KeyView: UIView {
                         normalize()
                         let text: String = seat.hasChildren ? (peekingText ?? seat.primary.text) : seat.primary.text
                         controller.operate(.input(text))
-                case .shadowKey(let text):
-                        controller.operate(.input(text))
+                case .hidden(.text(let hiddenText)):
+                        controller.operate(.input(hiddenText))
                 default:
                         break
                 }
