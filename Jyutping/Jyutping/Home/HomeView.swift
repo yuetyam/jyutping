@@ -1,5 +1,4 @@
 import SwiftUI
-import AVFoundation
 import LookupData
 
 struct HomeView: View {

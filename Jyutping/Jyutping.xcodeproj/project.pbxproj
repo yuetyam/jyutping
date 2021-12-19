@@ -512,6 +512,7 @@
 				37E234ED271466B8005825A2 /* StringExtensions.swift */,
 				377B86FA270F278B0065CBEF /* ImageExtensions.swift */,
 				376140ED27622368008BAFDE /* TextExtensions.swift */,
+				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -534,7 +535,6 @@
 			children = (
 				3759F491262FC2B600266086 /* AboutView.swift */,
 				37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */,
-				3791B2FE2633B9DB00562137 /* UIDevice+modelName.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";

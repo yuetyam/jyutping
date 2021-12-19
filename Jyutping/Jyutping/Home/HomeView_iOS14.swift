@@ -1,5 +1,4 @@
 import SwiftUI
-import AVFoundation
 import LookupData
 
 @available(iOS 14.0, *)
