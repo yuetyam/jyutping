@@ -14,7 +14,7 @@ extension KeyView {
                         return 72
                 case .space:
                         return 180
-                case .text(.period), .text(.cantoneseComma), .text(.separator):
+                case .input(.period), .input(.cantoneseComma), .input(.separator):
                         return controller.needsInputModeSwitchKey ? 37 : 33
                 default:
                         return 40
@@ -58,7 +58,7 @@ extension KeyView {
                 // https://www.iosfontsizes.com
                 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography
                 switch event {
-                case .text(let seat) where seat.primary.text.count > 1:
+                case .input(let seat) where seat.primary.text.count > 1:
                         switch keyboardInterface {
                         case .padLandscape:
                                 return .systemFont(ofSize: 28)
@@ -67,7 +67,7 @@ extension KeyView {
                         default:
                                 return .systemFont(ofSize: 18)
                         }
-                case .text:
+                case .input:
                         switch keyboardInterface {
                         case .padLandscape:
                                 return .systemFont(ofSize: 30)
@@ -82,7 +82,7 @@ extension KeyView {
         }
         var keyText: String? {
                 switch event {
-                case .text(let seat):
+                case .input(let seat):
                         return seat.primary.text
                 case .space:
                         if layout.isEnglishMode {
@@ -243,7 +243,7 @@ extension KeyView {
         }
         private var deepDarkFantasy: Bool {
                 switch event {
-                case .text, .space:
+                case .input, .space:
                         return false
                 default:
                         return true

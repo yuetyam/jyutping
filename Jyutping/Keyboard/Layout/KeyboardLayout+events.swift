@@ -49,7 +49,7 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .text(.cantoneseComma)
+                let comma: KeyboardEvent = .input(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.transform(.cantoneseNumeric), comma, .space, .newLine]
@@ -71,7 +71,7 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .text(.cantoneseComma)
+                let comma: KeyboardEvent = .input(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.transform(.cantoneseNumeric), comma, .space, .newLine]
@@ -88,7 +88,7 @@ private extension KeyboardIdiom {
                         let primary = KeyElement("aa")
                         let child_0 = KeyElement("q")
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_3: KeyboardEvent = {
                         let primary = KeyElement("oe", header: "eo")
@@ -96,26 +96,26 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("eo")
                         let child_2 = KeyElement("r")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_5: KeyboardEvent = {
                         let primary = KeyElement("yu")
                         let child_0 = KeyElement("y")
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
 
                 let second_4: KeyboardEvent = {
                         let primary = KeyElement("g")
                         let child_0 = KeyElement("gw")
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_7: KeyboardEvent = {
                         let primary = KeyElement("k")
                         let child_0 = KeyElement("kw")
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
 
                 let third_0: KeyboardEvent = {
@@ -123,7 +123,7 @@ private extension KeyboardIdiom {
                         let child_0 = KeyElement("z")
                         let child_1 = KeyElement("1", header: "聲調", footer: "陰平")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_1: KeyboardEvent = {
                         let primary = KeyElement("gw", header: "2")
@@ -132,14 +132,14 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("2", header: "聲調", footer: "陰上")
                         let child_3 = KeyElement("x")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_2: KeyboardEvent = {
                         let primary = KeyElement("c", header: "3")
                         let child_0 = KeyElement("c")
                         let child_1 = KeyElement("3", header: "聲調", footer: "陰去")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_3: KeyboardEvent = {
                         let primary = KeyElement("ng", header: "4")
@@ -147,26 +147,26 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("4", header: "聲調", footer: "陽平")
                         let child_2 = KeyElement("v")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_4: KeyboardEvent = {
                         let primary = KeyElement("b", header: "5")
                         let child_0 = KeyElement("b")
                         let child_1 = KeyElement("5", header: "聲調", footer: "陽上")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_5: KeyboardEvent = {
                         let primary = KeyElement("n", header: "6")
                         let child_0 = KeyElement("n")
                         let child_1 = KeyElement("6", header: "聲調", footer: "陽去")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_6: KeyboardEvent = {
                         let primary = KeyElement("m")
                         let seat = KeySeat(primary: primary)
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
                 eventRows[0][0] = first_0
@@ -187,19 +187,19 @@ private extension KeyboardIdiom {
                         let keyGW: KeyboardEvent = {
                                 let primary: KeyElement = KeyElement("gw")
                                 let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }()
                         let keyKW: KeyboardEvent = {
                                 let primary: KeyElement = KeyElement("kw")
                                 let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }()
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                                 [.transform(.cantoneseNumeric), .globe, keyGW, .space, keyKW, .newLine] :
                                 [.transform(.cantoneseNumeric), keyGW, .space, keyKW, .newLine]
                         eventRows.append(bottomEvents)
                 } else {
-                        let comma: KeyboardEvent = .text(.cantoneseComma)
+                        let comma: KeyboardEvent = .input(.cantoneseComma)
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                                 [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                                 [.transform(.cantoneseNumeric), comma, .space, .newLine]
@@ -217,26 +217,26 @@ private extension KeyboardIdiom {
                         let primary = KeyElement("AA")
                         let child_0 = KeyElement("Q")
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_3: KeyboardEvent = {
                         let primary = KeyElement("EO")
                         let child_0 = KeyElement("R")
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_5: KeyboardEvent = {
                         let primary = KeyElement("YU")
                         let child_0 = KeyElement("Y")
                         let seat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_0: KeyboardEvent = {
                         let primary = KeyElement("Z", header: "1")
                         let child_0 = KeyElement("Z")
                         let child_1 = KeyElement("1", header: "聲調", footer: "陰平")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_1: KeyboardEvent = {
                         let primary = KeyElement("OE", header: "2")
@@ -244,14 +244,14 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("2", header: "聲調", footer: "陰上")
                         let child_2 = KeyElement("X")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_2: KeyboardEvent = {
                         let primary = KeyElement("C", header: "3")
                         let child_0 = KeyElement("C")
                         let child_1 = KeyElement("3", header: "聲調", footer: "陰去")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_3: KeyboardEvent = {
                         let primary = KeyElement("NG", header: "4")
@@ -259,26 +259,26 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("4", header: "聲調", footer: "陽平")
                         let child_2 = KeyElement("V")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_4: KeyboardEvent = {
                         let primary = KeyElement("B", header: "5")
                         let child_0 = KeyElement("B")
                         let child_1 = KeyElement("5", header: "聲調", footer: "陽上")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_5: KeyboardEvent = {
                         let primary = KeyElement("N", header: "6")
                         let child_0 = KeyElement("N")
                         let child_1 = KeyElement("6", header: "聲調", footer: "陽去")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_6: KeyboardEvent = {
                         let primary = KeyElement("M")
                         let seat = KeySeat(primary: primary)
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
                 eventRows[0][0] = first_0
@@ -297,19 +297,19 @@ private extension KeyboardIdiom {
                         let keyGW: KeyboardEvent = {
                                 let primary: KeyElement = KeyElement("GW")
                                 let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }()
                         let keyKW: KeyboardEvent = {
                                 let primary: KeyElement = KeyElement("KW")
                                 let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }()
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                                 [.transform(.cantoneseNumeric), .globe, keyGW, .space, keyKW, .newLine] :
                                 [.transform(.cantoneseNumeric), keyGW, .space, keyKW, .newLine]
                         eventRows.append(bottomEvents)
                 } else {
-                        let comma: KeyboardEvent = .text(.cantoneseComma)
+                        let comma: KeyboardEvent = .input(.cantoneseComma)
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                                 [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                                 [.transform(.cantoneseNumeric), comma, .space, .newLine]
@@ -332,7 +332,7 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = .text(.period)
+                let period: KeyboardEvent = .input(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.transform(.numeric), .globe, .space, period, .newLine] :
                         [.transform(.numeric), period, .space, .newLine]
@@ -354,7 +354,7 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                let period: KeyboardEvent = .text(.period)
+                let period: KeyboardEvent = .input(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.transform(.numeric), .globe, .space, period, .newLine] :
                         [.transform(.numeric), period, .space, .newLine]
@@ -391,10 +391,10 @@ private extension KeyboardIdiom {
                                         let child_5 = KeyElement("拾")
                                         let child_6 = KeyElement("°", footer: "00B0")
                                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6])
-                                        return KeyboardEvent.text(seat)
+                                        return KeyboardEvent.input(seat)
                                 } else {
                                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4])
-                                        return KeyboardEvent.text(seat)
+                                        return KeyboardEvent.input(seat)
                                 }
                         }
                         return keys
@@ -407,7 +407,7 @@ private extension KeyboardIdiom {
                         let child_3 = KeyElement("–", footer: "2013")
                         let child_4 = KeyElement("•", footer: "2022")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_1: KeyboardEvent = {
                         let primary = KeyElement("\u{002F}")
@@ -415,31 +415,31 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("\u{FF0F}", header: "全形")
                         let child_2 = KeyElement("\u{005C}")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_2: KeyboardEvent = {
                         let primary = KeyElement("：")
                         let child_0 = KeyElement(":", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_3: KeyboardEvent = {
                         let primary = KeyElement("；")
                         let child_0 = KeyElement(";", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_4: KeyboardEvent = {
                         let primary = KeyElement("（")
                         let child_0 = KeyElement("(", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_5: KeyboardEvent = {
                         let primary = KeyElement("）")
                         let child_0 = KeyElement(")", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_6: KeyboardEvent = {
                         let primary = KeyElement("$")
@@ -450,13 +450,13 @@ private extension KeyboardIdiom {
                         let child_4 = KeyElement("₽")
                         let child_5 = KeyElement("¢")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3, child_4, child_5])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_7: KeyboardEvent = {
                         let primary = KeyElement("@")
                         let child_0 = KeyElement("＠", header: "全形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_8: KeyboardEvent = {
                         let primary = KeyElement("「")
@@ -467,7 +467,7 @@ private extension KeyboardIdiom {
                         let child_4 = KeyElement("\u{FE41}")
                         let child_5 = KeyElement("\u{FE43}")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3, child_4, child_5])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_9: KeyboardEvent = {
                         let primary = KeyElement("」")
@@ -478,44 +478,44 @@ private extension KeyboardIdiom {
                         let child_4 = KeyElement("\u{FE42}")
                         let child_5 = KeyElement("\u{FE44}")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3, child_4, child_5])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_0: KeyboardEvent = {
                         let primary = KeyElement("。")
                         let child_0 = KeyElement("⋯", footer: "22EF")
                         let child_1 = KeyElement("⋯⋯")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_1: KeyboardEvent = {
                         let primary = KeyElement("，")
                         let child_0 = KeyElement(",", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_2: KeyboardEvent = {
                         let primary = KeyElement("、")
                         let seat: KeySeat = KeySeat(primary: primary)
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_3: KeyboardEvent = {
                         let primary = KeyElement("？")
                         let child_0 = KeyElement("?", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_4: KeyboardEvent = {
                         let primary = KeyElement("！")
                         let child_0 = KeyElement("!", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_5: KeyboardEvent = {
                         let primary = KeyElement(".")
                         let child_0 = KeyElement("．", header: "全形", footer: "FF0E")
                         let child_1 = KeyElement("…", footer: "2026")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.placeholders
                 eventRows[0] = digitalKeys
@@ -541,7 +541,7 @@ private extension KeyboardIdiom {
                         let primary = KeyElement("0")
                         let child_0 = KeyElement("°")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_0: KeyboardEvent = {
                         let primary = KeyElement("\u{002D}")
@@ -550,14 +550,14 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("\u{2014}", footer: "2014")
                         let child_3 = KeyElement("\u{2022}", footer: "2022")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_1: KeyboardEvent = {
                         let text: String = #"\"#
                         let primary = KeyElement("/")
                         let child_0 = KeyElement(text)
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_6: KeyboardEvent = {
                         let primary = KeyElement("$")
@@ -568,13 +568,13 @@ private extension KeyboardIdiom {
                         let child_4 = KeyElement("₽")
                         let child_5 = KeyElement("¢")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3, child_4, child_5])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_7: KeyboardEvent = {
                         let primary = KeyElement("&")
                         let child_0 = KeyElement("§")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_9: KeyboardEvent = {
                         let primary = KeyElement("\u{0022}")
@@ -585,30 +585,30 @@ private extension KeyboardIdiom {
                         let child_4 = KeyElement("\u{00BB}", footer: "00BB")
                         let child_5 = KeyElement("\u{00AB}", footer: "00AB")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_0: KeyboardEvent = {
                         let primary = KeyElement(".")
                         let child_0 = KeyElement("…")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_1: KeyboardEvent = {
                         let primary = KeyElement(",")
                         let seat: KeySeat = KeySeat(primary: primary)
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_2: KeyboardEvent = {
                         let primary = KeyElement("?")
                         let child_0 = KeyElement("¿")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_3: KeyboardEvent = {
                         let primary = KeyElement("!")
                         let child_0 = KeyElement("¡")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_4: KeyboardEvent = {
                         let primary = KeyElement("\u{0027}")
@@ -617,7 +617,7 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("\u{2019}", footer: "2019")
                         let child_3 = KeyElement("\u{0060}", footer: "0060")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
                 eventRows[0][9] = first_9
@@ -650,7 +650,7 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("〖")
                         let child_3 = KeyElement("〔")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_1: KeyboardEvent = {
                         let primary = KeyElement("］")
@@ -659,50 +659,50 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("〗")
                         let child_3 = KeyElement("〕")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_2: KeyboardEvent = {
                         let primary = KeyElement("｛")
                         let child_0 = KeyElement("{", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_3: KeyboardEvent = {
                         let primary = KeyElement("｝")
                         let child_0 = KeyElement("}", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_4: KeyboardEvent = {
                         let primary = KeyElement("#")
                         let child_0 = KeyElement("＃", header: "全形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_5: KeyboardEvent = {
                         let primary = KeyElement("%")
                         let child_0 = KeyElement("％", header: "全形")
                         let child_1 = KeyElement("‰")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_6: KeyboardEvent = {
                         let primary = KeyElement("^")
                         let child_0 = KeyElement("＾", header: "全形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_7: KeyboardEvent = {
                         let primary = KeyElement("*")
                         let child_0 = KeyElement("＊", header: "全形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_8: KeyboardEvent = {
                         let primary = KeyElement("+")
                         let child_0 = KeyElement("＋", header: "全形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_9: KeyboardEvent = {
                         let primary = KeyElement("=")
@@ -710,37 +710,37 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("≠")
                         let child_2 = KeyElement("≈")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_0: KeyboardEvent = {
                         let primary = KeyElement("_")
                         let child_0 = KeyElement("＿", header: "全形", footer: "FF3F")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_1: KeyboardEvent = {
                         let primary = KeyElement("—")
                         let seat: KeySeat = KeySeat(primary: primary)
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_2: KeyboardEvent = {
                         let text: String = #"\"#
                         let primary = KeyElement(text)
                         let child_0 = KeyElement("＼", header: "全形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_3: KeyboardEvent = {
                         let primary = KeyElement("｜")
                         let child_0 = KeyElement("|", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_4: KeyboardEvent = {
                         let primary = KeyElement("～")
                         let child_0 = KeyElement("~", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_5: KeyboardEvent = {
                         let primary = KeyElement("《")
@@ -748,7 +748,7 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("\u{003C}", footer: "003C")
                         let child_2 = KeyElement("＜", footer: "FF1C")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_6: KeyboardEvent = {
                         let primary = KeyElement("》")
@@ -756,19 +756,19 @@ private extension KeyboardIdiom {
                         let child_1 = KeyElement("\u{003E}", footer: "003E")
                         let child_2 = KeyElement("＞", footer: "FF1E")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_7: KeyboardEvent = {
                         let primary = KeyElement("¥")
                         let seat: KeySeat = KeySeat(primary: primary)
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_8: KeyboardEvent = {
                         let primary = KeyElement("&")
                         let child_0 = KeyElement("＆", header: "全形")
                         let child_1 = KeyElement("§")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let second_9: KeyboardEvent = {
                         let primary = KeyElement("\u{00B7}")
@@ -777,20 +777,20 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("\u{00B0}", footer: "00B0")
                         let child_3 = KeyElement("\u{30FB}", footer: "30FB")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_0: KeyboardEvent = {
                         let primary = KeyElement("⋯")
                         let child_0 = KeyElement("⋯", footer: "22EF")
                         let child_1 = KeyElement("…", footer: "2026")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_1: KeyboardEvent = {
                         let primary = KeyElement("，")
                         let child_0 = KeyElement(",", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_2: KeyboardEvent = {
                         let primary = KeyElement("\u{00A9}")
@@ -799,19 +799,19 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("\u{2122}")
                         let child_3 = KeyElement("\u{F8FF}")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_3: KeyboardEvent = {
                         let primary = KeyElement("？")
                         let child_0 = KeyElement("?", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_4: KeyboardEvent = {
                         let primary = KeyElement("！")
                         let child_0 = KeyElement("!", header: "半形")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_5: KeyboardEvent = {
                         let primary = KeyElement("\u{0027}")
@@ -821,7 +821,7 @@ private extension KeyboardIdiom {
                         let child_3 = KeyElement("\u{2019}", footer: "2019")
                         let child_4 = KeyElement("\u{0060}", footer: "0060")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.placeholders
                 eventRows[0] = [first_0, first_1, first_2, first_3, first_4, first_5, first_6, first_7, first_8, first_9]
@@ -847,37 +847,37 @@ private extension KeyboardIdiom {
                         let primary = KeyElement("%")
                         let child_0 = KeyElement("‰")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let first_9: KeyboardEvent = {
                         let primary = KeyElement("=")
                         let child_0 = KeyElement("≠")
                         let child_1 = KeyElement("≈")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_0: KeyboardEvent = {
                         let primary = KeyElement(".")
                         let child_0 = KeyElement("…")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_1: KeyboardEvent = {
                         let primary = KeyElement(",")
                         let seat: KeySeat = KeySeat(primary: primary)
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_2: KeyboardEvent = {
                         let primary = KeyElement("?")
                         let child_0 = KeyElement("¿")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_3: KeyboardEvent = {
                         let primary = KeyElement("!")
                         let child_0 = KeyElement("¡")
                         let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 let third_4: KeyboardEvent = {
                         let primary = KeyElement("\u{0027}")
@@ -886,7 +886,7 @@ private extension KeyboardIdiom {
                         let child_2 = KeyElement("\u{2019}", footer: "2019")
                         let child_3 = KeyElement("\u{0060}", footer: "0060")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3])
-                        return KeyboardEvent.text(seat)
+                        return KeyboardEvent.input(seat)
                 }()
                 var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
                 eventRows[0][5] = first_5
@@ -917,14 +917,14 @@ private extension KeyboardIdiom {
                                 let child_0: KeyElement = KeyElement(tuple.0)
                                 let child_1: KeyElement = KeyElement(tuple.1, header: "聲調", footer: tuple.2)
                                 let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }
                         let last: KeyboardEvent = {
                                 let primary: KeyElement = KeyElement("m", header: "'")
                                 let child_0: KeyElement = KeyElement("m")
                                 let child_1: KeyElement = KeyElement("'", header: "分隔")
                                 let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }()
                         return keys + [last]
                 }()
@@ -938,7 +938,7 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.shadowKey("z"), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .text(.cantoneseComma)
+                let comma: KeyboardEvent = .input(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.transform(.cantoneseNumeric), comma, .space, .newLine]
@@ -958,14 +958,14 @@ private extension KeyboardIdiom {
                                 let child_0: KeyElement = KeyElement(tuple.0)
                                 let child_1: KeyElement = KeyElement(tuple.1, header: "聲調", footer: tuple.2)
                                 let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }
                         let last: KeyboardEvent = {
                                 let primary: KeyElement = KeyElement("M", header: "'")
                                 let child_0: KeyElement = KeyElement("M")
                                 let child_1: KeyElement = KeyElement("'", header: "分隔")
                                 let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.text(seat)
+                                return KeyboardEvent.input(seat)
                         }()
                         return keys + [last]
                 }()
@@ -979,7 +979,7 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.shadowKey("Z"), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .text(.cantoneseComma)
+                let comma: KeyboardEvent = .input(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
                         [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.transform(.cantoneseNumeric), comma, .space, .newLine]
@@ -991,7 +991,7 @@ private extension KeyboardIdiom {
 
 private extension Array where Element == [String] {
         var keysRows: [[KeyboardEvent]] {
-                return map { $0.map { KeyboardEvent.text(KeySeat(primary: KeyElement($0))) } }
+                return map { $0.map { KeyboardEvent.input(KeySeat(primary: KeyElement($0))) } }
         }
         var placeholders: [[KeyboardEvent]] {
                 return map { $0.map { _ in KeyboardEvent.none } }

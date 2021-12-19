@@ -26,11 +26,11 @@ final class KeyView: UIView {
                 case .globe:
                         setupKeyShapeView()
                         setupKeyImageView()
-                case .text(let seat) where seat.primary.header != nil:
+                case .input(let seat) where seat.primary.header != nil:
                         setupKeyShapeView()
                         setupKeyTextLabel()
                         setupKeyHeaderLabel(text: seat.primary.header)
-                case .text(.separator):
+                case .input(.separator):
                         setupKeyShapeView()
                         setupKeyTextLabel()
                         setupKeyFooterLabel(text: "分隔", alignment: .center)
@@ -66,14 +66,14 @@ final class KeyView: UIView {
                 switch self.event {
                 case .none, .shadowKey, .globe:
                         break
-                case .text(let seat) where seat.hasChildren:
+                case .input(let seat) where seat.hasChildren:
                         if keyboardInterface.isPhonePortrait {
                                 displayPreview()
                         } else {
                                 shape.backgroundColor = highlightingBackColor
                         }
                         handleLongPress()
-                case .text:
+                case .input:
                         if keyboardInterface.isPhonePortrait {
                                 displayPreview()
                         } else {
@@ -122,7 +122,7 @@ final class KeyView: UIView {
         override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesMoved(touches, with: event)
                 switch self.event {
-                case .text(let seat) where seat.hasChildren:
+                case .input(let seat) where seat.hasChildren:
                         guard isCalloutDisplaying else { break }
                         guard let location: CGPoint = touches.first?.location(in: controller.view) else { break }
                         let distance: CGFloat = location.x - self.frame.midX
@@ -191,15 +191,15 @@ final class KeyView: UIView {
                 case .newLine:
                         controller.operate(.return)
                         changeColorToNormal()
-                case .text(.cantoneseComma):
+                case .input(.cantoneseComma):
                         removeCallout()
                         normalize()
                         let punctuation: String = peekingText ?? KeySeat.cantoneseComma.primary.text
                         controller.operate(.punctuation(punctuation))
-                case .text(.separator):
+                case .input(.separator):
                         normalize()
                         controller.operate(.separator)
-                case .text(let seat):
+                case .input(let seat):
                         if seat.hasChildren {
                                 removeCallout()
                         }
@@ -230,10 +230,10 @@ final class KeyView: UIView {
                         spaceTouches = (false, false)
                 case .shift:
                         spaceTouches = (false, false)
-                case .text(let seat) where seat.hasChildren:
+                case .input(let seat) where seat.hasChildren:
                         removeCallout()
                         normalize()
-                case .text:
+                case .input:
                         normalize()
                 default:
                         break
@@ -406,7 +406,7 @@ final class KeyView: UIView {
         }()
         private lazy var calloutViews: [CalloutView] = {
                 switch event {
-                case .text(let seat) where seat.hasChildren:
+                case .input(let seat) where seat.hasChildren:
                         let firstChild: KeyElement = seat.children.first!
                         let firstKey = CalloutView(text: firstChild.text, header: firstChild.header, footer: firstChild.footer, isPhoneInterface: keyboardInterface.isCompact)
                         firstKey.backgroundColor = .selection

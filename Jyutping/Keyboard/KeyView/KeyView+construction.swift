@@ -40,7 +40,7 @@ extension KeyView {
                 }
                 let effectView: BlurEffectView = {
                         switch event {
-                        case .text, .space:
+                        case .input, .space:
                                 return BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
                         default:
                                 return BlurEffectView(fraction: 0.48, effectStyle: .light)

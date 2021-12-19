@@ -17,7 +17,7 @@ enum AudioFeedback {
         static func play(for keyboardEvent: KeyboardEvent) {
                 guard isAudioFeedbackOn else { return }
                 switch keyboardEvent {
-                case .text, .shadowKey:
+                case .input, .shadowKey:
                         AudioServicesPlaySystemSound(Self.input.soundID)
                 case .backspace, .hidden(.backspace):
                         AudioServicesPlaySystemSound(Self.delete.soundID)

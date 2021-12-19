@@ -6,13 +6,13 @@ enum KeyboardEvent: Hashable {
         case emoji
         case keyboard
         case globe
+        case input(KeySeat)
         case newLine
         case none
         indirect case hidden(KeyboardEvent)
         case shift
         case space
         case tab
-        case text(KeySeat)
         case transform(KeyboardIdiom)
 }
 
