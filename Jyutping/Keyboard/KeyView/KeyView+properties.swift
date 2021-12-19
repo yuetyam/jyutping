@@ -6,7 +6,7 @@ extension KeyView {
                 switch event {
                 case .none, .shadowKey, .shadowBackspace:
                         return 10
-                case .backspace, .shift, .switchTo:
+                case .backspace, .shift, .transform:
                         return 50
                 case .globe:
                         return 45
@@ -94,7 +94,7 @@ extension KeyView {
                         }
                 case .newLine:
                         return newLineKeyText
-                case .switchTo(let newLayout):
+                case .transform(let newLayout):
                         switch newLayout {
                         case .cantoneseNumeric, .numeric:
                                 return "123"

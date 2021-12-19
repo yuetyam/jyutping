@@ -101,7 +101,7 @@ final class KeyView: UIView {
                         }
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
-                case .switchTo(let newLayout):
+                case .transform(let newLayout):
                         controller.operate(.switchTo(newLayout))
                 default:
                         break
@@ -467,7 +467,7 @@ final class KeyView: UIView {
                         default:
                                 accessibilityValue = NSLocalizedString("Lowercased", comment: .empty)
                         }
-                case .switchTo(let layout):
+                case .transform(let layout):
                         switch layout {
                         case .cantonese:
                                 isAccessibilityElement = true

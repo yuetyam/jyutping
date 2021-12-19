@@ -5,7 +5,7 @@ enum KeyboardEvent: Hashable {
              backspace,
              newLine,
              shift,
-             switchTo(KeyboardIdiom),
+             transform(KeyboardIdiom),
              globe,
              shadowKey(String),
              shadowBackspace
@@ -22,7 +22,7 @@ enum KeyboardEvent: Hashable {
         // case space
         case tab
         case text(KeySeat)
-        case transform(KeyboardIdiom)
+        // case transform(KeyboardIdiom)
 }
 
 

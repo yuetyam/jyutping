@@ -19,8 +19,8 @@ extension KeyboardViewController {
 
         func updateBottomStackView(with newEvent: KeyboardEvent) {
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .globe, .space, newEvent, .newLine] :
-                        [.switchTo(.cantoneseNumeric), newEvent, .space, .newLine]
+                        [.transform(.cantoneseNumeric), .globe, .space, newEvent, .newLine] :
+                        [.transform(.cantoneseNumeric), newEvent, .space, .newLine]
                 let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
                         return makeKey(for: $0, controller: self)
                 }

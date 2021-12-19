@@ -21,7 +21,7 @@ enum AudioFeedback {
                         AudioServicesPlaySystemSound(Self.input.soundID)
                 case .backspace, .shadowBackspace:
                         AudioServicesPlaySystemSound(Self.delete.soundID)
-                case .switchTo, .newLine, .shift:
+                case .transform, .newLine, .shift:
                         AudioServicesPlaySystemSound(Self.modify.soundID)
                 case .none:
                         break
