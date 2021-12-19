@@ -3,8 +3,7 @@ import SwiftUI
 struct FinalsTable: View {
 
         @Environment(\.horizontalSizeClass) var horizontalSize
-        private let isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
-        private let offset: CGFloat = {
+        private let inset: CGFloat = {
                 if #available(iOS 14.0, *) {
                         return 64
                 } else {
@@ -12,8 +11,8 @@ struct FinalsTable: View {
                 }
         }()
         private var width: CGFloat {
-                guard isPad else {
-                        return (UIScreen.main.bounds.width - offset) / 3.0
+                guard Device.isPad else {
+                        return (UIScreen.main.bounds.width - inset) / 3.0
                 }
                 if horizontalSize == .compact {
                         return 100
