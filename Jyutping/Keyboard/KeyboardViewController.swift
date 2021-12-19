@@ -379,9 +379,9 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         switch (inputText.isEmpty, oldValue.isEmpty) {
                         case (true, false):
-                                updateBottomStackView(with: .key(.cantoneseComma))
+                                updateBottomStackView(with: .text(.cantoneseComma))
                         case (false, true):
-                                updateBottomStackView(with: .key(.separator))
+                                updateBottomStackView(with: .text(.separator))
                         default:
                                 break
                         }
