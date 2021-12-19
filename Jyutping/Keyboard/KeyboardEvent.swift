@@ -6,7 +6,7 @@ enum KeyboardEvent: Hashable {
              newLine,
              shift,
              switchTo(KeyboardIdiom),
-             switchInputMethod,
+             globe,
              shadowKey(String),
              shadowBackspace
 
@@ -14,16 +14,17 @@ enum KeyboardEvent: Hashable {
         case capsLock
         case emoji
         case keyboard
-        case globe
+        // case globe
         // case none
         case `return`
-        indirect case shadow(KeyboardEvent)
+        indirect case hidden(KeyboardEvent)
         // case shift
         // case space
         case tab
         case text(KeySeat)
         case transform(KeyboardIdiom)
 }
+
 
 struct KeySeat: Hashable {
 

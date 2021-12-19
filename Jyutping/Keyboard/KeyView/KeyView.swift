@@ -23,7 +23,7 @@ final class KeyView: UIView {
                 case .backspace, .shift:
                         setupKeyShapeView()
                         setupKeyImageView(constant: 11)
-                case .switchInputMethod:
+                case .globe:
                         setupKeyShapeView()
                         setupKeyImageView()
                 case .key(let seat) where seat.primary.header != nil:
@@ -64,7 +64,7 @@ final class KeyView: UIView {
                 isInteracting = true
                 peekingText = nil
                 switch self.event {
-                case .none, .shadowKey, .switchInputMethod:
+                case .none, .shadowKey, .globe:
                         break
                 case .key(let seat) where seat.hasChildren:
                         if keyboardInterface.isPhonePortrait {

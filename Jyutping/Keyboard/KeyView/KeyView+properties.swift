@@ -8,7 +8,7 @@ extension KeyView {
                         return 10
                 case .backspace, .shift, .switchTo:
                         return 50
-                case .switchInputMethod:
+                case .globe:
                         return 45
                 case .newLine:
                         return 72
@@ -207,7 +207,7 @@ extension KeyView {
 
         var keyImageName: String? {
                 switch event {
-                case .switchInputMethod:
+                case .globe:
                         return "globe"
                 case .backspace:
                         return "delete.left"

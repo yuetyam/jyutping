@@ -51,7 +51,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -73,7 +73,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -195,13 +195,13 @@ private extension KeyboardIdiom {
                                 return KeyboardEvent.key(seat)
                         }()
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.switchTo(.cantoneseNumeric), .switchInputMethod, keyGW, .space, keyKW, .newLine] :
+                                [.switchTo(.cantoneseNumeric), .globe, keyGW, .space, keyKW, .newLine] :
                                 [.switchTo(.cantoneseNumeric), keyGW, .space, keyKW, .newLine]
                         eventRows.append(bottomEvents)
                 } else {
                         let comma: KeyboardEvent = .key(.cantoneseComma)
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                                [.switchTo(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                                 [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                         eventRows.append(bottomEvents)
                 }
@@ -305,13 +305,13 @@ private extension KeyboardIdiom {
                                 return KeyboardEvent.key(seat)
                         }()
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.switchTo(.cantoneseNumeric), .switchInputMethod, keyGW, .space, keyKW, .newLine] :
+                                [.switchTo(.cantoneseNumeric), .globe, keyGW, .space, keyKW, .newLine] :
                                 [.switchTo(.cantoneseNumeric), keyGW, .space, keyKW, .newLine]
                         eventRows.append(bottomEvents)
                 } else {
                         let comma: KeyboardEvent = .key(.cantoneseComma)
                         let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                                [.switchTo(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                                 [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                         eventRows.append(bottomEvents)
                 }
@@ -334,7 +334,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .key(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
+                        [.switchTo(.numeric), .globe, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -356,7 +356,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .key(.period)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.numeric), .switchInputMethod, .space, period, .newLine] :
+                        [.switchTo(.numeric), .globe, .space, period, .newLine] :
                         [.switchTo(.numeric), period, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -526,7 +526,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantonese(.lowercased)), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.cantonese(.lowercased)), .globe, .space, .newLine] :
                         [.switchTo(.cantonese(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -632,7 +632,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.alphabetic(.lowercased)), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.alphabetic(.lowercased)), .globe, .space, .newLine] :
                         [.switchTo(.alphabetic(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -832,7 +832,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantonese(.lowercased)), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.cantonese(.lowercased)), .globe, .space, .newLine] :
                         [.switchTo(.cantonese(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -897,7 +897,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.alphabetic(.lowercased)), .switchInputMethod, .space, .newLine] :
+                        [.switchTo(.alphabetic(.lowercased)), .globe, .space, .newLine] :
                         [.switchTo(.alphabetic(.lowercased)), .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -940,7 +940,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -981,7 +981,7 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .key(.cantoneseComma)
                 let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.switchTo(.cantoneseNumeric), .switchInputMethod, .space, comma, .newLine] :
+                        [.switchTo(.cantoneseNumeric), .globe, .space, comma, .newLine] :
                         [.switchTo(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
