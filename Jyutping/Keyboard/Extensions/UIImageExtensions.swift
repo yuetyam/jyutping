@@ -1,6 +1,7 @@
 import UIKit
 
 extension UIImage {
+
         func cropped() -> UIImage? {
                 guard let sourceCGImage = self.cgImage else { return nil }
                 let sourceSize = self.size
@@ -15,6 +16,8 @@ extension UIImage {
                 guard let croppedCGImage = sourceCGImage.cropping(to: cropRect) else { return nil }
                 return UIImage(cgImage: croppedCGImage)
         }
+
+        static let emojiSmiley: UIImage? = UIImage(named: "EmojiSmiley")?.cropped()?.withRenderingMode(.alwaysTemplate)
 
         static func chevron(_ direction: Direction) -> UIImage? {
                 let imageName: String = {
@@ -40,6 +43,7 @@ extension UIImage {
                 return UIImage(systemName: imageName)
         }
 }
+
 
 enum Direction {
         case up

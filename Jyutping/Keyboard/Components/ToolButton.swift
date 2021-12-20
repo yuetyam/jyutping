@@ -21,7 +21,7 @@ final class ToolButton: UIButton {
         convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
                 let image: UIImage? = {
                         if imageName == "EmojiSmiley" {
-                                return UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate)
+                                return UIImage.emojiSmiley
                         } else {
                                 return UIImage(systemName: imageName)
                         }
