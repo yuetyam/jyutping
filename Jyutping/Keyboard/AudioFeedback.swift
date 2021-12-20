@@ -23,7 +23,7 @@ enum AudioFeedback {
                         AudioServicesPlaySystemSound(Self.input.soundID)
                 case .backspace, .hidden(.backspace):
                         AudioServicesPlaySystemSound(Self.delete.soundID)
-                case .capsLock, .emoji, .globe, .keyboard, .newLine, .shift, .transform:
+                case .capsLock, .globe, .keyboard, .newLine, .shift, .transform:
                         AudioServicesPlaySystemSound(Self.modify.soundID)
                 default:
                         AudioServicesPlaySystemSound(Self.input.soundID)
