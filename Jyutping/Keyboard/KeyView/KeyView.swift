@@ -162,7 +162,7 @@ final class KeyView: UIView {
                         spaceTouchPoint = location
                         draggedOnSpace = true
                 case .backspace:
-                        guard layout.isCantoneseMode else { break }
+                        guard layout.isPingMode else { break }
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - backspaceTouchPoint.x
                         guard distance < -44 else { break }

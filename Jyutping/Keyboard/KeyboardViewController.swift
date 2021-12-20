@@ -155,7 +155,7 @@ final class KeyboardViewController: UIInputViewController {
                                 didKeyboardEstablished = true
                                 return
                         }
-                        if (!keyboardIdiom.isCantoneseMode) && (!inputText.isEmpty) {
+                        if (!keyboardIdiom.isPingMode) && (!inputText.isEmpty) {
                                 let text: String = inputText
                                 inputText = .empty
                                 textDocumentProxy.insertText(text)
@@ -169,7 +169,7 @@ final class KeyboardViewController: UIInputViewController {
         func operate(_ operation: Operation) {
                 switch operation {
                 case .input(let text):
-                        if keyboardIdiom.isCantoneseMode {
+                        if keyboardIdiom.isPingMode {
                                 if keyboardLayout == 2 && text == "gw" {
                                         let newInputText: String = inputText + text
                                         inputText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")

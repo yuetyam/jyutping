@@ -27,7 +27,7 @@ extension KeyboardIdiom {
                         return false
                 }
         }
-        var isCantoneseMode: Bool {
+        var isPingMode: Bool {
                 switch self {
                 case .cantonese,
                      .candidates:
