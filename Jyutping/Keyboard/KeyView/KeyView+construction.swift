@@ -101,7 +101,7 @@ extension KeyView {
                 keyFooterLabel.textColor = foreColor.withAlphaComponent(0.6)
                 keyFooterLabel.text = text
         }
-        func setupKeyImageView(constant: CGFloat = 10) {
+        func setupKeyImageView(constant: CGFloat = 11) {
                 let keyImageView: UIImageView = UIImageView()
                 let constantValue: CGFloat = {
                         switch keyboardInterface {

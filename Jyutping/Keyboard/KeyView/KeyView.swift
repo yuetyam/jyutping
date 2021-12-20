@@ -22,7 +22,7 @@ final class KeyView: UIView {
                         break
                 case .backspace, .shift:
                         setupKeyShapeView()
-                        setupKeyImageView(constant: 11)
+                        setupKeyImageView()
                 case .globe:
                         setupKeyShapeView()
                         setupKeyImageView()
