@@ -4,9 +4,9 @@ extension KeyboardViewController {
 
         func setupKeyboard() {
                 switch keyboardIdiom {
-                case .candidateBoard:
+                case .candidates:
                         loadCandidateBoard()
-                case .settingsView:
+                case .settings:
                         loadSettingsView()
                 case .numberPad, .decimalPad:
                         loadNumberPad()

@@ -302,7 +302,7 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardIdiom = .alphabetic(.lowercased)
                 case .cantonese(.uppercased):
                         keyboardIdiom = .cantonese(.lowercased)
-                case .candidateBoard where inputText.isEmpty:
+                case .candidates where inputText.isEmpty:
                         candidateCollectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reset()
@@ -628,7 +628,7 @@ final class KeyboardViewController: UIInputViewController {
                 toolBar.downArrow.addTarget(self, action: #selector(handleDownArrow), for: .touchUpInside)
         }
         @objc private func handleSettingsButton() {
-                keyboardIdiom = .settingsView
+                keyboardIdiom = .settings
         }
         @objc private func handleYueEngSwitch() {
                 hapticFeedback?.impactOccurred()
@@ -682,7 +682,7 @@ final class KeyboardViewController: UIInputViewController {
                 dismissKeyboard()
         }
         @objc private func handleDownArrow() {
-                keyboardIdiom = .candidateBoard
+                keyboardIdiom = .candidates
         }
 
 

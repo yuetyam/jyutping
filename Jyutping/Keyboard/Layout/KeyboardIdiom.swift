@@ -1,15 +1,19 @@
 enum KeyboardIdiom: Hashable {
-        case cantonese(ShiftState),
-             cantoneseNumeric,
-             cantoneseSymbolic,
-             alphabetic(ShiftState),
-             numeric,
-             symbolic,
-             candidateBoard,
-             settingsView,
-             numberPad,
-             decimalPad,
-             emoji
+
+        case cantonese(ShiftState)
+        case cantoneseNumeric
+        case cantoneseSymbolic
+
+        case alphabetic(ShiftState)
+        case numeric
+        case symbolic
+
+        case candidates
+        case settings
+        case emoji
+
+        case numberPad
+        case decimalPad
 }
 
 extension KeyboardIdiom {
@@ -26,7 +30,7 @@ extension KeyboardIdiom {
         var isCantoneseMode: Bool {
                 switch self {
                 case .cantonese,
-                     .candidateBoard:
+                     .candidates:
                         return true
                 default:
                         return false
