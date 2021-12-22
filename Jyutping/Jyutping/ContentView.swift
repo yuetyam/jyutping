@@ -6,15 +6,15 @@ struct ContentView: View {
                 TabView(selection: $selection){
                         if #available(iOS 15.0, *) {
                                 HomeView_iOS15().tabItem {
-                                        Label("Home", systemImage: "house")
+                                        Label("Home", systemImage: "house").environment(\.symbolVariants, .none)
                                 }.tag(0)
 
                                 JyutpingView_iOS15().tabItem {
-                                        Label("Jyutping", systemImage: "doc.text.magnifyingglass")
+                                        Label("Jyutping", systemImage: "doc.text.magnifyingglass").environment(\.symbolVariants, .none)
                                 }.tag(1)
 
                                 AboutView_iOS14().tabItem {
-                                        Label("About", systemImage: "info.circle")
+                                        Label("About", systemImage: "info.circle").environment(\.symbolVariants, .none)
                                 }.tag(2)
 
                         } else if #available(iOS 14.0, *) {
