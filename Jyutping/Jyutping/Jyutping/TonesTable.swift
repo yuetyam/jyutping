@@ -72,7 +72,7 @@ private let dataSource: String = """
 奮 fan5,13/23,陽上,5
 份 fan6,22,陽去,6
 忽 fat1,5,高陰入,1
-沷 fat3,3,低陰入,3
+法 faat3,3,低陰入,3
 罰 fat6,2,陽入,6
 """
 
