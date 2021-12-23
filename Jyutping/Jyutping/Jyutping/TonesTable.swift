@@ -28,6 +28,8 @@ struct TonesTable: View {
                                         ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
                                                 ToneCell($0, width: width).textSelection(.enabled)
                                         }
+                                } footer: {
+                                        Text(verbatim: "聲調之「上」應讀上聲 soeng5，而非去聲 soeng6").textCase(.none)
                                 }
                                 if !(Speech.isLanguagesEnabled) {
                                         Section {
