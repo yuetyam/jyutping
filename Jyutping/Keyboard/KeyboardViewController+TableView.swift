@@ -41,10 +41,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
                         // Space double tapping shortcut
                         return 4
-                case 5 where footnoteStyle >= 3, 6:
-                        // Clear User Lexicon
-                        return 1
                 default:
+                        // Clear User Lexicon
                         return 1
                 }
         }
@@ -85,6 +83,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 switch indexPath.section {
                 case 0:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.feedbacksSettingsCell, for: indexPath)
+                        cell.selectionStyle = .none
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: .empty)
