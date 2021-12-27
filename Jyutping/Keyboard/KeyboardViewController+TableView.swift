@@ -10,7 +10,6 @@ struct Identifiers {
         static let candidateFootnoteSettingsCell: String = "SettingsTableViewCandidateFootnoteCell"
         static let candidateToneStyleSettingsCell: String = "SettingsTableViewCandidateToneStyleCell"
         static let spaceShortcutSettingsCell: String = "SettingsTableViewSpaceShortcutCell"
-        static let emojiKeyboardSettingsCell: String = "SettingsTableViewEmojiKeyboardCell"
         static let clearLexiconSettingsCell: String = "SettingsTableViewClearLexiconCell"
 }
 
@@ -18,7 +17,7 @@ struct Identifiers {
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
         func numberOfSections(in tableView: UITableView) -> Int {
-                return footnoteStyle < 3 ? 8 : 7
+                return footnoteStyle < 3 ? 7 : 6
         }
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,6 +41,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
                         // Space double tapping shortcut
                         return 4
+                case 5 where footnoteStyle >= 3, 6:
+                        // Clear User Lexicon
+                        return 1
                 default:
                         return 1
                 }
@@ -59,8 +61,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return NSLocalizedString("Jyutping Tones Display", comment: .empty)
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
                         return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
-                case 6 where footnoteStyle >= 3, 7:
-                        // Clear Lexicon
+                case 5 where footnoteStyle >= 3, 6:
                         return .zeroWidthSpace
                 default:
                         return nil
@@ -84,7 +85,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 switch indexPath.section {
                 case 0:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.feedbacksSettingsCell, for: indexPath)
-                        cell.selectionStyle = .none
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: .empty)
@@ -193,15 +193,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 5 where footnoteStyle >= 3, 6 where footnoteStyle < 3:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.emojiKeyboardSettingsCell, for: indexPath)
-                        cell.selectionStyle = .none
-                        cell.textLabel?.text = NSLocalizedString("Emoji Keyboard", comment: .empty)
-                        cell.accessoryView = UISwitch()
-                        (cell.accessoryView as? UISwitch)?.isOn = emojiKeyboardPreference <= 1
-                        (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleEmojiKeyboardSwitch), for: .valueChanged)
-                        return cell
-                case 6 where footnoteStyle >= 3, 7:
+                case 5 where footnoteStyle >= 3, 6:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.clearLexiconSettingsCell, for: indexPath)
                         cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: .empty)
                         cell.textLabel?.textColor = .systemRed
@@ -303,10 +295,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 5 where footnoteStyle >= 3, 6 where footnoteStyle < 3:
-                        // Emoji Keyboard
-                        break
-                case 6 where footnoteStyle >= 3, 7:
+                case 5 where footnoteStyle >= 3, 6:
                         clearUserLexicon()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)
@@ -345,9 +334,5 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         UserDefaults.standard.set(true, forKey: "haptic_feedback")
                 }
                 updateHapticFeedbackStatus()
-        }
-        @objc private func handleEmojiKeyboardSwitch() {
-                let newValue: Int = emojiKeyboardPreference > 1 ? 1 : 2
-                updateEmojiKeyboardPreference(newValue: newValue)
         }
 }

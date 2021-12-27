@@ -54,7 +54,6 @@ final class KeyboardViewController: UIInputViewController {
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.candidateFootnoteSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.candidateToneStyleSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.spaceShortcutSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.emojiKeyboardSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)
                 setupToolBarActions()
         }
@@ -792,19 +791,6 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         func updateDoubleSpaceShortcut() {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
-        }
-
-        /// Emoji 鍵盤設定
-        ///
-        /// 0: The key "emoji_keyboard" doesn‘t exist.
-        ///
-        /// 1: 啓用 Emoji 鍵盤
-        ///
-        /// 2: 毋啓用 Emoji 鍵盤
-        private(set) lazy var emojiKeyboardPreference: Int = UserDefaults.standard.integer(forKey: "emoji_keyboard")
-        func updateEmojiKeyboardPreference(newValue: Int) {
-                emojiKeyboardPreference = newValue
-                UserDefaults.standard.set(newValue, forKey: "emoji_keyboard")
         }
 
         private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty
