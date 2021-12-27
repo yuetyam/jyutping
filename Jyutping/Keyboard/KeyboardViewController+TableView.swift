@@ -198,7 +198,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         cell.selectionStyle = .none
                         cell.textLabel?.text = NSLocalizedString("Emoji Keyboard", comment: .empty)
                         cell.accessoryView = UISwitch()
-                        (cell.accessoryView as? UISwitch)?.isOn = emojiKeyboardPreference <= 1
+                        (cell.accessoryView as? UISwitch)?.isOn = isEmojiKeyboardEnabled
                         (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleEmojiKeyboardSwitch), for: .valueChanged)
                         return cell
                 case 6 where footnoteStyle >= 3, 7:
@@ -347,7 +347,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 updateHapticFeedbackStatus()
         }
         @objc private func handleEmojiKeyboardSwitch() {
-                let newValue: Int = emojiKeyboardPreference > 1 ? 1 : 2
+                let newValue: Int = isEmojiKeyboardEnabled ? 2 : 1
                 updateEmojiKeyboardPreference(newValue: newValue)
         }
 }
