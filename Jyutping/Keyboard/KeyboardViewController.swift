@@ -794,16 +794,17 @@ final class KeyboardViewController: UIInputViewController {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         }
 
-        private(set) lazy var isEmojiKeyboardEnabled: Bool = {
-                /// 0, 1: 啓用 Emoji 鍵盤.
-                /// 2: 毋啓用 Emoji 鍵盤
-                let value: Int = UserDefaults.standard.integer(forKey: "emoji_keyboard")
-                return value < 2
-        }()
+        /// Emoji 鍵盤設定
+        ///
+        /// 0: The key "emoji_keyboard" doesn‘t exist.
+        ///
+        /// 1: 啓用 Emoji 鍵盤
+        ///
+        /// 2: 毋啓用 Emoji 鍵盤
+        private(set) lazy var emojiKeyboardPreference: Int = UserDefaults.standard.integer(forKey: "emoji_keyboard")
         func updateEmojiKeyboardPreference(newValue: Int) {
-                isEmojiKeyboardEnabled = newValue < 2
+                emojiKeyboardPreference = newValue
                 UserDefaults.standard.set(newValue, forKey: "emoji_keyboard")
-                toolBar.reloadToolButtons()
         }
 
         private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty

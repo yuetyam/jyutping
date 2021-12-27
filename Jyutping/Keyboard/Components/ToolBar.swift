@@ -21,22 +21,15 @@ final class ToolBar: UIView {
         private func setupStackView() {
                 stackView.alignment = .center
                 stackView.distribution = .equalSpacing
-                reloadToolButtons()
-                NSLayoutConstraint.activate(toolBarItemsConstraints)
-        }
-
-        /// Re-add toolBar stackView subviews
-        func reloadToolButtons() {
-                stackView.removeArrangedSubviews()
                 stackView.addArrangedSubview(settingsButton)
                 stackView.addArrangedSubview(yueEngSwitch)
                 if controller.hasFullAccess {
                         stackView.addArrangedSubview(pasteButton)
                 }
-                if controller.isEmojiKeyboardEnabled {
-                        stackView.addArrangedSubview(emojiSwitch)
-                }
+                stackView.addArrangedSubview(emojiSwitch)
                 stackView.addArrangedSubview(keyboardDown)
+
+                NSLayoutConstraint.activate(toolBarItemsConstraints)
         }
 
         private lazy var showingToolButtons: Bool = true
