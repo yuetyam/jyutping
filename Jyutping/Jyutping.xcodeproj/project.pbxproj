@@ -59,7 +59,7 @@
 		3759F4E1262FC7EA00266086 /* KeyboardIdiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BD262FC7EA00266086 /* KeyboardIdiom.swift */; };
 		3759F4E2262FC7EA00266086 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BF262FC7EA00266086 /* UIStackViewExtensions.swift */; };
 		3759F4E3262FC7EA00266086 /* Array+uniqued.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C0262FC7EA00266086 /* Array+uniqued.swift */; };
-		3759F4E4262FC7EA00266086 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C1262FC7EA00266086 /* ColorExtension.swift */; };
+		3759F4E4262FC7EA00266086 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C1262FC7EA00266086 /* UIColorExtensions.swift */; };
 		3759F4E5262FC7EA00266086 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4C2262FC7EA00266086 /* StringExtensions.swift */; };
 		3759F4E8262FC86600266086 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4EA262FC86600266086 /* InfoPlist.strings */; };
 		3759F4F1262FC8A300266086 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3759F4F3262FC8A300266086 /* Localizable.strings */; };
@@ -197,7 +197,7 @@
 		3759F4BD262FC7EA00266086 /* KeyboardIdiom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardIdiom.swift; sourceTree = "<group>"; };
 		3759F4BF262FC7EA00266086 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
 		3759F4C0262FC7EA00266086 /* Array+uniqued.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+uniqued.swift"; sourceTree = "<group>"; };
-		3759F4C1262FC7EA00266086 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		3759F4C1262FC7EA00266086 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		3759F4C2262FC7EA00266086 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3759F4E9262FC86600266086 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3759F4EB262FC86800266086 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -473,7 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				3759F4BF262FC7EA00266086 /* UIStackViewExtensions.swift */,
-				3759F4C1262FC7EA00266086 /* ColorExtension.swift */,
+				3759F4C1262FC7EA00266086 /* UIColorExtensions.swift */,
 				373C0DD726771C9700EA52E4 /* UIImageExtensions.swift */,
 				3759F4C0262FC7EA00266086 /* Array+uniqued.swift */,
 				3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */,
@@ -797,7 +797,7 @@
 				37A598C5275249B20025A008 /* KeyboardInterface.swift in Sources */,
 				379E95922742CF1D00199A58 /* Operation.swift in Sources */,
 				3759F4C3262FC7EA00266086 /* ToolBar.swift in Sources */,
-				3759F4E4262FC7EA00266086 /* ColorExtension.swift in Sources */,
+				3759F4E4262FC7EA00266086 /* UIColorExtensions.swift in Sources */,
 				3759F4DB262FC7EA00266086 /* EmojiCell.swift in Sources */,
 				3759F4CE262FC7EA00266086 /* KeyboardEvent.swift in Sources */,
 				3759F4C5262FC7EA00266086 /* NumberPadButton.swift in Sources */,
