@@ -18,9 +18,17 @@ extension KeyboardViewController {
         }
 
         func updateBottomStackView(with newEvent: KeyboardEvent) {
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.cantoneseNumeric), .globe, .space, newEvent, .newLine] :
-                        [.transform(.cantoneseNumeric), newEvent, .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.cantoneseNumeric), newEvent, .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.cantoneseNumeric), .globe, .space, newEvent, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.cantoneseNumeric), .space, newEvent, .newLine]
+                        }
+                }()
                 let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
                         return makeKey(for: $0, controller: self)
                 }
@@ -38,7 +46,7 @@ extension KeyboardViewController {
                         toolBar.pasteButton.tintColor = .systemGray
                 }
                 keyboardStackView.addArrangedSubview(toolBar)
-                let events: [[KeyboardEvent]] = keyboardIdiom.events(for: keyboardLayout, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                let events: [[KeyboardEvent]] = keyboardIdiom.events(keyboardLayout: keyboardLayout, keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 let keysRows: [UIStackView] = makeKeysRows(for: events.dropLast())
                 keyboardStackView.addArrangedSubviews(keysRows)
                 guard let bottomEvents: [KeyboardEvent] = events.last else { return }

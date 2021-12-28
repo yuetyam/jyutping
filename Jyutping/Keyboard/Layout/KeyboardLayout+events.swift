@@ -1,32 +1,32 @@
 extension KeyboardIdiom {
-        func events(for keyboardLayout: Int, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func events(keyboardLayout: Int, keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
                         switch keyboardLayout {
                         case 2:
-                                return saamPingLowercasedKeys(needsInputModeSwitchKey)
+                                return saamPingLowercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                         default:
-                                return cantoneseLowercasedKeys(needsInputModeSwitchKey)
+                                return cantoneseLowercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                         }
                 case .cantonese(.uppercased), .cantonese(.capsLocked):
                         switch keyboardLayout {
                         case 2:
-                                return saamPingUppercasedKeys(needsInputModeSwitchKey)
+                                return saamPingUppercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                         default:
-                                return cantoneseUppercasedKeys(needsInputModeSwitchKey)
+                                return cantoneseUppercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                         }
                 case .alphabetic(.lowercased):
-                        return alphabeticLowercasedKeys(needsInputModeSwitchKey)
+                        return alphabeticLowercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .alphabetic(.uppercased), .alphabetic(.capsLocked):
-                        return alphabeticUppercasedKeys(needsInputModeSwitchKey)
+                        return alphabeticUppercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .cantoneseNumeric:
-                        return cantoneseNumericKeys(needsInputModeSwitchKey)
+                        return cantoneseNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .cantoneseSymbolic:
-                        return cantoneseSymbolicKeys(needsInputModeSwitchKey)
+                        return cantoneseSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .numeric:
-                        return numericKeys(needsInputModeSwitchKey)
+                        return numericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .symbolic:
-                        return symbolicKeys(needsInputModeSwitchKey)
+                        return symbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 default:
                         return []
                 }
@@ -34,7 +34,7 @@ extension KeyboardIdiom {
 }
 
 private extension KeyboardIdiom {
-        func cantoneseLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func cantoneseLowercasedKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -50,13 +50,21 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .input(.cantoneseComma)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
-                        [.transform(.cantoneseNumeric), comma, .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.cantoneseNumeric), comma, .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.cantoneseNumeric), .space, comma, .newLine]
+                        }
+                }()
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func cantoneseUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func cantoneseUppercasedKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -72,13 +80,21 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let comma: KeyboardEvent = .input(.cantoneseComma)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
-                        [.transform(.cantoneseNumeric), comma, .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.cantoneseNumeric), comma, .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.cantoneseNumeric), .space, comma, .newLine]
+                        }
+                }()
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func saamPingLowercasedKeys(_ needsInputModeSwitchKey: Bool, needsGWKW: Bool = false) -> [[KeyboardEvent]] {
+        func saamPingLowercasedKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["aa", "w", "e", "eo", "t", "yu", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -183,31 +199,22 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.hidden(.text("z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                if needsGWKW {
-                        let keyGW: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement("gw")
-                                let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.input(seat)
-                        }()
-                        let keyKW: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement("kw")
-                                let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.input(seat)
-                        }()
-                        let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.transform(.cantoneseNumeric), .globe, keyGW, .space, keyKW, .newLine] :
-                                [.transform(.cantoneseNumeric), keyGW, .space, keyKW, .newLine]
-                        eventRows.append(bottomEvents)
-                } else {
-                        let comma: KeyboardEvent = .input(.cantoneseComma)
-                        let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
-                                [.transform(.cantoneseNumeric), comma, .space, .newLine]
-                        eventRows.append(bottomEvents)
-                }
+                let comma: KeyboardEvent = .input(.cantoneseComma)
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.cantoneseNumeric), comma, .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.cantoneseNumeric), .space, comma, .newLine]
+                        }
+                }()
+                eventRows.append(bottomEvents)
                 return eventRows
         }
-        func saamPingUppercasedKeys(_ needsInputModeSwitchKey: Bool, needsGWKW: Bool = false) -> [[KeyboardEvent]] {
+        func saamPingUppercasedKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["AA", "W", "E", "EO", "T", "YU", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -293,31 +300,22 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.hidden(.text("Z")), at: 1)
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
-                if needsGWKW {
-                        let keyGW: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement("GW")
-                                let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.input(seat)
-                        }()
-                        let keyKW: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement("KW")
-                                let seat = KeySeat(primary: primary)
-                                return KeyboardEvent.input(seat)
-                        }()
-                        let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.transform(.cantoneseNumeric), .globe, keyGW, .space, keyKW, .newLine] :
-                                [.transform(.cantoneseNumeric), keyGW, .space, keyKW, .newLine]
-                        eventRows.append(bottomEvents)
-                } else {
-                        let comma: KeyboardEvent = .input(.cantoneseComma)
-                        let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                                [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
-                                [.transform(.cantoneseNumeric), comma, .space, .newLine]
-                        eventRows.append(bottomEvents)
-                }
+                let comma: KeyboardEvent = .input(.cantoneseComma)
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.cantoneseNumeric), comma, .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.cantoneseNumeric), .space, comma, .newLine]
+                        }
+                }()
+                eventRows.append(bottomEvents)
                 return eventRows
         }
-        func alphabeticLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func alphabeticLowercasedKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
                         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -333,13 +331,21 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .input(.period)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.numeric), .globe, .space, period, .newLine] :
-                        [.transform(.numeric), period, .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.numeric), period, .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.numeric), .globe, .space, period, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.numeric), .space, period, .newLine]
+                        }
+                }()
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func alphabeticUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func alphabeticUppercasedKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
                         ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -355,13 +361,21 @@ private extension KeyboardIdiom {
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let period: KeyboardEvent = .input(.period)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.numeric), .globe, .space, period, .newLine] :
-                        [.transform(.numeric), period, .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.numeric), period, .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.numeric), .globe, .space, period, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.numeric), .space, period, .newLine]
+                        }
+                }()
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func cantoneseNumericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func cantoneseNumericKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", "：", "；", "（", "）", "$", "@", "「", "」"],
@@ -525,13 +539,21 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.cantonese(.lowercased)), .globe, .space, .newLine] :
-                        [.transform(.cantonese(.lowercased)), .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.cantonese(.lowercased)), .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.cantonese(.lowercased)), .globe, .space, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.cantonese(.lowercased)), .space, .newLine]
+                        }
+                }()
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func numericKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func numericKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
                         ["-", "/", ":", ";", "(", ")", "$", "&", "@", "\""],
@@ -631,13 +653,21 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.alphabetic(.lowercased)), .globe, .space, .newLine] :
-                        [.transform(.alphabetic(.lowercased)), .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.alphabetic(.lowercased)), .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.alphabetic(.lowercased)), .globe, .space, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.alphabetic(.lowercased)), .space, .newLine]
+                        }
+                }()
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func cantoneseSymbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func cantoneseSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["［", "］", "｛", "｝", "#", "%", "^", "*", "+", "="],
                         ["_", "—", "＼", "｜", "～", "《", "》", "¥", "&", "\u{00B7}"],
@@ -831,13 +861,21 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.cantonese(.lowercased)), .globe, .space, .newLine] :
-                        [.transform(.cantonese(.lowercased)), .space, .newLine]
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.cantonese(.lowercased)), .space, .newLine]
+                        }
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.cantonese(.lowercased)), .globe, .space, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.cantonese(.lowercased)), .space, .newLine]
+                        }
+                }()
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        func symbolicKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func symbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let arrayTextArray: [[String]] = [
                         ["[", "]", "{", "}", "#", "%", "^", "*", "+", "="],
                         ["_", "\\", "|", "~", "<", ">", "€", "£", "¥", "•"],
@@ -896,97 +934,20 @@ private extension KeyboardIdiom {
                 eventRows[2].insert(.none, at: 1)
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.alphabetic(.lowercased)), .globe, .space, .newLine] :
-                        [.transform(.alphabetic(.lowercased)), .space, .newLine]
-                eventRows.append(bottomEvents)
-                return eventRows
-        }
-
-        /*
-        func longPressLowercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
-                let arrayTextArray: [[String]] = [
-                        ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-                        ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-                        ["z", "x", "c", "v", "b", "n", "m"]
-                ]
-                let third: [KeyboardEvent] = {
-                        let tones = [("z", "1", "陰平"), ("x", "2", "陰上"), ("c", "3", "陰去"), ("v", "4", "陽平"), ("b", "5", "陽上"), ("n", "6", "陽去")]
-                        let keys: [KeyboardEvent] = tones.map { tuple -> KeyboardEvent in
-                                let primary: KeyElement = KeyElement(tuple.0, header: tuple.1)
-                                let child_0: KeyElement = KeyElement(tuple.0)
-                                let child_1: KeyElement = KeyElement(tuple.1, header: "聲調", footer: tuple.2)
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.input(seat)
+                let bottomEvents: [KeyboardEvent] = {
+                        guard needsInputModeSwitchKey else {
+                                return [.transform(.alphabetic(.lowercased)), .space, .newLine]
                         }
-                        let last: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement("m", header: "'")
-                                let child_0: KeyElement = KeyElement("m")
-                                let child_1: KeyElement = KeyElement("'", header: "分隔")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.input(seat)
-                        }()
-                        return keys + [last]
-                }()
-                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.hidden(.text("a")), at: 0)
-                eventRows[1].insert(.hidden(.text("a")), at: 0)
-                eventRows[1].append(.hidden(.text("l")))
-                eventRows[1].append(.hidden(.text("l")))
-                eventRows[2] = third
-                eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.hidden(.text("z")), at: 1)
-                eventRows[2].append(.hidden(.backspace))
-                eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .input(.cantoneseComma)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
-                        [.transform(.cantoneseNumeric), comma, .space, .newLine]
-                eventRows.append(bottomEvents)
-                return eventRows
-        }
-        func longPressUppercasedKeys(_ needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
-                let arrayTextArray: [[String]] = [
-                        ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-                        ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-                        ["Z", "X", "C", "V", "B", "N", "M"]
-                ]
-                let third: [KeyboardEvent] = {
-                        let tones = [("Z", "1", "陰平"), ("X", "2", "陰上"), ("C", "3", "陰去"), ("V", "4", "陽平"), ("B", "5", "陽上"), ("N", "6", "陽去")]
-                        let keys: [KeyboardEvent] = tones.map { tuple -> KeyboardEvent in
-                                let primary: KeyElement = KeyElement(tuple.0, header: tuple.1)
-                                let child_0: KeyElement = KeyElement(tuple.0)
-                                let child_1: KeyElement = KeyElement(tuple.1, header: "聲調", footer: tuple.2)
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.input(seat)
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return [.transform(.alphabetic(.lowercased)), .globe, .space, .newLine]
+                        case .padPortrait, .padLandscape, .padFloating:
+                                return [.globe, .transform(.alphabetic(.lowercased)), .space, .newLine]
                         }
-                        let last: KeyboardEvent = {
-                                let primary: KeyElement = KeyElement("M", header: "'")
-                                let child_0: KeyElement = KeyElement("M")
-                                let child_1: KeyElement = KeyElement("'", header: "分隔")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
-                                return KeyboardEvent.input(seat)
-                        }()
-                        return keys + [last]
                 }()
-                var eventRows: [[KeyboardEvent]] = arrayTextArray.keysRows
-                eventRows[1].insert(.hidden(.text("A")), at: 0)
-                eventRows[1].insert(.hidden(.text("A")), at: 0)
-                eventRows[1].append(.hidden(.text("L")))
-                eventRows[1].append(.hidden(.text("L")))
-                eventRows[2] = third
-                eventRows[2].insert(.shift, at: 0)
-                eventRows[2].insert(.hidden(.text("Z")), at: 1)
-                eventRows[2].append(.hidden(.backspace))
-                eventRows[2].append(.backspace)
-                let comma: KeyboardEvent = .input(.cantoneseComma)
-                let bottomEvents: [KeyboardEvent] = needsInputModeSwitchKey ?
-                        [.transform(.cantoneseNumeric), .globe, .space, comma, .newLine] :
-                        [.transform(.cantoneseNumeric), comma, .space, .newLine]
                 eventRows.append(bottomEvents)
                 return eventRows
         }
-        */
 }
 
 private extension Array where Element == [String] {
