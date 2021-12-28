@@ -25,7 +25,7 @@ final class NumberButton: UIView {
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 controller.insert(String(digit))
-                shape.backgroundColor = isDarkAppearance ? .black : .lightActionButton
+                shape.backgroundColor = isDarkAppearance ? .black : .lightEmphatic
                 AudioFeedback.perform(.input)
                 controller.triggerHapticFeedback()
         }

@@ -69,16 +69,16 @@ final class YueEngSwitch: UIButton {
                 self.isDarkAppearance = isDarkAppearance
                 self.switched = switched
 
-                backView.backgroundColor = isDarkAppearance ? .darkActionButton : .lightActionButton
+                backView.backgroundColor = isDarkAppearance ? .darkThick : .lightEmphatic
                 yueLabel.textColor = isDarkAppearance ? .white : .black
                 engLabel.textColor = isDarkAppearance ? .white : .black
                 if switched {
                         leftForeView.backgroundColor = .clear
-                        rightForeView.backgroundColor = isDarkAppearance ? .darkButton : .white
+                        rightForeView.backgroundColor = isDarkAppearance ? .darkThin : .white
                         yueLabel.font = smallFont
                         engLabel.font = largeFont
                 } else {
-                        leftForeView.backgroundColor = isDarkAppearance ? .darkButton : .white
+                        leftForeView.backgroundColor = isDarkAppearance ? .darkThin : .white
                         rightForeView.backgroundColor = .clear
                         yueLabel.font = largeFont
                         engLabel.font = smallFont
@@ -96,7 +96,7 @@ final class YueEngSwitch: UIButton {
                 ])
                 backView.layer.cornerRadius = 5
                 backView.layer.cornerCurve = .continuous
-                backView.backgroundColor = isDarkAppearance ? .darkActionButton : .lightActionButton
+                backView.backgroundColor = isDarkAppearance ? .darkThick : .lightEmphatic
                 backView.isUserInteractionEnabled = false
         }
         private func setupLeftForeView() {
@@ -112,7 +112,7 @@ final class YueEngSwitch: UIButton {
                 ])
                 leftForeView.layer.cornerRadius = 5
                 leftForeView.layer.cornerCurve = .continuous
-                leftForeView.backgroundColor = switched ? .clear : (isDarkAppearance ? .darkButton : .white)
+                leftForeView.backgroundColor = switched ? .clear : (isDarkAppearance ? .darkThin : .white)
         }
         private func setupRightForeView() {
                 backView.addSubview(rightForeView)
@@ -127,7 +127,7 @@ final class YueEngSwitch: UIButton {
                 ])
                 rightForeView.layer.cornerRadius = 5
                 rightForeView.layer.cornerCurve = .continuous
-                rightForeView.backgroundColor = switched ? (isDarkAppearance ? .darkButton : .white) : .clear
+                rightForeView.backgroundColor = switched ? (isDarkAppearance ? .darkThin : .white) : .clear
         }
         private func setupText() {
                 backView.addSubview(yueLabel)

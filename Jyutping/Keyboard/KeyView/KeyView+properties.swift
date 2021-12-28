@@ -226,17 +226,17 @@ extension KeyView {
         /// Key Shape View background color
         var backColor: UIColor {
                 if isDarkAppearance {
-                        return deepDarkFantasy ? .darkActionButton : .darkButton
+                        return deepDarkFantasy ? .darkThick : .darkThin
                 } else {
-                        return deepDarkFantasy ? .lightActionButton : .white
+                        return deepDarkFantasy ? .lightEmphatic : .white
                 }
         }
         var highlightingBackColor: UIColor {
                 // action <=> non-action
                 if isDarkAppearance {
-                        return deepDarkFantasy ? .darkButton : .black
+                        return deepDarkFantasy ? .darkThin : .black
                 } else {
-                        return deepDarkFantasy ? .white : .lightActionButton
+                        return deepDarkFantasy ? .white : .lightEmphatic
                 }
         }
         private var deepDarkFantasy: Bool {
