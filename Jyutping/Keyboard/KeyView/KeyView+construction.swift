@@ -28,7 +28,7 @@ extension KeyView {
                 shape.layer.cornerRadius = 5
                 shape.layer.cornerCurve = .continuous
                 shape.layer.shadowColor = UIColor.black.cgColor
-                shape.layer.shadowOpacity = 0.3
+                shape.layer.shadowOpacity = isDarkAppearance ? 1 : 0.3
                 shape.layer.shadowOffset = CGSize(width: 0, height: 1)
                 shape.layer.shadowRadius = 0.5
                 shape.layer.shouldRasterize = true
@@ -38,6 +38,17 @@ extension KeyView {
                         shape.backgroundColor = backColor
                         return
                 }
+
+                /*
+                let shapeColor: UIColor = {
+                        if isDarkAppearance {
+                                return deepDarkFantasy ? UIColor(white: 1, alpha: 0.15) : UIColor(white: 1, alpha: 0.35)
+                        } else {
+                                return deepDarkFantasy ? .lightEmphatic : .white
+                        }
+                }()
+                */
+
                 let effectView: BlurEffectView = {
                         switch event {
                         case .input, .space:
