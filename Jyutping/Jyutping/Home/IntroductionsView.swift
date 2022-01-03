@@ -9,8 +9,8 @@ struct IntroductionsView: View {
                                 Text("Double tapping the space bar will insert a period followed by a space")
                         }
                         Section {
-                                Text(verbatim: "一次過清除已輸入音節").font(.headline)
-                                Text(verbatim: "喺刪除掣(Delete)度向左滑，即可一次過刪晒已輸入拼寫")
+                                Text("Clear the input buffer syllables").font(.headline)
+                                Text("Swipe from right to left on the Delete key will clear the pre-edited syllables")
                         }
                 }
                 .listStyle(.insetGrouped)

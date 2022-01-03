@@ -55,6 +55,8 @@ English
 "title.introductions" = "Introductions";
 "Period (Full Stop) Shortcut" = "Period (Full Stop) Shortcut";
 "Double tapping the space bar will insert a period followed by a space" = "Double tapping the space bar will insert a period followed by a space";
+"Clear the input buffer syllables" = "Clear the input buffer syllables";
+"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "Swipe from right to left on the Delete key will clear the pre-edited syllables";
 
 "Cantonese Expressions" = "Cantonese Expressions";
 "title.expressions" = "Expressions";
