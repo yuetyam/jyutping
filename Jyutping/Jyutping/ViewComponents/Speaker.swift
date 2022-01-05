@@ -29,7 +29,7 @@ struct Speaker: View {
         }
 
         @State private var isSpeaking: Bool = false
-        private let length: CGFloat = 30
+        private let length: CGFloat = 32
 
         var body: some View {
                 if isSpeaking {
@@ -45,7 +45,7 @@ struct Speaker: View {
                                 Image.speaker
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(width: 18, height: 18)
+                                        .frame(width: 20, height: 20)
                                         .foregroundColor(.blue)
                         }
                         .frame(width: length, height: length)
