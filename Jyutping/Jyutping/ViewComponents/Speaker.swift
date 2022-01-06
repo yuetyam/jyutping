@@ -27,9 +27,10 @@ struct Speaker: View {
                         }
                 }
         }
+        private let length: CGFloat = 32
 
         @State private var isSpeaking: Bool = false
-        private let length: CGFloat = 32
+        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 if isSpeaking {
@@ -39,6 +40,15 @@ struct Speaker: View {
                                 .padding(.leading, 6)
                                 .frame(width: length, height: length)
                                 .foregroundColor(.blue)
+                                .onTapGesture {
+                                        Speech.stop()
+                                        isSpeaking = false
+                                }
+                                .onReceive(timer) { _ in
+                                        if !(Speech.isSpeaking) {
+                                                isSpeaking = false
+                                        }
+                                }
                 } else {
                         ZStack {
                                 Circle().foregroundColor(background)
@@ -56,9 +66,6 @@ struct Speaker: View {
                                         Speech.speak(text)
                                 }
                                 action?()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        isSpeaking = false
-                                }
                         }
                 }
         }
