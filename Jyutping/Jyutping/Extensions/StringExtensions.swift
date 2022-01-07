@@ -9,10 +9,11 @@ extension String {
         /// aka. `String.init()`
         static let empty: String = ""
 
-        /// aka. `removedIrrelevancies()`
+        /// Ideographic characters only.
         /// - Returns: A new String made by removing irrelevant characters.
         func filtered() -> String {
-                return filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
+                // return filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
+                return unicodeScalars.filter({ $0.properties.isIdeographic }).map({ String($0) }).joined()
         }
 }
 
