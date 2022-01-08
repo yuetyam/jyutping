@@ -3,9 +3,16 @@ import AVFoundation
 struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+        private static let voice: AVSpeechSynthesisVoice? = {
+                if let enhancedVoice = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Sin-Ji-premium") {
+                        return enhancedVoice
+                } else {
+                        return AVSpeechSynthesisVoice(language: "zh-HK")
+                }
+        }()
         static func speak(_ text: String) {
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = AVSpeechSynthesisVoice(language: "zh-HK")
+                utterance.voice = voice
                 DispatchQueue.main.async {
                         synthesizer.speak(utterance)
                 }
