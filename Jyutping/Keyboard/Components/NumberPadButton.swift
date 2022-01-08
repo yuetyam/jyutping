@@ -20,8 +20,13 @@ final class NumberButton: UIView {
                 setupDigitLabel()
                 setupFootnoteLabel()
         }
-        required init?(coder: NSCoder) { fatalError("NumberButton.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
+
+        override var intrinsicContentSize: CGSize {
+                return CGSize(width: 50, height: 45)
+        }
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 controller.insert(String(digit))
@@ -140,8 +145,13 @@ final class PointButton: UIButton {
                 setupTextLabel()
                 addTarget(self, action: #selector(insert), for: .touchUpInside)
         }
-        required init?(coder: NSCoder) { fatalError("PointButton.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
+
+        override var intrinsicContentSize: CGSize {
+                return CGSize(width: 50, height: 45)
+        }
 
         @objc private func insert() {
                 controller.insert(".")
@@ -177,8 +187,13 @@ final class BackspaceButton: UIView {
                 backgroundColor = .interactiveClear
                 setupKeyImageView()
         }
-        required init?(coder: NSCoder) { fatalError("BackspaceButton.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { CGSize(width: 50, height: 45) }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
+
+        override var intrinsicContentSize: CGSize {
+                return CGSize(width: 50, height: 45)
+        }
 
         private var backspaceTimer: Timer?
         private var repeatingBackspaceTimer: Timer?

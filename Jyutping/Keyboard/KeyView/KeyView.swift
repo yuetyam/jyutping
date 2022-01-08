@@ -47,8 +47,13 @@ final class KeyView: UIView {
                 }
                 improveAccessibility()
         }
-        required init?(coder: NSCoder) { fatalError("KeyView.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { CGSize(width: width, height: height) }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
+
+        override var intrinsicContentSize: CGSize {
+                return CGSize(width: width, height: height)
+        }
 
 
         // MARK: - Touches

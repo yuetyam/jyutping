@@ -16,7 +16,9 @@ final class EmojiCell: UICollectionViewCell {
                 ])
                 emojiLabel.font = .systemFont(ofSize: 34)
         }
-        required init?(coder: NSCoder) { fatalError("EmojiCell.init(coder:) error") }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                 super.touchesBegan(touches, with: event)
@@ -100,9 +102,8 @@ final class EmojiCollectionViewHeader: UICollectionReusableView {
                 ])
         }
 
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
+         @available(*, unavailable)
+         required init?(coder: NSCoder) { fatalError() }
 }
 */
 

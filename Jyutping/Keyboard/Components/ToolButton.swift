@@ -16,7 +16,9 @@ final class ToolButton: UIButton {
                 buttonImageView.contentMode = .scaleAspectFit
                 buttonImageView.image = image
         }
-        required init?(coder: NSCoder) { fatalError("ToolButton.init(coder:) error") }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
 
         convenience init(imageName: String, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {
                 let image: UIImage? = {
@@ -60,7 +62,9 @@ final class YueEngSwitch: UIButton {
                 setupRightForeView()
                 setupText()
         }
-        required init?(coder: NSCoder) { fatalError("YueEngSwitch.init(coder:) error") }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
 
         func update(isDarkAppearance: Bool, switched: Bool) {
                 yueLabel.text = Logogram.current == .simplified ? "粤" : "粵"

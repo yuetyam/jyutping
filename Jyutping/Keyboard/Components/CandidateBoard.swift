@@ -16,5 +16,7 @@ final class CandidateBoard: UIView {
                 ])
                 upArrowButton.accessibilityLabel = NSLocalizedString("Switch back to Keyboard", comment: .empty)
         }
-        required init?(coder: NSCoder) { fatalError("CandidateBoard.init(coder:) error") }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
 }

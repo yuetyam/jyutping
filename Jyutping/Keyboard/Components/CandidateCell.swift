@@ -32,7 +32,8 @@ final class CandidateCell: UICollectionViewCell {
                 updateFonts()
         }
 
-        required init?(coder: NSCoder) { fatalError("CandidateCell.init(coder:) error") }
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
 
         override func prepareForReuse() {
                 super.prepareForReuse()

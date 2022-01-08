@@ -15,8 +15,13 @@ final class ToolBar: UIView {
                 downArrow.layer.addSublayer(splitLine)
                 improveAccessibility()
         }
-        required init?(coder: NSCoder) { fatalError("ToolBar.init(coder:) error") }
-        override var intrinsicContentSize: CGSize { CGSize(width: 320, height: 60)}
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
+
+        override var intrinsicContentSize: CGSize {
+                return CGSize(width: 320, height: toolBarHeight)
+        }
 
         private func setupStackView() {
                 stackView.alignment = .center

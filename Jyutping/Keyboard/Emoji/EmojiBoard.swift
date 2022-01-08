@@ -22,9 +22,8 @@ final class EmojiBoard: UIView {
                 setupSubViews()
         }
 
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
 
         private func setupBackButton() {
                 addSubview(backButton)
@@ -109,9 +108,8 @@ final class Indicator: UIButton {
                 }
         }
 
-        required init?(coder: NSCoder) {
-                fatalError("Indicator.init(coder:) error")
-        }
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
 
         override var intrinsicContentSize: CGSize {
                 return CGSize(width: 40, height: 40)
