@@ -19,16 +19,15 @@ struct JyutpingView_iOS15: View {
                                                 .submitLabel(.search)
                                                 .onSubmit {
                                                         submittedText = inputText
-                                                        let newInput: String = inputText.filtered()
-                                                        guard newInput != cantonese else { return }
-                                                        guard !newInput.isEmpty else {
-                                                                cantonese = newInput
+                                                        guard submittedText != cantonese else { return }
+                                                        guard !submittedText.isEmpty else {
+                                                                cantonese = submittedText
                                                                 pronunciations = []
                                                                 return
                                                         }
-                                                        let search = LookupData.advancedSearch(for: newInput)
+                                                        let search = AppMaster.lookup(text: submittedText)
                                                         if search.romanizations.isEmpty {
-                                                                cantonese = newInput
+                                                                cantonese = submittedText
                                                                 pronunciations = []
                                                         } else {
                                                                 cantonese = search.text

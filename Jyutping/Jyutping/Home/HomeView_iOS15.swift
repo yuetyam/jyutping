@@ -31,16 +31,15 @@ struct HomeView_iOS15: View {
                                                 .autocapitalization(.none)
                                                 .disableAutocorrection(true)
                                                 .onSubmit {
-                                                        let newInput: String = inputText.filtered()
-                                                        guard newInput != cantonese else { return }
-                                                        guard !newInput.isEmpty else {
-                                                                cantonese = newInput
+                                                        guard inputText != cantonese else { return }
+                                                        guard !inputText.isEmpty else {
+                                                                cantonese = inputText
                                                                 pronunciations = []
                                                                 return
                                                         }
-                                                        let search = LookupData.advancedSearch(for: newInput)
+                                                        let search = AppMaster.lookup(text: inputText)
                                                         if search.romanizations.isEmpty {
-                                                                cantonese = newInput
+                                                                cantonese = inputText
                                                                 pronunciations = []
                                                         } else {
                                                                 cantonese = search.text
