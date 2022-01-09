@@ -15,6 +15,41 @@ extension String {
                 // return filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
                 return unicodeScalars.filter({ $0.properties.isIdeographic }).map({ String($0) }).joined()
         }
+
+        var ideographicBlocks: [(text: String, isIdeographic: Bool)] {
+                var blocks: [(String, Bool)] = []
+                var ideographicCache: String = .empty
+                var otherCache: String = .empty
+                var lastWasIdeographic: Bool = true
+                for character in self {
+                        let isIdeographic: Bool = character.unicodeScalars.first?.properties.isIdeographic ?? false
+                        if isIdeographic {
+                                if !lastWasIdeographic && !otherCache.isEmpty {
+                                        let newElement: (String, Bool) = (otherCache, false)
+                                        blocks.append(newElement)
+                                        otherCache = .empty
+                                }
+                                ideographicCache.append(character)
+                                lastWasIdeographic = true
+                        } else {
+                                if lastWasIdeographic && !ideographicCache.isEmpty {
+                                        let newElement: (String, Bool) = (ideographicCache, true)
+                                        blocks.append(newElement)
+                                        ideographicCache = .empty
+                                }
+                                otherCache.append(character)
+                                lastWasIdeographic = false
+                        }
+                }
+                if !ideographicCache.isEmpty {
+                        let newElement: (String, Bool) = (ideographicCache, true)
+                        blocks.append(newElement)
+                } else if !otherCache.isEmpty {
+                        let newElement: (String, Bool) = (otherCache, false)
+                        blocks.append(newElement)
+                }
+                return blocks
+        }
 }
 
 
