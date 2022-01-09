@@ -20,6 +20,9 @@ struct AppMaster {
                 guard filtered != text else {
                         return search
                 }
+                guard !(filtered.isEmpty) else {
+                        return search
+                }
                 let transformed = text.ideographicBlocks
                 var handledCount: Int = 0
                 var combinedText: String = .empty
