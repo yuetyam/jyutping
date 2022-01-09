@@ -72,6 +72,7 @@
 		3775D53D263AF1D20024BF12 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */; };
 		377B86FB270F278B0065CBEF /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377B86FA270F278B0065CBEF /* ImageExtensions.swift */; };
 		377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */; };
+		3789D85E278ABD0A0020FFB1 /* AppMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789D85D278ABD0A0020FFB1 /* AppMaster.swift */; };
 		378FEA44270C14B200153488 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378FEA43270C14B200153488 /* Speech.swift */; };
 		378FEA46270C15A200153488 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378FEA45270C15A200153488 /* Sections.swift */; };
 		378FEA48270C17CC00153488 /* JyutpingView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378FEA47270C17CC00153488 /* JyutpingView_iOS15.swift */; };
@@ -218,6 +219,7 @@
 		3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
 		377B86FA270F278B0065CBEF /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
+		3789D85D278ABD0A0020FFB1 /* AppMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMaster.swift; sourceTree = "<group>"; };
 		378FEA43270C14B200153488 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 		378FEA45270C15A200153488 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		378FEA47270C17CC00153488 /* JyutpingView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingView_iOS15.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				3759F41B262FB65C00266086 /* AppDelegate.swift */,
+				3789D85D278ABD0A0020FFB1 /* AppMaster.swift */,
 				3759F41F262FB65C00266086 /* ContentView.swift */,
 				37D154572706F5640002A24F /* Syllable2IPA.swift */,
 				378FEA43270C14B200153488 /* Speech.swift */,
@@ -735,6 +738,7 @@
 				3759F496262FC2B600266086 /* AboutView.swift in Sources */,
 				3759F494262FC2B600266086 /* HomeView.swift in Sources */,
 				377236682719FB86007F9AB9 /* ExpressionsView.swift in Sources */,
+				3789D85E278ABD0A0020FFB1 /* AppMaster.swift in Sources */,
 				377B86FB270F278B0065CBEF /* ImageExtensions.swift in Sources */,
 				37A02AA9276DF4EF001ED1E7 /* SyllableCell.swift in Sources */,
 				376140EE27622368008BAFDE /* TextExtensions.swift in Sources */,
