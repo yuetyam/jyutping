@@ -60,6 +60,13 @@ struct AppMaster {
                 }
                 return (combinedText, combinedRomanizations)
         }
+
+        /// 1.0.1 (23)
+        static let version: String = {
+                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
+                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
+                return versionString + " (" + buildString + ")"
+        }()
 }
 
 

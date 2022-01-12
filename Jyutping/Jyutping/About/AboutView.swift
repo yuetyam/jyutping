@@ -1,13 +1,6 @@
 import SwiftUI
 
 struct AboutView: View {
-
-        private let versionString: String = {
-                let version: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
-                let build: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
-                return version + " (" + build + ")"
-        }()
-
         var body: some View {
                 NavigationView {
                         List {
@@ -16,10 +9,10 @@ struct AboutView: View {
                                                 Image(systemName: "info.circle").foregroundColor(.blue)
                                                 Text("Version")
                                                 Spacer()
-                                                Text(verbatim: versionString)
+                                                Text(verbatim: AppMaster.version)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton(versionString)
+                                                MenuCopyButton(AppMaster.version)
                                         }
                                 }
                                 Section {
@@ -182,10 +175,7 @@ struct EmailFeedbackButton: View {
         }
 
         private let mailtoUrl: URL = {
-                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
-                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
-                let version: String = versionString + " (" + buildString + ")"
-
+                let version: String = AppMaster.version
                 let device: String = Device.modelName
                 let system: String = Device.system
                 let messageBody: String = """

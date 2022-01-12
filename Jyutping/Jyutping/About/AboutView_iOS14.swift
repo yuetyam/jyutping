@@ -3,12 +3,6 @@ import SwiftUI
 @available(iOS 14.0, *)
 struct AboutView_iOS14: View {
 
-        private let version: String = {
-                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "_error"
-                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "_error"
-                return versionString + " (" + buildString + ")"
-        }()
-
         private let websiteIconName: String = {
                 if #available(iOS 15.0, *) {
                         return "globe.asia.australia"
@@ -28,9 +22,9 @@ struct AboutView_iOS14: View {
                 NavigationView {
                         List {
                                 Section {
-                                        EnhancedLabel("Version", icon: "info.circle", message: Text(verbatim: version))
+                                        EnhancedLabel("Version", icon: "info.circle", message: Text(verbatim: AppMaster.version))
                                                 .contextMenu {
-                                                        MenuCopyButton(version)
+                                                        MenuCopyButton(AppMaster.version)
                                                 }
                                 }
                                 Section {
