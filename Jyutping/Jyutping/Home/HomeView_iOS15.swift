@@ -1,5 +1,4 @@
 import SwiftUI
-import LookupData
 
 @available(iOS 15.0, *)
 struct HomeView_iOS15: View {
