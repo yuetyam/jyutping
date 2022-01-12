@@ -23,24 +23,28 @@ struct AboutView: View {
                                         }
                                 }
                                 Section {
+                                        /*
                                         LinkSafariView(url: URL(string: "https://ososo.io")!) {
                                                 EnhancedLabel("Website", icon: "house", symbol: .safari)
                                         }
                                         .contextMenu {
                                                 URLCopyButton("https://ososo.io")
                                         }
+                                        */
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
                                                 EnhancedLabel("Source Code", icon: "chevron.left.slash.chevron.right", symbol: .safari)
                                         }
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping")
                                         }
+                                        /*
                                         LinkSafariView(url: URL(string: "https://ososo.io/jyutping/terms")!) {
                                                 EnhancedLabel("Terms of Use", icon: "text.alignleft", symbol: .safari)
                                         }
                                         .contextMenu {
                                                 URLCopyButton("https://ososo.io/jyutping/terms")
                                         }
+                                        */
                                         LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy-ios")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
@@ -61,6 +65,7 @@ struct AboutView: View {
                                                 UsernameCopyButton("jyutping")
                                                 URLCopyButton("https://t.me/jyutping")
                                         }
+                                        /*
                                         Button {
                                                 let appUrl: URL = URL(string: "https://www.truthsocial.com")!
                                                 let webUrl: URL = URL(string: "https://www.truthsocial.com")!
@@ -72,6 +77,7 @@ struct AboutView: View {
                                                 UsernameCopyButton("username")
                                                 URLCopyButton("https://www.truthsocial.com")
                                         }
+                                        */
                                         Button {
                                                 // Instagram App doesn't support Universal Links
                                                 let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
