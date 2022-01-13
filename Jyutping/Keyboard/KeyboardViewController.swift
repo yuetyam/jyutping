@@ -325,15 +325,25 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 default:
                         candidateSequence.append(candidate)
-                        let inputCount: Int = {
+                        let inputTextLength: Int = inputText.count
+                        let candidateInputText: String = {
                                 if keyboardLayout > 1 {
-                                        return candidate.input.count
+                                        return candidate.input
                                 } else {
                                         let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "xx", options: .regularExpression)
-                                        return converted.count
+                                        return converted
                                 }
                         }()
-                        let leading = inputText.dropLast(inputText.count - inputCount)
+                        let inputCount: Int = {
+                                let candidateInputCount: Int = candidateInputText.count
+                                guard inputTextLength != 2 else { return candidateInputCount }
+                                guard candidateInputText.contains("jyu") else { return candidateInputCount }
+                                let suffixCount: Int = max(0, inputTextLength - candidateInputCount)
+                                let leading = inputText.dropLast(suffixCount)
+                                let modifiedLeading = leading.replacingOccurrences(of: "jyu", with: "xxx").replacingOccurrences(of: "yu", with: "jyu")
+                                return candidateInputCount - (modifiedLeading.count - leading.count)
+                        }()
+                        let leading = inputText.dropLast(inputTextLength - inputCount)
                         let filtered = leading.replacingOccurrences(of: "'", with: "")
                         var tail: String.SubSequence = {
                                 if filtered.count == leading.count {
@@ -442,6 +452,7 @@ final class KeyboardViewController: UIInputViewController {
                                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
                                                 .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
                                                 .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                                         return converted
                                 }

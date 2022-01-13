@@ -24,6 +24,7 @@ struct Splitter {
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
                                 .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
                                 .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return converted
                 })
@@ -238,7 +239,8 @@ private static let syllables: Set<String> = [
 
 "ye", "yi", "yo", "yau", "yiu", "yat", "yan", "yap", "yam", "yik", "yaa", "yin", "yuk", "yit",
 "yai", "yip", "yim", "yum", "yung", "ying", "yeng", "yaak", "yaai", "yaau",
-"yeoi", "yeon", "yoek", "yoei", "yoen", "yeok", "yoeng", "yeong"
+"yeoi", "yeon", "yoek", "yoei", "yoen", "yeok", "yoeng", "yeong",
+"yu", "yun", "yut"
 ]
 
 }
