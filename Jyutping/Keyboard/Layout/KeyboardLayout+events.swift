@@ -109,8 +109,8 @@ private extension KeyboardIdiom {
                 let first_3: KeyboardEvent = {
                         let primary = KeyElement("oe")
                         let child_0 = KeyElement("oe")
-                        let child_1 = KeyElement("eo")
-                        let child_2 = KeyElement("r")
+                        let child_1 = KeyElement("r")
+                        let child_2 = KeyElement("eo")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
                         return KeyboardEvent.input(seat)
                 }()
@@ -230,8 +230,8 @@ private extension KeyboardIdiom {
                 let first_3: KeyboardEvent = {
                         let primary = KeyElement("OE")
                         let child_0 = KeyElement("OE")
-                        let child_1 = KeyElement("EO")
-                        let child_2 = KeyElement("R")
+                        let child_1 = KeyElement("R")
+                        let child_2 = KeyElement("EO")
                         let seat = KeySeat(primary: primary, children: [child_0, child_1, child_2])
                         return KeyboardEvent.input(seat)
                 }()
