@@ -77,7 +77,7 @@ struct AboutView: View {
                                                 let webUrl: URL = URL(string: "https://www.instagram.com/jyutping_app")!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("Instagram", icon: "circle.square", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("Instagram", icon: "dot.square", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
                                                 UsernameCopyButton("jyutping_app")
