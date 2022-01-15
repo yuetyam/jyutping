@@ -625,6 +625,8 @@ final class KeyboardViewController: UIInputViewController {
                 imeQueue.async { [unowned self] in
                         userLexicon?.deleteAll()
                 }
+                let emptyEmojis: String = .empty
+                UserDefaults.standard.set(emptyEmojis, forKey: "emoji_frequent")
         }
 
 
