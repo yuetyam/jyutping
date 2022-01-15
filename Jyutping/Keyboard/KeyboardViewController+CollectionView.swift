@@ -16,14 +16,14 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 } else {
                         switch section {
                         case 0: return frequentEmojis.count
-                        case 1: return 461  // Smileys & People
-                        case 2: return 199  // Animals & Nature
-                        case 3: return 123  // Food & Drink
-                        case 4: return 117  // Activity
-                        case 5: return 128  // Travel & Places
-                        case 6: return 217  // Objects
-                        case 7: return 292  // Symbols
-                        case 8: return 259  // Flags
+                        case 1: return emojiData[0].count  // 461 Smileys & People
+                        case 2: return emojiData[1].count  // 199 Animals & Nature
+                        case 3: return emojiData[2].count  // 123 Food & Drink
+                        case 4: return emojiData[3].count  // 117 Activity
+                        case 5: return emojiData[4].count  // 128 Travel & Places
+                        case 6: return emojiData[5].count  // 217 Objects
+                        case 7: return emojiData[6].count  // 292 Symbols
+                        case 8: return emojiData[7].count  // 259 Flags
                         default: return 0
                         }
                 }

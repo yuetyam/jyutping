@@ -508,7 +508,6 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var pinyinProvider: PinyinProvider? = nil
         private lazy var shapeData: ShapeData? = nil
         private lazy var simplifier: Simplifier? = nil
-        private(set) lazy var emojiData: [[String]] = EmojiData.fetchAll()
         private func suggest() {
                 switch processingText.first {
                 case .none:
@@ -806,6 +805,9 @@ final class KeyboardViewController: UIInputViewController {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         }
 
+
+        // MARK: - Emoji
+
         private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty
         func updateFrequentEmojis(latest emoji: String) {
                 let combined: String = emoji + frequentEmojis
@@ -814,4 +816,26 @@ final class KeyboardViewController: UIInputViewController {
                 frequentEmojis = updated.joined()
                 UserDefaults.standard.set(frequentEmojis, forKey: "emoji_frequent")
         }
+
+        private(set) lazy var emojiData: [[String]] = {
+                let emojis: [[String]] = EmojiData.fetchAll()
+                if #available(iOSApplicationExtension 14.5, *) {
+                        return emojis
+                } else {
+                        let font = UIFont(name: "Apple Color Emoji", size: 17) ?? .systemFont(ofSize: 17)
+                        func canDisplay(_ text: String) -> Bool {
+                                let nsText = text as NSString
+                                var buffer = Array<unichar>(repeating: 0, count: nsText.length)
+                                nsText.getCharacters(&buffer)
+                                var glyphs = Array<CGGlyph>(repeating: 0, count: nsText.length)
+                                let result = CTFontGetGlyphsForCharacters(font, &buffer, &glyphs, glyphs.count)
+                                return result
+                        }
+                        let filteredEmojis: [[String]] = emojis.map { block -> [String] in
+                                let newBlock: [String] = block.filter({ canDisplay($0) })
+                                return newBlock
+                        }
+                        return filteredEmojis
+                }
+        }()
 }
