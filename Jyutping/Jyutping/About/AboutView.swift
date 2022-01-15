@@ -25,7 +25,7 @@ struct AboutView: View {
                                         }
                                         */
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
-                                                EnhancedLabel("Source Code", icon: "chevron.left.slash.chevron.right", symbol: .safari)
+                                                EnhancedLabel("Source Code", icon: "number.circle", symbol: .safari)
                                         }
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping")
