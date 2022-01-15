@@ -19,3 +19,11 @@ jobs:
       - name: KeyboardData SwiftTest
         run: swift test
         working-directory: ./KeyboardData
+  test_emojidata:
+    name: EmojiData Tests
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: EmojiData SwiftTest
+        run: swift test
+        working-directory: ./EmojiData
