@@ -56,7 +56,7 @@ Cantonese
 "Period (Full Stop) Shortcut" = "快捷輸入句號";
 "Double tapping the space bar will insert a period followed by a space" = "雙擊空格鍵 (space)\n快捷輸入句號「。」";
 "Clear the input buffer syllables" = "一次過清除已輸入音節";
-"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "刪除掣(Delete)度向左滑，即可一次過刪晒已輸入拼寫";
+"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "刪除(Delete)掣度向左滑，即可一次過刪晒已輸入拼寫";
 
 "Cantonese Expressions" = "粵語用字參考";
 "title.expressions" = "粵語用字參考";

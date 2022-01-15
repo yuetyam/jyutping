@@ -102,6 +102,10 @@ struct HomeView: View {
                                                 Text("以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
                                         }
                                         Section {
+                                                Text("Lookup Jyutping with Pinyin").font(.headline)
+                                                Text("以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
+                                        }
+                                        Section {
                                                 Text("Lookup Jyutping with Stroke").font(.headline)
                                                 Text("以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
                                                 Text("""
@@ -132,18 +136,33 @@ struct HomeView: View {
                                                                 }
                                                         }
                                         }
-                                        Section {
-                                                Text("Lookup Jyutping with Pinyin").font(.headline)
-                                                Text("以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6)
-                                        }
-                                        Section {
-                                                Text("Period (Full Stop) Shortcut").font(.headline)
-                                                Text("Double tapping the space bar will insert a period followed by a space").lineSpacing(6)
-                                        }
+                                }
+                                Section {
+                                        Text("Period (Full Stop) Shortcut").font(.headline)
+                                        Text("Double tapping the space bar will insert a period followed by a space").lineSpacing(6)
+                                }
+                                Section {
+                                        Text("Clear the input buffer syllables").font(.headline)
+                                        Text("Swipe from right to left on the Delete key will clear the pre-edited syllables")
                                 }
                                 Section {
                                         Text("Can I use with external keyboards?").font(.headline)
                                         Text("Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.").lineSpacing(6)
+                                }
+                                Section {
+                                        Text("What does “Allow Full Access” do?").font(.headline)
+                                        if UITraitCollection.current.userInterfaceIdiom == .pad {
+                                                Text("Enable a button on the keyboard for pasting texts from Clipboard")
+                                        } else {
+                                                HStack {
+                                                        Text(verbatim: "1.").font(.system(size: 15, design: .monospaced))
+                                                        Text("Haptic Feedback")
+                                                }
+                                                HStack {
+                                                        Text(verbatim: "2.").font(.system(size: 15, design: .monospaced))
+                                                        Text("Paste texts from Clipboard")
+                                                }
+                                        }
                                 }
                         }
                         .listStyle(.grouped)
