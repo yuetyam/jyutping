@@ -624,8 +624,8 @@ final class KeyboardViewController: UIInputViewController {
                 imeQueue.async { [unowned self] in
                         userLexicon?.deleteAll()
                 }
-                let emptyEmojis: String = .empty
-                UserDefaults.standard.set(emptyEmojis, forKey: "emoji_frequent")
+                let emptyText: String = .empty
+                UserDefaults.standard.set(emptyText, forKey: "emoji_frequent")
         }
 
 
@@ -817,12 +817,12 @@ final class KeyboardViewController: UIInputViewController {
                 UserDefaults.standard.set(frequentEmojis, forKey: "emoji_frequent")
         }
 
-        private(set) lazy var emojiData: [[String]] = {
+        private(set) lazy var emojiSequences: [[String]] = {
                 let emojis: [[String]] = EmojiData.fetchAll()
                 if #available(iOSApplicationExtension 14.5, *) {
                         return emojis
                 } else {
-                        let font = UIFont(name: "Apple Color Emoji", size: 17) ?? .systemFont(ofSize: 17)
+                        let font: UIFont = UIFont(name: "Apple Color Emoji", size: 17) ?? .systemFont(ofSize: 17)
                         func canDisplay(_ text: String) -> Bool {
                                 let nsText = text as NSString
                                 var buffer = Array<unichar>(repeating: 0, count: nsText.length)
