@@ -125,14 +125,13 @@ struct HomeView_iOS14: View {
                                 }
                                 Section {
                                         NavigationLink(destination: IntroductionsView()) {
-                                                Label("More Introductions", systemImage: "info.circle")
+                                                EnhancedLabel("More Introductions", icon: "info.circle")
                                         }
                                         NavigationLink(destination: ExpressionsView()) {
-                                                Label("Cantonese Expressions", systemImage: "checkmark.seal")
+                                                EnhancedLabel("Cantonese Expressions", icon: "checkmark.seal")
                                         }
-
                                         NavigationLink(destination: FAQView()) {
-                                                Label("Frequently Asked Questions", systemImage: "questionmark.circle")
+                                                EnhancedLabel("Frequently Asked Questions", icon: "questionmark.circle")
                                         }
                                 }
                         }
