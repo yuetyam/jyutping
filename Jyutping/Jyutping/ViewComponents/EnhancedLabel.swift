@@ -6,89 +6,33 @@ struct EnhancedLabel: View {
         private let icon: String
         private let message: Text?
         private let symbol: Image?
-        private let tintColor: Color
 
-        init(_ title: LocalizedStringKey, icon: String, message: Text? = nil, symbol: Image? = nil, tintColor: Color = .primary) {
+        init(_ title: LocalizedStringKey, icon: String, message: Text? = nil, symbol: Image? = nil) {
                 self.title = title
                 self.icon = icon
                 self.message = message
                 self.symbol = symbol
-                self.tintColor = tintColor
         }
 
         var body: some View {
-                if message == nil && symbol == nil {
-                        if #available(iOS 14.0, *) {
+                if #available(iOS 14.0, *) {
+                        HStack {
                                 Label {
-                                        Text(title).foregroundColor(tintColor)
+                                        Text(title).foregroundColor(.primary)
                                 } icon: {
-                                        Image(systemName: icon)
+                                        Image(systemName: icon).foregroundColor(.blue)
                                 }
-                        } else {
-                                HStack(spacing: 16) {
-                                        Image(systemName: icon)
-                                        Text(title).foregroundColor(tintColor)
-                                        Spacer()
-                                }
-                        }
-                } else if symbol == nil {
-                        if #available(iOS 14.0, *) {
-                                HStack {
-                                        Label {
-                                                Text(title).foregroundColor(tintColor)
-                                        } icon: {
-                                                Image(systemName: icon)
-                                        }
-                                        Spacer()
-                                        message?.foregroundColor(tintColor)
-                                }
-                        } else {
-                                HStack(spacing: 16) {
-                                        Image(systemName: icon)
-                                        Text(title).foregroundColor(tintColor)
-                                        Spacer()
-                                        message?.foregroundColor(tintColor)
-                                }
-                        }
-                } else if message == nil {
-                        if #available(iOS 14.0, *) {
-                                HStack {
-                                        Label {
-                                                Text(title).foregroundColor(tintColor)
-                                        } icon: {
-                                                Image(systemName: icon)
-                                        }
-                                        Spacer()
-                                        symbol?.foregroundColor(.secondary)
-                                }
-                        } else {
-                                HStack(spacing: 16) {
-                                        Image(systemName: icon)
-                                        Text(title).foregroundColor(tintColor)
-                                        Spacer()
-                                        symbol?.foregroundColor(.secondary)
-                                }
+                                Spacer()
+                                message?.foregroundColor(.primary)
+                                symbol?.foregroundColor(.secondary)
                         }
                 } else {
-                        if #available(iOS 14.0, *) {
-                                HStack {
-                                        Label {
-                                                Text(title).foregroundColor(tintColor)
-                                        } icon: {
-                                                Image(systemName: icon)
-                                        }
-                                        Spacer()
-                                        message?.foregroundColor(tintColor)
-                                        symbol?.foregroundColor(.secondary)
-                                }
-                        } else {
-                                HStack(spacing: 16) {
-                                        Image(systemName: icon)
-                                        Text(title).foregroundColor(tintColor)
-                                        Spacer()
-                                        message?.foregroundColor(tintColor)
-                                        symbol?.foregroundColor(.secondary)
-                                }
+                        HStack(spacing: 16) {
+                                Image(systemName: icon).foregroundColor(.blue)
+                                Text(title).foregroundColor(.primary)
+                                Spacer()
+                                message?.foregroundColor(.primary)
+                                symbol?.foregroundColor(.secondary)
                         }
                 }
         }
