@@ -624,8 +624,7 @@ final class KeyboardViewController: UIInputViewController {
                 imeQueue.async { [unowned self] in
                         userLexicon?.deleteAll()
                 }
-                let emptyText: String = .empty
-                UserDefaults.standard.set(emptyText, forKey: "emoji_frequent")
+                Emoji.clearFrequentEmojis()
         }
 
 
@@ -804,38 +803,4 @@ final class KeyboardViewController: UIInputViewController {
         func updateDoubleSpaceShortcut() {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         }
-
-
-        // MARK: - Emoji
-
-        private(set) lazy var frequentEmojis: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty
-        func updateFrequentEmojis(latest emoji: String) {
-                let combined: String = emoji + frequentEmojis
-                let uniqued: [String] = combined.map({ String($0) }).uniqued()
-                let updated: [String] = uniqued.count < 31 ? uniqued : uniqued.dropLast(uniqued.count - 30)
-                frequentEmojis = updated.joined()
-                UserDefaults.standard.set(frequentEmojis, forKey: "emoji_frequent")
-        }
-
-        private(set) lazy var emojiSequences: [[String]] = {
-                let emojis: [[String]] = EmojiData.fetchAll()
-                if #available(iOSApplicationExtension 14.5, *) {
-                        return emojis
-                } else {
-                        let font: UIFont = UIFont(name: "Apple Color Emoji", size: 17) ?? .systemFont(ofSize: 17)
-                        func canDisplay(_ text: String) -> Bool {
-                                let nsText = text as NSString
-                                var buffer = Array<unichar>(repeating: 0, count: nsText.length)
-                                nsText.getCharacters(&buffer)
-                                var glyphs = Array<CGGlyph>(repeating: 0, count: nsText.length)
-                                let result = CTFontGetGlyphsForCharacters(font, &buffer, &glyphs, glyphs.count)
-                                return result
-                        }
-                        let filteredEmojis: [[String]] = emojis.map { block -> [String] in
-                                let newBlock: [String] = block.filter({ canDisplay($0) })
-                                return newBlock
-                        }
-                        return filteredEmojis
-                }
-        }()
 }

@@ -15,15 +15,15 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return candidates.count
                 } else {
                         switch section {
-                        case 0: return frequentEmojis.count
-                        case 1: return emojiSequences[0].count  // 461 Smileys & People
-                        case 2: return emojiSequences[1].count  // 199 Animals & Nature
-                        case 3: return emojiSequences[2].count  // 123 Food & Drink
-                        case 4: return emojiSequences[3].count  // 117 Activity
-                        case 5: return emojiSequences[4].count  // 128 Travel & Places
-                        case 6: return emojiSequences[5].count  // 217 Objects
-                        case 7: return emojiSequences[6].count  // 292 Symbols
-                        case 8: return emojiSequences[7].count  // 259 Flags
+                        case 0: return Emoji.frequent.count
+                        case 1: return Emoji.sequences[0].count  // 461 Smileys & People
+                        case 2: return Emoji.sequences[1].count  // 199 Animals & Nature
+                        case 3: return Emoji.sequences[2].count  // 123 Food & Drink
+                        case 4: return Emoji.sequences[3].count  // 117 Activity
+                        case 5: return Emoji.sequences[4].count  // 128 Travel & Places
+                        case 6: return Emoji.sequences[5].count  // 217 Objects
+                        case 7: return Emoji.sequences[6].count  // 292 Symbols
+                        case 8: return Emoji.sequences[7].count  // 259 Flags
                         default: return 0
                         }
                 }
@@ -36,11 +36,11 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                         switch indexPath.section {
                         case 0:
-                                let start: String.Index = frequentEmojis.startIndex
-                                let index: String.Index = frequentEmojis.index(start, offsetBy: indexPath.row)
-                                cell.emojiLabel.text = String(frequentEmojis[index])
+                                let start: String.Index = Emoji.frequent.startIndex
+                                let index: String.Index = Emoji.frequent.index(start, offsetBy: indexPath.row)
+                                cell.emojiLabel.text = String(Emoji.frequent[index])
                         default:
-                                let emoji: String = emojiSequences[indexPath.section - 1][indexPath.row]
+                                let emoji: String = Emoji.sequences[indexPath.section - 1][indexPath.row]
                                 cell.emojiLabel.text = emoji
                         }
                         return cell
@@ -105,7 +105,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         textDocumentProxy.insertText(emoji)
                         triggerHapticFeedback()
                         AudioFeedback.perform(.input)
-                        updateFrequentEmojis(latest: emoji)
+                        Emoji.updateFrequentEmojis(latest: emoji)
                         return
                 }
                 let candidate: Candidate = candidates[indexPath.row]

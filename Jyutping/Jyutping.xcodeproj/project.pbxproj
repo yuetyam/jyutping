@@ -82,6 +82,8 @@
 		37A02AA7276DEC47001ED1E7 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A02AA6276DEC47001ED1E7 /* InitialsTable.swift */; };
 		37A02AA9276DF4EF001ED1E7 /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A02AA8276DF4EF001ED1E7 /* SyllableCell.swift */; };
 		37A598C5275249B20025A008 /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A598C4275249B20025A008 /* KeyboardInterface.swift */; };
+		37ABAD7D279311EA00FD0D85 /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 37ABAD7C279311EA00FD0D85 /* EmojiData */; };
+		37ABAD7F2793120E00FD0D85 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABAD7E2793120E00FD0D85 /* Emoji.swift */; };
 		37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B19F2527395B6E00DD8A8E /* Logogram.swift */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
 		37D98D92276BA59000DF37EF /* URLCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D91276BA59000DF37EF /* URLCopyButton.swift */; };
@@ -229,6 +231,8 @@
 		37A02AA6276DEC47001ED1E7 /* InitialsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
 		37A02AA8276DF4EF001ED1E7 /* SyllableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllableCell.swift; sourceTree = "<group>"; };
 		37A598C4275249B20025A008 /* KeyboardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
+		37ABAD7B2793117600FD0D85 /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../EmojiData; sourceTree = "<group>"; };
+		37ABAD7E2793120E00FD0D85 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		37B19F2527395B6E00DD8A8E /* Logogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
 		37D98D91276BA59000DF37EF /* URLCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCopyButton.swift; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37ABAD7D279311EA00FD0D85 /* EmojiData in Frameworks */,
 				37309DE42733D60600858162 /* LookupData in Frameworks */,
 				37309DE62733D61100858162 /* KeyboardData in Frameworks */,
 			);
@@ -290,6 +295,7 @@
 		3759F40F262FB65C00266086 = {
 			isa = PBXGroup;
 			children = (
+				37ABAD7B2793117600FD0D85 /* EmojiData */,
 				37309DDF273306FA00858162 /* LookupData */,
 				37309DE22733D5F500858162 /* KeyboardData */,
 				3759F41A262FB65C00266086 /* Jyutping */,
@@ -456,6 +462,7 @@
 		3759F4B4262FC7EA00266086 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
+				37ABAD7E2793120E00FD0D85 /* Emoji.swift */,
 				3759F4B6262FC7EA00266086 /* EmojiCell.swift */,
 				3759F4B7262FC7EA00266086 /* EmojiBoard.swift */,
 			);
@@ -628,6 +635,7 @@
 			packageProductDependencies = (
 				37309DE32733D60600858162 /* LookupData */,
 				37309DE52733D61100858162 /* KeyboardData */,
+				37ABAD7C279311EA00FD0D85 /* EmojiData */,
 			);
 			productName = Keyboard;
 			productReference = 3759F44F262FBA0500266086 /* Keyboard.appex */;
@@ -814,6 +822,7 @@
 				3759F4D0262FC7EA00266086 /* KeyView+construction.swift in Sources */,
 				3759F4D6262FC7EA00266086 /* KeyView.swift in Sources */,
 				3759F4E5262FC7EA00266086 /* StringExtensions.swift in Sources */,
+				37ABAD7F2793120E00FD0D85 /* Emoji.swift in Sources */,
 				3759F4DE262FC7EA00266086 /* KeyboardViewController+keyboard.swift in Sources */,
 				3759F4D8262FC7EA00266086 /* AudioFeedback.swift in Sources */,
 				3759F4DF262FC7EA00266086 /* KeyboardLayout+events.swift in Sources */,
@@ -1300,6 +1309,10 @@
 		37309DE52733D61100858162 /* KeyboardData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = KeyboardData;
+		};
+		37ABAD7C279311EA00FD0D85 /* EmojiData */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EmojiData;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -13,8 +13,8 @@ public struct EmojiData {
                         EmojiData.fetch(name: "emoji_7")]
         }
 
-        private static func fetch(name: String, type: String = "txt") -> [String] {
-                guard let path: String = Bundle.module.path(forResource: name, ofType: type) else { return fallback(name) }
+        private static func fetch(name: String) -> [String] {
+                guard let path: String = Bundle.module.path(forResource: name, ofType: "txt") else { return fallback(name) }
                 guard let content: String = try? String(contentsOfFile: path) else { return fallback(name) }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let transformed: [String] = sourceLines.map { line -> String in
