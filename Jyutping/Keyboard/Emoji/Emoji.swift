@@ -13,6 +13,7 @@ struct Emoji {
         }
         static func clearFrequentEmojis() {
                 let emptyText: String = .empty
+                frequent = emptyText
                 UserDefaults.standard.set(emptyText, forKey: "emoji_frequent")
         }
 
