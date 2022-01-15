@@ -16,7 +16,7 @@ public struct EmojiData {
         private static func fetch(name: String, type: String = "txt") -> [String] {
                 guard let path: String = Bundle.module.path(forResource: name, ofType: type) else { return fallback(name) }
                 guard let content: String = try? String(contentsOfFile: path) else { return fallback(name) }
-                let sourceLines: [String] = content.components(separatedBy: .newlines)
+                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let transformed: [String] = sourceLines.map { line -> String in
                         guard let codes: String = line.components(separatedBy: "#").first else { return "?" }
                         if codes.contains(" ") {
