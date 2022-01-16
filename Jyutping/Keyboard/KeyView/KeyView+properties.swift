@@ -239,7 +239,7 @@ extension KeyView {
                         return deepDarkFantasy ? .white : .lightEmphatic
                 }
         }
-        private var deepDarkFantasy: Bool {
+        var deepDarkFantasy: Bool {
                 switch event {
                 case .input, .space:
                         return false

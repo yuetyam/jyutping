@@ -49,14 +49,7 @@ extension KeyView {
                 }()
                 */
 
-                let effectView: BlurEffectView = {
-                        switch event {
-                        case .input, .space:
-                                return BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
-                        default:
-                                return BlurEffectView(fraction: 0.48, effectStyle: .light)
-                        }
-                }()
+                let effectView: BlurEffectView = deepDarkFantasy ? BlurEffectView(fraction: 0.48, effectStyle: .light) : BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
                 let blurEffectView: UIVisualEffectView = effectView
                 blurEffectView.frame = shape.bounds
                 blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
