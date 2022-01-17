@@ -4,7 +4,10 @@ Jyutping
 Jyutping Keyboard for iOS
 
 <a href="https://t.me/jyutping">
-        <img src="images/telegram.png" alt="Telegram" width="150"/>
+        <img src="images/telegram.png" alt="Telegram" height="37"/>
+</a>
+<a href="https://www.instagram.com/jyutping_app">
+        <img src="images/instagram.png" alt="Instagram" height="37"/>
 </a>
 
 ## Now Available on the App Store
