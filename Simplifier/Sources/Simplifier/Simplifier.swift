@@ -2,6 +2,7 @@ import Foundation
 import SQLite3
 
 public struct Simplifier {
+
         private let database: OpaquePointer? = {
                 guard let path: String = Bundle.module.path(forResource: "t2s", ofType: "sqlite3") else { return nil }
                 var db: OpaquePointer?
@@ -115,8 +116,6 @@ public struct Simplifier {
                 }
                 return (modified, matched, replacement)
         }
-
-
 
 
 private static let phrases: [String: String] = [

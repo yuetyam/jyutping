@@ -1,6 +1,7 @@
 import UIKit
 import KeyboardData
 import LookupData
+import Simplifier
 
 final class KeyboardViewController: UIInputViewController {
 

@@ -71,6 +71,7 @@
 		3772366A271A0018007F9AB9 /* IntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37723669271A0018007F9AB9 /* IntroductionsView.swift */; };
 		3775D53D263AF1D20024BF12 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */; };
 		377B86FB270F278B0065CBEF /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377B86FA270F278B0065CBEF /* ImageExtensions.swift */; };
+		377CBDE827958175000FBAEB /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 377CBDE727958175000FBAEB /* Simplifier */; };
 		377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */; };
 		3789D85E278ABD0A0020FFB1 /* AppMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789D85D278ABD0A0020FFB1 /* AppMaster.swift */; };
 		378FEA44270C14B200153488 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378FEA43270C14B200153488 /* Speech.swift */; };
@@ -220,6 +221,7 @@
 		37723669271A0018007F9AB9 /* IntroductionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionsView.swift; sourceTree = "<group>"; };
 		3775D53C263AF1D20024BF12 /* CharacterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
 		377B86FA270F278B0065CBEF /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		377CBDE627958168000FBAEB /* Simplifier */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Simplifier; path = ../Simplifier; sourceTree = "<group>"; };
 		377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
 		3789D85D278ABD0A0020FFB1 /* AppMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMaster.swift; sourceTree = "<group>"; };
 		378FEA43270C14B200153488 /* Speech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			files = (
 				37ABAD7D279311EA00FD0D85 /* EmojiData in Frameworks */,
 				37309DE42733D60600858162 /* LookupData in Frameworks */,
+				377CBDE827958175000FBAEB /* Simplifier in Frameworks */,
 				37309DE62733D61100858162 /* KeyboardData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +298,7 @@
 		3759F40F262FB65C00266086 = {
 			isa = PBXGroup;
 			children = (
+				377CBDE627958168000FBAEB /* Simplifier */,
 				37ABAD7B2793117600FD0D85 /* EmojiData */,
 				37309DDF273306FA00858162 /* LookupData */,
 				37309DE22733D5F500858162 /* KeyboardData */,
@@ -636,6 +640,7 @@
 				37309DE32733D60600858162 /* LookupData */,
 				37309DE52733D61100858162 /* KeyboardData */,
 				37ABAD7C279311EA00FD0D85 /* EmojiData */,
+				377CBDE727958175000FBAEB /* Simplifier */,
 			);
 			productName = Keyboard;
 			productReference = 3759F44F262FBA0500266086 /* Keyboard.appex */;
@@ -1309,6 +1314,10 @@
 		37309DE52733D61100858162 /* KeyboardData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = KeyboardData;
+		};
+		377CBDE727958175000FBAEB /* Simplifier */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Simplifier;
 		};
 		37ABAD7C279311EA00FD0D85 /* EmojiData */ = {
 			isa = XCSwiftPackageProductDependency;
