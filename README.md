@@ -3,7 +3,9 @@ Jyutping
 
 Jyutping Keyboard for iOS
 
-[![Telegram](https://img.shields.io/badge/Telegram-@jyutping-blue?style=for-the-badge&logo=telegram)](https://t.me/jyutping)
+<a href="https://t.me/jyutping">
+        <img src="images/telegram.png" alt="Telegram" width="150"/>
+</a>
 
 ## Now Available on the App Store
 
