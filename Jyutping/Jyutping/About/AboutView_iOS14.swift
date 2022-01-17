@@ -28,33 +28,23 @@ struct AboutView_iOS14: View {
                                                 }
                                 }
                                 Section {
-                                        /*
-                                        LinkSafariView(url: URL(string: "https://ososo.io")!) {
+                                        LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping")!) {
                                                 EnhancedLabel("Website", icon: websiteIconName, symbol: .safari)
                                         }
                                         .contextMenu {
-                                                URLCopyButton("https://ososo.io")
+                                                URLCopyButton("https://yuetyam.github.io/jyutping")
                                         }
-                                        */
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
                                                 EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: .safari)
                                         }
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping")
                                         }
-                                        /*
-                                        LinkSafariView(url: URL(string: "https://ososo.io/jyutping/terms")!) {
-                                                EnhancedLabel("Terms of Use", icon: "text.alignleft", symbol: .safari)
-                                        }
-                                        .contextMenu {
-                                                URLCopyButton("https://ososo.io/jyutping/terms")
-                                        }
-                                        */
-                                        LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy-ios")!) {
+                                        LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
                                         .contextMenu {
-                                                URLCopyButton("https://ososo.io/jyutping/privacy-ios")
+                                                URLCopyButton("https://yuetyam.github.io/jyutping/privacy")
                                         }
                                 }
                                 Section {
