@@ -27,3 +27,11 @@ jobs:
       - name: EmojiData SwiftTest
         run: swift test
         working-directory: ./EmojiData
+  test_simplifier:
+    name: Simplifier Tests
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+      - name: Simplifier SwiftTest
+        run: swift test
+        working-directory: ./Simplifier
