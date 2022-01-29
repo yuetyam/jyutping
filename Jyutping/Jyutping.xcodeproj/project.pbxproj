@@ -87,7 +87,6 @@
 		37ABAD7F2793120E00FD0D85 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABAD7E2793120E00FD0D85 /* Emoji.swift */; };
 		37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B19F2527395B6E00DD8A8E /* Logogram.swift */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
-		37D98D92276BA59000DF37EF /* URLCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D91276BA59000DF37EF /* URLCopyButton.swift */; };
 		37D98DA0276D2E1400DF37EF /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D9F276D2E1400DF37EF /* Speaker.swift */; };
 		37E234EE271466B8005825A2 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E234ED271466B8005825A2 /* StringExtensions.swift */; };
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
@@ -237,7 +236,6 @@
 		37ABAD7E2793120E00FD0D85 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		37B19F2527395B6E00DD8A8E /* Logogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
-		37D98D91276BA59000DF37EF /* URLCopyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCopyButton.swift; sourceTree = "<group>"; };
 		37D98D93276C316E00DF37EF /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37D98D94276C316E00DF37EF /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37D98D95276C316E00DF37EF /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -421,7 +419,6 @@
 				3759F47F262FC27100266086 /* SafariView.swift */,
 				3759F482262FC27100266086 /* ShareSheetView.swift */,
 				377FE2D7263FCA0B00F00DE8 /* MenuCopyButton.swift */,
-				37D98D91276BA59000DF37EF /* URLCopyButton.swift */,
 				37D98D9F276D2E1400DF37EF /* Speaker.swift */,
 			);
 			path = ViewComponents;
@@ -768,7 +765,6 @@
 				378FEA46270C15A200153488 /* Sections.swift in Sources */,
 				378FEA48270C17CC00153488 /* JyutpingView_iOS15.swift in Sources */,
 				3759F487262FC27100266086 /* SafariView.swift in Sources */,
-				37D98D92276BA59000DF37EF /* URLCopyButton.swift in Sources */,
 				37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */,
 				377FE2D8263FCA0B00F00DE8 /* MenuCopyButton.swift in Sources */,
 				3759F488262FC27100266086 /* LinkSafariView.swift in Sources */,
