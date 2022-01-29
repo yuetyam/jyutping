@@ -262,8 +262,8 @@ final class KeyboardViewController: UIInputViewController {
                         inputText = .empty
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
                                 DispatchQueue(label: "im.cantonese.fix.return").sync { [unowned self] in
-                                        textDocumentProxy.insertText(.zeroWidthSpace)
-                                        textDocumentProxy.deleteBackward()
+                                        self.textDocumentProxy.insertText(.zeroWidthSpace)
+                                        self.textDocumentProxy.deleteBackward()
                                 }
                         }
                         AudioFeedback.perform(.input)
