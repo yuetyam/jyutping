@@ -3,7 +3,16 @@ import EmojiData
 
 struct Emoji {
 
-        private(set) static var frequent: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty
+        private(set) static var frequent: String = {
+                let history: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty
+                if !(history.isEmpty) {
+                        return history
+                } else {
+                        // FIXME: iOS 13, 14 compatibility
+                        return "😂☺️💕👍🙈😴❤️😊😔✌️😎😄😍😘😏😉🎶😜😒😭😁😌👀😋👌😫😳🥰😑👏"
+                }
+        }()
+
         static func updateFrequentEmojis(latest emoji: String) {
                 let combined: String = emoji + frequent
                 let uniqued: [String] = combined.map({ String($0) }).uniqued()
