@@ -108,11 +108,7 @@ struct AboutView_iOS14: View {
                                         }
                                         EmailFeedbackButton()
                                                 .contextMenu {
-                                                        Button {
-                                                                UIPasteboard.general.string = "bing@ososo.io"
-                                                        } label: {
-                                                                Label("Copy Email Address", systemImage: "doc.on.doc")
-                                                        }
+                                                        MenuCopyButton("bing@ososo.io", title: "Copy Email Address")
                                                 }
                                 }
                                 Section {
@@ -120,21 +116,13 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("Review on the App Store", icon: "heart", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
-                                                Button {
-                                                        UIPasteboard.general.string = "https://apps.apple.com/app/id1509367629"
-                                                } label: {
-                                                        Label("Copy App Store link", systemImage: "doc.on.doc")
-                                                }
+                                                MenuCopyButton("https://apps.apple.com/app/id1509367629", title: "Copy App Store link")
                                         }
                                         ShareSheetView(activityItems: [URL(string: "https://apps.apple.com/app/id1509367629")!]) {
                                                 EnhancedLabel("Share this App", icon: "square.and.arrow.up")
                                         }
                                         .contextMenu {
-                                                Button {
-                                                        UIPasteboard.general.string = "https://apps.apple.com/app/id1509367629"
-                                                } label: {
-                                                        Label("Copy App Store link", systemImage: "doc.on.doc")
-                                                }
+                                                MenuCopyButton("https://apps.apple.com/app/id1509367629", title: "Copy App Store link")
                                         }
                                 }
                         }
