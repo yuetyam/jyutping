@@ -98,13 +98,15 @@
 "Terms of Use" = "使用條款";
 "Privacy Policy" = "隱私政策";
 
-"Telegram Group" = "加入 Telegram 群組";
+"Telegram Group" = "加入 Telegram 交流群";
+"QQ Group" = "加入 QQ 交流裙";
 "TRUTH Social" = "關注 TRUTH Social";
 "Instagram" = "關注 Instagram";
 "GitHub Issues" = "GitHub Issues";
 
 "Copy URL" = "拷貝網址";
 "Copy Username" = "拷貝戶名";
+"Copy QQ Group Number" = "拷貝 QQ 裙號";
 
 "Email Feedback" = "郵件反饋";
 "Unable to compose mail" = "無法編寫郵件";

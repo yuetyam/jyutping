@@ -48,6 +48,18 @@ struct AboutView: View {
                                                 UsernameCopyButton("jyutping")
                                                 URLCopyButton("https://t.me/jyutping")
                                         }
+                                        Button {
+                                                let scheme: String = #"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=293148593"#
+                                                let address: String = #"https://jq.qq.com/?k=4PR17m3t"#
+                                                let appUrl: URL = URL(string: scheme)!
+                                                let webUrl: URL = URL(string: address)!
+                                                AppMaster.open(appUrl: appUrl, webUrl: webUrl)
+                                        } label: {
+                                                EnhancedLabel("QQ Group", icon: "person.2", symbol: Image(systemName: "arrow.up.right"))
+                                        }
+                                        .contextMenu {
+                                                MenuCopyButton("293148593", title: "Copy QQ Group Number")
+                                        }
                                         /*
                                         Button {
                                                 let appUrl: URL = URL(string: "https://www.truthsocial.com")!
