@@ -2,21 +2,23 @@ import SwiftUI
 
 struct MenuCopyButton: View {
 
-        init(_ content: String) {
+        init(_ content: String, title: LocalizedStringKey = "Copy") {
                 self.content = content
+                self.title = title
         }
 
-        let content: String
+        private let content: String
+        private let title: LocalizedStringKey
 
         var body: some View {
-                Button(action: {
+                Button {
                         UIPasteboard.general.string = content
-                }) {
+                } label: {
                         if #available(iOS 14.0, *) {
-                                Label("Copy", systemImage: "doc.on.doc")
+                                Label(title, systemImage: "doc.on.doc")
                         } else {
                                 HStack {
-                                        Text("Copy")
+                                        Text(title)
                                         Spacer()
                                         Image(systemName: "doc.on.doc")
                                 }
