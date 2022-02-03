@@ -70,7 +70,7 @@ struct AboutView_iOS14: View {
                                                 EnhancedLabel("QQ Group", icon: "person.2", symbol: Image(systemName: "arrow.up.right"))
                                         }
                                         .contextMenu {
-                                                MenuCopyButton("293148593", title: "Copy QQ Group Number")
+                                                MenuCopyButton("293148593", title: "Copy QQ Group ID")
                                         }
                                         /*
                                         Button {
