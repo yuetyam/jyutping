@@ -8,7 +8,6 @@ struct Emoji {
                 if !(history.isEmpty) {
                         return history
                 } else {
-                        // FIXME: iOS 13, 14 compatibility
                         return "😂☺️💕👍🙈😴❤️😊😔✌️😎😄😍😘😏😉🎶😜😒😭😁😌👀😋👌😫😳🥰😑👏"
                 }
         }()
