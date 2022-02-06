@@ -166,9 +166,13 @@ struct HomeView_iOS15: View {
                                         NavigationLink(destination: ExpressionsView()) {
                                                 Label("Cantonese Expressions", systemImage: "checkmark.seal")
                                         }
-
+                                }
+                                Section {
                                         NavigationLink(destination: FAQView()) {
                                                 Label("Frequently Asked Questions", systemImage: "questionmark.circle")
+                                        }
+                                        NavigationLink(destination: PrivacyNoticeView()) {
+                                                Label("Privacy Notice", systemImage: "lock.circle")
                                         }
                                 }
                         }

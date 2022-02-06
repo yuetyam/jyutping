@@ -92,6 +92,7 @@
 		37EDF18626F21BD7001A4F43 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */; };
 		37EDF18826F21C3C001A4F43 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */; };
 		37EDF18E26F22D79001A4F43 /* AboutView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */; };
+		37F6FEBA27B0464700F4BA70 /* PrivacyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6FEB927B0464700F4BA70 /* PrivacyNoticeView.swift */; };
 		37FFCD74275E9BE9004F9D97 /* VariantConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FFCD73275E9BE9004F9D97 /* VariantConverter.swift */; };
 /* End PBXBuildFile section */
 
@@ -253,6 +254,7 @@
 		37EDF18526F21BD7001A4F43 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
 		37EDF18726F21C3B001A4F43 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
 		37EDF18D26F22D79001A4F43 /* AboutView_iOS14.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView_iOS14.swift; sourceTree = "<group>"; };
+		37F6FEB927B0464700F4BA70 /* PrivacyNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyNoticeView.swift; sourceTree = "<group>"; };
 		37FFCD73275E9BE9004F9D97 /* VariantConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -537,6 +539,7 @@
 				37723669271A0018007F9AB9 /* IntroductionsView.swift */,
 				377236672719FB86007F9AB9 /* ExpressionsView.swift */,
 				377236652719F9BF007F9AB9 /* FAQView.swift */,
+				37F6FEB927B0464700F4BA70 /* PrivacyNoticeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -752,6 +755,7 @@
 				377B86FB270F278B0065CBEF /* ImageExtensions.swift in Sources */,
 				37A02AA9276DF4EF001ED1E7 /* SyllableCell.swift in Sources */,
 				376140EE27622368008BAFDE /* TextExtensions.swift in Sources */,
+				37F6FEBA27B0464700F4BA70 /* PrivacyNoticeView.swift in Sources */,
 				3759F48B262FC27100266086 /* EnhancedTextField.swift in Sources */,
 				375BB6E526DD088F00D6A36A /* EnhancedLabel.swift in Sources */,
 				3759F48A262FC27100266086 /* ShareSheetView.swift in Sources */,

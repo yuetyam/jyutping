@@ -130,8 +130,13 @@ struct HomeView_iOS14: View {
                                         NavigationLink(destination: ExpressionsView()) {
                                                 EnhancedLabel("Cantonese Expressions", icon: "checkmark.seal")
                                         }
+                                }
+                                Section {
                                         NavigationLink(destination: FAQView()) {
                                                 EnhancedLabel("Frequently Asked Questions", icon: "questionmark.circle")
+                                        }
+                                        NavigationLink(destination: PrivacyNoticeView()) {
+                                                EnhancedLabel("Privacy Notice", icon: "lock.circle")
                                         }
                                 }
                         }
