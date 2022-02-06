@@ -16,11 +16,11 @@ struct AboutView: View {
                                         }
                                 }
                                 Section {
-                                        LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping")!) {
+                                        LinkSafariView(url: URL(string: "https://ososo.io")!) {
                                                 EnhancedLabel("Website", icon: "house", symbol: .safari)
                                         }
                                         .contextMenu {
-                                                URLCopyButton("https://yuetyam.github.io/jyutping")
+                                                URLCopyButton("https://ososo.io")
                                         }
                                         LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
                                                 EnhancedLabel("Source Code", icon: "number.circle", symbol: .safari)
@@ -28,11 +28,11 @@ struct AboutView: View {
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping")
                                         }
-                                        LinkSafariView(url: URL(string: "https://yuetyam.github.io/jyutping/privacy")!) {
+                                        LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy")!) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
                                         .contextMenu {
-                                                URLCopyButton("https://yuetyam.github.io/jyutping/privacy")
+                                                URLCopyButton("https://ososo.io/jyutping/privacy")
                                         }
                                 }
                                 Section {
