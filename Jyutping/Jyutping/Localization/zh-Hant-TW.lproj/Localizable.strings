@@ -70,6 +70,11 @@
 "All other features don't require Full Access" = "毋開啟「完整取用」毋會影響使用其他功能";
 
 "Privacy Notice" = "私隱佈告";
+"privacy.notice.1" = "鍵盤全程毋會訪問網絡";
+"privacy.notice.2" = "鍵盤係完全獨立个，同主應用程式之間毋會進行任何交流、分享";
+"privacy.notice.3" = "開啟「完整取用」權限僅用作提供振動反饋功能";
+"privacy.notice.4" = "鍵盤上部个「帖上」掣毋會收集任何剪帖板內容";
+"privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 
 // Search

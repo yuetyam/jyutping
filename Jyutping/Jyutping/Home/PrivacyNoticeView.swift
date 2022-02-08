@@ -5,11 +5,17 @@ struct PrivacyNoticeView: View {
 
         var body: some View {
                 List {
-                        VStack(spacing: 16) {
-                                NoteView("鍵盤全程毋會訪問網絡")
-                                NoteView("鍵盤係完全獨立个，同主應用程式之間毋會進行任何交流、分享")
+                        Section {
+                                VStack(spacing: 20) {
+                                        NoteView("privacy.notice.1")
+                                        NoteView("privacy.notice.2")
+                                        NoteView("privacy.notice.3")
+                                        NoteView("privacy.notice.4")
+                                }
+                                .padding(.vertical)
+                        } footer: {
+                                Text("privacy.notice.footer").textCase(.none)
                         }
-                        .padding(.vertical)
                 }
                 .listStyle(.insetGrouped)
                 .navigationTitle("Privacy Notice")
@@ -26,6 +32,7 @@ struct PrivacyNoticeView_Previews: PreviewProvider {
 }
 
 
+@available(iOS 14.0, *)
 private struct NoteView: View {
 
         init(_ text: LocalizedStringKey) {
