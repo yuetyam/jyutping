@@ -10,8 +10,8 @@ Chinese, Simplified
 
 "Characters" = "字符";
 "Traditional" = "傳統漢字";
-"Traditional, Hong Kong" = "傳統漢字（香港）";
-"Traditional, Taiwan" = "傳統漢字（臺灣）";
+"Traditional, Hong Kong" = "傳統漢字・香港";
+"Traditional, Taiwan" = "傳統漢字・臺灣";
 "Simplified" = "简化字";
 
 "Keyboard Layout" = "鍵盤佈局";
