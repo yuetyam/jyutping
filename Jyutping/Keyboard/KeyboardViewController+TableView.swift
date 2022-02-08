@@ -130,8 +130,11 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 cell.textLabel?.text = NSLocalizedString("QWERTY", comment: .empty)
                                 cell.accessoryType = keyboardLayout < 2 ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("SaamPing", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("Saam Ping", comment: .empty)
                                 cell.accessoryType = keyboardLayout == 2 ? .checkmark : .none
+                        case 2:
+                                cell.textLabel?.text = NSLocalizedString("Gau Gung Gaak", comment: .empty)
+                                cell.accessoryType = keyboardLayout == 3 ? .checkmark : .none
                         default:
                                 break
                         }
@@ -226,14 +229,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 2:
                         tableView.deselectRow(at: indexPath, animated: true)
-                        switch indexPath.row {
-                        case 0:
-                                UserDefaults.standard.set(1, forKey: "keyboard_layout")
-                        case 1:
-                                UserDefaults.standard.set(2, forKey: "keyboard_layout")
-                        default:
-                                break
-                        }
+                        let value: Int = {
+                                switch indexPath.row {
+                                case 0: return 1
+                                case 1: return 2
+                                case 2: return 3
+                                default: return 1
+                                }
+                        }()
+                        UserDefaults.standard.set(value, forKey: "keyboard_layout")
                         triggerHapticFeedback()
                         updateKeyboardLayout()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
