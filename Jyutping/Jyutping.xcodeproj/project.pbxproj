@@ -13,6 +13,7 @@
 		3738EC002704CF9A00E75BDF /* TonesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3738EBFF2704CF9A00E75BDF /* TonesTable.swift */; };
 		373C0DD626766A2300EA52E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373C0DD526766A2300EA52E4 /* Images.xcassets */; };
 		373C0DD826771C9700EA52E4 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373C0DD726771C9700EA52E4 /* UIImageExtensions.swift */; };
+		374C8F3527B21AA500890801 /* GridKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374C8F3427B21AA500890801 /* GridKeyView.swift */; };
 		3759F41C262FB65C00266086 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F41B262FB65C00266086 /* AppDelegate.swift */; };
 		3759F420262FB65C00266086 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F41F262FB65C00266086 /* ContentView.swift */; };
 		3759F422262FB65D00266086 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3759F421262FB65D00266086 /* Assets.xcassets */; };
@@ -140,6 +141,7 @@
 		3738EBFF2704CF9A00E75BDF /* TonesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonesTable.swift; sourceTree = "<group>"; };
 		373C0DD526766A2300EA52E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		373C0DD726771C9700EA52E4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		374C8F3427B21AA500890801 /* GridKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridKeyView.swift; sourceTree = "<group>"; };
 		3759F418262FB65C00266086 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3759F41B262FB65C00266086 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3759F41F262FB65C00266086 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -295,6 +297,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		374C8F3327B21A7200890801 /* GridKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				374C8F3427B21AA500890801 /* GridKeyView.swift */,
+			);
+			path = GridKeyboard;
+			sourceTree = "<group>";
+		};
 		3759F40F262FB65C00266086 = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +396,7 @@
 				3759F4BA262FC7EA00266086 /* Layout */,
 				3759F4A9262FC7E900266086 /* KeyView */,
 				3759F49A262FC7E900266086 /* Components */,
+				374C8F3327B21A7200890801 /* GridKeyboard */,
 				3759F4A1262FC7E900266086 /* Candidate */,
 				3759F4B4262FC7EA00266086 /* Emoji */,
 				3759F4BE262FC7EA00266086 /* Extensions */,
@@ -833,6 +844,7 @@
 				3759F4DF262FC7EA00266086 /* KeyboardLayout+events.swift in Sources */,
 				3759F4D2262FC7EA00266086 /* BlurEffectView.swift in Sources */,
 				3759F4C7262FC7EA00266086 /* CandidateCell.swift in Sources */,
+				374C8F3527B21AA500890801 /* GridKeyView.swift in Sources */,
 				3759F4E0262FC7EA00266086 /* ShiftState.swift in Sources */,
 				3759F4D5262FC7EA00266086 /* KeyView+properties.swift in Sources */,
 				37FFCD74275E9BE9004F9D97 /* VariantConverter.swift in Sources */,

@@ -62,6 +62,63 @@ extension KeyboardViewController {
         }
 
 
+        // MARK: - Gird Keyboard
+
+        private func loadGirdKeyboard() {
+                keyboardStackView.removeArrangedSubviews()
+                toolBar.tintColor = isDarkAppearance ? .white : .black
+                toolBar.yueEngSwitch.update(isDarkAppearance: isDarkAppearance, switched: keyboardIdiom.isEnglishMode)
+                if !UIPasteboard.general.hasStrings {
+                        toolBar.pasteButton.tintColor = .systemGray
+                }
+                keyboardStackView.addArrangedSubview(toolBar)
+
+                let boardStackView = UIStackView()
+                boardStackView.axis = .horizontal
+                boardStackView.distribution = .fillProportionally
+
+                let leadingStackView = makeGirdRow(for: generateSeats(["zou", "san", "nei", "hou"]))
+                let secondStackView = makeGirdRow(for: generateSeats([",\u{FF61}?!", "GHI", "PQRS", "123"]))
+                boardStackView.addArrangedSubview(leadingStackView)
+                boardStackView.addArrangedSubview(secondStackView)
+
+                let middle_0: UIStackView = makeGirdRow(for: generateSeats(["ABC", "JKL", "TUV"]))
+                let middle_1: UIStackView = makeGirdRow(for: generateSeats(["DEF", "MNO", "WXYZ"]))
+                let middleStackView = UIStackView()
+                middleStackView.axis = .horizontal
+                middleStackView.distribution = .fillProportionally
+                middleStackView.addArrangedSubview(middle_0)
+                middleStackView.addArrangedSubview(middle_1)
+
+                let spaceStackView = UIStackView()
+                spaceStackView.axis = .vertical
+                spaceStackView.distribution = .fillProportionally
+                spaceStackView.addArrangedSubview(middleStackView)
+                spaceStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+                boardStackView.addArrangedSubview(spaceStackView)
+
+                let trailingStackView: UIStackView = UIStackView()
+                trailingStackView.axis = .vertical
+                trailingStackView.distribution = .fillProportionally
+                trailingStackView.addArrangedSubview(GridKeyView(event: .backspace, controller: self))
+                trailingStackView.addArrangedSubview(GridKeyView(event: .input(.init(primary: .init("#@$"))), controller: self))
+                trailingStackView.addArrangedSubview(GridKeyView(event: .newLine, controller: self))
+                boardStackView.addArrangedSubview(trailingStackView)
+
+                keyboardStackView.addArrangedSubview(boardStackView)
+        }
+        private func makeGirdRow(for events: [KeyboardEvent]) -> UIStackView {
+                let stackView: UIStackView = UIStackView()
+                stackView.axis = .vertical
+                stackView.distribution = .fillProportionally
+                stackView.addArrangedSubviews(events.map { GridKeyView(event: $0, controller: self) })
+                return stackView
+        }
+        private func generateSeats(_ texts: [String]) -> [KeyboardEvent] {
+                return texts.map({ KeyboardEvent.input(KeySeat(primary: .init($0))) })
+        }
+
+
         // MARK: - NumberPad & DecimalPad
 
         private func loadNumberPad() {
