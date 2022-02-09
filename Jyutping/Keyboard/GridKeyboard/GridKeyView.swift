@@ -25,8 +25,8 @@ class GridKeyView: UIView {
         private func setupShapeView() {
                 addSubview(shape)
                 shape.translatesAutoresizingMaskIntoConstraints = false
-                let horizontalConstant: CGFloat = 4
-                let verticalConstant: CGFloat = 4
+                let horizontalConstant: CGFloat = 3
+                let verticalConstant: CGFloat = 3
                 NSLayoutConstraint.activate([
                         shape.topAnchor.constraint(equalTo: topAnchor, constant: verticalConstant),
                         shape.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalConstant),
@@ -34,7 +34,7 @@ class GridKeyView: UIView {
                         shape.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant)
                 ])
                 shape.isUserInteractionEnabled = false
-                shape.tintColor = isDarkAppearance ? .white : .black
+                shape.tintColor = foreColor
                 shape.layer.cornerRadius = 5
                 shape.layer.cornerCurve = .continuous
                 shape.layer.shadowColor = UIColor.black.cgColor
@@ -45,10 +45,11 @@ class GridKeyView: UIView {
                 shape.layer.rasterizationScale = UIScreen.main.scale
 
                 guard isDarkAppearance else {
-                        shape.backgroundColor = .white
+                        shape.backgroundColor = backColor
                         return
                 }
-                let blurEffectView: UIVisualEffectView = BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
+                let effectView: BlurEffectView = deepDarkFantasy ? BlurEffectView(fraction: 0.48, effectStyle: .light) : BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
+                let blurEffectView: UIVisualEffectView = effectView
                 blurEffectView.frame = shape.bounds
                 blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 blurEffectView.layer.cornerRadius = 5
@@ -69,7 +70,7 @@ class GridKeyView: UIView {
                 digitLabel.textAlignment = .center
                 digitLabel.font = .systemFont(ofSize: 16)
                 digitLabel.text = keyText
-                digitLabel.textColor = isDarkAppearance ? .white : .black
+                digitLabel.textColor = foreColor
         }
 }
 
@@ -79,9 +80,7 @@ extension GridKeyView {
         var width: CGFloat {
                 switch event {
                 case .space:
-                        return 140
-                case .backspace, .newLine:
-                        return 70
+                        return 180
                 default:
                         return 60
                 }
@@ -89,9 +88,9 @@ extension GridKeyView {
         var height: CGFloat {
                 switch event {
                 case .newLine:
-                        return 110
+                        return 106
                 default:
-                        return 55
+                        return 53
                 }
         }
         var keyText: String? {
@@ -132,5 +131,33 @@ extension GridKeyView {
                 default:
                         return nil
                 }
+        }
+
+        /// Key Shape View background color
+        var backColor: UIColor {
+                if isDarkAppearance {
+                        return deepDarkFantasy ? .darkThick : .darkThin
+                } else {
+                        return deepDarkFantasy ? .lightEmphatic : .white
+                }
+        }
+        var highlightingBackColor: UIColor {
+                // action <=> non-action
+                if isDarkAppearance {
+                        return deepDarkFantasy ? .darkThin : .black
+                } else {
+                        return deepDarkFantasy ? .white : .lightEmphatic
+                }
+        }
+        var deepDarkFantasy: Bool {
+                switch event {
+                case .input, .space:
+                        return false
+                default:
+                        return true
+                }
+        }
+        var foreColor: UIColor {
+                return isDarkAppearance ? .white : .black
         }
 }

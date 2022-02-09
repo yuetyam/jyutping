@@ -130,10 +130,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 cell.textLabel?.text = NSLocalizedString("QWERTY", comment: .empty)
                                 cell.accessoryType = keyboardLayout < 2 ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("Saam Ping", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("SaamPing", comment: .empty)
                                 cell.accessoryType = keyboardLayout == 2 ? .checkmark : .none
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("Gau Gung Gaak", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("10 Key", comment: .empty)
                                 cell.accessoryType = keyboardLayout == 3 ? .checkmark : .none
                         default:
                                 break
