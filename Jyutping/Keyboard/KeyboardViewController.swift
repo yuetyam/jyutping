@@ -3,6 +3,8 @@ import KeyboardData
 import LookupData
 import Simplifier
 
+
+
 final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Subviews
@@ -41,11 +43,11 @@ final class KeyboardViewController: UIInputViewController {
                 ])
                 candidateCollectionView.delegate = self
                 candidateCollectionView.dataSource = self
-                candidateCollectionView.backgroundColor = view.backgroundColor
+                candidateCollectionView.backgroundColor = .interactiveClear
                 candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: Identifiers.CandidateCell)
                 emojiCollectionView.delegate = self
                 emojiCollectionView.dataSource = self
-                emojiCollectionView.backgroundColor = view.backgroundColor
+                emojiCollectionView.backgroundColor = .interactiveClear
                 emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: Identifiers.EmojiCell)
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
