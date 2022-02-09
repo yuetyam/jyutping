@@ -31,7 +31,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return 4
                 case 2:
                         // Keyboard Layouts
-                        return 2
+                        return 3
                 case 3:
                         // Jyutping Display
                         return 3

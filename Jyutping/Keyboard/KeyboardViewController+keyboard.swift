@@ -39,6 +39,12 @@ extension KeyboardViewController {
         // MARK: - Normal Layouts
 
         private func loadKeys() {
+                let shouldBeGridKeyboard: Bool = keyboardLayout == 3 && keyboardIdiom.isPingMode
+                guard !shouldBeGridKeyboard else {
+                        loadGridKeyboard()
+                        return
+                }
+
                 keyboardStackView.removeArrangedSubviews()
                 toolBar.tintColor = isDarkAppearance ? .white : .black
                 toolBar.yueEngSwitch.update(isDarkAppearance: isDarkAppearance, switched: keyboardIdiom.isEnglishMode)
