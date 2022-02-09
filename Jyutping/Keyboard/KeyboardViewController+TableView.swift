@@ -128,13 +128,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("QWERTY", comment: .empty)
-                                cell.accessoryType = keyboardLayout < 2 ? .checkmark : .none
+                                cell.accessoryType = (keyboardLayout == .qwerty) ? .checkmark : .none
                         case 1:
                                 cell.textLabel?.text = NSLocalizedString("SaamPing", comment: .empty)
-                                cell.accessoryType = keyboardLayout == 2 ? .checkmark : .none
+                                cell.accessoryType = (keyboardLayout == .saamPing) ? .checkmark : .none
                         case 2:
                                 cell.textLabel?.text = NSLocalizedString("10 Key", comment: .empty)
-                                cell.accessoryType = keyboardLayout == 3 ? .checkmark : .none
+                                cell.accessoryType = (keyboardLayout == .grid) ? .checkmark : .none
                         default:
                                 break
                         }
@@ -227,17 +227,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 2:
                         tableView.deselectRow(at: indexPath, animated: true)
-                        let value: Int = {
+                        let selectedLayout: KeyboardLayout = {
                                 switch indexPath.row {
-                                case 0: return 1
-                                case 1: return 2
-                                case 2: return 3
-                                default: return 1
+                                case 0: return .qwerty
+                                case 1: return .saamPing
+                                case 2: return .grid
+                                default: return .qwerty
                                 }
                         }()
-                        UserDefaults.standard.set(value, forKey: "keyboard_layout")
+                        updateKeyboardLayout(to: selectedLayout)
                         triggerHapticFeedback()
-                        updateKeyboardLayout()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }

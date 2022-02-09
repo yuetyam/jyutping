@@ -171,7 +171,7 @@ final class KeyboardViewController: UIInputViewController {
                 switch operation {
                 case .input(let text):
                         if keyboardIdiom.isPingMode {
-                                if keyboardLayout == 2 && text == "gw" {
+                                if keyboardLayout == .saamPing && text == "gw" {
                                         let newInputText: String = inputText + text
                                         inputText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
                                 } else {
@@ -240,7 +240,7 @@ final class KeyboardViewController: UIInputViewController {
                                 textDocumentProxy.deleteBackward()
                         } else {
                                 lazy var hasLightToneSuffix: Bool = inputText.hasSuffix("vv") || inputText.hasSuffix("xx") || inputText.hasSuffix("qq")
-                                if keyboardLayout < 2 && hasLightToneSuffix {
+                                if keyboardLayout == .qwerty && hasLightToneSuffix {
                                         inputText = String(inputText.dropLast(2))
                                 } else {
                                         inputText = String(inputText.dropLast())
@@ -328,7 +328,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidateSequence.append(candidate)
                         let inputTextLength: Int = inputText.count
                         let candidateInputText: String = {
-                                if keyboardLayout > 1 {
+                                if keyboardLayout == .saamPing {
                                         return candidate.input
                                 } else {
                                         let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "xx", options: .regularExpression)
@@ -377,7 +377,7 @@ final class KeyboardViewController: UIInputViewController {
                         case .some("r"), .some("v"), .some("x"):
                                 processingText = inputText
                         default:
-                                if keyboardLayout > 1 {
+                                if keyboardLayout == .saamPing {
                                         processingText = inputText
                                 } else {
                                         processingText = inputText.replacingOccurrences(of: "vv", with: "4")
@@ -745,18 +745,43 @@ final class KeyboardViewController: UIInputViewController {
                 isHapticFeedbackOn = hasFullAccess && UserDefaults.standard.bool(forKey: "haptic_feedback")
         }
 
-        /// 鍵盤佈局
-        ///
-        /// 0: The key "keyboard_layout" doesn‘t exist.
-        ///
-        /// 1: 全鍵盤 QWERTY
-        ///
-        /// 2: 三拼
-        ///
-        /// 3: 九宮格（未實現）
-        private(set) lazy var keyboardLayout: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
-        func updateKeyboardLayout() {
-                keyboardLayout = UserDefaults.standard.integer(forKey: "keyboard_layout")
+        /// 鍵盤佈局。全鍵盤 或三拼 或九宮格。
+        private(set) lazy var keyboardLayout: KeyboardLayout = {
+
+                /// 鍵盤佈局
+                ///
+                /// 0: The key "keyboard_layout" doesn‘t exist.
+                ///
+                /// 1: 全鍵盤 QWERTY
+                ///
+                /// 2: 三拼
+                ///
+                /// 3: 九宮格（未實現）
+                let value: Int = UserDefaults.standard.integer(forKey: "keyboard_layout")
+                switch value {
+                case 0, 1:
+                        return .qwerty
+                case 2:
+                        return .saamPing
+                case 3:
+                        return .grid
+                default:
+                        return .qwerty
+                }
+        }()
+        func updateKeyboardLayout(to newLayout: KeyboardLayout) {
+                let value: Int = {
+                        switch newLayout {
+                        case .qwerty:
+                                return 1
+                        case .saamPing:
+                                return 2
+                        case .grid:
+                                return 3
+                        }
+                }()
+                UserDefaults.standard.set(value, forKey: "keyboard_layout")
+                keyboardLayout = newLayout
         }
 
         /// 粵拼顯示

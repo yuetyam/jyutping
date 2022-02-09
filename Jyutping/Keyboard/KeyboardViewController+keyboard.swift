@@ -39,7 +39,7 @@ extension KeyboardViewController {
         // MARK: - Normal Layouts
 
         private func loadKeys() {
-                let shouldBeGridKeyboard: Bool = keyboardLayout == 3 && keyboardIdiom.isPingMode
+                let shouldBeGridKeyboard: Bool = (keyboardLayout == .grid) && keyboardIdiom.isPingMode
                 guard !shouldBeGridKeyboard else {
                         loadGridKeyboard()
                         return

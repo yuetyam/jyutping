@@ -1,16 +1,16 @@
 extension KeyboardIdiom {
-        func events(keyboardLayout: Int, keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        func events(keyboardLayout: KeyboardLayout, keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 switch self {
                 case .cantonese(.lowercased):
                         switch keyboardLayout {
-                        case 2:
+                        case .saamPing:
                                 return saamPingLowercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                         default:
                                 return cantoneseLowercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                         }
                 case .cantonese(.uppercased), .cantonese(.capsLocked):
                         switch keyboardLayout {
-                        case 2:
+                        case .saamPing:
                                 return saamPingUppercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                         default:
                                 return cantoneseUppercasedKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
