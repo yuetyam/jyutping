@@ -210,18 +210,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 switch indexPath.section {
                 case 1:
                         tableView.deselectRow(at: indexPath, animated: true)
-                        switch indexPath.row {
-                        case 0:
-                                Logogram.changeCurrent(to: .traditional)
-                        case 1:
-                                Logogram.changeCurrent(to: .hongkong)
-                        case 2:
-                                Logogram.changeCurrent(to: .taiwan)
-                        case 3:
-                                Logogram.changeCurrent(to: .simplified)
-                        default:
-                                break
-                        }
+                        let selected: Logogram = {
+                                switch indexPath.row {
+                                case 0: return .traditional
+                                case 1: return .hongkong
+                                case 2: return .taiwan
+                                case 3: return .simplified
+                                default: return .traditional
+                                }
+                        }()
+                        Logogram.changeCurrent(to: selected)
                         Logogram.updatePreference()
                         triggerHapticFeedback()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
@@ -245,16 +243,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 3:
                         tableView.deselectRow(at: indexPath, animated: true)
-                        switch indexPath.row {
-                        case 0:
-                                UserDefaults.standard.set(1, forKey: "jyutping_display")
-                        case 1:
-                                UserDefaults.standard.set(2, forKey: "jyutping_display")
-                        case 2:
-                                UserDefaults.standard.set(3, forKey: "jyutping_display")
-                        default:
-                                break
-                        }
+                        let value: Int = {
+                                switch indexPath.row {
+                                case 0: return 1
+                                case 1: return 2
+                                case 2: return 3
+                                default: return 1
+                                }
+                        }()
+                        UserDefaults.standard.set(value, forKey: "jyutping_display")
                         triggerHapticFeedback()
                         updateFootnoteStyle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
@@ -262,18 +259,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 4 where footnoteStyle < 3:
                         tableView.deselectRow(at: indexPath, animated: true)
-                        switch indexPath.row {
-                        case 0:
-                                UserDefaults.standard.set(1, forKey: "tone_style")
-                        case 1:
-                                UserDefaults.standard.set(2, forKey: "tone_style")
-                        case 2:
-                                UserDefaults.standard.set(3, forKey: "tone_style")
-                        case 3:
-                                UserDefaults.standard.set(4, forKey: "tone_style")
-                        default:
-                                break
-                        }
+                        let value: Int = {
+                                switch indexPath.row {
+                                case 0: return 1
+                                case 1: return 2
+                                case 2: return 3
+                                case 3: return 4
+                                default: return 1
+                                }
+                        }()
+                        UserDefaults.standard.set(value, forKey: "tone_style")
                         triggerHapticFeedback()
                         updateToneStyle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
@@ -281,18 +276,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
                         tableView.deselectRow(at: indexPath, animated: true)
-                        switch indexPath.row {
-                        case 0:
-                                UserDefaults.standard.set(1, forKey: "double_space_shortcut")
-                        case 1:
-                                UserDefaults.standard.set(3, forKey: "double_space_shortcut")
-                        case 2:
-                                UserDefaults.standard.set(4, forKey: "double_space_shortcut")
-                        case 3:
-                                UserDefaults.standard.set(2, forKey: "double_space_shortcut")
-                        default:
-                                break
-                        }
+                        let value: Int = {
+                                switch indexPath.row {
+                                case 0: return 1  // Full Stop
+                                case 1: return 3  // Ideographic Comma
+                                case 2: return 4  // Fullwidth Space
+                                case 3: return 2  // None
+                                default: return 1
+                                }
+                        }()
+                        UserDefaults.standard.set(value, forKey: "double_space_shortcut")
                         triggerHapticFeedback()
                         updateDoubleSpaceShortcut()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
