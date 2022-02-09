@@ -55,7 +55,7 @@
 		3759F4DC262FC7EA00266086 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B7262FC7EA00266086 /* EmojiBoard.swift */; };
 		3759F4DD262FC7EA00266086 /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B8262FC7EA00266086 /* KeyboardViewController+TableView.swift */; };
 		3759F4DE262FC7EA00266086 /* KeyboardViewController+keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4B9262FC7EA00266086 /* KeyboardViewController+keyboard.swift */; };
-		3759F4DF262FC7EA00266086 /* KeyboardLayout+events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BB262FC7EA00266086 /* KeyboardLayout+events.swift */; };
+		3759F4DF262FC7EA00266086 /* KeyboardIdiom+events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BB262FC7EA00266086 /* KeyboardIdiom+events.swift */; };
 		3759F4E0262FC7EA00266086 /* ShiftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BC262FC7EA00266086 /* ShiftState.swift */; };
 		3759F4E1262FC7EA00266086 /* KeyboardIdiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BD262FC7EA00266086 /* KeyboardIdiom.swift */; };
 		3759F4E2262FC7EA00266086 /* UIStackViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3759F4BF262FC7EA00266086 /* UIStackViewExtensions.swift */; };
@@ -198,7 +198,7 @@
 		3759F4B7262FC7EA00266086 /* EmojiBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
 		3759F4B8262FC7EA00266086 /* KeyboardViewController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+TableView.swift"; sourceTree = "<group>"; };
 		3759F4B9262FC7EA00266086 /* KeyboardViewController+keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+keyboard.swift"; sourceTree = "<group>"; };
-		3759F4BB262FC7EA00266086 /* KeyboardLayout+events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardLayout+events.swift"; sourceTree = "<group>"; };
+		3759F4BB262FC7EA00266086 /* KeyboardIdiom+events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardIdiom+events.swift"; sourceTree = "<group>"; };
 		3759F4BC262FC7EA00266086 /* ShiftState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftState.swift; sourceTree = "<group>"; };
 		3759F4BD262FC7EA00266086 /* KeyboardIdiom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardIdiom.swift; sourceTree = "<group>"; };
 		3759F4BF262FC7EA00266086 /* UIStackViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStackViewExtensions.swift; sourceTree = "<group>"; };
@@ -487,7 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				3759F4BD262FC7EA00266086 /* KeyboardIdiom.swift */,
-				3759F4BB262FC7EA00266086 /* KeyboardLayout+events.swift */,
+				3759F4BB262FC7EA00266086 /* KeyboardIdiom+events.swift */,
 				3759F4BC262FC7EA00266086 /* ShiftState.swift */,
 			);
 			path = Layout;
@@ -841,7 +841,7 @@
 				37ABAD7F2793120E00FD0D85 /* Emoji.swift in Sources */,
 				3759F4DE262FC7EA00266086 /* KeyboardViewController+keyboard.swift in Sources */,
 				3759F4D8262FC7EA00266086 /* AudioFeedback.swift in Sources */,
-				3759F4DF262FC7EA00266086 /* KeyboardLayout+events.swift in Sources */,
+				3759F4DF262FC7EA00266086 /* KeyboardIdiom+events.swift in Sources */,
 				3759F4D2262FC7EA00266086 /* BlurEffectView.swift in Sources */,
 				3759F4C7262FC7EA00266086 /* CandidateCell.swift in Sources */,
 				374C8F3527B21AA500890801 /* GridKeyView.swift in Sources */,
