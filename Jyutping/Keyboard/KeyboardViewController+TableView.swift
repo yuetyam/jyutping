@@ -4,12 +4,8 @@ struct Identifiers {
         static let CandidateCell: String = "CandidateCell"
         static let EmojiCell: String = "EmojiCell"
 
-        static let feedbacksSettingsCell: String = "SettingsTableViewFeedbacksCell"
-        static let charactersSettingsCell: String = "SettingsTableViewCharactersCell"
-        static let keyboardLayoutSettingsCell: String = "SettingsTableViewKeyboardLayoutCell"
-        static let candidateFootnoteSettingsCell: String = "SettingsTableViewCandidateFootnoteCell"
-        static let candidateToneStyleSettingsCell: String = "SettingsTableViewCandidateToneStyleCell"
-        static let spaceShortcutSettingsCell: String = "SettingsTableViewSpaceShortcutCell"
+        static let switchSettingsCell: String = "SettingsTableViewSwitchCell"
+        static let selectionSettingsCell: String = "SettingsTableViewSelectionCell"
         static let clearLexiconSettingsCell: String = "SettingsTableViewClearLexiconCell"
 }
 
@@ -30,6 +26,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         // Characters, Logogram, Fonts
                         return 4
                 case 2:
+                        // FIXME: Revert to 2
                         // Keyboard Layouts
                         return 3
                 case 3:
@@ -82,7 +79,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 switch indexPath.section {
                 case 0:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.feedbacksSettingsCell, for: indexPath)
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
                         cell.selectionStyle = .none
                         switch indexPath.row {
                         case 0:
@@ -107,7 +104,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
                 case 1:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.charactersSettingsCell, for: indexPath)
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Traditional", comment: .empty)
@@ -124,7 +121,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return cell
 
                 case 2:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.keyboardLayoutSettingsCell, for: indexPath)
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("QWERTY", comment: .empty)
@@ -141,7 +138,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return cell
 
                 case 3:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.candidateFootnoteSettingsCell, for: indexPath)
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Above Candidates", comment: .empty)
@@ -158,7 +155,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return cell
 
                 case 4 where footnoteStyle < 3:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.candidateToneStyleSettingsCell, for: indexPath)
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: .empty)
@@ -177,7 +174,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
                 case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.spaceShortcutSettingsCell, for: indexPath)
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel?.text = NSLocalizedString("Insert a period", comment: .empty)

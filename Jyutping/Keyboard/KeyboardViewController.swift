@@ -3,8 +3,6 @@ import KeyboardData
 import LookupData
 import Simplifier
 
-
-
 final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Subviews
@@ -51,12 +49,8 @@ final class KeyboardViewController: UIInputViewController {
                 emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: Identifiers.EmojiCell)
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.feedbacksSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.charactersSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.keyboardLayoutSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.candidateFootnoteSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.candidateToneStyleSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.spaceShortcutSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.switchSettingsCell)
+                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.selectionSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)
                 setupToolBarActions()
         }
