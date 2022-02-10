@@ -4,12 +4,14 @@ import UIKit
 class GridKeyView: UIView {
 
         let event: KeyboardEvent
+        let controller: KeyboardViewController
         let returnKeyType: UIReturnKeyType
         let isDarkAppearance: Bool
 
         private let shape: UIView = UIView()
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
+                self.controller = controller
                 self.returnKeyType = controller.textDocumentProxy.returnKeyType ?? .default
                 self.isDarkAppearance = controller.isDarkAppearance
                 super.init(frame: .zero)
@@ -27,6 +29,15 @@ class GridKeyView: UIView {
 
         override var intrinsicContentSize: CGSize {
                 return CGSize(width: width, height: height)
+        }
+
+        override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+                switch self.event {
+                case .newLine:
+                        controller.insert("\n")
+                default:
+                        break
+                }
         }
 
         private func setupShapeView() {
