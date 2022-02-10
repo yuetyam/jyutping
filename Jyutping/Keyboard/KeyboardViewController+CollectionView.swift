@@ -53,7 +53,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return cell
                 }
                 guard collectionView != sidebarCollectionView else {
-                        guard let cell: SidebarCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SidebarCell", for: indexPath) as? SidebarCell else { return UICollectionViewCell() }
+                        guard let cell: SidebarCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.SidebarCell, for: indexPath) as? SidebarCell else { return UICollectionViewCell() }
                         switch indexPath.row {
                         case 0:
                                 cell.textLabel.text = "👍"

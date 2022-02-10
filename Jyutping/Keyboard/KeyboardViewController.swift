@@ -51,10 +51,9 @@ final class KeyboardViewController: UIInputViewController {
                 sidebarCollectionView.delegate = self
                 sidebarCollectionView.dataSource = self
                 sidebarCollectionView.backgroundColor = .interactiveClear
-                sidebarCollectionView.register(SidebarCell.self, forCellWithReuseIdentifier: "SidebarCell")
+                sidebarCollectionView.register(SidebarCell.self, forCellWithReuseIdentifier: Identifiers.SidebarCell)
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
-                // TODO: Merge as one identifier
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.switchSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.selectionSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)

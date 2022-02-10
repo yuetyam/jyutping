@@ -3,6 +3,7 @@ import UIKit
 struct Identifiers {
         static let CandidateCell: String = "CandidateCell"
         static let EmojiCell: String = "EmojiCell"
+        static let SidebarCell: String = "SidebarCell"
 
         static let switchSettingsCell: String = "SettingsTableViewSwitchCell"
         static let selectionSettingsCell: String = "SettingsTableViewSelectionCell"
