@@ -31,12 +31,37 @@ class GridKeyView: UIView {
                 return CGSize(width: width, height: height)
         }
 
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+                switch self.event {
+                case .backspace:
+                        shape.backgroundColor = highlightingBackColor
+                        controller.textDocumentProxy.deleteBackward()
+                case .newLine:
+                        shape.backgroundColor = highlightingBackColor
+                case .space:
+                        shape.backgroundColor = highlightingBackColor
+                        controller.insert(" ")
+                case .input(let seat):
+                        shape.backgroundColor = highlightingBackColor
+                        let text: String = seat.primary.text
+                        controller.insert(text)
+                default:
+                        break
+                }
+        }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+                revertBackground()
                 switch self.event {
                 case .newLine:
                         controller.insert("\n")
                 default:
                         break
+                }
+        }
+        private func revertBackground() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
+                        guard let self = self else { return }
+                        self.shape.backgroundColor = self.backColor
                 }
         }
 
