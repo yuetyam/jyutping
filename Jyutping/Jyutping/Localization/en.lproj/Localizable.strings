@@ -72,11 +72,11 @@ English
 "All other features don't require Full Access" = "All other features don't require Full Access";
 
 "Privacy Notice" = "Privacy Notice";
-"privacy.notice.1" = "鍵盤全程毋會訪問網絡";
-"privacy.notice.2" = "鍵盤係完全獨立个，同主應用程式之間毋會進行任何交流、分享";
-"privacy.notice.3" = "開啓「全權取用」權限僅用作提供振動反饋功能";
-"privacy.notice.4" = "鍵盤上部个「帖上」掣毋會收集任何剪帖板內容";
-"privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
+"privacy.notice.1" = "This Keyboard would always be offline, would never connect to the networks.";
+"privacy.notice.2" = "There is no communication between the Keyboard Extension and the main App.";
+"privacy.notice.3" = "Enabling Haptic Feedback needs Allow Full Access.";
+"privacy.notice.4" = "The Paste button on the top of the Keyboard would not collect any content of the Pasteboard.";
+"privacy.notice.footer" = "TLDR: We do NOT collect or share personal information.";
 
 
 // Search
