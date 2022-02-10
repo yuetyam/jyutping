@@ -83,7 +83,19 @@ extension KeyboardViewController {
                 let leadingStackView = UIStackView()
                 leadingStackView.axis = .vertical
                 leadingStackView.distribution = .fillProportionally
-                leadingStackView.addArrangedSubview(GridKeyView(event: .sidebar, controller: self))
+
+                let sidebar = GridKeyView(event: .sidebar, controller: self)
+                leadingStackView.addArrangedSubview(sidebar)
+                sidebar.addSubview(sidebarCollectionView)
+                sidebarCollectionView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        sidebarCollectionView.topAnchor.constraint(equalTo: sidebar.topAnchor, constant: 3),
+                        sidebarCollectionView.leadingAnchor.constraint(equalTo: sidebar.leadingAnchor),
+                        sidebarCollectionView.bottomAnchor.constraint(equalTo: sidebar.bottomAnchor, constant: -3),
+                        sidebarCollectionView.trailingAnchor.constraint(equalTo: sidebar.trailingAnchor)
+                ])
+                (sidebarCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
+
                 leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.numeric), controller: self))
 
                 let grid_row_0: UIStackView = makeGridRow(for: ["，。？！", "ABC", "DEF"])

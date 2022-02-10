@@ -1,5 +1,26 @@
 import UIKit
 
+final class SidebarCell: UICollectionViewCell {
+
+        let textLabel: UILabel = UILabel()
+
+        override init(frame: CGRect) {
+                super.init(frame: frame)
+                contentView.addSubview(textLabel)
+                textLabel.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        textLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                        textLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+                ])
+                textLabel.textAlignment = .center
+                textLabel.font = .systemFont(ofSize: 15)
+        }
+
+        @available(*, unavailable)
+        required init?(coder: NSCoder) { fatalError() }
+}
+
+
 final class CandidateCell: UICollectionViewCell {
 
         let textLabel: UILabel = UILabel()

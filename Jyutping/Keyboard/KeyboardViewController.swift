@@ -13,6 +13,7 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var candidateCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         private(set) lazy var emojiBoard: EmojiBoard = EmojiBoard()
         private(set) lazy var emojiCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        private(set) lazy var sidebarCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         private(set) lazy var settingsTableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
 
         private(set) lazy var keyboardStackView: UIStackView = {
@@ -47,8 +48,13 @@ final class KeyboardViewController: UIInputViewController {
                 emojiCollectionView.dataSource = self
                 emojiCollectionView.backgroundColor = .interactiveClear
                 emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: Identifiers.EmojiCell)
+                sidebarCollectionView.delegate = self
+                sidebarCollectionView.dataSource = self
+                sidebarCollectionView.backgroundColor = .interactiveClear
+                sidebarCollectionView.register(SidebarCell.self, forCellWithReuseIdentifier: "SidebarCell")
                 settingsTableView.delegate = self
                 settingsTableView.dataSource = self
+                // TODO: Merge as one identifier
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.switchSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.selectionSettingsCell)
                 settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)

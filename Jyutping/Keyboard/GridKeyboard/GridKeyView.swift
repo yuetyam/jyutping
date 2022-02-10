@@ -37,12 +37,12 @@ class GridKeyView: UIView {
                 switch self.event {
                 case .backspace:
                         shape.backgroundColor = highlightingBackColor
-                        controller.textDocumentProxy.deleteBackward()
+                        controller.operate(.backspace)
                 case .newLine:
                         shape.backgroundColor = highlightingBackColor
                 case .space:
                         shape.backgroundColor = highlightingBackColor
-                        controller.insert(" ")
+                        controller.operate(.space)
                 case .input(let seat):
                         shape.backgroundColor = highlightingBackColor
                         let text: String = seat.primary.text
@@ -55,13 +55,13 @@ class GridKeyView: UIView {
                 revertBackground()
                 switch self.event {
                 case .newLine:
-                        controller.insert("\n")
+                        controller.operate(.return)
                 default:
                         break
                 }
         }
         private func revertBackground() {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [weak self] in
                         guard let self = self else { return }
                         self.shape.backgroundColor = self.backColor
                 }

@@ -3,16 +3,23 @@ import UIKit
 extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
         func numberOfSections(in collectionView: UICollectionView) -> Int {
-                if collectionView == candidateCollectionView {
+                switch collectionView {
+                case candidateCollectionView:
                         return 1
-                } else {
+                case emojiCollectionView:
                         return 9
+                case sidebarCollectionView:
+                        return 1
+                default:
+                        return 1
                 }
         }
 
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
                 if collectionView == candidateCollectionView {
                         return candidates.count
+                } else if collectionView == sidebarCollectionView {
+                        return 20
                 } else {
                         switch section {
                         case 0: return Emoji.frequent.count
@@ -30,7 +37,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         }
 
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-                guard collectionView == candidateCollectionView else {
+                guard collectionView != emojiCollectionView else {
                         guard let cell: EmojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.EmojiCell, for: indexPath) as? EmojiCell else {
                                 return UICollectionViewCell()
                         }
@@ -42,6 +49,25 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         default:
                                 let emoji: String = Emoji.sequences[indexPath.section - 1][indexPath.row]
                                 cell.emojiLabel.text = emoji
+                        }
+                        return cell
+                }
+                guard collectionView != sidebarCollectionView else {
+                        guard let cell: SidebarCell = collectionView.dequeueReusableCell(withReuseIdentifier: "SidebarCell", for: indexPath) as? SidebarCell else { return UICollectionViewCell() }
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel.text = "👍"
+                        case 1:
+                                cell.textLabel.text = "好"
+                        case 2:
+                                cell.textLabel.text = "ping"
+                        case 3:
+                                cell.textLabel.text = "?"
+                        case 4...8:
+                                let emoji: String = Emoji.sequences[0][indexPath.row]
+                                cell.textLabel.text = emoji
+                        default:
+                                cell.textLabel.text = "row \(indexPath.row)"
                         }
                         return cell
                 }
@@ -99,7 +125,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         }
 
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                guard collectionView == candidateCollectionView else {
+                guard collectionView != emojiCollectionView else {
                         guard let cell: EmojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCell else { return }
                         let emoji: String = cell.emojiLabel.text ?? "😀"
                         textDocumentProxy.insertText(emoji)
@@ -108,14 +134,22 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         Emoji.updateFrequentEmojis(latest: emoji)
                         return
                 }
+                guard collectionView != sidebarCollectionView else {
+                        insert("\(indexPath.row)")
+                        return
+                }
                 let candidate: Candidate = candidates[indexPath.row]
                 operate(.select(candidate))
         }
 
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-                guard collectionView == candidateCollectionView else {
+                guard collectionView != emojiCollectionView else {
                         return CGSize(width: 42, height: 42)
                 }
+                guard collectionView != sidebarCollectionView else {
+                        return CGSize(width: 500, height: 40)
+                }
+
                 let characterCount: Int = candidates[indexPath.row].text.count
                 guard footnoteStyle < 3 else {
                         if keyboardIdiom == .candidates {
