@@ -83,9 +83,7 @@ extension KeyboardViewController {
                 let leadingStackView = UIStackView()
                 leadingStackView.axis = .vertical
                 leadingStackView.distribution = .fillProportionally
-                leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.cantonese(.lowercased)), controller: self))
-                leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.cantonese(.lowercased)), controller: self))
-                leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.cantonese(.lowercased)), controller: self))
+                leadingStackView.addArrangedSubview(GridKeyView(event: .sidebar, controller: self))
                 leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.numeric), controller: self))
 
                 let grid_row_0: UIStackView = makeGridRow(for: ["，。？！", "ABC", "DEF"])

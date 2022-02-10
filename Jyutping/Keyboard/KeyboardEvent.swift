@@ -8,6 +8,7 @@ enum KeyboardEvent: Hashable {
         case newLine
         case none
         case shift
+        case sidebar
         case space
         case tab
         case text(String)

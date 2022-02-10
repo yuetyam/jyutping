@@ -5,18 +5,20 @@ class GridKeyView: UIView {
 
         let event: KeyboardEvent
         let controller: KeyboardViewController
-        let returnKeyType: UIReturnKeyType
+        let enterKeyType: UIReturnKeyType
         let isDarkAppearance: Bool
 
         private let shape: UIView = UIView()
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
                 self.controller = controller
-                self.returnKeyType = controller.textDocumentProxy.returnKeyType ?? .default
+                self.enterKeyType = controller.textDocumentProxy.returnKeyType ?? .default
                 self.isDarkAppearance = controller.isDarkAppearance
                 super.init(frame: .zero)
                 setupShapeView()
                 switch event {
+                case .sidebar:
+                        break
                 case .backspace:
                         setupKeyImageView()
                 default:
@@ -136,19 +138,22 @@ extension GridKeyView {
         var width: CGFloat {
                 switch event {
                 case .input:
-                        return 50
+                        return 55
                 case .space:
-                        return 150
+                        return 165
                 default:
-                        return 65
+                        return 70
                 }
         }
         var height: CGFloat {
+                let base: CGFloat = 53
                 switch event {
+                case .sidebar:
+                        return base * 3
                 case .newLine:
-                        return 106
+                        return base * 2
                 default:
-                        return 53
+                        return base
                 }
         }
         var keyText: String? {
@@ -158,7 +163,7 @@ extension GridKeyView {
                 case .space:
                         return Logogram.current == .simplified ? "粤拼" : "粵拼"
                 case .newLine:
-                        return Logogram.current == .simplified ? returnKeyTextSimplified : returnKeyText
+                        return Logogram.current == .simplified ? enterKeyTextSimplified : enterKeyText
                 case .transform(let newLayout):
                         switch newLayout {
                         case .cantoneseNumeric, .numeric:
@@ -176,8 +181,8 @@ extension GridKeyView {
                         return nil
                 }
         }
-        private var returnKeyText: String {
-                switch returnKeyType {
+        private var enterKeyText: String {
+                switch enterKeyType {
                 case .continue:
                         return "繼續"
                 case .default:
@@ -206,8 +211,8 @@ extension GridKeyView {
                         return "換行"
                 }
         }
-        private var returnKeyTextSimplified: String {
-                switch returnKeyType {
+        private var enterKeyTextSimplified: String {
+                switch enterKeyType {
                 case .continue:
                         return "继续"
                 case .default:
