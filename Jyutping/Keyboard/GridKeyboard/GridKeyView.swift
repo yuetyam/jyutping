@@ -1,7 +1,7 @@
 import UIKit
 
 /// 九宮格鍵
-class GridKeyView: UIView {
+final class GridKeyView: UIView {
 
         let event: KeyboardEvent
         let controller: KeyboardViewController
@@ -50,6 +50,9 @@ class GridKeyView: UIView {
                 default:
                         break
                 }
+        }
+        override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+                revertBackground()
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 revertBackground()
@@ -133,7 +136,7 @@ class GridKeyView: UIView {
 }
 
 
-extension GridKeyView {
+private extension GridKeyView {
 
         var width: CGFloat {
                 switch event {
