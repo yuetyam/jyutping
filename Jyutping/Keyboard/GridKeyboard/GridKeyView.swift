@@ -4,15 +4,22 @@ import UIKit
 class GridKeyView: UIView {
 
         let event: KeyboardEvent
+        let returnKeyType: UIReturnKeyType
         let isDarkAppearance: Bool
 
         private let shape: UIView = UIView()
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
+                self.returnKeyType = controller.textDocumentProxy.returnKeyType ?? .default
                 self.isDarkAppearance = controller.isDarkAppearance
                 super.init(frame: .zero)
                 setupShapeView()
-                setupKeyTextLabel()
+                switch event {
+                case .backspace:
+                        setupKeyImageView()
+                default:
+                        setupKeyTextLabel()
+                }
         }
 
         @available(*, unavailable)
@@ -72,6 +79,19 @@ class GridKeyView: UIView {
                 digitLabel.text = keyText
                 digitLabel.textColor = foreColor
         }
+        private func setupKeyImageView() {
+                let keyImageView: UIImageView = UIImageView()
+                shape.addSubview(keyImageView)
+                keyImageView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        keyImageView.topAnchor.constraint(equalTo: shape.topAnchor, constant: 13),
+                        keyImageView.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -13),
+                        keyImageView.leadingAnchor.constraint(equalTo: shape.leadingAnchor),
+                        keyImageView.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
+                ])
+                keyImageView.contentMode = .scaleAspectFit
+                keyImageView.image = UIImage(systemName: "delete.left")?.withTintColor(foreColor)
+        }
 }
 
 
@@ -79,10 +99,12 @@ extension GridKeyView {
 
         var width: CGFloat {
                 switch event {
+                case .input:
+                        return 50
                 case .space:
-                        return 180
+                        return 150
                 default:
-                        return 60
+                        return 65
                 }
         }
         var height: CGFloat {
@@ -98,38 +120,84 @@ extension GridKeyView {
                 case .input(let seat):
                         return seat.primary.text
                 case .space:
-                        return "粵拼"
+                        return Logogram.current == .simplified ? "粤拼" : "粵拼"
                 case .newLine:
-                        return "return"
-                case .backspace:
-                        return "DEL"
+                        return Logogram.current == .simplified ? returnKeyTextSimplified : returnKeyText
                 case .transform(let newLayout):
                         switch newLayout {
                         case .cantoneseNumeric, .numeric:
                                 return "123"
                         case .cantoneseSymbolic, .symbolic:
-                                return "#+="
+                                return "#@$"
                         case .cantonese:
-                                return "拼"
+                                return "todo"
                         case .alphabetic:
                                 return "ABC"
                         default:
                                 return "??"
                         }
                 default:
-                        return "NULL"
+                        return nil
                 }
         }
-        var keyImageName: String? {
-                switch event {
-                case .globe:
-                        return "globe"
-                case .backspace:
-                        return "delete.left"
-                case .newLine:
-                        return "return"
-                default:
-                        return nil
+        private var returnKeyText: String {
+                switch returnKeyType {
+                case .continue:
+                        return "繼續"
+                case .default:
+                        return "換行"
+                case .done:
+                        return "完成"
+                case .emergencyCall:
+                        return "緊急"
+                case .go:
+                        return "前往"
+                case .google:
+                        return "谷歌"
+                case .join:
+                        return "加入"
+                case .next:
+                        return "下一個"
+                case .route:
+                        return "路線"
+                case .search:
+                        return "搜尋"
+                case .send:
+                        return "傳送"
+                case .yahoo:
+                        return "雅虎"
+                @unknown default:
+                        return "換行"
+                }
+        }
+        private var returnKeyTextSimplified: String {
+                switch returnKeyType {
+                case .continue:
+                        return "继续"
+                case .default:
+                        return "换行"
+                case .done:
+                        return "完成"
+                case .emergencyCall:
+                        return "紧急"
+                case .go:
+                        return "前往"
+                case .google:
+                        return "谷歌"
+                case .join:
+                        return "加入"
+                case .next:
+                        return "下一个"
+                case .route:
+                        return "路线"
+                case .search:
+                        return "搜寻"
+                case .send:
+                        return "传送"
+                case .yahoo:
+                        return "雅虎"
+                @unknown default:
+                        return "换行"
                 }
         }
 
