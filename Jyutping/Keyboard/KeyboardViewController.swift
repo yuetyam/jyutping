@@ -10,11 +10,41 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var toolBar: ToolBar = ToolBar(controller: self)
         private(set) lazy var settingsView: UIView = UIView()
         private(set) lazy var candidateBoard: CandidateBoard = CandidateBoard()
-        private(set) lazy var candidateCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         private(set) lazy var emojiBoard: EmojiBoard = EmojiBoard()
-        private(set) lazy var emojiCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        private(set) lazy var sidebarCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        private(set) lazy var settingsTableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
+
+        private(set) lazy var candidateCollectionView: UICollectionView = {
+                let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+                collectionView.delegate = self
+                collectionView.dataSource = self
+                collectionView.backgroundColor = .interactiveClear
+                collectionView.register(CandidateCell.self, forCellWithReuseIdentifier: Identifiers.CandidateCell)
+                return collectionView
+        }()
+        private(set) lazy var emojiCollectionView: UICollectionView = {
+                let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+                collectionView.delegate = self
+                collectionView.dataSource = self
+                collectionView.backgroundColor = .interactiveClear
+                collectionView.register(EmojiCell.self, forCellWithReuseIdentifier: Identifiers.EmojiCell)
+                return collectionView
+        }()
+        private(set) lazy var sidebarCollectionView: UICollectionView = {
+                let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+                collectionView.delegate = self
+                collectionView.dataSource = self
+                collectionView.backgroundColor = .interactiveClear
+                collectionView.register(SidebarCell.self, forCellWithReuseIdentifier: Identifiers.SidebarCell)
+                return collectionView
+        }()
+        private(set) lazy var settingsTableView: UITableView = {
+                let tableView = UITableView(frame: .zero, style: .insetGrouped)
+                tableView.delegate = self
+                tableView.dataSource = self
+                tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.switchSettingsCell)
+                tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.selectionSettingsCell)
+                tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)
+                return tableView
+        }()
 
         private(set) lazy var keyboardStackView: UIStackView = {
                 let stackView = UIStackView(frame: .zero)
@@ -31,7 +61,8 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Keyboard Life Cycle
 
-        private func initialize() {
+        override func viewDidLoad() {
+                super.viewDidLoad()
                 view.addSubview(keyboardStackView)
                 keyboardStackView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -40,29 +71,7 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardStackView.rightAnchor.constraint(equalTo: view.rightAnchor),
                         keyboardStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                 ])
-                candidateCollectionView.delegate = self
-                candidateCollectionView.dataSource = self
-                candidateCollectionView.backgroundColor = .interactiveClear
-                candidateCollectionView.register(CandidateCell.self, forCellWithReuseIdentifier: Identifiers.CandidateCell)
-                emojiCollectionView.delegate = self
-                emojiCollectionView.dataSource = self
-                emojiCollectionView.backgroundColor = .interactiveClear
-                emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: Identifiers.EmojiCell)
-                sidebarCollectionView.delegate = self
-                sidebarCollectionView.dataSource = self
-                sidebarCollectionView.backgroundColor = .interactiveClear
-                sidebarCollectionView.register(SidebarCell.self, forCellWithReuseIdentifier: Identifiers.SidebarCell)
-                settingsTableView.delegate = self
-                settingsTableView.dataSource = self
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.switchSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.selectionSettingsCell)
-                settingsTableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)
                 setupToolBarActions()
-        }
-
-        override func viewDidLoad() {
-                super.viewDidLoad()
-                initialize()
         }
         private lazy var shouldKeepInputTextWhileTextDidChange: Bool = false
         override func textDidChange(_ textInput: UITextInput?) {
