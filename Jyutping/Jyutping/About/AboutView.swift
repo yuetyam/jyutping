@@ -141,9 +141,9 @@ struct EmailFeedbackButton: View {
                 Button(action: {
                         UIApplication.shared.open(mailtoUrl) { success in
                                 if !success {
-                                        if UITraitCollection.current.userInterfaceIdiom == .phone {
-                                                isMailOnPhoneUnavailable = true
+                                        if Device.isPhone {
                                                 UINotificationFeedbackGenerator().notificationOccurred(.warning)
+                                                isMailOnPhoneUnavailable = true
                                         } else {
                                                 isMailOnPadUnavailable = true
                                         }

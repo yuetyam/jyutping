@@ -151,7 +151,7 @@ struct HomeView: View {
                                 }
                                 Section {
                                         Text("What does “Allow Full Access” do?").font(.headline)
-                                        if UITraitCollection.current.userInterfaceIdiom == .pad {
+                                        if Device.isPad {
                                                 Text("Enable a button on the keyboard for pasting texts from Clipboard")
                                         } else {
                                                 HStack {
