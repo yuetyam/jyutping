@@ -198,7 +198,7 @@ extension KeyboardViewController {
         @objc private func handleSwitchBack() {
                 triggerHapticFeedback()
                 AudioFeedback.perform(.modify)
-                keyboardIdiom = .cantonese(.lowercased)
+                keyboardIdiom = fallbackKeyboardIdiom
         }
         @objc private func handleBackspace() {
                 triggerHapticFeedback()
@@ -252,7 +252,7 @@ extension KeyboardViewController {
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                 toolBar.reset()
-                keyboardIdiom = .cantonese(.lowercased)
+                keyboardIdiom = fallbackKeyboardIdiom
         }
         
         
@@ -287,7 +287,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubview(settingsView)
         }
         @objc private func dismissSettingsView() {
-                keyboardIdiom = .cantonese(.lowercased)
+                keyboardIdiom = fallbackKeyboardIdiom
         }
 
 

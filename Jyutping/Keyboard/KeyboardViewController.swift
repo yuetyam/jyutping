@@ -173,7 +173,16 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        private lazy var fallbackKeyboardIdiom: KeyboardIdiom = (keyboardLayout == .grid) ? .gridKeyboard : .cantonese(.lowercased)
+        var fallbackKeyboardIdiom: KeyboardIdiom {
+                switch keyboardLayout {
+                case .qwerty:
+                        return .cantonese(.lowercased)
+                case .saamPing:
+                        return .cantonese(.lowercased)
+                case .grid:
+                        return .gridKeyboard
+                }
+        }
 
 
         // MARK: - Operations
