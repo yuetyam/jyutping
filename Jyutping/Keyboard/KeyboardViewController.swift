@@ -297,9 +297,10 @@ final class KeyboardViewController: UIInputViewController {
                 case .doubleShift:
                         AudioFeedback.perform(.modify)
                         keyboardIdiom = keyboardIdiom.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
-                case .transform(let newLayout):
+                case .transform(let newIdiom):
                         AudioFeedback.perform(.modify)
-                        keyboardIdiom = newLayout
+                        let shouldBeGridKeyboard: Bool = keyboardLayout == .grid && newIdiom == .cantonese(.lowercased)
+                        keyboardIdiom = shouldBeGridKeyboard ? .gridKeyboard : newIdiom
                 case .select(let candidate):
                         compose(candidate.text)
                         AudioFeedback.perform(.modify)
@@ -318,7 +319,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidateCollectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reset()
-                        keyboardIdiom = .cantonese(.lowercased)
+                        keyboardIdiom = fallbackKeyboardIdiom
                 default:
                         break
                 }
@@ -658,35 +659,42 @@ final class KeyboardViewController: UIInputViewController {
                 AudioFeedback.perform(.modify)
                 let switched: Bool = toolBar.yueEngSwitch.switched
                 if switched {
-                        switch keyboardIdiom {
-                        case .alphabetic(.lowercased):
-                                keyboardIdiom = .cantonese(.lowercased)
-                        case .alphabetic(.uppercased):
-                                keyboardIdiom = .cantonese(.uppercased)
-                        case .alphabetic(.capsLocked):
-                                keyboardIdiom = .cantonese(.capsLocked)
-                        case .numeric:
-                                keyboardIdiom = .cantoneseNumeric
-                        case .symbolic:
-                                keyboardIdiom = .cantoneseSymbolic
-                        default:
-                                keyboardIdiom = .cantonese(.lowercased)
-                        }
+                        let newIdiom: KeyboardIdiom = {
+                                let shouldBeGridLayout: Bool = keyboardLayout == .grid
+                                switch keyboardIdiom {
+                                case .alphabetic(.lowercased):
+                                        return fallbackKeyboardIdiom
+                                case .alphabetic(.uppercased):
+                                        return shouldBeGridLayout ? .gridKeyboard : .cantonese(.uppercased)
+                                case .alphabetic(.capsLocked):
+                                        return shouldBeGridLayout ? .gridKeyboard : .cantonese(.capsLocked)
+                                case .numeric:
+                                        return shouldBeGridLayout ? .gridKeyboard : .cantoneseNumeric
+                                case .symbolic:
+                                        return shouldBeGridLayout ? .gridKeyboard : .cantoneseSymbolic
+                                default:
+                                        return fallbackKeyboardIdiom
+                                }
+                        }()
+                        keyboardIdiom = newIdiom
                 } else {
-                        switch keyboardIdiom {
-                        case .cantonese(.lowercased):
-                                keyboardIdiom = .alphabetic(.lowercased)
-                        case .cantonese(.uppercased):
-                                keyboardIdiom = .alphabetic(.uppercased)
-                        case .cantonese(.capsLocked):
-                                keyboardIdiom = .alphabetic(.capsLocked)
-                        case .cantoneseNumeric:
-                                keyboardIdiom = .numeric
-                        case .cantoneseSymbolic:
-                                keyboardIdiom = .symbolic
-                        default:
-                                keyboardIdiom = .alphabetic(.lowercased)
-                        }
+                        let newIdiom: KeyboardIdiom = {
+                                switch keyboardIdiom {
+                                case .cantonese(.lowercased):
+                                        return .alphabetic(.lowercased)
+                                case .cantonese(.uppercased):
+                                        return .alphabetic(.uppercased)
+                                case .cantonese(.capsLocked):
+                                        return .alphabetic(.capsLocked)
+                                case .cantoneseNumeric:
+                                        return .numeric
+                                case .cantoneseSymbolic:
+                                        return .symbolic
+                                default:
+                                        return .alphabetic(.lowercased)
+                                }
+                        }()
+                        keyboardIdiom = newIdiom
                 }
         }
         @objc private func handlePaste() {

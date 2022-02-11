@@ -15,13 +15,7 @@ extension KeyboardViewController {
                 case .gridKeyboard, .gridNumeric:
                         loadGridKeyboard()
                 default:
-                        // FIXME: Just loadKeys()
-                        let shouldBeGridKeyboard: Bool = keyboardLayout == .grid && keyboardIdiom.isPingMode
-                        if shouldBeGridKeyboard {
-                                loadGridKeyboard()
-                        } else {
-                                loadKeys()
-                        }
+                        loadKeys()
                 }
         }
 
