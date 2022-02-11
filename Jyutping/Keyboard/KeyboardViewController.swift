@@ -144,7 +144,7 @@ final class KeyboardViewController: UIInputViewController {
 
         private lazy var didKeyboardEstablished: Bool = false
         private lazy var needsDifferentKeyboard: Bool = false
-        private lazy var respondingKeyboardIdiom: KeyboardIdiom = .cantonese(.lowercased)
+        private lazy var respondingKeyboardIdiom: KeyboardIdiom = fallbackKeyboardIdiom
         private var askedKeyboardIdiom: KeyboardIdiom {
                 switch textDocumentProxy.keyboardType {
                 case .numberPad, .asciiCapableNumberPad:
@@ -156,10 +156,10 @@ final class KeyboardViewController: UIInputViewController {
                 case .emailAddress, .URL:
                         return .alphabetic(.lowercased)
                 default:
-                        return .cantonese(.lowercased)
+                        return fallbackKeyboardIdiom
                 }
         }
-        lazy var keyboardIdiom: KeyboardIdiom = .cantonese(.lowercased) {
+        lazy var keyboardIdiom: KeyboardIdiom = fallbackKeyboardIdiom {
                 didSet {
                         setupKeyboard()
                         guard didKeyboardEstablished else {
@@ -173,6 +173,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
+        private lazy var fallbackKeyboardIdiom: KeyboardIdiom = (keyboardLayout == .grid) ? .gridKeyboard : .cantonese(.lowercased)
 
 
         // MARK: - Operations

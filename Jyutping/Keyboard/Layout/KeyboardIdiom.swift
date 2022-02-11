@@ -10,7 +10,6 @@ enum KeyboardIdiom: Hashable {
 
         case gridKeyboard
         case gridNumeric
-        case gridSymbolic
 
         case candidates
         case settings
@@ -21,6 +20,7 @@ enum KeyboardIdiom: Hashable {
 }
 
 extension KeyboardIdiom {
+
         var isEnglishMode: Bool {
                 switch self {
                 case .alphabetic,
@@ -31,11 +31,21 @@ extension KeyboardIdiom {
                         return false
                 }
         }
+
         var isPingMode: Bool {
                 switch self {
                 case .cantonese,
-                     .candidates,
-                     .gridKeyboard:
+                     .candidates:
+                        return true
+                default:
+                        return false
+                }
+        }
+
+        var isGridMode: Bool {
+                switch self {
+                case .gridKeyboard,
+                     .gridNumeric:
                         return true
                 default:
                         return false

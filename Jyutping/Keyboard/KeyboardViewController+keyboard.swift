@@ -12,8 +12,16 @@ extension KeyboardViewController {
                         loadNumberPad()
                 case .emoji:
                         loadEmojiKeyboard()
+                case .gridKeyboard, .gridNumeric:
+                        loadGridKeyboard()
                 default:
-                        loadKeys()
+                        // FIXME: Just loadKeys()
+                        let shouldBeGridKeyboard: Bool = keyboardLayout == .grid && keyboardIdiom.isPingMode
+                        if shouldBeGridKeyboard {
+                                loadGridKeyboard()
+                        } else {
+                                loadKeys()
+                        }
                 }
         }
 
@@ -39,12 +47,6 @@ extension KeyboardViewController {
         // MARK: - Normal Layouts
 
         private func loadKeys() {
-                let shouldBeGridKeyboard: Bool = (keyboardLayout == .grid) && keyboardIdiom.isPingMode
-                guard !shouldBeGridKeyboard else {
-                        loadGridKeyboard()
-                        return
-                }
-
                 keyboardStackView.removeArrangedSubviews()
                 toolBar.tintColor = isDarkAppearance ? .white : .black
                 toolBar.yueEngSwitch.update(isDarkAppearance: isDarkAppearance, switched: keyboardIdiom.isEnglishMode)
@@ -72,6 +74,7 @@ extension KeyboardViewController {
 
         private func loadGridKeyboard() {
                 keyboardStackView.removeArrangedSubviews()
+
                 toolBar.tintColor = isDarkAppearance ? .white : .black
                 toolBar.yueEngSwitch.update(isDarkAppearance: isDarkAppearance, switched: keyboardIdiom.isEnglishMode)
                 let isPasteboardEmpty: Bool = !(UIPasteboard.general.hasStrings)
@@ -96,16 +99,31 @@ extension KeyboardViewController {
                 ])
                 (sidebarCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
 
-                leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.gridNumeric), controller: self))
+                let bottomEvent: KeyboardEvent = keyboardIdiom == .gridNumeric ? .transform(.gridKeyboard) : .transform(.gridNumeric)
+                leadingStackView.addArrangedSubview(GridKeyView(event: bottomEvent, controller: self))
 
-                let grid_row_0: UIStackView = makeGridRow(for: ["，。？！", "ABC", "DEF"])
-                let grid_row_1: UIStackView = makeGridRow(for: ["GHI", "JKL", "MNO"])
-                let grid_row_2: UIStackView = makeGridRow(for: ["PQRS", "TUV", "WXYZ"])
                 let gridStackView = UIStackView()
                 gridStackView.axis = .vertical
                 gridStackView.distribution = .fillProportionally
-                gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2])
-                gridStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+                if keyboardIdiom == .gridNumeric {
+                        let grid_row_0: UIStackView = makeGridRow(for: ["1", "2", "3"])
+                        let grid_row_1: UIStackView = makeGridRow(for: ["4", "5", "6"])
+                        let grid_row_2: UIStackView = makeGridRow(for: ["7", "8", "9"])
+                        gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2])
+                        let gridBottomStackView = UIStackView()
+                        gridBottomStackView.axis = .horizontal
+                        gridBottomStackView.distribution = .fillProportionally
+                        gridBottomStackView.addArrangedSubview(GridKeyView(event: .input(.init(primary: .init("."))), controller: self))
+                        gridBottomStackView.addArrangedSubview(GridKeyView(event: .input(.init(primary: .init("0"))), controller: self))
+                        gridBottomStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+                        gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2, gridBottomStackView])
+                } else {
+                        let grid_row_0: UIStackView = makeGridRow(for: ["，。？", "ABC", "DEF"])
+                        let grid_row_1: UIStackView = makeGridRow(for: ["GHI", "JKL", "MNO"])
+                        let grid_row_2: UIStackView = makeGridRow(for: ["PQRS", "TUV", "WXYZ"])
+                        gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2])
+                        gridStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+                }
 
                 let trailingStackView: UIStackView = UIStackView()
                 trailingStackView.axis = .vertical
@@ -125,7 +143,7 @@ extension KeyboardViewController {
                 let stackView: UIStackView = UIStackView()
                 stackView.axis = .horizontal
                 stackView.distribution = .fillProportionally
-                stackView.addArrangedSubviews(events.map { GridKeyView(event: $0, controller: self) })
+                stackView.addArrangedSubviews(events.map({ GridKeyView(event: $0, controller: self) }))
                 return stackView
         }
 

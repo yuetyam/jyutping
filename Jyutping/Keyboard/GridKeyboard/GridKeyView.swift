@@ -5,6 +5,7 @@ final class GridKeyView: UIView {
 
         let event: KeyboardEvent
         let controller: KeyboardViewController
+        let keyboardIdiom: KeyboardIdiom
         let returnKeyType: UIReturnKeyType
         let isDarkAppearance: Bool
 
@@ -12,6 +13,7 @@ final class GridKeyView: UIView {
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
                 self.controller = controller
+                self.keyboardIdiom = controller.keyboardIdiom
                 self.returnKeyType = controller.textDocumentProxy.returnKeyType ?? .default
                 self.isDarkAppearance = controller.isDarkAppearance
                 super.init(frame: .zero)
@@ -47,7 +49,7 @@ final class GridKeyView: UIView {
                 case .input(let seat):
                         shape.backgroundColor = highlightingBackColor
                         let text: String = seat.primary.text
-                        controller.insert(text)
+                        controller.operate(.input(text))
                 default:
                         break
                 }
@@ -62,7 +64,6 @@ final class GridKeyView: UIView {
                 case .newLine:
                         controller.operate(.return)
                 case .transform(let idiom):
-                        guard idiom != .gridNumeric else { return }
                         controller.operate(.transform(idiom))
                 default:
                         break
@@ -121,7 +122,7 @@ final class GridKeyView: UIView {
                         digitLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
                 digitLabel.textAlignment = .center
-                digitLabel.font = .systemFont(ofSize: 16)
+                digitLabel.font = keyFont
                 digitLabel.text = keyText
                 digitLabel.textColor = foreColor
         }
@@ -144,14 +145,7 @@ final class GridKeyView: UIView {
 private extension GridKeyView {
 
         var width: CGFloat {
-                switch event {
-                case .input:
-                        return 55
-                case .space:
-                        return 165
-                default:
-                        return 70
-                }
+                return 70
         }
         var height: CGFloat {
                 let base: CGFloat = 53
@@ -164,12 +158,27 @@ private extension GridKeyView {
                         return base
                 }
         }
+        var keyFont: UIFont {
+                switch event {
+                case .input(let seat):
+                        let isSingular: Bool = seat.primary.text.count == 1
+                        return .systemFont(ofSize: isSingular ? 22 : 16)
+                default:
+                        return .systemFont(ofSize: 16)
+                }
+        }
         var keyText: String? {
                 switch event {
                 case .input(let seat):
                         return seat.primary.text
                 case .space:
-                        return Logogram.current == .simplified ? "粤拼" : "粵拼"
+                        if keyboardIdiom == .gridNumeric {
+                                return "空格"
+                        } else if Logogram.current == .simplified {
+                                return "粤拼"
+                        } else {
+                                return "粵拼"
+                        }
                 case .newLine:
                         return Logogram.current == .simplified ? returnKeyTextSimplified : returnKeyText
                 case .transform(let newLayout):
@@ -178,8 +187,6 @@ private extension GridKeyView {
                                 return "#@$"
                         case .gridNumeric:
                                 return "123"
-                        case .gridSymbolic:
-                                return "更多"
                         case .gridKeyboard:
                                 return "拼"
                         default:
