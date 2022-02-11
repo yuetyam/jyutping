@@ -78,6 +78,8 @@ English
 "privacy.notice.4" = "The Paste button on the top of the Keyboard would not collect any content of the Pasteboard.";
 "privacy.notice.footer" = "TLDR: We do NOT collect or share personal information.";
 
+"Why is this App's Text-to-Speech voice so odd?" = "Why is this App's Text-to-Speech voice so odd?";
+
 
 // Search
 "Lookup Jyutping for Cantonese" = "Lookup Jyutping for Cantonese";
@@ -87,9 +89,9 @@ English
 "Jyutping Initials" = "Jyutping Initials";
 "Jyutping Finals" = "Jyutping Finals";
 "Jyutping Tones" = "Jyutping Tones";
-"本應用程式使用系統提供嘅語音朗讀功能" = "本應用程式使用系統提供嘅語音朗讀功能";
-"爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言";
-"爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音";
+"本應用程式使用系統提供个語音朗讀功能。" = "本應用程式使用系統提供个語音朗讀功能。";
+"爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
+"爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
 
 "Search on other places (websites)" = "Search on other places (websites)";
 "Jyutping Resources" = "Jyutping Resources";

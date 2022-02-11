@@ -31,14 +31,6 @@ struct TonesTable: View {
                                 } footer: {
                                         Text(verbatim: "聲調之「上」應讀上聲 soeng5，而非去聲 soeng6").textCase(.none)
                                 }
-                                if !(Speech.isLanguagesEnabled) {
-                                        Section {
-                                                Text("爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言").padding(.vertical, 5)
-                                                Text("爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音").padding(.vertical, 5)
-                                        } header: {
-                                                Text("本應用程式使用系統提供嘅語音朗讀功能").textCase(.none)
-                                        }
-                                }
                         }
                         .navigationTitle("Jyutping Tones")
                         .navigationBarTitleDisplayMode(.inline)

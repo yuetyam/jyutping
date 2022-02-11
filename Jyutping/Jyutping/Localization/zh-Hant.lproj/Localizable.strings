@@ -64,7 +64,7 @@ Chinese, Traditional
 "Frequently Asked Questions" = "常問問題（FAQ）";
 "FAQ" = "常問問題";
 "Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
-"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，第三方輸入法係冇辦法使用外置鍵盤嘅，並非開發者有意爲之。";
+"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
 "What does “Allow Full Access” do?" = "開啟「完整取用」作何用？";
 "Enable a button on the keyboard for pasting texts from Clipboard" = "開啓之後，鍵盤上部會多一個「帖上」掣，方便一鍵帖上剪帖板內容";
 "Haptic Feedback" = "振動反饋（Haptic Feedback）";
@@ -78,6 +78,8 @@ Chinese, Traditional
 "privacy.notice.4" = "鍵盤上部个「帖上」掣毋會收集任何剪帖板內容";
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
+"Why is this App's Text-to-Speech voice so odd?" = "點解個語音朗讀有少少毋自然？";
+
 
 // Search
 "Lookup Jyutping for Cantonese" = "鍵入粵語字詞檢索其粵拼";
@@ -87,9 +89,9 @@ Chinese, Traditional
 "Jyutping Initials" = "粵拼聲母表";
 "Jyutping Finals" = "粵拼韻母表";
 "Jyutping Tones" = "粵拼聲調表";
-"本應用程式使用系統提供嘅語音朗讀功能" = "本應用程式使用系統提供嘅語音朗讀功能";
-"爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言";
-"爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音";
+"本應用程式使用系統提供个語音朗讀功能。" = "本應用程式使用系統提供个語音朗讀功能。";
+"爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
+"爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
 
 "Search on other places (websites)" = "其它可供檢索嘅網站";
 "Jyutping Resources" = "粵拼資源網站";
