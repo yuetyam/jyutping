@@ -96,7 +96,7 @@ extension KeyboardViewController {
                 ])
                 (sidebarCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
 
-                leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.numeric), controller: self))
+                leadingStackView.addArrangedSubview(GridKeyView(event: .transform(.gridNumeric), controller: self))
 
                 let grid_row_0: UIStackView = makeGridRow(for: ["，。？！", "ABC", "DEF"])
                 let grid_row_1: UIStackView = makeGridRow(for: ["GHI", "JKL", "MNO"])
@@ -111,7 +111,7 @@ extension KeyboardViewController {
                 trailingStackView.axis = .vertical
                 trailingStackView.distribution = .fillProportionally
                 trailingStackView.addArrangedSubview(GridKeyView(event: .backspace, controller: self))
-                trailingStackView.addArrangedSubview(GridKeyView(event: .transform(.symbolic), controller: self))
+                trailingStackView.addArrangedSubview(GridKeyView(event: .transform(.cantoneseNumeric), controller: self))
                 trailingStackView.addArrangedSubview(GridKeyView(event: .newLine, controller: self))
 
                 let boardStackView = UIStackView()

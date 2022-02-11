@@ -5,14 +5,14 @@ final class GridKeyView: UIView {
 
         let event: KeyboardEvent
         let controller: KeyboardViewController
-        let enterKeyType: UIReturnKeyType
+        let returnKeyType: UIReturnKeyType
         let isDarkAppearance: Bool
 
         private let shape: UIView = UIView()
         init(event: KeyboardEvent, controller: KeyboardViewController) {
                 self.event = event
                 self.controller = controller
-                self.enterKeyType = controller.textDocumentProxy.returnKeyType ?? .default
+                self.returnKeyType = controller.textDocumentProxy.returnKeyType ?? .default
                 self.isDarkAppearance = controller.isDarkAppearance
                 super.init(frame: .zero)
                 setupShapeView()
@@ -166,17 +166,17 @@ private extension GridKeyView {
                 case .space:
                         return Logogram.current == .simplified ? "粤拼" : "粵拼"
                 case .newLine:
-                        return Logogram.current == .simplified ? enterKeyTextSimplified : enterKeyText
+                        return Logogram.current == .simplified ? returnKeyTextSimplified : returnKeyText
                 case .transform(let newLayout):
                         switch newLayout {
-                        case .cantoneseNumeric, .numeric:
-                                return "123"
-                        case .cantoneseSymbolic, .symbolic:
+                        case .cantoneseNumeric:
                                 return "#@$"
-                        case .cantonese:
-                                return "todo"
-                        case .alphabetic:
-                                return "ABC"
+                        case .gridNumeric:
+                                return "123"
+                        case .gridSymbolic:
+                                return "更多"
+                        case .gridKeyboard:
+                                return "拼"
                         default:
                                 return "??"
                         }
@@ -184,8 +184,8 @@ private extension GridKeyView {
                         return nil
                 }
         }
-        private var enterKeyText: String {
-                switch enterKeyType {
+        private var returnKeyText: String {
+                switch returnKeyType {
                 case .continue:
                         return "繼續"
                 case .default:
@@ -214,8 +214,8 @@ private extension GridKeyView {
                         return "換行"
                 }
         }
-        private var enterKeyTextSimplified: String {
-                switch enterKeyType {
+        private var returnKeyTextSimplified: String {
+                switch returnKeyType {
                 case .continue:
                         return "继续"
                 case .default:

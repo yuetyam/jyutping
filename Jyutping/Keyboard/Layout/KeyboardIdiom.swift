@@ -8,6 +8,10 @@ enum KeyboardIdiom: Hashable {
         case numeric
         case symbolic
 
+        case gridKeyboard
+        case gridNumeric
+        case gridSymbolic
+
         case candidates
         case settings
         case emoji
@@ -30,7 +34,8 @@ extension KeyboardIdiom {
         var isPingMode: Bool {
                 switch self {
                 case .cantonese,
-                     .candidates:
+                     .candidates,
+                     .gridKeyboard:
                         return true
                 default:
                         return false
