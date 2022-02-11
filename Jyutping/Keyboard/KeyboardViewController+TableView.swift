@@ -18,18 +18,26 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+                let isPhone: Bool = {
+                        switch traitCollection.userInterfaceIdiom {
+                        case .phone, .unspecified:
+                                return true
+                        default:
+                                return false
+                        }
+                }()
                 switch section {
                 case 0:
                         // Audio Feedback & Haptic Feedback
                         // iPad does not support haptic feedback
-                        return traitCollection.userInterfaceIdiom == .phone ? 2 : 1
+                        return isPhone ? 2 : 1
                 case 1:
                         // Characters, Logogram, Fonts
                         return 4
                 case 2:
-                        // FIXME: Revert to 2
                         // Keyboard Layouts
-                        return 3
+                        // No GridKeyboard (10 Key) for iPad
+                        return isPhone ? 3 : 2
                 case 3:
                         // Jyutping Display
                         return 3
