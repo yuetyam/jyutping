@@ -34,6 +34,7 @@ final class GridKeyView: UIView {
         }
 
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+                controller.triggerHapticFeedback()
                 switch self.event {
                 case .backspace:
                         shape.backgroundColor = highlightingBackColor
@@ -56,9 +57,13 @@ final class GridKeyView: UIView {
         }
         override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
                 revertBackground()
+                controller.prepareHapticFeedback()
                 switch self.event {
                 case .newLine:
                         controller.operate(.return)
+                case .transform(let idiom):
+                        guard idiom != .gridNumeric else { return }
+                        controller.operate(.transform(idiom))
                 default:
                         break
                 }
