@@ -86,6 +86,7 @@
 		37A598C5275249B20025A008 /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A598C4275249B20025A008 /* KeyboardInterface.swift */; };
 		37ABAD7D279311EA00FD0D85 /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 37ABAD7C279311EA00FD0D85 /* EmojiData */; };
 		37ABAD7F2793120E00FD0D85 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABAD7E2793120E00FD0D85 /* Emoji.swift */; };
+		37AE8A2527B6079C003BA76F /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE8A2427B6079C003BA76F /* KeyboardLayout.swift */; };
 		37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B19F2527395B6E00DD8A8E /* Logogram.swift */; };
 		37D154582706F5640002A24F /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D154572706F5640002A24F /* Syllable2IPA.swift */; };
 		37D98DA0276D2E1400DF37EF /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D98D9F276D2E1400DF37EF /* Speaker.swift */; };
@@ -237,6 +238,7 @@
 		37A598C4275249B20025A008 /* KeyboardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
 		37ABAD7B2793117600FD0D85 /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../EmojiData; sourceTree = "<group>"; };
 		37ABAD7E2793120E00FD0D85 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		37AE8A2427B6079C003BA76F /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
 		37B19F2527395B6E00DD8A8E /* Logogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37D154572706F5640002A24F /* Syllable2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
 		37D98D93276C316E00DF37EF /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 		3759F4BA262FC7EA00266086 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				37AE8A2427B6079C003BA76F /* KeyboardLayout.swift */,
 				3759F4BD262FC7EA00266086 /* KeyboardIdiom.swift */,
 				3759F4BB262FC7EA00266086 /* KeyboardIdiom+events.swift */,
 				3759F4BC262FC7EA00266086 /* ShiftState.swift */,
@@ -835,6 +838,7 @@
 				3759F4D1262FC7EA00266086 /* CalloutView.swift in Sources */,
 				3759F4CF262FC7EA00266086 /* KeyboardViewController+CollectionView.swift in Sources */,
 				37B19F2627395B6E00DD8A8E /* Logogram.swift in Sources */,
+				37AE8A2527B6079C003BA76F /* KeyboardLayout.swift in Sources */,
 				3759F4D0262FC7EA00266086 /* KeyView+construction.swift in Sources */,
 				3759F4D6262FC7EA00266086 /* KeyView.swift in Sources */,
 				3759F4E5262FC7EA00266086 /* StringExtensions.swift in Sources */,
