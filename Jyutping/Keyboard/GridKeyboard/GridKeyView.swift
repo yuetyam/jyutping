@@ -6,6 +6,7 @@ final class GridKeyView: UIView {
         let event: KeyboardEvent
         let controller: KeyboardViewController
         let keyboardIdiom: KeyboardIdiom
+        let needsInputModeSwitchKey: Bool
         let returnKeyType: UIReturnKeyType
         let isDarkAppearance: Bool
 
@@ -14,6 +15,7 @@ final class GridKeyView: UIView {
                 self.event = event
                 self.controller = controller
                 self.keyboardIdiom = controller.keyboardIdiom
+                self.needsInputModeSwitchKey = controller.needsInputModeSwitchKey
                 self.returnKeyType = controller.textDocumentProxy.returnKeyType ?? .default
                 self.isDarkAppearance = controller.isDarkAppearance
                 super.init(frame: .zero)
@@ -22,7 +24,9 @@ final class GridKeyView: UIView {
                 case .sidebar:
                         break
                 case .backspace:
-                        setupKeyImageView()
+                        setupKeyImageView(.backspace)
+                case .globe:
+                        setupKeyImageView(.globe)
                 default:
                         setupKeyTextLabel()
                 }
@@ -126,7 +130,7 @@ final class GridKeyView: UIView {
                 digitLabel.text = keyText
                 digitLabel.textColor = foreColor
         }
-        private func setupKeyImageView() {
+        private func setupKeyImageView(_ keyboardEvent: KeyboardEvent) {
                 let keyImageView: UIImageView = UIImageView()
                 shape.addSubview(keyImageView)
                 keyImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -137,7 +141,19 @@ final class GridKeyView: UIView {
                         keyImageView.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
                 keyImageView.contentMode = .scaleAspectFit
-                keyImageView.image = UIImage(systemName: "delete.left")?.withTintColor(foreColor)
+                let imageName: String = {
+                        switch keyboardEvent {
+                        case .backspace:
+                                return "delete.left"
+                        case .globe:
+                                return "globe"
+                        case .newLine:
+                                return "return"
+                        default:
+                                return "textformat.abc"
+                        }
+                }()
+                keyImageView.image = UIImage(systemName: imageName)?.withTintColor(foreColor)
         }
 }
 
@@ -145,7 +161,15 @@ final class GridKeyView: UIView {
 private extension GridKeyView {
 
         var width: CGFloat {
-                return 70
+                guard needsInputModeSwitchKey else {
+                        return 70
+                }
+                switch event {
+                case .space where keyboardIdiom == .gridKeyboard:
+                        return 140
+                default:
+                        return 70
+                }
         }
         var height: CGFloat {
                 let base: CGFloat = 53

@@ -93,37 +93,68 @@ extension KeyboardViewController {
                 ])
                 (sidebarCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.scrollDirection = .vertical
 
-                let bottomEvent: KeyboardEvent = keyboardIdiom == .gridNumeric ? .transform(.gridKeyboard) : .transform(.gridNumeric)
-                leadingStackView.addArrangedSubview(GridKeyView(event: bottomEvent, controller: self))
+                let leftBottom: GridKeyView = {
+                        guard needsInputModeSwitchKey else {
+                                let event: KeyboardEvent = (keyboardIdiom == .gridNumeric) ? .transform(.gridKeyboard) : .transform(.gridNumeric)
+                                return GridKeyView(event: event, controller: self)
+                        }
+                        let key = GridKeyView(event: .globe, controller: self)
+                        let virtual = UIButton()
+                        key.addSubview(virtual)
+                        virtual.translatesAutoresizingMaskIntoConstraints = false
+                        NSLayoutConstraint.activate([
+                                virtual.topAnchor.constraint(equalTo: key.topAnchor),
+                                virtual.bottomAnchor.constraint(equalTo: key.bottomAnchor),
+                                virtual.leadingAnchor.constraint(equalTo: key.leadingAnchor),
+                                virtual.trailingAnchor.constraint(equalTo: key.trailingAnchor)
+                        ])
+                        virtual.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
+                        return key
+                }()
+                leadingStackView.addArrangedSubview(leftBottom)
 
                 let gridStackView = UIStackView()
                 gridStackView.axis = .vertical
                 gridStackView.distribution = .fillProportionally
                 if keyboardIdiom == .gridNumeric {
-                        let grid_row_0: UIStackView = makeGridRow(for: ["1", "2", "3"])
-                        let grid_row_1: UIStackView = makeGridRow(for: ["4", "5", "6"])
-                        let grid_row_2: UIStackView = makeGridRow(for: ["7", "8", "9"])
-                        gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2])
                         let gridBottomStackView = UIStackView()
                         gridBottomStackView.axis = .horizontal
                         gridBottomStackView.distribution = .fillProportionally
-                        gridBottomStackView.addArrangedSubview(GridKeyView(event: .input(.init(primary: .init("."))), controller: self))
+                        let firstEvent: KeyboardEvent = needsInputModeSwitchKey ? .transform(.gridKeyboard) : .input(.init(primary: .init(".")))
+                        gridBottomStackView.addArrangedSubview(GridKeyView(event: firstEvent, controller: self))
                         gridBottomStackView.addArrangedSubview(GridKeyView(event: .input(.init(primary: .init("0"))), controller: self))
                         gridBottomStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+
+                        let grid_row_0: UIStackView = makeGridRow(for: ["1", "2", "3"])
+                        let grid_row_1: UIStackView = makeGridRow(for: ["4", "5", "6"])
+                        let grid_row_2: UIStackView = makeGridRow(for: ["7", "8", "9"])
                         gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2, gridBottomStackView])
                 } else {
                         let grid_row_0: UIStackView = makeGridRow(for: ["，。？", "ABC", "DEF"])
                         let grid_row_1: UIStackView = makeGridRow(for: ["GHI", "JKL", "MNO"])
                         let grid_row_2: UIStackView = makeGridRow(for: ["PQRS", "TUV", "WXYZ"])
                         gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2])
-                        gridStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+                        if needsInputModeSwitchKey {
+                                let spaceStackView = UIStackView()
+                                spaceStackView.axis = .horizontal
+                                spaceStackView.distribution = .fillProportionally
+                                spaceStackView.addArrangedSubview(GridKeyView(event: .transform(.gridNumeric), controller: self))
+                                spaceStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+                                gridStackView.addArrangedSubview(spaceStackView)
+                        } else {
+                                gridStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
+                        }
                 }
 
                 let trailingStackView: UIStackView = UIStackView()
                 trailingStackView.axis = .vertical
                 trailingStackView.distribution = .fillProportionally
                 trailingStackView.addArrangedSubview(GridKeyView(event: .backspace, controller: self))
-                trailingStackView.addArrangedSubview(GridKeyView(event: .transform(.cantoneseNumeric), controller: self))
+                let trailingMiddleEvent: KeyboardEvent = {
+                        let shouldBeDot: Bool = (keyboardIdiom == .gridNumeric) && needsInputModeSwitchKey
+                        return shouldBeDot ? .input(.init(primary: .init("."))) : .transform(.cantoneseNumeric)
+                }()
+                trailingStackView.addArrangedSubview(GridKeyView(event: trailingMiddleEvent, controller: self))
                 trailingStackView.addArrangedSubview(GridKeyView(event: .newLine, controller: self))
 
                 let boardStackView = UIStackView()
