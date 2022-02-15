@@ -43,6 +43,6 @@
 		<string>$(PRODUCT_MODULE_NAME).KeyboardViewController</string>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2022 Bing Zheung</string>
+	<string>CC0 1.0 Public Domain</string>
 </dict>
 </plist>
