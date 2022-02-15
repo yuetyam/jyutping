@@ -1,4 +1,4 @@
-Jyutping
+Jyutping Keyboard
 ======
 
 Jyutping Keyboard for iOS
@@ -9,13 +9,13 @@ Jyutping Keyboard for iOS
 
 ## Now Available on the App Store
 
-<a href="https://apps.apple.com/app/id1509367629">
+<a href="https://apps.apple.com/hk/app/id1509367629">
         <img src="images/app-store-badge.svg" alt="App Store badge" width="150"/>
 </a>
 <br>
 <br>
 
-<a href="https://apps.apple.com/app/id1509367629">
+<a href="https://apps.apple.com/hk/app/id1509367629">
         <img src="images/app-store-link-qrcode.png" alt="App Store QR Code" width="150"/>
 </a>
 
