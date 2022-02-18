@@ -1,55 +1,54 @@
 extension String {
+        var ping: Int64 {
+                return Int64(self.removedSpacesTones().hash)
+        }
+        var prefix: Int64 {
+                guard !self.isEmpty else { return Int64(self.hash) }
+                guard let lastSyllable: String = self.components(separatedBy: String.space).last else { return Int64(self.hash) }
+                let leading: String = String(self.dropLast(lastSyllable.count - 1))
+                let raw: String = leading.removedSpacesTones()
+                return Int64(raw.hash)
+        }
+        var shortcut: Int64 {
+                let syllables: [String] = self.components(separatedBy: String.space)
+                let initials: String = syllables.reduce("") { (result, syllable) -> String in
+                        if let first = syllable.first {
+                                return result + String(first)
+                        } else {
+                                return result
+                        }
+                }
+                return Int64(initials.hash)
+        }
 
-        /// Returns a new String made by removing `.whitespacesAndNewlines` from both ends of the String.
-        /// - Returns: A new String made by removing `.whitespacesAndNewlines` from both ends of the String.
-        func trimmed() -> String {
-                return trimmingCharacters(in: .whitespacesAndNewlines)
+        /// A subsequence that only contains tones (1-6)
+        var tones: String {
+                return self.filter({ $0.isTone })
+        }
+
+        /// Remove all tones (1-6)
+        /// - Returns: A subsequence that leaves off the tones.
+        func removedTones() -> String {
+                return self.filter({ !$0.isTone })
+        }
+
+        /// Remove all spaces and tones
+        /// - Returns: A subsequence that leaves off the spaces and tones.
+        func removedSpacesTones() -> String {
+                return self.filter({ !$0.isSpaceOrTone })
         }
 
         /// aka. `String.init()`
         static let empty: String = ""
 
-        /// Ideographic characters only.
-        /// - Returns: A new String made by removing irrelevant characters.
-        func filtered() -> String {
-                // return filter({ !($0.isASCII || $0.isPunctuation || $0.isWhitespace) })
-                return unicodeScalars.filter({ $0.properties.isIdeographic }).map({ String($0) }).joined()
-        }
+        /// A Space. U+0020
+        static let space: String = " "
 
-        var ideographicBlocks: [(text: String, isIdeographic: Bool)] {
-                var blocks: [(String, Bool)] = []
-                var ideographicCache: String = .empty
-                var otherCache: String = .empty
-                var lastWasIdeographic: Bool = true
-                for character in self {
-                        let isIdeographic: Bool = character.unicodeScalars.first?.properties.isIdeographic ?? false
-                        if isIdeographic {
-                                if !lastWasIdeographic && !otherCache.isEmpty {
-                                        let newElement: (String, Bool) = (otherCache, false)
-                                        blocks.append(newElement)
-                                        otherCache = .empty
-                                }
-                                ideographicCache.append(character)
-                                lastWasIdeographic = true
-                        } else {
-                                if lastWasIdeographic && !ideographicCache.isEmpty {
-                                        let newElement: (String, Bool) = (ideographicCache, true)
-                                        blocks.append(newElement)
-                                        ideographicCache = .empty
-                                }
-                                otherCache.append(character)
-                                lastWasIdeographic = false
-                        }
-                }
-                if !ideographicCache.isEmpty {
-                        let newElement: (String, Bool) = (ideographicCache, true)
-                        blocks.append(newElement)
-                } else if !otherCache.isEmpty {
-                        let newElement: (String, Bool) = (otherCache, false)
-                        blocks.append(newElement)
-                }
-                return blocks
-        }
+        /// U+200B
+        static let zeroWidthSpace: String = "\u{200B}"
+
+        /// U+3000. Ideographic Space.
+        static let fullwidthSpace: String = "\u{3000}"
 }
 
 
