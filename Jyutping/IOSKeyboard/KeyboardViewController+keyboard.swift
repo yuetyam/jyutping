@@ -53,7 +53,7 @@ extension KeyboardViewController {
                 keyboardStackView.addArrangedSubviews(keysRows)
                 guard let bottomEvents: [KeyboardEvent] = events.last else { return }
                 let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
-                        if $0 == .input(.cantoneseComma) && !inputText.isEmpty {
+                        if $0 == .input(.cantoneseComma) && !bufferText.isEmpty {
                                 return KeyView(event: .input(.separator), controller: self)
                         }
                         return makeKey(for: $0, controller: self)

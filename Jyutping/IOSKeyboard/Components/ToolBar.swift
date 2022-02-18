@@ -39,7 +39,7 @@ final class ToolBar: UIView {
 
         private lazy var showingToolButtons: Bool = true
         func update() {
-                if controller.inputText.isEmpty {
+                if controller.bufferText.isEmpty {
                         if !showingToolButtons {
                                 setupToolMode()
                                 showingToolButtons = true
@@ -52,7 +52,7 @@ final class ToolBar: UIView {
                 }
         }
         func reset() {
-                if controller.inputText.isEmpty {
+                if controller.bufferText.isEmpty {
                         setupToolMode()
                         showingToolButtons = true
                 } else {

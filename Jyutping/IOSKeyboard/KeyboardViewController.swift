@@ -87,9 +87,9 @@ final class KeyboardViewController: UIInputViewController {
                 if shouldKeepInputTextWhileTextDidChange {
                         shouldKeepInputTextWhileTextDidChange = false
                 } else {
-                        if !inputText.isEmpty && !textDocumentProxy.hasText {
+                        if !bufferText.isEmpty && !textDocumentProxy.hasText {
                                 // User just tapped the Clear button in the text field
-                                inputText = .empty
+                                bufferText = .empty
                         }
                 }
         }
@@ -166,9 +166,9 @@ final class KeyboardViewController: UIInputViewController {
                                 didKeyboardEstablished = true
                                 return
                         }
-                        if (!keyboardIdiom.isPingMode) && (!inputText.isEmpty) {
-                                let text: String = inputText
-                                inputText = .empty
+                        if (!keyboardIdiom.isPingMode) && (!bufferText.isEmpty) {
+                                let text: String = bufferText
+                                bufferText = .empty
                                 textDocumentProxy.insertText(text)
                         }
                 }
@@ -192,10 +192,10 @@ final class KeyboardViewController: UIInputViewController {
                 case .input(let text):
                         if keyboardIdiom.isPingMode {
                                 if keyboardLayout == .saamPing && text == "gw" {
-                                        let newInputText: String = inputText + text
-                                        inputText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
+                                        let newInputText: String = bufferText + text
+                                        bufferText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
                                 } else {
-                                        inputText += text
+                                        bufferText += text
                                 }
                         } else {
                                 textDocumentProxy.insertText(text)
@@ -203,7 +203,7 @@ final class KeyboardViewController: UIInputViewController {
                         AudioFeedback.perform(.input)
                         adjustKeyboardIdiom()
                 case .separator:
-                        inputText += "'"
+                        bufferText += "'"
                         AudioFeedback.perform(.input)
                         adjustKeyboardIdiom()
                 case .punctuation(let text):
@@ -212,15 +212,15 @@ final class KeyboardViewController: UIInputViewController {
                         adjustKeyboardIdiom()
                 case .space:
                         switch keyboardIdiom {
-                        case .cantonese where !inputText.isEmpty:
+                        case .cantonese where !bufferText.isEmpty:
                                 if let firstCandidate: Candidate = candidates.first {
                                         compose(firstCandidate.text)
                                         AudioFeedback.perform(.modify)
                                         aftercareSelected(firstCandidate)
                                 } else {
-                                        compose(inputText)
+                                        compose(bufferText)
                                         AudioFeedback.perform(.input)
-                                        inputText = .empty
+                                        bufferText = .empty
                                 }
                         default:
                                 textDocumentProxy.insertText(.space)
@@ -228,7 +228,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         adjustKeyboardIdiom()
                 case .doubleSpace:
-                        guard inputText.isEmpty else { return }
+                        guard bufferText.isEmpty else { return }
                         defer {
                                 AudioFeedback.perform(.input)
                         }
@@ -256,30 +256,30 @@ final class KeyboardViewController: UIInputViewController {
                         }()
                         textDocumentProxy.insertText(text)
                 case .backspace:
-                        if inputText.isEmpty {
+                        if bufferText.isEmpty {
                                 textDocumentProxy.deleteBackward()
                         } else {
-                                lazy var hasLightToneSuffix: Bool = inputText.hasSuffix("vv") || inputText.hasSuffix("xx") || inputText.hasSuffix("qq")
+                                lazy var hasLightToneSuffix: Bool = bufferText.hasSuffix("vv") || bufferText.hasSuffix("xx") || bufferText.hasSuffix("qq")
                                 if keyboardLayout == .qwerty && hasLightToneSuffix {
-                                        inputText = String(inputText.dropLast(2))
+                                        bufferText = String(bufferText.dropLast(2))
                                 } else {
-                                        inputText = String(inputText.dropLast())
+                                        bufferText = String(bufferText.dropLast())
                                 }
                                 candidateSequence = []
                         }
                         AudioFeedback.perform(.delete)
                 case .clear:
-                        guard !inputText.isEmpty else { return }
-                        inputText = .empty
+                        guard !bufferText.isEmpty else { return }
+                        bufferText = .empty
                         AudioFeedback.perform(.delete)
                 case .return:
-                        guard !inputText.isEmpty else {
+                        guard !bufferText.isEmpty else {
                                 textDocumentProxy.insertText("\n")
                                 AudioFeedback.perform(.modify)
                                 return
                         }
-                        compose(inputText)
-                        inputText = .empty
+                        compose(bufferText)
+                        bufferText = .empty
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
                                 DispatchQueue(label: "im.cantonese.fix.return").sync { [unowned self] in
                                         self.textDocumentProxy.insertText(.zeroWidthSpace)
@@ -324,7 +324,7 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardIdiom = .alphabetic(.lowercased)
                 case .cantonese(.uppercased):
                         keyboardIdiom = .cantonese(.lowercased)
-                case .candidates where inputText.isEmpty:
+                case .candidates where bufferText.isEmpty:
                         candidateCollectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reset()
@@ -334,20 +334,20 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         private func aftercareSelected(_ candidate: Candidate) {
-                switch inputText.first {
+                switch bufferText.first {
                 case .none:
                         break
                 case .some("r"), .some("v"), .some("x"):
-                        if inputText.count == candidate.input.count + 1 {
-                                inputText = .empty
+                        if bufferText.count == candidate.input.count + 1 {
+                                bufferText = .empty
                         } else {
-                                let first: String = String(inputText.first!)
-                                let tail = inputText.dropFirst(candidate.input.count + 1)
-                                inputText = first + tail
+                                let first: String = String(bufferText.first!)
+                                let tail = bufferText.dropFirst(candidate.input.count + 1)
+                                bufferText = first + tail
                         }
                 default:
                         candidateSequence.append(candidate)
-                        let inputTextLength: Int = inputText.count
+                        let inputTextLength: Int = bufferText.count
                         let candidateInputText: String = {
                                 if keyboardLayout == .saamPing {
                                         return candidate.input
@@ -361,26 +361,26 @@ final class KeyboardViewController: UIInputViewController {
                                 guard inputTextLength != 2 else { return candidateInputCount }
                                 guard candidateInputText.contains("jyu") else { return candidateInputCount }
                                 let suffixCount: Int = max(0, inputTextLength - candidateInputCount)
-                                let leading = inputText.dropLast(suffixCount)
+                                let leading = bufferText.dropLast(suffixCount)
                                 let modifiedLeading = leading.replacingOccurrences(of: "jyu", with: "xxx").replacingOccurrences(of: "yu", with: "jyu")
                                 return candidateInputCount - (modifiedLeading.count - leading.count)
                         }()
-                        let leading = inputText.dropLast(inputTextLength - inputCount)
+                        let leading = bufferText.dropLast(inputTextLength - inputCount)
                         let filtered = leading.replacingOccurrences(of: "'", with: "")
                         var tail: String.SubSequence = {
                                 if filtered.count == leading.count {
-                                        return inputText.dropFirst(inputCount)
+                                        return bufferText.dropFirst(inputCount)
                                 } else {
                                         let separatorsCount: Int = leading.count - filtered.count
-                                        return inputText.dropFirst(inputCount + separatorsCount)
+                                        return bufferText.dropFirst(inputCount + separatorsCount)
                                 }
                         }()
                         while tail.hasPrefix("'") {
                                 tail = tail.dropFirst()
                         }
-                        inputText = String(tail)
+                        bufferText = String(tail)
                 }
-                if inputText.isEmpty && !candidateSequence.isEmpty {
+                if bufferText.isEmpty && !candidateSequence.isEmpty {
                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                         candidateSequence = []
                         handleLexicon(concatenatedCandidate)
@@ -390,18 +390,18 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Input Texts
 
-        private(set) lazy var inputText: String = .empty {
+        private(set) lazy var bufferText: String = .empty {
                 didSet {
-                        switch inputText.first {
+                        switch bufferText.first {
                         case .none:
                                 processingText = .empty
                         case .some("r"), .some("v"), .some("x"):
-                                processingText = inputText
+                                processingText = bufferText
                         default:
                                 if keyboardLayout == .saamPing {
-                                        processingText = inputText
+                                        processingText = bufferText
                                 } else {
-                                        processingText = inputText.replacingOccurrences(of: "vv", with: "4")
+                                        processingText = bufferText.replacingOccurrences(of: "vv", with: "4")
                                                 .replacingOccurrences(of: "xx", with: "5")
                                                 .replacingOccurrences(of: "qq", with: "6")
                                                 .replacingOccurrences(of: "v", with: "1")
@@ -409,7 +409,7 @@ final class KeyboardViewController: UIInputViewController {
                                                 .replacingOccurrences(of: "q", with: "3")
                                 }
                         }
-                        switch (inputText.isEmpty, oldValue.isEmpty) {
+                        switch (bufferText.isEmpty, oldValue.isEmpty) {
                         case (true, false):
                                 updateBottomStackView(with: .input(.cantoneseComma))
                         case (false, true):
