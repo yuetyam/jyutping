@@ -1,6 +1,9 @@
 import SwiftUI
 import Cocoa
 import InputMethodKit
+import KeyboardData
+import LookupData
+import Simplifier
 
 
 enum KeyboardMode {
@@ -99,23 +102,52 @@ class JyutpingInputController: IMKInputController {
 
         private lazy var bufferText: String = .empty {
                 didSet {
-                        guard !bufferText.isEmpty else {
+                        switch bufferText.first {
+                        case .none:
+                                processingText = .empty
+                        case .some("r"), .some("v"), .some("x"):
+                                processingText = bufferText
+                        default:
+                                processingText = bufferText.replacingOccurrences(of: "vv", with: "4")
+                                        .replacingOccurrences(of: "xx", with: "5")
+                                        .replacingOccurrences(of: "qq", with: "6")
+                                        .replacingOccurrences(of: "v", with: "1")
+                                        .replacingOccurrences(of: "x", with: "2")
+                                        .replacingOccurrences(of: "q", with: "3")
+                        }
+                }
+        }
+        private lazy var processingText: String = .empty {
+                didSet {
+                        switch processingText.first {
+                        case .none:
+                                syllablesSchemes = []
                                 markedText = .empty
                                 candidates = []
                                 displayObject.resetHighlightedIndex()
                                 displayObject.items = []
                                 window?.setFrame(.zero, display: true)
-                                return
+                                break
+                        case .some("r"), .some("v"), .some("x"):
+                                syllablesSchemes = []
+                                markedText = processingText
+                        default:
+                                syllablesSchemes = Splitter.split(processingText)
+                                if let syllables: [String] = syllablesSchemes.first {
+                                        let splittable: String = syllables.joined()
+                                        if splittable.count == processingText.count {
+                                                markedText = syllables.joined(separator: .space)
+                                        } else if processingText.contains("'") {
+                                                markedText = processingText.replacingOccurrences(of: "'", with: "' ")
+                                        } else {
+                                                let tail = processingText.dropFirst(splittable.count)
+                                                markedText = syllables.joined(separator: .space) + .space + tail
+                                        }
+                                } else {
+                                        markedText = processingText
+                                }
                         }
-                        let schemes = Splitter.split(bufferText)
-                        if let firstScheme = schemes.first, firstScheme.joined().count == bufferText.count {
-                                markedText = firstScheme.joined(separator: " ")
-                        } else {
-                                markedText = bufferText
-                        }
-                        if let suggestions = engine?.suggest(for: bufferText, schemes: schemes) {
-                                candidates = suggestions.uniqued()
-                        }
+                        imeSuggest()
                 }
         }
         private lazy var currentClient: IMKTextInput? = nil
@@ -124,6 +156,57 @@ class JyutpingInputController: IMKInputController {
                         let convertedText: NSString = markedText as NSString
                         currentClient?.setMarkedText(convertedText, selectionRange: NSRange(location: convertedText.length, length: 0), replacementRange: NSRange(location: NSNotFound, length: 0))
                 }
+        }
+
+        private lazy var syllablesSchemes: [[String]] = [] {
+                didSet {
+                        guard !syllablesSchemes.isEmpty else {
+                                schemes = []
+                                return
+                        }
+                        schemes = syllablesSchemes.map({ block -> [String] in
+                                let sequence: [String] = block.map { syllable -> String in
+                                        let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                                                .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
+                                                .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
+                                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
+                                        return converted
+                                }
+                                return sequence
+                        })
+                }
+        }
+        private lazy var schemes: [[String]] = []
+
+        private func suggest() {
+                switch processingText.first {
+                case .none:
+                        break
+                case .some("r"):
+                        break // pinyinReverseLookup()
+                case .some("v"):
+                        break // cangjieReverseLookup()
+                case .some("x"):
+                        break // strokeReverseLookup()
+                default:
+                        imeSuggest()
+                }
+        }
+        private func imeSuggest() {
+                // let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
+                let engineCandidates: [Candidate] = {
+                        let normal: [Candidate] = engine?.suggest(for: processingText, schemes: schemes.uniqued()) ?? []
+                        if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
+                                let droppedSeparator: String = String(processingText.dropLast())
+                                let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
+                                return engine?.suggest(for: droppedSeparator, schemes: newSchemes) ?? []
+                        } else {
+                                return normal
+                        }
+                }()
+                candidates = engineCandidates.uniqued()
         }
 
         private lazy var engine: Engine? = nil
