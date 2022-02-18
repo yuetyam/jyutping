@@ -73,7 +73,7 @@ final class KeyboardViewController: UIInputViewController {
                 ])
                 setupToolBarActions()
         }
-        private lazy var shouldKeepInputTextWhileTextDidChange: Bool = false
+        private lazy var shouldKeepBufferTextWhileTextDidChange: Bool = false
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
                 let asked: KeyboardIdiom = askedKeyboardIdiom
@@ -84,8 +84,8 @@ final class KeyboardViewController: UIInputViewController {
                                 keyboardIdiom = asked
                         }
                 }
-                if shouldKeepInputTextWhileTextDidChange {
-                        shouldKeepInputTextWhileTextDidChange = false
+                if shouldKeepBufferTextWhileTextDidChange {
+                        shouldKeepBufferTextWhileTextDidChange = false
                 } else {
                         if !bufferText.isEmpty && !textDocumentProxy.hasText {
                                 // User just tapped the Clear button in the text field
@@ -192,8 +192,8 @@ final class KeyboardViewController: UIInputViewController {
                 case .input(let text):
                         if keyboardIdiom.isPingMode {
                                 if keyboardLayout == .saamPing && text == "gw" {
-                                        let newInputText: String = bufferText + text
-                                        bufferText = newInputText.replacingOccurrences(of: "gwgw", with: "kw")
+                                        let newText: String = bufferText + text
+                                        bufferText = newText.replacingOccurrences(of: "gwgw", with: "kw")
                                 } else {
                                         bufferText += text
                                 }
@@ -457,7 +457,7 @@ final class KeyboardViewController: UIInputViewController {
                         // REASON: Chrome address bar
                         guard markedText.isEmpty && !newValue.isEmpty else { return }
                         guard textDocumentProxy.keyboardType == .webSearch else { return }
-                        shouldKeepInputTextWhileTextDidChange = true
+                        shouldKeepBufferTextWhileTextDidChange = true
                         textDocumentProxy.insertText(.empty)
                 }
                 didSet {
