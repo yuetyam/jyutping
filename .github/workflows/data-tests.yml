@@ -1,11 +1,13 @@
 name: Data Packages Tests
 on: [push, pull_request, release]
-env:
-  DEVELOPER_DIR: /Applications/Xcode_13.2.app/Contents/Developer
+
+# env:
+#   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+
 jobs:
   test_lookupdata:
     name: LookupData Tests
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: LookupData SwiftTest
@@ -13,7 +15,7 @@ jobs:
         working-directory: ./LookupData
   test_keyboarddata:
     name: KeyboardData Tests
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: KeyboardData SwiftTest
@@ -21,7 +23,7 @@ jobs:
         working-directory: ./KeyboardData
   test_emojidata:
     name: EmojiData Tests
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: EmojiData SwiftTest
@@ -29,7 +31,7 @@ jobs:
         working-directory: ./EmojiData
   test_simplifier:
     name: Simplifier Tests
-    runs-on: macos-11
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Simplifier SwiftTest
