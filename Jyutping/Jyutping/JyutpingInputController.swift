@@ -121,7 +121,7 @@ class JyutpingInputController: IMKInputController {
                 didSet {
                         switch processingText.first {
                         case .none:
-                                syllablesSchemes = []
+                                flexibleSchemes = []
                                 markedText = .empty
                                 candidates = []
                                 displayObject.resetHighlightedIndex()
@@ -129,11 +129,11 @@ class JyutpingInputController: IMKInputController {
                                 window?.setFrame(.zero, display: true)
                                 break
                         case .some("r"), .some("v"), .some("x"):
-                                syllablesSchemes = []
+                                flexibleSchemes = []
                                 markedText = processingText
                         default:
-                                syllablesSchemes = Splitter.split(processingText)
-                                if let syllables: [String] = syllablesSchemes.first {
+                                flexibleSchemes = Splitter.split(processingText)
+                                if let syllables: [String] = flexibleSchemes.first {
                                         let splittable: String = syllables.joined()
                                         if splittable.count == processingText.count {
                                                 markedText = syllables.joined(separator: .space)
@@ -158,13 +158,13 @@ class JyutpingInputController: IMKInputController {
                 }
         }
 
-        private lazy var syllablesSchemes: [[String]] = [] {
+        private lazy var flexibleSchemes: [[String]] = [] {
                 didSet {
-                        guard !syllablesSchemes.isEmpty else {
-                                schemes = []
+                        guard !flexibleSchemes.isEmpty else {
+                                regularSchemes = []
                                 return
                         }
-                        schemes = syllablesSchemes.map({ block -> [String] in
+                        regularSchemes = flexibleSchemes.map({ block -> [String] in
                                 let sequence: [String] = block.map { syllable -> String in
                                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
@@ -178,7 +178,7 @@ class JyutpingInputController: IMKInputController {
                         })
                 }
         }
-        private lazy var schemes: [[String]] = []
+        private lazy var regularSchemes: [[String]] = []
 
         private func suggest() {
                 switch processingText.first {
@@ -197,7 +197,7 @@ class JyutpingInputController: IMKInputController {
         private func imeSuggest() {
                 // let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
-                        let normal: [Candidate] = engine?.suggest(for: processingText, schemes: schemes.uniqued()) ?? []
+                        let normal: [Candidate] = engine?.suggest(for: processingText, schemes: regularSchemes.uniqued()) ?? []
                         if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
                                 let droppedSeparator: String = String(processingText.dropLast())
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
