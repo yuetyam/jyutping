@@ -1,9 +1,26 @@
+# SQLite
+*.sqlite binary
 *.sqlite3 binary
-*.ocd binary
-*.ocd2 binary
+
+# Image
 *.png binary
+*.heic binary
 *.jpg binary
 *.jpeg binary
 *.gif binary
+*.webp binary
+*.apng binary
+
+# Video
 *.mp4 binary
+*.mov binary
+*.webm binary
+
+# PDF
 *.pdf binary
+
+# Font
+*.otf binary
+*.ttf binary
+*.ttc binary
+*.otc binary
