@@ -7,9 +7,8 @@ import Simplifier
 
 class JyutpingInputController: IMKInputController {
 
-        private var window: NSWindow?
+        private lazy var window: NSWindow? = nil
         private lazy var isWindowInitialed: Bool = false
-
         private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
 
         // FIXME: candidateView size
@@ -37,10 +36,10 @@ class JyutpingInputController: IMKInputController {
                         window?.setFrame(frame, display: true)
                 } else {
                         window = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: false)
-                        initialMainWindow()
+                        initialWindow()
                 }
         }
-        private func initialMainWindow() {
+        private func initialWindow() {
                 window?.backgroundColor = .clear
                 window?.level = .floating
                 window?.orderFrontRegardless()
@@ -68,13 +67,14 @@ class JyutpingInputController: IMKInputController {
         private lazy var displayObject = DisplayObject()
         private lazy var candidates: [Candidate] = [] {
                 didSet {
-                        displayObject.resetHighlightedIndex()
                         guard !candidates.isEmpty else {
-                                displayObject.items = []
+                                displayObject.reset()
                                 return
                         }
+                        displayObject.resetHighlightedIndex()
                         let bound: Int = candidates.count > 9 ? 9 : candidates.count
-                        displayObject.items = candidates[..<bound].map({ DisplayCandidate($0.text, comment: $0.romanization) })
+                        let newItems = candidates[..<bound].map({ DisplayCandidate($0.text, comment: $0.romanization) })
+                        displayObject.setItems(newItems)
                 }
         }
 
@@ -102,8 +102,7 @@ class JyutpingInputController: IMKInputController {
                                 flexibleSchemes = []
                                 markedText = .empty
                                 candidates = []
-                                displayObject.resetHighlightedIndex()
-                                displayObject.items = []
+                                displayObject.reset()
                                 window?.setFrame(.zero, display: true)
                                 break
                         case .some("r"), .some("v"), .some("x"):
@@ -308,7 +307,16 @@ class JyutpingInputController: IMKInputController {
                 guard let selectedItem = displayObject.items.fetch(index) else { return }
                 client.insertText(selectedItem.text, replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
 
-                guard let correspondingCandidate = candidates.fetch(index) else { return }
+                let find: Candidate? = {
+                        for item in candidates {
+                                let isEqual: Bool = item.text == selectedItem.text && item.romanization == selectedItem.comment
+                                if isEqual {
+                                        return item
+                                }
+                        }
+                        return nil
+                }()
+                guard let correspondingCandidate = find else { return }
                 let newBufferText = bufferText.dropFirst(correspondingCandidate.input.count)
                 if newBufferText.isEmpty {
                         shutdownSession()
@@ -324,8 +332,7 @@ class JyutpingInputController: IMKInputController {
         private func shutdownSession() {
                 bufferText = .empty
                 candidates = []
-                displayObject.items = []
-                displayObject.resetHighlightedIndex()
+                displayObject.reset()
                 window?.setFrame(.zero, display: true)
         }
 }

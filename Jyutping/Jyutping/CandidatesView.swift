@@ -35,8 +35,20 @@ struct CandidatesView: View {
 
 final class DisplayObject: ObservableObject {
 
-        @Published var items: [DisplayCandidate] = []
-        @Published var highlightedIndex: Int = 0
+        @Published private(set) var items: [DisplayCandidate] = []
+        @Published private(set) var highlightedIndex: Int = 0
+
+        func reset() {
+                items = []
+                highlightedIndex = 0
+        }
+
+        func setItems(_ newItems: [DisplayCandidate]) {
+                items = newItems
+        }
+        func clearItems() {
+                items = []
+        }
 
         func increaseHighlightedIndex() {
                 guard highlightedIndex < (items.count - 1) else { return }
