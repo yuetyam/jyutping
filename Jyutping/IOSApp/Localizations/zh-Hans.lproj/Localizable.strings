@@ -12,13 +12,12 @@
 
 // Tab Bar
 "Home" = "首䈎";
-"Keyboard" = "鍵盤";
 "Jyutping" = "粵拼";
-"Search" = "檢索";
 "About" = "關於";
 
 
-// Home
+// MARK: - Home
+
 "Text Field" = "輸入框";
 
 // iOS 15
@@ -34,7 +33,7 @@
 "Tap" = "點選";
 "Turn on" = "開啓";
 "Allow Full Access" = "允許完全訪問";
-"How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "如何启用键盘。一：跳转至 设置，二：选择 键盘， 三：开启 粤拼，四：开启 允许完全访问";
+"How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "如何启用键盘。一：跳转至 设置；二：选择 键盘；三：开启 粤拼；四：开启 允许完全访问。";
 
 "Go to" = "前往";
 
@@ -78,9 +77,13 @@
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 "Why is this App's Text-to-Speech voice so odd?" = "點解個語音朗讀有少少毋自然？";
+"tts.notice.1" = "本應用程序使用系統提供个語音朗讀功能。";
+"tts.notice.2" = "爲保證發音質素，推薦到 **設置** → **通用** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
+"tts.notice.3" = "爲提高發音質素，推薦到 **設置** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
 
 
-// Search
+// MARK: - Jyutping
+
 "Lookup Jyutping for Cantonese" = "鍵入粵語字詞檢索其粵拼";
 "No Results." = "無結果";
 "Common Cantonese words only." = "只可檢索常見粵語字詞";
@@ -88,9 +91,6 @@
 "Jyutping Initials" = "粵拼聲母表";
 "Jyutping Finals" = "粵拼韻母表";
 "Jyutping Tones" = "粵拼聲調表";
-"本應用程式使用系統提供个語音朗讀功能。" = "本應用程序使用系統提供个語音朗讀功能。";
-"爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。" = "爲保證發音質素，推薦到 **設置** → **通用** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
-"爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。" = "爲提高發音質素，推薦到 **設置** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
 
 "Search on other places (websites)" = "其它可供檢索嘅網站";
 "Jyutping Resources" = "粵拼資源網站";
@@ -100,7 +100,8 @@
 "Cantonese Resources" = "粵語相關網站";
 
 
-// About
+// MARK: - About
+
 "Version" = "版本";
 
 "Website" = "網站";
