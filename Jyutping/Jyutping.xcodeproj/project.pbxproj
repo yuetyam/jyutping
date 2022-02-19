@@ -12,6 +12,7 @@
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
 		375D7A3227C10ED10018EB6F /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* KeyboardMode.swift */; };
+		375D7A3427C151470018EB6F /* DisplayObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3327C151470018EB6F /* DisplayObject.swift */; };
 		3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */; };
 		3764CEB427BE103300DCFB51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3764CEB327BE103300DCFB51 /* Assets.xcassets */; };
 		3764CEB727BE103300DCFB51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3764CEB627BE103300DCFB51 /* Preview Assets.xcassets */; };
@@ -200,6 +201,7 @@
 		3722934727BED0770077F15B /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934827BED0780077F15B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		375D7A3127C10ED10018EB6F /* KeyboardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMode.swift; sourceTree = "<group>"; };
+		375D7A3327C151470018EB6F /* DisplayObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayObject.swift; sourceTree = "<group>"; };
 		3764CEAC27BE103100DCFB51 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
 		3764CEB327BE103300DCFB51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -464,9 +466,10 @@
 				3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */,
 				3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */,
 				375D7A3127C10ED10018EB6F /* KeyboardMode.swift */,
-				3764CEEA27BE127000DCFB51 /* Candidate.swift */,
 				3764CEE527BE127000DCFB51 /* CandidatesView.swift */,
+				375D7A3327C151470018EB6F /* DisplayObject.swift */,
 				3764CEE627BE127000DCFB51 /* DisplayCandidate.swift */,
+				3764CEEA27BE127000DCFB51 /* Candidate.swift */,
 				3764CEE727BE127000DCFB51 /* SettingsView.swift */,
 				3764CEDE27BE126F00DCFB51 /* Engine.swift */,
 				3764CEEB27BE127000DCFB51 /* Splitter.swift */,
@@ -1048,6 +1051,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3764CEF327BE127000DCFB51 /* Modifier.swift in Sources */,
+				375D7A3427C151470018EB6F /* DisplayObject.swift in Sources */,
 				3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */,
 				3764CEF427BE127000DCFB51 /* CandidatesView.swift in Sources */,
 				3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */,
