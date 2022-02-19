@@ -13,7 +13,12 @@ class JyutpingInputController: IMKInputController {
 
         // FIXME: candidateView size
         private func showWindow(origin: CGPoint, size: CGSize = CGSize(width: 600, height: 256)) {
-                guard isBufferState && !displayObject.items.isEmpty else { return }
+                guard isBufferState && !displayObject.items.isEmpty else {
+                        if isWindowInitialed {
+                                window?.setFrame(.zero, display: true)
+                        }
+                        return
+                }
                 let x: CGFloat = {
                         if origin.x > (screenFrame.maxX - size.width) {
                                 // should be cursor's left side
@@ -105,9 +110,18 @@ class JyutpingInputController: IMKInputController {
                                 displayObject.reset()
                                 window?.setFrame(.zero, display: true)
                                 break
-                        case .some("r"), .some("v"), .some("x"):
+                        case .some("r"):
                                 flexibleSchemes = []
                                 markedText = processingText
+                                pinyinReverseLookup()
+                        case .some("v"):
+                                flexibleSchemes = []
+                                markedText = processingText
+                                cangjieReverseLookup()
+                        case .some("x"):
+                                flexibleSchemes = []
+                                markedText = processingText
+                                strokeReverseLookup()
                         default:
                                 flexibleSchemes = Splitter.split(processingText)
                                 if let syllables: [String] = flexibleSchemes.first {
@@ -123,8 +137,8 @@ class JyutpingInputController: IMKInputController {
                                 } else {
                                         markedText = processingText
                                 }
+                                suggest()
                         }
-                        imeSuggest()
                 }
         }
         private lazy var currentClient: IMKTextInput? = nil
@@ -158,20 +172,6 @@ class JyutpingInputController: IMKInputController {
         private lazy var regularSchemes: [[String]] = []
 
         private func suggest() {
-                switch processingText.first {
-                case .none:
-                        break
-                case .some("r"):
-                        break // pinyinReverseLookup()
-                case .some("v"):
-                        break // cangjieReverseLookup()
-                case .some("x"):
-                        break // strokeReverseLookup()
-                default:
-                        imeSuggest()
-                }
-        }
-        private func imeSuggest() {
                 // let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
                         let normal: [Candidate] = engine?.suggest(for: processingText, schemes: regularSchemes.uniqued()) ?? []
@@ -186,7 +186,65 @@ class JyutpingInputController: IMKInputController {
                 candidates = engineCandidates.uniqued()
         }
 
+        private func pinyinReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
+                if pinyinProvider == nil {
+                        pinyinProvider = PinyinProvider()
+                }
+                guard let searches = pinyinProvider?.search(for: text), !searches.isEmpty else { return }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                candidates = joined.uniqued()
+        }
+        private func cangjieReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
+                if shapeData == nil {
+                        shapeData = ShapeData()
+                }
+                guard let searches = shapeData?.search(cangjie: text), !searches.isEmpty else { return }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                candidates = joined.uniqued()
+        }
+        private func strokeReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
+                if shapeData == nil {
+                        shapeData = ShapeData()
+                }
+                guard let searches = shapeData?.search(stroke: text), !searches.isEmpty else { return }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                candidates = joined.uniqued()
+        }
+
         private lazy var engine: Engine? = nil
+        private lazy var pinyinProvider: PinyinProvider? = nil
+        private lazy var shapeData: ShapeData? = nil
+        private lazy var simplifier: Simplifier? = nil
 
         override func activateServer(_ sender: Any!) {
                 if engine == nil {
@@ -197,6 +255,13 @@ class JyutpingInputController: IMKInputController {
         override func deactivateServer(_ sender: Any!) {
                 engine?.close()
                 engine = nil
+                pinyinProvider?.close()
+                pinyinProvider = nil
+                shapeData?.close()
+                shapeData = nil
+                simplifier?.close()
+                simplifier = nil
+
                 shutdownSession()
                 currentClient = nil
         }
@@ -267,6 +332,9 @@ class JyutpingInputController: IMKInputController {
                         bufferText += letter
                 default:
                         switch event.keyCode {
+                        case KeyCode.Symbol.VK_QUOTE:
+                                guard isBufferState else { return false }
+                                bufferText += "'"
                         case KeyCode.Special.VK_ESCAPE:
                                 shutdownSession()
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
@@ -316,12 +384,51 @@ class JyutpingInputController: IMKInputController {
                         }
                         return nil
                 }()
-                guard let correspondingCandidate = find else { return }
-                let newBufferText = bufferText.dropFirst(correspondingCandidate.input.count)
-                if newBufferText.isEmpty {
-                        shutdownSession()
-                } else {
-                        bufferText = String(newBufferText)
+                guard let candidate = find else { return }
+                switch bufferText.first {
+                case .none:
+                        break
+                case .some("r"), .some("v"), .some("x"):
+                        if bufferText.count == candidate.input.count + 1 {
+                                bufferText = .empty
+                        } else {
+                                let first: String = String(bufferText.first!)
+                                let tail = bufferText.dropFirst(candidate.input.count + 1)
+                                bufferText = first + tail
+                        }
+                default:
+                        let bufferTextLength: Int = bufferText.count
+                        let candidateInputText: String = {
+                                let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "xx", options: .regularExpression)
+                                return converted
+                        }()
+                        let inputCount: Int = {
+                                let candidateInputCount: Int = candidateInputText.count
+                                guard bufferTextLength != 2 else { return candidateInputCount }
+                                guard candidateInputText.contains("jyu") else { return candidateInputCount }
+                                let suffixCount: Int = max(0, bufferTextLength - candidateInputCount)
+                                let leading = bufferText.dropLast(suffixCount)
+                                let modifiedLeading = leading.replacingOccurrences(of: "jyu", with: "xxx").replacingOccurrences(of: "yu", with: "jyu")
+                                return candidateInputCount - (modifiedLeading.count - leading.count)
+                        }()
+                        let leading = bufferText.dropLast(bufferTextLength - inputCount)
+                        let filtered = leading.replacingOccurrences(of: "'", with: "")
+                        var tail: String.SubSequence = {
+                                if filtered.count == leading.count {
+                                        return bufferText.dropFirst(inputCount)
+                                } else {
+                                        let separatorsCount: Int = leading.count - filtered.count
+                                        return bufferText.dropFirst(inputCount + separatorsCount)
+                                }
+                        }()
+                        while tail.hasPrefix("'") {
+                                tail = tail.dropFirst()
+                        }
+                        if tail.isEmpty {
+                                shutdownSession()
+                        } else {
+                                bufferText = String(tail)
+                        }
                 }
         }
 
