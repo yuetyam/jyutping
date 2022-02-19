@@ -19,24 +19,7 @@ class JyutpingInputController: IMKInputController {
                         }
                         return
                 }
-                let x: CGFloat = {
-                        if origin.x > (screenFrame.maxX - size.width) {
-                                // should be cursor's left side
-                                return origin.x + 16
-                        } else {
-                                return origin.x + 16
-                        }
-                }()
-                let y: CGFloat = {
-                        if origin.y > (screenFrame.minY + size.height) {
-                                // below cursor
-                                return origin.y - size.height - 8
-                        } else {
-                                // above cursor
-                                return origin.y + 16
-                        }
-                }()
-                let frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                let frame = windowFrame(origin, size: size)
                 if isWindowInitialed {
                         window?.setFrame(frame, display: true)
                 } else {
@@ -63,6 +46,54 @@ class JyutpingInputController: IMKInputController {
                 isWindowInitialed = true
         }
 
+        private func resetWindow() {
+                _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
+                _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
+                switch IMEMode {
+                case .settings:
+                        window = NSWindow(contentRect: windowFrame(), styleMask: .borderless, backing: .buffered, defer: false)
+                        window?.backgroundColor = .clear
+                        window?.level = .floating
+                        window?.orderFrontRegardless()
+                        let candidateUI = NSHostingController(rootView: SettingsView().environmentObject(settingsObject))
+                        window?.contentView?.addSubview(candidateUI.view)
+                        candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
+                        if let topAnchor = window?.contentView?.topAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
+                                NSLayoutConstraint.activate([
+                                        candidateUI.view.topAnchor.constraint(equalTo: topAnchor),
+                                        candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor)
+                                ])
+                        }
+                        window?.contentViewController?.addChild(candidateUI)
+                default:
+                        window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
+                        initialWindow()
+                }
+        }
+
+        private func windowFrame(_ origin: CGPoint? = nil, size: CGSize = CGSize(width: 600, height: 256)) -> CGRect {
+                let origin = origin ?? position(of: currentClient!)
+                let x: CGFloat = {
+                        if origin.x > (screenFrame.maxX - size.width) {
+                                // should be cursor's left side
+                                return origin.x + 16
+                        } else {
+                                return origin.x + 16
+                        }
+                }()
+                let y: CGFloat = {
+                        if origin.y > (screenFrame.minY + size.height) {
+                                // below cursor
+                                return origin.y - size.height - 8
+                        } else {
+                                // above cursor
+                                return origin.y + 16
+                        }
+                }()
+                let frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                return frame
+        }
+
         private func position(of client: IMKTextInput) -> CGPoint {
                 var lineHeightRectangle: CGRect = .init()
                 client.attributes(forCharacterIndex: 0, lineHeightRectangle: &lineHeightRectangle)
@@ -70,6 +101,8 @@ class JyutpingInputController: IMKInputController {
         }
 
         private lazy var displayObject = DisplayObject()
+        private lazy var settingsObject = SettingsObject()
+
         private lazy var candidates: [Candidate] = [] {
                 didSet {
                         guard !candidates.isEmpty else {
@@ -183,7 +216,7 @@ class JyutpingInputController: IMKInputController {
                                 return normal
                         }
                 }()
-                candidates = engineCandidates.uniqued()
+                push(engineCandidates)
         }
 
         private func pinyinReverseLookup() {
@@ -202,7 +235,7 @@ class JyutpingInputController: IMKInputController {
                         return candidates
                 }
                 let joined: [Candidate] = Array<Candidate>(lookup.joined())
-                candidates = joined.uniqued()
+                push(joined)
         }
         private func cangjieReverseLookup() {
                 let text: String = String(processingText.dropFirst())
@@ -220,7 +253,7 @@ class JyutpingInputController: IMKInputController {
                         return candidates
                 }
                 let joined: [Candidate] = Array<Candidate>(lookup.joined())
-                candidates = joined.uniqued()
+                push(joined)
         }
         private func strokeReverseLookup() {
                 let text: String = String(processingText.dropFirst())
@@ -238,7 +271,22 @@ class JyutpingInputController: IMKInputController {
                         return candidates
                 }
                 let joined: [Candidate] = Array<Candidate>(lookup.joined())
-                candidates = joined.uniqued()
+                push(joined)
+        }
+        private func push(_ origin: [Candidate]) {
+                switch Logogram.current {
+                case .traditional:
+                        candidates = origin.uniqued()
+                case .hongkong, .taiwan:
+                        let converted: [Candidate] = origin.map({ Candidate(text: VariantConverter.convert(text: $0.text, to: .current), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
+                        candidates = converted.uniqued()
+                case .simplified:
+                        if simplifier == nil {
+                                simplifier = Simplifier()
+                        }
+                        let converted: [Candidate] = origin.map({ Candidate(text: simplifier?.convert($0.text) ?? $0.text, romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText)})
+                        candidates = converted.uniqued()
+                }
         }
 
         private lazy var engine: Engine? = nil
@@ -266,7 +314,11 @@ class JyutpingInputController: IMKInputController {
                 currentClient = nil
         }
 
-        private lazy var keyboardMode: KeyboardMode = .cantonese
+        private lazy var IMEMode: InputMethodMode = .cantonese {
+                didSet {
+                        resetWindow()
+                }
+        }
         private var isBufferState: Bool {
                 return !(bufferText.isEmpty)
         }
@@ -287,24 +339,34 @@ class JyutpingInputController: IMKInputController {
                 }
                 if event.keyCode == KeyCode.Keypad.VK_KEYPAD_CLEAR {
                         // FIXME: Replace CLEAR with Shift
-                        switch keyboardMode {
+                        switch IMEMode {
                         case .transparent, .english:
-                                keyboardMode = .cantonese
+                                IMEMode = .cantonese
                         case .cantonese:
-                                keyboardMode = .english
+                                IMEMode = .english
+                        case .settings:
+                                break
                         }
                         return true
                 }
-                guard keyboardMode.isCantoneseMode else { return false }
+                guard !(IMEMode.isEnglishMode) else { return false }
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
 
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
+                                guard IMEMode != .settings else {
+                                        settingsObject.decreaseHighlightedIndex()
+                                        return true
+                                }
                                 guard isBufferState else { return false }
                                 displayObject.decreaseHighlightedIndex()
                         case .down:
+                                guard IMEMode != .settings else {
+                                        settingsObject.increaseHighlightedIndex()
+                                        return true
+                                }
                                 guard isBufferState else { return false }
                                 displayObject.increaseHighlightedIndex()
                         case .left:
@@ -313,6 +375,12 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 case .number(let number):
+                        guard IMEMode != .settings else {
+                                if number > 0 && number < 6 {
+                                        handleSettings(number - 1)
+                                }
+                                return true
+                        }
                         guard isBufferState else { return false }
                         selectDisplayingItem(index: number - 1, client: client)
                 case .instant(let text):
@@ -349,6 +417,10 @@ class JyutpingInputController: IMKInputController {
                                 guard isBufferState else { return false }
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
+                                guard IMEMode != .settings else {
+                                        handleSettings()
+                                        return true
+                                }
                                 guard isBufferState else { return false }
                                 insert(bufferText)
                                 bufferText = .empty
@@ -361,6 +433,11 @@ class JyutpingInputController: IMKInputController {
                         case KeyCode.Alphabet.VK_U where event.modifierFlags == .control:
                                 guard isBufferState else { return false }
                                 bufferText = .empty
+                        case KeyCode.Symbol.VK_BACKQUOTE where event.modifierFlags == .control:
+                                let shouldDisplaySettings: Bool = IMEMode == .cantonese && !isBufferState
+                                guard shouldDisplaySettings else { return false }
+                                IMEMode = .settings
+                                return true
                         default:
                                 return false
                         }
@@ -369,6 +446,34 @@ class JyutpingInputController: IMKInputController {
                 showWindow(origin: position(of: client))
 
                 return true
+        }
+
+        private func handleSettings(_ index: Int? = nil) {
+                let selectedIndex: Int = index ?? settingsObject.highlightedIndex
+                defer {
+                        settingsObject.resetHighlightedIndex()
+                        window?.setFrame(.zero, display: true)
+                        IMEMode = .cantonese
+                }
+                let newSelection: Logogram = {
+                        switch selectedIndex {
+                        case 0:
+                                return Logogram.current
+                        case 1:
+                                return .traditional
+                        case 2:
+                                return .hongkong
+                        case 3:
+                                return .taiwan
+                        case 4:
+                                return .simplified
+                        default:
+                                return Logogram.current
+                        }
+                }()
+                guard newSelection != Logogram.current else { return }
+                Logogram.changeCurrent(to: newSelection)
+                Logogram.updatePreference()
         }
 
         private func selectDisplayingItem(index: Int, client: IMKTextInput) {

@@ -11,7 +11,7 @@
 		37219BAA27C002A2004FE219 /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA927C002A2004FE219 /* Simplifier */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
-		375D7A3227C10ED10018EB6F /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* KeyboardMode.swift */; };
+		375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* InputMethodMode.swift */; };
 		375D7A3427C151470018EB6F /* DisplayObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3327C151470018EB6F /* DisplayObject.swift */; };
 		3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */; };
 		3764CEB427BE103300DCFB51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3764CEB327BE103300DCFB51 /* Assets.xcassets */; };
@@ -127,6 +127,8 @@
 		3797FCFF27BF94BE00C6BB8D /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FCFE27BF94BE00C6BB8D /* LookupData */; };
 		3797FD0127BF94C200C6BB8D /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FD0027BF94C200C6BB8D /* EmojiData */; };
 		3797FD0327BF94C600C6BB8D /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FD0227BF94C600C6BB8D /* Simplifier */; };
+		37ABA5AD27C19882000AC306 /* VariantConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AB27C19882000AC306 /* VariantConverter.swift */; };
+		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
 		37B5628527BEF9FE001F1E83 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B5628327BEF9FE001F1E83 /* icon.png */; };
 		37B5628627BEF9FE001F1E83 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B5628427BEF9FE001F1E83 /* icon@2x.png */; };
 /* End PBXBuildFile section */
@@ -200,7 +202,7 @@
 		3722934627BED0760077F15B /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934727BED0770077F15B /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934827BED0780077F15B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		375D7A3127C10ED10018EB6F /* KeyboardMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMode.swift; sourceTree = "<group>"; };
+		375D7A3127C10ED10018EB6F /* InputMethodMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodMode.swift; sourceTree = "<group>"; };
 		375D7A3327C151470018EB6F /* DisplayObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayObject.swift; sourceTree = "<group>"; };
 		3764CEAC27BE103100DCFB51 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
@@ -352,6 +354,8 @@
 		3797FCF827BF922900C6BB8D /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3797FCF927BF922A00C6BB8D /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3797FCFA27BF922B00C6BB8D /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37ABA5AB27C19882000AC306 /* VariantConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariantConverter.swift; sourceTree = "<group>"; };
+		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37B5628327BEF9FE001F1E83 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		37B5628427BEF9FE001F1E83 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -465,7 +469,7 @@
 				3764CEFF27BE13D900DCFB51 /* Info.plist */,
 				3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */,
 				3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */,
-				375D7A3127C10ED10018EB6F /* KeyboardMode.swift */,
+				375D7A3127C10ED10018EB6F /* InputMethodMode.swift */,
 				3764CEE527BE127000DCFB51 /* CandidatesView.swift */,
 				375D7A3327C151470018EB6F /* DisplayObject.swift */,
 				3764CEE627BE127000DCFB51 /* DisplayCandidate.swift */,
@@ -476,6 +480,7 @@
 				3764CEE827BE127000DCFB51 /* Direction.swift */,
 				3764CEE227BE126F00DCFB51 /* KeyCode.swift */,
 				3764CEE427BE126F00DCFB51 /* Modifier.swift */,
+				37ABA5AA27C19882000AC306 /* Variants */,
 				3764CEFE27BE138600DCFB51 /* Extensions */,
 				3722934927BED08B0077F15B /* Localizations */,
 				3764CEB327BE103300DCFB51 /* Assets.xcassets */,
@@ -767,6 +772,15 @@
 			path = Localizations;
 			sourceTree = "<group>";
 		};
+		37ABA5AA27C19882000AC306 /* Variants */ = {
+			isa = PBXGroup;
+			children = (
+				37ABA5AB27C19882000AC306 /* VariantConverter.swift */,
+				37ABA5AC27C19882000AC306 /* Logogram.swift */,
+			);
+			path = Variants;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1055,10 +1069,11 @@
 				3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */,
 				3764CEF427BE127000DCFB51 /* CandidatesView.swift in Sources */,
 				3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */,
-				375D7A3227C10ED10018EB6F /* KeyboardMode.swift in Sources */,
+				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
 				3764CEFA27BE127000DCFB51 /* Splitter.swift in Sources */,
 				3764CEED27BE127000DCFB51 /* Engine.swift in Sources */,
+				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
 				3764CEEF27BE127000DCFB51 /* ArrayExtensions.swift in Sources */,
 				3764CEF127BE127000DCFB51 /* KeyCode.swift in Sources */,
@@ -1068,6 +1083,7 @@
 				3764CEF927BE127000DCFB51 /* Candidate.swift in Sources */,
 				3764CEF627BE127000DCFB51 /* SettingsView.swift in Sources */,
 				3764CEF727BE127000DCFB51 /* Direction.swift in Sources */,
+				37ABA5AD27C19882000AC306 /* VariantConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

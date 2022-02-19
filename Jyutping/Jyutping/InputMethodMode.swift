@@ -1,7 +1,9 @@
-enum KeyboardMode {
+enum InputMethodMode {
+
         case transparent
         case english
         case cantonese
+        case settings
 
         var isCantoneseMode: Bool {
                 return self == .cantonese
@@ -13,6 +15,8 @@ enum KeyboardMode {
                 case .english:
                         return true
                 case .cantonese:
+                        return false
+                case .settings:
                         return false
                 }
         }
