@@ -20,4 +20,7 @@ enum InputMethodMode {
                         return false
                 }
         }
+        var isSettings: Bool {
+                return self == .settings
+        }
 }

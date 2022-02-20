@@ -11,7 +11,7 @@ class JyutpingInputController: IMKInputController {
         private lazy var isWindowInitialed: Bool = false
         private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
 
-        private func showWindow(origin: CGPoint, size: CGSize = CGSize(width: 600, height: 256)) {
+        private func showCandidatesWindow(origin: CGPoint, size: CGSize = CGSize(width: 600, height: 256)) {
                 guard isBufferState && !displayObject.items.isEmpty else {
                         if isWindowInitialed {
                                 window?.setFrame(.zero, display: true)
@@ -72,7 +72,7 @@ class JyutpingInputController: IMKInputController {
 
         // FIXME: candidateView size
         private func windowFrame(_ origin: CGPoint? = nil, size: CGSize = CGSize(width: 600, height: 256)) -> CGRect {
-                let origin = origin ?? position(of: currentClient!)
+                let origin = origin ?? currentClient?.position ?? .zero
                 let x: CGFloat = {
                         if origin.x > (screenFrame.maxX - size.width) {
                                 // should be cursor's left side
@@ -92,12 +92,6 @@ class JyutpingInputController: IMKInputController {
                 }()
                 let frame = CGRect(x: x, y: y, width: size.width, height: size.height)
                 return frame
-        }
-
-        private func position(of client: IMKTextInput) -> CGPoint {
-                var lineHeightRectangle: CGRect = .init()
-                client.attributes(forCharacterIndex: 0, lineHeightRectangle: &lineHeightRectangle)
-                return lineHeightRectangle.origin
         }
 
         private lazy var displayObject = DisplayObject()
@@ -213,7 +207,6 @@ class JyutpingInputController: IMKInputController {
         private lazy var regularSchemes: [[String]] = []
 
         private func suggest() {
-                // let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
                         let normal: [Candidate] = engine?.suggest(for: processingText, schemes: regularSchemes.uniqued()) ?? []
                         if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
@@ -351,14 +344,14 @@ class JyutpingInputController: IMKInputController {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
-                                guard inputMethodMode != .settings else {
+                                guard !(inputMethodMode.isSettings) else {
                                         settingsObject.decreaseHighlightedIndex()
                                         return true
                                 }
                                 guard isBufferState else { return false }
                                 displayObject.decreaseHighlightedIndex()
                         case .down:
-                                guard inputMethodMode != .settings else {
+                                guard !(inputMethodMode.isSettings) else {
                                         settingsObject.increaseHighlightedIndex()
                                         return true
                                 }
@@ -370,14 +363,30 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 case .number(let number):
-                        guard inputMethodMode != .settings else {
+                        guard !(inputMethodMode.isSettings) else {
                                 if number > 0 && number < 6 {
                                         handleSettings(number - 1)
                                 }
                                 return true
                         }
-                        guard isBufferState else { return false }
-                        selectDisplayingItem(index: number - 1, client: client)
+                        if isBufferState {
+                                selectDisplayingItem(index: number - 1, client: client)
+                        } else {
+                                guard event.modifierFlags == .shift else { return false }
+                                switch number {
+                                case 1:
+                                        insert("！")
+                                        return true
+                                case 9:
+                                        insert("（")
+                                        return true
+                                case 0:
+                                        insert("）")
+                                        return true
+                                default:
+                                        return false
+                                }
+                        }
                 case .instant(let text):
                         if isBufferState {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
@@ -404,8 +413,6 @@ class JyutpingInputController: IMKInputController {
                                 }
                                 insert("？")
                                 bufferText = .empty
-                        case KeyCode.Special.VK_ESCAPE:
-                                shutdownSession()
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
                                 guard isBufferState else { return false }
                                 guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
@@ -420,17 +427,24 @@ class JyutpingInputController: IMKInputController {
                                 guard isBufferState else { return false }
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
-                                guard inputMethodMode != .settings else {
+                                guard !(inputMethodMode.isSettings) else {
                                         handleSettings()
                                         return true
                                 }
-                                guard isBufferState else { return false }
+                                guard isBufferState else {
+                                        insert("\n")
+                                        return true
+                                }
                                 insert(bufferText)
                                 bufferText = .empty
                         case KeyCode.Special.VK_BACKWARD_DELETE:
                                 guard isBufferState else { return false }
                                 bufferText = String(bufferText.dropLast())
-                        case KeyCode.Keypad.VK_KEYPAD_CLEAR:
+                        case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
+                                guard !(inputMethodMode.isSettings) else {
+                                        handleSettings(0)
+                                        return true
+                                }
                                 guard isBufferState else { return false }
                                 bufferText = .empty
                         case KeyCode.Alphabet.VK_U where event.modifierFlags == .control:
@@ -445,9 +459,7 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 }
-
-                showWindow(origin: position(of: client))
-
+                showCandidatesWindow(origin: client.position)
                 return true
         }
 

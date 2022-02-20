@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
 		37219BA827C0029D004FE219 /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA727C0029D004FE219 /* LookupData */; };
 		37219BAA27C002A2004FE219 /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA927C002A2004FE219 /* Simplifier */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
@@ -186,6 +187,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
 		3722933627BECF310077F15B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3722933827BECF340077F15B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3722933927BECF440077F15B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				3764CEE927BE127000DCFB51 /* UInt16Extensions.swift */,
+				370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */,
 				3764CEDF27BE126F00DCFB51 /* StringExtensions.swift */,
 				3764CEE327BE126F00DCFB51 /* CharacterExtensions.swift */,
 				3764CEEC27BE127000DCFB51 /* FontExtensions.swift */,
@@ -1076,6 +1079,7 @@
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
 				3764CEEF27BE127000DCFB51 /* ArrayExtensions.swift in Sources */,
+				370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */,
 				3764CEF127BE127000DCFB51 /* KeyCode.swift in Sources */,
 				3764CEF527BE127000DCFB51 /* DisplayCandidate.swift in Sources */,
 				3764CEF227BE127000DCFB51 /* CharacterExtensions.swift in Sources */,
