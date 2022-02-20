@@ -330,15 +330,10 @@ class JyutpingInputController: IMKInputController {
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
+                guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
 
                 // Ignore any Command + ...
-                guard !(event.modifierFlags.contains(.command)) else {
-                        if isBufferState {
-                                bufferText = .empty
-                        }
-                        return false
-                }
-                guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
+                guard !(event.modifierFlags.contains(.command)) else { return false }
 
                 switch event.keyCode.representative {
                 case .arrow(let direction):
