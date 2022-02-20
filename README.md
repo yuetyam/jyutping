@@ -27,9 +27,9 @@ comming soon
 
 
 ## Screenshots
-<img src="images/screenshot.png" alt="screenshots" width="480"/>
+<img src="images/screenshot.png" alt="screenshots" width="460"/>
 <br>
-<img src="images/screenshot-mac.png" alt="screenshots" width="480"/>
+<img src="images/screenshot-mac.png" alt="screenshots" width="460"/>
 
 
 ## Build Requirements
