@@ -105,16 +105,24 @@ class JyutpingInputController: IMKInputController {
 
         private lazy var candidates: [Candidate] = [] {
                 didSet {
+                        firstIndex = 0
+                }
+        }
+        private lazy var firstIndex: Int = 0 {
+                didSet {
                         guard !candidates.isEmpty else {
+                                lastIndex = 0
                                 displayObject.reset()
                                 return
                         }
                         displayObject.resetHighlightedIndex()
-                        let bound: Int = candidates.count > 9 ? 9 : candidates.count
-                        let newItems = candidates[..<bound].map({ DisplayCandidate($0.text, comment: $0.romanization) })
+                        let bound: Int = (firstIndex == 0) ? min(9, candidates.count) : min(firstIndex + 9, candidates.count)
+                        lastIndex = bound - 1
+                        let newItems = candidates[firstIndex..<bound].map({ DisplayCandidate($0.text, comment: $0.romanization) })
                         displayObject.setItems(newItems)
                 }
         }
+        private lazy var lastIndex: Int = 0
 
         private lazy var bufferText: String = .empty {
                 didSet {
@@ -400,12 +408,14 @@ class JyutpingInputController: IMKInputController {
                                 shutdownSession()
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
                                 guard isBufferState else { return false }
-                                // FIXME: previousPage()
-                                displayObject.decreaseHighlightedIndex()
+                                guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
+                                guard firstIndex > 0 else { return true }
+                                firstIndex = max(0, firstIndex - 9)
                         case KeyCode.Symbol.VK_EQUAL, KeyCode.Special.VK_PAGEDOWN:
                                 guard isBufferState else { return false }
-                                // FIXME: nextPage()
-                                displayObject.increaseHighlightedIndex()
+                                guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
+                                guard lastIndex < candidates.count - 1 else { return true }
+                                firstIndex = lastIndex + 1
                         case KeyCode.Special.VK_SPACE:
                                 guard isBufferState else { return false }
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
