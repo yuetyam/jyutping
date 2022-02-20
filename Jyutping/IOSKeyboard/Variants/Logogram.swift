@@ -26,6 +26,7 @@ enum Logogram: Int {
         private(set) static var current: Logogram = {
                 let preference: Int = UserDefaults.standard.integer(forKey: "logogram")
                 switch preference {
+                case 1: return .traditional
                 case 2: return .hongkong
                 case 3: return .taiwan
                 case 4: return .simplified

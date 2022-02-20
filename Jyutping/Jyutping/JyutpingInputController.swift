@@ -11,7 +11,6 @@ class JyutpingInputController: IMKInputController {
         private lazy var isWindowInitialed: Bool = false
         private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
 
-        // FIXME: candidateView size
         private func showWindow(origin: CGPoint, size: CGSize = CGSize(width: 600, height: 256)) {
                 guard isBufferState && !displayObject.items.isEmpty else {
                         if isWindowInitialed {
@@ -49,7 +48,7 @@ class JyutpingInputController: IMKInputController {
         private func resetWindow() {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                switch IMEMode {
+                switch inputMethodMode {
                 case .settings:
                         window = NSWindow(contentRect: windowFrame(), styleMask: .borderless, backing: .buffered, defer: false)
                         window?.backgroundColor = .clear
@@ -71,6 +70,7 @@ class JyutpingInputController: IMKInputController {
                 }
         }
 
+        // FIXME: candidateView size
         private func windowFrame(_ origin: CGPoint? = nil, size: CGSize = CGSize(width: 600, height: 256)) -> CGRect {
                 let origin = origin ?? position(of: currentClient!)
                 let x: CGFloat = {
@@ -314,7 +314,7 @@ class JyutpingInputController: IMKInputController {
                 currentClient = nil
         }
 
-        private lazy var IMEMode: InputMethodMode = .cantonese {
+        private lazy var inputMethodMode: InputMethodMode = .cantonese {
                 didSet {
                         resetWindow()
                 }
@@ -337,33 +337,20 @@ class JyutpingInputController: IMKInputController {
                         }
                         return false
                 }
-                if event.keyCode == KeyCode.Keypad.VK_KEYPAD_CLEAR {
-                        // FIXME: Replace CLEAR with Shift
-                        switch IMEMode {
-                        case .transparent, .english:
-                                IMEMode = .cantonese
-                        case .cantonese:
-                                IMEMode = .english
-                        case .settings:
-                                break
-                        }
-                        return true
-                }
-                guard !(IMEMode.isEnglishMode) else { return false }
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
 
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
-                                guard IMEMode != .settings else {
+                                guard inputMethodMode != .settings else {
                                         settingsObject.decreaseHighlightedIndex()
                                         return true
                                 }
                                 guard isBufferState else { return false }
                                 displayObject.decreaseHighlightedIndex()
                         case .down:
-                                guard IMEMode != .settings else {
+                                guard inputMethodMode != .settings else {
                                         settingsObject.increaseHighlightedIndex()
                                         return true
                                 }
@@ -375,7 +362,7 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 case .number(let number):
-                        guard IMEMode != .settings else {
+                        guard inputMethodMode != .settings else {
                                 if number > 0 && number < 6 {
                                         handleSettings(number - 1)
                                 }
@@ -403,6 +390,12 @@ class JyutpingInputController: IMKInputController {
                         case KeyCode.Symbol.VK_QUOTE:
                                 guard isBufferState else { return false }
                                 bufferText += "'"
+                        case KeyCode.Symbol.VK_SLASH where event.modifierFlags == .shift:
+                                if isBufferState {
+                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
+                                }
+                                insert("？")
+                                bufferText = .empty
                         case KeyCode.Special.VK_ESCAPE:
                                 shutdownSession()
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
@@ -417,7 +410,7 @@ class JyutpingInputController: IMKInputController {
                                 guard isBufferState else { return false }
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
-                                guard IMEMode != .settings else {
+                                guard inputMethodMode != .settings else {
                                         handleSettings()
                                         return true
                                 }
@@ -433,10 +426,10 @@ class JyutpingInputController: IMKInputController {
                         case KeyCode.Alphabet.VK_U where event.modifierFlags == .control:
                                 guard isBufferState else { return false }
                                 bufferText = .empty
-                        case KeyCode.Symbol.VK_BACKQUOTE where event.modifierFlags == .control:
-                                let shouldDisplaySettings: Bool = IMEMode == .cantonese && !isBufferState
+                        case KeyCode.Symbol.VK_BACKQUOTE where event.modifierFlags == .control || event.modifierFlags == [.control, .shift]:
+                                let shouldDisplaySettings: Bool = inputMethodMode == .cantonese && !isBufferState
                                 guard shouldDisplaySettings else { return false }
-                                IMEMode = .settings
+                                inputMethodMode = .settings
                                 return true
                         default:
                                 return false
@@ -453,7 +446,7 @@ class JyutpingInputController: IMKInputController {
                 defer {
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(.zero, display: true)
-                        IMEMode = .cantonese
+                        inputMethodMode = .cantonese
                 }
                 let newSelection: Logogram = {
                         switch selectedIndex {
