@@ -1,7 +1,7 @@
 Jyutping
 ======
 
-Jyutping Keyboard for iOS & Jyutping Input Method for macOS
+Cantonese Jyutping Keyboard for iOS & macOS
 
 <a href="https://t.me/jyutping">
         <img src="images/telegram.png" alt="Telegram" width="150"/>
@@ -23,7 +23,7 @@ Jyutping Keyboard for iOS & Jyutping Input Method for macOS
 Compatibility: iOS 13.0+ or iPadOS 13.0+
 
 ## macOS
-comming soon
+Coming soon
 
 
 ## Screenshots
