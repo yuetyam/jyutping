@@ -6,7 +6,7 @@ final class SettingsObject: ObservableObject {
         @Published private(set) var highlightedIndex: Int = 0
 
         func increaseHighlightedIndex() {
-                guard highlightedIndex < 4 else { return }
+                guard highlightedIndex < 3 else { return }
                 highlightedIndex += 1
         }
         func decreaseHighlightedIndex() {
@@ -36,48 +36,25 @@ struct SettingsView: View {
                 }
         }()
 
-        @State var shapeSelection: Int = 0
-        @State var punctuationSelection: Int = 0
-        @State var emojiStateSelection: Int = 0
-
         var body: some View {
                 VStack(spacing: 8) {
-                        HStack {
-                                Text(verbatim: "1.").font(.serialNumber)
-                                Text(verbatim: "退出").font(.candidate)
-                                Spacer()
+                        Group {
+                                SettingLabel(number: 1, text: "傳統漢字\u{3000}\u{3000}\u{3000}", checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
+                                SettingLabel(number: 2, text: "傳統漢字・香港", checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
+                                SettingLabel(number: 3, text: "傳統漢字・臺灣", checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
+                                SettingLabel(number: 4, text: "简化字\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
                         }
-                        .foregroundColor(settingsObject.highlightedIndex == 0 ? .blue : .primary)
-
-                        LogogramLabel(number: 2, text: "傳統漢字\u{3000}\u{3000}\u{3000}", checked: variant == 0, highlighted: settingsObject.highlightedIndex == 1)
-                        LogogramLabel(number: 3, text: "傳統漢字・香港", checked: variant == 1, highlighted: settingsObject.highlightedIndex == 2)
-                        LogogramLabel(number: 4, text: "傳統漢字・臺灣", checked: variant == 2, highlighted: settingsObject.highlightedIndex == 3)
-                        LogogramLabel(number: 5, text: "简化字\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 4)
-
                         /*
-                        HStack {
-                                Text(verbatim: "6.").font(.serialNumber)
-                                Picker("Shape", selection: $shapeSelection) {
-                                        Text(verbatim: "半形數字").tag(0)
-                                        Text(verbatim: "全形數字").tag(1)
-                                }
-                                .labelsHidden()
-                                .pickerStyle(.segmented)
-                                Spacer()
+                        Divider()
+                        Group {
+                                SettingLabel(number: 5, text: "半形數字", checked: true, highlighted: false)
+                                SettingLabel(number: 6, text: "全形數字", checked: false, highlighted: false)
                         }
-                        .foregroundColor(settingsObject.highlightedIndex == 5 ? .blue : .primary)
-
-                        HStack {
-                                Text(verbatim: "7.").font(.serialNumber)
-                                Picker("Punctuation", selection: $punctuationSelection) {
-                                        Text(verbatim: "粵文句讀。").tag(0)
-                                        Text(verbatim: "英文標點 .").tag(1)
-                                }
-                                .labelsHidden()
-                                .pickerStyle(.segmented)
-                                Spacer()
+                        Divider()
+                        Group {
+                                SettingLabel(number: 7, text: "粵文句讀", checked: true, highlighted: false)
+                                SettingLabel(number: 8, text: "英文標點", checked: false, highlighted: false)
                         }
-                        .foregroundColor(settingsObject.highlightedIndex == 6 ? .blue : .primary)
                         */
                 }
                 .padding()
@@ -86,7 +63,7 @@ struct SettingsView: View {
 }
 
 
-private struct LogogramLabel: View {
+private struct SettingLabel: View {
 
         let number: Int
         let text: String

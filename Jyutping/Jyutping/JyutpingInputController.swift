@@ -359,7 +359,7 @@ class JyutpingInputController: IMKInputController {
                         }
                 case .number(let number):
                         guard !(inputMethodMode.isSettings) else {
-                                if number > 0 && number < 6 {
+                                if number >= 1 && number <= 4 {
                                         handleSettings(number - 1)
                                 }
                                 return true
@@ -437,7 +437,7 @@ class JyutpingInputController: IMKInputController {
                                 bufferText = String(bufferText.dropLast())
                         case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
                                 guard !(inputMethodMode.isSettings) else {
-                                        handleSettings(0)
+                                        handleSettings(-1)
                                         return true
                                 }
                                 guard isBufferState else { return false }
@@ -468,14 +468,12 @@ class JyutpingInputController: IMKInputController {
                 let newSelection: Logogram = {
                         switch selectedIndex {
                         case 0:
-                                return Logogram.current
-                        case 1:
                                 return .traditional
-                        case 2:
+                        case 1:
                                 return .hongkong
-                        case 3:
+                        case 2:
                                 return .taiwan
-                        case 4:
+                        case 3:
                                 return .simplified
                         default:
                                 return Logogram.current
