@@ -21,4 +21,12 @@ extension Image {
         }()
 
         static let safari: Image = Image(systemName: "safari")
+
+        static let arrowUpRight: Image = {
+                if #available(iOS 14.0, *) {
+                        return Image(systemName: "arrow.up.forward")
+                } else {
+                        return Image(systemName: "arrow.up.right")
+                }
+        }()
 }

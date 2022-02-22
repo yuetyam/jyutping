@@ -37,12 +37,11 @@ struct AboutView: View {
                                 }
                                 Section {
                                         Button {
-                                                // Telegram App doesn't support Universal Links
                                                 let appUrl: URL = URL(string: "tg://resolve?domain=jyutping")!
                                                 let webUrl: URL = URL(string: "https://t.me/jyutping")!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("Telegram Group", icon: "paperplane", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("Telegram Group", icon: "paperplane", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
                                                 UsernameCopyButton("jyutping")
@@ -55,31 +54,30 @@ struct AboutView: View {
                                                 let webUrl: URL = URL(string: address)!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("QQ Group", icon: "person.2", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("QQ Group", icon: "person.2", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
                                                 MenuCopyButton("293148593", title: "Copy QQ Group ID")
                                         }
-                                        /*
+                                }
+                                Section {
                                         Button {
-                                                let appUrl: URL = URL(string: "https://www.truthsocial.com")!
-                                                let webUrl: URL = URL(string: "https://www.truthsocial.com")!
+                                                let appUrl: URL = URL(string: "https://truthsocial.com/@jyutping")!
+                                                let webUrl: URL = URL(string: "https://truthsocial.com/@jyutping")!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("TRUTH Social", icon: "at", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("TRUTH Social", icon: "at", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
-                                                UsernameCopyButton("username")
-                                                URLCopyButton("https://www.truthsocial.com")
+                                                UsernameCopyButton("jyutping")
+                                                URLCopyButton("https://truthsocial.com/@jyutping")
                                         }
-                                        */
                                         Button {
-                                                // Instagram App doesn't support Universal Links
                                                 let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
                                                 let webUrl: URL = URL(string: "https://www.instagram.com/jyutping_app")!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("Instagram", icon: "dot.square", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("Instagram", icon: "dot.square", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
                                                 UsernameCopyButton("jyutping_app")
@@ -91,7 +89,7 @@ struct AboutView: View {
                                         Button {
                                                 UIApplication.shared.open(URL(string: "https://github.com/yuetyam/jyutping/issues")!)
                                         } label: {
-                                                EnhancedLabel("GitHub Issues", icon: "smallcircle.fill.circle", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("GitHub Issues", icon: "smallcircle.fill.circle", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping/issues")
@@ -105,7 +103,7 @@ struct AboutView: View {
                                         Button {
                                                 UIApplication.shared.open(URL(string: "itms-apps://apple.com/app/id1509367629")!)
                                         } label: {
-                                                EnhancedLabel("Review on the App Store", icon: "heart", symbol: Image(systemName: "arrow.up.right"))
+                                                EnhancedLabel("Review on the App Store", icon: "heart", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
                                                 MenuCopyButton("https://apps.apple.com/app/id1509367629", title: "Copy App Store link")
