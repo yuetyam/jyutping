@@ -331,9 +331,8 @@ class JyutpingInputController: IMKInputController {
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
-
-                // Ignore any Command + ...
-                guard !(event.modifierFlags.contains(.command)) else { return false }
+                guard !(event.modifierFlags.contains(.command)) else { return false }  // Ignore any Command + ...
+                let isShifting: Bool = event.modifierFlags == .shift
 
                 switch event.keyCode.representative {
                 case .arrow(let direction):
@@ -367,20 +366,8 @@ class JyutpingInputController: IMKInputController {
                         if isBufferState {
                                 selectDisplayingItem(index: number - 1, client: client)
                         } else {
-                                guard event.modifierFlags == .shift else { return false }
-                                switch number {
-                                case 1:
-                                        insert("！")
-                                        return true
-                                case 9:
-                                        insert("（")
-                                        return true
-                                case 0:
-                                        insert("）")
-                                        return true
-                                default:
-                                        return false
-                                }
+                                let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
+                                insert(text)
                         }
                 case .instant(let text):
                         if isBufferState {
@@ -389,10 +376,7 @@ class JyutpingInputController: IMKInputController {
                         insert(text)
                         bufferText = .empty
                 case .transparent:
-                        if isBufferState {
-                                insert(bufferText)
-                                bufferText = .empty
-                        }
+                        passBuffer()
                         return false
                 case .alphabet:
                         guard let letter: String = event.characters else { return false }
@@ -402,12 +386,10 @@ class JyutpingInputController: IMKInputController {
                         case KeyCode.Symbol.VK_QUOTE:
                                 guard isBufferState else { return false }
                                 bufferText += "'"
-                        case KeyCode.Symbol.VK_SLASH where event.modifierFlags == .shift:
-                                if isBufferState {
-                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
-                                }
-                                insert("？")
-                                bufferText = .empty
+                        case KeyCode.Symbol.VK_SLASH:
+                                passBuffer()
+                                let text: String = isShifting ? "？" : "/"
+                                insert(text)
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
                                 guard isBufferState else { return false }
                                 guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
@@ -426,12 +408,8 @@ class JyutpingInputController: IMKInputController {
                                         handleSettings()
                                         return true
                                 }
-                                guard isBufferState else {
-                                        insert("\n")
-                                        return true
-                                }
-                                insert(bufferText)
-                                bufferText = .empty
+                                guard isBufferState else { return false }
+                                passBuffer()
                         case KeyCode.Special.VK_BACKWARD_DELETE:
                                 guard isBufferState else { return false }
                                 bufferText = String(bufferText.dropLast())
@@ -456,6 +434,12 @@ class JyutpingInputController: IMKInputController {
                 }
                 showCandidatesWindow(origin: client.position)
                 return true
+        }
+
+        private func passBuffer() {
+                guard isBufferState else { return }
+                insert(bufferText)
+                bufferText = .empty
         }
 
         private func handleSettings(_ index: Int? = nil) {
