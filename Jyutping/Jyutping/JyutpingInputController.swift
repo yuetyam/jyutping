@@ -373,8 +373,12 @@ class JyutpingInputController: IMKInputController {
                         if isBufferState {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         }
-                        insert(text)
-                        bufferText = .empty
+                        passBuffer()
+                        if isShifting && text == "；" {
+                                insert("：")
+                        } else {
+                                insert(text)
+                        }
                 case .transparent:
                         passBuffer()
                         return false
