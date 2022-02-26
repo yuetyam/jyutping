@@ -374,11 +374,19 @@ class JyutpingInputController: IMKInputController {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         }
                         passBuffer()
-                        if isShifting && text == "；" {
-                                insert("：")
-                        } else {
-                                insert(text)
-                        }
+                        let symbol: String = {
+                                guard isShifting else { return text }
+                                switch text {
+                                case "，": return "《"
+                                case "。": return "》"
+                                case "；": return "："
+                                case "「": return "『"
+                                case "」": return "』"
+                                case "、": return "・"
+                                default: return text
+                                }
+                        }()
+                        insert(symbol)
                 case .transparent:
                         passBuffer()
                         return false
