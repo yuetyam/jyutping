@@ -27,6 +27,8 @@ Compatibility: iOS 13.0+
 ## macOS
 (早期測試版) 前往 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載
 
+(Beta) Download on the [Releases](https://github.com/yuetyam/jyutping/releases)
+
 Compatibility: macOS 12.0+ (Monterey or above)
 
 ## Screenshots
@@ -39,9 +41,8 @@ Compatibility: macOS 12.0+ (Monterey or above)
 Xcode 13.3+
 
 ## Credits
-[Rime Cantonese](https://github.com/rime/rime-cantonese)
-
-[OpenCC](https://github.com/BYVoid/OpenCC)
+- [Rime Cantonese](https://github.com/rime/rime-cantonese)
+- [OpenCC](https://github.com/BYVoid/OpenCC)
 
 ## Donate
 <a href="https://patreon.com/ososoio">
