@@ -207,6 +207,7 @@ class JyutpingInputController: IMKInputController {
         private lazy var regularSchemes: [[String]] = []
 
         private func suggest() {
+                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
                         let normal: [Candidate] = engine?.suggest(for: processingText, schemes: regularSchemes.uniqued()) ?? []
                         if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
@@ -217,7 +218,8 @@ class JyutpingInputController: IMKInputController {
                                 return normal
                         }
                 }()
-                push(engineCandidates)
+                let combined: [Candidate] = lexiconCandidates + engineCandidates
+                push(combined)
         }
 
         private func pinyinReverseLookup() {
@@ -291,6 +293,7 @@ class JyutpingInputController: IMKInputController {
         }
 
         private lazy var engine: Engine? = nil
+        private lazy var userLexicon: UserLexicon? = nil
         private lazy var pinyinProvider: PinyinProvider? = nil
         private lazy var shapeData: ShapeData? = nil
         private lazy var simplifier: Simplifier? = nil
@@ -299,11 +302,16 @@ class JyutpingInputController: IMKInputController {
                 if engine == nil {
                         engine = Engine()
                 }
+                if userLexicon == nil {
+                        userLexicon = UserLexicon()
+                }
                 currentClient = sender as? IMKTextInput
         }
         override func deactivateServer(_ sender: Any!) {
                 engine?.close()
                 engine = nil
+                userLexicon?.close()
+                userLexicon = nil
                 pinyinProvider?.close()
                 pinyinProvider = nil
                 shapeData?.close()
@@ -323,6 +331,7 @@ class JyutpingInputController: IMKInputController {
         private var isBufferState: Bool {
                 return !(bufferText.isEmpty)
         }
+        private lazy var candidateSequence: [Candidate] = []
 
         override func recognizedEvents(_ sender: Any!) -> Int {
                 let masks: NSEvent.EventTypeMask = [.keyDown, .flagsChanged]
@@ -506,6 +515,7 @@ class JyutpingInputController: IMKInputController {
                                 bufferText = first + tail
                         }
                 default:
+                        candidateSequence.append(candidate)
                         let bufferTextLength: Int = bufferText.count
                         let candidateInputText: String = {
                                 let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "xx", options: .regularExpression)
@@ -538,6 +548,11 @@ class JyutpingInputController: IMKInputController {
                         } else {
                                 bufferText = String(tail)
                         }
+                }
+                if bufferText.isEmpty && !candidateSequence.isEmpty {
+                        let concatenatedCandidate: Candidate = candidateSequence.joined()
+                        candidateSequence = []
+                        userLexicon?.handle(concatenatedCandidate)
                 }
         }
 

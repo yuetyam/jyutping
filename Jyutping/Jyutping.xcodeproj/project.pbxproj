@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3708EFC727CA4C0A00AD2735 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */; };
 		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
 		37219BA827C0029D004FE219 /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA727C0029D004FE219 /* LookupData */; };
 		37219BAA27C002A2004FE219 /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA927C002A2004FE219 /* Simplifier */; };
@@ -187,6 +188,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
 		3722933627BECF310077F15B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3722933827BECF340077F15B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				3764CEEA27BE127000DCFB51 /* Candidate.swift */,
 				3764CEE727BE127000DCFB51 /* SettingsView.swift */,
 				3764CEDE27BE126F00DCFB51 /* Engine.swift */,
+				3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */,
 				3764CEEB27BE127000DCFB51 /* Splitter.swift */,
 				3764CEE827BE127000DCFB51 /* Direction.swift */,
 				3764CEE227BE126F00DCFB51 /* KeyCode.swift */,
@@ -1086,6 +1089,7 @@
 				3764CEF827BE127000DCFB51 /* UInt16Extensions.swift in Sources */,
 				3764CEF927BE127000DCFB51 /* Candidate.swift in Sources */,
 				3764CEF627BE127000DCFB51 /* SettingsView.swift in Sources */,
+				3708EFC727CA4C0A00AD2735 /* UserLexicon.swift in Sources */,
 				3764CEF727BE127000DCFB51 /* Direction.swift in Sources */,
 				37ABA5AD27C19882000AC306 /* VariantConverter.swift in Sources */,
 			);
