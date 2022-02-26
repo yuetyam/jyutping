@@ -128,10 +128,10 @@
 		3797FCFF27BF94BE00C6BB8D /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FCFE27BF94BE00C6BB8D /* LookupData */; };
 		3797FD0127BF94C200C6BB8D /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FD0027BF94C200C6BB8D /* EmojiData */; };
 		3797FD0327BF94C600C6BB8D /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FD0227BF94C600C6BB8D /* Simplifier */; };
+		37AA717B27CA456200431E21 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717A27CA456200431E21 /* icon.png */; };
+		37AA717D27CA456A00431E21 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717C27CA456A00431E21 /* icon@2x.png */; };
 		37ABA5AD27C19882000AC306 /* VariantConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AB27C19882000AC306 /* VariantConverter.swift */; };
 		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
-		37B5628527BEF9FE001F1E83 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B5628327BEF9FE001F1E83 /* icon.png */; };
-		37B5628627BEF9FE001F1E83 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B5628427BEF9FE001F1E83 /* icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -356,10 +356,10 @@
 		3797FCF827BF922900C6BB8D /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3797FCF927BF922A00C6BB8D /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3797FCFA27BF922B00C6BB8D /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37AA717A27CA456200431E21 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		37AA717C27CA456A00431E21 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		37ABA5AB27C19882000AC306 /* VariantConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariantConverter.swift; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
-		37B5628327BEF9FE001F1E83 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		37B5628427BEF9FE001F1E83 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,8 +486,8 @@
 				3764CEFE27BE138600DCFB51 /* Extensions */,
 				3722934927BED08B0077F15B /* Localizations */,
 				3764CEB327BE103300DCFB51 /* Assets.xcassets */,
-				37B5628327BEF9FE001F1E83 /* icon.png */,
-				37B5628427BEF9FE001F1E83 /* icon@2x.png */,
+				37AA717A27CA456200431E21 /* icon.png */,
+				37AA717C27CA456A00431E21 /* icon@2x.png */,
 				3764CEB827BE103300DCFB51 /* Jyutping.entitlements */,
 				3764CEB527BE103300DCFB51 /* Preview Content */,
 			);
@@ -1001,11 +1001,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3764CEB727BE103300DCFB51 /* Preview Assets.xcassets in Resources */,
-				37B5628527BEF9FE001F1E83 /* icon.png in Resources */,
+				37AA717B27CA456200431E21 /* icon.png in Resources */,
 				3722933527BECF310077F15B /* Localizable.strings in Resources */,
 				3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */,
 				3764CEB427BE103300DCFB51 /* Assets.xcassets in Resources */,
-				37B5628627BEF9FE001F1E83 /* icon@2x.png in Resources */,
+				37AA717D27CA456A00431E21 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
