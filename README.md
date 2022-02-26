@@ -1,6 +1,8 @@
 Jyutping
 ======
 
+粵拼輸入法App
+
 Cantonese Jyutping Keyboard for iOS & macOS
 
 <a href="https://t.me/jyutping">
@@ -20,11 +22,12 @@ Cantonese Jyutping Keyboard for iOS & macOS
 </a>
 <br>
 <br>
-Compatibility: iOS 13.0+ or iPadOS 13.0+
+Compatibility: iOS 13.0+
 
 ## macOS
-Coming soon
+(早期測試版) 前往 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載
 
+Compatibility: macOS 12.0+ (Monterey or above)
 
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="460"/>
@@ -34,6 +37,11 @@ Coming soon
 
 ## Build Requirements
 Xcode 13.3+
+
+## Credits
+[Rime Cantonese](https://github.com/rime/rime-cantonese)
+
+[OpenCC](https://github.com/BYVoid/OpenCC)
 
 ## Donate
 <a href="https://patreon.com/ososoio">
