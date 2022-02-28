@@ -37,3 +37,11 @@ jobs:
       - name: Simplifier SwiftTest
         run: swift test
         working-directory: ./Simplifier
+  test_common_extensions:
+    name: CommonExtensions Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: CommonExtensions SwiftTest
+        run: swift test
+        working-directory: ./CommonExtensions
