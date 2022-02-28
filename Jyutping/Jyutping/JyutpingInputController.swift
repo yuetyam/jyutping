@@ -1,6 +1,7 @@
 import SwiftUI
 import Cocoa
 import InputMethodKit
+import CommonExtensions
 import KeyboardData
 import LookupData
 import Simplifier

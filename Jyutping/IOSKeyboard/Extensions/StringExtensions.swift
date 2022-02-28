@@ -1,3 +1,5 @@
+import CommonExtensions
+
 extension String {
         var ping: Int64 {
                 return Int64(self.removedSpacesTones().hash)
@@ -36,31 +38,5 @@ extension String {
         /// - Returns: A subsequence that leaves off the spaces and tones.
         func removedSpacesTones() -> String {
                 return self.filter({ !$0.isSpaceOrTone })
-        }
-
-        /// aka. `String.init()`
-        static let empty: String = ""
-
-        /// A Space. U+0020
-        static let space: String = " "
-
-        /// U+200B
-        static let zeroWidthSpace: String = "\u{200B}"
-
-        /// U+3000. Ideographic Space.
-        static let fullwidthSpace: String = "\u{3000}"
-}
-
-
-extension Optional where Wrapped == String {
-
-        /// Not nil && not empty
-        var hasContent: Bool {
-                switch self {
-                case .none:
-                        return false
-                case .some(let value):
-                        return !value.isEmpty
-                }
         }
 }

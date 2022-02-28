@@ -1,3 +1,5 @@
+import CommonExtensions
+
 /// Jyutping syllable to IPA
 struct Syllable2IPA {
 

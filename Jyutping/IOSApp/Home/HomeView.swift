@@ -1,11 +1,12 @@
 import SwiftUI
+import CommonExtensions
 import LookupData
 
 struct HomeView: View {
 
         private let placeholder: String = NSLocalizedString("Text Field", comment: .empty)
         @State private var inputText: String = .empty
-        private var rawCantonese: String { inputText.filtered() }
+        private var rawCantonese: String { inputText.ideographicFiltered() }
         private var jyutpings: [String] { LookupData.search(for: rawCantonese) }
 
         // Tones Input Section

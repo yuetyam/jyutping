@@ -1,4 +1,5 @@
 import UIKit
+import CommonExtensions
 import KeyboardData
 import LookupData
 import Simplifier
@@ -249,9 +250,9 @@ final class KeyboardViewController: UIInputViewController {
                                 case (3, true):
                                         return ", "
                                 case (4, _):
-                                        return .fullwidthSpace
+                                        return .fullWidthSpace
                                 default:
-                                        return .fullwidthSpace
+                                        return .fullWidthSpace
                                 }
                         }()
                         textDocumentProxy.insertText(text)

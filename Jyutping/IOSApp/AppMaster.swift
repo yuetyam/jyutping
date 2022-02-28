@@ -1,4 +1,5 @@
 import UIKit
+import CommonExtensions
 import LookupData
 
 struct AppMaster {
@@ -15,7 +16,7 @@ struct AppMaster {
         /// - Parameter text: Cantonese text
         /// - Returns: Cantonese text and corresponding romanizations
         static func lookup(text: String) -> (text: String, romanizations: [String]) {
-                let filtered: String = text.filtered()
+                let filtered: String = text.ideographicFiltered()
                 let search = LookupData.advancedSearch(for: filtered)
                 guard filtered != text else {
                         return search

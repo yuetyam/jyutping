@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 import LookupData
 
 @available(iOS 14.0, *)
@@ -7,7 +8,7 @@ struct JyutpingView_iOS14: View {
         private let placeholder: String = NSLocalizedString("Lookup Jyutping for Cantonese", comment: .empty)
         @State private var inputText: String = .empty
 
-        private var rawCantonese: String { inputText.filtered() }
+        private var rawCantonese: String { inputText.ideographicFiltered() }
         private var jyutpings: [String] { LookupData.search(for: rawCantonese) }
 
         var body: some View {
