@@ -29,7 +29,7 @@ Temporary Items
 
 ### Xcode ###
 *.xcodeproj/
-!*.pbxproj
+!project.pbxproj
 
 ## GCC Patch
 /*.gcno
