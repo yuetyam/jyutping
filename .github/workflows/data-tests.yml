@@ -29,14 +29,14 @@ jobs:
       - name: EmojiData SwiftTest
         run: swift test
         working-directory: ./EmojiData
-  test_simplifier:
-    name: Simplifier Tests
+  test_character_sets:
+    name: CharacterSets Tests
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Simplifier SwiftTest
+      - name: CharacterSets SwiftTest
         run: swift test
-        working-directory: ./Simplifier
+        working-directory: ./CharacterSets
   test_common_extensions:
     name: CommonExtensions Tests
     runs-on: macos-latest
