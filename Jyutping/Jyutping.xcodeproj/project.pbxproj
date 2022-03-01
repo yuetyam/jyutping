@@ -11,9 +11,10 @@
 		3708EFCD27CD5ADE00AD2735 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFCC27CD5ADE00AD2735 /* CommonExtensions */; };
 		3708EFCF27CD5B8300AD2735 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFCE27CD5B8300AD2735 /* CommonExtensions */; };
 		3708EFD127CD611600AD2735 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFD027CD611600AD2735 /* CommonExtensions */; };
+		3708EFD427CE471500AD2735 /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFD327CE471500AD2735 /* CharacterSets */; };
+		3708EFD627CE47F900AD2735 /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFD527CE47F900AD2735 /* CharacterSets */; };
 		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
 		37219BA827C0029D004FE219 /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA727C0029D004FE219 /* LookupData */; };
-		37219BAA27C002A2004FE219 /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA927C002A2004FE219 /* Simplifier */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
 		375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* InputMethodMode.swift */; };
@@ -98,7 +99,6 @@
 		3797FCC527BF915E00C6BB8D /* GridKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9927BF915D00C6BB8D /* GridKeyView.swift */; };
 		3797FCC627BF915E00C6BB8D /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9A27BF915D00C6BB8D /* KeyboardViewController+TableView.swift */; };
 		3797FCC727BF915E00C6BB8D /* KeyboardViewController+keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9B27BF915D00C6BB8D /* KeyboardViewController+keyboard.swift */; };
-		3797FCC827BF915E00C6BB8D /* VariantConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9D27BF915D00C6BB8D /* VariantConverter.swift */; };
 		3797FCC927BF915E00C6BB8D /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9E27BF915D00C6BB8D /* Logogram.swift */; };
 		3797FCCA27BF915E00C6BB8D /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9F27BF915D00C6BB8D /* KeyboardInterface.swift */; };
 		3797FCCB27BF915E00C6BB8D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCA127BF915D00C6BB8D /* Emoji.swift */; };
@@ -128,10 +128,8 @@
 		3797FCFD27BF94B400C6BB8D /* KeyboardData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FCFC27BF94B400C6BB8D /* KeyboardData */; };
 		3797FCFF27BF94BE00C6BB8D /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FCFE27BF94BE00C6BB8D /* LookupData */; };
 		3797FD0127BF94C200C6BB8D /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FD0027BF94C200C6BB8D /* EmojiData */; };
-		3797FD0327BF94C600C6BB8D /* Simplifier in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FD0227BF94C600C6BB8D /* Simplifier */; };
 		37AA717B27CA456200431E21 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717A27CA456200431E21 /* icon.png */; };
 		37AA717D27CA456A00431E21 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717C27CA456A00431E21 /* icon@2x.png */; };
-		37ABA5AD27C19882000AC306 /* VariantConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AB27C19882000AC306 /* VariantConverter.swift */; };
 		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +188,7 @@
 /* Begin PBXFileReference section */
 		3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		3708EFCB27CD5AA200AD2735 /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../CommonExtensions; sourceTree = "<group>"; };
+		3708EFD227CE3A6900AD2735 /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../CharacterSets; sourceTree = "<group>"; };
 		370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
 		3722933627BECF310077F15B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3722933827BECF340077F15B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -236,7 +235,6 @@
 		3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		3764CEFF27BE13D900DCFB51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3797FBDE27BF87FD00C6BB8D /* LookupData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LookupData; path = ../LookupData; sourceTree = "<group>"; };
-		3797FBDF27BF880400C6BB8D /* Simplifier */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Simplifier; path = ../Simplifier; sourceTree = "<group>"; };
 		3797FBE027BF880F00C6BB8D /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../EmojiData; sourceTree = "<group>"; };
 		3797FBE527BF88BE00C6BB8D /* IOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3797FBEB27BF88BE00C6BB8D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -315,7 +313,6 @@
 		3797FC9927BF915D00C6BB8D /* GridKeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridKeyView.swift; sourceTree = "<group>"; };
 		3797FC9A27BF915D00C6BB8D /* KeyboardViewController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+TableView.swift"; sourceTree = "<group>"; };
 		3797FC9B27BF915D00C6BB8D /* KeyboardViewController+keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+keyboard.swift"; sourceTree = "<group>"; };
-		3797FC9D27BF915D00C6BB8D /* VariantConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariantConverter.swift; sourceTree = "<group>"; };
 		3797FC9E27BF915D00C6BB8D /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		3797FC9F27BF915D00C6BB8D /* KeyboardInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
 		3797FCA127BF915D00C6BB8D /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
@@ -358,7 +355,6 @@
 		3797FCFA27BF922B00C6BB8D /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37AA717A27CA456200431E21 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		37AA717C27CA456A00431E21 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		37ABA5AB27C19882000AC306 /* VariantConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariantConverter.swift; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -369,7 +365,7 @@
 			files = (
 				37219BA827C0029D004FE219 /* LookupData in Frameworks */,
 				3708EFCD27CD5ADE00AD2735 /* CommonExtensions in Frameworks */,
-				37219BAA27C002A2004FE219 /* Simplifier in Frameworks */,
+				3708EFD427CE471500AD2735 /* CharacterSets in Frameworks */,
 				3764CEDD27BE124200DCFB51 /* KeyboardData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,7 +414,7 @@
 				3797FD0127BF94C200C6BB8D /* EmojiData in Frameworks */,
 				3708EFD127CD611600AD2735 /* CommonExtensions in Frameworks */,
 				3797FCFF27BF94BE00C6BB8D /* LookupData in Frameworks */,
-				3797FD0327BF94C600C6BB8D /* Simplifier in Frameworks */,
+				3708EFD627CE47F900AD2735 /* CharacterSets in Frameworks */,
 				3797FCFD27BF94B400C6BB8D /* KeyboardData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,9 +434,9 @@
 		3764CEA327BE103100DCFB51 = {
 			isa = PBXGroup;
 			children = (
+				3708EFD227CE3A6900AD2735 /* CharacterSets */,
 				3708EFCB27CD5AA200AD2735 /* CommonExtensions */,
 				3797FBE027BF880F00C6BB8D /* EmojiData */,
-				3797FBDF27BF880400C6BB8D /* Simplifier */,
 				3797FBDE27BF87FD00C6BB8D /* LookupData */,
 				3764CEDA27BE121900DCFB51 /* KeyboardData */,
 				3764CEAE27BE103200DCFB51 /* Jyutping */,
@@ -487,7 +483,7 @@
 				3764CEE827BE127000DCFB51 /* Direction.swift */,
 				3764CEE227BE126F00DCFB51 /* KeyCode.swift */,
 				3764CEE427BE126F00DCFB51 /* Modifier.swift */,
-				37ABA5AA27C19882000AC306 /* Variants */,
+				37ABA5AC27C19882000AC306 /* Logogram.swift */,
 				3764CEFE27BE138600DCFB51 /* Extensions */,
 				3722934927BED08B0077F15B /* Localizations */,
 				3764CEB327BE103300DCFB51 /* Assets.xcassets */,
@@ -667,13 +663,13 @@
 				3797FCA427BF915D00C6BB8D /* KeyboardEvent.swift */,
 				3797FC8B27BF915D00C6BB8D /* Operation.swift */,
 				3797FC9227BF915D00C6BB8D /* AudioFeedback.swift */,
+				3797FC9E27BF915D00C6BB8D /* Logogram.swift */,
 				3797FC9827BF915D00C6BB8D /* GridKeyboard */,
 				3797FCA027BF915D00C6BB8D /* Emoji */,
 				3797FC8C27BF915D00C6BB8D /* Components */,
 				3797FCAD27BF915D00C6BB8D /* Candidate */,
 				3797FCB227BF915E00C6BB8D /* KeyView */,
 				3797FC9327BF915D00C6BB8D /* Layout */,
-				3797FC9C27BF915D00C6BB8D /* Variants */,
 				3797FCA527BF915D00C6BB8D /* Extensions */,
 				3797FCFB27BF923500C6BB8D /* Localizations */,
 				3797FC8327BF90C000C6BB8D /* Info.plist */,
@@ -711,15 +707,6 @@
 				3797FC9927BF915D00C6BB8D /* GridKeyView.swift */,
 			);
 			path = GridKeyboard;
-			sourceTree = "<group>";
-		};
-		3797FC9C27BF915D00C6BB8D /* Variants */ = {
-			isa = PBXGroup;
-			children = (
-				3797FC9D27BF915D00C6BB8D /* VariantConverter.swift */,
-				3797FC9E27BF915D00C6BB8D /* Logogram.swift */,
-			);
-			path = Variants;
 			sourceTree = "<group>";
 		};
 		3797FCA027BF915D00C6BB8D /* Emoji */ = {
@@ -777,15 +764,6 @@
 			path = Localizations;
 			sourceTree = "<group>";
 		};
-		37ABA5AA27C19882000AC306 /* Variants */ = {
-			isa = PBXGroup;
-			children = (
-				37ABA5AB27C19882000AC306 /* VariantConverter.swift */,
-				37ABA5AC27C19882000AC306 /* Logogram.swift */,
-			);
-			path = Variants;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -805,8 +783,8 @@
 			packageProductDependencies = (
 				3764CEDC27BE124200DCFB51 /* KeyboardData */,
 				37219BA727C0029D004FE219 /* LookupData */,
-				37219BA927C002A2004FE219 /* Simplifier */,
 				3708EFCC27CD5ADE00AD2735 /* CommonExtensions */,
+				3708EFD327CE471500AD2735 /* CharacterSets */,
 			);
 			productName = Jyutping;
 			productReference = 3764CEAC27BE103100DCFB51 /* Jyutping.app */;
@@ -924,8 +902,8 @@
 				3797FCFC27BF94B400C6BB8D /* KeyboardData */,
 				3797FCFE27BF94BE00C6BB8D /* LookupData */,
 				3797FD0027BF94C200C6BB8D /* EmojiData */,
-				3797FD0227BF94C600C6BB8D /* Simplifier */,
 				3708EFD027CD611600AD2735 /* CommonExtensions */,
+				3708EFD527CE47F900AD2735 /* CharacterSets */,
 			);
 			productName = IOSKeyboard;
 			productReference = 3797FC7F27BF90C000C6BB8D /* IOSKeyboard.appex */;
@@ -1092,7 +1070,6 @@
 				3764CEF627BE127000DCFB51 /* SettingsView.swift in Sources */,
 				3708EFC727CA4C0A00AD2735 /* UserLexicon.swift in Sources */,
 				3764CEF727BE127000DCFB51 /* Direction.swift in Sources */,
-				37ABA5AD27C19882000AC306 /* VariantConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1209,7 +1186,6 @@
 				3797FCD527BF915E00C6BB8D /* KeyboardViewController+CollectionView.swift in Sources */,
 				3797FCBB27BF915E00C6BB8D /* ToolBar.swift in Sources */,
 				3797FCE027BF915E00C6BB8D /* KeyboardViewController.swift in Sources */,
-				3797FCC827BF915E00C6BB8D /* VariantConverter.swift in Sources */,
 				3797FCDD27BF915E00C6BB8D /* KeyView+paths.swift in Sources */,
 				3797FCCD27BF915E00C6BB8D /* EmojiBoard.swift in Sources */,
 				3797FCDA27BF915E00C6BB8D /* KeyView+construction.swift in Sources */,
@@ -1892,13 +1868,17 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
 		};
+		3708EFD327CE471500AD2735 /* CharacterSets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CharacterSets;
+		};
+		3708EFD527CE47F900AD2735 /* CharacterSets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CharacterSets;
+		};
 		37219BA727C0029D004FE219 /* LookupData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LookupData;
-		};
-		37219BA927C002A2004FE219 /* Simplifier */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Simplifier;
 		};
 		3764CEDC27BE124200DCFB51 /* KeyboardData */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1919,10 +1899,6 @@
 		3797FD0027BF94C200C6BB8D /* EmojiData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EmojiData;
-		};
-		3797FD0227BF94C600C6BB8D /* Simplifier */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Simplifier;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

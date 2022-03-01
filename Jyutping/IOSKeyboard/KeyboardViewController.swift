@@ -2,7 +2,7 @@ import UIKit
 import CommonExtensions
 import KeyboardData
 import LookupData
-import Simplifier
+import CharacterSets
 
 final class KeyboardViewController: UIInputViewController {
 
@@ -621,8 +621,11 @@ final class KeyboardViewController: UIInputViewController {
                 switch Logogram.current {
                 case .traditional:
                         candidates = origin.uniqued()
-                case .hongkong, .taiwan:
-                        let converted: [Candidate] = origin.map({ Candidate(text: VariantConverter.convert(text: $0.text, to: .current), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
+                case .hongkong:
+                        let converted: [Candidate] = origin.map({ Candidate(text: Converter.convert($0.text, to: .hongkong), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
+                        candidates = converted.uniqued()
+                case .taiwan:
+                        let converted: [Candidate] = origin.map({ Candidate(text: Converter.convert($0.text, to: .taiwan), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
                         candidates = converted.uniqued()
                 case .simplified:
                         if simplifier == nil {
