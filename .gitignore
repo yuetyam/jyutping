@@ -28,8 +28,9 @@ Temporary Items
 
 
 ### Xcode ###
-*.xcodeproj/
-!project.pbxproj
+*.xcworkspace/
+xcuserdata/
+xcshareddata/
 
 ## GCC Patch
 /*.gcno
