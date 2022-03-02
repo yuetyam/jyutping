@@ -44,13 +44,13 @@ public struct EmojiData {
         private static func fallback(_ name: String) -> [String] {
                 let number: Int = {
                         switch name {
-                        case "emoji_0": return 461  // Smileys & People
-                        case "emoji_1": return 199  // Animals & Nature
-                        case "emoji_2": return 123  // Food & Drink
-                        case "emoji_3": return 117  // Activity
-                        case "emoji_4": return 128  // Travel & Places
-                        case "emoji_5": return 217  // Objects
-                        case "emoji_6": return 292  // Symbols
+                        case "emoji_0": return 480  // Smileys & People
+                        case "emoji_1": return 204  // Animals & Nature
+                        case "emoji_2": return 126  // Food & Drink
+                        case "emoji_3": return 118  // Activity
+                        case "emoji_4": return 131  // Travel & Places
+                        case "emoji_5": return 222  // Objects
+                        case "emoji_6": return 293  // Symbols
                         case "emoji_7": return 259  // Flags
                         default: return 500
                         }

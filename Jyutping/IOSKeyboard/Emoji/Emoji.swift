@@ -27,7 +27,7 @@ struct Emoji {
 
         static let sequences: [[String]] = {
                 let emojis: [[String]] = EmojiData.fetchAll()
-                if #available(iOSApplicationExtension 14.5, *) {
+                if #available(iOSApplicationExtension 15.4, *) {
                         return emojis
                 } else {
                         let font: UIFont = UIFont(name: "Apple Color Emoji", size: 17) ?? .systemFont(ofSize: 17)

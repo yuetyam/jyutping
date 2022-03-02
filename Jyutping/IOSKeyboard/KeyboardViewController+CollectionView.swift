@@ -23,13 +23,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 } else {
                         switch section {
                         case 0: return Emoji.frequent.count
-                        case 1: return Emoji.sequences[0].count  // 461 Smileys & People
-                        case 2: return Emoji.sequences[1].count  // 199 Animals & Nature
-                        case 3: return Emoji.sequences[2].count  // 123 Food & Drink
-                        case 4: return Emoji.sequences[3].count  // 117 Activity
-                        case 5: return Emoji.sequences[4].count  // 128 Travel & Places
-                        case 6: return Emoji.sequences[5].count  // 217 Objects
-                        case 7: return Emoji.sequences[6].count  // 292 Symbols
+                        case 1: return Emoji.sequences[0].count  // 480 Smileys & People
+                        case 2: return Emoji.sequences[1].count  // 204 Animals & Nature
+                        case 3: return Emoji.sequences[2].count  // 126 Food & Drink
+                        case 4: return Emoji.sequences[3].count  // 118 Activity
+                        case 5: return Emoji.sequences[4].count  // 131 Travel & Places
+                        case 6: return Emoji.sequences[5].count  // 222 Objects
+                        case 7: return Emoji.sequences[6].count  // 293 Symbols
                         case 8: return Emoji.sequences[7].count  // 259 Flags
                         default: return 0
                         }
