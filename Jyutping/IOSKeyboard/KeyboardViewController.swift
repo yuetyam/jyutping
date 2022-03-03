@@ -135,6 +135,8 @@ final class KeyboardViewController: UIInputViewController {
                 pinyinProvider = nil
                 shapeData?.close()
                 shapeData = nil
+                loengfanProvider?.close()
+                loengfanProvider = nil
                 simplifier?.close()
                 simplifier = nil
         }
@@ -338,7 +340,7 @@ final class KeyboardViewController: UIInputViewController {
                 switch bufferText.first {
                 case .none:
                         break
-                case .some("r"), .some("v"), .some("x"):
+                case .some("r"), .some("v"), .some("x"), .some("q"):
                         if bufferText.count == candidate.input.count + 1 {
                                 bufferText = .empty
                         } else {
@@ -396,7 +398,7 @@ final class KeyboardViewController: UIInputViewController {
                         switch bufferText.first {
                         case .none:
                                 processingText = .empty
-                        case .some("r"), .some("v"), .some("x"):
+                        case .some("r"), .some("v"), .some("x"), .some("q"):
                                 processingText = bufferText
                         default:
                                 if keyboardLayout == .saamPing {
@@ -429,7 +431,7 @@ final class KeyboardViewController: UIInputViewController {
                                 markedText = .empty
                                 candidates = []
                                 break
-                        case .some("r"), .some("v"), .some("x"):
+                        case .some("r"), .some("v"), .some("x"), .some("q"):
                                 flexibleSchemes = []
                                 markedText = processingText
                         default:
@@ -533,6 +535,7 @@ final class KeyboardViewController: UIInputViewController {
         private lazy var engine: Engine? = Engine()
         private lazy var pinyinProvider: PinyinProvider? = nil
         private lazy var shapeData: ShapeData? = nil
+        private lazy var loengfanProvider: LoengfanProvider? = nil
         private lazy var simplifier: Simplifier? = nil
         private func suggest() {
                 switch processingText.first {
@@ -544,6 +547,8 @@ final class KeyboardViewController: UIInputViewController {
                         cangjieReverseLookup()
                 case .some("x"):
                         strokeReverseLookup()
+                case .some("q"):
+                        loengfanReverseLookup()
                 default:
                         imeSuggest()
                 }
@@ -594,6 +599,27 @@ final class KeyboardViewController: UIInputViewController {
                         shapeData = ShapeData()
                 }
                 guard let searches = shapeData?.search(stroke: text), !searches.isEmpty else { return }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                push(joined)
+        }
+        private func loengfanReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
+                if loengfanProvider == nil {
+                        loengfanProvider = LoengfanProvider()
+                }
+                guard let searches = loengfanProvider?.search(for: text), !searches.isEmpty else {
+                        candidates = []
+                        return
+                }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
                         let romanizations: [String] = LookupData.search(for: lexicon.text)
                         let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })

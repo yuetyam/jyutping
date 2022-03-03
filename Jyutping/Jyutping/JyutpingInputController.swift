@@ -124,7 +124,7 @@ class JyutpingInputController: IMKInputController {
                         switch bufferText.first {
                         case .none:
                                 processingText = .empty
-                        case .some("r"), .some("v"), .some("x"):
+                        case .some("r"), .some("v"), .some("x"), .some("q"):
                                 processingText = bufferText
                         default:
                                 processingText = bufferText.replacingOccurrences(of: "vv", with: "4")
@@ -158,6 +158,10 @@ class JyutpingInputController: IMKInputController {
                                 flexibleSchemes = []
                                 markedText = processingText
                                 strokeReverseLookup()
+                        case .some("q"):
+                                flexibleSchemes = []
+                                markedText = processingText
+                                loengfanReverseLookup()
                         default:
                                 flexibleSchemes = Splitter.split(processingText)
                                 if let syllables: [String] = flexibleSchemes.first {
@@ -277,6 +281,27 @@ class JyutpingInputController: IMKInputController {
                 let joined: [Candidate] = Array<Candidate>(lookup.joined())
                 push(joined)
         }
+        private func loengfanReverseLookup() {
+                let text: String = String(processingText.dropFirst())
+                guard !text.isEmpty else {
+                        candidates = []
+                        return
+                }
+                if loengfanProvider == nil {
+                        loengfanProvider = LoengfanProvider()
+                }
+                guard let searches = loengfanProvider?.search(for: text), !searches.isEmpty else {
+                        candidates = []
+                        return
+                }
+                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
+                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
+                        return candidates
+                }
+                let joined: [Candidate] = Array<Candidate>(lookup.joined())
+                push(joined)
+        }
         private func push(_ origin: [Candidate]) {
                 switch Logogram.current {
                 case .traditional:
@@ -300,6 +325,7 @@ class JyutpingInputController: IMKInputController {
         private lazy var userLexicon: UserLexicon? = nil
         private lazy var pinyinProvider: PinyinProvider? = nil
         private lazy var shapeData: ShapeData? = nil
+        private lazy var loengfanProvider: LoengfanProvider? = nil
         private lazy var simplifier: Simplifier? = nil
 
         override func activateServer(_ sender: Any!) {
@@ -320,6 +346,8 @@ class JyutpingInputController: IMKInputController {
                 pinyinProvider = nil
                 shapeData?.close()
                 shapeData = nil
+                loengfanProvider?.close()
+                loengfanProvider = nil
                 simplifier?.close()
                 simplifier = nil
 
@@ -510,7 +538,7 @@ class JyutpingInputController: IMKInputController {
                 switch bufferText.first {
                 case .none:
                         break
-                case .some("r"), .some("v"), .some("x"):
+                case .some("r"), .some("v"), .some("x"), .some("q"):
                         if bufferText.count == candidate.input.count + 1 {
                                 bufferText = .empty
                         } else {
