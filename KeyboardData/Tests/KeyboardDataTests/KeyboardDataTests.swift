@@ -41,4 +41,15 @@ final class KeyboardDataTests: XCTestCase {
                 let strokes: Int = shape.strokes(of: "木")
                 XCTAssertEqual(strokes, 4)
         }
+
+
+        // MARK: - Loengfan
+
+        func testLoengfan() {
+                let provider = LoengfanProvider()
+                let candidates = provider.search(for: "mukdaan")
+                provider.close()
+                let first = candidates.first!
+                XCTAssertEqual(first.text, "查")
+        }
 }
