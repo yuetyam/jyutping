@@ -137,6 +137,10 @@ struct HomeView: View {
                                                                 }
                                                         }
                                         }
+                                        Section {
+                                                Text("Lookup Jyutping with Loengfan").font(.headline)
+                                                Text("Loengfan Reverse Lookup Description").lineSpacing(6)
+                                        }
                                 }
                                 Section {
                                         Text("Period (Full Stop) Shortcut").font(.headline)
