@@ -21,17 +21,34 @@ struct TonesTable: View {
                 }
         }
 
+        private let tonesDescription: VStack = {
+                VStack(spacing: 0) {
+                        HStack {
+                                Text(verbatim: "聲調之「上」應讀上聲 soeng5")
+                                Speaker("soeng5")
+                                Spacer()
+                        }
+                        HStack {
+                                Text(verbatim: "而非去聲 soeng6")
+                                Speaker("soeng6")
+                                Spacer()
+                        }
+                }
+        }()
+
         var body: some View {
                 if #available(iOS 15.0, *) {
                         List {
                                 Section {
                                         ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
-                                                ToneCell($0, width: width).textSelection(.enabled)
+                                                ToneCell($0, width: width)
                                         }
-                                } footer: {
-                                        Text(verbatim: "聲調之「上」應讀上聲 soeng5，而非去聲 soeng6").textCase(.none)
+                                }
+                                Section {
+                                        tonesDescription
                                 }
                         }
+                        .textSelection(.enabled)
                         .navigationTitle("Jyutping Tones")
                         .navigationBarTitleDisplayMode(.inline)
 
@@ -41,8 +58,9 @@ struct TonesTable: View {
                                         ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
                                                 ToneCell($0, width: width)
                                         }
-                                } footer: {
-                                        Text(verbatim: "聲調之「上」應讀上聲 soeng5，而非去聲 soeng6").textCase(.none)
+                                }
+                                Section {
+                                        tonesDescription
                                 }
                         }
                         .listStyle(.insetGrouped)
@@ -55,8 +73,9 @@ struct TonesTable: View {
                                         ForEach(dataSource.components(separatedBy: .newlines), id: \.self) {
                                                 ToneCell($0, width: width)
                                         }
-                                } footer: {
-                                        Text(verbatim: "聲調之「上」應讀上聲 soeng5，而非去聲 soeng6")
+                                }
+                                Section {
+                                        tonesDescription
                                 }
                         }
                         .listStyle(.grouped)
