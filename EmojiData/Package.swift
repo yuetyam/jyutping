@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
         name: "EmojiData",
-        platforms: [.iOS(.v13), .macOS(.v12)],
+        platforms: [.iOS(.v13), .macOS(.v11)],
         products: [
                 .library(name: "EmojiData", targets: ["EmojiData"])
         ],

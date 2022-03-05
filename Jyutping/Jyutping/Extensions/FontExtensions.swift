@@ -38,11 +38,28 @@ extension Font {
                 if let font_0 = NSFont(name: "JetBrains Mono", size: 14) {
                         return Font.custom("JetBrains Mono", size: 14, relativeTo: .title3)
                 } else {
-                        return Font.title3.monospaced()
+                        if #available(macOS 12.0, *) {
+                                return Font.title3.monospaced()
+                        } else {
+                                return Font.system(size: 15, design: .monospaced)
+                        }
                 }
         }()
-        static let comment: Font = Font.title3.monospaced()
-        static let secondaryComment: Font = Font.body.monospaced()
+
+        static let comment: Font = {
+                if #available(macOS 12.0, *) {
+                        return Font.title3.monospaced()
+                } else {
+                        return Font.system(size: 15, design: .monospaced)
+                }
+        }()
+        static let secondaryComment: Font = {
+                if #available(macOS 12.0, *) {
+                        return Font.body.monospaced()
+                } else {
+                        return Font.system(size: 13, design: .monospaced)
+                }
+        }()
 
 
         private static func pairFonts(primary name: String, fallbacks: [String]) -> Font {
