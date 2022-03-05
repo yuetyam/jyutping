@@ -12,6 +12,15 @@ class JyutpingInputController: IMKInputController {
         private lazy var isWindowInitialed: Bool = false
         private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
 
+        // For View Shadow (Big Sur)
+        private let offset: CGFloat = {
+                if #available(macOS 12.0, *) {
+                        return 0
+                } else {
+                        return 5
+                }
+        }()
+
         private func showCandidatesWindow(origin: CGPoint, size: CGSize = CGSize(width: 600, height: 256)) {
                 guard isBufferState && !displayObject.items.isEmpty else {
                         if isWindowInitialed {
@@ -37,8 +46,8 @@ class JyutpingInputController: IMKInputController {
                 candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
                 if let topAnchor = window?.contentView?.topAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
                         NSLayoutConstraint.activate([
-                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor),
-                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor)
+                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                         ])
                 }
                 window?.contentViewController?.addChild(candidateUI)
@@ -60,8 +69,8 @@ class JyutpingInputController: IMKInputController {
                         candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
                                 NSLayoutConstraint.activate([
-                                        candidateUI.view.topAnchor.constraint(equalTo: topAnchor),
-                                        candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor)
+                                        candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                        candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                                 ])
                         }
                         window?.contentViewController?.addChild(candidateUI)
@@ -85,13 +94,14 @@ class JyutpingInputController: IMKInputController {
                 let y: CGFloat = {
                         if origin.y > (screenFrame.minY + size.height) {
                                 // below cursor
-                                return origin.y - size.height - 8
+                                return origin.y - size.height - 8 - offset
                         } else {
                                 // above cursor
-                                return origin.y + 16
+                                return origin.y + 16 + offset
                         }
                 }()
-                let frame = CGRect(x: x, y: y, width: size.width, height: size.height)
+                let height: CGFloat = size.height + (offset * 2)
+                let frame = CGRect(x: x, y: y, width: size.width, height: height)
                 return frame
         }
 

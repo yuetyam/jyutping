@@ -29,7 +29,7 @@ struct CandidatesView: View {
                         }
                         .padding(.vertical, 8)
                         .padding(.horizontal)
-                        .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                 } else {
                         VStack {
                                 ForEach((0..<displayObject.items.count), id: \.self) { index in
@@ -54,9 +54,10 @@ struct CandidatesView: View {
                         }
                         .padding(.vertical, 8)
                         .padding(.horizontal)
-                        .background(Color(NSColor.textBackgroundColor))
-                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                        .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).stroke(Color.gray.opacity(0.5)))
+                        .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(Color(NSColor.textBackgroundColor))
+                                .shadow(radius: 4)
+                        )
                 }
         }
 }
