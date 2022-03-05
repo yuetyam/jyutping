@@ -1,10 +1,50 @@
-name: Xcode Builds
+name: CI
 on: [push, pull_request, release]
 
 # env:
 #   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 
 jobs:
+  test_common_extensions:
+    name: CommonExtensions Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: CommonExtensions SwiftTest
+        run: swift test
+        working-directory: ./CommonExtensions
+  test_character_sets:
+    name: CharacterSets Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: CharacterSets SwiftTest
+        run: swift test
+        working-directory: ./CharacterSets
+  test_lookupdata:
+    name: LookupData Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: LookupData SwiftTest
+        run: swift test
+        working-directory: ./LookupData
+  test_keyboarddata:
+    name: KeyboardData Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: KeyboardData SwiftTest
+        run: swift test
+        working-directory: ./KeyboardData
+  test_emojidata:
+    name: EmojiData Tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: EmojiData SwiftTest
+        run: swift test
+        working-directory: ./EmojiData
   build_mac_ime:
     name: Build Mac IME
     runs-on: macos-latest
