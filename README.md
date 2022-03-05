@@ -29,7 +29,7 @@ Compatibility: iOS 13.0+
 
 (Beta) Download on the [Releases](https://github.com/yuetyam/jyutping/releases)
 
-Compatibility: macOS 12.0+ (Monterey or above)
+Compatibility: macOS 11.0+ (Big Sur or above)
 
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="460"/>
