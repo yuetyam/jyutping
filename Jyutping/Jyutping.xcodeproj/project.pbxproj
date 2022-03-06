@@ -131,6 +131,7 @@
 		37AA717B27CA456200431E21 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717A27CA456200431E21 /* icon.png */; };
 		37AA717D27CA456A00431E21 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717C27CA456A00431E21 /* icon@2x.png */; };
 		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
+		37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F31F4E27D565EA008399DB /* WindowPattern.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -356,6 +357,7 @@
 		37AA717A27CA456200431E21 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		37AA717C27CA456A00431E21 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
+		37F31F4E27D565EA008399DB /* WindowPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -471,6 +473,7 @@
 				3764CEFF27BE13D900DCFB51 /* Info.plist */,
 				3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */,
 				3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */,
+				37F31F4E27D565EA008399DB /* WindowPattern.swift */,
 				375D7A3127C10ED10018EB6F /* InputMethodMode.swift */,
 				3764CEE527BE127000DCFB51 /* CandidatesView.swift */,
 				375D7A3327C151470018EB6F /* DisplayObject.swift */,
@@ -1058,6 +1061,7 @@
 				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
 				3764CEFA27BE127000DCFB51 /* Splitter.swift in Sources */,
+				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
 				3764CEED27BE127000DCFB51 /* Engine.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
