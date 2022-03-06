@@ -46,20 +46,23 @@ struct SettingsView: View {
                                         SettingLabel(number: 4, text: "简化字\u{3000}\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
                                 }
                                 /*
-                                 Divider()
-                                 Group {
-                                 SettingLabel(number: 5, text: "半形數字", checked: true, highlighted: false)
-                                 SettingLabel(number: 6, text: "全形數字", checked: false, highlighted: false)
-                                 }
-                                 Divider()
-                                 Group {
-                                 SettingLabel(number: 7, text: "粵文句讀", checked: true, highlighted: false)
-                                 SettingLabel(number: 8, text: "英文標點", checked: false, highlighted: false)
-                                 }
-                                 */
+                                Divider()
+                                Group {
+                                        SettingLabel(number: 5, text: "半形數字", checked: true, highlighted: false)
+                                        SettingLabel(number: 6, text: "全形數字", checked: false, highlighted: false)
+                                }
+                                Divider()
+                                Group {
+                                        SettingLabel(number: 7, text: "粵文句讀", checked: true, highlighted: false)
+                                        SettingLabel(number: 8, text: "英文標點", checked: false, highlighted: false)
+                                }
+                                */
                         }
                         .padding()
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(.regularMaterial)
+                                .shadow(radius: 5)
+                        )
                 } else {
                         VStack(spacing: 8) {
                                 Group {
@@ -72,7 +75,7 @@ struct SettingsView: View {
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .fill(Color(NSColor.textBackgroundColor))
-                                .shadow(radius: 4)
+                                .shadow(radius: 5)
                         )
                 }
         }

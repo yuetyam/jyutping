@@ -12,14 +12,8 @@ class JyutpingInputController: IMKInputController {
         private lazy var isWindowInitialed: Bool = false
         private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
 
-        // For View Shadow (Big Sur)
-        private let offset: CGFloat = {
-                if #available(macOS 12.0, *) {
-                        return 0
-                } else {
-                        return 5
-                }
-        }()
+        // For View Shadow
+        private let offset: CGFloat = 10
 
         private func showCandidatesWindow(origin: CGPoint, size: CGSize = CGSize(width: 600, height: 256)) {
                 guard isBufferState && !displayObject.items.isEmpty else {
@@ -85,19 +79,19 @@ class JyutpingInputController: IMKInputController {
                 let origin = origin ?? currentClient?.position ?? .zero
                 let x: CGFloat = {
                         if origin.x > (screenFrame.maxX - size.width) {
-                                // should be cursor's left side
-                                return origin.x + 16
+                                // FIXME: should be cursor's left side
+                                return origin.x
                         } else {
-                                return origin.x + 16
+                                return origin.x
                         }
                 }()
                 let y: CGFloat = {
                         if origin.y > (screenFrame.minY + size.height) {
                                 // below cursor
-                                return origin.y - size.height - 8 - offset
+                                return origin.y - size.height - (offset * 2)
                         } else {
                                 // above cursor
-                                return origin.y + 16 + offset
+                                return origin.y + (offset * 2)
                         }
                 }()
                 let height: CGFloat = size.height + (offset * 2)

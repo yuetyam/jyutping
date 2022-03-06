@@ -29,7 +29,10 @@ struct CandidatesView: View {
                         }
                         .padding(.vertical, 8)
                         .padding(.horizontal)
-                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(.regularMaterial)
+                                .shadow(radius: 5)
+                        )
                 } else {
                         VStack {
                                 ForEach((0..<displayObject.items.count), id: \.self) { index in
@@ -56,7 +59,7 @@ struct CandidatesView: View {
                         .padding(.horizontal)
                         .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .fill(Color(NSColor.textBackgroundColor))
-                                .shadow(radius: 4)
+                                .shadow(radius: 5)
                         )
                 }
         }
