@@ -6,97 +6,134 @@ import KeyboardData
 import LookupData
 import CharacterSets
 
+enum WindowPattern {
+        case regular
+        case horizontalReversed
+        case verticalReversed
+        case reversed
+
+        var isReversingHorizontal: Bool {
+                switch self {
+                case .regular:
+                        return false
+                case .horizontalReversed:
+                        return true
+                case .verticalReversed:
+                        return false
+                case .reversed:
+                        return true
+                }
+        }
+        var isReversingVertical: Bool {
+                switch self {
+                case .regular:
+                        return false
+                case .horizontalReversed:
+                        return false
+                case .verticalReversed:
+                        return true
+                case .reversed:
+                        return true
+                }
+        }
+}
+
 class JyutpingInputController: IMKInputController {
 
         private lazy var window: NSWindow? = nil
-        private lazy var isWindowInitialed: Bool = false
         private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
-
-        // For View Shadow
         private let offset: CGFloat = 10
-
-        private func showCandidatesWindow(origin: CGPoint, size: CGSize = CGSize(width: 600, height: 256)) {
-                guard isBufferState && !displayObject.items.isEmpty else {
-                        if isWindowInitialed {
-                                window?.setFrame(.zero, display: true)
-                        }
-                        return
-                }
-                let frame = windowFrame(origin, size: size)
-                if isWindowInitialed {
-                        window?.setFrame(frame, display: true)
-                } else {
-                        window = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: false)
-                        initialWindow()
-                }
-        }
-        private func initialWindow() {
-                window?.backgroundColor = .clear
-                window?.level = .floating
-                window?.orderFrontRegardless()
-
-                let candidateUI = NSHostingController(rootView: CandidatesView().environmentObject(displayObject))
-                window?.contentView?.addSubview(candidateUI.view)
-                candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
-                if let topAnchor = window?.contentView?.topAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
-                        NSLayoutConstraint.activate([
-                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
-                        ])
-                }
-                window?.contentViewController?.addChild(candidateUI)
-
-                isWindowInitialed = true
-        }
 
         private func resetWindow() {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
+                window = NSWindow(contentRect: windowFrame(), styleMask: .borderless, backing: .buffered, defer: false)
+                window?.backgroundColor = .clear
+                window?.level = .floating
+                window?.orderFrontRegardless()
                 switch inputMethodMode {
                 case .settings:
-                        window = NSWindow(contentRect: windowFrame(), styleMask: .borderless, backing: .buffered, defer: false)
-                        window?.backgroundColor = .clear
-                        window?.level = .floating
-                        window?.orderFrontRegardless()
-                        let candidateUI = NSHostingController(rootView: SettingsView().environmentObject(settingsObject))
+                        let settingsUI = NSHostingController(rootView: SettingsView().environmentObject(settingsObject))
+                        window?.contentView?.addSubview(settingsUI.view)
+                        settingsUI.view.translatesAutoresizingMaskIntoConstraints = false
+                        if let topAnchor = window?.contentView?.topAnchor, let bottomAnchor = window?.contentView?.bottomAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
+                                if windowPattern.isReversingVertical {
+                                        NSLayoutConstraint.activate([
+                                                settingsUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                settingsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                        ])
+                                } else {
+                                        NSLayoutConstraint.activate([
+                                                settingsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                settingsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                        ])
+                                }
+                        }
+                        window?.contentViewController?.addChild(settingsUI)
+                default:
+                        let candidateUI = NSHostingController(rootView: CandidatesView().environmentObject(displayObject))
                         window?.contentView?.addSubview(candidateUI.view)
                         candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
-                        if let topAnchor = window?.contentView?.topAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
-                                NSLayoutConstraint.activate([
-                                        candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                        candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
-                                ])
+                        if let topAnchor = window?.contentView?.topAnchor, let bottomAnchor = window?.contentView?.bottomAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
+                                if windowPattern.isReversingVertical {
+                                        NSLayoutConstraint.activate([
+                                                candidateUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                        ])
+                                } else {
+                                        NSLayoutConstraint.activate([
+                                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                        ])
+                                }
                         }
                         window?.contentViewController?.addChild(candidateUI)
-                default:
-                        window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
-                        initialWindow()
+                        window?.setFrame(.zero, display: true)
                 }
         }
 
-        // FIXME: candidateView size
-        private func windowFrame(_ origin: CGPoint? = nil, size: CGSize = CGSize(width: 600, height: 256)) -> CGRect {
-                let origin = origin ?? currentClient?.position ?? .zero
+        private lazy var windowPattern: WindowPattern = .regular
+
+        private func windowFrame(origin: CGPoint? = nil) -> CGRect {
+                let origin: CGPoint = origin ?? currentClient?.position ?? .zero
+                let width: CGFloat = 600
+                let height: CGFloat = 280 + (offset * 2)
                 let x: CGFloat = {
-                        if origin.x > (screenFrame.maxX - size.width) {
-                                // FIXME: should be cursor's left side
+                        if windowPattern.isReversingHorizontal {
+                                // FIXME: should be on cursor's left side
                                 return origin.x
                         } else {
                                 return origin.x
                         }
                 }()
                 let y: CGFloat = {
-                        if origin.y > (screenFrame.minY + size.height) {
-                                // below cursor
-                                return origin.y - size.height - (offset * 2)
-                        } else {
-                                // above cursor
+                        if windowPattern.isReversingVertical {
                                 return origin.y + (offset * 2)
+                        } else {
+                                return (origin.y - height)
                         }
                 }()
-                let height: CGFloat = size.height + (offset * 2)
-                let frame = CGRect(x: x, y: y, width: size.width, height: height)
-                return frame
+                return CGRect(x: x, y: y, width: width, height: height)
+        }
+
+        private lazy var currentClient: IMKTextInput? = nil {
+                didSet {
+                        guard let origin = currentClient?.position else { return }
+                        let isRegularHorizontal: Bool = origin.x < (screenFrame.maxX - 600)
+                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 300)
+                        windowPattern = {
+                                switch (isRegularHorizontal, isRegularVertical) {
+                                case (true, true):
+                                        return .regular
+                                case (false, true):
+                                        return .horizontalReversed
+                                case (true, false):
+                                        return .verticalReversed
+                                case (false, false):
+                                        return .reversed
+                                }
+                        }()
+                }
         }
 
         private lazy var displayObject = DisplayObject()
@@ -185,7 +222,7 @@ class JyutpingInputController: IMKInputController {
                         }
                 }
         }
-        private lazy var currentClient: IMKTextInput? = nil
+
         private lazy var markedText: String = .empty {
                 didSet {
                         let convertedText: NSString = markedText as NSString
@@ -333,13 +370,14 @@ class JyutpingInputController: IMKInputController {
         private lazy var simplifier: Simplifier? = nil
 
         override func activateServer(_ sender: Any!) {
+                currentClient = sender as? IMKTextInput
                 if engine == nil {
                         engine = Engine()
                 }
                 if userLexicon == nil {
                         userLexicon = UserLexicon()
                 }
-                currentClient = sender as? IMKTextInput
+                resetWindow()
         }
         override func deactivateServer(_ sender: Any!) {
                 engine?.close()
@@ -489,8 +527,14 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 }
-                showCandidatesWindow(origin: client.position)
+                showCandidates(origin: client.position)
                 return true
+        }
+
+        private func showCandidates(origin: CGPoint? = nil) {
+                let shouldShowCandidates: Bool = isBufferState && !displayObject.items.isEmpty
+                let frame: CGRect = shouldShowCandidates ? windowFrame(origin: origin) : .zero
+                window?.setFrame(frame, display: true)
         }
 
         private func passBuffer() {
