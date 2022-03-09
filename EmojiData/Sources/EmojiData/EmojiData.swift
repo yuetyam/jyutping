@@ -35,7 +35,7 @@ public struct EmojiData {
         /// - Returns: A Character
         private static func character(from codePoint: String) -> Character {
                 lazy var fallback: Character = "?"
-                let cropped = codePoint.dropFirst(2)
+                let cropped = codePoint.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "U+", with: "", options: [.caseInsensitive, .anchored])
                 guard let u32 = UInt32(cropped, radix: 16) else { return fallback }
                 guard let scalar = Unicode.Scalar(u32) else { return fallback }
                 return Character(scalar)
