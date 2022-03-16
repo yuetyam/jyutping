@@ -62,15 +62,15 @@ struct AboutView: View {
                                 }
                                 Section {
                                         Button {
-                                                let appUrl: URL = URL(string: "https://truthsocial.com/@jyutping")!
-                                                let webUrl: URL = URL(string: "https://truthsocial.com/@jyutping")!
+                                                let appUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
+                                                let webUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
                                                 EnhancedLabel("TRUTH Social", icon: "at", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
-                                                UsernameCopyButton("jyutping")
-                                                URLCopyButton("https://truthsocial.com/@jyutping")
+                                                UsernameCopyButton("Cantonese")
+                                                URLCopyButton("https://truthsocial.com/@Cantonese")
                                         }
                                         Button {
                                                 let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
