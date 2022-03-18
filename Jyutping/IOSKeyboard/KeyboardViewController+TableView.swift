@@ -32,12 +32,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         // iPad does not support haptic feedback
                         return isPhone ? 2 : 1
                 case 1:
-                        // Characters, Logogram, Fonts
+                        // Characters, Logogram
                         return 4
                 case 2:
                         // Keyboard Layouts
                         // No GridKeyboard (10 Key) for iPad
-                        return isPhone ? 3 : 2
+                        // return isPhone ? 3 : 2
+                        return 2
                 case 3:
                         // Jyutping Display
                         return 3
