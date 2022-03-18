@@ -40,10 +40,10 @@ struct SettingsView: View {
                 if #available(macOS 12.0, *) {
                         VStack(spacing: 8) {
                                 Group {
-                                        SettingLabel(number: 1, text: "傳統漢字\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
-                                        SettingLabel(number: 2, text: "傳統漢字・香港\u{3000}", checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
-                                        SettingLabel(number: 3, text: "傳統漢字・臺灣\u{3000}", checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
-                                        SettingLabel(number: 4, text: "简化字\u{3000}\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
+                                        SettingLabel(number: 1, text: "漢字\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
+                                        SettingLabel(number: 2, text: "漢字・香港\u{3000}", checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
+                                        SettingLabel(number: 3, text: "漢字・臺灣\u{3000}", checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
+                                        SettingLabel(number: 4, text: "简化字\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
                                 }
                                 /*
                                 Divider()
@@ -66,10 +66,10 @@ struct SettingsView: View {
                 } else {
                         VStack(spacing: 8) {
                                 Group {
-                                        SettingLabel(number: 1, text: "傳統漢字\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
-                                        SettingLabel(number: 2, text: "傳統漢字・香港\u{3000}", checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
-                                        SettingLabel(number: 3, text: "傳統漢字・臺灣\u{3000}", checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
-                                        SettingLabel(number: 4, text: "简化字\u{3000}\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
+                                        SettingLabel(number: 1, text: "漢字\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
+                                        SettingLabel(number: 2, text: "漢字・香港\u{3000}", checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
+                                        SettingLabel(number: 3, text: "漢字・臺灣\u{3000}", checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
+                                        SettingLabel(number: 4, text: "简化字\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
                                 }
                         }
                         .padding()

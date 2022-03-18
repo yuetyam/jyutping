@@ -8,9 +8,9 @@
 "Haptic Feedback requires Full Access" = "振動反饋需啟用「完整取用」";
 
 "Characters" = "字符";
-"Traditional" = "傳統漢字";
-"Traditional, Hong Kong" = "傳統漢字・香港";
-"Traditional, Taiwan" = "傳統漢字・臺灣";
+"Traditional" = "漢字";
+"Traditional, Hong Kong" = "漢字・香港";
+"Traditional, Taiwan" = "漢字・臺灣";
 "Simplified" = "简化字";
 
 "Keyboard Layout" = "鍵盤佈局";
