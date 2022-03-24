@@ -48,3 +48,7 @@ Xcode 13.3+
 <a href="https://patreon.com/ososoio">
         <img src="images/become-a-patron.png" alt="patreon" width="150"/>
 </a>
+<br>
+<a href="https://ko-fi.com/ososoio">
+        <img src="images/buy-me-a-coffee.png" alt="ko-fi, buy me a coffee" width="150"/>
+</a>
