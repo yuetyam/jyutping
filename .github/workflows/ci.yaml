@@ -1,13 +1,13 @@
 name: CI
 on: [push, pull_request, release]
 
-# env:
-#   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+env:
+  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 
 jobs:
   test_common_extensions:
     name: CommonExtensions Tests
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: CommonExtensions SwiftTest
@@ -15,7 +15,7 @@ jobs:
         working-directory: ./CommonExtensions
   test_character_sets:
     name: CharacterSets Tests
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: CharacterSets SwiftTest
@@ -23,7 +23,7 @@ jobs:
         working-directory: ./CharacterSets
   test_lookupdata:
     name: LookupData Tests
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: LookupData SwiftTest
@@ -31,7 +31,7 @@ jobs:
         working-directory: ./LookupData
   test_keyboarddata:
     name: KeyboardData Tests
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: KeyboardData SwiftTest
@@ -39,7 +39,7 @@ jobs:
         working-directory: ./KeyboardData
   test_emojidata:
     name: EmojiData Tests
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: EmojiData SwiftTest
@@ -47,21 +47,21 @@ jobs:
         working-directory: ./EmojiData
   build_mac_ime:
     name: Build Mac IME
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: Build MacIME Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_app:
     name: Build iOS App
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: Build IOSApp Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme IOSApp -configuration Debug -destination "platform=iOS Simulator,name=iPhone 13" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_keyboard:
     name: Build iOS Keyboard
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
       - name: Build IOSKeyboard Scheme
