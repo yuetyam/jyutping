@@ -35,14 +35,10 @@ extension Font {
 
         /// Font for Candidate serial number
         static let serialNumber: Font = {
-                if let font_0 = NSFont(name: "JetBrains Mono", size: 14) {
-                        return Font.custom("JetBrains Mono", size: 14, relativeTo: .title3)
+                if #available(macOS 12.0, *) {
+                        return Font.title3.monospaced()
                 } else {
-                        if #available(macOS 12.0, *) {
-                                return Font.title3.monospaced()
-                        } else {
-                                return Font.system(size: 15, design: .monospaced)
-                        }
+                        return Font.system(size: 15, design: .monospaced)
                 }
         }()
 

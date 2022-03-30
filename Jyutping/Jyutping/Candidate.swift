@@ -31,8 +31,7 @@ struct Candidate: Hashable {
 
         // Equatable
         static func ==(lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.text == rhs.text &&
-                        lhs.romanization.removedTones() == rhs.romanization.removedTones()
+                return lhs.text == rhs.text && lhs.romanization.removedTones() == rhs.romanization.removedTones()
         }
 
         // Hashable
