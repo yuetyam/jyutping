@@ -193,18 +193,29 @@ final class KeyboardViewController: UIInputViewController {
         func operate(_ operation: Operation) {
                 switch operation {
                 case .input(let text):
-                        if keyboardIdiom.isPingMode {
-                                if keyboardLayout == .saamPing && text == "gw" {
-                                        let newText: String = bufferText + text
-                                        bufferText = newText.replacingOccurrences(of: "gwgw", with: "kw")
-                                } else {
-                                        bufferText += text
-                                }
-                        } else {
-                                textDocumentProxy.insertText(text)
+                        defer {
+                                AudioFeedback.perform(.input)
+                                adjustKeyboardIdiom()
                         }
-                        AudioFeedback.perform(.input)
-                        adjustKeyboardIdiom()
+                        guard keyboardIdiom.isPingMode else {
+                                textDocumentProxy.insertText(text)
+                                return
+                        }
+                        switch text {
+                        case "gw" where keyboardLayout == .saamPing:
+                                let newText: String = bufferText + text
+                                bufferText = newText.replacingOccurrences(of: "gwgw", with: "kw")
+                        case _ where text.isLetters:
+                                bufferText += text
+                        case _ where bufferText.isEmpty:
+                                textDocumentProxy.insertText(text)
+                        default:
+                                compose(bufferText)
+                                bufferText = .empty
+                                DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                                        textDocumentProxy.insertText(text)
+                                }
+                        }
                 case .separator:
                         bufferText += "'"
                         AudioFeedback.perform(.input)
@@ -309,10 +320,39 @@ final class KeyboardViewController: UIInputViewController {
                 case .doubleShift:
                         AudioFeedback.perform(.modify)
                         keyboardIdiom = keyboardIdiom.isEnglishMode ? .alphabetic(.capsLocked) : .cantonese(.capsLocked)
+                case .tab:
+                        defer {
+                                AudioFeedback.perform(.input)
+                                adjustKeyboardIdiom()
+                        }
+                        if bufferText.isEmpty {
+                                textDocumentProxy.insertText("\t")
+                        } else {
+                                compose(bufferText)
+                                bufferText = .empty
+                                DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                                        textDocumentProxy.insertText("\t")
+                                }
+                        }
                 case .transform(let newIdiom):
                         AudioFeedback.perform(.modify)
                         let shouldBeGridKeyboard: Bool = keyboardLayout == .grid && newIdiom == .cantonese(.lowercased)
                         keyboardIdiom = shouldBeGridKeyboard ? .gridKeyboard : newIdiom
+                case .dismiss:
+                        AudioFeedback.perform(.modify)
+                        guard !(bufferText.isEmpty) else {
+                                dismissKeyboard()
+                                return
+                        }
+                        compose(bufferText)
+                        bufferText = .empty
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                                DispatchQueue(label: "im.cantonese.fix.dismiss").sync { [unowned self] in
+                                        self.textDocumentProxy.insertText(.zeroWidthSpace)
+                                        self.textDocumentProxy.deleteBackward()
+                                        self.dismissKeyboard()
+                                }
+                        }
                 case .select(let candidate):
                         compose(candidate.text)
                         AudioFeedback.perform(.modify)
@@ -414,9 +454,9 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         switch (bufferText.isEmpty, oldValue.isEmpty) {
                         case (true, false):
-                                updateBottomStackView(with: .input(.cantoneseComma))
+                                updateBottomStackView(buffered: false)
                         case (false, true):
-                                updateBottomStackView(with: .input(.separator))
+                                updateBottomStackView(buffered: true)
                         default:
                                 break
                         }
@@ -767,8 +807,17 @@ final class KeyboardViewController: UIInputViewController {
                 switch traitCollection.userInterfaceIdiom {
                 case .pad:
                         guard traitCollection.horizontalSizeClass != .compact else { return .padFloating }
-                        let isPortrait: Bool = UIScreen.main.bounds.width < UIScreen.main.bounds.height
-                        return isPortrait ? .padPortrait : .padLandscape
+                        let width: CGFloat = UIScreen.main.bounds.width
+                        let height: CGFloat = UIScreen.main.bounds.height
+                        let isPortrait: Bool = width < height
+                        let minSide: CGFloat = min(width, height)
+                        if minSide > 840 {
+                                return isPortrait ? .padPortraitLarge : .padLandscapeLarge
+                        } else if minSide > 815 {
+                                return isPortrait ? .padPortraitMedium : .padLandscapeMedium
+                        } else {
+                                return isPortrait ? .padPortraitSmall : .padLandscapeSmall
+                        }
                 default:
                         switch traitCollection.verticalSizeClass {
                         case .compact:

@@ -4,14 +4,14 @@ extension KeyView {
         func setupKeyShapeView() {
                 let horizontalConstant: CGFloat = {
                         switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
+                                return 3
                         case .padFloating:
                                 return 2
-                        case .padPortrait:
+                        case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
                                 return 5
-                        case .padLandscape:
-                                return 10
-                        default:
-                                return 3
+                        case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                                return 5
                         }
                 }()
                 let verticalConstant: CGFloat = (keyboardInterface == .phoneLandscape) ? 3 : 5
@@ -105,33 +105,36 @@ extension KeyView {
                 keyFooterLabel.textColor = foreColor.withAlphaComponent(0.6)
                 keyFooterLabel.text = text
         }
-        func setupKeyImageView(constant: CGFloat = 11) {
-                let keyImageView: UIImageView = UIImageView()
-                let constantValue: CGFloat = {
+        func setupKeyImageView(offset: CGFloat = 11) {
+                let constant: CGFloat = {
+                        // FIXME: Adjust offsets
                         switch keyboardInterface {
-                        case .padLandscape:
-                                return constant * 2
-                        case .padPortrait:
-                                return constant + 5
+                        case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                                return offset + 9
+                        case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
+                                return offset + 6
                         case .phoneLandscape:
-                                return constant - 3
+                                return offset - 3
                         case .phonePortrait:
-                                return constant
+                                return offset
                         case .padFloating:
-                                return constant
+                                return offset
                         }
                 }()
+                let keyImageView: UIImageView = UIImageView()
                 shape.addSubview(keyImageView)
                 keyImageView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                        keyImageView.topAnchor.constraint(equalTo: shape.topAnchor, constant: constantValue),
-                        keyImageView.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -constantValue),
+                        keyImageView.topAnchor.constraint(equalTo: shape.topAnchor, constant: constant),
+                        keyImageView.bottomAnchor.constraint(equalTo: shape.bottomAnchor, constant: -constant),
                         keyImageView.leadingAnchor.constraint(equalTo: shape.leadingAnchor),
                         keyImageView.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
                 ])
                 keyImageView.contentMode = .scaleAspectFit
                 if let imageName: String = keyImageName {
                         keyImageView.image = UIImage(systemName: imageName)?.withTintColor(foreColor)
+                } else {
+                        keyImageView.image = UIImage(named: "EmojiSmiley")?.withTintColor(foreColor)
                 }
         }
 }

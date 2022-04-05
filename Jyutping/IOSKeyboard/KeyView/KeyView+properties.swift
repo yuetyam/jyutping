@@ -3,28 +3,90 @@ import UIKit
 extension KeyView {
 
         var width: CGFloat {
-                switch event {
-                case .none, .hidden(.text), .hidden(.backspace):
-                        return 10
-                case .backspace, .shift, .transform:
-                        return 50
-                case .globe:
-                        return 45
-                case .newLine:
-                        return 72
-                case .space:
-                        return 180
-                case .input(.period), .input(.cantoneseComma), .input(.separator):
-                        return controller.needsInputModeSwitchKey ? 37 : 33
+                guard !(keyboardInterface.isCompact) else {
+                        // FIXME: Adjust sizes
+                        switch event {
+                        case .none, .hidden(.text), .hidden(.backspace):
+                                return 10
+                        case .globe, .transform(.emoji):
+                                return 45
+                        case .backspace, .shift, .transform:
+                                return 50
+                        case .newLine:
+                                return 75
+                        case .space:
+                                return 180
+                        default:
+                                return 40
+                        }
+                }
+                switch keyboardInterface {
+                case .padPortraitSmall, .padLandscapeSmall:
+                        switch event {
+                        case .none, .hidden(.text), .hidden(.backspace):
+                                return 10
+                        case .backspace, .shift, .transform, .dismiss:
+                                return 50
+                        case .globe:
+                                return 45
+                        case .newLine:
+                                return 72
+                        case .space:
+                                return 180
+                        case .input(.period), .input(.cantoneseComma), .input(.separator):
+                                return 50
+                        default:
+                                return 40
+                        }
+                case .padPortraitMedium, .padLandscapeMedium:
+                        switch event {
+                        case .none:
+                                return 10
+                        case .backspace, .transform, .dismiss, .tab:
+                                return 50
+                        case .globe:
+                                return 45
+                        case .newLine:
+                                return 70
+                        case .shift:
+                                return 60
+                        case .space:
+                                return 180
+                        case .input(.period), .input(.cantoneseComma), .input(.separator):
+                                return 50
+                        default:
+                                return 40
+                        }
+                case .padPortraitLarge, .padLandscapeLarge:
+                        switch event {
+                        case .none:
+                                return 10
+                        case .transform, .dismiss, .tab:
+                                return 50
+                        case .globe:
+                                return 45
+                        case .backspace:
+                                return 60
+                        case .newLine:
+                                return 70
+                        case .shift:
+                                return 75
+                        case .space:
+                                return 180
+                        case .input(.period), .input(.cantoneseComma), .input(.separator):
+                                return 50
+                        default:
+                                return 40
+                        }
                 default:
                         return 40
                 }
         }
         var height: CGFloat {
                 switch keyboardInterface {
-                case .padPortrait:
+                case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
                         return 70
-                case .padLandscape:
+                case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
                         return 80
                 case .padFloating:
                         return 48
@@ -37,7 +99,7 @@ extension KeyView {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
                         } else if screenWidth < 400 {
-                                // iPhone 6s, 7, 8, SE2 (375 x 667)
+                                // iPhone 6s, 7, 8, SE2, SE3 (375 x 667)
                                 // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
                                 // iPhone 12, 12 Pro, 13, 13 Pro (390 x 844)
                                 return 53
@@ -53,28 +115,38 @@ extension KeyView {
         var keyFont: UIFont {
                 // https://www.iosfontsizes.com
                 // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography
-                switch event {
-                case .input(let seat) where seat.primary.text.count > 1:
-                        switch keyboardInterface {
-                        case .padLandscape:
-                                return .systemFont(ofSize: 28)
-                        case .padPortrait:
-                                return .systemFont(ofSize: 26)
+                let size: CGFloat = {
+                        switch event {
+                        case .input(let seat) where seat.primary.text.count > 1:
+                                switch keyboardInterface {
+                                case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                                        return 26
+                                case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
+                                        return 24
+                                default:
+                                        return 18
+                                }
+                        case .input:
+                                switch keyboardInterface {
+                                case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                                        return 28
+                                case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
+                                        return 26
+                                default:
+                                        return 24
+                                }
                         default:
-                                return .systemFont(ofSize: 18)
+                                switch keyboardInterface {
+                                case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                                        return 20
+                                case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
+                                        return 18
+                                default:
+                                        return 17
+                                }
                         }
-                case .input:
-                        switch keyboardInterface {
-                        case .padLandscape:
-                                return .systemFont(ofSize: 30)
-                        case .padPortrait:
-                                return .systemFont(ofSize: 28)
-                        default:
-                                return .systemFont(ofSize: 24)
-                        }
-                default:
-                        return keyboardInterface.isCompact ? .systemFont(ofSize: 17) : .systemFont(ofSize: 22)
-                }
+                }()
+                return .systemFont(ofSize: size)
         }
         var keyText: String? {
                 switch event {
@@ -93,7 +165,7 @@ extension KeyView {
                 case .transform(let newLayout):
                         switch newLayout {
                         case .cantoneseNumeric, .numeric:
-                                return "123"
+                                return keyboardInterface.isCompact ? "123" : ".?123"
                         case .cantoneseSymbolic, .symbolic:
                                 return "#+="
                         case .cantonese:
@@ -218,6 +290,10 @@ extension KeyView {
                         }
                 case .newLine:
                         return "return"
+                case .dismiss:
+                        return "keyboard.chevron.compact.down"
+                case .tab:
+                        return "arrow.right.to.line"
                 default:
                         return nil
                 }

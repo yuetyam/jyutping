@@ -40,6 +40,13 @@
 		3764CEFA27BE127000DCFB51 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEB27BE127000DCFB51 /* Splitter.swift */; };
 		3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEC27BE127000DCFB51 /* FontExtensions.swift */; };
 		3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */; };
+		3777EF0327F9CF8500D1EED0 /* SaamPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0227F9CF8500D1EED0 /* SaamPing.swift */; };
+		3777EF0527F9D45E00D1EED0 /* CantoneseNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0427F9D45E00D1EED0 /* CantoneseNumeric.swift */; };
+		3777EF0727FA946200D1EED0 /* CantoneseSymbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0627FA946200D1EED0 /* CantoneseSymbolic.swift */; };
+		3777EF0927FBC59500D1EED0 /* Alphabetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0827FBC59500D1EED0 /* Alphabetic.swift */; };
+		3777EF0B27FBD49200D1EED0 /* Cantonese.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0A27FBD49200D1EED0 /* Cantonese.swift */; };
+		3777EF0D27FBD55B00D1EED0 /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0C27FBD55B00D1EED0 /* Numeric.swift */; };
+		3777EF0F27FBD84200D1EED0 /* Symbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0E27FBD84200D1EED0 /* Symbolic.swift */; };
 		3797FBEC27BF88BE00C6BB8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FBEB27BF88BE00C6BB8D /* ViewController.swift */; };
 		3797FBEF27BF88BE00C6BB8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3797FBED27BF88BE00C6BB8D /* Main.storyboard */; };
 		3797FBF127BF88BF00C6BB8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3797FBF027BF88BF00C6BB8D /* Assets.xcassets */; };
@@ -94,7 +101,6 @@
 		3797FCC027BF915E00C6BB8D /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9227BF915D00C6BB8D /* AudioFeedback.swift */; };
 		3797FCC127BF915E00C6BB8D /* ShiftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9427BF915D00C6BB8D /* ShiftState.swift */; };
 		3797FCC227BF915E00C6BB8D /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9527BF915D00C6BB8D /* KeyboardLayout.swift */; };
-		3797FCC327BF915E00C6BB8D /* KeyboardIdiom+events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9627BF915D00C6BB8D /* KeyboardIdiom+events.swift */; };
 		3797FCC427BF915E00C6BB8D /* KeyboardIdiom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9727BF915D00C6BB8D /* KeyboardIdiom.swift */; };
 		3797FCC527BF915E00C6BB8D /* GridKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9927BF915D00C6BB8D /* GridKeyView.swift */; };
 		3797FCC627BF915E00C6BB8D /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC9A27BF915D00C6BB8D /* KeyboardViewController+TableView.swift */; };
@@ -235,6 +241,13 @@
 		3764CEEC27BE127000DCFB51 /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		3764CEFF27BE13D900DCFB51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3777EF0227F9CF8500D1EED0 /* SaamPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaamPing.swift; sourceTree = "<group>"; };
+		3777EF0427F9D45E00D1EED0 /* CantoneseNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseNumeric.swift; sourceTree = "<group>"; };
+		3777EF0627FA946200D1EED0 /* CantoneseSymbolic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseSymbolic.swift; sourceTree = "<group>"; };
+		3777EF0827FBC59500D1EED0 /* Alphabetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alphabetic.swift; sourceTree = "<group>"; };
+		3777EF0A27FBD49200D1EED0 /* Cantonese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cantonese.swift; sourceTree = "<group>"; };
+		3777EF0C27FBD55B00D1EED0 /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
+		3777EF0E27FBD84200D1EED0 /* Symbolic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbolic.swift; sourceTree = "<group>"; };
 		3797FBDE27BF87FD00C6BB8D /* LookupData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LookupData; path = ../LookupData; sourceTree = "<group>"; };
 		3797FBE027BF880F00C6BB8D /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../EmojiData; sourceTree = "<group>"; };
 		3797FBE527BF88BE00C6BB8D /* IOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,7 +322,6 @@
 		3797FC9227BF915D00C6BB8D /* AudioFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
 		3797FC9427BF915D00C6BB8D /* ShiftState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftState.swift; sourceTree = "<group>"; };
 		3797FC9527BF915D00C6BB8D /* KeyboardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
-		3797FC9627BF915D00C6BB8D /* KeyboardIdiom+events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardIdiom+events.swift"; sourceTree = "<group>"; };
 		3797FC9727BF915D00C6BB8D /* KeyboardIdiom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardIdiom.swift; sourceTree = "<group>"; };
 		3797FC9927BF915D00C6BB8D /* GridKeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridKeyView.swift; sourceTree = "<group>"; };
 		3797FC9A27BF915D00C6BB8D /* KeyboardViewController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -696,10 +708,16 @@
 		3797FC9327BF915D00C6BB8D /* Layout */ = {
 			isa = PBXGroup;
 			children = (
+				3797FC9727BF915D00C6BB8D /* KeyboardIdiom.swift */,
 				3797FC9427BF915D00C6BB8D /* ShiftState.swift */,
 				3797FC9527BF915D00C6BB8D /* KeyboardLayout.swift */,
-				3797FC9627BF915D00C6BB8D /* KeyboardIdiom+events.swift */,
-				3797FC9727BF915D00C6BB8D /* KeyboardIdiom.swift */,
+				3777EF0A27FBD49200D1EED0 /* Cantonese.swift */,
+				3777EF0427F9D45E00D1EED0 /* CantoneseNumeric.swift */,
+				3777EF0627FA946200D1EED0 /* CantoneseSymbolic.swift */,
+				3777EF0227F9CF8500D1EED0 /* SaamPing.swift */,
+				3777EF0827FBC59500D1EED0 /* Alphabetic.swift */,
+				3777EF0C27FBD55B00D1EED0 /* Numeric.swift */,
+				3777EF0E27FBD84200D1EED0 /* Symbolic.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -1161,11 +1179,12 @@
 				3797FCC927BF915E00C6BB8D /* Logogram.swift in Sources */,
 				3797FCC227BF915E00C6BB8D /* KeyboardLayout.swift in Sources */,
 				3797FCBE27BF915E00C6BB8D /* ToolButton.swift in Sources */,
-				3797FCC327BF915E00C6BB8D /* KeyboardIdiom+events.swift in Sources */,
+				3777EF0527F9D45E00D1EED0 /* CantoneseNumeric.swift in Sources */,
 				3797FCD127BF915E00C6BB8D /* UIStackViewExtensions.swift in Sources */,
 				3797FCD927BF915E00C6BB8D /* Candidate.swift in Sources */,
 				3797FCC027BF915E00C6BB8D /* AudioFeedback.swift in Sources */,
 				3797FCDB27BF915E00C6BB8D /* CalloutView.swift in Sources */,
+				3777EF0F27FBD84200D1EED0 /* Symbolic.swift in Sources */,
 				3797FCDE27BF915E00C6BB8D /* KeyView+properties.swift in Sources */,
 				3797FCC127BF915E00C6BB8D /* ShiftState.swift in Sources */,
 				3797FCC727BF915E00C6BB8D /* KeyboardViewController+keyboard.swift in Sources */,
@@ -1179,15 +1198,20 @@
 				3797FCD827BF915E00C6BB8D /* Engine.swift in Sources */,
 				3797FCCF27BF915E00C6BB8D /* CharacterExtensions.swift in Sources */,
 				3797FCD327BF915E00C6BB8D /* UIColorExtensions.swift in Sources */,
+				3777EF0927FBC59500D1EED0 /* Alphabetic.swift in Sources */,
 				3797FCBD27BF915E00C6BB8D /* NumberPadButton.swift in Sources */,
 				3797FCC527BF915E00C6BB8D /* GridKeyView.swift in Sources */,
 				3797FCD227BF915E00C6BB8D /* UIImageExtensions.swift in Sources */,
 				3797FCDC27BF915E00C6BB8D /* BlurEffectView.swift in Sources */,
+				3777EF0727FA946200D1EED0 /* CantoneseSymbolic.swift in Sources */,
 				3797FCCC27BF915E00C6BB8D /* EmojiCell.swift in Sources */,
+				3777EF0327F9CF8500D1EED0 /* SaamPing.swift in Sources */,
+				3777EF0D27FBD55B00D1EED0 /* Numeric.swift in Sources */,
 				3797FCC627BF915E00C6BB8D /* KeyboardViewController+TableView.swift in Sources */,
 				3797FCD427BF915E00C6BB8D /* StringExtensions.swift in Sources */,
 				3797FCCE27BF915E00C6BB8D /* KeyboardEvent.swift in Sources */,
 				3797FCD527BF915E00C6BB8D /* KeyboardViewController+CollectionView.swift in Sources */,
+				3777EF0B27FBD49200D1EED0 /* Cantonese.swift in Sources */,
 				3797FCBB27BF915E00C6BB8D /* ToolBar.swift in Sources */,
 				3797FCE027BF915E00C6BB8D /* KeyboardViewController.swift in Sources */,
 				3797FCDD27BF915E00C6BB8D /* KeyView+paths.swift in Sources */,

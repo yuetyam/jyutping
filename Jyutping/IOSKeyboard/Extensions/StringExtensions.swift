@@ -39,4 +39,13 @@ extension String {
         func removedSpacesTones() -> String {
                 return self.filter({ !$0.isSpaceOrTone })
         }
+
+        var isLetters: Bool {
+                switch self.first {
+                case .some(let character) where character.isLetter:
+                        return true
+                default:
+                        return false
+                }
+        }
 }

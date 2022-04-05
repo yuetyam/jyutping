@@ -20,10 +20,7 @@ final class KeyView: UIView {
                 switch event {
                 case .none, .hidden(.text), .hidden(.backspace):
                         break
-                case .backspace, .shift:
-                        setupKeyShapeView()
-                        setupKeyImageView()
-                case .globe:
+                case .backspace, .shift, .globe, .dismiss, .tab, .transform(.emoji):
                         setupKeyShapeView()
                         setupKeyImageView()
                 case .input(let seat) where seat.primary.header != nil:
@@ -111,7 +108,7 @@ final class KeyView: UIView {
                         } else {
                                 controller.operate(.shift)
                         }
-                case .newLine:
+                case .newLine, .dismiss, .tab:
                         shape.backgroundColor = highlightingBackColor
                 case .transform(let newLayout):
                         controller.operate(.transform(newLayout))
@@ -197,6 +194,12 @@ final class KeyView: UIView {
                                 controller.operate(.doubleSpace)
                                 spaceTouches = (false, false)
                         }
+                case .dismiss:
+                        controller.operate(.dismiss)
+                        changeColorToNormal()
+                case .tab:
+                        controller.operate(.tab)
+                        changeColorToNormal()
                 case .backspace:
                         backspaceTouchPoint = .zero
                         changeColorToNormal()
@@ -231,7 +234,7 @@ final class KeyView: UIView {
                 isInteracting = false
                 peekingText = nil
                 switch self.event {
-                case .newLine:
+                case .newLine, .dismiss, .tab:
                         changeColorToNormal()
                 case .backspace:
                         backspaceTouchPoint = .zero
