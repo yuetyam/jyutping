@@ -80,17 +80,27 @@ struct AboutView_iOS14: View {
                                         }
                                 }
                                 Section {
+                                        // Twitter App supports Universal Links
+                                        Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
+                                                EnhancedLabel("Twitter", icon: "at", symbol: .arrowUpRight)
+                                        }
+                                        .contextMenu {
+                                                UsernameCopyButton("JyutpingApp")
+                                                URLCopyButton("https://twitter.com/JyutpingApp")
+                                        }
+
                                         Button {
                                                 let appUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
                                                 let webUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("TRUTH Social", icon: "at", symbol: .arrowUpRight)
+                                                EnhancedLabel("TRUTH Social", icon: "t.square", symbol: .arrowUpRight)
                                         }
                                         .contextMenu {
                                                 UsernameCopyButton("Cantonese")
                                                 URLCopyButton("https://truthsocial.com/@Cantonese")
                                         }
+
                                         Button {
                                                 let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
                                                 let webUrl: URL = URL(string: "https://www.instagram.com/jyutping_app")!
