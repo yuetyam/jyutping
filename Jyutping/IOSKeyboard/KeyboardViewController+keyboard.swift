@@ -21,23 +21,17 @@ extension KeyboardViewController {
 
         func updateBottomStackView(buffered: Bool) {
                 let bottomEvents: [KeyboardEvent] = {
-                        if keyboardInterface.isCompact {
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        switch keyboardInterface {
+                        case .phonePortrait, .phoneLandscape:
                                 let newEvent: KeyboardEvent = buffered ? .input(.separator) : .input(.cantoneseComma)
-                                guard needsInputModeSwitchKey else {
-                                        return [.transform(.cantoneseNumeric), .transform(.emoji), .space, newEvent, .newLine]
-                                }
-                                switch keyboardInterface {
-                                case .padFloating:
-                                        return [.globe, .transform(.cantoneseNumeric), .space, newEvent, .newLine]
-                                default:
-                                        return [.transform(.cantoneseNumeric), .globe, .space, newEvent, .newLine]
-                                }
-                        } else {
+                                return [.transform(.cantoneseNumeric), switchKey, .space, newEvent, .newLine]
+                        case .padFloating:
+                                let newEvent: KeyboardEvent = buffered ? .input(.separator) : .input(.cantoneseComma)
+                                return [switchKey, .transform(.cantoneseNumeric), .space, newEvent, .newLine]
+                        default:
                                 let newEvent: KeyboardEvent = buffered ? .input(.separator) : .transform(.cantoneseNumeric)
-                                guard needsInputModeSwitchKey else {
-                                        return [.transform(.cantoneseNumeric), .space, newEvent, .dismiss]
-                                }
-                                return [.globe, .transform(.cantoneseNumeric), .space, newEvent, .dismiss]
+                                return [switchKey, .transform(.cantoneseNumeric), .space, newEvent, .dismiss]
                         }
                 }()
                 let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
