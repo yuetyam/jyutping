@@ -43,13 +43,13 @@ public struct LoengfanProvider {
                         }
                 }
                 sqlite3_finalize(queryStatement)
-                let tones = convertedText.filter({ $0.isNumber })
+                let tones = convertedText.filter(\.isNumber)
                 let hasTones = !tones.isEmpty
                 guard hasTones else {
                         return exLexicons.map({ $0.lexicon })
                 }
                 let filteredExLexicons = exLexicons.filter { item -> Bool in
-                        let itemTones = item.romanization.filter({ $0.isNumber })
+                        let itemTones = item.romanization.filter(\.isNumber)
                         return itemTones == tones
                 }
                 return filteredExLexicons.map({ $0.lexicon })

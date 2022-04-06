@@ -25,7 +25,7 @@ extension String {
 
         /// A subsequence that only contains tones (1-6)
         var tones: String {
-                return self.filter({ $0.isTone })
+                return self.filter(\.isTone)
         }
 
         /// Remove all tones (1-6)
