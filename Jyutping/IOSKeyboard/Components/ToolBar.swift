@@ -31,7 +31,9 @@ final class ToolBar: UIView {
                 if controller.hasFullAccess {
                         stackView.addArrangedSubview(pasteButton)
                 }
-                stackView.addArrangedSubview(emojiSwitch)
+                if controller.needsInputModeSwitchKey {
+                        stackView.addArrangedSubview(emojiSwitch)
+                }
                 stackView.addArrangedSubview(keyboardDown)
 
                 NSLayoutConstraint.activate(toolBarItemsConstraints)

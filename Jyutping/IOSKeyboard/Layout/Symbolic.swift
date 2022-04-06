@@ -73,15 +73,13 @@ extension KeyboardIdiom {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = {
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
                         let period: KeyboardEvent = KeyboardEvent.input(.period)
-                        guard needsInputModeSwitchKey else {
-                                return [.transform(.alphabetic(.lowercased)), .transform(.emoji), .space, period, .newLine]
-                        }
                         switch keyboardInterface {
                         case .padPortraitSmall, .padLandscapeSmall, .padFloating:
-                                return [.globe, .transform(.alphabetic(.lowercased)), .space, period, .newLine]
+                                return [switchKey, .transform(.alphabetic(.lowercased)), .space, period, .newLine]
                         default:
-                                return [.transform(.alphabetic(.lowercased)), .globe, .space, period, .newLine]
+                                return [.transform(.alphabetic(.lowercased)), switchKey, .space, period, .newLine]
                         }
                 }()
                 eventRows.append(bottomEvents)

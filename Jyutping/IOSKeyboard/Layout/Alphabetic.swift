@@ -62,8 +62,8 @@ extension KeyboardIdiom {
                 eventRows[3].append(.shift)
 
                 let bottomEvents: [KeyboardEvent] = {
-                        let leftBottom: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.symbolic)
-                        return [leftBottom, .transform(.numeric), .space, .transform(.numeric), .dismiss]
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        return [switchKey, .transform(.numeric), .space, .transform(.numeric), .dismiss]
                 }()
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -97,8 +97,8 @@ extension KeyboardIdiom {
                 eventRows[2].append(.shift)
 
                 let bottomEvents: [KeyboardEvent] = {
-                        let leftBottom: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.cantoneseSymbolic)
-                        return [leftBottom, .transform(.cantoneseNumeric), .space, .transform(.cantoneseNumeric), .dismiss]
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        return [switchKey, .transform(.numeric), .space, .transform(.numeric), .dismiss]
                 }()
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -128,8 +128,8 @@ extension KeyboardIdiom {
                 eventRows[2].append(.shift)
 
                 let bottomEvents: [KeyboardEvent] = {
-                        let leftBottom: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.cantoneseSymbolic)
-                        return [leftBottom, .transform(.cantoneseNumeric), .space, .transform(.cantoneseNumeric), .dismiss]
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        return [switchKey, .transform(.numeric), .space, .transform(.numeric), .dismiss]
                 }()
                 eventRows.append(bottomEvents)
                 return eventRows
@@ -149,15 +149,13 @@ extension KeyboardIdiom {
                 eventRows[2].append(.hidden(.backspace))
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = {
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
                         let period: KeyboardEvent = KeyboardEvent.input(.period)
-                        guard needsInputModeSwitchKey else {
-                                return [.transform(.numeric), .transform(.emoji), .space, period, .newLine]
-                        }
                         switch keyboardInterface {
                         case .padFloating:
-                                return [.globe, .transform(.numeric), .space, period, .newLine]
+                                return [switchKey, .transform(.numeric), .space, period, .newLine]
                         default:
-                                return [.transform(.numeric), .globe, .space, period, .newLine]
+                                return [.transform(.numeric), switchKey, .space, period, .newLine]
                         }
                 }()
                 eventRows.append(bottomEvents)

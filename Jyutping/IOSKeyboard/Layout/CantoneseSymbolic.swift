@@ -189,8 +189,8 @@ extension KeyboardIdiom {
                 }()
 
                 let bottomEvents: [KeyboardEvent] = {
-                        let leftBottom: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.cantoneseSymbolic)
-                        return [leftBottom, .transform(.cantonese(.lowercased)), .space, .transform(.cantonese(.lowercased)), .dismiss]
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        return [switchKey, .transform(.cantonese(.lowercased)), .space, .transform(.cantonese(.lowercased)), .dismiss]
                 }()
 
                 switch keyboardInterface {
@@ -396,15 +396,13 @@ extension KeyboardIdiom {
                 }()
 
                 let bottomEvents: [KeyboardEvent] = {
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
                         let comma: KeyboardEvent = KeyboardEvent.input(.cantoneseComma)
-                        guard needsInputModeSwitchKey else {
-                                return [.transform(.cantonese(.lowercased)), .transform(.emoji), .space, comma, .newLine]
-                        }
                         switch keyboardInterface {
                         case .padFloating:
-                                return [.globe, .transform(.cantonese(.lowercased)), .space, comma, .newLine]
+                                return [switchKey, .transform(.cantonese(.lowercased)), .space, comma, .newLine]
                         default:
-                                return [.transform(.cantonese(.lowercased)), .globe, .space, comma, .newLine]
+                                return [.transform(.cantonese(.lowercased)), switchKey, .space, comma, .newLine]
                         }
                 }()
                 let eventRows: [[KeyboardEvent]] = [

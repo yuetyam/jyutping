@@ -3,8 +3,8 @@ import UIKit
 extension KeyView {
 
         var width: CGFloat {
-                guard !(keyboardInterface.isCompact) else {
-                        // FIXME: Adjust sizes
+                switch keyboardInterface {
+                case .phonePortrait, .phoneLandscape, .padFloating:
                         switch event {
                         case .none, .hidden(.text), .hidden(.backspace):
                                 return 10
@@ -19,16 +19,14 @@ extension KeyView {
                         default:
                                 return 40
                         }
-                }
-                switch keyboardInterface {
                 case .padPortraitSmall, .padLandscapeSmall:
                         switch event {
                         case .none, .hidden(.text), .hidden(.backspace):
                                 return 10
+                        case .globe, .transform(.emoji):
+                                return 45
                         case .backspace, .shift, .transform, .dismiss:
                                 return 50
-                        case .globe:
-                                return 45
                         case .newLine:
                                 return 72
                         case .space:
@@ -42,10 +40,10 @@ extension KeyView {
                         switch event {
                         case .none:
                                 return 10
+                        case .globe, .transform(.emoji):
+                                return 45
                         case .backspace, .transform, .dismiss, .tab:
                                 return 50
-                        case .globe:
-                                return 45
                         case .newLine:
                                 return 70
                         case .shift:
@@ -61,10 +59,10 @@ extension KeyView {
                         switch event {
                         case .none:
                                 return 10
+                        case .globe, .transform(.emoji):
+                                return 45
                         case .transform, .dismiss, .tab:
                                 return 50
-                        case .globe:
-                                return 45
                         case .backspace:
                                 return 60
                         case .newLine:
@@ -78,8 +76,6 @@ extension KeyView {
                         default:
                                 return 40
                         }
-                default:
-                        return 40
                 }
         }
         var height: CGFloat {
