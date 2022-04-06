@@ -2,26 +2,24 @@ import UIKit
 
 extension KeyView {
         func setupKeyShapeView() {
-                let horizontalConstant: CGFloat = {
+                let horizontal: CGFloat = {
                         switch keyboardInterface {
                         case .phonePortrait, .phoneLandscape:
                                 return 3
                         case .padFloating:
                                 return 2
-                        case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
-                                return 5
-                        case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                        default:
                                 return 5
                         }
                 }()
-                let verticalConstant: CGFloat = (keyboardInterface == .phoneLandscape) ? 3 : 5
+                let vertical: CGFloat = (keyboardInterface == .phoneLandscape) ? 3 : 5
                 addSubview(shape)
                 shape.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                        shape.topAnchor.constraint(equalTo: topAnchor, constant: verticalConstant),
-                        shape.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -verticalConstant),
-                        shape.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontalConstant),
-                        shape.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontalConstant)
+                        shape.topAnchor.constraint(equalTo: topAnchor, constant: vertical),
+                        shape.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -vertical),
+                        shape.leadingAnchor.constraint(equalTo: leadingAnchor, constant: horizontal),
+                        shape.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -horizontal)
                 ])
                 shape.isUserInteractionEnabled = false
                 shape.tintColor = foreColor
@@ -107,18 +105,21 @@ extension KeyView {
         }
         func setupKeyImageView(offset: CGFloat = 11) {
                 let constant: CGFloat = {
-                        // FIXME: Adjust offsets
                         switch keyboardInterface {
-                        case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
-                                return offset + 9
-                        case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
-                                return offset + 6
                         case .phoneLandscape:
                                 return offset - 3
                         case .phonePortrait:
                                 return offset
                         case .padFloating:
                                 return offset
+                        case .padPortraitSmall:
+                                return offset + 4
+                        case .padPortraitMedium:
+                                return offset + 5
+                        case .padPortraitLarge:
+                                return offset + 6
+                        case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                                return offset + 10
                         }
                 }()
                 let keyImageView: UIImageView = UIImageView()

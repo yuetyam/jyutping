@@ -84,15 +84,20 @@ extension KeyView {
         }
         var height: CGFloat {
                 switch keyboardInterface {
-                case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
-                        return 70
+                case .padPortraitSmall:
+                        return 65
+                case .padPortraitMedium:
+                        return 68
+                case .padPortraitLarge:
+                        return 72
                 case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
                         return 80
                 case .padFloating:
                         return 48
                 case .phoneLandscape:
                         // iPhone SE1, iPod touch 7 (w480 x h320)
-                        return UIScreen.main.bounds.height < 350 ? 36 : 40
+                        let isSmallPhone: Bool = UIScreen.main.bounds.height < 350
+                        return isSmallPhone ? 36 : 40
                 case .phonePortrait:
                         let screenWidth: CGFloat = UIScreen.main.bounds.width
                         if screenWidth < 350 {
