@@ -80,8 +80,18 @@ extension KeyboardIdiom {
                 eventRows[2].insert(.none, at: 0)
                 eventRows[2].insert(.none, at: 0)
                 eventRows[2].insert(.shift, at: 0)
-                let comma: KeyboardEvent = .input(KeySeat(primary: KeyElement("，")))
-                let period: KeyboardEvent = .input(KeySeat(primary: KeyElement("。")))
+                let comma: KeyboardEvent = {
+                        let primary: KeyElement = KeyElement("，")
+                        let child: KeyElement = KeyElement("！")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child])
+                        return KeyboardEvent.input(seat)
+                }()
+                let period: KeyboardEvent = {
+                        let primary: KeyElement = KeyElement("。")
+                        let child: KeyElement = KeyElement("？")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child])
+                        return KeyboardEvent.input(seat)
+                }()
                 let exclamationMark: KeyboardEvent = .input(KeySeat(primary: KeyElement("！")))
                 let questionMark: KeyboardEvent = .input(KeySeat(primary: KeyElement("？")))
                 if uppercased {
@@ -111,8 +121,18 @@ extension KeyboardIdiom {
                 eventRows[1].append(.newLine)
 
                 eventRows[2].insert(.shift, at: 0)
-                let comma: KeyboardEvent = .input(KeySeat(primary: KeyElement("，")))
-                let period: KeyboardEvent = .input(KeySeat(primary: KeyElement("。")))
+                let comma: KeyboardEvent = {
+                        let primary: KeyElement = KeyElement("，")
+                        let child: KeyElement = KeyElement("！")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child])
+                        return KeyboardEvent.input(seat)
+                }()
+                let period: KeyboardEvent = {
+                        let primary: KeyElement = KeyElement("。")
+                        let child: KeyElement = KeyElement("？")
+                        let seat: KeySeat = KeySeat(primary: primary, children: [primary, child])
+                        return KeyboardEvent.input(seat)
+                }()
                 let exclamationMark: KeyboardEvent = .input(KeySeat(primary: KeyElement("！")))
                 let questionMark: KeyboardEvent = .input(KeySeat(primary: KeyElement("？")))
                 if uppercased {
