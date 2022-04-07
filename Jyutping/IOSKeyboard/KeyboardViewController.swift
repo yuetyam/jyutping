@@ -207,6 +207,8 @@ final class KeyboardViewController: UIInputViewController {
                                 bufferText = newText.replacingOccurrences(of: "gwgw", with: "kw")
                         case _ where text.isLetters:
                                 bufferText += text
+                        case _ where keyboardLayout == .saamPing && (text.first?.isTone ?? false):
+                                bufferText += text
                         case _ where bufferText.isEmpty:
                                 textDocumentProxy.insertText(text)
                         default:
