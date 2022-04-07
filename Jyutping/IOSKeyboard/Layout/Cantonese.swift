@@ -28,36 +28,124 @@ extension KeyboardIdiom {
                 eventRows[0].append(.backspace)
 
                 eventRows[1].insert(.tab, at: 0)
-                let openQuoteText: String = uppercased ? "『" : "「"
-                let closeQuoteText: String = uppercased ? "』" : "」"
-                let ideographicCommaText: String = uppercased ? "｜" : "、"
-                let openQuote: KeyboardEvent = .input(KeySeat(primary: KeyElement(openQuoteText)))
-                let closeQuote: KeyboardEvent = .input(KeySeat(primary: KeyElement(closeQuoteText)))
-                let ideographicComma: KeyboardEvent = .input(KeySeat(primary: KeyElement(ideographicCommaText)))
-                eventRows[1].append(openQuote)
-                eventRows[1].append(closeQuote)
-                eventRows[1].append(ideographicComma)
+                let row_1_extra_0: KeyboardEvent = {
+                        if uppercased {
+                                return KeyboardEvent.input(KeySeat(primary: KeyElement("『")))
+                        } else {
+                                let primary: KeyElement = KeyElement("「")
+                                let child_0: KeyElement = KeyElement("『")
+                                let child_1: KeyElement = KeyElement("\u{201C}", footer: "201C")
+                                let child_2: KeyElement = KeyElement("\"", footer: "0022")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                let row_1_extra_1: KeyboardEvent = {
+                        if uppercased {
+                                return KeyboardEvent.input(KeySeat(primary: KeyElement("』")))
+                        } else {
+                                let primary: KeyElement = KeyElement("」")
+                                let child_0: KeyElement = KeyElement("』")
+                                let child_1: KeyElement = KeyElement("\u{201D}", footer: "201D")
+                                let child_2: KeyElement = KeyElement("\"", footer: "0022")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                let row_1_extra_2: KeyboardEvent = {
+                        if uppercased {
+                                let primary: KeyElement = KeyElement("｜")
+                                let child: KeyElement = KeyElement("|", header: "半形")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child])
+                                return KeyboardEvent.input(seat)
+                        } else {
+                                let primary: KeyElement = KeyElement("、")
+                                let child_0: KeyElement = KeyElement("｜")
+                                let child_1: KeyElement = KeyElement("\\", header: "半形")
+                                let child_2: KeyElement = KeyElement("＼", header: "全形")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1, child_2])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                eventRows[1].append(row_1_extra_0)
+                eventRows[1].append(row_1_extra_1)
+                eventRows[1].append(row_1_extra_2)
 
                 eventRows[2].insert(.none, at: 0)
                 eventRows[2].insert(.transform(.alphabetic(uppercased ? .uppercased : .lowercased)), at: 0)
-                let semicolonText: String = uppercased ? "：" : "；"
-                let singleQuoteText: String = uppercased ? "\"" : "'"
-                let semicolon: KeyboardEvent = .input(KeySeat(primary: KeyElement(semicolonText)))
-                let singleQuote: KeyboardEvent = .input(KeySeat(primary: KeyElement(singleQuoteText)))
-                eventRows[2].append(semicolon)
-                eventRows[2].append(singleQuote)
+                let row_2_extra_0: KeyboardEvent = {
+                        if uppercased {
+                                let primary: KeyElement = KeyElement("：")
+                                let child_0: KeyElement = KeyElement(":", header: "半形")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                                return KeyboardEvent.input(seat)
+                        } else {
+                                let primary: KeyElement = KeyElement("；")
+                                let child_0: KeyElement = KeyElement("：")
+                                let child_1: KeyElement = KeyElement(";", header: "英")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                let row_2_extra_1: KeyboardEvent = {
+                        if uppercased {
+                                return KeyboardEvent.input(KeySeat(primary: KeyElement("\"")))
+                        } else {
+                                let primary: KeyElement = KeyElement("'")
+                                let child_0: KeyElement = KeyElement("'", footer: "0027")
+                                let child_1: KeyElement = KeyElement("\"", footer: "0022")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                eventRows[2].append(row_2_extra_0)
+                eventRows[2].append(row_2_extra_1)
                 eventRows[2].append(.newLine)
 
                 eventRows[3].insert(.shift, at: 0)
-                let commaText: String = uppercased ? "《" : "，"
-                let periodText: String = uppercased ? "》" : "。"
-                let slashText: String = uppercased ? "？" : "/"
-                let comma: KeyboardEvent = .input(KeySeat(primary: KeyElement(commaText)))
-                let period: KeyboardEvent = .input(KeySeat(primary: KeyElement(periodText)))
-                let slash: KeyboardEvent = .input(KeySeat(primary: KeyElement(slashText)))
-                eventRows[3].append(comma)
-                eventRows[3].append(period)
-                eventRows[3].append(slash)
+                let row_3_extra_0: KeyboardEvent = {
+                        if uppercased {
+                                let primary: KeyElement = KeyElement("《")
+                                let child_0: KeyElement = KeyElement("〈")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                                return KeyboardEvent.input(seat)
+                        } else {
+                                let primary: KeyElement = KeyElement("，")
+                                let child_0: KeyElement = KeyElement("《")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                let row_3_extra_1: KeyboardEvent = {
+                        if uppercased {
+                                let primary: KeyElement = KeyElement("》")
+                                let child_0: KeyElement = KeyElement("〉")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                                return KeyboardEvent.input(seat)
+                        } else {
+                                let primary: KeyElement = KeyElement("。")
+                                let child_0: KeyElement = KeyElement("》")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                let row_3_extra_2: KeyboardEvent = {
+                        if uppercased {
+                                let primary: KeyElement = KeyElement("？")
+                                let child_0: KeyElement = KeyElement("?", header: "半形")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0])
+                                return KeyboardEvent.input(seat)
+                        } else {
+                                let primary: KeyElement = KeyElement("/")
+                                let child_0: KeyElement = KeyElement("？")
+                                let child_1: KeyElement = KeyElement("／", header: "全形")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [primary, child_0, child_1])
+                                return KeyboardEvent.input(seat)
+                        }
+                }()
+                eventRows[3].append(row_3_extra_0)
+                eventRows[3].append(row_3_extra_1)
+                eventRows[3].append(row_3_extra_2)
                 eventRows[3].append(.shift)
 
                 let bottomEvents: [KeyboardEvent] = {
