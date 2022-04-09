@@ -14,14 +14,34 @@ extension KeyboardIdiom {
         }
 
         private func largePadCantoneseKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool, uppercased: Bool) -> [[KeyboardEvent]] {
-                let head: [String] = {
+                let headRow: [KeyboardEvent] = {
+                        // TODO: Reimplement
                         if uppercased {
-                                return ["～", "！", "@", "#", "$", "%", "⋯⋯", "&", "*", "（", "）", "——", "+"]
+                                // lowercase ["·", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="]
+                                let texts: [String] = ["～", "！", "@", "#", "$", "%", "⋯⋯", "&", "*", "（", "）", "——", "+"]
+                                return texts.map({ KeyboardEvent.input(KeySeat(primary: KeyElement($0))) })
                         } else {
-                                return ["·", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="]
+                                let left: KeyboardEvent = {
+                                        let primary = KeyElement("·")
+                                        let child_0 = KeyElement("～")
+                                        let seat = KeySeat(primary: primary, children: [primary, child_0])
+                                        return KeyboardEvent.input(seat)
+                                }()
+                                let right_0: KeyboardEvent = {
+                                        let primary = KeyElement("-")
+                                        let child_0 = KeyElement("——")
+                                        let seat = KeySeat(primary: primary, children: [primary, child_0])
+                                        return KeyboardEvent.input(seat)
+                                }()
+                                let right_1: KeyboardEvent = {
+                                        let primary = KeyElement("=")
+                                        let child_0 = KeyElement("+")
+                                        let seat = KeySeat(primary: primary, children: [primary, child_0])
+                                        return KeyboardEvent.input(seat)
+                                }()
+                                return [left] + digitalKeys() + [right_0, right_1]
                         }
                 }()
-                let headRow: [KeyboardEvent] = head.map({ KeyboardEvent.input(KeySeat(primary: KeyElement($0))) })
 
                 var eventRows: [[KeyboardEvent]] = letters(uppercased: uppercased)
                 eventRows.insert(headRow, at: 0)
