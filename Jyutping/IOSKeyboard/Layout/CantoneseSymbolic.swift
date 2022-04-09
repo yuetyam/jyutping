@@ -1,17 +1,14 @@
 extension KeyboardIdiom {
 
         func cantoneseSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
-                switch keyboardInterface {
-                case .phonePortrait, .phoneLandscape, .padFloating:
+                if keyboardInterface.isCompact {
                         return compactCantoneseSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitSmall, .padLandscapeSmall, .padPortraitMedium, .padLandscapeMedium:
-                        return smallMediumPadCantoneseSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitLarge, .padLandscapeLarge:
-                        return smallMediumPadCantoneseSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                } else {
+                        return padCantoneseSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 }
         }
 
-        private func smallMediumPadCantoneseSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        private func padCantoneseSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let first_0: KeyboardEvent = {
                         let primary = KeyElement("^")
                         let child_0 = KeyElement("＾", header: "全形")

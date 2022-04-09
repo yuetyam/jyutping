@@ -1,15 +1,54 @@
 extension KeyboardIdiom {
+
         func numericKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 switch keyboardInterface {
                 case .phonePortrait, .phoneLandscape, .padFloating:
                         return compactNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitSmall, .padLandscapeSmall:
-                        return compactNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitMedium, .padLandscapeMedium:
-                        return compactNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                case .padPortraitSmall, .padLandscapeSmall, .padPortraitMedium, .padLandscapeMedium:
+                        return smallMediumNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .padPortraitLarge, .padLandscapeLarge:
-                        return compactNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                        return smallMediumNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 }
+        }
+
+        private func smallMediumNumericKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+                let arrayTextArray: [[String]] = [
+                        ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+                        ["@", "#", "$", "&", "*", "(", ")", "'", "\""],
+                        ["%", "-", "+", "=", "/", ";", ":", ",", "."]
+                ]
+                var eventRows: [[KeyboardEvent]] = arrayTextArray.map({ $0.map({ KeyboardEvent.input(KeySeat(primary: KeyElement($0))) }) })
+                let toSymbolic: KeyboardEvent = .transform(.symbolic)
+                switch keyboardInterface {
+                case .padPortraitSmall, .padLandscapeSmall:
+                        eventRows[0].append(.backspace)
+                        eventRows[1].insert(.none, at: 0)
+                        eventRows[1].insert(.none, at: 0)
+                        eventRows[1].append(.newLine)
+                        eventRows[2].insert(toSymbolic, at: 0)
+                        eventRows[2].append(toSymbolic)
+                default:
+                        eventRows[0].insert(.tab, at: 0)
+                        eventRows[0].append(.backspace)
+
+                        eventRows[1].insert(.none, at: 0)
+                        eventRows[1].insert(toSymbolic, at: 0)
+                        eventRows[1].append(.newLine)
+
+                        eventRows[2].insert(.none, at: 0)
+                        eventRows[2].insert(.none, at: 0)
+                        eventRows[2].insert(.none, at: 0)
+                        eventRows[2].insert(toSymbolic, at: 0)
+                        eventRows[2].append(.none)
+                        eventRows[2].append(toSymbolic)
+                }
+                let bottomRow: [KeyboardEvent] = {
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
+                        return [switchKey, back, .space, back, .dismiss]
+                }()
+                eventRows.append(bottomRow)
+                return eventRows
         }
 
         private func compactNumericKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
