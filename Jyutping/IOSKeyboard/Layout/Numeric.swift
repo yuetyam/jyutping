@@ -7,8 +7,32 @@ extension KeyboardIdiom {
                 case .padPortraitSmall, .padLandscapeSmall, .padPortraitMedium, .padLandscapeMedium:
                         return smallMediumNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .padPortraitLarge, .padLandscapeLarge:
-                        return smallMediumNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                        return largeNumericKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 }
+        }
+
+        private func largeNumericKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+                let textLines: [String] = [
+                        #"`1234567890<>"#,
+                        #"[]{}#%^*+=\|~"#,
+                        #"-/:;()$&@£¥"#,
+                        #"….,?!’”_€¢"#
+                ]
+                var eventRows: [[KeyboardEvent]] = textLines.map({ $0.map({ KeyboardEvent.input(KeySeat(primary: KeyElement(String($0)))) }) })
+                eventRows[0].append(.backspace)
+                eventRows[1].insert(.tab, at: 0)
+                let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
+                eventRows[2].insert(.none, at: 0)
+                eventRows[2].insert(back, at: 0)
+                eventRows[2].append(.newLine)
+                eventRows[3].insert(.shift, at: 0)
+                eventRows[3].append(.shift)
+                let bottomRow: [KeyboardEvent] = {
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        return [switchKey, back, .space, back, .dismiss]
+                }()
+                eventRows.append(bottomRow)
+                return eventRows
         }
 
         private func smallMediumNumericKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
