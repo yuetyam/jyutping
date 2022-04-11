@@ -4,13 +4,51 @@ extension KeyboardIdiom {
                 switch keyboardInterface {
                 case .phonePortrait, .phoneLandscape, .padFloating:
                         return compactSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitSmall, .padLandscapeSmall:
-                        return compactSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitMedium, .padLandscapeMedium:
-                        return compactSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                case .padPortraitSmall, .padLandscapeSmall, .padPortraitMedium, .padLandscapeMedium:
+                        return smallMediumSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 case .padPortraitLarge, .padLandscapeLarge:
                         return compactSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 }
+        }
+
+        private func smallMediumSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+                let textLines: [String] = [
+                        "1234567890",
+                        #"€£¥_^[]{}"#,
+                        #"§|~…\<>!?"#
+                ]
+                var eventRows: [[KeyboardEvent]] = textLines.map({ $0.map({ KeyboardEvent.input(KeySeat(primary: KeyElement(String($0)))) }) })
+                let toNumeric: KeyboardEvent = .transform(.numeric)
+                switch keyboardInterface {
+                case .padPortraitSmall, .padLandscapeSmall:
+                        eventRows[0].append(.backspace)
+                        eventRows[1].insert(.none, at: 0)
+                        eventRows[1].insert(.none, at: 0)
+                        eventRows[1].append(.newLine)
+                        eventRows[2].insert(toNumeric, at: 0)
+                        eventRows[2].append(toNumeric)
+                default:
+                        eventRows[0].insert(.tab, at: 0)
+                        eventRows[0].append(.backspace)
+
+                        eventRows[1].insert(.none, at: 0)
+                        eventRows[1].insert(toNumeric, at: 0)
+                        eventRows[1].append(.newLine)
+
+                        eventRows[2].insert(.none, at: 0)
+                        eventRows[2].insert(.none, at: 0)
+                        eventRows[2].insert(.none, at: 0)
+                        eventRows[2].insert(toNumeric, at: 0)
+                        eventRows[2].append(.none)
+                        eventRows[2].append(toNumeric)
+                }
+                let bottomRow: [KeyboardEvent] = {
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
+                        return [switchKey, back, .space, back, .dismiss]
+                }()
+                eventRows.append(bottomRow)
+                return eventRows
         }
 
         private func compactSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
@@ -74,12 +112,13 @@ extension KeyboardIdiom {
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = {
                         let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
                         let period: KeyboardEvent = KeyboardEvent.input(.period)
                         switch keyboardInterface {
-                        case .padPortraitSmall, .padLandscapeSmall, .padFloating:
-                                return [switchKey, .transform(.alphabetic(.lowercased)), .space, period, .newLine]
+                        case .padFloating:
+                                return [switchKey, back, .space, period, .newLine]
                         default:
-                                return [.transform(.alphabetic(.lowercased)), switchKey, .space, period, .newLine]
+                                return [back, switchKey, .space, period, .newLine]
                         }
                 }()
                 eventRows.append(bottomEvents)
