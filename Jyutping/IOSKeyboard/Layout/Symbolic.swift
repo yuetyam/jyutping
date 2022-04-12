@@ -1,17 +1,14 @@
 extension KeyboardIdiom {
 
         func symbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
-                switch keyboardInterface {
-                case .phonePortrait, .phoneLandscape, .padFloating:
+                if keyboardInterface.isCompact {
                         return compactSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitSmall, .padLandscapeSmall, .padPortraitMedium, .padLandscapeMedium:
-                        return smallMediumSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
-                case .padPortraitLarge, .padLandscapeLarge:
-                        return compactSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                } else {
+                        return padSymbolicKeys(keyboardInterface: keyboardInterface, needsInputModeSwitchKey: needsInputModeSwitchKey)
                 }
         }
 
-        private func smallMediumSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
+        private func padSymbolicKeys(keyboardInterface: KeyboardInterface, needsInputModeSwitchKey: Bool) -> [[KeyboardEvent]] {
                 let textLines: [String] = [
                         "1234567890",
                         #"€£¥_^[]{}"#,
