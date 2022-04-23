@@ -22,14 +22,14 @@ Cantonese Jyutping Keyboard for iOS & macOS
 </a>
 <br>
 <br>
-Compatibility: iOS 13.0+
+兼容性 Compatibility: iOS 13.0+
 
 ## macOS
 (早期測試版) 前往 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載
 
 (Beta) Download on the [Releases](https://github.com/yuetyam/jyutping/releases)
 
-Compatibility: macOS 11.0+ (Big Sur or above)
+兼容性 Compatibility: macOS 12.0+ (Monterey or above)
 
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="460"/>
@@ -52,3 +52,6 @@ Xcode 13.3+
 <a href="https://ko-fi.com/ososoio">
         <img src="images/buy-me-a-coffee.png" alt="ko-fi, buy me a coffee" width="150"/>
 </a>
+<br>
+
+[`https://ososo.io/donate`](https://ososo.io/donate)
