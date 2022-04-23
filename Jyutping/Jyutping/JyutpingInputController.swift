@@ -441,6 +441,10 @@ class JyutpingInputController: IMKInputController {
                 case .transparent:
                         passBuffer()
                         return false
+                case .alphabet where event.modifierFlags.contains(.control):
+                        let shouldPerformClearing: Bool = event.keyCode == KeyCode.Alphabet.VK_U && isBufferState
+                        guard shouldPerformClearing else { return false }
+                        bufferText = .empty
                 case .alphabet:
                         guard let letter: String = event.characters else { return false }
                         bufferText += letter
@@ -481,9 +485,6 @@ class JyutpingInputController: IMKInputController {
                                         handleSettings(-1)
                                         return true
                                 }
-                                guard isBufferState else { return false }
-                                bufferText = .empty
-                        case KeyCode.Alphabet.VK_U where event.modifierFlags == .control:
                                 guard isBufferState else { return false }
                                 bufferText = .empty
                         case KeyCode.Symbol.VK_BACKQUOTE where event.modifierFlags == .control || event.modifierFlags == [.control, .shift]:
