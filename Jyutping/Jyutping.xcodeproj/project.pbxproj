@@ -137,6 +137,7 @@
 		37AA717B27CA456200431E21 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717A27CA456200431E21 /* icon.png */; };
 		37AA717D27CA456A00431E21 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717C27CA456A00431E21 /* icon@2x.png */; };
 		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
+		37CB2EC62818A4B20092E0DD /* AboutView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CB2EC52818A4B20092E0DD /* AboutView_iOS15.swift */; };
 		37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F31F4E27D565EA008399DB /* WindowPattern.swift */; };
 /* End PBXBuildFile section */
 
@@ -369,6 +370,7 @@
 		37AA717A27CA456200431E21 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		37AA717C27CA456A00431E21 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
+		37CB2EC52818A4B20092E0DD /* AboutView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView_iOS15.swift; sourceTree = "<group>"; };
 		37F31F4E27D565EA008399DB /* WindowPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -600,6 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				3797FC1827BF8A7300C6BB8D /* AboutView_iOS14.swift */,
+				37CB2EC52818A4B20092E0DD /* AboutView_iOS15.swift */,
 				3797FC1927BF8A7300C6BB8D /* AboutView.swift */,
 			);
 			path = About;
@@ -1143,6 +1146,7 @@
 				3797FC4227BF8A7300C6BB8D /* ImageExtensions.swift in Sources */,
 				3797FC5327BF8A7300C6BB8D /* FAQView.swift in Sources */,
 				3797FC4D27BF8A7300C6BB8D /* JyutpingView_iOS15.swift in Sources */,
+				37CB2EC62818A4B20092E0DD /* AboutView_iOS15.swift in Sources */,
 				3797FC4F27BF8A7300C6BB8D /* Device.swift in Sources */,
 				3797FC4E27BF8A7300C6BB8D /* AppMaster.swift in Sources */,
 				3797FC4727BF8A7300C6BB8D /* InitialsTable.swift in Sources */,

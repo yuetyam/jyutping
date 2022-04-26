@@ -13,7 +13,7 @@ struct ContentView: View {
                                         Label("Jyutping", systemImage: "doc.text.magnifyingglass").environment(\.symbolVariants, .none)
                                 }.tag(1)
 
-                                AboutView_iOS14().tabItem {
+                                AboutView_iOS15().tabItem {
                                         Label("About", systemImage: "info.circle").environment(\.symbolVariants, .none)
                                 }.tag(2)
 
