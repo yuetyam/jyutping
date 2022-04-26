@@ -34,28 +34,10 @@ extension Font {
 
 
         /// Font for Candidate serial number
-        static let serialNumber: Font = {
-                if #available(macOS 12.0, *) {
-                        return Font.title3.monospaced()
-                } else {
-                        return Font.system(size: 15, design: .monospaced)
-                }
-        }()
+        static let serialNumber: Font = Font.title3.monospaced()
 
-        static let comment: Font = {
-                if #available(macOS 12.0, *) {
-                        return Font.title3.monospaced()
-                } else {
-                        return Font.system(size: 15, design: .monospaced)
-                }
-        }()
-        static let secondaryComment: Font = {
-                if #available(macOS 12.0, *) {
-                        return Font.body.monospaced()
-                } else {
-                        return Font.system(size: 13, design: .monospaced)
-                }
-        }()
+        static let comment: Font = Font.title3.monospaced()
+        static let secondaryComment: Font = Font.body.monospaced()
 
 
         private static func pairFonts(primary name: String, fallbacks: [String]) -> Font {
