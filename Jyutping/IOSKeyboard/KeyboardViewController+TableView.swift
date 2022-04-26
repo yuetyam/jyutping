@@ -168,16 +168,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("Normal : jyut6 ping3", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("TonesDisplayStyle1", comment: .empty)
                                 cell.accessoryType = (toneStyle < 2) ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("No Tones : jyut ping", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("TonesDisplayStyle2", comment: .empty)
                                 cell.accessoryType = (toneStyle == 2) ? .checkmark : .none
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("Superscript : jyut⁶ ping³", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("TonesDisplayStyle3", comment: .empty)
                                 cell.accessoryType = (toneStyle == 3) ? .checkmark : .none
                         case 3:
-                                cell.textLabel?.text = NSLocalizedString("Subscript : jyut₆ ping₃", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("TonesDisplayStyle4", comment: .empty)
                                 cell.accessoryType = (toneStyle == 4) ? .checkmark : .none
                         default:
                                 break
