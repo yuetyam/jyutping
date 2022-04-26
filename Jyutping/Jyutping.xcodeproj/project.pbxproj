@@ -371,6 +371,12 @@
 		37AA717C27CA456A00431E21 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37CB2EC52818A4B20092E0DD /* AboutView_iOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView_iOS15.swift; sourceTree = "<group>"; };
+		37CB2EC72818A8460092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37CB2EC82818A8460092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37CB2EC92818A8460092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37CB2ECA2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37CB2ECB2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37CB2ECC2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37F31F4E27D565EA008399DB /* WindowPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -985,6 +991,7 @@
 				"zh-Hant-TW",
 				yue,
 				"zh-Hant-CN",
+				"zh-Hant-MO",
 			);
 			mainGroup = 3764CEA327BE103100DCFB51;
 			productRefGroup = 3764CEAD27BE103100DCFB51 /* Products */;
@@ -1266,6 +1273,7 @@
 				3722933C27BECF7A0077F15B /* zh-Hant-TW */,
 				3722933D27BECF8C0077F15B /* yue */,
 				3722933E27BECFDB0077F15B /* zh-Hant-CN */,
+				37CB2EC82818A8460092E0DD /* zh-Hant-MO */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1281,6 +1289,7 @@
 				3722934627BED0760077F15B /* zh-Hant-CN */,
 				3722934727BED0770077F15B /* zh-Hant-HK */,
 				3722934827BED0780077F15B /* zh-Hant-TW */,
+				37CB2EC72818A8460092E0DD /* zh-Hant-MO */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1312,6 +1321,7 @@
 				3797FC6927BF8B8500C6BB8D /* zh-Hant-CN */,
 				3797FC6A27BF8B8600C6BB8D /* zh-Hant-HK */,
 				3797FC6B27BF8B8700C6BB8D /* zh-Hant-TW */,
+				37CB2EC92818A8460092E0DD /* zh-Hant-MO */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1327,6 +1337,7 @@
 				3797FC7527BF8BDC00C6BB8D /* zh-Hant-CN */,
 				3797FC7627BF8BDE00C6BB8D /* zh-Hant-HK */,
 				3797FC7727BF8BDF00C6BB8D /* zh-Hant-TW */,
+				37CB2ECA2818A8470092E0DD /* zh-Hant-MO */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1342,6 +1353,7 @@
 				3797FCEC27BF91E700C6BB8D /* zh-Hant-CN */,
 				3797FCED27BF91E800C6BB8D /* zh-Hant-HK */,
 				3797FCEE27BF91E900C6BB8D /* zh-Hant-TW */,
+				37CB2ECB2818A8470092E0DD /* zh-Hant-MO */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1357,6 +1369,7 @@
 				3797FCF827BF922900C6BB8D /* zh-Hant-CN */,
 				3797FCF927BF922A00C6BB8D /* zh-Hant-HK */,
 				3797FCFA27BF922B00C6BB8D /* zh-Hant-TW */,
+				37CB2ECC2818A8470092E0DD /* zh-Hant-MO */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
