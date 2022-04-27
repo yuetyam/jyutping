@@ -2,7 +2,7 @@ import Foundation
 import SQLite3
 
 /// Provide Jyutping Data for Keyboard
-public struct KeyboardData {
+public struct InputMethodData {
 
         /// SQLite3 database
         public let database: OpaquePointer?

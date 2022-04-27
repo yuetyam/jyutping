@@ -2,7 +2,7 @@ import SwiftUI
 import Cocoa
 import InputMethodKit
 import CommonExtensions
-import KeyboardData
+import InputMethodData
 import LookupData
 import CharacterSets
 

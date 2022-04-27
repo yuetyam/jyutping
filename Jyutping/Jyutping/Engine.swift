@@ -1,12 +1,12 @@
 import Foundation
 import SQLite3
-import KeyboardData
+import InputMethodData
 
 struct Engine {
 
         fileprivate typealias RowCandidate = (candidate: Candidate, row: Int)
 
-        private let provider: KeyboardData = KeyboardData()
+        private let provider: InputMethodData = InputMethodData()
         func close() {
                 provider.close()
         }
@@ -205,7 +205,7 @@ struct Engine {
 
 private extension Engine {
 
-        // KeyboardData:
+        // InputMethodData:
         // CREATE TABLE keyboardtable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL);
 
         func shortcut(for text: String, count: Int = 100) -> [Candidate] {

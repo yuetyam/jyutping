@@ -1,7 +1,7 @@
 import XCTest
-@testable import KeyboardData
+@testable import InputMethodData
 
-final class KeyboardDataTests: XCTestCase {
+final class InputMethodDataTests: XCTestCase {
 
         // MARK: - Pinyin
 

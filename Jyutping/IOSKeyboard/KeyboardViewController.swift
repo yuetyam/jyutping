@@ -1,6 +1,6 @@
 import UIKit
 import CommonExtensions
-import KeyboardData
+import InputMethodData
 import LookupData
 import CharacterSets
 
