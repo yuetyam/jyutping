@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: CommonExtensions SwiftTest
         run: swift test
-        working-directory: ./CommonExtensions
+        working-directory: ./Modules/CommonExtensions
   test_character_sets:
     name: CharacterSets Tests
     runs-on: macos-12
@@ -20,23 +20,23 @@ jobs:
       - uses: actions/checkout@v2
       - name: CharacterSets SwiftTest
         run: swift test
-        working-directory: ./CharacterSets
-  test_lookupdata:
-    name: LookupData Tests
+        working-directory: ./Modules/CharacterSets
+  test_containersdata:
+    name: ContainersData Tests
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
-      - name: LookupData SwiftTest
+      - name: ContainersData SwiftTest
         run: swift test
-        working-directory: ./LookupData
-  test_keyboarddata:
-    name: KeyboardData Tests
+        working-directory: ./Modules/ContainersData
+  test_inputmethoddata:
+    name: InputMethodData Tests
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
-      - name: KeyboardData SwiftTest
+      - name: InputMethodData SwiftTest
         run: swift test
-        working-directory: ./KeyboardData
+        working-directory: ./Modules/InputMethodData
   test_emojidata:
     name: EmojiData Tests
     runs-on: macos-12
@@ -44,7 +44,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: EmojiData SwiftTest
         run: swift test
-        working-directory: ./EmojiData
+        working-directory: ./Modules/EmojiData
   build_mac_ime:
     name: Build Mac IME
     runs-on: macos-12
