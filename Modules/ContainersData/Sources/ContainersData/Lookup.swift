@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-public struct ContainersData {
+public struct Lookup {
 
         private static let database: OpaquePointer? = {
                 guard let path: String = Bundle.module.path(forResource: "lookup", ofType: "sqlite3") else { return nil }

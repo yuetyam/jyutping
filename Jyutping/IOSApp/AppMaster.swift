@@ -17,7 +17,7 @@ struct AppMaster {
         /// - Returns: Cantonese text and corresponding romanizations
         static func lookup(text: String) -> (text: String, romanizations: [String]) {
                 let filtered: String = text.ideographicFiltered()
-                let search = ContainersData.advancedSearch(for: filtered)
+                let search = Lookup.advancedSearch(for: filtered)
                 guard filtered != text else {
                         return search
                 }

@@ -8,7 +8,7 @@ struct JyutpingView: View {
         @State private var inputText: String = .empty
 
         private var rawCantonese: String { inputText.ideographicFiltered() }
-        private var jyutpings: [String] { ContainersData.search(for: rawCantonese) }
+        private var jyutpings: [String] { Lookup.search(for: rawCantonese) }
 
         var body: some View {
                 NavigationView {
