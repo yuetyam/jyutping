@@ -4,12 +4,9 @@ import PackageDescription
 
 let package = Package(
         name: "CharacterSets",
-        platforms: [.iOS(.v13), .macOS(.v11)],
+        platforms: [.iOS(.v13), .macOS(.v12)],
         products: [
-                .library(
-                        name: "CharacterSets",
-                        targets: ["CharacterSets"]
-                )
+                .library(name: "CharacterSets", targets: ["CharacterSets"])
         ],
         targets: [
                 .target(

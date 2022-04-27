@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3708EFC727CA4C0A00AD2735 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */; };
-		3708EFCD27CD5ADE00AD2735 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFCC27CD5ADE00AD2735 /* CommonExtensions */; };
-		3708EFCF27CD5B8300AD2735 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFCE27CD5B8300AD2735 /* CommonExtensions */; };
-		3708EFD127CD611600AD2735 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFD027CD611600AD2735 /* CommonExtensions */; };
-		3708EFD427CE471500AD2735 /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFD327CE471500AD2735 /* CharacterSets */; };
-		3708EFD627CE47F900AD2735 /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 3708EFD527CE47F900AD2735 /* CharacterSets */; };
 		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
 		37219BA827C0029D004FE219 /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 37219BA727C0029D004FE219 /* LookupData */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
@@ -133,11 +128,16 @@
 		3797FCF127BF921F00C6BB8D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3797FCF327BF921F00C6BB8D /* Localizable.strings */; };
 		3797FCFD27BF94B400C6BB8D /* KeyboardData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FCFC27BF94B400C6BB8D /* KeyboardData */; };
 		3797FCFF27BF94BE00C6BB8D /* LookupData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FCFE27BF94BE00C6BB8D /* LookupData */; };
-		3797FD0127BF94C200C6BB8D /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 3797FD0027BF94C200C6BB8D /* EmojiData */; };
 		37AA717B27CA456200431E21 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717A27CA456200431E21 /* icon.png */; };
 		37AA717D27CA456A00431E21 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717C27CA456A00431E21 /* icon@2x.png */; };
 		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
 		37CB2EC62818A4B20092E0DD /* AboutView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CB2EC52818A4B20092E0DD /* AboutView_iOS15.swift */; };
+		37CB2ED12818E9040092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED02818E9040092E0DD /* CharacterSets */; };
+		37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED22818E9080092E0DD /* CommonExtensions */; };
+		37CB2ED52818E90E0092E0DD /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED42818E90E0092E0DD /* EmojiData */; };
+		37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED62818E9210092E0DD /* CharacterSets */; };
+		37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED82818E9260092E0DD /* CommonExtensions */; };
+		37CB2EDB2818E95B0092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2EDA2818E95B0092E0DD /* CommonExtensions */; };
 		37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F31F4E27D565EA008399DB /* WindowPattern.swift */; };
 /* End PBXBuildFile section */
 
@@ -195,8 +195,6 @@
 
 /* Begin PBXFileReference section */
 		3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
-		3708EFCB27CD5AA200AD2735 /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../CommonExtensions; sourceTree = "<group>"; };
-		3708EFD227CE3A6900AD2735 /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../CharacterSets; sourceTree = "<group>"; };
 		370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
 		3722933627BECF310077F15B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3722933827BECF340077F15B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -250,7 +248,6 @@
 		3777EF0C27FBD55B00D1EED0 /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		3777EF0E27FBD84200D1EED0 /* Symbolic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbolic.swift; sourceTree = "<group>"; };
 		3797FBDE27BF87FD00C6BB8D /* LookupData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LookupData; path = ../LookupData; sourceTree = "<group>"; };
-		3797FBE027BF880F00C6BB8D /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../EmojiData; sourceTree = "<group>"; };
 		3797FBE527BF88BE00C6BB8D /* IOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3797FBEB27BF88BE00C6BB8D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3797FBEE27BF88BE00C6BB8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -377,6 +374,9 @@
 		37CB2ECA2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37CB2ECB2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37CB2ECC2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37CB2ECD2818E8DD0092E0DD /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
+		37CB2ECE2818E8E70092E0DD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
+		37CB2ECF2818E8EA0092E0DD /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../Modules/EmojiData; sourceTree = "<group>"; };
 		37F31F4E27D565EA008399DB /* WindowPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -385,9 +385,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */,
+				37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */,
 				37219BA827C0029D004FE219 /* LookupData in Frameworks */,
-				3708EFCD27CD5ADE00AD2735 /* CommonExtensions in Frameworks */,
-				3708EFD427CE471500AD2735 /* CharacterSets in Frameworks */,
 				3764CEDD27BE124200DCFB51 /* KeyboardData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,7 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3797FC1627BF8A0800C6BB8D /* LookupData in Frameworks */,
-				3708EFCF27CD5B8300AD2735 /* CommonExtensions in Frameworks */,
+				37CB2EDB2818E95B0092E0DD /* CommonExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,10 +433,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3797FD0127BF94C200C6BB8D /* EmojiData in Frameworks */,
-				3708EFD127CD611600AD2735 /* CommonExtensions in Frameworks */,
+				37CB2ED12818E9040092E0DD /* CharacterSets in Frameworks */,
+				37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */,
+				37CB2ED52818E90E0092E0DD /* EmojiData in Frameworks */,
 				3797FCFF27BF94BE00C6BB8D /* LookupData in Frameworks */,
-				3708EFD627CE47F900AD2735 /* CharacterSets in Frameworks */,
 				3797FCFD27BF94B400C6BB8D /* KeyboardData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,9 +456,9 @@
 		3764CEA327BE103100DCFB51 = {
 			isa = PBXGroup;
 			children = (
-				3708EFD227CE3A6900AD2735 /* CharacterSets */,
-				3708EFCB27CD5AA200AD2735 /* CommonExtensions */,
-				3797FBE027BF880F00C6BB8D /* EmojiData */,
+				37CB2ECE2818E8E70092E0DD /* CommonExtensions */,
+				37CB2ECD2818E8DD0092E0DD /* CharacterSets */,
+				37CB2ECF2818E8EA0092E0DD /* EmojiData */,
 				3797FBDE27BF87FD00C6BB8D /* LookupData */,
 				3764CEDA27BE121900DCFB51 /* KeyboardData */,
 				3764CEAE27BE103200DCFB51 /* Jyutping */,
@@ -813,8 +813,8 @@
 			packageProductDependencies = (
 				3764CEDC27BE124200DCFB51 /* KeyboardData */,
 				37219BA727C0029D004FE219 /* LookupData */,
-				3708EFCC27CD5ADE00AD2735 /* CommonExtensions */,
-				3708EFD327CE471500AD2735 /* CharacterSets */,
+				37CB2ED62818E9210092E0DD /* CharacterSets */,
+				37CB2ED82818E9260092E0DD /* CommonExtensions */,
 			);
 			productName = Jyutping;
 			productReference = 3764CEAC27BE103100DCFB51 /* Jyutping.app */;
@@ -873,7 +873,7 @@
 			name = IOSApp;
 			packageProductDependencies = (
 				3797FC1527BF8A0800C6BB8D /* LookupData */,
-				3708EFCE27CD5B8300AD2735 /* CommonExtensions */,
+				37CB2EDA2818E95B0092E0DD /* CommonExtensions */,
 			);
 			productName = IOSApp;
 			productReference = 3797FBE527BF88BE00C6BB8D /* IOSApp.app */;
@@ -931,9 +931,9 @@
 			packageProductDependencies = (
 				3797FCFC27BF94B400C6BB8D /* KeyboardData */,
 				3797FCFE27BF94BE00C6BB8D /* LookupData */,
-				3797FD0027BF94C200C6BB8D /* EmojiData */,
-				3708EFD027CD611600AD2735 /* CommonExtensions */,
-				3708EFD527CE47F900AD2735 /* CharacterSets */,
+				37CB2ED02818E9040092E0DD /* CharacterSets */,
+				37CB2ED22818E9080092E0DD /* CommonExtensions */,
+				37CB2ED42818E90E0092E0DD /* EmojiData */,
 			);
 			productName = IOSKeyboard;
 			productReference = 3797FC7F27BF90C000C6BB8D /* IOSKeyboard.appex */;
@@ -1907,26 +1907,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3708EFCC27CD5ADE00AD2735 /* CommonExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CommonExtensions;
-		};
-		3708EFCE27CD5B8300AD2735 /* CommonExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CommonExtensions;
-		};
-		3708EFD027CD611600AD2735 /* CommonExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CommonExtensions;
-		};
-		3708EFD327CE471500AD2735 /* CharacterSets */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CharacterSets;
-		};
-		3708EFD527CE47F900AD2735 /* CharacterSets */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CharacterSets;
-		};
 		37219BA727C0029D004FE219 /* LookupData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LookupData;
@@ -1947,9 +1927,29 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = LookupData;
 		};
-		3797FD0027BF94C200C6BB8D /* EmojiData */ = {
+		37CB2ED02818E9040092E0DD /* CharacterSets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CharacterSets;
+		};
+		37CB2ED22818E9080092E0DD /* CommonExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonExtensions;
+		};
+		37CB2ED42818E90E0092E0DD /* EmojiData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = EmojiData;
+		};
+		37CB2ED62818E9210092E0DD /* CharacterSets */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CharacterSets;
+		};
+		37CB2ED82818E9260092E0DD /* CommonExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonExtensions;
+		};
+		37CB2EDA2818E95B0092E0DD /* CommonExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonExtensions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
