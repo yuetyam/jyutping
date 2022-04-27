@@ -3,22 +3,22 @@
 import PackageDescription
 
 let package = Package(
-        name: "LookupData",
+        name: "ContainersData",
         platforms: [.iOS(.v13), .macOS(.v11)],
         products: [
                 .library(
-                        name: "LookupData",
-                        targets: ["LookupData"]
+                        name: "ContainersData",
+                        targets: ["ContainersData"]
                 )
         ],
         targets: [
                 .target(
-                        name: "LookupData",
+                        name: "ContainersData",
                         resources: [.process("Resources")]
                 ),
                 .testTarget(
-                        name: "LookupDataTests",
-                        dependencies: ["LookupData"]
+                        name: "ContainersDataTests",
+                        dependencies: ["ContainersData"]
                 )
         ]
 )

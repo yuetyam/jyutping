@@ -3,7 +3,6 @@ import Cocoa
 import InputMethodKit
 import CommonExtensions
 import InputMethodData
-import LookupData
 import CharacterSets
 
 class JyutpingInputController: IMKInputController {

@@ -1,6 +1,6 @@
 import SwiftUI
 import CommonExtensions
-import LookupData
+import ContainersData
 
 struct JyutpingView: View {
 
@@ -8,7 +8,7 @@ struct JyutpingView: View {
         @State private var inputText: String = .empty
 
         private var rawCantonese: String { inputText.ideographicFiltered() }
-        private var jyutpings: [String] { LookupData.search(for: rawCantonese) }
+        private var jyutpings: [String] { ContainersData.search(for: rawCantonese) }
 
         var body: some View {
                 NavigationView {

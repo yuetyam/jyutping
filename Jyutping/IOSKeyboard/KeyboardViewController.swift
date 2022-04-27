@@ -1,7 +1,6 @@
 import UIKit
 import CommonExtensions
 import InputMethodData
-import LookupData
 import CharacterSets
 
 final class KeyboardViewController: UIInputViewController {

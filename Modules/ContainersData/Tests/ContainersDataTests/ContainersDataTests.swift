@@ -1,9 +1,9 @@
 import XCTest
-@testable import LookupData
+@testable import ContainersData
 
-final class LookupDataTests: XCTestCase {
+final class Tests: XCTestCase {
         func testLookup() throws {
-                let search: [String] = LookupData.search(for: "我")
+                let search: [String] = ContainersData.search(for: "我")
                 let lookup: String = search.first!
                 XCTAssertEqual(lookup, "ngo5")
         }
