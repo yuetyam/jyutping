@@ -605,7 +605,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
                 guard let searches = pinyinProvider?.search(for: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let romanizations: [String] = Lookup.look(for: lexicon.text)
                         let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
                         return candidates
                 }
@@ -623,7 +623,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
                 guard let searches = shapeData?.search(cangjie: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let romanizations: [String] = Lookup.look(for: lexicon.text)
                         let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
                         return candidates
                 }
@@ -641,7 +641,7 @@ final class KeyboardViewController: UIInputViewController {
                 }
                 guard let searches = shapeData?.search(stroke: text), !searches.isEmpty else { return }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let romanizations: [String] = Lookup.look(for: lexicon.text)
                         let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
                         return candidates
                 }
@@ -662,7 +662,7 @@ final class KeyboardViewController: UIInputViewController {
                         return
                 }
                 let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = LookupData.search(for: lexicon.text)
+                        let romanizations: [String] = Lookup.look(for: lexicon.text)
                         let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
                         return candidates
                 }

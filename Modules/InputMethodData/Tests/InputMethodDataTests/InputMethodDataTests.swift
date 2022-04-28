@@ -52,4 +52,12 @@ final class InputMethodDataTests: XCTestCase {
                 let first = candidates.first!
                 XCTAssertEqual(first.text, "查")
         }
+
+
+        // MARK: - Lookup
+        func testLookup() throws {
+                let search: [String] = Lookup.look(for: "我")
+                let first: String = search.first!
+                XCTAssertEqual(first, "ngo5")
+        }
 }
