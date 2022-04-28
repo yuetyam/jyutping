@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
         name: "InputMethodData",
-        platforms: [.iOS(.v13), .macOS(.v12)],
+        platforms: [.iOS(.v14), .macOS(.v12)],
         products: [
                 .library(
                         name: "InputMethodData",
