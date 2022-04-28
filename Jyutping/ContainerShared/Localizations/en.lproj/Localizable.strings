@@ -1,15 +1,13 @@
-// English
+// English (en)
 
-
-// System
+// General
 "Settings" = "Settings";
-"General" = "General";
-"Keyboards" = "Keyboards";
-"Add New Keyboards..." = "Add New Keyboards...";
 "Edit" = "Edit";
+"Back" = "Back";
+"OK" = "OK";
+"Cancel" = "Cancel";
 "Copy" = "Copy";
 
-// Tab Bar
 "Home" = "Home";
 "Jyutping" = "Jyutping";
 "About" = "About";
@@ -19,6 +17,9 @@
 
 "Text Field" = "Text Field";
 
+"How to enable this Keyboard" = "How to enable this Keyboard";
+"accessibility.how_to_enable_this_keyboard" = "Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access";
+
 // iOS 15
 "Jump to **Settings**" = "Jump to **Settings**";
 "Tap **Keyboards**" = "Tap **Keyboards**";
@@ -26,27 +27,28 @@
 "Turn on **Allow Full Access**" = "Turn on **Allow Full Access**";
 "Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
 "Go to **Settings**" = "Go to **Settings**";
+// end
 
-"How to enable this Keyboard" = "How to enable this Keyboard";
+// iOS 14
 "Jump to" = "Jump to";
-"Tap" = "Jump to";
-"Turn on" = "Jump to";
+"Tap" = "Tap";
+"Keyboards" = "Keyboards";
+"Turn on" = "Turn to";
 "Allow Full Access" = "Allow Full Access";
-"How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access";
-
 "Go to" = "Go to";
+// end
 
 "Tones Input" = "Tones Input";
-"v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
+"tones.input.description" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
 
 "Lookup Jyutping with Cangjie" = "Lookup Jyutping with Cangjie";
-"以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。" = "Start with “v”, then enter the Cangjie code. For example, enter “vdam”, candidate “查” will appear. The candidates will be displayed with the corresponding Jyutping.";
+"Cangjie Reverse Lookup Description" = "Start with “v”, then enter the Cangjie code. For example, enter “vdam”, candidate “查” will appear. The candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Pinyin" = "Lookup Jyutping with Pinyin";
-"以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。" = "Start with “r”, then enter the Pinyin code. For example, enter “rcha”, candidate “查” will appear. The candidates will be displayed with the corresponding Jyutping.";
+"Pinyin Reverse Lookup Description" = "Start with “r”, then enter the Pinyin code. For example, enter “rcha”, candidate “查” will appear. The candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Stroke" = "Lookup Jyutping with Stroke";
-"以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。" = "Start with “x”, then enter the Stroke code. For example, enter “xwsad”, candidate “木” will appear. The candidates will be displayed with the corresponding Jyutping.";
+"Stroke Reverse Lookup Description" = "Start with “x”, then enter the Stroke code. For example, enter “xwsad”, candidate “木” will appear. The candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Loengfan" = "Lookup Jyutping with Loengfan";
 "Loengfan Reverse Lookup Description" = "兩分即係將一個字分成兩部份。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
@@ -125,7 +127,6 @@
 "Email Feedback" = "Email Feedback";
 "Unable to compose mail" = "Unable to compose mail";
 "Mail Unavailable" = "Mail Unavailable";
-"OK" = "OK";
 "Copy Email Address" = "Copy Email Address";
 
 "Review on the App Store" = "Review on the App Store";
@@ -137,4 +138,3 @@
 "Support Author Plus" = "Support Author Plus";
 "Support Author Max" = "Support Author Max";
 "Thank You" = "Thank You";
-"Cancel" = "Cancel";

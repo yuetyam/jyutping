@@ -1,15 +1,12 @@
 // Traditional Chinese, Macao (zh-Hant-MO)
 
-
-// System
+// General
 "Settings" = "設定";
-"General" = "一般";
-"Keyboards" = "鍵盤";
-"Add New Keyboards..." = "新增鍵盤 ··· ";
 "Edit" = "編輯";
+"OK" = "好";
+"Cancel" = "取消";
 "Copy" = "複製";
 
-// Tab Bar
 "Home" = "首䈎";
 "Jyutping" = "粵拼";
 "About" = "關於";
@@ -19,6 +16,9 @@
 
 "Text Field" = "輸入框";
 
+"How to enable this Keyboard" = "如何啓用鍵盤";
+"accessibility.how_to_enable_this_keyboard" = "一：跳轉至「設定」；二：選擇「鍵盤」；三：開啓「粵拼」；四：開啓「允許全權取用」。";
+
 // iOS 15
 "Jump to **Settings**" = "跳轉至 **設定**";
 "Tap **Keyboards**" = "點選 **鍵盤**";
@@ -26,27 +26,28 @@
 "Turn on **Allow Full Access**" = "開啓 **允許全權取用**";
 "Haptic Feedback requires Full Access" = "振動反饋 Haptic Feedback 需要「全權取用」權限";
 "Go to **Settings**" = "前往 **設定**";
+// end
 
-"How to enable this Keyboard" = "如何啓用鍵盤";
+// iOS 14
 "Jump to" = "跳轉至";
 "Tap" = "點選";
+"Keyboards" = "鍵盤";
 "Turn on" = "開啓";
 "Allow Full Access" = "允許全權取用";
-"How to enable this Keyboard. Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access" = "如何啓用鍵盤。一：跳轉至「設定」；二：選擇「鍵盤」；三：開啓「粵拼」；四：開啓「允許全權取用」。";
-
 "Go to" = "前往";
+// end
 
 "Tones Input" = "聲調輸入";
-"v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
+"tones.input.description" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
 
 "Lookup Jyutping with Cangjie" = "用倉頡反查粵拼";
-"以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。" = "以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
-
-"Lookup Jyutping with Stroke" = "用筆畫輸入反查粵拼";
-"以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。" = "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。";
+"Cangjie Reverse Lookup Description" = "以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
 
 "Lookup Jyutping with Pinyin" = "用普通話拼音反查粵拼";
-"以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
+"Pinyin Reverse Lookup Description" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
+
+"Lookup Jyutping with Stroke" = "用筆畫輸入反查粵拼";
+"Stroke Reverse Lookup Description" = "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。";
 
 "Lookup Jyutping with Loengfan" = "用兩分反查粵拼";
 "Loengfan Reverse Lookup Description" = "兩分即係將一個字分成兩部份。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
@@ -125,7 +126,6 @@
 "Email Feedback" = "電郵反饋";
 "Unable to compose mail" = "無法編寫郵件";
 "Mail Unavailable" = "電郵不可用";
-"OK" = "好";
 "Copy Email Address" = "複製電郵地址";
 
 "Review on the App Store" = "前往 App Store 點評";
@@ -137,4 +137,3 @@
 "Support Author Plus" = "大力支持";
 "Support Author Max" = "鼎力支持";
 "Thank You" = "多謝支持";
-"Cancel" = "取消";

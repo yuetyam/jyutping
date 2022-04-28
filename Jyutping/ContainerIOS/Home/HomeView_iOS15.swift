@@ -14,7 +14,7 @@ struct HomeView_iOS15: View {
         }()
         @State private var isGuideViewExpanded: Bool = false
 
-        private let tonesInputContent: String = NSLocalizedString("v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去", comment: .empty)
+        private let tonesInputDescription: String = NSLocalizedString("tones.input.description", comment: .empty)
         private let strokes: String = """
         w = 橫(waang)
         s = 豎(syu)
@@ -108,6 +108,7 @@ struct HomeView_iOS15: View {
                                                                 Spacer()
                                                         }
                                                 }
+                                                .accessibilityLabel("accessibility.how_to_enable_this_keyboard")
                                         }
                                 } footer: {
                                         if !isKeyboardEnabled || isGuideViewExpanded {
@@ -133,25 +134,25 @@ struct HomeView_iOS15: View {
                                 Group {
                                         Section {
                                                 Text("Tones Input").font(.headline)
-                                                Text(tonesInputContent)
+                                                Text(verbatim: tonesInputDescription)
                                                         .font(.body.monospaced())
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
                                                         .contextMenu {
-                                                                MenuCopyButton(tonesInputContent)
+                                                                MenuCopyButton(tonesInputDescription)
                                                         }
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Cangjie").font(.headline)
-                                                Text("以 v 開始，再輸入倉頡碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6).textSelection(.enabled)
+                                                Text("Cangjie Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Pinyin").font(.headline)
-                                                Text("以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6).textSelection(.enabled)
+                                                Text("Pinyin Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Stroke").font(.headline)
-                                                Text("以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。").lineSpacing(6).textSelection(.enabled)
+                                                Text("Stroke Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
                                                 Text(verbatim: strokes)
                                                         .font(.body.monospaced())
                                                         .lineSpacing(5)
