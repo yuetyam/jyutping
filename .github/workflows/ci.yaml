@@ -1,8 +1,8 @@
 name: CI
 on: [push, pull_request, release]
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
+# env:
+#   DEVELOPER_DIR: /Applications/Xcode_13.3.app/Contents/Developer
 
 jobs:
   test_common_extensions:
@@ -46,19 +46,26 @@ jobs:
         run: swift test
         working-directory: ./Modules/EmojiData
   build_mac_ime:
-    name: Build Mac IME
+    name: Build macOS IME
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
-      - name: Build MacIME Scheme
+      - name: Build macOS IME Scheme
         run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+  build_mac_app:
+    name: Build macOS App
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build macOS Container Scheme
+        run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme "Container (macOS)" -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_app:
     name: Build iOS App
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
-      - name: Build IOSApp Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme IOSApp -configuration Debug -destination "platform=iOS Simulator,name=iPhone 13" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+      - name: Build iOS Container Scheme
+        run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme "Container (iOS)" -configuration Debug -destination "platform=iOS Simulator,name=iPhone 13" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_keyboard:
     name: Build iOS Keyboard
     runs-on: macos-12
