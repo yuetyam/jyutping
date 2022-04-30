@@ -94,7 +94,6 @@
 		37B160AD28190DBE00C95317 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37B1608328190DBD00C95317 /* Assets.xcassets */; };
 		37B160CF2819114E00C95317 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37B160D22819114E00C95317 /* Localizable.strings */; };
 		37B160DC2819125E00C95317 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37B160DB2819125E00C95317 /* Settings.bundle */; };
-		37B160DD2819125E00C95317 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37B160DB2819125E00C95317 /* Settings.bundle */; };
 		37B160EF281912EE00C95317 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E0281912ED00C95317 /* SafariView.swift */; };
 		37B160F1281912EE00C95317 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E1281912ED00C95317 /* ShareSheetView.swift */; };
 		37B160F3281912EE00C95317 /* EnhancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E2281912ED00C95317 /* EnhancedLabel.swift */; };
@@ -747,7 +746,6 @@
 				37B160E8281912ED00C95317 /* Extensions */,
 				37B160DF281912ED00C95317 /* ViewComponents */,
 				37B1608328190DBD00C95317 /* Assets.xcassets */,
-				37B160DB2819125E00C95317 /* Settings.bundle */,
 			);
 			path = ContainerShared;
 			sourceTree = "<group>";
@@ -827,6 +825,7 @@
 				37B16160281A02C100C95317 /* About */,
 				37B160BB2819104200C95317 /* Localizations */,
 				37B160BA28190EBB00C95317 /* Container--iOS--Info.plist */,
+				37B160DB2819125E00C95317 /* Settings.bundle */,
 			);
 			path = ContainerIOS;
 			sourceTree = "<group>";
@@ -1162,7 +1161,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B160DD2819125E00C95317 /* Settings.bundle in Resources */,
 				37B1618F281BA84400C95317 /* Localizable.strings in Resources */,
 				37B160AD28190DBE00C95317 /* Assets.xcassets in Resources */,
 				37B16184281BA81D00C95317 /* InfoPlist.strings in Resources */,
