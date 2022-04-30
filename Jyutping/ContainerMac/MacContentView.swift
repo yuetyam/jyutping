@@ -5,43 +5,34 @@ struct MacContentView: View {
                 NavigationView {
                         List {
                                 Section {
-                                        NavigationLink(destination: Text("Introductions")) {
+                                        NavigationLink(destination: MacIntroductionsView()) {
                                                 Label("Introductions", systemImage: "book")
                                         }
-                                        NavigationLink(destination: Text("Home")) {
-                                                Label("label.title.expressions", systemImage: "text.quote")
+                                        NavigationLink(destination: ExpressionsView().textSelection(.enabled)) {
+                                                Label("title.expressions", systemImage: "text.quote")
                                         }
                                 } header: {
                                         Text("Keyboard").textCase(.none)
                                 }
                                 Section {
-                                        NavigationLink(destination: Text("About")) {
+                                        NavigationLink(destination: MacSearchView()) {
                                                 Label("Search", systemImage: "magnifyingglass")
                                         }
-                                        NavigationLink(destination: Text("About")) {
+                                        NavigationLink(destination: InitialsTable()) {
                                                 Label("Initials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
-                                        NavigationLink(destination: Text("About")) {
+                                        NavigationLink(destination: FinalsTable()) {
                                                 Label("Finals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
-                                        NavigationLink(destination: Text("About")) {
+                                        NavigationLink(destination: TonesTable()) {
                                                 Label("Tones", systemImage: "bell")
-                                        }
-                                        NavigationLink(destination: Text("About")) {
-                                                Label("Resources", systemImage: "square.3.stack.3d")
                                         }
                                 } header: {
                                         Text("Jyutping").textCase(.none)
                                 }
                                 Section {
-                                        NavigationLink(destination: Text("About")) {
+                                        NavigationLink(destination: MacAboutView()) {
                                                 Label("About", systemImage: "globe.asia.australia")
-                                        }
-                                        NavigationLink(destination: Text("About")) {
-                                                Label("FAQ", systemImage: "questionmark.circle")
-                                        }
-                                        NavigationLink(destination: Text("About")) {
-                                                Label("Version", systemImage: "info.circle")
                                         }
                                 } header: {
                                         Text("About").textCase(.none)

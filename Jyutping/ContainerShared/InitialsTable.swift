@@ -2,9 +2,14 @@ import SwiftUI
 
 struct InitialsTable: View {
 
+        #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSize
+        #endif
 
         private var width: CGFloat {
+                #if os(macOS)
+                return 120
+                #else
                 if Device.isPhone {
                         return (UIScreen.main.bounds.width - 64) / 3.0
                 } else if horizontalSize == .compact {
@@ -12,9 +17,18 @@ struct InitialsTable: View {
                 } else {
                         return 120
                 }
+                #endif
         }
 
         var body: some View {
+                #if os(macOS)
+                List(0..<dataLines.count, id: \.self) { index in
+                        SyllableCell(dataLines[index], width: width)
+                }
+                .font(.body.monospaced())
+                .textSelection(.enabled)
+                .navigationTitle("Jyutping Initials")
+                #else
                 if #available(iOS 15.0, *) {
                         List(0..<dataLines.count, id: \.self) { index in
                                 SyllableCell(dataLines[index], width: width)
@@ -32,6 +46,7 @@ struct InitialsTable: View {
                         .navigationTitle("Jyutping Initials")
                         .navigationBarTitleDisplayMode(.inline)
                 }
+                #endif
         }
 
         private var dataLines: [String] {

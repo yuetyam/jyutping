@@ -13,6 +13,15 @@
 "About" = "關於";
 
 
+// macOS
+"Introductions" = "介紹";
+"Keyboard" = "鍵盤";
+"Search" = "檢索";
+"Initials" = "聲母";
+"Finals" = "韻母";
+"Tones" = "聲調";
+
+
 // MARK: - Home
 
 "Text Field" = "輸入框";

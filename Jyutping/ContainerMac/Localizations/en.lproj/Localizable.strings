@@ -12,11 +12,13 @@
 "Jyutping" = "Jyutping";
 "About" = "About";
 
-
-
-
-"label.title.expressions" = "Expressions";
-
+// macOS
+"Introductions" = "Introductions";
+"Keyboard" = "Keyboard";
+"Search" = "Search";
+"Initials" = "Initials";
+"Finals" = "Finals";
+"Tones" = "Tones";
 
 
 // MARK: - Home

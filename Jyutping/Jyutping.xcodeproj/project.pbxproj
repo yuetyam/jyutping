@@ -150,6 +150,14 @@
 		37CB2ED52818E90E0092E0DD /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED42818E90E0092E0DD /* EmojiData */; };
 		37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED62818E9210092E0DD /* CharacterSets */; };
 		37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED82818E9260092E0DD /* CommonExtensions */; };
+		37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE888281CD5F300461235 /* MacIntroductionsView.swift */; };
+		37EEE88A281CD70D00461235 /* ExpressionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615A281A02C100C95317 /* ExpressionsView.swift */; };
+		37EEE88B281CD8DC00461235 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16153281A02C100C95317 /* InitialsTable.swift */; };
+		37EEE88C281CD90A00461235 /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16156281A02C100C95317 /* SyllableCell.swift */; };
+		37EEE88E281CDA0900461235 /* FinalsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16157281A02C100C95317 /* FinalsTable.swift */; };
+		37EEE88F281CDA1A00461235 /* TonesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16152281A02C100C95317 /* TonesTable.swift */; };
+		37EEE891281CDB4000461235 /* MacAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE890281CDB4000461235 /* MacAboutView.swift */; };
+		37EEE893281CE21800461235 /* MacSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE892281CE21800461235 /* MacSearchView.swift */; };
 		37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F31F4E27D565EA008399DB /* WindowPattern.swift */; };
 /* End PBXBuildFile section */
 
@@ -407,6 +415,9 @@
 		37EEE87F281BAAD300461235 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE880281BAAD400461235 /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE881281BAAD500461235 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37EEE888281CD5F300461235 /* MacIntroductionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacIntroductionsView.swift; sourceTree = "<group>"; };
+		37EEE890281CDB4000461235 /* MacAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAboutView.swift; sourceTree = "<group>"; };
+		37EEE892281CE21800461235 /* MacSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacSearchView.swift; sourceTree = "<group>"; };
 		37F31F4E27D565EA008399DB /* WindowPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -728,6 +739,11 @@
 				37B160E7281912ED00C95317 /* Device.swift */,
 				37B160ED281912EE00C95317 /* Speech.swift */,
 				37B160EC281912ED00C95317 /* Syllable2IPA.swift */,
+				37B1615A281A02C100C95317 /* ExpressionsView.swift */,
+				37B16153281A02C100C95317 /* InitialsTable.swift */,
+				37B16157281A02C100C95317 /* FinalsTable.swift */,
+				37B16152281A02C100C95317 /* TonesTable.swift */,
+				37B16156281A02C100C95317 /* SyllableCell.swift */,
 				37B160E8281912ED00C95317 /* Extensions */,
 				37B160DF281912ED00C95317 /* ViewComponents */,
 				37B1608328190DBD00C95317 /* Assets.xcassets */,
@@ -740,6 +756,9 @@
 			isa = PBXGroup;
 			children = (
 				37B1617D281A0E0400C95317 /* MacContentView.swift */,
+				37EEE888281CD5F300461235 /* MacIntroductionsView.swift */,
+				37EEE892281CE21800461235 /* MacSearchView.swift */,
+				37EEE890281CDB4000461235 /* MacAboutView.swift */,
 				37B16183281BA7D600C95317 /* Localizations */,
 				37B16150281961A100C95317 /* Container--macOS--Info.plist */,
 				37B1608F28190DBD00C95317 /* macOS.entitlements */,
@@ -818,10 +837,6 @@
 				37B16155281A02C100C95317 /* JyutpingView_iOS14.swift */,
 				37B16158281A02C100C95317 /* JyutpingView_iOS15.swift */,
 				37B16154281A02C100C95317 /* Sections.swift */,
-				37B16153281A02C100C95317 /* InitialsTable.swift */,
-				37B16157281A02C100C95317 /* FinalsTable.swift */,
-				37B16152281A02C100C95317 /* TonesTable.swift */,
-				37B16156281A02C100C95317 /* SyllableCell.swift */,
 			);
 			path = Jyutping;
 			sourceTree = "<group>";
@@ -832,7 +847,6 @@
 				37B1615D281A02C100C95317 /* HomeView_iOS14.swift */,
 				37B1615E281A02C100C95317 /* HomeView_iOS15.swift */,
 				37B1615B281A02C100C95317 /* IntroductionsView.swift */,
-				37B1615A281A02C100C95317 /* ExpressionsView.swift */,
 				37B1615C281A02C100C95317 /* FAQView.swift */,
 				37B1615F281A02C100C95317 /* PrivacyNoticeView.swift */,
 			);
@@ -1312,14 +1326,22 @@
 			files = (
 				37B16102281912EE00C95317 /* ImageExtensions.swift in Sources */,
 				37B16175281A06C900C95317 /* ColorExtensions.swift in Sources */,
+				37EEE88E281CDA0900461235 /* FinalsTable.swift in Sources */,
+				37EEE891281CDB4000461235 /* MacAboutView.swift in Sources */,
+				37EEE893281CE21800461235 /* MacSearchView.swift in Sources */,
 				37B1617E281A0E0400C95317 /* MacContentView.swift in Sources */,
 				37B160FA281912EE00C95317 /* Speaker.swift in Sources */,
 				37B1610A281912EE00C95317 /* AppMaster.swift in Sources */,
+				37EEE88F281CDA1A00461235 /* TonesTable.swift in Sources */,
+				37EEE88C281CD90A00461235 /* SyllableCell.swift in Sources */,
+				37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */,
 				37B16108281912EE00C95317 /* Speech.swift in Sources */,
 				37B16104281912EE00C95317 /* TextExtensions.swift in Sources */,
+				37EEE88A281CD70D00461235 /* ExpressionsView.swift in Sources */,
 				37B16106281912EE00C95317 /* Syllable2IPA.swift in Sources */,
 				37B160A928190DBE00C95317 /* ContainerApp.swift in Sources */,
 				37B1617C281A0BBF00C95317 /* EnhancedLabel.swift in Sources */,
+				37EEE88B281CD8DC00461235 /* InitialsTable.swift in Sources */,
 				37B16174281A06B600C95317 /* MenuCopyButton.swift in Sources */,
 				37B160FE281912EE00C95317 /* Device.swift in Sources */,
 			);

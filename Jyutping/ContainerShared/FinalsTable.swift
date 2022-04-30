@@ -2,9 +2,14 @@ import SwiftUI
 
 struct FinalsTable: View {
 
+        #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSize
+        #endif
 
         private var width: CGFloat {
+                #if os(macOS)
+                return 120
+                #else
                 if Device.isPhone {
                         return (UIScreen.main.bounds.width - 64) / 3.0
                 } else if horizontalSize == .compact {
@@ -12,9 +17,25 @@ struct FinalsTable: View {
                 } else {
                         return 120
                 }
+                #endif
         }
 
         var body: some View {
+                #if os(macOS)
+                List {
+                        ForEach(0..<blocks.count, id: \.self) { blockIndex in
+                                let lines = blocks[blockIndex]
+                                Section {
+                                        ForEach(0..<lines.count, id: \.self) { index in
+                                                SyllableCell(lines[index], width: width)
+                                        }
+                                }
+                        }
+                }
+                .font(.body.monospaced())
+                .textSelection(.enabled)
+                .navigationTitle("Jyutping Finals")
+                #else
                 if #available(iOS 15.0, *) {
                         List {
                                 ForEach(0..<blocks.count, id: \.self) { blockIndex in
@@ -46,6 +67,7 @@ struct FinalsTable: View {
                         .navigationTitle("Jyutping Finals")
                         .navigationBarTitleDisplayMode(.inline)
                 }
+                #endif
         }
 
         private var blocks: [[String]] {

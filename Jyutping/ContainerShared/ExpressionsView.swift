@@ -302,8 +302,10 @@ struct ExpressionsView: View {
                                 }
                         }
                 }
-                .listStyle(.insetGrouped)
                 .navigationTitle("title.expressions")
+                #if os(iOS)
+                .listStyle(.insetGrouped)
                 .navigationBarTitleDisplayMode(.inline)
+                #endif
         }
 }

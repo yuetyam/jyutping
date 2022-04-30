@@ -2,9 +2,14 @@ import SwiftUI
 
 struct TonesTable: View {
 
+        #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSize
+        #endif
 
         private var width: CGFloat {
+                #if os(macOS)
+                return 120
+                #else
                 if Device.isPhone {
                         return (UIScreen.main.bounds.width - 64) / 4.0
                 } else if horizontalSize == .compact {
@@ -12,6 +17,7 @@ struct TonesTable: View {
                 } else {
                         return 120
                 }
+                #endif
         }
 
         private let tonesDescription: VStack = {
@@ -30,6 +36,20 @@ struct TonesTable: View {
         }()
 
         var body: some View {
+                #if os(macOS)
+                List {
+                        Section {
+                                ForEach(0..<dataLines.count, id: \.self) { index in
+                                        ToneCell(dataLines[index], width: width)
+                                }
+                        }
+                        Section {
+                                tonesDescription
+                        }
+                }
+                .textSelection(.enabled)
+                .navigationTitle("Jyutping Tones")
+                #else
                 if #available(iOS 15.0, *) {
                         List {
                                 Section {
@@ -60,6 +80,7 @@ struct TonesTable: View {
                         .navigationTitle("Jyutping Tones")
                         .navigationBarTitleDisplayMode(.inline)
                 }
+                #endif
         }
 
         private var dataLines: [String] {
