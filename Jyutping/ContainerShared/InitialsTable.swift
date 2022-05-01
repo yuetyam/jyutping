@@ -6,7 +6,7 @@ struct InitialsTable: View {
         @Environment(\.horizontalSizeClass) var horizontalSize
         #endif
 
-        private var width: CGFloat {
+        private var responsiveWidth: CGFloat {
                 #if os(macOS)
                 return 120
                 #else
@@ -21,6 +21,8 @@ struct InitialsTable: View {
         }
 
         var body: some View {
+                let dataLines: [String] = sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
+                let width: CGFloat = responsiveWidth
                 #if os(macOS)
                 List(0..<dataLines.count, id: \.self) { index in
                         SyllableCell(dataLines[index], width: width)
@@ -47,10 +49,6 @@ struct InitialsTable: View {
                         .navigationBarTitleDisplayMode(.inline)
                 }
                 #endif
-        }
-
-        private var dataLines: [String] {
-                return sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
         }
 
 

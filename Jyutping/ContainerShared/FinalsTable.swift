@@ -6,7 +6,7 @@ struct FinalsTable: View {
         @Environment(\.horizontalSizeClass) var horizontalSize
         #endif
 
-        private var width: CGFloat {
+        private var responsiveWidth: CGFloat {
                 #if os(macOS)
                 return 120
                 #else
@@ -21,6 +21,20 @@ struct FinalsTable: View {
         }
 
         var body: some View {
+
+                let blocks: [[String]] = {
+                        return sourceText
+                                .trimmingCharacters(in: .whitespacesAndNewlines)
+                                .components(separatedBy: ".")
+                                .map({
+                                        $0.trimmingCharacters(in: .whitespacesAndNewlines)
+                                                .components(separatedBy: .newlines)
+                                                .map({ $0.trimmingCharacters(in: .whitespaces)})
+                                })
+                }()
+
+                let width: CGFloat = responsiveWidth
+
                 #if os(macOS)
                 List {
                         ForEach(0..<blocks.count, id: \.self) { blockIndex in
@@ -68,17 +82,6 @@ struct FinalsTable: View {
                         .navigationBarTitleDisplayMode(.inline)
                 }
                 #endif
-        }
-
-        private var blocks: [[String]] {
-                return sourceText
-                        .trimmingCharacters(in: .whitespacesAndNewlines)
-                        .components(separatedBy: ".")
-                        .map({
-                                $0.trimmingCharacters(in: .whitespacesAndNewlines)
-                                        .components(separatedBy: .newlines)
-                                        .map({ $0.trimmingCharacters(in: .whitespaces)})
-                        })
         }
 
 

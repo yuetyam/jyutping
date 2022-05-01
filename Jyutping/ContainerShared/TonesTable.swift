@@ -6,7 +6,7 @@ struct TonesTable: View {
         @Environment(\.horizontalSizeClass) var horizontalSize
         #endif
 
-        private var width: CGFloat {
+        private var responsiveWidth: CGFloat {
                 #if os(macOS)
                 return 120
                 #else
@@ -16,6 +16,19 @@ struct TonesTable: View {
                         return 80
                 } else {
                         return 120
+                }
+                #endif
+        }
+        private var responsiveFont: Font {
+                #if os(macOS)
+                return Font.body
+                #else
+                if Device.isPhone {
+                        return Font.callout
+                } else if horizontalSize == .compact {
+                        return Font.subheadline
+                } else {
+                        return Font.body
                 }
                 #endif
         }
@@ -36,6 +49,8 @@ struct TonesTable: View {
         }()
 
         var body: some View {
+                let dataLines: [String] = sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
+                let width: CGFloat = responsiveWidth
                 #if os(macOS)
                 List {
                         Section {
@@ -61,10 +76,10 @@ struct TonesTable: View {
                                         tonesDescription
                                 }
                         }
+                        .font(responsiveFont)
                         .textSelection(.enabled)
                         .navigationTitle("Jyutping Tones")
                         .navigationBarTitleDisplayMode(.inline)
-
                 } else {
                         List {
                                 Section {
@@ -76,15 +91,12 @@ struct TonesTable: View {
                                         tonesDescription
                                 }
                         }
+                        .font(responsiveFont)
                         .listStyle(.insetGrouped)
                         .navigationTitle("Jyutping Tones")
                         .navigationBarTitleDisplayMode(.inline)
                 }
                 #endif
-        }
-
-        private var dataLines: [String] {
-                return sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
         }
 
 
@@ -100,6 +112,7 @@ private let sourceText: String = """
 法 faat3,3,低陰入,3
 罰 fat6,2,陽入,6
 """
+
 
 }
 
@@ -133,3 +146,4 @@ private struct ToneCell: View {
                 }
         }
 }
+

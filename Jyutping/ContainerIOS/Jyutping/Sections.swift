@@ -36,8 +36,8 @@ struct SearchLinksView: View {
 
 struct JyutpingResourcesLinksView: View {
         var body: some View {
-                LinkSafariView(url: URL(string: "https://www.jyutping.org")!) {
-                        FootnoteLabelView(title: Text("Jyutping"), footnote: "www.jyutping.org")
+                LinkSafariView(url: URL(string: "https://jyutping.org")!) {
+                        FootnoteLabelView(title: Text("Jyutping"), footnote: "jyutping.org")
                 }
                 LinkSafariView(url: URL(string: "https://www.lshk.org/jyutping")!) {
                         FootnoteLabelView(title: Text("Jyutping - LSHK"), footnote: "www.lshk.org/jyutping")
@@ -46,7 +46,7 @@ struct JyutpingResourcesLinksView: View {
                         FootnoteLabelView(title: Text(verbatim: "粵語拼音速遞 - CUHK"), footnote: "www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
                 }
                 LinkSafariView(url: URL(string: "https://www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")!) {
-                        FootnoteLabelView(title: Text("Learn Jyutping"), footnote: "www.youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")
+                        FootnoteLabelView(title: Text("Learn Jyutping"), footnote: "youtube.com/channel/UCcmAegX-cgcOOconZIwqynw")
                 }
         }
 }
