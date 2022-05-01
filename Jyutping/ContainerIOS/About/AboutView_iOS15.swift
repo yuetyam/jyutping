@@ -60,15 +60,6 @@ struct AboutView_iOS15: View {
                                         }
                                 }
                                 Section {
-                                        // Twitter App supports Universal Links
-                                        Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
-                                                EnhancedLabel("Twitter", icon: "at", symbol: .arrowUpForward)
-                                        }
-                                        .contextMenu {
-                                                UsernameCopyButton("JyutpingApp")
-                                                URLCopyButton("https://twitter.com/JyutpingApp")
-                                        }
-
                                         Button {
                                                 let appUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
                                                 let webUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
@@ -79,6 +70,15 @@ struct AboutView_iOS15: View {
                                         .contextMenu {
                                                 UsernameCopyButton("Cantonese")
                                                 URLCopyButton("https://truthsocial.com/@Cantonese")
+                                        }
+
+                                        // Twitter App supports Universal Links
+                                        Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
+                                                EnhancedLabel("Twitter", icon: "at", symbol: .arrowUpForward)
+                                        }
+                                        .contextMenu {
+                                                UsernameCopyButton("JyutpingApp")
+                                                URLCopyButton("https://twitter.com/JyutpingApp")
                                         }
 
                                         Button {
@@ -132,8 +132,6 @@ struct AboutView_iOS15: View {
                                                 }
                                         }
                                         .sheet(isPresented: $isDonationViewPresented) {
-                                                print("dismissed")
-                                        } content: {
                                                 DonationView(isPresented: $isDonationViewPresented)
                                         }
                                 }
@@ -155,7 +153,7 @@ struct DonationView: View {
                         List {
                                 Section {
                                         Button {
-                                                print("Purchased")
+                                                print("IAP")
                                         } label: {
                                                 HStack {
                                                         Spacer()
@@ -167,7 +165,7 @@ struct DonationView: View {
                                 }
                                 Section {
                                         Button {
-                                                print("Purchased")
+                                                print("IAP")
                                         } label: {
                                                 HStack {
                                                         Spacer()
@@ -179,7 +177,7 @@ struct DonationView: View {
                                 }
                                 Section {
                                         Button {
-                                                print("Purchased")
+                                                print("IAP")
                                         } label: {
                                                 HStack {
                                                         Spacer()
