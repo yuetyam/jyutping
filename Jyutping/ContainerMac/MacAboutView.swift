@@ -51,6 +51,13 @@ struct MacAboutView: View {
                         }
                         Section {
                                 HStack(spacing: 32) {
+                                        Link(destination: URL(string: "https://truthsocial.com/@Cantonese")!) {
+                                                Label("TRUTH Social", systemImage: "t.square")
+                                        }
+                                        Text(verbatim: "https://truthsocial.com/@Cantonese").font(.body.monospaced())
+                                        Spacer()
+                                }
+                                HStack(spacing: 32) {
                                         Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
                                                 Label("Twitter", systemImage: "at")
                                         }
