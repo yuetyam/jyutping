@@ -272,7 +272,10 @@ class JyutpingInputController: IMKInputController {
                 push(joined)
         }
         private func strokeReverseLookup() {
-                let text: String = String(processingText.dropFirst())
+
+                // 橫h => 橫w, 撇p => 撇a, 捺n => 點d
+                let text: String = processingText.dropFirst().replacingOccurrences(of: "h", with: "w").replacingOccurrences(of: "p", with: "a").replacingOccurrences(of: "n", with: "d")
+
                 guard !text.isEmpty else {
                         candidates = []
                         return
@@ -555,7 +558,7 @@ class JyutpingInputController: IMKInputController {
                 case .none:
                         break
                 case .some("r"), .some("v"), .some("x"), .some("q"):
-                        if bufferText.count == candidate.input.count + 1 {
+                        if bufferText.count <= candidate.input.count + 1 {
                                 bufferText = .empty
                         } else {
                                 let first: String = String(bufferText.first!)
