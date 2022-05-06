@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct MacIntroductionsView: View {
 
@@ -12,46 +13,81 @@ struct MacIntroductionsView: View {
         """
 
         var body: some View {
-                List {
-                        Section {
-                                Text(verbatim: "Note: This App does NOT contain an Input Method / Keyboard for macOS.")
+                ScrollView {
+                        LazyVStack(spacing: 32) {
+                                HStack {
+                                        Text(verbatim: "Note: This App does NOT contain an Input Method / Keyboard for macOS.")
+                                        Spacer()
+                                }
+                                .block()
+
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("Tones Input").font(.headline)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text(verbatim: tonesInputDescription).font(.body.monospaced()).lineSpacing(5)
+                                                Spacer()
+                                        }
+                                }
+                                .block()
+
+                                BlockView(heading: "Lookup Jyutping with Cangjie", content: "Cangjie Reverse Lookup Description")
+                                BlockView(heading: "Lookup Jyutping with Pinyin", content: "Pinyin Reverse Lookup Description")
+
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("Lookup Jyutping with Stroke").font(.headline)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Stroke Reverse Lookup Description").lineSpacing(6)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text(verbatim: strokes).font(.body.monospaced()).lineSpacing(5)
+                                                Spacer()
+                                        }
+                                }
+                                .block()
+
+                                BlockView(heading: "Lookup Jyutping with Loengfan", content: "Loengfan Reverse Lookup Description")
+                                BlockView(heading: "Period (Full Stop) Shortcut", content: "Double tapping the space bar will insert a period followed by a space")
+                                BlockView(heading: "Clear the input buffer syllables", content: "Swipe from right to left on the Delete key will clear the pre-edited syllables")
                         }
-                        Section {
-                                Text("Tones Input").font(.headline)
-                                Text(verbatim: tonesInputDescription)
-                                        .font(.body.monospaced())
-                                        .lineSpacing(5)
-                                        .fixedSize(horizontal: true, vertical: false)
-                        }
-                        Section {
-                                Text("Lookup Jyutping with Cangjie").font(.headline)
-                                Text("Cangjie Reverse Lookup Description").lineSpacing(6)
-                        }
-                        Section {
-                                Text("Lookup Jyutping with Pinyin").font(.headline)
-                                Text("Pinyin Reverse Lookup Description").lineSpacing(6)
-                        }
-                        Section {
-                                Text("Lookup Jyutping with Stroke").font(.headline)
-                                Text("Stroke Reverse Lookup Description").lineSpacing(6)
-                                Text(verbatim: strokes)
-                                        .font(.body.monospaced())
-                                        .lineSpacing(5)
-                        }
-                        Section {
-                                Text("Lookup Jyutping with Loengfan").font(.headline)
-                                Text("Loengfan Reverse Lookup Description").lineSpacing(6)
-                        }
-                        Section {
-                                Text("Period (Full Stop) Shortcut").font(.headline)
-                                Text("Double tapping the space bar will insert a period followed by a space").lineSpacing(6)
-                        }
-                        Section {
-                                Text("Clear the input buffer syllables").font(.headline)
-                                Text("Swipe from right to left on the Delete key will clear the pre-edited syllables").lineSpacing(6)
-                        }
+                        .textSelection(.enabled)
+                        .padding(32)
                 }
-                .textSelection(.enabled)
                 .navigationTitle("Introductions")
         }
 }
+
+
+struct BlockView: View {
+
+        let heading: LocalizedStringKey
+        let content: LocalizedStringKey
+
+        var body: some View {
+                VStack(spacing: 16) {
+                        HStack {
+                                Text(heading).font(.headline)
+                                Spacer()
+                        }
+                        HStack {
+                                Text(content).lineSpacing(6)
+                                Spacer()
+                        }
+                }
+                .block()
+        }
+}
+
+
+extension View {
+        func block(cornerRadius: CGFloat = 8) -> some View {
+                return self.padding().background(Color(nsColor: NSColor.textBackgroundColor), in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        }
+}
+
