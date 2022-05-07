@@ -10,8 +10,10 @@ extension Color {
                         } else {
                                 return Color(UIColor.systemBackground)
                         }
-                        #else
+                        #elseif os(macOS)
                         return Color(nsColor: NSColor.windowBackgroundColor)
+                        #else
+                        return Color.black
                         #endif
                 default:
                         #if os(iOS)
@@ -20,8 +22,10 @@ extension Color {
                         } else {
                                 return Color(UIColor.secondarySystemBackground)
                         }
+                        #elseif os(macOS)
+                        return Color(nsColor: NSColor.windowBackgroundColor)
                         #else
-                        return Color(nsColor: NSColor.controlBackgroundColor)
+                        return Color.gray
                         #endif
 
                 }
