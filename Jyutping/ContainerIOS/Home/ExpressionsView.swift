@@ -142,26 +142,6 @@ struct ExpressionsView: View {
                                         }
                                 }
                                 .lineSpacing(5)
-
-                                Section {
-                                        Label {
-                                                Text(verbatim: "區分 曬、晒、哂")
-                                        } icon: {
-                                                Image(systemName: "6.circle")
-                                        }
-                                        .font(.headline)
-
-                                        Label {
-                                                Text(verbatim: """
-                                                曬 saai3：曬太陽。
-                                                晒 saai3：助詞，全部、所有、完。
-                                                哂 can2：譏笑。
-                                                """)
-                                        } icon: {
-                                                Image(systemName: "info.circle").hidden()
-                                        }
-                                }
-                                .lineSpacing(5)
                         }
                         Group {
                                 Section {
@@ -173,7 +153,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "的得地")
                                                 }
                                         } icon: {
-                                                Image(systemName: "7.circle").font(.headline)
+                                                Image(systemName: "6.circle").font(.headline)
                                         }
                                         Label {
                                                 Text(verbatim: """
@@ -196,7 +176,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "吧")
                                                 }
                                         } icon: {
-                                                Image(systemName: "8.circle").font(.headline)
+                                                Image(systemName: "7.circle").font(.headline)
                                         }
                                         Label {
                                                 Text(verbatim: "下個禮拜會出啩。")
@@ -228,7 +208,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "了")
                                                 }
                                         } icon: {
-                                                Image(systemName: "9.circle").font(.headline)
+                                                Image(systemName: "8.circle").font(.headline)
                                         }
                                         Label {
                                                 Text(verbatim: "各位，我毋客氣啦。")
@@ -260,7 +240,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "駛、洗")
                                                 }
                                         } icon: {
-                                                Image(systemName: "10.circle").font(.headline)
+                                                Image(systemName: "9.circle").font(.headline)
                                         }
                                         Label {
                                                 Text(verbatim: "毋使驚")
@@ -287,7 +267,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "宜家")
                                                 }
                                         } icon: {
-                                                Image(systemName: "11.circle").font(.headline)
+                                                Image(systemName: "10.circle").font(.headline)
                                         }
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
