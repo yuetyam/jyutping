@@ -15,22 +15,22 @@ struct ExpressionsView: View {
                                         Label {
                                                 Text(verbatim: "單數：你")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "複數：你哋／你等")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "毋用「您」。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」")
                                         } icon: {
-                                                Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
+                                                Image.warning.foregroundColor(.orange)
                                         }
                                         Label {
                                                 Text(verbatim: "毋推薦用「妳」，冇必要畫蛇添足")
                                         } icon: {
-                                                Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
+                                                Image.warning.foregroundColor(.orange)
                                         }
                                 }
                                 Section {
@@ -44,17 +44,17 @@ struct ExpressionsView: View {
                                         Label {
                                                 Text(verbatim: "單數：佢")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "複數：佢哋／佢等")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "避免：他、她、它、他們、她們")
                                         } icon: {
-                                                Image(systemName: "exclamationmark.circle").foregroundColor(.orange)
+                                                Image.warning.foregroundColor(.orange)
                                         }
                                         Label {
                                                 Text(verbatim: "佢亦作渠、⿰亻渠、其")
@@ -85,7 +85,7 @@ struct ExpressionsView: View {
                                                 例：我喺天后站落車。
                                                 """)
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green).hidden()
+                                                Image.checkmark.foregroundColor(.green).hidden()
                                         }
                                 }
                                 .lineSpacing(5)
@@ -111,7 +111,7 @@ struct ExpressionsView: View {
                                                 例：佢畀人㨃冧咗。
                                                 """)
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green).hidden()
+                                                Image.checkmark.foregroundColor(.green).hidden()
                                         }
                                 }
                                 .lineSpacing(5)
@@ -138,7 +138,7 @@ struct ExpressionsView: View {
                                                 例：噉又未必。
                                                 """)
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green).hidden()
+                                                Image.checkmark.foregroundColor(.green).hidden()
                                         }
                                 }
                                 .lineSpacing(5)
@@ -162,7 +162,7 @@ struct ExpressionsView: View {
                                                 例：細細聲噉講話。
                                                 """)
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green).hidden()
+                                                Image.checkmark.foregroundColor(.green).hidden()
                                         }
                                 }
                                 .lineSpacing(5)
@@ -181,22 +181,22 @@ struct ExpressionsView: View {
                                         Label {
                                                 Text(verbatim: "下個禮拜會出啩。")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "毋係啊嘛，真係冇？")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "下個禮拜會出吧。")
                                         } icon: {
-                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                                Image.xmark.foregroundColor(.red)
                                         }
                                         Label {
                                                 Text(verbatim: "毋係吧，真係冇？")
                                         } icon: {
-                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                                Image.xmark.foregroundColor(.red)
                                         }
                                 }
                                 Section {
@@ -213,22 +213,22 @@ struct ExpressionsView: View {
                                         Label {
                                                 Text(verbatim: "各位，我毋客氣啦。")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "係嘞，你試過箇間餐廳未呀？")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "各位，我毋客氣了。")
                                         } icon: {
-                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                                Image.xmark.foregroundColor(.red)
                                         }
                                         Label {
                                                 Text(verbatim: "係了，你試過箇間餐廳未呀？")
                                         } icon: {
-                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                                Image.xmark.foregroundColor(.red)
                                         }
                                 }
                                 Section {
@@ -245,17 +245,17 @@ struct ExpressionsView: View {
                                         Label {
                                                 Text(verbatim: "毋使驚")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "毋駛驚")
                                         } icon: {
-                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                                Image.xmark.foregroundColor(.red)
                                         }
                                         Label {
                                                 Text(verbatim: "毋洗驚")
                                         } icon: {
-                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                                Image.xmark.foregroundColor(.red)
                                         }
                                 }
                                 Section {
@@ -272,12 +272,12 @@ struct ExpressionsView: View {
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
                                         } icon: {
-                                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                                                Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
                                                 Text(verbatim: "我宜家食緊飯。")
                                         } icon: {
-                                                Image(systemName: "xmark.circle").foregroundColor(.red)
+                                                Image.xmark.foregroundColor(.red)
                                         }
                                 }
                         }
