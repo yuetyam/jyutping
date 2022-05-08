@@ -64,7 +64,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "係")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "hai6").font(.body)
+                                                                Text(verbatim: "hai6").font(.body.monospaced())
                                                                 Speaker("hai6")
                                                         }
                                                         Text(verbatim: "謂語，義同是。")
@@ -72,7 +72,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "喺")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "hai2").font(.body)
+                                                                Text(verbatim: "hai2").font(.body.monospaced())
                                                                 Speaker("hai2")
                                                         }
                                                         Text(verbatim: "表方位、時間，義同在。")
@@ -95,7 +95,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "諗")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "nam2").font(.body)
+                                                                Text(verbatim: "nam2").font(.body.monospaced())
                                                                 Speaker("nam2")
                                                         }
                                                         Text(verbatim: "想、思考、覺得。")
@@ -103,7 +103,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "冧")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "lam3").font(.body)
+                                                                Text(verbatim: "lam3").font(.body.monospaced())
                                                                 Speaker("lam3")
                                                         }
                                                         Text(verbatim: "表示倒塌、倒下。")
@@ -127,7 +127,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "咁")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "gam3").font(.body)
+                                                                Text(verbatim: "gam3").font(.body.monospaced())
                                                                 Speaker("gam3")
                                                         }
                                                         Text(verbatim: "音同「禁」。")
@@ -135,7 +135,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "噉")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "gam2").font(.body)
+                                                                Text(verbatim: "gam2").font(.body.monospaced())
                                                                 Speaker("gam2")
                                                         }
                                                         Text(verbatim: "音同「感」。")
