@@ -14,7 +14,27 @@ struct Speaker: View {
         private var background: Color {
                 return Color.backgroundColor(colorScheme: colorScheme)
         }
-        private let length: CGFloat = 32
+        private let length: CGFloat = {
+                #if os(iOS)
+                return 32
+                #else
+                return 24
+                #endif
+        }()
+        private let speakerLength: CGFloat = {
+                #if os(iOS)
+                return 20
+                #else
+                return 16
+                #endif
+        }()
+        private let speakingLeading: CGFloat = {
+                #if os(iOS)
+                return 6
+                #else
+                return 4
+                #endif
+        }()
 
         @State private var isSpeaking: Bool = false
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -24,7 +44,7 @@ struct Speaker: View {
                         Image.speaking
                                 .resizable()
                                 .scaledToFit()
-                                .padding(.leading, 6)
+                                .padding(.leading, speakingLeading)
                                 .frame(width: length, height: length)
                                 .foregroundColor(.blue)
                                 .onTapGesture {
@@ -42,7 +62,7 @@ struct Speaker: View {
                                 Image.speaker
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(width: 20, height: 20)
+                                        .frame(width: speakerLength, height: speakerLength)
                                         .foregroundColor(.blue)
                         }
                         .frame(width: length, height: length)

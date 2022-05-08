@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3708EFC727CA4C0A00AD2735 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */; };
+		370E71F5282836750033B708 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370E71F4282836750033B708 /* ViewExtensions.swift */; };
+		370E71F6282836750033B708 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370E71F4282836750033B708 /* ViewExtensions.swift */; };
+		370E71F8282844530033B708 /* MacExpressionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370E71F7282844530033B708 /* MacExpressionsView.swift */; };
 		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
@@ -214,6 +217,8 @@
 
 /* Begin PBXFileReference section */
 		3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
+		370E71F4282836750033B708 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		370E71F7282844530033B708 /* MacExpressionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacExpressionsView.swift; sourceTree = "<group>"; };
 		370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
 		3722933627BECF310077F15B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3722933827BECF340077F15B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -755,6 +760,7 @@
 			children = (
 				37B1617D281A0E0400C95317 /* MacContentView.swift */,
 				37EEE888281CD5F300461235 /* MacIntroductionsView.swift */,
+				370E71F7282844530033B708 /* MacExpressionsView.swift */,
 				37EEE892281CE21800461235 /* MacSearchView.swift */,
 				37EEE890281CDB4000461235 /* MacAboutView.swift */,
 				37B16183281BA7D600C95317 /* Localizations */,
@@ -808,6 +814,7 @@
 				37B160EA281912ED00C95317 /* ImageExtensions.swift */,
 				37B160EB281912ED00C95317 /* TextExtensions.swift */,
 				37B16172281A057500C95317 /* ColorExtensions.swift */,
+				370E71F4282836750033B708 /* ViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1305,6 +1312,7 @@
 				37B160F1281912EE00C95317 /* ShareSheetView.swift in Sources */,
 				37B1616F281A02C100C95317 /* PrivacyNoticeView.swift in Sources */,
 				37B1616A281A02C100C95317 /* ExpressionsView.swift in Sources */,
+				370E71F5282836750033B708 /* ViewExtensions.swift in Sources */,
 				37B16165281A02C100C95317 /* Sections.swift in Sources */,
 				37B16107281912EE00C95317 /* Speech.swift in Sources */,
 				37B16167281A02C100C95317 /* SyllableCell.swift in Sources */,
@@ -1323,6 +1331,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37B16102281912EE00C95317 /* ImageExtensions.swift in Sources */,
+				370E71F6282836750033B708 /* ViewExtensions.swift in Sources */,
 				37B16175281A06C900C95317 /* ColorExtensions.swift in Sources */,
 				37EEE88E281CDA0900461235 /* FinalsTable.swift in Sources */,
 				37EEE891281CDB4000461235 /* MacAboutView.swift in Sources */,
@@ -1341,6 +1350,7 @@
 				37B1617C281A0BBF00C95317 /* EnhancedLabel.swift in Sources */,
 				37EEE88B281CD8DC00461235 /* InitialsTable.swift in Sources */,
 				37B16174281A06B600C95317 /* MenuCopyButton.swift in Sources */,
+				370E71F8282844530033B708 /* MacExpressionsView.swift in Sources */,
 				37B160FE281912EE00C95317 /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

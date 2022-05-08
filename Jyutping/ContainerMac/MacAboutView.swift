@@ -2,78 +2,75 @@ import SwiftUI
 
 struct MacAboutView: View {
         var body: some View {
-                List {
-                        Section {
-                                HStack(spacing: 32) {
-                                        Label("Version", systemImage: "info.circle")
+                ScrollView {
+                        LazyVStack(spacing: 16) {
+                                HStack(spacing: 44) {
+                                        HStack(spacing: 20) {
+                                                Image(systemName: "info.circle")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 16)
+                                                        .foregroundColor(.blue)
+                                                Text("Version")
+                                        }
                                         Text(verbatim: AppMaster.version)
                                         Spacer()
                                 }
+                                .block()
+                                VStack {
+                                        LinkLabel(icon: "globe.asia.australia", tittle: "Website", link: "https://ososo.io")
+                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", tittle: "Source Code", link: "https://github.com/yuetyam/jyutping")
+                                        LinkLabel(icon: "lock.circle", tittle: "Privacy Policy", link: "https://ososo.io/jyutping/privacy")
+                                }
+                                .block()
+                                VStack {
+                                        LinkLabel(icon: "paperplane", tittle: "Telegram Group", link: "https://t.me/jyutping")
+                                        LinkLabel(icon: "person.2", tittle: "QQ Group", link: #"https://jq.qq.com/?k=4PR17m3t"#, message: "293148593")
+                                }
+                                .block()
+                                VStack {
+                                        LinkLabel(icon: "t.square", tittle: "TRUTH Social", link: "https://truthsocial.com/@Cantonese")
+                                        LinkLabel(icon: "at", tittle: "Twitter", link: "https://twitter.com/JyutpingApp")
+                                        LinkLabel(icon: "circle.square", tittle: "Instagram", link: "https://www.instagram.com/jyutping_app")
+                                }
+                                .block()
                         }
-                        Section {
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: "https://ososo.io")!) {
-                                                Label("Website", systemImage: "globe.asia.australia")
-                                        }
-                                        Text(verbatim: "https://ososo.io").font(.body.monospaced())
-                                        Spacer()
-                                }
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: "https://github.com/yuetyam/jyutping")!) {
-                                                Label("Source Code", systemImage: "chevron.left.forwardslash.chevron.right")
-                                        }
-                                        Text(verbatim: "https://github.com/yuetyam/jyutping").font(.body.monospaced())
-                                        Spacer()
-                                }
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: "https://ososo.io/jyutping/privacy")!) {
-                                                Label("Privacy Policy", systemImage: "lock.circle")
-                                        }
-                                        Text(verbatim: "https://ososo.io/jyutping/privacy").font(.body.monospaced())
-                                        Spacer()
-                                }
-                        }
-                        Section {
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: "https://t.me/jyutping")!) {
-                                                Label("Telegram Group", systemImage: "paperplane")
-                                        }
-                                        Text(verbatim: "https://t.me/jyutping").font(.body.monospaced())
-                                        Spacer()
-                                }
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: #"https://jq.qq.com/?k=4PR17m3t"#)!) {
-                                                Label("QQ Group", systemImage: "person.2")
-                                        }
-                                        Text(verbatim: "293148593").font(.body.monospaced())
-                                        Spacer()
-                                }
-                        }
-                        Section {
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: "https://truthsocial.com/@Cantonese")!) {
-                                                Label("TRUTH Social", systemImage: "t.square")
-                                        }
-                                        Text(verbatim: "https://truthsocial.com/@Cantonese").font(.body.monospaced())
-                                        Spacer()
-                                }
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
-                                                Label("Twitter", systemImage: "at")
-                                        }
-                                        Text(verbatim: "https://twitter.com/JyutpingApp").font(.body.monospaced())
-                                        Spacer()
-                                }
-                                HStack(spacing: 32) {
-                                        Link(destination: URL(string: "https://www.instagram.com/jyutping_app")!) {
-                                                Label("Instagram", systemImage: "circle.square")
-                                        }
-                                        Text(verbatim: "https://www.instagram.com/jyutping_app").font(.body.monospaced())
-                                        Spacer()
-                                }
-                        }
+                        .padding(32)
                 }
                 .textSelection(.enabled)
                 .navigationTitle("About")
         }
 }
+
+
+private struct LinkLabel: View {
+
+        init(icon: String, tittle: LocalizedStringKey, link: String, message: String? = nil) {
+                self.icon = icon
+                self.tittle = tittle
+                self.link = link
+                self.message = message ?? link
+        }
+
+        private let icon: String
+        private let tittle: LocalizedStringKey
+        private let link: String
+        private let message: String
+
+        var body: some View {
+                HStack(spacing: 44) {
+                        Link(destination: URL(string: link)!) {
+                                HStack(spacing: 20) {
+                                        Image(systemName: icon)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 16)
+                                        Text(tittle)
+                                }
+                        }
+                        Text(verbatim: message).font(.callout.monospaced())
+                        Spacer()
+                }
+        }
+}
+

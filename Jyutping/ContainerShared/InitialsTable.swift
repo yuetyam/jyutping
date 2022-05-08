@@ -8,7 +8,7 @@ struct InitialsTable: View {
 
         private var responsiveWidth: CGFloat {
                 #if os(macOS)
-                return 120
+                return 144
                 #else
                 if Device.isPhone {
                         return (UIScreen.main.bounds.width - 64) / 3.0
@@ -24,8 +24,16 @@ struct InitialsTable: View {
                 let dataLines: [String] = sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
                 let width: CGFloat = responsiveWidth
                 #if os(macOS)
-                List(0..<dataLines.count, id: \.self) { index in
-                        SyllableCell(dataLines[index], width: width)
+                ScrollView {
+                        LazyVStack {
+                                VStack {
+                                        ForEach(0..<dataLines.count, id: \.self) { index in
+                                                SyllableCell(dataLines[index], width: width)
+                                        }
+                                }
+                                .block()
+                        }
+                        .padding(32)
                 }
                 .font(.body.monospaced())
                 .textSelection(.enabled)

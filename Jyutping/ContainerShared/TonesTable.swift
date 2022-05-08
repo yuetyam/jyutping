@@ -8,7 +8,7 @@ struct TonesTable: View {
 
         private var responsiveWidth: CGFloat {
                 #if os(macOS)
-                return 120
+                return 128
                 #else
                 if Device.isPhone {
                         return (UIScreen.main.bounds.width - 64) / 4.0
@@ -52,15 +52,30 @@ struct TonesTable: View {
                 let dataLines: [String] = sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
                 let width: CGFloat = responsiveWidth
                 #if os(macOS)
-                List {
-                        Section {
-                                ForEach(0..<dataLines.count, id: \.self) { index in
-                                        ToneCell(dataLines[index], width: width)
+                ScrollView {
+                        LazyVStack {
+                                VStack {
+                                        ForEach(0..<dataLines.count, id: \.self) { index in
+                                                ToneCell(dataLines[index], width: width)
+                                        }
                                 }
+                                .font(.body.monospaced())
+                                .block()
+
+                                HStack(spacing: 12) {
+                                        HStack(spacing: 0) {
+                                                Text(verbatim: "聲調之「上」應讀上聲 soeng5")
+                                                Speaker("soeng5")
+                                        }
+                                        HStack(spacing: 0) {
+                                                Text(verbatim: "而非去聲 soeng6")
+                                                Speaker("soeng6")
+                                        }
+                                        Spacer()
+                                }
+                                .padding()
                         }
-                        Section {
-                                tonesDescription
-                        }
+                        .padding(32)
                 }
                 .textSelection(.enabled)
                 .navigationTitle("Jyutping Tones")

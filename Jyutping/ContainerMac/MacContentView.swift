@@ -8,7 +8,7 @@ struct MacContentView: View {
                                         NavigationLink(destination: MacIntroductionsView()) {
                                                 Label("Introductions", systemImage: "book")
                                         }
-                                        NavigationLink(destination: ExpressionsView().textSelection(.enabled)) {
+                                        NavigationLink(destination: MacExpressionsView().textSelection(.enabled)) {
                                                 Label("title.expressions", systemImage: "text.quote")
                                         }
                                 } header: {

@@ -84,10 +84,3 @@ struct BlockView: View {
         }
 }
 
-
-extension View {
-        func block(cornerRadius: CGFloat = 8) -> some View {
-                return self.padding().background(Color(nsColor: NSColor.textBackgroundColor), in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-        }
-}
-

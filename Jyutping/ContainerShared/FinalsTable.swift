@@ -8,7 +8,7 @@ struct FinalsTable: View {
 
         private var responsiveWidth: CGFloat {
                 #if os(macOS)
-                return 120
+                return 144
                 #else
                 if Device.isPhone {
                         return (UIScreen.main.bounds.width - 64) / 3.0
@@ -36,15 +36,19 @@ struct FinalsTable: View {
                 let width: CGFloat = responsiveWidth
 
                 #if os(macOS)
-                List {
-                        ForEach(0..<blocks.count, id: \.self) { blockIndex in
-                                let lines = blocks[blockIndex]
-                                Section {
-                                        ForEach(0..<lines.count, id: \.self) { index in
-                                                SyllableCell(lines[index], width: width)
+                ScrollView {
+                        LazyVStack(spacing: 16) {
+                                ForEach(0..<blocks.count, id: \.self) { blockIndex in
+                                        let lines = blocks[blockIndex]
+                                        VStack {
+                                                ForEach(0..<lines.count, id: \.self) { index in
+                                                        SyllableCell(lines[index], width: width)
+                                                }
                                         }
+                                        .block()
                                 }
                         }
+                        .padding(32)
                 }
                 .font(.body.monospaced())
                 .textSelection(.enabled)
