@@ -4,14 +4,12 @@ extension View {
 
         @available(macOS 12.0, *)
         func block() -> some View {
-                let color: Color = {
-                        #if os(macOS)
-                        return Color(nsColor: NSColor.textBackgroundColor)
-                        #else
-                        return Color.gray
-                        #endif
-                }()
+                #if os(macOS)
+                let color: Color = Color(nsColor: NSColor.textBackgroundColor)
                 return self.padding().background(color, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                #else
+                return self
+                #endif
         }
 }
 
