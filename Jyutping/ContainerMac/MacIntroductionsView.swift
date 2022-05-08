@@ -15,9 +15,15 @@ struct MacIntroductionsView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 32) {
-                                HStack {
-                                        Text(verbatim: "Note: This App does NOT contain an Input Method / Keyboard for macOS.")
-                                        Spacer()
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("**Note**: This App does NOT contain an Input Method / Keyboard for macOS.")
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("**注意**: 本App並無 macOS 輸入法／鍵盤。本App旨在幫助用戶學習、熟悉粵拼及粵拼輸入法")
+                                                Spacer()
+                                        }
                                 }
                                 .block()
 
