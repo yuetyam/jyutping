@@ -77,15 +77,13 @@ struct MacExpressionsView: View {
                                                         }
                                                         Text(verbatim: "表方位、時間，義同在。")
                                                 }
-                                                HStack(spacing: 44) {
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：我係曹阿瞞。")
-                                                                Speaker("我係曹阿瞞。")
-                                                        }
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：我喺天后站落車。")
-                                                                Speaker("我喺天后站落車。")
-                                                        }
+                                                HStack {
+                                                        Text(verbatim: "例：我係曹阿瞞。")
+                                                        Speaker("我係曹阿瞞。")
+                                                }
+                                                HStack {
+                                                        Text(verbatim: "例：我喺天后站落車。")
+                                                        Speaker("我喺天后站落車。")
                                                 }
                                         }
                                         Spacer()
@@ -110,15 +108,13 @@ struct MacExpressionsView: View {
                                                         }
                                                         Text(verbatim: "表示倒塌、倒下。")
                                                 }
-                                                HStack(spacing: 44) {
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：我諗緊今晚食咩。")
-                                                                Speaker("我諗緊今晚食咩。")
-                                                        }
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：佢畀人㨃冧咗。")
-                                                                Speaker("佢畀人㨃冧咗。")
-                                                        }
+                                                HStack {
+                                                        Text(verbatim: "例：我諗緊今晚食咩。")
+                                                        Speaker("我諗緊今晚食咩。")
+                                                }
+                                                HStack {
+                                                        Text(verbatim: "例：佢畀人㨃冧咗。")
+                                                        Speaker("佢畀人㨃冧咗。")
                                                 }
                                         }
                                         Spacer()
@@ -144,15 +140,13 @@ struct MacExpressionsView: View {
                                                         }
                                                         Text(verbatim: "音同「感」。")
                                                 }
-                                                HStack(spacing: 44) {
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：我生得咁靚仔。")
-                                                                Speaker("我生得咁靚仔。")
-                                                        }
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：噉又未必。")
-                                                                Speaker("gam2 又未必。")
-                                                        }
+                                                HStack {
+                                                        Text(verbatim: "例：我生得咁靚仔。")
+                                                        Speaker("我生得咁靚仔。")
+                                                }
+                                                HStack {
+                                                        Text(verbatim: "例：噉又未必。")
+                                                        Speaker("gam2 又未必。")
                                                 }
                                         }
                                         Spacer()
@@ -167,20 +161,9 @@ struct MacExpressionsView: View {
                                                 }
                                                 .font(.masterHeadline)
 
-                                                HStack(spacing: 28) {
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：我嘅細佬／我個細佬。")
-                                                                Speaker("我個細佬。")
-                                                        }
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：講得好！")
-                                                                Speaker("講得好！")
-                                                        }
-                                                        HStack(spacing: 4) {
-                                                                Text(verbatim: "例：細細聲噉講話。")
-                                                                Speaker("細細聲gam2講話。")
-                                                        }
-                                                }
+                                                Text(verbatim: "例：我嘅細佬／我個細佬。")
+                                                Text(verbatim: "例：講得好！")
+                                                Text(verbatim: "例：細細聲噉講話。")
                                         }
                                         Spacer()
                                 }
@@ -211,6 +194,90 @@ struct MacExpressionsView: View {
                                                 }
                                                 Label {
                                                         Text(verbatim: "毋係吧，真係冇？")
+                                                } icon: {
+                                                        Image.xmark.foregroundColor(.red)
+                                                }
+                                        }
+                                        Spacer()
+                                }
+                                .block()
+
+                                HStack {
+                                        VStack(alignment: .leading, spacing: 10) {
+                                                HStack(spacing: 44) {
+                                                        Text("推薦 **啦、嘞**")
+                                                        Text("避免 **了**")
+                                                }
+                                                .font(.masterHeadline)
+
+                                                Label {
+                                                        Text(verbatim: "各位，我毋客氣啦。")
+                                                } icon: {
+                                                        Image.checkmark.foregroundColor(.green)
+                                                }
+                                                Label {
+                                                        Text(verbatim: "係嘞，你試過箇間餐廳未呀？")
+                                                } icon: {
+                                                        Image.checkmark.foregroundColor(.green)
+                                                }
+                                                Label {
+                                                        Text(verbatim: "各位，我毋客氣了。")
+                                                } icon: {
+                                                        Image.xmark.foregroundColor(.red)
+                                                }
+                                                Label {
+                                                        Text(verbatim: "係了，你試過箇間餐廳未呀？")
+                                                } icon: {
+                                                        Image.xmark.foregroundColor(.red)
+                                                }
+                                        }
+                                        Spacer()
+                                }
+                                .block()
+
+                                HStack {
+                                        VStack(alignment: .leading, spacing: 10) {
+                                                HStack(spacing: 44) {
+                                                        Text("推薦 **使**")
+                                                        Text("避免 **駛、洗**")
+                                                }
+                                                .font(.masterHeadline)
+
+                                                Label {
+                                                        Text(verbatim: "毋使驚")
+                                                } icon: {
+                                                        Image.checkmark.foregroundColor(.green)
+                                                }
+                                                Label {
+                                                        Text(verbatim: "毋駛驚")
+                                                } icon: {
+                                                        Image.xmark.foregroundColor(.red)
+                                                }
+                                                Label {
+                                                        Text(verbatim: "毋洗驚")
+                                                } icon: {
+                                                        Image.xmark.foregroundColor(.red)
+                                                }
+                                        }
+                                        Spacer()
+                                }
+                                .block()
+
+                                HStack {
+                                        VStack(alignment: .leading, spacing: 10) {
+                                                HStack(spacing: 44) {
+                                                        Text("推薦 **而家／而今**")
+                                                        Text("避免 **宜家**")
+                                                }
+                                                .font(.masterHeadline)
+
+                                                Label {
+                                                        Text(verbatim: "我而家食緊飯。")
+                                                } icon: {
+                                                        Image.checkmark.foregroundColor(.green)
+                                                }
+                                                Label {
+                                                        Text(verbatim: "我宜家食緊飯。")
                                                 } icon: {
                                                         Image.xmark.foregroundColor(.red)
                                                 }
