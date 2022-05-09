@@ -1655,7 +1655,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1670,7 +1670,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1687,7 +1687,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1702,7 +1702,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1783,7 +1783,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IOSKeyboard/Info.plist;
@@ -1795,7 +1795,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1812,7 +1812,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IOSKeyboard/Info.plist;
@@ -1824,7 +1824,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1842,7 +1842,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ContainerIOS/Container--iOS--Info.plist";
@@ -1857,7 +1857,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = Container;
 				SDKROOT = iphoneos;
@@ -1873,7 +1873,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ContainerIOS/Container--iOS--Info.plist";
@@ -1888,7 +1888,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = Container;
 				SDKROOT = iphoneos;
@@ -1905,9 +1905,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ContainerMac/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1920,7 +1921,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = Jyutping;
 				SDKROOT = macosx;
@@ -1935,9 +1936,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ContainerMac/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1950,7 +1952,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.15.0;
+				MARKETING_VERSION = 0.16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = Jyutping;
 				SDKROOT = macosx;
