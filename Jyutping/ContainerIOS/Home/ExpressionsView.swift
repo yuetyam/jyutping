@@ -151,10 +151,10 @@ struct ExpressionsView: View {
                         Group {
                                 Section {
                                         HStack {
-                                                Text(verbatim: "推薦").fontWeight(.medium)
-                                                Text(verbatim: "嘅／個得噉。")
-                                                Text(verbatim: "避免").fontWeight(.medium)
-                                                Text(verbatim: "的得地")
+                                                Text(verbatim: "推薦")
+                                                Text(verbatim: "嘅／個得噉。").fontWeight(.medium)
+                                                Text(verbatim: "避免")
+                                                Text(verbatim: "的得地").fontWeight(.medium)
                                                 Spacer()
                                         }
                                         Text(verbatim: "例：我嘅細佬／我個細佬。")
@@ -164,10 +164,10 @@ struct ExpressionsView: View {
 
                                 Section {
                                         HStack {
-                                                Text(verbatim: "推薦").fontWeight(.medium)
-                                                Text(verbatim: "啩、啊嘛。")
-                                                Text(verbatim: "避免").fontWeight(.medium)
-                                                Text(verbatim: "吧")
+                                                Text(verbatim: "推薦")
+                                                Text(verbatim: "啩、啊嘛。").fontWeight(.medium)
+                                                Text(verbatim: "避免")
+                                                Text(verbatim: "吧").fontWeight(.medium)
                                                 Spacer()
                                         }
                                         Label {
@@ -193,10 +193,10 @@ struct ExpressionsView: View {
                                 }
                                 Section {
                                         HStack {
-                                                Text(verbatim: "推薦").fontWeight(.medium)
-                                                Text(verbatim: "啦、嘞。")
-                                                Text(verbatim: "避免").fontWeight(.medium)
-                                                Text(verbatim: "了")
+                                                Text(verbatim: "推薦")
+                                                Text(verbatim: "啦、嘞。").fontWeight(.medium)
+                                                Text(verbatim: "避免")
+                                                Text(verbatim: "了").fontWeight(.medium)
                                                 Spacer()
                                         }
                                         Label {
@@ -222,10 +222,10 @@ struct ExpressionsView: View {
                                 }
                                 Section {
                                         HStack {
-                                                Text(verbatim: "推薦").fontWeight(.medium)
-                                                Text(verbatim: "使。")
-                                                Text(verbatim: "避免").fontWeight(.medium)
-                                                Text(verbatim: "駛、洗")
+                                                Text(verbatim: "推薦")
+                                                Text(verbatim: "使。").fontWeight(.medium)
+                                                Text(verbatim: "避免")
+                                                Text(verbatim: "駛、洗").fontWeight(.medium)
                                                 Spacer()
                                         }
                                         Label {
@@ -246,10 +246,10 @@ struct ExpressionsView: View {
                                 }
                                 Section {
                                         HStack {
-                                                Text(verbatim: "推薦").fontWeight(.medium)
-                                                Text(verbatim: "而家／而今。")
-                                                Text(verbatim: "避免").fontWeight(.medium)
-                                                Text(verbatim: "宜家")
+                                                Text(verbatim: "推薦")
+                                                Text(verbatim: "而家／而今。").fontWeight(.medium)
+                                                Text(verbatim: "避免")
+                                                Text(verbatim: "宜家").fontWeight(.medium)
                                                 Spacer()
                                         }
                                         Label {
