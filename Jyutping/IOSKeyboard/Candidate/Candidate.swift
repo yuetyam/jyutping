@@ -19,7 +19,7 @@ struct Candidate: Hashable {
         /// Candidate
         /// - Parameters:
         ///   - text: Candidate word.
-        ///   - jyutping: Word's Jyutping.
+        ///   - romanization: Jyutping.
         ///   - input: User input for this Candidate.
         ///   - lexiconText: Lexicon Entry Cantonese word. User invisible.
         init(text: String, romanization: String, input: String, lexiconText: String) {
@@ -31,8 +31,7 @@ struct Candidate: Hashable {
 
         // Equatable
         static func ==(lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.text == rhs.text &&
-                        lhs.romanization.removedTones() == rhs.romanization.removedTones()
+                return lhs.text == rhs.text && lhs.romanization.removedTones() == rhs.romanization.removedTones()
         }
 
         // Hashable
@@ -43,7 +42,7 @@ struct Candidate: Hashable {
 
         static func +(lhs: Candidate, rhs: Candidate) -> Candidate {
                 let newText: String = lhs.text + rhs.text
-                let newRomanization: String = lhs.romanization + .space + rhs.romanization
+                let newRomanization: String = lhs.romanization + String.space + rhs.romanization
                 let newInput: String = lhs.input + rhs.input
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
 
@@ -62,10 +61,10 @@ struct Candidate: Hashable {
 extension Array where Element == Candidate {
 
         /// Returns a new Candidate by concatenating the candidates of the sequence.
-        /// - Returns: A single, concatenated Candidate.
+        /// - Returns: Single, concatenated Candidate.
         func joined() -> Candidate {
                 let text: String = map({ $0.text }).joined()
-                let romanization: String = map({ $0.romanization }).joined(separator: .space)
+                let romanization: String = map({ $0.romanization }).joined(separator: String.space)
                 let input: String = map({ $0.input }).joined()
                 let lexiconText: String = map({ $0.lexiconText }).joined()
                 let candidate: Candidate = Candidate(text: text, romanization: romanization, input: input, lexiconText: lexiconText)
