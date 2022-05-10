@@ -4,7 +4,6 @@ import CommonExtensions
 struct MacSearchView: View {
 
         @State private var inputText: String = .empty
-        @State private var submittedText: String = .empty
         @State private var cantonese: String = .empty
         @State private var pronunciations: [String] = []
 
@@ -15,16 +14,16 @@ struct MacSearchView: View {
                                         .textFieldStyle(.roundedBorder)
                                         .disableAutocorrection(true)
                                         .onSubmit {
-                                                submittedText = inputText.trimmed()
-                                                guard submittedText != cantonese else { return }
-                                                guard !submittedText.isEmpty else {
+                                                let trimmedInput: String = inputText.trimmed()
+                                                guard trimmedInput != cantonese else { return }
+                                                guard !trimmedInput.isEmpty else {
                                                         cantonese = .empty
                                                         pronunciations = []
                                                         return
                                                 }
-                                                let search = AppMaster.lookup(text: submittedText)
+                                                let search = AppMaster.lookup(text: trimmedInput)
                                                 if search.romanizations.isEmpty {
-                                                        cantonese = submittedText
+                                                        cantonese = trimmedInput
                                                         pronunciations = []
                                                 } else {
                                                         cantonese = search.text
