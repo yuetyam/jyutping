@@ -144,14 +144,16 @@ struct HomeView_iOS15: View {
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Cangjie").font(.headline)
-                                                Text("Cangjie Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
+                                                Text("Cangjie Reverse Lookup Description").lineSpacing(6)
                                         }
+                                        .textSelection(.enabled)
                                         Section {
                                                 Text("Lookup Jyutping with Pinyin").font(.headline)
-                                                Text("Pinyin Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
+                                                Text("Pinyin Reverse Lookup Description").lineSpacing(6)
                                         }
+                                        .textSelection(.enabled)
                                         Section {
-                                                Text("Lookup Jyutping with Stroke").font(.headline)
+                                                Text("Lookup Jyutping with Stroke").font(.headline).textSelection(.enabled)
                                                 Text("Stroke Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
                                                 Text(verbatim: strokes)
                                                         .font(.body.monospaced())
@@ -162,18 +164,26 @@ struct HomeView_iOS15: View {
                                         }
                                 }
                                 Section {
-                                        NavigationLink(destination: IntroductionsView()) {
+                                        NavigationLink {
+                                                IntroductionsView().textSelection(.enabled)
+                                        } label: {
                                                 Label("More Introductions", systemImage: "info.circle")
                                         }
-                                        NavigationLink(destination: ExpressionsView()) {
+                                        NavigationLink {
+                                                ExpressionsView().textSelection(.enabled)
+                                        } label: {
                                                 Label("Cantonese Expressions", systemImage: "checkmark.seal")
                                         }
                                 }
                                 Section {
-                                        NavigationLink(destination: FAQView()) {
+                                        NavigationLink {
+                                                FAQView().textSelection(.enabled)
+                                        } label: {
                                                 Label("Frequently Asked Questions", systemImage: "questionmark.circle")
                                         }
-                                        NavigationLink(destination: PrivacyNoticeView()) {
+                                        NavigationLink {
+                                                PrivacyNoticeView().textSelection(.enabled)
+                                        } label: {
                                                 Label("Privacy Notice", systemImage: "lock.circle")
                                         }
                                 }
