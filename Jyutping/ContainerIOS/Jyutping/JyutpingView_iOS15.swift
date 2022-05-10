@@ -1,10 +1,10 @@
 import SwiftUI
+import CommonExtensions
 
 @available(iOS 15.0, *)
 struct JyutpingView_iOS15: View {
 
         @State private var inputText: String = .empty
-        @State private var submittedText: String = .empty
         @State private var cantonese: String = .empty
         @State private var pronunciations: [String] = []
 
@@ -17,16 +17,16 @@ struct JyutpingView_iOS15: View {
                                                 .disableAutocorrection(true)
                                                 .submitLabel(.search)
                                                 .onSubmit {
-                                                        submittedText = inputText
-                                                        guard submittedText != cantonese else { return }
-                                                        guard !submittedText.isEmpty else {
-                                                                cantonese = submittedText
+                                                        let trimmedInput: String = inputText.trimmed()
+                                                        guard trimmedInput != cantonese else { return }
+                                                        guard !trimmedInput.isEmpty else {
+                                                                cantonese = .empty
                                                                 pronunciations = []
                                                                 return
                                                         }
-                                                        let search = AppMaster.lookup(text: submittedText)
+                                                        let search = AppMaster.lookup(text: trimmedInput)
                                                         if search.romanizations.isEmpty {
-                                                                cantonese = submittedText
+                                                                cantonese = trimmedInput
                                                                 pronunciations = []
                                                         } else {
                                                                 cantonese = search.text
@@ -34,19 +34,15 @@ struct JyutpingView_iOS15: View {
                                                         }
                                                 }
                                 }
-                                if !submittedText.isEmpty && pronunciations.isEmpty {
-                                        Section {
-                                                Text("No Results.")
-                                                Text("Common Cantonese words only.").font(.footnote)
-                                        }
-                                } else if !submittedText.isEmpty {
+                                if !cantonese.isEmpty {
                                         Section {
                                                 HStack {
                                                         Text(verbatim: cantonese)
                                                         Spacer()
                                                         Speaker(cantonese)
                                                 }
-                                                ForEach(pronunciations, id: \.self) { romanization in
+                                                ForEach(0..<pronunciations.count, id: \.self) { index in
+                                                        let romanization: String = pronunciations[index]
                                                         HStack(spacing: 16) {
                                                                 Text(verbatim: romanization)
                                                                 if cantonese.count == 1 {
@@ -83,7 +79,7 @@ struct JyutpingView_iOS15: View {
                                         Text("Cantonese Resources").textCase(.none)
                                 }
                         }
-                        .animation(.default, value: pronunciations)
+                        .animation(.default, value: cantonese)
                         .navigationTitle("Jyutping")
                 }
                 .navigationViewStyle(.stack)
