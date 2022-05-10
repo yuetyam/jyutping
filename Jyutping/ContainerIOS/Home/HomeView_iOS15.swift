@@ -31,15 +31,16 @@ struct HomeView_iOS15: View {
                                                 .autocapitalization(.none)
                                                 .disableAutocorrection(true)
                                                 .onSubmit {
-                                                        guard inputText != cantonese else { return }
-                                                        guard !inputText.isEmpty else {
-                                                                cantonese = inputText
+                                                        let trimmedInput: String = inputText.trimmed()
+                                                        guard trimmedInput != cantonese else { return }
+                                                        guard !trimmedInput.isEmpty else {
+                                                                cantonese = .empty
                                                                 pronunciations = []
                                                                 return
                                                         }
-                                                        let search = AppMaster.lookup(text: inputText)
+                                                        let search = AppMaster.lookup(text: trimmedInput)
                                                         if search.romanizations.isEmpty {
-                                                                cantonese = inputText
+                                                                cantonese = trimmedInput
                                                                 pronunciations = []
                                                         } else {
                                                                 cantonese = search.text
@@ -47,14 +48,15 @@ struct HomeView_iOS15: View {
                                                         }
                                                 }
                                 }
-                                if !cantonese.isEmpty && !pronunciations.isEmpty {
+                                if !cantonese.isEmpty {
                                         Section {
                                                 HStack {
                                                         Text(verbatim: cantonese)
                                                         Spacer()
                                                         Speaker(cantonese)
                                                 }
-                                                ForEach(pronunciations, id: \.self) { romanization in
+                                                ForEach(0..<pronunciations.count, id: \.self) { index in
+                                                        let romanization: String = pronunciations[index]
                                                         HStack(spacing: 16) {
                                                                 Text(verbatim: romanization)
                                                                 if cantonese.count == 1 {
@@ -188,7 +190,7 @@ struct HomeView_iOS15: View {
                                         }
                                 }
                         }
-                        .animation(.default, value: pronunciations)
+                        .animation(.default, value: cantonese)
                         .animation(.default, value: isGuideViewExpanded)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }
