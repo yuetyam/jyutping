@@ -294,30 +294,3 @@ struct MacExpressionsView: View {
         }
 }
 
-
-private extension Font {
-
-        @available(macOS 12.0, *)
-        static let master: Font = Font.custom(primaryFontName, size: 13, relativeTo: .body)
-
-        @available(macOS 12.0, *)
-        static let masterHeadline: Font = Font.custom(primaryFontName, size: 15, relativeTo: .title3)
-
-        private static let primaryFontName: String = {
-                #if os(iOS)
-                return "PingFang HK"
-                #else
-                let fontName: String = {
-                        let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
-                        for name in preferredList {
-                                if let font = NSFont(name: name, size: 13) {
-                                        return name
-                                }
-                        }
-                        return "PingFang HK"
-                }()
-                return fontName
-                #endif
-        }()
-}
-

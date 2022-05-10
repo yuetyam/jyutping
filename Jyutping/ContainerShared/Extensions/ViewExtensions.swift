@@ -3,6 +3,7 @@ import SwiftUI
 extension View {
 
         @available(macOS 12.0, *)
+        @available(iOS, unavailable)
         func block() -> some View {
                 #if os(macOS)
                 let color: Color = Color(nsColor: NSColor.textBackgroundColor)

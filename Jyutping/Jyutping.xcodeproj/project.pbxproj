@@ -85,6 +85,8 @@
 		37AA717B27CA456200431E21 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717A27CA456200431E21 /* icon.png */; };
 		37AA717D27CA456A00431E21 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37AA717C27CA456A00431E21 /* icon@2x.png */; };
 		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
+		37AEE49C282A51BE00C54BD9 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */; };
+		37AEE49D282A51BE00C54BD9 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */; };
 		37B1607A2818EDA100C95317 /* InputMethodData in Frameworks */ = {isa = PBXBuildFile; productRef = 37B160792818EDA100C95317 /* InputMethodData */; };
 		37B1607C2818EDAA00C95317 /* InputMethodData in Frameworks */ = {isa = PBXBuildFile; productRef = 37B1607B2818EDAA00C95317 /* InputMethodData */; };
 		37B1609928190DBD00C95317 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1609828190DBD00C95317 /* Tests_iOS.swift */; };
@@ -327,6 +329,7 @@
 		37AA717A27CA456200431E21 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		37AA717C27CA456A00431E21 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
+		37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		37B160782818ED9900C95317 /* InputMethodData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = InputMethodData; path = ../Modules/InputMethodData; sourceTree = "<group>"; };
 		37B1607D2818F0C100C95317 /* ContainersData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ContainersData; path = ../Modules/ContainersData; sourceTree = "<group>"; };
 		37B1608128190DBC00C95317 /* ContainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerApp.swift; sourceTree = "<group>"; };
@@ -813,6 +816,7 @@
 				37B160EB281912ED00C95317 /* TextExtensions.swift */,
 				37B16172281A057500C95317 /* ColorExtensions.swift */,
 				370E71F4282836750033B708 /* ViewExtensions.swift */,
+				37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1301,6 +1305,7 @@
 				37B160FF281912EE00C95317 /* UIDevice+modelName.swift in Sources */,
 				37B16171281A02C100C95317 /* AboutView_iOS15.swift in Sources */,
 				37B160F9281912EE00C95317 /* Speaker.swift in Sources */,
+				37AEE49C282A51BE00C54BD9 /* FontExtensions.swift in Sources */,
 				37B16166281A02C100C95317 /* JyutpingView_iOS14.swift in Sources */,
 				37B16109281912EE00C95317 /* AppMaster.swift in Sources */,
 				37B160F3281912EE00C95317 /* EnhancedLabel.swift in Sources */,
@@ -1335,6 +1340,7 @@
 				37EEE88E281CDA0900461235 /* FinalsTable.swift in Sources */,
 				37EEE891281CDB4000461235 /* MacAboutView.swift in Sources */,
 				37EEE893281CE21800461235 /* MacSearchView.swift in Sources */,
+				37AEE49D282A51BE00C54BD9 /* FontExtensions.swift in Sources */,
 				37B1617E281A0E0400C95317 /* MacContentView.swift in Sources */,
 				37B160FA281912EE00C95317 /* Speaker.swift in Sources */,
 				37B1610A281912EE00C95317 /* AppMaster.swift in Sources */,
