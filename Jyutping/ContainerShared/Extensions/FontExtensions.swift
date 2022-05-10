@@ -2,6 +2,14 @@ import SwiftUI
 
 extension Font {
 
+        static let fixedWidth: Font = {
+                if #available(iOS 15.0, macOS 12.0, *) {
+                        return Font.body.monospaced()
+                } else {
+                        return Font.system(.body, design: .monospaced)
+                }
+        }()
+
         static let master: Font = {
                 let size: CGFloat = {
                         #if os(iOS)
