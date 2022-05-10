@@ -155,12 +155,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                HStack(spacing: 44) {
-                                                        Text("推薦 **嘅／個、得、噉**")
-                                                        Text("避免 **的、得、地**")
-                                                }
-                                                .font(.masterHeadline)
-
+                                                Text("推薦 **嘅／個、得、噉**。  避免 **的、得、地**").font(.masterHeadline)
                                                 Text(verbatim: "例：我嘅細佬／我個細佬。")
                                                 Text(verbatim: "例：講得好！")
                                                 Text(verbatim: "例：細細聲噉講話。")
@@ -171,12 +166,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                HStack(spacing: 44) {
-                                                        Text("推薦 **啩、啊嘛**")
-                                                        Text("避免 **吧**")
-                                                }
-                                                .font(.masterHeadline)
-
+                                                Text("推薦 **啩、啊嘛**。  避免 **吧**").font(.masterHeadline)
                                                 Label {
                                                         Text(verbatim: "下個禮拜會出啩。")
                                                 } icon: {
@@ -204,12 +194,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                HStack(spacing: 44) {
-                                                        Text("推薦 **啦、嘞**")
-                                                        Text("避免 **了**")
-                                                }
-                                                .font(.masterHeadline)
-
+                                                Text("推薦 **啦、嘞**。  避免 **了**").font(.masterHeadline)
                                                 Label {
                                                         Text(verbatim: "各位，我毋客氣啦。")
                                                 } icon: {
@@ -237,12 +222,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                HStack(spacing: 44) {
-                                                        Text("推薦 **使**")
-                                                        Text("避免 **駛、洗**")
-                                                }
-                                                .font(.masterHeadline)
-
+                                                Text("推薦 **使**。  避免 **駛、洗**").font(.masterHeadline)
                                                 Label {
                                                         Text(verbatim: "毋使驚")
                                                 } icon: {
@@ -265,12 +245,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                HStack(spacing: 44) {
-                                                        Text("推薦 **而家／而今**")
-                                                        Text("避免 **宜家**")
-                                                }
-                                                .font(.masterHeadline)
-
+                                                Text("推薦 **而家／而今**。  避免 **宜家**").font(.masterHeadline)
                                                 Label {
                                                         Text(verbatim: "我而家食緊飯。")
                                                 } icon: {
