@@ -84,16 +84,18 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 if cell.logogram != Logogram.current {
                         cell.shouldUpdateFonts = true
                 }
-                cell.textLabel.text = candidates[indexPath.row].text
+
+                let candidate: Candidate = candidates[indexPath.row]
+                cell.textLabel.text = candidate.text
+
                 switch toneStyle {
                 case 2:
-                        cell.footnoteLabel.text = candidates[indexPath.row].romanization.removedTones()
+                        cell.footnoteLabel.text = candidate.romanization.removedTones()
                 case 3, 4:
-                        let footnote: String = candidates[indexPath.row].romanization
-                        let attributed: NSAttributedString = attribute(text: footnote, toneStyle: toneStyle)
+                        let attributed: NSAttributedString = attribute(text: candidate.romanization, toneStyle: toneStyle)
                         cell.footnoteLabel.attributedText = attributed
                 default:
-                        cell.footnoteLabel.text = candidates[indexPath.row].romanization
+                        cell.footnoteLabel.text = candidate.romanization
                 }
 
                 // REASON: In some apps (like QQ), the cell may not showing the correct default colors
@@ -104,6 +106,9 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 return cell
         }
         private func attribute(text: String, toneStyle: Int) -> NSAttributedString {
+                guard !text.isEmpty else {
+                        return NSAttributedString(string: text)
+                }
                 let font: UIFont = .systemFont(ofSize: 10)
                 let offset: NSNumber = toneStyle == 3 ? 2 : -2
                 let jyutpings: [String] = text.components(separatedBy: String.space)

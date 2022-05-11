@@ -390,6 +390,11 @@ final class KeyboardViewController: UIInputViewController {
                                 bufferText = first + tail
                         }
                 default:
+                        guard candidate.type == .cantonese else {
+                                candidateSequence = []
+                                bufferText = .empty
+                                return
+                        }
                         candidateSequence.append(candidate)
                         let bufferTextLength: Int = bufferText.count
                         let candidateInputText: String = {
@@ -591,7 +596,14 @@ final class KeyboardViewController: UIInputViewController {
                 case .some("q"):
                         loengfanReverseLookup()
                 default:
-                        imeSuggest()
+                        let key: String = bufferText.lowercased()
+                        if let trademark = Candidate.trademarks[key] {
+                                let text: String = trademark + String.space
+                                let trademarkCandidate: Candidate = Candidate(trademark: text)
+                                candidates = [trademarkCandidate]
+                        } else {
+                                imeSuggest()
+                        }
                 }
         }
         private func pinyinReverseLookup() {
