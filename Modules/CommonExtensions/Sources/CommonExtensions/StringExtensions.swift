@@ -33,10 +33,9 @@ extension String {
 
 extension String {
 
-        /// Returns a new String made by removing `.whitespacesAndNewlines` from both ends of the String.
-        /// - Returns: A new String made by removing `.whitespacesAndNewlines` from both ends of the String.
+        /// Returns a new String made by removing `.whitespacesAndNewlines` & `.controlCharacters` from both ends of the String.
         public func trimmed() -> String {
-                return self.trimmingCharacters(in: .whitespacesAndNewlines)
+                return self.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
         }
 
         /// Ideographic characters only.
@@ -44,9 +43,7 @@ extension String {
         public func ideographicFiltered() -> String {
                 return self.unicodeScalars.filter({ $0.properties.isIdeographic }).map({ String($0) }).joined()
         }
-}
 
-extension String {
 
         /// CJKV && !CJKV
         public var ideographicBlocks: [(text: String, isIdeographic: Bool)] {
