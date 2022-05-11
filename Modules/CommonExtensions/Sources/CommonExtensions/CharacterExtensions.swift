@@ -1,11 +1,11 @@
 extension Character {
 
-        /// UNICODE code points. Example: Á = ["U+41", "U+301"]
+        /// UNICODE code points. Example: é = ["U+65", "U+301"]
         public var codePoints: [String] {
                 return self.unicodeScalars.map { "U+" + String($0.value, radix: 16, uppercase: true) }
         }
 
-        /// UNICODE code points as a String. Example: Á = "U+41 U+301"
+        /// UNICODE code points as a String. Example: é = "U+65 U+301"
         public var codePointsText: String {
                 return self.codePoints.joined(separator: " ")
         }
