@@ -12,7 +12,7 @@ extension KeyboardViewController {
                         loadNumberPad()
                 case .emoji:
                         loadEmojiKeyboard()
-                case .gridKeyboard, .gridNumeric:
+                case .tenKeyCantonese, .tenKeyNumeric:
                         loadGridKeyboard()
                 default:
                         loadKeys()
@@ -98,7 +98,7 @@ extension KeyboardViewController {
 
                 let leftBottom: GridKeyView = {
                         guard needsInputModeSwitchKey else {
-                                let event: KeyboardEvent = (keyboardIdiom == .gridNumeric) ? .transform(.gridKeyboard) : .transform(.gridNumeric)
+                                let event: KeyboardEvent = (keyboardIdiom == .tenKeyNumeric) ? .transform(.tenKeyCantonese) : .transform(.tenKeyNumeric)
                                 return GridKeyView(event: event, controller: self)
                         }
                         let key = GridKeyView(event: .globe, controller: self)
@@ -119,11 +119,11 @@ extension KeyboardViewController {
                 let gridStackView = UIStackView()
                 gridStackView.axis = .vertical
                 gridStackView.distribution = .fillProportionally
-                if keyboardIdiom == .gridNumeric {
+                if keyboardIdiom == .tenKeyNumeric {
                         let gridBottomStackView = UIStackView()
                         gridBottomStackView.axis = .horizontal
                         gridBottomStackView.distribution = .fillProportionally
-                        let firstEvent: KeyboardEvent = needsInputModeSwitchKey ? .transform(.gridKeyboard) : .input(.init(primary: .init(".")))
+                        let firstEvent: KeyboardEvent = needsInputModeSwitchKey ? .transform(.tenKeyCantonese) : .input(.init(primary: .init(".")))
                         gridBottomStackView.addArrangedSubview(GridKeyView(event: firstEvent, controller: self))
                         gridBottomStackView.addArrangedSubview(GridKeyView(event: .input(.init(primary: .init("0"))), controller: self))
                         gridBottomStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
@@ -141,7 +141,7 @@ extension KeyboardViewController {
                                 let spaceStackView = UIStackView()
                                 spaceStackView.axis = .horizontal
                                 spaceStackView.distribution = .fillProportionally
-                                spaceStackView.addArrangedSubview(GridKeyView(event: .transform(.gridNumeric), controller: self))
+                                spaceStackView.addArrangedSubview(GridKeyView(event: .transform(.tenKeyNumeric), controller: self))
                                 spaceStackView.addArrangedSubview(GridKeyView(event: .space, controller: self))
                                 gridStackView.addArrangedSubview(spaceStackView)
                         } else {
@@ -154,7 +154,7 @@ extension KeyboardViewController {
                 trailingStackView.distribution = .fillProportionally
                 trailingStackView.addArrangedSubview(GridKeyView(event: .backspace, controller: self))
                 let trailingMiddleEvent: KeyboardEvent = {
-                        let shouldBeDot: Bool = (keyboardIdiom == .gridNumeric) && needsInputModeSwitchKey
+                        let shouldBeDot: Bool = (keyboardIdiom == .tenKeyNumeric) && needsInputModeSwitchKey
                         return shouldBeDot ? .input(.init(primary: .init("."))) : .transform(.cantoneseNumeric)
                 }()
                 trailingStackView.addArrangedSubview(GridKeyView(event: trailingMiddleEvent, controller: self))

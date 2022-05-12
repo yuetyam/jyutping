@@ -182,7 +182,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .saamPing:
                         return .cantonese(.lowercased)
                 case .grid:
-                        return .gridKeyboard
+                        return .tenKeyCantonese
                 }
         }
 
@@ -338,7 +338,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .transform(let newIdiom):
                         AudioFeedback.perform(.modify)
                         let shouldBeGridKeyboard: Bool = keyboardLayout == .grid && newIdiom == .cantonese(.lowercased)
-                        keyboardIdiom = shouldBeGridKeyboard ? .gridKeyboard : newIdiom
+                        keyboardIdiom = shouldBeGridKeyboard ? .tenKeyCantonese : newIdiom
                 case .dismiss:
                         AudioFeedback.perform(.modify)
                         guard !(bufferText.isEmpty) else {
@@ -767,13 +767,13 @@ final class KeyboardViewController: UIInputViewController {
                                 case .alphabetic(.lowercased):
                                         return fallbackKeyboardIdiom
                                 case .alphabetic(.uppercased):
-                                        return shouldBeGridLayout ? .gridKeyboard : .cantonese(.uppercased)
+                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantonese(.uppercased)
                                 case .alphabetic(.capsLocked):
-                                        return shouldBeGridLayout ? .gridKeyboard : .cantonese(.capsLocked)
+                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantonese(.capsLocked)
                                 case .numeric:
-                                        return shouldBeGridLayout ? .gridKeyboard : .cantoneseNumeric
+                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantoneseNumeric
                                 case .symbolic:
-                                        return shouldBeGridLayout ? .gridKeyboard : .cantoneseSymbolic
+                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantoneseSymbolic
                                 default:
                                         return fallbackKeyboardIdiom
                                 }

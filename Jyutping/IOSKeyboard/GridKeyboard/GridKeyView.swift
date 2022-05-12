@@ -169,7 +169,7 @@ private extension GridKeyView {
                         return 70
                 }
                 switch event {
-                case .space where keyboardIdiom == .gridKeyboard:
+                case .space where keyboardIdiom == .tenKeyCantonese:
                         return 140
                 default:
                         return 70
@@ -200,7 +200,7 @@ private extension GridKeyView {
                 case .input(let seat):
                         return seat.primary.text
                 case .space:
-                        if keyboardIdiom == .gridNumeric {
+                        if keyboardIdiom == .tenKeyNumeric {
                                 return "空格"
                         } else if Logogram.current == .simplified {
                                 return "粤拼"
@@ -213,9 +213,9 @@ private extension GridKeyView {
                         switch newLayout {
                         case .cantoneseNumeric:
                                 return "#@$"
-                        case .gridNumeric:
+                        case .tenKeyNumeric:
                                 return "123"
-                        case .gridKeyboard:
+                        case .tenKeyCantonese:
                                 return "拼"
                         default:
                                 return "??"

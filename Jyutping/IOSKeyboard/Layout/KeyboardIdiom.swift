@@ -8,8 +8,8 @@ enum KeyboardIdiom: Hashable {
         case numeric
         case symbolic
 
-        case gridKeyboard
-        case gridNumeric
+        case tenKeyCantonese
+        case tenKeyNumeric
 
         case candidates
         case settings
@@ -44,8 +44,8 @@ extension KeyboardIdiom {
 
         var isGridMode: Bool {
                 switch self {
-                case .gridKeyboard,
-                     .gridNumeric:
+                case .tenKeyCantonese,
+                     .tenKeyNumeric:
                         return true
                 default:
                         return false
