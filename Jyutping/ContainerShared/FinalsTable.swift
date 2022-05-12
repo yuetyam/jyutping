@@ -47,6 +47,17 @@ struct FinalsTable: View {
                                         }
                                         .block()
                                 }
+                                VStack(spacing: 2) {
+                                        HStack {
+                                                Text(verbatim: "鼻音單獨成韻").font(.subheadline).foregroundColor(.secondary)
+                                                Spacer()
+                                        }
+                                        VStack {
+                                                SyllableCell("唔 m4,[m̩],m", width: width)
+                                                SyllableCell("吳 ng4,[ŋ̩],ng", width: width)
+                                        }
+                                        .block()
+                                }
                         }
                         .padding(32)
                 }
@@ -54,37 +65,26 @@ struct FinalsTable: View {
                 .textSelection(.enabled)
                 .navigationTitle("Jyutping Finals")
                 #else
-                if #available(iOS 15.0, *) {
-                        List {
-                                ForEach(0..<blocks.count, id: \.self) { blockIndex in
-                                        let lines = blocks[blockIndex]
-                                        Section {
-                                                ForEach(0..<lines.count, id: \.self) { index in
-                                                        SyllableCell(lines[index], width: width)
-                                                }
+                List {
+                        ForEach(0..<blocks.count, id: \.self) { blockIndex in
+                                let lines = blocks[blockIndex]
+                                Section {
+                                        ForEach(0..<lines.count, id: \.self) { index in
+                                                SyllableCell(lines[index], width: width)
                                         }
                                 }
                         }
-                        .font(.body.monospaced())
-                        .textSelection(.enabled)
-                        .navigationTitle("Jyutping Finals")
-                        .navigationBarTitleDisplayMode(.inline)
-                } else {
-                        List {
-                                ForEach(0..<blocks.count, id: \.self) { blockIndex in
-                                        let lines = blocks[blockIndex]
-                                        Section {
-                                                ForEach(0..<lines.count, id: \.self) { index in
-                                                        SyllableCell(lines[index], width: width)
-                                                }
-                                        }
-                                }
+                        Section {
+                                SyllableCell("唔 m4,[m̩],m", width: width)
+                                SyllableCell("吳 ng4,[ŋ̩],ng", width: width)
+                        } header: {
+                                Text(verbatim: "鼻音單獨成韻")
                         }
-                        .font(.system(.body, design: .monospaced))
-                        .listStyle(.insetGrouped)
-                        .navigationTitle("Jyutping Finals")
-                        .navigationBarTitleDisplayMode(.inline)
                 }
+                .font(.fixedWidth)
+                .listStyle(.insetGrouped)
+                .navigationTitle("Jyutping Finals")
+                .navigationBarTitleDisplayMode(.inline)
                 #endif
         }
 
@@ -159,9 +159,6 @@ private let sourceText: String = """
 書 syu1,[yː],yu
 酸 syun1,[yːn],yun
 雪 syut3,[yːt̚],yut
-.
-唔 m4,[m̩],m
-五 ng5,[ŋ̩],ng
 """
 
 

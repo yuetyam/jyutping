@@ -15,20 +15,20 @@ struct TonesTable: View {
                 } else if horizontalSize == .compact {
                         return 80
                 } else {
-                        return 120
+                        return 128
                 }
                 #endif
         }
         private var responsiveFont: Font {
                 #if os(macOS)
-                return Font.body
+                return Font.fixedWidth
                 #else
                 if Device.isPhone {
                         return Font.callout
                 } else if horizontalSize == .compact {
                         return Font.subheadline
                 } else {
-                        return Font.body
+                        return Font.fixedWidth
                 }
                 #endif
         }
@@ -59,7 +59,7 @@ struct TonesTable: View {
                                                 ToneCell(dataLines[index], width: width)
                                         }
                                 }
-                                .font(.body.monospaced())
+                                .font(responsiveFont)
                                 .block()
 
                                 HStack(spacing: 12) {
@@ -80,37 +80,20 @@ struct TonesTable: View {
                 .textSelection(.enabled)
                 .navigationTitle("Jyutping Tones")
                 #else
-                if #available(iOS 15.0, *) {
-                        List {
-                                Section {
-                                        ForEach(0..<dataLines.count, id: \.self) { index in
-                                                ToneCell(dataLines[index], width: width)
-                                        }
-                                }
-                                Section {
-                                        tonesDescription
+                List {
+                        Section {
+                                ForEach(0..<dataLines.count, id: \.self) { index in
+                                        ToneCell(dataLines[index], width: width)
                                 }
                         }
-                        .font(responsiveFont)
-                        .textSelection(.enabled)
-                        .navigationTitle("Jyutping Tones")
-                        .navigationBarTitleDisplayMode(.inline)
-                } else {
-                        List {
-                                Section {
-                                        ForEach(0..<dataLines.count, id: \.self) { index in
-                                                ToneCell(dataLines[index], width: width)
-                                        }
-                                }
-                                Section {
-                                        tonesDescription
-                                }
+                        Section {
+                                tonesDescription
                         }
-                        .font(responsiveFont)
-                        .listStyle(.insetGrouped)
-                        .navigationTitle("Jyutping Tones")
-                        .navigationBarTitleDisplayMode(.inline)
                 }
+                .font(responsiveFont)
+                .listStyle(.insetGrouped)
+                .navigationTitle("Jyutping Tones")
+                .navigationBarTitleDisplayMode(.inline)
                 #endif
         }
 

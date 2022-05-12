@@ -2,13 +2,33 @@ import SwiftUI
 
 struct TableLinksView: View {
         var body: some View {
-                NavigationLink(destination: InitialsTable()) {
+                NavigationLink {
+                        if #available(iOS 15.0, *) {
+                                InitialsTable().textSelection(.enabled)
+                        } else {
+                                InitialsTable()
+                        }
+                } label: {
                         Label("Jyutping Initials", systemImage: "tablecells")
                 }
-                NavigationLink(destination: FinalsTable()) {
+
+                NavigationLink {
+                        if #available(iOS 15.0, *) {
+                                FinalsTable().textSelection(.enabled)
+                        } else {
+                                FinalsTable()
+                        }
+                } label: {
                         Label("Jyutping Finals", systemImage: "tablecells")
                 }
-                NavigationLink(destination: TonesTable()) {
+
+                NavigationLink {
+                        if #available(iOS 15.0, *) {
+                                TonesTable().textSelection(.enabled)
+                        } else {
+                                TonesTable()
+                        }
+                } label: {
                         Label("Jyutping Tones", systemImage: "tablecells")
                 }
         }

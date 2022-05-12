@@ -39,23 +39,13 @@ struct InitialsTable: View {
                 .textSelection(.enabled)
                 .navigationTitle("Jyutping Initials")
                 #else
-                if #available(iOS 15.0, *) {
-                        List(0..<dataLines.count, id: \.self) { index in
-                                SyllableCell(dataLines[index], width: width)
-                        }
-                        .font(.body.monospaced())
-                        .textSelection(.enabled)
-                        .navigationTitle("Jyutping Initials")
-                        .navigationBarTitleDisplayMode(.inline)
-                } else {
-                        List(0..<dataLines.count, id: \.self) { index in
-                                SyllableCell(dataLines[index], width: width)
-                        }
-                        .font(.system(.body, design: .monospaced))
-                        .listStyle(.insetGrouped)
-                        .navigationTitle("Jyutping Initials")
-                        .navigationBarTitleDisplayMode(.inline)
+                List(0..<dataLines.count, id: \.self) { index in
+                        SyllableCell(dataLines[index], width: width)
                 }
+                .font(.fixedWidth)
+                .listStyle(.insetGrouped)
+                .navigationTitle("Jyutping Initials")
+                .navigationBarTitleDisplayMode(.inline)
                 #endif
         }
 
