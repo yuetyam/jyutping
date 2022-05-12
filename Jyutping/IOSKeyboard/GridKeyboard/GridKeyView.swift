@@ -53,7 +53,11 @@ final class GridKeyView: UIView {
                 case .input(let seat):
                         shape.backgroundColor = highlightingBackColor
                         let text: String = seat.primary.text
-                        controller.operate(.input(text))
+                        if let combination = Combination.match(for: text) {
+                                controller.operate(.tenKey(combination))
+                        } else {
+                                controller.operate(.input(text))
+                        }
                 default:
                         break
                 }
@@ -307,5 +311,66 @@ private extension GridKeyView {
         }
         var foreColor: UIColor {
                 return isDarkAppearance ? .white : .black
+        }
+}
+
+
+enum Combination {
+
+        case ABC
+        case DEF
+        case GHI
+        case JKL
+        case MNO
+        case PQRS
+        case TUV
+        case WXYZ
+
+        var text: String {
+                switch self {
+                case .ABC:
+                        return "abc"
+                case .DEF:
+                        return "def"
+                case .GHI:
+                        return "ghi"
+                case .JKL:
+                        return "jkl"
+                case .MNO:
+                        return "mno"
+                case .PQRS:
+                        return "pqrs"
+                case .TUV:
+                        return "tuv"
+                case .WXYZ:
+                        return "wxyz"
+                }
+        }
+
+        var letters: [String] {
+                return self.text.map({ String($0) })
+        }
+
+        static func match(for text: String) -> Combination? {
+                switch text.lowercased() {
+                case Combination.ABC.text:
+                        return .ABC
+                case Combination.DEF.text:
+                        return .DEF
+                case Combination.GHI.text:
+                        return .GHI
+                case Combination.JKL.text:
+                        return .JKL
+                case Combination.MNO.text:
+                        return .MNO
+                case Combination.PQRS.text:
+                        return .PQRS
+                case Combination.TUV.text:
+                        return .TUV
+                case Combination.WXYZ.text:
+                        return .WXYZ
+                default:
+                        return nil
+                }
         }
 }

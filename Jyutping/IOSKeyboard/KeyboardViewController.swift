@@ -360,6 +360,10 @@ final class KeyboardViewController: UIInputViewController {
                         triggerHapticFeedback()
                         aftercareSelected(candidate)
                         adjustKeyboardIdiom()
+                case .tenKey(let combination):
+                        // FIXME: schemes
+                        bufferText += combination.letters.first!
+                        AudioFeedback.perform(.input)
                 }
         }
         private func adjustKeyboardIdiom() {

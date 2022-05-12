@@ -13,4 +13,5 @@ enum Operation: Hashable {
         case transform(KeyboardIdiom)
         case dismiss
         case select(Candidate)
+        case tenKey(Combination)
 }
