@@ -14,7 +14,8 @@ struct Identifiers {
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
         func numberOfSections(in tableView: UITableView) -> Int {
-                return footnoteStyle < 3 ? 7 : 6
+                let needsTonesOptions: Bool = footnoteStyle < 3
+                return needsTonesOptions ? 7 : 6
         }
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,6 +27,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 return false
                         }
                 }()
+                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch section {
                 case 0:
                         // Audio Feedback & Haptic Feedback
@@ -35,26 +37,31 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         // Characters, Logogram
                         return 4
                 case 2:
-                        // Keyboard Layouts
-                        // No GridKeyboard (10 Key) for iPad
-                        // return isPhone ? 3 : 2
-                        return 2
+                        // Keyboard Layouts (Arrangements)
+                        // No TenKey keyboards for iPad
+                        return isPhone ? 3 : 2
                 case 3:
                         // Jyutping Display
                         return 3
-                case 4 where footnoteStyle < 3:
-                        // Jyutping Tones Display
+                case 4:
+                        // Jyutping Tones Display || Space double tapping shortcut
                         return 4
-                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                case 5 where needsTonesOptions:
                         // Space double tapping shortcut
                         return 4
-                default:
+                case 5 where !needsTonesOptions:
                         // Clear User Lexicon
+                        return 1
+                case 6:
+                        // Clear User Lexicon
+                        return 1
+                default:
                         return 1
                 }
         }
 
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch section {
                 case 1:
                         return NSLocalizedString("Characters", comment: .empty)
@@ -62,11 +69,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return NSLocalizedString("Keyboard Layout", comment: .empty)
                 case 3:
                         return NSLocalizedString("Jyutping Display", comment: .empty)
-                case 4 where footnoteStyle < 3:
+                case 4 where needsTonesOptions:
                         return NSLocalizedString("Jyutping Tones Display", comment: .empty)
-                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                case 4 where !needsTonesOptions:
                         return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
-                case 5 where footnoteStyle >= 3, 6:
+                case 5 where needsTonesOptions:
+                        return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
+                case 5 where !needsTonesOptions:
+                        return .zeroWidthSpace
+                case 6:
                         return .zeroWidthSpace
                 default:
                         return nil
@@ -75,18 +86,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
                 switch section {
                 case 0:
+                        guard !hasFullAccess else { return nil }
                         guard traitCollection.userInterfaceIdiom == .phone else { return nil }
-                        if hasFullAccess {
-                                return nil
-                        } else {
-                                return NSLocalizedString("Haptic Feedback requires Full Access", comment: .empty)
-                        }
+                        return NSLocalizedString("Haptic Feedback requires Full Access", comment: .empty)
                 default:
                         return nil
                 }
         }
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch indexPath.section {
                 case 0:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
@@ -164,7 +173,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
 
-                case 4 where footnoteStyle < 3:
+                case 4 where needsTonesOptions:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -183,7 +192,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                case 4 where !needsTonesOptions, 5 where needsTonesOptions:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -202,7 +211,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 5 where footnoteStyle >= 3, 6:
+                case 5 where !needsTonesOptions, 6:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.clearLexiconSettingsCell, for: indexPath)
                         cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: .empty)
                         cell.textLabel?.textColor = .systemRed
@@ -214,6 +223,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch indexPath.section {
                 case 1:
                         tableView.deselectRow(at: indexPath, animated: true)
@@ -263,7 +273,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4 where footnoteStyle < 3:
+                case 4 where needsTonesOptions:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let value: Int = {
                                 switch indexPath.row {
@@ -280,7 +290,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4 where footnoteStyle >= 3, 5 where footnoteStyle < 3:
+                case 4 where !needsTonesOptions, 5 where needsTonesOptions:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let value: Int = {
                                 switch indexPath.row {
@@ -297,7 +307,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 5 where footnoteStyle >= 3, 6:
+                case 5 where !needsTonesOptions, 6:
                         clearUserLexicon()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)
