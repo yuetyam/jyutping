@@ -33,9 +33,9 @@ Cantonese Jyutping Keyboard for iOS & macOS
 > 兼容性 / Compatibility: macOS 12.0+ (Monterey or above)
 
 ## Screenshots
-<img src="images/screenshot.png" alt="screenshots" width="460"/>
+<img src="images/screenshot.png" alt="screenshots" width="450"/>
 <br>
-<img src="images/screenshot-mac.png" alt="screenshots" width="460"/>
+<img src="images/screenshot-mac.png" alt="screenshots" width="450"/>
 
 
 ## Build requirements
