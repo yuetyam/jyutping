@@ -11,7 +11,7 @@ struct MacSearchView: View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 TextField("Lookup Jyutping for Cantonese", text: $inputText)
-                                        .textFieldStyle(.roundedBorder)
+                                        .textFieldStyle(.plain)
                                         .disableAutocorrection(true)
                                         .onSubmit {
                                                 let trimmedInput: String = inputText.trimmed()
@@ -30,10 +30,13 @@ struct MacSearchView: View {
                                                         pronunciations = search.romanizations
                                                 }
                                         }
+                                        .font(.masterHeadline)
+                                        .padding(8)
+                                        .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                         .padding(.vertical)
                                 if !cantonese.isEmpty {
                                         HStack {
-                                                Text(verbatim: cantonese).font(.title3)
+                                                Text(verbatim: cantonese).font(.masterHeadline)
                                                 Spacer()
                                                 Speaker(cantonese)
                                         }
