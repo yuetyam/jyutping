@@ -1,6 +1,7 @@
 import SwiftUI
 
 extension Color {
+
         static func backgroundColor(colorScheme: ColorScheme) -> Color {
                 switch colorScheme {
                 case .dark:
@@ -30,5 +31,15 @@ extension Color {
 
                 }
         }
+
+        @available(iOS, unavailable)
+        static let textBackgroundColor: Color = {
+                #if os(macOS)
+                let color: Color = Color(nsColor: NSColor.textBackgroundColor)
+                return color
+                #else
+                return Color.gray
+                #endif
+        }()
 }
 
