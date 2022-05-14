@@ -92,13 +92,14 @@ struct Engine {
                 guard let bestScheme: [String] = schemes.first, !bestScheme.isEmpty else {
                         return processUnsplittable(text)
                 }
-                if bestScheme.reduce(0, {$0 + $1.count}) == text.count {
-                        return process(text: text, origin: origin, sequences: schemes)
+                let modifiedText = text.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
+                if bestScheme.joined().count == modifiedText.count {
+                        return process(text: modifiedText, origin: origin, sequences: schemes)
                 } else {
                         return processPartial(text: text, origin: origin, sequences: schemes)
                 }
         }
-        
+
         private func processUnsplittable(_ text: String) -> [Candidate] {
                 var combine: [Candidate] = match(for: text) + prefix(match: text) + shortcut(for: text)
                 for number in 1..<text.count {
