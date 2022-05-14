@@ -63,8 +63,10 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
                 let needsTonesOptions: Bool = footnoteStyle < 3
                 switch section {
+                case 0:
+                        return nil
                 case 1:
-                        return NSLocalizedString("Characters", comment: .empty)
+                        return nil
                 case 2:
                         return NSLocalizedString("Keyboard Layout", comment: .empty)
                 case 3:
@@ -126,13 +128,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("Traditional", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("Traditional Characters", comment: .empty)
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("Traditional, Hong Kong", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("Traditional Characters, Hong Kong", comment: .empty)
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("Traditional, Taiwan", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("Traditional Characters, Taiwan", comment: .empty)
                         case 3:
-                                cell.textLabel?.text = NSLocalizedString("Simplified", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("Simplified Characters", comment: .empty)
                         default:
                                 break
                         }

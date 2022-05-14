@@ -288,14 +288,14 @@ extension KeyboardViewController {
                 toolBar.reset()
                 keyboardIdiom = fallbackKeyboardIdiom
         }
-        
-        
+
+
         // MARK: - SettingsView
 
         private func loadSettingsView() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeArrangedSubviews()
-                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 128
+                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 100
                 let upArrow: ToolButton = .chevron(.up, leftInset: 16, rightInset: 16)
                 settingsView.addSubview(upArrow)
                 upArrow.translatesAutoresizingMaskIntoConstraints = false
@@ -304,8 +304,8 @@ extension KeyboardViewController {
                         settingsView.heightAnchor.constraint(equalToConstant: extended),
                         upArrow.topAnchor.constraint(equalTo: settingsView.topAnchor),
                         upArrow.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
-                        upArrow.widthAnchor.constraint(equalToConstant: 64),
-                        upArrow.heightAnchor.constraint(equalToConstant: 40)
+                        upArrow.widthAnchor.constraint(equalToConstant: 66),
+                        upArrow.heightAnchor.constraint(equalToConstant: 36)
                 ])
                 upArrow.tintColor = isDarkAppearance ? .white : .black
                 upArrow.addTarget(self, action: #selector(dismissSettingsView), for: .touchUpInside)
