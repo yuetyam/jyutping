@@ -3,8 +3,6 @@ import SwiftUI
 @available(iOS 15.0, *)
 struct AboutView_iOS15: View {
 
-        @State private var isDonationViewPresented: Bool = false
-
         var body: some View {
                 NavigationView {
                         List {
@@ -122,17 +120,12 @@ struct AboutView_iOS15: View {
                                 }
 
                                 Section {
-                                        Button {
-                                                isDonationViewPresented.toggle()
-                                        } label: {
+                                        NavigationLink(destination: DonationView()) {
                                                 Label {
                                                         Text("button.support.author").foregroundColor(.primary)
                                                 } icon: {
                                                         Image(systemName: "heart").symbolRenderingMode(.multicolor)
                                                 }
-                                        }
-                                        .sheet(isPresented: $isDonationViewPresented) {
-                                                DonationView(isPresented: $isDonationViewPresented)
                                         }
                                 }
                         }
@@ -146,57 +139,47 @@ struct AboutView_iOS15: View {
 @available(iOS 15.0, *)
 struct DonationView: View {
 
-        @Binding var isPresented: Bool
-
         var body: some View {
-                NavigationView {
-                        List {
-                                Section {
-                                        Button {
-                                                print("IAP")
-                                        } label: {
-                                                HStack {
-                                                        Spacer()
-                                                        Text("Support Author")
-                                                        Text(verbatim: "$0.99")
-                                                        Spacer()
-                                                }
-                                        }
-                                }
-                                Section {
-                                        Button {
-                                                print("IAP")
-                                        } label: {
-                                                HStack {
-                                                        Spacer()
-                                                        Text("Support Author Plus")
-                                                        Text(verbatim: "$1.99")
-                                                        Spacer()
-                                                }
-                                        }
-                                }
-                                Section {
-                                        Button {
-                                                print("IAP")
-                                        } label: {
-                                                HStack {
-                                                        Spacer()
-                                                        Text("Support Author Max")
-                                                        Text(verbatim: "$5.99")
-                                                        Spacer()
-                                                }
+                List {
+                        Section {
+                                Button {
+                                        print("IAP")
+                                } label: {
+                                        HStack {
+                                                Spacer()
+                                                Text("Support Author")
+                                                Text(verbatim: "$0.99")
+                                                Spacer()
                                         }
                                 }
                         }
-                        .navigationTitle("Thank You")
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                                ToolbarItem(placement: .cancellationAction) {
-                                        Button("Cancel") {
-                                                isPresented = false
+                        Section {
+                                Button {
+                                        print("IAP")
+                                } label: {
+                                        HStack {
+                                                Spacer()
+                                                Text("Support Author Plus")
+                                                Text(verbatim: "$1.99")
+                                                Spacer()
+                                        }
+                                }
+                        }
+                        Section {
+                                Button {
+                                        print("IAP")
+                                } label: {
+                                        HStack {
+                                                Spacer()
+                                                Text("Support Author Max")
+                                                Text(verbatim: "$5.99")
+                                                Spacer()
                                         }
                                 }
                         }
                 }
+                .navigationTitle("Thank You")
+                .navigationBarTitleDisplayMode(.inline)
         }
 }
+
