@@ -130,7 +130,7 @@ struct Engine {
                         return candidates
                 }
                 let tailText: String = String(text.dropFirst(firstCandidate.input.count))
-                let tailJyutpings: [String] = Splitter.engineSplit(tailText)
+                let tailJyutpings: [String] = Splitter.peekSplit(tailText)
                 guard !tailJyutpings.isEmpty else { return candidates }
                 var combine: [Candidate] = []
                 for (index, _) in tailJyutpings.enumerated().reversed() {
@@ -173,7 +173,7 @@ struct Engine {
                         let newFirst: Candidate = firstCandidate + tailOne
                         return match(for: text) + prefix(match: text, count: 5) + [newFirst] + candidates + shortcut(for: text)
                 } else {
-                        let tailJyutpings: [String] = Splitter.engineSplit(tailText)
+                        let tailJyutpings: [String] = Splitter.peekSplit(tailText)
                         guard !tailJyutpings.isEmpty else {
                                 return match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
                         }

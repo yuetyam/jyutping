@@ -1,7 +1,9 @@
 struct Splitter {
-        private static func prepare(text: String) -> (text: String, raw: String, tones: String, blocks: [String]) {
+
+        /// Split text to sequence blocks by tones
+        private static func prepare(text: String) -> (tones: String, blocks: [String]) {
                 let tones: String = text.tones
-                guard !tones.isEmpty else { return (text, text, tones, []) }
+                guard !tones.isEmpty else { return (tones, []) }
                 var unit: String = .empty
                 var blocks: [String] = []
                 for character in text {
@@ -14,12 +16,11 @@ struct Splitter {
                 if !unit.isEmpty {
                         blocks.append(unit)
                 }
-                let raw: String = text.removedTones()
-                return (text, raw, tones, blocks)
+                return (tones, blocks)
         }
-        static func engineSplit(_ text: String) -> [String] {
+        static func peekSplit(_ text: String) -> [String] {
                 guard let sequence: [String] = split(text).first, !sequence.isEmpty else { return [] }
-                let scheme = sequence.map({ syllable -> String in
+                let scheme: [String] = sequence.map { syllable -> String in
                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
                                 .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
@@ -27,7 +28,7 @@ struct Splitter {
                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return converted
-                })
+                }
                 return scheme
         }
         static func split(_ text: String) -> [[String]] {
@@ -36,7 +37,7 @@ struct Splitter {
                         return separate(text: text)
                 }
                 let prepared = prepare(text: text)
-                let schemes: [[String]] = performSplit(text: prepared.raw)
+                let schemes: [[String]] = performSplit(text: text.removedTones())
                 guard !prepared.tones.isEmpty else { return schemes }
 
                 let blocks: [String] = prepared.blocks
@@ -73,7 +74,7 @@ struct Splitter {
                 return sequences(for: checked)
         }
         private static func separate(text: String) -> [[String]] {
-                let parts: [String] = text.split(separator: "'").map({ String($0) })
+                let parts: [String] = text.components(separatedBy: "'")
                 let schemes: [[String]] = Splitter.sequences(for: parts)
                 return schemes
         }
@@ -89,10 +90,10 @@ struct Splitter {
         }
 
         private static func performSplit(text: String) -> [[String]] {
-                let leadingJyutpings: [String] = splitLeading(text)
-                guard !leadingJyutpings.isEmpty else { return [] }
+                let leadingSyllables: [String] = splitLeading(text)
+                guard !leadingSyllables.isEmpty else { return [] }
 
-                var sequences: [[String]] = leadingJyutpings.map { [$0] }
+                var sequences: [[String]] = leadingSyllables.map { [$0] }
                 var leadingLength: Int = 0
                 var shouldContinue: Bool = true
                 var latestGeneration: [[String]] = sequences
@@ -139,10 +140,10 @@ struct Splitter {
                 var tokens: [String] = []
                 let maxLength: Int = min(text.count, 6)
                 for number in 0..<maxLength {
-                        let dropCount: Int = (text.count - 1) - number
-                        let part: String = String(text.dropLast(dropCount))
-                        if syllables.contains(part) {
-                                tokens.append(part)
+                        let tailCount: Int = (text.count - 1) - number
+                        let leading: String = String(text.dropLast(tailCount))
+                        if syllables.contains(leading) {
+                                tokens.append(leading)
                         }
                 }
                 return tokens
