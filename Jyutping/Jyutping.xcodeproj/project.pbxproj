@@ -137,8 +137,8 @@
 		37B1616D281A02C100C95317 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615D281A02C100C95317 /* HomeView_iOS14.swift */; };
 		37B1616E281A02C100C95317 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615E281A02C100C95317 /* HomeView_iOS15.swift */; };
 		37B1616F281A02C100C95317 /* PrivacyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615F281A02C100C95317 /* PrivacyNoticeView.swift */; };
-		37B16170281A02C100C95317 /* AboutView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16161281A02C100C95317 /* AboutView_iOS14.swift */; };
-		37B16171281A02C100C95317 /* AboutView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16162281A02C100C95317 /* AboutView_iOS15.swift */; };
+		37B16170281A02C100C95317 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16161281A02C100C95317 /* AboutView.swift */; };
+		37B16171281A02C100C95317 /* DonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16162281A02C100C95317 /* DonationView.swift */; };
 		37B16173281A057500C95317 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16172281A057500C95317 /* ColorExtensions.swift */; };
 		37B16174281A06B600C95317 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E3281912ED00C95317 /* MenuCopyButton.swift */; };
 		37B16175281A06C900C95317 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16172281A057500C95317 /* ColorExtensions.swift */; };
@@ -393,8 +393,8 @@
 		37B1615D281A02C100C95317 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
 		37B1615E281A02C100C95317 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
 		37B1615F281A02C100C95317 /* PrivacyNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyNoticeView.swift; sourceTree = "<group>"; };
-		37B16161281A02C100C95317 /* AboutView_iOS14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView_iOS14.swift; sourceTree = "<group>"; };
-		37B16162281A02C100C95317 /* AboutView_iOS15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView_iOS15.swift; sourceTree = "<group>"; };
+		37B16161281A02C100C95317 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		37B16162281A02C100C95317 /* DonationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationView.swift; sourceTree = "<group>"; };
 		37B16172281A057500C95317 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		37B16176281A07A000C95317 /* IOSContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSContentView.swift; sourceTree = "<group>"; };
 		37B1617D281A0E0400C95317 /* MacContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
@@ -871,8 +871,8 @@
 		37B16160281A02C100C95317 /* About */ = {
 			isa = PBXGroup;
 			children = (
-				37B16161281A02C100C95317 /* AboutView_iOS14.swift */,
-				37B16162281A02C100C95317 /* AboutView_iOS15.swift */,
+				37B16161281A02C100C95317 /* AboutView.swift */,
+				37B16162281A02C100C95317 /* DonationView.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -1311,7 +1311,7 @@
 				37B160EF281912EE00C95317 /* SafariView.swift in Sources */,
 				37B16163281A02C100C95317 /* TonesTable.swift in Sources */,
 				37B160FF281912EE00C95317 /* UIDevice+modelName.swift in Sources */,
-				37B16171281A02C100C95317 /* AboutView_iOS15.swift in Sources */,
+				37B16171281A02C100C95317 /* DonationView.swift in Sources */,
 				37B160F9281912EE00C95317 /* Speaker.swift in Sources */,
 				37AEE49C282A51BE00C54BD9 /* FontExtensions.swift in Sources */,
 				37B16166281A02C100C95317 /* JyutpingView_iOS14.swift in Sources */,
@@ -1331,7 +1331,7 @@
 				37B16103281912EE00C95317 /* TextExtensions.swift in Sources */,
 				37B160F7281912EE00C95317 /* EnhancedTextField.swift in Sources */,
 				37B16105281912EE00C95317 /* Syllable2IPA.swift in Sources */,
-				37B16170281A02C100C95317 /* AboutView_iOS14.swift in Sources */,
+				37B16170281A02C100C95317 /* AboutView.swift in Sources */,
 				37B16168281A02C100C95317 /* FinalsTable.swift in Sources */,
 				37B160A828190DBE00C95317 /* ContainerApp.swift in Sources */,
 				37B160FD281912EE00C95317 /* Device.swift in Sources */,

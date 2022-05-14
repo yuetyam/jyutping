@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AboutView_iOS14: View {
+struct AboutView: View {
 
         private let websiteIconName: String = {
                 if #available(iOS 15.0, *) {
@@ -139,6 +139,18 @@ struct AboutView_iOS14: View {
                                                 MenuCopyButton("https://apps.apple.com/app/id1509367629", title: "Copy App Store link")
                                         }
                                 }
+
+                                if #available(iOS 15.0, *) {
+                                        Section {
+                                                NavigationLink(destination: DonationView()) {
+                                                        Label {
+                                                                Text("button.support.author").foregroundColor(.primary)
+                                                        } icon: {
+                                                                Image(systemName: "heart").symbolRenderingMode(.multicolor)
+                                                        }
+                                                }
+                                        }
+                                }
                         }
                         .listStyle(.insetGrouped)
                         .navigationTitle("About")
@@ -148,13 +160,13 @@ struct AboutView_iOS14: View {
 }
 
 
-struct EmailFeedbackButton: View {
+private struct EmailFeedbackButton: View {
 
         @State private var isMailOnPhoneUnavailable: Bool = false
         @State private var isMailOnPadUnavailable: Bool = false
 
         var body: some View {
-                Button(action: {
+                Button {
                         UIApplication.shared.open(mailtoUrl) { success in
                                 if !success {
                                         if Device.isPhone {
@@ -165,7 +177,7 @@ struct EmailFeedbackButton: View {
                                         }
                                 }
                         }
-                }) {
+                } label: {
                         EnhancedLabel("Email Feedback", icon: "envelope", symbol: Image(systemName: "square.and.pencil"))
                 }
                 .actionSheet(isPresented: $isMailOnPhoneUnavailable) {

@@ -19,7 +19,7 @@ struct IOSContentView: View {
                                         }
                                         .tag(1)
 
-                                AboutView_iOS15()
+                                AboutView()
                                         .tabItem {
                                                 Label("About", systemImage: "info.circle").environment(\.symbolVariants, .none)
                                         }
@@ -38,7 +38,7 @@ struct IOSContentView: View {
                                         }
                                         .tag(1)
 
-                                AboutView_iOS14()
+                                AboutView()
                                         .tabItem {
                                                 Label("About", systemImage: "info.circle")
                                         }
