@@ -411,11 +411,11 @@ final class KeyboardViewController: UIInputViewController {
                         }()
                         let inputCount: Int = {
                                 let candidateInputCount: Int = candidateInputText.count
-                                guard bufferTextLength != 2 else { return candidateInputCount }
+                                guard bufferTextLength > 2 else { return candidateInputCount }
                                 guard candidateInputText.contains("jyu") else { return candidateInputCount }
                                 let suffixCount: Int = max(0, bufferTextLength - candidateInputCount)
                                 let leading = bufferText.dropLast(suffixCount)
-                                let modifiedLeading = leading.replacingOccurrences(of: "jyu", with: "xxx").replacingOccurrences(of: "yu", with: "jyu")
+                                let modifiedLeading = leading.replacingOccurrences(of: "(c|j|s|z)yu", with: "xxx", options: .regularExpression).replacingOccurrences(of: "yu", with: "jyu")
                                 return candidateInputCount - (modifiedLeading.count - leading.count)
                         }()
                         let leading = bufferText.dropLast(bufferTextLength - inputCount)
