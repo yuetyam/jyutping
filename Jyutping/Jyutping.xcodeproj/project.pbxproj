@@ -33,7 +33,6 @@
 		3764CEF727BE127000DCFB51 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE827BE127000DCFB51 /* Direction.swift */; };
 		3764CEF827BE127000DCFB51 /* UInt16Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE927BE127000DCFB51 /* UInt16Extensions.swift */; };
 		3764CEF927BE127000DCFB51 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEA27BE127000DCFB51 /* Candidate.swift */; };
-		3764CEFA27BE127000DCFB51 /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEB27BE127000DCFB51 /* Splitter.swift */; };
 		3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEC27BE127000DCFB51 /* FontExtensions.swift */; };
 		3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */; };
 		3777EF0327F9CF8500D1EED0 /* SaamPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0227F9CF8500D1EED0 /* SaamPing.swift */; };
@@ -68,7 +67,6 @@
 		3797FCD327BF915E00C6BB8D /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAA27BF915D00C6BB8D /* UIColorExtensions.swift */; };
 		3797FCD427BF915E00C6BB8D /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAB27BF915D00C6BB8D /* StringExtensions.swift */; };
 		3797FCD527BF915E00C6BB8D /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAC27BF915D00C6BB8D /* KeyboardViewController+CollectionView.swift */; };
-		3797FCD627BF915E00C6BB8D /* Splitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAE27BF915D00C6BB8D /* Splitter.swift */; };
 		3797FCD727BF915E00C6BB8D /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAF27BF915D00C6BB8D /* UserLexicon.swift */; };
 		3797FCD827BF915E00C6BB8D /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCB027BF915D00C6BB8D /* Engine.swift */; };
 		3797FCD927BF915E00C6BB8D /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCB127BF915E00C6BB8D /* Candidate.swift */; };
@@ -156,6 +154,8 @@
 		37CB2ED52818E90E0092E0DD /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED42818E90E0092E0DD /* EmojiData */; };
 		37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED62818E9210092E0DD /* CharacterSets */; };
 		37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED82818E9260092E0DD /* CommonExtensions */; };
+		37EDC490283175B400E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC48F283175B400E45916 /* CoreIME */; };
+		37EDC492283175C100E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC491283175C100E45916 /* CoreIME */; };
 		37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE888281CD5F300461235 /* MacIntroductionsView.swift */; };
 		37EEE88B281CD8DC00461235 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16153281A02C100C95317 /* InitialsTable.swift */; };
 		37EEE88C281CD90A00461235 /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16156281A02C100C95317 /* SyllableCell.swift */; };
@@ -262,7 +262,6 @@
 		3764CEE827BE127000DCFB51 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		3764CEE927BE127000DCFB51 /* UInt16Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UInt16Extensions.swift; sourceTree = "<group>"; };
 		3764CEEA27BE127000DCFB51 /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
-		3764CEEB27BE127000DCFB51 /* Splitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splitter.swift; sourceTree = "<group>"; };
 		3764CEEC27BE127000DCFB51 /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		3764CEFF27BE13D900DCFB51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -300,7 +299,6 @@
 		3797FCAA27BF915D00C6BB8D /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		3797FCAB27BF915D00C6BB8D /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3797FCAC27BF915D00C6BB8D /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
-		3797FCAE27BF915D00C6BB8D /* Splitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Splitter.swift; sourceTree = "<group>"; };
 		3797FCAF27BF915D00C6BB8D /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		3797FCB027BF915D00C6BB8D /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		3797FCB127BF915E00C6BB8D /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
@@ -418,6 +416,7 @@
 		37CB2ECD2818E8DD0092E0DD /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
 		37CB2ECE2818E8E70092E0DD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
 		37CB2ECF2818E8EA0092E0DD /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../Modules/EmojiData; sourceTree = "<group>"; };
+		37EDC48E2831759700E45916 /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
 		37EEE87B281BAACF00461235 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87C281BAAD000461235 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87D281BAAD100461235 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -439,6 +438,7 @@
 				37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */,
 				37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */,
 				37B1607C2818EDAA00C95317 /* InputMethodData in Frameworks */,
+				37EDC490283175B400E45916 /* CoreIME in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +463,7 @@
 				37CB2ED12818E9040092E0DD /* CharacterSets in Frameworks */,
 				37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */,
 				37CB2ED52818E90E0092E0DD /* EmojiData in Frameworks */,
+				37EDC492283175C100E45916 /* CoreIME in Frameworks */,
 				37B1607A2818EDA100C95317 /* InputMethodData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +515,7 @@
 		3764CEA327BE103100DCFB51 = {
 			isa = PBXGroup;
 			children = (
+				37EDC48E2831759700E45916 /* CoreIME */,
 				37B1607D2818F0C100C95317 /* ContainersData */,
 				37B160782818ED9900C95317 /* InputMethodData */,
 				37CB2ECE2818E8E70092E0DD /* CommonExtensions */,
@@ -563,7 +565,6 @@
 				3764CEE727BE127000DCFB51 /* SettingsView.swift */,
 				3764CEDE27BE126F00DCFB51 /* Engine.swift */,
 				3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */,
-				3764CEEB27BE127000DCFB51 /* Splitter.swift */,
 				3764CEE827BE127000DCFB51 /* Direction.swift */,
 				3764CEE227BE126F00DCFB51 /* KeyCode.swift */,
 				3764CEE427BE126F00DCFB51 /* Modifier.swift */,
@@ -711,7 +712,6 @@
 		3797FCAD27BF915D00C6BB8D /* Candidate */ = {
 			isa = PBXGroup;
 			children = (
-				3797FCAE27BF915D00C6BB8D /* Splitter.swift */,
 				3797FCAF27BF915D00C6BB8D /* UserLexicon.swift */,
 				3797FCB027BF915D00C6BB8D /* Engine.swift */,
 				3797FCB127BF915E00C6BB8D /* Candidate.swift */,
@@ -906,6 +906,7 @@
 				37CB2ED62818E9210092E0DD /* CharacterSets */,
 				37CB2ED82818E9260092E0DD /* CommonExtensions */,
 				37B1607B2818EDAA00C95317 /* InputMethodData */,
+				37EDC48F283175B400E45916 /* CoreIME */,
 			);
 			productName = Jyutping;
 			productReference = 3764CEAC27BE103100DCFB51 /* Jyutping.app */;
@@ -965,6 +966,7 @@
 				37CB2ED22818E9080092E0DD /* CommonExtensions */,
 				37CB2ED42818E90E0092E0DD /* EmojiData */,
 				37B160792818EDA100C95317 /* InputMethodData */,
+				37EDC491283175C100E45916 /* CoreIME */,
 			);
 			productName = IOSKeyboard;
 			productReference = 3797FC7F27BF90C000C6BB8D /* IOSKeyboard.appex */;
@@ -1211,7 +1213,6 @@
 				3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */,
 				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
-				3764CEFA27BE127000DCFB51 /* Splitter.swift in Sources */,
 				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
 				3764CEED27BE127000DCFB51 /* Engine.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
@@ -1267,7 +1268,6 @@
 				3797FCBA27BF915E00C6BB8D /* Operation.swift in Sources */,
 				3797FCBF27BF915E00C6BB8D /* CandidateCell.swift in Sources */,
 				3797FCDF27BF915E00C6BB8D /* KeyView.swift in Sources */,
-				3797FCD627BF915E00C6BB8D /* Splitter.swift in Sources */,
 				3797FCCA27BF915E00C6BB8D /* KeyboardInterface.swift in Sources */,
 				3797FCCB27BF915E00C6BB8D /* Emoji.swift in Sources */,
 				3797FCD827BF915E00C6BB8D /* Engine.swift in Sources */,
@@ -2180,6 +2180,14 @@
 		37CB2ED82818E9260092E0DD /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
+		};
+		37EDC48F283175B400E45916 /* CoreIME */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreIME;
+		};
+		37EDC491283175C100E45916 /* CoreIME */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreIME;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

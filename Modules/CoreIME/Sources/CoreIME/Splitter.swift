@@ -1,4 +1,4 @@
-struct Splitter {
+public struct Splitter {
 
         /// Split text to sequence blocks by tones
         private static func prepare(text: String) -> (tones: String, blocks: [String]) {
@@ -18,7 +18,7 @@ struct Splitter {
                 }
                 return (tones, blocks)
         }
-        static func peekSplit(_ text: String) -> [String] {
+        public static func peekSplit(_ text: String) -> [String] {
                 guard let sequence: [String] = split(text).first, !sequence.isEmpty else { return [] }
                 let scheme: [String] = sequence.map { syllable -> String in
                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
@@ -31,7 +31,7 @@ struct Splitter {
                 }
                 return scheme
         }
-        static func split(_ text: String) -> [[String]] {
+        public static func split(_ text: String) -> [[String]] {
                 guard !text.isEmpty else { return [] }
                 guard !text.contains("'") else {
                         return separate(text: text)
@@ -149,7 +149,7 @@ struct Splitter {
                 return tokens
         }
 
-        private static func canSplit(_ text: String) -> Bool {
+        public static func canSplit(_ text: String) -> Bool {
                 guard !text.isEmpty else { return false }
                 return syllables.first(where: { text.hasPrefix($0) }) != nil
         }

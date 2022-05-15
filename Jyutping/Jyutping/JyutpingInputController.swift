@@ -2,8 +2,9 @@ import SwiftUI
 import Cocoa
 import InputMethodKit
 import CommonExtensions
-import InputMethodData
 import CharacterSets
+import CoreIME
+import InputMethodData
 
 class JyutpingInputController: IMKInputController {
 

@@ -1,7 +1,8 @@
 import UIKit
 import CommonExtensions
-import InputMethodData
 import CharacterSets
+import CoreIME
+import InputMethodData
 
 final class KeyboardViewController: UIInputViewController {
 
