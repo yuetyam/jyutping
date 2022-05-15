@@ -28,15 +28,19 @@ struct CandidatesView: View {
                                         }
                                         Spacer()
                                 }
-                                .foregroundColor(isHighlighted ? .blue : .primary)
+                                .padding(.horizontal, 4)
+                                .padding(.leading, 4)
+                                .foregroundColor(isHighlighted ? .white : .primary)
+                                .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                         }
                         Spacer()
                 }
-                .padding(.vertical, 8)
-                .padding(.horizontal)
-                .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(.regularMaterial)
-                        .shadow(radius: 5)
+                .padding(10)
+                .background(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(.regularMaterial)
+                                .shadow(radius: 4)
                 )
+                .animation(.default, value: displayObject.items)
         }
 }

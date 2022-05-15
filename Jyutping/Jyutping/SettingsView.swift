@@ -58,9 +58,10 @@ struct SettingsView: View {
                         */
                 }
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(.regularMaterial)
-                        .shadow(radius: 5)
+                .background(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                .fill(.regularMaterial)
+                                .shadow(radius: 4)
                 )
         }
 }
@@ -82,6 +83,6 @@ private struct SettingLabel: View {
                         }
                         Spacer()
                 }
-                .foregroundColor(highlighted ? .blue : .primary)
+                .foregroundColor(highlighted ? .accentColor : .primary)
         }
 }
