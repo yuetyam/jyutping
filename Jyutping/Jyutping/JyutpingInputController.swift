@@ -64,7 +64,7 @@ class JyutpingInputController: IMKInputController {
         private func windowFrame(origin: CGPoint? = nil) -> CGRect {
                 let origin: CGPoint = origin ?? currentClient?.position ?? .zero
                 let width: CGFloat = 600
-                let height: CGFloat = 280 + (offset * 2)
+                let height: CGFloat = 300 + (offset * 2)
                 let x: CGFloat = {
                         if windowPattern.isReversingHorizontal {
                                 // FIXME: should be on cursor's left side
@@ -87,7 +87,7 @@ class JyutpingInputController: IMKInputController {
                 didSet {
                         guard let origin = currentClient?.position else { return }
                         let isRegularHorizontal: Bool = origin.x < (screenFrame.maxX - 600)
-                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 300)
+                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 320)
                         windowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
                                 case (true, true):

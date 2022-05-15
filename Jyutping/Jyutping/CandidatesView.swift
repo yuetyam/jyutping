@@ -5,7 +5,7 @@ struct CandidatesView: View {
         @EnvironmentObject private var displayObject: DisplayObject
 
         var body: some View {
-                VStack {
+                VStack(spacing: 3) {
                         ForEach(0..<displayObject.items.count, id: \.self) { index in
                                 let candidate = displayObject.items[index]
                                 let isHighlighted: Bool = index == displayObject.highlightedIndex
