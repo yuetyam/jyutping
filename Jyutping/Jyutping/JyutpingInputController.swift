@@ -274,8 +274,19 @@ class JyutpingInputController: IMKInputController {
         }
         private func strokeReverseLookup() {
 
-                // 橫h => 橫w, 撇p => 撇a, 捺n => 點d
-                let text: String = processingText.dropFirst().replacingOccurrences(of: "h", with: "w").replacingOccurrences(of: "p", with: "a").replacingOccurrences(of: "n", with: "d")
+                // 橫: w, h     :  w for Waang, h for Heng or Horizontal
+                // 豎: s, v     :  s for Syu or Shu, v for Vertical
+                // 撇: a, p, l  :  p for Pit or Pie, l for Left, a for the position of key A
+                // 點: d, n, r  :  d for Dim or Dian or Dot, n for Naat(捺) or Na, r for Right
+                // 折: z, t     :  z for Zit or Zhe, t for Turning
+                let text: String = processingText.dropFirst()
+                        .replacingOccurrences(of: "h", with: "w")
+                        .replacingOccurrences(of: "v", with: "s")
+                        .replacingOccurrences(of: "p", with: "a")
+                        .replacingOccurrences(of: "l", with: "a")
+                        .replacingOccurrences(of: "n", with: "d")
+                        .replacingOccurrences(of: "r", with: "d")
+                        .replacingOccurrences(of: "t", with: "z")
 
                 guard !text.isEmpty else {
                         candidates = []
