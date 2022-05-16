@@ -133,9 +133,9 @@ extension KeyboardViewController {
                         let grid_row_2: UIStackView = makeGridRow(for: ["7", "8", "9"])
                         gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2, gridBottomStackView])
                 } else {
-                        let grid_row_0: UIStackView = makeGridRow(for: ["，。？", "ABC", "DEF"])
-                        let grid_row_1: UIStackView = makeGridRow(for: ["GHI", "JKL", "MNO"])
-                        let grid_row_2: UIStackView = makeGridRow(for: ["PQRS", "TUV", "WXYZ"])
+                        let grid_row_0: UIStackView = makeCombinationRow(for: [.punctuation, .ABC, .DEF])
+                        let grid_row_1: UIStackView = makeCombinationRow(for: [.GHI, .JKL, .MNO])
+                        let grid_row_2: UIStackView = makeCombinationRow(for: [.PQRS, .TUV, .WXYZ])
                         gridStackView.addArrangedSubviews([grid_row_0, grid_row_1, grid_row_2])
                         if needsInputModeSwitchKey {
                                 let spaceStackView = UIStackView()
@@ -168,6 +168,14 @@ extension KeyboardViewController {
         }
         private func makeGridRow(for texts: [String]) -> UIStackView {
                 let events = texts.map({ KeyboardEvent.input(.init(primary: .init($0))) })
+                let stackView: UIStackView = UIStackView()
+                stackView.axis = .horizontal
+                stackView.distribution = .fillProportionally
+                stackView.addArrangedSubviews(events.map({ GridKeyView(event: $0, controller: self) }))
+                return stackView
+        }
+        private func makeCombinationRow(for combinations: [Combination]) -> UIStackView {
+                let events = combinations.map({ KeyboardEvent.combine($0) })
                 let stackView: UIStackView = UIStackView()
                 stackView.axis = .horizontal
                 stackView.distribution = .fillProportionally

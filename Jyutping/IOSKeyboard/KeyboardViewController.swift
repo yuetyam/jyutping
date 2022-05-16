@@ -357,6 +357,17 @@ final class KeyboardViewController: UIInputViewController {
                         aftercareSelected(candidate)
                         adjustKeyboardIdiom()
                 case .tenKey(let combination):
+                        guard !combination.isPunctuation else {
+                                if bufferText.isEmpty {
+                                        textDocumentProxy.insertText("，")
+                                } else {
+                                        let text: String = bufferText + "，"
+                                        bufferText = .empty
+                                        textDocumentProxy.insertText(text)
+                                }
+                                AudioFeedback.perform(.input)
+                                return
+                        }
                         // FIXME: schemes
                         bufferText += combination.letters.first!
                         AudioFeedback.perform(.input)

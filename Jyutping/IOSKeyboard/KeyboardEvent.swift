@@ -1,6 +1,7 @@
 enum KeyboardEvent: Hashable {
         case backspace
         case capsLock
+        case combine(Combination)
         case dismiss
         case globe
         indirect case hidden(KeyboardEvent)

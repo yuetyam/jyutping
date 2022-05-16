@@ -50,14 +50,13 @@ final class GridKeyView: UIView {
                 case .space:
                         shape.backgroundColor = highlightingBackColor
                         controller.operate(.space)
+                case .combine(let combination):
+                        shape.backgroundColor = highlightingBackColor
+                        controller.operate(.tenKey(combination))
                 case .input(let seat):
                         shape.backgroundColor = highlightingBackColor
                         let text: String = seat.primary.text
-                        if let combination = Combination.match(for: text) {
-                                controller.operate(.tenKey(combination))
-                        } else {
-                                controller.operate(.input(text))
-                        }
+                        controller.operate(.input(text))
                 default:
                         break
                 }
@@ -188,6 +187,8 @@ private extension GridKeyView {
         }
         var keyFont: UIFont {
                 switch event {
+                case .combine:
+                        return .systemFont(ofSize: 16)
                 case .input(let seat):
                         let isSingular: Bool = seat.primary.text.count == 1
                         return .systemFont(ofSize: isSingular ? 22 : 16)
@@ -197,6 +198,8 @@ private extension GridKeyView {
         }
         var keyText: String? {
                 switch event {
+                case .combine(let combination):
+                        return combination.isPunctuation ? combination.text : combination.text.uppercased()
                 case .input(let seat):
                         return seat.primary.text
                 case .space:
@@ -303,7 +306,7 @@ private extension GridKeyView {
         }
         var deepDarkFantasy: Bool {
                 switch event {
-                case .input, .space:
+                case .combine, .input, .space:
                         return false
                 default:
                         return true
@@ -317,6 +320,7 @@ private extension GridKeyView {
 
 enum Combination {
 
+        case punctuation
         case ABC
         case DEF
         case GHI
@@ -328,6 +332,8 @@ enum Combination {
 
         var text: String {
                 switch self {
+                case .punctuation:
+                        return "，。？"
                 case .ABC:
                         return "abc"
                 case .DEF:
@@ -351,26 +357,7 @@ enum Combination {
                 return self.text.map({ String($0) })
         }
 
-        static func match(for text: String) -> Combination? {
-                switch text.lowercased() {
-                case Combination.ABC.text:
-                        return .ABC
-                case Combination.DEF.text:
-                        return .DEF
-                case Combination.GHI.text:
-                        return .GHI
-                case Combination.JKL.text:
-                        return .JKL
-                case Combination.MNO.text:
-                        return .MNO
-                case Combination.PQRS.text:
-                        return .PQRS
-                case Combination.TUV.text:
-                        return .TUV
-                case Combination.WXYZ.text:
-                        return .WXYZ
-                default:
-                        return nil
-                }
+        var isPunctuation: Bool {
+                return self == .punctuation
         }
 }
