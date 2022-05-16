@@ -275,13 +275,8 @@ final class KeyboardViewController: UIInputViewController {
                         if bufferText.isEmpty {
                                 textDocumentProxy.deleteBackward()
                         } else {
-                                lazy var hasLightToneSuffix: Bool = bufferText.hasSuffix("vv") || bufferText.hasSuffix("xx") || bufferText.hasSuffix("qq")
-                                if keyboardLayout == .qwerty && hasLightToneSuffix {
-                                        bufferText = String(bufferText.dropLast(2))
-                                } else {
-                                        bufferText = String(bufferText.dropLast())
-                                }
                                 candidateSequence = []
+                                bufferText = String(bufferText.dropLast())
                         }
                         AudioFeedback.perform(.delete)
                 case .clear:
