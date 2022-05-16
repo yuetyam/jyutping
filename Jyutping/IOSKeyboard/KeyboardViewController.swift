@@ -284,20 +284,15 @@ final class KeyboardViewController: UIInputViewController {
                         bufferText = .empty
                         AudioFeedback.perform(.delete)
                 case .return:
-                        guard !bufferText.isEmpty else {
-                                textDocumentProxy.insertText("\n")
+                        if bufferText.isEmpty {
                                 AudioFeedback.perform(.modify)
-                                return
+                                textDocumentProxy.insertText("\n")
+                        } else {
+                                let text: String = bufferText
+                                bufferText = .empty
+                                AudioFeedback.perform(.input)
+                                textDocumentProxy.insertText(text)
                         }
-                        compose(bufferText)
-                        bufferText = .empty
-                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
-                                DispatchQueue(label: "im.cantonese.fix.return").sync { [unowned self] in
-                                        self.textDocumentProxy.insertText(.zeroWidthSpace)
-                                        self.textDocumentProxy.deleteBackward()
-                                }
-                        }
-                        AudioFeedback.perform(.input)
                 case .shift:
                         AudioFeedback.perform(.modify)
                         switch keyboardIdiom {
