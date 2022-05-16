@@ -8,5 +8,5 @@ enum KeyboardLayout {
         case saamPing
 
         /// 九宮格
-        case grid
+        case tenKey
 }

@@ -35,6 +35,7 @@ extension KeyboardIdiom {
         var isPingMode: Bool {
                 switch self {
                 case .cantonese,
+                     .tenKeyCantonese,
                      .candidates:
                         return true
                 default:
@@ -42,7 +43,7 @@ extension KeyboardIdiom {
                 }
         }
 
-        var isGridMode: Bool {
+        var isTenKeyMode: Bool {
                 switch self {
                 case .tenKeyCantonese,
                      .tenKeyNumeric:

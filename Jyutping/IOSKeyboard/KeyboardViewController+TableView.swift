@@ -152,7 +152,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 cell.accessoryType = (keyboardLayout == .saamPing) ? .checkmark : .none
                         case 2:
                                 cell.textLabel?.text = NSLocalizedString("10 Key", comment: .empty)
-                                cell.accessoryType = (keyboardLayout == .grid) ? .checkmark : .none
+                                cell.accessoryType = (keyboardLayout == .tenKey) ? .checkmark : .none
                         default:
                                 break
                         }
@@ -250,7 +250,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 switch indexPath.row {
                                 case 0: return .qwerty
                                 case 1: return .saamPing
-                                case 2: return .grid
+                                case 2: return .tenKey
                                 default: return .qwerty
                                 }
                         }()

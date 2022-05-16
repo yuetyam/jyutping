@@ -182,7 +182,7 @@ final class KeyboardViewController: UIInputViewController {
                         return .cantonese(.lowercased)
                 case .saamPing:
                         return .cantonese(.lowercased)
-                case .grid:
+                case .tenKey:
                         return .tenKeyCantonese
                 }
         }
@@ -333,8 +333,8 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 case .transform(let newIdiom):
                         AudioFeedback.perform(.modify)
-                        let shouldBeGridKeyboard: Bool = keyboardLayout == .grid && newIdiom == .cantonese(.lowercased)
-                        keyboardIdiom = shouldBeGridKeyboard ? .tenKeyCantonese : newIdiom
+                        let shouldBeTenKeyKeyboard: Bool = keyboardLayout == .tenKey && newIdiom == .cantonese(.lowercased)
+                        keyboardIdiom = shouldBeTenKeyKeyboard ? .tenKeyCantonese : newIdiom
                 case .dismiss:
                         AudioFeedback.perform(.modify)
                         guard !(bufferText.isEmpty) else {
@@ -769,18 +769,18 @@ final class KeyboardViewController: UIInputViewController {
                 let switched: Bool = toolBar.yueEngSwitch.switched
                 if switched {
                         let newIdiom: KeyboardIdiom = {
-                                let shouldBeGridLayout: Bool = keyboardLayout == .grid
+                                let shouldBeTenKeyLayout: Bool = keyboardLayout == .tenKey
                                 switch keyboardIdiom {
                                 case .alphabetic(.lowercased):
                                         return fallbackKeyboardIdiom
                                 case .alphabetic(.uppercased):
-                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantonese(.uppercased)
+                                        return shouldBeTenKeyLayout ? .tenKeyCantonese : .cantonese(.uppercased)
                                 case .alphabetic(.capsLocked):
-                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantonese(.capsLocked)
+                                        return shouldBeTenKeyLayout ? .tenKeyCantonese : .cantonese(.capsLocked)
                                 case .numeric:
-                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantoneseNumeric
+                                        return shouldBeTenKeyLayout ? .tenKeyCantonese : .cantoneseNumeric
                                 case .symbolic:
-                                        return shouldBeGridLayout ? .tenKeyCantonese : .cantoneseSymbolic
+                                        return shouldBeTenKeyLayout ? .tenKeyCantonese : .cantoneseSymbolic
                                 default:
                                         return fallbackKeyboardIdiom
                                 }
@@ -901,7 +901,7 @@ final class KeyboardViewController: UIInputViewController {
                 case 2:
                         return .saamPing
                 case 3:
-                        return .grid
+                        return .tenKey
                 default:
                         return .qwerty
                 }
@@ -913,7 +913,7 @@ final class KeyboardViewController: UIInputViewController {
                                 return 1
                         case .saamPing:
                                 return 2
-                        case .grid:
+                        case .tenKey:
                                 return 3
                         }
                 }()

@@ -13,7 +13,7 @@ extension KeyboardViewController {
                 case .emoji:
                         loadEmojiKeyboard()
                 case .tenKeyCantonese, .tenKeyNumeric:
-                        loadGridKeyboard()
+                        loadTenKeyKeyboard()
                 default:
                         loadKeys()
                 }
@@ -67,9 +67,9 @@ extension KeyboardViewController {
         }
 
 
-        // MARK: - GridKeyboard
+        // MARK: - TenKeyKeyboard
 
-        private func loadGridKeyboard() {
+        private func loadTenKeyKeyboard() {
                 keyboardStackView.removeArrangedSubviews()
 
                 toolBar.tintColor = isDarkAppearance ? .white : .black
