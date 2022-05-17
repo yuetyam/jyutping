@@ -24,16 +24,30 @@ class JyutpingInputController: IMKInputController {
                         let settingsUI = NSHostingController(rootView: SettingsView().environmentObject(settingsObject))
                         window?.contentView?.addSubview(settingsUI.view)
                         settingsUI.view.translatesAutoresizingMaskIntoConstraints = false
-                        if let topAnchor = window?.contentView?.topAnchor, let bottomAnchor = window?.contentView?.bottomAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
-                                if windowPattern.isReversingVertical {
+                        if let topAnchor = window?.contentView?.topAnchor,
+                           let bottomAnchor = window?.contentView?.bottomAnchor,
+                           let leadingAnchor = window?.contentView?.leadingAnchor,
+                           let trailingAnchor = window?.contentView?.trailingAnchor {
+                                switch windowPattern {
+                                case .regular:
+                                        NSLayoutConstraint.activate([
+                                                settingsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                settingsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                        ])
+                                case .horizontalReversed:
+                                        NSLayoutConstraint.activate([
+                                                settingsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                settingsUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                                        ])
+                                case .verticalReversed:
                                         NSLayoutConstraint.activate([
                                                 settingsUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
                                                 settingsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                                         ])
-                                } else {
+                                case .reversed:
                                         NSLayoutConstraint.activate([
-                                                settingsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                                settingsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                                settingsUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                settingsUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
                                         ])
                                 }
                         }
@@ -42,16 +56,30 @@ class JyutpingInputController: IMKInputController {
                         let candidateUI = NSHostingController(rootView: CandidatesView().environmentObject(displayObject))
                         window?.contentView?.addSubview(candidateUI.view)
                         candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
-                        if let topAnchor = window?.contentView?.topAnchor, let bottomAnchor = window?.contentView?.bottomAnchor, let leadingAnchor = window?.contentView?.leadingAnchor {
-                                if windowPattern.isReversingVertical {
+                        if let topAnchor = window?.contentView?.topAnchor,
+                           let bottomAnchor = window?.contentView?.bottomAnchor,
+                           let leadingAnchor = window?.contentView?.leadingAnchor,
+                           let trailingAnchor = window?.contentView?.trailingAnchor {
+                                switch windowPattern {
+                                case .regular:
+                                        NSLayoutConstraint.activate([
+                                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                        ])
+                                case .horizontalReversed:
+                                        NSLayoutConstraint.activate([
+                                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                candidateUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                                        ])
+                                case .verticalReversed:
                                         NSLayoutConstraint.activate([
                                                 candidateUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
                                                 candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                                         ])
-                                } else {
+                                case .reversed:
                                         NSLayoutConstraint.activate([
-                                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                                candidateUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                candidateUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
                                         ])
                                 }
                         }
@@ -68,17 +96,16 @@ class JyutpingInputController: IMKInputController {
                 let height: CGFloat = 300 + (offset * 2)
                 let x: CGFloat = {
                         if windowPattern.isReversingHorizontal {
-                                // FIXME: should be on cursor's left side
-                                return origin.x
+                                return origin.x - width - 8
                         } else {
                                 return origin.x
                         }
                 }()
                 let y: CGFloat = {
                         if windowPattern.isReversingVertical {
-                                return origin.y + (offset * 2)
+                                return origin.y + 16
                         } else {
-                                return (origin.y - height)
+                                return origin.y - height
                         }
                 }()
                 return CGRect(x: x, y: y, width: width, height: height)
