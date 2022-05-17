@@ -352,6 +352,9 @@ final class KeyboardViewController: UIInputViewController {
                         aftercareSelected(candidate)
                         adjustKeyboardIdiom()
                 case .tenKey(let combination):
+                        defer {
+                                AudioFeedback.perform(.input)
+                        }
                         guard !combination.isPunctuation else {
                                 if bufferText.isEmpty {
                                         textDocumentProxy.insertText("，")
@@ -360,14 +363,32 @@ final class KeyboardViewController: UIInputViewController {
                                         bufferText = .empty
                                         textDocumentProxy.insertText(text)
                                 }
-                                AudioFeedback.perform(.input)
                                 return
                         }
-                        // FIXME: schemes
-                        bufferText += combination.letters.first!
-                        AudioFeedback.perform(.input)
+                        guard !possibleTexts.isEmpty else {
+                                possibleTexts = combination.letters
+                                bufferText = combination.letters.first!
+                                return
+                        }
+                        let newPossibles = combination.letters.map { letter -> [String] in
+                                return possibleTexts.map({ $0 + letter })
+                        }
+                        possibleTexts = newPossibles.flatMap({ $0 })
+                        possibleTexts.sort { lhs, rhs in
+                                let lhsSyllables = Splitter.peekSplit(lhs)
+                                let rhsSyllables = Splitter.peekSplit(rhs)
+                                let lhsLength = lhsSyllables.joined().count
+                                let rhsLength = rhsSyllables.joined().count
+                                if lhsLength == rhsLength {
+                                        return lhsSyllables.count < lhsSyllables.count
+                                } else {
+                                        return lhsLength > rhsLength
+                                }
+                        }
+                        bufferText = possibleTexts.first!
                 }
         }
+        private lazy var possibleTexts: [String] = []
         private func adjustKeyboardIdiom() {
                 switch keyboardIdiom {
                 case .alphabetic(.uppercased):
@@ -449,6 +470,7 @@ final class KeyboardViewController: UIInputViewController {
                 didSet {
                         switch bufferText.first {
                         case .none:
+                                possibleTexts = []
                                 processingText = .empty
                         case .some("r"), .some("v"), .some("x"), .some("q"):
                                 processingText = bufferText
