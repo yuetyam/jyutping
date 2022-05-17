@@ -10,7 +10,7 @@ struct CandidatesView: View {
                                 let candidate = displayObject.items[index]
                                 let isHighlighted: Bool = index == displayObject.highlightedIndex
                                 HStack {
-                                        Text(verbatim: "\(index + 1).").font(.serialNumber)
+                                        Text(verbatim: "\(index + 1).").font(.serial)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: candidate.text).font(.candidate)
                                                 if let comment = candidate.comment {

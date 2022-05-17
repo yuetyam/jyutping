@@ -2,7 +2,6 @@ import SwiftUI
 
 extension Font {
 
-        /// Font for Candidate text
         static let candidate: Font = {
                 let primaryFontName: String = {
                         let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
@@ -14,7 +13,7 @@ extension Font {
                         return "PingFang HK"
                 }()
                 let fallbackFontNames: [String] = {
-                        let expected: [String] = ["I.MingCP", "I.Ming", "HanaMinA", "HanaMinB"]
+                        let expected: [String] = ["I.MingCP", "I.Ming", "HanaMinB"]
                         let results: [String?] = expected.map { name -> String? in
                                 if let font = NSFont(name: name, size: 17) {
                                         return name
@@ -32,13 +31,9 @@ extension Font {
                 }
         }()
 
-
-        /// Font for Candidate serial number
-        static let serialNumber: Font = Font.title3.monospaced()
-
+        static let serial: Font = Font.title3.monospaced()
         static let comment: Font = Font.title3.monospaced()
         static let secondaryComment: Font = Font.body.monospaced()
-
 
         private static func pairFonts(primary name: String, fallbacks: [String]) -> Font {
                 let fontSize: CGFloat = 17
@@ -47,8 +42,8 @@ extension Font {
                 let fallbackDescriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
                         return originalDescriptor.addingAttributes([.name: fontName])
                 }
-                let repairedDescriptor: NSFontDescriptor = originalDescriptor.addingAttributes([.cascadeList : fallbackDescriptors])
-                let pairedFont: NSFont = NSFont(descriptor: repairedDescriptor, size: fontSize) ?? .systemFont(ofSize: fontSize)
+                let pairedDescriptor: NSFontDescriptor = originalDescriptor.addingAttributes([.cascadeList : fallbackDescriptors])
+                let pairedFont: NSFont = NSFont(descriptor: pairedDescriptor, size: fontSize) ?? .systemFont(ofSize: fontSize)
                 return Font(pairedFont)
         }
 }

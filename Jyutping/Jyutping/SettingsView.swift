@@ -76,7 +76,7 @@ private struct SettingLabel: View {
 
         var body: some View {
                 HStack {
-                        Text(verbatim: "\(number).").font(.serialNumber)
+                        Text(verbatim: "\(number).").font(.serial)
                         Text(verbatim: text).font(.candidate)
                         if checked {
                                 Image(systemName: "checkmark").font(.title2)
