@@ -144,7 +144,7 @@ struct AboutView: View {
                                         Section {
                                                 NavigationLink(destination: DonationView()) {
                                                         Label {
-                                                                Text("button.support.author").foregroundColor(.primary)
+                                                                Text("label.support_author").foregroundColor(.primary)
                                                         } icon: {
                                                                 Image(systemName: "heart").symbolRenderingMode(.multicolor)
                                                         }

@@ -13,6 +13,7 @@
 "About" = "About";
 
 // macOS
+"Install Input Method" = "Install Input Method";
 "Introductions" = "Introductions";
 "Keyboard" = "Keyboard";
 "Search" = "Search";
@@ -141,7 +142,7 @@
 "Share this App" = "Share this App";
 "Copy App Store link" = "Copy App Store link";
 
-"button.support.author" = "Support Author";
+"label.support_author" = "Support Author";
 "Support Author" = "Support Author";
 "Support Author Plus" = "Support Author Plus";
 "Support Author Max" = "Support Author Max";

@@ -5,11 +5,14 @@ struct MacContentView: View {
                 NavigationView {
                         List {
                                 Section {
+                                        NavigationLink(destination: InputMethodInstallationView()) {
+                                                Label("Install Input Method", systemImage: "laptopcomputer.and.arrow.down")
+                                        }
                                         NavigationLink(destination: MacIntroductionsView()) {
                                                 Label("Introductions", systemImage: "book")
                                         }
                                         NavigationLink(destination: MacExpressionsView().textSelection(.enabled)) {
-                                                Label("title.expressions", systemImage: "text.quote")
+                                                Label("Cantonese Expressions", systemImage: "text.quote")
                                         }
                                 } header: {
                                         Text("Keyboard").textCase(.none)

@@ -14,6 +14,7 @@
 
 
 // macOS
+"Install Input Method" = "安裝輸入法";
 "Introductions" = "介紹";
 "Keyboard" = "鍵盤";
 "Search" = "檢索";
@@ -142,7 +143,7 @@
 "Share this App" = "分享本應用程式";
 "Copy App Store link" = "拷貝 App Store 鏈接";
 
-"button.support.author" = "支持一下作者";
+"label.support_author" = "支持一下作者";
 "Support Author" = "支持作者";
 "Support Author Plus" = "大力支持";
 "Support Author Max" = "鼎力支持";
