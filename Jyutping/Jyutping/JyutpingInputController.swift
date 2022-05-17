@@ -17,7 +17,8 @@ class JyutpingInputController: IMKInputController {
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
                 window = NSWindow(contentRect: windowFrame(), styleMask: .borderless, backing: .buffered, defer: false)
                 window?.backgroundColor = .clear
-                window?.level = .floating
+                let levelValue: Int = Int(CGShieldingWindowLevel())
+                window?.level = NSWindow.Level(levelValue)
                 window?.orderFrontRegardless()
                 switch inputMethodMode {
                 case .settings:
