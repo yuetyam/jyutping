@@ -6,22 +6,24 @@ extension Font {
                 let primaryFontName: String = {
                         let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                         for name in preferredList {
-                                if let font = NSFont(name: name, size: 17) {
+                                if let _ = NSFont(name: name, size: 17) {
                                         return name
                                 }
                         }
                         return "PingFang HK"
                 }()
                 let fallbackFontNames: [String] = {
+                        let size: CGFloat = 17
                         let expected: [String] = ["I.MingCP", "I.Ming", "HanaMinB"]
-                        let results: [String?] = expected.map { name -> String? in
-                                if let font = NSFont(name: name, size: 17) {
-                                        return name
-                                } else {
-                                        return nil
-                                }
+                        var found: [String] = []
+                        if let _ = NSFont(name: expected[0], size: size) {
+                                found.append(expected[0])
+                        } else if let _ = NSFont(name: expected[1], size: size) {
+                                found.append(expected[1])
                         }
-                        let found: [String] = results.compactMap({ $0 })
+                        if let _ = NSFont(name: expected[2], size: size) {
+                                found.append(expected[2])
+                        }
                         return found
                 }()
                 if fallbackFontNames.isEmpty {

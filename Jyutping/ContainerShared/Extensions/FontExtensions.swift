@@ -38,14 +38,15 @@ extension Font {
                 }()
                 let fallbackFontNames: [String] = {
                         let expected: [String] = ["I.MingCP", "I.Ming", "HanaMinB"]
-                        let results: [String?] = expected.map { name -> String? in
-                                if let _ = NSFont(name: name, size: size) {
-                                        return name
-                                } else {
-                                        return nil
-                                }
+                        var found: [String] = []
+                        if let _ = NSFont(name: expected[0], size: size) {
+                                found.append(expected[0])
+                        } else if let _ = NSFont(name: expected[1], size: size) {
+                                found.append(expected[1])
                         }
-                        let found: [String] = results.compactMap({ $0 })
+                        if let _ = NSFont(name: expected[2], size: size) {
+                                found.append(expected[2])
+                        }
                         return found
                 }()
                 if fallbackFontNames.isEmpty {
