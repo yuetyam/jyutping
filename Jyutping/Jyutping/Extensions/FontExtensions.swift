@@ -4,7 +4,7 @@ extension Font {
 
         static let candidate: Font = {
                 let primaryFontName: String = {
-                        let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
+                        let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                         for name in preferredList {
                                 if let font = NSFont(name: name, size: 17) {
                                         return name

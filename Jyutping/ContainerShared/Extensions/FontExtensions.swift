@@ -28,7 +28,7 @@ extension Font {
         #if os(macOS)
         private static func generateFont(size: CGFloat, style: Font.TextStyle) -> Font {
                 let primaryFontName: String = {
-                        let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
+                        let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                         for name in preferredList {
                                 if let _ = NSFont(name: name, size: size) {
                                         return name
