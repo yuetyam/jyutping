@@ -261,7 +261,7 @@ struct MacExpressionsView: View {
                                 }
                                 .block()
                         }
-                        .padding(32)
+                        .padding()
                 }
                 .font(.master)
                 .textSelection(.enabled)

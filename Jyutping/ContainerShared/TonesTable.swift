@@ -75,7 +75,7 @@ struct TonesTable: View {
                                 }
                                 .padding()
                         }
-                        .padding(32)
+                        .padding()
                 }
                 .textSelection(.enabled)
                 .navigationTitle("Jyutping Tones")

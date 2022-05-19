@@ -56,7 +56,7 @@ struct MacSearchView: View {
                                 }
                         }
                         .textSelection(.enabled)
-                        .padding(32)
+                        .padding()
                 }
                 .animation(.default, value: cantonese)
                 .navigationTitle("Search")

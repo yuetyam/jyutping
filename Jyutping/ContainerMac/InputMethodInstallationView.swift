@@ -27,7 +27,7 @@ struct InputMethodInstallationView: View {
                                 .block()
                         }
                         .textSelection(.enabled)
-                        .padding(32)
+                        .padding()
                 }
                 .navigationTitle("Install Input Method")
         }

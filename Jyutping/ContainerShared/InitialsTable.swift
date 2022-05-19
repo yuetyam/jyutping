@@ -33,7 +33,7 @@ struct InitialsTable: View {
                                 }
                                 .block()
                         }
-                        .padding(32)
+                        .padding()
                 }
                 .font(.body.monospaced())
                 .textSelection(.enabled)

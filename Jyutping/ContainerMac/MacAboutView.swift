@@ -7,15 +7,13 @@ struct MacAboutView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                HStack(spacing: 44) {
-                                        HStack(spacing: 20) {
-                                                Image(systemName: "info.circle")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 16, height: 16)
-                                                        .foregroundColor(.blue)
-                                                Text("Version")
-                                        }
+                                HStack(spacing: 16) {
+                                        Image(systemName: "info.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 16, height: 16)
+                                                .foregroundColor(.blue)
+                                        Text("Version")
                                         Text(verbatim: AppMaster.version)
                                         Spacer()
                                 }
@@ -38,8 +36,8 @@ struct MacAboutView: View {
                                 }
                                 .block()
 
-                                VStack(spacing: 24) {
-                                        HStack(spacing: 20) {
+                                VStack(spacing: 20) {
+                                        HStack(spacing: 16) {
                                                 Image(systemName: "heart")
                                                         .symbolRenderingMode(.multicolor)
                                                         .resizable()
@@ -57,7 +55,7 @@ struct MacAboutView: View {
                                                 HStack {
                                                         Text("Support Author")
                                                                 .foregroundColor(.blue)
-                                                                .padding(.leading, 36)
+                                                                .padding(.leading, 32)
                                                         Spacer()
                                                 }
                                         }
@@ -65,7 +63,7 @@ struct MacAboutView: View {
                                 .block()
                                 .textSelection(.disabled)
                         }
-                        .padding(32)
+                        .padding()
                 }
                 .textSelection(.enabled)
                 .animation(.default, value: isSupportAuthorExpanded)
@@ -89,9 +87,9 @@ private struct LinkLabel: View {
         private let message: String
 
         var body: some View {
-                HStack(spacing: 44) {
+                HStack(spacing: 16) {
                         Link(destination: URL(string: link)!) {
-                                HStack(spacing: 20) {
+                                HStack(spacing: 16) {
                                         Image(systemName: icon)
                                                 .resizable()
                                                 .scaledToFit()

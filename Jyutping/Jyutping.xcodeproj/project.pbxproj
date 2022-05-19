@@ -14,6 +14,7 @@
 		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
+		37418EE628366381000CA712 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37418EE528366381000CA712 /* ResourcesView.swift */; };
 		374E8A702834817F003A6174 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6E2834817F003A6174 /* icon@2x.png */; };
 		374E8A712834817F003A6174 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6F2834817F003A6174 /* icon.png */; };
 		375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* InputMethodMode.swift */; };
@@ -240,6 +241,7 @@
 		3722934627BED0760077F15B /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934727BED0770077F15B /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934827BED0780077F15B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37418EE528366381000CA712 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		374E8A6E2834817F003A6174 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		374E8A6F2834817F003A6174 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		375D7A3127C10ED10018EB6F /* InputMethodMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodMode.swift; sourceTree = "<group>"; };
@@ -772,6 +774,7 @@
 				37EEE888281CD5F300461235 /* MacIntroductionsView.swift */,
 				370E71F7282844530033B708 /* MacExpressionsView.swift */,
 				37EEE892281CE21800461235 /* MacSearchView.swift */,
+				37418EE528366381000CA712 /* ResourcesView.swift */,
 				37EEE890281CDB4000461235 /* MacAboutView.swift */,
 				37B16183281BA7D600C95317 /* Localizations */,
 				37B16150281961A100C95317 /* Container--macOS--Info.plist */,
@@ -812,7 +815,6 @@
 			children = (
 				37B160E3281912ED00C95317 /* MenuCopyButton.swift */,
 				37B160E5281912ED00C95317 /* Speaker.swift */,
-				37B160E6281912ED00C95317 /* LinkSafariView.swift */,
 				37B160E2281912ED00C95317 /* EnhancedLabel.swift */,
 			);
 			path = ViewComponents;
@@ -836,6 +838,7 @@
 				37B16176281A07A000C95317 /* IOSContentView.swift */,
 				37B160E4281912ED00C95317 /* EnhancedTextField.swift */,
 				37B160E1281912ED00C95317 /* ShareSheetView.swift */,
+				37B160E6281912ED00C95317 /* LinkSafariView.swift */,
 				37B160E0281912ED00C95317 /* SafariView.swift */,
 				37B160E9281912ED00C95317 /* UIDevice+modelName.swift */,
 				37B16159281A02C100C95317 /* Home */,
@@ -1357,6 +1360,7 @@
 				37B1610A281912EE00C95317 /* AppMaster.swift in Sources */,
 				37EEE88F281CDA1A00461235 /* TonesTable.swift in Sources */,
 				37EEE88C281CD90A00461235 /* SyllableCell.swift in Sources */,
+				37418EE628366381000CA712 /* ResourcesView.swift in Sources */,
 				37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */,
 				37BD8C9F2834383F005DE156 /* InputMethodInstallationView.swift in Sources */,
 				37B16108281912EE00C95317 /* Speech.swift in Sources */,

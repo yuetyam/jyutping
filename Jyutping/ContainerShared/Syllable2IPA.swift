@@ -1,5 +1,3 @@
-import CommonExtensions
-
 /// Romanization syllable to IPA
 struct Syllable2IPA {
 

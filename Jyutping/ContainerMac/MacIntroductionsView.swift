@@ -49,7 +49,7 @@ struct MacIntroductionsView: View {
                                 BlockView(heading: "Lookup Jyutping with Loengfan", content: "Loengfan Reverse Lookup Description")
                         }
                         .textSelection(.enabled)
-                        .padding(32)
+                        .padding()
                 }
                 .navigationTitle("Introductions")
         }

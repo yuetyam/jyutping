@@ -34,8 +34,11 @@ struct MacContentView: View {
                                         Text("Jyutping").textCase(.none)
                                 }
                                 Section {
+                                        NavigationLink(destination: ResourcesView()) {
+                                                Label("Resources", systemImage: "globe.asia.australia")
+                                        }
                                         NavigationLink(destination: MacAboutView()) {
-                                                Label("About", systemImage: "globe.asia.australia")
+                                                Label("About", systemImage: "info.circle")
                                         }
                                 } header: {
                                         Text("About").textCase(.none)
