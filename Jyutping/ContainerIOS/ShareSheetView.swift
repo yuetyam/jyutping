@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ActivityView: UIViewControllerRepresentable {
+private struct ActivityView: UIViewControllerRepresentable {
 
         private let activityItems: [Any]
         private let excludedActivityTypes: [UIActivity.ActivityType]?

@@ -1,22 +1,18 @@
-#if os(iOS)
-import UIKit
-#else
-import Cocoa
-#endif
+import SwiftUI
 import CommonExtensions
 import ContainersData
 
 struct AppMaster {
 
+        #if os(iOS)
         static func open(appUrl: URL, webUrl: URL) {
-                #if os(iOS)
                 UIApplication.shared.open(appUrl) { success in
                         if !success {
                                 UIApplication.shared.open(webUrl)
                         }
                 }
-                #endif
         }
+        #endif
 
         static func copy(_ content: String) {
                 #if os(iOS)
