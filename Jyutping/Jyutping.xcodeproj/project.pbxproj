@@ -105,7 +105,6 @@
 		37B160F7281912EE00C95317 /* EnhancedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E4281912ED00C95317 /* EnhancedTextField.swift */; };
 		37B160F9281912EE00C95317 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E5281912ED00C95317 /* Speaker.swift */; };
 		37B160FA281912EE00C95317 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E5281912ED00C95317 /* Speaker.swift */; };
-		37B160FB281912EE00C95317 /* LinkSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E6281912ED00C95317 /* LinkSafariView.swift */; };
 		37B160FD281912EE00C95317 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E7281912ED00C95317 /* Device.swift */; };
 		37B160FE281912EE00C95317 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E7281912ED00C95317 /* Device.swift */; };
 		37B160FF281912EE00C95317 /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E9281912ED00C95317 /* UIDevice+modelName.swift */; };
@@ -372,7 +371,6 @@
 		37B160E3281912ED00C95317 /* MenuCopyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
 		37B160E4281912ED00C95317 /* EnhancedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedTextField.swift; sourceTree = "<group>"; };
 		37B160E5281912ED00C95317 /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
-		37B160E6281912ED00C95317 /* LinkSafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkSafariView.swift; sourceTree = "<group>"; };
 		37B160E7281912ED00C95317 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		37B160E9281912ED00C95317 /* UIDevice+modelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
 		37B160EA281912ED00C95317 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
@@ -838,7 +836,6 @@
 				37B16176281A07A000C95317 /* IOSContentView.swift */,
 				37B160E4281912ED00C95317 /* EnhancedTextField.swift */,
 				37B160E1281912ED00C95317 /* ShareSheetView.swift */,
-				37B160E6281912ED00C95317 /* LinkSafariView.swift */,
 				37B160E0281912ED00C95317 /* SafariView.swift */,
 				37B160E9281912ED00C95317 /* UIDevice+modelName.swift */,
 				37B16159281A02C100C95317 /* Home */,
@@ -1309,7 +1306,6 @@
 			files = (
 				37B1616C281A02C100C95317 /* FAQView.swift in Sources */,
 				37B160F5281912EE00C95317 /* MenuCopyButton.swift in Sources */,
-				37B160FB281912EE00C95317 /* LinkSafariView.swift in Sources */,
 				37B1616B281A02C100C95317 /* IntroductionsView.swift in Sources */,
 				37B16101281912EE00C95317 /* ImageExtensions.swift in Sources */,
 				37B16173281A057500C95317 /* ColorExtensions.swift in Sources */,

@@ -25,9 +25,9 @@ struct ResourcesView: View {
                                 .block()
 
                                 VStack {
-                                        LinkView(icon: linkIcon, title: "迴響", url: "https://resonate.hk")
                                         LinkView(icon: linkIcon, title: "冚唪唥粵文", url: "https://hambaanglaang.hk")
                                         LinkView(icon: linkIcon, title: "學識 Hok6", url: "https://www.hok6.com")
+                                        LinkView(icon: linkIcon, title: "迴響", url: "https://resonate.hk")
                                 }
                                 .block()
                         }

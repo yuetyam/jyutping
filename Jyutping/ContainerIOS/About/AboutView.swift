@@ -34,23 +34,14 @@ struct AboutView: View {
                                                 }
                                 }
                                 Section {
-                                        LinkSafariView(url: URL(string: "https://ososo.io")!) {
+                                        SafariLink("https://ososo.io") {
                                                 EnhancedLabel("Website", icon: websiteIconName, symbol: .safari)
                                         }
-                                        .contextMenu {
-                                                URLCopyButton("https://ososo.io")
-                                        }
-                                        LinkSafariView(url: URL(string: "https://github.com/yuetyam/jyutping")!) {
+                                        SafariLink("https://github.com/yuetyam/jyutping") {
                                                 EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: .safari)
                                         }
-                                        .contextMenu {
-                                                URLCopyButton("https://github.com/yuetyam/jyutping")
-                                        }
-                                        LinkSafariView(url: URL(string: "https://ososo.io/jyutping/privacy")!) {
+                                        SafariLink("https://ososo.io/jyutping/privacy") {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
-                                        }
-                                        .contextMenu {
-                                                URLCopyButton("https://ososo.io/jyutping/privacy")
                                         }
                                 }
                                 Section {
