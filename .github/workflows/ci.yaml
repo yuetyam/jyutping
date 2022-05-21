@@ -37,14 +37,14 @@ jobs:
       - name: InputMethodData SwiftTest
         run: swift test
         working-directory: ./Modules/InputMethodData
-  test_emojidata:
-    name: EmojiData Tests
+  test_coreime:
+    name: CoreIME Tests
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
-      - name: EmojiData SwiftTest
+      - name: CoreIME SwiftTest
         run: swift test
-        working-directory: ./Modules/EmojiData
+        working-directory: ./Modules/CoreIME
   build_mac_ime:
     name: Build macOS IME
     runs-on: macos-12
