@@ -1,5 +1,5 @@
 import UIKit
-import EmojiData
+import CoreIME
 
 struct Emoji {
 
@@ -26,7 +26,7 @@ struct Emoji {
         }
 
         static let sequences: [[String]] = {
-                let emojis: [[String]] = EmojiData.fetchAll()
+                let emojis: [[String]] = EmojiSource.fetchAll()
                 if #available(iOSApplicationExtension 15.4, *) {
                         return emojis
                 } else {

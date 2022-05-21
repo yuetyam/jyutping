@@ -1,42 +1,42 @@
 import Foundation
 
-public struct EmojiData {
+public struct EmojiSource {
 
         public static func fetchAll() -> [[String]] {
-                return [EmojiData.fetch(name: "emoji_0"),
-                        EmojiData.fetch(name: "emoji_1"),
-                        EmojiData.fetch(name: "emoji_2"),
-                        EmojiData.fetch(name: "emoji_3"),
-                        EmojiData.fetch(name: "emoji_4"),
-                        EmojiData.fetch(name: "emoji_5"),
-                        EmojiData.fetch(name: "emoji_6"),
-                        EmojiData.fetch(name: "emoji_7")]
+                return [fetch(name: "emoji_0"),
+                        fetch(name: "emoji_1"),
+                        fetch(name: "emoji_2"),
+                        fetch(name: "emoji_3"),
+                        fetch(name: "emoji_4"),
+                        fetch(name: "emoji_5"),
+                        fetch(name: "emoji_6"),
+                        fetch(name: "emoji_7")]
         }
 
         private static func fetch(name: String) -> [String] {
                 guard let path: String = Bundle.module.path(forResource: name, ofType: "txt") else { return fallback(name) }
                 guard let content: String = try? String(contentsOfFile: path) else { return fallback(name) }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let transformed: [String] = sourceLines.map { line -> String in
-                        guard let codes: String = line.components(separatedBy: "#").first else { return "?" }
-                        if codes.contains(" ") {
-                                let characters: [Character] = codes.components(separatedBy: " ").map({ character(from: $0) })
-                                return String(characters)
-                        } else {
+                let transformed: [String] = sourceLines.map { codes -> String in
+                        let blocks: [String] = codes.components(separatedBy: ".")
+                        switch blocks.count {
+                        case 0, 1:
                                 let character = character(from: codes)
                                 return String(character)
+                        default:
+                                let characters: [Character] = blocks.map({ character(from: $0) })
+                                return String(characters)
                         }
                 }
                 return transformed
         }
 
-        /// Create a Character from the given Unicode Code Point String (U+XXXX)
-        /// - Parameter codePoint: U+XXXX
+        /// Create a Character from the given Unicode Code Point String, e.g. 1F600
+        /// - Parameter codePoint: e.g. 1F600
         /// - Returns: A Character
         private static func character(from codePoint: String) -> Character {
                 lazy var fallback: Character = "?"
-                let cropped = codePoint.trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "U+", with: "", options: [.caseInsensitive, .anchored])
-                guard let u32 = UInt32(cropped, radix: 16) else { return fallback }
+                guard let u32 = UInt32(codePoint, radix: 16) else { return fallback }
                 guard let scalar = Unicode.Scalar(u32) else { return fallback }
                 return Character(scalar)
         }

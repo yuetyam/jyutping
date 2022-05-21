@@ -152,7 +152,6 @@
 		37BD8C9F2834383F005DE156 /* InputMethodInstallationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD8C9E2834383F005DE156 /* InputMethodInstallationView.swift */; };
 		37CB2ED12818E9040092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED02818E9040092E0DD /* CharacterSets */; };
 		37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED22818E9080092E0DD /* CommonExtensions */; };
-		37CB2ED52818E90E0092E0DD /* EmojiData in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED42818E90E0092E0DD /* EmojiData */; };
 		37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED62818E9210092E0DD /* CharacterSets */; };
 		37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED82818E9260092E0DD /* CommonExtensions */; };
 		37EDC490283175B400E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC48F283175B400E45916 /* CoreIME */; };
@@ -417,7 +416,6 @@
 		37CB2ECC2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37CB2ECD2818E8DD0092E0DD /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
 		37CB2ECE2818E8E70092E0DD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
-		37CB2ECF2818E8EA0092E0DD /* EmojiData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EmojiData; path = ../Modules/EmojiData; sourceTree = "<group>"; };
 		37EDC48E2831759700E45916 /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
 		37EEE87B281BAACF00461235 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87C281BAAD000461235 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -464,7 +462,6 @@
 			files = (
 				37CB2ED12818E9040092E0DD /* CharacterSets in Frameworks */,
 				37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */,
-				37CB2ED52818E90E0092E0DD /* EmojiData in Frameworks */,
 				37EDC492283175C100E45916 /* CoreIME in Frameworks */,
 				37B1607A2818EDA100C95317 /* InputMethodData in Frameworks */,
 			);
@@ -522,7 +519,6 @@
 				37B160782818ED9900C95317 /* InputMethodData */,
 				37CB2ECE2818E8E70092E0DD /* CommonExtensions */,
 				37CB2ECD2818E8DD0092E0DD /* CharacterSets */,
-				37CB2ECF2818E8EA0092E0DD /* EmojiData */,
 				3764CEAE27BE103200DCFB51 /* Jyutping */,
 				3764CEC027BE103300DCFB51 /* JyutpingTests */,
 				3764CECA27BE103300DCFB51 /* JyutpingUITests */,
@@ -967,7 +963,6 @@
 			packageProductDependencies = (
 				37CB2ED02818E9040092E0DD /* CharacterSets */,
 				37CB2ED22818E9080092E0DD /* CommonExtensions */,
-				37CB2ED42818E90E0092E0DD /* EmojiData */,
 				37B160792818EDA100C95317 /* InputMethodData */,
 				37EDC491283175C100E45916 /* CoreIME */,
 			);
@@ -2172,10 +2167,6 @@
 		37CB2ED22818E9080092E0DD /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
-		};
-		37CB2ED42818E90E0092E0DD /* EmojiData */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = EmojiData;
 		};
 		37CB2ED62818E9210092E0DD /* CharacterSets */ = {
 			isa = XCSwiftPackageProductDependency;
