@@ -46,5 +46,13 @@ public struct CoreCandidate: Hashable {
                 hasher.combine(text)
                 hasher.combine(syllables)
         }
+
+        static func +(lhs: CoreCandidate, rhs: CoreCandidate) -> CoreCandidate {
+                let newText: String = lhs.text + rhs.text
+                let newRomanization: String = lhs.romanization + String.space + rhs.romanization
+                let newInput: String = lhs.input + rhs.input
+                let newCandidate: CoreCandidate = CoreCandidate(text: newText, romanization: newRomanization, input: newInput)
+                return newCandidate
+        }
 }
 

@@ -1,18 +1,12 @@
 import Foundation
 import SQLite3
-import CoreIME
-import InputMethodData
 
-struct Engine {
+extension Lychee {
 
+        fileprivate typealias Candidate = CoreCandidate
         fileprivate typealias RowCandidate = (candidate: Candidate, row: Int)
 
-        private let provider: InputMethodData = InputMethodData()
-        func close() {
-                provider.close()
-        }
-
-        func suggest(for text: String, schemes: [[String]]) -> [Candidate] {
+        public static func suggest(for text: String, schemes: [[String]]) -> [CoreCandidate] {
                 switch text.count {
                 case 0:
                         return []
@@ -28,7 +22,7 @@ struct Engine {
                 }
         }
 
-        private func fetchTwoChars(_ text: String) -> [Candidate] {
+        private static func fetchTwoChars(_ text: String) -> [Candidate] {
                 guard let firstChar = text.first, let lastChar = text.last else { return [] }
                 guard !(firstChar.isSeparator || firstChar.isTone) else { return [] }
                 guard !lastChar.isSeparator else { return match(for: String(firstChar)) }
@@ -38,7 +32,7 @@ struct Engine {
                 let shortcutFirst: [Candidate] = shortcut(for: String(firstChar))
                 return matched + shortcutTwo + shortcutFirst
         }
-        private func fetchThreeChars(_ text: String) -> [Candidate] {
+        private static func fetchThreeChars(_ text: String) -> [Candidate] {
                 guard let firstChar = text.first, let lastChar = text.last else { return [] }
                 guard !(firstChar.isSeparator || firstChar.isTone) else { return [] }
                 let medium = text[text.index(text.startIndex, offsetBy: 1)]
@@ -89,7 +83,7 @@ struct Engine {
                 return head + tail
         }
 
-        private func fetch(for text: String, origin: String, schemes: [[String]]) -> [Candidate] {
+        private static func fetch(for text: String, origin: String, schemes: [[String]]) -> [Candidate] {
                 guard let bestScheme: [String] = schemes.first, !bestScheme.isEmpty else {
                         return processUnsplittable(text)
                 }
@@ -101,7 +95,7 @@ struct Engine {
                 }
         }
 
-        private func processUnsplittable(_ text: String) -> [Candidate] {
+        private static func processUnsplittable(_ text: String) -> [Candidate] {
                 var combine: [Candidate] = match(for: text) + prefix(match: text) + shortcut(for: text)
                 for number in 1..<text.count {
                         let leading: String = String(text.dropLast(number))
@@ -109,7 +103,7 @@ struct Engine {
                 }
                 return combine
         }
-        private func process(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
+        private static func process(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
                 let candidates: [Candidate] = {
                         let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
                         let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
@@ -149,7 +143,7 @@ struct Engine {
                 }
                 return combine + candidates
         }
-        private func processPartial(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
+        private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
                 let candidates: [Candidate] = {
                         let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
                         let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
@@ -205,43 +199,43 @@ struct Engine {
         }
 }
 
-private extension Engine {
 
-        // InputMethodData:
-        // CREATE TABLE keyboardtable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL);
+private extension Lychee {
 
-        func shortcut(for text: String, count: Int = 100) -> [Candidate] {
+        // CREATE TABLE imetable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL);
+
+        static func shortcut(for text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 let textHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, romanization FROM keyboardtable WHERE shortcut = \(textHash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization FROM imetable WHERE shortcut = \(textHash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text)
                                 candidates.append(candidate)
                         }
                 }
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        
-        func match(for text: String) -> [Candidate] {
+
+        static func match(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT word, romanization FROM keyboardtable WHERE ping = \(ping.hash);"
+                let queryString = "SELECT word, romanization FROM imetable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
+                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text)
                                         candidates.append(candidate)
                                 }
                         }
@@ -249,20 +243,20 @@ private extension Engine {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        func matchWithLimitCount(for text: String, count: Int) -> [Candidate] {
+        static func matchWithLimitCount(for text: String, count: Int) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT word, romanization FROM keyboardtable WHERE ping = \(ping.hash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization FROM imetable WHERE ping = \(ping.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
+                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text)
                                         candidates.append(candidate)
                                 }
                         }
@@ -270,21 +264,21 @@ private extension Engine {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        func matchWithRowID(for text: String) -> [RowCandidate] {
+        static func matchWithRowID(for text: String) -> [RowCandidate] {
                 guard !text.isEmpty else { return [] }
                 var rowCandidates: [RowCandidate] = []
                 let tones: String = text.tones
                 let hasTones: Bool = !tones.isEmpty
                 let ping: String = hasTones ? text.removedTones() : text
-                let queryString = "SELECT rowid, word, romanization FROM keyboardtable WHERE ping = \(ping.hash);"
+                let queryString = "SELECT rowid, word, romanization FROM imetable WHERE ping = \(ping.hash);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
                                 if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
-                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
+                                        let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text)
                                         let rowCandidate: RowCandidate = (candidate: candidate, row: rowid)
                                         rowCandidates.append(rowCandidate)
                                 }
@@ -293,17 +287,17 @@ private extension Engine {
                 sqlite3_finalize(queryStatement)
                 return rowCandidates
         }
-        
-        func prefix(match text: String, count: Int = 100) -> [Candidate] {
+
+        static func prefix(match text: String, count: Int = 100) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 var candidates: [Candidate] = []
-                let queryString = "SELECT word, romanization FROM keyboardtable WHERE prefix = \(text.hash) LIMIT \(count);"
+                let queryString = "SELECT word, romanization FROM imetable WHERE prefix = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(provider.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text, lexiconText: word)
+                                let candidate: Candidate = Candidate(text: word, romanization: romanization, input: text)
                                 candidates.append(candidate)
                         }
                 }
@@ -311,3 +305,4 @@ private extension Engine {
                 return candidates
         }
 }
+

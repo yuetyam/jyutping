@@ -22,6 +22,34 @@ final class CoreIMETests: XCTestCase {
         }
 
 
+        // MARK: - Reverse Lookup
+
+        func testPinyinSplitter() throws {
+                let text: String = "putonghuapinyin"
+                let schemes: [[String]] = PinyinSplitter.split(text)
+                let syllables: [String] = schemes.first!
+                XCTAssertEqual(syllables, ["pu", "tong", "hua", "pin", "yin"])
+        }
+        func testPinyinLookup() throws {
+                let result: String = Lychee.pinyinLookup(for: "wo").first!.text
+                XCTAssertEqual(result, "我")
+        }
+
+        func testCangjie() throws {
+                let result: String = Lychee.cangjieLookup(for: "dam").first!.text
+                XCTAssertEqual(result, "查")
+        }
+        func testStroke() throws {
+                let result: String = Lychee.strokeLookup(for: "wsad").first!.text
+                XCTAssertEqual(result, "木")
+        }
+
+        func testLeungFan() {
+                let result: String = Lychee.leungFanLookup(for: "mukdaan").first!.text
+                XCTAssertEqual(result, "查")
+        }
+
+
         // MARK: - Emoji
 
         func testEmoji() throws {
@@ -37,5 +65,5 @@ final class CoreIMETests: XCTestCase {
                 XCTAssertEqual(emojis[7].count, 259)
                 XCTAssertNotEqual(emojis[0][0], "?")
         }
-
 }
+

@@ -1,6 +1,7 @@
 extension String {
 
         static let empty: String = ""
+        static let space: String = " "
 
         var ping: Int64 {
                 return Int64(self.removedSpacesTones().hash)

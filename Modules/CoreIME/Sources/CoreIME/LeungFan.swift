@@ -26,7 +26,7 @@ extension Lychee {
                 let convertedText = convertTones(for: text)
                 let noTonesText = convertedText.filter({ !$0.isNumber })
                 let code = noTonesText.hash
-                let queryString = "SELECT * FROM leungfantable WHERE ping = \(code);"
+                let queryString = "SELECT * FROM loengfantable WHERE ping = \(code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {

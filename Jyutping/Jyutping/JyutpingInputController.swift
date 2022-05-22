@@ -4,7 +4,6 @@ import InputMethodKit
 import CommonExtensions
 import CharacterSets
 import CoreIME
-import InputMethodData
 
 class JyutpingInputController: IMKInputController {
 
@@ -251,11 +250,11 @@ class JyutpingInputController: IMKInputController {
         private func suggest() {
                 let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
-                        let normal: [Candidate] = engine?.suggest(for: processingText, schemes: regularSchemes.uniqued()) ?? []
+                        let normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued()).transformed()
                         if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
                                 let droppedSeparator: String = String(processingText.dropLast())
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return engine?.suggest(for: droppedSeparator, schemes: newSchemes) ?? []
+                                return Lychee.suggest(for: droppedSeparator, schemes: newSchemes).transformed()
                         } else {
                                 return normal
                         }
@@ -270,17 +269,8 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                if pinyinProvider == nil {
-                        pinyinProvider = PinyinProvider()
-                }
-                guard let searches = pinyinProvider?.search(for: text), !searches.isEmpty else { return }
-                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = Lookup.look(for: lexicon.text)
-                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
-                        return candidates
-                }
-                let joined: [Candidate] = Array<Candidate>(lookup.joined())
-                push(joined)
+                let lookup: [Candidate] = Lychee.pinyinLookup(for: text).transformed()
+                push(lookup)
         }
         private func cangjieReverseLookup() {
                 let text: String = String(processingText.dropFirst())
@@ -288,17 +278,8 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                if shapeData == nil {
-                        shapeData = ShapeData()
-                }
-                guard let searches = shapeData?.search(cangjie: text), !searches.isEmpty else { return }
-                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = Lookup.look(for: lexicon.text)
-                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
-                        return candidates
-                }
-                let joined: [Candidate] = Array<Candidate>(lookup.joined())
-                push(joined)
+                let lookup: [Candidate] = Lychee.cangjieLookup(for: text).transformed()
+                push(lookup)
         }
         private func strokeReverseLookup() {
 
@@ -320,17 +301,8 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                if shapeData == nil {
-                        shapeData = ShapeData()
-                }
-                guard let searches = shapeData?.search(stroke: text), !searches.isEmpty else { return }
-                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = Lookup.look(for: lexicon.text)
-                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
-                        return candidates
-                }
-                let joined: [Candidate] = Array<Candidate>(lookup.joined())
-                push(joined)
+                let lookup: [Candidate] = Lychee.strokeLookup(for: text).transformed()
+                push(lookup)
         }
         private func loengfanReverseLookup() {
                 let text: String = String(processingText.dropFirst())
@@ -338,20 +310,8 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                if loengfanProvider == nil {
-                        loengfanProvider = LoengfanProvider()
-                }
-                guard let searches = loengfanProvider?.search(for: text), !searches.isEmpty else {
-                        candidates = []
-                        return
-                }
-                let lookup: [[Candidate]] = searches.map { lexicon -> [Candidate] in
-                        let romanizations: [String] = Lookup.look(for: lexicon.text)
-                        let candidates: [Candidate] = romanizations.map({ Candidate(text: lexicon.text, romanization: $0, input: lexicon.input, lexiconText: lexicon.text) })
-                        return candidates
-                }
-                let joined: [Candidate] = Array<Candidate>(lookup.joined())
-                push(joined)
+                let lookup: [Candidate] = Lychee.leungFanLookup(for: text).transformed()
+                push(lookup)
         }
         private func push(_ origin: [Candidate]) {
                 switch Logogram.current {
@@ -372,34 +332,21 @@ class JyutpingInputController: IMKInputController {
                 }
         }
 
-        private lazy var engine: Engine? = nil
         private lazy var userLexicon: UserLexicon? = nil
-        private lazy var pinyinProvider: PinyinProvider? = nil
-        private lazy var shapeData: ShapeData? = nil
-        private lazy var loengfanProvider: LoengfanProvider? = nil
         private lazy var simplifier: Simplifier? = nil
 
         override func activateServer(_ sender: Any!) {
                 currentClient = sender as? IMKTextInput
-                if engine == nil {
-                        engine = Engine()
-                }
+                Lychee.connect()
                 if userLexicon == nil {
                         userLexicon = UserLexicon()
                 }
                 resetWindow()
         }
         override func deactivateServer(_ sender: Any!) {
-                engine?.close()
-                engine = nil
+                Lychee.close()
                 userLexicon?.close()
                 userLexicon = nil
-                pinyinProvider?.close()
-                pinyinProvider = nil
-                shapeData?.close()
-                shapeData = nil
-                loengfanProvider?.close()
-                loengfanProvider = nil
                 simplifier?.close()
                 simplifier = nil
 
@@ -658,3 +605,11 @@ class JyutpingInputController: IMKInputController {
                 window?.setFrame(.zero, display: true)
         }
 }
+
+
+private extension Array where Element == CoreCandidate {
+        func transformed() -> [Candidate] {
+                return self.map({ Candidate(text: $0.text, romanization: $0.romanization, input: $0.input, lexiconText: $0.text) })
+        }
+}
+

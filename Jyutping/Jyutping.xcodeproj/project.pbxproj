@@ -25,7 +25,6 @@
 		3764CEC227BE103300DCFB51 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEC127BE103300DCFB51 /* JyutpingTests.swift */; };
 		3764CECC27BE103300DCFB51 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CECB27BE103300DCFB51 /* JyutpingUITests.swift */; };
 		3764CECE27BE103300DCFB51 /* JyutpingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CECD27BE103300DCFB51 /* JyutpingUITestsLaunchTests.swift */; };
-		3764CEED27BE127000DCFB51 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEDE27BE126F00DCFB51 /* Engine.swift */; };
 		3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEDF27BE126F00DCFB51 /* StringExtensions.swift */; };
 		3764CEF127BE127000DCFB51 /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE227BE126F00DCFB51 /* KeyCode.swift */; };
 		3764CEF227BE127000DCFB51 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE327BE126F00DCFB51 /* CharacterExtensions.swift */; };
@@ -71,7 +70,6 @@
 		3797FCD427BF915E00C6BB8D /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAB27BF915D00C6BB8D /* StringExtensions.swift */; };
 		3797FCD527BF915E00C6BB8D /* KeyboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAC27BF915D00C6BB8D /* KeyboardViewController+CollectionView.swift */; };
 		3797FCD727BF915E00C6BB8D /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCAF27BF915D00C6BB8D /* UserLexicon.swift */; };
-		3797FCD827BF915E00C6BB8D /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCB027BF915D00C6BB8D /* Engine.swift */; };
 		3797FCD927BF915E00C6BB8D /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCB127BF915E00C6BB8D /* Candidate.swift */; };
 		3797FCDA27BF915E00C6BB8D /* KeyView+construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCB327BF915E00C6BB8D /* KeyView+construction.swift */; };
 		3797FCDB27BF915E00C6BB8D /* CalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FCB427BF915E00C6BB8D /* CalloutView.swift */; };
@@ -86,8 +84,6 @@
 		37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ABA5AC27C19882000AC306 /* Logogram.swift */; };
 		37AEE49C282A51BE00C54BD9 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */; };
 		37AEE49D282A51BE00C54BD9 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */; };
-		37B1607A2818EDA100C95317 /* InputMethodData in Frameworks */ = {isa = PBXBuildFile; productRef = 37B160792818EDA100C95317 /* InputMethodData */; };
-		37B1607C2818EDAA00C95317 /* InputMethodData in Frameworks */ = {isa = PBXBuildFile; productRef = 37B1607B2818EDAA00C95317 /* InputMethodData */; };
 		37B1609928190DBD00C95317 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1609828190DBD00C95317 /* Tests_iOS.swift */; };
 		37B1609B28190DBD00C95317 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1609A28190DBD00C95317 /* Tests_iOSLaunchTests.swift */; };
 		37B160A528190DBE00C95317 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160A428190DBE00C95317 /* Tests_macOS.swift */; };
@@ -254,7 +250,6 @@
 		3764CEC727BE103300DCFB51 /* JyutpingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3764CECB27BE103300DCFB51 /* JyutpingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITests.swift; sourceTree = "<group>"; };
 		3764CECD27BE103300DCFB51 /* JyutpingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3764CEDE27BE126F00DCFB51 /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		3764CEDF27BE126F00DCFB51 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3764CEE227BE126F00DCFB51 /* KeyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		3764CEE327BE126F00DCFB51 /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
@@ -303,7 +298,6 @@
 		3797FCAB27BF915D00C6BB8D /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3797FCAC27BF915D00C6BB8D /* KeyboardViewController+CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		3797FCAF27BF915D00C6BB8D /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
-		3797FCB027BF915D00C6BB8D /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 		3797FCB127BF915E00C6BB8D /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
 		3797FCB327BF915E00C6BB8D /* KeyView+construction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+construction.swift"; sourceTree = "<group>"; };
 		3797FCB427BF915E00C6BB8D /* CalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalloutView.swift; sourceTree = "<group>"; };
@@ -331,7 +325,6 @@
 		3797FCFA27BF922B00C6BB8D /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
-		37B160782818ED9900C95317 /* InputMethodData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = InputMethodData; path = ../Modules/InputMethodData; sourceTree = "<group>"; };
 		37B1607D2818F0C100C95317 /* ContainersData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ContainersData; path = ../Modules/ContainersData; sourceTree = "<group>"; };
 		37B1608128190DBC00C95317 /* ContainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerApp.swift; sourceTree = "<group>"; };
 		37B1608328190DBD00C95317 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -437,7 +430,6 @@
 			files = (
 				37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */,
 				37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */,
-				37B1607C2818EDAA00C95317 /* InputMethodData in Frameworks */,
 				37EDC490283175B400E45916 /* CoreIME in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,7 +455,6 @@
 				37CB2ED12818E9040092E0DD /* CharacterSets in Frameworks */,
 				37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */,
 				37EDC492283175C100E45916 /* CoreIME in Frameworks */,
-				37B1607A2818EDA100C95317 /* InputMethodData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +507,6 @@
 			children = (
 				37EDC48E2831759700E45916 /* CoreIME */,
 				37B1607D2818F0C100C95317 /* ContainersData */,
-				37B160782818ED9900C95317 /* InputMethodData */,
 				37CB2ECE2818E8E70092E0DD /* CommonExtensions */,
 				37CB2ECD2818E8DD0092E0DD /* CharacterSets */,
 				3764CEAE27BE103200DCFB51 /* Jyutping */,
@@ -561,7 +551,6 @@
 				3764CEE627BE127000DCFB51 /* DisplayCandidate.swift */,
 				3764CEEA27BE127000DCFB51 /* Candidate.swift */,
 				3764CEE727BE127000DCFB51 /* SettingsView.swift */,
-				3764CEDE27BE126F00DCFB51 /* Engine.swift */,
 				3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */,
 				3764CEE827BE127000DCFB51 /* Direction.swift */,
 				3764CEE227BE126F00DCFB51 /* KeyCode.swift */,
@@ -711,7 +700,6 @@
 			isa = PBXGroup;
 			children = (
 				3797FCAF27BF915D00C6BB8D /* UserLexicon.swift */,
-				3797FCB027BF915D00C6BB8D /* Engine.swift */,
 				3797FCB127BF915E00C6BB8D /* Candidate.swift */,
 				37B5D35B282C58EA0058D18C /* CandidateType.swift */,
 				37B5D359282C57F50058D18C /* Candidate+trademarks.swift */,
@@ -904,7 +892,6 @@
 			packageProductDependencies = (
 				37CB2ED62818E9210092E0DD /* CharacterSets */,
 				37CB2ED82818E9260092E0DD /* CommonExtensions */,
-				37B1607B2818EDAA00C95317 /* InputMethodData */,
 				37EDC48F283175B400E45916 /* CoreIME */,
 			);
 			productName = Jyutping;
@@ -963,7 +950,6 @@
 			packageProductDependencies = (
 				37CB2ED02818E9040092E0DD /* CharacterSets */,
 				37CB2ED22818E9080092E0DD /* CommonExtensions */,
-				37B160792818EDA100C95317 /* InputMethodData */,
 				37EDC491283175C100E45916 /* CoreIME */,
 			);
 			productName = IOSKeyboard;
@@ -1212,7 +1198,6 @@
 				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
 				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
-				3764CEED27BE127000DCFB51 /* Engine.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
 				370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */,
@@ -1268,7 +1253,6 @@
 				3797FCDF27BF915E00C6BB8D /* KeyView.swift in Sources */,
 				3797FCCA27BF915E00C6BB8D /* KeyboardInterface.swift in Sources */,
 				3797FCCB27BF915E00C6BB8D /* Emoji.swift in Sources */,
-				3797FCD827BF915E00C6BB8D /* Engine.swift in Sources */,
 				3797FCCF27BF915E00C6BB8D /* CharacterExtensions.swift in Sources */,
 				37B5D35C282C58EA0058D18C /* CandidateType.swift in Sources */,
 				3797FCD327BF915E00C6BB8D /* UIColorExtensions.swift in Sources */,
@@ -2136,14 +2120,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		37B160792818EDA100C95317 /* InputMethodData */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = InputMethodData;
-		};
-		37B1607B2818EDAA00C95317 /* InputMethodData */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = InputMethodData;
-		};
 		37B161462819142300C95317 /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
