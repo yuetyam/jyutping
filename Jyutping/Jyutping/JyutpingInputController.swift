@@ -197,7 +197,7 @@ class JyutpingInputController: IMKInputController {
                         case .some("q"):
                                 flexibleSchemes = []
                                 markedText = processingText
-                                loengfanReverseLookup()
+                                leungFanReverseLookup()
                         default:
                                 flexibleSchemes = Splitter.split(processingText)
                                 if let syllables: [String] = flexibleSchemes.first {
@@ -304,7 +304,7 @@ class JyutpingInputController: IMKInputController {
                 let lookup: [Candidate] = Lychee.strokeLookup(for: text).transformed()
                 push(lookup)
         }
-        private func loengfanReverseLookup() {
+        private func leungFanReverseLookup() {
                 let text: String = String(processingText.dropFirst())
                 guard !text.isEmpty else {
                         candidates = []

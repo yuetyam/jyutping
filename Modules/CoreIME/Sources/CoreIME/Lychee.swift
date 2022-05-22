@@ -2,8 +2,6 @@ import Foundation
 import SQLite3
 
 /// Core IME Engine
-///
-/// 寫邇份代碼箇陣，啱好係荔枝成熟期
 public struct Lychee {
 
         /// SQLite3 database
