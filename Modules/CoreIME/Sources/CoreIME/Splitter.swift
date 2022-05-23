@@ -23,8 +23,7 @@ public struct Splitter {
                 let scheme: [String] = sequence.map { syllable -> String in
                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                                .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
-                                .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return converted
@@ -39,8 +38,7 @@ public struct Splitter {
                 let scheme: [String] = sequence.map { syllable -> String in
                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                                .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
-                                .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return converted
@@ -246,14 +244,10 @@ private static let syllables: Set<String> = [
 "coen", "doen", "joen", "loen", "soen", "toen", "zoen",
 "coet", "loet", "noet", "soet", "zoet",
 
-"ceong", "deong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
+"ceung", "geung", "heung", "jeung", "keung", "leung", "neung", "seung", "zeung",
+
+"ceong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
 "ceok", "deok", "geok", "jeok", "keok", "leok", "neok", "seok", "zeok",
-
-"ceoy", "deoy", "geoy", "heoy", "jeoy", "keoy", "leoy", "neoy", "seoy", "teoy", "zeoy",
-"coey", "doey", "goey", "hoey", "joey", "koey", "loey", "noey", "soey", "toey", "zoey",
-
-"bum", "cum", "dum", "gum", "hum", "jum", "kum", "lum", "num", "sum", "tum", "zum", "ngum",
-"bom", "com", "dom", "gom", "hom", "jom", "kom", "lom", "nom", "som", "tom", "zom", "ngom",
 
 "ye", "yi", "yo", "yau", "yiu", "yat", "yan", "yap", "yam", "yik", "yaa", "yin", "yuk", "yit",
 "yai", "yip", "yim", "yum", "yung", "ying", "yeng", "yaak", "yaai", "yaau",

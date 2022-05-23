@@ -235,8 +235,7 @@ class JyutpingInputController: IMKInputController {
                                 let sequence: [String] = block.map { syllable -> String in
                                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                                                .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
-                                                .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                                .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
                                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                                         return converted
@@ -555,6 +554,13 @@ class JyutpingInputController: IMKInputController {
                         }
                 default:
                         candidateSequence.append(candidate)
+                        defer {
+                                if bufferText.isEmpty && !candidateSequence.isEmpty {
+                                        let concatenatedCandidate: Candidate = candidateSequence.joined()
+                                        candidateSequence = []
+                                        userLexicon?.handle(concatenatedCandidate)
+                                }
+                        }
                         let bufferTextLength: Int = bufferText.count
                         let candidateInputText: String = {
                                 let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "xx", options: .regularExpression)
@@ -569,7 +575,12 @@ class JyutpingInputController: IMKInputController {
                                 let modifiedLeading = leading.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
                                 return candidateInputCount - (modifiedLeading.count - leading.count)
                         }()
-                        let leading = bufferText.dropLast(bufferTextLength - inputCount)
+                        let difference: Int = bufferTextLength - inputCount
+                        guard difference > 0 else {
+                                shutdownSession()
+                                return
+                        }
+                        let leading = bufferText.dropLast(difference)
                         let filtered = leading.replacingOccurrences(of: "'", with: "")
                         var tail: String.SubSequence = {
                                 if filtered.count == leading.count {
@@ -587,11 +598,6 @@ class JyutpingInputController: IMKInputController {
                         } else {
                                 bufferText = String(tail)
                         }
-                }
-                if bufferText.isEmpty && !candidateSequence.isEmpty {
-                        let concatenatedCandidate: Candidate = candidateSequence.joined()
-                        candidateSequence = []
-                        userLexicon?.handle(concatenatedCandidate)
                 }
         }
 
