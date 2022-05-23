@@ -104,98 +104,70 @@ extension Lychee {
                 return combine
         }
         private static func process(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
-                let candidates: [Candidate] = {
-                        let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
-                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
-                        let candidates: [Candidate] = sorted.map({ $0.candidate })
-                        let hasSeparators: Bool = text.count != origin.count
-                        guard hasSeparators else { return candidates }
-                        let firstSyllable: String = sequences.first?.first ?? "X"
-                        let filtered: [Candidate] = candidates.filter { candidate in
-                                let firstJyutping: String = candidate.romanization.components(separatedBy: String.space).first ?? "Y"
-                                return firstSyllable == firstJyutping.removedTones()
-                        }
-                        return filtered
-                }()
-                guard candidates.count > 1 else {
-                        return candidates
-                }
-                let firstCandidate: Candidate = candidates[0]
-                let secondCandidate: Candidate = candidates[1]
-                guard firstCandidate.input != text else {
-                        return candidates
-                }
-                let tailText: String = String(text.dropFirst(firstCandidate.input.count))
-                let tailJyutpings: [String] = Splitter.peekSplit(tailText)
-                guard !tailJyutpings.isEmpty else { return candidates }
-                var combine: [Candidate] = []
-                for (index, _) in tailJyutpings.enumerated().reversed() {
-                        let tail: String = tailJyutpings[0...index].joined()
-                        if let one: Candidate = matchWithLimitCount(for: tail, count: 1).first {
-                                let newFirstCandidate: Candidate = firstCandidate + one
-                                combine.append(newFirstCandidate)
-                                if firstCandidate.input.count == secondCandidate.input.count && firstCandidate.text.count == secondCandidate.text.count {
-                                        let newSecondCandidate: Candidate = secondCandidate + one
-                                        combine.append(newSecondCandidate)
-                                }
-                                break
-                        }
-                }
-                return combine + candidates
+                let hasSeparators: Bool = text.count != origin.count
+                let candidates = match(schemes: sequences, hasSeparators: hasSeparators)
+                guard !hasSeparators else { return candidates }
+                guard let firstCandidate = candidates.first else { return candidates }
+                let firstInputCount: Int = firstCandidate.input.count
+                guard firstInputCount != text.count else { return candidates }
+                let tailText: String = String(text.dropFirst(firstInputCount))
+                let tailSchemes: [[String]] = Splitter.engineSplit(tailText)
+                let tailCandidates = match(schemes: tailSchemes, hasSeparators: false)
+                guard let backCandidate = tailCandidates.first else { return candidates }
+                let offset: Int = (firstCandidate.text.count < 3) ? 3 : 2
+                let qualified = candidates.enumerated().filter({ $0.offset < offset && $0.element.input.count == firstInputCount })
+                let combines = qualified.map({ $0.element + backCandidate })
+                return combines + candidates
         }
         private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [Candidate] {
-                let candidates: [Candidate] = {
-                        let matches = sequences.map({ matchWithRowID(for: $0.joined()) }).joined()
-                        let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
-                        let candidates: [Candidate] = sorted.map({ $0.candidate })
-                        let hasSeparators: Bool = text.count != origin.count
-                        guard hasSeparators else { return candidates }
-                        let firstSyllable: String = sequences.first?.first ?? "X"
-                        let filtered: [Candidate] = candidates.filter { candidate in
-                                let firstJyutping: String = candidate.romanization.components(separatedBy: String.space).first ?? "Y"
-                                return firstSyllable == firstJyutping.removedTones()
-                        }
-                        return filtered
-                }()
-                guard !candidates.isEmpty else {
-                        return match(for: text) + prefix(match: text, count: 5) + shortcut(for: text)
-                }
-                let firstCandidate: Candidate = candidates[0]
-                guard firstCandidate.input != text else {
-                        return match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
-                }
-                let tailText: String = String(text.dropFirst(firstCandidate.input.count))
+                let hasSeparators: Bool = text.count != origin.count
+                let candidates: [Candidate] = match(schemes: sequences, hasSeparators: hasSeparators)
+                lazy var fallback: [Candidate] = match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
+                guard !hasSeparators else { return fallback }
+                guard let firstCandidate: Candidate = candidates.first else { return fallback }
+                let firstInputCount: Int = firstCandidate.input.count
+                guard firstInputCount != text.count else { return fallback }
+                let tailText: String = String(text.dropFirst(firstInputCount))
                 if let tailOne: Candidate = prefix(match: tailText, count: 1).first {
-                        let newFirst: Candidate = firstCandidate + tailOne
-                        return match(for: text) + prefix(match: text, count: 5) + [newFirst] + candidates + shortcut(for: text)
-                } else {
-                        let tailJyutpings: [String] = Splitter.peekSplit(tailText)
-                        guard !tailJyutpings.isEmpty else {
-                                return match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
-                        }
-                        var concatenated: [Candidate] = []
-                        var hasTailCandidate: Bool = false
-                        let rawTailJyutpings: String = tailJyutpings.joined()
-                        if tailText.count - rawTailJyutpings.count > 1 {
-                                let tailRawJPPlusOne: String = String(tailText.dropLast(tailText.count - rawTailJyutpings.count - 1))
-                                if let one: Candidate = prefix(match: tailRawJPPlusOne, count: 1).first {
-                                        let newFirst: Candidate = firstCandidate + one
-                                        concatenated.append(newFirst)
-                                        hasTailCandidate = true
-                                }
-                        }
-                        if !hasTailCandidate {
-                                for (index, _) in tailJyutpings.enumerated().reversed() {
-                                        let someJPs: String = tailJyutpings[0...index].joined()
-                                        if let one: Candidate = matchWithLimitCount(for: someJPs, count: 1).first {
-                                                let newFirst: Candidate = firstCandidate + one
-                                                concatenated.append(newFirst)
-                                                break
-                                        }
-                                }
-                        }
-                        return match(for: text) + prefix(match: text, count: 5) + concatenated + candidates + shortcut(for: text)
+                        let combine: Candidate = firstCandidate + tailOne
+                        return match(for: text) + prefix(match: text, count: 5) + [combine] + candidates + shortcut(for: text)
                 }
+                let tailSyllables: [String] = Splitter.peekSplit(tailText)
+                guard !(tailSyllables.isEmpty) else { return fallback }
+                var concatenated: [Candidate] = []
+                let hasTailCandidate: Bool = {
+                        let syllablesText = tailSyllables.joined()
+                        let difference: Int = tailText.count - syllablesText.count
+                        guard difference > 1 else { return false }
+                        let syllablesPlusOne = tailText.dropLast(difference - 1)
+                        guard let one = prefix(match: String(syllablesPlusOne), count: 1).first else { return false }
+                        let combine: Candidate = firstCandidate + one
+                        concatenated.append(combine)
+                        return true
+                }()
+                if !hasTailCandidate {
+                        for (index, _) in tailSyllables.enumerated().reversed() {
+                                let someSyllables: String = tailSyllables[0...index].joined()
+                                if let one: Candidate = matchWithLimitCount(for: someSyllables, count: 1).first {
+                                        let combine: Candidate = firstCandidate + one
+                                        concatenated.append(combine)
+                                        break
+                                }
+                        }
+                }
+                return match(for: text) + prefix(match: text, count: 5) + concatenated + candidates + shortcut(for: text)
+        }
+        private static func match(schemes: [[String]], hasSeparators: Bool) -> [Candidate] {
+                let matches = schemes.map({ matchWithRowID(for: $0.joined()) }).joined()
+                let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
+                let candidates: [Candidate] = sorted.map({ $0.candidate })
+                guard hasSeparators else { return candidates }
+                let firstSyllable: String = schemes.first?.first ?? "X"
+                let filtered: [Candidate] = candidates.filter { candidate in
+                        let firstRomanization: String = candidate.romanization.components(separatedBy: String.space).first ?? "Y"
+                        return firstSyllable == firstRomanization.removedTones()
+                }
+                return filtered
         }
 }
 

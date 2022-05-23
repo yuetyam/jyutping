@@ -31,6 +31,23 @@ public struct Splitter {
                 }
                 return scheme
         }
+
+        static func engineSplit(_ text: String) -> [[String]] {
+                return split(text).map(transform(_:))
+        }
+        private static func transform(_ sequence: [String]) -> [String] {
+                let scheme: [String] = sequence.map { syllable -> String in
+                        let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                                .replacingOccurrences(of: "(eoy|oey)$", with: "eoi", options: .regularExpression)
+                                .replacingOccurrences(of: "^([b-z]|ng)(u|o)m$", with: "$1am", options: .regularExpression)
+                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
+                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
+                        return converted
+                }
+                return scheme
+        }
+
         public static func split(_ text: String) -> [[String]] {
                 guard !text.isEmpty else { return [] }
                 guard !text.contains("'") else {
