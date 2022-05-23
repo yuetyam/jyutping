@@ -33,7 +33,7 @@ extension Font {
                 }
         }()
 
-        static let serial: Font = Font.title3.monospaced()
+        static let serial: Font = Font.title3.monospacedDigit()
         static let comment: Font = Font.title3.monospaced()
         static let secondaryComment: Font = Font.body.monospaced()
 

@@ -36,13 +36,18 @@ struct SettingsView: View {
                 }
         }()
 
+        private let textLine1: String = "傳統漢字\u{3000}\u{3000}\u{3000}"
+        private let textLine2: String = "傳統漢字・香港"
+        private let textLine3: String = "傳統漢字・臺灣"
+        private let textLine4: String = "简化字\u{3000}\u{3000}\u{3000}\u{3000}"
+
         var body: some View {
                 VStack(spacing: 8) {
                         Group {
-                                SettingLabel(number: 1, text: "傳統漢字\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
-                                SettingLabel(number: 2, text: "傳統漢字・香港\u{3000}", checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
-                                SettingLabel(number: 3, text: "傳統漢字・臺灣\u{3000}", checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
-                                SettingLabel(number: 4, text: "简化字\u{3000}\u{3000}\u{3000}\u{3000}\u{3000}", checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
+                                SettingLabel(number: 1, text: textLine1, checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
+                                SettingLabel(number: 2, text: textLine2, checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
+                                SettingLabel(number: 3, text: textLine3, checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
+                                SettingLabel(number: 4, text: textLine4, checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
                         }
                         /*
                         Divider()
@@ -60,7 +65,7 @@ struct SettingsView: View {
                 .padding()
                 .background(
                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(.regularMaterial)
+                                .fill(.thinMaterial)
                                 .shadow(radius: 4)
                 )
         }
@@ -75,7 +80,7 @@ private struct SettingLabel: View {
         let highlighted: Bool
 
         var body: some View {
-                HStack {
+                HStack(spacing: 14) {
                         Text(verbatim: "\(number).").font(.serial)
                         Text(verbatim: text).font(.candidate)
                         if checked {

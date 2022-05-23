@@ -93,7 +93,7 @@ class JyutpingInputController: IMKInputController {
         private func windowFrame(origin: CGPoint? = nil) -> CGRect {
                 let origin: CGPoint = origin ?? currentClient?.position ?? .zero
                 let width: CGFloat = 600
-                let height: CGFloat = 300 + (offset * 2)
+                let height: CGFloat = 310 + (offset * 2)
                 let x: CGFloat = {
                         if windowPattern.isReversingHorizontal {
                                 return origin.x - width - 8
@@ -115,7 +115,7 @@ class JyutpingInputController: IMKInputController {
                 didSet {
                         guard let origin = currentClient?.position else { return }
                         let isRegularHorizontal: Bool = origin.x < (screenFrame.maxX - 600)
-                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 320)
+                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 330)
                         windowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
                                 case (true, true):
@@ -147,7 +147,7 @@ class JyutpingInputController: IMKInputController {
                                 return
                         }
                         displayObject.resetHighlightedIndex()
-                        let bound: Int = (firstIndex == 0) ? min(9, candidates.count) : min(firstIndex + 9, candidates.count)
+                        let bound: Int = (firstIndex == 0) ? min(10, candidates.count) : min(firstIndex + 10, candidates.count)
                         lastIndex = bound - 1
                         let newItems = candidates[firstIndex..<bound].map({ DisplayCandidate($0.text, comment: $0.romanization) })
                         displayObject.setItems(newItems)
@@ -404,7 +404,8 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                         if isBufferState {
-                                selectDisplayingItem(index: number - 1, client: client)
+                                let index: Int = number == 0 ? 9 : (number - 1)
+                                selectDisplayingItem(index: index, client: client)
                         } else {
                                 let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
                                 insert(text)
@@ -450,7 +451,7 @@ class JyutpingInputController: IMKInputController {
                                 guard isBufferState else { return false }
                                 guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
                                 guard firstIndex > 0 else { return true }
-                                firstIndex = max(0, firstIndex - 9)
+                                firstIndex = max(0, firstIndex - 10)
                         case KeyCode.Symbol.VK_EQUAL, KeyCode.Special.VK_PAGEDOWN:
                                 guard isBufferState else { return false }
                                 guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
