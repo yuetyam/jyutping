@@ -1,9 +1,6 @@
 import SwiftUI
 
 struct MacAboutView: View {
-
-        @State private var isSupportAuthorExpanded: Bool = false
-
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
@@ -35,38 +32,10 @@ struct MacAboutView: View {
                                         LinkLabel(icon: "circle.square", tittle: "Instagram", link: "https://www.instagram.com/jyutping_app")
                                 }
                                 .block()
-
-                                VStack(spacing: 20) {
-                                        HStack(spacing: 16) {
-                                                Image(systemName: "heart")
-                                                        .symbolRenderingMode(.multicolor)
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 16, height: 16)
-                                                Text("label.support_author")
-                                                Image(systemName: isSupportAuthorExpanded ? "chevron.down" : "chevron.backward").font(.subheadline)
-                                                Spacer()
-                                        }
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                isSupportAuthorExpanded.toggle()
-                                        }
-                                        if isSupportAuthorExpanded {
-                                                HStack {
-                                                        Text("Support Author")
-                                                                .foregroundColor(.blue)
-                                                                .padding(.leading, 32)
-                                                        Spacer()
-                                                }
-                                        }
-                                }
-                                .block()
-                                .textSelection(.disabled)
                         }
+                        .textSelection(.enabled)
                         .padding()
                 }
-                .textSelection(.enabled)
-                .animation(.default, value: isSupportAuthorExpanded)
                 .navigationTitle("About")
         }
 }

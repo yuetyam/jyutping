@@ -265,7 +265,7 @@ struct MacExpressionsView: View {
                 }
                 .font(.master)
                 .textSelection(.enabled)
-                .navigationTitle("title.expressions")
+                .navigationTitle("Cantonese Expressions")
         }
 }
 

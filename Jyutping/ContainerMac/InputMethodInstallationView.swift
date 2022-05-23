@@ -21,7 +21,7 @@ struct InputMethodInstallationView: View {
 
                                 HStack(spacing: 16) {
                                         Link("GitHub", destination: URL(string: GitHubAddress)!)
-                                        Text(verbatim: GitHubAddress).font(.callout.monospaced())
+                                        Text(verbatim: GitHubAddress).font(.body.monospaced())
                                         Spacer()
                                 }
                                 .block()

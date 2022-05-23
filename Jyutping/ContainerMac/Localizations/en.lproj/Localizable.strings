@@ -1,52 +1,8 @@
-// English (en)
-
-// General
-"Settings" = "Settings";
-"Edit" = "Edit";
-"Back" = "Back";
-"OK" = "OK";
-"Cancel" = "Cancel";
-"Copy" = "Copy";
-
-"Home" = "Home";
-"Jyutping" = "Jyutping";
-"About" = "About";
-
-// macOS
-"Install Input Method" = "Install Input Method";
-"Introductions" = "Introductions";
 "Keyboard" = "Keyboard";
-"Search" = "Search";
-"Initials" = "Initials";
-"Finals" = "Finals";
-"Tones" = "Tones";
-"Resources" = "Resources";
+"Install Input Method" = "Install Input Method";
 
 
-// MARK: - Home
-
-"Text Field" = "Text Field";
-
-"How to enable this Keyboard" = "How to enable this Keyboard";
-"accessibility.how_to_enable_this_keyboard" = "Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access";
-
-// iOS 15
-"Jump to **Settings**" = "Jump to **Settings**";
-"Tap **Keyboards**" = "Tap **Keyboards**";
-"Turn on **Jyutping**" = "Turn on **Jyutping**";
-"Turn on **Allow Full Access**" = "Turn on **Allow Full Access**";
-"Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
-"Go to **Settings**" = "Go to **Settings**";
-// end
-
-// iOS 14
-"Jump to" = "Jump to";
-"Tap" = "Tap";
-"Keyboards" = "Keyboards";
-"Turn on" = "Turn to";
-"Allow Full Access" = "Allow Full Access";
-"Go to" = "Go to";
-// end
+"Introductions" = "Introductions";
 
 "Tones Input" = "Tones Input";
 "tones.input.description" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
@@ -63,88 +19,36 @@
 "Lookup Jyutping with Loengfan" = "Lookup Jyutping with Loengfan";
 "Loengfan Reverse Lookup Description" = "兩分即係將一個字分成兩部份。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
 
-"More Introductions" = "More Introductions";
-"title.introductions" = "Introductions";
-"Period (Full Stop) Shortcut" = "Period (Full Stop) Shortcut";
-"Double tapping the space bar will insert a period followed by a space" = "Double tapping the space bar will insert a period followed by a space";
-"Clear the input buffer syllables" = "Clear the input buffer syllables";
-"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "Swipe from right to left on the Delete key will clear the pre-edited syllables";
 
 "Cantonese Expressions" = "Cantonese Expressions";
-"title.expressions" = "Expressions";
-
-"Frequently Asked Questions" = "Frequently Asked Questions";
-"FAQ" = "FAQ";
-"Can I use with external keyboards?" = "Can I use with external keyboards?";
-"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";
-"What does “Allow Full Access” do?" = "What does “Allow Full Access” do?";
-"Enable a button on the keyboard for pasting texts from Clipboard" = "Enable a button on the keyboard for pasting texts from Clipboard";
-"Haptic Feedback" = "Haptic Feedback";
-"Paste texts from Clipboard" = "Paste texts from Clipboard";
-"All other features don't require Full Access" = "All other features don't require Full Access";
-
-"Privacy Notice" = "Privacy Notice";
-"privacy.notice.1" = "This Keyboard would always be offline, would never connect to the networks.";
-"privacy.notice.2" = "There is no communication between the Keyboard Extension and the main App.";
-"privacy.notice.3" = "Enabling Haptic Feedback needs Allow Full Access.";
-"privacy.notice.4" = "The Paste button on the top of the Keyboard would not collect any content of the Clipboard.";
-"privacy.notice.footer" = "TLDR: We do NOT collect or share personal information.";
-
-"Why is this App's Text-to-Speech voice so odd?" = "Why is this App's Text-to-Speech voice so odd?";
-"tts.notice.1" = "本應用程式使用系統提供个語音朗讀功能。";
-"tts.notice.2" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
-"tts.notice.3" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
 
 
 // MARK: - Jyutping
 
+"Jyutping" = "Jyutping";
+"Search" = "Search";
 "Lookup Jyutping for Cantonese" = "Lookup Jyutping for Cantonese";
-"No Results." = "No Results.";
-"Common Cantonese words only." = "Common Cantonese words only.";
-
+"Initials" = "Initials";
+"Finals" = "Finals";
+"Tones" = "Tones";
 "Jyutping Initials" = "Jyutping Initials";
 "Jyutping Finals" = "Jyutping Finals";
 "Jyutping Tones" = "Jyutping Tones";
 
-"Search on other places (websites)" = "Search on other places (websites)";
-"Jyutping Resources" = "Jyutping Resources";
-"Jyutping - LSHK" = "Jyutping - LSHK";
-"Learn Jyutping" = "Learn Jyutping";
-
-"Cantonese Resources" = "Cantonese Resources";
-
 
 // MARK: - About
 
+"About" = "About";
+"Resources" = "Resources";
 "Version" = "Version";
 
 "Website" = "Website";
 "Source Code" = "Source Code";
-"Terms of Use" = "Terms of Use";
 "Privacy Policy" = "Privacy Policy";
 
 "Telegram Group" = "Telegram Group";
 "QQ Group" = "QQ Group";
-"Twitter" = "Follow us on Twitter";
+
 "TRUTH Social" = "Follow us on Truth Social";
+"Twitter" = "Follow us on Twitter";
 "Instagram" = "Follow us on Instagram";
-"GitHub Issues" = "GitHub Issues";
-
-"Copy URL" = "Copy URL";
-"Copy Username" = "Copy Username";
-"Copy QQ Group ID" = "Copy QQ Group ID";
-
-"Email Feedback" = "Email Feedback";
-"Unable to compose mail" = "Unable to compose mail";
-"Mail Unavailable" = "Mail Unavailable";
-"Copy Email Address" = "Copy Email Address";
-
-"Review on the App Store" = "Review on the App Store";
-"Share this App" = "Share this App";
-"Copy App Store link" = "Copy App Store link";
-
-"label.support_author" = "Support Author";
-"Support Author" = "Support Author";
-"Support Author Plus" = "Support Author Plus";
-"Support Author Max" = "Support Author Max";
-"Thank You" = "Thank You";
