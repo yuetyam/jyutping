@@ -249,9 +249,12 @@ private static let syllables: Set<String> = [
 "ceong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
 "ceok", "deok", "geok", "jeok", "keok", "leok", "neok", "seok", "zeok",
 
-"ye", "yi", "yo", "yau", "yiu", "yat", "yan", "yap", "yam", "yik", "yaa", "yin", "yuk", "yit",
-"yai", "yip", "yim", "yum", "yung", "ying", "yeng", "yaak", "yaai", "yaau",
-"yeoi", "yeon", "yoek", "yoei", "yoen", "yeok", "yoeng", "yeong",
+"yaa", "yaai", "yaak", "yaau",
+"yai", "yam", "yan", "yap", "yat", "yau",
+"ye", "yeng", "yeoi", "yeok", "yeon", "yeong", "yeung",
+"yi", "yik", "yim", "yin", "ying", "yip", "yit", "yiu",
+"yo", "yoen", "yoeng", "yoei", "yoek",
+"yuk", "yung",
 "yu", "yun", "yut"
 ]
 
