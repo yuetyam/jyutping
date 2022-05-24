@@ -246,9 +246,9 @@ private static let syllables: Set<String> = [
 "coen", "doen", "joen", "loen", "soen", "toen", "zoen",
 "coet", "loet", "noet", "soet", "zoet",
 
-"ceung", "geung", "heung", "jeung", "keung", "leung", "neung", "seung", "zeung",
+"ceung", "geung", "heung", "keung", "leung", "neung", "seung",
 
-"ceong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
+"ceong", "deong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
 "ceok", "deok", "geok", "jeok", "keok", "leok", "neok", "seok", "zeok",
 
 "dum", "gum", "hum", "kum", "lum", "num", "sum",
@@ -259,7 +259,7 @@ private static let syllables: Set<String> = [
 "ye", "yeng", "yeoi", "yeok", "yeon", "yeong", "yeung",
 "yi", "yik", "yim", "yin", "ying", "yip", "yit", "yiu",
 "yo", "yoen", "yoeng", "yoei", "yoek",
-"yuk", "yung",
+"yuk", "yum", "yung",
 "yu", "yun", "yut"
 ]
 
