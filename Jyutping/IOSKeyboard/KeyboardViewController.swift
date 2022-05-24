@@ -425,7 +425,7 @@ final class KeyboardViewController: UIInputViewController {
                                 if keyboardLayout == .saamPing {
                                         return candidate.input
                                 } else {
-                                        let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "xx", options: .regularExpression)
+                                        let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression)
                                         return converted
                                 }
                         }()
@@ -435,7 +435,9 @@ final class KeyboardViewController: UIInputViewController {
                                 guard candidateInputText.contains("jyu") else { return candidateInputCount }
                                 let suffixCount: Int = max(0, bufferTextLength - candidateInputCount)
                                 let leading = bufferText.dropLast(suffixCount)
-                                let modifiedLeading = leading.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
+                                let modifiedLeading = leading.replacingOccurrences(of: "(c|d|h|j|l|s|z)yu(n|t)", with: "RRRR", options: .regularExpression)
+                                        .replacingOccurrences(of: "^(g|k|n|t)?yu(n|t)", with: "RRRR", options: .regularExpression)
+                                        .replacingOccurrences(of: "(?<!c|j|s|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
                                 return candidateInputCount - (modifiedLeading.count - leading.count)
                         }()
                         let difference: Int = bufferTextLength - inputCount
