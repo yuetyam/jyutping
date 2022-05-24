@@ -1,3 +1,9 @@
+enum CandidateType {
+        case cantonese
+        case specialMark
+}
+
+
 struct Candidate: Hashable {
 
         /// Candidate word.
@@ -33,11 +39,11 @@ struct Candidate: Hashable {
                 self.type = type
         }
 
-        /// Create a Candidate with trademark text
-        /// - Parameters:
-        ///   - trademark: Trademark text. Examples: iPhone, GitHub
-        init(trademark: String) {
-                self.init(text: trademark, romanization: String.empty, input: String.empty, lexiconText: String.empty, type: .trademark)
+        /// Create a Candidate with special mark text
+        /// - Parameter mark: Special mark. Examples: iPhone, GitHub
+        init(mark: String) {
+                let textSpace: String = mark + String.space
+                self.init(text: textSpace, romanization: String.empty, input: mark, lexiconText: mark, type: .specialMark)
         }
 
         // Equatable
@@ -56,18 +62,11 @@ struct Candidate: Hashable {
                 let newRomanization: String = lhs.romanization + String.space + rhs.romanization
                 let newInput: String = lhs.input + rhs.input
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
-
-                let newCandidate: Candidate = Candidate(text: newText,
-                                                        romanization: newRomanization,
-                                                        input: newInput,
-                                                        lexiconText: newLexiconText)
+                let newCandidate: Candidate = Candidate(text: newText, romanization: newRomanization, input: newInput, lexiconText: newLexiconText)
                 return newCandidate
         }
-
-        static func += (lhs: inout Candidate, rhs: Candidate) {
-                return lhs = lhs + rhs
-        }
 }
+
 
 extension Array where Element == Candidate {
 

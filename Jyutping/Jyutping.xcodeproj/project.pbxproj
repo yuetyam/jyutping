@@ -143,8 +143,7 @@
 		37B16184281BA81D00C95317 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37B16186281BA81D00C95317 /* InfoPlist.strings */; };
 		37B1618F281BA84400C95317 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37B16191281BA84400C95317 /* Localizable.strings */; };
 		37B16193281BA89900C95317 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37B160C02819107D00C95317 /* InfoPlist.strings */; };
-		37B5D35A282C57F50058D18C /* Candidate+trademarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B5D359282C57F50058D18C /* Candidate+trademarks.swift */; };
-		37B5D35C282C58EA0058D18C /* CandidateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B5D35B282C58EA0058D18C /* CandidateType.swift */; };
+		37B5D35A282C57F50058D18C /* Candidate+marks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B5D359282C57F50058D18C /* Candidate+marks.swift */; };
 		37BD8C9F2834383F005DE156 /* InputMethodInstallationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD8C9E2834383F005DE156 /* InputMethodInstallationView.swift */; };
 		37CB2ED12818E9040092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED02818E9040092E0DD /* CharacterSets */; };
 		37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED22818E9080092E0DD /* CommonExtensions */; };
@@ -400,8 +399,7 @@
 		37B1618E281BA83600C95317 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37B16190281BA84400C95317 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37B16192281BA84500C95317 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
-		37B5D359282C57F50058D18C /* Candidate+trademarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Candidate+trademarks.swift"; sourceTree = "<group>"; };
-		37B5D35B282C58EA0058D18C /* CandidateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateType.swift; sourceTree = "<group>"; };
+		37B5D359282C57F50058D18C /* Candidate+marks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Candidate+marks.swift"; sourceTree = "<group>"; };
 		37BD8C9E2834383F005DE156 /* InputMethodInstallationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodInstallationView.swift; sourceTree = "<group>"; };
 		37CB2EC72818A8460092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37CB2EC82818A8460092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -701,8 +699,7 @@
 			children = (
 				3797FCAF27BF915D00C6BB8D /* UserLexicon.swift */,
 				3797FCB127BF915E00C6BB8D /* Candidate.swift */,
-				37B5D35B282C58EA0058D18C /* CandidateType.swift */,
-				37B5D359282C57F50058D18C /* Candidate+trademarks.swift */,
+				37B5D359282C57F50058D18C /* Candidate+marks.swift */,
 			);
 			path = Candidate;
 			sourceTree = "<group>";
@@ -1254,7 +1251,6 @@
 				3797FCCA27BF915E00C6BB8D /* KeyboardInterface.swift in Sources */,
 				3797FCCB27BF915E00C6BB8D /* Emoji.swift in Sources */,
 				3797FCCF27BF915E00C6BB8D /* CharacterExtensions.swift in Sources */,
-				37B5D35C282C58EA0058D18C /* CandidateType.swift in Sources */,
 				3797FCD327BF915E00C6BB8D /* UIColorExtensions.swift in Sources */,
 				3777EF0927FBC59500D1EED0 /* Alphabetic.swift in Sources */,
 				3797FCBD27BF915E00C6BB8D /* NumberPadButton.swift in Sources */,
@@ -1275,7 +1271,7 @@
 				3797FCDD27BF915E00C6BB8D /* KeyView+paths.swift in Sources */,
 				3797FCCD27BF915E00C6BB8D /* EmojiBoard.swift in Sources */,
 				3797FCDA27BF915E00C6BB8D /* KeyView+construction.swift in Sources */,
-				37B5D35A282C57F50058D18C /* Candidate+trademarks.swift in Sources */,
+				37B5D35A282C57F50058D18C /* Candidate+marks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

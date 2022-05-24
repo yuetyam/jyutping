@@ -1,6 +1,6 @@
 extension Candidate {
 
-        static let trademarks: [String: String] = {
+        static let specialMarks: [String: String] = {
 
                 let values: [String] = [
                         "iOS",
@@ -23,12 +23,14 @@ extension Candidate {
                         "GitHub",
                         "PayPal",
                         "WhatsApp",
-                        "YouTube"
+                        "YouTube",
+                        "Canton",
+                        "Cantonese",
+                        "Cantonia"
                 ]
 
                 let keys: [String] = values.map({ $0.lowercased() })
-                let combined = zip(keys, values)
-                let dict: [String: String] = Dictionary(uniqueKeysWithValues: combined)
+                let dict: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, values))
                 return dict
         }()
 }

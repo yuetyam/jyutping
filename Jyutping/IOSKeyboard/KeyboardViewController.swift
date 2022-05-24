@@ -617,10 +617,9 @@ final class KeyboardViewController: UIInputViewController {
                         leungFanReverseLookup()
                 default:
                         let key: String = bufferText.lowercased()
-                        if let trademark = Candidate.trademarks[key] {
-                                let text: String = trademark + String.space
-                                let trademarkCandidate: Candidate = Candidate(trademark: text)
-                                candidates = [trademarkCandidate]
+                        if let markText = Candidate.specialMarks[key] {
+                                let markCandidate: Candidate = Candidate(mark: markText)
+                                candidates = [markCandidate]
                         } else {
                                 imeSuggest()
                         }
