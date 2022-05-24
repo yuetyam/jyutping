@@ -24,6 +24,7 @@ public struct Splitter {
                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
                                 .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
+                                .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return converted
@@ -39,6 +40,7 @@ public struct Splitter {
                         let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
                                 .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
+                                .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return converted
@@ -248,6 +250,9 @@ private static let syllables: Set<String> = [
 
 "ceong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
 "ceok", "deok", "geok", "jeok", "keok", "leok", "neok", "seok", "zeok",
+
+"dum", "gum", "hum", "kum", "lum", "num", "sum",
+"dom", "gom", "hom", "kom", "lom", "nom", "som",
 
 "yaa", "yaai", "yaak", "yaau",
 "yai", "yam", "yan", "yap", "yat", "yau",

@@ -7,15 +7,15 @@ extension Lychee {
         fileprivate typealias RowCandidate = (candidate: Candidate, row: Int)
 
         public static func suggest(for text: String, schemes: [[String]]) -> [CoreCandidate] {
-                let hasPrefixY: Bool = text.hasPrefix("y")
+                let startsWithY: Bool = text.hasPrefix("y")
                 switch text.count {
                 case 0:
                         return []
                 case 1:
                         return shortcut(for: text)
-                case 2 where !hasPrefixY:
+                case 2 where !startsWithY:
                         return fetchTwoChars(text)
-                case 3 where !hasPrefixY:
+                case 3 where !(startsWithY || text.hasSuffix("um") || text.hasSuffix("om")):
                         return fetchThreeChars(text)
                 default:
                         let filtered: String = text.replacingOccurrences(of: "'", with: "")
