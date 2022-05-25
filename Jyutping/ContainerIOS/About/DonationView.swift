@@ -74,11 +74,9 @@ struct DonationView: View {
                                 } label: {
                                         HStack {
                                                 Spacer()
+                                                Text("Support Author")
                                                 if let item = donateViewModel.products.filter({ $0.id == DonationID.supportAuthor }).first {
-                                                        Text(verbatim: item.displayName)
-                                                        Text(verbatim: item.displayPrice)
-                                                } else {
-                                                        Text("Support Author")
+                                                        Text(verbatim: item.displayPrice).font(.body.monospacedDigit())
                                                 }
                                                 Spacer()
                                         }
@@ -90,11 +88,9 @@ struct DonationView: View {
                                 } label: {
                                         HStack {
                                                 Spacer()
+                                                Text("Support Author Plus")
                                                 if let item = donateViewModel.products.filter({ $0.id == DonationID.supportAuthorPlus }).first {
-                                                        Text(verbatim: item.displayName)
-                                                        Text(verbatim: item.displayPrice)
-                                                } else {
-                                                        Text("Support Author Plus")
+                                                        Text(verbatim: item.displayPrice).font(.body.monospacedDigit())
                                                 }
                                                 Spacer()
                                         }
@@ -106,11 +102,9 @@ struct DonationView: View {
                                 } label: {
                                         HStack {
                                                 Spacer()
+                                                Text("Support Author Max")
                                                 if let item = donateViewModel.products.filter({ $0.id == DonationID.supportAuthorMax }).first {
-                                                        Text(verbatim: item.displayName)
-                                                        Text(verbatim: item.displayPrice)
-                                                } else {
-                                                        Text("Support Author Max")
+                                                        Text(verbatim: item.displayPrice).font(.body.monospacedDigit())
                                                 }
                                                 Spacer()
                                         }
