@@ -14,6 +14,7 @@
 		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
+		373F6B53283E115D00874144 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 373F6B52283E115D00874144 /* Configuration.storekit */; };
 		37418EE628366381000CA712 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37418EE528366381000CA712 /* ResourcesView.swift */; };
 		374E8A702834817F003A6174 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6E2834817F003A6174 /* icon@2x.png */; };
 		374E8A712834817F003A6174 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6F2834817F003A6174 /* icon.png */; };
@@ -234,6 +235,7 @@
 		3722934627BED0760077F15B /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934727BED0770077F15B /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934827BED0780077F15B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		373F6B52283E115D00874144 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		37418EE528366381000CA712 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		374E8A6E2834817F003A6174 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		374E8A6F2834817F003A6174 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -824,6 +826,7 @@
 				37B16160281A02C100C95317 /* About */,
 				37B160BB2819104200C95317 /* Localizations */,
 				37B160BA28190EBB00C95317 /* Container--iOS--Info.plist */,
+				373F6B52283E115D00874144 /* Configuration.storekit */,
 				37B160DB2819125E00C95317 /* Settings.bundle */,
 			);
 			path = ContainerIOS;
@@ -1150,6 +1153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37B160DC2819125E00C95317 /* Settings.bundle in Resources */,
+				373F6B53283E115D00874144 /* Configuration.storekit in Resources */,
 				37B16193281BA89900C95317 /* InfoPlist.strings in Resources */,
 				37B160AC28190DBE00C95317 /* Assets.xcassets in Resources */,
 				37B160CF2819114E00C95317 /* Localizable.strings in Resources */,
