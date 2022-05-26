@@ -128,6 +128,7 @@ class JyutpingInputController: IMKInputController {
                                         return .reversed
                                 }
                         }()
+                        resetWindow()
                 }
         }
 
@@ -341,7 +342,6 @@ class JyutpingInputController: IMKInputController {
                 if userLexicon == nil {
                         userLexicon = UserLexicon()
                 }
-                resetWindow()
         }
         override func deactivateServer(_ sender: Any!) {
                 Lychee.close()
@@ -371,6 +371,12 @@ class JyutpingInputController: IMKInputController {
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
+                let distanceX = currentClient?.position.x.distance(to: client.position.x) ?? 700
+                let distanceY = currentClient?.position.y.distance(to: client.position.y) ?? 700
+                let shouldResetClient: Bool = bufferText.isEmpty || abs(distanceX) > 300 || abs(distanceY) > 300
+                if shouldResetClient {
+                        currentClient = client
+                }
                 guard !(event.modifierFlags.contains(.command)) else { return false }  // Ignore any Command + ...
                 let isShifting: Bool = event.modifierFlags == .shift
 
