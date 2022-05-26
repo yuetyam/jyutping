@@ -39,7 +39,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 2:
                         // Keyboard Layouts (Arrangements)
                         // No TenKey keyboards for iPad
-                        return isPhone ? 3 : 2
+                        // return isPhone ? 3 : 2
+                        return 2
                 case 3:
                         // Jyutping Display
                         return 3

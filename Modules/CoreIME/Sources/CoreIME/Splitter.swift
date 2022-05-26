@@ -207,7 +207,7 @@ private static let syllables: Set<String> = [
 "cou", "haau", "waan", "cyu", "ping", "hap", "naai", "ciu", "cong", "kam",
 "nang", "jip", "caam", "baak", "mau", "gap", "dyun", "mung", "cit", "toi",
 "paai", "caang", "pin", "ziu", "zok", "gaap", "pik", "git", "gwong", "jing",
-"din", "jo", "jeng", "gon", "gim", "tip", "aap", "goi", "saa", "gaam",
+"din", "jeng", "gon", "gim", "tip", "aap", "goi", "saa", "gaam",
 "taam", "dok", "gwaan", "ngaang", "zaat", "niu", "caak", "bik", "nyun",
 "biu", "long", "fung", "taap", "nou", "fun", "geng", "kin", "am", "gik",
 "pok", "puk", "zaan", "pei", "wing", "cang", "koeng", "kat", "coi", "kyun",
@@ -234,11 +234,9 @@ private static let syllables: Set<String> = [
 "naap", "kwok", "nok", "kyut", "ap", "koe", "ngou", "zaang", "aang", "dap",
 "nip", "gep", "paan", "baang", "cak", "wik", "gwing", "teon", "kim",
 "tik", "mik", "kwik", "naat", "soe", "wang", "neot",
-"kui", "bau", "ceng", "daak", "doeng",
-"gwe", "gwei", "gwi", "gwik", "gwit", "gyut", "he", "heng", "hik",
-"jaai", "jaau", "kaak", "kaam", "kak",
-"kik", "ko", "kwaai", "kwaak", "lan",
-"mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
+"kui", "bau", "ceng", "daak", "doeng", "gwe", "gwei", "gwi", "gwik", "gwit",
+"gyut", "he", "heng", "hik", "kaak", "kaam", "kak", "kik", "ko", "kwaai", "kwaak",
+"lan", "mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
 "ngam", "ngang", "nge", "ngit", "ngot", "nit", "noek", "nuk", "ong",
 "paat", "pau", "pe", "peng", "pet", "saak", "toe", "tuk", "wak",
 
@@ -254,14 +252,14 @@ private static let syllables: Set<String> = [
 "dum", "gum", "hum", "kum", "lum", "num", "sum",
 "dom", "gom", "hom", "kom", "lom", "nom", "som",
 
-"yaa", "yaai", "yaak", "yaau",
-"yai", "yam", "yan", "yap", "yat", "yau",
+"yaa", "yai", "yam", "yan", "yap", "yat", "yau",
 "ye", "yeng", "yeoi", "yeok", "yeon", "yeong", "yeung",
 "yi", "yik", "yim", "yin", "ying", "yip", "yit", "yiu",
-"yo", "yoen", "yoeng", "yoei", "yoek",
+"yoei", "yoek", "yoen", "yoeng",
 "yuk", "yum", "yung",
 "yu", "yun", "yut"
 ]
+
 
 }
 
