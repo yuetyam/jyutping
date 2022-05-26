@@ -29,14 +29,14 @@ jobs:
       - name: ContainersData SwiftTest
         run: swift test
         working-directory: ./Modules/ContainersData
-  # test_coreime:
-  #   name: CoreIME Tests
-  #   runs-on: macos-12
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: CoreIME SwiftTest
-  #       run: swift test
-  #       working-directory: ./Modules/CoreIME
+  test_coreime:
+    name: CoreIME Tests
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v2
+      - name: CoreIME SwiftTest
+        run: swift test
+        working-directory: ./Modules/CoreIME
   build_mac_ime:
     name: Build macOS IME
     runs-on: macos-12

@@ -14,7 +14,7 @@ extension Lychee {
                 var chars: String = text
                 var fetches: [String] = []
                 while !chars.isEmpty {
-                        let leading = leading(for: chars)
+                        let leading = fetchLeading(for: chars)
                         if let romanization: String = leading.romanization {
                                 fetches.append(romanization)
                                 let length: Int = max(1, leading.charCount)
@@ -29,7 +29,7 @@ extension Lychee {
                 return [suggestion]
         }
 
-        private static func leading(for word: String) -> (romanization: String?, charCount: Int) {
+        private static func fetchLeading(for word: String) -> (romanization: String?, charCount: Int) {
                 var chars: String = word
                 var romanization: String? = nil
                 var matchedCount: Int = 0
