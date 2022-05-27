@@ -1,9 +1,7 @@
 Jyutping
 ======
 
-粵拼輸入法App
-
-Cantonese Jyutping Keyboard for iOS & macOS
+粵拼輸入法App. Cantonese Jyutping Keyboard for iOS & macOS.
 
 <a href="https://t.me/jyutping">
         <img src="images/telegram.png" alt="Telegram" width="150"/>
@@ -20,13 +18,9 @@ Cantonese Jyutping Keyboard for iOS & macOS
 <a href="https://apps.apple.com/hk/app/id1509367629">
         <img src="images/app-store-link-qrcode.png" alt="App Store QR Code" width="150"/>
 </a>
-<br>
-<br>
 
 ## macOS
-前往 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載
-
-Download on the [Releases](https://github.com/yuetyam/jyutping/releases)
+由於 Mac App Store 毋接受輸入法上架，請前往 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="450"/>
