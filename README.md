@@ -23,14 +23,10 @@ Cantonese Jyutping Keyboard for iOS & macOS
 <br>
 <br>
 
-> 兼容性 / Compatibility: iOS 14.0+
-
 ## macOS
 前往 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載
 
 Download on the [Releases](https://github.com/yuetyam/jyutping/releases)
-
-> 兼容性 / Compatibility: macOS 12.0+ (Monterey or above)
 
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="450"/>
