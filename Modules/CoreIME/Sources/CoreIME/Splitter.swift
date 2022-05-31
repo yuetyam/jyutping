@@ -231,14 +231,11 @@ private static let syllables: Set<String> = [
 "bang", "kut", "ou", "kaai", "hoe", "seng", "buk", "gwaak", "hit", "saau",
 "loe", "haap", "gaat", "cok", "saap", "jeoi", "ku", "kok", "doek", "fok",
 "tang", "kang", "cap", "fe", "ngat", "nong", "bam", "cyut", "gwaang", "cip",
-"naap", "kwok", "nok", "kyut", "ap", "koe", "ngou", "zaang", "aang", "dap",
+"naap", "kwok", "nok", "kyut", "ap", "ngou", "zaang", "aang", "dap",
 "nip", "gep", "paan", "baang", "cak", "wik", "gwing", "teon", "kim",
-"tik", "mik", "kwik", "naat", "soe", "wang", "neot",
-"kui", "bau", "ceng", "daak", "doeng", "gwik",
-"gyut", "he", "heng", "hik", "kaak", "kaam", "kak", "kik",
-"lan", "mam", "meng", "mi", "nak", "neng", "ngaap", "ngaat",
-"ngam", "ngang", "nge", "ngit", "ngot", "nit", "noek", "nuk", "ong",
-"paat", "pau", "pe", "peng", "pet", "saak", "toe", "tuk", "wak",
+"tik", "mik", "kwik", "naat", "soe", "wang", "neot", "kui", "bau", "ceng",
+"daak", "doeng", "gwik", "gyut", "heng", "kaak", "kak", "kik", "lan", "meng",
+"mi", "ngaat", "ngam", "ong", "pau", "peng", "pet", "saak", "toe", "tuk",
 
 "coei", "doei", "goei", "hoei", "joei", "koei", "loei", "noei", "soei", "toei", "zoei",
 "coen", "doen", "joen", "loen", "soen", "toen", "zoen",
@@ -247,7 +244,7 @@ private static let syllables: Set<String> = [
 "ceung", "geung", "heung", "keung", "leung", "neung", "seung",
 
 "ceong", "deong", "geong", "heong", "jeong", "keong", "leong", "neong", "seong", "zeong",
-"ceok", "deok", "geok", "jeok", "keok", "leok", "neok", "seok", "zeok",
+"ceok", "deok", "geok", "jeok", "keok", "leok", "seok", "zeok",
 
 "dum", "gum", "hum", "kum", "lum", "num", "sum",
 "dom", "gom", "hom", "kom", "lom", "nom", "som",
@@ -262,4 +259,9 @@ private static let syllables: Set<String> = [
 
 
 }
+
+
+//  .replacingOccurrences(of: "^(g|k)u", with: "$1w", options: .regularExpression)
+//  "guaa", "guaai", "guaan", "guaang", "guaat", "guai", "guan", "guang", "guat", "guo", "guok", "guong",
+//  "kuaa", "kuaang", "kuai", "kuan", "kuok", "kuong"
 
