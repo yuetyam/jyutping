@@ -59,3 +59,9 @@ Package.resolved
 ### IDEs and editors ###
 .vscode/
 .idea/
+
+
+### Mac IME Packaging ###
+*.zip
+*.pkg
+/packaging/app/
