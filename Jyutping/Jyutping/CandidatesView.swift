@@ -33,7 +33,7 @@ struct CandidatesView: View {
                                 .fill(.thinMaterial)
                                 .shadow(radius: 4)
                 )
-                .animation(.default, value: displayObject.items)
+                .animation(.default, value: displayObject.animationState)
         }
 
         private func serialText(_ index: Int) -> String {
