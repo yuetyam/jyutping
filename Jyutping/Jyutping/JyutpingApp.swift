@@ -20,13 +20,37 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         var server: IMKServer?
 
         func applicationDidFinishLaunching(_ notification: Notification) {
-                let shouldQuit: Bool = CommandLine.arguments.contains("quit")
-                guard !shouldQuit else {
-                        let bundleIdentifier = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
-                        _ = NSRunningApplication.runningApplications(withBundleIdentifier: bundleIdentifier).map({ $0.terminate() })
-                        return
-                }
+                handleCommandLineArguments()
                 let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "Jyutping_1_Connection"
                 server = IMKServer(name: name, bundleIdentifier: Bundle.main.bundleIdentifier)
+        }
+
+        private func handleCommandLineArguments() {
+                let shouldInstallIME: Bool = CommandLine.arguments.contains("install")
+                guard shouldInstallIME else { return }
+                registerIME()
+                activateIME()
+                NSRunningApplication.current.terminate()
+                NSApplication.shared.terminate(self)
+                exit(0)
+        }
+
+        private func registerIME() {
+                let url = Bundle.main.bundleURL
+                let cfURL = url as CFURL
+                TISRegisterInputSource(cfURL)
+        }
+        private func activateIME() {
+                guard let inputSources = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
+                let inputSourceID: String = "org.jyutping.inputmethod.Jyutping"
+                let inputModeID: String = "org.jyutping.inputmethod.Jyutping.IME"
+                for item in inputSources {
+                        guard let pointer = TISGetInputSourceProperty(item, kTISPropertyInputSourceID) else { return }
+                        let sourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
+                        if sourceID == inputSourceID || sourceID == inputModeID {
+                                TISDisableInputSource(item)
+                                TISEnableInputSource(item)
+                        }
+                }
         }
 }
