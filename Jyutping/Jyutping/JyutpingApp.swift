@@ -20,6 +20,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         var server: IMKServer?
 
         func applicationDidFinishLaunching(_ notification: Notification) {
+                let shouldQuit: Bool = CommandLine.arguments.contains("quit")
+                guard !shouldQuit else {
+                        let bundleIdentifier = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
+                        _ = NSRunningApplication.runningApplications(withBundleIdentifier: bundleIdentifier).map({ $0.terminate() })
+                        return
+                }
                 let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "Jyutping_1_Connection"
                 server = IMKServer(name: name, bundleIdentifier: Bundle.main.bundleIdentifier)
         }
