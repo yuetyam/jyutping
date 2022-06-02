@@ -1,0 +1,5 @@
+#!/bin/bash
+
+osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+
+exit 0

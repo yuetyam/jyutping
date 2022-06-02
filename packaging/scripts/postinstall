@@ -1,0 +1,16 @@
+#!/bin/bash
+
+osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+
+rm -r /Users/$USER/Library/Input\ Methods/Jyutping.app
+cp -r /tmp/Jyutping.app /Users/$USER/Library/Input\ Methods/
+
+jyutping_app_root="${DSTROOT}/Jyutping.app"
+ime_executable="${jyutping_app_root}/Contents/MacOS/Jyutping"
+"${ime_executable}" install
+
+osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+
+rm -r /tmp/Jyutping.app
+
+exit 0
