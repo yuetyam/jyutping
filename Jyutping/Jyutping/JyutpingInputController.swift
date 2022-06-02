@@ -371,9 +371,14 @@ class JyutpingInputController: IMKInputController {
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
-                let distanceX = currentClient?.position.x.distance(to: client.position.x) ?? 700
-                let distanceY = currentClient?.position.y.distance(to: client.position.y) ?? 700
-                let shouldResetClient: Bool = bufferText.isEmpty || abs(distanceX) > 300 || abs(distanceY) > 300
+                let shouldResetClient: Bool = {
+                        guard !bufferText.isEmpty else { return true }
+                        guard let previousPosition = currentClient?.position else { return true }
+                        let distanceX = client.position.x.distance(to: previousPosition.x)
+                        let distanceY = client.position.y.distance(to: previousPosition.y)
+                        let hasSignificantDistance: Bool = abs(distanceX) > 300 || abs(distanceY) > 300
+                        return hasSignificantDistance
+                }()
                 if shouldResetClient {
                         currentClient = client
                 }
