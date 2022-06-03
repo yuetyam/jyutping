@@ -14,11 +14,14 @@ class JyutpingInputController: IMKInputController {
         private func resetWindow() {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                window = NSWindow(contentRect: windowFrame(), styleMask: .borderless, backing: .buffered, defer: false)
-                window?.backgroundColor = .clear
-                let levelValue: Int = Int(CGShieldingWindowLevel())
-                window?.level = NSWindow.Level(levelValue)
-                window?.orderFrontRegardless()
+                lazy var frame: CGRect = windowFrame()
+                if window == nil {
+                        window = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: false)
+                        window?.backgroundColor = .clear
+                        let levelValue: Int = Int(CGShieldingWindowLevel())
+                        window?.level = NSWindow.Level(levelValue)
+                        window?.orderFrontRegardless()
+                }
                 switch inputMethodMode {
                 case .settings:
                         let settingsUI = NSHostingController(rootView: SettingsView().environmentObject(settingsObject))
@@ -52,6 +55,7 @@ class JyutpingInputController: IMKInputController {
                                 }
                         }
                         window?.contentViewController?.addChild(settingsUI)
+                        window?.setFrame(frame, display: true)
                 default:
                         let candidateUI = NSHostingController(rootView: CandidatesView().environmentObject(displayObject))
                         window?.contentView?.addSubview(candidateUI.view)
