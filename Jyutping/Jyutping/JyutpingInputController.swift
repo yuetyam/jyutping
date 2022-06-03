@@ -116,7 +116,7 @@ class JyutpingInputController: IMKInputController {
                         guard let origin = currentClient?.position else { return }
                         let isRegularHorizontal: Bool = origin.x < (screenFrame.maxX - 600)
                         let isRegularVertical: Bool = origin.y > (screenFrame.minY + 330)
-                        windowPattern = {
+                        let newPattern: WindowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
                                 case (true, true):
                                         return .regular
@@ -128,7 +128,11 @@ class JyutpingInputController: IMKInputController {
                                         return .reversed
                                 }
                         }()
-                        resetWindow()
+                        let shouldResetWindow: Bool = newPattern != windowPattern || window == nil || oldValue == nil
+                        if shouldResetWindow {
+                                windowPattern = newPattern
+                                resetWindow()
+                        }
                 }
         }
 
