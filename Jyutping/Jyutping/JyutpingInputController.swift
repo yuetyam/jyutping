@@ -97,7 +97,7 @@ class JyutpingInputController: IMKInputController {
         private func windowFrame(origin: CGPoint? = nil) -> CGRect {
                 let origin: CGPoint = origin ?? currentClient?.position ?? .zero
                 let width: CGFloat = 600
-                let height: CGFloat = 310 + (offset * 2)
+                let height: CGFloat = 340 + (offset * 2)
                 let x: CGFloat = {
                         if windowPattern.isReversingHorizontal {
                                 return origin.x - width - 8
@@ -119,7 +119,7 @@ class JyutpingInputController: IMKInputController {
                 didSet {
                         guard let origin = currentClient?.position else { return }
                         let isRegularHorizontal: Bool = origin.x < (screenFrame.maxX - 600)
-                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 330)
+                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 360)
                         let newPattern: WindowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
                                 case (true, true):
@@ -165,7 +165,7 @@ class JyutpingInputController: IMKInputController {
                                 case .specialMark:
                                         return DisplayCandidate(item.text)
                                 case .emoji:
-                                        let commentText: String = "( \(item.lexiconText) )"
+                                        let commentText: String = "〔\(item.lexiconText)〕"
                                         return DisplayCandidate(item.text, secondaryComment: commentText)
                                 }
                         }
@@ -276,8 +276,7 @@ class JyutpingInputController: IMKInputController {
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
                                 return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
                         }
-                        // TODO: Add needsEmojiCandidates
-                        let shouldContinue: Bool = !normal.isEmpty && candidateSequence.isEmpty
+                        let shouldContinue: Bool = InstantPreferences.needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
                         let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
                         for emoji in emojis {
@@ -437,9 +436,8 @@ class JyutpingInputController: IMKInputController {
                         }
                 case .number(let number):
                         guard !(inputMethodMode.isSettings) else {
-                                if number >= 1 && number <= 4 {
-                                        handleSettings(number - 1)
-                                }
+                                let index: Int = number == 0 ? 9 : (number - 1)
+                                handleSettings(index)
                                 return true
                         }
                         if isBufferState {
@@ -547,6 +545,14 @@ class JyutpingInputController: IMKInputController {
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(.zero, display: true)
                         inputMethodMode = .cantonese
+                }
+                switch selectedIndex {
+                case 8:
+                        InstantPreferences.updateNeedsEmojiCandidates(to: true)
+                case 9:
+                        InstantPreferences.updateNeedsEmojiCandidates(to: false)
+                default:
+                        break
                 }
                 let newSelection: Logogram = {
                         switch selectedIndex {

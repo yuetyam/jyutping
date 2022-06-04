@@ -6,7 +6,7 @@ final class SettingsObject: ObservableObject {
         @Published private(set) var highlightedIndex: Int = 0
 
         func increaseHighlightedIndex() {
-                guard highlightedIndex < 3 else { return }
+                guard highlightedIndex < 9 else { return }
                 highlightedIndex += 1
         }
         func decreaseHighlightedIndex() {
@@ -42,27 +42,31 @@ struct SettingsView: View {
         private let textLine4: String = "简化字\u{3000}\u{3000}\u{3000}\u{3000}"
 
         var body: some View {
-                VStack(spacing: 8) {
+                let highlightedIndex = settingsObject.highlightedIndex
+                VStack(spacing: 4) {
                         Group {
-                                SettingLabel(number: 1, text: textLine1, checked: variant == 0, highlighted: settingsObject.highlightedIndex == 0)
-                                SettingLabel(number: 2, text: textLine2, checked: variant == 1, highlighted: settingsObject.highlightedIndex == 1)
-                                SettingLabel(number: 3, text: textLine3, checked: variant == 2, highlighted: settingsObject.highlightedIndex == 2)
-                                SettingLabel(number: 4, text: textLine4, checked: variant == 3, highlighted: settingsObject.highlightedIndex == 3)
-                        }
-                        /*
-                        Divider()
-                        Group {
-                                SettingLabel(number: 5, text: "半形數字", checked: true, highlighted: false)
-                                SettingLabel(number: 6, text: "全形數字", checked: false, highlighted: false)
+                                SettingLabel(number: 1, text: textLine1, checked: variant == 0, highlighted: highlightedIndex == 0)
+                                SettingLabel(number: 2, text: textLine2, checked: variant == 1, highlighted: highlightedIndex == 1)
+                                SettingLabel(number: 3, text: textLine3, checked: variant == 2, highlighted: highlightedIndex == 2)
+                                SettingLabel(number: 4, text: textLine4, checked: variant == 3, highlighted: highlightedIndex == 3)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 7, text: "粵文句讀", checked: true, highlighted: false)
-                                SettingLabel(number: 8, text: "英文標點", checked: false, highlighted: false)
+                                SettingLabel(number: 5, text: "半形數字", checked: true, highlighted: highlightedIndex == 4)
+                                SettingLabel(number: 6, text: "全形數字（未實現）", checked: false, highlighted: highlightedIndex == 5)
                         }
-                        */
+                        Divider()
+                        Group {
+                                SettingLabel(number: 7, text: "粵文句讀", checked: true, highlighted: highlightedIndex == 6)
+                                SettingLabel(number: 8, text: "英文標點（未實現）", checked: false, highlighted: highlightedIndex == 7)
+                        }
+                        Divider()
+                        Group {
+                                SettingLabel(number: 9, text: "有 Emoji", checked: InstantPreferences.needsEmojiCandidates, highlighted: highlightedIndex == 8)
+                                SettingLabel(number: 0, text: "無 Emoji", checked: !(InstantPreferences.needsEmojiCandidates), highlighted: highlightedIndex == 9)
+                        }
                 }
-                .padding()
+                .padding(8)
                 .background(
                         RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .fill(.thinMaterial)
@@ -91,3 +95,15 @@ private struct SettingLabel: View {
                 .foregroundColor(highlighted ? .accentColor : .primary)
         }
 }
+
+
+struct InstantPreferences {
+
+        /// 候選詞包含 Emoji
+        private(set) static var needsEmojiCandidates: Bool = UserDefaults.standard.bool(forKey: "needs_emoji_candidates")
+        static func updateNeedsEmojiCandidates(to newState: Bool) {
+                needsEmojiCandidates = newState
+                UserDefaults.standard.set(newState, forKey: "needs_emoji_candidates")
+        }
+}
+
