@@ -1,3 +1,5 @@
+import CoreIME
+
 enum Operation: Hashable {
         case input(String)
         case separator

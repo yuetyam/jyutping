@@ -6,7 +6,7 @@ extension Lychee {
         /// LeungFan Reverse Lookup
         /// - Parameter text: Input text, e.g. "mukdaan"
         /// - Returns: An Array of CoreCandidate
-        public static func leungFanLookup(for text: String) -> [CoreCandidate] {
+        public static func leungFanLookup(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 let words = match(for: text).uniqued()
                 let candidates = words.map { item -> [CoreCandidate] in

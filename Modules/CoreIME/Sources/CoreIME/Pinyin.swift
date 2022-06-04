@@ -6,7 +6,7 @@ extension Lychee {
         /// Pinyin Reverse Lookup
         /// - Parameter text: Input text, e.g. "nihao"
         /// - Returns: An Array of CoreCandidate
-        public static func pinyinLookup(for text: String) -> [CoreCandidate] {
+        public static func pinyinLookup(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 let words = search(pinyin: text)
                 let candidates = words.map { item -> [CoreCandidate] in

@@ -12,7 +12,7 @@ extension Lychee {
         /// Stroke Reverse Lookup
         /// - Parameter text: Input text, e.g. "wsad"
         /// - Returns: An Array of CoreCandidate
-        public static func strokeLookup(for text: String) -> [CoreCandidate] {
+        public static func strokeLookup(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 let words = searchStroke(with: text)
                 let candidates = words.map { item -> [CoreCandidate] in
@@ -87,7 +87,7 @@ extension Lychee {
         /// Cangjie Reverse Lookup
         /// - Parameter text: Input text, e.g. "dam"
         /// - Returns: An Array of CoreCandidate
-        public static func cangjieLookup(for text: String) -> [CoreCandidate] {
+        public static func cangjieLookup(for text: String) -> [Candidate] {
                 guard !text.isEmpty else { return [] }
                 let words = searchCongGit(with: text)
                 let candidates = words.map { item -> [CoreCandidate] in

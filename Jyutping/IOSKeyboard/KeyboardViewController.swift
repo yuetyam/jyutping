@@ -639,9 +639,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .some("q"):
                         leungFanReverseLookup()
                 default:
-                        let key: String = bufferText.lowercased()
-                        if let markText = Candidate.specialMarks[key] {
-                                let markCandidate: Candidate = Candidate(mark: markText)
+                        if let markCandidate = Lychee.searchMark(for: bufferText) {
                                 candidates = [markCandidate]
                         } else {
                                 imeSuggest()
@@ -654,7 +652,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.pinyinLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.pinyinLookup(for: text)
                 push(lookup)
         }
         private func cangjieReverseLookup() {
@@ -663,7 +661,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.cangjieLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.cangjieLookup(for: text)
                 push(lookup)
         }
         private func strokeReverseLookup() {
@@ -686,7 +684,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.strokeLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.strokeLookup(for: text)
                 push(lookup)
         }
         private func leungFanReverseLookup() {
@@ -695,37 +693,23 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.leungFanLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.leungFanLookup(for: text)
                 push(lookup)
-        }
-
-        /// For tests only
-        private func fetchEmojis(for text: String) -> [Candidate] {
-                switch text {
-                case "fai":
-                        let fai: Candidate = Candidate(emoji: "🫁", cantonese: "肺", romanization: "fai3", input: text)
-                        return [fai]
-                case "gaamgaai":
-                        let gaamgaai: Candidate = Candidate(emoji: "😅", cantonese: "尷尬", romanization: "gaam3 gaai3", input: text)
-                        return [gaamgaai]
-                default:
-                        return []
-                }
         }
         private func imeSuggest() {
                 let engineCandidates: [Candidate] = {
-                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued()).transformed()
+                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued())
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(droppedLast)
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Lychee.suggest(for: droppedSeparator, schemes: newSchemes).transformed()
+                                return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
                         }
                         // TODO: Add needsEmojiCandidates
                         let shouldContinue: Bool = !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
-                        let emojis: [Candidate] = fetchEmojis(for: bufferText)
+                        let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
                         for emoji in emojis {
                                 if let index = normal.firstIndex(where: { $0.input == bufferText && $0.lexiconText == emoji.lexiconText }) {
                                         normal.insert(emoji, at: index + 1)
@@ -994,11 +978,3 @@ final class KeyboardViewController: UIInputViewController {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         }
 }
-
-
-private extension Array where Element == CoreCandidate {
-        func transformed() -> [Candidate] {
-                return self.map({ Candidate(text: $0.text, romanization: $0.romanization, input: $0.input, lexiconText: $0.text) })
-        }
-}
-

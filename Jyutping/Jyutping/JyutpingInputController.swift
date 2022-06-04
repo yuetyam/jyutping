@@ -158,7 +158,17 @@ class JyutpingInputController: IMKInputController {
                         displayObject.resetHighlightedIndex()
                         let bound: Int = (firstIndex == 0) ? min(10, candidates.count) : min(firstIndex + 10, candidates.count)
                         lastIndex = bound - 1
-                        let newItems = candidates[firstIndex..<bound].map({ DisplayCandidate($0.text, comment: $0.romanization) })
+                        let newItems = candidates[firstIndex..<bound].map { item -> DisplayCandidate in
+                                switch item.type {
+                                case .cantonese:
+                                        return DisplayCandidate(item.text, comment: item.romanization)
+                                case .specialMark:
+                                        return DisplayCandidate(item.text)
+                                case .emoji:
+                                        let commentText: String = "( \(item.lexiconText) )"
+                                        return DisplayCandidate(item.text, secondaryComment: commentText)
+                                }
+                        }
                         displayObject.setItems(newItems)
                 }
         }
@@ -257,17 +267,27 @@ class JyutpingInputController: IMKInputController {
         private lazy var regularSchemes: [[String]] = []
 
         private func suggest() {
-                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
-                        let normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued()).transformed()
-                        if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
+                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued())
+                        let droppedLast = processingText.dropLast()
+                        let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
+                        guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(processingText.dropLast())
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Lychee.suggest(for: droppedSeparator, schemes: newSchemes).transformed()
-                        } else {
-                                return normal
+                                return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
                         }
+                        // TODO: Add needsEmojiCandidates
+                        let shouldContinue: Bool = !normal.isEmpty && candidateSequence.isEmpty
+                        guard shouldContinue else { return normal }
+                        let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
+                        for emoji in emojis {
+                                if let index = normal.firstIndex(where: { $0.input == bufferText && $0.lexiconText == emoji.lexiconText }) {
+                                        normal.insert(emoji, at: index + 1)
+                                }
+                        }
+                        return normal
                 }()
+                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
                 push(combined)
         }
@@ -278,7 +298,7 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.pinyinLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.pinyinLookup(for: text)
                 push(lookup)
         }
         private func cangjieReverseLookup() {
@@ -287,7 +307,7 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.cangjieLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.cangjieLookup(for: text)
                 push(lookup)
         }
         private func strokeReverseLookup() {
@@ -310,7 +330,7 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.strokeLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.strokeLookup(for: text)
                 push(lookup)
         }
         private func leungFanReverseLookup() {
@@ -319,7 +339,7 @@ class JyutpingInputController: IMKInputController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.leungFanLookup(for: text).transformed()
+                let lookup: [Candidate] = Lychee.leungFanLookup(for: text)
                 push(lookup)
         }
         private func push(_ origin: [Candidate]) {
@@ -552,7 +572,7 @@ class JyutpingInputController: IMKInputController {
                 client.insertText(selectedItem.text, replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
 
                 let find: Candidate? = {
-                        for item in candidates {
+                        for item in candidates where item.isCantonese {
                                 let isEqual: Bool = item.text == selectedItem.text && item.romanization == selectedItem.comment
                                 if isEqual {
                                         return item
@@ -560,7 +580,11 @@ class JyutpingInputController: IMKInputController {
                         }
                         return nil
                 }()
-                guard let candidate = find else { return }
+                guard let candidate = find else {
+                        candidateSequence = []
+                        shutdownSession()
+                        return
+                }
                 switch bufferText.first {
                 case .none:
                         break
@@ -632,13 +656,6 @@ class JyutpingInputController: IMKInputController {
                 candidates = []
                 displayObject.reset()
                 window?.setFrame(.zero, display: true)
-        }
-}
-
-
-private extension Array where Element == CoreCandidate {
-        func transformed() -> [Candidate] {
-                return self.map({ Candidate(text: $0.text, romanization: $0.romanization, input: $0.input, lexiconText: $0.text) })
         }
 }
 

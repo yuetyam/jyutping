@@ -5,7 +5,7 @@ extension Lychee {
 
         fileprivate typealias RowCandidate = (candidate: CoreCandidate, row: Int)
 
-        public static func suggest(for text: String, schemes: [[String]]) -> [CoreCandidate] {
+        public static func suggest(for text: String, schemes: [[String]]) -> [Candidate] {
                 let startsWithY: Bool = text.hasPrefix("y")
                 switch text.count {
                 case 0:
