@@ -34,17 +34,44 @@ public struct Lychee {
 extension Lychee {
 
         public static func searchEmojis(for text: String) -> [Candidate] {
-                // TODO: emoji search
-                switch text {
-                case "fai":
-                        return [Candidate(emoji: "🫁", cantonese: "肺", romanization: "fai3", input: text)]
-                case "hoenggong":
-                        return [Candidate(emoji: "🇭🇰", cantonese: "香港", romanization: "hoeng1 gong2", input: text)]
-                case "gaamgaai":
-                        return [Candidate(emoji: "😅", cantonese: "尷尬", romanization: "gaam3 gaai3", input: text)]
-                default:
-                        return []
+                var candidates: [Candidate] = []
+                // TODO: improve ping text
+                let queryString = "SELECT * FROM emojitable WHERE ping = \(text.hash);"
+                var queryStatement: OpaquePointer? = nil
+                defer {
+                        sqlite3_finalize(queryStatement)
                 }
+                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                let emojiCodeText: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let cantonese: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
+                                if let emoji: String = transform(codes: emojiCodeText) {
+                                        let instance = Candidate(emoji: emoji, cantonese: cantonese, romanization: romanization, input: text)
+                                        candidates.append(instance)
+                                }
+                        }
+                }
+                return candidates
+        }
+        private static func transform(codes: String) -> String? {
+                let blocks: [String] = codes.components(separatedBy: ".")
+                switch blocks.count {
+                case 0, 1:
+                        guard let character = character(from: codes) else { return nil }
+                        return String(character)
+                default:
+                        let characters = blocks.map({ character(from: $0) })
+                        let found = characters.compactMap({ $0 })
+                        guard found.count == characters.count else { return nil }
+                        return String(found)
+                }
+        }
+        /// Create a Character from the given Unicode Code Point String, e.g. 1F600
+        private static func character(from codePoint: String) -> Character? {
+                guard let u32 = UInt32(codePoint, radix: 16) else { return nil }
+                guard let scalar = Unicode.Scalar(u32) else { return nil }
+                return Character(scalar)
         }
 }
 
