@@ -34,6 +34,8 @@
 "Insert an ideographic space" = "輸入一個全形空格（U+3000）";
 "No Double Space Shortcut" = "無";
 
+"Emoji Suggestions" = "候選詞包含 Emoji";
+
 "Clear User Lexicon" = "清空用戶詞庫";
 
 

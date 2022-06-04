@@ -14,8 +14,7 @@ struct Identifiers {
 extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
 
         func numberOfSections(in tableView: UITableView) -> Int {
-                let needsTonesOptions: Bool = footnoteStyle < 3
-                return needsTonesOptions ? 7 : 6
+                return 8
         }
 
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -27,7 +26,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 return false
                         }
                 }()
-                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch section {
                 case 0:
                         // Audio Feedback & Haptic Feedback
@@ -45,15 +43,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         // Jyutping Display
                         return 3
                 case 4:
-                        // Jyutping Tones Display || Space double tapping shortcut
+                        // Jyutping Tones Display
                         return 4
-                case 5 where needsTonesOptions:
+                case 5:
                         // Space double tapping shortcut
                         return 4
-                case 5 where !needsTonesOptions:
-                        // Clear User Lexicon
-                        return 1
                 case 6:
+                        // Emoji Suggestions
+                        return 1
+                case 7:
                         // Clear User Lexicon
                         return 1
                 default:
@@ -62,7 +60,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch section {
                 case 0:
                         return nil
@@ -72,15 +69,13 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return NSLocalizedString("Keyboard Layout", comment: .empty)
                 case 3:
                         return NSLocalizedString("Jyutping Display", comment: .empty)
-                case 4 where needsTonesOptions:
+                case 4:
                         return NSLocalizedString("Jyutping Tones Display", comment: .empty)
-                case 4 where !needsTonesOptions:
+                case 5:
                         return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
-                case 5 where needsTonesOptions:
-                        return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
-                case 5 where !needsTonesOptions:
-                        return .zeroWidthSpace
                 case 6:
+                        return nil
+                case 7:
                         return .zeroWidthSpace
                 default:
                         return nil
@@ -98,7 +93,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch indexPath.section {
                 case 0:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
@@ -176,7 +170,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         }
                         return cell
 
-                case 4 where needsTonesOptions:
+                case 4:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -195,7 +189,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 4 where !needsTonesOptions, 5 where needsTonesOptions:
+                case 5:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -214,7 +208,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 5 where !needsTonesOptions, 6:
+                case 6:
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
+                        cell.selectionStyle = .none
+                        cell.textLabel?.text = NSLocalizedString("Emoji Suggestions", comment: .empty)
+                        cell.accessoryView = UISwitch()
+                        (cell.accessoryView as? UISwitch)?.isOn = needsEmojiCandidates
+                        (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleEmojiCandidatesSwitch), for: .valueChanged)
+                        return cell
+                case 7:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.clearLexiconSettingsCell, for: indexPath)
                         cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: .empty)
                         cell.textLabel?.textColor = .systemRed
@@ -226,8 +228,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                let needsTonesOptions: Bool = footnoteStyle < 3
                 switch indexPath.section {
+                case 0:
+                        break
                 case 1:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let selected: Logogram = {
@@ -276,7 +279,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4 where needsTonesOptions:
+                case 4:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let value: Int = {
                                 switch indexPath.row {
@@ -293,7 +296,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4 where !needsTonesOptions, 5 where needsTonesOptions:
+                case 5:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let value: Int = {
                                 switch indexPath.row {
@@ -310,7 +313,9 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 5 where !needsTonesOptions, 6:
+                case 6:
+                        break
+                case 7:
                         clearUserLexicon()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 tableView.deselectRow(at: indexPath, animated: true)
@@ -335,19 +340,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
         @objc private func handleAudioFeedbackSwitch() {
-                if UserDefaults.standard.bool(forKey: "audio_feedback") {
-                        UserDefaults.standard.set(false, forKey: "audio_feedback")
-                } else {
-                        UserDefaults.standard.set(true, forKey: "audio_feedback")
-                }
-                AudioFeedback.updateAudioFeedbackStatus()
+                let newState: Bool = !AudioFeedback.isAudioFeedbackOn
+                AudioFeedback.updateAudioFeedbackStatus(to: newState)
         }
         @objc private func handleHapticFeedbackSwitch() {
-                if isHapticFeedbackOn {
-                        UserDefaults.standard.set(false, forKey: "haptic_feedback")
-                } else {
-                        UserDefaults.standard.set(true, forKey: "haptic_feedback")
-                }
-                updateHapticFeedbackStatus()
+                let newState: Bool = !isHapticFeedbackOn
+                updateHapticFeedbackStatus(to: newState)
+        }
+
+        @objc private func handleEmojiCandidatesSwitch() {
+                let newState: Bool = !needsEmojiCandidates
+                updateNeedsEmojiCandidates(to: newState)
         }
 }

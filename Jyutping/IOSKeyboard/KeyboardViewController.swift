@@ -706,8 +706,7 @@ final class KeyboardViewController: UIInputViewController {
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
                                 return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
                         }
-                        // TODO: Add needsEmojiCandidates
-                        let shouldContinue: Bool = !normal.isEmpty && candidateSequence.isEmpty
+                        let shouldContinue: Bool = needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
                         let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
                         for emoji in emojis {
@@ -889,8 +888,9 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 }
         }
-        func updateHapticFeedbackStatus() {
-                isHapticFeedbackOn = hasFullAccess && UserDefaults.standard.bool(forKey: "haptic_feedback")
+        func updateHapticFeedbackStatus(to newState: Bool) {
+                isHapticFeedbackOn = hasFullAccess ? newState : false
+                UserDefaults.standard.set(isHapticFeedbackOn, forKey: "haptic_feedback")
         }
 
         /// 鍵盤佈局。全鍵盤 或三拼 或九宮格。
@@ -976,5 +976,12 @@ final class KeyboardViewController: UIInputViewController {
         private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")
         func updateDoubleSpaceShortcut() {
                 doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
+        }
+
+        /// 候選詞包含 Emoji
+        private(set) lazy var needsEmojiCandidates: Bool = UserDefaults.standard.bool(forKey: "needs_emoji_candidates")
+        func updateNeedsEmojiCandidates(to newState: Bool) {
+                needsEmojiCandidates = newState
+                UserDefaults.standard.set(newState, forKey: "needs_emoji_candidates")
         }
 }

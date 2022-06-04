@@ -36,7 +36,8 @@ enum AudioFeedback {
         }
         
         private(set) static var isAudioFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "audio_feedback")
-        static func updateAudioFeedbackStatus() {
-                isAudioFeedbackOn = UserDefaults.standard.bool(forKey: "audio_feedback")
+        static func updateAudioFeedbackStatus(to newState: Bool) {
+                isAudioFeedbackOn = newState
+                UserDefaults.standard.set(newState, forKey: "audio_feedback")
         }
 }
