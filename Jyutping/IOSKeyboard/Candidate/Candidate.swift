@@ -1,14 +1,13 @@
 enum CandidateType {
         case cantonese
         case specialMark
+        case emoji
 }
 
 
 struct Candidate: Hashable {
 
-        /// Candidate word.
-        ///
-        /// Cloud be traditional or simplified characters, depends on `logogram` settings.
+        /// Displaying Candidate text
         let text: String
 
         /// Jyutping
@@ -17,7 +16,7 @@ struct Candidate: Hashable {
         /// User input
         let input: String
 
-        /// Lexicon Entry Cantonese word.
+        /// Candidate text for UserLexicon Entry.
         ///
         /// Always be traditional characters. User invisible.
         let lexiconText: String
@@ -31,30 +30,56 @@ struct Candidate: Hashable {
         ///   - romanization: Jyutping.
         ///   - input: User input for this Candidate.
         ///   - lexiconText: Lexicon Entry Cantonese word. User invisible.
-        init(text: String, romanization: String, input: String, lexiconText: String, type: CandidateType = .cantonese) {
+        init(text: String, romanization: String, input: String, lexiconText: String) {
                 self.text = text
                 self.romanization = romanization
                 self.input = input
                 self.lexiconText = lexiconText
-                self.type = type
+                self.type = .cantonese
         }
 
         /// Create a Candidate with special mark text
         /// - Parameter mark: Special mark. Examples: iPhone, GitHub
         init(mark: String) {
-                let textSpace: String = mark + String.space
-                self.init(text: textSpace, romanization: String.empty, input: mark, lexiconText: mark, type: .specialMark)
+                self.text = mark
+                self.romanization = mark
+                self.input = mark
+                self.lexiconText = mark
+                self.type = .specialMark
+        }
+
+        /// Create a Candidate with Emoji
+        /// - Parameters:
+        ///   - emoji: Emoji
+        ///   - cantonese: Cantonese word for this Emoji
+        ///   - romanization: Romanization (Jyutping) of Cantonese word
+        ///   - input: User input
+        init(emoji: String, cantonese: String, romanization: String, input: String) {
+                self.text = emoji
+                self.romanization = romanization
+                self.input = input
+                self.lexiconText = cantonese
+                self.type = .emoji
+        }
+
+        var isCantonese: Bool {
+                return self.type == .cantonese
+        }
+
+        /// Romanization without tones
+        private var syllables: String {
+                return romanization.removedTones()
         }
 
         // Equatable
         static func ==(lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.text == rhs.text && lhs.romanization.removedTones() == rhs.romanization.removedTones()
+                return lhs.text == rhs.text && lhs.syllables == rhs.syllables
         }
 
         // Hashable
         func hash(into hasher: inout Hasher) {
                 hasher.combine(text)
-                hasher.combine(romanization.removedTones())
+                hasher.combine(syllables)
         }
 
         static func +(lhs: Candidate, rhs: Candidate) -> Candidate {

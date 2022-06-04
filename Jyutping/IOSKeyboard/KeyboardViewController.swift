@@ -220,7 +220,17 @@ final class KeyboardViewController: UIInputViewController {
                         switch keyboardIdiom {
                         case .cantonese where !bufferText.isEmpty:
                                 if let firstCandidate: Candidate = candidates.first {
-                                        compose(firstCandidate.text)
+                                        let outputText: String = {
+                                                switch firstCandidate.type {
+                                                case .cantonese:
+                                                        return firstCandidate.text
+                                                case .specialMark:
+                                                        return firstCandidate.text + String.space
+                                                case .emoji:
+                                                        return firstCandidate.text
+                                                }
+                                        }()
+                                        compose(outputText)
                                         AudioFeedback.perform(.modify)
                                         aftercareSelected(firstCandidate)
                                 } else {
@@ -336,7 +346,17 @@ final class KeyboardViewController: UIInputViewController {
                                 }
                         }
                 case .select(let candidate):
-                        compose(candidate.text)
+                        let outputText: String = {
+                                switch candidate.type {
+                                case .cantonese:
+                                        return candidate.text
+                                case .specialMark:
+                                        return candidate.text + String.space
+                                case .emoji:
+                                        return candidate.text
+                                }
+                        }()
+                        compose(outputText)
                         AudioFeedback.perform(.modify)
                         triggerHapticFeedback()
                         aftercareSelected(candidate)
@@ -407,7 +427,7 @@ final class KeyboardViewController: UIInputViewController {
                                 bufferText = first + tail
                         }
                 default:
-                        guard candidate.type == .cantonese else {
+                        guard candidate.isCantonese else {
                                 candidateSequence = []
                                 bufferText = .empty
                                 return
@@ -678,18 +698,42 @@ final class KeyboardViewController: UIInputViewController {
                 let lookup: [Candidate] = Lychee.leungFanLookup(for: text).transformed()
                 push(lookup)
         }
+
+        /// For tests only
+        private func fetchEmojis(for text: String) -> [Candidate] {
+                switch text {
+                case "fai":
+                        let fai: Candidate = Candidate(emoji: "🫁", cantonese: "肺", romanization: "fai3", input: text)
+                        return [fai]
+                case "gaamgaai":
+                        let gaamgaai: Candidate = Candidate(emoji: "😅", cantonese: "尷尬", romanization: "gaam3 gaai3", input: text)
+                        return [gaamgaai]
+                default:
+                        return []
+                }
+        }
         private func imeSuggest() {
-                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let engineCandidates: [Candidate] = {
-                        let normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued()).transformed()
-                        if normal.isEmpty && processingText.hasSuffix("'") && !processingText.dropLast().contains("'") {
-                                let droppedSeparator: String = String(processingText.dropLast())
+                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued()).transformed()
+                        let droppedLast = processingText.dropLast()
+                        let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
+                        guard !shouldDropSeparator else {
+                                let droppedSeparator: String = String(droppedLast)
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
                                 return Lychee.suggest(for: droppedSeparator, schemes: newSchemes).transformed()
-                        } else {
-                                return normal
                         }
+                        // TODO: Add needsEmojiCandidates
+                        let shouldContinue: Bool = !normal.isEmpty && candidateSequence.isEmpty
+                        guard shouldContinue else { return normal }
+                        let emojis: [Candidate] = fetchEmojis(for: bufferText)
+                        for emoji in emojis {
+                                if let index = normal.firstIndex(where: { $0.input == bufferText && $0.lexiconText == emoji.lexiconText }) {
+                                        normal.insert(emoji, at: index + 1)
+                                }
+                        }
+                        return normal
                 }()
+                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
                 push(combined)
         }

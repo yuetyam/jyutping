@@ -88,14 +88,21 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 let candidate: Candidate = candidates[indexPath.row]
                 cell.textLabel.text = candidate.text
 
-                switch toneStyle {
-                case 2:
-                        cell.footnoteLabel.text = candidate.romanization.removedTones()
-                case 3, 4:
-                        let attributed: NSAttributedString = attribute(text: candidate.romanization, toneStyle: toneStyle)
-                        cell.footnoteLabel.attributedText = attributed
-                default:
-                        cell.footnoteLabel.text = candidate.romanization
+                switch candidate.type {
+                case .cantonese:
+                        switch toneStyle {
+                        case 2:
+                                cell.footnoteLabel.text = candidate.romanization.removedTones()
+                        case 3, 4:
+                                let attributed: NSAttributedString = attribute(text: candidate.romanization, toneStyle: toneStyle)
+                                cell.footnoteLabel.attributedText = attributed
+                        default:
+                                cell.footnoteLabel.text = candidate.romanization
+                        }
+                case .specialMark:
+                        cell.footnoteLabel.text = String.empty
+                case .emoji:
+                        cell.footnoteLabel.text = String.empty
                 }
 
                 // REASON: In some apps (like QQ), the cell may not showing the correct default colors
@@ -155,7 +162,17 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         return CGSize(width: 500, height: 40)
                 }
 
-                let characterCount: Int = candidates[indexPath.row].text.count
+                let candidate: Candidate = candidates[indexPath.row]
+                let characterCount: Int = candidate.text.count
+
+                guard candidate.type != .emoji else {
+                        return CGSize(width: 45, height: 55)
+                }
+                guard candidate.type != .specialMark else {
+                        let width = characterCount * 16
+                        return CGSize(width: width, height: 60)
+                }
+
                 guard footnoteStyle < 3 else {
                         if keyboardIdiom == .candidates {
                                 let fullWidth: CGFloat = collectionView.bounds.size.width
