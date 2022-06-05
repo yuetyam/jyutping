@@ -3,7 +3,7 @@ enum Representative: Hashable {
         case number(Int)
         case arrow(Direction)
         case modifier(Modifier)
-        case instant(String)
+        case punctuation(PunctuationKey)
         case transparent
         case other
 }
@@ -41,17 +41,19 @@ extension UInt16 {
                 case KeyCode.Number.VK_KEY_9:
                         return .number(9)
                 case KeyCode.Symbol.VK_COMMA:
-                        return .instant("，")
-                case KeyCode.Symbol.VK_SEMICOLON:
-                        return .instant("；")
+                        return .punctuation(.comma)
                 case KeyCode.Symbol.VK_DOT:
-                        return .instant("。")
+                        return .punctuation(.period)
+                case KeyCode.Symbol.VK_SLASH:
+                        return .punctuation(.slash)
+                case KeyCode.Symbol.VK_SEMICOLON:
+                        return .punctuation(.semicolon)
                 case KeyCode.Symbol.VK_BRACKET_LEFT:
-                        return .instant("「")
+                        return .punctuation(.bracketLeft)
                 case KeyCode.Symbol.VK_BRACKET_RIGHT:
-                        return .instant("」")
+                        return .punctuation(.bracketRight)
                 case KeyCode.Symbol.VK_BACKSLASH:
-                        return .instant("、")
+                        return .punctuation(.backSlash)
                 case KeyCode.Keypad.VK_KEYPAD_ENTER:
                         return .other
                 case KeyCode.Keypad.VK_KEYPAD_CLEAR:

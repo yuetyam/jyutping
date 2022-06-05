@@ -243,15 +243,26 @@ class JyutpingInputController: IMKInputController {
                         default:
                                 flexibleSchemes = []
                                 markedText = processingText
-                                // TODO: handle other symbols
-                                let newCandidates: [Candidate] = [
-                                        Candidate(symbol: "/", comment: "半形", secondaryComment: nil),
-                                        Candidate(symbol: "／", comment: "全形", secondaryComment: nil),
-                                        Candidate(symbol: "÷", comment: nil, secondaryComment: nil),
-                                        Candidate(symbol: "？", comment: "全形", secondaryComment: nil),
-                                        Candidate(symbol: "?", comment: "半形", secondaryComment: nil)
-                                ]
-                                candidates = newCandidates
+                                let symbols: [PunctuationSymbol] = {
+                                        switch processingText {
+                                        case PunctuationKey.comma.shiftingKeyText:
+                                                return PunctuationKey.comma.shiftingSymbols
+                                        case PunctuationKey.period.shiftingKeyText:
+                                                return PunctuationKey.period.shiftingSymbols
+                                        case PunctuationKey.slash.keyText:
+                                                return PunctuationKey.slash.symbols
+
+                                        case PunctuationKey.bracketLeft.shiftingKeyText:
+                                                return PunctuationKey.bracketLeft.shiftingSymbols
+                                        case PunctuationKey.bracketRight.shiftingKeyText:
+                                                return PunctuationKey.bracketRight.shiftingSymbols
+                                        case PunctuationKey.backSlash.shiftingKeyText:
+                                                return PunctuationKey.backSlash.shiftingSymbols
+                                        default:
+                                                return PunctuationKey.slash.symbols
+                                        }
+                                }()
+                                candidates = symbols.map({ Candidate(symbol: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment) })
                         }
                 }
         }
@@ -492,25 +503,25 @@ class JyutpingInputController: IMKInputController {
                                         insert(fullWidthText)
                                 }
                         }
-                case .instant(let text):
+                case .punctuation(let punctuationKey):
                         if isBufferState {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         }
                         passBuffer()
                         guard InstantPreferences.punctuation.isCantoneseMode else { return false }
-                        let symbol: String = {
-                                guard isShifting else { return text }
-                                switch text {
-                                case "，": return "《"
-                                case "。": return "》"
-                                case "；": return "："
-                                case "「": return "『"
-                                case "」": return "』"
-                                case "、": return "・"
-                                default: return text
+                        if isShifting {
+                                if let symbol = punctuationKey.instantShiftingSymbol {
+                                        insert(symbol)
+                                } else {
+                                        bufferText = punctuationKey.shiftingKeyText
                                 }
-                        }()
-                        insert(symbol)
+                        } else {
+                                if let symbol = punctuationKey.instantSymbol {
+                                        insert(symbol)
+                                } else {
+                                        bufferText = punctuationKey.keyText
+                                }
+                        }
                 case .transparent:
                         passBuffer()
                         return false
@@ -526,15 +537,6 @@ class JyutpingInputController: IMKInputController {
                         case KeyCode.Symbol.VK_QUOTE:
                                 guard isBufferState else { return false }
                                 bufferText += "'"
-                        case KeyCode.Symbol.VK_SLASH:
-                                passBuffer()
-                                guard InstantPreferences.punctuation.isCantoneseMode else { return false }
-                                if isShifting {
-                                        let text: String = "？"
-                                        insert(text)
-                                } else {
-                                        bufferText = "/"
-                                }
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
                                 guard isBufferState else { return false }
                                 guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
@@ -546,25 +548,32 @@ class JyutpingInputController: IMKInputController {
                                 guard lastIndex < candidates.count - 1 else { return true }
                                 firstIndex = lastIndex + 1
                         case KeyCode.Special.VK_SPACE:
-                                guard isBufferState else { return false }
-                                selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
-                        case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
-                                guard !(inputMethodMode.isSettings) else {
+                                if inputMethodMode.isSettings {
                                         handleSettings()
                                         return true
+                                } else {
+                                        guard isBufferState else { return false }
+                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                                 }
-                                guard isBufferState else { return false }
-                                passBuffer()
+                        case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
+                                if inputMethodMode.isSettings {
+                                        handleSettings()
+                                        return true
+                                } else {
+                                        guard isBufferState else { return false }
+                                        passBuffer()
+                                }
                         case KeyCode.Special.VK_BACKWARD_DELETE:
                                 guard isBufferState else { return false }
                                 bufferText = String(bufferText.dropLast())
                         case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
-                                guard !(inputMethodMode.isSettings) else {
+                                if inputMethodMode.isSettings {
                                         handleSettings(-1)
                                         return true
+                                } else {
+                                        guard isBufferState else { return false }
+                                        bufferText = .empty
                                 }
-                                guard isBufferState else { return false }
-                                bufferText = .empty
                         case KeyCode.Symbol.VK_BACKQUOTE where event.modifierFlags == .control || event.modifierFlags == [.control, .shift]:
                                 let shouldDisplaySettings: Bool = inputMethodMode == .cantonese && !isBufferState
                                 guard shouldDisplaySettings else { return false }
