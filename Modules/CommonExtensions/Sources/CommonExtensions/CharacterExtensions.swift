@@ -31,4 +31,10 @@ extension Character {
                 guard let scalar = Unicode.Scalar(decimal) else { return nil }
                 self.init(scalar)
         }
+
+
+        /// a-z or A-Z
+        public var isBasicLatinLetter: Bool {
+                return ("a"..."z") ~= self || ("A"..."Z") ~= self
+        }
 }
