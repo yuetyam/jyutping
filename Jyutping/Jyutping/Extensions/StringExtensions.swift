@@ -1,3 +1,5 @@
+import Foundation
+
 extension String {
         var ping: Int64 {
                 return Int64(self.removedSpacesTones().hash)
@@ -38,3 +40,15 @@ extension String {
                 return self.filter({ !$0.isSpaceOrTone })
         }
 }
+
+
+extension String {
+
+        /// Transform to Full Width characters
+        /// - Returns: Full Width characters
+        func fullWidth() -> String {
+                let transformed: String? = self.applyingTransform(.fullwidthToHalfwidth, reverse: true)
+                return transformed ?? self
+        }
+}
+

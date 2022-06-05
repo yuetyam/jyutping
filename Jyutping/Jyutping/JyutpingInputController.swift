@@ -462,14 +462,24 @@ class JyutpingInputController: IMKInputController {
                                 let index: Int = number == 0 ? 9 : (number - 1)
                                 selectDisplayingItem(index: index, client: client)
                         } else {
-                                let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
-                                insert(text)
+                                switch InstantPreferences.characterForm {
+                                case .halfWidth:
+                                        let shouldInsertCantoneseSymbol: Bool = InstantPreferences.punctuation.isCantoneseMode && isShifting
+                                        guard shouldInsertCantoneseSymbol else { return false }
+                                        let text: String = KeyCode.shiftingSymbol(of: number)
+                                        insert(text)
+                                case .fullWidth:
+                                        let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
+                                        let fullWidthText: String = text.fullWidth()
+                                        insert(fullWidthText)
+                                }
                         }
                 case .instant(let text):
                         if isBufferState {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         }
                         passBuffer()
+                        guard InstantPreferences.punctuation.isCantoneseMode else { return false }
                         let symbol: String = {
                                 guard isShifting else { return text }
                                 switch text {
@@ -500,6 +510,7 @@ class JyutpingInputController: IMKInputController {
                                 bufferText += "'"
                         case KeyCode.Symbol.VK_SLASH:
                                 passBuffer()
+                                guard InstantPreferences.punctuation.isCantoneseMode else { return false }
                                 let text: String = isShifting ? "？" : "/"
                                 insert(text)
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
@@ -553,8 +564,10 @@ class JyutpingInputController: IMKInputController {
 
         private func passBuffer() {
                 guard isBufferState else { return }
-                insert(bufferText)
+                let text: String = InstantPreferences.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
+                insert(text)
                 bufferText = .empty
+                candidateSequence = []
         }
 
         private func handleSettings(_ index: Int? = nil) {
@@ -565,6 +578,14 @@ class JyutpingInputController: IMKInputController {
                         inputMethodMode = .cantonese
                 }
                 switch selectedIndex {
+                case 4:
+                        InstantPreferences.updateCharacterFormState(to: .halfWidth)
+                case 5:
+                        InstantPreferences.updateCharacterFormState(to: .fullWidth)
+                case 6:
+                        InstantPreferences.updatePunctuationState(to: .cantonese)
+                case 7:
+                        InstantPreferences.updatePunctuationState(to: .english)
                 case 8:
                         InstantPreferences.updateNeedsEmojiCandidates(to: true)
                 case 9:

@@ -52,13 +52,13 @@ struct SettingsView: View {
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 5, text: "半形數字", checked: true, highlighted: highlightedIndex == 4)
-                                SettingLabel(number: 6, text: "全形數字（未實現）", checked: false, highlighted: highlightedIndex == 5)
+                                SettingLabel(number: 5, text: "半形數字", checked: InstantPreferences.characterForm == .halfWidth, highlighted: highlightedIndex == 4)
+                                SettingLabel(number: 6, text: "全形數字", checked: InstantPreferences.characterForm == .fullWidth, highlighted: highlightedIndex == 5)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 7, text: "粵文句讀", checked: true, highlighted: highlightedIndex == 6)
-                                SettingLabel(number: 8, text: "英文標點（未實現）", checked: false, highlighted: highlightedIndex == 7)
+                                SettingLabel(number: 7, text: "粵文句讀", checked: InstantPreferences.punctuation == .cantonese, highlighted: highlightedIndex == 6)
+                                SettingLabel(number: 8, text: "英文標點", checked: InstantPreferences.punctuation == .english, highlighted: highlightedIndex == 7)
                         }
                         Divider()
                         Group {
@@ -101,11 +101,66 @@ private struct SettingLabel: View {
 
 struct InstantPreferences {
 
+        /// 全形 / 半形
+        private(set) static var characterForm: CharacterForm = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: "character_form")
+                switch savedValue {
+                case 0, 1:
+                        return .halfWidth
+                case 2:
+                        return .fullWidth
+                default:
+                        return .halfWidth
+                }
+        }()
+        static func updateCharacterFormState(to newState: CharacterForm) {
+                characterForm = newState
+                let value: Int = newState.rawValue
+                UserDefaults.standard.set(value, forKey: "character_form")
+        }
+
+
+        /// 標點符號。粵文句讀 or 英文標點
+        private(set) static var punctuation: Punctuation = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: "punctuation")
+                switch savedValue {
+                case 0, 1:
+                        return .cantonese
+                case 2:
+                        return .english
+                default:
+                        return .cantonese
+                }
+        }()
+        static func updatePunctuationState(to newState: Punctuation) {
+                punctuation = newState
+                let value: Int = newState.rawValue
+                UserDefaults.standard.set(value, forKey: "punctuation")
+        }
+
+
         /// 候選詞包含 Emoji
         private(set) static var needsEmojiCandidates: Bool = UserDefaults.standard.bool(forKey: "needs_emoji_candidates")
         static func updateNeedsEmojiCandidates(to newState: Bool) {
                 needsEmojiCandidates = newState
                 UserDefaults.standard.set(newState, forKey: "needs_emoji_candidates")
+        }
+}
+
+
+enum CharacterForm: Int {
+        case halfWidth = 1
+        case fullWidth = 2
+}
+
+
+enum Punctuation: Int {
+
+        case cantonese = 1
+        case english = 2
+
+        var isCantoneseMode: Bool {
+                return self == .cantonese
         }
 }
 
