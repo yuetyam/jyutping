@@ -41,11 +41,6 @@ extension String {
         }
 
         var isLetters: Bool {
-                switch self.first {
-                case .some(let character) where character.isLetter:
-                        return true
-                default:
-                        return false
-                }
+                return self.first?.isBasicLatinLetter ?? false
         }
 }

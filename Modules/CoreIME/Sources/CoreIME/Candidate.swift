@@ -12,6 +12,7 @@ public enum CandidateType {
         case cantonese
         case specialMark
         case emoji
+        case symbol
 }
 
 
@@ -70,6 +71,17 @@ public struct Candidate: Hashable {
                 self.input = input
                 self.lexiconText = cantonese
                 self.type = .emoji
+        }
+
+        /// Create a Candidate with symbol
+        public init(symbol: String, comment: String?, secondaryComment: String?) {
+                let commentText: String = comment ?? ""
+                let secondaryCommentText: String = secondaryComment ?? ""
+                self.text = symbol
+                self.romanization = secondaryCommentText
+                self.input = commentText
+                self.lexiconText = commentText
+                self.type = .symbol
         }
 
         /// type == .cantonese

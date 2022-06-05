@@ -168,6 +168,10 @@ class JyutpingInputController: IMKInputController {
                                         let convertedText: String = convert(text: item.lexiconText, logogram: Logogram.current)
                                         let commentText: String = "〔\(convertedText)〕"
                                         return DisplayCandidate(item.text, secondaryComment: commentText)
+                                case .symbol:
+                                        let comment: String? = item.input.isEmpty ? nil : "〔\(item.input)〕"
+                                        let secondaryComment: String? = item.romanization.isEmpty ? nil : item.romanization
+                                        return DisplayCandidate(item.text, comment: comment, secondaryComment: secondaryComment)
                                 }
                         }
                         displayObject.setItems(newItems)
@@ -182,13 +186,15 @@ class JyutpingInputController: IMKInputController {
                                 processingText = .empty
                         case .some("r"), .some("v"), .some("x"), .some("q"):
                                 processingText = bufferText
-                        default:
+                        case .some(let character) where character.isBasicLatinLetter:
                                 processingText = bufferText.replacingOccurrences(of: "vv", with: "4")
                                         .replacingOccurrences(of: "xx", with: "5")
                                         .replacingOccurrences(of: "qq", with: "6")
                                         .replacingOccurrences(of: "v", with: "1")
                                         .replacingOccurrences(of: "x", with: "2")
                                         .replacingOccurrences(of: "q", with: "3")
+                        default:
+                                processingText = bufferText
                         }
                 }
         }
@@ -218,7 +224,7 @@ class JyutpingInputController: IMKInputController {
                                 flexibleSchemes = []
                                 markedText = processingText
                                 leungFanReverseLookup()
-                        default:
+                        case .some(let character) where character.isBasicLatinLetter:
                                 flexibleSchemes = Splitter.split(processingText)
                                 if let syllables: [String] = flexibleSchemes.first {
                                         let splittable: String = syllables.joined()
@@ -234,6 +240,18 @@ class JyutpingInputController: IMKInputController {
                                         markedText = processingText
                                 }
                                 suggest()
+                        default:
+                                flexibleSchemes = []
+                                markedText = processingText
+                                // TODO: handle other symbols
+                                let newCandidates: [Candidate] = [
+                                        Candidate(symbol: "/", comment: "半形", secondaryComment: nil),
+                                        Candidate(symbol: "／", comment: "全形", secondaryComment: nil),
+                                        Candidate(symbol: "÷", comment: nil, secondaryComment: nil),
+                                        Candidate(symbol: "？", comment: "全形", secondaryComment: nil),
+                                        Candidate(symbol: "?", comment: "半形", secondaryComment: nil)
+                                ]
+                                candidates = newCandidates
                         }
                 }
         }
@@ -511,8 +529,12 @@ class JyutpingInputController: IMKInputController {
                         case KeyCode.Symbol.VK_SLASH:
                                 passBuffer()
                                 guard InstantPreferences.punctuation.isCantoneseMode else { return false }
-                                let text: String = isShifting ? "？" : "/"
-                                insert(text)
+                                if isShifting {
+                                        let text: String = "？"
+                                        insert(text)
+                                } else {
+                                        bufferText = "/"
+                                }
                         case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
                                 guard isBufferState else { return false }
                                 guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
