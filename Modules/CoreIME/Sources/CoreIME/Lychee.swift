@@ -36,7 +36,7 @@ extension Lychee {
         public static func searchEmojis(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
                 // TODO: improve ping text
-                let queryString = "SELECT * FROM emojitable WHERE ping = \(text.hash);"
+                let queryString = "SELECT emoji, cantonese, romanization FROM emojitable WHERE ping = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 defer {
                         sqlite3_finalize(queryStatement)

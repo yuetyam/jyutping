@@ -725,17 +725,34 @@ final class KeyboardViewController: UIInputViewController {
                 case .traditional:
                         candidates = origin.uniqued()
                 case .hongkong:
-                        let converted: [Candidate] = origin.map({ Candidate(text: Converter.convert($0.text, to: .hongkong), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
+                        let converted: [Candidate] = origin.map({ transform($0, logogram: .hongkong) })
                         candidates = converted.uniqued()
                 case .taiwan:
-                        let converted: [Candidate] = origin.map({ Candidate(text: Converter.convert($0.text, to: .taiwan), romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText) })
+                        let converted: [Candidate] = origin.map({ transform($0, logogram: .taiwan) })
                         candidates = converted.uniqued()
                 case .simplified:
                         if simplifier == nil {
                                 simplifier = Simplifier()
                         }
-                        let converted: [Candidate] = origin.map({ Candidate(text: simplifier?.convert($0.text) ?? $0.text, romanization: $0.romanization, input: $0.input, lexiconText: $0.lexiconText)})
+                        let converted: [Candidate] = origin.map({ transform($0, logogram: .simplified) })
                         candidates = converted.uniqued()
+                }
+        }
+        private func transform(_ candidate: Candidate, logogram: Logogram) -> Candidate {
+                guard candidate.isCantonese else { return candidate }
+                let convertedText: String = convert(text: candidate.text, logogram: logogram)
+                return Candidate(text: convertedText, romanization: candidate.romanization, input: candidate.input, lexiconText: candidate.lexiconText)
+        }
+        private func convert(text: String, logogram: Logogram) -> String {
+                switch logogram {
+                case .traditional:
+                        return text
+                case .hongkong:
+                        return Converter.convert(text, to: .hongkong)
+                case .taiwan:
+                        return Converter.convert(text, to: .taiwan)
+                case .simplified:
+                        return simplifier?.convert(text) ?? text
                 }
         }
         private(set) lazy var candidates: [Candidate] = [] {
