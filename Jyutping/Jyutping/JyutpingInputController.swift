@@ -424,7 +424,14 @@ class JyutpingInputController: IMKInputController {
                 simplifier?.close()
                 simplifier = nil
 
-                shutdownSession()
+                bufferText = .empty
+                markedText = .empty
+                candidates = []
+                candidateSequence = []
+                displayObject.reset()
+                settingsObject.resetHighlightedIndex()
+                window?.setFrame(.zero, display: true)
+
                 currentClient = nil
         }
 
