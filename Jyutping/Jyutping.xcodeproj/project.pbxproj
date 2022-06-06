@@ -12,6 +12,7 @@
 		370E71F6282836750033B708 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370E71F4282836750033B708 /* ViewExtensions.swift */; };
 		370E71F8282844530033B708 /* MacExpressionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370E71F7282844530033B708 /* MacExpressionsView.swift */; };
 		370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */; };
+		37184B05284E351B0072A53E /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37184B04284E351B0072A53E /* Representative.swift */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
 		373F6B53283E115D00874144 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 373F6B52283E115D00874144 /* Configuration.storekit */; };
@@ -30,12 +31,10 @@
 		3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEDF27BE126F00DCFB51 /* StringExtensions.swift */; };
 		3764CEF127BE127000DCFB51 /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE227BE126F00DCFB51 /* KeyCode.swift */; };
 		3764CEF227BE127000DCFB51 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE327BE126F00DCFB51 /* CharacterExtensions.swift */; };
-		3764CEF327BE127000DCFB51 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE427BE126F00DCFB51 /* Modifier.swift */; };
 		3764CEF427BE127000DCFB51 /* CandidatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE527BE127000DCFB51 /* CandidatesView.swift */; };
 		3764CEF527BE127000DCFB51 /* DisplayCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE627BE127000DCFB51 /* DisplayCandidate.swift */; };
 		3764CEF627BE127000DCFB51 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE727BE127000DCFB51 /* SettingsView.swift */; };
 		3764CEF727BE127000DCFB51 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE827BE127000DCFB51 /* Direction.swift */; };
-		3764CEF827BE127000DCFB51 /* UInt16Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE927BE127000DCFB51 /* UInt16Extensions.swift */; };
 		3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEC27BE127000DCFB51 /* FontExtensions.swift */; };
 		3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */; };
 		3777EF0327F9CF8500D1EED0 /* SaamPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0227F9CF8500D1EED0 /* SaamPing.swift */; };
@@ -217,6 +216,7 @@
 		370E71F4282836750033B708 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		370E71F7282844530033B708 /* MacExpressionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacExpressionsView.swift; sourceTree = "<group>"; };
 		370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
+		37184B04284E351B0072A53E /* Representative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
 		3722933627BECF310077F15B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3722933827BECF340077F15B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3722933927BECF440077F15B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -253,12 +253,10 @@
 		3764CEDF27BE126F00DCFB51 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		3764CEE227BE126F00DCFB51 /* KeyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		3764CEE327BE126F00DCFB51 /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
-		3764CEE427BE126F00DCFB51 /* Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		3764CEE527BE127000DCFB51 /* CandidatesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidatesView.swift; sourceTree = "<group>"; };
 		3764CEE627BE127000DCFB51 /* DisplayCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCandidate.swift; sourceTree = "<group>"; };
 		3764CEE727BE127000DCFB51 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3764CEE827BE127000DCFB51 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		3764CEE927BE127000DCFB51 /* UInt16Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UInt16Extensions.swift; sourceTree = "<group>"; };
 		3764CEEC27BE127000DCFB51 /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		3764CEFF27BE13D900DCFB51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -549,8 +547,8 @@
 				3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */,
 				3764CEE827BE127000DCFB51 /* Direction.swift */,
 				3764CEE227BE126F00DCFB51 /* KeyCode.swift */,
+				37184B04284E351B0072A53E /* Representative.swift */,
 				3760444D284D411900AC42E7 /* PunctuationKey.swift */,
-				3764CEE427BE126F00DCFB51 /* Modifier.swift */,
 				37ABA5AC27C19882000AC306 /* Logogram.swift */,
 				3764CEFE27BE138600DCFB51 /* Extensions */,
 				3722934927BED08B0077F15B /* Localizations */,
@@ -598,7 +596,6 @@
 		3764CEFE27BE138600DCFB51 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				3764CEE927BE127000DCFB51 /* UInt16Extensions.swift */,
 				370ECA7A27C27578002D20FF /* IMKTextInputExtensions.swift */,
 				3764CEDF27BE126F00DCFB51 /* StringExtensions.swift */,
 				3764CEE327BE126F00DCFB51 /* CharacterExtensions.swift */,
@@ -1177,7 +1174,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3764CEF327BE127000DCFB51 /* Modifier.swift in Sources */,
 				375D7A3427C151470018EB6F /* DisplayObject.swift in Sources */,
 				3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */,
 				3764CEF427BE127000DCFB51 /* CandidatesView.swift in Sources */,
@@ -1185,6 +1181,7 @@
 				3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */,
 				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
+				37184B05284E351B0072A53E /* Representative.swift in Sources */,
 				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
@@ -1192,7 +1189,6 @@
 				3764CEF127BE127000DCFB51 /* KeyCode.swift in Sources */,
 				3764CEF527BE127000DCFB51 /* DisplayCandidate.swift in Sources */,
 				3764CEF227BE127000DCFB51 /* CharacterExtensions.swift in Sources */,
-				3764CEF827BE127000DCFB51 /* UInt16Extensions.swift in Sources */,
 				3764CEF627BE127000DCFB51 /* SettingsView.swift in Sources */,
 				3708EFC727CA4C0A00AD2735 /* UserLexicon.swift in Sources */,
 				3764CEF727BE127000DCFB51 /* Direction.swift in Sources */,
