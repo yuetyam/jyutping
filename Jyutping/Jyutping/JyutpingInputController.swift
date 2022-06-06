@@ -461,7 +461,14 @@ class JyutpingInputController: IMKInputController {
                 let hasControlModifier: Bool = event.modifierFlags.contains(.control) || event.keyCode == KeyCode.Modifier.VK_CONTROL_LEFT || event.keyCode == KeyCode.Modifier.VK_CONTROL_RIGHT
                 let isShifting: Bool = event.modifierFlags == .shift
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
-                let shouldResetClient: Bool = currentClient == nil || bufferText.isEmpty
+                let shouldResetClient: Bool = {
+                        guard let previousPosition = currentClient?.position else { return true }
+                        guard !bufferText.isEmpty else { return true }
+                        let distanceX = client.position.x.distance(to: previousPosition.x)
+                        let distanceY = client.position.y.distance(to: previousPosition.y)
+                        let hasSignificantDistance: Bool = abs(distanceX) > 300 || abs(distanceY) > 300
+                        return hasSignificantDistance
+                }()
                 if shouldResetClient {
                         currentClient = client
                 }
