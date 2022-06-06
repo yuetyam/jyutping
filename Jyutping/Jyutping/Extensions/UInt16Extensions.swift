@@ -4,16 +4,8 @@ enum Representative: Hashable {
         case arrow(Direction)
         case punctuation(PunctuationKey)
         case separator
-
-        /// backquote
-        case graveAccent
-
-        /// Return / Enter
-        case enter
-
-        /// Backward Delete, not Forward Delete
+        case `return`
         case backspace
-
         case escapeClear
         case space
         case previousPage
@@ -100,7 +92,7 @@ extension UInt16 {
                 case KeyCode.Special.VK_SPACE:
                         return .space
                 case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
-                        return .enter
+                        return .return
                 case KeyCode.Special.VK_BACKWARD_DELETE:
                         return .backspace
                 case KeyCode.Arrow.VK_UP:
@@ -127,8 +119,6 @@ extension UInt16 {
                         return .punctuation(.backSlash)
                 case KeyCode.Symbol.VK_QUOTE:
                         return .separator
-                case KeyCode.Symbol.VK_BACKQUOTE:
-                        return .graveAccent
                 case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
                         return .escapeClear
                 case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:

@@ -416,6 +416,9 @@ class JyutpingInputController: IMKInputController {
                 if userLexicon == nil {
                         userLexicon = UserLexicon()
                 }
+                if !bufferText.isEmpty {
+                        bufferText = .empty
+                }
         }
         override func deactivateServer(_ sender: Any!) {
                 Lychee.close()
@@ -451,12 +454,14 @@ class JyutpingInputController: IMKInputController {
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-                guard !(event.modifierFlags.contains(.command)) else { return false }  // Ignore any Command + ...
-
+                let hasCommandModifier: Bool = event.modifierFlags.contains(.command) || event.keyCode == KeyCode.Modifier.VK_COMMAND_LEFT || event.keyCode == KeyCode.Modifier.VK_COMMAND_RIGHT
+                guard !hasCommandModifier else { return false } // Ignore any Command + ...
+                let hasControlModifier: Bool = event.modifierFlags.contains(.control) || event.keyCode == KeyCode.Modifier.VK_CONTROL_LEFT || event.keyCode == KeyCode.Modifier.VK_CONTROL_RIGHT
+                let isShifting: Bool = event.modifierFlags == .shift
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
                 let shouldResetClient: Bool = {
-                        guard !bufferText.isEmpty else { return true }
                         guard let previousPosition = currentClient?.position else { return true }
+                        guard bufferText.isEmpty else { return false }
                         let distanceX = client.position.x.distance(to: previousPosition.x)
                         let distanceY = client.position.y.distance(to: previousPosition.y)
                         let hasSignificantDistance: Bool = abs(distanceX) > 300 || abs(distanceY) > 300
@@ -465,8 +470,18 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                let isShifting: Bool = event.modifierFlags == .shift
-
+                guard !hasControlModifier else {
+                        let isSettingsShortcut: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
+                        guard isSettingsShortcut else { return false }
+                        if inputMethodMode.isSettings {
+                                handleSettings(-1)
+                                return true
+                        } else {
+                                passBuffer()
+                                inputMethodMode = .settings
+                                return true
+                        }
+                }
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
@@ -543,6 +558,8 @@ class JyutpingInputController: IMKInputController {
                         return true
                 case .alphabet(let letter):
                         guard !inputMethodMode.isSettings else { return false }
+                        let hasCharacters: Bool = event.characters.hasContent
+                        guard hasCharacters else { return false }
                         let text: String = isShifting ? letter.uppercased() : letter
                         bufferText += text
                         showCandidates(origin: client.position)
@@ -551,7 +568,7 @@ class JyutpingInputController: IMKInputController {
                         guard isBufferState else { return false }
                         bufferText += "'"
                         return true
-                case .enter:
+                case .return:
                         if inputMethodMode.isSettings {
                                 handleSettings()
                                 return true
@@ -602,16 +619,6 @@ class JyutpingInputController: IMKInputController {
                         guard lastIndex < candidates.count - 1 else { return true }
                         firstIndex = lastIndex + 1
                         return true
-                case .graveAccent:
-                        guard event.modifierFlags.contains(.control) else { return false }
-                        if inputMethodMode.isSettings {
-                                handleSettings(-1)
-                                return true
-                        } else {
-                                passBuffer()
-                                inputMethodMode = .settings
-                                return true
-                        }
                 case .other:
                         return false
                 }
