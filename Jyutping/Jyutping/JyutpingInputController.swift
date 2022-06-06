@@ -444,6 +444,8 @@ class JyutpingInputController: IMKInputController {
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
+                guard !(event.modifierFlags.contains(.command)) else { return false }  // Ignore any Command + ...
+
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
                 let shouldResetClient: Bool = {
                         guard !bufferText.isEmpty else { return true }
@@ -456,26 +458,29 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                guard !(event.modifierFlags.contains(.command)) else { return false }  // Ignore any Command + ...
                 let isShifting: Bool = event.modifierFlags == .shift
 
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
-                                guard !(inputMethodMode.isSettings) else {
+                                if inputMethodMode.isSettings {
                                         settingsObject.decreaseHighlightedIndex()
                                         return true
-                                }
-                                guard isBufferState else { return false }
-                                displayObject.decreaseHighlightedIndex()
-                        case .down:
-                                guard !(inputMethodMode.isSettings) else {
-                                        settingsObject.increaseHighlightedIndex()
+                                } else {
+                                        guard isBufferState else { return false }
+                                        displayObject.decreaseHighlightedIndex()
                                         return true
                                 }
-                                guard isBufferState else { return false }
-                                displayObject.increaseHighlightedIndex()
+                        case .down:
+                                if inputMethodMode.isSettings {
+                                        settingsObject.increaseHighlightedIndex()
+                                        return true
+                                } else {
+                                        guard isBufferState else { return false }
+                                        displayObject.increaseHighlightedIndex()
+                                        return true
+                                }
                         case .left:
                                 return false
                         case .right:
@@ -490,6 +495,8 @@ class JyutpingInputController: IMKInputController {
                         if isBufferState {
                                 let index: Int = number == 0 ? 9 : (number - 1)
                                 selectDisplayingItem(index: index, client: client)
+                                showCandidates(origin: client.position)
+                                return true
                         } else {
                                 switch InstantPreferences.characterForm {
                                 case .halfWidth:
@@ -497,13 +504,16 @@ class JyutpingInputController: IMKInputController {
                                         guard shouldInsertCantoneseSymbol else { return false }
                                         let text: String = KeyCode.shiftingSymbol(of: number)
                                         insert(text)
+                                        return true
                                 case .fullWidth:
                                         let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
                                         let fullWidthText: String = text.fullWidth()
                                         insert(fullWidthText)
+                                        return true
                                 }
                         }
                 case .punctuation(let punctuationKey):
+                        guard !inputMethodMode.isSettings else { return false }
                         if isBufferState {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         }
@@ -522,69 +532,82 @@ class JyutpingInputController: IMKInputController {
                                         bufferText = punctuationKey.keyText
                                 }
                         }
-                case .transparent:
-                        passBuffer()
-                        return false
-                case .alphabet where event.modifierFlags.contains(.control):
-                        let shouldPerformClearing: Bool = event.keyCode == KeyCode.Alphabet.VK_U && isBufferState
-                        guard shouldPerformClearing else { return false }
-                        bufferText = .empty
-                case .alphabet:
-                        guard let letter: String = event.characters else { return false }
-                        bufferText += letter
-                default:
-                        switch event.keyCode {
-                        case KeyCode.Symbol.VK_QUOTE:
+                        showCandidates(origin: client.position)
+                        return true
+                case .alphabet(let letter):
+                        guard !inputMethodMode.isSettings else { return false }
+                        let text: String = isShifting ? letter.uppercased() : letter
+                        bufferText += text
+                        showCandidates(origin: client.position)
+                        return true
+                case .separator:
+                        guard isBufferState else { return false }
+                        bufferText += "'"
+                        return true
+                case .enter:
+                        if inputMethodMode.isSettings {
+                                handleSettings()
+                                return true
+                        } else {
                                 guard isBufferState else { return false }
-                                bufferText += "'"
-                        case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
+                                passBuffer()
+                                return true
+                        }
+                case .backspace:
+                        guard isBufferState else { return false }
+                        bufferText = String(bufferText.dropLast())
+                        showCandidates(origin: client.position)
+                        return true
+                case .escapeClear:
+                        if inputMethodMode.isSettings {
+                                handleSettings(-1)
+                                return true
+                        } else {
                                 guard isBufferState else { return false }
-                                guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
-                                guard firstIndex > 0 else { return true }
-                                firstIndex = max(0, firstIndex - 10)
-                        case KeyCode.Symbol.VK_EQUAL, KeyCode.Special.VK_PAGEDOWN:
-                                guard isBufferState else { return false }
-                                guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
-                                guard lastIndex < candidates.count - 1 else { return true }
-                                firstIndex = lastIndex + 1
-                        case KeyCode.Special.VK_SPACE:
-                                if inputMethodMode.isSettings {
-                                        handleSettings()
-                                        return true
-                                } else {
-                                        guard isBufferState else { return false }
-                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
-                                }
-                        case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:
-                                if inputMethodMode.isSettings {
-                                        handleSettings()
-                                        return true
-                                } else {
-                                        guard isBufferState else { return false }
+                                shutdownSession()
+                                return true
+                        }
+                case .space:
+                        if inputMethodMode.isSettings {
+                                handleSettings()
+                                return true
+                        } else {
+                                if candidates.isEmpty {
                                         passBuffer()
-                                }
-                        case KeyCode.Special.VK_BACKWARD_DELETE:
-                                guard isBufferState else { return false }
-                                bufferText = String(bufferText.dropLast())
-                        case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
-                                if inputMethodMode.isSettings {
-                                        handleSettings(-1)
+                                        guard InstantPreferences.characterForm == .fullWidth else { return false }
+                                        insert(String.fullWidthSpace)
                                         return true
                                 } else {
-                                        guard isBufferState else { return false }
-                                        bufferText = .empty
+                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
+                                        showCandidates(origin: client.position)
+                                        return true
                                 }
-                        case KeyCode.Symbol.VK_BACKQUOTE where event.modifierFlags == .control || event.modifierFlags == [.control, .shift]:
-                                let shouldDisplaySettings: Bool = inputMethodMode == .cantonese && !isBufferState
-                                guard shouldDisplaySettings else { return false }
+                        }
+                case .previousPage:
+                        guard isBufferState else { return false }
+                        guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
+                        guard firstIndex > 0 else { return true }
+                        firstIndex = max(0, firstIndex - 10)
+                        return true
+                case .nextPage:
+                        guard isBufferState else { return false }
+                        guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
+                        guard lastIndex < candidates.count - 1 else { return true }
+                        firstIndex = lastIndex + 1
+                        return true
+                case .graveAccent:
+                        guard event.modifierFlags.contains(.control) else { return false }
+                        if inputMethodMode.isSettings {
+                                handleSettings(-1)
+                                return true
+                        } else {
+                                passBuffer()
                                 inputMethodMode = .settings
                                 return true
-                        default:
-                                return false
                         }
+                case .other:
+                        return false
                 }
-                showCandidates(origin: client.position)
-                return true
         }
 
         private func showCandidates(origin: CGPoint? = nil) {
@@ -609,6 +632,8 @@ class JyutpingInputController: IMKInputController {
                         inputMethodMode = .cantonese
                 }
                 switch selectedIndex {
+                case -1:
+                        return
                 case 4:
                         InstantPreferences.updateCharacterFormState(to: .halfWidth)
                 case 5:
@@ -657,7 +682,6 @@ class JyutpingInputController: IMKInputController {
                         return nil
                 }()
                 guard let candidate = find else {
-                        candidateSequence = []
                         shutdownSession()
                         return
                 }
@@ -673,7 +697,6 @@ class JyutpingInputController: IMKInputController {
                                 bufferText = first + tail
                         }
                 default:
-                        candidateSequence.append(candidate)
                         defer {
                                 if bufferText.isEmpty && !candidateSequence.isEmpty {
                                         let concatenatedCandidate: Candidate = candidateSequence.joined()
@@ -681,6 +704,7 @@ class JyutpingInputController: IMKInputController {
                                         userLexicon?.handle(concatenatedCandidate)
                                 }
                         }
+                        candidateSequence.append(candidate)
                         let bufferTextLength: Int = bufferText.count
                         let candidateInputText: String = {
                                 let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression)
@@ -699,7 +723,7 @@ class JyutpingInputController: IMKInputController {
                         }()
                         let difference: Int = bufferTextLength - inputCount
                         guard difference > 0 else {
-                                shutdownSession()
+                                bufferText = .empty
                                 return
                         }
                         let leading = bufferText.dropLast(difference)
@@ -715,11 +739,7 @@ class JyutpingInputController: IMKInputController {
                         while tail.hasPrefix("'") {
                                 tail = tail.dropFirst()
                         }
-                        if tail.isEmpty {
-                                shutdownSession()
-                        } else {
-                                bufferText = String(tail)
-                        }
+                        bufferText = String(tail)
                 }
         }
 
@@ -728,10 +748,8 @@ class JyutpingInputController: IMKInputController {
         }
 
         private func shutdownSession() {
+                candidateSequence = []
                 bufferText = .empty
-                candidates = []
-                displayObject.reset()
-                window?.setFrame(.zero, display: true)
         }
 }
 
