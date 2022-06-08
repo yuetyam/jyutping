@@ -33,16 +33,10 @@ enum Logogram: Int {
                 default: return .traditional
                 }
         }()
-
-        /// Update `Logogram.current` to the new value
-        /// - Parameter newLogogram: New value for `Logogram.current`
-        static func changeCurrent(to newLogogram: Logogram) {
-                current = newLogogram
-        }
-
-        /// Save current logogram to UserDefaults
-        static func updatePreference() {
-                let value: Int = current.rawValue
+        static func updateCurrent(to newOption: Logogram) {
+                current = newOption
+                let value: Int = newOption.rawValue
                 UserDefaults.standard.set(value, forKey: "logogram")
         }
 }
+

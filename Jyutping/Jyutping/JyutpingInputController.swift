@@ -680,8 +680,7 @@ class JyutpingInputController: IMKInputController {
                         }
                 }()
                 guard newSelection != Logogram.current else { return }
-                Logogram.changeCurrent(to: newSelection)
-                Logogram.updatePreference()
+                Logogram.updateCurrent(to: newSelection)
         }
 
         private func selectDisplayingItem(index: Int, client: IMKTextInput) {
