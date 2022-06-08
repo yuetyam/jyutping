@@ -963,8 +963,10 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 3: 無
         private(set) lazy var footnoteStyle: Int = UserDefaults.standard.integer(forKey: "jyutping_display")
-        func updateFootnoteStyle() {
-                footnoteStyle = UserDefaults.standard.integer(forKey: "jyutping_display")
+        func updateFootnoteStyle(to newOption: Int) {
+                footnoteStyle = newOption
+                UserDefaults.standard.set(newOption, forKey: "jyutping_display")
+
         }
 
         /// 粵拼聲調樣式
@@ -979,8 +981,9 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 4: 下標
         private(set) lazy var toneStyle: Int = UserDefaults.standard.integer(forKey: "tone_style")
-        func updateToneStyle() {
-                toneStyle = UserDefaults.standard.integer(forKey: "tone_style")
+        func updateToneStyle(to newOption: Int) {
+                toneStyle = newOption
+                UserDefaults.standard.set(newOption, forKey: "tone_style")
         }
 
         /// 雙擊空格鍵快捷動作
@@ -995,14 +998,32 @@ final class KeyboardViewController: UIInputViewController {
         ///
         /// 4: 輸入一個全形空格（U+3000）
         private(set) lazy var doubleSpaceShortcut: Int = UserDefaults.standard.integer(forKey: "double_space_shortcut")
-        func updateDoubleSpaceShortcut() {
-                doubleSpaceShortcut = UserDefaults.standard.integer(forKey: "double_space_shortcut")
+        func updateDoubleSpaceShortcut(to newOption: Int) {
+                doubleSpaceShortcut = newOption
+                UserDefaults.standard.set(newOption, forKey: "double_space_shortcut")
         }
 
         /// 候選詞包含 Emoji
-        private(set) lazy var needsEmojiCandidates: Bool = UserDefaults.standard.bool(forKey: "needs_emoji_candidates")
+        private(set) lazy var needsEmojiCandidates: Bool = {
+                /// 0: The key "emoji" doesn‘t exist.
+                ///
+                /// 1: Emoji Suggestions On
+                ///
+                /// 2: Emoji Suggestions Off
+                let savedValue: Int = UserDefaults.standard.integer(forKey: "emoji")
+                switch savedValue {
+                case 0, 1:
+                        return true
+                case 2:
+                        return false
+                default:
+                        return true
+                }
+        }()
         func updateNeedsEmojiCandidates(to newState: Bool) {
                 needsEmojiCandidates = newState
-                UserDefaults.standard.set(newState, forKey: "needs_emoji_candidates")
+                let value: Int = newState ? 1 : 2
+                UserDefaults.standard.set(value, forKey: "emoji")
         }
 }
+

@@ -273,9 +273,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 default: return 1
                                 }
                         }()
-                        UserDefaults.standard.set(value, forKey: "jyutping_display")
+                        updateFootnoteStyle(to: value)
                         triggerHapticFeedback()
-                        updateFootnoteStyle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
@@ -290,9 +289,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 default: return 1
                                 }
                         }()
-                        UserDefaults.standard.set(value, forKey: "tone_style")
+                        updateToneStyle(to: value)
                         triggerHapticFeedback()
-                        updateToneStyle()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
@@ -307,9 +305,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 default: return 1
                                 }
                         }()
-                        UserDefaults.standard.set(value, forKey: "double_space_shortcut")
+                        updateDoubleSpaceShortcut(to: value)
                         triggerHapticFeedback()
-                        updateDoubleSpaceShortcut()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
