@@ -140,10 +140,26 @@ struct InstantPreferences {
 
 
         /// 候選詞包含 Emoji
-        private(set) static var needsEmojiCandidates: Bool = UserDefaults.standard.bool(forKey: "needs_emoji_candidates")
+        private(set) static var needsEmojiCandidates: Bool = {
+                /// 0: The key "emoji" doesn‘t exist.
+                ///
+                /// 1: Emoji Suggestions On
+                ///
+                /// 2: Emoji Suggestions Off
+                let savedValue: Int = UserDefaults.standard.integer(forKey: "emoji")
+                switch savedValue {
+                case 0, 1:
+                        return true
+                case 2:
+                        return false
+                default:
+                        return true
+                }
+        }()
         static func updateNeedsEmojiCandidates(to newState: Bool) {
                 needsEmojiCandidates = newState
-                UserDefaults.standard.set(newState, forKey: "needs_emoji_candidates")
+                let value: Int = newState ? 1 : 2
+                UserDefaults.standard.set(value, forKey: "emoji")
         }
 }
 
