@@ -9,7 +9,7 @@ struct PunctuationKey: Hashable {
 
         static let comma: PunctuationKey = {
                 let shiftingSymbols: [PunctuationSymbol] = [
-                        PunctuationSymbol("《 "),
+                        PunctuationSymbol("《"),
                         PunctuationSymbol("〈"),
                         PunctuationSymbol("«"),
                         PunctuationSymbol("‹"),
