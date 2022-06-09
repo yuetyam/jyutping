@@ -647,7 +647,8 @@ class JyutpingInputController: IMKInputController {
         }
 
         private func adjustWindow(origin: CGPoint? = nil) {
-                let frame: CGRect = isBufferState ? windowFrame(origin: origin) : .zero
+                let isEmptyWindow: Bool = bufferText.isEmpty || candidates.isEmpty
+                let frame: CGRect = isEmptyWindow ? .zero : windowFrame(origin: origin)
                 window?.setFrame(frame, display: true)
         }
 
