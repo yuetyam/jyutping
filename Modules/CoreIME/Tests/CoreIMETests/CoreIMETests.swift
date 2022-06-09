@@ -31,20 +31,24 @@ final class CoreIMETests: XCTestCase {
                 XCTAssertEqual(syllables, ["pu", "tong", "hua", "pin", "yin"])
         }
         func testPinyinLookup() throws {
+                Lychee.prepare()
                 let result: String = Lychee.pinyinLookup(for: "wo").first!.text
                 XCTAssertEqual(result, "我")
         }
 
         func testCangjie() throws {
+                Lychee.prepare()
                 let result: String = Lychee.cangjieLookup(for: "dam").first!.text
                 XCTAssertEqual(result, "查")
         }
         func testStroke() throws {
+                Lychee.prepare()
                 let result: String = Lychee.strokeLookup(for: "wsad").first!.text
                 XCTAssertEqual(result, "木")
         }
 
         func testLeungFan() {
+                Lychee.prepare()
                 let result: String = Lychee.leungFanLookup(for: "mukdaan").first!.text
                 XCTAssertEqual(result, "查")
         }
