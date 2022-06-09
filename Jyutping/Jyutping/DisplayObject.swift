@@ -3,16 +3,22 @@ import Combine
 final class DisplayObject: ObservableObject {
 
         @Published private(set) var items: [DisplayCandidate] = []
+        @Published private(set) var longest: DisplayCandidate = DisplayCandidate("我", comment: "ngo5")
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var animationState: Int = 0
 
         func reset() {
                 items = []
+                longest = DisplayCandidate("我", comment: "ngo5")
                 highlightedIndex = 0
                 animationState = 0
         }
 
         func setItems(_ newItems: [DisplayCandidate]) {
+                guard !newItems.isEmpty else {
+                        reset()
+                        return
+                }
                 let shouldAnimate: Bool = {
                         guard !items.isEmpty else { return false }
                         guard let oldFirst = items.first, let newFirst = newItems.first else { return false }
@@ -25,7 +31,13 @@ final class DisplayObject: ObservableObject {
                                 return newCommentLength >= oldCommentLength
                         }
                 }()
+                let newLongest: DisplayCandidate = newItems.sorted(by: { $0.text.count >= $1.text.count }).first ?? longest
+
                 items = newItems
+                if newLongest.text.count >= longest.text.count {
+                        longest = newLongest
+                }
+                highlightedIndex = 0
                 if newItems.isEmpty {
                         animationState = 0
                 } else if shouldAnimate {

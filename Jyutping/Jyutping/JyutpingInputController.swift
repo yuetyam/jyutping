@@ -195,7 +195,6 @@ class JyutpingInputController: IMKInputController {
                         }
                 }
                 displayObject.setItems(newItems)
-                displayObject.resetHighlightedIndex()
         }
 
         private lazy var bufferText: String = .empty {
