@@ -147,42 +147,60 @@ class JyutpingInputController: IMKInputController {
 
         private lazy var candidates: [Candidate] = [] {
                 didSet {
-                        firstIndex = 0
+                        updateDisplayingCandidates(.establish)
                 }
         }
-        private lazy var firstIndex: Int = 0 {
-                didSet {
-                        guard !candidates.isEmpty else {
-                                lastIndex = 0
-                                displayObject.reset()
-                                return
-                        }
-                        displayObject.resetHighlightedIndex()
-                        let bound: Int = (firstIndex == 0) ? min(10, candidates.count) : min(firstIndex + 10, candidates.count)
-                        lastIndex = bound - 1
-                        let newItems = candidates[firstIndex..<bound].map { item -> DisplayCandidate in
-                                switch item.type {
-                                case .cantonese:
-                                        return DisplayCandidate(item.text, comment: item.romanization)
-                                case .specialMark:
-                                        return DisplayCandidate(item.text)
-                                case .emoji:
-                                        let convertedText: String = convert(text: item.lexiconText, logogram: Logogram.current)
-                                        let commentText: String = "〔\(convertedText)〕"
-                                        return DisplayCandidate(item.text, secondaryComment: commentText)
-                                case .symbol:
-                                        let comment: String? = item.input.isEmpty ? nil : "〔\(item.input)〕"
-                                        let secondaryComment: String? = item.romanization.isEmpty ? nil : item.romanization
-                                        return DisplayCandidate(item.text, comment: comment, secondaryComment: secondaryComment)
-                                }
-                        }
-                        displayObject.setItems(newItems)
+
+        /// DisplayCandidates indices
+        private lazy var indices: (first: Int, last: Int) = (0, 0)
+
+        private func updateDisplayingCandidates(_ mode: CandidatesTransformation) {
+                guard !candidates.isEmpty else {
+                        indices = (0, 0)
+                        displayObject.reset()
+                        return
                 }
+                let newFirstIndex: Int? = {
+                        switch mode {
+                        case .establish:
+                                return 0
+                        case .previousPage:
+                                let oldFirstIndex: Int = indices.first
+                                guard oldFirstIndex > 0 else { return nil }
+                                return max(0, oldFirstIndex - 10)
+                        case .nextPage:
+                                let oldLastIndex: Int = indices.last
+                                guard oldLastIndex < candidates.count - 1 else { return nil }
+                                return oldLastIndex + 1
+                        }
+                }()
+                guard let firstIndex: Int = newFirstIndex else { return }
+                let bound: Int = (firstIndex == 0) ? min(10, candidates.count) : min(firstIndex + 10, candidates.count)
+                indices = (firstIndex, bound - 1)
+                let newItems = candidates[firstIndex..<bound].map { item -> DisplayCandidate in
+                        switch item.type {
+                        case .cantonese:
+                                return DisplayCandidate(item.text, comment: item.romanization)
+                        case .specialMark:
+                                return DisplayCandidate(item.text)
+                        case .emoji:
+                                let convertedText: String = convert(text: item.lexiconText, logogram: Logogram.current)
+                                let commentText: String = "〔\(convertedText)〕"
+                                return DisplayCandidate(item.text, secondaryComment: commentText)
+                        case .symbol:
+                                let convertedText: String = convert(text: item.input, logogram: Logogram.current)
+                                let comment: String? = convertedText.isEmpty ? nil : "〔\(convertedText)〕"
+                                let secondaryComment: String? = item.romanization.isEmpty ? nil : item.romanization
+                                return DisplayCandidate(item.text, comment: comment, secondaryComment: secondaryComment)
+                        }
+                }
+                displayObject.setItems(newItems)
+                displayObject.resetHighlightedIndex()
         }
-        private lazy var lastIndex: Int = 0
 
         private lazy var bufferText: String = .empty {
                 didSet {
+                        indices = (0, 0)
                         switch bufferText.first {
                         case .none:
                                 processingText = .empty
@@ -435,6 +453,7 @@ class JyutpingInputController: IMKInputController {
                 candidateSequence = []
                 displayObject.reset()
                 settingsObject.resetHighlightedIndex()
+                indices = (0, 0)
                 window?.setFrame(.zero, display: true)
 
                 currentClient = nil
@@ -519,7 +538,7 @@ class JyutpingInputController: IMKInputController {
                         if isBufferState {
                                 let index: Int = number == 0 ? 9 : (number - 1)
                                 selectDisplayingItem(index: index, client: client)
-                                showCandidates(origin: client.position)
+                                adjustWindow(origin: client.position)
                                 return true
                         } else {
                                 switch InstantPreferences.characterForm {
@@ -556,7 +575,7 @@ class JyutpingInputController: IMKInputController {
                                         bufferText = punctuationKey.keyText
                                 }
                         }
-                        showCandidates(origin: client.position)
+                        adjustWindow(origin: client.position)
                         return true
                 case .alphabet(let letter):
                         guard !inputMethodMode.isSettings else { return false }
@@ -564,7 +583,7 @@ class JyutpingInputController: IMKInputController {
                         guard hasCharacters else { return false }
                         let text: String = isShifting ? letter.uppercased() : letter
                         bufferText += text
-                        showCandidates(origin: client.position)
+                        adjustWindow(origin: client.position)
                         return true
                 case .separator:
                         guard isBufferState else { return false }
@@ -582,7 +601,7 @@ class JyutpingInputController: IMKInputController {
                 case .backspace:
                         guard isBufferState else { return false }
                         bufferText = String(bufferText.dropLast())
-                        showCandidates(origin: client.position)
+                        adjustWindow(origin: client.position)
                         return true
                 case .escapeClear:
                         if inputMethodMode.isSettings {
@@ -605,30 +624,25 @@ class JyutpingInputController: IMKInputController {
                                         return true
                                 } else {
                                         selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
-                                        showCandidates(origin: client.position)
+                                        adjustWindow(origin: client.position)
                                         return true
                                 }
                         }
                 case .previousPage:
                         guard isBufferState else { return false }
-                        guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
-                        guard firstIndex > 0 else { return true }
-                        firstIndex = max(0, firstIndex - 10)
+                        updateDisplayingCandidates(.previousPage)
                         return true
                 case .nextPage:
                         guard isBufferState else { return false }
-                        guard !candidates.isEmpty && !displayObject.items.isEmpty else { return false }
-                        guard lastIndex < candidates.count - 1 else { return true }
-                        firstIndex = lastIndex + 1
+                        updateDisplayingCandidates(.nextPage)
                         return true
                 case .other:
                         return false
                 }
         }
 
-        private func showCandidates(origin: CGPoint? = nil) {
-                let shouldShowCandidates: Bool = isBufferState && !displayObject.items.isEmpty
-                let frame: CGRect = shouldShowCandidates ? windowFrame(origin: origin) : .zero
+        private func adjustWindow(origin: CGPoint? = nil) {
+                let frame: CGRect = isBufferState ? windowFrame(origin: origin) : .zero
                 window?.setFrame(frame, display: true)
         }
 
@@ -766,5 +780,12 @@ class JyutpingInputController: IMKInputController {
                 candidateSequence = []
                 bufferText = .empty
         }
+}
+
+
+enum CandidatesTransformation {
+        case establish
+        case previousPage
+        case nextPage
 }
 
