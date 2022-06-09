@@ -219,6 +219,11 @@ class JyutpingInputController: IMKInputController {
                 }
         }
         private lazy var processingText: String = .empty {
+                willSet {
+                        if processingText.isEmpty && !newValue.isEmpty {
+                                Lychee.prepare()
+                        }
+                }
                 didSet {
                         switch processingText.first {
                         case .none:
