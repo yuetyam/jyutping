@@ -268,6 +268,9 @@ class JyutpingInputController: IMKInputController {
                         default:
                                 flexibleSchemes = []
                                 markedText = processingText
+                                if Logogram.current == .simplified && simplifier == nil {
+                                        simplifier = Simplifier()
+                                }
                                 let symbols: [PunctuationSymbol] = {
                                         switch processingText {
                                         case PunctuationKey.comma.shiftingKeyText:
