@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUNDLE_IDENTIFIER='org.jyutping.inputmethod.Jyutping'
-APP_VERSION='0.18.0'
+APP_VERSION='0.19.0'
 
 INSTALL_LOCATION='/tmp'
 
