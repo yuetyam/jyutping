@@ -22,6 +22,10 @@ Jyutping
 ## macOS
 由於 Mac App Store 毋接受輸入法上架，請前往 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
+**注意事項**：安裝／更新輸入法之後需要登出電腦再登入，或者重啓電腦。
+
+使用說明：撳 `Control` + `` ` `` 可以呼出快捷設定䈎面。（ `` ` `` 係 esc 下邊箇粒掣）
+
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="450"/>
 <br>
