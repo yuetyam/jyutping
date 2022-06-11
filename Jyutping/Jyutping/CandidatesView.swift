@@ -10,8 +10,8 @@ struct CandidatesView: View {
                         ForEach(0..<displayObject.items.count, id: \.self) { index in
                                 let candidate = displayObject.items[index]
                                 let isHighlighted: Bool = index == displayObject.highlightedIndex
-                                ZStack {
-                                        HStack(spacing: 14) {
+                                ZStack(alignment: .leading) {
+                                        HStack(spacing: componentsSpacing) {
                                                 Text(verbatim: "0.").font(.serial)
                                                 Text(verbatim: longest.text).font(.candidate)
                                                 if let comment = longest.comment {
@@ -20,10 +20,9 @@ struct CandidatesView: View {
                                                 if let secondaryComment = longest.secondaryComment {
                                                         Text(verbatim: secondaryComment).font(.secondaryComment)
                                                 }
-                                                Spacer()
                                         }
                                         .opacity(0)
-                                        HStack(spacing: 14) {
+                                        HStack(spacing: componentsSpacing) {
                                                 Text(verbatim: serialText(index)).font(.serial)
                                                 Text(verbatim: candidate.text).font(.candidate)
                                                 if let comment = candidate.comment {
@@ -32,17 +31,14 @@ struct CandidatesView: View {
                                                 if let secondaryComment = candidate.secondaryComment {
                                                         Text(verbatim: secondaryComment).font(.secondaryComment)
                                                 }
-                                                Spacer()
                                         }
                                 }
-                                .padding(.leading, 8)
+                                .padding(.horizontal, 8)
                                 .foregroundColor(isHighlighted ? .white : .primary)
                                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                         }
-                        Spacer()
                 }
-                .padding(.horizontal, 8)
-                .padding(.top, 8)
+                .padding(8)
                 .background(
                         RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .fill(.thinMaterial)
@@ -50,6 +46,9 @@ struct CandidatesView: View {
                 )
                 .animation(.default, value: displayObject.animationState)
         }
+
+        /// Distance between text, comment and secondaryComment
+        private let componentsSpacing: CGFloat = 14
 
         private func serialText(_ index: Int) -> String {
                 switch index {

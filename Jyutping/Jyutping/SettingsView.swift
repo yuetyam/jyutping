@@ -101,15 +101,17 @@ private struct SettingLabel: View {
         let highlighted: Bool
 
         var body: some View {
-                HStack(spacing: 14) {
-                        Text(verbatim: "\(number).").font(.serial)
-                        Text(verbatim: text).font(.candidate)
-                        if checked {
-                                Image(systemName: "checkmark").font(.title2)
+                HStack {
+                        HStack(spacing: 14) {
+                                Text(verbatim: "\(number).").font(.serial)
+                                Text(verbatim: text).font(.candidate)
+                                if checked {
+                                        Image(systemName: "checkmark").font(.title2)
+                                }
                         }
                         Spacer()
                 }
-                .padding(.leading, 8)
+                .padding(.horizontal, 8)
                 .foregroundColor(highlighted ? .white : .primary)
                 .background(highlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
