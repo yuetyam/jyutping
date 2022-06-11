@@ -23,15 +23,9 @@ final class DisplayObject: ObservableObject {
                 }
                 let newLongest: DisplayCandidate = newItems.sorted(by: { $0.isLonger(than: $1) }).first!
                 let shouldUpdateLongest: Bool = newLongest.isLonger(than: longest)
-                let shouldAnimate: Bool = {
-                        let isUpdate: Bool = !items.isEmpty
-                        guard isUpdate else { return false }
-                        let pageSize: Int = AppSettings.displayCandidatesSize
-                        let isFilled: Bool = items.count == pageSize && newItems.count == pageSize
-                        guard isFilled else { return false }
-                        guard shouldUpdateLongest else { return false }
-                        return true
-                }()
+
+                let pageSize: Int = AppSettings.displayCandidatesSize
+                let shouldAnimate: Bool = items.count == pageSize && newItems.count == pageSize
 
                 items = newItems
                 if shouldUpdateLongest {
