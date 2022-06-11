@@ -17,6 +17,7 @@
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
 		373F6B53283E115D00874144 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 373F6B52283E115D00874144 /* Configuration.storekit */; };
 		37418EE628366381000CA712 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37418EE528366381000CA712 /* ResourcesView.swift */; };
+		3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749982D28543B6E0023AC94 /* InstantSettings.swift */; };
 		374E8A702834817F003A6174 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6E2834817F003A6174 /* icon@2x.png */; };
 		374E8A712834817F003A6174 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6F2834817F003A6174 /* icon.png */; };
 		375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* InputMethodMode.swift */; };
@@ -235,6 +236,7 @@
 		3722934827BED0780077F15B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		373F6B52283E115D00874144 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		37418EE528366381000CA712 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
+		3749982D28543B6E0023AC94 /* InstantSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSettings.swift; sourceTree = "<group>"; };
 		374E8A6E2834817F003A6174 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		374E8A6F2834817F003A6174 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		375D7A3127C10ED10018EB6F /* InputMethodMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodMode.swift; sourceTree = "<group>"; };
@@ -544,6 +546,7 @@
 				375D7A3327C151470018EB6F /* DisplayObject.swift */,
 				3764CEE627BE127000DCFB51 /* DisplayCandidate.swift */,
 				3764CEE727BE127000DCFB51 /* SettingsView.swift */,
+				3749982D28543B6E0023AC94 /* InstantSettings.swift */,
 				3708EFC627CA4C0A00AD2735 /* UserLexicon.swift */,
 				3764CEE827BE127000DCFB51 /* Direction.swift */,
 				3764CEE227BE126F00DCFB51 /* KeyCode.swift */,
@@ -1181,6 +1184,7 @@
 				3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */,
 				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
+				3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */,
 				37184B05284E351B0072A53E /* Representative.swift in Sources */,
 				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,

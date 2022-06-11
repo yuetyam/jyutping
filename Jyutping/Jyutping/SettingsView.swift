@@ -26,13 +26,13 @@ struct SettingsView: View {
         private let variant: Int = {
                 switch Logogram.current {
                 case .traditional:
-                        return 0
-                case .hongkong:
                         return 1
-                case .taiwan:
+                case .hongkong:
                         return 2
-                case .simplified:
+                case .taiwan:
                         return 3
+                case .simplified:
+                        return 4
                 }
         }()
 
@@ -41,29 +41,46 @@ struct SettingsView: View {
         private let textLine3: String = "傳統漢字・臺灣"
         private let textLine4: String = "简化字\u{3000}\u{3000}\u{3000}\u{3000}"
 
+        private struct LabelLines {
+                let textLine5: String
+                let textLine6: String
+                let textLine7: String
+                let textLine8: String
+                let textLine9: String
+                let textLine10: String
+        }
+        private let options: LabelLines = {
+                switch Logogram.current {
+                case .simplified:
+                        return LabelLines(textLine5: "半形数字", textLine6: "全形数字", textLine7: "粤文句读", textLine8: "英文标点", textLine9: "有 Emoji", textLine10: "无 Emoji")
+                default:
+                        return LabelLines(textLine5: "半形數字", textLine6: "全形數字", textLine7: "粵文句讀", textLine8: "英文標點", textLine9: "有 Emoji", textLine10: "無 Emoji")
+                }
+        }()
+
         var body: some View {
                 let highlightedIndex = settingsObject.highlightedIndex
                 VStack(spacing: 3) {
                         Group {
-                                SettingLabel(number: 1, text: textLine1, checked: variant == 0, highlighted: highlightedIndex == 0)
-                                SettingLabel(number: 2, text: textLine2, checked: variant == 1, highlighted: highlightedIndex == 1)
-                                SettingLabel(number: 3, text: textLine3, checked: variant == 2, highlighted: highlightedIndex == 2)
-                                SettingLabel(number: 4, text: textLine4, checked: variant == 3, highlighted: highlightedIndex == 3)
+                                SettingLabel(number: 1, text: textLine1, checked: variant == 1, highlighted: highlightedIndex == 0)
+                                SettingLabel(number: 2, text: textLine2, checked: variant == 2, highlighted: highlightedIndex == 1)
+                                SettingLabel(number: 3, text: textLine3, checked: variant == 3, highlighted: highlightedIndex == 2)
+                                SettingLabel(number: 4, text: textLine4, checked: variant == 4, highlighted: highlightedIndex == 3)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 5, text: "半形數字", checked: InstantPreferences.characterForm == .halfWidth, highlighted: highlightedIndex == 4)
-                                SettingLabel(number: 6, text: "全形數字", checked: InstantPreferences.characterForm == .fullWidth, highlighted: highlightedIndex == 5)
+                                SettingLabel(number: 5, text: options.textLine5, checked: InstantSettings.characterForm == .halfWidth, highlighted: highlightedIndex == 4)
+                                SettingLabel(number: 6, text: options.textLine6, checked: InstantSettings.characterForm == .fullWidth, highlighted: highlightedIndex == 5)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 7, text: "粵文句讀", checked: InstantPreferences.punctuation == .cantonese, highlighted: highlightedIndex == 6)
-                                SettingLabel(number: 8, text: "英文標點", checked: InstantPreferences.punctuation == .english, highlighted: highlightedIndex == 7)
+                                SettingLabel(number: 7, text: options.textLine7, checked: InstantSettings.punctuation == .cantonese, highlighted: highlightedIndex == 6)
+                                SettingLabel(number: 8, text: options.textLine8, checked: InstantSettings.punctuation == .english, highlighted: highlightedIndex == 7)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 9, text: "有 Emoji", checked: InstantPreferences.needsEmojiCandidates, highlighted: highlightedIndex == 8)
-                                SettingLabel(number: 0, text: "無 Emoji", checked: !(InstantPreferences.needsEmojiCandidates), highlighted: highlightedIndex == 9)
+                                SettingLabel(number: 9, text: options.textLine9, checked: InstantSettings.needsEmojiCandidates, highlighted: highlightedIndex == 8)
+                                SettingLabel(number: 0, text: options.textLine10, checked: !(InstantSettings.needsEmojiCandidates), highlighted: highlightedIndex == 9)
                         }
                 }
                 .padding(8)
@@ -95,88 +112,6 @@ private struct SettingLabel: View {
                 .padding(.leading, 8)
                 .foregroundColor(highlighted ? .white : .primary)
                 .background(highlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
-        }
-}
-
-
-struct InstantPreferences {
-
-        /// 全形 / 半形
-        private(set) static var characterForm: CharacterForm = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: "character_form")
-                switch savedValue {
-                case 0, 1:
-                        return .halfWidth
-                case 2:
-                        return .fullWidth
-                default:
-                        return .halfWidth
-                }
-        }()
-        static func updateCharacterFormState(to newState: CharacterForm) {
-                characterForm = newState
-                let value: Int = newState.rawValue
-                UserDefaults.standard.set(value, forKey: "character_form")
-        }
-
-
-        /// 標點符號。粵文句讀 or 英文標點
-        private(set) static var punctuation: Punctuation = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: "punctuation")
-                switch savedValue {
-                case 0, 1:
-                        return .cantonese
-                case 2:
-                        return .english
-                default:
-                        return .cantonese
-                }
-        }()
-        static func updatePunctuationState(to newState: Punctuation) {
-                punctuation = newState
-                let value: Int = newState.rawValue
-                UserDefaults.standard.set(value, forKey: "punctuation")
-        }
-
-
-        /// 候選詞包含 Emoji
-        private(set) static var needsEmojiCandidates: Bool = {
-                /// 0: The key "emoji" doesn‘t exist.
-                ///
-                /// 1: Emoji Suggestions On
-                ///
-                /// 2: Emoji Suggestions Off
-                let savedValue: Int = UserDefaults.standard.integer(forKey: "emoji")
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
-        }()
-        static func updateNeedsEmojiCandidates(to newState: Bool) {
-                needsEmojiCandidates = newState
-                let value: Int = newState ? 1 : 2
-                UserDefaults.standard.set(value, forKey: "emoji")
-        }
-}
-
-
-enum CharacterForm: Int {
-        case halfWidth = 1
-        case fullWidth = 2
-}
-
-
-enum Punctuation: Int {
-
-        case cantonese = 1
-        case english = 2
-
-        var isCantoneseMode: Bool {
-                return self == .cantonese
         }
 }
 

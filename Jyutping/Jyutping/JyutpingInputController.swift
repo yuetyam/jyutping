@@ -160,6 +160,7 @@ class JyutpingInputController: IMKInputController {
                         displayObject.reset()
                         return
                 }
+                let pageSize: Int = AppSettings.displayCandidatesSize
                 let newFirstIndex: Int? = {
                         switch mode {
                         case .establish:
@@ -167,7 +168,7 @@ class JyutpingInputController: IMKInputController {
                         case .previousPage:
                                 let oldFirstIndex: Int = indices.first
                                 guard oldFirstIndex > 0 else { return nil }
-                                return max(0, oldFirstIndex - 10)
+                                return max(0, oldFirstIndex - pageSize)
                         case .nextPage:
                                 let oldLastIndex: Int = indices.last
                                 guard oldLastIndex < candidates.count - 1 else { return nil }
@@ -175,7 +176,7 @@ class JyutpingInputController: IMKInputController {
                         }
                 }()
                 guard let firstIndex: Int = newFirstIndex else { return }
-                let bound: Int = (firstIndex == 0) ? min(10, candidates.count) : min(firstIndex + 10, candidates.count)
+                let bound: Int = min(firstIndex + pageSize, candidates.count)
                 indices = (firstIndex, bound - 1)
                 let newItems = candidates[firstIndex..<bound].map { item -> DisplayCandidate in
                         switch item.type {
@@ -333,7 +334,7 @@ class JyutpingInputController: IMKInputController {
                                 let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
                                 return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
                         }
-                        let shouldContinue: Bool = InstantPreferences.needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
+                        let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
                         let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
                         for emoji in emojis.reversed() {
@@ -548,9 +549,9 @@ class JyutpingInputController: IMKInputController {
                                 adjustWindow(origin: client.position)
                                 return true
                         } else {
-                                switch InstantPreferences.characterForm {
+                                switch InstantSettings.characterForm {
                                 case .halfWidth:
-                                        let shouldInsertCantoneseSymbol: Bool = InstantPreferences.punctuation.isCantoneseMode && isShifting
+                                        let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuation.isCantoneseMode && isShifting
                                         guard shouldInsertCantoneseSymbol else { return false }
                                         let text: String = KeyCode.shiftingSymbol(of: number)
                                         insert(text)
@@ -568,7 +569,7 @@ class JyutpingInputController: IMKInputController {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         }
                         passBuffer()
-                        guard InstantPreferences.punctuation.isCantoneseMode else { return false }
+                        guard InstantSettings.punctuation.isCantoneseMode else { return false }
                         if isShifting {
                                 if let symbol = punctuationKey.instantShiftingSymbol {
                                         insert(symbol)
@@ -626,7 +627,7 @@ class JyutpingInputController: IMKInputController {
                         } else {
                                 if candidates.isEmpty {
                                         passBuffer()
-                                        guard InstantPreferences.characterForm == .fullWidth else { return false }
+                                        guard InstantSettings.characterForm == .fullWidth else { return false }
                                         insert(String.fullWidthSpace)
                                         return true
                                 } else {
@@ -656,7 +657,7 @@ class JyutpingInputController: IMKInputController {
 
         private func passBuffer() {
                 guard isBufferState else { return }
-                let text: String = InstantPreferences.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
+                let text: String = InstantSettings.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
                 insert(text)
                 bufferText = .empty
                 candidateSequence = []
@@ -673,17 +674,17 @@ class JyutpingInputController: IMKInputController {
                 case -1:
                         return
                 case 4:
-                        InstantPreferences.updateCharacterFormState(to: .halfWidth)
+                        InstantSettings.updateCharacterFormState(to: .halfWidth)
                 case 5:
-                        InstantPreferences.updateCharacterFormState(to: .fullWidth)
+                        InstantSettings.updateCharacterFormState(to: .fullWidth)
                 case 6:
-                        InstantPreferences.updatePunctuationState(to: .cantonese)
+                        InstantSettings.updatePunctuationState(to: .cantonese)
                 case 7:
-                        InstantPreferences.updatePunctuationState(to: .english)
+                        InstantSettings.updatePunctuationState(to: .english)
                 case 8:
-                        InstantPreferences.updateNeedsEmojiCandidates(to: true)
+                        InstantSettings.updateNeedsEmojiCandidates(to: true)
                 case 9:
-                        InstantPreferences.updateNeedsEmojiCandidates(to: false)
+                        InstantSettings.updateNeedsEmojiCandidates(to: false)
                 default:
                         break
                 }

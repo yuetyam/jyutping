@@ -26,7 +26,8 @@ final class DisplayObject: ObservableObject {
                 let shouldAnimate: Bool = {
                         let isUpdate: Bool = !items.isEmpty
                         guard isUpdate else { return false }
-                        let isFilled: Bool = items.count == 10 && newItems.count == 10
+                        let pageSize: Int = AppSettings.displayCandidatesSize
+                        let isFilled: Bool = items.count == pageSize && newItems.count == pageSize
                         guard isFilled else { return false }
                         guard shouldUpdateLongest else { return false }
                         return true
@@ -43,11 +44,13 @@ final class DisplayObject: ObservableObject {
         }
 
         func increaseHighlightedIndex() {
-                guard highlightedIndex < (items.count - 1) else { return }
+                let lastIndex: Int = items.count - 1
+                guard highlightedIndex < lastIndex else { return }
                 highlightedIndex += 1
         }
         func decreaseHighlightedIndex() {
-                guard highlightedIndex > 0 else { return }
+                let firstIndex: Int = 0
+                guard highlightedIndex > firstIndex else { return }
                 highlightedIndex -= 1
         }
 }
