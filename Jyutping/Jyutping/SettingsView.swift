@@ -60,7 +60,7 @@ struct SettingsView: View {
 
         var body: some View {
                 let highlightedIndex = settingsObject.highlightedIndex
-                VStack(spacing: 3) {
+                VStack(spacing: 1) {
                         Group {
                                 SettingLabel(number: 1, text: textLine1, checked: variant == 1, highlighted: highlightedIndex == 0)
                                 SettingLabel(number: 2, text: textLine2, checked: variant == 2, highlighted: highlightedIndex == 1)
@@ -112,6 +112,7 @@ private struct SettingLabel: View {
                         Spacer()
                 }
                 .padding(.horizontal, 8)
+                .padding(.vertical, 1)
                 .foregroundColor(highlighted ? .white : .primary)
                 .background(highlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }

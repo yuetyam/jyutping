@@ -6,7 +6,7 @@ struct CandidatesView: View {
 
         var body: some View {
                 let longest: DisplayCandidate = displayObject.longest
-                VStack(spacing: 3) {
+                VStack(spacing: 1) {
                         ForEach(0..<displayObject.items.count, id: \.self) { index in
                                 let candidate = displayObject.items[index]
                                 let isHighlighted: Bool = index == displayObject.highlightedIndex
@@ -34,6 +34,7 @@ struct CandidatesView: View {
                                         }
                                 }
                                 .padding(.horizontal, 8)
+                                .padding(.vertical, 1)
                                 .foregroundColor(isHighlighted ? .white : .primary)
                                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                         }
