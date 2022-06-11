@@ -15,4 +15,17 @@ struct DisplayCandidate: Identifiable, Hashable {
                 self.comment = comment
                 self.secondaryComment = secondaryComment
         }
+
+        func isLonger(than another: DisplayCandidate) -> Bool {
+                let textDifference: Int = self.text.count - another.text.count
+                switch textDifference {
+                case 0:
+                        let commentDifference: Int = (self.comment?.count ?? 0) - (another.comment?.count ?? 0)
+                        return commentDifference >= 0
+                case ..<0:
+                        return false
+                default:
+                        return true
+                }
+        }
 }
