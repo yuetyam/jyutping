@@ -60,7 +60,7 @@ struct SettingsView: View {
 
         var body: some View {
                 let highlightedIndex = settingsObject.highlightedIndex
-                VStack(spacing: 1) {
+                VStack(alignment: .leading, spacing: 1) {
                         Group {
                                 SettingLabel(number: 1, text: textLine1, checked: variant == 1, highlighted: highlightedIndex == 0)
                                 SettingLabel(number: 2, text: textLine2, checked: variant == 2, highlighted: highlightedIndex == 1)
@@ -101,15 +101,12 @@ private struct SettingLabel: View {
         let highlighted: Bool
 
         var body: some View {
-                HStack {
-                        HStack(spacing: 14) {
-                                Text(verbatim: "\(number).").font(.serial)
-                                Text(verbatim: text).font(.candidate)
-                                if checked {
-                                        Image(systemName: "checkmark").font(.title2)
-                                }
+                HStack(spacing: 14) {
+                        Text(verbatim: "\(number).").font(.serial)
+                        Text(verbatim: text).font(.candidate)
+                        if checked {
+                                Image(systemName: "checkmark").font(.title2)
                         }
-                        Spacer()
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, 1)
