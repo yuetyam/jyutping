@@ -7,7 +7,7 @@ final class DisplayObject: ObservableObject {
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var animationState: Int = 0
 
-        private static let defaultLongest: DisplayCandidate = DisplayCandidate("我", comment: "ngo5")
+        private static let defaultLongest: DisplayCandidate = DisplayCandidate("毋", comment: "m4")
 
         func reset() {
                 items = []

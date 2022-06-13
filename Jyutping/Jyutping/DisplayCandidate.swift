@@ -19,11 +19,12 @@ struct DisplayCandidate: Identifiable, Hashable {
         func isLonger(than another: DisplayCandidate) -> Bool {
                 let textDifference: Int = self.text.count - another.text.count
                 switch textDifference {
-                case 0:
-                        let commentDifference: Int = (self.comment?.count ?? 0) - (another.comment?.count ?? 0)
-                        return commentDifference >= 0
                 case ..<0:
                         return false
+                case 0:
+                        let thisCommentsTextCount: Int = (self.comment?.count ?? 0) + (self.secondaryComment?.count ?? 0)
+                        let anotherCommentsTextCount: Int = (another.comment?.count ?? 0) + (another.secondaryComment?.count ?? 0)
+                        return thisCommentsTextCount >= anotherCommentsTextCount
                 default:
                         return true
                 }

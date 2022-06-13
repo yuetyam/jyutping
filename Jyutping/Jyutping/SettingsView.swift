@@ -100,12 +100,22 @@ private struct SettingLabel: View {
         let checked: Bool
         let highlighted: Bool
 
+        private let componentsSpacing: CGFloat = 14
+
         var body: some View {
-                HStack(spacing: 14) {
-                        Text(verbatim: "\(number).").font(.serial)
-                        Text(verbatim: text).font(.candidate)
-                        if checked {
+                ZStack(alignment: .leading) {
+                        HStack(spacing: componentsSpacing) {
+                                Text(verbatim: "0.").font(.serial)
+                                Text(verbatim: "傳統漢字・香港").font(.candidate)
                                 Image(systemName: "checkmark").font(.title2)
+                        }
+                        .opacity(0)
+                        HStack(spacing: componentsSpacing) {
+                                Text(verbatim: "\(number).").font(.serial)
+                                Text(verbatim: text).font(.candidate)
+                                if checked {
+                                        Image(systemName: "checkmark").font(.title2)
+                                }
                         }
                 }
                 .padding(.horizontal, 8)
