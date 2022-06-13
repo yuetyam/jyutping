@@ -14,8 +14,7 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("«"),
                         PunctuationSymbol("‹"),
                         PunctuationSymbol("<", comment: "半形", secondaryComment: "U+003C"),
-                        PunctuationSymbol("＜", comment: "全形", secondaryComment: "U+FF1C"),
-                        PunctuationSymbol(",", comment: "英文逗號")
+                        PunctuationSymbol("＜", comment: "全形", secondaryComment: "U+FF1C")
                 ]
                 return PunctuationKey(keyText: ",", shiftingKeyText: "<", instantSymbol: "，", instantShiftingSymbol: nil, symbols: [.init("，")], shiftingSymbols: shiftingSymbols)
         }()
@@ -27,7 +26,6 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("›"),
                         PunctuationSymbol(">", comment: "半形", secondaryComment: "U+003E"),
                         PunctuationSymbol("＞", comment: "全形", secondaryComment: "U+FF1E"),
-                        PunctuationSymbol(".", comment: "英文句號"),
                         PunctuationSymbol("．", comment: "全形英文句號", secondaryComment: "U+FF0E"),
                         PunctuationSymbol("｡", comment: "半形句號", secondaryComment: "U+FF61")
                 ]
@@ -38,8 +36,6 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("/", comment: "半形"),
                         PunctuationSymbol("／", comment: "全形"),
                         PunctuationSymbol("÷"),
-                        PunctuationSymbol("？", comment: "全形"),
-                        PunctuationSymbol("?", comment: "半形"),
                         PunctuationSymbol(String.fullWidthSpace, comment: "全形空格", secondaryComment: "U+3000")
                 ]
                 return PunctuationKey(keyText: "/", shiftingKeyText: "?", instantSymbol: nil, instantShiftingSymbol: "？", symbols: symbols, shiftingSymbols: [.init("？")])
@@ -84,8 +80,7 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("•", comment: "Bullet", secondaryComment: "U+2022"),
                         PunctuationSymbol("·", comment: "陸標間隔號", secondaryComment: "Middle Dot, U+00B7"),
                         PunctuationSymbol("‧", comment: "港臺間隔號", secondaryComment: "U+2027"),
-                        PunctuationSymbol("・", comment: "全形中點", secondaryComment: "U+30FB"),
-                        PunctuationSymbol("°", comment: "度")
+                        PunctuationSymbol("・", comment: "全形中點", secondaryComment: "U+30FB")
                 ]
                 return PunctuationKey(keyText: "\\", shiftingKeyText: "|", instantSymbol: "、", instantShiftingSymbol: nil, symbols: [.init("、")], shiftingSymbols: shiftingSymbols)
         }()

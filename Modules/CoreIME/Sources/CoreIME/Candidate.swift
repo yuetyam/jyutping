@@ -74,12 +74,12 @@ public struct Candidate: Hashable {
         }
 
         /// Create a Candidate with symbol
-        public init(symbol: String, comment: String?, secondaryComment: String?) {
+        public init(key: String, symbol: String, comment: String?, secondaryComment: String?) {
                 let commentText: String = comment ?? ""
                 let secondaryCommentText: String = secondaryComment ?? ""
                 self.text = symbol
                 self.romanization = secondaryCommentText
-                self.input = commentText
+                self.input = key
                 self.lexiconText = commentText
                 self.type = .symbol
         }

@@ -186,10 +186,10 @@ class JyutpingInputController: IMKInputController {
                                 return DisplayCandidate(item.text)
                         case .emoji:
                                 let convertedText: String = convert(text: item.lexiconText, logogram: Logogram.current)
-                                let commentText: String = "〔\(convertedText)〕"
-                                return DisplayCandidate(item.text, secondaryComment: commentText)
+                                let comment: String = "〔\(convertedText)〕"
+                                return DisplayCandidate(item.text, comment: comment)
                         case .symbol:
-                                let convertedText: String = convert(text: item.input, logogram: Logogram.current)
+                                let convertedText: String = convert(text: item.lexiconText, logogram: Logogram.current)
                                 let comment: String? = convertedText.isEmpty ? nil : "〔\(convertedText)〕"
                                 let secondaryComment: String? = item.romanization.isEmpty ? nil : item.romanization
                                 return DisplayCandidate(item.text, comment: comment, secondaryComment: secondaryComment)
@@ -290,7 +290,7 @@ class JyutpingInputController: IMKInputController {
                                                 return PunctuationKey.slash.symbols
                                         }
                                 }()
-                                candidates = symbols.map({ Candidate(symbol: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment) })
+                                candidates = symbols.map({ Candidate(key: bufferText, symbol: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment) })
                         }
                 }
         }
