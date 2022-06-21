@@ -13,7 +13,7 @@ cask "jyutping" do
   pkg "Jyutping.pkg"
 
   uninstall pkgutil: "org.jyutping.inputmethod.Jyutping",
-            delete:  "~/Library/Input Methods/Jyutping.app"
+            delete:  "/Library/Input Methods/Jyutping.app"
 
   zap trash: [
     "~/Library/Application Scripts/org.jyutping.inputmethod.Jyutping",

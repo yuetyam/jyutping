@@ -2,4 +2,7 @@
 
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
 
+# old files
+rm -rf /Users/$USER/Library/Input\ Methods/Jyutping.app
+
 exit 0
