@@ -189,8 +189,9 @@ class JyutpingInputController: IMKInputController {
                                 let comment: String = "〔\(convertedText)〕"
                                 return DisplayCandidate(item.text, comment: comment)
                         case .symbol:
-                                let convertedText: String = convert(text: item.lexiconText, logogram: Logogram.current)
-                                let comment: String? = convertedText.isEmpty ? nil : "〔\(convertedText)〕"
+                                let originalComment: String = item.lexiconText
+                                lazy var convertedComment: String = convert(text: originalComment, logogram: Logogram.current)
+                                let comment: String? = originalComment.isEmpty ? nil : "〔\(convertedComment)〕"
                                 let secondaryComment: String? = item.romanization.isEmpty ? nil : item.romanization
                                 return DisplayCandidate(item.text, comment: comment, secondaryComment: secondaryComment)
                         }
@@ -483,10 +484,7 @@ class JyutpingInputController: IMKInputController {
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-                let hasCommandModifier: Bool = event.modifierFlags.contains(.command) || event.keyCode == KeyCode.Modifier.VK_COMMAND_LEFT || event.keyCode == KeyCode.Modifier.VK_COMMAND_RIGHT
-                guard !hasCommandModifier else { return false } // Ignore any Command + ...
-                let hasControlModifier: Bool = event.modifierFlags.contains(.control) || event.keyCode == KeyCode.Modifier.VK_CONTROL_LEFT || event.keyCode == KeyCode.Modifier.VK_CONTROL_RIGHT
-                let isShifting: Bool = event.modifierFlags == .shift
+                guard !event.modifierFlags.contains(.command) else { return false }
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
                 let shouldResetClient: Bool = {
                         guard let previousPosition = currentClient?.position else { return true }
@@ -499,9 +497,8 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                guard !hasControlModifier else {
-                        let isSettingsShortcut: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
-                        guard isSettingsShortcut else { return false }
+                let isInstantSettingsShortcut: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE && event.modifierFlags.contains(.control)
+                if isInstantSettingsShortcut {
                         if inputMethodMode.isSettings {
                                 handleSettings(-1)
                                 return true
@@ -511,6 +508,7 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                 }
+                let isShifting: Bool = event.modifierFlags == .shift
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
