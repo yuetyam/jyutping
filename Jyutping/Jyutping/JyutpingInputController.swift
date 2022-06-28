@@ -484,7 +484,8 @@ class JyutpingInputController: IMKInputController {
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-                guard !event.modifierFlags.contains(.command) else { return false }
+                let shouldIgnore: Bool = event.modifierFlags.contains(.command) || event.modifierFlags.contains(.option)
+                guard !shouldIgnore else { return false }
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
                 let shouldResetClient: Bool = {
                         guard let previousPosition = currentClient?.position else { return true }
@@ -497,7 +498,8 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                let isInstantSettingsShortcut: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE && event.modifierFlags.contains(.control)
+                let hasControlModifier: Bool = event.modifierFlags.contains(.control)
+                let isInstantSettingsShortcut: Bool = hasControlModifier && event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
                 if isInstantSettingsShortcut {
                         if inputMethodMode.isSettings {
                                 handleSettings(-1)
@@ -508,6 +510,7 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                 }
+                guard !hasControlModifier else { return false }
                 let isShifting: Bool = event.modifierFlags == .shift
                 switch event.keyCode.representative {
                 case .arrow(let direction):
