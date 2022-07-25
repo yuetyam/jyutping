@@ -7,10 +7,7 @@ extension Array where Element: Hashable {
                 var set: Set<Element> = Set<Element>()
                 return filter { set.insert($0).inserted }
         }
-}
 
-
-extension Array {
 
         /// Safely access element by index
         /// - Parameter index: Index
