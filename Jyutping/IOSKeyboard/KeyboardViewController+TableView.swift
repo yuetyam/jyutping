@@ -99,6 +99,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         cell.selectionStyle = .none
                         switch indexPath.row {
                         case 0:
+                                cell.isUserInteractionEnabled = true
+                                cell.textLabel?.isEnabled = true
                                 cell.textLabel?.text = NSLocalizedString("Audio Feedback on Click", comment: .empty)
                                 cell.accessoryView = UISwitch()
                                 (cell.accessoryView as? UISwitch)?.isOn = AudioFeedback.isAudioFeedbackOn
@@ -107,13 +109,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 cell.textLabel?.text = NSLocalizedString("Haptic Feedback on Click", comment: .empty)
                                 cell.accessoryView = UISwitch()
                                 if hasFullAccess {
+                                        cell.isUserInteractionEnabled = true
+                                        cell.textLabel?.isEnabled = true
                                         (cell.accessoryView as? UISwitch)?.isOn = isHapticFeedbackOn
                                         (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleHapticFeedbackSwitch), for: .valueChanged)
                                 } else {
+                                        cell.isUserInteractionEnabled = false
+                                        cell.textLabel?.isEnabled = false
                                         (cell.accessoryView as? UISwitch)?.isOn = false
                                         (cell.accessoryView as? UISwitch)?.isEnabled = false
-                                        cell.textLabel?.isEnabled = false
-                                        cell.isUserInteractionEnabled = false
                                 }
                         default:
                                 break
@@ -211,6 +215,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 6:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
                         cell.selectionStyle = .none
+                        cell.isUserInteractionEnabled = true
+                        cell.textLabel?.isEnabled = true
                         cell.textLabel?.text = NSLocalizedString("Emoji Suggestions", comment: .empty)
                         cell.accessoryView = UISwitch()
                         (cell.accessoryView as? UISwitch)?.isOn = needsEmojiCandidates
