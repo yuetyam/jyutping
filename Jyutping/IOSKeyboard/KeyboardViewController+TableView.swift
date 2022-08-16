@@ -28,29 +28,29 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 }()
                 switch section {
                 case 0:
+                        // Characters, Logogram
+                        return 4
+                case 1:
                         // Audio Feedback & Haptic Feedback
                         // iPad does not support haptic feedback
                         return isPhone ? 2 : 1
-                case 1:
-                        // Characters, Logogram
-                        return 4
                 case 2:
+                        // Emoji Suggestions
+                        return 1
+                case 3:
                         // Keyboard Layouts (Arrangements)
                         // No TenKey keyboards for iPad
                         // return isPhone ? 3 : 2
                         return 2
-                case 3:
+                case 4:
                         // Jyutping Display
                         return 3
-                case 4:
+                case 5:
                         // Jyutping Tones Display
                         return 4
-                case 5:
+                case 6:
                         // Space double tapping shortcut
                         return 4
-                case 6:
-                        // Emoji Suggestions
-                        return 1
                 case 7:
                         // Clear User Lexicon
                         return 1
@@ -66,15 +66,15 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                 case 1:
                         return nil
                 case 2:
-                        return NSLocalizedString("Keyboard Layout", comment: .empty)
-                case 3:
-                        return NSLocalizedString("Jyutping Display", comment: .empty)
-                case 4:
-                        return NSLocalizedString("Jyutping Tones Display", comment: .empty)
-                case 5:
-                        return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
-                case 6:
                         return nil
+                case 3:
+                        return NSLocalizedString("Keyboard Layout", comment: .empty)
+                case 4:
+                        return NSLocalizedString("Jyutping Display", comment: .empty)
+                case 5:
+                        return NSLocalizedString("Jyutping Tones Display", comment: .empty)
+                case 6:
+                        return NSLocalizedString("Space Double Tapping Shortcut", comment: .empty)
                 case 7:
                         return .zeroWidthSpace
                 default:
@@ -83,7 +83,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         }
         func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
                 switch section {
-                case 0:
+                case 1:
                         guard !hasFullAccess else { return nil }
                         guard traitCollection.userInterfaceIdiom == .phone else { return nil }
                         return NSLocalizedString("Haptic Feedback requires Full Access", comment: .empty)
@@ -95,6 +95,22 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 switch indexPath.section {
                 case 0:
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
+                        switch indexPath.row {
+                        case 0:
+                                cell.textLabel?.text = NSLocalizedString("Traditional Characters", comment: .empty)
+                        case 1:
+                                cell.textLabel?.text = NSLocalizedString("Traditional Characters, Hong Kong", comment: .empty)
+                        case 2:
+                                cell.textLabel?.text = NSLocalizedString("Traditional Characters, Taiwan", comment: .empty)
+                        case 3:
+                                cell.textLabel?.text = NSLocalizedString("Simplified Characters", comment: .empty)
+                        default:
+                                break
+                        }
+                        cell.accessoryType = Logogram.current.rawValue == (indexPath.row + 1) ? .checkmark : .none
+                        return cell
+                case 1:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
                         cell.selectionStyle = .none
                         switch indexPath.row {
@@ -123,24 +139,17 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 1:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
-                        switch indexPath.row {
-                        case 0:
-                                cell.textLabel?.text = NSLocalizedString("Traditional Characters", comment: .empty)
-                        case 1:
-                                cell.textLabel?.text = NSLocalizedString("Traditional Characters, Hong Kong", comment: .empty)
-                        case 2:
-                                cell.textLabel?.text = NSLocalizedString("Traditional Characters, Taiwan", comment: .empty)
-                        case 3:
-                                cell.textLabel?.text = NSLocalizedString("Simplified Characters", comment: .empty)
-                        default:
-                                break
-                        }
-                        cell.accessoryType = Logogram.current.rawValue == (indexPath.row + 1) ? .checkmark : .none
-                        return cell
-
                 case 2:
+                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
+                        cell.selectionStyle = .none
+                        cell.isUserInteractionEnabled = true
+                        cell.textLabel?.isEnabled = true
+                        cell.textLabel?.text = NSLocalizedString("Emoji Suggestions", comment: .empty)
+                        cell.accessoryView = UISwitch()
+                        (cell.accessoryView as? UISwitch)?.isOn = needsEmojiCandidates
+                        (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleEmojiCandidatesSwitch), for: .valueChanged)
+                        return cell
+                case 3:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -156,8 +165,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-
-                case 3:
+                case 4:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -173,8 +181,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-
-                case 4:
+                case 5:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -193,7 +200,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 5:
+                case 6:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
@@ -212,16 +219,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 break
                         }
                         return cell
-                case 6:
-                        let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.switchSettingsCell, for: indexPath)
-                        cell.selectionStyle = .none
-                        cell.isUserInteractionEnabled = true
-                        cell.textLabel?.isEnabled = true
-                        cell.textLabel?.text = NSLocalizedString("Emoji Suggestions", comment: .empty)
-                        cell.accessoryView = UISwitch()
-                        (cell.accessoryView as? UISwitch)?.isOn = needsEmojiCandidates
-                        (cell.accessoryView as? UISwitch)?.addTarget(self, action: #selector(handleEmojiCandidatesSwitch), for: .valueChanged)
-                        return cell
                 case 7:
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.clearLexiconSettingsCell, for: indexPath)
                         cell.textLabel?.text = NSLocalizedString("Clear User Lexicon", comment: .empty)
@@ -236,8 +233,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                 switch indexPath.section {
                 case 0:
-                        break
-                case 1:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let selected: Logogram = {
                                 switch indexPath.row {
@@ -253,7 +248,11 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
+                case 1:
+                        break
                 case 2:
+                        break
+                case 3:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let selectedLayout: KeyboardLayout = {
                                 switch indexPath.row {
@@ -268,7 +267,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 3:
+                case 4:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let value: Int = {
                                 switch indexPath.row {
@@ -283,7 +282,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 4:
+                case 5:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let value: Int = {
                                 switch indexPath.row {
@@ -299,7 +298,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 5:
+                case 6:
                         tableView.deselectRow(at: indexPath, animated: true)
                         let value: Int = {
                                 switch indexPath.row {
@@ -315,8 +314,6 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 tableView.reloadData()
                         }
-                case 6:
-                        break
                 case 7:
                         clearUserLexicon()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {

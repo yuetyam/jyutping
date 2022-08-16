@@ -303,13 +303,13 @@ extension KeyboardViewController {
         private func loadSettingsView() {
                 let height: CGFloat = view.frame.height
                 keyboardStackView.removeArrangedSubviews()
-                let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 110
+                // let extended: CGFloat = traitCollection.verticalSizeClass == .compact ? height : height + 110
                 let upArrow: ToolButton = .chevron(.up, leftInset: 16, rightInset: 16)
                 settingsView.addSubview(upArrow)
                 upArrow.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                         // FIXME: - Unable to simultaneously satisfy constraints
-                        settingsView.heightAnchor.constraint(equalToConstant: extended),
+                        settingsView.heightAnchor.constraint(equalToConstant: height),
                         upArrow.topAnchor.constraint(equalTo: settingsView.topAnchor),
                         upArrow.leadingAnchor.constraint(equalTo: settingsView.leadingAnchor),
                         upArrow.widthAnchor.constraint(equalToConstant: 64),
