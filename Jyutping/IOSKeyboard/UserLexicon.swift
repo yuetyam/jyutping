@@ -92,7 +92,16 @@ struct UserLexicon {
         // MARK: - Suggestion
 
         func suggest(for text: String) -> [Candidate] {
-                return match(for: text) + fetch(by: text)
+                let matched = match(for: text)
+                guard matched.isEmpty else {
+                        return matched + fetch(by: text)
+                }
+                let convertedText: String = text.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                        .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
+                        .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
+                        .replacingOccurrences(of: "y", with: "j", options: .anchored)
+                return match(for: convertedText) + fetch(by: text)
         }
         private func match(for text: String) -> [Candidate] {
                 let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE ping = \(text.hash) ORDER BY frequency DESC LIMIT 5;"
