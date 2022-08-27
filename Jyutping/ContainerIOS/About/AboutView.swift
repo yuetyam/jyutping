@@ -24,6 +24,9 @@ struct AboutView: View {
                 }
         }()
 
+        private let appStoreAddress: String = "https://apps.apple.com/app/id1509367629"
+        private let link2AppStore: URL = URL(string: "https://apps.apple.com/app/id1509367629")!
+
         var body: some View {
                 NavigationView {
                         List {
@@ -121,13 +124,22 @@ struct AboutView: View {
                                                 EnhancedLabel("Review on the App Store", icon: "heart", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton("https://apps.apple.com/app/id1509367629", title: "Copy App Store link")
+                                                MenuCopyButton(appStoreAddress, title: "Copy App Store link")
                                         }
-                                        ShareSheetView(activityItems: [URL(string: "https://apps.apple.com/app/id1509367629")!]) {
-                                                EnhancedLabel("Share this App", icon: "square.and.arrow.up")
-                                        }
-                                        .contextMenu {
-                                                MenuCopyButton("https://apps.apple.com/app/id1509367629", title: "Copy App Store link")
+                                        if #available(iOS 16.0, *) {
+                                                ShareLink(item: link2AppStore) {
+                                                        EnhancedLabel("Share this App", icon: "square.and.arrow.up")
+                                                }
+                                                .contextMenu {
+                                                        MenuCopyButton(appStoreAddress, title: "Copy App Store link")
+                                                }
+                                        } else {
+                                                ShareSheetView(activityItems: [link2AppStore]) {
+                                                        EnhancedLabel("Share this App", icon: "square.and.arrow.up")
+                                                }
+                                                .contextMenu {
+                                                        MenuCopyButton(appStoreAddress, title: "Copy App Store link")
+                                                }
                                         }
                                 }
 

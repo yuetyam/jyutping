@@ -26,6 +26,7 @@ private struct ActivityView: UIViewControllerRepresentable {
         func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
 
+@available(iOS, introduced: 14, deprecated: 16, message: "Use ShareLink instead")
 struct ShareSheetView<Content: View>: View {
 
         private let activityItems: [Any]
