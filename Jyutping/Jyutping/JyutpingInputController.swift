@@ -608,10 +608,15 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                 case .backspace:
-                        guard isBufferState else { return false }
-                        bufferText = String(bufferText.dropLast())
-                        adjustWindow(origin: client.position)
-                        return true
+                        if inputMethodMode.isSettings {
+                                handleSettings(-1)
+                                return true
+                        } else {
+                                guard isBufferState else { return false }
+                                bufferText = String(bufferText.dropLast())
+                                adjustWindow(origin: client.position)
+                                return true
+                        }
                 case .escapeClear:
                         if inputMethodMode.isSettings {
                                 handleSettings(-1)
