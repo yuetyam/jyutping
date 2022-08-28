@@ -1,4 +1,5 @@
 import UIKit
+import UniformTypeIdentifiers
 import CommonExtensions
 import CharacterSets
 import CoreIME
@@ -854,6 +855,27 @@ final class KeyboardViewController: UIInputViewController {
         }
         @objc private func handleDownArrow() {
                 keyboardIdiom = .candidates
+        }
+
+        override func canPaste(_ itemProviders: [NSItemProvider]) -> Bool {
+                guard hasFullAccess else { return false }
+                let isTrueCanPaste: Bool = itemProviders.reduce(true) { (partialResult, provider) -> Bool in
+                        return partialResult && provider.hasItemConformingToTypeIdentifier(UTType.text.identifier)
+                }
+                return isTrueCanPaste
+        }
+        override func paste(itemProviders: [NSItemProvider]) {
+                guard hasFullAccess else { return }
+                for provider in itemProviders {
+                        if provider.hasItemConformingToTypeIdentifier(UTType.text.identifier) {
+                                _ = provider.loadObject(ofClass: String.self) { [weak self] (reading, _) -> Void in
+                                        guard let text: String = reading else { return }
+                                        self?.textDocumentProxy.insertText(text)
+                                        self?.hapticFeedback?.impactOccurred()
+                                        AudioFeedback.perform(.input)
+                                }
+                        }
+                }
         }
 
 

@@ -28,13 +28,67 @@ final class ToolBar: UIView {
                 stackView.distribution = .equalSpacing
                 stackView.addArrangedSubview(settingsButton)
                 stackView.addArrangedSubview(yueEngSwitch)
-                if controller.hasFullAccess {
-                        stackView.addArrangedSubview(pasteButton)
+                if #available(iOSApplicationExtension 16, *) {
+                        iOS16_setupStackView()
+                } else {
+                        if controller.hasFullAccess {
+                                stackView.addArrangedSubview(pasteButton)
+                        }
+                        stackView.addArrangedSubview(emojiSwitch)
+                        stackView.addArrangedSubview(keyboardDown)
+                        NSLayoutConstraint.activate(toolBarItemsConstraints)
+                }
+        }
+
+        @available(iOSApplicationExtension 16.0, *)
+        private func iOS16_setupStackView() {
+                let isDarkAppearance: Bool = controller.isDarkAppearance
+                let hasFullAccess: Bool = controller.hasFullAccess
+                let config = UIPasteControl.Configuration()
+                config.baseBackgroundColor = {
+                        if isDarkAppearance {
+                                return UIColor(red: 50.0 / 255.0, green: 50.0 / 255.0, blue: 50.0 / 255.0, alpha: 1)
+                        } else {
+                                return UIColor(red: 208.0 / 255.0, green: 211.0 / 255.0, blue: 216.0 / 255.0, alpha: 1)
+                        }
+                }()
+                config.baseForegroundColor = isDarkAppearance ? .white : .black
+                config.displayMode = .iconOnly
+                let pasteControl: UIPasteControl = UIPasteControl(configuration: config)
+                pasteControl.target = self.controller
+                if hasFullAccess {
+                        stackView.addArrangedSubview(pasteControl)
                 }
                 stackView.addArrangedSubview(emojiSwitch)
                 stackView.addArrangedSubview(keyboardDown)
-
-                NSLayoutConstraint.activate(toolBarItemsConstraints)
+                let width: CGFloat = 50
+                if hasFullAccess {
+                        NSLayoutConstraint.activate([
+                                settingsButton.widthAnchor.constraint(equalToConstant: width),
+                                settingsButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
+                                yueEngSwitch.widthAnchor.constraint(equalToConstant: 80),
+                                yueEngSwitch.heightAnchor.constraint(equalToConstant: toolBarHeight),
+                                pasteControl.widthAnchor.constraint(equalToConstant: 36),
+                                pasteControl.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+                                pasteControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+                                emojiSwitch.widthAnchor.constraint(equalToConstant: width),
+                                emojiSwitch.heightAnchor.constraint(equalToConstant: toolBarHeight),
+                                keyboardDown.widthAnchor.constraint(equalToConstant: width),
+                                keyboardDown.heightAnchor.constraint(equalToConstant: toolBarHeight)
+                        ])
+                } else {
+                        NSLayoutConstraint.activate([
+                                settingsButton.widthAnchor.constraint(equalToConstant: width),
+                                settingsButton.heightAnchor.constraint(equalToConstant: toolBarHeight),
+                                yueEngSwitch.widthAnchor.constraint(equalToConstant: 80),
+                                yueEngSwitch.heightAnchor.constraint(equalToConstant: toolBarHeight),
+                                pasteControl.widthAnchor.constraint(equalToConstant: 36),
+                                emojiSwitch.widthAnchor.constraint(equalToConstant: width),
+                                emojiSwitch.heightAnchor.constraint(equalToConstant: toolBarHeight),
+                                keyboardDown.widthAnchor.constraint(equalToConstant: width),
+                                keyboardDown.heightAnchor.constraint(equalToConstant: toolBarHeight)
+                        ])
+                }
         }
 
         private lazy var showingToolButtons: Bool = true
