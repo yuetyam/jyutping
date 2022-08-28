@@ -715,7 +715,7 @@ final class KeyboardViewController: UIInputViewController {
                         guard shouldContinue else { return normal }
                         let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
                         for emoji in emojis.reversed() {
-                                if let index = normal.firstIndex(where: { $0.input == bufferText && $0.lexiconText == emoji.lexiconText }) {
+                                if let index = normal.firstIndex(where: { $0.lexiconText == emoji.lexiconText }) {
                                         normal.insert(emoji, at: index + 1)
                                 }
                         }

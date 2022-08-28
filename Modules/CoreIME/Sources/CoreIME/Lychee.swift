@@ -50,8 +50,18 @@ public struct Lychee {
 extension Lychee {
 
         public static func searchEmojis(for text: String) -> [Candidate] {
+                let regularMatch = matchEmojis(for: text)
+                guard regularMatch.isEmpty else { return regularMatch }
+                let convertedText: String = text.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                        .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
+                        .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
+                        .replacingOccurrences(of: "y", with: "j", options: .anchored)
+                return matchEmojis(for: convertedText)
+        }
+
+        private static func matchEmojis(for text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                // TODO: improve ping text
                 let queryString = "SELECT emoji, cantonese, romanization FROM emojitable WHERE ping = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 defer {
@@ -70,6 +80,7 @@ extension Lychee {
                 }
                 return candidates
         }
+
         private static func transform(codes: String) -> String? {
                 let blocks: [String] = codes.components(separatedBy: ".")
                 switch blocks.count {
@@ -83,6 +94,7 @@ extension Lychee {
                         return String(found)
                 }
         }
+
         /// Create a Character from the given Unicode Code Point String, e.g. 1F600
         private static func character(from codePoint: String) -> Character? {
                 guard let u32 = UInt32(codePoint, radix: 16) else { return nil }
