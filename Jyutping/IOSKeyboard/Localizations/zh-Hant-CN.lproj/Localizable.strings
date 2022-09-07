@@ -3,14 +3,16 @@
 
 // MARK: - Settings
 
-"Audio Feedback on Click" = "按鍵聲音反饋";
-"Haptic Feedback on Click" = "按鍵振動反饋";
-"Haptic Feedback requires Full Access" = "振動反饋需啓用「完全訪問」";
-
 "Traditional Characters" = "傳統漢字";
 "Traditional Characters, Hong Kong" = "傳統漢字・香港";
 "Traditional Characters, Taiwan" = "傳統漢字・臺灣";
 "Simplified Characters" = "简化字";
+
+"Audio Feedback on Click" = "按鍵聲音反饋";
+"Haptic Feedback on Click" = "按鍵振動反饋";
+"Haptic Feedback requires Full Access" = "振動反饋需啓用「完全訪問」";
+
+"Emoji Suggestions" = "繪文字（Emoji）候選詞";
 
 "Keyboard Layout" = "鍵盤佈局";
 "QWERTY" = "全鍵盤・QWERTY";
@@ -33,8 +35,6 @@
 "Insert an ideographic comma" = "輸入一個頓號「、」";
 "Insert an ideographic space" = "輸入一個全形空格（U+3000）";
 "No Double Space Shortcut" = "無";
-
-"Emoji Suggestions" = "Emoji 候選詞";
 
 "Clear User Lexicon" = "清空用戶詞庫";
 

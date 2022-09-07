@@ -3,14 +3,16 @@
 
 // MARK: - Settings
 
-"Audio Feedback on Click" = "Audio Feedback on Click";
-"Haptic Feedback on Click" = "Haptic Feedback on Click";
-"Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
-
 "Traditional Characters" = "Traditional Characters";
 "Traditional Characters, Hong Kong" = "Traditional Characters, Hong Kong";
 "Traditional Characters, Taiwan" = "Traditional Characters, Taiwan";
 "Simplified Characters" = "Simplified Characters";
+
+"Audio Feedback on Click" = "Audio Feedback on Click";
+"Haptic Feedback on Click" = "Haptic Feedback on Click";
+"Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
+
+"Emoji Suggestions" = "Emoji Suggestions";
 
 "Keyboard Layout" = "Keyboard Layout";
 "QWERTY" = "QWERTY";
@@ -33,8 +35,6 @@
 "Insert an ideographic comma" = "Insert an Ideographic Comma";
 "Insert an ideographic space" = "Insert a Fullwidth Space (U+3000)";
 "No Double Space Shortcut" = "None";
-
-"Emoji Suggestions" = "Emoji Suggestions";
 
 "Clear User Lexicon" = "Clear User Lexicon";
 
