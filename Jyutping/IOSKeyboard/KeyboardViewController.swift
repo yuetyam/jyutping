@@ -860,7 +860,8 @@ final class KeyboardViewController: UIInputViewController {
         override func canPaste(_ itemProviders: [NSItemProvider]) -> Bool {
                 guard hasFullAccess else { return false }
                 let isTrueCanPaste: Bool = itemProviders.reduce(true) { (partialResult, provider) -> Bool in
-                        return partialResult && provider.hasItemConformingToTypeIdentifier(UTType.text.identifier)
+                        let isThisCanPaste: Bool = provider.hasItemConformingToTypeIdentifier(UTType.text.identifier) || provider.hasItemConformingToTypeIdentifier(UTType.url.identifier)
+                        return partialResult && isThisCanPaste
                 }
                 return isTrueCanPaste
         }
@@ -871,6 +872,15 @@ final class KeyboardViewController: UIInputViewController {
                                 _ = provider.loadObject(ofClass: String.self) { [weak self] (reading, _) -> Void in
                                         guard let text: String = reading else { return }
                                         self?.textDocumentProxy.insertText(text)
+                                        self?.hapticFeedback?.impactOccurred()
+                                        AudioFeedback.perform(.input)
+                                }
+                        } else if provider.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+                                _ = provider.loadObject(ofClass: URL.self) { [weak self] (reading, _) -> Void in
+                                        guard let url: URL = reading else { return }
+                                        let addressText: String = url.absoluteString
+                                        guard !(addressText.isEmpty) else { return }
+                                        self?.textDocumentProxy.insertText(addressText)
                                         self?.hapticFeedback?.impactOccurred()
                                         AudioFeedback.perform(.input)
                                 }
