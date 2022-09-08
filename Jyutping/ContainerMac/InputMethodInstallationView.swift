@@ -2,6 +2,60 @@ import SwiftUI
 
 struct InputMethodInstallationView: View {
 
+        private let GitHubAddress: String = "https://github.com/yuetyam/jyutping/releases"
+
+        @State private var isGitHubAddressCopied: Bool = false
+
+        var body: some View {
+                ScrollView {
+                        LazyVStack(spacing: 16) {
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text(verbatim: "由於各種因素限制，本應用程式並冇包含輸入法本身。請前往 GitHub 下載輸入法程式，另行安裝。")
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text(verbatim: "Due to various limitations, this App does not contain an Input Method. Please download the Input Method program from GitHub and install it separately.")
+                                                Spacer()
+                                        }
+                                }
+                                .block()
+
+                                HStack(spacing: 16) {
+                                        Link("GitHub", destination: URL(string: GitHubAddress)!)
+                                        Text(verbatim: GitHubAddress).font(.body.monospaced())
+                                        Button {
+                                                NSPasteboard.general.clearContents()
+                                                NSPasteboard.general.setString(GitHubAddress, forType: .string)
+                                                isGitHubAddressCopied = true
+                                        } label: {
+                                                if isGitHubAddressCopied {
+                                                        HStack(spacing: 4) {
+                                                                Image(systemName: "text.badge.checkmark")
+                                                                Text("Copied")
+                                                        }
+                                                } else {
+                                                        HStack(spacing: 4) {
+                                                                Image(systemName: "doc.on.doc")
+                                                                Text("Copy")
+                                                        }
+                                                }
+                                        }
+                                        Spacer()
+                                }
+                                .block()
+                        }
+                        .textSelection(.enabled)
+                        .padding()
+                }
+                .navigationTitle("Install Input Method")
+        }
+}
+
+
+/*
+struct InputMethodInstallationView2: View {
+
         private let homebrewCommand: String = "brew install --cask jyutping"
         private let GitHubAddress: String = "https://github.com/yuetyam/jyutping/releases"
 
@@ -93,3 +147,5 @@ struct InputMethodInstallationView: View {
                 .navigationTitle("Install Input Method")
         }
 }
+*/
+

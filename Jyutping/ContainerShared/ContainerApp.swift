@@ -20,10 +20,10 @@ struct ContainerApp: App {
 
         var body: some Scene {
                 WindowGroup {
-                        #if os(iOS)
-                        IOSContentView()
-                        #else
+                        #if os(macOS)
                         MacContentView()
+                        #else
+                        IOSContentView()
                         #endif
                 }
         }
