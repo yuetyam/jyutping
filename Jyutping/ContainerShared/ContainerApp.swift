@@ -1,30 +1,35 @@
 import SwiftUI
 
-
 #if os(macOS)
 import AppKit
-class AppDelegate: NSObject, NSApplicationDelegate {
+
+final class AppDelegate: NSObject, NSApplicationDelegate {
         func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
                 return true
         }
 }
-#endif
-
 
 @main
 struct ContainerApp: App {
 
-        #if os(macOS)
         @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-        #endif
 
         var body: some Scene {
                 WindowGroup {
-                        #if os(macOS)
                         MacContentView()
-                        #else
-                        IOSContentView()
-                        #endif
                 }
         }
 }
+
+#else
+
+@main
+struct ContainerApp: App {
+        var body: some Scene {
+                WindowGroup {
+                        IOSContentView()
+                }
+        }
+}
+
+#endif
