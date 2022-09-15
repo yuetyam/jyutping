@@ -131,10 +131,6 @@ final class KeyboardViewController: UIInputViewController {
                 simplifier?.close()
                 simplifier = nil
         }
-        override func viewDidDisappear(_ animated: Bool) {
-                super.viewDidDisappear(animated)
-                keyboardStackView.removeFromSuperview()
-        }
 
         private lazy var didKeyboardEstablished: Bool = false
         private lazy var needsDifferentKeyboard: Bool = false
