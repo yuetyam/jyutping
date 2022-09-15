@@ -137,7 +137,7 @@
 		37B16174281A06B600C95317 /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E3281912ED00C95317 /* MenuCopyButton.swift */; };
 		37B16175281A06C900C95317 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16172281A057500C95317 /* ColorExtensions.swift */; };
 		37B16177281A07A000C95317 /* IOSContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16176281A07A000C95317 /* IOSContentView.swift */; };
-		37B16178281A09AD00C95317 /* IOSKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3797FC7F27BF90C000C6BB8D /* IOSKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		37B16178281A09AD00C95317 /* IOSKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3797FC7F27BF90C000C6BB8D /* IOSKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37B1617C281A0BBF00C95317 /* EnhancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160E2281912ED00C95317 /* EnhancedLabel.swift */; };
 		37B1617E281A0E0400C95317 /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1617D281A0E0400C95317 /* MacContentView.swift */; };
 		37B16184281BA81D00C95317 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37B16186281BA81D00C95317 /* InfoPlist.strings */; };
@@ -199,15 +199,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		37B1617B281A09AD00C95317 /* Embed App Extensions */ = {
+		37B1617B281A09AD00C95317 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				37B16178281A09AD00C95317 /* IOSKeyboard.appex in Embed App Extensions */,
+				37B16178281A09AD00C95317 /* IOSKeyboard.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -949,7 +949,7 @@
 				37B1608428190DBD00C95317 /* Sources */,
 				37B1608528190DBD00C95317 /* Frameworks */,
 				37B1608628190DBD00C95317 /* Resources */,
-				37B1617B281A09AD00C95317 /* Embed App Extensions */,
+				37B1617B281A09AD00C95317 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -1030,7 +1030,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					3764CEAB27BE103100DCFB51 = {
 						CreatedOnToolsVersion = 13.3;
@@ -1548,6 +1548,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1609,6 +1610,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1639,6 +1641,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 78;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1671,6 +1674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 78;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1700,6 +1704,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
@@ -1718,6 +1723,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 12.2;
 				MARKETING_VERSION = 1.0;
@@ -1735,6 +1741,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.JyutpingUITests;
@@ -1751,6 +1758,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.JyutpingUITests;
@@ -1891,9 +1899,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ContainerMac/macOS.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 76;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1922,9 +1932,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ContainerMac/macOS.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 76;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1991,6 +2003,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.cantonese.Tests-macOS";
@@ -2007,6 +2020,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.cantonese.Tests-macOS";
