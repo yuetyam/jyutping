@@ -484,8 +484,9 @@ class JyutpingInputController: IMKInputController {
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
-                let shouldIgnore: Bool = event.modifierFlags.contains(.command) || event.modifierFlags.contains(.option)
-                guard !shouldIgnore else { return false }
+                let modifiers = event.modifierFlags
+                let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
+                guard !shouldIgnoreCurrentEvent else { return false }
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
                 let shouldResetClient: Bool = {
                         guard let previousPosition = currentClient?.position else { return true }
@@ -498,9 +499,12 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                let hasControlModifier: Bool = event.modifierFlags.contains(.control)
-                let isInstantSettingsShortcut: Bool = hasControlModifier && event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
-                if isInstantSettingsShortcut {
+                let isShifting: Bool = modifiers == .shift
+                let isBackquoteEvent: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
+                switch modifiers {
+                case [.control, .shift]:
+                        guard isBackquoteEvent else { return false }
+                        // TODO: trigger preferences window
                         if inputMethodMode.isSettings {
                                 handleSettings(-1)
                                 return true
@@ -509,9 +513,20 @@ class JyutpingInputController: IMKInputController {
                                 inputMethodMode = .settings
                                 return true
                         }
+                case .control:
+                        guard isBackquoteEvent else { return false }
+                        if inputMethodMode.isSettings {
+                                handleSettings(-1)
+                                return true
+                        } else {
+                                passBuffer()
+                                inputMethodMode = .settings
+                                return true
+                        }
+                default:
+                        let shouldContinue: Bool = isShifting || modifiers.isEmpty
+                        guard shouldContinue else { return false }
                 }
-                guard !hasControlModifier else { return false }
-                let isShifting: Bool = event.modifierFlags == .shift
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
