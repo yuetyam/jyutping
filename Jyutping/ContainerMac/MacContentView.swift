@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct MacContentView: View {
+
+        @State private var isMacSearchViewActive: Bool = true
+
         var body: some View {
                 NavigationView {
                         List {
@@ -18,7 +21,7 @@ struct MacContentView: View {
                                         Text("Keyboard").textCase(.none)
                                 }
                                 Section {
-                                        NavigationLink(destination: MacSearchView()) {
+                                        NavigationLink(destination: MacSearchView(), isActive: $isMacSearchViewActive) {
                                                 Label("Search", systemImage: "magnifyingglass")
                                         }
                                         NavigationLink(destination: InitialsTable()) {
