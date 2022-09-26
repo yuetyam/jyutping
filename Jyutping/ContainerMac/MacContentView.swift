@@ -44,6 +44,15 @@ struct MacContentView: View {
                                         Text("About").textCase(.none)
                                 }
                         }
+                        .toolbar {
+                                ToolbarItem(placement: .navigation) {
+                                        Button {
+                                                NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+                                        } label: {
+                                                Image(systemName: "sidebar.leading")
+                                        }
+                                }
+                        }
                         .listStyle(.sidebar)
                         .navigationTitle("Jyutping")
                 }
