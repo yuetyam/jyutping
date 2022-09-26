@@ -3,7 +3,7 @@ enum InputMethodMode {
         case transparent
         case english
         case cantonese
-        case settings
+        case instantSettings
 
         var isCantoneseMode: Bool {
                 return self == .cantonese
@@ -16,11 +16,11 @@ enum InputMethodMode {
                         return true
                 case .cantonese:
                         return false
-                case .settings:
+                case .instantSettings:
                         return false
                 }
         }
-        var isSettings: Bool {
-                return self == .settings
+        var isInstantSettings: Bool {
+                return self == .instantSettings
         }
 }

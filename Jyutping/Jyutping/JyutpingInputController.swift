@@ -23,7 +23,7 @@ class JyutpingInputController: IMKInputController {
                         window?.orderFrontRegardless()
                 }
                 switch inputMethodMode {
-                case .settings:
+                case .instantSettings:
                         let settingsUI = NSHostingController(rootView: SettingsView().environmentObject(settingsObject))
                         window?.contentView?.addSubview(settingsUI.view)
                         settingsUI.view.translatesAutoresizingMaskIntoConstraints = false
@@ -505,22 +505,22 @@ class JyutpingInputController: IMKInputController {
                 case [.control, .shift]:
                         guard isBackquoteEvent else { return false }
                         // TODO: trigger preferences window
-                        if inputMethodMode.isSettings {
+                        if inputMethodMode.isInstantSettings {
                                 handleSettings(-1)
                                 return true
                         } else {
                                 passBuffer()
-                                inputMethodMode = .settings
+                                inputMethodMode = .instantSettings
                                 return true
                         }
                 case .control:
                         guard isBackquoteEvent else { return false }
-                        if inputMethodMode.isSettings {
+                        if inputMethodMode.isInstantSettings {
                                 handleSettings(-1)
                                 return true
                         } else {
                                 passBuffer()
-                                inputMethodMode = .settings
+                                inputMethodMode = .instantSettings
                                 return true
                         }
                 default:
@@ -531,7 +531,7 @@ class JyutpingInputController: IMKInputController {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
-                                if inputMethodMode.isSettings {
+                                if inputMethodMode.isInstantSettings {
                                         settingsObject.decreaseHighlightedIndex()
                                         return true
                                 } else {
@@ -540,7 +540,7 @@ class JyutpingInputController: IMKInputController {
                                         return true
                                 }
                         case .down:
-                                if inputMethodMode.isSettings {
+                                if inputMethodMode.isInstantSettings {
                                         settingsObject.increaseHighlightedIndex()
                                         return true
                                 } else {
@@ -554,7 +554,7 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 case .number(let number):
-                        guard !(inputMethodMode.isSettings) else {
+                        guard !(inputMethodMode.isInstantSettings) else {
                                 let index: Int = number == 0 ? 9 : (number - 1)
                                 handleSettings(index)
                                 return true
@@ -580,7 +580,7 @@ class JyutpingInputController: IMKInputController {
                                 }
                         }
                 case .punctuation(let punctuationKey):
-                        guard !inputMethodMode.isSettings else { return false }
+                        guard !inputMethodMode.isInstantSettings else { return false }
                         if isBufferState {
                                 selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                         }
@@ -602,7 +602,7 @@ class JyutpingInputController: IMKInputController {
                         adjustWindow(origin: client.position)
                         return true
                 case .alphabet(let letter):
-                        guard !inputMethodMode.isSettings else { return false }
+                        guard !inputMethodMode.isInstantSettings else { return false }
                         let hasCharacters: Bool = event.characters.hasContent
                         guard hasCharacters else { return false }
                         let text: String = isShifting ? letter.uppercased() : letter
@@ -614,7 +614,7 @@ class JyutpingInputController: IMKInputController {
                         bufferText += "'"
                         return true
                 case .return:
-                        if inputMethodMode.isSettings {
+                        if inputMethodMode.isInstantSettings {
                                 handleSettings()
                                 return true
                         } else {
@@ -623,7 +623,7 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                 case .backspace:
-                        if inputMethodMode.isSettings {
+                        if inputMethodMode.isInstantSettings {
                                 handleSettings(-1)
                                 return true
                         } else {
@@ -633,7 +633,7 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                 case .escapeClear:
-                        if inputMethodMode.isSettings {
+                        if inputMethodMode.isInstantSettings {
                                 handleSettings(-1)
                                 return true
                         } else {
@@ -642,7 +642,7 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                 case .space:
-                        if inputMethodMode.isSettings {
+                        if inputMethodMode.isInstantSettings {
                                 handleSettings()
                                 return true
                         } else {
