@@ -7,6 +7,8 @@ struct MacSearchView: View {
         @State private var cantonese: String = .empty
         @State private var pronunciations: [String] = []
 
+        @FocusState private var isTextFieldFocused: Bool
+
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
@@ -30,10 +32,14 @@ struct MacSearchView: View {
                                                         pronunciations = search.romanizations
                                                 }
                                         }
+                                        .focused($isTextFieldFocused)
                                         .font(.masterHeadline)
                                         .padding(8)
                                         .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                         .padding(.vertical)
+                                        .onAppear {
+                                                isTextFieldFocused = true
+                                        }
                                 if !cantonese.isEmpty {
                                         HStack {
                                                 Text(verbatim: cantonese).font(.masterHeadline)
