@@ -45,6 +45,8 @@
 		3777EF0B27FBD49200D1EED0 /* Cantonese.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0A27FBD49200D1EED0 /* Cantonese.swift */; };
 		3777EF0D27FBD55B00D1EED0 /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0C27FBD55B00D1EED0 /* Numeric.swift */; };
 		3777EF0F27FBD84200D1EED0 /* Symbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0E27FBD84200D1EED0 /* Symbolic.swift */; };
+		3797B03A28E27B7000AE2196 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797B03928E27B7000AE2196 /* PreferencesView.swift */; };
+		3797B03C28E27C4F00AE2196 /* PreferencesCandidatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797B03B28E27C4E00AE2196 /* PreferencesCandidatesView.swift */; };
 		3797FCBA27BF915E00C6BB8D /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC8B27BF915D00C6BB8D /* Operation.swift */; };
 		3797FCBB27BF915E00C6BB8D /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC8D27BF915D00C6BB8D /* ToolBar.swift */; };
 		3797FCBC27BF915E00C6BB8D /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC8E27BF915D00C6BB8D /* CandidateBoard.swift */; };
@@ -148,6 +150,7 @@
 		37CB2ED32818E9080092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED22818E9080092E0DD /* CommonExtensions */; };
 		37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED62818E9210092E0DD /* CharacterSets */; };
 		37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED82818E9260092E0DD /* CommonExtensions */; };
+		37E8BF0228E288A3007FBCC5 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8BF0128E288A3007FBCC5 /* AppSettings.swift */; };
 		37EDC490283175B400E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC48F283175B400E45916 /* CoreIME */; };
 		37EDC492283175C100E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC491283175C100E45916 /* CoreIME */; };
 		37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE888281CD5F300461235 /* MacIntroductionsView.swift */; };
@@ -269,6 +272,8 @@
 		3777EF0A27FBD49200D1EED0 /* Cantonese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cantonese.swift; sourceTree = "<group>"; };
 		3777EF0C27FBD55B00D1EED0 /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		3777EF0E27FBD84200D1EED0 /* Symbolic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbolic.swift; sourceTree = "<group>"; };
+		3797B03928E27B7000AE2196 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		3797B03B28E27C4E00AE2196 /* PreferencesCandidatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesCandidatesView.swift; sourceTree = "<group>"; };
 		3797FC7F27BF90C000C6BB8D /* IOSKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IOSKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3797FC8327BF90C000C6BB8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3797FC8B27BF915D00C6BB8D /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -405,6 +410,7 @@
 		37CB2ECC2818A8470092E0DD /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37CB2ECD2818E8DD0092E0DD /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
 		37CB2ECE2818E8E70092E0DD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
+		37E8BF0128E288A3007FBCC5 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		37EDC48E2831759700E45916 /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
 		37EEE87B281BAACF00461235 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87C281BAAD000461235 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -553,6 +559,7 @@
 				37184B04284E351B0072A53E /* Representative.swift */,
 				3760444D284D411900AC42E7 /* PunctuationKey.swift */,
 				37ABA5AC27C19882000AC306 /* Logogram.swift */,
+				37E8BF0328E2BE69007FBCC5 /* Preferences */,
 				3764CEFE27BE138600DCFB51 /* Extensions */,
 				3722934927BED08B0077F15B /* Localizations */,
 				3764CEB327BE103300DCFB51 /* Assets.xcassets */,
@@ -857,6 +864,16 @@
 				37B16191281BA84400C95317 /* Localizable.strings */,
 			);
 			path = Localizations;
+			sourceTree = "<group>";
+		};
+		37E8BF0328E2BE69007FBCC5 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				3797B03928E27B7000AE2196 /* PreferencesView.swift */,
+				3797B03B28E27C4E00AE2196 /* PreferencesCandidatesView.swift */,
+				37E8BF0128E288A3007FBCC5 /* AppSettings.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1182,6 +1199,7 @@
 				3764CEF427BE127000DCFB51 /* CandidatesView.swift in Sources */,
 				3760444E284D411900AC42E7 /* PunctuationKey.swift in Sources */,
 				3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */,
+				3797B03A28E27B7000AE2196 /* PreferencesView.swift in Sources */,
 				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
 				3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */,
@@ -1189,10 +1207,12 @@
 				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
+				3797B03C28E27C4F00AE2196 /* PreferencesCandidatesView.swift in Sources */,
 				370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */,
 				3764CEF127BE127000DCFB51 /* KeyCode.swift in Sources */,
 				3764CEF527BE127000DCFB51 /* DisplayCandidate.swift in Sources */,
 				3764CEF227BE127000DCFB51 /* CharacterExtensions.swift in Sources */,
+				37E8BF0228E288A3007FBCC5 /* AppSettings.swift in Sources */,
 				3764CEF627BE127000DCFB51 /* SettingsView.swift in Sources */,
 				3708EFC727CA4C0A00AD2735 /* UserLexicon.swift in Sources */,
 				3764CEF727BE127000DCFB51 /* Direction.swift in Sources */,

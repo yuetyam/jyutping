@@ -83,10 +83,3 @@ struct InstantSettings {
         }
 }
 
-
-struct AppSettings {
-
-        // TODO: Should be a preference
-        /// 每䈎候選詞數目
-        static let displayCandidatesSize: Int = 10
-}

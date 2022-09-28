@@ -7,6 +7,42 @@ import CoreIME
 
 class JyutpingInputController: IMKInputController {
 
+        private lazy var preferencesWindow: NSWindow? = nil
+        private func displayPreferencesPane() {
+                let frame: CGRect = {
+                        let x: CGFloat = screenFrame.width / 4.0
+                        let y: CGFloat = screenFrame.height / 4.0
+                        let width: CGFloat = screenFrame.width / 2.0
+                        let height: CGFloat = screenFrame.height / 2.0
+                        return CGRect(x: x, y: y, width: width, height: height)
+                }()
+                preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
+                preferencesWindow?.title = NSLocalizedString("Jyutping Input Method Preferences", comment: .empty)
+                preferencesWindow?.titlebarAppearsTransparent = true
+                let pane = NSHostingController(rootView: PreferencesView())
+                preferencesWindow?.contentView?.addSubview(pane.view)
+                pane.view.translatesAutoresizingMaskIntoConstraints = false
+                if let topAnchor = preferencesWindow?.contentView?.topAnchor,
+                   let bottomAnchor = preferencesWindow?.contentView?.bottomAnchor,
+                   let leadingAnchor = preferencesWindow?.contentView?.leadingAnchor,
+                   let trailingAnchor = preferencesWindow?.contentView?.trailingAnchor {
+                        NSLayoutConstraint.activate([
+                                pane.view.topAnchor.constraint(equalTo: topAnchor),
+                                pane.view.bottomAnchor.constraint(equalTo: bottomAnchor),
+                                pane.view.leadingAnchor.constraint(equalTo: leadingAnchor),
+                                pane.view.trailingAnchor.constraint(equalTo: trailingAnchor)
+                        ])
+                }
+                preferencesWindow?.contentViewController?.addChild(pane)
+                preferencesWindow?.makeKey()
+                preferencesWindow?.orderFrontRegardless()
+                preferencesWindow?.setFrame(frame, display: true)
+        }
+        private func closePreferencesWindow() {
+                preferencesWindow?.setFrame(.zero, display: true)
+                preferencesWindow?.close()
+        }
+
         private lazy var window: NSWindow? = nil
         private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
         private let offset: CGFloat = 10
@@ -160,7 +196,7 @@ class JyutpingInputController: IMKInputController {
                         displayObject.reset()
                         return
                 }
-                let pageSize: Int = AppSettings.displayCandidatesSize
+                let pageSize: Int = AppSettings.displayCandidatesPageSize
                 let newFirstIndex: Int? = {
                         switch mode {
                         case .establish:
@@ -504,15 +540,8 @@ class JyutpingInputController: IMKInputController {
                 switch modifiers {
                 case [.control, .shift]:
                         guard isBackquoteEvent else { return false }
-                        // TODO: trigger preferences window
-                        if inputMethodMode.isInstantSettings {
-                                handleSettings(-1)
-                                return true
-                        } else {
-                                passBuffer()
-                                inputMethodMode = .instantSettings
-                                return true
-                        }
+                        displayPreferencesPane()
+                        return true
                 case .control:
                         guard isBackquoteEvent else { return false }
                         if inputMethodMode.isInstantSettings {
