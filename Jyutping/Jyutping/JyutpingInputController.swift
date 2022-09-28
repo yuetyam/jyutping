@@ -196,7 +196,7 @@ class JyutpingInputController: IMKInputController {
                         displayObject.reset()
                         return
                 }
-                let pageSize: Int = AppSettings.displayCandidatesPageSize
+                let pageSize: Int = AppSettings.displayCandidatePageSize
                 let newFirstIndex: Int? = {
                         switch mode {
                         case .establish:

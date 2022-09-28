@@ -151,6 +151,7 @@
 		37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED62818E9210092E0DD /* CharacterSets */; };
 		37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED82818E9260092E0DD /* CommonExtensions */; };
 		37E8BF0228E288A3007FBCC5 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8BF0128E288A3007FBCC5 /* AppSettings.swift */; };
+		37E8BF0528E3DE6F007FBCC5 /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */; };
 		37EDC490283175B400E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC48F283175B400E45916 /* CoreIME */; };
 		37EDC492283175C100E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC491283175C100E45916 /* CoreIME */; };
 		37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE888281CD5F300461235 /* MacIntroductionsView.swift */; };
@@ -411,6 +412,7 @@
 		37CB2ECD2818E8DD0092E0DD /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
 		37CB2ECE2818E8E70092E0DD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
 		37E8BF0128E288A3007FBCC5 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
 		37EDC48E2831759700E45916 /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
 		37EEE87B281BAACF00461235 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87C281BAAD000461235 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -871,6 +873,7 @@
 			children = (
 				3797B03928E27B7000AE2196 /* PreferencesView.swift */,
 				3797B03B28E27C4E00AE2196 /* PreferencesCandidatesView.swift */,
+				37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */,
 				37E8BF0128E288A3007FBCC5 /* AppSettings.swift */,
 			);
 			path = Preferences;
@@ -1194,6 +1197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37E8BF0528E3DE6F007FBCC5 /* HotkeysView.swift in Sources */,
 				375D7A3427C151470018EB6F /* DisplayObject.swift in Sources */,
 				3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */,
 				3764CEF427BE127000DCFB51 /* CandidatesView.swift in Sources */,

@@ -4,7 +4,7 @@ extension Font {
 
         static let candidate: Font = {
                 let primaryFontName: String = {
-                        let preferredList: [String] = ["ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+                        let preferredList: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                         for name in preferredList {
                                 if let _ = NSFont(name: name, size: 17) {
                                         return name
@@ -27,9 +27,9 @@ extension Font {
                         return found
                 }()
                 if fallbackFontNames.isEmpty {
-                        return Font.custom(primaryFontName, size: 17, relativeTo: .title2)
+                        return Font.custom(primaryFontName, size: AppSettings.candidateFontSize)
                 } else {
-                        return pairFonts(primary: primaryFontName, fallbacks: fallbackFontNames)
+                        return pairFonts(primary: primaryFontName, fallbacks: fallbackFontNames, fontSize: AppSettings.candidateFontSize)
                 }
         }()
 
@@ -37,9 +37,8 @@ extension Font {
         static let comment: Font = Font.title3.monospaced()
         static let secondaryComment: Font = Font.body.monospaced()
 
-        private static func pairFonts(primary name: String, fallbacks: [String]) -> Font {
-                let fontSize: CGFloat = 17
-                let originalFont: NSFont = NSFont(name: name, size: fontSize) ?? .systemFont(ofSize: fontSize)
+        private static func pairFonts(primary: String, fallbacks: [String], fontSize: CGFloat) -> Font {
+                let originalFont: NSFont = NSFont(name: primary, size: fontSize) ?? .systemFont(ofSize: fontSize)
                 let originalDescriptor: NSFontDescriptor = originalFont.fontDescriptor
                 let fallbackDescriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
                         return originalDescriptor.addingAttributes([.name: fontName])
