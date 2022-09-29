@@ -37,16 +37,6 @@ struct Speech {
         static let isLanguagesEnabled: Bool = Locale.preferredLanguages.contains("zh-Hant-HK")
         static let isEnhancedVoiceAvailable: Bool = {
                 guard let voiceQuality = voice?.quality else { return false }
-                switch voiceQuality {
-                case .default:
-                        return false
-                case .enhanced:
-                        return true
-                default:
-                        return true
-                }
-                // TODO: - Xcode 14.1
-                /*
                 if #available(iOS 16.0, macOS 13.0, *) {
                         switch voiceQuality {
                         case .default:
@@ -68,6 +58,5 @@ struct Speech {
                                 return true
                         }
                 }
-                */
         }()
 }

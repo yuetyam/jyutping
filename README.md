@@ -33,7 +33,7 @@ Jyutping
 
 
 ## Build requirements
-- Xcode 14.0+
+- Xcode 14.1+
 
 ## Credits
 - [Rime Cantonese](https://github.com/rime/rime-cantonese)
