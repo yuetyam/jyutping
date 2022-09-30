@@ -33,9 +33,11 @@ extension Font {
                 }
         }()
 
-        static let serial: Font = Font.title3.monospacedDigit()
-        static let comment: Font = Font.title3.monospaced()
-        static let secondaryComment: Font = Font.body.monospaced()
+        // TODO: Change name to label
+        static let serial: Font = Font.system(size: AppSettings.labelFontSize).monospacedDigit()
+
+        static let comment: Font = Font.system(size: AppSettings.commentFontSize, design: .monospaced)
+        static let secondaryComment: Font = Font.system(size: AppSettings.commentFontSize, design: .monospaced)
 
         private static func pairFonts(primary: String, fallbacks: [String], fontSize: CGFloat) -> Font {
                 let originalFont: NSFont = NSFont(name: primary, size: fontSize) ?? .systemFont(ofSize: fontSize)

@@ -19,6 +19,12 @@ class JyutpingInputController: IMKInputController {
                 preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
                 preferencesWindow?.title = NSLocalizedString("Jyutping Input Method Preferences", comment: .empty)
                 preferencesWindow?.titlebarAppearsTransparent = true
+                let visualEffect = NSVisualEffectView()
+                visualEffect.blendingMode = .behindWindow
+                visualEffect.state = .active
+                visualEffect.material = .contentBackground
+                preferencesWindow?.contentView = visualEffect
+
                 let pane = NSHostingController(rootView: PreferencesView())
                 preferencesWindow?.contentView?.addSubview(pane.view)
                 pane.view.translatesAutoresizingMaskIntoConstraints = false

@@ -15,6 +15,7 @@
 		37184B05284E351B0072A53E /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37184B04284E351B0072A53E /* Representative.swift */; };
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
+		3722AC3728E671BB00CB0174 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722AC3628E671BB00CB0174 /* AboutView.swift */; };
 		373F6B53283E115D00874144 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 373F6B52283E115D00874144 /* Configuration.storekit */; };
 		37418EE628366381000CA712 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37418EE528366381000CA712 /* ResourcesView.swift */; };
 		3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749982D28543B6E0023AC94 /* InstantSettings.swift */; };
@@ -45,8 +46,9 @@
 		3777EF0B27FBD49200D1EED0 /* Cantonese.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0A27FBD49200D1EED0 /* Cantonese.swift */; };
 		3777EF0D27FBD55B00D1EED0 /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0C27FBD55B00D1EED0 /* Numeric.swift */; };
 		3777EF0F27FBD84200D1EED0 /* Symbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0E27FBD84200D1EED0 /* Symbolic.swift */; };
+		3787A15628E695EA00A13255 /* CandidateFontPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3787A15528E695EA00A13255 /* CandidateFontPreferencesView.swift */; };
 		3797B03A28E27B7000AE2196 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797B03928E27B7000AE2196 /* PreferencesView.swift */; };
-		3797B03C28E27C4F00AE2196 /* PreferencesCandidatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797B03B28E27C4E00AE2196 /* PreferencesCandidatesView.swift */; };
+		3797B03C28E27C4F00AE2196 /* CandidateLayoutPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797B03B28E27C4E00AE2196 /* CandidateLayoutPreferencesView.swift */; };
 		3797FCBA27BF915E00C6BB8D /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC8B27BF915D00C6BB8D /* Operation.swift */; };
 		3797FCBB27BF915E00C6BB8D /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC8D27BF915D00C6BB8D /* ToolBar.swift */; };
 		3797FCBC27BF915E00C6BB8D /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797FC8E27BF915D00C6BB8D /* CandidateBoard.swift */; };
@@ -238,6 +240,7 @@
 		3722934627BED0760077F15B /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934727BED0770077F15B /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934827BED0780077F15B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		3722AC3628E671BB00CB0174 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		373F6B52283E115D00874144 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		37418EE528366381000CA712 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		3749982D28543B6E0023AC94 /* InstantSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSettings.swift; sourceTree = "<group>"; };
@@ -273,8 +276,9 @@
 		3777EF0A27FBD49200D1EED0 /* Cantonese.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cantonese.swift; sourceTree = "<group>"; };
 		3777EF0C27FBD55B00D1EED0 /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		3777EF0E27FBD84200D1EED0 /* Symbolic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbolic.swift; sourceTree = "<group>"; };
+		3787A15528E695EA00A13255 /* CandidateFontPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateFontPreferencesView.swift; sourceTree = "<group>"; };
 		3797B03928E27B7000AE2196 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
-		3797B03B28E27C4E00AE2196 /* PreferencesCandidatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesCandidatesView.swift; sourceTree = "<group>"; };
+		3797B03B28E27C4E00AE2196 /* CandidateLayoutPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLayoutPreferencesView.swift; sourceTree = "<group>"; };
 		3797FC7F27BF90C000C6BB8D /* IOSKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IOSKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3797FC8327BF90C000C6BB8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3797FC8B27BF915D00C6BB8D /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
@@ -872,8 +876,10 @@
 			isa = PBXGroup;
 			children = (
 				3797B03928E27B7000AE2196 /* PreferencesView.swift */,
-				3797B03B28E27C4E00AE2196 /* PreferencesCandidatesView.swift */,
+				3797B03B28E27C4E00AE2196 /* CandidateLayoutPreferencesView.swift */,
+				3787A15528E695EA00A13255 /* CandidateFontPreferencesView.swift */,
 				37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */,
+				3722AC3628E671BB00CB0174 /* AboutView.swift */,
 				37E8BF0128E288A3007FBCC5 /* AppSettings.swift */,
 			);
 			path = Preferences;
@@ -1206,13 +1212,15 @@
 				3797B03A28E27B7000AE2196 /* PreferencesView.swift in Sources */,
 				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
+				3787A15628E695EA00A13255 /* CandidateFontPreferencesView.swift in Sources */,
 				3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */,
 				37184B05284E351B0072A53E /* Representative.swift in Sources */,
 				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
-				3797B03C28E27C4F00AE2196 /* PreferencesCandidatesView.swift in Sources */,
+				3797B03C28E27C4F00AE2196 /* CandidateLayoutPreferencesView.swift in Sources */,
 				370ECA7B27C27578002D20FF /* IMKTextInputExtensions.swift in Sources */,
+				3722AC3728E671BB00CB0174 /* AboutView.swift in Sources */,
 				3764CEF127BE127000DCFB51 /* KeyCode.swift in Sources */,
 				3764CEF527BE127000DCFB51 /* DisplayCandidate.swift in Sources */,
 				3764CEF227BE127000DCFB51 /* CharacterExtensions.swift in Sources */,

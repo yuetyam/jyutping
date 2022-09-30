@@ -20,18 +20,45 @@ struct AppSettings {
 
         private(set) static var candidateFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: "CandidateFontSize")
-                let isSavedValueValid: Bool = candidateFontSizeValidity(of: savedValue)
+                let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 guard isSavedValueValid else { return 17 }
                 return CGFloat(savedValue)
         }()
         static func updateCandidateFontSize(to newFontSize: Int) {
-                let isNewFontSizeValid: Bool = candidateFontSizeValidity(of: newFontSize)
+                let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 candidateFontSize = CGFloat(newFontSize)
                 UserDefaults.standard.set(newFontSize, forKey: "CandidateFontSize")
         }
-        private static func candidateFontSizeValidity(of value: Int) -> Bool {
-                return value > 13 && value < 25
+
+        private(set) static var commentFontSize: CGFloat = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: "CommentFontSize")
+                let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
+                guard isSavedValueValid else { return 15 }
+                return CGFloat(savedValue)
+        }()
+        static func updateCommentFontSize(to newFontSize: Int) {
+                let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
+                guard isNewFontSizeValid else { return }
+                commentFontSize = CGFloat(newFontSize)
+                UserDefaults.standard.set(newFontSize, forKey: "CommentFontSize")
+        }
+
+        private(set) static var labelFontSize: CGFloat = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: "LabelFontSize")
+                let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
+                guard isSavedValueValid else { return 15 }
+                return CGFloat(savedValue)
+        }()
+        static func updateLabelFontSize(to newFontSize: Int) {
+                let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
+                guard isNewFontSizeValid else { return }
+                labelFontSize = CGFloat(newFontSize)
+                UserDefaults.standard.set(newFontSize, forKey: "LabelFontSize")
+        }
+
+        private static func fontSizeValidity(of value: Int) -> Bool {
+                return value > 11 && value < 23
         }
 
 

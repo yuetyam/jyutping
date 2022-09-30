@@ -6,7 +6,7 @@ struct HotkeysView: View {
 
         var body: some View {
                 ScrollView {
-                        LazyVStack {
+                        LazyVStack(spacing: 16) {
                                 HStack {
                                         Picker("Press Shift Key Once To", selection: $pressShiftOnce) {
                                                 Text(verbatim: "Do Nothing").tag(1)
@@ -19,9 +19,11 @@ struct HotkeysView: View {
                                         }
                                         Spacer()
                                 }
+                                .block()
                         }
                         .padding()
                 }
+                .background(.ultraThinMaterial)
                 .navigationTitle("Hotkeys")
         }
 }
