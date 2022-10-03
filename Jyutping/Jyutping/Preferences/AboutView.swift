@@ -17,9 +17,9 @@ struct AboutView: View {
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "globe.asia.australia", tittle: "Website", link: "https://ososo.io")
+                                        LinkLabel(icon: "globe.asia.australia", tittle: "Website", link: "https://jyutping.app")
                                         LinkLabel(icon: "chevron.left.forwardslash.chevron.right", tittle: "Source Code", link: "https://github.com/yuetyam/jyutping")
-                                        LinkLabel(icon: "lock.circle", tittle: "Privacy Policy", link: "https://ososo.io/jyutping/privacy")
+                                        LinkLabel(icon: "lock.circle", tittle: "Privacy Policy", link: "https://jyutping.app/privacy")
                                 }
                                 .block()
 

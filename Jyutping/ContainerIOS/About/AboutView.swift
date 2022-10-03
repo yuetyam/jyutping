@@ -37,13 +37,13 @@ struct AboutView: View {
                                                 }
                                 }
                                 Section {
-                                        SafariLink("https://ososo.io") {
+                                        SafariLink("https://jyutping.app") {
                                                 EnhancedLabel("Website", icon: websiteIconName, symbol: .safari)
                                         }
                                         SafariLink("https://github.com/yuetyam/jyutping") {
                                                 EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: .safari)
                                         }
-                                        SafariLink("https://ososo.io/jyutping/privacy") {
+                                        SafariLink("https://jyutping.app/privacy") {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
                                 }
@@ -114,9 +114,15 @@ struct AboutView: View {
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping/issues")
                                         }
+                                        Link(destination: URL(string: "imessage://support@jyutping.app")!) {
+                                                EnhancedLabel("iMessage Feedback", icon: "message", symbol: Image(systemName: "square.and.pencil"))
+                                        }
+                                        .contextMenu {
+                                                MenuCopyButton("support@jyutping.app", title: "Copy iMessage Address")
+                                        }
                                         EmailFeedbackButton()
                                                 .contextMenu {
-                                                        MenuCopyButton("bing@ososo.io", title: "Copy Email Address")
+                                                        MenuCopyButton("support@jyutping.app", title: "Copy Email Address")
                                                 }
                                 }
                                 Section {
@@ -206,7 +212,7 @@ private struct EmailFeedbackButton: View {
                 Device: \(device)
                 System: \(system)
                 """
-                let address: String = "bing@ososo.io"
+                let address: String = "support@jyutping.app"
                 let subject: String = "Jyutping Feedback"
                 let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
                 return URL(string: scheme)!

@@ -124,6 +124,8 @@
 "Copy Username" = "拷貝戶名";
 "Copy QQ Group ID" = "拷貝 QQ 羣號";
 
+"iMessage Feedback" = "iMessage 反饋";
+"Copy iMessage Address" = "拷貝 iMessage 地址";
 "Email Feedback" = "郵件反饋";
 "Unable to compose mail" = "無法編寫郵件";
 "Mail Unavailable" = "郵箱不可用";
