@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CandidateLayoutPreferencesView: View {
 
-        @State private var pageSize: Int = AppSettings.displayCandidatePageSize
+        @AppStorage(SettingsKeys.CandidatePageSize) private var pageSize: Int = AppSettings.displayCandidatePageSize
 
         var body: some View {
                 ScrollView {
@@ -15,9 +15,7 @@ struct CandidateLayoutPreferencesView: View {
                                         }
                                         .scaledToFit()
                                         .onChange(of: pageSize) { newPageSize in
-                                                DispatchQueue.preferences.async {
-                                                        AppSettings.updateDisplayCandidatePageSize(to: newPageSize)
-                                                }
+                                                AppSettings.updateDisplayCandidatePageSize(to: newPageSize)
                                         }
                                         Spacer()
                                 }

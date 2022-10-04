@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HotkeysView: View {
 
-        @State private var pressShiftOnce: Int = AppSettings.pressShiftOnce
+        @AppStorage(SettingsKeys.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce
 
         var body: some View {
                 ScrollView {

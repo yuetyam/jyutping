@@ -1,9 +1,11 @@
 import SwiftUI
 import AppKit
 
+/*
 extension DispatchQueue {
         static let preferences: DispatchQueue = DispatchQueue(label: "org.jyutping.inputmethod.Jyutping.Preferences")
 }
+*/
 
 final class PreferencesAppDelegate: NSObject, NSApplicationDelegate {
         func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

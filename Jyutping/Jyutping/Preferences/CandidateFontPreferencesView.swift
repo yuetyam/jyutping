@@ -2,13 +2,13 @@ import SwiftUI
 
 struct CandidateFontPreferencesView: View {
 
-        @State private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
+        @AppStorage(SettingsKeys.CandidateFontSize) private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
         @State private var candidateFontMode: Int = 1
 
-        @State private var commentFontSize: Int = Int(AppSettings.commentFontSize)
+        @AppStorage(SettingsKeys.CommentFontSize) private var commentFontSize: Int = Int(AppSettings.commentFontSize)
         @State private var commentFontMode: Int = 1
 
-        @State private var labelFontSize: Int = Int(AppSettings.labelFontSize)
+        @AppStorage(SettingsKeys.LabelFontSize) private var labelFontSize: Int = Int(AppSettings.labelFontSize)
         @State private var labelFontMode: Int = 1
 
         var body: some View {
@@ -23,9 +23,7 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: candidateFontSize) { newFontSize in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCandidateFontSize(to: newFontSize)
-                                                        }
+                                                        AppSettings.updateCandidateFontSize(to: newFontSize)
                                                 }
                                                 Spacer()
                                         }
@@ -50,9 +48,7 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: commentFontSize) { newFontSize in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCommentFontSize(to: newFontSize)
-                                                        }
+                                                        AppSettings.updateCommentFontSize(to: newFontSize)
                                                 }
                                                 Spacer()
                                         }
@@ -77,9 +73,7 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: labelFontSize) { newFontSize in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateLabelFontSize(to: newFontSize)
-                                                        }
+                                                        AppSettings.updateLabelFontSize(to: newFontSize)
                                                 }
                                                 Spacer()
                                         }
