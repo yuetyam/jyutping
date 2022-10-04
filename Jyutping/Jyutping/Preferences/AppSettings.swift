@@ -1,16 +1,42 @@
 import Foundation
 
-struct SettingsKeys: Hashable {
+struct SettingsKeys {
         static let CandidatePageSize: String = "CandidatePageSize"
 
         static let CandidateFontSize: String = "CandidateFontSize"
         static let CommentFontSize: String = "CommentFontSize"
         static let LabelFontSize: String = "LabelFontSize"
 
+        static let CandidateFontMode: String = "CandidateFontMode"
+        static let CommentFontMode: String = "CommentFontMode"
+        static let LabelFontMode: String = "LabelFontMode"
+
         static let PressShiftOnce: String = "PressShiftOnce"
 }
 
+enum FontMode: Int {
+
+        case `default` = 1
+        case system = 2
+        case custom = 3
+
+        static func mode(of value: Int) -> FontMode {
+                switch value {
+                case 1:
+                        return .default
+                case 2:
+                        return .system
+                case 3:
+                        return .custom
+                default:
+                        return .default
+                }
+        }
+}
+
 struct AppSettings {
+
+        // MARK: - Page Size
 
         private(set) static var displayCandidatePageSize: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidatePageSize)
@@ -26,6 +52,8 @@ struct AppSettings {
         private static func pageSizeValidity(of value: Int) -> Bool {
                 return value > 4 && value < 11
         }
+
+        // MARK: - Font Size
 
         private(set) static var candidateFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidateFontSize)
@@ -65,6 +93,60 @@ struct AppSettings {
 
         private static func fontSizeValidity(of value: Int) -> Bool {
                 return value > 11 && value < 23
+        }
+
+
+        // MARK: - Font Mode
+
+        private(set) static var candidateFontMode: FontMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidateFontMode)
+                switch savedValue {
+                case 0, 1:
+                        return .default
+                case 2:
+                        return .system
+                case 3:
+                        return .custom
+                default:
+                        return .default
+                }
+        }()
+        static func updateCandidateFontMode(to newMode: FontMode) {
+                candidateFontMode = newMode
+        }
+
+        private(set) static var commentFontMode: FontMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CommentFontMode)
+                switch savedValue {
+                case 0, 1:
+                        return .default
+                case 2:
+                        return .system
+                case 3:
+                        return .custom
+                default:
+                        return .default
+                }
+        }()
+        static func updateCommentFontMode(to newMode: FontMode) {
+                commentFontMode = newMode
+        }
+
+        private(set) static var labelFontMode: FontMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.LabelFontMode)
+                switch savedValue {
+                case 0, 1:
+                        return .default
+                case 2:
+                        return .system
+                case 3:
+                        return .custom
+                default:
+                        return .default
+                }
+        }()
+        static func updateLabelFontMode(to newMode: FontMode) {
+                labelFontMode = newMode
         }
 
 

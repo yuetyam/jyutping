@@ -6,30 +6,30 @@ struct CandidatesView: View {
 
         var body: some View {
                 let longest: DisplayCandidate = displayObject.longest
-                VStack(alignment: .leading, spacing: 1) {
+                VStack(alignment: .leading, spacing: 2) {
                         ForEach(0..<displayObject.items.count, id: \.self) { index in
                                 let candidate = displayObject.items[index]
                                 let isHighlighted: Bool = index == displayObject.highlightedIndex
                                 ZStack(alignment: .leading) {
                                         HStack(spacing: componentsSpacing) {
-                                                Text(verbatim: "0.").font(.serial)
+                                                Text(verbatim: "0.").font(.label)
                                                 Text(verbatim: longest.text).font(.candidate)
                                                 if let comment = longest.comment {
                                                         Text(verbatim: comment).font(.comment)
                                                 }
                                                 if let secondaryComment = longest.secondaryComment {
-                                                        Text(verbatim: secondaryComment).font(.secondaryComment)
+                                                        Text(verbatim: secondaryComment).font(.comment)
                                                 }
                                         }
                                         .opacity(0)
                                         HStack(spacing: componentsSpacing) {
-                                                Text(verbatim: serialText(index)).font(.serial)
+                                                Text(verbatim: serialText(index)).font(.label)
                                                 Text(verbatim: candidate.text).font(.candidate)
                                                 if let comment = candidate.comment {
                                                         Text(verbatim: comment).font(.comment)
                                                 }
                                                 if let secondaryComment = candidate.secondaryComment {
-                                                        Text(verbatim: secondaryComment).font(.secondaryComment)
+                                                        Text(verbatim: secondaryComment).font(.comment)
                                                 }
                                         }
                                 }

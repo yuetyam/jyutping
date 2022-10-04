@@ -3,13 +3,12 @@ import SwiftUI
 struct CandidateFontPreferencesView: View {
 
         @AppStorage(SettingsKeys.CandidateFontSize) private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
-        @State private var candidateFontMode: Int = 1
-
         @AppStorage(SettingsKeys.CommentFontSize) private var commentFontSize: Int = Int(AppSettings.commentFontSize)
-        @State private var commentFontMode: Int = 1
-
         @AppStorage(SettingsKeys.LabelFontSize) private var labelFontSize: Int = Int(AppSettings.labelFontSize)
-        @State private var labelFontMode: Int = 1
+
+        @AppStorage(SettingsKeys.CandidateFontMode) private var candidateFontMode: Int = AppSettings.candidateFontMode.rawValue
+        @AppStorage(SettingsKeys.CommentFontMode) private var commentFontMode: Int = AppSettings.commentFontMode.rawValue
+        @AppStorage(SettingsKeys.LabelFontMode) private var labelFontMode: Int = AppSettings.labelFontMode.rawValue
 
         var body: some View {
                 ScrollView {
@@ -24,6 +23,9 @@ struct CandidateFontPreferencesView: View {
                                                 .scaledToFit()
                                                 .onChange(of: candidateFontSize) { newFontSize in
                                                         AppSettings.updateCandidateFontSize(to: newFontSize)
+                                                        DispatchQueue.preferences.async {
+                                                                Font.updateCandidateFont(size: CGFloat(newFontSize))
+                                                        }
                                                 }
                                                 Spacer()
                                         }
@@ -35,6 +37,20 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .pickerStyle(.radioGroup)
                                                 .scaledToFit()
+                                                .onChange(of: candidateFontMode) { newValue in
+                                                        let newMode: FontMode = FontMode.mode(of: newValue)
+                                                        AppSettings.updateCandidateFontMode(to: newMode)
+                                                        DispatchQueue.preferences.async {
+                                                                switch newMode {
+                                                                case .default:
+                                                                        Font.updateCandidateFont()
+                                                                case .system:
+                                                                        Font.updateCandidateFont(isSystemFontPreferred: true)
+                                                                case .custom:
+                                                                        Font.updateCandidateFont()
+                                                                }
+                                                        }
+                                                }
                                                 Spacer()
                                         }
                                 }
@@ -49,6 +65,9 @@ struct CandidateFontPreferencesView: View {
                                                 .scaledToFit()
                                                 .onChange(of: commentFontSize) { newFontSize in
                                                         AppSettings.updateCommentFontSize(to: newFontSize)
+                                                        DispatchQueue.preferences.async {
+                                                                Font.updateCommentFont(size: CGFloat(newFontSize))
+                                                        }
                                                 }
                                                 Spacer()
                                         }
@@ -60,6 +79,20 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .pickerStyle(.radioGroup)
                                                 .scaledToFit()
+                                                .onChange(of: commentFontMode) { newValue in
+                                                        let newMode: FontMode = FontMode.mode(of: newValue)
+                                                        AppSettings.updateCommentFontMode(to: newMode)
+                                                        DispatchQueue.preferences.async {
+                                                                switch newMode {
+                                                                case .default:
+                                                                        Font.updateCommentFont()
+                                                                case .system:
+                                                                        Font.updateCommentFont()
+                                                                case .custom:
+                                                                        Font.updateCommentFont()
+                                                                }
+                                                        }
+                                                }
                                                 Spacer()
                                         }
                                 }
@@ -74,6 +107,9 @@ struct CandidateFontPreferencesView: View {
                                                 .scaledToFit()
                                                 .onChange(of: labelFontSize) { newFontSize in
                                                         AppSettings.updateLabelFontSize(to: newFontSize)
+                                                        DispatchQueue.preferences.async {
+                                                                Font.updateLabelFont(size: CGFloat(newFontSize))
+                                                        }
                                                 }
                                                 Spacer()
                                         }
@@ -85,6 +121,20 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .pickerStyle(.radioGroup)
                                                 .scaledToFit()
+                                                .onChange(of: labelFontMode) { newValue in
+                                                        let newMode: FontMode = FontMode.mode(of: newValue)
+                                                        AppSettings.updateLabelFontMode(to: newMode)
+                                                        DispatchQueue.preferences.async {
+                                                                switch newMode {
+                                                                case .default:
+                                                                        Font.updateLabelFont()
+                                                                case .system:
+                                                                        Font.updateLabelFont()
+                                                                case .custom:
+                                                                        Font.updateLabelFont()
+                                                                }
+                                                        }
+                                                }
                                                 Spacer()
                                         }
                                 }
