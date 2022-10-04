@@ -141,7 +141,7 @@ class JyutpingInputController: IMKInputController {
         private func windowFrame(origin: CGPoint? = nil) -> CGRect {
                 let origin: CGPoint = origin ?? currentClient?.position ?? .zero
                 let width: CGFloat = 600
-                let height: CGFloat = 330 + (offset * 2)
+                let height: CGFloat = 380 + (offset * 2)
                 let x: CGFloat = {
                         if windowPattern.isReversingHorizontal {
                                 return origin.x - width - 8
@@ -163,7 +163,7 @@ class JyutpingInputController: IMKInputController {
                 didSet {
                         guard let origin = currentClient?.position else { return }
                         let isRegularHorizontal: Bool = origin.x < (screenFrame.maxX - 600)
-                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 350)
+                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 400)
                         let newPattern: WindowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
                                 case (true, true):
@@ -541,15 +541,8 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                let isShifting: Bool = modifiers == .shift
-                let isBackquoteEvent: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
-                switch modifiers {
-                case [.control, .shift]:
-                        guard isBackquoteEvent else { return false }
-                        displayPreferencesPane()
-                        return true
-                case .control:
-                        guard isBackquoteEvent else { return false }
+                let shouldToggleInstantSettingsView: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE && modifiers.contains(.control)
+                if shouldToggleInstantSettingsView {
                         if inputMethodMode.isInstantSettings {
                                 handleSettings(-1)
                                 return true
@@ -558,10 +551,13 @@ class JyutpingInputController: IMKInputController {
                                 inputMethodMode = .instantSettings
                                 return true
                         }
-                default:
-                        let shouldContinue: Bool = isShifting || modifiers.isEmpty
-                        guard shouldContinue else { return false }
                 }
+                let shouldDisplayPreferencesPane: Bool = event.keyCode == KeyCode.Symbol.VK_COMMA && modifiers.contains(.control)
+                if shouldDisplayPreferencesPane {
+                        displayPreferencesPane()
+                        return true
+                }
+                let isShifting: Bool = modifiers == .shift
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
