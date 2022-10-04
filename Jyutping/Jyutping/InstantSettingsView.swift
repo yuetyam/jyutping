@@ -1,7 +1,7 @@
 import SwiftUI
 
 
-final class SettingsObject: ObservableObject {
+final class InstantSettingsObject: ObservableObject {
 
         @Published private(set) var highlightedIndex: Int = 0
 
@@ -19,9 +19,9 @@ final class SettingsObject: ObservableObject {
 }
 
 
-struct SettingsView: View {
+struct InstantSettingsView: View {
 
-        @EnvironmentObject private var settingsObject: SettingsObject
+        @EnvironmentObject private var settingsObject: InstantSettingsObject
 
         private let variant: Int = {
                 switch Logogram.current {

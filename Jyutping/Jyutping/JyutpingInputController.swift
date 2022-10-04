@@ -66,7 +66,7 @@ class JyutpingInputController: IMKInputController {
                 }
                 switch inputMethodMode {
                 case .instantSettings:
-                        let settingsUI = NSHostingController(rootView: SettingsView().environmentObject(settingsObject))
+                        let settingsUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject))
                         window?.contentView?.addSubview(settingsUI.view)
                         settingsUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
@@ -185,7 +185,7 @@ class JyutpingInputController: IMKInputController {
         }
 
         private lazy var displayObject = DisplayObject()
-        private lazy var settingsObject = SettingsObject()
+        private lazy var settingsObject = InstantSettingsObject()
 
         private lazy var candidates: [Candidate] = [] {
                 didSet {
