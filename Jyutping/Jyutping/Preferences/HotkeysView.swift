@@ -23,7 +23,6 @@ struct HotkeysView: View {
                         }
                         .padding()
                 }
-                .background(.ultraThinMaterial)
                 .navigationTitle("Hotkeys")
         }
 }

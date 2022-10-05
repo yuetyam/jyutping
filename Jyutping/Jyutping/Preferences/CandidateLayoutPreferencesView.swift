@@ -23,7 +23,6 @@ struct CandidateLayoutPreferencesView: View {
                         }
                         .padding()
                 }
-                .background(.ultraThinMaterial)
                 .navigationTitle("Layouts")
         }
 }

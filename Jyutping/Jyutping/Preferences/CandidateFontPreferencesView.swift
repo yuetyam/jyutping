@@ -142,7 +142,6 @@ struct CandidateFontPreferencesView: View {
                         }
                         .padding()
                 }
-                .background(.ultraThinMaterial)
                 .navigationTitle("Fonts")
         }
 }

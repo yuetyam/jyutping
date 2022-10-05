@@ -39,7 +39,6 @@ struct AboutView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .background(.ultraThinMaterial)
                 .navigationTitle("About")
         }
 

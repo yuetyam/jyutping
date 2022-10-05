@@ -5,6 +5,16 @@ import CommonExtensions
 import CharacterSets
 import CoreIME
 
+private struct VisualEffect: NSViewRepresentable {
+        // https://developer.apple.com/forums/thread/694837
+        func makeNSView(context: Self.Context) -> NSView {
+                let view = NSVisualEffectView()
+                view.state = NSVisualEffectView.State.active
+                return view
+        }
+        func updateNSView(_ nsView: NSView, context: Context) { }
+}
+
 class JyutpingInputController: IMKInputController {
 
         private lazy var preferencesWindow: NSWindow? = nil
@@ -19,13 +29,14 @@ class JyutpingInputController: IMKInputController {
                 preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
                 preferencesWindow?.title = NSLocalizedString("Jyutping Input Method Preferences", comment: .empty)
                 preferencesWindow?.titlebarAppearsTransparent = true
+                preferencesWindow?.toolbarStyle = .unifiedCompact
                 let visualEffect = NSVisualEffectView()
                 visualEffect.blendingMode = .behindWindow
                 visualEffect.state = .active
                 visualEffect.material = .contentBackground
                 preferencesWindow?.contentView = visualEffect
 
-                let pane = NSHostingController(rootView: PreferencesView())
+                let pane = NSHostingController(rootView: PreferencesView().background(VisualEffect()))
                 preferencesWindow?.contentView?.addSubview(pane.view)
                 pane.view.translatesAutoresizingMaskIntoConstraints = false
                 if let topAnchor = preferencesWindow?.contentView?.topAnchor,
