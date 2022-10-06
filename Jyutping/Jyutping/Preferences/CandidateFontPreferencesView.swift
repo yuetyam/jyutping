@@ -140,6 +140,7 @@ struct CandidateFontPreferencesView: View {
                                 }
                                 .block()
                         }
+                        .textSelection(.enabled)
                         .padding()
                 }
                 .navigationTitle("Fonts")

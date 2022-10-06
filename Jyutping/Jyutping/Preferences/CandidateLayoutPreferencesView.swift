@@ -21,6 +21,7 @@ struct CandidateLayoutPreferencesView: View {
                                 }
                                 .block()
                         }
+                        .textSelection(.enabled)
                         .padding()
                 }
                 .navigationTitle("Layouts")

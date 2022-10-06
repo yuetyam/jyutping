@@ -11,7 +11,7 @@ struct SettingsKeys {
         static let CommentFontMode: String = "CommentFontMode"
         static let LabelFontMode: String = "LabelFontMode"
 
-        static let PressShiftOnce: String = "PressShiftOnce"
+        static let SwitchCantoneseEnglish: String = "SwitchCantoneseEnglish"
 }
 
 enum FontMode: Int {
@@ -152,27 +152,26 @@ struct AppSettings {
 
         // MARK: - Hotkeys
 
-        /// Press Shift Key Once TO
+        /// Switch between Cantonese and English
         ///
-        /// 1. Do Nothing
-        /// 2. Switch between Cantonese and English
-        private(set) static var pressShiftOnce: Int = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.PressShiftOnce)
+        /// 1. None
+        /// 2. Control + Shift + Space
+        /// 3. Shift
+        private(set) static var switchCantoneseEnglish: Int = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.SwitchCantoneseEnglish)
                 switch savedValue {
-                case 0:
-                        return 1
-                case 1:
+                case 0, 1:
                         return 1
                 case 2:
                         return 2
+                case 3:
+                        return 3
                 default:
                         return 1
                 }
         }()
-        static func updatePressShiftOnce(to newOption: Int) {
-                let isNewOptionValid: Bool = newOption == 1 || newOption == 2
-                guard isNewOptionValid else { return }
-                pressShiftOnce = newOption
+        static func updateSwitchCantoneseEnglish(to newOption: Int) {
+                switchCantoneseEnglish = newOption
         }
 }
 

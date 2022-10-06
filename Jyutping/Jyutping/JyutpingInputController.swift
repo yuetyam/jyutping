@@ -21,9 +21,9 @@ class JyutpingInputController: IMKInputController {
         private func displayPreferencesPane() {
                 let frame: CGRect = {
                         let x: CGFloat = screenFrame.width / 4.0
-                        let y: CGFloat = screenFrame.height / 4.0
+                        let y: CGFloat = screenFrame.height / 5.0
                         let width: CGFloat = screenFrame.width / 2.0
-                        let height: CGFloat = screenFrame.height / 2.0
+                        let height: CGFloat = (screenFrame.height / 5.0) * 3.0
                         return CGRect(x: x, y: y, width: width, height: height)
                 }()
                 preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
