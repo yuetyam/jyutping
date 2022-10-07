@@ -136,9 +136,18 @@ struct UserLexicon {
                 return candidates
         }
 
+        /// Delete one lexicon entry
+        func removeItem(candidate: Candidate) {
+                let id: Int64 = Int64((candidate.lexiconText + candidate.romanization).hash)
+                let deleteStatementString = "DELETE FROM lexicon WHERE id = \(id) LIMIT 1;"
+                var deleteStatement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(database, deleteStatementString, -1, &deleteStatement, nil) == SQLITE_OK {
+                        if sqlite3_step(deleteStatement) == SQLITE_DONE {}
+                }
+                sqlite3_finalize(deleteStatement)
+        }
 
-        // MARK: - Clear User Lexicon
-
+        /// Clear User Lexicon
         func deleteAll() {
                 let deleteStatementString = "DELETE FROM lexicon;"
                 var deleteStatement: OpaquePointer? = nil

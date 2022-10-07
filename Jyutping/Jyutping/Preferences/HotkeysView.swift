@@ -22,7 +22,7 @@ struct HotkeysView: View {
                                 .block()
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
-                                                Text("Open Preferences Window (This Window)").frame(width: 260, alignment: .leading)
+                                                LabelText("Open Preferences Window (This Window)")
                                                 Text.separator
                                                 KeyBlockView.Control
                                                 Text.plus
@@ -32,7 +32,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                Text("Open/Close InstantSettings Window").frame(width: 260, alignment: .leading)
+                                                LabelText("Open/Close InstantSettings Window")
                                                 Text.separator
                                                 KeyBlockView.Control
                                                 Text.plus
@@ -45,7 +45,7 @@ struct HotkeysView: View {
                                 .block()
                                 VStack {
                                         HStack(spacing: 4) {
-                                                Text("Directly Select InstantSettings Options").frame(width: 260, alignment: .leading)
+                                                LabelText("Directly toggle InstantSettings options")
                                                 Text.separator
                                                 KeyBlockView.Control
                                                 Text.plus
@@ -58,7 +58,7 @@ struct HotkeysView: View {
                                 .block()
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
-                                                Text("Switch to Cantonese Mode").frame(width: 260, alignment: .leading)
+                                                LabelText("Switch to Cantonese Mode")
                                                 Text.separator
                                                 KeyBlockView.Control
                                                 Text.plus
@@ -68,7 +68,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                Text("Switch to English Mode").frame(width: 260, alignment: .leading)
+                                                LabelText("Switch to English Mode")
                                                 Text.separator
                                                 KeyBlockView.Control
                                                 Text.plus
@@ -80,9 +80,20 @@ struct HotkeysView: View {
                                 }
                                 .block()
                                 HStack(spacing: 4) {
-                                        Text("Clear Input Buffer").frame(width: 260, alignment: .leading)
+                                        LabelText("Remove highlighted Candidate from User Lexicon")
                                         Text.separator
-                                        KeyBlockView("esc")
+                                        KeyBlockView.Control
+                                        Text.plus
+                                        KeyBlockView.Shift
+                                        Text.plus
+                                        KeyBlockView.BackwardDelete
+                                        Spacer()
+                                }
+                                .block()
+                                HStack(spacing: 4) {
+                                        LabelText("Clear current Input Buffer")
+                                        Text.separator
+                                        KeyBlockView.escape
                                         Spacer()
                                 }
                                 .block()
@@ -91,6 +102,20 @@ struct HotkeysView: View {
                         .padding()
                 }
                 .navigationTitle("Hotkeys")
+        }
+}
+
+
+private struct LabelText: View {
+        init(_ title: LocalizedStringKey) {
+                self.title = title
+        }
+        private let title: LocalizedStringKey
+        var body: some View {
+                Text(title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .frame(width: 270, alignment: .leading)
         }
 }
 
@@ -109,12 +134,17 @@ private struct KeyBlockView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                         .padding(.vertical, 2)
-                        .frame(width: 70)
+                        .frame(width: 72)
                         .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 
         static let Control: KeyBlockView = KeyBlockView("Control ⌃")
         static let Shift: KeyBlockView = KeyBlockView("Shift ⇧")
+        static let Space: KeyBlockView = KeyBlockView("Space ␣")
+        static let escape: KeyBlockView = KeyBlockView("esc ⎋")
+
+        /// Backspace. NOT Forward Delete.
+        static let BackwardDelete: KeyBlockView = KeyBlockView("Delete ⌫")
 }
 
 

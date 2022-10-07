@@ -590,6 +590,25 @@ class JyutpingInputController: IMKInputController {
                                 inputState = .english
                                 InstantSettings.updateInputMethodMode(to: .english)
                                 return true
+                        case KeyCode.Special.VK_BACKWARD_DELETE:
+                                switch inputState {
+                                case .cantonese:
+                                        guard !(candidates.isEmpty) else { return false }
+                                        let index = displayObject.highlightedIndex
+                                        guard let selectedItem = displayObject.items.fetch(index) else { return false }
+                                        for candidate in candidates where candidate.isCantonese {
+                                                let isEqual: Bool = candidate.text == selectedItem.text && candidate.romanization == selectedItem.comment
+                                                if isEqual {
+                                                        userLexicon?.removeItem(candidate: candidate)
+                                                        break
+                                                }
+                                        }
+                                        return true
+                                case .english:
+                                        return false
+                                case .instantSettings:
+                                        return true
+                                }
                         case let value where KeyCode.numberSet.contains(value):
                                 hasControlShiftModifiers = true
                         default:
