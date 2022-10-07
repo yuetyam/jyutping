@@ -21,7 +21,7 @@
 		3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749982D28543B6E0023AC94 /* InstantSettings.swift */; };
 		374E8A702834817F003A6174 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6E2834817F003A6174 /* icon@2x.png */; };
 		374E8A712834817F003A6174 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 374E8A6F2834817F003A6174 /* icon.png */; };
-		375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* InputMethodMode.swift */; };
+		375D7A3227C10ED10018EB6F /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3127C10ED10018EB6F /* InputState.swift */; };
 		375D7A3427C151470018EB6F /* DisplayObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D7A3327C151470018EB6F /* DisplayObject.swift */; };
 		3760444E284D411900AC42E7 /* PunctuationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760444D284D411900AC42E7 /* PunctuationKey.swift */; };
 		3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */; };
@@ -246,7 +246,7 @@
 		3749982D28543B6E0023AC94 /* InstantSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSettings.swift; sourceTree = "<group>"; };
 		374E8A6E2834817F003A6174 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		374E8A6F2834817F003A6174 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		375D7A3127C10ED10018EB6F /* InputMethodMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodMode.swift; sourceTree = "<group>"; };
+		375D7A3127C10ED10018EB6F /* InputState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputState.swift; sourceTree = "<group>"; };
 		375D7A3327C151470018EB6F /* DisplayObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayObject.swift; sourceTree = "<group>"; };
 		3760444D284D411900AC42E7 /* PunctuationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunctuationKey.swift; sourceTree = "<group>"; };
 		3764CEAC27BE103100DCFB51 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -553,7 +553,7 @@
 				3764CEAF27BE103200DCFB51 /* JyutpingApp.swift */,
 				3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */,
 				37F31F4E27D565EA008399DB /* WindowPattern.swift */,
-				375D7A3127C10ED10018EB6F /* InputMethodMode.swift */,
+				375D7A3127C10ED10018EB6F /* InputState.swift */,
 				3764CEE527BE127000DCFB51 /* CandidatesView.swift */,
 				375D7A3327C151470018EB6F /* DisplayObject.swift */,
 				3764CEE627BE127000DCFB51 /* DisplayCandidate.swift */,
@@ -1210,7 +1210,7 @@
 				3760444E284D411900AC42E7 /* PunctuationKey.swift in Sources */,
 				3764CEEE27BE127000DCFB51 /* StringExtensions.swift in Sources */,
 				3797B03A28E27B7000AE2196 /* PreferencesView.swift in Sources */,
-				375D7A3227C10ED10018EB6F /* InputMethodMode.swift in Sources */,
+				375D7A3227C10ED10018EB6F /* InputState.swift in Sources */,
 				3764CEB027BE103200DCFB51 /* JyutpingApp.swift in Sources */,
 				3787A15628E695EA00A13255 /* CandidateFontPreferencesView.swift in Sources */,
 				3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */,

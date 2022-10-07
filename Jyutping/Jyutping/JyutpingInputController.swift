@@ -75,7 +75,7 @@ class JyutpingInputController: IMKInputController {
                         window?.level = NSWindow.Level(levelValue)
                         window?.orderFrontRegardless()
                 }
-                switch inputMethodMode {
+                switch inputState {
                 case .instantSettings:
                         let settingsUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject))
                         window?.contentView?.addSubview(settingsUI.view)
@@ -521,7 +521,14 @@ class JyutpingInputController: IMKInputController {
                 currentClient = nil
         }
 
-        private lazy var inputMethodMode: InputMethodMode = .cantonese {
+        private lazy var inputState: InputState = {
+                switch InstantSettings.inputMethodMode {
+                case .cantonese:
+                        return .cantonese
+                case .english:
+                        return .english
+                }
+        }() {
                 didSet {
                         resetWindow()
                 }
@@ -552,42 +559,77 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                let shouldToggleInstantSettingsView: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE && modifiers.contains(.control)
-                if shouldToggleInstantSettingsView {
-                        if inputMethodMode.isInstantSettings {
-                                handleSettings(-1)
-                                return true
-                        } else {
+                func toggleInstantSettingsView() -> Bool {
+                        switch inputState {
+                        case .cantonese:
                                 passBuffer()
-                                inputMethodMode = .instantSettings
+                                inputState = .instantSettings
+                                return true
+                        case .english:
+                                inputState = .instantSettings
+                                return true
+                        case .instantSettings:
+                                handleSettings(-1)
                                 return true
                         }
                 }
-                let shouldDisplayPreferencesPane: Bool = event.keyCode == KeyCode.Symbol.VK_COMMA && modifiers.contains(.control)
-                if shouldDisplayPreferencesPane {
-                        displayPreferencesPane()
-                        return true
+                lazy var hasControlShiftModifiers: Bool = false
+                switch modifiers {
+                case [.control, .shift]:
+                        switch event.keyCode {
+                        case KeyCode.Symbol.VK_COMMA:
+                                displayPreferencesPane()
+                                return true
+                        case KeyCode.Symbol.VK_BACKQUOTE:
+                                return toggleInstantSettingsView()
+                        case KeyCode.Symbol.VK_MINUS:
+                                inputState = .cantonese
+                                InstantSettings.updateInputMethodMode(to: .cantonese)
+                                return true
+                        case KeyCode.Symbol.VK_EQUAL:
+                                inputState = .english
+                                InstantSettings.updateInputMethodMode(to: .english)
+                                return true
+                        case let value where KeyCode.numberSet.contains(value):
+                                hasControlShiftModifiers = true
+                        default:
+                                return false
+                        }
+                case .control:
+                        let isBackquoteEvent: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
+                        guard isBackquoteEvent else { return false }
+                        return toggleInstantSettingsView()
+                case .option:
+                        return false
+                default:
+                        break
                 }
                 let isShifting: Bool = modifiers == .shift
                 switch event.keyCode.representative {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
-                                if inputMethodMode.isInstantSettings {
-                                        settingsObject.decreaseHighlightedIndex()
-                                        return true
-                                } else {
+                                switch inputState {
+                                case .cantonese:
                                         guard isBufferState else { return false }
                                         displayObject.decreaseHighlightedIndex()
                                         return true
+                                case .english:
+                                        return false
+                                case .instantSettings:
+                                        settingsObject.decreaseHighlightedIndex()
+                                        return true
                                 }
                         case .down:
-                                if inputMethodMode.isInstantSettings {
-                                        settingsObject.increaseHighlightedIndex()
-                                        return true
-                                } else {
+                                switch inputState {
+                                case .cantonese:
                                         guard isBufferState else { return false }
                                         displayObject.increaseHighlightedIndex()
+                                        return true
+                                case .english:
+                                        return false
+                                case .instantSettings:
+                                        settingsObject.increaseHighlightedIndex()
                                         return true
                                 }
                         case .left:
@@ -596,98 +638,133 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 case .number(let number):
-                        guard !(inputMethodMode.isInstantSettings) else {
+                        guard !hasControlShiftModifiers else {
                                 let index: Int = number == 0 ? 9 : (number - 1)
                                 handleSettings(index)
                                 return true
                         }
-                        if isBufferState {
-                                let index: Int = number == 0 ? 9 : (number - 1)
-                                selectDisplayingItem(index: index, client: client)
-                                adjustWindow(origin: client.position)
-                                return true
-                        } else {
-                                switch InstantSettings.characterForm {
-                                case .halfWidth:
-                                        let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuation.isCantoneseMode && isShifting
-                                        guard shouldInsertCantoneseSymbol else { return false }
-                                        let text: String = KeyCode.shiftingSymbol(of: number)
-                                        insert(text)
+                        switch inputState {
+                        case .cantonese:
+                                if isBufferState {
+                                        let index: Int = number == 0 ? 9 : (number - 1)
+                                        selectDisplayingItem(index: index, client: client)
+                                        adjustWindow(origin: client.position)
                                         return true
-                                case .fullWidth:
-                                        let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
-                                        let fullWidthText: String = text.fullWidth()
-                                        insert(fullWidthText)
-                                        return true
+                                } else {
+                                        switch InstantSettings.characterForm {
+                                        case .halfWidth:
+                                                let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuation.isCantoneseMode && isShifting
+                                                guard shouldInsertCantoneseSymbol else { return false }
+                                                let text: String = KeyCode.shiftingSymbol(of: number)
+                                                insert(text)
+                                                return true
+                                        case .fullWidth:
+                                                let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
+                                                let fullWidthText: String = text.fullWidth()
+                                                insert(fullWidthText)
+                                                return true
+                                        }
                                 }
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                let index: Int = number == 0 ? 9 : (number - 1)
+                                handleSettings(index)
+                                return true
                         }
                 case .punctuation(let punctuationKey):
-                        guard !inputMethodMode.isInstantSettings else { return false }
-                        if isBufferState {
-                                selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
-                        }
-                        passBuffer()
-                        guard InstantSettings.punctuation.isCantoneseMode else { return false }
-                        if isShifting {
-                                if let symbol = punctuationKey.instantShiftingSymbol {
-                                        insert(symbol)
-                                } else {
-                                        bufferText = punctuationKey.shiftingKeyText
+                        switch inputState {
+                        case .cantonese:
+                                if isBufferState {
+                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
                                 }
-                        } else {
-                                if let symbol = punctuationKey.instantSymbol {
-                                        insert(symbol)
+                                passBuffer()
+                                guard InstantSettings.punctuation.isCantoneseMode else { return false }
+                                if isShifting {
+                                        if let symbol = punctuationKey.instantShiftingSymbol {
+                                                insert(symbol)
+                                        } else {
+                                                bufferText = punctuationKey.shiftingKeyText
+                                        }
                                 } else {
-                                        bufferText = punctuationKey.keyText
+                                        if let symbol = punctuationKey.instantSymbol {
+                                                insert(symbol)
+                                        } else {
+                                                bufferText = punctuationKey.keyText
+                                        }
                                 }
-                        }
-                        adjustWindow(origin: client.position)
-                        return true
-                case .alphabet(let letter):
-                        guard !inputMethodMode.isInstantSettings else { return false }
-                        let hasCharacters: Bool = event.characters.hasContent
-                        guard hasCharacters else { return false }
-                        let text: String = isShifting ? letter.uppercased() : letter
-                        bufferText += text
-                        adjustWindow(origin: client.position)
-                        return true
-                case .separator:
-                        guard isBufferState else { return false }
-                        bufferText += "'"
-                        return true
-                case .return:
-                        if inputMethodMode.isInstantSettings {
-                                handleSettings()
+                                adjustWindow(origin: client.position)
                                 return true
-                        } else {
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                return true
+                        }
+                case .alphabet(let letter):
+                        switch inputState {
+                        case .cantonese:
+                                let hasCharacters: Bool = event.characters.hasContent
+                                guard hasCharacters else { return false }
+                                let text: String = isShifting ? letter.uppercased() : letter
+                                bufferText += text
+                                adjustWindow(origin: client.position)
+                                return true
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                return true
+                        }
+                case .separator:
+                        switch inputState {
+                        case .cantonese:
+                                guard isBufferState else { return false }
+                                bufferText += "'"
+                                return true
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                return true
+                        }
+                case .return:
+                        switch inputState {
+                        case .cantonese:
                                 guard isBufferState else { return false }
                                 passBuffer()
                                 return true
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                handleSettings()
+                                return true
                         }
                 case .backspace:
-                        if inputMethodMode.isInstantSettings {
-                                handleSettings(-1)
-                                return true
-                        } else {
+                        switch inputState {
+                        case .cantonese:
                                 guard isBufferState else { return false }
                                 bufferText = String(bufferText.dropLast())
                                 adjustWindow(origin: client.position)
                                 return true
-                        }
-                case .escapeClear:
-                        if inputMethodMode.isInstantSettings {
+                        case .english:
+                                return false
+                        case .instantSettings:
                                 handleSettings(-1)
                                 return true
-                        } else {
+                        }
+                case .escapeClear:
+                        switch inputState {
+                        case .cantonese:
                                 guard isBufferState else { return false }
                                 shutdownSession()
                                 return true
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                handleSettings(-1)
+                                return true
                         }
                 case .space:
-                        if inputMethodMode.isInstantSettings {
-                                handleSettings()
-                                return true
-                        } else {
+                        switch inputState {
+                        case .cantonese:
                                 if candidates.isEmpty {
                                         passBuffer()
                                         guard InstantSettings.characterForm == .fullWidth else { return false }
@@ -698,15 +775,34 @@ class JyutpingInputController: IMKInputController {
                                         adjustWindow(origin: client.position)
                                         return true
                                 }
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                handleSettings()
+                                return true
                         }
                 case .previousPage:
-                        guard isBufferState else { return false }
-                        updateDisplayingCandidates(.previousPage)
-                        return true
+                        switch inputState {
+                        case .cantonese:
+                                guard isBufferState else { return false }
+                                updateDisplayingCandidates(.previousPage)
+                                return true
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                return true
+                        }
                 case .nextPage:
-                        guard isBufferState else { return false }
-                        updateDisplayingCandidates(.nextPage)
-                        return true
+                        switch inputState {
+                        case .cantonese:
+                                guard isBufferState else { return false }
+                                updateDisplayingCandidates(.nextPage)
+                                return true
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                return true
+                        }
                 case .other:
                         return false
                 }
@@ -731,7 +827,14 @@ class JyutpingInputController: IMKInputController {
                 defer {
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(.zero, display: true)
-                        inputMethodMode = .cantonese
+                        inputState = {
+                                switch InstantSettings.inputMethodMode {
+                                case .cantonese:
+                                        return .cantonese
+                                case .english:
+                                        return .english
+                                }
+                        }()
                 }
                 switch selectedIndex {
                 case -1:

@@ -19,6 +19,22 @@ enum Punctuation: Int {
 }
 
 
+/// Cantonese / English
+enum InputMethodMode: Int {
+
+        case cantonese = 1
+        case english = 2
+
+        var isCantonese: Bool {
+                return self == .cantonese
+        }
+
+        var isEnglish: Bool {
+                return self == .english
+        }
+}
+
+
 struct InstantSettings {
 
         /// 全形 / 半形
@@ -80,6 +96,23 @@ struct InstantSettings {
                 needsEmojiCandidates = newState
                 let value: Int = newState ? 1 : 2
                 UserDefaults.standard.set(value, forKey: "emoji")
+        }
+
+        private(set) static var inputMethodMode: InputMethodMode = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: "InputMethodMode")
+                switch savedValue {
+                case 0, 1:
+                        return .cantonese
+                case 2:
+                        return .english
+                default:
+                        return .cantonese
+                }
+        }()
+        static func updateInputMethodMode(to newMode: InputMethodMode) {
+                inputMethodMode = newMode
+                let value: Int = newMode.rawValue
+                UserDefaults.standard.set(value, forKey: "InputMethodMode")
         }
 }
 

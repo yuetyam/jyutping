@@ -11,7 +11,7 @@ struct SettingsKeys {
         static let CommentFontMode: String = "CommentFontMode"
         static let LabelFontMode: String = "LabelFontMode"
 
-        static let SwitchCantoneseEnglish: String = "SwitchCantoneseEnglish"
+        static let PressShiftOnce: String = "PressShiftOnce"
 }
 
 enum FontMode: Int {
@@ -32,6 +32,11 @@ enum FontMode: Int {
                         return .default
                 }
         }
+}
+
+enum PressShiftOnce: Int {
+        case doNothing = 1
+        case switchCantoneseEnglish = 2
 }
 
 struct AppSettings {
@@ -152,26 +157,33 @@ struct AppSettings {
 
         // MARK: - Hotkeys
 
-        /// Switch between Cantonese and English
+        /// Press Shift Key Once TO
         ///
-        /// 1. None
-        /// 2. Control + Shift + Space
-        /// 3. Shift
-        private(set) static var switchCantoneseEnglish: Int = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.SwitchCantoneseEnglish)
+        /// 1. Do Nothing
+        /// 2. Switch between Cantonese and English
+        private(set) static var pressShiftOnce: PressShiftOnce = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.PressShiftOnce)
                 switch savedValue {
                 case 0, 1:
-                        return 1
+                        return .doNothing
                 case 2:
-                        return 2
-                case 3:
-                        return 3
+                        return .switchCantoneseEnglish
                 default:
-                        return 1
+                        return .doNothing
                 }
         }()
-        static func updateSwitchCantoneseEnglish(to newOption: Int) {
-                switchCantoneseEnglish = newOption
+        static func updatePressShiftOnce(to newValue: Int) {
+                let newOption: PressShiftOnce = {
+                        switch newValue {
+                        case 0, 1:
+                                return .doNothing
+                        case 2:
+                                return .switchCantoneseEnglish
+                        default:
+                                return .doNothing
+                        }
+                }()
+                pressShiftOnce = newOption
         }
 }
 
