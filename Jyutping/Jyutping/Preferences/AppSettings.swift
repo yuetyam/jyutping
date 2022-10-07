@@ -2,6 +2,7 @@ import Foundation
 
 struct SettingsKeys {
         static let CandidatePageSize: String = "CandidatePageSize"
+        static let ToneDisplayStyle: String = "ToneDisplayStyle"
 
         static let CandidateFontSize: String = "CandidateFontSize"
         static let CommentFontSize: String = "CommentFontSize"
@@ -12,6 +13,29 @@ struct SettingsKeys {
         static let LabelFontMode: String = "LabelFontMode"
 
         static let PressShiftOnce: String = "PressShiftOnce"
+}
+
+enum ToneDisplayStyle: Int {
+
+        case normal = 1
+        case noTones = 2
+        case superscript = 3
+        case `subscript` = 4
+
+        static func style(of value: Int) -> ToneDisplayStyle {
+                switch value {
+                case 1:
+                        return .normal
+                case 2:
+                        return .noTones
+                case 3:
+                        return .superscript
+                case 4:
+                        return .subscript
+                default:
+                        return .normal
+                }
+        }
 }
 
 enum FontMode: Int {
@@ -57,6 +81,30 @@ struct AppSettings {
         private static func pageSizeValidity(of value: Int) -> Bool {
                 return value > 4 && value < 11
         }
+
+
+        // MARK: - Tones Display Style
+
+        private(set) static var toneDisplayStyle: ToneDisplayStyle = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ToneDisplayStyle)
+                switch savedValue {
+                case 0, 1:
+                        return .normal
+                case 2:
+                        return .noTones
+                case 3:
+                        return .superscript
+                case 4:
+                        return .subscript
+                default:
+                        return .normal
+                }
+        }()
+        static func updateToneDisplayStyle(to value: Int) {
+                let newStyle: ToneDisplayStyle = ToneDisplayStyle.style(of: value)
+                toneDisplayStyle = newStyle
+        }
+
 
         // MARK: - Font Size
 

@@ -62,25 +62,25 @@ struct InstantSettingsView: View {
                 let highlightedIndex = settingsObject.highlightedIndex
                 VStack(alignment: .leading, spacing: 2) {
                         Group {
-                                SettingLabel(number: 1, text: textLine1, checked: variant == 1, highlighted: highlightedIndex == 0)
-                                SettingLabel(number: 2, text: textLine2, checked: variant == 2, highlighted: highlightedIndex == 1)
-                                SettingLabel(number: 3, text: textLine3, checked: variant == 3, highlighted: highlightedIndex == 2)
-                                SettingLabel(number: 4, text: textLine4, checked: variant == 4, highlighted: highlightedIndex == 3)
+                                SettingLabel(index: 0, text: textLine1, checked: variant == 1, highlighted: highlightedIndex == 0)
+                                SettingLabel(index: 1, text: textLine2, checked: variant == 2, highlighted: highlightedIndex == 1)
+                                SettingLabel(index: 2, text: textLine3, checked: variant == 3, highlighted: highlightedIndex == 2)
+                                SettingLabel(index: 3, text: textLine4, checked: variant == 4, highlighted: highlightedIndex == 3)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 5, text: options.textLine5, checked: InstantSettings.characterForm == .halfWidth, highlighted: highlightedIndex == 4)
-                                SettingLabel(number: 6, text: options.textLine6, checked: InstantSettings.characterForm == .fullWidth, highlighted: highlightedIndex == 5)
+                                SettingLabel(index: 4, text: options.textLine5, checked: InstantSettings.characterForm == .halfWidth, highlighted: highlightedIndex == 4)
+                                SettingLabel(index: 5, text: options.textLine6, checked: InstantSettings.characterForm == .fullWidth, highlighted: highlightedIndex == 5)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 7, text: options.textLine7, checked: InstantSettings.punctuation == .cantonese, highlighted: highlightedIndex == 6)
-                                SettingLabel(number: 8, text: options.textLine8, checked: InstantSettings.punctuation == .english, highlighted: highlightedIndex == 7)
+                                SettingLabel(index: 6, text: options.textLine7, checked: InstantSettings.punctuation == .cantonese, highlighted: highlightedIndex == 6)
+                                SettingLabel(index: 7, text: options.textLine8, checked: InstantSettings.punctuation == .english, highlighted: highlightedIndex == 7)
                         }
                         Divider()
                         Group {
-                                SettingLabel(number: 9, text: options.textLine9, checked: InstantSettings.needsEmojiCandidates, highlighted: highlightedIndex == 8)
-                                SettingLabel(number: 0, text: options.textLine10, checked: !(InstantSettings.needsEmojiCandidates), highlighted: highlightedIndex == 9)
+                                SettingLabel(index: 8, text: options.textLine9, checked: InstantSettings.needsEmojiCandidates, highlighted: highlightedIndex == 8)
+                                SettingLabel(index: 9, text: options.textLine10, checked: !(InstantSettings.needsEmojiCandidates), highlighted: highlightedIndex == 9)
                         }
                 }
                 .padding(8)
@@ -95,7 +95,7 @@ struct InstantSettingsView: View {
 
 private struct SettingLabel: View {
 
-        let number: Int
+        let index: Int
         let text: String
         let checked: Bool
         let highlighted: Bool
@@ -105,13 +105,13 @@ private struct SettingLabel: View {
         var body: some View {
                 ZStack(alignment: .leading) {
                         HStack(spacing: componentsSpacing) {
-                                Text(verbatim: "0.").font(.label)
+                                SerialNumberLabel(7)
                                 Text(verbatim: "傳統漢字・香港").font(.candidate)
                                 Image(systemName: "checkmark").font(.title2)
                         }
                         .opacity(0)
                         HStack(spacing: componentsSpacing) {
-                                Text(verbatim: "\(number).").font(.label)
+                                SerialNumberLabel(index)
                                 Text(verbatim: text).font(.candidate)
                                 if checked {
                                         Image(systemName: "checkmark").font(.title2)
