@@ -832,7 +832,15 @@ class JyutpingInputController: IMKInputController {
                                 return true
                         }
                 case .other:
-                        return false
+                        switch event.keyCode {
+                        case KeyCode.Special.VK_HOME:
+                                let shouldJump2FirstPage: Bool = inputState == .cantonese && !(candidates.isEmpty)
+                                guard shouldJump2FirstPage else { return false }
+                                updateDisplayingCandidates(.establish)
+                                return true
+                        default:
+                                return false
+                        }
                 }
         }
 

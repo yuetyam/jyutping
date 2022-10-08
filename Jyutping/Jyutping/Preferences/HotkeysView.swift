@@ -97,8 +97,54 @@ struct HotkeysView: View {
                                         Spacer()
                                 }
                                 .block()
+                                VStack(spacing: 8) {
+                                        HStack(spacing: 4) {
+                                                LabelText("Highlight previous Candidate")
+                                                Text.separator
+                                                KeyBlockView("▲")
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("Highlight next Candidate")
+                                                Text.separator
+                                                KeyBlockView("▼")
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("Backward to previous Candidate page")
+                                                Text.separator
+                                                KeyBlockView("-")
+                                                Text("or")
+                                                KeyBlockView("[")
+                                                Text("or")
+                                                KeyBlockView(",")
+                                                Text("or")
+                                                KeyBlockView("Page Up ↑")
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("Forward to next Candidate page")
+                                                Text.separator
+                                                KeyBlockView("=")
+                                                Text("or")
+                                                KeyBlockView("]")
+                                                Text("or")
+                                                KeyBlockView(".")
+                                                Text("or")
+                                                KeyBlockView("Page Down ↓")
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("Jump to the first Candidate page")
+                                                Text.separator
+                                                KeyBlockView("Home ⤒")
+                                                Spacer()
+                                        }
+                                }
+                                .block()
                         }
                         .textSelection(.enabled)
+                        .padding(.bottom)
                         .padding()
                 }
                 .navigationTitle("Hotkeys")
@@ -133,7 +179,7 @@ private struct KeyBlockView: View {
                 Text(verbatim: keyText)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .padding(.vertical, 2)
+                        .padding(2)
                         .frame(width: 72)
                         .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
