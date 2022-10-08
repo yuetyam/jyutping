@@ -694,8 +694,17 @@ class JyutpingInputController: IMKInputController {
                 case .punctuation(let punctuationKey):
                         switch inputState {
                         case .cantonese:
-                                if isBufferState {
-                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
+                                guard candidates.isEmpty else {
+                                        switch punctuationKey {
+                                        case .bracketLeft, .comma:
+                                                updateDisplayingCandidates(.previousPage)
+                                                return true
+                                        case .bracketRight, .period:
+                                                updateDisplayingCandidates(.nextPage)
+                                                return true
+                                        default:
+                                                return true
+                                        }
                                 }
                                 passBuffer()
                                 guard InstantSettings.punctuation.isCantoneseMode else { return false }
