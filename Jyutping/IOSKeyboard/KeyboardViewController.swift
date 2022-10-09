@@ -130,6 +130,11 @@ final class KeyboardViewController: UIInputViewController {
                 userLexicon = nil
                 simplifier?.close()
                 simplifier = nil
+
+                candidateSequence = []
+                candidates = []
+                markedText = .empty
+                bufferText = .empty
         }
 
         private lazy var didKeyboardEstablished: Bool = false
