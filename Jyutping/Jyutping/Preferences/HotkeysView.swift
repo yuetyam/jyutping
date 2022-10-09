@@ -51,9 +51,14 @@ struct HotkeysView: View {
                                                 Text.plus
                                                 KeyBlockView.Shift
                                                 Text.plus
-                                                KeyBlockView("1~0")
+                                                KeyBlockView.Number
                                                 Spacer()
                                         }
+                                        HStack {
+                                                Text(verbatim: "Number: 1, 2, 3, ... 8, 9, 0")
+                                                Spacer()
+                                        }
+                                        .font(.footnote)
                                 }
                                 .block()
                                 VStack(spacing: 8) {
@@ -142,6 +147,24 @@ struct HotkeysView: View {
                                         }
                                 }
                                 .block()
+                                VStack {
+                                        HStack(spacing: 4) {
+                                                LabelText("Speak Candidate (Using system's built-in TTS)")
+                                                Text.separator
+                                                KeyBlockView.Control
+                                                Text.plus
+                                                KeyBlockView.Shift
+                                                Text.plus
+                                                KeyBlockView.Number
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text(verbatim: "Number: 1, 2, 3, ... 8, 9, 0")
+                                                Spacer()
+                                        }
+                                        .font(.footnote)
+                                }
+                                .block()
                         }
                         .textSelection(.enabled)
                         .padding(.bottom)
@@ -186,7 +209,8 @@ private struct KeyBlockView: View {
 
         static let Control: KeyBlockView = KeyBlockView("Control ⌃")
         static let Shift: KeyBlockView = KeyBlockView("Shift ⇧")
-        static let Space: KeyBlockView = KeyBlockView("Space ␣")
+        static let Number: KeyBlockView = KeyBlockView("Number")
+        // static let Space: KeyBlockView = KeyBlockView("Space ␣")
         static let escape: KeyBlockView = KeyBlockView("esc ⎋")
 
         /// Backspace. NOT Forward Delete.

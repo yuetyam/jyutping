@@ -658,37 +658,48 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         }
                 case .number(let number):
-                        guard !hasControlShiftModifiers else {
-                                let index: Int = number == 0 ? 9 : (number - 1)
-                                handleSettings(index)
-                                return true
-                        }
+                        let index: Int = number == 0 ? 9 : (number - 1)
                         switch inputState {
                         case .cantonese:
                                 if isBufferState {
-                                        let index: Int = number == 0 ? 9 : (number - 1)
-                                        selectDisplayingItem(index: index, client: client)
-                                        adjustWindow(origin: client.position)
-                                        return true
+                                        if hasControlShiftModifiers {
+                                                guard let item = displayObject.items.fetch(index) else { return true }
+                                                guard let romanization = item.comment else { return true }
+                                                Speech.speak(romanization)
+                                                return true
+                                        } else {
+                                                selectDisplayingItem(index: index, client: client)
+                                                adjustWindow(origin: client.position)
+                                                return true
+                                        }
                                 } else {
-                                        switch InstantSettings.characterForm {
-                                        case .halfWidth:
-                                                let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuation.isCantoneseMode && isShifting
-                                                guard shouldInsertCantoneseSymbol else { return false }
-                                                let text: String = KeyCode.shiftingSymbol(of: number)
-                                                insert(text)
+                                        if hasControlShiftModifiers {
+                                                handleSettings(index)
                                                 return true
-                                        case .fullWidth:
-                                                let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
-                                                let fullWidthText: String = text.fullWidth()
-                                                insert(fullWidthText)
-                                                return true
+                                        } else {
+                                                switch InstantSettings.characterForm {
+                                                case .halfWidth:
+                                                        let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuation.isCantoneseMode && isShifting
+                                                        guard shouldInsertCantoneseSymbol else { return false }
+                                                        let text: String = KeyCode.shiftingSymbol(of: number)
+                                                        insert(text)
+                                                        return true
+                                                case .fullWidth:
+                                                        let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
+                                                        let fullWidthText: String = text.fullWidth()
+                                                        insert(fullWidthText)
+                                                        return true
+                                                }
                                         }
                                 }
                         case .english:
-                                return false
+                                if hasControlShiftModifiers {
+                                        handleSettings(index)
+                                        return true
+                                } else {
+                                        return false
+                                }
                         case .instantSettings:
-                                let index: Int = number == 0 ? 9 : (number - 1)
                                 handleSettings(index)
                                 return true
                         }
