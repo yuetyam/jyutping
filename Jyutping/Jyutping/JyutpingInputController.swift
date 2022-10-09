@@ -494,6 +494,7 @@ class JyutpingInputController: IMKInputController {
 
         override func activateServer(_ sender: Any!) {
                 currentClient = sender as? IMKTextInput
+                currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.US")
                 Lychee.connect()
                 if userLexicon == nil {
                         userLexicon = UserLexicon()
