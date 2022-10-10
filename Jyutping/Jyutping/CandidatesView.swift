@@ -8,12 +8,12 @@ struct CandidatesView: View {
 
         var body: some View {
                 let longest: DisplayCandidate = displayObject.longest
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 0) {
                         ForEach(0..<displayObject.items.count, id: \.self) { index in
                                 let candidate = displayObject.items[index]
                                 let isHighlighted: Bool = index == displayObject.highlightedIndex
                                 ZStack(alignment: .leading) {
-                                        HStack(spacing: componentsSpacing) {
+                                        HStack(spacing: 14) {
                                                 SerialNumberLabel(7)
                                                 Text(verbatim: longest.text).font(.candidate)
                                                 if let comment = longest.comment {
@@ -24,7 +24,7 @@ struct CandidatesView: View {
                                                 }
                                         }
                                         .opacity(0)
-                                        HStack(spacing: componentsSpacing) {
+                                        HStack(spacing: 14) {
                                                 SerialNumberLabel(index)
                                                 Text(verbatim: candidate.text).font(.candidate)
                                                 if let comment = candidate.comment {
@@ -36,22 +36,14 @@ struct CandidatesView: View {
                                         }
                                 }
                                 .padding(.horizontal, 8)
-                                .padding(.vertical, 1)
+                                .padding(.vertical, 2)
                                 .foregroundColor(isHighlighted ? .white : .primary)
                                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                         }
                 }
                 .padding(8)
-                .background(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(.thinMaterial)
-                                .shadow(radius: 4)
-                )
                 .animation(.default, value: displayObject.animationState)
         }
-
-        /// Distance between text, comment and secondaryComment
-        private let componentsSpacing: CGFloat = 14
 }
 
 

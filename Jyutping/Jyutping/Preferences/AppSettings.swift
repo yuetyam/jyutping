@@ -13,6 +13,8 @@ struct SettingsKeys {
         static let LabelFontMode: String = "LabelFontMode"
 
         static let PressShiftOnce: String = "PressShiftOnce"
+
+        static let SpeakCandidate: String = "SpeakCandidate"
 }
 
 enum ToneDisplayStyle: Int {
@@ -232,6 +234,31 @@ struct AppSettings {
                         }
                 }()
                 pressShiftOnce = newOption
+        }
+
+        private(set) static var isSpeakCandidateEnabled: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.SpeakCandidate)
+                switch savedValue {
+                case 101:
+                        return true
+                case 102:
+                        return false
+                default:
+                        return false
+                }
+        }()
+        static func updateSpeakCandidateState(to newValue: Int) {
+                let newState: Bool = {
+                        switch newValue {
+                        case 101:
+                                return true
+                        case 102:
+                                return false
+                        default:
+                                return false
+                        }
+                }()
+                isSpeakCandidateEnabled = newState
         }
 }
 

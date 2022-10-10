@@ -15,6 +15,16 @@ private struct VisualEffect: NSViewRepresentable {
         func updateNSView(_ nsView: NSView, context: Context) { }
 }
 
+private extension View {
+        func visualEffect() -> some View {
+                return self.background(
+                        VisualEffect()
+                                .cornerRadius(8)
+                                .shadow(radius: 4)
+                )
+        }
+}
+
 class JyutpingInputController: IMKInputController {
 
         private lazy var preferencesWindow: NSWindow? = nil
@@ -27,14 +37,12 @@ class JyutpingInputController: IMKInputController {
                         return CGRect(x: x, y: y, width: width, height: height)
                 }()
                 preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
-                preferencesWindow?.title = NSLocalizedString("Jyutping Input Method Preferences", comment: .empty)
                 preferencesWindow?.titlebarAppearsTransparent = true
                 preferencesWindow?.toolbarStyle = .unifiedCompact
-                let visualEffect = NSVisualEffectView()
-                visualEffect.blendingMode = .behindWindow
-                visualEffect.state = .active
-                visualEffect.material = .contentBackground
-                preferencesWindow?.contentView = visualEffect
+                let visualEffectView = NSVisualEffectView()
+                visualEffectView.material = .titlebar
+                visualEffectView.state = .active
+                preferencesWindow?.contentView = visualEffectView
 
                 let pane = NSHostingController(rootView: PreferencesView().background(VisualEffect()))
                 preferencesWindow?.contentView?.addSubview(pane.view)
@@ -77,7 +85,7 @@ class JyutpingInputController: IMKInputController {
                 }
                 switch inputState {
                 case .instantSettings:
-                        let settingsUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject))
+                        let settingsUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject).visualEffect())
                         window?.contentView?.addSubview(settingsUI.view)
                         settingsUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
@@ -112,7 +120,7 @@ class JyutpingInputController: IMKInputController {
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(frame, display: true)
                 default:
-                        let candidateUI = NSHostingController(rootView: CandidatesView().environmentObject(displayObject))
+                        let candidateUI = NSHostingController(rootView: CandidatesView().environmentObject(displayObject).visualEffect())
                         window?.contentView?.addSubview(candidateUI.view)
                         candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
@@ -502,6 +510,7 @@ class JyutpingInputController: IMKInputController {
                 if !bufferText.isEmpty {
                         bufferText = .empty
                 }
+                resetWindow()
         }
         override func deactivateServer(_ sender: Any!) {
                 Lychee.close()
@@ -560,29 +569,27 @@ class JyutpingInputController: IMKInputController {
                 if shouldResetClient {
                         currentClient = client
                 }
-                func toggleInstantSettingsView() -> Bool {
+                func toggleInstantSettingsView() {
                         switch inputState {
                         case .cantonese:
                                 passBuffer()
                                 inputState = .instantSettings
-                                return true
                         case .english:
                                 inputState = .instantSettings
-                                return true
                         case .instantSettings:
                                 handleSettings(-1)
-                                return true
                         }
                 }
                 lazy var hasControlShiftModifiers: Bool = false
                 switch modifiers {
-                case [.control, .shift]:
+                case [.control, .shift], .control:
                         switch event.keyCode {
                         case KeyCode.Symbol.VK_COMMA:
                                 displayPreferencesPane()
                                 return true
                         case KeyCode.Symbol.VK_BACKQUOTE:
-                                return toggleInstantSettingsView()
+                                toggleInstantSettingsView()
+                                return true
                         case KeyCode.Symbol.VK_MINUS:
                                 inputState = .cantonese
                                 InstantSettings.updateInputMethodMode(to: .cantonese)
@@ -610,16 +617,16 @@ class JyutpingInputController: IMKInputController {
                                 case .instantSettings:
                                         return true
                                 }
+                        case KeyCode.Alphabet.VK_U:
+                                guard inputState.isCantonese && isBufferState else { return false }
+                                shutdownSession()
+                                return true
                         case let value where KeyCode.numberSet.contains(value):
                                 hasControlShiftModifiers = true
                         default:
                                 return false
                         }
-                case .control:
-                        let isBackquoteEvent: Bool = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
-                        guard isBackquoteEvent else { return false }
-                        return toggleInstantSettingsView()
-                case .option:
+                case .option, .capsLock, .function, .help:
                         return false
                 default:
                         break
@@ -663,6 +670,7 @@ class JyutpingInputController: IMKInputController {
                         case .cantonese:
                                 if isBufferState {
                                         if hasControlShiftModifiers {
+                                                guard AppSettings.isSpeakCandidateEnabled else { return true }
                                                 guard let item = displayObject.items.fetch(index) else { return true }
                                                 guard let romanization = item.comment else { return true }
                                                 Speech.speak(romanization)
@@ -942,7 +950,7 @@ class JyutpingInputController: IMKInputController {
                         break
                 case .some("r"), .some("v"), .some("x"), .some("q"):
                         if bufferText.count <= candidate.input.count + 1 {
-                                bufferText = .empty
+                                shutdownSession()
                         } else {
                                 let first: String = String(bufferText.first!)
                                 let tail = bufferText.dropFirst(candidate.input.count + 1)

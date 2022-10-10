@@ -60,7 +60,7 @@ struct InstantSettingsView: View {
 
         var body: some View {
                 let highlightedIndex = settingsObject.highlightedIndex
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 0) {
                         Group {
                                 SettingLabel(index: 0, text: textLine1, checked: variant == 1, highlighted: highlightedIndex == 0)
                                 SettingLabel(index: 1, text: textLine2, checked: variant == 2, highlighted: highlightedIndex == 1)
@@ -84,11 +84,6 @@ struct InstantSettingsView: View {
                         }
                 }
                 .padding(8)
-                .background(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(.thinMaterial)
-                                .shadow(radius: 4)
-                )
         }
 }
 
@@ -119,7 +114,7 @@ private struct SettingLabel: View {
                         }
                 }
                 .padding(.horizontal, 8)
-                .padding(.vertical, 1)
+                .padding(.vertical, 2)
                 .foregroundColor(highlighted ? .white : .primary)
                 .background(highlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }

@@ -1,8 +1,27 @@
 import SwiftUI
 
+private extension Int {
+        var isSpeakCandidateOn: Bool {
+                get {
+                        switch self {
+                        case 101:
+                                return true
+                        case 102:
+                                return false
+                        default:
+                                return false
+                        }
+                }
+                set {
+                        self = newValue ? 101 : 102
+                }
+        }
+}
+
 struct HotkeysView: View {
 
         @AppStorage(SettingsKeys.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce.rawValue
+        @AppStorage(SettingsKeys.SpeakCandidate) private var speakCandidateSate: Int = AppSettings.isSpeakCandidateEnabled ? 101 : 102
 
         var body: some View {
                 ScrollView {
@@ -58,7 +77,7 @@ struct HotkeysView: View {
                                                 Text(verbatim: "Number: 1, 2, 3, ... 8, 9, 0")
                                                 Spacer()
                                         }
-                                        .font(.footnote)
+                                        .font(.subheadline)
                                 }
                                 .block()
                                 VStack(spacing: 8) {
@@ -157,12 +176,18 @@ struct HotkeysView: View {
                                                 Text.plus
                                                 KeyBlockView.Number
                                                 Spacer()
+                                                Toggle("isSpeakCandidateEnabled", isOn: $speakCandidateSate.isSpeakCandidateOn)
+                                                        .toggleStyle(.switch)
+                                                        .labelsHidden()
+                                                        .onChange(of: speakCandidateSate) { newValue in
+                                                                AppSettings.updateSpeakCandidateState(to: newValue)
+                                                        }
                                         }
                                         HStack {
                                                 Text(verbatim: "Number: 1, 2, 3, ... 8, 9, 0")
                                                 Spacer()
                                         }
-                                        .font(.footnote)
+                                        .font(.subheadline)
                                 }
                                 .block()
                         }
