@@ -9,14 +9,17 @@ extension Font {
                 case .system:
                         return constructCandidateFont(isSystemFontPreferred: true)
                 case .custom:
-                        return constructCandidateFont()
+                        let names: [String] = AppSettings.customCandidateFonts
+                        let primary: String? = names.first
+                        let fallbacks: [String] = Array<String>(names.dropFirst())
+                        return constructCandidateFont(primary: primary, fallbacks: fallbacks)
                 }
         }()
         static func updateCandidateFont(isSystemFontPreferred: Bool = false, primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) {
                 candidate = constructCandidateFont(isSystemFontPreferred: isSystemFontPreferred, primary: primary, fallbacks: fallbacks, size: size)
         }
 
-        private static let preferredPrimaryList: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+        private static let preferredPrimaryList: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
         private static let preferredFallbacks: [String] = ["I.MingCP", "I.Ming", "HanaMinB"]
         private static func constructCandidateFont(isSystemFontPreferred: Bool = false, primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) -> Font {
                 let fontSize: CGFloat = size ?? AppSettings.candidateFontSize
@@ -74,7 +77,10 @@ extension Font {
                 case .system:
                         return constructFont(size: commentFontSize)
                 case .custom:
-                        return constructFont(size: commentFontSize)
+                        let names: [String] = AppSettings.customCommentFonts
+                        let primary: String? = names.first
+                        let fallbacks: [String] = Array<String>(names.dropFirst())
+                        return constructFont(primary: primary, fallbacks: fallbacks, size: commentFontSize)
                 }
         }()
         static func updateCommentFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) {
@@ -91,7 +97,10 @@ extension Font {
                 case .system:
                         return constructFont(size: toneFontSize)
                 case .custom:
-                        return constructFont(size: toneFontSize)
+                        let names: [String] = AppSettings.customCommentFonts
+                        let primary: String? = names.first
+                        let fallbacks: [String] = Array<String>(names.dropFirst())
+                        return constructFont(primary: primary, fallbacks: fallbacks, size: toneFontSize)
                 }
         }()
         private(set) static var label: Font = {
@@ -102,7 +111,10 @@ extension Font {
                 case .system:
                         return constructFont(size: labelFontSize)
                 case .custom:
-                        return constructFont(size: labelFontSize)
+                        let names: [String] = AppSettings.customLabelFonts
+                        let primary: String? = names.first
+                        let fallbacks: [String] = Array<String>(names.dropFirst())
+                        return constructFont(primary: primary, fallbacks: fallbacks, size: labelFontSize)
                 }
         }()
         static func updateLabelFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) {

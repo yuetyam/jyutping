@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct CandidateFontPreferencesView: View {
 
@@ -9,6 +10,15 @@ struct CandidateFontPreferencesView: View {
         @AppStorage(SettingsKeys.CandidateFontMode) private var candidateFontMode: Int = AppSettings.candidateFontMode.rawValue
         @AppStorage(SettingsKeys.CommentFontMode) private var commentFontMode: Int = AppSettings.commentFontMode.rawValue
         @AppStorage(SettingsKeys.LabelFontMode) private var labelFontMode: Int = AppSettings.labelFontMode.rawValue
+
+        @AppStorage(SettingsKeys.CustomCandidateFontList) private var customCandidateFontList: String = AppSettings.customCandidateFonts.joined(separator: ",")
+        @AppStorage(SettingsKeys.CustomCommentFontList) private var customCommentFontList: String = AppSettings.customCommentFonts.joined(separator: ",")
+        @AppStorage(SettingsKeys.CustomLabelFontList) private var customLabelFontList: String = AppSettings.customLabelFonts.joined(separator: ",")
+
+        @State private var availableFonts: [String] = ["PingFang HK", "Helvetica Neue", "Menlo"]
+        @State private var customCandidateFonts: [String] = AppSettings.customCandidateFonts
+        @State private var customCommentFonts: [String] = AppSettings.customCommentFonts
+        @State private var customLabelFonts: [String] = AppSettings.customLabelFonts
 
         var body: some View {
                 ScrollView {
@@ -53,6 +63,45 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 Spacer()
                                         }
+                                        if candidateFontMode == 3 {
+                                                VStack {
+                                                        ForEach(0..<customCandidateFonts.count, id: \.self) { index in
+                                                                HStack {
+                                                                        Button {
+                                                                                customCandidateFonts.remove(at: index)
+                                                                        } label: {
+                                                                                Image(systemName: "minus")
+                                                                        }
+                                                                        Picker("Font", selection: $customCandidateFonts[index]) {
+                                                                                ForEach(0..<availableFonts.count, id: \.self) {
+                                                                                        let fontName: String = availableFonts[$0]
+                                                                                        Text(verbatim: fontName)
+                                                                                                .font(.footnote)
+                                                                                                .tag(fontName)
+                                                                                }
+                                                                        }
+                                                                        .scaledToFit()
+                                                                        .labelsHidden()
+                                                                        Spacer()
+                                                                }
+                                                        }
+                                                        HStack {
+                                                                Button {
+                                                                        customCandidateFonts.append("PingFang HK")
+                                                                } label: {
+                                                                        Image(systemName: "plus")
+                                                                }
+                                                                Spacer()
+                                                        }
+                                                        Spacer()
+                                                }
+                                                .onChange(of: customCandidateFonts) { newFontNames in
+                                                        customCandidateFontList = newFontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued().joined(separator: ",")
+                                                        DispatchQueue.preferences.async {
+                                                                AppSettings.updateCustomCandidateFonts(to: newFontNames)
+                                                        }
+                                                }
+                                        }
                                 }
                                 .block()
                                 VStack {
@@ -94,6 +143,45 @@ struct CandidateFontPreferencesView: View {
                                                         }
                                                 }
                                                 Spacer()
+                                        }
+                                        if commentFontMode == 3 {
+                                                VStack {
+                                                        ForEach(0..<customCommentFonts.count, id: \.self) { index in
+                                                                HStack {
+                                                                        Button {
+                                                                                customCommentFonts.remove(at: index)
+                                                                        } label: {
+                                                                                Image(systemName: "minus")
+                                                                        }
+                                                                        Picker("Font", selection: $customCommentFonts[index]) {
+                                                                                ForEach(0..<availableFonts.count, id: \.self) {
+                                                                                        let fontName: String = availableFonts[$0]
+                                                                                        Text(verbatim: fontName)
+                                                                                                .font(.footnote)
+                                                                                                .tag(fontName)
+                                                                                }
+                                                                        }
+                                                                        .scaledToFit()
+                                                                        .labelsHidden()
+                                                                        Spacer()
+                                                                }
+                                                        }
+                                                        HStack {
+                                                                Button {
+                                                                        customCommentFonts.append("Helvetica Neue")
+                                                                } label: {
+                                                                        Image(systemName: "plus")
+                                                                }
+                                                                Spacer()
+                                                        }
+                                                        Spacer()
+                                                }
+                                                .onChange(of: customCommentFonts) { newFontNames in
+                                                        customCommentFontList = newFontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued().joined(separator: ",")
+                                                        DispatchQueue.preferences.async {
+                                                                AppSettings.updateCustomCommentFonts(to: newFontNames)
+                                                        }
+                                                }
                                         }
                                 }
                                 .block()
@@ -137,11 +225,75 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 Spacer()
                                         }
+                                        if labelFontMode == 3 {
+                                                VStack {
+                                                        ForEach(0..<customLabelFonts.count, id: \.self) { index in
+                                                                HStack {
+                                                                        Button {
+                                                                                customLabelFonts.remove(at: index)
+                                                                        } label: {
+                                                                                Image(systemName: "minus")
+                                                                        }
+                                                                        Picker("Font", selection: $customLabelFonts[index]) {
+                                                                                ForEach(0..<availableFonts.count, id: \.self) {
+                                                                                        let fontName: String = availableFonts[$0]
+                                                                                        Text(verbatim: fontName)
+                                                                                                .font(.footnote)
+                                                                                                .tag(fontName)
+                                                                                }
+                                                                        }
+                                                                        .scaledToFit()
+                                                                        .labelsHidden()
+                                                                        Spacer()
+                                                                }
+                                                        }
+                                                        HStack {
+                                                                Button {
+                                                                        customLabelFonts.append("Menlo")
+                                                                } label: {
+                                                                        Image(systemName: "plus")
+                                                                }
+                                                                Spacer()
+                                                        }
+                                                        Spacer()
+                                                }
+                                                .onChange(of: customLabelFonts) { newFontNames in
+                                                        customLabelFontList = newFontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued().joined(separator: ",")
+                                                        DispatchQueue.preferences.async {
+                                                                AppSettings.updateCustomLabelFonts(to: newFontNames)
+                                                        }
+                                                }
+                                        }
                                 }
                                 .block()
                         }
                         .textSelection(.enabled)
                         .padding()
+                }
+                .task {
+                        let noGoodList: Set<String> = [
+                                "Bodoni Ornaments",
+                                "GB18030 Bitmap",
+                                "Toppan Bunkyu Midashi Gothic",
+                                "Toppan Bunkyu Midashi Mincho",
+                                "Webdings",
+                                "Wingdings",
+                                "Wingdings 2",
+                                "Wingdings 3",
+                                "Zapf Dingbats",
+                                "Zapfino"
+                        ]
+                        availableFonts = {
+                                let allAvailableFonts: [String] = NSFontManager.shared.availableFontFamilies
+                                let filtered: [String] = allAvailableFonts
+                                        .filter({ !($0.isEmpty || $0.hasPrefix(".") || noGoodList.contains($0)) })
+                                        .map({ $0.trimmed() })
+                                        .uniqued()
+                                return filtered
+                        }()
+                        customCandidateFonts = customCandidateFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
+                        customCommentFonts = customCommentFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
+                        customLabelFonts = customLabelFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
                 }
                 .navigationTitle("Fonts")
         }
