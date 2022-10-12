@@ -48,7 +48,6 @@ extension Font {
                         return pairFonts(primary: primary, fallbacks: foundFallbacks, fontSize: fontSize)
                 }
         }
-
         private static func constructDefaultCandidateFont(size: CGFloat? = nil) -> Font {
                 let fontSize: CGFloat = size ?? AppSettings.candidateFontSize
                 let primary: String = {
@@ -88,7 +87,7 @@ extension Font {
                 case .default:
                         return constructFont(size: commentFontSize)
                 case .system:
-                        return constructFont(size: commentFontSize)
+                        return Font.system(size: commentFontSize, design: .monospaced)
                 case .custom:
                         let names: [String] = AppSettings.customCommentFonts
                         let primary: String? = names.first
@@ -108,7 +107,7 @@ extension Font {
                 case .default:
                         return constructFont(size: toneFontSize)
                 case .system:
-                        return constructFont(size: toneFontSize)
+                        return Font.system(size: toneFontSize, design: .monospaced)
                 case .custom:
                         let names: [String] = AppSettings.customCommentFonts
                         let primary: String? = names.first
@@ -122,7 +121,7 @@ extension Font {
                 case .default:
                         return constructFont(size: labelFontSize)
                 case .system:
-                        return constructFont(size: labelFontSize)
+                        return Font.system(size: labelFontSize, design: .monospaced)
                 case .custom:
                         let names: [String] = AppSettings.customLabelFonts
                         let primary: String? = names.first
@@ -138,39 +137,23 @@ extension Font {
         private(set) static var labelDot: Font = Font.system(size: AppSettings.labelFontSize)
 
         private static func constructFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat) -> Font {
-                let pickedList: [String] = {
-                        var list: [String] = []
-                        if let pickedPrimary = primary {
-                                list.append(pickedPrimary)
-                        }
-                        if let pickedFallbacks = fallbacks {
-                                for name in pickedFallbacks {
-                                        list.append(name)
+                guard let primary else { return Font.system(size: size, design: .monospaced) }
+                guard let _ = NSFont(name: primary, size: size) else { return Font.system(size: size, design: .monospaced) }
+                let foundFallbacks: [String] = {
+                        guard let fallbacks else { return [] }
+                        guard !(fallbacks.isEmpty) else { return [] }
+                        var available: [String] = []
+                        for name in fallbacks where name != primary {
+                                if let _ = NSFont(name: name, size: size) {
+                                        available.append(name)
                                 }
                         }
-                        return list
+                        return available.uniqued()
                 }()
-                guard !pickedList.isEmpty else {
-                        return Font.system(size: size, design: .monospaced)
-                }
-                let check = pickedList.map { name -> String? in
-                        if let _ = NSFont(name: name, size: size) {
-                                return name
-                        } else {
-                                return nil
-                        }
-                }
-                let foundList = check.compactMap({ $0 })
-                switch foundList.count {
-                case 0:
-                        return Font.system(size: size, design: .monospaced)
-                case 1:
-                        let name: String = foundList[0]
-                        return Font.custom(name, size: size)
-                default:
-                        let primaryFontName: String = foundList[0]
-                        let fallbackFontNames: [String] = Array<String>(foundList.dropFirst())
-                        return pairFonts(primary: primaryFontName, fallbacks: fallbackFontNames, fontSize: size)
+                if foundFallbacks.isEmpty {
+                        return Font.custom(primary, size: size)
+                } else {
+                        return pairFonts(primary: primary, fallbacks: foundFallbacks, fontSize: size)
                 }
         }
 

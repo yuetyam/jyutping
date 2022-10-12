@@ -114,7 +114,7 @@ private struct SettingLabel: View {
                         }
                 }
                 .padding(.horizontal, 8)
-                .padding(.vertical, 2)
+                .padding(.vertical, 3)
                 .foregroundColor(highlighted ? .white : .primary)
                 .background(highlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }

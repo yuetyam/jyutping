@@ -36,7 +36,7 @@ struct CandidatesView: View {
                                         }
                                 }
                                 .padding(.horizontal, 8)
-                                .padding(.vertical, 2)
+                                .padding(.vertical, 3)
                                 .foregroundColor(isHighlighted ? .white : .primary)
                                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                         }
