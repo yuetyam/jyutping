@@ -3,7 +3,10 @@ import SwiftUI
 struct CandidateLayoutPreferencesView: View {
 
         @AppStorage(SettingsKeys.CandidatePageSize) private var pageSize: Int = AppSettings.displayCandidatePageSize
+        @AppStorage(SettingsKeys.CandidateLineSpacing) private var lineSpacing: Int = AppSettings.candidateLineSpacing
         @AppStorage(SettingsKeys.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
+
+        private let presetLineSpacingOptions: [Int] = [2, 4, 6, 8, 10, 12]
 
         var body: some View {
                 ScrollView {
@@ -17,6 +20,19 @@ struct CandidateLayoutPreferencesView: View {
                                         .scaledToFit()
                                         .onChange(of: pageSize) { newPageSize in
                                                 AppSettings.updateDisplayCandidatePageSize(to: newPageSize)
+                                        }
+                                        Spacer()
+                                }
+                                .block()
+                                HStack {
+                                        Picker("Candidate Line Spacing", selection: $lineSpacing) {
+                                                ForEach(presetLineSpacingOptions, id: \.self) { option in
+                                                        Text(verbatim: "\(option)").tag(option)
+                                                }
+                                        }
+                                        .scaledToFit()
+                                        .onChange(of: lineSpacing) { newLineSpacing in
+                                                AppSettings.updateCandidateLineSpacing(to: newLineSpacing)
                                         }
                                         Spacer()
                                 }

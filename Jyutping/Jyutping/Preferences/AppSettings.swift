@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsKeys {
         static let CandidatePageSize: String = "CandidatePageSize"
+        static let CandidateLineSpacing: String = "CandidateLineSpacing"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
 
 
@@ -88,6 +89,22 @@ struct AppSettings {
         }
         private static func pageSizeValidity(of value: Int) -> Bool {
                 return value > 4 && value < 11
+        }
+
+        private(set) static var candidateLineSpacing: Int = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidateLineSpacing)
+                let isSavedValueValid: Bool = lineSpacingValidity(of: savedValue)
+                guard isSavedValueValid else { return 6 }
+                return savedValue
+        }()
+        static func updateCandidateLineSpacing(to newLineSpacing: Int) {
+                let isNewLineSpacingValid: Bool = lineSpacingValidity(of: newLineSpacing)
+                guard isNewLineSpacingValid else { return }
+                candidateLineSpacing = newLineSpacing
+        }
+        private static func lineSpacingValidity(of value: Int) -> Bool {
+                let presetOptions: Set<Int> = [2, 4, 6, 8, 10, 12]
+                return presetOptions.contains(value)
         }
 
 

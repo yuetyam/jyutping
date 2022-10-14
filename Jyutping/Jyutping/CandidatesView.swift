@@ -5,6 +5,7 @@ struct CandidatesView: View {
         @EnvironmentObject private var displayObject: DisplayObject
 
         private let toneStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
+        private let lineSpacing: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
         var body: some View {
                 let longest: DisplayCandidate = displayObject.longest
@@ -36,7 +37,7 @@ struct CandidatesView: View {
                                         }
                                 }
                                 .padding(.horizontal, 8)
-                                .padding(.vertical, 3)
+                                .padding(.vertical, lineSpacing)
                                 .foregroundColor(isHighlighted ? .white : .primary)
                                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                         }
