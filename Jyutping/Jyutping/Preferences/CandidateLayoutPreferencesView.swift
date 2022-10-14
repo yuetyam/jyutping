@@ -6,8 +6,6 @@ struct CandidateLayoutPreferencesView: View {
         @AppStorage(SettingsKeys.CandidateLineSpacing) private var lineSpacing: Int = AppSettings.candidateLineSpacing
         @AppStorage(SettingsKeys.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
 
-        private let presetLineSpacingOptions: [Int] = [2, 4, 6, 8, 10, 12]
-
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
@@ -26,8 +24,8 @@ struct CandidateLayoutPreferencesView: View {
                                 .block()
                                 HStack {
                                         Picker("Candidate Line Spacing", selection: $lineSpacing) {
-                                                ForEach(presetLineSpacingOptions, id: \.self) { option in
-                                                        Text(verbatim: "\(option)").tag(option)
+                                                ForEach(2..<13, id: \.self) {
+                                                        Text(verbatim: "\($0)").tag($0)
                                                 }
                                         }
                                         .scaledToFit()

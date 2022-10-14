@@ -103,8 +103,7 @@ struct AppSettings {
                 candidateLineSpacing = newLineSpacing
         }
         private static func lineSpacingValidity(of value: Int) -> Bool {
-                let presetOptions: Set<Int> = [2, 4, 6, 8, 10, 12]
-                return presetOptions.contains(value)
+                return value > 1 && value < 13
         }
 
 
