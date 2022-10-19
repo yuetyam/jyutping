@@ -11,4 +11,38 @@ extension Image {
         static let checkmark: Image = Image(systemName: "checkmark.circle")
         static let warning: Image = Image(systemName: "exclamationmark.circle")
         static let xmark: Image = Image(systemName: "xmark.circle")
+
+
+        // MARK: - Chevrons
+
+        /// Chevron Image
+        /// - Parameter direction: Chevron direction
+        /// - Returns: A Chevron Image
+        static func chevron(_ direction: Direction) -> Image {
+                let imageName: String = {
+                        switch direction {
+                        case .up:
+                                return "chevron.up"
+                        case .down:
+                                return "chevron.down"
+                        case .forward:
+                                return "chevron.forward"
+                        case .backward:
+                                return "chevron.backward"
+                        }
+                }()
+                return Image(systemName: imageName)
+        }
+
+        static let downChevron: Image = Image.chevron(.down)
+        static let backwardChevron: Image = Image.chevron(.backward)
 }
+
+
+enum Direction {
+        case up
+        case down
+        case forward
+        case backward
+}
+
