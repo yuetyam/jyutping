@@ -47,7 +47,7 @@ struct ExpressionsView: View {
                                                 Image.warning.foregroundColor(.orange)
                                         }
                                         Label {
-                                                Text(verbatim: "佢亦作渠、⿰亻渠、其")
+                                                Text(verbatim: "佢亦作渠、⿰亻渠")
                                         } icon: {
                                                 Image(systemName: "info.circle").foregroundColor(.primary)
                                         }
@@ -265,7 +265,6 @@ struct ExpressionsView: View {
                                 }
                         }
                 }
-                .font(.master)
                 .listStyle(.insetGrouped)
                 .navigationTitle("title.expressions")
                 .navigationBarTitleDisplayMode(.inline)
