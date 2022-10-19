@@ -2,7 +2,7 @@ import SwiftUI
 import CommonExtensions
 
 @available(iOS 15.0, *)
-struct HomeView_iOS15: View {
+struct HomeView: View {
 
         @State private var inputText: String = .empty
         @State private var cantonese: String = .empty

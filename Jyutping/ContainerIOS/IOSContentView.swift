@@ -7,7 +7,7 @@ struct IOSContentView: View {
         var body: some View {
                 TabView(selection: $selection) {
                         if #available(iOS 15.0, *) {
-                                HomeView_iOS15()
+                                HomeView()
                                         .tabItem {
                                                 Label("Home", systemImage: "house").environment(\.symbolVariants, .none)
                                         }

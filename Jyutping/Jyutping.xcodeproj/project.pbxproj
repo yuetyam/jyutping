@@ -133,7 +133,7 @@
 		37B1616B281A02C100C95317 /* IntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615B281A02C100C95317 /* IntroductionsView.swift */; };
 		37B1616C281A02C100C95317 /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615C281A02C100C95317 /* FAQView.swift */; };
 		37B1616D281A02C100C95317 /* HomeView_iOS14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615D281A02C100C95317 /* HomeView_iOS14.swift */; };
-		37B1616E281A02C100C95317 /* HomeView_iOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615E281A02C100C95317 /* HomeView_iOS15.swift */; };
+		37B1616E281A02C100C95317 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615E281A02C100C95317 /* HomeView.swift */; };
 		37B1616F281A02C100C95317 /* PrivacyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1615F281A02C100C95317 /* PrivacyNoticeView.swift */; };
 		37B16170281A02C100C95317 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16161281A02C100C95317 /* AboutView.swift */; };
 		37B16171281A02C100C95317 /* DonationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16162281A02C100C95317 /* DonationView.swift */; };
@@ -391,7 +391,7 @@
 		37B1615B281A02C100C95317 /* IntroductionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionsView.swift; sourceTree = "<group>"; };
 		37B1615C281A02C100C95317 /* FAQView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		37B1615D281A02C100C95317 /* HomeView_iOS14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView_iOS14.swift; sourceTree = "<group>"; };
-		37B1615E281A02C100C95317 /* HomeView_iOS15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView_iOS15.swift; sourceTree = "<group>"; };
+		37B1615E281A02C100C95317 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		37B1615F281A02C100C95317 /* PrivacyNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyNoticeView.swift; sourceTree = "<group>"; };
 		37B16161281A02C100C95317 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37B16162281A02C100C95317 /* DonationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationView.swift; sourceTree = "<group>"; };
@@ -847,8 +847,8 @@
 		37B16159281A02C100C95317 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				37B1615E281A02C100C95317 /* HomeView.swift */,
 				37B1615D281A02C100C95317 /* HomeView_iOS14.swift */,
-				37B1615E281A02C100C95317 /* HomeView_iOS15.swift */,
 				37B1615B281A02C100C95317 /* IntroductionsView.swift */,
 				37B1615A281A02C100C95317 /* ExpressionsView.swift */,
 				37B1615C281A02C100C95317 /* FAQView.swift */,
@@ -1318,7 +1318,7 @@
 				37B16166281A02C100C95317 /* JyutpingView_iOS14.swift in Sources */,
 				37B16109281912EE00C95317 /* AppMaster.swift in Sources */,
 				37B160F3281912EE00C95317 /* EnhancedLabel.swift in Sources */,
-				37B1616E281A02C100C95317 /* HomeView_iOS15.swift in Sources */,
+				37B1616E281A02C100C95317 /* HomeView.swift in Sources */,
 				37B16177281A07A000C95317 /* IOSContentView.swift in Sources */,
 				37B16164281A02C100C95317 /* InitialsTable.swift in Sources */,
 				37B16169281A02C100C95317 /* JyutpingView_iOS15.swift in Sources */,
