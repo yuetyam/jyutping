@@ -79,7 +79,7 @@ struct HomeView_iOS14: View {
                                         }
                                         .accessibilityLabel("accessibility.how_to_enable_this_keyboard")
                                 } footer: {
-                                        Text("Haptic Feedback requires Full Access").textCase(.none)
+                                        Text("Haptic Feedback requires Full Access").textCase(nil)
                                 }
                                 Section {
                                         Button(action: {

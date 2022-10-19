@@ -24,7 +24,7 @@ struct FAQView: View {
                                         }
                                 }
                         } footer: {
-                                Text("All other features don't require Full Access").textCase(.none)
+                                Text("All other features don't require Full Access").textCase(nil)
                         }
 
                         if !(Speech.isLanguagesEnabled && Speech.isEnhancedVoiceAvailable) {

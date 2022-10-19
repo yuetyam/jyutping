@@ -18,7 +18,7 @@ struct MacContentView: View {
                                                 Label("Cantonese Expressions", systemImage: "text.quote")
                                         }
                                 } header: {
-                                        Text("Keyboard").textCase(.none)
+                                        Text("Keyboard").textCase(nil)
                                 }
                                 Section {
                                         NavigationLink(destination: MacSearchView(), isActive: $isMacSearchViewActive) {
@@ -34,7 +34,7 @@ struct MacContentView: View {
                                                 Label("Tones", systemImage: "bell")
                                         }
                                 } header: {
-                                        Text("Jyutping").textCase(.none)
+                                        Text("Jyutping").textCase(nil)
                                 }
                                 Section {
                                         NavigationLink(destination: ResourcesView()) {
@@ -44,7 +44,7 @@ struct MacContentView: View {
                                                 Label("About", systemImage: "info.circle")
                                         }
                                 } header: {
-                                        Text("About").textCase(.none)
+                                        Text("About").textCase(nil)
                                 }
                         }
                         .toolbar {

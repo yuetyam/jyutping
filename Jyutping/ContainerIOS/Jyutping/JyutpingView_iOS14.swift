@@ -62,19 +62,19 @@ struct JyutpingView_iOS14: View {
                                 Section {
                                         SearchLinksView()
                                 } header: {
-                                        Text("Search on other places (websites)").textCase(.none)
+                                        Text("Search on other places (websites)").textCase(nil)
                                 }
 
                                 Section {
                                         JyutpingResourcesLinksView()
                                 } header: {
-                                        Text("Jyutping Resources").textCase(.none)
+                                        Text("Jyutping Resources").textCase(nil)
                                 }
 
                                 Section {
                                         CantoneseResourcesLinksView()
                                 } header: {
-                                        Text("Cantonese Resources").textCase(.none)
+                                        Text("Cantonese Resources").textCase(nil)
                                 }
                         }
                         .listStyle(.insetGrouped)

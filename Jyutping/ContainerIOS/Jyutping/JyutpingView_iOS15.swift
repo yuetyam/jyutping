@@ -18,12 +18,12 @@ struct JyutpingView_iOS15: View {
                                                 .submitLabel(.search)
                                                 .onSubmit {
                                                         let trimmedInput: String = inputText.trimmed()
-                                                        guard trimmedInput != cantonese else { return }
                                                         guard !trimmedInput.isEmpty else {
                                                                 cantonese = .empty
                                                                 pronunciations = []
                                                                 return
                                                         }
+                                                        guard trimmedInput != cantonese else { return }
                                                         let search = AppMaster.lookup(text: trimmedInput)
                                                         if search.romanizations.isEmpty {
                                                                 cantonese = trimmedInput
@@ -64,19 +64,19 @@ struct JyutpingView_iOS15: View {
                                 Section {
                                         SearchLinksView()
                                 } header: {
-                                        Text("Search on other places (websites)").textCase(.none)
+                                        Text("Search on other places (websites)").textCase(nil)
                                 }
 
                                 Section {
                                         JyutpingResourcesLinksView()
                                 } header: {
-                                        Text("Jyutping Resources").textCase(.none)
+                                        Text("Jyutping Resources").textCase(nil)
                                 }
 
                                 Section {
                                         CantoneseResourcesLinksView()
                                 } header: {
-                                        Text("Cantonese Resources").textCase(.none)
+                                        Text("Cantonese Resources").textCase(nil)
                                 }
                         }
                         .animation(.default, value: cantonese)

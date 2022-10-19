@@ -12,7 +12,7 @@ struct PrivacyNoticeView: View {
                                 }
                                 .padding(.vertical)
                         } footer: {
-                                Text("privacy.notice.footer").textCase(.none)
+                                Text("privacy.notice.footer").textCase(nil)
                         }
                 }
                 .listStyle(.insetGrouped)

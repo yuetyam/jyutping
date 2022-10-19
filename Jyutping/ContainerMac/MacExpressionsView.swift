@@ -50,7 +50,7 @@ struct MacExpressionsView: View {
                                                         Image.warning.foregroundColor(.orange)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "佢 亦作 渠、𠍲、其")
+                                                        Text(verbatim: "佢 亦作 渠、𠍲")
                                                 } icon: {
                                                         Image(systemName: "info.circle").foregroundColor(.primary)
                                                 }

@@ -28,7 +28,7 @@ struct PreferencesView: View {
                                                 Label("Fonts", systemImage: "textformat")
                                         }
                                 } header: {
-                                        Text("Candidates").textCase(.none)
+                                        Text("Candidates").textCase(nil)
                                 }
 
                                 Section {
@@ -36,7 +36,7 @@ struct PreferencesView: View {
                                                 Label("Hotkeys", systemImage: "keyboard")
                                         }
                                 } header: {
-                                        Text("Hotkeys").textCase(.none)
+                                        Text("Hotkeys").textCase(nil)
                                 }
 
                                 Section {
@@ -44,7 +44,7 @@ struct PreferencesView: View {
                                                 Label("About", systemImage: "info.circle")
                                         }
                                 } header: {
-                                        Text("About").textCase(.none)
+                                        Text("About").textCase(nil)
                                 }
                         }
                         .listStyle(.sidebar)
