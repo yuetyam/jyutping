@@ -28,16 +28,16 @@ struct HomeView_iOS15: View {
                         List {
                                 Section {
                                         TextField("Text Field", text: $inputText)
-                                                .autocapitalization(.none)
-                                                .disableAutocorrection(true)
+                                                .textInputAutocapitalization(.never)
+                                                .autocorrectionDisabled(true)
                                                 .onSubmit {
                                                         let trimmedInput: String = inputText.trimmed()
-                                                        guard trimmedInput != cantonese else { return }
                                                         guard !trimmedInput.isEmpty else {
                                                                 cantonese = .empty
                                                                 pronunciations = []
                                                                 return
                                                         }
+                                                        guard trimmedInput != cantonese else { return }
                                                         let search = AppMaster.lookup(text: trimmedInput)
                                                         if search.romanizations.isEmpty {
                                                                 cantonese = trimmedInput
@@ -69,15 +69,16 @@ struct HomeView_iOS15: View {
                                         }
                                         .textSelection(.enabled)
                                 }
+
                                 Section {
                                         if isKeyboardEnabled {
                                                 HStack {
                                                         Text("How to enable this Keyboard")
                                                         Spacer()
                                                         if isGuideViewExpanded {
-                                                                Image(systemName: "chevron.down")
+                                                                Image.downChevron
                                                         } else {
-                                                                Image(systemName: "chevron.left")
+                                                                Image.backwardChevron
                                                         }
                                                 }
                                                 .contentShape(Rectangle())
@@ -114,7 +115,7 @@ struct HomeView_iOS15: View {
                                         }
                                 } footer: {
                                         if !isKeyboardEnabled || isGuideViewExpanded {
-                                                Text("Haptic Feedback requires Full Access").textCase(.none)
+                                                Text("Haptic Feedback requires Full Access").textCase(nil)
                                         } else {
                                                 EmptyView()
                                         }
@@ -133,10 +134,11 @@ struct HomeView_iOS15: View {
                                                 }
                                         }
                                 }
+
                                 Group {
                                         Section {
                                                 Text("Tones Input").font(.headline)
-                                                Text(verbatim: tonesInputDescription)
+                                                Text("tones.input.description")
                                                         .font(.body.monospaced())
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
@@ -165,6 +167,7 @@ struct HomeView_iOS15: View {
                                                         }
                                         }
                                 }
+
                                 Section {
                                         NavigationLink {
                                                 IntroductionsView().textSelection(.enabled)
