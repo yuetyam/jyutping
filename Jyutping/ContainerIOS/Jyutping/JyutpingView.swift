@@ -2,7 +2,7 @@ import SwiftUI
 import CommonExtensions
 
 @available(iOS 15.0, *)
-struct JyutpingView_iOS15: View {
+struct JyutpingView: View {
 
         @State private var inputText: String = .empty
         @State private var cantonese: String = .empty
@@ -13,8 +13,8 @@ struct JyutpingView_iOS15: View {
                         List {
                                 Section {
                                         TextField("Lookup Jyutping for Cantonese", text: $inputText)
-                                                .autocapitalization(.none)
-                                                .disableAutocorrection(true)
+                                                .textInputAutocapitalization(.never)
+                                                .autocorrectionDisabled(true)
                                                 .submitLabel(.search)
                                                 .onSubmit {
                                                         let trimmedInput: String = inputText.trimmed()

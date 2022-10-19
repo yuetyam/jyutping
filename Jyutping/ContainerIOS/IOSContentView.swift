@@ -13,7 +13,7 @@ struct IOSContentView: View {
                                         }
                                         .tag(0)
 
-                                JyutpingView_iOS15()
+                                JyutpingView()
                                         .tabItem {
                                                 Label("Jyutping", systemImage: "doc.text.magnifyingglass").environment(\.symbolVariants, .none)
                                         }
