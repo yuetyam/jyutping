@@ -14,45 +14,52 @@ extension Font {
                 #if os(iOS)
                 return Font.body
                 #else
-                return generateFont(size: 13, style: .body)
+                return constructFont(size: 13)
                 #endif
         }()
         static let masterHeadline: Font = {
                 #if os(iOS)
                 return Font.body.weight(.medium)
                 #else
-                return generateFont(size: 15, style: .title3)
+                return constructFont(size: 15)
                 #endif
         }()
 
         #if os(macOS)
-        private static func generateFont(size: CGFloat, style: Font.TextStyle) -> Font {
-                let primaryFontName: String = {
-                        let preferredList: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
-                        for name in preferredList {
+        private static func constructFont(size: CGFloat) -> Font {
+                let primary: String = {
+                        if let _ = NSFont(name: "SF Pro", size: size) {
+                                return "SF Pro"
+                        } else {
+                                return "Helvetica Neue"
+                        }
+                }()
+                let fallbacks: [String] = {
+                        var list: [String] = ["PingFang HK"]
+                        let firstWave: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+                        for name in firstWave {
                                 if let _ = NSFont(name: name, size: size) {
-                                        return name
+                                        list = [name]
+                                        break
                                 }
                         }
-                        return "PingFang HK"
-                }()
-                let fallbackFontNames: [String] = {
-                        let expected: [String] = ["I.MingCP", "I.Ming", "HanaMinB"]
-                        var found: [String] = []
-                        if let _ = NSFont(name: expected[0], size: size) {
-                                found.append(expected[0])
-                        } else if let _ = NSFont(name: expected[1], size: size) {
-                                found.append(expected[1])
+                        let secondWave: [String] = ["I.MingCP", "I.Ming"]
+                        for item in secondWave {
+                                if let _ = NSFont(name: item, size: size) {
+                                        list.append(item)
+                                        break
+                                }
                         }
-                        if let _ = NSFont(name: expected[2], size: size) {
-                                found.append(expected[2])
+                        if let _ = NSFont(name: "HanaMinB", size: size) {
+                                list.append("HanaMinB")
                         }
-                        return found
+                        return list
                 }()
-                if fallbackFontNames.isEmpty {
-                        return Font.custom(primaryFontName, size: size, relativeTo: style)
+                let shouldUseSystemFonts: Bool = primary == "Helvetica Neue" && fallbacks == ["PingFang HK"]
+                if shouldUseSystemFonts {
+                        return Font.system(size: size)
                 } else {
-                        return pairFonts(primary: primaryFontName, fallbacks: fallbackFontNames, size: size)
+                        return pairFonts(primary: primary, fallbacks: fallbacks, size: size)
                 }
         }
         #endif
