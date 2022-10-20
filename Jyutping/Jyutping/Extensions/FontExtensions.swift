@@ -124,9 +124,9 @@ extension Font {
                 let labelFontSize: CGFloat = AppSettings.labelFontSize
                 switch AppSettings.labelFontMode {
                 case .default:
-                        return constructFont(size: labelFontSize)
+                        return Font.system(size: labelFontSize).monospacedDigit()
                 case .system:
-                        return Font.system(size: labelFontSize, design: .monospaced)
+                        return Font.system(size: labelFontSize).monospacedDigit()
                 case .custom:
                         let names: [String] = AppSettings.customLabelFonts
                         let primary: String? = names.first
@@ -136,7 +136,14 @@ extension Font {
         }()
         static func updateLabelFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) {
                 let labelFontSize: CGFloat = size ?? AppSettings.labelFontSize
-                label = constructFont(primary: primary, fallbacks: fallbacks, size: labelFontSize)
+                switch AppSettings.labelFontMode {
+                case .default:
+                        label = Font.system(size: labelFontSize).monospacedDigit()
+                case .system:
+                        label = Font.system(size: labelFontSize).monospacedDigit()
+                case .custom:
+                        label = constructFont(primary: primary, fallbacks: fallbacks, size: labelFontSize)
+                }
                 labelDot = Font.system(size: labelFontSize)
         }
         private(set) static var labelDot: Font = Font.system(size: AppSettings.labelFontSize)
