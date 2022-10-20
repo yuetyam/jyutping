@@ -55,7 +55,7 @@ extension Font {
                         }
                         return list
                 }()
-                let shouldUseSystemFonts: Bool = primary == "Helvetica Neue" && fallbacks == ["PingFang HK"]
+                let shouldUseSystemFonts: Bool = fallbacks == ["PingFang HK"]
                 if shouldUseSystemFonts {
                         return Font.system(size: size)
                 } else {

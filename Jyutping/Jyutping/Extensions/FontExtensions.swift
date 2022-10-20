@@ -78,7 +78,12 @@ extension Font {
                         }
                         return list
                 }()
-                return pairFonts(primary: primary, fallbacks: fallbacks, fontSize: fontSize)
+                let shouldUseSystemFonts: Bool = fallbacks == ["PingFang HK"]
+                if shouldUseSystemFonts {
+                        return Font.system(size: fontSize)
+                } else {
+                        return pairFonts(primary: primary, fallbacks: fallbacks, fontSize: fontSize)
+                }
         }
 
         private(set) static var comment: Font = {
