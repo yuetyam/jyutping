@@ -48,6 +48,7 @@ extension UIDevice {
                 case "iPad7,11", "iPad7,12":        return "iPad (7th generation)"
                 case "iPad11,6", "iPad11,7":        return "iPad (8th generation)"
                 case "iPad12,1", "iPad12,2":        return "iPad (9th generation)"
+                case "iPad13,18", "iPad13,19":      return "iPad (10th generation)";
 
 
                 case "iPad5,3", "iPad5,4":          return "iPad Air 2"
@@ -61,24 +62,28 @@ extension UIDevice {
                 case "iPad14,1", "iPad14,2":        return "iPad mini (6th generation)"
 
 
-                case "iPad6,3", "iPad6,4":          return "iPad Pro (9.7-inch)"
-                case "iPad7,3", "iPad7,4":          return "iPad Pro (10.5-inch)"
+                case "iPad6,3", "iPad6,4":          return "iPad Pro 9.7-inch"
+                case "iPad7,3", "iPad7,4":          return "iPad Pro 10.5-inch"
 
 
                 case "iPad8,1", "iPad8,2",
-                     "iPad8,3", "iPad8,4":          return "iPad Pro (11-inch) (1st generation)"
-                case "iPad8,9", "iPad8,10":         return "iPad Pro (11-inch) (2nd generation)"
+                     "iPad8,3", "iPad8,4":          return "iPad Pro 11-inch (1st generation)"
+                case "iPad8,9", "iPad8,10":         return "iPad Pro 11-inch (2nd generation)"
                 case "iPad13,4", "iPad13,5",
-                     "iPad13,6", "iPad13,7":        return "iPad Pro (11-inch) (3rd generation)"
+                     "iPad13,6", "iPad13,7":        return "iPad Pro 11-inch (3rd generation)"
+                case "iPad14,3-A", "iPad14,3-B",
+                     "iPad14,4-A", "iPad14,4-B":    return "iPad Pro 11-inch (4th generation)";
 
 
-                case "iPad6,7", "iPad6,8":          return "iPad Pro (12.9-inch) (1st generation)"
-                case "iPad7,1", "iPad7,2":          return "iPad Pro (12.9-inch) (2nd generation)"
+                case "iPad6,7", "iPad6,8":          return "iPad Pro 12.9-inch (1st generation)"
+                case "iPad7,1", "iPad7,2":          return "iPad Pro 12.9-inch (2nd generation)"
                 case "iPad8,5", "iPad8,6",
-                     "iPad8,7", "iPad8,8":          return "iPad Pro (12.9-inch) (3rd generation)"
-                case "iPad8,11", "iPad8,12":        return "iPad Pro (12.9-inch) (4th generation)"
+                     "iPad8,7", "iPad8,8":          return "iPad Pro 12.9-inch (3rd generation)"
+                case "iPad8,11", "iPad8,12":        return "iPad Pro 12.9-inch (4th generation)"
                 case "iPad13,8", "iPad13,9",
-                     "iPad13,10", "iPad13,11":      return "iPad Pro (12.9-inch) (5th generation)"
+                     "iPad13,10", "iPad13,11":      return "iPad Pro 12.9-inch (5th generation)"
+                case "iPad14,5-A", "iPad14,5-B",
+                     "iPad14,6-A", "iPad14,6-B":    return "iPad Pro 12.9-inch (6th generation)";
 
 
                 default:                            return identifier
