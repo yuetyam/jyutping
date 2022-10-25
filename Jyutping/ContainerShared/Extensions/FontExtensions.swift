@@ -27,22 +27,27 @@ extension Font {
 
         #if os(macOS)
         private static func constructFont(size: CGFloat) -> Font {
-                let primary: String = {
-                        if let _ = NSFont(name: "SF Pro", size: size) {
-                                return "SF Pro"
+                let SFPro: String = "SF Pro"
+                let HelveticaNeue: String = "Helvetica Neue"
+                let PingFangHK: String = "PingFang HK"
+                let isSFProAvailable: Bool = {
+                        if let _ = NSFont(name: SFPro, size: size) {
+                                return true
                         } else {
-                                return "Helvetica Neue"
+                                return false
                         }
                 }()
+                let primary: String = isSFProAvailable ? SFPro : HelveticaNeue
                 let fallbacks: [String] = {
-                        var list: [String] = ["PingFang HK"]
+                        var list: [String] = isSFProAvailable ? [HelveticaNeue] : []
                         let firstWave: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                         for name in firstWave {
                                 if let _ = NSFont(name: name, size: size) {
-                                        list = [name]
+                                        list.append(name)
                                         break
                                 }
                         }
+                        list.append(PingFangHK)
                         let secondWave: [String] = ["I.MingCP", "I.Ming"]
                         for item in secondWave {
                                 if let _ = NSFont(name: item, size: size) {
@@ -55,7 +60,7 @@ extension Font {
                         }
                         return list
                 }()
-                let shouldUseSystemFonts: Bool = fallbacks == ["PingFang HK"]
+                let shouldUseSystemFonts: Bool = fallbacks == [PingFangHK]
                 if shouldUseSystemFonts {
                         return Font.system(size: size)
                 } else {
