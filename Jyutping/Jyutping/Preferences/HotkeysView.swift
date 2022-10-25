@@ -74,7 +74,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: "Number: 1, 2, 3, ... 8, 9, 0")
+                                                Text(verbatim: "number: 1, 2, 3, ... 8, 9, 0")
                                                 Spacer()
                                         }
                                         .font(.subheadline)
@@ -132,36 +132,38 @@ struct HotkeysView: View {
                                                 LabelText("Highlight next Candidate")
                                                 Text.separator
                                                 KeyBlockView("▼")
+                                                Text.or
+                                                KeyBlockView("tab ⇥")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
                                                 LabelText("Backward to previous Candidate page")
                                                 Text.separator
                                                 KeyBlockView("-")
-                                                Text("or")
+                                                Text.or
                                                 KeyBlockView("[")
-                                                Text("or")
+                                                Text.or
                                                 KeyBlockView(",")
-                                                Text("or")
-                                                KeyBlockView("Page Up ↑")
+                                                Text.or
+                                                KeyBlockView("page up ↑")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
                                                 LabelText("Forward to next Candidate page")
                                                 Text.separator
                                                 KeyBlockView("=")
-                                                Text("or")
+                                                Text.or
                                                 KeyBlockView("]")
-                                                Text("or")
+                                                Text.or
                                                 KeyBlockView(".")
-                                                Text("or")
-                                                KeyBlockView("Page Down ↓")
+                                                Text.or
+                                                KeyBlockView("page down ↓")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
                                                 LabelText("Jump to the first Candidate page")
                                                 Text.separator
-                                                KeyBlockView("Home ⤒")
+                                                KeyBlockView("home ⤒")
                                                 Spacer()
                                         }
                                 }
@@ -184,7 +186,7 @@ struct HotkeysView: View {
                                                         }
                                         }
                                         HStack {
-                                                Text(verbatim: "Number: 1, 2, 3, ... 8, 9, 0")
+                                                Text(verbatim: "number: 1, 2, 3, ... 8, 9, 0")
                                                 Spacer()
                                         }
                                         .font(.subheadline)
@@ -227,24 +229,24 @@ private struct KeyBlockView: View {
                 Text(verbatim: keyText)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .padding(2)
-                        .frame(width: 72)
+                        .frame(width: 72, height: 24)
                         .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 
-        static let Control: KeyBlockView = KeyBlockView("Control ⌃")
-        static let Shift: KeyBlockView = KeyBlockView("Shift ⇧")
-        static let Number: KeyBlockView = KeyBlockView("Number")
+        static let Control: KeyBlockView = KeyBlockView("control ⌃")
+        static let Shift: KeyBlockView = KeyBlockView("shift ⇧")
+        static let Number: KeyBlockView = KeyBlockView("number")
         // static let Space: KeyBlockView = KeyBlockView("Space ␣")
         static let escape: KeyBlockView = KeyBlockView("esc ⎋")
 
         /// Backspace. NOT Forward Delete.
-        static let BackwardDelete: KeyBlockView = KeyBlockView("Delete ⌫")
+        static let BackwardDelete: KeyBlockView = KeyBlockView("delete ⌫")
 }
 
 
 private extension Text {
         static let separator: Text = Text(verbatim: ": ").foregroundColor(.secondary)
         static let plus: Text = Text(verbatim: "+")
+        static let or: Text = Text("or")
 }
 

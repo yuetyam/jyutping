@@ -24,6 +24,7 @@ enum Representative: Hashable {
         case backspace
         case escapeClear
         case space
+        case tab
         case previousPage
         case nextPage
         case other
@@ -137,6 +138,8 @@ extension UInt16 {
                         return .separator
                 case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
                         return .escapeClear
+                case KeyCode.Special.VK_TAB:
+                        return .tab
                 case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
                         return .previousPage
                 case KeyCode.Symbol.VK_EQUAL, KeyCode.Special.VK_PAGEDOWN:

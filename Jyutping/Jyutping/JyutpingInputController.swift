@@ -502,7 +502,6 @@ class JyutpingInputController: IMKInputController {
 
         override func activateServer(_ sender: Any!) {
                 currentClient = sender as? IMKTextInput
-                currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.US")
                 Lychee.connect()
                 if userLexicon == nil {
                         userLexicon = UserLexicon()
@@ -511,6 +510,9 @@ class JyutpingInputController: IMKInputController {
                         bufferText = .empty
                 }
                 resetWindow()
+                DispatchQueue.main.async { [weak self] in
+                        self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.US")
+                }
         }
         override func deactivateServer(_ sender: Any!) {
                 Lychee.close()
@@ -827,6 +829,18 @@ class JyutpingInputController: IMKInputController {
                                 return false
                         case .instantSettings:
                                 handleSettings()
+                                return true
+                        }
+                case .tab:
+                        switch inputState {
+                        case .cantonese:
+                                guard isBufferState else { return false }
+                                displayObject.increaseHighlightedIndex()
+                                return true
+                        case .english:
+                                return false
+                        case .instantSettings:
+                                settingsObject.increaseHighlightedIndex()
                                 return true
                         }
                 case .previousPage:
