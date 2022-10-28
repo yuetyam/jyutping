@@ -25,10 +25,26 @@ private extension View {
         }
 }
 
+@objc(JyutpingInputController)
 class JyutpingInputController: IMKInputController {
 
+        override func menu() -> NSMenu! {
+                let item = NSMenuItem()
+                item.title = NSLocalizedString("Preferences...", comment: "")
+                item.action = #selector(openPreferences)
+                item.keyEquivalent = ","
+                item.keyEquivalentModifierMask = [.control, .shift]
+                let menu = NSMenu()
+                menu.title = NSLocalizedString("Jyutping", comment: "")
+                menu.addItem(item)
+                return menu
+        }
+        @objc private func openPreferences() {
+                displayPreferencesPane()
+        }
         private lazy var preferencesWindow: NSWindow? = nil
         private func displayPreferencesPane() {
+                guard preferencesWindow == nil else { return }
                 let frame: CGRect = {
                         let x: CGFloat = screenFrame.width / 4.0
                         let y: CGFloat = screenFrame.height / 5.0
