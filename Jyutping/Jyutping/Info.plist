@@ -41,6 +41,8 @@
 	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+        <key>LSHasLocalizedDisplayName</key>
+        <true/>
 	<key>InputMethodConnectionName</key>
 	<string>Jyutping_1_Connection</string>
 	<key>InputMethodServerControllerClass</key>

@@ -29,14 +29,13 @@ private extension View {
 class JyutpingInputController: IMKInputController {
 
         override func menu() -> NSMenu! {
-                let item = NSMenuItem()
-                item.title = NSLocalizedString("Preferences...", comment: "")
-                item.action = #selector(openPreferences)
-                item.keyEquivalent = ","
-                item.keyEquivalentModifierMask = [.control, .shift]
+                let preferences = NSMenuItem()
+                preferences.title = NSLocalizedString("Preferences...", comment: "")
+                preferences.action = #selector(openPreferences)
+                preferences.keyEquivalent = ","
+                preferences.keyEquivalentModifierMask = [.control, .shift]
                 let menu = NSMenu()
-                menu.title = NSLocalizedString("Jyutping", comment: "")
-                menu.addItem(item)
+                menu.addItem(preferences)
                 return menu
         }
         @objc private func openPreferences() {
@@ -44,7 +43,8 @@ class JyutpingInputController: IMKInputController {
         }
         private lazy var preferencesWindow: NSWindow? = nil
         private func displayPreferencesPane() {
-                guard preferencesWindow == nil else { return }
+                preferencesWindow?.setFrame(.zero, display: true)
+                preferencesWindow?.close()
                 let frame: CGRect = {
                         let x: CGFloat = screenFrame.width / 4.0
                         let y: CGFloat = screenFrame.height / 5.0
@@ -75,13 +75,8 @@ class JyutpingInputController: IMKInputController {
                         ])
                 }
                 preferencesWindow?.contentViewController?.addChild(pane)
-                preferencesWindow?.makeKey()
                 preferencesWindow?.orderFrontRegardless()
                 preferencesWindow?.setFrame(frame, display: true)
-        }
-        private func closePreferencesWindow() {
-                preferencesWindow?.setFrame(.zero, display: true)
-                preferencesWindow?.close()
         }
 
         private lazy var window: NSWindow? = nil
@@ -603,8 +598,8 @@ class JyutpingInputController: IMKInputController {
                 case [.control, .shift], .control:
                         switch event.keyCode {
                         case KeyCode.Symbol.VK_COMMA:
-                                displayPreferencesPane()
-                                return true
+                                // handled by NSMenu
+                                return false
                         case KeyCode.Symbol.VK_BACKQUOTE:
                                 toggleInstantSettingsView()
                                 return true

@@ -1,3 +1,4 @@
 "org.jyutping.inputmethod.Jyutping" = "Jyutping";
-"CFBundleDisplayName" = "Jyutping";
-"CFBundleSpokenName" = "YuetPing";
+CFBundleName = "Jyutping";
+CFBundleDisplayName = "Jyutping";
+CFBundleSpokenName = "YuetPing";

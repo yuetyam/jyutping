@@ -1,2 +1,3 @@
 "org.jyutping.inputmethod.Jyutping" = "粵拼";
-"CFBundleDisplayName" = "粵拼";
+CFBundleName = "粵拼";
+CFBundleDisplayName = "粵拼";
