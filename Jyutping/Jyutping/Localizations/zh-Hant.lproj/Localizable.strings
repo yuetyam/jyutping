@@ -1,1 +1,71 @@
-"Jyutping" = "Jyutping";
+"menu.preferences" = "偏好設定...";
+
+"PreferencesView.SectionHeader.Candidates" = "候選詞";
+"PreferencesView.SectionHeader.Hotkeys" = "熱鍵";
+"PreferencesView.SectionHeader.About" = "關於";
+
+"PreferencesView.NavigationTitle.Preferences" = "偏好設定";
+"PreferencesView.NavigationTitle.Layouts" = "樣式佈局";
+"PreferencesView.NavigationTitle.Fonts" = "字體";
+"PreferencesView.NavigationTitle.Hotkeys" = "熱鍵";
+"PreferencesView.NavigationTitle.About" = "關於";
+
+
+// CandidateLayoutPreferencesView
+"Candidate Count Per Page" = "每䈎候選詞數目";
+"Candidate Line Spacing" = "候選詞行間隔";
+"Comment(Jyutping) Tones Display" = "候選詞註釋(粵拼)聲調樣式";
+"Normal" = "正常";
+"No Tones" = "無聲調";
+"Superscript" = "上標";
+"Subscript" = "下標";
+
+
+// CandidateFontPreferencesView
+"Candidate Font Size" = "候選詞字號";
+"Comment Font Size" = "候選詞註釋字號";
+"Serial Number Font Size" = "候選詞編號字號";
+"Candidate Font" = "候選詞字體";
+"Comment Font" = "候選詞註釋字體";
+"Serial Number Font" = "候選詞編號字體";
+"Default" = "默認";
+"System" = "系統";
+"Custom" = "自定";
+
+
+//HotkeysView
+"Press Shift Once To" = "撳一下 Shift 掣";
+"Do Nothing" = "無";
+"Switch between Cantonese and English" = "粵語／英語模式切換（未實現）";
+
+"Open Preferences Window (This Window)" = "開啓偏好設定窗口（即係當前邇個）";
+"Open/Close InstantSettings Window" = "開啓／關閉快捷設定窗口";
+"Directly toggle InstantSettings options" = "直接開關快捷設定項";
+"Switch to Cantonese Mode" = "切換至粵語模式";
+"Switch to English Mode" = "切換至英語模式";
+"Remove highlighted Candidate from User Lexicon" = "從用戶詞庫刪除當前高亮(highlighted)候選詞";
+"Clear current Input Buffer" = "清除當前已輸入音節（即 Input Buffer）";
+
+"Highlight previous Candidate" = "高亮(Highlight)上一個候選詞";
+"Highlight next Candidate" = "高亮(Highlight)下一個候選詞";
+"Backward to previous Candidate page" = "退返到上一䈎候選詞";
+"Forward to next Candidate page" = "翻去到下一䈎候選詞";
+"Jump to the first Candidate page" = "跳到第一䈎候選詞";
+"or" = "或";
+
+"Speak Candidate (Using system's built-in TTS)" = "朗讀候選詞（用系統內置嘅語音朗讀TTS）";
+
+
+// AboutView
+"Version" = "版本";
+
+"Website" = "網站";
+"Source Code" = "源碼";
+"Privacy Policy" = "私隱政策";
+
+"Telegram Group" = "Telegram 交流羣";
+"QQ Group" = "QQ 交流羣";
+
+"TRUTH Social" = "Truth Social";
+"Twitter" = "Twitter";
+"Instagram" = "Instagram";

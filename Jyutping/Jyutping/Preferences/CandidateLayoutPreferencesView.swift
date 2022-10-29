@@ -54,6 +54,6 @@ struct CandidateLayoutPreferencesView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .navigationTitle("Layouts")
+                .navigationTitle("PreferencesView.NavigationTitle.Layouts")
         }
 }

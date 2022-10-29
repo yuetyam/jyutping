@@ -295,6 +295,6 @@ struct CandidateFontPreferencesView: View {
                         customCommentFonts = customCommentFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
                         customLabelFonts = customLabelFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
                 }
-                .navigationTitle("Fonts")
+                .navigationTitle("PreferencesView.NavigationTitle.Fonts")
         }
 }

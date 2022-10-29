@@ -1,1 +1,71 @@
-"Jyutping" = "Jyutping";
+"menu.preferences" = "Preferences...";
+
+"PreferencesView.SectionHeader.Candidates" = "Candidates";
+"PreferencesView.SectionHeader.Hotkeys" = "Hotkeys";
+"PreferencesView.SectionHeader.About" = "About";
+
+"PreferencesView.NavigationTitle.Preferences" = "Preferences";
+"PreferencesView.NavigationTitle.Layouts" = "Layouts";
+"PreferencesView.NavigationTitle.Fonts" = "Fonts";
+"PreferencesView.NavigationTitle.Hotkeys" = "Hotkeys";
+"PreferencesView.NavigationTitle.About" = "About";
+
+
+// CandidateLayoutPreferencesView
+"Candidate Count Per Page" = "Candidate Count Per Page";
+"Candidate Line Spacing" = "Candidate Line Spacing";
+"Comment(Jyutping) Tones Display" = "Comment(Jyutping) Tones Display";
+"Normal" = "Normal";
+"No Tones" = "No Tones";
+"Superscript" = "Superscript";
+"Subscript" = "Subscript";
+
+
+// CandidateFontPreferencesView
+"Candidate Font Size" = "Candidate Font Size";
+"Comment Font Size" = "Comment Font Size";
+"Serial Number Font Size" = "Serial Number Font Size";
+"Candidate Font" = "Candidate Font";
+"Comment Font" = "Comment Font";
+"Serial Number Font" = "Serial Number Font";
+"Default" = "Default";
+"System" = "System";
+"Custom" = "Custom";
+
+
+//HotkeysView
+"Press Shift Once To" = "Press Shift Once To";
+"Do Nothing" = "Do Nothing";
+"Switch between Cantonese and English" = "Switch between Cantonese and English (Not Implemented Yet)";
+
+"Open Preferences Window (This Window)" = "Open Preferences Window (This Window)";
+"Open/Close InstantSettings Window" = "Open/Close InstantSettings Window";
+"Directly toggle InstantSettings options" = "Directly toggle InstantSettings options";
+"Switch to Cantonese Mode" = "Switch to Cantonese Mode";
+"Switch to English Mode" = "Switch to English Mode";
+"Remove highlighted Candidate from User Lexicon" = "Remove highlighted Candidate from User Lexicon";
+"Clear current Input Buffer" = "Clear current Input Buffer";
+
+"Highlight previous Candidate" = "Highlight previous Candidate";
+"Highlight next Candidate" = "Highlight next Candidate";
+"Backward to previous Candidate page" = "Backward to previous Candidate page";
+"Forward to next Candidate page" = "Forward to next Candidate page";
+"Jump to the first Candidate page" = "Jump to the first Candidate page";
+"or" = "or";
+
+"Speak Candidate (Using system's built-in TTS)" = "Speak Candidate (Using system's built-in TTS)";
+
+
+// AboutView
+"Version" = "Version";
+
+"Website" = "Website";
+"Source Code" = "Source Code";
+"Privacy Policy" = "Privacy Policy";
+
+"Telegram Group" = "Telegram Group";
+"QQ Group" = "QQ Group";
+
+"TRUTH Social" = "Follow us on Truth Social";
+"Twitter" = "Follow us on Twitter";
+"Instagram" = "Follow us on Instagram";

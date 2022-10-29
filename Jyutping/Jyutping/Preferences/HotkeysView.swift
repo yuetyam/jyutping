@@ -197,7 +197,7 @@ struct HotkeysView: View {
                         .padding(.bottom)
                         .padding()
                 }
-                .navigationTitle("Hotkeys")
+                .navigationTitle("PreferencesView.NavigationTitle.Hotkeys")
         }
 }
 

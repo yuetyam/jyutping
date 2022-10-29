@@ -30,7 +30,7 @@ class JyutpingInputController: IMKInputController {
 
         override func menu() -> NSMenu! {
                 let preferences = NSMenuItem()
-                preferences.title = NSLocalizedString("Preferences...", comment: "")
+                preferences.title = NSLocalizedString("menu.preferences", comment: "")
                 preferences.action = #selector(openPreferences)
                 preferences.keyEquivalent = ","
                 preferences.keyEquivalentModifierMask = [.control, .shift]

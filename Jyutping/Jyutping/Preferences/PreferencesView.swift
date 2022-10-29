@@ -22,33 +22,33 @@ struct PreferencesView: View {
                         List {
                                 Section {
                                         NavigationLink(destination: CandidateLayoutPreferencesView(), isActive: $isLayoutsViewActive) {
-                                                Label("Layouts", systemImage: "list.number")
+                                                Label("PreferencesView.NavigationTitle.Layouts", systemImage: "list.number")
                                         }
                                         NavigationLink(destination: CandidateFontPreferencesView()) {
-                                                Label("Fonts", systemImage: "textformat")
+                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat")
                                         }
                                 } header: {
-                                        Text("Candidates").textCase(nil)
+                                        Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
                                 }
 
                                 Section {
                                         NavigationLink(destination: HotkeysView()) {
-                                                Label("Hotkeys", systemImage: "keyboard")
+                                                Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard")
                                         }
                                 } header: {
-                                        Text("Hotkeys").textCase(nil)
+                                        Text("PreferencesView.SectionHeader.Hotkeys").textCase(nil)
                                 }
 
                                 Section {
                                         NavigationLink(destination: AboutView()) {
-                                                Label("About", systemImage: "info.circle")
+                                                Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle")
                                         }
                                 } header: {
-                                        Text("About").textCase(nil)
+                                        Text("PreferencesView.SectionHeader.About").textCase(nil)
                                 }
                         }
                         .listStyle(.sidebar)
-                        .navigationTitle("Preferences")
+                        .navigationTitle("PreferencesView.NavigationTitle.Preferences")
                 }
         }
 }
