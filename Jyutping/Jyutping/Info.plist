@@ -6,7 +6,7 @@
 	<dict>
 		<key>tsInputModeListKey</key>
 		<dict>
-			<key>org.jyutping.inputmethod.Jyutping</key>
+			<key>org.jyutping.inputmethod.Jyutping.IME</key>
 			<dict>
 				<key>TISInputSourceID</key>
 				<string>org.jyutping.inputmethod.Jyutping.IME</string>
@@ -14,10 +14,6 @@
 				<string>yue</string>
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>icon.png</string>
-				<key>tsInputModeCharacterRepertoireKey</key>
-				<array>
-					<string>Hant</string>
-				</array>
 				<key>tsInputModeDefaultStateKey</key>
 				<true/>
 				<key>tsInputModeIsVisibleKey</key>
@@ -44,8 +40,10 @@
         <key>LSHasLocalizedDisplayName</key>
         <true/>
 	<key>InputMethodConnectionName</key>
-	<string>Jyutping_1_Connection</string>
+	<string>org_jyutping_inputmethod_Jyutping_Connection</string>
 	<key>InputMethodServerControllerClass</key>
+	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
+	<key>InputMethodServerDelegateClass</key>
 	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
 	<key>LSBackgroundOnly</key>
 	<false/>
@@ -58,6 +56,7 @@
 	<key>tsInputMethodCharacterRepertoireKey</key>
 	<array>
 		<string>Hant</string>
+		<string>Hans</string>
 	</array>
 	<key>tsInputMethodIconFileKey</key>
 	<string>icon.png</string>

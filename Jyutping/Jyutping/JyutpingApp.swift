@@ -21,7 +21,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
-                let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "Jyutping_1_Connection"
+                // let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org_jyutping_inputmethod_Jyutping_Connection"
+                let name: String = "org_jyutping_inputmethod_Jyutping_Connection"
                 server = IMKServer(name: name, bundleIdentifier: Bundle.main.bundleIdentifier)
         }
 
