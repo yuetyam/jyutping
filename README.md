@@ -5,6 +5,10 @@ Jyutping
 
 <a href="https://t.me/jyutping">
         <img src="images/telegram.png" alt="Telegram" width="150"/>
+</a>　<a href="https://twitter.com/JyutpingApp">
+        <img src="images/twitter.png" alt="Twitter" width="150"/>
+</a>　<a href="https://www.instagram.com/jyutping_app">
+        <img src="images/instagram.png" alt="Instagram" width="150"/>
 </a>
 
 ## iOS & iPadOS
