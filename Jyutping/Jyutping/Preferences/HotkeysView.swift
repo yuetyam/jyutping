@@ -21,13 +21,14 @@ private extension Int {
 struct HotkeysView: View {
 
         @AppStorage(SettingsKeys.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce.rawValue
+        @AppStorage(SettingsKeys.ShiftSpaceCombination) private var shiftSpaceCombination: Int = AppSettings.shiftSpaceCombination.rawValue
         @AppStorage(SettingsKeys.SpeakCandidate) private var speakCandidateSate: Int = AppSettings.isSpeakCandidateEnabled ? 101 : 102
 
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 HStack {
-                                        Picker("Press Shift Once To", selection: $pressShiftOnce) {
+                                        Picker("Press **Shift** Once To", selection: $pressShiftOnce) {
                                                 Text("Do Nothing").tag(1)
                                                 Text("Switch between Cantonese and English").tag(2)
                                         }
@@ -39,13 +40,26 @@ struct HotkeysView: View {
                                         Spacer()
                                 }
                                 .block()
+                                HStack {
+                                        Picker("Press **Shift** + **Space** To", selection: $shiftSpaceCombination) {
+                                                Text("Input a Full-width Space (U+3000)").tag(1)
+                                                Text("Switch between Cantonese and English").tag(2)
+                                        }
+                                        .scaledToFit()
+                                        .pickerStyle(.radioGroup)
+                                        .onChange(of: shiftSpaceCombination) { newValue in
+                                                AppSettings.updateShiftSpaceCombination(to: newValue)
+                                        }
+                                        Spacer()
+                                }
+                                .block()
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
                                                 LabelText("Open Preferences Window (This Window)")
                                                 Text.separator
-                                                KeyBlockView.Control
+                                                KeyBlockView.control
                                                 Text.plus
-                                                KeyBlockView.Shift
+                                                KeyBlockView.shift
                                                 Text.plus
                                                 KeyBlockView(",")
                                                 Spacer()
@@ -53,9 +67,9 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Open/Close InstantSettings Window")
                                                 Text.separator
-                                                KeyBlockView.Control
+                                                KeyBlockView.control
                                                 Text.plus
-                                                KeyBlockView.Shift
+                                                KeyBlockView.shift
                                                 Text.plus
                                                 KeyBlockView("`")
                                                 Spacer()
@@ -66,11 +80,11 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Directly toggle InstantSettings options")
                                                 Text.separator
-                                                KeyBlockView.Control
+                                                KeyBlockView.control
                                                 Text.plus
-                                                KeyBlockView.Shift
+                                                KeyBlockView.shift
                                                 Text.plus
-                                                KeyBlockView.Number
+                                                KeyBlockView.number
                                                 Spacer()
                                         }
                                         HStack {
@@ -80,13 +94,14 @@ struct HotkeysView: View {
                                         .font(.subheadline)
                                 }
                                 .block()
+                                /*
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
                                                 LabelText("Switch to Cantonese Mode")
                                                 Text.separator
-                                                KeyBlockView.Control
+                                                KeyBlockView.control
                                                 Text.plus
-                                                KeyBlockView.Shift
+                                                KeyBlockView.shift
                                                 Text.plus
                                                 KeyBlockView("-")
                                                 Spacer()
@@ -94,23 +109,24 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Switch to English Mode")
                                                 Text.separator
-                                                KeyBlockView.Control
+                                                KeyBlockView.control
                                                 Text.plus
-                                                KeyBlockView.Shift
+                                                KeyBlockView.shift
                                                 Text.plus
                                                 KeyBlockView("=")
                                                 Spacer()
                                         }
                                 }
                                 .block()
+                                */
                                 HStack(spacing: 4) {
                                         LabelText("Remove highlighted Candidate from User Lexicon")
                                         Text.separator
-                                        KeyBlockView.Control
+                                        KeyBlockView.control
                                         Text.plus
-                                        KeyBlockView.Shift
+                                        KeyBlockView.shift
                                         Text.plus
-                                        KeyBlockView.BackwardDelete
+                                        KeyBlockView.backwardDelete
                                         Spacer()
                                 }
                                 .block()
@@ -172,11 +188,11 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Speak Candidate (Using system's built-in TTS)")
                                                 Text.separator
-                                                KeyBlockView.Control
+                                                KeyBlockView.control
                                                 Text.plus
-                                                KeyBlockView.Shift
+                                                KeyBlockView.shift
                                                 Text.plus
-                                                KeyBlockView.Number
+                                                KeyBlockView.number
                                                 Spacer()
                                                 Toggle("isSpeakCandidateEnabled", isOn: $speakCandidateSate.isSpeakCandidateOn)
                                                         .toggleStyle(.switch)
@@ -233,14 +249,14 @@ private struct KeyBlockView: View {
                         .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 
-        static let Control: KeyBlockView = KeyBlockView("control ⌃")
-        static let Shift: KeyBlockView = KeyBlockView("shift ⇧")
-        static let Number: KeyBlockView = KeyBlockView("number")
-        // static let Space: KeyBlockView = KeyBlockView("Space ␣")
+        static let control: KeyBlockView = KeyBlockView("control ⌃")
+        static let shift: KeyBlockView = KeyBlockView("shift ⇧")
+        static let number: KeyBlockView = KeyBlockView("number")
+        static let space: KeyBlockView = KeyBlockView("space ␣")
         static let escape: KeyBlockView = KeyBlockView("esc ⎋")
 
-        /// Backspace. NOT Forward Delete.
-        static let BackwardDelete: KeyBlockView = KeyBlockView("delete ⌫")
+        /// Backspace. NOT Forward-Delete.
+        static let backwardDelete: KeyBlockView = KeyBlockView("delete ⌫")
 }
 
 

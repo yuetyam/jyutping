@@ -603,6 +603,7 @@ class JyutpingInputController: IMKInputController {
                         case KeyCode.Symbol.VK_BACKQUOTE:
                                 toggleInstantSettingsView()
                                 return true
+                        /*
                         case KeyCode.Symbol.VK_MINUS:
                                 inputState = .cantonese
                                 InstantSettings.updateInputMethodMode(to: .cantonese)
@@ -611,6 +612,7 @@ class JyutpingInputController: IMKInputController {
                                 inputState = .english
                                 InstantSettings.updateInputMethodMode(to: .english)
                                 return true
+                        */
                         case KeyCode.Special.VK_BACKWARD_DELETE:
                                 switch inputState {
                                 case .cantonese:
@@ -828,7 +830,8 @@ class JyutpingInputController: IMKInputController {
                         case .cantonese:
                                 if candidates.isEmpty {
                                         passBuffer()
-                                        guard InstantSettings.characterForm == .fullWidth else { return false }
+                                        let shouldInsertFullWidthSpace: Bool = isShifting || InstantSettings.characterForm == .fullWidth
+                                        guard shouldInsertFullWidthSpace else { return false }
                                         insert(String.fullWidthSpace)
                                         return true
                                 } else {

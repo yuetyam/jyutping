@@ -20,7 +20,7 @@ struct SettingsKeys {
 
 
         static let PressShiftOnce: String = "PressShiftOnce"
-
+        static let ShiftSpaceCombination: String = "ShiftSpaceCombination"
         static let SpeakCandidate: String = "SpeakCandidate"
 }
 
@@ -69,6 +69,11 @@ enum FontMode: Int {
 
 enum PressShiftOnce: Int {
         case doNothing = 1
+        case switchCantoneseEnglish = 2
+}
+
+enum ShiftSpaceCombination: Int {
+        case inputFullWidthSpace = 1
         case switchCantoneseEnglish = 2
 }
 
@@ -310,6 +315,35 @@ struct AppSettings {
                         }
                 }()
                 pressShiftOnce = newOption
+        }
+
+        /// Press Shift+Space TO
+        ///
+        /// 1. Input Full-width Space (U+3000)
+        /// 2. Switch between Cantonese and English
+        private(set) static var shiftSpaceCombination: ShiftSpaceCombination = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ShiftSpaceCombination)
+                switch savedValue {
+                case 0, 1:
+                        return .inputFullWidthSpace
+                case 2:
+                        return .switchCantoneseEnglish
+                default:
+                        return .inputFullWidthSpace
+                }
+        }()
+        static func updateShiftSpaceCombination(to newValue: Int) {
+                let newOption: ShiftSpaceCombination = {
+                        switch newValue {
+                        case 0, 1:
+                                return .inputFullWidthSpace
+                        case 2:
+                                return .switchCantoneseEnglish
+                        default:
+                                return .inputFullWidthSpace
+                        }
+                }()
+                shiftSpaceCombination = newOption
         }
 
         private(set) static var isSpeakCandidateEnabled: Bool = {
