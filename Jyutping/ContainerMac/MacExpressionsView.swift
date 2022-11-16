@@ -201,7 +201,7 @@ struct MacExpressionsView: View {
                                                         Image.checkmark.foregroundColor(.green)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "係嘞，你試過箇間餐廳未呀？")
+                                                        Text(verbatim: "係嘞，你試過箇間餐廳未啊？")
                                                 } icon: {
                                                         Image.checkmark.foregroundColor(.green)
                                                 }
@@ -211,7 +211,7 @@ struct MacExpressionsView: View {
                                                         Image.xmark.foregroundColor(.red)
                                                 }
                                                 Label {
-                                                        Text(verbatim: "係了，你試過箇間餐廳未呀？")
+                                                        Text(verbatim: "係了，你試過箇間餐廳未啊？")
                                                 } icon: {
                                                         Image.xmark.foregroundColor(.red)
                                                 }
