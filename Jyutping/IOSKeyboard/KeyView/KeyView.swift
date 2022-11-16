@@ -73,7 +73,7 @@ final class KeyView: UIView {
                 isInteracting = true
                 peekingText = nil
                 switch self.event {
-                case .none, .hidden(.text), .globe:
+                case .none, .globe:
                         break
                 case .input(let seat) where seat.hasChildren:
                         if keyboardInterface.isPhonePortrait {
@@ -82,12 +82,16 @@ final class KeyView: UIView {
                                 shape.backgroundColor = highlightingBackColor
                         }
                         handleLongPress()
+                        AudioFeedback.perform(.input)
                 case .input:
                         if keyboardInterface.isPhonePortrait {
                                 displayPreview()
                         } else {
                                 shape.backgroundColor = highlightingBackColor
                         }
+                        AudioFeedback.perform(.input)
+                case .hidden(.text):
+                        AudioFeedback.perform(.input)
                 case .backspace:
                         shape.backgroundColor = highlightingBackColor
                         backspaceTouchPoint = touches.first?.location(in: self) ?? .zero

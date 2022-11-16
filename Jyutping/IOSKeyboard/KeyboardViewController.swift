@@ -186,7 +186,6 @@ final class KeyboardViewController: UIInputViewController {
                 switch operation {
                 case .input(let text):
                         defer {
-                                AudioFeedback.perform(.input)
                                 adjustKeyboardIdiom()
                         }
                         guard keyboardIdiom.isPingMode else {
