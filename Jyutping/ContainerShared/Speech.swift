@@ -4,11 +4,10 @@ struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
         private static let voice: AVSpeechSynthesisVoice? = {
-                // TODO: - Update for macOS 13
-                if let iOS16Premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-HK.Sinji") {
-                        return iOS16Premium
-                } else if let oldIOSEnhanced = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Sin-Ji-premium") {
-                        return oldIOSEnhanced
+                if let iOS16_macOS13_Premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-HK.Sinji") {
+                        return iOS16_macOS13_Premium
+                } else if let iOS15Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Sin-Ji-premium") {
+                        return iOS15Enhanced
                 } else if let macOS12Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.speech.synthesis.voice.sinji.premium") {
                         return macOS12Enhanced
                 } else if let iOS16Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.voice.enhanced.zh-HK.Sinji") {
