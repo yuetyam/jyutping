@@ -16,7 +16,11 @@ struct ContainerApp: App {
 
         var body: some Scene {
                 WindowGroup {
-                        MacContentView().background(VisualEffect())
+                        if #available(macOS 13.0, *) {
+                                MacContentView_macOS13().background(VisualEffect())
+                        } else {
+                                MacContentView().background(VisualEffect())
+                        }
                 }
                 .windowToolbarStyle(.unifiedCompact)
         }
