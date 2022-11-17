@@ -24,10 +24,10 @@ struct CandidatesView: View {
                                                         Text(verbatim: secondaryComment).font(.comment)
                                                 }
                                         }
-                                        .opacity(0)
+                                        .hidden()
                                         HStack(spacing: 14) {
                                                 SerialNumberLabel(index)
-                                                Text(verbatim: candidate.text).font(.candidate)
+                                                Text(verbatim: candidate.text).font(.candidate).animation(nil, value: displayObject.animationState)
                                                 if let comment = candidate.comment {
                                                         CommentLabel(comment, toneStyle: toneStyle)
                                                 }
