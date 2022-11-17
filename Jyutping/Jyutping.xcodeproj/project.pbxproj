@@ -39,6 +39,7 @@
 		3764CEF727BE127000DCFB51 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEE827BE127000DCFB51 /* Direction.swift */; };
 		3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEC27BE127000DCFB51 /* FontExtensions.swift */; };
 		3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */; };
+		376C7665292630620083AE7B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C7664292630620083AE7B /* ViewExtensions.swift */; };
 		3777EF0327F9CF8500D1EED0 /* SaamPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0227F9CF8500D1EED0 /* SaamPing.swift */; };
 		3777EF0527F9D45E00D1EED0 /* CantoneseNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0427F9D45E00D1EED0 /* CantoneseNumeric.swift */; };
 		3777EF0727FA946200D1EED0 /* CantoneseSymbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0627FA946200D1EED0 /* CantoneseSymbolic.swift */; };
@@ -270,6 +271,7 @@
 		3764CEEC27BE127000DCFB51 /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		3764CEFF27BE13D900DCFB51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		376C7664292630620083AE7B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		3777EF0227F9CF8500D1EED0 /* SaamPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaamPing.swift; sourceTree = "<group>"; };
 		3777EF0427F9D45E00D1EED0 /* CantoneseNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseNumeric.swift; sourceTree = "<group>"; };
 		3777EF0627FA946200D1EED0 /* CantoneseSymbolic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseSymbolic.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				3764CEDF27BE126F00DCFB51 /* StringExtensions.swift */,
 				3764CEE327BE126F00DCFB51 /* CharacterExtensions.swift */,
 				3764CEEC27BE127000DCFB51 /* FontExtensions.swift */,
+				376C7664292630620083AE7B /* ViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1219,6 +1222,7 @@
 				3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */,
 				37184B05284E351B0072A53E /* Representative.swift in Sources */,
 				37F31F4F27D565EA008399DB /* WindowPattern.swift in Sources */,
+				376C7665292630620083AE7B /* ViewExtensions.swift in Sources */,
 				37ABA5AE27C19882000AC306 /* Logogram.swift in Sources */,
 				3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */,
 				3797B03C28E27C4F00AE2196 /* CandidateLayoutPreferencesView.swift in Sources */,
