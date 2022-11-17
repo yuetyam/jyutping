@@ -1,10 +1,12 @@
-"menu.preferences" = "Preferences...";
+"menu.preferences" = "Settings…";
+
+"Jyutping Input Method Preferences" = "Jyutping Input Method Settings";
 
 "PreferencesView.SectionHeader.Candidates" = "Candidates";
 "PreferencesView.SectionHeader.Hotkeys" = "Hotkeys";
 "PreferencesView.SectionHeader.About" = "About";
 
-"PreferencesView.NavigationTitle.Preferences" = "Preferences";
+"PreferencesView.NavigationTitle.Preferences" = "Settings";
 "PreferencesView.NavigationTitle.Layouts" = "Layouts";
 "PreferencesView.NavigationTitle.Fonts" = "Fonts";
 "PreferencesView.NavigationTitle.Hotkeys" = "Hotkeys";
@@ -41,7 +43,7 @@
 "Press **Shift** + **Space** To" = "Press **Shift** + **Space** To";
 "Input a Full-width Space (U+3000)" = "Input a Full-width Space (U+3000)";
 
-"Open Preferences Window (This Window)" = "Open Preferences Window (This Window)";
+"Open Preferences Window (This Window)" = "Open Settings Window (This Window)";
 "Open/Close InstantSettings Window" = "Open/Close InstantSettings Window";
 "Directly toggle InstantSettings options" = "Directly toggle InstantSettings options";
 "Switch to Cantonese Mode" = "Switch to Cantonese Mode";

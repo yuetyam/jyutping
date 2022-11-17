@@ -26,7 +26,7 @@ private extension View {
 }
 
 @objc(JyutpingInputController)
-class JyutpingInputController: IMKInputController {
+final class JyutpingInputController: IMKInputController {
 
         override func menu() -> NSMenu! {
                 let preferences = NSMenuItem()
@@ -53,8 +53,7 @@ class JyutpingInputController: IMKInputController {
                         return CGRect(x: x, y: y, width: width, height: height)
                 }()
                 preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
-                preferencesWindow?.titlebarAppearsTransparent = true
-                preferencesWindow?.toolbarStyle = .unifiedCompact
+                preferencesWindow?.title = NSLocalizedString("Jyutping Input Method Preferences", comment: "")
                 let visualEffectView = NSVisualEffectView()
                 visualEffectView.material = .titlebar
                 visualEffectView.state = .active

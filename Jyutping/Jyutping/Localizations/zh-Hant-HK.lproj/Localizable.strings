@@ -1,10 +1,12 @@
-"menu.preferences" = "偏好設定...";
+"menu.preferences" = "設定⋯";
+
+"Jyutping Input Method Preferences" = "粵拼輸入法設定";
 
 "PreferencesView.SectionHeader.Candidates" = "候選詞";
 "PreferencesView.SectionHeader.Hotkeys" = "熱鍵";
 "PreferencesView.SectionHeader.About" = "關於";
 
-"PreferencesView.NavigationTitle.Preferences" = "偏好設定";
+"PreferencesView.NavigationTitle.Preferences" = "設定";
 "PreferencesView.NavigationTitle.Layouts" = "樣式佈局";
 "PreferencesView.NavigationTitle.Fonts" = "字體";
 "PreferencesView.NavigationTitle.Hotkeys" = "熱鍵";
@@ -41,7 +43,7 @@
 "Press **Shift** + **Space** To" = "撳 Shift + Space";
 "Input a Full-width Space (U+3000)" = "輸入一個全形空格（U+3000）";
 
-"Open Preferences Window (This Window)" = "開啓偏好設定窗口（即係當前邇個）";
+"Open Preferences Window (This Window)" = "開啓設定窗口（即係當前邇個）";
 "Open/Close InstantSettings Window" = "開啓／關閉快捷設定窗口";
 "Directly toggle InstantSettings options" = "直接開關快捷設定項";
 "Switch to Cantonese Mode" = "切換至粵語模式";
