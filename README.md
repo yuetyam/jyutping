@@ -37,6 +37,7 @@ Jyutping
 
 
 ## Build requirements
+- macOS 13.0+
 - Xcode 14.1+
 
 ## Credits
