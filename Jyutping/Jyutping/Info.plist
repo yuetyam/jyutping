@@ -14,6 +14,11 @@
 				<string>yue</string>
 				<key>tsInputModeAlternateMenuIconFileKey</key>
 				<string>jyutping.pdf</string>
+				<key>TISIconLabels</key>
+				<dict>
+					<key>Primary</key>
+					<string>粵拼</string>
+				</dict>
 				<key>tsInputModeDefaultStateKey</key>
 				<true/>
 				<key>tsInputModeIsVisibleKey</key>
