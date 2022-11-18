@@ -21,7 +21,7 @@ struct SettingsKeys {
 
         static let PressShiftOnce: String = "PressShiftOnce"
         static let ShiftSpaceCombination: String = "ShiftSpaceCombination"
-        static let SpeakCandidate: String = "SpeakCandidate"
+        // static let SpeakCandidate: String = "SpeakCandidate"
 }
 
 enum ToneDisplayStyle: Int {
@@ -346,6 +346,7 @@ struct AppSettings {
                 shiftSpaceCombination = newOption
         }
 
+        /*
         private(set) static var isSpeakCandidateEnabled: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.SpeakCandidate)
                 switch savedValue {
@@ -370,5 +371,6 @@ struct AppSettings {
                 }()
                 isSpeakCandidateEnabled = newState
         }
+        */
 }
 

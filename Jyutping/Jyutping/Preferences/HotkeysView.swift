@@ -1,5 +1,6 @@
 import SwiftUI
 
+/*
 private extension Int {
         var isSpeakCandidateOn: Bool {
                 get {
@@ -17,12 +18,13 @@ private extension Int {
                 }
         }
 }
+*/
 
 struct HotkeysView: View {
 
         @AppStorage(SettingsKeys.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce.rawValue
         @AppStorage(SettingsKeys.ShiftSpaceCombination) private var shiftSpaceCombination: Int = AppSettings.shiftSpaceCombination.rawValue
-        @AppStorage(SettingsKeys.SpeakCandidate) private var speakCandidateSate: Int = AppSettings.isSpeakCandidateEnabled ? 101 : 102
+        // @AppStorage(SettingsKeys.SpeakCandidate) private var speakCandidateState: Int = AppSettings.isSpeakCandidateEnabled ? 101 : 102
 
         var body: some View {
                 ScrollView {
@@ -149,7 +151,7 @@ struct HotkeysView: View {
                                                 Text.separator
                                                 KeyBlockView("▼")
                                                 Text.or
-                                                KeyBlockView("tab ⇥")
+                                                KeyBlockView("Tab ⇥")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
@@ -161,7 +163,7 @@ struct HotkeysView: View {
                                                 Text.or
                                                 KeyBlockView(",")
                                                 Text.or
-                                                KeyBlockView("page up ↑")
+                                                KeyBlockView("Page Up ↑")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
@@ -173,17 +175,18 @@ struct HotkeysView: View {
                                                 Text.or
                                                 KeyBlockView(".")
                                                 Text.or
-                                                KeyBlockView("page down ↓")
+                                                KeyBlockView("Page Down ↓")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
                                                 LabelText("Jump to the first Candidate page")
                                                 Text.separator
-                                                KeyBlockView("home ⤒")
+                                                KeyBlockView("Home ⤒")
                                                 Spacer()
                                         }
                                 }
                                 .block()
+                                /*
                                 VStack {
                                         HStack(spacing: 4) {
                                                 LabelText("Speak Candidate (Using system's built-in TTS)")
@@ -194,10 +197,10 @@ struct HotkeysView: View {
                                                 Text.plus
                                                 KeyBlockView.number
                                                 Spacer()
-                                                Toggle("isSpeakCandidateEnabled", isOn: $speakCandidateSate.isSpeakCandidateOn)
+                                                Toggle("isSpeakCandidateEnabled", isOn: $speakCandidateState.isSpeakCandidateOn)
                                                         .toggleStyle(.switch)
                                                         .labelsHidden()
-                                                        .onChange(of: speakCandidateSate) { newValue in
+                                                        .onChange(of: speakCandidateState) { newValue in
                                                                 AppSettings.updateSpeakCandidateState(to: newValue)
                                                         }
                                         }
@@ -208,6 +211,7 @@ struct HotkeysView: View {
                                         .font(.subheadline)
                                 }
                                 .block()
+                                */
                         }
                         .textSelection(.enabled)
                         .padding(.bottom)
@@ -249,14 +253,14 @@ private struct KeyBlockView: View {
                         .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 
-        static let control: KeyBlockView = KeyBlockView("control ⌃")
-        static let shift: KeyBlockView = KeyBlockView("shift ⇧")
+        static let control: KeyBlockView = KeyBlockView("Control ⌃")
+        static let shift: KeyBlockView = KeyBlockView("Shift ⇧")
         static let number: KeyBlockView = KeyBlockView("number")
-        static let space: KeyBlockView = KeyBlockView("space ␣")
-        static let escape: KeyBlockView = KeyBlockView("esc ⎋")
+        static let space: KeyBlockView = KeyBlockView("Space ␣")
+        static let escape: KeyBlockView = KeyBlockView("Esc ⎋")
 
         /// Backspace. NOT Forward-Delete.
-        static let backwardDelete: KeyBlockView = KeyBlockView("delete ⌫")
+        static let backwardDelete: KeyBlockView = KeyBlockView("Delete ⌫")
 }
 
 

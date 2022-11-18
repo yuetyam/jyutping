@@ -683,6 +683,10 @@ final class JyutpingInputController: IMKInputController {
                         switch inputState {
                         case .cantonese:
                                 if isBufferState {
+                                        selectDisplayingItem(index: index, client: client)
+                                        adjustWindow(origin: client.position)
+                                        return true
+                                        /*
                                         if hasControlShiftModifiers {
                                                 guard AppSettings.isSpeakCandidateEnabled else { return true }
                                                 guard let item = displayObject.items.fetch(index) else { return true }
@@ -694,6 +698,7 @@ final class JyutpingInputController: IMKInputController {
                                                 adjustWindow(origin: client.position)
                                                 return true
                                         }
+                                        */
                                 } else {
                                         if hasControlShiftModifiers {
                                                 handleSettings(index)
