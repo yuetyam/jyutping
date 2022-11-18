@@ -16,7 +16,7 @@ struct PreferencesView: View {
         @NSApplicationDelegateAdaptor(PreferencesAppDelegate.self) var appDelegate
 
         // macOS 13.0+
-        @State private var selection: ItemIdentifier = .layouts
+        @State private var selection: ViewIdentifier = .layouts
 
         // macOS 12
         @State private var isLayoutsViewActive: Bool = true
@@ -26,18 +26,18 @@ struct PreferencesView: View {
                         NavigationSplitView {
                                 List(selection: $selection) {
                                         Section {
-                                                Label("PreferencesView.NavigationTitle.Layouts", systemImage: "list.number").tag(ItemIdentifier.layouts)
-                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(ItemIdentifier.fonts)
+                                                Label("PreferencesView.NavigationTitle.Layouts", systemImage: "list.number").tag(ViewIdentifier.layouts)
+                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(ViewIdentifier.fonts)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
                                         }
                                         Section {
-                                                Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(ItemIdentifier.hotkeys)
+                                                Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(ViewIdentifier.hotkeys)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Hotkeys").textCase(nil)
                                         }
                                         Section {
-                                                Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle").tag(ItemIdentifier.about)
+                                                Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle").tag(ViewIdentifier.about)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.About").textCase(nil)
                                         }
@@ -94,7 +94,7 @@ struct PreferencesView: View {
 }
 
 
-private enum ItemIdentifier: Int, Hashable, Identifiable {
+private enum ViewIdentifier: Int, Hashable, Identifiable {
 
         case layouts
         case fonts
