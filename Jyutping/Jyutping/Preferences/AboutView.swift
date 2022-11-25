@@ -30,7 +30,7 @@ struct AboutView: View {
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "t.square", tittle: "TRUTH Social", link: "https://truthsocial.com/@Cantonese")
+                                        // LinkLabel(icon: "t.square", tittle: "TRUTH Social", link: "https://truthsocial.com/@Cantonese")
                                         LinkLabel(icon: "at", tittle: "Twitter", link: "https://twitter.com/JyutpingApp")
                                         LinkLabel(icon: "circle.square", tittle: "Instagram", link: "https://www.instagram.com/jyutping_app")
                                 }

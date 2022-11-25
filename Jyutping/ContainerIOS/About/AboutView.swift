@@ -73,6 +73,7 @@ struct AboutView: View {
                                         }
                                 }
                                 Section {
+                                        /*
                                         Button {
                                                 let appUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
                                                 let webUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
@@ -84,6 +85,7 @@ struct AboutView: View {
                                                 UsernameCopyButton("Cantonese")
                                                 URLCopyButton("https://truthsocial.com/@Cantonese")
                                         }
+                                        */
 
                                         // Twitter App supports Universal Links
                                         Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
@@ -114,15 +116,17 @@ struct AboutView: View {
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping/issues")
                                         }
-                                        Link(destination: URL(string: "imessage://support@jyutping.app")!) {
+                                        /*
+                                        Link(destination: URL(string: "imessage://bing@ososo.io")!) {
                                                 EnhancedLabel("iMessage Feedback", icon: "message", symbol: Image(systemName: "square.and.pencil"))
                                         }
                                         .contextMenu {
-                                                MenuCopyButton("support@jyutping.app", title: "Copy iMessage Address")
+                                                MenuCopyButton("bing@ososo.io", title: "Copy iMessage Address")
                                         }
+                                        */
                                         EmailFeedbackButton()
                                                 .contextMenu {
-                                                        MenuCopyButton("support@jyutping.app", title: "Copy Email Address")
+                                                        MenuCopyButton("bing@ososo.io", title: "Copy Email Address")
                                                 }
                                 }
                                 Section {
@@ -212,7 +216,7 @@ private struct EmailFeedbackButton: View {
                 Device: \(device)
                 System: \(system)
                 """
-                let address: String = "support@jyutping.app"
+                let address: String = "bing@ososo.io"
                 let subject: String = "Jyutping Feedback"
                 let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
                 return URL(string: scheme)!
