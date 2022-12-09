@@ -49,6 +49,10 @@ struct FAQView: View {
                                         }
                                 }
                         }
+                        Section {
+                                Text("Why is there no Text-to-Speech sound on this device?").font(.headline)
+                                Text("Please check if it is because this device is in silent mode.")
+                        }
                 }
                 .listStyle(.insetGrouped)
                 .navigationTitle("FAQ")

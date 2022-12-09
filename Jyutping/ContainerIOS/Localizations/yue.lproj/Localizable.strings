@@ -84,6 +84,9 @@
 "tts.notice.2" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
 "tts.notice.3" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
 
+"Why is there no Text-to-Speech sound on this device?" = "點解我部機嘅語音朗讀冇聲音？";
+"Please check if it is because this device is in silent mode." = "請檢查下係毋係因爲部機處於靜音模式";
+
 
 // MARK: - Jyutping
 
