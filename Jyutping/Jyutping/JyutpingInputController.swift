@@ -76,6 +76,7 @@ final class JyutpingInputController: IMKInputController {
                 preferencesWindow?.contentViewController?.addChild(pane)
                 preferencesWindow?.orderFrontRegardless()
                 preferencesWindow?.setFrame(frame, display: true)
+                NSApp.activate(ignoringOtherApps: true)
         }
 
         private lazy var window: NSWindow? = nil

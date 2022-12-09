@@ -17,7 +17,7 @@ final class PrincipalApplication: NSApplication {
 @main
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-        var server: IMKServer?
+        private(set) var server: IMKServer?
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
