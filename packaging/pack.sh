@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUNDLE_IDENTIFIER='org.jyutping.inputmethod.Jyutping'
-APP_VERSION='0.20.0'
+APP_VERSION='0.21.0'
 
 INSTALL_LOCATION='/Library/Input Methods'
 
