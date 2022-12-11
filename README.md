@@ -22,11 +22,16 @@ Jyutping
 <a href="https://apps.apple.com/hk/app/id1509367629">
         <img src="images/app-store-link-qrcode.png" alt="App Store QR Code" width="150"/>
 </a>
+<br>
+
+兼容性： iOS / iPadOS 14.0+
 
 ## macOS
 由於 Mac App Store 毋接受輸入法上架，請前往 [網站](https://jyutping.app) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
 **注意事項**：安裝／更新輸入法之後需要登出電腦再登入，或者重啓電腦。
+
+兼容性： macOS 12 Monterey 或者更高
 
 ## Screenshots
 <img src="images/screenshot.png" alt="screenshots" width="450"/>
