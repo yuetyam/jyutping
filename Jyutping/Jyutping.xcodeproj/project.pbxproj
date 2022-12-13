@@ -160,6 +160,8 @@
 		37E8BF0528E3DE6F007FBCC5 /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */; };
 		37EDC490283175B400E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC48F283175B400E45916 /* CoreIME */; };
 		37EDC492283175C100E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC491283175C100E45916 /* CoreIME */; };
+		37EE024F2948917E003F40D0 /* ChineseZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EE024E2948917E003F40D0 /* ChineseZodiacView.swift */; };
+		37EE02502948917E003F40D0 /* ChineseZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EE024E2948917E003F40D0 /* ChineseZodiacView.swift */; };
 		37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE888281CD5F300461235 /* MacIntroductionsView.swift */; };
 		37EEE88B281CD8DC00461235 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16153281A02C100C95317 /* InitialsTable.swift */; };
 		37EEE88C281CD90A00461235 /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16156281A02C100C95317 /* SyllableCell.swift */; };
@@ -425,6 +427,7 @@
 		37E8BF0128E288A3007FBCC5 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
 		37EDC48E2831759700E45916 /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
+		37EE024E2948917E003F40D0 /* ChineseZodiacView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseZodiacView.swift; sourceTree = "<group>"; };
 		37EEE87B281BAACF00461235 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87C281BAAD000461235 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87D281BAAD100461235 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -520,6 +523,7 @@
 		372BD0F02947A4FE009BCAB4 /* Materials */ = {
 			isa = PBXGroup;
 			children = (
+				37EE024E2948917E003F40D0 /* ChineseZodiacView.swift */,
 				372BD0F12947A51D009BCAB4 /* SolarTermsView.swift */,
 			);
 			path = Materials;
@@ -1338,6 +1342,7 @@
 				37B16177281A07A000C95317 /* IOSContentView.swift in Sources */,
 				37B16164281A02C100C95317 /* InitialsTable.swift in Sources */,
 				37B16169281A02C100C95317 /* JyutpingView.swift in Sources */,
+				37EE024F2948917E003F40D0 /* ChineseZodiacView.swift in Sources */,
 				37B160F1281912EE00C95317 /* ShareSheetView.swift in Sources */,
 				37B1616F281A02C100C95317 /* PrivacyNoticeView.swift in Sources */,
 				37B1616A281A02C100C95317 /* ExpressionsView.swift in Sources */,
@@ -1364,6 +1369,7 @@
 				37B16175281A06C900C95317 /* ColorExtensions.swift in Sources */,
 				37EEE88E281CDA0900461235 /* FinalsTable.swift in Sources */,
 				372BD0F32947A51D009BCAB4 /* SolarTermsView.swift in Sources */,
+				37EE02502948917E003F40D0 /* ChineseZodiacView.swift in Sources */,
 				37EEE891281CDB4000461235 /* MacAboutView.swift in Sources */,
 				37EEE893281CE21800461235 /* MacSearchView.swift in Sources */,
 				376C76682926329D0083AE7B /* MacContentView_macOS12.swift in Sources */,

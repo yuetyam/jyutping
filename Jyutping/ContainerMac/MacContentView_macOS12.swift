@@ -37,6 +37,9 @@ struct MacContentView_macOS12: View {
                                         Text("Jyutping").textCase(nil)
                                 }
                                 Section {
+                                        NavigationLink(destination: ChineseZodiacView()) {
+                                                Label("Chinese Zodiac", systemImage: "hare")
+                                        }
                                         NavigationLink(destination: SolarTermsView()) {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }

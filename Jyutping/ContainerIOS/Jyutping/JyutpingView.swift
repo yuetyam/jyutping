@@ -63,6 +63,11 @@ struct JyutpingView: View {
 
                                 Section {
                                         NavigationLink {
+                                                ChineseZodiacView()
+                                        } label: {
+                                                Label("Chinese Zodiac", systemImage: "hare")
+                                        }
+                                        NavigationLink {
                                                 SolarTermsView()
                                         } label: {
                                                 Label("Solar Terms", systemImage: "cloud.sun")

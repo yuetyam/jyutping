@@ -1,6 +1,6 @@
 import SwiftUI
 
-private struct Term: Hashable, Identifiable {
+struct Term: Hashable, Identifiable {
 
         let name: String
         let romanization: String
@@ -11,9 +11,12 @@ private struct Term: Hashable, Identifiable {
 }
 
 @available(iOS 15.0, *)
-private struct TermView: View {
+struct TermView: View {
 
         let term: Term
+
+        // Longest String of Romanizations
+        let placeholder: String
 
         #if os(macOS)
         private let spacing: CGFloat = 32
@@ -26,8 +29,7 @@ private struct TermView: View {
                         HStack(spacing: spacing) {
                                 Text(verbatim: term.name).font(.master).textSelection(.enabled)
                                 ZStack(alignment: .leading) {
-                                        // { soeng1 gong3 } is the longest
-                                        Text(verbatim: "soeng1 gong3").hidden()
+                                        Text(verbatim: placeholder).hidden()
                                         Text(verbatim: term.romanization).textSelection(.enabled)
                                 }
                                 .font(.body.monospaced())
@@ -46,7 +48,7 @@ struct SolarTermsView: View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 ForEach(terms) {
-                                        TermView(term: $0)
+                                        TermView(term: $0, placeholder: "soeng1 gong3")
                                 }
                         }
                         .block()
@@ -55,7 +57,7 @@ struct SolarTermsView: View {
                 .navigationTitle("Solar Terms")
                 #else
                 List(terms) {
-                        TermView(term: $0)
+                        TermView(term: $0, placeholder: "soeng1 gong3")
                 }
                 .navigationTitle("Solar Terms")
                 .navigationBarTitleDisplayMode(.inline)
