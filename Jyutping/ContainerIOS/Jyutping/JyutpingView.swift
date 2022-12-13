@@ -62,14 +62,13 @@ struct JyutpingView: View {
                                 .labelStyle(.titleOnly)
 
                                 Section {
-                                        NavigationLink {
-                                                ChineseZodiacView()
-                                        } label: {
+                                        NavigationLink(destination: StemsBranchesView()) {
+                                                Label("Stems and Branches", systemImage: "timelapse")
+                                        }
+                                        NavigationLink(destination: ChineseZodiacView()) {
                                                 Label("Chinese Zodiac", systemImage: "hare")
                                         }
-                                        NavigationLink {
-                                                SolarTermsView()
-                                        } label: {
+                                        NavigationLink(destination: SolarTermsView()) {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }
                                 } header: {

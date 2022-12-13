@@ -37,6 +37,9 @@ struct MacContentView_macOS12: View {
                                         Text("Jyutping").textCase(nil)
                                 }
                                 Section {
+                                        NavigationLink(destination: StemsBranchesView()) {
+                                                Label("Stems and Branches", systemImage: "timelapse")
+                                        }
                                         NavigationLink(destination: ChineseZodiacView()) {
                                                 Label("Chinese Zodiac", systemImage: "hare")
                                         }

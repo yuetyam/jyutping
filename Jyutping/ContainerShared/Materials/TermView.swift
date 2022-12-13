@@ -32,3 +32,33 @@ struct TermView: View {
                 }
         }
 }
+
+@available(iOS 15.0, *)
+struct HeaderTermView: View {
+
+        let term: Term
+
+        var body: some View {
+                #if os(macOS)
+                HStack {
+                        HStack(spacing: 32) {
+                                Text(verbatim: term.name).font(.master)
+                                Text(verbatim: term.romanization).font(.body.monospaced())
+                        }
+                        .textSelection(.enabled)
+                        Speaker(term.romanization)
+                        Spacer()
+                }
+                #else
+                HStack(spacing: 16) {
+                        VStack(alignment: .leading, spacing: 8) {
+                                Text(verbatim: term.name).font(.master)
+                                Text(verbatim: term.romanization).font(.footnote.monospaced())
+                        }
+                        .textSelection(.enabled)
+                        Speaker(term.romanization)
+                        Spacer()
+                }
+                #endif
+        }
+}

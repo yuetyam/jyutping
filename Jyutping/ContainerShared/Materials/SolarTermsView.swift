@@ -7,17 +7,27 @@ struct SolarTermsView: View {
                 #if os(macOS)
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                ForEach(terms) {
-                                        TermView(term: $0, placeholder: "soeng1 gong3")
+                                HeaderTermView(term: Term(name: "二十四節氣", romanization: "ji6 sap6 sei3 zit3 hei3")).block()
+                                VStack {
+                                        ForEach(terms) {
+                                                TermView(term: $0, placeholder: "soeng1 gong3")
+                                        }
                                 }
+                                .block()
                         }
-                        .block()
                         .padding()
                 }
                 .navigationTitle("Solar Terms")
                 #else
-                List(terms) {
-                        TermView(term: $0, placeholder: "soeng1 gong3")
+                List {
+                        Section {
+                                HeaderTermView(term: Term(name: "二十四節氣", romanization: "ji6 sap6 sei3 zit3 hei3"))
+                        }
+                        Section {
+                                ForEach(terms) {
+                                        TermView(term: $0, placeholder: "soeng1 gong3")
+                                }
+                        }
                 }
                 .navigationTitle("Solar Terms")
                 .navigationBarTitleDisplayMode(.inline)
@@ -52,13 +62,7 @@ struct SolarTermsView: View {
                 大寒,daai6 hon4
                 """
 
-                let lines: [String] = textBlock.components(separatedBy: .newlines).map({ $0.trimmed() }).filter({ !$0.isEmpty })
-                let termItems: [Term] = lines.map { line -> Term in
-                        let parts: [String] = line.components(separatedBy: ",")
-                        let name: String = parts.first ?? "?"
-                        let romanization: String = parts.last ?? "?"
-                        return Term(name: name, romanization: romanization)
-                }
-                return termItems
+                let items: [Term] = Term.array(from: textBlock)
+                return items
         }()
 }

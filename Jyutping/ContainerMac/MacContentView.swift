@@ -24,6 +24,7 @@ struct MacContentView: View {
                                         Text("Jyutping").textCase(nil)
                                 }
                                 Section {
+                                        Label("Stems and Branches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
                                         Label("Chinese Zodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
                                         Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
                                         Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
@@ -54,6 +55,8 @@ struct MacContentView: View {
                                 FinalsTable()
                         case .tones:
                                 TonesTable()
+                        case .stemsBranches:
+                                StemsBranchesView()
                         case .chineseZodiac:
                                 ChineseZodiacView()
                         case .solarTerms:
@@ -79,6 +82,7 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case finals
         case tones
 
+        case stemsBranches
         case chineseZodiac
         case solarTerms
         case resources

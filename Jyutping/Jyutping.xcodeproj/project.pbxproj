@@ -166,6 +166,8 @@
 		37EE025329489A94003F40D0 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EE025129489A93003F40D0 /* Term.swift */; };
 		37EE025529489ABE003F40D0 /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EE025429489ABE003F40D0 /* TermView.swift */; };
 		37EE025629489ABE003F40D0 /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EE025429489ABE003F40D0 /* TermView.swift */; };
+		37EE02582948A068003F40D0 /* StemsBranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EE02572948A068003F40D0 /* StemsBranchesView.swift */; };
+		37EE02592948A068003F40D0 /* StemsBranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EE02572948A068003F40D0 /* StemsBranchesView.swift */; };
 		37EEE889281CD5F300461235 /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EEE888281CD5F300461235 /* MacIntroductionsView.swift */; };
 		37EEE88B281CD8DC00461235 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16153281A02C100C95317 /* InitialsTable.swift */; };
 		37EEE88C281CD90A00461235 /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16156281A02C100C95317 /* SyllableCell.swift */; };
@@ -434,6 +436,7 @@
 		37EE024E2948917E003F40D0 /* ChineseZodiacView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseZodiacView.swift; sourceTree = "<group>"; };
 		37EE025129489A93003F40D0 /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		37EE025429489ABE003F40D0 /* TermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
+		37EE02572948A068003F40D0 /* StemsBranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemsBranchesView.swift; sourceTree = "<group>"; };
 		37EEE87B281BAACF00461235 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87C281BAAD000461235 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37EEE87D281BAAD100461235 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -531,6 +534,7 @@
 			children = (
 				37EE025129489A93003F40D0 /* Term.swift */,
 				37EE025429489ABE003F40D0 /* TermView.swift */,
+				37EE02572948A068003F40D0 /* StemsBranchesView.swift */,
 				37EE024E2948917E003F40D0 /* ChineseZodiacView.swift */,
 				372BD0F12947A51D009BCAB4 /* SolarTermsView.swift */,
 			);
@@ -1339,6 +1343,7 @@
 				37B1616D281A02C100C95317 /* HomeView_iOS14.swift in Sources */,
 				37B160EF281912EE00C95317 /* SafariView.swift in Sources */,
 				37B16163281A02C100C95317 /* TonesTable.swift in Sources */,
+				37EE02582948A068003F40D0 /* StemsBranchesView.swift in Sources */,
 				37B160FF281912EE00C95317 /* UIDevice+modelName.swift in Sources */,
 				37B16171281A02C100C95317 /* DonationView.swift in Sources */,
 				37B160F9281912EE00C95317 /* Speaker.swift in Sources */,
@@ -1377,6 +1382,7 @@
 				37B16102281912EE00C95317 /* ImageExtensions.swift in Sources */,
 				370E71F6282836750033B708 /* ViewExtensions.swift in Sources */,
 				37B16175281A06C900C95317 /* ColorExtensions.swift in Sources */,
+				37EE02592948A068003F40D0 /* StemsBranchesView.swift in Sources */,
 				37EEE88E281CDA0900461235 /* FinalsTable.swift in Sources */,
 				372BD0F32947A51D009BCAB4 /* SolarTermsView.swift in Sources */,
 				37EE02502948917E003F40D0 /* ChineseZodiacView.swift in Sources */,

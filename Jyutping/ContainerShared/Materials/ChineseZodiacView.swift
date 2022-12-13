@@ -6,6 +6,7 @@ struct ChineseZodiacView: View {
                 #if os(macOS)
                 ScrollView {
                         LazyVStack(spacing: 16) {
+                                HeaderTermView(term: Term(name: "十二生肖", romanization: "sap6 ji6 sang1 ciu3")).block()
                                 VStack {
                                         ForEach(terms) {
                                                 TermView(term: $0, placeholder: "joeng4")
@@ -24,6 +25,9 @@ struct ChineseZodiacView: View {
                 .navigationTitle("Chinese Zodiac")
                 #else
                 List {
+                        Section {
+                                HeaderTermView(term: Term(name: "十二生肖", romanization: "sap6 ji6 sang1 ciu3"))
+                        }
                         Section {
                                 ForEach(terms) {
                                         TermView(term: $0, placeholder: "joeng4")
@@ -56,13 +60,7 @@ struct ChineseZodiacView: View {
                 豬,zyu1
                 """
 
-                let lines: [String] = textBlock.components(separatedBy: .newlines).map({ $0.trimmed() }).filter({ !$0.isEmpty })
-                let items: [Term] = lines.map { line -> Term in
-                        let parts: [String] = line.components(separatedBy: ",")
-                        let name: String = parts.first ?? "?"
-                        let romanization: String = parts.last ?? "?"
-                        return Term(name: name, romanization: romanization)
-                }
+                let items: [Term] = Term.array(from: textBlock)
                 return items
         }()
 
