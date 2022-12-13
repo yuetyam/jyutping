@@ -17,23 +17,13 @@ struct ContainerApp: App {
         var body: some Scene {
                 WindowGroup {
                         if #available(macOS 13.0, *) {
-                                MacContentView().background(VisualEffect())
+                                MacContentView()
                         } else {
-                                MacContentView_macOS12().background(VisualEffect())
+                                MacContentView_macOS12()
                         }
                 }
                 .windowToolbarStyle(.unifiedCompact)
         }
-}
-
-private struct VisualEffect: NSViewRepresentable {
-        // https://developer.apple.com/forums/thread/694837
-        func makeNSView(context: Self.Context) -> NSView {
-                let view = NSVisualEffectView()
-                view.state = NSVisualEffectView.State.active
-                return view
-        }
-        func updateNSView(_ nsView: NSView, context: Context) { }
 }
 
 #else

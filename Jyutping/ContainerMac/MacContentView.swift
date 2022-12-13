@@ -1,9 +1,20 @@
 import SwiftUI
 
+struct VisualEffect: NSViewRepresentable {
+        // https://developer.apple.com/forums/thread/694837
+        func makeNSView(context: Self.Context) -> NSView {
+                let view = NSVisualEffectView()
+                view.state = NSVisualEffectView.State.active
+                return view
+        }
+        func updateNSView(_ nsView: NSView, context: Context) { }
+}
+
 @available(macOS 13.0, *)
 struct MacContentView: View {
 
         @State private var selection: ViewIdentifier = .search
+        private let visualEffect: VisualEffect = VisualEffect()
 
         var body: some View {
                 NavigationSplitView {
@@ -42,29 +53,29 @@ struct MacContentView: View {
                 } detail: {
                         switch selection {
                         case .installation:
-                                InputMethodInstallationView()
+                                InputMethodInstallationView().background(visualEffect)
                         case .introductions:
-                                MacIntroductionsView()
+                                MacIntroductionsView().background(visualEffect)
                         case .expressions:
-                                MacExpressionsView()
+                                MacExpressionsView().background(visualEffect)
                         case .search:
-                                MacSearchView()
+                                MacSearchView().background(visualEffect)
                         case .initials:
-                                InitialsTable()
+                                InitialsTable().background(visualEffect)
                         case .finals:
-                                FinalsTable()
+                                FinalsTable().background(visualEffect)
                         case .tones:
-                                TonesTable()
+                                TonesTable().background(visualEffect)
                         case .stemsBranches:
-                                StemsBranchesView()
+                                StemsBranchesView().background(visualEffect)
                         case .chineseZodiac:
-                                ChineseZodiacView()
+                                ChineseZodiacView().background(visualEffect)
                         case .solarTerms:
-                                SolarTermsView()
+                                SolarTermsView().background(visualEffect)
                         case .resources:
-                                ResourcesView()
+                                ResourcesView().background(visualEffect)
                         case .about:
-                                MacAboutView()
+                                MacAboutView().background(visualEffect)
                         }
                 }
         }
