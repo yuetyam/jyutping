@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct MacContentView_macOS12: View {
+@available(macOS, deprecated: 13, message: "Use MacContentView instead")
+struct MacContentViewMonterey: View {
 
         @State private var isMacSearchViewActive: Bool = true
         private let visualEffect: VisualEffect = VisualEffect()

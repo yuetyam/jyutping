@@ -1,6 +1,7 @@
 import SwiftUI
 
 #if os(macOS)
+
 import AppKit
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
@@ -19,7 +20,7 @@ struct ContainerApp: App {
                         if #available(macOS 13.0, *) {
                                 MacContentView()
                         } else {
-                                MacContentView_macOS12()
+                                MacContentViewMonterey()
                         }
                 }
                 .windowToolbarStyle(.unifiedCompact)

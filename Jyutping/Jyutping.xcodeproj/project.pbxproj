@@ -40,7 +40,7 @@
 		3764CEFB27BE127000DCFB51 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEEC27BE127000DCFB51 /* FontExtensions.swift */; };
 		3764CEFD27BE128C00DCFB51 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */; };
 		376C7665292630620083AE7B /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C7664292630620083AE7B /* ViewExtensions.swift */; };
-		376C76682926329D0083AE7B /* MacContentView_macOS12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C7666292632690083AE7B /* MacContentView_macOS12.swift */; };
+		376C76682926329D0083AE7B /* MacContentViewMonterey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376C7666292632690083AE7B /* MacContentViewMonterey.swift */; };
 		3777EF0327F9CF8500D1EED0 /* SaamPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0227F9CF8500D1EED0 /* SaamPing.swift */; };
 		3777EF0527F9D45E00D1EED0 /* CantoneseNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0427F9D45E00D1EED0 /* CantoneseNumeric.swift */; };
 		3777EF0727FA946200D1EED0 /* CantoneseSymbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3777EF0627FA946200D1EED0 /* CantoneseSymbolic.swift */; };
@@ -281,7 +281,7 @@
 		3764CEFC27BE128C00DCFB51 /* JyutpingInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		3764CEFF27BE13D900DCFB51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		376C7664292630620083AE7B /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		376C7666292632690083AE7B /* MacContentView_macOS12.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentView_macOS12.swift; sourceTree = "<group>"; };
+		376C7666292632690083AE7B /* MacContentViewMonterey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacContentViewMonterey.swift; sourceTree = "<group>"; };
 		3777EF0227F9CF8500D1EED0 /* SaamPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaamPing.swift; sourceTree = "<group>"; };
 		3777EF0427F9D45E00D1EED0 /* CantoneseNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseNumeric.swift; sourceTree = "<group>"; };
 		3777EF0627FA946200D1EED0 /* CantoneseSymbolic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseSymbolic.swift; sourceTree = "<group>"; };
@@ -783,7 +783,7 @@
 			isa = PBXGroup;
 			children = (
 				37B1617D281A0E0400C95317 /* MacContentView.swift */,
-				376C7666292632690083AE7B /* MacContentView_macOS12.swift */,
+				376C7666292632690083AE7B /* MacContentViewMonterey.swift */,
 				37BD8C9E2834383F005DE156 /* InputMethodInstallationView.swift */,
 				37EEE888281CD5F300461235 /* MacIntroductionsView.swift */,
 				370E71F7282844530033B708 /* MacExpressionsView.swift */,
@@ -1388,7 +1388,7 @@
 				37EE02502948917E003F40D0 /* ChineseZodiacView.swift in Sources */,
 				37EEE891281CDB4000461235 /* MacAboutView.swift in Sources */,
 				37EEE893281CE21800461235 /* MacSearchView.swift in Sources */,
-				376C76682926329D0083AE7B /* MacContentView_macOS12.swift in Sources */,
+				376C76682926329D0083AE7B /* MacContentViewMonterey.swift in Sources */,
 				37AEE49D282A51BE00C54BD9 /* FontExtensions.swift in Sources */,
 				37B1617E281A0E0400C95317 /* MacContentView.swift in Sources */,
 				37EE025629489ABE003F40D0 /* TermView.swift in Sources */,
