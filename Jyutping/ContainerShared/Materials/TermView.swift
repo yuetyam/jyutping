@@ -25,6 +25,9 @@ struct TermView: View {
                                 .font(.body.monospaced())
                         }
                         Speaker(term.romanization)
+                        if let comment = term.comment {
+                                Text(verbatim: comment).font(.subheadline).textSelection(.enabled).foregroundColor(.secondary)
+                        }
                         Spacer()
                 }
         }

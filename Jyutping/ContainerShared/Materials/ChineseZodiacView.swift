@@ -66,5 +66,10 @@ struct ChineseZodiacView: View {
                 return items
         }()
 
-        private let altTerms: [Term] = [Term(name: "大蟲", romanization: "daai6 cung4"), Term(name: "馬騮", romanization: "maa5 lau1")]
+        private let altTerms: [Term] = [
+                Term(name: "老鼠", romanization: "lou5 syu2"),
+                Term(name: "老虎", romanization: "lou5 fu2"),
+                Term(name: "大蟲", romanization: "daai6 cung4", comment: "即老虎"),
+                Term(name: "馬騮", romanization: "maa5 lau1", comment: "即猴")
+        ]
 }
