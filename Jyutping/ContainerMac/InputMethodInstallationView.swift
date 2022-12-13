@@ -25,8 +25,7 @@ struct InputMethodInstallationView: View {
                                         Link("Website", destination: URL(string: websiteAddress)!)
                                         Text(verbatim: websiteAddress).font(.body.monospaced())
                                         Button {
-                                                NSPasteboard.general.clearContents()
-                                                NSPasteboard.general.setString(websiteAddress, forType: .string)
+                                                AppMaster.copy(websiteAddress)
                                                 isWebsiteAddressCopied = true
                                         } label: {
                                                 if isWebsiteAddressCopied {

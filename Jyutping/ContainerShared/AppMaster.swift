@@ -18,7 +18,8 @@ struct AppMaster {
                 #if os(iOS)
                 UIPasteboard.general.string = content
                 #else
-                NSPasteboard.general.setString(content, forType: .string)
+                _ = NSPasteboard.general.clearContents()
+                _ = NSPasteboard.general.setString(content, forType: .string)
                 #endif
         }
 
