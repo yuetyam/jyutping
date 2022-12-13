@@ -16,6 +16,8 @@
 		3722933527BECF310077F15B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722933727BECF310077F15B /* Localizable.strings */; };
 		3722933F27BED06E0077F15B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3722934127BED06E0077F15B /* InfoPlist.strings */; };
 		3722AC3728E671BB00CB0174 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722AC3628E671BB00CB0174 /* AboutView.swift */; };
+		372BD0F22947A51D009BCAB4 /* SolarTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BD0F12947A51D009BCAB4 /* SolarTermsView.swift */; };
+		372BD0F32947A51D009BCAB4 /* SolarTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BD0F12947A51D009BCAB4 /* SolarTermsView.swift */; };
 		373F6B53283E115D00874144 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 373F6B52283E115D00874144 /* Configuration.storekit */; };
 		37418EE628366381000CA712 /* ResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37418EE528366381000CA712 /* ResourcesView.swift */; };
 		3749982E28543B6E0023AC94 /* InstantSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749982D28543B6E0023AC94 /* InstantSettings.swift */; };
@@ -243,6 +245,7 @@
 		3722934727BED0770077F15B /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722934827BED0780077F15B /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3722AC3628E671BB00CB0174 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		372BD0F12947A51D009BCAB4 /* SolarTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolarTermsView.swift; sourceTree = "<group>"; };
 		373F6B52283E115D00874144 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		37418EE528366381000CA712 /* ResourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesView.swift; sourceTree = "<group>"; };
 		3749982D28543B6E0023AC94 /* InstantSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSettings.swift; sourceTree = "<group>"; };
@@ -514,6 +517,14 @@
 			path = Localizations;
 			sourceTree = "<group>";
 		};
+		372BD0F02947A4FE009BCAB4 /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				372BD0F12947A51D009BCAB4 /* SolarTermsView.swift */,
+			);
+			path = Materials;
+			sourceTree = "<group>";
+		};
 		3764CEA327BE103100DCFB51 = {
 			isa = PBXGroup;
 			children = (
@@ -744,6 +755,7 @@
 				37B16157281A02C100C95317 /* FinalsTable.swift */,
 				37B16152281A02C100C95317 /* TonesTable.swift */,
 				37B16156281A02C100C95317 /* SyllableCell.swift */,
+				372BD0F02947A4FE009BCAB4 /* Materials */,
 				37B160E8281912ED00C95317 /* Extensions */,
 				37B160DF281912ED00C95317 /* ViewComponents */,
 				37B1608328190DBD00C95317 /* Assets.xcassets */,
@@ -1318,6 +1330,7 @@
 				37B16171281A02C100C95317 /* DonationView.swift in Sources */,
 				37B160F9281912EE00C95317 /* Speaker.swift in Sources */,
 				37AEE49C282A51BE00C54BD9 /* FontExtensions.swift in Sources */,
+				372BD0F22947A51D009BCAB4 /* SolarTermsView.swift in Sources */,
 				37B16166281A02C100C95317 /* JyutpingView_iOS14.swift in Sources */,
 				37B16109281912EE00C95317 /* AppMaster.swift in Sources */,
 				37B160F3281912EE00C95317 /* EnhancedLabel.swift in Sources */,
@@ -1350,6 +1363,7 @@
 				370E71F6282836750033B708 /* ViewExtensions.swift in Sources */,
 				37B16175281A06C900C95317 /* ColorExtensions.swift in Sources */,
 				37EEE88E281CDA0900461235 /* FinalsTable.swift in Sources */,
+				372BD0F32947A51D009BCAB4 /* SolarTermsView.swift in Sources */,
 				37EEE891281CDB4000461235 /* MacAboutView.swift in Sources */,
 				37EEE893281CE21800461235 /* MacSearchView.swift in Sources */,
 				376C76682926329D0083AE7B /* MacContentView_macOS12.swift in Sources */,

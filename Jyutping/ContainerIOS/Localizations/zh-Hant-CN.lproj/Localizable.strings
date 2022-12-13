@@ -107,6 +107,12 @@
 "Cantonese Resources" = "粵語相關網站";
 
 
+// MARK: - Materials
+
+"Materials" = "材料";
+"Solar Terms" = "二十四節氣";
+
+
 // MARK: - About
 
 "Version" = "版本";

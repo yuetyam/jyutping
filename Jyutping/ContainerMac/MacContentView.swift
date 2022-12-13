@@ -24,7 +24,12 @@ struct MacContentView: View {
                                         Text("Jyutping").textCase(nil)
                                 }
                                 Section {
+                                        Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
                                         Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
+                                } header: {
+                                        Text("Materials").textCase(nil)
+                                }
+                                Section {
                                         Label("About", systemImage: "info.circle").tag(ViewIdentifier.about)
                                 } header: {
                                         Text("About").textCase(nil)
@@ -48,6 +53,8 @@ struct MacContentView: View {
                                 FinalsTable()
                         case .tones:
                                 TonesTable()
+                        case .solarTerms:
+                                SolarTermsView()
                         case .resources:
                                 ResourcesView()
                         case .about:
@@ -69,7 +76,9 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case finals
         case tones
 
+        case solarTerms
         case resources
+
         case about
 
         var id: Int {

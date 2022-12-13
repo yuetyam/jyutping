@@ -37,9 +37,16 @@ struct MacContentView_macOS12: View {
                                         Text("Jyutping").textCase(nil)
                                 }
                                 Section {
+                                        NavigationLink(destination: SolarTermsView()) {
+                                                Label("Solar Terms", systemImage: "cloud.sun")
+                                        }
                                         NavigationLink(destination: ResourcesView()) {
                                                 Label("Resources", systemImage: "globe.asia.australia")
                                         }
+                                } header: {
+                                        Text("Materials").textCase(nil)
+                                }
+                                Section {
                                         NavigationLink(destination: MacAboutView()) {
                                                 Label("About", systemImage: "info.circle")
                                         }

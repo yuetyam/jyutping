@@ -39,6 +39,12 @@
 "Jyutping Tones" = "粵拼聲調表";
 
 
+// MARK: - Materials
+
+"Materials" = "材料";
+"Solar Terms" = "二十四節氣";
+
+
 // MARK: - About
 
 "About" = "關於";

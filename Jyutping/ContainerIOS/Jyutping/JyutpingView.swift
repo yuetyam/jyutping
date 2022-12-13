@@ -62,6 +62,16 @@ struct JyutpingView: View {
                                 .labelStyle(.titleOnly)
 
                                 Section {
+                                        NavigationLink {
+                                                SolarTermsView()
+                                        } label: {
+                                                Label("Solar Terms", systemImage: "cloud.sun")
+                                        }
+                                } header: {
+                                        Text("Materials").textCase(nil)
+                                }
+
+                                Section {
                                         SearchLinksView()
                                 } header: {
                                         Text("Search on other places (websites)").textCase(nil)
