@@ -21,14 +21,14 @@ jobs:
       - name: CharacterSets SwiftTest
         run: swift test
         working-directory: ./Modules/CharacterSets
-  test_containersdata:
-    name: ContainersData Tests
+  test_materials:
+    name: Materials Tests
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v2
-      - name: ContainersData SwiftTest
+      - name: Materials SwiftTest
         run: swift test
-        working-directory: ./Modules/ContainersData
+        working-directory: ./Modules/Materials
   test_coreime:
     name: CoreIME Tests
     runs-on: macos-12
