@@ -1,24 +1,24 @@
-// swift-tools-version:5.7
+// swift-tools-version: 5.7
 
 import PackageDescription
 
 let package = Package(
-        name: "ContainersData",
+        name: "Materials",
         platforms: [.iOS(.v14), .macOS(.v12)],
         products: [
                 .library(
-                        name: "ContainersData",
-                        targets: ["ContainersData"]
+                        name: "Materials",
+                        targets: ["Materials"]
                 )
         ],
         targets: [
                 .target(
-                        name: "ContainersData",
+                        name: "Materials",
                         resources: [.process("Resources")]
                 ),
                 .testTarget(
-                        name: "ContainersDataTests",
-                        dependencies: ["ContainersData"]
+                        name: "MaterialsTests",
+                        dependencies: ["Materials"]
                 )
         ]
 )

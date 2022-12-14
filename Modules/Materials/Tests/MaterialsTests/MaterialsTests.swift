@@ -1,7 +1,7 @@
 import XCTest
-@testable import ContainersData
+@testable import Materials
 
-final class Tests: XCTestCase {
+final class MaterialsTests: XCTestCase {
         func testLookup() throws {
                 let search: [String] = Lookup.look(for: "我")
                 let lookup: String = search.first!

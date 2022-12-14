@@ -121,9 +121,7 @@
 		37B16109281912EE00C95317 /* AppMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160EE281912EE00C95317 /* AppMaster.swift */; };
 		37B1610A281912EE00C95317 /* AppMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B160EE281912EE00C95317 /* AppMaster.swift */; };
 		37B161472819142300C95317 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37B161462819142300C95317 /* CommonExtensions */; };
-		37B161492819143C00C95317 /* ContainersData in Frameworks */ = {isa = PBXBuildFile; productRef = 37B161482819143C00C95317 /* ContainersData */; };
 		37B1614D2819613700C95317 /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37B1614C2819613700C95317 /* CommonExtensions */; };
-		37B1614F2819613E00C95317 /* ContainersData in Frameworks */ = {isa = PBXBuildFile; productRef = 37B1614E2819613E00C95317 /* ContainersData */; };
 		37B16163281A02C100C95317 /* TonesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16152281A02C100C95317 /* TonesTable.swift */; };
 		37B16164281A02C100C95317 /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16153281A02C100C95317 /* InitialsTable.swift */; };
 		37B16165281A02C100C95317 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B16154281A02C100C95317 /* Sections.swift */; };
@@ -156,6 +154,8 @@
 		37CB2ED72818E9210092E0DD /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED62818E9210092E0DD /* CharacterSets */; };
 		37CB2ED92818E9260092E0DD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37CB2ED82818E9260092E0DD /* CommonExtensions */; };
 		37CB772A2928047000D27354 /* jyutping.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37CB77292928047000D27354 /* jyutping.pdf */; };
+		37DF35112949FBD200EB61E7 /* Materials in Frameworks */ = {isa = PBXBuildFile; productRef = 37DF35102949FBD200EB61E7 /* Materials */; };
+		37DF35132949FBDE00EB61E7 /* Materials in Frameworks */ = {isa = PBXBuildFile; productRef = 37DF35122949FBDE00EB61E7 /* Materials */; };
 		37E8BF0228E288A3007FBCC5 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8BF0128E288A3007FBCC5 /* AppSettings.swift */; };
 		37E8BF0528E3DE6F007FBCC5 /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */; };
 		37EDC490283175B400E45916 /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37EDC48F283175B400E45916 /* CoreIME */; };
@@ -346,7 +346,6 @@
 		3797FCFA27BF922B00C6BB8D /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37ABA5AC27C19882000AC306 /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37AEE49B282A51BE00C54BD9 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
-		37B1607D2818F0C100C95317 /* ContainersData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ContainersData; path = ../Modules/ContainersData; sourceTree = "<group>"; };
 		37B1608128190DBC00C95317 /* ContainerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerApp.swift; sourceTree = "<group>"; };
 		37B1608328190DBD00C95317 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37B1608828190DBD00C95317 /* Container.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Container.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -430,6 +429,7 @@
 		37CB2ECD2818E8DD0092E0DD /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
 		37CB2ECE2818E8E70092E0DD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
 		37CB77292928047000D27354 /* jyutping.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = jyutping.pdf; sourceTree = "<group>"; };
+		37DF350F2949FB3F00EB61E7 /* Materials */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Materials; path = ../Modules/Materials; sourceTree = "<group>"; };
 		37E8BF0128E288A3007FBCC5 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		37E8BF0428E3DE6F007FBCC5 /* HotkeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
 		37EDC48E2831759700E45916 /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
@@ -489,8 +489,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B161492819143C00C95317 /* ContainersData in Frameworks */,
 				37B161472819142300C95317 /* CommonExtensions in Frameworks */,
+				37DF35112949FBD200EB61E7 /* Materials in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,8 +498,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37B1614F2819613E00C95317 /* ContainersData in Frameworks */,
 				37B1614D2819613700C95317 /* CommonExtensions in Frameworks */,
+				37DF35132949FBDE00EB61E7 /* Materials in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,8 +544,8 @@
 		3764CEA327BE103100DCFB51 = {
 			isa = PBXGroup;
 			children = (
+				37DF350F2949FB3F00EB61E7 /* Materials */,
 				37EDC48E2831759700E45916 /* CoreIME */,
-				37B1607D2818F0C100C95317 /* ContainersData */,
 				37CB2ECE2818E8E70092E0DD /* CommonExtensions */,
 				37CB2ECD2818E8DD0092E0DD /* CharacterSets */,
 				3764CEAE27BE103200DCFB51 /* Jyutping */,
@@ -1019,7 +1019,7 @@
 			name = "Container (iOS)";
 			packageProductDependencies = (
 				37B161462819142300C95317 /* CommonExtensions */,
-				37B161482819143C00C95317 /* ContainersData */,
+				37DF35102949FBD200EB61E7 /* Materials */,
 			);
 			productName = "Container (iOS)";
 			productReference = 37B1608828190DBD00C95317 /* Container.app */;
@@ -1040,7 +1040,7 @@
 			name = "Container (macOS)";
 			packageProductDependencies = (
 				37B1614C2819613700C95317 /* CommonExtensions */,
-				37B1614E2819613E00C95317 /* ContainersData */,
+				37DF35122949FBDE00EB61E7 /* Materials */,
 			);
 			productName = "Container (macOS)";
 			productReference = 37B1608D28190DBD00C95317 /* Jyutping.app */;
@@ -2210,17 +2210,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
 		};
-		37B161482819143C00C95317 /* ContainersData */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ContainersData;
-		};
 		37B1614C2819613700C95317 /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
-		};
-		37B1614E2819613E00C95317 /* ContainersData */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ContainersData;
 		};
 		37CB2ED02818E9040092E0DD /* CharacterSets */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -2237,6 +2229,14 @@
 		37CB2ED82818E9260092E0DD /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
+		};
+		37DF35102949FBD200EB61E7 /* Materials */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Materials;
+		};
+		37DF35122949FBDE00EB61E7 /* Materials */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Materials;
 		};
 		37EDC48F283175B400E45916 /* CoreIME */ = {
 			isa = XCSwiftPackageProductDependency;
