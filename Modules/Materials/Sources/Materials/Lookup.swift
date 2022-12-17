@@ -1,6 +1,17 @@
 import Foundation
 import SQLite3
 
+public struct Response: Hashable {
+
+        public let text: String
+        public let romanizations: [String]
+
+        public init(text: String, romanizations: [String] = []) {
+                self.text = text
+                self.romanizations = romanizations
+        }
+}
+
 public struct Lookup {
 
         private static let database: OpaquePointer? = {
@@ -46,15 +57,15 @@ public struct Lookup {
         ///
         /// - Parameter text: Word to search
         /// - Returns: Text (converted) & Array of Romanization
-        public static func search(for text: String) -> (text: String, romanizations: [String]) {
-                lazy var fallback: (String, [String]) = (text, [])
+        public static func search(for text: String) -> Response {
+                lazy var fallback: Response = Response(text: text)
                 guard !text.isEmpty else { return fallback }
                 let matched = match(for: text)
-                guard matched.isEmpty else { return (text, matched) }
+                guard matched.isEmpty else { return Response(text: text, romanizations: matched) }
                 let traditionalText: String = convert(from: text)
                 let tryMatched = match(for: traditionalText)
                 guard tryMatched.isEmpty else {
-                        return (traditionalText, tryMatched)
+                        return Response(text: traditionalText, romanizations: tryMatched)
                 }
                 guard text.count != 1 else { return fallback }
 
@@ -85,7 +96,7 @@ public struct Lookup {
                 }
                 guard !fetches.isEmpty else { return fallback }
                 let suggestion: String = fetches.joined(separator: " ")
-                return (newText, [suggestion])
+                return Response(text: newText, romanizations: [suggestion])
         }
 
         private static func fetchLeading(for word: String) -> (romanization: String?, charCount: Int) {

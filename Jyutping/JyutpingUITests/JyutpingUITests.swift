@@ -1,6 +1,6 @@
 import XCTest
 
-class JyutpingUITests: XCTestCase {
+final class JyutpingUITests: XCTestCase {
 
         override func setUpWithError() throws {
                 // Put setup code here. This method is called before the invocation of each test method in the class.

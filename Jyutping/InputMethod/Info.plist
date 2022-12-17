@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ComponentInputModeDict</key>
+	<dict>
+		<key>tsInputModeListKey</key>
+		<dict>
+			<key>TISIconLabels</key>
+			<dict>
+				<key>Primary</key>
+				<string>粵拼</string>
+			</dict>
+			<key>TISInputSourceID</key>
+			<string>org.jyutping.inputmethod.Jyutping.IME</string>
+			<key>TISIntendedLanguage</key>
+			<string>yue</string>
+			<key>tsInputModeAlternateMenuIconFileKey</key>
+			<string>jyutpingimeicon.pdf</string>
+			<key>tsInputModeDefaultStateKey</key>
+			<true/>
+			<key>tsInputModeIsVisibleKey</key>
+			<true/>
+			<key>tsInputModeKeyEquivalentModifiersKey</key>
+			<integer>4608</integer>
+			<key>tsInputModeMenuIconFileKey</key>
+			<string>jyutpingimeicon.pdf</string>
+			<key>tsInputModePaletteIconFileKey</key>
+			<string>jyutpingimeicon.pdf</string>
+			<key>tsInputModePrimaryInScriptKey</key>
+			<true/>
+			<key>tsInputModeScriptKey</key>
+			<string>smUnicodeScript</string>
+		</dict>
+		<key>tsVisibleInputModeOrderedArrayKey</key>
+		<array>
+			<string>org.jyutping.inputmethod.Jyutping.IME</string>
+		</array>
+	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>InputMethodConnectionName</key>
+	<string>org_jyutping_inputmethod_Jyutping_Connection</string>
+	<key>InputMethodServerControllerClass</key>
+	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
+	<key>InputMethodServerDelegateClass</key>
+	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
+	<key>LSHasLocalizedDisplayName</key>
+	<true/>
+	<key>TICapsLockLanguageSwitchCapable</key>
+	<true/>
+	<key>TISIntendedLanguage</key>
+	<string>yue</string>
+	<key>tsInputMethodCharacterRepertoireKey</key>
+	<array>
+		<string>Hant</string>
+		<string>Hans</string>
+	</array>
+	<key>tsInputMethodIconFileKey</key>
+	<string>jyutpingimeicon.pdf</string>
+</dict>
+</plist>
