@@ -41,7 +41,7 @@ Jyutping
 
 ## Build requirements
 - macOS 13.0+
-- Xcode 14.1+
+- Xcode 14.2+
 
 ## Credits
 - [Rime Cantonese](https://github.com/rime/rime-cantonese)
