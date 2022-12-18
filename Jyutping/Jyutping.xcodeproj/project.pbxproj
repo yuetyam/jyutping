@@ -329,7 +329,7 @@
 		37FC1B4E294DF8C800D7153F /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37FC1B4F294DF8C800D7153F /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37FC1B50294DF8C800D7153F /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		37FC1B57294DFAE300D7153F /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37FC1B57294DFAE300D7153F /* InputMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InputMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FC1B5D294DFAE400D7153F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37FC1B60294DFAE400D7153F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37FC1B62294DFAE400D7153F /* InputMethod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InputMethod.entitlements; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 				37D7BD23294CAADC006A6ADD /* JyutpingTests.xctest */,
 				37D7BD2D294CAADC006A6ADD /* JyutpingUITests.xctest */,
 				37FC1AD2294DF40900D7153F /* Keyboard.appex */,
-				37FC1B57294DFAE300D7153F /* Jyutping.app */,
+				37FC1B57294DFAE300D7153F /* InputMethod.app */,
 				37FC1B67294DFAE400D7153F /* InputMethodTests.xctest */,
 				37FC1B71294DFAE500D7153F /* InputMethodUITests.xctest */,
 			);
@@ -930,7 +930,7 @@
 				37FC1BC1294DFC7400D7153F /* CoreIME */,
 			);
 			productName = InputMethod;
-			productReference = 37FC1B57294DFAE300D7153F /* Jyutping.app */;
+			productReference = 37FC1B57294DFAE300D7153F /* InputMethod.app */;
 			productType = "com.apple.product-type.application";
 		};
 		37FC1B66294DFAE400D7153F /* InputMethodTests */ = {
@@ -1749,7 +1749,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 0.22.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
-				PRODUCT_NAME = Jyutping;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1783,7 +1783,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 0.22.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
-				PRODUCT_NAME = Jyutping;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
