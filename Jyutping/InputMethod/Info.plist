@@ -6,31 +6,34 @@
 	<dict>
 		<key>tsInputModeListKey</key>
 		<dict>
-			<key>TISIconLabels</key>
+			<key>org.jyutping.inputmethod.Jyutping.IME</key>
 			<dict>
-				<key>Primary</key>
-				<string>粵拼</string>
+				<key>TISIconLabels</key>
+				<dict>
+					<key>Primary</key>
+					<string>粵拼</string>
+				</dict>
+				<key>TISInputSourceID</key>
+				<string>org.jyutping.inputmethod.Jyutping.IME</string>
+				<key>TISIntendedLanguage</key>
+				<string>yue</string>
+				<key>tsInputModeAlternateMenuIconFileKey</key>
+				<string>jyutpingimeicon.pdf</string>
+				<key>tsInputModeDefaultStateKey</key>
+				<true/>
+				<key>tsInputModeIsVisibleKey</key>
+				<true/>
+				<key>tsInputModeKeyEquivalentModifiersKey</key>
+				<integer>4608</integer>
+				<key>tsInputModeMenuIconFileKey</key>
+				<string>jyutpingimeicon.pdf</string>
+				<key>tsInputModePaletteIconFileKey</key>
+				<string>jyutpingimeicon.pdf</string>
+				<key>tsInputModePrimaryInScriptKey</key>
+				<true/>
+				<key>tsInputModeScriptKey</key>
+				<string>smUnicodeScript</string>
 			</dict>
-			<key>TISInputSourceID</key>
-			<string>org.jyutping.inputmethod.Jyutping.IME</string>
-			<key>TISIntendedLanguage</key>
-			<string>yue</string>
-			<key>tsInputModeAlternateMenuIconFileKey</key>
-			<string>jyutpingimeicon.pdf</string>
-			<key>tsInputModeDefaultStateKey</key>
-			<true/>
-			<key>tsInputModeIsVisibleKey</key>
-			<true/>
-			<key>tsInputModeKeyEquivalentModifiersKey</key>
-			<integer>4608</integer>
-			<key>tsInputModeMenuIconFileKey</key>
-			<string>jyutpingimeicon.pdf</string>
-			<key>tsInputModePaletteIconFileKey</key>
-			<string>jyutpingimeicon.pdf</string>
-			<key>tsInputModePrimaryInScriptKey</key>
-			<true/>
-			<key>tsInputModeScriptKey</key>
-			<string>smUnicodeScript</string>
 		</dict>
 		<key>tsVisibleInputModeOrderedArrayKey</key>
 		<array>
