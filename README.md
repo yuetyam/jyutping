@@ -1,8 +1,6 @@
 Jyutping
 ======
 
-粵拼輸入法App. Cantonese Jyutping Keyboard for iOS & macOS.
-
 <a href="https://t.me/jyutping">
         <img src="images/telegram.png" alt="Telegram" width="150"/>
 </a>　<a href="https://twitter.com/JyutpingApp">
@@ -10,6 +8,12 @@ Jyutping
 </a>　<a href="https://www.instagram.com/jyutping_app">
         <img src="images/instagram.png" alt="Instagram" width="150"/>
 </a>
+<br>
+<br>
+
+粵拼輸入法App. Cantonese Jyutping Keyboard for iOS & macOS.
+
+採用香港語言學學會粵語拼音方案（粵拼，Jyutping）。詞庫碼表來自 CanCLD [Rime-Cantonese](https://github.com/rime/rime-cantonese) 。
 
 ## iOS & iPadOS
 
@@ -23,27 +27,39 @@ Jyutping
         <img src="images/app-store-link-qrcode.png" alt="App Store QR Code" width="150"/>
 </a>
 <br>
+<br>
 
-兼容性： iOS / iPadOS 14.0+
+兼容性： iOS / iPadOS 15.0+
 
 ## macOS
 由於 Mac App Store 毋接受輸入法上架，請前往 [網站](https://jyutping.app) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
-**注意事項**：安裝／更新輸入法之後需要登出電腦再登入，或者重啓電腦。
+請注意： 安裝／更新輸入法之後需要登出電腦再登入，或者重啓電腦。
 
 兼容性： macOS 12 Monterey 或者更高
 
-## Screenshots
+## 擷屏（Screenshots）
 <img src="images/screenshot.png" alt="screenshots" width="450"/>
 <br>
 <img src="images/screenshot-mac.png" alt="screenshots" width="450"/>
 
 
-## Build requirements
+## 如何構建（How to build）
+成個項目（project）包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標（target）。
+
+其中 `Jyutping` 係正常App， `Keyboard` 係 `Jyutping` 嘅 Keyboard Extension。而 `InputMethod` 係 macOS 輸入法。
+
+### 前置要求（Build requirements）
 - macOS 13.0+
 - Xcode 14.2+
 
-## Credits
+用 Xcode 打開 `Jyutping.xcodeproj` 即可。
+
+### 注意事項
+- 毋好喺 Xcode 度撳個 Run 掣來運行 `InputMethod`。只可以 Build 或 Archive，毋可以 Run。
+- 本倉庫所帶嘅詞庫只包含少量詞條，毋係完整詞庫。
+
+## 鳴謝（Credits）
 - [Rime Cantonese](https://github.com/rime/rime-cantonese)
 - [OpenCC](https://github.com/BYVoid/OpenCC)
 
