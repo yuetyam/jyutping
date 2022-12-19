@@ -13,7 +13,7 @@ Jyutping
 
 粵拼輸入法App. Cantonese Jyutping Keyboard for iOS & macOS.
 
-採用香港語言學學會粵語拼音方案（粵拼，Jyutping）。詞庫碼表來自 CanCLD [Rime-Cantonese](https://github.com/rime/rime-cantonese) 。
+採用香港語言學學會粵語拼音方案（粵拼，Jyutping）。詞庫碼表來自 CanCLD [Rime-Cantonese](https://github.com/rime/rime-cantonese)
 
 ## iOS & iPadOS
 
@@ -47,15 +47,15 @@ Jyutping
 ## 如何構建（How to build）
 成個項目（project）包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標（target）。
 
-其中 `Jyutping` 係正常App， `Keyboard` 係 `Jyutping` 嘅 Keyboard Extension。而 `InputMethod` 係 macOS 輸入法。
+其中 `Jyutping` 係正常App，`Keyboard` 係 `Jyutping` 嘅 Keyboard Extension。`InputMethod` 係 macOS 輸入法。
 
-### 前置要求（Build requirements）
+#### 前置要求（Build requirements）
 - macOS 13.0+
 - Xcode 14.2+
 
 用 Xcode 打開 `Jyutping.xcodeproj` 即可。
 
-### 注意事項
+#### 注意事項
 - 毋好喺 Xcode 度撳個 Run 掣來運行 `InputMethod`。只可以 Build 或 Archive，毋可以 Run。
 - 本倉庫所帶嘅詞庫只包含少量詞條，毋係完整詞庫。
 
