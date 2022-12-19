@@ -47,7 +47,7 @@ Jyutping
 ## 如何構建（How to build）
 成個項目（project）包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標（target）。
 
-其中 `Jyutping` 係正常App，`Keyboard` 係 `Jyutping` 嘅 Keyboard Extension。`InputMethod` 係 macOS 輸入法。
+`Jyutping` 係正常App，`Keyboard` 係 iOS Keyboard Extension，`InputMethod` 係 macOS 輸入法。
 
 #### 前置要求（Build requirements）
 - macOS 13.0+
@@ -56,7 +56,7 @@ Jyutping
 用 Xcode 打開 `Jyutping.xcodeproj` 即可。
 
 #### 注意事項
-- 毋好喺 Xcode 度撳個 Run 掣來運行 `InputMethod`。只可以 Build 或 Archive，毋可以 Run。
+- 毋好喺 Xcode 度撳個 Run 掣來運行 `InputMethod`，只可以 Build 或 Archive。
 - 本倉庫所帶嘅詞庫只包含少量詞條，毋係完整詞庫。
 
 ## 鳴謝（Credits）
