@@ -49,17 +49,21 @@ struct MacSearchView: View {
                                         }
                                         .block()
                                 }
-                                ForEach(0..<pronunciations.count, id: \.self) { index in
-                                        let romanization: String = pronunciations[index]
-                                        HStack(spacing: 16) {
-                                                Text(verbatim: romanization).font(.title3.monospaced())
-                                                if cantonese.count == 1 {
-                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
+                                if !pronunciations.isEmpty {
+                                        VStack {
+                                                ForEach(0..<pronunciations.count, id: \.self) { index in
+                                                        let romanization: String = pronunciations[index]
+                                                        HStack(spacing: 16) {
+                                                                Text(verbatim: romanization).font(.title3.monospaced())
+                                                                if cantonese.count == 1 {
+                                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
+                                                                }
+                                                                Spacer()
+                                                                Speaker(romanization)
+                                                        }
+                                                        .block()
                                                 }
-                                                Spacer()
-                                                Speaker(romanization)
                                         }
-                                        .block()
                                 }
                         }
                         .textSelection(.enabled)
