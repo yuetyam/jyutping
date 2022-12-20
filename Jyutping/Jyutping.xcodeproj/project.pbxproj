@@ -58,6 +58,7 @@
 		37D7BDBC294CC3AB006A6ADD /* CantoneseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */; };
 		37D7BDC0294CC9DA006A6ADD /* Materials in Frameworks */ = {isa = PBXBuildFile; productRef = 37D7BDBF294CC9DA006A6ADD /* Materials */; };
 		37D7BDC3294CCAD8006A6ADD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37D7BDC2294CCAD8006A6ADD /* CommonExtensions */; };
+		37EA2897295158CB00B40CE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37EA2896295158CB00B40CE4 /* Settings.bundle */; };
 		37FC1AD9294DF40900D7153F /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 37FC1AD2294DF40900D7153F /* Keyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37FC1AE0294DF5FD00D7153F /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1ADF294DF5FD00D7153F /* CharacterSets */; };
 		37FC1AE2294DF60200D7153F /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1AE1294DF60200D7153F /* CommonExtensions */; };
@@ -268,6 +269,7 @@
 		37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseView.swift; sourceTree = "<group>"; };
 		37D7BDBD294CC9BE006A6ADD /* Materials */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Materials; path = ../Modules/Materials; sourceTree = "<group>"; };
 		37D7BDC1294CCAC5006A6ADD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
+		37EA2896295158CB00B40CE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37FC1AD2294DF40900D7153F /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FC1AD6294DF40900D7153F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37FC1ADE294DF5D100D7153F /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 				37D7BD60294CB212006A6ADD /* Extensions */,
 				37D7BD45294CAEB7006A6ADD /* Localization */,
 				37D7BD19294CAADC006A6ADD /* Assets.xcassets */,
+				37EA2896295158CB00B40CE4 /* Settings.bundle */,
 				37D7BD1B294CAADC006A6ADD /* Jyutping.entitlements */,
 				37D7BD1C294CAADC006A6ADD /* Preview Content */,
 			);
@@ -1045,6 +1048,7 @@
 			files = (
 				37D7BD1E294CAADC006A6ADD /* Preview Assets.xcassets in Resources */,
 				37D7BD50294CB04F006A6ADD /* Localizable.strings in Resources */,
+				37EA2897295158CB00B40CE4 /* Settings.bundle in Resources */,
 				37D7BD46294CB032006A6ADD /* InfoPlist.strings in Resources */,
 				37D7BD1A294CAADC006A6ADD /* Assets.xcassets in Resources */,
 			);
