@@ -20,7 +20,8 @@ struct FinalsTable: View {
                 #endif
         }
 
-        private let placeholder: String = "hoeng4"
+        private let macPlaceholder: String = "hoeng4"
+        private let iOSPlaceholder: String = "香 hoeng4"
 
         var body: some View {
                 let blocks: [[String]] = sourceText
@@ -35,7 +36,7 @@ struct FinalsTable: View {
                                         let lines = blocks[blockIndex]
                                         VStack {
                                                 ForEach(0..<lines.count, id: \.self) { index in
-                                                        MacTableCell(lines[index], placeholder: placeholder)
+                                                        MacTableCell(lines[index], placeholder: macPlaceholder)
                                                 }
                                         }
                                         .block()
@@ -46,8 +47,8 @@ struct FinalsTable: View {
                                                 Spacer()
                                         }
                                         VStack {
-                                                MacTableCell("唔 m4,[m̩],m", placeholder: placeholder)
-                                                MacTableCell("吳 ng4,[ŋ̩],ng", placeholder: placeholder)
+                                                MacTableCell("唔 m4,[ m̩ ],m", placeholder: macPlaceholder)
+                                                MacTableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: macPlaceholder)
                                         }
                                         .block()
                                 }
@@ -61,13 +62,13 @@ struct FinalsTable: View {
                                 let lines = blocks[blockIndex]
                                 Section {
                                         ForEach(0..<lines.count, id: \.self) { index in
-                                                SyllableCell(lines[index], width: width)
+                                                IOSTableCell(lines[index], placeholder: iOSPlaceholder, width: width)
                                         }
                                 }
                         }
                         Section {
-                                SyllableCell("唔 m4,[m̩],m", width: width)
-                                SyllableCell("吳 ng4,[ŋ̩],ng", width: width)
+                                IOSTableCell("唔 m4,[ m̩ ],m", placeholder: iOSPlaceholder, width: width)
+                                IOSTableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: iOSPlaceholder, width: width)
                         } header: {
                                 Text(verbatim: "鼻音單獨成韻")
                         }
@@ -80,74 +81,74 @@ struct FinalsTable: View {
 
 private let sourceText: String = """
 例字,IPA,粵拼
-渣 zaa1,[aː],aa
-齋 zaai1,[aːi],aai
-嘲 zaau1,[aːu],aau
-站 zaam6,[aːm],aam
-讚 zaan3,[aːn],aan
-爭 zaang1,[aːŋ],aang
-雜 zaap6,[aːp̚],aap
-扎 zaat3,[aːt̚],aat
-責 zaak3,[aːk̚],aak
+渣 zaa1,[ aː ],aa
+齋 zaai1,[ aːi ],aai
+嘲 zaau1,[ aːu ],aau
+站 zaam6,[ aːm ],aam
+讚 zaan3,[ aːn ],aan
+爭 zaang1,[ aːŋ ],aang
+雜 zaap6,[ aːp̚ ],aap
+扎 zaat3,[ aːt̚ ],aat
+責 zaak3,[ aːk̚ ],aak
 .
-嘞 la3,[ɐ],a
-擠 zai1,[ɐi],ai
-周 zau1,[ɐu],au
-針 zam1,[ɐm],am
-真 zan1,[ɐn],an
-增 zang1,[ɐŋ],ang
-汁 zap1,[ɐp̚],ap
-質 zat1,[ɐt̚],at
-則 zak1,[ɐk̚],ak
+嘞 la3,[ ɐ ],a
+擠 zai1,[ ɐi ],ai
+周 zau1,[ ɐu ],au
+針 zam1,[ ɐm ],am
+真 zan1,[ ɐn ],an
+增 zang1,[ ɐŋ ],ang
+汁 zap1,[ ɐp̚ ],ap
+質 zat1,[ ɐt̚ ],at
+則 zak1,[ ɐk̚ ],ak
 .
-遮 ze1,[ɛː],e
-悲 bei1,[ei],ei
-掉 deu6,[ɛːu],eu
-𦧷 lem2,[ɛːm],em
-？,[en],en
-鄭 zeng6,[ɛːŋ],eng
-夾 gep6,[ɛːp̚],ep
-坺 pet6,[ɛːt̚],et
-隻 zek3,[ɛːk̚],ek
+遮 ze1,[ ɛː ],e
+悲 bei1,[ ei ],ei
+掉 deu6,[ ɛːu ],eu
+𦧷 lem2,[ ɛːm ],em
+？,[ en ],en
+鄭 zeng6,[ ɛːŋ ],eng
+夾 gep6,[ ɛːp̚ ],ep
+坺 pet6,[ ɛːt̚ ],et
+隻 zek3,[ ɛːk̚ ],ek
 .
-之 zi1,[iː],i
-招 ziu1,[iːu],iu
-尖 zim1,[iːm],im
-煎 zin1,[iːn],in
-晶 zing1,[eŋ],ing
-接 zip3,[iːp̚],ip
-節 zit3,[iːt̚],it
-即 zik1,[ek̚],ik
+之 zi1,[ iː ],i
+招 ziu1,[ iːu ],iu
+尖 zim1,[ iːm ],im
+煎 zin1,[ iːn ],in
+晶 zing1,[ eŋ ],ing
+接 zip3,[ iːp̚ ],ip
+節 zit3,[ iːt̚ ],it
+即 zik1,[ ek̚ ],ik
 .
-左 zo2,[ɔː],o
-栽 zoi1,[ɔːi],oi
-租 zou1,[ou],ou
-肝 gon1,[ɔːn],on
-裝 zong1,[ɔːŋ],ong
-喝 hot3,[ɔːt̚],ot
-作 zok3,[ɔːk̚],ok
+左 zo2,[ ɔː ],o
+栽 zoi1,[ ɔːi ],oi
+租 zou1,[ ou ],ou
+肝 gon1,[ ɔːn ],on
+裝 zong1,[ ɔːŋ ],ong
+喝 hot3,[ ɔːt̚ ],ot
+作 zok3,[ ɔːk̚ ],ok
 .
-夫 fu1,[uː],u
-灰 fui1,[uːi],ui
-？,[om],um
-寬 fun1,[uːn],un
-封 fung1,[oŋ],ung
-？,[op̚],up
-闊 fut3,[uːt̚],ut
-福 fuk1,[ok̚],uk
+夫 fu1,[ uː ],u
+灰 fui1,[ uːi ],ui
+？,[ om ],um
+寬 fun1,[ uːn ],un
+封 fung1,[ oŋ ],ung
+？,[ op̚ ],up
+闊 fut3,[ uːt̚ ],ut
+福 fuk1,[ ok̚ ],uk
 .
-靴 hoe1,[œː],oe
-香 hoeng1,[œːŋ],oeng
-？,[œːt̚],oet
-腳 goek3,[œːk̚],oek
+靴 hoe1,[ œː ],oe
+香 hoeng1,[ œːŋ ],oeng
+？,[ œːt̚ ],oet
+腳 goek3,[ œːk̚ ],oek
 .
-追 zeoi1,[ɵy],eoi
-津 zeon1,[ɵn],eon
-卒 zeot1,[ɵt̚],eot
+追 zeoi1,[ ɵy ],eoi
+津 zeon1,[ ɵn ],eon
+卒 zeot1,[ ɵt̚ ],eot
 .
-書 syu1,[yː],yu
-酸 syun1,[yːn],yun
-雪 syut3,[yːt̚],yut
+書 syu1,[ yː ],yu
+酸 syun1,[ yːn ],yun
+雪 syut3,[ yːt̚ ],yut
 """
 
 

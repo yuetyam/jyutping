@@ -1,36 +1,47 @@
 import SwiftUI
 
-struct SyllableCell: View {
+struct IOSTableCell: View {
 
-        init(_ line: String, width: CGFloat) {
+        init(_ line: String, placeholder: String, width: CGFloat) {
                 let parts: [String] = line.components(separatedBy: ",")
-                self.components = parts
+                let leading: String = parts[0]
+                self.example = leading
+                self.syllable = leading.filter({ $0.isASCII })
+                self.placeholder = placeholder
+                self.ipa = parts[1]
+                self.jyutping = parts[2]
                 self.width = width
-                self.syllable = String(parts[0].dropFirst(2))
         }
 
-        private let components: [String]
-        private let width: CGFloat
+        private let example: String
         private let syllable: String
+        private let placeholder: String
+        private let ipa: String
+        private let jyutping: String
+        private let width: CGFloat
 
         var body: some View {
                 HStack {
-                        HStack(spacing: 8) {
-                                Text(verbatim: components[0])
+                        HStack(spacing: 2) {
+                                ZStack(alignment: .leading) {
+                                        Text(verbatim: placeholder).hidden()
+                                        Text(verbatim: example)
+                                }
                                 if !syllable.isEmpty {
                                         Speaker(syllable)
                                 }
                         }
                         .frame(width: width + 25, alignment: .leading)
-                        Text(verbatim: components[1]).frame(width: width - 12, alignment: .leading)
-                        Text(verbatim: components[2])
+
+                        Text(verbatim: ipa).frame(width: width - 12, alignment: .leading)
+
+                        Text(verbatim: jyutping).font(.fixedWidth)
+
                         Spacer()
                 }
-                .font(.fixedWidth)
                 .textSelection(.enabled)
         }
 }
-
 
 struct MacTableCell: View {
 
@@ -40,7 +51,7 @@ struct MacTableCell: View {
                 self.word = leading.filter({ !$0.isASCII })
                 self.syllable = leading.filter({ $0.isASCII })
                 self.placeholder = placeholder
-                self.ipa = parts[1].replacingOccurrences(of: "[", with: "[ ").replacingOccurrences(of: "]", with: " ]").replacingOccurrences(of: "~", with: " ~ ")
+                self.ipa = parts[1].replacingOccurrences(of: "~", with: " ~ ")
                 self.jyutping = parts[2]
         }
 
