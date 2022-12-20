@@ -18,11 +18,11 @@ struct MacIntroductionsView: View {
                         LazyVStack(spacing: 32) {
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Tones Input").font(.headline)
+                                                Text("Tones Input").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: tonesInputDescription).font(.body.monospaced()).lineSpacing(5)
+                                                Text(verbatim: tonesInputDescription).font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                 }
@@ -33,7 +33,7 @@ struct MacIntroductionsView: View {
 
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Lookup Jyutping with Stroke").font(.headline)
+                                                Text("Lookup Jyutping with Stroke").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
@@ -41,7 +41,7 @@ struct MacIntroductionsView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: strokes).font(.body.monospaced()).lineSpacing(5)
+                                                Text(verbatim: strokes).font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                 }
@@ -65,11 +65,11 @@ private struct BlockView: View {
         var body: some View {
                 VStack(spacing: 16) {
                         HStack {
-                                Text(heading).font(.headline)
+                                Text(heading).font(.significant)
                                 Spacer()
                         }
                         HStack {
-                                Text(content).lineSpacing(6)
+                                Text(content).font(.master).lineSpacing(6)
                                 Spacer()
                         }
                 }

@@ -25,7 +25,7 @@ struct MacInputMethodInstallationView: View {
 
                                 HStack(spacing: 16) {
                                         Link("Website", destination: URL(string: websiteAddress)!)
-                                        Text(verbatim: websiteAddress).font(.body.monospaced())
+                                        Text(verbatim: websiteAddress).font(.fixedWidth)
                                         Button {
                                                 AppMaster.copy(websiteAddress)
                                                 isWebsiteAddressCopied = true

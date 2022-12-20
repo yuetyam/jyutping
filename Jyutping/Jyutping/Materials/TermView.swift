@@ -21,11 +21,11 @@ struct TermView: View {
                                         Text(verbatim: placeholder).hidden()
                                         Text(verbatim: term.romanization).textSelection(.enabled)
                                 }
-                                .font(.body.monospaced())
+                                .font(.fixedWidth)
                         }
                         Speaker(term.romanization)
                         if let comment = term.comment {
-                                Text(verbatim: comment).font(.subheadline).textSelection(.enabled).foregroundColor(.secondary)
+                                Text(verbatim: comment).font(.copilot).textSelection(.enabled).foregroundColor(.secondary)
                         }
                         Spacer()
                 }
@@ -41,7 +41,7 @@ struct HeaderTermView: View {
                 HStack {
                         HStack(spacing: 32) {
                                 Text(verbatim: term.name).font(.master)
-                                Text(verbatim: term.romanization).font(.body.monospaced())
+                                Text(verbatim: term.romanization).font(.fixedWidth)
                         }
                         .textSelection(.enabled)
                         Speaker(term.romanization)

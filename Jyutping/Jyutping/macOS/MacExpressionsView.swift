@@ -8,7 +8,7 @@ struct MacExpressionsView: View {
                         LazyVStack(spacing: 16) {
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text(verbatim: "第二人稱代詞").font(.masterHeadline)
+                                                Text(verbatim: "第二人稱代詞").font(.significant)
                                                 Label {
                                                         Text(verbatim: "單數：你")
                                                 } icon: {
@@ -35,7 +35,7 @@ struct MacExpressionsView: View {
                                 .block()
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text(verbatim: "第三人稱代詞").font(.masterHeadline)
+                                                Text(verbatim: "第三人稱代詞").font(.significant)
                                                 Label {
                                                         Text(verbatim: "單數：佢")
                                                 } icon: {
@@ -62,11 +62,11 @@ struct MacExpressionsView: View {
                                 .block()
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("區分 **係** 同 **喺**").font(.masterHeadline)
+                                                Text("區分 **係** 同 **喺**").font(.significant)
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "係")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "hai6").font(.body.monospaced())
+                                                                Text(verbatim: "hai6").font(.fixedWidth)
                                                                 Speaker("hai6")
                                                         }
                                                         Text(verbatim: "謂語，義同是。")
@@ -74,7 +74,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "喺")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "hai2").font(.body.monospaced())
+                                                                Text(verbatim: "hai2").font(.fixedWidth)
                                                                 Speaker("hai2")
                                                         }
                                                         Text(verbatim: "表方位、時間，義同在。")
@@ -93,11 +93,11 @@ struct MacExpressionsView: View {
                                 .block()
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("區分 **諗** 同 **冧**").font(.masterHeadline)
+                                                Text("區分 **諗** 同 **冧**").font(.significant)
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "諗")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "nam2").font(.body.monospaced())
+                                                                Text(verbatim: "nam2").font(.fixedWidth)
                                                                 Speaker("nam2")
                                                         }
                                                         Text(verbatim: "想、思考、覺得。")
@@ -105,7 +105,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "冧")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "lam3").font(.body.monospaced())
+                                                                Text(verbatim: "lam3").font(.fixedWidth)
                                                                 Speaker("lam3")
                                                         }
                                                         Text(verbatim: "表示倒塌、倒下。")
@@ -125,11 +125,11 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("區分 **咁** 同 **噉**").font(.masterHeadline)
+                                                Text("區分 **咁** 同 **噉**").font(.significant)
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "咁")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "gam3").font(.body.monospaced())
+                                                                Text(verbatim: "gam3").font(.fixedWidth)
                                                                 Speaker("gam3")
                                                         }
                                                         Text(verbatim: "音同「禁」。")
@@ -137,7 +137,7 @@ struct MacExpressionsView: View {
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "噉")
                                                         HStack(spacing: 4) {
-                                                                Text(verbatim: "gam2").font(.body.monospaced())
+                                                                Text(verbatim: "gam2").font(.fixedWidth)
                                                                 Speaker("gam2")
                                                         }
                                                         Text(verbatim: "音同「感」。")
@@ -157,7 +157,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("推薦 **嘅／個、得、噉**。  避免 **的、得、地**").font(.masterHeadline)
+                                                Text("推薦 **嘅／個、得、噉**。  避免 **的、得、地**").font(.significant)
                                                 Text(verbatim: "例：我嘅細佬／我個細佬。")
                                                 Text(verbatim: "例：講得好！")
                                                 Text(verbatim: "例：細細聲噉講話。")
@@ -168,7 +168,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("推薦 **啩、啊嘛**。  避免 **吧**").font(.masterHeadline)
+                                                Text("推薦 **啩、啊嘛**。  避免 **吧**").font(.significant)
                                                 Label {
                                                         Text(verbatim: "下個禮拜會出啩。")
                                                 } icon: {
@@ -196,7 +196,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("推薦 **啦、嘞**。  避免 **了**").font(.masterHeadline)
+                                                Text("推薦 **啦、嘞**。  避免 **了**").font(.significant)
                                                 Label {
                                                         Text(verbatim: "各位，我毋客氣啦。")
                                                 } icon: {
@@ -224,7 +224,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("推薦 **使**。  避免 **駛、洗**").font(.masterHeadline)
+                                                Text("推薦 **使**。  避免 **駛、洗**").font(.significant)
                                                 Label {
                                                         Text(verbatim: "毋使驚")
                                                 } icon: {
@@ -247,7 +247,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("推薦 **而家／而今**。  避免 **宜家**").font(.masterHeadline)
+                                                Text("推薦 **而家／而今**。  避免 **宜家**").font(.significant)
                                                 Label {
                                                         Text(verbatim: "我而家食緊飯。")
                                                 } icon: {
@@ -263,10 +263,10 @@ struct MacExpressionsView: View {
                                 }
                                 .block()
                         }
+                        .font(.master)
+                        .textSelection(.enabled)
                         .padding()
                 }
-                .font(.master)
-                .textSelection(.enabled)
                 .navigationTitle("Cantonese Expressions")
         }
 }

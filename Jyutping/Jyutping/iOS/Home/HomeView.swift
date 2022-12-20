@@ -86,7 +86,7 @@ struct HomeView: View {
                                                         isGuideViewExpanded.toggle()
                                                 }
                                         } else {
-                                                Text("How to enable this Keyboard").font(.headline)
+                                                Text("How to enable this Keyboard").font(.significant)
                                         }
                                         if !isKeyboardEnabled || isGuideViewExpanded {
                                                 VStack(spacing: 5) {
@@ -137,9 +137,9 @@ struct HomeView: View {
 
                                 Group {
                                         Section {
-                                                Text("Tones Input").font(.headline)
+                                                Text("Tones Input").font(.significant)
                                                 Text("tones.input.description")
-                                                        .font(.body.monospaced())
+                                                        .font(.fixedWidth)
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
                                                         .contextMenu {
@@ -147,20 +147,20 @@ struct HomeView: View {
                                                         }
                                         }
                                         Section {
-                                                Text("Lookup Jyutping with Cangjie").font(.headline)
+                                                Text("Lookup Jyutping with Cangjie").font(.significant)
                                                 Text("Cangjie Reverse Lookup Description").lineSpacing(6)
                                         }
                                         .textSelection(.enabled)
                                         Section {
-                                                Text("Lookup Jyutping with Pinyin").font(.headline)
+                                                Text("Lookup Jyutping with Pinyin").font(.significant)
                                                 Text("Pinyin Reverse Lookup Description").lineSpacing(6)
                                         }
                                         .textSelection(.enabled)
                                         Section {
-                                                Text("Lookup Jyutping with Stroke").font(.headline).textSelection(.enabled)
+                                                Text("Lookup Jyutping with Stroke").font(.significant).textSelection(.enabled)
                                                 Text("Stroke Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
                                                 Text(verbatim: strokes)
-                                                        .font(.body.monospaced())
+                                                        .font(.fixedWidth)
                                                         .lineSpacing(5)
                                                         .contextMenu {
                                                                 MenuCopyButton(strokes)

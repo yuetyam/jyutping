@@ -7,7 +7,7 @@ struct ExpressionsView: View {
                 List {
                         Group {
                                 Section {
-                                        Text(verbatim: "第二人稱代詞").font(.masterHeadline)
+                                        Text(verbatim: "第二人稱代詞").font(.significant)
 
                                         Label {
                                                 Text(verbatim: "單數：你")
@@ -31,7 +31,7 @@ struct ExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "第三人稱代詞").font(.masterHeadline)
+                                        Text(verbatim: "第三人稱代詞").font(.significant)
 
                                         Label {
                                                 Text(verbatim: "單數：佢")
@@ -57,7 +57,7 @@ struct ExpressionsView: View {
                         }
                         Group {
                                 Section {
-                                        Text(verbatim: "區分「係」同「喺」").font(.masterHeadline)
+                                        Text(verbatim: "區分「係」同「喺」").font(.significant)
                                         HStack {
                                                 Text(verbatim: "係")
                                                 HStack(spacing: 2) {
@@ -88,7 +88,7 @@ struct ExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分「諗」同「冧」").font(.masterHeadline)
+                                        Text(verbatim: "區分「諗」同「冧」").font(.significant)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "諗")
                                                 HStack(spacing: 2) {
@@ -119,7 +119,7 @@ struct ExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分「咁」同「噉」").font(.masterHeadline)
+                                        Text(verbatim: "區分「咁」同「噉」").font(.significant)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "咁")
                                                 HStack(spacing: 2) {

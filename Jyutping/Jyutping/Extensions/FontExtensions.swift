@@ -8,14 +8,25 @@ extension Font {
                 #if os(iOS)
                 return Font.body
                 #else
-                return constructFont(size: 13)
+                return constructFont(size: 14)
                 #endif
         }()
-        static let masterHeadline: Font = {
+
+        /// Heading
+        static let significant: Font = {
                 #if os(iOS)
                 return Font.body.weight(.medium)
                 #else
-                return constructFont(size: 15)
+                return constructFont(size: 16)
+                #endif
+        }()
+
+        /// Subheadline
+        static let copilot: Font = {
+                #if os(iOS)
+                return Font.subheadline
+                #else
+                return constructFont(size: 12)
                 #endif
         }()
 
