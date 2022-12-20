@@ -20,6 +20,8 @@ struct FinalsTable: View {
                 #endif
         }
 
+        private let placeholder: String = "hoeng4"
+
         var body: some View {
                 let blocks: [[String]] = sourceText
                         .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -33,7 +35,7 @@ struct FinalsTable: View {
                                         let lines = blocks[blockIndex]
                                         VStack {
                                                 ForEach(0..<lines.count, id: \.self) { index in
-                                                        SyllableCell(lines[index], width: width)
+                                                        MacTableCell(lines[index], placeholder: placeholder)
                                                 }
                                         }
                                         .block()
@@ -44,8 +46,8 @@ struct FinalsTable: View {
                                                 Spacer()
                                         }
                                         VStack {
-                                                SyllableCell("唔 m4,[m̩],m", width: width)
-                                                SyllableCell("吳 ng4,[ŋ̩],ng", width: width)
+                                                MacTableCell("唔 m4,[m̩],m", placeholder: placeholder)
+                                                MacTableCell("吳 ng4,[ŋ̩],ng", placeholder: placeholder)
                                         }
                                         .block()
                                 }
@@ -127,10 +129,10 @@ private let sourceText: String = """
 .
 夫 fu1,[uː],u
 灰 fui1,[uːi],ui
-?,[om],um
+？,[om],um
 寬 fun1,[uːn],un
 封 fung1,[oŋ],ung
-?,[op̚],up
+？,[op̚],up
 闊 fut3,[uːt̚],ut
 福 fuk1,[ok̚],uk
 .

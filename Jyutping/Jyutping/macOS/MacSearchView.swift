@@ -34,7 +34,6 @@ struct MacSearchView: View {
                                                 }
                                         }
                                         .focused($isTextFieldFocused)
-                                        .font(.significant)
                                         .padding(8)
                                         .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                         .padding(.vertical)
@@ -43,7 +42,7 @@ struct MacSearchView: View {
                                         }
                                 if !cantonese.isEmpty {
                                         HStack {
-                                                Text(verbatim: cantonese).font(.significant)
+                                                Text(verbatim: cantonese)
                                                 Spacer()
                                                 Speaker(cantonese)
                                         }
@@ -66,6 +65,7 @@ struct MacSearchView: View {
                                         }
                                 }
                         }
+                        .font(.master)
                         .textSelection(.enabled)
                         .padding()
                 }

@@ -12,7 +12,7 @@ struct MacAboutView: View {
                                                 .scaledToFit()
                                                 .frame(width: 16, height: 16)
                                                 .foregroundColor(.blue)
-                                        Text("Version")
+                                        Text("Version").font(.master)
                                         Text(verbatim: AppMaster.version)
                                         Spacer()
                                 }
@@ -65,7 +65,7 @@ private struct LinkLabel: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 16, height: 16)
-                                        Text(tittle)
+                                        Text(tittle).font(.master)
                                 }
                         }
                         Text(verbatim: message).font(.callout.monospaced())

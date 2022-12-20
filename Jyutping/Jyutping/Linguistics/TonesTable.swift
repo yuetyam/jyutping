@@ -21,7 +21,7 @@ struct TonesTable: View {
         }
         private var responsiveFont: Font {
                 #if os(macOS)
-                return Font.fixedWidth
+                return Font.master
                 #else
                 if Device.isPhone {
                         return Font.callout
@@ -44,9 +44,8 @@ struct TonesTable: View {
                                                 ToneCell(dataLines[index], width: width)
                                         }
                                 }
-                                .font(responsiveFont)
+                                .font(.master)
                                 .block()
-
                                 HStack(spacing: 12) {
                                         HStack(spacing: 0) {
                                                 Text(verbatim: "聲調之「上」應讀上聲 soeng5")
@@ -58,6 +57,7 @@ struct TonesTable: View {
                                         }
                                         Spacer()
                                 }
+                                .font(.copilot)
                                 .textSelection(.enabled)
                                 .padding()
                         }
@@ -127,7 +127,10 @@ private struct ToneCell: View {
         var body: some View {
                 HStack {
                         HStack(spacing: 8) {
-                                Text(verbatim: components[0])
+                                ZStack(alignment: .leading) {
+                                        Text(verbatim: "法 faat3").hidden()
+                                        Text(verbatim: components[0])
+                                }
                                 if !syllable.isEmpty {
                                         Speaker(syllable)
                                 }

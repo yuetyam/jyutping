@@ -27,7 +27,7 @@ struct InitialsTable: View {
                 ScrollView {
                         VStack {
                                 ForEach(0..<dataLines.count, id: \.self) { index in
-                                        SyllableCell(dataLines[index], width: width)
+                                        MacTableCell(dataLines[index], placeholder: "gwaa4")
                                 }
                         }
                         .block()
