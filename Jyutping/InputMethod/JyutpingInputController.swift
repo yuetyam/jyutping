@@ -323,7 +323,7 @@ final class JyutpingInputController: IMKInputController {
                                 markedText = processingText
                                 leungFanReverseLookup()
                         case .some(let character) where character.isBasicLatinLetter:
-                                flexibleSchemes = Splitter.split(processingText)
+                                flexibleSchemes = Segmentor.segment(processingText)
                                 if let syllables: [String] = flexibleSchemes.first {
                                         let splittable: String = syllables.joined()
                                         if splittable.count == processingText.count {
@@ -404,7 +404,7 @@ final class JyutpingInputController: IMKInputController {
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(processingText.dropLast())
-                                let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
+                                let newSchemes: [[String]] = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
                                 return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
                         }
                         let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty

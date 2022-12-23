@@ -390,8 +390,8 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         possibleTexts = newPossibles.flatMap({ $0 })
                         possibleTexts.sort { lhs, rhs in
-                                let lhsSyllables = Splitter.peekSplit(lhs)
-                                let rhsSyllables = Splitter.peekSplit(rhs)
+                                let lhsSyllables = Segmentor.scheme(of: lhs)
+                                let rhsSyllables = Segmentor.scheme(of: rhs)
                                 let lhsLength = lhsSyllables.joined().count
                                 let rhsLength = rhsSyllables.joined().count
                                 if lhsLength == rhsLength {
@@ -533,7 +533,7 @@ final class KeyboardViewController: UIInputViewController {
                                 flexibleSchemes = []
                                 markedText = processingText
                         default:
-                                flexibleSchemes = Splitter.split(processingText)
+                                flexibleSchemes = Segmentor.segment(processingText)
                                 if let syllables: [String] = flexibleSchemes.first {
                                         let splittable: String = syllables.joined()
                                         if splittable.count == processingText.count {
@@ -708,8 +708,8 @@ final class KeyboardViewController: UIInputViewController {
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(droppedLast)
-                                let newSchemes: [[String]] = Splitter.split(droppedSeparator).uniqued().filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
+                                let newSegmentation: Segmentation = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
+                                return Lychee.suggest(for: droppedSeparator, schemes: newSegmentation)
                         }
                         let shouldContinue: Bool = needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }

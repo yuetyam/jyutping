@@ -111,7 +111,7 @@ extension Lychee {
                 let firstInputCount: Int = firstCandidate.input.count
                 guard firstInputCount != text.count else { return candidates }
                 let tailText: String = String(text.dropFirst(firstInputCount))
-                let tailSchemes: [[String]] = Splitter.engineSplit(tailText)
+                let tailSchemes: [[String]] = Segmentor.engineSegment(tailText)
                 let tailCandidates = match(schemes: tailSchemes, hasSeparators: false)
                 guard let backCandidate = tailCandidates.first else { return candidates }
                 let offset: Int = (firstCandidate.text.count < 3) ? 3 : 2
@@ -132,7 +132,7 @@ extension Lychee {
                         let combine: CoreCandidate = firstCandidate + tailOne
                         return match(for: text) + prefix(match: text, count: 5) + [combine] + candidates + shortcut(for: text)
                 }
-                let tailSyllables: [String] = Splitter.peekSplit(tailText)
+                let tailSyllables: [String] = Segmentor.scheme(of: tailText)
                 guard !(tailSyllables.isEmpty) else { return fallback }
                 var concatenated: [CoreCandidate] = []
                 let hasTailCandidate: Bool = {

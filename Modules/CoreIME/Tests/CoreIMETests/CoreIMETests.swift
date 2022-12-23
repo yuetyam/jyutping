@@ -3,21 +3,17 @@ import XCTest
 
 final class CoreIMETests: XCTestCase {
 
-        // MARK: - Splitter
+        // MARK: - Segmentor
 
-        func testCanSplit() throws {
+        func testSegment() throws {
                 let sourceText: String = "neihou"
-                let result = Splitter.canSplit(sourceText)
-                XCTAssertEqual(result, true)
+                let expected: [[String]] = [["nei", "hou"], ["nei", "ho"], ["nei"], ["ne"]]
+                let result = Segmentor.segment(sourceText)
+                XCTAssertEqual(result, expected)
         }
-        func testPeekSplit() throws {
+        func testScheme() throws {
                 let sourceText: String = "neihou"
-                let result = Splitter.peekSplit(sourceText)
-                XCTAssertEqual(result, ["nei", "hou"])
-        }
-        func testSplit() throws {
-                let sourceText: String = "neihou"
-                let result = Splitter.split(sourceText).first!
+                let result = Segmentor.scheme(of: sourceText)
                 XCTAssertEqual(result, ["nei", "hou"])
         }
 
