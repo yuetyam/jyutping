@@ -1,6 +1,7 @@
+#if os(macOS)
+
 import SwiftUI
 
-#if os(macOS)
 struct VisualEffect: NSViewRepresentable {
         // https://developer.apple.com/forums/thread/694837
         func makeNSView(context: Self.Context) -> NSView {
@@ -36,6 +37,7 @@ struct MacContentView: View {
                                         Text("Jyutping").textCase(nil)
                                 }
                                 Section {
+                                        Label("Numbers", systemImage: "number").tag(ViewIdentifier.numbers)
                                         Label("Stems and Branches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
                                         Label("Chinese Zodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
                                         Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
@@ -67,6 +69,8 @@ struct MacContentView: View {
                                 FinalsTable().background(visualEffect)
                         case .tones:
                                 TonesTable().background(visualEffect)
+                        case .numbers:
+                                NumbersView().background(visualEffect)
                         case .stemsBranches:
                                 StemsBranchesView().background(visualEffect)
                         case .chineseZodiac:
@@ -94,6 +98,7 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case finals
         case tones
 
+        case numbers
         case stemsBranches
         case chineseZodiac
         case solarTerms

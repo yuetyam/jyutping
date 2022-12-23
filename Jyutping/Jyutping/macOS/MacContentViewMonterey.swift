@@ -54,6 +54,11 @@ struct MacContentViewMonterey: View {
                                 }
                                 Section {
                                         NavigationLink {
+                                                NumbersView().background(visualEffect)
+                                        } label: {
+                                                Label("Numbers", systemImage: "number")
+                                        }
+                                        NavigationLink {
                                                 StemsBranchesView().background(visualEffect)
                                         } label: {
                                                 Label("Stems and Branches", systemImage: "timelapse")

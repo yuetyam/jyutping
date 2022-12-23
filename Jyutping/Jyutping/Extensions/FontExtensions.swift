@@ -65,7 +65,7 @@ extension Font {
                         }
                         return list
                 }()
-                let shouldUseSystemFonts: Bool = fallbacks == [PingFangHK]
+                let shouldUseSystemFonts: Bool = (fallbacks.count == 1)
                 if shouldUseSystemFonts {
                         return Font.system(size: size)
                 } else {

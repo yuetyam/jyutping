@@ -7,6 +7,9 @@ struct CantoneseView: View {
                 NavigationView {
                         List {
                                 Section {
+                                        NavigationLink(destination: NumbersView()) {
+                                                Label("Numbers", systemImage: "number")
+                                        }
                                         NavigationLink(destination: StemsBranchesView()) {
                                                 Label("Stems and Branches", systemImage: "timelapse")
                                         }
