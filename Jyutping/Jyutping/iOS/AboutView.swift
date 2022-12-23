@@ -4,28 +4,6 @@ import SwiftUI
 
 struct AboutView: View {
 
-        private let websiteIconName: String = {
-                if #available(iOS 15.0, *) {
-                        return "globe.asia.australia"
-                } else {
-                        return "house"
-                }
-        }()
-        private let sourceCodeIconName: String = {
-                if #available(iOS 15.0, *) {
-                        return "chevron.left.forwardslash.chevron.right"
-                } else {
-                        return "chevron.left.slash.chevron.right"
-                }
-        }()
-        private let githubIssuesIconName: String = {
-                if #available(iOS 15.0, *) {
-                        return "smallcircle.filled.circle"
-                } else {
-                        return "smallcircle.fill.circle"
-                }
-        }()
-
         private let appStoreAddress: String = "https://apps.apple.com/app/id1509367629"
         private let link2AppStore: URL = URL(string: "https://apps.apple.com/app/id1509367629")!
 
@@ -40,13 +18,16 @@ struct AboutView: View {
                                 }
                                 Section {
                                         SafariLink("https://jyutping.app") {
-                                                EnhancedLabel("Website", icon: websiteIconName, symbol: .safari)
+                                                EnhancedLabel("Website", icon: "globe.asia.australia", symbol: .safari)
                                         }
                                         SafariLink("https://github.com/yuetyam/jyutping") {
-                                                EnhancedLabel("Source Code", icon: sourceCodeIconName, symbol: .safari)
+                                                EnhancedLabel("Source Code", icon: "chevron.left.forwardslash.chevron.right", symbol: .safari)
                                         }
                                         SafariLink("https://jyutping.app/privacy") {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
+                                        }
+                                        SafariLink("https://jyutping.app/faq") {
+                                                EnhancedLabel("Frequently Asked Questions", icon: "questionmark.circle", symbol: .safari)
                                         }
                                 }
                                 Section {
@@ -113,19 +94,11 @@ struct AboutView: View {
                                 Section {
                                         // GitHub App supports Universal Links
                                         Link(destination: URL(string: "https://github.com/yuetyam/jyutping/issues")!) {
-                                                EnhancedLabel("GitHub Issues", icon: githubIssuesIconName, symbol: .arrowUpForward)
+                                                EnhancedLabel("GitHub Issues", icon: "smallcircle.filled.circle", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
                                                 URLCopyButton("https://github.com/yuetyam/jyutping/issues")
                                         }
-                                        /*
-                                        Link(destination: URL(string: "imessage://bing@ososo.io")!) {
-                                                EnhancedLabel("iMessage Feedback", icon: "message", symbol: Image(systemName: "square.and.pencil"))
-                                        }
-                                        .contextMenu {
-                                                MenuCopyButton("bing@ososo.io", title: "Copy iMessage Address")
-                                        }
-                                        */
                                         EmailFeedbackButton()
                                                 .contextMenu {
                                                         MenuCopyButton("bing@ososo.io", title: "Copy Email Address")
