@@ -267,6 +267,7 @@ struct ExpressionsView: View {
                                 }
                         }
                 }
+                .textSelection(.enabled)
                 .navigationTitle("title.expressions")
                 .navigationBarTitleDisplayMode(.inline)
         }

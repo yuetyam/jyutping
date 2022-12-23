@@ -29,33 +29,31 @@ struct FAQView: View {
                                 Text("All other features don't require Full Access").textCase(nil)
                         }
 
-                        if !(Speech.isLanguagesEnabled && Speech.isEnhancedVoiceAvailable) {
-                                Section {
-                                        Text("Why is this App's Text-to-Speech voice so odd?").font(.significant)
-                                        HStack {
-                                                Text.dotMark
-                                                Text("tts.notice.1")
-                                                Spacer()
-                                        }
-                                        if !(Speech.isLanguagesEnabled) {
-                                                HStack {
-                                                        Text.dotMark
-                                                        Text("tts.notice.2")
-                                                        Spacer()
-                                                }
-                                        }
-                                        HStack {
-                                                Text.dotMark
-                                                Text("tts.notice.3")
-                                                Spacer()
-                                        }
+                        Section {
+                                Text("faq.heading.tts").font(.significant)
+                                HStack {
+                                        Text.dotMark
+                                        Text("tts.notice.0")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text.dotMark
+                                        Text("tts.notice.1")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text.dotMark
+                                        Text("tts.notice.2")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text.dotMark
+                                        Text("tts.notice.3")
+                                        Spacer()
                                 }
                         }
-                        Section {
-                                Text("Why is there no Text-to-Speech sound on this device?").font(.significant)
-                                Text("Please check if it is because this device is in silent mode.")
-                        }
                 }
+                .textSelection(.enabled)
                 .navigationTitle("FAQ")
                 .navigationBarTitleDisplayMode(.inline)
         }

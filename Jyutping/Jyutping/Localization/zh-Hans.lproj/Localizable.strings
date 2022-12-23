@@ -1,5 +1,3 @@
-// Cantonese (yue)
-
 // MARK: - General
 
 "Settings" = "設定";
@@ -50,6 +48,13 @@
 "Clear the input buffer syllables" = "一次過清除已輸入音節";
 "Swipe from right to left on the Delete key will clear the pre-edited syllables" = "刪除(Delete)掣度向左滑，即可一次過刪晒已輸入拼寫";
 
+"Text to Speech" = "語音朗讀";
+"tts.notice.0" = "本應用程式使用嘅係，系統提供嘅語音朗讀（TTS）功能。";
+"tts.notice.1" = "如果本設備處於靜音模式，語音朗讀會冇聲音。";
+"tts.notice.2" = "爲保證發音質素，請到 **設定** → **一般** → **語言與地區** 度，添加 **繁體中文(香港)** 語言。";
+"tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
+"faq.heading.tts" = "點解我部機嘅語音朗讀毋正常？";
+
 "Cantonese Expressions" = "粵語用字參攷";
 "title.expressions" = "粵語用字參攷";
 
@@ -69,14 +74,6 @@
 "privacy.notice.3" = "開啓「全權取用」權限僅用作提供振動反饋功能";
 "privacy.notice.4" = "鍵盤上部個「帖上」掣毋會收集任何剪帖板內容";
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
-
-"Why is this App's Text-to-Speech voice so odd?" = "點解個語音朗讀有少少毋自然？";
-"tts.notice.1" = "本應用程式使用系統提供嘅語音朗讀功能。";
-"tts.notice.2" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
-"tts.notice.3" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
-
-"Why is there no Text-to-Speech sound on this device?" = "點解我部機嘅語音朗讀冇聲音？";
-"Please check if it is because this device is in silent mode." = "請檢查下係毋係因爲部機處於靜音模式";
 
 
 // MARK: - Jyutping Lookup

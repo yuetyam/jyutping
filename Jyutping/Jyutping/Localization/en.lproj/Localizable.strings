@@ -1,5 +1,3 @@
-// English (en)
-
 // MARK: - General
 
 "Settings" = "Settings";
@@ -51,6 +49,13 @@
 "Clear the input buffer syllables" = "Clear the input buffer syllables";
 "Swipe from right to left on the Delete key will clear the pre-edited syllables" = "Swipe from right to left on the Delete key will clear the pre-edited syllables";
 
+"Text to Speech" = "Text to Speech";
+"tts.notice.0" = "本應用程式使用嘅係，系統提供嘅語音朗讀（TTS）功能。";
+"tts.notice.1" = "如果本設備處於靜音模式，語音朗讀會冇聲音。";
+"tts.notice.2" = "爲保證發音質素，請到 **設定** → **一般** → **語言與地區** 度，添加 **繁體中文(香港)** 語言。";
+"tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
+"faq.heading.tts" = "點解我部機嘅語音朗讀毋正常？";
+
 "Cantonese Expressions" = "Cantonese Expressions";
 "title.expressions" = "Expressions";
 
@@ -70,14 +75,6 @@
 "privacy.notice.3" = "Enabling Haptic Feedback needs Allow Full Access.";
 "privacy.notice.4" = "The Paste button on the top of the Keyboard would not collect any content of the Clipboard.";
 "privacy.notice.footer" = "TLDR: We do NOT collect or share personal information.";
-
-"Why is this App's Text-to-Speech voice so odd?" = "Why is this App's Text-to-Speech voice so odd?";
-"tts.notice.1" = "本應用程式使用系統提供嘅語音朗讀功能。";
-"tts.notice.2" = "爲保證發音質素，推薦到 **設定** → **一般** → **語言與地區** 度添加 **繁體中文(香港)** 語言。";
-"tts.notice.3" = "爲提高發音質素，推薦到 **設定** → **輔助功能** → **旁白** → **語音** 度添加 **繁體中文(香港)** 語音。";
-
-"Why is there no Text-to-Speech sound on this device?" = "Why is there no Text-to-Speech sound on this device?";
-"Please check if it is because this device is in silent mode." = "Please check if it is because this device is in silent mode.";
 
 
 // MARK: - Jyutping Lookup

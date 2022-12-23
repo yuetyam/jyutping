@@ -170,24 +170,31 @@ struct HomeView: View {
 
                                 Section {
                                         NavigationLink {
-                                                IntroductionsView().textSelection(.enabled)
+                                                IntroductionsView()
                                         } label: {
                                                 Label("More Introductions", systemImage: "info.circle")
                                         }
+                                }
+                                Section {
                                         NavigationLink {
-                                                ExpressionsView().textSelection(.enabled)
+                                                Text2SpeechView()
+                                        } label: {
+                                                Label("Text to Speech", systemImage: "speaker.wave.2")
+                                        }
+                                        NavigationLink {
+                                                ExpressionsView()
                                         } label: {
                                                 Label("Cantonese Expressions", systemImage: "checkmark.seal")
                                         }
                                 }
                                 Section {
                                         NavigationLink {
-                                                FAQView().textSelection(.enabled)
+                                                FAQView()
                                         } label: {
                                                 Label("Frequently Asked Questions", systemImage: "questionmark.circle")
                                         }
                                         NavigationLink {
-                                                PrivacyNoticeView().textSelection(.enabled)
+                                                PrivacyNoticeView()
                                         } label: {
                                                 Label("Privacy Notice", systemImage: "lock.circle")
                                         }

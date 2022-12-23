@@ -17,6 +17,7 @@ struct PrivacyNoticeView: View {
                                 Text("privacy.notice.footer").textCase(nil)
                         }
                 }
+                .textSelection(.enabled)
                 .navigationTitle("Privacy Notice")
                 .navigationBarTitleDisplayMode(.inline)
         }

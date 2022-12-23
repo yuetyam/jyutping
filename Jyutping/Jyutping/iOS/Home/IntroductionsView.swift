@@ -18,6 +18,7 @@ struct IntroductionsView: View {
                                 Text("Swipe from right to left on the Delete key will clear the pre-edited syllables").lineSpacing(6)
                         }
                 }
+                .textSelection(.enabled)
                 .navigationTitle("title.introductions")
                 .navigationBarTitleDisplayMode(.inline)
         }
