@@ -38,46 +38,43 @@ extension String {
                 return self.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
         }
 
-        /// Ideographic characters only.
-        /// - Returns: A new String made by removing irrelevant characters.
-        public func ideographicFiltered() -> String {
-                return self.unicodeScalars.filter({ $0.properties.isIdeographic }).map({ String($0) }).joined()
-        }
-
-
         /// CJKV && !CJKV
-        public var ideographicBlocks: [(text: String, isIdeographic: Bool)] {
-                var blocks: [(String, Bool)] = []
-                var ideographicCache: String = .empty
-                var otherCache: String = .empty
+        public var textBlocks: [TextUnit] {
+                var blocks: [TextUnit] = []
+                var ideographicCache: String = ""
+                var otherCache: String = ""
                 var lastWasIdeographic: Bool = true
                 for character in self {
-                        let isIdeographic: Bool = character.unicodeScalars.first?.properties.isIdeographic ?? false
-                        if isIdeographic {
+                        if character.isIdeographic {
                                 if !lastWasIdeographic && !otherCache.isEmpty {
-                                        let newElement: (String, Bool) = (otherCache, false)
+                                        let newElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
                                         blocks.append(newElement)
-                                        otherCache = .empty
+                                        otherCache = ""
                                 }
                                 ideographicCache.append(character)
                                 lastWasIdeographic = true
                         } else {
                                 if lastWasIdeographic && !ideographicCache.isEmpty {
-                                        let newElement: (String, Bool) = (ideographicCache, true)
+                                        let newElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
                                         blocks.append(newElement)
-                                        ideographicCache = .empty
+                                        ideographicCache = ""
                                 }
                                 otherCache.append(character)
                                 lastWasIdeographic = false
                         }
                 }
                 if !ideographicCache.isEmpty {
-                        let tailElement: (String, Bool) = (ideographicCache, true)
+                        let tailElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
                         blocks.append(tailElement)
                 } else if !otherCache.isEmpty {
-                        let tailElement: (String, Bool) = (otherCache, false)
+                        let tailElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
                         blocks.append(tailElement)
                 }
                 return blocks
         }
+}
+
+public struct TextUnit {
+        public let text: String
+        public let isIdeographic: Bool
 }
