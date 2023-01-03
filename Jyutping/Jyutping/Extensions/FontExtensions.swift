@@ -53,8 +53,14 @@ extension Font {
                                 }
                         }
                         list.append(PingFangHK)
-                        let secondWave: [String] = ["I.MingCP", "I.Ming"]
-                        for item in secondWave {
+                        let planFonts: [String] = ["Plangothic P1", "Plangothic P2"]
+                        for item in planFonts {
+                                if let _ = NSFont(name: item, size: size) {
+                                        list.append(item)
+                                }
+                        }
+                        let IMingFonts: [String] = ["I.MingCP", "I.Ming"]
+                        for item in IMingFonts {
                                 if let _ = NSFont(name: item, size: size) {
                                         list.append(item)
                                         break
