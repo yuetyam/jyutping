@@ -293,12 +293,13 @@ public struct Segmentor {
 
         private static let singular: Set<Character> = ["m", "a", "o"]
         private static let dual: Set<String> = [
-                "aa", "ai", "au", "am", "an", "ap", "at", "ak", "ei", "oi", "ou", "on", "ok", "uk", "yu",
+                "aa", "ai", "au", "am", "an", "ap", "at", "ak", "ei", "oi", "ou", "on", "ok", "uk",
                 "bo", "po", "mo", "fo", "do", "to", "no", "lo", "go", "ko", "ho", "wo", "zo", "co", "so",
                 "me", "de", "ne", "le", "ge", "ke", "ze", "ce", "se", "je",
                 "di", "ni", "zi", "ci", "si", "ji",
                 "fu", "gu", "ku", "wu",
                 "ng",
+                "yu", "ye", "yi",
         ]
         private static let triple: Set<String> = [
                 "ang", "ong", "ung",
@@ -337,6 +338,12 @@ public struct Segmentor {
                 "buk", "puk", "muk", "fuk", "duk", "tuk", "nuk", "luk", "guk", "kuk", "huk", "zuk", "cuk", "suk", "juk",
 
                 "zyu", "cyu", "syu", "jyu",
+
+                "dum", "tum", "num", "lum", "gum", "kum", "hum", "zum", "cum", "sum", "jum",
+                "dom", "tom", "nom", "lom", "gom", "kom", "hom", "zom", "com", "som", "jom",
+
+                "yaa", "yai", "yau", "yam", "yan", "yap", "yat", "yiu", "yim", "yin", "yip", "yit", "yik", "yuk",
+                "yun", "yut", "yum", "yom",
         ]
         private static let quad: Set<String> = [
                 "ngaa", "gwaa", "kwaa",
@@ -368,12 +375,22 @@ public struct Segmentor {
 
                 "beng", "peng", "meng", "deng", "teng", "leng", "geng", "zeng", "ceng", "seng",
 
+                "doei", "toei", "noei", "loei", "goei", "koei", "hoei", "zoei", "coei", "soei", "joei",
+                "doen", "toen", "loen", "zoen", "coen", "soen", "joen",
+                "doet", "toet", "noet", "loet", "zoet", "coet", "soet",
+                "deok", "leok", "geok", "keok", "zeok", "ceok", "seok", "jeok",
+
+                "yaak", "ying", "yeoi", "yeon", "yoek", "yung", "yoei", "yoen", "yeok",
         ]
         private static let five: Set<String> = [
                 "ngaai", "ngaau", "ngaam", "ngaan",
                 "gwang", "gwaan", "gwaat", "gwaak", "gwong", "gwing",
                 "baang", "paang", "maang", "laang", "gaang", "haang", "zaang", "caang", "saang",
-                "doeng", "loeng", "goeng", "koeng", "hoeng", "zoeng", "coeng", "soeng", "joeng", "yoeng",
+                "doeng", "loeng", "goeng", "koeng", "hoeng", "zoeng", "coeng", "soeng", "joeng",
+
+                "deong", "leong", "geong", "keong", "heong", "zeong", "ceong", "seong", "jeong",
+                "deung", "leung", "geung", "keung", "heung", "zeung", "ceung", "seung", "jeung",
+                "yoeng", "yeong", "yeung",
         ]
         private static let six: Set<String> = ["ngaang", "gwaang", "kwaang"]
 }
