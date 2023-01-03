@@ -1,5 +1,6 @@
 import SwiftUI
 import Materials
+import CommonExtensions
 
 struct AppMaster {
 
@@ -36,15 +37,11 @@ extension AppMaster {
         /// - Parameter text: Cantonese text
         /// - Returns: Cantonese text and corresponding romanizations
         static func lookup(text: String) -> Response {
-                let filtered: String = ideographicFilter(text: text)
+                let filtered: String = text.filter({ $0.isIdeographic })
                 let search = Lookup.search(for: filtered)
-                guard filtered != text else {
-                        return search
-                }
-                guard !(filtered.isEmpty) else {
-                        return search
-                }
-                let transformed = handleIdeographicBlocks(of: text)
+                guard filtered != text else { return search }
+                guard !(filtered.isEmpty) else { return search }
+                let transformed = text.textBlocks
                 var handledCount: Int = 0
                 var combinedText: String = ""
                 for item in transformed {
@@ -64,8 +61,7 @@ extension AppMaster {
                         var newRomanization: String = ""
                         var lastWasIdeographic: Bool = false
                         for character in text {
-                                let isIdeographic: Bool = character.unicodeScalars.first?.properties.isIdeographic ?? false
-                                if isIdeographic {
+                                if character.isIdeographic {
                                         newRomanization += (syllables[index] + " ")
                                         index += 1
                                         lastWasIdeographic = true
@@ -80,43 +76,5 @@ extension AppMaster {
                         return newRomanization.trimmingCharacters(in: .whitespaces)
                 }
                 return Response(text: combinedText, romanizations: combinedRomanizations)
-        }
-
-        private static func ideographicFilter(text: String) -> String {
-                return text.unicodeScalars.filter({ $0.properties.isIdeographic }).map({ String($0) }).joined()
-        }
-        private static func handleIdeographicBlocks(of text: String) -> [(text: String, isIdeographic: Bool)] {
-                var blocks: [(String, Bool)] = []
-                var ideographicCache: String = ""
-                var otherCache: String = ""
-                var lastWasIdeographic: Bool = true
-                for character in text {
-                        let isIdeographic: Bool = character.unicodeScalars.first?.properties.isIdeographic ?? false
-                        if isIdeographic {
-                                if !lastWasIdeographic && !otherCache.isEmpty {
-                                        let newElement: (String, Bool) = (otherCache, false)
-                                        blocks.append(newElement)
-                                        otherCache = ""
-                                }
-                                ideographicCache.append(character)
-                                lastWasIdeographic = true
-                        } else {
-                                if lastWasIdeographic && !ideographicCache.isEmpty {
-                                        let newElement: (String, Bool) = (ideographicCache, true)
-                                        blocks.append(newElement)
-                                        ideographicCache = ""
-                                }
-                                otherCache.append(character)
-                                lastWasIdeographic = false
-                        }
-                }
-                if !ideographicCache.isEmpty {
-                        let tailElement: (String, Bool) = (ideographicCache, true)
-                        blocks.append(tailElement)
-                } else if !otherCache.isEmpty {
-                        let tailElement: (String, Bool) = (otherCache, false)
-                        blocks.append(tailElement)
-                }
-                return blocks
         }
 }
