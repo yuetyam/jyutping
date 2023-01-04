@@ -300,46 +300,42 @@ final class JyutpingInputController: IMKInputController {
                 didSet {
                         switch processingText.first {
                         case .none:
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = .empty
                                 candidates = []
                                 displayObject.reset()
                                 window?.setFrame(.zero, display: true)
                                 break
                         case .some("r"):
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = processingText
                                 pinyinReverseLookup()
                         case .some("v"):
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = processingText
                                 cangjieReverseLookup()
                         case .some("x"):
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = processingText
                                 strokeReverseLookup()
                         case .some("q"):
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = processingText
                                 leungFanReverseLookup()
                         case .some(let character) where character.isBasicLatinLetter:
-                                flexibleSchemes = Segmentor.segment(processingText)
-                                if let syllables: [String] = flexibleSchemes.first {
-                                        let splittable: String = syllables.joined()
-                                        if splittable.count == processingText.count {
-                                                markedText = syllables.joined(separator: .space)
-                                        } else if processingText.contains("'") {
-                                                markedText = processingText.replacingOccurrences(of: "'", with: "' ")
-                                        } else {
-                                                let tail = processingText.dropFirst(splittable.count)
-                                                markedText = syllables.joined(separator: .space) + .space + tail
-                                        }
-                                } else {
-                                        markedText = processingText
-                                }
+                                segmentation = Segmentor.segment(processingText)
+                                markedText = {
+                                        guard !(processingText.contains("'")) else { return processingText.replacingOccurrences(of: "'", with: "' ") }
+                                        guard let bestScheme = segmentation.first else { return processingText }
+                                        let leading: String = bestScheme.joined(separator: " ")
+                                        let isFullScheme: Bool = bestScheme.length == processingText.count
+                                        guard !isFullScheme else { return leading }
+                                        let tail = processingText.dropFirst(bestScheme.length)
+                                        return leading + " " + tail
+                                }()
                                 suggest()
                         default:
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = processingText
                                 if Logogram.current == .simplified && simplifier == nil {
                                         simplifier = Simplifier()
@@ -375,32 +371,13 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
 
-        private lazy var flexibleSchemes: [[String]] = [] {
-                didSet {
-                        guard !flexibleSchemes.isEmpty else {
-                                regularSchemes = []
-                                return
-                        }
-                        regularSchemes = flexibleSchemes.map({ block -> [String] in
-                                let sequence: [String] = block.map { syllable -> String in
-                                        let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
-                                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                                                .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
-                                                .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
-                                                .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
-                                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
-                                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
-                                        return converted
-                                }
-                                return sequence
-                        })
-                }
-        }
-        private lazy var regularSchemes: [[String]] = []
+        /// Flexible Segmentation
+        private lazy var segmentation: Segmentation = []
 
         private func suggest() {
                 let engineCandidates: [Candidate] = {
-                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued())
+                        let convertedSegmentation: Segmentation = segmentation.converted()
+                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: convertedSegmentation)
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
