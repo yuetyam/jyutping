@@ -387,6 +387,7 @@ final class JyutpingInputController: IMKInputController {
                                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
                                                 .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
                                                 .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
+                                                .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
                                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                                         return converted
