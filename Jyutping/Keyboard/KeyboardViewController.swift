@@ -687,13 +687,13 @@ final class KeyboardViewController: UIInputViewController {
         private func imeSuggest() {
                 let engineCandidates: [Candidate] = {
                         let convertedSegmentation: Segmentation = segmentation.converted()
-                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: convertedSegmentation)
+                        var normal: [Candidate] = Lychee.suggest(for: processingText, segmentation: convertedSegmentation)
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(droppedLast)
                                 let newSegmentation: Segmentation = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Lychee.suggest(for: droppedSeparator, schemes: newSegmentation)
+                                return Lychee.suggest(for: droppedSeparator, segmentation: newSegmentation)
                         }
                         let shouldContinue: Bool = needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }

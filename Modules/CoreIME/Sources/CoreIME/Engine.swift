@@ -5,23 +5,18 @@ extension Lychee {
 
         fileprivate typealias RowCandidate = (candidate: CoreCandidate, row: Int)
 
-        public static func suggest(for text: String, schemes: [[String]]) -> [Candidate] {
-                let startsWithY: Bool = text.hasPrefix("y")
+        public static func suggest(for text: String, segmentation: Segmentation) -> [Candidate] {
                 switch text.count {
                 case 0:
                         return []
                 case 1:
                         return shortcut(for: text)
-                case 2 where !startsWithY:
-                        return fetchTwoChars(text)
-                case 3 where !(startsWithY || text.hasSuffix("um") || text.hasSuffix("om")):
-                        return fetchThreeChars(text)
                 default:
-                        let filtered: String = text.replacingOccurrences(of: "'", with: "")
-                        return fetch(for: filtered, origin: text, schemes: schemes)
+                        return fetch(text: text, segmentation: segmentation)
                 }
         }
 
+        /*
         private static func fetchTwoChars(_ text: String) -> [CoreCandidate] {
                 guard let firstChar = text.first, let lastChar = text.last else { return [] }
                 guard !(firstChar.isSeparator || firstChar.isTone) else { return [] }
@@ -82,16 +77,18 @@ extension Lychee {
                 let tail: [CoreCandidate] = combine + shortcutTwo + matchTwo + shortcutFirst
                 return head + tail
         }
+        */
 
-        private static func fetch(for text: String, origin: String, schemes: [[String]]) -> [CoreCandidate] {
-                guard let bestScheme: [String] = schemes.first, !bestScheme.isEmpty else {
-                        return processUnsplittable(text)
+        private static func fetch(text: String, segmentation: Segmentation) -> [CoreCandidate] {
+                let textWithoutSeparators: String = text.filter({ !($0.isSeparator) })
+                guard let bestScheme: SyllableScheme = segmentation.first, !bestScheme.isEmpty else {
+                        return processUnsplittable(textWithoutSeparators)
                 }
-                let modifiedText = text.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
-                if bestScheme.joined().count == modifiedText.count {
-                        return process(text: modifiedText, origin: origin, sequences: schemes)
+                let convertedText = textWithoutSeparators.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression).replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
+                if bestScheme.length == convertedText.count {
+                        return process(text: convertedText, origin: text, sequences: segmentation)
                 } else {
-                        return processPartial(text: text, origin: origin, sequences: schemes)
+                        return processPartial(text: textWithoutSeparators, origin: text, sequences: segmentation)
                 }
         }
 

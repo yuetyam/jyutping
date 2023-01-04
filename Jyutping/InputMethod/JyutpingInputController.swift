@@ -377,13 +377,13 @@ final class JyutpingInputController: IMKInputController {
         private func suggest() {
                 let engineCandidates: [Candidate] = {
                         let convertedSegmentation: Segmentation = segmentation.converted()
-                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: convertedSegmentation)
+                        var normal: [Candidate] = Lychee.suggest(for: processingText, segmentation: convertedSegmentation)
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(processingText.dropLast())
                                 let newSchemes: [[String]] = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Lychee.suggest(for: droppedSeparator, schemes: newSchemes)
+                                return Lychee.suggest(for: droppedSeparator, segmentation: newSchemes)
                         }
                         let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
