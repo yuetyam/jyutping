@@ -528,27 +528,26 @@ final class KeyboardViewController: UIInputViewController {
                                 segmentation = []
                                 markedText = .empty
                                 candidates = []
-                                break
                         case .some("r"), .some("v"), .some("x"), .some("q"):
                                 segmentation = []
                                 markedText = processingText
+                                imeQueue.async { [unowned self] in
+                                        suggest()
+                                }
                         default:
                                 segmentation = Segmentor.segment(processingText)
-                                if let bestScheme: SyllableScheme = segmentation.first {
-                                        if bestScheme.length == processingText.count {
-                                                markedText = bestScheme.joined(separator: " ")
-                                        } else if processingText.contains("'") {
-                                                markedText = processingText.replacingOccurrences(of: "'", with: "' ")
-                                        } else {
-                                                let tail = processingText.dropFirst(bestScheme.length)
-                                                markedText = bestScheme.joined(separator: " ") + " " + tail
-                                        }
-                                } else {
-                                        markedText = processingText
+                                markedText = {
+                                        guard !(processingText.contains("'")) else { return processingText.replacingOccurrences(of: "'", with: "' ") }
+                                        guard let bestScheme: SyllableScheme = segmentation.first else { return processingText }
+                                        let leading: String = bestScheme.joined(separator: " ")
+                                        let isFullScheme: Bool = bestScheme.length == processingText.count
+                                        guard !isFullScheme else { return leading }
+                                        let tail = processingText.dropFirst(bestScheme.length)
+                                        return leading + " " + tail
+                                }()
+                                imeQueue.async { [unowned self] in
+                                        suggest()
                                 }
-                        }
-                        imeQueue.async { [unowned self] in
-                                suggest()
                         }
                 }
         }
