@@ -4,14 +4,38 @@ public typealias SyllableScheme = [String]
 /// Schemes, aka. Romanization Syllable Sequences, alias to `[[String]]`
 public typealias Segmentation = [SyllableScheme]
 
-private extension SyllableScheme {
-        var length: Int {
+extension SyllableScheme {
+
+        /// Character count
+        public var length: Int {
                 return reduce(0, { $0 + $1.count })
         }
+
+        /// Normal Syllable Scheme
+        public func converted() -> SyllableScheme {
+                let convertedScheme: SyllableScheme = self.map { syllable -> String in
+                        let convertedSyllable: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                                .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
+                                .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
+                                .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
+                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
+                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
+                        return convertedSyllable
+                }
+                return convertedScheme
+        }
 }
-private extension Segmentation {
-        var length: Int {
+extension Segmentation {
+
+        /// Character count
+        public var length: Int {
                 return reduce(0, { $0 + $1.length })
+        }
+
+        /// Normal Segmentation
+        public func converted() -> Segmentation {
+                return self.map({ $0.converted() })
         }
 }
 
@@ -36,11 +60,15 @@ public struct Segmentor {
                 }
                 return (hasTones: hasTones, components: components)
         }
+
+        /// Segment text by separates
         private static func separate(text: String) -> Segmentation {
                 let scheme: SyllableScheme = text.components(separatedBy: "'")
-                return regular(scheme: scheme)
+                return serialization(scheme: scheme)
         }
-        private static func regular(scheme blocks: SyllableScheme) -> Segmentation {
+
+        /// Convert one Scheme to one Segmentation
+        private static func serialization(scheme blocks: SyllableScheme) -> Segmentation {
                 switch blocks.count {
                 case 0:
                         return []
@@ -55,6 +83,7 @@ public struct Segmentor {
                 }
         }
 
+        /// Get the best Scheme of text segmentation
         public static func scheme(of text: String) -> SyllableScheme {
                 switch text.count {
                 case 0:
@@ -62,10 +91,12 @@ public struct Segmentor {
                 case 1:
                         return canSplit(text) ? [text] : []
                 default:
-                        guard let sequence: [String] = segment(text).first, !sequence.isEmpty else { return [] }
-                        return transform(sequence)
+                        guard let sequence: SyllableScheme = segment(text).first, !sequence.isEmpty else { return [] }
+                        return sequence.converted()
                 }
         }
+
+        /// Segment (flexible), then convert it to the normal Segmentation
         static func engineSegment(_ text: String) -> Segmentation {
                 switch text.count {
                 case 0:
@@ -73,23 +104,11 @@ public struct Segmentor {
                 case 1:
                         return canSplit(text) ? [[text]] : []
                 default:
-                        return segment(text).map(transform(_:))
+                        return segment(text).converted()
                 }
-        }
-        private static func transform(_ scheme: SyllableScheme) -> SyllableScheme {
-                let convertedScheme: [String] = scheme.map { syllable -> String in
-                        let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
-                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                                .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
-                                .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
-                                .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
-                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
-                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
-                        return converted
-                }
-                return convertedScheme
         }
 
+        /// Segmentation (flexible)
         public static func segment(_ text: String) -> Segmentation {
                 switch text.count {
                 case 0:
@@ -104,7 +123,7 @@ public struct Segmentor {
                 guard composition.hasTones else { return split(text: text) }
                 let segmentation: Segmentation = split(text: text.removedTones())
                 let blocks: [String] = composition.components
-                guard !segmentation.isEmpty else { return regular(scheme: blocks) }
+                guard !segmentation.isEmpty else { return serialization(scheme: blocks) }
                 var scheme: [String] = []
                 for block in blocks {
                         let hasTone: Bool = block.last!.isTone
@@ -132,9 +151,10 @@ public struct Segmentor {
                                 scheme.append(tail)
                         }
                 }
-                return regular(scheme: scheme)
+                return serialization(scheme: scheme)
         }
 
+        /// Segmentation (no tones)
         private static func split(text: String) -> Segmentation {
                 let leadingSyllables: [String] = splitLeading(text)
                 guard !leadingSyllables.isEmpty else { return [] }

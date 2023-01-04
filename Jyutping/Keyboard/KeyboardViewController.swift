@@ -525,24 +525,23 @@ final class KeyboardViewController: UIInputViewController {
                         toolBar.update()
                         switch processingText.first {
                         case .none:
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = .empty
                                 candidates = []
                                 break
                         case .some("r"), .some("v"), .some("x"), .some("q"):
-                                flexibleSchemes = []
+                                segmentation = []
                                 markedText = processingText
                         default:
-                                flexibleSchemes = Segmentor.segment(processingText)
-                                if let syllables: [String] = flexibleSchemes.first {
-                                        let splittable: String = syllables.joined()
-                                        if splittable.count == processingText.count {
-                                                markedText = syllables.joined(separator: .space)
+                                segmentation = Segmentor.segment(processingText)
+                                if let bestScheme: SyllableScheme = segmentation.first {
+                                        if bestScheme.length == processingText.count {
+                                                markedText = bestScheme.joined(separator: " ")
                                         } else if processingText.contains("'") {
                                                 markedText = processingText.replacingOccurrences(of: "'", with: "' ")
                                         } else {
-                                                let tail = processingText.dropFirst(splittable.count)
-                                                markedText = syllables.joined(separator: .space) + .space + tail
+                                                let tail = processingText.dropFirst(bestScheme.length)
+                                                markedText = bestScheme.joined(separator: " ") + " " + tail
                                         }
                                 } else {
                                         markedText = processingText
@@ -566,28 +565,9 @@ final class KeyboardViewController: UIInputViewController {
                         handleMarkedText()
                 }
         }
-        private lazy var flexibleSchemes: [[String]] = [] {
-                didSet {
-                        guard !flexibleSchemes.isEmpty else {
-                                regularSchemes = []
-                                return
-                        }
-                        regularSchemes = flexibleSchemes.map({ block -> [String] in
-                                let sequence: [String] = block.map { syllable -> String in
-                                        let converted: String = syllable.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
-                                                .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                                                .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
-                                                .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
-                                                .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
-                                                .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
-                                                .replacingOccurrences(of: "y", with: "j", options: .anchored)
-                                        return converted
-                                }
-                                return sequence
-                        })
-                }
-        }
-        private lazy var regularSchemes: [[String]] = []
+
+        /// Flexible Segmentation
+        private lazy var segmentation: Segmentation = []
 
         /// some apps can't be compatible with `textDocumentProxy.setMarkedText() & textDocumentProxy.insertText()`
         /// - Parameter text: text to insert
@@ -704,7 +684,8 @@ final class KeyboardViewController: UIInputViewController {
         }
         private func imeSuggest() {
                 let engineCandidates: [Candidate] = {
-                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: regularSchemes.uniqued())
+                        let convertedSegmentation: Segmentation = segmentation.converted()
+                        var normal: [Candidate] = Lychee.suggest(for: processingText, schemes: convertedSegmentation)
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
