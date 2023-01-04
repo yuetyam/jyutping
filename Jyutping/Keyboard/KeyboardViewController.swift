@@ -528,11 +528,29 @@ final class KeyboardViewController: UIInputViewController {
                                 segmentation = []
                                 markedText = .empty
                                 candidates = []
-                        case .some("r"), .some("v"), .some("x"), .some("q"):
+                        case .some("r"):
                                 segmentation = []
                                 markedText = processingText
                                 imeQueue.async { [unowned self] in
-                                        suggest()
+                                        pinyinReverseLookup()
+                                }
+                        case .some("v"):
+                                segmentation = []
+                                markedText = processingText
+                                imeQueue.async { [unowned self] in
+                                        cangjieReverseLookup()
+                                }
+                        case .some("x"):
+                                segmentation = []
+                                markedText = processingText
+                                imeQueue.async { [unowned self] in
+                                        strokeReverseLookup()
+                                }
+                        case .some("q"):
+                                segmentation = []
+                                markedText = processingText
+                                imeQueue.async { [unowned self] in
+                                        leungFanReverseLookup()
                                 }
                         default:
                                 segmentation = Segmentor.segment(processingText)
@@ -546,7 +564,11 @@ final class KeyboardViewController: UIInputViewController {
                                         return leading + " " + tail
                                 }()
                                 imeQueue.async { [unowned self] in
-                                        suggest()
+                                        if let markCandidate = Lychee.searchMark(for: bufferText) {
+                                                candidates = [markCandidate]
+                                        } else {
+                                                imeSuggest()
+                                        }
                                 }
                         }
                 }
@@ -611,26 +633,7 @@ final class KeyboardViewController: UIInputViewController {
         private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.Keyboard.ime", qos: .userInteractive)
         private lazy var userLexicon: UserLexicon? = UserLexicon()
         private lazy var simplifier: Simplifier? = nil
-        private func suggest() {
-                switch processingText.first {
-                case .none:
-                        break
-                case .some("r"):
-                        pinyinReverseLookup()
-                case .some("v"):
-                        cangjieReverseLookup()
-                case .some("x"):
-                        strokeReverseLookup()
-                case .some("q"):
-                        leungFanReverseLookup()
-                default:
-                        if let markCandidate = Lychee.searchMark(for: bufferText) {
-                                candidates = [markCandidate]
-                        } else {
-                                imeSuggest()
-                        }
-                }
-        }
+
         private func pinyinReverseLookup() {
                 let text: String = String(processingText.dropFirst())
                 guard !text.isEmpty else {
