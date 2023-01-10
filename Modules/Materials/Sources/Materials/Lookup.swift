@@ -14,22 +14,12 @@ public struct Response: Hashable {
 
 public struct Lookup {
 
-        private static let database: OpaquePointer? = {
-                guard let path: String = Bundle.module.path(forResource: "lookup", ofType: "sqlite3") else { return nil }
-                var db: OpaquePointer?
-                if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK {
-                        return db
-                } else {
-                        return nil
-                }
-        }()
-
         /// Search Romanization for word
         /// - Parameter text: word
         /// - Returns: Array of Romanization matched the input word
         public static func look(for text: String) -> [String] {
                 guard !text.isEmpty else { return [] }
-                let matched = match(for: text)
+                let matched = DataMaster.matchRomanization(for: text)
                 guard matched.isEmpty else { return matched }
                 guard text.count != 1 else { return [] }
 
@@ -60,10 +50,10 @@ public struct Lookup {
         public static func search(for text: String) -> Response {
                 lazy var fallback: Response = Response(text: text)
                 guard !text.isEmpty else { return fallback }
-                let matched = match(for: text)
+                let matched = DataMaster.matchRomanization(for: text)
                 guard matched.isEmpty else { return Response(text: text, romanizations: matched) }
                 let traditionalText: String = convert(from: text)
-                let tryMatched = match(for: traditionalText)
+                let tryMatched = DataMaster.matchRomanization(for: traditionalText)
                 guard tryMatched.isEmpty else {
                         return Response(text: traditionalText, romanizations: tryMatched)
                 }
@@ -104,7 +94,7 @@ public struct Lookup {
                 var romanization: String? = nil
                 var matchedCount: Int = 0
                 while romanization == nil && !chars.isEmpty {
-                        romanization = match(for: chars).first
+                        romanization = DataMaster.matchRomanization(for: chars).first
                         matchedCount = chars.count
                         chars = String(chars.dropLast())
                 }
@@ -114,7 +104,21 @@ public struct Lookup {
                 return (matched, matchedCount)
         }
 
-        private static func match(for text: String) -> [String] {
+        /// Convert simplified characters to traditional
+        /// - Parameter text: Simplified characters
+        /// - Returns: Traditional characters
+        private static func convert(from text: String) -> String {
+                let transformed: String? = text.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false)
+                return transformed ?? text
+        }
+}
+
+private extension DataMaster {
+
+        /// Match Jyutping for text
+        /// - Parameter text: Word
+        /// - Returns: An Array of Jyutping
+        static func matchRomanization(for text: String) -> [String] {
                 var romanizations: [String] = []
                 let queryString = "SELECT romanization FROM lookuptable WHERE word = '\(text)';"
                 var queryStatement: OpaquePointer? = nil
@@ -128,13 +132,5 @@ public struct Lookup {
                         }
                 }
                 return romanizations
-        }
-
-        /// Convert simplified characters to traditional
-        /// - Parameter text: Simplified characters
-        /// - Returns: Traditional characters
-        private static func convert(from text: String) -> String {
-                let transformed: String? = text.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false)
-                return transformed ?? text
         }
 }

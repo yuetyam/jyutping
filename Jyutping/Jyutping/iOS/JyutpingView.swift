@@ -1,12 +1,14 @@
 #if os(iOS)
 
 import SwiftUI
+import Materials
 
 struct JyutpingView: View {
 
         @State private var inputText: String = ""
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
+        @State private var yingWaaEntries: [YingWaaFanWan] = []
 
         private let searchIcon: String = "doc.text.magnifyingglass"
 
@@ -26,6 +28,7 @@ struct JyutpingView: View {
                                                                 return
                                                         }
                                                         guard trimmedInput != cantonese else { return }
+                                                        yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
                                                         let search = AppMaster.lookup(text: trimmedInput)
                                                         if search.romanizations.isEmpty {
                                                                 cantonese = trimmedInput
@@ -54,6 +57,16 @@ struct JyutpingView: View {
                                                                 Speaker(romanization)
                                                         }
                                                 }
+                                        }
+                                        .textSelection(.enabled)
+                                }
+                                if !yingWaaEntries.isEmpty {
+                                        Section {
+                                                ForEach(0..<yingWaaEntries.count, id: \.self) { index in
+                                                        YingWaaFanWanLabel(entry: yingWaaEntries[index])
+                                                }
+                                        } header: {
+                                                Text(verbatim: "《英華分韻撮要》 衛三畏 1856 廣州").textCase(nil)
                                         }
                                         .textSelection(.enabled)
                                 }

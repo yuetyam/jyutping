@@ -1,12 +1,14 @@
 #if os(macOS)
 
 import SwiftUI
+import Materials
 
 struct MacSearchView: View {
 
         @State private var inputText: String = ""
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
+        @State private var yingWaaEntries: [YingWaaFanWan] = []
 
         @FocusState private var isTextFieldFocused: Bool
 
@@ -24,6 +26,7 @@ struct MacSearchView: View {
                                                         pronunciations = []
                                                         return
                                                 }
+                                                yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
                                                 let search = AppMaster.lookup(text: trimmedInput)
                                                 if search.romanizations.isEmpty {
                                                         cantonese = trimmedInput
@@ -60,9 +63,33 @@ struct MacSearchView: View {
                                                                 Spacer()
                                                                 Speaker(romanization)
                                                         }
-                                                        .block()
+                                                        if (index < pronunciations.count - 1) {
+                                                                Divider()
+                                                        }
                                                 }
                                         }
+                                        .block()
+                                }
+                                if !yingWaaEntries.isEmpty {
+                                        VStack(spacing: 2) {
+                                                HStack {
+                                                        Text(verbatim: yingWaaEntries.first!.word)
+                                                        Text(verbatim: "《英華分韻撮要》")
+                                                        Text(verbatim: "衛三畏(Samuel Wells Williams)　1856　廣州").foregroundColor(.secondary)
+                                                        Spacer()
+                                                }
+                                                .font(.copilot)
+                                                VStack {
+                                                        ForEach(0..<yingWaaEntries.count, id: \.self) { index in
+                                                                YingWaaFanWanView(entry: yingWaaEntries[index])
+                                                                if (index < yingWaaEntries.count - 1) {
+                                                                        Divider()
+                                                                }
+                                                        }
+                                                }
+                                                .block()
+                                        }
+                                        .padding(.vertical)
                                 }
                         }
                         .font(.master)
@@ -71,6 +98,46 @@ struct MacSearchView: View {
                 }
                 .animation(.default, value: cantonese)
                 .navigationTitle("Search")
+        }
+}
+
+private struct YingWaaFanWanView: View {
+        let entry: YingWaaFanWan
+        var body: some View {
+                VStack(alignment: .leading) {
+                        HStack(spacing: 16) {
+                                HStack {
+                                        Text(verbatim: "書本原文標示")
+                                        Text.separator
+                                        Text(verbatim: entry.romanization)
+                                }
+                                if let romanizationType = entry.romanizationType {
+                                        Text(verbatim: romanizationType)
+                                }
+                                if let romanizationNote = entry.romanizationNote {
+                                        Text(verbatim: romanizationNote)
+                                }
+                                if let interpretation = entry.interpretation {
+                                        Text(verbatim: interpretation)
+                                }
+                                if let note = entry.note {
+                                        Text(verbatim: note)
+                                }
+                        }
+                        HStack(spacing: 16) {
+                                HStack {
+                                        Text(verbatim: "對應現代粵拼")
+                                        Text.separator
+                                        Text(verbatim: entry.jyutping)
+                                }
+                                Text(verbatim: Syllable2IPA.IPAText(entry.jyutping)).foregroundColor(.secondary)
+                                if let note = entry.note {
+                                        Text(verbatim: note)
+                                }
+                                Spacer()
+                                Speaker(entry.jyutping)
+                        }
+                }
         }
 }
 

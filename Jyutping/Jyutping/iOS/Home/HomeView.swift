@@ -1,12 +1,14 @@
 #if os(iOS)
 
 import SwiftUI
+import Materials
 
 struct HomeView: View {
 
         @State private var inputText: String = ""
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
+        @State private var yingWaaEntries: [YingWaaFanWan] = []
 
         @State private var isKeyboardEnabled: Bool = {
                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return false }
@@ -38,6 +40,7 @@ struct HomeView: View {
                                                                 return
                                                         }
                                                         guard trimmedInput != cantonese else { return }
+                                                        yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
                                                         let search = AppMaster.lookup(text: trimmedInput)
                                                         if search.romanizations.isEmpty {
                                                                 cantonese = trimmedInput
@@ -66,6 +69,16 @@ struct HomeView: View {
                                                                 Speaker(romanization)
                                                         }
                                                 }
+                                        }
+                                        .textSelection(.enabled)
+                                }
+                                if !yingWaaEntries.isEmpty {
+                                        Section {
+                                                ForEach(0..<yingWaaEntries.count, id: \.self) { index in
+                                                        YingWaaFanWanLabel(entry: yingWaaEntries[index])
+                                                }
+                                        } header: {
+                                                Text(verbatim: "《英華分韻撮要》 衛三畏 1856 廣州").textCase(nil)
                                         }
                                         .textSelection(.enabled)
                                 }

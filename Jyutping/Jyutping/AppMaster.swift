@@ -78,3 +78,15 @@ extension AppMaster {
                 return Response(text: combinedText, romanizations: combinedRomanizations)
         }
 }
+
+extension AppMaster {
+
+        /// Lookup YingWaaFanWan for the given text
+        /// - Parameter text: Character to Lookup
+        /// - Returns: An Array of YingWaaFanWan
+        static func lookupYingWaaFanWan(for text: String) -> [YingWaaFanWan] {
+                guard text.count == 1 else { return [] }
+                let character = text.first!
+                return YingWaaFanWan.match(for: character).uniqued()
+        }
+}
