@@ -89,4 +89,30 @@ extension AppMaster {
                 let character = text.first!
                 return YingWaaFanWan.match(for: character).uniqued()
         }
+
+        /// Lookup FanWanCuetYiu for the given text
+        /// - Parameter text: Character to Lookup
+        /// - Returns: An Array of FanWanCuetYiu
+        static func lookupFanWanCuetYiu(for text: String) -> [FanWanCuetYiu] {
+                guard text.count == 1 else { return [] }
+                let character = text.first!
+                return FanWanCuetYiu.match(for: character).uniqued()
+        }
+}
+
+extension FanWanCuetYiu {
+        var  abstract: String {
+                return "\(initial)母　\(final)韻　\(yamyeung)\(tone)　\(rhyme)小韻"
+        }
+        var convertedRomanization: String {
+                return romanization.replacingOccurrences(of: "7", with: "1").replacingOccurrences(of: "8", with: "3").replacingOccurrences(of: "9", with: "6")
+        }
+        var regularJyutping: String {
+                return convertedRomanization.replacingOccurrences(of: "^(z|c|s)h", with: "$1", options: .regularExpression)
+                        .replacingOccurrences(of: "^nj", with: "j", options: .regularExpression)
+                        .replacingOccurrences(of: "o(m|p)$", with: "a$1", options: .regularExpression)
+        }
+        var ipa: String {
+                return FanWanJyutping2IPA.IPA(for: romanization)
+        }
 }

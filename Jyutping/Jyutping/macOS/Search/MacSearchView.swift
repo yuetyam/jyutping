@@ -9,12 +9,13 @@ struct MacSearchView: View {
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
         @State private var yingWaaEntries: [YingWaaFanWan] = []
+        @State private var fanWanEntries: [FanWanCuetYiu] = []
 
         @FocusState private var isTextFieldFocused: Bool
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 24) {
                                 TextField("Lookup Jyutping for Cantonese", text: $inputText)
                                         .textFieldStyle(.plain)
                                         .disableAutocorrection(true)
@@ -27,6 +28,7 @@ struct MacSearchView: View {
                                                         return
                                                 }
                                                 yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
+                                                fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                                                 let search = AppMaster.lookup(text: trimmedInput)
                                                 if search.romanizations.isEmpty {
                                                         cantonese = trimmedInput
@@ -39,7 +41,6 @@ struct MacSearchView: View {
                                         .focused($isTextFieldFocused)
                                         .padding(8)
                                         .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                                        .padding(.vertical)
                                         .onAppear {
                                                 isTextFieldFocused = true
                                         }
@@ -58,7 +59,7 @@ struct MacSearchView: View {
                                                         HStack(spacing: 16) {
                                                                 Text(verbatim: romanization).font(.title3.monospaced())
                                                                 if cantonese.count == 1 {
-                                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
+                                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).font(.title3).foregroundColor(.secondary)
                                                                 }
                                                                 Spacer()
                                                                 Speaker(romanization)
@@ -89,7 +90,26 @@ struct MacSearchView: View {
                                                 }
                                                 .block()
                                         }
-                                        .padding(.vertical)
+                                }
+                                if !fanWanEntries.isEmpty {
+                                        VStack(spacing: 2) {
+                                                HStack {
+                                                        Text(verbatim: fanWanEntries.first!.word)
+                                                        Text(verbatim: "《分韻撮要》")
+                                                        Text(verbatim: "佚名　約明末清初").foregroundColor(.secondary)
+                                                        Spacer()
+                                                }
+                                                .font(.copilot)
+                                                VStack {
+                                                        ForEach(0..<fanWanEntries.count, id: \.self) { index in
+                                                                FanWanCuetYiuView(entry: fanWanEntries[index])
+                                                                if (index < fanWanEntries.count - 1) {
+                                                                        Divider()
+                                                                }
+                                                        }
+                                                }
+                                                .block()
+                                        }
                                 }
                         }
                         .font(.master)
@@ -98,46 +118,6 @@ struct MacSearchView: View {
                 }
                 .animation(.default, value: cantonese)
                 .navigationTitle("Search")
-        }
-}
-
-private struct YingWaaFanWanView: View {
-        let entry: YingWaaFanWan
-        var body: some View {
-                VStack(alignment: .leading) {
-                        HStack(spacing: 16) {
-                                HStack {
-                                        Text(verbatim: "書本原文標示")
-                                        Text.separator
-                                        Text(verbatim: entry.romanization)
-                                }
-                                if let romanizationType = entry.romanizationType {
-                                        Text(verbatim: romanizationType)
-                                }
-                                if let romanizationNote = entry.romanizationNote {
-                                        Text(verbatim: romanizationNote)
-                                }
-                                if let interpretation = entry.interpretation {
-                                        Text(verbatim: interpretation)
-                                }
-                                if let note = entry.note {
-                                        Text(verbatim: note)
-                                }
-                        }
-                        HStack(spacing: 16) {
-                                HStack {
-                                        Text(verbatim: "對應現代粵拼")
-                                        Text.separator
-                                        Text(verbatim: entry.jyutping)
-                                }
-                                Text(verbatim: Syllable2IPA.IPAText(entry.jyutping)).foregroundColor(.secondary)
-                                if let note = entry.note {
-                                        Text(verbatim: note)
-                                }
-                                Spacer()
-                                Speaker(entry.jyutping)
-                        }
-                }
         }
 }
 

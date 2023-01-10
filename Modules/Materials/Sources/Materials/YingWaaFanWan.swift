@@ -50,8 +50,8 @@ private extension DataMaster {
                                 let romanizationNote: String = String(cString: sqlite3_column_text(queryStatement, 5))
                                 let interpretation: String = String(cString: sqlite3_column_text(queryStatement, 6))
                                 let note: String = String(cString: sqlite3_column_text(queryStatement, 7))
-                                let item: YingWaaFanWan = YingWaaFanWan(word: word, jyutping: jyutping, romanizationMark: romanizationMark, romanizationType: romanizationType, romanizationNote: romanizationNote, interpretation: interpretation, note: note)
-                                entries.append(item)
+                                let instance: YingWaaFanWan = YingWaaFanWan(word: word, jyutping: jyutping, romanizationMark: romanizationMark, romanizationType: romanizationType, romanizationNote: romanizationNote, interpretation: interpretation, note: note)
+                                entries.append(instance)
                         }
                 }
                 return entries

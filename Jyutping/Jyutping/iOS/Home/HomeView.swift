@@ -9,6 +9,7 @@ struct HomeView: View {
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
         @State private var yingWaaEntries: [YingWaaFanWan] = []
+        @State private var fanWanEntries: [FanWanCuetYiu] = []
 
         @State private var isKeyboardEnabled: Bool = {
                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return false }
@@ -41,6 +42,7 @@ struct HomeView: View {
                                                         }
                                                         guard trimmedInput != cantonese else { return }
                                                         yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
+                                                        fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                                                         let search = AppMaster.lookup(text: trimmedInput)
                                                         if search.romanizations.isEmpty {
                                                                 cantonese = trimmedInput
@@ -78,7 +80,17 @@ struct HomeView: View {
                                                         YingWaaFanWanLabel(entry: yingWaaEntries[index])
                                                 }
                                         } header: {
-                                                Text(verbatim: "《英華分韻撮要》 衛三畏 1856 廣州").textCase(nil)
+                                                Text(verbatim: "《英華分韻撮要》　衛三畏　1856　廣州").textCase(nil)
+                                        }
+                                        .textSelection(.enabled)
+                                }
+                                if !fanWanEntries.isEmpty {
+                                        Section {
+                                                ForEach(0..<fanWanEntries.count, id: \.self) { index in
+                                                        FanWanCuetYiuLabel(entry: fanWanEntries[index])
+                                                }
+                                        } header: {
+                                                Text(verbatim: "《分韻撮要》　佚名　約明末清初").textCase(nil)
                                         }
                                         .textSelection(.enabled)
                                 }

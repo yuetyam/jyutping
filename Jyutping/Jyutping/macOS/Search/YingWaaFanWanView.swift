@@ -1,16 +1,18 @@
-#if os(iOS)
+#if os(macOS)
 
 import SwiftUI
 import Materials
 
-struct YingWaaFanWanLabel: View {
+struct YingWaaFanWanView: View {
         let entry: YingWaaFanWan
         var body: some View {
                 VStack(alignment: .leading) {
-                        HStack {
-                                Text(verbatim: "書本原文")
-                                Text.separator
-                                Text(verbatim: entry.romanization).font(.body)
+                        HStack(spacing: 16) {
+                                HStack {
+                                        Text(verbatim: "書本原文標示")
+                                        Text.separator
+                                        Text(verbatim: entry.romanization).font(.title3)
+                                }
                                 if let romanizationType = entry.romanizationType {
                                         Text(verbatim: romanizationType)
                                 }
@@ -24,11 +26,13 @@ struct YingWaaFanWanLabel: View {
                                         Text(verbatim: note)
                                 }
                         }
-                        HStack {
-                                Text(verbatim: "對應粵拼")
-                                Text.separator
-                                Text(verbatim: entry.jyutping).font(.body)
-                                Text(verbatim: Syllable2IPA.IPAText(entry.jyutping)).font(.body).foregroundColor(.secondary)
+                        HStack(spacing: 16) {
+                                HStack {
+                                        Text(verbatim: "對應現代粵拼")
+                                        Text.separator
+                                        Text(verbatim: entry.jyutping).font(.title3.monospaced())
+                                }
+                                Text(verbatim: Syllable2IPA.IPAText(entry.jyutping)).font(.title3).foregroundColor(.secondary)
                                 if let note = entry.note {
                                         Text(verbatim: note)
                                 }
@@ -36,7 +40,6 @@ struct YingWaaFanWanLabel: View {
                                 Speaker(entry.jyutping)
                         }
                 }
-                .font(.copilot)
         }
 }
 
