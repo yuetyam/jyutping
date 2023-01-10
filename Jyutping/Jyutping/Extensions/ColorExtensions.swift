@@ -33,5 +33,15 @@ extension Color {
                 return Color.gray
                 #endif
         }()
+
+        static let separator: Color = {
+                #if os(iOS)
+                return Color(uiColor: UIColor.separator)
+                #elseif os(macOS)
+                return Color(nsColor: NSColor.separatorColor)
+                #else
+                return Color.secondary
+                #endif
+        }()
 }
 
