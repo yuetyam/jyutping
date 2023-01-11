@@ -18,6 +18,10 @@ struct Speech {
         }()
 
         static func speak(_ text: String) {
+                guard isVoiceAvailable else {
+                        speakFeedback()
+                        return
+                }
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                 utterance.voice = voice
                 DispatchQueue.main.async {
@@ -33,29 +37,95 @@ struct Speech {
                 return synthesizer.isSpeaking
         }
 
-        static let isLanguagesEnabled: Bool = Locale.preferredLanguages.contains("zh-Hant-HK")
-        static let isEnhancedVoiceAvailable: Bool = {
-                guard let voiceQuality = voice?.quality else { return false }
+        /// Does current device contains a Cantonese voice
+        static let isVoiceAvailable: Bool = voiceStatus != .unavailable
+
+        static let voiceStatus: VoiceStatus = {
+                guard let voiceQuality = voice?.quality else { return .unavailable }
                 if #available(iOS 16.0, macOS 13.0, *) {
                         switch voiceQuality {
                         case .default:
-                                return false
+                                return .regular
                         case .enhanced:
-                                return true
+                                return .enhanced
                         case .premium:
-                                return true
+                                return .premium
                         @unknown default:
-                                return true
+                                return .regular
                         }
                 } else {
                         switch voiceQuality {
                         case .default:
-                                return false
+                                return .regular
                         case .enhanced:
-                                return true
+                                return .enhanced
                         default:
-                                return true
+                                return .regular
                         }
                 }
         }()
+
+        /// Does System Preferred Languages contains `zh-Hant-HK`
+        static var isLanguageTraditionalChineseHongKongEnabled: Bool {
+                return Locale.preferredLanguages.contains("zh-Hant-HK")
+        }
+
+        private static func speakFeedback() {
+                if let mandarinTaiwanVoice = mandarinTaiwanVoice {
+                        let text: String = "此設備缺少粵語語音，請添加後再試。"
+                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                        utterance.voice = mandarinTaiwanVoice
+                        DispatchQueue.main.async {
+                                synthesizer.speak(utterance)
+                        }
+                } else if let mandarinPekingVoice = mandarinPekingVoice {
+                        let text: String = "此设备缺少粤语语音，请添加后再试。"
+                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                        utterance.voice = mandarinPekingVoice
+                        DispatchQueue.main.async {
+                                synthesizer.speak(utterance)
+                        }
+                } else if let cantoneseVoice = voice {
+                        let text: String = "此設備缺少粵語語音，請添加後再試。"
+                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                        utterance.voice = cantoneseVoice
+                        DispatchQueue.main.async {
+                                synthesizer.speak(utterance)
+                        }
+                } else {
+                        let text: String = "This device does not contain a Cantonese voice, please add it and try again."
+                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                        utterance.voice = englishVoice
+                        DispatchQueue.main.async {
+                                synthesizer.speak(utterance)
+                        }
+                }
+        }
+
+        private static let mandarinTaiwanVoice: AVSpeechSynthesisVoice? = {
+                if let premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-TW.Meijia") {
+                        return premium
+                } else if let enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.voice.enhanced.zh-TW.Meijia") {
+                        return enhanced
+                } else {
+                        return AVSpeechSynthesisVoice(language: "zh-TW")
+                }
+        }()
+        private static let mandarinPekingVoice: AVSpeechSynthesisVoice? = {
+                if let premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-CN.Tingting") {
+                        return premium
+                } else if let enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.voice.enhanced.zh-CN.Tingting") {
+                        return enhanced
+                } else {
+                        return AVSpeechSynthesisVoice(language: "zh-CN")
+                }
+        }()
+        private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU") ?? AVSpeechSynthesisVoice(language: nil)
+}
+
+enum VoiceStatus: Int {
+        case unavailable
+        case regular
+        case enhanced
+        case premium
 }
