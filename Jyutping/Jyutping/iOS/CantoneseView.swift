@@ -3,9 +3,14 @@
 import SwiftUI
 
 struct CantoneseView: View {
+
+        @State private var animationState: Int = 0
+
         var body: some View {
                 NavigationView {
                         List {
+                                SearchView(placeholder: "Search Pronunciation", animationState: $animationState)
+
                                 Section {
                                         NavigationLink(destination: NumbersView()) {
                                                 Label("Numbers", systemImage: "number")
@@ -31,6 +36,7 @@ struct CantoneseView: View {
                                         Text("Cantonese Resources").textCase(nil)
                                 }
                         }
+                        .animation(.default, value: animationState)
                         .navigationTitle("Cantonese")
                 }
                 .navigationViewStyle(.stack)

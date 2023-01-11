@@ -16,7 +16,7 @@ struct MacSearchView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 24) {
-                                TextField("Lookup Jyutping for Cantonese", text: $inputText)
+                                TextField("Search Pronunciation", text: $inputText)
                                         .textFieldStyle(.plain)
                                         .disableAutocorrection(true)
                                         .onSubmit {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */; };
 		37D7BD1A294CAADC006A6ADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD19294CAADC006A6ADD /* Assets.xcassets */; };
 		37D7BD1E294CAADC006A6ADD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD1D294CAADC006A6ADD /* Preview Assets.xcassets */; };
@@ -206,6 +207,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37D7BD12294CAADB006A6ADD /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
 		37D7BD19294CAADC006A6ADD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -462,6 +464,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37B6BDBA296EA2AF0008B9F0 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				37B6BDB8296EA2510008B9F0 /* SearchView.swift */,
+				37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */,
+				37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		37D7BD09294CAADB006A6ADD = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +583,7 @@
 				37D7BDA3294CB9F3006A6ADD /* JyutpingView.swift */,
 				37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */,
 				37D7BDA6294CB9F3006A6ADD /* AboutView.swift */,
+				37B6BDBA296EA2AF0008B9F0 /* Search */,
 				37D7BD6E294CB3A2006A6ADD /* SafariView.swift */,
 				37D7BD6F294CB3A2006A6ADD /* ShareSheetView.swift */,
 				37D7BD6C294CB323006A6ADD /* UIDevice+modelName.swift */,
@@ -639,8 +652,6 @@
 				37D7BDA9294CB9F3006A6ADD /* ExpressionsView.swift */,
 				37D7BDAC294CB9F3006A6ADD /* FAQView.swift */,
 				37D7BDAE294CB9F3006A6ADD /* PrivacyNoticeView.swift */,
-				37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */,
-				37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1180,6 +1191,7 @@
 				37D7BD69294CB212006A6ADD /* ImageExtensions.swift in Sources */,
 				37D7BD8C294CB61F006A6ADD /* SyllableCell.swift in Sources */,
 				37EF1955296DBD4200A3F4C9 /* FanWanJyutping2IPA.swift in Sources */,
+				37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */,
 				37D7BD8A294CB61F006A6ADD /* TonesTable.swift in Sources */,
 				37D7BD82294CB4B3006A6ADD /* Speaker.swift in Sources */,
 				37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */,

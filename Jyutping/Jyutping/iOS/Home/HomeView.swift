@@ -1,15 +1,10 @@
 #if os(iOS)
 
 import SwiftUI
-import Materials
 
 struct HomeView: View {
 
-        @State private var inputText: String = ""
-        @State private var cantonese: String = ""
-        @State private var pronunciations: [String] = []
-        @State private var yingWaaEntries: [YingWaaFanWan] = []
-        @State private var fanWanEntries: [FanWanCuetYiu] = []
+        @State private var animationState: Int = 0
 
         @State private var isKeyboardEnabled: Bool = {
                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return false }
@@ -29,71 +24,7 @@ struct HomeView: View {
         var body: some View {
                 NavigationView {
                         List {
-                                Section {
-                                        TextField("Text Field", text: $inputText)
-                                                .textInputAutocapitalization(.never)
-                                                .autocorrectionDisabled(true)
-                                                .onSubmit {
-                                                        let trimmedInput: String = inputText.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
-                                                        guard !trimmedInput.isEmpty else {
-                                                                cantonese = ""
-                                                                pronunciations = []
-                                                                return
-                                                        }
-                                                        guard trimmedInput != cantonese else { return }
-                                                        yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
-                                                        fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
-                                                        let search = AppMaster.lookup(text: trimmedInput)
-                                                        if search.romanizations.isEmpty {
-                                                                cantonese = trimmedInput
-                                                                pronunciations = []
-                                                        } else {
-                                                                cantonese = search.text
-                                                                pronunciations = search.romanizations
-                                                        }
-                                                }
-                                }
-                                if !cantonese.isEmpty {
-                                        Section {
-                                                HStack {
-                                                        Text(verbatim: cantonese)
-                                                        Spacer()
-                                                        Speaker(cantonese)
-                                                }
-                                                ForEach(0..<pronunciations.count, id: \.self) { index in
-                                                        let romanization: String = pronunciations[index]
-                                                        HStack(spacing: 16) {
-                                                                Text(verbatim: romanization)
-                                                                if cantonese.count == 1 {
-                                                                        Text(verbatim: Syllable2IPA.IPAText(romanization)).foregroundColor(.secondary)
-                                                                }
-                                                                Spacer()
-                                                                Speaker(romanization)
-                                                        }
-                                                }
-                                        }
-                                        .textSelection(.enabled)
-                                }
-                                if !yingWaaEntries.isEmpty {
-                                        Section {
-                                                ForEach(0..<yingWaaEntries.count, id: \.self) { index in
-                                                        YingWaaFanWanLabel(entry: yingWaaEntries[index])
-                                                }
-                                        } header: {
-                                                Text(verbatim: "《英華分韻撮要》　衛三畏　1856　廣州").textCase(nil)
-                                        }
-                                        .textSelection(.enabled)
-                                }
-                                if !fanWanEntries.isEmpty {
-                                        Section {
-                                                ForEach(0..<fanWanEntries.count, id: \.self) { index in
-                                                        FanWanCuetYiuLabel(entry: fanWanEntries[index])
-                                                }
-                                        } header: {
-                                                Text(verbatim: "《分韻撮要》　佚名　約明末清初").textCase(nil)
-                                        }
-                                        .textSelection(.enabled)
-                                }
+                                SearchView(placeholder: "Text Field", animationState: $animationState)
 
                                 Section {
                                         if isKeyboardEnabled {
@@ -225,7 +156,7 @@ struct HomeView: View {
                                         }
                                 }
                         }
-                        .animation(.default, value: cantonese)
+                        .animation(.default, value: animationState)
                         .animation(.default, value: isGuideViewExpanded)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }

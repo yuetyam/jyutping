@@ -78,7 +78,7 @@
 
 // MARK: - Jyutping Lookup
 
-"Lookup Jyutping for Cantonese" = "鍵入粵語字詞檢索其粵拼";
+"Search Pronunciation" = "查字音";
 
 "Jyutping Initials" = "粵拼聲母表";
 "Jyutping Finals" = "粵拼韻母表";
