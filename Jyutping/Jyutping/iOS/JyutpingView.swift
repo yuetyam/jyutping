@@ -6,6 +6,7 @@ struct JyutpingView: View {
 
         @State private var animationState: Int = 0
         private let searchIcon: String = "doc.text.magnifyingglass"
+        private let globeIcon: String = "globe.asia.australia"
 
         var body: some View {
                 NavigationView {
@@ -34,8 +35,8 @@ struct JyutpingView: View {
                                 }
 
                                 Section {
-                                        ExtendedLinkLabel(title: "粵拼 Jyutping", footnote: "jyutping.org", address: "https://jyutping.org")
-                                        ExtendedLinkLabel(title: "粵語拼音速遞 - CUHK", footnote: "ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization", address: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
+                                        ExtendedLinkLabel(icon: globeIcon, title: "粵拼 Jyutping", footnote: "jyutping.org", address: "https://jyutping.org")
+                                        ExtendedLinkLabel(icon: globeIcon, title: "粵語拼音速遞 - CUHK", footnote: "ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization", address: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
                                 }
                         }
                         .animation(.default, value: animationState)
