@@ -12,6 +12,7 @@ struct SearchView: View {
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
         @State private var yingWaaEntries: [YingWaaFanWan] = []
+        @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
 
         var body: some View {
@@ -21,16 +22,20 @@ struct SearchView: View {
                                 .autocorrectionDisabled(true)
                                 .onSubmit {
                                         let trimmedInput: String = inputText.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
+                                        guard trimmedInput != cantonese else { return }
+                                        defer {
+                                                animationState += 1
+                                        }
                                         guard !trimmedInput.isEmpty else {
                                                 cantonese = ""
                                                 pronunciations = []
                                                 yingWaaEntries = []
+                                                choHokEntries = []
                                                 fanWanEntries = []
-                                                animationState += 1
                                                 return
                                         }
-                                        guard trimmedInput != cantonese else { return }
                                         yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
+                                        choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
                                         fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                                         let search = AppMaster.lookup(text: trimmedInput)
                                         if search.romanizations.isEmpty {
@@ -40,7 +45,6 @@ struct SearchView: View {
                                                 cantonese = search.text
                                                 pronunciations = search.romanizations
                                         }
-                                        animationState += 1
                                 }
                 }
                 if !cantonese.isEmpty {
@@ -71,6 +75,16 @@ struct SearchView: View {
                                 }
                         } header: {
                                 Text(verbatim: "《英華分韻撮要》　衛三畏　1856　廣州").textCase(nil)
+                        }
+                        .textSelection(.enabled)
+                }
+                if !choHokEntries.isEmpty {
+                        Section {
+                                ForEach(0..<choHokEntries.count, id: \.self) { index in
+                                        ChoHokYuetYamCitYiuLabel(entry: choHokEntries[index])
+                                }
+                        } header: {
+                                Text(verbatim: "《初學粵音切要》　湛約翰　1855　香港").textCase(nil)
                         }
                         .textSelection(.enabled)
                 }

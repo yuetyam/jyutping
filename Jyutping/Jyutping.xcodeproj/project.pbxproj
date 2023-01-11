@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
+		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
+		37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */; };
 		37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */; };
 		37D7BD1A294CAADC006A6ADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD19294CAADC006A6ADD /* Assets.xcassets */; };
 		37D7BD1E294CAADC006A6ADD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD1D294CAADC006A6ADD /* Preview Assets.xcassets */; };
@@ -63,7 +65,6 @@
 		37E02E452955AB9900F7543F /* Text2SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E442955AB9900F7543F /* Text2SpeechView.swift */; };
 		37EA2897295158CB00B40CE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37EA2896295158CB00B40CE4 /* Settings.bundle */; };
 		37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */; };
-		37EF1955296DBD4200A3F4C9 /* FanWanJyutping2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1954296DBD4200A3F4C9 /* FanWanJyutping2IPA.swift */; };
 		37EF1957296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */; };
 		37EF1959296DBE1600A3F4C9 /* YingWaaFanWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */; };
 		37EF195C296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */; };
@@ -208,6 +209,8 @@
 
 /* Begin PBXFileReference section */
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
+		37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
 		37D7BD12294CAADB006A6ADD /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
 		37D7BD19294CAADC006A6ADD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -282,7 +285,6 @@
 		37E02E442955AB9900F7543F /* Text2SpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text2SpeechView.swift; sourceTree = "<group>"; };
 		37EA2896295158CB00B40CE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanLabel.swift; sourceTree = "<group>"; };
-		37EF1954296DBD4200A3F4C9 /* FanWanJyutping2IPA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanWanJyutping2IPA.swift; sourceTree = "<group>"; };
 		37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuView.swift; sourceTree = "<group>"; };
 		37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanView.swift; sourceTree = "<group>"; };
 		37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuLabel.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 			children = (
 				37B6BDB8296EA2510008B9F0 /* SearchView.swift */,
 				37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */,
+				37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */,
 				37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */,
 			);
 			path = Search;
@@ -614,7 +617,6 @@
 				37D7BD89294CB61F006A6ADD /* FinalsTable.swift */,
 				37D7BD86294CB61F006A6ADD /* TonesTable.swift */,
 				37D7BD5A294CB182006A6ADD /* Syllable2IPA.swift */,
-				37EF1954296DBD4200A3F4C9 /* FanWanJyutping2IPA.swift */,
 			);
 			path = Linguistics;
 			sourceTree = "<group>";
@@ -668,6 +670,7 @@
 			children = (
 				37D7BD90294CB6C6006A6ADD /* MacSearchView.swift */,
 				37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */,
+				37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */,
 				37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */,
 			);
 			path = Search;
@@ -1188,14 +1191,15 @@
 				37D7BD99294CB6C6006A6ADD /* MacResourcesView.swift in Sources */,
 				37D7BDB1294CB9F3006A6ADD /* JyutpingView.swift in Sources */,
 				37D7BD7A294CB440006A6ADD /* TermView.swift in Sources */,
+				37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */,
 				37D7BD69294CB212006A6ADD /* ImageExtensions.swift in Sources */,
 				37D7BD8C294CB61F006A6ADD /* SyllableCell.swift in Sources */,
-				37EF1955296DBD4200A3F4C9 /* FanWanJyutping2IPA.swift in Sources */,
 				37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */,
 				37D7BD8A294CB61F006A6ADD /* TonesTable.swift in Sources */,
 				37D7BD82294CB4B3006A6ADD /* Speaker.swift in Sources */,
 				37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */,
 				37D7BD5F294CB1EE006A6ADD /* Device.swift in Sources */,
+				37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */,
 				37D7BDBA294CB9F3006A6ADD /* PrivacyNoticeView.swift in Sources */,
 				37D7BDB6294CB9F3006A6ADD /* IntroductionsView.swift in Sources */,
 				37D7BD66294CB212006A6ADD /* ColorExtensions.swift in Sources */,

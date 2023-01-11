@@ -9,7 +9,9 @@ struct MacSearchView: View {
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
         @State private var yingWaaEntries: [YingWaaFanWan] = []
+        @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
+        @State private var animationState: Int = 0
 
         @FocusState private var isTextFieldFocused: Bool
 
@@ -22,12 +24,19 @@ struct MacSearchView: View {
                                         .onSubmit {
                                                 let trimmedInput: String = inputText.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
                                                 guard trimmedInput != cantonese else { return }
+                                                defer {
+                                                        animationState += 1
+                                                }
                                                 guard !trimmedInput.isEmpty else {
                                                         cantonese = ""
                                                         pronunciations = []
+                                                        yingWaaEntries = []
+                                                        choHokEntries = []
+                                                        fanWanEntries = []
                                                         return
                                                 }
                                                 yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
+                                                choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
                                                 fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                                                 let search = AppMaster.lookup(text: trimmedInput)
                                                 if search.romanizations.isEmpty {
@@ -91,6 +100,26 @@ struct MacSearchView: View {
                                                 .block()
                                         }
                                 }
+                                if !choHokEntries.isEmpty {
+                                        VStack(spacing: 2) {
+                                                HStack {
+                                                        Text(verbatim: choHokEntries.first!.word)
+                                                        Text(verbatim: "《初學粵音切要》")
+                                                        Text(verbatim: "湛約翰(John Chalmers)　1855　香港").foregroundColor(.secondary)
+                                                        Spacer()
+                                                }
+                                                .font(.copilot)
+                                                VStack {
+                                                        ForEach(0..<choHokEntries.count, id: \.self) { index in
+                                                                ChoHokYuetYamCitYiuView(entry: choHokEntries[index])
+                                                                if (index < choHokEntries.count - 1) {
+                                                                        Divider()
+                                                                }
+                                                        }
+                                                }
+                                                .block()
+                                        }
+                                }
                                 if !fanWanEntries.isEmpty {
                                         VStack(spacing: 2) {
                                                 HStack {
@@ -116,7 +145,7 @@ struct MacSearchView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .animation(.default, value: cantonese)
+                .animation(.default, value: animationState)
                 .navigationTitle("Search")
         }
 }

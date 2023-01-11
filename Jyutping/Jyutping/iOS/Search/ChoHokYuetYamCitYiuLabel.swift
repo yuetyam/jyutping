@@ -3,12 +3,12 @@
 import SwiftUI
 import Materials
 
-struct FanWanCuetYiuLabel: View {
-        let entry: FanWanCuetYiu
+struct ChoHokYuetYamCitYiuLabel: View {
+        let entry: ChoHokYuetYamCitYiu
         var body: some View {
                 VStack(alignment: .leading) {
                         HStack {
-                                Text(verbatim: "位屬")
+                                Text(verbatim: "原文")
                                 Text.separator
                                 Text(verbatim: entry.abstract)
                         }
@@ -21,11 +21,6 @@ struct FanWanCuetYiuLabel: View {
                                 Text(verbatim: entry.ipa).font(.body).foregroundColor(.secondary)
                                 Spacer()
                                 Speaker(entry.jyutping)
-                        }
-                        HStack {
-                                Text(verbatim: "釋義")
-                                Text.separator
-                                Text(verbatim: entry.interpretation)
                         }
                 }
                 .font(.copilot)

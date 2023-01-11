@@ -30,19 +30,36 @@ extension DataMaster {
                 return entries
         }
 }
+
 public struct FanWanCuetYiu: Hashable {
 
+        fileprivate init(word: String, romanization: String, initial: String, final: String, yamyeung: String, tone: String, rhyme: String, interpretation: String) {
+                let syllable: String = romanization.replacingOccurrences(of: "7", with: "1").replacingOccurrences(of: "8", with: "3").replacingOccurrences(of: "9", with: "6")
+                self.word = word
+                self.romanization = syllable
+                self.initial = initial
+                self.final = final
+                self.yamyeung = yamyeung
+                self.tone = tone
+                self.rhyme = rhyme
+                self.interpretation = interpretation
+                self.abstract = "\(initial)母　\(final)韻　\(yamyeung)\(tone)　\(rhyme)小韻"
+                self.ipa = OldCantonese.IPA(for: syllable)
+                self.jyutping = OldCantonese.jyutping(for: syllable)
+        }
+
         public let word: String
-
-        /// Jyutping
         public let romanization: String
-
         public let initial: String
         public let final: String
         public let yamyeung: String
         public let tone: String
         public let rhyme: String
         public let interpretation: String
+
+        public let abstract: String
+        public let ipa: String
+        public let jyutping: String
 
         public static func match(for character: Character) -> [FanWanCuetYiu] {
                 return DataMaster.matchFanWanCuetYiu(for: character)

@@ -1,11 +1,20 @@
-struct FanWanJyutping2IPA {
+extension OldCantonese {
+        static func jyutping(for syllable: String) -> String {
+                return syllable.replacingOccurrences(of: "^(z|c|s)h", with: "$1", options: .regularExpression)
+                        .replacingOccurrences(of: "^nj", with: "j", options: .regularExpression)
+                        .replacingOccurrences(of: "o(m|p)$", with: "a$1", options: .regularExpression)
+        }
+}
+
+struct OldCantonese {
 
         static func IPA(for syllable: String) -> String {
                 lazy var fallback: String = "[ ? ]"
-                guard syllable != "?" else { return fallback }
-                guard let phone: String = IPASyllable(syllable) else { return fallback }
+                let isFineSyllable: Bool = syllable != "X" || syllable != "?"
+                guard isFineSyllable else { return fallback }
+                guard let phone: String = IPAPhone(syllable) else { return fallback }
                 guard let tone: String = IPATone(syllable) else { return fallback }
-                return "[ " + phone + " " + tone + " ]"
+                return "[ \(phone) \(tone) ]"
         }
 
         private static func IPATone(_ syllable: String) -> String? {
@@ -34,7 +43,7 @@ struct FanWanJyutping2IPA {
                 }
         }
 
-        private static func IPASyllable(_ syllable: String) -> String? {
+        private static func IPAPhone(_ syllable: String) -> String? {
                 let withoutTone = syllable.filter({ !$0.isNumber })
                 guard !withoutTone.isEmpty else { return nil }
                 switch withoutTone {
@@ -46,15 +55,15 @@ struct FanWanJyutping2IPA {
                         let initial = String(text.dropLast(text.count - 2))
                         guard let IPAInitial = dualInitialsMap[initial] else { return nil }
                         let final: String = String(text.dropFirst(2))
-                        guard let IPAFinal: String = FinalsMap[final] else { return nil }
+                        guard let IPAFinal: String = finalMap[final] else { return nil }
                         return IPAInitial + IPAFinal
                 default:
-                        if let IPAInitial: String = InitialsMap[withoutTone.first!] {
+                        if let IPAInitial: String = initialMap[withoutTone.first!] {
                                 let final: String = String(withoutTone.dropFirst())
-                                guard let IPAFinal: String = FinalsMap[final] else { return nil }
+                                guard let IPAFinal: String = finalMap[final] else { return nil }
                                 return IPAInitial + IPAFinal
                         } else {
-                                guard let IPAFinal: String = FinalsMap[String(withoutTone)] else { return nil }
+                                guard let IPAFinal: String = finalMap[String(withoutTone)] else { return nil }
                                 return IPAFinal
                         }
                 }
@@ -76,7 +85,7 @@ struct FanWanJyutping2IPA {
                 "sh": "ʃ"
         ]
 
-        private static let InitialsMap: [Character: String] = [
+        private static let initialMap: [Character: String] = [
                 "b": "p",
                 "p": "pʰ",
                 "m": "m",
@@ -94,8 +103,7 @@ struct FanWanJyutping2IPA {
                 "s": "s",
                 "j": "j"
         ]
-
-        private static let FinalsMap: [String: String] = [
+        private static let finalMap: [String: String] = [
                 "aa": "aː",
                 "aai": "aːi",
                 "aau": "aːu",
