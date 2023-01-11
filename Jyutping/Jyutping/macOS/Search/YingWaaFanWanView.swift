@@ -9,33 +9,24 @@ struct YingWaaFanWanView: View {
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack {
-                                        Text(verbatim: "書本原文標示")
+                                        Text(verbatim: "原文")
                                         Text.separator
-                                        Text(verbatim: entry.romanization).font(.title3)
+                                        Text(verbatim: entry.pronunciation)
                                 }
-                                if let romanizationType = entry.romanizationType {
-                                        Text(verbatim: romanizationType)
-                                }
-                                if let romanizationNote = entry.romanizationNote {
-                                        Text(verbatim: romanizationNote)
+                                if let pronunciationType = entry.pronunciationType {
+                                        Text(verbatim: pronunciationType)
                                 }
                                 if let interpretation = entry.interpretation {
                                         Text(verbatim: interpretation)
                                 }
-                                if let note = entry.note {
-                                        Text(verbatim: note)
-                                }
                         }
                         HStack(spacing: 16) {
                                 HStack {
-                                        Text(verbatim: "對應現代粵拼")
+                                        Text(verbatim: "轉寫")
                                         Text.separator
-                                        Text(verbatim: entry.jyutping).font(.title3.monospaced())
+                                        Text(verbatim: entry.romanization).font(.title3.monospaced())
                                 }
-                                Text(verbatim: Syllable2IPA.IPAText(entry.jyutping)).font(.title3).foregroundColor(.secondary)
-                                if let note = entry.note {
-                                        Text(verbatim: note)
-                                }
+                                Text(verbatim: entry.ipa).font(.title3).foregroundColor(.secondary)
                                 Spacer()
                                 Speaker(entry.jyutping)
                         }

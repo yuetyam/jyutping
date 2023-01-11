@@ -4,24 +4,21 @@ import SQLite3
 public struct YingWaaFanWan: Hashable {
 
         public let word: String
-        public let jyutping: String
-        public let romanization: String
-        public let romanizationMark: String
-        public let romanizationType: String?
-        public let romanizationNote: String?
+        public let pronunciation: String
+        public let pronunciationType: String?
         public let interpretation: String?
-        public let note: String?
+        public let romanization: String
+        public let ipa: String
+        public let jyutping: String
 
-        fileprivate init(word: String, jyutping: String, romanizationMark: String, romanizationType: String, romanizationNote: String, interpretation: String, note: String) {
+        fileprivate init(word: String, romanization: String, pronunciation: String, pronunciationType: String, interpretation: String) {
                 self.word = word
-                self.jyutping = jyutping
-                // TODO: romanization from romanizationMark
-                self.romanization = romanizationMark
-                self.romanizationMark = romanizationMark
-                self.romanizationType = YingWaaFanWan.handleRomanizationType(of: romanizationType)
-                self.romanizationNote = romanizationNote.isNone ? nil : romanizationNote
-                self.interpretation = interpretation.isNone ? nil : interpretation
-                self.note = note.isNone ? nil : note
+                self.pronunciation = pronunciation
+                self.pronunciationType = YingWaaFanWan.handlePronunciationType(of: pronunciationType)
+                self.interpretation = (interpretation == "X") ? nil : interpretation
+                self.romanization = romanization
+                self.ipa = OldCantonese.IPA(for: romanization)
+                self.jyutping = OldCantonese.jyutping(for: romanization)
         }
 
         public static func match(for character: Character) -> [YingWaaFanWan] {
@@ -31,7 +28,7 @@ public struct YingWaaFanWan: Hashable {
 
 private extension DataMaster {
 
-        // CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, jyutping TEXT NOT NULL, romanizationmark TEXT NOT NULL, romanizationtype TEXT NOT NULL, romanizationnote TEXT NOT NULL, interpretation TEXT NOT NULL, note TEXT NOT NULL);
+        // CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationtype TEXT NOT NULL, interpretation TEXT NOT NULL);
         static func matchYingWaaFanWan(for character: Character) -> [YingWaaFanWan] {
                 var entries: [YingWaaFanWan] = []
                 let code: UInt32 = character.unicodeScalars.first?.value ?? 0xFFFFFF
@@ -44,13 +41,11 @@ private extension DataMaster {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let jyutping: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                let romanizationMark: String = String(cString: sqlite3_column_text(queryStatement, 3))
-                                let romanizationType: String = String(cString: sqlite3_column_text(queryStatement, 4))
-                                let romanizationNote: String = String(cString: sqlite3_column_text(queryStatement, 5))
-                                let interpretation: String = String(cString: sqlite3_column_text(queryStatement, 6))
-                                let note: String = String(cString: sqlite3_column_text(queryStatement, 7))
-                                let instance: YingWaaFanWan = YingWaaFanWan(word: word, jyutping: jyutping, romanizationMark: romanizationMark, romanizationType: romanizationType, romanizationNote: romanizationNote, interpretation: interpretation, note: note)
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
+                                let pronunciation: String = String(cString: sqlite3_column_text(queryStatement, 3))
+                                let pronunciationType: String = String(cString: sqlite3_column_text(queryStatement, 4))
+                                let interpretation: String = String(cString: sqlite3_column_text(queryStatement, 5))
+                                let instance: YingWaaFanWan = YingWaaFanWan(word: word, romanization: romanization, pronunciation: pronunciation, pronunciationType: pronunciationType, interpretation: interpretation)
                                 entries.append(instance)
                         }
                 }
@@ -59,7 +54,7 @@ private extension DataMaster {
 }
 
 private extension YingWaaFanWan {
-        static func handleRomanizationType(of type: String) -> String? {
+        static func handlePronunciationType(of type: String) -> String? {
                 switch type {
                 case "X":
                         return nil

@@ -17,7 +17,7 @@ struct MacSearchView: View {
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 24) {
+                        LazyVStack(spacing: 32) {
                                 TextField("Search Pronunciation", text: $inputText)
                                         .textFieldStyle(.plain)
                                         .disableAutocorrection(true)

@@ -8,30 +8,23 @@ struct YingWaaFanWanLabel: View {
         var body: some View {
                 VStack(alignment: .leading) {
                         HStack {
-                                Text(verbatim: "書本原文")
+                                Text(verbatim: "原文")
                                 Text.separator
-                                Text(verbatim: entry.romanization).font(.body)
-                                if let romanizationType = entry.romanizationType {
-                                        Text(verbatim: romanizationType)
-                                }
-                                if let romanizationNote = entry.romanizationNote {
-                                        Text(verbatim: romanizationNote)
+                                Text(verbatim: entry.pronunciation)
+                                if let pronunciationType = entry.pronunciationType {
+                                        Text(verbatim: pronunciationType)
                                 }
                                 if let interpretation = entry.interpretation {
                                         Text(verbatim: interpretation)
                                 }
-                                if let note = entry.note {
-                                        Text(verbatim: note)
-                                }
                         }
-                        HStack {
-                                Text(verbatim: "對應粵拼")
-                                Text.separator
-                                Text(verbatim: entry.jyutping).font(.body)
-                                Text(verbatim: Syllable2IPA.IPAText(entry.jyutping)).font(.body).foregroundColor(.secondary)
-                                if let note = entry.note {
-                                        Text(verbatim: note)
+                        HStack(spacing: 16) {
+                                HStack {
+                                        Text(verbatim: "轉寫")
+                                        Text.separator
+                                        Text(verbatim: entry.romanization).font(.body)
                                 }
+                                Text(verbatim: entry.ipa).font(.body).foregroundColor(.secondary)
                                 Spacer()
                                 Speaker(entry.jyutping)
                         }
