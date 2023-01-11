@@ -500,7 +500,7 @@ final class JyutpingInputController: IMKInputController {
                 }
                 resetWindow()
                 DispatchQueue.main.async { [weak self] in
-                        self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.US")
+                        self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
         }
         override func deactivateServer(_ sender: Any!) {
