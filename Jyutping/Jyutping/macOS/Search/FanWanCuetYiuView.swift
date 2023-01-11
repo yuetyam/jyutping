@@ -16,11 +16,11 @@ struct FanWanCuetYiuView: View {
                                 HStack {
                                         Text(verbatim: "轉寫")
                                         Text.separator
-                                        Text(verbatim: entry.convertedRomanization).font(.title3.monospaced())
+                                        Text(verbatim: entry.romanization).font(.title3.monospaced())
                                 }
                                 Text(verbatim: entry.ipa).font(.title3).foregroundColor(.secondary)
                                 Spacer()
-                                Speaker(entry.regularJyutping)
+                                Speaker(entry.jyutping)
                         }
                         HStack {
                                 Text(verbatim: "釋義")
