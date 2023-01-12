@@ -34,13 +34,13 @@ struct NumbersView: View {
 
         private let numbers: [Term] = {
                 let textBlock: String = """
-                一,jat1
-                二,ji6
-                兩,loeng5
+                一,jat1,☝️
+                二,ji6,✌️
+                兩,loeng5,✌️
                 三,saam1
                 四,sei3
-                五,ng5
-                六,luk6
+                五,ng5,🖐️
+                六,luk6,🤙
                 七,cat1
                 八,baat3
                 九,gau2

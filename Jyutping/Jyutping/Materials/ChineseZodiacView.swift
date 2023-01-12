@@ -45,28 +45,35 @@ struct ChineseZodiacView: View {
 
         private let terms: [Term] = {
                 let textBlock: String = """
-                鼠,syu2
-                牛,ngau4
-                虎,fu2
-                兔,tou3
-                龍,lung4
-                蛇,se4
-                馬,maa5
-                羊,joeng4
-                猴,hau4
-                雞,gai1
-                狗,gau2
-                豬,zyu1
+                鼠,syu2,🐀
+                牛,ngau4,🐃
+                虎,fu2,🐅
+                兔,tou3,🐇
+                龍,lung4,🐲
+                蛇,se4,🐍
+                馬,maa5,🐎
+                羊,joeng4,🐑
+                猴,hau4,🐒
+                雞,gai1,🐓
+                狗,gau2,🐶
+                豬,zyu1,🐖
                 """
 
                 let items: [Term] = Term.array(from: textBlock)
                 return items
         }()
 
-        private let altTerms: [Term] = [
-                Term(name: "老鼠", romanization: "lou5 syu2"),
-                Term(name: "老虎", romanization: "lou5 fu2"),
-                Term(name: "大蟲", romanization: "daai6 cung4", comment: "即老虎"),
-                Term(name: "馬騮", romanization: "maa5 lau1", comment: "即猴")
-        ]
+        private let altTerms: [Term] = {
+                let textBlock: String = """
+                老鼠,lou5 syu2,🐀
+                水牛,seoi2 ngau4,🐃
+                老虎,lou5 fu2,🐅
+                大蟲,daai6 cung4,🐅
+                綿羊,min4 joeng4,🐑
+                馬騮,maa5 lau1,🐒
+                """
+
+                let items: [Term] = Term.array(from: textBlock)
+                return items
+        }()
 }

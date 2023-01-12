@@ -7,28 +7,46 @@ struct TermView: View {
         // Longest String of Romanizations
         let placeholder: String
 
-        #if os(macOS)
-        private let spacing: CGFloat = 32
-        #else
-        private let spacing: CGFloat = 24
-        #endif
-
         var body: some View {
-                HStack {
-                        HStack(spacing: spacing) {
-                                Text(verbatim: term.name).font(.master).textSelection(.enabled)
-                                ZStack(alignment: .leading) {
-                                        Text(verbatim: placeholder).hidden()
-                                        Text(verbatim: term.romanization).textSelection(.enabled)
-                                }
-                                .font(.fixedWidth)
+                #if os(macOS)
+                HStack(spacing: 32) {
+                        Text(verbatim: term.name).font(.master)
+                        ZStack(alignment: .leading) {
+                                Text(verbatim: placeholder).hidden()
+                                Text(verbatim: term.romanization)
                         }
+                        .font(.fixedWidth)
                         Speaker(term.romanization)
+                        if let emoji = term.emoji {
+                                Text(verbatim: emoji).font(.title3)
+                        }
                         if let comment = term.comment {
-                                Text(verbatim: comment).font(.copilot).textSelection(.enabled).foregroundColor(.secondary)
+                                Text(verbatim: comment).font(.copilot).foregroundColor(.secondary)
                         }
                         Spacer()
                 }
+                .textSelection(.enabled)
+                #else
+                HStack(spacing: 20) {
+                        Text(verbatim: term.name)
+                        HStack {
+                                ZStack(alignment: .leading) {
+                                        Text(verbatim: placeholder).hidden()
+                                        Text(verbatim: term.romanization)
+                                }
+                                .font(.fixedWidth)
+                                Speaker(term.romanization)
+                        }
+                        if let emoji = term.emoji {
+                                Text(verbatim: emoji)
+                        }
+                        if let comment = term.comment {
+                                Text(verbatim: comment).font(.copilot).foregroundColor(.secondary)
+                        }
+                        Spacer()
+                }
+                .textSelection(.enabled)
+                #endif
         }
 }
 
