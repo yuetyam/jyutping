@@ -22,7 +22,26 @@ public struct YingWaaFanWan: Hashable {
         }
 
         public static func match(for character: Character) -> [YingWaaFanWan] {
-                return DataMaster.matchYingWaaFanWan(for: character)
+                let items: [YingWaaFanWan] = DataMaster.matchYingWaaFanWan(for: character)
+                guard items.count > 1 else { return items }
+                let romanizations = items.map({ $0.romanization }).uniqued()
+                let hasDuplicates: Bool = romanizations.count != items.count
+                guard hasDuplicates else { return items }
+                let entries: [YingWaaFanWan?] = romanizations.map { syllable -> YingWaaFanWan? in
+                        let filtered = items.filter({ $0.romanization == syllable })
+                        switch filtered.count {
+                        case 0:
+                                return nil
+                        case 1:
+                                return filtered.first!
+                        default:
+                                let example = filtered.first!
+                                let pronunciationType: String = filtered.map({ $0.pronunciationType }).compactMap({ $0 }).uniqued().joined(separator: ", ")
+                                let interpretation: String = filtered.map({ $0.interpretation }).compactMap({ $0 }).uniqued().joined(separator: " ")
+                                return YingWaaFanWan(word: example.word, romanization: syllable, pronunciation: example.pronunciation, pronunciationType: pronunciationType, interpretation: interpretation)
+                        }
+                }
+                return entries.compactMap({ $0 })
         }
 }
 

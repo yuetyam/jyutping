@@ -11,13 +11,13 @@ struct YingWaaFanWanView: View {
                                 HStack {
                                         Text(verbatim: "原文")
                                         Text.separator
-                                        Text(verbatim: entry.pronunciation)
+                                        Text(verbatim: entry.pronunciation).font(.title3)
                                 }
                                 if let pronunciationType = entry.pronunciationType {
-                                        Text(verbatim: pronunciationType)
+                                        Text(verbatim: pronunciationType).font(.body.italic())
                                 }
                                 if let interpretation = entry.interpretation {
-                                        Text(verbatim: interpretation)
+                                        Text(verbatim: interpretation).font(.body)
                                 }
                         }
                         HStack(spacing: 16) {

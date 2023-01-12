@@ -34,19 +34,23 @@ public struct ChoHokYuetYamCitYiu: Hashable {
         fileprivate init(word: String, romanization: String, initial: String, final: String, tone: String, faancit: String) {
                 let convertedInitial: String = initial.replacingOccurrences(of: "X", with: "")
                 self.word = word
-                self.abstract = "\(convertedInitial)\(final)　\(tone)　\(faancit)切"
+                self.pronunciation = "\(convertedInitial)\(final)"
+                self.tone = tone
+                self.faancit = faancit + "切"
                 self.romanization = romanization
                 self.ipa = OldCantonese.IPA(for: romanization)
                 self.jyutping = OldCantonese.jyutping(for: romanization)
         }
 
         public let word: String
-        public let abstract: String
+        public let pronunciation: String
+        public let tone: String
+        public let faancit: String
         public let romanization: String
         public let ipa: String
         public let jyutping: String
 
         public static func match(for character: Character) -> [ChoHokYuetYamCitYiu] {
-                return DataMaster.matchChoHokYuetYamCitYiu(for: character)
+                return DataMaster.matchChoHokYuetYamCitYiu(for: character).uniqued()
         }
 }

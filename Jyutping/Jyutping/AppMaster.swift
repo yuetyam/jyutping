@@ -87,7 +87,7 @@ extension AppMaster {
         static func lookupYingWaaFanWan(for text: String) -> [YingWaaFanWan] {
                 guard text.count == 1 else { return [] }
                 let character = text.first!
-                return YingWaaFanWan.match(for: character).uniqued()
+                return YingWaaFanWan.match(for: character)
         }
 
         /// Lookup ChoHokYuetYamCitYiu for the given text
@@ -96,7 +96,7 @@ extension AppMaster {
         static func lookupChoHokYuetYamCitYiu(for text: String) -> [ChoHokYuetYamCitYiu] {
                 guard text.count == 1 else { return [] }
                 let character = text.first!
-                return ChoHokYuetYamCitYiu.match(for: character).uniqued()
+                return ChoHokYuetYamCitYiu.match(for: character)
         }
 
         /// Lookup FanWanCuetYiu for the given text
@@ -105,6 +105,6 @@ extension AppMaster {
         static func lookupFanWanCuetYiu(for text: String) -> [FanWanCuetYiu] {
                 guard text.count == 1 else { return [] }
                 let character = text.first!
-                return FanWanCuetYiu.match(for: character).uniqued()
+                return FanWanCuetYiu.match(for: character)
         }
 }

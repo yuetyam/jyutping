@@ -10,12 +10,12 @@ struct YingWaaFanWanLabel: View {
                         HStack {
                                 Text(verbatim: "原文")
                                 Text.separator
-                                Text(verbatim: entry.pronunciation)
+                                Text(verbatim: entry.pronunciation).font(.body)
                                 if let pronunciationType = entry.pronunciationType {
-                                        Text(verbatim: pronunciationType)
+                                        Text(verbatim: pronunciationType).font(.footnote.italic())
                                 }
                                 if let interpretation = entry.interpretation {
-                                        Text(verbatim: interpretation)
+                                        Text(verbatim: interpretation).font(.footnote)
                                 }
                         }
                         HStack(spacing: 16) {

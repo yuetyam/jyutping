@@ -62,6 +62,6 @@ public struct FanWanCuetYiu: Hashable {
         public let jyutping: String
 
         public static func match(for character: Character) -> [FanWanCuetYiu] {
-                return DataMaster.matchFanWanCuetYiu(for: character)
+                return DataMaster.matchFanWanCuetYiu(for: character).uniqued()
         }
 }
