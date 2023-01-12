@@ -15,16 +15,15 @@ struct JyutpingView: View {
 
                                 Section {
                                         NavigationLink(destination: InitialsTable()) {
-                                                Label("Jyutping Initials", systemImage: "tablecells")
+                                                Label("Jyutping Initials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
                                         NavigationLink(destination: FinalsTable()) {
-                                                Label("Jyutping Finals", systemImage: "tablecells")
+                                                Label("Jyutping Finals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
                                         NavigationLink(destination: TonesTable()) {
-                                                Label("Jyutping Tones", systemImage: "tablecells")
+                                                Label("Jyutping Tones", systemImage: "bell")
                                         }
                                 }
-                                .labelStyle(.titleOnly)
 
                                 Section {
                                         ExtendedLinkLabel(icon: searchIcon, title: "粵音資料集叢", footnote: "jyut.net", address: "https://jyut.net")
