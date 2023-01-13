@@ -4,8 +4,8 @@ import SwiftUI
 
 struct AboutView: View {
 
-        private let appStoreAddress: String = "https://apps.apple.com/app/id1509367629"
-        private let link2AppStore: URL = URL(string: "https://apps.apple.com/app/id1509367629")!
+        private let appStoreAddress: String = AppMaster.appStoreAddress
+        private let link2AppStore: URL = URL(string: AppMaster.appStoreAddress)!
 
         var body: some View {
                 NavigationView {
@@ -17,7 +17,7 @@ struct AboutView: View {
                                                 }
                                 }
                                 Section {
-                                        SafariLink("https://jyutping.app") {
+                                        SafariLink(AppMaster.websiteAddress) {
                                                 EnhancedLabel("Website", icon: "globe.asia.australia", symbol: .safari)
                                         }
                                         SafariLink("https://github.com/yuetyam/jyutping") {

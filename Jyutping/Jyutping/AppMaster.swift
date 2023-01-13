@@ -29,6 +29,15 @@ struct AppMaster {
                 let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
                 return versionString + " (" + buildString + ")"
         }()
+
+        /// `https://jyutping.app`
+        static let websiteAddress: String = "https://jyutping.app"
+
+        /// `https://jyutping.app`
+        static let websiteURL: URL = URL(string: websiteAddress)!
+
+        /// `https://apps.apple.com/app/id1509367629`
+        static let appStoreAddress: String = "https://apps.apple.com/app/id1509367629"
 }
 
 extension AppMaster {
