@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TonesTable: View {
+struct ToneTable: View {
 
         #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSize

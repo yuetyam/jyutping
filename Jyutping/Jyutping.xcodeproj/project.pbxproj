@@ -38,10 +38,10 @@
 		37D7BD81294CB4B3006A6ADD /* EnhancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD7E294CB4B3006A6ADD /* EnhancedLabel.swift */; };
 		37D7BD82294CB4B3006A6ADD /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD7F294CB4B3006A6ADD /* Speaker.swift */; };
 		37D7BD84294CB500006A6ADD /* AppMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD83294CB500006A6ADD /* AppMaster.swift */; };
-		37D7BD8A294CB61F006A6ADD /* TonesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD86294CB61F006A6ADD /* TonesTable.swift */; };
-		37D7BD8B294CB61F006A6ADD /* InitialsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD87294CB61F006A6ADD /* InitialsTable.swift */; };
+		37D7BD8A294CB61F006A6ADD /* ToneTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD86294CB61F006A6ADD /* ToneTable.swift */; };
+		37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD87294CB61F006A6ADD /* InitialTable.swift */; };
 		37D7BD8C294CB61F006A6ADD /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD88294CB61F006A6ADD /* SyllableCell.swift */; };
-		37D7BD8D294CB61F006A6ADD /* FinalsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD89294CB61F006A6ADD /* FinalsTable.swift */; };
+		37D7BD8D294CB61F006A6ADD /* FinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD89294CB61F006A6ADD /* FinalTable.swift */; };
 		37D7BD97294CB6C6006A6ADD /* MacInputMethodInstallationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD8F294CB6C6006A6ADD /* MacInputMethodInstallationView.swift */; };
 		37D7BD98294CB6C6006A6ADD /* MacSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD90294CB6C6006A6ADD /* MacSearchView.swift */; };
 		37D7BD99294CB6C6006A6ADD /* MacResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD91294CB6C6006A6ADD /* MacResourcesView.swift */; };
@@ -258,10 +258,10 @@
 		37D7BD7E294CB4B3006A6ADD /* EnhancedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedLabel.swift; sourceTree = "<group>"; };
 		37D7BD7F294CB4B3006A6ADD /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		37D7BD83294CB500006A6ADD /* AppMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMaster.swift; sourceTree = "<group>"; };
-		37D7BD86294CB61F006A6ADD /* TonesTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TonesTable.swift; sourceTree = "<group>"; };
-		37D7BD87294CB61F006A6ADD /* InitialsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialsTable.swift; sourceTree = "<group>"; };
+		37D7BD86294CB61F006A6ADD /* ToneTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneTable.swift; sourceTree = "<group>"; };
+		37D7BD87294CB61F006A6ADD /* InitialTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialTable.swift; sourceTree = "<group>"; };
 		37D7BD88294CB61F006A6ADD /* SyllableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllableCell.swift; sourceTree = "<group>"; };
-		37D7BD89294CB61F006A6ADD /* FinalsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalsTable.swift; sourceTree = "<group>"; };
+		37D7BD89294CB61F006A6ADD /* FinalTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTable.swift; sourceTree = "<group>"; };
 		37D7BD8F294CB6C6006A6ADD /* MacInputMethodInstallationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacInputMethodInstallationView.swift; sourceTree = "<group>"; };
 		37D7BD90294CB6C6006A6ADD /* MacSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacSearchView.swift; sourceTree = "<group>"; };
 		37D7BD91294CB6C6006A6ADD /* MacResourcesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacResourcesView.swift; sourceTree = "<group>"; };
@@ -613,9 +613,9 @@
 			isa = PBXGroup;
 			children = (
 				37D7BD88294CB61F006A6ADD /* SyllableCell.swift */,
-				37D7BD87294CB61F006A6ADD /* InitialsTable.swift */,
-				37D7BD89294CB61F006A6ADD /* FinalsTable.swift */,
-				37D7BD86294CB61F006A6ADD /* TonesTable.swift */,
+				37D7BD87294CB61F006A6ADD /* InitialTable.swift */,
+				37D7BD89294CB61F006A6ADD /* FinalTable.swift */,
+				37D7BD86294CB61F006A6ADD /* ToneTable.swift */,
 				37D7BD5A294CB182006A6ADD /* Syllable2IPA.swift */,
 			);
 			path = Linguistics;
@@ -1159,7 +1159,7 @@
 				37D7BD9B294CB6C6006A6ADD /* MacContentView.swift in Sources */,
 				37D7BDBC294CC3AB006A6ADD /* CantoneseView.swift in Sources */,
 				37D7BDB3294CB9F3006A6ADD /* AboutView.swift in Sources */,
-				37D7BD8B294CB61F006A6ADD /* InitialsTable.swift in Sources */,
+				37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */,
 				37D7BD79294CB440006A6ADD /* StemsBranchesView.swift in Sources */,
 				37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */,
 				37D7BD70294CB3A2006A6ADD /* SafariView.swift in Sources */,
@@ -1170,7 +1170,7 @@
 				37D7BD71294CB3A2006A6ADD /* ShareSheetView.swift in Sources */,
 				37D7BD6A294CB212006A6ADD /* TextExtensions.swift in Sources */,
 				37EF195C296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift in Sources */,
-				37D7BD8D294CB61F006A6ADD /* FinalsTable.swift in Sources */,
+				37D7BD8D294CB61F006A6ADD /* FinalTable.swift in Sources */,
 				37D7BD9D294CB6C6006A6ADD /* MacIntroductionsView.swift in Sources */,
 				37D7BDB7294CB9F3006A6ADD /* HomeView.swift in Sources */,
 				37D7BD5B294CB182006A6ADD /* Syllable2IPA.swift in Sources */,
@@ -1195,7 +1195,7 @@
 				37D7BD69294CB212006A6ADD /* ImageExtensions.swift in Sources */,
 				37D7BD8C294CB61F006A6ADD /* SyllableCell.swift in Sources */,
 				37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */,
-				37D7BD8A294CB61F006A6ADD /* TonesTable.swift in Sources */,
+				37D7BD8A294CB61F006A6ADD /* ToneTable.swift in Sources */,
 				37D7BD82294CB4B3006A6ADD /* Speaker.swift in Sources */,
 				37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */,
 				37D7BD5F294CB1EE006A6ADD /* Device.swift in Sources */,

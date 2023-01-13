@@ -13,13 +13,13 @@ struct JyutpingView: View {
                                 SearchView(placeholder: "Search Pronunciation", animationState: $animationState)
 
                                 Section {
-                                        NavigationLink(destination: InitialsTable()) {
+                                        NavigationLink(destination: InitialTable()) {
                                                 Label("Jyutping Initials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
-                                        NavigationLink(destination: FinalsTable()) {
+                                        NavigationLink(destination: FinalTable()) {
                                                 Label("Jyutping Finals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
-                                        NavigationLink(destination: TonesTable()) {
+                                        NavigationLink(destination: ToneTable()) {
                                                 Label("Jyutping Tones", systemImage: "bell")
                                         }
                                 }

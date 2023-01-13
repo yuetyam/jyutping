@@ -64,11 +64,11 @@ struct MacContentView: View {
                         case .search:
                                 MacSearchView().background(visualEffect)
                         case .initials:
-                                InitialsTable().background(visualEffect)
+                                InitialTable().background(visualEffect)
                         case .finals:
-                                FinalsTable().background(visualEffect)
+                                FinalTable().background(visualEffect)
                         case .tones:
-                                TonesTable().background(visualEffect)
+                                ToneTable().background(visualEffect)
                         case .numbers:
                                 NumbersView().background(visualEffect)
                         case .stemsBranches:

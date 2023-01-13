@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct FinalsTable: View {
+struct FinalTable: View {
 
         #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSize

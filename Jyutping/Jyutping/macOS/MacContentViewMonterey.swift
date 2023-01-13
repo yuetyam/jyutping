@@ -35,17 +35,17 @@ struct MacContentViewMonterey: View {
                                                 Label("Search", systemImage: "magnifyingglass")
                                         }
                                         NavigationLink {
-                                                InitialsTable().background(visualEffect)
+                                                InitialTable().background(visualEffect)
                                         } label: {
                                                 Label("Initials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
                                         NavigationLink {
-                                                FinalsTable().background(visualEffect)
+                                                FinalTable().background(visualEffect)
                                         } label: {
                                                 Label("Finals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
                                         NavigationLink {
-                                                TonesTable().background(visualEffect)
+                                                ToneTable().background(visualEffect)
                                         } label: {
                                                 Label("Tones", systemImage: "bell")
                                         }

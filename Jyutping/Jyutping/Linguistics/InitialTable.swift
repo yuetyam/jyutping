@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct InitialsTable: View {
+struct InitialTable: View {
 
         #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSize
@@ -20,23 +20,37 @@ struct InitialsTable: View {
                 #endif
         }
 
+        private let footnote: String = "註：零聲母無標記"
+
         var body: some View {
                 let dataLines: [String] = sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
                 let width: CGFloat = responsiveWidth
                 #if os(macOS)
                 ScrollView {
-                        VStack {
-                                ForEach(0..<dataLines.count, id: \.self) { index in
-                                        MacTableCell(dataLines[index], placeholder: "gwaa4")
+                        LazyVStack(spacing: 2) {
+                                VStack {
+                                        ForEach(0..<dataLines.count, id: \.self) { index in
+                                                MacTableCell(dataLines[index], placeholder: "gwaa4")
+                                        }
+                                }
+                                .block()
+                                HStack {
+                                        Text(verbatim: footnote).font(.copilot).textSelection(.enabled).foregroundColor(.secondary)
+                                        Spacer()
                                 }
                         }
-                        .block()
                         .padding()
                 }
                 .navigationTitle("Jyutping Initials")
                 #else
-                List(0..<dataLines.count, id: \.self) { index in
-                        IOSTableCell(dataLines[index], placeholder: "瓜 gwaa4", width: width)
+                List {
+                        Section {
+                                ForEach(0..<dataLines.count, id: \.self) { index in
+                                        IOSTableCell(dataLines[index], placeholder: "瓜 gwaa4", width: width)
+                                }
+                        } footer: {
+                                Text(verbatim: footnote).textCase(nil)
+                        }
                 }
                 .navigationTitle("Jyutping Initials")
                 .navigationBarTitleDisplayMode(.inline)
