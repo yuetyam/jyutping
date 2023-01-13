@@ -45,26 +45,21 @@ struct SafariLink<Content: View>: View {
 
 struct ExtendedLinkLabel: View {
 
-        init(icon: String = "link.circle", title: String, footnote: String? = nil, address: String, symbol: String = "safari") {
+        init(icon: String = "globe.asia.australia", title: String, footnote: String? = nil, address: String, symbol: String = "safari") {
                 self.icon = icon
-                self.text = Text(verbatim: title)
+                self.title = title
                 self.footnote = footnote ?? address
                 self.address = address
                 self.symbol = symbol
-        }
-        init(icon: String = "link.circle", text: Text, footnote: String? = nil, address: String, symbol: String = "safari") {
-                self.icon = icon
-                self.text = text
-                self.footnote = footnote ?? address
-                self.address = address
-                self.symbol = symbol
+                self.url = URL(string: address) ?? AppMaster.websiteURL
         }
 
         private let icon: String
-        private let text: Text
+        private let title: String
         private let footnote: String
         private let address: String
         private let symbol: String
+        private let url: URL
 
         @State private var isSafariSheetPresented: Bool = false
 
@@ -72,31 +67,28 @@ struct ExtendedLinkLabel: View {
                 Button {
                         isSafariSheetPresented = true
                 } label: {
-                        HStack(spacing: 16) {
-                                Image(systemName: icon)
-                                VStack(spacing: 2) {
-                                        HStack {
-                                                text.foregroundColor(.primary)
-                                                Spacer()
-                                        }
-                                        HStack {
+                        Label {
+                                HStack {
+                                        VStack(alignment: .leading, spacing: 1) {
+                                                Text(verbatim: title).foregroundColor(.primary)
                                                 Text(verbatim: footnote)
                                                         .minimumScaleFactor(0.5)
                                                         .lineLimit(1)
                                                         .font(.caption2)
                                                         .foregroundColor(.secondary)
-                                                Spacer()
                                         }
+                                        Spacer()
+                                        Image(systemName: symbol).foregroundColor(.secondary)
                                 }
-                                Spacer()
-                                Image(systemName: symbol).foregroundColor(.secondary)
+                        } icon: {
+                                Image(systemName: icon)
                         }
                 }
                 .contextMenu {
                         URLCopyButton(address)
                 }
                 .sheet(isPresented: $isSafariSheetPresented) {
-                        SafariView(url: URL(string: address)!)
+                        SafariView(url: url)
                 }
         }
 }
