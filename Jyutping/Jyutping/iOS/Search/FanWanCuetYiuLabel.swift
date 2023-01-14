@@ -8,7 +8,7 @@ struct FanWanCuetYiuLabel: View {
         var body: some View {
                 VStack(alignment: .leading) {
                         HStack {
-                                Text(verbatim: "位屬")
+                                Text(verbatim: "讀音")
                                 Text.separator
                                 Text(verbatim: entry.abstract)
                         }
