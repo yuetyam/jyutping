@@ -92,10 +92,17 @@ struct Speech {
                         DispatchQueue.main.async {
                                 synthesizer.speak(utterance)
                         }
-                } else {
+                } else if let englishVoice = englishVoice {
                         let text: String = "This device does not contain a Cantonese voice, please add it and try again."
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = englishVoice
+                        DispatchQueue.main.async {
+                                synthesizer.speak(utterance)
+                        }
+                } else {
+                        let text: String = "No Voice"
+                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                        utterance.voice = currentDefaultVoice
                         DispatchQueue.main.async {
                                 synthesizer.speak(utterance)
                         }
@@ -120,7 +127,8 @@ struct Speech {
                         return AVSpeechSynthesisVoice(language: "zh-CN")
                 }
         }()
-        private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU") ?? AVSpeechSynthesisVoice(language: nil)
+        private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU")
+        private static let currentDefaultVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: nil)
 }
 
 enum VoiceStatus: Int {
