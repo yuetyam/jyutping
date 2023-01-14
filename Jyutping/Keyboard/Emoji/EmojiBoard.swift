@@ -80,7 +80,7 @@ final class Indicator: UIButton {
                 let indicatorImageView: UIImageView = UIImageView()
                 addSubview(indicatorImageView)
                 indicatorImageView.translatesAutoresizingMaskIntoConstraints = false
-                let baseInset: CGFloat = 20
+                let baseInset: CGFloat = 10
                 let topInset: CGFloat = {
                         switch index {
                         case 2:
@@ -107,7 +107,7 @@ final class Indicator: UIButton {
                 }()
                 NSLayoutConstraint.activate([
                         indicatorImageView.topAnchor.constraint(equalTo: topAnchor, constant: topInset),
-                        indicatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                        indicatorImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
                         indicatorImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
                         indicatorImageView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
