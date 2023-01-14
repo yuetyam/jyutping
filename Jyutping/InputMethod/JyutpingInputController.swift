@@ -131,7 +131,7 @@ final class JyutpingInputController: IMKInputController {
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(frame, display: true)
                 default:
-                        let candidateUI = NSHostingController(rootView: CandidateView().environmentObject(displayObject).visualEffect())
+                        let candidateUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject).visualEffect())
                         window?.contentView?.addSubview(candidateUI.view)
                         candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,

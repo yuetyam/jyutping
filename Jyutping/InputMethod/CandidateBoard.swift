@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CandidateView: View {
+struct CandidateBoard: View {
 
         @EnvironmentObject private var displayObject: DisplayObject
 
