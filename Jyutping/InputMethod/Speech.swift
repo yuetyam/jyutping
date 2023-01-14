@@ -6,10 +6,10 @@ struct Speech {
         private static let voice: AVSpeechSynthesisVoice? = {
                 if let iOS16_macOS13_Premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-HK.Sinji") {
                         return iOS16_macOS13_Premium
-                } else if let iOS15Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Sin-Ji-premium") {
-                        return iOS15Enhanced
                 } else if let macOS12Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.speech.synthesis.voice.sinji.premium") {
                         return macOS12Enhanced
+                } else if let iOS15Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Sin-Ji-premium") {
+                        return iOS15Enhanced
                 } else if let iOS16Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.voice.enhanced.zh-HK.Sinji") {
                         return iOS16Enhanced
                 } else {
@@ -42,7 +42,7 @@ struct Speech {
 
         static let voiceStatus: VoiceStatus = {
                 guard let voiceQuality = voice?.quality else { return .unavailable }
-                if #available(iOS 16.0, macOS 13.0, *) {
+                if #available(macOS 13.0, *) {
                         switch voiceQuality {
                         case .default:
                                 return .regular
@@ -92,10 +92,17 @@ struct Speech {
                         DispatchQueue.main.async {
                                 synthesizer.speak(utterance)
                         }
-                } else {
+                } else if let englishVoice = englishVoice {
                         let text: String = "This device does not contain a Cantonese voice, please add it and try again."
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = englishVoice
+                        DispatchQueue.main.async {
+                                synthesizer.speak(utterance)
+                        }
+                } else {
+                        let text: String = "No Voice"
+                        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
+                        utterance.voice = currentDefaultVoice
                         DispatchQueue.main.async {
                                 synthesizer.speak(utterance)
                         }
@@ -120,7 +127,8 @@ struct Speech {
                         return AVSpeechSynthesisVoice(language: "zh-CN")
                 }
         }()
-        private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU") ?? AVSpeechSynthesisVoice(language: nil)
+        private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU")
+        private static let currentDefaultVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: nil)
 }
 
 enum VoiceStatus: Int {
