@@ -4,6 +4,7 @@ struct SettingsKeys {
         static let CandidatePageSize: String = "CandidatePageSize"
         static let CandidateLineSpacing: String = "CandidateLineSpacing"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
+        static let ToneDisplayColor: String = "ToneDisplayColor"
 
 
         static let CandidateFontSize: String = "CandidateFontSize"
@@ -41,6 +42,24 @@ enum ToneDisplayStyle: Int {
                         return .superscript
                 case 4:
                         return .subscript
+                default:
+                        return .normal
+                }
+        }
+}
+enum ToneDisplayColor: Int {
+
+        case normal = 1
+
+        /// 相對更淺
+        case shallow = 2
+
+        static func color(of value: Int) -> ToneDisplayColor {
+                switch value {
+                case 1:
+                        return .normal
+                case 2:
+                        return .shallow
                 default:
                         return .normal
                 }
@@ -132,6 +151,22 @@ struct AppSettings {
         static func updateToneDisplayStyle(to value: Int) {
                 let newStyle: ToneDisplayStyle = ToneDisplayStyle.style(of: value)
                 toneDisplayStyle = newStyle
+        }
+
+        private(set) static var toneDisplayColor: ToneDisplayColor = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ToneDisplayColor)
+                switch savedValue {
+                case 1:
+                        return .normal
+                case 2:
+                        return .shallow
+                default:
+                        return .normal
+                }
+        }()
+        static func updateToneDisplayColor(to value: Int) {
+                let newColor: ToneDisplayColor = ToneDisplayColor.color(of: value)
+                toneDisplayColor = newColor
         }
 
 

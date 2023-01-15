@@ -5,6 +5,7 @@ struct CandidateLayoutPreferencesView: View {
         @AppStorage(SettingsKeys.CandidatePageSize) private var pageSize: Int = AppSettings.displayCandidatePageSize
         @AppStorage(SettingsKeys.CandidateLineSpacing) private var lineSpacing: Int = AppSettings.candidateLineSpacing
         @AppStorage(SettingsKeys.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
+        @AppStorage(SettingsKeys.ToneDisplayColor) private var toneDisplayColor: Int = AppSettings.toneDisplayColor.rawValue
 
         var body: some View {
                 ScrollView {
@@ -36,16 +37,29 @@ struct CandidateLayoutPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Comment(Jyutping) Tones Display", selection: $toneDisplayStyle) {
-                                                Text("Normal").tag(1)
-                                                Text("No Tones").tag(2)
-                                                Text("Superscript").tag(3)
-                                                Text("Subscript").tag(4)
+                                        Picker("Comment(Jyutping) Tone Style", selection: $toneDisplayStyle) {
+                                                Text("CommentToneStyle.Normal").tag(1)
+                                                Text("CommentToneStyle.NoTones").tag(2)
+                                                Text("CommentToneStyle.Superscript").tag(3)
+                                                Text("CommentToneStyle.Subscript").tag(4)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
                                         .onChange(of: toneDisplayStyle) { newValue in
                                                 AppSettings.updateToneDisplayStyle(to: newValue)
+                                        }
+                                        Spacer()
+                                }
+                                .block()
+                                HStack {
+                                        Picker("Comment(Jyutping) Tone Color", selection: $toneDisplayColor) {
+                                                Text("CommentToneColor.Normal").tag(1)
+                                                Text("CommentToneColor.Shallow").tag(2)
+                                        }
+                                        .scaledToFit()
+                                        .pickerStyle(.radioGroup)
+                                        .onChange(of: toneDisplayColor) { newValue in
+                                                AppSettings.updateToneDisplayColor(to: newValue)
                                         }
                                         Spacer()
                                 }

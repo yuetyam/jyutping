@@ -16,11 +16,16 @@
 // CandidateLayoutPreferencesView
 "Candidate Count Per Page" = "Candidate Count Per Page";
 "Candidate Line Spacing" = "Candidate Line Spacing";
-"Comment(Jyutping) Tones Display" = "Comment(Jyutping) Tones Display";
-"Normal" = "Normal";
-"No Tones" = "No Tones";
-"Superscript" = "Superscript";
-"Subscript" = "Subscript";
+
+"Comment(Jyutping) Tone Style" = "Comment(Jyutping) Tone Style";
+"CommentToneStyle.Normal" = "Normal";
+"CommentToneStyle.NoTones" = "No Tones";
+"CommentToneStyle.Superscript" = "Superscript";
+"CommentToneStyle.Subscript" = "Subscript";
+
+"Comment(Jyutping) Tone Color" = "Comment(Jyutping) Tone Color";
+"CommentToneColor.Normal" = "Normal";
+"CommentToneColor.Shallow" = "Shallow";
 
 
 // CandidateFontPreferencesView

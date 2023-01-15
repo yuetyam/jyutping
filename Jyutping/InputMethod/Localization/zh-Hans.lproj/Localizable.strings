@@ -16,11 +16,16 @@
 // CandidateLayoutPreferencesView
 "Candidate Count Per Page" = "每䈎候選詞數目";
 "Candidate Line Spacing" = "候選詞行間隔";
-"Comment(Jyutping) Tones Display" = "候選詞註釋(粵拼)聲調樣式";
-"Normal" = "正常";
-"No Tones" = "無聲調";
-"Superscript" = "上標";
-"Subscript" = "下標";
+
+"Comment(Jyutping) Tone Style" = "候選詞註釋(粵拼)聲調樣式";
+"CommentToneStyle.Normal" = "正常";
+"CommentToneStyle.NoTones" = "無聲調";
+"CommentToneStyle.Superscript" = "上標";
+"CommentToneStyle.Subscript" = "下標";
+
+"Comment(Jyutping) Tone Color" = "候選詞註釋(粵拼)聲調顏色";
+"CommentToneColor.Normal" = "正常";
+"CommentToneColor.Shallow" = "相對更淺";;
 
 
 // CandidateFontPreferencesView
