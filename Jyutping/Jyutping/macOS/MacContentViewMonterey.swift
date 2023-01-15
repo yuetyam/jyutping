@@ -6,24 +6,23 @@ import SwiftUI
 struct MacContentViewMonterey: View {
 
         @State private var isMacSearchViewActive: Bool = true
-        private let visualEffect: VisualEffect = VisualEffect()
 
         var body: some View {
                 NavigationView {
                         List {
                                 Section {
                                         NavigationLink {
-                                                MacInputMethodInstallationView().background(visualEffect)
+                                                MacInputMethodInstallationView().visualEffect()
                                         } label: {
                                                 Label("Install Input Method", systemImage: "laptopcomputer.and.arrow.down")
                                         }
                                         NavigationLink {
-                                                MacIntroductionsView().background(visualEffect)
+                                                MacIntroductionsView().visualEffect()
                                         } label: {
                                                 Label("Introductions", systemImage: "book")
                                         }
                                         NavigationLink {
-                                                MacExpressionsView().textSelection(.enabled).background(visualEffect)
+                                                MacExpressionsView().textSelection(.enabled).visualEffect()
                                         } label: {
                                                 Label("Cantonese Expressions", systemImage: "text.quote")
                                         }
@@ -31,21 +30,21 @@ struct MacContentViewMonterey: View {
                                         Text("Input Method").textCase(nil)
                                 }
                                 Section {
-                                        NavigationLink(destination: MacSearchView().background(visualEffect), isActive: $isMacSearchViewActive) {
+                                        NavigationLink(destination: MacSearchView().visualEffect(), isActive: $isMacSearchViewActive) {
                                                 Label("Search", systemImage: "magnifyingglass")
                                         }
                                         NavigationLink {
-                                                InitialTable().background(visualEffect)
+                                                InitialTable().visualEffect()
                                         } label: {
                                                 Label("Initials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
                                         NavigationLink {
-                                                FinalTable().background(visualEffect)
+                                                FinalTable().visualEffect()
                                         } label: {
                                                 Label("Finals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
                                         NavigationLink {
-                                                ToneTable().background(visualEffect)
+                                                ToneTable().visualEffect()
                                         } label: {
                                                 Label("Tones", systemImage: "bell")
                                         }
@@ -54,27 +53,27 @@ struct MacContentViewMonterey: View {
                                 }
                                 Section {
                                         NavigationLink {
-                                                NumbersView().background(visualEffect)
+                                                NumbersView().visualEffect()
                                         } label: {
                                                 Label("Numbers", systemImage: "number")
                                         }
                                         NavigationLink {
-                                                StemsBranchesView().background(visualEffect)
+                                                StemsBranchesView().visualEffect()
                                         } label: {
                                                 Label("Stems and Branches", systemImage: "timelapse")
                                         }
                                         NavigationLink {
-                                                ChineseZodiacView().background(visualEffect)
+                                                ChineseZodiacView().visualEffect()
                                         } label: {
                                                 Label("Chinese Zodiac", systemImage: "hare")
                                         }
                                         NavigationLink {
-                                                SolarTermsView().background(visualEffect)
+                                                SolarTermsView().visualEffect()
                                         } label: {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }
                                         NavigationLink {
-                                                MacResourcesView().background(visualEffect)
+                                                MacResourcesView().visualEffect()
                                         } label: {
                                                 Label("Resources", systemImage: "globe.asia.australia")
                                         }
@@ -83,7 +82,7 @@ struct MacContentViewMonterey: View {
                                 }
                                 Section {
                                         NavigationLink {
-                                                MacAboutView().background(visualEffect)
+                                                MacAboutView().visualEffect()
                                         } label: {
                                                 Label("About", systemImage: "info.circle")
                                         }
