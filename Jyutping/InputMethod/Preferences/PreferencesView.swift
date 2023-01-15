@@ -47,23 +47,25 @@ struct PreferencesView: View {
                         } detail: {
                                 switch selection {
                                 case .layouts:
-                                        CandidateLayoutPreferencesView()
+                                        CandidateLayoutPreferencesView().visualEffect()
                                 case .fonts:
-                                        CandidateFontPreferencesView()
+                                        CandidateFontPreferencesView().visualEffect()
                                 case .hotkeys:
-                                        HotkeysView()
+                                        HotkeysView().visualEffect()
                                 case .about:
-                                        AboutView()
+                                        AboutView().visualEffect()
                                 }
                         }
                 } else {
                         NavigationView {
                                 List {
                                         Section {
-                                                NavigationLink(destination: CandidateLayoutPreferencesView(), isActive: $isLayoutsViewActive) {
+                                                NavigationLink(destination: CandidateLayoutPreferencesView().visualEffect(), isActive: $isLayoutsViewActive) {
                                                         Label("PreferencesView.NavigationTitle.Layouts", systemImage: "list.number")
                                                 }
-                                                NavigationLink(destination: CandidateFontPreferencesView()) {
+                                                NavigationLink {
+                                                        CandidateFontPreferencesView().visualEffect()
+                                                } label: {
                                                         Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat")
                                                 }
                                         } header: {
@@ -71,7 +73,9 @@ struct PreferencesView: View {
                                         }
 
                                         Section {
-                                                NavigationLink(destination: HotkeysView()) {
+                                                NavigationLink {
+                                                        HotkeysView().visualEffect()
+                                                } label: {
                                                         Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard")
                                                 }
                                         } header: {
@@ -79,7 +83,9 @@ struct PreferencesView: View {
                                         }
 
                                         Section {
-                                                NavigationLink(destination: AboutView()) {
+                                                NavigationLink {
+                                                        AboutView().visualEffect()
+                                                } label: {
                                                         Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle")
                                                 }
                                         } header: {

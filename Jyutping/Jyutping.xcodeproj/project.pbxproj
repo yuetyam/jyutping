@@ -10,6 +10,7 @@
 		3783D9B42973BED8000B3332 /* SerialNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */; };
 		3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B52973BEF5000B3332 /* CommentLabel.swift */; };
 		3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B72973CB55000B3332 /* CandidateLabel.swift */; };
+		3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B92973CDAA000B3332 /* VisualEffect.swift */; };
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
 		37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */; };
@@ -214,6 +215,7 @@
 		3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialNumberLabel.swift; sourceTree = "<group>"; };
 		3783D9B52973BEF5000B3332 /* CommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		3783D9B72973CB55000B3332 /* CandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
+		3783D9B92973CDAA000B3332 /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
 		37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
@@ -806,6 +808,7 @@
 				37FC1B82294DFB6600D7153F /* Info.plist */,
 				37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */,
 				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
+				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
 				3783D9B22973BEC0000B3332 /* CandidateViews */,
 				37FC1B95294DFC5300D7153F /* Direction.swift */,
 				37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */,
@@ -859,10 +862,10 @@
 		37FC1B87294DFC5300D7153F /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				37FC1B88294DFC5300D7153F /* HotkeysView.swift */,
+				37FC1B8B294DFC5300D7153F /* PreferencesView.swift */,
 				37FC1B89294DFC5300D7153F /* CandidateLayoutPreferencesView.swift */,
 				37FC1B8A294DFC5300D7153F /* CandidateFontPreferencesView.swift */,
-				37FC1B8B294DFC5300D7153F /* PreferencesView.swift */,
+				37FC1B88294DFC5300D7153F /* HotkeysView.swift */,
 				37FC1B8C294DFC5300D7153F /* AboutView.swift */,
 				37FC1B8D294DFC5300D7153F /* AppSettings.swift */,
 			);
@@ -1293,6 +1296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */,
 				37FC1BB8294DFC5400D7153F /* StringExtensions.swift in Sources */,
 				37FC1BB0294DFC5300D7153F /* Representative.swift in Sources */,
 				3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */,

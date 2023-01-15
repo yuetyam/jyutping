@@ -5,26 +5,6 @@ import CommonExtensions
 import CharacterSets
 import CoreIME
 
-private struct VisualEffect: NSViewRepresentable {
-        // https://developer.apple.com/forums/thread/694837
-        func makeNSView(context: Self.Context) -> NSView {
-                let view = NSVisualEffectView()
-                view.state = NSVisualEffectView.State.active
-                return view
-        }
-        func updateNSView(_ nsView: NSView, context: Context) { }
-}
-
-private extension View {
-        func visualEffect() -> some View {
-                return self.background(
-                        VisualEffect()
-                                .cornerRadius(8)
-                                .shadow(radius: 4)
-                )
-        }
-}
-
 @objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
 
@@ -59,7 +39,7 @@ final class JyutpingInputController: IMKInputController {
                 visualEffectView.state = .active
                 preferencesWindow?.contentView = visualEffectView
 
-                let pane = NSHostingController(rootView: PreferencesView().background(VisualEffect()))
+                let pane = NSHostingController(rootView: PreferencesView())
                 preferencesWindow?.contentView?.addSubview(pane.view)
                 pane.view.translatesAutoresizingMaskIntoConstraints = false
                 if let topAnchor = preferencesWindow?.contentView?.topAnchor,
@@ -96,7 +76,7 @@ final class JyutpingInputController: IMKInputController {
                 }
                 switch inputState {
                 case .instantSettings:
-                        let settingsUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject).visualEffect())
+                        let settingsUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject))
                         window?.contentView?.addSubview(settingsUI.view)
                         settingsUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
@@ -131,7 +111,7 @@ final class JyutpingInputController: IMKInputController {
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(frame, display: true)
                 default:
-                        let candidateUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject).visualEffect())
+                        let candidateUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject))
                         window?.contentView?.addSubview(candidateUI.view)
                         candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
