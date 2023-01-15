@@ -11,6 +11,7 @@
 		3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B52973BEF5000B3332 /* CommentLabel.swift */; };
 		3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B72973CB55000B3332 /* CandidateLabel.swift */; };
 		3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B92973CDAA000B3332 /* VisualEffect.swift */; };
+		3783D9BC29741B06000B3332 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9BB29741B06000B3332 /* Constant.swift */; };
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
 		37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */; };
@@ -216,6 +217,7 @@
 		3783D9B52973BEF5000B3332 /* CommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		3783D9B72973CB55000B3332 /* CandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
 		3783D9B92973CDAA000B3332 /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
+		3783D9BB29741B06000B3332 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
 		37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
@@ -868,6 +870,7 @@
 				37FC1B88294DFC5300D7153F /* HotkeysView.swift */,
 				37FC1B8C294DFC5300D7153F /* AboutView.swift */,
 				37FC1B8D294DFC5300D7153F /* AppSettings.swift */,
+				3783D9BB29741B06000B3332 /* Constant.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -1297,6 +1300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */,
+				3783D9BC29741B06000B3332 /* Constant.swift in Sources */,
 				37FC1BB8294DFC5400D7153F /* StringExtensions.swift in Sources */,
 				37FC1BB0294DFC5300D7153F /* Representative.swift in Sources */,
 				3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */,

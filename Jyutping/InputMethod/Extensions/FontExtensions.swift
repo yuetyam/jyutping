@@ -2,7 +2,12 @@ import SwiftUI
 
 extension Font {
 
-        private(set) static var candidate: Font = {
+        private(set) static var candidate: Font = candidateFont()
+        static func updateCandidateFont() {
+                candidate = candidateFont()
+        }
+
+        private static func candidateFont() -> Font {
                 let size: CGFloat = AppSettings.candidateFontSize
                 switch AppSettings.candidateFontMode {
                 case .default:
@@ -13,181 +18,200 @@ extension Font {
                         let names: [String] = AppSettings.customCandidateFonts
                         let primary: String? = names.first
                         let fallbacks: [String] = Array<String>(names.dropFirst())
-                        return constructCandidateFont(primary: primary, fallbacks: fallbacks, size: size)
+                        return customCandidateFont(primary: primary, fallbacks: fallbacks, size: size)
                 }
-        }()
-        static func updateCandidateFont(isSystemFontPreferred: Bool = false, primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) {
-                let fontSize: CGFloat = size ?? AppSettings.candidateFontSize
-                candidate = {
-                        if isSystemFontPreferred {
-                                return Font.system(size: fontSize)
-                        } else {
-                                return constructCandidateFont(primary: primary, fallbacks: fallbacks, size: fontSize)
-                        }
-                }()
         }
-
-        private static func constructCandidateFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) -> Font {
-                let fontSize: CGFloat = size ?? AppSettings.candidateFontSize
-                guard let primary else { return constructDefaultCandidateFont(size: fontSize) }
-                guard let _ = NSFont(name: primary, size: fontSize) else { return constructDefaultCandidateFont(size: fontSize) }
+        private static func customCandidateFont(primary: String?, fallbacks: [String], size: CGFloat) -> Font {
+                guard let primary else { return constructDefaultCandidateFont(size: size) }
+                guard found(font: primary) else { return constructDefaultCandidateFont(size: size) }
                 let foundFallbacks: [String] = {
-                        guard let fallbacks else { return [] }
                         guard !(fallbacks.isEmpty) else { return [] }
                         var available: [String] = []
                         for name in fallbacks where name != primary {
-                                if let _ = NSFont(name: name, size: fontSize) {
+                                if found(font: name) {
                                         available.append(name)
                                 }
                         }
                         return available.uniqued()
                 }()
-                if foundFallbacks.isEmpty {
-                        return Font.custom(primary, size: fontSize)
-                } else {
-                        return pairFonts(primary: primary, fallbacks: foundFallbacks, fontSize: fontSize)
-                }
+                guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size)}
+                return pairFonts(primary: primary, fallbacks: foundFallbacks, size: size)
         }
-        private static func constructDefaultCandidateFont(size: CGFloat? = nil) -> Font {
-                let fontSize: CGFloat = size ?? AppSettings.candidateFontSize
-                let SFPro: String = "SF Pro"
-                let HelveticaNeue: String = "Helvetica Neue"
-                let PingFangHK: String = "PingFang HK"
-                let isSFProAvailable: Bool = {
-                        if let _ = NSFont(name: SFPro, size: fontSize) {
-                                return true
-                        } else {
-                                return false
-                        }
-                }()
-                let primary: String = isSFProAvailable ? SFPro : HelveticaNeue
+        private static func constructDefaultCandidateFont(size: CGFloat) -> Font {
+                let isSFProAvailable: Bool = found(font: Constant.SFPro)
+                let primary: String = isSFProAvailable ? Constant.SFPro : Constant.HelveticaNeue
                 let fallbacks: [String] = {
-                        var list: [String] = isSFProAvailable ? [HelveticaNeue] : []
+                        var list: [String] = isSFProAvailable ? [Constant.HelveticaNeue] : []
                         let firstWave: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                         for name in firstWave {
-                                if let _ = NSFont(name: name, size: fontSize) {
+                                if found(font: name) {
                                         list.append(name)
                                         break
                                 }
                         }
-                        list.append(PingFangHK)
+                        list.append(Constant.PingFangHK)
                         let planFonts: [String] = ["Plangothic P1", "Plangothic P2"]
-                        for item in planFonts {
-                                if let _ = NSFont(name: item, size: fontSize) {
-                                        list.append(item)
+                        for name in planFonts {
+                                if found(font: name) {
+                                        list.append(name)
                                 }
                         }
-                        let IMingFonts: [String] = ["I.MingCP", "I.Ming"]
-                        for item in IMingFonts {
-                                if let _ = NSFont(name: item, size: fontSize) {
-                                        list.append(item)
+                        let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
+                        for name in IMingFonts {
+                                if found(font: name) {
+                                        list.append(name)
                                         break
                                 }
                         }
-                        if let _ = NSFont(name: "HanaMinB", size: fontSize) {
-                                list.append("HanaMinB")
+                        if found(font: Constant.HanaMinB) {
+                                list.append(Constant.HanaMinB)
                         }
                         return list
                 }()
-                let shouldUseSystemFonts: Bool = fallbacks == [PingFangHK]
-                if shouldUseSystemFonts {
-                        return Font.system(size: fontSize)
-                } else {
-                        return pairFonts(primary: primary, fallbacks: fallbacks, fontSize: fontSize)
-                }
+                let shouldUseSystemFont: Bool = fallbacks == [Constant.PingFangHK]
+                guard !shouldUseSystemFont else { return Font.system(size: size)}
+                return pairFonts(primary: primary, fallbacks: fallbacks, size: size)
         }
+}
 
-        private(set) static var comment: Font = {
-                let commentFontSize: CGFloat = AppSettings.commentFontSize
-                switch AppSettings.commentFontMode {
-                case .default:
-                        return constructFont(size: commentFontSize)
-                case .system:
-                        return Font.system(size: commentFontSize, design: .monospaced)
-                case .custom:
-                        let names: [String] = AppSettings.customCommentFonts
-                        let primary: String? = names.first
-                        let fallbacks: [String] = Array<String>(names.dropFirst())
-                        return constructFont(primary: primary, fallbacks: fallbacks, size: commentFontSize)
-                }
-        }()
-        static func updateCommentFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) {
-                let commentFontSize: CGFloat = size ?? AppSettings.commentFontSize
-                let toneFontSize: CGFloat = commentFontSize - 4
-                comment = constructFont(primary: primary, fallbacks: fallbacks, size: commentFontSize)
-                commentTone = constructFont(primary: primary, fallbacks: fallbacks, size: toneFontSize)
-        }
+extension Font {
+
+        private(set) static var comment: Font = commentFont(size: AppSettings.commentFontSize)
         private(set) static var commentTone: Font = {
                 let toneFontSize: CGFloat = AppSettings.commentFontSize - 4
+                return commentFont(size: toneFontSize)
+        }()
+        static func updateCommentFont() {
+                let commentFontSize: CGFloat = AppSettings.commentFontSize
+                let toneFontSize: CGFloat = commentFontSize - 4
+                comment = commentFont(size: commentFontSize)
+                commentTone = commentFont(size: toneFontSize)
+        }
+
+        private static func commentFont(size: CGFloat) -> Font {
                 switch AppSettings.commentFontMode {
                 case .default:
-                        return constructFont(size: toneFontSize)
+                        return constructDefaultCommentFont(size: size)
                 case .system:
-                        return Font.system(size: toneFontSize, design: .monospaced)
+                        return Font.system(size: size)
                 case .custom:
                         let names: [String] = AppSettings.customCommentFonts
                         let primary: String? = names.first
                         let fallbacks: [String] = Array<String>(names.dropFirst())
-                        return constructFont(primary: primary, fallbacks: fallbacks, size: toneFontSize)
+                        return customCommentFont(primary: primary, fallbacks: fallbacks, size: size)
                 }
-        }()
-        private(set) static var label: Font = {
-                let labelFontSize: CGFloat = AppSettings.labelFontSize
-                switch AppSettings.labelFontMode {
-                case .default:
-                        return Font.system(size: labelFontSize).monospacedDigit()
-                case .system:
-                        return Font.system(size: labelFontSize).monospacedDigit()
-                case .custom:
-                        let names: [String] = AppSettings.customLabelFonts
-                        let primary: String? = names.first
-                        let fallbacks: [String] = Array<String>(names.dropFirst())
-                        return constructFont(primary: primary, fallbacks: fallbacks, size: labelFontSize)
-                }
-        }()
-        static func updateLabelFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat? = nil) {
-                let labelFontSize: CGFloat = size ?? AppSettings.labelFontSize
-                switch AppSettings.labelFontMode {
-                case .default:
-                        label = Font.system(size: labelFontSize).monospacedDigit()
-                case .system:
-                        label = Font.system(size: labelFontSize).monospacedDigit()
-                case .custom:
-                        label = constructFont(primary: primary, fallbacks: fallbacks, size: labelFontSize)
-                }
-                labelDot = Font.system(size: labelFontSize)
         }
-        private(set) static var labelDot: Font = Font.system(size: AppSettings.labelFontSize)
-
-        private static func constructFont(primary: String? = nil, fallbacks: [String]? = nil, size: CGFloat) -> Font {
-                guard let primary else { return Font.system(size: size, design: .monospaced) }
-                guard let _ = NSFont(name: primary, size: size) else { return Font.system(size: size, design: .monospaced) }
+        private static func customCommentFont(primary: String?, fallbacks: [String], size: CGFloat) -> Font {
+                guard let primary else { return constructDefaultCommentFont(size: size) }
+                guard found(font: primary) else { return constructDefaultCommentFont(size: size) }
                 let foundFallbacks: [String] = {
-                        guard let fallbacks else { return [] }
                         guard !(fallbacks.isEmpty) else { return [] }
                         var available: [String] = []
                         for name in fallbacks where name != primary {
-                                if let _ = NSFont(name: name, size: size) {
+                                if found(font: name) {
                                         available.append(name)
                                 }
                         }
                         return available.uniqued()
                 }()
-                if foundFallbacks.isEmpty {
-                        return Font.custom(primary, size: size)
-                } else {
-                        return pairFonts(primary: primary, fallbacks: foundFallbacks, fontSize: size)
+                guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size)}
+                return pairFonts(primary: primary, fallbacks: foundFallbacks, size: size)
+        }
+        private static func constructDefaultCommentFont(size: CGFloat) -> Font {
+                let fallback: Font = Font.system(size: size, design: .monospaced)
+                let isSFMonoAvailable: Bool = found(font: Constant.SFMono)
+                guard isSFMonoAvailable else { return fallback }
+                let primary: String = Constant.SFMono
+                let fallbacks: [String] = {
+                        let isSFProAvailable: Bool = found(font: Constant.SFPro)
+                        var list: [String] = isSFProAvailable ? [Constant.SFPro, Constant.HelveticaNeue] : [Constant.HelveticaNeue]
+                        let firstWave: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+                        for name in firstWave {
+                                if found(font: name) {
+                                        list.append(name)
+                                        break
+                                }
+                        }
+                        list.append(Constant.PingFangHK)
+                        let planFonts: [String] = ["Plangothic P1", "Plangothic P2"]
+                        for name in planFonts {
+                                if found(font: name) {
+                                        list.append(name)
+                                }
+                        }
+                        let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
+                        for name in IMingFonts {
+                                if found(font: name) {
+                                        list.append(name)
+                                        break
+                                }
+                        }
+                        if found(font: Constant.HanaMinB) {
+                                list.append(Constant.HanaMinB)
+                        }
+                        return list
+                }()
+                let shouldFallback: Bool = fallbacks.count == 2
+                guard !shouldFallback else { return fallback }
+                return pairFonts(primary: primary, fallbacks: fallbacks, size: size)
+        }
+}
+
+extension Font {
+
+        private(set) static var label: Font = labelFont(size: AppSettings.labelFontSize)
+        private(set) static var labelDot: Font = Font.system(size: AppSettings.labelFontSize)
+        static func updateLabelFont() {
+                let size: CGFloat = AppSettings.labelFontSize
+                label = labelFont(size: size)
+                labelDot = Font.system(size: size)
+        }
+        private static func labelFont(size: CGFloat) -> Font {
+                switch AppSettings.labelFontMode {
+                case .default:
+                        return Font.system(size: size).monospacedDigit()
+                case .system:
+                        return Font.system(size: size).monospacedDigit()
+                case .custom:
+                        let names: [String] = AppSettings.customLabelFonts
+                        let primary: String? = names.first
+                        let fallbacks: [String] = Array<String>(names.dropFirst())
+                        return customLabelFont(primary: primary, fallbacks: fallbacks, size: size)
                 }
         }
+        private static func customLabelFont(primary: String?, fallbacks: [String], size: CGFloat) -> Font {
+                let fallback: Font = Font.system(size: size).monospacedDigit()
+                guard let primary else { return fallback }
+                guard found(font: primary) else { return fallback }
+                let foundFallbacks: [String] = {
+                        guard !(fallbacks.isEmpty) else { return [] }
+                        var available: [String] = []
+                        for name in fallbacks where name != primary {
+                                if found(font: name) {
+                                        available.append(name)
+                                }
+                        }
+                        return available.uniqued()
+                }()
+                guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size) }
+                return pairFonts(primary: primary, fallbacks: foundFallbacks, size: size)
+        }
+}
 
-        private static func pairFonts(primary: String, fallbacks: [String], fontSize: CGFloat) -> Font {
-                let originalFont: NSFont = NSFont(name: primary, size: fontSize) ?? .systemFont(ofSize: fontSize)
+private extension Font {
+
+        static func found(font fontName: String) -> Bool {
+                return NSFont(name: fontName, size: 15) != nil
+        }
+
+        static func pairFonts(primary: String, fallbacks: [String], size: CGFloat) -> Font {
+                let originalFont: NSFont = NSFont(name: primary, size: size) ?? .systemFont(ofSize: size)
                 let originalDescriptor: NSFontDescriptor = originalFont.fontDescriptor
                 let fallbackDescriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
                         return originalDescriptor.addingAttributes([.name: fontName])
                 }
                 let pairedDescriptor: NSFontDescriptor = originalDescriptor.addingAttributes([.cascadeList : fallbackDescriptors])
-                let pairedFont: NSFont = NSFont(descriptor: pairedDescriptor, size: fontSize) ?? .systemFont(ofSize: fontSize)
+                let pairedFont: NSFont = NSFont(descriptor: pairedDescriptor, size: size) ?? .systemFont(ofSize: size)
                 return Font(pairedFont)
         }
 }

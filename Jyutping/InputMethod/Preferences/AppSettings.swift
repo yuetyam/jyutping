@@ -135,18 +135,7 @@ struct AppSettings {
 
         private(set) static var toneDisplayStyle: ToneDisplayStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ToneDisplayStyle)
-                switch savedValue {
-                case 0, 1:
-                        return .normal
-                case 2:
-                        return .noTones
-                case 3:
-                        return .superscript
-                case 4:
-                        return .subscript
-                default:
-                        return .normal
-                }
+                return ToneDisplayStyle.style(of: savedValue)
         }()
         static func updateToneDisplayStyle(to value: Int) {
                 let newStyle: ToneDisplayStyle = ToneDisplayStyle.style(of: value)
@@ -155,14 +144,7 @@ struct AppSettings {
 
         private(set) static var toneDisplayColor: ToneDisplayColor = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ToneDisplayColor)
-                switch savedValue {
-                case 1:
-                        return .normal
-                case 2:
-                        return .shallow
-                default:
-                        return .normal
-                }
+                return ToneDisplayColor.color(of: savedValue)
         }()
         static func updateToneDisplayColor(to value: Int) {
                 let newColor: ToneDisplayColor = ToneDisplayColor.color(of: value)
@@ -182,6 +164,7 @@ struct AppSettings {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 candidateFontSize = CGFloat(newFontSize)
+                Font.updateCandidateFont()
         }
 
         private(set) static var commentFontSize: CGFloat = {
@@ -194,6 +177,7 @@ struct AppSettings {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 commentFontSize = CGFloat(newFontSize)
+                Font.updateCommentFont()
         }
 
         private(set) static var labelFontSize: CGFloat = {
@@ -206,6 +190,7 @@ struct AppSettings {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 labelFontSize = CGFloat(newFontSize)
+                Font.updateLabelFont()
         }
 
         private static func fontSizeValidity(of value: Int) -> Bool {
@@ -217,107 +202,71 @@ struct AppSettings {
 
         private(set) static var candidateFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidateFontMode)
-                switch savedValue {
-                case 0, 1:
-                        return .default
-                case 2:
-                        return .system
-                case 3:
-                        return .custom
-                default:
-                        return .default
-                }
+                return FontMode.mode(of: savedValue)
         }()
         static func updateCandidateFontMode(to newMode: FontMode) {
                 candidateFontMode = newMode
+                Font.updateCandidateFont()
         }
 
         private(set) static var commentFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CommentFontMode)
-                switch savedValue {
-                case 0, 1:
-                        return .default
-                case 2:
-                        return .system
-                case 3:
-                        return .custom
-                default:
-                        return .default
-                }
+                return FontMode.mode(of: savedValue)
         }()
         static func updateCommentFontMode(to newMode: FontMode) {
                 commentFontMode = newMode
+                Font.updateCommentFont()
         }
 
         private(set) static var labelFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.LabelFontMode)
-                switch savedValue {
-                case 0, 1:
-                        return .default
-                case 2:
-                        return .system
-                case 3:
-                        return .custom
-                default:
-                        return .default
-                }
+                return FontMode.mode(of: savedValue)
         }()
         static func updateLabelFontMode(to newMode: FontMode) {
                 labelFontMode = newMode
+                Font.updateLabelFont()
         }
 
 
         // MARK: - Custom Fonts
 
         private(set) static var customCandidateFonts: [String] = {
-                let fallback: [String] = ["PingFang HK"]
-                let savedValue = UserDefaults.standard.string(forKey: SettingsKeys.CustomCandidateFontList)
-                guard let fontList = savedValue else { return fallback }
-                let names: [String] = fontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
+                let fallback: [String] = [Constant.PingFangHK]
+                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKeys.CustomCandidateFontList)
+                guard let savedNames else { return fallback }
+                let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
                 return names
         }()
         static func updateCustomCandidateFonts(to fontNames: [String]) {
-                let names: [String] = fontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
-                guard !(names.isEmpty) else { return }
-                customCandidateFonts = names
-                let primary: String? = names.first
-                let fallbacks: [String] = Array<String>(names.dropFirst())
-                Font.updateCandidateFont(primary: primary, fallbacks: fallbacks, size: candidateFontSize)
+                customCandidateFonts = fontNames
+                Font.updateCandidateFont()
         }
 
         private(set) static var customCommentFonts: [String] = {
-                let fallback: [String] = ["Helvetica Neue"]
-                let savedValue = UserDefaults.standard.string(forKey: SettingsKeys.CustomCommentFontList)
-                guard let fontList = savedValue else { return fallback }
-                let names: [String] = fontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
+                let fallback: [String] = [Constant.HelveticaNeue]
+                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKeys.CustomCommentFontList)
+                guard let savedNames else { return fallback }
+                let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
                 return names
         }()
         static func updateCustomCommentFonts(to fontNames: [String]) {
-                let names: [String] = fontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
-                guard !(names.isEmpty) else { return }
-                customCommentFonts = names
-                let primary: String? = names.first
-                let fallbacks: [String] = Array<String>(names.dropFirst())
-                Font.updateCommentFont(primary: primary, fallbacks: fallbacks, size: commentFontSize)
+                customCommentFonts = fontNames
+                Font.updateCommentFont()
         }
 
         private(set) static var customLabelFonts: [String] = {
-                let fallback: [String] = ["Menlo"]
-                let savedValue = UserDefaults.standard.string(forKey: SettingsKeys.CustomLabelFontList)
-                guard let fontList = savedValue else { return fallback }
-                let names: [String] = fontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
+                let fallback: [String] = [Constant.Menlo]
+                let savedNames = UserDefaults.standard.string(forKey: SettingsKeys.CustomLabelFontList)
+                guard let savedNames else { return fallback }
+                let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
                 return names
         }()
         static func updateCustomLabelFonts(to fontNames: [String]) {
-                let names: [String] = fontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
-                guard !(names.isEmpty) else { return }
-                customLabelFonts = names
-                let primary: String? = names.first
-                let fallbacks: [String] = Array<String>(names.dropFirst())
-                Font.updateLabelFont(primary: primary, fallbacks: fallbacks, size: labelFontSize)
+                customLabelFonts = fontNames
+                Font.updateLabelFont()
         }
 
 

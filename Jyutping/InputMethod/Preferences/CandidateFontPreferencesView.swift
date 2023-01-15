@@ -3,6 +3,9 @@ import CommonExtensions
 
 struct CandidateFontPreferencesView: View {
 
+        private let minusImage: Image = Image(systemName: "minus")
+        private let plusImage: Image = Image(systemName: "plus")
+
         @AppStorage(SettingsKeys.CandidateFontSize) private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
         @AppStorage(SettingsKeys.CommentFontSize) private var commentFontSize: Int = Int(AppSettings.commentFontSize)
         @AppStorage(SettingsKeys.LabelFontSize) private var labelFontSize: Int = Int(AppSettings.labelFontSize)
@@ -15,7 +18,7 @@ struct CandidateFontPreferencesView: View {
         @AppStorage(SettingsKeys.CustomCommentFontList) private var customCommentFontList: String = AppSettings.customCommentFonts.joined(separator: ",")
         @AppStorage(SettingsKeys.CustomLabelFontList) private var customLabelFontList: String = AppSettings.customLabelFonts.joined(separator: ",")
 
-        @State private var availableFonts: [String] = ["PingFang HK", "Helvetica Neue", "Menlo"]
+        @State private var availableFonts: [String] = [Constant.HelveticaNeue, Constant.Menlo, Constant.PingFangHK]
         @State private var customCandidateFonts: [String] = AppSettings.customCandidateFonts
         @State private var customCommentFonts: [String] = AppSettings.customCommentFonts
         @State private var customLabelFonts: [String] = AppSettings.customLabelFonts
@@ -32,9 +35,8 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: candidateFontSize) { newFontSize in
-                                                        AppSettings.updateCandidateFontSize(to: newFontSize)
                                                         DispatchQueue.preferences.async {
-                                                                Font.updateCandidateFont(size: CGFloat(newFontSize))
+                                                                AppSettings.updateCandidateFontSize(to: newFontSize)
                                                         }
                                                 }
                                                 Spacer()
@@ -49,16 +51,8 @@ struct CandidateFontPreferencesView: View {
                                                 .scaledToFit()
                                                 .onChange(of: candidateFontMode) { newValue in
                                                         let newMode: FontMode = FontMode.mode(of: newValue)
-                                                        AppSettings.updateCandidateFontMode(to: newMode)
                                                         DispatchQueue.preferences.async {
-                                                                switch newMode {
-                                                                case .default:
-                                                                        Font.updateCandidateFont()
-                                                                case .system:
-                                                                        Font.updateCandidateFont(isSystemFontPreferred: true)
-                                                                case .custom:
-                                                                        Font.updateCandidateFont()
-                                                                }
+                                                                AppSettings.updateCandidateFontMode(to: newMode)
                                                         }
                                                 }
                                                 Spacer()
@@ -70,7 +64,7 @@ struct CandidateFontPreferencesView: View {
                                                                         Button {
                                                                                 customCandidateFonts.remove(at: index)
                                                                         } label: {
-                                                                                Image(systemName: "minus")
+                                                                                minusImage
                                                                         }
                                                                         Picker("Font", selection: $customCandidateFonts[index]) {
                                                                                 ForEach(0..<availableFonts.count, id: \.self) {
@@ -87,18 +81,19 @@ struct CandidateFontPreferencesView: View {
                                                         }
                                                         HStack {
                                                                 Button {
-                                                                        customCandidateFonts.append("PingFang HK")
+                                                                        customCandidateFonts.append(Constant.PingFangHK)
                                                                 } label: {
-                                                                        Image(systemName: "plus")
+                                                                        plusImage
                                                                 }
                                                                 Spacer()
                                                         }
                                                         Spacer()
                                                 }
                                                 .onChange(of: customCandidateFonts) { newFontNames in
-                                                        customCandidateFontList = newFontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued().joined(separator: ",")
+                                                        let newList: [String] = newFontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                                                        customCandidateFontList = newList.joined(separator: ",")
                                                         DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomCandidateFonts(to: newFontNames)
+                                                                AppSettings.updateCustomCandidateFonts(to: newList)
                                                         }
                                                 }
                                         }
@@ -113,9 +108,8 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: commentFontSize) { newFontSize in
-                                                        AppSettings.updateCommentFontSize(to: newFontSize)
                                                         DispatchQueue.preferences.async {
-                                                                Font.updateCommentFont(size: CGFloat(newFontSize))
+                                                                AppSettings.updateCommentFontSize(to: newFontSize)
                                                         }
                                                 }
                                                 Spacer()
@@ -130,16 +124,8 @@ struct CandidateFontPreferencesView: View {
                                                 .scaledToFit()
                                                 .onChange(of: commentFontMode) { newValue in
                                                         let newMode: FontMode = FontMode.mode(of: newValue)
-                                                        AppSettings.updateCommentFontMode(to: newMode)
                                                         DispatchQueue.preferences.async {
-                                                                switch newMode {
-                                                                case .default:
-                                                                        Font.updateCommentFont()
-                                                                case .system:
-                                                                        Font.updateCommentFont()
-                                                                case .custom:
-                                                                        Font.updateCommentFont()
-                                                                }
+                                                                AppSettings.updateCommentFontMode(to: newMode)
                                                         }
                                                 }
                                                 Spacer()
@@ -151,7 +137,7 @@ struct CandidateFontPreferencesView: View {
                                                                         Button {
                                                                                 customCommentFonts.remove(at: index)
                                                                         } label: {
-                                                                                Image(systemName: "minus")
+                                                                                minusImage
                                                                         }
                                                                         Picker("Font", selection: $customCommentFonts[index]) {
                                                                                 ForEach(0..<availableFonts.count, id: \.self) {
@@ -168,18 +154,19 @@ struct CandidateFontPreferencesView: View {
                                                         }
                                                         HStack {
                                                                 Button {
-                                                                        customCommentFonts.append("Helvetica Neue")
+                                                                        customCommentFonts.append(Constant.HelveticaNeue)
                                                                 } label: {
-                                                                        Image(systemName: "plus")
+                                                                        plusImage
                                                                 }
                                                                 Spacer()
                                                         }
                                                         Spacer()
                                                 }
                                                 .onChange(of: customCommentFonts) { newFontNames in
-                                                        customCommentFontList = newFontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued().joined(separator: ",")
+                                                        let newList: [String] = newFontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                                                        customCommentFontList = newList.joined(separator: ",")
                                                         DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomCommentFonts(to: newFontNames)
+                                                                AppSettings.updateCustomCommentFonts(to: newList)
                                                         }
                                                 }
                                         }
@@ -194,9 +181,8 @@ struct CandidateFontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: labelFontSize) { newFontSize in
-                                                        AppSettings.updateLabelFontSize(to: newFontSize)
                                                         DispatchQueue.preferences.async {
-                                                                Font.updateLabelFont(size: CGFloat(newFontSize))
+                                                                AppSettings.updateLabelFontSize(to: newFontSize)
                                                         }
                                                 }
                                                 Spacer()
@@ -211,16 +197,8 @@ struct CandidateFontPreferencesView: View {
                                                 .scaledToFit()
                                                 .onChange(of: labelFontMode) { newValue in
                                                         let newMode: FontMode = FontMode.mode(of: newValue)
-                                                        AppSettings.updateLabelFontMode(to: newMode)
                                                         DispatchQueue.preferences.async {
-                                                                switch newMode {
-                                                                case .default:
-                                                                        Font.updateLabelFont()
-                                                                case .system:
-                                                                        Font.updateLabelFont()
-                                                                case .custom:
-                                                                        Font.updateLabelFont()
-                                                                }
+                                                                AppSettings.updateLabelFontMode(to: newMode)
                                                         }
                                                 }
                                                 Spacer()
@@ -232,7 +210,7 @@ struct CandidateFontPreferencesView: View {
                                                                         Button {
                                                                                 customLabelFonts.remove(at: index)
                                                                         } label: {
-                                                                                Image(systemName: "minus")
+                                                                                minusImage
                                                                         }
                                                                         Picker("Font", selection: $customLabelFonts[index]) {
                                                                                 ForEach(0..<availableFonts.count, id: \.self) {
@@ -249,18 +227,19 @@ struct CandidateFontPreferencesView: View {
                                                         }
                                                         HStack {
                                                                 Button {
-                                                                        customLabelFonts.append("Menlo")
+                                                                        customLabelFonts.append(Constant.Menlo)
                                                                 } label: {
-                                                                        Image(systemName: "plus")
+                                                                        plusImage
                                                                 }
                                                                 Spacer()
                                                         }
                                                         Spacer()
                                                 }
                                                 .onChange(of: customLabelFonts) { newFontNames in
-                                                        customLabelFontList = newFontNames.filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued().joined(separator: ",")
+                                                        let newList: [String] = newFontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                                                        customLabelFontList = newList.joined(separator: ",")
                                                         DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomLabelFonts(to: newFontNames)
+                                                                AppSettings.updateCustomLabelFonts(to: newList)
                                                         }
                                                 }
                                         }
@@ -286,14 +265,14 @@ struct CandidateFontPreferencesView: View {
                         availableFonts = {
                                 let allAvailableFonts: [String] = NSFontManager.shared.availableFontFamilies
                                 let filtered: [String] = allAvailableFonts
-                                        .filter({ !($0.isEmpty || $0.hasPrefix(".") || noGoodList.contains($0)) })
                                         .map({ $0.trimmed() })
+                                        .filter({ !($0.isEmpty || $0.hasPrefix(".") || noGoodList.contains($0)) })
                                         .uniqued()
                                 return filtered
                         }()
-                        customCandidateFonts = customCandidateFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
-                        customCommentFonts = customCommentFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
-                        customLabelFonts = customLabelFontList.components(separatedBy: ",").filter({ !($0.isEmpty) }).map({ $0.trimmed() }).uniqued()
+                        customCandidateFonts = customCandidateFontList.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                        customCommentFonts = customCommentFontList.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                        customLabelFonts = customLabelFontList.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 }
                 .navigationTitle("PreferencesView.NavigationTitle.Fonts")
         }
