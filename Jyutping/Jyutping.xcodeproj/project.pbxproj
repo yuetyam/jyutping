@@ -12,6 +12,7 @@
 		3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B72973CB55000B3332 /* CandidateLabel.swift */; };
 		3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B92973CDAA000B3332 /* VisualEffect.swift */; };
 		3783D9BC29741B06000B3332 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9BB29741B06000B3332 /* Constant.swift */; };
+		3783D9BE29744036000B3332 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9BD29744036000B3332 /* Constant.swift */; };
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
 		37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */; };
@@ -218,6 +219,7 @@
 		3783D9B72973CB55000B3332 /* CandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
 		3783D9B92973CDAA000B3332 /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		3783D9BB29741B06000B3332 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		3783D9BD29744036000B3332 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
 		37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */,
 				37D7BD83294CB500006A6ADD /* AppMaster.swift */,
 				37D7BD5E294CB1EE006A6ADD /* Device.swift */,
+				3783D9BD29744036000B3332 /* Constant.swift */,
 				37D7BD9F294CB865006A6ADD /* Speech */,
 				37D7BD85294CB61F006A6ADD /* Linguistics */,
 				37D7BD72294CB440006A6ADD /* Materials */,
@@ -1212,6 +1215,7 @@
 				37D7BD80294CB4B3006A6ADD /* MenuCopyButton.swift in Sources */,
 				37D7BD98294CB6C6006A6ADD /* MacSearchView.swift in Sources */,
 				37D7BD99294CB6C6006A6ADD /* MacResourcesView.swift in Sources */,
+				3783D9BE29744036000B3332 /* Constant.swift in Sources */,
 				37D7BDB1294CB9F3006A6ADD /* JyutpingView.swift in Sources */,
 				37D7BD7A294CB440006A6ADD /* TermView.swift in Sources */,
 				37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */,

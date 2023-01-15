@@ -32,55 +32,45 @@ extension Font {
 
         #if os(macOS)
         private static func constructFont(size: CGFloat) -> Font {
-                let SFPro: String = "SF Pro"
-                let HelveticaNeue: String = "Helvetica Neue"
-                let PingFangHK: String = "PingFang HK"
-                let isSFProAvailable: Bool = {
-                        if let _ = NSFont(name: SFPro, size: size) {
-                                return true
-                        } else {
-                                return false
-                        }
-                }()
-                let primary: String = isSFProAvailable ? SFPro : HelveticaNeue
+                let isSFProAvailable: Bool = found(font: Constant.SFPro)
+                let primary: String = isSFProAvailable ? Constant.SFPro : Constant.HelveticaNeue
                 let fallbacks: [String] = {
-                        var list: [String] = isSFProAvailable ? [HelveticaNeue] : []
+                        var list: [String] = isSFProAvailable ? [Constant.HelveticaNeue] : []
                         let firstWave: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                         for name in firstWave {
-                                if let _ = NSFont(name: name, size: size) {
+                                if found(font: name) {
                                         list.append(name)
                                         break
                                 }
                         }
-                        list.append(PingFangHK)
+                        list.append(Constant.PingFangHK)
                         let planFonts: [String] = ["Plangothic P1", "Plangothic P2"]
-                        for item in planFonts {
-                                if let _ = NSFont(name: item, size: size) {
-                                        list.append(item)
+                        for name in planFonts {
+                                if found(font: name) {
+                                        list.append(name)
                                 }
                         }
-                        let IMingFonts: [String] = ["I.MingCP", "I.Ming"]
-                        for item in IMingFonts {
-                                if let _ = NSFont(name: item, size: size) {
-                                        list.append(item)
+                        let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
+                        for name in IMingFonts {
+                                if found(font: name) {
+                                        list.append(name)
                                         break
                                 }
                         }
-                        if let _ = NSFont(name: "HanaMinB", size: size) {
-                                list.append("HanaMinB")
+                        if found(font: Constant.HanaMinB) {
+                                list.append(Constant.HanaMinB)
                         }
                         return list
                 }()
-                let shouldUseSystemFonts: Bool = (fallbacks.count == 1)
-                if shouldUseSystemFonts {
-                        return Font.system(size: size)
-                } else {
-                        return pairFonts(primary: primary, fallbacks: fallbacks, size: size)
-                }
+                let shouldUseSystemFont: Bool = fallbacks == [Constant.PingFangHK]
+                guard !shouldUseSystemFont else { return Font.system(size: size) }
+                return pairFonts(primary: primary, fallbacks: fallbacks, size: size)
         }
-        #endif
 
-        #if os(macOS)
+        private static func found(font fontName: String) -> Bool {
+                return NSFont(name: fontName, size: 15) != nil
+        }
+
         private static func pairFonts(primary name: String, fallbacks: [String], size: CGFloat) -> Font {
                 let originalFont: NSFont = NSFont(name: name, size: size) ?? .systemFont(ofSize: size)
                 let originalDescriptor: NSFontDescriptor = originalFont.fontDescriptor
