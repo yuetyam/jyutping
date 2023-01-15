@@ -25,10 +25,10 @@
 "No Jyutpings" = "無";
 
 "Jyutping Tones Display" = "粵拼聲調樣式";
-"TonesDisplayStyle1" = "正常　 :   jyut6 ping3";
-"TonesDisplayStyle2" = "無聲調 :   jyut ping";
-"TonesDisplayStyle3" = "上標　 :   jyut⁶ ping³";
-"TonesDisplayStyle4" = "下標　 :   jyut₆ ping₃";
+"ToneDisplayStyle.Option1" = "正常　 :   jyut6 ping3";
+"ToneDisplayStyle.Option2" = "無聲調 :   jyut ping";
+"ToneDisplayStyle.Option3" = "上標　 :   jyut⁶ ping³";
+"ToneDisplayStyle.Option4" = "下標　 :   jyut₆ ping₃";
 
 "Space Double Tapping Shortcut" = "雙擊空格鍵快捷動作";
 "Insert a period" = "輸入一個句號「。」";

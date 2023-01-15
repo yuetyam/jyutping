@@ -25,10 +25,10 @@
 "No Jyutpings" = "None";
 
 "Jyutping Tones Display" = "Jyutping Tones Display";
-"TonesDisplayStyle1" = "Normal         :  jyut6 ping3";
-"TonesDisplayStyle2" = "No Tones     :  jyut ping";
-"TonesDisplayStyle3" = "Superscript :  jyut⁶ ping³";
-"TonesDisplayStyle4" = "Subscript    :  jyut₆ ping₃";
+"ToneDisplayStyle.Option1" = "Normal         :  jyut6 ping3";
+"ToneDisplayStyle.Option2" = "No Tones     :  jyut ping";
+"ToneDisplayStyle.Option3" = "Superscript :  jyut⁶ ping³";
+"ToneDisplayStyle.Option4" = "Subscript    :  jyut₆ ping₃";
 
 "Space Double Tapping Shortcut" = "Space Double Tapping Shortcut";
 "Insert a period" = "Insert a Period (Full Stop)";
