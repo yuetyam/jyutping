@@ -16,7 +16,7 @@ struct CandidateLabel: View {
                 ZStack(alignment: .leading) {
                         HStack(spacing: 14) {
                                 SerialNumberLabel(index)
-                                Text(verbatim: placeholder.text).font(.candidate)
+                                Text(verbatim: placeholder.text).font(.candidate).disableAnimation()
                                 if let comment = placeholder.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
                                 }
@@ -27,7 +27,7 @@ struct CandidateLabel: View {
                         .hidden()
                         HStack(spacing: 14) {
                                 SerialNumberLabel(index)
-                                Text(verbatim: candidate.text).font(.candidate).animation(nil, value: 0)
+                                Text(verbatim: candidate.text).font(.candidate).disableAnimation()
                                 if let comment = candidate.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
                                 }
@@ -40,5 +40,15 @@ struct CandidateLabel: View {
                 .padding(.vertical, lineSpacing)
                 .foregroundColor(foreColor)
                 .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+        }
+}
+
+private extension Text {
+
+        // https://www.avanderlee.com/swiftui/disable-animations-transactions
+        func disableAnimation() -> some View {
+                return self.transaction { transaction in
+                        transaction.animation = nil
+                }
         }
 }
