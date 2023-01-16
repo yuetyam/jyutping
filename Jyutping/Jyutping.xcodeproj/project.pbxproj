@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
 		3783D9B42973BED8000B3332 /* SerialNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */; };
 		3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B52973BEF5000B3332 /* CommentLabel.swift */; };
 		3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B72973CB55000B3332 /* CandidateLabel.swift */; };
@@ -214,6 +215,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
 		3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialNumberLabel.swift; sourceTree = "<group>"; };
 		3783D9B52973BEF5000B3332 /* CommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		3783D9B72973CB55000B3332 /* CandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
@@ -693,6 +695,7 @@
 			isa = PBXGroup;
 			children = (
 				37D7BD90294CB6C6006A6ADD /* MacSearchView.swift */,
+				378020CF29752C31002F6E0A /* RomanizationLabelView.swift */,
 				37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */,
 				37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */,
 				37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */,
@@ -1212,6 +1215,7 @@
 				37D7BD84294CB500006A6ADD /* AppMaster.swift in Sources */,
 				37D7BD9C294CB6C6006A6ADD /* MacAboutView.swift in Sources */,
 				37D7BDAF294CB9F3006A6ADD /* IOSContentView.swift in Sources */,
+				378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */,
 				37D7BD80294CB4B3006A6ADD /* MenuCopyButton.swift in Sources */,
 				37D7BD98294CB6C6006A6ADD /* MacSearchView.swift in Sources */,
 				37D7BD99294CB6C6006A6ADD /* MacResourcesView.swift in Sources */,
