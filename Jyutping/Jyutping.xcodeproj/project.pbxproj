@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
+		378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* RomanizationLabel.swift */; };
 		3783D9B42973BED8000B3332 /* SerialNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */; };
 		3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B52973BEF5000B3332 /* CommentLabel.swift */; };
 		3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B72973CB55000B3332 /* CandidateLabel.swift */; };
@@ -216,6 +217,7 @@
 
 /* Begin PBXFileReference section */
 		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
+		378020D129752EA6002F6E0A /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialNumberLabel.swift; sourceTree = "<group>"; };
 		3783D9B52973BEF5000B3332 /* CommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		3783D9B72973CB55000B3332 /* CandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				37B6BDB8296EA2510008B9F0 /* SearchView.swift */,
+				378020D129752EA6002F6E0A /* RomanizationLabel.swift */,
 				37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */,
 				37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */,
 				37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */,
@@ -1202,6 +1205,7 @@
 				37D7BD8D294CB61F006A6ADD /* FinalTable.swift in Sources */,
 				37D7BD9D294CB6C6006A6ADD /* MacIntroductionsView.swift in Sources */,
 				37D7BDB7294CB9F3006A6ADD /* HomeView.swift in Sources */,
+				378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */,
 				37D7BD5B294CB182006A6ADD /* Syllable2IPA.swift in Sources */,
 				37D7BD7C294CB440006A6ADD /* Term.swift in Sources */,
 				37D7BD97294CB6C6006A6ADD /* MacInputMethodInstallationView.swift in Sources */,
