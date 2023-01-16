@@ -1,13 +1,13 @@
-/// Romanization syllable to IPA
+/// Jyutping romanization syllable to IPA
 struct Syllable2IPA {
 
         static func IPAText(_ syllable: String) -> String {
                 lazy var fallback: String = "[ ? ]"
-                guard syllable != "?" else { return fallback }
-                guard !syllable.contains(" ") else { return fallback }
-                guard let withoutTone: String = IPASyllable(syllable) else { return fallback }
+                let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
+                guard !isBadFormat else { return fallback }
+                guard let phone: String = IPAPhone(syllable) else { return fallback }
                 guard let tone: String = IPATone(syllable) else { return fallback }
-                return "[ " + withoutTone + " " + tone + " ]"
+                return "[ " + phone + " " + tone + " ]"
         }
 
         private static func IPATone(_ syllable: String) -> String? {
@@ -25,42 +25,51 @@ struct Syllable2IPA {
                         return "˩˧"
                 case "6":
                         return "˨"
+                case "7":
+                        return "˥"
+                case "8":
+                        return "˧"
+                case "9":
+                        return "˨"
                 default:
                         return nil
                 }
         }
 
-        private static func IPASyllable(_ syllable: String) -> String? {
-                let withoutTone = syllable.dropLast()
-                guard !withoutTone.isEmpty else { return nil }
-                guard !withoutTone.contains(" ") else { return nil }
-
-                switch withoutTone {
+        private static func IPAPhone(_ syllable: String) -> String? {
+                let phone = syllable.dropLast()
+                guard !phone.isEmpty else { return nil }
+                switch phone {
                 case "m":
                         return "m̩"
                 case "ng":
                         return "ŋ̩"
                 case let text where text.hasPrefix("ng") || text.hasPrefix("gw") || text.hasPrefix("kw"):
-                        let initialText = withoutTone.dropLast(withoutTone.count - 2)
+                        let initialText = phone.dropLast(phone.count - 2)
                         let initial: String = String(initialText)
-                        guard let IPAInitial: String = InitialsMap[initial] else { return nil }
+                        guard let IPAInitial: String = dualInitialsMap[initial] else { return nil }
                         let final: String = String(text.dropFirst(2))
-                        guard let IPAFinal: String = FinalsMap[final] else { return nil }
+                        guard let IPAFinal: String = FinalMap[final] else { return nil }
                         return IPAInitial + IPAFinal
                 default:
-                        let initial: String = String(withoutTone.first!)
-                        if let IPAInitial: String = InitialsMap[initial] {
-                                let final: String = String(withoutTone.dropFirst())
-                                guard let IPAFinal: String = FinalsMap[final] else { return nil }
+                        let initial = phone.first!
+                        if let IPAInitial: String = InitialMap[initial] {
+                                let final: String = String(phone.dropFirst())
+                                guard let IPAFinal: String = FinalMap[final] else { return nil }
                                 return IPAInitial + IPAFinal
                         } else {
-                                let final: String = String(withoutTone)
-                                return FinalsMap[final]
+                                let final: String = String(phone)
+                                return FinalMap[final]
                         }
                 }
         }
 
-        private static let InitialsMap: [String: String] = [
+        private static let dualInitialsMap: [String: String] = [
+                "ng": "ŋ",
+                "gw": "kʷ",
+                "kw": "kʷʰ"
+        ]
+        private static let InitialMap: [Character: String] = [
                 "b": "p",
                 "p": "pʰ",
                 "m": "m",
@@ -71,18 +80,17 @@ struct Syllable2IPA {
                 "l": "l",
                 "g": "k",
                 "k": "kʰ",
-                "ng": "ŋ",
+                // "ng": "ŋ",
                 "h": "h",
-                "gw": "kʷ",
-                "kw": "kʷʰ",
+                // "gw": "kʷ",
+                // "kw": "kʷʰ",
                 "w": "w",
                 "z": "t͡ʃ",
                 "c": "t͡ʃʰ",
                 "s": "ʃ",
                 "j": "j"
         ]
-
-        private static let FinalsMap: [String: String] = [
+        private static let FinalMap: [String: String] = [
                 "aa": "aː",
                 "aai": "aːi",
                 "aau": "aːu",
@@ -144,5 +152,4 @@ struct Syllable2IPA {
                 "yun": "yːn",
                 "yut": "yːt̚"
         ]
-
 }
