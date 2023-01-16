@@ -16,7 +16,7 @@ struct FanWanCuetYiuLabel: View {
                                 HStack {
                                         Text(verbatim: "轉寫")
                                         Text.separator
-                                        Text(verbatim: entry.romanization).font(.body)
+                                        Text(verbatim: entry.romanization).font(.fixedWidth)
                                 }
                                 Text(verbatim: entry.ipa).font(.body).foregroundColor(.secondary)
                                 Spacer()
