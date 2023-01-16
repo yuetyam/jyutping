@@ -34,9 +34,15 @@ extension DataMaster {
 public struct FanWanCuetYiu: Hashable {
 
         fileprivate init(word: String, romanization: String, initial: String, final: String, yamyeung: String, tone: String, rhyme: String, interpretation: String) {
-                let syllable: String = romanization.replacingOccurrences(of: "7", with: "1").replacingOccurrences(of: "8", with: "3").replacingOccurrences(of: "9", with: "6")
+                let romanization: String = romanization
+                        .replacingOccurrences(of: "7", with: "1", options: [.anchored, .backwards])
+                        .replacingOccurrences(of: "8", with: "1", options: [.anchored, .backwards])
+                        .replacingOccurrences(of: "9", with: "6", options: [.anchored, .backwards])
+                let interpretation: String = interpretation
+                        .replacingOccurrences(of: "[同上](", with: "", options: .anchored)
+                        .replacingOccurrences(of: ")", with: "", options: [.anchored, .backwards])
                 self.word = word
-                self.romanization = syllable
+                self.romanization = romanization
                 self.initial = initial
                 self.final = final
                 self.yamyeung = yamyeung
@@ -44,8 +50,8 @@ public struct FanWanCuetYiu: Hashable {
                 self.rhyme = rhyme
                 self.interpretation = interpretation
                 self.abstract = "\(initial)母　\(final)韻　\(yamyeung)\(tone)　\(rhyme)小韻"
-                self.ipa = OldCantonese.IPA(for: syllable)
-                self.jyutping = OldCantonese.jyutping(for: syllable)
+                self.ipa = OldCantonese.IPA(for: romanization)
+                self.jyutping = OldCantonese.jyutping(for: romanization)
         }
 
         public let word: String
