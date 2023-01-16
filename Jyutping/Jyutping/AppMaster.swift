@@ -116,4 +116,13 @@ extension AppMaster {
                 let character = text.first!
                 return FanWanCuetYiu.match(for: character)
         }
+
+        /// Lookup GwongWan for the given text
+        /// - Parameter text: Character to Lookup
+        /// - Returns: An Array of GwongWan
+        static func lookupGwongWan(for text: String) -> [GwongWan] {
+                guard text.count == 1 else { return [] }
+                let character = text.first!
+                return GwongWan.match(for: character)
+        }
 }

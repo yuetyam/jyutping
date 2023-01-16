@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
 		378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* RomanizationLabel.swift */; };
+		378020D42975A1D0002F6E0A /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D32975A1D0002F6E0A /* GwongWanView.swift */; };
+		378020D62975A6FC002F6E0A /* GwongWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D52975A6FC002F6E0A /* GwongWanLabel.swift */; };
 		3783D9B42973BED8000B3332 /* SerialNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */; };
 		3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B52973BEF5000B3332 /* CommentLabel.swift */; };
 		3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B72973CB55000B3332 /* CandidateLabel.swift */; };
@@ -218,6 +220,8 @@
 /* Begin PBXFileReference section */
 		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
 		378020D129752EA6002F6E0A /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
+		378020D32975A1D0002F6E0A /* GwongWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
+		378020D52975A6FC002F6E0A /* GwongWanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanLabel.swift; sourceTree = "<group>"; };
 		3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialNumberLabel.swift; sourceTree = "<group>"; };
 		3783D9B52973BEF5000B3332 /* CommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		3783D9B72973CB55000B3332 /* CandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
@@ -501,6 +505,7 @@
 				37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */,
 				37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */,
 				37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */,
+				378020D52975A6FC002F6E0A /* GwongWanLabel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -702,6 +707,7 @@
 				37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */,
 				37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */,
 				37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */,
+				378020D32975A1D0002F6E0A /* GwongWanView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1210,11 +1216,13 @@
 				37D7BD7C294CB440006A6ADD /* Term.swift in Sources */,
 				37D7BD97294CB6C6006A6ADD /* MacInputMethodInstallationView.swift in Sources */,
 				37D7BDB5294CB9F3006A6ADD /* ExpressionsView.swift in Sources */,
+				378020D42975A1D0002F6E0A /* GwongWanView.swift in Sources */,
 				37EF1957296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift in Sources */,
 				37E02E452955AB9900F7543F /* Text2SpeechView.swift in Sources */,
 				37EF1959296DBE1600A3F4C9 /* YingWaaFanWanView.swift in Sources */,
 				37D7BD81294CB4B3006A6ADD /* EnhancedLabel.swift in Sources */,
 				37D7BD5D294CB1A5006A6ADD /* Speech.swift in Sources */,
+				378020D62975A6FC002F6E0A /* GwongWanLabel.swift in Sources */,
 				37D7BD7B294CB440006A6ADD /* SolarTermsView.swift in Sources */,
 				37D7BD84294CB500006A6ADD /* AppMaster.swift in Sources */,
 				37D7BD9C294CB6C6006A6ADD /* MacAboutView.swift in Sources */,

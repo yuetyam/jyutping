@@ -11,9 +11,11 @@ struct SearchView: View {
         @State private var inputText: String = ""
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
+
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
+        @State private var gwongWanEntries: [GwongWan] = []
 
         var body: some View {
                 Section {
@@ -32,11 +34,13 @@ struct SearchView: View {
                                                 yingWaaEntries = []
                                                 choHokEntries = []
                                                 fanWanEntries = []
+                                                gwongWanEntries = []
                                                 return
                                         }
                                         yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
                                         choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
                                         fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
+                                        gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
                                         let search = AppMaster.lookup(text: trimmedInput)
                                         if search.romanizations.isEmpty {
                                                 cantonese = trimmedInput
@@ -87,6 +91,16 @@ struct SearchView: View {
                                 }
                         } header: {
                                 Text(verbatim: "《分韻撮要》　佚名　約明末清初").textCase(nil)
+                        }
+                        .textSelection(.enabled)
+                }
+                if !gwongWanEntries.isEmpty {
+                        Section {
+                                ForEach(0..<gwongWanEntries.count, id: \.self) { index in
+                                        GwongWanLabel(entry: gwongWanEntries[index])
+                                }
+                        } header: {
+                                Text(verbatim: "《大宋重修廣韻》").textCase(nil)
                         }
                         .textSelection(.enabled)
                 }

@@ -8,11 +8,13 @@ struct MacSearchView: View {
         @State private var inputText: String = ""
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
+
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
-        @State private var animationState: Int = 0
+        @State private var gwongWanEntries: [GwongWan] = []
 
+        @State private var animationState: Int = 0
         @FocusState private var isTextFieldFocused: Bool
 
         var body: some View {
@@ -33,11 +35,13 @@ struct MacSearchView: View {
                                                         yingWaaEntries = []
                                                         choHokEntries = []
                                                         fanWanEntries = []
+                                                        gwongWanEntries = []
                                                         return
                                                 }
                                                 yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
                                                 choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
                                                 fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
+                                                gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
                                                 let search = AppMaster.lookup(text: trimmedInput)
                                                 if search.romanizations.isEmpty {
                                                         cantonese = trimmedInput
@@ -125,6 +129,25 @@ struct MacSearchView: View {
                                                         ForEach(0..<fanWanEntries.count, id: \.self) { index in
                                                                 FanWanCuetYiuView(entry: fanWanEntries[index])
                                                                 if (index < fanWanEntries.count - 1) {
+                                                                        Divider()
+                                                                }
+                                                        }
+                                                }
+                                                .block()
+                                        }
+                                }
+                                if !gwongWanEntries.isEmpty {
+                                        VStack(spacing: 2) {
+                                                HStack {
+                                                        Text(verbatim: gwongWanEntries.first!.word)
+                                                        Text(verbatim: "《大宋重修廣韻》")
+                                                        Spacer()
+                                                }
+                                                .font(.copilot)
+                                                VStack {
+                                                        ForEach(0..<gwongWanEntries.count, id: \.self) { index in
+                                                                GwongWanView(entry: gwongWanEntries[index])
+                                                                if (index < gwongWanEntries.count - 1) {
                                                                         Divider()
                                                                 }
                                                         }
