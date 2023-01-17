@@ -40,6 +40,13 @@ public struct GwongWan: Hashable {
         public let interpretation: String
 
         public static func match(for character: Character) -> [GwongWan] {
+                let originalMatch = fetch(for: character)
+                guard originalMatch.isEmpty else { return originalMatch }
+                let traditionalText: String = String(character).convertedS2T()
+                let traditionalCharacter: Character = traditionalText.first ?? character
+                return fetch(for: traditionalCharacter)
+        }
+        private static func fetch(for character: Character) -> [GwongWan] {
                 return DataMaster.matchGwongWan(for: character).uniqued()
         }
 }

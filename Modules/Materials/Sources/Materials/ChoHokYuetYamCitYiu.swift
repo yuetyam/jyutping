@@ -1,12 +1,12 @@
 import Foundation
 import SQLite3
 
-extension DataMaster {
+private extension DataMaster {
 
         // CREATE TABLE chohoktable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, tone TEXT NOT NULL, faancit TEXT NOT NULL);
         static func matchChoHokYuetYamCitYiu(for character: Character) -> [ChoHokYuetYamCitYiu] {
-                let code: UInt32 = character.unicodeScalars.first?.value ?? 0xFFFFFF
                 var entries: [ChoHokYuetYamCitYiu] = []
+                guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
                 let queryString = "SELECT * FROM chohoktable WHERE code = \(code);"
                 var queryStatement: OpaquePointer? = nil
                 defer {
@@ -51,6 +51,13 @@ public struct ChoHokYuetYamCitYiu: Hashable {
         public let jyutping: String
 
         public static func match(for character: Character) -> [ChoHokYuetYamCitYiu] {
+                let originalMatch = fetch(for: character)
+                guard originalMatch.isEmpty else { return originalMatch }
+                let traditionalText: String = String(character).convertedS2T()
+                let traditionalCharacter: Character = traditionalText.first ?? character
+                return fetch(for: traditionalCharacter)
+        }
+        private static func fetch(for character: Character) -> [ChoHokYuetYamCitYiu] {
                 return DataMaster.matchChoHokYuetYamCitYiu(for: character).uniqued()
         }
 }

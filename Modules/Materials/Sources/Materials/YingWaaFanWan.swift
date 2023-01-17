@@ -22,6 +22,13 @@ public struct YingWaaFanWan: Hashable {
         }
 
         public static func match(for character: Character) -> [YingWaaFanWan] {
+                let originalMatch = fetch(for: character)
+                guard originalMatch.isEmpty else { return originalMatch }
+                let traditionalText: String = String(character).convertedS2T()
+                let traditionalCharacter: Character = traditionalText.first ?? character
+                return fetch(for: traditionalCharacter)
+        }
+        private static func fetch(for character: Character) -> [YingWaaFanWan] {
                 let items: [YingWaaFanWan] = DataMaster.matchYingWaaFanWan(for: character)
                 guard items.count > 1 else { return items }
                 let romanizations = items.map({ $0.romanization }).uniqued()
@@ -50,7 +57,7 @@ private extension DataMaster {
         // CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationtype TEXT NOT NULL, interpretation TEXT NOT NULL);
         static func matchYingWaaFanWan(for character: Character) -> [YingWaaFanWan] {
                 var entries: [YingWaaFanWan] = []
-                let code: UInt32 = character.unicodeScalars.first?.value ?? 0xFFFFFF
+                guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
                 let queryString = "SELECT * FROM yingwaatable WHERE code = \(code);"
                 var queryStatement: OpaquePointer? = nil
                 defer {
