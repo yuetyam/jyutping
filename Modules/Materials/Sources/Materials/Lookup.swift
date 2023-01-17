@@ -52,7 +52,7 @@ public struct Lookup {
                 guard !text.isEmpty else { return fallback }
                 let matched = DataMaster.matchRomanization(for: text)
                 guard matched.isEmpty else { return Response(text: text, romanizations: matched) }
-                let traditionalText: String = convert(from: text)
+                let traditionalText: String = text.convertedS2T()
                 let tryMatched = DataMaster.matchRomanization(for: traditionalText)
                 guard tryMatched.isEmpty else {
                         return Response(text: traditionalText, romanizations: tryMatched)
@@ -64,7 +64,7 @@ public struct Lookup {
                 lazy var newText: String = ""
                 while !chars.isEmpty {
                         let leading = fetchLeading(for: chars)
-                        lazy var traditionalChars: String = convert(from: chars)
+                        lazy var traditionalChars: String = chars.convertedS2T()
                         lazy var tryLeading = fetchLeading(for: traditionalChars)
                         if let romanization: String = leading.romanization {
                                 fetches.append(romanization)
@@ -102,14 +102,6 @@ public struct Lookup {
                         return (nil, 0)
                 }
                 return (matched, matchedCount)
-        }
-
-        /// Convert simplified characters to traditional
-        /// - Parameter text: Simplified characters
-        /// - Returns: Traditional characters
-        private static func convert(from text: String) -> String {
-                let transformed: String? = text.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false)
-                return transformed ?? text
         }
 }
 
