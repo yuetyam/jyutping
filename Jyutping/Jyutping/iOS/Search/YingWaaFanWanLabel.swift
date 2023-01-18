@@ -11,8 +11,8 @@ struct YingWaaFanWanLabel: View {
                                 Text(verbatim: "原文")
                                 Text.separator
                                 Text(verbatim: entry.pronunciation).font(.body)
-                                if let pronunciationType = entry.pronunciationType {
-                                        Text(verbatim: pronunciationType).font(.footnote.italic())
+                                if let pronunciationMark = entry.pronunciationMark {
+                                        Text(verbatim: pronunciationMark).font(.footnote.italic())
                                 }
                                 if let interpretation = entry.interpretation {
                                         Text(verbatim: interpretation).font(.footnote)

@@ -6,16 +6,16 @@ public struct YingWaaFanWan: Hashable {
         public let word: String
         public let romanization: String
         public let pronunciation: String
-        public let pronunciationType: String?
+        public let pronunciationMark: String?
         public let interpretation: String?
         public let ipa: String
         public let jyutping: String
 
-        fileprivate init(word: String, romanization: String, pronunciation: String, pronunciationType: String, interpretation: String) {
+        fileprivate init(word: String, romanization: String, pronunciation: String, pronunciationMark: String, interpretation: String) {
                 self.word = word
                 self.romanization = romanization
                 self.pronunciation = pronunciation
-                self.pronunciationType = YingWaaFanWan.handlePronunciationType(of: pronunciationType)
+                self.pronunciationMark = YingWaaFanWan.handlePronunciationMark(of: pronunciationMark)
                 self.interpretation = (interpretation == "X") ? nil : interpretation
                 self.ipa = OldCantonese.IPA(for: romanization)
                 self.jyutping = OldCantonese.jyutping(for: romanization)
@@ -43,9 +43,9 @@ public struct YingWaaFanWan: Hashable {
                                 return filtered.first!
                         default:
                                 let example = filtered.first!
-                                let pronunciationType: String = filtered.map({ $0.pronunciationType }).compactMap({ $0 }).uniqued().joined(separator: ", ")
+                                let pronunciationMark: String = filtered.map({ $0.pronunciationMark }).compactMap({ $0 }).uniqued().joined(separator: ", ")
                                 let interpretation: String = filtered.map({ $0.interpretation }).compactMap({ $0 }).uniqued().joined(separator: " ")
-                                return YingWaaFanWan(word: example.word, romanization: syllable, pronunciation: example.pronunciation, pronunciationType: pronunciationType, interpretation: interpretation)
+                                return YingWaaFanWan(word: example.word, romanization: syllable, pronunciation: example.pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation)
                         }
                 }
                 return entries.compactMap({ $0 })
@@ -54,7 +54,7 @@ public struct YingWaaFanWan: Hashable {
 
 private extension DataMaster {
 
-        // CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationtype TEXT NOT NULL, interpretation TEXT NOT NULL);
+        // CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationmark TEXT NOT NULL, interpretation TEXT NOT NULL);
         static func matchYingWaaFanWan(for character: Character) -> [YingWaaFanWan] {
                 var entries: [YingWaaFanWan] = []
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
@@ -69,9 +69,9 @@ private extension DataMaster {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
                                 let pronunciation: String = String(cString: sqlite3_column_text(queryStatement, 3))
-                                let pronunciationType: String = String(cString: sqlite3_column_text(queryStatement, 4))
+                                let pronunciationMark: String = String(cString: sqlite3_column_text(queryStatement, 4))
                                 let interpretation: String = String(cString: sqlite3_column_text(queryStatement, 5))
-                                let instance: YingWaaFanWan = YingWaaFanWan(word: word, romanization: romanization, pronunciation: pronunciation, pronunciationType: pronunciationType, interpretation: interpretation)
+                                let instance: YingWaaFanWan = YingWaaFanWan(word: word, romanization: romanization, pronunciation: pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation)
                                 entries.append(instance)
                         }
                 }
@@ -80,8 +80,8 @@ private extension DataMaster {
 }
 
 private extension YingWaaFanWan {
-        static func handlePronunciationType(of type: String) -> String? {
-                switch type {
+        static func handlePronunciationMark(of mark: String) -> String? {
+                switch mark {
                 case "X":
                         return nil
                 case "ALMOST_ALWAYS_PRO":
@@ -113,7 +113,7 @@ private extension YingWaaFanWan {
                 case "VULGAR":
                         return "Vulgar"
                 default:
-                        return type
+                        return mark
                 }
         }
 }
