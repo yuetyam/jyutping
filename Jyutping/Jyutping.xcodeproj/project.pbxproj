@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
+		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
 		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
 		378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* RomanizationLabel.swift */; };
 		378020D42975A1D0002F6E0A /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D32975A1D0002F6E0A /* GwongWanView.swift */; };
@@ -220,6 +221,7 @@
 
 /* Begin PBXFileReference section */
 		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
+		3768795B297826780006D0A6 /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
 		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
 		378020D129752EA6002F6E0A /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		378020D32975A1D0002F6E0A /* GwongWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				37B6BDB8296EA2510008B9F0 /* SearchView.swift */,
+				3768795B297826780006D0A6 /* CantoneseTextLabel.swift */,
 				378020D129752EA6002F6E0A /* RomanizationLabel.swift */,
 				37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */,
 				37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */,
@@ -1247,6 +1250,7 @@
 				37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */,
 				37D7BD5F294CB1EE006A6ADD /* Device.swift in Sources */,
 				37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */,
+				3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */,
 				37D7BDBA294CB9F3006A6ADD /* PrivacyNoticeView.swift in Sources */,
 				37D7BDB6294CB9F3006A6ADD /* IntroductionsView.swift in Sources */,
 				37D7BD66294CB212006A6ADD /* ColorExtensions.swift in Sources */,

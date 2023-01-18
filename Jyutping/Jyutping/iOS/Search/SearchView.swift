@@ -53,11 +53,7 @@ struct SearchView: View {
                 }
                 if !cantonese.isEmpty {
                         Section {
-                                HStack {
-                                        Text(verbatim: cantonese)
-                                        Spacer()
-                                        Speaker(cantonese)
-                                }
+                                CantoneseTextLabel(cantonese)
                                 ForEach(0..<pronunciations.count, id: \.self) { index in
                                         RomanizationLabel(pronunciations[index])
                                 }
