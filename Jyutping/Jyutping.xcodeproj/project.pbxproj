@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
 		378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* RomanizationLabel.swift */; };
 		378020D42975A1D0002F6E0A /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D32975A1D0002F6E0A /* GwongWanView.swift */; };
@@ -218,6 +219,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
 		378020D129752EA6002F6E0A /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		378020D32975A1D0002F6E0A /* GwongWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 			isa = PBXGroup;
 			children = (
 				37D7BD90294CB6C6006A6ADD /* MacSearchView.swift */,
+				37687959297817F50006D0A6 /* CantoneseTextView.swift */,
 				378020CF29752C31002F6E0A /* RomanizationLabelView.swift */,
 				37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */,
 				37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */,
@@ -1231,6 +1234,7 @@
 				37D7BD80294CB4B3006A6ADD /* MenuCopyButton.swift in Sources */,
 				37D7BD98294CB6C6006A6ADD /* MacSearchView.swift in Sources */,
 				37D7BD99294CB6C6006A6ADD /* MacResourcesView.swift in Sources */,
+				3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */,
 				3783D9BE29744036000B3332 /* Constant.swift in Sources */,
 				37D7BDB1294CB9F3006A6ADD /* JyutpingView.swift in Sources */,
 				37D7BD7A294CB440006A6ADD /* TermView.swift in Sources */,

@@ -58,12 +58,7 @@ struct MacSearchView: View {
                                                 isTextFieldFocused = true
                                         }
                                 if !cantonese.isEmpty {
-                                        HStack {
-                                                Text(verbatim: cantonese)
-                                                Spacer()
-                                                Speaker(cantonese)
-                                        }
-                                        .block()
+                                        CantoneseTextView(cantonese).block()
                                 }
                                 if !pronunciations.isEmpty {
                                         VStack {
