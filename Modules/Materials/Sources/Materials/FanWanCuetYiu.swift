@@ -36,6 +36,7 @@ public struct FanWanCuetYiu: Hashable {
         fileprivate init(word: String, romanization: String, initial: String, final: String, yamyeung: String, tone: String, rhyme: String, interpretation: String) {
                 let romanization: String = romanization
                         .replacingOccurrences(of: "7", with: "1", options: [.anchored, .backwards])
+                        .replacingOccurrences(of: "aa(p|t|k)8$", with: "aa$13", options: .regularExpression)
                         .replacingOccurrences(of: "8", with: "1", options: [.anchored, .backwards])
                         .replacingOccurrences(of: "9", with: "6", options: [.anchored, .backwards])
                 let interpretation: String = interpretation

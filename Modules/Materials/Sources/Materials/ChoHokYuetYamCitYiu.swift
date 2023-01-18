@@ -33,10 +33,12 @@ public struct ChoHokYuetYamCitYiu: Hashable {
 
         fileprivate init(word: String, romanization: String, initial: String, final: String, tone: String, faancit: String) {
                 let convertedInitial: String = initial.replacingOccurrences(of: "X", with: "")
+                let pronunciation: String = "\(convertedInitial)\(final)"
+                let faanciText: String = faancit + "切"
                 self.word = word
-                self.pronunciation = "\(convertedInitial)\(final)"
+                self.pronunciation = pronunciation
                 self.tone = tone
-                self.faancit = faancit + "切"
+                self.faancit = faanciText
                 self.romanization = romanization
                 self.ipa = OldCantonese.IPA(for: romanization)
                 self.jyutping = OldCantonese.jyutping(for: romanization)

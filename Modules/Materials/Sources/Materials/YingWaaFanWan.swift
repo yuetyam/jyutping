@@ -4,19 +4,19 @@ import SQLite3
 public struct YingWaaFanWan: Hashable {
 
         public let word: String
+        public let romanization: String
         public let pronunciation: String
         public let pronunciationType: String?
         public let interpretation: String?
-        public let romanization: String
         public let ipa: String
         public let jyutping: String
 
         fileprivate init(word: String, romanization: String, pronunciation: String, pronunciationType: String, interpretation: String) {
                 self.word = word
+                self.romanization = romanization
                 self.pronunciation = pronunciation
                 self.pronunciationType = YingWaaFanWan.handlePronunciationType(of: pronunciationType)
                 self.interpretation = (interpretation == "X") ? nil : interpretation
-                self.romanization = romanization
                 self.ipa = OldCantonese.IPA(for: romanization)
                 self.jyutping = OldCantonese.jyutping(for: romanization)
         }
