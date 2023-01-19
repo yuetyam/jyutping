@@ -12,7 +12,6 @@ struct HomeView: View {
         }()
         @State private var isGuideViewExpanded: Bool = false
 
-        private let tonesInputDescription: String = NSLocalizedString("tones.input.description", comment: "")
         private let strokes: String = """
         w = 橫(waang)
         s = 豎(syu)
@@ -98,31 +97,22 @@ struct HomeView: View {
                                                         .font(.fixedWidth)
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
-                                                        .contextMenu {
-                                                                MenuCopyButton(tonesInputDescription)
-                                                        }
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Cangjie").font(.significant)
                                                 Text("Cangjie Reverse Lookup Description").lineSpacing(6)
                                         }
-                                        .textSelection(.enabled)
                                         Section {
                                                 Text("Lookup Jyutping with Pinyin").font(.significant)
                                                 Text("Pinyin Reverse Lookup Description").lineSpacing(6)
                                         }
-                                        .textSelection(.enabled)
                                         Section {
                                                 Text("Lookup Jyutping with Stroke").font(.significant).textSelection(.enabled)
                                                 Text("Stroke Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
-                                                Text(verbatim: strokes)
-                                                        .font(.fixedWidth)
-                                                        .lineSpacing(5)
-                                                        .contextMenu {
-                                                                MenuCopyButton(strokes)
-                                                        }
+                                                Text(verbatim: strokes).font(.fixedWidth).lineSpacing(5)
                                         }
                                 }
+                                .textSelection(.enabled)
 
                                 Section {
                                         NavigationLink {
