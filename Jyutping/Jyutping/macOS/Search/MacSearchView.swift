@@ -5,57 +5,60 @@ import Materials
 
 struct MacSearchView: View {
 
-        @State private var inputText: String = ""
+        @State private var submittedText: String = ""
+        @FocusState private var isTextFieldFocused: Bool
+
         @State private var cantonese: String = ""
         @State private var pronunciations: [String] = []
-
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
         @State private var gwongWanEntries: [GwongWan] = []
-
         @State private var animationState: Int = 0
-        @FocusState private var isTextFieldFocused: Bool
+
+        private func handleSubmission(_ text: String) {
+                let trimmedInput: String = text.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
+                guard trimmedInput != cantonese else { return }
+                defer {
+                        animationState += 1
+                }
+                guard !trimmedInput.isEmpty else {
+                        cantonese = ""
+                        pronunciations = []
+                        yingWaaEntries = []
+                        choHokEntries = []
+                        fanWanEntries = []
+                        gwongWanEntries = []
+                        return
+                }
+                yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
+                choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
+                fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
+                gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
+                let search = AppMaster.lookup(text: trimmedInput)
+                if search.romanizations.isEmpty {
+                        cantonese = trimmedInput
+                        pronunciations = []
+                } else {
+                        cantonese = search.text
+                        pronunciations = search.romanizations
+                }
+        }
 
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 32) {
-                                TextField("Search Pronunciation", text: $inputText)
-                                        .textFieldStyle(.plain)
-                                        .disableAutocorrection(true)
-                                        .onSubmit {
-                                                let trimmedInput: String = inputText.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
-                                                guard trimmedInput != cantonese else { return }
-                                                defer {
-                                                        animationState += 1
-                                                }
-                                                guard !trimmedInput.isEmpty else {
-                                                        cantonese = ""
-                                                        pronunciations = []
-                                                        yingWaaEntries = []
-                                                        choHokEntries = []
-                                                        fanWanEntries = []
-                                                        gwongWanEntries = []
-                                                        return
-                                                }
-                                                yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
-                                                choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
-                                                fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
-                                                gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
-                                                let search = AppMaster.lookup(text: trimmedInput)
-                                                if search.romanizations.isEmpty {
-                                                        cantonese = trimmedInput
-                                                        pronunciations = []
-                                                } else {
-                                                        cantonese = search.text
-                                                        pronunciations = search.romanizations
-                                                }
-                                        }
+                                SearchField("Search Pronunciation", submittedText: $submittedText)
                                         .focused($isTextFieldFocused)
                                         .padding(8)
                                         .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                         .onAppear {
                                                 isTextFieldFocused = true
+                                        }
+                                        .onChange(of: submittedText) { newText in
+                                                Task(priority: .high) {
+                                                        handleSubmission(newText)
+                                                }
                                         }
                                 if !cantonese.isEmpty {
                                         CantoneseTextView(cantonese).block()

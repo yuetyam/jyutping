@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370AA36E297975D400A666A5 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA36D297975D400A666A5 /* SearchField.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
 		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
@@ -220,6 +221,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		370AA36D297975D400A666A5 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		3768795B297826780006D0A6 /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
 		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				37D7BD90294CB6C6006A6ADD /* MacSearchView.swift */,
+				370AA36D297975D400A666A5 /* SearchField.swift */,
 				37687959297817F50006D0A6 /* CantoneseTextView.swift */,
 				378020CF29752C31002F6E0A /* RomanizationLabelView.swift */,
 				37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */,
@@ -1217,6 +1220,7 @@
 				37D7BD8D294CB61F006A6ADD /* FinalTable.swift in Sources */,
 				37D7BD9D294CB6C6006A6ADD /* MacIntroductionsView.swift in Sources */,
 				37D7BDB7294CB9F3006A6ADD /* HomeView.swift in Sources */,
+				370AA36E297975D400A666A5 /* SearchField.swift in Sources */,
 				378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */,
 				37D7BD5B294CB182006A6ADD /* Syllable2IPA.swift in Sources */,
 				37D7BD7C294CB440006A6ADD /* Term.swift in Sources */,
