@@ -5,8 +5,13 @@ import Materials
 
 struct SearchView: View {
 
-        let placeholder: LocalizedStringKey
-        @Binding var animationState: Int
+        init(placeholder: LocalizedStringKey? = nil, animationState: Binding<Int>) {
+                self.placeholder = placeholder ?? "Search"
+                self._animationState = animationState
+        }
+
+        private let placeholder: LocalizedStringKey
+        @Binding private var animationState: Int
 
         @State private var inputText: String = ""
         @State private var cantonese: String = ""
