@@ -5,12 +5,14 @@ import Materials
 
 struct SearchView: View {
 
-        init(placeholder: LocalizedStringKey? = nil, animationState: Binding<Int>) {
-                self.placeholder = placeholder ?? "Search"
+        init(placeholder: LocalizedStringKey = "Search", submitLabel: SubmitLabel = .search, animationState: Binding<Int>) {
+                self.placeholder = placeholder
+                self.submitLabel = submitLabel
                 self._animationState = animationState
         }
 
         private let placeholder: LocalizedStringKey
+        private let submitLabel: SubmitLabel
         @Binding private var animationState: Int
 
         @State private var inputText: String = ""
@@ -27,6 +29,7 @@ struct SearchView: View {
                         TextField(placeholder, text: $inputText)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled(true)
+                                .submitLabel(submitLabel)
                                 .onSubmit {
                                         let trimmedInput: String = inputText.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
                                         guard trimmedInput != cantonese else { return }
