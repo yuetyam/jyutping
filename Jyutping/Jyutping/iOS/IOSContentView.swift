@@ -32,6 +32,9 @@ struct IOSContentView: View {
                                 }
                                 .tag(3)
                 }
+                .onAppear {
+                        UITextField.appearance().clearButtonMode = .always
+                }
         }
 }
 
