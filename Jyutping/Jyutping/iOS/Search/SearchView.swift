@@ -74,7 +74,7 @@ struct SearchView: View {
                                         YingWaaFanWanLabel(entry: yingWaaEntries[index])
                                 }
                         } header: {
-                                Text(verbatim: "《英華分韻撮要》　衛三畏　1856　廣州").textCase(nil)
+                                Text(verbatim: yingWaaHeader).minimumScaleFactor(0.5).lineLimit(1).textCase(nil)
                         }
                         .textSelection(.enabled)
                 }
@@ -84,7 +84,7 @@ struct SearchView: View {
                                         ChoHokYuetYamCitYiuLabel(entry: choHokEntries[index])
                                 }
                         } header: {
-                                Text(verbatim: "《初學粵音切要》　湛約翰　1855　香港").textCase(nil)
+                                Text(verbatim: choHokHeader).minimumScaleFactor(0.5).lineLimit(1).textCase(nil)
                         }
                         .textSelection(.enabled)
                 }
@@ -94,7 +94,7 @@ struct SearchView: View {
                                         FanWanCuetYiuLabel(entry: fanWanEntries[index])
                                 }
                         } header: {
-                                Text(verbatim: "《分韻撮要》　佚名　約明末清初").textCase(nil)
+                                Text(verbatim: fanWanHeader).minimumScaleFactor(0.5).lineLimit(1).textCase(nil)
                         }
                         .textSelection(.enabled)
                 }
@@ -104,10 +104,33 @@ struct SearchView: View {
                                         GwongWanLabel(entry: gwongWanEntries[index])
                                 }
                         } header: {
-                                Text(verbatim: "《大宋重修廣韻》").textCase(nil)
+                                Text(verbatim: gwongWanHeader).minimumScaleFactor(0.5).lineLimit(1).textCase(nil)
                         }
                         .textSelection(.enabled)
                 }
+        }
+
+        private let yingWaaMeta: String = "《初學粵音切要》　湛約翰　1855　香港"
+        private let choHokMeta: String = "《初學粵音切要》　湛約翰　1855　香港"
+        private let fanWamMeta: String = "《分韻撮要》　佚名　約明末清初"
+        private let gwongWanMeta: String = "《大宋重修廣韻》"
+        private let fullWidthSpace: String = "　"
+
+        private var yingWaaHeader: String {
+                guard let leading: String = yingWaaEntries.first?.word else { return yingWaaMeta }
+                return leading + fullWidthSpace + yingWaaMeta
+        }
+        private var choHokHeader: String {
+                guard let leading: String = choHokEntries.first?.word else { return choHokMeta }
+                return leading + fullWidthSpace + choHokMeta
+        }
+        private var fanWanHeader: String {
+                guard let leading: String = fanWanEntries.first?.word else { return fanWamMeta }
+                return leading + fullWidthSpace + fanWamMeta
+        }
+        private var gwongWanHeader: String {
+                guard let leading: String = gwongWanEntries.first?.word else { return gwongWanMeta }
+                return leading + fullWidthSpace + gwongWanMeta
         }
 }
 
