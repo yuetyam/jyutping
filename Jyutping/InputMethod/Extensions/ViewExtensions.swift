@@ -2,9 +2,16 @@ import SwiftUI
 
 extension View {
 
-        /// Set Material background in rounded rectangle for view
+        /// Material background in rounded rectangle
         /// - Returns: some View
         func block() -> some View {
                 return self.padding().background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        }
+
+        // https://www.avanderlee.com/swiftui/disable-animations-transactions
+        func disableAnimation() -> some View {
+                return self.transaction { transaction in
+                        transaction.animation = nil
+                }
         }
 }

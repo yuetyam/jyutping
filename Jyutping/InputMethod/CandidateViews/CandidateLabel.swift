@@ -42,13 +42,3 @@ struct CandidateLabel: View {
                 .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 }
-
-private extension Text {
-
-        // https://www.avanderlee.com/swiftui/disable-animations-transactions
-        func disableAnimation() -> some View {
-                return self.transaction { transaction in
-                        transaction.animation = nil
-                }
-        }
-}
