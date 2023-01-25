@@ -34,25 +34,24 @@ private extension DataMaster {
 public struct FanWanCuetYiu: Hashable {
 
         fileprivate init(word: String, romanization: String, initial: String, final: String, yamyeung: String, tone: String, rhyme: String, interpretation: String) {
-                let romanization: String = romanization
+                let convertedRomanization: String = romanization
                         .replacingOccurrences(of: "7", with: "1", options: [.anchored, .backwards])
                         .replacingOccurrences(of: "aa(p|t|k)8$", with: "aa$13", options: .regularExpression)
                         .replacingOccurrences(of: "8", with: "1", options: [.anchored, .backwards])
                         .replacingOccurrences(of: "9", with: "6", options: [.anchored, .backwards])
-                let interpretation: String = interpretation
-                        .replacingOccurrences(of: "[同上](", with: "", options: .anchored)
-                        .replacingOccurrences(of: ")", with: "", options: [.anchored, .backwards])
+                let processedInterpretation: String = interpretation == "X" ? "(None)" : interpretation
+                let abstract: String = "\(initial)母　\(final)韻　\(yamyeung)\(tone)　\(rhyme)小韻"
                 self.word = word
-                self.romanization = romanization
+                self.romanization = convertedRomanization
                 self.initial = initial
                 self.final = final
                 self.yamyeung = yamyeung
                 self.tone = tone
                 self.rhyme = rhyme
-                self.interpretation = interpretation
-                self.abstract = "\(initial)母　\(final)韻　\(yamyeung)\(tone)　\(rhyme)小韻"
-                self.ipa = OldCantonese.IPA(for: romanization)
-                self.jyutping = OldCantonese.jyutping(for: romanization)
+                self.interpretation = processedInterpretation
+                self.abstract = abstract
+                self.ipa = OldCantonese.IPA(for: convertedRomanization)
+                self.jyutping = OldCantonese.jyutping(for: convertedRomanization)
         }
 
         public let word: String
