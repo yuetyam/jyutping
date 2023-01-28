@@ -1,9 +1,26 @@
 import Foundation
 import SQLite3
 
-extension Lychee {
+private struct RowCandidate {
+        let candidate: Candidate
+        let row: Int
+        let isExactlyMatch: Bool
+}
 
-        fileprivate typealias RowCandidate = (candidate: CoreCandidate, row: Int)
+private extension Array where Element == RowCandidate {
+        func sorted() -> [RowCandidate] {
+                return self.sorted(by: { (lhs, rhs) -> Bool in
+                        let shouldCompare: Bool = !lhs.isExactlyMatch && !rhs.isExactlyMatch
+                        guard shouldCompare else { return lhs.isExactlyMatch && !rhs.isExactlyMatch }
+                        let lhsTextCount: Int = lhs.candidate.text.count
+                        let rhsTextCount: Int = lhs.candidate.text.count
+                        guard lhsTextCount == rhsTextCount else { return lhsTextCount > rhsTextCount }
+                        return (rhs.row - lhs.row) > 50000
+                })
+        }
+}
+
+extension Lychee {
 
         public static func suggest(for text: String, segmentation: Segmentation) -> [Candidate] {
                 switch text.count {
@@ -102,7 +119,7 @@ extension Lychee {
         }
         private static func process(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
                 let hasSeparators: Bool = text.count != origin.count
-                let candidates = match(schemes: sequences, hasSeparators: hasSeparators)
+                let candidates = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
                 guard !hasSeparators else { return candidates }
                 guard let firstCandidate = candidates.first else { return candidates }
                 let firstInputCount: Int = firstCandidate.input.count
@@ -118,7 +135,7 @@ extension Lychee {
         }
         private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
                 let hasSeparators: Bool = text.count != origin.count
-                let candidates: [CoreCandidate] = match(schemes: sequences, hasSeparators: hasSeparators)
+                let candidates: [CoreCandidate] = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
                 lazy var fallback: [CoreCandidate] = match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
                 guard !hasSeparators else { return fallback }
                 guard let firstCandidate: CoreCandidate = candidates.first else { return fallback }
@@ -154,10 +171,13 @@ extension Lychee {
                 }
                 return match(for: text) + prefix(match: text, count: 5) + concatenated + candidates + shortcut(for: text)
         }
-        private static func match(schemes: [[String]], hasSeparators: Bool) -> [CoreCandidate] {
-                let matches = schemes.map({ matchWithRowID(for: $0.joined()) }).joined()
-                let sorted = matches.sorted { $0.candidate.text.count == $1.candidate.text.count && ($1.row - $0.row) > 50000 }
-                let candidates: [CoreCandidate] = sorted.map({ $0.candidate })
+        private static func match(schemes: [[String]], hasSeparators: Bool, fullTextCount: Int = -1) -> [CoreCandidate] {
+                let matches = schemes.map { scheme -> [RowCandidate] in
+                        let joinedText = scheme.joined()
+                        let isExactlyMatch: Bool = joinedText.count == fullTextCount
+                        return matchWithRowID(for: joinedText, isExactlyMatch: isExactlyMatch)
+                }
+                let candidates: [CoreCandidate] = matches.flatMap({ $0 }).sorted().map({ $0.candidate })
                 guard hasSeparators else { return candidates }
                 let firstSyllable: String = schemes.first?.first ?? "X"
                 let filtered: [CoreCandidate] = candidates.filter { candidate in
@@ -233,7 +253,7 @@ private extension Lychee {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        static func matchWithRowID(for text: String) -> [RowCandidate] {
+        static func matchWithRowID(for text: String, isExactlyMatch: Bool) -> [RowCandidate] {
                 guard !text.isEmpty else { return [] }
                 var rowCandidates: [RowCandidate] = []
                 let tones: String = text.tones
@@ -248,7 +268,7 @@ private extension Lychee {
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
                                 if !hasTones || tones == romanization.tones || (tones.count == 1 && text.last == romanization.last) {
                                         let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                        let rowCandidate: RowCandidate = (candidate: candidate, row: rowid)
+                                        let rowCandidate: RowCandidate = RowCandidate(candidate: candidate, row: rowid, isExactlyMatch: isExactlyMatch)
                                         rowCandidates.append(rowCandidate)
                                 }
                         }
