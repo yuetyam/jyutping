@@ -7,4 +7,13 @@ extension Array where Element: Hashable {
                 var set: Set<Element> = Set<Element>()
                 return filter { set.insert($0).inserted }
         }
+
+        /// Safely access element by index
+        /// - Parameter index: Index
+        /// - Returns: An Element if index is compatible, otherwise nil.
+        func fetch(_ index: Int) -> Element? {
+                let isSafe: Bool = index >= 0 && index < self.count
+                guard isSafe else { return nil }
+                return self[index]
+        }
 }
