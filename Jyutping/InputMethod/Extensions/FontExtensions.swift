@@ -34,8 +34,8 @@ extension Font {
                         }
                         return available.uniqued()
                 }()
-                guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size)}
-                return pairFonts(primary: primary, fallbacks: foundFallbacks, size: size)
+                guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size) }
+                return combineFonts(primary: primary, fallbacks: foundFallbacks, size: size) ?? Font.custom(primary, size: size)
         }
         private static func constructDefaultCandidateFont(size: CGFloat) -> Font {
                 let isSFProAvailable: Bool = found(font: Constant.SFPro)
@@ -69,8 +69,8 @@ extension Font {
                         return list
                 }()
                 let shouldUseSystemFont: Bool = fallbacks == [Constant.PingFangHK]
-                guard !shouldUseSystemFont else { return Font.system(size: size)}
-                return pairFonts(primary: primary, fallbacks: fallbacks, size: size)
+                guard !shouldUseSystemFont else { return Font.system(size: size) }
+                return combineFonts(primary: primary, fallbacks: fallbacks, size: size) ?? Font.system(size: size)
         }
 }
 
@@ -114,11 +114,11 @@ extension Font {
                         }
                         return available.uniqued()
                 }()
-                guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size)}
-                return pairFonts(primary: primary, fallbacks: foundFallbacks, size: size)
+                guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size) }
+                return combineFonts(primary: primary, fallbacks: foundFallbacks, size: size) ?? Font.custom(primary, size: size)
         }
         private static func constructDefaultCommentFont(size: CGFloat) -> Font {
-                let fallback: Font = Font.system(size: size, design: .monospaced)
+                lazy var fallback: Font = Font.system(size: size, design: .monospaced)
                 let isSFMonoAvailable: Bool = found(font: Constant.SFMono)
                 guard isSFMonoAvailable else { return fallback }
                 let primary: String = Constant.SFMono
@@ -153,7 +153,7 @@ extension Font {
                 }()
                 let shouldFallback: Bool = fallbacks.count == 2
                 guard !shouldFallback else { return fallback }
-                return pairFonts(primary: primary, fallbacks: fallbacks, size: size)
+                return combineFonts(primary: primary, fallbacks: fallbacks, size: size) ?? fallback
         }
 }
 
@@ -180,7 +180,7 @@ extension Font {
                 }
         }
         private static func customLabelFont(primary: String?, fallbacks: [String], size: CGFloat) -> Font {
-                let fallback: Font = Font.system(size: size).monospacedDigit()
+                lazy var fallback: Font = Font.system(size: size).monospacedDigit()
                 guard let primary else { return fallback }
                 guard found(font: primary) else { return fallback }
                 let foundFallbacks: [String] = {
@@ -194,7 +194,7 @@ extension Font {
                         return available.uniqued()
                 }()
                 guard !(foundFallbacks.isEmpty) else { return Font.custom(primary, size: size) }
-                return pairFonts(primary: primary, fallbacks: foundFallbacks, size: size)
+                return combineFonts(primary: primary, fallbacks: foundFallbacks, size: size) ?? Font.custom(primary, size: size)
         }
 }
 
@@ -204,30 +204,16 @@ private extension Font {
                 return NSFont(name: fontName, size: 15) != nil
         }
 
-        static func pairFonts(primary: String, fallbacks: [String], size: CGFloat) -> Font {
-                let originalFont: NSFont = NSFont(name: primary, size: size) ?? .systemFont(ofSize: size)
-                let originalDescriptor: NSFontDescriptor = originalFont.fontDescriptor
-                let fallbackDescriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
-                        return originalDescriptor.addingAttributes([.name: fontName])
-                }
-                let pairedDescriptor: NSFontDescriptor = originalDescriptor.addingAttributes([.cascadeList : fallbackDescriptors])
-                let pairedFont: NSFont = NSFont(descriptor: pairedDescriptor, size: size) ?? .systemFont(ofSize: size)
-                return Font(pairedFont)
-        }
-}
-
-extension Font {
-
         /// Combining multiple fonts
         /// - Parameters:
-        ///   - primary: Font name of the primary font
-        ///   - fallback: Font names of fallback fonts
+        ///   - primary: Primary font name
+        ///   - fallbacks: Fallback font names
         ///   - size: Font size
         /// - Returns: Font?
-        static func combineFonts(primary: String, fallback: [String], size: CGFloat) -> Font? {
+        static func combineFonts(primary: String, fallbacks: [String], size: CGFloat) -> Font? {
                 guard let primaryFont: NSFont = NSFont(name: primary, size: size) else { return nil }
                 let primaryDescriptor: NSFontDescriptor = primaryFont.fontDescriptor
-                let fallbackDescriptors: [NSFontDescriptor] = fallback.map { fontName -> NSFontDescriptor in
+                let fallbackDescriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
                         return primaryDescriptor.addingAttributes([.name: fontName])
                 }
                 let combinedDescriptor: NSFontDescriptor = primaryDescriptor.addingAttributes([.cascadeList : fallbackDescriptors])
