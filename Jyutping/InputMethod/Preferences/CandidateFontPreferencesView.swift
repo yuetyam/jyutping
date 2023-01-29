@@ -18,7 +18,6 @@ struct CandidateFontPreferencesView: View {
         @AppStorage(SettingsKeys.CustomCommentFontList) private var customCommentFontList: String = AppSettings.customCommentFonts.joined(separator: ",")
         @AppStorage(SettingsKeys.CustomLabelFontList) private var customLabelFontList: String = AppSettings.customLabelFonts.joined(separator: ",")
 
-        @State private var availableFonts: [String] = [Constant.HelveticaNeue, Constant.Menlo, Constant.PingFangHK]
         @State private var customCandidateFonts: [String] = AppSettings.customCandidateFonts
         @State private var customCommentFonts: [String] = AppSettings.customCommentFonts
         @State private var customLabelFonts: [String] = AppSettings.customLabelFonts
@@ -66,16 +65,7 @@ struct CandidateFontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        Picker("Font", selection: $customCandidateFonts[index]) {
-                                                                                ForEach(0..<availableFonts.count, id: \.self) {
-                                                                                        let fontName: String = availableFonts[$0]
-                                                                                        Text(verbatim: fontName)
-                                                                                                .font(.footnote)
-                                                                                                .tag(fontName)
-                                                                                }
-                                                                        }
-                                                                        .scaledToFit()
-                                                                        .labelsHidden()
+                                                                        FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: Constant.PingFangHK)
                                                                         Spacer()
                                                                 }
                                                         }
@@ -139,16 +129,7 @@ struct CandidateFontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        Picker("Font", selection: $customCommentFonts[index]) {
-                                                                                ForEach(0..<availableFonts.count, id: \.self) {
-                                                                                        let fontName: String = availableFonts[$0]
-                                                                                        Text(verbatim: fontName)
-                                                                                                .font(.footnote)
-                                                                                                .tag(fontName)
-                                                                                }
-                                                                        }
-                                                                        .scaledToFit()
-                                                                        .labelsHidden()
+                                                                        FontPicker($customCommentFonts[index], size: commentFontSize, fallback: Constant.HelveticaNeue)
                                                                         Spacer()
                                                                 }
                                                         }
@@ -212,16 +193,7 @@ struct CandidateFontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        Picker("Font", selection: $customLabelFonts[index]) {
-                                                                                ForEach(0..<availableFonts.count, id: \.self) {
-                                                                                        let fontName: String = availableFonts[$0]
-                                                                                        Text(verbatim: fontName)
-                                                                                                .font(.footnote)
-                                                                                                .tag(fontName)
-                                                                                }
-                                                                        }
-                                                                        .scaledToFit()
-                                                                        .labelsHidden()
+                                                                        FontPicker($customLabelFonts[index], size: labelFontSize, fallback: Constant.Menlo)
                                                                         Spacer()
                                                                 }
                                                         }
@@ -248,31 +220,6 @@ struct CandidateFontPreferencesView: View {
                         }
                         .textSelection(.enabled)
                         .padding()
-                }
-                .task {
-                        let noGoodList: Set<String> = [
-                                "Bodoni Ornaments",
-                                "GB18030 Bitmap",
-                                "Toppan Bunkyu Midashi Gothic",
-                                "Toppan Bunkyu Midashi Mincho",
-                                "Webdings",
-                                "Wingdings",
-                                "Wingdings 2",
-                                "Wingdings 3",
-                                "Zapf Dingbats",
-                                "Zapfino"
-                        ]
-                        availableFonts = {
-                                let allAvailableFonts: [String] = NSFontManager.shared.availableFontFamilies
-                                let filtered: [String] = allAvailableFonts
-                                        .map({ $0.trimmed() })
-                                        .filter({ !($0.isEmpty || $0.hasPrefix(".") || noGoodList.contains($0)) })
-                                        .uniqued()
-                                return filtered
-                        }()
-                        customCandidateFonts = customCandidateFontList.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                        customCommentFonts = customCommentFontList.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                        customLabelFonts = customLabelFontList.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 }
                 .navigationTitle("PreferencesView.NavigationTitle.Fonts")
         }

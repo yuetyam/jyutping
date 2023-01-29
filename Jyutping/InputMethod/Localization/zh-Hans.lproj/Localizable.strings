@@ -38,6 +38,7 @@
 "Default" = "默認";
 "System" = "系統";
 "Custom" = "自定";
+"FontPicker.CurrentFont.Change" = "更改⋯";
 
 
 //HotkeysView

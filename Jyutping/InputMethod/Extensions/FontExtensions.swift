@@ -215,3 +215,92 @@ private extension Font {
                 return Font(pairedFont)
         }
 }
+
+extension Font {
+
+        /// Combining multiple fonts
+        /// - Parameters:
+        ///   - primary: Font name of the primary font
+        ///   - fallback: Font names of fallback fonts
+        ///   - size: Font size
+        /// - Returns: Font?
+        static func combineFonts(primary: String, fallback: [String], size: CGFloat) -> Font? {
+                guard let primaryFont: NSFont = NSFont(name: primary, size: size) else { return nil }
+                let primaryDescriptor: NSFontDescriptor = primaryFont.fontDescriptor
+                let fallbackDescriptors: [NSFontDescriptor] = fallback.map { fontName -> NSFontDescriptor in
+                        return primaryDescriptor.addingAttributes([.name: fontName])
+                }
+                let combinedDescriptor: NSFontDescriptor = primaryDescriptor.addingAttributes([.cascadeList : fallbackDescriptors])
+                guard let combinedFont: NSFont = NSFont(descriptor: combinedDescriptor, size: size) else { return nil }
+                return Font(combinedFont)
+        }
+}
+
+
+private final class FontPickerDelegate {
+
+        private var picker: FontPicker
+
+        init(_ picker: FontPicker) {
+                self.picker = picker
+        }
+
+        @objc func changeFont(_ id: Any) {
+                picker.performFontSelection()
+        }
+
+}
+
+struct FontPicker: View {
+
+        @State private var fontPickerDelegate: FontPickerDelegate?
+
+        @Binding private var familyName: String
+        private let size: CGFloat
+        private let fallback: String
+
+        /// FontPicker
+        /// - Parameters:
+        ///   - name: NSFont().familyName
+        ///   - size: Font size
+        ///   - fallback: Fallback font name
+        init(_ name: Binding<String>, size: Int, fallback: String) {
+                self._familyName = name
+                self.size = CGFloat(size)
+                self.fallback = fallback
+        }
+
+        private var font: NSFont {
+                get {
+                        return NSFont(name: familyName, size: size) ?? NSFont(name: fallback, size: size) ?? .systemFont(ofSize: size)
+                }
+                set {
+                        familyName = newValue.familyName ?? newValue.fontName
+                }
+        }
+
+        var body: some View {
+                HStack {
+                        Text(verbatim: familyName)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                                .frame(width: 128, alignment: .leading)
+                        Button {
+                                guard !(NSFontPanel.shared.isVisible) else {
+                                        NSFontPanel.shared.orderOut(nil)
+                                        return
+                                }
+                                fontPickerDelegate = FontPickerDelegate(self)
+                                NSFontManager.shared.target = fontPickerDelegate
+                                NSFontManager.shared.setSelectedFont(font, isMultiple: false)
+                                NSFontPanel.shared.orderBack(nil)
+                        } label: {
+                                Text("FontPicker.CurrentFont.Change")
+                        }
+                }
+        }
+
+        mutating func performFontSelection() {
+                font = NSFontPanel.shared.convert(font)
+        }
+}

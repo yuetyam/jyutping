@@ -38,6 +38,7 @@
 "Default" = "Default";
 "System" = "System";
 "Custom" = "Custom";
+"FontPicker.CurrentFont.Change" = "Change…";
 
 
 //HotkeysView
