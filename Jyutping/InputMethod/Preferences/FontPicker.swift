@@ -18,35 +18,30 @@ struct FontPicker: View {
 
         @State private var fontPickerDelegate: FontPickerDelegate?
 
-        @Binding private var familyName: String
+        @Binding private var name: String
         private let size: CGFloat
         private let fallback: String
 
-        /// FontPicker
-        /// - Parameters:
-        ///   - name: NSFont().familyName
-        ///   - size: Font size
-        ///   - fallback: Fallback font name
         init(_ name: Binding<String>, size: Int, fallback: String) {
-                self._familyName = name
+                self._name = name
                 self.size = CGFloat(size)
                 self.fallback = fallback
         }
 
         private var font: NSFont {
                 get {
-                        return NSFont(name: familyName, size: size) ?? NSFont(name: fallback, size: size) ?? .systemFont(ofSize: size)
+                        return NSFont(name: name, size: size) ?? NSFont(name: fallback, size: size) ?? NSFont.systemFont(ofSize: size)
                 }
                 set {
-                        familyName = newValue.familyName ?? newValue.fontName
+                        name = newValue.fontName
                 }
         }
 
         var body: some View {
                 HStack {
-                        Text(verbatim: familyName)
+                        Text(verbatim: name)
                                 .lineLimit(1)
-                                .minimumScaleFactor(0.5)
+                                .minimumScaleFactor(0.4)
                                 .frame(width: 128, alignment: .leading)
                         Button {
                                 guard !(NSFontPanel.shared.isVisible) else {

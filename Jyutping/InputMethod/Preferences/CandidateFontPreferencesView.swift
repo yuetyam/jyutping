@@ -22,6 +22,11 @@ struct CandidateFontPreferencesView: View {
         @State private var customCommentFonts: [String] = AppSettings.customCommentFonts
         @State private var customLabelFonts: [String] = AppSettings.customLabelFonts
 
+        @State private var animationState: Int = 0
+        private func triggerAnimation() {
+                animationState += 1
+        }
+
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
@@ -62,6 +67,7 @@ struct CandidateFontPreferencesView: View {
                                                                 HStack {
                                                                         Button {
                                                                                 customCandidateFonts.remove(at: index)
+                                                                                triggerAnimation()
                                                                         } label: {
                                                                                 minusImage
                                                                         }
@@ -72,6 +78,7 @@ struct CandidateFontPreferencesView: View {
                                                         HStack {
                                                                 Button {
                                                                         customCandidateFonts.append(Constant.PingFangHK)
+                                                                        triggerAnimation()
                                                                 } label: {
                                                                         plusImage
                                                                 }
@@ -126,6 +133,7 @@ struct CandidateFontPreferencesView: View {
                                                                 HStack {
                                                                         Button {
                                                                                 customCommentFonts.remove(at: index)
+                                                                                triggerAnimation()
                                                                         } label: {
                                                                                 minusImage
                                                                         }
@@ -136,6 +144,7 @@ struct CandidateFontPreferencesView: View {
                                                         HStack {
                                                                 Button {
                                                                         customCommentFonts.append(Constant.HelveticaNeue)
+                                                                        triggerAnimation()
                                                                 } label: {
                                                                         plusImage
                                                                 }
@@ -190,6 +199,7 @@ struct CandidateFontPreferencesView: View {
                                                                 HStack {
                                                                         Button {
                                                                                 customLabelFonts.remove(at: index)
+                                                                                triggerAnimation()
                                                                         } label: {
                                                                                 minusImage
                                                                         }
@@ -200,6 +210,7 @@ struct CandidateFontPreferencesView: View {
                                                         HStack {
                                                                 Button {
                                                                         customLabelFonts.append(Constant.Menlo)
+                                                                        triggerAnimation()
                                                                 } label: {
                                                                         plusImage
                                                                 }
@@ -221,6 +232,7 @@ struct CandidateFontPreferencesView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
+                .animation(.default, value: animationState)
                 .navigationTitle("PreferencesView.NavigationTitle.Fonts")
         }
 }
