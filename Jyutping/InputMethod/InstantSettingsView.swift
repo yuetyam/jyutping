@@ -86,7 +86,7 @@ struct InstantSettingsView: View {
                         }
                 }
                 .padding(8)
-                .roundedVisualEffect()
+                .roundedHUDVisualEffect()
         }
 }
 

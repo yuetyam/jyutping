@@ -21,6 +21,6 @@ struct CandidateBoard: View {
                 }
                 .animation(.default, value: displayObject.animationState)
                 .padding(8)
-                .roundedVisualEffect()
+                .roundedHUDVisualEffect()
         }
 }
