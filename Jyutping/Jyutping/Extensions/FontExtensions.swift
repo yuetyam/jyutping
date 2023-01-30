@@ -20,29 +20,20 @@ extension Font {
 private extension Font {
 
         static func enhancedFont(size: CGFloat) -> Font {
-                let shouldUseSystemFont: Bool = fontNames.count == 2
-                guard !shouldUseSystemFont else { return Font.system(size: size) }
-                return combinedFont(from: fontNames, size: size)
+                return combine(fonts: fontNames, size: size)
         }
 
         private static let fontNames: [String] = {
-                var names: [String] = []
-                if found(font: Constant.SFPro) {
-                        names.append(Constant.SFPro)
-                }
-                names.append(Constant.HelveticaNeue)
-                let expected: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
-                for name in expected {
+                var names: [String] = [Constant.SFPro, Constant.HelveticaNeue]
+                let potential: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+                for name in potential {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                names.append(Constant.PingFangHK)
-                let planFonts: [String] = ["Plangothic P1", "Plangothic P2"]
-                for name in planFonts where found(font: name) {
-                        names.append(name)
-                }
+                let fallbacks: [String] = [Constant.PingFangHK, "Plangothic P1", "Plangothic P2"]
+                names.append(contentsOf: fallbacks)
                 let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
                 for name in IMingFonts {
                         if found(font: name) {
@@ -50,9 +41,7 @@ private extension Font {
                                 break
                         }
                 }
-                if found(font: Constant.HanaMinB) {
-                        names.append(Constant.HanaMinB)
-                }
+                names.append(Constant.HanaMinB)
                 return names
         }()
 
@@ -60,15 +49,17 @@ private extension Font {
                 return NSFont(name: name, size: 15) != nil
         }
 
-        private static func combinedFont(from names: [String], size: CGFloat) -> Font {
-                guard let primary = names.first, let primaryFont = NSFont(name: primary, size: size) else { return Font.system(size: size) }
-                let fallbacks: [String] = names.dropFirst().compactMap({ $0 })
+        private static func combine(fonts names: [String], size: CGFloat) -> Font {
+                let fontNames: [String] = names.filter({ found(font: $0) }).uniqued()
+                guard let primary = fontNames.first, let primaryFont = NSFont(name: primary, size: size) else { return Font.system(size: size) }
+                let fallbacks = fontNames.dropFirst()
+                guard !(fallbacks.isEmpty) else { return Font.custom(primary, size: size) }
                 let primaryDescriptor: NSFontDescriptor = primaryFont.fontDescriptor
-                let descriptors: [NSFontDescriptor] = fallbacks.map { name -> NSFontDescriptor in
-                        return primaryDescriptor.addingAttributes([.name: name])
+                let descriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
+                        return primaryDescriptor.addingAttributes([.name: fontName])
                 }
                 let descriptor: NSFontDescriptor = primaryDescriptor.addingAttributes([.cascadeList : descriptors])
-                guard let combined: NSFont = NSFont(descriptor: descriptor, size: size) else { return Font.system(size: size) }
+                guard let combined: NSFont = NSFont(descriptor: descriptor, size: size) else { return Font.custom(primary, size: size) }
                 return Font(combined)
         }
 }
