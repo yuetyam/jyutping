@@ -58,7 +58,7 @@ private extension Font {
                 let descriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
                         return primaryDescriptor.addingAttributes([.name: fontName])
                 }
-                let descriptor: NSFontDescriptor = primaryDescriptor.addingAttributes([.cascadeList : descriptors])
+                let descriptor: NSFontDescriptor = primaryDescriptor.addingAttributes([.cascadeList: descriptors])
                 guard let combined: NSFont = NSFont(descriptor: descriptor, size: size) else { return Font.custom(primary, size: size) }
                 return Font(combined)
         }
