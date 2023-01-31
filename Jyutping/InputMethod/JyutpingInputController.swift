@@ -23,19 +23,13 @@ final class JyutpingInputController: IMKInputController {
         }
         private lazy var preferencesWindow: NSWindow? = nil
         private func displayPreferencesPane() {
-                preferencesWindow?.setFrame(.zero, display: true)
-                preferencesWindow?.close()
-                let frame: CGRect = {
-                        let x: CGFloat = screenFrame.width / 4.0
-                        let y: CGFloat = screenFrame.height / 5.0
-                        let width: CGFloat = screenFrame.width / 2.0
-                        let height: CGFloat = (screenFrame.height / 5.0) * 3.0
-                        return CGRect(x: x, y: y, width: width, height: height)
-                }()
+                guard preferencesWindow == nil else { return }
+                let frame: CGRect = preferencesWindowFrame
                 preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
                 preferencesWindow?.title = NSLocalizedString("Jyutping Input Method Preferences", comment: "")
                 let visualEffectView = NSVisualEffectView()
-                visualEffectView.material = .titlebar
+                visualEffectView.material = .sidebar
+                visualEffectView.blendingMode = .behindWindow
                 visualEffectView.state = .active
                 preferencesWindow?.contentView = visualEffectView
 
@@ -58,15 +52,22 @@ final class JyutpingInputController: IMKInputController {
                 preferencesWindow?.setFrame(frame, display: true)
                 NSApp.activate(ignoringOtherApps: true)
         }
+        private var preferencesWindowFrame: CGRect {
+                let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
+                let screenHeight: CGFloat = NSScreen.main?.frame.size.height ?? 1080
+                let x: CGFloat = screenWidth / 4.0
+                let y: CGFloat = screenHeight / 5.0
+                let width: CGFloat = screenWidth / 2.0
+                let height: CGFloat = (screenHeight / 5.0) * 3.0
+                return CGRect(x: x, y: y, width: width, height: height)
+        }
 
         private lazy var window: NSWindow? = nil
-        private lazy var screenFrame: CGRect = NSScreen.main?.frame ?? CGRect(origin: .zero, size: CGSize(width: 1920, height: 1080))
         private let offset: CGFloat = 10
-
         private func resetWindow() {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                lazy var frame: CGRect = windowFrame()
+                let frame: CGRect = currentWindowFrame
                 if window == nil {
                         window = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: false)
                         window?.backgroundColor = .clear
@@ -107,7 +108,6 @@ final class JyutpingInputController: IMKInputController {
                                 }
                         }
                         window?.contentViewController?.addChild(settingsUI)
-                        window?.setFrame(.zero, display: true)
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(frame, display: true)
                 default:
@@ -146,10 +146,8 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
 
-        private lazy var windowPattern: WindowPattern = .regular
-
-        private func windowFrame(origin: CGPoint? = nil) -> CGRect {
-                let origin: CGPoint = origin ?? currentClient?.position ?? .zero
+        private var currentWindowFrame: CGRect {
+                let origin: CGPoint = currentClient?.position ?? .zero
                 let width: CGFloat = 600
                 let height: CGFloat = 380 + (offset * 2)
                 let x: CGFloat = {
@@ -169,11 +167,14 @@ final class JyutpingInputController: IMKInputController {
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
+        private lazy var screenMaxX: CGFloat = NSScreen.main?.frame.maxX ?? 1920
+        private lazy var windowPattern: WindowPattern = .regular
+
         private lazy var currentClient: IMKTextInput? = nil {
                 didSet {
                         guard let origin = currentClient?.position else { return }
-                        let isRegularHorizontal: Bool = origin.x < (screenFrame.maxX - 600)
-                        let isRegularVertical: Bool = origin.y > (screenFrame.minY + 400)
+                        let isRegularHorizontal: Bool = origin.x < (screenMaxX - 600)
+                        let isRegularVertical: Bool = origin.y > 400
                         let newPattern: WindowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
                                 case (true, true):
@@ -200,6 +201,20 @@ final class JyutpingInputController: IMKInputController {
         private lazy var candidates: [Candidate] = [] {
                 didSet {
                         updateDisplayingCandidates(.establish)
+                        switch (oldValue.isEmpty, candidates.isEmpty) {
+                        case (true, true):
+                                // Stay empty
+                                break
+                        case (true, false):
+                                // Starting
+                                window?.setFrame(currentWindowFrame, display: true)
+                        case (false, true):
+                                // Ending
+                                window?.setFrame(.zero, display: true)
+                        case (false, false):
+                                // Ongoing
+                                window?.setFrame(currentWindowFrame, display: true)
+                        }
                 }
         }
 
@@ -284,8 +299,6 @@ final class JyutpingInputController: IMKInputController {
                                 markedText = .empty
                                 candidates = []
                                 displayObject.reset()
-                                window?.setFrame(.zero, display: true)
-                                break
                         case .some("r"):
                                 segmentation = []
                                 markedText = processingText
@@ -470,6 +483,7 @@ final class JyutpingInputController: IMKInputController {
         private lazy var simplifier: Simplifier? = nil
 
         override func activateServer(_ sender: Any!) {
+                screenMaxX = NSScreen.main?.frame.maxX ?? 1920
                 currentClient = sender as? IMKTextInput
                 Lychee.connect()
                 if userLexicon == nil {
@@ -478,7 +492,6 @@ final class JyutpingInputController: IMKInputController {
                 if !bufferText.isEmpty {
                         bufferText = .empty
                 }
-                resetWindow()
                 DispatchQueue.main.async { [weak self] in
                         self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
@@ -498,6 +511,7 @@ final class JyutpingInputController: IMKInputController {
                 settingsObject.resetHighlightedIndex()
                 indices = (0, 0)
                 window?.setFrame(.zero, display: true)
+                window?.close()
 
                 currentClient = nil
         }
@@ -529,28 +543,7 @@ final class JyutpingInputController: IMKInputController {
                 let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
                 guard !shouldIgnoreCurrentEvent else { return false }
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
-                let shouldResetClient: Bool = {
-                        guard let previousPosition = currentClient?.position else { return true }
-                        guard !bufferText.isEmpty else { return true }
-                        let distanceX = client.position.x.distance(to: previousPosition.x)
-                        let distanceY = client.position.y.distance(to: previousPosition.y)
-                        let hasSignificantDistance: Bool = abs(distanceX) > 300 || abs(distanceY) > 300
-                        return hasSignificantDistance
-                }()
-                if shouldResetClient {
-                        currentClient = client
-                }
-                func toggleInstantSettingsView() {
-                        switch inputState {
-                        case .cantonese:
-                                passBuffer()
-                                inputState = .instantSettings
-                        case .english:
-                                inputState = .instantSettings
-                        case .instantSettings:
-                                handleSettings(-1)
-                        }
-                }
+                currentClient = client
                 lazy var hasControlShiftModifiers: Bool = false
                 switch modifiers {
                 case [.control, .shift], .control:
@@ -559,8 +552,18 @@ final class JyutpingInputController: IMKInputController {
                                 // handled by NSMenu
                                 return false
                         case KeyCode.Symbol.VK_BACKQUOTE:
-                                toggleInstantSettingsView()
+                                switch inputState {
+                                case .cantonese:
+                                        passBuffer()
+                                        inputState = .instantSettings
+                                case .english:
+                                        inputState = .instantSettings
+                                case .instantSettings:
+                                        handleSettings(-1)
+                                }
                                 return true
+
+                        // TODO: Replace tis with UserLexicon modification
                         /*
                         case KeyCode.Symbol.VK_MINUS:
                                 inputState = .cantonese
@@ -643,7 +646,6 @@ final class JyutpingInputController: IMKInputController {
                         case .cantonese:
                                 if isBufferState {
                                         selectDisplayingItem(index: index, client: client)
-                                        adjustWindow(origin: client.position)
                                         return true
                                         /*
                                         if hasControlShiftModifiers {
@@ -654,7 +656,6 @@ final class JyutpingInputController: IMKInputController {
                                                 return true
                                         } else {
                                                 selectDisplayingItem(index: index, client: client)
-                                                adjustWindow(origin: client.position)
                                                 return true
                                         }
                                         */
@@ -719,7 +720,6 @@ final class JyutpingInputController: IMKInputController {
                                                 bufferText = punctuationKey.keyText
                                         }
                                 }
-                                adjustWindow(origin: client.position)
                                 return true
                         case .english:
                                 return false
@@ -733,7 +733,6 @@ final class JyutpingInputController: IMKInputController {
                                 guard hasCharacters else { return false }
                                 let text: String = isShifting ? letter.uppercased() : letter
                                 bufferText += text
-                                adjustWindow(origin: client.position)
                                 return true
                         case .english:
                                 return false
@@ -768,7 +767,6 @@ final class JyutpingInputController: IMKInputController {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 bufferText = String(bufferText.dropLast())
-                                adjustWindow(origin: client.position)
                                 return true
                         case .english:
                                 return false
@@ -799,7 +797,6 @@ final class JyutpingInputController: IMKInputController {
                                         return true
                                 } else {
                                         selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
-                                        adjustWindow(origin: client.position)
                                         return true
                                 }
                         case .english:
@@ -855,12 +852,6 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
 
-        private func adjustWindow(origin: CGPoint? = nil) {
-                let isEmptyWindow: Bool = bufferText.isEmpty || candidates.isEmpty
-                let frame: CGRect = isEmptyWindow ? .zero : windowFrame(origin: origin)
-                window?.setFrame(frame, display: true)
-        }
-
         private func passBuffer() {
                 guard isBufferState else { return }
                 let text: String = InstantSettings.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
@@ -872,8 +863,6 @@ final class JyutpingInputController: IMKInputController {
         private func handleSettings(_ index: Int? = nil) {
                 let selectedIndex: Int = index ?? settingsObject.highlightedIndex
                 defer {
-                        settingsObject.resetHighlightedIndex()
-                        window?.setFrame(.zero, display: true)
                         inputState = {
                                 switch InstantSettings.inputMethodMode {
                                 case .cantonese:
