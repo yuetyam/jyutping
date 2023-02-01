@@ -36,7 +36,7 @@
 "Insert an ideographic space" = "輸入一個全形空格（U+3000）";
 "No Double Space Shortcut" = "無";
 
-"Clear User Lexicon" = "清空用戶詞庫";
+"Clear User Lexicon" = "清空個人詞庫";
 
 
 // MARK: - Accessibility
