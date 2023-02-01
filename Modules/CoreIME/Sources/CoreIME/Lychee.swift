@@ -9,6 +9,7 @@ public struct Lychee {
 
         /// Connect SQLite3 database
         public static func connect() {
+                close()
                 guard let path: String = Bundle.module.path(forResource: "lexicon", ofType: "sqlite3") else { return }
                 var db: OpaquePointer?
                 if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK {
@@ -18,24 +19,26 @@ public struct Lychee {
 
         /// Close SQLite3 database
         public static func close() {
-                sqlite3_close_v2(database)
-                database = nil
+                guard database != nil else { return }
+                if sqlite3_close_v2(database) == SQLITE_OK {
+                        database = nil
+                }
         }
 
         /// Reconnect database if it's not working
         public static func prepare() {
                 let isWorking = ping()
                 guard !isWorking else { return }
-                close()
                 connect()
         }
         private static func ping() -> Bool {
+                guard database != nil else { return false }
                 var found: Bool = false
                 let text: String = "ngo"
                 let code = text.hash
                 let queryString = "SELECT word FROM imetable WHERE ping = \(code) LIMIT 1;"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         if sqlite3_step(queryStatement) == SQLITE_ROW {
                                 _ = String(cString: sqlite3_column_text(queryStatement, 0))
                                 found = true

@@ -4,17 +4,20 @@ import CoreIME
 
 struct UserLexicon {
 
-        private let database: OpaquePointer? = {
-                guard let libraryDirectoryUrl: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first else { return nil }
+        private static var database: OpaquePointer? = nil
+
+        static func connect() {
+                close()
+                guard let libraryDirectoryUrl: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first else { return }
                 let userLexiconUrl: URL = libraryDirectoryUrl.appendingPathComponent("userlexicon.sqlite3", isDirectory: false)
                 var db: OpaquePointer? = nil
                 if sqlite3_open_v2(userLexiconUrl.path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK {
-                        return db
-                } else {
-                        return nil
+                        database = db
+                        ensureTable()
                 }
-        }()
-        private func ensure() {
+        }
+
+        private static func ensureTable() {
                 let createTableString = "CREATE TABLE IF NOT EXISTS lexicon(id INTEGER NOT NULL PRIMARY KEY,input INTEGER NOT NULL,ping INTEGER NOT NULL,prefix INTEGER NOT NULL,shortcut INTEGER NOT NULL,frequency INTEGER NOT NULL,word TEXT NOT NULL,jyutping TEXT NOT NULL);"
                 var createTableStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, createTableString, -1, &createTableStatement, nil) == SQLITE_OK {
@@ -22,17 +25,24 @@ struct UserLexicon {
                 }
                 sqlite3_finalize(createTableStatement)
         }
-        init() {
-                ensure()
+
+        static func prepare() {
+                if database == nil {
+                        connect()
+                }
         }
-        func close() {
-                sqlite3_close_v2(database)
+
+        static func close() {
+                guard database != nil else { return }
+                if sqlite3_close_v2(database) == SQLITE_OK {
+                        database = nil
+                }
         }
 
 
         // MARK: - Handle Candidate
 
-        func handle(_ candidate: Candidate) {
+        static func handle(_ candidate: Candidate) {
                 let id: Int64 = Int64((candidate.lexiconText + candidate.romanization).hash)
                 if let frequency: Int64 = find(by: id) {
                         update(id: id, frequency: frequency + 1)
@@ -49,7 +59,7 @@ struct UserLexicon {
                         insert(entry: newEntry)
                 }
         }
-        private func find(by id: Int64) -> Int64? {
+        private static func find(by id: Int64) -> Int64? {
                 let queryStatementString = "SELECT frequency FROM lexicon WHERE id = \(id) LIMIT 1;"
                 var queryStatement: OpaquePointer? = nil
                 var frequency: Int64?
@@ -61,7 +71,7 @@ struct UserLexicon {
                 sqlite3_finalize(queryStatement)
                 return frequency
         }
-        private func update(id: Int64, frequency: Int64) {
+        private static func update(id: Int64, frequency: Int64) {
                 let updateStatementString = "UPDATE lexicon SET frequency = \(frequency) WHERE id = \(id);"
                 var updateStatement: OpaquePointer?
                 if sqlite3_prepare_v2(database, updateStatementString, -1, &updateStatement, nil) == SQLITE_OK {
@@ -69,7 +79,7 @@ struct UserLexicon {
                 }
                 sqlite3_finalize(updateStatement)
         }
-        private func insert(entry: LexiconEntry) {
+        private static func insert(entry: LexiconEntry) {
                 let insertStatementString = "INSERT INTO lexicon (id, input, ping, prefix, shortcut, frequency, word, jyutping) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
                 var insertStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, insertStatementString, -1, &insertStatement, nil) == SQLITE_OK {
@@ -91,7 +101,7 @@ struct UserLexicon {
 
         // MARK: - Suggestion
 
-        func suggest(for text: String) -> [Candidate] {
+        static func suggest(for text: String) -> [Candidate] {
                 let matched = match(for: text)
                 guard matched.isEmpty else {
                         return matched + fetch(by: text)
@@ -105,7 +115,7 @@ struct UserLexicon {
                         .replacingOccurrences(of: "y", with: "j", options: .anchored)
                 return match(for: convertedText) + fetch(by: text)
         }
-        private func match(for text: String) -> [Candidate] {
+        private static func match(for text: String) -> [Candidate] {
                 let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE ping = \(text.hash) ORDER BY frequency DESC LIMIT 5;"
                 var queryStatement: OpaquePointer? = nil
                 var candidates: [Candidate] = []
@@ -120,7 +130,7 @@ struct UserLexicon {
                 sqlite3_finalize(queryStatement)
                 return candidates
         }
-        private func fetch(by text: String) -> [Candidate] {
+        private static func fetch(by text: String) -> [Candidate] {
                 let textHash: Int = text.hash
                 let shortcutHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE input = \(textHash) OR prefix = \(textHash) OR shortcut = \(shortcutHash) ORDER BY frequency DESC LIMIT 5;"
@@ -141,7 +151,7 @@ struct UserLexicon {
 
         // MARK: - Clear User Lexicon
 
-        func deleteAll() {
+        static func deleteAll() {
                 let deleteStatementString = "DELETE FROM lexicon;"
                 var deleteStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, deleteStatementString, -1, &deleteStatement, nil) == SQLITE_OK {

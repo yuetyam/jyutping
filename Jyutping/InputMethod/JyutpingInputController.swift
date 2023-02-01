@@ -11,18 +11,15 @@ final class JyutpingInputController: IMKInputController {
         override func menu() -> NSMenu! {
                 let preferences = NSMenuItem()
                 preferences.title = NSLocalizedString("menu.preferences", comment: "")
-                preferences.action = #selector(openPreferences)
+                preferences.action = #selector(openPreferencesWindow)
                 preferences.keyEquivalent = ","
                 preferences.keyEquivalentModifierMask = [.control, .shift]
                 let menu = NSMenu()
                 menu.addItem(preferences)
                 return menu
         }
-        @objc private func openPreferences() {
-                displayPreferencesPane()
-        }
         private lazy var preferencesWindow: NSWindow? = nil
-        private func displayPreferencesPane() {
+        @objc private func openPreferencesWindow() {
                 guard preferencesWindow == nil else { return }
                 let frame: CGRect = preferencesWindowFrame
                 preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
@@ -288,9 +285,10 @@ final class JyutpingInputController: IMKInputController {
         }
         private lazy var processingText: String = .empty {
                 willSet {
-                        if processingText.isEmpty && !newValue.isEmpty {
-                                Lychee.prepare()
-                        }
+                        let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
+                        guard isStarting else { return }
+                        Lychee.prepare()
+                        UserLexicon.prepare()
                 }
                 didSet {
                         switch processingText.first {
@@ -388,7 +386,7 @@ final class JyutpingInputController: IMKInputController {
                         }
                         return normal
                 }()
-                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
+                let lexiconCandidates: [Candidate] = UserLexicon.suggest(for: processingText)
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
                 push(combined)
         }
@@ -479,16 +477,13 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
 
-        private lazy var userLexicon: UserLexicon? = nil
         private lazy var simplifier: Simplifier? = nil
 
         override func activateServer(_ sender: Any!) {
                 screenMaxX = NSScreen.main?.frame.maxX ?? 1920
                 currentClient = sender as? IMKTextInput
+                UserLexicon.connect()
                 Lychee.connect()
-                if userLexicon == nil {
-                        userLexicon = UserLexicon()
-                }
                 if !bufferText.isEmpty {
                         bufferText = .empty
                 }
@@ -498,8 +493,7 @@ final class JyutpingInputController: IMKInputController {
         }
         override func deactivateServer(_ sender: Any!) {
                 Lychee.close()
-                userLexicon?.close()
-                userLexicon = nil
+                UserLexicon.close()
                 simplifier?.close()
                 simplifier = nil
 
@@ -583,7 +577,7 @@ final class JyutpingInputController: IMKInputController {
                                         for candidate in candidates where candidate.isCantonese {
                                                 let isEqual: Bool = candidate.text == selectedItem.text && candidate.romanization == selectedItem.comment
                                                 if isEqual {
-                                                        userLexicon?.removeItem(candidate: candidate)
+                                                        UserLexicon.removeItem(candidate: candidate)
                                                         break
                                                 }
                                         }
@@ -941,7 +935,7 @@ final class JyutpingInputController: IMKInputController {
                                 if bufferText.isEmpty && !candidateSequence.isEmpty {
                                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                                         candidateSequence = []
-                                        userLexicon?.handle(concatenatedCandidate)
+                                        UserLexicon.handle(concatenatedCandidate)
                                 }
                         }
                         candidateSequence.append(candidate)

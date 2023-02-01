@@ -97,9 +97,7 @@ final class KeyboardViewController: UIInputViewController {
 
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
-                if userLexicon == nil {
-                        userLexicon = UserLexicon()
-                }
+                UserLexicon.connect()
                 Lychee.connect()
                 if isHapticFeedbackOn && hapticFeedback == nil {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
@@ -126,8 +124,7 @@ final class KeyboardViewController: UIInputViewController {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
                 Lychee.close()
-                userLexicon?.close()
-                userLexicon = nil
+                UserLexicon.close()
                 simplifier?.close()
                 simplifier = nil
 
@@ -442,7 +439,7 @@ final class KeyboardViewController: UIInputViewController {
                                 if bufferText.isEmpty && !candidateSequence.isEmpty {
                                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                                         candidateSequence = []
-                                        handleLexicon(concatenatedCandidate)
+                                        UserLexicon.handle(concatenatedCandidate)
                                 }
                         }
                         let bufferTextLength: Int = bufferText.count
@@ -531,27 +528,19 @@ final class KeyboardViewController: UIInputViewController {
                         case .some("r"):
                                 segmentation = []
                                 markedText = processingText
-                                imeQueue.async { [unowned self] in
-                                        pinyinReverseLookup()
-                                }
+                                pinyinReverseLookup()
                         case .some("v"):
                                 segmentation = []
                                 markedText = processingText
-                                imeQueue.async { [unowned self] in
-                                        cangjieReverseLookup()
-                                }
+                                cangjieReverseLookup()
                         case .some("x"):
                                 segmentation = []
                                 markedText = processingText
-                                imeQueue.async { [unowned self] in
-                                        strokeReverseLookup()
-                                }
+                                strokeReverseLookup()
                         case .some("q"):
                                 segmentation = []
                                 markedText = processingText
-                                imeQueue.async { [unowned self] in
-                                        leungFanReverseLookup()
-                                }
+                                leungFanReverseLookup()
                         default:
                                 segmentation = Segmentor.segment(processingText)
                                 markedText = {
@@ -563,12 +552,10 @@ final class KeyboardViewController: UIInputViewController {
                                         let tail = processingText.dropFirst(bestScheme.length)
                                         return leading + " " + tail
                                 }()
-                                imeQueue.async { [unowned self] in
-                                        if let markCandidate = Lychee.searchMark(for: bufferText) {
-                                                candidates = [markCandidate]
-                                        } else {
-                                                imeSuggest()
-                                        }
+                                if let markCandidate = Lychee.searchMark(for: bufferText) {
+                                        candidates = [markCandidate]
+                                } else {
+                                        suggest()
                                 }
                         }
                 }
@@ -630,8 +617,6 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Engine
 
-        private let imeQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.Keyboard.ime", qos: .userInteractive)
-        private lazy var userLexicon: UserLexicon? = UserLexicon()
         private lazy var simplifier: Simplifier? = nil
 
         private func pinyinReverseLookup() {
@@ -684,7 +669,7 @@ final class KeyboardViewController: UIInputViewController {
                 let lookup: [Candidate] = Lychee.leungFanLookup(for: text)
                 push(lookup)
         }
-        private func imeSuggest() {
+        private func suggest() {
                 let engineCandidates: [Candidate] = {
                         let convertedSegmentation: Segmentation = segmentation.converted()
                         var normal: [Candidate] = Lychee.suggest(for: processingText, segmentation: convertedSegmentation)
@@ -705,7 +690,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         return normal
                 }()
-                let lexiconCandidates: [Candidate] = userLexicon?.suggest(for: processingText) ?? []
+                let lexiconCandidates: [Candidate] = UserLexicon.suggest(for: processingText)
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
                 push(combined)
         }
@@ -753,15 +738,9 @@ final class KeyboardViewController: UIInputViewController {
                 }
         }
         private lazy var candidateSequence: [Candidate] = []
-        func handleLexicon(_ candidate: Candidate) {
-                imeQueue.async { [unowned self] in
-                        userLexicon?.handle(candidate)
-                }
-        }
+
         func clearUserLexicon() {
-                imeQueue.async { [unowned self] in
-                        userLexicon?.deleteAll()
-                }
+                UserLexicon.deleteAll()
                 Emoji.clearFrequentEmojis()
         }
 
