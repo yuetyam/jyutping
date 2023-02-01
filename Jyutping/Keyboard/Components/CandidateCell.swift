@@ -1,4 +1,5 @@
 import UIKit
+import CoreIME
 
 final class SidebarCell: UICollectionViewCell {
 

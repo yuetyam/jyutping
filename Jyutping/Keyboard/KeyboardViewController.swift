@@ -1,7 +1,6 @@
 import UIKit
 import UniformTypeIdentifiers
 import CommonExtensions
-import CharacterSets
 import CoreIME
 
 final class KeyboardViewController: UIInputViewController {
@@ -125,8 +124,6 @@ final class KeyboardViewController: UIInputViewController {
                 hapticFeedback = nil
                 Lychee.close()
                 UserLexicon.close()
-                simplifier?.close()
-                simplifier = nil
 
                 candidateSequence = []
                 candidates = []
@@ -617,8 +614,6 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Engine
 
-        private lazy var simplifier: Simplifier? = nil
-
         private func pinyinReverseLookup() {
                 let text: String = String(processingText.dropFirst())
                 guard !text.isEmpty else {
@@ -695,39 +690,7 @@ final class KeyboardViewController: UIInputViewController {
                 push(combined)
         }
         private func push(_ origin: [Candidate]) {
-                switch Logogram.current {
-                case .traditional:
-                        candidates = origin.uniqued()
-                case .hongkong:
-                        let converted: [Candidate] = origin.map({ transform($0, logogram: .hongkong) })
-                        candidates = converted.uniqued()
-                case .taiwan:
-                        let converted: [Candidate] = origin.map({ transform($0, logogram: .taiwan) })
-                        candidates = converted.uniqued()
-                case .simplified:
-                        if simplifier == nil {
-                                simplifier = Simplifier()
-                        }
-                        let converted: [Candidate] = origin.map({ transform($0, logogram: .simplified) })
-                        candidates = converted.uniqued()
-                }
-        }
-        private func transform(_ candidate: Candidate, logogram: Logogram) -> Candidate {
-                guard candidate.isCantonese else { return candidate }
-                let convertedText: String = convert(text: candidate.text, logogram: logogram)
-                return Candidate(text: convertedText, romanization: candidate.romanization, input: candidate.input, lexiconText: candidate.lexiconText)
-        }
-        private func convert(text: String, logogram: Logogram) -> String {
-                switch logogram {
-                case .traditional:
-                        return text
-                case .hongkong:
-                        return Converter.convert(text, to: .hongkong)
-                case .taiwan:
-                        return Converter.convert(text, to: .taiwan)
-                case .simplified:
-                        return simplifier?.convert(text) ?? text
-                }
+                candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
         private(set) lazy var candidates: [Candidate] = [] {
                 didSet {

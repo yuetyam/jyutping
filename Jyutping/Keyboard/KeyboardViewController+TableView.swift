@@ -1,4 +1,5 @@
 import UIKit
+import CoreIME
 
 struct Identifiers {
         static let CandidateCell: String = "CandidateCell"

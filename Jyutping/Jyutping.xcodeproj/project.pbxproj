@@ -83,7 +83,6 @@
 		37EF1959296DBE1600A3F4C9 /* YingWaaFanWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */; };
 		37EF195C296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */; };
 		37FC1AD9294DF40900D7153F /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 37FC1AD2294DF40900D7153F /* Keyboard.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		37FC1AE0294DF5FD00D7153F /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1ADF294DF5FD00D7153F /* CharacterSets */; };
 		37FC1AE2294DF60200D7153F /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1AE1294DF60200D7153F /* CommonExtensions */; };
 		37FC1AE5294DF66500D7153F /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1AE4294DF66500D7153F /* CoreIME */; };
 		37FC1B14294DF6AA00D7153F /* KeyboardViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AE6294DF6A900D7153F /* KeyboardViewController+TableView.swift */; };
@@ -161,7 +160,6 @@
 		37FC1BBA294DFC5400D7153F /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B9E294DFC5300D7153F /* WindowPattern.swift */; };
 		37FC1BBB294DFC5400D7153F /* InputMethodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */; };
 		37FC1BBC294DFC5400D7153F /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1BA0294DFC5300D7153F /* Logogram.swift */; };
-		37FC1BBE294DFC6D00D7153F /* CharacterSets in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1BBD294DFC6D00D7153F /* CharacterSets */; };
 		37FC1BC0294DFC7000D7153F /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1BBF294DFC7000D7153F /* CommonExtensions */; };
 		37FC1BC2294DFC7400D7153F /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1BC1294DFC7400D7153F /* CoreIME */; };
 		37FC1BC4294DFCCE00D7153F /* jyutpingimeicon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1BC3294DFCCE00D7153F /* jyutpingimeicon.pdf */; };
@@ -318,7 +316,6 @@
 		37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuLabel.swift; sourceTree = "<group>"; };
 		37FC1AD2294DF40900D7153F /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FC1AD6294DF40900D7153F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		37FC1ADE294DF5D100D7153F /* CharacterSets */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CharacterSets; path = ../Modules/CharacterSets; sourceTree = "<group>"; };
 		37FC1AE3294DF65400D7153F /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
 		37FC1AE6294DF6A900D7153F /* KeyboardViewController+TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyboardViewController+TableView.swift"; sourceTree = "<group>"; };
 		37FC1AE8294DF6A900D7153F /* KeyView+construction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KeyView+construction.swift"; sourceTree = "<group>"; };
@@ -462,7 +459,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FC1AE5294DF66500D7153F /* CoreIME in Frameworks */,
-				37FC1AE0294DF5FD00D7153F /* CharacterSets in Frameworks */,
 				37FC1AE2294DF60200D7153F /* CommonExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,7 +468,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FC1BC2294DFC7400D7153F /* CoreIME in Frameworks */,
-				37FC1BBE294DFC6D00D7153F /* CharacterSets in Frameworks */,
 				37FC1BC0294DFC7000D7153F /* CommonExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,7 +518,6 @@
 			isa = PBXGroup;
 			children = (
 				37FC1AE3294DF65400D7153F /* CoreIME */,
-				37FC1ADE294DF5D100D7153F /* CharacterSets */,
 				37D7BDC1294CCAC5006A6ADD /* CommonExtensions */,
 				37D7BDBD294CC9BE006A6ADD /* Materials */,
 				37D7BD14294CAADB006A6ADD /* Jyutping */,
@@ -999,7 +993,6 @@
 			);
 			name = Keyboard;
 			packageProductDependencies = (
-				37FC1ADF294DF5FD00D7153F /* CharacterSets */,
 				37FC1AE1294DF60200D7153F /* CommonExtensions */,
 				37FC1AE4294DF66500D7153F /* CoreIME */,
 			);
@@ -1021,7 +1014,6 @@
 			);
 			name = InputMethod;
 			packageProductDependencies = (
-				37FC1BBD294DFC6D00D7153F /* CharacterSets */,
 				37FC1BBF294DFC7000D7153F /* CommonExtensions */,
 				37FC1BC1294DFC7400D7153F /* CoreIME */,
 			);
@@ -1628,11 +1620,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 82;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
-				DEVELOPMENT_TEAM = B4DFXUQCVX;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jyutping/Info.plist;
@@ -1670,11 +1662,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 82;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
-				DEVELOPMENT_TEAM = B4DFXUQCVX;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Jyutping/Info.plist;
@@ -1797,7 +1789,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 82;
-				DEVELOPMENT_TEAM = B4DFXUQCVX;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
@@ -1826,7 +1818,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 82;
-				DEVELOPMENT_TEAM = B4DFXUQCVX;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
@@ -1855,12 +1847,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = InputMethod/InputMethod.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 82;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
-				DEVELOPMENT_TEAM = B4DFXUQCVX;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InputMethod/Info.plist;
@@ -1889,12 +1881,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = InputMethod/InputMethod.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 82;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
-				DEVELOPMENT_TEAM = B4DFXUQCVX;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InputMethod/Info.plist;
@@ -2077,10 +2069,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
 		};
-		37FC1ADF294DF5FD00D7153F /* CharacterSets */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CharacterSets;
-		};
 		37FC1AE1294DF60200D7153F /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
@@ -2088,10 +2076,6 @@
 		37FC1AE4294DF66500D7153F /* CoreIME */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CoreIME;
-		};
-		37FC1BBD294DFC6D00D7153F /* CharacterSets */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = CharacterSets;
 		};
 		37FC1BBF294DFC7000D7153F /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;

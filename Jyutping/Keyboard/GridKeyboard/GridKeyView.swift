@@ -1,4 +1,5 @@
 import UIKit
+import CoreIME
 
 /// 九宮格鍵
 final class GridKeyView: UIView {

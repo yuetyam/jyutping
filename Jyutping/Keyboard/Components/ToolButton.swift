@@ -1,4 +1,5 @@
 import UIKit
+import CoreIME
 
 final class ToolButton: UIButton {
         init(image: UIImage?, topInset: CGFloat = 0, bottomInset: CGFloat = 0, leftInset: CGFloat = 0, rightInset: CGFloat = 0) {

@@ -1,38 +1,26 @@
-/// Character Variants Converter
+import Foundation
+
+extension Candidate {
+
+        /// Convert Cantonese Candidate text to specific variant
+        /// - Parameter variant: Character variant
+        /// - Returns: Transformed Candidate
+        public func transformed(to variant: Logogram) -> Candidate {
+                guard self.isCantonese else { return self }
+                let convertedText: String = Converter.convert(self.text, to: variant)
+                return Candidate(text: convertedText, romanization: self.romanization, input: self.input, lexiconText: self.lexiconText)
+        }
+}
+
+/// Character Variant Converter
 public struct Converter {
 
-        /// 字符集標準
-        ///
-        /// 1: 傳統漢字
-        ///
-        /// 2: 傳統漢字（香港）
-        ///
-        /// 3: 傳統漢字（臺灣）
-        ///
-        /// 4: 簡化字
-        public enum Variant: Int {
-
-                /// Traditional. 傳統漢字
-                @available(*, deprecated, message: "Make no sense")
-                case traditional = 1
-
-                /// Traditional, Hong Kong. 傳統漢字（香港）
-                case hongkong = 2
-
-                /// Traditional, Taiwan. 傳統漢字（臺灣）
-                case taiwan = 3
-
-                /// Simplified. 簡化字
-                @available(*, unavailable, message: "Use Simplifier instead")
-                case simplified = 4
-        }
-
-        /// Convert the original (traditional) text to specific variant
+        /// Convert original (traditional) text to the specific variant
         /// - Parameters:
-        ///   - text: The original (traditional) text
-        ///   - variant: Characters Variant
+        ///   - text: Original (traditional) text
+        ///   - variant: Character Variant
         /// - Returns: Converted text
-        public static func convert(_ text: String, to variant: Variant) -> String {
+        public static func convert(_ text: String, to variant: Logogram) -> String {
                 switch variant {
                 case .traditional:
                         return text
@@ -57,8 +45,13 @@ public struct Converter {
                                 return String(converted)
                         }
                 case .simplified:
-                        return text
+                        return t2s(text)
                 }
+        }
+
+        private static func t2s(_ text: String) -> String {
+                let transformed: String? = text.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true)
+                return transformed ?? text
         }
 
         private static let hongkongVariants: [String: String] = {

@@ -2,7 +2,6 @@ import SwiftUI
 import Cocoa
 import InputMethodKit
 import CommonExtensions
-import CharacterSets
 import CoreIME
 
 @objc(JyutpingInputController)
@@ -249,12 +248,12 @@ final class JyutpingInputController: IMKInputController {
                         case .specialMark:
                                 return DisplayCandidate(item.text)
                         case .emoji:
-                                let convertedText: String = convert(text: item.lexiconText, logogram: Logogram.current)
+                                let convertedText: String = Converter.convert(item.lexiconText, to: Logogram.current)
                                 let comment: String = "〔\(convertedText)〕"
                                 return DisplayCandidate(item.text, comment: comment)
                         case .symbol:
                                 let originalComment: String = item.lexiconText
-                                lazy var convertedComment: String = convert(text: originalComment, logogram: Logogram.current)
+                                lazy var convertedComment: String = Converter.convert(originalComment, to: Logogram.current)
                                 let comment: String? = originalComment.isEmpty ? nil : "〔\(convertedComment)〕"
                                 let secondaryComment: String? = item.romanization.isEmpty ? nil : item.romanization
                                 return DisplayCandidate(item.text, comment: comment, secondaryComment: secondaryComment)
@@ -328,9 +327,6 @@ final class JyutpingInputController: IMKInputController {
                         default:
                                 segmentation = []
                                 markedText = processingText
-                                if Logogram.current == .simplified && simplifier == nil {
-                                        simplifier = Simplifier()
-                                }
                                 let symbols: [PunctuationSymbol] = {
                                         switch processingText {
                                         case PunctuationKey.comma.shiftingKeyText:
@@ -442,42 +438,8 @@ final class JyutpingInputController: IMKInputController {
                 push(lookup)
         }
         private func push(_ origin: [Candidate]) {
-                switch Logogram.current {
-                case .traditional:
-                        candidates = origin.uniqued()
-                case .hongkong:
-                        let converted: [Candidate] = origin.map({ transform($0, logogram: .hongkong) })
-                        candidates = converted.uniqued()
-                case .taiwan:
-                        let converted: [Candidate] = origin.map({ transform($0, logogram: .taiwan) })
-                        candidates = converted.uniqued()
-                case .simplified:
-                        if simplifier == nil {
-                                simplifier = Simplifier()
-                        }
-                        let converted: [Candidate] = origin.map({ transform($0, logogram: .simplified) })
-                        candidates = converted.uniqued()
-                }
+                candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
-        private func transform(_ candidate: Candidate, logogram: Logogram) -> Candidate {
-                guard candidate.isCantonese else { return candidate }
-                let convertedText: String = convert(text: candidate.text, logogram: logogram)
-                return Candidate(text: convertedText, romanization: candidate.romanization, input: candidate.input, lexiconText: candidate.lexiconText)
-        }
-        private func convert(text: String, logogram: Logogram) -> String {
-                switch logogram {
-                case .traditional:
-                        return text
-                case .hongkong:
-                        return Converter.convert(text, to: .hongkong)
-                case .taiwan:
-                        return Converter.convert(text, to: .taiwan)
-                case .simplified:
-                        return simplifier?.convert(text) ?? text
-                }
-        }
-
-        private lazy var simplifier: Simplifier? = nil
 
         override func activateServer(_ sender: Any!) {
                 screenMaxX = NSScreen.main?.frame.maxX ?? 1920
@@ -494,8 +456,6 @@ final class JyutpingInputController: IMKInputController {
         override func deactivateServer(_ sender: Any!) {
                 Lychee.close()
                 UserLexicon.close()
-                simplifier?.close()
-                simplifier = nil
 
                 bufferText = .empty
                 markedText = .empty

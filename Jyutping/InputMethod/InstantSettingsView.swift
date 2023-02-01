@@ -1,5 +1,5 @@
 import SwiftUI
-
+import CoreIME
 
 final class InstantSettingsObject: ObservableObject {
 
@@ -25,18 +25,7 @@ struct InstantSettingsView: View {
 
         private let lineSpacing: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
-        private let variant: Int = {
-                switch Logogram.current {
-                case .traditional:
-                        return 1
-                case .hongkong:
-                        return 2
-                case .taiwan:
-                        return 3
-                case .simplified:
-                        return 4
-                }
-        }()
+        private let currentVariant: Logogram = Logogram.current
 
         private let textLine1: String = "傳統漢字\u{3000}\u{3000}\u{3000}"
         private let textLine2: String = "傳統漢字・香港"
@@ -64,10 +53,10 @@ struct InstantSettingsView: View {
                 let highlightedIndex = settingsObject.highlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                SettingLabel(lineSpacing: lineSpacing, index: 0, text: textLine1, checked: variant == 1, highlighted: highlightedIndex == 0)
-                                SettingLabel(lineSpacing: lineSpacing, index: 1, text: textLine2, checked: variant == 2, highlighted: highlightedIndex == 1)
-                                SettingLabel(lineSpacing: lineSpacing, index: 2, text: textLine3, checked: variant == 3, highlighted: highlightedIndex == 2)
-                                SettingLabel(lineSpacing: lineSpacing, index: 3, text: textLine4, checked: variant == 4, highlighted: highlightedIndex == 3)
+                                SettingLabel(lineSpacing: lineSpacing, index: 0, text: textLine1, checked: currentVariant == .traditional, highlighted: highlightedIndex == 0)
+                                SettingLabel(lineSpacing: lineSpacing, index: 1, text: textLine2, checked: currentVariant == .hongkong, highlighted: highlightedIndex == 1)
+                                SettingLabel(lineSpacing: lineSpacing, index: 2, text: textLine3, checked: currentVariant == .taiwan, highlighted: highlightedIndex == 2)
+                                SettingLabel(lineSpacing: lineSpacing, index: 3, text: textLine4, checked: currentVariant == .simplified, highlighted: highlightedIndex == 3)
                         }
                         Divider()
                         Group {
@@ -102,7 +91,7 @@ private struct SettingLabel: View {
         var body: some View {
                 ZStack(alignment: .leading) {
                         HStack(spacing: 14) {
-                                SerialNumberLabel(7)
+                                SerialNumberLabel(index)
                                 Text(verbatim: "傳統漢字・香港").font(.candidate)
                                 Image(systemName: "checkmark").font(.title2)
                         }
