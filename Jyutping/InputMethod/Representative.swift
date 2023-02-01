@@ -17,6 +17,7 @@ enum Modifier {
 enum Representative: Hashable {
         case alphabet(String)
         case number(Int)
+        case keypadNumber(Int)
         case arrow(Direction)
         case punctuation(PunctuationKey)
         case separator
@@ -106,6 +107,16 @@ extension UInt16 {
                         return .number(8)
                 case KeyCode.Number.VK_KEY_9:
                         return .number(9)
+                case KeyCode.Keypad.VK_KEYPAD_1:
+                        return .keypadNumber(1)
+                case KeyCode.Keypad.VK_KEYPAD_2:
+                        return .keypadNumber(2)
+                case KeyCode.Keypad.VK_KEYPAD_3:
+                        return .keypadNumber(3)
+                case KeyCode.Keypad.VK_KEYPAD_4:
+                        return .keypadNumber(4)
+                case KeyCode.Keypad.VK_KEYPAD_5:
+                        return .keypadNumber(5)
                 case KeyCode.Special.VK_SPACE:
                         return .space
                 case KeyCode.Special.VK_RETURN, KeyCode.Keypad.VK_KEYPAD_ENTER:

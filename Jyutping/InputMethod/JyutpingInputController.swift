@@ -302,11 +302,9 @@ final class JyutpingInputController: IMKInputController {
                                 pinyinReverseLookup()
                         case .some("v"):
                                 segmentation = []
-                                markedText = processingText
                                 cangjieReverseLookup()
                         case .some("x"):
                                 segmentation = []
-                                markedText = processingText
                                 strokeReverseLookup()
                         case .some("q"):
                                 segmentation = []
@@ -398,35 +396,30 @@ final class JyutpingInputController: IMKInputController {
         }
         private func cangjieReverseLookup() {
                 let text: String = String(processingText.dropFirst())
-                guard !text.isEmpty else {
+                let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
+                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                if isValidSequence {
+                        markedText = String(converted)
+                        let lookup: [Candidate] = Lychee.cangjieLookup(for: text)
+                        push(lookup)
+                } else {
+                        markedText = processingText
                         candidates = []
-                        return
                 }
-                let lookup: [Candidate] = Lychee.cangjieLookup(for: text)
-                push(lookup)
         }
         private func strokeReverseLookup() {
-
-                // 橫: w, h     :  w for Waang, h for Heng or Horizontal
-                // 豎: s, v     :  s for Syu or Shu, v for Vertical
-                // 撇: a, p, l  :  p for Pit or Pie, l for Left, a for the position of key A
-                // 點: d, n, r  :  d for Dim or Dian or Dot, n for Naat(捺) or Na, r for Right
-                // 折: z, t     :  z for Zit or Zhe, t for Turning
-                let text: String = processingText.dropFirst()
-                        .replacingOccurrences(of: "h", with: "w")
-                        .replacingOccurrences(of: "v", with: "s")
-                        .replacingOccurrences(of: "p", with: "a")
-                        .replacingOccurrences(of: "l", with: "a")
-                        .replacingOccurrences(of: "n", with: "d")
-                        .replacingOccurrences(of: "r", with: "d")
-                        .replacingOccurrences(of: "t", with: "z")
-
-                guard !text.isEmpty else {
+                let text: String = String(processingText.dropFirst())
+                let transformed: String = Logogram.strokeTransform(text)
+                let converted = transformed.map({ Logogram.stroke(of: $0) }).compactMap({ $0 })
+                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                if isValidSequence {
+                        markedText = String(converted)
+                        let lookup: [Candidate] = Lychee.strokeLookup(for: transformed)
+                        push(lookup)
+                } else {
+                        markedText = processingText
                         candidates = []
-                        return
                 }
-                let lookup: [Candidate] = Lychee.strokeLookup(for: text)
-                push(lookup)
         }
         private func leungFanReverseLookup() {
                 let text: String = String(processingText.dropFirst())
@@ -644,6 +637,11 @@ final class JyutpingInputController: IMKInputController {
                                 handleSettings(index)
                                 return true
                         }
+                case .keypadNumber(let number):
+                        let isStrokeReverseLookup: Bool = inputState == .cantonese && bufferText.hasPrefix("x")
+                        guard isStrokeReverseLookup else { return false }
+                        bufferText += "\(number)"
+                        return true
                 case .punctuation(let punctuationKey):
                         switch inputState {
                         case .cantonese:
