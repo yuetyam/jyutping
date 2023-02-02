@@ -4,6 +4,7 @@ struct CandidateLabel: View {
 
         let candidate: DisplayCandidate
         let placeholder: DisplayCandidate
+        let shouldAnimateCandidateText: Bool
         let index: Int
         let isHighlighted: Bool
         let toneStyle: ToneDisplayStyle
@@ -17,7 +18,7 @@ struct CandidateLabel: View {
                 ZStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 Text(verbatim: serialNumber).font(.label)
-                                Text(verbatim: placeholder.text).font(.candidate).disableAnimation()
+                                Text(verbatim: placeholder.text).font(.candidate)
                                 if let comment = placeholder.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
                                 }
@@ -28,7 +29,7 @@ struct CandidateLabel: View {
                         .hidden()
                         HStack(spacing: 16) {
                                 Text(verbatim: serialNumber).font(.label)
-                                Text(verbatim: candidate.text).font(.candidate).disableAnimation()
+                                Text(verbatim: candidate.text).font(.candidate).conditionalAnimation(shouldAnimateCandidateText)
                                 if let comment = candidate.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
                                 }

@@ -14,4 +14,12 @@ extension View {
                         transaction.animation = nil
                 }
         }
+
+        func conditionalAnimation(_ shouldAnimate: Bool) -> some View {
+                return self.transaction { transaction in
+                        if !shouldAnimate {
+                                transaction.animation = nil
+                        }
+                }
+        }
 }

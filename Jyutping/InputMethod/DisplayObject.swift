@@ -6,6 +6,7 @@ final class DisplayObject: ObservableObject {
         @Published private(set) var longest: DisplayCandidate = DisplayObject.defaultLongest
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var animationState: Int = 0
+        @Published private(set) var candidateTextAnimationConditions: [Bool] = []
 
         private static let defaultLongest: DisplayCandidate = DisplayCandidate("毋", comment: "m4")
 
@@ -14,6 +15,7 @@ final class DisplayObject: ObservableObject {
                 longest = DisplayObject.defaultLongest
                 highlightedIndex = 0
                 animationState = 0
+                candidateTextAnimationConditions = []
         }
 
         func setItems(_ newItems: [DisplayCandidate]) {
@@ -21,16 +23,19 @@ final class DisplayObject: ObservableObject {
                         reset()
                         return
                 }
-                let newLongest: DisplayCandidate = newItems.sorted(by: { $0.isLonger(than: $1) }).first!
-                let shouldUpdateLongest: Bool = newLongest.isLonger(than: longest)
-
+                candidateTextAnimationConditions = Array(repeating: false, count: newItems.count)
                 let pageSize: Int = AppSettings.displayCandidatePageSize
                 let shouldAnimate: Bool = items.count == pageSize && newItems.count == pageSize
-
-                items = newItems
-                if shouldUpdateLongest {
-                        longest = newLongest
+                if shouldAnimate {
+                        for index in 0..<newItems.count {
+                                let oldTextCount = items[index].text.count
+                                let newTextCount = newItems[index].text.count
+                                let shouldAnimateCandidateText: Bool = !(oldTextCount == newTextCount)
+                                candidateTextAnimationConditions[index] = shouldAnimateCandidateText
+                        }
                 }
+                items = newItems
+                longest = newItems.longest!
                 highlightedIndex = 0
                 if shouldAnimate {
                         animationState += 1
