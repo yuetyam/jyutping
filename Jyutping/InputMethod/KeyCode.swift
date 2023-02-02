@@ -104,7 +104,7 @@ struct KeyCode {
                 case 5:
                         return "%"
                 case 6:
-                        return "^"
+                        return "……"
                 case 7:
                         return "&"
                 case 8:
@@ -117,7 +117,7 @@ struct KeyCode {
         }
 
         struct Symbol {
-                /// aka. grave accent. Below ESC.
+                /// aka. grave accent, backtick. Below ESC.
                 static let VK_BACKQUOTE    : UInt16 = 0x32
 
                 /// \

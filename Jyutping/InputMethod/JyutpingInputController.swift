@@ -333,13 +333,16 @@ final class JyutpingInputController: IMKInputController {
                                                 return PunctuationKey.period.shiftingSymbols
                                         case PunctuationKey.slash.keyText:
                                                 return PunctuationKey.slash.symbols
-
                                         case PunctuationKey.bracketLeft.shiftingKeyText:
                                                 return PunctuationKey.bracketLeft.shiftingSymbols
                                         case PunctuationKey.bracketRight.shiftingKeyText:
                                                 return PunctuationKey.bracketRight.shiftingSymbols
                                         case PunctuationKey.backSlash.shiftingKeyText:
                                                 return PunctuationKey.backSlash.shiftingSymbols
+                                        case PunctuationKey.backquote.keyText:
+                                                return PunctuationKey.backquote.symbols
+                                        case PunctuationKey.backquote.shiftingKeyText:
+                                                return PunctuationKey.backquote.shiftingSymbols
                                         default:
                                                 return PunctuationKey.slash.symbols
                                         }
@@ -647,10 +650,10 @@ final class JyutpingInputController: IMKInputController {
                         case .cantonese:
                                 guard candidates.isEmpty else {
                                         switch punctuationKey {
-                                        case .bracketLeft, .comma:
+                                        case .bracketLeft, .comma, .minus:
                                                 updateDisplayingCandidates(.previousPage)
                                                 return true
-                                        case .bracketRight, .period:
+                                        case .bracketRight, .period, .equal:
                                                 updateDisplayingCandidates(.nextPage)
                                                 return true
                                         default:

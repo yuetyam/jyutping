@@ -7,14 +7,15 @@ struct PunctuationKey: Hashable {
         let symbols: [PunctuationSymbol]
         let shiftingSymbols: [PunctuationSymbol]
 
+        private static let halfWidth: String = "半形"
+        private static let fullWidth: String = "全形"
+
         static let comma: PunctuationKey = {
                 let shiftingSymbols: [PunctuationSymbol] = [
                         PunctuationSymbol("《"),
                         PunctuationSymbol("〈"),
-                        PunctuationSymbol("«"),
-                        PunctuationSymbol("‹"),
-                        PunctuationSymbol("<", comment: "半形", secondaryComment: "U+003C"),
-                        PunctuationSymbol("＜", comment: "全形", secondaryComment: "U+FF1C")
+                        PunctuationSymbol("<", comment: halfWidth),
+                        PunctuationSymbol("＜", comment: fullWidth)
                 ]
                 return PunctuationKey(keyText: ",", shiftingKeyText: "<", instantSymbol: "，", instantShiftingSymbol: nil, symbols: [.init("，")], shiftingSymbols: shiftingSymbols)
         }()
@@ -22,10 +23,8 @@ struct PunctuationKey: Hashable {
                 let shiftingSymbols: [PunctuationSymbol] = [
                         PunctuationSymbol("》"),
                         PunctuationSymbol("〉"),
-                        PunctuationSymbol("»"),
-                        PunctuationSymbol("›"),
-                        PunctuationSymbol(">", comment: "半形", secondaryComment: "U+003E"),
-                        PunctuationSymbol("＞", comment: "全形", secondaryComment: "U+FF1E"),
+                        PunctuationSymbol(">", comment: halfWidth),
+                        PunctuationSymbol("＞", comment: fullWidth),
                         PunctuationSymbol("．", comment: "全形英文句號", secondaryComment: "U+FF0E"),
                         PunctuationSymbol("｡", comment: "半形句號", secondaryComment: "U+FF61")
                 ]
@@ -33,8 +32,8 @@ struct PunctuationKey: Hashable {
         }()
         static let slash: PunctuationKey = {
                 let symbols: [PunctuationSymbol] = [
-                        PunctuationSymbol("/", comment: "半形"),
-                        PunctuationSymbol("／", comment: "全形"),
+                        PunctuationSymbol("/", comment: halfWidth),
+                        PunctuationSymbol("／", comment: fullWidth),
                         PunctuationSymbol("÷"),
                         PunctuationSymbol(String.fullWidthSpace, comment: "全形空格", secondaryComment: "U+3000")
                 ]
@@ -49,10 +48,10 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("〔"),
                         PunctuationSymbol("﹂", comment: "縱書"),
                         PunctuationSymbol("﹄", comment: "縱書"),
-                        PunctuationSymbol("［", comment: "全形"),
-                        PunctuationSymbol("[", comment: "半形"),
-                        PunctuationSymbol("｛", comment: "全形"),
-                        PunctuationSymbol("{", comment: "半形")
+                        PunctuationSymbol("[", comment: halfWidth),
+                        PunctuationSymbol("［", comment: fullWidth),
+                        PunctuationSymbol("{", comment: halfWidth),
+                        PunctuationSymbol("｛", comment: fullWidth)
                 ]
                 return PunctuationKey(keyText: "[", shiftingKeyText: "{", instantSymbol: "「", instantShiftingSymbol: nil, symbols: [.init("「")], shiftingSymbols: shiftingSymbols)
         }()
@@ -64,26 +63,43 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("〕"),
                         PunctuationSymbol("﹁", comment: "縱書"),
                         PunctuationSymbol("﹃", comment: "縱書"),
-                        PunctuationSymbol("］", comment: "全形"),
-                        PunctuationSymbol("]", comment: "半形"),
-                        PunctuationSymbol("｝", comment: "全形"),
-                        PunctuationSymbol("}", comment: "半形")
+                        PunctuationSymbol("]", comment: halfWidth),
+                        PunctuationSymbol("］", comment: fullWidth),
+                        PunctuationSymbol("}", comment: halfWidth),
+                        PunctuationSymbol("｝", comment: fullWidth)
                 ]
                 return PunctuationKey(keyText: "]", shiftingKeyText: "}", instantSymbol: "」", instantShiftingSymbol: nil, symbols: [.init("」")], shiftingSymbols: shiftingSymbols)
         }()
         static let backSlash: PunctuationKey = {
                 let shiftingSymbols: [PunctuationSymbol] = [
-                        PunctuationSymbol("|", comment: "半形"),
-                        PunctuationSymbol("｜", comment: "全形"),
-                        PunctuationSymbol("\\", comment: "半形"),
-                        PunctuationSymbol("＼", comment: "全形"),
+                        PunctuationSymbol("|", comment: halfWidth),
+                        PunctuationSymbol("｜", comment: fullWidth),
+                        PunctuationSymbol("\\", comment: halfWidth),
+                        PunctuationSymbol("＼", comment: fullWidth),
                         PunctuationSymbol("•", comment: "Bullet", secondaryComment: "U+2022"),
-                        PunctuationSymbol("·", comment: "陸標間隔號", secondaryComment: "Middle Dot, U+00B7"),
+                        PunctuationSymbol("·", comment: "陸標間隔號", secondaryComment: "U+00B7"),
                         PunctuationSymbol("‧", comment: "港臺間隔號", secondaryComment: "U+2027"),
                         PunctuationSymbol("・", comment: "全形中點", secondaryComment: "U+30FB")
                 ]
                 return PunctuationKey(keyText: "\\", shiftingKeyText: "|", instantSymbol: "、", instantShiftingSymbol: nil, symbols: [.init("、")], shiftingSymbols: shiftingSymbols)
         }()
+
+        static let backquote: PunctuationKey = {
+                let symbols: [PunctuationSymbol] = [
+                        PunctuationSymbol("`"),
+                        PunctuationSymbol("·", comment: "陸標間隔號", secondaryComment: "U+00B7"),
+                        PunctuationSymbol("‧", comment: "港臺間隔號", secondaryComment: "U+2027"),
+                        PunctuationSymbol("・", comment: "全形中點", secondaryComment: "U+30FB")
+                ]
+                let shiftingSymbols: [PunctuationSymbol] = [
+                        PunctuationSymbol("~"),
+                        PunctuationSymbol("～", comment: fullWidth),
+                        PunctuationSymbol("≈")
+                ]
+                return PunctuationKey(keyText: "`", shiftingKeyText: "~", instantSymbol: nil, instantShiftingSymbol: nil, symbols: symbols, shiftingSymbols: shiftingSymbols)
+        }()
+        static let minus = PunctuationKey(keyText: "-", shiftingKeyText: "_", instantSymbol: "-", instantShiftingSymbol: "——", symbols: [.init("-")], shiftingSymbols: [.init("——")])
+        static let equal = PunctuationKey(keyText: "=", shiftingKeyText: "+", instantSymbol: "=", instantShiftingSymbol: "+", symbols: [.init("=")], shiftingSymbols: [.init("+")])
 }
 
 

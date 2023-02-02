@@ -145,15 +145,21 @@ extension UInt16 {
                         return .punctuation(.bracketRight)
                 case KeyCode.Symbol.VK_BACKSLASH:
                         return .punctuation(.backSlash)
+                case KeyCode.Symbol.VK_BACKQUOTE:
+                        return .punctuation(.backquote)
+                case KeyCode.Symbol.VK_MINUS:
+                        return .punctuation(.minus)
+                case KeyCode.Symbol.VK_EQUAL:
+                        return .punctuation(.equal)
                 case KeyCode.Symbol.VK_QUOTE:
                         return .separator
                 case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
                         return .escapeClear
                 case KeyCode.Special.VK_TAB:
                         return .tab
-                case KeyCode.Symbol.VK_MINUS, KeyCode.Special.VK_PAGEUP:
+                case KeyCode.Special.VK_PAGEUP:
                         return .previousPage
-                case KeyCode.Symbol.VK_EQUAL, KeyCode.Special.VK_PAGEDOWN:
+                case KeyCode.Special.VK_PAGEDOWN:
                         return .nextPage
                 default:
                         return .other
