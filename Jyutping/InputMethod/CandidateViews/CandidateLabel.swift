@@ -8,14 +8,15 @@ struct CandidateLabel: View {
         let isHighlighted: Bool
         let toneStyle: ToneDisplayStyle
         let toneColor: ToneDisplayColor
-        let lineSpacing: CGFloat
+        let verticalPadding: CGFloat
         let foreColor: Color
         let backColor: Color
 
         var body: some View {
+                let serialNumber: String = index == 9 ? "0" : "\(index + 1)"
                 ZStack(alignment: .leading) {
-                        HStack(spacing: 14) {
-                                SerialNumberLabel(index)
+                        HStack(spacing: 16) {
+                                Text(verbatim: serialNumber).font(.label)
                                 Text(verbatim: placeholder.text).font(.candidate).disableAnimation()
                                 if let comment = placeholder.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
@@ -25,8 +26,8 @@ struct CandidateLabel: View {
                                 }
                         }
                         .hidden()
-                        HStack(spacing: 14) {
-                                SerialNumberLabel(index)
+                        HStack(spacing: 16) {
+                                Text(verbatim: serialNumber).font(.label)
                                 Text(verbatim: candidate.text).font(.candidate).disableAnimation()
                                 if let comment = candidate.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
@@ -37,7 +38,7 @@ struct CandidateLabel: View {
                         }
                 }
                 .padding(.horizontal, 8)
-                .padding(.vertical, lineSpacing)
+                .padding(.vertical, verticalPadding)
                 .foregroundColor(foreColor)
                 .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }

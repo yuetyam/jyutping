@@ -6,7 +6,7 @@ struct CandidateBoard: View {
 
         private let toneStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         private let toneColor: ToneDisplayColor = AppSettings.toneDisplayColor
-        private let lineSpacing: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
+        private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
         var body: some View {
                 let placeholder: DisplayCandidate = displayObject.longest
@@ -16,7 +16,7 @@ struct CandidateBoard: View {
                                 let isHighlighted: Bool = index == displayObject.highlightedIndex
                                 let foreColor: Color = isHighlighted ? Color.white : Color.primary
                                 let backColor: Color = isHighlighted ? Color.accentColor : Color.clear
-                                CandidateLabel(candidate: candidate, placeholder: placeholder, index: index, isHighlighted: isHighlighted, toneStyle: toneStyle, toneColor: toneColor, lineSpacing: lineSpacing, foreColor: foreColor, backColor: backColor)
+                                CandidateLabel(candidate: candidate, placeholder: placeholder, index: index, isHighlighted: isHighlighted, toneStyle: toneStyle, toneColor: toneColor, verticalPadding: verticalPadding, foreColor: foreColor, backColor: backColor)
                         }
                 }
                 .animation(.default, value: displayObject.animationState)

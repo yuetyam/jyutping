@@ -23,9 +23,7 @@ struct InstantSettingsView: View {
 
         @EnvironmentObject private var settingsObject: InstantSettingsObject
 
-        private let lineSpacing: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
-
-        private let currentVariant: Logogram = Logogram.current
+        private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
         private let textLine1: String = "傳統漢字\u{3000}\u{3000}\u{3000}"
         private let textLine2: String = "傳統漢字・香港"
@@ -49,29 +47,31 @@ struct InstantSettingsView: View {
                 }
         }()
 
+        private let currentVariant: Logogram = Logogram.current
+
         var body: some View {
                 let highlightedIndex = settingsObject.highlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                SettingLabel(lineSpacing: lineSpacing, index: 0, text: textLine1, checked: currentVariant == .traditional, highlighted: highlightedIndex == 0)
-                                SettingLabel(lineSpacing: lineSpacing, index: 1, text: textLine2, checked: currentVariant == .hongkong, highlighted: highlightedIndex == 1)
-                                SettingLabel(lineSpacing: lineSpacing, index: 2, text: textLine3, checked: currentVariant == .taiwan, highlighted: highlightedIndex == 2)
-                                SettingLabel(lineSpacing: lineSpacing, index: 3, text: textLine4, checked: currentVariant == .simplified, highlighted: highlightedIndex == 3)
+                                SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: textLine1, checked: currentVariant == .traditional)
+                                SettingLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: textLine2, checked: currentVariant == .hongkong)
+                                SettingLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: textLine3, checked: currentVariant == .taiwan)
+                                SettingLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: textLine4, checked: currentVariant == .simplified)
                         }
                         Divider()
                         Group {
-                                SettingLabel(lineSpacing: lineSpacing, index: 4, text: options.textLine5, checked: InstantSettings.characterForm == .halfWidth, highlighted: highlightedIndex == 4)
-                                SettingLabel(lineSpacing: lineSpacing, index: 5, text: options.textLine6, checked: InstantSettings.characterForm == .fullWidth, highlighted: highlightedIndex == 5)
+                                SettingLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options.textLine5, checked: InstantSettings.characterForm == .halfWidth)
+                                SettingLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options.textLine6, checked: InstantSettings.characterForm == .fullWidth)
                         }
                         Divider()
                         Group {
-                                SettingLabel(lineSpacing: lineSpacing, index: 6, text: options.textLine7, checked: InstantSettings.punctuation == .cantonese, highlighted: highlightedIndex == 6)
-                                SettingLabel(lineSpacing: lineSpacing, index: 7, text: options.textLine8, checked: InstantSettings.punctuation == .english, highlighted: highlightedIndex == 7)
+                                SettingLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options.textLine7, checked: InstantSettings.punctuation == .cantonese)
+                                SettingLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options.textLine8, checked: InstantSettings.punctuation == .english)
                         }
                         Divider()
                         Group {
-                                SettingLabel(lineSpacing: lineSpacing, index: 8, text: options.textLine9, checked: InstantSettings.needsEmojiCandidates, highlighted: highlightedIndex == 8)
-                                SettingLabel(lineSpacing: lineSpacing, index: 9, text: options.textLine10, checked: !(InstantSettings.needsEmojiCandidates), highlighted: highlightedIndex == 9)
+                                SettingLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options.textLine9, checked: InstantSettings.needsEmojiCandidates)
+                                SettingLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options.textLine10, checked: !(InstantSettings.needsEmojiCandidates))
                         }
                 }
                 .padding(8)
@@ -79,25 +79,28 @@ struct InstantSettingsView: View {
         }
 }
 
-
 private struct SettingLabel: View {
 
-        let lineSpacing: CGFloat
+        let verticalPadding: CGFloat
         let index: Int
+        let highlightedIndex: Int
         let text: String
         let checked: Bool
-        let highlighted: Bool
+
+        private let placeholder: String = "傳統漢字・香港"
 
         var body: some View {
+                let serialNumber: String = index == 9 ? "0" : "\(index + 1)"
+                let isHighlighted: Bool = index == highlightedIndex
                 ZStack(alignment: .leading) {
-                        HStack(spacing: 14) {
-                                SerialNumberLabel(index)
-                                Text(verbatim: "傳統漢字・香港").font(.candidate)
+                        HStack(spacing: 16) {
+                                Text(verbatim: serialNumber).font(.label)
+                                Text(verbatim: placeholder).font(.candidate)
                                 Image(systemName: "checkmark").font(.title2)
                         }
-                        .opacity(0)
-                        HStack(spacing: 14) {
-                                SerialNumberLabel(index)
+                        .hidden()
+                        HStack(spacing: 16) {
+                                Text(verbatim: serialNumber).font(.label)
                                 Text(verbatim: text).font(.candidate)
                                 if checked {
                                         Image(systemName: "checkmark").font(.title2)
@@ -105,9 +108,8 @@ private struct SettingLabel: View {
                         }
                 }
                 .padding(.horizontal, 8)
-                .padding(.vertical, lineSpacing)
-                .foregroundColor(highlighted ? .white : .primary)
-                .background(highlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                .padding(.vertical, verticalPadding)
+                .foregroundColor(isHighlighted ? .white : .primary)
+                .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 }
-
