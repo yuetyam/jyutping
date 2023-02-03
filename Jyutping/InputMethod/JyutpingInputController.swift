@@ -14,6 +14,7 @@ final class JyutpingInputController: IMKInputController {
                 preferences.keyEquivalent = ","
                 preferences.keyEquivalentModifierMask = [.control, .shift]
                 let menu = NSMenu()
+                menu.title = NSLocalizedString("menu.title", comment: "")
                 menu.addItem(preferences)
                 return menu
         }
@@ -28,7 +29,6 @@ final class JyutpingInputController: IMKInputController {
                 visualEffectView.blendingMode = .behindWindow
                 visualEffectView.state = .active
                 preferencesWindow?.contentView = visualEffectView
-
                 let pane = NSHostingController(rootView: PreferencesView())
                 preferencesWindow?.contentView?.addSubview(pane.view)
                 pane.view.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +46,6 @@ final class JyutpingInputController: IMKInputController {
                 preferencesWindow?.contentViewController?.addChild(pane)
                 preferencesWindow?.orderFrontRegardless()
                 preferencesWindow?.setFrame(frame, display: true)
-                NSApp.activate(ignoringOtherApps: true)
         }
         private var preferencesWindowFrame: CGRect {
                 let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
