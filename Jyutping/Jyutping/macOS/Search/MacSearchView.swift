@@ -119,7 +119,6 @@ struct MacSearchView: View {
                                                 HStack {
                                                         Text(verbatim: fanWanEntries.first!.word)
                                                         Text(verbatim: "《分韻撮要》")
-                                                        Text(verbatim: "佚名　約明末清初").foregroundColor(.secondary)
                                                         Spacer()
                                                 }
                                                 .font(.copilot)

@@ -112,7 +112,7 @@ struct SearchView: View {
 
         private let yingWaaMeta: String = "《英華分韻撮要》　衛三畏　1856　廣州"
         private let choHokMeta: String = "《初學粵音切要》　湛約翰　1855　香港"
-        private let fanWamMeta: String = "《分韻撮要》　佚名　約明末清初"
+        private let fanWamMeta: String = "《分韻撮要》"
         private let gwongWanMeta: String = "《大宋重修廣韻》"
         private let fullWidthSpace: String = "　"
 
