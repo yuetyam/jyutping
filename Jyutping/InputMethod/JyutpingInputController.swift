@@ -142,7 +142,7 @@ final class JyutpingInputController: IMKInputController {
         }
 
         private var currentWindowFrame: CGRect {
-                let origin: CGPoint = currentClient?.position ?? .zero
+                let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
                 let width: CGFloat = 600
                 let height: CGFloat = 380 + (offset * 2)
                 let x: CGFloat = {
@@ -165,6 +165,7 @@ final class JyutpingInputController: IMKInputController {
         private lazy var screenMaxX: CGFloat = NSScreen.main?.frame.maxX ?? 1920
         private lazy var windowPattern: WindowPattern = .regular
 
+        private lazy var currentOrigin: CGPoint? = nil
         private lazy var currentClient: IMKTextInput? = nil {
                 didSet {
                         guard let origin = currentClient?.position else { return }
@@ -492,7 +493,12 @@ final class JyutpingInputController: IMKInputController {
                 let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
                 guard !shouldIgnoreCurrentEvent else { return false }
                 guard let client: IMKTextInput = sender as? IMKTextInput else { return false }
-                currentClient = client
+                currentOrigin = client.position
+                let currentClientID = currentClient?.uniqueClientIdentifierString()
+                let clientID = client.uniqueClientIdentifierString()
+                if clientID != currentClientID {
+                        currentClient = client
+                }
                 lazy var hasControlShiftModifiers: Bool = false
                 switch modifiers {
                 case [.control, .shift], .control:
