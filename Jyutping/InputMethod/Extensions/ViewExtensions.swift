@@ -23,13 +23,5 @@ extension View {
 }
 
 private extension Color {
-
-        @available(iOS, unavailable)
-        static let textBackgroundColor: Color = {
-                #if os(macOS)
-                return Color(nsColor: NSColor.textBackgroundColor)
-                #else
-                return Color.gray
-                #endif
-        }()
+        static let textBackgroundColor: Color = Color(nsColor: NSColor.textBackgroundColor)
 }

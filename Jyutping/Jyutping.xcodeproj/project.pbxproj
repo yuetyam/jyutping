@@ -702,6 +702,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		37E9918F298EAACB003423C2 /* KeyCode */ = {
+			isa = PBXGroup;
+			children = (
+				37FC1B95294DFC5300D7153F /* Direction.swift */,
+				37FC1B94294DFC5300D7153F /* KeyCode.swift */,
+				37FC1B92294DFC5300D7153F /* PunctuationKey.swift */,
+				37FC1B93294DFC5300D7153F /* Representative.swift */,
+			);
+			path = KeyCode;
+			sourceTree = "<group>";
+		};
 		37EF195A296DBE5B00A3F4C9 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,22 +842,19 @@
 				37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */,
 				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
 				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
-				3783D9B22973BEC0000B3332 /* CandidateViews */,
-				37FC1B95294DFC5300D7153F /* Direction.swift */,
+				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
 				37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */,
 				37FC1B86294DFC5300D7153F /* DisplayObject.swift */,
-				37FC1B97294DFC5300D7153F /* Extensions */,
 				37FC1B85294DFC5300D7153F /* InputState.swift */,
 				37FC1B84294DFC5300D7153F /* InstantSettings.swift */,
 				37FC1B96294DFC5300D7153F /* InstantSettingsView.swift */,
-				37FC1B94294DFC5300D7153F /* KeyCode.swift */,
 				37FC1BA0294DFC5300D7153F /* Logogram.swift */,
-				37FC1B87294DFC5300D7153F /* Preferences */,
-				37FC1B92294DFC5300D7153F /* PunctuationKey.swift */,
-				37FC1B93294DFC5300D7153F /* Representative.swift */,
 				37FC1B9D294DFC5300D7153F /* Speech.swift */,
 				37FC1B8E294DFC5300D7153F /* UserLexicon.swift */,
-				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
+				3783D9B22973BEC0000B3332 /* CandidateViews */,
+				37FC1B87294DFC5300D7153F /* Preferences */,
+				37FC1B97294DFC5300D7153F /* Extensions */,
+				37E9918F298EAACB003423C2 /* KeyCode */,
 				37FC1BC5294DFD1400D7153F /* Localization */,
 				37FC1BC3294DFCCE00D7153F /* jyutpingimeicon.pdf */,
 				37FC1B5D294DFAE400D7153F /* Assets.xcassets */,
