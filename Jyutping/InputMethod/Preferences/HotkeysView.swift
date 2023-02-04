@@ -243,14 +243,13 @@ private struct KeyBlockView: View {
         }
 
         private let keyText: String
-        private let backColor: Color = Color(nsColor: NSColor.textBackgroundColor)
 
         var body: some View {
                 Text(verbatim: keyText)
                         .lineLimit(1)
-                        .minimumScaleFactor(0.5)
+                        .minimumScaleFactor(0.4)
                         .frame(width: 72, height: 24)
-                        .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                        .background(Material.regular, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 
         static let control: KeyBlockView = KeyBlockView("Control ⌃")

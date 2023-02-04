@@ -2,10 +2,8 @@ import SwiftUI
 
 extension View {
 
-        /// Material background in rounded rectangle
-        /// - Returns: some View
         func block() -> some View {
-                return self.padding().background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                return self.padding().background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
 
         // https://www.avanderlee.com/swiftui/disable-animations-transactions
@@ -22,4 +20,16 @@ extension View {
                         }
                 }
         }
+}
+
+private extension Color {
+
+        @available(iOS, unavailable)
+        static let textBackgroundColor: Color = {
+                #if os(macOS)
+                return Color(nsColor: NSColor.textBackgroundColor)
+                #else
+                return Color.gray
+                #endif
+        }()
 }

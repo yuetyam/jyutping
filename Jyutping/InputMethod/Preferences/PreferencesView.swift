@@ -42,7 +42,7 @@ struct PreferencesView: View {
                                                 Text("PreferencesView.SectionHeader.About").textCase(nil)
                                         }
                                 }
-                                .toolbarBackground(Material.ultraThin, for: .windowToolbar)
+                                .toolbarBackground(Material.bar, for: .windowToolbar)
                                 .navigationTitle("PreferencesView.NavigationTitle.Preferences")
                         } detail: {
                                 switch selection {
