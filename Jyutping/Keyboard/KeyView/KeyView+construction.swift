@@ -23,6 +23,7 @@ extension KeyView {
                 ])
                 shape.isUserInteractionEnabled = false
                 shape.tintColor = foreColor
+                shape.backgroundColor = shapeColor
                 shape.layer.cornerRadius = 5
                 shape.layer.cornerCurve = .continuous
                 shape.layer.shadowColor = UIColor.black.cgColor
@@ -31,22 +32,7 @@ extension KeyView {
                 shape.layer.shadowRadius = 0.5
                 shape.layer.shouldRasterize = true
                 shape.layer.rasterizationScale = UIScreen.main.scale
-
-                guard isDarkAppearance else {
-                        shape.backgroundColor = backColor
-                        return
-                }
-
                 /*
-                let shapeColor: UIColor = {
-                        if isDarkAppearance {
-                                return deepDarkFantasy ? UIColor(white: 1, alpha: 0.15) : UIColor(white: 1, alpha: 0.35)
-                        } else {
-                                return deepDarkFantasy ? .lightEmphatic : .white
-                        }
-                }()
-                */
-
                 let effectView: BlurEffectView = deepDarkFantasy ? BlurEffectView(fraction: 0.48, effectStyle: .light) : BlurEffectView(fraction: 0.44, effectStyle: .extraLight)
                 let blurEffectView: UIVisualEffectView = effectView
                 blurEffectView.frame = shape.bounds
@@ -55,6 +41,7 @@ extension KeyView {
                 blurEffectView.layer.cornerCurve = .continuous
                 blurEffectView.clipsToBounds = true
                 shape.addSubview(blurEffectView)
+                */
         }
         func setupKeyTextLabel() {
                 let keyTextLabel: UILabel = UILabel()

@@ -326,7 +326,7 @@ final class KeyView: UIView {
         private func changeColorToNormal() {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [weak self] in
                         guard let self = self else { return }
-                        self.shape.backgroundColor = self.isDarkAppearance ? .clear : self.backColor
+                        self.shape.backgroundColor = self.shapeColor
                 }
         }
         private lazy var previewShapeLayer: CAShapeLayer = {

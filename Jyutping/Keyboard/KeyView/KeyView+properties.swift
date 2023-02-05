@@ -301,7 +301,13 @@ extension KeyView {
                 }
         }
 
-        /// Key Shape View background color
+        var shapeColor: UIColor {
+                if isDarkAppearance {
+                        return deepDarkFantasy ? UIColor(white: 1, alpha: 0.15) : UIColor(white: 1, alpha: 0.35)
+                } else {
+                        return deepDarkFantasy ? .lightEmphatic : .white
+                }
+        }
         var backColor: UIColor {
                 if isDarkAppearance {
                         return deepDarkFantasy ? .darkThick : .darkThin
