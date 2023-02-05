@@ -113,12 +113,18 @@ extension Lychee {
                 let textCount: Int = text.count
                 let rounds = (0..<textCount).map { number -> [CoreCandidate] in
                         let leading: String = String(text.dropLast(number))
-                        let prefixes: [CoreCandidate] = prefix(match: leading).map { item -> CoreCandidate in
-                                let shouldTransform: Bool = (item.input.count != textCount) && item.romanization.removedSpacesTones().hasPrefix(text)
-                                guard shouldTransform else { return item }
-                                return CoreCandidate(text: item.text, romanization: item.romanization, input: text)
-                        }
-                        return match(for: leading) + prefixes + shortcut(for: leading)
+                        let prefixes: [CoreCandidate] = prefix(match: leading)
+                                .sorted(by: { (lhs, rhs) -> Bool in
+                                        guard number != 0 else { return false }
+                                        return lhs.romanization.removedSpacesTones().hasPrefix(text) && !(rhs.romanization.removedSpacesTones().hasPrefix(text))
+                                })
+                                .map({ item -> CoreCandidate in
+                                        guard number != 0 else { return item }
+                                        guard item.romanization.removedSpacesTones().hasPrefix(text) else { return item }
+                                        return CoreCandidate(text: item.text, romanization: item.romanization, input: text)
+                                })
+                        let sliced = (number == 0) ? prefixes : prefixes[..<min(8, prefixes.count)].compactMap({ $0 })
+                        return match(for: leading) + sliced + shortcut(for: leading)
                 }
                 return rounds.flatMap({ $0 })
         }
