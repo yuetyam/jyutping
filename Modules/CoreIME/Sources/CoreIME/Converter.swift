@@ -1,5 +1,3 @@
-import Foundation
-
 extension Candidate {
 
         /// Convert Cantonese Candidate text to specific variant
@@ -45,13 +43,13 @@ public struct Converter {
                                 return String(converted)
                         }
                 case .simplified:
-                        return t2s(text)
+                        return text
+                                .replacingOccurrences(of: "嗰", with: "*")
+                                .replacingOccurrences(of: "𨋢", with: "•")
+                                .simplified
+                                .replacingOccurrences(of: "*", with: "𠮶")
+                                .replacingOccurrences(of: "•", with: "䢂")
                 }
-        }
-
-        private static func t2s(_ text: String) -> String {
-                let transformed: String? = text.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true)
-                return transformed ?? text
         }
 
         private static let hongkongVariants: [String: String] = {

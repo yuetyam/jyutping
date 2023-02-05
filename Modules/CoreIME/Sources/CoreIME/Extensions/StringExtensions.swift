@@ -1,3 +1,5 @@
+import Foundation
+
 extension String {
 
         static let empty: String = ""
@@ -40,5 +42,10 @@ extension String {
         /// - Returns: A subsequence that leaves off the spaces and tones.
         func removedSpacesTones() -> String {
                 return self.filter({ !$0.isSpaceOrTone })
+        }
+
+        /// Convert to simplifier characters
+        var simplified: String {
+                return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true) ?? self
         }
 }
