@@ -110,12 +110,17 @@ extension Lychee {
         }
 
         private static func processUnsplittable(_ text: String) -> [CoreCandidate] {
-                var combine: [CoreCandidate] = match(for: text) + prefix(match: text) + shortcut(for: text)
-                for number in 1..<text.count {
+                let textCount: Int = text.count
+                let rounds = (0..<textCount).map { number -> [CoreCandidate] in
                         let leading: String = String(text.dropLast(number))
-                        combine += shortcut(for: leading)
+                        let prefixes: [CoreCandidate] = prefix(match: leading).map { item -> CoreCandidate in
+                                let shouldTransform: Bool = (item.input.count != textCount) && item.romanization.removedSpacesTones().hasPrefix(text)
+                                guard shouldTransform else { return item }
+                                return CoreCandidate(text: item.text, romanization: item.romanization, input: text)
+                        }
+                        return match(for: leading) + prefixes + shortcut(for: leading)
                 }
-                return combine
+                return rounds.flatMap({ $0 })
         }
         private static func process(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
                 let hasSeparators: Bool = text.count != origin.count
