@@ -1,5 +1,4 @@
 import SwiftUI
-import Cocoa
 import InputMethodKit
 import CommonExtensions
 import CoreIME
@@ -7,56 +6,7 @@ import CoreIME
 @objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
 
-        override func menu() -> NSMenu! {
-                let preferences = NSMenuItem()
-                preferences.title = NSLocalizedString("menu.preferences", comment: "")
-                preferences.action = #selector(openPreferencesWindow)
-                preferences.keyEquivalent = ","
-                preferences.keyEquivalentModifierMask = [.control, .shift]
-                let menu = NSMenu()
-                menu.title = NSLocalizedString("menu.title", comment: "")
-                menu.addItem(preferences)
-                return menu
-        }
-        private lazy var preferencesWindow: NSWindow? = nil
-        @objc private func openPreferencesWindow() {
-                guard preferencesWindow == nil else { return }
-                let frame: CGRect = preferencesWindowFrame
-                preferencesWindow = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
-                preferencesWindow?.title = NSLocalizedString("Jyutping Input Method Preferences", comment: "")
-                let visualEffectView = NSVisualEffectView()
-                visualEffectView.material = .sidebar
-                visualEffectView.blendingMode = .behindWindow
-                visualEffectView.state = .active
-                preferencesWindow?.contentView = visualEffectView
-                let pane = NSHostingController(rootView: PreferencesView())
-                preferencesWindow?.contentView?.addSubview(pane.view)
-                pane.view.translatesAutoresizingMaskIntoConstraints = false
-                if let topAnchor = preferencesWindow?.contentView?.topAnchor,
-                   let bottomAnchor = preferencesWindow?.contentView?.bottomAnchor,
-                   let leadingAnchor = preferencesWindow?.contentView?.leadingAnchor,
-                   let trailingAnchor = preferencesWindow?.contentView?.trailingAnchor {
-                        NSLayoutConstraint.activate([
-                                pane.view.topAnchor.constraint(equalTo: topAnchor),
-                                pane.view.bottomAnchor.constraint(equalTo: bottomAnchor),
-                                pane.view.leadingAnchor.constraint(equalTo: leadingAnchor),
-                                pane.view.trailingAnchor.constraint(equalTo: trailingAnchor)
-                        ])
-                }
-                preferencesWindow?.contentViewController?.addChild(pane)
-                preferencesWindow?.orderFrontRegardless()
-                preferencesWindow?.setFrame(frame, display: true)
-        }
-        private var preferencesWindowFrame: CGRect {
-                let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
-                let screenHeight: CGFloat = NSScreen.main?.frame.size.height ?? 1080
-                let x: CGFloat = screenWidth / 4.0
-                let y: CGFloat = screenHeight / 5.0
-                let width: CGFloat = screenWidth / 2.0
-                let height: CGFloat = (screenHeight / 5.0) * 3.0
-                return CGRect(x: x, y: y, width: width, height: height)
-        }
-
+        /// CandidateBoard Window
         private lazy var window: NSWindow? = nil
         private let offset: CGFloat = 10
         private func resetWindow() {

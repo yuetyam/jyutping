@@ -1,4 +1,4 @@
-import Cocoa
+import AppKit
 import InputMethodKit
 
 final class PrincipalApplication: NSApplication {
@@ -32,7 +32,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 registerIME()
                 activateIME()
                 NSRunningApplication.current.terminate()
-                NSApplication.shared.terminate(self)
+                NSApp.terminate(self)
                 exit(0)
         }
 
