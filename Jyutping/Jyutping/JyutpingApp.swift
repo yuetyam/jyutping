@@ -8,6 +8,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
                 return true
         }
+        func applicationWillFinishLaunching(_ notification: Notification) {
+                NSWindow.allowsAutomaticWindowTabbing = false
+        }
+        func applicationDidFinishLaunching(_ notification: Notification) {
+                _ = NSApp.windows.map({ $0.tabbingMode = .disallowed })
+        }
 }
 
 @main
@@ -24,6 +30,9 @@ struct JyutpingApp: App {
                         }
                 }
                 .windowToolbarStyle(.unifiedCompact)
+                .commands {
+                        CommandGroup(replacing: .newItem, addition: {})
+                }
         }
 }
 
