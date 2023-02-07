@@ -163,7 +163,7 @@
 		37FC1BBC294DFC5400D7153F /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1BA0294DFC5300D7153F /* Logogram.swift */; };
 		37FC1BC0294DFC7000D7153F /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1BBF294DFC7000D7153F /* CommonExtensions */; };
 		37FC1BC2294DFC7400D7153F /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1BC1294DFC7400D7153F /* CoreIME */; };
-		37FC1BC4294DFCCE00D7153F /* jyutpingimeicon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1BC3294DFCCE00D7153F /* jyutpingimeicon.pdf */; };
+		37FC1BC4294DFCCE00D7153F /* jyutpingime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1BC3294DFCCE00D7153F /* jyutpingime.pdf */; };
 		37FC1BD8294DFD1400D7153F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1BC6294DFD1400D7153F /* InfoPlist.strings */; };
 		37FC1BD9294DFD1400D7153F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1BC8294DFD1400D7153F /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -413,7 +413,7 @@
 		37FC1B9E294DFC5300D7153F /* WindowPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 		37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMethodApp.swift; sourceTree = "<group>"; };
 		37FC1BA0294DFC5300D7153F /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
-		37FC1BC3294DFCCE00D7153F /* jyutpingimeicon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = jyutpingimeicon.pdf; sourceTree = "<group>"; };
+		37FC1BC3294DFCCE00D7153F /* jyutpingime.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = jyutpingime.pdf; sourceTree = "<group>"; };
 		37FC1BC7294DFD1400D7153F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37FC1BC9294DFD1400D7153F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		37FC1BCA294DFD1400D7153F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -859,7 +859,7 @@
 				37FC1B97294DFC5300D7153F /* Extensions */,
 				37E9918F298EAACB003423C2 /* KeyCode */,
 				37FC1BC5294DFD1400D7153F /* Localization */,
-				37FC1BC3294DFCCE00D7153F /* jyutpingimeicon.pdf */,
+				37FC1BC3294DFCCE00D7153F /* jyutpingime.pdf */,
 				37FC1B5D294DFAE400D7153F /* Assets.xcassets */,
 				37FC1B62294DFAE400D7153F /* InputMethod.entitlements */,
 				37FC1B5F294DFAE400D7153F /* Preview Content */,
@@ -1179,7 +1179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37FC1BD9294DFD1400D7153F /* Localizable.strings in Resources */,
-				37FC1BC4294DFCCE00D7153F /* jyutpingimeicon.pdf in Resources */,
+				37FC1BC4294DFCCE00D7153F /* jyutpingime.pdf in Resources */,
 				37FC1BD8294DFD1400D7153F /* InfoPlist.strings in Resources */,
 				37FC1B61294DFAE400D7153F /* Preview Assets.xcassets in Resources */,
 				37FC1B5E294DFAE400D7153F /* Assets.xcassets in Resources */,

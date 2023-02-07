@@ -18,7 +18,7 @@
 				<key>TISIntendedLanguage</key>
 				<string>yue</string>
 				<key>tsInputModeAlternateMenuIconFileKey</key>
-				<string>jyutpingimeicon.pdf</string>
+				<string>jyutpingime.pdf</string>
 				<key>tsInputModeDefaultStateKey</key>
 				<true/>
 				<key>tsInputModeIsVisibleKey</key>
@@ -26,9 +26,9 @@
 				<key>tsInputModeKeyEquivalentModifiersKey</key>
 				<integer>4608</integer>
 				<key>tsInputModeMenuIconFileKey</key>
-				<string>jyutpingimeicon.pdf</string>
+				<string>jyutpingime.pdf</string>
 				<key>tsInputModePaletteIconFileKey</key>
-				<string>jyutpingimeicon.pdf</string>
+				<string>jyutpingime.pdf</string>
 				<key>tsInputModePrimaryInScriptKey</key>
 				<true/>
 				<key>tsInputModeScriptKey</key>
@@ -60,6 +60,6 @@
 		<string>Hans</string>
 	</array>
 	<key>tsInputMethodIconFileKey</key>
-	<string>jyutpingimeicon.pdf</string>
+	<string>jyutpingime.pdf</string>
 </dict>
 </plist>
