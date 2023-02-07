@@ -145,6 +145,11 @@ final class JyutpingInputController: IMKInputController {
         private lazy var settingsObject = InstantSettingsObject()
 
         private lazy var candidates: [Candidate] = [] {
+                willSet {
+                        if window == nil {
+                                resetWindow()
+                        }
+                }
                 didSet {
                         updateDisplayingCandidates(.establish)
                         switch (oldValue.isEmpty, candidates.isEmpty) {
@@ -400,9 +405,6 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
         override func deactivateServer(_ sender: Any!) {
-                Lychee.close()
-                UserLexicon.close()
-
                 bufferText = .empty
                 markedText = .empty
                 candidates = []
@@ -412,7 +414,6 @@ final class JyutpingInputController: IMKInputController {
                 indices = (0, 0)
                 window?.setFrame(.zero, display: true)
                 window?.close()
-
                 currentClient = nil
         }
 
