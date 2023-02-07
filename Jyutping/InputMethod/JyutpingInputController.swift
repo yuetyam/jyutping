@@ -112,14 +112,14 @@ final class JyutpingInputController: IMKInputController {
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
-        private lazy var screenMaxX: CGFloat = NSScreen.main?.frame.maxX ?? 1920
         private lazy var windowPattern: WindowPattern = .regular
 
         private lazy var currentOrigin: CGPoint? = nil
         private lazy var currentClient: IMKTextInput? = nil {
                 didSet {
                         guard let origin = currentClient?.position else { return }
-                        let isRegularHorizontal: Bool = origin.x < (screenMaxX - 600)
+                        let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
+                        let isRegularHorizontal: Bool = origin.x < (screenWidth - 600)
                         let isRegularVertical: Bool = origin.y > 400
                         let newPattern: WindowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
@@ -133,9 +133,9 @@ final class JyutpingInputController: IMKInputController {
                                         return .reversed
                                 }
                         }()
-                        let shouldResetWindow: Bool = newPattern != windowPattern || window == nil || oldValue == nil
-                        if shouldResetWindow {
-                                windowPattern = newPattern
+                        guard newPattern != windowPattern else { return }
+                        windowPattern = newPattern
+                        if window != nil {
                                 resetWindow()
                         }
                 }
@@ -393,28 +393,19 @@ final class JyutpingInputController: IMKInputController {
         }
 
         override func activateServer(_ sender: Any!) {
-                screenMaxX = NSScreen.main?.frame.maxX ?? 1920
                 currentClient = sender as? IMKTextInput
-                UserLexicon.connect()
-                Lychee.connect()
-                if !bufferText.isEmpty {
-                        bufferText = .empty
-                }
+                UserLexicon.prepare()
+                Lychee.prepare()
                 DispatchQueue.main.async { [weak self] in
                         self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
+                if !bufferText.isEmpty {
+                        bufferText = .empty
+                }
         }
         override func deactivateServer(_ sender: Any!) {
-                bufferText = .empty
-                markedText = .empty
-                candidates = []
                 candidateSequence = []
-                displayObject.reset()
-                settingsObject.resetHighlightedIndex()
-                indices = (0, 0)
                 window?.setFrame(.zero, display: true)
-                window?.close()
-                currentClient = nil
         }
 
         private lazy var inputState: InputState = {
