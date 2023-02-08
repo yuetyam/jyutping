@@ -13,7 +13,7 @@ struct MacSearchView: View {
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
-        @State private var gwongWanEntries: [GwongWan] = []
+        @State private var gwongWanEntries: [GwongWanCharacter] = []
         @State private var animationState: Int = 0
 
         private func handleSubmission(_ text: String) {

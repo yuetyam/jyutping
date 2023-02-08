@@ -4,14 +4,14 @@ import SwiftUI
 import Materials
 
 struct GwongWanView: View {
-        let entry: GwongWan
+        let entry: GwongWanCharacter
         var body: some View {
                 VStack(alignment: .leading, spacing: 10) {
                         HStack {
                                 Text(verbatim: "讀音")
                                 Text.separator
                                 HStack(spacing: 32) {
-                                        Text(verbatim: "\(entry.faancit)切")
+                                        Text(verbatim: entry.faancitText)
                                         Text(verbatim: entry.hierarchy)
                                 }
                                 Spacer()

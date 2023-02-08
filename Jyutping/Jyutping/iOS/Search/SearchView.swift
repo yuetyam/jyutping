@@ -22,7 +22,7 @@ struct SearchView: View {
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
-        @State private var gwongWanEntries: [GwongWan] = []
+        @State private var gwongWanEntries: [GwongWanCharacter] = []
 
         var body: some View {
                 Section {
