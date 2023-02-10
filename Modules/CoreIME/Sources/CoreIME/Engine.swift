@@ -144,17 +144,20 @@ extension Lychee {
                 return combines + candidates
         }
         private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
+                let fullProcessed: [CoreCandidate] = match(for: text) + shortcut(for: text) + prefix(match: text)
+                let backup: [CoreCandidate] = processCharacters(text)
                 let hasSeparators: Bool = text.count != origin.count
                 let candidates: [CoreCandidate] = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
-                lazy var fallback: [CoreCandidate] = match(for: text) + prefix(match: text, count: 5) + candidates + shortcut(for: text)
+                lazy var fallback: [CoreCandidate] = fullProcessed + candidates + backup
                 guard !hasSeparators else { return fallback }
                 guard let firstCandidate: CoreCandidate = candidates.first else { return fallback }
                 let firstInputCount: Int = firstCandidate.input.count
                 guard firstInputCount != text.count else { return fallback }
                 let tailText: String = String(text.dropFirst(firstInputCount))
                 if let tailOne: CoreCandidate = prefix(match: tailText, count: 1).first {
-                        let combine: CoreCandidate = firstCandidate + tailOne
-                        return match(for: text) + prefix(match: text, count: 5) + [combine] + candidates + shortcut(for: text)
+                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
+                        let combines = qualified.map({ $0.element + tailOne })
+                        return fullProcessed + combines + candidates + backup
                 }
                 let tailSyllables: [String] = Segmentor.scheme(of: tailText)
                 guard !(tailSyllables.isEmpty) else { return fallback }
@@ -165,21 +168,23 @@ extension Lychee {
                         guard difference > 1 else { return false }
                         let syllablesPlusOne = tailText.dropLast(difference - 1)
                         guard let one = prefix(match: String(syllablesPlusOne), count: 1).first else { return false }
-                        let combine: CoreCandidate = firstCandidate + one
-                        concatenated.append(combine)
+                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
+                        let combines = qualified.map({ $0.element + one })
+                        concatenated = combines
                         return true
                 }()
                 if !hasTailCandidate {
                         for (index, _) in tailSyllables.enumerated().reversed() {
                                 let someSyllables: String = tailSyllables[0...index].joined()
                                 if let one: CoreCandidate = matchWithLimitCount(for: someSyllables, count: 1).first {
-                                        let combine: CoreCandidate = firstCandidate + one
-                                        concatenated.append(combine)
+                                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
+                                        let combines = qualified.map({ $0.element + one })
+                                        concatenated = combines
                                         break
                                 }
                         }
                 }
-                return match(for: text) + prefix(match: text, count: 5) + concatenated + candidates + shortcut(for: text)
+                return fullProcessed + concatenated + candidates + backup
         }
         private static func match(schemes: [[String]], hasSeparators: Bool, fullTextCount: Int = -1) -> [CoreCandidate] {
                 let matches = schemes.map { scheme -> [RowCandidate] in
