@@ -8,8 +8,7 @@ public struct Lychee {
         private(set) static var database: OpaquePointer? = nil
 
         /// Connect SQLite3 database
-        public static func connect() {
-                guard !isWorking else { return }
+        private static func connect() {
                 guard let path: String = Bundle.module.path(forResource: "lexicon", ofType: "sqlite3") else { return }
                 var db: OpaquePointer?
                 if sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK {

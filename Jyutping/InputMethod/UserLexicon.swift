@@ -6,8 +6,7 @@ struct UserLexicon {
 
         private static var database: OpaquePointer? = nil
 
-        static func connect() {
-                guard !isWorking else { return }
+        private static func connect() {
                 guard let libraryDirectoryUrl: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first else { return }
                 let userLexiconUrl: URL = libraryDirectoryUrl.appendingPathComponent("userlexicon.sqlite3", isDirectory: false)
                 var db: OpaquePointer? = nil
@@ -26,17 +25,17 @@ struct UserLexicon {
                 sqlite3_finalize(createTableStatement)
         }
 
-        static func prepare() {
-                guard !isWorking else { return }
-                close()
-                connect()
-        }
-
         static func close() {
                 guard database != nil else { return }
                 if sqlite3_close_v2(database) == SQLITE_OK {
                         database = nil
                 }
+        }
+
+        static func prepare() {
+                guard !isWorking else { return }
+                close()
+                connect()
         }
 
         private static var isWorking: Bool {

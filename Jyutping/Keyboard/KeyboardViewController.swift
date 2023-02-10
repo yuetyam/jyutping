@@ -96,8 +96,8 @@ final class KeyboardViewController: UIInputViewController {
 
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
-                UserLexicon.connect()
-                Lychee.connect()
+                UserLexicon.prepare()
+                Lychee.prepare()
                 if isHapticFeedbackOn && hapticFeedback == nil {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
@@ -122,9 +122,6 @@ final class KeyboardViewController: UIInputViewController {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 hapticFeedback = nil
-                Lychee.close()
-                UserLexicon.close()
-
                 candidateSequence = []
                 candidates = []
                 markedText = .empty
