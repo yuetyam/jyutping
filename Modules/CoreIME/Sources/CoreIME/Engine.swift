@@ -99,7 +99,7 @@ extension Lychee {
         private static func fetch(text: String, segmentation: Segmentation) -> [CoreCandidate] {
                 let textWithoutSeparators: String = text.filter({ !($0.isSeparator) })
                 guard let bestScheme: SyllableScheme = segmentation.first, !bestScheme.isEmpty else {
-                        return processUnsplittable(textWithoutSeparators)
+                        return processCharacters(textWithoutSeparators)
                 }
                 let convertedText = textWithoutSeparators.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression).replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
                 if bestScheme.length == convertedText.count {
@@ -109,7 +109,7 @@ extension Lychee {
                 }
         }
 
-        private static func processUnsplittable(_ text: String) -> [CoreCandidate] {
+        private static func processCharacters(_ text: String) -> [CoreCandidate] {
                 let textCount: Int = text.count
                 let rounds = (0..<textCount).map { number -> [CoreCandidate] in
                         let leading: String = String(text.dropLast(number))
@@ -132,16 +132,15 @@ extension Lychee {
                 let hasSeparators: Bool = text.count != origin.count
                 let candidates = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
                 guard !hasSeparators else { return candidates }
-                guard let firstCandidate = candidates.first else { return candidates }
+                guard let firstCandidate = candidates.first else { return processCharacters(text) }
                 let firstInputCount: Int = firstCandidate.input.count
                 guard firstInputCount != text.count else { return candidates }
                 let tailText: String = String(text.dropFirst(firstInputCount))
-                let tailSchemes: [[String]] = Segmentor.engineSegment(tailText)
-                let tailCandidates = match(schemes: tailSchemes, hasSeparators: false)
-                guard let backCandidate = tailCandidates.first else { return candidates }
-                let offset: Int = (firstCandidate.text.count < 3) ? 3 : 2
-                let qualified = candidates.enumerated().filter({ $0.offset < offset && $0.element.input.count == firstInputCount })
-                let combines = qualified.map({ $0.element + backCandidate })
+                let tailSegmentation: Segmentation = Segmentor.engineSegment(tailText)
+                let tailCandidates = match(schemes: tailSegmentation, hasSeparators: false)
+                guard let firstTailCandidate = tailCandidates.first else { return candidates + processCharacters(text) }
+                let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
+                let combines = qualified.map({ $0.element + firstTailCandidate })
                 return combines + candidates
         }
         private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
