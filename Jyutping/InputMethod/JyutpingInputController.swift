@@ -404,6 +404,7 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
         override func deactivateServer(_ sender: Any!) {
+                markedText = .empty
                 candidateSequence = []
                 window?.setFrame(.zero, display: true)
         }
@@ -869,7 +870,7 @@ final class JyutpingInputController: IMKInputController {
                                 return
                         }
                         let leading = bufferText.dropLast(difference)
-                        let filtered = leading.replacingOccurrences(of: "'", with: "")
+                        let filtered = leading.filter({ !$0.isSeparator })
                         var tail: String.SubSequence = {
                                 if filtered.count == leading.count {
                                         return bufferText.dropFirst(inputCount)
