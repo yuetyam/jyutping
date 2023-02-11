@@ -18,7 +18,7 @@ extension SyllableScheme {
                                 .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
                                 .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
                                 .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
-                                .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
+                                // .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
                                 .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
                                 .replacingOccurrences(of: "y", with: "j", options: .anchored)
                         return convertedSyllable
@@ -310,7 +310,7 @@ public struct Segmentor {
                 }
         }
 
-        private static let singular: Set<Character> = ["m", "a", "o"]
+        private static let singular: Set<Character> = ["m", "o"] // ["m", "a", "o"]
         private static let dual: Set<String> = [
                 "aa", "ai", "au", "am", "an", "ap", "at", "ak", "ei", "oi", "ou", "on", "ok", "uk",
                 "bo", "po", "mo", "fo", "do", "to", "no", "lo", "go", "ko", "ho", "wo", "zo", "co", "so",
@@ -318,13 +318,13 @@ public struct Segmentor {
                 "di", "ni", "zi", "ci", "si", "ji",
                 "fu", "gu", "ku", "wu",
                 "ng",
-                "ba", "pa", "ma", "fa", "da", "ta", "na", "la", "ga", "ka", "ha", "wa", "za", "ca", "sa", "ja",
+                // "ba", "pa", "ma", "fa", "da", "ta", "na", "la", "ga", "ka", "ha", "wa", "za", "ca", "sa", "ja",
                 "yu", "ye", "yi", "ya",
         ]
         private static let triple: Set<String> = [
                 "ang", "ong", "ung",
                 "ngo", "gwo",
-                "nga", "gwa", "kwa",
+                // "nga", "gwa", "kwa",
 
                 "baa", "paa", "maa", "faa", "daa", "taa", "naa", "laa", "gaa", "kaa", "haa", "waa", "zaa", "caa", "saa", "jaa",
                 "bai", "pai", "mai", "fai", "dai", "tai", "nai", "lai", "gai", "kai", "hai", "wai", "zai", "cai", "sai", "jai",

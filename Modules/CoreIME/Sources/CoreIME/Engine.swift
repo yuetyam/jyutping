@@ -38,9 +38,7 @@ extension Lychee {
                 guard let bestScheme: SyllableScheme = segmentation.first, !bestScheme.isEmpty else {
                         return processCharacters(textWithoutSeparators)
                 }
-                let convertedText = textWithoutSeparators
-                        .replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
-                        .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
+                let convertedText = textWithoutSeparators.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
                 if bestScheme.length == convertedText.count {
                         return process(text: convertedText, origin: text, sequences: segmentation)
                 } else {
