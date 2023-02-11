@@ -35,6 +35,7 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("/", comment: halfWidth),
                         PunctuationSymbol("／", comment: fullWidth),
                         PunctuationSymbol("÷"),
+                        PunctuationSymbol("≠"),
                         PunctuationSymbol(String.fullWidthSpace, comment: "全形空格", secondaryComment: "U+3000")
                 ]
                 return PunctuationKey(keyText: "/", shiftingKeyText: "?", instantSymbol: nil, instantShiftingSymbol: "？", symbols: symbols, shiftingSymbols: [.init("？")])
