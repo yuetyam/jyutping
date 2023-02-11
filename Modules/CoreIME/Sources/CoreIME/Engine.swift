@@ -33,75 +33,14 @@ extension Lychee {
                 }
         }
 
-        /*
-        private static func fetchTwoChars(_ text: String) -> [CoreCandidate] {
-                guard let firstChar = text.first, let lastChar = text.last else { return [] }
-                guard !(firstChar.isSeparator || firstChar.isTone) else { return [] }
-                guard !lastChar.isSeparator else { return match(for: String(firstChar)) }
-                let matched: [CoreCandidate] = match(for: text)
-                guard !lastChar.isTone else { return matched }
-                let shortcutTwo: [CoreCandidate] = shortcut(for: text)
-                let shortcutFirst: [CoreCandidate] = shortcut(for: String(firstChar))
-                return matched + shortcutTwo + shortcutFirst
-        }
-        private static func fetchThreeChars(_ text: String) -> [CoreCandidate] {
-                guard let firstChar = text.first, let lastChar = text.last else { return [] }
-                guard !(firstChar.isSeparator || firstChar.isTone) else { return [] }
-                let medium = text[text.index(text.startIndex, offsetBy: 1)]
-                let leadingTwo: String = String([firstChar, medium])
-                let headTail: String = String([firstChar, lastChar])
-                if medium.isSeparator {
-                        if lastChar.isSeparator || lastChar.isTone {
-                                return match(for: String(firstChar))
-                        } else {
-                                return prefix(match: headTail)
-                        }
-                } else if medium.isTone {
-                        guard !(lastChar.isSeparator || lastChar.isTone) else {
-                                return match(for: leadingTwo)
-                        }
-                        let fetches: [CoreCandidate] = prefix(match: headTail)
-                        let filtered: [CoreCandidate] = fetches.filter {
-                                guard let first: String = $0.romanization.components(separatedBy: String.space).first else { return false }
-                                return first == leadingTwo
-                        }
-                        return filtered
-                }
-                if lastChar.isSeparator {
-                        return match(for: leadingTwo)
-                } else if lastChar.isTone {
-                        return match(for: text)
-                }
-                let exactly: [CoreCandidate] = match(for: text)
-                let prefixes: [CoreCandidate] = prefix(match: text)
-                let shortcutThree: [CoreCandidate] = shortcut(for: text)
-                let shortcutTwo: [CoreCandidate] = shortcut(for: leadingTwo)
-                let matchTwo: [CoreCandidate] = match(for: leadingTwo)
-                let shortcutFirst: [CoreCandidate] = shortcut(for: String(firstChar))
-
-                var combine: [CoreCandidate] = []
-                if let shortcutLast1: CoreCandidate = shortcut(for: String(lastChar), count: 1).first {
-                        if let firstMatchTwo: CoreCandidate = matchTwo.first {
-                                let new: CoreCandidate = firstMatchTwo + shortcutLast1
-                                combine.append(new)
-                        }
-                        if let firstShortcutTwo: CoreCandidate = matchTwo.first {
-                                let new: CoreCandidate = firstShortcutTwo + shortcutLast1
-                                combine.append(new)
-                        }
-                }
-                let head: [CoreCandidate] = exactly + prefixes + shortcutThree
-                let tail: [CoreCandidate] = combine + shortcutTwo + matchTwo + shortcutFirst
-                return head + tail
-        }
-        */
-
         private static func fetch(text: String, segmentation: Segmentation) -> [CoreCandidate] {
                 let textWithoutSeparators: String = text.filter({ !($0.isSeparator) })
                 guard let bestScheme: SyllableScheme = segmentation.first, !bestScheme.isEmpty else {
                         return processCharacters(textWithoutSeparators)
                 }
-                let convertedText = textWithoutSeparators.replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression).replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
+                let convertedText = textWithoutSeparators
+                        .replacingOccurrences(of: "(?<!c|s|j|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
+                        .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
                 if bestScheme.length == convertedText.count {
                         return process(text: convertedText, origin: text, sequences: segmentation)
                 } else {
@@ -132,24 +71,29 @@ extension Lychee {
                 let hasSeparators: Bool = text.count != origin.count
                 let candidates = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
                 guard !hasSeparators else { return candidates }
-                guard let firstCandidate = candidates.first else { return processCharacters(text) }
-                let firstInputCount: Int = firstCandidate.input.count
-                guard firstInputCount != text.count else { return candidates }
-                let tailText: String = String(text.dropFirst(firstInputCount))
-                let tailSegmentation: Segmentation = Segmentor.engineSegment(tailText)
-                let tailCandidates = match(schemes: tailSegmentation, hasSeparators: false)
-                guard let firstTailCandidate = tailCandidates.first else { return candidates + processCharacters(text) }
-                let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-                let combines = qualified.map({ $0.element + firstTailCandidate })
-                return combines + candidates
-        }
-        private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
                 let fullProcessed: [CoreCandidate] = match(for: text) + shortcut(for: text) + prefix(match: text)
                 let backup: [CoreCandidate] = processCharacters(text)
+                let fallback: [CoreCandidate] = fullProcessed + candidates + backup
+                guard let firstCandidate = candidates.first else { return fallback }
+                let firstInputCount: Int = firstCandidate.input.count
+                guard firstInputCount != text.count else { return fallback }
+                let tailText: String = String(text.dropFirst(firstInputCount))
+                let tailSegmentation: Segmentation = Segmentor.engineSegment(tailText)
+                let hasSchemes: Bool = !(tailSegmentation.first?.isEmpty ?? true)
+                guard hasSchemes else { return fallback }
+                let tailCandidates = match(schemes: tailSegmentation, hasSeparators: false)
+                guard let firstTailCandidate = tailCandidates.first else { return fallback }
+                let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
+                let combines = qualified.map({ $0.element + firstTailCandidate })
+                return fullProcessed + combines + candidates + backup
+        }
+        private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
                 let hasSeparators: Bool = text.count != origin.count
                 let candidates: [CoreCandidate] = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
-                lazy var fallback: [CoreCandidate] = fullProcessed + candidates + backup
-                guard !hasSeparators else { return fallback }
+                guard !hasSeparators else { return candidates }
+                let fullProcessed: [CoreCandidate] = match(for: text) + shortcut(for: text) + prefix(match: text)
+                let backup: [CoreCandidate] = processCharacters(text)
+                let fallback: [CoreCandidate] = fullProcessed + candidates + backup
                 guard let firstCandidate: CoreCandidate = candidates.first else { return fallback }
                 let firstInputCount: Int = firstCandidate.input.count
                 guard firstInputCount != text.count else { return fallback }
