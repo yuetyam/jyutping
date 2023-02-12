@@ -93,7 +93,7 @@ enum PressShiftOnce: Int {
 
 enum ShiftSpaceCombination: Int {
         case inputFullWidthSpace = 1
-        case switchCantoneseEnglish = 2
+        case switchInputMethodMode = 2
 }
 
 struct AppSettings {
@@ -311,7 +311,7 @@ struct AppSettings {
                 case 0, 1:
                         return .inputFullWidthSpace
                 case 2:
-                        return .switchCantoneseEnglish
+                        return .switchInputMethodMode
                 default:
                         return .inputFullWidthSpace
                 }
@@ -322,7 +322,7 @@ struct AppSettings {
                         case 0, 1:
                                 return .inputFullWidthSpace
                         case 2:
-                                return .switchCantoneseEnglish
+                                return .switchInputMethodMode
                         default:
                                 return .inputFullWidthSpace
                         }

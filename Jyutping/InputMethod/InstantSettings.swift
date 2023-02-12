@@ -19,18 +19,18 @@ enum Punctuation: Int {
 }
 
 
-/// Cantonese / English
+/// Cantonese / ABC
 enum InputMethodMode: Int {
 
         case cantonese = 1
-        case english = 2
+        case abc = 2
 
         var isCantonese: Bool {
                 return self == .cantonese
         }
 
-        var isEnglish: Bool {
-                return self == .english
+        var isABC: Bool {
+                return self == .abc
         }
 }
 
@@ -104,7 +104,7 @@ struct InstantSettings {
                 case 0, 1:
                         return .cantonese
                 case 2:
-                        return .english
+                        return .abc
                 default:
                         return .cantonese
                 }

@@ -396,7 +396,7 @@ final class JyutpingInputController: IMKInputController {
                 switch InstantSettings.inputMethodMode {
                 case .cantonese:
                         return .cantonese
-                case .english:
+                case .abc:
                         return .english
                 }
         }() {
@@ -444,16 +444,10 @@ final class JyutpingInputController: IMKInputController {
                                 }
                                 return true
 
-                        // TODO: Replace tis with UserLexicon modification
+                        // TODO: Replace this with UserLexicon modification
                         /*
                         case KeyCode.Symbol.VK_MINUS:
-                                inputState = .cantonese
-                                InstantSettings.updateInputMethodMode(to: .cantonese)
-                                return true
                         case KeyCode.Symbol.VK_EQUAL:
-                                inputState = .english
-                                InstantSettings.updateInputMethodMode(to: .english)
-                                return true
                         */
                         case KeyCode.Special.VK_BACKWARD_DELETE:
                                 switch inputState {
@@ -681,11 +675,18 @@ final class JyutpingInputController: IMKInputController {
                 case .space:
                         switch inputState {
                         case .cantonese:
+                                let shouldSwitchToABCMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
+                                guard !shouldSwitchToABCMode else {
+                                        passBuffer()
+                                        InstantSettings.updateInputMethodMode(to: .abc)
+                                        inputState = .english
+                                        return true
+                                }
                                 if candidates.isEmpty {
                                         passBuffer()
                                         let shouldInsertFullWidthSpace: Bool = isShifting || InstantSettings.characterForm == .fullWidth
-                                        guard shouldInsertFullWidthSpace else { return false }
-                                        client.insert("　")
+                                        let text: String = shouldInsertFullWidthSpace ? "　" : " "
+                                        client.insert(text)
                                         return true
                                 } else {
                                         let index = displayObject.highlightedIndex
@@ -696,7 +697,11 @@ final class JyutpingInputController: IMKInputController {
                                         return true
                                 }
                         case .english:
-                                return false
+                                let shouldSwitchToCantoneseMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
+                                guard shouldSwitchToCantoneseMode else { return false }
+                                InstantSettings.updateInputMethodMode(to: .cantonese)
+                                inputState = .cantonese
+                                return true
                         case .instantSettings:
                                 handleSettings()
                                 return true
@@ -763,7 +768,7 @@ final class JyutpingInputController: IMKInputController {
                                 switch InstantSettings.inputMethodMode {
                                 case .cantonese:
                                         return .cantonese
-                                case .english:
+                                case .abc:
                                         return .english
                                 }
                         }()

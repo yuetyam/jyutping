@@ -32,7 +32,7 @@ struct HotkeysView: View {
                                 HStack {
                                         Picker("Press **Shift** Once To", selection: $pressShiftOnce) {
                                                 Text("Do Nothing").tag(1)
-                                                Text("Switch between Cantonese and English").tag(2)
+                                                Text("Switch between Cantonese and ABC (Not Implemented Yet)").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
@@ -45,7 +45,7 @@ struct HotkeysView: View {
                                 HStack {
                                         Picker("Press **Shift** + **Space** To", selection: $shiftSpaceCombination) {
                                                 Text("Input a Full-width Space (U+3000)").tag(1)
-                                                Text("Switch between Cantonese and English").tag(2)
+                                                Text("Switch between Cantonese and ABC").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
@@ -96,31 +96,6 @@ struct HotkeysView: View {
                                         .font(.subheadline)
                                 }
                                 .block()
-                                /*
-                                VStack(spacing: 8) {
-                                        HStack(spacing: 4) {
-                                                LabelText("Switch to Cantonese Mode")
-                                                Text.separator
-                                                KeyBlockView.control
-                                                Text.plus
-                                                KeyBlockView.shift
-                                                Text.plus
-                                                KeyBlockView("-")
-                                                Spacer()
-                                        }
-                                        HStack(spacing: 4) {
-                                                LabelText("Switch to English Mode")
-                                                Text.separator
-                                                KeyBlockView.control
-                                                Text.plus
-                                                KeyBlockView.shift
-                                                Text.plus
-                                                KeyBlockView("=")
-                                                Spacer()
-                                        }
-                                }
-                                .block()
-                                */
                                 HStack(spacing: 4) {
                                         LabelText("Remove highlighted Candidate from User Lexicon")
                                         Text.separator
