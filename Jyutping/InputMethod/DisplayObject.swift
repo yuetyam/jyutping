@@ -1,4 +1,5 @@
 import Combine
+import CoreIME
 
 final class DisplayObject: ObservableObject {
 
@@ -8,7 +9,7 @@ final class DisplayObject: ObservableObject {
         @Published private(set) var animationState: Int = 0
         @Published private(set) var candidateTextAnimationConditions: [Bool] = []
 
-        private static let defaultLongest: DisplayCandidate = DisplayCandidate("毋", comment: "m4")
+        private static let defaultLongest: DisplayCandidate = DisplayCandidate(candidate: Candidate(text: "毋", romanization: "m4", input: "m", lexiconText: "毋"))
 
         func reset() {
                 items = []

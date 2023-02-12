@@ -1,4 +1,5 @@
 import Foundation
+import CoreIME
 
 struct DisplayCandidate: Identifiable, Hashable {
 
@@ -6,14 +7,38 @@ struct DisplayCandidate: Identifiable, Hashable {
                 return UUID()
         }
 
+        let candidate: Candidate
         let text: String
         let comment: String?
         let secondaryComment: String?
 
-        init(_ text: String, comment: String? = nil, secondaryComment: String? = nil) {
-                self.text = text
-                self.comment = comment
-                self.secondaryComment = secondaryComment
+        init(candidate: Candidate) {
+                self.candidate = candidate
+                let text: String = candidate.text
+                switch candidate.type {
+                case .cantonese:
+                        self.text = text
+                        self.comment = candidate.romanization
+                        self.secondaryComment = nil
+                case .specialMark:
+                        self.text = text
+                        self.comment = nil
+                        self.secondaryComment = nil
+                case .emoji:
+                        let convertedText: String = Converter.convert(candidate.lexiconText, to: Logogram.current)
+                        let comment: String = "〔\(convertedText)〕"
+                        self.text = text
+                        self.comment = comment
+                        self.secondaryComment = nil
+                case .symbol:
+                        let originalComment: String = candidate.lexiconText
+                        lazy var convertedComment: String = Converter.convert(originalComment, to: Logogram.current)
+                        let comment: String? = originalComment.isEmpty ? nil : "〔\(convertedComment)〕"
+                        let secondaryComment: String? = candidate.romanization.isEmpty ? nil : candidate.romanization
+                        self.text = text
+                        self.comment = comment
+                        self.secondaryComment = secondaryComment
+                }
         }
 }
 

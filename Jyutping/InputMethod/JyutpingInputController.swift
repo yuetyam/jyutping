@@ -196,24 +196,7 @@ final class JyutpingInputController: IMKInputController {
                 guard let firstIndex: Int = newFirstIndex else { return }
                 let bound: Int = min(firstIndex + pageSize, candidates.count)
                 indices = (firstIndex, bound - 1)
-                let newItems = candidates[firstIndex..<bound].map { item -> DisplayCandidate in
-                        switch item.type {
-                        case .cantonese:
-                                return DisplayCandidate(item.text, comment: item.romanization)
-                        case .specialMark:
-                                return DisplayCandidate(item.text)
-                        case .emoji:
-                                let convertedText: String = Converter.convert(item.lexiconText, to: Logogram.current)
-                                let comment: String = "〔\(convertedText)〕"
-                                return DisplayCandidate(item.text, comment: comment)
-                        case .symbol:
-                                let originalComment: String = item.lexiconText
-                                lazy var convertedComment: String = Converter.convert(originalComment, to: Logogram.current)
-                                let comment: String? = originalComment.isEmpty ? nil : "〔\(convertedComment)〕"
-                                let secondaryComment: String? = item.romanization.isEmpty ? nil : item.romanization
-                                return DisplayCandidate(item.text, comment: comment, secondaryComment: secondaryComment)
-                        }
-                }
+                let newItems = candidates[firstIndex..<bound].map({ DisplayCandidate(candidate: $0) })
                 displayObject.setItems(newItems)
         }
 
@@ -543,7 +526,10 @@ final class JyutpingInputController: IMKInputController {
                         switch inputState {
                         case .cantonese:
                                 if isBufferState {
-                                        selectDisplayingItem(index: index, client: client)
+                                        guard let selectedItem = displayObject.items.fetch(index) else { return true }
+                                        let text = selectedItem.text
+                                        client.insert(text)
+                                        aftercareSelection(selectedItem)
                                         return true
                                         /*
                                         if hasControlShiftModifiers {
@@ -553,8 +539,11 @@ final class JyutpingInputController: IMKInputController {
                                                 Speech.speak(romanization)
                                                 return true
                                         } else {
-                                                selectDisplayingItem(index: index, client: client)
-                                                return true
+                                                 guard let selectedItem = displayObject.items.fetch(index) else { return true }
+                                                 let text = selectedItem.text
+                                                 client.insert(text)
+                                                 aftercareSelection(selectedItem)
+                                                 return true
                                         }
                                         */
                                 } else {
@@ -567,12 +556,12 @@ final class JyutpingInputController: IMKInputController {
                                                         let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuation.isCantoneseMode && isShifting
                                                         guard shouldInsertCantoneseSymbol else { return false }
                                                         let text: String = KeyCode.shiftingSymbol(of: number)
-                                                        insert(text)
+                                                        client.insert(text)
                                                         return true
                                                 case .fullWidth:
                                                         let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
                                                         let fullWidthText: String = text.fullWidth()
-                                                        insert(fullWidthText)
+                                                        client.insert(fullWidthText)
                                                         return true
                                                 }
                                         }
@@ -612,13 +601,13 @@ final class JyutpingInputController: IMKInputController {
                                 guard InstantSettings.punctuation.isCantoneseMode else { return false }
                                 if isShifting {
                                         if let symbol = punctuationKey.instantShiftingSymbol {
-                                                insert(symbol)
+                                                client.insert(symbol)
                                         } else {
                                                 bufferText = punctuationKey.shiftingKeyText
                                         }
                                 } else {
                                         if let symbol = punctuationKey.instantSymbol {
-                                                insert(symbol)
+                                                client.insert(symbol)
                                         } else {
                                                 bufferText = punctuationKey.keyText
                                         }
@@ -696,10 +685,14 @@ final class JyutpingInputController: IMKInputController {
                                         passBuffer()
                                         let shouldInsertFullWidthSpace: Bool = isShifting || InstantSettings.characterForm == .fullWidth
                                         guard shouldInsertFullWidthSpace else { return false }
-                                        insert(String.fullWidthSpace)
+                                        client.insert("　")
                                         return true
                                 } else {
-                                        selectDisplayingItem(index: displayObject.highlightedIndex, client: client)
+                                        let index = displayObject.highlightedIndex
+                                        guard let selectedItem = displayObject.items.fetch(index) else { return true }
+                                        let text = selectedItem.text
+                                        client.insert(text)
+                                        aftercareSelection(selectedItem)
                                         return true
                                 }
                         case .english:
@@ -758,7 +751,7 @@ final class JyutpingInputController: IMKInputController {
         private func passBuffer() {
                 guard isBufferState else { return }
                 let text: String = InstantSettings.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
-                insert(text)
+                currentClient?.insert(text)
                 bufferText = .empty
                 candidateSequence = []
         }
@@ -811,20 +804,8 @@ final class JyutpingInputController: IMKInputController {
                 Logogram.updateCurrent(to: newSelection)
         }
 
-        private func selectDisplayingItem(index: Int, client: IMKTextInput) {
-                guard let selectedItem = displayObject.items.fetch(index) else { return }
-                client.insertText(selectedItem.text, replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
-
-                let find: Candidate? = {
-                        for item in candidates where item.isCantonese {
-                                let isEqual: Bool = item.text == selectedItem.text && item.romanization == selectedItem.comment
-                                if isEqual {
-                                        return item
-                                }
-                        }
-                        return nil
-                }()
-                guard let candidate = find else {
+        private func aftercareSelection(_ selected: DisplayCandidate) {
+                guard let candidate = candidates.first(where: { $0.isCantonese && $0 == selected.candidate }) else {
                         shutdownSession()
                         return
                 }
@@ -884,10 +865,6 @@ final class JyutpingInputController: IMKInputController {
                         }
                         bufferText = String(tail)
                 }
-        }
-
-        private func insert(_ text: String) {
-                currentClient?.insertText(text, replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
         }
 
         private func shutdownSession() {
