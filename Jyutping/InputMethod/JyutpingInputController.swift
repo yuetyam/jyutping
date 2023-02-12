@@ -201,6 +201,13 @@ final class JyutpingInputController: IMKInputController {
         }
 
         private lazy var bufferText: String = .empty {
+                willSet {
+                        let shouldHandleCandidateSequence: Bool = !(candidateSequence.isEmpty) && newValue.isEmpty
+                        guard shouldHandleCandidateSequence else { return }
+                        let concatenatedCandidate: Candidate = candidateSequence.joined()
+                        candidateSequence = []
+                        UserLexicon.handle(concatenatedCandidate)
+                }
                 didSet {
                         indices = (0, 0)
                         switch bufferText.first {
@@ -470,7 +477,7 @@ final class JyutpingInputController: IMKInputController {
                                 }
                         case KeyCode.Alphabet.VK_U:
                                 guard inputState.isCantonese && isBufferState else { return false }
-                                shutdownSession()
+                                bufferText = .empty
                                 return true
                         case let value where KeyCode.numberSet.contains(value):
                                 hasControlShiftModifiers = true
@@ -664,7 +671,7 @@ final class JyutpingInputController: IMKInputController {
                         switch inputState {
                         case .cantonese:
                                 guard isBufferState else { return false }
-                                shutdownSession()
+                                bufferText = .empty
                                 return true
                         case .english:
                                 return false
@@ -758,7 +765,6 @@ final class JyutpingInputController: IMKInputController {
                 let text: String = InstantSettings.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
                 currentClient?.insert(text)
                 bufferText = .empty
-                candidateSequence = []
         }
 
         private func handleSettings(_ index: Int? = nil) {
@@ -811,7 +817,7 @@ final class JyutpingInputController: IMKInputController {
 
         private func aftercareSelection(_ selected: DisplayCandidate) {
                 guard let candidate = candidates.first(where: { $0.isCantonese && $0 == selected.candidate }) else {
-                        shutdownSession()
+                        bufferText = .empty
                         return
                 }
                 switch bufferText.first {
@@ -819,20 +825,13 @@ final class JyutpingInputController: IMKInputController {
                         break
                 case .some("r"), .some("v"), .some("x"), .some("q"):
                         if bufferText.count <= candidate.input.count + 1 {
-                                shutdownSession()
+                                bufferText = .empty
                         } else {
                                 let first: String = String(bufferText.first!)
                                 let tail = bufferText.dropFirst(candidate.input.count + 1)
                                 bufferText = first + tail
                         }
                 default:
-                        defer {
-                                if bufferText.isEmpty && !candidateSequence.isEmpty {
-                                        let concatenatedCandidate: Candidate = candidateSequence.joined()
-                                        candidateSequence = []
-                                        UserLexicon.handle(concatenatedCandidate)
-                                }
-                        }
                         candidateSequence.append(candidate)
                         let bufferTextLength: Int = bufferText.count
                         let candidateInputText: String = {
@@ -870,11 +869,6 @@ final class JyutpingInputController: IMKInputController {
                         }
                         bufferText = String(tail)
                 }
-        }
-
-        private func shutdownSession() {
-                candidateSequence = []
-                bufferText = .empty
         }
 }
 
