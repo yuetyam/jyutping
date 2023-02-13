@@ -20,11 +20,11 @@ final class JyutpingInputController: IMKInputController {
                         window?.level = NSWindow.Level(levelValue)
                         window?.orderFrontRegardless()
                 }
-                switch inputState {
-                case .instantSettings:
-                        let settingsUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject))
-                        window?.contentView?.addSubview(settingsUI.view)
-                        settingsUI.view.translatesAutoresizingMaskIntoConstraints = false
+                switch InputState.current {
+                case .switches:
+                        let switchesUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject))
+                        window?.contentView?.addSubview(switchesUI.view)
+                        switchesUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
                            let bottomAnchor = window?.contentView?.bottomAnchor,
                            let leadingAnchor = window?.contentView?.leadingAnchor,
@@ -32,33 +32,33 @@ final class JyutpingInputController: IMKInputController {
                                 switch windowPattern {
                                 case .regular:
                                         NSLayoutConstraint.activate([
-                                                settingsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                                settingsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                                switchesUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                switchesUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                                         ])
                                 case .horizontalReversed:
                                         NSLayoutConstraint.activate([
-                                                settingsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                                settingsUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                                                switchesUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                switchesUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
                                         ])
                                 case .verticalReversed:
                                         NSLayoutConstraint.activate([
-                                                settingsUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
-                                                settingsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                                switchesUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                switchesUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                                         ])
                                 case .reversed:
                                         NSLayoutConstraint.activate([
-                                                settingsUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
-                                                settingsUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                                                switchesUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                switchesUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
                                         ])
                                 }
                         }
-                        window?.contentViewController?.addChild(settingsUI)
+                        window?.contentViewController?.addChild(switchesUI)
                         settingsObject.resetHighlightedIndex()
                         window?.setFrame(frame, display: true)
                 default:
-                        let candidateUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject))
-                        window?.contentView?.addSubview(candidateUI.view)
-                        candidateUI.view.translatesAutoresizingMaskIntoConstraints = false
+                        let candidatesUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject))
+                        window?.contentView?.addSubview(candidatesUI.view)
+                        candidatesUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
                            let bottomAnchor = window?.contentView?.bottomAnchor,
                            let leadingAnchor = window?.contentView?.leadingAnchor,
@@ -66,27 +66,27 @@ final class JyutpingInputController: IMKInputController {
                                 switch windowPattern {
                                 case .regular:
                                         NSLayoutConstraint.activate([
-                                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                                candidatesUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                candidatesUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                                         ])
                                 case .horizontalReversed:
                                         NSLayoutConstraint.activate([
-                                                candidateUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                                candidateUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                                                candidatesUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                                candidatesUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
                                         ])
                                 case .verticalReversed:
                                         NSLayoutConstraint.activate([
-                                                candidateUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
-                                                candidateUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
+                                                candidatesUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                candidatesUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset)
                                         ])
                                 case .reversed:
                                         NSLayoutConstraint.activate([
-                                                candidateUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
-                                                candidateUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                                                candidatesUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                                candidatesUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
                                         ])
                                 }
                         }
-                        window?.contentViewController?.addChild(candidateUI)
+                        window?.contentViewController?.addChild(candidatesUI)
                         window?.setFrame(.zero, display: true)
                 }
         }
@@ -399,18 +399,6 @@ final class JyutpingInputController: IMKInputController {
                 window?.setFrame(.zero, display: true)
         }
 
-        private lazy var inputState: InputState = {
-                switch InstantSettings.inputMethodMode {
-                case .cantonese:
-                        return .cantonese
-                case .abc:
-                        return .english
-                }
-        }() {
-                didSet {
-                        resetWindow()
-                }
-        }
         private var isBufferState: Bool {
                 return !(bufferText.isEmpty)
         }
@@ -440,14 +428,16 @@ final class JyutpingInputController: IMKInputController {
                                 // handled by NSMenu
                                 return false
                         case KeyCode.Symbol.VK_BACKQUOTE:
-                                switch inputState {
+                                switch InputState.current {
                                 case .cantonese:
                                         passBuffer()
-                                        inputState = .instantSettings
-                                case .english:
-                                        inputState = .instantSettings
-                                case .instantSettings:
-                                        handleSettings(-1)
+                                        InputState.updateCurrent(to: .switches)
+                                        resetWindow()
+                                case .transparent:
+                                        InputState.updateCurrent(to: .switches)
+                                        resetWindow()
+                                case .switches:
+                                        handleSwitches(-1)
                                 }
                                 return true
 
@@ -457,7 +447,7 @@ final class JyutpingInputController: IMKInputController {
                         case KeyCode.Symbol.VK_EQUAL:
                         */
                         case KeyCode.Special.VK_BACKWARD_DELETE:
-                                switch inputState {
+                                switch InputState.current {
                                 case .cantonese:
                                         guard !(candidates.isEmpty) else { return false }
                                         let index = displayObject.highlightedIndex
@@ -470,13 +460,13 @@ final class JyutpingInputController: IMKInputController {
                                                 }
                                         }
                                         return true
-                                case .english:
+                                case .transparent:
                                         return false
-                                case .instantSettings:
+                                case .switches:
                                         return true
                                 }
                         case KeyCode.Alphabet.VK_U:
-                                guard inputState.isCantonese && isBufferState else { return false }
+                                guard InputState.current.isCantonese && isBufferState else { return false }
                                 bufferText = .empty
                                 return true
                         case let value where KeyCode.numberSet.contains(value):
@@ -494,26 +484,26 @@ final class JyutpingInputController: IMKInputController {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
-                                switch inputState {
+                                switch InputState.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
                                         displayObject.decreaseHighlightedIndex()
                                         return true
-                                case .english:
+                                case .transparent:
                                         return false
-                                case .instantSettings:
+                                case .switches:
                                         settingsObject.decreaseHighlightedIndex()
                                         return true
                                 }
                         case .down:
-                                switch inputState {
+                                switch InputState.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
                                         displayObject.increaseHighlightedIndex()
                                         return true
-                                case .english:
+                                case .transparent:
                                         return false
-                                case .instantSettings:
+                                case .switches:
                                         settingsObject.increaseHighlightedIndex()
                                         return true
                                 }
@@ -524,7 +514,7 @@ final class JyutpingInputController: IMKInputController {
                         }
                 case .number(let number):
                         let index: Int = number == 0 ? 9 : (number - 1)
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 if isBufferState {
                                         guard let selectedItem = displayObject.items.fetch(index) else { return true }
@@ -549,7 +539,7 @@ final class JyutpingInputController: IMKInputController {
                                         */
                                 } else {
                                         if hasControlShiftModifiers {
-                                                handleSettings(index)
+                                                handleSwitches(index)
                                                 return true
                                         } else {
                                                 switch InstantSettings.characterForm {
@@ -567,24 +557,24 @@ final class JyutpingInputController: IMKInputController {
                                                 }
                                         }
                                 }
-                        case .english:
+                        case .transparent:
                                 if hasControlShiftModifiers {
-                                        handleSettings(index)
+                                        handleSwitches(index)
                                         return true
                                 } else {
                                         return false
                                 }
-                        case .instantSettings:
-                                handleSettings(index)
+                        case .switches:
+                                handleSwitches(index)
                                 return true
                         }
                 case .keypadNumber(let number):
-                        let isStrokeReverseLookup: Bool = inputState == .cantonese && bufferText.hasPrefix("x")
+                        let isStrokeReverseLookup: Bool = InputState.current.isCantonese && bufferText.hasPrefix("x")
                         guard isStrokeReverseLookup else { return false }
                         bufferText += "\(number)"
                         return true
                 case .punctuation(let punctuationKey):
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard candidates.isEmpty else {
                                         switch punctuationKey {
@@ -614,79 +604,79 @@ final class JyutpingInputController: IMKInputController {
                                         }
                                 }
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
+                        case .switches:
                                 return true
                         }
                 case .alphabet(let letter):
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 let hasCharacters: Bool = event.characters.hasContent
                                 guard hasCharacters else { return false }
                                 let text: String = isShifting ? letter.uppercased() : letter
                                 bufferText += text
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
+                        case .switches:
                                 return true
                         }
                 case .separator:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 bufferText += "'"
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
+                        case .switches:
                                 return true
                         }
                 case .return:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 passBuffer()
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
-                                handleSettings()
+                        case .switches:
+                                handleSwitches()
                                 return true
                         }
                 case .backspace:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 bufferText = String(bufferText.dropLast())
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
-                                handleSettings(-1)
+                        case .switches:
+                                handleSwitches(-1)
                                 return true
                         }
                 case .escapeClear:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 bufferText = .empty
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
-                                handleSettings(-1)
+                        case .switches:
+                                handleSwitches(-1)
                                 return true
                         }
                 case .space:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 let shouldSwitchToABCMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
                                 guard !shouldSwitchToABCMode else {
                                         passBuffer()
                                         InstantSettings.updateInputMethodMode(to: .abc)
-                                        inputState = .english
+                                        InputState.updateCurrent(to: .transparent)
                                         return true
                                 }
                                 if candidates.isEmpty {
@@ -703,54 +693,54 @@ final class JyutpingInputController: IMKInputController {
                                         aftercareSelection(selectedItem)
                                         return true
                                 }
-                        case .english:
+                        case .transparent:
                                 let shouldSwitchToCantoneseMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
                                 guard shouldSwitchToCantoneseMode else { return false }
                                 InstantSettings.updateInputMethodMode(to: .cantonese)
-                                inputState = .cantonese
+                                InputState.updateCurrent(to: .cantonese)
                                 return true
-                        case .instantSettings:
-                                handleSettings()
+                        case .switches:
+                                handleSwitches()
                                 return true
                         }
                 case .tab:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 displayObject.increaseHighlightedIndex()
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
+                        case .switches:
                                 settingsObject.increaseHighlightedIndex()
                                 return true
                         }
                 case .previousPage:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 updateDisplayingCandidates(.previousPage)
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
+                        case .switches:
                                 return true
                         }
                 case .nextPage:
-                        switch inputState {
+                        switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 updateDisplayingCandidates(.nextPage)
                                 return true
-                        case .english:
+                        case .transparent:
                                 return false
-                        case .instantSettings:
+                        case .switches:
                                 return true
                         }
                 case .other:
                         switch event.keyCode {
                         case KeyCode.Special.VK_HOME:
-                                let shouldJump2FirstPage: Bool = inputState == .cantonese && !(candidates.isEmpty)
+                                let shouldJump2FirstPage: Bool = InputState.current.isCantonese && !(candidates.isEmpty)
                                 guard shouldJump2FirstPage else { return false }
                                 updateDisplayingCandidates(.establish)
                                 return true
@@ -767,17 +757,19 @@ final class JyutpingInputController: IMKInputController {
                 bufferText = .empty
         }
 
-        private func handleSettings(_ index: Int? = nil) {
+        private func handleSwitches(_ index: Int? = nil) {
                 let selectedIndex: Int = index ?? settingsObject.highlightedIndex
                 defer {
-                        inputState = {
+                        let newInputState: InputState = {
                                 switch InstantSettings.inputMethodMode {
                                 case .cantonese:
                                         return .cantonese
                                 case .abc:
-                                        return .english
+                                        return .transparent
                                 }
                         }()
+                        InputState.updateCurrent(to: newInputState)
+                        resetWindow()
                 }
                 switch selectedIndex {
                 case -1:

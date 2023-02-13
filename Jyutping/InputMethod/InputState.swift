@@ -1,18 +1,42 @@
 enum InputState: Int {
 
         case cantonese = 1
-        case english = 2
-        case instantSettings = 3
+        case transparent = 2
+        case switches = 3
 
         var isCantonese: Bool {
                 return self == .cantonese
         }
 
-        var isEnglish: Bool {
-                return self == .english
+        var isTransparent: Bool {
+                return self == .transparent
         }
 
-        var isInstantSettings: Bool {
-                return self == .instantSettings
+        var isSwitches: Bool {
+                return self == .switches
+        }
+
+        private(set) static var current: InputState = {
+                switch InstantSettings.inputMethodMode {
+                case .cantonese:
+                        return .cantonese
+                case .abc:
+                        return .transparent
+                }
+        }()
+        static func updateCurrent(to state: InputState?) {
+                if let state {
+                        current = state
+                } else {
+                        let newState: InputState = {
+                                switch InstantSettings.inputMethodMode {
+                                case .cantonese:
+                                        return .cantonese
+                                case .abc:
+                                        return .transparent
+                                }
+                        }()
+                        current = newState
+                }
         }
 }
