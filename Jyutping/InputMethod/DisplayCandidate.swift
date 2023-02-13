@@ -8,12 +8,14 @@ struct DisplayCandidate: Identifiable, Hashable {
         }
 
         let candidate: Candidate
+        let candidateIndex: Int
         let text: String
         let comment: String?
         let secondaryComment: String?
 
-        init(candidate: Candidate) {
+        init(candidate: Candidate, candidateIndex: Int) {
                 self.candidate = candidate
+                self.candidateIndex = candidateIndex
                 let text: String = candidate.text
                 switch candidate.type {
                 case .cantonese:

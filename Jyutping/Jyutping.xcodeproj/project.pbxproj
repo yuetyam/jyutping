@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		370AA36E297975D400A666A5 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA36D297975D400A666A5 /* SearchField.swift */; };
+		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
+		3726E43C2999DCC4003E5842 /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E43B2999DCC4003E5842 /* CandidateWindow.swift */; };
+		3726E43E2999E073003E5842 /* Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E43D2999E073003E5842 /* Suggestions.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
 		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
@@ -222,6 +225,9 @@
 
 /* Begin PBXFileReference section */
 		370AA36D297975D400A666A5 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
+		3726E43B2999DCC4003E5842 /* CandidateWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
+		3726E43D2999E073003E5842 /* Suggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestions.swift; sourceTree = "<group>"; };
 		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		3768795B297826780006D0A6 /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
 		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
@@ -491,6 +497,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3726E43F2999E324003E5842 /* InputController */ = {
+			isa = PBXGroup;
+			children = (
+				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
+				3726E43D2999E073003E5842 /* Suggestions.swift */,
+				3726E43B2999DCC4003E5842 /* CandidateWindow.swift */,
+				3726E4392999D164003E5842 /* EventHandler.swift */,
+				37E4C60C2990B03A00BFF179 /* Menu.swift */,
+				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
+				37FC1B85294DFC5300D7153F /* InputState.swift */,
+			);
+			path = InputController;
+			sourceTree = "<group>";
+		};
 		3783D9B22973BEC0000B3332 /* CandidateViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -842,13 +862,10 @@
 			children = (
 				37FC1B82294DFB6600D7153F /* Info.plist */,
 				37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */,
-				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
-				37E4C60C2990B03A00BFF179 /* Menu.swift */,
+				3726E43F2999E324003E5842 /* InputController */,
 				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
-				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
 				37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */,
 				37FC1B86294DFC5300D7153F /* DisplayObject.swift */,
-				37FC1B85294DFC5300D7153F /* InputState.swift */,
 				37FC1B84294DFC5300D7153F /* InstantSettings.swift */,
 				37FC1B96294DFC5300D7153F /* InstantSettingsView.swift */,
 				37FC1BA0294DFC5300D7153F /* Logogram.swift */,
@@ -1346,6 +1363,7 @@
 				37FC1BB4294DFC5400D7153F /* CharacterExtensions.swift in Sources */,
 				37FC1BA4294DFC5300D7153F /* DisplayObject.swift in Sources */,
 				37FC1BBA294DFC5400D7153F /* WindowPattern.swift in Sources */,
+				3726E43E2999E073003E5842 /* Suggestions.swift in Sources */,
 				37FC1BBC294DFC5400D7153F /* Logogram.swift in Sources */,
 				37FC1BAF294DFC5300D7153F /* PunctuationKey.swift in Sources */,
 				37FC1BAB294DFC5300D7153F /* UserLexicon.swift in Sources */,
@@ -1358,6 +1376,7 @@
 				37FC1BA1294DFC5300D7153F /* DisplayCandidate.swift in Sources */,
 				37FC1BA9294DFC5300D7153F /* AboutView.swift in Sources */,
 				37FC1BA8294DFC5300D7153F /* PreferencesView.swift in Sources */,
+				3726E43C2999DCC4003E5842 /* CandidateWindow.swift in Sources */,
 				37FC1BA2294DFC5300D7153F /* InstantSettings.swift in Sources */,
 				37FC1BAA294DFC5300D7153F /* AppSettings.swift in Sources */,
 				37FC1BB7294DFC5400D7153F /* ViewExtensions.swift in Sources */,
@@ -1366,6 +1385,7 @@
 				37FC1BB9294DFC5400D7153F /* Speech.swift in Sources */,
 				37FC1BB3294DFC5300D7153F /* InstantSettingsView.swift in Sources */,
 				37FC1BA7294DFC5300D7153F /* CandidateFontPreferencesView.swift in Sources */,
+				3726E43A2999D164003E5842 /* EventHandler.swift in Sources */,
 				37FC1BA6294DFC5300D7153F /* CandidateLayoutPreferencesView.swift in Sources */,
 				37E4C60D2990B03A00BFF179 /* Menu.swift in Sources */,
 				37FC1BBB294DFC5400D7153F /* InputMethodApp.swift in Sources */,

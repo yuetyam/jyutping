@@ -9,7 +9,7 @@ final class DisplayObject: ObservableObject {
         @Published private(set) var animationState: Int = 0
         @Published private(set) var candidateTextAnimationConditions: [Bool] = []
 
-        private static let defaultLongest: DisplayCandidate = DisplayCandidate(candidate: Candidate(text: "毋", romanization: "m4", input: "m", lexiconText: "毋"))
+        private static let defaultLongest: DisplayCandidate = DisplayCandidate(candidate: Candidate(text: "毋", romanization: "m4", input: "m", lexiconText: "毋"), candidateIndex: 0)
 
         func reset() {
                 items = []
@@ -19,7 +19,7 @@ final class DisplayObject: ObservableObject {
                 candidateTextAnimationConditions = []
         }
 
-        func setItems(_ newItems: [DisplayCandidate]) {
+        func update(with newItems: [DisplayCandidate]) {
                 guard !newItems.isEmpty else {
                         reset()
                         return
