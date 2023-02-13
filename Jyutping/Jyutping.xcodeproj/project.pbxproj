@@ -497,10 +497,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3726E43F2999E324003E5842 /* InputController */ = {
+		3726E43F2999E324003E5842 /* InputControllerExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
 				3726E43D2999E073003E5842 /* Suggestions.swift */,
 				3726E43B2999DCC4003E5842 /* CandidateWindow.swift */,
 				3726E4392999D164003E5842 /* EventHandler.swift */,
@@ -508,7 +507,7 @@
 				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
 				37FC1B85294DFC5300D7153F /* InputState.swift */,
 			);
-			path = InputController;
+			path = InputControllerExtensions;
 			sourceTree = "<group>";
 		};
 		3783D9B22973BEC0000B3332 /* CandidateViews */ = {
@@ -862,7 +861,8 @@
 			children = (
 				37FC1B82294DFB6600D7153F /* Info.plist */,
 				37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */,
-				3726E43F2999E324003E5842 /* InputController */,
+				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
+				3726E43F2999E324003E5842 /* InputControllerExtensions */,
 				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
 				37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */,
 				37FC1B86294DFC5300D7153F /* DisplayObject.swift */,

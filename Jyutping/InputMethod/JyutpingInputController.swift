@@ -93,7 +93,7 @@ final class JyutpingInputController: IMKInputController {
         /// DisplayCandidates indices
         lazy var indices: (first: Int, last: Int) = (0, 0)
 
-        func updateDisplayingCandidates(_ mode: CandidatesTransformation) {
+        func updateDisplayingCandidates(_ mode: PageTransformation) {
                 guard !candidates.isEmpty else {
                         indices = (0, 0)
                         displayObject.reset()
@@ -236,7 +236,8 @@ final class JyutpingInputController: IMKInputController {
         private(set) lazy var segmentation: Segmentation = []
 }
 
-enum CandidatesTransformation {
+/// DisplayCandidate page transformation
+enum PageTransformation {
         case establish
         case previousPage
         case nextPage
