@@ -22,9 +22,9 @@ private extension Int {
 
 struct HotkeysView: View {
 
-        @AppStorage(SettingsKeys.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce.rawValue
-        @AppStorage(SettingsKeys.ShiftSpaceCombination) private var shiftSpaceCombination: Int = AppSettings.shiftSpaceCombination.rawValue
-        // @AppStorage(SettingsKeys.SpeakCandidate) private var speakCandidateState: Int = AppSettings.isSpeakCandidateEnabled ? 101 : 102
+        @AppStorage(SettingsKey.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce.rawValue
+        @AppStorage(SettingsKey.ShiftSpaceCombination) private var shiftSpaceCombination: Int = AppSettings.shiftSpaceCombination.rawValue
+        // @AppStorage(SettingsKey.SpeakCandidate) private var speakCandidateState: Int = AppSettings.isSpeakCandidateEnabled ? 101 : 102
 
         var body: some View {
                 ScrollView {

@@ -2,10 +2,10 @@ import SwiftUI
 
 struct CandidateLayoutPreferencesView: View {
 
-        @AppStorage(SettingsKeys.CandidatePageSize) private var pageSize: Int = AppSettings.displayCandidatePageSize
-        @AppStorage(SettingsKeys.CandidateLineSpacing) private var lineSpacing: Int = AppSettings.candidateLineSpacing
-        @AppStorage(SettingsKeys.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
-        @AppStorage(SettingsKeys.ToneDisplayColor) private var toneDisplayColor: Int = AppSettings.toneDisplayColor.rawValue
+        @AppStorage(SettingsKey.CandidatePageSize) private var pageSize: Int = AppSettings.displayCandidatePageSize
+        @AppStorage(SettingsKey.CandidateLineSpacing) private var lineSpacing: Int = AppSettings.candidateLineSpacing
+        @AppStorage(SettingsKey.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
+        @AppStorage(SettingsKey.ToneDisplayColor) private var toneDisplayColor: Int = AppSettings.toneDisplayColor.rawValue
 
         var body: some View {
                 ScrollView {

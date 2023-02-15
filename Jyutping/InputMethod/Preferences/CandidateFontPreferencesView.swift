@@ -6,17 +6,17 @@ struct CandidateFontPreferencesView: View {
         private let minusImage: Image = Image(systemName: "minus")
         private let plusImage: Image = Image(systemName: "plus")
 
-        @AppStorage(SettingsKeys.CandidateFontSize) private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
-        @AppStorage(SettingsKeys.CommentFontSize) private var commentFontSize: Int = Int(AppSettings.commentFontSize)
-        @AppStorage(SettingsKeys.LabelFontSize) private var labelFontSize: Int = Int(AppSettings.labelFontSize)
+        @AppStorage(SettingsKey.CandidateFontSize) private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
+        @AppStorage(SettingsKey.CommentFontSize) private var commentFontSize: Int = Int(AppSettings.commentFontSize)
+        @AppStorage(SettingsKey.LabelFontSize) private var labelFontSize: Int = Int(AppSettings.labelFontSize)
 
-        @AppStorage(SettingsKeys.CandidateFontMode) private var candidateFontMode: Int = AppSettings.candidateFontMode.rawValue
-        @AppStorage(SettingsKeys.CommentFontMode) private var commentFontMode: Int = AppSettings.commentFontMode.rawValue
-        @AppStorage(SettingsKeys.LabelFontMode) private var labelFontMode: Int = AppSettings.labelFontMode.rawValue
+        @AppStorage(SettingsKey.CandidateFontMode) private var candidateFontMode: Int = AppSettings.candidateFontMode.rawValue
+        @AppStorage(SettingsKey.CommentFontMode) private var commentFontMode: Int = AppSettings.commentFontMode.rawValue
+        @AppStorage(SettingsKey.LabelFontMode) private var labelFontMode: Int = AppSettings.labelFontMode.rawValue
 
-        @AppStorage(SettingsKeys.CustomCandidateFontList) private var customCandidateFontList: String = AppSettings.customCandidateFonts.joined(separator: ",")
-        @AppStorage(SettingsKeys.CustomCommentFontList) private var customCommentFontList: String = AppSettings.customCommentFonts.joined(separator: ",")
-        @AppStorage(SettingsKeys.CustomLabelFontList) private var customLabelFontList: String = AppSettings.customLabelFonts.joined(separator: ",")
+        @AppStorage(SettingsKey.CustomCandidateFontList) private var customCandidateFontList: String = AppSettings.customCandidateFonts.joined(separator: ",")
+        @AppStorage(SettingsKey.CustomCommentFontList) private var customCommentFontList: String = AppSettings.customCommentFonts.joined(separator: ",")
+        @AppStorage(SettingsKey.CustomLabelFontList) private var customLabelFontList: String = AppSettings.customLabelFonts.joined(separator: ",")
 
         @State private var customCandidateFonts: [String] = AppSettings.customCandidateFonts
         @State private var customCommentFonts: [String] = AppSettings.customCommentFonts

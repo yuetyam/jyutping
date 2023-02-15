@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SettingsKeys {
+struct SettingsKey {
         static let CandidatePageSize: String = "CandidatePageSize"
         static let CandidateLineSpacing: String = "CandidateLineSpacing"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
@@ -101,7 +101,7 @@ struct AppSettings {
         // MARK: - Page Size
 
         private(set) static var displayCandidatePageSize: Int = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidatePageSize)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageSize)
                 let isSavedValueValid: Bool = pageSizeValidity(of: savedValue)
                 guard isSavedValueValid else { return 10 }
                 return savedValue
@@ -116,7 +116,7 @@ struct AppSettings {
         }
 
         private(set) static var candidateLineSpacing: Int = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidateLineSpacing)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
                 let isSavedValueValid: Bool = lineSpacingValidity(of: savedValue)
                 guard isSavedValueValid else { return 6 }
                 return savedValue
@@ -134,7 +134,7 @@ struct AppSettings {
         // MARK: - Tones Display Style
 
         private(set) static var toneDisplayStyle: ToneDisplayStyle = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ToneDisplayStyle)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayStyle)
                 return ToneDisplayStyle.style(of: savedValue)
         }()
         static func updateToneDisplayStyle(to value: Int) {
@@ -143,7 +143,7 @@ struct AppSettings {
         }
 
         private(set) static var toneDisplayColor: ToneDisplayColor = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ToneDisplayColor)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayColor)
                 return ToneDisplayColor.color(of: savedValue)
         }()
         static func updateToneDisplayColor(to value: Int) {
@@ -155,7 +155,7 @@ struct AppSettings {
         // MARK: - Font Size
 
         private(set) static var candidateFontSize: CGFloat = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidateFontSize)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 guard isSavedValueValid else { return 17 }
                 return CGFloat(savedValue)
@@ -168,7 +168,7 @@ struct AppSettings {
         }
 
         private(set) static var commentFontSize: CGFloat = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CommentFontSize)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 guard isSavedValueValid else { return 15 }
                 return CGFloat(savedValue)
@@ -181,7 +181,7 @@ struct AppSettings {
         }
 
         private(set) static var labelFontSize: CGFloat = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.LabelFontSize)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 guard isSavedValueValid else { return 15 }
                 return CGFloat(savedValue)
@@ -201,7 +201,7 @@ struct AppSettings {
         // MARK: - Font Mode
 
         private(set) static var candidateFontMode: FontMode = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CandidateFontMode)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateFontMode)
                 return FontMode.mode(of: savedValue)
         }()
         static func updateCandidateFontMode(to newMode: FontMode) {
@@ -210,7 +210,7 @@ struct AppSettings {
         }
 
         private(set) static var commentFontMode: FontMode = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.CommentFontMode)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentFontMode)
                 return FontMode.mode(of: savedValue)
         }()
         static func updateCommentFontMode(to newMode: FontMode) {
@@ -219,7 +219,7 @@ struct AppSettings {
         }
 
         private(set) static var labelFontMode: FontMode = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.LabelFontMode)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelFontMode)
                 return FontMode.mode(of: savedValue)
         }()
         static func updateLabelFontMode(to newMode: FontMode) {
@@ -232,7 +232,7 @@ struct AppSettings {
 
         private(set) static var customCandidateFonts: [String] = {
                 let fallback: [String] = [Constant.PingFangHK]
-                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKeys.CustomCandidateFontList)
+                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCandidateFontList)
                 guard let savedNames else { return fallback }
                 let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
@@ -245,7 +245,7 @@ struct AppSettings {
 
         private(set) static var customCommentFonts: [String] = {
                 let fallback: [String] = [Constant.HelveticaNeue]
-                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKeys.CustomCommentFontList)
+                let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCommentFontList)
                 guard let savedNames else { return fallback }
                 let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
@@ -258,7 +258,7 @@ struct AppSettings {
 
         private(set) static var customLabelFonts: [String] = {
                 let fallback: [String] = [Constant.Menlo]
-                let savedNames = UserDefaults.standard.string(forKey: SettingsKeys.CustomLabelFontList)
+                let savedNames = UserDefaults.standard.string(forKey: SettingsKey.CustomLabelFontList)
                 guard let savedNames else { return fallback }
                 let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
@@ -277,7 +277,7 @@ struct AppSettings {
         /// 1. Do Nothing
         /// 2. Switch between Cantonese and English
         private(set) static var pressShiftOnce: PressShiftOnce = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.PressShiftOnce)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.PressShiftOnce)
                 switch savedValue {
                 case 0, 1:
                         return .doNothing
@@ -306,7 +306,7 @@ struct AppSettings {
         /// 1. Input Full-width Space (U+3000)
         /// 2. Switch between Cantonese and English
         private(set) static var shiftSpaceCombination: ShiftSpaceCombination = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.ShiftSpaceCombination)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ShiftSpaceCombination)
                 switch savedValue {
                 case 0, 1:
                         return .inputFullWidthSpace
@@ -332,7 +332,7 @@ struct AppSettings {
 
         /*
         private(set) static var isSpeakCandidateEnabled: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKeys.SpeakCandidate)
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.SpeakCandidate)
                 switch savedValue {
                 case 101:
                         return true
