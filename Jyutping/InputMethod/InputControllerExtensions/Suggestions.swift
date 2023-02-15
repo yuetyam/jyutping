@@ -9,7 +9,7 @@ extension JyutpingInputController {
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
-                                let droppedSeparator: String = String(processingText.dropLast())
+                                let droppedSeparator: String = String(droppedLast)
                                 let newSchemes: [[String]] = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
                                 return Lychee.suggest(for: droppedSeparator, segmentation: newSchemes)
                         }

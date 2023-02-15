@@ -5,7 +5,7 @@ import CoreIME
 extension JyutpingInputController {
 
         override func recognizedEvents(_ sender: Any!) -> Int {
-                let masks: NSEvent.EventTypeMask = [.keyDown, .flagsChanged]
+                let masks: NSEvent.EventTypeMask = [.keyDown]
                 return Int(masks.rawValue)
         }
 
@@ -212,8 +212,6 @@ extension JyutpingInputController {
                 case .alphabet(let letter):
                         switch InputState.current {
                         case .cantonese:
-                                let hasCharacters: Bool = event.characters.hasContent
-                                guard hasCharacters else { return false }
                                 let text: String = isShifting ? letter.uppercased() : letter
                                 bufferText += text
                                 return true
