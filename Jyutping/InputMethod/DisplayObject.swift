@@ -24,9 +24,14 @@ final class DisplayObject: ObservableObject {
                         reset()
                         return
                 }
-                candidateTextAnimationConditions = Array(repeating: false, count: newItems.count)
+                let newLongest = newItems.longest!
                 let pageSize: Int = AppSettings.displayCandidatePageSize
-                let shouldAnimate: Bool = items.count == pageSize && newItems.count == pageSize
+                let shouldAnimate: Bool = {
+                        guard items.count == pageSize && newItems.count == pageSize else { return false }
+                        guard newLongest.text.count >= longest.text.count else { return false }
+                        return newLongest.candidate.romanization.count >= longest.candidate.romanization.count
+                }()
+                candidateTextAnimationConditions = Array(repeating: false, count: newItems.count)
                 if shouldAnimate {
                         for index in 0..<newItems.count {
                                 let oldTextCount = items[index].text.count
@@ -36,7 +41,7 @@ final class DisplayObject: ObservableObject {
                         }
                 }
                 items = newItems
-                longest = newItems.longest!
+                longest = newLongest
                 highlightedIndex = 0
                 if shouldAnimate {
                         animationState += 1
