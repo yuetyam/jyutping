@@ -18,16 +18,16 @@ extension String {
         /// aka. `String.init()`
         public static let empty: String = ""
 
-        /// A Space. U+0020
-        public static let space: String = "\u{0020}"
+        /// U+20
+        public static let space: String = "\u{20}"
 
         /// U+200B
         public static let zeroWidthSpace: String = "\u{200B}"
 
-        /// U+3000. Ideographic Space.
+        /// U+3000. Ideographic Space. 全形空格
         public static let fullWidthSpace: String = "\u{3000}"
 
-        /// U+30FB =>・<=
+        /// U+30FB. 全形中點
         public static let centerDot: String = "\u{30FB}"
 }
 
