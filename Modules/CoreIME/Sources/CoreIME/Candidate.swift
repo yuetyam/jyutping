@@ -9,10 +9,19 @@ struct CoreLexicon: Hashable {
 
 
 public enum CandidateType {
+
         case cantonese
+
+        /// Examples: iPad, macOS
         case specialMark
+
         case emoji
+
+        /// Note that `text.count == 1` not always true
         case symbol
+
+        /// macOS Keyboard composed text
+        case compose
 }
 
 
@@ -74,14 +83,33 @@ public struct Candidate: Hashable {
         }
 
         /// Create a Candidate with symbol
-        public init(key: String, symbol: String, comment: String?, secondaryComment: String?) {
+        /// - Parameters:
+        ///   - emoji: Symbol text
+        ///   - cantonese: Cantonese word for this symbol
+        ///   - romanization: Romanization (Jyutping) of Cantonese word
+        ///   - input: User input
+        init(symbol: String, cantonese: String, romanization: String, input: String) {
+                self.text = symbol
+                self.romanization = romanization
+                self.input = input
+                self.lexiconText = cantonese
+                self.type = .symbol
+        }
+
+        /// Create a Candidate for keyboard compose
+        /// - Parameters:
+        ///   - text: Symbol text for this key compose
+        ///   - comment: Name comment of this key symbol
+        ///   - secondaryComment: Unicode code point
+        ///   - input: User input
+        public init(text: String, comment: String?, secondaryComment: String?, input: String) {
                 let commentText: String = comment ?? ""
                 let secondaryCommentText: String = secondaryComment ?? ""
-                self.text = symbol
+                self.text = text
                 self.romanization = secondaryCommentText
-                self.input = key
+                self.input = input
                 self.lexiconText = commentText
-                self.type = .symbol
+                self.type = .compose
         }
 
         /// type == .cantonese
@@ -91,13 +119,28 @@ public struct Candidate: Hashable {
 
         // Equatable
         public static func ==(lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.text == rhs.text && lhs.romanization == rhs.romanization
+                if (lhs.isCantonese && rhs.isCantonese) {
+                        return lhs.text == rhs.text && lhs.romanization == rhs.romanization
+                } else {
+                        return lhs.text == rhs.text
+                }
         }
 
         // Hashable
         public func hash(into hasher: inout Hasher) {
-                hasher.combine(text)
-                hasher.combine(romanization)
+                switch type {
+                case .cantonese:
+                        hasher.combine(text)
+                        hasher.combine(romanization)
+                case .specialMark:
+                        hasher.combine(text)
+                case .emoji:
+                        hasher.combine(text)
+                case .symbol:
+                        hasher.combine(text)
+                case .compose:
+                        hasher.combine(text)
+                }
         }
 
         public static func +(lhs: Candidate, rhs: Candidate) -> Candidate {

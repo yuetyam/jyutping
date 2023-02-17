@@ -218,7 +218,7 @@ final class JyutpingInputController: IMKInputController {
                                                 return PunctuationKey.slash.symbols
                                         }
                                 }()
-                                candidates = symbols.map({ Candidate(key: bufferText, symbol: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment) })
+                                candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })
                         }
                 }
         }

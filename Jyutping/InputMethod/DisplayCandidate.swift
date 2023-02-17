@@ -33,6 +33,12 @@ struct DisplayCandidate: Identifiable, Hashable {
                         self.comment = comment
                         self.secondaryComment = nil
                 case .symbol:
+                        let convertedText: String = Converter.convert(candidate.lexiconText, to: Logogram.current)
+                        let comment: String = "〔\(convertedText)〕"
+                        self.text = text
+                        self.comment = comment
+                        self.secondaryComment = nil
+                case .compose:
                         let originalComment: String = candidate.lexiconText
                         lazy var convertedComment: String = Converter.convert(originalComment, to: Logogram.current)
                         let comment: String? = originalComment.isEmpty ? nil : "〔\(convertedComment)〕"

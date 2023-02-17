@@ -106,6 +106,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         cell.footnoteLabel.text = String.empty
                 case .symbol:
                         cell.footnoteLabel.text = String.empty
+                case .compose:
+                        cell.footnoteLabel.text = String.empty
                 }
 
                 // REASON: In some apps (like QQ), the cell may not showing the correct default colors

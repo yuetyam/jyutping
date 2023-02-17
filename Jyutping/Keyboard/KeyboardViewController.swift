@@ -222,6 +222,8 @@ final class KeyboardViewController: UIInputViewController {
                                                         return firstCandidate.text
                                                 case .symbol:
                                                         return firstCandidate.text
+                                                case .compose:
+                                                        return firstCandidate.text
                                                 }
                                         }()
                                         compose(outputText)
@@ -349,6 +351,8 @@ final class KeyboardViewController: UIInputViewController {
                                 case .emoji:
                                         return candidate.text
                                 case .symbol:
+                                        return candidate.text
+                                case .compose:
                                         return candidate.text
                                 }
                         }()
