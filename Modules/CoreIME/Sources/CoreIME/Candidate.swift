@@ -89,25 +89,20 @@ public struct Candidate: Hashable {
                 return self.type == .cantonese
         }
 
-        /// Romanization without tones
-        private var syllables: String {
-                return romanization.removedTones()
-        }
-
         // Equatable
         public static func ==(lhs: Candidate, rhs: Candidate) -> Bool {
-                return lhs.text == rhs.text && lhs.syllables == rhs.syllables
+                return lhs.text == rhs.text && lhs.romanization == rhs.romanization
         }
 
         // Hashable
         public func hash(into hasher: inout Hasher) {
                 hasher.combine(text)
-                hasher.combine(syllables)
+                hasher.combine(romanization)
         }
 
         public static func +(lhs: Candidate, rhs: Candidate) -> Candidate {
                 let newText: String = lhs.text + rhs.text
-                let newRomanization: String = lhs.romanization + String.space + rhs.romanization
+                let newRomanization: String = lhs.romanization + " " + rhs.romanization
                 let newInput: String = lhs.input + rhs.input
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
                 let newCandidate: Candidate = Candidate(text: newText, romanization: newRomanization, input: newInput, lexiconText: newLexiconText)
