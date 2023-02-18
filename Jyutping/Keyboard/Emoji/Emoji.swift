@@ -3,26 +3,28 @@ import CoreIME
 
 struct Emoji {
 
-        private(set) static var frequent: String = {
-                let history: String = UserDefaults.standard.string(forKey: "emoji_frequent") ?? .empty
-                if !(history.isEmpty) {
-                        return history
+        private static let key: String = "emoji_frequent"
+        private(set) static var frequent: [String] = {
+                let history: String = UserDefaults.standard.string(forKey: key) ?? .empty
+                if history.isEmpty {
+                        return EmojiSource.defaultFrequent
+                } else if history.contains(",") {
+                        return history.split(separator: ",").map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
                 } else {
-                        return "👋👍👌✌️🤝👏😍😘🥰👀❤️😋😇🥹🤩😎😏🐶🌚🤗😃🤔🌹🔥🍻✅👻🤪🤣🙃"
+                        return history.map({ String($0) })
                 }
         }()
-
-        static func updateFrequentEmojis(latest emoji: String) {
-                let combined: String = emoji + frequent
-                let uniqued: [String] = combined.map({ String($0) }).uniqued()
-                let updated: [String] = uniqued.count < 31 ? uniqued : uniqued.dropLast(uniqued.count - 30)
-                frequent = updated.joined()
-                UserDefaults.standard.set(frequent, forKey: "emoji_frequent")
+        static func updateFrequent(latest emoji: String) {
+                let combined: [String] = ([emoji] + frequent).uniqued()
+                let updated: [String] = combined.count <= 30 ? combined : combined.dropLast(combined.count - 30)
+                frequent = updated
+                let frequentText: String = updated.joined(separator: ",")
+                UserDefaults.standard.set(frequentText, forKey: key)
         }
-        static func clearFrequentEmojis() {
-                let emptyText: String = .empty
-                frequent = emptyText
-                UserDefaults.standard.set(emptyText, forKey: "emoji_frequent")
+        static func clearFrequent() {
+                frequent = EmojiSource.defaultFrequent
+                let emptyText: String = ""
+                UserDefaults.standard.set(emptyText, forKey: key)
         }
 
         static let sequences: [[String]] = {

@@ -698,7 +698,7 @@ final class KeyboardViewController: UIInputViewController {
 
         func clearUserLexicon() {
                 UserLexicon.deleteAll()
-                Emoji.clearFrequentEmojis()
+                Emoji.clearFrequent()
         }
 
 

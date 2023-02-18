@@ -1,4 +1,5 @@
 import UIKit
+import CommonExtensions
 import CoreIME
 
 extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -44,11 +45,11 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         }
                         switch indexPath.section {
                         case 0:
-                                let start: String.Index = Emoji.frequent.startIndex
-                                let index: String.Index = Emoji.frequent.index(start, offsetBy: indexPath.row)
-                                cell.emojiLabel.text = String(Emoji.frequent[index])
+                                let index: Int = indexPath.row
+                                let emoji: String = Emoji.frequent.fetch(index) ?? "?"
+                                cell.emojiLabel.text = emoji
                         default:
-                                let emoji: String = Emoji.sequences[indexPath.section - 1][indexPath.row]
+                                let emoji: String = Emoji.sequences.fetch(indexPath.section - 1)?.fetch(indexPath.row) ?? "?"
                                 cell.emojiLabel.text = emoji
                         }
                         return cell
@@ -144,11 +145,11 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
                 guard collectionView != emojiCollectionView else {
                         guard let cell: EmojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCell else { return }
-                        let emoji: String = cell.emojiLabel.text ?? "😀"
+                        let emoji: String = cell.emojiLabel.text ?? "?"
                         textDocumentProxy.insertText(emoji)
                         triggerHapticFeedback()
                         AudioFeedback.perform(.input)
-                        Emoji.updateFrequentEmojis(latest: emoji)
+                        Emoji.updateFrequent(latest: emoji)
                         return
                 }
                 guard collectionView != sidebarCollectionView else {
