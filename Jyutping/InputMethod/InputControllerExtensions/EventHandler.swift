@@ -40,25 +40,14 @@ extension JyutpingInputController {
                                         handleSwitches(-1)
                                 }
                                 return true
-
-                        // TODO: Replace this with UserLexicon modification
-                        /*
-                        case KeyCode.Symbol.VK_MINUS:
-                        case KeyCode.Symbol.VK_EQUAL:
-                        */
-                        case KeyCode.Special.VK_BACKWARD_DELETE:
+                        case KeyCode.Special.VK_BACKWARD_DELETE, KeyCode.Special.VK_FORWARD_DELETE:
                                 switch InputState.current {
                                 case .cantonese:
                                         guard !(candidates.isEmpty) else { return false }
                                         let index = displayObject.highlightedIndex
-                                        guard let selectedItem = displayObject.items.fetch(index) else { return false }
-                                        for candidate in candidates where candidate.isCantonese {
-                                                let isEqual: Bool = candidate.text == selectedItem.text && candidate.romanization == selectedItem.comment
-                                                if isEqual {
-                                                        UserLexicon.removeItem(candidate: candidate)
-                                                        break
-                                                }
-                                        }
+                                        guard let candidate = displayObject.items.fetch(index)?.candidate else { return true }
+                                        guard candidate.isCantonese else { return true }
+                                        UserLexicon.removeItem(candidate: candidate)
                                         return true
                                 case .transparent:
                                         return false
@@ -74,7 +63,7 @@ extension JyutpingInputController {
                         default:
                                 return false
                         }
-                case .option, .capsLock, .function, .help:
+                case .capsLock, .function, .help:
                         return false
                 default:
                         break
@@ -122,21 +111,6 @@ extension JyutpingInputController {
                                         client.insert(text)
                                         aftercareSelection(selectedItem)
                                         return true
-                                        /*
-                                        if hasControlShiftModifiers {
-                                                guard AppSettings.isSpeakCandidateEnabled else { return true }
-                                                guard let item = displayObject.items.fetch(index) else { return true }
-                                                guard let romanization = item.comment else { return true }
-                                                Speech.speak(romanization)
-                                                return true
-                                        } else {
-                                                 guard let selectedItem = displayObject.items.fetch(index) else { return true }
-                                                 let text = selectedItem.text
-                                                 client.insert(text)
-                                                 aftercareSelection(selectedItem)
-                                                 return true
-                                        }
-                                        */
                                 } else {
                                         if hasControlShiftModifiers {
                                                 handleSwitches(index)
