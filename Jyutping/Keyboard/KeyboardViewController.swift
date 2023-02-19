@@ -202,11 +202,9 @@ final class KeyboardViewController: UIInputViewController {
                         }
                 case .separator:
                         bufferText += "'"
-                        AudioFeedback.perform(.input)
                         adjustKeyboardIdiom()
                 case .punctuation(let text):
                         textDocumentProxy.insertText(text)
-                        AudioFeedback.perform(.input)
                         adjustKeyboardIdiom()
                 case .space:
                         switch keyboardIdiom {
