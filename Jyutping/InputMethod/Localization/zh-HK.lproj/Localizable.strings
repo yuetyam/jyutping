@@ -1,5 +1,5 @@
 "menu.title" = "粵拼";
-"menu.preferences" = "設定⋯";
+"menu.preferences" = "設定…";
 "menu.terminate" = "結束運行";
 
 "Jyutping Input Method Preferences" = "粵拼輸入法設定";
@@ -40,7 +40,7 @@
 "Default" = "默認";
 "System" = "系統";
 "Custom" = "自定";
-"FontPicker.CurrentFont.Change" = "更改⋯";
+"FontPicker.CurrentFont.Change" = "更改…";
 
 
 //HotkeysView

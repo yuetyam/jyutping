@@ -18,7 +18,7 @@ extension KeyboardIdiom {
                         // TODO: Reimplement
                         if uppercased {
                                 // lowercase ["·", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="]
-                                let texts: [String] = ["～", "！", "@", "#", "$", "%", "⋯⋯", "&", "*", "（", "）", "——", "+"]
+                                let texts: [String] = ["～", "！", "@", "#", "$", "%", "……", "&", "*", "（", "）", "——", "+"]
                                 return texts.map({ KeyboardEvent.input(KeySeat(primary: KeyElement($0))) })
                         } else {
                                 let left: KeyboardEvent = {

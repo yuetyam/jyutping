@@ -348,9 +348,9 @@ extension KeyboardIdiom {
                         return KeyboardEvent.input(seat)
                 }()
                 let third_0: KeyboardEvent = {
-                        let primary = KeyElement("⋯")
-                        let child_0 = KeyElement("⋯", footer: "22EF")
-                        let child_1 = KeyElement("…", footer: "2026")
+                        let primary = KeyElement("…")
+                        let child_0 = KeyElement("…", footer: "2026")
+                        let child_1 = KeyElement("……", footer: "2026*2")
                         let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1])
                         return KeyboardEvent.input(seat)
                 }()
