@@ -17,7 +17,7 @@ final class JyutpingInputController: IMKInputController {
                 didSet {
                         guard let origin = currentClient?.position else { return }
                         let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
-                        let isRegularHorizontal: Bool = origin.x < (screenWidth - 600)
+                        let isRegularHorizontal: Bool = origin.x < (screenWidth - 400)
                         let isRegularVertical: Bool = origin.y > 400
                         let newPattern: WindowPattern = {
                                 switch (isRegularHorizontal, isRegularVertical) {
@@ -70,15 +70,23 @@ final class JyutpingInputController: IMKInputController {
                                 break
                         case (true, false):
                                 // Starting
-                                window?.setFrame(currentWindowFrame, display: true)
+                                adjustCandidateWindow()
                         case (false, true):
                                 // Ending
                                 window?.setFrame(.zero, display: true)
                         case (false, false):
                                 // Ongoing
-                                window?.setFrame(currentWindowFrame, display: true)
+                                adjustCandidateWindow()
                         }
                 }
+        }
+        private func adjustCandidateWindow() {
+                window?.setFrame(windowFrame(), display: true)
+                let expanded: CGFloat = windowOffset * 2
+                guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return }
+                guard size.width > 44 else { return }
+                let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
+                window?.setFrame(windowFrame(size: windowSize), display: true)
         }
         func push(_ origin: [Candidate]) {
                 candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()

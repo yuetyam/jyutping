@@ -5,7 +5,7 @@ extension JyutpingInputController {
         func resetWindow() {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                let frame: CGRect = currentWindowFrame
+                let frame: CGRect = windowFrame()
                 if window == nil {
                         window = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: false)
                         window?.backgroundColor = .clear
@@ -46,8 +46,16 @@ extension JyutpingInputController {
                                 }
                         }
                         window?.contentViewController?.addChild(switchesUI)
-                        settingsObject.resetHighlightedIndex()
                         window?.setFrame(frame, display: true)
+                        settingsObject.resetHighlightedIndex()
+                        let expanded: CGFloat = windowOffset * 2
+                        let newFrame: CGRect = {
+                                guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return frame }
+                                guard size.width > 44 else { return frame }
+                                let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
+                                return windowFrame(size: windowSize)
+                        }()
+                        window?.setFrame(newFrame, display: true)
                 default:
                         let candidatesUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject))
                         window?.contentView?.addSubview(candidatesUI.view)
@@ -84,10 +92,10 @@ extension JyutpingInputController {
                 }
         }
 
-        var currentWindowFrame: CGRect {
+        func windowFrame(size: CGSize = CGSize(width: 700, height: 500)) -> CGRect {
                 let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
-                let width: CGFloat = 600
-                let height: CGFloat = 380 + (windowOffset * 2)
+                let width: CGFloat = size.width
+                let height: CGFloat = size.height
                 let x: CGFloat = {
                         if windowPattern.isReversingHorizontal {
                                 return origin.x - width - 8
