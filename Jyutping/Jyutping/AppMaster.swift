@@ -36,8 +36,8 @@ struct AppMaster {
         /// `https://jyutping.app`
         static let websiteURL: URL = URL(string: websiteAddress)!
 
-        /// `https://apps.apple.com/app/id1509367629`
-        static let appStoreAddress: String = "https://apps.apple.com/app/id1509367629"
+        /// `https://apps.apple.com/hk/app/id1509367629`
+        static let appStoreAddress: String = "https://apps.apple.com/hk/app/id1509367629"
 }
 
 extension AppMaster {
