@@ -1,14 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 BUNDLE_IDENTIFIER='org.jyutping.inputmethod.Jyutping'
 APP_VERSION='0.21.0'
 
 INSTALL_LOCATION='/Library/Input Methods'
-
-WRONG_NAME_DIRECTORY='app/InputMethod.app'
-if [ -d "${WRONG_NAME_DIRECTORY}" ]; then
-  mv app/InputMethod.app app/Jyutping.app
-fi
 
 pkgbuild \
     --info PackageInfo \

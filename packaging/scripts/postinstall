@@ -2,8 +2,8 @@
 
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
 
-jyutping_executable="${DSTROOT}/Jyutping.app/Contents/MacOS/Jyutping"
-"${jyutping_executable}" install
+JYUTPING_EXECUTABLE="${DSTROOT}/Jyutping.app/Contents/MacOS/Jyutping"
+"${JYUTPING_EXECUTABLE}" install
 
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
 
