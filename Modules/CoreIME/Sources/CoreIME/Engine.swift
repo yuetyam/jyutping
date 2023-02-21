@@ -13,7 +13,7 @@ private extension Array where Element == RowCandidate {
                         let shouldCompare: Bool = !lhs.isExactlyMatch && !rhs.isExactlyMatch
                         guard shouldCompare else { return lhs.isExactlyMatch && !rhs.isExactlyMatch }
                         let lhsTextCount: Int = lhs.candidate.text.count
-                        let rhsTextCount: Int = lhs.candidate.text.count
+                        let rhsTextCount: Int = rhs.candidate.text.count
                         guard lhsTextCount == rhsTextCount else { return lhsTextCount > rhsTextCount }
                         return (rhs.row - lhs.row) > 50000
                 })
