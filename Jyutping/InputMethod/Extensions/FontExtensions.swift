@@ -22,7 +22,7 @@ extension Font {
         }
         private static let preferredCandidateFontNames: [String] = {
                 var names: [String] = [Constant.SFPro, Constant.HelveticaNeue]
-                let potential: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+                let potential: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                 for name in potential {
                         if found(font: name) {
                                 names.append(name)
@@ -72,7 +72,7 @@ extension Font {
         }
         private static let preferredCommentFontNames: [String] = {
                 var names: [String] = [Constant.SFMono, Constant.SFPro, Constant.HelveticaNeue]
-                let potential: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+                let potential: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                 for name in potential {
                         if found(font: name) {
                                 names.append(name)

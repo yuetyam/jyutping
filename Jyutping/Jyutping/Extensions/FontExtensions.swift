@@ -25,7 +25,7 @@ private extension Font {
 
         private static let fontNames: [String] = {
                 var names: [String] = [Constant.SFPro, Constant.HelveticaNeue]
-                let potential: [String] = ["ChiuKong Gothic CL", "Advocate Ancient Sans", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+                let potential: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
                 for name in potential {
                         if found(font: name) {
                                 names.append(name)

@@ -42,7 +42,7 @@ struct FontPicker: View {
                         Text(verbatim: name)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.4)
-                                .frame(width: 128, alignment: .leading)
+                                .frame(width: 160, alignment: .leading)
                         Button {
                                 guard !(NSFontPanel.shared.isVisible) else {
                                         NSFontPanel.shared.orderOut(nil)
