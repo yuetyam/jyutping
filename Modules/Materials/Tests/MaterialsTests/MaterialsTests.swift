@@ -3,8 +3,8 @@ import XCTest
 
 final class MaterialsTests: XCTestCase {
         func testLookup() throws {
-                let search: [String] = Lookup.look(for: "我")
-                let lookup: String = search.first!
-                XCTAssertEqual(lookup, "ngo5")
+                let romanizations: [String] = JyutpingProvider.lookup(text: "我")
+                let romanization: String = romanizations.first!
+                XCTAssertEqual(romanization, "ngo5")
         }
 }

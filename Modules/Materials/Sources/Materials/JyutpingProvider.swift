@@ -1,23 +1,23 @@
 import Foundation
 import SQLite3
 
-public struct Response: Hashable {
+public struct JyutpingProvider {
 
-        public let text: String
-        public let romanizations: [String]
+        public struct Response: Hashable {
 
-        public init(text: String, romanizations: [String] = []) {
-                self.text = text
-                self.romanizations = romanizations
+                public let text: String
+                public let romanizations: [String]
+
+                public init(text: String, romanizations: [String] = []) {
+                        self.text = text
+                        self.romanizations = romanizations
+                }
         }
-}
-
-public struct Lookup {
 
         /// Search Romanization for word
         /// - Parameter text: word
         /// - Returns: Array of Romanization matched the input word
-        public static func look(for text: String) -> [String] {
+        public static func lookup(text: String) -> [String] {
                 guard !text.isEmpty else { return [] }
                 let matched = DataMaster.matchRomanization(for: text)
                 guard matched.isEmpty else { return matched }
@@ -112,7 +112,7 @@ private extension DataMaster {
         /// - Returns: An Array of Jyutping
         static func matchRomanization(for text: String) -> [String] {
                 var romanizations: [String] = []
-                let queryString = "SELECT romanization FROM lookuptable WHERE word = '\(text)';"
+                let queryString = "SELECT romanization FROM jyutpingtable WHERE word = '\(text)';"
                 var queryStatement: OpaquePointer? = nil
                 defer {
                         sqlite3_finalize(queryStatement)

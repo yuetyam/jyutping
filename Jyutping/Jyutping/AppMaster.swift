@@ -45,9 +45,9 @@ extension AppMaster {
         /// Lookup Cantonese Romanization for text
         /// - Parameter text: Cantonese text
         /// - Returns: Cantonese text and corresponding romanizations
-        static func lookup(text: String) -> Response {
+        static func lookup(text: String) -> JyutpingProvider.Response {
                 let filtered: String = text.filter({ $0.isIdeographic })
-                let search = Lookup.search(for: filtered)
+                let search = JyutpingProvider.search(for: filtered)
                 guard filtered != text else { return search }
                 guard !(filtered.isEmpty) else { return search }
                 let transformed = text.textBlocks
@@ -84,7 +84,7 @@ extension AppMaster {
                         }
                         return newRomanization.trimmingCharacters(in: .whitespaces)
                 }
-                return Response(text: combinedText, romanizations: combinedRomanizations)
+                return JyutpingProvider.Response(text: combinedText, romanizations: combinedRomanizations)
         }
 }
 
