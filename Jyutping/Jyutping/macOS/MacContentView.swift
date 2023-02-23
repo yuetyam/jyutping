@@ -46,6 +46,7 @@ struct MacContentView: View {
                                         Label("Stems and Branches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
                                         Label("Chinese Zodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
                                         Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
+                                        Label("Canton Metro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
                                         Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
                                 } header: {
                                         Text("Materials").textCase(nil)
@@ -82,6 +83,8 @@ struct MacContentView: View {
                                 ChineseZodiacView().visualEffect()
                         case .solarTerms:
                                 SolarTermsView().visualEffect()
+                        case .cantonMetro:
+                                MacCantonMetroView().visualEffect()
                         case .resources:
                                 MacResourcesView().visualEffect()
                         case .about:
@@ -107,6 +110,7 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case stemsBranches
         case chineseZodiac
         case solarTerms
+        case cantonMetro
         case resources
 
         case about

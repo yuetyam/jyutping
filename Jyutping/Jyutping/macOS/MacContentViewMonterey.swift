@@ -73,6 +73,11 @@ struct MacContentViewMonterey: View {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }
                                         NavigationLink {
+                                                MacCantonMetroView().visualEffect()
+                                        } label: {
+                                                Label("Canton Metro", systemImage: "tram.circle")
+                                        }
+                                        NavigationLink {
                                                 MacResourcesView().visualEffect()
                                         } label: {
                                                 Label("Resources", systemImage: "globe.asia.australia")

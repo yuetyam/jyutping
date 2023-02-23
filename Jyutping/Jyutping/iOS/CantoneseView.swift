@@ -24,6 +24,9 @@ struct CantoneseView: View {
                                         NavigationLink(destination: SolarTermsView()) {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }
+                                        NavigationLink(destination: IOSCantonMetroView()) {
+                                                Label("Canton Metro", systemImage: "tram.circle")
+                                        }
                                 } header: {
                                         Text("Materials").textCase(nil)
                                 }
