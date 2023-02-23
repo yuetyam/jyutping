@@ -47,6 +47,7 @@ struct MacContentView: View {
                                         Label("Chinese Zodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
                                         Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
                                         Label("Canton Metro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
+                                        Label("Fatshan Metro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
                                         Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
                                 } header: {
                                         Text("Materials").textCase(nil)
@@ -85,6 +86,8 @@ struct MacContentView: View {
                                 SolarTermsView().visualEffect()
                         case .cantonMetro:
                                 MacCantonMetroView().visualEffect()
+                        case .fatshanMetro:
+                                MacFatshanMetroView().visualEffect()
                         case .resources:
                                 MacResourcesView().visualEffect()
                         case .about:
@@ -93,7 +96,6 @@ struct MacContentView: View {
                 }
         }
 }
-
 
 private enum ViewIdentifier: Int, Hashable, Identifiable {
 
@@ -111,6 +113,7 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case chineseZodiac
         case solarTerms
         case cantonMetro
+        case fatshanMetro
         case resources
 
         case about

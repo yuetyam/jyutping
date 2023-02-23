@@ -78,6 +78,11 @@ struct MacContentViewMonterey: View {
                                                 Label("Canton Metro", systemImage: "tram.circle")
                                         }
                                         NavigationLink {
+                                                MacFatshanMetroView().visualEffect()
+                                        } label: {
+                                                Label("Fatshan Metro", systemImage: "tram.circle")
+                                        }
+                                        NavigationLink {
                                                 MacResourcesView().visualEffect()
                                         } label: {
                                                 Label("Resources", systemImage: "globe.asia.australia")

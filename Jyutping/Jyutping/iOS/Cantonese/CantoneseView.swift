@@ -27,6 +27,9 @@ struct CantoneseView: View {
                                         NavigationLink(destination: IOSCantonMetroView()) {
                                                 Label("Canton Metro", systemImage: "tram.circle")
                                         }
+                                        NavigationLink(destination: IOSFatshanMetroView()) {
+                                                Label("Fatshan Metro", systemImage: "tram.circle")
+                                        }
                                 } header: {
                                         Text("Materials").textCase(nil)
                                 }

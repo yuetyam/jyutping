@@ -15,6 +15,9 @@
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
 		3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564929A744EA00468C2A /* IOSCantonMetroView.swift */; };
+		3773564D29A769E900468C2A /* MacMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564C29A769E900468C2A /* MacMetroLineView.swift */; };
+		3773564F29A769FC00468C2A /* MacStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564E29A769FC00468C2A /* MacStationLabel.swift */; };
+		3773565129A76A6100468C2A /* MacFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773565029A76A6100468C2A /* MacFatshanMetroView.swift */; };
 		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
 		378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* RomanizationLabel.swift */; };
 		378020D42975A1D0002F6E0A /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D32975A1D0002F6E0A /* GwongWanView.swift */; };
@@ -25,6 +28,9 @@
 		3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B92973CDAA000B3332 /* VisualEffect.swift */; };
 		3783D9BC29741B06000B3332 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9BB29741B06000B3332 /* Constant.swift */; };
 		3783D9BE29744036000B3332 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9BD29744036000B3332 /* Constant.swift */; };
+		378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */; };
+		378B2A7A29A76E0700456AE8 /* IOSMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */; };
+		378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */; };
 		37AB045229A22EA3009D8F2D /* name.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37AB045129A22EA3009D8F2D /* name.xcconfig */; };
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
@@ -235,6 +241,9 @@
 		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		3768795B297826780006D0A6 /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
 		3773564929A744EA00468C2A /* IOSCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCantonMetroView.swift; sourceTree = "<group>"; };
+		3773564C29A769E900468C2A /* MacMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetroLineView.swift; sourceTree = "<group>"; };
+		3773564E29A769FC00468C2A /* MacStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacStationLabel.swift; sourceTree = "<group>"; };
+		3773565029A76A6100468C2A /* MacFatshanMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacFatshanMetroView.swift; sourceTree = "<group>"; };
 		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
 		378020D129752EA6002F6E0A /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		378020D32975A1D0002F6E0A /* GwongWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
@@ -245,6 +254,9 @@
 		3783D9B92973CDAA000B3332 /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		3783D9BB29741B06000B3332 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		3783D9BD29744036000B3332 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroStationLabel.swift; sourceTree = "<group>"; };
+		378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroLineView.swift; sourceTree = "<group>"; };
+		378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSFatshanMetroView.swift; sourceTree = "<group>"; };
 		37AB045129A22EA3009D8F2D /* name.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = name.xcconfig; sourceTree = "<group>"; };
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
@@ -516,6 +528,17 @@
 			path = InputControllerExtensions;
 			sourceTree = "<group>";
 		};
+		3773564B29A769D600468C2A /* Metro */ = {
+			isa = PBXGroup;
+			children = (
+				37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */,
+				3773565029A76A6100468C2A /* MacFatshanMetroView.swift */,
+				3773564C29A769E900468C2A /* MacMetroLineView.swift */,
+				3773564E29A769FC00468C2A /* MacStationLabel.swift */,
+			);
+			path = Metro;
+			sourceTree = "<group>";
+		};
 		3783D9B22973BEC0000B3332 /* CandidateViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +548,18 @@
 				3783D9B52973BEF5000B3332 /* CommentLabel.swift */,
 			);
 			path = CandidateViews;
+			sourceTree = "<group>";
+		};
+		378B2A7629A76D9800456AE8 /* Cantonese */ = {
+			isa = PBXGroup;
+			children = (
+				37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */,
+				3773564929A744EA00468C2A /* IOSCantonMetroView.swift */,
+				378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */,
+				378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */,
+				378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */,
+			);
+			path = Cantonese;
 			sourceTree = "<group>";
 		};
 		37B6BDBA296EA2AF0008B9F0 /* Search */ = {
@@ -648,8 +683,7 @@
 				37D7BDA0294CB9F3006A6ADD /* IOSContentView.swift */,
 				37D7BDA8294CB9F3006A6ADD /* Home */,
 				37D7BDA3294CB9F3006A6ADD /* JyutpingView.swift */,
-				37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */,
-				3773564929A744EA00468C2A /* IOSCantonMetroView.swift */,
+				378B2A7629A76D9800456AE8 /* Cantonese */,
 				37D7BDA6294CB9F3006A6ADD /* AboutView.swift */,
 				37B6BDBA296EA2AF0008B9F0 /* Search */,
 				37D7BD6E294CB3A2006A6ADD /* SafariView.swift */,
@@ -696,7 +730,7 @@
 				37D7BD96294CB6C6006A6ADD /* MacExpressionsView.swift */,
 				37EF195A296DBE5B00A3F4C9 /* Search */,
 				37D7BD91294CB6C6006A6ADD /* MacResourcesView.swift */,
-				37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */,
+				3773564B29A769D600468C2A /* Metro */,
 				37D7BD94294CB6C6006A6ADD /* MacAboutView.swift */,
 			);
 			path = macOS;
@@ -1236,12 +1270,14 @@
 			files = (
 				37D7BD67294CB212006A6ADD /* FontExtensions.swift in Sources */,
 				37D7BD68294CB212006A6ADD /* ViewExtensions.swift in Sources */,
+				378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */,
 				37D7BD9B294CB6C6006A6ADD /* MacContentView.swift in Sources */,
 				37D7BDBC294CC3AB006A6ADD /* CantoneseView.swift in Sources */,
 				37D7BDB3294CB9F3006A6ADD /* AboutView.swift in Sources */,
 				37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */,
 				37D7BD79294CB440006A6ADD /* StemsBranchesView.swift in Sources */,
 				3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */,
+				378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */,
 				37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */,
 				37D7BD70294CB3A2006A6ADD /* SafariView.swift in Sources */,
 				37D7BD9E294CB6C6006A6ADD /* MacExpressionsView.swift in Sources */,
@@ -1270,6 +1306,7 @@
 				37D7BD7B294CB440006A6ADD /* SolarTermsView.swift in Sources */,
 				37D7BD84294CB500006A6ADD /* AppMaster.swift in Sources */,
 				37D7BD9C294CB6C6006A6ADD /* MacAboutView.swift in Sources */,
+				3773564D29A769E900468C2A /* MacMetroLineView.swift in Sources */,
 				37D7BDAF294CB9F3006A6ADD /* IOSContentView.swift in Sources */,
 				378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */,
 				37D7BD80294CB4B3006A6ADD /* MenuCopyButton.swift in Sources */,
@@ -1277,13 +1314,16 @@
 				37D7BD99294CB6C6006A6ADD /* MacResourcesView.swift in Sources */,
 				3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */,
 				3783D9BE29744036000B3332 /* Constant.swift in Sources */,
+				3773565129A76A6100468C2A /* MacFatshanMetroView.swift in Sources */,
 				37D7BDB1294CB9F3006A6ADD /* JyutpingView.swift in Sources */,
 				37D7BD7A294CB440006A6ADD /* TermView.swift in Sources */,
 				37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */,
 				37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */,
 				37D7BD69294CB212006A6ADD /* ImageExtensions.swift in Sources */,
 				37D7BD8C294CB61F006A6ADD /* SyllableCell.swift in Sources */,
+				3773564F29A769FC00468C2A /* MacStationLabel.swift in Sources */,
 				37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */,
+				378B2A7A29A76E0700456AE8 /* IOSMetroLineView.swift in Sources */,
 				37D7BD8A294CB61F006A6ADD /* ToneTable.swift in Sources */,
 				37D7BD82294CB4B3006A6ADD /* Speaker.swift in Sources */,
 				37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */,
