@@ -41,12 +41,16 @@ final class JyutpingInputController: IMKInputController {
 
         override func activateServer(_ sender: Any!) {
                 currentClient = sender as? IMKTextInput
-                UserLexicon.prepare()
-                Lychee.prepare()
                 DispatchQueue.main.async { [weak self] in
                         self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
-                if !bufferText.isEmpty {
+                currentOrigin = currentClient?.position
+                UserLexicon.prepare()
+                Lychee.prepare()
+                if InputState.current.isSwitches {
+                        InputState.updateCurrent()
+                }
+                if !(bufferText.isEmpty) {
                         bufferText = .empty
                 }
         }

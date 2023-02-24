@@ -24,7 +24,7 @@ enum InputState: Int {
                         return .transparent
                 }
         }()
-        static func updateCurrent(to state: InputState?) {
+        static func updateCurrent(to state: InputState? = nil) {
                 if let state {
                         current = state
                 } else {
