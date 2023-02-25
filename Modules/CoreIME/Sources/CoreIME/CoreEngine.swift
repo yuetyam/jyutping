@@ -67,10 +67,13 @@ extension Engine {
                 let hasSchemes: Bool = !(tailSegmentation.first?.isEmpty ?? true)
                 guard hasSchemes else { return fallback }
                 let tailCandidates = match(schemes: tailSegmentation, hasSeparators: false)
-                guard let firstTailCandidate = tailCandidates.first else { return fallback }
+                guard !(tailCandidates.isEmpty) else { return fallback }
                 let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-                let combines = qualified.map({ $0.element + firstTailCandidate })
-                return fullProcessed + combines + candidates + backup
+                let combines = tailCandidates.map { tail -> [CoreCandidate] in
+                        return qualified.map({ $0.element + tail })
+                }
+                let concatenated: [CoreCandidate] = combines.flatMap({ $0 }).enumerated().filter({ $0.offset < 4 }).map(\.element)
+                return fullProcessed + concatenated + candidates + backup
         }
         private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
                 let hasSeparators: Bool = text.count != origin.count
