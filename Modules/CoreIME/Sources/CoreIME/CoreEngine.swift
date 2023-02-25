@@ -42,7 +42,7 @@ extension Engine {
                 if bestScheme.length == convertedText.count {
                         return process(text: convertedText, origin: text, sequences: segmentation)
                 } else {
-                        return processPartial(text: textWithoutSeparators, origin: text, sequences: segmentation)
+                        return processPartial(text: textWithoutSeparators, origin: text, segmentation: segmentation)
                 }
         }
         private static func processVerbatim(_ text: String) -> [CoreCandidate] {
@@ -66,7 +66,7 @@ extension Engine {
                 let tailSegmentation: Segmentation = Segmentor.engineSegment(tailText)
                 let hasSchemes: Bool = !(tailSegmentation.first?.isEmpty ?? true)
                 guard hasSchemes else { return fallback }
-                let tailCandidates = match(schemes: tailSegmentation, hasSeparators: false)
+                let tailCandidates: [CoreCandidate] = (match(for: tailText) + shortcut(for: tailText) + match(schemes: tailSegmentation, hasSeparators: false)).uniqued()
                 guard !(tailCandidates.isEmpty) else { return fallback }
                 let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
                 let combines = tailCandidates.map { tail -> [CoreCandidate] in
@@ -75,48 +75,41 @@ extension Engine {
                 let concatenated: [CoreCandidate] = combines.flatMap({ $0 }).enumerated().filter({ $0.offset < 4 }).map(\.element)
                 return fullProcessed + concatenated + candidates + backup
         }
-        private static func processPartial(text: String, origin: String, sequences: [[String]]) -> [CoreCandidate] {
+        private static func processPartial(text: String, origin: String, segmentation: Segmentation) -> [CoreCandidate] {
                 let hasSeparators: Bool = text.count != origin.count
-                let candidates: [CoreCandidate] = match(schemes: sequences, hasSeparators: hasSeparators, fullTextCount: origin.count)
+                let candidates = match(schemes: segmentation, hasSeparators: hasSeparators, fullTextCount: origin.count)
                 guard !hasSeparators else { return candidates }
                 let fullProcessed: [CoreCandidate] = match(for: text) + shortcut(for: text)
                 let backup: [CoreCandidate] = processVerbatim(text)
                 let fallback: [CoreCandidate] = fullProcessed + candidates + backup
-                guard let firstCandidate: CoreCandidate = candidates.first else { return fallback }
+                guard let firstCandidate = candidates.first else { return fallback }
                 let firstInputCount: Int = firstCandidate.input.count
                 guard firstInputCount != text.count else { return fallback }
+                let anchorsArray: [String] = segmentation.map({ scheme -> String in
+                        let last = text.dropFirst(scheme.length).first
+                        let schemeAnchors = scheme.map({ $0.first })
+                        let anchors = (schemeAnchors + [last]).compactMap({ $0 })
+                        return String(anchors)
+                })
+                let prefixes: [CoreCandidate] = anchorsArray.map({ shortcut(for: $0) }).flatMap({ $0 })
+                        .filter({ $0.romanization.removedSpacesTones().hasPrefix(text) })
+                        .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: text) })
+                guard prefixes.isEmpty else { return fullProcessed + prefixes + candidates + backup }
                 let tailText: String = String(text.dropFirst(firstInputCount))
-//                if let tailOne: CoreCandidate = prefix(match: tailText, count: 1).first {
-//                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-//                        let combines = qualified.map({ $0.element + tailOne })
-//                        return fullProcessed + combines + candidates + backup
-//                }
-                let tailSyllables: [String] = Segmentor.scheme(of: tailText)
-                guard !(tailSyllables.isEmpty) else { return fallback }
-                var concatenated: [CoreCandidate] = []
-                let hasTailCandidate: Bool = false
-//                {
-//                        let syllablesText = tailSyllables.joined()
-//                        let difference: Int = tailText.count - syllablesText.count
-//                        guard difference > 1 else { return false }
-//                        let syllablesPlusOne = tailText.dropLast(difference - 1)
-//                        guard let one = prefix(match: String(syllablesPlusOne), count: 1).first else { return false }
-//                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-//                        let combines = qualified.map({ $0.element + one })
-//                        concatenated = combines
-//                        return true
-//                }()
-                if !hasTailCandidate {
-                        for (index, _) in tailSyllables.enumerated().reversed() {
-                                let someSyllables: String = tailSyllables[0...index].joined()
-                                if let one: CoreCandidate = match(for: someSyllables, limit: 1).first {
-                                        let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
-                                        let combines = qualified.map({ $0.element + one })
-                                        concatenated = combines
-                                        break
-                                }
-                        }
+                let tailCandidates = processVerbatim(tailText)
+                        .filter({ item -> Bool in
+                                let hasText: Bool = item.romanization.removedSpacesTones().hasPrefix(tailText)
+                                guard !hasText else { return true }
+                                let anchors = item.romanization.split(separator: " ").map({ $0.first }).compactMap({ $0 })
+                                return anchors == tailText.map({ $0 })
+                        })
+                        .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: tailText) })
+                guard !(tailCandidates.isEmpty) else { return fallback }
+                let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
+                let combines = tailCandidates.map { tail -> [CoreCandidate] in
+                        return qualified.map({ $0.element + tail })
                 }
+                let concatenated: [CoreCandidate] = combines.flatMap({ $0 }).enumerated().filter({ $0.offset < 4 }).map(\.element)
                 return fullProcessed + concatenated + candidates + backup
         }
         private static func match(schemes: [[String]], hasSeparators: Bool, fullTextCount: Int = -1) -> [CoreCandidate] {
