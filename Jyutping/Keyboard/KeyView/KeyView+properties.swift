@@ -158,7 +158,7 @@ extension KeyView {
                         if layout.isEnglishMode {
                                 return "ABC"
                         } else if Logogram.current == .simplified {
-                                return "粤拼"
+                                return "粤拼·简化字"
                         } else {
                                 return "粵拼"
                         }

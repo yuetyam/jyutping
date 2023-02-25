@@ -207,7 +207,7 @@ private extension GridKeyView {
                         if keyboardIdiom == .tenKeyNumeric {
                                 return "空格"
                         } else if Logogram.current == .simplified {
-                                return "粤拼"
+                                return "粤拼·简化字"
                         } else {
                                 return "粵拼"
                         }
