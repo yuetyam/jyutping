@@ -5,17 +5,17 @@ extension JyutpingInputController {
         func suggest() {
                 let engineCandidates: [Candidate] = {
                         let convertedSegmentation: Segmentation = segmentation.converted()
-                        var normal: [Candidate] = Lychee.suggest(for: processingText, segmentation: convertedSegmentation)
+                        var normal: [Candidate] = Engine.suggest(for: processingText, segmentation: convertedSegmentation)
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(droppedLast)
                                 let newSchemes: [[String]] = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Lychee.suggest(for: droppedSeparator, segmentation: newSchemes)
+                                return Engine.suggest(for: droppedSeparator, segmentation: newSchemes)
                         }
                         let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
-                        let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
+                        let emojis: [Candidate] = Engine.searchEmojis(for: bufferText)
                         for emoji in emojis.reversed() {
                                 if let index = normal.firstIndex(where: { $0.lexiconText == emoji.lexiconText }) {
                                         normal.insert(emoji, at: index + 1)
@@ -34,7 +34,7 @@ extension JyutpingInputController {
                         empty()
                         return
                 }
-                let lookup: [Candidate] = Lychee.pinyinLookup(for: text)
+                let lookup: [Candidate] = Engine.pinyinLookup(for: text)
                 push(lookup)
         }
         func cangjieReverseLookup() {
@@ -43,7 +43,7 @@ extension JyutpingInputController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         markedText = String(converted)
-                        let lookup: [Candidate] = Lychee.cangjieLookup(for: text)
+                        let lookup: [Candidate] = Engine.cangjieLookup(for: text)
                         push(lookup)
                 } else {
                         markedText = processingText
@@ -57,7 +57,7 @@ extension JyutpingInputController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         markedText = String(converted)
-                        let lookup: [Candidate] = Lychee.strokeLookup(for: transformed)
+                        let lookup: [Candidate] = Engine.strokeLookup(for: transformed)
                         push(lookup)
                 } else {
                         markedText = processingText
@@ -70,7 +70,7 @@ extension JyutpingInputController {
                         empty()
                         return
                 }
-                let lookup: [Candidate] = Lychee.leungFanLookup(for: text)
+                let lookup: [Candidate] = Engine.leungFanLookup(for: text)
                 push(lookup)
         }
 }

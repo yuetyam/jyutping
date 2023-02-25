@@ -46,7 +46,7 @@ final class JyutpingInputController: IMKInputController {
                 }
                 currentOrigin = currentClient?.position
                 UserLexicon.prepare()
-                Lychee.prepare()
+                Engine.prepare()
                 if InputState.current.isSwitches {
                         InputState.updateCurrent()
                 }
@@ -169,7 +169,7 @@ final class JyutpingInputController: IMKInputController {
                 willSet {
                         let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
                         guard isStarting else { return }
-                        Lychee.prepare()
+                        Engine.prepare()
                         UserLexicon.prepare()
                 }
                 didSet {

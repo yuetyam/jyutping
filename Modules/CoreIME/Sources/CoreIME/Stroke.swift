@@ -7,7 +7,7 @@ private struct ShapeLexicon: Hashable {
         let code: String
 }
 
-extension Lychee {
+extension Engine {
 
         /// Stroke Reverse Lookup
         /// - Parameter text: Input text, e.g. "wsad"
@@ -40,7 +40,7 @@ extension Lychee {
                 defer {
                         sqlite3_finalize(queryStatement)
                 }
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         if sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let strokes: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 return strokes.count
@@ -54,7 +54,7 @@ extension Lychee {
                 var candidates: [CoreLexicon] = []
                 let queryString = "SELECT character FROM shapetable WHERE stroke = '\(stroke)';"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let candidate = CoreLexicon(input: stroke, text: character)
@@ -68,7 +68,7 @@ extension Lychee {
                 var candidates: [ShapeLexicon] = []
                 let queryString = "SELECT character, stroke FROM shapetable WHERE stroke LIKE '\(stroke)%' LIMIT 50;"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let code: String = String(cString: sqlite3_column_text(queryStatement, 1))
@@ -82,7 +82,7 @@ extension Lychee {
 }
 
 
-extension Lychee {
+extension Engine {
 
         /// Cangjie Reverse Lookup
         /// - Parameter text: Input text, e.g. "dam"
@@ -111,7 +111,7 @@ extension Lychee {
                 var candidates: [CoreLexicon] = []
                 let queryString = "SELECT character FROM shapetable WHERE cangjie = '\(cangjie)';"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let candidate = CoreLexicon(input: cangjie, text: character)
@@ -125,7 +125,7 @@ extension Lychee {
                 var candidates: [ShapeLexicon] = []
                 let queryString = "SELECT character, cangjie FROM shapetable WHERE cangjie LIKE '\(cangjie)%' LIMIT 50;"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let code: String = String(cString: sqlite3_column_text(queryStatement, 1))

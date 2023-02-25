@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-extension Lychee {
+extension Engine {
 
         /// Pinyin Reverse Lookup
         /// - Parameter text: Input text, e.g. "nihao"
@@ -30,7 +30,7 @@ extension Lychee {
                 var candidates: [CoreLexicon] = []
                 let queryString = "SELECT word FROM pinyintable WHERE pin = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let candidate = CoreLexicon(input: text, text: word)
@@ -44,7 +44,7 @@ extension Lychee {
                 var candidates: [CoreLexicon] = []
                 let queryString = "SELECT word FROM pinyintable WHERE shortcut = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let candidate = CoreLexicon(input: text, text: word)
@@ -58,7 +58,7 @@ extension Lychee {
                 var candidates: [CoreLexicon] = []
                 let queryString = "SELECT word FROM pinyintable WHERE prefix = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let candidate = CoreLexicon(input: text, text: word)

@@ -97,7 +97,7 @@ final class KeyboardViewController: UIInputViewController {
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
                 UserLexicon.prepare()
-                Lychee.prepare()
+                Engine.prepare()
                 if isHapticFeedbackOn && hapticFeedback == nil {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }
@@ -546,7 +546,7 @@ final class KeyboardViewController: UIInputViewController {
                                         let tail = processingText.dropFirst(bestScheme.length)
                                         return leading + " " + tail
                                 }()
-                                if let markCandidate = Lychee.searchMark(for: bufferText) {
+                                if let markCandidate = Engine.searchMark(for: bufferText) {
                                         candidates = [markCandidate]
                                 } else {
                                         suggest()
@@ -617,7 +617,7 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.pinyinLookup(for: text)
+                let lookup: [Candidate] = Engine.pinyinLookup(for: text)
                 push(lookup)
         }
         private func cangjieReverseLookup() {
@@ -626,7 +626,7 @@ final class KeyboardViewController: UIInputViewController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         markedText = String(converted)
-                        let lookup: [Candidate] = Lychee.cangjieLookup(for: text)
+                        let lookup: [Candidate] = Engine.cangjieLookup(for: text)
                         push(lookup)
                 } else {
                         markedText = processingText
@@ -640,7 +640,7 @@ final class KeyboardViewController: UIInputViewController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         markedText = String(converted)
-                        let lookup: [Candidate] = Lychee.strokeLookup(for: transformed)
+                        let lookup: [Candidate] = Engine.strokeLookup(for: transformed)
                         push(lookup)
                 } else {
                         markedText = processingText
@@ -653,23 +653,23 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Lychee.leungFanLookup(for: text)
+                let lookup: [Candidate] = Engine.leungFanLookup(for: text)
                 push(lookup)
         }
         private func suggest() {
                 let engineCandidates: [Candidate] = {
                         let convertedSegmentation: Segmentation = segmentation.converted()
-                        var normal: [Candidate] = Lychee.suggest(for: processingText, segmentation: convertedSegmentation)
+                        var normal: [Candidate] = Engine.suggest(for: processingText, segmentation: convertedSegmentation)
                         let droppedLast = processingText.dropLast()
                         let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
                         guard !shouldDropSeparator else {
                                 let droppedSeparator: String = String(droppedLast)
                                 let newSegmentation: Segmentation = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Lychee.suggest(for: droppedSeparator, segmentation: newSegmentation)
+                                return Engine.suggest(for: droppedSeparator, segmentation: newSegmentation)
                         }
                         let shouldContinue: Bool = needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
-                        let emojis: [Candidate] = Lychee.searchEmojis(for: bufferText)
+                        let emojis: [Candidate] = Engine.searchEmojis(for: bufferText)
                         for emoji in emojis.reversed() {
                                 if let index = normal.firstIndex(where: { $0.lexiconText == emoji.lexiconText }) {
                                         normal.insert(emoji, at: index + 1)

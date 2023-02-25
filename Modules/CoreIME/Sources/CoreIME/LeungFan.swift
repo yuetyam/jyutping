@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-extension Lychee {
+extension Engine {
 
         /// LeungFan Reverse Lookup
         /// - Parameter text: Input text, e.g. "mukdaan"
@@ -28,7 +28,7 @@ extension Lychee {
                 let code = noTonesText.hash
                 let queryString = "SELECT * FROM leungfantable WHERE ping = \(code);"
                 var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Lychee.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
                                 let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))

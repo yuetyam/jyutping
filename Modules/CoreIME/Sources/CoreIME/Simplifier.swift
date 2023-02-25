@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-private extension Lychee {
+private extension Engine {
         static func matchT2S(_ character: Character) -> String {
                 let code: UInt32 = character.unicodeScalars.first?.value ?? 0
                 let queryString = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
@@ -26,7 +26,7 @@ public struct Simplifier {
                 case .none:
                         return text
                 case .some(let character) where text.count == 1:
-                        return Lychee.matchT2S(character)
+                        return Engine.matchT2S(character)
                 default:
                         return transform(text)
                 }
@@ -36,14 +36,14 @@ public struct Simplifier {
         private static func transform(_ text: String) -> String {
                 let stepOne = replace(text, replacement: "X")
                 guard !(stepOne.matched.isEmpty) else {
-                        let newCharacters: [String] = text.map({ Lychee.matchT2S($0) })
+                        let newCharacters: [String] = text.map({ Engine.matchT2S($0) })
                         let transformed: String = newCharacters.joined()
                         return transformed
                 }
 
                 let stepTwo = replace(stepOne.modified, replacement: "Y")
                 guard !(stepTwo.matched.isEmpty) else {
-                        let newCharacters: [String] = stepTwo.modified.map({ Lychee.matchT2S($0) })
+                        let newCharacters: [String] = stepTwo.modified.map({ Engine.matchT2S($0) })
                         let transformed: String = newCharacters.joined()
                         let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
                         return reverted
@@ -51,14 +51,14 @@ public struct Simplifier {
 
                 let stepThree = replace(stepTwo.modified, replacement: "Z")
                 guard !(stepThree.matched.isEmpty) else {
-                        let newCharacters: [String] = stepTwo.modified.map({ Lychee.matchT2S($0) })
+                        let newCharacters: [String] = stepTwo.modified.map({ Engine.matchT2S($0) })
                         let transformed: String = newCharacters.joined()
                         let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
                                 .replacingOccurrences(of: stepTwo.replacement, with: stepTwo.matched)
                         return reverted
                 }
 
-                let newCharacters: [String] = stepThree.modified.map({ Lychee.matchT2S($0) })
+                let newCharacters: [String] = stepThree.modified.map({ Engine.matchT2S($0) })
                 let transformed: String = newCharacters.joined()
                 let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
                         .replacingOccurrences(of: stepTwo.replacement, with: stepTwo.matched)
