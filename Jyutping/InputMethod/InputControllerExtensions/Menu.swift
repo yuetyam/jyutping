@@ -5,15 +5,42 @@ extension JyutpingInputController {
 
         override func menu() -> NSMenu! {
                 let menuTittle: String = NSLocalizedString("menu.title", comment: "")
+                let menu = NSMenu(title: menuTittle)
+
+                let checkmark: String = " ✓"
+                let cantoneseModeTitle: String = {
+                        let text = NSLocalizedString("menu.mode.cantonese", comment: "")
+                        return InstantSettings.inputMethodMode.isCantonese ? (text + checkmark) : text
+                }()
+                let abcModeTitle: String = {
+                        let text = NSLocalizedString("menu.mode.abc", comment: "")
+                        return InstantSettings.inputMethodMode.isABC ? (text + checkmark) : text
+                }()
+                let cantoneseMode = NSMenuItem(title: cantoneseModeTitle, action: #selector(toggleInputMethodMode), keyEquivalent: "")
+                let abcMode = NSMenuItem(title: abcModeTitle, action: #selector(toggleInputMethodMode), keyEquivalent: "")
+                menu.addItem(cantoneseMode)
+                menu.addItem(abcMode)
+
+                menu.addItem(.separator())
+
                 let preferencesTitle: String = NSLocalizedString("menu.preferences", comment: "")
-                let terminateTittle: String = NSLocalizedString("menu.terminate", comment: "")
                 let preferences = NSMenuItem(title: preferencesTitle, action: #selector(openPreferencesWindow), keyEquivalent: ",")
                 preferences.keyEquivalentModifierMask = [.control, .shift]
-                let terminate = NSMenuItem(title: terminateTittle, action: #selector(terminateApp), keyEquivalent: "")
-                let menu = NSMenu(title: menuTittle)
                 menu.addItem(preferences)
+
+                menu.addItem(.separator())
+
+                let terminateTittle: String = NSLocalizedString("menu.terminate", comment: "")
+                let terminate = NSMenuItem(title: terminateTittle, action: #selector(terminateApp), keyEquivalent: "")
                 menu.addItem(terminate)
+
                 return menu
+        }
+
+        @objc private func toggleInputMethodMode() {
+                let newMode: InputMethodMode = InstantSettings.inputMethodMode.isCantonese ? .abc : .cantonese
+                InstantSettings.updateInputMethodMode(to: newMode)
+                InputState.updateCurrent()
         }
 
         @objc private func openPreferencesWindow() {

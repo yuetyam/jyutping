@@ -1,4 +1,6 @@
 "menu.title" = "Jyutping";
+"menu.mode.cantonese" = "Jyutping Mode";
+"menu.mode.abc" = "ABC Mode";
 "menu.preferences" = "Settings…";
 "menu.terminate" = "Quit";
 
