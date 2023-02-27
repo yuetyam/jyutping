@@ -23,11 +23,11 @@ struct AppMaster {
                 #endif
         }
 
-        /// 1.0.1 (23)
+        /// Example: 1.0.1 (23)
         static let version: String = {
-                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
-                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
-                return versionString + " (" + buildString + ")"
+                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.1.0"
+                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
+                return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 
         /// `https://jyutping.app`
@@ -93,7 +93,7 @@ extension AppMaster {
         private static let dataQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.data", qos: .userInitiated)
         static func prepareDatabase() {
                 dataQueue.async {
-                        DataMaster.prepare()
+                        DataMaster.prepare(appVersion: version)
                 }
         }
 
