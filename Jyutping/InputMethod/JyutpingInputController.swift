@@ -60,6 +60,9 @@ final class JyutpingInputController: IMKInputController {
                 window?.setFrame(.zero, display: true)
         }
 
+        func push(_ origin: [Candidate]) {
+                candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()
+        }
         private(set) lazy var candidates: [Candidate] = [] {
                 willSet {
                         if window == nil {
@@ -91,12 +94,6 @@ final class JyutpingInputController: IMKInputController {
                 guard size.width > 44 else { return }
                 let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
                 window?.setFrame(windowFrame(size: windowSize), display: true)
-        }
-        func push(_ origin: [Candidate]) {
-                candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()
-        }
-        func empty() {
-                candidates = []
         }
 
         lazy var displayObject = DisplayObject()
