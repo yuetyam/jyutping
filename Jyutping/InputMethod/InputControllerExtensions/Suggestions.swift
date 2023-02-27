@@ -31,7 +31,7 @@ extension JyutpingInputController {
         func pinyinReverseLookup() {
                 let text: String = String(processingText.dropFirst())
                 guard !text.isEmpty else {
-                        empty()
+                        clearCandidates()
                         return
                 }
                 let lookup: [Candidate] = Engine.pinyinLookup(for: text)
@@ -47,7 +47,7 @@ extension JyutpingInputController {
                         push(lookup)
                 } else {
                         markedText = processingText
-                        empty()
+                        clearCandidates()
                 }
         }
         func strokeReverseLookup() {
@@ -61,13 +61,13 @@ extension JyutpingInputController {
                         push(lookup)
                 } else {
                         markedText = processingText
-                        empty()
+                        clearCandidates()
                 }
         }
         func leungFanReverseLookup() {
                 let text: String = String(processingText.dropFirst())
                 guard !text.isEmpty else {
-                        empty()
+                        clearCandidates()
                         return
                 }
                 let lookup: [Candidate] = Engine.leungFanLookup(for: text)

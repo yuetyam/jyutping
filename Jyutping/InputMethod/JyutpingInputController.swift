@@ -63,6 +63,9 @@ final class JyutpingInputController: IMKInputController {
         func push(_ origin: [Candidate]) {
                 candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
+        func clearCandidates() {
+                candidates = []
+        }
         private(set) lazy var candidates: [Candidate] = [] {
                 willSet {
                         if window == nil {
