@@ -38,6 +38,7 @@ private extension DataMaster {
 public struct GwongWan {
 
         public static func match(for character: Character) -> [GwongWanCharacter] {
+                guard DataMaster.isDatabaseReady else { return [] }
                 let originalMatch = fetch(for: character)
                 guard originalMatch.isEmpty else { return originalMatch }
                 let traditionalText: String = String(character).convertedS2T()

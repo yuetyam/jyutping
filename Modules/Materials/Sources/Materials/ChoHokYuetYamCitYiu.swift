@@ -53,6 +53,7 @@ public struct ChoHokYuetYamCitYiu: Hashable {
         public let jyutping: String
 
         public static func match(for character: Character) -> [ChoHokYuetYamCitYiu] {
+                guard DataMaster.isDatabaseReady else { return [] }
                 let originalMatch = fetch(for: character)
                 guard originalMatch.isEmpty else { return originalMatch }
                 let traditionalText: String = String(character).convertedS2T()

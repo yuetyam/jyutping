@@ -18,6 +18,7 @@ public struct JyutpingProvider {
         /// - Parameter text: word
         /// - Returns: Array of Romanization matched the input word
         public static func lookup(text: String) -> [String] {
+                guard DataMaster.isDatabaseReady else { return [] }
                 guard !text.isEmpty else { return [] }
                 let matched = DataMaster.matchRomanization(for: text)
                 guard matched.isEmpty else { return matched }
@@ -48,6 +49,7 @@ public struct JyutpingProvider {
         /// - Parameter text: Word to search
         /// - Returns: Text (converted) & Array of Romanization
         public static func search(for text: String) -> Response {
+                guard DataMaster.isDatabaseReady else { return Response(text: text) }
                 lazy var fallback: Response = Response(text: text)
                 guard !text.isEmpty else { return fallback }
                 let matched = DataMaster.matchRomanization(for: text)
