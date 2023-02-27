@@ -24,3 +24,6 @@
 *.ttf binary
 *.ttc binary
 *.otc binary
+
+# Swift Package Resources
+/Modules/Materials/Sources/Materials/Resources/** binary
