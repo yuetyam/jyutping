@@ -46,11 +46,11 @@ public struct DataMaster {
                         try? FileManager.default.removeItem(at: url)
                 }
                 var destination: OpaquePointer? = nil
+                defer { sqlite3_close_v2(destination) }
                 guard sqlite3_open_v2(path, &destination, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 let backup = sqlite3_backup_init(destination, "main", database, "main")
-                sqlite3_backup_step(backup, -1)
-                sqlite3_backup_finish(backup)
-                sqlite3_close_v2(destination)
+                guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return }
+                guard sqlite3_backup_finish(backup) == SQLITE_OK else { return }
         }
 }
 
@@ -64,9 +64,9 @@ private extension DataMaster {
                 let values: String = "(1, '\(appVersion)')"
                 let insert: String = "INSERT INTO metatable (keynumber, valuetext) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
-                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { sqlite3_finalize(insertStatement); return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { sqlite3_finalize(insertStatement); return }
-                sqlite3_finalize(insertStatement)
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         static func createJyutpingTable() {
                 let createTable: String = "CREATE TABLE jyutpingtable(word TEXT NOT NULL, romanization TEXT NOT NULL);"
@@ -87,45 +87,23 @@ private extension DataMaster {
                 let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
                 let insert: String = "INSERT INTO jyutpingtable (word, romanization) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
-                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { sqlite3_finalize(insertStatement); return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { sqlite3_finalize(insertStatement); return }
-                sqlite3_finalize(insertStatement)
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         static func createIndies() {
-                do {
-                        let command: String = "CREATE INDEX jyutpingwordindex ON jyutpingtable(word);"
+                let commands: [String] = [
+                        "CREATE INDEX jyutpingwordindex ON jyutpingtable(word);",
+                        "CREATE INDEX yingwaacodeindex ON yingwaatable(code);",
+                        "CREATE INDEX chohokcodeindex ON chohoktable(code);",
+                        "CREATE INDEX fanwancodeindex ON fanwantable(code);",
+                        "CREATE INDEX gwongwancodeindex ON gwongwantable(code);",
+                ]
+                for command in commands {
                         var statement: OpaquePointer? = nil
-                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { sqlite3_finalize(statement); return }
-                        guard sqlite3_step(statement) == SQLITE_DONE else { sqlite3_finalize(statement); return }
-                        sqlite3_finalize(statement)
-                }
-                do {
-                        let command: String = "CREATE INDEX yingwaacodeindex ON yingwaatable(code);"
-                        var statement: OpaquePointer? = nil
-                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { sqlite3_finalize(statement); return }
-                        guard sqlite3_step(statement) == SQLITE_DONE else { sqlite3_finalize(statement); return }
-                        sqlite3_finalize(statement)
-                }
-                do {
-                        let command: String = "CREATE INDEX chohokcodeindex ON chohoktable(code);"
-                        var statement: OpaquePointer? = nil
-                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { sqlite3_finalize(statement); return }
-                        guard sqlite3_step(statement) == SQLITE_DONE else { sqlite3_finalize(statement); return }
-                        sqlite3_finalize(statement)
-                }
-                do {
-                        let command: String = "CREATE INDEX fanwancodeindex ON fanwantable(code);"
-                        var statement: OpaquePointer? = nil
-                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { sqlite3_finalize(statement); return }
-                        guard sqlite3_step(statement) == SQLITE_DONE else { sqlite3_finalize(statement); return }
-                        sqlite3_finalize(statement)
-                }
-                do {
-                        let command: String = "CREATE INDEX gwongwancodeindex ON gwongwantable(code);"
-                        var statement: OpaquePointer? = nil
-                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { sqlite3_finalize(statement); return }
-                        guard sqlite3_step(statement) == SQLITE_DONE else { sqlite3_finalize(statement); return }
-                        sqlite3_finalize(statement)
+                        defer { sqlite3_finalize(statement) }
+                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(statement) == SQLITE_DONE else { return }
                 }
         }
 }
@@ -156,7 +134,7 @@ private extension DataMaster {
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { sqlite3_finalize(insertStatement); return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         static func createChoHokTable() {
                 let createTable: String = "CREATE TABLE chohoktable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, tone TEXT NOT NULL, faancit TEXT NOT NULL);"
@@ -184,7 +162,7 @@ private extension DataMaster {
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { sqlite3_finalize(insertStatement); return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         static func createFanWanTable() {
                 let createTable: String = "CREATE TABLE fanwantable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, initial TEXT NOT NULL, final TEXT NOT NULL, yamyeung TEXT NOT NULL, tone TEXT NOT NULL, rhyme TEXT NOT NULL, interpretation TEXT NOT NULL);"
@@ -214,7 +192,7 @@ private extension DataMaster {
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { sqlite3_finalize(insertStatement); return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         static func createGwongWanTable() {
                 let createTable: String = "CREATE TABLE gwongwantable(code INTEGER NOT NULL, word TEXT NOT NULL, rhyme TEXT NOT NULL, subrhyme TEXT NOT NULL, subrhymeserial INTEGER NOT NULL, subrhymenumber INTEGER NOT NULL, upper TEXT NOT NULL, lower TEXT NOT NULL, initial TEXT NOT NULL, rounding TEXT NOT NULL, division TEXT NOT NULL, rhymeclass TEXT NOT NULL, repeating TEXT NOT NULL, tone TEXT NOT NULL, interpretation TEXT NOT NULL);"
@@ -250,6 +228,6 @@ private extension DataMaster {
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { sqlite3_finalize(insertStatement); return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
 }
