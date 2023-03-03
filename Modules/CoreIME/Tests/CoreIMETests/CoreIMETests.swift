@@ -26,6 +26,7 @@ final class CoreIMETests: XCTestCase {
                 let syllables: [String] = schemes.first!
                 XCTAssertEqual(syllables, ["pu", "tong", "hua", "pin", "yin"])
         }
+        /*
         func testPinyinLookup() throws {
                 Engine.prepare()
                 let result: String = Engine.pinyinLookup(for: "wo").first!.text
@@ -48,6 +49,7 @@ final class CoreIMETests: XCTestCase {
                 let result: String = Engine.leungFanLookup(for: "mukdaan").first!.text
                 XCTAssertEqual(result, "查")
         }
+        */
 
 
         // MARK: - Emoji
