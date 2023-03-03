@@ -7,6 +7,7 @@ extension Engine {
         /// - Parameter text: Input text, e.g. "mukdaan"
         /// - Returns: An Array of CoreCandidate
         public static func leungFanLookup(for text: String) -> [Candidate] {
+                guard Engine.isDatabaseReady else { return [] }
                 guard !text.isEmpty else { return [] }
                 let words = match(for: text).uniqued()
                 let candidates = words.map { item -> [CoreCandidate] in
@@ -26,13 +27,13 @@ extension Engine {
                 let convertedText = convertTones(for: text)
                 let noTonesText = convertedText.filter({ !$0.isNumber })
                 let code = noTonesText.hash
-                let queryString = "SELECT * FROM leungfantable WHERE ping = \(code);"
+                let queryString = "SELECT word, romanization FROM composetable WHERE ping = \(code);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let lexicon = CoreLexicon(input: text, text: character)
+                                let lexicon = CoreLexicon(input: text, text: word)
                                 let instance = ExtendedLexicon(lexicon: lexicon, romanization: romanization)
                                 exLexicons.append(instance)
                         }
@@ -59,3 +60,44 @@ extension Engine {
                 return converted
         }
 }
+
+/*
+extension Engine {
+        /// LeungFan Reverse Lookup
+        /// - Parameter text: Input text, e.g. "mukdaan"
+        /// - Returns: An Array of Candidate
+        public static func composeLookup(text: String) -> [Candidate] {
+                guard !text.isEmpty else { return [] }
+                var candidates: [CoreCandidate] = []
+                let code: Int = code(of: text)
+                let queryString: String = "SELECT word, romanization FROM composetable WHERE ping = \(code);"
+                var queryStatement: OpaquePointer? = nil
+                defer {
+                        sqlite3_finalize(queryStatement)
+                }
+                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
+                        while sqlite3_step(queryStatement) == SQLITE_ROW {
+                                let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                                let instance = CoreCandidate(text: character, romanization: romanization, input: text, lexiconText: character)
+                                candidates.append(instance)
+                        }
+                }
+                return candidates
+        }
+
+        // TODO: Improve this with Segmentor
+        private static func code(of text: String) -> Int {
+                let noTones = text.filter({ !toneSet.contains($0) })
+                let converted = noTones
+                        .replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
+                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
+                        .replacingOccurrences(of: "eung", with: "oeng", options: [.backwards, .anchored])
+                        .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
+                        .replacingOccurrences(of: "yu", with: "jyu", options: .anchored)
+                        .replacingOccurrences(of: "y", with: "j", options: .anchored)
+                return converted.hash
+        }
+        private static let toneSet: Set<Character> = Set("123456vxq")
+}
+*/

@@ -13,6 +13,7 @@ extension Engine {
         /// - Parameter text: Input text, e.g. "wsad"
         /// - Returns: An Array of CoreCandidate
         public static func strokeLookup(for text: String) -> [Candidate] {
+                guard Engine.isDatabaseReady else { return [] }
                 guard !text.isEmpty else { return [] }
                 let words = searchStroke(with: text)
                 let candidates = words.map { item -> [CoreCandidate] in
@@ -52,12 +53,12 @@ extension Engine {
 
         private static func match(stroke: String) -> [CoreLexicon] {
                 var candidates: [CoreLexicon] = []
-                let queryString = "SELECT character FROM shapetable WHERE stroke = '\(stroke)';"
+                let queryString = "SELECT word FROM shapetable WHERE stroke = '\(stroke)';"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let candidate = CoreLexicon(input: stroke, text: character)
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let candidate = CoreLexicon(input: stroke, text: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -66,13 +67,13 @@ extension Engine {
         }
         private static func like(stroke: String) -> [ShapeLexicon] {
                 var candidates: [ShapeLexicon] = []
-                let queryString = "SELECT character, stroke FROM shapetable WHERE stroke LIKE '\(stroke)%' LIMIT 50;"
+                let queryString = "SELECT word, stroke FROM shapetable WHERE stroke LIKE '\(stroke)%' LIMIT 50;"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let code: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate = ShapeLexicon(text: character, input: stroke, code: code)
+                                let candidate = ShapeLexicon(text: word, input: stroke, code: code)
                                 candidates.append(candidate)
                         }
                 }
@@ -88,8 +89,9 @@ extension Engine {
         /// - Parameter text: Input text, e.g. "dam"
         /// - Returns: An Array of CoreCandidate
         public static func cangjieLookup(for text: String) -> [Candidate] {
+                guard Engine.isDatabaseReady else { return [] }
                 guard !text.isEmpty else { return [] }
-                let words = searchCongGit(with: text)
+                let words = searchCangjie(with: text)
                 let candidates = words.map { item -> [CoreCandidate] in
                         let romanizations: [String] = lookup(item.text)
                         let candidates: [CoreCandidate] = romanizations.map({ CoreCandidate(text: item.text, romanization: $0, input: item.input) })
@@ -98,7 +100,7 @@ extension Engine {
                 return candidates.flatMap({ $0 })
         }
 
-        private static func searchCongGit(with text: String) -> [CoreLexicon] {
+        private static func searchCangjie(with text: String) -> [CoreLexicon] {
                 let likes = like(cangjie: text)
                 let sortedLikes = likes.sorted { $0.code.count < $1.code.count }
                 let prefixes: [CoreLexicon] = sortedLikes.map({ CoreLexicon(input: $0.input, text: $0.text) })
@@ -109,12 +111,12 @@ extension Engine {
 
         private static func match(cangjie: String) -> [CoreLexicon] {
                 var candidates: [CoreLexicon] = []
-                let queryString = "SELECT character FROM shapetable WHERE cangjie = '\(cangjie)';"
+                let queryString = "SELECT word FROM shapetable WHERE cangjie = '\(cangjie)';"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let candidate = CoreLexicon(input: cangjie, text: character)
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let candidate = CoreLexicon(input: cangjie, text: word)
                                 candidates.append(candidate)
                         }
                 }
@@ -123,13 +125,13 @@ extension Engine {
         }
         private static func like(cangjie: String) -> [ShapeLexicon] {
                 var candidates: [ShapeLexicon] = []
-                let queryString = "SELECT character, cangjie FROM shapetable WHERE cangjie LIKE '\(cangjie)%' LIMIT 50;"
+                let queryString = "SELECT word, cangjie FROM shapetable WHERE cangjie LIKE '\(cangjie)%' LIMIT 50;"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let character: String = String(cString: sqlite3_column_text(queryStatement, 0))
+                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
                                 let code: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate = ShapeLexicon(text: character, input: cangjie, code: code)
+                                let candidate = ShapeLexicon(text: word, input: cangjie, code: code)
                                 candidates.append(candidate)
                         }
                 }

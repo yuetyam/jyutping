@@ -3,7 +3,19 @@ import UniformTypeIdentifiers
 import CommonExtensions
 import CoreIME
 
+extension DispatchQueue {
+        static let dataQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.Keyboard.data", qos: .userInitiated)
+}
+
 final class KeyboardViewController: UIInputViewController {
+
+        /// Example: 1.0.1 (23)
+        private lazy var appVersion: String = {
+                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.1.0"
+                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
+                // FIXME: Remove tail
+                return marketingVersion + " (" + currentProjectVersion + ")"
+        }()
 
         // MARK: - Subviews
 
@@ -97,7 +109,9 @@ final class KeyboardViewController: UIInputViewController {
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
                 UserLexicon.prepare()
-                Engine.prepare()
+                DispatchQueue.dataQueue.async { [unowned self] in
+                        Engine.prepare(appVersion: self.appVersion)
+                }
                 if isHapticFeedbackOn && hapticFeedback == nil {
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 }

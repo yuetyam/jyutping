@@ -43,12 +43,7 @@ public struct Converter {
                                 return String(converted)
                         }
                 case .simplified:
-                        return text
-                                .replacingOccurrences(of: "嗰", with: "*")
-                                .replacingOccurrences(of: "𨋢", with: "•")
-                                .simplified
-                                .replacingOccurrences(of: "*", with: "𠮶")
-                                .replacingOccurrences(of: "•", with: "䢂")
+                        return Simplifier.convert(text)
                 }
         }
 

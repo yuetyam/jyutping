@@ -46,7 +46,7 @@ extension Engine {
 
         private static func match(for text: String) -> [String] {
                 var romanizations: [String] = []
-                let queryString = "SELECT romanization FROM lookuptable WHERE word = '\(text)';"
+                let queryString = "SELECT romanization FROM lexicontable WHERE word = '\(text)';"
                 var queryStatement: OpaquePointer? = nil
                 defer {
                         sqlite3_finalize(queryStatement)

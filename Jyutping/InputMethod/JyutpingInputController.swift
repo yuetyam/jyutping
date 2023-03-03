@@ -41,12 +41,14 @@ final class JyutpingInputController: IMKInputController {
 
         override func activateServer(_ sender: Any!) {
                 currentClient = sender as? IMKTextInput
+                currentOrigin = currentClient?.position
                 DispatchQueue.main.async { [weak self] in
                         self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
-                currentOrigin = currentClient?.position
+                DispatchQueue.dataQueue.async {
+                        Engine.prepare(appVersion: InstantSettings.appVersion)
+                }
                 UserLexicon.prepare()
-                Engine.prepare()
                 if InputState.current.isSwitches {
                         InputState.updateCurrent()
                 }
@@ -166,12 +168,6 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
         private(set) lazy var processingText: String = .empty {
-                willSet {
-                        let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
-                        guard isStarting else { return }
-                        Engine.prepare()
-                        UserLexicon.prepare()
-                }
                 didSet {
                         switch processingText.first {
                         case .none:

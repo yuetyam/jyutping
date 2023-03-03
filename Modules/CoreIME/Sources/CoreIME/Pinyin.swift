@@ -7,6 +7,7 @@ extension Engine {
         /// - Parameter text: Input text, e.g. "nihao"
         /// - Returns: An Array of CoreCandidate
         public static func pinyinLookup(for text: String) -> [Candidate] {
+                guard Engine.isDatabaseReady else { return [] }
                 guard !text.isEmpty else { return [] }
                 let words = search(pinyin: text)
                 let candidates = words.map { item -> [CoreCandidate] in
@@ -21,7 +22,7 @@ extension Engine {
                 let schemes: [[String]] = PinyinSplitter.split(text)
                 let schemesMatches = schemes.map({ match(for: $0.joined()) })
                 let matches: [CoreLexicon] = schemesMatches.flatMap({ $0 })
-                let candidates: [CoreLexicon] = match(for: text) + prefixMatch(text: text) + shortcut(for: text) + matches
+                let candidates: [CoreLexicon] = match(for: text) + shortcut(for: text) + matches
                 return candidates.uniqued()
         }
 
@@ -43,20 +44,6 @@ extension Engine {
         private static func shortcut(for text: String, count: Int = 100) -> [CoreLexicon] {
                 var candidates: [CoreLexicon] = []
                 let queryString = "SELECT word FROM pinyintable WHERE shortcut = \(text.hash) LIMIT \(count);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let candidate = CoreLexicon(input: text, text: word)
-                                candidates.append(candidate)
-                        }
-                }
-                sqlite3_finalize(queryStatement)
-                return candidates
-        }
-        private static func prefixMatch(text: String, count: Int = 100) -> [CoreLexicon] {
-                var candidates: [CoreLexicon] = []
-                let queryString = "SELECT word FROM pinyintable WHERE prefix = \(text.hash) LIMIT \(count);"
                 var queryStatement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
                         while sqlite3_step(queryStatement) == SQLITE_ROW {

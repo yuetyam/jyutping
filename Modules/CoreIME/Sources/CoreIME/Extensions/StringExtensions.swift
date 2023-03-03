@@ -45,6 +45,8 @@ extension String {
         }
 
         /// Convert to simplifier characters
+        @available(iOS, deprecated: 15.0, message: "Use Simplifier instead")
+        @available(macOS, deprecated: 12.0, message: "Use Simplifier instead")
         var simplified: String {
                 return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true) ?? self
         }
