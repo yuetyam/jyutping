@@ -30,10 +30,10 @@
 "tones.input.description" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
 
 "Lookup Jyutping with Cangjie" = "用倉頡反查粵拼";
-"Cangjie Reverse Lookup Description" = "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
+"Cangjie Reverse Lookup Description" = "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
 
 "Lookup Jyutping with Pinyin" = "用普通話拼音反查粵拼";
-"Pinyin Reverse Lookup Description" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼";
+"Pinyin Reverse Lookup Description" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
 
 "Lookup Jyutping with Stroke" = "用筆畫輸入反查粵拼";
 "Stroke Reverse Lookup Description" = "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。";

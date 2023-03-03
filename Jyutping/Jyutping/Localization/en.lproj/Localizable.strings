@@ -31,16 +31,16 @@
 "tones.input.description" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
 
 "Lookup Jyutping with Cangjie" = "Lookup Jyutping with Cangjie";
-"Cangjie Reverse Lookup Description" = "Start with “v”, then enter the Cangjie code. For example, enter “vdam”, candidate “查” will appear. The candidates will be displayed with the corresponding Jyutping.";
+"Cangjie Reverse Lookup Description" = "Start with “v”, then enter Cangjie5 code. For example, enter “vdam”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Pinyin" = "Lookup Jyutping with Pinyin";
-"Pinyin Reverse Lookup Description" = "Start with “r”, then enter the Pinyin code. For example, enter “rcha”, candidate “查” will appear. The candidates will be displayed with the corresponding Jyutping.";
+"Pinyin Reverse Lookup Description" = "Start with “r”, then enter Pinyin code. For example, enter “rcha”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Stroke" = "Lookup Jyutping with Stroke";
-"Stroke Reverse Lookup Description" = "Start with “x”, then enter the Stroke code. For example, enter “xwsad”, candidate “木” will appear. The candidates will be displayed with the corresponding Jyutping.";
+"Stroke Reverse Lookup Description" = "Start with “x”, then enter Stroke code. For example, enter “xwsad”, candidate “木” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Loengfan" = "Lookup Jyutping with Loengfan";
-"Loengfan Reverse Lookup Description" = "兩分即係將一個字分成兩部份。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+"Loengfan Reverse Lookup Description" = "Start with “q”, then enter two Jyutping syllables. For example, enter “xmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
 "More Introductions" = "More Introductions";
 "title.introductions" = "Introductions";
