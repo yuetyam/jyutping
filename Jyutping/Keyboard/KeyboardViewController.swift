@@ -950,7 +950,7 @@ final class KeyboardViewController: UIInputViewController {
                 UserDefaults.standard.set(newOption, forKey: "tone_style")
         }
 
-        /// 雙擊空格鍵快捷動作
+        /// 雙擊空格掣快捷動作
         ///
         /// 0: The key "double_space_shortcut" doesn‘t exist.
         ///
