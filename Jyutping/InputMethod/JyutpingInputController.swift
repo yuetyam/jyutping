@@ -57,8 +57,8 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
         override func deactivateServer(_ sender: Any!) {
-                markedText = .empty
                 candidateSequence = []
+                currentClient?.clearMarkedText()
                 window?.setFrame(.zero, display: true)
         }
 
@@ -233,8 +233,7 @@ final class JyutpingInputController: IMKInputController {
 
         lazy var markedText: String = .empty {
                 didSet {
-                        let convertedText: NSString = markedText as NSString
-                        currentClient?.setMarkedText(convertedText, selectionRange: NSRange(location: convertedText.length, length: 0), replacementRange: NSRange(location: NSNotFound, length: 0))
+                        currentClient?.mark(markedText)
                 }
         }
 

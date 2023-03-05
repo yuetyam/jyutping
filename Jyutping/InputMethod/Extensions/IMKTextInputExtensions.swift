@@ -1,3 +1,4 @@
+import Foundation
 import InputMethodKit
 
 extension IMKTextInput {
@@ -10,7 +11,17 @@ extension IMKTextInput {
         }
 
         func insert(_ text: String) {
-                let text: NSString = text as NSString
-                self.insertText(text, replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
+                clearMarkedText()
+                let convertedText: NSString = text as NSString
+                self.insertText(convertedText, replacementRange: NSRange(location: NSNotFound, length: NSNotFound))
+        }
+
+        func mark(_ text: String) {
+                let convertedText: NSString = text as NSString
+                self.setMarkedText(convertedText, selectionRange: NSRange(location: convertedText.length, length: 0), replacementRange: NSRange(location: NSNotFound, length: 0))
+        }
+
+        func clearMarkedText() {
+                self.setMarkedText(NSString(), selectionRange: NSRange(location: 0, length: 0), replacementRange: NSRange(location: NSNotFound, length: 0))
         }
 }
