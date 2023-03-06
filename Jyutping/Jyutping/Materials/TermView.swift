@@ -72,8 +72,8 @@ struct HeaderTermView: View {
                                 Text(verbatim: term.romanization).font(.footnote.monospaced())
                         }
                         .textSelection(.enabled)
-                        Speaker(term.romanization)
                         Spacer()
+                        Speaker(term.romanization)
                 }
                 #endif
         }
