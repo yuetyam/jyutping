@@ -39,9 +39,9 @@ Jyutping
 兼容性： macOS 12 Monterey 或者更高
 
 ## 擷屏（Screenshots）
-<img src="images/screenshot.png" alt="screenshots" width="450"/>
+<img src="images/screenshot.png" alt="iPhone screenshots" width="440"/>
 <br>
-<img src="images/screenshot-mac.png" alt="screenshots" width="450"/>
+<img src="images/screenshot-mac.png" alt="macOS screenshots" width="440"/>
 
 
 ## 如何構建（How to build）
