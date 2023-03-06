@@ -21,9 +21,17 @@ extension Font {
                 }
         }
         private static let preferredCandidateFontNames: [String] = {
-                var names: [String] = [Constant.SFPro, Constant.HelveticaNeue]
-                let potential: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
-                for name in potential {
+                var names: [String] = []
+                let primaryQueue: [String] = [Constant.SFPro, Constant.Inter]
+                for name in primaryQueue {
+                        if found(font: name) {
+                                names.append(name)
+                                break
+                        }
+                }
+                names.append(Constant.HelveticaNeue)
+                let primaryCJKVQueue: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
+                for name in primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
@@ -71,9 +79,17 @@ extension Font {
                 }
         }
         private static let preferredCommentFontNames: [String] = {
-                var names: [String] = [Constant.SFMono, Constant.SFPro, Constant.HelveticaNeue]
-                let potential: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
-                for name in potential {
+                var names: [String] = [Constant.SFMono]
+                let secondaryQueue: [String] = [Constant.SFPro, Constant.Inter]
+                for name in secondaryQueue {
+                        if found(font: name) {
+                                names.append(name)
+                                break
+                        }
+                }
+                names.append(Constant.HelveticaNeue)
+                let primaryCJKVQueue: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
+                for name in primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break

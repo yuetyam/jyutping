@@ -24,9 +24,17 @@ private extension Font {
         }
 
         private static let fontNames: [String] = {
-                var names: [String] = [Constant.SFPro, Constant.HelveticaNeue]
-                let potential: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
-                for name in potential {
+                var names: [String] = []
+                let primaryQueue: [String] = [Constant.SFPro, Constant.Inter]
+                for name in primaryQueue {
+                        if found(font: name) {
+                                names.append(name)
+                                break
+                        }
+                }
+                names.append(Constant.HelveticaNeue)
+                let primaryCJKVQueue: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
+                for name in primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break

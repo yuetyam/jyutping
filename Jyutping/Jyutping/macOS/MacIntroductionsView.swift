@@ -15,7 +15,7 @@ struct MacIntroductionsView: View {
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 32) {
+                        LazyVStack(spacing: 16) {
                                 VStack(spacing: 16) {
                                         HStack {
                                                 Text("Tones Input").font(.significant)
