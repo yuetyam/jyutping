@@ -115,33 +115,18 @@ struct HomeView: View {
                                 .textSelection(.enabled)
 
                                 Section {
-                                        NavigationLink {
-                                                IntroductionsView()
-                                        } label: {
+                                        NavigationLink(destination: IntroductionsView()) {
                                                 Label("More Introductions", systemImage: "info.circle")
                                         }
-                                }
-                                Section {
-                                        NavigationLink {
-                                                Text2SpeechView()
-                                        } label: {
+                                        NavigationLink(destination: Text2SpeechView()) {
                                                 Label("Text to Speech", systemImage: "speaker.wave.2")
                                         }
-                                        NavigationLink {
-                                                ExpressionsView()
-                                        } label: {
-                                                Label("Cantonese Expressions", systemImage: "checkmark.seal")
-                                        }
                                 }
                                 Section {
-                                        NavigationLink {
-                                                FAQView()
-                                        } label: {
+                                        NavigationLink(destination: FAQView()) {
                                                 Label("Frequently Asked Questions", systemImage: "questionmark.circle")
                                         }
-                                        NavigationLink {
-                                                PrivacyNoticeView()
-                                        } label: {
+                                        NavigationLink(destination: PrivacyNoticeView()) {
                                                 Label("Privacy Notice", systemImage: "lock.circle")
                                         }
                                 }

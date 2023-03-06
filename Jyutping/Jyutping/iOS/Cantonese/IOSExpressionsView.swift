@@ -2,56 +2,96 @@
 
 import SwiftUI
 
-struct ExpressionsView: View {
+struct IOSExpressionsView: View {
         var body: some View {
                 List {
                         Group {
                                 Section {
+                                        Text(verbatim: "第一人稱代詞").font(.significant)
+                                        Label {
+                                                HStack {
+                                                        Text(verbatim: "單數：我")
+                                                        Speaker("我")
+                                                        Spacer()
+                                                }
+                                        } icon: {
+                                                Image.checkmark.foregroundColor(.green)
+                                        }
+                                        Label {
+                                                HStack {
+                                                        Text(verbatim: "複數：我哋／我等")
+                                                        Speaker("我哋")
+                                                        Spacer()
+                                                }
+                                        } icon: {
+                                                Image.checkmark.foregroundColor(.green)
+                                        }
+                                        Label {
+                                                Text(verbatim: "毋用「咱、咱們」")
+                                        } icon: {
+                                                Image.warning.foregroundColor(.orange)
+                                        }
+                                }
+                                Section {
                                         Text(verbatim: "第二人稱代詞").font(.significant)
-
                                         Label {
-                                                Text(verbatim: "單數：你")
+                                                HStack {
+                                                        Text(verbatim: "單數：你")
+                                                        Speaker("你")
+                                                        Spacer()
+                                                }
                                         } icon: {
                                                 Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "複數：你哋／你等")
+                                                HStack {
+                                                        Text(verbatim: "複數：你哋／你等")
+                                                        Speaker("你哋")
+                                                        Spacer()
+                                                }
                                         } icon: {
                                                 Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "毋用「您」。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」")
+                                                Text(verbatim: "毋用「您」。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」。")
                                         } icon: {
                                                 Image.warning.foregroundColor(.orange)
                                         }
                                         Label {
-                                                Text(verbatim: "毋推薦用「妳」，冇必要畫蛇添足")
+                                                Text(verbatim: "毋推薦用「妳」，冇必要畫蛇添足。")
                                         } icon: {
                                                 Image.warning.foregroundColor(.orange)
                                         }
                                 }
                                 Section {
                                         Text(verbatim: "第三人稱代詞").font(.significant)
-
                                         Label {
-                                                Text(verbatim: "單數：佢")
+                                                HStack {
+                                                        Text(verbatim: "單數：佢")
+                                                        Speaker("佢")
+                                                        Spacer()
+                                                }
                                         } icon: {
                                                 Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "複數：佢哋／佢等")
+                                                HStack {
+                                                        Text(verbatim: "複數：佢哋／佢等")
+                                                        Speaker("佢哋")
+                                                        Spacer()
+                                                }
                                         } icon: {
                                                 Image.checkmark.foregroundColor(.green)
                                         }
                                         Label {
-                                                Text(verbatim: "避免：他、她、它、他們、她們")
+                                                Text(verbatim: "毋分性別、人、物，一律用佢。")
                                         } icon: {
-                                                Image.warning.foregroundColor(.orange)
+                                                Image.info.foregroundColor(.primary)
                                         }
                                         Label {
                                                 Text(verbatim: "佢亦作渠、⿰亻渠")
                                         } icon: {
-                                                Image(systemName: "info.circle").foregroundColor(.primary)
+                                                Image.info.foregroundColor(.primary)
                                         }
                                 }
                         }
@@ -64,7 +104,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "hai6").font(.fixedWidth)
                                                         Speaker("hai6")
                                                 }
-                                                Text(verbatim: "謂語，義同是")
+                                                Text(verbatim: "謂語，義同是。")
                                                 Spacer()
                                         }
                                         HStack {
@@ -73,7 +113,7 @@ struct ExpressionsView: View {
                                                         Text(verbatim: "hai2").font(.fixedWidth)
                                                         Speaker("hai2")
                                                 }
-                                                Text(verbatim: "表方位、時間，義同在")
+                                                Text(verbatim: "表方位、時間，義同在。")
                                                 Spacer()
                                         }
                                         HStack {

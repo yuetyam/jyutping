@@ -8,6 +8,7 @@ extension Image {
         static let arrowUpForward: Image = Image(systemName: "arrow.up.forward")
 
         // ExpressionsView
+        static let info: Image = Image(systemName: "info.circle")
         static let checkmark: Image = Image(systemName: "checkmark.circle")
         static let warning: Image = Image(systemName: "exclamationmark.circle")
         static let xmark: Image = Image(systemName: "xmark.circle")

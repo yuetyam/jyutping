@@ -12,6 +12,12 @@ struct CantoneseView: View {
                                 SearchView(placeholder: "Search Pronunciation", animationState: $animationState)
 
                                 Section {
+                                        NavigationLink(destination: IOSExpressionsView()) {
+                                                Label("Cantonese Expressions", systemImage: "checkmark.seal")
+                                        }
+                                }
+
+                                Section {
                                         NavigationLink(destination: NumbersView()) {
                                                 Label("Numbers", systemImage: "number")
                                         }
