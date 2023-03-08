@@ -3,6 +3,12 @@ import SQLite3
 
 public struct Engine {
 
+        private static var dbPath: String? {
+                guard let cacheUrl = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else { return nil }
+                let url = cacheUrl.appendingPathComponent("imedb.sqlite3", isDirectory: false)
+                return url.path
+        }
+
         private(set) static var database: OpaquePointer? = nil
         private(set) static var cachedDatabase: OpaquePointer? = nil
         private(set) static var isDatabaseReady: Bool = false
@@ -10,12 +16,21 @@ public struct Engine {
         public static func prepare(appVersion: String) {
                 guard !isDatabaseReady else { return }
                 guard !verifiedCachedDatabase(appVersion: appVersion) else {
+                        #if os(macOS)
                         loadCachedDatabaseIntoMemory()
+                        #endif
                         isDatabaseReady = true
                         return
                 }
+                sqlite3_close_v2(database)
                 sqlite3_close_v2(cachedDatabase)
+                #if os(macOS)
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
+                #else
+                guard let path: String = dbPath else { return }
+                try? FileManager.default.removeItem(atPath: path)
+                guard sqlite3_open_v2(path, &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
+                #endif
                 createLexiconTable()
                 createT2STable()
                 createComposeTable()
@@ -25,29 +40,33 @@ public struct Engine {
                 createMetaTable(appVersion: appVersion)
                 isDatabaseReady = true
                 createIndies()
+                #if os(macOS)
                 backupInMemoryDatabaseToCaches()
+                #endif
         }
         private static func verifiedCachedDatabase(appVersion: String) -> Bool {
-                guard let cacheUrl = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else { return false }
-                let url = cacheUrl.appendingPathComponent("imedb.sqlite3", isDirectory: false)
-                let path = url.path
+                guard let path = dbPath else { return false }
                 guard FileManager.default.fileExists(atPath: path) else { return false }
+                #if os(macOS)
                 guard sqlite3_open_v2(path, &cachedDatabase, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else { return false }
+                #else
+                guard sqlite3_open_v2(path, &database, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else { return false }
+                #endif
                 let query: String = "SELECT valuetext FROM metatable WHERE keynumber = 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
+                #if os(macOS)
                 guard sqlite3_prepare_v2(cachedDatabase, query, -1, &statement, nil) == SQLITE_OK else { return false }
+                #else
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return false }
+                #endif
                 guard sqlite3_step(statement) == SQLITE_ROW else { return false }
                 let savedAppVersion: String = String(cString: sqlite3_column_text(statement, 0))
                 return appVersion == savedAppVersion
         }
         private static func backupInMemoryDatabaseToCaches() {
-                guard let cacheUrl = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else { return }
-                let url = cacheUrl.appendingPathComponent("imedb.sqlite3", isDirectory: false)
-                let path = url.path
-                if FileManager.default.fileExists(atPath: path) {
-                        try? FileManager.default.removeItem(at: url)
-                }
+                guard let path = dbPath else { return }
+                try? FileManager.default.removeItem(atPath: path)
                 var destination: OpaquePointer? = nil
                 defer { sqlite3_close_v2(destination) }
                 guard sqlite3_open_v2(path, &destination, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
@@ -87,21 +106,30 @@ private extension Engine {
                 guard let url = Bundle.module.url(forResource: "lexicon", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
-                        let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 4 else { return nil }
-                        let word = parts[0]
-                        let romanization = parts[1]
-                        let shortcut = parts[2]
-                        let ping = parts[3]
-                        return "('\(word)', '\(romanization)', \(shortcut), \(ping))"
+                func insert(values: String) {
+                        let insert: String = "INSERT INTO lexicontable (word, romanization, shortcut, ping) VALUES \(values);"
+                        var insertStatement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(insertStatement) }
+                        guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
-                let insert: String = "INSERT INTO lexicontable (word, romanization, shortcut, ping) VALUES \(values);"
-                var insertStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(insertStatement) }
-                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                let range: Range<Int> = 0..<2000
+                let distance: Int = sourceLines.count / 2000
+                for number in range {
+                        let bound: Int = number == 1999 ? sourceLines.count : ((number + 1) * distance)
+                        let part = sourceLines[(number * distance)..<bound]
+                        let entries = part.map { line -> String? in
+                                let parts = line.split(separator: "\t")
+                                guard parts.count == 4 else { return nil }
+                                let word = parts[0]
+                                let romanization = parts[1]
+                                let shortcut = parts[2]
+                                let ping = parts[3]
+                                return "('\(word)', '\(romanization)', \(shortcut), \(ping))"
+                        }
+                        let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                        insert(values: values)
+                }
         }
         static func createIndies() {
                 let commands: [String] = [
@@ -181,21 +209,30 @@ private extension Engine {
                 guard let url = Bundle.module.url(forResource: "pinyin", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
-                        // TODO: replace , with tab
-                        let parts = sourceLine.split(separator: ",")
-                        guard parts.count == 4 else { return nil }
-                        let word = parts[0]
-                        let pin = parts[1]
-                        let shortcut = parts[2]
-                        return "('\(word)', \(shortcut), \(pin))"
+                func insert(values: String) {
+                        let insert: String = "INSERT INTO pinyintable (word, shortcut, pin) VALUES \(values);"
+                        var insertStatement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(insertStatement) }
+                        guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
-                let insert: String = "INSERT INTO pinyintable (word, shortcut, pin) VALUES \(values);"
-                var insertStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(insertStatement) }
-                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                let range: Range<Int> = 0..<2000
+                let distance: Int = sourceLines.count / 2000
+                for number in range {
+                        let bound: Int = number == 1999 ? sourceLines.count : ((number + 1) * distance)
+                        let part = sourceLines[(number * distance)..<bound]
+                        let entries = part.map { line -> String? in
+                                // TODO: replace , with tab
+                                let parts = line.split(separator: ",")
+                                guard parts.count == 4 else { return nil }
+                                let word = parts[0]
+                                let pin = parts[1]
+                                let shortcut = parts[2]
+                                return "('\(word)', \(shortcut), \(pin))"
+                        }
+                        let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                        insert(values: values)
+                }
         }
         static func createShapeTable() {
                 let createTable: String = "CREATE TABLE shapetable(word TEXT NOT NULL, cangjie TEXT NOT NULL, stroke TEXT NOT NULL);"
@@ -207,8 +244,7 @@ private extension Engine {
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.map { sourceLine -> String? in
-                        // TODO: replace , with tab
-                        let parts = sourceLine.split(separator: ",")
+                        let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 3 else { return nil }
                         let word = parts[0]
                         let cangjie = parts[1]
