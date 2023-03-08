@@ -27,7 +27,7 @@ struct AboutView: View {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
                                         SafariLink("https://jyutping.app/faq") {
-                                                EnhancedLabel("Frequently Asked Questions", icon: "questionmark.circle", symbol: .safari)
+                                                EnhancedLabel("FAQ", icon: "questionmark.circle", symbol: .safari)
                                         }
                                 }
                                 Section {

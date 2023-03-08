@@ -95,7 +95,7 @@ struct MacExpressionsView: View {
                                                         Label {
                                                                 Text(verbatim: "佢 亦作 渠、𠍲")
                                                         } icon: {
-                                                                Image(systemName: "info.circle").foregroundColor(.primary)
+                                                                Image.info.foregroundColor(.primary)
                                                         }
                                                 }
                                                 Spacer()

@@ -7,7 +7,7 @@ struct MacAboutView: View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 HStack(spacing: 16) {
-                                        Image(systemName: "info.circle")
+                                        Image.info
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 16, height: 16)

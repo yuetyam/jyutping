@@ -121,10 +121,8 @@ struct HomeView: View {
                                         NavigationLink(destination: Text2SpeechView()) {
                                                 Label("Text to Speech", systemImage: "speaker.wave.2")
                                         }
-                                }
-                                Section {
                                         NavigationLink(destination: FAQView()) {
-                                                Label("Frequently Asked Questions", systemImage: "questionmark.circle")
+                                                Label("FAQ", systemImage: "questionmark.circle")
                                         }
                                         NavigationLink(destination: PrivacyNoticeView()) {
                                                 Label("Privacy Notice", systemImage: "lock.circle")
