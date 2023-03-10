@@ -53,7 +53,6 @@ struct MacSearchView: View {
                                         .padding(8)
                                         .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                         .onAppear {
-                                                AppMaster.prepareDatabase()
                                                 isTextFieldFocused = true
                                         }
                                         .onChange(of: submittedText) { newText in
