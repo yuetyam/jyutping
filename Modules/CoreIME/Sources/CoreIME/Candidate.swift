@@ -68,32 +68,19 @@ public struct Candidate: Hashable {
                 self.type = .specialMark
         }
 
-        /// Create a Candidate with Emoji
+        /// Create a Candidate with a emoji or a symbol
         /// - Parameters:
-        ///   - emoji: Emoji
-        ///   - cantonese: Cantonese word for this Emoji
+        ///   - symbol: Emoji text or symbol text
+        ///   - cantonese: Cantonese word for this Emoji/Symbol
         ///   - romanization: Romanization (Jyutping) of Cantonese word
         ///   - input: User input
-        init(emoji: String, cantonese: String, romanization: String, input: String) {
-                self.text = emoji
-                self.romanization = romanization
-                self.input = input
-                self.lexiconText = cantonese
-                self.type = .emoji
-        }
-
-        /// Create a Candidate with symbol
-        /// - Parameters:
-        ///   - emoji: Symbol text
-        ///   - cantonese: Cantonese word for this symbol
-        ///   - romanization: Romanization (Jyutping) of Cantonese word
-        ///   - input: User input
-        init(symbol: String, cantonese: String, romanization: String, input: String) {
+        ///   - isEmoji: Emoji or symbol
+        init(symbol: String, cantonese: String, romanization: String, input: String, isEmoji: Bool) {
                 self.text = symbol
                 self.romanization = romanization
                 self.input = input
                 self.lexiconText = cantonese
-                self.type = .symbol
+                self.type = isEmoji ? .emoji : .symbol
         }
 
         /// Create a Candidate for keyboard compose

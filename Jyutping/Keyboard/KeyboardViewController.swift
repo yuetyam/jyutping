@@ -683,10 +683,11 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         let shouldContinue: Bool = needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return normal }
-                        let emojis: [Candidate] = Engine.searchEmojis(for: bufferText)
-                        for emoji in emojis.reversed() {
-                                if let index = normal.firstIndex(where: { $0.lexiconText == emoji.lexiconText }) {
-                                        normal.insert(emoji, at: index + 1)
+                        let symbols: [Candidate] = Engine.searchEmojiSymbols(for: bufferText)
+                        guard !(symbols.isEmpty) else { return normal }
+                        for symbol in symbols.reversed() {
+                                if let index = normal.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
+                                        normal.insert(symbol, at: index + 1)
                                 }
                         }
                         return normal
@@ -710,7 +711,7 @@ final class KeyboardViewController: UIInputViewController {
 
         func clearUserLexicon() {
                 UserLexicon.deleteAll()
-                Emoji.clearFrequent()
+                EmojiMaster.clearFrequent()
         }
 
 

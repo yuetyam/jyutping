@@ -23,18 +23,8 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 } else if collectionView == sidebarCollectionView {
                         return 20
                 } else {
-                        switch section {
-                        case 0: return Emoji.frequent.count
-                        case 1: return Emoji.sequences[0].count  // 480 Smileys & People
-                        case 2: return Emoji.sequences[1].count  // 204 Animals & Nature
-                        case 3: return Emoji.sequences[2].count  // 126 Food & Drink
-                        case 4: return Emoji.sequences[3].count  // 118 Activity
-                        case 5: return Emoji.sequences[4].count  // 131 Travel & Places
-                        case 6: return Emoji.sequences[5].count  // 222 Objects
-                        case 7: return Emoji.sequences[6].count  // 293 Symbols
-                        case 8: return Emoji.sequences[7].count  // 259 Flags
-                        default: return 0
-                        }
+                        guard let category = Emoji.Category(rawValue: section) else { return EmojiMaster.frequent.count }
+                        return EmojiMaster.emojis[category]?.count ?? 0
                 }
         }
 
@@ -46,10 +36,13 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         switch indexPath.section {
                         case 0:
                                 let index: Int = indexPath.row
-                                let emoji: String = Emoji.frequent.fetch(index) ?? "?"
+                                let emoji: String = EmojiMaster.frequent.fetch(index) ?? "?"
                                 cell.emojiLabel.text = emoji
                         default:
-                                let emoji: String = Emoji.sequences.fetch(indexPath.section - 1)?.fetch(indexPath.row) ?? "?"
+                                let emoji: String = {
+                                        guard let category = Emoji.Category(rawValue: indexPath.section) else { return "?" }
+                                        return EmojiMaster.emojis[category]?.fetch(indexPath.row) ?? "?"
+                                }()
                                 cell.emojiLabel.text = emoji
                         }
                         return cell
@@ -65,9 +58,6 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 cell.textLabel.text = "ping"
                         case 3:
                                 cell.textLabel.text = "?"
-                        case 4...8:
-                                let emoji: String = Emoji.sequences[0][indexPath.row]
-                                cell.textLabel.text = emoji
                         default:
                                 cell.textLabel.text = "row \(indexPath.row)"
                         }
@@ -149,7 +139,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                         textDocumentProxy.insertText(emoji)
                         triggerHapticFeedback()
                         AudioFeedback.perform(.input)
-                        Emoji.updateFrequent(latest: emoji)
+                        EmojiMaster.updateFrequent(latest: emoji)
                         return
                 }
                 guard collectionView != sidebarCollectionView else {

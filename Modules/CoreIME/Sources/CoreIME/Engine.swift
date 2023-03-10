@@ -36,7 +36,7 @@ public struct Engine {
                 createComposeTable()
                 createPinyinTable()
                 createShapeTable()
-                createEmojiTable()
+                createSymbolTable()
                 createMetaTable(appVersion: appVersion)
                 isDatabaseReady = true
                 createIndies()
@@ -141,7 +141,8 @@ private extension Engine {
                         "CREATE INDEX pinyinpinindex ON pinyintable(pin);",
                         "CREATE INDEX shapecangjieindex ON shapetable(cangjie);",
                         "CREATE INDEX shapestrokeindex ON shapetable(stroke);",
-                        "CREATE INDEX emojipingindex ON emojitable(ping);"
+                        "CREATE INDEX symbolshortcutindex ON symboltable(shortcut);",
+                        "CREATE INDEX symbolpingindex ON symboltable(ping);"
                 ]
                 for command in commands {
                         var statement: OpaquePointer? = nil
@@ -258,137 +259,31 @@ private extension Engine {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        static func createEmojiTable() {
-                let createTable: String = "CREATE TABLE emojitable(emoji TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL);"
+        static func createSymbolTable() {
+                let createTable: String = "CREATE TABLE symboltable(category INTEGER NOT NULL, codepoint TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                guard let url = Bundle.module.url(forResource: "emoji", withExtension: "txt") else { return }
+                guard let url = Bundle.module.url(forResource: "symbol", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.map { sourceLine -> String? in
-                        // TODO: replace , with tab
-                        let parts = sourceLine.split(separator: ",")
-                        guard parts.count == 4 else { return nil }
-                        let word = parts[0]
-                        let cantonese = parts[1]
-                        let romanization = parts[2]
-                        let ping = parts[3]
-                        return "('\(word)', '\(cantonese)', '\(romanization)', \(ping))"
+                        let parts = sourceLine.split(separator: "\t")
+                        guard parts.count == 6 else { return nil }
+                        let category = parts[0]
+                        let codepoint = parts[1]
+                        let cantonese = parts[2]
+                        let romanization = parts[3]
+                        let shortcut = parts[4]
+                        let ping = parts[5]
+                        return "(\(category), '\(codepoint)', '\(cantonese)', '\(romanization)', \(shortcut), \(ping))"
                 }
                 let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
-                let insert: String = "INSERT INTO emojitable (emoji, cantonese, romanization, ping) VALUES \(values);"
+                let insert: String = "INSERT INTO symboltable (category, codepoint, cantonese, romanization, shortcut, ping) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
 }
-
-
-extension Engine {
-
-        public static func searchEmojis(for text: String) -> [Candidate] {
-                guard Engine.isDatabaseReady else { return [] }
-                let regularMatch = matchEmojis(for: text)
-                guard regularMatch.isEmpty else { return regularMatch }
-                let convertedText: String = text.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
-                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                        .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
-                        .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
-                        .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
-                        .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
-                        .replacingOccurrences(of: "y", with: "j", options: .anchored)
-                return matchEmojis(for: convertedText)
-        }
-
-        private static func matchEmojis(for text: String) -> [Candidate] {
-                var candidates: [Candidate] = []
-                let queryString = "SELECT emoji, cantonese, romanization FROM emojitable WHERE ping = \(text.hash);"
-                var queryStatement: OpaquePointer? = nil
-                defer {
-                        sqlite3_finalize(queryStatement)
-                }
-                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let emojiCodeText: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let cantonese: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                if let emoji: String = transform(codes: emojiCodeText) {
-                                        let instance = Candidate(emoji: emoji, cantonese: cantonese, romanization: romanization, input: text)
-                                        candidates.append(instance)
-                                }
-                        }
-                }
-                return candidates
-        }
-
-        private static func transform(codes: String) -> String? {
-                let blocks: [String] = codes.components(separatedBy: ".")
-                switch blocks.count {
-                case 0, 1:
-                        guard let character = character(from: codes) else { return nil }
-                        return String(character)
-                default:
-                        let characters = blocks.map({ character(from: $0) })
-                        let found = characters.compactMap({ $0 })
-                        guard found.count == characters.count else { return nil }
-                        return String(found)
-                }
-        }
-
-        /// Create a Character from the given Unicode Code Point String, e.g. 1F600
-        private static func character(from codePoint: String) -> Character? {
-                guard let u32 = UInt32(codePoint, radix: 16) else { return nil }
-                guard let scalar = Unicode.Scalar(u32) else { return nil }
-                return Character(scalar)
-        }
-}
-
-
-extension Engine {
-
-
-        /// Search special mark for text
-        /// - Parameter text: Input text
-        /// - Returns: Candidate, type == .specialMark
-        public static func searchMark(for text: String) -> Candidate? {
-                let key: String = text.lowercased()
-                guard let markText = specialMarks[key] else { return nil }
-                return Candidate(mark: markText)
-        }
-
-        private static let specialMarks: [String: String] = {
-                let values: [String] = [
-                        "iOS",
-                        "iPadOS",
-                        "macOS",
-                        "watchOS",
-                        "tvOS",
-                        "iPhone",
-                        "iPad",
-                        "iPod",
-                        "iMac",
-                        "MacBook",
-                        "HomePod",
-                        "AirPods",
-                        "AirTag",
-                        "iCloud",
-                        "FaceTime",
-                        "iMessage",
-                        "SwiftUI",
-                        "GitHub",
-                        "PayPal",
-                        "WhatsApp",
-                        "YouTube",
-                        "Canton",
-                        "Cantonese",
-                        "Cantonia"
-                ]
-                let keys: [String] = values.map({ $0.lowercased() })
-                let dict: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, values))
-                return dict
-        }()
-}
-

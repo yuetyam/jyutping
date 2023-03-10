@@ -252,13 +252,8 @@ extension KeyboardViewController {
                 AudioFeedback.perform(.modify)
                 _ = emojiBoard.indicatorsStackView.arrangedSubviews.filter({ $0.tintColor != .systemGray }).map({ $0.tintColor = .systemGray })
                 let indexPath: IndexPath = {
-                        if sender.index != 0 {
-                                return IndexPath(row: 15, section: sender.index)
-                        } else if Emoji.frequent.isEmpty {
-                                return IndexPath(row: 0, section: 1)
-                        } else {
-                                return IndexPath(row: 0, section: 0)
-                        }
+                        let row: Int = (sender.index == 0) ? 0 : 15
+                        return IndexPath(row: row, section: sender.index)
                 }()
                 emojiCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
                 emojiBoard.indicatorsStackView.arrangedSubviews[sender.index].tintColor = isDarkAppearance ? .white : .black
