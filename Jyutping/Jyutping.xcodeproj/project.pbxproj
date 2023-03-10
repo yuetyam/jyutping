@@ -119,7 +119,7 @@
 		37FC1B25294DF6AA00D7153F /* SaamPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AF9294DF6A900D7153F /* SaamPing.swift */; };
 		37FC1B26294DF6AA00D7153F /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AFA294DF6A900D7153F /* Operation.swift */; };
 		37FC1B27294DF6AA00D7153F /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AFB294DF6A900D7153F /* Logogram.swift */; };
-		37FC1B28294DF6AA00D7153F /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AFD294DF6A900D7153F /* Emoji.swift */; };
+		37FC1B28294DF6AA00D7153F /* EmojiMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AFD294DF6A900D7153F /* EmojiMaster.swift */; };
 		37FC1B29294DF6AA00D7153F /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AFE294DF6A900D7153F /* EmojiCell.swift */; };
 		37FC1B2A294DF6AA00D7153F /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1AFF294DF6A900D7153F /* EmojiBoard.swift */; };
 		37FC1B2B294DF6AA00D7153F /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B00294DF6A900D7153F /* UserLexicon.swift */; };
@@ -365,7 +365,7 @@
 		37FC1AF9294DF6A900D7153F /* SaamPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaamPing.swift; sourceTree = "<group>"; };
 		37FC1AFA294DF6A900D7153F /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		37FC1AFB294DF6A900D7153F /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
-		37FC1AFD294DF6A900D7153F /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		37FC1AFD294DF6A900D7153F /* EmojiMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiMaster.swift; sourceTree = "<group>"; };
 		37FC1AFE294DF6A900D7153F /* EmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
 		37FC1AFF294DF6A900D7153F /* EmojiBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
 		37FC1B00294DF6A900D7153F /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
@@ -852,7 +852,7 @@
 		37FC1AFC294DF6A900D7153F /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
-				37FC1AFD294DF6A900D7153F /* Emoji.swift */,
+				37FC1AFD294DF6A900D7153F /* EmojiMaster.swift */,
 				37FC1AFE294DF6A900D7153F /* EmojiCell.swift */,
 				37FC1AFF294DF6A900D7153F /* EmojiBoard.swift */,
 			);
@@ -1400,7 +1400,7 @@
 				37FC1B32294DF6AA00D7153F /* ToolButton.swift in Sources */,
 				37FC1B2C294DF6AA00D7153F /* KeyboardInterface.swift in Sources */,
 				37FC1B16294DF6AA00D7153F /* CalloutView.swift in Sources */,
-				37FC1B28294DF6AA00D7153F /* Emoji.swift in Sources */,
+				37FC1B28294DF6AA00D7153F /* EmojiMaster.swift in Sources */,
 				37FC1B1C294DF6AA00D7153F /* ShiftState.swift in Sources */,
 				37FC1B1B294DF6AA00D7153F /* KeyboardViewController.swift in Sources */,
 			);
@@ -1714,7 +1714,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -1737,7 +1737,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.22.0;
+				MARKETING_VERSION = 0.23.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1757,7 +1757,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -1780,7 +1780,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.22.0;
+				MARKETING_VERSION = 0.23.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1886,7 +1886,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -1898,7 +1898,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.22.0;
+				MARKETING_VERSION = 0.23.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1915,7 +1915,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -1927,7 +1927,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.22.0;
+				MARKETING_VERSION = 0.23.0;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1949,7 +1949,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -1966,7 +1966,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.22.0;
+				MARKETING_VERSION = 0.23.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1985,7 +1985,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 82;
+				CURRENT_PROJECT_VERSION = 83;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2002,7 +2002,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.22.0;
+				MARKETING_VERSION = 0.23.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
