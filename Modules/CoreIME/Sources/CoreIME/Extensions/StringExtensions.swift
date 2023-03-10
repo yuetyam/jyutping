@@ -5,28 +5,6 @@ extension String {
         static let empty: String = ""
         static let space: String = " "
 
-        var ping: Int64 {
-                return Int64(self.removedSpacesTones().hash)
-        }
-        var prefix: Int64 {
-                guard !self.isEmpty else { return Int64(self.hash) }
-                guard let lastSyllable: String = self.components(separatedBy: " ").last else { return Int64(self.hash) }
-                let leading: String = String(self.dropLast(lastSyllable.count - 1))
-                let raw: String = leading.removedSpacesTones()
-                return Int64(raw.hash)
-        }
-        var shortcut: Int64 {
-                let syllables: [String] = self.components(separatedBy: " ")
-                let initials: String = syllables.reduce("") { (result, syllable) -> String in
-                        if let first = syllable.first {
-                                return result + String(first)
-                        } else {
-                                return result
-                        }
-                }
-                return Int64(initials.hash)
-        }
-
         /// A subsequence that only contains tones (1-6)
         var tones: String {
                 return self.filter(\.isTone)
@@ -42,12 +20,5 @@ extension String {
         /// - Returns: A subsequence that leaves off the spaces and tones.
         func removedSpacesTones() -> String {
                 return self.filter({ !$0.isSpaceOrTone })
-        }
-
-        /// Convert to simplifier characters
-        @available(iOS, deprecated: 15.0, message: "Use Simplifier instead")
-        @available(macOS, deprecated: 12.0, message: "Use Simplifier instead")
-        var simplified: String {
-                return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true) ?? self
         }
 }
