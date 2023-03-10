@@ -23,7 +23,6 @@ private extension Array where Element == RowCandidate {
 extension Engine {
 
         public static func suggest(for text: String, segmentation: Segmentation) -> [Candidate] {
-                guard Engine.isDatabaseReady else { return [] }
                 switch text.count {
                 case 0:
                         return []

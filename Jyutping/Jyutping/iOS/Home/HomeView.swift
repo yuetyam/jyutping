@@ -132,7 +132,6 @@ struct HomeView: View {
                         .animation(.default, value: animationState)
                         .animation(.default, value: isGuideViewExpanded)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                                AppMaster.prepareDatabase()
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }
                                 let isContained: Bool =  keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
                                 if isKeyboardEnabled != isContained {

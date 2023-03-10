@@ -7,7 +7,6 @@ extension Engine {
         /// - Parameter text: Input text, e.g. "nihao"
         /// - Returns: An Array of CoreCandidate
         public static func pinyinLookup(for text: String) -> [Candidate] {
-                guard Engine.isDatabaseReady else { return [] }
                 guard !text.isEmpty else { return [] }
                 let words = search(pinyin: text)
                 let candidates = words.map { item -> [CoreCandidate] in

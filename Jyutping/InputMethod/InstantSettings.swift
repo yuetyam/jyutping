@@ -37,13 +37,6 @@ enum InputMethodMode: Int {
 
 struct InstantSettings {
 
-        /// Example: 1.0.1 (23)
-        static let appVersion: String = {
-                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.1.0"
-                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
-                return marketingVersion + " (" + currentProjectVersion + ")"
-        }()
-
         /// 全形 / 半形
         private(set) static var characterForm: CharacterForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: "character_form")

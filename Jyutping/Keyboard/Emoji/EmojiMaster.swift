@@ -6,8 +6,8 @@ struct EmojiMaster {
         private static let key: String = "emoji_frequent"
         private(set) static var frequent: [String] = {
                 let history = UserDefaults.standard.string(forKey: key)
-                guard let history else { return Emoji.defaultFrequent }
-                guard !(history.isEmpty) else { return Emoji.defaultFrequent }
+                guard let history else { return defaultFrequent }
+                guard !(history.isEmpty) else { return defaultFrequent }
                 guard history.contains(",") else { return [history] }
                 return history.split(separator: ",").map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
         }()
@@ -19,7 +19,7 @@ struct EmojiMaster {
                 UserDefaults.standard.set(frequentText, forKey: key)
         }
         static func clearFrequent() {
-                frequent = Emoji.defaultFrequent
+                frequent = defaultFrequent
                 let emptyText: String = ""
                 UserDefaults.standard.set(emptyText, forKey: key)
         }
@@ -33,4 +33,7 @@ struct EmojiMaster {
                 }
                 return dict
         }()
+
+
+        private static let defaultFrequent: [String] = ["👋", "👍", "👌", "✌️", "👏", "🤩", "😍", "😘", "🥰", "😋", "😎", "😇", "🤗", "😏", "🤔", "❤️", "💖", "💕", "💞", "🌹", "🌚", "👀", "🐶", "👻", "🤪", "🍻", "🔥", "✅", "💯", "🎉"]
 }

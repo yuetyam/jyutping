@@ -21,7 +21,6 @@ public struct Emoji: Hashable {
 extension Engine {
 
         public static func searchEmojiSymbols(for text: String) -> [Candidate] {
-                guard Engine.isDatabaseReady else { return [] }
                 let regular = matchSymbols(for: text)
                 guard regular.isEmpty else { return regular }
                 let convertedText: String = text.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
@@ -59,7 +58,6 @@ extension Engine {
         /// - Parameter category: Fetch all Emoji if category is nil
         /// - Returns: An Array of Emoji
         public static func fetchEmoji(category: Emoji.Category? = nil) -> [Emoji] {
-                guard Engine.isDatabaseReady else { return [] }
                 var emojis: [Emoji] = []
                 let tailQueryText: String = {
                         guard let categoryCode = category?.rawValue else { return "" }
@@ -110,41 +108,6 @@ extension Engine {
         }
 }
 
-extension Emoji {
-        public static let defaultFrequent: [String] = [
-                "👋",
-                "👍",
-                "👌",
-                "✌️",
-                "👏",
-                "🤩",
-                "😍",
-                "😘",
-                "🥰",
-                "😋",
-                "😎",
-                "😇",
-                "🤗",
-                "😏",
-                "🤔",
-                "❤️",
-                "💖",
-                "💕",
-                "💞",
-                "🌹",
-                "🌚",
-                "👀",
-                "🐶",
-                "👻",
-                "🤪",
-                "🍻",
-                "🔥",
-                "✅",
-                "💯",
-                "🎉",
-        ]
-}
-
 
 extension Engine {
 
@@ -159,34 +122,16 @@ extension Engine {
         }
 
         private static let specialMarks: [String: String] = {
-                let values: [String] = [
-                        "iOS",
-                        "iPadOS",
-                        "macOS",
-                        "watchOS",
-                        "tvOS",
-                        "iPhone",
-                        "iPad",
-                        "iPod",
-                        "iMac",
-                        "MacBook",
-                        "HomePod",
-                        "AirPods",
-                        "AirTag",
-                        "iCloud",
-                        "FaceTime",
-                        "iMessage",
-                        "SwiftUI",
-                        "GitHub",
-                        "PayPal",
-                        "WhatsApp",
-                        "YouTube",
-                        "Canton",
-                        "Cantonese",
-                        "Cantonia"
-                ]
-                let keys: [String] = values.map({ $0.lowercased() })
-                let dict: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, values))
+                guard let url = Bundle.module.url(forResource: "marks", withExtension: "txt") else { return [:] }
+                guard let content = try? String(contentsOf: url) else { return [:] }
+                let sourceLines: [String] = content
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                        .trimmingCharacters(in: .controlCharacters)
+                        .components(separatedBy: .newlines)
+                        .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
+                        .filter({ !$0.isEmpty })
+                let keys: [String] = sourceLines.map({ $0.lowercased() })
+                let dict: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, sourceLines))
                 return dict
         }()
 }

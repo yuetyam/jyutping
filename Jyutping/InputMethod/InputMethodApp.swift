@@ -2,10 +2,6 @@ import AppKit
 import InputMethodKit
 import CoreIME
 
-extension DispatchQueue {
-        static let dataQueue: DispatchQueue = DispatchQueue(label: "org.jyutping.inputmethod.Jyutping.data", qos: .userInitiated)
-}
-
 final class PrincipalApplication: NSApplication {
 
         private let appDelegate = AppDelegate()
@@ -29,9 +25,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 // let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org_jyutping_inputmethod_Jyutping_1_Connection"
                 let name: String = "org_jyutping_inputmethod_Jyutping_1_Connection"
                 server = IMKServer(name: name, bundleIdentifier: Bundle.main.bundleIdentifier)
-                DispatchQueue.dataQueue.async {
-                        Engine.prepare(appVersion: InstantSettings.appVersion)
-                }
         }
 
         private func handleCommandLineArguments() {

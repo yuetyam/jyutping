@@ -45,10 +45,8 @@ final class JyutpingInputController: IMKInputController {
                 DispatchQueue.main.async { [weak self] in
                         self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
-                DispatchQueue.dataQueue.async {
-                        Engine.prepare(appVersion: InstantSettings.appVersion)
-                }
                 UserLexicon.prepare()
+                Engine.prepare()
                 if InputState.current.isSwitches {
                         InputState.updateCurrent()
                 }
@@ -168,6 +166,12 @@ final class JyutpingInputController: IMKInputController {
                 }
         }
         private(set) lazy var processingText: String = .empty {
+                willSet {
+                        let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
+                        guard isStarting else { return }
+                        UserLexicon.prepare()
+                        Engine.prepare()
+                }
                 didSet {
                         switch processingText.first {
                         case .none:

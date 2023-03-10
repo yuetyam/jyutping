@@ -7,7 +7,6 @@ extension Engine {
         /// - Parameter text: Input text, e.g. "mukdaan"
         /// - Returns: An Array of CoreCandidate
         public static func leungFanLookup(for text: String) -> [Candidate] {
-                guard Engine.isDatabaseReady else { return [] }
                 guard !text.isEmpty else { return [] }
                 let words = match(for: text).uniqued()
                 let candidates = words.map { item -> [CoreCandidate] in

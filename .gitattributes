@@ -26,5 +26,6 @@
 *.otc binary
 
 # Swift Package Resources
-/Modules/Materials/Sources/Materials/Resources/** binary
 /Modules/CoreIME/Sources/CoreIME/Resources/** binary
+/Modules/Materials/Sources/Materials/Resources/** binary
+/Modules/Prepare/Sources/Prepare/Resources/** binary

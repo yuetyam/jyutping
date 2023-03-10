@@ -61,6 +61,10 @@ Package.resolved
 .idea/
 
 
+### Generated Databases ###
+*.sqlite3
+
+
 ### Mac IME Packaging ###
 *.zip
 *.pkg

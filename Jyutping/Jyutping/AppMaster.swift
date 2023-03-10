@@ -90,13 +90,6 @@ extension AppMaster {
 
 extension AppMaster {
 
-        private static let dataQueue: DispatchQueue = DispatchQueue(label: "im.cantonese.CantoneseIM.data", qos: .userInitiated)
-        static func prepareDatabase() {
-                dataQueue.async {
-                        DataMaster.prepare(appVersion: version)
-                }
-        }
-
         /// Lookup YingWaaFanWan for the given text
         /// - Parameter text: Character to Lookup
         /// - Returns: An Array of YingWaaFanWan

@@ -3,7 +3,6 @@ import SQLite3
 
 private extension Engine {
         static func matchT2S(_ character: Character) -> String {
-                guard Engine.isDatabaseReady else { return String(character) }
                 let code: UInt32 = character.unicodeScalars.first?.value ?? 0
                 let queryString = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
                 var queryStatement: OpaquePointer? = nil
