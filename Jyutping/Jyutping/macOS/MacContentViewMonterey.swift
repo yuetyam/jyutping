@@ -82,15 +82,15 @@ struct MacContentViewMonterey: View {
                                         } label: {
                                                 Label("Fatshan Metro", systemImage: "tram.circle")
                                         }
+                                } header: {
+                                        Text("Materials").textCase(nil)
+                                }
+                                Section {
                                         NavigationLink {
                                                 MacResourcesView().visualEffect()
                                         } label: {
                                                 Label("Resources", systemImage: "globe.asia.australia")
                                         }
-                                } header: {
-                                        Text("Materials").textCase(nil)
-                                }
-                                Section {
                                         NavigationLink {
                                                 MacAboutView().visualEffect()
                                         } label: {

@@ -48,11 +48,11 @@ struct MacContentView: View {
                                         Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
                                         Label("Canton Metro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
                                         Label("Fatshan Metro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
-                                        Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
                                 } header: {
                                         Text("Materials").textCase(nil)
                                 }
                                 Section {
+                                        Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
                                         Label("About", systemImage: "info.circle").tag(ViewIdentifier.about)
                                 } header: {
                                         Text("About").textCase(nil)
@@ -114,8 +114,8 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case solarTerms
         case cantonMetro
         case fatshanMetro
-        case resources
 
+        case resources
         case about
 
         var id: Int {
