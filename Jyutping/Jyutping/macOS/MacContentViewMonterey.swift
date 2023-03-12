@@ -82,8 +82,18 @@ struct MacContentViewMonterey: View {
                                         } label: {
                                                 Label("Fatshan Metro", systemImage: "tram.circle")
                                         }
+                                        NavigationLink {
+                                                MacShamChunMetroView().visualEffect()
+                                        } label: {
+                                                Label("Sham Chun Metro", systemImage: "tram.circle")
+                                        }
+                                        NavigationLink {
+                                                MacHongKongMTRView().visualEffect()
+                                        } label: {
+                                                Label("Hong Kong MTR", systemImage: "tram.circle")
+                                        }
                                 } header: {
-                                        Text("Materials").textCase(nil)
+                                        Text("Cantonese").textCase(nil)
                                 }
                                 Section {
                                         NavigationLink {

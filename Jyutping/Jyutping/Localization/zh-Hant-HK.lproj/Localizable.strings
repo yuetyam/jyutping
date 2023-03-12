@@ -75,7 +75,7 @@
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 
-// MARK: - Jyutping Lookup
+// MARK: - Jyutping
 
 "Search Pronunciation" = "查字音";
 
@@ -84,22 +84,21 @@
 "Jyutping Tones" = "粵拼聲調表";
 
 
-// MARK: - Materials. / iOS Cantonese.
+// MARK: - Cantonese
 
-"Materials" = "材料";
 "Numbers" = "數字";
 "Stems and Branches" = "天干地支";
 "Chinese Zodiac" = "十二生肖";
 "Solar Terms" = "二十四節氣";
 "Canton Metro" = "廣州地鐵";
 "Fatshan Metro" = "佛山地鐵";
+"Sham Chun Metro" = "深圳地鐵";
+"Hong Kong MTR" = "港鐵";
 
-"Cantonese Resources" = "粵語相關網站";
+
+// MARK: - About
 
 "Resources" = "資源";
-
-
-// MARK: - About (iOS & macOS)
 
 "Version" = "版本";
 "Website" = "網站";

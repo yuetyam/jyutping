@@ -30,22 +30,26 @@ struct CantoneseView: View {
                                         NavigationLink(destination: SolarTermsView()) {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }
+                                }
+                                Section {
                                         NavigationLink(destination: IOSCantonMetroView()) {
                                                 Label("Canton Metro", systemImage: "tram.circle")
                                         }
                                         NavigationLink(destination: IOSFatshanMetroView()) {
                                                 Label("Fatshan Metro", systemImage: "tram.circle")
                                         }
-                                } header: {
-                                        Text("Materials").textCase(nil)
+                                        NavigationLink(destination: IOSShamChunMetroView()) {
+                                                Label("Sham Chun Metro", systemImage: "tram.circle")
+                                        }
+                                        NavigationLink(destination: IOSHongKongMTRView()) {
+                                                Label("Hong Kong MTR", systemImage: "tram.circle")
+                                        }
                                 }
 
                                 Section {
                                         ExtendedLinkLabel(title: "冚唪唥粵文", footnote: "hambaanglaang.hk", address: "https://hambaanglaang.hk")
                                         ExtendedLinkLabel(title: "學識 Hok6", footnote: "www.hok6.com", address: "https://www.hok6.com")
                                         ExtendedLinkLabel(title: "迴響", footnote: "resonate.hk", address: "https://resonate.hk")
-                                } header: {
-                                        Text("Cantonese Resources").textCase(nil)
                                 }
                         }
                         .animation(.default, value: animationState)

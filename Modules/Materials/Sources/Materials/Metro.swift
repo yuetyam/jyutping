@@ -23,6 +23,8 @@ public struct Metro {
 
         public static let cantonMetroLines: [Line] = fetch("CantonMetro")
         public static let fatshanMetroLines: [Line] = fetch("FatshanMetro")
+        public static let shamchunMetroLines: [Line] = fetch("ShamChunMetro")
+        public static let hongkongMTRLines: [Line] = fetch("HongKongMTR")
 
         private static func fetch(_ name: String) -> [Line] {
                 guard let url = Bundle.module.url(forResource: name, withExtension: "yaml") else { return [] }

@@ -46,6 +46,7 @@ struct NumbersView: View {
                 九,gau2
                 幾,gei2
                 十,sap6
+                廿,jaa6
                 百,baak3
                 千,cin1
                 萬,maan6

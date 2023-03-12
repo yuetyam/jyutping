@@ -76,7 +76,7 @@
 "privacy.notice.footer" = "TLDR: We do NOT collect or share personal information.";
 
 
-// MARK: - Jyutping Lookup
+// MARK: - Jyutping
 
 "Search Pronunciation" = "Search Pronunciation";
 
@@ -85,22 +85,21 @@
 "Jyutping Tones" = "Jyutping Tones";
 
 
-// MARK: - Materials. / iOS Cantonese.
+// MARK: - Cantonese
 
-"Materials" = "Materials";
 "Numbers" = "Numbers";
 "Stems and Branches" = "Stems & Branches";
 "Chinese Zodiac" = "Chinese Zodiac";
 "Solar Terms" = "Solar Terms";
 "Canton Metro" = "Canton Metro";
 "Fatshan Metro" = "Fatshan Metro";
+"Sham Chun Metro" = "Sham Chun Metro";
+"Hong Kong MTR" = "Hong Kong MTR";
 
-"Cantonese Resources" = "Cantonese Resources";
+
+// MARK: - About
 
 "Resources" = "Resources";
-
-
-// MARK: - About (iOS & macOS)
 
 "Version" = "Version";
 "Website" = "Website";
