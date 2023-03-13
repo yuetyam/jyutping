@@ -22,68 +22,77 @@ private extension Engine {
 struct Simplifier {
 
         static func convert(_ text: String) -> String {
-                switch text.first {
-                case .none:
+                switch text.count {
+                case 0:
                         return text
-                case .some(let character) where text.count == 1:
-                        return Engine.matchT2S(character)
+                case 1:
+                        return Engine.matchT2S(text.first!)
+                case 2:
+                        return phrases[text] ?? text.map(Engine.matchT2S(_:)).joined()
                 default:
-                        return transform(text)
+                        return phrases[text] ?? transform(text)
                 }
         }
 
-        // TODO: Reimplement with recursion
         private static func transform(_ text: String) -> String {
-                let stepOne = replace(text, replacement: "X")
-                guard !(stepOne.matched.isEmpty) else {
-                        let newCharacters: [String] = text.map({ Engine.matchT2S($0) })
-                        let transformed: String = newCharacters.joined()
-                        return transformed
+                let roundOne = replace(text, replacement: "W")
+                guard !(roundOne.matched.isEmpty) else {
+                        return text.map(Engine.matchT2S(_:)).joined()
                 }
 
-                let stepTwo = replace(stepOne.modified, replacement: "Y")
-                guard !(stepTwo.matched.isEmpty) else {
-                        let newCharacters: [String] = stepTwo.modified.map({ Engine.matchT2S($0) })
-                        let transformed: String = newCharacters.joined()
-                        let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
+                let roundTwo = replace(roundOne.modified, replacement: "X")
+                guard !(roundTwo.matched.isEmpty) else {
+                        let transformed: String = roundTwo.modified.map(Engine.matchT2S(_:)).joined()
+                        let reverted: String = transformed.replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         return reverted
                 }
 
-                let stepThree = replace(stepTwo.modified, replacement: "Z")
-                guard !(stepThree.matched.isEmpty) else {
-                        let newCharacters: [String] = stepTwo.modified.map({ Engine.matchT2S($0) })
-                        let transformed: String = newCharacters.joined()
-                        let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
-                                .replacingOccurrences(of: stepTwo.replacement, with: stepTwo.matched)
+                let roundThree = replace(roundTwo.modified, replacement: "Y")
+                guard !(roundThree.matched.isEmpty) else {
+                        let transformed: String = roundThree.modified.map(Engine.matchT2S(_:)).joined()
+                        let reverted: String = transformed
+                                .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
+                                .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
                         return reverted
                 }
 
-                let newCharacters: [String] = stepThree.modified.map({ Engine.matchT2S($0) })
-                let transformed: String = newCharacters.joined()
-                let reverted: String = transformed.replacingOccurrences(of: stepOne.replacement, with: stepOne.matched)
-                        .replacingOccurrences(of: stepTwo.replacement, with: stepTwo.matched)
-                        .replacingOccurrences(of: stepThree.replacement, with: stepThree.matched)
+                let roundFour = replace(roundThree.modified, replacement: "Z")
+                guard !(roundFour.matched.isEmpty) else {
+                        let transformed: String = roundFour.modified.map(Engine.matchT2S(_:)).joined()
+                        let reverted: String = transformed
+                                .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
+                                .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
+                                .replacingOccurrences(of: roundThree.replacement, with: roundThree.matched)
+                        return reverted
+                }
+
+                let transformed: String = roundFour.modified.map(Engine.matchT2S(_:)).joined()
+                let reverted: String = transformed
+                        .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
+                        .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
+                        .replacingOccurrences(of: roundThree.replacement, with: roundThree.matched)
+                        .replacingOccurrences(of: roundFour.replacement, with: roundFour.matched)
                 return reverted
         }
 
         private static func replace(_ text: String, replacement: String) -> (modified: String, matched: String, replacement: String) {
-                let possibleKeys: [String] = Simplifier.phrases.keys.filter({ $0.count <= text.count }).sorted(by: { $0.count > $1.count })
+                let keys: [String] = phrases.keys.filter({ $0.count <= text.count }).sorted(by: { $0.count > $1.count })
                 lazy var modified: String = text
                 lazy var matched: String = ""
-                for item in possibleKeys {
-                        if text.hasPrefix(item) {
-                                modified = text.replacingOccurrences(of: item, with: replacement)
-                                matched = Simplifier.phrases[item]!
+                for key in keys {
+                        if text.hasPrefix(key) {
+                                modified = text.replacingOccurrences(of: key, with: replacement)
+                                matched = phrases[key]!
                                 break
                         }
                 }
                 guard matched.isEmpty else {
                         return (modified, matched, replacement)
                 }
-                for item in possibleKeys {
-                        if text.contains(item) {
-                                modified = text.replacingOccurrences(of: item, with: replacement)
-                                matched = Simplifier.phrases[item]!
+                for key in keys {
+                        if text.contains(key) {
+                                modified = text.replacingOccurrences(of: key, with: replacement)
+                                matched = phrases[key]!
                                 break
                         }
                 }

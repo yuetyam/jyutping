@@ -1,12 +1,12 @@
 extension Candidate {
 
-        /// Convert Cantonese Candidate text to specific variant
+        /// Convert Cantonese Candidate text to the specific variant
         /// - Parameter variant: Character variant
         /// - Returns: Transformed Candidate
         public func transformed(to variant: Logogram) -> Candidate {
                 guard self.isCantonese else { return self }
-                let convertedText: String = Converter.convert(self.text, to: variant)
-                return Candidate(text: convertedText, romanization: self.romanization, input: self.input, lexiconText: self.lexiconText)
+                let convertedText: String = Converter.convert(text, to: variant)
+                return Candidate(text: convertedText, romanization: romanization, input: input, lexiconText: lexiconText)
         }
 }
 
