@@ -27,21 +27,18 @@ struct DisplayCandidate: Identifiable, Hashable {
                         self.comment = nil
                         self.secondaryComment = nil
                 case .emoji:
-                        let convertedText: String = Converter.convert(candidate.lexiconText, to: Logogram.current)
-                        let comment: String = "〔\(convertedText)〕"
+                        let comment: String = Converter.convert(candidate.lexiconText, to: Logogram.current)
                         self.text = text
                         self.comment = comment
                         self.secondaryComment = nil
                 case .symbol:
-                        let convertedText: String = Converter.convert(candidate.lexiconText, to: Logogram.current)
-                        let comment: String = "〔\(convertedText)〕"
+                        let comment: String = Converter.convert(candidate.lexiconText, to: Logogram.current)
                         self.text = text
                         self.comment = comment
                         self.secondaryComment = nil
                 case .compose:
-                        let originalComment: String = candidate.lexiconText
-                        lazy var convertedComment: String = Converter.convert(originalComment, to: Logogram.current)
-                        let comment: String? = originalComment.isEmpty ? nil : "〔\(convertedComment)〕"
+                        let commentText: String = candidate.lexiconText
+                        let comment: String? = commentText.isEmpty ? nil : Converter.convert(commentText, to: Logogram.current)
                         let secondaryComment: String? = candidate.romanization.isEmpty ? nil : candidate.romanization
                         self.text = text
                         self.comment = comment
