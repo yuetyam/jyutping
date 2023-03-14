@@ -93,22 +93,24 @@ extension KeyView {
                         return 48
                 case .phoneLandscape:
                         // iPhone SE1, iPod touch 7 (w480 x h320)
-                        let isSmallPhone: Bool = UIScreen.main.bounds.height < 350
+                        let isSmallPhone: Bool = UIScreen.main.bounds.size.height < 350
                         return isSmallPhone ? 36 : 40
                 case .phonePortrait:
-                        let screenWidth: CGFloat = UIScreen.main.bounds.width
+                        let screenWidth: CGFloat = UIScreen.main.bounds.size.width
                         if screenWidth < 350 {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
                         } else if screenWidth < 400 {
                                 // iPhone 6s, 7, 8, SE2, SE3 (375 x 667)
                                 // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
-                                // iPhone 12, 12 Pro, 13, 13 Pro (390 x 844)
+                                // iPhone 12, 12 Pro, 13, 13 Pro, 14 (390 x 844)
+                                // iPhone 14 Pro (393 x 852)
                                 return 53
                         } else {
                                 // iPhone 6s Plus, 7 Plus, 8 Plus (414 x 836)
                                 // iPhone Xr, Xs Max, 11, 11 Pro Max (414 x 896)
-                                // iPhone 12 Pro Max, 13 Pro Max (428 x 926)
+                                // iPhone 12 Pro Max, 13 Pro Max, 14 Plus (428 x 926)
+                                // iPhone 14 Pro Max (430 x 932)
                                 return 55
                         }
                 }
@@ -116,26 +118,27 @@ extension KeyView {
 
         var keyFont: UIFont {
                 // https://www.iosfontsizes.com
-                // https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/typography
+                // https://developer.apple.com/design/human-interface-guidelines/foundations/typography
                 let size: CGFloat = {
                         switch event {
-                        case .input(let seat) where seat.primary.text.count > 1:
+                        case .input(let seat):
+                                let isMultipleCharacters: Bool = seat.primary.text.count > 1
                                 switch keyboardInterface {
                                 case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
-                                        return 26
+                                        return isMultipleCharacters ? 26 : 28
                                 case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
-                                        return 24
+                                        return isMultipleCharacters ? 24 : 26
                                 default:
-                                        return 18
+                                        return isMultipleCharacters ? 18 : 24
                                 }
-                        case .input:
+                        case .space, .newLine:
                                 switch keyboardInterface {
                                 case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
-                                        return 28
+                                        return 20
                                 case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
-                                        return 26
+                                        return 18
                                 default:
-                                        return 24
+                                        return 16
                                 }
                         default:
                                 switch keyboardInterface {
@@ -148,7 +151,7 @@ extension KeyView {
                                 }
                         }
                 }()
-                return .systemFont(ofSize: size)
+                return UIFont.systemFont(ofSize: size)
         }
         var keyText: String? {
                 switch event {
