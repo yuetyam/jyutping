@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct IOSTableCell: View {
+struct IOSSyllableCell: View {
 
         init(_ line: String, placeholder: String, width: CGFloat) {
                 let parts: [String] = line.components(separatedBy: ",")
@@ -27,9 +27,7 @@ struct IOSTableCell: View {
                                         Text(verbatim: placeholder).hidden()
                                         Text(verbatim: example)
                                 }
-                                if !syllable.isEmpty {
-                                        Speaker(syllable)
-                                }
+                                Speaker(syllable)
                         }
                         .frame(width: width + 25, alignment: .leading)
 
@@ -43,7 +41,7 @@ struct IOSTableCell: View {
         }
 }
 
-struct MacTableCell: View {
+struct MacSyllableCell: View {
 
         init(_ line: String, placeholder: String) {
                 let parts: [String] = line.components(separatedBy: ",")
@@ -69,9 +67,7 @@ struct MacTableCell: View {
                                         Text(verbatim: placeholder).hidden()
                                         Text(verbatim: syllable)
                                 }
-                                if !syllable.isEmpty {
-                                        Speaker(syllable)
-                                }
+                                Speaker(syllable)
                         }
                         .frame(width: 170, alignment: .leading)
 

@@ -30,7 +30,7 @@ struct InitialTable: View {
                         LazyVStack(spacing: 2) {
                                 VStack {
                                         ForEach(0..<dataLines.count, id: \.self) { index in
-                                                MacTableCell(dataLines[index], placeholder: "gwaa4")
+                                                MacSyllableCell(dataLines[index], placeholder: "gwaa4")
                                         }
                                 }
                                 .block()
@@ -46,7 +46,7 @@ struct InitialTable: View {
                 List {
                         Section {
                                 ForEach(0..<dataLines.count, id: \.self) { index in
-                                        IOSTableCell(dataLines[index], placeholder: "瓜 gwaa4", width: width)
+                                        IOSSyllableCell(dataLines[index], placeholder: "瓜 gwaa4", width: width)
                                 }
                         } footer: {
                                 Text(verbatim: footnote).textCase(nil)

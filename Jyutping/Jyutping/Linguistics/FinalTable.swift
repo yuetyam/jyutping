@@ -36,7 +36,7 @@ struct FinalTable: View {
                                         let lines = blocks[blockIndex]
                                         VStack {
                                                 ForEach(0..<lines.count, id: \.self) { index in
-                                                        MacTableCell(lines[index], placeholder: macPlaceholder)
+                                                        MacSyllableCell(lines[index], placeholder: macPlaceholder)
                                                 }
                                         }
                                         .block()
@@ -47,8 +47,8 @@ struct FinalTable: View {
                                                 Spacer()
                                         }
                                         VStack {
-                                                MacTableCell("唔 m4,[ m̩ ],m", placeholder: macPlaceholder)
-                                                MacTableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: macPlaceholder)
+                                                MacSyllableCell("唔 m4,[ m̩ ],m", placeholder: macPlaceholder)
+                                                MacSyllableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: macPlaceholder)
                                         }
                                         .block()
                                 }
@@ -62,13 +62,13 @@ struct FinalTable: View {
                                 let lines = blocks[blockIndex]
                                 Section {
                                         ForEach(0..<lines.count, id: \.self) { index in
-                                                IOSTableCell(lines[index], placeholder: iOSPlaceholder, width: width)
+                                                IOSSyllableCell(lines[index], placeholder: iOSPlaceholder, width: width)
                                         }
                                 }
                         }
                         Section {
-                                IOSTableCell("唔 m4,[ m̩ ],m", placeholder: iOSPlaceholder, width: width)
-                                IOSTableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: iOSPlaceholder, width: width)
+                                IOSSyllableCell("唔 m4,[ m̩ ],m", placeholder: iOSPlaceholder, width: width)
+                                IOSSyllableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: iOSPlaceholder, width: width)
                         } header: {
                                 Text(verbatim: "鼻音單獨成韻")
                         }
@@ -105,7 +105,6 @@ private let sourceText: String = """
 悲 bei1,[ ei ],ei
 掉 deu6,[ ɛːu ],eu
 𦧷 lem2,[ ɛːm ],em
-？,[ en ],en
 鄭 zeng6,[ ɛːŋ ],eng
 夾 gep6,[ ɛːp̚ ],ep
 坺 pet6,[ ɛːt̚ ],et
@@ -130,16 +129,13 @@ private let sourceText: String = """
 .
 夫 fu1,[ uː ],u
 灰 fui1,[ uːi ],ui
-？,[ om ],um
 寬 fun1,[ uːn ],un
 封 fung1,[ oŋ ],ung
-？,[ op̚ ],up
 闊 fut3,[ uːt̚ ],ut
 福 fuk1,[ ok̚ ],uk
 .
 靴 hoe1,[ œː ],oe
 香 hoeng1,[ œːŋ ],oeng
-？,[ œːt̚ ],oet
 腳 goek3,[ œːk̚ ],oek
 .
 追 zeoi1,[ ɵy ],eoi
