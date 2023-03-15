@@ -77,7 +77,7 @@ struct MacContentView: View {
                         case .finals:
                                 FinalTable().visualEffect()
                         case .tones:
-                                ToneTable().visualEffect()
+                                MacToneTableView().visualEffect()
                         case .numbers:
                                 NumbersView().visualEffect()
                         case .stemsBranches:

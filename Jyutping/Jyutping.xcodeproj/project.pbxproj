@@ -12,6 +12,7 @@
 		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
 		3726E43C2999DCC4003E5842 /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E43B2999DCC4003E5842 /* CandidateWindow.swift */; };
 		3726E43E2999E073003E5842 /* Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E43D2999E073003E5842 /* Suggestions.swift */; };
+		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
 		3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564929A744EA00468C2A /* IOSCantonMetroView.swift */; };
@@ -68,7 +69,7 @@
 		37D7BD81294CB4B3006A6ADD /* EnhancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD7E294CB4B3006A6ADD /* EnhancedLabel.swift */; };
 		37D7BD82294CB4B3006A6ADD /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD7F294CB4B3006A6ADD /* Speaker.swift */; };
 		37D7BD84294CB500006A6ADD /* AppMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD83294CB500006A6ADD /* AppMaster.swift */; };
-		37D7BD8A294CB61F006A6ADD /* ToneTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD86294CB61F006A6ADD /* ToneTable.swift */; };
+		37D7BD8A294CB61F006A6ADD /* IOSToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD86294CB61F006A6ADD /* IOSToneTableView.swift */; };
 		37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD87294CB61F006A6ADD /* InitialTable.swift */; };
 		37D7BD8C294CB61F006A6ADD /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD88294CB61F006A6ADD /* SyllableCell.swift */; };
 		37D7BD8D294CB61F006A6ADD /* FinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD89294CB61F006A6ADD /* FinalTable.swift */; };
@@ -243,6 +244,7 @@
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		3726E43B2999DCC4003E5842 /* CandidateWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
 		3726E43D2999E073003E5842 /* Suggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestions.swift; sourceTree = "<group>"; };
+		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
 		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		3768795B297826780006D0A6 /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
 		3773564929A744EA00468C2A /* IOSCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCantonMetroView.swift; sourceTree = "<group>"; };
@@ -318,7 +320,7 @@
 		37D7BD7E294CB4B3006A6ADD /* EnhancedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedLabel.swift; sourceTree = "<group>"; };
 		37D7BD7F294CB4B3006A6ADD /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		37D7BD83294CB500006A6ADD /* AppMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMaster.swift; sourceTree = "<group>"; };
-		37D7BD86294CB61F006A6ADD /* ToneTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneTable.swift; sourceTree = "<group>"; };
+		37D7BD86294CB61F006A6ADD /* IOSToneTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSToneTableView.swift; sourceTree = "<group>"; };
 		37D7BD87294CB61F006A6ADD /* InitialTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialTable.swift; sourceTree = "<group>"; };
 		37D7BD88294CB61F006A6ADD /* SyllableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllableCell.swift; sourceTree = "<group>"; };
 		37D7BD89294CB61F006A6ADD /* FinalTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTable.swift; sourceTree = "<group>"; };
@@ -729,7 +731,8 @@
 				37D7BD88294CB61F006A6ADD /* SyllableCell.swift */,
 				37D7BD87294CB61F006A6ADD /* InitialTable.swift */,
 				37D7BD89294CB61F006A6ADD /* FinalTable.swift */,
-				37D7BD86294CB61F006A6ADD /* ToneTable.swift */,
+				37D7BD86294CB61F006A6ADD /* IOSToneTableView.swift */,
+				374B615829C1E224006C49DC /* MacToneTableView.swift */,
 				37D7BD5A294CB182006A6ADD /* Syllable2IPA.swift */,
 			);
 			path = Linguistics;
@@ -1295,6 +1298,7 @@
 				3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */,
 				378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */,
 				37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */,
+				374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */,
 				37D7BD70294CB3A2006A6ADD /* SafariView.swift in Sources */,
 				37D7BD9E294CB6C6006A6ADD /* MacExpressionsView.swift in Sources */,
 				37E02E432955847200F7543F /* NumbersView.swift in Sources */,
@@ -1343,7 +1347,7 @@
 				3773564F29A769FC00468C2A /* MacStationLabel.swift in Sources */,
 				37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */,
 				378B2A7A29A76E0700456AE8 /* IOSMetroLineView.swift in Sources */,
-				37D7BD8A294CB61F006A6ADD /* ToneTable.swift in Sources */,
+				37D7BD8A294CB61F006A6ADD /* IOSToneTableView.swift in Sources */,
 				37D7BD82294CB4B3006A6ADD /* Speaker.swift in Sources */,
 				37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */,
 				37D7BD5F294CB1EE006A6ADD /* Device.swift in Sources */,

@@ -44,7 +44,7 @@ struct MacContentViewMonterey: View {
                                                 Label("Finals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
                                         NavigationLink {
-                                                ToneTable().visualEffect()
+                                                MacToneTableView().visualEffect()
                                         } label: {
                                                 Label("Tones", systemImage: "bell")
                                         }

@@ -19,7 +19,7 @@ struct JyutpingView: View {
                                         NavigationLink(destination: FinalTable()) {
                                                 Label("Jyutping Finals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
-                                        NavigationLink(destination: ToneTable()) {
+                                        NavigationLink(destination: IOSToneTableView()) {
                                                 Label("Jyutping Tones", systemImage: "bell")
                                         }
                                 }
