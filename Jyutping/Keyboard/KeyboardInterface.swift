@@ -1,4 +1,4 @@
-enum KeyboardInterface {
+enum KeyboardInterface: Int {
 
         case phonePortrait
         case phoneLandscape
@@ -14,7 +14,7 @@ enum KeyboardInterface {
         case padLandscapeMedium
         case padLandscapeLarge
 
-        /// `KeyboardInterface == .phonePortrait || .phoneLandscape || .padFloating`
+        /// .phonePortrait || .phoneLandscape || .padFloating
         var isCompact: Bool {
                 switch self {
                 case .phonePortrait, .phoneLandscape, .padFloating:
@@ -24,7 +24,6 @@ enum KeyboardInterface {
                 }
         }
 
-        /// `KeyboardInterface == .phonePortrait`
         var isPhonePortrait: Bool {
                 return self == .phonePortrait
         }

@@ -40,8 +40,8 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         return 1
                 case 3:
                         // Keyboard Layouts (Arrangements)
-                        // No TenKey keyboards for iPad
-                        return isPhone ? 3 : 2
+                        // Qwerty, SaamPing, 10 Key
+                        return 3
                 case 4:
                         // Jyutping Display
                         return 3
@@ -175,7 +175,7 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                                 cell.textLabel?.text = NSLocalizedString("Below Candidates", comment: .empty)
                                 cell.accessoryType = footnoteStyle == 2 ? .checkmark : .none
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("No Jyutpings", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("No Jyutping", comment: .empty)
                                 cell.accessoryType = footnoteStyle == 3 ? .checkmark : .none
                         default:
                                 break
@@ -204,16 +204,16 @@ extension KeyboardViewController: UITableViewDataSource, UITableViewDelegate {
                         let cell = tableView.dequeueReusableCell(withIdentifier: Identifiers.selectionSettingsCell, for: indexPath)
                         switch indexPath.row {
                         case 0:
-                                cell.textLabel?.text = NSLocalizedString("Insert a period", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("DoubleSpaceShortcut.Option1", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut < 2 ? .checkmark : .none
                         case 1:
-                                cell.textLabel?.text = NSLocalizedString("Insert an ideographic comma", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("DoubleSpaceShortcut.Option3", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut == 3 ? .checkmark : .none
                         case 2:
-                                cell.textLabel?.text = NSLocalizedString("Insert an ideographic space", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("DoubleSpaceShortcut.Option4", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut == 4 ? .checkmark : .none
                         case 3:
-                                cell.textLabel?.text = NSLocalizedString("No Double Space Shortcut", comment: .empty)
+                                cell.textLabel?.text = NSLocalizedString("DoubleSpaceShortcut.Option2", comment: .empty)
                                 cell.accessoryType = doubleSpaceShortcut == 2 ? .checkmark : .none
                         default:
                                 break

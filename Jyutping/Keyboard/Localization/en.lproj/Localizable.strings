@@ -15,14 +15,14 @@
 "Emoji Suggestions" = "Emoji Suggestions";
 
 "Keyboard Layout" = "Keyboard Layout";
-"QWERTY" = "QWERTY";
+"QWERTY" = "QWERTY (全鍵盤)";
 "SaamPing" = "SaamPing (三拼)";
 "10 Key" = "10 Key (九宮格)";
 
 "Jyutping Display" = "Jyutping Display";
 "Above Candidates" = "Above Candidates";
 "Below Candidates" = "Below Candidates";
-"No Jyutpings" = "None";
+"No Jyutping" = "None";
 
 "Jyutping Tones Display" = "Jyutping Tones Display";
 "ToneDisplayStyle.Option1" = "Normal         :  jyut6 ping3";
@@ -31,10 +31,10 @@
 "ToneDisplayStyle.Option4" = "Subscript    :  jyut₆ ping₃";
 
 "Space Double Tapping Shortcut" = "Space Double Tapping Shortcut";
-"Insert a period" = "Insert a Period (Full Stop)";
-"Insert an ideographic comma" = "Insert an Ideographic Comma";
-"Insert an ideographic space" = "Insert a Fullwidth Space (U+3000)";
-"No Double Space Shortcut" = "None";
+"DoubleSpaceShortcut.Option1" = "Insert a Period (Full Stop)";
+"DoubleSpaceShortcut.Option3" = "Insert an Ideographic Comma";
+"DoubleSpaceShortcut.Option4" = "Insert a Fullwidth Space (U+3000)";
+"DoubleSpaceShortcut.Option2" = "None";
 
 "Clear User Lexicon" = "Clear User Lexicon";
 
