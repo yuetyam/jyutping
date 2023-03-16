@@ -11,12 +11,12 @@ struct IOSToneTableView: View {
                 let spacing: CGFloat = (horizontalSize == .compact) ? 18 : 32
                 List {
                         Section {
+                                IOSToneTipView()
+                        }
+                        Section {
                                 ForEach(0..<dataLines.count, id: \.self) { index in
                                         IOSToneLabel(dataLines[index], spacing: spacing)
                                 }
-                        }
-                        Section {
-                                IOSToneTipView()
                         }
                         if #available(iOS 16.0, *) {
                                 Section {

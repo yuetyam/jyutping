@@ -6,50 +6,38 @@ struct InitialTable: View {
         @Environment(\.horizontalSizeClass) var horizontalSize
         #endif
 
-        private var responsiveWidth: CGFloat {
-                #if os(macOS)
-                return 144
-                #else
-                if Device.isPhone {
-                        return (UIScreen.main.bounds.width - 64) / 3.0
-                } else if horizontalSize == .compact {
-                        return 90
-                } else {
-                        return 120
-                }
-                #endif
-        }
-
         private let footnote: String = "註：零聲母無標記"
 
         var body: some View {
                 let dataLines: [String] = sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
-                let width: CGFloat = responsiveWidth
                 #if os(macOS)
                 ScrollView {
-                        LazyVStack(spacing: 2) {
+                        LazyVStack(spacing: 16) {
                                 VStack {
                                         ForEach(0..<dataLines.count, id: \.self) { index in
-                                                MacSyllableCell(dataLines[index], placeholder: "gwaa4")
+                                                MacSyllableCell(dataLines[index])
                                         }
                                 }
                                 .block()
                                 HStack {
-                                        Text(verbatim: footnote).font(.copilot).textSelection(.enabled).foregroundColor(.secondary)
+                                        Text(verbatim: footnote).font(.copilot).textSelection(.enabled)
                                         Spacer()
                                 }
+                                .block()
                         }
                         .padding()
                 }
                 .navigationTitle("Jyutping Initials")
                 #else
+                let spacing: CGFloat = (horizontalSize == .compact) ? 24 : 32
                 List {
                         Section {
                                 ForEach(0..<dataLines.count, id: \.self) { index in
-                                        IOSSyllableCell(dataLines[index], placeholder: "瓜 gwaa4", width: width)
+                                        IOSSyllableCell(dataLines[index], spacing: spacing)
                                 }
-                        } footer: {
-                                Text(verbatim: footnote).textCase(nil)
+                        }
+                        Section {
+                                Text(verbatim: footnote)
                         }
                 }
                 .navigationTitle("Jyutping Initials")
@@ -57,9 +45,8 @@ struct InitialTable: View {
                 #endif
         }
 
-
 private let sourceText: String = """
-例字,IPA,粵拼
+例字,國際音標,粵拼
 巴 baa1,[ p ],b
 趴 paa1,[ pʰ ],p
 媽 maa1,[ m ],m
@@ -81,6 +68,4 @@ private let sourceText: String = """
 也 jaa5,[ j ],j
 """
 
-
 }
-

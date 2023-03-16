@@ -4,29 +4,26 @@ import SwiftUI
 
 struct MacToneTableView: View {
         var body: some View {
+                let dataLines: [String] = Constant.toneSourceText.components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
                 ScrollView {
-                        LazyVStack(spacing: 32) {
+                        LazyVStack(spacing: 16) {
                                 MacToneTipView()
-                                if #available(macOS 13.0, *) {
-                                        HStack {
-                                                MacToneGridView()
-                                                Spacer()
-                                        }
-                                }
                                 VStack {
                                         ForEach(0..<dataLines.count, id: \.self) { index in
                                                 MacToneLabel(dataLines[index])
                                         }
                                 }
                                 .block()
+                                if #available(macOS 13.0, *) {
+                                        HStack {
+                                                MacToneGridView()
+                                                Spacer()
+                                        }
+                                }
                         }
                         .padding()
                 }
                 .navigationTitle("Jyutping Tones")
-        }
-
-        private var dataLines: [String] {
-                return Constant.toneSourceText.components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
         }
 }
 

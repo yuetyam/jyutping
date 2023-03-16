@@ -6,29 +6,13 @@ struct FinalTable: View {
         @Environment(\.horizontalSizeClass) var horizontalSize
         #endif
 
-        private var responsiveWidth: CGFloat {
-                #if os(macOS)
-                return 144
-                #else
-                if Device.isPhone {
-                        return (UIScreen.main.bounds.width - 64) / 3.0
-                } else if horizontalSize == .compact {
-                        return 90
-                } else {
-                        return 120
-                }
-                #endif
-        }
-
-        private let macPlaceholder: String = "hoeng4"
-        private let iOSPlaceholder: String = "香 hoeng4"
-
         var body: some View {
                 let blocks: [[String]] = sourceText
-                        .trimmingCharacters(in: .whitespacesAndNewlines)
                         .components(separatedBy: ".")
-                        .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) }) })
-                let width: CGFloat = responsiveWidth
+                        .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines)
+                                .components(separatedBy: .newlines)
+                                .map({ $0.trimmingCharacters(in: .whitespaces) })
+                        })
                 #if os(macOS)
                 ScrollView {
                         LazyVStack(spacing: 16) {
@@ -36,7 +20,7 @@ struct FinalTable: View {
                                         let lines = blocks[blockIndex]
                                         VStack {
                                                 ForEach(0..<lines.count, id: \.self) { index in
-                                                        MacSyllableCell(lines[index], placeholder: macPlaceholder)
+                                                        MacSyllableCell(lines[index])
                                                 }
                                         }
                                         .block()
@@ -47,8 +31,8 @@ struct FinalTable: View {
                                                 Spacer()
                                         }
                                         VStack {
-                                                MacSyllableCell("唔 m4,[ m̩ ],m", placeholder: macPlaceholder)
-                                                MacSyllableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: macPlaceholder)
+                                                MacSyllableCell("唔 m4,[ m̩ ],m")
+                                                MacSyllableCell("吳 ng4,[ ŋ̩ ],ng")
                                         }
                                         .block()
                                 }
@@ -57,18 +41,19 @@ struct FinalTable: View {
                 }
                 .navigationTitle("Jyutping Finals")
                 #else
+                let spacing: CGFloat = (horizontalSize == .compact) ? 24 : 32
                 List {
                         ForEach(0..<blocks.count, id: \.self) { blockIndex in
                                 let lines = blocks[blockIndex]
                                 Section {
                                         ForEach(0..<lines.count, id: \.self) { index in
-                                                IOSSyllableCell(lines[index], placeholder: iOSPlaceholder, width: width)
+                                                IOSSyllableCell(lines[index], spacing: spacing)
                                         }
                                 }
                         }
                         Section {
-                                IOSSyllableCell("唔 m4,[ m̩ ],m", placeholder: iOSPlaceholder, width: width)
-                                IOSSyllableCell("吳 ng4,[ ŋ̩ ],ng", placeholder: iOSPlaceholder, width: width)
+                                IOSSyllableCell("唔 m4,[ m̩ ],m", spacing: spacing)
+                                IOSSyllableCell("吳 ng4,[ ŋ̩ ],ng", spacing: spacing)
                         } header: {
                                 Text(verbatim: "鼻音單獨成韻")
                         }
@@ -78,9 +63,8 @@ struct FinalTable: View {
                 #endif
         }
 
-
 private let sourceText: String = """
-例字,IPA,粵拼
+例字,國際音標,粵拼
 渣 zaa1,[ aː ],aa
 齋 zaai1,[ aːi ],aai
 嘲 zaau1,[ aːu ],aau
@@ -147,6 +131,4 @@ private let sourceText: String = """
 雪 syut3,[ yːt̚ ],yut
 """
 
-
 }
-
