@@ -9,7 +9,7 @@ struct MacToneTableView: View {
                                 MacToneTipView()
                                 if #available(macOS 13.0, *) {
                                         HStack {
-                                                MacToneGrid()
+                                                MacToneGridView()
                                                 Spacer()
                                         }
                                 }
@@ -48,7 +48,7 @@ private struct MacToneTipView: View {
 }
 
 @available(macOS 13.0, *)
-private struct MacToneGrid: View {
+private struct MacToneGridView: View {
         var body: some View {
                 Grid(horizontalSpacing: 12, verticalSpacing: 8) {
                         GridRow {
