@@ -182,7 +182,7 @@ struct MacExpressionsView: View {
                                                                 Text(verbatim: "gam2").font(.fixedWidth)
                                                                 Speaker("gam2")
                                                         }
-                                                        Text(verbatim: "音同「感」。")
+                                                        Text(verbatim: "音同「錦」。")
                                                 }
                                                 HStack {
                                                         Text(verbatim: "例：我生得咁靚仔。")
