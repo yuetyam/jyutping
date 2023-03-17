@@ -8,9 +8,14 @@ struct Constant {
         static let IMingCP: String = "I.MingCP"
         static let IMing: String = "I.Ming"
         static let HanaMinB: String = "HanaMinB"
-}
 
-extension Constant {
+static let strokeKeyDefinitions: String = """
+w = 橫(waang)
+s = 豎(syu)
+a = 撇
+d = 點(dim)
+z = 折(zit)
+"""
 
 static let toneSourceText: String = """
 例字,調值,聲調,粵拼

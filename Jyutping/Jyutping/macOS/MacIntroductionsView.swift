@@ -5,13 +5,6 @@ import SwiftUI
 struct MacIntroductionsView: View {
 
         private let tonesInputDescription: String = NSLocalizedString("tones.input.description", comment: "")
-        private let strokes: String = """
-        w = 橫(waang)
-        s = 豎(syu)
-        a = 撇
-        d = 點(dim)
-        z = 折(zit)
-        """
 
         var body: some View {
                 ScrollView {
@@ -41,7 +34,7 @@ struct MacIntroductionsView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: strokes).font(.fixedWidth).lineSpacing(5)
+                                                Text(verbatim: Constant.strokeKeyDefinitions).font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                 }

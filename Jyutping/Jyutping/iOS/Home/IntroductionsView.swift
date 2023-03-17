@@ -6,10 +6,6 @@ struct IntroductionsView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("Lookup Jyutping with Loengfan").font(.significant)
-                                Text("Loengfan Reverse Lookup Description").lineSpacing(6)
-                        }
-                        Section {
                                 Text("Period (Full Stop) Shortcut").font(.significant)
                                 Text("Double tapping the space bar will insert a period followed by a space").lineSpacing(6)
                         }

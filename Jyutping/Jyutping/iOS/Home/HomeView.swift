@@ -12,14 +12,6 @@ struct HomeView: View {
         }()
         @State private var isGuideViewExpanded: Bool = false
 
-        private let strokes: String = """
-        w = 橫(waang)
-        s = 豎(syu)
-        a = 撇
-        d = 點(dim)
-        z = 折(zit)
-        """
-
         var body: some View {
                 NavigationView {
                         List {
@@ -107,9 +99,13 @@ struct HomeView: View {
                                                 Text("Pinyin Reverse Lookup Description").lineSpacing(6)
                                         }
                                         Section {
-                                                Text("Lookup Jyutping with Stroke").font(.significant).textSelection(.enabled)
-                                                Text("Stroke Reverse Lookup Description").lineSpacing(6).textSelection(.enabled)
-                                                Text(verbatim: strokes).font(.fixedWidth).lineSpacing(5)
+                                                Text("Lookup Jyutping with Stroke").font(.significant)
+                                                Text("Stroke Reverse Lookup Description").lineSpacing(6)
+                                                Text(verbatim: Constant.strokeKeyDefinitions).font(.fixedWidth).lineSpacing(5)
+                                        }
+                                        Section {
+                                                Text("Lookup Jyutping with Loengfan").font(.significant)
+                                                Text("Loengfan Reverse Lookup Description").lineSpacing(6)
                                         }
                                 }
                                 .textSelection(.enabled)
