@@ -48,7 +48,6 @@ struct CantoneseView: View {
 
                                 Section {
                                         ExtendedLinkLabel(title: "冚唪唥粵文", footnote: "hambaanglaang.hk", address: "https://hambaanglaang.hk")
-                                        ExtendedLinkLabel(title: "學識 Hok6", footnote: "www.hok6.com", address: "https://www.hok6.com")
                                         ExtendedLinkLabel(title: "迴響", footnote: "resonate.hk", address: "https://resonate.hk")
                                 }
                         }

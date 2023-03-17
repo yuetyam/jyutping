@@ -26,7 +26,6 @@ struct MacResourcesView: View {
 
                                 VStack {
                                         LinkView(icon: globeIcon, title: "冚唪唥粵文", url: "https://hambaanglaang.hk")
-                                        LinkView(icon: globeIcon, title: "學識 Hok6", url: "https://www.hok6.com")
                                         LinkView(icon: globeIcon, title: "迴響", url: "https://resonate.hk")
                                 }
                                 .block()

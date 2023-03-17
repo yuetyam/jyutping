@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-private struct RowCandidate {
+private struct RowCandidate: Hashable {
         let candidate: Candidate
         let row: Int
         let isExactlyMatch: Bool
@@ -131,23 +131,23 @@ extension Engine {
 
 private extension Engine {
 
-        // CREATE TABLE imetable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL, shortcut INTEGER NOT NULL, prefix INTEGER NOT NULL);
+        // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
         static func shortcut(for text: String, count: Int = 100) -> [CoreCandidate] {
                 guard !text.isEmpty else { return [] }
                 let textHash: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(textHash) LIMIT \(count);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                let query = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(textHash) LIMIT \(count);"
+                var statement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK {
+                        while sqlite3_step(statement) == SQLITE_ROW {
+                                let word: String = String(cString: sqlite3_column_text(statement, 0))
+                                let romanization: String = String(cString: sqlite3_column_text(statement, 1))
                                 let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
                                 candidates.append(candidate)
                         }
                 }
-                sqlite3_finalize(queryStatement)
+                sqlite3_finalize(statement)
                 return candidates
         }
 
@@ -171,17 +171,17 @@ private extension Engine {
         }
         private static func queryPing(for text: String, ping: String) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
-                let queryString = "SELECT word, romanization FROM lexicontable WHERE ping = \(ping.hash);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 1))
+                let query = "SELECT word, romanization FROM lexicontable WHERE ping = \(ping.hash);"
+                var statement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK {
+                        while sqlite3_step(statement) == SQLITE_ROW {
+                                let word: String = String(cString: sqlite3_column_text(statement, 0))
+                                let romanization: String = String(cString: sqlite3_column_text(statement, 1))
                                 let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
                                 candidates.append(candidate)
                         }
                 }
-                sqlite3_finalize(queryStatement)
+                sqlite3_finalize(statement)
                 return candidates
         }
 
@@ -205,19 +205,19 @@ private extension Engine {
         }
         private static func queryRowCandidate(for text: String, ping: String, isExactlyMatch: Bool) -> [RowCandidate] {
                 var rowCandidates: [RowCandidate] = []
-                let queryString = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(ping.hash);"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Engine.database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let rowid: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
+                let query = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(ping.hash);"
+                var statement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK {
+                        while sqlite3_step(statement) == SQLITE_ROW {
+                                let rowid: Int = Int(sqlite3_column_int64(statement, 0))
+                                let word: String = String(cString: sqlite3_column_text(statement, 1))
+                                let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                                 let candidate: CoreCandidate = CoreCandidate(text: word, romanization: romanization, input: text)
                                 let rowCandidate: RowCandidate = RowCandidate(candidate: candidate, row: rowid, isExactlyMatch: isExactlyMatch)
                                 rowCandidates.append(rowCandidate)
                         }
                 }
-                sqlite3_finalize(queryStatement)
+                sqlite3_finalize(statement)
                 return rowCandidates
         }
 }

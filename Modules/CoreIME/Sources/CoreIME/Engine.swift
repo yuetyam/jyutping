@@ -25,12 +25,12 @@ public struct Engine {
 
         private static var isWorking: Bool {
                 guard database != nil else { return false }
-                let text: String = "ngo"
+                let text = "ngo"
                 let code = text.hash
-                let queryString = "SELECT word FROM lexicontable WHERE ping = \(code) LIMIT 1;"
-                var queryStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(queryStatement) }
-                guard sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK else { return false }
-                return sqlite3_step(queryStatement) == SQLITE_ROW
+                let query = "SELECT word FROM lexicontable WHERE ping = \(code) LIMIT 1;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return false }
+                return sqlite3_step(statement) == SQLITE_ROW
         }
 }
