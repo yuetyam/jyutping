@@ -45,7 +45,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         private func activateIME() {
                 guard let inputSources = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
                 let inputSourceID: String = "org.jyutping.inputmethod.Jyutping"
-                let inputModeID: String = "org.jyutping.inputmethod.Jyutping.IME"
+                let inputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
                 for item in inputSources {
                         guard let pointer = TISGetInputSourceProperty(item, kTISPropertyInputSourceID) else { return }
                         let sourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String

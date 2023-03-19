@@ -1,5 +1,5 @@
 "org.jyutping.inputmethod.Jyutping" = "Jyutping";
-"org.jyutping.inputmethod.Jyutping.IME" = "Jyutping";
+"org.jyutping.inputmethod.Jyutping.JyutpingIM" = "Jyutping";
 CFBundleName = "Jyutping";
 CFBundleDisplayName = "Jyutping";
 CFBundleSpokenName = "YuetPing";

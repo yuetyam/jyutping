@@ -6,7 +6,7 @@
 	<dict>
 		<key>tsInputModeListKey</key>
 		<dict>
-			<key>org.jyutping.inputmethod.Jyutping.IME</key>
+			<key>org.jyutping.inputmethod.Jyutping.JyutpingIM</key>
 			<dict>
 				<key>TISIconLabels</key>
 				<dict>
@@ -14,7 +14,7 @@
 					<string>粵拼</string>
 				</dict>
 				<key>TISInputSourceID</key>
-				<string>org.jyutping.inputmethod.Jyutping.IME</string>
+				<string>org.jyutping.inputmethod.Jyutping.JyutpingIM</string>
 				<key>TISIntendedLanguage</key>
 				<string>yue</string>
 				<key>tsInputModeAlternateMenuIconFileKey</key>
@@ -37,7 +37,7 @@
 		</dict>
 		<key>tsVisibleInputModeOrderedArrayKey</key>
 		<array>
-			<string>org.jyutping.inputmethod.Jyutping.IME</string>
+			<string>org.jyutping.inputmethod.Jyutping.JyutpingIM</string>
 		</array>
 	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
