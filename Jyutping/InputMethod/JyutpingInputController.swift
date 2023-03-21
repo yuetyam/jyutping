@@ -194,15 +194,16 @@ final class JyutpingInputController: IMKInputController {
                                 markedText = processingText
                                 leungFanReverseLookup()
                         case .some(let character) where character.isBasicLatinLetter:
-                                segmentation = Segmentor.segment(processingText)
+                                segmentation = Segmentor.segment(text: processingText)
                                 markedText = {
-                                        guard !(processingText.contains("'")) else { return processingText.replacingOccurrences(of: "'", with: "' ") }
+                                        let isMarkFree: Bool = processingText.filter(\.isSeparatorOrTone).isEmpty
+                                        guard isMarkFree else { return processingText }
                                         guard let bestScheme = segmentation.first else { return processingText }
-                                        let leading: String = bestScheme.joined(separator: " ")
-                                        let isFullScheme: Bool = bestScheme.length == processingText.count
-                                        guard !isFullScheme else { return leading }
-                                        let tail = processingText.dropFirst(bestScheme.length)
-                                        return leading + " " + tail
+                                        let leadingLength: Int = bestScheme.length
+                                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                                        guard leadingLength != processingText.count else { return leadingText }
+                                        let tailText = processingText.dropFirst(leadingLength)
+                                        return leadingText + " " + tailText
                                 }()
                                 suggest()
                         default:

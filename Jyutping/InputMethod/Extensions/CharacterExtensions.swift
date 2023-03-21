@@ -17,4 +17,9 @@ extension Character {
         var isSeparator: Bool {
                 return self == "'"
         }
+
+        /// A Boolean value indicating whether this character represents a separator or a tone number.
+        var isSeparatorOrTone: Bool {
+                return self.isSeparator || self.isTone
+        }
 }

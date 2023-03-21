@@ -389,6 +389,7 @@ extension JyutpingInputController {
                 case .none:
                         break
                 case .some("r"), .some("v"), .some("x"), .some("q"):
+                        candidateSequence = []
                         if bufferText.count <= candidate.input.count + 1 {
                                 bufferText = .empty
                         } else {
@@ -398,37 +399,8 @@ extension JyutpingInputController {
                         }
                 default:
                         candidateSequence.append(candidate)
-                        let bufferTextLength: Int = bufferText.count
-                        let candidateInputText: String = {
-                                let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression)
-                                return converted
-                        }()
-                        let inputCount: Int = {
-                                let candidateInputCount: Int = candidateInputText.count
-                                guard bufferTextLength > 2 else { return candidateInputCount }
-                                guard candidateInputText.contains("jyu") else { return candidateInputCount }
-                                let suffixCount: Int = max(0, bufferTextLength - candidateInputCount)
-                                let leading = bufferText.dropLast(suffixCount)
-                                let modifiedLeading = leading.replacingOccurrences(of: "(c|d|h|j|l|s|z)yu(n|t)", with: "RRRR", options: .regularExpression)
-                                        .replacingOccurrences(of: "^(g|k|n|t)?yu(n|t)", with: "RRRR", options: .regularExpression)
-                                        .replacingOccurrences(of: "(?<!c|j|s|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
-                                return candidateInputCount - (modifiedLeading.count - leading.count)
-                        }()
-                        let difference: Int = bufferTextLength - inputCount
-                        guard difference > 0 else {
-                                bufferText = .empty
-                                return
-                        }
-                        let leading = bufferText.dropLast(difference)
-                        let filtered = leading.filter({ !$0.isSeparator })
-                        var tail: String.SubSequence = {
-                                if filtered.count == leading.count {
-                                        return bufferText.dropFirst(inputCount)
-                                } else {
-                                        let separatorsCount: Int = leading.count - filtered.count
-                                        return bufferText.dropFirst(inputCount + separatorsCount)
-                                }
-                        }()
+                        let inputCount: Int = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression).count
+                        var tail = bufferText.dropFirst(inputCount)
                         while tail.hasPrefix("'") {
                                 tail = tail.dropFirst()
                         }

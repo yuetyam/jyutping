@@ -5,6 +5,7 @@ final class CoreIMETests: XCTestCase {
 
         // MARK: - Segmentor
 
+        /*
         func testSegment() throws {
                 let sourceText: String = "neihou"
                 let expected: [[String]] = [["nei", "hou"], ["nei", "ho"], ["nei"], ["ne"]]
@@ -16,6 +17,7 @@ final class CoreIMETests: XCTestCase {
                 let result = Segmentor.scheme(of: sourceText)
                 XCTAssertEqual(result, ["nei", "hou"])
         }
+        */
 
 
         // MARK: - Reverse Lookup

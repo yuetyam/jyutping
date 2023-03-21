@@ -4,24 +4,17 @@ extension JyutpingInputController {
 
         func suggest() {
                 let engineCandidates: [Candidate] = {
-                        let convertedSegmentation: Segmentation = segmentation.converted()
-                        var normal: [Candidate] = Engine.suggest(for: processingText, segmentation: convertedSegmentation)
-                        let droppedLast = processingText.dropLast()
-                        let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
-                        guard !shouldDropSeparator else {
-                                let droppedSeparator: String = String(droppedLast)
-                                let newSchemes: [[String]] = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Engine.suggest(for: droppedSeparator, segmentation: newSchemes)
-                        }
-                        let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
-                        guard shouldContinue else { return normal }
+                        var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
+                        let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !suggestion.isEmpty && candidateSequence.isEmpty
+                        guard shouldContinue else { return suggestion }
                         let symbols: [Candidate] = Engine.searchEmojiSymbols(for: bufferText)
+                        guard !(symbols.isEmpty) else { return suggestion }
                         for symbol in symbols.reversed() {
-                                if let index = normal.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
-                                        normal.insert(symbol, at: index + 1)
+                                if let index = suggestion.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
+                                        suggestion.insert(symbol, at: index + 1)
                                 }
                         }
-                        return normal
+                        return suggestion
                 }()
                 let lexiconCandidates: [Candidate] = UserLexicon.suggest(for: processingText)
                 let combined: [Candidate] = lexiconCandidates + engineCandidates

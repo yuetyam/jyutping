@@ -22,6 +22,11 @@ extension Character {
                 return self.isSpace || self.isTone
         }
 
+        /// A Boolean value indicating whether this character represents a separator or a tone number.
+        var isSeparatorOrTone: Bool {
+                return self.isSeparator || self.isTone
+        }
+
         /// A Boolean value indicating whether this character represents a space / a tone number / a separator.
         var isSpaceOrToneOrSeparator: Bool {
                 return self.isSpace || self.isTone || self.isSeparator

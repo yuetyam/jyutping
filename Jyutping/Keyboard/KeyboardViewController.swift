@@ -382,17 +382,17 @@ final class KeyboardViewController: UIInputViewController {
                                 return possibleTexts.map({ $0 + letter })
                         }
                         possibleTexts = newPossibles.flatMap({ $0 })
-                        possibleTexts.sort { lhs, rhs in
-                                let lhsSyllables = Segmentor.scheme(of: lhs)
-                                let rhsSyllables = Segmentor.scheme(of: rhs)
-                                let lhsLength = lhsSyllables.joined().count
-                                let rhsLength = rhsSyllables.joined().count
+                        possibleTexts.sort(by: { (lhs, rhs) -> Bool in
+                                guard let lhsScheme = Segmentor.segment(text: lhs).first else { return false }
+                                guard let rhsScheme = Segmentor.segment(text: rhs).first else { return true }
+                                let lhsLength = lhsScheme.length
+                                let rhsLength = rhsScheme.length
                                 if lhsLength == rhsLength {
-                                        return lhsSyllables.count < lhsSyllables.count
+                                        return lhsScheme.count < rhsScheme.count
                                 } else {
                                         return lhsLength > rhsLength
                                 }
-                        }
+                        })
                         bufferText = possibleTexts.first!
                 }
         }
@@ -417,6 +417,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .none:
                         break
                 case .some("r"), .some("v"), .some("x"), .some("q"):
+                        candidateSequence = []
                         if bufferText.count <= candidate.input.count + 1 {
                                 bufferText = .empty
                         } else {
@@ -438,41 +439,15 @@ final class KeyboardViewController: UIInputViewController {
                                         UserLexicon.handle(concatenatedCandidate)
                                 }
                         }
-                        let bufferTextLength: Int = bufferText.count
-                        let candidateInputText: String = {
-                                if keyboardLayout == .saamPing {
-                                        return candidate.input
-                                } else {
-                                        let converted: String = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression)
-                                        return converted
-                                }
-                        }()
                         let inputCount: Int = {
-                                let candidateInputCount: Int = candidateInputText.count
-                                guard bufferTextLength > 2 else { return candidateInputCount }
-                                guard candidateInputText.contains("jyu") else { return candidateInputCount }
-                                let suffixCount: Int = max(0, bufferTextLength - candidateInputCount)
-                                let leading = bufferText.dropLast(suffixCount)
-                                let modifiedLeading = leading.replacingOccurrences(of: "(c|d|h|j|l|s|z)yu(n|t)", with: "RRRR", options: .regularExpression)
-                                        .replacingOccurrences(of: "^(g|k|n|t)?yu(n|t)", with: "RRRR", options: .regularExpression)
-                                        .replacingOccurrences(of: "(?<!c|j|s|z)yu(?!k|m|ng)", with: "jyu", options: .regularExpression)
-                                return candidateInputCount - (modifiedLeading.count - leading.count)
-                        }()
-                        let difference: Int = bufferTextLength - inputCount
-                        guard difference > 0 else {
-                                bufferText = .empty
-                                return
-                        }
-                        let leading = bufferText.dropLast(difference)
-                        let filtered = leading.replacingOccurrences(of: "'", with: "")
-                        var tail: Substring = {
-                                if filtered.count == leading.count {
-                                        return bufferText.dropFirst(inputCount)
-                                } else {
-                                        let separatorsCount: Int = leading.count - filtered.count
-                                        return bufferText.dropFirst(inputCount + separatorsCount)
+                                switch keyboardLayout {
+                                case .saamPing:
+                                        return candidate.input.count
+                                default:
+                                        return candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression).count
                                 }
                         }()
+                        var tail = bufferText.dropFirst(inputCount)
                         while tail.hasPrefix("'") {
                                 tail = tail.dropFirst()
                         }
@@ -536,15 +511,16 @@ final class KeyboardViewController: UIInputViewController {
                                 markedText = processingText
                                 leungFanReverseLookup()
                         default:
-                                segmentation = Segmentor.segment(processingText)
+                                segmentation = Segmentor.segment(text: processingText)
                                 markedText = {
-                                        guard !(processingText.contains("'")) else { return processingText.replacingOccurrences(of: "'", with: "' ") }
-                                        guard let bestScheme: SyllableScheme = segmentation.first else { return processingText }
-                                        let leading: String = bestScheme.joined(separator: " ")
-                                        let isFullScheme: Bool = bestScheme.length == processingText.count
-                                        guard !isFullScheme else { return leading }
-                                        let tail = processingText.dropFirst(bestScheme.length)
-                                        return leading + " " + tail
+                                        let isMarkFree: Bool = processingText.filter(\.isSeparatorOrTone).isEmpty
+                                        guard isMarkFree else { return processingText }
+                                        guard let bestScheme = segmentation.first else { return processingText }
+                                        let leadingLength: Int = bestScheme.length
+                                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                                        guard leadingLength != processingText.count else { return leadingText }
+                                        let tailText = processingText.dropFirst(leadingLength)
+                                        return leadingText + " " + tailText
                                 }()
                                 if let markCandidate = Engine.searchMark(for: bufferText) {
                                         candidates = [markCandidate]
@@ -658,25 +634,17 @@ final class KeyboardViewController: UIInputViewController {
         }
         private func suggest() {
                 let engineCandidates: [Candidate] = {
-                        let convertedSegmentation: Segmentation = segmentation.converted()
-                        var normal: [Candidate] = Engine.suggest(for: processingText, segmentation: convertedSegmentation)
-                        let droppedLast = processingText.dropLast()
-                        let shouldDropSeparator: Bool = normal.isEmpty && processingText.hasSuffix("'") && !droppedLast.contains("'")
-                        guard !shouldDropSeparator else {
-                                let droppedSeparator: String = String(droppedLast)
-                                let newSegmentation: Segmentation = Segmentor.segment(droppedSeparator).filter({ $0.joined() == droppedSeparator || $0.count == 1 })
-                                return Engine.suggest(for: droppedSeparator, segmentation: newSegmentation)
-                        }
-                        let shouldContinue: Bool = needsEmojiCandidates && !normal.isEmpty && candidateSequence.isEmpty
-                        guard shouldContinue else { return normal }
+                        var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
+                        let shouldContinue: Bool = needsEmojiCandidates && !suggestion.isEmpty && candidateSequence.isEmpty
+                        guard shouldContinue else { return suggestion }
                         let symbols: [Candidate] = Engine.searchEmojiSymbols(for: bufferText)
-                        guard !(symbols.isEmpty) else { return normal }
+                        guard !(symbols.isEmpty) else { return suggestion }
                         for symbol in symbols.reversed() {
-                                if let index = normal.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
-                                        normal.insert(symbol, at: index + 1)
+                                if let index = suggestion.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
+                                        suggestion.insert(symbol, at: index + 1)
                                 }
                         }
-                        return normal
+                        return suggestion
                 }()
                 let lexiconCandidates: [Candidate] = UserLexicon.suggest(for: processingText)
                 let combined: [Candidate] = lexiconCandidates + engineCandidates
