@@ -5,6 +5,7 @@ import SQLite3
 struct Prepare {
         static func main() {
                 MaterialsHandler.prepare()
+                SyllableDBHandler.prepare()
                 IMEDBHandler.prepare()
         }
 }

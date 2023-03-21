@@ -26,44 +26,27 @@ public struct Segmentor {
 
         // MARK: - Database
 
+        private static var storageDatabase: OpaquePointer? = nil
         private static var database: OpaquePointer? = nil
         private static var isDatabaseReady: Bool = false
+
         static func prepare() {
                 guard !isDatabaseReady else { return }
+                guard let path: String = Bundle.module.path(forResource: "syllabledb", ofType: "sqlite3") else { return }
+                guard sqlite3_open_v2(path, &storageDatabase, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else { return }
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
-                createTokenTable()
+                let backup = sqlite3_backup_init(database, "main", storageDatabase, "main")
+                guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return }
+                guard sqlite3_backup_finish(backup) == SQLITE_OK else { return }
+                sqlite3_close_v2(storageDatabase)
                 isDatabaseReady = true
-        }
-        private static func createTokenTable() {
-                let createTable: String = "CREATE TABLE tokentable(code INTEGER NOT NULL PRIMARY KEY, token TEXT NOT NULL, origin TEXT NOT NULL);"
-                var createStatement: OpaquePointer? = nil
-                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
-                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
-                sqlite3_finalize(createStatement)
-                guard let url = Bundle.module.url(forResource: "syllables", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
-                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { line -> String? in
-                        let parts = line.split(separator: "\t")
-                        guard parts.count == 3 else { return nil }
-                        let code = parts[0]
-                        let token = parts[1]
-                        let origin = parts[2]
-                        return "(\(code), '\(token)', '\(origin)')"
-                }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
-                let insertValues: String = "INSERT INTO tokentable (code, token, origin) VALUES \(values);"
-                var insertStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(insertStatement) }
-                guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
-                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
 
 
         // MARK: - SQLite
 
         private static func match(text: String) -> SegmentToken? {
-                let queryString = "SELECT token, origin FROM tokentable WHERE code = \(text.hash);"
+                let queryString = "SELECT token, origin FROM syllabletable WHERE code = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(queryStatement) }
                 guard sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK else { return nil }
@@ -74,7 +57,7 @@ public struct Segmentor {
                 return SegmentToken(text: token, origin: origin)
         }
         private static func canSplit(_ text: String) -> Bool {
-                let queryString = "SELECT token FROM tokentable WHERE code = \(text.hash);"
+                let queryString = "SELECT token FROM syllabletable WHERE code = \(text.hash);"
                 var queryStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(queryStatement) }
                 guard sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK else { return false }

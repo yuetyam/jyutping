@@ -5,10 +5,12 @@ public struct Engine {
 
         private static var storageDatabase: OpaquePointer? = nil
         private(set) static var database: OpaquePointer? = nil
+        private static var isDatabaseReady: Bool = false
 
         public static func prepare() {
                 Segmentor.prepare()
-                guard !isWorking else { return }
+                let shouldPrepare: Bool = !isDatabaseReady || (database == nil)
+                guard shouldPrepare else { return }
                 sqlite3_close_v2(storageDatabase)
                 sqlite3_close_v2(database)
                 guard let path: String = Bundle.module.path(forResource: "imedb", ofType: "sqlite3") else { return }
@@ -22,16 +24,7 @@ public struct Engine {
                 guard sqlite3_backup_finish(backup) == SQLITE_OK else { return }
                 sqlite3_close_v2(storageDatabase)
                 #endif
-        }
-        private static var isWorking: Bool {
-                guard database != nil else { return false }
-                let text = "ngo"
-                let code = text.hash
-                let query = "SELECT word FROM lexicontable WHERE ping = \(code) LIMIT 1;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return false }
-                return sqlite3_step(statement) == SQLITE_ROW
+                isDatabaseReady = true
         }
 
 
