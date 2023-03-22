@@ -1,11 +1,11 @@
 import Foundation
 import SQLite3
 
-public struct IMEDBHandler {
+struct IMEDBHandler {
 
-        private(set) static var database: OpaquePointer? = nil
+        private static var database: OpaquePointer? = nil
 
-        public static func prepare() {
+        static func prepare() {
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createLexiconTable()
                 createT2STable()
@@ -29,10 +29,8 @@ public struct IMEDBHandler {
                 guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return }
                 guard sqlite3_backup_finish(backup) == SQLITE_OK else { return }
         }
-}
 
-private extension IMEDBHandler {
-        static func createLexiconTable() {
+        private static func createLexiconTable() {
                 let createTable: String = "CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -66,7 +64,7 @@ private extension IMEDBHandler {
                         insert(values: values)
                 }
         }
-        static func createIndies() {
+        private static func createIndies() {
                 let commands: [String] = [
                         "CREATE INDEX lexiconpingindex ON lexicontable(ping);",
                         "CREATE INDEX lexiconshortcutindex ON lexicontable(shortcut);",
@@ -86,10 +84,8 @@ private extension IMEDBHandler {
                         sqlite3_finalize(statement)
                 }
         }
-}
 
-private extension IMEDBHandler {
-        static func createT2STable() {
+        private static func createT2STable() {
                 let createTable: String = "CREATE TABLE t2stable(traditional INTEGER NOT NULL PRIMARY KEY, simplified TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -112,7 +108,7 @@ private extension IMEDBHandler {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        static func createComposeTable() {
+        private static func createComposeTable() {
                 let createTable: String = "CREATE TABLE composetable(word TEXT NOT NULL, romanization TEXT NOT NULL, ping INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -136,7 +132,7 @@ private extension IMEDBHandler {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        static func createPinyinTable() {
+        private static func createPinyinTable() {
                 let createTable: String = "CREATE TABLE pinyintable(word TEXT NOT NULL, shortcut INTEGER NOT NULL, pin INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -169,7 +165,7 @@ private extension IMEDBHandler {
                         insert(values: values)
                 }
         }
-        static func createShapeTable() {
+        private static func createShapeTable() {
                 let createTable: String = "CREATE TABLE shapetable(word TEXT NOT NULL, cangjie TEXT NOT NULL, stroke TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
@@ -193,7 +189,7 @@ private extension IMEDBHandler {
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
-        static func createSymbolTable() {
+        private static func createSymbolTable() {
                 let createTable: String = "CREATE TABLE symboltable(category INTEGER NOT NULL, codepoint TEXT NOT NULL, cantonese TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
