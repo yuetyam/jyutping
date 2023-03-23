@@ -100,7 +100,7 @@ struct UserLexicon {
         }
         private static func match(text: String, isShortcut: Bool) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let code: Int = text.hash
+                let code: Int = isShortcut ? text.replacingOccurrences(of: "y", with: "j").hash : text.hash
                 let column: String = isShortcut ? "shortcut" : "ping"
                 let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
                 var queryStatement: OpaquePointer? = nil
