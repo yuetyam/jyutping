@@ -1,19 +1,19 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
 let package = Package(
-        name: "Prepare",
+        name: "Preparing",
         platforms: [.macOS(.v13)],
-        products: [.executable(name: "prepare", targets: ["Prepare"])],
+        products: [.executable(name: "Preparing", targets: ["Preparing"])],
         targets: [
                 .executableTarget(
-                        name: "Prepare",
+                        name: "Preparing",
                         resources: [.process("Resources")]
                 ),
                 .testTarget(
-                        name: "PrepareTests",
-                        dependencies: ["Prepare"]
+                        name: "PreparingTests",
+                        dependencies: ["Preparing"]
                 )
         ]
 )
