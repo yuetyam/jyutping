@@ -4,7 +4,9 @@ import SQLite3
 // MARK: - Segmentation
 
 public struct SegmentToken: Hashable {
+        /// Token
         public let text: String
+        /// Regular Jyutping Syllable
         let origin: String
 }
 
@@ -12,8 +14,9 @@ public typealias SegmentScheme = Array<SegmentToken>
 public typealias Segmentation = Array<SegmentScheme>
 
 extension SegmentScheme {
+        /// All texts character count
         public var length: Int {
-                return self.map(\.text.count).reduce(0, +)
+                return self.map(\.text).summedLength
         }
 }
 extension Segmentation {
@@ -84,7 +87,7 @@ public struct Segmentor {
                 guard !(leadingTokens.isEmpty) else { return [] }
                 let textCount = text.count
                 var segmentation: Segmentation = leadingTokens.map({ [$0] })
-                var cache = segmentation
+                var previousSegmentation = segmentation
                 var shouldContinue: Bool = true
                 while shouldContinue {
                         for scheme in segmentation {
@@ -96,8 +99,8 @@ public struct Segmentor {
                                 let newSegmentation: Segmentation = tailTokens.map({ scheme + [$0] })
                                 segmentation = (segmentation + newSegmentation).uniqued()
                         }
-                        if segmentation != cache {
-                                cache = segmentation
+                        if segmentation.subelementCount != previousSegmentation.subelementCount {
+                                previousSegmentation = segmentation
                         } else {
                                 shouldContinue = false
                         }
