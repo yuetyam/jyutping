@@ -44,3 +44,11 @@ extension String {
                 return !(self.filter(\.isTone).isEmpty)
         }
 }
+
+extension Array where Element == String {
+
+        /// All characters count
+        var summedLength: Int {
+                return self.map(\.count).reduce(0, +)
+        }
+}
