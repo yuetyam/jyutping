@@ -13,6 +13,14 @@ extension Optional where Wrapped == String {
         }
 }
 
+extension Array where Element == String {
+
+        /// All characters count
+        public var summedLength: Int {
+                return self.map(\.count).reduce(0, +)
+        }
+}
+
 extension String {
 
         /// aka. `String.init()`
