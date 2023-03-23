@@ -88,23 +88,23 @@ public struct Engine {
                 }
         }
 
-        private static func processVerbatim(text: String) -> [CoreCandidate] {
+        private static func processVerbatim(text: String, limit: Int? = nil) -> [CoreCandidate] {
                 let rounds = (0..<text.count).map({ number -> [CoreCandidate] in
                         let leading: String = String(text.dropLast(number))
-                        return match(text: leading, input: text) + shortcut(text: leading)
+                        return match(text: leading, input: text, limit: limit) + shortcut(text: leading, limit: limit)
                 })
                 return rounds.flatMap({ $0 }).uniqued()
         }
 
-        private static func process(text: String, segmentation: Segmentation) -> [CoreCandidate] {
-                guard segmentation.maxLength > 0 else { return processVerbatim(text: text) }
+        private static func process(text: String, segmentation: Segmentation, limit: Int? = nil) -> [CoreCandidate] {
+                guard segmentation.maxLength > 0 else { return processVerbatim(text: text, limit: limit) }
                 let textCount = text.count
-                let fullMatch = match(text: text, input: text)
-                let fullShortcut = shortcut(text: text)
-                let candidates = match(segmentation: segmentation)
+                let fullMatch = match(text: text, input: text, limit: limit)
+                let fullShortcut = shortcut(text: text, limit: limit)
+                let candidates = match(segmentation: segmentation, limit: limit)
                 let perfectCandidates = candidates.filter({ $0.input.count == textCount })
                 let primary: [CoreCandidate] = (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
-                guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text) }
+                guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: 4) }
                 guard firstInputCount != textCount else { return primary }
                 let anchorsArray: [String] = segmentation.map({ scheme -> String in
                         let last = text.dropFirst(scheme.length).first
@@ -112,14 +112,14 @@ public struct Engine {
                         let anchors = (schemeAnchors + [last]).compactMap({ $0 })
                         return String(anchors)
                 })
-                let prefixes: [CoreCandidate] = anchorsArray.map({ shortcut(text: $0) }).flatMap({ $0 })
+                let prefixes: [CoreCandidate] = anchorsArray.map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
                         .filter({ $0.romanization.removedSpacesTones().hasPrefix(text) })
                         .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: text) })
                 guard prefixes.isEmpty else { return (prefixes + candidates).uniqued() }
                 let tailText: String = String(text.dropFirst(firstInputCount))
                 guard canProcess(text: tailText) else { return primary }
                 let tailSegmentation = Segmentor.segment(text: tailText)
-                let tailCandidates: [CoreCandidate] = process(text: tailText, segmentation: tailSegmentation)
+                let tailCandidates: [CoreCandidate] = process(text: tailText, segmentation: tailSegmentation, limit: 4)
                 guard !(tailCandidates.isEmpty) else { return primary }
                 let qualified = candidates.enumerated().filter({ $0.offset < 3 && $0.element.input.count == firstInputCount })
                 let combines = tailCandidates.map { tail -> [CoreCandidate] in
@@ -130,14 +130,14 @@ public struct Engine {
         }
         private static func canProcess(text: String) -> Bool {
                 guard let first = text.first else { return false }
-                return !(shortcut(text: String(first)).isEmpty)
+                return !(shortcut(text: String(first), limit: 1).isEmpty)
         }
 
-        private static func match(segmentation: Segmentation) -> [CoreCandidate] {
+        private static func match(segmentation: Segmentation, limit: Int? = nil) -> [CoreCandidate] {
                 let matches = segmentation.map({ scheme -> [CoreCandidate] in
                         let input = scheme.map(\.text).joined()
                         let ping = scheme.map(\.origin).joined()
-                        return match(text: ping, input: input)
+                        return match(text: ping, input: input, limit: limit)
                 })
                 return matches.flatMap({ $0 })
         }
@@ -147,10 +147,10 @@ public struct Engine {
 
         // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
-        private static func shortcut(text: String) -> [CoreCandidate] {
+        private static func shortcut(text: String, limit: Int? = nil) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
                 let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
-                let limit: Int = 100
+                let limit: Int = limit ?? 50
                 let query = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
@@ -164,9 +164,10 @@ public struct Engine {
                 sqlite3_finalize(statement)
                 return candidates
         }
-        private static func match(text: String, input: String) -> [CoreCandidate] {
+        private static func match(text: String, input: String, limit: Int? = nil) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
-                let query = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash);"
+                let limit: Int = limit ?? -1
+                let query = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
                         while sqlite3_step(statement) == SQLITE_ROW {
