@@ -27,7 +27,7 @@ extension Segmentation {
 
 public struct Segmentor {
 
-        // MARK: - Database
+        // MARK: - SQLite
 
         private static var storageDatabase: OpaquePointer? = nil
         private static var database: OpaquePointer? = nil
@@ -45,40 +45,24 @@ public struct Segmentor {
                 isDatabaseReady = true
         }
 
-
-        // MARK: - SQLite
-
-        private static func match(text: String) -> SegmentToken? {
-                let queryString = "SELECT token, origin FROM syllabletable WHERE code = \(text.hash);"
-                var queryStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(queryStatement) }
-                guard sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK else { return nil }
-                guard sqlite3_step(queryStatement) == SQLITE_ROW else { return nil }
-                let token = String(cString: sqlite3_column_text(queryStatement, 0))
-                let origin = String(cString: sqlite3_column_text(queryStatement, 1))
-                guard token == text else { return nil }
+        private static func match(_ code: Int) -> SegmentToken? {
+                let query = "SELECT token, origin FROM syllabletable WHERE code = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
+                let token = String(cString: sqlite3_column_text(statement, 0))
+                let origin = String(cString: sqlite3_column_text(statement, 1))
                 return SegmentToken(text: token, origin: origin)
-        }
-        private static func canSplit(_ text: String) -> Bool {
-                let queryString = "SELECT token FROM syllabletable WHERE code = \(text.hash);"
-                var queryStatement: OpaquePointer? = nil
-                defer { sqlite3_finalize(queryStatement) }
-                guard sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK else { return false }
-                guard sqlite3_step(queryStatement) == SQLITE_ROW else { return false }
-                let token = String(cString: sqlite3_column_text(queryStatement, 0))
-                return token == text
         }
 
 
         // MARK: - Split
 
         private static func splitLeading(_ text: String) -> [SegmentToken] {
-                guard !(text.isEmpty) else { return [] }
                 let maxLength: Int = min(text.count, 6)
-                let tokens = (1...maxLength).map { length -> SegmentToken? in
-                        let prefixSlice: String = String(text.prefix(length))
-                        return match(text: prefixSlice)
-                }
+                guard maxLength > 0 else { return [] }
+                let tokens = (1...maxLength).map({ match(text.prefix($0).hash) })
                 return tokens.compactMap({ $0 })
         }
 
@@ -113,13 +97,25 @@ public struct Segmentor {
                 case 0:
                         return []
                 case 1:
-                        guard let token = match(text: text) else { return [] }
-                        return [[token]]
+                        switch text {
+                        case "a":
+                                return letterA
+                        case "o":
+                                return letterO
+                        case "m":
+                                return letterM
+                        default:
+                                return []
+                        }
                 default:
                         let rawText = text.filter({ !$0.isSeparatorOrTone })
                         return split(text: rawText)
                 }
         }
+
+        private static let letterA: Segmentation = [[SegmentToken(text: "a", origin: "aa")]]
+        private static let letterO: Segmentation = [[SegmentToken(text: "o", origin: "o")]]
+        private static let letterM: Segmentation = [[SegmentToken(text: "m", origin: "m")]]
 }
 
 private extension Segmentation {
