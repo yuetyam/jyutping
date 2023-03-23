@@ -53,10 +53,10 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 ~~~bash
 git clone --depth 1 https://github.com/yuetyam/jyutping.git
 ~~~
-先構建數據庫(Prepare database)。
+先構建數據庫 (Prepare database)。
 ~~~bash
 # cd path/to/jyutping
-cd ./Modules/Prepare/
+cd ./Modules/Preparing/
 swift run -c release
 ~~~
 跟住用 Xcode 開啓 `Jyutping/Jyutping.xcodeproj` 即可。
