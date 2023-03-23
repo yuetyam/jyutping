@@ -28,4 +28,4 @@
 # Swift Package Resources
 /Modules/CoreIME/Sources/CoreIME/Resources/** binary
 /Modules/Materials/Sources/Materials/Resources/** binary
-/Modules/Prepare/Sources/Prepare/Resources/** binary
+/Modules/Preparing/Sources/Preparing/Resources/** binary
