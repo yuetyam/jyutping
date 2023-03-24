@@ -228,9 +228,10 @@ final class KeyboardViewController: UIInputViewController {
                                         AudioFeedback.perform(.modify)
                                         aftercareSelected(firstCandidate)
                                 } else {
-                                        compose(bufferText)
-                                        AudioFeedback.perform(.input)
+                                        let text: String = bufferText
                                         bufferText = .empty
+                                        AudioFeedback.perform(.input)
+                                        textDocumentProxy.insertText(text)
                                 }
                         default:
                                 textDocumentProxy.insertText(.space)
@@ -415,15 +416,15 @@ final class KeyboardViewController: UIInputViewController {
         private func aftercareSelected(_ candidate: Candidate) {
                 switch bufferText.first {
                 case .none:
-                        break
-                case .some("r"), .some("v"), .some("x"), .some("q"):
+                        return
+                case .some(let character) where character.isReverseLookupTrigger:
                         candidateSequence = []
-                        if bufferText.count <= candidate.input.count + 1 {
-                                bufferText = .empty
+                        let leadingCount: Int = candidate.input.count + 1
+                        if bufferText.count > leadingCount {
+                                let tail = bufferText.dropFirst(leadingCount)
+                                bufferText = String(character) + tail
                         } else {
-                                let first: String = String(bufferText.first!)
-                                let tail = bufferText.dropFirst(candidate.input.count + 1)
-                                bufferText = first + tail
+                                bufferText = .empty
                         }
                 default:
                         guard candidate.isCantonese else {
@@ -464,13 +465,14 @@ final class KeyboardViewController: UIInputViewController {
                         case .none:
                                 possibleTexts = []
                                 processingText = .empty
-                        case .some("r"), .some("v"), .some("x"), .some("q"):
+                        case .some(let character) where character.isReverseLookupTrigger:
                                 processingText = bufferText
                         default:
                                 if keyboardLayout == .saamPing {
                                         processingText = bufferText
                                 } else {
-                                        processingText = bufferText.replacingOccurrences(of: "vv", with: "4")
+                                        processingText = bufferText
+                                                .replacingOccurrences(of: "vv", with: "4")
                                                 .replacingOccurrences(of: "xx", with: "5")
                                                 .replacingOccurrences(of: "qq", with: "6")
                                                 .replacingOccurrences(of: "v", with: "1")
