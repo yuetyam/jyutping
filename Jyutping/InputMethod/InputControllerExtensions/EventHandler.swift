@@ -56,7 +56,7 @@ extension JyutpingInputController {
                                 }
                         case KeyCode.Alphabet.VK_U:
                                 guard InputState.current.isCantonese && isBufferState else { return false }
-                                bufferText = .empty
+                                clearBufferText()
                                 return true
                         case let value where KeyCode.numberSet.contains(value):
                                 hasControlShiftModifiers = true
@@ -233,7 +233,7 @@ extension JyutpingInputController {
                         switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
-                                bufferText = .empty
+                                clearBufferText()
                                 return true
                         case .transparent:
                                 return false
@@ -326,7 +326,7 @@ extension JyutpingInputController {
                 guard isBufferState else { return }
                 let text: String = InstantSettings.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
                 currentClient?.insert(text)
-                bufferText = .empty
+                clearBufferText()
         }
 
         private func handleSwitches(_ index: Int? = nil) {
@@ -382,20 +382,23 @@ extension JyutpingInputController {
         private func aftercareSelection(_ selected: DisplayCandidate) {
                 let candidate = candidates.fetch(selected.candidateIndex) ?? candidates.first(where: { $0 == selected.candidate })
                 guard let candidate, candidate.isCantonese else {
-                        bufferText = .empty
+                        clearBufferText()
                         return
                 }
                 switch bufferText.first {
                 case .none:
-                        break
-                case .some("r"), .some("v"), .some("x"), .some("q"):
+                        return
+                case .some(let character) where !(character.isBasicLatinLetter):
                         candidateSequence = []
-                        if bufferText.count <= candidate.input.count + 1 {
-                                bufferText = .empty
-                        } else {
-                                let first: String = String(bufferText.first!)
+                        clearBufferText()
+                case .some(let character) where character.isReverseLookupTrigger:
+                        candidateSequence = []
+                        let leadingCount: Int = candidate.input.count + 1
+                        if bufferText.count > leadingCount {
                                 let tail = bufferText.dropFirst(candidate.input.count + 1)
-                                bufferText = first + tail
+                                bufferText = String(character) + tail
+                        } else {
+                                clearBufferText()
                         }
                 default:
                         candidateSequence.append(candidate)

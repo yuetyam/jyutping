@@ -23,3 +23,13 @@ extension Character {
                 return self.isSeparator || self.isTone
         }
 }
+
+extension Character {
+
+        private static let reverseLookupTriggers: Set<Character> = ["r", "v", "x", "q"]
+
+        /// r / v / x / q
+        var isReverseLookupTrigger: Bool {
+                return Character.reverseLookupTriggers.contains(self)
+        }
+}

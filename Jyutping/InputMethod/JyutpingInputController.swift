@@ -50,8 +50,8 @@ final class JyutpingInputController: IMKInputController {
                 if InputState.current.isSwitches {
                         InputState.updateCurrent()
                 }
-                if !(bufferText.isEmpty) {
-                        bufferText = .empty
+                if isBufferState {
+                        clearBufferText()
                 }
         }
         override func deactivateServer(_ sender: Any!) {
@@ -135,6 +135,9 @@ final class JyutpingInputController: IMKInputController {
                 displayObject.update(with: newItems)
         }
 
+        func clearBufferText() {
+                bufferText = .empty
+        }
         var isBufferState: Bool {
                 return !(bufferText.isEmpty)
         }
@@ -151,10 +154,11 @@ final class JyutpingInputController: IMKInputController {
                         switch bufferText.first {
                         case .none:
                                 processingText = .empty
-                        case .some("r"), .some("v"), .some("x"), .some("q"):
+                        case .some(let character) where character.isReverseLookupTrigger:
                                 processingText = bufferText
                         case .some(let character) where character.isBasicLatinLetter:
-                                processingText = bufferText.replacingOccurrences(of: "vv", with: "4")
+                                processingText = bufferText
+                                        .replacingOccurrences(of: "vv", with: "4")
                                         .replacingOccurrences(of: "xx", with: "5")
                                         .replacingOccurrences(of: "qq", with: "6")
                                         .replacingOccurrences(of: "v", with: "1")
