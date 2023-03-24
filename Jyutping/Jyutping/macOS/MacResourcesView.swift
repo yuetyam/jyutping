@@ -25,6 +25,7 @@ struct MacResourcesView: View {
                                 .block()
 
                                 VStack {
+                                        LinkView(icon: globeIcon, title: "懶音診療室 - PolyU", url: "https://www.polyu.edu.hk/cbs/pronunciation")
                                         LinkView(icon: globeIcon, title: "冚唪唥粵文", url: "https://hambaanglaang.hk")
                                         LinkView(icon: globeIcon, title: "迴響", url: "https://resonate.hk")
                                 }
