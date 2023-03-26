@@ -92,11 +92,13 @@ final class JyutpingInputController: IMKInputController {
         }
         private func adjustCandidateWindow() {
                 window?.setFrame(windowFrame(), display: true)
+                /*
                 let expanded: CGFloat = windowOffset * 2
                 guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return }
                 guard size.width > 44 else { return }
                 let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
                 window?.setFrame(windowFrame(size: windowSize), display: true)
+                */
         }
 
         lazy var displayObject = DisplayObject()

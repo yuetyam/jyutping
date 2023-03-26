@@ -92,7 +92,7 @@ extension JyutpingInputController {
                 }
         }
 
-        func windowFrame(size: CGSize = CGSize(width: 700, height: 500)) -> CGRect {
+        func windowFrame(size: CGSize = CGSize(width: 800, height: 500)) -> CGRect {
                 let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
                 let width: CGFloat = size.width
                 let height: CGFloat = size.height
