@@ -35,7 +35,14 @@ public struct Engine {
                 case 0:
                         return []
                 case 1:
-                        return shortcut(text: text)
+                        switch text {
+                        case "a":
+                                return match(text: text, input: text) + match(text: "aa", input: text) + shortcut(text: text)
+                        case "o", "m", "e":
+                                return match(text: text, input: text) + shortcut(text: text)
+                        default:
+                                return shortcut(text: text)
+                        }
                 default:
                         return dispatch(text: text, segmentation: segmentation)
                 }
