@@ -5,6 +5,7 @@ final class DisplayObject: ObservableObject {
 
         @Published private(set) var items: [DisplayCandidate] = []
         @Published private(set) var longest: DisplayCandidate = DisplayObject.defaultLongest
+        private var maxIndex: Int = 0
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var animationState: Int = 0
         @Published private(set) var candidateTextAnimationConditions: [Bool] = []
@@ -14,26 +15,28 @@ final class DisplayObject: ObservableObject {
         func reset() {
                 items = []
                 longest = DisplayObject.defaultLongest
+                maxIndex = 0
                 highlightedIndex = 0
                 animationState = 0
                 candidateTextAnimationConditions = []
         }
 
-        func update(with newItems: [DisplayCandidate]) {
-                guard !newItems.isEmpty else {
+        func update(with newItems: [DisplayCandidate], highlight: Highlight) {
+                let newItemCount: Int = newItems.count
+                guard newItemCount > 0 else {
                         reset()
                         return
                 }
                 let newLongest = newItems.longest!
                 let pageSize: Int = AppSettings.displayCandidatePageSize
                 let shouldAnimate: Bool = {
-                        guard items.count == pageSize && newItems.count == pageSize else { return false }
+                        guard (newItemCount == pageSize) && (items.count == pageSize) else { return false }
                         guard newLongest.text.count >= longest.text.count else { return false }
                         return newLongest.candidate.romanization.count >= longest.candidate.romanization.count
                 }()
-                candidateTextAnimationConditions = Array(repeating: false, count: newItems.count)
+                candidateTextAnimationConditions = Array(repeating: false, count: newItemCount)
                 if shouldAnimate {
-                        for index in 0..<newItems.count {
+                        for index in 0..<newItemCount {
                                 let oldTextCount = items[index].text.count
                                 let newTextCount = newItems[index].text.count
                                 let shouldAnimateCandidateText: Bool = !(oldTextCount == newTextCount)
@@ -42,21 +45,42 @@ final class DisplayObject: ObservableObject {
                 }
                 items = newItems
                 longest = newLongest
-                highlightedIndex = 0
+                maxIndex = newItemCount - 1
+                let newHighlightedIndex: Int = {
+                        switch highlight {
+                        case .start:
+                                return 0
+                        case .unchanged:
+                                return min(highlightedIndex, maxIndex)
+                        case .end:
+                                return maxIndex
+                        }
+                }()
+                highlightedIndex = newHighlightedIndex
                 if shouldAnimate {
                         animationState += 1
                 }
         }
 
+        var isHighlightingStart: Bool {
+                return highlightedIndex == 0
+        }
+        var isHighlightingEnd: Bool {
+                return highlightedIndex == maxIndex
+        }
+
         func increaseHighlightedIndex() {
-                let lastIndex: Int = items.count - 1
-                guard highlightedIndex < lastIndex else { return }
+                guard highlightedIndex < maxIndex else { return }
                 highlightedIndex += 1
         }
         func decreaseHighlightedIndex() {
-                let firstIndex: Int = 0
-                guard highlightedIndex > firstIndex else { return }
+                guard highlightedIndex > 0 else { return }
                 highlightedIndex -= 1
         }
 }
 
+enum Highlight: Int, Hashable {
+        case start
+        case unchanged
+        case end
+}

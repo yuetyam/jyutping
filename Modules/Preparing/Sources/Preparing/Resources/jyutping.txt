@@ -29370,7 +29370,7 @@
 二進制	ji6 zeon3 zai3
 八進制	baat3 zeon3 zai3
 十進制	sap6 zeon3 zai3
-十六進制	sap6 luk6zeon3 zai3
+十六進制	sap6 luk6 zeon3 zai3
 一文	jat1 man1
 兩文	loeng5 man1
 兩文	loeng5 man4

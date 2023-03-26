@@ -76,8 +76,13 @@ extension JyutpingInputController {
                                 switch InputState.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
-                                        displayObject.decreaseHighlightedIndex()
-                                        return true
+                                        if displayObject.isHighlightingStart {
+                                                updateDisplayingCandidates(.previousPage, highlight: .end)
+                                                return true
+                                        } else {
+                                                displayObject.decreaseHighlightedIndex()
+                                                return true
+                                        }
                                 case .transparent:
                                         return false
                                 case .switches:
@@ -88,8 +93,13 @@ extension JyutpingInputController {
                                 switch InputState.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
-                                        displayObject.increaseHighlightedIndex()
-                                        return true
+                                        if displayObject.isHighlightingEnd {
+                                                updateDisplayingCandidates(.nextPage, highlight: .start)
+                                                return true
+                                        } else {
+                                                displayObject.increaseHighlightedIndex()
+                                                return true
+                                        }
                                 case .transparent:
                                         return false
                                 case .switches:
@@ -153,10 +163,10 @@ extension JyutpingInputController {
                                 guard candidates.isEmpty else {
                                         switch punctuationKey {
                                         case .bracketLeft, .comma, .minus:
-                                                updateDisplayingCandidates(.previousPage)
+                                                updateDisplayingCandidates(.previousPage, highlight: .unchanged)
                                                 return true
                                         case .bracketRight, .period, .equal:
-                                                updateDisplayingCandidates(.nextPage)
+                                                updateDisplayingCandidates(.nextPage, highlight: .unchanged)
                                                 return true
                                         default:
                                                 return true
@@ -279,8 +289,13 @@ extension JyutpingInputController {
                         switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
-                                displayObject.increaseHighlightedIndex()
-                                return true
+                                if displayObject.isHighlightingEnd {
+                                        updateDisplayingCandidates(.nextPage, highlight: .start)
+                                        return true
+                                } else {
+                                        displayObject.increaseHighlightedIndex()
+                                        return true
+                                }
                         case .transparent:
                                 return false
                         case .switches:
@@ -291,7 +306,7 @@ extension JyutpingInputController {
                         switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
-                                updateDisplayingCandidates(.previousPage)
+                                updateDisplayingCandidates(.previousPage, highlight: .unchanged)
                                 return true
                         case .transparent:
                                 return false
@@ -302,7 +317,7 @@ extension JyutpingInputController {
                         switch InputState.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
-                                updateDisplayingCandidates(.nextPage)
+                                updateDisplayingCandidates(.nextPage, highlight: .unchanged)
                                 return true
                         case .transparent:
                                 return false
@@ -314,7 +329,7 @@ extension JyutpingInputController {
                         case KeyCode.Special.VK_HOME:
                                 let shouldJump2FirstPage: Bool = InputState.current.isCantonese && !(candidates.isEmpty)
                                 guard shouldJump2FirstPage else { return false }
-                                updateDisplayingCandidates(.establish)
+                                updateDisplayingCandidates(.establish, highlight: .start)
                                 return true
                         default:
                                 return false

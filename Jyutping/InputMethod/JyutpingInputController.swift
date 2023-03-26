@@ -73,7 +73,7 @@ final class JyutpingInputController: IMKInputController {
                         }
                 }
                 didSet {
-                        updateDisplayingCandidates(.establish)
+                        updateDisplayingCandidates(.establish, highlight: .start)
                         switch (oldValue.isEmpty, candidates.isEmpty) {
                         case (true, true):
                                 // Stay empty
@@ -103,9 +103,9 @@ final class JyutpingInputController: IMKInputController {
         lazy var settingsObject = InstantSettingsObject()
 
         /// DisplayCandidates indices
-        lazy var indices: (first: Int, last: Int) = (0, 0)
+        private lazy var indices: (first: Int, last: Int) = (0, 0)
 
-        func updateDisplayingCandidates(_ mode: PageTransformation) {
+        func updateDisplayingCandidates(_ mode: PageTransformation, highlight: Highlight) {
                 guard !candidates.isEmpty else {
                         indices = (0, 0)
                         displayObject.reset()
@@ -132,7 +132,7 @@ final class JyutpingInputController: IMKInputController {
                 let newItems = (firstIndex..<bound).map({ index -> DisplayCandidate in
                         return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
                 })
-                displayObject.update(with: newItems)
+                displayObject.update(with: newItems, highlight: highlight)
         }
 
         func clearBufferText() {
