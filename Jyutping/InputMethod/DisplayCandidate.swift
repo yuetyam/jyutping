@@ -1,11 +1,7 @@
 import Foundation
 import CoreIME
 
-struct DisplayCandidate: Identifiable, Hashable {
-
-        var id: UUID {
-                return UUID()
-        }
+struct DisplayCandidate: Hashable {
 
         let candidate: Candidate
         let candidateIndex: Int
