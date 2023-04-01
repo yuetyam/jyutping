@@ -3,6 +3,16 @@ import SQLite3
 
 extension Engine {
 
+        /// Reverse Lookup
+        /// - Parameters:
+        ///   - text: Cantonese word text.
+        ///   - input: User input for this word
+        /// - Returns: Candidates
+        static func reveresLookup(text: String, input: String) -> [Candidate] {
+                let romanizations: [String] = Engine.lookup(text)
+                return romanizations.map({ CoreCandidate(text: text, romanization: $0, input: input) })
+        }
+
         /// Search Romanization for word
         /// - Parameter text: word
         /// - Returns: Array of Romanization matched the input word

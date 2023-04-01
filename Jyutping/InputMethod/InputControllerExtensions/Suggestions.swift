@@ -57,13 +57,4 @@ extension JyutpingInputController {
                         clearCandidates()
                 }
         }
-        func composeReverseLookup() {
-                let text = processingText.dropFirst()
-                guard text.count > 2 else {
-                        clearCandidates()
-                        return
-                }
-                let lookup: [Candidate] = Engine.composeLookup(text: String(text))
-                push(lookup)
-        }
 }

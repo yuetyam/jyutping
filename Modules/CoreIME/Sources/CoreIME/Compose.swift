@@ -3,45 +3,43 @@ import SQLite3
 
 extension Engine {
 
+        // TODO: - Handle separators
+
         /// Compose(LoengFan) Reverse Lookup
-        /// - Parameter text: Input text. Example: mukdaan.
-        /// - Returns: An Array of Candidate
-        public static func composeLookup(text: String) -> [Candidate] {
-                let convertedText = text
-                        .replacingOccurrences(of: "vv", with: "4")
-                        .replacingOccurrences(of: "xx", with: "5")
-                        .replacingOccurrences(of: "qq", with: "6")
-                        .replacingOccurrences(of: "v", with: "1")
-                        .replacingOccurrences(of: "x", with: "2")
-                        .replacingOccurrences(of: "q", with: "3")
-                guard !(convertedText.hasTones) else {
-                        let noToneText = convertedText.removedTones()
-                        let matched = match(text: noToneText).filter({ $0.romanization.hasPrefix(convertedText) || $0.romanization.removedTones() == convertedText.dropLast() })
-                        let candidates = matched.map({ item -> [CoreCandidate] in
-                                let romanizations: [String] = Engine.lookup(item.text)
-                                return romanizations.map({ CoreCandidate(text: item.text, romanization: $0, input: text) })
-                        })
-                        return candidates.flatMap({ $0 })
+        /// - Parameters:
+        ///   - text: Text to process
+        ///   - input: User input for candidates
+        ///   - segmentation: Segmentation
+        /// - Returns: Candidates
+        public static func composeReverseLookup(text: String, input: String, segmentation: Segmentation) -> [Candidate] {
+                let toneFreeText = text.removedTones()
+                let matched = process(text: toneFreeText, segmentation: segmentation).uniqued()
+                guard !matched.isEmpty else { return [] }
+                let toneCount: Int = text.count - toneFreeText.count
+                guard toneCount != 0 else {
+                        return matched.map(\.text).map({ Engine.reveresLookup(text: $0, input: input) }).flatMap({ $0 })
                 }
+                let filtered = matched.filter({ item -> Bool in
+                        if item.romanization.removedSpaces().hasPrefix(text) {
+                                return true
+                        } else {
+                                return (toneCount == 1) && (text.last == item.romanization.last)
+                        }
+                })
+                return filtered.map(\.text).map({ Engine.reveresLookup(text: $0, input: input) }).flatMap({ $0 })
+        }
+
+        private static func process(text: String, segmentation: Segmentation) -> [CoreCandidate] {
                 let textCount = text.count
-                let segmentation = Segmentor.segment(text: text).filter({ $0.length == textCount })
+                let segmentation = segmentation.filter({ $0.length == textCount })
                 guard segmentation.maxLength > 0 else {
-                        let matched = match(text: text)
-                        let candidates = matched.map({ item -> [CoreCandidate] in
-                                let romanizations: [String] = Engine.lookup(item.text)
-                                return romanizations.map({ CoreCandidate(text: item.text, romanization: $0, input: text) })
-                        })
-                        return candidates.flatMap({ $0 })
+                        return match(text: text)
                 }
                 let matches = segmentation.map({ scheme -> [CoreCandidate] in
                         let pingText = scheme.map(\.origin).joined()
                         return match(text: pingText)
                 })
-                let candidates = matches.flatMap({ $0 }).map({ item -> [CoreCandidate] in
-                        let romanizations: [String] = Engine.lookup(item.text)
-                        return romanizations.map({ CoreCandidate(text: item.text, romanization: $0, input: text) })
-                })
-                return candidates.flatMap({ $0 })
+                return match(text: text) + matches.flatMap({ $0 })
         }
 
         private static func match(text: String) -> [CoreCandidate] {

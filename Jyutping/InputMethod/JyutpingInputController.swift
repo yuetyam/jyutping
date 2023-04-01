@@ -159,13 +159,7 @@ final class JyutpingInputController: IMKInputController {
                         case .some(let character) where character.isReverseLookupTrigger:
                                 processingText = bufferText
                         case .some(let character) where character.isBasicLatinLetter:
-                                processingText = bufferText
-                                        .replacingOccurrences(of: "vv", with: "4")
-                                        .replacingOccurrences(of: "xx", with: "5")
-                                        .replacingOccurrences(of: "qq", with: "6")
-                                        .replacingOccurrences(of: "v", with: "1")
-                                        .replacingOccurrences(of: "x", with: "2")
-                                        .replacingOccurrences(of: "q", with: "3")
+                                processingText = bufferText.toneConverted()
                         default:
                                 processingText = bufferText
                         }
@@ -196,15 +190,33 @@ final class JyutpingInputController: IMKInputController {
                                 segmentation = []
                                 strokeReverseLookup()
                         case .some("q"):
-                                segmentation = []
-                                markedText = processingText
-                                composeReverseLookup()
+                                guard processingText.count > 2 else {
+                                        markedText = processingText
+                                        segmentation = []
+                                        candidates = []
+                                        return
+                                }
+                                let text = processingText.dropFirst().toneConverted()
+                                segmentation = Segmentor.segment(text: text)
+                                let tailMarkedText: String = {
+                                        let isMarkFree: Bool = text.first(where: { $0.isSeparatorOrTone }) == nil
+                                        guard isMarkFree else { return text.formattedForMark() }
+                                        guard let bestScheme = segmentation.first else { return text.formattedForMark() }
+                                        let leadingLength: Int = bestScheme.length
+                                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                                        guard leadingLength != text.count else { return leadingText }
+                                        let tailText = text.dropFirst(leadingLength)
+                                        return leadingText + " " + tailText
+                                }()
+                                markedText = "q " + tailMarkedText
+                                let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: processingText, segmentation: segmentation)
+                                push(lookup)
                         case .some(let character) where character.isBasicLatinLetter:
                                 segmentation = Segmentor.segment(text: processingText)
                                 markedText = {
-                                        let isMarkFree: Bool = processingText.filter(\.isSeparatorOrTone).isEmpty
-                                        guard isMarkFree else { return processingText }
-                                        guard let bestScheme = segmentation.first else { return processingText }
+                                        let isMarkFree: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil
+                                        guard isMarkFree else { return processingText.formattedForMark() }
+                                        guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
                                         let leadingLength: Int = bestScheme.length
                                         let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
                                         guard leadingLength != processingText.count else { return leadingText }
