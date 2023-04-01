@@ -3,8 +3,6 @@ import SQLite3
 
 extension Engine {
 
-        // TODO: - Handle separators
-
         /// Compose(LoengFan) Reverse Lookup
         /// - Parameters:
         ///   - text: Text to process
@@ -12,21 +10,37 @@ extension Engine {
         ///   - segmentation: Segmentation
         /// - Returns: Candidates
         public static func composeReverseLookup(text: String, input: String, segmentation: Segmentation) -> [Candidate] {
-                let toneFreeText = text.removedTones()
-                let matched = process(text: toneFreeText, segmentation: segmentation).uniqued()
+                let markFreeText = text.removedSpacesTonesSeparators()
+                let matched = process(text: markFreeText, segmentation: segmentation).uniqued()
                 guard !matched.isEmpty else { return [] }
-                let toneCount: Int = text.count - toneFreeText.count
-                guard toneCount != 0 else {
+                switch (text.hasSeparators, text.hasTones) {
+                case (true, true):
+                        let isOneToneOnly: Bool = (text.count - markFreeText.count) == 2
+                        guard isOneToneOnly else { return [] }
+                        let textParts = text.removedTones().split(separator: "'")
+                        let filtered = matched.filter({ item -> Bool in
+                                let syllables = item.romanization.removedTones().split(separator: " ")
+                                return (syllables == textParts) && (item.romanization.last == text.last)
+                        })
+                        return filtered.map(\.text).map({ Engine.reveresLookup(text: $0, input: input) }).flatMap({ $0 })
+                case (false, true):
+                        let isOneToneOnly: Bool = (text.count - markFreeText.count) == 1
+                        let filtered = matched.filter({ item -> Bool in
+                                guard !(item.romanization.removedSpaces().hasPrefix(text)) else { return true }
+                                guard isOneToneOnly else { return false }
+                                return text.last == item.romanization.last
+                        })
+                        return filtered.map(\.text).map({ Engine.reveresLookup(text: $0, input: input) }).flatMap({ $0 })
+                case (true, false):
+                        let textParts = text.split(separator: "'")
+                        let filtered = matched.filter({ item -> Bool in
+                                let syllables = item.romanization.removedTones().split(separator: " ")
+                                return syllables == textParts
+                        })
+                        return filtered.map(\.text).map({ Engine.reveresLookup(text: $0, input: input) }).flatMap({ $0 })
+                case (false, false):
                         return matched.map(\.text).map({ Engine.reveresLookup(text: $0, input: input) }).flatMap({ $0 })
                 }
-                let filtered = matched.filter({ item -> Bool in
-                        if item.romanization.removedSpaces().hasPrefix(text) {
-                                return true
-                        } else {
-                                return (toneCount == 1) && (text.last == item.romanization.last)
-                        }
-                })
-                return filtered.map(\.text).map({ Engine.reveresLookup(text: $0, input: input) }).flatMap({ $0 })
         }
 
         private static func process(text: String, segmentation: Segmentation) -> [CoreCandidate] {

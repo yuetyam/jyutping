@@ -34,6 +34,12 @@ extension String {
                 return self.replacingOccurrences(of: "'", with: "")
         }
 
+        /// Remove all separators and tones
+        /// - Returns: A subsequence that leaves off separators and tones
+        func removedSeparatorsTones() -> String {
+                return self.filter({ !$0.isSeparatorOrTone })
+        }
+
         /// Remove all spaces, tones and separators
         /// - Returns: A subsequence that leaves off spaces, tones and separators
         func removedSpacesTonesSeparators() -> String {
@@ -47,7 +53,7 @@ extension String {
 
         /// Contains tone number (1-6)
         var hasTones: Bool {
-                return !(self.filter(\.isTone).isEmpty)
+                return self.first(where: { $0.isTone }) != nil
         }
 }
 

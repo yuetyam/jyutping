@@ -51,7 +51,7 @@ public struct Engine {
         private static func dispatch(text: String, segmentation: Segmentation) -> [CoreCandidate] {
                 switch (text.hasSeparators, text.hasTones) {
                 case (true, true):
-                        let syllable = text.removedSpacesTonesSeparators()
+                        let syllable = text.removedSeparatorsTones()
                         let candidates = match(text: syllable, input: text)
                         let filtered = candidates.filter({ text.hasPrefix($0.romanization) })
                         return filtered
