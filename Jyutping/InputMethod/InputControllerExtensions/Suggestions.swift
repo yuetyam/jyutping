@@ -22,12 +22,12 @@ extension JyutpingInputController {
         }
 
         func pinyinReverseLookup() {
-                let text: String = String(processingText.dropFirst())
+                let text = processingText.dropFirst()
                 guard !text.isEmpty else {
                         clearCandidates()
                         return
                 }
-                let lookup: [Candidate] = Engine.pinyinLookup(for: text)
+                let lookup: [Candidate] = Engine.pinyinLookup(for: String(text))
                 push(lookup)
         }
         func cangjieReverseLookup() {
@@ -57,13 +57,13 @@ extension JyutpingInputController {
                         clearCandidates()
                 }
         }
-        func leungFanReverseLookup() {
-                let text: String = String(processingText.dropFirst())
-                guard !text.isEmpty else {
+        func composeReverseLookup() {
+                let text = processingText.dropFirst()
+                guard text.count > 2 else {
                         clearCandidates()
                         return
                 }
-                let lookup: [Candidate] = Engine.leungFanLookup(for: text)
+                let lookup: [Candidate] = Engine.composeLookup(text: String(text))
                 push(lookup)
         }
 }

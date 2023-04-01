@@ -511,7 +511,7 @@ final class KeyboardViewController: UIInputViewController {
                         case .some("q"):
                                 segmentation = []
                                 markedText = processingText
-                                leungFanReverseLookup()
+                                composeReverseLookup()
                         default:
                                 segmentation = Segmentor.segment(text: processingText)
                                 markedText = {
@@ -590,12 +590,12 @@ final class KeyboardViewController: UIInputViewController {
         // MARK: - Engine
 
         private func pinyinReverseLookup() {
-                let text: String = String(processingText.dropFirst())
+                let text = processingText.dropFirst()
                 guard !text.isEmpty else {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Engine.pinyinLookup(for: text)
+                let lookup: [Candidate] = Engine.pinyinLookup(for: String(text))
                 push(lookup)
         }
         private func cangjieReverseLookup() {
@@ -625,13 +625,13 @@ final class KeyboardViewController: UIInputViewController {
                         candidates = []
                 }
         }
-        private func leungFanReverseLookup() {
-                let text: String = String(processingText.dropFirst())
-                guard !text.isEmpty else {
+        private func composeReverseLookup() {
+                let text = processingText.dropFirst()
+                guard text.count > 2 else {
                         candidates = []
                         return
                 }
-                let lookup: [Candidate] = Engine.leungFanLookup(for: text)
+                let lookup: [Candidate] = Engine.composeLookup(text: String(text))
                 push(lookup)
         }
         private func suggest() {

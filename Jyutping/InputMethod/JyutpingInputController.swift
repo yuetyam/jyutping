@@ -198,7 +198,7 @@ final class JyutpingInputController: IMKInputController {
                         case .some("q"):
                                 segmentation = []
                                 markedText = processingText
-                                leungFanReverseLookup()
+                                composeReverseLookup()
                         case .some(let character) where character.isBasicLatinLetter:
                                 segmentation = Segmentor.segment(text: processingText)
                                 markedText = {

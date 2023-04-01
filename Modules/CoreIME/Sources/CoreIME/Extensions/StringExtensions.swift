@@ -16,6 +16,12 @@ extension String {
                 return self.filter({ !$0.isTone })
         }
 
+        /// Remove all spaces
+        /// - Returns: A subsequence that leaves off spaces.
+        func removedSpaces() -> String {
+                return self.replacingOccurrences(of: " ", with: "")
+        }
+
         /// Remove all spaces and tones
         /// - Returns: A subsequence that leaves off spaces and tones.
         func removedSpacesTones() -> String {

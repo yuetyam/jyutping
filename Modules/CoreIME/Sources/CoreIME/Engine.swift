@@ -58,7 +58,7 @@ public struct Engine {
                 case (false, true):
                         let candidates: [Candidate] = match(segmentation: segmentation)
                         let qualified = candidates.map({ item -> Candidate? in
-                                let continuous = item.romanization.filter({ !$0.isSpace })
+                                let continuous = item.romanization.removedSpaces()
                                 if continuous.hasPrefix(text) {
                                         return Candidate(text: item.text, romanization: item.romanization, input: text)
                                 } else if text.hasPrefix(continuous) {
@@ -119,7 +119,7 @@ public struct Engine {
                         let anchors = (schemeAnchors + [last]).compactMap({ $0 })
                         return String(anchors)
                 })
-                let prefixes: [CoreCandidate] = anchorsArray.map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
+                let prefixes: [CoreCandidate] = anchorsArray.uniqued().map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
                         .filter({ $0.romanization.removedSpacesTones().hasPrefix(text) })
                         .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: text) })
                 guard prefixes.isEmpty else { return (prefixes + candidates).uniqued() }
