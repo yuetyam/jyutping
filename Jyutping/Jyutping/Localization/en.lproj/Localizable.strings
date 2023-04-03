@@ -56,9 +56,6 @@
 "tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
 "faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
 
-"Cantonese Expressions" = "Cantonese Expressions";
-"title.expressions" = "Expressions";
-
 "FAQ" = "FAQ";
 "Can I use with external keyboards?" = "Can I use with external keyboards?";
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";
@@ -86,6 +83,11 @@
 
 
 // MARK: - Cantonese
+
+"Cantonese Expressions" = "Cantonese Expressions";
+"title.expressions" = "Expressions";
+
+"Hans Mess" = "Hans Mess";
 
 "Numbers" = "Numbers";
 "Stems and Branches" = "Stems & Branches";

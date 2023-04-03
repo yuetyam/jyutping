@@ -38,6 +38,8 @@
 		37942C7E29BD81EF00667A58 /* IOSHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7D29BD81EF00667A58 /* IOSHongKongMTRView.swift */; };
 		37A5D00529A888E700256042 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37A5D00429A888E700256042 /* Release.xcconfig */; };
 		37A5D00729A888F900256042 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37A5D00629A888F900256042 /* Debug.xcconfig */; };
+		37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775429D96FEC007F07D7 /* MacHansMessView.swift */; };
+		37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */; };
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
 		37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */; };
@@ -270,6 +272,8 @@
 		37942C7D29BD81EF00667A58 /* IOSHongKongMTRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHongKongMTRView.swift; sourceTree = "<group>"; };
 		37A5D00429A888E700256042 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		37A5D00629A888F900256042 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		37AD775429D96FEC007F07D7 /* MacHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHansMessView.swift; sourceTree = "<group>"; };
+		37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHansMessView.swift; sourceTree = "<group>"; };
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
 		37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
@@ -569,6 +573,7 @@
 			children = (
 				37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */,
 				37D7BDA9294CB9F3006A6ADD /* IOSExpressionsView.swift */,
+				37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */,
 				3773564929A744EA00468C2A /* IOSCantonMetroView.swift */,
 				378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */,
 				37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */,
@@ -746,6 +751,7 @@
 				37D7BD8F294CB6C6006A6ADD /* MacInputMethodInstallationView.swift */,
 				37D7BD95294CB6C6006A6ADD /* MacIntroductionsView.swift */,
 				37D7BD96294CB6C6006A6ADD /* MacExpressionsView.swift */,
+				37AD775429D96FEC007F07D7 /* MacHansMessView.swift */,
 				37EF195A296DBE5B00A3F4C9 /* Search */,
 				3773564B29A769D600468C2A /* Metro */,
 				37D7BD91294CB6C6006A6ADD /* MacResourcesView.swift */,
@@ -1287,6 +1293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */,
 				37D7BD67294CB212006A6ADD /* FontExtensions.swift in Sources */,
 				37D7BD68294CB212006A6ADD /* ViewExtensions.swift in Sources */,
 				378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */,
@@ -1294,6 +1301,7 @@
 				37D7BDBC294CC3AB006A6ADD /* CantoneseView.swift in Sources */,
 				37D7BDB3294CB9F3006A6ADD /* AboutView.swift in Sources */,
 				37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */,
+				37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */,
 				37D7BD79294CB440006A6ADD /* StemsBranchesView.swift in Sources */,
 				3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */,
 				378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */,

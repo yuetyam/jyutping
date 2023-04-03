@@ -55,9 +55,6 @@
 "tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
 "faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
 
-"Cantonese Expressions" = "粵語用字參攷";
-"title.expressions" = "粵語用字參攷";
-
 "FAQ" = "常問問題";
 "Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
@@ -85,6 +82,11 @@
 
 
 // MARK: - Cantonese
+
+"Cantonese Expressions" = "粵語用字參攷";
+"title.expressions" = "粵語用字參攷";
+
+"Hans Mess" = "簡化字常見混亂";
 
 "Numbers" = "數字";
 "Stems and Branches" = "天干地支";

@@ -22,9 +22,14 @@ struct MacContentViewMonterey: View {
                                                 Label("Introductions", systemImage: "book")
                                         }
                                         NavigationLink {
-                                                MacExpressionsView().textSelection(.enabled).visualEffect()
+                                                MacExpressionsView().visualEffect()
                                         } label: {
-                                                Label("Cantonese Expressions", systemImage: "text.quote")
+                                                Label("Cantonese Expressions", systemImage: "checkmark.seal")
+                                        }
+                                        NavigationLink {
+                                                MacHansMessView().visualEffect()
+                                        } label: {
+                                                Label("Hans Mess", systemImage: "character")
                                         }
                                 } header: {
                                         Text("Input Method").textCase(nil)

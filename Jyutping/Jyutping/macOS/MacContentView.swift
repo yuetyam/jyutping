@@ -29,7 +29,8 @@ struct MacContentView: View {
                                 Section {
                                         Label("Install Input Method", systemImage: "laptopcomputer.and.arrow.down").tag(ViewIdentifier.installation)
                                         Label("Introductions", systemImage: "book").tag(ViewIdentifier.introductions)
-                                        Label("Cantonese Expressions", systemImage: "text.quote").tag(ViewIdentifier.expressions)
+                                        Label("Cantonese Expressions", systemImage: "checkmark.seal").tag(ViewIdentifier.expressions)
+                                        Label("Hans Mess", systemImage: "character").tag(ViewIdentifier.hansMess)
                                 } header: {
                                         Text("Input Method").textCase(nil)
                                 }
@@ -70,6 +71,8 @@ struct MacContentView: View {
                                 MacIntroductionsView().visualEffect()
                         case .expressions:
                                 MacExpressionsView().visualEffect()
+                        case .hansMess:
+                                MacHansMessView().visualEffect()
                         case .search:
                                 MacSearchView().visualEffect()
                         case .initials:
@@ -108,6 +111,7 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case installation
         case introductions
         case expressions
+        case hansMess
 
         case search
         case initials
