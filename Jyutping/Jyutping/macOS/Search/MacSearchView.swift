@@ -15,6 +15,7 @@ struct MacSearchView: View {
         @State private var fanWanEntries: [FanWanCuetYiu] = []
         @State private var gwongWanEntries: [GwongWanCharacter] = []
         @State private var animationState: Int = 0
+        @Namespace private var topID
 
         private func handleSubmission(_ text: String) {
                 let trimmedInput: String = text.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
@@ -49,6 +50,7 @@ struct MacSearchView: View {
                 ScrollViewReader { proxy in
                         SearchField("Search Pronunciation", submittedText: $submittedText)
                                 .focused($isTextFieldFocused)
+                                .font(.master)
                                 .padding(8)
                                 .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 .padding()
@@ -56,7 +58,7 @@ struct MacSearchView: View {
                                         isTextFieldFocused = true
                                 }
                                 .onChange(of: submittedText) { newText in
-                                        proxy.scrollTo(-1)
+                                        proxy.scrollTo(topID)
                                         Task(priority: .high) {
                                                 handleSubmission(newText)
                                         }
@@ -64,7 +66,7 @@ struct MacSearchView: View {
                         ScrollView {
                                 LazyVStack(spacing: 32) {
                                         if !cantonese.isEmpty {
-                                                CantoneseTextView(cantonese).block().id(-1)
+                                                CantoneseTextView(cantonese).block().id(topID)
                                         }
                                         if !pronunciations.isEmpty {
                                                 VStack {

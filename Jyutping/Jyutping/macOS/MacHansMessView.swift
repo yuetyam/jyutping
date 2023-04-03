@@ -18,17 +18,17 @@ struct MacHansMessView: View {
                                         Spacer()
                                 }
                                 .font(.copilot)
+                                .textSelection(.enabled)
                                 ForEach(0..<items.count, id: \.self) { index in
                                         MessView(item: items[index])
                                 }
                         }
-                        .textSelection(.enabled)
                         .padding()
-                        .task {
-                                guard !isDataSourceLoaded else { return }
-                                items = HansMess.fetch()
-                                isDataSourceLoaded = true
-                        }
+                }
+                .task {
+                        guard !isDataSourceLoaded else { return }
+                        items = HansMess.fetch()
+                        isDataSourceLoaded = true
                 }
                 .navigationTitle("Hans Mess")
         }
@@ -66,6 +66,7 @@ private struct MessView: View {
                         Spacer()
                 }
                 .font(.master)
+                .textSelection(.enabled)
                 .padding(.vertical, 12)
                 .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
