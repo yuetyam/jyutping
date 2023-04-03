@@ -46,118 +46,122 @@ struct MacSearchView: View {
         }
 
         var body: some View {
-                ScrollView {
-                        LazyVStack(spacing: 32) {
-                                SearchField("Search Pronunciation", submittedText: $submittedText)
-                                        .focused($isTextFieldFocused)
-                                        .padding(8)
-                                        .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                                        .onAppear {
-                                                isTextFieldFocused = true
-                                        }
-                                        .onChange(of: submittedText) { newText in
-                                                Task(priority: .high) {
-                                                        handleSubmission(newText)
-                                                }
-                                        }
-                                if !cantonese.isEmpty {
-                                        CantoneseTextView(cantonese).block()
+                ScrollViewReader { proxy in
+                        SearchField("Search Pronunciation", submittedText: $submittedText)
+                                .focused($isTextFieldFocused)
+                                .padding(8)
+                                .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                .padding()
+                                .onAppear {
+                                        isTextFieldFocused = true
                                 }
-                                if !pronunciations.isEmpty {
-                                        VStack {
-                                                ForEach(0..<pronunciations.count, id: \.self) { index in
-                                                        RomanizationLabelView(pronunciations[index])
-                                                        if (index < pronunciations.count - 1) {
-                                                                Divider()
-                                                        }
-                                                }
+                                .onChange(of: submittedText) { newText in
+                                        proxy.scrollTo(-1)
+                                        Task(priority: .high) {
+                                                handleSubmission(newText)
                                         }
-                                        .block()
                                 }
-                                if !yingWaaEntries.isEmpty {
-                                        VStack(spacing: 2) {
-                                                HStack {
-                                                        Text(verbatim: yingWaaEntries.first!.word)
-                                                        Text(verbatim: "《英華分韻撮要》")
-                                                        Text(verbatim: "衛三畏(Samuel Wells Williams)　1856　廣州").foregroundColor(.secondary)
-                                                        Spacer()
-                                                }
-                                                .font(.copilot)
+                        ScrollView {
+                                LazyVStack(spacing: 32) {
+                                        if !cantonese.isEmpty {
+                                                CantoneseTextView(cantonese).block().id(-1)
+                                        }
+                                        if !pronunciations.isEmpty {
                                                 VStack {
-                                                        ForEach(0..<yingWaaEntries.count, id: \.self) { index in
-                                                                YingWaaFanWanView(entry: yingWaaEntries[index])
-                                                                if (index < yingWaaEntries.count - 1) {
+                                                        ForEach(0..<pronunciations.count, id: \.self) { index in
+                                                                RomanizationLabelView(pronunciations[index])
+                                                                if (index < pronunciations.count - 1) {
                                                                         Divider()
                                                                 }
                                                         }
                                                 }
                                                 .block()
                                         }
-                                }
-                                if !choHokEntries.isEmpty {
-                                        VStack(spacing: 2) {
-                                                HStack {
-                                                        Text(verbatim: choHokEntries.first!.word)
-                                                        Text(verbatim: "《初學粵音切要》")
-                                                        Text(verbatim: "湛約翰(John Chalmers)　1855　香港").foregroundColor(.secondary)
-                                                        Spacer()
-                                                }
-                                                .font(.copilot)
-                                                VStack {
-                                                        ForEach(0..<choHokEntries.count, id: \.self) { index in
-                                                                ChoHokYuetYamCitYiuView(entry: choHokEntries[index])
-                                                                if (index < choHokEntries.count - 1) {
-                                                                        Divider()
+                                        if !yingWaaEntries.isEmpty {
+                                                VStack(spacing: 2) {
+                                                        HStack {
+                                                                Text(verbatim: yingWaaEntries.first!.word)
+                                                                Text(verbatim: "《英華分韻撮要》")
+                                                                Text(verbatim: "衛三畏(Samuel Wells Williams)　1856　廣州").foregroundColor(.secondary)
+                                                                Spacer()
+                                                        }
+                                                        .font(.copilot)
+                                                        VStack {
+                                                                ForEach(0..<yingWaaEntries.count, id: \.self) { index in
+                                                                        YingWaaFanWanView(entry: yingWaaEntries[index])
+                                                                        if (index < yingWaaEntries.count - 1) {
+                                                                                Divider()
+                                                                        }
                                                                 }
                                                         }
+                                                        .block()
                                                 }
-                                                .block()
                                         }
-                                }
-                                if !fanWanEntries.isEmpty {
-                                        VStack(spacing: 2) {
-                                                HStack {
-                                                        Text(verbatim: fanWanEntries.first!.word)
-                                                        Text(verbatim: "《分韻撮要》")
-                                                        Spacer()
-                                                }
-                                                .font(.copilot)
-                                                VStack {
-                                                        ForEach(0..<fanWanEntries.count, id: \.self) { index in
-                                                                FanWanCuetYiuView(entry: fanWanEntries[index])
-                                                                if (index < fanWanEntries.count - 1) {
-                                                                        Divider()
+                                        if !choHokEntries.isEmpty {
+                                                VStack(spacing: 2) {
+                                                        HStack {
+                                                                Text(verbatim: choHokEntries.first!.word)
+                                                                Text(verbatim: "《初學粵音切要》")
+                                                                Text(verbatim: "湛約翰(John Chalmers)　1855　香港").foregroundColor(.secondary)
+                                                                Spacer()
+                                                        }
+                                                        .font(.copilot)
+                                                        VStack {
+                                                                ForEach(0..<choHokEntries.count, id: \.self) { index in
+                                                                        ChoHokYuetYamCitYiuView(entry: choHokEntries[index])
+                                                                        if (index < choHokEntries.count - 1) {
+                                                                                Divider()
+                                                                        }
                                                                 }
                                                         }
+                                                        .block()
                                                 }
-                                                .block()
                                         }
-                                }
-                                if !gwongWanEntries.isEmpty {
-                                        VStack(spacing: 2) {
-                                                HStack {
-                                                        Text(verbatim: gwongWanEntries.first!.word)
-                                                        Text(verbatim: "《大宋重修廣韻》")
-                                                        Spacer()
-                                                }
-                                                .font(.copilot)
-                                                VStack {
-                                                        ForEach(0..<gwongWanEntries.count, id: \.self) { index in
-                                                                GwongWanView(entry: gwongWanEntries[index])
-                                                                if (index < gwongWanEntries.count - 1) {
-                                                                        Divider()
+                                        if !fanWanEntries.isEmpty {
+                                                VStack(spacing: 2) {
+                                                        HStack {
+                                                                Text(verbatim: fanWanEntries.first!.word)
+                                                                Text(verbatim: "《分韻撮要》")
+                                                                Spacer()
+                                                        }
+                                                        .font(.copilot)
+                                                        VStack {
+                                                                ForEach(0..<fanWanEntries.count, id: \.self) { index in
+                                                                        FanWanCuetYiuView(entry: fanWanEntries[index])
+                                                                        if (index < fanWanEntries.count - 1) {
+                                                                                Divider()
+                                                                        }
                                                                 }
                                                         }
+                                                        .block()
                                                 }
-                                                .block()
+                                        }
+                                        if !gwongWanEntries.isEmpty {
+                                                VStack(spacing: 2) {
+                                                        HStack {
+                                                                Text(verbatim: gwongWanEntries.first!.word)
+                                                                Text(verbatim: "《大宋重修廣韻》")
+                                                                Spacer()
+                                                        }
+                                                        .font(.copilot)
+                                                        VStack {
+                                                                ForEach(0..<gwongWanEntries.count, id: \.self) { index in
+                                                                        GwongWanView(entry: gwongWanEntries[index])
+                                                                        if (index < gwongWanEntries.count - 1) {
+                                                                                Divider()
+                                                                        }
+                                                                }
+                                                        }
+                                                        .block()
+                                                }
                                         }
                                 }
+                                .font(.master)
+                                .textSelection(.enabled)
+                                .padding(.horizontal)
                         }
-                        .font(.master)
-                        .textSelection(.enabled)
-                        .padding()
+                        .animation(.default, value: animationState)
                 }
-                .animation(.default, value: animationState)
                 .navigationTitle("Search")
         }
 }
