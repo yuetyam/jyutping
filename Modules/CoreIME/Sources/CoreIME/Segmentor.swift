@@ -79,7 +79,7 @@ public struct Segmentor {
                                 guard schemeLength < textCount else { continue }
                                 let tailText: String = String(text.dropFirst(schemeLength))
                                 let tailTokens = splitLeading(tailText)
-                                guard !tailTokens.isEmpty else { continue }
+                                guard !(tailTokens.isEmpty) else { continue }
                                 let newSegmentation: Segmentation = tailTokens.map({ scheme + [$0] })
                                 segmentation = (segmentation + newSegmentation).uniqued()
                         }

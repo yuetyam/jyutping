@@ -22,12 +22,23 @@ extension JyutpingInputController {
         }
 
         func pinyinReverseLookup() {
-                let text = processingText.dropFirst()
-                guard !text.isEmpty else {
+                let text: String = String(processingText.dropFirst())
+                guard !(text.isEmpty) else {
+                        markedText = processingText
                         clearCandidates()
                         return
                 }
-                let lookup: [Candidate] = Engine.pinyinLookup(for: String(text))
+                let schemes: [[String]] = PinyinSegmentor.segment(text: text)
+                let tailMarkedText: String = {
+                        guard let bestScheme = schemes.first else { return text }
+                        let leadingLength: Int = bestScheme.summedLength
+                        let leadingText: String = bestScheme.joined(separator: " ")
+                        guard leadingLength != text.count else { return leadingText }
+                        let tailText = text.dropFirst(leadingLength)
+                        return leadingText + " " + tailText
+                }()
+                markedText = "r " + tailMarkedText
+                let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
                 push(lookup)
         }
         func cangjieReverseLookup() {

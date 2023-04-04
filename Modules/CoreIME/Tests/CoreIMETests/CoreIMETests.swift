@@ -22,12 +22,16 @@ final class CoreIMETests: XCTestCase {
 
         // MARK: - Reverse Lookup
 
-        func testPinyinSplitter() throws {
+        func testPinyinSegmentor() throws {
                 let text: String = "putonghuapinyin"
-                let schemes: [[String]] = PinyinSplitter.split(text)
-                let syllables: [String] = schemes.first!
-                XCTAssertEqual(syllables, ["pu", "tong", "hua", "pin", "yin"])
+                let schemes: [[String]] = PinyinSegmentor.segment(text: text)
+                if let syllables = schemes.first {
+                        XCTAssertEqual(syllables, ["pu", "tong", "hua", "pin", "yin"])
+                } else {
+                        XCTFail("No schemes")
+                }
         }
+
         /*
         func testPinyinLookup() throws {
                 Engine.prepare()

@@ -181,7 +181,6 @@ final class JyutpingInputController: IMKInputController {
                                 displayObject.reset()
                         case .some("r"):
                                 segmentation = []
-                                markedText = processingText
                                 pinyinReverseLookup()
                         case .some("v"):
                                 segmentation = []

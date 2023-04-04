@@ -1,75 +1,65 @@
-struct PinyinSplitter {
+public struct PinyinSegmentor {
 
-        static func split(_ text: String) -> [[String]] {
-                let leadings: [String] = splitLeading(text)
-                guard !leadings.isEmpty else { return [] }
-
-                var sequences: [[String]] = leadings.map { [$0] }
-                var leadingLength: Int = 0
-                var shouldContinue: Bool = true
-                var latestGeneration: [[String]] = sequences
-                while shouldContinue {
-                        var cache: [[String]] = []
-                        for sequence in latestGeneration {
-                                leadingLength = max(leadingLength, sequence.reduce(0, { $0 + $1.count }))
-                                let lastPart: String = String(text.dropFirst(leadingLength))
-                                let nextTokens: [String] = splitLeading(lastPart)
-                                let newGenSequences: [[String]] = nextTokens.map { sequence + [$0] }
-                                cache += newGenSequences
+        public static func segment(text: String) -> [[String]] {
+                switch text.count {
+                case 0:
+                        return []
+                case 1:
+                        switch text {
+                        case "a", "o", "e":
+                                return [[text]]
+                        default:
+                                return []
                         }
-                        if cache.first?.first != nil {
-                                sequences += cache
-                                latestGeneration = cache
+                default:
+                        return split(text)
+                }
+        }
+
+        private static func split(_ text: String) -> [[String]] {
+                let leadingTokens: [String] = splitLeading(text)
+                guard !(leadingTokens.isEmpty) else { return [] }
+                let textCount = text.count
+                var segmentation: [[String]] = leadingTokens.map({ [$0] })
+                var previousSegmentation = segmentation
+                var shouldContinue: Bool = true
+                while shouldContinue {
+                        for scheme in segmentation {
+                                let schemeLength = scheme.reduce(0, { $0 + $1.count })
+                                guard schemeLength < textCount else { continue }
+                                let tailText = String(text.dropFirst(schemeLength))
+                                let tailTokens = splitLeading(tailText)
+                                guard !(tailTokens.isEmpty) else { continue }
+                                let newSegmentation: [[String]] = tailTokens.map({ scheme + [$0] })
+                                segmentation = (segmentation + newSegmentation).uniqued()
+                        }
+                        if segmentation.subelementCount != previousSegmentation.subelementCount {
+                                previousSegmentation = segmentation
                         } else {
                                 shouldContinue = false
-                                break
-                        }
-
-                        if leadingLength == text.count {
-                                shouldContinue = false
-                                break
-                        }
-                        if !canSplit(String(text.dropFirst(leadingLength))) {
-                                shouldContinue = false
-                                break
                         }
                 }
-                sequences.sort {
-                        let lhsCount: Int = $0.joined().count
-                        let rhsCount: Int = $1.joined().count
-                        if lhsCount == rhsCount {
+                let sequences: [[String]] = segmentation.uniqued().sorted(by: {
+                        let lhsLength: Int = $0.summedLength
+                        let rhsLength: Int = $1.summedLength
+                        if lhsLength == rhsLength {
                                 return $0.count < $1.count
                         } else {
-                                return lhsCount > rhsCount
+                                return lhsLength > rhsLength
                         }
-                }
-                return sequences.uniqued()
+                })
+                return sequences
         }
 
         private static func splitLeading(_ text: String) -> [String] {
-                guard !text.isEmpty else { return [] }
-                var tokens: [String] = []
                 let maxLength: Int = min(text.count, 6)
-                for number in 0..<maxLength {
-                        let tailCount: Int = (text.count - 1) - number
-                        let leading: String = String(text.dropLast(tailCount))
-                        if syllables.contains(leading) {
-                                tokens.append(leading)
-                        }
-                }
-                return tokens
+                guard maxLength > 0 else { return [] }
+                let tokens = (1...maxLength).map({ number -> String? in
+                        let token = String(text.prefix(number))
+                        return syllables.contains(token) ? token : nil
+                })
+                return tokens.compactMap({ $0 })
         }
-
-        private static func canSplit(_ text: String) -> Bool {
-                guard !text.isEmpty else { return false }
-                for pinyin in syllables {
-                        if text.hasPrefix(pinyin) {
-                                return true
-                        }
-                }
-                return false
-        }
-
 
 private static let syllables: Set<String> = [
 "a", "ai", "an", "ang", "ao",
@@ -100,6 +90,4 @@ private static let syllables: Set<String> = [
 "zha", "zhai", "zhan", "zhang", "zhao", "zhe", "zhei", "zhen", "zheng", "zhi", "zhong", "zhou", "zhu", "zhua", "zhuai", "zhuan", "zhuang", "zhui", "zhun", "zhuo"
 ]
 
-
 }
-
