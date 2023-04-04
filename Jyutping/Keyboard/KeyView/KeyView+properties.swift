@@ -116,6 +116,30 @@ extension KeyView {
                 }
         }
 
+        /// KeyView shape.layer.cornerRadius
+        var layerCornerRadius: CGFloat {
+                switch keyboardInterface {
+                case .phonePortrait:
+                        return 5
+                case .phoneLandscape:
+                        return 5
+                case .padFloating:
+                        return 4
+                case .padPortraitSmall:
+                        return 6
+                case .padPortraitMedium:
+                        return 6
+                case .padPortraitLarge:
+                        return 6
+                case .padLandscapeSmall:
+                        return 6
+                case .padLandscapeMedium:
+                        return 6
+                case .padLandscapeLarge:
+                        return 6
+                }
+        }
+
         var keyFont: UIFont {
                 // https://www.iosfontsizes.com
                 // https://developer.apple.com/design/human-interface-guidelines/foundations/typography

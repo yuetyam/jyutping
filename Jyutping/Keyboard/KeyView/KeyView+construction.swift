@@ -24,7 +24,7 @@ extension KeyView {
                 shape.isUserInteractionEnabled = false
                 shape.tintColor = foreColor
                 shape.backgroundColor = shapeColor
-                shape.layer.cornerRadius = 5
+                shape.layer.cornerRadius = layerCornerRadius
                 shape.layer.cornerCurve = .continuous
                 shape.layer.shadowColor = UIColor.black.cgColor
                 shape.layer.shadowOpacity = isDarkAppearance ? 1 : 0.3
