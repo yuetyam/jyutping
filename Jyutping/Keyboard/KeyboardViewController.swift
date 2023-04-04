@@ -642,7 +642,7 @@ final class KeyboardViewController: UIInputViewController {
                         var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
                         let shouldContinue: Bool = needsEmojiCandidates && !suggestion.isEmpty && candidateSequence.isEmpty
                         guard shouldContinue else { return suggestion }
-                        let symbols: [Candidate] = Engine.searchEmojiSymbols(for: bufferText)
+                        let symbols: [Candidate] = Engine.searchSymbols(text: bufferText, segmentation: segmentation)
                         guard !(symbols.isEmpty) else { return suggestion }
                         for symbol in symbols.reversed() {
                                 if let index = suggestion.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
