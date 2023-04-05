@@ -84,35 +84,36 @@ struct UserLexicon {
 
         // MARK: - Suggestion
 
-        static func suggest(for text: String) -> [Candidate] {
-                let regularMatch = match(text: text, isShortcut: false)
-                let regularShortcut = match(text: text, isShortcut: true)
-                let convertedText: String = text.replacingOccurrences(of: "eo(ng|k)$", with: "oe$1", options: .regularExpression)
-                        .replacingOccurrences(of: "oe(i|n|t)$", with: "eo$1", options: .regularExpression)
-                        .replacingOccurrences(of: "eung$", with: "oeng", options: .regularExpression)
-                        .replacingOccurrences(of: "(u|o)m$", with: "am", options: .regularExpression)
-                        .replacingOccurrences(of: "^(ng|gw|kw|[b-z])?a$", with: "$1aa", options: .regularExpression)
-                        .replacingOccurrences(of: "^y(u|un|ut)$", with: "jy$1", options: .regularExpression)
-                        .replacingOccurrences(of: "y", with: "j", options: .anchored)
-                let anotherMatch = match(text: convertedText, isShortcut: false)
-                let anotherShortcut = match(text: convertedText, isShortcut: true)
-                return regularMatch + regularShortcut + anotherMatch + anotherShortcut
+        static func suggest(text: String, segmentation: Segmentation) -> [Candidate] {
+                let regularMatch = match(text: text, input: text, isShortcut: false)
+                let regularShortcut = match(text: text, input: text, isShortcut: true)
+                let textCount = text.count
+                let segmentation = segmentation.filter({ $0.length == textCount })
+                guard segmentation.maxLength > 0 else {
+                        return (regularMatch + regularShortcut).uniqued()
+                }
+                let matches = segmentation.map({ scheme -> [Candidate] in
+                        let pingText = scheme.map(\.origin).joined()
+                        return match(text: pingText, input: text, isShortcut: false)
+                })
+                let combined = regularMatch + regularShortcut + matches.flatMap({ $0 })
+                return combined.uniqued()
         }
-        private static func match(text: String, isShortcut: Bool) -> [Candidate] {
+
+        private static func match(text: String, input: String, isShortcut: Bool) -> [Candidate] {
                 var candidates: [Candidate] = []
                 let code: Int = isShortcut ? text.replacingOccurrences(of: "y", with: "j").hash : text.hash
                 let column: String = isShortcut ? "shortcut" : "ping"
-                let queryStatementString = "SELECT word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
-                var queryStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, queryStatementString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let word = String(cString: sqlite3_column_text(queryStatement, 0))
-                                let jyutping = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: text, lexiconText: word)
-                                candidates.append(candidate)
-                        }
+                let query: String = "SELECT word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let word = String(cString: sqlite3_column_text(statement, 0))
+                        let jyutping = String(cString: sqlite3_column_text(statement, 1))
+                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, lexiconText: word)
+                        candidates.append(candidate)
                 }
-                sqlite3_finalize(queryStatement)
                 return candidates
         }
 

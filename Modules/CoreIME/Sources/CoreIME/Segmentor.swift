@@ -7,7 +7,7 @@ public struct SegmentToken: Hashable {
         /// Token
         public let text: String
         /// Regular Jyutping Syllable
-        let origin: String
+        public let origin: String
 }
 
 public typealias SegmentScheme = Array<SegmentToken>

@@ -148,8 +148,8 @@ final class JyutpingInputController: IMKInputController {
                         }
                         return suggestion
                 }()
-                let lexiconCandidates: [Candidate] = UserLexicon.suggest(for: processingText)
-                let combined: [Candidate] = lexiconCandidates + engineCandidates
+                let userCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
+                let combined: [Candidate] = userCandidates + engineCandidates
                 candidates = combined.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
 
