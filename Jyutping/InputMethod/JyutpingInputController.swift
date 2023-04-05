@@ -56,16 +56,10 @@ final class JyutpingInputController: IMKInputController {
         }
         override func deactivateServer(_ sender: Any!) {
                 candidateSequence = []
-                currentClient?.clearMarkedText()
+                unmarkText()
                 window?.setFrame(.zero, display: true)
         }
 
-        func push(_ origin: [Candidate]) {
-                candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()
-        }
-        func clearCandidates() {
-                candidates = []
-        }
         private(set) lazy var candidates: [Candidate] = [] {
                 willSet {
                         if window == nil {
@@ -137,6 +131,8 @@ final class JyutpingInputController: IMKInputController {
                 displayObject.update(with: newItems, highlight: highlight)
         }
 
+        lazy var candidateSequence: [Candidate] = []
+
         func clearBufferText() {
                 bufferText = .empty
         }
@@ -145,126 +141,194 @@ final class JyutpingInputController: IMKInputController {
         }
         lazy var bufferText: String = .empty {
                 willSet {
-                        let shouldHandleCandidateSequence: Bool = !(candidateSequence.isEmpty) && newValue.isEmpty
-                        guard shouldHandleCandidateSequence else { return }
-                        let concatenatedCandidate: Candidate = candidateSequence.joined()
-                        candidateSequence = []
-                        UserLexicon.handle(concatenatedCandidate)
+                        switch (bufferText.isEmpty, newValue.isEmpty) {
+                        case (true, true):
+                                // Stay empty
+                                break
+                        case (true, false):
+                                // Starting
+                                UserLexicon.prepare()
+                                Engine.prepare()
+                        case (false, true):
+                                // Ending
+                                let shouldHandleCandidateSequence: Bool = !(candidateSequence.isEmpty)
+                                guard shouldHandleCandidateSequence else { return }
+                                let concatenated: Candidate = candidateSequence.joined()
+                                candidateSequence = []
+                                UserLexicon.handle(concatenated)
+                        case (false, false):
+                                // Ongoing
+                                break
+                        }
                 }
                 didSet {
                         indices = (0, 0)
                         switch bufferText.first {
                         case .none:
-                                processingText = .empty
-                        case .some(let character) where character.isReverseLookupTrigger:
-                                processingText = bufferText
-                        case .some(let character) where character.isBasicLatinLetter:
-                                processingText = bufferText.toneConverted()
-                        default:
-                                processingText = bufferText
-                        }
-                }
-        }
-        private(set) lazy var processingText: String = .empty {
-                willSet {
-                        let isStarting: Bool = processingText.isEmpty && !newValue.isEmpty
-                        guard isStarting else { return }
-                        UserLexicon.prepare()
-                        Engine.prepare()
-                }
-                didSet {
-                        switch processingText.first {
-                        case .none:
-                                segmentation = []
-                                markedText = .empty
+                                unmarkText()
                                 candidates = []
-                                displayObject.reset()
                         case .some("r"):
-                                segmentation = []
                                 pinyinReverseLookup()
                         case .some("v"):
-                                segmentation = []
                                 cangjieReverseLookup()
                         case .some("x"):
-                                segmentation = []
                                 strokeReverseLookup()
                         case .some("q"):
-                                guard processingText.count > 2 else {
-                                        markedText = processingText
-                                        segmentation = []
-                                        candidates = []
-                                        return
-                                }
-                                let text = processingText.dropFirst().toneConverted()
-                                segmentation = Segmentor.segment(text: text)
-                                let tailMarkedText: String = {
-                                        let isMarkFree: Bool = text.first(where: { $0.isSeparatorOrTone }) == nil
-                                        guard isMarkFree else { return text.formattedForMark() }
-                                        guard let bestScheme = segmentation.first else { return text.formattedForMark() }
-                                        let leadingLength: Int = bestScheme.length
-                                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
-                                        guard leadingLength != text.count else { return leadingText }
-                                        let tailText = text.dropFirst(leadingLength)
-                                        return leadingText + " " + tailText
-                                }()
-                                markedText = "q " + tailMarkedText
-                                let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: processingText, segmentation: segmentation)
-                                push(lookup)
+                                composeReverseLookup()
                         case .some(let character) where character.isBasicLatinLetter:
-                                segmentation = Segmentor.segment(text: processingText)
-                                markedText = {
-                                        let isMarkFree: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil
-                                        guard isMarkFree else { return processingText.formattedForMark() }
-                                        guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
-                                        let leadingLength: Int = bestScheme.length
-                                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
-                                        guard leadingLength != processingText.count else { return leadingText }
-                                        let tailText = processingText.dropFirst(leadingLength)
-                                        return leadingText + " " + tailText
-                                }()
                                 suggest()
                         default:
-                                segmentation = []
-                                markedText = processingText
-                                let symbols: [PunctuationSymbol] = {
-                                        switch processingText {
-                                        case PunctuationKey.comma.shiftingKeyText:
-                                                return PunctuationKey.comma.shiftingSymbols
-                                        case PunctuationKey.period.shiftingKeyText:
-                                                return PunctuationKey.period.shiftingSymbols
-                                        case PunctuationKey.slash.keyText:
-                                                return PunctuationKey.slash.symbols
-                                        case PunctuationKey.bracketLeft.shiftingKeyText:
-                                                return PunctuationKey.bracketLeft.shiftingSymbols
-                                        case PunctuationKey.bracketRight.shiftingKeyText:
-                                                return PunctuationKey.bracketRight.shiftingSymbols
-                                        case PunctuationKey.backSlash.shiftingKeyText:
-                                                return PunctuationKey.backSlash.shiftingSymbols
-                                        case PunctuationKey.backquote.keyText:
-                                                return PunctuationKey.backquote.symbols
-                                        case PunctuationKey.backquote.shiftingKeyText:
-                                                return PunctuationKey.backquote.shiftingSymbols
-                                        default:
-                                                return PunctuationKey.slash.symbols
-                                        }
-                                }()
-                                candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })
+                                mark(text: bufferText)
+                                handlePunctuation()
                         }
                 }
         }
 
-        lazy var markedText: String = .empty {
-                didSet {
-                        currentClient?.mark(markedText)
+        private func mark(text: String) {
+                currentClient?.mark(text)
+        }
+        private func unmarkText() {
+                currentClient?.clearMarkedText()
+        }
+
+
+        // MARK: - Candidate Suggestion
+
+        private func suggest() {
+                let processingText = bufferText.toneConverted()
+                let segmentation = Segmentor.segment(text: processingText)
+                let text2mark: String = {
+                        let isMarkFree: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil
+                        guard isMarkFree else { return processingText.formattedForMark() }
+                        guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
+                        let leadingLength: Int = bestScheme.length
+                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                        guard leadingLength != processingText.count else { return leadingText }
+                        let tailText = processingText.dropFirst(leadingLength)
+                        return leadingText + " " + tailText
+                }()
+                mark(text: text2mark)
+                let engineCandidates: [Candidate] = {
+                        var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
+                        let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !suggestion.isEmpty && candidateSequence.isEmpty
+                        guard shouldContinue else { return suggestion }
+                        let symbols: [Candidate] = Engine.searchSymbols(text: bufferText, segmentation: segmentation)
+                        guard !(symbols.isEmpty) else { return suggestion }
+                        for symbol in symbols.reversed() {
+                                if let index = suggestion.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
+                                        suggestion.insert(symbol, at: index + 1)
+                                }
+                        }
+                        return suggestion
+                }()
+                let lexiconCandidates: [Candidate] = UserLexicon.suggest(for: processingText)
+                let combined: [Candidate] = lexiconCandidates + engineCandidates
+                candidates = combined.map({ $0.transformed(to: Logogram.current) }).uniqued()
+        }
+
+        private func pinyinReverseLookup() {
+                let text: String = String(bufferText.dropFirst())
+                guard !(text.isEmpty) else {
+                        mark(text: bufferText)
+                        candidates = []
+                        return
+                }
+                let schemes: [[String]] = PinyinSegmentor.segment(text: text)
+                let tailMarkedText: String = {
+                        guard let bestScheme = schemes.first else { return text }
+                        let leadingLength: Int = bestScheme.summedLength
+                        let leadingText: String = bestScheme.joined(separator: " ")
+                        guard leadingLength != text.count else { return leadingText }
+                        let tailText = text.dropFirst(leadingLength)
+                        return leadingText + " " + tailText
+                }()
+                let text2mark: String = "r " + tailMarkedText
+                mark(text: text2mark)
+                let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
+                candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+        }
+
+        private func cangjieReverseLookup() {
+                let text: String = String(bufferText.dropFirst())
+                let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
+                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                if isValidSequence {
+                        mark(text: String(converted))
+                        let lookup: [Candidate] = Engine.cangjieLookup(for: text)
+                        candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                } else {
+                        mark(text: bufferText)
+                        candidates = []
+                }
+        }
+        private func strokeReverseLookup() {
+                let text: String = String(bufferText.dropFirst())
+                let transformed: String = Logogram.strokeTransform(text)
+                let converted = transformed.map({ Logogram.stroke(of: $0) }).compactMap({ $0 })
+                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                if isValidSequence {
+                        mark(text: String(converted))
+                        let lookup: [Candidate] = Engine.strokeLookup(for: transformed)
+                        candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                } else {
+                        mark(text: bufferText)
+                        candidates = []
                 }
         }
 
-        lazy var candidateSequence: [Candidate] = []
+        /// Compose(LoengFan) Reverse Lookup
+        private func composeReverseLookup() {
+                guard bufferText.count > 2 else {
+                        mark(text: bufferText)
+                        candidates = []
+                        return
+                }
+                let text = bufferText.dropFirst().toneConverted()
+                let segmentation = Segmentor.segment(text: text)
+                let tailMarkedText: String = {
+                        let isMarkFree: Bool = text.first(where: { $0.isSeparatorOrTone }) == nil
+                        guard isMarkFree else { return text.formattedForMark() }
+                        guard let bestScheme = segmentation.first else { return text.formattedForMark() }
+                        let leadingLength: Int = bestScheme.length
+                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                        guard leadingLength != text.count else { return leadingText }
+                        let tailText = text.dropFirst(leadingLength)
+                        return leadingText + " " + tailText
+                }()
+                let text2mark: String = "q " + tailMarkedText
+                mark(text: text2mark)
+                let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
+                candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+        }
 
-        /// Flexible Segmentation
-        private(set) lazy var segmentation: Segmentation = []
+        private func handlePunctuation() {
+                let symbols: [PunctuationSymbol] = {
+                        switch bufferText {
+                        case PunctuationKey.comma.shiftingKeyText:
+                                return PunctuationKey.comma.shiftingSymbols
+                        case PunctuationKey.period.shiftingKeyText:
+                                return PunctuationKey.period.shiftingSymbols
+                        case PunctuationKey.slash.keyText:
+                                return PunctuationKey.slash.symbols
+                        case PunctuationKey.bracketLeft.shiftingKeyText:
+                                return PunctuationKey.bracketLeft.shiftingSymbols
+                        case PunctuationKey.bracketRight.shiftingKeyText:
+                                return PunctuationKey.bracketRight.shiftingSymbols
+                        case PunctuationKey.backSlash.shiftingKeyText:
+                                return PunctuationKey.backSlash.shiftingSymbols
+                        case PunctuationKey.backquote.keyText:
+                                return PunctuationKey.backquote.symbols
+                        case PunctuationKey.backquote.shiftingKeyText:
+                                return PunctuationKey.backquote.shiftingSymbols
+                        default:
+                                return PunctuationKey.slash.symbols
+                        }
+                }()
+                candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })
+        }
 }
 
+// TODO: - Move this to a separate file
 /// DisplayCandidate page transformation
 enum PageTransformation {
         case establish
