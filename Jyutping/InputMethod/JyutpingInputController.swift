@@ -181,7 +181,7 @@ final class JyutpingInputController: IMKInputController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         mark(text: String(converted))
-                        let lookup: [Candidate] = Engine.cangjieLookup(for: text)
+                        let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text)
                         candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
                 } else {
                         mark(text: bufferText)
@@ -195,7 +195,7 @@ final class JyutpingInputController: IMKInputController {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         mark(text: String(converted))
-                        let lookup: [Candidate] = Engine.strokeLookup(for: transformed)
+                        let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)
                         candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
                 } else {
                         mark(text: bufferText)
