@@ -19,18 +19,18 @@ extension KeyboardViewController {
                 }
         }
 
-        func updateBottomStackView(buffered: Bool) {
+        func updateBottomStackView(isBufferState: Bool) {
                 let bottomEvents: [KeyboardEvent] = {
                         let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
                         switch keyboardInterface {
                         case .phonePortrait, .phoneLandscape:
-                                let newEvent: KeyboardEvent = buffered ? .input(.separator) : .input(.cantoneseComma)
+                                let newEvent: KeyboardEvent = isBufferState ? .input(.separator) : .input(.cantoneseComma)
                                 return [.transform(.cantoneseNumeric), switchKey, .space, newEvent, .newLine]
                         case .padFloating:
-                                let newEvent: KeyboardEvent = buffered ? .input(.separator) : .input(.cantoneseComma)
+                                let newEvent: KeyboardEvent = isBufferState ? .input(.separator) : .input(.cantoneseComma)
                                 return [switchKey, .transform(.cantoneseNumeric), .space, newEvent, .newLine]
                         default:
-                                let newEvent: KeyboardEvent = buffered ? .input(.separator) : .transform(.cantoneseNumeric)
+                                let newEvent: KeyboardEvent = isBufferState ? .input(.separator) : .transform(.cantoneseNumeric)
                                 return [switchKey, .transform(.cantoneseNumeric), .space, newEvent, .dismiss]
                         }
                 }()

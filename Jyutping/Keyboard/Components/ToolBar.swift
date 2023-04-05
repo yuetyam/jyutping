@@ -91,17 +91,18 @@ final class ToolBar: UIView {
                 }
         }
 
+        // TODO: - Improve this code block
         private lazy var showingToolButtons: Bool = true
-        func update() {
-                if controller.bufferText.isEmpty {
-                        if !showingToolButtons {
-                                setupToolMode()
-                                showingToolButtons = true
-                        }
-                } else {
+        func reload(isBufferState: Bool) {
+                if isBufferState {
                         if showingToolButtons {
                                 setupInputMode()
                                 showingToolButtons = false
+                        }
+                } else {
+                        if !showingToolButtons {
+                                setupToolMode()
+                                showingToolButtons = true
                         }
                 }
         }

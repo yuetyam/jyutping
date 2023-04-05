@@ -104,32 +104,3 @@ extension Engine {
                 return Character(scalar)
         }
 }
-
-
-extension Engine {
-
-
-        /// Search special mark for text
-        /// - Parameter text: Input text
-        /// - Returns: Candidate, type == .specialMark
-        public static func searchMark(for text: String) -> Candidate? {
-                let key: String = text.lowercased()
-                guard let markText = specialMarks[key] else { return nil }
-                return Candidate(mark: markText)
-        }
-
-        private static let specialMarks: [String: String] = {
-                guard let url = Bundle.module.url(forResource: "marks", withExtension: "txt") else { return [:] }
-                guard let content = try? String(contentsOf: url) else { return [:] }
-                let sourceLines: [String] = content
-                        .trimmingCharacters(in: .whitespacesAndNewlines)
-                        .trimmingCharacters(in: .controlCharacters)
-                        .components(separatedBy: .newlines)
-                        .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
-                        .filter({ !$0.isEmpty })
-                let keys: [String] = sourceLines.map({ $0.lowercased() })
-                let dict: [String: String] = Dictionary(uniqueKeysWithValues: zip(keys, sourceLines))
-                return dict
-        }()
-}
-

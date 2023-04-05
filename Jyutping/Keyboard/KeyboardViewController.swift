@@ -460,94 +460,47 @@ final class KeyboardViewController: UIInputViewController {
         // MARK: - Input Texts
 
         private(set) lazy var bufferText: String = .empty {
-                didSet {
-                        switch bufferText.first {
-                        case .none:
-                                possibleTexts = []
-                                processingText = .empty
-                        case .some(let character) where character.isReverseLookupTrigger:
-                                processingText = bufferText
-                        default:
-                                if keyboardLayout == .saamPing {
-                                        processingText = bufferText
-                                } else {
-                                        processingText = bufferText.toneConverted()
-                                }
-                        }
-                        switch (bufferText.isEmpty, oldValue.isEmpty) {
+                willSet {
+                        switch (bufferText.isEmpty, newValue.isEmpty) {
+                        case (true, true):
+                                // Stay empty
+                                break
                         case (true, false):
-                                updateBottomStackView(buffered: false)
+                                // Starting
+                                toolBar.reload(isBufferState: true)
+                                updateBottomStackView(isBufferState: true)
                         case (false, true):
-                                updateBottomStackView(buffered: true)
-                        default:
+                                // Ending
+                                toolBar.reload(isBufferState: false)
+                                updateBottomStackView(isBufferState: false)
+                        case (false, false):
+                                // Ongoing
                                 break
                         }
                 }
-        }
-        private lazy var processingText: String = .empty {
                 didSet {
-                        toolBar.update()
-                        switch processingText.first {
+                        switch bufferText.first {
                         case .none:
-                                segmentation = []
                                 markedText = .empty
                                 candidates = []
                         case .some("r"):
-                                segmentation = []
                                 pinyinReverseLookup()
                         case .some("v"):
-                                segmentation = []
                                 cangjieReverseLookup()
                         case .some("x"):
-                                segmentation = []
                                 strokeReverseLookup()
                         case .some("q"):
-                                guard processingText.count > 2 else {
-                                        markedText = processingText
-                                        segmentation = []
-                                        candidates = []
-                                        return
-                                }
-                                let text = processingText.dropFirst().toneConverted()
-                                segmentation = Segmentor.segment(text: text)
-                                let tailMarkedText: String = {
-                                        let isMarkFree: Bool = text.first(where: { $0.isSeparatorOrTone }) == nil
-                                        guard isMarkFree else { return text.formattedForMark() }
-                                        guard let bestScheme = segmentation.first else { return text.formattedForMark() }
-                                        let leadingLength: Int = bestScheme.length
-                                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
-                                        guard leadingLength != text.count else { return leadingText }
-                                        let tailText = text.dropFirst(leadingLength)
-                                        return leadingText + " " + tailText
-                                }()
-                                markedText = "q " + tailMarkedText
-                                let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: processingText, segmentation: segmentation)
-                                push(lookup)
+                                composeReverseLookup()
                         default:
-                                segmentation = Segmentor.segment(text: processingText)
-                                markedText = {
-                                        let isMarkFree: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil
-                                        guard isMarkFree else { return processingText.formattedForMark() }
-                                        guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
-                                        let leadingLength: Int = bestScheme.length
-                                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
-                                        guard leadingLength != processingText.count else { return leadingText }
-                                        let tailText = processingText.dropFirst(leadingLength)
-                                        return leadingText + " " + tailText
-                                }()
-                                if let markCandidate = Engine.searchMark(for: bufferText) {
-                                        candidates = [markCandidate]
-                                } else {
-                                        suggest()
-                                }
+                                suggest()
                         }
                 }
         }
         private lazy var markedText: String = .empty {
                 willSet {
                         // REASON: Chrome address bar
-                        guard markedText.isEmpty && !newValue.isEmpty else { return }
                         guard textDocumentProxy.keyboardType == .webSearch else { return }
+                        guard markedText.isEmpty && !newValue.isEmpty else { return }
                         shouldKeepBufferTextWhileTextDidChange = true
                         textDocumentProxy.insertText(.empty)
                 }
@@ -556,9 +509,6 @@ final class KeyboardViewController: UIInputViewController {
                         handleMarkedText()
                 }
         }
-
-        /// Flexible Segmentation
-        private lazy var segmentation: Segmentation = []
 
         /// some apps can't be compatible with `textDocumentProxy.setMarkedText() & textDocumentProxy.insertText()`
         /// - Parameter text: text to insert
@@ -598,56 +548,22 @@ final class KeyboardViewController: UIInputViewController {
         }
 
 
-        // MARK: - Engine
+        // MARK: - Candidate Suggestion
 
-        private func pinyinReverseLookup() {
-                let text: String = String(processingText.dropFirst())
-                guard !(text.isEmpty) else {
-                        markedText = processingText
-                        candidates = []
-                        return
-                }
-                let schemes: [[String]] = PinyinSegmentor.segment(text: text)
-                let tailMarkedText: String = {
-                        guard let bestScheme = schemes.first else { return text }
-                        let leadingLength: Int = bestScheme.summedLength
-                        let leadingText: String = bestScheme.joined(separator: " ")
-                        guard leadingLength != text.count else { return leadingText }
-                        let tailText = text.dropFirst(leadingLength)
+        private func suggest() {
+                let processingText: String = bufferText.toneConverted()
+                let segmentation = Segmentor.segment(text: processingText)
+                let text2mark: String = {
+                        let isMarkFree: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil
+                        guard isMarkFree else { return processingText.formattedForMark() }
+                        guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
+                        let leadingLength: Int = bestScheme.length
+                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                        guard leadingLength != processingText.count else { return leadingText }
+                        let tailText = processingText.dropFirst(leadingLength)
                         return leadingText + " " + tailText
                 }()
-                markedText = "r " + tailMarkedText
-                let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
-                push(lookup)
-        }
-        private func cangjieReverseLookup() {
-                let text: String = String(processingText.dropFirst())
-                let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
-                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
-                if isValidSequence {
-                        markedText = String(converted)
-                        let lookup: [Candidate] = Engine.cangjieLookup(for: text)
-                        push(lookup)
-                } else {
-                        markedText = processingText
-                        candidates = []
-                }
-        }
-        private func strokeReverseLookup() {
-                let text: String = String(processingText.dropFirst())
-                let transformed: String = Logogram.strokeTransform(text)
-                let converted = transformed.map({ Logogram.stroke(of: $0) }).compactMap({ $0 })
-                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
-                if isValidSequence {
-                        markedText = String(converted)
-                        let lookup: [Candidate] = Engine.strokeLookup(for: transformed)
-                        push(lookup)
-                } else {
-                        markedText = processingText
-                        candidates = []
-                }
-        }
-        private func suggest() {
+                markedText = text2mark
                 let engineCandidates: [Candidate] = {
                         var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
                         let shouldContinue: Bool = needsEmojiCandidates && !suggestion.isEmpty && candidateSequence.isEmpty
@@ -663,11 +579,80 @@ final class KeyboardViewController: UIInputViewController {
                 }()
                 let userCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
                 let combined: [Candidate] = userCandidates + engineCandidates
-                push(combined)
+                candidates = combined.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
-        private func push(_ origin: [Candidate]) {
-                candidates = origin.map({ $0.transformed(to: Logogram.current) }).uniqued()
+        private func pinyinReverseLookup() {
+                let text: String = String(bufferText.dropFirst())
+                guard !(text.isEmpty) else {
+                        markedText = bufferText
+                        candidates = []
+                        return
+                }
+                let schemes: [[String]] = PinyinSegmentor.segment(text: text)
+                let tailMarkedText: String = {
+                        guard let bestScheme = schemes.first else { return text }
+                        let leadingLength: Int = bestScheme.summedLength
+                        let leadingText: String = bestScheme.joined(separator: " ")
+                        guard leadingLength != text.count else { return leadingText }
+                        let tailText = text.dropFirst(leadingLength)
+                        return leadingText + " " + tailText
+                }()
+                let text2mark: String = "r " + tailMarkedText
+                markedText = text2mark
+                let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
+                candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
+        private func cangjieReverseLookup() {
+                let text: String = String(bufferText.dropFirst())
+                let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
+                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                if isValidSequence {
+                        markedText = String(converted)
+                        let lookup: [Candidate] = Engine.cangjieLookup(for: text)
+                        candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                } else {
+                        markedText = bufferText
+                        candidates = []
+                }
+        }
+        private func strokeReverseLookup() {
+                let text: String = String(bufferText.dropFirst())
+                let transformed: String = Logogram.strokeTransform(text)
+                let converted = transformed.map({ Logogram.stroke(of: $0) }).compactMap({ $0 })
+                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                if isValidSequence {
+                        markedText = String(converted)
+                        let lookup: [Candidate] = Engine.strokeLookup(for: transformed)
+                        candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                } else {
+                        markedText = bufferText
+                        candidates = []
+                }
+        }
+        private func composeReverseLookup() {
+                guard bufferText.count > 2 else {
+                        markedText = bufferText
+                        candidates = []
+                        return
+                }
+                let text = bufferText.dropFirst().toneConverted()
+                let segmentation = Segmentor.segment(text: text)
+                let tailMarkedText: String = {
+                        let isMarkFree: Bool = text.first(where: { $0.isSeparatorOrTone }) == nil
+                        guard isMarkFree else { return text.formattedForMark() }
+                        guard let bestScheme = segmentation.first else { return text.formattedForMark() }
+                        let leadingLength: Int = bestScheme.length
+                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                        guard leadingLength != text.count else { return leadingText }
+                        let tailText = text.dropFirst(leadingLength)
+                        return leadingText + " " + tailText
+                }()
+                let text2mark: String = "q " + tailMarkedText
+                markedText = text2mark
+                let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
+                candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+        }
+
         private(set) lazy var candidates: [Candidate] = [] {
                 didSet {
                         DispatchQueue.main.async { [unowned self] in
