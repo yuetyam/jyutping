@@ -60,79 +60,6 @@ final class JyutpingInputController: IMKInputController {
                 window?.setFrame(.zero, display: true)
         }
 
-        private(set) lazy var candidates: [Candidate] = [] {
-                willSet {
-                        if window == nil {
-                                resetWindow()
-                        }
-                }
-                didSet {
-                        updateDisplayingCandidates(.establish, highlight: .start)
-                        switch (oldValue.isEmpty, candidates.isEmpty) {
-                        case (true, true):
-                                // Stay empty
-                                break
-                        case (true, false):
-                                // Starting
-                                adjustCandidateWindow()
-                        case (false, true):
-                                // Ending
-                                window?.setFrame(.zero, display: true)
-                        case (false, false):
-                                // Ongoing
-                                adjustCandidateWindow()
-                        }
-                }
-        }
-        private func adjustCandidateWindow() {
-                window?.setFrame(windowFrame(), display: true)
-                /*
-                let expanded: CGFloat = windowOffset * 2
-                guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return }
-                guard size.width > 44 else { return }
-                let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
-                window?.setFrame(windowFrame(size: windowSize), display: true)
-                */
-        }
-
-        lazy var displayObject = DisplayObject()
-        lazy var settingsObject = InstantSettingsObject()
-
-        /// DisplayCandidates indices
-        private lazy var indices: (first: Int, last: Int) = (0, 0)
-
-        func updateDisplayingCandidates(_ mode: PageTransformation, highlight: Highlight) {
-                guard !candidates.isEmpty else {
-                        indices = (0, 0)
-                        displayObject.reset()
-                        return
-                }
-                let pageSize: Int = AppSettings.displayCandidatePageSize
-                let newFirstIndex: Int? = {
-                        switch mode {
-                        case .establish:
-                                return 0
-                        case .previousPage:
-                                let oldFirstIndex: Int = indices.first
-                                guard oldFirstIndex > 0 else { return nil }
-                                return max(0, oldFirstIndex - pageSize)
-                        case .nextPage:
-                                let oldLastIndex: Int = indices.last
-                                guard oldLastIndex < candidates.count - 1 else { return nil }
-                                return oldLastIndex + 1
-                        }
-                }()
-                guard let firstIndex: Int = newFirstIndex else { return }
-                let bound: Int = min(firstIndex + pageSize, candidates.count)
-                indices = (firstIndex, bound - 1)
-                let newItems = (firstIndex..<bound).map({ index -> DisplayCandidate in
-                        return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
-                })
-                displayObject.update(with: newItems, highlight: highlight)
-        }
-
-        lazy var candidateSequence: [Candidate] = []
-
         func clearBufferText() {
                 bufferText = .empty
         }
@@ -326,12 +253,81 @@ final class JyutpingInputController: IMKInputController {
                 }()
                 candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })
         }
-}
 
-// TODO: - Move this to a separate file
-/// DisplayCandidate page transformation
-enum PageTransformation {
-        case establish
-        case previousPage
-        case nextPage
+
+        // MARK: - Candidates
+
+        private(set) lazy var candidates: [Candidate] = [] {
+                willSet {
+                        if window == nil {
+                                resetWindow()
+                        }
+                }
+                didSet {
+                        updateDisplayingCandidates(.establish, highlight: .start)
+                        switch (oldValue.isEmpty, candidates.isEmpty) {
+                        case (true, true):
+                                // Stay empty
+                                break
+                        case (true, false):
+                                // Starting
+                                adjustCandidateWindow()
+                        case (false, true):
+                                // Ending
+                                window?.setFrame(.zero, display: true)
+                        case (false, false):
+                                // Ongoing
+                                adjustCandidateWindow()
+                        }
+                }
+        }
+        private func adjustCandidateWindow() {
+                window?.setFrame(windowFrame(), display: true)
+                /*
+                let expanded: CGFloat = windowOffset * 2
+                guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return }
+                guard size.width > 44 else { return }
+                let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
+                window?.setFrame(windowFrame(size: windowSize), display: true)
+                */
+        }
+
+        lazy var displayObject = DisplayObject()
+        lazy var settingsObject = InstantSettingsObject()
+
+        /// DisplayCandidates indices
+        private lazy var indices: (first: Int, last: Int) = (0, 0)
+
+        func updateDisplayingCandidates(_ mode: PageTransformation, highlight: Highlight) {
+                guard !(candidates.isEmpty) else {
+                        indices = (0, 0)
+                        displayObject.reset()
+                        return
+                }
+                let pageSize: Int = AppSettings.displayCandidatePageSize
+                let newFirstIndex: Int? = {
+                        switch mode {
+                        case .establish:
+                                return 0
+                        case .previousPage:
+                                let oldFirstIndex: Int = indices.first
+                                guard oldFirstIndex > 0 else { return nil }
+                                return max(0, oldFirstIndex - pageSize)
+                        case .nextPage:
+                                let oldLastIndex: Int = indices.last
+                                guard oldLastIndex < candidates.count - 1 else { return nil }
+                                return oldLastIndex + 1
+                        }
+                }()
+                guard let firstIndex: Int = newFirstIndex else { return }
+                let bound: Int = min(firstIndex + pageSize, candidates.count)
+                indices = (firstIndex, bound - 1)
+                let newItems = (firstIndex..<bound).map({ index -> DisplayCandidate in
+                        return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
+                })
+                displayObject.update(with: newItems, highlight: highlight)
+        }
+
+        /// Cache for UserLexicon
+        lazy var candidateSequence: [Candidate] = []
 }

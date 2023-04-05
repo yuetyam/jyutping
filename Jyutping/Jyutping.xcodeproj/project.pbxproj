@@ -11,7 +11,6 @@
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
 		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
 		3726E43C2999DCC4003E5842 /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E43B2999DCC4003E5842 /* CandidateWindow.swift */; };
-		3726E43E2999E073003E5842 /* Suggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E43D2999E073003E5842 /* Suggestions.swift */; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
@@ -32,6 +31,7 @@
 		378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */; };
 		378B2A7A29A76E0700456AE8 /* IOSMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */; };
 		378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */; };
+		3793330829DD53B200F6A7D4 /* PageTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3793330729DD53B200F6A7D4 /* PageTransformation.swift */; };
 		37942C7829BD7FA300667A58 /* MacShamChunMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7729BD7FA300667A58 /* MacShamChunMetroView.swift */; };
 		37942C7A29BD7FFB00667A58 /* MacHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */; };
 		37942C7C29BD81B700667A58 /* IOSShamChunMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */; };
@@ -245,7 +245,6 @@
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		3726E43B2999DCC4003E5842 /* CandidateWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
-		3726E43D2999E073003E5842 /* Suggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestions.swift; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
 		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		3768795B297826780006D0A6 /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
@@ -266,6 +265,7 @@
 		378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroStationLabel.swift; sourceTree = "<group>"; };
 		378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroLineView.swift; sourceTree = "<group>"; };
 		378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSFatshanMetroView.swift; sourceTree = "<group>"; };
+		3793330729DD53B200F6A7D4 /* PageTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransformation.swift; sourceTree = "<group>"; };
 		37942C7729BD7FA300667A58 /* MacShamChunMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacShamChunMetroView.swift; sourceTree = "<group>"; };
 		37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHongKongMTRView.swift; sourceTree = "<group>"; };
 		37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSShamChunMetroView.swift; sourceTree = "<group>"; };
@@ -534,12 +534,9 @@
 		3726E43F2999E324003E5842 /* InputControllerExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				3726E43D2999E073003E5842 /* Suggestions.swift */,
 				3726E43B2999DCC4003E5842 /* CandidateWindow.swift */,
 				3726E4392999D164003E5842 /* EventHandler.swift */,
 				37E4C60C2990B03A00BFF179 /* Menu.swift */,
-				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
-				37FC1B85294DFC5300D7153F /* InputState.swift */,
 			);
 			path = InputControllerExtensions;
 			sourceTree = "<group>";
@@ -928,6 +925,9 @@
 				37A5D00629A888F900256042 /* Debug.xcconfig */,
 				37A5D00429A888E700256042 /* Release.xcconfig */,
 				37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */,
+				3793330729DD53B200F6A7D4 /* PageTransformation.swift */,
+				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
+				37FC1B85294DFC5300D7153F /* InputState.swift */,
 				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
 				3726E43F2999E324003E5842 /* InputControllerExtensions */,
 				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
@@ -1443,11 +1443,11 @@
 				37ED91D1298676220077B604 /* FontPicker.swift in Sources */,
 				37FC1BB8294DFC5400D7153F /* StringExtensions.swift in Sources */,
 				37FC1BB0294DFC5300D7153F /* Representative.swift in Sources */,
+				3793330829DD53B200F6A7D4 /* PageTransformation.swift in Sources */,
 				3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */,
 				37FC1BB4294DFC5400D7153F /* CharacterExtensions.swift in Sources */,
 				37FC1BA4294DFC5300D7153F /* DisplayObject.swift in Sources */,
 				37FC1BBA294DFC5400D7153F /* WindowPattern.swift in Sources */,
-				3726E43E2999E073003E5842 /* Suggestions.swift in Sources */,
 				37FC1BBC294DFC5400D7153F /* Logogram.swift in Sources */,
 				37FC1BAF294DFC5300D7153F /* PunctuationKey.swift in Sources */,
 				37FC1BAB294DFC5300D7153F /* UserLexicon.swift in Sources */,

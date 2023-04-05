@@ -1,4 +1,4 @@
-enum WindowPattern {
+enum WindowPattern: Int {
 
         case regular
         case horizontalReversed
