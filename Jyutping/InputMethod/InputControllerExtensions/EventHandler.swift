@@ -107,9 +107,27 @@ extension JyutpingInputController {
                                         return true
                                 }
                         case .left:
-                                return false
+                                switch InputState.current {
+                                case .cantonese:
+                                        guard isBufferState else { return false }
+                                        updateDisplayingCandidates(.previousPage, highlight: .unchanged)
+                                        return true
+                                case .transparent:
+                                        return false
+                                case .switches:
+                                        return true
+                                }
                         case .right:
-                                return false
+                                switch InputState.current {
+                                case .cantonese:
+                                        guard isBufferState else { return false }
+                                        updateDisplayingCandidates(.nextPage, highlight: .unchanged)
+                                        return true
+                                case .transparent:
+                                        return false
+                                case .switches:
+                                        return true
+                                }
                         }
                 case .number(let number):
                         let index: Int = number == 0 ? 9 : (number - 1)

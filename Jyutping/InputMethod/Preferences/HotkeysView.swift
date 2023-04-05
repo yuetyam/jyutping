@@ -118,13 +118,13 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Highlight previous Candidate")
                                                 Text.separator
-                                                KeyBlockView("▲")
+                                                KeyBlockView("⯅")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
                                                 LabelText("Highlight next Candidate")
                                                 Text.separator
-                                                KeyBlockView("▼")
+                                                KeyBlockView("⯆")
                                                 Text.or
                                                 KeyBlockView("Tab ⇥")
                                                 Spacer()
@@ -132,11 +132,9 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Backward to previous Candidate page")
                                                 Text.separator
+                                                KeyBlockView("⯇")
+                                                Text.or
                                                 KeyBlockView("-")
-                                                Text.or
-                                                KeyBlockView("[")
-                                                Text.or
-                                                KeyBlockView(",")
                                                 Text.or
                                                 KeyBlockView("Page Up ↑")
                                                 Spacer()
@@ -144,11 +142,9 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Forward to next Candidate page")
                                                 Text.separator
+                                                KeyBlockView("⯈")
+                                                Text.or
                                                 KeyBlockView("=")
-                                                Text.or
-                                                KeyBlockView("]")
-                                                Text.or
-                                                KeyBlockView(".")
                                                 Text.or
                                                 KeyBlockView("Page Down ↓")
                                                 Spacer()
