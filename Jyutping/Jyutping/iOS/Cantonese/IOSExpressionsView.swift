@@ -128,9 +128,9 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分「惗」同「冧」").font(.significant)
+                                        Text(verbatim: "區分「諗」同「冧」").font(.significant)
                                         HStack(spacing: 16) {
-                                                Text(verbatim: "惗")
+                                                Text(verbatim: "諗")
                                                 HStack(spacing: 2) {
                                                         Text(verbatim: "nam2").font(.fixedWidth)
                                                         Speaker("nam2")
@@ -148,8 +148,8 @@ struct IOSExpressionsView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: "例：我惗緊今晚食咩。")
-                                                Speaker("我惗緊今晚食咩。")
+                                                Text(verbatim: "例：我諗緊今晚食咩。")
+                                                Speaker("我諗緊今晚食咩。")
                                                 Spacer()
                                         }
                                         HStack {

@@ -5754,9 +5754,9 @@
 39149	飭	shik1	s’	ik	陰入	審息
 39137	飡	caan1	ts’	an	陰平	七飡
 39143	飧	syun1	s	ün	陰平	心全
-39178	養	oeng5	X	eong	陽上	喻兩
-39178	養	oeng6	X	eong	陽去	喻上
-30306	癢	oeng5	X	eong	陽上	喻兩
+39178	養	joeng5	X	eong	陽上	喻兩
+39178	養	joeng6	X	eong	陽去	喻上
+30306	癢	joeng5	X	eong	陽上	喻兩
 39321	香	hoeng1	h	eong	陰平	可章
 39340	馬	maa5	m	a[r]	陽上	明也
 23229	媽	maa5	m	a[r]	陽上	明也
