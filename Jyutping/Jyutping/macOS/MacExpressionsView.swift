@@ -135,9 +135,9 @@ struct MacExpressionsView: View {
                                 .block()
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("區分 **諗** 同 **冧**").font(.significant)
+                                                Text("區分 **惗** 同 **冧**").font(.significant)
                                                 HStack(spacing: 16) {
-                                                        Text(verbatim: "諗")
+                                                        Text(verbatim: "惗")
                                                         HStack(spacing: 4) {
                                                                 Text(verbatim: "nam2").font(.fixedWidth)
                                                                 Speaker("nam2")
@@ -153,8 +153,8 @@ struct MacExpressionsView: View {
                                                         Text(verbatim: "表示倒塌、倒下。")
                                                 }
                                                 HStack {
-                                                        Text(verbatim: "例：我諗緊今晚食咩。")
-                                                        Speaker("我諗緊今晚食咩。")
+                                                        Text(verbatim: "例：我惗緊今晚食咩。")
+                                                        Speaker("我惗緊今晚食咩。")
                                                 }
                                                 HStack {
                                                         Text(verbatim: "例：佢畀人㨃冧咗。")
