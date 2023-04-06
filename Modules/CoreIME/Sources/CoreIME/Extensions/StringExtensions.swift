@@ -87,3 +87,14 @@ extension Array where Element == String {
                 return self.map(\.count).reduce(0, +)
         }
 }
+
+extension String {
+        /// Occurrence count of substring in this String
+        /// - Parameter substring: Substring
+        /// - Returns: Number of occurrences
+        func occurrenceCount(substring: String) -> Int {
+                // return self.matches(of: Regex{substring}).count
+                guard let regex = try? NSRegularExpression(pattern: substring) else { return 0 }
+                return regex.numberOfMatches(in: self, range: NSRange(self.startIndex..., in: self))
+        }
+}

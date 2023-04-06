@@ -115,7 +115,7 @@ public struct Engine {
                 guard firstInputCount != textCount else { return primary }
                 let anchorsArray: [String] = segmentation.map({ scheme -> String in
                         let last = text.dropFirst(scheme.length).first
-                        let schemeAnchors = scheme.map({ $0.text.first })
+                        let schemeAnchors = scheme.map(\.text.first)
                         let anchors = (schemeAnchors + [last]).compactMap({ $0 })
                         return String(anchors)
                 })

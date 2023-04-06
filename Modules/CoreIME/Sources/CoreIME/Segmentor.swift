@@ -25,6 +25,17 @@ extension Segmentation {
         }
 }
 
+private extension SegmentScheme {
+        // REASON: *am => [*aa, m] => *aam
+        var isValid: Bool {
+                let originNumber = self.map(\.origin).joined().occurrenceCount(substring: "aam")
+                guard originNumber > 0 else { return true }
+                let tokenNumber = self.map(\.text).joined().occurrenceCount(substring: "aam")
+                guard tokenNumber > 0 else { return false }
+                return originNumber == tokenNumber
+        }
+}
+
 public struct Segmentor {
 
         // MARK: - SQLite
@@ -89,7 +100,7 @@ public struct Segmentor {
                                 shouldContinue = false
                         }
                 }
-                return segmentation.uniqued().descended()
+                return segmentation.uniqued().filter(\.isValid).descended()
         }
 
         public static func segment(text: String) -> Segmentation {
