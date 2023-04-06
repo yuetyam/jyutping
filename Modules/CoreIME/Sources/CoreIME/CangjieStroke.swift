@@ -30,7 +30,7 @@ extension Engine {
         }
         private static func glob(cangjie: String) -> [ShapeLexicon] {
                 var items: [ShapeLexicon] = []
-                let query: String = "SELECT word, cangjie FROM shapetable WHERE cangjie GLOB '\(cangjie)*' LIMIT 50;"
+                let query: String = "SELECT word, cangjie FROM shapetable WHERE cangjie GLOB '\(cangjie)*' ORDER BY complex ASC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK else { return items }
@@ -47,7 +47,7 @@ extension Engine {
 extension Engine {
         public static func strokeReverseLookup(text: String) -> [Candidate] {
                 let matched = match(stroke: text)
-                let globed = glob(stroke: text).sorted(by: { $0.code.count < $1.code.count })
+                let globed = glob(stroke: text)
                 let combined = (matched + globed).uniqued()
                 let candidates = combined.map({ Engine.reveresLookup(text: $0.text, input: $0.input) })
                 return candidates.flatMap({ $0 })
@@ -67,7 +67,7 @@ extension Engine {
         }
         private static func glob(stroke: String) -> [ShapeLexicon] {
                 var items: [ShapeLexicon] = []
-                let query: String = "SELECT word, stroke FROM shapetable WHERE stroke GLOB '\(stroke)*' LIMIT 50;"
+                let query: String = "SELECT word, stroke FROM shapetable WHERE stroke GLOB '\(stroke)*' ORDER BY complex ASC LIMIT 100;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK else { return items }

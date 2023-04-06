@@ -17,7 +17,7 @@ CREATE TABLE pinyintable(word TEXT NOT NULL, shortcut INTEGER NOT NULL, pin INTE
 CREATE INDEX pinyinshortcutindex ON pinyintable(shortcut);
 CREATE INDEX pinyinpinindex ON pinyintable(pin);
 
-CREATE TABLE shapetable(word TEXT NOT NULL, cangjie TEXT NOT NULL, stroke TEXT NOT NULL);
+CREATE TABLE shapetable(word TEXT NOT NULL, complex INTEGER NOT NULL, cangjie TEXT NOT NULL, stroke TEXT NOT NULL);
 .import shape.txt shapetable
 CREATE INDEX shapecangjieindex ON shapetable(cangjie);
 CREATE INDEX shapestrokeindex ON shapetable(stroke);

@@ -166,7 +166,7 @@ struct IMEDBHandler {
                 }
         }
         private static func createShapeTable() {
-                let createTable: String = "CREATE TABLE shapetable(word TEXT NOT NULL, cangjie TEXT NOT NULL, stroke TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE shapetable(word TEXT NOT NULL, complex INTEGER NOT NULL, cangjie TEXT NOT NULL, stroke TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -176,14 +176,15 @@ struct IMEDBHandler {
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.map { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 3 else { return nil }
+                        guard parts.count == 4 else { return nil }
                         let word = parts[0]
-                        let cangjie = parts[1]
-                        let stroke = parts[2]
-                        return "('\(word)', '\(cangjie)', '\(stroke)')"
+                        let complex = parts[1]
+                        let cangjie = parts[2]
+                        let stroke = parts[3]
+                        return "('\(word)', \(complex), '\(cangjie)', '\(stroke)')"
                 }
                 let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
-                let insert: String = "INSERT INTO shapetable (word, cangjie, stroke) VALUES \(values);"
+                let insert: String = "INSERT INTO shapetable (word, complex, cangjie, stroke) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
