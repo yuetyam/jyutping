@@ -43,6 +43,7 @@ final class KeyboardViewController: UIInputViewController {
                 tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.switchSettingsCell)
                 tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.selectionSettingsCell)
                 tableView.register(UITableViewCell.self, forCellReuseIdentifier: Identifiers.clearLexiconSettingsCell)
+                tableView.contentInset = UIEdgeInsets(top: -12, left: 0, bottom: 0, right: 0)
                 return tableView
         }()
 
