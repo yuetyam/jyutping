@@ -30,12 +30,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         private func handleCommandLineArguments() {
                 let shouldInstall: Bool = CommandLine.arguments.contains("install")
                 guard shouldInstall else { return }
-                deactivate()
                 register()
                 activate()
-                NSRunningApplication.current.terminate()
-                NSApp.terminate(self)
-                exit(0)
         }
 
         private func register() {
@@ -43,29 +39,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let cfUrl = url as CFURL
                 TISRegisterInputSource(cfUrl)
         }
+
         private func activate() {
-                let inputSourceID: String = "org.jyutping.inputmethod.Jyutping"
-                let inputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
+                let kInputSourceID: String = "org.jyutping.inputmethod.Jyutping"
+                let kInputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
                 guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
-                for item in inputSourceList {
-                        guard let pointer = TISGetInputSourceProperty(item, kTISPropertyInputSourceID) else { return }
-                        let sourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
-                        guard sourceID == inputSourceID || sourceID == inputModeID else { return }
-                        TISEnableInputSource(item)
+                for inputSource in inputSourceList {
+                        guard let pointer = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { return }
+                        let inputSourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
+                        guard inputSourceID == kInputSourceID || inputSourceID == kInputModeID else { return }
+                        TISEnableInputSource(inputSource)
+                        TISSelectInputSource(inputSource)
                 }
         }
-        private func deactivate() {
-                let inputSourceID: String = "org.jyutping.inputmethod.Jyutping"
-                let inputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
-                guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
-                for item in inputSourceList {
-                        guard let pointer = TISGetInputSourceProperty(item, kTISPropertyInputSourceID) else { return }
-                        let sourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
-                        guard sourceID == inputSourceID || sourceID == inputModeID else { return }
-                        guard let pointer2IsEnabled = TISGetInputSourceProperty(item, kTISPropertyInputSourceIsEnabled) else { return }
-                        let isEnabled = Unmanaged<CFBoolean>.fromOpaque(pointer2IsEnabled).takeRetainedValue()
-                        guard CFBooleanGetValue(isEnabled) else { return }
-                        TISDisableInputSource(item)
-                }
+
+        /*
+        private func fetchState(of inputSource: TISInputSource) -> (isEnabled: Bool, isSelected: Bool) {
+                guard let pointer2IsEnabled = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsEnabled) else { return (false, false) }
+                let isEnabled = Unmanaged<CFBoolean>.fromOpaque(pointer2IsEnabled).takeRetainedValue()
+                guard let pointer2IsSelected = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsSelected) else { return (CFBooleanGetValue(isEnabled), false) }
+                let isSelected = Unmanaged<CFBoolean>.fromOpaque(pointer2IsSelected).takeRetainedValue()
+                return (CFBooleanGetValue(isEnabled), CFBooleanGetValue(isSelected))
         }
+        */
 }
