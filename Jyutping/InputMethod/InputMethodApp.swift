@@ -22,37 +22,54 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
-                // let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org_jyutping_inputmethod_Jyutping_1_Connection"
-                let name: String = "org_jyutping_inputmethod_Jyutping_1_Connection"
+                // let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org_jyutping_inputmethod_Jyutping_Connection"
+                let name: String = "org_jyutping_inputmethod_Jyutping_Connection"
                 server = IMKServer(name: name, bundleIdentifier: Bundle.main.bundleIdentifier)
         }
 
         private func handleCommandLineArguments() {
-                let shouldInstallIME: Bool = CommandLine.arguments.contains("install")
-                guard shouldInstallIME else { return }
-                registerIME()
-                activateIME()
+                let shouldInstall: Bool = CommandLine.arguments.contains("install")
+                guard shouldInstall else { return }
+                register()
+                deactivate()
+                activate()
                 NSRunningApplication.current.terminate()
                 NSApp.terminate(self)
                 exit(0)
         }
 
-        private func registerIME() {
+        private func register() {
                 let url = Bundle.main.bundleURL
-                let cfURL = url as CFURL
-                TISRegisterInputSource(cfURL)
+                let cfUrl = url as CFURL
+                TISRegisterInputSource(cfUrl)
         }
-        private func activateIME() {
-                guard let inputSources = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
+        private func deactivate() {
+                guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
                 let inputSourceID: String = "org.jyutping.inputmethod.Jyutping"
                 let inputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
-                for item in inputSources {
+                for item in inputSourceList {
                         guard let pointer = TISGetInputSourceProperty(item, kTISPropertyInputSourceID) else { return }
                         let sourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
-                        if sourceID == inputSourceID || sourceID == inputModeID {
-                                TISDisableInputSource(item)
-                                TISEnableInputSource(item)
-                        }
+                        guard sourceID == inputSourceID || sourceID == inputModeID else { return }
+                        guard let pointer2IsEnabled = TISGetInputSourceProperty(item, kTISPropertyInputSourceIsEnabled) else { return }
+                        let isEnabled = Unmanaged<CFBoolean>.fromOpaque(pointer2IsEnabled).takeRetainedValue()
+                        guard CFBooleanGetValue(isEnabled) else { return }
+                        TISDisableInputSource(item)
+                }
+        }
+        private func activate() {
+                guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
+                let inputSourceID: String = "org.jyutping.inputmethod.Jyutping"
+                let inputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
+                for item in inputSourceList {
+                        guard let pointer = TISGetInputSourceProperty(item, kTISPropertyInputSourceID) else { return }
+                        let sourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
+                        guard sourceID == inputSourceID || sourceID == inputModeID else { return }
+                        TISEnableInputSource(item)
+                        guard let pointer2Selectable = TISGetInputSourceProperty(item, kTISPropertyInputSourceIsSelectCapable) else { return }
+                        let isSelectable = Unmanaged<CFBoolean>.fromOpaque(pointer2Selectable).takeRetainedValue()
+                        guard CFBooleanGetValue(isSelectable) else { return }
+                        TISSelectInputSource(item)
                 }
         }
 }
