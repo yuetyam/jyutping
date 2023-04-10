@@ -79,8 +79,27 @@ extension JyutpingInputController {
         }
 
         @objc private func terminateApp() {
+                switchInputSource()
                 NSRunningApplication.current.terminate()
                 NSApp.terminate(self)
                 exit(0)
+        }
+        private func switchInputSource() {
+                guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
+                for inputSource in inputSourceList {
+                        let isSelectable = shouldSelect(inputSource: inputSource)
+                        if isSelectable {
+                                TISSelectInputSource(inputSource)
+                                break
+                        }
+                }
+        }
+        private func shouldSelect(inputSource: TISInputSource) -> Bool {
+                guard let pointer2ID = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { return false }
+                let inputSourceID = Unmanaged<CFString>.fromOpaque(pointer2ID).takeUnretainedValue() as String
+                guard inputSourceID.hasPrefix("com.apple.keylayout") else { return false }
+                guard let pointer2IsSelectable = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsSelectCapable) else { return false }
+                let isSelectable = Unmanaged<CFBoolean>.fromOpaque(pointer2IsSelectable).takeRetainedValue()
+                return CFBooleanGetValue(isSelectable)
         }
 }
