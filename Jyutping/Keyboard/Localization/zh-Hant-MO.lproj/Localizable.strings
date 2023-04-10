@@ -1,0 +1,68 @@
+// Traditional Chinese, Macao (zh-Hant-MO)
+
+
+// MARK: - Settings
+
+"Traditional Characters" = "傳統漢字";
+"Traditional Characters, Hong Kong" = "傳統漢字・香港";
+"Traditional Characters, Taiwan" = "傳統漢字・臺灣";
+"Simplified Characters" = "简化字";
+
+"Audio Feedback on Click" = "按鍵聲音反饋";
+"Haptic Feedback on Click" = "按鍵振動反饋";
+"Haptic Feedback requires Full Access" = "振動反饋需啓用「全權取用」";
+
+"Emoji Suggestions" = "繪文字（Emoji）候選詞";
+
+"Keyboard Layout" = "鍵盤佈局";
+"QWERTY" = "全鍵盤・QWERTY";
+"SaamPing" = "三拼";
+"10 Key" = "九宮格";
+
+"Jyutping Display" = "粵拼顯示";
+"Above Candidates" = "候選詞之上";
+"Below Candidates" = "候選詞之下";
+"No Jyutping" = "無";
+
+"Jyutping Tones Display" = "粵拼聲調樣式";
+"ToneDisplayStyle.Option1" = "正常　 :   jyut6 ping3";
+"ToneDisplayStyle.Option2" = "無聲調 :   jyut ping";
+"ToneDisplayStyle.Option3" = "上標　 :   jyut⁶ ping³";
+"ToneDisplayStyle.Option4" = "下標　 :   jyut₆ ping₃";
+
+"Space Double Tapping Shortcut" = "雙擊空格掣快捷動作";
+"DoubleSpaceShortcut.Option1" = "輸入一個句號「。」";
+"DoubleSpaceShortcut.Option3" = "輸入一個頓號「、」";
+"DoubleSpaceShortcut.Option4" = "輸入一個全形空格（U+3000）";
+"DoubleSpaceShortcut.Option2" = "無";
+
+"Clear User Lexicon" = "清空個人詞庫";
+
+
+// MARK: - Accessibility
+
+// ToolBar
+"Keyboard Settings" = "鍵盤設定";
+"Keyboard Mode Switch" = "切換鍵盤模式";
+"Paste Clipboard content" = "貼上";
+"Switch to Emoji layout" = "切換到 Emoji 佈局";
+"Dismiss keyboard" = "收起鍵盤";
+"Expand Candidates board" = "展開更多候選詞";
+"Current mode: English" = "當前模式：英語";
+"Current mode: Cantonese" = "當前模式：粵語";
+
+// Keyboard Keys
+"space bar" = "空格掣";
+"return key" = "換行";
+"backspace key" = "刪除";
+"shift key" = "shift";
+"Caps Locked" = "大寫鎖定";
+"Uppercased" = "大寫";
+"Lowercased" = "小寫";
+"Switch to Cantonese layout" = "粵拼";
+"Switch to English layout" = "英語";
+"Switch to Numbers layout" = "數字";
+"Switch to Symbols layout" = "符號";
+
+// Settings page
+"Switch back to Keyboard" = "返回";

@@ -18,13 +18,11 @@ final class PrincipalApplication: NSApplication {
 @main
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-        private(set) var server: IMKServer?
-
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
                 let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org_jyutping_inputmethod_Jyutping_Connection"
                 let identifier = Bundle.main.bundleIdentifier
-                server = IMKServer(name: name, bundleIdentifier: identifier)
+                _ = IMKServer(name: name, bundleIdentifier: identifier)
         }
 
         private func handleCommandLineArguments() {
