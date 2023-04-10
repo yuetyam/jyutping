@@ -28,9 +28,9 @@ extension Segmentation {
 private extension SegmentScheme {
         // REASON: *am => [*aa, m] => *aam
         var isValid: Bool {
-                let originNumber = self.map(\.origin).joined().occurrenceCount(substring: "aam")
+                let originNumber = self.map(\.origin).joined().occurrenceCount(pattern: "aa(m|ng)")
                 guard originNumber > 0 else { return true }
-                let tokenNumber = self.map(\.text).joined().occurrenceCount(substring: "aam")
+                let tokenNumber = self.map(\.text).joined().occurrenceCount(pattern: "aa(m|ng)")
                 guard tokenNumber > 0 else { return false }
                 return originNumber == tokenNumber
         }

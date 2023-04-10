@@ -82,19 +82,19 @@ extension StringProtocol {
 
 extension Array where Element == String {
 
-        /// All characters count
+        /// Character count
         var summedLength: Int {
                 return self.map(\.count).reduce(0, +)
         }
 }
 
 extension String {
-        /// Occurrence count of substring in this String
-        /// - Parameter substring: Substring
+        /// Occurrence count of pattern in this String
+        /// - Parameter pattern: Regular expression pattern
         /// - Returns: Number of occurrences
-        func occurrenceCount(substring: String) -> Int {
+        func occurrenceCount(pattern: String) -> Int {
                 // return self.matches(of: Regex{substring}).count
-                guard let regex = try? NSRegularExpression(pattern: substring) else { return 0 }
+                guard let regex = try? NSRegularExpression(pattern: pattern) else { return 0 }
                 return regex.numberOfMatches(in: self, range: NSRange(self.startIndex..., in: self))
         }
 }
