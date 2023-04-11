@@ -1,8 +1,14 @@
 #!/bin/bash
 
-osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+login_user=$(/usr/bin/stat -f%Su /dev/console)
 
-# old files
-rm -rf /Users/$USER/Library/Input\ Methods/Jyutping.app
+# Stop the running instances
+osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+/usr/bin/sudo -u "${login_user}" osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+
+# Delete invalid files
+rm -rf /Users/"${login_user}"/Library/Input\ Methods/Jyutping.app
+rm -rf /private/var/root/Library/Application\ Scripts/org.jyutping.inputmethod.Jyutping
+rm -rf /private/var/root/Library/Containers/org.jyutping.inputmethod.Jyutping
 
 exit 0

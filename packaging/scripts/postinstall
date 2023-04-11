@@ -1,8 +1,13 @@
 #!/bin/bash
 
-osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+login_user=$(/usr/bin/stat -f%Su /dev/console)
+executable="${DSTROOT}/Jyutping.app/Contents/MacOS/Jyutping"
 
-JYUTPING_EXECUTABLE="${DSTROOT}/Jyutping.app/Contents/MacOS/Jyutping"
-"${JYUTPING_EXECUTABLE}" install
+# Stop the running instances
+osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+/usr/bin/sudo -u "${login_user}" osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
+
+# Install
+/usr/bin/sudo -u "${login_user}" "${executable}" install
 
 exit 0
