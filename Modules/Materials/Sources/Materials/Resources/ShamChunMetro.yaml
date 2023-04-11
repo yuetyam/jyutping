@@ -8,7 +8,6 @@
 寶安中心	bou2 on1 zung1 sam1
 新安	san1 on1
 前海灣	cin4 hoi2 waan1
-鯉魚門	lei5 jyu2 mun4
 鯉魚門	lei5 jyu4 mun4
 大新	daai6 san1
 桃園	tou4 jyun4
@@ -20,7 +19,6 @@
 僑城東	kiu4 sing4 dung1
 竹子林	zuk1 zi2 lam4
 車公廟	ce1 gung1 miu2
-車公廟	ce1 gung1 miu6
 香蜜湖	hoeng1 mat6 wu4
 購物公園	kau3 mat6 gung1 jyun2
 會展中心	wui6 zin2 zung1 sam1
@@ -44,6 +42,7 @@
 后海	hau6 hoi2
 科苑	fo1 jyun2
 紅樹灣	hung4 syu6 waan1
+世界之窗	sai3 gaai3 zi1 coeng1
 僑城北	kiu4 sing4 bak1
 深康	sam1 hong1
 安托山	on1 tok3 saan1
@@ -57,6 +56,7 @@
 崗廈北	gong1 haa6 bak1
 華強北	waa4 koeng4 bak1
 燕南	jin3 naam4
+大劇院	daai6 kek6 jyun2
 湖貝	wu4 bui3
 黃貝嶺	wong4 bui3 ling5
 新秀	san1 sau3
@@ -68,11 +68,14 @@
 福保	fuk1 bou2
 益田	jik1 tin4
 石廈	sik6 haa6
+購物公園	kau3 mat6 gung1 jyun2
+福田	fuk1 tin4
 少年宮	siu3 nin4 gung1
 蓮花村	lin4 faa1 cyun1
 華新	waa4 san1
 通新嶺	tung1 san1 ling5
 紅嶺	hung4 ling5
+老街	lou5 gaai1
 曬布	saai3 bou3
 翠竹	ceoi3 zuk1
 田貝	tin4 bui3
@@ -113,18 +116,24 @@
 民樂	man4 ngok6
 上梅林	soeng6 mui4 lam4
 蓮花北	lin4 faa1 bak1
+少年宮	siu3 nin4 gung1
+市民中心	si5 man4 zung1 sam1
+會展中心	wui6 zin2 zung1 sam1
 福民	fuk1 man4
 福田口岸	fuk1 tin4 hau2 ngon6
 
 # 5 號線
+赤灣	cik1 waan1
 荔灣	lai6 waan1
 鐵路公園	tit3 lou6 gung1 jyun2
 媽灣	maa1 waan1
 前灣公園	cin4 waan1 gung1 jyun2
 前灣	cin4 waan1
 桂灣	gwai3 waan1
+前海灣	cin4 hoi2 waan1
 臨海	lam4 hoi2
 寶華	bou2 waa4
+寶安中心	bou2 on1 zung1 sam1
 翻身	faan1 san1
 靈芝	ling4 zi1
 洪浪北	hung4 long4 bak1
@@ -134,6 +143,7 @@
 大學城	daai6 hok6 sing4
 塘朗	tong4 long5
 長嶺陂	coeng4 ling5 bei1
+深圳北站	sam1 zan3 bak1 zaam6
 民治	man4 zi6
 五和	ng5 wo4
 坂田	baan2 tin4
@@ -141,17 +151,23 @@
 上水徑	soeng6 seoi2 ging3
 下水徑	haa6 seoi2 ging3
 長龍	coeng4 lung4
+布吉	bou3 gat1
 百鴿籠	baak3 gaap3 lung4
 布心	bou3 sam1
 太安	taai3 on1
 怡景	ji4 ging2
+黃貝嶺	wong4 bui3 ling5
 
 # 6 號線
+科學館	fo1 hok6 gun2
+通新嶺	tung1 san1 ling5
 體育中心	tai2 juk6 zung1 sam1
 八卦嶺	baat3 gwaa3 ling5
 銀湖	ngan4 wu4
 翰嶺	hon6 ling5
 梅林關	mui4 lam4 gwaan1
+深圳北站	sam1 zan3 bak1 zaam6
+紅山	hung4 saan1
 上芬	soeng6 fan1
 元芬	jyun4 fan1
 陽台山東	joeng4 toi4 saan1 dung1
@@ -172,29 +188,39 @@
 松崗	cung4 gong1
 
 # 6 號線・支線
+光明	gwong1 ming4
 圳美	zan3 mei5
 中大	zung1 daai6
 深理工	sam1 lei5 gung1
 
 # 7 號線
 西麗湖	sai1 lai6 wu4
+西麗	sai1 lai6
 茶光	caa4 gwong1
 珠光	zyu1 gwong1
 龍井	lung4 zeng2
 桃源村	tou4 jyun4 cyun1
 深雲	sam1 wan4
+安托山	on1 tok3 saan1
 農林	nung4 lam4
+車公廟	ce1 gung1 miu2
 上沙	soeng6 saa1
 沙尾	saa1 mei5
+石廈	sik6 haa6
 皇崗村	wong4 gong1 cyun1
+福民	fuk1 man4
 皇崗口岸	wong4 gong1 hau2 ngon6
 福鄰	fuk1 leon4
 赤尾	cik1 mei5
 華強南	waa4 koeng4 naam4
+華強北	waa4 koeng4 bak1
+華新	waa4 san1
 黃木崗	wong4 muk6 gong1
 紅嶺北	hung4 ling5 bak1
 筍崗	seon2 gong1
 洪湖	hung4 wu4
+田貝	tin4 bui3
+太安	taai3 on1
 
 # 8 號線
 梧桐山南	ng4 tung4 saan1 naam4
@@ -205,6 +231,7 @@
 鹽田路	jim4 tin4 lou6
 
 # 9 號線
+前灣	cin4 waan1
 夢海	mung6 hoi2
 怡海	ji4 hoi2
 荔林	lai6 lam4
@@ -218,13 +245,18 @@
 深灣	sam1 waan1
 深圳灣公園	sam1 zan3 waan1 gung1 jyun2
 下沙	haa6 saa1
+車公廟	ce1 gung1 miu2
 香梅	hoeng1 mui4
 梅景	mui4 ging2
 下梅林	haa6 mui4 lam4
 梅村	mui4 cyun1
+上梅林	soeng6 mui4 lam4
 孖嶺	maa1 ling5
+銀湖	ngan4 wu4
 泥崗	nai4 gong1
+紅嶺北	hung4 ling5 bak1
 園嶺	jyun4 ling5
+紅嶺	hung4 ling5
 紅嶺南	hung4 ling5 naam4
 鹿丹村	luk6 daan1 cyun1
 人民南	jan4 man4 naam4
@@ -232,10 +264,17 @@
 文錦	man4 gam2
 
 # 10 號線
+福田口岸	fuk1 tin4 hau2 ngon6
+福民	fuk1 man4
+崗廈	gong1 haa6
+崗廈北	gong1 haa6 bak1
+蓮花村	lin4 faa1 cyun1
 冬瓜嶺	dung1 gwaa1 ling5
+孖嶺	maa1 ling5
 雅寶	ngaa5 bou2
 南坑	naam4 haang1
 光雅園	gwong1 ngaa5 jyun4
+五和	ng5 wo4
 坂田北	baan2 tin4 bak1
 貝爾路	bui3 ji5 lou6
 華為	waa4 wai4
@@ -247,15 +286,15 @@
 木古	muk6 gu2
 華南城	waa4 naam4 sing4
 禾花	wo4 faa1
-平湖站	ping4 wu4 zaam6
+平湖	ping4 wu4
 雙擁街	soeng1 jung2 gaai1
 
 # 11 號線
 碧頭	bik1 tau4
+松崗	cung4 gong1
 後亭	hau6 ting4
 沙井	saa1 zeng2
 馬安山	maa5 on1 saan1
-塘尾	tong4 mei1
 塘尾	tong4 mei5
 橋頭	kiu4 tau4
 福永	fuk1 wing5
@@ -263,7 +302,13 @@
 機場	gei1 coeng4
 碧海灣	bik1 hoi2 waan1
 寶安	bou2 on1
+前海灣	cin4 hoi2 waan1
 南山	naam4 saan1
+后海	hau6 hoi2
+紅樹灣南	hung4 syu6 waan1 naam4
+車公廟	ce1 gung1 miu2
+福田	fuk1 tin4
+崗廈北	gong1 haa6 bak1
 
 # 12 號線
 海上田園東	hoi2 soeng6 tin4 jyun4 dung1
@@ -272,8 +317,10 @@
 國展	gwok3 zin2
 福海西	fuk1 hoi2 sai1
 橋頭西	kiu4 tau4 sai1
+福永	fuk1 wing5
 懷德	waai4 dak1
 福圍	fuk1 wai4
+機場東	gei1 coeng4 dung1
 興圍	hing1 wai4
 黃田	wong4 tin4
 鍾屋南	zung1 uk1 naam4
@@ -283,22 +330,31 @@
 寶安客運站	bou2 on1 haak3 wan6 zaam6
 流塘	lau4 tong4
 上川	soeng6 cyun1
+靈芝	ling4 zi1
 新安公園	san1 on1 gung1 jyun2
 同樂南	tung4 lok6 naam4
 中山公園	zung1 saan1 gung1 jyun2
 南頭古城	naam4 tau4 gu2 sing4
+桃園	tou4 jyun4
+南山	naam4 saan1
 南光	naam4 gwong1
+南油	naam4 jau4
 四海	sei3 hoi2
 花果山	faa1 gwo2 saan1
+海上世界	hoi2 soeng6 sai3 gaai3
 太子灣	taai3 zi2 waan1
 左炮台東	zo2 paau3 toi4 dung1
 
 # 14 號線
+崗廈北	gong1 haa6 bak1
+黃木崗	wong4 muk6 gong1
 羅湖北	lo4 wu4 bak1
+布吉	bou3 gat1
 石芽嶺	sik6 ngaa4 ling5
 六約北	luk6 joek3 bak1
 四聯	sei3 lyun4
 坳背	aau3 bui3
+大運	daai6 wan6
 嶂背	zoeng3 bui3
 南約	naam4 joek3
 寶龍	bou2 lung4
@@ -310,6 +366,7 @@
 沙田	saa1 tin4
 
 # 16 號線
+大運	daai6 wan6
 大運中心	daai6 wan6 zung1 sam1
 龍城公園	lung4 sing4 gung1 jyun2
 黃閣坑	wong4 gok3 haang1
@@ -318,13 +375,14 @@
 尚景	soeng6 ging2
 盛平	sing6 ping4
 龍園	lung4 jyun4
+雙龍	soeng1 lung4
 新塘圍	san1 tong4 wai4
 龍東	lung4 dung1
 寶龍同樂	bou2 lung4 tung4 lok6
 坪山	ping4 saan1
-新和	san1 wo2
 新和	san1 wo4
 六和	luk6 wo4
+坪山圍	ping4 saan1 wai4
 坪環	ping4 waan4
 東縱紀念館	dung1 zung3 gei2 nim6 gun2
 沙壆	saa1 bok3
@@ -334,5 +392,8 @@
 田心	tin4 sam1
 
 # 20 號線
+機場北	gei1 coeng4 bak1
 國展南	gwok3 zin2 naam4
+國展	gwok3 zin2
+國展北	gwok3 zin2 bak1
 會展城	wui6 zin2 sing4
