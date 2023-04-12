@@ -10,19 +10,16 @@ struct CandidateBoard: View {
 
         var body: some View {
                 let placeholder: DisplayCandidate = displayObject.longest
+                let highlightedIndex = displayObject.highlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         ForEach(0..<displayObject.items.count, id: \.self) { index in
-                                let candidate = displayObject.items[index]
-                                let shouldAnimateCandidateText = displayObject.candidateTextAnimationConditions[index]
-                                let isHighlighted: Bool = index == displayObject.highlightedIndex
+                                let isHighlighted: Bool = index == highlightedIndex
                                 let foreColor: Color = isHighlighted ? Color.white : Color.primary
                                 let backColor: Color = isHighlighted ? Color.accentColor : Color.clear
                                 CandidateLabel(
-                                        candidate: candidate,
+                                        candidate: displayObject.items[index],
                                         placeholder: placeholder,
-                                        shouldAnimateCandidateText: shouldAnimateCandidateText,
                                         index: index,
-                                        isHighlighted: isHighlighted,
                                         toneStyle: toneStyle,
                                         toneColor: toneColor,
                                         verticalPadding: verticalPadding,
@@ -33,6 +30,5 @@ struct CandidateBoard: View {
                 }
                 .padding(8)
                 .roundedHUDVisualEffect()
-                .animation(.default, value: displayObject.animationState)
         }
 }

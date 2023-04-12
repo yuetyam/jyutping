@@ -4,9 +4,7 @@ struct CandidateLabel: View {
 
         let candidate: DisplayCandidate
         let placeholder: DisplayCandidate
-        let shouldAnimateCandidateText: Bool
         let index: Int
-        let isHighlighted: Bool
         let toneStyle: ToneDisplayStyle
         let toneColor: ToneDisplayColor
         let verticalPadding: CGFloat
@@ -29,7 +27,7 @@ struct CandidateLabel: View {
                         .hidden()
                         HStack(spacing: 16) {
                                 Text(verbatim: serialNumber).font(.label)
-                                Text(verbatim: candidate.text).font(.candidate).conditionalAnimation(shouldAnimateCandidateText)
+                                Text(verbatim: candidate.text).font(.candidate)
                                 if let comment = candidate.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
                                 }
