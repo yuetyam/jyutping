@@ -28,7 +28,16 @@ struct EmojiMaster {
                 var dict: [Emoji.Category: [String]] = [:]
                 let fetched = Engine.fetchEmoji()
                 _ = Emoji.Category.allCases.map { category in
-                        let filtered = fetched.filter({ $0.category == category })
+                        let matchedCategory = fetched.filter({ $0.category == category })
+                        let filtered: [Emoji] = {
+                                if #available(iOSApplicationExtension 16.4, *) {
+                                        return matchedCategory
+                                } else if #available(iOSApplicationExtension 15.4, *) {
+                                        return matchedCategory.filter({ !new_in_iOS_16_4.contains($0.text) })
+                                } else {
+                                        return matchedCategory.filter({ !new_in_iOS_16_4.contains($0.text) && !new_in_iOS_15_4.contains($0.text) })
+                                }
+                        }()
                         dict[category] = filtered.map(\.text).uniqued()
                 }
                 return dict
@@ -36,4 +45,8 @@ struct EmojiMaster {
 
 
         private static let defaultFrequent: [String] = ["👋", "👍", "👌", "✌️", "👏", "🤩", "😍", "😘", "🥰", "😋", "😎", "😇", "🤗", "😏", "🤔", "❤️", "💖", "💕", "💞", "🌹", "🌚", "👀", "🐶", "👻", "🤪", "🍻", "🔥", "✅", "💯", "🎉"]
+
+        private static let new_in_iOS_16_4: Set<String> = ["🫨", "🩷", "🩵", "🩶", "🫷", "🫸", "🫎", "🫏", "🪽", "🐦‍⬛", "🪿", "🪼", "🪻", "🫚", "🫛", "🪭", "🪮", "🪇", "🪈", "🪯", "🛜"]
+
+        private static let new_in_iOS_15_4: Set<String> = ["🥹", "🫣", "🫢", "🫡", "🫠", "🫥", "🫤", "🫶", "🤝", "🫰", "🫳", "🫴", "🫲", "🫱", "🫵", "🫦", "🫅", "🧌", "🫄", "🫃", "🪺", "🪹", "🪸", "🪷", "🫧", "🫙", "🫘", "🫗", "🛝", "🩼", "🛞", "🛟", "🪫", "🪪", "🪬", "🩻", "🪩", "🟰"]
 }
