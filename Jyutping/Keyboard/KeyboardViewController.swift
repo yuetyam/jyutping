@@ -408,7 +408,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .candidates where bufferText.isEmpty:
                         candidateCollectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
-                        toolBar.reset()
+                        toolBar.reset(isBufferState: false)
                         keyboardIdiom = fallbackKeyboardIdiom
                 default:
                         break

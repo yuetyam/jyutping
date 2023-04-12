@@ -288,7 +288,7 @@ extension KeyboardViewController {
         @objc private func dismissCandidateBoard() {
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
-                toolBar.reset()
+                toolBar.reset(isBufferState: !(bufferText.isEmpty))
                 keyboardIdiom = fallbackKeyboardIdiom
         }
 
