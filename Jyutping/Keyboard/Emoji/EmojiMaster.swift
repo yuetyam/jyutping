@@ -28,17 +28,17 @@ struct EmojiMaster {
                 var dict: [Emoji.Category: [String]] = [:]
                 let fetched = Engine.fetchEmoji()
                 _ = Emoji.Category.allCases.map { category in
-                        let matchedCategory = fetched.filter({ $0.category == category })
-                        let filtered: [Emoji] = {
+                        let categoryEmoji = fetched.filter({ $0.category == category })
+                        let filtered: [String] = {
                                 if #available(iOSApplicationExtension 16.4, *) {
-                                        return matchedCategory
+                                        return categoryEmoji.map(\.text).uniqued()
                                 } else if #available(iOSApplicationExtension 15.4, *) {
-                                        return matchedCategory.filter({ !new_in_iOS_16_4.contains($0.text) })
+                                        return categoryEmoji.map(\.text).uniqued().filter({ !new_in_iOS_16_4.contains($0) })
                                 } else {
-                                        return matchedCategory.filter({ !new_in_iOS_16_4.contains($0.text) && !new_in_iOS_15_4.contains($0.text) })
+                                        return categoryEmoji.map(\.text).uniqued().filter({ !new_in_iOS_16_4.contains($0) && !new_in_iOS_15_4.contains($0) })
                                 }
                         }()
-                        dict[category] = filtered.map(\.text).uniqued()
+                        dict[category] = filtered
                 }
                 return dict
         }()
