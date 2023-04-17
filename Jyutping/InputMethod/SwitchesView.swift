@@ -40,16 +40,16 @@ struct SwitchesView: View {
                         "全形數字",
                         "粵文句讀",
                         "英文標點",
-                        "有 Emoji",
-                        "無 Emoji"
+                        "表情符號",
+                        "無\u{3000}\u{3000}\u{3000}"
                 ]
                 let simplified: [String] = [
                         "半形数字",
                         "全形数字",
                         "粤文句读",
                         "英文标点",
-                        "有 Emoji",
-                        "无 Emoji"
+                        "表情符号",
+                        "无\u{3000}\u{3000}\u{3000}"
                 ]
                 return (Logogram.current == .simplified) ? (variants + simplified) : (variants + traditional)
         }()
