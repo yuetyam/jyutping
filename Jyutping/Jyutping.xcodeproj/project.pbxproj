@@ -171,7 +171,7 @@
 		37FC1BB0294DFC5300D7153F /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B93294DFC5300D7153F /* Representative.swift */; };
 		37FC1BB1294DFC5300D7153F /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B94294DFC5300D7153F /* KeyCode.swift */; };
 		37FC1BB2294DFC5300D7153F /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B95294DFC5300D7153F /* Direction.swift */; };
-		37FC1BB3294DFC5300D7153F /* InstantSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B96294DFC5300D7153F /* InstantSettingsView.swift */; };
+		37FC1BB3294DFC5300D7153F /* SwitchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B96294DFC5300D7153F /* SwitchesView.swift */; };
 		37FC1BB4294DFC5400D7153F /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B98294DFC5300D7153F /* CharacterExtensions.swift */; };
 		37FC1BB5294DFC5400D7153F /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B99294DFC5300D7153F /* FontExtensions.swift */; };
 		37FC1BB6294DFC5400D7153F /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B9A294DFC5300D7153F /* IMKTextInputExtensions.swift */; };
@@ -455,7 +455,7 @@
 		37FC1B93294DFC5300D7153F /* Representative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
 		37FC1B94294DFC5300D7153F /* KeyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
 		37FC1B95294DFC5300D7153F /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		37FC1B96294DFC5300D7153F /* InstantSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSettingsView.swift; sourceTree = "<group>"; };
+		37FC1B96294DFC5300D7153F /* SwitchesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchesView.swift; sourceTree = "<group>"; };
 		37FC1B98294DFC5300D7153F /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
 		37FC1B99294DFC5300D7153F /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		37FC1B9A294DFC5300D7153F /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
@@ -948,7 +948,7 @@
 				37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */,
 				37FC1B86294DFC5300D7153F /* DisplayObject.swift */,
 				37FC1B84294DFC5300D7153F /* InstantSettings.swift */,
-				37FC1B96294DFC5300D7153F /* InstantSettingsView.swift */,
+				37FC1B96294DFC5300D7153F /* SwitchesView.swift */,
 				37FC1BA0294DFC5300D7153F /* Logogram.swift */,
 				37FC1B9D294DFC5300D7153F /* Speech.swift */,
 				37FC1B8E294DFC5300D7153F /* UserLexicon.swift */,
@@ -1483,7 +1483,7 @@
 				37FC1BAE294DFC5300D7153F /* JyutpingInputController.swift in Sources */,
 				3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */,
 				37FC1BB9294DFC5400D7153F /* Speech.swift in Sources */,
-				37FC1BB3294DFC5300D7153F /* InstantSettingsView.swift in Sources */,
+				37FC1BB3294DFC5300D7153F /* SwitchesView.swift in Sources */,
 				37FC1BA7294DFC5300D7153F /* CandidateFontPreferencesView.swift in Sources */,
 				3726E43A2999D164003E5842 /* EventHandler.swift in Sources */,
 				37FC1BA6294DFC5300D7153F /* CandidateLayoutPreferencesView.swift in Sources */,

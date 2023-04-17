@@ -86,7 +86,7 @@ extension JyutpingInputController {
                                 case .transparent:
                                         return false
                                 case .switches:
-                                        settingsObject.decreaseHighlightedIndex()
+                                        switchesObject.decreaseHighlightedIndex()
                                         return true
                                 }
                         case .down:
@@ -103,7 +103,7 @@ extension JyutpingInputController {
                                 case .transparent:
                                         return false
                                 case .switches:
-                                        settingsObject.increaseHighlightedIndex()
+                                        switchesObject.increaseHighlightedIndex()
                                         return true
                                 }
                         case .left:
@@ -317,7 +317,7 @@ extension JyutpingInputController {
                         case .transparent:
                                 return false
                         case .switches:
-                                settingsObject.increaseHighlightedIndex()
+                                switchesObject.increaseHighlightedIndex()
                                 return true
                         }
                 case .previousPage:
@@ -363,7 +363,7 @@ extension JyutpingInputController {
         }
 
         private func handleSwitches(_ index: Int? = nil) {
-                let selectedIndex: Int = index ?? settingsObject.highlightedIndex
+                let selectedIndex: Int = index ?? switchesObject.highlightedIndex
                 defer {
                         let newInputState: InputState = {
                                 switch InstantSettings.inputMethodMode {

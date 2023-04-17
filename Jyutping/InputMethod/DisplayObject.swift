@@ -1,6 +1,7 @@
 import Combine
 import CoreIME
 
+/// DisplayCandidate model
 final class DisplayObject: ObservableObject {
 
         @Published private(set) var items: [DisplayCandidate] = []

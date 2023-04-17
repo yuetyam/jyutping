@@ -35,6 +35,7 @@ enum InputMethodMode: Int {
 }
 
 
+// TODO: Rename to InstantSwitches
 struct InstantSettings {
 
         /// 全形 / 半形

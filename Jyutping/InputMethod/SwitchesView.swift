@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreIME
 
-final class InstantSettingsObject: ObservableObject {
+final class SwitchesObject: ObservableObject {
 
         @Published private(set) var highlightedIndex: Int = 0
 
@@ -21,10 +21,10 @@ final class InstantSettingsObject: ObservableObject {
         }
 }
 
+/// InstantSettings switches
+struct SwitchesView: View {
 
-struct InstantSettingsView: View {
-
-        @EnvironmentObject private var settingsObject: InstantSettingsObject
+        @EnvironmentObject private var switchesObject: SwitchesObject
 
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
@@ -57,7 +57,7 @@ struct InstantSettingsView: View {
         private let currentVariant: Logogram = Logogram.current
 
         var body: some View {
-                let highlightedIndex = settingsObject.highlightedIndex
+                let highlightedIndex = switchesObject.highlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
                                 SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: currentVariant == .traditional)

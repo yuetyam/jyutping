@@ -293,7 +293,7 @@ final class JyutpingInputController: IMKInputController {
         }
 
         lazy var displayObject = DisplayObject()
-        lazy var settingsObject = InstantSettingsObject()
+        lazy var switchesObject = SwitchesObject()
 
         /// DisplayCandidates indices
         private lazy var indices: (first: Int, last: Int) = (0, 0)

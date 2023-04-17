@@ -15,7 +15,7 @@ extension JyutpingInputController {
                 }
                 switch InputState.current {
                 case .switches:
-                        let switchesUI = NSHostingController(rootView: InstantSettingsView().environmentObject(settingsObject))
+                        let switchesUI = NSHostingController(rootView: SwitchesView().environmentObject(switchesObject))
                         window?.contentView?.addSubview(switchesUI.view)
                         switchesUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
@@ -47,7 +47,7 @@ extension JyutpingInputController {
                         }
                         window?.contentViewController?.addChild(switchesUI)
                         window?.setFrame(frame, display: true)
-                        settingsObject.resetHighlightedIndex()
+                        switchesObject.resetHighlightedIndex()
                         let expanded: CGFloat = windowOffset * 2
                         let newFrame: CGRect = {
                                 guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return frame }
