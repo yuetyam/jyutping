@@ -5,16 +5,19 @@ final class InstantSettingsObject: ObservableObject {
 
         @Published private(set) var highlightedIndex: Int = 0
 
+        private let minIndex: Int = 0
+        private let maxIndex: Int = 9
+
         func increaseHighlightedIndex() {
-                guard highlightedIndex < 9 else { return }
+                guard highlightedIndex < maxIndex else { return }
                 highlightedIndex += 1
         }
         func decreaseHighlightedIndex() {
-                guard highlightedIndex > 0 else { return }
+                guard highlightedIndex > minIndex else { return }
                 highlightedIndex -= 1
         }
         func resetHighlightedIndex() {
-                highlightedIndex = 0
+                highlightedIndex = minIndex
         }
 }
 
