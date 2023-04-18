@@ -9,10 +9,9 @@ extension JyutpingInputController {
                 if window == nil {
                         window = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: false)
                         window?.collectionBehavior = .moveToActiveSpace
-                        window?.backgroundColor = .clear
                         let levelValue: Int = Int(CGShieldingWindowLevel())
                         window?.level = NSWindow.Level(levelValue)
-                        window?.orderFrontRegardless()
+                        window?.backgroundColor = .clear
                 }
                 switch InputState.current {
                 case .switches:
@@ -83,12 +82,6 @@ extension JyutpingInputController {
                         window?.contentViewController?.addChild(candidatesUI)
                         window?.setFrame(.zero, display: true)
                 }
-                bringWindowToCurrentActiveSpace()
-        }
-
-        func bringWindowToCurrentActiveSpace() {
-                let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
-                guard !isOnActiveSpace else { return }
                 window?.orderFrontRegardless()
         }
 

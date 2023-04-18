@@ -269,7 +269,10 @@ final class JyutpingInputController: IMKInputController {
                                 if window == nil {
                                         resetWindow()
                                 } else {
-                                        bringWindowToCurrentActiveSpace()
+                                        let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
+                                        if !isOnActiveSpace {
+                                                window?.orderFrontRegardless()
+                                        }
                                 }
                                 adjustCandidateWindow()
                         case (false, true):
