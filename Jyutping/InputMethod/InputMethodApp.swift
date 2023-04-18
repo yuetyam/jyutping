@@ -30,6 +30,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 guard shouldInstall else { return }
                 register()
                 activate()
+                NSRunningApplication.current.terminate()
+                NSApp.terminate(self)
+                exit(0)
         }
 
         private func register() {
