@@ -64,7 +64,7 @@ struct MacSearchView: View {
                                         }
                                 }
                         ScrollView {
-                                LazyVStack(spacing: 32) {
+                                LazyVStack(spacing: 24) {
                                         if !cantonese.isEmpty {
                                                 CantoneseTextView(cantonese).block().id(topID)
                                         }

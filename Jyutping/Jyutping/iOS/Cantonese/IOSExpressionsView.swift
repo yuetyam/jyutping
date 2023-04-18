@@ -19,7 +19,7 @@ struct IOSExpressionsView: View {
                                         }
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "複數：我哋／我等")
+                                                        Text(verbatim: "複數：我哋（我等）")
                                                         Speaker("我哋")
                                                         Spacer()
                                                 }
@@ -45,7 +45,7 @@ struct IOSExpressionsView: View {
                                         }
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "複數：你哋／你等")
+                                                        Text(verbatim: "複數：你哋（你等）")
                                                         Speaker("你哋")
                                                         Spacer()
                                                 }
@@ -76,7 +76,7 @@ struct IOSExpressionsView: View {
                                         }
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "複數：佢哋／佢等")
+                                                        Text(verbatim: "複數：佢哋（佢等）")
                                                         Speaker("佢哋")
                                                         Spacer()
                                                 }
@@ -289,7 +289,7 @@ struct IOSExpressionsView: View {
                                 Section {
                                         HStack {
                                                 Text(verbatim: "推薦")
-                                                Text(verbatim: "而家／而今。").fontWeight(.medium)
+                                                Text(verbatim: "而家（而今）。").fontWeight(.medium)
                                                 Text(verbatim: "避免")
                                                 Text(verbatim: "宜家").fontWeight(.medium)
                                                 Spacer()
