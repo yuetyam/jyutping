@@ -8,6 +8,7 @@ extension JyutpingInputController {
                 let frame: CGRect = windowFrame()
                 if window == nil {
                         window = NSWindow(contentRect: frame, styleMask: .borderless, backing: .buffered, defer: false)
+                        window?.collectionBehavior = .moveToActiveSpace
                         window?.backgroundColor = .clear
                         let levelValue: Int = Int(CGShieldingWindowLevel())
                         window?.level = NSWindow.Level(levelValue)
@@ -48,14 +49,6 @@ extension JyutpingInputController {
                         window?.contentViewController?.addChild(switchesUI)
                         window?.setFrame(frame, display: true)
                         switchesObject.resetHighlightedIndex()
-                        let expanded: CGFloat = windowOffset * 2
-                        let newFrame: CGRect = {
-                                guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return frame }
-                                guard size.width > 44 else { return frame }
-                                let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
-                                return windowFrame(size: windowSize)
-                        }()
-                        window?.setFrame(newFrame, display: true)
                 default:
                         let candidatesUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject))
                         window?.contentView?.addSubview(candidatesUI.view)
@@ -90,6 +83,13 @@ extension JyutpingInputController {
                         window?.contentViewController?.addChild(candidatesUI)
                         window?.setFrame(.zero, display: true)
                 }
+                bringWindowToCurrentActiveSpace()
+        }
+
+        func bringWindowToCurrentActiveSpace() {
+                let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
+                guard !isOnActiveSpace else { return }
+                window?.orderFrontRegardless()
         }
 
         func windowFrame(size: CGSize = CGSize(width: 800, height: 500)) -> CGRect {

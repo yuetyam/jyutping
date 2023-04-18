@@ -258,11 +258,6 @@ final class JyutpingInputController: IMKInputController {
         // MARK: - Candidates
 
         private(set) lazy var candidates: [Candidate] = [] {
-                willSet {
-                        if window == nil {
-                                resetWindow()
-                        }
-                }
                 didSet {
                         updateDisplayingCandidates(.establish, highlight: .start)
                         switch (oldValue.isEmpty, candidates.isEmpty) {
@@ -271,6 +266,11 @@ final class JyutpingInputController: IMKInputController {
                                 break
                         case (true, false):
                                 // Starting
+                                if window == nil {
+                                        resetWindow()
+                                } else {
+                                        bringWindowToCurrentActiveSpace()
+                                }
                                 adjustCandidateWindow()
                         case (false, true):
                                 // Ending
