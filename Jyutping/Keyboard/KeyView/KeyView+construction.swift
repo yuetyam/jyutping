@@ -44,14 +44,30 @@ extension KeyView {
                 */
         }
         func setupKeyTextLabel() {
+                let verticalConstant: CGFloat = {
+                        // TODO: Test on different devices
+                        let shouldAdjust: Bool = {
+                                switch layout {
+                                case .cantonese(.lowercased), .alphabetic(.lowercased):
+                                        return true
+                                default:
+                                        return false
+                                }
+                        }()
+                        guard shouldAdjust else { return 0 }
+                        switch event {
+                        case .input:
+                                return 2
+                        default:
+                                return 0
+                        }
+                }()
                 let keyTextLabel: UILabel = UILabel()
                 shape.addSubview(keyTextLabel)
                 keyTextLabel.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                        keyTextLabel.topAnchor.constraint(equalTo: shape.topAnchor),
-                        keyTextLabel.bottomAnchor.constraint(equalTo: shape.bottomAnchor),
-                        keyTextLabel.leadingAnchor.constraint(equalTo: shape.leadingAnchor),
-                        keyTextLabel.trailingAnchor.constraint(equalTo: shape.trailingAnchor)
+                        keyTextLabel.centerXAnchor.constraint(equalTo: shape.centerXAnchor),
+                        keyTextLabel.centerYAnchor.constraint(equalTo: shape.centerYAnchor, constant: -verticalConstant)
                 ])
                 keyTextLabel.font = keyFont
                 keyTextLabel.textAlignment = .center
