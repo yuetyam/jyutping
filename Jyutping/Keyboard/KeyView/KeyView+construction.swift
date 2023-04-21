@@ -44,6 +44,7 @@ extension KeyView {
                 */
         }
         func setupKeyTextLabel() {
+                // TODO: Replace this with UIEdgeInsets
                 let verticalConstant: CGFloat = {
                         // TODO: Test on different devices
                         let shouldAdjust: Bool = {
@@ -56,6 +57,8 @@ extension KeyView {
                         }()
                         guard shouldAdjust else { return 0 }
                         switch event {
+                        case .input(.cantoneseComma), .input(.period):
+                                return 0
                         case .input:
                                 return 2
                         default:
