@@ -158,7 +158,7 @@ final class KeyView: UIView {
                         guard let location: CGPoint = touches.first?.location(in: self) else { break }
                         let distance: CGFloat = location.x - spaceTouchPoint.x
                         guard abs(distance) > 10 else { break }
-                        guard controller.bufferText.isEmpty else {
+                        guard !(controller.inputStage.isBuffering) else {
                                 // FIXME: - Dragging in input text
                                 controller.operate(.clear)
                                 return

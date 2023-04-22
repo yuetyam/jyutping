@@ -88,8 +88,8 @@ final class KeyboardViewController: UIInputViewController {
                 if shouldKeepBufferTextWhileTextDidChange {
                         shouldKeepBufferTextWhileTextDidChange = false
                 } else {
-                        if !bufferText.isEmpty && !textDocumentProxy.hasText {
-                                // User just tapped the Clear button in the text field
+                        let didUserClearTextFiled: Bool = inputStage.isBuffering && !textDocumentProxy.hasText
+                        if didUserClearTextFiled {
                                 bufferText = .empty
                         }
                 }
@@ -153,7 +153,7 @@ final class KeyboardViewController: UIInputViewController {
                                 didKeyboardEstablished = true
                                 return
                         }
-                        if (!keyboardIdiom.isPingMode) && (!bufferText.isEmpty) {
+                        if (!keyboardIdiom.isPingMode) && inputStage.isBuffering {
                                 let text: String = bufferText
                                 bufferText = .empty
                                 textDocumentProxy.insertText(text)
@@ -192,7 +192,7 @@ final class KeyboardViewController: UIInputViewController {
                                 bufferText += text
                         case _ where keyboardLayout == .saamPing && (text.first?.isTone ?? false):
                                 bufferText += text
-                        case _ where bufferText.isEmpty:
+                        case _ where !(inputStage.isBuffering):
                                 textDocumentProxy.insertText(text)
                         default:
                                 compose(bufferText)
@@ -209,7 +209,7 @@ final class KeyboardViewController: UIInputViewController {
                         adjustKeyboardIdiom()
                 case .space:
                         switch keyboardIdiom {
-                        case .cantonese where !bufferText.isEmpty:
+                        case .cantonese where inputStage.isBuffering:
                                 if let firstCandidate: Candidate = candidates.first {
                                         let outputText: String = {
                                                 switch firstCandidate.type {
@@ -240,7 +240,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         adjustKeyboardIdiom()
                 case .doubleSpace:
-                        guard bufferText.isEmpty else { return }
+                        guard !(inputStage.isBuffering) else { return }
                         defer {
                                 AudioFeedback.perform(.input)
                         }
@@ -268,26 +268,26 @@ final class KeyboardViewController: UIInputViewController {
                         }()
                         textDocumentProxy.insertText(text)
                 case .backspace:
-                        if bufferText.isEmpty {
-                                textDocumentProxy.deleteBackward()
-                        } else {
+                        if inputStage.isBuffering {
                                 candidateSequence = []
                                 bufferText = String(bufferText.dropLast())
+                        } else {
+                                textDocumentProxy.deleteBackward()
                         }
                         AudioFeedback.perform(.delete)
                 case .clear:
-                        guard !bufferText.isEmpty else { return }
+                        guard inputStage.isBuffering else { return }
                         bufferText = .empty
                         AudioFeedback.perform(.delete)
                 case .return:
-                        if bufferText.isEmpty {
-                                AudioFeedback.perform(.modify)
-                                textDocumentProxy.insertText("\n")
-                        } else {
+                        if inputStage.isBuffering {
                                 let text: String = bufferText
                                 bufferText = .empty
                                 AudioFeedback.perform(.input)
                                 textDocumentProxy.insertText(text)
+                        } else {
+                                AudioFeedback.perform(.modify)
+                                textDocumentProxy.insertText("\n")
                         }
                 case .shift:
                         AudioFeedback.perform(.modify)
@@ -313,14 +313,14 @@ final class KeyboardViewController: UIInputViewController {
                                 AudioFeedback.perform(.input)
                                 adjustKeyboardIdiom()
                         }
-                        if bufferText.isEmpty {
-                                textDocumentProxy.insertText("\t")
-                        } else {
+                        if inputStage.isBuffering {
                                 compose(bufferText)
                                 bufferText = .empty
                                 DispatchQueue.global().asyncAfter(deadline: .now() + 0.04) { [unowned self] in
                                         textDocumentProxy.insertText("\t")
                                 }
+                        } else {
+                                textDocumentProxy.insertText("\t")
                         }
                 case .transform(let newIdiom):
                         AudioFeedback.perform(.modify)
@@ -328,7 +328,7 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardIdiom = shouldBeTenKeyKeyboard ? .tenKeyCantonese : newIdiom
                 case .dismiss:
                         AudioFeedback.perform(.modify)
-                        guard !(bufferText.isEmpty) else {
+                        guard inputStage.isBuffering else {
                                 dismissKeyboard()
                                 return
                         }
@@ -366,12 +366,12 @@ final class KeyboardViewController: UIInputViewController {
                                 AudioFeedback.perform(.input)
                         }
                         guard !combination.isPunctuation else {
-                                if bufferText.isEmpty {
-                                        textDocumentProxy.insertText("，")
-                                } else {
+                                if inputStage.isBuffering {
                                         let text: String = bufferText + "，"
                                         bufferText = .empty
                                         textDocumentProxy.insertText(text)
+                                } else {
+                                        textDocumentProxy.insertText("，")
                                 }
                                 return
                         }
@@ -405,7 +405,7 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardIdiom = .alphabetic(.lowercased)
                 case .cantonese(.uppercased):
                         keyboardIdiom = .cantonese(.lowercased)
-                case .candidateBoard where bufferText.isEmpty:
+                case .candidateBoard where !(inputStage.isBuffering):
                         candidateCollectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reset(isBufferState: false)
@@ -435,7 +435,7 @@ final class KeyboardViewController: UIInputViewController {
                         }
                         candidateSequence.append(candidate)
                         defer {
-                                if bufferText.isEmpty && !candidateSequence.isEmpty {
+                                if !(inputStage.isBuffering) && !(candidateSequence.isEmpty) {
                                         let concatenatedCandidate: Candidate = candidateSequence.joined()
                                         candidateSequence = []
                                         UserLexicon.handle(concatenatedCandidate)
@@ -460,23 +460,23 @@ final class KeyboardViewController: UIInputViewController {
 
         // MARK: - Input Texts
 
-        private(set) lazy var bufferText: String = .empty {
+        private(set) lazy var inputStage: InputStage = .standby
+
+        private lazy var bufferText: String = .empty {
                 willSet {
                         switch (bufferText.isEmpty, newValue.isEmpty) {
                         case (true, true):
-                                // Stay empty
-                                break
+                                inputStage = .standby
                         case (true, false):
-                                // Starting
+                                inputStage = .starting
                                 toolBar.reload(isBufferState: true)
                                 updateBottomStackView(isBufferState: true)
                         case (false, true):
-                                // Ending
+                                inputStage = .ending
                                 toolBar.reload(isBufferState: false)
                                 updateBottomStackView(isBufferState: false)
                         case (false, false):
-                                // Ongoing
-                                break
+                                inputStage = .ongoing
                         }
                 }
                 didSet {

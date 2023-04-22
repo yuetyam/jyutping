@@ -78,11 +78,14 @@ extension KeyboardViewController {
                 let keysRows: [UIStackView] = makeKeysRows(for: events.dropLast())
                 keyboardStackView.addArrangedSubviews(keysRows)
                 guard let bottomEvents: [KeyboardEvent] = events.last else { return }
-                let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in
-                        if $0 == .input(.cantoneseComma) && !bufferText.isEmpty {
+                let bottomViews: [KeyView] = bottomEvents.map { [unowned self] event -> KeyView in
+                        guard inputStage.isBuffering else { return makeKey(for: event, controller: self) }
+                        switch event {
+                        case .input(.cantoneseComma), .input(.cantonesePeriod):
                                 return KeyView(event: .input(.separator), controller: self)
+                        default:
+                                return makeKey(for: event, controller: self)
                         }
-                        return makeKey(for: $0, controller: self)
                 }
                 bottomStackView.removeArrangedSubviews()
                 bottomStackView.addArrangedSubviews(bottomViews)
@@ -311,7 +314,7 @@ extension KeyboardViewController {
         @objc private func dismissCandidateBoard() {
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
-                toolBar.reset(isBufferState: !(bufferText.isEmpty))
+                toolBar.reset(isBufferState: inputStage.isBuffering)
                 keyboardIdiom = fallbackKeyboardIdiom
         }
 
