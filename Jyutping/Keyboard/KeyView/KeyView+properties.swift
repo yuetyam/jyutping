@@ -9,7 +9,7 @@ extension KeyView {
                         switch event {
                         case .none, .hidden(.text), .hidden(.backspace):
                                 return 10
-                        case .globe, .transform(.emoji):
+                        case .globe:
                                 return 45
                         case .backspace, .shift, .transform:
                                 return 50
@@ -26,7 +26,7 @@ extension KeyView {
                         switch event {
                         case .none, .hidden(.text), .hidden(.backspace):
                                 return 10
-                        case .globe, .transform(.emoji):
+                        case .globe:
                                 return 45
                         case .backspace, .shift, .transform, .dismiss:
                                 return 50
@@ -43,7 +43,7 @@ extension KeyView {
                         switch event {
                         case .none:
                                 return 10
-                        case .globe, .transform(.emoji):
+                        case .globe:
                                 return 45
                         case .backspace, .transform, .dismiss, .tab:
                                 return 50
@@ -62,7 +62,7 @@ extension KeyView {
                         switch event {
                         case .none:
                                 return 10
-                        case .globe, .transform(.emoji):
+                        case .globe:
                                 return 45
                         case .transform, .dismiss, .tab:
                                 return 50

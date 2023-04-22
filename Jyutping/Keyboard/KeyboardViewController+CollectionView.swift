@@ -170,7 +170,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                 }
 
                 guard footnoteStyle < 3 else {
-                        if keyboardIdiom == .candidates {
+                        if keyboardIdiom == .candidateBoard {
                                 let fullWidth: CGFloat = collectionView.bounds.size.width
                                 var itemCount: Int {
                                         switch characterCount {
@@ -207,7 +207,7 @@ extension KeyboardViewController: UICollectionViewDataSource, UICollectionViewDe
                                 }
                         }
                 }
-                if keyboardIdiom == .candidates {
+                if keyboardIdiom == .candidateBoard {
                         let fullWidth: CGFloat = collectionView.bounds.size.width
                         var itemCount: Int {
                                 switch characterCount {

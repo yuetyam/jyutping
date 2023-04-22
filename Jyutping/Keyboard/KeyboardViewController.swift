@@ -405,7 +405,7 @@ final class KeyboardViewController: UIInputViewController {
                         keyboardIdiom = .alphabetic(.lowercased)
                 case .cantonese(.uppercased):
                         keyboardIdiom = .cantonese(.lowercased)
-                case .candidates where bufferText.isEmpty:
+                case .candidateBoard where bufferText.isEmpty:
                         candidateCollectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
                         toolBar.reset(isBufferState: false)
@@ -742,7 +742,7 @@ final class KeyboardViewController: UIInputViewController {
                 dismissKeyboard()
         }
         @objc private func handleDownArrow() {
-                keyboardIdiom = .candidates
+                keyboardIdiom = .candidateBoard
         }
 
         override func canPaste(_ itemProviders: [NSItemProvider]) -> Bool {

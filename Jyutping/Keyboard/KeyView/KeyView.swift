@@ -20,7 +20,7 @@ final class KeyView: UIView {
                 switch event {
                 case .none, .hidden(.text), .hidden(.backspace):
                         break
-                case .backspace, .shift, .globe, .dismiss, .tab, .transform(.emoji):
+                case .backspace, .shift, .globe, .dismiss, .tab:
                         setupKeyShapeView()
                         setupKeyImageView()
                 case .input(let seat) where seat.primary.header != nil:

@@ -11,7 +11,7 @@ enum KeyboardIdiom: Hashable {
         case tenKeyCantonese
         case tenKeyNumeric
 
-        case candidates
+        case candidateBoard
         case settings
         case emoji
 
@@ -36,7 +36,7 @@ extension KeyboardIdiom {
                 switch self {
                 case .cantonese,
                      .tenKeyCantonese,
-                     .candidates:
+                     .candidateBoard:
                         return true
                 default:
                         return false
