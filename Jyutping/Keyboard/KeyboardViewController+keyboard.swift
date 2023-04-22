@@ -19,11 +19,11 @@ extension KeyboardViewController {
                 }
         }
 
-        func updateBottomStackView(isBufferState: Bool) {
+        func updateBottomStackView(isBuffering: Bool) {
                 let bottomEvents: [KeyboardEvent] = {
                         switch keyboardInterface {
                         case .phonePortrait, .phoneLandscape:
-                                switch (needsInputModeSwitchKey, isBufferState) {
+                                switch (needsInputModeSwitchKey, isBuffering) {
                                 case (true, true):
                                         return [.transform(.cantoneseNumeric), .globe, .space, .input(.separator), .newLine]
                                 case (true, false):
@@ -34,7 +34,7 @@ extension KeyboardViewController {
                                         return [.transform(.cantoneseNumeric), .input(.cantoneseComma), .space, .input(.cantonesePeriod), .newLine]
                                 }
                         case .padFloating:
-                                switch (needsInputModeSwitchKey, isBufferState) {
+                                switch (needsInputModeSwitchKey, isBuffering) {
                                 case (true, true):
                                         return [.globe, .transform(.cantoneseNumeric), .space, .input(.separator), .newLine]
                                 case (true, false):
@@ -45,7 +45,7 @@ extension KeyboardViewController {
                                         return [.transform(.cantoneseNumeric), .input(.cantoneseComma), .space, .input(.cantonesePeriod), .newLine]
                                 }
                         default:
-                                switch (needsInputModeSwitchKey, isBufferState) {
+                                switch (needsInputModeSwitchKey, isBuffering) {
                                 case (true, true):
                                         return [.globe, .transform(.cantoneseNumeric), .space, .input(.separator), .dismiss]
                                 case (true, false):
@@ -314,7 +314,7 @@ extension KeyboardViewController {
         @objc private func dismissCandidateBoard() {
                 candidateCollectionView.removeFromSuperview()
                 NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
-                toolBar.reset(isBufferState: inputStage.isBuffering)
+                toolBar.reset(isBuffering: inputStage.isBuffering)
                 keyboardIdiom = fallbackKeyboardIdiom
         }
 

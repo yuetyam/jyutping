@@ -92,8 +92,8 @@ final class ToolBar: UIView {
         }
 
         private lazy var isToolMode: Bool = true
-        func reload(isBufferState: Bool) {
-                switch (isBufferState, isToolMode) {
+        func reload(isBuffering: Bool) {
+                switch (isBuffering, isToolMode) {
                 case (true, true):
                         setupInputMode()
                         isToolMode = false
@@ -106,8 +106,8 @@ final class ToolBar: UIView {
                         isToolMode = true
                 }
         }
-        func reset(isBufferState: Bool) {
-                if isBufferState {
+        func reset(isBuffering: Bool) {
+                if isBuffering {
                         setupInputMode()
                         isToolMode = false
                 } else {

@@ -408,7 +408,7 @@ final class KeyboardViewController: UIInputViewController {
                 case .candidateBoard where !(inputStage.isBuffering):
                         candidateCollectionView.removeFromSuperview()
                         NSLayoutConstraint.deactivate(candidateBoardCollectionViewConstraints)
-                        toolBar.reset(isBufferState: false)
+                        toolBar.reset(isBuffering: false)
                         keyboardIdiom = fallbackKeyboardIdiom
                 default:
                         break
@@ -469,12 +469,12 @@ final class KeyboardViewController: UIInputViewController {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                toolBar.reload(isBufferState: true)
-                                updateBottomStackView(isBufferState: true)
+                                toolBar.reload(isBuffering: true)
+                                updateBottomStackView(isBuffering: true)
                         case (false, true):
                                 inputStage = .ending
-                                toolBar.reload(isBufferState: false)
-                                updateBottomStackView(isBufferState: false)
+                                toolBar.reload(isBuffering: false)
+                                updateBottomStackView(isBuffering: false)
                         case (false, false):
                                 inputStage = .ongoing
                         }
