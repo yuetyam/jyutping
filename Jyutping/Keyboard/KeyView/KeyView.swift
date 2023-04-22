@@ -23,21 +23,14 @@ final class KeyView: UIView {
                 case .backspace, .shift, .globe, .dismiss, .tab:
                         setupKeyShapeView()
                         setupKeyImageView()
-                case .input(let seat) where seat.primary.header != nil:
-                        setupKeyShapeView()
-                        setupKeyTextLabel()
-                        setupKeyHeaderLabel(text: seat.primary.header)
                 case .input(.separator):
                         setupKeyShapeView()
                         setupKeyTextLabel()
                         setupKeyFooterLabel(text: "分隔", alignment: .center)
-                case .newLine:
+                case .input(let seat) where seat.primary.header != nil:
                         setupKeyShapeView()
-                        if keyText == nil {
-                                setupKeyImageView()
-                        } else {
-                                setupKeyTextLabel()
-                        }
+                        setupKeyTextLabel()
+                        setupKeyHeaderLabel(text: seat.primary.header)
                 default:
                         setupKeyShapeView()
                         setupKeyTextLabel()
