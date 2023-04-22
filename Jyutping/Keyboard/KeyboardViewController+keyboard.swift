@@ -21,17 +21,40 @@ extension KeyboardViewController {
 
         func updateBottomStackView(isBufferState: Bool) {
                 let bottomEvents: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
                         switch keyboardInterface {
                         case .phonePortrait, .phoneLandscape:
-                                let newEvent: KeyboardEvent = isBufferState ? .input(.separator) : .input(.cantoneseComma)
-                                return [.transform(.cantoneseNumeric), switchKey, .space, newEvent, .newLine]
+                                switch (needsInputModeSwitchKey, isBufferState) {
+                                case (true, true):
+                                        return [.transform(.cantoneseNumeric), .globe, .space, .input(.separator), .newLine]
+                                case (true, false):
+                                        return [.transform(.cantoneseNumeric), .globe, .space, .input(.cantoneseComma), .newLine]
+                                case (false, true):
+                                        return [.transform(.cantoneseNumeric), .input(.separator), .space, .input(.separator), .newLine]
+                                case (false, false):
+                                        return [.transform(.cantoneseNumeric), .input(.cantoneseComma), .space, .input(.cantonesePeriod), .newLine]
+                                }
                         case .padFloating:
-                                let newEvent: KeyboardEvent = isBufferState ? .input(.separator) : .input(.cantoneseComma)
-                                return [switchKey, .transform(.cantoneseNumeric), .space, newEvent, .newLine]
+                                switch (needsInputModeSwitchKey, isBufferState) {
+                                case (true, true):
+                                        return [.globe, .transform(.cantoneseNumeric), .space, .input(.separator), .newLine]
+                                case (true, false):
+                                        return [.globe, .transform(.cantoneseNumeric), .space, .input(.cantoneseComma), .newLine]
+                                case (false, true):
+                                        return [.transform(.cantoneseNumeric), .input(.separator), .space, .input(.separator), .newLine]
+                                case (false, false):
+                                        return [.transform(.cantoneseNumeric), .input(.cantoneseComma), .space, .input(.cantonesePeriod), .newLine]
+                                }
                         default:
-                                let newEvent: KeyboardEvent = isBufferState ? .input(.separator) : .transform(.cantoneseNumeric)
-                                return [switchKey, .transform(.cantoneseNumeric), .space, newEvent, .dismiss]
+                                switch (needsInputModeSwitchKey, isBufferState) {
+                                case (true, true):
+                                        return [.globe, .transform(.cantoneseNumeric), .space, .input(.separator), .dismiss]
+                                case (true, false):
+                                        return [.globe, .transform(.cantoneseNumeric), .space, .transform(.cantoneseNumeric), .dismiss]
+                                case (false, true):
+                                        return [.transform(.cantoneseNumeric), .transform(.cantoneseNumeric), .space, .input(.separator), .dismiss]
+                                case (false, false):
+                                        return [.transform(.cantoneseNumeric), .transform(.cantoneseNumeric), .space, .transform(.cantoneseNumeric), .dismiss]
+                                }
                         }
                 }()
                 let bottomViews: [KeyView] = bottomEvents.map { [unowned self] in

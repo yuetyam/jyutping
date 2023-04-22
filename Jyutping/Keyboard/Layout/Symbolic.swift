@@ -40,8 +40,8 @@ extension KeyboardIdiom {
                         eventRows[2].append(toNumeric)
                 }
                 let bottomRow: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
                         let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : back
                         return [switchKey, back, .space, back, .dismiss]
                 }()
                 eventRows.append(bottomRow)
@@ -108,14 +108,16 @@ extension KeyboardIdiom {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
-                        let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
-                        let period: KeyboardEvent = KeyboardEvent.input(.period)
-                        switch keyboardInterface {
-                        case .padFloating:
-                                return [switchKey, back, .space, period, .newLine]
-                        default:
-                                return [back, switchKey, .space, period, .newLine]
+                        let isPadFloating: Bool = keyboardInterface == .padFloating
+                        switch (needsInputModeSwitchKey, isPadFloating) {
+                        case (true, true):
+                                return [.globe, .transform(.alphabetic(.lowercased)), .space, .input(.period), .newLine]
+                        case (true, false):
+                                return [.transform(.alphabetic(.lowercased)), .globe, .space, .input(.period), .newLine]
+                        case (false, true):
+                                return [.transform(.alphabetic(.lowercased)), .input(.comma), .space, .input(.period), .newLine]
+                        case (false, false):
+                                return [.transform(.alphabetic(.lowercased)), .input(.comma), .space, .input(.period), .newLine]
                         }
                 }()
                 eventRows.append(bottomEvents)

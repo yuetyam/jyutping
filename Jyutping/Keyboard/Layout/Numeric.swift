@@ -28,7 +28,7 @@ extension KeyboardIdiom {
                 eventRows[3].insert(.shift, at: 0)
                 eventRows[3].append(.shift)
                 let bottomRow: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : back
                         return [switchKey, back, .space, back, .dismiss]
                 }()
                 eventRows.append(bottomRow)
@@ -67,8 +67,8 @@ extension KeyboardIdiom {
                         eventRows[2].append(toSymbolic)
                 }
                 let bottomRow: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
                         let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : back
                         return [switchKey, back, .space, back, .dismiss]
                 }()
                 eventRows.append(bottomRow)
@@ -176,13 +176,17 @@ extension KeyboardIdiom {
                 eventRows[2].append(.none)
                 eventRows[2].append(.backspace)
                 let bottomEvents: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
-                        let period: KeyboardEvent = KeyboardEvent.input(.period)
-                        switch keyboardInterface {
-                        case .padFloating:
-                                return [switchKey, .transform(.alphabetic(.lowercased)), .space, period, .newLine]
-                        default:
-                                return [.transform(.alphabetic(.lowercased)), switchKey, .space, period, .newLine]
+                        let back: KeyboardEvent = .transform(.alphabetic(.lowercased))
+                        let isPadFloating: Bool = keyboardInterface == .padFloating
+                        switch (needsInputModeSwitchKey, isPadFloating) {
+                        case (true, true):
+                                return [.globe, back, .space, .input(.period), .newLine]
+                        case (true, false):
+                                return [back, .globe, .space, .input(.period), .newLine]
+                        case (false, true):
+                                return [back, .input(.comma), .space, .input(.period), .newLine]
+                        case (false, false):
+                                return [back, .input(.comma), .space, .input(.period), .newLine]
                         }
                 }()
                 eventRows.append(bottomEvents)

@@ -14,9 +14,11 @@ extension KeyView {
                         case .backspace, .shift, .transform:
                                 return 50
                         case .newLine:
-                                return 80
+                                return 70
                         case .space:
-                                return 180
+                                return 170
+                        case .input(.comma), .input(.period), .input(.cantoneseComma), .input(.cantonesePeriod), .input(.separator):
+                                return 35
                         default:
                                 return 40
                         }

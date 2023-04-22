@@ -186,8 +186,9 @@ extension KeyboardIdiom {
                 }()
 
                 let bottomEvents: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
-                        return [switchKey, .transform(.cantonese(.lowercased)), .space, .transform(.cantonese(.lowercased)), .dismiss]
+                        let back: KeyboardEvent = .transform(.cantonese(.lowercased))
+                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : back
+                        return [switchKey, back, .space, back, .dismiss]
                 }()
 
                 switch keyboardInterface {
@@ -393,13 +394,16 @@ extension KeyboardIdiom {
                 }()
 
                 let bottomEvents: [KeyboardEvent] = {
-                        let switchKey: KeyboardEvent = needsInputModeSwitchKey ? .globe : .transform(.emoji)
-                        let comma: KeyboardEvent = KeyboardEvent.input(.cantoneseComma)
-                        switch keyboardInterface {
-                        case .padFloating:
-                                return [switchKey, .transform(.cantonese(.lowercased)), .space, comma, .newLine]
-                        default:
-                                return [.transform(.cantonese(.lowercased)), switchKey, .space, comma, .newLine]
+                        let isPadFloating: Bool = keyboardInterface == .padFloating
+                        switch (needsInputModeSwitchKey, isPadFloating) {
+                        case (true, true):
+                                return [.globe, .transform(.cantonese(.lowercased)), .space, .input(.cantoneseComma), .newLine]
+                        case (true, false):
+                                return [.transform(.cantonese(.lowercased)), .globe, .space, .input(.cantoneseComma), .newLine]
+                        case (false, true):
+                                return [.transform(.cantonese(.lowercased)), .input(.cantoneseComma), .space, .input(.cantonesePeriod), .newLine]
+                        case (false, false):
+                                return [.transform(.cantonese(.lowercased)), .input(.cantoneseComma), .space, .input(.cantonesePeriod), .newLine]
                         }
                 }()
                 let eventRows: [[KeyboardEvent]] = [

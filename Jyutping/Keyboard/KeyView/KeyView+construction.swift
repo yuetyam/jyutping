@@ -57,7 +57,7 @@ extension KeyView {
                         }()
                         guard shouldAdjust else { return 0 }
                         switch event {
-                        case .input(.cantoneseComma), .input(.period):
+                        case .input(.comma), .input(.period), .input(.cantoneseComma), .input(.cantonesePeriod):
                                 return 0
                         case .input:
                                 return 2

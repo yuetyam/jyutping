@@ -32,6 +32,13 @@ struct KeySeat: Hashable {
                 return !children.isEmpty
         }
 
+        static let comma: KeySeat = {
+                let comma: KeyElement = KeyElement(",")
+                let period: KeyElement = KeyElement(".")
+                let questionMark: KeyElement = KeyElement("?")
+                let exclamationMark: KeyElement = KeyElement("!")
+                return KeySeat(primary: comma, children: [comma, period, questionMark, exclamationMark])
+        }()
         static let period: KeySeat = {
                 let period: KeyElement = KeyElement(".")
                 let comma: KeyElement = KeyElement(",")
@@ -41,10 +48,15 @@ struct KeySeat: Hashable {
         }()
         static let cantoneseComma: KeySeat = {
                 let comma: KeyElement = KeyElement("，")
+                let ideographicComma: KeyElement = KeyElement("、")
+                let period: KeyElement = KeyElement("。")
+                return KeySeat(primary: comma, children: [comma, ideographicComma, period])
+        }()
+        static let cantonesePeriod: KeySeat = {
                 let period: KeyElement = KeyElement("。")
                 let questionMark: KeyElement = KeyElement("？")
                 let exclamationMark: KeyElement = KeyElement("！")
-                return KeySeat(primary: comma, children: [comma, period, questionMark, exclamationMark])
+                return KeySeat(primary: period, children: [period, questionMark, exclamationMark])
         }()
         static let separator: KeySeat = KeySeat(primary: KeyElement("'", footer: "分隔"))
 }
