@@ -146,7 +146,7 @@ extension JyutpingInputController {
                                         } else {
                                                 switch InstantSettings.characterForm {
                                                 case .halfWidth:
-                                                        let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuation.isCantoneseMode && isShifting
+                                                        let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuationForm.isCantoneseMode && isShifting
                                                         guard shouldInsertCantoneseSymbol else { return false }
                                                         let text: String = KeyCode.shiftingSymbol(of: number)
                                                         client.insert(text)
@@ -191,7 +191,7 @@ extension JyutpingInputController {
                                         }
                                 }
                                 passBuffer()
-                                guard InstantSettings.punctuation.isCantoneseMode else { return false }
+                                guard InstantSettings.punctuationForm.isCantoneseMode else { return false }
                                 if isShifting {
                                         if let symbol = punctuationKey.instantShiftingSymbol {
                                                 client.insert(symbol)
@@ -384,9 +384,9 @@ extension JyutpingInputController {
                 case 5:
                         InstantSettings.updateCharacterFormState(to: .fullWidth)
                 case 6:
-                        InstantSettings.updatePunctuationState(to: .cantonese)
+                        InstantSettings.updatePunctuationForm(to: .cantonese)
                 case 7:
-                        InstantSettings.updatePunctuationState(to: .english)
+                        InstantSettings.updatePunctuationForm(to: .english)
                 case 8:
                         InstantSettings.updateNeedsEmojiCandidates(to: true)
                 case 9:

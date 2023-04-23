@@ -6,34 +6,26 @@ enum CharacterForm: Int {
         case fullWidth = 2
 }
 
-
 /// 標點符號
-enum Punctuation: Int {
-
+enum PunctuationForm: Int {
         case cantonese = 1
         case english = 2
-
         var isCantoneseMode: Bool {
                 return self == .cantonese
         }
 }
 
-
 /// Cantonese / ABC
 enum InputMethodMode: Int {
-
         case cantonese = 1
         case abc = 2
-
         var isCantonese: Bool {
                 return self == .cantonese
         }
-
         var isABC: Bool {
                 return self == .abc
         }
 }
-
 
 struct InstantSettings {
 
@@ -56,8 +48,8 @@ struct InstantSettings {
         }
 
 
-        /// 標點符號。粵文句讀 or 英文標點
-        private(set) static var punctuation: Punctuation = {
+        /// 標點符號形態。粵文句讀抑或英文標點
+        private(set) static var punctuationForm: PunctuationForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: "punctuation")
                 switch savedValue {
                 case 0, 1:
@@ -68,9 +60,9 @@ struct InstantSettings {
                         return .cantonese
                 }
         }()
-        static func updatePunctuationState(to newState: Punctuation) {
-                punctuation = newState
-                let value: Int = newState.rawValue
+        static func updatePunctuationForm(to form: PunctuationForm) {
+                punctuationForm = form
+                let value: Int = form.rawValue
                 UserDefaults.standard.set(value, forKey: "punctuation")
         }
 
