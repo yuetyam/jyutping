@@ -37,7 +37,7 @@ extension JyutpingInputController {
                                         InputForm.updateCurrent(to: .options)
                                         resetWindow()
                                 case .options:
-                                        handleSwitches(-1)
+                                        handleOptions(-1)
                                 }
                                 return true
                         case KeyCode.Special.VK_BACKWARD_DELETE, KeyCode.Special.VK_FORWARD_DELETE:
@@ -141,7 +141,7 @@ extension JyutpingInputController {
                                         return true
                                 } else {
                                         if hasControlShiftModifiers {
-                                                handleSwitches(index)
+                                                handleOptions(index)
                                                 return true
                                         } else {
                                                 switch InstantSettings.characterForm {
@@ -161,13 +161,13 @@ extension JyutpingInputController {
                                 }
                         case .transparent:
                                 if hasControlShiftModifiers {
-                                        handleSwitches(index)
+                                        handleOptions(index)
                                         return true
                                 } else {
                                         return false
                                 }
                         case .options:
-                                handleSwitches(index)
+                                handleOptions(index)
                                 return true
                         }
                 case .keypadNumber(let number):
@@ -242,7 +242,7 @@ extension JyutpingInputController {
                         case .transparent:
                                 return false
                         case .options:
-                                handleSwitches()
+                                handleOptions()
                                 return true
                         }
                 case .backspace:
@@ -254,7 +254,7 @@ extension JyutpingInputController {
                         case .transparent:
                                 return false
                         case .options:
-                                handleSwitches(-1)
+                                handleOptions(-1)
                                 return true
                         }
                 case .escapeClear:
@@ -266,7 +266,7 @@ extension JyutpingInputController {
                         case .transparent:
                                 return false
                         case .options:
-                                handleSwitches(-1)
+                                handleOptions(-1)
                                 return true
                         }
                 case .space:
@@ -300,7 +300,7 @@ extension JyutpingInputController {
                                 InputForm.updateCurrent(to: .cantonese)
                                 return true
                         case .options:
-                                handleSwitches()
+                                handleOptions()
                                 return true
                         }
                 case .tab:
@@ -362,7 +362,7 @@ extension JyutpingInputController {
                 clearBufferText()
         }
 
-        private func handleSwitches(_ index: Int? = nil) {
+        private func handleOptions(_ index: Int? = nil) {
                 let selectedIndex: Int = index ?? switchesObject.highlightedIndex
                 defer {
                         let newInputState: InputForm = {

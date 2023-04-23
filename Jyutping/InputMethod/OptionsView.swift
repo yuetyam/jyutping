@@ -21,8 +21,8 @@ final class SwitchesObject: ObservableObject {
         }
 }
 
-/// InstantSettings switches
-struct SwitchesView: View {
+/// InstantSettings Options View
+struct OptionsView: View {
 
         @EnvironmentObject private var switchesObject: SwitchesObject
 

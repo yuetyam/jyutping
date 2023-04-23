@@ -15,9 +15,9 @@ extension JyutpingInputController {
                 }
                 switch InputForm.current {
                 case .options:
-                        let switchesUI = NSHostingController(rootView: SwitchesView().environmentObject(switchesObject))
-                        window?.contentView?.addSubview(switchesUI.view)
-                        switchesUI.view.translatesAutoresizingMaskIntoConstraints = false
+                        let optionsUI = NSHostingController(rootView: OptionsView().environmentObject(switchesObject))
+                        window?.contentView?.addSubview(optionsUI.view)
+                        optionsUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
                            let bottomAnchor = window?.contentView?.bottomAnchor,
                            let leadingAnchor = window?.contentView?.leadingAnchor,
@@ -25,27 +25,27 @@ extension JyutpingInputController {
                                 switch windowPattern {
                                 case .regular:
                                         NSLayoutConstraint.activate([
-                                                switchesUI.view.topAnchor.constraint(equalTo: topAnchor, constant: windowOffset),
-                                                switchesUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: windowOffset)
+                                                optionsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: windowOffset),
+                                                optionsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: windowOffset)
                                         ])
                                 case .horizontalReversed:
                                         NSLayoutConstraint.activate([
-                                                switchesUI.view.topAnchor.constraint(equalTo: topAnchor, constant: windowOffset),
-                                                switchesUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -windowOffset)
+                                                optionsUI.view.topAnchor.constraint(equalTo: topAnchor, constant: windowOffset),
+                                                optionsUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -windowOffset)
                                         ])
                                 case .verticalReversed:
                                         NSLayoutConstraint.activate([
-                                                switchesUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -windowOffset),
-                                                switchesUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: windowOffset)
+                                                optionsUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -windowOffset),
+                                                optionsUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: windowOffset)
                                         ])
                                 case .reversed:
                                         NSLayoutConstraint.activate([
-                                                switchesUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -windowOffset),
-                                                switchesUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -windowOffset)
+                                                optionsUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -windowOffset),
+                                                optionsUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -windowOffset)
                                         ])
                                 }
                         }
-                        window?.contentViewController?.addChild(switchesUI)
+                        window?.contentViewController?.addChild(optionsUI)
                         window?.setFrame(frame, display: true)
                         switchesObject.resetHighlightedIndex()
                 default:
