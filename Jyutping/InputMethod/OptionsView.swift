@@ -1,64 +1,54 @@
 import SwiftUI
 import CoreIME
 
-/// InstantSettings Options View
+/// InstantSettings View
 struct OptionsView: View {
 
         @EnvironmentObject private var displayContext: DisplayContext
 
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
-        private let options: [String] = {
-                let variants: [String] = [
-                        "傳統漢字\u{3000}\u{3000}\u{3000}",
-                        "傳統漢字・香港",
-                        "傳統漢字・臺灣",
-                        "简化字\u{3000}\u{3000}\u{3000}\u{3000}"
-                ]
-                let traditional: [String] = [
-                        "半形數字",
-                        "全形數字",
-                        "粵文句讀",
-                        "英文標點",
-                        "表情符號",
-                        "無\u{3000}\u{3000}\u{3000}"
-                ]
-                let simplified: [String] = [
-                        "半形数字",
-                        "全形数字",
-                        "粤文句读",
-                        "英文标点",
-                        "表情符号",
-                        "无\u{3000}\u{3000}\u{3000}"
-                ]
-                return (Logogram.current == .simplified) ? (variants + simplified) : (variants + traditional)
-        }()
+        private let options: [String] = [
+                "傳統漢字\u{3000}\u{3000}\u{3000}",
+                "傳統漢字・香港",
+                "傳統漢字・臺灣",
+                "簡化字\u{3000}\u{3000}\u{3000}\u{3000}",
+                "半形數字",
+                "全形數字",
+                "粵文句讀",
+                "英文標點",
+                "表情符號",
+                "無\u{3000}\u{3000}\u{3000}"
+        ]
 
-        private let currentVariant: Logogram = Logogram.current
+        private let variant: Logogram = Logogram.current
+        private let characterForm: CharacterForm = InstantSettings.characterForm
+        private let punctuationForm: PunctuationForm = InstantSettings.punctuationForm
+        private let needsEmojiCandidates: Bool = InstantSettings.needsEmojiCandidates
 
         var body: some View {
-                let highlightedIndex = displayContext.highlightedIndex
+                let highlightedIndex = displayContext.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: currentVariant == .traditional)
-                                SettingLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: currentVariant == .hongkong)
-                                SettingLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: currentVariant == .taiwan)
-                                SettingLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: currentVariant == .simplified)
+                                SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: variant == .traditional)
+                                SettingLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: variant == .hongkong)
+                                SettingLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: variant == .taiwan)
+                                SettingLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: variant == .simplified)
                         }
                         Divider()
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: InstantSettings.characterForm == .halfWidth)
-                                SettingLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: InstantSettings.characterForm == .fullWidth)
+                                SettingLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm == .halfWidth)
+                                SettingLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm == .fullWidth)
                         }
                         Divider()
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: InstantSettings.punctuationForm == .cantonese)
-                                SettingLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: InstantSettings.punctuationForm == .english)
+                                SettingLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm == .cantonese)
+                                SettingLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm == .english)
                         }
                         Divider()
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: InstantSettings.needsEmojiCandidates)
-                                SettingLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: !(InstantSettings.needsEmojiCandidates))
+                                SettingLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: needsEmojiCandidates)
+                                SettingLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: !needsEmojiCandidates)
                         }
                 }
                 .padding(8)

@@ -86,7 +86,7 @@ extension JyutpingInputController {
                                 case .transparent:
                                         return false
                                 case .options:
-                                        displayContext.decreaseHighlightedIndex()
+                                        displayContext.decreaseOptionsHighlightedIndex()
                                         return true
                                 }
                         case .down:
@@ -103,7 +103,7 @@ extension JyutpingInputController {
                                 case .transparent:
                                         return false
                                 case .options:
-                                        displayContext.increaseHighlightedIndex()
+                                        displayContext.increaseOptionsHighlightedIndex()
                                         return true
                                 }
                         case .left:
@@ -317,7 +317,7 @@ extension JyutpingInputController {
                         case .transparent:
                                 return false
                         case .options:
-                                displayContext.increaseHighlightedIndex()
+                                displayContext.increaseOptionsHighlightedIndex()
                                 return true
                         }
                 case .previousPage:
@@ -363,9 +363,9 @@ extension JyutpingInputController {
         }
 
         private func handleOptions(_ index: Int? = nil) {
-                let selectedIndex: Int = index ?? displayContext.highlightedIndex
+                let selectedIndex: Int = index ?? displayContext.optionsHighlightedIndex
                 defer {
-                        let newInputState: InputForm = {
+                        let newInputForm: InputForm = {
                                 switch InstantSettings.inputMethodMode {
                                 case .cantonese:
                                         return .cantonese
@@ -373,12 +373,12 @@ extension JyutpingInputController {
                                         return .transparent
                                 }
                         }()
-                        InputForm.updateCurrent(to: newInputState)
+                        InputForm.updateCurrent(to: newInputForm)
                         resetWindow()
                 }
                 switch selectedIndex {
                 case -1:
-                        return
+                        break
                 case 4:
                         InstantSettings.updateCharacterFormState(to: .halfWidth)
                 case 5:
@@ -394,7 +394,7 @@ extension JyutpingInputController {
                 default:
                         break
                 }
-                let newSelection: Logogram = {
+                let newVariant: Logogram? = {
                         switch selectedIndex {
                         case 0:
                                 return .traditional
@@ -405,11 +405,11 @@ extension JyutpingInputController {
                         case 3:
                                 return .simplified
                         default:
-                                return Logogram.current
+                                return nil
                         }
                 }()
-                guard newSelection != Logogram.current else { return }
-                Logogram.updateCurrent(to: newSelection)
+                guard let newVariant, newVariant != Logogram.current else { return }
+                Logogram.updateCurrent(to: newVariant)
         }
 
         private func aftercareSelection(_ selected: DisplayCandidate) {
