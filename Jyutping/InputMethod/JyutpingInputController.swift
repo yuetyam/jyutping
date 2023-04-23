@@ -50,7 +50,7 @@ final class JyutpingInputController: IMKInputController {
                 if InputForm.current.isOptions {
                         InputForm.updateCurrent()
                 }
-                if isBufferState {
+                if inputStage.isBuffering {
                         clearBufferText()
                 }
         }
@@ -60,32 +60,25 @@ final class JyutpingInputController: IMKInputController {
                 window?.setFrame(.zero, display: true)
         }
 
-        func clearBufferText() {
-                bufferText = .empty
-        }
-        var isBufferState: Bool {
-                return !(bufferText.isEmpty)
-        }
+        private(set) lazy var inputStage: InputStage = .standby
         lazy var bufferText: String = .empty {
                 willSet {
                         switch (bufferText.isEmpty, newValue.isEmpty) {
                         case (true, true):
-                                // Stay empty
-                                break
+                                inputStage = .standby
                         case (true, false):
-                                // Starting
+                                inputStage = .starting
                                 UserLexicon.prepare()
                                 Engine.prepare()
                         case (false, true):
-                                // Ending
+                                inputStage = .ending
                                 let shouldHandleCandidateSequence: Bool = !(candidateSequence.isEmpty)
                                 guard shouldHandleCandidateSequence else { return }
                                 let concatenated: Candidate = candidateSequence.joined()
                                 candidateSequence = []
                                 UserLexicon.handle(concatenated)
                         case (false, false):
-                                // Ongoing
-                                break
+                                inputStage = .ongoing
                         }
                 }
                 didSet {
@@ -109,6 +102,9 @@ final class JyutpingInputController: IMKInputController {
                                 handlePunctuation()
                         }
                 }
+        }
+        func clearBufferText() {
+                bufferText = .empty
         }
 
         private func mark(text: String) {

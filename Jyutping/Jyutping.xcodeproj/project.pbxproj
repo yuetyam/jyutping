@@ -105,6 +105,7 @@
 		37EF1957296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */; };
 		37EF1959296DBE1600A3F4C9 /* YingWaaFanWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */; };
 		37EF195C296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */; };
+		37EF921629F51AF6007B8926 /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF921529F51AF6007B8926 /* InputStage.swift */; };
 		37FC1AD9294DF40900D7153F /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 37FC1AD2294DF40900D7153F /* Keyboard.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		37FC1AE2294DF60200D7153F /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1AE1294DF60200D7153F /* CommonExtensions */; };
 		37FC1AE5294DF66500D7153F /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1AE4294DF66500D7153F /* CoreIME */; };
@@ -371,6 +372,7 @@
 		37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuView.swift; sourceTree = "<group>"; };
 		37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanView.swift; sourceTree = "<group>"; };
 		37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuLabel.swift; sourceTree = "<group>"; };
+		37EF921529F51AF6007B8926 /* InputStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
 		37FC1AD2294DF40900D7153F /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FC1AD6294DF40900D7153F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		37FC1AE3294DF65400D7153F /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
@@ -945,6 +947,7 @@
 				3793330729DD53B200F6A7D4 /* PageTransformation.swift */,
 				37FC1B9E294DFC5300D7153F /* WindowPattern.swift */,
 				37FC1B85294DFC5300D7153F /* InputForm.swift */,
+				37EF921529F51AF6007B8926 /* InputStage.swift */,
 				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
 				3726E43F2999E324003E5842 /* InputControllerExtensions */,
 				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
@@ -1487,6 +1490,7 @@
 				37FC1BAE294DFC5300D7153F /* JyutpingInputController.swift in Sources */,
 				3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */,
 				37FC1BB9294DFC5400D7153F /* Speech.swift in Sources */,
+				37EF921629F51AF6007B8926 /* InputStage.swift in Sources */,
 				37FC1BB3294DFC5300D7153F /* OptionsView.swift in Sources */,
 				37FC1BA7294DFC5300D7153F /* CandidateFontPreferencesView.swift in Sources */,
 				3726E43A2999D164003E5842 /* EventHandler.swift in Sources */,

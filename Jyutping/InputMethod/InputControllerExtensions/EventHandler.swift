@@ -55,7 +55,7 @@ extension JyutpingInputController {
                                         return true
                                 }
                         case KeyCode.Alphabet.VK_U:
-                                guard InputForm.current.isCantonese && isBufferState else { return false }
+                                guard inputStage.isBuffering && InputForm.current.isCantonese else { return false }
                                 clearBufferText()
                                 return true
                         case let value where KeyCode.numberSet.contains(value):
@@ -75,7 +75,7 @@ extension JyutpingInputController {
                         case .up:
                                 switch InputForm.current {
                                 case .cantonese:
-                                        guard isBufferState else { return false }
+                                        guard inputStage.isBuffering else { return false }
                                         if displayContext.isHighlightingStart {
                                                 updateDisplayingCandidates(.previousPage, highlight: .end)
                                                 return true
@@ -92,7 +92,7 @@ extension JyutpingInputController {
                         case .down:
                                 switch InputForm.current {
                                 case .cantonese:
-                                        guard isBufferState else { return false }
+                                        guard inputStage.isBuffering else { return false }
                                         if displayContext.isHighlightingEnd {
                                                 updateDisplayingCandidates(.nextPage, highlight: .start)
                                                 return true
@@ -109,7 +109,7 @@ extension JyutpingInputController {
                         case .left:
                                 switch InputForm.current {
                                 case .cantonese:
-                                        guard isBufferState else { return false }
+                                        guard inputStage.isBuffering else { return false }
                                         updateDisplayingCandidates(.previousPage, highlight: .unchanged)
                                         return true
                                 case .transparent:
@@ -120,7 +120,7 @@ extension JyutpingInputController {
                         case .right:
                                 switch InputForm.current {
                                 case .cantonese:
-                                        guard isBufferState else { return false }
+                                        guard inputStage.isBuffering else { return false }
                                         updateDisplayingCandidates(.nextPage, highlight: .unchanged)
                                         return true
                                 case .transparent:
@@ -133,7 +133,7 @@ extension JyutpingInputController {
                         let index: Int = number == 0 ? 9 : (number - 1)
                         switch InputForm.current {
                         case .cantonese:
-                                if isBufferState {
+                                if inputStage.isBuffering {
                                         guard let selectedItem = displayContext.items.fetch(index) else { return true }
                                         let text = selectedItem.text
                                         client.insert(text)
@@ -225,7 +225,7 @@ extension JyutpingInputController {
                 case .separator:
                         switch InputForm.current {
                         case .cantonese:
-                                guard isBufferState else { return false }
+                                guard inputStage.isBuffering else { return false }
                                 bufferText += "'"
                                 return true
                         case .transparent:
@@ -236,7 +236,7 @@ extension JyutpingInputController {
                 case .return:
                         switch InputForm.current {
                         case .cantonese:
-                                guard isBufferState else { return false }
+                                guard inputStage.isBuffering else { return false }
                                 passBuffer()
                                 return true
                         case .transparent:
@@ -248,7 +248,7 @@ extension JyutpingInputController {
                 case .backspace:
                         switch InputForm.current {
                         case .cantonese:
-                                guard isBufferState else { return false }
+                                guard inputStage.isBuffering else { return false }
                                 bufferText = String(bufferText.dropLast())
                                 return true
                         case .transparent:
@@ -260,7 +260,7 @@ extension JyutpingInputController {
                 case .escapeClear:
                         switch InputForm.current {
                         case .cantonese:
-                                guard isBufferState else { return false }
+                                guard inputStage.isBuffering else { return false }
                                 clearBufferText()
                                 return true
                         case .transparent:
@@ -306,7 +306,7 @@ extension JyutpingInputController {
                 case .tab:
                         switch InputForm.current {
                         case .cantonese:
-                                guard isBufferState else { return false }
+                                guard inputStage.isBuffering else { return false }
                                 if displayContext.isHighlightingEnd {
                                         updateDisplayingCandidates(.nextPage, highlight: .start)
                                         return true
@@ -323,7 +323,7 @@ extension JyutpingInputController {
                 case .previousPage:
                         switch InputForm.current {
                         case .cantonese:
-                                guard isBufferState else { return false }
+                                guard inputStage.isBuffering else { return false }
                                 updateDisplayingCandidates(.previousPage, highlight: .unchanged)
                                 return true
                         case .transparent:
@@ -334,7 +334,7 @@ extension JyutpingInputController {
                 case .nextPage:
                         switch InputForm.current {
                         case .cantonese:
-                                guard isBufferState else { return false }
+                                guard inputStage.isBuffering else { return false }
                                 updateDisplayingCandidates(.nextPage, highlight: .unchanged)
                                 return true
                         case .transparent:
@@ -356,7 +356,7 @@ extension JyutpingInputController {
         }
 
         private func passBuffer() {
-                guard isBufferState else { return }
+                guard inputStage.isBuffering else { return }
                 let text: String = InstantSettings.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
                 currentClient?.insert(text)
                 clearBufferText()
