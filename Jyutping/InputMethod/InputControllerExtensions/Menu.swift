@@ -35,7 +35,7 @@ extension JyutpingInputController {
         @objc private func toggleInputMethodMode() {
                 let newMode: InputMethodMode = InstantSettings.inputMethodMode.isCantonese ? .abc : .cantonese
                 InstantSettings.updateInputMethodMode(to: newMode)
-                InputState.updateCurrent()
+                InputForm.updateCurrent()
         }
 
         @objc private func openPreferencesWindow() {

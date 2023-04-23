@@ -13,8 +13,8 @@ extension JyutpingInputController {
                         window?.level = NSWindow.Level(levelValue)
                         window?.backgroundColor = .clear
                 }
-                switch InputState.current {
-                case .switches:
+                switch InputForm.current {
+                case .options:
                         let switchesUI = NSHostingController(rootView: SwitchesView().environmentObject(switchesObject))
                         window?.contentView?.addSubview(switchesUI.view)
                         switchesUI.view.translatesAutoresizingMaskIntoConstraints = false

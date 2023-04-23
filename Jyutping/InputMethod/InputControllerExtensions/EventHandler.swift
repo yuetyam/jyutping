@@ -28,20 +28,20 @@ extension JyutpingInputController {
                                 // handled by NSMenu
                                 return false
                         case KeyCode.Symbol.VK_BACKQUOTE:
-                                switch InputState.current {
+                                switch InputForm.current {
                                 case .cantonese:
                                         passBuffer()
-                                        InputState.updateCurrent(to: .switches)
+                                        InputForm.updateCurrent(to: .options)
                                         resetWindow()
                                 case .transparent:
-                                        InputState.updateCurrent(to: .switches)
+                                        InputForm.updateCurrent(to: .options)
                                         resetWindow()
-                                case .switches:
+                                case .options:
                                         handleSwitches(-1)
                                 }
                                 return true
                         case KeyCode.Special.VK_BACKWARD_DELETE, KeyCode.Special.VK_FORWARD_DELETE:
-                                switch InputState.current {
+                                switch InputForm.current {
                                 case .cantonese:
                                         guard !(candidates.isEmpty) else { return false }
                                         let index = displayObject.highlightedIndex
@@ -51,11 +51,11 @@ extension JyutpingInputController {
                                         return true
                                 case .transparent:
                                         return false
-                                case .switches:
+                                case .options:
                                         return true
                                 }
                         case KeyCode.Alphabet.VK_U:
-                                guard InputState.current.isCantonese && isBufferState else { return false }
+                                guard InputForm.current.isCantonese && isBufferState else { return false }
                                 clearBufferText()
                                 return true
                         case let value where KeyCode.numberSet.contains(value):
@@ -73,7 +73,7 @@ extension JyutpingInputController {
                 case .arrow(let direction):
                         switch direction {
                         case .up:
-                                switch InputState.current {
+                                switch InputForm.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
                                         if displayObject.isHighlightingStart {
@@ -85,12 +85,12 @@ extension JyutpingInputController {
                                         }
                                 case .transparent:
                                         return false
-                                case .switches:
+                                case .options:
                                         switchesObject.decreaseHighlightedIndex()
                                         return true
                                 }
                         case .down:
-                                switch InputState.current {
+                                switch InputForm.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
                                         if displayObject.isHighlightingEnd {
@@ -102,36 +102,36 @@ extension JyutpingInputController {
                                         }
                                 case .transparent:
                                         return false
-                                case .switches:
+                                case .options:
                                         switchesObject.increaseHighlightedIndex()
                                         return true
                                 }
                         case .left:
-                                switch InputState.current {
+                                switch InputForm.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
                                         updateDisplayingCandidates(.previousPage, highlight: .unchanged)
                                         return true
                                 case .transparent:
                                         return false
-                                case .switches:
+                                case .options:
                                         return true
                                 }
                         case .right:
-                                switch InputState.current {
+                                switch InputForm.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
                                         updateDisplayingCandidates(.nextPage, highlight: .unchanged)
                                         return true
                                 case .transparent:
                                         return false
-                                case .switches:
+                                case .options:
                                         return true
                                 }
                         }
                 case .number(let number):
                         let index: Int = number == 0 ? 9 : (number - 1)
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 if isBufferState {
                                         guard let selectedItem = displayObject.items.fetch(index) else { return true }
@@ -166,17 +166,17 @@ extension JyutpingInputController {
                                 } else {
                                         return false
                                 }
-                        case .switches:
+                        case .options:
                                 handleSwitches(index)
                                 return true
                         }
                 case .keypadNumber(let number):
-                        let isStrokeReverseLookup: Bool = InputState.current.isCantonese && bufferText.hasPrefix("x")
+                        let isStrokeReverseLookup: Bool = InputForm.current.isCantonese && bufferText.hasPrefix("x")
                         guard isStrokeReverseLookup else { return false }
                         bufferText += "\(number)"
                         return true
                 case .punctuation(let punctuationKey):
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard candidates.isEmpty else {
                                         switch punctuationKey {
@@ -208,75 +208,75 @@ extension JyutpingInputController {
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 return true
                         }
                 case .alphabet(let letter):
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 let text: String = isShifting ? letter.uppercased() : letter
                                 bufferText += text
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 return true
                         }
                 case .separator:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 bufferText += "'"
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 return true
                         }
                 case .return:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 passBuffer()
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 handleSwitches()
                                 return true
                         }
                 case .backspace:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 bufferText = String(bufferText.dropLast())
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 handleSwitches(-1)
                                 return true
                         }
                 case .escapeClear:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 clearBufferText()
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 handleSwitches(-1)
                                 return true
                         }
                 case .space:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 let shouldSwitchToABCMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
                                 guard !shouldSwitchToABCMode else {
                                         passBuffer()
                                         InstantSettings.updateInputMethodMode(to: .abc)
-                                        InputState.updateCurrent(to: .transparent)
+                                        InputForm.updateCurrent(to: .transparent)
                                         return true
                                 }
                                 if candidates.isEmpty {
@@ -297,14 +297,14 @@ extension JyutpingInputController {
                                 let shouldSwitchToCantoneseMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
                                 guard shouldSwitchToCantoneseMode else { return false }
                                 InstantSettings.updateInputMethodMode(to: .cantonese)
-                                InputState.updateCurrent(to: .cantonese)
+                                InputForm.updateCurrent(to: .cantonese)
                                 return true
-                        case .switches:
+                        case .options:
                                 handleSwitches()
                                 return true
                         }
                 case .tab:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 if displayObject.isHighlightingEnd {
@@ -316,36 +316,36 @@ extension JyutpingInputController {
                                 }
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 switchesObject.increaseHighlightedIndex()
                                 return true
                         }
                 case .previousPage:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 updateDisplayingCandidates(.previousPage, highlight: .unchanged)
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 return true
                         }
                 case .nextPage:
-                        switch InputState.current {
+                        switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
                                 updateDisplayingCandidates(.nextPage, highlight: .unchanged)
                                 return true
                         case .transparent:
                                 return false
-                        case .switches:
+                        case .options:
                                 return true
                         }
                 case .other:
                         switch event.keyCode {
                         case KeyCode.Special.VK_HOME:
-                                let shouldJump2FirstPage: Bool = InputState.current.isCantonese && !(candidates.isEmpty)
+                                let shouldJump2FirstPage: Bool = InputForm.current.isCantonese && !(candidates.isEmpty)
                                 guard shouldJump2FirstPage else { return false }
                                 updateDisplayingCandidates(.establish, highlight: .start)
                                 return true
@@ -365,7 +365,7 @@ extension JyutpingInputController {
         private func handleSwitches(_ index: Int? = nil) {
                 let selectedIndex: Int = index ?? switchesObject.highlightedIndex
                 defer {
-                        let newInputState: InputState = {
+                        let newInputState: InputForm = {
                                 switch InstantSettings.inputMethodMode {
                                 case .cantonese:
                                         return .cantonese
@@ -373,7 +373,7 @@ extension JyutpingInputController {
                                         return .transparent
                                 }
                         }()
-                        InputState.updateCurrent(to: newInputState)
+                        InputForm.updateCurrent(to: newInputState)
                         resetWindow()
                 }
                 switch selectedIndex {

@@ -47,8 +47,8 @@ final class JyutpingInputController: IMKInputController {
                 }
                 UserLexicon.prepare()
                 Engine.prepare()
-                if InputState.current.isSwitches {
-                        InputState.updateCurrent()
+                if InputForm.current.isOptions {
+                        InputForm.updateCurrent()
                 }
                 if isBufferState {
                         clearBufferText()
