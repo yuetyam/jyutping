@@ -295,8 +295,7 @@ final class JyutpingInputController: IMKInputController {
                 */
         }
 
-        lazy var displayObject = DisplayObject()
-        lazy var switchesObject = SwitchesObject()
+        private(set) lazy var displayContext: DisplayContext = DisplayContext()
 
         /// DisplayCandidates indices
         private lazy var indices: (first: Int, last: Int) = (0, 0)
@@ -304,7 +303,7 @@ final class JyutpingInputController: IMKInputController {
         func updateDisplayingCandidates(_ mode: PageTransformation, highlight: Highlight) {
                 guard !(candidates.isEmpty) else {
                         indices = (0, 0)
-                        displayObject.reset()
+                        displayContext.reset()
                         return
                 }
                 let pageSize: Int = AppSettings.displayCandidatePageSize
@@ -328,7 +327,7 @@ final class JyutpingInputController: IMKInputController {
                 let newItems = (firstIndex..<bound).map({ index -> DisplayCandidate in
                         return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
                 })
-                displayObject.update(with: newItems, highlight: highlight)
+                displayContext.update(with: newItems, highlight: highlight)
         }
 
         /// Cache for UserLexicon

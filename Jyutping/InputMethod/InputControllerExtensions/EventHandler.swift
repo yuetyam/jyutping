@@ -44,8 +44,8 @@ extension JyutpingInputController {
                                 switch InputForm.current {
                                 case .cantonese:
                                         guard !(candidates.isEmpty) else { return false }
-                                        let index = displayObject.highlightedIndex
-                                        guard let candidate = displayObject.items.fetch(index)?.candidate else { return true }
+                                        let index = displayContext.highlightedIndex
+                                        guard let candidate = displayContext.items.fetch(index)?.candidate else { return true }
                                         guard candidate.isCantonese else { return true }
                                         UserLexicon.removeItem(candidate: candidate)
                                         return true
@@ -76,34 +76,34 @@ extension JyutpingInputController {
                                 switch InputForm.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
-                                        if displayObject.isHighlightingStart {
+                                        if displayContext.isHighlightingStart {
                                                 updateDisplayingCandidates(.previousPage, highlight: .end)
                                                 return true
                                         } else {
-                                                displayObject.decreaseHighlightedIndex()
+                                                displayContext.decreaseHighlightedIndex()
                                                 return true
                                         }
                                 case .transparent:
                                         return false
                                 case .options:
-                                        switchesObject.decreaseHighlightedIndex()
+                                        displayContext.decreaseHighlightedIndex()
                                         return true
                                 }
                         case .down:
                                 switch InputForm.current {
                                 case .cantonese:
                                         guard isBufferState else { return false }
-                                        if displayObject.isHighlightingEnd {
+                                        if displayContext.isHighlightingEnd {
                                                 updateDisplayingCandidates(.nextPage, highlight: .start)
                                                 return true
                                         } else {
-                                                displayObject.increaseHighlightedIndex()
+                                                displayContext.increaseHighlightedIndex()
                                                 return true
                                         }
                                 case .transparent:
                                         return false
                                 case .options:
-                                        switchesObject.increaseHighlightedIndex()
+                                        displayContext.increaseHighlightedIndex()
                                         return true
                                 }
                         case .left:
@@ -134,7 +134,7 @@ extension JyutpingInputController {
                         switch InputForm.current {
                         case .cantonese:
                                 if isBufferState {
-                                        guard let selectedItem = displayObject.items.fetch(index) else { return true }
+                                        guard let selectedItem = displayContext.items.fetch(index) else { return true }
                                         let text = selectedItem.text
                                         client.insert(text)
                                         aftercareSelection(selectedItem)
@@ -286,8 +286,8 @@ extension JyutpingInputController {
                                         client.insert(text)
                                         return true
                                 } else {
-                                        let index = displayObject.highlightedIndex
-                                        guard let selectedItem = displayObject.items.fetch(index) else { return true }
+                                        let index = displayContext.highlightedIndex
+                                        guard let selectedItem = displayContext.items.fetch(index) else { return true }
                                         let text = selectedItem.text
                                         client.insert(text)
                                         aftercareSelection(selectedItem)
@@ -307,17 +307,17 @@ extension JyutpingInputController {
                         switch InputForm.current {
                         case .cantonese:
                                 guard isBufferState else { return false }
-                                if displayObject.isHighlightingEnd {
+                                if displayContext.isHighlightingEnd {
                                         updateDisplayingCandidates(.nextPage, highlight: .start)
                                         return true
                                 } else {
-                                        displayObject.increaseHighlightedIndex()
+                                        displayContext.increaseHighlightedIndex()
                                         return true
                                 }
                         case .transparent:
                                 return false
                         case .options:
-                                switchesObject.increaseHighlightedIndex()
+                                displayContext.increaseHighlightedIndex()
                                 return true
                         }
                 case .previousPage:
@@ -363,7 +363,7 @@ extension JyutpingInputController {
         }
 
         private func handleOptions(_ index: Int? = nil) {
-                let selectedIndex: Int = index ?? switchesObject.highlightedIndex
+                let selectedIndex: Int = index ?? displayContext.highlightedIndex
                 defer {
                         let newInputState: InputForm = {
                                 switch InstantSettings.inputMethodMode {

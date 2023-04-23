@@ -15,7 +15,7 @@ extension JyutpingInputController {
                 }
                 switch InputForm.current {
                 case .options:
-                        let optionsUI = NSHostingController(rootView: OptionsView().environmentObject(switchesObject))
+                        let optionsUI = NSHostingController(rootView: OptionsView().environmentObject(displayContext))
                         window?.contentView?.addSubview(optionsUI.view)
                         optionsUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,
@@ -47,9 +47,9 @@ extension JyutpingInputController {
                         }
                         window?.contentViewController?.addChild(optionsUI)
                         window?.setFrame(frame, display: true)
-                        switchesObject.resetHighlightedIndex()
+                        displayContext.resetOptionsHighlightedIndex()
                 default:
-                        let candidatesUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayObject))
+                        let candidatesUI = NSHostingController(rootView: CandidateBoard().environmentObject(displayContext))
                         window?.contentView?.addSubview(candidatesUI.view)
                         candidatesUI.view.translatesAutoresizingMaskIntoConstraints = false
                         if let topAnchor = window?.contentView?.topAnchor,

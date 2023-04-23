@@ -1,30 +1,10 @@
 import SwiftUI
 import CoreIME
 
-final class SwitchesObject: ObservableObject {
-
-        @Published private(set) var highlightedIndex: Int = 0
-
-        private let minIndex: Int = 0
-        private let maxIndex: Int = 9
-
-        func increaseHighlightedIndex() {
-                guard highlightedIndex < maxIndex else { return }
-                highlightedIndex += 1
-        }
-        func decreaseHighlightedIndex() {
-                guard highlightedIndex > minIndex else { return }
-                highlightedIndex -= 1
-        }
-        func resetHighlightedIndex() {
-                highlightedIndex = minIndex
-        }
-}
-
 /// InstantSettings Options View
 struct OptionsView: View {
 
-        @EnvironmentObject private var switchesObject: SwitchesObject
+        @EnvironmentObject private var displayContext: DisplayContext
 
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
@@ -57,7 +37,7 @@ struct OptionsView: View {
         private let currentVariant: Logogram = Logogram.current
 
         var body: some View {
-                let highlightedIndex = switchesObject.highlightedIndex
+                let highlightedIndex = displayContext.highlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
                                 SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: currentVariant == .traditional)
