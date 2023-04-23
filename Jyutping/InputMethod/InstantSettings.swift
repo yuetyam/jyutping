@@ -1,12 +1,12 @@
 import Foundation
 
-/// 全形 / 半形
+/// 半形／全形數字、字母
 enum CharacterForm: Int {
         case halfWidth = 1
         case fullWidth = 2
 }
 
-/// 標點符號
+/// 標點符號形態
 enum PunctuationForm: Int {
         case cantonese = 1
         case english = 2
@@ -29,7 +29,7 @@ enum InputMethodMode: Int {
 
 struct InstantSettings {
 
-        /// 全形 / 半形
+        /// 半形／全形數字、字母
         private(set) static var characterForm: CharacterForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: "character_form")
                 switch savedValue {
@@ -46,7 +46,6 @@ struct InstantSettings {
                 let value: Int = newState.rawValue
                 UserDefaults.standard.set(value, forKey: "character_form")
         }
-
 
         /// 標點符號形態。粵文句讀抑或英文標點
         private(set) static var punctuationForm: PunctuationForm = {
@@ -65,7 +64,6 @@ struct InstantSettings {
                 let value: Int = form.rawValue
                 UserDefaults.standard.set(value, forKey: "punctuation")
         }
-
 
         /// 候選詞包含 Emoji
         private(set) static var needsEmojiCandidates: Bool = {
@@ -107,4 +105,3 @@ struct InstantSettings {
                 UserDefaults.standard.set(value, forKey: "InputMethodMode")
         }
 }
-

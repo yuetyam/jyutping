@@ -52,8 +52,8 @@ struct OptionsView: View {
                         }
                         Divider()
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: InstantSettings.punctuation == .cantonese)
-                                SettingLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: InstantSettings.punctuation == .english)
+                                SettingLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: InstantSettings.punctuationForm == .cantonese)
+                                SettingLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: InstantSettings.punctuationForm == .english)
                         }
                         Divider()
                         Group {
