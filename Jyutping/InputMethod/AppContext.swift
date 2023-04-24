@@ -1,37 +1,37 @@
 import Combine
 import CoreIME
 
-/// Handle Displaying Candidates and Options
-final class DisplayContext: ObservableObject {
+final class AppContext: ObservableObject {
 
-        @Published private(set) var items: [DisplayCandidate] = []
-        @Published private(set) var longest: DisplayCandidate = DisplayContext.defaultLongest
+        @Published private(set) var displayCandidates: [DisplayCandidate] = []
+        @Published private(set) var placeholder: DisplayCandidate = .defaultPlaceholder
+        @Published private(set) var highlightedIndex: Int = 0
+        @Published private(set) var optionsHighlightedIndex: Int = 0
+        @Published private(set) var inputForm: InputForm = InputForm.matchInputMethodMode()
+        @Published private(set) var windowPattern: WindowPattern = .regular
+
         private let minIndex: Int = 0
         private var maxIndex: Int = 0
-        @Published private(set) var highlightedIndex: Int = 0
-
-        /// OptionsView highlighted index
-        @Published private(set) var optionsHighlightedIndex: Int = 0
 
 
         // MARK: - Update context
 
-        func reset() {
-                items = []
-                longest = DisplayContext.defaultLongest
-                maxIndex = minIndex
+        func resetDisplayContext() {
+                displayCandidates = []
+                placeholder = .defaultPlaceholder
                 highlightedIndex = minIndex
                 optionsHighlightedIndex = minIndex
+                maxIndex = minIndex
         }
 
-        func update(with newItems: [DisplayCandidate], highlight: Highlight) {
-                guard !(newItems.isEmpty) else {
-                        reset()
+        func update(with newDisplayCandidates: [DisplayCandidate], highlight: Highlight) {
+                guard !(newDisplayCandidates.isEmpty) else {
+                        resetDisplayContext()
                         return
                 }
-                items = newItems
-                longest = newItems.longest!
-                maxIndex = newItems.count - 1
+                displayCandidates = newDisplayCandidates
+                placeholder = newDisplayCandidates.longest!
+                maxIndex = newDisplayCandidates.count - 1
                 let newHighlightedIndex: Int = {
                         switch highlight {
                         case .start:
@@ -43,6 +43,17 @@ final class DisplayContext: ObservableObject {
                         }
                 }()
                 highlightedIndex = newHighlightedIndex
+        }
+
+        func updateInputForm(to form: InputForm? = nil) {
+                let newForm: InputForm = form ?? InputForm.matchInputMethodMode()
+                if newForm.isOptions {
+                        optionsHighlightedIndex = minIndex
+                }
+                inputForm = newForm
+        }
+        func updateWindowPattern(to pattern: WindowPattern) {
+                windowPattern = pattern
         }
 
 
@@ -76,12 +87,10 @@ final class DisplayContext: ObservableObject {
                 guard optionsHighlightedIndex > minIndex else { return }
                 optionsHighlightedIndex -= 1
         }
-        func resetOptionsHighlightedIndex() {
-                optionsHighlightedIndex = minIndex
-        }
+}
 
-        /// Default placeholder
-        private static let defaultLongest: DisplayCandidate = DisplayCandidate(candidate: Candidate(text: "毋", romanization: "m4", input: "m", lexiconText: "毋"), candidateIndex: 0)
+private extension DisplayCandidate {
+        static let defaultPlaceholder: DisplayCandidate = DisplayCandidate(candidate: Candidate(text: "毋", romanization: "m4", input: "m", lexiconText: "毋"), candidateIndex: 0)
 }
 
 enum Highlight: Int {

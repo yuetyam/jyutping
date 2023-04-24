@@ -2,22 +2,22 @@ import SwiftUI
 
 struct CandidateBoard: View {
 
-        @EnvironmentObject private var displayContext: DisplayContext
+        @EnvironmentObject private var context: AppContext
 
         private let toneStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         private let toneColor: ToneDisplayColor = AppSettings.toneDisplayColor
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
         var body: some View {
-                let placeholder: DisplayCandidate = displayContext.longest
-                let highlightedIndex = displayContext.highlightedIndex
+                let placeholder: DisplayCandidate = context.placeholder
+                let highlightedIndex = context.highlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
-                        ForEach(0..<displayContext.items.count, id: \.self) { index in
+                        ForEach(0..<context.displayCandidates.count, id: \.self) { index in
                                 let isHighlighted: Bool = index == highlightedIndex
                                 let foreColor: Color = isHighlighted ? Color.white : Color.primary
                                 let backColor: Color = isHighlighted ? Color.accentColor : Color.clear
                                 CandidateLabel(
-                                        candidate: displayContext.items[index],
+                                        candidate: context.displayCandidates[index],
                                         placeholder: placeholder,
                                         index: index,
                                         toneStyle: toneStyle,
@@ -30,5 +30,6 @@ struct CandidateBoard: View {
                 }
                 .padding(8)
                 .roundedHUDVisualEffect()
+                .fixedSize()
         }
 }

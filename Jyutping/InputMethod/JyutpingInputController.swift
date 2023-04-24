@@ -6,17 +6,66 @@ import CoreIME
 @objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
 
-        /// CandidateBoard Window
-        lazy var window: NSWindow? = nil
-        let windowOffset: CGFloat = 10
+        // MARK: - Window, InputClient
 
-        private(set) lazy var windowPattern: WindowPattern = .regular
+        private(set) lazy var window: NSWindow? = nil
+        private func createMasterWindow() {
+                if window == nil {
+                        window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
+                        window?.collectionBehavior = .moveToActiveSpace
+                        let levelValue: Int = Int(CGShieldingWindowLevel())
+                        window?.level = NSWindow.Level(levelValue)
+                        window?.backgroundColor = .clear
+                } else {
+                        _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
+                        _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
+                }
+                let boardUI = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
+                window?.contentView?.addSubview(boardUI.view)
+                boardUI.view.translatesAutoresizingMaskIntoConstraints = false
+                let offset: CGFloat = 10
+                if let topAnchor = window?.contentView?.topAnchor,
+                   let bottomAnchor = window?.contentView?.bottomAnchor,
+                   let leadingAnchor = window?.contentView?.leadingAnchor,
+                   let trailingAnchor = window?.contentView?.trailingAnchor {
+                        NSLayoutConstraint.activate([
+                                boardUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                boardUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                boardUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
+                                boardUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                        ])
+                }
+                window?.contentViewController?.addChild(boardUI)
+                window?.setFrame(.zero, display: true)
+                window?.orderFrontRegardless()
+        }
 
+        var windowFrame: CGRect {
+                let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
+                let width: CGFloat = 800
+                let height: CGFloat = 500
+                let x: CGFloat = {
+                        if appContext.windowPattern.isReversingHorizontal {
+                                return origin.x - width - 8
+                        } else {
+                                return origin.x
+                        }
+                }()
+                let y: CGFloat = {
+                        if appContext.windowPattern.isReversingVertical {
+                                return origin.y + 16
+                        } else {
+                                return origin.y - height
+                        }
+                }()
+                return CGRect(x: x, y: y, width: width, height: height)
+        }
+
+        private lazy var screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 2560
         lazy var currentOrigin: CGPoint? = nil
         lazy var currentClient: IMKTextInput? = nil {
                 didSet {
                         guard let origin = currentClient?.position else { return }
-                        let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
                         let isRegularHorizontal: Bool = origin.x < (screenWidth - 400)
                         let isRegularVertical: Bool = origin.y > 400
                         let newPattern: WindowPattern = {
@@ -31,15 +80,16 @@ final class JyutpingInputController: IMKInputController {
                                         return .reversed
                                 }
                         }()
-                        guard newPattern != windowPattern else { return }
-                        windowPattern = newPattern
-                        if window != nil {
-                                resetWindow()
-                        }
+                        guard newPattern != appContext.windowPattern else { return }
+                        appContext.updateWindowPattern(to: newPattern)
                 }
         }
 
+
+        // MARK: - Input Server lifecycle
+
         override func activateServer(_ sender: Any!) {
+                screenWidth = NSScreen.main?.frame.size.width ?? 2560
                 currentClient = sender as? IMKTextInput
                 currentOrigin = currentClient?.position
                 DispatchQueue.main.async { [weak self] in
@@ -47,18 +97,26 @@ final class JyutpingInputController: IMKInputController {
                 }
                 UserLexicon.prepare()
                 Engine.prepare()
-                if InputForm.current.isOptions {
-                        InputForm.updateCurrent()
+                if appContext.inputForm.isOptions {
+                        appContext.updateInputForm()
                 }
                 if inputStage.isBuffering {
                         clearBufferText()
                 }
+                if window == nil {
+                        createMasterWindow()
+                }
         }
         override func deactivateServer(_ sender: Any!) {
-                candidateSequence = []
                 unmarkText()
                 window?.setFrame(.zero, display: true)
+                selectedCandidates = []
         }
+
+        private(set) lazy var appContext: AppContext = AppContext()
+
+
+        // MARK: - Input Texts
 
         private(set) lazy var inputStage: InputStage = .standby
         lazy var bufferText: String = .empty {
@@ -72,17 +130,16 @@ final class JyutpingInputController: IMKInputController {
                                 Engine.prepare()
                         case (false, true):
                                 inputStage = .ending
-                                let shouldHandleCandidateSequence: Bool = !(candidateSequence.isEmpty)
-                                guard shouldHandleCandidateSequence else { return }
-                                let concatenated: Candidate = candidateSequence.joined()
-                                candidateSequence = []
+                                let shouldHandleSelectedCandidates: Bool = !(selectedCandidates.isEmpty)
+                                guard shouldHandleSelectedCandidates else { return }
+                                let concatenated: Candidate = selectedCandidates.joined()
+                                selectedCandidates = []
                                 UserLexicon.handle(concatenated)
                         case (false, false):
                                 inputStage = .ongoing
                         }
                 }
                 didSet {
-                        indices = (0, 0)
                         switch bufferText.first {
                         case .none:
                                 unmarkText()
@@ -115,7 +172,79 @@ final class JyutpingInputController: IMKInputController {
         }
 
 
-        // MARK: - Candidate Suggestion
+        // MARK: - Candidates
+
+        /// Cached Candidate sequence for UserLexicon
+        lazy var selectedCandidates: [Candidate] = []
+
+        private(set) lazy var candidates: [Candidate] = [] {
+                willSet {
+                        switch (candidates.isEmpty, newValue.isEmpty) {
+                        case (true, true):
+                                // Stay empty
+                                window?.setFrame(.zero, display: true)
+                        case (true, false):
+                                // Become un-empty
+                                if window == nil {
+                                        createMasterWindow()
+                                        window?.setFrame(windowFrame, display: true)
+                                } else {
+                                        window?.setFrame(windowFrame, display: true)
+                                        let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
+                                        if !isOnActiveSpace {
+                                                window?.orderFrontRegardless()
+                                        }
+                                }
+                        case (false, true):
+                                // End up to be empty
+                                window?.setFrame(.zero, display: true)
+                        case (false, false):
+                                // Ongoing
+                                window?.setFrame(windowFrame, display: true)
+                        }
+                }
+                didSet {
+                        updateDisplayCandidates(.establish, highlight: .start)
+                }
+        }
+
+        /// DisplayCandidates indices
+        private lazy var indices: (first: Int, last: Int) = (0, 0)
+
+        func updateDisplayCandidates(_ transformation: PageTransformation, highlight: Highlight) {
+                let candidateCount: Int = candidates.count
+                guard candidateCount > 0 else {
+                        indices = (0, 0)
+                        appContext.resetDisplayContext()
+                        return
+                }
+                let pageSize: Int = AppSettings.displayCandidatePageSize
+                let newFirstIndex: Int? = {
+                        switch transformation {
+                        case .establish:
+                                return 0
+                        case .previousPage:
+                                let oldFirstIndex: Int = indices.first
+                                guard oldFirstIndex > 0 else { return nil }
+                                return max(0, oldFirstIndex - pageSize)
+                        case .nextPage:
+                                let oldLastIndex: Int = indices.last
+                                let maxIndex: Int = candidateCount - 1
+                                guard oldLastIndex < maxIndex else { return nil }
+                                return oldLastIndex + 1
+                        }
+                }()
+                guard let firstIndex: Int = newFirstIndex else { return }
+                let bound: Int = min(firstIndex + pageSize, candidateCount)
+                indices = (firstIndex, bound - 1)
+                let newDisplayCandidates = (firstIndex..<bound).map({ index -> DisplayCandidate in
+                        return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
+                })
+                appContext.update(with: newDisplayCandidates, highlight: highlight)
+        }
+
+
+        // MARK: - Candidate Suggestions
 
         private func suggest() {
                 let processingText = bufferText.toneConverted()
@@ -133,7 +262,7 @@ final class JyutpingInputController: IMKInputController {
                 mark(text: text2mark)
                 let engineCandidates: [Candidate] = {
                         var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
-                        let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !suggestion.isEmpty && candidateSequence.isEmpty
+                        let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !suggestion.isEmpty && selectedCandidates.isEmpty
                         guard shouldContinue else { return suggestion }
                         let symbols: [Candidate] = Engine.searchSymbols(text: bufferText, segmentation: segmentation)
                         guard !(symbols.isEmpty) else { return suggestion }
@@ -148,7 +277,6 @@ final class JyutpingInputController: IMKInputController {
                 let combined: [Candidate] = userCandidates + engineCandidates
                 candidates = combined.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
-
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 guard !(text.isEmpty) else {
@@ -170,7 +298,6 @@ final class JyutpingInputController: IMKInputController {
                 let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
                 candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
         }
-
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
@@ -198,7 +325,6 @@ final class JyutpingInputController: IMKInputController {
                         candidates = []
                 }
         }
-
         /// Compose(LoengFan) Reverse Lookup
         private func composeReverseLookup() {
                 guard bufferText.count > 2 else {
@@ -249,83 +375,4 @@ final class JyutpingInputController: IMKInputController {
                 }()
                 candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })
         }
-
-
-        // MARK: - Candidates
-
-        private(set) lazy var candidates: [Candidate] = [] {
-                didSet {
-                        updateDisplayingCandidates(.establish, highlight: .start)
-                        switch (oldValue.isEmpty, candidates.isEmpty) {
-                        case (true, true):
-                                // Stay empty
-                                break
-                        case (true, false):
-                                // Starting
-                                if window == nil {
-                                        resetWindow()
-                                } else {
-                                        let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
-                                        if !isOnActiveSpace {
-                                                window?.orderFrontRegardless()
-                                        }
-                                }
-                                adjustCandidateWindow()
-                        case (false, true):
-                                // Ending
-                                window?.setFrame(.zero, display: true)
-                        case (false, false):
-                                // Ongoing
-                                adjustCandidateWindow()
-                        }
-                }
-        }
-        private func adjustCandidateWindow() {
-                window?.setFrame(windowFrame(), display: true)
-                /*
-                let expanded: CGFloat = windowOffset * 2
-                guard let size: CGSize = window?.contentView?.subviews.first?.frame.size else { return }
-                guard size.width > 44 else { return }
-                let windowSize: CGSize = CGSize(width: size.width + expanded, height: size.height + expanded)
-                window?.setFrame(windowFrame(size: windowSize), display: true)
-                */
-        }
-
-        private(set) lazy var displayContext: DisplayContext = DisplayContext()
-
-        /// DisplayCandidates indices
-        private lazy var indices: (first: Int, last: Int) = (0, 0)
-
-        func updateDisplayingCandidates(_ mode: PageTransformation, highlight: Highlight) {
-                guard !(candidates.isEmpty) else {
-                        indices = (0, 0)
-                        displayContext.reset()
-                        return
-                }
-                let pageSize: Int = AppSettings.displayCandidatePageSize
-                let newFirstIndex: Int? = {
-                        switch mode {
-                        case .establish:
-                                return 0
-                        case .previousPage:
-                                let oldFirstIndex: Int = indices.first
-                                guard oldFirstIndex > 0 else { return nil }
-                                return max(0, oldFirstIndex - pageSize)
-                        case .nextPage:
-                                let oldLastIndex: Int = indices.last
-                                guard oldLastIndex < candidates.count - 1 else { return nil }
-                                return oldLastIndex + 1
-                        }
-                }()
-                guard let firstIndex: Int = newFirstIndex else { return }
-                let bound: Int = min(firstIndex + pageSize, candidates.count)
-                indices = (firstIndex, bound - 1)
-                let newItems = (firstIndex..<bound).map({ index -> DisplayCandidate in
-                        return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
-                })
-                displayContext.update(with: newItems, highlight: highlight)
-        }
-
-        /// Cache for UserLexicon
-        lazy var candidateSequence: [Candidate] = []
 }

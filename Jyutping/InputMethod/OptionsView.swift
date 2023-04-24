@@ -4,7 +4,7 @@ import CoreIME
 /// InstantSettings View
 struct OptionsView: View {
 
-        @EnvironmentObject private var displayContext: DisplayContext
+        @EnvironmentObject private var context: AppContext
 
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
@@ -27,7 +27,7 @@ struct OptionsView: View {
         private let needsEmojiCandidates: Bool = InstantSettings.needsEmojiCandidates
 
         var body: some View {
-                let highlightedIndex = displayContext.optionsHighlightedIndex
+                let highlightedIndex = context.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
                                 SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: variant == .traditional)
@@ -53,6 +53,7 @@ struct OptionsView: View {
                 }
                 .padding(8)
                 .roundedHUDVisualEffect()
+                .fixedSize()
         }
 }
 

@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		370AA36E297975D400A666A5 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA36D297975D400A666A5 /* SearchField.swift */; };
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
-		371B6CEF29F4DC4E00DBB629 /* DisplayContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* DisplayContext.swift */; };
+		371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* AppContext.swift */; };
 		371B870F29F3B585005EEAAE /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B870E29F3B585005EEAAE /* InputStage.swift */; };
 		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
-		3726E43C2999DCC4003E5842 /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E43B2999DCC4003E5842 /* CandidateWindow.swift */; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
@@ -45,6 +44,7 @@
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
 		37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */; };
+		37C042E429F5805B00F7F301 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C042E329F5805B00F7F301 /* MotherBoard.swift */; };
 		37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */; };
 		37D7BD1A294CAADC006A6ADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD19294CAADC006A6ADD /* Assets.xcassets */; };
 		37D7BD1E294CAADC006A6ADD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD1D294CAADC006A6ADD /* Preview Assets.xcassets */; };
@@ -245,10 +245,9 @@
 /* Begin PBXFileReference section */
 		370AA36D297975D400A666A5 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
-		371B6CEE29F4DC4E00DBB629 /* DisplayContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayContext.swift; sourceTree = "<group>"; };
+		371B6CEE29F4DC4E00DBB629 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		371B870E29F3B585005EEAAE /* InputStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
-		3726E43B2999DCC4003E5842 /* CandidateWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
 		3763DE1329E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3763DE1429E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -293,6 +292,7 @@
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
 		37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
+		37C042E329F5805B00F7F301 /* MotherBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
 		37D7BD12294CAADB006A6ADD /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
 		37D7BD19294CAADC006A6ADD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -547,16 +547,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3726E43F2999E324003E5842 /* InputControllerExtensions */ = {
-			isa = PBXGroup;
-			children = (
-				3726E43B2999DCC4003E5842 /* CandidateWindow.swift */,
-				3726E4392999D164003E5842 /* EventHandler.swift */,
-				37E4C60C2990B03A00BFF179 /* Menu.swift */,
-			);
-			path = InputControllerExtensions;
-			sourceTree = "<group>";
-		};
 		3773564B29A769D600468C2A /* Metro */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,6 +563,7 @@
 		3783D9B22973BEC0000B3332 /* CandidateViews */ = {
 			isa = PBXGroup;
 			children = (
+				37C042E329F5805B00F7F301 /* MotherBoard.swift */,
 				37FC1B90294DFC5300D7153F /* CandidateBoard.swift */,
 				3783D9B72973CB55000B3332 /* CandidateLabel.swift */,
 				3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */,
@@ -949,10 +940,11 @@
 				37FC1B85294DFC5300D7153F /* InputForm.swift */,
 				37EF921529F51AF6007B8926 /* InputStage.swift */,
 				37FC1B91294DFC5300D7153F /* JyutpingInputController.swift */,
-				3726E43F2999E324003E5842 /* InputControllerExtensions */,
+				3726E4392999D164003E5842 /* EventHandler.swift */,
+				37E4C60C2990B03A00BFF179 /* Menu.swift */,
 				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
 				37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */,
-				371B6CEE29F4DC4E00DBB629 /* DisplayContext.swift */,
+				371B6CEE29F4DC4E00DBB629 /* AppContext.swift */,
 				37FC1B84294DFC5300D7153F /* InstantSettings.swift */,
 				37FC1B96294DFC5300D7153F /* OptionsView.swift */,
 				37FC1BA0294DFC5300D7153F /* Logogram.swift */,
@@ -1476,14 +1468,14 @@
 				37FC1BB6294DFC5400D7153F /* IMKTextInputExtensions.swift in Sources */,
 				37FC1BA3294DFC5300D7153F /* InputForm.swift in Sources */,
 				37FC1BAD294DFC5300D7153F /* CandidateBoard.swift in Sources */,
-				371B6CEF29F4DC4E00DBB629 /* DisplayContext.swift in Sources */,
+				371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */,
 				37FC1BB1294DFC5300D7153F /* KeyCode.swift in Sources */,
 				37FC1BB5294DFC5400D7153F /* FontExtensions.swift in Sources */,
 				37FC1BA5294DFC5300D7153F /* HotkeysView.swift in Sources */,
 				37FC1BA1294DFC5300D7153F /* DisplayCandidate.swift in Sources */,
 				37FC1BA9294DFC5300D7153F /* AboutView.swift in Sources */,
+				37C042E429F5805B00F7F301 /* MotherBoard.swift in Sources */,
 				37FC1BA8294DFC5300D7153F /* PreferencesView.swift in Sources */,
-				3726E43C2999DCC4003E5842 /* CandidateWindow.swift in Sources */,
 				37FC1BA2294DFC5300D7153F /* InstantSettings.swift in Sources */,
 				37FC1BAA294DFC5300D7153F /* AppSettings.swift in Sources */,
 				37FC1BB7294DFC5400D7153F /* ViewExtensions.swift in Sources */,
