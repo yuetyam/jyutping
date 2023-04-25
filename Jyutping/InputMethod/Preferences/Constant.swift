@@ -8,4 +8,6 @@ struct Constant {
         static let IMingCP: String = "I.MingCP"
         static let IMing: String = "I.Ming"
         static let HanaMinB: String = "HanaMinB"
+
+        static let preferencesWindowIdentifier: String = "JyutpingInputMethodPreferencesWindowIdentifier"
 }

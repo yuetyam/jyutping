@@ -10,32 +10,30 @@ final class JyutpingInputController: IMKInputController {
 
         private(set) lazy var window: NSWindow? = nil
         private func createMasterWindow() {
-                if window == nil {
-                        window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
-                        window?.collectionBehavior = .moveToActiveSpace
-                        let levelValue: Int = Int(CGShieldingWindowLevel())
-                        window?.level = NSWindow.Level(levelValue)
-                        window?.backgroundColor = .clear
-                } else {
-                        _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
-                        _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                }
-                let boardUI = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
-                window?.contentView?.addSubview(boardUI.view)
-                boardUI.view.translatesAutoresizingMaskIntoConstraints = false
+                _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
+                _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
+                window?.close()
+                let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
+                window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
+                window?.collectionBehavior = .moveToActiveSpace
+                let levelValue: Int = Int(CGShieldingWindowLevel())
+                window?.level = NSWindow.Level(levelValue)
+                window?.backgroundColor = .clear
+                window?.contentView?.addSubview(motherBoard.view)
+                motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
                 let offset: CGFloat = 10
                 if let topAnchor = window?.contentView?.topAnchor,
                    let bottomAnchor = window?.contentView?.bottomAnchor,
                    let leadingAnchor = window?.contentView?.leadingAnchor,
                    let trailingAnchor = window?.contentView?.trailingAnchor {
                         NSLayoutConstraint.activate([
-                                boardUI.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                boardUI.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
-                                boardUI.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
-                                boardUI.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                                motherBoard.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                motherBoard.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                motherBoard.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
+                                motherBoard.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
                         ])
                 }
-                window?.contentViewController?.addChild(boardUI)
+                window?.contentViewController?.addChild(motherBoard)
                 window?.setFrame(.zero, display: true)
                 window?.orderFrontRegardless()
         }
@@ -61,7 +59,7 @@ final class JyutpingInputController: IMKInputController {
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
-        private lazy var screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 2560
+        private lazy var screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
         lazy var currentOrigin: CGPoint? = nil
         lazy var currentClient: IMKTextInput? = nil {
                 didSet {
@@ -89,7 +87,7 @@ final class JyutpingInputController: IMKInputController {
         // MARK: - Input Server lifecycle
 
         override func activateServer(_ sender: Any!) {
-                screenWidth = NSScreen.main?.frame.size.width ?? 2560
+                screenWidth = NSScreen.main?.frame.size.width ?? 1920
                 currentClient = sender as? IMKTextInput
                 currentOrigin = currentClient?.position
                 DispatchQueue.main.async { [weak self] in

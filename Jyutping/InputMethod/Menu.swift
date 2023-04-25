@@ -39,36 +39,37 @@ extension JyutpingInputController {
         }
 
         @objc private func openPreferencesWindow() {
-                let shouldOpenNewWindow: Bool = NSApp.windows.map({ $0.frame.size.width < 128 }).reduce(true, { $0 && $1 })
+                let shouldOpenNewWindow: Bool = NSApp.windows.filter({ $0.identifier?.rawValue == Constant.preferencesWindowIdentifier }).isEmpty
                 guard shouldOpenNewWindow else { return }
-                let frame: CGRect = preferencesWindowFrame
+                let frame: CGRect = preferencesWindowFrame()
                 let window = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
+                window.identifier = NSUserInterfaceItemIdentifier(rawValue: Constant.preferencesWindowIdentifier)
                 window.title = NSLocalizedString("Jyutping Input Method Preferences", comment: "")
                 let visualEffectView = NSVisualEffectView()
                 visualEffectView.material = .sidebar
                 visualEffectView.blendingMode = .behindWindow
                 visualEffectView.state = .active
                 window.contentView = visualEffectView
-                let pane = NSHostingController(rootView: PreferencesView())
-                window.contentView?.addSubview(pane.view)
-                pane.view.translatesAutoresizingMaskIntoConstraints = false
+                let preferencesUI = NSHostingController(rootView: PreferencesView())
+                window.contentView?.addSubview(preferencesUI.view)
+                preferencesUI.view.translatesAutoresizingMaskIntoConstraints = false
                 if let topAnchor = window.contentView?.topAnchor,
                    let bottomAnchor = window.contentView?.bottomAnchor,
                    let leadingAnchor = window.contentView?.leadingAnchor,
                    let trailingAnchor = window.contentView?.trailingAnchor {
                         NSLayoutConstraint.activate([
-                                pane.view.topAnchor.constraint(equalTo: topAnchor),
-                                pane.view.bottomAnchor.constraint(equalTo: bottomAnchor),
-                                pane.view.leadingAnchor.constraint(equalTo: leadingAnchor),
-                                pane.view.trailingAnchor.constraint(equalTo: trailingAnchor)
+                                preferencesUI.view.topAnchor.constraint(equalTo: topAnchor),
+                                preferencesUI.view.bottomAnchor.constraint(equalTo: bottomAnchor),
+                                preferencesUI.view.leadingAnchor.constraint(equalTo: leadingAnchor),
+                                preferencesUI.view.trailingAnchor.constraint(equalTo: trailingAnchor)
                         ])
                 }
-                window.contentViewController?.addChild(pane)
+                window.contentViewController?.addChild(preferencesUI)
                 window.orderFrontRegardless()
                 window.setFrame(frame, display: true)
                 NSApp.activate(ignoringOtherApps: true)
         }
-        private var preferencesWindowFrame: CGRect {
+        private func preferencesWindowFrame() -> CGRect {
                 let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
                 let screenHeight: CGFloat = NSScreen.main?.frame.size.height ?? 1080
                 let x: CGFloat = screenWidth / 4.0
@@ -87,14 +88,13 @@ extension JyutpingInputController {
         private func switchInputSource() {
                 guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
                 for inputSource in inputSourceList {
-                        let isSelectable = shouldSelect(inputSource: inputSource)
-                        if isSelectable {
+                        if shouldSelect(inputSource) {
                                 TISSelectInputSource(inputSource)
                                 break
                         }
                 }
         }
-        private func shouldSelect(inputSource: TISInputSource) -> Bool {
+        private func shouldSelect(_ inputSource: TISInputSource) -> Bool {
                 guard let pointer2ID = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { return false }
                 let inputSourceID = Unmanaged<CFString>.fromOpaque(pointer2ID).takeUnretainedValue() as String
                 guard inputSourceID.hasPrefix("com.apple.keylayout") else { return false }
