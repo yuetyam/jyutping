@@ -22,6 +22,7 @@ public enum Logogram: Int {
         case simplified = 4
 }
 
+public typealias CharacterStandard = Logogram
 
 extension Logogram {
 

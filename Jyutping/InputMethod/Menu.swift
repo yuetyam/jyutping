@@ -11,8 +11,8 @@ extension JyutpingInputController {
                 let abcModeTitle: String = NSLocalizedString("menu.mode.abc", comment: "")
                 let cantoneseMode = NSMenuItem(title: cantoneseModeTitle, action: #selector(toggleInputMethodMode), keyEquivalent: "")
                 let abcMode = NSMenuItem(title: abcModeTitle, action: #selector(toggleInputMethodMode), keyEquivalent: "")
-                cantoneseMode.state = InstantSettings.inputMethodMode.isCantonese ? .on : .off
-                abcMode.state = InstantSettings.inputMethodMode.isABC ? .on : .off
+                cantoneseMode.state = Options.inputMethodMode.isCantonese ? .on : .off
+                abcMode.state = Options.inputMethodMode.isABC ? .on : .off
                 menu.addItem(cantoneseMode)
                 menu.addItem(abcMode)
 
@@ -33,8 +33,8 @@ extension JyutpingInputController {
         }
 
         @objc private func toggleInputMethodMode() {
-                let newMode: InputMethodMode = InstantSettings.inputMethodMode.isCantonese ? .abc : .cantonese
-                InstantSettings.updateInputMethodMode(to: newMode)
+                let newMode: InputMethodMode = Options.inputMethodMode.isCantonese ? .abc : .cantonese
+                Options.updateInputMethodMode(to: newMode)
                 appContext.updateInputForm()
         }
 

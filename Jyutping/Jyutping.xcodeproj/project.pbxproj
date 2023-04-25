@@ -158,7 +158,7 @@
 		37FC1B76294DFAE500D7153F /* InputMethodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B75294DFAE500D7153F /* InputMethodUITests.swift */; };
 		37FC1B78294DFAE500D7153F /* InputMethodUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B77294DFAE500D7153F /* InputMethodUITestsLaunchTests.swift */; };
 		37FC1BA1294DFC5300D7153F /* DisplayCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */; };
-		37FC1BA2294DFC5300D7153F /* InstantSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B84294DFC5300D7153F /* InstantSettings.swift */; };
+		37FC1BA2294DFC5300D7153F /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B84294DFC5300D7153F /* Options.swift */; };
 		37FC1BA3294DFC5300D7153F /* InputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B85294DFC5300D7153F /* InputForm.swift */; };
 		37FC1BA5294DFC5300D7153F /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B88294DFC5300D7153F /* HotkeysView.swift */; };
 		37FC1BA6294DFC5300D7153F /* CandidateLayoutPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B89294DFC5300D7153F /* CandidateLayoutPreferencesView.swift */; };
@@ -182,7 +182,6 @@
 		37FC1BB9294DFC5400D7153F /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B9D294DFC5300D7153F /* Speech.swift */; };
 		37FC1BBA294DFC5400D7153F /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B9E294DFC5300D7153F /* WindowPattern.swift */; };
 		37FC1BBB294DFC5400D7153F /* InputMethodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */; };
-		37FC1BBC294DFC5400D7153F /* Logogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1BA0294DFC5300D7153F /* Logogram.swift */; };
 		37FC1BC0294DFC7000D7153F /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1BBF294DFC7000D7153F /* CommonExtensions */; };
 		37FC1BC2294DFC7400D7153F /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37FC1BC1294DFC7400D7153F /* CoreIME */; };
 		37FC1BC4294DFCCE00D7153F /* jyutpingime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1BC3294DFCCE00D7153F /* jyutpingime.pdf */; };
@@ -444,7 +443,7 @@
 		37FC1B77294DFAE500D7153F /* InputMethodUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		37FC1B82294DFB6600D7153F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCandidate.swift; sourceTree = "<group>"; };
-		37FC1B84294DFC5300D7153F /* InstantSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstantSettings.swift; sourceTree = "<group>"; };
+		37FC1B84294DFC5300D7153F /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		37FC1B85294DFC5300D7153F /* InputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputForm.swift; sourceTree = "<group>"; };
 		37FC1B88294DFC5300D7153F /* HotkeysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
 		37FC1B89294DFC5300D7153F /* CandidateLayoutPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateLayoutPreferencesView.swift; sourceTree = "<group>"; };
@@ -468,7 +467,6 @@
 		37FC1B9D294DFC5300D7153F /* Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 		37FC1B9E294DFC5300D7153F /* WindowPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 		37FC1B9F294DFC5300D7153F /* InputMethodApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMethodApp.swift; sourceTree = "<group>"; };
-		37FC1BA0294DFC5300D7153F /* Logogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logogram.swift; sourceTree = "<group>"; };
 		37FC1BC3294DFCCE00D7153F /* jyutpingime.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = jyutpingime.pdf; sourceTree = "<group>"; };
 		37FC1BC7294DFD1400D7153F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37FC1BC9294DFD1400D7153F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -945,9 +943,8 @@
 				3783D9B92973CDAA000B3332 /* VisualEffect.swift */,
 				37FC1B83294DFC5300D7153F /* DisplayCandidate.swift */,
 				371B6CEE29F4DC4E00DBB629 /* AppContext.swift */,
-				37FC1B84294DFC5300D7153F /* InstantSettings.swift */,
+				37FC1B84294DFC5300D7153F /* Options.swift */,
 				37FC1B96294DFC5300D7153F /* OptionsView.swift */,
-				37FC1BA0294DFC5300D7153F /* Logogram.swift */,
 				37FC1B9D294DFC5300D7153F /* Speech.swift */,
 				37FC1B8E294DFC5300D7153F /* UserLexicon.swift */,
 				3783D9B22973BEC0000B3332 /* CandidateViews */,
@@ -1462,7 +1459,6 @@
 				3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */,
 				37FC1BB4294DFC5400D7153F /* CharacterExtensions.swift in Sources */,
 				37FC1BBA294DFC5400D7153F /* WindowPattern.swift in Sources */,
-				37FC1BBC294DFC5400D7153F /* Logogram.swift in Sources */,
 				37FC1BAF294DFC5300D7153F /* PunctuationKey.swift in Sources */,
 				37FC1BAB294DFC5300D7153F /* UserLexicon.swift in Sources */,
 				37FC1BB6294DFC5400D7153F /* IMKTextInputExtensions.swift in Sources */,
@@ -1476,7 +1472,7 @@
 				37FC1BA9294DFC5300D7153F /* AboutView.swift in Sources */,
 				37C042E429F5805B00F7F301 /* MotherBoard.swift in Sources */,
 				37FC1BA8294DFC5300D7153F /* PreferencesView.swift in Sources */,
-				37FC1BA2294DFC5300D7153F /* InstantSettings.swift in Sources */,
+				37FC1BA2294DFC5300D7153F /* Options.swift in Sources */,
 				37FC1BAA294DFC5300D7153F /* AppSettings.swift in Sources */,
 				37FC1BB7294DFC5400D7153F /* ViewExtensions.swift in Sources */,
 				37FC1BAE294DFC5300D7153F /* JyutpingInputController.swift in Sources */,

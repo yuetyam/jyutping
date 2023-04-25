@@ -141,9 +141,9 @@ extension JyutpingInputController {
                                                 handleOptions(index)
                                                 return true
                                         } else {
-                                                switch InstantSettings.characterForm {
+                                                switch Options.characterForm {
                                                 case .halfWidth:
-                                                        let shouldInsertCantoneseSymbol: Bool = InstantSettings.punctuationForm.isCantoneseMode && isShifting
+                                                        let shouldInsertCantoneseSymbol: Bool = isShifting && Options.punctuationForm.isCantoneseMode
                                                         guard shouldInsertCantoneseSymbol else { return false }
                                                         let text: String = KeyCode.shiftingSymbol(of: number)
                                                         client.insert(text)
@@ -188,7 +188,7 @@ extension JyutpingInputController {
                                         }
                                 }
                                 passBuffer()
-                                guard InstantSettings.punctuationForm.isCantoneseMode else { return false }
+                                guard Options.punctuationForm.isCantoneseMode else { return false }
                                 if isShifting {
                                         if let symbol = punctuationKey.instantShiftingSymbol {
                                                 client.insert(symbol)
@@ -272,14 +272,14 @@ extension JyutpingInputController {
                                 let shouldSwitchToABCMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
                                 guard !shouldSwitchToABCMode else {
                                         passBuffer()
-                                        InstantSettings.updateInputMethodMode(to: .abc)
+                                        Options.updateInputMethodMode(to: .abc)
                                         appContext.updateInputForm(to: .transparent)
                                         window?.setFrame(.zero, display: true)
                                         return true
                                 }
                                 if candidates.isEmpty {
                                         passBuffer()
-                                        let shouldInsertFullWidthSpace: Bool = isShifting || InstantSettings.characterForm == .fullWidth
+                                        let shouldInsertFullWidthSpace: Bool = isShifting || (Options.characterForm == .fullWidth)
                                         let text: String = shouldInsertFullWidthSpace ? "　" : " "
                                         client.insert(text)
                                         return true
@@ -294,7 +294,7 @@ extension JyutpingInputController {
                         case .transparent:
                                 let shouldSwitchToCantoneseMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
                                 guard shouldSwitchToCantoneseMode else { return false }
-                                InstantSettings.updateInputMethodMode(to: .cantonese)
+                                Options.updateInputMethodMode(to: .cantonese)
                                 appContext.updateInputForm(to: .cantonese)
                                 return true
                         case .options:
@@ -355,7 +355,7 @@ extension JyutpingInputController {
 
         private func passBuffer() {
                 guard inputStage.isBuffering else { return }
-                let text: String = InstantSettings.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
+                let text: String = Options.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
                 currentClient?.insert(text)
                 clearBufferText()
         }
@@ -371,21 +371,21 @@ extension JyutpingInputController {
                 case -1:
                         break
                 case 4:
-                        InstantSettings.updateCharacterFormState(to: .halfWidth)
+                        Options.updateCharacterForm(to: .halfWidth)
                 case 5:
-                        InstantSettings.updateCharacterFormState(to: .fullWidth)
+                        Options.updateCharacterForm(to: .fullWidth)
                 case 6:
-                        InstantSettings.updatePunctuationForm(to: .cantonese)
+                        Options.updatePunctuationForm(to: .cantonese)
                 case 7:
-                        InstantSettings.updatePunctuationForm(to: .english)
+                        Options.updatePunctuationForm(to: .english)
                 case 8:
-                        InstantSettings.updateNeedsEmojiCandidates(to: true)
+                        Options.updateEmojiSuggestions(to: true)
                 case 9:
-                        InstantSettings.updateNeedsEmojiCandidates(to: false)
+                        Options.updateEmojiSuggestions(to: false)
                 default:
                         break
                 }
-                let newVariant: Logogram? = {
+                let newVariant: CharacterStandard? = {
                         switch selectedIndex {
                         case 0:
                                 return .traditional
@@ -399,8 +399,8 @@ extension JyutpingInputController {
                                 return nil
                         }
                 }()
-                guard let newVariant, newVariant != Logogram.current else { return }
-                Logogram.updateCurrent(to: newVariant)
+                guard let newVariant, newVariant != Options.characterStandard else { return }
+                Options.updateCharacterStandard(to: newVariant)
         }
 
         private func aftercareSelection(_ selected: DisplayCandidate) {

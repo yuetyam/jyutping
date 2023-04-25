@@ -258,7 +258,7 @@ final class JyutpingInputController: IMKInputController {
                 mark(text: text2mark)
                 let engineCandidates: [Candidate] = {
                         var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
-                        let shouldContinue: Bool = InstantSettings.needsEmojiCandidates && !suggestion.isEmpty && selectedCandidates.isEmpty
+                        let shouldContinue: Bool = Options.isEmojiSuggestionsOn && !suggestion.isEmpty && selectedCandidates.isEmpty
                         guard shouldContinue else { return suggestion }
                         let symbols: [Candidate] = Engine.searchSymbols(text: bufferText, segmentation: segmentation)
                         guard !(symbols.isEmpty) else { return suggestion }
@@ -271,7 +271,7 @@ final class JyutpingInputController: IMKInputController {
                 }()
                 let userCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
                 let combined: [Candidate] = userCandidates + engineCandidates
-                candidates = combined.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                candidates = combined.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
@@ -292,16 +292,16 @@ final class JyutpingInputController: IMKInputController {
                 let text2mark: String = "r " + tailMarkedText
                 mark(text: text2mark)
                 let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
-                candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
-                let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
+                let converted = text.map({ CharacterStandard.cangjie(of: $0) }).compactMap({ $0 })
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text)
-                        candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                        candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
                 } else {
                         mark(text: bufferText)
                         candidates = []
@@ -309,13 +309,13 @@ final class JyutpingInputController: IMKInputController {
         }
         private func strokeReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
-                let transformed: String = Logogram.strokeTransform(text)
-                let converted = transformed.map({ Logogram.stroke(of: $0) }).compactMap({ $0 })
+                let transformed: String = CharacterStandard.strokeTransform(text)
+                let converted = transformed.map({ CharacterStandard.stroke(of: $0) }).compactMap({ $0 })
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)
-                        candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                        candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
                 } else {
                         mark(text: bufferText)
                         candidates = []
@@ -343,7 +343,7 @@ final class JyutpingInputController: IMKInputController {
                 let text2mark: String = "q " + tailMarkedText
                 mark(text: text2mark)
                 let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
-                candidates = lookup.map({ $0.transformed(to: Logogram.current) }).uniqued()
+                candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
 
         private func handlePunctuation() {

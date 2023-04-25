@@ -1,7 +1,6 @@
 import SwiftUI
 import CoreIME
 
-/// InstantSettings View
 struct OptionsView: View {
 
         @EnvironmentObject private var context: AppContext
@@ -21,19 +20,19 @@ struct OptionsView: View {
                 "無\u{3000}\u{3000}\u{3000}"
         ]
 
-        private let variant: Logogram = Logogram.current
-        private let characterForm: CharacterForm = InstantSettings.characterForm
-        private let punctuationForm: PunctuationForm = InstantSettings.punctuationForm
-        private let needsEmojiCandidates: Bool = InstantSettings.needsEmojiCandidates
+        private let characterStandard: CharacterStandard = Options.characterStandard
+        private let characterForm: CharacterForm = Options.characterForm
+        private let punctuationForm: PunctuationForm = Options.punctuationForm
+        private let needsEmojiCandidates: Bool = Options.isEmojiSuggestionsOn
 
         var body: some View {
                 let highlightedIndex = context.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: variant == .traditional)
-                                SettingLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: variant == .hongkong)
-                                SettingLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: variant == .taiwan)
-                                SettingLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: variant == .simplified)
+                                SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
+                                SettingLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
+                                SettingLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
+                                SettingLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
                         }
                         Divider()
                         Group {

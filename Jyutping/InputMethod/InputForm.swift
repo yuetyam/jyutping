@@ -15,7 +15,7 @@ enum InputForm: Int {
         }
 
         static func matchInputMethodMode() -> InputForm {
-                switch InstantSettings.inputMethodMode {
+                switch Options.inputMethodMode {
                 case .cantonese:
                         return .cantonese
                 case .abc:
