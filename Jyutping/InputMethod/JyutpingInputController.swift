@@ -10,9 +10,7 @@ final class JyutpingInputController: IMKInputController {
 
         private(set) lazy var window: NSWindow? = nil
         private func createMasterWindow() {
-                _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
-                _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                window?.close()
+                _ = NSApp.windows.map({ $0.close() })
                 let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
                 window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
                 window?.collectionBehavior = .moveToActiveSpace
@@ -36,6 +34,18 @@ final class JyutpingInputController: IMKInputController {
                 window?.contentViewController?.addChild(motherBoard)
                 window?.setFrame(.zero, display: true)
                 window?.orderFrontRegardless()
+        }
+        func prepareMasterWindow() {
+                if window == nil {
+                        createMasterWindow()
+                        window?.setFrame(windowFrame, display: true)
+                } else {
+                        window?.setFrame(windowFrame, display: true)
+                        let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
+                        if !isOnActiveSpace {
+                                window?.orderFrontRegardless()
+                        }
+                }
         }
 
         var windowFrame: CGRect {
@@ -100,9 +110,6 @@ final class JyutpingInputController: IMKInputController {
                 }
                 if inputStage.isBuffering {
                         clearBufferText()
-                }
-                if window == nil {
-                        createMasterWindow()
                 }
         }
         override func deactivateServer(_ sender: Any!) {
@@ -183,16 +190,7 @@ final class JyutpingInputController: IMKInputController {
                                 window?.setFrame(.zero, display: true)
                         case (true, false):
                                 // Become un-empty
-                                if window == nil {
-                                        createMasterWindow()
-                                        window?.setFrame(windowFrame, display: true)
-                                } else {
-                                        window?.setFrame(windowFrame, display: true)
-                                        let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
-                                        if !isOnActiveSpace {
-                                                window?.orderFrontRegardless()
-                                        }
-                                }
+                                prepareMasterWindow()
                         case (false, true):
                                 // End up to be empty
                                 window?.setFrame(.zero, display: true)

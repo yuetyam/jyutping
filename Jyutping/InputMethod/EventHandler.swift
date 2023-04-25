@@ -30,11 +30,8 @@ extension JyutpingInputController {
                                 return false
                         case KeyCode.Symbol.VK_BACKQUOTE:
                                 switch currentInputForm {
-                                case .cantonese:
-                                        window?.setFrame(windowFrame, display: true)
-                                        appContext.updateInputForm(to: .options)
-                                case .transparent:
-                                        window?.setFrame(windowFrame, display: true)
+                                case .cantonese, .transparent:
+                                        prepareMasterWindow()
                                         appContext.updateInputForm(to: .options)
                                 case .options:
                                         handleOptions(-1)
