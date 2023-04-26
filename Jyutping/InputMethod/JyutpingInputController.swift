@@ -10,13 +10,16 @@ final class JyutpingInputController: IMKInputController {
 
         private(set) lazy var window: NSWindow? = nil
         private func createMasterWindow() {
-                _ = NSApp.windows.map({ $0.close() })
+                _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
+                _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
+                if window == nil {
+                        window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
+                        window?.collectionBehavior = .moveToActiveSpace
+                        let levelValue: Int = Int(CGShieldingWindowLevel())
+                        window?.level = NSWindow.Level(levelValue)
+                        window?.backgroundColor = .clear
+                }
                 let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
-                window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
-                window?.collectionBehavior = .moveToActiveSpace
-                let levelValue: Int = Int(CGShieldingWindowLevel())
-                window?.level = NSWindow.Level(levelValue)
-                window?.backgroundColor = .clear
                 window?.contentView?.addSubview(motherBoard.view)
                 motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
                 let offset: CGFloat = 10
@@ -97,25 +100,31 @@ final class JyutpingInputController: IMKInputController {
         // MARK: - Input Server lifecycle
 
         override func activateServer(_ sender: Any!) {
+                UserLexicon.prepare()
+                Engine.prepare()
                 screenWidth = NSScreen.main?.frame.size.width ?? 1920
+                if inputStage.isBuffering {
+                        clearBufferText()
+                }
                 currentClient = sender as? IMKTextInput
                 currentOrigin = currentClient?.position
                 DispatchQueue.main.async { [weak self] in
                         self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
-                UserLexicon.prepare()
-                Engine.prepare()
+                if appContext.inputForm.isOptions {
+                        appContext.updateInputForm()
+                }
+        }
+        override func deactivateServer(_ sender: Any!) {
+                selectedCandidates = []
                 if appContext.inputForm.isOptions {
                         appContext.updateInputForm()
                 }
                 if inputStage.isBuffering {
                         clearBufferText()
                 }
-        }
-        override func deactivateServer(_ sender: Any!) {
                 unmarkText()
                 window?.setFrame(.zero, display: true)
-                selectedCandidates = []
         }
 
         private(set) lazy var appContext: AppContext = AppContext()
