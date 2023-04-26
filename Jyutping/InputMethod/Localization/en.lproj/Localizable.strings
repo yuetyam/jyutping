@@ -45,7 +45,7 @@
 "FontPicker.CurrentFont.Change" = "Change…";
 
 
-//HotkeysView
+// HotkeysView
 "Press **Shift** Once To" = "Press **Shift** Once To";
 "Do Nothing" = "Do Nothing";
 "Switch between Cantonese and ABC" = "Switch between Cantonese and ABC";
@@ -54,8 +54,8 @@
 "Input a Full-width Space (U+3000)" = "Input a Full-width Space (U+3000)";
 
 "Open Preferences Window (This Window)" = "Open Settings Window (This Window)";
-"Open/Close InstantSettings Window" = "Open/Close InstantSettings Window";
-"Directly toggle InstantSettings options" = "Directly toggle InstantSettings options";
+"Enter/Exit Options View" = "Enter/Exit Options View";
+"Directly toggle specific option" = "Directly toggle specific option";
 "Switch to Cantonese Mode" = "Switch to Cantonese Mode";
 "Switch to English Mode" = "Switch to English Mode";
 "Remove highlighted Candidate from User Lexicon" = "Remove highlighted Candidate from User Lexicon";

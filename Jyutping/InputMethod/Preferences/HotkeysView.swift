@@ -67,7 +67,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Open/Close InstantSettings Window")
+                                                LabelText("Enter/Exit Options View")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
@@ -80,7 +80,7 @@ struct HotkeysView: View {
                                 .block()
                                 VStack {
                                         HStack(spacing: 4) {
-                                                LabelText("Directly toggle InstantSettings options")
+                                                LabelText("Directly toggle specific option")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
