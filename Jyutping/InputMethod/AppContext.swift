@@ -3,6 +3,7 @@ import CoreIME
 
 final class AppContext: ObservableObject {
 
+        @Published private(set) var isClean: Bool = true
         @Published private(set) var displayCandidates: [DisplayCandidate] = []
         @Published private(set) var placeholder: DisplayCandidate = .defaultPlaceholder
         @Published private(set) var highlightedIndex: Int = 0
@@ -17,6 +18,7 @@ final class AppContext: ObservableObject {
         // MARK: - Update context
 
         func resetDisplayContext() {
+                isClean = true
                 displayCandidates = []
                 placeholder = .defaultPlaceholder
                 highlightedIndex = minIndex
@@ -29,6 +31,7 @@ final class AppContext: ObservableObject {
                         resetDisplayContext()
                         return
                 }
+                isClean = false
                 displayCandidates = newDisplayCandidates
                 placeholder = newDisplayCandidates.longest!
                 maxIndex = newDisplayCandidates.count - 1

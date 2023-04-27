@@ -11,6 +11,8 @@ struct MotherBoard: View {
                                 HStack {
                                         if context.inputForm.isOptions {
                                                 OptionsView().environmentObject(context)
+                                        } else if context.isClean {
+                                                EmptyView()
                                         } else {
                                                 CandidateBoard().environmentObject(context)
                                         }
@@ -24,6 +26,8 @@ struct MotherBoard: View {
                                         Spacer()
                                         if context.inputForm.isOptions {
                                                 OptionsView().environmentObject(context)
+                                        } else if context.isClean {
+                                                EmptyView()
                                         } else {
                                                 CandidateBoard().environmentObject(context)
                                         }
@@ -36,6 +40,8 @@ struct MotherBoard: View {
                                 HStack {
                                         if context.inputForm.isOptions {
                                                 OptionsView().environmentObject(context)
+                                        } else if context.isClean {
+                                                EmptyView()
                                         } else {
                                                 CandidateBoard().environmentObject(context)
                                         }
@@ -49,6 +55,8 @@ struct MotherBoard: View {
                                         Spacer()
                                         if context.inputForm.isOptions {
                                                 OptionsView().environmentObject(context)
+                                        } else if context.isClean {
+                                                EmptyView()
                                         } else {
                                                 CandidateBoard().environmentObject(context)
                                         }

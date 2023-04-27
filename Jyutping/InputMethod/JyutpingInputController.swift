@@ -12,13 +12,11 @@ final class JyutpingInputController: IMKInputController {
         private func createMasterWindow() {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                if window == nil {
-                        window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
-                        window?.collectionBehavior = .moveToActiveSpace
-                        let levelValue: Int = Int(CGShieldingWindowLevel())
-                        window?.level = NSWindow.Level(levelValue)
-                        window?.backgroundColor = .clear
-                }
+                window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
+                window?.collectionBehavior = .moveToActiveSpace
+                let levelValue: Int = Int(CGShieldingWindowLevel())
+                window?.level = NSWindow.Level(levelValue)
+                window?.backgroundColor = .clear
                 let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
                 window?.contentView?.addSubview(motherBoard.view)
                 motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +122,11 @@ final class JyutpingInputController: IMKInputController {
                         clearBufferText()
                 }
                 unmarkText()
-                window?.setFrame(.zero, display: true)
+                if NSApp.windows.count > 5 {
+                        _ = NSApp.windows.map({ $0.close() })
+                } else {
+                        window?.setFrame(.zero, display: true)
+                }
         }
 
         private(set) lazy var appContext: AppContext = AppContext()
