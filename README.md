@@ -13,7 +13,7 @@ Jyutping
 
 Cantonese Jyutping Keyboard for iOS & macOS.
 
-粵拼輸入法。採用香港語言學學會粵語拼音方案（粵拼／Jyutping）。詞庫碼表來自 CanCLID [Rime-Cantonese](https://github.com/rime/rime-cantonese)
+粵拼輸入法。採用 [香港語言學學會粵語拼音方案](https://jyutping.org/jyutping) (粵拼 / Jyutping)。詞庫碼表來自 CanCLID [Rime-Cantonese](https://github.com/rime/rime-cantonese)
 
 ## iOS & iPadOS
 
