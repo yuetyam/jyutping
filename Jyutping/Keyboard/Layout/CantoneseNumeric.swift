@@ -22,10 +22,8 @@ extension KeyboardIdiom {
                         let child_4 = KeyElement(block[4], header: "下標")
                         let child_5 = KeyElement(block[5])
                         if block[0] == "0" {
-                                let child_6 = KeyElement("〇")
-                                let child_7 = KeyElement("拾")
-                                let child_8 = KeyElement("°", footer: "00B0")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8])
+                                let child_6 = KeyElement("°", footer: "00B0")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6])
                                 return KeyboardEvent.input(seat)
                         } else {
                                 let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5])
