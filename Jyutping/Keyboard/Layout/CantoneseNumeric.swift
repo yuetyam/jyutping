@@ -2,16 +2,16 @@ extension KeyboardIdiom {
 
         func digitalKeys() -> [KeyboardEvent] {
                 let digits: [[String]] = [
-                        ["1", "１", "壹", "¹", "₁"],
-                        ["2", "２", "貳", "²", "₂"],
-                        ["3", "３", "叁", "³", "₃"],
-                        ["4", "４", "肆", "⁴", "₄"],
-                        ["5", "５", "伍", "⁵", "₅"],
-                        ["6", "６", "陸", "⁶", "₆"],
-                        ["7", "７", "柒", "⁷", "₇"],
-                        ["8", "８", "捌", "⁸", "₈"],
-                        ["9", "９", "玖", "⁹", "₉"],
-                        ["0", "０", "零", "⁰", "₀"]
+                        ["1", "１", "壹", "¹", "₁", "①"],
+                        ["2", "２", "貳", "²", "₂", "②"],
+                        ["3", "３", "叁", "³", "₃", "③"],
+                        ["4", "４", "肆", "⁴", "₄", "④"],
+                        ["5", "５", "伍", "⁵", "₅", "⑤"],
+                        ["6", "６", "陸", "⁶", "₆", "⑥"],
+                        ["7", "７", "柒", "⁷", "₇", "⑦"],
+                        ["8", "８", "捌", "⁸", "₈", "⑧"],
+                        ["9", "９", "玖", "⁹", "₉", "⑨"],
+                        ["0", "０", "零", "⁰", "₀", "⓪"]
                 ]
                 let keys: [KeyboardEvent] = digits.map { block -> KeyboardEvent in
                         let primary = KeyElement(block[0])
@@ -20,14 +20,15 @@ extension KeyboardIdiom {
                         let child_2 = KeyElement(block[2])
                         let child_3 = KeyElement(block[3], header: "上標")
                         let child_4 = KeyElement(block[4], header: "下標")
+                        let child_5 = KeyElement(block[5])
                         if block[0] == "0" {
-                                let child_5 = KeyElement("〇")
-                                let child_6 = KeyElement("拾")
-                                let child_7 = KeyElement("°", footer: "00B0")
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6, child_7])
+                                let child_6 = KeyElement("〇")
+                                let child_7 = KeyElement("拾")
+                                let child_8 = KeyElement("°", footer: "00B0")
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5, child_6, child_7, child_8])
                                 return KeyboardEvent.input(seat)
                         } else {
-                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4])
+                                let seat: KeySeat = KeySeat(primary: primary, children: [child_0, child_1, child_2, child_3, child_4, child_5])
                                 return KeyboardEvent.input(seat)
                         }
                 }
