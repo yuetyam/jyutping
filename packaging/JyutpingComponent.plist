@@ -10,9 +10,18 @@
 		<key>BundleIsRelocatable</key>
 		<false/>
 		<key>BundleIsVersionChecked</key>
-		<false/>
+		<true/>
 		<key>BundleOverwriteAction</key>
 		<string>upgrade</string>
+		<key>ChildBundles</key>
+		<array>
+			<dict>
+				<key>BundleOverwriteAction</key>
+				<string>upgrade</string>
+				<key>RootRelativeBundlePath</key>
+				<string>Jyutping.app/Contents/Frameworks/Sparkle.framework</string>
+			</dict>
+		</array>
 	</dict>
 </array>
 </plist>

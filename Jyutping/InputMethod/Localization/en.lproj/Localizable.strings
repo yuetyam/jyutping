@@ -2,6 +2,7 @@
 "menu.mode.cantonese" = "Jyutping Mode";
 "menu.mode.abc" = "ABC Mode";
 "menu.preferences" = "Settings…";
+"menu.check4updates" = "Check for Updates…";
 "menu.terminate" = "Quit";
 
 "Jyutping Input Method Preferences" = "Jyutping Input Method Settings";

@@ -2,9 +2,18 @@ import SwiftUI
 import InputMethodKit
 import CommonExtensions
 import CoreIME
+import Sparkle
 
 @objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
+
+        private let updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+        @objc func checkForUpdates() {
+                if updaterController.updater.canCheckForUpdates {
+                        updaterController.updater.checkForUpdates()
+                }
+        }
+
 
         // MARK: - Window, InputClient
 

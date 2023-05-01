@@ -4,8 +4,8 @@ import InputMethodKit
 extension JyutpingInputController {
 
         override func menu() -> NSMenu! {
-                let menuTittle: String = NSLocalizedString("menu.title", comment: "")
-                let menu = NSMenu(title: menuTittle)
+                let menuTitle: String = NSLocalizedString("menu.title", comment: "")
+                let menu = NSMenu(title: menuTitle)
 
                 let cantoneseModeTitle: String = NSLocalizedString("menu.mode.cantonese", comment: "")
                 let abcModeTitle: String = NSLocalizedString("menu.mode.abc", comment: "")
@@ -23,10 +23,14 @@ extension JyutpingInputController {
                 preferences.keyEquivalentModifierMask = [.control, .shift]
                 menu.addItem(preferences)
 
+                let check4updatesTitle: String = NSLocalizedString("menu.check4updates", comment: "")
+                let check4updates = NSMenuItem(title: check4updatesTitle, action: #selector(checkForUpdates), keyEquivalent: "")
+                menu.addItem(check4updates)
+
                 menu.addItem(.separator())
 
-                let terminateTittle: String = NSLocalizedString("menu.terminate", comment: "")
-                let terminate = NSMenuItem(title: terminateTittle, action: #selector(terminateApp), keyEquivalent: "")
+                let terminateTitle: String = NSLocalizedString("menu.terminate", comment: "")
+                let terminate = NSMenuItem(title: terminateTitle, action: #selector(terminateApp), keyEquivalent: "")
                 menu.addItem(terminate)
 
                 return menu

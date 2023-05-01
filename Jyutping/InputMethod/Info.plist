@@ -50,6 +50,12 @@
 	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://jyutping.app/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>MaIeb2a5zTv+hpwycNCYXmPBxMr1+eho9PQmHJjZkNk=</string>
 	<key>TICapsLockLanguageSwitchCapable</key>
 	<true/>
 	<key>TISIntendedLanguage</key>
