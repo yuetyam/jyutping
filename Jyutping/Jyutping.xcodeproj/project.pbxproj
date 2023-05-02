@@ -17,6 +17,8 @@
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
+		3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */; };
+		3768B4952A00C2A10049D7C1 /* NewKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3768B48E2A00C2A10049D7C1 /* NewKeyboard.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564929A744EA00468C2A /* IOSCantonMetroView.swift */; };
 		3773564D29A769E900468C2A /* MacMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564C29A769E900468C2A /* MacMetroLineView.swift */; };
 		3773564F29A769FC00468C2A /* MacStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564E29A769FC00468C2A /* MacStationLabel.swift */; };
@@ -192,6 +194,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3768B4932A00C2A10049D7C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37D7BD0A294CAADB006A6ADD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3768B48D2A00C2A10049D7C1;
+			remoteInfo = NewKeyboard;
+		};
 		37D7BD24294CAADC006A6ADD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 37D7BD0A294CAADB006A6ADD /* Project object */;
@@ -247,6 +256,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				3768B4952A00C2A10049D7C1 /* NewKeyboard.appex in Embed Foundation Extensions */,
 				37FC1AD9294DF40900D7153F /* Keyboard.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -276,6 +286,9 @@
 		3763DE1E29E3DE74003AED7F /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37687959297817F50006D0A6 /* CantoneseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
 		3768795B297826780006D0A6 /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
+		3768B48E2A00C2A10049D7C1 /* NewKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NewKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		3768B4922A00C2A10049D7C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3773564929A744EA00468C2A /* IOSCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCantonMetroView.swift; sourceTree = "<group>"; };
 		3773564C29A769E900468C2A /* MacMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetroLineView.swift; sourceTree = "<group>"; };
 		3773564E29A769FC00468C2A /* MacStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacStationLabel.swift; sourceTree = "<group>"; };
@@ -501,6 +514,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3768B48B2A00C2A10049D7C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37D7BD0F294CAADB006A6ADD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -560,6 +580,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3768B48F2A00C2A10049D7C1 /* NewKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */,
+				3768B4922A00C2A10049D7C1 /* Info.plist */,
+			);
+			path = NewKeyboard;
+			sourceTree = "<group>";
+		};
 		3773564B29A769D600468C2A /* Metro */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +655,7 @@
 				37D7BD26294CAADC006A6ADD /* JyutpingTests */,
 				37D7BD30294CAADC006A6ADD /* JyutpingUITests */,
 				37FC1AD3294DF40900D7153F /* Keyboard */,
+				3768B48F2A00C2A10049D7C1 /* NewKeyboard */,
 				37FC1B58294DFAE300D7153F /* InputMethod */,
 				37FC1B6A294DFAE400D7153F /* InputMethodTests */,
 				37FC1B74294DFAE500D7153F /* InputMethodUITests */,
@@ -646,6 +676,7 @@
 				37FC1B57294DFAE300D7153F /* JyutpingInputMethod.app */,
 				37FC1B67294DFAE400D7153F /* InputMethodTests.xctest */,
 				37FC1B71294DFAE500D7153F /* InputMethodUITests.xctest */,
+				3768B48E2A00C2A10049D7C1 /* NewKeyboard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1040,6 +1071,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3768B48D2A00C2A10049D7C1 /* NewKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3768B4982A00C2A10049D7C1 /* Build configuration list for PBXNativeTarget "NewKeyboard" */;
+			buildPhases = (
+				3768B48A2A00C2A10049D7C1 /* Sources */,
+				3768B48B2A00C2A10049D7C1 /* Frameworks */,
+				3768B48C2A00C2A10049D7C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NewKeyboard;
+			productName = NewKeyboard;
+			productReference = 3768B48E2A00C2A10049D7C1 /* NewKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		37D7BD11294CAADB006A6ADD /* Jyutping */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 37D7BD37294CAADC006A6ADD /* Build configuration list for PBXNativeTarget "Jyutping" */;
@@ -1053,6 +1101,7 @@
 			);
 			dependencies = (
 				37FC1AD8294DF40900D7153F /* PBXTargetDependency */,
+				3768B4942A00C2A10049D7C1 /* PBXTargetDependency */,
 			);
 			name = Jyutping;
 			packageProductDependencies = (
@@ -1185,9 +1234,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1420;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					3768B48D2A00C2A10049D7C1 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					37D7BD11294CAADB006A6ADD = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -1245,11 +1297,19 @@
 				37FC1B56294DFAE300D7153F /* InputMethod */,
 				37FC1B66294DFAE400D7153F /* InputMethodTests */,
 				37FC1B70294DFAE500D7153F /* InputMethodUITests */,
+				3768B48D2A00C2A10049D7C1 /* NewKeyboard */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3768B48C2A00C2A10049D7C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37D7BD10294CAADB006A6ADD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1317,6 +1377,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3768B48A2A00C2A10049D7C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		37D7BD0E294CAADB006A6ADD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1527,6 +1595,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3768B4942A00C2A10049D7C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 3768B48D2A00C2A10049D7C1 /* NewKeyboard */;
+			targetProxy = 3768B4932A00C2A10049D7C1 /* PBXContainerItemProxy */;
+		};
 		37D7BD25294CAADC006A6ADD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 37D7BD11294CAADB006A6ADD /* Jyutping */;
@@ -1661,6 +1735,61 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3768B4962A00C2A10049D7C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 91;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewKeyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NewKeyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.26.1;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.NewKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3768B4972A00C2A10049D7C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 91;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewKeyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NewKeyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.26.1;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.NewKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		37D7BD35294CAADC006A6ADD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2171,6 +2300,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3768B4982A00C2A10049D7C1 /* Build configuration list for PBXNativeTarget "NewKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3768B4962A00C2A10049D7C1 /* Debug */,
+				3768B4972A00C2A10049D7C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		37D7BD0D294CAADB006A6ADD /* Build configuration list for PBXProject "Jyutping" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
