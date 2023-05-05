@@ -57,13 +57,42 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Input
 
+        @Published private(set) var inputStage: InputStage = .standby
+
         func clearBufferText() {
-                bufferText = ""
+                bufferText = .empty
         }
         func updateBufferText(to text: String) {
                 bufferText = text
         }
-        private(set) lazy var bufferText: String = ""
+        private(set) lazy var bufferText: String = .empty {
+                didSet {
+                        switch (oldValue.isEmpty, bufferText.isEmpty) {
+                        case (true, true):
+                                inputStage = .standby
+                        case (true, false):
+                                inputStage = .starting
+                        case (false, true):
+                                inputStage = .ending
+                        case (false, false):
+                                inputStage = .ongoing
+                        }
+                        switch bufferText.first {
+                        case .none:
+                                break
+                        case .some("r"):
+                                break
+                        case .some("v"):
+                                break
+                        case .some("x"):
+                                break
+                        case .some("q"):
+                                break
+                        default:
+                                break
+                        }
+                }
+        }
 
 
         // MARK: - Properties
