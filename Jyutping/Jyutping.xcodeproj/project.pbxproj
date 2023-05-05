@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370563262A0168D000872AA4 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370563252A0168D000872AA4 /* ToolBar.swift */; };
 		370AA36E297975D400A666A5 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA36D297975D400A666A5 /* SearchField.swift */; };
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
 		371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* AppContext.swift */; };
@@ -19,6 +20,12 @@
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
 		3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */; };
 		3768B4952A00C2A10049D7C1 /* NewKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3768B48E2A00C2A10049D7C1 /* NewKeyboard.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B4992A00C8510049D7C1 /* KeyboardInterface.swift */; };
+		3768B49C2A00C8B40049D7C1 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B49B2A00C8B40049D7C1 /* Appearance.swift */; };
+		3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B49D2A00CA620049D7C1 /* KeyboardLayout.swift */; };
+		3768B4A22A00CE510049D7C1 /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B4A12A00CE510049D7C1 /* HapticFeedback.swift */; };
+		3768B4A42A00CE9B0049D7C1 /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B4A32A00CE9B0049D7C1 /* AudioFeedback.swift */; };
+		3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B4A62A00E9760049D7C1 /* MotherBoard.swift */; };
 		3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564929A744EA00468C2A /* IOSCantonMetroView.swift */; };
 		3773564D29A769E900468C2A /* MacMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564C29A769E900468C2A /* MacMetroLineView.swift */; };
 		3773564F29A769FC00468C2A /* MacStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564E29A769FC00468C2A /* MacStationLabel.swift */; };
@@ -45,6 +52,13 @@
 		37A5D00729A888F900256042 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37A5D00629A888F900256042 /* Debug.xcconfig */; };
 		37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775429D96FEC007F07D7 /* MacHansMessView.swift */; };
 		37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */; };
+		37B1765E2A049B6800A4E531 /* KeyboardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1765D2A049B6800A4E531 /* KeyboardStack.swift */; };
+		37B176602A049B8B00A4E531 /* KeyboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1765F2A049B8B00A4E531 /* KeyboardRow.swift */; };
+		37B176622A049BA300A4E531 /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B176612A049BA300A4E531 /* KeyView.swift */; };
+		37B176642A049BD500A4E531 /* KeyElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B176632A049BD500A4E531 /* KeyElementView.swift */; };
+		37B176662A0507CD00A4E531 /* KeyboardEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B176652A0507CD00A4E531 /* KeyboardEvent.swift */; };
+		37B176682A050B1100A4E531 /* KeyboardCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B176672A050B1100A4E531 /* KeyboardCase.swift */; };
+		37B1766A2A050B2B00A4E531 /* KeyboardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B176692A050B2B00A4E531 /* KeyboardType.swift */; };
 		37B6BDB9296EA2510008B9F0 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDB8296EA2510008B9F0 /* SearchView.swift */; };
 		37B6BDBC296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */; };
 		37B6BDBE296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */; };
@@ -100,6 +114,19 @@
 		37D7BDBC294CC3AB006A6ADD /* CantoneseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */; };
 		37D7BDC0294CC9DA006A6ADD /* Materials in Frameworks */ = {isa = PBXBuildFile; productRef = 37D7BDBF294CC9DA006A6ADD /* Materials */; };
 		37D7BDC3294CCAD8006A6ADD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37D7BDC2294CCAD8006A6ADD /* CommonExtensions */; };
+		37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32872A0216B90066D03A /* ColorExtensions.swift */; };
+		37DE328A2A02187B0066D03A /* ToolBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32892A02187B0066D03A /* ToolBarItem.swift */; };
+		37DE328C2A0218960066D03A /* CantoneseABCSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */; };
+		37DE328E2A021A570066D03A /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE328D2A021A570066D03A /* Direction.swift */; };
+		37DE32902A021C450066D03A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE328F2A021C450066D03A /* Constant.swift */; };
+		37DE32922A021E780066D03A /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32912A021E780066D03A /* Options.swift */; };
+		37DE32942A022DF80066D03A /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37DE32932A022DF80066D03A /* CoreIME */; };
+		37DE32962A022DFC0066D03A /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37DE32952A022DFC0066D03A /* CommonExtensions */; };
+		37DE32982A024D400066D03A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37DE32972A024D400066D03A /* Images.xcassets */; };
+		37DE329A2A02613B0066D03A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32992A02613B0066D03A /* SettingsView.swift */; };
+		37DE329C2A0286D70066D03A /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE329B2A0286D70066D03A /* ImageExtensions.swift */; };
+		37DE32B42A028A3D0066D03A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DE329E2A028A3D0066D03A /* InfoPlist.strings */; };
+		37DE32B52A028A3D0066D03A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37DE32A02A028A3D0066D03A /* Localizable.strings */; };
 		37E02E432955847200F7543F /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E422955847200F7543F /* NumbersView.swift */; };
 		37E02E452955AB9900F7543F /* Text2SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E442955AB9900F7543F /* Text2SpeechView.swift */; };
 		37E4C60D2990B03A00BFF179 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C60C2990B03A00BFF179 /* Menu.swift */; };
@@ -265,6 +292,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		370563252A0168D000872AA4 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		370AA36D297975D400A666A5 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
 		371B6CEE29F4DC4E00DBB629 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
@@ -289,6 +317,12 @@
 		3768B48E2A00C2A10049D7C1 /* NewKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NewKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		3768B4922A00C2A10049D7C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3768B4992A00C8510049D7C1 /* KeyboardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
+		3768B49B2A00C8B40049D7C1 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		3768B49D2A00CA620049D7C1 /* KeyboardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
+		3768B4A12A00CE510049D7C1 /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
+		3768B4A32A00CE9B0049D7C1 /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
+		3768B4A62A00E9760049D7C1 /* MotherBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
 		3773564929A744EA00468C2A /* IOSCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCantonMetroView.swift; sourceTree = "<group>"; };
 		3773564C29A769E900468C2A /* MacMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetroLineView.swift; sourceTree = "<group>"; };
 		3773564E29A769FC00468C2A /* MacStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacStationLabel.swift; sourceTree = "<group>"; };
@@ -315,6 +349,13 @@
 		37A5D00629A888F900256042 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		37AD775429D96FEC007F07D7 /* MacHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHansMessView.swift; sourceTree = "<group>"; };
 		37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHansMessView.swift; sourceTree = "<group>"; };
+		37B1765D2A049B6800A4E531 /* KeyboardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardStack.swift; sourceTree = "<group>"; };
+		37B1765F2A049B8B00A4E531 /* KeyboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardRow.swift; sourceTree = "<group>"; };
+		37B176612A049BA300A4E531 /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
+		37B176632A049BD500A4E531 /* KeyElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyElementView.swift; sourceTree = "<group>"; };
+		37B176652A0507CD00A4E531 /* KeyboardEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEvent.swift; sourceTree = "<group>"; };
+		37B176672A050B1100A4E531 /* KeyboardCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardCase.swift; sourceTree = "<group>"; };
+		37B176692A050B2B00A4E531 /* KeyboardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardType.swift; sourceTree = "<group>"; };
 		37B6BDB8296EA2510008B9F0 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
 		37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
@@ -389,6 +430,35 @@
 		37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseView.swift; sourceTree = "<group>"; };
 		37D7BDBD294CC9BE006A6ADD /* Materials */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Materials; path = ../Modules/Materials; sourceTree = "<group>"; };
 		37D7BDC1294CCAC5006A6ADD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
+		37DE32872A0216B90066D03A /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		37DE32892A02187B0066D03A /* ToolBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarItem.swift; sourceTree = "<group>"; };
+		37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseABCSwitch.swift; sourceTree = "<group>"; };
+		37DE328D2A021A570066D03A /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		37DE328F2A021C450066D03A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		37DE32912A021E780066D03A /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		37DE32972A024D400066D03A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		37DE32992A02613B0066D03A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		37DE329B2A0286D70066D03A /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		37DE329F2A028A3D0066D03A /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32A12A028A3D0066D03A /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37DE32A22A028A3D0066D03A /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32A32A028A3D0066D03A /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37DE32A42A028A3D0066D03A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37DE32A52A028A3D0066D03A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37DE32A62A028A3D0066D03A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32A72A028A3D0066D03A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37DE32A82A028A3D0066D03A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32A92A028A3D0066D03A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37DE32AA2A028A3D0066D03A /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32AB2A028A3D0066D03A /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37DE32AC2A028A3D0066D03A /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32AD2A028A3D0066D03A /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37DE32AE2A028A3D0066D03A /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37DE32AF2A028A3D0066D03A /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37DE32B02A028A3D0066D03A /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32B12A028A3D0066D03A /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37DE32B22A028A3D0066D03A /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37DE32B32A028A3D0066D03A /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37E02E422955847200F7543F /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 		37E02E442955AB9900F7543F /* Text2SpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text2SpeechView.swift; sourceTree = "<group>"; };
 		37E4C60C2990B03A00BFF179 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
@@ -518,6 +588,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DE32942A022DF80066D03A /* CoreIME in Frameworks */,
+				37DE32962A022DFC0066D03A /* CommonExtensions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,9 +656,40 @@
 			isa = PBXGroup;
 			children = (
 				3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */,
+				3768B4A52A00E95C0049D7C1 /* Views */,
+				37DE32912A021E780066D03A /* Options.swift */,
+				37DE328D2A021A570066D03A /* Direction.swift */,
+				37DE328F2A021C450066D03A /* Constant.swift */,
+				3768B4A12A00CE510049D7C1 /* HapticFeedback.swift */,
+				3768B4A32A00CE9B0049D7C1 /* AudioFeedback.swift */,
+				3768B49D2A00CA620049D7C1 /* KeyboardLayout.swift */,
+				37B176692A050B2B00A4E531 /* KeyboardType.swift */,
+				37B176672A050B1100A4E531 /* KeyboardCase.swift */,
+				3768B49B2A00C8B40049D7C1 /* Appearance.swift */,
+				37DE32862A0216740066D03A /* Extensions */,
+				3768B4992A00C8510049D7C1 /* KeyboardInterface.swift */,
+				37DE329D2A028A3D0066D03A /* Localization */,
 				3768B4922A00C2A10049D7C1 /* Info.plist */,
+				37DE32972A024D400066D03A /* Images.xcassets */,
 			);
 			path = NewKeyboard;
+			sourceTree = "<group>";
+		};
+		3768B4A52A00E95C0049D7C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3768B4A62A00E9760049D7C1 /* MotherBoard.swift */,
+				37B176632A049BD500A4E531 /* KeyElementView.swift */,
+				37B176612A049BA300A4E531 /* KeyView.swift */,
+				37B176652A0507CD00A4E531 /* KeyboardEvent.swift */,
+				37B1765F2A049B8B00A4E531 /* KeyboardRow.swift */,
+				37B1765D2A049B6800A4E531 /* KeyboardStack.swift */,
+				370563252A0168D000872AA4 /* ToolBar.swift */,
+				37DE32992A02613B0066D03A /* SettingsView.swift */,
+				37DE32892A02187B0066D03A /* ToolBarItem.swift */,
+				37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3773564B29A769D600468C2A /* Metro */ = {
@@ -839,6 +942,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		37DE32862A0216740066D03A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				37DE32872A0216B90066D03A /* ColorExtensions.swift */,
+				37DE329B2A0286D70066D03A /* ImageExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		37DE329D2A028A3D0066D03A /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				37DE329E2A028A3D0066D03A /* InfoPlist.strings */,
+				37DE32A02A028A3D0066D03A /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		37E9918F298EAACB003423C2 /* KeyCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1084,6 +1205,10 @@
 			dependencies = (
 			);
 			name = NewKeyboard;
+			packageProductDependencies = (
+				37DE32932A022DF80066D03A /* CoreIME */,
+				37DE32952A022DFC0066D03A /* CommonExtensions */,
+			);
 			productName = NewKeyboard;
 			productReference = 3768B48E2A00C2A10049D7C1 /* NewKeyboard.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -1307,6 +1432,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DE32982A024D400066D03A /* Images.xcassets in Resources */,
+				37DE32B52A028A3D0066D03A /* Localizable.strings in Resources */,
+				37DE32B42A028A3D0066D03A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1381,7 +1509,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37DE329A2A02613B0066D03A /* SettingsView.swift in Sources */,
+				37B1765E2A049B6800A4E531 /* KeyboardStack.swift in Sources */,
+				3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */,
+				37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */,
+				37DE329C2A0286D70066D03A /* ImageExtensions.swift in Sources */,
+				3768B4A42A00CE9B0049D7C1 /* AudioFeedback.swift in Sources */,
+				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
+				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
+				3768B49C2A00C8B40049D7C1 /* Appearance.swift in Sources */,
+				37B176642A049BD500A4E531 /* KeyElementView.swift in Sources */,
+				37DE32902A021C450066D03A /* Constant.swift in Sources */,
+				37DE328C2A0218960066D03A /* CantoneseABCSwitch.swift in Sources */,
+				37DE328A2A02187B0066D03A /* ToolBarItem.swift in Sources */,
 				3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */,
+				37B1766A2A050B2B00A4E531 /* KeyboardType.swift in Sources */,
+				370563262A0168D000872AA4 /* ToolBar.swift in Sources */,
+				3768B4A22A00CE510049D7C1 /* HapticFeedback.swift in Sources */,
+				37B176602A049B8B00A4E531 /* KeyboardRow.swift in Sources */,
+				37B176662A0507CD00A4E531 /* KeyboardEvent.swift in Sources */,
+				37B176622A049BA300A4E531 /* KeyView.swift in Sources */,
+				37DE32922A021E780066D03A /* Options.swift in Sources */,
+				37B176682A050B1100A4E531 /* KeyboardCase.swift in Sources */,
+				37DE328E2A021A570066D03A /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1664,6 +1814,40 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		37DE329E2A028A3D0066D03A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37DE329F2A028A3D0066D03A /* zh-Hans-CN */,
+				37DE32A22A028A3D0066D03A /* zh-Hant-MO */,
+				37DE32A42A028A3D0066D03A /* en */,
+				37DE32A62A028A3D0066D03A /* zh-Hant */,
+				37DE32A82A028A3D0066D03A /* zh-Hans */,
+				37DE32AA2A028A3D0066D03A /* zh-Hant-CN */,
+				37DE32AC2A028A3D0066D03A /* zh-HK */,
+				37DE32AE2A028A3D0066D03A /* yue */,
+				37DE32B02A028A3D0066D03A /* zh-Hant-TW */,
+				37DE32B22A028A3D0066D03A /* zh-Hant-HK */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		37DE32A02A028A3D0066D03A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37DE32A12A028A3D0066D03A /* zh-Hans-CN */,
+				37DE32A32A028A3D0066D03A /* zh-Hant-MO */,
+				37DE32A52A028A3D0066D03A /* en */,
+				37DE32A72A028A3D0066D03A /* zh-Hant */,
+				37DE32A92A028A3D0066D03A /* zh-Hans */,
+				37DE32AB2A028A3D0066D03A /* zh-Hant-CN */,
+				37DE32AD2A028A3D0066D03A /* zh-HK */,
+				37DE32AF2A028A3D0066D03A /* yue */,
+				37DE32B12A028A3D0066D03A /* zh-Hant-TW */,
+				37DE32B32A028A3D0066D03A /* zh-Hant-HK */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		37FC1B3F294DF8C800D7153F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1743,7 +1927,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewKeyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NewKeyboard;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1770,7 +1954,7 @@
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewKeyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NewKeyboard;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2389,6 +2573,14 @@
 			productName = Materials;
 		};
 		37D7BDC2294CCAD8006A6ADD /* CommonExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonExtensions;
+		};
+		37DE32932A022DF80066D03A /* CoreIME */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreIME;
+		};
+		37DE32952A022DFC0066D03A /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
 		};
