@@ -5,11 +5,18 @@ struct MotherBoard: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
-                if context.keyboardType == .settings {
+                switch context.keyboardType {
+                case .settings:
                         SettingsView().environmentObject(context)
-                } else {
+                case .candidateBoard:
+                        CandidateBoard().environmentObject(context)
+                default:
                         VStack(spacing: 0) {
-                                ToolBar().environmentObject(context)
+                                if context.inputStage.isBuffering {
+                                        CandidateScrollBar().environmentObject(context)
+                                } else {
+                                        ToolBar().environmentObject(context)
+                                }
                                 KeyboardStack().environmentObject(context)
                         }
                 }

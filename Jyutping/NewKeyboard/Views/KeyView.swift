@@ -20,9 +20,16 @@ struct KeyView: View {
                         }
                         .frame(width: context.widthUnit * 1.25, height: context.heightUnit)
                         .contentShape(Rectangle())
-                        .onTapGesture {
-                                context.textDocumentProxy.deleteBackward()
-                        }
+                        .gesture(DragGesture(minimumDistance: 44, coordinateSpace: .local)
+                                .onEnded { value in
+                                        let horizontalTranslation = value.translation.width
+                                        guard horizontalTranslation < -44 else { return }
+                                        context.operate(.clear)
+                                 }
+                        )
+                        .simultaneousGesture(TapGesture().onEnded {
+                                context.operate(.backspace)
+                        })
                 case .capsLock:
                         EmptyView()
                 case .dismiss:
@@ -33,7 +40,7 @@ struct KeyView: View {
                         Color.interactiveClear
                                 .frame(width: context.widthUnit * 0.25, height: context.heightUnit)
                                 .onTapGesture {
-                                        context.textDocumentProxy.insertText(text)
+                                        context.operate(.input(text))
                                 }
                 case .input(let key):
                         ZStack {
@@ -49,7 +56,7 @@ struct KeyView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 let text: String = key.primary.center
-                                context.textDocumentProxy.insertText(text)
+                                context.operate(.input(text))
                         }
                 case .newLine:
                         ZStack {
@@ -64,7 +71,7 @@ struct KeyView: View {
                         .frame(width: context.widthUnit * 2, height: context.heightUnit)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                context.textDocumentProxy.insertText("\n")
+                                context.operate(.return)
                         }
                 case .placeholder:
                         EmptyView()
@@ -76,11 +83,17 @@ struct KeyView: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
+                                // TODO: Adjust shift image based on keyboardType
                                 Image(systemName: "shift")
                         }
                         .frame(width: context.widthUnit * 1.25, height: context.heightUnit)
                         .contentShape(Rectangle())
-                        .onTapGesture { }
+                        .gesture(TapGesture(count: 2).onEnded {
+                                context.operate(.doubleShift)
+                        })
+                        .simultaneousGesture(TapGesture().onEnded {
+                                context.operate(.shift)
+                        })
                 case .space:
                         ZStack {
                                 Color.interactiveClear
@@ -93,12 +106,15 @@ struct KeyView: View {
                         }
                         .frame(width: context.widthUnit * 4.5, height: context.heightUnit)
                         .contentShape(Rectangle())
-                        .onTapGesture {
-                                context.textDocumentProxy.insertText(" ")
-                        }
+                        .gesture(TapGesture(count: 2).onEnded {
+                                context.operate(.doubleSpace)
+                        })
+                        .simultaneousGesture(TapGesture().onEnded {
+                                context.operate(.space)
+                        })
                 case .tab:
                         EmptyView()
-                case .transform:
+                case .transform(let keyboard):
                         ZStack {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -111,7 +127,7 @@ struct KeyView: View {
                         .frame(width: context.widthUnit * 1.5, height: context.heightUnit)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                context.textDocumentProxy.insertText("\n")
+                                context.operate(.transform(keyboard))
                         }
                 }
         }
