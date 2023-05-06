@@ -10,7 +10,7 @@ struct ToolBar: View {
 
         var body: some View {
                 HStack(spacing: 0) {
-                        ToolBarItem(imageName: "gear", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0))
+                        ToolBarItem(imageName: "gear", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0))
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                         context.updateKeyboardType(to: .settings)
@@ -22,7 +22,7 @@ struct ToolBar: View {
                                 Image(uiImage: UIImage.emojiSmiley)
                                         .resizable()
                                         .scaledToFit()
-                                        .padding(.vertical, 18)
+                                        .padding(.vertical, 15)
                         }
                         .frame(width: itemWidth, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
@@ -42,13 +42,13 @@ struct ToolBar: View {
                         }
 
                         Spacer()
-                        ToolBarItem(imageName: "arrowtriangle.left.and.line.vertical.and.arrowtriangle.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 19, leading: 0, bottom: 19, trailing: 0))
+                        ToolBarItem(imageName: "arrowtriangle.left.and.line.vertical.and.arrowtriangle.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0))
                                 .onTapGesture {
                                         isCantoneseSelected.toggle()
                                 }
 
                         Spacer()
-                        ToolBarItem(imageName: "keyboard.chevron.compact.down", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 19, leading: 0, bottom: 20, trailing: 0))
+                        ToolBarItem(imageName: "keyboard.chevron.compact.down", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 16, leading: 0, bottom: 17, trailing: 0))
                                 .onTapGesture {
                                         context.dismissKeyboard()
                                 }
