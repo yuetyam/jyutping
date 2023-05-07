@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		370563262A0168D000872AA4 /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370563252A0168D000872AA4 /* ToolBar.swift */; };
 		370AA36E297975D400A666A5 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA36D297975D400A666A5 /* SearchField.swift */; };
+		370AF8892A07742F00A92562 /* SettingsViewIOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */; };
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
 		371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* AppContext.swift */; };
 		371B870F29F3B585005EEAAE /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B870E29F3B585005EEAAE /* InputStage.swift */; };
@@ -300,6 +301,7 @@
 /* Begin PBXFileReference section */
 		370563252A0168D000872AA4 /* ToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		370AA36D297975D400A666A5 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewIOS15.swift; sourceTree = "<group>"; };
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
 		371B6CEE29F4DC4E00DBB629 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		371B870E29F3B585005EEAAE /* InputStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 				37B7B4172A06178400B3AB08 /* CandidateScrollBar.swift */,
 				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
 				37DE32992A02613B0066D03A /* SettingsView.swift */,
+				370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */,
 				37DE32892A02187B0066D03A /* ToolBarItem.swift */,
 				37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */,
 			);
@@ -1538,6 +1541,7 @@
 				37B7B41A2A0646E100B3AB08 /* CandidateBoard.swift in Sources */,
 				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
 				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
+				370AF8892A07742F00A92562 /* SettingsViewIOS15.swift in Sources */,
 				3768B49C2A00C8B40049D7C1 /* Appearance.swift in Sources */,
 				37B176642A049BD500A4E531 /* KeyElementView.swift in Sources */,
 				37DE32902A021C450066D03A /* Constant.swift in Sources */,

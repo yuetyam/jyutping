@@ -7,7 +7,11 @@ struct MotherBoard: View {
         var body: some View {
                 switch context.keyboardType {
                 case .settings:
-                        SettingsView().environmentObject(context)
+                        if #available(iOSApplicationExtension 16.0, *) {
+                                SettingsView().environmentObject(context)
+                        } else {
+                                SettingsViewIOS15().environmentObject(context)
+                        }
                 case .candidateBoard:
                         CandidateBoard().environmentObject(context)
                 default:

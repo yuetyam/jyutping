@@ -31,6 +31,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
+                candidates = []
+                markedText = .empty
+                bufferText = .empty
+                _ = view.subviews.map({ $0.removeFromSuperview() })
+                _ = self.children.map({ $0.removeFromParent() })
         }
 
         override func viewWillLayoutSubviews() {

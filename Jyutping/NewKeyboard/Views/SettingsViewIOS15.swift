@@ -1,7 +1,6 @@
 import SwiftUI
 
-@available(iOSApplicationExtension 16.0, *)
-struct SettingsView: View {
+struct SettingsViewIOS15: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -196,8 +195,6 @@ struct SettingsView: View {
                                         }
                                 }
                         }
-                        .scrollContentBackground(.hidden)
-                        .background(Color.interactiveClear)
                 }
         }
 }
