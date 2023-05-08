@@ -45,15 +45,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func textWillChange(_ textInput: UITextInput?) {
                 // The app is about to change the document's contents. Perform any preparation here.
         }
+
         override func textDidChange(_ textInput: UITextInput?) {
-                // The app has just changed the document's contents, the document context has been updated.
+                let didUserClearTextFiled: Bool = inputStage.isBuffering && !textDocumentProxy.hasText
+                if didUserClearTextFiled {
+                        clearBufferText()
+                }
         }
 
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 updateScreenSize()
                 let newKeyboardAppearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light
-                if keyboardAppearance != newKeyboardAppearance {
-                        keyboardAppearance = newKeyboardAppearance
+                if appearance != newKeyboardAppearance {
+                        appearance = newKeyboardAppearance
                 }
                 let newKeyboardInterface: KeyboardInterface = adoptKeyboardInterface()
                 if keyboardInterface != newKeyboardInterface {
@@ -61,63 +65,37 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        func operate(_ operation: Operation) {
-                switch operation {
-                case .input(let text):
-                        appendBufferText(text)
-                case .separator:
-                        appendBufferText("'")
-                case .punctuation:
-                        break
-                case .space:
-                        guard inputStage.isBuffering else {
-                                textDocumentProxy.insertText(" ")
-                                return
-                        }
-                        guard let candidate = candidates.first else {
-                                textDocumentProxy.insertText(bufferText)
-                                clearBufferText()
-                                return
-                        }
-                        textDocumentProxy.insertText(candidate.text)
-                        let newBufferText = bufferText.dropFirst(candidate.input.count)
-                        bufferText = String(newBufferText)
-                case .doubleSpace:
-                        break
-                case .backspace:
-                        if inputStage.isBuffering {
-                                dropLastBufferCharacter()
+
+        // MARK: - Mark & Insert
+
+        private lazy var markedText: String = .empty {
+                willSet {
+                        // REASON: Chrome address bar
+                        guard textDocumentProxy.keyboardType == .webSearch else { return }
+                        guard markedText.isEmpty && !newValue.isEmpty else { return }
+                        textDocumentProxy.insertText(String.empty)
+                }
+                didSet {
+                        if markedText.isEmpty {
+                                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                                textDocumentProxy.unmarkText()
                         } else {
-                                textDocumentProxy.deleteBackward()
+                                let location: Int = (markedText as NSString).length
+                                let range: NSRange = NSRange(location: location, length: 0)
+                                textDocumentProxy.setMarkedText(markedText, selectedRange: range)
                         }
-                case .clear:
-                        clearBufferText()
-                case .return:
-                        if inputStage.isBuffering {
-                                textDocumentProxy.insertText(bufferText)
-                                clearBufferText()
-                        } else {
-                                textDocumentProxy.insertText("\n")
-                        }
-                case .shift:
-                        break
-                case .doubleShift:
-                        break
-                case .tab:
-                        textDocumentProxy.insertText("\t")
-                case .transform(let keyboardType):
-                        updateKeyboardType(to: keyboardType)
-                case .dismiss:
-                        dismissKeyboard()
-                case .select(let candidate):
-                        textDocumentProxy.insertText(candidate.text)
-                        let newBufferText = bufferText.dropFirst(candidate.input.count)
-                        bufferText = String(newBufferText)
                 }
         }
 
+        private func insert(_ text: String) {
+                let location: Int = (text as NSString).length
+                let range: NSRange = NSRange(location: location, length: 0)
+                textDocumentProxy.setMarkedText(text, selectedRange: range)
+                textDocumentProxy.unmarkText()
+        }
 
-        // MARK: - Input
+
+        // MARK: - Input & Buffer
 
         @Published private(set) var inputStage: InputStage = .standby
 
@@ -159,7 +137,110 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        private lazy var markedText: String = .empty
+
+        // MARK: - Operations
+
+        func operate(_ operation: Operation) {
+                switch operation {
+                case .input(let text):
+                        appendBufferText(text)
+                case .separator:
+                        appendBufferText("'")
+                case .punctuation:
+                        break
+                case .space:
+                        guard inputStage.isBuffering else {
+                                textDocumentProxy.insertText(" ")
+                                return
+                        }
+                        guard let candidate = candidates.first else {
+                                let text: String = bufferText
+                                clearBufferText()
+                                textDocumentProxy.insertText(text)
+                                return
+                        }
+                        insert(candidate.text)
+                        textDocumentProxy.insertText(candidate.text)
+                        adjustKeyboardType()
+                        aftercareSelected(candidate)
+                case .doubleSpace:
+                        break
+                case .backspace:
+                        if inputStage.isBuffering {
+                                dropLastBufferCharacter()
+                        } else {
+                                textDocumentProxy.deleteBackward()
+                        }
+                case .clear:
+                        clearBufferText()
+                case .return:
+                        if inputStage.isBuffering {
+                                let text: String = bufferText
+                                clearBufferText()
+                                textDocumentProxy.insertText(text)
+                        } else {
+                                textDocumentProxy.insertText("\n")
+                        }
+                case .shift:
+                        break
+                case .doubleShift:
+                        break
+                case .tab:
+                        textDocumentProxy.insertText("\t")
+                case .transform(let keyboardType):
+                        updateKeyboardType(to: keyboardType)
+                case .dismiss:
+                        dismissKeyboard()
+                case .select(let candidate):
+                        insert(candidate.text)
+                        adjustKeyboardType()
+                        aftercareSelected(candidate)
+                }
+        }
+        private func adjustKeyboardType() {
+                switch keyboardType {
+                case .abc(.uppercased):
+                        keyboardType = .abc(.lowercased)
+                case .cantonese(.uppercased):
+                        keyboardType = .cantonese(.lowercased)
+                case .candidateBoard where !(inputStage.isBuffering):
+                        keyboardType = .cantonese(.lowercased)
+                default:
+                        break
+                }
+        }
+        private func aftercareSelected(_ candidate: Candidate) {
+                switch bufferText.first {
+                case .none:
+                        return
+                case .some(let character) where character.isReverseLookupTrigger:
+                        let leadingCount: Int = candidate.input.count + 1
+                        if bufferText.count > leadingCount {
+                                let tail = bufferText.dropFirst(leadingCount)
+                                bufferText = String(character) + tail
+                        } else {
+                                clearBufferText()
+                        }
+                default:
+                        guard candidate.isCantonese else {
+                                clearBufferText()
+                                return
+                        }
+                        let inputCount: Int = {
+                                switch Options.keyboardLayout {
+                                case .saamPing:
+                                        return candidate.input.count
+                                default:
+                                        return candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression).count
+                                }
+                        }()
+                        var tail = bufferText.dropFirst(inputCount)
+                        while tail.hasPrefix("'") {
+                                tail = tail.dropFirst()
+                        }
+                        bufferText = String(tail)
+                }
+        }
 
 
         // MARK: - Candidate Suggestions
@@ -285,12 +366,42 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 heightUnit = 53
         }
 
-        @Published private(set) var keyboardType: KeyboardType = .cantonese(.lowercased)
+        @Published private(set) var keyboardType: KeyboardType = {
+                switch Options.keyboardLayout {
+                case .qwerty:
+                        return .cantonese(.lowercased)
+                case .saamPing:
+                        return .saamPing(.lowercased)
+                case .tenKey:
+                        return .tenKeyCantonese
+                }
+        }()
         func updateKeyboardType(to type: KeyboardType) {
                 keyboardType = type
         }
+        private var askedKeyboardType: KeyboardType {
+                switch textDocumentProxy.keyboardType {
+                case .numberPad, .asciiCapableNumberPad:
+                        return keyboardInterface.isCompact ? .numberPad : .numeric
+                case .decimalPad:
+                        return keyboardInterface.isCompact ? .decimalPad : .numeric
+                case .numbersAndPunctuation:
+                        return .numeric
+                case .emailAddress, .URL:
+                        return .abc(.lowercased)
+                default:
+                        switch Options.keyboardLayout {
+                        case .qwerty:
+                                return .cantonese(.lowercased)
+                        case .saamPing:
+                                return .saamPing(.lowercased)
+                        case .tenKey:
+                                return .tenKeyCantonese
+                        }
+                }
+        }
 
-        private(set) lazy var keyboardAppearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light
+        private(set) lazy var appearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light
         private(set) lazy var keyboardInterface: KeyboardInterface = adoptKeyboardInterface()
         private func adoptKeyboardInterface() -> KeyboardInterface {
                 switch traitCollection.userInterfaceIdiom {

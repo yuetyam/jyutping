@@ -59,6 +59,26 @@ struct Options {
                 let value: Int = state ? 1 : 2
                 UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
         }
+
+        /// Cantonese Keyboard Layout. qwerty / SaamPing / TenKey
+        private(set) static var keyboardLayout: KeyboardLayout = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
+                switch savedValue {
+                case KeyboardLayout.qwerty.rawValue:
+                        return .qwerty
+                case KeyboardLayout.saamPing.rawValue:
+                        return .saamPing
+                case KeyboardLayout.tenKey.rawValue:
+                        return .tenKey
+                default:
+                        return .qwerty
+                }
+        }()
+        static func updateKeyboardLayout(to layout: KeyboardLayout) {
+                keyboardLayout = layout
+                let value: Int = layout.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
+        }
 }
 
 struct OptionsKey {
