@@ -42,9 +42,9 @@ struct ToolBar: View {
                         }
 
                         Spacer()
-                        ToolBarItem(imageName: "arrowtriangle.left.and.line.vertical.and.arrowtriangle.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0))
+                        ToolBarItem(imageName: "arrow.left.and.line.vertical.and.arrow.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 17, leading: 0, bottom: 17, trailing: 0))
                                 .onTapGesture {
-                                        isCantoneseSelected.toggle()
+                                        context.updateKeyboardType(to: .editingPanel)
                                 }
 
                         Spacer()

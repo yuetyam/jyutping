@@ -12,6 +12,8 @@ struct MotherBoard: View {
                         } else {
                                 SettingsViewIOS15().environmentObject(context)
                         }
+                case .editingPanel:
+                        EditingPanel().environmentObject(context)
                 case .candidateBoard:
                         CandidateBoard().environmentObject(context)
                 default:

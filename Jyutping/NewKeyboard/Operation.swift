@@ -15,4 +15,5 @@ enum Operation: Hashable {
         case transform(KeyboardType)
         case dismiss
         case select(Candidate)
+        case paste
 }

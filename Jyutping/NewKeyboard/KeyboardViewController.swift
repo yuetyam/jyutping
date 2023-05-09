@@ -11,6 +11,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func viewDidLoad() {
                 super.viewDidLoad()
                 updateScreenSize()
+                _ = view.subviews.map({ $0.removeFromSuperview() })
+                _ = self.children.map({ $0.removeFromParent() })
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 view.addSubview(motherBoard.view)
                 motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,8 +36,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 candidates = []
                 markedText = .empty
                 bufferText = .empty
-                _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = self.children.map({ $0.removeFromParent() })
         }
 
         override func viewWillLayoutSubviews() {
@@ -195,6 +195,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         insert(candidate.text)
                         adjustKeyboardType()
                         aftercareSelected(candidate)
+                case .paste:
+                        guard UIPasteboard.general.hasStrings else { return }
+                        guard let text = UIPasteboard.general.string else { return }
+                        insert(text)
                 }
         }
         private func adjustKeyboardType() {

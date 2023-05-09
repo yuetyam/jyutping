@@ -19,6 +19,7 @@ enum KeyboardType: Hashable {
         case candidateBoard
         case emojiBoard
 
+        case editingPanel
         case settings
 }
 
