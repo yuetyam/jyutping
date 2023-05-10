@@ -199,6 +199,31 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard UIPasteboard.general.hasStrings else { return }
                         guard let text = UIPasteboard.general.string else { return }
                         insert(text)
+                case .clearClipboard:
+                        UIPasteboard.general.items.removeAll()
+                case .clearText:
+                        if let textBeforeCursor = textDocumentProxy.documentContextBeforeInput {
+                                _ = (0..<textBeforeCursor.count).map({ _ in
+                                        textDocumentProxy.deleteBackward()
+                                })
+                        }
+                        if let textAfterCursor = textDocumentProxy.documentContextAfterInput {
+                                let characterCount: Int = textAfterCursor.count
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: characterCount)
+                                _ = (0..<characterCount).map({ _ in
+                                        textDocumentProxy.deleteBackward()
+                                })
+                        }
+                case .moveCursorBackward:
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+                case .moveCursorForward:
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+                case .jumpToBeginning:
+                        guard let text = textDocumentProxy.documentContextBeforeInput else { return }
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -(text.count))
+                case .jumpToEnd:
+                        guard let text = textDocumentProxy.documentContextAfterInput else { return }
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: text.count)
                 }
         }
         private func adjustKeyboardType() {

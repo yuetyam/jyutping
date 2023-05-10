@@ -11,12 +11,42 @@ struct EditingPanel: View {
                                 HStack(spacing: 0) {
                                         ZStack {
                                                 Color.interactiveClear
+                                                VStack(spacing: 4) {
+                                                        Image(systemName: "clipboard")
+                                                        Text(verbatim: "清空剪帖板").font(.caption2)
+                                                }
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                                context.operate(.clearClipboard)
+                                        }
+                                        Divider()
+                                        ZStack {
+                                                Color.interactiveClear
+                                                VStack(spacing: 4) {
+                                                        Image(systemName: "doc.on.clipboard")
+                                                        Text(verbatim: "帖上").font(.caption2)
+                                                }
+                                                .opacity(UIPasteboard.general.hasStrings ? 1 : 0.5)
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                                context.operate(.paste)
+                                        }
+                                }
+                                .frame(maxHeight: .infinity)
+                                Divider()
+                                HStack(spacing: 0) {
+                                        ZStack {
+                                                Color.interactiveClear
                                                 Image(systemName: "arrow.backward")
                                         }
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
                                         .onTapGesture {
-                                                context.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+                                                context.operate(.moveCursorBackward)
                                         }
                                         Divider()
                                         ZStack {
@@ -26,7 +56,7 @@ struct EditingPanel: View {
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
                                         .onTapGesture {
-                                                context.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+                                                context.operate(.moveCursorForward)
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
@@ -39,7 +69,7 @@ struct EditingPanel: View {
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
                                         .onTapGesture {
-                                                context.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+                                                context.operate(.jumpToBeginning)
                                         }
                                         Divider()
                                         ZStack {
@@ -49,7 +79,7 @@ struct EditingPanel: View {
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
                                         .onTapGesture {
-                                                context.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+                                                context.operate(.jumpToEnd)
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
@@ -69,23 +99,25 @@ struct EditingPanel: View {
                                 Divider()
                                 ZStack {
                                         Color.interactiveClear
-                                        Image(systemName: "doc.on.clipboard")
-                                }
-                                .frame(maxHeight: .infinity)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                        context.operate(.paste)
-                                }
-                                .disabled(!(UIPasteboard.general.hasStrings))
-                                Divider()
-                                ZStack {
-                                        Color.interactiveClear
                                         Image(systemName: "delete.backward")
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                         context.operate(.backspace)
+                                }
+                                Divider()
+                                ZStack {
+                                        Color.interactiveClear
+                                        VStack(spacing: 4) {
+                                                Image(systemName: "clear")
+                                                Text(verbatim: "清空").font(.caption2)
+                                        }
+                                }
+                                .frame(maxHeight: .infinity)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                        context.operate(.clearText)
                                 }
                                 Divider()
                                 ZStack {
