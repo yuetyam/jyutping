@@ -10,9 +10,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         override func viewDidLoad() {
                 super.viewDidLoad()
-                updateScreenSize()
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = self.children.map({ $0.removeFromParent() })
+                updateScreenSize()
+                updateReturnKeyText()
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 view.addSubview(motherBoard.view)
                 motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
@@ -115,8 +116,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
+                                updateReturnKeyText()
                         case (false, true):
                                 inputStage = .ending
+                                updateReturnKeyText()
                         case (false, false):
                                 inputStage = .ongoing
                         }
@@ -143,7 +146,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func operate(_ operation: Operation) {
                 switch operation {
                 case .input(let text):
-                        appendBufferText(text)
+                        if keyboardType.isABCMode {
+                                textDocumentProxy.insertText(text)
+                        } else {
+                                appendBufferText(text)
+                        }
                 case .separator:
                         appendBufferText("'")
                 case .punctuation:
@@ -202,6 +209,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearClipboard:
                         UIPasteboard.general.items.removeAll()
                 case .clearText:
+                        if textDocumentProxy.selectedText != nil {
+                                textDocumentProxy.deleteBackward()
+                        }
                         if let textBeforeCursor = textDocumentProxy.documentContextBeforeInput {
                                 _ = (0..<textBeforeCursor.count).map({ _ in
                                         textDocumentProxy.deleteBackward()
@@ -382,6 +392,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Properties
 
+        @Published private(set) var returnKeyText: String = "換行"
+        private func updateReturnKeyText() {
+                returnKeyText = textDocumentProxy.returnKeyType.returnKeyText(isABC: keyboardType.isABCMode, isSimplified: Options.characterStandard == .simplified, isBuffering: inputStage.isBuffering)
+        }
+        @Published private(set) var spaceText: String = "粵拼"
+        private func updateSpaceText() {
+                let newText: String = {
+                        guard !keyboardType.isABCMode else { return "ABC" }
+                        guard Options.characterStandard != .simplified else { return "粤拼" }
+                        return "粵拼"
+                }()
+                if spaceText != newText {
+                        spaceText = newText
+                }
+        }
+
         private(set) lazy var isPhone: Bool = UITraitCollection.current.userInterfaceIdiom == .phone
         private(set) lazy var isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
 
@@ -407,6 +433,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }()
         func updateKeyboardType(to type: KeyboardType) {
                 keyboardType = type
+                updateReturnKeyText()
+                updateSpaceText()
         }
         private var askedKeyboardType: KeyboardType {
                 switch textDocumentProxy.keyboardType {

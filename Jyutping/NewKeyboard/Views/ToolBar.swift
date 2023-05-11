@@ -38,7 +38,10 @@ struct ToolBar: View {
                         .frame(width: 72, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
+                                let isLeftSelected: Bool = isCantoneseSelected
                                 isCantoneseSelected.toggle()
+                                let newKeyboardType: KeyboardType = isLeftSelected ? .abc(.lowercased) : .cantonese(.lowercased)
+                                context.updateKeyboardType(to: newKeyboardType)
                         }
 
                         Spacer()
