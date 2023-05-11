@@ -49,9 +49,9 @@ struct KeyboardStack: View {
 
                         KeyboardRow(events: [
                                 KeyboardEvent.transform(.cantoneseNumeric),
-                                KeyboardEvent.input(KeyUnit(primary: KeyElement("，"))),
+                                KeyboardEvent.comma,
                                 KeyboardEvent.space,
-                                KeyboardEvent.input(KeyUnit(primary: KeyElement("。"))),
+                                KeyboardEvent.period,
                                 KeyboardEvent.newLine
                         ]).environmentObject(context)
                 }

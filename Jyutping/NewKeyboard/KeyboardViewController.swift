@@ -154,8 +154,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         AudioFeedback.perform(.input)
                 case .separator:
                         appendBufferText("'")
-                case .punctuation:
-                        break
+                case .punctuation(let text):
+                        textDocumentProxy.insertText(text)
                 case .space:
                         guard inputStage.isBuffering else {
                                 textDocumentProxy.insertText(" ")

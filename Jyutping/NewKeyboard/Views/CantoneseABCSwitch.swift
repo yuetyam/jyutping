@@ -19,11 +19,11 @@ struct CantoneseABCSwitch: View {
                 let textBackColor: Color = {
                         switch colorScheme {
                         case .light:
-                                return .white
+                                return .light
                         case .dark:
-                                return .black
+                                return .dark
                         @unknown default:
-                                return .white
+                                return .light
                         }
                 }()
                 let backColor: Color = {
@@ -31,7 +31,7 @@ struct CantoneseABCSwitch: View {
                         case .light:
                                 return .lightEmphatic
                         case .dark:
-                                return .darkThick
+                                return .darkEmphatic
                         @unknown default:
                                 return .lightEmphatic
                         }

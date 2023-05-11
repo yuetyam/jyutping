@@ -32,6 +32,8 @@ struct KeyView: View {
                         })
                 case .capsLock:
                         EmptyView()
+                case .comma:
+                        CommaKey().environmentObject(context)
                 case .dismiss:
                         EmptyView()
                 case .globe:
@@ -59,20 +61,9 @@ struct KeyView: View {
                                 context.operate(.input(text))
                         }
                 case .newLine:
-                        ZStack {
-                                Color.interactiveClear
-                                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(Color.lightEmphatic)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
-                                Text(verbatim: context.returnKeyText)
-                        }
-                        .frame(width: context.widthUnit * 2, height: context.heightUnit)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                                context.operate(.return)
-                        }
+                        ReturnKey().environmentObject(context)
+                case .period:
+                        PeriodKey().environmentObject(context)
                 case .placeholder:
                         EmptyView()
                 case .shift:
