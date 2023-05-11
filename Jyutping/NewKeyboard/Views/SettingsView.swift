@@ -55,8 +55,9 @@ struct SettingsView: View {
                                 Section {
                                         Toggle("Sound", isOn: $isAudioFeedbackOn)
                                                 .onChange(of: isAudioFeedbackOn) { newValue in
-                                                        // TODO: perform change
-                                                        // Options.updateAudioFeedbackStatus(isOn: newValue)
+                                                        DispatchQueue.preferences.async {
+                                                                Options.updateAudioFeedbackStatus(isOn: newValue)
+                                                        }
                                                 }
                                         if context.isPhone {
                                                 HStack {
@@ -92,7 +93,9 @@ struct SettingsView: View {
                                 Section {
                                         Toggle("Emoji Suggestions", isOn: $isEmojiSuggestionsOn)
                                                 .onChange(of: isEmojiSuggestionsOn) { newValue in
-                                                        // TODO: perform change
+                                                        DispatchQueue.preferences.async {
+                                                                Options.updateEmojiSuggestions(to: newValue)
+                                                        }
                                                 }
                                 }
 

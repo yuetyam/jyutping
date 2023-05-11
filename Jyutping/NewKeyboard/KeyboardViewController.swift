@@ -151,6 +151,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 appendBufferText(text)
                         }
+                        AudioFeedback.perform(.input)
                 case .separator:
                         appendBufferText("'")
                 case .punctuation:
@@ -178,6 +179,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 textDocumentProxy.deleteBackward()
                         }
+                        AudioFeedback.perform(.delete)
                 case .clear:
                         clearBufferText()
                 case .return:
