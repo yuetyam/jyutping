@@ -4,12 +4,30 @@ struct EditingPanel: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
+        @Environment(\.colorScheme) private var colorScheme
+
+        private var keyColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .lightEmphatic
+                case .dark:
+                        return .darkEmphatic
+                @unknown default:
+                        return .lightEmphatic
+                }
+        }
+
         var body: some View {
                 HStack(spacing: 0) {
                         VStack(spacing: 0) {
                                 HStack(spacing: 0) {
                                         ZStack {
                                                 Color.interactiveClear
+                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                        .fill(keyColor)
+                                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                        .padding(.vertical, 6)
+                                                        .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
                                                         Image(systemName: "clipboard")
                                                         Text(verbatim: "清空剪帖板").font(.caption2)
@@ -20,9 +38,13 @@ struct EditingPanel: View {
                                         .onTapGesture {
                                                 context.operate(.clearClipboard)
                                         }
-                                        Divider()
                                         ZStack {
                                                 Color.interactiveClear
+                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                        .fill(keyColor)
+                                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                        .padding(.vertical, 6)
+                                                        .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
                                                         Image(systemName: "doc.on.clipboard")
                                                         Text(verbatim: "帖上").font(.caption2)
@@ -36,10 +58,14 @@ struct EditingPanel: View {
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
-                                Divider()
                                 HStack(spacing: 0) {
                                         ZStack {
                                                 Color.interactiveClear
+                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                        .fill(keyColor)
+                                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                        .padding(.vertical, 6)
+                                                        .padding(.horizontal, 3)
                                                 Image(systemName: "arrow.backward")
                                         }
                                         .frame(maxWidth: .infinity)
@@ -47,9 +73,13 @@ struct EditingPanel: View {
                                         .onTapGesture {
                                                 context.operate(.moveCursorBackward)
                                         }
-                                        Divider()
                                         ZStack {
                                                 Color.interactiveClear
+                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                        .fill(keyColor)
+                                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                        .padding(.vertical, 6)
+                                                        .padding(.horizontal, 3)
                                                 Image(systemName: "arrow.forward")
                                         }
                                         .frame(maxWidth: .infinity)
@@ -59,10 +89,14 @@ struct EditingPanel: View {
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
-                                Divider()
                                 HStack(spacing: 0) {
                                         ZStack {
                                                 Color.interactiveClear
+                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                        .fill(keyColor)
+                                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                        .padding(.vertical, 6)
+                                                        .padding(.horizontal, 3)
                                                 Image(systemName: "arrow.backward.to.line")
                                         }
                                         .frame(maxWidth: .infinity)
@@ -70,9 +104,13 @@ struct EditingPanel: View {
                                         .onTapGesture {
                                                 context.operate(.jumpToBeginning)
                                         }
-                                        Divider()
                                         ZStack {
                                                 Color.interactiveClear
+                                                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                        .fill(keyColor)
+                                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                        .padding(.vertical, 6)
+                                                        .padding(.horizontal, 3)
                                                 Image(systemName: "arrow.forward.to.line")
                                         }
                                         .frame(maxWidth: .infinity)
@@ -84,20 +122,31 @@ struct EditingPanel: View {
                                 .frame(maxHeight: .infinity)
                         }
                         .frame(maxWidth: .infinity)
-                        Divider()
                         VStack(spacing: 0) {
                                 ZStack {
                                         Color.interactiveClear
-                                        Text(verbatim: "返回")
+                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                .fill(keyColor)
+                                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                .padding(.vertical, 6)
+                                                .padding(.horizontal, 3)
+                                        VStack(spacing: 4) {
+                                                Image(systemName: "chevron.up").font(.title3)
+                                                Text(verbatim: "返回").font(.caption2)
+                                        }
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                         context.updateKeyboardType(to: .cantonese(.lowercased))
                                 }
-                                Divider()
                                 ZStack {
                                         Color.interactiveClear
+                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                .fill(keyColor)
+                                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                .padding(.vertical, 6)
+                                                .padding(.horizontal, 3)
                                         Image(systemName: "delete.backward")
                                 }
                                 .frame(maxHeight: .infinity)
@@ -105,9 +154,13 @@ struct EditingPanel: View {
                                 .onTapGesture {
                                         context.operate(.backspace)
                                 }
-                                Divider()
                                 ZStack {
                                         Color.interactiveClear
+                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                .fill(keyColor)
+                                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                .padding(.vertical, 6)
+                                                .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
                                                 Image(systemName: "clear")
                                                 Text(verbatim: "清空").font(.caption2)
@@ -118,10 +171,14 @@ struct EditingPanel: View {
                                 .onTapGesture {
                                         context.operate(.clearText)
                                 }
-                                Divider()
                                 ZStack {
                                         Color.interactiveClear
-                                        Text(verbatim: "換行")
+                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                                .fill(keyColor)
+                                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                                .padding(.vertical, 6)
+                                                .padding(.horizontal, 3)
+                                        Text(verbatim: context.returnKeyText)
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
