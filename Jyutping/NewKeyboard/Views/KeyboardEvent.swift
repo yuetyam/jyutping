@@ -7,6 +7,7 @@ enum KeyboardEvent: Hashable {
         case hidden(String)
         case input(KeyUnit)
         case newLine
+        case numeric
         case period
         case placeholder
         case shift

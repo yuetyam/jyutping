@@ -47,13 +47,13 @@ struct KeyboardStack: View {
                                 KeyboardEvent.backspace
                         ]).environmentObject(context)
 
-                        KeyboardRow(events: [
-                                KeyboardEvent.transform(.cantoneseNumeric),
-                                KeyboardEvent.comma,
-                                KeyboardEvent.space,
-                                KeyboardEvent.period,
-                                KeyboardEvent.newLine
-                        ]).environmentObject(context)
+                        HStack(spacing: 0) {
+                                NumericKey().environmentObject(context)
+                                CommaKey().environmentObject(context)
+                                SpaceKey().environmentObject(context)
+                                PeriodKey().environmentObject(context)
+                                ReturnKey().environmentObject(context)
+                        }
                 }
         }
 }

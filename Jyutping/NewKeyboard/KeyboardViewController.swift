@@ -191,9 +191,47 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 textDocumentProxy.insertText("\n")
                         }
                 case .shift:
-                        break
+                        let newKeyboardType: KeyboardType = {
+                                switch keyboardType {
+                                case .abc(.capsLocked), .abc(.uppercased):
+                                        return .abc(.lowercased)
+                                case .cantonese(.capsLocked), .cantonese(.uppercased):
+                                        return .cantonese(.lowercased)
+                                case .saamPing(.capsLocked), .saamPing(.uppercased):
+                                        return .saamPing(.lowercased)
+                                case .abc(.lowercased):
+                                        return .abc(.uppercased)
+                                case .cantonese(.lowercased):
+                                        return .cantonese(.uppercased)
+                                case .saamPing(.lowercased):
+                                        return .saamPing(.uppercased)
+                                default:
+                                        return .cantonese(.lowercased)
+                                }
+                        }()
+                        updateKeyboardType(to: newKeyboardType)
+                        AudioFeedback.perform(.modify)
                 case .doubleShift:
-                        break
+                        let newKeyboardType: KeyboardType = {
+                                switch keyboardType {
+                                case .abc(.capsLocked):
+                                        return .abc(.lowercased)
+                                case .cantonese(.capsLocked):
+                                        return .cantonese(.lowercased)
+                                case .saamPing(.capsLocked):
+                                        return .saamPing(.lowercased)
+                                case .abc(.lowercased), .abc(.uppercased):
+                                        return .abc(.capsLocked)
+                                case .cantonese(.lowercased), .cantonese(.uppercased):
+                                        return .cantonese(.capsLocked)
+                                case .saamPing(.lowercased), .saamPing(.uppercased):
+                                        return .saamPing(.capsLocked)
+                                default:
+                                        return .cantonese(.capsLocked)
+                                }
+                        }()
+                        updateKeyboardType(to: newKeyboardType)
+                        AudioFeedback.perform(.modify)
                 case .tab:
                         textDocumentProxy.insertText("\t")
                 case .transform(let keyboardType):
@@ -396,14 +434,25 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         @Published private(set) var returnKeyText: String = "換行"
         private func updateReturnKeyText() {
-                returnKeyText = textDocumentProxy.returnKeyType.returnKeyText(isABC: keyboardType.isABCMode, isSimplified: Options.characterStandard == .simplified, isBuffering: inputStage.isBuffering)
+                let newText: String = textDocumentProxy.returnKeyType.returnKeyText(isABC: keyboardType.isABCMode, isSimplified: Options.characterStandard == .simplified, isBuffering: inputStage.isBuffering)
+                if returnKeyText != newText {
+                        returnKeyText = newText
+                }
         }
         @Published private(set) var spaceText: String = "粵拼"
         private func updateSpaceText() {
                 let newText: String = {
-                        guard !keyboardType.isABCMode else { return "ABC" }
-                        guard Options.characterStandard != .simplified else { return "粤拼" }
-                        return "粵拼"
+                        let isSimplified: Bool = Options.characterStandard == .simplified
+                        switch keyboardType {
+                        case .abc:
+                                return "ABC"
+                        case .cantonese(.capsLocked), .saamPing(.capsLocked):
+                                return isSimplified ? "大写锁定" : "大寫鎖定"
+                        case .cantonese(.uppercased), .saamPing(.uppercased):
+                                return "全形空格"
+                        default:
+                                return isSimplified ? "粤拼·简化字" : "粵拼"
+                        }
                 }()
                 if spaceText != newText {
                         spaceText = newText
