@@ -7,7 +7,7 @@ enum Operation: Hashable {
         case space
         case doubleSpace
         case backspace
-        case clear
+        case clearBuffer
         case `return`
         case shift
         case doubleShift

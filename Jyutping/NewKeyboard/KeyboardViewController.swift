@@ -125,6 +125,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         switch bufferText.first {
                         case .none:
+                                markedText = .empty
                                 candidates = []
                         case .some("r"):
                                 pinyinReverseLookup()
@@ -180,7 +181,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 textDocumentProxy.deleteBackward()
                         }
                         AudioFeedback.perform(.delete)
-                case .clear:
+                case .clearBuffer:
                         clearBufferText()
                 case .return:
                         if inputStage.isBuffering {
