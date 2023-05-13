@@ -159,7 +159,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                 case .space:
                         guard inputStage.isBuffering else {
-                                textDocumentProxy.insertText(" ")
+                                // TODO: Full-width space?
+                                let spaceValue: String = " "
+                                textDocumentProxy.insertText(spaceValue)
+                                AudioFeedback.perform(.input)
                                 return
                         }
                         guard let candidate = candidates.first else {
@@ -173,7 +176,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         adjustKeyboardType()
                         aftercareSelected(candidate)
                 case .doubleSpace:
-                        break
+                        textDocumentProxy.deleteBackward()
+                        textDocumentProxy.insertText("。")
+                        AudioFeedback.perform(.input)
                 case .backspace:
                         if inputStage.isBuffering {
                                 dropLastBufferCharacter()
@@ -458,6 +463,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 if spaceText != newText {
                         spaceText = newText
                 }
+        }
+        @Published private(set) var touchedLocation: CGPoint = .zero
+        func updateTouchedLocation(to point: CGPoint) {
+                touchedLocation = point
         }
 
         private(set) lazy var isPhone: Bool = UITraitCollection.current.userInterfaceIdiom == .phone
