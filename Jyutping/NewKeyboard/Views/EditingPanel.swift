@@ -5,7 +5,6 @@ struct EditingPanel: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         @Environment(\.colorScheme) private var colorScheme
-
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
@@ -16,6 +15,30 @@ struct EditingPanel: View {
                         return .lightEmphatic
                 }
         }
+        private var activeKeyColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .light
+                case .dark:
+                        return .dark
+                @unknown default:
+                        return .light
+                }
+        }
+
+        @GestureState private var isClearingClipboard: Bool = false
+        @GestureState private var isPasting: Bool = false
+        @GestureState private var isMovingCursorBackward: Bool = false
+        @GestureState private var isMovingCursorForward: Bool = false
+        @GestureState private var isJumpingToHead: Bool = false
+        @GestureState private var isJumpingToTail: Bool = false
+        @GestureState private var isNavigatingBack: Bool = false
+        @GestureState private var isClearingText: Bool = false
+        @GestureState private var isReturning: Bool = false
+
+        @GestureState private var isBackspacing: Bool = false
+        @State private var buffer: Int = 0
+        private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
                 HStack(spacing: 0) {
@@ -24,7 +47,7 @@ struct EditingPanel: View {
                                         ZStack {
                                                 Color.interactiveClear
                                                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                        .fill(keyColor)
+                                                        .fill(isClearingClipboard ? activeKeyColor : keyColor)
                                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                         .padding(.vertical, 6)
                                                         .padding(.horizontal, 3)
@@ -35,13 +58,20 @@ struct EditingPanel: View {
                                         }
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                context.operate(.clearClipboard)
-                                        }
+                                        .gesture(DragGesture(minimumDistance: 0)
+                                                .updating($isClearingClipboard) { _, tapped, _ in
+                                                        if !tapped {
+                                                                tapped = true
+                                                        }
+                                                }
+                                                .onEnded { _ in
+                                                        context.operate(.clearClipboard)
+                                                }
+                                        )
                                         ZStack {
                                                 Color.interactiveClear
                                                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                        .fill(keyColor)
+                                                        .fill(isPasting ? activeKeyColor : keyColor)
                                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                         .padding(.vertical, 6)
                                                         .padding(.horizontal, 3)
@@ -53,16 +83,23 @@ struct EditingPanel: View {
                                         }
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                context.operate(.paste)
-                                        }
+                                        .gesture(DragGesture(minimumDistance: 0)
+                                                .updating($isPasting) { _, tapped, _ in
+                                                        if !tapped {
+                                                                tapped = true
+                                                        }
+                                                }
+                                                .onEnded { _ in
+                                                        context.operate(.paste)
+                                                }
+                                        )
                                 }
                                 .frame(maxHeight: .infinity)
                                 HStack(spacing: 0) {
                                         ZStack {
                                                 Color.interactiveClear
                                                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                        .fill(keyColor)
+                                                        .fill(isMovingCursorBackward ? activeKeyColor : keyColor)
                                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                         .padding(.vertical, 6)
                                                         .padding(.horizontal, 3)
@@ -70,13 +107,20 @@ struct EditingPanel: View {
                                         }
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                context.operate(.moveCursorBackward)
-                                        }
+                                        .gesture(DragGesture(minimumDistance: 0)
+                                                .updating($isMovingCursorBackward) { _, tapped, _ in
+                                                        if !tapped {
+                                                                tapped = true
+                                                        }
+                                                }
+                                                .onEnded { _ in
+                                                        context.operate(.moveCursorBackward)
+                                                }
+                                        )
                                         ZStack {
                                                 Color.interactiveClear
                                                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                        .fill(keyColor)
+                                                        .fill(isMovingCursorForward ? activeKeyColor : keyColor)
                                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                         .padding(.vertical, 6)
                                                         .padding(.horizontal, 3)
@@ -84,16 +128,23 @@ struct EditingPanel: View {
                                         }
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                context.operate(.moveCursorForward)
-                                        }
+                                        .gesture(DragGesture(minimumDistance: 0)
+                                                .updating($isMovingCursorForward) { _, tapped, _ in
+                                                        if !tapped {
+                                                                tapped = true
+                                                        }
+                                                }
+                                                .onEnded { _ in
+                                                        context.operate(.moveCursorForward)
+                                                }
+                                        )
                                 }
                                 .frame(maxHeight: .infinity)
                                 HStack(spacing: 0) {
                                         ZStack {
                                                 Color.interactiveClear
                                                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                        .fill(keyColor)
+                                                        .fill(isJumpingToHead ? activeKeyColor : keyColor)
                                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                         .padding(.vertical, 6)
                                                         .padding(.horizontal, 3)
@@ -101,13 +152,20 @@ struct EditingPanel: View {
                                         }
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                context.operate(.jumpToBeginning)
-                                        }
+                                        .gesture(DragGesture(minimumDistance: 0)
+                                                .updating($isJumpingToHead) { _, tapped, _ in
+                                                        if !tapped {
+                                                                tapped = true
+                                                        }
+                                                }
+                                                .onEnded { _ in
+                                                        context.operate(.jumpToHead)
+                                                }
+                                        )
                                         ZStack {
                                                 Color.interactiveClear
                                                 RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                        .fill(keyColor)
+                                                        .fill(isJumpingToTail ? activeKeyColor : keyColor)
                                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                         .padding(.vertical, 6)
                                                         .padding(.horizontal, 3)
@@ -115,9 +173,16 @@ struct EditingPanel: View {
                                         }
                                         .frame(maxWidth: .infinity)
                                         .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                context.operate(.jumpToEnd)
-                                        }
+                                        .gesture(DragGesture(minimumDistance: 0)
+                                                .updating($isJumpingToTail) { _, tapped, _ in
+                                                        if !tapped {
+                                                                tapped = true
+                                                        }
+                                                }
+                                                .onEnded { _ in
+                                                        context.operate(.jumpToTail)
+                                                }
+                                        )
                                 }
                                 .frame(maxHeight: .infinity)
                         }
@@ -126,7 +191,7 @@ struct EditingPanel: View {
                                 ZStack {
                                         Color.interactiveClear
                                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                .fill(keyColor)
+                                                .fill(isNavigatingBack ? activeKeyColor : keyColor)
                                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
@@ -137,13 +202,21 @@ struct EditingPanel: View {
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
-                                .onTapGesture {
-                                        context.updateKeyboardType(to: .cantonese(.lowercased))
-                                }
+                                .gesture(DragGesture(minimumDistance: 0)
+                                        .updating($isNavigatingBack) { _, tapped, _ in
+                                                if !tapped {
+                                                        tapped = true
+                                                }
+                                        }
+                                        .onEnded { _ in
+                                                // FIXME: Navigate back
+                                                context.updateKeyboardType(to: .cantonese(.lowercased))
+                                        }
+                                )
                                 ZStack {
                                         Color.interactiveClear
                                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                .fill(keyColor)
+                                                .fill(isBackspacing ? activeKeyColor : keyColor)
                                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
@@ -151,13 +224,29 @@ struct EditingPanel: View {
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
-                                .onTapGesture {
-                                        context.operate(.backspace)
+                                .gesture(DragGesture(minimumDistance: 0)
+                                        .updating($isBackspacing) { _, tapped, _ in
+                                                if !tapped {
+                                                        context.operate(.backspace)
+                                                        tapped = true
+                                                }
+                                        }
+                                        .onEnded { _ in
+                                                buffer = 0
+                                        }
+                                )
+                                .onReceive(timer) { _ in
+                                        guard isBackspacing else { return }
+                                        if buffer > 3 {
+                                                context.operate(.backspace)
+                                        } else {
+                                                buffer += 1
+                                        }
                                 }
                                 ZStack {
                                         Color.interactiveClear
                                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                .fill(keyColor)
+                                                .fill(isClearingText ? activeKeyColor : keyColor)
                                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
@@ -168,13 +257,20 @@ struct EditingPanel: View {
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
-                                .onTapGesture {
-                                        context.operate(.clearText)
-                                }
+                                .gesture(DragGesture(minimumDistance: 0)
+                                        .updating($isClearingText) { _, tapped, _ in
+                                                if !tapped {
+                                                        tapped = true
+                                                }
+                                        }
+                                        .onEnded { _ in
+                                                context.operate(.clearText)
+                                        }
+                                )
                                 ZStack {
                                         Color.interactiveClear
                                         RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                                .fill(keyColor)
+                                                .fill(isReturning ? activeKeyColor : keyColor)
                                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
@@ -182,9 +278,16 @@ struct EditingPanel: View {
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
-                                .onTapGesture {
-                                        context.operate(.return)
-                                }
+                                .gesture(DragGesture(minimumDistance: 0)
+                                        .updating($isReturning) { _, tapped, _ in
+                                                if !tapped {
+                                                        tapped = true
+                                                }
+                                        }
+                                        .onEnded { _ in
+                                                context.operate(.return)
+                                        }
+                                )
                         }
                         .frame(width: 100)
                 }

@@ -21,6 +21,6 @@ enum Operation: Hashable {
         case clearText
         case moveCursorBackward
         case moveCursorForward
-        case jumpToBeginning
-        case jumpToEnd
+        case jumpToHead
+        case jumpToTail
 }

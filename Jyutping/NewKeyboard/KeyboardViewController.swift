@@ -269,10 +269,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
                 case .moveCursorForward:
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-                case .jumpToBeginning:
+                case .jumpToHead:
                         guard let text = textDocumentProxy.documentContextBeforeInput else { return }
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: -(text.count))
-                case .jumpToEnd:
+                case .jumpToTail:
                         guard let text = textDocumentProxy.documentContextAfterInput else { return }
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: text.count)
                 }
