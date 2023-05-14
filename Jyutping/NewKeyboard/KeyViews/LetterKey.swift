@@ -2,11 +2,11 @@ import SwiftUI
 
 struct LetterKey: View {
 
-        @EnvironmentObject private var context: KeyboardViewController
-        @Environment(\.colorScheme) private var colorScheme
-
         let key: KeyUnit
 
+        @EnvironmentObject private var context: KeyboardViewController
+
+        @Environment(\.colorScheme) private var colorScheme
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
@@ -18,21 +18,43 @@ struct LetterKey: View {
                 }
         }
 
+        @GestureState private var isTouching: Bool = false
+
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill(keyColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                .padding(.vertical, 6)
-                                .padding(.horizontal, 3)
-                        KeyElementView(element: key.primary).font(.title2)
+                        if isTouching {
+                                KeyPreview()
+                                        .fill(keyColor)
+                                        .shadow(color: .black.opacity(0.5), radius: 1)
+                                        .overlay {
+                                                Text(verbatim: key.primary.center)
+                                                        .font(.largeTitle)
+                                                        .padding(.bottom, context.heightUnit * 2.0)
+                                        }
+                                        .padding(.vertical, 6)
+                                        .padding(.horizontal, 3)
+                        } else {
+                                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                        .fill(keyColor)
+                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                        .padding(.vertical, 6)
+                                        .padding(.horizontal, 3)
+                                KeyElementView(element: key.primary).font(.title2)
+                        }
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
-                .onTapGesture {
-                        let text: String = key.primary.center
-                        context.operate(.input(text))
-                }
+                .gesture(DragGesture(minimumDistance: 0)
+                        .updating($isTouching) { _, tapped, _ in
+                                if !tapped {
+                                        tapped = true
+                                }
+                        }
+                        .onEnded { _ in
+                                let text: String = key.primary.center
+                                context.operate(.input(text))
+                         }
+                )
         }
 }
