@@ -209,8 +209,7 @@ struct EditingPanel: View {
                                                 }
                                         }
                                         .onEnded { _ in
-                                                // FIXME: Navigate back
-                                                context.updateKeyboardType(to: .cantonese(.lowercased))
+                                                context.updateKeyboardType(to: context.previousKeyboardType)
                                         }
                                 )
                                 ZStack {

@@ -28,7 +28,7 @@ struct SettingsView: View {
                         .background(Material.ultraThin)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                context.updateKeyboardType(to: .cantonese(.lowercased))
+                                context.updateKeyboardType(to: context.previousKeyboardType)
                         }
                         List {
                                 Section {

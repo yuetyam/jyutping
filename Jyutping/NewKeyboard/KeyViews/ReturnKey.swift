@@ -31,7 +31,6 @@ struct ReturnKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        // TODO: BackgroundColor for ReturnKey
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)

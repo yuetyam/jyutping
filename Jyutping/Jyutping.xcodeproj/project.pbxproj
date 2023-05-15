@@ -728,7 +728,6 @@
 				37B176652A0507CD00A4E531 /* KeyboardEvent.swift */,
 				37B1765F2A049B8B00A4E531 /* KeyboardRow.swift */,
 				37B1765D2A049B6800A4E531 /* KeyboardStack.swift */,
-				370D438F2A10EA4100EB48B8 /* HiddenLetterKey.swift */,
 				370563252A0168D000872AA4 /* ToolBar.swift */,
 				37B7B4172A06178400B3AB08 /* CandidateScrollBar.swift */,
 				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
@@ -792,6 +791,7 @@
 				37993A682A0EA33600BC8E35 /* ShiftKey.swift */,
 				37993A6A2A0EA34D00BC8E35 /* NumericKey.swift */,
 				37993A6C2A0EA36C00BC8E35 /* LetterKey.swift */,
+				370D438F2A10EA4100EB48B8 /* HiddenLetterKey.swift */,
 			);
 			path = KeyViews;
 			sourceTree = "<group>";

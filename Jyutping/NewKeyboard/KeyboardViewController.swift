@@ -285,11 +285,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func adjustKeyboardType() {
                 switch keyboardType {
                 case .abc(.uppercased):
-                        keyboardType = .abc(.lowercased)
+                        updateKeyboardType(to: .abc(.lowercased))
                 case .cantonese(.uppercased):
-                        keyboardType = .cantonese(.lowercased)
+                        updateKeyboardType(to: .cantonese(.lowercased))
                 case .candidateBoard where !(inputStage.isBuffering):
-                        keyboardType = .cantonese(.lowercased)
+                        updateKeyboardType(to: .cantonese(.lowercased))
                 default:
                         break
                 }
@@ -482,6 +482,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 heightUnit = 53
         }
 
+        @Published private(set) var previousKeyboardType: KeyboardType = .cantonese(.lowercased)
         @Published private(set) var keyboardType: KeyboardType = {
                 switch Options.keyboardLayout {
                 case .qwerty:
@@ -493,6 +494,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }()
         func updateKeyboardType(to type: KeyboardType) {
+                previousKeyboardType = keyboardType
                 keyboardType = type
                 updateReturnKeyText()
                 updateSpaceText()

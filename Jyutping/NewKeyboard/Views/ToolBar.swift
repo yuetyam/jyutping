@@ -4,8 +4,6 @@ struct ToolBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        @State private var isCantoneseSelected: Bool = true
-
         private let itemWidth: CGFloat = 50
 
         var body: some View {
@@ -27,20 +25,27 @@ struct ToolBar: View {
                         .frame(width: itemWidth, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                isCantoneseSelected.toggle()
+                                print("No Emoji Board")
                         }
 
                         Spacer()
                         ZStack {
                                 Color.interactiveClear
-                                CantoneseABCSwitch(isCantoneseSelected: isCantoneseSelected)
+                                CantoneseABCSwitch(isCantoneseSelected: !(context.keyboardType.isABCMode))
                         }
                         .frame(width: 72, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                let isLeftSelected: Bool = isCantoneseSelected
-                                isCantoneseSelected.toggle()
-                                let newKeyboardType: KeyboardType = isLeftSelected ? .abc(.lowercased) : .cantonese(.lowercased)
+                                let newKeyboardType: KeyboardType = {
+                                        switch context.keyboardType {
+                                        case .abc(let keyboardCase):
+                                                return .cantonese(keyboardCase)
+                                        case .cantonese(let keyboardCase):
+                                                return .abc(keyboardCase)
+                                        default:
+                                                return .cantonese(.lowercased)
+                                        }
+                                }()
                                 context.updateKeyboardType(to: newKeyboardType)
                         }
 
