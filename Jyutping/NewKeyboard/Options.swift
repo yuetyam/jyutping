@@ -79,6 +79,65 @@ struct Options {
                 let value: Int = layout.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
         }
+
+        private(set) static var commentStyle: CommentStyle = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
+                switch savedValue {
+                case CommentStyle.aboveCandidates.rawValue:
+                        return .aboveCandidates
+                case CommentStyle.belowCandidates.rawValue:
+                        return .belowCandidates
+                case CommentStyle.noComments.rawValue:
+                        return .noComments
+                default:
+                        return .aboveCandidates
+                }
+        }()
+        static func updateCommentStyle(to style: CommentStyle) {
+                commentStyle = style
+                let value: Int = style.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.CommentStyle)
+        }
+
+        private(set) static var commentToneStyle: CommentToneStyle = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentToneStyle)
+                switch savedValue {
+                case CommentToneStyle.normal.rawValue:
+                        return .normal
+                case CommentToneStyle.superscript.rawValue:
+                        return .superscript
+                case CommentToneStyle.subscript.rawValue:
+                        return .subscript
+                default:
+                        return .normal
+                }
+        }()
+        static func updateCommentToneStyle(to style: CommentToneStyle) {
+                commentToneStyle = style
+                let value: Int = style.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.CommentToneStyle)
+        }
+
+        private(set) static var doubleSpaceShortcut: DoubleSpaceShortcut = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.DoubleSpaceShortcut)
+                switch savedValue {
+                case DoubleSpaceShortcut.insertPeriod.rawValue:
+                        return .insertPeriod
+                case DoubleSpaceShortcut.doNothing.rawValue:
+                        return .doNothing
+                case DoubleSpaceShortcut.insertIdeographicComma.rawValue:
+                        return .insertIdeographicComma
+                case DoubleSpaceShortcut.insertFullWidthSpace.rawValue:
+                        return .insertFullWidthSpace
+                default:
+                        return .insertPeriod
+                }
+        }()
+        static func updateDoubleSpaceShortcut(to shortcut: DoubleSpaceShortcut) {
+                doubleSpaceShortcut = shortcut
+                let value: Int = shortcut.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.DoubleSpaceShortcut)
+        }
 }
 
 struct OptionsKey {
@@ -87,7 +146,25 @@ struct OptionsKey {
         static let HapticFeedback: String = "haptic_feedback"
         static let EmojiSuggestions: String = "emoji"
         static let KeyboardLayout: String = "keyboard_layout"
-        static let JyutpingDisplay: String = "jyutping_display"
-        static let ToneStyle: String = "tone_style"
+        static let CommentStyle: String = "jyutping_display"
+        static let CommentToneStyle: String = "tone_style"
         static let DoubleSpaceShortcut: String = "double_space_shortcut"
+}
+
+enum CommentStyle: Int {
+        case aboveCandidates = 1
+        case belowCandidates = 2
+        case noComments = 3
+}
+enum CommentToneStyle: Int {
+        case normal = 1
+        case superscript = 2
+        case `subscript` = 3
+        case noTones = 4
+}
+enum DoubleSpaceShortcut: Int {
+        case insertPeriod = 1
+        case doNothing = 2
+        case insertIdeographicComma = 3
+        case insertFullWidthSpace = 4
 }
