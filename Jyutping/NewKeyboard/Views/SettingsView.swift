@@ -1,10 +1,12 @@
 import SwiftUI
+import CoreIME
 
 @available(iOSApplicationExtension 16.0, *)
 struct SettingsView: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
+        @State private var selectedCharacterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = .disabled
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
@@ -15,7 +17,6 @@ struct SettingsView: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        // TODO: Responsive height for iPhong/iPad
                         HStack {
                                 Image(systemName: "chevron.up")
                                         .resizable()
@@ -24,7 +25,7 @@ struct SettingsView: View {
                                         .frame(width: 48)
                                 Spacer()
                         }
-                        .frame(height: 36)
+                        .frame(height: context.keyboardInterface.isCompact ? 36 : 44)
                         .background(Material.ultraThin)
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -32,22 +33,45 @@ struct SettingsView: View {
                         }
                         List {
                                 Section {
-                                        HStack {
-                                                Text("Traditional")
-                                                Spacer()
-                                                Image.checkmark
+                                        Button {
+                                                selectedCharacterStandard = .traditional
+                                                Options.updateCharacterStandard(to: .traditional)
+                                        } label: {
+                                                HStack {
+                                                        Text("Traditional").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .traditional ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("Traditional, Hong Kong")
-                                                Spacer()
+                                        Button {
+                                                selectedCharacterStandard = .hongkong
+                                                Options.updateCharacterStandard(to: .hongkong)
+                                        } label: {
+                                                HStack {
+                                                        Text("Traditional, Hong Kong").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .hongkong ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("Traditional, Taiwan")
-                                                Spacer()
+                                        Button {
+                                                selectedCharacterStandard = .taiwan
+                                                Options.updateCharacterStandard(to: .taiwan)
+                                        } label: {
+                                                HStack {
+                                                        Text("Traditional, Taiwan").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .taiwan ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("Simplified")
-                                                Spacer()
+                                        Button {
+                                                selectedCharacterStandard = .simplified
+                                                Options.updateCharacterStandard(to: .simplified)
+                                        } label: {
+                                                HStack {
+                                                        Text("Simplified").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .simplified ? 1: 0)
+                                                }
                                         }
                                 } header: {
                                         Text("Characters").textCase(nil)
