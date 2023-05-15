@@ -10,6 +10,7 @@ struct SettingsView: View {
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = .disabled
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+        @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
 
         @State private var isPerformingClearUserLexicon: Bool = false
         @State private var clearUserLexiconProgress: Double = 0
@@ -124,16 +125,35 @@ struct SettingsView: View {
                                 }
 
                                 Section {
-                                        HStack {
-                                                Text("KeyboardLayout.QWERTY")
-                                                Spacer()
-                                                Image.checkmark
+                                        Button {
+                                                selectedKeyboardLayout = .qwerty
+                                                Options.updateKeyboardLayout(to: .qwerty)
+                                        } label: {
+                                                HStack {
+                                                        Text("KeyboardLayout.QWERTY").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedKeyboardLayout == .qwerty ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("KeyboardLayout.SaamPing")
+                                        Button {
+                                                selectedKeyboardLayout = .saamPing
+                                                Options.updateKeyboardLayout(to: .saamPing)
+                                        } label: {
+                                                HStack {
+                                                        Text("KeyboardLayout.SaamPing").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedKeyboardLayout == .saamPing ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("KeyboardLayout.10Key")
+                                        Button {
+                                                selectedKeyboardLayout = .tenKey
+                                                Options.updateKeyboardLayout(to: .tenKey)
+                                        } label: {
+                                                HStack {
+                                                        Text("KeyboardLayout.10Key").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedKeyboardLayout == .tenKey ? 1: 0)
+                                                }
                                         }
                                 } header: {
                                         Text("Keyboard Layout").textCase(nil)
