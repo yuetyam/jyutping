@@ -1,8 +1,7 @@
-"Characters" = "字形";
-"Traditional" = "傳統漢字";
-"Traditional, Hong Kong" = "傳統漢字・香港";
-"Traditional, Taiwan" = "傳統漢字・臺灣";
-"Simplified" = "简化字";
+"Traditional Characters" = "傳統漢字";
+"Traditional Characters, Hong Kong" = "傳統漢字・香港";
+"Traditional Characters, Taiwan" = "傳統漢字・臺灣";
+"Simplified Characters" = "简化字";
 
 "Keyboard Feedback" = "鍵盤回應";
 "Sound" = "聲音";

@@ -42,7 +42,7 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .traditional)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional").foregroundColor(.primary)
+                                                        Text("Traditional Characters").foregroundColor(.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .traditional ? 1: 0)
                                                 }
@@ -52,7 +52,7 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .hongkong)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional, Hong Kong").foregroundColor(.primary)
+                                                        Text("Traditional Characters, Hong Kong").foregroundColor(.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .hongkong ? 1: 0)
                                                 }
@@ -62,7 +62,7 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .taiwan)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional, Taiwan").foregroundColor(.primary)
+                                                        Text("Traditional Characters, Taiwan").foregroundColor(.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .taiwan ? 1: 0)
                                                 }
@@ -72,13 +72,11 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .simplified)
                                         } label: {
                                                 HStack {
-                                                        Text("Simplified").foregroundColor(.primary)
+                                                        Text("Simplified Characters").foregroundColor(.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .simplified ? 1: 0)
                                                 }
                                         }
-                                } header: {
-                                        Text("Characters").textCase(nil)
                                 }
                                 Section {
                                         Toggle("Sound", isOn: $isAudioFeedbackOn)
