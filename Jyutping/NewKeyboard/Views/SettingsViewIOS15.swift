@@ -1,12 +1,18 @@
 import SwiftUI
+import CoreIME
 
 struct SettingsViewIOS15: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
+        @State private var selectedCharacterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = .disabled
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+        @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
+        @State private var selectedCommentStyle: CommentStyle = Options.commentStyle
+        @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
+        @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
 
         @State private var isPerformingClearUserLexicon: Bool = false
         @State private var clearUserLexiconProgress: Double = 0
@@ -14,7 +20,6 @@ struct SettingsViewIOS15: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        // TODO: Responsive height for iPhong/iPad
                         HStack {
                                 Image(systemName: "chevron.up")
                                         .resizable()
@@ -23,39 +28,61 @@ struct SettingsViewIOS15: View {
                                         .frame(width: 48)
                                 Spacer()
                         }
-                        .frame(height: 36)
+                        .frame(height: context.keyboardInterface.isCompact ? 36 : 44)
                         .background(Material.ultraThin)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                context.updateKeyboardType(to: .cantonese(.lowercased))
+                                context.updateKeyboardType(to: context.previousKeyboardType)
                         }
                         List {
                                 Section {
-                                        HStack {
-                                                Text("Traditional")
-                                                Spacer()
-                                                Image.checkmark
+                                        Button {
+                                                selectedCharacterStandard = .traditional
+                                                Options.updateCharacterStandard(to: .traditional)
+                                        } label: {
+                                                HStack {
+                                                        Text("Traditional Characters").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .traditional ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("Traditional, Hong Kong")
-                                                Spacer()
+                                        Button {
+                                                selectedCharacterStandard = .hongkong
+                                                Options.updateCharacterStandard(to: .hongkong)
+                                        } label: {
+                                                HStack {
+                                                        Text("Traditional Characters, Hong Kong").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .hongkong ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("Traditional, Taiwan")
-                                                Spacer()
+                                        Button {
+                                                selectedCharacterStandard = .taiwan
+                                                Options.updateCharacterStandard(to: .taiwan)
+                                        } label: {
+                                                HStack {
+                                                        Text("Traditional Characters, Taiwan").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .taiwan ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("Simplified")
-                                                Spacer()
+                                        Button {
+                                                selectedCharacterStandard = .simplified
+                                                Options.updateCharacterStandard(to: .simplified)
+                                        } label: {
+                                                HStack {
+                                                        Text("Simplified Characters").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCharacterStandard == .simplified ? 1: 0)
+                                                }
                                         }
-                                } header: {
-                                        Text("Characters").textCase(nil)
                                 }
                                 Section {
                                         Toggle("Sound", isOn: $isAudioFeedbackOn)
                                                 .onChange(of: isAudioFeedbackOn) { newValue in
-                                                        // TODO: perform change
-                                                        // Options.updateAudioFeedbackStatus(isOn: newValue)
+                                                        DispatchQueue.preferences.async {
+                                                                Options.updateAudioFeedbackStatus(isOn: newValue)
+                                                        }
                                                 }
                                         if context.isPhone {
                                                 HStack {
@@ -91,75 +118,167 @@ struct SettingsViewIOS15: View {
                                 Section {
                                         Toggle("Emoji Suggestions", isOn: $isEmojiSuggestionsOn)
                                                 .onChange(of: isEmojiSuggestionsOn) { newValue in
-                                                        // TODO: perform change
+                                                        DispatchQueue.preferences.async {
+                                                                Options.updateEmojiSuggestions(to: newValue)
+                                                        }
                                                 }
                                 }
 
                                 Section {
-                                        HStack {
-                                                Text("KeyboardLayout.QWERTY")
-                                                Spacer()
-                                                Image.checkmark
+                                        Button {
+                                                selectedKeyboardLayout = .qwerty
+                                                Options.updateKeyboardLayout(to: .qwerty)
+                                        } label: {
+                                                HStack {
+                                                        Text("KeyboardLayout.QWERTY").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedKeyboardLayout == .qwerty ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("KeyboardLayout.SaamPing")
+                                        Button {
+                                                selectedKeyboardLayout = .saamPing
+                                                Options.updateKeyboardLayout(to: .saamPing)
+                                        } label: {
+                                                HStack {
+                                                        Text("KeyboardLayout.SaamPing").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedKeyboardLayout == .saamPing ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("KeyboardLayout.10Key")
+                                        Button {
+                                                selectedKeyboardLayout = .tenKey
+                                                Options.updateKeyboardLayout(to: .tenKey)
+                                        } label: {
+                                                HStack {
+                                                        Text("KeyboardLayout.10Key").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedKeyboardLayout == .tenKey ? 1: 0)
+                                                }
                                         }
                                 } header: {
                                         Text("Keyboard Layout").textCase(nil)
                                 }
 
                                 Section {
-                                        HStack {
-                                                Text("Above Candidates")
-                                                Spacer()
-                                                Image.checkmark
+                                        Button {
+                                                selectedCommentStyle = .aboveCandidates
+                                                Options.updateCommentStyle(to: .aboveCandidates)
+                                        } label: {
+                                                HStack {
+                                                        Text("Above Candidates").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentStyle == .aboveCandidates ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("Above Candidates")
+                                        Button {
+                                                selectedCommentStyle = .belowCandidates
+                                                Options.updateCommentStyle(to: .belowCandidates)
+                                        } label: {
+                                                HStack {
+                                                        Text("Below Candidates").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentStyle == .belowCandidates ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("No Jyutping")
+                                        Button {
+                                                selectedCommentStyle = .noComments
+                                                Options.updateCommentStyle(to: .noComments)
+                                        } label: {
+                                                HStack {
+                                                        Text("No Jyutping").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentStyle == .noComments ? 1: 0)
+                                                }
                                         }
                                 } header: {
                                         Text("Jyutping Display").textCase(nil)
                                 }
 
                                 Section {
-                                        HStack {
-                                                Text("ToneDisplayStyle.Option1")
-                                                Spacer()
-                                                Image.checkmark
+                                        Button {
+                                                selectedCommentToneStyle = .normal
+                                                Options.updateCommentToneStyle(to: .normal)
+                                        } label: {
+                                                HStack {
+                                                        Text("ToneDisplayStyle.Option1").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentToneStyle == .normal ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("ToneDisplayStyle.Option2")
+                                        Button {
+                                                selectedCommentToneStyle = .superscript
+                                                Options.updateCommentToneStyle(to: .superscript)
+                                        } label: {
+                                                HStack {
+                                                        Text("ToneDisplayStyle.Option2").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentToneStyle == .superscript ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("ToneDisplayStyle.Option3")
+                                        Button {
+                                                selectedCommentToneStyle = .subscript
+                                                Options.updateCommentToneStyle(to: .subscript)
+                                        } label: {
+                                                HStack {
+                                                        Text("ToneDisplayStyle.Option3").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentToneStyle == .subscript ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("ToneDisplayStyle.Option4")
+                                        Button {
+                                                selectedCommentToneStyle = .noTones
+                                                Options.updateCommentToneStyle(to: .noTones)
+                                        } label: {
+                                                HStack {
+                                                        Text("ToneDisplayStyle.Option4").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentToneStyle == .noTones ? 1: 0)
+                                                }
                                         }
                                 } header: {
                                         Text("Jyutping Tones Display").textCase(nil)
                                 }
 
                                 Section {
-                                        HStack {
-                                                Text("DoubleSpaceShortcut.Option1")
-                                                Spacer()
-                                                Image.checkmark
+                                        Button {
+                                                selectedDoubleSpaceShortcut = .insertPeriod
+                                                Options.updateDoubleSpaceShortcut(to: .insertPeriod)
+                                        } label: {
+                                                HStack {
+                                                        Text("DoubleSpaceShortcut.Option1").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertPeriod ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("DoubleSpaceShortcut.Option3")
+                                        Button {
+                                                selectedDoubleSpaceShortcut = .insertIdeographicComma
+                                                Options.updateDoubleSpaceShortcut(to: .insertIdeographicComma)
+                                        } label: {
+                                                HStack {
+                                                        Text("DoubleSpaceShortcut.Option3").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertIdeographicComma ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("DoubleSpaceShortcut.Option4")
+                                        Button {
+                                                selectedDoubleSpaceShortcut = .insertFullWidthSpace
+                                                Options.updateDoubleSpaceShortcut(to: .insertFullWidthSpace)
+                                        } label: {
+                                                HStack {
+                                                        Text("DoubleSpaceShortcut.Option4").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertFullWidthSpace ? 1: 0)
+                                                }
                                         }
-                                        HStack {
-                                                Text("DoubleSpaceShortcut.Option2")
+                                        Button {
+                                                selectedDoubleSpaceShortcut = .doNothing
+                                                Options.updateDoubleSpaceShortcut(to: .doNothing)
+                                        } label: {
+                                                HStack {
+                                                        Text("DoubleSpaceShortcut.Option2").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .doNothing ? 1: 0)
+                                                }
                                         }
                                 } header: {
                                         Text("Space Double Tapping Shortcut").textCase(nil)
