@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NumericSymbolicKeyboard: View {
+struct NumericKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 

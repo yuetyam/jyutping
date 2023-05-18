@@ -6,6 +6,11 @@ struct AlphabeticKeyboard: View {
 
         var body: some View {
                 VStack(spacing: 0) {
+                        if context.inputStage.isBuffering {
+                                CandidateScrollBar().environmentObject(context)
+                        } else {
+                                ToolBar().environmentObject(context)
+                        }
                         HStack(spacing: 0 ) {
                                 InputKey(key: KeyUnit(primary: KeyElement("q"))).environmentObject(context)
                                 InputKey(key: KeyUnit(primary: KeyElement("w"))).environmentObject(context)

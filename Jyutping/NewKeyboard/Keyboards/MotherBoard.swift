@@ -16,17 +16,12 @@ struct MotherBoard: View {
                         EditingPanel().environmentObject(context)
                 case .candidateBoard:
                         CandidateBoard().environmentObject(context)
-                case .numeric, .symbolic:
-                        NumericSymbolicKeyboard().environmentObject(context)
+                case .numeric:
+                        NumericKeyboard().environmentObject(context)
+                case .symbolic:
+                        SymbolicKeyboard().environmentObject(context)
                 default:
-                        VStack(spacing: 0) {
-                                if context.inputStage.isBuffering {
-                                        CandidateScrollBar().environmentObject(context)
-                                } else {
-                                        ToolBar().environmentObject(context)
-                                }
-                                AlphabeticKeyboard().environmentObject(context)
-                        }
+                        AlphabeticKeyboard().environmentObject(context)
                 }
         }
 }
