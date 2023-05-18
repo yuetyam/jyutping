@@ -8,7 +8,8 @@ struct HiddenLetterKey: View {
 
         var body: some View {
                 Color.interactiveClear
-                        .frame(width: context.widthUnit * 0.25, height: context.heightUnit)
+                        .frame(height: context.heightUnit)
+                        .frame(maxWidth: .infinity)
                         .onTapGesture {
                                 let text: String = {
                                         switch letter {
@@ -32,4 +33,10 @@ enum HiddenLetter: Int {
         case letterL
         case letterZ
         case letterM
+}
+
+struct PlaceHolderKey: View {
+        var body: some View {
+                Color.clear.frame(maxWidth: .infinity)
+        }
 }

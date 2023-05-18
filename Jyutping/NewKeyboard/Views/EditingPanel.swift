@@ -209,7 +209,7 @@ struct EditingPanel: View {
                                                 }
                                         }
                                         .onEnded { _ in
-                                                context.updateKeyboardType(to: context.previousKeyboardType)
+                                                context.updateKeyboardForm(to: context.previousKeyboardForm)
                                         }
                                 )
                                 ZStack {

@@ -52,7 +52,7 @@ struct PeriodKey: View {
                                         .fill(keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
-                                                PeriodKeyText(isABCMode: context.keyboardType.isABCMode, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
+                                                PeriodKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, context.heightUnit * 2.0)
                                         }
@@ -64,7 +64,7 @@ struct PeriodKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                                PeriodKeyText(isABCMode: context.keyboardType.isABCMode, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
+                                PeriodKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
                         }
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
@@ -76,7 +76,7 @@ struct PeriodKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                if context.keyboardType.isABCMode {
+                                if context.inputMethodMode.isABC {
                                         context.operate(.punctuation("."))
                                 } else {
                                         if context.inputStage.isBuffering {

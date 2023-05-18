@@ -76,7 +76,7 @@ struct CandidateBoard: View {
                                 .frame(width: collapseWidth, height: collapseHeight)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                        context.updateKeyboardType(to: .cantonese(.lowercased))
+                                        context.updateKeyboardForm(to: context.previousKeyboardForm)
                                 }
                                 Spacer()
                         }

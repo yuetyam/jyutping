@@ -5,7 +5,7 @@ struct MotherBoard: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
-                switch context.keyboardType {
+                switch context.keyboardForm {
                 case .settings:
                         if #available(iOSApplicationExtension 16.0, *) {
                                 SettingsView().environmentObject(context)
@@ -16,6 +16,8 @@ struct MotherBoard: View {
                         EditingPanel().environmentObject(context)
                 case .candidateBoard:
                         CandidateBoard().environmentObject(context)
+                case .numeric, .symbolic:
+                        NumericSymbolicKeyboard().environmentObject(context)
                 default:
                         VStack(spacing: 0) {
                                 if context.inputStage.isBuffering {
@@ -23,7 +25,7 @@ struct MotherBoard: View {
                                 } else {
                                         ToolBar().environmentObject(context)
                                 }
-                                KeyboardStack().environmentObject(context)
+                                AlphabeticKeyboard().environmentObject(context)
                         }
                 }
         }

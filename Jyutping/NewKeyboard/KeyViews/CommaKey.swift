@@ -57,7 +57,7 @@ struct CommaKey: View {
                                         .fill(keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
-                                                CommaKeyText(isABCMode: context.keyboardType.isABCMode, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
+                                                CommaKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, context.heightUnit * 2.0)
                                         }
@@ -69,7 +69,7 @@ struct CommaKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                                CommaKeyText(isABCMode: context.keyboardType.isABCMode, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
+                                CommaKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
                         }
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
@@ -81,7 +81,7 @@ struct CommaKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                if context.keyboardType.isABCMode {
+                                if context.inputMethodMode.isABC {
                                         if context.needsInputModeSwitchKey {
                                                 context.operate(.punctuation("."))
                                         } else {

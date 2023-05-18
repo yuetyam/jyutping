@@ -147,7 +147,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func operate(_ operation: Operation) {
                 switch operation {
                 case .input(let text):
-                        if keyboardType.isABCMode {
+                        if inputMethodMode.isABC {
                                 textDocumentProxy.insertText(text)
                         } else {
                                 appendBufferText(text)
@@ -173,7 +173,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         insert(candidate.text)
                         textDocumentProxy.insertText(candidate.text)
-                        adjustKeyboardType()
+                        adjustKeyboard()
                         aftercareSelected(candidate)
                 case .doubleSpace:
                         textDocumentProxy.deleteBackward()
@@ -197,56 +197,38 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 textDocumentProxy.insertText("\n")
                         }
                 case .shift:
-                        let newKeyboardType: KeyboardType = {
-                                switch keyboardType {
-                                case .abc(.capsLocked), .abc(.uppercased):
-                                        return .abc(.lowercased)
-                                case .cantonese(.capsLocked), .cantonese(.uppercased):
-                                        return .cantonese(.lowercased)
-                                case .saamPing(.capsLocked), .saamPing(.uppercased):
-                                        return .saamPing(.lowercased)
-                                case .abc(.lowercased):
-                                        return .abc(.uppercased)
-                                case .cantonese(.lowercased):
-                                        return .cantonese(.uppercased)
-                                case .saamPing(.lowercased):
-                                        return .saamPing(.uppercased)
-                                default:
-                                        return .cantonese(.lowercased)
+                        let newCase: KeyboardCase = {
+                                switch keyboardCase {
+                                case .lowercased:
+                                        return .uppercased
+                                case .uppercased:
+                                        return .lowercased
+                                case .capsLocked:
+                                        return .lowercased
                                 }
                         }()
-                        updateKeyboardType(to: newKeyboardType)
+                        updateKeyboardCase(to: newCase)
                         AudioFeedback.perform(.modify)
                 case .doubleShift:
-                        let newKeyboardType: KeyboardType = {
-                                switch keyboardType {
-                                case .abc(.capsLocked):
-                                        return .abc(.lowercased)
-                                case .cantonese(.capsLocked):
-                                        return .cantonese(.lowercased)
-                                case .saamPing(.capsLocked):
-                                        return .saamPing(.lowercased)
-                                case .abc(.lowercased), .abc(.uppercased):
-                                        return .abc(.capsLocked)
-                                case .cantonese(.lowercased), .cantonese(.uppercased):
-                                        return .cantonese(.capsLocked)
-                                case .saamPing(.lowercased), .saamPing(.uppercased):
-                                        return .saamPing(.capsLocked)
-                                default:
-                                        return .cantonese(.capsLocked)
+                        let newCase: KeyboardCase = {
+                                switch keyboardCase {
+                                case .lowercased:
+                                        return .capsLocked
+                                case .uppercased:
+                                        return .capsLocked
+                                case .capsLocked:
+                                        return .lowercased
                                 }
                         }()
-                        updateKeyboardType(to: newKeyboardType)
+                        updateKeyboardCase(to: newCase)
                         AudioFeedback.perform(.modify)
                 case .tab:
                         textDocumentProxy.insertText("\t")
-                case .transform(let keyboardType):
-                        updateKeyboardType(to: keyboardType)
                 case .dismiss:
                         dismissKeyboard()
                 case .select(let candidate):
                         insert(candidate.text)
-                        adjustKeyboardType()
+                        adjustKeyboard()
                         aftercareSelected(candidate)
                 case .paste:
                         guard UIPasteboard.general.hasStrings else { return }
@@ -282,14 +264,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: text.count)
                 }
         }
-        private func adjustKeyboardType() {
-                switch keyboardType {
-                case .abc(.uppercased):
-                        updateKeyboardType(to: .abc(.lowercased))
-                case .cantonese(.uppercased):
-                        updateKeyboardType(to: .cantonese(.lowercased))
-                case .candidateBoard where !(inputStage.isBuffering):
-                        updateKeyboardType(to: .cantonese(.lowercased))
+        private func adjustKeyboard() {
+                switch keyboardCase {
+                case .lowercased:
+                        break
+                case .uppercased:
+                        updateKeyboardCase(to: .lowercased)
+                case .capsLocked:
+                        break
+                }
+                switch keyboardForm {
+                case .candidateBoard:
+                        guard !(inputStage.isBuffering) else { return }
+                        updateKeyboardForm(to: .alphabet)
                 default:
                         break
                 }
@@ -438,9 +425,31 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Properties
 
+        @Published private(set) var inputMethodMode: InputMethodMode = .cantonese
+        func toggleInputMethodMode() {
+                inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
+                updateReturnKeyText()
+                updateSpaceText()
+        }
+
+        @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabet
+        @Published private(set) var keyboardForm: KeyboardForm = .alphabet
+        func updateKeyboardForm(to form: KeyboardForm) {
+                previousKeyboardForm = keyboardForm
+                keyboardForm = form
+                updateReturnKeyText()
+                updateSpaceText()
+        }
+
+        @Published private(set) var keyboardCase: KeyboardCase = .lowercased
+        func updateKeyboardCase(to newCase: KeyboardCase) {
+                keyboardCase = newCase
+                updateSpaceText()
+        }
+
         @Published private(set) var returnKeyText: String = "換行"
         private func updateReturnKeyText() {
-                let newText: String = textDocumentProxy.returnKeyType.returnKeyText(isABC: keyboardType.isABCMode, isSimplified: Options.characterStandard == .simplified, isBuffering: inputStage.isBuffering)
+                let newText: String = textDocumentProxy.returnKeyType.returnKeyText(isABC: inputMethodMode.isABC, isSimplified: Options.characterStandard.isSimplified, isBuffering: inputStage.isBuffering)
                 if returnKeyText != newText {
                         returnKeyText = newText
                 }
@@ -448,16 +457,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var spaceText: String = "粵拼"
         private func updateSpaceText() {
                 let newText: String = {
-                        let isSimplified: Bool = Options.characterStandard == .simplified
-                        switch keyboardType {
-                        case .abc:
-                                return "ABC"
-                        case .cantonese(.capsLocked), .saamPing(.capsLocked):
-                                return isSimplified ? "大写锁定" : "大寫鎖定"
-                        case .cantonese(.uppercased), .saamPing(.uppercased):
-                                return "全形空格"
-                        default:
+                        guard inputMethodMode.isCantonese else { return "ABC" }
+                        let isSimplified: Bool = Options.characterStandard.isSimplified
+                        switch keyboardCase {
+                        case .lowercased:
                                 return isSimplified ? "粤拼·简化字" : "粵拼"
+                        case .uppercased:
+                                return "全形空格"
+                        case .capsLocked:
+                                return isSimplified ? "大写锁定" : "大寫鎖定"
                         }
                 }()
                 if spaceText != newText {
@@ -476,49 +484,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var widthUnit: CGFloat = 37.5
         @Published private(set) var heightUnit: CGFloat = 53
         private func updateScreenSize() {
+                // FIXME: Use safe area size instead
                 screenSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
                 widthUnit = screenSize.width / 10.0
                 // TODO: Responsible height
                 heightUnit = 53
-        }
-
-        @Published private(set) var previousKeyboardType: KeyboardType = .cantonese(.lowercased)
-        @Published private(set) var keyboardType: KeyboardType = {
-                switch Options.keyboardLayout {
-                case .qwerty:
-                        return .cantonese(.lowercased)
-                case .saamPing:
-                        return .saamPing(.lowercased)
-                case .tenKey:
-                        return .tenKeyCantonese
-                }
-        }()
-        func updateKeyboardType(to type: KeyboardType) {
-                previousKeyboardType = keyboardType
-                keyboardType = type
-                updateReturnKeyText()
-                updateSpaceText()
-        }
-        private var askedKeyboardType: KeyboardType {
-                switch textDocumentProxy.keyboardType {
-                case .numberPad, .asciiCapableNumberPad:
-                        return keyboardInterface.isCompact ? .numberPad : .numeric
-                case .decimalPad:
-                        return keyboardInterface.isCompact ? .decimalPad : .numeric
-                case .numbersAndPunctuation:
-                        return .numeric
-                case .emailAddress, .URL:
-                        return .abc(.lowercased)
-                default:
-                        switch Options.keyboardLayout {
-                        case .qwerty:
-                                return .cantonese(.lowercased)
-                        case .saamPing:
-                                return .saamPing(.lowercased)
-                        case .tenKey:
-                                return .tenKeyCantonese
-                        }
-                }
         }
 
         private(set) lazy var appearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light

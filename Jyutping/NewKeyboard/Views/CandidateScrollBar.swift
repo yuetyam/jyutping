@@ -42,7 +42,7 @@ struct CandidateScrollBar: View {
                         .frame(width: expanderWidth, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                context.updateKeyboardType(to: .candidateBoard)
+                                context.updateKeyboardForm(to: .candidateBoard)
                         }
                 }
         }

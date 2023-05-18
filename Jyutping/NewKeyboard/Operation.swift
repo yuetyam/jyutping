@@ -12,7 +12,6 @@ enum Operation: Hashable {
         case shift
         case doubleShift
         case tab
-        case transform(KeyboardType)
         case dismiss
         case select(Candidate)
 

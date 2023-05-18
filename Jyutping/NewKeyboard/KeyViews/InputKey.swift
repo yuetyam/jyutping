@@ -1,8 +1,14 @@
 import SwiftUI
 
-struct LetterKey: View {
+struct InputKey: View {
 
-        let key: KeyUnit
+        init(key: KeyUnit, widthUnitTimes: CGFloat = 1) {
+                self.key = key
+                self.widthUnitTimes = widthUnitTimes
+        }
+
+        private let key: KeyUnit
+        private let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -43,7 +49,7 @@ struct LetterKey: View {
                                 KeyElementView(element: key.primary).font(.title2)
                         }
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

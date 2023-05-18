@@ -33,7 +33,7 @@ struct SettingsView: View {
                         .background(Material.ultraThin)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                context.updateKeyboardType(to: context.previousKeyboardType)
+                                context.updateKeyboardForm(to: context.previousKeyboardForm)
                         }
                         List {
                                 Section {
