@@ -4,8 +4,6 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>LSHasLocalizedDisplayName</key>
-	<true/>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>

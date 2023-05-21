@@ -1,11 +1,11 @@
 import AudioToolbox
 
-enum AudioFeedback {
+enum AudioFeedback: Int {
 
         case input
         case delete
         case modify
-        
+
         private var soundID: SystemSoundID {
                 switch self {
                 case .input : return 1123
@@ -13,31 +13,9 @@ enum AudioFeedback {
                 case .modify: return 1156
                 }
         }
-        
-        static func play(for keyboardEvent: KeyboardEvent) {
-                guard isAudioFeedbackOn else { return }
-                switch keyboardEvent {
-                case .none:
-                        break
-                case .input, .text, .hidden(.text), .space, .tab:
-                        AudioServicesPlaySystemSound(Self.input.soundID)
-                case .backspace, .hidden(.backspace):
-                        AudioServicesPlaySystemSound(Self.delete.soundID)
-                case .capsLock, .globe, .keyboard, .newLine, .shift, .transform:
-                        AudioServicesPlaySystemSound(Self.modify.soundID)
-                default:
-                        AudioServicesPlaySystemSound(Self.input.soundID)
-                }
-        }
-        
+
         static func perform(_ feedback: AudioFeedback) {
-                guard isAudioFeedbackOn else { return }
+                guard Options.isAudioFeedbackOn else { return }
                 AudioServicesPlaySystemSound(feedback.soundID)
-        }
-        
-        private(set) static var isAudioFeedbackOn: Bool = UserDefaults.standard.bool(forKey: "audio_feedback")
-        static func updateAudioFeedbackStatus(to newState: Bool) {
-                isAudioFeedbackOn = newState
-                UserDefaults.standard.set(newState, forKey: "audio_feedback")
         }
 }

@@ -7,13 +7,19 @@ enum Operation: Hashable {
         case space
         case doubleSpace
         case backspace
-        case clear
+        case clearBuffer
         case `return`
         case shift
         case doubleShift
         case tab
-        case transform(KeyboardIdiom)
         case dismiss
         case select(Candidate)
-        case tenKey(Combination)
+
+        case paste
+        case clearClipboard
+        case clearText
+        case moveCursorBackward
+        case moveCursorForward
+        case jumpToHead
+        case jumpToTail
 }

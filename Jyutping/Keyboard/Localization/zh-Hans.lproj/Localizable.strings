@@ -1,23 +1,23 @@
-// Simplified Chinese (zh-Hans)
-
-
-// MARK: - Settings
-
 "Traditional Characters" = "傳統漢字";
 "Traditional Characters, Hong Kong" = "傳統漢字・香港";
 "Traditional Characters, Taiwan" = "傳統漢字・臺灣";
 "Simplified Characters" = "简化字";
 
-"Audio Feedback on Click" = "按鍵聲音反饋";
-"Haptic Feedback on Click" = "按鍵振動反饋";
-"Haptic Feedback requires Full Access" = "振動反饋需啓用「完全訪問」";
+"Keyboard Feedback" = "鍵盤回應";
+"Sound" = "聲音";
+"Haptic" = "觸感";
+"Haptic.None" = "無";
+"Haptic.Light" = "輕";
+"Haptic.Medium" = "中";
+"Haptic.Heavy" = "重";
+"Haptic Feedback requires Full Access" = "觸感回應需啓用「全權取用」";
 
-"Emoji Suggestions" = "繪文字（Emoji）候選詞";
+"Emoji Suggestions" = "繪文字(Emoji)候選詞";
 
 "Keyboard Layout" = "鍵盤佈局";
-"QWERTY" = "全鍵盤・QWERTY";
-"SaamPing" = "三拼";
-"10 Key" = "九宮格";
+"KeyboardLayout.QWERTY" = "全鍵盤・QWERTY";
+"KeyboardLayout.SaamPing" = "三拼";
+"KeyboardLayout.10Key" = "九宮格";
 
 "Jyutping Display" = "粵拼顯示";
 "Above Candidates" = "候選詞之上";
@@ -37,32 +37,3 @@
 "DoubleSpaceShortcut.Option2" = "無";
 
 "Clear User Lexicon" = "清空個人詞庫";
-
-
-// MARK: - Accessibility
-
-// ToolBar
-"Keyboard Settings" = "键盘设置";
-"Keyboard Mode Switch" = "切换键盘模式";
-"Paste Clipboard content" = "粘贴";
-"Switch to Emoji layout" = "切换到 Emoji 布局";
-"Dismiss keyboard" = "收起键盘";
-"Expand Candidates board" = "展开更多候选词";
-"Current mode: English" = "当前模式：英语";
-"Current mode: Cantonese" = "当前模式：粤语";
-
-// Keyboard Keys
-"space bar" = "空格键";
-"return key" = "换行";
-"backspace key" = "删除";
-"shift key" = "shift";
-"Caps Locked" = "大写锁定";
-"Uppercased" = "大写";
-"Lowercased" = "小写";
-"Switch to Cantonese layout" = "粤拼";
-"Switch to English layout" = "英语";
-"Switch to Numbers layout" = "数字";
-"Switch to Symbols layout" = "符号";
-
-// Settings page
-"Switch back to Keyboard" = "返回";
