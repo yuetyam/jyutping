@@ -59,6 +59,8 @@ struct CandidateBoard: View {
                                                                 .frame(maxWidth: .infinity)
                                                                 .contentShape(Rectangle())
                                                                 .onTapGesture {
+                                                                        AudioFeedback.inputed()
+                                                                        context.triggerSelectionHapticFeedback()
                                                                         context.operate(.select(candidate))
                                                                 }
                                                         }

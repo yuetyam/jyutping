@@ -91,10 +91,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         private func insert(_ text: String) {
-                let location: Int = (text as NSString).length
-                let range: NSRange = NSRange(location: location, length: 0)
-                textDocumentProxy.setMarkedText(text, selectedRange: range)
+                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
                 textDocumentProxy.unmarkText()
+                textDocumentProxy.insertText(text)
         }
 
 
@@ -172,7 +171,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         insert(candidate.text)
-                        textDocumentProxy.insertText(candidate.text)
                         adjustKeyboard()
                         aftercareSelected(candidate)
                 case .doubleSpace:

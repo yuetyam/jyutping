@@ -107,6 +107,8 @@ struct SettingsView: View {
                                                         .pickerStyle(.segmented)
                                                         .fixedSize()
                                                         .onChange(of: hapticFeedback) { newValue in
+                                                                AudioFeedback.modified()
+                                                                context.triggerSelectionHapticFeedback()
                                                                 context.updateHapticFeedbackMode(to: newValue)
                                                         }
                                                         /*

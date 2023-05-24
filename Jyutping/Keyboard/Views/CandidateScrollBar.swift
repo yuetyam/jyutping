@@ -25,6 +25,8 @@ struct CandidateScrollBar: View {
                                                 .frame(width: candidateWidth(of: candidate))
                                                 .contentShape(Rectangle())
                                                 .onTapGesture {
+                                                        AudioFeedback.inputed()
+                                                        context.triggerSelectionHapticFeedback()
                                                         context.operate(.select(candidate))
                                                 }
                                         }
