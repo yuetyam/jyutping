@@ -17,8 +17,10 @@ struct CandidateScrollBar: View {
                                                                 Text(verbatim: candidate.isCantonese ? candidate.romanization : String.space)
                                                                         .minimumScaleFactor(0.2)
                                                                         .lineLimit(1)
-                                                                        .font(.caption2)
-                                                                Text(verbatim: candidate.text).lineLimit(1)
+                                                                        .font(.romanization)
+                                                                Text(verbatim: candidate.text)
+                                                                        .lineLimit(1)
+                                                                        .font(.candidate)
                                                         }
                                                         .padding(1)
                                                 }
