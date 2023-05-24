@@ -93,6 +93,7 @@ struct SpaceKey: View {
                         if isTouching {
                                 if longPressBuffer > 3 {
                                         if !isEngagedLongPress {
+                                                context.triggerHapticFeedback()
                                                 isEngagedLongPress = true
                                         }
                                 } else {

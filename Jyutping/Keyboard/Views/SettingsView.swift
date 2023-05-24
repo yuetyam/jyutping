@@ -8,7 +8,7 @@ struct SettingsView: View {
 
         @State private var selectedCharacterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
-        @State private var hapticFeedback: HapticFeedback = .disabled
+        @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
         @State private var selectedCommentStyle: CommentStyle = Options.commentStyle

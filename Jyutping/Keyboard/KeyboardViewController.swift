@@ -559,19 +559,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private(set) lazy var hapticFeedbackMode: HapticFeedback = {
                 guard hasFullAccess else { return .disabled }
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.HapticFeedback)
-                switch savedValue {
-                case HapticFeedback.disabled.rawValue:
-                        return .disabled
-                case HapticFeedback.light.rawValue:
-                        return .light
-                case HapticFeedback.medium.rawValue:
-                        return .medium
-                case HapticFeedback.heavy.rawValue:
-                        return .heavy
-                default:
-                        return .disabled
-                }
+                return HapticFeedback.fetchSavedMode()
         }()
         func updateHapticFeedbackMode(to mode: HapticFeedback) {
                 hapticFeedbackMode = mode
