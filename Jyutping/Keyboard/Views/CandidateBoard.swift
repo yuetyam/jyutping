@@ -31,7 +31,7 @@ struct CandidateBoard: View {
                 case .emoji, .symbol:
                         return 44
                 default:
-                        return (CGFloat(candidate.text.count) * 20.0) + 20.0
+                        return CGFloat(candidate.text.count * 20 + 20)
                 }
         }
 
@@ -51,8 +51,10 @@ struct CandidateBoard: View {
                                                                                 Text(verbatim: candidate.isCantonese ? candidate.romanization : String.space)
                                                                                         .minimumScaleFactor(0.2)
                                                                                         .lineLimit(1)
-                                                                                        .font(.caption2)
-                                                                                Text(verbatim: candidate.text).lineLimit(1)
+                                                                                        .font(.romanization)
+                                                                                Text(verbatim: candidate.text)
+                                                                                        .lineLimit(1)
+                                                                                        .font(.candidate)
                                                                         }
                                                                         .padding(4)
                                                                 }
@@ -73,7 +75,10 @@ struct CandidateBoard: View {
                         VStack {
                                 ZStack {
                                         Color.interactiveClear
-                                        Image(systemName: "chevron.up").font(.title3)
+                                        Image(systemName: "chevron.up")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 20, height: 20)
                                 }
                                 .frame(width: collapseWidth, height: collapseHeight)
                                 .contentShape(Rectangle())

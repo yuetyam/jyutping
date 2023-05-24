@@ -38,10 +38,13 @@ struct CandidateScrollBar: View {
                         ZStack {
                                 Color.interactiveClear
                                 HStack {
-                                        Rectangle().fill(Color.black).opacity(0.3).frame(width: 1, height: 32)
+                                        Rectangle().fill(Color.black).opacity(0.3).frame(width: 1, height: 24)
                                         Spacer()
                                 }
-                                Image(systemName: "chevron.down").font(.title3)
+                                Image(systemName: "chevron.down")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
                         }
                         .frame(width: expanderWidth, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
@@ -58,7 +61,7 @@ struct CandidateScrollBar: View {
                 case .emoji, .symbol:
                         return 44
                 default:
-                        return (CGFloat(candidate.text.count) * 20.0) + 20.0
+                        return CGFloat(candidate.text.count * 20 + 20)
                 }
         }
 }
