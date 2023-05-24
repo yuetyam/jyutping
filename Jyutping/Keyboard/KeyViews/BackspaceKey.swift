@@ -45,6 +45,8 @@ struct BackspaceKey: View {
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if !tapped {
+                                        AudioFeedback.deleted()
+                                        context.triggerHapticFeedback()
                                         context.operate(.backspace)
                                         tapped = true
                                 }
@@ -53,12 +55,16 @@ struct BackspaceKey: View {
                                 buffer = 0
                                 let horizontalTranslation = value.translation.width
                                 guard horizontalTranslation < -44 else { return }
+                                AudioFeedback.deleted()
+                                context.triggerHapticFeedback()
                                 context.operate(.clearBuffer)
                          }
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
                         if buffer > 3 {
+                                AudioFeedback.deleted()
+                                context.triggerHapticFeedback()
                                 context.operate(.backspace)
                         } else {
                                 buffer += 1

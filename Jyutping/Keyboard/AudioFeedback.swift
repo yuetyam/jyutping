@@ -1,21 +1,25 @@
 import AudioToolbox
 
-enum AudioFeedback: Int {
+enum AudioFeedback: SystemSoundID {
 
-        case input
-        case delete
-        case modify
-
-        private var soundID: SystemSoundID {
-                switch self {
-                case .input : return 1123
-                case .delete: return 1155
-                case .modify: return 1156
-                }
-        }
+        case input = 1123
+        case delete = 1155
+        case modify = 1156
 
         static func perform(_ feedback: AudioFeedback) {
                 guard Options.isAudioFeedbackOn else { return }
-                AudioServicesPlaySystemSound(feedback.soundID)
+                AudioServicesPlaySystemSound(feedback.rawValue)
+        }
+        static func inputed() {
+                guard Options.isAudioFeedbackOn else { return }
+                AudioServicesPlaySystemSound(Self.input.rawValue)
+        }
+        static func deleted() {
+                guard Options.isAudioFeedbackOn else { return }
+                AudioServicesPlaySystemSound(Self.delete.rawValue)
+        }
+        static func modified() {
+                guard Options.isAudioFeedbackOn else { return }
+                AudioServicesPlaySystemSound(Self.modify.rawValue)
         }
 }

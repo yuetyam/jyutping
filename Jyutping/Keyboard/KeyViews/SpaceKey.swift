@@ -51,6 +51,8 @@ struct SpaceKey: View {
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { value, touched, transaction in
                                 if !touched {
+                                        AudioFeedback.inputed()
+                                        context.triggerHapticFeedback()
                                         touched = true
                                         context.updateTouchedLocation(to: value.startLocation)
                                 } else if isEngagedLongPress {
@@ -61,6 +63,8 @@ struct SpaceKey: View {
                                                 // TODO: Dragging in markedText
                                                 context.operate(.clearBuffer)
                                         } else {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
                                                 if distance > 0 {
                                                         context.operate(.moveCursorForward)
                                                 } else {
@@ -76,6 +80,7 @@ struct SpaceKey: View {
                                         isEngagedLongPress = false
                                 } else {
                                         if isInTheMediumOfDoubleTapping {
+                                                isInTheMediumOfDoubleTapping = false
                                                 context.operate(.doubleSpace)
                                         } else {
                                                 isInTheMediumOfDoubleTapping = true

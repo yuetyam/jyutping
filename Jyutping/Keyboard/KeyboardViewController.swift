@@ -28,12 +28,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         override func viewWillAppear(_ animated: Bool) {
                 Engine.prepare()
+                instantiateHapticFeedbacks()
         }
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
         }
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
+                releaseHapticFeedbacks()
                 candidates = []
                 markedText = .empty
                 bufferText = .empty
@@ -152,7 +154,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 appendBufferText(text)
                         }
-                        AudioFeedback.perform(.input)
                 case .separator:
                         appendBufferText("'")
                 case .punctuation(let text):
@@ -162,7 +163,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 // TODO: Full-width space?
                                 let spaceValue: String = " "
                                 textDocumentProxy.insertText(spaceValue)
-                                AudioFeedback.perform(.input)
                                 return
                         }
                         guard let candidate = candidates.first else {
@@ -178,14 +178,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .doubleSpace:
                         textDocumentProxy.deleteBackward()
                         textDocumentProxy.insertText("。")
-                        AudioFeedback.perform(.input)
                 case .backspace:
                         if inputStage.isBuffering {
                                 dropLastBufferCharacter()
                         } else {
                                 textDocumentProxy.deleteBackward()
                         }
-                        AudioFeedback.perform(.delete)
                 case .clearBuffer:
                         clearBufferText()
                 case .return:
@@ -208,7 +206,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         }()
                         updateKeyboardCase(to: newCase)
-                        AudioFeedback.perform(.modify)
                 case .doubleShift:
                         let newCase: KeyboardCase = {
                                 switch keyboardCase {
@@ -221,7 +218,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         }()
                         updateKeyboardCase(to: newCase)
-                        AudioFeedback.perform(.modify)
                 case .tab:
                         textDocumentProxy.insertText("\t")
                 case .dismiss:
@@ -521,26 +517,42 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Haptic Feedback
 
+        private lazy var selectionHapticFeedback: UISelectionFeedbackGenerator? = nil
         private lazy var hapticFeedback: UIImpactFeedbackGenerator? = nil
-        private func instantiateHapticFeedback() {
+        private func instantiateHapticFeedbacks() {
                 switch hapticFeedbackMode {
                 case .disabled:
+                        selectionHapticFeedback = nil
                         hapticFeedback = nil
                 case .light:
+                        selectionHapticFeedback = UISelectionFeedbackGenerator()
                         hapticFeedback = UIImpactFeedbackGenerator(style: .light)
                 case .medium:
+                        selectionHapticFeedback = UISelectionFeedbackGenerator()
                         hapticFeedback = UIImpactFeedbackGenerator(style: .medium)
                 case .heavy:
+                        selectionHapticFeedback = UISelectionFeedbackGenerator()
                         hapticFeedback = UIImpactFeedbackGenerator(style: .heavy)
                 }
+                selectionHapticFeedback?.prepare()
+                hapticFeedback?.prepare()
+        }
+        func prepareSelectionHapticFeedback() {
+                selectionHapticFeedback?.prepare()
         }
         func prepareHapticFeedback() {
                 hapticFeedback?.prepare()
         }
+        func triggerSelectionHapticFeedback() {
+                selectionHapticFeedback?.selectionChanged()
+                prepareSelectionHapticFeedback()
+        }
         func triggerHapticFeedback() {
                 hapticFeedback?.impactOccurred()
+                prepareHapticFeedback()
         }
-        private func releaseHapticFeedback() {
+        private func releaseHapticFeedbacks() {
+                selectionHapticFeedback = nil
                 hapticFeedback = nil
         }
 
@@ -564,6 +576,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 hapticFeedbackMode = mode
                 let value: Int = mode.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.HapticFeedback)
-                instantiateHapticFeedback()
+                instantiateHapticFeedbacks()
         }
 }

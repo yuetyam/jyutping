@@ -11,6 +11,8 @@ struct ToolBar: View {
                         ToolBarItem(imageName: "gear", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0))
                                 .contentShape(Rectangle())
                                 .onTapGesture {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
                                         context.updateKeyboardForm(to: .settings)
                                 }
 
@@ -25,7 +27,9 @@ struct ToolBar: View {
                         .frame(width: itemWidth, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                                print("No Emoji Board")
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                // TODO: Navigate to EmojiBoard
                         }
 
                         Spacer()
@@ -36,18 +40,24 @@ struct ToolBar: View {
                         .frame(width: 72, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
+                                AudioFeedback.modified()
+                                context.triggerSelectionHapticFeedback()
                                 context.toggleInputMethodMode()
                         }
 
                         Spacer()
                         ToolBarItem(imageName: "arrow.left.and.line.vertical.and.arrow.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 17, leading: 0, bottom: 17, trailing: 0))
                                 .onTapGesture {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
                                         context.updateKeyboardForm(to: .editingPanel)
                                 }
 
                         Spacer()
                         ToolBarItem(imageName: "keyboard.chevron.compact.down", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 16, leading: 0, bottom: 17, trailing: 0))
                                 .onTapGesture {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
                                         context.dismissKeyboard()
                                 }
                 }

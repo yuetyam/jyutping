@@ -11,6 +11,8 @@ struct HiddenLetterKey: View {
                         .frame(height: context.heightUnit)
                         .frame(maxWidth: .infinity)
                         .onTapGesture {
+                                AudioFeedback.inputed()
+                                context.triggerHapticFeedback()
                                 let text: String = {
                                         switch letter {
                                         case .letterA:

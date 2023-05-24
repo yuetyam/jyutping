@@ -61,6 +61,8 @@ struct EditingPanel: View {
                                         .gesture(DragGesture(minimumDistance: 0)
                                                 .updating($isClearingClipboard) { _, tapped, _ in
                                                         if !tapped {
+                                                                AudioFeedback.modified()
+                                                                context.triggerHapticFeedback()
                                                                 tapped = true
                                                         }
                                                 }
@@ -86,6 +88,8 @@ struct EditingPanel: View {
                                         .gesture(DragGesture(minimumDistance: 0)
                                                 .updating($isPasting) { _, tapped, _ in
                                                         if !tapped {
+                                                                AudioFeedback.inputed()
+                                                                context.triggerHapticFeedback()
                                                                 tapped = true
                                                         }
                                                 }
@@ -110,6 +114,8 @@ struct EditingPanel: View {
                                         .gesture(DragGesture(minimumDistance: 0)
                                                 .updating($isMovingCursorBackward) { _, tapped, _ in
                                                         if !tapped {
+                                                                AudioFeedback.modified()
+                                                                context.triggerHapticFeedback()
                                                                 tapped = true
                                                         }
                                                 }
@@ -131,6 +137,8 @@ struct EditingPanel: View {
                                         .gesture(DragGesture(minimumDistance: 0)
                                                 .updating($isMovingCursorForward) { _, tapped, _ in
                                                         if !tapped {
+                                                                AudioFeedback.modified()
+                                                                context.triggerHapticFeedback()
                                                                 tapped = true
                                                         }
                                                 }
@@ -155,6 +163,8 @@ struct EditingPanel: View {
                                         .gesture(DragGesture(minimumDistance: 0)
                                                 .updating($isJumpingToHead) { _, tapped, _ in
                                                         if !tapped {
+                                                                AudioFeedback.modified()
+                                                                context.triggerHapticFeedback()
                                                                 tapped = true
                                                         }
                                                 }
@@ -176,6 +186,8 @@ struct EditingPanel: View {
                                         .gesture(DragGesture(minimumDistance: 0)
                                                 .updating($isJumpingToTail) { _, tapped, _ in
                                                         if !tapped {
+                                                                AudioFeedback.modified()
+                                                                context.triggerHapticFeedback()
                                                                 tapped = true
                                                         }
                                                 }
@@ -205,6 +217,8 @@ struct EditingPanel: View {
                                 .gesture(DragGesture(minimumDistance: 0)
                                         .updating($isNavigatingBack) { _, tapped, _ in
                                                 if !tapped {
+                                                        AudioFeedback.modified()
+                                                        context.triggerHapticFeedback()
                                                         tapped = true
                                                 }
                                         }
@@ -226,6 +240,8 @@ struct EditingPanel: View {
                                 .gesture(DragGesture(minimumDistance: 0)
                                         .updating($isBackspacing) { _, tapped, _ in
                                                 if !tapped {
+                                                        AudioFeedback.deleted()
+                                                        context.triggerHapticFeedback()
                                                         context.operate(.backspace)
                                                         tapped = true
                                                 }
@@ -237,6 +253,8 @@ struct EditingPanel: View {
                                 .onReceive(timer) { _ in
                                         guard isBackspacing else { return }
                                         if buffer > 3 {
+                                                AudioFeedback.deleted()
+                                                context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {
                                                 buffer += 1
@@ -259,6 +277,8 @@ struct EditingPanel: View {
                                 .gesture(DragGesture(minimumDistance: 0)
                                         .updating($isClearingText) { _, tapped, _ in
                                                 if !tapped {
+                                                        AudioFeedback.deleted()
+                                                        context.triggerHapticFeedback()
                                                         tapped = true
                                                 }
                                         }
@@ -280,6 +300,8 @@ struct EditingPanel: View {
                                 .gesture(DragGesture(minimumDistance: 0)
                                         .updating($isReturning) { _, tapped, _ in
                                                 if !tapped {
+                                                        AudioFeedback.modified()
+                                                        context.triggerHapticFeedback()
                                                         tapped = true
                                                 }
                                         }

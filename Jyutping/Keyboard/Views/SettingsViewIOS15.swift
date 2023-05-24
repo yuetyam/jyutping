@@ -32,11 +32,15 @@ struct SettingsViewIOS15: View {
                         .background(Material.ultraThin)
                         .contentShape(Rectangle())
                         .onTapGesture {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: context.previousKeyboardForm)
                         }
                         List {
                                 Section {
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCharacterStandard = .traditional
                                                 Options.updateCharacterStandard(to: .traditional)
                                         } label: {
@@ -47,6 +51,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCharacterStandard = .hongkong
                                                 Options.updateCharacterStandard(to: .hongkong)
                                         } label: {
@@ -57,6 +63,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCharacterStandard = .taiwan
                                                 Options.updateCharacterStandard(to: .taiwan)
                                         } label: {
@@ -67,6 +75,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCharacterStandard = .simplified
                                                 Options.updateCharacterStandard(to: .simplified)
                                         } label: {
@@ -80,9 +90,7 @@ struct SettingsViewIOS15: View {
                                 Section {
                                         Toggle("Sound", isOn: $isAudioFeedbackOn)
                                                 .onChange(of: isAudioFeedbackOn) { newValue in
-                                                        DispatchQueue.preferences.async {
-                                                                Options.updateAudioFeedbackStatus(isOn: newValue)
-                                                        }
+                                                        Options.updateAudioFeedbackStatus(isOn: newValue)
                                                 }
                                         if context.isPhone {
                                                 HStack {
@@ -97,13 +105,13 @@ struct SettingsViewIOS15: View {
                                                         .labelsHidden()
                                                         .pickerStyle(.segmented)
                                                         .fixedSize()
+                                                        .onChange(of: hapticFeedback) { newValue in
+                                                                context.updateHapticFeedbackMode(to: newValue)
+                                                        }
                                                         /*
                                                         .scaledToFit()
                                                         .scaleEffect(x: 0.9, y: 0.9, anchor: .trailing)
                                                         */
-                                                        .onChange(of: hapticFeedback) { newValue in
-                                                                // TODO: perform change
-                                                        }
                                                 }
                                                 .disabled(!(context.hasFullAccess))
                                         }
@@ -118,14 +126,14 @@ struct SettingsViewIOS15: View {
                                 Section {
                                         Toggle("Emoji Suggestions", isOn: $isEmojiSuggestionsOn)
                                                 .onChange(of: isEmojiSuggestionsOn) { newValue in
-                                                        DispatchQueue.preferences.async {
-                                                                Options.updateEmojiSuggestions(to: newValue)
-                                                        }
+                                                        Options.updateEmojiSuggestions(to: newValue)
                                                 }
                                 }
 
                                 Section {
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedKeyboardLayout = .qwerty
                                                 Options.updateKeyboardLayout(to: .qwerty)
                                         } label: {
@@ -136,6 +144,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedKeyboardLayout = .saamPing
                                                 Options.updateKeyboardLayout(to: .saamPing)
                                         } label: {
@@ -146,6 +156,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedKeyboardLayout = .tenKey
                                                 Options.updateKeyboardLayout(to: .tenKey)
                                         } label: {
@@ -161,6 +173,8 @@ struct SettingsViewIOS15: View {
 
                                 Section {
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentStyle = .aboveCandidates
                                                 Options.updateCommentStyle(to: .aboveCandidates)
                                         } label: {
@@ -171,6 +185,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentStyle = .belowCandidates
                                                 Options.updateCommentStyle(to: .belowCandidates)
                                         } label: {
@@ -181,6 +197,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentStyle = .noComments
                                                 Options.updateCommentStyle(to: .noComments)
                                         } label: {
@@ -196,6 +214,8 @@ struct SettingsViewIOS15: View {
 
                                 Section {
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentToneStyle = .normal
                                                 Options.updateCommentToneStyle(to: .normal)
                                         } label: {
@@ -206,6 +226,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentToneStyle = .superscript
                                                 Options.updateCommentToneStyle(to: .superscript)
                                         } label: {
@@ -216,6 +238,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentToneStyle = .subscript
                                                 Options.updateCommentToneStyle(to: .subscript)
                                         } label: {
@@ -226,6 +250,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentToneStyle = .noTones
                                                 Options.updateCommentToneStyle(to: .noTones)
                                         } label: {
@@ -241,6 +267,8 @@ struct SettingsViewIOS15: View {
 
                                 Section {
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedDoubleSpaceShortcut = .insertPeriod
                                                 Options.updateDoubleSpaceShortcut(to: .insertPeriod)
                                         } label: {
@@ -251,6 +279,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedDoubleSpaceShortcut = .insertIdeographicComma
                                                 Options.updateDoubleSpaceShortcut(to: .insertIdeographicComma)
                                         } label: {
@@ -261,6 +291,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedDoubleSpaceShortcut = .insertFullWidthSpace
                                                 Options.updateDoubleSpaceShortcut(to: .insertFullWidthSpace)
                                         } label: {
@@ -271,6 +303,8 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                         Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedDoubleSpaceShortcut = .doNothing
                                                 Options.updateDoubleSpaceShortcut(to: .doNothing)
                                         } label: {
@@ -288,6 +322,8 @@ struct SettingsViewIOS15: View {
                                         ZStack {
                                                 Menu {
                                                         Button(role: .destructive) {
+                                                                AudioFeedback.modified()
+                                                                context.triggerHapticFeedback()
                                                                 // TODO: perform clearing
                                                                 clearUserLexiconProgress = 0
                                                                 isPerformingClearUserLexicon = true

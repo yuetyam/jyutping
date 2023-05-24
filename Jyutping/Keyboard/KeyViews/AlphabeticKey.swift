@@ -43,6 +43,8 @@ struct AlphabeticKey: View {
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if !tapped {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
                                         tapped = true
                                 }
                         }
