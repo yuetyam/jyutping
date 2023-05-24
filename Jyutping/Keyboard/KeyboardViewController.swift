@@ -12,7 +12,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 super.viewDidLoad()
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = self.children.map({ $0.removeFromParent() })
-                updateScreenSize()
+                updateKeyboardSize()
                 updateReturnKeyText()
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 view.addSubview(motherBoard.view)
@@ -57,7 +57,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-                updateScreenSize()
+                updateKeyboardSize()
                 let newKeyboardAppearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light
                 if appearance != newKeyboardAppearance {
                         appearance = newKeyboardAppearance
@@ -476,15 +476,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private(set) lazy var isPhone: Bool = UITraitCollection.current.userInterfaceIdiom == .phone
         private(set) lazy var isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
 
-        @Published private(set) var screenSize: CGSize = CGSize(width: 375, height: 667)
+        @Published private(set) var keyboardWidth: CGFloat = 375
         @Published private(set) var widthUnit: CGFloat = 37.5
         @Published private(set) var heightUnit: CGFloat = 53
-        private func updateScreenSize() {
-                // FIXME: Use safe area size instead
-                screenSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
-                widthUnit = screenSize.width / 10.0
-                // TODO: Responsible height
-                heightUnit = 53
+        private func updateKeyboardSize() {
+                let screenWidth: CGFloat = view.window?.windowScene?.screen.bounds.size.width ?? UIScreen.main.bounds.size.width
+                let isPhoneLandscape: Bool = traitCollection.verticalSizeClass == .compact
+                let horizontalInset: CGFloat = isPhoneLandscape ? 150 : 0
+                keyboardWidth = screenWidth - horizontalInset
+                widthUnit = keyboardWidth / 10.0
+                heightUnit = isPhoneLandscape ? 40 : 53
         }
 
         private(set) lazy var appearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light
@@ -493,8 +494,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 switch traitCollection.userInterfaceIdiom {
                 case .pad:
                         guard traitCollection.horizontalSizeClass != .compact else { return .padFloating }
-                        let width: CGFloat = UIScreen.main.bounds.size.width
-                        let height: CGFloat = UIScreen.main.bounds.size.height
+                        let width: CGFloat = view.window?.windowScene?.screen.bounds.size.width ?? UIScreen.main.bounds.size.width
+                        let height: CGFloat = view.window?.windowScene?.screen.bounds.size.width ?? UIScreen.main.bounds.size.height
                         let isPortrait: Bool = width < height
                         let minSide: CGFloat = min(width, height)
                         if minSide > 840 {

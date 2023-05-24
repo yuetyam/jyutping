@@ -30,7 +30,7 @@ struct CandidateScrollBar: View {
                                         }
                                 }
                         }
-                        .frame(width: context.screenSize.width - expanderWidth, height: Constant.toolBarHeight)
+                        .frame(width: context.keyboardWidth - expanderWidth, height: Constant.toolBarHeight)
                         ZStack {
                                 Color.interactiveClear
                                 HStack {

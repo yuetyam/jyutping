@@ -9,7 +9,7 @@ struct CandidateBoard: View {
         private let collapseHeight: CGFloat = 50
 
         private func rows(of candidates: [Candidate]) -> [[Candidate]] {
-                let maxWidth: CGFloat = context.screenSize.width - collapseWidth
+                let maxWidth: CGFloat = context.keyboardWidth - collapseWidth
                 var rows: [[Candidate]] = []
                 var row: [Candidate] = []
                 var rowWidth: CGFloat = 0
