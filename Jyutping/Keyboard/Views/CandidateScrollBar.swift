@@ -61,7 +61,7 @@ struct CandidateScrollBar: View {
                 case .emoji, .symbol:
                         return 44
                 default:
-                        return CGFloat(candidate.text.count * 20 + 20)
+                        return CGFloat(candidate.text.count * 20 + 24)
                 }
         }
 }

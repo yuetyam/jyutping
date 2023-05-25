@@ -16,6 +16,8 @@ struct MotherBoard: View {
                         EditingPanel().environmentObject(context)
                 case .candidateBoard:
                         CandidateBoard().environmentObject(context)
+                case .emojiBoard:
+                        EmojiBoard().environmentObject(context)
                 case .numeric:
                         NumericKeyboard().environmentObject(context)
                 case .symbolic:

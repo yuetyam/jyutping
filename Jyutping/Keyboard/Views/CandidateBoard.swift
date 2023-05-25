@@ -6,7 +6,7 @@ struct CandidateBoard: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         private let collapseWidth: CGFloat = 44
-        private let collapseHeight: CGFloat = 50
+        private let collapseHeight: CGFloat = 48
 
         private func rows(of candidates: [Candidate]) -> [[Candidate]] {
                 let maxWidth: CGFloat = context.keyboardWidth - collapseWidth
@@ -31,7 +31,7 @@ struct CandidateBoard: View {
                 case .emoji, .symbol:
                         return 44
                 default:
-                        return CGFloat(candidate.text.count * 20 + 20)
+                        return CGFloat(candidate.text.count * 20 + 24)
                 }
         }
 

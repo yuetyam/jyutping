@@ -60,6 +60,7 @@
 		37993A6D2A0EA36C00BC8E35 /* InputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A6C2A0EA36C00BC8E35 /* InputKey.swift */; };
 		37A5D00529A888E700256042 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37A5D00429A888E700256042 /* Release.xcconfig */; };
 		37A5D00729A888F900256042 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37A5D00629A888F900256042 /* Debug.xcconfig */; };
+		37A9ECF72A1E93E100F63732 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */; };
 		37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775429D96FEC007F07D7 /* MacHansMessView.swift */; };
 		37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */; };
 		37B1765E2A049B6800A4E531 /* AlphabeticKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */; };
@@ -319,6 +320,7 @@
 		37993A6C2A0EA36C00BC8E35 /* InputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputKey.swift; sourceTree = "<group>"; };
 		37A5D00429A888E700256042 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		37A5D00629A888F900256042 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
 		37AD775429D96FEC007F07D7 /* MacHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHansMessView.swift; sourceTree = "<group>"; };
 		37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHansMessView.swift; sourceTree = "<group>"; };
 		37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeticKeyboard.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 				370563252A0168D000872AA4 /* ToolBar.swift */,
 				37B7B4172A06178400B3AB08 /* CandidateScrollBar.swift */,
 				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
+				37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */,
 				37DE32992A02613B0066D03A /* SettingsView.swift */,
 				370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */,
 				37DE32892A02187B0066D03A /* ToolBarItem.swift */,
@@ -1317,6 +1320,7 @@
 				37F72E7E2A14F4630013AC85 /* AlphabeticKey.swift in Sources */,
 				37B7B4182A06178400B3AB08 /* CandidateScrollBar.swift in Sources */,
 				37DE329A2A02613B0066D03A /* SettingsView.swift in Sources */,
+				37A9ECF72A1E93E100F63732 /* EmojiBoard.swift in Sources */,
 				37B1765E2A049B6800A4E531 /* AlphabeticKeyboard.swift in Sources */,
 				3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */,
 				37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */,

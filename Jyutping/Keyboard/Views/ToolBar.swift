@@ -29,7 +29,7 @@ struct ToolBar: View {
                         .onTapGesture {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
-                                // TODO: Navigate to EmojiBoard
+                                context.updateKeyboardForm(to: .emojiBoard)
                         }
 
                         Spacer()
