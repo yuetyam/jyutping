@@ -33,11 +33,13 @@ struct EditingPanel: View {
         @GestureState private var isJumpingToHead: Bool = false
         @GestureState private var isJumpingToTail: Bool = false
         @GestureState private var isNavigatingBack: Bool = false
+        @GestureState private var isBackspacing: Bool = false
         @GestureState private var isClearingText: Bool = false
         @GestureState private var isReturning: Bool = false
 
-        @GestureState private var isBackspacing: Bool = false
-        @State private var buffer: Int = 0
+        @State private var backwardBuffer: Int = 0
+        @State private var forwardBuffer: Int = 0
+        @State private var backspaceBuffer: Int = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
@@ -116,13 +118,24 @@ struct EditingPanel: View {
                                                         if !tapped {
                                                                 AudioFeedback.modified()
                                                                 context.triggerHapticFeedback()
+                                                                context.operate(.moveCursorBackward)
                                                                 tapped = true
                                                         }
                                                 }
                                                 .onEnded { _ in
-                                                        context.operate(.moveCursorBackward)
+                                                        backwardBuffer = 0
                                                 }
                                         )
+                                        .onReceive(timer) { _ in
+                                                guard isMovingCursorBackward else { return }
+                                                if backwardBuffer > 3 {
+                                                        AudioFeedback.modified()
+                                                        context.triggerHapticFeedback()
+                                                        context.operate(.moveCursorBackward)
+                                                } else {
+                                                        backwardBuffer += 1
+                                                }
+                                        }
                                         ZStack {
                                                 Color.interactiveClear
                                                 RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -139,13 +152,24 @@ struct EditingPanel: View {
                                                         if !tapped {
                                                                 AudioFeedback.modified()
                                                                 context.triggerHapticFeedback()
+                                                                context.operate(.moveCursorForward)
                                                                 tapped = true
                                                         }
                                                 }
                                                 .onEnded { _ in
-                                                        context.operate(.moveCursorForward)
+                                                        forwardBuffer = 0
                                                 }
                                         )
+                                        .onReceive(timer) { _ in
+                                                guard isMovingCursorForward else { return }
+                                                if forwardBuffer > 3 {
+                                                        AudioFeedback.modified()
+                                                        context.triggerHapticFeedback()
+                                                        context.operate(.moveCursorForward)
+                                                } else {
+                                                        forwardBuffer += 1
+                                                }
+                                        }
                                 }
                                 .frame(maxHeight: .infinity)
                                 HStack(spacing: 0) {
@@ -247,17 +271,17 @@ struct EditingPanel: View {
                                                 }
                                         }
                                         .onEnded { _ in
-                                                buffer = 0
+                                                backspaceBuffer = 0
                                         }
                                 )
                                 .onReceive(timer) { _ in
                                         guard isBackspacing else { return }
-                                        if buffer > 3 {
+                                        if backspaceBuffer > 3 {
                                                 AudioFeedback.deleted()
                                                 context.triggerHapticFeedback()
                                                 context.operate(.backspace)
                                         } else {
-                                                buffer += 1
+                                                backspaceBuffer += 1
                                         }
                                 }
                                 ZStack {
