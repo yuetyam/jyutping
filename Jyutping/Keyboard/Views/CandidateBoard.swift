@@ -6,14 +6,15 @@ struct CandidateBoard: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         private let collapseWidth: CGFloat = 44
-        private let collapseHeight: CGFloat = 48
+        private let collapseHeight: CGFloat = 44
 
         private func rows(of candidates: [Candidate]) -> [[Candidate]] {
-                let maxWidth: CGFloat = context.keyboardWidth - collapseWidth
+                let keyboardWidth: CGFloat = context.keyboardWidth
                 var rows: [[Candidate]] = []
                 var row: [Candidate] = []
                 var rowWidth: CGFloat = 0
                 for candidate in candidates {
+                        let maxWidth: CGFloat = rows.isEmpty ? (keyboardWidth - collapseWidth) : keyboardWidth
                         let length: CGFloat = candidateWidth(of: candidate)
                         if rowWidth < (maxWidth - length) {
                                 row.append(candidate)
@@ -36,7 +37,7 @@ struct CandidateBoard: View {
         }
 
         var body: some View {
-                HStack(spacing: 0) {
+                ZStack(alignment: .topTrailing) {
                         ScrollView(.vertical) {
                                 LazyVStack(spacing: 0) {
                                         let candidateRows = rows(of: context.candidates)
@@ -66,27 +67,27 @@ struct CandidateBoard: View {
                                                                         context.operate(.select(candidate))
                                                                 }
                                                         }
+                                                        if index == 0 {
+                                                                Color.clear.frame(width: collapseWidth)
+                                                        }
                                                 }
                                                 Divider()
                                         }
                                 }
                         }
-                        .frame(maxWidth: .infinity)
-                        VStack {
-                                ZStack {
-                                        Color.interactiveClear
-                                        Image(systemName: "chevron.up")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 20, height: 20)
-                                }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        Image(systemName: "chevron.up")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
                                 .frame(width: collapseWidth, height: collapseHeight)
+                                .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                                 .contentShape(Rectangle())
                                 .onTapGesture {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
                                         context.updateKeyboardForm(to: context.previousKeyboardForm)
                                 }
-                                Spacer()
-                        }
                 }
         }
 }

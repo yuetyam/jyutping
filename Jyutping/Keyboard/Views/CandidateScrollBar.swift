@@ -49,6 +49,8 @@ struct CandidateScrollBar: View {
                         .frame(width: expanderWidth, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .candidateBoard)
                         }
                 }
