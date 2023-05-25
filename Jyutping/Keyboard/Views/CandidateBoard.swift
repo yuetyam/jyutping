@@ -5,6 +5,8 @@ struct CandidateBoard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
+        @Namespace private var topID
+
         private let collapseWidth: CGFloat = 44
         private let collapseHeight: CGFloat = 44
 
@@ -37,45 +39,51 @@ struct CandidateBoard: View {
         }
 
         var body: some View {
+                let candidateRows = rows(of: context.candidates)
                 ZStack(alignment: .topTrailing) {
-                        ScrollView(.vertical) {
-                                LazyVStack(spacing: 0) {
-                                        let candidateRows = rows(of: context.candidates)
-                                        ForEach(0..<candidateRows.count, id: \.self) { index in
-                                                let rowCandidates: [Candidate] = candidateRows[index]
-                                                HStack(spacing: 0) {
-                                                        ForEach(0..<rowCandidates.count, id: \.self) { deepIndex in
-                                                                let candidate = rowCandidates[deepIndex]
-                                                                ZStack {
-                                                                        Color.interactiveClear
-                                                                        VStack {
-                                                                                Text(verbatim: candidate.isCantonese ? candidate.romanization : String.space)
-                                                                                        .minimumScaleFactor(0.2)
-                                                                                        .lineLimit(1)
-                                                                                        .font(.romanization)
-                                                                                Text(verbatim: candidate.text)
-                                                                                        .lineLimit(1)
-                                                                                        .font(.candidate)
+                        ScrollViewReader { proxy in
+                                ScrollView(.vertical) {
+                                        LazyVStack(spacing: 0) {
+                                                EmptyView().id(topID)
+                                                ForEach(0..<candidateRows.count, id: \.self) { index in
+                                                        let rowCandidates: [Candidate] = candidateRows[index]
+                                                        HStack(spacing: 0) {
+                                                                ForEach(0..<rowCandidates.count, id: \.self) { deepIndex in
+                                                                        let candidate = rowCandidates[deepIndex]
+                                                                        ZStack {
+                                                                                Color.interactiveClear
+                                                                                VStack {
+                                                                                        Text(verbatim: candidate.isCantonese ? candidate.romanization : String.space)
+                                                                                                .minimumScaleFactor(0.2)
+                                                                                                .lineLimit(1)
+                                                                                                .font(.romanization)
+                                                                                        Text(verbatim: candidate.text)
+                                                                                                .lineLimit(1)
+                                                                                                .font(.candidate)
+                                                                                }
+                                                                                .padding(4)
                                                                         }
-                                                                        .padding(4)
+                                                                        .frame(maxWidth: .infinity)
+                                                                        .contentShape(Rectangle())
+                                                                        .onTapGesture {
+                                                                                AudioFeedback.inputed()
+                                                                                context.triggerSelectionHapticFeedback()
+                                                                                context.operate(.select(candidate))
+                                                                                withAnimation {
+                                                                                        proxy.scrollTo(topID)
+                                                                                }
+                                                                        }
                                                                 }
-                                                                .frame(maxWidth: .infinity)
-                                                                .contentShape(Rectangle())
-                                                                .onTapGesture {
-                                                                        AudioFeedback.inputed()
-                                                                        context.triggerSelectionHapticFeedback()
-                                                                        context.operate(.select(candidate))
+                                                                if index == 0 {
+                                                                        Color.clear.frame(width: collapseWidth)
                                                                 }
                                                         }
-                                                        if index == 0 {
-                                                                Color.clear.frame(width: collapseWidth)
-                                                        }
+                                                        Divider()
                                                 }
-                                                Divider()
                                         }
                                 }
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         Image(systemName: "chevron.up")
                                 .resizable()
                                 .scaledToFit()

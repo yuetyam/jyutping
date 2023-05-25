@@ -92,7 +92,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private func insert(_ text: String) {
                 textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
-                textDocumentProxy.unmarkText()
                 textDocumentProxy.insertText(text)
         }
 
@@ -171,7 +170,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         insert(candidate.text)
-                        adjustKeyboard()
                         aftercareSelected(candidate)
                 case .doubleSpace:
                         textDocumentProxy.deleteBackward()
@@ -222,7 +220,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         dismissKeyboard()
                 case .select(let candidate):
                         insert(candidate.text)
-                        adjustKeyboard()
                         aftercareSelected(candidate)
                 case .paste:
                         guard UIPasteboard.general.hasStrings else { return }
@@ -258,24 +255,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: text.count)
                 }
         }
-        private func adjustKeyboard() {
-                switch keyboardCase {
-                case .lowercased:
-                        break
-                case .uppercased:
-                        updateKeyboardCase(to: .lowercased)
-                case .capsLocked:
-                        break
-                }
-                switch keyboardForm {
-                case .candidateBoard:
-                        guard !(inputStage.isBuffering) else { return }
-                        updateKeyboardForm(to: .alphabet)
-                default:
-                        break
-                }
-        }
         private func aftercareSelected(_ candidate: Candidate) {
+                defer {
+                        adjustKeyboard()
+                }
                 switch bufferText.first {
                 case .none:
                         return
@@ -305,6 +288,23 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 tail = tail.dropFirst()
                         }
                         bufferText = String(tail)
+                }
+        }
+        private func adjustKeyboard() {
+                switch keyboardCase {
+                case .lowercased:
+                        break
+                case .uppercased:
+                        updateKeyboardCase(to: .lowercased)
+                case .capsLocked:
+                        break
+                }
+                switch keyboardForm {
+                case .candidateBoard:
+                        guard candidates.isEmpty else { return }
+                        updateKeyboardForm(to: previousKeyboardForm)
+                default:
+                        break
                 }
         }
 
