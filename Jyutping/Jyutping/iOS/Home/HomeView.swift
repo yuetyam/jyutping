@@ -89,6 +89,7 @@ struct HomeView: View {
                                                         .font(.fixedWidth)
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
+                                                Text("tones.input.examples")
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Cangjie").font(.significant)

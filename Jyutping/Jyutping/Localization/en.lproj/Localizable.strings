@@ -29,6 +29,7 @@
 
 "Tones Input" = "Tones Input";
 "tones.input.description" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
+"tones.input.examples" = "Examples: sinq = sin3(線), sinqq = sin6(羨)";
 
 "Lookup Jyutping with Cangjie" = "Lookup Jyutping with Cangjie";
 "Cangjie Reverse Lookup Description" = "Start with “v”, then enter Cangjie5 code. For example, enter “vdam”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";

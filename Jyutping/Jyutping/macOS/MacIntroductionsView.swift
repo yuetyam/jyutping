@@ -18,6 +18,10 @@ struct MacIntroductionsView: View {
                                                 Text(verbatim: tonesInputDescription).font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
+                                        HStack {
+                                                Text("tones.input.examples").font(.master)
+                                                Spacer()
+                                        }
                                 }
                                 .block()
 

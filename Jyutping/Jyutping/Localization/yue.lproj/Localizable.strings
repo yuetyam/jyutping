@@ -28,6 +28,7 @@
 
 "Tones Input" = "聲調輸入";
 "tones.input.description" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
+"tones.input.examples" = "例: sinq = sin3(線), sinqq = sin6(羨)";
 
 "Lookup Jyutping with Cangjie" = "用倉頡反查粵拼";
 "Cangjie Reverse Lookup Description" = "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
