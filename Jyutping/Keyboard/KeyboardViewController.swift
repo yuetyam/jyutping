@@ -159,25 +159,33 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 appendBufferText(text)
                         }
+                        adjustKeyboard()
                 case .separator:
                         appendBufferText("'")
                 case .punctuation(let text):
                         textDocumentProxy.insertText(text)
                 case .space:
+                        guard inputMethodMode.isCantonese else {
+                                textDocumentProxy.insertText(String.space)
+                                adjustKeyboard()
+                                return
+                        }
                         guard inputStage.isBuffering else {
                                 // TODO: Full-width space?
                                 let spaceValue: String = " "
                                 textDocumentProxy.insertText(spaceValue)
+                                adjustKeyboard()
                                 return
                         }
-                        guard let candidate = candidates.first else {
+                        if let candidate = candidates.first {
+                                insert(candidate.text)
+                                aftercareSelected(candidate)
+                        } else {
                                 let text: String = bufferText
                                 clearBufferText()
                                 textDocumentProxy.insertText(text)
-                                return
+                                adjustKeyboard()
                         }
-                        insert(candidate.text)
-                        aftercareSelected(candidate)
                 case .doubleSpace:
                         textDocumentProxy.deleteBackward()
                         textDocumentProxy.insertText("。")
