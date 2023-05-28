@@ -69,9 +69,11 @@ private struct SettingLabel: View {
         var body: some View {
                 let serialNumber: String = index == 9 ? "0" : "\(index + 1)"
                 let isHighlighted: Bool = index == highlightedIndex
-                HStack(spacing: 16) {
-                        Text(verbatim: serialNumber).font(.label)
-                        Text(verbatim: text).font(.candidate)
+                HStack(spacing: 0) {
+                        HStack(spacing: 16) {
+                                Text(verbatim: serialNumber).font(.label)
+                                Text(verbatim: text).font(.candidate)
+                        }
                         Spacer()
                         Image(systemName: "checkmark").font(.title3).opacity(checked ? 1 : 0)
                 }
