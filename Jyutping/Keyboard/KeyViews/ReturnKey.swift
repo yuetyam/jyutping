@@ -50,7 +50,7 @@ struct ReturnKey: View {
                         }
                         .onEnded { _ in
                                 context.operate(.return)
-                         }
+                        }
                 )
         }
 }

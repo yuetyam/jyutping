@@ -2,7 +2,7 @@ import Foundation
 import SQLite3
 
 public struct Emoji: Hashable {
-        public enum Category: Int, Hashable, CaseIterable {
+        public enum Category: Int, Hashable, CaseIterable, Identifiable {
                 case smileysAndPeople = 1
                 case animalsAndNature = 2
                 case foodAndDrink = 3
@@ -11,6 +11,29 @@ public struct Emoji: Hashable {
                 case objects = 6
                 case symbols = 7
                 case flags = 8
+                public var id: Int {
+                        return self.rawValue
+                }
+                public var title: String {
+                        switch self {
+                        case .smileysAndPeople:
+                                return "Smileys & People"
+                        case .animalsAndNature:
+                                return "Animals & Nature"
+                        case .foodAndDrink:
+                                return "Food & Drink"
+                        case .activity:
+                                return "Activity"
+                        case .travelAndPlaces:
+                                return "Travel & Places"
+                        case .objects:
+                                return "Objects"
+                        case .symbols:
+                                return "Symbols"
+                        case .flags:
+                                return "Flags"
+                        }
+                }
         }
         public let category: Category
         public let text: String

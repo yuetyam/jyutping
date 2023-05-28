@@ -13,6 +13,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = self.children.map({ $0.removeFromParent() })
                 updateKeyboardSize()
+                updateSpaceText()
                 updateReturnKeyText()
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 view.addSubview(motherBoard.view)
@@ -29,6 +30,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func viewWillAppear(_ animated: Bool) {
                 Engine.prepare()
                 instantiateHapticFeedbacks()
+                updateSpaceText()
+                updateReturnKeyText()
         }
         override func viewDidAppear(_ animated: Bool) {
                 super.viewDidAppear(animated)
@@ -147,6 +150,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func operate(_ operation: Operation) {
                 switch operation {
                 case .input(let text):
+                        guard keyboardForm != .emojiBoard else {
+                                textDocumentProxy.insertText(text)
+                                return
+                        }
                         if inputMethodMode.isABC {
                                 textDocumentProxy.insertText(text)
                         } else {
