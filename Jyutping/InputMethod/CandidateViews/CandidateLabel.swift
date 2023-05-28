@@ -3,7 +3,6 @@ import SwiftUI
 struct CandidateLabel: View {
 
         let candidate: DisplayCandidate
-        let placeholder: DisplayCandidate
         let index: Int
         let toneStyle: ToneDisplayStyle
         let toneColor: ToneDisplayColor
@@ -13,18 +12,7 @@ struct CandidateLabel: View {
 
         var body: some View {
                 let serialNumber: String = index == 9 ? "0" : "\(index + 1)"
-                ZStack(alignment: .leading) {
-                        HStack(spacing: 16) {
-                                Text(verbatim: serialNumber).font(.label)
-                                Text(verbatim: placeholder.text).font(.candidate)
-                                if let comment = placeholder.comment {
-                                        CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
-                                }
-                                if let secondaryComment = placeholder.secondaryComment {
-                                        Text(verbatim: secondaryComment).font(.comment)
-                                }
-                        }
-                        .hidden()
+                HStack(spacing: 0) {
                         HStack(spacing: 16) {
                                 Text(verbatim: serialNumber).font(.label)
                                 Text(verbatim: candidate.text).font(.candidate)
@@ -35,8 +23,10 @@ struct CandidateLabel: View {
                                         Text(verbatim: secondaryComment).font(.comment)
                                 }
                         }
+                        Spacer()
+                        Color.clear.frame(width: 1, height: 1)
                 }
-                .padding(.horizontal, 8)
+                .padding(.leading, 8)
                 .padding(.vertical, verticalPadding)
                 .foregroundColor(foreColor)
                 .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))

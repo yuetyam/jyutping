@@ -8,16 +8,16 @@ struct OptionsView: View {
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
         private let options: [String] = [
-                "傳統漢字\u{3000}\u{3000}\u{3000}",
+                "傳統漢字",
                 "傳統漢字・香港",
                 "傳統漢字・臺灣",
-                "簡化字\u{3000}\u{3000}\u{3000}\u{3000}",
+                "简化字",
                 "半形數字",
                 "全形數字",
                 "粵文句讀",
                 "英文標點",
                 "表情符號",
-                "無\u{3000}\u{3000}\u{3000}"
+                "無"
         ]
 
         private let characterStandard: CharacterStandard = Options.characterStandard
@@ -69,20 +69,11 @@ private struct SettingLabel: View {
         var body: some View {
                 let serialNumber: String = index == 9 ? "0" : "\(index + 1)"
                 let isHighlighted: Bool = index == highlightedIndex
-                ZStack(alignment: .leading) {
-                        HStack(spacing: 16) {
-                                Text(verbatim: serialNumber).font(.label)
-                                Text(verbatim: placeholder).font(.candidate)
-                                Image(systemName: "checkmark").font(.title2)
-                        }
-                        .hidden()
-                        HStack(spacing: 16) {
-                                Text(verbatim: serialNumber).font(.label)
-                                Text(verbatim: text).font(.candidate)
-                                if checked {
-                                        Image(systemName: "checkmark").font(.title2)
-                                }
-                        }
+                HStack(spacing: 16) {
+                        Text(verbatim: serialNumber).font(.label)
+                        Text(verbatim: text).font(.candidate)
+                        Spacer()
+                        Image(systemName: "checkmark").font(.title3).opacity(checked ? 1 : 0)
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, verticalPadding)

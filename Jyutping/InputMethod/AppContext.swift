@@ -5,7 +5,6 @@ final class AppContext: ObservableObject {
 
         @Published private(set) var isClean: Bool = true
         @Published private(set) var displayCandidates: [DisplayCandidate] = []
-        @Published private(set) var placeholder: DisplayCandidate = .defaultPlaceholder
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var optionsHighlightedIndex: Int = 0
         @Published private(set) var inputForm: InputForm = InputForm.matchInputMethodMode()
@@ -20,7 +19,6 @@ final class AppContext: ObservableObject {
         func resetDisplayContext() {
                 isClean = true
                 displayCandidates = []
-                placeholder = .defaultPlaceholder
                 highlightedIndex = minIndex
                 optionsHighlightedIndex = minIndex
                 maxIndex = minIndex
@@ -33,7 +31,6 @@ final class AppContext: ObservableObject {
                 }
                 isClean = false
                 displayCandidates = newDisplayCandidates
-                placeholder = newDisplayCandidates.longest!
                 maxIndex = newDisplayCandidates.count - 1
                 let newHighlightedIndex: Int = {
                         switch highlight {
@@ -90,10 +87,6 @@ final class AppContext: ObservableObject {
                 guard optionsHighlightedIndex > minIndex else { return }
                 optionsHighlightedIndex -= 1
         }
-}
-
-private extension DisplayCandidate {
-        static let defaultPlaceholder: DisplayCandidate = DisplayCandidate(candidate: Candidate(text: "毋", romanization: "m4", input: "m", lexiconText: "毋"), candidateIndex: 0)
 }
 
 enum Highlight: Int {
