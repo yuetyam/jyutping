@@ -10,6 +10,7 @@ extension JyutpingInputController {
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
+                guard let event = event else { return false }
                 let modifiers = event.modifierFlags
                 let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
                 guard !shouldIgnoreCurrentEvent else { return false }

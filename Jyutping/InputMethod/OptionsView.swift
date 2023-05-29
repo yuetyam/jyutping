@@ -64,8 +64,6 @@ private struct SettingLabel: View {
         let text: String
         let checked: Bool
 
-        private let placeholder: String = "傳統漢字・香港"
-
         var body: some View {
                 let serialNumber: String = index == 9 ? "0" : "\(index + 1)"
                 let isHighlighted: Bool = index == highlightedIndex

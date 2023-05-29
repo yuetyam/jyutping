@@ -3,6 +3,7 @@
 "menu.mode.abc" = "ABC 模式";
 "menu.preferences" = "設定…";
 "menu.check4updates" = "檢查更新…";
+"menu.about" = "關於";
 "menu.terminate" = "結束運行";
 
 "Jyutping Input Method Preferences" = "粵拼輸入法設定";
