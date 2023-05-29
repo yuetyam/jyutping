@@ -34,11 +34,12 @@ struct CandidateBoard: View {
                 case .emoji, .symbol:
                         return 44
                 default:
-                        return CGFloat(candidate.text.count * 20 + 24)
+                        return CGFloat(candidate.text.count * 20 + 28)
                 }
         }
 
         var body: some View {
+                let commentStyle: CommentStyle = Options.commentStyle
                 let candidateRows = rows(of: context.candidates)
                 ZStack(alignment: .topTrailing) {
                         ScrollViewReader { proxy in
@@ -52,16 +53,39 @@ struct CandidateBoard: View {
                                                                         let candidate = rowCandidates[deepIndex]
                                                                         ZStack {
                                                                                 Color.interactiveClear
-                                                                                VStack {
-                                                                                        Text(verbatim: candidate.isCantonese ? candidate.romanization : String.space)
-                                                                                                .minimumScaleFactor(0.2)
-                                                                                                .lineLimit(1)
-                                                                                                .font(.romanization)
+                                                                                switch commentStyle {
+                                                                                case .aboveCandidates:
+                                                                                        VStack {
+                                                                                                if candidate.isCantonese {
+                                                                                                        Text(verbatim: candidate.romanization)
+                                                                                                                .minimumScaleFactor(0.2)
+                                                                                                                .lineLimit(1)
+                                                                                                                .font(.romanization)
+                                                                                                }
+                                                                                                Text(verbatim: candidate.text)
+                                                                                                        .lineLimit(1)
+                                                                                                        .font(.candidate)
+                                                                                        }
+                                                                                        .padding(2)
+                                                                                case .belowCandidates:
+                                                                                        VStack {
+                                                                                                Text(verbatim: candidate.text)
+                                                                                                        .lineLimit(1)
+                                                                                                        .font(.candidate)
+                                                                                                if candidate.isCantonese {
+                                                                                                        Text(verbatim: candidate.romanization)
+                                                                                                                .minimumScaleFactor(0.2)
+                                                                                                                .lineLimit(1)
+                                                                                                                .font(.romanization)
+                                                                                                }
+                                                                                        }
+                                                                                        .padding(2)
+                                                                                case .noComments:
                                                                                         Text(verbatim: candidate.text)
                                                                                                 .lineLimit(1)
                                                                                                 .font(.candidate)
+                                                                                                .padding(4)
                                                                                 }
-                                                                                .padding(4)
                                                                         }
                                                                         .frame(maxWidth: .infinity)
                                                                         .contentShape(Rectangle())

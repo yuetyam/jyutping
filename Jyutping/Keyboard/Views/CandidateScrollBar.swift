@@ -6,6 +6,7 @@ struct CandidateScrollBar: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
+                let commentStyle: CommentStyle = Options.commentStyle
                 HStack(spacing: 0) {
                         ScrollView(.horizontal) {
                                 LazyHStack(spacing: 0) {
@@ -13,18 +14,45 @@ struct CandidateScrollBar: View {
                                                 let candidate = context.candidates[index]
                                                 ZStack {
                                                         Color.interactiveClear
-                                                        VStack {
-                                                                Text(verbatim: candidate.isCantonese ? candidate.romanization : String.space)
-                                                                        .minimumScaleFactor(0.2)
-                                                                        .lineLimit(1)
-                                                                        .font(.romanization)
+                                                        switch commentStyle {
+                                                        case .aboveCandidates:
+                                                                VStack {
+                                                                        if candidate.isCantonese {
+                                                                                Text(verbatim: candidate.romanization)
+                                                                                        .minimumScaleFactor(0.2)
+                                                                                        .lineLimit(1)
+                                                                                        .font(.romanization)
+                                                                        }
+                                                                        Text(verbatim: candidate.text)
+                                                                                .lineLimit(1)
+                                                                                .font(.candidate)
+                                                                }
+                                                                .padding(.horizontal, 1)
+                                                                .padding(.bottom, 8)
+                                                        case .belowCandidates:
+                                                                VStack {
+                                                                        Text(verbatim: candidate.text)
+                                                                                .lineLimit(1)
+                                                                                .font(.candidate)
+                                                                        if candidate.isCantonese {
+                                                                                Text(verbatim: candidate.romanization)
+                                                                                        .minimumScaleFactor(0.2)
+                                                                                        .lineLimit(1)
+                                                                                        .font(.romanization)
+                                                                        }
+                                                                }
+                                                                .padding(.horizontal, 1)
+                                                                .padding(.bottom, 8)
+                                                        case .noComments:
                                                                 Text(verbatim: candidate.text)
                                                                         .lineLimit(1)
                                                                         .font(.candidate)
+                                                                        .padding(.horizontal, 1)
+                                                                        .padding(.bottom, 4)
                                                         }
-                                                        .padding(1)
                                                 }
                                                 .frame(width: candidateWidth(of: candidate))
+                                                .frame(maxHeight: .infinity)
                                                 .contentShape(Rectangle())
                                                 .onTapGesture {
                                                         AudioFeedback.inputed()
@@ -63,7 +91,7 @@ struct CandidateScrollBar: View {
                 case .emoji, .symbol:
                         return 44
                 default:
-                        return CGFloat(candidate.text.count * 20 + 24)
+                        return CGFloat(candidate.text.count * 20 + 28)
                 }
         }
 }
