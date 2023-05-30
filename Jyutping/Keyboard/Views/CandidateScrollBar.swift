@@ -87,11 +87,6 @@ struct CandidateScrollBar: View {
         private let expanderWidth: CGFloat = 44
 
         private func candidateWidth(of candidate: Candidate) -> CGFloat {
-                switch candidate.type {
-                case .emoji, .symbol:
-                        return 44
-                default:
-                        return CGFloat(candidate.text.count * 20 + 28)
-                }
+                return CGFloat(candidate.text.count * 20 + 28)
         }
 }

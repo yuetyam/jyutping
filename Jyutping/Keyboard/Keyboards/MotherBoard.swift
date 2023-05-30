@@ -23,7 +23,23 @@ struct MotherBoard: View {
                 case .symbolic:
                         SymbolicKeyboard().environmentObject(context)
                 default:
-                        AlphabeticKeyboard().environmentObject(context)
+                        switch context.inputMethodMode {
+                        case .abc:
+                                AlphabeticKeyboard().environmentObject(context)
+                        case .cantonese:
+                                switch Options.keyboardLayout {
+                                case .qwerty:
+                                        AlphabeticKeyboard().environmentObject(context)
+                                case .saamPing:
+                                        AlphabeticKeyboard().environmentObject(context)
+                                case .tenKey:
+                                        if context.keyboardInterface.isCompact {
+                                                TenKeyKeyboard().environmentObject(context)
+                                        } else {
+                                                AlphabeticKeyboard().environmentObject(context)
+                                        }
+                                }
+                        }
                 }
         }
 }
