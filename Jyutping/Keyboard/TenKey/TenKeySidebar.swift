@@ -16,14 +16,34 @@ struct TenKeySidebar: View {
                 }
         }
 
+        private let symbols: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
+
         var body: some View {
                 ZStack {
-                        Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                .padding(3)
+                        ScrollView {
+                                LazyVStack(spacing: 0) {
+                                        ForEach(0..<symbols.count, id: \.self) { index in
+                                                ZStack {
+                                                        Color.interactiveClear
+                                                        Text(verbatim: symbols[index])
+                                                }
+                                                .frame(height: context.heightUnit * 3.0 / 4.0)
+                                                .frame(maxWidth: .infinity)
+                                                .contentShape(Rectangle())
+                                                .onTapGesture {
+                                                        AudioFeedback.inputed()
+                                                        context.triggerHapticFeedback()
+                                                        context.operate(.punctuation(symbols[index]))
+                                                }
+                                                Divider()
+                                        }
+                                }
+                        }
                 }
+                .padding(3)
                 .frame(width: context.widthUnit * 2, height: context.heightUnit * 3)
         }
 }
