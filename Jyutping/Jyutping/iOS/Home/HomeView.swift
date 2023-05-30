@@ -15,7 +15,7 @@ struct HomeView: View {
         var body: some View {
                 NavigationView {
                         List {
-                                SearchView(placeholder: "Text Field", submitLabel: .return, animationState: $animationState)
+                                SearchView(placeholder: "Input Text Field", submitLabel: .return, animationState: $animationState)
 
                                 Section {
                                         if isKeyboardEnabled {

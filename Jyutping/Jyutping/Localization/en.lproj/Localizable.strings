@@ -15,7 +15,7 @@
 
 // MARK: - iOS Home
 
-"Text Field" = "Text Field";
+"Input Text Field" = "Input";
 
 "How to enable this Keyboard" = "How to enable this Keyboard";
 "accessibility.how_to_enable_this_keyboard" = "Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access";

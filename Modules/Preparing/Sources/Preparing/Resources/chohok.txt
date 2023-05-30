@@ -382,8 +382,8 @@
 23994	嶺	ling5	l	ing	陽上	耒丙
 20919	冷	lang5	l	a’ng	陽上	耒等
 21629	命	ming6	m	ing	陽去	明正
-20197	以	i5	X	e	陽上	喻始
-33505	苡	i5	X	e	陽上	喻始
+20197	以	ji5	X	e	陽上	喻始
+33505	苡	ji5	X	e	陽上	喻始
 20284	似	cz5	ts’	ze	陽上	前子
 22994	姒	cz5	ts’	ze	陽上	前子
 20214	件	gin6	k	een	陽去	共見
@@ -923,6 +923,7 @@
 35377	許	hyu2	h	ü	陰上	可語
 28408	滸	wu2	X	oo	陰上	烏苦
 21321	卉	wai5	X	wy	陽上	喻鬼
+133508	𠦄	wai5	X	wy	陽上	喻鬼
 21322	半	bun3	p	oon	陰去	丙半
 32070	絆	pun3	p’	oon	陰去	篇半
 21028	判	pun3	p’	oon	陰去	篇半
@@ -1066,6 +1067,7 @@
 21430	厶	sz1	s	ze	陰平	心詞
 31169	私	sz1	s	ze	陰平	心詞
 30022	畆	mau5	m	ow	陽上	明九
+150612	𤱔	mau5	m	ow	陽上	明九
 21431	厷	gwaang1	k	wang	陰平	見橫
 32945	肱	gwaang1	k	wang	陰平	見橫
 38286	閎	waang4	X	wang	陽平	喻橫
@@ -3426,8 +3428,8 @@
 35506	課	fo3	f	o[r]	陰去	非個
 35064	裸	lo2	l	o[r]	陰上	拉火
 36381	踝	faa3	f	a[r]	陰去	非亞
-26556	枼	ip6	X	eep	陽入	喻帖
-33865	葉	ip6	X	eep	陽入	喻帖
+26556	枼	jip6	X	eep	陽入	喻帖
+33865	葉	jip6	X	eep	陽入	喻帖
 30879	碟	dip6	t	eep	陽入	大帖
 25586	揲	dip6	t	eep	陽入	大帖
 29266	牒	dip6	t	eep	陽入	大帖
@@ -3660,6 +3662,7 @@
 31047	祇	zhi2	ch	e	陰上	之始
 32025	紙	zhi2	ch	e	陰上	之始
 33296	舐	shaai5	s’	ea	陽上	時乃
+17499	䑛	shaai5	s’	ea	陽上	時乃
 27664	氐	dai2	t	y	陰上	丁啟
 24213	底	dai2	t	y	陰上	丁啟
 25269	抵	dai2	t	y	陰上	丁啟
@@ -4052,7 +4055,7 @@
 21123	劃	waak6	X	wak	陽入	喻或
 30059	畫	waa6	X	wa	陽去	喻卦
 30069	畵	waa6	X	wa	陽去	喻卦
-30064	異	i6	X	e	陽去	喻至
+30064	異	ji6	X	e	陽去	喻至
 20864	冀	ki3	k’	e	陰去	啟至
 39525	驥	ki3	k’	e	陰去	啟至
 32764	翼	jik6	y	ik	陽入	由息
@@ -4285,6 +4288,7 @@
 28580	澤	zhak6	ch	a’k	陽入	杖則
 37944	鐸	dok6	t	ok	陽入	大學
 30591	睿	jeoi6	y	oey	陽去	由稅
+152096	𥈠	jeoi6	y	oey	陽去	由稅
 28652	濬	zeon3	ts	un	陰去	則盡
 22737	壑	kok1	k’	ok	陰入	啟學
 30655	瞿	kyu4	k’	ü	陽平	其於
@@ -4737,8 +4741,8 @@
 32696	羸	lui4	l	ooey	陽平	耒回
 33251	臣	shan4	s’	a’n	陽平	時申
 22170	嚚	ngan4	ng	a’n	陽平	岸申
-157918	𦣞	i4	X	e	陽平	喻希
-38948	頤	i4	X	e	陽平	喻希
+157918	𦣞	ji4	X	e	陽平	喻希
+38948	頤	ji4	X	e	陽平	喻希
 23020	姬	gi1	k	e	陰平	見希
 23019	姫	gi1	k	e	陰平	見希
 29081	熙	hi1	h	e	陰平	可希
@@ -5107,6 +5111,7 @@
 32412	纜	laam6	l	am	陽去	耒鑑
 17195	䌫	laam6	l	am	陽去	耒鑑
 27414	欖	laam2	l	am	陰上	拉斬
+15382	㰖	laam2	l	am	陰上	拉斬
 35282	角	gok1	k	ok	陰入	見學
 26743	桷	gok1	k	ok	陰入	見學
 26011	斛	huk6	h	uk	陽入	下卜
@@ -5209,7 +5214,9 @@
 36000	負	fu6	f	oo	陽去	扶父
 163114	𧴪	so2	s	o[r]	陰上	心火
 29795	瑣	so2	s	o[r]	陰上	心火
+150031	𤨏	so2	s	o[r]	陰上	心火
 37782	鎖	so2	s	o[r]	陰上	心火
+37819	鎻	so2	s	o[r]	陰上	心火
 36002	貢	gung3	k	ung	陰去	見動
 36010	貪	taam1	t’	am	陰平	太監
 36011	貫	gun3	k	oon	陰去	見半

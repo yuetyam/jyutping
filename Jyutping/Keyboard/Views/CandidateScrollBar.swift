@@ -16,7 +16,7 @@ struct CandidateScrollBar: View {
                                                         Color.interactiveClear
                                                         switch commentStyle {
                                                         case .aboveCandidates:
-                                                                VStack {
+                                                                VStack(spacing: -2) {
                                                                         if candidate.isCantonese {
                                                                                 Text(verbatim: candidate.romanization)
                                                                                         .minimumScaleFactor(0.2)
@@ -30,7 +30,7 @@ struct CandidateScrollBar: View {
                                                                 .padding(.horizontal, 1)
                                                                 .padding(.bottom, 8)
                                                         case .belowCandidates:
-                                                                VStack {
+                                                                VStack(spacing: -2) {
                                                                         Text(verbatim: candidate.text)
                                                                                 .lineLimit(1)
                                                                                 .font(.candidate)

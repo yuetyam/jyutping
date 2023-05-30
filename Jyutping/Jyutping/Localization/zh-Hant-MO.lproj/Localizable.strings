@@ -14,7 +14,7 @@
 
 // MARK: - iOS Home
 
-"Text Field" = "輸入框";
+"Input Text Field" = "輸入框";
 
 "How to enable this Keyboard" = "如何啓用鍵盤";
 "accessibility.how_to_enable_this_keyboard" = "一：跳轉至「設定」；二：選擇「鍵盤」；三：開啓「粵拼」；四：開啓「允許全權取用」。";
