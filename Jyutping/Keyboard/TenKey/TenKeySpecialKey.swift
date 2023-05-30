@@ -35,11 +35,19 @@ struct TenKeySpecialKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(3)
-                        VStack(spacing: 0) {
-                                Text(verbatim: "rvxq")
-                                Text(verbatim: "反查").font(.keyFooter).foregroundColor(.secondary)
+                        if context.inputStage.isBuffering {
+                                VStack {
+                                        Text(verbatim: "'")
+                                        Text(verbatim: "分隔").font(.keyFooter).foregroundColor(.secondary)
+                                }
+                                .padding(.top, 8)
+                        } else {
+                                VStack(spacing: 0) {
+                                        Text(verbatim: "rvxq")
+                                        Text(verbatim: "反查").font(.keyFooter).foregroundColor(.secondary)
+                                }
+                                .padding(.top, 8)
                         }
-                        .padding(.top, 8)
                 }
                 .frame(width: context.widthUnit * 2, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -52,7 +60,7 @@ struct TenKeySpecialKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                let text: String = "r"
+                                let text: String = context.inputStage.isBuffering ? "'" : "r"
                                 context.operate(.input(text))
                          }
                 )
