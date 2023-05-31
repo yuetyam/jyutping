@@ -1,6 +1,8 @@
 import SwiftUI
 
-struct TenKeyNumericKey: View {
+struct TenKeyNumberKey: View {
+
+        let key: String
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -8,21 +10,21 @@ struct TenKeyNumericKey: View {
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
-                case .dark:
-                        return .darkEmphatic
-                @unknown default:
-                        return .lightEmphatic
-                }
-        }
-        private var activeKeyColor: Color {
-                switch colorScheme {
-                case .light:
                         return .light
                 case .dark:
                         return .dark
                 @unknown default:
                         return .light
+                }
+        }
+        private var activeKeyColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .lightEmphatic
+                case .dark:
+                        return .darkEmphatic
+                @unknown default:
+                        return .lightEmphatic
                 }
         }
 
@@ -35,20 +37,20 @@ struct TenKeyNumericKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(3)
-                        Text(verbatim: "123")
+                        Text(verbatim: key)
                 }
                 .frame(width: context.widthUnit * 2, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if !tapped {
-                                        AudioFeedback.modified()
+                                        AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         tapped = true
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: .numeric)
+                                context.operate(.punctuation(key))
                          }
                 )
         }

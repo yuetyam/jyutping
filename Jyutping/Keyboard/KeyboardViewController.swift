@@ -437,8 +437,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var inputMethodMode: InputMethodMode = .cantonese
         func toggleInputMethodMode() {
                 inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
-                updateReturnKeyText()
-                updateSpaceText()
+                if inputMethodMode.isABC && (keyboardForm == .tenKeyNumeric) {
+                        updateKeyboardForm(to: .alphabet)
+                } else {
+                        updateReturnKeyText()
+                        updateSpaceText()
+                }
         }
 
         @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabet
@@ -467,6 +471,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateSpaceText() {
                 let newText: String = {
                         guard inputMethodMode.isCantonese else { return "ABC" }
+                        guard keyboardForm != .tenKeyNumeric else { return "空格" }
                         let isSimplified: Bool = Options.characterStandard.isSimplified
                         switch keyboardCase {
                         case .lowercased:

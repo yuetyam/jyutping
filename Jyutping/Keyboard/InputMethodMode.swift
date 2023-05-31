@@ -20,4 +20,5 @@ enum KeyboardForm {
         case numeric
         case settings
         case symbolic
+        case tenKeyNumeric
 }

@@ -45,7 +45,8 @@ struct TenKeySpaceKey: View {
                                 .padding(3)
                         Text(verbatim: isEngagedLongPress ? longPressHint : context.spaceText)
                 }
-                .frame(width: context.widthUnit * 6, height: context.heightUnit)
+                .frame(height: context.heightUnit)
+                .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { value, touched, transaction in

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TenKeySidebar: View {
+struct TenKeySymbolsBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -16,9 +16,11 @@ struct TenKeySidebar: View {
                 }
         }
 
-        private let symbols: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
+        private let abcPadSymbols: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
+        private let numericPadSymbols: [String] = ["+", "-", "*", "/", "=", "%", "#", ":", "@"]
 
         var body: some View {
+                let symbols: [String] = (context.keyboardForm == .tenKeyNumeric) ? numericPadSymbols : abcPadSymbols
                 ZStack {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(keyColor)
@@ -30,7 +32,7 @@ struct TenKeySidebar: View {
                                                         Color.interactiveClear
                                                         Text(verbatim: symbols[index])
                                                 }
-                                                .frame(height: context.heightUnit * 3.0 / 4.0)
+                                                .frame(height: context.heightUnit * 3.0 / 4.0 - 1.0)
                                                 .frame(maxWidth: .infinity)
                                                 .contentShape(Rectangle())
                                                 .onTapGesture {
