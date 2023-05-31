@@ -34,13 +34,13 @@ struct SymbolicKeyboard: View {
                         }
                         HStack(spacing: 0) {
                                 NumericSymbolicSwitchKey().environmentObject(context)
-                                PlaceHolderKey()
+                                PlaceholderKey()
                                 InputKey(key: KeyUnit(primary: KeyElement(".")), widthUnitTimes: 1.3).environmentObject(context)
                                 InputKey(key: KeyUnit(primary: KeyElement(",")), widthUnitTimes: 1.3).environmentObject(context)
                                 InputKey(key: KeyUnit(primary: KeyElement("?")), widthUnitTimes: 1.3).environmentObject(context)
                                 InputKey(key: KeyUnit(primary: KeyElement("!")), widthUnitTimes: 1.3).environmentObject(context)
                                 InputKey(key: KeyUnit(primary: KeyElement("'")), widthUnitTimes: 1.3).environmentObject(context)
-                                PlaceHolderKey()
+                                PlaceholderKey()
                                 BackspaceKey().environmentObject(context)
                         }
                         HStack(spacing: 0) {

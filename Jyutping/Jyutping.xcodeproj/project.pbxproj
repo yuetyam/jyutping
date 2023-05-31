@@ -21,7 +21,7 @@
 		37073FF52A2642EA00691F9D /* TenKeyNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FF42A2642EA00691F9D /* TenKeyNumericKeyboard.swift */; };
 		370AA36E297975D400A666A5 /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA36D297975D400A666A5 /* SearchField.swift */; };
 		370AF8892A07742F00A92562 /* SettingsViewIOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */; };
-		370D43902A10EA4100EB48B8 /* HiddenLetterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370D438F2A10EA4100EB48B8 /* HiddenLetterKey.swift */; };
+		370D43902A10EA4100EB48B8 /* HiddenKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370D438F2A10EA4100EB48B8 /* HiddenKey.swift */; };
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
 		371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* AppContext.swift */; };
 		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
@@ -285,7 +285,7 @@
 		37073FF42A2642EA00691F9D /* TenKeyNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyNumericKeyboard.swift; sourceTree = "<group>"; };
 		370AA36D297975D400A666A5 /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewIOS15.swift; sourceTree = "<group>"; };
-		370D438F2A10EA4100EB48B8 /* HiddenLetterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenLetterKey.swift; sourceTree = "<group>"; };
+		370D438F2A10EA4100EB48B8 /* HiddenKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenKey.swift; sourceTree = "<group>"; };
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
 		371B6CEE29F4DC4E00DBB629 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
@@ -710,7 +710,7 @@
 				37F72E7D2A14F4630013AC85 /* AlphabeticKey.swift */,
 				37F72E7B2A14F4490013AC85 /* NumericSymbolicSwitchKey.swift */,
 				37993A6C2A0EA36C00BC8E35 /* InputKey.swift */,
-				370D438F2A10EA4100EB48B8 /* HiddenLetterKey.swift */,
+				370D438F2A10EA4100EB48B8 /* HiddenKey.swift */,
 			);
 			path = KeyViews;
 			sourceTree = "<group>";
@@ -1390,7 +1390,7 @@
 				37B176642A049BD500A4E531 /* KeyElementView.swift in Sources */,
 				37073FE92A26028800691F9D /* Combination.swift in Sources */,
 				37DE32902A021C450066D03A /* Constant.swift in Sources */,
-				370D43902A10EA4100EB48B8 /* HiddenLetterKey.swift in Sources */,
+				370D43902A10EA4100EB48B8 /* HiddenKey.swift in Sources */,
 				37993A692A0EA33600BC8E35 /* ShiftKey.swift in Sources */,
 				37073FE12A25FF1800691F9D /* TenKeySpaceKey.swift in Sources */,
 				37DE328C2A0218960066D03A /* CantoneseABCSwitch.swift in Sources */,

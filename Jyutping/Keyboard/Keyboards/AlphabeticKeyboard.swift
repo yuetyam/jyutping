@@ -25,7 +25,7 @@ struct AlphabeticKeyboard: View {
 
                         }
                         HStack(spacing: 0) {
-                                HiddenLetterKey(letter: .letterA).environmentObject(context)
+                                HiddenKey(key: .letterA).environmentObject(context)
                                 Group {
                                         InputKey(key: KeyUnit(primary: KeyElement("a"))).environmentObject(context)
                                         InputKey(key: KeyUnit(primary: KeyElement("s"))).environmentObject(context)
@@ -37,11 +37,11 @@ struct AlphabeticKeyboard: View {
                                         InputKey(key: KeyUnit(primary: KeyElement("k"))).environmentObject(context)
                                         InputKey(key: KeyUnit(primary: KeyElement("l"))).environmentObject(context)
                                 }
-                                HiddenLetterKey(letter: .letterL).environmentObject(context)
+                                HiddenKey(key: .letterL).environmentObject(context)
                         }
                         HStack(spacing: 0) {
                                 ShiftKey().environmentObject(context)
-                                HiddenLetterKey(letter: .letterZ).environmentObject(context)
+                                HiddenKey(key: .letterZ).environmentObject(context)
                                 Group {
                                         InputKey(key: KeyUnit(primary: KeyElement("z"))).environmentObject(context)
                                         InputKey(key: KeyUnit(primary: KeyElement("x"))).environmentObject(context)
@@ -51,7 +51,7 @@ struct AlphabeticKeyboard: View {
                                         InputKey(key: KeyUnit(primary: KeyElement("n"))).environmentObject(context)
                                         InputKey(key: KeyUnit(primary: KeyElement("m"))).environmentObject(context)
                                 }
-                                HiddenLetterKey(letter: .letterM).environmentObject(context)
+                                HiddenKey(key: .backspace).environmentObject(context)
                                 BackspaceKey().environmentObject(context)
                         }
                         HStack(spacing: 0) {
