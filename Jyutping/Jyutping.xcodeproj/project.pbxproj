@@ -29,6 +29,7 @@
 		373FCEBB29FF962000DC9102 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; };
 		373FCEBC29FF962000DC9102 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
+		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
 		3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */; };
@@ -291,6 +292,7 @@
 		373104D42A0A3D780009BF66 /* EditingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
 		373FCEB929FF961500DC9102 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
+		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
 		3763DE1329E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3763DE1429E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3763DE1729E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				37B1766B2A05465000A4E531 /* InputStage.swift */,
 				37B7B4112A05F22800B3AB08 /* Operation.swift */,
 				37F72E7F2A1531DF0013AC85 /* InputMethodMode.swift */,
+				37611CF22A27416800F3E6F9 /* KeyboardForm.swift */,
 				37073FDF2A25FEFD00691F9D /* TenKey */,
 				37E004222A16341100442290 /* Keyboards */,
 				37993A5D2A0EA25F00BC8E35 /* KeyViews */,
@@ -1374,6 +1377,7 @@
 				3768B4A42A00CE9B0049D7C1 /* AudioFeedback.swift in Sources */,
 				37B7B41A2A0646E100B3AB08 /* CandidateBoard.swift in Sources */,
 				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
+				37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */,
 				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
 				37993A6B2A0EA34D00BC8E35 /* NumericKey.swift in Sources */,
 				37073FF32A2642BD00691F9D /* TenKeyNavigateKey.swift in Sources */,
