@@ -2,8 +2,7 @@ import CoreIME
 
 enum Operation: Hashable {
         case input(String)
-        case separator
-        case punctuation(String)
+        case process(String)
         case space
         case doubleSpace
         case backspace

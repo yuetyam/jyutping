@@ -150,6 +150,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func operate(_ operation: Operation) {
                 switch operation {
                 case .input(let text):
+                        textDocumentProxy.insertText(text)
+                case .process(let text):
                         guard keyboardForm != .emojiBoard else {
                                 textDocumentProxy.insertText(text)
                                 return
@@ -160,10 +162,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 appendBufferText(text)
                         }
                         adjustKeyboard()
-                case .separator:
-                        appendBufferText("'")
-                case .punctuation(let text):
-                        textDocumentProxy.insertText(text)
                 case .space:
                         guard inputMethodMode.isCantonese else {
                                 textDocumentProxy.insertText(String.space)

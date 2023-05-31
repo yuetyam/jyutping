@@ -66,7 +66,7 @@ struct InputKey: View {
                         }
                         .onEnded { _ in
                                 let text: String = context.keyboardCase.isLowercased ? key.primary.center : key.primary.center.uppercased()
-                                context.operate(.input(text))
+                                context.operate(.process(text))
                          }
                 )
         }

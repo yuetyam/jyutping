@@ -51,7 +51,7 @@ struct TenKeyInputKey: View {
                         }
                         .onEnded { _ in
                                 let text: String = key.rawValue.lowercased()
-                                context.operate(.input(text))
+                                context.operate(.process(text))
                          }
                 )
         }

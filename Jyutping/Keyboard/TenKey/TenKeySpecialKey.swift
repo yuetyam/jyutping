@@ -61,7 +61,7 @@ struct TenKeySpecialKey: View {
                         }
                         .onEnded { _ in
                                 let text: String = context.inputStage.isBuffering ? "'" : "r"
-                                context.operate(.input(text))
+                                context.operate(.process(text))
                          }
                 )
         }

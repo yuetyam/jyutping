@@ -25,7 +25,7 @@ struct HiddenLetterKey: View {
                                                 return "m"
                                         }
                                 }()
-                                context.operate(.input(text))
+                                context.operate(.process(text))
                         }
         }
 }

@@ -85,15 +85,15 @@ struct CommaKey: View {
                         .onEnded { _ in
                                 if context.inputMethodMode.isABC {
                                         if context.needsInputModeSwitchKey {
-                                                context.operate(.punctuation("."))
+                                                context.operate(.input("."))
                                         } else {
-                                                context.operate(.punctuation(","))
+                                                context.operate(.input(","))
                                         }
                                 } else {
                                         if context.inputStage.isBuffering {
-                                                context.operate(.input("'"))
+                                                context.operate(.process("'"))
                                         } else {
-                                                context.operate(.punctuation("，"))
+                                                context.operate(.input("，"))
                                         }
                                 }
                          }

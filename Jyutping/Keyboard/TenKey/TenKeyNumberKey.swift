@@ -50,7 +50,7 @@ struct TenKeyNumberKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.punctuation(key))
+                                context.operate(.input(key))
                          }
                 )
         }

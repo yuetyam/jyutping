@@ -38,7 +38,7 @@ struct TenKeySymbolsBar: View {
                                                 .onTapGesture {
                                                         AudioFeedback.inputed()
                                                         context.triggerHapticFeedback()
-                                                        context.operate(.punctuation(symbols[index]))
+                                                        context.operate(.input(symbols[index]))
                                                 }
                                                 Divider()
                                         }
