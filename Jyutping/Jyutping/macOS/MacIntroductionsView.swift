@@ -25,8 +25,8 @@ struct MacIntroductionsView: View {
                                 }
                                 .block()
 
-                                BlockView(heading: "Lookup Jyutping with Cangjie", content: "Cangjie Reverse Lookup Description")
                                 BlockView(heading: "Lookup Jyutping with Pinyin", content: "Pinyin Reverse Lookup Description")
+                                BlockView(heading: "Lookup Jyutping with Cangjie", content: "Cangjie Reverse Lookup Description")
 
                                 VStack(spacing: 16) {
                                         HStack {

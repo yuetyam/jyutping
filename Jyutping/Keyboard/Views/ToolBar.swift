@@ -37,7 +37,7 @@ struct ToolBar: View {
                                 Color.interactiveClear
                                 CantoneseABCSwitch(isCantoneseSelected: context.inputMethodMode.isCantonese)
                         }
-                        .frame(width: 72, height: Constant.toolBarHeight)
+                        .frame(width: 80, height: Constant.toolBarHeight)
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 AudioFeedback.modified()

@@ -92,12 +92,12 @@ struct HomeView: View {
                                                 Text("tones.input.examples")
                                         }
                                         Section {
-                                                Text("Lookup Jyutping with Cangjie").font(.significant)
-                                                Text("Cangjie Reverse Lookup Description").lineSpacing(6)
-                                        }
-                                        Section {
                                                 Text("Lookup Jyutping with Pinyin").font(.significant)
                                                 Text("Pinyin Reverse Lookup Description").lineSpacing(6)
+                                        }
+                                        Section {
+                                                Text("Lookup Jyutping with Cangjie").font(.significant)
+                                                Text("Cangjie Reverse Lookup Description").lineSpacing(6)
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Stroke").font(.significant)
