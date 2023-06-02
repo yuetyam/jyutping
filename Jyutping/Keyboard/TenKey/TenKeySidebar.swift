@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TenKeySymbolsBar: View {
+struct TenKeySidebar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -16,8 +16,6 @@ struct TenKeySymbolsBar: View {
                 }
         }
 
-        private let symbols: [String] = ["+", "-", "*", "/", "=", "%", "#", ":", "@"]
-
         var body: some View {
                 ZStack {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -25,10 +23,10 @@ struct TenKeySymbolsBar: View {
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                         ScrollView {
                                 LazyVStack(spacing: 0) {
-                                        ForEach(0..<symbols.count, id: \.self) { index in
+                                        ForEach(0..<context.sidebarTexts.count, id: \.self) { index in
                                                 ZStack {
                                                         Color.interactiveClear
-                                                        Text(verbatim: symbols[index])
+                                                        Text(verbatim: context.sidebarTexts[index])
                                                 }
                                                 .frame(height: context.heightUnit * 3.0 / 4.0 - 1.0)
                                                 .frame(maxWidth: .infinity)
@@ -36,7 +34,7 @@ struct TenKeySymbolsBar: View {
                                                 .onTapGesture {
                                                         AudioFeedback.inputed()
                                                         context.triggerHapticFeedback()
-                                                        context.operate(.input(symbols[index]))
+                                                        // FIXME: Handle tapping
                                                 }
                                                 Divider()
                                         }

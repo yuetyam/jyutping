@@ -12,7 +12,7 @@
 		37073FE12A25FF1800691F9D /* TenKeySpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FE02A25FF1800691F9D /* TenKeySpaceKey.swift */; };
 		37073FE52A26008F00691F9D /* TenKeySymbolsBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FE42A26008F00691F9D /* TenKeySymbolsBar.swift */; };
 		37073FE72A2601D600691F9D /* TenKeyInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FE62A2601D600691F9D /* TenKeyInputKey.swift */; };
-		37073FE92A26028800691F9D /* Combination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FE82A26028800691F9D /* Combination.swift */; };
+		37073FE92A26028800691F9D /* Combo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FE82A26028800691F9D /* Combo.swift */; };
 		37073FEB2A26072C00691F9D /* TenKeyBackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FEA2A26072C00691F9D /* TenKeyBackspaceKey.swift */; };
 		37073FED2A26074B00691F9D /* TenKeyReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FEC2A26074B00691F9D /* TenKeyReturnKey.swift */; };
 		37073FEF2A26097600691F9D /* TenKeySpecialKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37073FEE2A26097600691F9D /* TenKeySpecialKey.swift */; };
@@ -158,6 +158,7 @@
 		37E004212A16331600442290 /* SymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E004202A16331600442290 /* SymbolicKeyboard.swift */; };
 		37E02E432955847200F7543F /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E422955847200F7543F /* NumbersView.swift */; };
 		37E02E452955AB9900F7543F /* Text2SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E442955AB9900F7543F /* Text2SpeechView.swift */; };
+		37E47FC72A29AD1E00EC11C6 /* TenKeySidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E47FC62A29AD1E00EC11C6 /* TenKeySidebar.swift */; };
 		37E4C60D2990B03A00BFF179 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C60C2990B03A00BFF179 /* Menu.swift */; };
 		37EA2897295158CB00B40CE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37EA2896295158CB00B40CE4 /* Settings.bundle */; };
 		37ED91D1298676220077B604 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED91D0298676220077B604 /* FontPicker.swift */; };
@@ -276,7 +277,7 @@
 		37073FE02A25FF1800691F9D /* TenKeySpaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySpaceKey.swift; sourceTree = "<group>"; };
 		37073FE42A26008F00691F9D /* TenKeySymbolsBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySymbolsBar.swift; sourceTree = "<group>"; };
 		37073FE62A2601D600691F9D /* TenKeyInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyInputKey.swift; sourceTree = "<group>"; };
-		37073FE82A26028800691F9D /* Combination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combination.swift; sourceTree = "<group>"; };
+		37073FE82A26028800691F9D /* Combo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combo.swift; sourceTree = "<group>"; };
 		37073FEA2A26072C00691F9D /* TenKeyBackspaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyBackspaceKey.swift; sourceTree = "<group>"; };
 		37073FEC2A26074B00691F9D /* TenKeyReturnKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyReturnKey.swift; sourceTree = "<group>"; };
 		37073FEE2A26097600691F9D /* TenKeySpecialKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySpecialKey.swift; sourceTree = "<group>"; };
@@ -465,6 +466,7 @@
 		37E004202A16331600442290 /* SymbolicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolicKeyboard.swift; sourceTree = "<group>"; };
 		37E02E422955847200F7543F /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 		37E02E442955AB9900F7543F /* Text2SpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text2SpeechView.swift; sourceTree = "<group>"; };
+		37E47FC62A29AD1E00EC11C6 /* TenKeySidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySidebar.swift; sourceTree = "<group>"; };
 		37E4C60C2990B03A00BFF179 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		37EA2896295158CB00B40CE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37ED91D0298676220077B604 /* FontPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
@@ -602,10 +604,11 @@
 				37073FEA2A26072C00691F9D /* TenKeyBackspaceKey.swift */,
 				37073FE62A2601D600691F9D /* TenKeyInputKey.swift */,
 				37073FF02A263EC600691F9D /* TenKeyNumberKey.swift */,
-				37073FE82A26028800691F9D /* Combination.swift */,
+				37073FE82A26028800691F9D /* Combo.swift */,
 				37073FEE2A26097600691F9D /* TenKeySpecialKey.swift */,
 				37073FE02A25FF1800691F9D /* TenKeySpaceKey.swift */,
 				37073FE42A26008F00691F9D /* TenKeySymbolsBar.swift */,
+				37E47FC62A29AD1E00EC11C6 /* TenKeySidebar.swift */,
 			);
 			path = TenKey;
 			sourceTree = "<group>";
@@ -1376,6 +1379,7 @@
 				37B7B4162A05F39500B3AB08 /* CharacterExtensions.swift in Sources */,
 				3768B4A42A00CE9B0049D7C1 /* AudioFeedback.swift in Sources */,
 				37B7B41A2A0646E100B3AB08 /* CandidateBoard.swift in Sources */,
+				37E47FC72A29AD1E00EC11C6 /* TenKeySidebar.swift in Sources */,
 				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
 				37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */,
 				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
@@ -1388,7 +1392,7 @@
 				3768B49C2A00C8B40049D7C1 /* Appearance.swift in Sources */,
 				37F72E802A1531DF0013AC85 /* InputMethodMode.swift in Sources */,
 				37B176642A049BD500A4E531 /* KeyElementView.swift in Sources */,
-				37073FE92A26028800691F9D /* Combination.swift in Sources */,
+				37073FE92A26028800691F9D /* Combo.swift in Sources */,
 				37DE32902A021C450066D03A /* Constant.swift in Sources */,
 				370D43902A10EA4100EB48B8 /* HiddenKey.swift in Sources */,
 				37993A692A0EA33600BC8E35 /* ShiftKey.swift in Sources */,

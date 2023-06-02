@@ -104,15 +104,23 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var inputStage: InputStage = .standby
 
         func clearBufferText() {
+                bufferCombos = []
                 bufferText = .empty
         }
-        func dropLastBufferCharacter() {
-                bufferText = String(bufferText.dropLast())
+        func dropLastBuffer() {
+                switch Options.keyboardLayout {
+                case .qwerty:
+                        bufferText = String(bufferText.dropLast())
+                case .saamPing:
+                        bufferText = String(bufferText.dropLast())
+                case .tenKey:
+                        bufferCombos = bufferCombos.dropLast()
+                }
         }
         func appendBufferText(_ text: String) {
                 bufferText += text
         }
-        private(set) lazy var bufferText: String = .empty {
+        private lazy var bufferText: String = .empty {
                 didSet {
                         switch (oldValue.isEmpty, bufferText.isEmpty) {
                         case (true, true):
@@ -144,6 +152,28 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
+        private lazy var bufferCombos: [Combo] = [] {
+                didSet {
+                        switch (oldValue.isEmpty, bufferCombos.isEmpty) {
+                        case (true, true):
+                                inputStage = .standby
+                        case (true, false):
+                                inputStage = .starting
+                                guard let combo = bufferCombos.first else { return }
+                                sidebarTexts = combo.keys
+                                guard let anchor = combo.anchors.first else { return }
+                                bufferText = anchor
+                        case (false, true):
+                                inputStage = .ending
+                                sidebarTexts = Constant.defaultSidebarTexts
+                        case (false, false):
+                                inputStage = .ongoing
+                        }
+                }
+        }
+        private lazy var confirmedSyllables: [String] = []
+        @Published private(set) var sidebarTexts: [String] = Constant.defaultSidebarTexts
+
 
         // MARK: - Operations
 
@@ -152,16 +182,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .input(let text):
                         textDocumentProxy.insertText(text)
                 case .process(let text):
-                        guard keyboardForm != .emojiBoard else {
-                                textDocumentProxy.insertText(text)
-                                return
-                        }
-                        if inputMethodMode.isABC {
-                                textDocumentProxy.insertText(text)
-                        } else {
+                        let shouldAppendBuffer: Bool = inputMethodMode.isCantonese && (keyboardForm == .alphabet)
+                        if shouldAppendBuffer {
                                 appendBufferText(text)
+                                adjustKeyboard()
+                        } else {
+                                textDocumentProxy.insertText(text)
                         }
-                        adjustKeyboard()
+                case .combine(let combo):
+                        bufferCombos.append(combo)
                 case .space:
                         guard inputMethodMode.isCantonese else {
                                 textDocumentProxy.insertText(String.space)
@@ -189,7 +218,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText("。")
                 case .backspace:
                         if inputStage.isBuffering {
-                                dropLastBufferCharacter()
+                                dropLastBuffer()
                         } else {
                                 textDocumentProxy.deleteBackward()
                         }
@@ -241,15 +270,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearClipboard:
                         UIPasteboard.general.items.removeAll()
                 case .clearText:
-                        if textDocumentProxy.selectedText != nil {
-                                textDocumentProxy.deleteBackward()
-                        }
-                        if let textBeforeCursor = textDocumentProxy.documentContextBeforeInput {
+                        textDocumentProxy.deleteBackward() // Delete selectedText
+                        for _ in 0..<5 {
+                                guard let textBeforeCursor = textDocumentProxy.documentContextBeforeInput else { break }
                                 _ = (0..<textBeforeCursor.count).map({ _ in
                                         textDocumentProxy.deleteBackward()
                                 })
                         }
-                        if let textAfterCursor = textDocumentProxy.documentContextAfterInput {
+                        for _ in 0..<5 {
+                                guard let textAfterCursor = textDocumentProxy.documentContextAfterInput else { break }
                                 let characterCount: Int = textAfterCursor.count
                                 textDocumentProxy.adjustTextPosition(byCharacterOffset: characterCount)
                                 _ = (0..<characterCount).map({ _ in
@@ -261,11 +290,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .moveCursorForward:
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
                 case .jumpToHead:
-                        guard let text = textDocumentProxy.documentContextBeforeInput else { return }
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -(text.count))
+                        for _ in 0..<5 {
+                                guard let text = textDocumentProxy.documentContextBeforeInput else { break }
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: -(text.count))
+                        }
                 case .jumpToTail:
-                        guard let text = textDocumentProxy.documentContextAfterInput else { return }
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: text.count)
+                        for _ in 0..<5 {
+                                guard let text = textDocumentProxy.documentContextAfterInput else { break }
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: text.count)
+                        }
                 }
         }
         private func aftercareSelected(_ candidate: Candidate) {

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TenKeyInputKey: View {
 
-        let key: Combination
+        let key: Combo
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -37,7 +37,7 @@ struct TenKeyInputKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(3)
-                        Text(verbatim: key.rawValue)
+                        Text(verbatim: key.text)
                 }
                 .frame(width: context.widthUnit * 2, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -50,8 +50,7 @@ struct TenKeyInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                let text: String = key.rawValue.lowercased()
-                                context.operate(.process(text))
+                                context.operate(.combine(key))
                          }
                 )
         }

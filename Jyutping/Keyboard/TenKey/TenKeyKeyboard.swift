@@ -14,7 +14,7 @@ struct TenKeyKeyboard: View {
                         HStack(spacing: 0) {
                                 VStack(spacing: 0) {
                                         HStack(spacing: 0) {
-                                                TenKeySymbolsBar().environmentObject(context)
+                                                TenKeySidebar().environmentObject(context)
                                                 VStack(spacing: 0) {
                                                         HStack(spacing: 0) {
                                                                 TenKeySpecialKey()
