@@ -24,6 +24,10 @@ struct MotherBoard: View {
                         SymbolicKeyboard().environmentObject(context)
                 case .tenKeyNumeric:
                         TenKeyNumericKeyboard().environmentObject(context)
+                case .numberPad:
+                        NumberPad(isDecimalPad: false).environmentObject(context)
+                case .decimalPad:
+                        NumberPad(isDecimalPad: true).environmentObject(context)
                 default:
                         switch context.inputMethodMode {
                         case .abc:

@@ -54,6 +54,7 @@
 		3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B92973CDAA000B3332 /* VisualEffect.swift */; };
 		3783D9BC29741B06000B3332 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9BB29741B06000B3332 /* Constant.swift */; };
 		3783D9BE29744036000B3332 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9BD29744036000B3332 /* Constant.swift */; };
+		37877D502A2B119300630F77 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37877D4F2A2B119300630F77 /* NumberPad.swift */; };
 		378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */; };
 		378B2A7A29A76E0700456AE8 /* IOSMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */; };
 		378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */; };
@@ -327,6 +328,7 @@
 		3783D9B92973CDAA000B3332 /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		3783D9BB29741B06000B3332 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		3783D9BD29744036000B3332 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		37877D4F2A2B119300630F77 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
 		378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroStationLabel.swift; sourceTree = "<group>"; };
 		378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroLineView.swift; sourceTree = "<group>"; };
 		378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSFatshanMetroView.swift; sourceTree = "<group>"; };
@@ -952,6 +954,7 @@
 			isa = PBXGroup;
 			children = (
 				3768B4A62A00E9760049D7C1 /* MotherBoard.swift */,
+				37877D4F2A2B119300630F77 /* NumberPad.swift */,
 				37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */,
 				37F72E762A14EF7B0013AC85 /* NumericKeyboard.swift */,
 				37E004202A16331600442290 /* SymbolicKeyboard.swift */,
@@ -1419,6 +1422,7 @@
 				37073FDE2A25FC2700691F9D /* TenKeyKeyboard.swift in Sources */,
 				37DE328E2A021A570066D03A /* Direction.swift in Sources */,
 				37993A5F2A0EA28200BC8E35 /* CommaKey.swift in Sources */,
+				37877D502A2B119300630F77 /* NumberPad.swift in Sources */,
 				37F72E7C2A14F4490013AC85 /* NumericSymbolicSwitchKey.swift in Sources */,
 				37073FEF2A26097600691F9D /* TenKeySpecialKey.swift in Sources */,
 			);
