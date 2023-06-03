@@ -104,8 +104,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var inputStage: InputStage = .standby
 
         func clearBufferText() {
-                bufferCombos = []
-                bufferText = .empty
+                switch Options.keyboardLayout {
+                case .qwerty:
+                        bufferText = .empty
+                case .saamPing:
+                        bufferText = .empty
+                case .tenKey:
+                        bufferCombos = []
+                }
         }
         func dropLastBuffer() {
                 switch Options.keyboardLayout {
@@ -161,14 +167,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .starting
                                 guard let combo = bufferCombos.first else { return }
                                 sidebarTexts = combo.keys
-                                guard let anchor = combo.anchors.first else { return }
-                                bufferText = anchor
                         case (false, true):
                                 inputStage = .ending
                                 sidebarTexts = Constant.defaultSidebarTexts
                         case (false, false):
                                 inputStage = .ongoing
+                                guard let combo = bufferCombos.last else { return }
+                                sidebarTexts = combo.keys
                         }
+                        tenKeySuggest()
                 }
         }
         private lazy var confirmedSyllables: [String] = []
@@ -387,6 +394,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let userCandidates: [Candidate] = [] // UserLexicon.suggest(text: processingText, segmentation: segmentation)
                 let combined: [Candidate] = userCandidates + engineCandidates
                 candidates = combined.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+        }
+        private func tenKeySuggest() {
+                guard var possibleTexts = bufferCombos.first?.keys.map({ $0 }) else { return }
+                for combo in bufferCombos.dropFirst() {
+                        let possibilities = combo.keys.map { key -> [String] in
+                                return possibleTexts.map({ $0 + key })
+                        }
+                        possibleTexts = possibilities.flatMap({ $0 })
+                }
+                let suggestions = possibleTexts.uniqued().map { scheme -> [Candidate] in
+                        let segmentation = Segmentor.segment(text: scheme)
+                        guard segmentation.maxLength == scheme.count else { return [] }
+                        return Engine.suggest(text: scheme, segmentation: segmentation)
+                }
+                let sortedCandidates = suggestions.flatMap({ $0 }).sorted(by: { $0.input > $1.input })
+                candidates = sortedCandidates.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
