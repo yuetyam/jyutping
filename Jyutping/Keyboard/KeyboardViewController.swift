@@ -189,7 +189,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .input(let text):
                         textDocumentProxy.insertText(text)
                 case .process(let text):
-                        let shouldAppendBuffer: Bool = inputMethodMode.isCantonese && (keyboardForm == .alphabet)
+                        let shouldAppendBuffer: Bool = inputMethodMode.isCantonese && (keyboardForm == .alphabetic)
                         if shouldAppendBuffer {
                                 appendBufferText(text)
                                 adjustKeyboard()
@@ -492,15 +492,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func toggleInputMethodMode() {
                 inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
                 if inputMethodMode.isABC && (keyboardForm == .tenKeyNumeric) {
-                        updateKeyboardForm(to: .alphabet)
+                        updateKeyboardForm(to: .alphabetic)
                 } else {
                         updateReturnKeyText()
                         updateSpaceText()
                 }
         }
 
-        @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabet
-        @Published private(set) var keyboardForm: KeyboardForm = .alphabet
+        @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabetic
+        @Published private(set) var keyboardForm: KeyboardForm = .alphabetic
         func updateKeyboardForm(to form: KeyboardForm) {
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form

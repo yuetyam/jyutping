@@ -1,5 +1,5 @@
 enum KeyboardForm: Int {
-        case alphabet
+        case alphabetic
         case candidateBoard
         case decimalPad
         case editingPanel
@@ -9,4 +9,17 @@ enum KeyboardForm: Int {
         case settings
         case symbolic
         case tenKeyNumeric
+}
+
+enum QwertyForm: Int {
+
+        case abc
+        case jyutping
+        case saamPing
+
+        case pinyin
+        case cangjie
+        case stroke
+        /// LoengFan
+        case compose
 }

@@ -49,7 +49,7 @@ struct AlphabeticKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.updateKeyboardForm(to: .alphabet)
+                                context.updateKeyboardForm(to: .alphabetic)
                          }
                 )
         }

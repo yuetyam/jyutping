@@ -29,7 +29,7 @@ struct TenKeyNavigateKey: View {
         }
         private var keyText: String {
                 switch destination {
-                case .alphabet:
+                case .alphabetic:
                         return "ABC"
                 case .numeric:
                         return "#@$"

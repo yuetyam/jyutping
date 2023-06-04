@@ -30,7 +30,7 @@ struct TenKeyNumericKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                TenKeyNavigateKey(destination: .alphabet)
+                                                TenKeyNavigateKey(destination: .alphabetic)
                                                 TenKeyNumberKey(key: ".")
                                                 TenKeyNumberKey(key: "0")
                                                 TenKeySpaceKey()

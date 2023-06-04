@@ -50,7 +50,7 @@ struct InputKey: View {
                                 Text(verbatim: key.primary.center)
                                         .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
                                         .font(.system(size: 24))
-                                        .padding(.bottom, (context.keyboardForm == .alphabet && context.keyboardCase.isLowercased) ? 3 : 0)
+                                        .padding(.bottom, (context.keyboardForm == .alphabetic && context.keyboardCase.isLowercased) ? 3 : 0)
                                 // KeyElementView(element: key.primary).font(.title2)
                         }
                 }

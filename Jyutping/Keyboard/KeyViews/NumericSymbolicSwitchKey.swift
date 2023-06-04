@@ -65,7 +65,7 @@ struct NumericSymbolicSwitchKey: View {
                                         case .numeric:
                                                 return .symbolic
                                         default:
-                                                return .alphabet
+                                                return .alphabetic
                                         }
                                 }()
                                 context.updateKeyboardForm(to: newForm)
