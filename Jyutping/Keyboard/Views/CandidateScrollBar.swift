@@ -17,12 +17,10 @@ struct CandidateScrollBar: View {
                                                         switch commentStyle {
                                                         case .aboveCandidates:
                                                                 VStack(spacing: -2) {
-                                                                        if candidate.isCantonese {
-                                                                                Text(verbatim: candidate.romanization)
-                                                                                        .minimumScaleFactor(0.2)
-                                                                                        .lineLimit(1)
-                                                                                        .font(.romanization)
-                                                                        }
+                                                                        Text(verbatim: candidate.isCantonese ? candidate.romanization: String.space)
+                                                                                .minimumScaleFactor(0.2)
+                                                                                .lineLimit(1)
+                                                                                .font(.romanization)
                                                                         Text(verbatim: candidate.text)
                                                                                 .lineLimit(1)
                                                                                 .font(.candidate)
@@ -34,12 +32,10 @@ struct CandidateScrollBar: View {
                                                                         Text(verbatim: candidate.text)
                                                                                 .lineLimit(1)
                                                                                 .font(.candidate)
-                                                                        if candidate.isCantonese {
-                                                                                Text(verbatim: candidate.romanization)
-                                                                                        .minimumScaleFactor(0.2)
-                                                                                        .lineLimit(1)
-                                                                                        .font(.romanization)
-                                                                        }
+                                                                        Text(verbatim: candidate.isCantonese ? candidate.romanization: String.space)
+                                                                                .minimumScaleFactor(0.2)
+                                                                                .lineLimit(1)
+                                                                                .font(.romanization)
                                                                 }
                                                                 .padding(.horizontal, 1)
                                                                 .padding(.bottom, 8)
