@@ -188,14 +188,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 switch operation {
                 case .input(let text):
                         textDocumentProxy.insertText(text)
+                        adjustKeyboard()
                 case .process(let text):
                         let shouldAppendBuffer: Bool = inputMethodMode.isCantonese && (keyboardForm == .alphabetic)
                         if shouldAppendBuffer {
                                 appendBufferText(text)
-                                adjustKeyboard()
                         } else {
                                 textDocumentProxy.insertText(text)
                         }
+                        adjustKeyboard()
                 case .combine(let combo):
                         bufferCombos.append(combo)
                 case .space:
@@ -205,9 +206,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         guard inputStage.isBuffering else {
-                                // TODO: Full-width space?
-                                let spaceValue: String = " "
-                                textDocumentProxy.insertText(spaceValue)
+                                let spaceText: String = (keyboardCase == .uppercased) ? String.fullWidthSpace : String.space
+                                textDocumentProxy.insertText(spaceText)
                                 adjustKeyboard()
                                 return
                         }
@@ -221,8 +221,31 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 adjustKeyboard()
                         }
                 case .doubleSpace:
-                        textDocumentProxy.deleteBackward()
-                        textDocumentProxy.insertText("。")
+                        let shortcutText: String? = {
+                                switch (Options.doubleSpaceShortcut, inputMethodMode) {
+                                case (.insertPeriod, .abc):
+                                        return ". "
+                                case (.insertPeriod, .cantonese):
+                                        return "。"
+                                case (.doNothing, _):
+                                        return nil
+                                case (.insertIdeographicComma, .abc):
+                                        return nil
+                                case (.insertIdeographicComma, .cantonese):
+                                        return "、"
+                                case (.insertFullWidthSpace, .abc):
+                                        return nil
+                                case (.insertFullWidthSpace, .cantonese):
+                                        return String.fullWidthSpace
+                                }
+                        }()
+                        if let shortcutText {
+                                textDocumentProxy.deleteBackward()
+                                textDocumentProxy.insertText(shortcutText)
+                        } else {
+                                textDocumentProxy.insertText(String.space)
+                        }
+                        adjustKeyboard()
                 case .backspace:
                         if inputStage.isBuffering {
                                 dropLastBuffer()
