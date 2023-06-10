@@ -231,11 +231,23 @@ struct SettingsView: View {
                                         Button {
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()
+                                                selectedCommentToneStyle = .noTones
+                                                Options.updateCommentToneStyle(to: .noTones)
+                                        } label: {
+                                                HStack {
+                                                        Text("ToneDisplayStyle.Option2").foregroundColor(.primary)
+                                                        Spacer()
+                                                        Image.checkmark.opacity(selectedCommentToneStyle == .noTones ? 1: 0)
+                                                }
+                                        }
+                                        Button {
+                                                AudioFeedback.modified()
+                                                context.triggerSelectionHapticFeedback()
                                                 selectedCommentToneStyle = .superscript
                                                 Options.updateCommentToneStyle(to: .superscript)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option2").foregroundColor(.primary)
+                                                        Text("ToneDisplayStyle.Option3").foregroundColor(.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .superscript ? 1: 0)
                                                 }
@@ -247,21 +259,9 @@ struct SettingsView: View {
                                                 Options.updateCommentToneStyle(to: .subscript)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option3").foregroundColor(.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentToneStyle == .subscript ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentToneStyle = .noTones
-                                                Options.updateCommentToneStyle(to: .noTones)
-                                        } label: {
-                                                HStack {
                                                         Text("ToneDisplayStyle.Option4").foregroundColor(.primary)
                                                         Spacer()
-                                                        Image.checkmark.opacity(selectedCommentToneStyle == .noTones ? 1: 0)
+                                                        Image.checkmark.opacity(selectedCommentToneStyle == .subscript ? 1: 0)
                                                 }
                                         }
                                 } header: {
