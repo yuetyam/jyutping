@@ -48,7 +48,6 @@
 		378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* RomanizationLabel.swift */; };
 		378020D42975A1D0002F6E0A /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D32975A1D0002F6E0A /* GwongWanView.swift */; };
 		378020D62975A6FC002F6E0A /* GwongWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D52975A6FC002F6E0A /* GwongWanLabel.swift */; };
-		3783D9B42973BED8000B3332 /* SerialNumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */; };
 		3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B52973BEF5000B3332 /* CommentLabel.swift */; };
 		3783D9B82973CB55000B3332 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B72973CB55000B3332 /* CandidateLabel.swift */; };
 		3783D9BA2973CDAA000B3332 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B92973CDAA000B3332 /* VisualEffect.swift */; };
@@ -322,7 +321,6 @@
 		378020D129752EA6002F6E0A /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		378020D32975A1D0002F6E0A /* GwongWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
 		378020D52975A6FC002F6E0A /* GwongWanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanLabel.swift; sourceTree = "<group>"; };
-		3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialNumberLabel.swift; sourceTree = "<group>"; };
 		3783D9B52973BEF5000B3332 /* CommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		3783D9B72973CB55000B3332 /* CandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
 		3783D9B92973CDAA000B3332 /* VisualEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
@@ -680,7 +678,6 @@
 				37C042E329F5805B00F7F301 /* MotherBoard.swift */,
 				37FC1B90294DFC5300D7153F /* CandidateBoard.swift */,
 				3783D9B72973CB55000B3332 /* CandidateLabel.swift */,
-				3783D9B32973BED8000B3332 /* SerialNumberLabel.swift */,
 				3783D9B52973BEF5000B3332 /* CommentLabel.swift */,
 			);
 			path = CandidateViews;
@@ -1566,7 +1563,6 @@
 				37E4C60D2990B03A00BFF179 /* Menu.swift in Sources */,
 				37FC1BBB294DFC5400D7153F /* InputMethodApp.swift in Sources */,
 				37FC1BB2294DFC5300D7153F /* Direction.swift in Sources */,
-				3783D9B42973BED8000B3332 /* SerialNumberLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

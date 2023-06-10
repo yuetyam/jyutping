@@ -29,25 +29,25 @@ struct OptionsView: View {
                 let highlightedIndex = context.optionsHighlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
-                                SettingLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
-                                SettingLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
-                                SettingLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
+                                OptionLabel(verticalPadding: verticalPadding, index: 0, highlightedIndex: highlightedIndex, text: options[0], checked: characterStandard == .traditional)
+                                OptionLabel(verticalPadding: verticalPadding, index: 1, highlightedIndex: highlightedIndex, text: options[1], checked: characterStandard == .hongkong)
+                                OptionLabel(verticalPadding: verticalPadding, index: 2, highlightedIndex: highlightedIndex, text: options[2], checked: characterStandard == .taiwan)
+                                OptionLabel(verticalPadding: verticalPadding, index: 3, highlightedIndex: highlightedIndex, text: options[3], checked: characterStandard == .simplified)
                         }
                         Divider()
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm == .halfWidth)
-                                SettingLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm == .fullWidth)
+                                OptionLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm == .halfWidth)
+                                OptionLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm == .fullWidth)
                         }
                         Divider()
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm == .cantonese)
-                                SettingLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm == .english)
+                                OptionLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm == .cantonese)
+                                OptionLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm == .english)
                         }
                         Divider()
                         Group {
-                                SettingLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: needsEmojiCandidates)
-                                SettingLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: !needsEmojiCandidates)
+                                OptionLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: needsEmojiCandidates)
+                                OptionLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: !needsEmojiCandidates)
                         }
                 }
                 .padding(8)
@@ -56,7 +56,7 @@ struct OptionsView: View {
         }
 }
 
-private struct SettingLabel: View {
+private struct OptionLabel: View {
 
         let verticalPadding: CGFloat
         let index: Int
@@ -65,11 +65,11 @@ private struct SettingLabel: View {
         let checked: Bool
 
         var body: some View {
-                let serialNumber: String = index == 9 ? "0" : "\(index + 1)"
+                let serialNumber: String = (index == 9) ? "0" : "\(index + 1)"
                 let isHighlighted: Bool = index == highlightedIndex
                 HStack(spacing: 0) {
                         HStack(spacing: 16) {
-                                Text(verbatim: serialNumber).font(.label)
+                                Text(verbatim: serialNumber).font(.label).foregroundColor(isHighlighted ? .white : .secondary)
                                 Text(verbatim: text).font(.candidate)
                         }
                         Spacer()

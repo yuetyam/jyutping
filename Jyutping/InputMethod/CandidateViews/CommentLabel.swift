@@ -1,31 +1,5 @@
 import SwiftUI
 
-private struct Syllable {
-        let phone: String
-        let tone: String
-}
-
-private struct ModifiedCommentView: View {
-        let alignment: VerticalAlignment
-        let syllables: [Syllable]
-        let foreColor: Color
-        let shouldModifyColor: Bool
-        let shouldApplyToneFont: Bool
-        var body: some View {
-                HStack(alignment: alignment, spacing: 0) {
-                        ForEach(0..<syllables.count, id: \.self) { index in
-                                let syllable = syllables[index]
-                                let leadingText: String = (index == 0) ? syllable.phone : " \(syllable.phone)"
-                                Text(verbatim: leadingText).font(.comment)
-                                Text(verbatim: syllable.tone)
-                                        .font(shouldApplyToneFont ? .commentTone : .comment)
-                                        .foregroundColor(shouldModifyColor ? foreColor.opacity(0.67) : foreColor)
-                        }
-                        Spacer()
-                }
-        }
-}
-
 struct CommentLabel: View {
 
         init(_ comment: String, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, foreColor: Color) {
@@ -76,6 +50,32 @@ struct CommentLabel: View {
                                 ModifiedCommentView(alignment: .bottom, syllables: syllables, foreColor: foreColor, shouldModifyColor: shouldModifyColor, shouldApplyToneFont: true)
                         } else {
                                 Text(verbatim: comment).font(.comment)
+                        }
+                }
+        }
+}
+
+private struct Syllable {
+        let phone: String
+        let tone: String
+}
+
+private struct ModifiedCommentView: View {
+        let alignment: VerticalAlignment
+        let syllables: [Syllable]
+        let foreColor: Color
+        let shouldModifyColor: Bool
+        let shouldApplyToneFont: Bool
+        var body: some View {
+                let toneForeColor: Color = shouldModifyColor ? foreColor.opacity(0.66) : foreColor
+                HStack(alignment: alignment, spacing: 0) {
+                        ForEach(0..<syllables.count, id: \.self) { index in
+                                let syllable = syllables[index]
+                                let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
+                                Text(verbatim: leadingText).font(.comment)
+                                Text(verbatim: syllable.tone)
+                                        .font(shouldApplyToneFont ? .commentTone : .comment)
+                                        .foregroundColor(toneForeColor)
                         }
                 }
         }

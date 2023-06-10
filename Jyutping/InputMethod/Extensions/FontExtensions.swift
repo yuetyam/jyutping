@@ -112,11 +112,9 @@ extension Font {
 extension Font {
 
         private(set) static var label: Font = labelFont(size: AppSettings.labelFontSize)
-        private(set) static var labelDot: Font = Font.system(size: AppSettings.labelFontSize)
         static func updateLabelFont() {
                 let size: CGFloat = AppSettings.labelFontSize
                 label = labelFont(size: size)
-                labelDot = Font.system(size: size)
         }
         private static func labelFont(size: CGFloat) -> Font {
                 lazy var fallback: Font = Font.system(size: size).monospacedDigit()

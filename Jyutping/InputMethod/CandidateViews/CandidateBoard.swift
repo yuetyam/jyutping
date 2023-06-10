@@ -12,17 +12,13 @@ struct CandidateBoard: View {
                 let highlightedIndex = context.highlightedIndex
                 VStack(alignment: .leading, spacing: 0) {
                         ForEach(0..<context.displayCandidates.count, id: \.self) { index in
-                                let isHighlighted: Bool = index == highlightedIndex
-                                let foreColor: Color = isHighlighted ? Color.white : Color.primary
-                                let backColor: Color = isHighlighted ? Color.accentColor : Color.clear
                                 CandidateLabel(
                                         candidate: context.displayCandidates[index],
                                         index: index,
+                                        highlightedIndex: highlightedIndex,
                                         toneStyle: toneStyle,
                                         toneColor: toneColor,
-                                        verticalPadding: verticalPadding,
-                                        foreColor: foreColor,
-                                        backColor: backColor
+                                        verticalPadding: verticalPadding
                                 )
                         }
                 }
