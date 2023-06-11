@@ -23,4 +23,5 @@ extension Font {
         }
 
         static let romanization: Font = Font.system(size: 12)
+        static let tone: Font = Font.system(size: 10)
 }

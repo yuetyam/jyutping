@@ -7,6 +7,7 @@ struct CandidateScrollBar: View {
 
         var body: some View {
                 let commentStyle: CommentStyle = Options.commentStyle
+                let commentToneStyle: CommentToneStyle = Options.commentToneStyle
                 HStack(spacing: 0) {
                         ScrollView(.horizontal) {
                                 LazyHStack(spacing: 0) {
@@ -16,11 +17,8 @@ struct CandidateScrollBar: View {
                                                         Color.interactiveClear
                                                         switch commentStyle {
                                                         case .aboveCandidates:
-                                                                VStack(spacing: -2) {
-                                                                        Text(verbatim: candidate.isCantonese ? candidate.romanization: String.space)
-                                                                                .minimumScaleFactor(0.2)
-                                                                                .lineLimit(1)
-                                                                                .font(.romanization)
+                                                                VStack {
+                                                                        RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                         Text(verbatim: candidate.text)
                                                                                 .lineLimit(1)
                                                                                 .font(.candidate)
@@ -28,14 +26,11 @@ struct CandidateScrollBar: View {
                                                                 .padding(.horizontal, 1)
                                                                 .padding(.bottom, 8)
                                                         case .belowCandidates:
-                                                                VStack(spacing: -2) {
+                                                                VStack {
                                                                         Text(verbatim: candidate.text)
                                                                                 .lineLimit(1)
                                                                                 .font(.candidate)
-                                                                        Text(verbatim: candidate.isCantonese ? candidate.romanization: String.space)
-                                                                                .minimumScaleFactor(0.2)
-                                                                                .lineLimit(1)
-                                                                                .font(.romanization)
+                                                                        RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                 }
                                                                 .padding(.horizontal, 1)
                                                                 .padding(.bottom, 8)
@@ -85,4 +80,78 @@ struct CandidateScrollBar: View {
         private func candidateWidth(of candidate: Candidate) -> CGFloat {
                 return CGFloat(candidate.text.count * 20 + 28)
         }
+}
+
+
+private struct RomanizationLabel: View {
+
+        init(candidate: Candidate, toneStyle: CommentToneStyle) {
+                self.candidate = candidate
+                self.toneStyle = toneStyle
+                self.syllables = {
+                        let blocks = candidate.romanization.split(separator: " ")
+                        let items: [Syllable] = blocks.map({ syllable -> Syllable in
+                                let phone: String = syllable.filter({ !$0.isTone })
+                                let tone: String = syllable.filter(\.isTone)
+                                return Syllable(phone: phone, tone: tone)
+                        })
+                        return items
+                }()
+        }
+
+        let candidate: Candidate
+        let toneStyle: CommentToneStyle
+        let syllables: [Syllable]
+
+        var body: some View {
+                switch toneStyle {
+                case .normal:
+                        Text(verbatim: candidate.isCantonese ? candidate.romanization : String.space)
+                                .minimumScaleFactor(0.2)
+                                .lineLimit(1)
+                                .font(.romanization)
+                case .superscript:
+                        if candidate.isCantonese {
+                                HStack(alignment: .top, spacing: 0) {
+                                        ForEach(0..<syllables.count, id: \.self) { index in
+                                                let syllable = syllables[index]
+                                                let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
+                                                Text(verbatim: leadingText)
+                                                        .minimumScaleFactor(0.2)
+                                                        .lineLimit(1)
+                                                        .font(.romanization)
+                                                Text(verbatim: syllable.tone).font(.tone)
+                                        }
+                                }
+                        } else {
+                                Text(verbatim: String.space).font(.romanization)
+                        }
+                case .subscript:
+                        if candidate.isCantonese {
+                                HStack(alignment: .bottom, spacing: 0) {
+                                        ForEach(0..<syllables.count, id: \.self) { index in
+                                                let syllable = syllables[index]
+                                                let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
+                                                Text(verbatim: leadingText)
+                                                        .minimumScaleFactor(0.2)
+                                                        .lineLimit(1)
+                                                        .font(.romanization)
+                                                Text(verbatim: syllable.tone).font(.tone)
+                                        }
+                                }
+                        } else {
+                                Text(verbatim: String.space).font(.romanization)
+                        }
+                case .noTones:
+                        Text(verbatim: candidate.isCantonese ? candidate.romanization.removedTones() : String.space)
+                                .minimumScaleFactor(0.2)
+                                .lineLimit(1)
+                                .font(.romanization)
+                }
+        }
+}
+
+private struct Syllable {
+        let phone: String
+        let tone: String
 }
