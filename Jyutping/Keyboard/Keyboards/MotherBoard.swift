@@ -37,7 +37,7 @@ struct MotherBoard: View {
                                 case .qwerty:
                                         AlphabeticKeyboard().environmentObject(context)
                                 case .saamPing:
-                                        AlphabeticKeyboard().environmentObject(context)
+                                        SaamPingKeyboard().environmentObject(context)
                                 case .tenKey:
                                         if context.keyboardInterface.isCompact {
                                                 TenKeyKeyboard().environmentObject(context)

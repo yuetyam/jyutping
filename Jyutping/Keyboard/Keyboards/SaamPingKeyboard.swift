@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AlphabeticKeyboard: View {
+struct SaamPingKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -12,12 +12,12 @@ struct AlphabeticKeyboard: View {
                                 ToolBar()
                         }
                         HStack(spacing: 0 ) {
-                                LetterInputKey("q")
+                                DualLettersInputKey("aa")
                                 LetterInputKey("w")
                                 LetterInputKey("e")
-                                LetterInputKey("r")
+                                DualLettersInputKey("oe")
                                 LetterInputKey("t")
-                                LetterInputKey("y")
+                                DualLettersInputKey("yu")
                                 LetterInputKey("u")
                                 LetterInputKey("i")
                                 LetterInputKey("o")
@@ -43,9 +43,9 @@ struct AlphabeticKeyboard: View {
                                 HiddenKey(key: .letterZ)
                                 Group {
                                         LetterInputKey("z")
-                                        LetterInputKey("x")
+                                        DualLettersInputKey("gw")
                                         LetterInputKey("c")
-                                        LetterInputKey("v")
+                                        DualLettersInputKey("ng")
                                         LetterInputKey("b")
                                         LetterInputKey("n")
                                         LetterInputKey("m")

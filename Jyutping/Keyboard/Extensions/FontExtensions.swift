@@ -24,4 +24,10 @@ extension Font {
 
         static let romanization: Font = Font.system(size: 12)
         static let tone: Font = Font.system(size: 10)
+
+
+        // MARK: - Input Key
+
+        static let letterInputKeyCompact: Font = Font.system(size: 24)
+        static let dualLettersInputKeyCompact: Font = Font.system(size: 18)
 }
