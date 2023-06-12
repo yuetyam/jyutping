@@ -1,54 +1,54 @@
 import SwiftUI
 
+/// ABC mode keyboard
 struct SymbolicKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
                 VStack(spacing: 0) {
-                        ToolBar().environmentObject(context)
-                        HStack(spacing: 0 ) {
-                                InputKey(key: KeyUnit(primary: KeyElement("["))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("]"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("{"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("}"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("#"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("%"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("^"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("*"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("+"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("="))).environmentObject(context)
-
+                        ToolBar()
+                        HStack(spacing: 0) {
+                                SymbolInputKey("[")
+                                SymbolInputKey("]")
+                                SymbolInputKey("{")
+                                SymbolInputKey("}")
+                                SymbolInputKey("#")
+                                SymbolInputKey("%")
+                                SymbolInputKey("^")
+                                SymbolInputKey("*")
+                                SymbolInputKey("+")
+                                SymbolInputKey("=")
                         }
                         HStack(spacing: 0) {
-                                InputKey(key: KeyUnit(primary: KeyElement("_"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("\\"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("|"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("~"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("<"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement(">"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("$"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("$"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("$"))).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("•"))).environmentObject(context)
+                                SymbolInputKey("_")
+                                SymbolInputKey("\\")
+                                SymbolInputKey("|")
+                                SymbolInputKey("~")
+                                SymbolInputKey("<")
+                                SymbolInputKey(">")
+                                SymbolInputKey("€")
+                                SymbolInputKey("£")
+                                SymbolInputKey("¥")
+                                SymbolInputKey("•")
                         }
                         HStack(spacing: 0) {
-                                NumericSymbolicSwitchKey().environmentObject(context)
+                                NumericSymbolicSwitchKey()
                                 PlaceholderKey()
-                                InputKey(key: KeyUnit(primary: KeyElement(".")), widthUnitTimes: 1.3).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement(",")), widthUnitTimes: 1.3).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("?")), widthUnitTimes: 1.3).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("!")), widthUnitTimes: 1.3).environmentObject(context)
-                                InputKey(key: KeyUnit(primary: KeyElement("'")), widthUnitTimes: 1.3).environmentObject(context)
+                                SymbolInputKey(".", widthUnitTimes: 1.3)
+                                SymbolInputKey(",", widthUnitTimes: 1.3)
+                                SymbolInputKey("?", widthUnitTimes: 1.3)
+                                SymbolInputKey("!", widthUnitTimes: 1.3)
+                                SymbolInputKey("'", widthUnitTimes: 1.3)
                                 PlaceholderKey()
-                                BackspaceKey().environmentObject(context)
+                                BackspaceKey()
                         }
                         HStack(spacing: 0) {
-                                AlphabeticKey().environmentObject(context)
-                                CommaKey().environmentObject(context)
-                                SpaceKey().environmentObject(context)
-                                PeriodKey().environmentObject(context)
-                                ReturnKey().environmentObject(context)
+                                AlphabeticKey()
+                                CommaKey()
+                                SpaceKey()
+                                PeriodKey()
+                                ReturnKey()
                         }
                 }
         }

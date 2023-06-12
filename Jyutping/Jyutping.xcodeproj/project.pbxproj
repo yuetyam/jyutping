@@ -25,6 +25,7 @@
 		370DF32F2A36B43D00AE655B /* SaamPingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370DF32E2A36B43D00AE655B /* SaamPingKeyboard.swift */; };
 		370DF3312A36B6EA00AE655B /* LetterInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370DF3302A36B6EA00AE655B /* LetterInputKey.swift */; };
 		370DF3332A36BB0B00AE655B /* DualLettersInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */; };
+		370DF3352A370C9A00AE655B /* SymbolInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370DF3342A370C9A00AE655B /* SymbolInputKey.swift */; };
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
 		371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* AppContext.swift */; };
 		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
@@ -293,6 +294,7 @@
 		370DF32E2A36B43D00AE655B /* SaamPingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaamPingKeyboard.swift; sourceTree = "<group>"; };
 		370DF3302A36B6EA00AE655B /* LetterInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterInputKey.swift; sourceTree = "<group>"; };
 		370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualLettersInputKey.swift; sourceTree = "<group>"; };
+		370DF3342A370C9A00AE655B /* SymbolInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolInputKey.swift; sourceTree = "<group>"; };
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
 		371B6CEE29F4DC4E00DBB629 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 				370DF3302A36B6EA00AE655B /* LetterInputKey.swift */,
 				370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */,
 				370D438F2A10EA4100EB48B8 /* HiddenKey.swift */,
+				370DF3342A370C9A00AE655B /* SymbolInputKey.swift */,
 			);
 			path = KeyViews;
 			sourceTree = "<group>";
@@ -1381,6 +1384,7 @@
 				37073FEB2A26072C00691F9D /* TenKeyBackspaceKey.swift in Sources */,
 				37A9ECF72A1E93E100F63732 /* EmojiBoard.swift in Sources */,
 				370DF3312A36B6EA00AE655B /* LetterInputKey.swift in Sources */,
+				370DF3352A370C9A00AE655B /* SymbolInputKey.swift in Sources */,
 				37073FED2A26074B00691F9D /* TenKeyReturnKey.swift in Sources */,
 				37B1765E2A049B6800A4E531 /* AlphabeticKeyboard.swift in Sources */,
 				3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */,
