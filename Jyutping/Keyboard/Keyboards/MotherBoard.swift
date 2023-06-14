@@ -19,9 +19,19 @@ struct MotherBoard: View {
                 case .emojiBoard:
                         EmojiBoard().environmentObject(context)
                 case .numeric:
-                        NumericKeyboard().environmentObject(context)
+                        switch context.inputMethodMode {
+                        case .cantonese:
+                                CantoneseNumericKeyboard().environmentObject(context)
+                        case .abc:
+                                NumericKeyboard().environmentObject(context)
+                        }
                 case .symbolic:
-                        SymbolicKeyboard().environmentObject(context)
+                        switch context.inputMethodMode {
+                        case .cantonese:
+                                CantoneseSymbolicKeyboard().environmentObject(context)
+                        case .abc:
+                                SymbolicKeyboard().environmentObject(context)
+                        }
                 case .tenKeyNumeric:
                         TenKeyNumericKeyboard().environmentObject(context)
                 case .numberPad:

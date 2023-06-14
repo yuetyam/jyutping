@@ -61,6 +61,8 @@
 		378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */; };
 		378B2A7A29A76E0700456AE8 /* IOSMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */; };
 		378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */; };
+		3792615E2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3792615D2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift */; };
+		379261602A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3792615F2A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift */; };
 		3793330829DD53B200F6A7D4 /* PageTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3793330729DD53B200F6A7D4 /* PageTransformation.swift */; };
 		37942C7829BD7FA300667A58 /* MacShamChunMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7729BD7FA300667A58 /* MacShamChunMetroView.swift */; };
 		37942C7A29BD7FFB00667A58 /* MacHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */; };
@@ -338,6 +340,8 @@
 		378B2A7729A76DC000456AE8 /* IOSMetroStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroStationLabel.swift; sourceTree = "<group>"; };
 		378B2A7929A76E0700456AE8 /* IOSMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMetroLineView.swift; sourceTree = "<group>"; };
 		378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSFatshanMetroView.swift; sourceTree = "<group>"; };
+		3792615D2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
+		3792615F2A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseSymbolicKeyboard.swift; sourceTree = "<group>"; };
 		3793330729DD53B200F6A7D4 /* PageTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTransformation.swift; sourceTree = "<group>"; };
 		37942C7729BD7FA300667A58 /* MacShamChunMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacShamChunMetroView.swift; sourceTree = "<group>"; };
 		37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHongKongMTRView.swift; sourceTree = "<group>"; };
@@ -966,7 +970,9 @@
 				37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */,
 				370DF32E2A36B43D00AE655B /* SaamPingKeyboard.swift */,
 				37F72E762A14EF7B0013AC85 /* NumericKeyboard.swift */,
+				3792615D2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift */,
 				37E004202A16331600442290 /* SymbolicKeyboard.swift */,
+				3792615F2A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift */,
 			);
 			path = Keyboards;
 			sourceTree = "<group>";
@@ -1399,11 +1405,13 @@
 				37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */,
 				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
 				37993A6B2A0EA34D00BC8E35 /* NumericKey.swift in Sources */,
+				379261602A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift in Sources */,
 				37073FF32A2642BD00691F9D /* TenKeyNavigateKey.swift in Sources */,
 				370AF8892A07742F00A92562 /* SettingsViewIOS15.swift in Sources */,
 				37BAED4D2A0D07920069F6F3 /* DispatchQueueExtensions.swift in Sources */,
 				37E004212A16331600442290 /* SymbolicKeyboard.swift in Sources */,
 				37073FF12A263EC600691F9D /* TenKeyNumberKey.swift in Sources */,
+				3792615E2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift in Sources */,
 				370DF32F2A36B43D00AE655B /* SaamPingKeyboard.swift in Sources */,
 				3768B49C2A00C8B40049D7C1 /* Appearance.swift in Sources */,
 				37F72E802A1531DF0013AC85 /* InputMethodMode.swift in Sources */,
