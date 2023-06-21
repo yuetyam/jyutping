@@ -45,9 +45,23 @@ struct MotherBoard: View {
                         case .cantonese:
                                 switch Options.keyboardLayout {
                                 case .qwerty:
-                                        AlphabeticKeyboard().environmentObject(context)
+                                        switch context.qwertyForm {
+                                        case .cangjie:
+                                                CangjieKeyboard().environmentObject(context)
+                                        case .stroke:
+                                                StrokeKeyboard().environmentObject(context)
+                                        default:
+                                                AlphabeticKeyboard().environmentObject(context)
+                                        }
                                 case .saamPing:
-                                        SaamPingKeyboard().environmentObject(context)
+                                        switch context.qwertyForm {
+                                        case .cangjie:
+                                                CangjieKeyboard().environmentObject(context)
+                                        case .stroke:
+                                                StrokeKeyboard().environmentObject(context)
+                                        default:
+                                                SaamPingKeyboard().environmentObject(context)
+                                        }
                                 case .tenKey:
                                         if context.keyboardInterface.isCompact {
                                                 TenKeyKeyboard().environmentObject(context)

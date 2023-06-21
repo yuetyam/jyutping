@@ -16,7 +16,7 @@ struct TenKeySymbolsBar: View {
                 }
         }
 
-        private let symbols: [String] = ["+", "-", "*", "/", "=", "%", "#", ":", "@"]
+        private let symbols: [String] = ["+", "-", "*", "/", "=", ":", "%", "#", "@"]
 
         var body: some View {
                 ZStack {

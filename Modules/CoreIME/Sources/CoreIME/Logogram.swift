@@ -46,8 +46,8 @@ extension Logogram {
                         .replacingOccurrences(of: "(i|5)", with: "z", options: .regularExpression)
         }
 
-        public static func stroke(of character: Character) -> Character? {
-                return strokeMap[character]
+        public static func stroke(of letter: Character) -> Character? {
+                return strokeMap[letter]
         }
 
         public static func cangjie(of letter: Character) -> Character? {
@@ -80,6 +80,8 @@ extension Logogram {
                 "u": "山",
                 "v": "女",
                 "w": "田",
+                "x": "難",
                 "y": "卜",
+                "z": "重"
         ]
 }

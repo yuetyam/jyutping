@@ -97,6 +97,10 @@
 		37BAED4D2A0D07920069F6F3 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAED4C2A0D07920069F6F3 /* DispatchQueueExtensions.swift */; };
 		37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAED502A0D10FA0069F6F3 /* FontExtensions.swift */; };
 		37C042E429F5805B00F7F301 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C042E329F5805B00F7F301 /* MotherBoard.swift */; };
+		37CBD68D2A42E053003F7B68 /* CangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */; };
+		37CBD68F2A42E46A003F7B68 /* CangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */; };
+		37CBD6912A42EB34003F7B68 /* StrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */; };
+		37CBD6932A42EE21003F7B68 /* StrokeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD6922A42EE21003F7B68 /* StrokeKeyboard.swift */; };
 		37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */; };
 		37D7BD1A294CAADC006A6ADD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD19294CAADC006A6ADD /* Assets.xcassets */; };
 		37D7BD1E294CAADC006A6ADD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37D7BD1D294CAADC006A6ADD /* Preview Assets.xcassets */; };
@@ -376,6 +380,10 @@
 		37BAED4C2A0D07920069F6F3 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		37BAED502A0D10FA0069F6F3 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		37C042E329F5805B00F7F301 /* MotherBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
+		37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieInputKey.swift; sourceTree = "<group>"; };
+		37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieKeyboard.swift; sourceTree = "<group>"; };
+		37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeInputKey.swift; sourceTree = "<group>"; };
+		37CBD6922A42EE21003F7B68 /* StrokeKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeKeyboard.swift; sourceTree = "<group>"; };
 		37D7BD12294CAADB006A6ADD /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D7BD15294CAADB006A6ADD /* JyutpingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
 		37D7BD19294CAADC006A6ADD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -724,6 +732,8 @@
 				37F72E7D2A14F4630013AC85 /* AlphabeticKey.swift */,
 				37F72E7B2A14F4490013AC85 /* NumericSymbolicSwitchKey.swift */,
 				37993A6C2A0EA36C00BC8E35 /* InputKey.swift */,
+				37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */,
+				37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */,
 				370DF3302A36B6EA00AE655B /* LetterInputKey.swift */,
 				370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */,
 				370D438F2A10EA4100EB48B8 /* HiddenKey.swift */,
@@ -968,6 +978,8 @@
 				3768B4A62A00E9760049D7C1 /* MotherBoard.swift */,
 				37877D4F2A2B119300630F77 /* NumberPad.swift */,
 				37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */,
+				37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */,
+				37CBD6922A42EE21003F7B68 /* StrokeKeyboard.swift */,
 				370DF32E2A36B43D00AE655B /* SaamPingKeyboard.swift */,
 				37F72E762A14EF7B0013AC85 /* NumericKeyboard.swift */,
 				3792615D2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift */,
@@ -1383,6 +1395,7 @@
 			files = (
 				37F72E772A14EF7B0013AC85 /* NumericKeyboard.swift in Sources */,
 				37F72E7E2A14F4630013AC85 /* AlphabeticKey.swift in Sources */,
+				37CBD68F2A42E46A003F7B68 /* CangjieKeyboard.swift in Sources */,
 				37073FE52A26008F00691F9D /* TenKeySymbolsBar.swift in Sources */,
 				37B7B4182A06178400B3AB08 /* CandidateScrollBar.swift in Sources */,
 				37073FF52A2642EA00691F9D /* TenKeyNumericKeyboard.swift in Sources */,
@@ -1396,11 +1409,13 @@
 				3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */,
 				37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */,
 				37DE329C2A0286D70066D03A /* ImageExtensions.swift in Sources */,
+				37CBD6912A42EB34003F7B68 /* StrokeInputKey.swift in Sources */,
 				370DF3332A36BB0B00AE655B /* DualLettersInputKey.swift in Sources */,
 				37B7B4162A05F39500B3AB08 /* CharacterExtensions.swift in Sources */,
 				3768B4A42A00CE9B0049D7C1 /* AudioFeedback.swift in Sources */,
 				37B7B41A2A0646E100B3AB08 /* CandidateBoard.swift in Sources */,
 				37E47FC72A29AD1E00EC11C6 /* TenKeySidebar.swift in Sources */,
+				37CBD68D2A42E053003F7B68 /* CangjieInputKey.swift in Sources */,
 				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
 				37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */,
 				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
@@ -1428,6 +1443,7 @@
 				37993A652A0EA2DD00BC8E35 /* SpaceKey.swift in Sources */,
 				37BAED4B2A0C94A00069F6F3 /* UIReturnKeyTypeExtensions.swift in Sources */,
 				37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */,
+				37CBD6932A42EE21003F7B68 /* StrokeKeyboard.swift in Sources */,
 				3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */,
 				37993A6D2A0EA36C00BC8E35 /* InputKey.swift in Sources */,
 				37B1766C2A05465000A4E531 /* InputStage.swift in Sources */,

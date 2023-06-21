@@ -142,13 +142,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         switch bufferText.first {
                         case .none:
+                                ensureQwertyForm(to: .jyutping)
                                 markedText = .empty
                                 candidates = []
                         case .some("r"):
                                 pinyinReverseLookup()
                         case .some("v"):
+                                ensureQwertyForm(to: .cangjie)
                                 cangjieReverseLookup()
                         case .some("x"):
+                                ensureQwertyForm(to: .stroke)
                                 strokeReverseLookup()
                         case .some("q"):
                                 composeReverseLookup()
@@ -529,6 +532,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 keyboardForm = form
                 updateReturnKeyText()
                 updateSpaceText()
+        }
+
+        @Published private(set) var qwertyForm: QwertyForm = .jyutping
+        private func ensureQwertyForm(to form: QwertyForm) {
+                guard qwertyForm != form else { return }
+                qwertyForm = form
         }
 
         @Published private(set) var keyboardCase: KeyboardCase = .lowercased

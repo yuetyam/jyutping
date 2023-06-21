@@ -28,6 +28,8 @@ struct NumericSymbolicSwitchKey: View {
 
         private var keyText: String {
                 switch context.keyboardForm {
+                case .numeric:
+                        return "#+="
                 case .symbolic:
                         return "123"
                 default:
