@@ -11,9 +11,7 @@ struct CantoneseABCSwitch: View {
         private let partHeight: CGFloat = 26
         private let cornerRadius: CGFloat = 5
 
-        private var cantoneseLabelText: String {
-                return (Options.characterStandard == .simplified) ? "粤" : "粵"
-        }
+        private var cantoneseLabelText: String { Options.characterStandard.isSimplified ? "粤" : "粵" }
 
         var body: some View {
                 let textBackColor: Color = {

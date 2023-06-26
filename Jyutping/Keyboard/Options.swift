@@ -1,12 +1,6 @@
 import SwiftUI
 import CoreIME
 
-extension CharacterStandard {
-        var isSimplified: Bool {
-                return self == .simplified
-        }
-}
-
 struct Options {
 
         /// 字形標準

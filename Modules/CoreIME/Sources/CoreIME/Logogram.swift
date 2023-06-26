@@ -24,6 +24,19 @@ public enum Logogram: Int {
 
 public typealias CharacterStandard = Logogram
 
+extension CharacterStandard {
+
+        /// self == .simplified
+        public var isSimplified: Bool {
+                return self == .simplified
+        }
+
+        /// self != .simplified
+        public var isTraditional: Bool {
+                return self != .simplified
+        }
+}
+
 extension Logogram {
 
         public static func strokeTransform(_ text: String) -> String {
