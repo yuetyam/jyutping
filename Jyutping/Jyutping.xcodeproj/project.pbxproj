@@ -27,6 +27,7 @@
 		370DF3332A36BB0B00AE655B /* DualLettersInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */; };
 		370DF3352A370C9A00AE655B /* SymbolInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370DF3342A370C9A00AE655B /* SymbolInputKey.swift */; };
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
+		371A13A12A49F294001695C1 /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A13A02A49F294001695C1 /* RomanizationLabel.swift */; };
 		371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* AppContext.swift */; };
 		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
 		373104D52A0A3D780009BF66 /* EditingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373104D42A0A3D780009BF66 /* EditingPanel.swift */; };
@@ -302,6 +303,7 @@
 		370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualLettersInputKey.swift; sourceTree = "<group>"; };
 		370DF3342A370C9A00AE655B /* SymbolInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolInputKey.swift; sourceTree = "<group>"; };
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
+		371A13A02A49F294001695C1 /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		371B6CEE29F4DC4E00DBB629 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		373104D42A0A3D780009BF66 /* EditingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
@@ -669,6 +671,7 @@
 				37B176632A049BD500A4E531 /* KeyElementView.swift */,
 				370563252A0168D000872AA4 /* ToolBar.swift */,
 				37B7B4172A06178400B3AB08 /* CandidateScrollBar.swift */,
+				371A13A02A49F294001695C1 /* RomanizationLabel.swift */,
 				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
 				37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */,
 				37DE32992A02613B0066D03A /* SettingsView.swift */,
@@ -1456,6 +1459,7 @@
 				37073FE72A2601D600691F9D /* TenKeyInputKey.swift in Sources */,
 				37B176682A050B1100A4E531 /* KeyboardCase.swift in Sources */,
 				37B7B4142A05F31200B3AB08 /* StringExtensions.swift in Sources */,
+				371A13A12A49F294001695C1 /* RomanizationLabel.swift in Sources */,
 				37073FDE2A25FC2700691F9D /* TenKeyKeyboard.swift in Sources */,
 				37DE328E2A021A570066D03A /* Direction.swift in Sources */,
 				37993A5F2A0EA28200BC8E35 /* CommaKey.swift in Sources */,
