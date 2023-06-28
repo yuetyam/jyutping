@@ -21,7 +21,7 @@ struct SettingsViewIOS15: View {
         var body: some View {
                 VStack(spacing: 0) {
                         HStack {
-                                Image(systemName: "chevron.up")
+                                Image.upChevron
                                         .resizable()
                                         .scaledToFit()
                                         .padding(12)

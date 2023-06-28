@@ -35,6 +35,7 @@ struct CandidateBoard: View {
 
         var body: some View {
                 let commentStyle: CommentStyle = Options.commentStyle
+                let commentToneStyle: CommentToneStyle = Options.commentToneStyle
                 let candidateRows = rows(of: context.candidates)
                 ZStack(alignment: .topTrailing) {
                         ScrollViewReader { proxy in
@@ -50,29 +51,19 @@ struct CandidateBoard: View {
                                                                                 Color.interactiveClear
                                                                                 switch commentStyle {
                                                                                 case .aboveCandidates:
-                                                                                        VStack(spacing: -2) {
-                                                                                                if candidate.isCantonese {
-                                                                                                        Text(verbatim: candidate.romanization)
-                                                                                                                .minimumScaleFactor(0.2)
-                                                                                                                .lineLimit(1)
-                                                                                                                .font(.romanization)
-                                                                                                }
+                                                                                        VStack {
+                                                                                                RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                                 Text(verbatim: candidate.text)
                                                                                                         .lineLimit(1)
                                                                                                         .font(.candidate)
                                                                                         }
                                                                                         .padding(2)
                                                                                 case .belowCandidates:
-                                                                                        VStack(spacing: -2) {
+                                                                                        VStack {
                                                                                                 Text(verbatim: candidate.text)
                                                                                                         .lineLimit(1)
                                                                                                         .font(.candidate)
-                                                                                                if candidate.isCantonese {
-                                                                                                        Text(verbatim: candidate.romanization)
-                                                                                                                .minimumScaleFactor(0.2)
-                                                                                                                .lineLimit(1)
-                                                                                                                .font(.romanization)
-                                                                                                }
+                                                                                                RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                         }
                                                                                         .padding(2)
                                                                                 case .noComments:
@@ -103,7 +94,7 @@ struct CandidateBoard: View {
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
-                        Image(systemName: "chevron.up")
+                        Image.upChevron
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 20, height: 20)

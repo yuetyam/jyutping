@@ -137,7 +137,7 @@ private struct NumberPadBackspaceKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Image(systemName: "delete.backward")
+                        Image.backspace
                 }
                 .frame(width: width, height: height)
                 .contentShape(Rectangle())

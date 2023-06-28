@@ -69,7 +69,7 @@ struct EmojiBoard: View {
                                 }
                                 ZStack {
                                         Color.interactiveClear
-                                        Image(systemName: "delete.backward")
+                                        Image.backspace
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 24, height: 24)

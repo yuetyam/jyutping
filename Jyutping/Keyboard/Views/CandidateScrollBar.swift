@@ -60,7 +60,7 @@ struct CandidateScrollBar: View {
                                         Rectangle().fill(Color.black).opacity(0.3).frame(width: 1, height: 24)
                                         Spacer()
                                 }
-                                Image(systemName: "chevron.down")
+                                Image.downChevron
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 20, height: 20)

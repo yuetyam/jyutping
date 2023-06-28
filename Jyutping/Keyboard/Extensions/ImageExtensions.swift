@@ -1,6 +1,14 @@
 import SwiftUI
 
 extension Image {
+        static let upChevron: Image = Image(systemName: "chevron.up")
+        static let downChevron: Image = Image(systemName: "chevron.down")
+        static let leftChevron: Image = Image(systemName: "chevron.left")
+        static let rightChevron: Image = Image(systemName: "chevron.right")
+
+        /// Backward delete
+        static let backspace: Image = Image(systemName: "delete.backward")
+
         static let checkmark: Image = Image(systemName: "checkmark")
 }
 

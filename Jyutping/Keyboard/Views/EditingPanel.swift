@@ -232,7 +232,7 @@ struct EditingPanel: View {
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
-                                                Image(systemName: "chevron.up").font(.title3)
+                                                Image.upChevron.font(.title3)
                                                 Text(verbatim: "返回").font(.caption2)
                                         }
                                 }
@@ -257,7 +257,7 @@ struct EditingPanel: View {
                                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
-                                        Image(systemName: "delete.backward")
+                                        Image.backspace
                                 }
                                 .frame(maxHeight: .infinity)
                                 .contentShape(Rectangle())
