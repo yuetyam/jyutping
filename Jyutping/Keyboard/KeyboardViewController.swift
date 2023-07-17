@@ -224,6 +224,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 adjustKeyboard()
                         }
                 case .doubleSpace:
+                        guard !(inputStage.isBuffering) else { return }
+                        defer {
+                                adjustKeyboard()
+                        }
+                        let hasSpaceAhead: Bool = textDocumentProxy.documentContextBeforeInput?.hasSuffix(String.space) ?? false
+                        guard hasSpaceAhead else {
+                                textDocumentProxy.insertText(String.space)
+                                return
+                        }
                         let shortcutText: String? = {
                                 switch (Options.doubleSpaceShortcut, inputMethodMode) {
                                 case (.insertPeriod, .abc):
@@ -242,13 +251,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         return String.fullWidthSpace
                                 }
                         }()
-                        if let shortcutText {
-                                textDocumentProxy.deleteBackward()
-                                textDocumentProxy.insertText(shortcutText)
-                        } else {
+                        guard let shortcutText else {
                                 textDocumentProxy.insertText(String.space)
+                                return
                         }
-                        adjustKeyboard()
+                        textDocumentProxy.deleteBackward()
+                        textDocumentProxy.insertText(shortcutText)
                 case .backspace:
                         if inputStage.isBuffering {
                                 dropLastBuffer()
