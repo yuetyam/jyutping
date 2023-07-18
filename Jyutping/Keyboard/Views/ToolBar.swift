@@ -8,7 +8,7 @@ struct ToolBar: View {
 
         var body: some View {
                 HStack(spacing: 0) {
-                        ToolBarItem(imageName: "gear", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0))
+                        ToolBarItem(imageName: "gear", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                         AudioFeedback.modified()
@@ -46,7 +46,7 @@ struct ToolBar: View {
                         }
 
                         Spacer()
-                        ToolBarItem(imageName: "arrow.left.and.line.vertical.and.arrow.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                        ToolBarItem(imageName: "arrow.left.and.line.vertical.and.arrow.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 22, leading: 0, bottom: 22, trailing: 0))
                                 .onTapGesture {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
@@ -54,7 +54,7 @@ struct ToolBar: View {
                                 }
 
                         Spacer()
-                        ToolBarItem(imageName: "keyboard.chevron.compact.down", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 19, leading: 0, bottom: 20, trailing: 0))
+                        ToolBarItem(imageName: "keyboard.chevron.compact.down", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 21, leading: 0, bottom: 22, trailing: 0))
                                 .onTapGesture {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
