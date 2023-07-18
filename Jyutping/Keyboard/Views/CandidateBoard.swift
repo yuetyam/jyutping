@@ -48,7 +48,7 @@ struct CandidateBoard: View {
                                                                                 Color.interactiveClear
                                                                                 switch commentStyle {
                                                                                 case .aboveCandidates:
-                                                                                        VStack {
+                                                                                        VStack(spacing: -2) {
                                                                                                 RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                                 Text(verbatim: candidate.text)
                                                                                                         .lineLimit(1)
@@ -56,7 +56,7 @@ struct CandidateBoard: View {
                                                                                         }
                                                                                         .padding(2)
                                                                                 case .belowCandidates:
-                                                                                        VStack {
+                                                                                        VStack(spacing: -2) {
                                                                                                 Text(verbatim: candidate.text)
                                                                                                         .lineLimit(1)
                                                                                                         .font(.candidate)
