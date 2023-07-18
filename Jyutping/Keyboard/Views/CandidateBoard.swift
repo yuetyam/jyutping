@@ -17,7 +17,7 @@ struct CandidateBoard: View {
                 var rowWidth: CGFloat = 0
                 for candidate in candidates {
                         let maxWidth: CGFloat = rows.isEmpty ? (keyboardWidth - collapseWidth) : keyboardWidth
-                        let length: CGFloat = candidateWidth(of: candidate)
+                        let length: CGFloat = candidate.width
                         if rowWidth < (maxWidth - length) {
                                 row.append(candidate)
                                 rowWidth += length
@@ -28,9 +28,6 @@ struct CandidateBoard: View {
                         }
                 }
                 return rows
-        }
-        private func candidateWidth(of candidate: Candidate) -> CGFloat {
-                return CGFloat(candidate.text.count * 20 + 28)
         }
 
         var body: some View {

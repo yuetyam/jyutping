@@ -1,6 +1,12 @@
 import SwiftUI
 import CoreIME
 
+extension Candidate {
+        var width: CGFloat {
+                return CGFloat(self.text.count * 20 + 28)
+        }
+}
+
 struct CandidateScrollBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -17,32 +23,29 @@ struct CandidateScrollBar: View {
                                                         Color.interactiveClear
                                                         switch commentStyle {
                                                         case .aboveCandidates:
-                                                                VStack {
+                                                                VStack(spacing: -2) {
                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                         Text(verbatim: candidate.text)
                                                                                 .lineLimit(1)
                                                                                 .font(.candidate)
                                                                 }
                                                                 .padding(.horizontal, 1)
-                                                                .padding(.bottom, 8)
                                                         case .belowCandidates:
-                                                                VStack {
+                                                                VStack(spacing: -2) {
                                                                         Text(verbatim: candidate.text)
                                                                                 .lineLimit(1)
                                                                                 .font(.candidate)
                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                 }
                                                                 .padding(.horizontal, 1)
-                                                                .padding(.bottom, 8)
                                                         case .noComments:
                                                                 Text(verbatim: candidate.text)
                                                                         .lineLimit(1)
                                                                         .font(.candidate)
                                                                         .padding(.horizontal, 1)
-                                                                        .padding(.bottom, 4)
                                                         }
                                                 }
-                                                .frame(width: candidateWidth(of: candidate))
+                                                .frame(width: candidate.width)
                                                 .frame(maxHeight: .infinity)
                                                 .contentShape(Rectangle())
                                                 .onTapGesture {
@@ -76,8 +79,4 @@ struct CandidateScrollBar: View {
         }
 
         private let expanderWidth: CGFloat = 44
-
-        private func candidateWidth(of candidate: Candidate) -> CGFloat {
-                return CGFloat(candidate.text.count * 20 + 28)
-        }
 }
