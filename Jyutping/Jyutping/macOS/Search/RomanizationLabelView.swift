@@ -4,27 +4,28 @@ import SwiftUI
 
 struct RomanizationLabelView: View {
 
-        let romanization: String
-        private let ipa: String?
-        private let note: String?
-
         init(_ romanization: String) {
                 self.romanization = romanization
-                let isSingular = !(romanization.contains(" "))
+                let isSingular: Bool = romanization.filter({ !($0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit) }).isEmpty
                 self.ipa = isSingular ? Syllable2IPA.IPAText(romanization) : nil
-                let enterTones: Set<Character> = ["1", "3", "6"]
-                let enterTails: Set<Character> = ["p", "t", "k"]
                 self.note = {
                         guard isSingular else { return nil }
                         guard let tone = romanization.last else { return nil }
-                        let isEnterTone: Bool = enterTones.contains(tone)
-                        guard !isEnterTone else { return nil }
+                        let isRegularEnterTone: Bool = Self.enterTones.contains(tone)
+                        guard !isRegularEnterTone else { return nil }
                         guard let tail = romanization.dropLast().last else { return nil }
-                        let isToneSandhi: Bool = enterTails.contains(tail)
+                        let isToneSandhi: Bool = Self.enterTails.contains(tail)
                         guard isToneSandhi else { return nil }
                         return "（變調）"
                 }()
         }
+
+        private let romanization: String
+        private let ipa: String?
+        private let note: String?
+
+        private static let enterTones: Set<Character> = ["1", "3", "6"]
+        private static let enterTails: Set<Character> = ["p", "t", "k"]
 
         var body: some View {
                 HStack(spacing: 16) {
