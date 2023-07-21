@@ -38,6 +38,25 @@ extension Character {
                 return ("a"..."z") ~= self || ("A"..."Z") ~= self
         }
 
+        /// a-z
+        public var isLowercaseBasicLatinLetter: Bool {
+                return ("a"..."z") ~= self
+        }
+
+        /// A-Z
+        public var isUppercaseBasicLatinLetter: Bool {
+                return ("A"..."Z") ~= self
+        }
+
+        /// 0-9
+        public var isBasicDigit: Bool {
+                return ("0"..."9") ~= self
+        }
+
+        /// 1-6
+        public var isCantoneseToneDigit: Bool {
+                return ("1"..."6") ~= self
+        }
 
         /// is CJKV character
         public var isIdeographic: Bool {
