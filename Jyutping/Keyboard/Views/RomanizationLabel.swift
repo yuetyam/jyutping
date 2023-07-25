@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct RomanizationLabel: View {
 
@@ -18,10 +19,10 @@ struct RomanizationLabel: View {
                 self.toneStyle = toneStyle
                 self.romanization = candidate.romanization
                 self.syllables = {
-                        let blocks = candidate.romanization.split(separator: " ")
+                        let blocks = candidate.romanization.split(separator: Character.space)
                         let items: [Syllable] = blocks.map({ syllable -> Syllable in
-                                let phone: String = syllable.filter({ !$0.isTone })
-                                let tone: String = syllable.filter(\.isTone)
+                                let phone: String = syllable.filter({ !$0.isCantoneseToneDigit })
+                                let tone: String = syllable.filter(\.isCased)
                                 return Syllable(phone: phone, tone: tone)
                         })
                         return items

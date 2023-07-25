@@ -3,7 +3,7 @@ import Foundation
 extension String {
 
         static let empty: String = ""
-        static let space: String = " "
+        static let space: String = "\u{20}"
 
         /// A subsequence that only contains tones (1-6)
         var tones: String {
@@ -19,7 +19,7 @@ extension String {
         /// Remove all spaces
         /// - Returns: A subsequence that leaves off spaces.
         func removedSpaces() -> String {
-                return self.replacingOccurrences(of: " ", with: "")
+                return self.filter({ !$0.isSpace })
         }
 
         /// Remove all spaces and tones
@@ -31,7 +31,7 @@ extension String {
         /// Remove all separators
         /// - Returns: A subsequence that leaves off separators
         func removedSeparators() -> String {
-                return self.replacingOccurrences(of: "'", with: "")
+                return self.filter({ !$0.isSeparator })
         }
 
         /// Remove all separators and tones
@@ -48,7 +48,7 @@ extension String {
 
         /// Contains separator
         var hasSeparators: Bool {
-                return self.contains("'")
+                return self.contains(Character.separator)
         }
 
         /// Contains tone number (1-6)

@@ -35,7 +35,7 @@ struct UserLexicon {
                         let newEntry: LexiconEntry = LexiconEntry(id: id,
                                                                   input: Int64(candidate.input.hash),
                                                                   ping: jyutping.ping,
-                                                                  prefix: jyutping.prefix,
+                                                                  prefix: jyutping.shortcut,
                                                                   shortcut: jyutping.shortcut,
                                                                   frequency: 1,
                                                                   word: candidate.lexiconText,
@@ -150,10 +150,10 @@ private struct LexiconEntry {
         /// jyutping.withoutTonesAndSpaces.hash
         let ping: Int64
 
-        /// jyutping.prefix.hash
+        /// (deprecated)
         let prefix: Int64
 
-        /// jyutping.initials.hash
+        /// jyutping.anchors.hash
         let shortcut: Int64
 
         let frequency: Int64

@@ -1,37 +1,27 @@
 import CommonExtensions
 
 extension String {
+
         var ping: Int64 {
                 return Int64(self.removedSpacesTones().hash)
         }
-        var prefix: Int64 {
-                guard !self.isEmpty else { return Int64(self.hash) }
-                guard let lastSyllable: String = self.components(separatedBy: String.space).last else { return Int64(self.hash) }
-                let leading: String = String(self.dropLast(lastSyllable.count - 1))
-                let raw: String = leading.removedSpacesTones()
-                return Int64(raw.hash)
-        }
+
         var shortcut: Int64 {
-                let syllables: [String] = self.components(separatedBy: String.space)
-                let initials: String = syllables.reduce("") { (result, syllable) -> String in
-                        if let first = syllable.first {
-                                return result + String(first)
-                        } else {
-                                return result
-                        }
-                }
-                return Int64(initials.hash)
+                let syllables = self.split(separator: Character.space)
+                let anchors = syllables.map(\.first).compactMap({ $0 })
+                let text = String(anchors)
+                return Int64(text.hash)
         }
 
         /// A subsequence that only contains tones (1-6)
         var tones: String {
-                return self.filter(\.isTone)
+                return self.filter(\.isCantoneseToneDigit)
         }
 
         /// Remove all tones (1-6)
         /// - Returns: A subsequence that leaves off the tones.
         func removedTones() -> String {
-                return self.filter({ !$0.isTone })
+                return self.filter({ !$0.isCantoneseToneDigit })
         }
 
         /// Remove all spaces and tones
@@ -40,6 +30,13 @@ extension String {
                 return self.filter({ !$0.isSpaceOrTone })
         }
 
+        /// Remove all spaces, separators and tones
+        /// - Returns: A subsequence that leaves off the spaces, separators and tones.
+        func removedSpacesSeparatorsTones() -> String {
+                return self.filter({ !$0.isSpaceOrSeparatorOrTone })
+        }
+
+        /// check if the first character is letter
         var isLetters: Bool {
                 return self.first?.isBasicLatinLetter ?? false
         }

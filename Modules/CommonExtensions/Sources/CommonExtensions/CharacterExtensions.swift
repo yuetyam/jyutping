@@ -32,6 +32,21 @@ extension Character {
                 self.init(scalar)
         }
 
+        /// U+0020
+        public static let space: Character = "\u{20}"
+
+        /// U+0020.
+        public var isSpace: Bool {
+                return self == Self.space
+        }
+
+        /// U+0027 ( ' ) apostrophe
+        public static let separator: Character = "\u{27}"
+
+        /// U+0027 ( ' ) apostrophe
+        public var isSeparator: Bool {
+                return self == Self.separator
+        }
 
         /// a-z or A-Z
         public var isBasicLatinLetter: Bool {

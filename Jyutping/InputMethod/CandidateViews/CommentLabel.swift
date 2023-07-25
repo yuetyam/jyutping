@@ -16,7 +16,7 @@ struct CommentLabel: View {
                         }
                         return items
                 }()
-                self.isLastTone = comment.last?.isTone ?? false
+                self.isLastTone = comment.last?.isCantoneseToneDigit ?? false
                 self.shouldModifyColor = toneColor != .normal
         }
 
@@ -38,7 +38,7 @@ struct CommentLabel: View {
                                 Text(verbatim: comment).font(.comment)
                         }
                 case .noTones:
-                        Text(verbatim: comment.filter({ !($0.isTone) })).font(.comment)
+                        Text(verbatim: comment.filter({ !($0.isCantoneseToneDigit) })).font(.comment)
                 case .superscript:
                         if isLastTone {
                                 ModifiedCommentView(alignment: .top, syllables: syllables, foreColor: foreColor, shouldModifyColor: shouldModifyColor, shouldApplyToneFont: true)
