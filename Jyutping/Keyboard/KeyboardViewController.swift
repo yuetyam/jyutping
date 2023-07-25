@@ -90,14 +90,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 let range: NSRange = NSRange(location: location, length: 0)
                                 textDocumentProxy.setMarkedText(markedText, selectedRange: range)
                         }
-                        iOS17BufferText = markedText
                 }
         }
 
-        @Published private(set) var iOS17BufferText: String = ""
-
         private func insert(_ text: String) {
                 textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                textDocumentProxy.unmarkText()
                 textDocumentProxy.insertText(text)
         }
 

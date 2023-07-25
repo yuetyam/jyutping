@@ -7,14 +7,7 @@ struct CangjieKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         if context.inputStage.isBuffering {
-                                if #available(iOSApplicationExtension 17.0, *) {
-                                        CandidateScrollBar()
-                                                .overlay(alignment: .topLeading) {
-                                                        Text(verbatim: context.iOS17BufferText).font(.caption2).foregroundStyle(Color.secondary)
-                                                }
-                                } else {
-                                        CandidateScrollBar()
-                                }
+                                CandidateScrollBar()
                         } else {
                                 ToolBar()
                         }
