@@ -21,6 +21,16 @@ struct DualLettersInputKey: View {
                         return .light
                 }
         }
+        private var keyPreviewColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .light
+                case .dark:
+                        return .darkOpacity
+                @unknown default:
+                        return .light
+                }
+        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -29,7 +39,7 @@ struct DualLettersInputKey: View {
                         Color.interactiveClear
                         if isTouching {
                                 KeyPreview()
-                                        .fill(keyColor)
+                                        .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.5), radius: 1)
                                         .overlay {
                                                 Text(verbatim: keyText)

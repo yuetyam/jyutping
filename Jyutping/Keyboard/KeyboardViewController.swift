@@ -61,10 +61,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
                 updateKeyboardSize()
-                let newKeyboardAppearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light
-                if appearance != newKeyboardAppearance {
-                        appearance = newKeyboardAppearance
-                }
                 let newKeyboardInterface: KeyboardInterface = adoptKeyboardInterface()
                 if keyboardInterface != newKeyboardInterface {
                         keyboardInterface = newKeyboardInterface
@@ -93,7 +89,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
-        private func insert(_ text: String) {
+        private func input(_ text: String) {
                 textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
                 textDocumentProxy.unmarkText()
                 textDocumentProxy.insertText(text)
@@ -216,7 +212,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         if let candidate = candidates.first {
-                                insert(candidate.text)
+                                input(candidate.text)
                                 aftercareSelected(candidate)
                         } else {
                                 let text: String = bufferText
@@ -303,12 +299,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .dismiss:
                         dismissKeyboard()
                 case .select(let candidate):
-                        insert(candidate.text)
+                        input(candidate.text)
                         aftercareSelected(candidate)
                 case .paste:
                         guard UIPasteboard.general.hasStrings else { return }
                         guard let text = UIPasteboard.general.string else { return }
-                        insert(text)
+                        guard !(text.isEmpty) else { return }
+                        textDocumentProxy.insertText(text)
                 case .clearClipboard:
                         UIPasteboard.general.items.removeAll()
                 case .clearText:
@@ -601,7 +598,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 heightUnit = isPhoneLandscape ? 40 : 53
         }
 
-        private(set) lazy var appearance: Appearance = (traitCollection.userInterfaceStyle == .dark || textDocumentProxy.keyboardAppearance == .dark) ? .dark : .light
         private(set) lazy var keyboardInterface: KeyboardInterface = adoptKeyboardInterface()
         private func adoptKeyboardInterface() -> KeyboardInterface {
                 switch traitCollection.userInterfaceIdiom {

@@ -1,31 +1,5 @@
 import SwiftUI
 
-private struct PeriodKeyText: View {
-
-        let isABCMode: Bool
-        let isBuffering: Bool
-        let width: CGFloat
-        let height: CGFloat
-
-        var body: some View {
-                if isABCMode {
-                        Text(verbatim: ".")
-                } else {
-                        if isBuffering {
-                                Text(verbatim: "'")
-                                VStack(spacing: 0) {
-                                        Text(verbatim: " ").padding(.top, 12)
-                                        Spacer()
-                                        Text(verbatim: "分隔").font(.keyFooter).foregroundColor(.secondary).padding(.bottom, 12)
-                                }
-                                .frame(width: width, height: height)
-                        } else {
-                                Text(verbatim: "。")
-                        }
-                }
-        }
-}
-
 struct PeriodKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -41,6 +15,16 @@ struct PeriodKey: View {
                         return .light
                 }
         }
+        private var keyPreviewColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .light
+                case .dark:
+                        return .darkOpacity
+                @unknown default:
+                        return .light
+                }
+        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -49,7 +33,7 @@ struct PeriodKey: View {
                         Color.interactiveClear
                         if isTouching {
                                 KeyPreview()
-                                        .fill(keyColor)
+                                        .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
                                                 PeriodKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
@@ -89,5 +73,31 @@ struct PeriodKey: View {
                                 }
                          }
                 )
+        }
+}
+
+private struct PeriodKeyText: View {
+
+        let isABCMode: Bool
+        let isBuffering: Bool
+        let width: CGFloat
+        let height: CGFloat
+
+        var body: some View {
+                if isABCMode {
+                        Text(verbatim: ".")
+                } else {
+                        if isBuffering {
+                                Text(verbatim: "'")
+                                VStack(spacing: 0) {
+                                        Text(verbatim: " ").padding(.top, 12)
+                                        Spacer()
+                                        Text(verbatim: "分隔").font(.keyFooter).foregroundColor(.secondary).padding(.bottom, 12)
+                                }
+                                .frame(width: width, height: height)
+                        } else {
+                                Text(verbatim: "。")
+                        }
+                }
         }
 }

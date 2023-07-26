@@ -1,6 +1,7 @@
 import SwiftUI
 import CoreIME
 
+@available(iOS 16.0, *)
 @available(iOSApplicationExtension 16.0, *)
 struct SettingsView: View {
 

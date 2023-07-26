@@ -2,11 +2,10 @@ import SwiftUI
 
 struct LetterInputKey: View {
 
+        private let keyText: String
         init(_ keyText: String) {
                 self.keyText = keyText
         }
-
-        private let keyText: String
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -21,6 +20,16 @@ struct LetterInputKey: View {
                         return .light
                 }
         }
+        private var keyPreviewColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .light
+                case .dark:
+                        return .darkOpacity
+                @unknown default:
+                        return .light
+                }
+        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -29,7 +38,7 @@ struct LetterInputKey: View {
                         Color.interactiveClear
                         if isTouching {
                                 KeyPreview()
-                                        .fill(keyColor)
+                                        .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.5), radius: 1)
                                         .overlay {
                                                 Text(verbatim: keyText)
