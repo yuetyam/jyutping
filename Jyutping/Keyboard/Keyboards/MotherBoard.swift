@@ -8,65 +8,65 @@ struct MotherBoard: View {
                 switch context.keyboardForm {
                 case .settings:
                         if #available(iOSApplicationExtension 16.0, *) {
-                                SettingsView().environmentObject(context)
+                                SettingsView()
                         } else {
-                                SettingsViewIOS15().environmentObject(context)
+                                SettingsViewIOS15()
                         }
                 case .editingPanel:
-                        EditingPanel().environmentObject(context)
+                        EditingPanel()
                 case .candidateBoard:
-                        CandidateBoard().environmentObject(context)
+                        CandidateBoard()
                 case .emojiBoard:
-                        EmojiBoard().environmentObject(context)
+                        EmojiBoard()
                 case .numeric:
                         switch context.inputMethodMode {
                         case .cantonese:
-                                CantoneseNumericKeyboard().environmentObject(context)
+                                CantoneseNumericKeyboard()
                         case .abc:
-                                NumericKeyboard().environmentObject(context)
+                                NumericKeyboard()
                         }
                 case .symbolic:
                         switch context.inputMethodMode {
                         case .cantonese:
-                                CantoneseSymbolicKeyboard().environmentObject(context)
+                                CantoneseSymbolicKeyboard()
                         case .abc:
-                                SymbolicKeyboard().environmentObject(context)
+                                SymbolicKeyboard()
                         }
                 case .tenKeyNumeric:
-                        TenKeyNumericKeyboard().environmentObject(context)
+                        TenKeyNumericKeyboard()
                 case .numberPad:
-                        NumberPad(isDecimalPad: false).environmentObject(context)
+                        NumberPad(isDecimalPad: false)
                 case .decimalPad:
-                        NumberPad(isDecimalPad: true).environmentObject(context)
+                        NumberPad(isDecimalPad: true)
                 default:
                         switch context.inputMethodMode {
                         case .abc:
-                                AlphabeticKeyboard().environmentObject(context)
+                                AlphabeticKeyboard()
                         case .cantonese:
                                 switch Options.keyboardLayout {
                                 case .qwerty:
                                         switch context.qwertyForm {
                                         case .cangjie:
-                                                CangjieKeyboard().environmentObject(context)
+                                                CangjieKeyboard()
                                         case .stroke:
-                                                StrokeKeyboard().environmentObject(context)
+                                                StrokeKeyboard()
                                         default:
-                                                AlphabeticKeyboard().environmentObject(context)
+                                                AlphabeticKeyboard()
                                         }
                                 case .saamPing:
                                         switch context.qwertyForm {
                                         case .cangjie:
-                                                CangjieKeyboard().environmentObject(context)
+                                                CangjieKeyboard()
                                         case .stroke:
-                                                StrokeKeyboard().environmentObject(context)
+                                                StrokeKeyboard()
                                         default:
-                                                SaamPingKeyboard().environmentObject(context)
+                                                SaamPingKeyboard()
                                         }
                                 case .tenKey:
                                         if context.keyboardInterface.isCompact {
-                                                TenKeyKeyboard().environmentObject(context)
+                                                TenKeyKeyboard()
                                         } else {
-                                                AlphabeticKeyboard().environmentObject(context)
+                                                AlphabeticKeyboard()
                                         }
                                 }
                         }

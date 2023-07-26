@@ -20,6 +20,7 @@ enum QwertyForm: Int {
         case pinyin
         case cangjie
         case stroke
+
         /// LoengFan
         case compose
 }

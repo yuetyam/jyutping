@@ -154,7 +154,6 @@
 		37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32872A0216B90066D03A /* ColorExtensions.swift */; };
 		37DE328A2A02187B0066D03A /* ToolBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32892A02187B0066D03A /* ToolBarItem.swift */; };
 		37DE328C2A0218960066D03A /* CantoneseABCSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */; };
-		37DE328E2A021A570066D03A /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE328D2A021A570066D03A /* Direction.swift */; };
 		37DE32902A021C450066D03A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE328F2A021C450066D03A /* Constant.swift */; };
 		37DE32922A021E780066D03A /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32912A021E780066D03A /* Options.swift */; };
 		37DE32942A022DF80066D03A /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 37DE32932A022DF80066D03A /* CoreIME */; };
@@ -453,7 +452,6 @@
 		37DE32872A0216B90066D03A /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		37DE32892A02187B0066D03A /* ToolBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarItem.swift; sourceTree = "<group>"; };
 		37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseABCSwitch.swift; sourceTree = "<group>"; };
-		37DE328D2A021A570066D03A /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		37DE328F2A021C450066D03A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		37DE32912A021E780066D03A /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		37DE32972A024D400066D03A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -640,7 +638,6 @@
 				37993A5D2A0EA25F00BC8E35 /* KeyViews */,
 				3768B4A52A00E95C0049D7C1 /* Views */,
 				37DE32912A021E780066D03A /* Options.swift */,
-				37DE328D2A021A570066D03A /* Direction.swift */,
 				37DE328F2A021C450066D03A /* Constant.swift */,
 				3768B4A12A00CE510049D7C1 /* HapticFeedback.swift */,
 				3768B4A32A00CE9B0049D7C1 /* AudioFeedback.swift */,
@@ -1446,7 +1443,6 @@
 				371A13A12A49F294001695C1 /* RomanizationLabel.swift in Sources */,
 				37073FDE2A25FC2700691F9D /* TenKeyKeyboard.swift in Sources */,
 				3754F1942A7102B400A2692A /* KeyPreview.swift in Sources */,
-				37DE328E2A021A570066D03A /* Direction.swift in Sources */,
 				37993A5F2A0EA28200BC8E35 /* CommaKey.swift in Sources */,
 				37877D502A2B119300630F77 /* NumberPad.swift in Sources */,
 				37073FEF2A26097600691F9D /* TenKeySpecialKey.swift in Sources */,

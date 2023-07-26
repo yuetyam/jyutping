@@ -22,7 +22,7 @@ struct RomanizationLabel: View {
                         let blocks = candidate.romanization.split(separator: Character.space)
                         let items: [Syllable] = blocks.map({ syllable -> Syllable in
                                 let phone: String = syllable.filter({ !$0.isCantoneseToneDigit })
-                                let tone: String = syllable.filter(\.isCased)
+                                let tone: String = syllable.filter(\.isCantoneseToneDigit)
                                 return Syllable(phone: phone, tone: tone)
                         })
                         return items
