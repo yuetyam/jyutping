@@ -54,7 +54,7 @@ struct StrokeKeyboard: View {
                                 BackspaceKey()
                         }
                         HStack(spacing: 0) {
-                                NumericKey()
+                                TransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                 CommaKey()
                                 SpaceKey()
                                 PeriodKey()

@@ -2,8 +2,26 @@ import SwiftUI
 
 struct TransformKey: View {
 
-        let destination: KeyboardForm
-        let widthUnitTimes: CGFloat
+        init(destination: KeyboardForm, widthUnitTimes: CGFloat) {
+                self.destination = destination
+                self.keyText = {
+                        switch destination {
+                        case .alphabetic:
+                                return "ABC"
+                        case .numeric:
+                                return "123"
+                        case .symbolic:
+                                return "#+="
+                        default:
+                                return "???"
+                        }
+                }()
+                self.widthUnitTimes = widthUnitTimes
+        }
+
+        private let destination: KeyboardForm
+        private let keyText: String
+        private let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -28,18 +46,6 @@ struct TransformKey: View {
                         return .light
                 }
         }
-        private var keyText: String {
-                switch destination {
-                case .alphabetic:
-                        return "ABC"
-                case .numeric:
-                        return "123"
-                case .symbolic:
-                        return "#+="
-                default:
-                        return "???"
-                }
-        }
 
         @GestureState private var isTouching: Bool = false
 
@@ -58,6 +64,8 @@ struct TransformKey: View {
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if !tapped {
+                                        AudioFeedback.modified()
+                                        context.triggerHapticFeedback()
                                         tapped = true
                                 }
                         }

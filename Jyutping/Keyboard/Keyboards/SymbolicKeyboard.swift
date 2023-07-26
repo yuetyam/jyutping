@@ -33,7 +33,7 @@ struct SymbolicKeyboard: View {
                                 SymbolInputKey("•")
                         }
                         HStack(spacing: 0) {
-                                NumericSymbolicSwitchKey()
+                                TransformKey(destination: .numeric, widthUnitTimes: 1.3)
                                 PlaceholderKey()
                                 SymbolInputKey(".", widthUnitTimes: 1.3)
                                 SymbolInputKey(",", widthUnitTimes: 1.3)
@@ -44,7 +44,7 @@ struct SymbolicKeyboard: View {
                                 BackspaceKey()
                         }
                         HStack(spacing: 0) {
-                                AlphabeticKey()
+                                TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
                                 CommaKey()
                                 SpaceKey()
                                 PeriodKey()
