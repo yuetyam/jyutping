@@ -40,8 +40,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 super.viewWillDisappear(animated)
                 releaseHapticFeedbacks()
                 candidates = []
-                markedText = .empty
-                bufferText = .empty
+                text2mark = String.empty
+                clearBufferText()
         }
 
         override func viewWillLayoutSubviews() {
@@ -68,47 +68,50 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
 
-        // MARK: - Mark & Insert
+        // MARK: - Mark & Input
 
-        private lazy var markedText: String = .empty {
-                willSet {
-                        // REASON: Chrome address bar
-                        guard textDocumentProxy.keyboardType == .webSearch else { return }
-                        guard markedText.isEmpty && !newValue.isEmpty else { return }
-                        textDocumentProxy.insertText(String.empty)
-                }
+        private lazy var text2mark: String = String.empty {
                 didSet {
-                        if markedText.isEmpty {
-                                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
-                                textDocumentProxy.unmarkText()
-                        } else {
-                                let location: Int = (markedText as NSString).length
-                                let range: NSRange = NSRange(location: location, length: 0)
-                                textDocumentProxy.setMarkedText(markedText, selectedRange: range)
-                        }
+                        guard canMarkText else { return }
+                        markText()
                 }
         }
-
+        private func markText() {
+                if text2mark.isEmpty {
+                        textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                        textDocumentProxy.unmarkText()
+                } else {
+                        let location: Int = (text2mark as NSString).length
+                        let range: NSRange = NSRange(location: location, length: 0)
+                        textDocumentProxy.setMarkedText(text2mark, selectedRange: range)
+                }
+        }
+        private lazy var canMarkText: Bool = true {
+                didSet {
+                        guard canMarkText else { return }
+                        markText()
+                }
+        }
         private func input(_ text: String) {
+                canMarkText = false
+                defer {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [unowned self] in
+                                canMarkText = true
+                        }
+                }
                 textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
                 textDocumentProxy.unmarkText()
                 textDocumentProxy.insertText(text)
         }
 
 
-        // MARK: - Input & Buffer
+        // MARK: - Buffer
 
         @Published private(set) var inputStage: InputStage = .standby
 
         func clearBufferText() {
-                switch Options.keyboardLayout {
-                case .qwerty:
-                        bufferText = .empty
-                case .saamPing:
-                        bufferText = .empty
-                case .tenKey:
-                        bufferCombos = []
-                }
+                bufferCombos = []
+                bufferText = String.empty
         }
         func dropLastBuffer() {
                 switch Options.keyboardLayout {
@@ -123,12 +126,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func appendBufferText(_ text: String) {
                 bufferText += text
         }
-        private lazy var bufferText: String = .empty {
+        private lazy var bufferText: String = String.empty {
                 didSet {
                         switch (oldValue.isEmpty, bufferText.isEmpty) {
                         case (true, true):
                                 inputStage = .standby
                         case (true, false):
+                                if textDocumentProxy.keyboardType == .webSearch {
+                                        // REASON: Chrome address bar
+                                        textDocumentProxy.insertText(String.empty)
+                                }
                                 inputStage = .starting
                                 updateReturnKeyText()
                         case (false, true):
@@ -139,8 +146,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         switch bufferText.first {
                         case .none:
-                                ensureQwertyForm(to: .jyutping)
-                                markedText = .empty
+                                // ensureQwertyForm(to: .jyutping) // FIXME: why need this?
+                                text2mark = String.empty
                                 candidates = []
                         case .some("r"):
                                 pinyinReverseLookup()
@@ -409,7 +416,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let tailText = processingText.dropFirst(leadingLength)
                         return leadingText + " " + tailText
                 }()
-                markedText = text2mark
+                self.text2mark = text2mark
                 let engineCandidates: [Candidate] = {
                         var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
                         let shouldContinue: Bool = Options.isEmojiSuggestionsOn && !suggestion.isEmpty //  && candidateSequence.isEmpty
@@ -446,7 +453,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 guard !(text.isEmpty) else {
-                        markedText = bufferText
+                        text2mark = bufferText
                         candidates = []
                         return
                 }
@@ -459,8 +466,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let tailText = text.dropFirst(leadingLength)
                         return leadingText + " " + tailText
                 }()
-                let text2mark: String = "r " + tailMarkedText
-                markedText = text2mark
+                text2mark = "r " + tailMarkedText
                 let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
                 candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
@@ -469,11 +475,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
-                        markedText = String(converted)
+                        text2mark = String(converted)
                         let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text)
                         candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
                 } else {
-                        markedText = bufferText
+                        text2mark = bufferText
                         candidates = []
                 }
         }
@@ -483,17 +489,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let converted = transformed.map({ Logogram.stroke(of: $0) }).compactMap({ $0 })
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
-                        markedText = String(converted)
+                        text2mark = String(converted)
                         let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)
                         candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
                 } else {
-                        markedText = bufferText
+                        text2mark = bufferText
                         candidates = []
                 }
         }
         private func composeReverseLookup() {
                 guard bufferText.count > 2 else {
-                        markedText = bufferText
+                        text2mark = bufferText
                         candidates = []
                         return
                 }
@@ -509,8 +515,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let tailText = text.dropFirst(leadingLength)
                         return leadingText + " " + tailText
                 }()
-                let text2mark: String = "q " + tailMarkedText
-                markedText = text2mark
+                text2mark = "q " + tailMarkedText
                 let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
                 candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
