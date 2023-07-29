@@ -146,7 +146,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         switch bufferText.first {
                         case .none:
-                                // ensureQwertyForm(to: .jyutping) // FIXME: why need this?
+                                ensureQwertyForm(to: .jyutping)
                                 text2mark = String.empty
                                 candidates = []
                         case .some("r"):
