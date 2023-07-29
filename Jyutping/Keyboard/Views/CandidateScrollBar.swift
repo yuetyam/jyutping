@@ -19,39 +19,39 @@ struct CandidateScrollBar: View {
                                 LazyHStack(spacing: 0) {
                                         ForEach(0..<context.candidates.count, id: \.self) { index in
                                                 let candidate = context.candidates[index]
-                                                ZStack {
-                                                        Color.interactiveClear
-                                                        switch commentStyle {
-                                                        case .aboveCandidates:
-                                                                VStack(spacing: -2) {
-                                                                        RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
-                                                                        Text(verbatim: candidate.text)
-                                                                                .lineLimit(1)
-                                                                                .font(.candidate)
-                                                                }
-                                                                .padding(.horizontal, 1)
-                                                        case .belowCandidates:
-                                                                VStack(spacing: -2) {
-                                                                        Text(verbatim: candidate.text)
-                                                                                .lineLimit(1)
-                                                                                .font(.candidate)
-                                                                        RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
-                                                                }
-                                                                .padding(.horizontal, 1)
-                                                        case .noComments:
-                                                                Text(verbatim: candidate.text)
-                                                                        .lineLimit(1)
-                                                                        .font(.candidate)
-                                                                        .padding(.horizontal, 1)
-                                                        }
-                                                }
-                                                .frame(width: candidate.width)
-                                                .frame(maxHeight: .infinity)
-                                                .contentShape(Rectangle())
-                                                .onTapGesture {
+                                                ScrollViewButton {
                                                         AudioFeedback.inputed()
                                                         context.triggerSelectionHapticFeedback()
                                                         context.operate(.select(candidate))
+                                                } label: {
+                                                        ZStack {
+                                                                Color.interactiveClear
+                                                                switch commentStyle {
+                                                                case .aboveCandidates:
+                                                                        VStack(spacing: -2) {
+                                                                                RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
+                                                                                Text(verbatim: candidate.text)
+                                                                                        .lineLimit(1)
+                                                                                        .font(.candidate)
+                                                                        }
+                                                                        .padding(.horizontal, 1)
+                                                                case .belowCandidates:
+                                                                        VStack(spacing: -2) {
+                                                                                Text(verbatim: candidate.text)
+                                                                                        .lineLimit(1)
+                                                                                        .font(.candidate)
+                                                                                RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
+                                                                        }
+                                                                        .padding(.horizontal, 1)
+                                                                case .noComments:
+                                                                        Text(verbatim: candidate.text)
+                                                                                .lineLimit(1)
+                                                                                .font(.candidate)
+                                                                                .padding(.horizontal, 1)
+                                                                }
+                                                        }
+                                                        .frame(width: candidate.width)
+                                                        .frame(maxHeight: .infinity)
                                                 }
                                         }
                                 }

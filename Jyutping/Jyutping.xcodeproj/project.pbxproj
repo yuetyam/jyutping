@@ -96,6 +96,8 @@
 		37BAED4D2A0D07920069F6F3 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAED4C2A0D07920069F6F3 /* DispatchQueueExtensions.swift */; };
 		37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAED502A0D10FA0069F6F3 /* FontExtensions.swift */; };
 		37C042E429F5805B00F7F301 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C042E329F5805B00F7F301 /* MotherBoard.swift */; };
+		37C8494E2A7505E500C806B5 /* ScrollViewGestureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */; };
+		37C849502A750A9000C806B5 /* ScrollViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */; };
 		37CBD68D2A42E053003F7B68 /* CangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */; };
 		37CBD68F2A42E46A003F7B68 /* CangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */; };
 		37CBD6912A42EB34003F7B68 /* StrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */; };
@@ -375,6 +377,8 @@
 		37BAED4C2A0D07920069F6F3 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		37BAED502A0D10FA0069F6F3 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		37C042E329F5805B00F7F301 /* MotherBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
+		37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewGestureButton.swift; sourceTree = "<group>"; };
+		37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewButton.swift; sourceTree = "<group>"; };
 		37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieInputKey.swift; sourceTree = "<group>"; };
 		37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieKeyboard.swift; sourceTree = "<group>"; };
 		37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeInputKey.swift; sourceTree = "<group>"; };
@@ -659,6 +663,8 @@
 				370563252A0168D000872AA4 /* ToolBar.swift */,
 				37B7B4172A06178400B3AB08 /* CandidateScrollBar.swift */,
 				371A13A02A49F294001695C1 /* RomanizationLabel.swift */,
+				37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */,
+				37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */,
 				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
 				37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */,
 				37DE32992A02613B0066D03A /* SettingsView.swift */,
@@ -1402,6 +1408,7 @@
 				3768B4A42A00CE9B0049D7C1 /* AudioFeedback.swift in Sources */,
 				37B7B41A2A0646E100B3AB08 /* CandidateBoard.swift in Sources */,
 				3754F1962A71031400A2692A /* TransformKey.swift in Sources */,
+				37C8494E2A7505E500C806B5 /* ScrollViewGestureButton.swift in Sources */,
 				37E47FC72A29AD1E00EC11C6 /* TenKeySidebar.swift in Sources */,
 				37CBD68D2A42E053003F7B68 /* CangjieInputKey.swift in Sources */,
 				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
@@ -1416,6 +1423,7 @@
 				3792615E2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift in Sources */,
 				370DF32F2A36B43D00AE655B /* SaamPingKeyboard.swift in Sources */,
 				37F72E802A1531DF0013AC85 /* InputMethodMode.swift in Sources */,
+				37C849502A750A9000C806B5 /* ScrollViewButton.swift in Sources */,
 				37073FE92A26028800691F9D /* Combo.swift in Sources */,
 				37DE32902A021C450066D03A /* Constant.swift in Sources */,
 				370D43902A10EA4100EB48B8 /* HiddenKey.swift in Sources */,
