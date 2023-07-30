@@ -44,6 +44,7 @@ struct CandidateScrollBar: View {
                                                                                                 .font(.candidate)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
+                                                                                .padding(.bottom, 8)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(verbatim: candidate.text)
@@ -52,11 +53,13 @@ struct CandidateScrollBar: View {
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
+                                                                                .padding(.bottom, 8)
                                                                         case .noComments:
                                                                                 Text(verbatim: candidate.text)
                                                                                         .lineLimit(1)
                                                                                         .font(.candidate)
                                                                                         .padding(.horizontal, 1)
+                                                                                        .padding(.bottom, 4)
                                                                         }
                                                                 }
                                                                 .frame(width: candidate.width)
