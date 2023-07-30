@@ -324,9 +324,9 @@ struct SettingsViewIOS15: View {
                                                         Button(role: .destructive) {
                                                                 AudioFeedback.modified()
                                                                 context.triggerHapticFeedback()
-                                                                // TODO: perform clearing
                                                                 clearUserLexiconProgress = 0
                                                                 isPerformingClearUserLexicon = true
+                                                                UserLexicon.deleteAll()
                                                         } label: {
                                                                 Label("Clear User Lexicon", systemImage: "trash")
                                                         }

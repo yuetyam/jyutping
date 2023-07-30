@@ -407,6 +407,7 @@ extension JyutpingInputController {
         private func aftercareSelection(_ selected: DisplayCandidate) {
                 let candidate = candidates.fetch(selected.candidateIndex) ?? candidates.first(where: { $0 == selected.candidate })
                 guard let candidate, candidate.isCantonese else {
+                        selectedCandidates = []
                         clearBufferText()
                         return
                 }

@@ -28,6 +28,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 self.addChild(motherBoard)
         }
         override func viewWillAppear(_ animated: Bool) {
+                UserLexicon.prepare()
                 Engine.prepare()
                 instantiateHapticFeedbacks()
                 updateSpaceText()
@@ -39,6 +40,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 releaseHapticFeedbacks()
+                selectedCandidates = []
                 candidates = []
                 text2mark = String.empty
                 clearBufferText()
@@ -136,11 +138,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         // REASON: Chrome address bar
                                         textDocumentProxy.insertText(String.empty)
                                 }
+                                UserLexicon.prepare()
+                                Engine.prepare()
                                 inputStage = .starting
                                 updateReturnKeyText()
                         case (false, true):
                                 inputStage = .ending
                                 updateReturnKeyText()
+                                if !(selectedCandidates.isEmpty) {
+                                        let concatenated: Candidate = selectedCandidates.joined()
+                                        selectedCandidates = []
+                                        UserLexicon.handle(concatenated)
+                                }
                         case (false, false):
                                 inputStage = .ongoing
                         }
@@ -355,6 +364,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .none:
                         return
                 case .some(let character) where character.isReverseLookupTrigger:
+                        selectedCandidates = []
                         let leadingCount: Int = candidate.input.count + 1
                         if bufferText.count > leadingCount {
                                 let tail = bufferText.dropFirst(leadingCount)
@@ -364,9 +374,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                 default:
                         guard candidate.isCantonese else {
+                                selectedCandidates = []
                                 clearBufferText()
                                 return
                         }
+                        selectedCandidates.append(candidate)
                         let inputCount: Int = {
                                 switch Options.keyboardLayout {
                                 case .saamPing:
@@ -419,7 +431,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 self.text2mark = text2mark
                 let engineCandidates: [Candidate] = {
                         var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
-                        let shouldContinue: Bool = Options.isEmojiSuggestionsOn && !suggestion.isEmpty //  && candidateSequence.isEmpty
+                        let shouldContinue: Bool = Options.isEmojiSuggestionsOn && !(suggestion.isEmpty) && selectedCandidates.isEmpty
                         guard shouldContinue else { return suggestion }
                         let symbols: [Candidate] = Engine.searchSymbols(text: bufferText, segmentation: segmentation)
                         guard !(symbols.isEmpty) else { return suggestion }
@@ -430,7 +442,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         return suggestion
                 }()
-                let userCandidates: [Candidate] = [] // UserLexicon.suggest(text: processingText, segmentation: segmentation)
+                let userCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
                 let combined: [Candidate] = userCandidates + engineCandidates
                 candidates = combined.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
@@ -519,6 +531,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
                 candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
+
+        /// Cached Candidate sequence for UserLexicon
+        private lazy var selectedCandidates: [Candidate] = []
 
         @Published private(set) var candidates: [Candidate] = []
 

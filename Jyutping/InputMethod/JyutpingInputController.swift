@@ -284,7 +284,7 @@ final class JyutpingInputController: IMKInputController {
                 mark(text: text2mark)
                 let engineCandidates: [Candidate] = {
                         var suggestion: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation)
-                        let shouldContinue: Bool = Options.isEmojiSuggestionsOn && !suggestion.isEmpty && selectedCandidates.isEmpty
+                        let shouldContinue: Bool = Options.isEmojiSuggestionsOn && !(suggestion.isEmpty) && selectedCandidates.isEmpty
                         guard shouldContinue else { return suggestion }
                         let symbols: [Candidate] = Engine.searchSymbols(text: bufferText, segmentation: segmentation)
                         guard !(symbols.isEmpty) else { return suggestion }

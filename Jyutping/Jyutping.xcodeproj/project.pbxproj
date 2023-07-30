@@ -98,6 +98,7 @@
 		37C042E429F5805B00F7F301 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C042E329F5805B00F7F301 /* MotherBoard.swift */; };
 		37C8494E2A7505E500C806B5 /* ScrollViewGestureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */; };
 		37C849502A750A9000C806B5 /* ScrollViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */; };
+		37C849522A75EF7E00C806B5 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C849512A75EF7E00C806B5 /* UserLexicon.swift */; };
 		37CBD68D2A42E053003F7B68 /* CangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */; };
 		37CBD68F2A42E46A003F7B68 /* CangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */; };
 		37CBD6912A42EB34003F7B68 /* StrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */; };
@@ -379,6 +380,7 @@
 		37C042E329F5805B00F7F301 /* MotherBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
 		37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewGestureButton.swift; sourceTree = "<group>"; };
 		37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewButton.swift; sourceTree = "<group>"; };
+		37C849512A75EF7E00C806B5 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
 		37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieInputKey.swift; sourceTree = "<group>"; };
 		37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieKeyboard.swift; sourceTree = "<group>"; };
 		37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeInputKey.swift; sourceTree = "<group>"; };
@@ -643,6 +645,7 @@
 				3768B4A52A00E95C0049D7C1 /* Views */,
 				37DE32912A021E780066D03A /* Options.swift */,
 				37DE328F2A021C450066D03A /* Constant.swift */,
+				37C849512A75EF7E00C806B5 /* UserLexicon.swift */,
 				3768B4A12A00CE510049D7C1 /* HapticFeedback.swift */,
 				3768B4A32A00CE9B0049D7C1 /* AudioFeedback.swift */,
 				3768B49D2A00CA620049D7C1 /* KeyboardLayout.swift */,
@@ -1388,6 +1391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37F72E772A14EF7B0013AC85 /* NumericKeyboard.swift in Sources */,
+				37C849522A75EF7E00C806B5 /* UserLexicon.swift in Sources */,
 				37CBD68F2A42E46A003F7B68 /* CangjieKeyboard.swift in Sources */,
 				37073FE52A26008F00691F9D /* TenKeySymbolsBar.swift in Sources */,
 				37B7B4182A06178400B3AB08 /* CandidateScrollBar.swift in Sources */,
