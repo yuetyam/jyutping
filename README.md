@@ -32,7 +32,7 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 兼容性： iOS / iPadOS 15.0+
 
 ## macOS
-由於 Mac App Store 毋接受輸入法上架，請前往 [網站](https://jyutping.app) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
+由於 Mac App Store 毋接受輸入法上架，請前往 [網站](https://jyutping.app/mac) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
 請注意： 安裝／更新輸入法之後需要登出電腦再登入，或者重啓電腦。
 
