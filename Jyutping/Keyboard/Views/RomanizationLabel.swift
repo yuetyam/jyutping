@@ -4,75 +4,65 @@ import CommonExtensions
 
 struct RomanizationLabel: View {
 
-        private struct Syllable {
-                let phone: String
-                let tone: String
+        init(candidate: Candidate, toneStyle: CommentToneStyle) {
+                self.shouldDisplayRomanization = candidate.isCantonese
+                self.romanization = candidate.romanization
+                self.toneStyle = toneStyle
         }
 
         private let shouldDisplayRomanization: Bool
-        private let toneStyle: CommentToneStyle
         private let romanization: String
-        private let syllables: [Syllable]
+        private let toneStyle: CommentToneStyle
 
-        init(candidate: Candidate, toneStyle: CommentToneStyle) {
-                self.shouldDisplayRomanization = candidate.isCantonese
-                self.toneStyle = toneStyle
-                self.romanization = candidate.romanization
-                self.syllables = {
-                        let blocks = candidate.romanization.split(separator: Character.space)
-                        let items: [Syllable] = blocks.map({ syllable -> Syllable in
-                                let phone: String = syllable.filter({ !$0.isCantoneseToneDigit })
-                                let tone: String = syllable.filter(\.isCantoneseToneDigit)
-                                return Syllable(phone: phone, tone: tone)
-                        })
-                        return items
+        private func attributed() -> AttributedString {
+                let offset: CGFloat = {
+                        switch toneStyle {
+                        case .normal:
+                                return 0
+                        case .superscript:
+                                return 2
+                        case .subscript:
+                                return -2
+                        case .noTones:
+                                return 0
+                        }
                 }()
+                let blocks = romanization.components(separatedBy: .decimalDigits).filter({ !$0.isEmpty })
+                let tones = romanization.tones.map({ String($0) })
+                var stack: AttributedString = AttributedString()
+                for (index, element) in blocks.enumerated() {
+                        var phone = AttributedString(element)
+                        let toneText: String = tones.fetch(index) ?? "?"
+                        var tone = AttributedString(toneText)
+                        phone.font = .romanization
+                        tone.font = .tone
+                        tone.baselineOffset = offset
+                        stack += phone
+                        stack += tone
+                }
+                return stack
         }
 
         var body: some View {
                 switch toneStyle {
                 case .normal:
                         Text(verbatim: shouldDisplayRomanization ? romanization : String.space)
+                                .font(.romanization)
                                 .minimumScaleFactor(0.2)
                                 .lineLimit(1)
-                                .font(.romanization)
-                case .superscript:
+                case .superscript, .subscript:
                         if shouldDisplayRomanization {
-                                HStack(alignment: .top, spacing: 0) {
-                                        ForEach(0..<syllables.count, id: \.self) { index in
-                                                let syllable = syllables[index]
-                                                let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
-                                                Text(verbatim: leadingText)
-                                                        .minimumScaleFactor(0.2)
-                                                        .lineLimit(1)
-                                                        .font(.romanization)
-                                                Text(verbatim: syllable.tone).font(.tone)
-                                        }
-                                }
-                        } else {
-                                Text(verbatim: String.space).font(.romanization)
-                        }
-                case .subscript:
-                        if shouldDisplayRomanization {
-                                HStack(alignment: .bottom, spacing: 0) {
-                                        ForEach(0..<syllables.count, id: \.self) { index in
-                                                let syllable = syllables[index]
-                                                let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
-                                                Text(verbatim: leadingText)
-                                                        .minimumScaleFactor(0.2)
-                                                        .lineLimit(1)
-                                                        .font(.romanization)
-                                                Text(verbatim: syllable.tone).font(.tone)
-                                        }
-                                }
+                                Text(attributed())
+                                        .minimumScaleFactor(0.2)
+                                        .lineLimit(1)
                         } else {
                                 Text(verbatim: String.space).font(.romanization)
                         }
                 case .noTones:
                         Text(verbatim: shouldDisplayRomanization ? romanization.removedTones() : String.space)
+                                .font(.romanization)
                                 .minimumScaleFactor(0.2)
                                 .lineLimit(1)
-                                .font(.romanization)
                 }
         }
 }
