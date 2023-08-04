@@ -27,6 +27,10 @@ extension JyutpingInputController {
                 let check4updates = NSMenuItem(title: check4updatesTitle, action: #selector(checkForUpdates), keyEquivalent: "")
                 menu.addItem(check4updates)
 
+                let helpTitle: String = NSLocalizedString("menu.help", comment: "")
+                let help = NSMenuItem(title: helpTitle, action: #selector(openHelpWindow), keyEquivalent: "")
+                menu.addItem(help)
+
                 let aboutTitle: String = NSLocalizedString("menu.about", comment: "")
                 let about = NSMenuItem(title: aboutTitle, action: #selector(openAboutWindow), keyEquivalent: "")
                 menu.addItem(about)
@@ -48,6 +52,10 @@ extension JyutpingInputController {
 
         @objc private func openPreferencesWindow() {
                 Options.updateSelectedPreferencesRow(to: .layouts)
+                displayPreferencesView()
+        }
+        @objc private func openHelpWindow() {
+                Options.updateSelectedPreferencesRow(to: .hotkeys)
                 displayPreferencesView()
         }
         @objc private func openAboutWindow() {

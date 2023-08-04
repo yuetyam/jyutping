@@ -3,6 +3,7 @@
 "menu.mode.abc" = "ABC Mode";
 "menu.preferences" = "Settings…";
 "menu.check4updates" = "Check for Updates…";
+"menu.help" = "Help";
 "menu.about" = "About";
 "menu.terminate" = "Quit";
 

@@ -20,6 +20,7 @@ struct PreferencesView: View {
 
         // macOS 12
         @State private var isLayoutsViewActive: Bool = Options.selectedPreferencesRow == .layouts
+        @State private var isHotkeysViewActive: Bool = Options.selectedPreferencesRow == .hotkeys
         @State private var isAboutViewActive: Bool = Options.selectedPreferencesRow == .about
 
         var body: some View {
@@ -74,9 +75,7 @@ struct PreferencesView: View {
                                         }
 
                                         Section {
-                                                NavigationLink {
-                                                        HotkeysView().visualEffect()
-                                                } label: {
+                                                NavigationLink(destination: HotkeysView().visualEffect(), isActive: $isHotkeysViewActive) {
                                                         Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard")
                                                 }
                                         } header: {
