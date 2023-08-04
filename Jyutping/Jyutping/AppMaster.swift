@@ -38,6 +38,9 @@ struct AppMaster {
 
         /// `https://apps.apple.com/hk/app/id1509367629`
         static let appStoreAddress: String = "https://apps.apple.com/hk/app/id1509367629"
+
+        /// Email Feedback
+        static let emailAddress: String = "bing@zheung.org"
 }
 
 extension AppMaster {

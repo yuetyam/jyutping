@@ -20,6 +20,9 @@ struct AboutView: View {
                                         SafariLink(AppMaster.websiteAddress) {
                                                 EnhancedLabel("Website", icon: "globe.asia.australia", symbol: .safari)
                                         }
+                                        SafariLink("https://jyutping.app/mac") {
+                                                EnhancedLabel("Jyutping for macOS", icon: "command.square", symbol: .safari)
+                                        }
                                         SafariLink("https://github.com/yuetyam/jyutping") {
                                                 EnhancedLabel("Source Code", icon: "chevron.left.forwardslash.chevron.right", symbol: .safari)
                                         }
@@ -101,7 +104,7 @@ struct AboutView: View {
                                         }
                                         EmailFeedbackButton()
                                                 .contextMenu {
-                                                        MenuCopyButton("bing@ososo.io", title: "Copy Email Address")
+                                                        MenuCopyButton(AppMaster.emailAddress, title: "Copy Email Address")
                                                 }
                                 }
                                 Section {
@@ -178,7 +181,7 @@ private struct EmailFeedbackButton: View {
                 Device: \(device)
                 System: \(system)
                 """
-                let address: String = "bing@ososo.io"
+                let address: String = AppMaster.emailAddress
                 let subject: String = "Jyutping Feedback"
                 let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
                 return URL(string: scheme)!
