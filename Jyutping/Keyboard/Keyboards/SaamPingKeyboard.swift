@@ -54,11 +54,19 @@ struct SaamPingKeyboard: View {
                                 BackspaceKey()
                         }
                         HStack(spacing: 0) {
-                                TransformKey(destination: .numeric, widthUnitTimes: 1.5)
-                                CommaKey()
-                                SpaceKey()
-                                PeriodKey()
-                                ReturnKey()
+                                if context.needsInputModeSwitchKey {
+                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        GlobeKey()
+                                        SpaceKey()
+                                        CommaKey()
+                                        ReturnKey()
+                                } else {
+                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        CommaKey()
+                                        SpaceKey()
+                                        PeriodKey()
+                                        ReturnKey()
+                                }
                         }
                 }
         }

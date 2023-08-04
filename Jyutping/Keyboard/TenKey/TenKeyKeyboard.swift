@@ -34,6 +34,7 @@ struct TenKeyKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
+                                                // TODO: Globe Key
                                                 TenKeyNavigateKey(destination: .tenKeyNumeric)
                                                 TenKeySpaceKey()
                                         }
