@@ -3,9 +3,9 @@ import SwiftUI
 struct ScrollViewButton<Label: View>: View {
 
         init(
-                pressAction: @escaping () -> Void,
+                pressAction: @escaping () -> Void = {},
                 endAction: @escaping () -> Void = {},
-                releaseAction: @escaping () -> Void = {},
+                releaseAction: @escaping () -> Void,
                 label: @escaping () -> Label
         ) {
                 self.releaseAction = releaseAction

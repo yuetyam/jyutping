@@ -59,22 +59,25 @@ struct CandidateBoard: View {
                                                                                                 VStack(spacing: -2) {
                                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                                         Text(verbatim: candidate.text)
-                                                                                                                .lineLimit(1)
                                                                                                                 .font(.candidate)
+                                                                                                                .minimumScaleFactor(0.4)
+                                                                                                                .lineLimit(1)
                                                                                                 }
                                                                                                 .padding(2)
                                                                                         case .belowCandidates:
                                                                                                 VStack(spacing: -2) {
                                                                                                         Text(verbatim: candidate.text)
-                                                                                                                .lineLimit(1)
                                                                                                                 .font(.candidate)
+                                                                                                                .minimumScaleFactor(0.4)
+                                                                                                                .lineLimit(1)
                                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                                 }
                                                                                                 .padding(2)
                                                                                         case .noComments:
                                                                                                 Text(verbatim: candidate.text)
-                                                                                                        .lineLimit(1)
                                                                                                         .font(.candidate)
+                                                                                                        .minimumScaleFactor(0.4)
+                                                                                                        .lineLimit(1)
                                                                                                         .padding(4)
                                                                                         }
                                                                                 }

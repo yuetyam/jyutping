@@ -43,7 +43,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 selectedCandidates = []
                 candidates = []
                 text2mark = String.empty
-                clearBufferText()
+                clearBuffer()
         }
 
         override func viewWillLayoutSubviews() {
@@ -57,7 +57,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func textDidChange(_ textInput: UITextInput?) {
                 let didUserClearTextFiled: Bool = inputStage.isBuffering && !textDocumentProxy.hasText
                 if didUserClearTextFiled {
-                        clearBufferText()
+                        clearBuffer()
                 }
         }
 
@@ -94,6 +94,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         markText()
                 }
         }
+
+        /// Compose text
+        /// - Parameter text: Text to insert
+        ///
+        /// Some Flutter apps can't be compatible with `setMarkedText() & insertText()`
+        ///
+        /// So we use `setMarkedText() & unmarkText()`
+        ///
+        /// On iOS 17 betas, we may still need to use `insertText()`
         private func input(_ text: String) {
                 canMarkText = false
                 defer {
@@ -101,8 +110,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 canMarkText = true
                         }
                 }
-                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                let previousLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
+                let location: Int = (text as NSString).length
+                let range: NSRange = NSRange(location: location, length: 0)
+                textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
+                guard !(text.isEmpty) else { return }
+                let currentLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
+                let isFailed: Bool = currentLength == previousLength
+                guard isFailed else { return }
                 textDocumentProxy.insertText(text)
         }
 
@@ -111,21 +127,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         @Published private(set) var inputStage: InputStage = .standby
 
-        func clearBufferText() {
+        func clearBuffer() {
                 bufferCombos = []
                 bufferText = String.empty
         }
-        func dropLastBuffer() {
-                switch Options.keyboardLayout {
-                case .qwerty:
-                        bufferText = String(bufferText.dropLast())
-                case .saamPing:
-                        bufferText = String(bufferText.dropLast())
-                case .tenKey:
-                        bufferCombos = bufferCombos.dropLast()
-                }
-        }
-        func appendBufferText(_ text: String) {
+        private func appendBufferText(_ text: String) {
                 bufferText += text
         }
         private lazy var bufferText: String = String.empty {
@@ -134,22 +140,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (true, true):
                                 inputStage = .standby
                         case (true, false):
+                                inputStage = .starting
                                 if textDocumentProxy.keyboardType == .webSearch {
                                         // REASON: Chrome address bar
                                         textDocumentProxy.insertText(String.empty)
                                 }
                                 UserLexicon.prepare()
                                 Engine.prepare()
-                                inputStage = .starting
                                 updateReturnKeyText()
                         case (false, true):
                                 inputStage = .ending
-                                updateReturnKeyText()
                                 if !(selectedCandidates.isEmpty) {
                                         let concatenated: Candidate = selectedCandidates.joined()
                                         selectedCandidates = []
                                         UserLexicon.handle(concatenated)
                                 }
+                                updateReturnKeyText()
                         case (false, false):
                                 inputStage = .ongoing
                         }
@@ -181,21 +187,40 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                guard let combo = bufferCombos.first else { return }
-                                sidebarTexts = combo.keys
+                                if textDocumentProxy.keyboardType == .webSearch {
+                                        // REASON: Chrome address bar
+                                        textDocumentProxy.insertText(String.empty)
+                                }
+                                UserLexicon.prepare()
+                                Engine.prepare()
+                                if let combo = bufferCombos.first {
+                                        sidebarTexts = combo.keys
+                                }
+                                updateReturnKeyText()
                         case (false, true):
                                 inputStage = .ending
-                                sidebarTexts = Constant.defaultSidebarTexts
+                                if !(selectedCandidates.isEmpty) {
+                                        // TODO: Uncomment this
+                                        // let concatenated: Candidate = selectedCandidates.joined()
+                                        selectedCandidates = []
+                                        // UserLexicon.handle(concatenated)
+                                }
+                                resetSidebarTexts()
+                                updateReturnKeyText()
                         case (false, false):
                                 inputStage = .ongoing
-                                guard let combo = bufferCombos.last else { return }
-                                sidebarTexts = combo.keys
+                                if let combo = bufferCombos.last {
+                                        sidebarTexts = combo.keys
+                                }
                         }
                         tenKeySuggest()
                 }
         }
-        private lazy var confirmedSyllables: [String] = []
+
         @Published private(set) var sidebarTexts: [String] = Constant.defaultSidebarTexts
+        private func resetSidebarTexts() {
+                sidebarTexts = Constant.defaultSidebarTexts
+        }
 
 
         // MARK: - Operations
@@ -232,7 +257,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 aftercareSelected(candidate)
                         } else {
                                 let text: String = bufferText
-                                clearBufferText()
+                                clearBuffer()
                                 textDocumentProxy.insertText(text)
                                 adjustKeyboard()
                         }
@@ -272,16 +297,21 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(shortcutText)
                 case .backspace:
                         if inputStage.isBuffering {
-                                dropLastBuffer()
+                                let isTenKeyKeyboard: Bool = (Options.keyboardLayout == .tenKey) && keyboardInterface.isCompact
+                                if isTenKeyKeyboard {
+                                        bufferCombos = bufferCombos.dropLast()
+                                } else {
+                                        bufferText = String(bufferText.dropLast())
+                                }
                         } else {
                                 textDocumentProxy.deleteBackward()
                         }
                 case .clearBuffer:
-                        clearBufferText()
+                        clearBuffer()
                 case .return:
                         if inputStage.isBuffering {
                                 let text: String = bufferText
-                                clearBufferText()
+                                clearBuffer()
                                 textDocumentProxy.insertText(text)
                         } else {
                                 textDocumentProxy.insertText("\n")
@@ -360,6 +390,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 defer {
                         adjustKeyboard()
                 }
+                let isTenKeyKeyboard: Bool = (Options.keyboardLayout == .tenKey) && keyboardInterface.isCompact
+                guard !isTenKeyKeyboard else {
+                        // TODO: selectedCandidates.append(candidate)
+                        let length: Int = bufferCombos.count - candidate.input.count
+                        bufferCombos = bufferCombos.suffix(length)
+                        return
+                }
                 switch bufferText.first {
                 case .none:
                         return
@@ -370,12 +407,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 let tail = bufferText.dropFirst(leadingCount)
                                 bufferText = String(character) + tail
                         } else {
-                                clearBufferText()
+                                clearBuffer()
                         }
                 default:
                         guard candidate.isCantonese else {
                                 selectedCandidates = []
-                                clearBufferText()
+                                clearBuffer()
                                 return
                         }
                         selectedCandidates.append(candidate)
@@ -415,6 +452,25 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Candidate Suggestions
 
+        private func tenKeySuggest() {
+                guard var possibleTexts = bufferCombos.first?.keys else {
+                        text2mark = String.empty
+                        if !(candidates.isEmpty) {
+                                candidates = []
+                        }
+                        return
+                }
+                for combo in bufferCombos.dropFirst() {
+                        let possibilities = combo.keys.map { key -> [String] in
+                                return possibleTexts.map({ $0 + key })
+                        }
+                        possibleTexts = possibilities.flatMap({ $0 })
+                }
+                let suggestions = Engine.tenKeySuggest(sequences: possibleTexts)
+                text2mark = suggestions.first?.input ?? String.empty
+                candidates = suggestions
+        }
+
         private func suggest() {
                 let processingText: String = bufferText.toneConverted()
                 let segmentation = Segmentor.segment(text: processingText)
@@ -445,22 +501,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let userCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
                 let combined: [Candidate] = userCandidates + engineCandidates
                 candidates = combined.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
-        }
-        private func tenKeySuggest() {
-                guard var possibleTexts = bufferCombos.first?.keys.map({ $0 }) else { return }
-                for combo in bufferCombos.dropFirst() {
-                        let possibilities = combo.keys.map { key -> [String] in
-                                return possibleTexts.map({ $0 + key })
-                        }
-                        possibleTexts = possibilities.flatMap({ $0 })
-                }
-                let suggestions = possibleTexts.uniqued().map { scheme -> [Candidate] in
-                        let segmentation = Segmentor.segment(text: scheme)
-                        guard segmentation.maxLength == scheme.count else { return [] }
-                        return Engine.suggest(text: scheme, segmentation: segmentation)
-                }
-                let sortedCandidates = suggestions.flatMap({ $0 }).sorted(by: { $0.input > $1.input })
-                candidates = sortedCandidates.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())

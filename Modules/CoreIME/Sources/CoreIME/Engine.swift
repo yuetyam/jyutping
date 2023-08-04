@@ -27,9 +27,9 @@ public struct Engine {
                 isDatabaseReady = true
         }
 
+}
 
-        // MARK: - Suggestion
-
+extension Engine {
         public static func suggest(text: String, segmentation: Segmentation) -> [Candidate] {
                 switch text.count {
                 case 0:
@@ -87,7 +87,6 @@ public struct Engine {
                                 let tail: [Character] = Array(repeating: "i", count: syllableCount - 1)
                                 let input: String = item.input + tail
                                 return Candidate(text: item.text, romanization: item.romanization, input: input)
-
                         })
                         return qualified.compactMap({ $0 })
                 case (false, false):
@@ -150,8 +149,6 @@ public struct Engine {
         }
 
 
-        // MARK: - SQLite
-
         // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
         private static func shortcut(text: String, limit: Int? = nil) -> [CoreCandidate] {
@@ -182,6 +179,96 @@ public struct Engine {
                                 let romanization: String = String(cString: sqlite3_column_text(statement, 1))
                                 let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
                                 candidates.append(candidate)
+                        }
+                }
+                sqlite3_finalize(statement)
+                return candidates
+        }
+}
+
+extension Engine {
+
+        private struct TenKeyCandidate: Hashable {
+                let candidate: Candidate
+                let rowID: Int
+        }
+
+        public static func tenKeySuggest(sequences: [String]) -> [Candidate] {
+                guard !(sequences.isEmpty) else { return [] }
+                let suggestions = sequences.map { text -> [TenKeyCandidate] in
+                        let segmentation = Segmentor.segment(text: text)
+                        guard segmentation.maxLength > 0 else { return tenKeyProcessVerbatim(text: text) }
+                        let fullMatch = matchWithRowID(text: text, input: text)
+                        let fullShortcut = shortcutWithRowID(text: text)
+                        let candidates = tenKenMatch(segmentation: segmentation)
+                        let perfectCandidates = candidates.filter({ $0.candidate.input.count == text.count })
+                        return fullMatch + perfectCandidates + fullShortcut + candidates
+                }
+                let entries = suggestions.flatMap({ $0 }).sorted { (lhs, rhs) -> Bool in
+                        let lhsInputCount: Int = lhs.candidate.input.count
+                        let rhsInputCount: Int = rhs.candidate.input.count
+                        if lhsInputCount > rhsInputCount {
+                                return true
+                        } else if lhsInputCount < rhsInputCount {
+                                return false
+                        } else {
+                                return lhs.rowID < rhs.rowID
+                        }
+                }
+                return entries.map({ $0.candidate }).uniqued()
+        }
+
+        private static func tenKeyProcessVerbatim(text: String, limit: Int? = nil) -> [TenKeyCandidate] {
+                let rounds = (0..<text.count).map({ number -> [TenKeyCandidate] in
+                        let leading: String = String(text.dropLast(number))
+                        return matchWithRowID(text: leading, input: text, limit: limit) + shortcutWithRowID(text: leading, limit: limit)
+                })
+                return rounds.flatMap({ $0 }).uniqued()
+        }
+        private static func tenKenMatch(segmentation: Segmentation, limit: Int? = nil) -> [TenKeyCandidate] {
+                let matches = segmentation.map({ scheme -> [TenKeyCandidate] in
+                        let input = scheme.map(\.text).joined()
+                        let ping = scheme.map(\.origin).joined()
+                        return matchWithRowID(text: ping, input: input, limit: limit)
+                })
+                return matches.flatMap({ $0 })
+        }
+
+
+        // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
+
+        private static func shortcutWithRowID(text: String, limit: Int? = nil) -> [TenKeyCandidate] {
+                var candidates: [TenKeyCandidate] = []
+                let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
+                let limit: Int = limit ?? 50
+                let query = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
+                var statement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+                        while sqlite3_step(statement) == SQLITE_ROW {
+                                let rowID: Int = Int(sqlite3_column_int64(statement, 0))
+                                let word: String = String(cString: sqlite3_column_text(statement, 1))
+                                let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                                let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
+                                candidates.append(instance)
+                        }
+                }
+                sqlite3_finalize(statement)
+                return candidates
+        }
+        private static func matchWithRowID(text: String, input: String, limit: Int? = nil) -> [TenKeyCandidate] {
+                var candidates: [TenKeyCandidate] = []
+                let limit: Int = limit ?? -1
+                let query = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
+                var statement: OpaquePointer? = nil
+                if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+                        while sqlite3_step(statement) == SQLITE_ROW {
+                                let rowID: Int = Int(sqlite3_column_int64(statement, 0))
+                                let word: String = String(cString: sqlite3_column_text(statement, 1))
+                                let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                                let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
+                                let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
+                                candidates.append(instance)
                         }
                 }
                 sqlite3_finalize(statement)

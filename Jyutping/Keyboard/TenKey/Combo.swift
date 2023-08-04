@@ -1,13 +1,13 @@
 enum Combo: Int {
 
-        case ABC
-        case DEF
-        case GHI
-        case JKL
-        case MNO
-        case PQRS
-        case TUV
-        case WXYZ
+        case ABC = 2
+        case DEF = 3
+        case GHI = 4
+        case JKL = 5
+        case MNO = 6
+        case PQRS = 7
+        case TUV = 8
+        case WXYZ = 9
 
         var text: String {
                 switch self {

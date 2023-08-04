@@ -32,7 +32,12 @@ struct TenKeySidebar: View {
                                                         ScrollViewButton {
                                                                 AudioFeedback.inputed()
                                                                 context.triggerHapticFeedback()
-                                                                // FIXME: Handle tapping
+                                                                if context.inputStage.isBuffering {
+                                                                        // FIXME: Handle tapping
+                                                                        // context.operate(.toggle(text))
+                                                                } else {
+                                                                        context.operate(.input(text))
+                                                                }
                                                                 withAnimation {
                                                                         proxy.scrollTo(topID)
                                                                 }
