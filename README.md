@@ -34,9 +34,9 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 ## macOS
 由於 Mac App Store 毋接受輸入法上架，請前往 [網站](https://jyutping.app/mac) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
-請注意： 安裝／更新輸入法之後需要登出電腦再登入，或者重啓電腦。
+安裝： [macOS 粵拼輸入法下載安裝指引](https://jyutping.app/mac/install)
 
-兼容性： macOS 12 Monterey 或者更高
+兼容： macOS 12 Monterey 或者更高
 
 ## 擷屏（Screenshots）
 <img src="images/screenshot.png" alt="iPhone screenshots" width="440"/>
@@ -47,7 +47,7 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 ## 如何構建（How to build）
 前置要求（Build requirements）
 - macOS 13.0+
-- Xcode 14.3+
+- Xcode 14.3.1+
 
 倉庫體積比較大，建議加 `--depth` 來 clone。
 ~~~bash
@@ -72,10 +72,10 @@ swift run -c release
 - [OpenCC](https://github.com/BYVoid/OpenCC)
 
 ## Support this project
-<a href="https://patreon.com/ososoio">
-        <img src="images/become-a-patron.png" alt="patreon" width="150"/>
+<a href="https://ko-fi.com/zheung">
+        <img src="images/buy-me-a-coffee.png" alt="ko-fi, buy me a coffee" width="150"/>
 </a>
 <br>
-<a href="https://ko-fi.com/ososoio">
-        <img src="images/buy-me-a-coffee.png" alt="ko-fi, buy me a coffee" width="150"/>
+<a href="https://patreon.com/bingzheung">
+        <img src="images/become-a-patron.png" alt="patreon" width="150"/>
 </a>
