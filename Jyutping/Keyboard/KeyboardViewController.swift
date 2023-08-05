@@ -12,6 +12,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 super.viewDidLoad()
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = self.children.map({ $0.removeFromParent() })
+                keyboardInterface = adoptKeyboardInterface()
                 updateKeyboardSize()
                 updateSpaceText()
                 updateReturnKeyText()
@@ -62,11 +63,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+                keyboardInterface = adoptKeyboardInterface()
                 updateKeyboardSize()
-                let newKeyboardInterface: KeyboardInterface = adoptKeyboardInterface()
-                if keyboardInterface != newKeyboardInterface {
-                        keyboardInterface = newKeyboardInterface
-                }
         }
 
 
@@ -102,7 +100,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         ///
         /// So we use `setMarkedText() & unmarkText()`
         ///
-        /// On iOS 17 betas, we may still need to use `insertText()`
+        /// In iOS 17 betas, we may still need to use `insertText()`
         private func input(_ text: String) {
                 canMarkText = false
                 defer {
@@ -650,23 +648,30 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var widthUnit: CGFloat = 37.5
         @Published private(set) var heightUnit: CGFloat = 53
         private func updateKeyboardSize() {
-                let screenWidth: CGFloat = view.window?.windowScene?.screen.bounds.size.width ?? UIScreen.main.bounds.size.width
-                let isPhoneLandscape: Bool = traitCollection.verticalSizeClass == .compact
-                let horizontalInset: CGFloat = isPhoneLandscape ? 150 : 0
-                keyboardWidth = screenWidth - horizontalInset
+                let screen: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
+                let newKeyboardWidth: CGFloat = {
+                        guard keyboardInterface != .padFloating else { return 320 }
+                        let horizontalInset: CGFloat = {
+                                let isPhoneLandscape: Bool = traitCollection.verticalSizeClass == .compact
+                                guard isPhoneLandscape else { return 0 }
+                                let hasHomeButton: Bool = needsInputModeSwitchKey // FIXME: Not a good way
+                                return hasHomeButton ? 0 : 236
+                        }()
+                        return screen.width - horizontalInset
+                }()
+                keyboardWidth = newKeyboardWidth
                 widthUnit = keyboardWidth / 10.0
-                heightUnit = isPhoneLandscape ? 40 : 53
+                heightUnit = keyboardInterface.keyHeightUnit(of: screen)
         }
 
-        private(set) lazy var keyboardInterface: KeyboardInterface = adoptKeyboardInterface()
+        @Published private(set) var keyboardInterface: KeyboardInterface = .phonePortrait
         private func adoptKeyboardInterface() -> KeyboardInterface {
                 switch traitCollection.userInterfaceIdiom {
                 case .pad:
                         guard traitCollection.horizontalSizeClass != .compact else { return .padFloating }
-                        let width: CGFloat = view.window?.windowScene?.screen.bounds.size.width ?? UIScreen.main.bounds.size.width
-                        let height: CGFloat = view.window?.windowScene?.screen.bounds.size.width ?? UIScreen.main.bounds.size.height
-                        let isPortrait: Bool = width < height
-                        let minSide: CGFloat = min(width, height)
+                        let screen: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
+                        let isPortrait: Bool = screen.width < screen.height
+                        let minSide: CGFloat = min(screen.width, screen.height)
                         if minSide > 840 {
                                 return isPortrait ? .padPortraitLarge : .padLandscapeLarge
                         } else if minSide > 815 {

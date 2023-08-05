@@ -6,6 +6,14 @@ struct ToolBar: View {
 
         private let itemWidth: CGFloat = 50
 
+        private let editingButtonImageName: String = {
+                if #available(iOSApplicationExtension 16.0, *) {
+                        return "arrow.left.and.line.vertical.and.arrow.right"
+                } else {
+                        return "arrowtriangle.left.and.line.vertical.and.arrowtriangle.right"
+                }
+        }()
+
         var body: some View {
                 HStack(spacing: 0) {
                         ToolBarItem(imageName: "gear", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0))
@@ -46,7 +54,7 @@ struct ToolBar: View {
                         }
 
                         Spacer()
-                        ToolBarItem(imageName: "arrow.left.and.line.vertical.and.arrow.right", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                        ToolBarItem(imageName: editingButtonImageName, width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                                 .onTapGesture {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
