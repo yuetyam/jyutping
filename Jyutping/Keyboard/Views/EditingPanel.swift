@@ -293,7 +293,7 @@ struct EditingPanel: View {
                                                 .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
                                                 Image(systemName: "clear")
-                                                Text(verbatim: "清空").font(.caption2)
+                                                Text(verbatim: "清空前文").font(.caption2)
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
@@ -307,7 +307,7 @@ struct EditingPanel: View {
                                                 }
                                         }
                                         .onEnded { _ in
-                                                context.operate(.clearText)
+                                                context.operate(.clearLeadingText)
                                         }
                                 )
                                 ZStack {

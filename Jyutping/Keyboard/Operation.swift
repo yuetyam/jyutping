@@ -17,7 +17,7 @@ enum Operation: Hashable {
 
         case paste
         case clearClipboard
-        case clearText
+        case clearLeadingText
         case moveCursorBackward
         case moveCursorForward
         case jumpToHead

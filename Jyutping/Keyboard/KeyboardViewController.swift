@@ -352,19 +352,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                 case .clearClipboard:
                         UIPasteboard.general.items.removeAll()
-                case .clearText:
+                case .clearLeadingText:
                         textDocumentProxy.deleteBackward() // Delete selectedText
                         for _ in 0..<5 {
                                 guard let textBeforeCursor = textDocumentProxy.documentContextBeforeInput else { break }
                                 _ = (0..<textBeforeCursor.count).map({ _ in
-                                        textDocumentProxy.deleteBackward()
-                                })
-                        }
-                        for _ in 0..<5 {
-                                guard let textAfterCursor = textDocumentProxy.documentContextAfterInput else { break }
-                                let characterCount: Int = textAfterCursor.count
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: characterCount)
-                                _ = (0..<characterCount).map({ _ in
                                         textDocumentProxy.deleteBackward()
                                 })
                         }
