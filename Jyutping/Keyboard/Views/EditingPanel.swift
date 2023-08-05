@@ -42,6 +42,14 @@ struct EditingPanel: View {
         @State private var backspaceBuffer: Int = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
+        private let clipboardImageName: String = {
+                if #available(iOSApplicationExtension 16.0, *) {
+                        return "clipboard"
+                } else {
+                        return "doc"
+                }
+        }()
+
         var body: some View {
                 HStack(spacing: 0) {
                         VStack(spacing: 0) {
@@ -54,7 +62,7 @@ struct EditingPanel: View {
                                                         .padding(.vertical, 6)
                                                         .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
-                                                        Image(systemName: "clipboard")
+                                                        Image(systemName: clipboardImageName)
                                                         Text(verbatim: "清空剪帖板").font(.caption2)
                                                 }
                                         }
