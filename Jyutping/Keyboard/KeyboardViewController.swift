@@ -119,6 +119,34 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 guard isFailed else { return }
                 textDocumentProxy.insertText(text)
         }
+        private func inputBufferText() {
+                // Yes, this's some kind of hack
+                defer {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [unowned self] in
+                                clearBuffer()
+                        }
+                }
+                defer {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                                textDocumentProxy.deleteBackward()
+                        }
+                }
+                defer {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [unowned self] in
+                                textDocumentProxy.insertText(String.zeroWidthSpace)
+                        }
+                }
+                let previousLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
+                let location: Int = (bufferText as NSString).length
+                let range: NSRange = NSRange(location: location, length: 0)
+                textDocumentProxy.setMarkedText(bufferText, selectedRange: range)
+                textDocumentProxy.unmarkText()
+                guard !(bufferText.isEmpty) else { return }
+                let currentLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
+                let isFailed: Bool = currentLength == previousLength
+                guard isFailed else { return }
+                textDocumentProxy.insertText(bufferText)
+        }
 
 
         // MARK: - Buffer
@@ -254,9 +282,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 input(candidate.text)
                                 aftercareSelected(candidate)
                         } else {
-                                let text: String = bufferText
-                                clearBuffer()
-                                textDocumentProxy.insertText(text)
+                                inputBufferText()
+                                updateReturnKeyText()
                                 adjustKeyboard()
                         }
                 case .doubleSpace:
@@ -308,9 +335,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         clearBuffer()
                 case .return:
                         if inputStage.isBuffering {
-                                let text: String = bufferText
-                                clearBuffer()
-                                textDocumentProxy.insertText(text)
+                                inputBufferText()
+                                updateReturnKeyText()
                         } else {
                                 textDocumentProxy.insertText("\n")
                         }
@@ -572,13 +598,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         @Published private(set) var inputMethodMode: InputMethodMode = .cantonese
         func toggleInputMethodMode() {
-                inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
-                if inputMethodMode.isABC && (keyboardForm == .tenKeyNumeric) {
-                        updateKeyboardForm(to: .alphabetic)
-                } else {
-                        updateReturnKeyText()
-                        updateSpaceText()
+                if inputMethodMode.isCantonese && inputStage.isBuffering {
+                        inputBufferText()
                 }
+                inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
+                updateSpaceText()
+                updateReturnKeyText()
         }
 
         @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabetic
