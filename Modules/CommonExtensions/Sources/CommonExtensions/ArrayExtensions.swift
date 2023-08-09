@@ -7,7 +7,9 @@ extension Array where Element: Hashable {
                 var set: Set<Element> = Set<Element>()
                 return filter { set.insert($0).inserted }
         }
+}
 
+extension Array {
 
         /// Safely access element by index
         /// - Parameter index: Index
@@ -16,5 +18,14 @@ extension Array where Element: Hashable {
                 let isSafe: Bool = index >= 0 && index < self.count
                 guard isSafe else { return nil }
                 return self[index]
+        }
+
+        /// Split array into sub-array
+        /// - Parameter size: The capacity of every sub-array
+        /// - Returns: An array of sub-array
+        public func chunked(size: Int) -> [[Element]] {
+                return stride(from: 0, to: count, by: size).map {
+                        Array(self[$0 ..< Swift.min($0 + size, count)])
+                }
         }
 }
