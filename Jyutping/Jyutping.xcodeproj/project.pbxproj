@@ -76,8 +76,6 @@
 		37993A652A0EA2DD00BC8E35 /* SpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */; };
 		37993A672A0EA31D00BC8E35 /* BackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */; };
 		37993A692A0EA33600BC8E35 /* ShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A682A0EA33600BC8E35 /* ShiftKey.swift */; };
-		37A5D00529A888E700256042 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37A5D00429A888E700256042 /* Release.xcconfig */; };
-		37A5D00729A888F900256042 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37A5D00629A888F900256042 /* Debug.xcconfig */; };
 		37A9ECF72A1E93E100F63732 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */; };
 		37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775429D96FEC007F07D7 /* MacHansMessView.swift */; };
 		37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */; };
@@ -1273,7 +1271,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					3768B48D2A00C2A10049D7C1 = {
 						CreatedOnToolsVersion = 14.3;
@@ -1379,9 +1377,7 @@
 				37FC1BD9294DFD1400D7153F /* Localizable.strings in Resources */,
 				37FC1BC4294DFCCE00D7153F /* jyutpingime.pdf in Resources */,
 				37FC1BD8294DFD1400D7153F /* InfoPlist.strings in Resources */,
-				37A5D00729A888F900256042 /* Debug.xcconfig in Resources */,
 				37FC1B61294DFAE400D7153F /* Preview Assets.xcassets in Resources */,
-				37A5D00529A888E700256042 /* Release.xcconfig in Resources */,
 				37FC1B5E294DFAE400D7153F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1835,6 +1831,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1870,6 +1867,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1896,6 +1894,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1931,6 +1930,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
