@@ -172,6 +172,8 @@
 		37E02E452955AB9900F7543F /* Text2SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E02E442955AB9900F7543F /* Text2SpeechView.swift */; };
 		37E47FC72A29AD1E00EC11C6 /* TenKeySidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E47FC62A29AD1E00EC11C6 /* TenKeySidebar.swift */; };
 		37E4C60D2990B03A00BFF179 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C60C2990B03A00BFF179 /* Menu.swift */; };
+		37E772082A813188004D0467 /* EmojiMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E772072A813188004D0467 /* EmojiMaster.swift */; };
+		37E7720A2A8131F4004D0467 /* EmojiIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E772092A8131F4004D0467 /* EmojiIndicator.swift */; };
 		37EA2897295158CB00B40CE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37EA2896295158CB00B40CE4 /* Settings.bundle */; };
 		37ED91D1298676220077B604 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED91D0298676220077B604 /* FontPicker.swift */; };
 		37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */; };
@@ -490,6 +492,8 @@
 		37E02E442955AB9900F7543F /* Text2SpeechView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text2SpeechView.swift; sourceTree = "<group>"; };
 		37E47FC62A29AD1E00EC11C6 /* TenKeySidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeySidebar.swift; sourceTree = "<group>"; };
 		37E4C60C2990B03A00BFF179 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		37E772072A813188004D0467 /* EmojiMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMaster.swift; sourceTree = "<group>"; };
+		37E772092A8131F4004D0467 /* EmojiIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiIndicator.swift; sourceTree = "<group>"; };
 		37EA2896295158CB00B40CE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37ED91D0298676220077B604 /* FontPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
 		37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanLabel.swift; sourceTree = "<group>"; };
@@ -653,6 +657,7 @@
 				3768B49D2A00CA620049D7C1 /* KeyboardLayout.swift */,
 				37B176672A050B1100A4E531 /* KeyboardCase.swift */,
 				3768B4992A00C8510049D7C1 /* KeyboardInterface.swift */,
+				37E772062A81316E004D0467 /* Emoji */,
 				37DE32862A0216740066D03A /* Extensions */,
 				37DE329D2A028A3D0066D03A /* Localization */,
 				3768B4922A00C2A10049D7C1 /* Info.plist */,
@@ -671,7 +676,6 @@
 				37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */,
 				37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */,
 				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
-				37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */,
 				37DE32992A02613B0066D03A /* SettingsView.swift */,
 				370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */,
 				37DE32892A02187B0066D03A /* ToolBarItem.swift */,
@@ -987,6 +991,16 @@
 				3792615F2A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift */,
 			);
 			path = Keyboards;
+			sourceTree = "<group>";
+		};
+		37E772062A81316E004D0467 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */,
+				37E772092A8131F4004D0467 /* EmojiIndicator.swift */,
+				37E772072A813188004D0467 /* EmojiMaster.swift */,
+			);
+			path = Emoji;
 			sourceTree = "<group>";
 		};
 		37E9918F298EAACB003423C2 /* KeyCode */ = {
@@ -1445,10 +1459,12 @@
 				37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */,
 				37CBD6932A42EE21003F7B68 /* StrokeKeyboard.swift in Sources */,
 				3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */,
+				37E772082A813188004D0467 /* EmojiMaster.swift in Sources */,
 				37B486D72A7D23B000B175B6 /* GlobeKey.swift in Sources */,
 				37B1766C2A05465000A4E531 /* InputStage.swift in Sources */,
 				37993A672A0EA31D00BC8E35 /* BackspaceKey.swift in Sources */,
 				370563262A0168D000872AA4 /* ToolBar.swift in Sources */,
+				37E7720A2A8131F4004D0467 /* EmojiIndicator.swift in Sources */,
 				3768B4A22A00CE510049D7C1 /* HapticFeedback.swift in Sources */,
 				37993A612A0EA2A500BC8E35 /* PeriodKey.swift in Sources */,
 				37993A632A0EA2C700BC8E35 /* ReturnKey.swift in Sources */,
@@ -1764,7 +1780,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -1791,7 +1807,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -1939,7 +1955,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -1982,7 +1998,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2116,7 +2132,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2156,7 +2172,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 92;
+				CURRENT_PROJECT_VERSION = 94;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
