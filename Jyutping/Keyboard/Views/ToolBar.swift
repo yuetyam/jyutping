@@ -27,7 +27,7 @@ struct ToolBar: View {
                         Spacer()
                         ZStack {
                                 Color.interactiveClear
-                                Image(uiImage: UIImage.emojiSmiley)
+                                Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage())
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 24, height: 24)

@@ -28,6 +28,4 @@ extension UIImage {
                 guard let croppedCGImage = sourceCGImage.cropping(to: cropRect) else { return nil }
                 return UIImage(cgImage: croppedCGImage)
         }
-
-        static let emojiSmiley: UIImage = UIImage(named: "EmojiSmiley")?.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage()
 }

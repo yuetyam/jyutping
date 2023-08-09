@@ -46,7 +46,7 @@ struct EmojiIndicator: View {
                 ZStack {
                         Color.interactiveClear
                         if isCustomImage {
-                                Image(uiImage: UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
+                                Image(uiImage: UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage())
                                         .resizable()
                                         .scaledToFit()
                                         .padding(.top, topInset)
