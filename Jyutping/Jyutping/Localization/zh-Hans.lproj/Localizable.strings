@@ -23,7 +23,7 @@
 "Tap **Keyboards**" = "點選 **鍵盤**";
 "Turn on **Jyutping**" = "開啓 **粵拼**";
 "Turn on **Allow Full Access**" = "開啓 **允許全權取用**";
-"Haptic Feedback requires Full Access" = "振動反饋 Haptic Feedback 需要「全權取用」權限";
+"Haptic Feedback requires Full Access" = "振動回應 Haptic Feedback 需要「全權取用」權限";
 "Go to **Settings**" = "前往 **設定**";
 
 "Tones Input" = "聲調輸入";
@@ -61,14 +61,14 @@
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
 "What does “Allow Full Access” do?" = "開啓「全權取用」作何用？";
 "Enable a button on the keyboard for pasting texts from Clipboard" = "開啓之後，鍵盤上部會多一個「帖上」掣，方便一鍵帖上剪帖板內容";
-"Haptic Feedback" = "振動反饋（Haptic Feedback）";
+"Haptic Feedback" = "振動回應（Haptic Feedback）";
 "Paste texts from Clipboard" = "鍵盤上部會有個「帖上」掣";
 "All other features don't require Full Access" = "毋開啓「全權取用」毋會影響使用其他功能";
 
 "Privacy Notice" = "私隱佈告";
 "privacy.notice.1" = "鍵盤全程毋會訪問網絡";
 "privacy.notice.2" = "鍵盤係完全獨立嘅，同主應用程式之間毋會進行任何交流、分享";
-"privacy.notice.3" = "開啓「全權取用」權限僅用作提供振動反饋功能";
+"privacy.notice.3" = "開啓「全權取用」權限僅用作提供振動回應功能";
 "privacy.notice.4" = "鍵盤上部個「帖上」掣毋會收集任何剪帖板內容";
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
