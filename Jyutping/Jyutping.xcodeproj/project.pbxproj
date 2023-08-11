@@ -34,7 +34,6 @@
 		373FCEBB29FF962000DC9102 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; };
 		373FCEBC29FF962000DC9102 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
-		3754F1942A7102B400A2692A /* KeyPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1932A7102B400A2692A /* KeyPreview.swift */; };
 		3754F1962A71031400A2692A /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1952A71031400A2692A /* TransformKey.swift */; };
 		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
@@ -172,6 +171,8 @@
 		37E4C60D2990B03A00BFF179 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E4C60C2990B03A00BFF179 /* Menu.swift */; };
 		37E772082A813188004D0467 /* EmojiMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E772072A813188004D0467 /* EmojiMaster.swift */; };
 		37E7720A2A8131F4004D0467 /* EmojiIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E772092A8131F4004D0467 /* EmojiIndicator.swift */; };
+		37E924692A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */; };
+		37E9246C2A86E7F7002D33B9 /* KeyPreviewPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */; };
 		37EA2897295158CB00B40CE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37EA2896295158CB00B40CE4 /* Settings.bundle */; };
 		37ED91D1298676220077B604 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED91D0298676220077B604 /* FontPicker.swift */; };
 		37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */; };
@@ -308,7 +309,6 @@
 		373104D42A0A3D780009BF66 /* EditingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
 		373FCEB929FF961500DC9102 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
-		3754F1932A7102B400A2692A /* KeyPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPreview.swift; sourceTree = "<group>"; };
 		3754F1952A71031400A2692A /* TransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
 		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
 		3763DE1329E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -492,6 +492,8 @@
 		37E4C60C2990B03A00BFF179 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		37E772072A813188004D0467 /* EmojiMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMaster.swift; sourceTree = "<group>"; };
 		37E772092A8131F4004D0467 /* EmojiIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiIndicator.swift; sourceTree = "<group>"; };
+		37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPreviewRightExpansionPath.swift; sourceTree = "<group>"; };
+		37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPreviewPath.swift; sourceTree = "<group>"; };
 		37EA2896295158CB00B40CE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37ED91D0298676220077B604 /* FontPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
 		37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanLabel.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				37073FDF2A25FEFD00691F9D /* TenKey */,
 				37E004222A16341100442290 /* Keyboards */,
 				37993A5D2A0EA25F00BC8E35 /* KeyViews */,
+				37E9246A2A86E7CD002D33B9 /* KeyPreviews */,
 				3768B4A52A00E95C0049D7C1 /* Views */,
 				37DE32912A021E780066D03A /* Options.swift */,
 				37DE328F2A021C450066D03A /* Constant.swift */,
@@ -728,7 +731,6 @@
 				37B486D62A7D23B000B175B6 /* GlobeKey.swift */,
 				37993A5E2A0EA28200BC8E35 /* CommaKey.swift */,
 				37993A602A0EA2A500BC8E35 /* PeriodKey.swift */,
-				3754F1932A7102B400A2692A /* KeyPreview.swift */,
 				37993A622A0EA2C700BC8E35 /* ReturnKey.swift */,
 				37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */,
 				37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */,
@@ -999,6 +1001,15 @@
 				37E772072A813188004D0467 /* EmojiMaster.swift */,
 			);
 			path = Emoji;
+			sourceTree = "<group>";
+		};
+		37E9246A2A86E7CD002D33B9 /* KeyPreviews */ = {
+			isa = PBXGroup;
+			children = (
+				37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */,
+				37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */,
+			);
+			path = KeyPreviews;
 			sourceTree = "<group>";
 		};
 		37E9918F298EAACB003423C2 /* KeyCode */ = {
@@ -1454,6 +1465,7 @@
 				37BAED4B2A0C94A00069F6F3 /* UIReturnKeyTypeExtensions.swift in Sources */,
 				37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */,
 				37CBD6932A42EE21003F7B68 /* StrokeKeyboard.swift in Sources */,
+				37E9246C2A86E7F7002D33B9 /* KeyPreviewPath.swift in Sources */,
 				3768B4912A00C2A10049D7C1 /* KeyboardViewController.swift in Sources */,
 				37E772082A813188004D0467 /* EmojiMaster.swift in Sources */,
 				37B486D72A7D23B000B175B6 /* GlobeKey.swift in Sources */,
@@ -1470,10 +1482,10 @@
 				37B7B4142A05F31200B3AB08 /* StringExtensions.swift in Sources */,
 				371A13A12A49F294001695C1 /* RomanizationLabel.swift in Sources */,
 				37073FDE2A25FC2700691F9D /* TenKeyKeyboard.swift in Sources */,
-				3754F1942A7102B400A2692A /* KeyPreview.swift in Sources */,
 				37993A5F2A0EA28200BC8E35 /* CommaKey.swift in Sources */,
 				37877D502A2B119300630F77 /* NumberPad.swift in Sources */,
 				37073FEF2A26097600691F9D /* TenKeySpecialKey.swift in Sources */,
+				37E924692A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

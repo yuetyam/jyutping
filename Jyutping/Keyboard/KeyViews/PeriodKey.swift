@@ -32,7 +32,7 @@ struct PeriodKey: View {
                 ZStack {
                         Color.interactiveClear
                         if isTouching {
-                                KeyPreview()
+                                KeyPreviewPath()
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {

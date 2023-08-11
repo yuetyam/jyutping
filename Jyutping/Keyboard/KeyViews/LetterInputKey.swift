@@ -37,7 +37,7 @@ struct LetterInputKey: View {
                 ZStack {
                         Color.interactiveClear
                         if isTouching {
-                                KeyPreview()
+                                KeyPreviewPath()
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.5), radius: 1)
                                         .overlay {

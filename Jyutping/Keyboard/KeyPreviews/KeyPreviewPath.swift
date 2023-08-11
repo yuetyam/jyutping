@@ -1,14 +1,14 @@
 import SwiftUI
 
-struct KeyPreview: Shape {
+struct KeyPreviewPath: Shape {
         func path(in rect: CGRect) -> Path {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)
-                return Path.previewPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5)
+                return Path.keyPreviewPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5)
         }
 }
 
-extension Path {
-        static func previewPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> Path {
+private extension Path {
+        static func keyPreviewPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat) -> Path {
 
                 //    +-------------------G---+
                 //    +   |               |   +
@@ -56,7 +56,7 @@ extension Path {
                         path.move(to: origin)
 
                         path.addLine(to: pointA)
-                        path.addArc(center: pointBArcCenter, radius: keyCornerRadius, startAngle: .degrees(270), endAngle: .degrees(180), clockwise: true)
+                        path.addArc(center: pointBArcCenter, radius: keyCornerRadius, startAngle: .degrees(270), endAngle: .degrees(180), clockwise: false)
 
                         path.addLine(to: pointC)
                         path.addCurve(to: pointD, control1: curve1Control1, control2: curve1Control2)
@@ -71,7 +71,9 @@ extension Path {
                         path.addCurve(to: pointK, control1: curve2Control1, control2: curve2Control2)
 
                         path.addLine(to: pointL)
-                        path.addArc(center: pointMArcCenter, radius: keyCornerRadius, startAngle: .zero, endAngle: .degrees(90), clockwise: true)
+                        path.addArc(center: pointMArcCenter, radius: keyCornerRadius, startAngle: .zero, endAngle: .degrees(90), clockwise: false)
+
+                        path.addLine(to: origin)
                 }
         }
 }
