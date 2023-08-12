@@ -48,13 +48,13 @@ struct CantoneseSymbolicKeyboard: View {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
                                         GlobeKey()
                                         SpaceKey()
-                                        CommaKey()
+                                        RightKey()
                                         ReturnKey()
                                 } else {
                                         TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
-                                        CommaKey()
+                                        LeftKey()
                                         SpaceKey()
-                                        PeriodKey()
+                                        RightKey()
                                         ReturnKey()
                                 }
                         }

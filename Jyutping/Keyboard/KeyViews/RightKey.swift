@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CommaKey: View {
+struct RightKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -33,34 +33,44 @@ struct CommaKey: View {
         @State private var selectedIndex: Int = 0
 
         private func responsiveSymbols(isABCMode: Bool, needsInputModeSwitchKey: Bool) -> [String] {
-                guard isABCMode else { return ["，", "。", "？", "！"] }
-                return needsInputModeSwitchKey ? [".", ",", "?", "!"] : [",", ".", "?", "!"]
+                switch (isABCMode, needsInputModeSwitchKey) {
+                case (true, true):
+                        return [".", ",", "?", "!"]
+                case (true, false):
+                        return [".", ",", "?", "!"]
+                case (false, true):
+                        return ["，", "。", "？", "！"]
+                case (false, false):
+                        return ["。", ".", "？", "！"]
+                }
         }
 
         var body: some View {
                 ZStack {
                         if isLongPressing {
                                 let symbols: [String] = responsiveSymbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
-                                let expansions: Int = symbols.count - 1
-                                KeyPreviewRightExpansionPath(expansions: expansions)
+                                let symbolsCount: Int = symbols.count
+                                let expansions: Int = symbolsCount - 1
+                                KeyPreviewLeftExpansionPath(expansions: expansions)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(0..<symbols.count, id: \.self) { index in
+                                                                let reversedIndex = (symbolsCount - 1) - index
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                                                                .fill(selectedIndex == index ? Color.selection : Color.clear)
-                                                                        Text(verbatim: symbols[index])
+                                                                                .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
+                                                                        Text(verbatim: symbols[reversedIndex])
                                                                                 .font(.title)
-                                                                                .foregroundStyle(selectedIndex == index ? Color.white : Color.primary)
+                                                                                .foregroundStyle(selectedIndex == reversedIndex ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: context.widthUnit * CGFloat(expansions + 1), height: context.heightUnit - 10)
+                                                .frame(width: context.widthUnit * CGFloat(symbolsCount), height: context.heightUnit - 16)
                                                 .padding(.bottom, context.heightUnit * 2)
-                                                .padding(.leading, context.widthUnit * CGFloat(expansions))
+                                                .padding(.trailing, context.widthUnit * CGFloat(expansions))
                                         }
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
@@ -69,7 +79,7 @@ struct CommaKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
-                                                CommaKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
+                                                RightKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, keyWidth: context.widthUnit, keyHeight: context.heightUnit)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, context.heightUnit * 2)
                                         }
@@ -81,7 +91,7 @@ struct CommaKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                                CommaKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, width: context.widthUnit, height: context.heightUnit)
+                                RightKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, keyWidth: context.widthUnit, keyHeight: context.heightUnit)
                         }
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
@@ -94,9 +104,9 @@ struct CommaKey: View {
                                         tapped = true
                                 }
                         }
-                        .onChanged { value in
+                        .onChanged { state in
                                 guard isLongPressing else { return }
-                                let distance: CGFloat = value.translation.width
+                                let distance: CGFloat = -(state.translation.width)
                                 guard distance > 0 else { return }
                                 let step: CGFloat = context.widthUnit
                                 if distance < step {
@@ -121,16 +131,13 @@ struct CommaKey: View {
                                         isLongPressing = false
                                 } else {
                                         if context.inputMethodMode.isABC {
-                                                if context.needsInputModeSwitchKey {
-                                                        context.operate(.input("."))
-                                                } else {
-                                                        context.operate(.input(","))
-                                                }
+                                                context.operate(.input("."))
                                         } else {
                                                 if context.inputStage.isBuffering {
                                                         context.operate(.process("'"))
                                                 } else {
-                                                        context.operate(.input("，"))
+                                                        let symbol: String = context.needsInputModeSwitchKey ? "，" : "。"
+                                                        context.operate(.input(symbol))
                                                 }
                                         }
                                 }
@@ -150,33 +157,53 @@ struct CommaKey: View {
         }
 }
 
-private struct CommaKeyText: View {
+private struct RightKeyText: View {
 
-        let isABCMode: Bool
-        let needsInputModeSwitchKey: Bool
-        let isBuffering: Bool
-        let width: CGFloat
-        let height: CGFloat
+        private enum RightKeyForm: Int {
+                case abc
+                case comma
+                case period
+                case buffering
+        }
+
+        init(isABCMode: Bool, needsInputModeSwitchKey: Bool, isBuffering: Bool, keyWidth: CGFloat, keyHeight: CGFloat) {
+                self.form = {
+                        if isABCMode {
+                                return .abc
+                        } else if isBuffering {
+                                return .buffering
+                        } else if needsInputModeSwitchKey {
+                                return .comma
+                        } else {
+                                return .period
+                        }
+                }()
+                self.keyWidth = keyWidth
+                self.keyHeight = keyHeight
+        }
+
+        private let form: RightKeyForm
+        private let keyWidth: CGFloat
+        private let keyHeight: CGFloat
 
         var body: some View {
-                if isABCMode {
-                        if needsInputModeSwitchKey {
-                                Text(verbatim: ".")
-                        } else {
-                                Text(verbatim: ",")
-                        }
-                } else {
-                        if isBuffering {
+                switch form {
+                case .abc:
+                        Text(verbatim: ".")
+                case .comma:
+                        Text(verbatim: "，")
+                case .period:
+                        Text(verbatim: "。")
+                case .buffering:
+                        VStack {
                                 Text(verbatim: "'")
-                                VStack(spacing: 0) {
-                                        Text(verbatim: " ").padding(.top, 12)
-                                        Spacer()
-                                        Text(verbatim: "分隔").font(.keyFooter).foregroundColor(.secondary).padding(.bottom, 12)
-                                }
-                                .frame(width: width, height:height)
-                        } else {
-                                Text(verbatim: "，")
+                                Spacer()
+                                Text(verbatim: "分隔")
+                                        .font(.keyFooter)
+                                        .foregroundColor(.secondary)
                         }
+                        .padding(.vertical)
+                        .frame(maxWidth: keyWidth, maxHeight: keyHeight)
                 }
         }
 }

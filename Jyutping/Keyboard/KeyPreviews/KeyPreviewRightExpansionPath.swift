@@ -14,21 +14,22 @@ struct KeyPreviewRightExpansionPath: Shape {
 private extension Path {
         static func keyPreviewRightExpansionPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, expansions: Int) -> Path {
 
-                //    +-----------------------e------------+------------a---+
-                //    +   |                   +            +            |   +
-                //    E...F                   +            +            b...+
-                //    +                       +            +                +
-                //    +                       +            +                +
-                //    +                       +            +            d...c
-                //    D                       +            +            |   +
-                //     .                      J------------+----------------+
+                //    +-------------------------e------------+------------a---+
+                //    +   |                     +            +            |   +
+                //    E...F                     +            +            b...+
+                //    +                         +            +                +
+                //    +                         +            +                +
+                //    +                         +            +            d...c
+                //    +                         +            +            |   +
+                //    D                         J------------+----------------+
+                //     .                       .
                 //       .                   .
-                //        C               K
-                //        +               +
-                //        +               +
-                //        +...B       M...L
-                //        +   |       |   +
-                //        +---A---o-------+
+                //         C               K
+                //         +               +
+                //         +               +
+                //         +...B       M...L
+                //         +   |       |   +
+                //         +---A---o-------+
 
                 let expansionWidth: CGFloat = keyWidth / 2.85
                 let curveDistance: CGFloat = expansionWidth * 1.5

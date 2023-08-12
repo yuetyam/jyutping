@@ -58,13 +58,13 @@ struct AlphabeticKeyboard: View {
                                         TransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                         GlobeKey()
                                         SpaceKey()
-                                        CommaKey()
+                                        RightKey()
                                         ReturnKey()
                                 } else {
                                         TransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                         LeftKey()
                                         SpaceKey()
-                                        PeriodKey()
+                                        RightKey()
                                         ReturnKey()
                                 }
                         }

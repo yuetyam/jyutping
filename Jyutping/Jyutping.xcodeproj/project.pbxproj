@@ -69,8 +69,6 @@
 		37942C7A29BD7FFB00667A58 /* MacHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */; };
 		37942C7C29BD81B700667A58 /* IOSShamChunMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */; };
 		37942C7E29BD81EF00667A58 /* IOSHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7D29BD81EF00667A58 /* IOSHongKongMTRView.swift */; };
-		37993A5F2A0EA28200BC8E35 /* CommaKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A5E2A0EA28200BC8E35 /* CommaKey.swift */; };
-		37993A612A0EA2A500BC8E35 /* PeriodKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A602A0EA2A500BC8E35 /* PeriodKey.swift */; };
 		37993A632A0EA2C700BC8E35 /* ReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A622A0EA2C700BC8E35 /* ReturnKey.swift */; };
 		37993A652A0EA2DD00BC8E35 /* SpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */; };
 		37993A672A0EA31D00BC8E35 /* BackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */; };
@@ -174,6 +172,8 @@
 		37E924692A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */; };
 		37E9246C2A86E7F7002D33B9 /* KeyPreviewPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */; };
 		37E9246E2A871220002D33B9 /* LeftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E9246D2A871220002D33B9 /* LeftKey.swift */; };
+		37E924702A880F31002D33B9 /* KeyPreviewLeftExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E9246F2A880F31002D33B9 /* KeyPreviewLeftExpansionPath.swift */; };
+		37E924722A88148D002D33B9 /* RightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E924712A88148D002D33B9 /* RightKey.swift */; };
 		37EA2897295158CB00B40CE4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37EA2896295158CB00B40CE4 /* Settings.bundle */; };
 		37ED91D1298676220077B604 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37ED91D0298676220077B604 /* FontPicker.swift */; };
 		37EF1953296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */; };
@@ -354,8 +354,6 @@
 		37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHongKongMTRView.swift; sourceTree = "<group>"; };
 		37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSShamChunMetroView.swift; sourceTree = "<group>"; };
 		37942C7D29BD81EF00667A58 /* IOSHongKongMTRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHongKongMTRView.swift; sourceTree = "<group>"; };
-		37993A5E2A0EA28200BC8E35 /* CommaKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommaKey.swift; sourceTree = "<group>"; };
-		37993A602A0EA2A500BC8E35 /* PeriodKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodKey.swift; sourceTree = "<group>"; };
 		37993A622A0EA2C700BC8E35 /* ReturnKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnKey.swift; sourceTree = "<group>"; };
 		37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceKey.swift; sourceTree = "<group>"; };
 		37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackspaceKey.swift; sourceTree = "<group>"; };
@@ -496,6 +494,8 @@
 		37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPreviewRightExpansionPath.swift; sourceTree = "<group>"; };
 		37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPreviewPath.swift; sourceTree = "<group>"; };
 		37E9246D2A871220002D33B9 /* LeftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftKey.swift; sourceTree = "<group>"; };
+		37E9246F2A880F31002D33B9 /* KeyPreviewLeftExpansionPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPreviewLeftExpansionPath.swift; sourceTree = "<group>"; };
+		37E924712A88148D002D33B9 /* RightKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightKey.swift; sourceTree = "<group>"; };
 		37EA2896295158CB00B40CE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		37ED91D0298676220077B604 /* FontPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
 		37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanLabel.swift; sourceTree = "<group>"; };
@@ -731,9 +731,8 @@
 			isa = PBXGroup;
 			children = (
 				37B486D62A7D23B000B175B6 /* GlobeKey.swift */,
-				37993A5E2A0EA28200BC8E35 /* CommaKey.swift */,
 				37E9246D2A871220002D33B9 /* LeftKey.swift */,
-				37993A602A0EA2A500BC8E35 /* PeriodKey.swift */,
+				37E924712A88148D002D33B9 /* RightKey.swift */,
 				37993A622A0EA2C700BC8E35 /* ReturnKey.swift */,
 				37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */,
 				37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */,
@@ -1009,8 +1008,9 @@
 		37E9246A2A86E7CD002D33B9 /* KeyPreviews */ = {
 			isa = PBXGroup;
 			children = (
-				37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */,
 				37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */,
+				37E9246F2A880F31002D33B9 /* KeyPreviewLeftExpansionPath.swift */,
+				37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */,
 			);
 			path = KeyPreviews;
 			sourceTree = "<group>";
@@ -1465,7 +1465,9 @@
 				373104D52A0A3D780009BF66 /* EditingPanel.swift in Sources */,
 				37B7B4122A05F22800B3AB08 /* Operation.swift in Sources */,
 				37993A652A0EA2DD00BC8E35 /* SpaceKey.swift in Sources */,
+				37E924702A880F31002D33B9 /* KeyPreviewLeftExpansionPath.swift in Sources */,
 				37BAED4B2A0C94A00069F6F3 /* UIReturnKeyTypeExtensions.swift in Sources */,
+				37E924722A88148D002D33B9 /* RightKey.swift in Sources */,
 				37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */,
 				37CBD6932A42EE21003F7B68 /* StrokeKeyboard.swift in Sources */,
 				37E9246C2A86E7F7002D33B9 /* KeyPreviewPath.swift in Sources */,
@@ -1477,7 +1479,6 @@
 				370563262A0168D000872AA4 /* ToolBar.swift in Sources */,
 				37E7720A2A8131F4004D0467 /* EmojiIndicator.swift in Sources */,
 				3768B4A22A00CE510049D7C1 /* HapticFeedback.swift in Sources */,
-				37993A612A0EA2A500BC8E35 /* PeriodKey.swift in Sources */,
 				37993A632A0EA2C700BC8E35 /* ReturnKey.swift in Sources */,
 				37DE32922A021E780066D03A /* Options.swift in Sources */,
 				37073FE72A2601D600691F9D /* TenKeyInputKey.swift in Sources */,
@@ -1485,7 +1486,6 @@
 				37B7B4142A05F31200B3AB08 /* StringExtensions.swift in Sources */,
 				371A13A12A49F294001695C1 /* RomanizationLabel.swift in Sources */,
 				37073FDE2A25FC2700691F9D /* TenKeyKeyboard.swift in Sources */,
-				37993A5F2A0EA28200BC8E35 /* CommaKey.swift in Sources */,
 				37877D502A2B119300630F77 /* NumberPad.swift in Sources */,
 				37073FEF2A26097600691F9D /* TenKeySpecialKey.swift in Sources */,
 				37E9246E2A871220002D33B9 /* LeftKey.swift in Sources */,
