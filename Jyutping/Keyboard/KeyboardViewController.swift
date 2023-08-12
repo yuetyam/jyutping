@@ -482,7 +482,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         possibleTexts = possibilities.flatMap({ $0 })
                 }
-                let suggestions = Engine.tenKeySuggest(sequences: possibleTexts)
+                let suggestions = Engine.tenKeySuggest(sequences: possibleTexts).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
                 text2mark = suggestions.first?.input ?? String.empty
                 candidates = suggestions
         }
