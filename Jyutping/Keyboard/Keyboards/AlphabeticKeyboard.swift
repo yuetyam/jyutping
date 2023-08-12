@@ -62,7 +62,7 @@ struct AlphabeticKeyboard: View {
                                         ReturnKey()
                                 } else {
                                         TransformKey(destination: .numeric, widthUnitTimes: 1.5)
-                                        CommaKey()
+                                        LeftKey()
                                         SpaceKey()
                                         PeriodKey()
                                         ReturnKey()

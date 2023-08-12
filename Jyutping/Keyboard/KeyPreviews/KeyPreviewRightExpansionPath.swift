@@ -33,22 +33,22 @@ private extension Path {
                 let expansionWidth: CGFloat = keyWidth / 2.85
                 let curveDistance: CGFloat = expansionWidth * 1.5
                 let controlDistance: CGFloat = curveDistance / 3.0
-                let maxWidth: CGFloat = keyWidth + (expansionWidth * 2)
+                let peekWidth: CGFloat = keyWidth + (expansionWidth * 2)
 
-                let pointA: CGPoint = CGPoint(x: origin.x - (keyWidth / 2) + keyCornerRadius, y: origin.y)
+                let pointA: CGPoint = CGPoint(x: origin.x - (keyWidth / 2.0) + keyCornerRadius, y: origin.y)
                 let pointBArcCenter: CGPoint = CGPoint(x: pointA.x, y: pointA.y - keyCornerRadius)
-                let pointC: CGPoint = CGPoint(x: origin.x - (keyWidth / 2), y: origin.y - keyHeight)
+                let pointC: CGPoint = CGPoint(x: origin.x - (keyWidth / 2.0), y: origin.y - keyHeight)
 
                 let pointD: CGPoint = CGPoint(x: pointC.x - expansionWidth, y: pointC.y - curveDistance)
                 let curve1Control1: CGPoint = CGPoint(x: pointC.x, y: pointC.y - controlDistance)
                 let curve1Control2: CGPoint = CGPoint(x: pointD.x, y: curve1Control1.y)
 
-                let pointE: CGPoint = CGPoint(x: pointD.x, y: pointD.y - keyHeight + previewCornerRadius + 2)
+                let pointE: CGPoint = CGPoint(x: pointD.x, y: pointD.y - keyHeight + previewCornerRadius + 4)
                 let pointFArcCenter: CGPoint = CGPoint(x: pointE.x + previewCornerRadius, y: pointE.y)
 
-                let pointExtE: CGPoint = CGPoint(x: pointE.x + maxWidth, y: pointE.y - previewCornerRadius)
-                let extendWith: CGFloat = (keyWidth + 2) * CGFloat(expansions) + previewCornerRadius
-                let pointExtA: CGPoint = CGPoint(x: pointExtE.x + extendWith - previewCornerRadius, y: pointExtE.y)
+                let pointExtE: CGPoint = CGPoint(x: pointE.x + peekWidth, y: pointE.y - previewCornerRadius)
+                let extendedWith: CGFloat = (keyWidth + 4) * CGFloat(expansions)
+                let pointExtA: CGPoint = CGPoint(x: pointExtE.x + extendedWith - previewCornerRadius, y: pointExtE.y)
                 let pointExtBArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointE.y)
                 let pointExtC: CGPoint = CGPoint(x: pointExtA.x + previewCornerRadius, y: pointD.y)
                 let pointExtDArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointExtC.y)
