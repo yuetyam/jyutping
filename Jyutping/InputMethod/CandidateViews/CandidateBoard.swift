@@ -22,7 +22,7 @@ struct CandidateBoard: View {
                                 )
                         }
                 }
-                .padding(8)
+                .padding(4)
                 .roundedHUDVisualEffect()
                 .fixedSize()
         }

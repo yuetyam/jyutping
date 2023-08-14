@@ -43,6 +43,6 @@ struct CandidateLabel: View {
                 .padding(.leading, 8)
                 .padding(.vertical, verticalPadding)
                 .foregroundColor(foreColor)
-                .background(backColor, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                .background(backColor, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
         }
 }
