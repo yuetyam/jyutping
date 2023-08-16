@@ -52,13 +52,13 @@ struct LeftKey: View {
                                                                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                                                                 .fill(selectedIndex == index ? Color.accentColor : Color.clear)
                                                                         Text(verbatim: symbols[index])
-                                                                                .font(.title)
+                                                                                .font(.title2)
                                                                                 .foregroundStyle(selectedIndex == index ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: context.widthUnit * CGFloat(symbolsCount), height: context.heightUnit - 16)
+                                                .frame(width: context.widthUnit * CGFloat(symbolsCount), height: context.heightUnit - 12)
                                                 .padding(.bottom, context.heightUnit * 2)
                                                 .padding(.leading, context.widthUnit * CGFloat(expansions))
                                         }
@@ -134,7 +134,7 @@ struct LeftKey: View {
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
-                        if buffer > 4 {
+                        if buffer > 3 {
                                 let shouldPerformLongPress: Bool = !isLongPressing && !(context.inputStage.isBuffering)
                                 if shouldPerformLongPress {
                                         isLongPressing = true

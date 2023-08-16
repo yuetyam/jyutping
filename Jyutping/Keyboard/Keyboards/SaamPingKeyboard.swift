@@ -12,12 +12,12 @@ struct SaamPingKeyboard: View {
                                 ToolBar()
                         }
                         HStack(spacing: 0 ) {
-                                DualLettersInputKey("aa")
+                                ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
                                 LetterInputKey("w")
                                 LetterInputKey("e")
-                                DualLettersInputKey("oe")
+                                ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("oe"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
                                 LetterInputKey("t")
-                                DualLettersInputKey("yu")
+                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
                                 LetterInputKey("u")
                                 LetterInputKey("i")
                                 LetterInputKey("o")
@@ -42,31 +42,27 @@ struct SaamPingKeyboard: View {
                                 ShiftKey()
                                 HiddenKey(key: .letterZ)
                                 Group {
-                                        LetterInputKey("z")
-                                        DualLettersInputKey("gw")
-                                        LetterInputKey("c")
-                                        DualLettersInputKey("ng")
-                                        LetterInputKey("b")
-                                        LetterInputKey("n")
-                                        LetterInputKey("m")
+                                        ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("z", header: "1"), members: [KeyElement("z"), KeyElement("1", footer: "陰平")]))
+                                        ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x")]))
+                                        ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("c", header: "3"), members: [KeyElement("c"), KeyElement("3", footer: "陰去")]))
+                                        ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng", header: "4"), members: [KeyElement("ng"), KeyElement("4", footer: "陽平"), KeyElement("v")]))
+                                        ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("b", header: "5"), members: [KeyElement("b"), KeyElement("5", footer: "陽上")]))
+                                        ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("n", header: "6"), members: [KeyElement("n"), KeyElement("6", footer: "陽去")]))
+                                        ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
                                 }
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()
                         }
                         HStack(spacing: 0) {
+                                TransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                 if context.needsInputModeSwitchKey {
-                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                         GlobeKey()
-                                        SpaceKey()
-                                        RightKey()
-                                        ReturnKey()
                                 } else {
-                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                         LeftKey()
-                                        SpaceKey()
-                                        RightKey()
-                                        ReturnKey()
                                 }
+                                SpaceKey()
+                                RightKey()
+                                ReturnKey()
                         }
                 }
         }

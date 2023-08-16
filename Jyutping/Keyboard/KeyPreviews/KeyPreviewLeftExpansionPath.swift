@@ -11,7 +11,7 @@ struct KeyPreviewLeftExpansionPath: Shape {
         }
 }
 
-private extension Path {
+extension Path {
         static func keyPreviewLeftExpansionPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, expansions: Int) -> Path {
 
                 //    +-----------+-----------+---------------------G---+
@@ -49,16 +49,16 @@ private extension Path {
                 let pointG: CGPoint = CGPoint(x: pointHArcCenter.x, y: pointHArcCenter.y - previewCornerRadius)
 
                 let pointD: CGPoint = CGPoint(x: pointJ.x - maxWidth, y: pointJ.y + previewCornerRadius)
-                let extendedWith: CGFloat = (keyWidth + 4) * CGFloat(expansions) + previewCornerRadius
+                let extendedWith: CGFloat = (keyWidth + 4) * CGFloat(expansions)
                 let pointExtA: CGPoint = CGPoint(x: pointD.x - extendedWith + previewCornerRadius, y: pointD.y)
                 let pointExtBArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointExtA.y - previewCornerRadius)
                 let pointExtC: CGPoint = CGPoint(x: pointExtA.x - previewCornerRadius, y: pointHArcCenter.y)
                 let pointExtDArcCenter: CGPoint = CGPoint(x: pointExtBArcCenter.x, y: pointExtC.y)
-                let control: CGFloat = (pointC.x - pointD.x) / 3
+                let control: CGFloat = (pointC.x - pointD.x) / 3.0
                 let curve1Control1: CGPoint = CGPoint(x: pointC.x, y: pointC.y - control * 2)
                 let curve1Control2: CGPoint = CGPoint(x: pointD.x, y: curve1Control1.y)
 
-                let pointL: CGPoint = CGPoint(x: origin.x + (keyWidth / 2), y: pointBArcCenter.y)
+                let pointL: CGPoint = CGPoint(x: origin.x + (keyWidth / 2.0), y: pointBArcCenter.y)
                 let pointMArcCenter: CGPoint = CGPoint(x: pointL.x - keyCornerRadius, y: pointL.y)
 
                 return Path { path in

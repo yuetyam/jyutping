@@ -11,7 +11,7 @@ struct KeyPreviewRightExpansionPath: Shape {
         }
 }
 
-private extension Path {
+extension Path {
         static func keyPreviewRightExpansionPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, expansions: Int) -> Path {
 
                 //    +-------------------------e------------+------------a---+

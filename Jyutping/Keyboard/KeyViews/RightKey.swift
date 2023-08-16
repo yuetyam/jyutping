@@ -62,13 +62,13 @@ struct RightKey: View {
                                                                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                                                                 .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
                                                                         Text(verbatim: symbols[reversedIndex])
-                                                                                .font(.title)
+                                                                                .font(.title2)
                                                                                 .foregroundStyle(selectedIndex == reversedIndex ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: context.widthUnit * CGFloat(symbolsCount), height: context.heightUnit - 16)
+                                                .frame(width: context.widthUnit * CGFloat(symbolsCount), height: context.heightUnit - 12)
                                                 .padding(.bottom, context.heightUnit * 2)
                                                 .padding(.trailing, context.widthUnit * CGFloat(expansions))
                                         }
@@ -145,7 +145,7 @@ struct RightKey: View {
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
-                        if buffer > 4 {
+                        if buffer > 3 {
                                 let shouldPerformLongPress: Bool = !isLongPressing && !(context.inputStage.isBuffering)
                                 if shouldPerformLongPress {
                                         isLongPressing = true
