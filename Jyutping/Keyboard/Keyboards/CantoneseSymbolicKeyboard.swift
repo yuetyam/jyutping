@@ -44,19 +44,15 @@ struct CantoneseSymbolicKeyboard: View {
                                 BackspaceKey()
                         }
                         HStack(spacing: 0) {
+                                TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
                                 if context.needsInputModeSwitchKey {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
                                         GlobeKey()
-                                        SpaceKey()
-                                        RightKey()
-                                        ReturnKey()
                                 } else {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
                                         LeftKey()
-                                        SpaceKey()
-                                        RightKey()
-                                        ReturnKey()
                                 }
+                                SpaceKey()
+                                RightKey()
+                                ReturnKey()
                         }
                 }
         }
