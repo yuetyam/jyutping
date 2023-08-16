@@ -69,13 +69,14 @@ struct LeftKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
-                                                LeftKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, keyWidth: context.widthUnit, keyHeight: context.heightUnit)
+                                                LeftKeyPreviewText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, context.heightUnit * 2)
                                         }
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                         } else {
+                                Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
@@ -189,5 +190,26 @@ private struct LeftKeyText: View {
                         .padding(.vertical)
                         .frame(maxWidth: keyWidth, maxHeight: keyHeight)
                 }
+        }
+}
+
+private struct LeftKeyPreviewText: View {
+
+        init(isABCMode: Bool, isBuffering: Bool) {
+                self.symbol = {
+                        if isABCMode {
+                                return ","
+                        } else if isBuffering {
+                                return "'"
+                        } else {
+                                return "，"
+                        }
+                }()
+        }
+
+        private let symbol: String
+
+        var body: some View {
+                Text(verbatim: symbol)
         }
 }

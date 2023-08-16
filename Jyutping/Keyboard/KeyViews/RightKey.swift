@@ -79,13 +79,14 @@ struct RightKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
-                                                RightKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, keyWidth: context.widthUnit, keyHeight: context.heightUnit)
+                                                RightKeyPreviewText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, context.heightUnit * 2)
                                         }
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                         } else {
+                                Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
@@ -205,5 +206,28 @@ private struct RightKeyText: View {
                         .padding(.vertical)
                         .frame(maxWidth: keyWidth, maxHeight: keyHeight)
                 }
+        }
+}
+
+private struct RightKeyPreviewText: View {
+
+        init(isABCMode: Bool, isBuffering: Bool, needsInputModeSwitchKey: Bool) {
+                self.symbol = {
+                        if isABCMode {
+                                return "."
+                        } else if isBuffering {
+                                return "'"
+                        } else if needsInputModeSwitchKey {
+                                return "，"
+                        } else {
+                                return "。"
+                        }
+                }()
+        }
+
+        private let symbol: String
+
+        var body: some View {
+                Text(verbatim: symbol)
         }
 }
