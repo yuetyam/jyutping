@@ -2,10 +2,20 @@ import SwiftUI
 
 struct ExpansibleInputKey: View {
 
-        /// Key location, left half (leading) or right half (trailing).
-        let keyLocale: HorizontalEdge
+        /// Create an ExpansibleInputKey
+        /// - Parameters:
+        ///   - keyLocale: Key location, left half (leading) or right half (trailing).
+        ///   - widthUnitTimes: Times of widthUnit
+        ///   - keyModel: keyModel
+        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 1, keyModel: KeyModel) {
+                self.keyLocale = keyLocale
+                self.widthUnitTimes = widthUnitTimes
+                self.keyModel = keyModel
+        }
 
-        let keyModel: KeyModel
+        private let keyLocale: HorizontalEdge
+        private let widthUnitTimes: CGFloat
+        private let keyModel: KeyModel
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -38,6 +48,7 @@ struct ExpansibleInputKey: View {
         @State private var selectedIndex: Int = 0
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
                 ZStack {
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
@@ -74,10 +85,10 @@ struct ExpansibleInputKey: View {
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: context.widthUnit * CGFloat(memberCount), height: context.heightUnit - 12)
+                                                .frame(width: keyWidth * CGFloat(memberCount), height: context.heightUnit - 12)
                                                 .padding(.bottom, context.heightUnit * 2)
-                                                .padding(.leading, keyLocale.isLeading ? (context.widthUnit * CGFloat(expansions)) : 0)
-                                                .padding(.trailing, keyLocale.isTrailing ? (context.widthUnit * CGFloat(expansions)) : 0)
+                                                .padding(.leading, keyLocale.isLeading ? (keyWidth * CGFloat(expansions)) : 0)
+                                                .padding(.trailing, keyLocale.isTrailing ? (keyWidth * CGFloat(expansions)) : 0)
                                         }
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
@@ -121,7 +132,7 @@ struct ExpansibleInputKey: View {
                                         .padding(.bottom, (context.keyboardForm == .alphabetic && context.keyboardCase.isLowercased) ? 3 : 0)
                         }
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: keyWidth, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -137,7 +148,7 @@ struct ExpansibleInputKey: View {
                                 guard memberCount > 1 else { return }
                                 let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                 guard distance > 0 else { return }
-                                let step: CGFloat = context.widthUnit
+                                let step: CGFloat = keyWidth
                                 for index in 0..<memberCount {
                                         let lowPoint: CGFloat = step * CGFloat(index)
                                         let heightPoint: CGFloat = step * CGFloat(index + 1)
