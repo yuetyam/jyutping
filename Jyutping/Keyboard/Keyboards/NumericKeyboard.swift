@@ -18,28 +18,70 @@ struct NumericKeyboard: View {
                                 SymbolInputKey("7")
                                 SymbolInputKey("8")
                                 SymbolInputKey("9")
-                                SymbolInputKey("0")
+                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("0"), members: [KeyElement("0"), KeyElement("°")]))
                         }
                         HStack(spacing: 0) {
-                                SymbolInputKey("-")
-                                SymbolInputKey("/")
+                                ExpansibleInputKey(
+                                        keyLocale: .leading,
+                                        keyModel: KeyModel(primary: KeyElement("-"),
+                                                           members: [
+                                                                KeyElement("-", footer: "002D"),
+                                                                KeyElement("–", footer: "2013"),
+                                                                KeyElement("—", footer: "2014"),
+                                                                KeyElement("•", footer: "2022")
+                                                           ])
+                                )
+                                ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("\\")]))
                                 SymbolInputKey(":")
                                 SymbolInputKey(";")
                                 SymbolInputKey("(")
                                 SymbolInputKey(")")
-                                SymbolInputKey("$")
-                                SymbolInputKey("&")
+                                ExpansibleInputKey(
+                                        keyLocale: .trailing,
+                                        keyModel: KeyModel(primary: KeyElement("$"),
+                                                           members: [
+                                                                KeyElement("$"),
+                                                                KeyElement("€"),
+                                                                KeyElement("£"),
+                                                                KeyElement("¥"),
+                                                                KeyElement("₩"),
+                                                                KeyElement("₽"),
+                                                                KeyElement("¢")
+                                                           ])
+                                )
+                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("§")]))
                                 SymbolInputKey("@")
-                                SymbolInputKey("\"")
+                                ExpansibleInputKey(
+                                        keyLocale: .trailing,
+                                        keyModel: KeyModel(primary: KeyElement("\u{0022}"),
+                                                           members: [
+                                                                KeyElement("\u{0022}", footer: "0022"),
+                                                                KeyElement("\u{201C}", footer: "201C"),
+                                                                KeyElement("\u{201D}", footer: "201D"),
+                                                                KeyElement("\u{201E}", footer: "201E"),
+                                                                KeyElement("\u{00BB}", footer: "00BB"),
+                                                                KeyElement("\u{00AB}", footer: "00AB")
+                                                           ])
+                                )
                         }
                         HStack(spacing: 0) {
                                 TransformKey(destination: .symbolic, widthUnitTimes: 1.3)
                                 PlaceholderKey()
-                                SymbolInputKey(".", widthUnitTimes: 1.3)
+                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
                                 SymbolInputKey(",", widthUnitTimes: 1.3)
-                                SymbolInputKey("?", widthUnitTimes: 1.3)
-                                SymbolInputKey("!", widthUnitTimes: 1.3)
-                                SymbolInputKey("'", widthUnitTimes: 1.3)
+                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
+                                ExpansibleInputKey(keyLocale: .trailing, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("¡")]))
+                                ExpansibleInputKey(
+                                        keyLocale: .trailing,
+                                        widthUnitTimes: 1.3,
+                                        keyModel: KeyModel(primary: KeyElement("\u{0027}"),
+                                                           members: [
+                                                                KeyElement("\u{0027}", footer: "0027"),
+                                                                KeyElement("\u{2018}", footer: "2018"),
+                                                                KeyElement("\u{2019}", footer: "2019"),
+                                                                KeyElement("\u{0060}", footer: "0060")
+                                                           ])
+                                )
                                 PlaceholderKey()
                                 BackspaceKey()
                         }
