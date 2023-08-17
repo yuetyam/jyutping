@@ -14,11 +14,11 @@ struct SymbolicKeyboard: View {
                                 SymbolInputKey("{")
                                 SymbolInputKey("}")
                                 SymbolInputKey("#")
-                                SymbolInputKey("%")
+                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
                                 SymbolInputKey("^")
                                 SymbolInputKey("*")
                                 SymbolInputKey("+")
-                                SymbolInputKey("=")
+                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("≠"), KeyElement("≈")]))
                         }
                         HStack(spacing: 0) {
                                 SymbolInputKey("_")
@@ -35,11 +35,21 @@ struct SymbolicKeyboard: View {
                         HStack(spacing: 0) {
                                 TransformKey(destination: .numeric, widthUnitTimes: 1.3)
                                 PlaceholderKey()
-                                SymbolInputKey(".", widthUnitTimes: 1.3)
+                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
                                 SymbolInputKey(",", widthUnitTimes: 1.3)
-                                SymbolInputKey("?", widthUnitTimes: 1.3)
-                                SymbolInputKey("!", widthUnitTimes: 1.3)
-                                SymbolInputKey("'", widthUnitTimes: 1.3)
+                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
+                                ExpansibleInputKey(keyLocale: .trailing, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("¡")]))
+                                ExpansibleInputKey(
+                                        keyLocale: .trailing,
+                                        widthUnitTimes: 1.3,
+                                        keyModel: KeyModel(primary: KeyElement("\u{0027}"),
+                                                           members: [
+                                                                KeyElement("\u{0027}", footer: "0027"),
+                                                                KeyElement("\u{2018}", footer: "2018"),
+                                                                KeyElement("\u{2019}", footer: "2019"),
+                                                                KeyElement("\u{0060}", footer: "0060")
+                                                           ])
+                                )
                                 PlaceholderKey()
                                 BackspaceKey()
                         }
