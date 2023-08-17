@@ -495,10 +495,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard isMarkFree else { return processingText.formattedForMark() }
                         guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
                         let leadingLength: Int = bestScheme.length
-                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                        let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
                         guard leadingLength != processingText.count else { return leadingText }
                         let tailText = processingText.dropFirst(leadingLength)
-                        return leadingText + " " + tailText
+                        return leadingText + String.space + tailText
                 }()
                 self.text2mark = text2mark
                 let engineCandidates: [Candidate] = {
@@ -529,10 +529,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let tailMarkedText: String = {
                         guard let bestScheme = schemes.first else { return text }
                         let leadingLength: Int = bestScheme.summedLength
-                        let leadingText: String = bestScheme.joined(separator: " ")
+                        let leadingText: String = bestScheme.joined(separator: String.space)
                         guard leadingLength != text.count else { return leadingText }
                         let tailText = text.dropFirst(leadingLength)
-                        return leadingText + " " + tailText
+                        return leadingText + String.space + tailText
                 }()
                 text2mark = "r " + tailMarkedText
                 let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
@@ -578,10 +578,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard isMarkFree else { return text.formattedForMark() }
                         guard let bestScheme = segmentation.first else { return text.formattedForMark() }
                         let leadingLength: Int = bestScheme.length
-                        let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
+                        let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
                         guard leadingLength != text.count else { return leadingText }
                         let tailText = text.dropFirst(leadingLength)
-                        return leadingText + " " + tailText
+                        return leadingText + String.space + tailText
                 }()
                 text2mark = "q " + tailMarkedText
                 let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
