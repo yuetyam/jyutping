@@ -79,7 +79,7 @@ struct RightKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
-                                                RightKeyPreviewText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
+                                                RightKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, context.heightUnit * 2)
                                         }
@@ -92,7 +92,15 @@ struct RightKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                                RightKeyText(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey, isBuffering: context.inputStage.isBuffering, keyWidth: context.widthUnit, keyHeight: context.heightUnit)
+                                ZStack(alignment: .bottom) {
+                                        Color.clear
+                                        Text(verbatim: "分隔")
+                                                .font(.keyFooter)
+                                                .foregroundColor(.secondary)
+                                                .padding(.bottom, 8)
+                                }
+                                .opacity(context.inputStage.isBuffering ? 1 : 0)
+                                RightKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
                         }
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
@@ -159,57 +167,6 @@ struct RightKey: View {
 }
 
 private struct RightKeyText: View {
-
-        private enum RightKeyForm: Int {
-                case abc
-                case comma
-                case period
-                case buffering
-        }
-
-        init(isABCMode: Bool, needsInputModeSwitchKey: Bool, isBuffering: Bool, keyWidth: CGFloat, keyHeight: CGFloat) {
-                self.form = {
-                        if isABCMode {
-                                return .abc
-                        } else if isBuffering {
-                                return .buffering
-                        } else if needsInputModeSwitchKey {
-                                return .comma
-                        } else {
-                                return .period
-                        }
-                }()
-                self.keyWidth = keyWidth
-                self.keyHeight = keyHeight
-        }
-
-        private let form: RightKeyForm
-        private let keyWidth: CGFloat
-        private let keyHeight: CGFloat
-
-        var body: some View {
-                switch form {
-                case .abc:
-                        Text(verbatim: ".")
-                case .comma:
-                        Text(verbatim: "，")
-                case .period:
-                        Text(verbatim: "。")
-                case .buffering:
-                        VStack {
-                                Text(verbatim: "'")
-                                Spacer()
-                                Text(verbatim: "分隔")
-                                        .font(.keyFooter)
-                                        .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical)
-                        .frame(maxWidth: keyWidth, maxHeight: keyHeight)
-                }
-        }
-}
-
-private struct RightKeyPreviewText: View {
 
         init(isABCMode: Bool, isBuffering: Bool, needsInputModeSwitchKey: Bool) {
                 self.symbol = {

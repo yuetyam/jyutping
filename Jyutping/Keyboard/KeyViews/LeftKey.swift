@@ -69,7 +69,7 @@ struct LeftKey: View {
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
-                                                LeftKeyPreviewText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering)
+                                                LeftKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering)
                                                         .font(.largeTitle)
                                                         .padding(.bottom, context.heightUnit * 2)
                                         }
@@ -82,7 +82,15 @@ struct LeftKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                                LeftKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, keyWidth: context.widthUnit, keyHeight: context.heightUnit)
+                                ZStack(alignment: .bottom) {
+                                        Color.clear
+                                        Text(verbatim: "分隔")
+                                                .font(.keyFooter)
+                                                .foregroundColor(.secondary)
+                                                .padding(.bottom, 8)
+                                }
+                                .opacity(context.inputStage.isBuffering ? 1 : 0)
+                                LeftKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering)
                         }
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
@@ -148,52 +156,6 @@ struct LeftKey: View {
 }
 
 private struct LeftKeyText: View {
-
-        private enum LeftKeyForm: Int {
-                case abc
-                case standby
-                case buffering
-        }
-
-        init(isABCMode: Bool, isBuffering: Bool, keyWidth: CGFloat, keyHeight: CGFloat) {
-                self.form = {
-                        if isABCMode {
-                                return .abc
-                        } else if isBuffering {
-                                return .buffering
-                        } else {
-                                return .standby
-                        }
-                }()
-                self.keyWidth = keyWidth
-                self.keyHeight = keyHeight
-        }
-
-        private let form: LeftKeyForm
-        private let keyWidth: CGFloat
-        private let keyHeight: CGFloat
-
-        var body: some View {
-                switch form {
-                case .abc:
-                        Text(verbatim: ",")
-                case .standby:
-                        Text(verbatim: "，")
-                case .buffering:
-                        VStack {
-                                Text(verbatim: "'")
-                                Spacer()
-                                Text(verbatim: "分隔")
-                                        .font(.keyFooter)
-                                        .foregroundColor(.secondary)
-                        }
-                        .padding(.vertical)
-                        .frame(maxWidth: keyWidth, maxHeight: keyHeight)
-                }
-        }
-}
-
-private struct LeftKeyPreviewText: View {
 
         init(isABCMode: Bool, isBuffering: Bool) {
                 self.symbol = {
