@@ -25,7 +25,7 @@ struct NumericKeyboard: View {
                                         keyLocale: .leading,
                                         keyModel: KeyModel(primary: KeyElement("-"),
                                                            members: [
-                                                                KeyElement("-", footer: "002D"),
+                                                                KeyElement("-"),
                                                                 KeyElement("–", footer: "2013"),
                                                                 KeyElement("—", footer: "2014"),
                                                                 KeyElement("•", footer: "2022")
