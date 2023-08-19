@@ -37,7 +37,7 @@ private extension Path {
                 let curve1Control1: CGPoint = CGPoint(x: pointC.x, y: pointC.y - controlDistance)
                 let curve1Control2: CGPoint = CGPoint(x: pointD.x, y: curve1Control1.y)
 
-                let pointE: CGPoint = CGPoint(x: pointD.x, y: pointD.y - keyHeight + previewCornerRadius + 4)
+                let pointE: CGPoint = CGPoint(x: pointD.x, y: pointD.y - keyHeight + previewCornerRadius)
                 let pointFArcCenter: CGPoint = CGPoint(x: pointE.x + previewCornerRadius, y: pointE.y)
 
                 let maxWidth: CGFloat = keyWidth + (expansionWidth * 2)

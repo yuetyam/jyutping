@@ -44,21 +44,24 @@ extension Path {
                 let curve1Control1: CGPoint = CGPoint(x: pointC.x, y: pointC.y - controlDistance)
                 let curve1Control2: CGPoint = CGPoint(x: pointD.x, y: curve1Control1.y)
 
-                let pointE: CGPoint = CGPoint(x: pointD.x, y: pointD.y - keyHeight + previewCornerRadius + 4)
+                let pointE: CGPoint = CGPoint(x: pointD.x, y: pointD.y - keyHeight + previewCornerRadius)
                 let pointFArcCenter: CGPoint = CGPoint(x: pointE.x + previewCornerRadius, y: pointE.y)
 
                 let pointExtE: CGPoint = CGPoint(x: pointE.x + peekWidth, y: pointE.y - previewCornerRadius)
                 let extendedWith: CGFloat = (keyWidth + 4) * CGFloat(expansions)
                 let pointExtA: CGPoint = CGPoint(x: pointExtE.x + extendedWith - previewCornerRadius, y: pointExtE.y)
                 let pointExtBArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointE.y)
-                let pointExtC: CGPoint = CGPoint(x: pointExtA.x + previewCornerRadius, y: pointD.y)
+
+                let extrasHeight: CGFloat = curveDistance / 2.0
+                let pointExtC: CGPoint = CGPoint(x: pointExtA.x + previewCornerRadius, y: pointD.y + extrasHeight - previewCornerRadius)
                 let pointExtDArcCenter: CGPoint = CGPoint(x: pointExtA.x, y: pointExtC.y)
 
-                let pointJ: CGPoint = CGPoint(x: pointExtE.x, y: pointD.y + previewCornerRadius)
+                let pointJ: CGPoint = CGPoint(x: pointExtE.x, y: pointD.y + extrasHeight)
                 let pointK: CGPoint = CGPoint(x: pointC.x + keyWidth, y: pointC.y)
-                let control: CGFloat = (pointJ.x - pointK.x) / 3.0
-                let curve2Control1: CGPoint = CGPoint(x: pointJ.x, y: pointK.y - control * 2)
-                let curve2Control2: CGPoint = CGPoint(x: pointK.x, y: curve2Control1.y)
+                let xControl: CGFloat = (pointJ.x - pointK.x) / 3.0
+                let yControl: CGFloat = (pointK.y - pointJ.y) / 3.0
+                let curve2Control1: CGPoint = CGPoint(x: pointJ.x - xControl, y: pointJ.y)
+                let curve2Control2: CGPoint = CGPoint(x: pointK.x, y: pointK.y - yControl)
 
                 let pointL: CGPoint = CGPoint(x: origin.x + (keyWidth / 2.0), y: pointBArcCenter.y)
                 let pointMArcCenter: CGPoint = CGPoint(x: pointL.x - keyCornerRadius, y: pointL.y)
