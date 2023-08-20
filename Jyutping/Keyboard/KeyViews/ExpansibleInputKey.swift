@@ -85,7 +85,7 @@ struct ExpansibleInputKey: View {
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: keyWidth * CGFloat(memberCount), height: context.heightUnit - 12)
+                                                .frame(width: keyWidth * CGFloat(memberCount), height: context.heightUnit - 8)
                                                 .padding(.bottom, context.heightUnit * 2)
                                                 .padding(.leading, keyLocale.isLeading ? (keyWidth * CGFloat(expansions)) : 0)
                                                 .padding(.trailing, keyLocale.isTrailing ? (keyWidth * CGFloat(expansions)) : 0)

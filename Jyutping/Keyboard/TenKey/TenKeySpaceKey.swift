@@ -27,7 +27,7 @@ struct TenKeySpaceKey: View {
         }
 
         @GestureState private var isTouching: Bool = false
-        @State private var isEngagedLongPress: Bool = false
+        @State private var isLongPressEngaged: Bool = false
         @State private var longPressBuffer: Int = 0
         private let longPressHint: String = "← →"
 
@@ -43,7 +43,7 @@ struct TenKeySpaceKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(3)
-                        Text(verbatim: isEngagedLongPress ? longPressHint : context.spaceText)
+                        Text(verbatim: isLongPressEngaged ? longPressHint : context.spaceText)
                 }
                 .frame(height: context.heightUnit)
                 .frame(maxWidth: .infinity)
@@ -55,7 +55,7 @@ struct TenKeySpaceKey: View {
                                         context.triggerHapticFeedback()
                                         touched = true
                                         context.updateTouchedLocation(to: value.startLocation)
-                                } else if isEngagedLongPress {
+                                } else if isLongPressEngaged {
                                         let distance = value.location.x - context.touchedLocation.x
                                         guard abs(distance) > 10 else { return }
                                         context.updateTouchedLocation(to: value.location)
@@ -76,8 +76,8 @@ struct TenKeySpaceKey: View {
                         .onEnded { value in
                                 longPressBuffer = 0
                                 context.updateTouchedLocation(to: .zero)
-                                if isEngagedLongPress {
-                                        isEngagedLongPress = false
+                                if isLongPressEngaged {
+                                        isLongPressEngaged = false
                                 } else {
                                         if isInTheMediumOfDoubleTapping {
                                                 isInTheMediumOfDoubleTapping = false
@@ -92,9 +92,9 @@ struct TenKeySpaceKey: View {
                 .onReceive(timer) { _ in
                         if isTouching {
                                 if longPressBuffer > 3 {
-                                        if !isEngagedLongPress {
+                                        if !isLongPressEngaged {
                                                 context.triggerHapticFeedback()
-                                                isEngagedLongPress = true
+                                                isLongPressEngaged = true
                                         }
                                 } else {
                                         longPressBuffer += 1
