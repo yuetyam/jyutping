@@ -257,13 +257,30 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text)
                         adjustKeyboard()
                 case .process(let text):
-                        let shouldAppendBuffer: Bool = inputMethodMode.isCantonese && (keyboardForm == .alphabetic)
-                        if shouldAppendBuffer {
-                                appendBufferText(text)
-                        } else {
-                                textDocumentProxy.insertText(text)
+                        defer {
+                                adjustKeyboard()
                         }
-                        adjustKeyboard()
+                        let isCantoneseComposeMode: Bool = inputMethodMode.isCantonese && (keyboardForm == .alphabetic)
+                        guard isCantoneseComposeMode else {
+                                textDocumentProxy.insertText(text)
+                                return
+                        }
+                        switch text {
+                        case "gw" where Options.keyboardLayout == .saamPing:
+                                let fullText: String = bufferText + text
+                                bufferText = fullText.replacingOccurrences(of: "gwgw", with: "kw", options: [.anchored, .backwards])
+                        case _ where text.isLetters:
+                                appendBufferText(text)
+                        case _ where (Options.keyboardLayout == .saamPing) && (text.first?.isCantoneseToneDigit ?? false):
+                                appendBufferText(text)
+                        case _ where !(inputStage.isBuffering):
+                                textDocumentProxy.insertText(text)
+                        default:
+                                inputBufferText()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) { [unowned self] in
+                                        textDocumentProxy.insertText(text)
+                                }
+                        }
                 case .combine(let combo):
                         bufferCombos.append(combo)
                 case .space:
@@ -677,7 +694,28 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return screen.width - horizontalInset
                 }()
                 keyboardWidth = newKeyboardWidth
-                widthUnit = keyboardWidth / 10.0
+                widthUnit = {
+                        switch keyboardInterface {
+                        case .phonePortrait:
+                                return keyboardWidth / 10.0
+                        case .phoneLandscape:
+                                return keyboardWidth / 10.0
+                        case .padFloating:
+                                return keyboardWidth / 10.0
+                        case .padPortraitSmall:
+                                return keyboardWidth / 11.0
+                        case .padPortraitMedium:
+                                return keyboardWidth / 11.0
+                        case .padPortraitLarge:
+                                return keyboardWidth / 11.0
+                        case .padLandscapeSmall:
+                                return keyboardWidth / 11.0
+                        case .padLandscapeMedium:
+                                return keyboardWidth / 11.0
+                        case .padLandscapeLarge:
+                                return keyboardWidth / 11.0
+                        }
+                }()
                 heightUnit = keyboardInterface.keyHeightUnit(of: screen)
         }
 

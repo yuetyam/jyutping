@@ -41,7 +41,11 @@ struct MotherBoard: View {
                 default:
                         switch context.inputMethodMode {
                         case .abc:
-                                AlphabeticKeyboard()
+                                if context.keyboardInterface.isCompact {
+                                        AlphabeticKeyboard()
+                                } else {
+                                        SmallPadAlphabeticKeyboard()
+                                }
                         case .cantonese:
                                 switch Options.keyboardLayout {
                                 case .qwerty:
@@ -51,7 +55,11 @@ struct MotherBoard: View {
                                         case .stroke:
                                                 StrokeKeyboard()
                                         default:
-                                                AlphabeticKeyboard()
+                                                if context.keyboardInterface.isCompact {
+                                                        AlphabeticKeyboard()
+                                                } else {
+                                                        SmallPadAlphabeticKeyboard()
+                                                }
                                         }
                                 case .saamPing:
                                         switch context.qwertyForm {
