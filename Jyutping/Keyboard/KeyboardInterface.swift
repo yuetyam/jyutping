@@ -68,3 +68,30 @@ extension KeyboardInterface {
                 }
         }
 }
+
+extension KeyboardInterface {
+
+        /// Key count per row
+        var widthUnitTimes: CGFloat {
+                switch self {
+                case .phonePortrait:
+                        return 10
+                case .phoneLandscape:
+                        return 10
+                case .padFloating:
+                        return 10
+                case .padPortraitSmall:
+                        return 11
+                case .padPortraitMedium:
+                        return 11
+                case .padPortraitLarge:
+                        return 11
+                case .padLandscapeSmall:
+                        return 11
+                case .padLandscapeMedium:
+                        return 11
+                case .padLandscapeLarge:
+                        return 11
+                }
+        }
+}

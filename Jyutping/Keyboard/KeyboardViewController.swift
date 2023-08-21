@@ -654,7 +654,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var spaceText: String = "粵拼"
         private func updateSpaceText() {
                 let newText: String = {
-                        guard inputMethodMode.isCantonese else { return "ABC" }
+                        guard inputMethodMode.isCantonese else { return "space" }
                         guard keyboardForm != .tenKeyNumeric else { return "空格" }
                         let isSimplified: Bool = Options.characterStandard.isSimplified
                         switch keyboardCase {
@@ -694,28 +694,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return screen.width - horizontalInset
                 }()
                 keyboardWidth = newKeyboardWidth
-                widthUnit = {
-                        switch keyboardInterface {
-                        case .phonePortrait:
-                                return keyboardWidth / 10.0
-                        case .phoneLandscape:
-                                return keyboardWidth / 10.0
-                        case .padFloating:
-                                return keyboardWidth / 10.0
-                        case .padPortraitSmall:
-                                return keyboardWidth / 11.0
-                        case .padPortraitMedium:
-                                return keyboardWidth / 11.0
-                        case .padPortraitLarge:
-                                return keyboardWidth / 11.0
-                        case .padLandscapeSmall:
-                                return keyboardWidth / 11.0
-                        case .padLandscapeMedium:
-                                return keyboardWidth / 11.0
-                        case .padLandscapeLarge:
-                                return keyboardWidth / 11.0
-                        }
-                }()
+                widthUnit = keyboardWidth / keyboardInterface.widthUnitTimes
                 heightUnit = keyboardInterface.keyHeightUnit(of: screen)
         }
 
