@@ -21,9 +21,17 @@ struct MotherBoard: View {
                 case .numeric:
                         switch context.inputMethodMode {
                         case .cantonese:
-                                CantoneseNumericKeyboard()
+                                if context.keyboardInterface.isCompact {
+                                        CantoneseNumericKeyboard()
+                                } else {
+                                        SmallPadCantoneseNumericKeyboard()
+                                }
                         case .abc:
-                                NumericKeyboard()
+                                if context.keyboardInterface.isCompact {
+                                        NumericKeyboard()
+                                } else {
+                                        SmallPadNumericKeyboard()
+                                }
                         }
                 case .symbolic:
                         switch context.inputMethodMode {

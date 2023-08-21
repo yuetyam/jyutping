@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ExpansibleInputKey: View {
+struct PadExpansibleInputKey: View {
 
         /// Create an ExpansibleInputKey
         /// - Parameters:
@@ -30,6 +30,16 @@ struct ExpansibleInputKey: View {
                         return .light
                 }
         }
+        private var activeKeyColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .lightEmphatic
+                case .dark:
+                        return .darkEmphatic
+                @unknown default:
+                        return .lightEmphatic
+                }
+        }
         private var keyPreviewColor: Color {
                 switch colorScheme {
                 case .light:
@@ -53,9 +63,9 @@ struct ExpansibleInputKey: View {
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
                                 let expansions: Int = keyModel.members.count - 1
-                                KeyPreviewExpansionPath(keyLocale: keyLocale, expansions: expansions)
+                                PadKeyPreviewExpansionPath(keyLocale: keyLocale, expansions: expansions)
                                         .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5)
+                                        .shadow(color: .black.opacity(0.8), radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(0..<memberCount, id: \.self) { index in
@@ -85,31 +95,17 @@ struct ExpansibleInputKey: View {
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: keyWidth * CGFloat(memberCount), height: context.heightUnit - 8)
-                                                .padding(.bottom, context.heightUnit * 2)
-                                                .padding(.leading, keyLocale.isLeading ? (keyWidth * CGFloat(expansions)) : 0)
-                                                .padding(.trailing, keyLocale.isTrailing ? (keyWidth * CGFloat(expansions)) : 0)
+                                                .frame(width: (keyWidth - 14) * CGFloat(memberCount), height: context.heightUnit * 0.7)
+                                                .padding(.bottom, context.heightUnit * 1.7)
+                                                .padding(.leading, keyLocale.isLeading ? ((keyWidth - 10) * CGFloat(expansions)) : 0)
+                                                .padding(.trailing, keyLocale.isTrailing ? ((keyWidth - 10) * CGFloat(expansions)) : 0)
                                         }
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
-                        } else if isTouching {
-                                KeyPreviewPath()
-                                        .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.5), radius: 1)
-                                        .overlay {
-                                                Text(verbatim: keyModel.primary.text)
-                                                        .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
-                                                        .font(keyModel.primary.isTextSingular ? .title : .title2)
-                                                        .padding(.bottom, context.heightUnit * 2.0)
-                                        }
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(5)
                         } else {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(keyColor)
+                                        .fill(isTouching ? activeKeyColor : keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(5)
                                 ZStack(alignment: .topTrailing) {
                                         Color.interactiveClear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
@@ -128,8 +124,7 @@ struct ExpansibleInputKey: View {
                                 }
                                 Text(verbatim: keyModel.primary.text)
                                         .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
-                                        .font(keyModel.primary.isTextSingular ? .letterInputKeyCompact : .dualLettersInputKeyCompact)
-                                        .padding(.bottom, (context.keyboardForm == .alphabetic && context.keyboardCase.isLowercased) ? 3 : 0)
+                                        .font(.title3)
                         }
                 }
                 .frame(width: keyWidth, height: context.heightUnit)
@@ -148,7 +143,7 @@ struct ExpansibleInputKey: View {
                                 guard memberCount > 1 else { return }
                                 let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                 guard distance > 0 else { return }
-                                let step: CGFloat = keyWidth - 8
+                                let step: CGFloat = keyWidth - 14
                                 for index in 0..<memberCount {
                                         let lowPoint: CGFloat = step * CGFloat(index)
                                         let heightPoint: CGFloat = step * CGFloat(index + 1)

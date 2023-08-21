@@ -52,8 +52,13 @@ struct SmallPadAlphabeticKeyboard: View {
                                         PadLetterInputKey("n")
                                         PadLetterInputKey("m")
                                 }
-                                PadLetterInputKey("，")
-                                PadLetterInputKey("。")
+                                if context.inputMethodMode.isABC {
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?")]))
+                                } else {
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？")]))
+                                }
                                 PadShiftKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {

@@ -33,6 +33,7 @@
 		373104D52A0A3D780009BF66 /* EditingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373104D42A0A3D780009BF66 /* EditingPanel.swift */; };
 		373FCEBB29FF962000DC9102 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; };
 		373FCEBC29FF962000DC9102 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		374357742A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3754F1962A71031400A2692A /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1952A71031400A2692A /* TransformKey.swift */; };
 		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
@@ -82,6 +83,10 @@
 		37A7EB602A91AE6400B7CDAF /* PadGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB5F2A91AE6400B7CDAF /* PadGlobeKey.swift */; };
 		37A7EB622A91AEF700B7CDAF /* PadSpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB612A91AEF700B7CDAF /* PadSpaceKey.swift */; };
 		37A7EB642A91B4B600B7CDAF /* PadTransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB632A91B4B600B7CDAF /* PadTransformKey.swift */; };
+		37A7EB662A927D4700B7CDAF /* PadKeyExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB652A927D4700B7CDAF /* PadKeyExpansionPath.swift */; };
+		37A7EB682A92835C00B7CDAF /* PadExpansibleInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB672A92835C00B7CDAF /* PadExpansibleInputKey.swift */; };
+		37A7EB6A2A92B44E00B7CDAF /* SmallPadNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB692A92B44E00B7CDAF /* SmallPadNumericKeyboard.swift */; };
+		37A7EB6C2A92B4E800B7CDAF /* PadSymbolInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */; };
 		37A9ECF72A1E93E100F63732 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */; };
 		37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775429D96FEC007F07D7 /* MacHansMessView.swift */; };
 		37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */; };
@@ -321,6 +326,7 @@
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		373104D42A0A3D780009BF66 /* EditingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
 		373FCEB929FF961500DC9102 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
 		3754F1952A71031400A2692A /* TransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
 		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
@@ -381,6 +387,10 @@
 		37A7EB5F2A91AE6400B7CDAF /* PadGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadGlobeKey.swift; sourceTree = "<group>"; };
 		37A7EB612A91AEF700B7CDAF /* PadSpaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadSpaceKey.swift; sourceTree = "<group>"; };
 		37A7EB632A91B4B600B7CDAF /* PadTransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadTransformKey.swift; sourceTree = "<group>"; };
+		37A7EB652A927D4700B7CDAF /* PadKeyExpansionPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadKeyExpansionPath.swift; sourceTree = "<group>"; };
+		37A7EB672A92835C00B7CDAF /* PadExpansibleInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadExpansibleInputKey.swift; sourceTree = "<group>"; };
+		37A7EB692A92B44E00B7CDAF /* SmallPadNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadNumericKeyboard.swift; sourceTree = "<group>"; };
+		37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadSymbolInputKey.swift; sourceTree = "<group>"; };
 		37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
 		37AD775429D96FEC007F07D7 /* MacHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHansMessView.swift; sourceTree = "<group>"; };
 		37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHansMessView.swift; sourceTree = "<group>"; };
@@ -779,6 +789,7 @@
 			isa = PBXGroup;
 			children = (
 				37A7EB532A91A0DE00B7CDAF /* PadLetterInputKey.swift */,
+				37A7EB672A92835C00B7CDAF /* PadExpansibleInputKey.swift */,
 				37A7EB572A91A44A00B7CDAF /* PadDismissKey.swift */,
 				37A7EB592A91A7AD00B7CDAF /* PadBackspaceKey.swift */,
 				37A7EB5B2A91A97000B7CDAF /* PadReturnKey.swift */,
@@ -787,6 +798,9 @@
 				37A7EB612A91AEF700B7CDAF /* PadSpaceKey.swift */,
 				37A7EB632A91B4B600B7CDAF /* PadTransformKey.swift */,
 				37A7EB552A91A25800B7CDAF /* SmallPadAlphabeticKeyboard.swift */,
+				37A7EB692A92B44E00B7CDAF /* SmallPadNumericKeyboard.swift */,
+				374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */,
+				37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -1052,6 +1066,7 @@
 			isa = PBXGroup;
 			children = (
 				37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */,
+				37A7EB652A927D4700B7CDAF /* PadKeyExpansionPath.swift */,
 				37DE5B972A8C9C370084C45B /* KeyPreviewExpansionPath.swift */,
 				37E9246F2A880F31002D33B9 /* KeyPreviewLeftExpansionPath.swift */,
 				37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */,
@@ -1465,6 +1480,7 @@
 				37C849522A75EF7E00C806B5 /* UserLexicon.swift in Sources */,
 				37CBD68F2A42E46A003F7B68 /* CangjieKeyboard.swift in Sources */,
 				37073FE52A26008F00691F9D /* TenKeySymbolsBar.swift in Sources */,
+				37A7EB682A92835C00B7CDAF /* PadExpansibleInputKey.swift in Sources */,
 				37B7B4182A06178400B3AB08 /* CandidateScrollBar.swift in Sources */,
 				37073FF52A2642EA00691F9D /* TenKeyNumericKeyboard.swift in Sources */,
 				37DE329A2A02613B0066D03A /* SettingsView.swift in Sources */,
@@ -1505,6 +1521,8 @@
 				3792615E2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift in Sources */,
 				37E924742A89383D002D33B9 /* ExpansibleInputKey.swift in Sources */,
 				370DF32F2A36B43D00AE655B /* SaamPingKeyboard.swift in Sources */,
+				374357742A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift in Sources */,
+				37A7EB662A927D4700B7CDAF /* PadKeyExpansionPath.swift in Sources */,
 				37F72E802A1531DF0013AC85 /* InputMethodMode.swift in Sources */,
 				37C849502A750A9000C806B5 /* ScrollViewButton.swift in Sources */,
 				37073FE92A26028800691F9D /* Combo.swift in Sources */,
@@ -1533,10 +1551,12 @@
 				37993A672A0EA31D00BC8E35 /* BackspaceKey.swift in Sources */,
 				370563262A0168D000872AA4 /* ToolBar.swift in Sources */,
 				37E7720A2A8131F4004D0467 /* EmojiIndicator.swift in Sources */,
+				37A7EB6A2A92B44E00B7CDAF /* SmallPadNumericKeyboard.swift in Sources */,
 				3768B4A22A00CE510049D7C1 /* HapticFeedback.swift in Sources */,
 				37993A632A0EA2C700BC8E35 /* ReturnKey.swift in Sources */,
 				37DE32922A021E780066D03A /* Options.swift in Sources */,
 				37A7EB5E2A91AA4900B7CDAF /* PadShiftKey.swift in Sources */,
+				37A7EB6C2A92B4E800B7CDAF /* PadSymbolInputKey.swift in Sources */,
 				37073FE72A2601D600691F9D /* TenKeyInputKey.swift in Sources */,
 				37B176682A050B1100A4E531 /* KeyboardCase.swift in Sources */,
 				37B7B4142A05F31200B3AB08 /* StringExtensions.swift in Sources */,
