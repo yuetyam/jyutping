@@ -38,7 +38,11 @@ struct MotherBoard: View {
                         case .cantonese:
                                 CantoneseSymbolicKeyboard()
                         case .abc:
-                                SymbolicKeyboard()
+                                if context.keyboardInterface.isCompact {
+                                        SymbolicKeyboard()
+                                } else {
+                                        SmallPadSymbolicKeyboard()
+                                }
                         }
                 case .tenKeyNumeric:
                         TenKeyNumericKeyboard()

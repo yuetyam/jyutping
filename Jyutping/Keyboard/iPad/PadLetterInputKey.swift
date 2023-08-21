@@ -42,7 +42,7 @@ struct PadLetterInputKey: View {
                                 .padding(5)
                         Text(verbatim: keyText)
                                 .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
-                                .font(.title)
+                                .font(.title2)
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())

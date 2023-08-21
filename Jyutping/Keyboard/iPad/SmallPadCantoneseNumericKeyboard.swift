@@ -13,7 +13,6 @@ struct SmallPadCantoneseNumericKeyboard: View {
                         }
                         HStack(spacing: 0 ) {
                                 Group {
-
                                         PadSymbolInputKey("1")
                                         PadSymbolInputKey("2")
                                         PadSymbolInputKey("3")

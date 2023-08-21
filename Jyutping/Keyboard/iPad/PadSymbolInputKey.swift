@@ -45,7 +45,7 @@ struct PadSymbolInputKey: View {
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(5)
                         Text(verbatim: keyText)
-                                .font(.title)
+                                .font(.title2)
                 }
                 .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
                 .contentShape(Rectangle())
