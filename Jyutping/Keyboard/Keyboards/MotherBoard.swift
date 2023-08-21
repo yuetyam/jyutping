@@ -36,7 +36,11 @@ struct MotherBoard: View {
                 case .symbolic:
                         switch context.inputMethodMode {
                         case .cantonese:
-                                CantoneseSymbolicKeyboard()
+                                if context.keyboardInterface.isCompact {
+                                        CantoneseSymbolicKeyboard()
+                                } else {
+                                        SmallPadCantoneseSymbolicKeyboard()
+                                }
                         case .abc:
                                 if context.keyboardInterface.isCompact {
                                         SymbolicKeyboard()

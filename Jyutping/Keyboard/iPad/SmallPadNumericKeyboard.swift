@@ -7,11 +7,7 @@ struct SmallPadNumericKeyboard: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        if context.inputStage.isBuffering {
-                                CandidateScrollBar()
-                        } else {
-                                ToolBar()
-                        }
+                        ToolBar()
                         HStack(spacing: 0 ) {
                                 Group {
                                         PadSymbolInputKey("1")

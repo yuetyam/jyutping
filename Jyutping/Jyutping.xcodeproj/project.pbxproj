@@ -35,6 +35,7 @@
 		373FCEBC29FF962000DC9102 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		374357742A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */; };
 		374357762A934A6200466697 /* SmallPadSymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357752A934A6200466697 /* SmallPadSymbolicKeyboard.swift */; };
+		374357782A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3754F1962A71031400A2692A /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1952A71031400A2692A /* TransformKey.swift */; };
 		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
@@ -329,6 +330,7 @@
 		373FCEB929FF961500DC9102 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
 		374357752A934A6200466697 /* SmallPadSymbolicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadSymbolicKeyboard.swift; sourceTree = "<group>"; };
+		374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCantoneseSymblicKeyboard.swift; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
 		3754F1952A71031400A2692A /* TransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
 		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
@@ -803,6 +805,7 @@
 				374357752A934A6200466697 /* SmallPadSymbolicKeyboard.swift */,
 				37A7EB692A92B44E00B7CDAF /* SmallPadNumericKeyboard.swift */,
 				374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */,
+				374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */,
 				37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */,
 			);
 			path = iPad;
@@ -1566,6 +1569,7 @@
 				37B7B4142A05F31200B3AB08 /* StringExtensions.swift in Sources */,
 				371A13A12A49F294001695C1 /* RomanizationLabel.swift in Sources */,
 				37073FDE2A25FC2700691F9D /* TenKeyKeyboard.swift in Sources */,
+				374357782A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift in Sources */,
 				37877D502A2B119300630F77 /* NumberPad.swift in Sources */,
 				37073FEF2A26097600691F9D /* TenKeySpecialKey.swift in Sources */,
 				37E9246E2A871220002D33B9 /* LeftKey.swift in Sources */,
