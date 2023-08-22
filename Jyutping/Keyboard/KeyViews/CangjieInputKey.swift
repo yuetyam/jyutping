@@ -59,11 +59,11 @@ struct CangjieInputKey: View {
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                                 ZStack(alignment: .topTrailing) {
+                                        Color.clear
                                         Text(verbatim: letter)
                                                 .font(.footnote)
                                                 .foregroundColor(.secondary)
                                                 .padding(5)
-                                        Color.clear
                                 }
                                 Text(verbatim: radical)
                         }

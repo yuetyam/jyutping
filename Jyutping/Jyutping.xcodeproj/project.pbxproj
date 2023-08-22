@@ -36,6 +36,8 @@
 		374357742A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */; };
 		374357762A934A6200466697 /* SmallPadSymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357752A934A6200466697 /* SmallPadSymbolicKeyboard.swift */; };
 		374357782A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */; };
+		3743577A2A94496B00466697 /* SmallPadCangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357792A94496B00466697 /* SmallPadCangjieKeyboard.swift */; };
+		3743577C2A94499500466697 /* PadCangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743577B2A94499500466697 /* PadCangjieInputKey.swift */; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3754F1962A71031400A2692A /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1952A71031400A2692A /* TransformKey.swift */; };
 		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
@@ -331,6 +333,8 @@
 		374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
 		374357752A934A6200466697 /* SmallPadSymbolicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadSymbolicKeyboard.swift; sourceTree = "<group>"; };
 		374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCantoneseSymblicKeyboard.swift; sourceTree = "<group>"; };
+		374357792A94496B00466697 /* SmallPadCangjieKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCangjieKeyboard.swift; sourceTree = "<group>"; };
+		3743577B2A94499500466697 /* PadCangjieInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadCangjieInputKey.swift; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
 		3754F1952A71031400A2692A /* TransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
 		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
@@ -806,6 +810,8 @@
 				37A7EB692A92B44E00B7CDAF /* SmallPadNumericKeyboard.swift */,
 				374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */,
 				374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */,
+				374357792A94496B00466697 /* SmallPadCangjieKeyboard.swift */,
+				3743577B2A94499500466697 /* PadCangjieInputKey.swift */,
 				37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */,
 			);
 			path = iPad;
@@ -1514,6 +1520,7 @@
 				37C8494E2A7505E500C806B5 /* ScrollViewGestureButton.swift in Sources */,
 				37E47FC72A29AD1E00EC11C6 /* TenKeySidebar.swift in Sources */,
 				37CBD68D2A42E053003F7B68 /* CangjieInputKey.swift in Sources */,
+				3743577A2A94496B00466697 /* SmallPadCangjieKeyboard.swift in Sources */,
 				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
 				37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */,
 				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
@@ -1529,6 +1536,7 @@
 				37E924742A89383D002D33B9 /* ExpansibleInputKey.swift in Sources */,
 				370DF32F2A36B43D00AE655B /* SaamPingKeyboard.swift in Sources */,
 				374357742A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift in Sources */,
+				3743577C2A94499500466697 /* PadCangjieInputKey.swift in Sources */,
 				37A7EB662A927D4700B7CDAF /* PadKeyExpansionPath.swift in Sources */,
 				37F72E802A1531DF0013AC85 /* InputMethodMode.swift in Sources */,
 				37C849502A750A9000C806B5 /* ScrollViewButton.swift in Sources */,

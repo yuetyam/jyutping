@@ -67,7 +67,11 @@ struct MotherBoard: View {
                                 case .qwerty:
                                         switch context.qwertyForm {
                                         case .cangjie:
-                                                CangjieKeyboard()
+                                                if context.keyboardInterface.isCompact {
+                                                        CangjieKeyboard()
+                                                } else {
+                                                        SmallPadCangjieKeyboard()
+                                                }
                                         case .stroke:
                                                 StrokeKeyboard()
                                         default:
