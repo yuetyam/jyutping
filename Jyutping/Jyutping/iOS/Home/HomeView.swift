@@ -12,6 +12,11 @@ struct HomeView: View {
         }()
         @State private var isGuideViewExpanded: Bool = false
 
+        private var shouldDisplayHapticFeedbackTip: Bool {
+                guard Device.isPhone else { return false }
+                return !isKeyboardEnabled || isGuideViewExpanded
+        }
+
         var body: some View {
                 NavigationView {
                         List {
@@ -61,7 +66,7 @@ struct HomeView: View {
                                                 .accessibilityLabel("accessibility.how_to_enable_this_keyboard")
                                         }
                                 } footer: {
-                                        if !isKeyboardEnabled || isGuideViewExpanded {
+                                        if shouldDisplayHapticFeedbackTip {
                                                 Text("Haptic Feedback requires Full Access").textCase(nil)
                                         } else {
                                                 EmptyView()
