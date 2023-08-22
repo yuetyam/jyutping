@@ -155,16 +155,18 @@ struct SettingsViewIOS15: View {
                                                         Image.checkmark.opacity(selectedKeyboardLayout == .saamPing ? 1: 0)
                                                 }
                                         }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedKeyboardLayout = .tenKey
-                                                Options.updateKeyboardLayout(to: .tenKey)
-                                        } label: {
-                                                HStack {
-                                                        Text("KeyboardLayout.10Key").foregroundColor(.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedKeyboardLayout == .tenKey ? 1: 0)
+                                        if context.isPhone {
+                                                Button {
+                                                        AudioFeedback.modified()
+                                                        context.triggerSelectionHapticFeedback()
+                                                        selectedKeyboardLayout = .tenKey
+                                                        Options.updateKeyboardLayout(to: .tenKey)
+                                                } label: {
+                                                        HStack {
+                                                                Text("KeyboardLayout.10Key").foregroundColor(.primary)
+                                                                Spacer()
+                                                                Image.checkmark.opacity(selectedKeyboardLayout == .tenKey ? 1: 0)
+                                                        }
                                                 }
                                         }
                                 } header: {
