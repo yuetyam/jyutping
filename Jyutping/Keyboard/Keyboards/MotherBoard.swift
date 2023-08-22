@@ -88,11 +88,23 @@ struct MotherBoard: View {
                                 case .saamPing:
                                         switch context.qwertyForm {
                                         case .cangjie:
-                                                CangjieKeyboard()
+                                                if context.keyboardInterface.isCompact {
+                                                        CangjieKeyboard()
+                                                } else {
+                                                        SmallPadCangjieKeyboard()
+                                                }
                                         case .stroke:
-                                                StrokeKeyboard()
+                                                if context.keyboardInterface.isCompact {
+                                                        StrokeKeyboard()
+                                                } else {
+                                                        SmallPadStrokeKeyboard()
+                                                }
                                         default:
-                                                SaamPingKeyboard()
+                                                if context.keyboardInterface.isCompact {
+                                                        SaamPingKeyboard()
+                                                } else {
+                                                        SmallPadSaamPingKeyboard()
+                                                }
                                         }
                                 case .tenKey:
                                         if context.keyboardInterface.isCompact {

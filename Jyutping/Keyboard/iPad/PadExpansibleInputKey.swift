@@ -111,7 +111,7 @@ struct PadExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .font(.keyFooter)
                                                 .foregroundColor(.secondary)
-                                                .padding(.trailing, 5)
+                                                .padding(.trailing, 8)
                                                 .padding(.top, 8)
                                 }
                                 ZStack(alignment: .bottomTrailing) {
@@ -119,7 +119,7 @@ struct PadExpansibleInputKey: View {
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .font(.keyFooter)
                                                 .foregroundColor(.secondary)
-                                                .padding(.trailing, 5)
+                                                .padding(.trailing, 8)
                                                 .padding(.bottom, 8)
                                 }
                                 Text(verbatim: keyModel.primary.text)
