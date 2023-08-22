@@ -43,7 +43,7 @@ struct PadSpaceKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(5)
-                        Text(verbatim: isLongPressEngaged ? longPressHint : context.spaceText)
+                        Text(verbatim: isLongPressEngaged ? longPressHint : context.spaceKeyText)
                 }
                 .frame(height: context.heightUnit)
                 .frame(maxWidth: .infinity)

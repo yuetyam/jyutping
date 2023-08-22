@@ -8,13 +8,34 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 super.updateViewConstraints()
         }
 
+        override func didReceiveMemoryWarning() {
+                super.didReceiveMemoryWarning()
+                _ = view.subviews.map({ $0.removeFromSuperview() })
+                _ = self.children.map({ $0.removeFromParent() })
+                keyboardInterface = adoptKeyboardInterface()
+                updateKeyboardSize()
+                updateSpaceKeyText()
+                updateReturnKeyText()
+                let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
+                view.addSubview(motherBoard.view)
+                motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                        motherBoard.view.topAnchor.constraint(equalTo: view.topAnchor),
+                        motherBoard.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                        motherBoard.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                        motherBoard.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+                ])
+                motherBoard.view.backgroundColor = view.backgroundColor
+                self.addChild(motherBoard)
+        }
+
         override func viewDidLoad() {
                 super.viewDidLoad()
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = self.children.map({ $0.removeFromParent() })
                 keyboardInterface = adoptKeyboardInterface()
                 updateKeyboardSize()
-                updateSpaceText()
+                updateSpaceKeyText()
                 updateReturnKeyText()
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 view.addSubview(motherBoard.view)
@@ -32,7 +53,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserLexicon.prepare()
                 Engine.prepare()
                 instantiateHapticFeedbacks()
-                updateSpaceText()
+                updateSpaceKeyText()
                 updateReturnKeyText()
         }
         override func viewDidAppear(_ animated: Bool) {
@@ -290,8 +311,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         guard inputStage.isBuffering else {
-                                let spaceText: String = (keyboardCase == .uppercased) ? String.fullWidthSpace : String.space
-                                textDocumentProxy.insertText(spaceText)
+                                let text: String = (keyboardCase == .uppercased) ? String.fullWidthSpace : String.space
+                                textDocumentProxy.insertText(text)
                                 adjustKeyboard()
                                 return
                         }
@@ -619,7 +640,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         inputBufferText()
                 }
                 inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
-                updateSpaceText()
+                updateSpaceKeyText()
                 updateReturnKeyText()
         }
 
@@ -629,7 +650,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form
                 updateReturnKeyText()
-                updateSpaceText()
+                updateSpaceKeyText()
         }
 
         @Published private(set) var qwertyForm: QwertyForm = .jyutping
@@ -641,7 +662,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var keyboardCase: KeyboardCase = .lowercased
         func updateKeyboardCase(to newCase: KeyboardCase) {
                 keyboardCase = newCase
-                updateSpaceText()
+                updateSpaceKeyText()
         }
 
         @Published private(set) var returnKeyText: String = "換行"
@@ -651,8 +672,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         returnKeyText = newText
                 }
         }
-        @Published private(set) var spaceText: String = "粵拼"
-        private func updateSpaceText() {
+        @Published private(set) var spaceKeyText: String = "粵拼"
+        private func updateSpaceKeyText() {
                 let newText: String = {
                         guard inputMethodMode.isCantonese else { return "space" }
                         guard keyboardForm != .tenKeyNumeric else { return "空格" }
@@ -666,8 +687,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return isSimplified ? "大写锁定" : "大寫鎖定"
                         }
                 }()
-                if spaceText != newText {
-                        spaceText = newText
+                if spaceKeyText != newText {
+                        spaceKeyText = newText
                 }
         }
         @Published private(set) var touchedLocation: CGPoint = .zero
