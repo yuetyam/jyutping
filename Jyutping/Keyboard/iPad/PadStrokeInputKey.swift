@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreIME
 
-struct StrokeInputKey: View {
+struct PadStrokeInputKey: View {
 
         private let strokeMap: [String: String] = ["w": "⼀", "s": "⼁", "a": "⼃", "d": "⼂", "z": "⼄"]
 
@@ -26,14 +26,14 @@ struct StrokeInputKey: View {
                         return .light
                 }
         }
-        private var keyPreviewColor: Color {
+        private var activeKeyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .light
+                        return .lightEmphatic
                 case .dark:
-                        return .darkOpacity
+                        return .darkEmphatic
                 @unknown default:
-                        return .light
+                        return .lightEmphatic
                 }
         }
 
@@ -43,32 +43,18 @@ struct StrokeInputKey: View {
                 if let stroke {
                         ZStack {
                                 Color.interactiveClear
-                                if isTouching {
-                                        KeyPreviewPath()
-                                                .fill(keyPreviewColor)
-                                                .shadow(color: .black.opacity(0.5), radius: 1)
-                                                .overlay {
-                                                        Text(verbatim: stroke)
-                                                                .font(.largeTitle)
-                                                                .padding(.bottom, context.heightUnit * 2.0)
-                                                }
-                                                .padding(.vertical, 6)
-                                                .padding(.horizontal, 3)
-                                } else {
-                                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                                .fill(keyColor)
-                                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                                .padding(.vertical, 6)
-                                                .padding(.horizontal, 3)
-                                        ZStack(alignment: .topTrailing) {
-                                                Color.clear
-                                                Text(verbatim: letter)
-                                                        .font(.footnote)
-                                                        .foregroundColor(.secondary)
-                                                        .padding(5)
-                                        }
-                                        Text(verbatim: stroke)
+                                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                        .fill(isTouching ? activeKeyColor : keyColor)
+                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                        .padding(5)
+                                ZStack(alignment: .topTrailing) {
+                                        Color.clear
+                                        Text(verbatim: letter)
+                                                .font(.footnote)
+                                                .foregroundColor(.secondary)
+                                                .padding(8)
                                 }
+                                Text(verbatim: stroke)
                         }
                         .frame(width: context.widthUnit, height: context.heightUnit)
                         .contentShape(Rectangle())
@@ -76,7 +62,6 @@ struct StrokeInputKey: View {
                                 .updating($isTouching) { _, tapped, _ in
                                         if !tapped {
                                                 AudioFeedback.inputed()
-                                                context.triggerHapticFeedback()
                                                 tapped = true
                                         }
                                 }
@@ -89,15 +74,13 @@ struct StrokeInputKey: View {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(5)
                                 Text(verbatim: letter).foregroundColor(.secondary)
                         }
                         .frame(width: context.widthUnit, height: context.heightUnit)
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 AudioFeedback.inputed()
-                                context.triggerHapticFeedback()
                                 context.operate(.process(letter))
                         }
                 }

@@ -73,7 +73,11 @@ struct MotherBoard: View {
                                                         SmallPadCangjieKeyboard()
                                                 }
                                         case .stroke:
-                                                StrokeKeyboard()
+                                                if context.keyboardInterface.isCompact {
+                                                        StrokeKeyboard()
+                                                } else {
+                                                        SmallPadStrokeKeyboard()
+                                                }
                                         default:
                                                 if context.keyboardInterface.isCompact {
                                                         AlphabeticKeyboard()

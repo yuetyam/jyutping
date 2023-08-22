@@ -38,6 +38,8 @@
 		374357782A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */; };
 		3743577A2A94496B00466697 /* SmallPadCangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374357792A94496B00466697 /* SmallPadCangjieKeyboard.swift */; };
 		3743577C2A94499500466697 /* PadCangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743577B2A94499500466697 /* PadCangjieInputKey.swift */; };
+		3743577E2A944C5200466697 /* PadStrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743577D2A944C5200466697 /* PadStrokeInputKey.swift */; };
+		374357802A944CF200466697 /* SmallPadStrokeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3743577F2A944CF200466697 /* SmallPadStrokeKeyboard.swift */; };
 		374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374B615829C1E224006C49DC /* MacToneTableView.swift */; };
 		3754F1962A71031400A2692A /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1952A71031400A2692A /* TransformKey.swift */; };
 		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
@@ -335,6 +337,8 @@
 		374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCantoneseSymblicKeyboard.swift; sourceTree = "<group>"; };
 		374357792A94496B00466697 /* SmallPadCangjieKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadCangjieKeyboard.swift; sourceTree = "<group>"; };
 		3743577B2A94499500466697 /* PadCangjieInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadCangjieInputKey.swift; sourceTree = "<group>"; };
+		3743577D2A944C5200466697 /* PadStrokeInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadStrokeInputKey.swift; sourceTree = "<group>"; };
+		3743577F2A944CF200466697 /* SmallPadStrokeKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPadStrokeKeyboard.swift; sourceTree = "<group>"; };
 		374B615829C1E224006C49DC /* MacToneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
 		3754F1952A71031400A2692A /* TransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
 		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
@@ -811,7 +815,9 @@
 				374357732A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift */,
 				374357772A934D9200466697 /* SmallPadCantoneseSymblicKeyboard.swift */,
 				374357792A94496B00466697 /* SmallPadCangjieKeyboard.swift */,
+				3743577F2A944CF200466697 /* SmallPadStrokeKeyboard.swift */,
 				3743577B2A94499500466697 /* PadCangjieInputKey.swift */,
+				3743577D2A944C5200466697 /* PadStrokeInputKey.swift */,
 				37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */,
 			);
 			path = iPad;
@@ -1534,6 +1540,7 @@
 				37073FF12A263EC600691F9D /* TenKeyNumberKey.swift in Sources */,
 				3792615E2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift in Sources */,
 				37E924742A89383D002D33B9 /* ExpansibleInputKey.swift in Sources */,
+				374357802A944CF200466697 /* SmallPadStrokeKeyboard.swift in Sources */,
 				370DF32F2A36B43D00AE655B /* SaamPingKeyboard.swift in Sources */,
 				374357742A93243F00466697 /* SmallPadCantoneseNumericKeyboard.swift in Sources */,
 				3743577C2A94499500466697 /* PadCangjieInputKey.swift in Sources */,
@@ -1581,6 +1588,7 @@
 				37877D502A2B119300630F77 /* NumberPad.swift in Sources */,
 				37073FEF2A26097600691F9D /* TenKeySpecialKey.swift in Sources */,
 				37E9246E2A871220002D33B9 /* LeftKey.swift in Sources */,
+				3743577E2A944C5200466697 /* PadStrokeInputKey.swift in Sources */,
 				37E924692A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
