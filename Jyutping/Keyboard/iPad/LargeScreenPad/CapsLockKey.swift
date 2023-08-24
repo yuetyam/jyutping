@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct PadDismissKey: View {
+/// For Large screen iPad Pro only
+struct CapsLockKey: View {
 
         let widthUnitTimes: CGFloat
 
@@ -28,29 +29,31 @@ struct PadDismissKey: View {
                 }
         }
 
-        @GestureState private var isTouching: Bool = false
-
         var body: some View {
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill(isTouching ? activeKeyColor : keyColor)
+                                .fill((context.keyboardCase == .capsLocked) ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                .padding(5)
-                        Image(systemName: "keyboard.chevron.compact.down")
+                                .padding(4)
+                        ZStack(alignment: .topLeading) {
+                                Color.clear
+                                Circle()
+                                        .fill((context.keyboardCase == .capsLocked) ? Color.green : activeKeyColor.opacity(0.8))
+                                        .frame(width: 4, height: 4)
+                                        .padding(12)
+                        }
+                        ZStack(alignment: .bottomLeading) {
+                                Color.clear
+                                Text(verbatim: "caps lock")
+                                        .padding(12)
+                        }
                 }
                 .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
                 .contentShape(Rectangle())
-                .gesture(DragGesture(minimumDistance: 0)
-                        .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
-                                        AudioFeedback.modified()
-                                        tapped = true
-                                }
-                        }
-                        .onEnded { _ in
-                                context.operate(.dismiss)
-                         }
-                )
+                .onTapGesture {
+                        AudioFeedback.modified()
+                        context.operate(.doubleShift)
+                }
         }
 }

@@ -1,8 +1,11 @@
 import SwiftUI
 
-struct PadDismissKey: View {
+struct LargePadLetterInputKey: View {
 
-        let widthUnitTimes: CGFloat
+        private let keyText: String
+        init(_ keyText: String) {
+                self.keyText = keyText
+        }
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -10,21 +13,21 @@ struct PadDismissKey: View {
         private var keyColor: Color {
                 switch colorScheme {
                 case .light:
-                        return .lightEmphatic
-                case .dark:
-                        return .darkEmphatic
-                @unknown default:
-                        return .lightEmphatic
-                }
-        }
-        private var activeKeyColor: Color {
-                switch colorScheme {
-                case .light:
                         return .light
                 case .dark:
                         return .dark
                 @unknown default:
                         return .light
+                }
+        }
+        private var activeKeyColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .lightEmphatic
+                case .dark:
+                        return .darkEmphatic
+                @unknown default:
+                        return .lightEmphatic
                 }
         }
 
@@ -36,20 +39,23 @@ struct PadDismissKey: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                .padding(5)
-                        Image(systemName: "keyboard.chevron.compact.down")
+                                .padding(4)
+                        Text(verbatim: keyText)
+                                .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
+                                .font(.title2)
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: context.widthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if !tapped {
-                                        AudioFeedback.modified()
+                                        AudioFeedback.inputed()
                                         tapped = true
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.dismiss)
+                                let text: String = context.keyboardCase.isLowercased ? keyText : keyText.uppercased()
+                                context.operate(.process(text))
                          }
                 )
         }

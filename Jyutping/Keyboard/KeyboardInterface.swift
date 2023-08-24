@@ -16,6 +16,10 @@ enum KeyboardInterface: Int {
         case padLandscapeMedium
         case padLandscapeLarge
 
+}
+
+extension KeyboardInterface {
+
         /// .phonePortrait || .phoneLandscape || .padFloating
         var isCompact: Bool {
                 switch self {
@@ -29,6 +33,30 @@ enum KeyboardInterface: Int {
         var isPhonePortrait: Bool {
                 return self == .phonePortrait
         }
+        var isPhoneLandscape: Bool {
+                return self == .phoneLandscape
+        }
+
+        var isPadFloating: Bool {
+                return self == .padFloating
+        }
+
+        var isPadPortrait: Bool {
+                switch self {
+                case .padPortraitSmall, .padPortraitMedium, .padPortraitLarge:
+                        return true
+                default:
+                        return false
+                }
+        }
+        var isPadLandscape: Bool {
+                switch self {
+                case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
+                        return true
+                default:
+                        return false
+                }
+        }
 }
 
 extension KeyboardInterface {
@@ -39,7 +67,7 @@ extension KeyboardInterface {
                 case .padPortraitMedium:
                         return 68
                 case .padPortraitLarge:
-                        return 72
+                        return 68
                 case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
                         return 80
                 case .padFloating:
@@ -85,13 +113,13 @@ extension KeyboardInterface {
                 case .padPortraitMedium:
                         return 11
                 case .padPortraitLarge:
-                        return 11
+                        return 14.5
                 case .padLandscapeSmall:
                         return 11
                 case .padLandscapeMedium:
                         return 11
                 case .padLandscapeLarge:
-                        return 11
+                        return 14.5
                 }
         }
 }

@@ -65,7 +65,7 @@ struct SmallPadCangjieKeyboard: View {
                                 PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                 PadSpaceKey()
                                 PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
-                                PadDismissKey()
+                                PadDismissKey(widthUnitTimes: 1.5)
                         }
                 }
         }

@@ -79,9 +79,24 @@ struct MotherBoard: View {
                                                         SmallPadStrokeKeyboard()
                                                 }
                                         default:
-                                                if context.keyboardInterface.isCompact {
+                                                switch context.keyboardInterface {
+                                                case .phonePortrait:
                                                         AlphabeticKeyboard()
-                                                } else {
+                                                case .phoneLandscape:
+                                                        AlphabeticKeyboard()
+                                                case .padFloating:
+                                                        AlphabeticKeyboard()
+                                                case .padPortraitSmall:
+                                                        SmallPadAlphabeticKeyboard()
+                                                case .padPortraitMedium:
+                                                        SmallPadAlphabeticKeyboard()
+                                                case .padPortraitLarge:
+                                                        LargePadCantoneseKeyboard()
+                                                case .padLandscapeSmall:
+                                                        SmallPadAlphabeticKeyboard()
+                                                case .padLandscapeMedium:
+                                                        LargePadCantoneseKeyboard()
+                                                case .padLandscapeLarge:
                                                         SmallPadAlphabeticKeyboard()
                                                 }
                                         }

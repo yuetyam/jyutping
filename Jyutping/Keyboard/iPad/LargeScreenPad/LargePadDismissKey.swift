@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PadDismissKey: View {
+struct LargePadDismissKey: View {
 
         let widthUnitTimes: CGFloat
 
@@ -36,8 +36,12 @@ struct PadDismissKey: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                .padding(5)
-                        Image(systemName: "keyboard.chevron.compact.down")
+                                .padding(4)
+                        ZStack(alignment: .bottomTrailing) {
+                                Color.clear
+                                Image(systemName: "keyboard.chevron.compact.down")
+                                        .padding(12)
+                        }
                 }
                 .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
                 .contentShape(Rectangle())

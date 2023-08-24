@@ -62,7 +62,7 @@ struct SmallPadNumericKeyboard: View {
                                 PadTransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
                                 PadSpaceKey()
                                 PadTransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
-                                PadDismissKey()
+                                PadDismissKey(widthUnitTimes: 1.5)
                         }
                 }
         }

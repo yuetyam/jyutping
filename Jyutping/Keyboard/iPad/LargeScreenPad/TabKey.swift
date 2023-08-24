@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct PadDismissKey: View {
+/// For Large screen iPad Pro only
+struct TabKey: View {
 
         let widthUnitTimes: CGFloat
 
@@ -36,20 +37,29 @@ struct PadDismissKey: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                .padding(5)
-                        Image(systemName: "keyboard.chevron.compact.down")
+                                .padding(4)
+                        ZStack(alignment: .topLeading) {
+                                Color.clear
+                                Image(systemName: "arrow.right.to.line")
+                                        .padding(12)
+                        }
+                        ZStack(alignment: .bottomLeading) {
+                                Color.clear
+                                Text(verbatim: "tab")
+                                        .padding(12)
+                        }
                 }
                 .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if !tapped {
-                                        AudioFeedback.modified()
+                                        AudioFeedback.inputed()
                                         tapped = true
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.dismiss)
+                                context.operate(.process("\t"))
                          }
                 )
         }

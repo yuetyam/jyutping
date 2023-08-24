@@ -1,8 +1,29 @@
 import SwiftUI
 
-struct PadDismissKey: View {
+struct LargePadTransformKey: View {
 
-        let widthUnitTimes: CGFloat
+        init(destination: KeyboardForm, keyLocale: HorizontalEdge, widthUnitTimes: CGFloat) {
+                self.destination = destination
+                self.keyLocale = keyLocale
+                self.keyText = {
+                        switch destination {
+                        case .alphabetic:
+                                return "ABC"
+                        case .numeric:
+                                return ".?123"
+                        case .symbolic:
+                                return "#+="
+                        default:
+                                return "???"
+                        }
+                }()
+                self.widthUnitTimes = widthUnitTimes
+        }
+
+        private let destination: KeyboardForm
+        private let keyLocale: HorizontalEdge
+        private let keyText: String
+        private let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -36,8 +57,12 @@ struct PadDismissKey: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
-                                .padding(5)
-                        Image(systemName: "keyboard.chevron.compact.down")
+                                .padding(4)
+                        ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
+                                Color.clear
+                                Text(verbatim: keyText)
+                                        .padding(12)
+                        }
                 }
                 .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -49,7 +74,7 @@ struct PadDismissKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.dismiss)
+                                context.updateKeyboardForm(to: destination)
                          }
                 )
         }
