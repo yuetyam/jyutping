@@ -30,16 +30,137 @@ struct LargePadCantoneseKeyboard: View {
                                         )
                                 )
                                 Group {
-                                        PadSymbolInputKey("1")
-                                        PadSymbolInputKey("2")
-                                        PadSymbolInputKey("3")
-                                        PadSymbolInputKey("4")
-                                        PadSymbolInputKey("5")
-                                        PadSymbolInputKey("6")
-                                        PadSymbolInputKey("7")
-                                        PadSymbolInputKey("8")
-                                        PadSymbolInputKey("9")
-                                        PadSymbolInputKey("0")
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .leading,
+                                                upper: "！",
+                                                lower: "1",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("1"),
+                                                        members: [
+                                                                KeyElement("1"),
+                                                                KeyElement("！"),
+                                                                KeyElement("!", header: "半形")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .leading,
+                                                upper: "@",
+                                                lower: "2",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("2"),
+                                                        members: [
+                                                                KeyElement("2"),
+                                                                KeyElement("@"),
+                                                                KeyElement("＠", header: "全形")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .leading,
+                                                upper: "#",
+                                                lower: "3",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("3"),
+                                                        members: [
+                                                                KeyElement("3"),
+                                                                KeyElement("#"),
+                                                                KeyElement("＃", header: "全形")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .leading,
+                                                upper: "$",
+                                                lower: "4",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("4"),
+                                                        members: [
+                                                                KeyElement("4"),
+                                                                KeyElement("$")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .leading,
+                                                upper: "%",
+                                                lower: "5",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("5"),
+                                                        members: [
+                                                                KeyElement("5"),
+                                                                KeyElement("%"),
+                                                                KeyElement("％", header: "全形"),
+                                                                KeyElement("‰")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .leading,
+                                                upper: "……",
+                                                lower: "6",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("6"),
+                                                        members: [
+                                                                KeyElement("6"),
+                                                                KeyElement("……"),
+                                                                KeyElement("…")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "&",
+                                                lower: "7",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("7"),
+                                                        members: [
+                                                                KeyElement("7"),
+                                                                KeyElement("&"),
+                                                                KeyElement("＆", header: "全形"),
+                                                                KeyElement("§")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "*",
+                                                lower: "8",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("8"),
+                                                        members: [
+                                                                KeyElement("8"),
+                                                                KeyElement("*"),
+                                                                KeyElement("＊", header: "全形")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "（",
+                                                lower: "9",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("9"),
+                                                        members: [
+                                                                KeyElement("9"),
+                                                                KeyElement("（"),
+                                                                KeyElement("(", header: "半形")
+                                                        ]
+                                                )
+                                        )
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "）",
+                                                lower: "0",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("0"),
+                                                        members: [
+                                                                KeyElement("0"),
+                                                                KeyElement("）"),
+                                                                KeyElement(")", header: "半形")
+                                                        ]
+                                                )
+                                        )
                                 }
                                 LargePadUpperLowerInputKey(
                                         keyLocale: .trailing,
