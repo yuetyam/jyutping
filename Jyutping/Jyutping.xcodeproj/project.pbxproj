@@ -53,6 +53,7 @@
 		3753F5102A96FDB700300CE5 /* LargePadTransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753F50F2A96FDB700300CE5 /* LargePadTransformKey.swift */; };
 		3753F5122A97B05700300CE5 /* LargePadLetterInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753F5112A97B05700300CE5 /* LargePadLetterInputKey.swift */; };
 		3753F5142A97B42700300CE5 /* LargePadUpperLowerInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753F5132A97B42700300CE5 /* LargePadUpperLowerInputKey.swift */; };
+		3753F5162A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753F5152A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift */; };
 		3754F1962A71031400A2692A /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1952A71031400A2692A /* TransformKey.swift */; };
 		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
@@ -364,6 +365,7 @@
 		3753F50F2A96FDB700300CE5 /* LargePadTransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadTransformKey.swift; sourceTree = "<group>"; };
 		3753F5112A97B05700300CE5 /* LargePadLetterInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadLetterInputKey.swift; sourceTree = "<group>"; };
 		3753F5132A97B42700300CE5 /* LargePadUpperLowerInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadUpperLowerInputKey.swift; sourceTree = "<group>"; };
+		3753F5152A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadExpansibleInputKey.swift; sourceTree = "<group>"; };
 		3754F1952A71031400A2692A /* TransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
 		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
 		3763DE1329E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -715,6 +717,7 @@
 				3753F5002A96D71400300CE5 /* CapsLockKey.swift */,
 				3753F5022A96DEC100300CE5 /* TabKey.swift */,
 				3753F5132A97B42700300CE5 /* LargePadUpperLowerInputKey.swift */,
+				3753F5152A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift */,
 				3753F5112A97B05700300CE5 /* LargePadLetterInputKey.swift */,
 				3753F50F2A96FDB700300CE5 /* LargePadTransformKey.swift */,
 				3753F50B2A96FC8600300CE5 /* LargePadGlobeKey.swift */,
@@ -1545,6 +1548,7 @@
 				37A7EB682A92835C00B7CDAF /* PadExpansibleInputKey.swift in Sources */,
 				37B7B4182A06178400B3AB08 /* CandidateScrollBar.swift in Sources */,
 				37073FF52A2642EA00691F9D /* TenKeyNumericKeyboard.swift in Sources */,
+				3753F5162A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift in Sources */,
 				37DE329A2A02613B0066D03A /* SettingsView.swift in Sources */,
 				37A7EB5C2A91A97000B7CDAF /* PadReturnKey.swift in Sources */,
 				37073FEB2A26072C00691F9D /* TenKeyBackspaceKey.swift in Sources */,
