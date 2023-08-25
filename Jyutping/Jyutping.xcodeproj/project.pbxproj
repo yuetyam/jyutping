@@ -223,6 +223,7 @@
 		37F85CF02A9851950009C2C8 /* LargePadNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CEF2A9851950009C2C8 /* LargePadNumericKeyboard.swift */; };
 		37F85CF22A9856990009C2C8 /* LargePadInstantInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CF12A9856990009C2C8 /* LargePadInstantInputKey.swift */; };
 		37F85CF42A98849C0009C2C8 /* LargePadCantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CF32A98849C0009C2C8 /* LargePadCantoneseNumericKeyboard.swift */; };
+		37F85CF62A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CF52A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift */; };
 		37FC1B5E294DFAE400D7153F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1B5D294DFAE400D7153F /* Assets.xcassets */; };
 		37FC1B61294DFAE400D7153F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1B60294DFAE400D7153F /* Preview Assets.xcassets */; };
 		37FC1B6C294DFAE500D7153F /* InputMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B6B294DFAE500D7153F /* InputMethodTests.swift */; };
@@ -585,6 +586,7 @@
 		37F85CEF2A9851950009C2C8 /* LargePadNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadNumericKeyboard.swift; sourceTree = "<group>"; };
 		37F85CF12A9856990009C2C8 /* LargePadInstantInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadInstantInputKey.swift; sourceTree = "<group>"; };
 		37F85CF32A98849C0009C2C8 /* LargePadCantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadCantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
+		37F85CF52A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadSaamPingKeyboard.swift; sourceTree = "<group>"; };
 		37FC1AE3294DF65400D7153F /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
 		37FC1B57294DFAE300D7153F /* JyutpingInputMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JyutpingInputMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FC1B5D294DFAE400D7153F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 				37B738822A98307B006C9AA0 /* LargePadABCKeyboard.swift */,
 				37F85CEF2A9851950009C2C8 /* LargePadNumericKeyboard.swift */,
 				37F85CF32A98849C0009C2C8 /* LargePadCantoneseNumericKeyboard.swift */,
+				37F85CF52A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift */,
 				37F85CF12A9856990009C2C8 /* LargePadInstantInputKey.swift */,
 			);
 			path = LargeScreenPad;
@@ -1575,6 +1578,7 @@
 				37DE5B962A8B60D20084C45B /* KeyModel.swift in Sources */,
 				37F85CF42A98849C0009C2C8 /* LargePadCantoneseNumericKeyboard.swift in Sources */,
 				37A7EB542A91A0DE00B7CDAF /* PadLetterInputKey.swift in Sources */,
+				37F85CF62A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift in Sources */,
 				37B1765E2A049B6800A4E531 /* AlphabeticKeyboard.swift in Sources */,
 				3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */,
 				37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */,

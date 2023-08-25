@@ -160,10 +160,25 @@ struct MotherBoard: View {
                                                         SmallPadStrokeKeyboard()
                                                 }
                                         default:
-                                                if context.keyboardInterface.isCompact {
+                                                switch context.keyboardInterface {
+                                                case .phonePortrait:
                                                         SaamPingKeyboard()
-                                                } else {
+                                                case .phoneLandscape:
+                                                        SaamPingKeyboard()
+                                                case .padFloating:
+                                                        SaamPingKeyboard()
+                                                case .padPortraitSmall:
                                                         SmallPadSaamPingKeyboard()
+                                                case .padPortraitMedium:
+                                                        SmallPadSaamPingKeyboard()
+                                                case .padPortraitLarge:
+                                                        LargePadSaamPingKeyboard()
+                                                case .padLandscapeSmall:
+                                                        SmallPadSaamPingKeyboard()
+                                                case .padLandscapeMedium:
+                                                        SmallPadSaamPingKeyboard()
+                                                case .padLandscapeLarge:
+                                                        LargePadSaamPingKeyboard()
                                                 }
                                         }
                                 case .tenKey:

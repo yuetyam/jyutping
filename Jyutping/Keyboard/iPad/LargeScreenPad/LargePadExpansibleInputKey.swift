@@ -170,7 +170,7 @@ struct LargePadExpansibleInputKey: View {
                                         selectedIndex = 0
                                         isLongPressing = false
                                 } else {
-                                        let text: String = keyModel.primary.text
+                                        let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))
                                 }
                          }
