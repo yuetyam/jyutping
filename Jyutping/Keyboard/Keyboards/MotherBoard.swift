@@ -21,10 +21,25 @@ struct MotherBoard: View {
                 case .numeric:
                         switch context.inputMethodMode {
                         case .cantonese:
-                                if context.keyboardInterface.isCompact {
+                                switch context.keyboardInterface {
+                                case .phonePortrait:
                                         CantoneseNumericKeyboard()
-                                } else {
+                                case .phoneLandscape:
+                                        CantoneseNumericKeyboard()
+                                case .padFloating:
+                                        CantoneseNumericKeyboard()
+                                case .padPortraitSmall:
                                         SmallPadCantoneseNumericKeyboard()
+                                case .padPortraitMedium:
+                                        SmallPadCantoneseNumericKeyboard()
+                                case .padPortraitLarge:
+                                        LargePadCantoneseNumericKeyboard()
+                                case .padLandscapeSmall:
+                                        SmallPadCantoneseNumericKeyboard()
+                                case .padLandscapeMedium:
+                                        SmallPadCantoneseNumericKeyboard()
+                                case .padLandscapeLarge:
+                                        LargePadCantoneseNumericKeyboard()
                                 }
                         case .abc:
                                 switch context.keyboardInterface {
