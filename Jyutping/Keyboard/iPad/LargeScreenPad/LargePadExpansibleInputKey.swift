@@ -128,6 +128,7 @@ struct LargePadExpansibleInputKey: View {
                                 }
                                 Text(verbatim: keyModel.primary.text)
                                         .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
+                                        .font(.title2)
                         }
                 }
                 .frame(width: keyWidth, height: context.heightUnit)

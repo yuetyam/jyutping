@@ -118,7 +118,7 @@ struct LargePadUpperLowerInputKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(4)
                                 if isPullingDown {
-                                        Text(verbatim: upper)
+                                        Text(verbatim: upper).font(.title2)
                                 } else {
                                         ZStack(alignment: .top) {
                                                 Color.clear

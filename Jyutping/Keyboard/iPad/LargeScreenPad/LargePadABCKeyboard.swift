@@ -9,7 +9,7 @@ struct LargePadABCKeyboard: View {
                         ToolBar()
                         if context.keyboardCase.isUppercased {
                                 HStack(spacing: 0 ) {
-                                        LargePadLetterInputKey("~")
+                                        LargePadInstantInputKey("~")
                                         Group {
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
@@ -21,8 +21,8 @@ struct LargePadABCKeyboard: View {
                                                                 ]
                                                         )
                                                 )
-                                                LargePadLetterInputKey("@")
-                                                LargePadLetterInputKey("#")
+                                                LargePadInstantInputKey("@")
+                                                LargePadInstantInputKey("#")
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
                                                         keyModel: KeyModel(
@@ -48,7 +48,7 @@ struct LargePadABCKeyboard: View {
                                                                 ]
                                                         )
                                                 )
-                                                LargePadLetterInputKey("^")
+                                                LargePadInstantInputKey("^")
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
                                                         keyModel: KeyModel(
@@ -69,11 +69,11 @@ struct LargePadABCKeyboard: View {
                                                                 ]
                                                         )
                                                 )
-                                                LargePadLetterInputKey("(")
-                                                LargePadLetterInputKey(")")
+                                                LargePadInstantInputKey("(")
+                                                LargePadInstantInputKey(")")
                                         }
-                                        LargePadLetterInputKey("_")
-                                        LargePadLetterInputKey("+")
+                                        LargePadInstantInputKey("_")
+                                        LargePadInstantInputKey("+")
                                         LargePadBackspaceKey(widthUnitTimes: 1.5)
                                 }
                         } else {
@@ -246,22 +246,21 @@ struct LargePadABCKeyboard: View {
                         HStack(spacing: 0 ) {
                                 TabKey(widthUnitTimes: 1.5)
                                 Group {
-                                        LargePadLetterInputKey("q")
-                                        LargePadLetterInputKey("w")
-                                        LargePadLetterInputKey("e")
-                                        LargePadLetterInputKey("r")
-                                        LargePadLetterInputKey("t")
-                                        LargePadLetterInputKey("y")
-                                        LargePadLetterInputKey("u")
-                                        LargePadLetterInputKey("i")
-                                        LargePadLetterInputKey("o")
-                                        LargePadLetterInputKey("p")
+                                        LargePadInstantInputKey("q")
+                                        LargePadInstantInputKey("w")
+                                        LargePadInstantInputKey("e")
+                                        LargePadInstantInputKey("r")
+                                        LargePadInstantInputKey("t")
+                                        LargePadInstantInputKey("y")
+                                        LargePadInstantInputKey("u")
+                                        LargePadInstantInputKey("i")
+                                        LargePadInstantInputKey("o")
+                                        LargePadInstantInputKey("p")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        // FIXME: Replace LargePadLetterInputKey with LargePadSymbolInputKey
-                                        LargePadLetterInputKey("{")
-                                        LargePadLetterInputKey("}")
-                                        LargePadLetterInputKey("|")
+                                        LargePadInstantInputKey("{")
+                                        LargePadInstantInputKey("}")
+                                        LargePadInstantInputKey("|")
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "{", lower: "[", keyModel: KeyModel(primary: KeyElement("["), members: [KeyElement("["), KeyElement("{")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "}", lower: "]", keyModel: KeyModel(primary: KeyElement("]"), members: [KeyElement("]"), KeyElement("}")]))
@@ -271,19 +270,18 @@ struct LargePadABCKeyboard: View {
                         HStack(spacing: 0) {
                                 CapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadLetterInputKey("a")
-                                        LargePadLetterInputKey("s")
-                                        LargePadLetterInputKey("d")
-                                        LargePadLetterInputKey("f")
-                                        LargePadLetterInputKey("g")
-                                        LargePadLetterInputKey("h")
-                                        LargePadLetterInputKey("j")
-                                        LargePadLetterInputKey("k")
-                                        LargePadLetterInputKey("l")
+                                        LargePadInstantInputKey("a")
+                                        LargePadInstantInputKey("s")
+                                        LargePadInstantInputKey("d")
+                                        LargePadInstantInputKey("f")
+                                        LargePadInstantInputKey("g")
+                                        LargePadInstantInputKey("h")
+                                        LargePadInstantInputKey("j")
+                                        LargePadInstantInputKey("k")
+                                        LargePadInstantInputKey("l")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        // FIXME: Replace LargePadLetterInputKey with LargePadSymbolInputKey
-                                        LargePadLetterInputKey(":")
+                                        LargePadInstantInputKey(":")
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\"", footer: "0022"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ":", lower: ";", keyModel: KeyModel(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement(":")]))
@@ -294,18 +292,17 @@ struct LargePadABCKeyboard: View {
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadLetterInputKey("z")
-                                        LargePadLetterInputKey("x")
-                                        LargePadLetterInputKey("c")
-                                        LargePadLetterInputKey("v")
-                                        LargePadLetterInputKey("b")
-                                        LargePadLetterInputKey("n")
-                                        LargePadLetterInputKey("m")
+                                        LargePadInstantInputKey("z")
+                                        LargePadInstantInputKey("x")
+                                        LargePadInstantInputKey("c")
+                                        LargePadInstantInputKey("v")
+                                        LargePadInstantInputKey("b")
+                                        LargePadInstantInputKey("n")
+                                        LargePadInstantInputKey("m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        // FIXME: Replace LargePadLetterInputKey with LargePadSymbolInputKey
-                                        LargePadLetterInputKey("<")
-                                        LargePadLetterInputKey(">")
+                                        LargePadInstantInputKey("<")
+                                        LargePadInstantInputKey(">")
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "<", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("<")]))
