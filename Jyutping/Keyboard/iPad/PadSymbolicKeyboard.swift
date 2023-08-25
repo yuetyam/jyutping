@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// ABC mode keyboard on iPad
-struct SmallPadSymbolicKeyboard: View {
+struct PadSymbolicKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 

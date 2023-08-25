@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SmallPadStrokeKeyboard: View {
+struct PadCangjieKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -13,44 +13,44 @@ struct SmallPadStrokeKeyboard: View {
                         }
                         HStack(spacing: 0 ) {
                                 Group {
-                                        PadStrokeInputKey("q")
-                                        PadStrokeInputKey("w")
-                                        PadStrokeInputKey("e")
-                                        PadStrokeInputKey("r")
-                                        PadStrokeInputKey("t")
-                                        PadStrokeInputKey("y")
-                                        PadStrokeInputKey("u")
-                                        PadStrokeInputKey("i")
-                                        PadStrokeInputKey("o")
-                                        PadStrokeInputKey("p")
+                                        PadCangjieInputKey("q")
+                                        PadCangjieInputKey("w")
+                                        PadCangjieInputKey("e")
+                                        PadCangjieInputKey("r")
+                                        PadCangjieInputKey("t")
+                                        PadCangjieInputKey("y")
+                                        PadCangjieInputKey("u")
+                                        PadCangjieInputKey("i")
+                                        PadCangjieInputKey("o")
+                                        PadCangjieInputKey("p")
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
                                 PlaceholderKey()
                                 Group {
-                                        PadStrokeInputKey("a")
-                                        PadStrokeInputKey("s")
-                                        PadStrokeInputKey("d")
-                                        PadStrokeInputKey("f")
-                                        PadStrokeInputKey("g")
-                                        PadStrokeInputKey("h")
-                                        PadStrokeInputKey("j")
-                                        PadStrokeInputKey("k")
-                                        PadStrokeInputKey("l")
+                                        PadCangjieInputKey("a")
+                                        PadCangjieInputKey("s")
+                                        PadCangjieInputKey("d")
+                                        PadCangjieInputKey("f")
+                                        PadCangjieInputKey("g")
+                                        PadCangjieInputKey("h")
+                                        PadCangjieInputKey("j")
+                                        PadCangjieInputKey("k")
+                                        PadCangjieInputKey("l")
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
                                 PadShiftKey(widthUnitTimes: 1).hidden()
                                 Group {
-                                        PadStrokeInputKey("z")
-                                        PadStrokeInputKey("x")
-                                        PadStrokeInputKey("c")
-                                        PadStrokeInputKey("v")
-                                        PadStrokeInputKey("b")
-                                        PadStrokeInputKey("n")
-                                        PadStrokeInputKey("m")
+                                        PadCangjieInputKey("z")
+                                        PadCangjieInputKey("x")
+                                        PadCangjieInputKey("c")
+                                        PadCangjieInputKey("v")
+                                        PadCangjieInputKey("b")
+                                        PadCangjieInputKey("n")
+                                        PadCangjieInputKey("m")
                                 }
                                 PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！")])).hidden()
                                 PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？")])).hidden()

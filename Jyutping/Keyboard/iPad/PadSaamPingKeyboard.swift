@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SmallPadAlphabeticKeyboard: View {
+struct PadSaamPingKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -13,12 +13,12 @@ struct SmallPadAlphabeticKeyboard: View {
                         }
                         HStack(spacing: 0 ) {
                                 Group {
-                                        PadLetterInputKey("q")
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
                                         PadLetterInputKey("w")
                                         PadLetterInputKey("e")
-                                        PadLetterInputKey("r")
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("oe"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
                                         PadLetterInputKey("t")
-                                        PadLetterInputKey("y")
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
                                         PadLetterInputKey("u")
                                         PadLetterInputKey("i")
                                         PadLetterInputKey("o")
@@ -44,13 +44,13 @@ struct SmallPadAlphabeticKeyboard: View {
                         HStack(spacing: 0) {
                                 PadShiftKey(widthUnitTimes: 1)
                                 Group {
-                                        PadLetterInputKey("z")
-                                        PadLetterInputKey("x")
-                                        PadLetterInputKey("c")
-                                        PadLetterInputKey("v")
-                                        PadLetterInputKey("b")
-                                        PadLetterInputKey("n")
-                                        PadLetterInputKey("m")
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("z", header: "1"), members: [KeyElement("z"), KeyElement("1", footer: "陰平")]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x")]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("c", header: "3"), members: [KeyElement("c"), KeyElement("3", footer: "陰去")]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng", header: "4"), members: [KeyElement("ng"), KeyElement("4", footer: "陽平"), KeyElement("v")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("b", header: "5"), members: [KeyElement("b"), KeyElement("5", footer: "陽上")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("n", header: "6"), members: [KeyElement("n"), KeyElement("6", footer: "陽去")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
                                 }
                                 if context.inputMethodMode.isABC {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!")]))

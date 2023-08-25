@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SmallPadCantoneseSymbolicKeyboard: View {
+struct PadCantoneseSymbolicKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
