@@ -57,10 +57,25 @@ struct MotherBoard: View {
                 default:
                         switch context.inputMethodMode {
                         case .abc:
-                                if context.keyboardInterface.isCompact {
+                                switch context.keyboardInterface {
+                                case .phonePortrait:
                                         AlphabeticKeyboard()
-                                } else {
+                                case .phoneLandscape:
+                                        AlphabeticKeyboard()
+                                case .padFloating:
+                                        AlphabeticKeyboard()
+                                case .padPortraitSmall:
                                         SmallPadAlphabeticKeyboard()
+                                case .padPortraitMedium:
+                                        SmallPadAlphabeticKeyboard()
+                                case .padPortraitLarge:
+                                        LargePadABCKeyboard()
+                                case .padLandscapeSmall:
+                                        SmallPadAlphabeticKeyboard()
+                                case .padLandscapeMedium:
+                                        SmallPadAlphabeticKeyboard()
+                                case .padLandscapeLarge:
+                                        LargePadABCKeyboard()
                                 }
                         case .cantonese:
                                 switch Options.keyboardLayout {
@@ -95,9 +110,9 @@ struct MotherBoard: View {
                                                 case .padLandscapeSmall:
                                                         SmallPadAlphabeticKeyboard()
                                                 case .padLandscapeMedium:
-                                                        LargePadCantoneseKeyboard()
-                                                case .padLandscapeLarge:
                                                         SmallPadAlphabeticKeyboard()
+                                                case .padLandscapeLarge:
+                                                        LargePadCantoneseKeyboard()
                                                 }
                                         }
                                 case .saamPing:
