@@ -112,10 +112,25 @@ struct MotherBoard: View {
                                 case .qwerty:
                                         switch context.qwertyForm {
                                         case .cangjie:
-                                                if context.keyboardInterface.isCompact {
+                                                switch context.keyboardInterface {
+                                                case .phonePortrait:
                                                         CangjieKeyboard()
-                                                } else {
+                                                case .phoneLandscape:
+                                                        CangjieKeyboard()
+                                                case .padFloating:
+                                                        CangjieKeyboard()
+                                                case .padPortraitSmall:
                                                         PadCangjieKeyboard()
+                                                case .padPortraitMedium:
+                                                        PadCangjieKeyboard()
+                                                case .padPortraitLarge:
+                                                        LargePadCangjieKeyboard()
+                                                case .padLandscapeSmall:
+                                                        PadCangjieKeyboard()
+                                                case .padLandscapeMedium:
+                                                        PadCangjieKeyboard()
+                                                case .padLandscapeLarge:
+                                                        LargePadCangjieKeyboard()
                                                 }
                                         case .stroke:
                                                 if context.keyboardInterface.isCompact {
@@ -148,10 +163,25 @@ struct MotherBoard: View {
                                 case .saamPing:
                                         switch context.qwertyForm {
                                         case .cangjie:
-                                                if context.keyboardInterface.isCompact {
+                                                switch context.keyboardInterface {
+                                                case .phonePortrait:
                                                         CangjieKeyboard()
-                                                } else {
+                                                case .phoneLandscape:
+                                                        CangjieKeyboard()
+                                                case .padFloating:
+                                                        CangjieKeyboard()
+                                                case .padPortraitSmall:
                                                         PadCangjieKeyboard()
+                                                case .padPortraitMedium:
+                                                        PadCangjieKeyboard()
+                                                case .padPortraitLarge:
+                                                        LargePadCangjieKeyboard()
+                                                case .padLandscapeSmall:
+                                                        PadCangjieKeyboard()
+                                                case .padLandscapeMedium:
+                                                        PadCangjieKeyboard()
+                                                case .padLandscapeLarge:
+                                                        LargePadCangjieKeyboard()
                                                 }
                                         case .stroke:
                                                 if context.keyboardInterface.isCompact {
