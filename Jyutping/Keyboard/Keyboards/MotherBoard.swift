@@ -133,10 +133,25 @@ struct MotherBoard: View {
                                                         LargePadCangjieKeyboard()
                                                 }
                                         case .stroke:
-                                                if context.keyboardInterface.isCompact {
+                                                switch context.keyboardInterface {
+                                                case .phonePortrait:
                                                         StrokeKeyboard()
-                                                } else {
+                                                case .phoneLandscape:
+                                                        StrokeKeyboard()
+                                                case .padFloating:
+                                                        StrokeKeyboard()
+                                                case .padPortraitSmall:
                                                         PadStrokeKeyboard()
+                                                case .padPortraitMedium:
+                                                        PadStrokeKeyboard()
+                                                case .padPortraitLarge:
+                                                        LargePadStrokeKeyboard()
+                                                case .padLandscapeSmall:
+                                                        PadStrokeKeyboard()
+                                                case .padLandscapeMedium:
+                                                        PadStrokeKeyboard()
+                                                case .padLandscapeLarge:
+                                                        LargePadStrokeKeyboard()
                                                 }
                                         default:
                                                 switch context.keyboardInterface {
@@ -184,10 +199,25 @@ struct MotherBoard: View {
                                                         LargePadCangjieKeyboard()
                                                 }
                                         case .stroke:
-                                                if context.keyboardInterface.isCompact {
+                                                switch context.keyboardInterface {
+                                                case .phonePortrait:
                                                         StrokeKeyboard()
-                                                } else {
+                                                case .phoneLandscape:
+                                                        StrokeKeyboard()
+                                                case .padFloating:
+                                                        StrokeKeyboard()
+                                                case .padPortraitSmall:
                                                         PadStrokeKeyboard()
+                                                case .padPortraitMedium:
+                                                        PadStrokeKeyboard()
+                                                case .padPortraitLarge:
+                                                        LargePadStrokeKeyboard()
+                                                case .padLandscapeSmall:
+                                                        PadStrokeKeyboard()
+                                                case .padLandscapeMedium:
+                                                        PadStrokeKeyboard()
+                                                case .padLandscapeLarge:
+                                                        LargePadStrokeKeyboard()
                                                 }
                                         default:
                                                 switch context.keyboardInterface {

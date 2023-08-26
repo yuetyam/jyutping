@@ -226,6 +226,8 @@
 		37F85CF62A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CF52A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift */; };
 		37F85CF82A99AED00009C2C8 /* LargePadCangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CF72A99AED00009C2C8 /* LargePadCangjieInputKey.swift */; };
 		37F85CFA2A99AFAC0009C2C8 /* LargePadCangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CF92A99AFAC0009C2C8 /* LargePadCangjieKeyboard.swift */; };
+		37F85CFC2A99B1A90009C2C8 /* LargePadStrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CFB2A99B1A90009C2C8 /* LargePadStrokeInputKey.swift */; };
+		37F85CFE2A99B21F0009C2C8 /* LargePadStrokeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F85CFD2A99B21F0009C2C8 /* LargePadStrokeKeyboard.swift */; };
 		37FC1B5E294DFAE400D7153F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1B5D294DFAE400D7153F /* Assets.xcassets */; };
 		37FC1B61294DFAE400D7153F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FC1B60294DFAE400D7153F /* Preview Assets.xcassets */; };
 		37FC1B6C294DFAE500D7153F /* InputMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FC1B6B294DFAE500D7153F /* InputMethodTests.swift */; };
@@ -591,6 +593,8 @@
 		37F85CF52A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadSaamPingKeyboard.swift; sourceTree = "<group>"; };
 		37F85CF72A99AED00009C2C8 /* LargePadCangjieInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadCangjieInputKey.swift; sourceTree = "<group>"; };
 		37F85CF92A99AFAC0009C2C8 /* LargePadCangjieKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadCangjieKeyboard.swift; sourceTree = "<group>"; };
+		37F85CFB2A99B1A90009C2C8 /* LargePadStrokeInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadStrokeInputKey.swift; sourceTree = "<group>"; };
+		37F85CFD2A99B21F0009C2C8 /* LargePadStrokeKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadStrokeKeyboard.swift; sourceTree = "<group>"; };
 		37FC1AE3294DF65400D7153F /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = ../Modules/CoreIME; sourceTree = "<group>"; };
 		37FC1B57294DFAE300D7153F /* JyutpingInputMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JyutpingInputMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FC1B5D294DFAE400D7153F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -741,6 +745,8 @@
 				3753F5092A96F02C00300CE5 /* LargePadShiftKey.swift */,
 				3753F4FE2A968D3100300CE5 /* LargePadCantoneseKeyboard.swift */,
 				37F85CF92A99AFAC0009C2C8 /* LargePadCangjieKeyboard.swift */,
+				37F85CFD2A99B21F0009C2C8 /* LargePadStrokeKeyboard.swift */,
+				37F85CFB2A99B1A90009C2C8 /* LargePadStrokeInputKey.swift */,
 				37F85CF72A99AED00009C2C8 /* LargePadCangjieInputKey.swift */,
 				37B738822A98307B006C9AA0 /* LargePadABCKeyboard.swift */,
 				37F85CEF2A9851950009C2C8 /* LargePadNumericKeyboard.swift */,
@@ -1588,6 +1594,7 @@
 				37B1765E2A049B6800A4E531 /* AlphabeticKeyboard.swift in Sources */,
 				3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */,
 				37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */,
+				37F85CFE2A99B21F0009C2C8 /* LargePadStrokeKeyboard.swift in Sources */,
 				37DE329C2A0286D70066D03A /* ImageExtensions.swift in Sources */,
 				37CBD6912A42EB34003F7B68 /* StrokeInputKey.swift in Sources */,
 				37A7EB622A91AEF700B7CDAF /* PadSpaceKey.swift in Sources */,
@@ -1608,6 +1615,7 @@
 				37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */,
 				3768B49A2A00C8510049D7C1 /* KeyboardInterface.swift in Sources */,
 				379261602A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift in Sources */,
+				37F85CFC2A99B1A90009C2C8 /* LargePadStrokeInputKey.swift in Sources */,
 				37073FF32A2642BD00691F9D /* TenKeyNavigateKey.swift in Sources */,
 				37A7EB642A91B4B600B7CDAF /* PadTransformKey.swift in Sources */,
 				370AF8892A07742F00A92562 /* SettingsViewIOS15.swift in Sources */,
