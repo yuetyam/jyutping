@@ -78,12 +78,51 @@ struct MotherBoard: View {
                                         PadSymbolicKeyboard()
                                 }
                         }
-                case .tenKeyNumeric:
-                        TenKeyNumericKeyboard()
                 case .numberPad:
-                        NumberPad(isDecimalPad: false)
+                        switch context.keyboardInterface {
+                        case .phonePortrait:
+                                NumberPad(isDecimalPad: false)
+                        case .phoneLandscape:
+                                NumberPad(isDecimalPad: false)
+                        case .padFloating:
+                                NumberPad(isDecimalPad: false)
+                        case .padPortraitSmall:
+                                PadNumericKeyboard()
+                        case .padPortraitMedium:
+                                PadNumericKeyboard()
+                        case .padPortraitLarge:
+                                LargePadNumericKeyboard()
+                        case .padLandscapeSmall:
+                                PadNumericKeyboard()
+                        case .padLandscapeMedium:
+                                PadNumericKeyboard()
+                        case .padLandscapeLarge:
+                                LargePadNumericKeyboard()
+                        }
                 case .decimalPad:
-                        NumberPad(isDecimalPad: true)
+                        switch context.keyboardInterface {
+                        case .phonePortrait:
+                                NumberPad(isDecimalPad: true)
+                        case .phoneLandscape:
+                                NumberPad(isDecimalPad: true)
+                        case .padFloating:
+                                NumberPad(isDecimalPad: true)
+                        case .padPortraitSmall:
+                                PadNumericKeyboard()
+                        case .padPortraitMedium:
+                                PadNumericKeyboard()
+                        case .padPortraitLarge:
+                                LargePadNumericKeyboard()
+                        case .padLandscapeSmall:
+                                PadNumericKeyboard()
+                        case .padLandscapeMedium:
+                                PadNumericKeyboard()
+                        case .padLandscapeLarge:
+                                LargePadNumericKeyboard()
+                        }
+                case .tenKeyNumeric:
+                        // iPhone only
+                        TenKeyNumericKeyboard()
                 default:
                         switch context.inputMethodMode {
                         case .abc:
@@ -242,11 +281,8 @@ struct MotherBoard: View {
                                                 }
                                         }
                                 case .tenKey:
-                                        if context.keyboardInterface.isCompact {
-                                                TenKeyKeyboard()
-                                        } else {
-                                                AlphabeticKeyboard()
-                                        }
+                                        // iPhone Only
+                                        TenKeyKeyboard()
                                 }
                         }
                 }
