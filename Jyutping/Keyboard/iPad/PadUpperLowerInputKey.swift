@@ -123,12 +123,12 @@ struct PadUpperLowerInputKey: View {
                                         ZStack(alignment: .top) {
                                                 Color.clear
                                                 Text(verbatim: upper)
-                                                        .padding(.top, 10)
+                                                        .padding(.top, 12)
                                         }
                                         ZStack(alignment: .bottom) {
                                                 Color.clear
                                                 Text(verbatim: lower)
-                                                        .padding(.bottom, 10)
+                                                        .padding(.bottom, 12)
                                         }
                                 }
                         }
