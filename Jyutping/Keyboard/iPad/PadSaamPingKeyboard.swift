@@ -14,30 +14,30 @@ struct PadSaamPingKeyboard: View {
                         HStack(spacing: 0 ) {
                                 Group {
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
-                                        PadLetterInputKey("w")
-                                        PadLetterInputKey("e")
+                                        PadPullableInputKey(upper: "2", lower: "w")
+                                        PadPullableInputKey(upper: "3", lower: "e")
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("oe"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
-                                        PadLetterInputKey("t")
+                                        PadPullableInputKey(upper: "5", lower: "t")
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
-                                        PadLetterInputKey("u")
-                                        PadLetterInputKey("i")
-                                        PadLetterInputKey("o")
-                                        PadLetterInputKey("p")
+                                        PadPullableInputKey(upper: "7", lower: "u")
+                                        PadPullableInputKey(upper: "8", lower: "i")
+                                        PadPullableInputKey(upper: "9", lower: "o")
+                                        PadPullableInputKey(upper: "0", lower: "p")
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
                                 PlaceholderKey()
                                 Group {
-                                        PadLetterInputKey("a")
-                                        PadLetterInputKey("s")
-                                        PadLetterInputKey("d")
-                                        PadLetterInputKey("f")
-                                        PadLetterInputKey("g")
-                                        PadLetterInputKey("h")
-                                        PadLetterInputKey("j")
-                                        PadLetterInputKey("k")
-                                        PadLetterInputKey("l")
+                                        PadPullableInputKey(upper: "@", lower: "a")
+                                        PadPullableInputKey(upper: "#", lower: "s")
+                                        PadPullableInputKey(upper: "$", lower: "d")
+                                        PadPullableInputKey(upper: "/", lower: "f")
+                                        PadPullableInputKey(upper: "（", lower: "g")
+                                        PadPullableInputKey(upper: "）", lower: "h")
+                                        PadPullableInputKey(upper: "「", lower: "j")
+                                        PadPullableInputKey(upper: "」", lower: "k")
+                                        PadPullableInputKey(upper: "'", lower: "l")
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
@@ -52,12 +52,12 @@ struct PadSaamPingKeyboard: View {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("n", header: "6"), members: [KeyElement("n"), KeyElement("6", footer: "陽去")]))
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
                                 }
-                                if context.inputMethodMode.isABC {
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?")]))
+                                if context.keyboardCase.isUppercased {
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: "半形")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半形")]))
                                 } else {
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？")]))
+                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", header: "半形"), KeyElement("!", header: "半形")]))
+                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？"), KeyElement(".", header: "半形"), KeyElement("?", header: "半形")]))
                                 }
                                 PadShiftKey(widthUnitTimes: 1)
                         }
