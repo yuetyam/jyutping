@@ -134,15 +134,15 @@ struct MotherBoard: View {
                                 case .padFloating:
                                         AlphabeticKeyboard()
                                 case .padPortraitSmall:
-                                        PadAlphabeticKeyboard()
+                                        PadABCKeyboard()
                                 case .padPortraitMedium:
-                                        PadAlphabeticKeyboard()
+                                        PadABCKeyboard()
                                 case .padPortraitLarge:
                                         LargePadABCKeyboard()
                                 case .padLandscapeSmall:
-                                        PadAlphabeticKeyboard()
+                                        PadABCKeyboard()
                                 case .padLandscapeMedium:
-                                        PadAlphabeticKeyboard()
+                                        PadABCKeyboard()
                                 case .padLandscapeLarge:
                                         LargePadABCKeyboard()
                                 }
@@ -201,15 +201,15 @@ struct MotherBoard: View {
                                                 case .padFloating:
                                                         AlphabeticKeyboard()
                                                 case .padPortraitSmall:
-                                                        PadAlphabeticKeyboard()
+                                                        PadCantoneseKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadAlphabeticKeyboard()
+                                                        PadCantoneseKeyboard()
                                                 case .padPortraitLarge:
                                                         LargePadCantoneseKeyboard()
                                                 case .padLandscapeSmall:
-                                                        PadAlphabeticKeyboard()
+                                                        PadCantoneseKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadAlphabeticKeyboard()
+                                                        PadCantoneseKeyboard()
                                                 case .padLandscapeLarge:
                                                         LargePadCantoneseKeyboard()
                                                 }

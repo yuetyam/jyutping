@@ -1,16 +1,12 @@
 import SwiftUI
 
-struct PadAlphabeticKeyboard: View {
+struct PadABCKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
                 VStack(spacing: 0) {
-                        if context.inputStage.isBuffering {
-                                CandidateScrollBar()
-                        } else {
-                                ToolBar()
-                        }
+                        ToolBar()
                         HStack(spacing: 0 ) {
                                 Group {
                                         PadLetterInputKey("q")
@@ -52,22 +48,12 @@ struct PadAlphabeticKeyboard: View {
                                         PadLetterInputKey("n")
                                         PadLetterInputKey("m")
                                 }
-                                if context.inputMethodMode.isABC {
-                                        if context.keyboardCase.isUppercased {
-                                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
-                                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
-                                        } else {
-                                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
-                                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
-                                        }
+                                if context.keyboardCase.isUppercased {
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
                                 } else {
-                                        if context.keyboardCase.isUppercased {
-                                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: "半形")]))
-                                                PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半形")]))
-                                        } else {
-                                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", header: "半形"), KeyElement("!", header: "半形")]))
-                                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？"), KeyElement(".", header: "半形"), KeyElement("?", header: "半形")]))
-                                        }
+                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("'"), KeyElement("¡")]))
+                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("\""), KeyElement("…"), KeyElement("¿")]))
                                 }
                                 PadShiftKey(widthUnitTimes: 1)
                         }
