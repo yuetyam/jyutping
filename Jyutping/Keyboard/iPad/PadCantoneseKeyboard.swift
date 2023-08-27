@@ -13,44 +13,44 @@ struct PadCantoneseKeyboard: View {
                         }
                         HStack(spacing: 0 ) {
                                 Group {
-                                        PadLetterInputKey("q")
-                                        PadLetterInputKey("w")
-                                        PadLetterInputKey("e")
-                                        PadLetterInputKey("r")
-                                        PadLetterInputKey("t")
-                                        PadLetterInputKey("y")
-                                        PadLetterInputKey("u")
-                                        PadLetterInputKey("i")
-                                        PadLetterInputKey("o")
-                                        PadLetterInputKey("p")
+                                        PadPullableInputKey(upper: "1", lower: "q")
+                                        PadPullableInputKey(upper: "2", lower: "w")
+                                        PadPullableInputKey(upper: "3", lower: "e")
+                                        PadPullableInputKey(upper: "4", lower: "r")
+                                        PadPullableInputKey(upper: "5", lower: "t")
+                                        PadPullableInputKey(upper: "6", lower: "y")
+                                        PadPullableInputKey(upper: "7", lower: "u")
+                                        PadPullableInputKey(upper: "8", lower: "i")
+                                        PadPullableInputKey(upper: "9", lower: "o")
+                                        PadPullableInputKey(upper: "0", lower: "p")
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
                                 PlaceholderKey()
                                 Group {
-                                        PadLetterInputKey("a")
-                                        PadLetterInputKey("s")
-                                        PadLetterInputKey("d")
-                                        PadLetterInputKey("f")
-                                        PadLetterInputKey("g")
-                                        PadLetterInputKey("h")
-                                        PadLetterInputKey("j")
-                                        PadLetterInputKey("k")
-                                        PadLetterInputKey("l")
+                                        PadPullableInputKey(upper: "@", lower: "a")
+                                        PadPullableInputKey(upper: "#", lower: "s")
+                                        PadPullableInputKey(upper: "$", lower: "d")
+                                        PadPullableInputKey(upper: "/", lower: "f")
+                                        PadPullableInputKey(upper: "（", lower: "g")
+                                        PadPullableInputKey(upper: "）", lower: "h")
+                                        PadPullableInputKey(upper: "「", lower: "j")
+                                        PadPullableInputKey(upper: "」", lower: "k")
+                                        PadPullableInputKey(upper: "'", lower: "l")
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
                                 PadShiftKey(widthUnitTimes: 1)
                                 Group {
-                                        PadLetterInputKey("z")
-                                        PadLetterInputKey("x")
-                                        PadLetterInputKey("c")
-                                        PadLetterInputKey("v")
-                                        PadLetterInputKey("b")
-                                        PadLetterInputKey("n")
-                                        PadLetterInputKey("m")
+                                        PadPullableInputKey(upper: "%", lower: "z")
+                                        PadPullableInputKey(upper: "-", lower: "x")
+                                        PadPullableInputKey(upper: "～", lower: "c")
+                                        PadPullableInputKey(upper: "…", lower: "v")
+                                        PadPullableInputKey(upper: "、", lower: "b")
+                                        PadPullableInputKey(upper: "；", lower: "n")
+                                        PadPullableInputKey(upper: "：", lower: "m")
                                 }
                                 if context.keyboardCase.isUppercased {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: "半形")]))
