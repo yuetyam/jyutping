@@ -5,20 +5,17 @@ struct LargePadUpperLowerInputKey: View {
         /// Create a LargePadUpperLowerInputKey
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
-        ///   - widthUnitTimes: Times of widthUnit
         ///   - upper: Key upper text
         ///   - lower: Key lower text
         ///   - keyModel: KeyElements
-        init(keyLocale: HorizontalEdge, widthUnitTimes: CGFloat = 1, upper: String, lower: String, keyModel: KeyModel) {
+        init(keyLocale: HorizontalEdge, upper: String, lower: String, keyModel: KeyModel) {
                 self.keyLocale = keyLocale
-                self.widthUnitTimes = widthUnitTimes
                 self.upper = upper
                 self.lower = lower
                 self.keyModel = keyModel
         }
 
         private let keyLocale: HorizontalEdge
-        private let widthUnitTimes: CGFloat
         private let upper: String
         private let lower: String
         private let keyModel: KeyModel
@@ -65,7 +62,6 @@ struct LargePadUpperLowerInputKey: View {
         @State private var isPullingDown: Bool = false
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
                 ZStack {
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
@@ -105,10 +101,10 @@ struct LargePadUpperLowerInputKey: View {
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: (keyWidth - 14) * CGFloat(memberCount), height: context.heightUnit * 0.7)
+                                                .frame(width: (context.widthUnit - 14) * CGFloat(memberCount), height: context.heightUnit * 0.7)
                                                 .padding(.bottom, context.heightUnit * 1.8)
-                                                .padding(.leading, keyLocale.isLeading ? ((keyWidth - 10) * CGFloat(expansions)) : 0)
-                                                .padding(.trailing, keyLocale.isTrailing ? ((keyWidth - 10) * CGFloat(expansions)) : 0)
+                                                .padding(.leading, keyLocale.isLeading ? ((context.widthUnit - 10) * CGFloat(expansions)) : 0)
+                                                .padding(.trailing, keyLocale.isTrailing ? ((context.widthUnit - 10) * CGFloat(expansions)) : 0)
                                         }
                                         .padding(4)
                         } else {
@@ -133,7 +129,7 @@ struct LargePadUpperLowerInputKey: View {
                                 }
                         }
                 }
-                .frame(width: keyWidth, height: context.heightUnit)
+                .frame(width: context.widthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -148,7 +144,7 @@ struct LargePadUpperLowerInputKey: View {
                                         guard memberCount > 1 else { return }
                                         let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                         guard distance > 10 else { return }
-                                        let step: CGFloat = keyWidth - 14
+                                        let step: CGFloat = context.widthUnit - 14
                                         for index in 0..<memberCount {
                                                 let lowPoint: CGFloat = step * CGFloat(index)
                                                 let heightPoint: CGFloat = step * CGFloat(index + 1)
