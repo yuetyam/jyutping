@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// Pullable & expansible
 struct PadCompleteInputKey: View {
 
         /// Create a LargePadUpperLowerInputKey

@@ -26,31 +26,31 @@ struct PadNumericKeyboard: View {
                         HStack(spacing: 0) {
                                 PlaceholderKey()
                                 Group {
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("@"), members: [KeyElement("@"), KeyElement("¥")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("€")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("$"), members: [KeyElement("$"), KeyElement("£")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("_")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("^")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("("), members: [KeyElement("("), KeyElement("[")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(")"), members: [KeyElement(")"), KeyElement("]")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("{")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("}")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "¥", keyModel: KeyModel(primary: KeyElement("@"), members: [KeyElement("@"), KeyElement("¥")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "€", keyModel: KeyModel(primary: KeyElement("#"), members: [KeyElement("#"), KeyElement("€")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "£", keyModel: KeyModel(primary: KeyElement("$"), members: [KeyElement("$"), KeyElement("£")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "_", keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("_")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "^", keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("^")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "[", keyModel: KeyModel(primary: KeyElement("("), members: [KeyElement("("), KeyElement("[")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "]", keyModel: KeyModel(primary: KeyElement(")"), members: [KeyElement(")"), KeyElement("]")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "{", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("{"), KeyElement("\u{2019}", footer: "2019"), KeyElement("\u{2018}", footer: "2018")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "}", keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("}"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0) {
                                 PadTransformKey(destination: .symbolic, widthUnitTimes: 1)
                                 Group {
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("§")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("-"), members: [KeyElement("-"), KeyElement("|")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("+"), members: [KeyElement("+"), KeyElement("~")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("…")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("\\")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement("<")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(":"), members: [KeyElement(":"), KeyElement(">")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "§", keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("§")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "|", keyModel: KeyModel(primary: KeyElement("-"), members: [KeyElement("-"), KeyElement("|")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "~", keyModel: KeyModel(primary: KeyElement("+"), members: [KeyElement("+"), KeyElement("~")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "…", keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("…")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "\\", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("\\")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "<", keyModel: KeyModel(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement("<")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: ">", keyModel: KeyModel(primary: KeyElement(":"), members: [KeyElement(":"), KeyElement(">")]))
                                 }
+                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "!", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("!"), KeyElement("¡")]))
+                                PadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("?"), KeyElement("¿")]))
                                 PadTransformKey(destination: .symbolic, widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
