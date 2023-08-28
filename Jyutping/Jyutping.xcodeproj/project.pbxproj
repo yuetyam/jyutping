@@ -69,6 +69,7 @@
 		3773115D2A9AE63E0083B8A8 /* PadCantoneseKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773115C2A9AE63E0083B8A8 /* PadCantoneseKeyboard.swift */; };
 		3773115F2A9AE6800083B8A8 /* PadABCKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773115E2A9AE6800083B8A8 /* PadABCKeyboard.swift */; };
 		377311612A9AEF100083B8A8 /* PadPullableInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377311602A9AEF100083B8A8 /* PadPullableInputKey.swift */; };
+		377311632A9C21680083B8A8 /* PadCompleteInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377311622A9C21680083B8A8 /* PadCompleteInputKey.swift */; };
 		3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564929A744EA00468C2A /* IOSCantonMetroView.swift */; };
 		3773564D29A769E900468C2A /* MacMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564C29A769E900468C2A /* MacMetroLineView.swift */; };
 		3773564F29A769FC00468C2A /* MacStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564E29A769FC00468C2A /* MacStationLabel.swift */; };
@@ -402,6 +403,7 @@
 		3773115C2A9AE63E0083B8A8 /* PadCantoneseKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadCantoneseKeyboard.swift; sourceTree = "<group>"; };
 		3773115E2A9AE6800083B8A8 /* PadABCKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadABCKeyboard.swift; sourceTree = "<group>"; };
 		377311602A9AEF100083B8A8 /* PadPullableInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadPullableInputKey.swift; sourceTree = "<group>"; };
+		377311622A9C21680083B8A8 /* PadCompleteInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadCompleteInputKey.swift; sourceTree = "<group>"; };
 		3773564929A744EA00468C2A /* IOSCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCantonMetroView.swift; sourceTree = "<group>"; };
 		3773564C29A769E900468C2A /* MacMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetroLineView.swift; sourceTree = "<group>"; };
 		3773564E29A769FC00468C2A /* MacStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacStationLabel.swift; sourceTree = "<group>"; };
@@ -881,6 +883,7 @@
 				37A7EB532A91A0DE00B7CDAF /* PadLetterInputKey.swift */,
 				3753F5042A96E0D000300CE5 /* LargeScreenPad */,
 				37A7EB672A92835C00B7CDAF /* PadExpansibleInputKey.swift */,
+				377311622A9C21680083B8A8 /* PadCompleteInputKey.swift */,
 				3773115A2A9AA5E10083B8A8 /* PadUpperLowerInputKey.swift */,
 				37A7EB572A91A44A00B7CDAF /* PadDismissKey.swift */,
 				37A7EB592A91A7AD00B7CDAF /* PadBackspaceKey.swift */,
@@ -1620,6 +1623,7 @@
 				37F85CF82A99AED00009C2C8 /* LargePadCangjieInputKey.swift in Sources */,
 				37E47FC72A29AD1E00EC11C6 /* TenKeySidebar.swift in Sources */,
 				37CBD68D2A42E053003F7B68 /* CangjieInputKey.swift in Sources */,
+				377311632A9C21680083B8A8 /* PadCompleteInputKey.swift in Sources */,
 				3773115D2A9AE63E0083B8A8 /* PadCantoneseKeyboard.swift in Sources */,
 				3743577A2A94496B00466697 /* PadCangjieKeyboard.swift in Sources */,
 				3768B4A72A00E9760049D7C1 /* MotherBoard.swift in Sources */,
