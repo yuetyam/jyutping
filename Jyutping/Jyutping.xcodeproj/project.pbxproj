@@ -737,6 +737,77 @@
 			path = TenKey;
 			sourceTree = "<group>";
 		};
+		37534F282A9DEC9C0027F73A /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				370DF3342A370C9A00AE655B /* SymbolInputKey.swift */,
+				370D438F2A10EA4100EB48B8 /* HiddenKey.swift */,
+				37B486D62A7D23B000B175B6 /* GlobeKey.swift */,
+				37E9246D2A871220002D33B9 /* LeftKey.swift */,
+				37E924712A88148D002D33B9 /* RightKey.swift */,
+				37993A622A0EA2C700BC8E35 /* ReturnKey.swift */,
+				37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */,
+				37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */,
+				37993A682A0EA33600BC8E35 /* ShiftKey.swift */,
+				3754F1952A71031400A2692A /* TransformKey.swift */,
+				37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */,
+				37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */,
+				370DF3302A36B6EA00AE655B /* LetterInputKey.swift */,
+				370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */,
+				37E924732A89383D002D33B9 /* ExpansibleInputKey.swift */,
+				37877D4F2A2B119300630F77 /* NumberPad.swift */,
+				37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */,
+				37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */,
+				37CBD6922A42EE21003F7B68 /* StrokeKeyboard.swift */,
+				370DF32E2A36B43D00AE655B /* SaamPingKeyboard.swift */,
+				37F72E762A14EF7B0013AC85 /* NumericKeyboard.swift */,
+				3792615D2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift */,
+				37E004202A16331600442290 /* SymbolicKeyboard.swift */,
+				3792615F2A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift */,
+				37073FDF2A25FEFD00691F9D /* TenKey */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		37534F292A9DECDE0027F73A /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				3768B4A62A00E9760049D7C1 /* MotherBoard.swift */,
+				37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */,
+				37DE32892A02187B0066D03A /* ToolBarItem.swift */,
+				370563252A0168D000872AA4 /* ToolBar.swift */,
+				373104D42A0A3D780009BF66 /* EditingPanel.swift */,
+				37B7B4172A06178400B3AB08 /* CandidateScrollBar.swift */,
+				371A13A02A49F294001695C1 /* RomanizationLabel.swift */,
+				37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */,
+				37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */,
+				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
+				37DE32992A02613B0066D03A /* SettingsView.swift */,
+				370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */,
+			);
+			path = SharedViews;
+			sourceTree = "<group>";
+		};
+		37534F2A2A9DEF080027F73A /* SharedModels */ = {
+			isa = PBXGroup;
+			children = (
+				37B1766B2A05465000A4E531 /* InputStage.swift */,
+				37B7B4112A05F22800B3AB08 /* Operation.swift */,
+				37F72E7F2A1531DF0013AC85 /* InputMethodMode.swift */,
+				37611CF22A27416800F3E6F9 /* KeyboardForm.swift */,
+				37DE32912A021E780066D03A /* Options.swift */,
+				37C849512A75EF7E00C806B5 /* UserLexicon.swift */,
+				37DE328F2A021C450066D03A /* Constant.swift */,
+				3768B4A12A00CE510049D7C1 /* HapticFeedback.swift */,
+				3768B4A32A00CE9B0049D7C1 /* AudioFeedback.swift */,
+				3768B49D2A00CA620049D7C1 /* KeyboardLayout.swift */,
+				37B176672A050B1100A4E531 /* KeyboardCase.swift */,
+				3768B4992A00C8510049D7C1 /* KeyboardInterface.swift */,
+				37DE5B952A8B60D20084C45B /* KeyModel.swift */,
+			);
+			path = SharedModels;
+			sourceTree = "<group>";
+		};
 		3753F5042A96E0D000300CE5 /* LargeScreenPad */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,24 +840,11 @@
 			isa = PBXGroup;
 			children = (
 				3768B4902A00C2A10049D7C1 /* KeyboardViewController.swift */,
-				37B1766B2A05465000A4E531 /* InputStage.swift */,
-				37B7B4112A05F22800B3AB08 /* Operation.swift */,
-				37F72E7F2A1531DF0013AC85 /* InputMethodMode.swift */,
-				37611CF22A27416800F3E6F9 /* KeyboardForm.swift */,
+				37534F2A2A9DEF080027F73A /* SharedModels */,
+				37534F292A9DECDE0027F73A /* SharedViews */,
+				37534F282A9DEC9C0027F73A /* iPhone */,
 				37A7EB522A91A08100B7CDAF /* iPad */,
-				37073FDF2A25FEFD00691F9D /* TenKey */,
-				37E004222A16341100442290 /* Keyboards */,
-				37993A5D2A0EA25F00BC8E35 /* KeyViews */,
-				37E9246A2A86E7CD002D33B9 /* KeyPreviews */,
-				3768B4A52A00E95C0049D7C1 /* Views */,
-				37DE32912A021E780066D03A /* Options.swift */,
-				37DE328F2A021C450066D03A /* Constant.swift */,
-				37C849512A75EF7E00C806B5 /* UserLexicon.swift */,
-				3768B4A12A00CE510049D7C1 /* HapticFeedback.swift */,
-				3768B4A32A00CE9B0049D7C1 /* AudioFeedback.swift */,
-				3768B49D2A00CA620049D7C1 /* KeyboardLayout.swift */,
-				37B176672A050B1100A4E531 /* KeyboardCase.swift */,
-				3768B4992A00C8510049D7C1 /* KeyboardInterface.swift */,
+				37E9246A2A86E7CD002D33B9 /* Paths */,
 				37E772062A81316E004D0467 /* Emoji */,
 				37DE32862A0216740066D03A /* Extensions */,
 				37DE329D2A028A3D0066D03A /* Localization */,
@@ -794,24 +852,6 @@
 				37DE32972A024D400066D03A /* Images.xcassets */,
 			);
 			path = Keyboard;
-			sourceTree = "<group>";
-		};
-		3768B4A52A00E95C0049D7C1 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				373104D42A0A3D780009BF66 /* EditingPanel.swift */,
-				370563252A0168D000872AA4 /* ToolBar.swift */,
-				37B7B4172A06178400B3AB08 /* CandidateScrollBar.swift */,
-				371A13A02A49F294001695C1 /* RomanizationLabel.swift */,
-				37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */,
-				37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */,
-				37B7B4192A0646E100B3AB08 /* CandidateBoard.swift */,
-				37DE32992A02613B0066D03A /* SettingsView.swift */,
-				370AF8882A07742F00A92562 /* SettingsViewIOS15.swift */,
-				37DE32892A02187B0066D03A /* ToolBarItem.swift */,
-				37DE328B2A0218960066D03A /* CantoneseABCSwitch.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		3773564B29A769D600468C2A /* Metro */ = {
@@ -854,34 +894,11 @@
 			path = Cantonese;
 			sourceTree = "<group>";
 		};
-		37993A5D2A0EA25F00BC8E35 /* KeyViews */ = {
-			isa = PBXGroup;
-			children = (
-				37B486D62A7D23B000B175B6 /* GlobeKey.swift */,
-				37E9246D2A871220002D33B9 /* LeftKey.swift */,
-				37E924712A88148D002D33B9 /* RightKey.swift */,
-				37993A622A0EA2C700BC8E35 /* ReturnKey.swift */,
-				37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */,
-				37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */,
-				37993A682A0EA33600BC8E35 /* ShiftKey.swift */,
-				3754F1952A71031400A2692A /* TransformKey.swift */,
-				37CBD68C2A42E053003F7B68 /* CangjieInputKey.swift */,
-				37CBD6902A42EB34003F7B68 /* StrokeInputKey.swift */,
-				370DF3302A36B6EA00AE655B /* LetterInputKey.swift */,
-				370DF3322A36BB0B00AE655B /* DualLettersInputKey.swift */,
-				37E924732A89383D002D33B9 /* ExpansibleInputKey.swift */,
-				37DE5B952A8B60D20084C45B /* KeyModel.swift */,
-				370D438F2A10EA4100EB48B8 /* HiddenKey.swift */,
-				370DF3342A370C9A00AE655B /* SymbolInputKey.swift */,
-			);
-			path = KeyViews;
-			sourceTree = "<group>";
-		};
 		37A7EB522A91A08100B7CDAF /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				37A7EB532A91A0DE00B7CDAF /* PadLetterInputKey.swift */,
 				3753F5042A96E0D000300CE5 /* LargeScreenPad */,
+				37A7EB532A91A0DE00B7CDAF /* PadLetterInputKey.swift */,
 				37A7EB672A92835C00B7CDAF /* PadExpansibleInputKey.swift */,
 				377311622A9C21680083B8A8 /* PadCompleteInputKey.swift */,
 				3773115A2A9AA5E10083B8A8 /* PadUpperLowerInputKey.swift */,
@@ -1139,23 +1156,6 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
-		37E004222A16341100442290 /* Keyboards */ = {
-			isa = PBXGroup;
-			children = (
-				3768B4A62A00E9760049D7C1 /* MotherBoard.swift */,
-				37877D4F2A2B119300630F77 /* NumberPad.swift */,
-				37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */,
-				37CBD68E2A42E46A003F7B68 /* CangjieKeyboard.swift */,
-				37CBD6922A42EE21003F7B68 /* StrokeKeyboard.swift */,
-				370DF32E2A36B43D00AE655B /* SaamPingKeyboard.swift */,
-				37F72E762A14EF7B0013AC85 /* NumericKeyboard.swift */,
-				3792615D2A39ADFB00DBB9F0 /* CantoneseNumericKeyboard.swift */,
-				37E004202A16331600442290 /* SymbolicKeyboard.swift */,
-				3792615F2A39AF8600DBB9F0 /* CantoneseSymbolicKeyboard.swift */,
-			);
-			path = Keyboards;
-			sourceTree = "<group>";
-		};
 		37E772062A81316E004D0467 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
@@ -1166,7 +1166,7 @@
 			path = Emoji;
 			sourceTree = "<group>";
 		};
-		37E9246A2A86E7CD002D33B9 /* KeyPreviews */ = {
+		37E9246A2A86E7CD002D33B9 /* Paths */ = {
 			isa = PBXGroup;
 			children = (
 				37E9246B2A86E7F7002D33B9 /* KeyPreviewPath.swift */,
@@ -1175,7 +1175,7 @@
 				37E9246F2A880F31002D33B9 /* KeyPreviewLeftExpansionPath.swift */,
 				37E924682A86E793002D33B9 /* KeyPreviewRightExpansionPath.swift */,
 			);
-			path = KeyPreviews;
+			path = Paths;
 			sourceTree = "<group>";
 		};
 		37E9918F298EAACB003423C2 /* KeyCode */ = {
@@ -2004,7 +2004,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2031,7 +2031,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2183,7 +2183,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2226,7 +2226,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2360,7 +2360,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2400,7 +2400,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 96;
+				CURRENT_PROJECT_VERSION = 97;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
