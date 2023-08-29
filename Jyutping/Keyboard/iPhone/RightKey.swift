@@ -51,7 +51,7 @@ struct RightKey: View {
                                 let symbols: [String] = responsiveSymbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
                                 let symbolsCount: Int = symbols.count
                                 let expansions: Int = symbolsCount - 1
-                                KeyPreviewLeftExpansionPath(expansions: expansions)
+                                KeyLeftExpansionPath(expansions: expansions)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {

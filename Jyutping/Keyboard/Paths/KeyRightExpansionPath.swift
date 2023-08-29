@@ -1,18 +1,18 @@
 import SwiftUI
 
-struct KeyPreviewRightExpansionPath: Shape {
+struct KeyRightExpansionPath: Shape {
 
         /// Count of the extras blocks
         let expansions: Int
 
         func path(in rect: CGRect) -> Path {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)
-                return Path.keyPreviewRightExpansionPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5, expansions: expansions)
+                return Path.keyRightExpansionPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5, expansions: expansions)
         }
 }
 
 extension Path {
-        static func keyPreviewRightExpansionPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, expansions: Int) -> Path {
+        static func keyRightExpansionPath(origin: CGPoint, previewCornerRadius: CGFloat, keyWidth: CGFloat, keyHeight: CGFloat, keyCornerRadius: CGFloat, expansions: Int) -> Path {
 
                 //    +-------------------------e------------+------------a---+
                 //    +   |                     +            +            |   +

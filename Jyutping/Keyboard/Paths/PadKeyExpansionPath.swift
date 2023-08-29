@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PadKeyPreviewExpansionPath: Shape {
+struct PadKeyExpansionPath: Shape {
 
         /// Key location, left half (leading) or right half (trailing).
         let keyLocale: HorizontalEdge
@@ -12,15 +12,15 @@ struct PadKeyPreviewExpansionPath: Shape {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)
                 switch keyLocale {
                 case .leading:
-                        return Path.padKeyPreviewRightExpansionPath(origin: origin, keyWidth: rect.size.width, keyHeight: rect.size.height, cornerRadius: 5, expansions: expansions)
+                        return Path.padKeyRightExpansionPath(origin: origin, keyWidth: rect.size.width, keyHeight: rect.size.height, cornerRadius: 5, expansions: expansions)
                 case .trailing:
-                        return Path.padKeyPreviewLeftExpansionPath(origin: origin, keyWidth: rect.size.width, keyHeight: rect.size.height, cornerRadius: 5, expansions: expansions)
+                        return Path.padKeyLeftExpansionPath(origin: origin, keyWidth: rect.size.width, keyHeight: rect.size.height, cornerRadius: 5, expansions: expansions)
                 }
         }
 }
 
 extension Path {
-        static func padKeyPreviewLeftExpansionPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, cornerRadius: CGFloat, expansions: Int) -> Path {
+        static func padKeyLeftExpansionPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, cornerRadius: CGFloat, expansions: Int) -> Path {
 
                 //    +---------------+---------------+-----------G---+
                 //    +   +           +               +           +   +
@@ -82,7 +82,7 @@ extension Path {
 }
 
 extension Path {
-        static func padKeyPreviewRightExpansionPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, cornerRadius: CGFloat, expansions: Int) -> Path {
+        static func padKeyRightExpansionPath(origin: CGPoint, keyWidth: CGFloat, keyHeight: CGFloat, cornerRadius: CGFloat, expansions: Int) -> Path {
 
                 //    +---------------+---------------+------------a---+
                 //    +   |           +               +            |   +

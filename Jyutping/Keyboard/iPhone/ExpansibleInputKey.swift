@@ -53,7 +53,7 @@ struct ExpansibleInputKey: View {
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
                                 let expansions: Int = keyModel.members.count - 1
-                                KeyPreviewExpansionPath(keyLocale: keyLocale, expansions: expansions)
+                                KeyExpansionPath(keyLocale: keyLocale, expansions: expansions)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {

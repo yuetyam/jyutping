@@ -42,7 +42,7 @@ struct LeftKey: View {
                                 let symbols: [String] = responsiveSymbols(isABCMode: context.inputMethodMode.isABC)
                                 let symbolsCount: Int = symbols.count
                                 let expansions: Int = symbolsCount - 1
-                                KeyPreviewRightExpansionPath(expansions: expansions)
+                                KeyRightExpansionPath(expansions: expansions)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {

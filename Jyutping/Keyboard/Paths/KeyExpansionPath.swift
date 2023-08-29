@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct KeyPreviewExpansionPath: Shape {
+struct KeyExpansionPath: Shape {
 
         /// Key location, left half (leading) or right half (trailing).
         let keyLocale: HorizontalEdge
@@ -12,9 +12,9 @@ struct KeyPreviewExpansionPath: Shape {
                 let origin: CGPoint = CGPoint(x: rect.midX, y: rect.maxY)
                 switch keyLocale {
                 case .leading:
-                        return Path.keyPreviewRightExpansionPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5, expansions: expansions)
+                        return Path.keyRightExpansionPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5, expansions: expansions)
                 case .trailing:
-                        return Path.keyPreviewLeftExpansionPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5, expansions: expansions)
+                        return Path.keyLeftExpansionPath(origin: origin, previewCornerRadius: 10, keyWidth: rect.size.width, keyHeight: rect.size.height, keyCornerRadius: 5, expansions: expansions)
                 }
         }
 }
