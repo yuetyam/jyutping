@@ -40,26 +40,29 @@ struct CandidateScrollBar: View {
                                                                                 VStack(spacing: -2) {
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                         Text(verbatim: candidate.text)
-                                                                                                .lineLimit(1)
                                                                                                 .font(.candidate)
+                                                                                                .minimumScaleFactor(0.4)
+                                                                                                .lineLimit(1)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 8)
+                                                                                .padding(.bottom, 10)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(verbatim: candidate.text)
-                                                                                                .lineLimit(1)
                                                                                                 .font(.candidate)
+                                                                                                .minimumScaleFactor(0.4)
+                                                                                                .lineLimit(1)
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 8)
+                                                                                .padding(.bottom, 10)
                                                                         case .noComments:
                                                                                 Text(verbatim: candidate.text)
-                                                                                        .lineLimit(1)
                                                                                         .font(.candidate)
+                                                                                        .minimumScaleFactor(0.4)
+                                                                                        .lineLimit(1)
                                                                                         .padding(.horizontal, 1)
-                                                                                        .padding(.bottom, 4)
+                                                                                        .padding(.bottom, 5)
                                                                         }
                                                                 }
                                                                 .frame(width: candidate.width)
