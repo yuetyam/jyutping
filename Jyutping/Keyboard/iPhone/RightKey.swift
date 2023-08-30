@@ -143,7 +143,7 @@ struct RightKey: View {
                                                 context.operate(.input("."))
                                         } else {
                                                 if context.inputStage.isBuffering {
-                                                        context.operate(.process("'"))
+                                                        context.operate(.separate)
                                                 } else {
                                                         let symbol: String = context.needsInputModeSwitchKey ? "，" : "。"
                                                         context.operate(.input(symbol))

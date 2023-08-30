@@ -133,7 +133,7 @@ struct LeftKey: View {
                                                 context.operate(.input(","))
                                         } else {
                                                 if context.inputStage.isBuffering {
-                                                        context.operate(.process("'"))
+                                                        context.operate(.separate)
                                                 } else {
                                                         context.operate(.input("，"))
                                                 }

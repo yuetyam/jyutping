@@ -277,6 +277,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .input(let text):
                         textDocumentProxy.insertText(text)
                         adjustKeyboard()
+                case .separate:
+                        appendBufferText("'")
+                        adjustKeyboard()
                 case .process(let text):
                         defer {
                                 adjustKeyboard()
