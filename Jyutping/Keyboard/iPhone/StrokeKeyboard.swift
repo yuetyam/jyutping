@@ -53,16 +53,39 @@ struct StrokeKeyboard: View {
                                 HiddenKey(key: .backspace)
                                 BackspaceKey()
                         }
-                        HStack(spacing: 0) {
-                                TransformKey(destination: .numeric, widthUnitTimes: 1.5)
-                                if context.needsInputModeSwitchKey {
+                        switch (context.keyboardInterface.isPadFloating, context.needsInputModeSwitchKey) {
+                        case (true, true):
+                                HStack(spacing: 0) {
                                         GlobeKey()
-                                } else {
-                                        LeftKey()
+                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        SpaceKey()
+                                        RightKey()
+                                        ReturnKey()
                                 }
-                                SpaceKey()
-                                RightKey()
-                                ReturnKey()
+                        case (true, false):
+                                HStack(spacing: 0) {
+                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        LeftKey()
+                                        SpaceKey()
+                                        RightKey()
+                                        ReturnKey()
+                                }
+                        case (false, true):
+                                HStack(spacing: 0) {
+                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        GlobeKey()
+                                        SpaceKey()
+                                        RightKey()
+                                        ReturnKey()
+                                }
+                        case (false, false):
+                                HStack(spacing: 0) {
+                                        TransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                        LeftKey()
+                                        SpaceKey()
+                                        RightKey()
+                                        ReturnKey()
+                                }
                         }
                 }
         }
