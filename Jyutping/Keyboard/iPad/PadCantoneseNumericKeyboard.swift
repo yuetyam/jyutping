@@ -9,8 +9,9 @@ struct PadCantoneseNumericKeyboard: View {
                         ToolBar()
                         HStack(spacing: 0 ) {
                                 Group {
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .leading,
+                                                upper: "^",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("1"),
                                                         members: [
@@ -23,8 +24,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .leading,
+                                                upper: "_",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("2"),
                                                         members: [
@@ -37,8 +39,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .leading,
+                                                upper: "｜",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("3"),
                                                         members: [
@@ -51,8 +54,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .leading,
+                                                upper: "\\",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("4"),
                                                         members: [
@@ -65,8 +69,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .leading,
+                                                upper: "<",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("5"),
                                                         members: [
@@ -79,8 +84,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .leading,
+                                                upper: ">",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("6"),
                                                         members: [
@@ -93,8 +99,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .trailing,
+                                                upper: "{",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("7"),
                                                         members: [
@@ -107,8 +114,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .trailing,
+                                                upper: "}",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("8"),
                                                         members: [
@@ -121,8 +129,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .trailing,
+                                                upper: ",",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("9"),
                                                         members: [
@@ -135,8 +144,9 @@ struct PadCantoneseNumericKeyboard: View {
                                                         ]
                                                 )
                                         )
-                                        PadExpansibleInputKey(
+                                        PadCompleteInputKey(
                                                 keyLocale: .trailing,
+                                                upper: ".",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("0"),
                                                         members: [
