@@ -24,7 +24,7 @@ struct Speech {
                 }
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                 utterance.voice = voice
-                utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.9
+                utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
                 DispatchQueue.main.async {
                         synthesizer.speak(utterance)
                 }
