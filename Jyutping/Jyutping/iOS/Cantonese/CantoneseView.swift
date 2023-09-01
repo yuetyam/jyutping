@@ -33,6 +33,9 @@ struct CantoneseView: View {
                                         NavigationLink(destination: SolarTermsView()) {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }
+                                        NavigationLink(destination: IOSSurnamesView()) {
+                                                Label("Surnames", systemImage: "person.2")
+                                        }
                                 }
                                 Section {
                                         NavigationLink(destination: IOSCantonMetroView()) {

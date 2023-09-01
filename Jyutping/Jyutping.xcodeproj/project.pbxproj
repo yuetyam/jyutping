@@ -132,6 +132,8 @@
 		37BAED4D2A0D07920069F6F3 /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAED4C2A0D07920069F6F3 /* DispatchQueueExtensions.swift */; };
 		37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BAED502A0D10FA0069F6F3 /* FontExtensions.swift */; };
 		37C042E429F5805B00F7F301 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C042E329F5805B00F7F301 /* MotherBoard.swift */; };
+		37C647F82AA1D8260092D447 /* IOSSurnamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C647F72AA1D8260092D447 /* IOSSurnamesView.swift */; };
+		37C647FA2AA1DC020092D447 /* MacSurnamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C647F92AA1DC020092D447 /* MacSurnamesView.swift */; };
 		37C8494E2A7505E500C806B5 /* ScrollViewGestureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */; };
 		37C849502A750A9000C806B5 /* ScrollViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */; };
 		37C849522A75EF7E00C806B5 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C849512A75EF7E00C806B5 /* UserLexicon.swift */; };
@@ -470,6 +472,8 @@
 		37BAED4C2A0D07920069F6F3 /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		37BAED502A0D10FA0069F6F3 /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		37C042E329F5805B00F7F301 /* MotherBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
+		37C647F72AA1D8260092D447 /* IOSSurnamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSurnamesView.swift; sourceTree = "<group>"; };
+		37C647F92AA1DC020092D447 /* MacSurnamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacSurnamesView.swift; sourceTree = "<group>"; };
 		37C8494D2A7505E500C806B5 /* ScrollViewGestureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewGestureButton.swift; sourceTree = "<group>"; };
 		37C8494F2A750A9000C806B5 /* ScrollViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewButton.swift; sourceTree = "<group>"; };
 		37C849512A75EF7E00C806B5 /* UserLexicon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
@@ -889,6 +893,7 @@
 				37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */,
 				37D7BDA9294CB9F3006A6ADD /* IOSExpressionsView.swift */,
 				37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */,
+				37C647F72AA1D8260092D447 /* IOSSurnamesView.swift */,
 				3773564929A744EA00468C2A /* IOSCantonMetroView.swift */,
 				378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */,
 				37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */,
@@ -1103,6 +1108,7 @@
 				37D7BD95294CB6C6006A6ADD /* MacIntroductionsView.swift */,
 				37D7BD96294CB6C6006A6ADD /* MacExpressionsView.swift */,
 				37AD775429D96FEC007F07D7 /* MacHansMessView.swift */,
+				37C647F92AA1DC020092D447 /* MacSurnamesView.swift */,
 				37EF195A296DBE5B00A3F4C9 /* Search */,
 				3773564B29A769D600468C2A /* Metro */,
 				37D7BD91294CB6C6006A6ADD /* MacResourcesView.swift */,
@@ -1723,6 +1729,7 @@
 				378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */,
 				37D7BD9B294CB6C6006A6ADD /* MacContentView.swift in Sources */,
 				37D7BDBC294CC3AB006A6ADD /* CantoneseView.swift in Sources */,
+				37C647F82AA1D8260092D447 /* IOSSurnamesView.swift in Sources */,
 				37D7BDB3294CB9F3006A6ADD /* AboutView.swift in Sources */,
 				37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */,
 				37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */,
@@ -1742,6 +1749,7 @@
 				37EF195C296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift in Sources */,
 				37D7BD8D294CB61F006A6ADD /* FinalTable.swift in Sources */,
 				37D7BD9D294CB6C6006A6ADD /* MacIntroductionsView.swift in Sources */,
+				37C647FA2AA1DC020092D447 /* MacSurnamesView.swift in Sources */,
 				37D7BDB7294CB9F3006A6ADD /* HomeView.swift in Sources */,
 				370AA36E297975D400A666A5 /* SearchField.swift in Sources */,
 				378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */,
@@ -2012,7 +2020,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2039,7 +2047,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2191,7 +2199,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2234,7 +2242,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2368,7 +2376,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2408,7 +2416,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 97;
+				CURRENT_PROJECT_VERSION = 98;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";

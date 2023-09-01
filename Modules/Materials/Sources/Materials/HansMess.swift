@@ -1,5 +1,4 @@
 import Foundation
-import SQLite3
 
 public struct HansMess: Hashable {
 
