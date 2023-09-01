@@ -98,6 +98,8 @@
 		37993A652A0EA2DD00BC8E35 /* SpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */; };
 		37993A672A0EA31D00BC8E35 /* BackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */; };
 		37993A692A0EA33600BC8E35 /* ShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A682A0EA33600BC8E35 /* ShiftKey.swift */; };
+		37A52D5C2AA0C6D400946E2D /* PadRightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A52D5B2AA0C6D400946E2D /* PadRightKey.swift */; };
+		37A52D5E2AA0C91400946E2D /* LargePadRightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A52D5D2AA0C91400946E2D /* LargePadRightKey.swift */; };
 		37A7EB542A91A0DE00B7CDAF /* PadLetterInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB532A91A0DE00B7CDAF /* PadLetterInputKey.swift */; };
 		37A7EB582A91A44A00B7CDAF /* PadDismissKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB572A91A44A00B7CDAF /* PadDismissKey.swift */; };
 		37A7EB5A2A91A7AD00B7CDAF /* PadBackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB592A91A7AD00B7CDAF /* PadBackspaceKey.swift */; };
@@ -432,6 +434,8 @@
 		37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceKey.swift; sourceTree = "<group>"; };
 		37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackspaceKey.swift; sourceTree = "<group>"; };
 		37993A682A0EA33600BC8E35 /* ShiftKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftKey.swift; sourceTree = "<group>"; };
+		37A52D5B2AA0C6D400946E2D /* PadRightKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadRightKey.swift; sourceTree = "<group>"; };
+		37A52D5D2AA0C91400946E2D /* LargePadRightKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadRightKey.swift; sourceTree = "<group>"; };
 		37A5D00429A888E700256042 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		37A5D00629A888F900256042 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		37A7EB532A91A0DE00B7CDAF /* PadLetterInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLetterInputKey.swift; sourceTree = "<group>"; };
@@ -817,6 +821,7 @@
 				3753F5152A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift */,
 				3753F5112A97B05700300CE5 /* LargePadLetterInputKey.swift */,
 				3753F50F2A96FDB700300CE5 /* LargePadTransformKey.swift */,
+				37A52D5D2AA0C91400946E2D /* LargePadRightKey.swift */,
 				3753F50B2A96FC8600300CE5 /* LargePadGlobeKey.swift */,
 				3753F50D2A96FD1F00300CE5 /* LargePadDismissKey.swift */,
 				3753F5052A96E10300300CE5 /* LargePadBackspaceKey.swift */,
@@ -909,6 +914,7 @@
 				37A7EB5F2A91AE6400B7CDAF /* PadGlobeKey.swift */,
 				37A7EB612A91AEF700B7CDAF /* PadSpaceKey.swift */,
 				37A7EB632A91B4B600B7CDAF /* PadTransformKey.swift */,
+				37A52D5B2AA0C6D400946E2D /* PadRightKey.swift */,
 				3773115C2A9AE63E0083B8A8 /* PadCantoneseKeyboard.swift */,
 				3773115E2A9AE6800083B8A8 /* PadABCKeyboard.swift */,
 				377311602A9AEF100083B8A8 /* PadPullableInputKey.swift */,
@@ -1603,6 +1609,7 @@
 				37DE5B962A8B60D20084C45B /* KeyModel.swift in Sources */,
 				37F85CF42A98849C0009C2C8 /* LargePadCantoneseNumericKeyboard.swift in Sources */,
 				37A7EB542A91A0DE00B7CDAF /* PadLetterInputKey.swift in Sources */,
+				37A52D5C2AA0C6D400946E2D /* PadRightKey.swift in Sources */,
 				37F85CF62A992DA50009C2C8 /* LargePadSaamPingKeyboard.swift in Sources */,
 				37B1765E2A049B6800A4E531 /* AlphabeticKeyboard.swift in Sources */,
 				3768B49E2A00CA620049D7C1 /* KeyboardLayout.swift in Sources */,
@@ -1667,6 +1674,7 @@
 				37E924702A880F31002D33B9 /* KeyLeftExpansionPath.swift in Sources */,
 				37BAED4B2A0C94A00069F6F3 /* UIReturnKeyTypeExtensions.swift in Sources */,
 				37E924722A88148D002D33B9 /* RightKey.swift in Sources */,
+				37A52D5E2AA0C91400946E2D /* LargePadRightKey.swift in Sources */,
 				37DE5B982A8C9C370084C45B /* KeyExpansionPath.swift in Sources */,
 				37BAED512A0D10FA0069F6F3 /* FontExtensions.swift in Sources */,
 				37CBD6932A42EE21003F7B68 /* StrokeKeyboard.swift in Sources */,

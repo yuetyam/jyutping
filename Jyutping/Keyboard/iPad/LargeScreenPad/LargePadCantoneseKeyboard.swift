@@ -412,7 +412,7 @@ struct LargePadCantoneseKeyboard: View {
                                 }
                                 LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
                                 PadSpaceKey()
-                                LargePadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 2.125)
+                                LargePadRightKey(widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }
                 }

@@ -69,7 +69,7 @@ struct PadCantoneseKeyboard: View {
                                 }
                                 PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
                                 PadSpaceKey()
-                                PadTransformKey(destination: .numeric, widthUnitTimes: 1.5)
+                                PadRightKey(widthUnitTimes: 1.5)
                                 PadDismissKey(widthUnitTimes: 1.5)
                         }
                 }
