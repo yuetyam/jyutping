@@ -650,6 +650,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabetic
         @Published private(set) var keyboardForm: KeyboardForm = .alphabetic
         func updateKeyboardForm(to form: KeyboardForm) {
+                if inputStage.isBuffering {
+                        inputBufferText()
+                }
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form
                 updateReturnKeyText()
