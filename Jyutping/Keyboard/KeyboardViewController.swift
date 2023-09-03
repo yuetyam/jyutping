@@ -650,8 +650,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabetic
         @Published private(set) var keyboardForm: KeyboardForm = .alphabetic
         func updateKeyboardForm(to form: KeyboardForm) {
-                if inputStage.isBuffering {
+                let shouldStayBuffering: Bool = inputMethodMode.isCantonese && (form == .alphabetic || form == .candidateBoard)
+                if inputStage.isBuffering && !shouldStayBuffering {
                         inputBufferText()
+                }
+                let currentHeight = view.frame.size.height
+                if currentHeight > 200 {
+                        keyboardHeight = currentHeight
                 }
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form
@@ -706,6 +711,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private(set) lazy var isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
 
         @Published private(set) var keyboardWidth: CGFloat = 375
+        @Published private(set) var keyboardHeight: CGFloat = 272
         @Published private(set) var widthUnit: CGFloat = 37.5
         @Published private(set) var heightUnit: CGFloat = 53
         private func updateKeyboardSize() {

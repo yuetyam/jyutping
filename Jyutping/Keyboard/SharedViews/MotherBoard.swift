@@ -8,16 +8,16 @@ struct MotherBoard: View {
                 switch context.keyboardForm {
                 case .settings:
                         if #available(iOSApplicationExtension 16.0, *) {
-                                SettingsView()
+                                SettingsView().frame(height: context.keyboardHeight)
                         } else {
-                                SettingsViewIOS15()
+                                SettingsViewIOS15().frame(height: context.keyboardHeight)
                         }
                 case .editingPanel:
-                        EditingPanel()
+                        EditingPanel().frame(height: context.keyboardHeight)
                 case .candidateBoard:
-                        CandidateBoard()
+                        CandidateBoard().frame(height: context.keyboardHeight)
                 case .emojiBoard:
-                        EmojiBoard()
+                        EmojiBoard().frame(height: context.keyboardHeight)
                 case .numeric:
                         switch context.inputMethodMode {
                         case .cantonese:
