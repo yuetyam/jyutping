@@ -1,14 +1,9 @@
 import Foundation
 
-public struct LineUnit: Hashable {
-        public let text: String
-        public let romanization: String
-}
-
-/// 百家姓
-public struct BaakGaaSing: Hashable {
+/// 千字文
+public struct CinZiMan: Hashable {
         public static func fetch() -> [LineUnit] {
-                guard let url = Bundle.module.url(forResource: "surnames", withExtension: "txt") else { return [] }
+                guard let url = Bundle.module.url(forResource: "char1000", withExtension: "txt") else { return [] }
                 guard let content: String = try? String(contentsOf: url) else { return [] }
                 let sourceLines: [String] = content
                         .trimmingCharacters(in: .whitespacesAndNewlines)

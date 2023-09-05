@@ -80,7 +80,12 @@ struct MacContentViewMonterey: View {
                                         NavigationLink {
                                                 MacSurnamesView().visualEffect()
                                         } label: {
-                                                Label("Surnames", systemImage: "person.2")
+                                                Label("title.surnames", systemImage: "person")
+                                        }
+                                        NavigationLink {
+                                                MacCinZiManView().visualEffect()
+                                        } label: {
+                                                Label("title.characters", systemImage: "character")
                                         }
                                         NavigationLink {
                                                 MacCantonMetroView().visualEffect()

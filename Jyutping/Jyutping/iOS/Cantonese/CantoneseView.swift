@@ -34,7 +34,10 @@ struct CantoneseView: View {
                                                 Label("Solar Terms", systemImage: "cloud.sun")
                                         }
                                         NavigationLink(destination: IOSSurnamesView()) {
-                                                Label("Surnames", systemImage: "person.2")
+                                                Label("Hundred Family Surnames", systemImage: "person")
+                                        }
+                                        NavigationLink(destination: IOSCinZiManView()) {
+                                                Label("Thousand Character Classic", systemImage: "character")
                                         }
                                 }
                                 Section {

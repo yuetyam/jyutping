@@ -5,7 +5,7 @@ import Materials
 
 struct MacSurnamesView: View {
 
-        @State private var surnames: [BaakGaaSing.SurnameUnit] = []
+        @State private var surnames: [LineUnit] = []
         @State private var isSurnamesLoaded: Bool = false
 
         var body: some View {
@@ -13,7 +13,7 @@ struct MacSurnamesView: View {
                         LazyVStack(alignment: .leading, spacing: 8) {
                                 HeaderTermView(term: Term(name: "百家姓", romanization: "baak3 gaa1 sing3")).block()
                                 ForEach(0..<surnames.count, id: \.self) { index in
-                                        MacSurnameUnitView(item: surnames[index])
+                                        MacLineUnitView(line: surnames[index])
                                 }
                         }
                         .padding()
@@ -23,23 +23,24 @@ struct MacSurnamesView: View {
                         surnames = BaakGaaSing.fetch()
                         isSurnamesLoaded = true
                 }
-                .navigationTitle("Surnames")
+                .animation(.default, value: surnames.count)
+                .navigationTitle("Hundred Family Surnames")
         }
 }
 
-private struct MacSurnameUnitView: View {
+struct MacLineUnitView: View {
 
-        let item: BaakGaaSing.SurnameUnit
+        let line: LineUnit
 
         var body: some View {
-                HStack(spacing: 22) {
+                HStack(spacing: 24) {
                         HStack {
-                                Speaker(item.text)
-                                Text(verbatim: item.text).font(.master)
+                                Speaker(line.text)
+                                Text(verbatim: line.text).font(.master)
                         }
                         HStack {
-                                Speaker(item.romanization)
-                                Text(verbatim: item.romanization)
+                                Speaker(line.romanization)
+                                Text(verbatim: line.romanization).font(.body.monospaced())
                         }
                         Spacer()
                 }

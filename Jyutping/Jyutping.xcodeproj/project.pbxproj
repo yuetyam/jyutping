@@ -55,6 +55,8 @@
 		3753F5142A97B42700300CE5 /* LargePadUpperLowerInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753F5132A97B42700300CE5 /* LargePadUpperLowerInputKey.swift */; };
 		3753F5162A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753F5152A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift */; };
 		3754F1962A71031400A2692A /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3754F1952A71031400A2692A /* TransformKey.swift */; };
+		375F35972AA4C838001D425A /* IOSCinZiManView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375F35962AA4C838001D425A /* IOSCinZiManView.swift */; };
+		375F35992AA4CCD4001D425A /* MacCinZiManView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375F35982AA4CCD4001D425A /* MacCinZiManView.swift */; };
 		37611CF32A27416800F3E6F9 /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37611CF22A27416800F3E6F9 /* KeyboardForm.swift */; };
 		3768795A297817F50006D0A6 /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37687959297817F50006D0A6 /* CantoneseTextView.swift */; };
 		3768795C297826780006D0A6 /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768795B297826780006D0A6 /* CantoneseTextLabel.swift */; };
@@ -384,6 +386,8 @@
 		3753F5132A97B42700300CE5 /* LargePadUpperLowerInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadUpperLowerInputKey.swift; sourceTree = "<group>"; };
 		3753F5152A97EC8B00300CE5 /* LargePadExpansibleInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargePadExpansibleInputKey.swift; sourceTree = "<group>"; };
 		3754F1952A71031400A2692A /* TransformKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
+		375F35962AA4C838001D425A /* IOSCinZiManView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSCinZiManView.swift; sourceTree = "<group>"; };
+		375F35982AA4CCD4001D425A /* MacCinZiManView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCinZiManView.swift; sourceTree = "<group>"; };
 		37611CF22A27416800F3E6F9 /* KeyboardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
 		3763DE1329E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3763DE1429E3DE4F003AED7F /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -894,6 +898,7 @@
 				37D7BDA9294CB9F3006A6ADD /* IOSExpressionsView.swift */,
 				37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */,
 				37C647F72AA1D8260092D447 /* IOSSurnamesView.swift */,
+				375F35962AA4C838001D425A /* IOSCinZiManView.swift */,
 				3773564929A744EA00468C2A /* IOSCantonMetroView.swift */,
 				378B2A7B29A76E9C00456AE8 /* IOSFatshanMetroView.swift */,
 				37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */,
@@ -1109,6 +1114,7 @@
 				37D7BD96294CB6C6006A6ADD /* MacExpressionsView.swift */,
 				37AD775429D96FEC007F07D7 /* MacHansMessView.swift */,
 				37C647F92AA1DC020092D447 /* MacSurnamesView.swift */,
+				375F35982AA4CCD4001D425A /* MacCinZiManView.swift */,
 				37EF195A296DBE5B00A3F4C9 /* Search */,
 				3773564B29A769D600468C2A /* Metro */,
 				37D7BD91294CB6C6006A6ADD /* MacResourcesView.swift */,
@@ -1732,9 +1738,11 @@
 				37C647F82AA1D8260092D447 /* IOSSurnamesView.swift in Sources */,
 				37D7BDB3294CB9F3006A6ADD /* AboutView.swift in Sources */,
 				37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */,
+				375F35972AA4C838001D425A /* IOSCinZiManView.swift in Sources */,
 				37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */,
 				37D7BD79294CB440006A6ADD /* StemsBranchesView.swift in Sources */,
 				3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */,
+				375F35992AA4CCD4001D425A /* MacCinZiManView.swift in Sources */,
 				378B2A7C29A76E9C00456AE8 /* IOSFatshanMetroView.swift in Sources */,
 				37D7BD16294CAADB006A6ADD /* JyutpingApp.swift in Sources */,
 				374B615929C1E224006C49DC /* MacToneTableView.swift in Sources */,

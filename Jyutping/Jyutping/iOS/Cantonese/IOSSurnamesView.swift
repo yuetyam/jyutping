@@ -5,7 +5,7 @@ import Materials
 
 struct IOSSurnamesView: View {
 
-        @State private var surnames: [BaakGaaSing.SurnameUnit] = []
+        @State private var surnames: [LineUnit] = []
         @State private var isSurnamesLoaded: Bool = false
 
         var body: some View {
@@ -15,7 +15,7 @@ struct IOSSurnamesView: View {
                         }
                         ForEach(0..<surnames.count, id: \.self) { index in
                                 Section {
-                                        IOSSurnameUnitView(item: surnames[index])
+                                        IOSLineUnitView(line: surnames[index])
                                 }
                         }
                 }
@@ -25,33 +25,33 @@ struct IOSSurnamesView: View {
                         isSurnamesLoaded = true
                 }
                 .textSelection(.enabled)
-                .navigationTitle("Surnames")
+                .navigationTitle("title.surnames")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }
 
-private struct IOSSurnameUnitView: View {
+struct IOSLineUnitView: View {
 
-        let item: BaakGaaSing.SurnameUnit
+        let line: LineUnit
 
         var body: some View {
                 VStack {
                         HStack {
-                                Text(verbatim: item.text)
+                                Text(verbatim: line.text)
                                         .tracking(8)
                                         .font(.title3)
                                         .minimumScaleFactor(0.4)
                                         .lineLimit(1)
                                 Spacer()
-                                Speaker(item.text)
+                                Speaker(line.text)
                         }
                         Divider()
                         HStack {
-                                Text(verbatim: item.romanization)
+                                Text(verbatim: line.romanization)
                                         .minimumScaleFactor(0.4)
                                         .lineLimit(1)
                                 Spacer()
-                                Speaker(item.romanization)
+                                Speaker(line.romanization)
                         }
                 }
         }

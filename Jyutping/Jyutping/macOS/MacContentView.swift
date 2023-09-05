@@ -47,7 +47,8 @@ struct MacContentView: View {
                                         Label("Stems and Branches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
                                         Label("Chinese Zodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
                                         Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
-                                        Label("Surnames", systemImage: "person.2").tag(ViewIdentifier.surnames)
+                                        Label("title.surnames", systemImage: "person").tag(ViewIdentifier.surnames)
+                                        Label("title.characters", systemImage: "character").tag(ViewIdentifier.cinZiMan)
                                         Label("Canton Metro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
                                         Label("Fatshan Metro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
                                         Label("Sham Chun Metro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)
@@ -92,6 +93,8 @@ struct MacContentView: View {
                                 SolarTermsView().visualEffect()
                         case .surnames:
                                 MacSurnamesView().visualEffect()
+                        case .cinZiMan:
+                                MacCinZiManView().visualEffect()
                         case .cantonMetro:
                                 MacCantonMetroView().visualEffect()
                         case .fatshanMetro:
@@ -126,6 +129,7 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case chineseZodiac
         case solarTerms
         case surnames
+        case cinZiMan
         case cantonMetro
         case fatshanMetro
         case shamchunMetro
