@@ -6,39 +6,18 @@ struct EmojiBoard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        @State private var currentCategory: Emoji.Category? = .smileysAndPeople
-
         @GestureState private var isBackspacing: Bool = false
         @State private var buffer: Int = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
-        private let frequentColumns: [[String]] = EmojiMaster.frequent.chunked(size: 5)
+        @State private var currentCategory: Emoji.Category = .smileysAndPeople
 
-        private func columns(of category: Emoji.Category) -> [[String]] {
-                guard let emojis = EmojiMaster.emojis[category] else { return [] }
-                return emojis.chunked(size: 5)
-        }
-
-        private let gridItems: [GridItem] = [
-                GridItem(.flexible()),
-                GridItem(.flexible()),
-                GridItem(.flexible()),
-                GridItem(.flexible()),
-                GridItem(.flexible())
-        ]
-        private let categories: [[String]] = {
-                var blocks: [[String]] = [EmojiMaster.frequent]
-                _ = Emoji.Category.allCases.map { category in
-                        guard let emojis = EmojiMaster.emojis[category] else { return }
-                        blocks.append(emojis)
-                }
-                return blocks
-        }()
+        private let rows: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
 
         var body: some View {
                 ScrollViewReader { proxy in
                         HStack {
-                                Text(verbatim: currentCategory?.title ?? "Frequently Used")
+                                Text(verbatim: currentCategory.title)
                                         .font(.footnote)
                                         .foregroundStyle(Color.secondary)
                                         .padding(.horizontal)
@@ -46,42 +25,25 @@ struct EmojiBoard: View {
                         }
                         .frame(height: 22)
                         ScrollView(.horizontal) {
-                                LazyHGrid(rows: gridItems) {
-                                        ForEach(0..<categories.count, id: \.self) { index in
-                                                let emojis = categories[index]
-                                                Section {
-                                                        ForEach(0..<emojis.count, id: \.self) { deepIndex in
-                                                                Text(verbatim: emojis[deepIndex]).font(.largeTitle)
-                                                        }
-                                                }
-                                                .id(index)
-                                        }
-                                }
-                                /*
-                                LazyHStack(spacing: 0) {
-                                        ForEach(0..<frequentColumns.count, id: \.self) { index in
-                                                let column = frequentColumns[index]
-                                                VStack(spacing: 0) {
-                                                        ForEach(0..<column.count, id: \.self) { deepIndex in
-                                                                Text(verbatim: column[deepIndex]).font(.largeTitle)
-                                                        }
-                                                }
-                                        }
-                                        Spacer().frame(width: 44)
+                                LazyHGrid(rows: rows) {
                                         ForEach(Emoji.Category.allCases) { category in
-                                                let emojiColumns = columns(of: category)
-                                                ForEach(0..<emojiColumns.count, id: \.self) { index in
-                                                        let column = emojiColumns[index]
-                                                        VStack(spacing: 0) {
-                                                                ForEach(0..<column.count, id: \.self) { deepIndex in
-                                                                        Text(verbatim: column[deepIndex]).font(.largeTitle)
+                                                if let emojis: [Emoji] = EmojiMaster.emojis[category] {
+                                                        Section {
+                                                                ForEach(emojis) { emoji in
+                                                                        ScrollViewButton {
+                                                                                AudioFeedback.inputed()
+                                                                                context.triggerSelectionHapticFeedback()
+                                                                                context.operate(.input(emoji.text))
+                                                                                EmojiMaster.updateFrequent(latest: emoji.text)
+                                                                        } label: {
+                                                                                Text(verbatim: emoji.text).font(.largeTitle)
+                                                                        }
                                                                 }
                                                         }
+                                                        .id(category)
                                                 }
-                                                Spacer().frame(width: 44)
                                         }
                                 }
-                                */
                         }
                         .frame(maxHeight: .infinity)
                         HStack(spacing: 0) {
@@ -104,64 +66,64 @@ struct EmojiBoard: View {
                                         EmojiIndicator(index: 0, imageName: "clock") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
-                                                currentCategory = nil
-                                                proxy.scrollTo(0)
+                                                currentCategory = .frequent
+                                                proxy.scrollTo(Emoji.Category.frequent)
                                         }
-                                        .foregroundStyle((currentCategory == nil) ? Color.primary : Color.secondary)
+                                        .foregroundStyle((currentCategory == .frequent) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 1, imageName: "EmojiSmiley") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .smileysAndPeople
-                                                proxy.scrollTo(1)
+                                                proxy.scrollTo(Emoji.Category.smileysAndPeople)
                                         }
                                         .foregroundStyle((currentCategory == .smileysAndPeople) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 2, imageName: "hare") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .animalsAndNature
-                                                proxy.scrollTo(2)
+                                                proxy.scrollTo(Emoji.Category.animalsAndNature)
                                         }
                                         .foregroundStyle((currentCategory == .animalsAndNature) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 3, imageName: "EmojiCategoryFoodAndDrink") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .foodAndDrink
-                                                proxy.scrollTo(3)
+                                                proxy.scrollTo(Emoji.Category.foodAndDrink)
                                         }
                                         .foregroundStyle((currentCategory == .foodAndDrink) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 4, imageName: footballImageName) {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .activity
-                                                proxy.scrollTo(4)
+                                                proxy.scrollTo(Emoji.Category.activity)
                                         }
                                         .foregroundStyle((currentCategory == .activity) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 5, imageName: "EmojiCategoryTravelAndPlaces") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .travelAndPlaces
-                                                proxy.scrollTo(5)
+                                                proxy.scrollTo(Emoji.Category.travelAndPlaces)
                                         }
                                         .foregroundStyle((currentCategory == .travelAndPlaces) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 6, imageName: "lightbulb") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .objects
-                                                proxy.scrollTo(6)
+                                                proxy.scrollTo(Emoji.Category.objects)
                                         }
                                         .foregroundStyle((currentCategory == .objects) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 7, imageName: "EmojiCategorySymbols") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .symbols
-                                                proxy.scrollTo(7)
+                                                proxy.scrollTo(Emoji.Category.symbols)
                                         }
                                         .foregroundStyle((currentCategory == .symbols) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 8, imageName: "flag") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .flags
-                                                proxy.scrollTo(8)
+                                                proxy.scrollTo(Emoji.Category.flags)
                                         }
                                         .foregroundStyle((currentCategory == .flags) ? Color.primary : Color.secondary)
                                 }
@@ -210,4 +172,29 @@ struct EmojiBoard: View {
                         return "EmojiCategoryActivity"
                 }
         }()
+}
+
+private extension Emoji.Category {
+        var title: String {
+                switch self {
+                case .frequent:
+                        return "Frequently Used"
+                case .smileysAndPeople:
+                        return "Smileys & People"
+                case .animalsAndNature:
+                        return "Animals & Nature"
+                case .foodAndDrink:
+                        return "Food & Drink"
+                case .activity:
+                        return "Activity"
+                case .travelAndPlaces:
+                        return "Travel & Places"
+                case .objects:
+                        return "Objects"
+                case .symbols:
+                        return "Symbols"
+                case .flags:
+                        return "Flags"
+                }
+        }
 }

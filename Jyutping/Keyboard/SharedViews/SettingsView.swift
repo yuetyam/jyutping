@@ -333,6 +333,7 @@ struct SettingsView: View {
                                                                 clearUserLexiconProgress = 0
                                                                 isPerformingClearUserLexicon = true
                                                                 UserLexicon.deleteAll()
+                                                                EmojiMaster.clearFrequent()
                                                         } label: {
                                                                 Label("Clear User Lexicon", systemImage: "trash")
                                                         }
@@ -351,7 +352,7 @@ struct SettingsView: View {
                                                 if clearUserLexiconProgress > 1 {
                                                         isPerformingClearUserLexicon = false
                                                 } else {
-                                                        clearUserLexiconProgress += 0.05
+                                                        clearUserLexiconProgress += 0.1
                                                 }
                                         }
                                 }

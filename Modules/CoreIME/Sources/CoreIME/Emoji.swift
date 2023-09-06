@@ -1,8 +1,9 @@
 import Foundation
 import SQLite3
 
-public struct Emoji: Hashable {
+public struct Emoji: Hashable, Identifiable {
         public enum Category: Int, Hashable, CaseIterable, Identifiable {
+                case frequent = 0
                 case smileysAndPeople = 1
                 case animalsAndNature = 2
                 case foodAndDrink = 3
@@ -14,31 +15,29 @@ public struct Emoji: Hashable {
                 public var id: Int {
                         return self.rawValue
                 }
-                public var title: String {
-                        switch self {
-                        case .smileysAndPeople:
-                                return "Smileys & People"
-                        case .animalsAndNature:
-                                return "Animals & Nature"
-                        case .foodAndDrink:
-                                return "Food & Drink"
-                        case .activity:
-                                return "Activity"
-                        case .travelAndPlaces:
-                                return "Travel & Places"
-                        case .objects:
-                                return "Objects"
-                        case .symbols:
-                                return "Symbols"
-                        case .flags:
-                                return "Flags"
-                        }
-                }
         }
         public let category: Category
+        public let uniqueNumber: Int
         public let text: String
         public let cantonese: String
         public let romanization: String
+        public var id: Int {
+                return uniqueNumber
+        }
+
+        public static func ==(lhs: Emoji, rhs: Emoji) -> Bool {
+                return (lhs.category == rhs.category) && (lhs.text == rhs.text)
+        }
+        public func hash(into hasher: inout Hasher) {
+                hasher.combine(category)
+                hasher.combine(text)
+        }
+}
+
+extension Emoji {
+        public static func generateFrequentEmoji(with text: String, uniqueNumber: Int) -> Emoji {
+                return Emoji(category: .frequent, uniqueNumber: uniqueNumber, text: text, cantonese: "", romanization: "")
+        }
 }
 
 extension Engine {
@@ -52,17 +51,19 @@ extension Engine {
                         guard let categoryCode = category?.rawValue else { return "" }
                         return " WHERE category = \(categoryCode)"
                 }()
-                let query = "SELECT category, codepoint, cantonese, romanization FROM symboltable\(tailQueryText);"
+                let query = "SELECT rowid, category, codepoint, cantonese, romanization FROM symboltable\(tailQueryText);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK else { return emojis }
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let categoryCode: Int = Int(sqlite3_column_int64(statement, 0))
-                        let codepoint: String = String(cString: sqlite3_column_text(statement, 1))
-                        let cantonese: String = String(cString: sqlite3_column_text(statement, 2))
-                        let romanization: String = String(cString: sqlite3_column_text(statement, 3))
+                        let rowid: Int = Int(sqlite3_column_int64(statement, 0))
+                        let categoryCode: Int = Int(sqlite3_column_int64(statement, 1))
+                        let codepoint: String = String(cString: sqlite3_column_text(statement, 2))
+                        let cantonese: String = String(cString: sqlite3_column_text(statement, 3))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 4))
+                        let uniqueNumber: Int = 10000 + rowid
                         if let category = Emoji.Category(rawValue: categoryCode), let text = generateSymbol(from: codepoint) {
-                                let emoji = Emoji(category: category, text: text, cantonese: cantonese, romanization: romanization)
+                                let emoji = Emoji(category: category, uniqueNumber: uniqueNumber, text: text, cantonese: cantonese, romanization: romanization)
                                 emojis.append(emoji)
                         }
                 }
