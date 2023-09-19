@@ -32,10 +32,10 @@ extension String {
         /// U+200B
         public static let zeroWidthSpace: String = "\u{200B}"
 
-        /// U+3000. Ideographic Space. 全形空格
+        /// U+3000. Ideographic Space. 全寬空格
         public static let fullWidthSpace: String = "\u{3000}"
 
-        /// U+30FB. 全形中點
+        /// U+30FB. 全寬中點
         public static let centerDot: String = "\u{30FB}"
 }
 

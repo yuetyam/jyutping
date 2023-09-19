@@ -693,7 +693,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case .lowercased:
                                 return isSimplified ? "粤拼·简化字" : "粵拼"
                         case .uppercased:
-                                return "全形空格"
+                                return isSimplified ? "全宽空格" : "全寬空格"
                         case .capsLocked:
                                 return isSimplified ? "大写锁定" : "大寫鎖定"
                         }

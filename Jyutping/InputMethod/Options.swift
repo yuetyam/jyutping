@@ -25,7 +25,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CharacterStandard)
         }
 
-        /// 半形／全形數字、字母
+        /// 半寬／全寬數字、字母
         private(set) static var characterForm: CharacterForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterForm)
                 switch savedValue {
@@ -113,7 +113,7 @@ private struct OptionsKey {
         static let InputMethodMode: String = "InputMethodMode"
 }
 
-/// 半形／全形數字、字母
+/// 半寬／全寬數字、字母
 enum CharacterForm: Int {
         case halfWidth = 1
         case fullWidth = 2

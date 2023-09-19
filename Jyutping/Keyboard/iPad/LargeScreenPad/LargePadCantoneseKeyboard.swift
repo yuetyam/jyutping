@@ -19,7 +19,7 @@ struct LargePadCantoneseKeyboard: View {
                                                         primary: KeyElement("～"),
                                                         members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半形")
+                                                                KeyElement("~", header: "半寬")
                                                         ]
                                                 )
                                         )
@@ -30,7 +30,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("！"),
                                                                 members: [
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", header: "半形")
+                                                                        KeyElement("!", header: "半寬")
                                                                 ]
                                                         )
                                                 )
@@ -40,7 +40,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("@"),
                                                                 members: [
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", header: "全形")
+                                                                        KeyElement("＠", header: "全寬")
                                                                 ]
                                                         )
                                                 )
@@ -50,7 +50,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("#"),
                                                                 members: [
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", header: "全形")
+                                                                        KeyElement("＃", header: "全寬")
                                                                 ]
                                                         )
                                                 )
@@ -75,7 +75,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("%"),
                                                                 members: [
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: "全形"),
+                                                                        KeyElement("％", header: "全寬"),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
@@ -96,7 +96,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("&"),
                                                                 members: [
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: "全形"),
+                                                                        KeyElement("＆", header: "全寬"),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
@@ -107,7 +107,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: "全形")
+                                                                        KeyElement("＊", header: "全寬")
                                                                 ]
                                                         )
                                                 )
@@ -117,7 +117,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("（"),
                                                                 members: [
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", header: "半形")
+                                                                        KeyElement("(", header: "半寬")
                                                                 ]
                                                         )
                                                 )
@@ -127,7 +127,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 primary: KeyElement("）"),
                                                                 members: [
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", header: "半形")
+                                                                        KeyElement(")", header: "半寬")
                                                                 ]
                                                         )
                                                 )
@@ -148,7 +148,7 @@ struct LargePadCantoneseKeyboard: View {
                                                         primary: KeyElement("+"),
                                                         members: [
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: "全形")
+                                                                KeyElement("＋", header: "全寬")
                                                         ]
                                                 )
                                         )
@@ -165,7 +165,7 @@ struct LargePadCantoneseKeyboard: View {
                                                         members: [
                                                                 KeyElement("·", header: "間隔號", footer: "00B7"),
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半形"),
+                                                                KeyElement("~", header: "半寬"),
                                                                 KeyElement("•", header: "Bullet", footer: "2022"),
                                                                 KeyElement("‧", footer: "2027"),
                                                                 KeyElement("・", header: "中點", footer: "30FB"),
@@ -183,7 +183,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("1"),
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", header: "半形")
+                                                                        KeyElement("!", header: "半寬")
                                                                 ]
                                                         )
                                                 )
@@ -196,7 +196,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("2"),
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", header: "全形")
+                                                                        KeyElement("＠", header: "全寬")
                                                                 ]
                                                         )
                                                 )
@@ -209,7 +209,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("3"),
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", header: "全形")
+                                                                        KeyElement("＃", header: "全寬")
                                                                 ]
                                                         )
                                                 )
@@ -234,7 +234,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("5"),
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: "全形"),
+                                                                        KeyElement("％", header: "全寬"),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
@@ -261,7 +261,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("7"),
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: "全形"),
+                                                                        KeyElement("＆", header: "全寬"),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
@@ -275,7 +275,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("8"),
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: "全形")
+                                                                        KeyElement("＊", header: "全寬")
                                                                 ]
                                                         )
                                                 )
@@ -288,7 +288,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("9"),
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", header: "半形")
+                                                                        KeyElement("(", header: "半寬")
                                                                 ]
                                                         )
                                                 )
@@ -301,7 +301,7 @@ struct LargePadCantoneseKeyboard: View {
                                                                 members: [
                                                                         KeyElement("0"),
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", header: "半形")
+                                                                        KeyElement(")", header: "半寬")
                                                                 ]
                                                         )
                                                 )
@@ -328,8 +328,8 @@ struct LargePadCantoneseKeyboard: View {
                                                         members: [
                                                                 KeyElement("="),
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: "全形"),
-                                                                KeyElement("＝", header: "全形")
+                                                                KeyElement("＋", header: "全寬"),
+                                                                KeyElement("＝", header: "全寬")
                                                         ]
                                                 )
                                         )
@@ -353,11 +353,11 @@ struct LargePadCantoneseKeyboard: View {
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: "縱書")]))
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("﹃", header: "縱書")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: "半形")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: "半寬")]))
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: "縱書")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半形")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬")]))
                                 }
                         }
                         HStack(spacing: 0) {
@@ -374,7 +374,7 @@ struct LargePadCantoneseKeyboard: View {
                                         LargePadLetterInputKey("l")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: "半形")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: "半寬")]))
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\"", footer: "0022"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("：")]))
@@ -394,13 +394,13 @@ struct LargePadCantoneseKeyboard: View {
                                         LargePadLetterInputKey("m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: "全形")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", header: "全形")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半形")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: "全寬")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", header: "全寬")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半寬")]))
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "《", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("《")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "》", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", header: "全形")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", header: "全寬")]))
                                 }
                                 LargePadShiftKey(keyLocale: .trailing, widthUnitTimes: 2.25)
                         }
