@@ -36,9 +36,7 @@ struct IMEDBHandler {
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                guard let url = Bundle.module.url(forResource: "lexicon", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
-                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+                let sourceLines: [String] = Jyutping2Lexicon.convert()
                 func insert(values: String) {
                         let insert: String = "INSERT INTO lexicontable (word, romanization, shortcut, ping) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
