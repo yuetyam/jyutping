@@ -45,7 +45,7 @@ struct CandidateScrollBar: View {
                                                                                                 .lineLimit(1)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 14)
+                                                                                .padding(.bottom, 16)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(verbatim: candidate.text)
@@ -55,14 +55,14 @@ struct CandidateScrollBar: View {
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 12)
+                                                                                .padding(.bottom, 14)
                                                                         case .noComments:
                                                                                 Text(verbatim: candidate.text)
                                                                                         .font(.candidate)
                                                                                         .minimumScaleFactor(0.4)
                                                                                         .lineLimit(1)
                                                                                         .padding(.horizontal, 1)
-                                                                                        .padding(.bottom, 8)
+                                                                                        .padding(.bottom, 10)
                                                                         }
                                                                 }
                                                                 .frame(width: candidate.width)
