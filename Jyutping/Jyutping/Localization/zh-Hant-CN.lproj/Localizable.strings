@@ -51,7 +51,7 @@
 
 "Text to Speech" = "文字語音朗讀";
 "tts.notice.0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
-"tts.notice.1" = "如果本設備處於靜音模式，文字語音朗讀會冇聲音。";
+"tts.notice.1" = "如果本設備處於靜音模式，文字語音朗讀可能會冇聲音。";
 "tts.notice.2" = "爲保證發音質素，請到 **設定** → **一般** → **語言與地區** 度，添加 **繁體中文(香港)** 語言。";
 "tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
 "faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
@@ -60,16 +60,16 @@
 "Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
 "What does “Allow Full Access” do?" = "開啓「全權取用」作何用？";
-"Enable a button on the keyboard for pasting texts from Clipboard" = "開啓之後，鍵盤上部會多一個「帖上」掣，方便一鍵帖上剪帖板內容";
+"Enable a button on the keyboard for pasting texts from Clipboard" = "鍵盤個「帖上」掣，需要開啓權限，先可以獲得剪帖板內容";
 "Haptic Feedback" = "振動回應（Haptic Feedback）";
-"Paste texts from Clipboard" = "鍵盤上部會有個「帖上」掣";
+"Paste texts from Clipboard" = "鍵盤個「帖上」掣";
 "All other features don't require Full Access" = "毋開啓「全權取用」毋會影響使用其他功能";
 
 "Privacy Notice" = "私隱佈告";
 "privacy.notice.1" = "鍵盤全程毋會訪問網絡";
 "privacy.notice.2" = "鍵盤係完全獨立嘅，同主應用程式之間毋會進行任何交流、分享";
-"privacy.notice.3" = "開啓「全權取用」權限僅用作提供振動回應功能";
-"privacy.notice.4" = "鍵盤上部個「帖上」掣毋會收集任何剪帖板內容";
+"privacy.notice.3" = "開啓「全權取用」權限係用來提供振動回應";
+"privacy.notice.4" = "鍵盤個「帖上」掣毋會收集任何剪帖板內容";
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 
