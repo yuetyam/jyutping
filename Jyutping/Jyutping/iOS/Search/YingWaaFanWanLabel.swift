@@ -26,7 +26,7 @@ struct YingWaaFanWanLabel: View {
                                 }
                                 Text(verbatim: entry.ipa).font(.body).foregroundColor(.secondary)
                                 Spacer()
-                                Speaker(entry.jyutping)
+                                Speaker(entry.jyutping).opacity(entry.romanization.isValidJyutping ? 1 : 0)
                         }
                 }
                 .font(.copilot)

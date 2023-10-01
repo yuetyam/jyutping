@@ -96,6 +96,7 @@
 		37942C7A29BD7FFB00667A58 /* MacHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */; };
 		37942C7C29BD81B700667A58 /* IOSShamChunMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */; };
 		37942C7E29BD81EF00667A58 /* IOSHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37942C7D29BD81EF00667A58 /* IOSHongKongMTRView.swift */; };
+		37962AE92AC962A600C6C98A /* SyllableChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37962AE82AC962A600C6C98A /* SyllableChecker.swift */; };
 		37993A632A0EA2C700BC8E35 /* ReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A622A0EA2C700BC8E35 /* ReturnKey.swift */; };
 		37993A652A0EA2DD00BC8E35 /* SpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */; };
 		37993A672A0EA31D00BC8E35 /* BackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */; };
@@ -436,6 +437,7 @@
 		37942C7929BD7FFB00667A58 /* MacHongKongMTRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHongKongMTRView.swift; sourceTree = "<group>"; };
 		37942C7B29BD81B700667A58 /* IOSShamChunMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSShamChunMetroView.swift; sourceTree = "<group>"; };
 		37942C7D29BD81EF00667A58 /* IOSHongKongMTRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHongKongMTRView.swift; sourceTree = "<group>"; };
+		37962AE82AC962A600C6C98A /* SyllableChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyllableChecker.swift; sourceTree = "<group>"; };
 		37993A622A0EA2C700BC8E35 /* ReturnKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnKey.swift; sourceTree = "<group>"; };
 		37993A642A0EA2DD00BC8E35 /* SpaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceKey.swift; sourceTree = "<group>"; };
 		37993A662A0EA31D00BC8E35 /* BackspaceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackspaceKey.swift; sourceTree = "<group>"; };
@@ -1100,6 +1102,7 @@
 				37D7BD86294CB61F006A6ADD /* IOSToneTableView.swift */,
 				374B615829C1E224006C49DC /* MacToneTableView.swift */,
 				37D7BD5A294CB182006A6ADD /* Syllable2IPA.swift */,
+				37962AE82AC962A600C6C98A /* SyllableChecker.swift */,
 			);
 			path = Linguistics;
 			sourceTree = "<group>";
@@ -1730,6 +1733,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */,
+				37962AE92AC962A600C6C98A /* SyllableChecker.swift in Sources */,
 				37D7BD67294CB212006A6ADD /* FontExtensions.swift in Sources */,
 				37D7BD68294CB212006A6ADD /* ViewExtensions.swift in Sources */,
 				378B2A7829A76DC000456AE8 /* IOSMetroStationLabel.swift in Sources */,
