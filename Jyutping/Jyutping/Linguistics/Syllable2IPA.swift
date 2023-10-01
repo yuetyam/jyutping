@@ -85,9 +85,9 @@ struct Syllable2IPA {
                 // "gw": "kʷ",
                 // "kw": "kʷʰ",
                 "w": "w",
-                "z": "t͡ʃ",
-                "c": "t͡ʃʰ",
-                "s": "ʃ",
+                "z": "t͡s",
+                "c": "t͡sʰ",
+                "s": "s",
                 "j": "j"
         ]
         private static let FinalMap: [String: String] = [
