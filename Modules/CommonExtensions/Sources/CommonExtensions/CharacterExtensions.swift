@@ -97,6 +97,8 @@ extension Character {
                         return true
                 case 0x31350...0x323AF:
                         return true
+                case 0x2EBF0...0x2EE5F:
+                        return true
                 default:
                         return false
                 }
@@ -114,4 +116,5 @@ U+2B820-U+2CEAF: CJK Unified Ideographs Extension E
 U+2CEB0-U+2EBEF: CJK Unified Ideographs Extension F
 U+30000-U+3134F: CJK Unified Ideographs Extension G
 U+31350-U+323AF: CJK Unified Ideographs Extension H
+U+2EBF0-U+2EE5F: CJK Unified Ideographs Extension I
 */
