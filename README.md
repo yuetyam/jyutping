@@ -46,7 +46,7 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 
 ## 如何構建（How to build）
 前置要求（Build requirements）
-- macOS 13.0+
+- macOS 14.0+
 - Xcode 15.0+
 
 倉庫體積比較大，建議加 `--depth` 來 clone。
@@ -65,7 +65,7 @@ swift run -c release
 
 `Jyutping` 係正常App，`Keyboard` 係 iOS Keyboard Extension，`InputMethod` 係 macOS 輸入法。
 
-注意事項: 毋好直接 Run `InputMethod`，只可以 Build 或 Archive。
+注意事項: 毋好直接 Run `InputMethod`，只可以 Build 或 [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
 
 ## 鳴謝（Credits）
 - [Rime-Cantonese](https://github.com/rime/rime-cantonese)
