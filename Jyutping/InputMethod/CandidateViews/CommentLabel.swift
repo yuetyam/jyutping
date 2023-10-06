@@ -75,7 +75,7 @@ private struct ModifiedCommentView: View {
                                 Text(verbatim: leadingText).font(.comment)
                                 Text(verbatim: syllable.tone)
                                         .font(shouldApplyToneFont ? .commentTone : .comment)
-                                        .foregroundColor(toneForeColor)
+                                        .foregroundStyle(toneForeColor)
                         }
                 }
         }

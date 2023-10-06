@@ -49,7 +49,7 @@ struct PadCangjieInputKey: View {
                                 Color.clear
                                 Text(verbatim: letter)
                                         .font(.footnote)
-                                        .foregroundColor(.secondary)
+                                        .foregroundStyle(Color.secondary)
                                         .padding(8)
                         }
                         Text(verbatim: radical)

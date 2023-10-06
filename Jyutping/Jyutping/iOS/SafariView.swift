@@ -70,15 +70,15 @@ struct ExtendedLinkLabel: View {
                         Label {
                                 HStack {
                                         VStack(alignment: .leading, spacing: 1) {
-                                                Text(verbatim: title).foregroundColor(.primary)
+                                                Text(verbatim: title).foregroundStyle(Color.primary)
                                                 Text(verbatim: footnote)
                                                         .minimumScaleFactor(0.5)
                                                         .lineLimit(1)
                                                         .font(.caption2)
-                                                        .foregroundColor(.secondary)
+                                                        .foregroundStyle(Color.secondary)
                                         }
                                         Spacer()
-                                        Image(systemName: symbol).foregroundColor(.secondary)
+                                        Image(systemName: symbol).foregroundStyle(Color.secondary)
                                 }
                         } icon: {
                                 Image(systemName: icon)

@@ -96,7 +96,7 @@ struct RightKey: View {
                                         Color.clear
                                         Text(verbatim: "分隔")
                                                 .font(.keyFooter)
-                                                .foregroundColor(.secondary)
+                                                .foregroundStyle(Color.secondary)
                                                 .padding(.bottom, 8)
                                 }
                                 .opacity(context.inputStage.isBuffering ? 1 : 0)

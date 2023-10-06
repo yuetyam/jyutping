@@ -118,7 +118,7 @@ struct PadCompleteInputKey: View {
                                                 Color.clear
                                                 Text(verbatim: keyModel.primary.header ?? String.space)
                                                         .font(.keyFooter)
-                                                        .foregroundColor(.secondary)
+                                                        .foregroundStyle(Color.secondary)
                                                         .padding(.trailing, 8)
                                                         .padding(.top, 8)
                                         }
@@ -126,7 +126,7 @@ struct PadCompleteInputKey: View {
                                                 Color.clear
                                                 Text(verbatim: keyModel.primary.footer ?? String.space)
                                                         .font(.keyFooter)
-                                                        .foregroundColor(.secondary)
+                                                        .foregroundStyle(Color.secondary)
                                                         .padding(.trailing, 8)
                                                         .padding(.bottom, 8)
                                         }

@@ -17,7 +17,7 @@ struct CantoneseTextView: View {
                 HStack(spacing: 16) {
                         Text(verbatim: text)
                         if let unicode {
-                                Text(verbatim: unicode).font(.fixedWidth).foregroundColor(.secondary)
+                                Text(verbatim: unicode).font(.fixedWidth).foregroundStyle(Color.secondary)
                         }
                         Spacer()
                         Speaker(text)

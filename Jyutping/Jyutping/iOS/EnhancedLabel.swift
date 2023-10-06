@@ -17,13 +17,13 @@ struct EnhancedLabel: View {
         var body: some View {
                 HStack {
                         Label {
-                                Text(title).foregroundColor(.primary)
+                                Text(title).foregroundStyle(Color.primary)
                         } icon: {
-                                Image(systemName: icon).foregroundColor(.blue)
+                                Image(systemName: icon).foregroundStyle(Color.accentColor)
                         }
                         Spacer()
-                        message?.foregroundColor(.primary)
-                        symbol?.foregroundColor(.secondary)
+                        message?.foregroundStyle(Color.primary)
+                        symbol?.foregroundStyle(Color.secondary)
                 }
         }
 }

@@ -31,7 +31,7 @@ struct RomanizationLabelView: View {
                 HStack(spacing: 16) {
                         Text(verbatim: romanization).font(.title3.monospaced())
                         if let ipa {
-                                Text(verbatim: ipa).font(.title3).foregroundColor(.secondary)
+                                Text(verbatim: ipa).font(.title3).foregroundStyle(Color.secondary)
                         }
                         if let note {
                                 Text(verbatim: note).font(.copilot)

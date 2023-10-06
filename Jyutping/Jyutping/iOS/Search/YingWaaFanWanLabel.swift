@@ -24,7 +24,7 @@ struct YingWaaFanWanLabel: View {
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.fixedWidth)
                                 }
-                                Text(verbatim: entry.ipa).font(.body).foregroundColor(.secondary)
+                                Text(verbatim: entry.ipa).font(.body).foregroundStyle(Color.secondary)
                                 Spacer()
                                 Speaker(entry.jyutping).opacity(entry.romanization.isValidJyutping ? 1 : 0)
                         }

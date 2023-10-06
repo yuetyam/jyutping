@@ -62,7 +62,7 @@ struct CangjieInputKey: View {
                                         Color.clear
                                         Text(verbatim: letter)
                                                 .font(.footnote)
-                                                .foregroundColor(.secondary)
+                                                .foregroundStyle(Color.secondary)
                                                 .padding(5)
                                 }
                                 Text(verbatim: radical)

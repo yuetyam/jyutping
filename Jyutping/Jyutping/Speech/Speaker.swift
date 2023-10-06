@@ -46,7 +46,7 @@ struct Speaker: View {
                                 .scaledToFit()
                                 .padding(.leading, speakingLeading)
                                 .frame(width: length, height: length)
-                                .foregroundColor(.blue)
+                                .foregroundStyle(Color.accentColor)
                                 .onTapGesture {
                                         Speech.stop()
                                         isSpeaking = false
@@ -58,12 +58,12 @@ struct Speaker: View {
                                 }
                 } else {
                         ZStack {
-                                Circle().foregroundColor(background)
+                                Circle().foregroundStyle(background)
                                 Image.speaker
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: speakerLength, height: speakerLength)
-                                        .foregroundColor(.blue)
+                                        .foregroundStyle(Color.accentColor)
                         }
                         .frame(width: length, height: length)
                         .contentShape(Rectangle())

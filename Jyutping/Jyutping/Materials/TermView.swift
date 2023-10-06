@@ -21,7 +21,7 @@ struct TermView: View {
                                 Text(verbatim: emoji).font(.title3)
                         }
                         if let comment = term.comment {
-                                Text(verbatim: comment).font(.copilot).foregroundColor(.secondary)
+                                Text(verbatim: comment).font(.copilot).foregroundStyle(Color.secondary)
                         }
                         Spacer()
                 }
@@ -41,7 +41,7 @@ struct TermView: View {
                                 Text(verbatim: emoji)
                         }
                         if let comment = term.comment {
-                                Text(verbatim: comment).font(.copilot).foregroundColor(.secondary)
+                                Text(verbatim: comment).font(.copilot).foregroundStyle(Color.secondary)
                         }
                         Spacer()
                 }

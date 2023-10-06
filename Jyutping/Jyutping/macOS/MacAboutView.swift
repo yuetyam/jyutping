@@ -11,7 +11,7 @@ struct MacAboutView: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 16, height: 16)
-                                                .foregroundColor(.blue)
+                                                .foregroundStyle(Color.accentColor)
                                         Text("Version").font(.master)
                                         Text(verbatim: AppMaster.version)
                                         Spacer()

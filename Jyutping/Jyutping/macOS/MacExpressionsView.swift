@@ -16,7 +16,7 @@ struct MacExpressionsView: View {
                                                                         Speaker("我")
                                                                 }
                                                         } icon: {
-                                                                Image.checkmark.foregroundColor(.green)
+                                                                Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
                                                                 HStack(spacing: 8) {
@@ -24,12 +24,12 @@ struct MacExpressionsView: View {
                                                                         Speaker("我哋")
                                                                 }
                                                         } icon: {
-                                                                Image.checkmark.foregroundColor(.green)
+                                                                Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
                                                                 Text(verbatim: "毋用「咱、咱們」")
                                                         } icon: {
-                                                                Image.warning.foregroundColor(.orange)
+                                                                Image.warning.foregroundStyle(Color.orange)
                                                         }
                                                 }
                                                 Spacer()
@@ -44,7 +44,7 @@ struct MacExpressionsView: View {
                                                                         Speaker("你")
                                                                 }
                                                         } icon: {
-                                                                Image.checkmark.foregroundColor(.green)
+                                                                Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
                                                                 HStack(spacing: 8) {
@@ -52,17 +52,17 @@ struct MacExpressionsView: View {
                                                                         Speaker("你哋")
                                                                 }
                                                         } icon: {
-                                                                Image.checkmark.foregroundColor(.green)
+                                                                Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
                                                                 Text(verbatim: "毋用「您」。「您」係北京方言用字，好少見於其他漢語。如果要用敬詞，粵語一般用「閣下」。")
                                                         } icon: {
-                                                                Image.warning.foregroundColor(.orange)
+                                                                Image.warning.foregroundStyle(Color.orange)
                                                         }
                                                         Label {
                                                                 Text(verbatim: "毋推薦用「妳」，冇必要畫蛇添足。")
                                                         } icon: {
-                                                                Image.warning.foregroundColor(.orange)
+                                                                Image.warning.foregroundStyle(Color.orange)
                                                         }
                                                 }
                                                 Spacer()
@@ -77,7 +77,7 @@ struct MacExpressionsView: View {
                                                                         Speaker("佢")
                                                                 }
                                                         } icon: {
-                                                                Image.checkmark.foregroundColor(.green)
+                                                                Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
                                                                 HStack(spacing: 8) {
@@ -85,17 +85,17 @@ struct MacExpressionsView: View {
                                                                         Speaker("佢哋")
                                                                 }
                                                         } icon: {
-                                                                Image.checkmark.foregroundColor(.green)
+                                                                Image.checkmark.foregroundStyle(Color.green)
                                                         }
                                                         Label {
                                                                 Text(verbatim: "毋分性別、人、物，一律用佢。")
                                                         } icon: {
-                                                                Image.warning.foregroundColor(.orange)
+                                                                Image.warning.foregroundStyle(Color.orange)
                                                         }
                                                         Label {
                                                                 Text(verbatim: "佢 亦作 渠、𠍲")
                                                         } icon: {
-                                                                Image.info.foregroundColor(.primary)
+                                                                Image.info.foregroundStyle(Color.primary)
                                                         }
                                                 }
                                                 Spacer()
@@ -214,22 +214,22 @@ struct MacExpressionsView: View {
                                                 Label {
                                                         Text(verbatim: "下個禮拜會出啩。")
                                                 } icon: {
-                                                        Image.checkmark.foregroundColor(.green)
+                                                        Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
                                                         Text(verbatim: "毋係啊嘛，真係冇？")
                                                 } icon: {
-                                                        Image.checkmark.foregroundColor(.green)
+                                                        Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
                                                         Text(verbatim: "下個禮拜會出吧。")
                                                 } icon: {
-                                                        Image.xmark.foregroundColor(.red)
+                                                        Image.xmark.foregroundStyle(Color.red)
                                                 }
                                                 Label {
                                                         Text(verbatim: "毋係吧，真係冇？")
                                                 } icon: {
-                                                        Image.xmark.foregroundColor(.red)
+                                                        Image.xmark.foregroundStyle(Color.red)
                                                 }
                                         }
                                         Spacer()
@@ -242,22 +242,22 @@ struct MacExpressionsView: View {
                                                 Label {
                                                         Text(verbatim: "各位，我毋客氣啦。")
                                                 } icon: {
-                                                        Image.checkmark.foregroundColor(.green)
+                                                        Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
                                                         Text(verbatim: "係嘞，你試過箇間餐廳未啊？")
                                                 } icon: {
-                                                        Image.checkmark.foregroundColor(.green)
+                                                        Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
                                                         Text(verbatim: "各位，我毋客氣了。")
                                                 } icon: {
-                                                        Image.xmark.foregroundColor(.red)
+                                                        Image.xmark.foregroundStyle(Color.red)
                                                 }
                                                 Label {
                                                         Text(verbatim: "係了，你試過箇間餐廳未啊？")
                                                 } icon: {
-                                                        Image.xmark.foregroundColor(.red)
+                                                        Image.xmark.foregroundStyle(Color.red)
                                                 }
                                         }
                                         Spacer()
@@ -270,17 +270,17 @@ struct MacExpressionsView: View {
                                                 Label {
                                                         Text(verbatim: "毋使驚")
                                                 } icon: {
-                                                        Image.checkmark.foregroundColor(.green)
+                                                        Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
                                                         Text(verbatim: "毋駛驚")
                                                 } icon: {
-                                                        Image.xmark.foregroundColor(.red)
+                                                        Image.xmark.foregroundStyle(Color.red)
                                                 }
                                                 Label {
                                                         Text(verbatim: "毋洗驚")
                                                 } icon: {
-                                                        Image.xmark.foregroundColor(.red)
+                                                        Image.xmark.foregroundStyle(Color.red)
                                                 }
                                         }
                                         Spacer()
@@ -293,12 +293,12 @@ struct MacExpressionsView: View {
                                                 Label {
                                                         Text(verbatim: "我而家食緊飯。")
                                                 } icon: {
-                                                        Image.checkmark.foregroundColor(.green)
+                                                        Image.checkmark.foregroundStyle(Color.green)
                                                 }
                                                 Label {
                                                         Text(verbatim: "我宜家食緊飯。")
                                                 } icon: {
-                                                        Image.xmark.foregroundColor(.red)
+                                                        Image.xmark.foregroundStyle(Color.red)
                                                 }
                                         }
                                         Spacer()

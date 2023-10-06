@@ -69,7 +69,7 @@ private struct OptionLabel: View {
                 let isHighlighted: Bool = index == highlightedIndex
                 HStack(spacing: 0) {
                         HStack(spacing: 16) {
-                                Text(verbatim: serialNumber).font(.label).foregroundColor(isHighlighted ? .white : .secondary)
+                                Text(verbatim: serialNumber).font(.label).foregroundStyle(isHighlighted ? Color.white : Color.secondary)
                                 Text(verbatim: text).font(.candidate)
                         }
                         Spacer()
@@ -77,7 +77,7 @@ private struct OptionLabel: View {
                 }
                 .padding(.horizontal, 8)
                 .padding(.vertical, verticalPadding)
-                .foregroundColor(isHighlighted ? .white : .primary)
+                .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
         }
 }

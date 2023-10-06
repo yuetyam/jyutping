@@ -37,7 +37,7 @@ struct RomanizationLabel: View {
                                 Text(verbatim: romanization)
                         }
                         if let ipa {
-                                Text(verbatim: ipa).foregroundColor(.secondary)
+                                Text(verbatim: ipa).foregroundStyle(Color.secondary)
                         }
                         if let note {
                                 Text(verbatim: note).font(.copilot)

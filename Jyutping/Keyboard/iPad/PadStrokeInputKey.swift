@@ -51,7 +51,7 @@ struct PadStrokeInputKey: View {
                                         Color.clear
                                         Text(verbatim: letter)
                                                 .font(.footnote)
-                                                .foregroundColor(.secondary)
+                                                .foregroundStyle(Color.secondary)
                                                 .padding(8)
                                 }
                                 Text(verbatim: stroke)
@@ -75,7 +75,7 @@ struct PadStrokeInputKey: View {
                                         .fill(keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(5)
-                                Text(verbatim: letter).foregroundColor(.secondary)
+                                Text(verbatim: letter).foregroundStyle(Color.secondary)
                         }
                         .frame(width: context.widthUnit, height: context.heightUnit)
                         .contentShape(Rectangle())

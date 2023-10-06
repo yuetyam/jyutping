@@ -49,7 +49,7 @@ struct LargePadCangjieInputKey: View {
                                 Color.clear
                                 Text(verbatim: letter)
                                         .font(.footnote)
-                                        .foregroundColor(.secondary)
+                                        .foregroundStyle(Color.secondary)
                                         .padding(.top, 8)
                                         .padding(.trailing, 8)
                         }

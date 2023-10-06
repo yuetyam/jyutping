@@ -27,7 +27,7 @@ struct FinalTable: View {
                                 }
                                 VStack(spacing: 2) {
                                         HStack {
-                                                Text(verbatim: "鼻音單獨成韻").font(.copilot).textSelection(.enabled).foregroundColor(.secondary)
+                                                Text(verbatim: "鼻音單獨成韻").font(.copilot).textSelection(.enabled).foregroundStyle(Color.secondary)
                                                 Spacer()
                                         }
                                         VStack {

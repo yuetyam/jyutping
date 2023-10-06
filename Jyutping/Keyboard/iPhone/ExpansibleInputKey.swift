@@ -68,14 +68,14 @@ struct ExpansibleInputKey: View {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
                                                                                         .font(.keyFooter)
-                                                                                        .foregroundColor(.secondary)
+                                                                                        .foregroundStyle(Color.secondary)
                                                                                         .padding(.top, 1)
                                                                         }
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
                                                                                         .font(.keyFooter)
-                                                                                        .foregroundColor(.secondary)
+                                                                                        .foregroundStyle(Color.secondary)
                                                                                         .padding(.bottom, 1)
                                                                         }
                                                                         Text(verbatim: element.text)
@@ -114,7 +114,7 @@ struct ExpansibleInputKey: View {
                                         Color.interactiveClear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .font(.keyFooter)
-                                                .foregroundColor(.secondary)
+                                                .foregroundStyle(Color.secondary)
                                                 .padding(.trailing, 5)
                                                 .padding(.top, 8)
                                 }
@@ -122,7 +122,7 @@ struct ExpansibleInputKey: View {
                                         Color.interactiveClear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .font(.keyFooter)
-                                                .foregroundColor(.secondary)
+                                                .foregroundStyle(Color.secondary)
                                                 .padding(.trailing, 5)
                                                 .padding(.bottom, 8)
                                 }

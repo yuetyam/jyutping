@@ -84,7 +84,7 @@ struct MacSearchView: View {
                                                         HStack {
                                                                 Text(verbatim: yingWaaEntries.first!.word)
                                                                 Text(verbatim: "《英華分韻撮要》")
-                                                                Text(verbatim: "衛三畏(Samuel Wells Williams)　1856　廣州").foregroundColor(.secondary)
+                                                                Text(verbatim: "衛三畏(Samuel Wells Williams)　1856　廣州").foregroundStyle(Color.secondary)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
@@ -104,7 +104,7 @@ struct MacSearchView: View {
                                                         HStack {
                                                                 Text(verbatim: choHokEntries.first!.word)
                                                                 Text(verbatim: "《初學粵音切要》")
-                                                                Text(verbatim: "湛約翰(John Chalmers)　1855　香港").foregroundColor(.secondary)
+                                                                Text(verbatim: "湛約翰(John Chalmers)　1855　香港").foregroundStyle(Color.secondary)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)

@@ -64,7 +64,7 @@ struct StrokeInputKey: View {
                                                 Color.clear
                                                 Text(verbatim: letter)
                                                         .font(.footnote)
-                                                        .foregroundColor(.secondary)
+                                                        .foregroundStyle(Color.secondary)
                                                         .padding(5)
                                         }
                                         Text(verbatim: stroke)
@@ -91,7 +91,7 @@ struct StrokeInputKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                                Text(verbatim: letter).foregroundColor(.secondary)
+                                Text(verbatim: letter).foregroundStyle(Color.secondary)
                         }
                         .frame(width: context.widthUnit, height: context.heightUnit)
                         .contentShape(Rectangle())

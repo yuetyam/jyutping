@@ -47,7 +47,7 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .traditional)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional Characters").foregroundColor(.primary)
+                                                        Text("Traditional Characters").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .traditional ? 1: 0)
                                                 }
@@ -59,7 +59,7 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .hongkong)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional Characters, Hong Kong").foregroundColor(.primary)
+                                                        Text("Traditional Characters, Hong Kong").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .hongkong ? 1: 0)
                                                 }
@@ -71,7 +71,7 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .taiwan)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional Characters, Taiwan").foregroundColor(.primary)
+                                                        Text("Traditional Characters, Taiwan").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .taiwan ? 1: 0)
                                                 }
@@ -83,7 +83,7 @@ struct SettingsView: View {
                                                 Options.updateCharacterStandard(to: .simplified)
                                         } label: {
                                                 HStack {
-                                                        Text("Simplified Characters").foregroundColor(.primary)
+                                                        Text("Simplified Characters").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .simplified ? 1: 0)
                                                 }
@@ -142,7 +142,7 @@ struct SettingsView: View {
                                                 Options.updateKeyboardLayout(to: .qwerty)
                                         } label: {
                                                 HStack {
-                                                        Text("KeyboardLayout.QWERTY").foregroundColor(.primary)
+                                                        Text("KeyboardLayout.QWERTY").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedKeyboardLayout == .qwerty ? 1: 0)
                                                 }
@@ -154,7 +154,7 @@ struct SettingsView: View {
                                                 Options.updateKeyboardLayout(to: .saamPing)
                                         } label: {
                                                 HStack {
-                                                        Text("KeyboardLayout.SaamPing").foregroundColor(.primary)
+                                                        Text("KeyboardLayout.SaamPing").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedKeyboardLayout == .saamPing ? 1: 0)
                                                 }
@@ -167,7 +167,7 @@ struct SettingsView: View {
                                                         Options.updateKeyboardLayout(to: .tenKey)
                                                 } label: {
                                                         HStack {
-                                                                Text("KeyboardLayout.10Key").foregroundColor(.primary)
+                                                                Text("KeyboardLayout.10Key").foregroundStyle(Color.primary)
                                                                 Spacer()
                                                                 Image.checkmark.opacity(selectedKeyboardLayout == .tenKey ? 1: 0)
                                                         }
@@ -185,7 +185,7 @@ struct SettingsView: View {
                                                 Options.updateCommentStyle(to: .aboveCandidates)
                                         } label: {
                                                 HStack {
-                                                        Text("Above Candidates").foregroundColor(.primary)
+                                                        Text("Above Candidates").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentStyle == .aboveCandidates ? 1: 0)
                                                 }
@@ -197,7 +197,7 @@ struct SettingsView: View {
                                                 Options.updateCommentStyle(to: .belowCandidates)
                                         } label: {
                                                 HStack {
-                                                        Text("Below Candidates").foregroundColor(.primary)
+                                                        Text("Below Candidates").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentStyle == .belowCandidates ? 1: 0)
                                                 }
@@ -209,7 +209,7 @@ struct SettingsView: View {
                                                 Options.updateCommentStyle(to: .noComments)
                                         } label: {
                                                 HStack {
-                                                        Text("No Jyutping").foregroundColor(.primary)
+                                                        Text("No Jyutping").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentStyle == .noComments ? 1: 0)
                                                 }
@@ -226,7 +226,7 @@ struct SettingsView: View {
                                                 Options.updateCommentToneStyle(to: .normal)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option1").foregroundColor(.primary)
+                                                        Text("ToneDisplayStyle.Option1").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .normal ? 1: 0)
                                                 }
@@ -238,7 +238,7 @@ struct SettingsView: View {
                                                 Options.updateCommentToneStyle(to: .noTones)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option2").foregroundColor(.primary)
+                                                        Text("ToneDisplayStyle.Option2").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .noTones ? 1: 0)
                                                 }
@@ -250,7 +250,7 @@ struct SettingsView: View {
                                                 Options.updateCommentToneStyle(to: .superscript)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option3").foregroundColor(.primary)
+                                                        Text("ToneDisplayStyle.Option3").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .superscript ? 1: 0)
                                                 }
@@ -262,7 +262,7 @@ struct SettingsView: View {
                                                 Options.updateCommentToneStyle(to: .subscript)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option4").foregroundColor(.primary)
+                                                        Text("ToneDisplayStyle.Option4").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .subscript ? 1: 0)
                                                 }
@@ -279,7 +279,7 @@ struct SettingsView: View {
                                                 Options.updateDoubleSpaceShortcut(to: .insertPeriod)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option1").foregroundColor(.primary)
+                                                        Text("DoubleSpaceShortcut.Option1").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertPeriod ? 1: 0)
                                                 }
@@ -291,7 +291,7 @@ struct SettingsView: View {
                                                 Options.updateDoubleSpaceShortcut(to: .insertIdeographicComma)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option3").foregroundColor(.primary)
+                                                        Text("DoubleSpaceShortcut.Option3").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertIdeographicComma ? 1: 0)
                                                 }
@@ -303,7 +303,7 @@ struct SettingsView: View {
                                                 Options.updateDoubleSpaceShortcut(to: .insertFullWidthSpace)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option4").foregroundColor(.primary)
+                                                        Text("DoubleSpaceShortcut.Option4").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertFullWidthSpace ? 1: 0)
                                                 }
@@ -315,7 +315,7 @@ struct SettingsView: View {
                                                 Options.updateDoubleSpaceShortcut(to: .doNothing)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option2").foregroundColor(.primary)
+                                                        Text("DoubleSpaceShortcut.Option2").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .doNothing ? 1: 0)
                                                 }
@@ -343,7 +343,7 @@ struct SettingsView: View {
                                                                 Text("Clear User Lexicon")
                                                                 Spacer()
                                                         }
-                                                        .foregroundColor(.red)
+                                                        .foregroundStyle(Color.red)
                                                 }
                                                 ProgressView(value: clearUserLexiconProgress).opacity(isPerformingClearUserLexicon ? 1 : 0)
                                         }

@@ -28,7 +28,7 @@ struct CandidateLabel: View {
         var body: some View {
                 HStack(spacing: 0) {
                         HStack(spacing: 16) {
-                                Text(verbatim: label).font(.label).foregroundColor(labelForeColor)
+                                Text(verbatim: label).font(.label).foregroundStyle(labelForeColor)
                                 Text(verbatim: candidate.text).font(.candidate)
                                 if let comment = candidate.comment {
                                         CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
@@ -42,7 +42,7 @@ struct CandidateLabel: View {
                 }
                 .padding(.leading, 8)
                 .padding(.vertical, verticalPadding)
-                .foregroundColor(foreColor)
+                .foregroundStyle(foreColor)
                 .background(backColor, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
         }
 }

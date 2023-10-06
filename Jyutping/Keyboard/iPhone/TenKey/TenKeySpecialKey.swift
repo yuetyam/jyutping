@@ -38,13 +38,13 @@ struct TenKeySpecialKey: View {
                         if context.inputStage.isBuffering {
                                 VStack {
                                         Text(verbatim: "'")
-                                        Text(verbatim: "分隔").font(.keyFooter).foregroundColor(.secondary)
+                                        Text(verbatim: "分隔").font(.keyFooter).foregroundStyle(Color.secondary)
                                 }
                                 .padding(.top, 8)
                         } else {
                                 VStack(spacing: 0) {
                                         Text(verbatim: "rvxq")
-                                        Text(verbatim: "反查").font(.keyFooter).foregroundColor(.secondary)
+                                        Text(verbatim: "反查").font(.keyFooter).foregroundStyle(Color.secondary)
                                 }
                                 .padding(.top, 8)
                         }
