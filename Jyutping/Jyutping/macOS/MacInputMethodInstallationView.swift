@@ -24,7 +24,7 @@ struct MacInputMethodInstallationView: View {
                                 .block()
 
                                 HStack(spacing: 16) {
-                                        Link("Website", destination: URL(string: websiteAddress)!)
+                                        Link("Website", destination: URL(string: websiteAddress)!).foregroundStyle(Color.accentColor)
                                         Text(verbatim: websiteAddress).font(.fixedWidth)
                                         Button {
                                                 AppMaster.copy(websiteAddress)

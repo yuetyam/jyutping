@@ -68,6 +68,7 @@ private struct LinkLabel: View {
                                         Text(title).font(.master)
                                 }
                         }
+                        .foregroundStyle(Color.accentColor)
                         Text(verbatim: message).font(.callout.monospaced())
                         Spacer()
                 }

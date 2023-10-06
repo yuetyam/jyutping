@@ -56,6 +56,7 @@ private struct LinkView: View {
                                                 .font(.master)
                                 }
                         }
+                        .foregroundStyle(Color.accentColor)
                         Text(verbatim: url)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.5)
