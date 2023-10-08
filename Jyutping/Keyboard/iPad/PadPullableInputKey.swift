@@ -62,6 +62,7 @@ struct PadPullableInputKey: View {
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: lower)
+                                                .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
                                                 .font(.title2)
                                                 .padding(.bottom, 12)
                                 }
@@ -88,7 +89,7 @@ struct PadPullableInputKey: View {
                                         context.operate(.process(text))
                                         isPullingDown = false
                                 } else {
-                                        let text: String = lower
+                                        let text: String = context.keyboardCase.isLowercased ? lower : lower.uppercased()
                                         context.operate(.process(text))
                                 }
                          }
