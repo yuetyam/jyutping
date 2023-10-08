@@ -1,6 +1,7 @@
 #if os(iOS)
 
 import SwiftUI
+import CommonExtensions
 
 struct IOSToneTableView: View {
 
@@ -53,7 +54,7 @@ private struct IOSToneLabel: View {
         init(_ line: String, spacing: CGFloat) {
                 let parts: [String] = line.components(separatedBy: ",")
                 self.example = parts[0]
-                self.syllable = String(parts[0].dropFirst(2))
+                self.syllable = parts[0].filter({ $0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit })
                 self.toneValue = parts[1]
                 self.toneName = parts[2]
                 self.tone = parts[3]

@@ -29,6 +29,32 @@ struct Speech {
                         synthesizer.speak(utterance)
                 }
         }
+
+        static func speak(text: String, ipa: String) {
+                let pronunciationKey = NSAttributedString.Key(rawValue: AVSpeechSynthesisIPANotationAttribute)
+                let attributedString = NSMutableAttributedString(string: text, attributes: [pronunciationKey: ipa])
+                let utterance = AVSpeechUtterance(attributedString: attributedString)
+                utterance.voice = voice
+                DispatchQueue.main.async {
+                        synthesizer.speak(utterance)
+                }
+        }
+
+        @available(iOS 16.0, *)
+        @available(macOS 13.0, *)
+        static func speakSSML(text: String, jyutping: String) {
+                let ipaText: String = Syllable2IPA.ipa(of: jyutping)
+                let combined: String = """
+                <speak><phoneme alphabet="ipa" ph="\(ipaText)">\(text)</phoneme></speak>
+                """
+                let ssml: String = combined.trimmingCharacters(in: .whitespacesAndNewlines)
+                let utterance: AVSpeechUtterance = AVSpeechUtterance(ssmlRepresentation: ssml) ?? AVSpeechUtterance(string: jyutping)
+                utterance.voice = voice
+                DispatchQueue.main.async {
+                        synthesizer.speak(utterance)
+                }
+        }
+
         static func stop() {
                 DispatchQueue.main.async {
                         synthesizer.stopSpeaking(at: .immediate)
@@ -38,7 +64,7 @@ struct Speech {
                 return synthesizer.isSpeaking
         }
 
-        /// Does current device contains a Cantonese voice
+        /// Does current device contain any Cantonese voice
         static let isVoiceAvailable: Bool = voiceStatus != .unavailable
 
         static let voiceStatus: VoiceStatus = {

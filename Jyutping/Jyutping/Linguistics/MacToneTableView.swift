@@ -1,6 +1,7 @@
 #if os(macOS)
 
 import SwiftUI
+import CommonExtensions
 
 struct MacToneTableView: View {
         var body: some View {
@@ -112,7 +113,7 @@ private struct MacToneLabel: View {
         init(_ line: String) {
                 let parts: [String] = line.components(separatedBy: ",")
                 self.example = parts[0]
-                self.syllable = String(parts[0].dropFirst(2))
+                self.syllable = parts[0].filter({ $0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit })
                 self.toneValue = parts[1]
                 self.toneName = parts[2]
                 self.tone = parts[3]

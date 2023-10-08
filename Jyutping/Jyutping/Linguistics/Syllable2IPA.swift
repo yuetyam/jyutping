@@ -9,6 +9,14 @@ struct Syllable2IPA {
                 guard let tone: String = IPATone(syllable) else { return fallback }
                 return "[ " + phone + " " + tone + " ]"
         }
+        static func ipa(of syllable: String) -> String {
+                lazy var fallback: String = ""
+                let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
+                guard !isBadFormat else { return fallback }
+                guard let phone: String = IPAPhone(syllable) else { return fallback }
+                guard let tone: String = IPATone(syllable) else { return fallback }
+                return phone + tone
+        }
 
         private static func IPATone(_ syllable: String) -> String? {
                 guard let tone = syllable.last else { return nil }

@@ -38,7 +38,7 @@ struct Speech {
                 return synthesizer.isSpeaking
         }
 
-        /// Does current device contains a Cantonese voice
+        /// Does current device contain any Cantonese voice
         static let isVoiceAvailable: Bool = voiceStatus != .unavailable
 
         static let voiceStatus: VoiceStatus = {
@@ -66,7 +66,7 @@ struct Speech {
                 }
         }()
 
-        /// Does System Preferred Languages contains `zh-Hant-HK`
+        /// Does System Preferred Languages contain `zh-Hant-HK`
         static var isLanguageTraditionalChineseHongKongEnabled: Bool {
                 return Locale.preferredLanguages.contains("zh-Hant-HK")
         }

@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct IOSSyllableCell: View {
 
@@ -6,7 +7,7 @@ struct IOSSyllableCell: View {
                 let parts: [String] = line.components(separatedBy: ",")
                 let leading: String = parts[0]
                 self.word = leading.filter({ !$0.isASCII })
-                self.syllable = leading.filter(\.isASCII)
+                self.syllable = leading.filter({ $0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit })
                 self.ipa = parts[1]
                 self.jyutping = parts[2]
                 self.spacing = spacing
@@ -35,10 +36,18 @@ struct IOSSyllableCell: View {
                                                 }
                                         }
                                 }
-                                ZStack(alignment: .leading) {
+                                if syllable.isEmpty {
                                         Speaker(syllable).hidden()
-                                        if !(syllable.isEmpty) {
-                                                Speaker(syllable)
+                                } else {
+                                        Speaker {
+                                                switch syllable {
+                                                case "la3":
+                                                        Speech.speak(text: word, ipa: "lɐ˧")
+                                                case "pet6":
+                                                        Speech.speak(text: word, ipa: "pʰɛːt̚˨")
+                                                default:
+                                                        Speech.speak(syllable)
+                                                }
                                         }
                                 }
                         }
@@ -59,7 +68,7 @@ struct MacSyllableCell: View {
                 let parts: [String] = line.components(separatedBy: ",")
                 let leading: String = parts[0]
                 self.word = leading.filter({ !$0.isASCII })
-                self.syllable = leading.filter(\.isASCII)
+                self.syllable = leading.filter({ $0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit })
                 self.ipa = parts[1].replacingOccurrences(of: "~", with: " ~ ")
                 self.jyutping = parts[2]
         }
@@ -85,10 +94,18 @@ struct MacSyllableCell: View {
                                                 }
                                         }
                                 }
-                                ZStack(alignment: .leading) {
+                                if syllable.isEmpty {
                                         Speaker(syllable).hidden()
-                                        if !(syllable.isEmpty) {
-                                                Speaker(syllable)
+                                } else {
+                                        Speaker {
+                                                switch syllable {
+                                                case "la3":
+                                                        Speech.speak(text: word, ipa: "lɐ˧")
+                                                case "pet6":
+                                                        Speech.speak(text: word, ipa: "pʰɛːt̚˨")
+                                                default:
+                                                        Speech.speak(syllable)
+                                                }
                                         }
                                 }
                         }
