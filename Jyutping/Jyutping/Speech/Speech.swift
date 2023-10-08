@@ -3,19 +3,7 @@ import AVFoundation
 struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private static let voice: AVSpeechSynthesisVoice? = {
-                if let iOS16_macOS13_Premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-HK.Sinji") {
-                        return iOS16_macOS13_Premium
-                } else if let iOS15Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.ttsbundle.Sin-Ji-premium") {
-                        return iOS15Enhanced
-                } else if let macOS12Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.speech.synthesis.voice.sinji.premium") {
-                        return macOS12Enhanced
-                } else if let iOS16Enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.voice.enhanced.zh-HK.Sinji") {
-                        return iOS16Enhanced
-                } else {
-                        return AVSpeechSynthesisVoice(language: "zh-HK")
-                }
-        }()
+        private static let voice: AVSpeechSynthesisVoice? = preferredVoice(of: "zh-HK")
 
         static func speak(_ text: String) {
                 guard isVoiceAvailable else {
@@ -40,21 +28,6 @@ struct Speech {
                 }
         }
 
-        @available(iOS 16.0, *)
-        @available(macOS 13.0, *)
-        static func speakSSML(text: String, jyutping: String) {
-                let ipaText: String = Syllable2IPA.ipa(of: jyutping)
-                let combined: String = """
-                <speak><phoneme alphabet="ipa" ph="\(ipaText)">\(text)</phoneme></speak>
-                """
-                let ssml: String = combined.trimmingCharacters(in: .whitespacesAndNewlines)
-                let utterance: AVSpeechUtterance = AVSpeechUtterance(ssmlRepresentation: ssml) ?? AVSpeechUtterance(string: jyutping)
-                utterance.voice = voice
-                DispatchQueue.main.async {
-                        synthesizer.speak(utterance)
-                }
-        }
-
         static func stop() {
                 DispatchQueue.main.async {
                         synthesizer.stopSpeaking(at: .immediate)
@@ -67,32 +40,7 @@ struct Speech {
         /// Does current device contain any Cantonese voice
         static let isVoiceAvailable: Bool = voiceStatus != .unavailable
 
-        static let voiceStatus: VoiceStatus = {
-                guard let voiceQuality = voice?.quality else { return .unavailable }
-                if #available(iOS 16.0, macOS 13.0, *) {
-                        switch voiceQuality {
-                        case .default:
-                                return .regular
-                        case .enhanced:
-                                return .enhanced
-                        case .premium:
-                                return .premium
-                        @unknown default:
-                                return .regular
-                        }
-                } else {
-                        switch voiceQuality {
-                        case .default:
-                                return .regular
-                        case .enhanced:
-                                return .enhanced
-                        default:
-                                return .regular
-                        }
-                }
-        }()
-
-        /// Does System Preferred Languages contains `zh-Hant-HK`
+        /// Does System Preferred Languages contain `zh-Hant-HK`
         static var isLanguageTraditionalChineseHongKongEnabled: Bool {
                 return Locale.preferredLanguages.contains("zh-Hant-HK")
         }
@@ -120,7 +68,7 @@ struct Speech {
                                 synthesizer.speak(utterance)
                         }
                 } else if let englishVoice = englishVoice {
-                        let text: String = "This device does not contain a Cantonese voice, please add it and try again."
+                        let text: String = "This device does not contain a Cantonese voice, please add one and try again."
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = englishVoice
                         DispatchQueue.main.async {
@@ -136,26 +84,62 @@ struct Speech {
                 }
         }
 
-        private static let mandarinTaiwanVoice: AVSpeechSynthesisVoice? = {
-                if let premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-TW.Meijia") {
-                        return premium
-                } else if let enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.voice.enhanced.zh-TW.Meijia") {
-                        return enhanced
-                } else {
-                        return AVSpeechSynthesisVoice(language: "zh-TW")
-                }
-        }()
-        private static let mandarinPekingVoice: AVSpeechSynthesisVoice? = {
-                if let premium = AVSpeechSynthesisVoice(identifier: "com.apple.voice.premium.zh-CN.Tingting") {
-                        return premium
-                } else if let enhanced = AVSpeechSynthesisVoice(identifier: "com.apple.voice.enhanced.zh-CN.Tingting") {
-                        return enhanced
-                } else {
-                        return AVSpeechSynthesisVoice(language: "zh-CN")
-                }
-        }()
+        private static let mandarinTaiwanVoice: AVSpeechSynthesisVoice? = preferredVoice(of: "zh-TW")
+        private static let mandarinPekingVoice: AVSpeechSynthesisVoice? = preferredVoice(of: "zh-CN")
         private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU")
         private static let currentDefaultVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: nil)
+
+        private static func preferredVoice(of languageCode: String) -> AVSpeechSynthesisVoice? {
+                let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
+                guard !(voices.isEmpty) else { return AVSpeechSynthesisVoice(language: languageCode) }
+                let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
+                        if #available(iOS 16.0, macOS 13.0, *) {
+                                switch (lhs.quality, rhs.quality) {
+                                case (.premium, .enhanced):
+                                        return true
+                                case (.premium, .default):
+                                        return true
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        } else {
+                                switch (lhs.quality, rhs.quality) {
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        }
+                }
+                return preferredVoices.first ?? AVSpeechSynthesisVoice(language: languageCode)
+        }
+
+        static let voiceStatus: VoiceStatus = {
+                guard let voiceQuality = voice?.quality else { return .unavailable }
+                if #available(iOS 16.0, macOS 13.0, *) {
+                        switch voiceQuality {
+                        case .default:
+                                return .regular
+                        case .enhanced:
+                                return .enhanced
+                        case .premium:
+                                return .premium
+                        @unknown default:
+                                return .regular
+                        }
+                } else {
+                        switch voiceQuality {
+                        case .default:
+                                return .regular
+                        case .enhanced:
+                                return .enhanced
+                        default:
+                                return .regular
+                        }
+                }
+        }()
 }
 
 enum VoiceStatus: Int {
