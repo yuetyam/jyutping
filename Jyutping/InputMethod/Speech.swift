@@ -3,7 +3,7 @@ import AVFoundation
 struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private static let voice: AVSpeechSynthesisVoice? = preferredVoice(of: "zh-HK")
+        private static let voice: AVSpeechSynthesisVoice? = preferredIOS17Voice()
 
         static func speak(_ text: String) {
                 guard isVoiceAvailable else {
@@ -84,12 +84,54 @@ struct Speech {
                 }
         }
 
-        private static let mandarinTaiwanVoice: AVSpeechSynthesisVoice? = preferredVoice(of: "zh-TW")
-        private static let mandarinPekingVoice: AVSpeechSynthesisVoice? = preferredVoice(of: "zh-CN")
+        private static let mandarinTaiwanVoice: AVSpeechSynthesisVoice? = preferredVoice(of: .mandarinTaiwan)
+        private static let mandarinPekingVoice: AVSpeechSynthesisVoice? = preferredVoice(of: .mandarinPeking)
         private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU")
         private static let currentDefaultVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: nil)
 
-        private static func preferredVoice(of languageCode: String) -> AVSpeechSynthesisVoice? {
+        /// Workaround for iOS 17.
+        ///
+        /// Cantonese .premium voices are broken in iOS 17.
+        private static func preferredIOS17Voice() -> AVSpeechSynthesisVoice? {
+                let languageCode: String = SpeechLanguage.chineseHongKong.code
+                let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
+                guard !(voices.isEmpty) else { return AVSpeechSynthesisVoice(language: languageCode) }
+                let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
+                        if #available(iOS 17.0, macOS 14.0, *) {
+                                switch (lhs.quality, rhs.quality) {
+                                case (.premium, _):
+                                        return false
+                                case (_, .premium):
+                                        return true
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        } else if #available(iOS 16.0, macOS 13.0, *) {
+                                switch (lhs.quality, rhs.quality) {
+                                case (.premium, .enhanced):
+                                        return true
+                                case (.premium, .default):
+                                        return true
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        } else {
+                                switch (lhs.quality, rhs.quality) {
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        }
+                }
+                return preferredVoices.first ?? AVSpeechSynthesisVoice(language: languageCode)
+        }
+        private static func preferredVoice(of language: SpeechLanguage) -> AVSpeechSynthesisVoice? {
+                let languageCode: String = language.code
                 let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
                 guard !(voices.isEmpty) else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
@@ -147,4 +189,22 @@ enum VoiceStatus: Int {
         case regular
         case enhanced
         case premium
+}
+
+enum SpeechLanguage: Int, Hashable {
+
+        case chineseHongKong
+        case mandarinTaiwan
+        case mandarinPeking
+
+        var code: String {
+                switch self {
+                case .chineseHongKong:
+                        return "zh-HK"
+                case .mandarinTaiwan:
+                        return "zh-TW"
+                case .mandarinPeking:
+                        return "zh-CN"
+                }
+        }
 }
