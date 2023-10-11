@@ -328,7 +328,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 adjustKeyboard()
                         }
                 case .doubleSpace:
-                        guard !(inputStage.isBuffering) else { return }
+                        guard !(inputStage.isBuffering) else {
+                                if let candidate = candidates.first {
+                                        input(candidate.text)
+                                        aftercareSelected(candidate)
+                                } else {
+                                        inputBufferText()
+                                        updateReturnKeyText()
+                                        adjustKeyboard()
+                                }
+                                return
+                        }
                         defer {
                                 adjustKeyboard()
                         }
