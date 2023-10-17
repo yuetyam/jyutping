@@ -4,31 +4,6 @@ import CoreIME
 
 final class KeyboardViewController: UIInputViewController, ObservableObject {
 
-        override func updateViewConstraints() {
-                super.updateViewConstraints()
-        }
-
-        override func didReceiveMemoryWarning() {
-                super.didReceiveMemoryWarning()
-                _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = self.children.map({ $0.removeFromParent() })
-                keyboardInterface = adoptKeyboardInterface()
-                updateKeyboardSize()
-                updateSpaceKeyText()
-                updateReturnKeyText()
-                let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
-                view.addSubview(motherBoard.view)
-                motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                        motherBoard.view.topAnchor.constraint(equalTo: view.topAnchor),
-                        motherBoard.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                        motherBoard.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                        motherBoard.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-                ])
-                motherBoard.view.backgroundColor = view.backgroundColor
-                self.addChild(motherBoard)
-        }
-
         override func viewDidLoad() {
                 super.viewDidLoad()
                 _ = view.subviews.map({ $0.removeFromSuperview() })
