@@ -59,12 +59,54 @@ extension Engine {
                         let candidates: [Candidate] = match(segmentation: segmentation)
                         let qualified = candidates.map({ item -> Candidate? in
                                 let continuous = item.romanization.removedSpaces()
-                                if continuous.hasPrefix(text) {
-                                        return Candidate(text: item.text, romanization: item.romanization, input: text)
-                                } else if text.hasPrefix(continuous) {
-                                        return Candidate(text: item.text, romanization: item.romanization, input: continuous)
-                                } else {
-                                        return nil
+                                let textTones = text.tones
+                                let continuousTones = continuous.tones
+                                switch (textTones.count, continuousTones.count) {
+                                case (1, 1):
+                                        guard textTones == continuousTones else { return nil }
+                                        let isCorrectPosition: Bool = text.dropFirst(item.input.count).first?.isTone ?? false
+                                        guard isCorrectPosition else { return nil }
+                                        let combinedInput = item.input + textTones
+                                        return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                case (1, 2):
+                                        let isToneLast: Bool = text.last?.isTone ?? false
+                                        if isToneLast {
+                                                guard continuousTones.hasSuffix(textTones) else { return nil }
+                                                let isCorrectPosition: Bool = text.dropFirst(item.input.count).first?.isTone ?? false
+                                                guard isCorrectPosition else { return nil }
+                                                return Candidate(text: item.text, romanization: item.romanization, input: text)
+                                        } else {
+                                                guard continuousTones.hasPrefix(textTones) else { return nil }
+                                                let combinedInput = item.input + textTones
+                                                return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                        }
+                                case (2, 1):
+                                        guard textTones.hasPrefix(continuousTones) else { return nil }
+                                        let isCorrectPosition: Bool = text.dropFirst(item.input.count).first?.isTone ?? false
+                                        guard isCorrectPosition else { return nil }
+                                        let combinedInput = item.input + continuousTones
+                                        return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                case (2, 2):
+                                        guard textTones == continuousTones else { return nil }
+                                        let isToneLast: Bool = text.last?.isTone ?? false
+                                        if isToneLast {
+                                                guard item.input.count == (text.count - 2) else { return nil }
+                                                return Candidate(text: item.text, romanization: item.romanization, input: text)
+                                        } else {
+                                                let tail = text.dropFirst(item.input.count + 1)
+                                                let isCorrectPosition: Bool = tail.first == textTones.last
+                                                guard isCorrectPosition else { return nil }
+                                                let combinedInput = item.input + textTones
+                                                return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                        }
+                                default:
+                                        if continuous.hasPrefix(text) {
+                                                return Candidate(text: item.text, romanization: item.romanization, input: text)
+                                        } else if text.hasPrefix(continuous) {
+                                                return Candidate(text: item.text, romanization: item.romanization, input: continuous)
+                                        } else {
+                                                return nil
+                                        }
                                 }
                         })
                         return qualified.compactMap({ $0 })
