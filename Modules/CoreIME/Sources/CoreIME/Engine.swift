@@ -112,23 +112,60 @@ extension Engine {
                         return qualified.compactMap({ $0 })
                 case (true, false):
                         let candidates: [Candidate] = match(segmentation: segmentation)
-                        let textParts = text.split(separator: "'")
-                        let textPartCount = textParts.count
                         let qualified = candidates.map({ item -> Candidate? in
+                                let textParts = text.split(separator: "'")
                                 let syllables = item.romanization.removedTones().split(separator: " ")
                                 guard syllables != textParts else { return Candidate(text: item.text, romanization: item.romanization, input: text) }
-                                let syllableCount = syllables.count
-                                guard syllableCount < textPartCount else { return nil }
-                                let checks = (0..<syllableCount).map { index -> Bool in
-                                        let syllable = syllables[index]
-                                        let part = textParts[index]
-                                        return syllable == part
+                                let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
+                                let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
+                                guard !isHeadingSeparator else { return nil }
+                                let textSeparators = text.filter(\.isSeparator)
+                                switch textSeparators.count {
+                                case 1 where isTrailingSeparator:
+                                        guard syllables.count == 1 else { return nil }
+                                        let isLengthMatched: Bool = item.input.count == (text.count - 1)
+                                        guard isLengthMatched else { return nil }
+                                        return Candidate(text: item.text, romanization: item.romanization, input: text)
+                                case 1:
+                                        switch syllables.count {
+                                        case 1:
+                                                guard item.input == textParts.first! else { return nil }
+                                                let combinedInput: String = item.input + "'"
+                                                return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                        case 2:
+                                                guard syllables.first == textParts.first else { return nil }
+                                                let combinedInput: String = item.input + "'"
+                                                return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                        default:
+                                                return nil
+                                        }
+                                case 2 where isTrailingSeparator:
+                                        switch syllables.count {
+                                        case 1:
+                                                guard item.input == textParts.first! else { return nil }
+                                                let combinedInput: String = item.input + "'"
+                                                return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                        case 2:
+                                                let isLengthMatched: Bool = item.input.count == (text.count - 2)
+                                                guard isLengthMatched else { return nil }
+                                                guard syllables.first == textParts.first else { return nil }
+                                                return Candidate(text: item.text, romanization: item.romanization, input: text)
+                                        default:
+                                                return nil
+                                        }
+                                default:
+                                        let textPartCount = textParts.count
+                                        let syllableCount = syllables.count
+                                        guard syllableCount < textPartCount else { return nil }
+                                        let checks = (0..<syllableCount).map { index -> Bool in
+                                                return syllables[index] == textParts[index]
+                                        }
+                                        let isMatched = checks.reduce(true, { $0 && $1 })
+                                        guard isMatched else { return nil }
+                                        let tail: [Character] = Array(repeating: "i", count: syllableCount - 1)
+                                        let combinedInput: String = item.input + tail
+                                        return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                 }
-                                let isMatched = checks.reduce(true, { $0 && $1 })
-                                guard isMatched else { return nil }
-                                let tail: [Character] = Array(repeating: "i", count: syllableCount - 1)
-                                let input: String = item.input + tail
-                                return Candidate(text: item.text, romanization: item.romanization, input: input)
                         })
                         return qualified.compactMap({ $0 })
                 case (false, false):
