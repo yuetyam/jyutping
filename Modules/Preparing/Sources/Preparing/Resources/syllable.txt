@@ -50,6 +50,7 @@
 802395	no	no
 803650	oi	oi
 803660	ok	ok
+803670	om	am
 803675	on	on
 803685	op	ap
 803695	or	o
