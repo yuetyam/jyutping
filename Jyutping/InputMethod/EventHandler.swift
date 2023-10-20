@@ -5,12 +5,23 @@ import CoreIME
 extension JyutpingInputController {
 
         override func recognizedEvents(_ sender: Any!) -> Int {
-                let masks: NSEvent.EventTypeMask = [.keyDown]
+                let masks: NSEvent.EventTypeMask = [.keyDown, .flagsChanged]
                 return Int(masks.rawValue)
         }
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
                 guard let event = event else { return false }
+                if AppSettings.pressShiftOnce == .switchCantoneseEnglish && ShiftKey.isShiftKeyTaped(event: event) {
+                        if Options.inputMethodMode == .cantonese {
+                                passBuffer()
+                                Options.updateInputMethodMode(to: .abc)
+                                appContext.updateInputForm(to: .transparent)
+                                window?.setFrame(.zero, display: true)
+                        } else {
+                                Options.updateInputMethodMode(to: .cantonese)
+                                appContext.updateInputForm(to: .cantonese)
+                        }
+                }
                 let modifiers = event.modifierFlags
                 let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
                 guard !shouldIgnoreCurrentEvent else { return false }
