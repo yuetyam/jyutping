@@ -2,6 +2,18 @@ import SwiftUI
 import InputMethodKit
 import CoreIME
 
+private struct ShiftKey {
+        private(set) static var isBuffering: Bool = false
+        static func triggerBuffer() {
+                isBuffering = true
+        }
+        static func resetBuffer() {
+                if isBuffering {
+                        isBuffering = false
+                }
+        }
+}
+
 extension JyutpingInputController {
 
         override func recognizedEvents(_ sender: Any!) -> Int {
@@ -9,22 +21,50 @@ extension JyutpingInputController {
                 return Int(masks.rawValue)
         }
 
+        private func shouldSwitchInputMethodMode(with event: NSEvent) -> Bool {
+                guard AppSettings.pressShiftOnce == .switchCantoneseEnglish else {
+                        ShiftKey.resetBuffer()
+                        return false
+                }
+                guard (event.keyCode == KeyCode.Modifier.VK_SHIFT_LEFT) || (event.keyCode == KeyCode.Modifier.VK_SHIFT_RIGHT) else {
+                        ShiftKey.resetBuffer()
+                        return false
+                }
+                guard event.type == .flagsChanged else {
+                        ShiftKey.resetBuffer()
+                        return false
+                }
+                if ShiftKey.isBuffering {
+                        ShiftKey.resetBuffer()
+                        return true
+                } else {
+                        ShiftKey.triggerBuffer()
+                        return false
+                }
+        }
+
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
                 guard let event = event else { return false }
-                if AppSettings.pressShiftOnce == .switchCantoneseEnglish && ShiftKey.isShiftKeyTaped(event: event) {
-                        if Options.inputMethodMode == .cantonese {
+                let modifiers = event.modifierFlags
+                let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
+                guard !shouldIgnoreCurrentEvent else { return false }
+                if shouldSwitchInputMethodMode(with: event) {
+                        switch appContext.inputForm {
+                        case .cantonese:
                                 passBuffer()
                                 Options.updateInputMethodMode(to: .abc)
                                 appContext.updateInputForm(to: .transparent)
                                 window?.setFrame(.zero, display: true)
-                        } else {
+                                return true
+                        case .transparent:
                                 Options.updateInputMethodMode(to: .cantonese)
                                 appContext.updateInputForm(to: .cantonese)
+                                return true
+                        case .options:
+                                return true
                         }
                 }
-                let modifiers = event.modifierFlags
-                let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
-                guard !shouldIgnoreCurrentEvent else { return false }
+                guard event.type == .keyDown else { return false }
                 let client: IMKTextInput? = (sender as? IMKTextInput) ?? currentClient
                 currentOrigin = client?.position
                 let currentClientID = currentClient?.uniqueClientIdentifierString()
@@ -281,7 +321,7 @@ extension JyutpingInputController {
                 case .space:
                         switch currentInputForm {
                         case .cantonese:
-                                let shouldSwitchToABCMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
+                                let shouldSwitchToABCMode: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
                                 guard !shouldSwitchToABCMode else {
                                         passBuffer()
                                         Options.updateInputMethodMode(to: .abc)
@@ -304,7 +344,7 @@ extension JyutpingInputController {
                                         return true
                                 }
                         case .transparent:
-                                let shouldSwitchToCantoneseMode: Bool = isShifting && AppSettings.shiftSpaceCombination == .switchInputMethodMode
+                                let shouldSwitchToCantoneseMode: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
                                 guard shouldSwitchToCantoneseMode else { return false }
                                 Options.updateInputMethodMode(to: .cantonese)
                                 appContext.updateInputForm(to: .cantonese)
