@@ -51,7 +51,7 @@
 // HotkeysView
 "Press **Shift** Once To" = "撳一下 Shift 掣";
 "Do Nothing" = "無";
-"Switch between Cantonese and ABC" = "粵語 / ABC 模式切換";
+"Switch between Cantonese Mode and ABC Mode" = "粵拼 / ABC 模式切換";
 
 "Press **Shift** + **Space** To" = "撳 Shift + Space";
 "Input a Full-width Space (U+3000)" = "輸入一個全寬空格（U+3000）";

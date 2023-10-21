@@ -88,7 +88,7 @@ enum FontMode: Int {
 
 enum PressShiftOnce: Int {
         case doNothing = 1
-        case switchCantoneseEnglish = 2
+        case switchInputMethodMode = 2
 }
 
 enum ShiftSpaceCombination: Int {
@@ -282,7 +282,7 @@ struct AppSettings {
                 case 0, 1:
                         return .doNothing
                 case 2:
-                        return .switchCantoneseEnglish
+                        return .switchInputMethodMode
                 default:
                         return .doNothing
                 }
@@ -293,7 +293,7 @@ struct AppSettings {
                         case 0, 1:
                                 return .doNothing
                         case 2:
-                                return .switchCantoneseEnglish
+                                return .switchInputMethodMode
                         default:
                                 return .doNothing
                         }

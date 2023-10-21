@@ -1,5 +1,5 @@
 "menu.title" = "Jyutping";
-"menu.mode.cantonese" = "Jyutping Mode";
+"menu.mode.cantonese" = "Cantonese Mode";
 "menu.mode.abc" = "ABC Mode";
 "menu.preferences" = "Settings…";
 "menu.check4updates" = "Check for Updates…";
@@ -51,7 +51,7 @@
 // HotkeysView
 "Press **Shift** Once To" = "Press **Shift** Once To";
 "Do Nothing" = "Do Nothing";
-"Switch between Cantonese and ABC" = "Switch between Cantonese and ABC";
+"Switch between Cantonese Mode and ABC Mode" = "Switch between Cantonese Mode and ABC Mode";
 
 "Press **Shift** + **Space** To" = "Press **Shift** + **Space** To";
 "Input a Full-width Space (U+3000)" = "Input a Full-width Space (U+3000)";

@@ -32,7 +32,7 @@ struct HotkeysView: View {
                                 HStack {
                                         Picker("Press **Shift** Once To", selection: $pressShiftOnce) {
                                                 Text("Do Nothing").tag(1)
-                                                Text("Switch between Cantonese and ABC").tag(2)
+                                                Text("Switch between Cantonese Mode and ABC Mode").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
@@ -45,7 +45,7 @@ struct HotkeysView: View {
                                 HStack {
                                         Picker("Press **Shift** + **Space** To", selection: $shiftSpaceCombination) {
                                                 Text("Input a Full-width Space (U+3000)").tag(1)
-                                                Text("Switch between Cantonese and ABC").tag(2)
+                                                Text("Switch between Cantonese Mode and ABC Mode").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)

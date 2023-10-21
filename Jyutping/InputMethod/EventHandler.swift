@@ -22,7 +22,7 @@ extension JyutpingInputController {
         }
 
         private func shouldSwitchInputMethodMode(with event: NSEvent) -> Bool {
-                guard AppSettings.pressShiftOnce == .switchCantoneseEnglish else {
+                guard AppSettings.pressShiftOnce == .switchInputMethodMode else {
                         ShiftKey.resetBuffer()
                         return false
                 }
