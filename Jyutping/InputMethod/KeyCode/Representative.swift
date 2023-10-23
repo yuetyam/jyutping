@@ -23,7 +23,8 @@ enum Representative: Hashable {
         case separator
         case `return`
         case backspace
-        case escapeClear
+        case escape
+        case clear
         case space
         case tab
         case previousPage
@@ -153,8 +154,10 @@ extension UInt16 {
                         return .punctuation(.equal)
                 case KeyCode.Symbol.VK_QUOTE:
                         return .separator
-                case KeyCode.Special.VK_ESCAPE, KeyCode.Keypad.VK_KEYPAD_CLEAR:
-                        return .escapeClear
+                case KeyCode.Special.VK_ESCAPE:
+                        return .escape
+                case KeyCode.Keypad.VK_KEYPAD_CLEAR:
+                        return .clear
                 case KeyCode.Special.VK_TAB:
                         return .tab
                 case KeyCode.Special.VK_PAGEUP:
@@ -166,5 +169,3 @@ extension UInt16 {
                 }
         }
 }
-
-

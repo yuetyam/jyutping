@@ -1,6 +1,7 @@
 import SwiftUI
 import InputMethodKit
 import CoreIME
+import CommonExtensions
 
 private struct ShiftKey {
         private(set) static var isBuffering: Bool = false
@@ -45,10 +46,7 @@ extension JyutpingInputController {
 
         override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
                 guard let event = event else { return false }
-                let modifiers = event.modifierFlags
-                let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
-                guard !shouldIgnoreCurrentEvent else { return false }
-                if shouldSwitchInputMethodMode(with: event) {
+                guard !shouldSwitchInputMethodMode(with: event) else {
                         switch appContext.inputForm {
                         case .cantonese:
                                 passBuffer()
@@ -65,6 +63,9 @@ extension JyutpingInputController {
                         }
                 }
                 guard event.type == .keyDown else { return false }
+                let modifiers = event.modifierFlags
+                let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
+                guard !shouldIgnoreCurrentEvent else { return false }
                 let client: IMKTextInput? = (sender as? IMKTextInput) ?? currentClient
                 currentOrigin = client?.position
                 let currentClientID = currentClient?.uniqueClientIdentifierString()
@@ -306,7 +307,7 @@ extension JyutpingInputController {
                                 handleOptions(-1)
                                 return true
                         }
-                case .escapeClear:
+                case .escape, .clear:
                         switch currentInputForm {
                         case .cantonese:
                                 guard inputStage.isBuffering else { return false }
@@ -332,14 +333,13 @@ extension JyutpingInputController {
                                 if candidates.isEmpty {
                                         passBuffer()
                                         let shouldInsertFullWidthSpace: Bool = isShifting || (Options.characterForm == .fullWidth)
-                                        let text: String = shouldInsertFullWidthSpace ? "　" : " "
+                                        let text: String = shouldInsertFullWidthSpace ? String.fullWidthSpace : String.space
                                         client?.insert(text)
                                         return true
                                 } else {
                                         let index = appContext.highlightedIndex
                                         guard let selectedItem = appContext.displayCandidates.fetch(index) else { return true }
-                                        let text = selectedItem.text
-                                        client?.insert(text)
+                                        client?.insert(selectedItem.text)
                                         aftercareSelection(selectedItem)
                                         return true
                                 }
