@@ -20,16 +20,16 @@ struct AboutView: View {
                                         SafariLink(AppMaster.websiteAddress) {
                                                 EnhancedLabel("Website", icon: "globe.asia.australia", symbol: .safari)
                                         }
-                                        SafariLink("https://jyutping.app/mac") {
+                                        SafariLink(AppMaster.jyutping4MacAddress) {
                                                 EnhancedLabel("Jyutping for macOS", icon: "command.square", symbol: .safari)
                                         }
-                                        SafariLink("https://github.com/yuetyam/jyutping") {
+                                        SafariLink(AppMaster.sourceCodeAddress) {
                                                 EnhancedLabel("Source Code", icon: "chevron.left.forwardslash.chevron.right", symbol: .safari)
                                         }
-                                        SafariLink("https://jyutping.app/privacy") {
+                                        SafariLink(AppMaster.privacyPolicyAddress) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
-                                        SafariLink("https://jyutping.app/faq") {
+                                        SafariLink(AppMaster.faqAddress) {
                                                 EnhancedLabel("FAQ", icon: "questionmark.circle", symbol: .safari)
                                         }
                                 }

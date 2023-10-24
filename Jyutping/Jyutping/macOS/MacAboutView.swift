@@ -18,9 +18,10 @@ struct MacAboutView: View {
                                 }
                                 .block()
                                 VStack {
-                                        LinkLabel(icon: "globe.asia.australia", title: "Website", link: "https://jyutping.app")
-                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Source Code", link: "https://github.com/yuetyam/jyutping")
-                                        LinkLabel(icon: "lock.circle", title: "Privacy Policy", link: "https://jyutping.app/privacy")
+                                        LinkLabel(icon: "globe.asia.australia", title: "Website", link: AppMaster.websiteAddress)
+                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Source Code", link: AppMaster.sourceCodeAddress)
+                                        LinkLabel(icon: "lock.circle", title: "Privacy Policy", link: AppMaster.privacyPolicyAddress)
+                                        LinkLabel(icon: "questionmark.circle", title: "FAQ", link: AppMaster.faqAddress)
                                 }
                                 .block()
                                 VStack {

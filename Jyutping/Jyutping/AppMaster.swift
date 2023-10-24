@@ -30,17 +30,16 @@ struct AppMaster {
                 return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 
-        /// `https://jyutping.app`
         static let websiteAddress: String = "https://jyutping.app"
-
-        /// `https://jyutping.app`
         static let websiteURL: URL = URL(string: websiteAddress)!
 
-        /// `https://apps.apple.com/hk/app/id1509367629`
-        static let appStoreAddress: String = "https://apps.apple.com/hk/app/id1509367629"
+        static let jyutping4MacAddress: String = "https://jyutping.app/mac"
+        static let privacyPolicyAddress: String = "https://jyutping.app/privacy"
+        static let faqAddress: String = "https://jyutping.app/faq"
 
-        /// Email Feedback
-        static let emailAddress: String = "bing@zheung.org"
+        static let sourceCodeAddress: String = "https://github.com/yuetyam/jyutping"
+        static let appStoreAddress: String = "https://apps.apple.com/hk/app/id1509367629"
+        static let emailAddress: String = "support@jyutping.app"
 }
 
 extension AppMaster {
