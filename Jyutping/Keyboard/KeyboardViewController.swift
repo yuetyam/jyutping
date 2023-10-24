@@ -25,14 +25,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 self.addChild(motherBoard)
         }
         override func viewWillAppear(_ animated: Bool) {
+                super.viewWillAppear(animated)
                 UserLexicon.prepare()
                 Engine.prepare()
                 instantiateHapticFeedbacks()
                 updateSpaceKeyText()
                 updateReturnKeyText()
-        }
-        override func viewDidAppear(_ animated: Bool) {
-                super.viewDidAppear(animated)
         }
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
@@ -43,15 +41,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 clearBuffer()
         }
 
-        override func viewWillLayoutSubviews() {
-                super.viewWillLayoutSubviews()
-        }
-
-        override func textWillChange(_ textInput: UITextInput?) {
-                // The app is about to change the document's contents. Perform any preparation here.
-        }
-
         override func textDidChange(_ textInput: UITextInput?) {
+                super.textDidChange(textInput)
                 let didUserClearTextFiled: Bool = inputStage.isBuffering && !textDocumentProxy.hasText
                 if didUserClearTextFiled {
                         clearBuffer()
@@ -59,6 +50,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+                super.traitCollectionDidChange(previousTraitCollection)
                 keyboardInterface = adoptKeyboardInterface()
                 updateKeyboardSize()
         }
