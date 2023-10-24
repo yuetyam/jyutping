@@ -34,9 +34,9 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 ## macOS
 由於 Mac App Store 毋接受輸入法上架，請前往 [網站](https://jyutping.app/mac) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
-安裝： [macOS 粵拼輸入法下載安裝指引](https://jyutping.app/mac/install)
-
-兼容： macOS 12 Monterey 或者更高
+安裝指引： [macOS 粵拼輸入法下載安裝指引](https://jyutping.app/mac/install)  
+常問問題： [常問問題（FAQ）](https://jyutping.app/faq)  
+兼容系統： macOS 12 Monterey 或者更高
 
 ## 擷屏（Screenshots）
 <img src="images/screenshot.png" alt="iPhone screenshots" width="440"/>
@@ -71,11 +71,14 @@ swift run -c release
 - [Rime-Cantonese](https://github.com/rime/rime-cantonese)
 - [OpenCC](https://github.com/BYVoid/OpenCC)
 
-## Support this project
+## 多謝支持（Support this project）
 <a href="https://ko-fi.com/zheung">
-        <img src="images/buy-me-a-coffee.png" alt="ko-fi, buy me a coffee" width="150"/>
+        <img src="images/buy-me-a-coffee.png" alt="ko-fi, buy me a coffee" width="180"/>
 </a>
 <br>
 <a href="https://patreon.com/bingzheung">
-        <img src="images/become-a-patron.png" alt="patreon" width="150"/>
+        <img src="images/become-a-patron.png" alt="patreon" width="180"/>
 </a>
+<br>
+<br>
+<img src="images/sponsor.jpg" alt="WeChat Sponsor" width="180"/>
