@@ -4,8 +4,6 @@ import SwiftUI
 
 struct MacInputMethodInstallationView: View {
 
-        private let websiteAddress: String = "https://jyutping.app"
-
         @State private var isWebsiteAddressCopied: Bool = false
 
         var body: some View {
@@ -24,10 +22,10 @@ struct MacInputMethodInstallationView: View {
                                 .block()
 
                                 HStack(spacing: 16) {
-                                        Link("Website", destination: URL(string: websiteAddress)!).foregroundStyle(Color.accentColor)
-                                        Text(verbatim: websiteAddress).font(.fixedWidth)
+                                        Link("Website", destination: AppMaster.websiteURL).foregroundStyle(Color.accentColor)
+                                        Text(verbatim: AppMaster.websiteAddress).font(.fixedWidth)
                                         Button {
-                                                AppMaster.copy(websiteAddress)
+                                                AppMaster.copy(AppMaster.websiteAddress)
                                                 isWebsiteAddressCopied = true
                                         } label: {
                                                 if isWebsiteAddressCopied {
