@@ -72,6 +72,9 @@ struct CandidateScrollBar: View {
                                         }
                                 }
                                 .frame(width: context.keyboardWidth - expanderWidth, height: Constant.toolBarHeight)
+                                .onChange(of: context.candidatesState) { _ in
+                                        proxy.scrollTo(topID)
+                                }
                         }
                         ZStack {
                                 Color.interactiveClear

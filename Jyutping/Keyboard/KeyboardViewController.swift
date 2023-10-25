@@ -609,7 +609,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         /// Cached Candidate sequence for UserLexicon
         private lazy var selectedCandidates: [Candidate] = []
 
-        @Published private(set) var candidates: [Candidate] = []
+        @Published private(set) var candidatesState: Int = 0
+        @Published private(set) var candidates: [Candidate] = [] {
+                didSet {
+                        candidatesState += 1
+                }
+        }
 
 
         // MARK: - Properties
