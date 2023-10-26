@@ -3,7 +3,12 @@ import InputMethodKit
 import CoreIME
 import CommonExtensions
 
-private struct ShiftKey {
+private struct Modifier {
+        private(set) static var previousModifiers: NSEvent.ModifierFlags = .init()
+        static func updatePreviousModifiers(to modifiers: NSEvent.ModifierFlags) {
+                previousModifiers = modifiers
+        }
+
         private(set) static var isBuffering: Bool = false
         static func triggerBuffer() {
                 isBuffering = true
@@ -23,23 +28,32 @@ extension JyutpingInputController {
         }
 
         private func shouldSwitchInputMethodMode(with event: NSEvent) -> Bool {
+                let currentModifiers: NSEvent.ModifierFlags = event.modifierFlags
+                defer {
+                        Modifier.updatePreviousModifiers(to: currentModifiers)
+                }
                 guard AppSettings.pressShiftOnce == .switchInputMethodMode else {
-                        ShiftKey.resetBuffer()
+                        Modifier.resetBuffer()
                         return false
                 }
                 guard (event.keyCode == KeyCode.Modifier.VK_SHIFT_LEFT) || (event.keyCode == KeyCode.Modifier.VK_SHIFT_RIGHT) else {
-                        ShiftKey.resetBuffer()
+                        Modifier.resetBuffer()
                         return false
                 }
                 guard event.type == .flagsChanged else {
-                        ShiftKey.resetBuffer()
+                        Modifier.resetBuffer()
                         return false
                 }
-                if ShiftKey.isBuffering {
-                        ShiftKey.resetBuffer()
+                let isShiftKeyPressed: Bool = Modifier.previousModifiers.isEmpty && (currentModifiers == .shift)
+                let isShiftKeyReleased: Bool = (Modifier.previousModifiers == .shift) && currentModifiers.isEmpty
+                if isShiftKeyPressed && !Modifier.isBuffering {
+                        Modifier.triggerBuffer()
+                        return false
+                } else if isShiftKeyReleased && Modifier.isBuffering {
+                        Modifier.resetBuffer()
                         return true
                 } else {
-                        ShiftKey.triggerBuffer()
+                        Modifier.resetBuffer()
                         return false
                 }
         }
