@@ -46,7 +46,7 @@ extension JyutpingInputController {
                 }
                 let isShiftKeyPressed: Bool = Modifier.previousModifiers.isEmpty && (currentModifiers == .shift)
                 let isShiftKeyReleased: Bool = (Modifier.previousModifiers == .shift) && currentModifiers.isEmpty
-                if isShiftKeyPressed && !Modifier.isBuffering {
+                if isShiftKeyPressed && !(Modifier.isBuffering) {
                         Modifier.triggerBuffer()
                         return false
                 } else if isShiftKeyReleased && Modifier.isBuffering {

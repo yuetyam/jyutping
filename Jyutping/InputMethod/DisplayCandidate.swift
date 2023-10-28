@@ -33,12 +33,9 @@ struct DisplayCandidate: Hashable {
                         self.comment = comment
                         self.secondaryComment = nil
                 case .compose:
-                        let commentText: String = candidate.lexiconText
-                        let comment: String? = commentText.isEmpty ? nil : Converter.convert(commentText, to: Options.characterStandard)
-                        let secondaryComment: String? = candidate.romanization.isEmpty ? nil : candidate.romanization
                         self.text = text
-                        self.comment = comment
-                        self.secondaryComment = secondaryComment
+                        self.comment = candidate.romanization
+                        self.secondaryComment = nil
                 }
         }
 }
