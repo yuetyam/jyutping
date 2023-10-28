@@ -3,7 +3,7 @@ import AVFoundation
 struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
-        private static let voice: AVSpeechSynthesisVoice? = preferredIOS17Voice()
+        private static let voice: AVSpeechSynthesisVoice? = preferredCantoneseVoice()
 
         static func speak(_ text: String) {
                 guard isVoiceAvailable else {
@@ -89,15 +89,24 @@ struct Speech {
         private static let englishVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: "en-US") ?? AVSpeechSynthesisVoice(language: "en-GB") ?? AVSpeechSynthesisVoice(language: "en-AU")
         private static let currentDefaultVoice: AVSpeechSynthesisVoice? = AVSpeechSynthesisVoice(language: nil)
 
-        /// Workaround for iOS 17.
-        ///
-        /// Cantonese .premium voices are broken in iOS 17.
-        private static func preferredIOS17Voice() -> AVSpeechSynthesisVoice? {
+        private static func preferredCantoneseVoice() -> AVSpeechSynthesisVoice? {
                 let languageCode: String = SpeechLanguage.chineseHongKong.code
                 let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
                 guard !(voices.isEmpty) else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
-                        if #available(iOS 17.0, macOS 14.0, *) {
+                        if #available(iOS 17.1, macOS 14.1, *) {
+                                switch (lhs.quality, rhs.quality) {
+                                case (.premium, .enhanced):
+                                        return true
+                                case (.premium, .default):
+                                        return true
+                                case (.enhanced, .default):
+                                        return true
+                                case (_, _):
+                                        return false
+                                }
+                        } else if #available(iOS 17.0, macOS 14.0, *) {
+                                // Premium Cantonese voices are broken in iOS 17.0
                                 switch (lhs.quality, rhs.quality) {
                                 case (.premium, _):
                                         return false
