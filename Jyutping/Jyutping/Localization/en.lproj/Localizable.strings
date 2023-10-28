@@ -41,7 +41,7 @@
 "Stroke Reverse Lookup Description" = "Start with “x”, then enter Stroke code. For example, enter “xwsad”, candidate “木” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
 "Lookup Jyutping with Loengfan" = "Lookup Jyutping with Loengfan";
-"Loengfan Reverse Lookup Description" = "Start with “q”, then enter two Jyutping syllables. For example, enter “xmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
+"Loengfan Reverse Lookup Description" = "Start with “q”, then enter two components' Jyutping. For example, enter “xmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
 "More Introductions" = "More Introductions";
 "title.introductions" = "Introductions";
@@ -51,11 +51,11 @@
 "Swipe from right to left on the Delete key will clear the pre-edited syllables" = "Swipe from right to left on the Delete key will clear the pre-edited syllables";
 
 "Text to Speech" = "Text to Speech";
-"tts.notice.0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
-"tts.notice.1" = "如果本設備處於靜音模式，文字語音朗讀可能會冇聲音。";
-"tts.notice.2" = "爲保證發音質素，請到 **設定** → **一般** → **語言與地區** 度，添加 **繁體中文(香港)** 語言。";
-"tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助使用** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
-"faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
+"tts.notice.0" = "This app uses system built-in Text-to-Speech (TTS) service to speak texts.";
+"tts.notice.1" = "Text-to-Speech (TTS) may not work if this device is in silent mode.";
+"tts.notice.2" = "To ensure TTS functional, please go to **Settings** → **General** → **Language & Region**, then add **Chinese, Traditional (Hong Kong)** language.";
+"tts.notice.3" = "To improve TTS quality, please go to **Settings** → **Accessibility** → **VioceOver** → **Speech**, then add **Chinese (Hong Kong)** language voice.";
+"faq.heading.tts" = "Why is my TTS not working?";
 
 "FAQ" = "FAQ";
 "Can I use with external keyboards?" = "Can I use with external keyboards?";
@@ -68,7 +68,7 @@
 
 "Privacy Notice" = "Privacy Notice";
 "privacy.notice.1" = "This Keyboard will always be offline and never connected to the network.";
-"privacy.notice.2" = "There is no communication between the Keyboard Extension and the main App.";
+"privacy.notice.2" = "There is no communication between the Keyboard Extension and the main app.";
 "privacy.notice.3" = "Enabling Haptic Feedback needs Allow Full Access.";
 "privacy.notice.4" = "The Paste button on the Keyboard would not collect any content of the Clipboard.";
 "privacy.notice.footer" = "TLDR: We do NOT collect or share personal information.";
