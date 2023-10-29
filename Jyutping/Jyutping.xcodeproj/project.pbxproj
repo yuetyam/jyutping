@@ -116,8 +116,8 @@
 		37A7EB6A2A92B44E00B7CDAF /* PadNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB692A92B44E00B7CDAF /* PadNumericKeyboard.swift */; };
 		37A7EB6C2A92B4E800B7CDAF /* PadSymbolInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */; };
 		37A9ECF72A1E93E100F63732 /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */; };
-		37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775429D96FEC007F07D7 /* MacHansMessView.swift */; };
-		37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */; };
+		37AD775529D96FEC007F07D7 /* MacConfusionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775429D96FEC007F07D7 /* MacConfusionView.swift */; };
+		37AD775729D9C9E9007F07D7 /* IOSConfusionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AD775629D9C9E9007F07D7 /* IOSConfusionView.swift */; };
 		37B1765E2A049B6800A4E531 /* AlphabeticKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */; };
 		37B176682A050B1100A4E531 /* KeyboardCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B176672A050B1100A4E531 /* KeyboardCase.swift */; };
 		37B1766C2A05465000A4E531 /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1766B2A05465000A4E531 /* InputStage.swift */; };
@@ -459,8 +459,8 @@
 		37A7EB692A92B44E00B7CDAF /* PadNumericKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadNumericKeyboard.swift; sourceTree = "<group>"; };
 		37A7EB6B2A92B4E800B7CDAF /* PadSymbolInputKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadSymbolInputKey.swift; sourceTree = "<group>"; };
 		37A9ECF62A1E93E100F63732 /* EmojiBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
-		37AD775429D96FEC007F07D7 /* MacHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacHansMessView.swift; sourceTree = "<group>"; };
-		37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSHansMessView.swift; sourceTree = "<group>"; };
+		37AD775429D96FEC007F07D7 /* MacConfusionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacConfusionView.swift; sourceTree = "<group>"; };
+		37AD775629D9C9E9007F07D7 /* IOSConfusionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSConfusionView.swift; sourceTree = "<group>"; };
 		37B1765D2A049B6800A4E531 /* AlphabeticKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeticKeyboard.swift; sourceTree = "<group>"; };
 		37B176672A050B1100A4E531 /* KeyboardCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardCase.swift; sourceTree = "<group>"; };
 		37B1766B2A05465000A4E531 /* InputStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
@@ -898,7 +898,7 @@
 			children = (
 				37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */,
 				37D7BDA9294CB9F3006A6ADD /* IOSExpressionsView.swift */,
-				37AD775629D9C9E9007F07D7 /* IOSHansMessView.swift */,
+				37AD775629D9C9E9007F07D7 /* IOSConfusionView.swift */,
 				37C647F72AA1D8260092D447 /* IOSSurnamesView.swift */,
 				375F35962AA4C838001D425A /* IOSCinZiManView.swift */,
 				3773564929A744EA00468C2A /* IOSCantonMetroView.swift */,
@@ -1115,7 +1115,7 @@
 				37D7BD8F294CB6C6006A6ADD /* MacInputMethodInstallationView.swift */,
 				37D7BD95294CB6C6006A6ADD /* MacIntroductionsView.swift */,
 				37D7BD96294CB6C6006A6ADD /* MacExpressionsView.swift */,
-				37AD775429D96FEC007F07D7 /* MacHansMessView.swift */,
+				37AD775429D96FEC007F07D7 /* MacConfusionView.swift */,
 				37C647F92AA1DC020092D447 /* MacSurnamesView.swift */,
 				375F35982AA4CCD4001D425A /* MacCinZiManView.swift */,
 				37EF195A296DBE5B00A3F4C9 /* Search */,
@@ -1732,7 +1732,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37AD775729D9C9E9007F07D7 /* IOSHansMessView.swift in Sources */,
+				37AD775729D9C9E9007F07D7 /* IOSConfusionView.swift in Sources */,
 				37962AE92AC962A600C6C98A /* SyllableChecker.swift in Sources */,
 				37D7BD67294CB212006A6ADD /* FontExtensions.swift in Sources */,
 				37D7BD68294CB212006A6ADD /* ViewExtensions.swift in Sources */,
@@ -1743,7 +1743,7 @@
 				37D7BDB3294CB9F3006A6ADD /* AboutView.swift in Sources */,
 				37D7BD8B294CB61F006A6ADD /* InitialTable.swift in Sources */,
 				375F35972AA4C838001D425A /* IOSCinZiManView.swift in Sources */,
-				37AD775529D96FEC007F07D7 /* MacHansMessView.swift in Sources */,
+				37AD775529D96FEC007F07D7 /* MacConfusionView.swift in Sources */,
 				37D7BD79294CB440006A6ADD /* StemsBranchesView.swift in Sources */,
 				3773564A29A744EA00468C2A /* IOSCantonMetroView.swift in Sources */,
 				375F35992AA4CCD4001D425A /* MacCinZiManView.swift in Sources */,

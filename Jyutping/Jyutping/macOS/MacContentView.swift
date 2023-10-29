@@ -30,7 +30,7 @@ struct MacContentView: View {
                                         Label("Install Input Method", systemImage: "laptopcomputer.and.arrow.down").tag(ViewIdentifier.installation)
                                         Label("Introductions", systemImage: "book").tag(ViewIdentifier.introductions)
                                         Label("Cantonese Expressions", systemImage: "checkmark.seal").tag(ViewIdentifier.expressions)
-                                        Label("Hans Mess", systemImage: "character").tag(ViewIdentifier.hansMess)
+                                        Label("Simplified Character Confusion", systemImage: "character").tag(ViewIdentifier.confusion)
                                 } header: {
                                         Text("Input Method").textCase(nil)
                                 }
@@ -73,8 +73,8 @@ struct MacContentView: View {
                                 MacIntroductionsView().visualEffect()
                         case .expressions:
                                 MacExpressionsView().visualEffect()
-                        case .hansMess:
-                                MacHansMessView().visualEffect()
+                        case .confusion:
+                                MacConfusionView().visualEffect()
                         case .search:
                                 MacSearchView().visualEffect()
                         case .initials:
@@ -117,7 +117,7 @@ private enum ViewIdentifier: Int, Hashable, Identifiable {
         case installation
         case introductions
         case expressions
-        case hansMess
+        case confusion
 
         case search
         case initials

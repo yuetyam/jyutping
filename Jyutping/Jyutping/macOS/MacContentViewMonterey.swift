@@ -27,9 +27,9 @@ struct MacContentViewMonterey: View {
                                                 Label("Cantonese Expressions", systemImage: "checkmark.seal")
                                         }
                                         NavigationLink {
-                                                MacHansMessView().visualEffect()
+                                                MacConfusionView().visualEffect()
                                         } label: {
-                                                Label("Hans Mess", systemImage: "character")
+                                                Label("Simplified Character Confusion", systemImage: "character")
                                         }
                                 } header: {
                                         Text("Input Method").textCase(nil)

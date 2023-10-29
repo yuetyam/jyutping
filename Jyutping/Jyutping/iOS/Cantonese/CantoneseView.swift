@@ -15,8 +15,8 @@ struct CantoneseView: View {
                                         NavigationLink(destination: IOSExpressionsView()) {
                                                 Label("Cantonese Expressions", systemImage: "checkmark.seal")
                                         }
-                                        NavigationLink(destination: IOSHansMessView()) {
-                                                Label("Hans Mess", systemImage: "character")
+                                        NavigationLink(destination: IOSConfusionView()) {
+                                                Label("Simplified Character Confusion", systemImage: "character")
                                         }
                                 }
 

@@ -128,3 +128,10 @@ extension AppMaster {
                 return GwongWan.match(for: character)
         }
 }
+
+extension AppMaster {
+        private(set) static var confusionEntries: [ConfusionEntry] = []
+        static func fetchConfusionEntries() {
+                confusionEntries = Confusion.fetch()
+        }
+}
