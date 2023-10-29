@@ -66,19 +66,14 @@ struct HomeView: View {
                                                 .accessibilityLabel("accessibility.how_to_enable_this_keyboard")
                                         }
                                 } footer: {
-                                        if shouldDisplayHapticFeedbackTip {
-                                                Text("Haptic Feedback requires Full Access").textCase(nil)
-                                        } else {
-                                                EmptyView()
-                                        }
+                                        Text("Haptic Feedback requires Full Access")
+                                                .textCase(nil)
+                                                .opacity(shouldDisplayHapticFeedbackTip ? 1 : 0)
                                 }
                                 if !isKeyboardEnabled || isGuideViewExpanded {
                                         Section {
-                                                Button {
-                                                        guard let url: URL = URL(string: UIApplication.openSettingsURLString) else { return }
-                                                        UIApplication.shared.open(url)
-                                                } label: {
-                                                        HStack{
+                                                Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+                                                        HStack {
                                                                 Spacer()
                                                                 Text("Go to **Settings**")
                                                                 Spacer()
