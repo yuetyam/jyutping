@@ -5,25 +5,30 @@ import Materials
 
 struct MacCinZiManView: View {
 
-        @State private var lines: [LineUnit] = []
-        @State private var isLinesLoaded: Bool = false
+        @State private var units: [LineUnit] = AppMaster.cinZiManUnits
+        @State private var isUnitsLoaded: Bool = false
 
         var body: some View {
                 ScrollView {
                         LazyVStack(alignment: .leading, spacing: 8) {
                                 HeaderTermView(term: Term(name: "千字文", romanization: "cin1 zi6 man4")).block()
-                                ForEach(0..<lines.count, id: \.self) { index in
-                                        MacLineUnitView(line: lines[index])
+                                ForEach(0..<units.count, id: \.self) { index in
+                                        MacLineUnitView(line: units[index])
                                 }
                         }
                         .padding()
                 }
                 .task {
-                        guard !isLinesLoaded else { return }
-                        lines = CinZiMan.fetch()
-                        isLinesLoaded = true
+                        guard !isUnitsLoaded else { return }
+                        defer { isUnitsLoaded = true }
+                        if AppMaster.cinZiManUnits.isEmpty {
+                                AppMaster.fetchCinZiManUnits()
+                                units = CinZiMan.fetch()
+                        } else {
+                                units = AppMaster.cinZiManUnits
+                        }
                 }
-                .animation(.default, value: lines.count)
+                .animation(.default, value: units.count)
                 .navigationTitle("Thousand Character Classic")
         }
 }

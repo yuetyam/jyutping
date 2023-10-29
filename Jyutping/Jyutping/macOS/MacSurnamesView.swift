@@ -5,7 +5,7 @@ import Materials
 
 struct MacSurnamesView: View {
 
-        @State private var surnames: [LineUnit] = []
+        @State private var surnames: [LineUnit] = AppMaster.surnames
         @State private var isSurnamesLoaded: Bool = false
 
         var body: some View {
@@ -20,8 +20,13 @@ struct MacSurnamesView: View {
                 }
                 .task {
                         guard !isSurnamesLoaded else { return }
-                        surnames = BaakGaaSing.fetch()
-                        isSurnamesLoaded = true
+                        defer { isSurnamesLoaded = true }
+                        if AppMaster.surnames.isEmpty {
+                                AppMaster.fetchSurnames()
+                                surnames = BaakGaaSing.fetch()
+                        } else {
+                                surnames = AppMaster.surnames
+                        }
                 }
                 .animation(.default, value: surnames.count)
                 .navigationTitle("Hundred Family Surnames")

@@ -5,24 +5,29 @@ import Materials
 
 struct IOSCinZiManView: View {
 
-        @State private var lines: [LineUnit] = []
-        @State private var isLinesLoaded: Bool = false
+        @State private var units: [LineUnit] = AppMaster.cinZiManUnits
+        @State private var isUnitsLoaded: Bool = false
 
         var body: some View {
                 List {
                         Section {
                                 HeaderTermView(term: Term(name: "千字文", romanization: "cin1 zi6 man4"))
                         }
-                        ForEach(0..<lines.count, id: \.self) { index in
+                        ForEach(0..<units.count, id: \.self) { index in
                                 Section {
-                                        IOSLineUnitView(line: lines[index])
+                                        IOSLineUnitView(line: units[index])
                                 }
                         }
                 }
                 .task {
-                        guard !isLinesLoaded else { return }
-                        lines = CinZiMan.fetch()
-                        isLinesLoaded = true
+                        guard !isUnitsLoaded else { return }
+                        defer { isUnitsLoaded = true }
+                        if AppMaster.cinZiManUnits.isEmpty {
+                                AppMaster.fetchCinZiManUnits()
+                                units = CinZiMan.fetch()
+                        } else {
+                                units = AppMaster.cinZiManUnits
+                        }
                 }
                 .textSelection(.enabled)
                 .navigationTitle("title.characters")

@@ -5,7 +5,7 @@ import Materials
 
 struct IOSSurnamesView: View {
 
-        @State private var surnames: [LineUnit] = []
+        @State private var surnames: [LineUnit] = AppMaster.surnames
         @State private var isSurnamesLoaded: Bool = false
 
         var body: some View {
@@ -21,8 +21,13 @@ struct IOSSurnamesView: View {
                 }
                 .task {
                         guard !isSurnamesLoaded else { return }
-                        surnames = BaakGaaSing.fetch()
-                        isSurnamesLoaded = true
+                        defer { isSurnamesLoaded = true }
+                        if AppMaster.surnames.isEmpty {
+                                AppMaster.fetchSurnames()
+                                surnames = BaakGaaSing.fetch()
+                        } else {
+                                surnames = AppMaster.surnames
+                        }
                 }
                 .textSelection(.enabled)
                 .navigationTitle("title.surnames")

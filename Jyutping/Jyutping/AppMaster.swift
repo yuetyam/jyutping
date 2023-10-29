@@ -134,4 +134,14 @@ extension AppMaster {
         static func fetchConfusionEntries() {
                 confusionEntries = Confusion.fetch()
         }
+
+        private(set) static var surnames: [LineUnit] = []
+        static func fetchSurnames() {
+                surnames = BaakGaaSing.fetch()
+        }
+
+        private(set) static var cinZiManUnits: [LineUnit] = []
+        static func fetchCinZiManUnits() {
+                cinZiManUnits = CinZiMan.fetch()
+        }
 }
