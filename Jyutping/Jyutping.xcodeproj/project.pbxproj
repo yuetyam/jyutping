@@ -76,8 +76,8 @@
 		3773564D29A769E900468C2A /* MacMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564C29A769E900468C2A /* MacMetroLineView.swift */; };
 		3773564F29A769FC00468C2A /* MacStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773564E29A769FC00468C2A /* MacStationLabel.swift */; };
 		3773565129A76A6100468C2A /* MacFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773565029A76A6100468C2A /* MacFatshanMetroView.swift */; };
-		378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* RomanizationLabelView.swift */; };
-		378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* RomanizationLabel.swift */; };
+		378020D029752C31002F6E0A /* PronunciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020CF29752C31002F6E0A /* PronunciationView.swift */; };
+		378020D229752EA6002F6E0A /* PronunciationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D129752EA6002F6E0A /* PronunciationLabel.swift */; };
 		378020D42975A1D0002F6E0A /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D32975A1D0002F6E0A /* GwongWanView.swift */; };
 		378020D62975A6FC002F6E0A /* GwongWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378020D52975A6FC002F6E0A /* GwongWanLabel.swift */; };
 		3783D9B62973BEF5000B3332 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783D9B52973BEF5000B3332 /* CommentLabel.swift */; };
@@ -417,8 +417,8 @@
 		3773564C29A769E900468C2A /* MacMetroLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetroLineView.swift; sourceTree = "<group>"; };
 		3773564E29A769FC00468C2A /* MacStationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacStationLabel.swift; sourceTree = "<group>"; };
 		3773565029A76A6100468C2A /* MacFatshanMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacFatshanMetroView.swift; sourceTree = "<group>"; };
-		378020CF29752C31002F6E0A /* RomanizationLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabelView.swift; sourceTree = "<group>"; };
-		378020D129752EA6002F6E0A /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
+		378020CF29752C31002F6E0A /* PronunciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationView.swift; sourceTree = "<group>"; };
+		378020D129752EA6002F6E0A /* PronunciationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PronunciationLabel.swift; sourceTree = "<group>"; };
 		378020D32975A1D0002F6E0A /* GwongWanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
 		378020D52975A6FC002F6E0A /* GwongWanLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GwongWanLabel.swift; sourceTree = "<group>"; };
 		3783D9B52973BEF5000B3332 /* CommentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
@@ -949,7 +949,7 @@
 			children = (
 				37B6BDB8296EA2510008B9F0 /* SearchView.swift */,
 				3768795B297826780006D0A6 /* CantoneseTextLabel.swift */,
-				378020D129752EA6002F6E0A /* RomanizationLabel.swift */,
+				378020D129752EA6002F6E0A /* PronunciationLabel.swift */,
 				37EF1952296DA2B100A3F4C9 /* YingWaaFanWanLabel.swift */,
 				37B6BDBD296EE30A0008B9F0 /* ChoHokYuetYamCitYiuLabel.swift */,
 				37EF195B296DBEDA00A3F4C9 /* FanWanCuetYiuLabel.swift */,
@@ -1216,7 +1216,7 @@
 				37D7BD90294CB6C6006A6ADD /* MacSearchView.swift */,
 				370AA36D297975D400A666A5 /* SearchField.swift */,
 				37687959297817F50006D0A6 /* CantoneseTextView.swift */,
-				378020CF29752C31002F6E0A /* RomanizationLabelView.swift */,
+				378020CF29752C31002F6E0A /* PronunciationView.swift */,
 				37EF1958296DBE1600A3F4C9 /* YingWaaFanWanView.swift */,
 				37B6BDBB296EB8BB0008B9F0 /* ChoHokYuetYamCitYiuView.swift */,
 				37EF1956296DBDCD00A3F4C9 /* FanWanCuetYiuView.swift */,
@@ -1764,7 +1764,7 @@
 				37C647FA2AA1DC020092D447 /* MacSurnamesView.swift in Sources */,
 				37D7BDB7294CB9F3006A6ADD /* HomeView.swift in Sources */,
 				370AA36E297975D400A666A5 /* SearchField.swift in Sources */,
-				378020D229752EA6002F6E0A /* RomanizationLabel.swift in Sources */,
+				378020D229752EA6002F6E0A /* PronunciationLabel.swift in Sources */,
 				37D7BD5B294CB182006A6ADD /* Syllable2IPA.swift in Sources */,
 				37D7BD7C294CB440006A6ADD /* Term.swift in Sources */,
 				37D7BD97294CB6C6006A6ADD /* MacInputMethodInstallationView.swift in Sources */,
@@ -1782,7 +1782,7 @@
 				37D7BD9C294CB6C6006A6ADD /* MacAboutView.swift in Sources */,
 				3773564D29A769E900468C2A /* MacMetroLineView.swift in Sources */,
 				37D7BDAF294CB9F3006A6ADD /* IOSContentView.swift in Sources */,
-				378020D029752C31002F6E0A /* RomanizationLabelView.swift in Sources */,
+				378020D029752C31002F6E0A /* PronunciationView.swift in Sources */,
 				37D7BD80294CB4B3006A6ADD /* MenuCopyButton.swift in Sources */,
 				37D7BD98294CB6C6006A6ADD /* MacSearchView.swift in Sources */,
 				37D7BD99294CB6C6006A6ADD /* MacResourcesView.swift in Sources */,

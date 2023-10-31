@@ -2,14 +2,15 @@
 
 import SwiftUI
 import Materials
+import CommonExtensions
 
 struct MacSearchView: View {
 
-        @State private var submittedText: String = ""
+        @State private var submittedText: String = String.empty
         @FocusState private var isTextFieldFocused: Bool
 
-        @State private var cantonese: String = ""
-        @State private var pronunciations: [String] = []
+        @State private var cantonese: String = String.empty
+        @State private var lexicon: CantoneseLexicon? = nil
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
         @State private var fanWanEntries: [FanWanCuetYiu] = []
@@ -24,26 +25,20 @@ struct MacSearchView: View {
                         animationState += 1
                 }
                 guard !trimmedInput.isEmpty else {
-                        cantonese = ""
-                        pronunciations = []
                         yingWaaEntries = []
                         choHokEntries = []
                         fanWanEntries = []
                         gwongWanEntries = []
+                        lexicon = nil
+                        cantonese = String.empty
                         return
                 }
                 yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
                 choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
                 fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                 gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
-                let search = AppMaster.lookup(text: trimmedInput)
-                if search.romanizations.isEmpty {
-                        cantonese = trimmedInput
-                        pronunciations = []
-                } else {
-                        cantonese = search.text
-                        pronunciations = search.romanizations
-                }
+                lexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
+                cantonese = trimmedInput
         }
 
         var body: some View {
@@ -66,18 +61,17 @@ struct MacSearchView: View {
                         ScrollView {
                                 LazyVStack(spacing: 24) {
                                         if !cantonese.isEmpty {
-                                                CantoneseTextView(cantonese).block().id(topID)
-                                        }
-                                        if !pronunciations.isEmpty {
                                                 VStack {
-                                                        ForEach(0..<pronunciations.count, id: \.self) { index in
-                                                                RomanizationLabelView(pronunciations[index])
-                                                                if (index < pronunciations.count - 1) {
+                                                        CantoneseTextView(cantonese)
+                                                        if let pronunciations = lexicon?.pronunciations {
+                                                                ForEach(0..<pronunciations.count, id: \.self) { index in
                                                                         Divider()
+                                                                        PronunciationView(pronunciations[index])
                                                                 }
                                                         }
                                                 }
                                                 .block()
+                                                .id(topID)
                                         }
                                         if !yingWaaEntries.isEmpty {
                                                 VStack(spacing: 2) {
@@ -90,10 +84,10 @@ struct MacSearchView: View {
                                                         .font(.copilot)
                                                         VStack {
                                                                 ForEach(0..<yingWaaEntries.count, id: \.self) { index in
-                                                                        YingWaaFanWanView(entry: yingWaaEntries[index])
-                                                                        if (index < yingWaaEntries.count - 1) {
+                                                                        if (index != 0) {
                                                                                 Divider()
                                                                         }
+                                                                        YingWaaFanWanView(entry: yingWaaEntries[index])
                                                                 }
                                                         }
                                                         .block()
@@ -110,10 +104,10 @@ struct MacSearchView: View {
                                                         .font(.copilot)
                                                         VStack {
                                                                 ForEach(0..<choHokEntries.count, id: \.self) { index in
-                                                                        ChoHokYuetYamCitYiuView(entry: choHokEntries[index])
-                                                                        if (index < choHokEntries.count - 1) {
+                                                                        if (index != 0) {
                                                                                 Divider()
                                                                         }
+                                                                        ChoHokYuetYamCitYiuView(entry: choHokEntries[index])
                                                                 }
                                                         }
                                                         .block()
@@ -129,10 +123,10 @@ struct MacSearchView: View {
                                                         .font(.copilot)
                                                         VStack {
                                                                 ForEach(0..<fanWanEntries.count, id: \.self) { index in
-                                                                        FanWanCuetYiuView(entry: fanWanEntries[index])
-                                                                        if (index < fanWanEntries.count - 1) {
+                                                                        if (index != 0) {
                                                                                 Divider()
                                                                         }
+                                                                        FanWanCuetYiuView(entry: fanWanEntries[index])
                                                                 }
                                                         }
                                                         .block()
@@ -148,10 +142,10 @@ struct MacSearchView: View {
                                                         .font(.copilot)
                                                         VStack {
                                                                 ForEach(0..<gwongWanEntries.count, id: \.self) { index in
-                                                                        GwongWanView(entry: gwongWanEntries[index])
-                                                                        if (index < gwongWanEntries.count - 1) {
+                                                                        if (index != 0) {
                                                                                 Divider()
                                                                         }
+                                                                        GwongWanView(entry: gwongWanEntries[index])
                                                                 }
                                                         }
                                                         .block()

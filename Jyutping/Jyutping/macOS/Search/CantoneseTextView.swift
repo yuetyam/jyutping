@@ -15,7 +15,11 @@ struct CantoneseTextView: View {
 
         var body: some View {
                 HStack(spacing: 16) {
-                        Text(verbatim: text)
+                        HStack {
+                                Text(verbatim: "文字")
+                                Text.separator
+                                Text(verbatim: text)
+                        }
                         if let unicode {
                                 Text(verbatim: unicode).font(.fixedWidth).foregroundStyle(Color.secondary)
                         }

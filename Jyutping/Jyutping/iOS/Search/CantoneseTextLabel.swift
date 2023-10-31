@@ -15,7 +15,11 @@ struct CantoneseTextLabel: View {
 
         var body: some View {
                 HStack(spacing: 16) {
-                        Text(verbatim: text)
+                        HStack {
+                                Text(verbatim: "文字").font(.copilot)
+                                Text.separator.font(.copilot)
+                                Text(verbatim: text)
+                        }
                         if let unicode {
                                 Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
                         }

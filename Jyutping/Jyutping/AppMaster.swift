@@ -44,17 +44,17 @@ struct AppMaster {
 
 extension AppMaster {
 
-        /// Lookup Cantonese Romanization for text
-        /// - Parameter text: Cantonese text
-        /// - Returns: Cantonese text and corresponding romanizations
-        static func lookup(text: String) -> JyutpingProvider.Response {
-                let filtered: String = text.filter({ $0.isIdeographic })
-                let search = JyutpingProvider.search(for: filtered)
-                guard filtered != text else { return search }
+        /// Lookup Cantonese CantoneseLexicon for the given text.
+        /// - Parameter text: Cantonese text.
+        /// - Returns: CantoneseLexicon.
+        static func lookupCantoneseLexicon(for text: String) -> CantoneseLexicon {
+                let filtered: String = text.filter(\.isIdeographic)
+                let search = CantoneseLexicon.search(text: filtered)
+                guard filtered.count != text.count else { return search }
                 guard !(filtered.isEmpty) else { return search }
                 let transformed = text.textBlocks
                 var handledCount: Int = 0
-                var combinedText: String = ""
+                var combinedText: String = String.empty
                 for item in transformed {
                         if item.isIdeographic {
                                 let tail = search.text.dropFirst(handledCount)
@@ -66,14 +66,14 @@ extension AppMaster {
                                 combinedText += item.text
                         }
                 }
-                let combinedRomanizations = search.romanizations.map { romanization -> String in
-                        let syllables: [String] = romanization.components(separatedBy: " ")
+                let combinedRomanizations = search.pronunciations.map(\.romanization).map { romanization -> String in
+                        let syllables: [String] = romanization.components(separatedBy: String.space)
                         var index: Int = 0
-                        var newRomanization: String = ""
+                        var newRomanization: String = String.empty
                         var lastWasIdeographic: Bool = false
                         for character in text {
                                 if character.isIdeographic {
-                                        newRomanization += (syllables[index] + " ")
+                                        newRomanization += (syllables[index] + String.space)
                                         index += 1
                                         lastWasIdeographic = true
                                 } else {
@@ -86,7 +86,8 @@ extension AppMaster {
                         }
                         return newRomanization.trimmingCharacters(in: .whitespaces)
                 }
-                return JyutpingProvider.Response(text: combinedText, romanizations: combinedRomanizations)
+                let combinedPronunciations = combinedRomanizations.map({ Pronunciation(romanization: $0) })
+                return CantoneseLexicon(text: combinedText, pronunciations: combinedPronunciations)
         }
 }
 

@@ -2,6 +2,7 @@
 
 import SwiftUI
 import Materials
+import CommonExtensions
 
 struct SearchView: View {
 
@@ -15,9 +16,9 @@ struct SearchView: View {
         private let submitLabel: SubmitLabel
         @Binding private var animationState: Int
 
-        @State private var inputText: String = ""
-        @State private var cantonese: String = ""
-        @State private var pronunciations: [String] = []
+        @State private var inputText: String = String.empty
+        @State private var cantonese: String = String.empty
+        @State private var lexicon: CantoneseLexicon? = nil
 
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
@@ -37,33 +38,29 @@ struct SearchView: View {
                                                 animationState += 1
                                         }
                                         guard !trimmedInput.isEmpty else {
-                                                cantonese = ""
-                                                pronunciations = []
                                                 yingWaaEntries = []
                                                 choHokEntries = []
                                                 fanWanEntries = []
                                                 gwongWanEntries = []
+                                                lexicon = nil
+                                                cantonese = String.empty
                                                 return
                                         }
                                         yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
                                         choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
                                         fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                                         gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
-                                        let search = AppMaster.lookup(text: trimmedInput)
-                                        if search.romanizations.isEmpty {
-                                                cantonese = trimmedInput
-                                                pronunciations = []
-                                        } else {
-                                                cantonese = search.text
-                                                pronunciations = search.romanizations
-                                        }
+                                        lexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
+                                        cantonese = trimmedInput
                                 }
                 }
                 if !cantonese.isEmpty {
                         Section {
                                 CantoneseTextLabel(cantonese)
-                                ForEach(0..<pronunciations.count, id: \.self) { index in
-                                        RomanizationLabel(pronunciations[index])
+                                if let pronunciations = lexicon?.pronunciations {
+                                        ForEach(0..<pronunciations.count, id: \.self) { index in
+                                                PronunciationLabel(pronunciations[index])
+                                        }
                                 }
                         }
                         .textSelection(.enabled)
@@ -114,23 +111,22 @@ struct SearchView: View {
         private let choHokMeta: String = "《初學粵音切要》　湛約翰　1855　香港"
         private let fanWamMeta: String = "《分韻撮要》"
         private let gwongWanMeta: String = "《大宋重修廣韻》"
-        private let fullWidthSpace: String = "　"
 
         private var yingWaaHeader: String {
                 guard let leading: String = yingWaaEntries.first?.word else { return yingWaaMeta }
-                return leading + fullWidthSpace + yingWaaMeta
+                return leading + String.fullWidthSpace + yingWaaMeta
         }
         private var choHokHeader: String {
                 guard let leading: String = choHokEntries.first?.word else { return choHokMeta }
-                return leading + fullWidthSpace + choHokMeta
+                return leading + String.fullWidthSpace + choHokMeta
         }
         private var fanWanHeader: String {
                 guard let leading: String = fanWanEntries.first?.word else { return fanWamMeta }
-                return leading + fullWidthSpace + fanWamMeta
+                return leading + String.fullWidthSpace + fanWamMeta
         }
         private var gwongWanHeader: String {
                 guard let leading: String = gwongWanEntries.first?.word else { return gwongWanMeta }
-                return leading + fullWidthSpace + gwongWanMeta
+                return leading + String.fullWidthSpace + gwongWanMeta
         }
 }
 

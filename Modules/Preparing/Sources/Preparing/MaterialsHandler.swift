@@ -57,6 +57,7 @@ private extension MaterialsHandler {
         static func createIndies() {
                 let commands: [String] = [
                         "CREATE INDEX jyutpingwordindex ON jyutpingtable(word);",
+                        "CREATE INDEX jyutpingromanizationindex ON jyutpingtable(romanization);",
                         "CREATE INDEX yingwaacodeindex ON yingwaatable(code);",
                         "CREATE INDEX chohokcodeindex ON chohoktable(code);",
                         "CREATE INDEX fanwancodeindex ON fanwantable(code);",
