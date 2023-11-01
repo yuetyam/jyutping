@@ -102,7 +102,7 @@ struct HomeView: View {
                                         Section {
                                                 Text("Lookup Jyutping with Stroke").font(.significant)
                                                 Text("Stroke Reverse Lookup Description").lineSpacing(6)
-                                                Text(verbatim: Constant.strokeKeyDefinitions).font(.fixedWidth).lineSpacing(5)
+                                                Text("Stroke Key Description").font(.fixedWidth).lineSpacing(5)
                                         }
                                         Section {
                                                 Text("Lookup Jyutping with Loengfan").font(.significant)

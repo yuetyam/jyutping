@@ -39,6 +39,7 @@
 
 "Lookup Jyutping with Stroke" = "Lookup Jyutping with Stroke";
 "Stroke Reverse Lookup Description" = "Start with “x”, then enter Stroke code. For example, enter “xwsad”, candidate “木” will appear. Candidates will be displayed with the corresponding Jyutping.";
+"Stroke Key Description" = "w = 橫(waang), Horizontal\ns = 豎(syu), Vertical\na = 撇, Left-falling\nd = 點(dim), Right-falling\nz = 折(zit), Turning";
 
 "Lookup Jyutping with Loengfan" = "Lookup Jyutping with Loengfan";
 "Loengfan Reverse Lookup Description" = "Start with “q”, then enter two components' Jyutping. For example, enter “xmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";

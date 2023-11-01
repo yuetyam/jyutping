@@ -38,6 +38,7 @@
 
 "Lookup Jyutping with Stroke" = "用笔画输入反查粤拼";
 "Stroke Reverse Lookup Description" = "以 x 开始，再输入笔画码即可。例如输入 xwsad 就会出「查」等。候选词会带显示对应嘅粤拼。";
+"Stroke Key Description" = "w = 横(waang)\ns = 竖(syu)\na = 撇\nd = 点(dim)\nz = 折(zit)";
 
 "Lookup Jyutping with Loengfan" = "用两分反查粤拼";
 "Loengfan Reverse Lookup Description" = "两分即系将一个字分成两部份。例如「查」字可以分成「木、旦」。\n以 q 开始，再输入两个字嘅粤拼即可。例如输入 qmukdaan 就会出「查」等。候选词会带显示对应嘅粤拼。";

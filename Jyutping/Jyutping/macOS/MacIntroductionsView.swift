@@ -38,7 +38,7 @@ struct MacIntroductionsView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: Constant.strokeKeyDefinitions).font(.fixedWidth).lineSpacing(5)
+                                                Text("Stroke Key Description").font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                 }
