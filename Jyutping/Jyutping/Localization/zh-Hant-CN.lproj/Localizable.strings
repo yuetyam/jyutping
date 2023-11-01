@@ -1,6 +1,6 @@
 // MARK: - General
 
-"Settings" = "設定";
+"Settings" = "設置";
 "Edit" = "編輯";
 "OK" = "好";
 "Cancel" = "取消";
@@ -17,14 +17,14 @@
 "Input Text Field" = "輸入框";
 
 "How to enable this Keyboard" = "如何啓用鍵盤";
-"accessibility.how_to_enable_this_keyboard" = "一：跳轉至「設定」；二：選擇「鍵盤」；三：開啓「粵拼」；四：開啓「允許完全訪問」。";
+"accessibility.how_to_enable_this_keyboard" = "一：跳轉至「設置」；二：選擇「鍵盤」；三：開啓「粵拼」；四：開啓「允許完全訪問」。";
 
-"Jump to **Settings**" = "跳轉至 **設定**";
+"Jump to **Settings**" = "跳轉至 **設置**";
 "Tap **Keyboards**" = "點選 **鍵盤**";
 "Turn on **Jyutping**" = "開啓 **粵拼**";
 "Turn on **Allow Full Access**" = "開啓 **允許完全訪問**";
 "Haptic Feedback requires Full Access" = "振動回應 Haptic Feedback 需要「完全訪問」權限";
-"Go to **Settings**" = "前往 **設定**";
+"Go to **Settings**" = "前往 **設置**";
 
 "Tones Input" = "聲調輸入";
 "tones.input.description" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
@@ -52,8 +52,8 @@
 "Text to Speech" = "文字語音朗讀";
 "tts.notice.0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
 "tts.notice.1" = "如果本設備處於靜音模式，文字語音朗讀可能會冇聲音。";
-"tts.notice.2" = "爲保證發音質素，請到 **設定** → **一般** → **語言與地區** 度，添加 **繁體中文(香港)** 語言。";
-"tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
+"tts.notice.2" = "爲保證發音質素，請到 **設置** → **通用** → **語言與地區** 度，添加 **繁體中文(香港)** 語言。";
+"tts.notice.3" = "爲提高發音質素，請到 **設置** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
 "faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
 
 "FAQ" = "常問問題";

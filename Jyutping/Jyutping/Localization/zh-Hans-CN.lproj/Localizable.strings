@@ -1,147 +1,147 @@
 // MARK: - General
 
-"Settings" = "設定";
-"Edit" = "編輯";
+"Settings" = "设置";
+"Edit" = "编辑";
 "OK" = "好";
 "Cancel" = "取消";
-"Copy" = "複製";
+"Copy" = "复制";
 
-"Home" = "首䈎";
-"Jyutping" = "粵拼";
-"Cantonese" = "粵語";
-"About" = "關於";
+"Home" = "首页";
+"Jyutping" = "粤拼";
+"Cantonese" = "粤语";
+"About" = "关于";
 
 
 // MARK: - iOS Home
 
-"Input Text Field" = "輸入框";
+"Input Text Field" = "输入框";
 
-"How to enable this Keyboard" = "如何啓用鍵盤";
-"accessibility.how_to_enable_this_keyboard" = "一：跳轉至「設定」；二：選擇「鍵盤」；三：開啓「粵拼」；四：開啓「允許完全訪問」。";
+"How to enable this Keyboard" = "如何启用键盘";
+"accessibility.how_to_enable_this_keyboard" = "一：跳转至「设置」；二：选择「键盘」；三：开启「粤拼」；四：开启「允许完全访问」。";
 
-"Jump to **Settings**" = "跳轉至 **設定**";
-"Tap **Keyboards**" = "點選 **鍵盤**";
-"Turn on **Jyutping**" = "開啓 **粵拼**";
-"Turn on **Allow Full Access**" = "開啓 **允許完全訪問**";
-"Haptic Feedback requires Full Access" = "振動回應 Haptic Feedback 需要「完全訪問」權限";
-"Go to **Settings**" = "前往 **設定**";
+"Jump to **Settings**" = "跳转至 **设置**";
+"Tap **Keyboards**" = "点选 **键盘**";
+"Turn on **Jyutping**" = "开启 **粤拼**";
+"Turn on **Allow Full Access**" = "开启 **允许完全访问**";
+"Haptic Feedback requires Full Access" = "振动回应 Haptic Feedback 需要「完全访问」权限";
+"Go to **Settings**" = "前往 **设置**";
 
-"Tones Input" = "聲調輸入";
-"tones.input.description" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
-"tones.input.examples" = "例: sinq = sin3(線), sinqq = sin6(羨)";
+"Tones Input" = "声调输入";
+"tones.input.description" = "v = 1 阴平， vv = 4 阳平\nx = 2 阴上， xx = 5 阳上\nq = 3 阴去， qq = 6 阳去";
+"tones.input.examples" = "例: sinq = sin3(线), sinqq = sin6(羡)";
 
-"Lookup Jyutping with Cangjie" = "用倉頡反查粵拼";
-"Cangjie Reverse Lookup Description" = "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+"Lookup Jyutping with Cangjie" = "用仓颉反查粤拼";
+"Cangjie Reverse Lookup Description" = "以 v 开始，再输入仓颉(五代)码即可。例如输入 vdam 就会出「查」等。候选词会带显示对应嘅粤拼。";
 
-"Lookup Jyutping with Pinyin" = "用普通話拼音反查粵拼";
-"Pinyin Reverse Lookup Description" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+"Lookup Jyutping with Pinyin" = "用普通话拼音反查粤拼";
+"Pinyin Reverse Lookup Description" = "以 r 开始，再输入普通话拼音即可。例如输入 rcha 就会出「查」等。候选词会带显示对应嘅粤拼。";
 
-"Lookup Jyutping with Stroke" = "用筆畫輸入反查粵拼";
-"Stroke Reverse Lookup Description" = "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。";
+"Lookup Jyutping with Stroke" = "用笔画输入反查粤拼";
+"Stroke Reverse Lookup Description" = "以 x 开始，再输入笔画码即可。例如输入 xwsad 就会出「查」等。候选词会带显示对应嘅粤拼。";
 
-"Lookup Jyutping with Loengfan" = "用兩分反查粵拼";
-"Loengfan Reverse Lookup Description" = "兩分即係將一個字分成兩部份。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+"Lookup Jyutping with Loengfan" = "用两分反查粤拼";
+"Loengfan Reverse Lookup Description" = "两分即系将一个字分成两部份。例如「查」字可以分成「木、旦」。\n以 q 开始，再输入两个字嘅粤拼即可。例如输入 qmukdaan 就会出「查」等。候选词会带显示对应嘅粤拼。";
 
-"More Introductions" = "更多介紹";
-"title.introductions" = "更多介紹";
-"Period (Full Stop) Shortcut" = "快捷輸入句號";
-"Double tapping the space bar will insert a period followed by a space" = "雙擊空格掣 (space)\n快捷輸入句號「。」";
-"Clear the input buffer syllables" = "一次過清除已輸入音節";
-"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "刪除(Delete)掣度向左滑，即可一次過刪晒已輸入拼寫";
+"More Introductions" = "更多介绍";
+"title.introductions" = "更多介绍";
+"Period (Full Stop) Shortcut" = "快捷输入句号";
+"Double tapping the space bar will insert a period followed by a space" = "双击空格掣 (space)\n快捷输入句号「。」";
+"Clear the input buffer syllables" = "一次过清除已输入音节";
+"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "删除(Delete)掣度向左滑，即可一次过删嗮已输入拼写";
 
-"Text to Speech" = "文字語音朗讀";
-"tts.notice.0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
-"tts.notice.1" = "如果本設備處於靜音模式，文字語音朗讀可能會冇聲音。";
-"tts.notice.2" = "爲保證發音質素，請到 **設定** → **一般** → **語言與地區** 度，添加 **繁體中文(香港)** 語言。";
-"tts.notice.3" = "爲提高發音質素，請到 **設定** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
-"faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
+"Text to Speech" = "文字语音朗读";
+"tts.notice.0" = "本应用程式使用嘅系，系统提供嘅文字语音朗读（TTS）功能。";
+"tts.notice.1" = "如果本设备处于静音模式，文字语音朗读可能会冇声音。";
+"tts.notice.2" = "为保证发音质素，请到 **设置** → **通用** → **语言与地区** 度，添加 **繁体中文(香港)** 语言。";
+"tts.notice.3" = "为提高发音质素，请到 **设置** → **辅助功能** → **旁白** → **语音** 度，添加 **繁体中文(香港)** 语音。";
+"faq.heading.tts" = "点解我部机嘅文字语音朗读毋正常？";
 
-"FAQ" = "常問問題";
-"Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
-"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
-"What does “Allow Full Access” do?" = "開啓「完全訪問」作何用？";
-"Enable a button on the keyboard for pasting texts from Clipboard" = "鍵盤個「帖上」掣，需要開啓權限，先可以獲得剪帖板內容";
-"Haptic Feedback" = "振動回應（Haptic Feedback）";
-"Paste texts from Clipboard" = "鍵盤個「帖上」掣";
-"All other features don't require Full Access" = "毋開啓「完全訪問」毋會影響使用其他功能";
+"FAQ" = "常问问题";
+"Can I use with external keyboards?" = "点解用毋到外置键盘？";
+"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由于系统限制，所有第三方输入法都冇办法使用外置键盘。并非开发者有意为之。";
+"What does “Allow Full Access” do?" = "开启「完全访问」作何用？";
+"Enable a button on the keyboard for pasting texts from Clipboard" = "键盘个「帖上」掣，需要开启权限，先可以获得剪帖板内容";
+"Haptic Feedback" = "振动回应（Haptic Feedback）";
+"Paste texts from Clipboard" = "键盘个「帖上」掣";
+"All other features don't require Full Access" = "毋开启「完全访问」毋会影响使用其他功能";
 
-"Privacy Notice" = "私隱佈告";
-"privacy.notice.1" = "鍵盤全程毋會訪問網絡";
-"privacy.notice.2" = "鍵盤係完全獨立嘅，同主應用程式之間毋會進行任何交流、分享";
-"privacy.notice.3" = "開啓「完全訪問」權限係用來提供振動回應";
-"privacy.notice.4" = "鍵盤個「帖上」掣毋會收集任何剪帖板內容";
-"privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
+"Privacy Notice" = "私隐布告";
+"privacy.notice.1" = "键盘全程毋会访问网络";
+"privacy.notice.2" = "键盘系完全独立嘅，同主应用程式之间毋会进行任何交流、分享";
+"privacy.notice.3" = "开启「完全访问」权限系用来提供振动回应";
+"privacy.notice.4" = "键盘个「帖上」掣毋会收集任何剪帖板内容";
+"privacy.notice.footer" = "一句话讲嗮：本输入法毋会收集个人资讯";
 
 
 // MARK: - Jyutping
 
 "Search Pronunciation" = "查字音";
 
-"Jyutping Initials" = "粵拼聲母表";
-"Jyutping Finals" = "粵拼韻母表";
-"Jyutping Tones" = "粵拼聲調表";
+"Jyutping Initials" = "粤拼声母表";
+"Jyutping Finals" = "粤拼韵母表";
+"Jyutping Tones" = "粤拼声调表";
 
 
 // MARK: - Cantonese
 
-"Cantonese Expressions" = "粵語用字參攷";
-"title.expressions" = "粵語用字參攷";
+"Cantonese Expressions" = "粤语用字参攷";
+"title.expressions" = "粤语用字参攷";
 
-"Simplified Character Confusion" = "簡化字常見混亂";
-"title.confusion" = "簡化字常見混亂";
+"Simplified Character Confusion" = "简化字常见混乱";
+"title.confusion" = "简化字常见混乱";
 
-"Numbers" = "數字";
+"Numbers" = "数字";
 "Stems and Branches" = "天干地支";
 "Chinese Zodiac" = "十二生肖";
-"Solar Terms" = "二十四節氣";
+"Solar Terms" = "二十四节气";
 "Hundred Family Surnames" = "百家姓";
 "title.surnames" = "百家姓";
 "Thousand Character Classic" = "千字文";
 "title.characters" = "千字文";
-"Canton Metro" = "廣州地鐵";
-"Fatshan Metro" = "佛山地鐵";
-"Sham Chun Metro" = "深圳地鐵";
-"Hong Kong MTR" = "港鐵";
+"Canton Metro" = "广州地铁";
+"Fatshan Metro" = "佛山地铁";
+"Sham Chun Metro" = "深圳地铁";
+"Hong Kong MTR" = "港铁";
 
 
 // MARK: - About
 
-"Resources" = "資源";
+"Resources" = "资源";
 
 "Version" = "版本";
-"Website" = "網站";
-"Jyutping for macOS" = "macOS 粵拼輸入法";
-"Source Code" = "源碼";
-"Privacy Policy" = "私隱政策";
+"Website" = "网站";
+"Jyutping for macOS" = "macOS 粤拼输入法";
+"Source Code" = "源码";
+"Privacy Policy" = "私隐政策";
 
-"Telegram Group" = "加入 Telegram 交流羣";
-"QQ Group" = "加入 QQ 交流羣";
-"Twitter" = "關注 X (Twitter)";
-"TRUTH Social" = "關注 Truth Social";
-"Instagram" = "關注 Instagram";
+"Telegram Group" = "加入 Telegram 交流群";
+"QQ Group" = "加入 QQ 交流群";
+"Twitter" = "关注 X (Twitter)";
+"TRUTH Social" = "关注 Truth Social";
+"Instagram" = "关注 Instagram";
 "GitHub Issues" = "GitHub Issues";
 
-"Copy URL" = "複製網址";
-"Copy Username" = "複製戶名";
-"Copy QQ Group ID" = "複製 QQ 羣號";
+"Copy URL" = "复制网址";
+"Copy Username" = "复制户名";
+"Copy QQ Group ID" = "复制 QQ 群号";
 
-"Email Feedback" = "電郵反饋";
-"Unable to compose mail" = "無法編寫郵件";
-"Mail Unavailable" = "電郵不可用";
-"Copy Email Address" = "複製電郵地址";
+"Email Feedback" = "电邮反馈";
+"Unable to compose mail" = "无法编写邮件";
+"Mail Unavailable" = "电邮不可用";
+"Copy Email Address" = "复制电邮地址";
 
-"Review on the App Store" = "前往 App Store 點評";
-"Share this App" = "分享本應用程式";
-"Copy App Store link" = "複製 App Store 連結";
+"Review on the App Store" = "前往 App Store 点评";
+"Share this App" = "分享本应用程式";
+"Copy App Store link" = "复制 App Store 连结";
 
 
 // MARK: - macOS
 
-"Input Method" = "輸入法";
-"Install Input Method" = "安裝輸入法";
-"Copied" = "已複製";
-"Introductions" = "介紹";
-"Search" = "檢索";
-"Initials" = "聲母";
-"Finals" = "韻母";
-"Tones" = "聲調";
+"Input Method" = "输入法";
+"Install Input Method" = "安装输入法";
+"Copied" = "已复制";
+"Introductions" = "介绍";
+"Search" = "检索";
+"Initials" = "声母";
+"Finals" = "韵母";
+"Tones" = "声调";
