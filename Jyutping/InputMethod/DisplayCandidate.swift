@@ -33,9 +33,13 @@ struct DisplayCandidate: Hashable {
                         self.comment = comment
                         self.secondaryComment = nil
                 case .compose:
+                        let cantoneseComment: String = candidate.lexiconText
+                        let unicodeComment: String = candidate.romanization
+                        let comment: String? = cantoneseComment.isEmpty ? nil : Converter.convert(cantoneseComment, to: Options.characterStandard)
+                        let secondaryComment: String? = unicodeComment.isEmpty ? nil : unicodeComment
                         self.text = text
-                        self.comment = candidate.romanization
-                        self.secondaryComment = nil
+                        self.comment = comment
+                        self.secondaryComment = secondaryComment
                 }
         }
 }
