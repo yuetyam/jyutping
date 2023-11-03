@@ -63,7 +63,7 @@ struct EditingPanel: View {
                                                         .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
                                                         Image(systemName: clipboardImageName)
-                                                        Text(verbatim: "清空剪帖板").font(.caption2)
+                                                        Text("Clear Clipboard").font(.caption2)
                                                 }
                                         }
                                         .frame(maxWidth: .infinity)
@@ -89,7 +89,7 @@ struct EditingPanel: View {
                                                         .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
                                                         Image(systemName: "doc.on.clipboard")
-                                                        Text(verbatim: "帖上").font(.caption2)
+                                                        Text("Paste").font(.caption2)
                                                 }
                                                 .opacity(UIPasteboard.general.hasStrings ? 1 : 0.5)
                                         }
@@ -241,7 +241,7 @@ struct EditingPanel: View {
                                                 .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
                                                 Image.upChevron.font(.title3)
-                                                Text(verbatim: "返回").font(.caption2)
+                                                Text("Back").font(.caption2)
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
@@ -301,7 +301,7 @@ struct EditingPanel: View {
                                                 .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
                                                 Image(systemName: "clear")
-                                                Text(verbatim: "清空前文").font(.caption2)
+                                                Text("Clear").font(.caption2)
                                         }
                                 }
                                 .frame(maxHeight: .infinity)

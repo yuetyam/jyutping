@@ -1,3 +1,5 @@
+// MARK: - SettingsView
+
 "Traditional Characters" = "Traditional Characters";
 "Traditional Characters, Hong Kong" = "Traditional Characters, Hong Kong";
 "Traditional Characters, Taiwan" = "Traditional Characters, Taiwan";
@@ -37,3 +39,11 @@
 "DoubleSpaceShortcut.Option2" = "None";
 
 "Clear User Lexicon" = "Clear User Lexicon";
+
+
+// MARK: - EditingPanel
+
+"Clear Clipboard" = "Clear Clipboard";
+"Paste" = "Paste";
+"Back" = "Back";
+"Clear" = "Clear";
