@@ -21,10 +21,8 @@ struct MacSearchView: View {
         private func handleSubmission(_ text: String) {
                 let trimmedInput: String = text.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
                 guard trimmedInput != cantonese else { return }
-                defer {
-                        animationState += 1
-                }
-                guard !trimmedInput.isEmpty else {
+                defer { animationState += 1 }
+                guard !(trimmedInput.isEmpty) else {
                         yingWaaEntries = []
                         choHokEntries = []
                         fanWanEntries = []
@@ -37,8 +35,9 @@ struct MacSearchView: View {
                 choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
                 fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                 gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
-                lexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
-                cantonese = trimmedInput
+                let cantoneseLexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
+                lexicon = cantoneseLexicon
+                cantonese = cantoneseLexicon.text
         }
 
         var body: some View {
@@ -60,7 +59,7 @@ struct MacSearchView: View {
                                 }
                         ScrollView {
                                 LazyVStack(spacing: 24) {
-                                        if !cantonese.isEmpty {
+                                        if !(cantonese.isEmpty) {
                                                 VStack {
                                                         CantoneseTextView(cantonese)
                                                         if let pronunciations = lexicon?.pronunciations {
@@ -73,12 +72,12 @@ struct MacSearchView: View {
                                                 .block()
                                                 .id(topID)
                                         }
-                                        if !yingWaaEntries.isEmpty {
+                                        if let word = yingWaaEntries.first?.word {
                                                 VStack(spacing: 2) {
                                                         HStack {
-                                                                Text(verbatim: yingWaaEntries.first!.word)
+                                                                Text(verbatim: word)
                                                                 Text(verbatim: "《英華分韻撮要》")
-                                                                Text(verbatim: "衛三畏(Samuel Wells Williams)　1856　廣州").foregroundStyle(Color.secondary)
+                                                                Text(verbatim: "衛三畏 (Samuel Wells Williams)　廣州　1856").foregroundStyle(Color.secondary)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
@@ -93,12 +92,12 @@ struct MacSearchView: View {
                                                         .block()
                                                 }
                                         }
-                                        if !choHokEntries.isEmpty {
+                                        if let word = choHokEntries.first?.word {
                                                 VStack(spacing: 2) {
                                                         HStack {
-                                                                Text(verbatim: choHokEntries.first!.word)
+                                                                Text(verbatim: word)
                                                                 Text(verbatim: "《初學粵音切要》")
-                                                                Text(verbatim: "湛約翰(John Chalmers)　1855　香港").foregroundStyle(Color.secondary)
+                                                                Text(verbatim: "湛約翰 (John Chalmers)　香港　1855").foregroundStyle(Color.secondary)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
@@ -113,10 +112,10 @@ struct MacSearchView: View {
                                                         .block()
                                                 }
                                         }
-                                        if !fanWanEntries.isEmpty {
+                                        if let word = fanWanEntries.first?.word {
                                                 VStack(spacing: 2) {
                                                         HStack {
-                                                                Text(verbatim: fanWanEntries.first!.word)
+                                                                Text(verbatim: word)
                                                                 Text(verbatim: "《分韻撮要》")
                                                                 Spacer()
                                                         }
@@ -132,10 +131,10 @@ struct MacSearchView: View {
                                                         .block()
                                                 }
                                         }
-                                        if !gwongWanEntries.isEmpty {
+                                        if let word = gwongWanEntries.first?.word {
                                                 VStack(spacing: 2) {
                                                         HStack {
-                                                                Text(verbatim: gwongWanEntries.first!.word)
+                                                                Text(verbatim: word)
                                                                 Text(verbatim: "《大宋重修廣韻》")
                                                                 Spacer()
                                                         }
@@ -155,6 +154,7 @@ struct MacSearchView: View {
                                 .font(.master)
                                 .textSelection(.enabled)
                                 .padding(.horizontal)
+                                .padding(.bottom)
                         }
                         .animation(.default, value: animationState)
                 }
