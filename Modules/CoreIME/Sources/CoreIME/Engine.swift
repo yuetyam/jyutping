@@ -236,33 +236,31 @@ extension Engine {
                 var candidates: [CoreCandidate] = []
                 let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 let limit: Int = limit ?? 50
-                let query = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
+                let query: String = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-                        while sqlite3_step(statement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(statement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                candidates.append(candidate)
-                        }
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let word: String = String(cString: sqlite3_column_text(statement, 0))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 1))
+                        let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                        candidates.append(candidate)
                 }
-                sqlite3_finalize(statement)
                 return candidates
         }
         private static func match(text: String, input: String, limit: Int? = nil) -> [CoreCandidate] {
                 var candidates: [CoreCandidate] = []
                 let limit: Int = limit ?? -1
-                let query = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
+                let query: String = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-                        while sqlite3_step(statement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(statement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                                let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
-                                candidates.append(candidate)
-                        }
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let word: String = String(cString: sqlite3_column_text(statement, 0))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 1))
+                        let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
+                        candidates.append(candidate)
                 }
-                sqlite3_finalize(statement)
                 return candidates
         }
 }
@@ -302,7 +300,7 @@ extension Engine {
         private static func tenKeyProcessVerbatim(text: String, limit: Int? = nil) -> [TenKeyCandidate] {
                 let rounds = (0..<text.count).map({ number -> [TenKeyCandidate] in
                         let leading: String = String(text.dropLast(number))
-                        return matchWithRowID(text: leading, input: text, limit: limit) + shortcutWithRowID(text: leading, limit: limit)
+                        return matchWithRowID(text: leading, input: leading, limit: limit) + shortcutWithRowID(text: leading, limit: limit)
                 })
                 return rounds.flatMap({ $0 }).uniqued()
         }
@@ -322,37 +320,35 @@ extension Engine {
                 var candidates: [TenKeyCandidate] = []
                 let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 let limit: Int = limit ?? 50
-                let query = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
+                let query: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-                        while sqlite3_step(statement) == SQLITE_ROW {
-                                let rowID: Int = Int(sqlite3_column_int64(statement, 0))
-                                let word: String = String(cString: sqlite3_column_text(statement, 1))
-                                let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                                let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
-                                let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
-                                candidates.append(instance)
-                        }
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                        let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
+                        candidates.append(instance)
                 }
-                sqlite3_finalize(statement)
                 return candidates
         }
         private static func matchWithRowID(text: String, input: String, limit: Int? = nil) -> [TenKeyCandidate] {
                 var candidates: [TenKeyCandidate] = []
                 let limit: Int = limit ?? -1
-                let query = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
+                let query: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-                        while sqlite3_step(statement) == SQLITE_ROW {
-                                let rowID: Int = Int(sqlite3_column_int64(statement, 0))
-                                let word: String = String(cString: sqlite3_column_text(statement, 1))
-                                let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                                let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
-                                let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
-                                candidates.append(instance)
-                        }
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
+                        let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
+                        candidates.append(instance)
                 }
-                sqlite3_finalize(statement)
                 return candidates
         }
 }
