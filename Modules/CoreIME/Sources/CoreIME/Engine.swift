@@ -175,6 +175,7 @@ extension Engine {
         }
 
         private static func processVerbatim(text: String, limit: Int? = nil) -> [CoreCandidate] {
+                guard canProcess(text) else { return [] }
                 let rounds = (0..<text.count).map({ number -> [CoreCandidate] in
                         let leading: String = String(text.dropLast(number))
                         return match(text: leading, input: leading, limit: limit) + shortcut(text: leading, limit: limit)
@@ -183,6 +184,7 @@ extension Engine {
         }
 
         private static func process(text: String, segmentation: Segmentation, limit: Int? = nil) -> [CoreCandidate] {
+                guard canProcess(text) else { return [] }
                 let textCount = text.count
                 let fullMatch = match(text: text, input: text, limit: limit)
                 let fullShortcut = shortcut(text: text, limit: limit)
@@ -207,6 +209,7 @@ extension Engine {
                 let concatenated = headingTexts.map { headingText -> Array<Candidate>.SubSequence in
                         let headingInputCount = headingText.count
                         let tailText = String(text.dropFirst(headingInputCount))
+                        guard canProcess(tailText) else { return [] }
                         let tailSegmentation = Segmentor.segment(text: tailText)
                         let tailCandidates = process(text: tailText, segmentation: tailSegmentation, limit: 4)
                         guard !(tailCandidates.isEmpty) else { return [] }
@@ -265,6 +268,19 @@ extension Engine {
         }
 }
 
+private extension Engine {
+        static func canProcess(_ text: String) -> Bool {
+                guard let anchor = text.first else { return false }
+                let code: Int = (anchor == "y") ? "j".hash : String(anchor).hash
+                let query: String = "SELECT rowid FROM lexicontable WHERE shortcut = \(code) LIMIT 1;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return false }
+                guard sqlite3_step(statement) == SQLITE_ROW else { return false }
+                return true
+        }
+}
+
 extension Engine {
 
         private struct TenKeyCandidate: Hashable {
@@ -275,13 +291,16 @@ extension Engine {
         public static func tenKeySuggest(sequences: [String]) -> [Candidate] {
                 guard !(sequences.isEmpty) else { return [] }
                 let suggestions = sequences.map { text -> [TenKeyCandidate] in
+                        guard canProcess(text) else { return [] }
+                        let textCount = text.count
+                        guard textCount > 1 else { return shortcutWithRowID(text: text) }
                         let segmentation = Segmentor.segment(text: text)
                         guard segmentation.maxLength > 0 else { return tenKeyProcessVerbatim(text: text) }
                         let fullMatch = matchWithRowID(text: text, input: text)
                         let fullShortcut = shortcutWithRowID(text: text)
                         let candidates = tenKenMatch(segmentation: segmentation)
-                        let perfectCandidates = candidates.filter({ $0.candidate.input.count == text.count })
-                        return fullMatch + perfectCandidates + fullShortcut + candidates
+                        let perfectCandidates = candidates.filter({ $0.candidate.input.count == textCount })
+                        return (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
                 }
                 let entries = suggestions.flatMap({ $0 }).sorted { (lhs, rhs) -> Bool in
                         let lhsInputCount: Int = lhs.candidate.input.count
