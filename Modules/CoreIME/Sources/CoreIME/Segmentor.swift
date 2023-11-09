@@ -106,8 +106,9 @@ public struct Segmentor {
                                 let tailTokens = splitLeading(tailText)
                                 guard !(tailTokens.isEmpty) else { continue }
                                 let newSegmentation: Segmentation = tailTokens.map({ scheme + [$0] })
-                                segmentation = (segmentation + newSegmentation).uniqued()
+                                segmentation += newSegmentation
                         }
+                        segmentation = segmentation.uniqued()
                         let currentSubelementCount = segmentation.subelementCount
                         if currentSubelementCount != previousSubelementCount {
                                 previousSubelementCount = currentSubelementCount
@@ -115,7 +116,7 @@ public struct Segmentor {
                                 shouldContinue = false
                         }
                 }
-                return segmentation.uniqued().filter(\.isValid).descended()
+                return segmentation.filter(\.isValid).descended()
         }
 
         public static func segment(text: String) -> Segmentation {
@@ -135,9 +136,33 @@ public struct Segmentor {
                         }
                 default:
                         let rawText = text.filter({ !$0.isSeparatorOrTone })
-                        return split(text: rawText)
+                        if let cached = cachedSegmentations[rawText] {
+                                return cached
+                        } else {
+                                let segmented = split(text: rawText)
+                                cache(text: rawText, segmentation: segmented)
+                                return segmented
+                        }
                 }
         }
+
+        #if os(macOS)
+        private static let maxCachedCount: Int = 5000
+        private static var cachedSegmentations: [String: Segmentation] = Dictionary<String, Segmentation>.init(minimumCapacity: maxCachedCount)
+        private static func cache(text: String, segmentation: Segmentation) {
+                defer { cachedSegmentations[text] = segmentation }
+                guard cachedSegmentations.count > maxCachedCount else { return }
+                cachedSegmentations.removeAll(keepingCapacity: true)
+        }
+        #else
+        private static let maxCachedCount: Int = 500
+        private static var cachedSegmentations: [String: Segmentation] = [:]
+        private static func cache(text: String, segmentation: Segmentation) {
+                defer { cachedSegmentations[text] = segmentation }
+                guard cachedSegmentations.count > maxCachedCount else { return }
+                cachedSegmentations = [:]
+        }
+        #endif
 
         private static let letterA: Segmentation = [[SegmentToken(text: "a", origin: "aa")]]
         private static let letterO: Segmentation = [[SegmentToken(text: "o", origin: "o")]]
