@@ -135,30 +135,31 @@ public struct Segmentor {
                                 return []
                         }
                 default:
-                        let rawText = text.filter({ !$0.isSeparatorOrTone })
-                        if let cached = cachedSegmentations[rawText] {
+                        let rawText: String = text.filter({ !$0.isSeparatorOrTone })
+                        let key: Int = rawText.hash
+                        if let cached = cachedSegmentations[key] {
                                 return cached
                         } else {
                                 let segmented = split(text: rawText)
-                                cache(text: rawText, segmentation: segmented)
+                                cache(key: key, segmentation: segmented)
                                 return segmented
                         }
                 }
         }
 
         #if os(macOS)
-        private static let maxCachedCount: Int = 5000
-        private static var cachedSegmentations: [String: Segmentation] = Dictionary<String, Segmentation>.init(minimumCapacity: maxCachedCount)
-        private static func cache(text: String, segmentation: Segmentation) {
-                defer { cachedSegmentations[text] = segmentation }
+        private static let maxCachedCount: Int = 2000
+        private static var cachedSegmentations: [Int: Segmentation] = Dictionary<Int, Segmentation>.init(minimumCapacity: maxCachedCount)
+        private static func cache(key: Int, segmentation: Segmentation) {
+                defer { cachedSegmentations[key] = segmentation }
                 guard cachedSegmentations.count > maxCachedCount else { return }
                 cachedSegmentations.removeAll(keepingCapacity: true)
         }
         #else
-        private static let maxCachedCount: Int = 500
-        private static var cachedSegmentations: [String: Segmentation] = [:]
-        private static func cache(text: String, segmentation: Segmentation) {
-                defer { cachedSegmentations[text] = segmentation }
+        private static let maxCachedCount: Int = 200
+        private static var cachedSegmentations: [Int: Segmentation] = [:]
+        private static func cache(key: Int, segmentation: Segmentation) {
+                defer { cachedSegmentations[key] = segmentation }
                 guard cachedSegmentations.count > maxCachedCount else { return }
                 cachedSegmentations = [:]
         }

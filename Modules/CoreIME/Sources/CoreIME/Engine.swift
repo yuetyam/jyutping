@@ -295,7 +295,7 @@ extension Engine {
                         let textCount = text.count
                         guard textCount > 1 else { return shortcutWithRowID(text: text) }
                         let segmentation = Segmentor.segment(text: text)
-                        guard segmentation.maxLength > 0 else { return tenKeyProcessVerbatim(text: text) }
+                        // guard segmentation.maxLength > 0 else { return tenKeyProcessVerbatim(text: text) }
                         let fullMatch = matchWithRowID(text: text, input: text)
                         let fullShortcut = shortcutWithRowID(text: text)
                         let candidates = tenKenMatch(segmentation: segmentation)
