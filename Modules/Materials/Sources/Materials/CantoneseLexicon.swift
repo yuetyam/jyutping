@@ -123,7 +123,7 @@ private extension DataMaster {
         /// - Returns: Homophone characters
         static func fetchHomophones(for romanization: String) -> [String] {
                 var homophones: [String] = []
-                let query = "SELECT word FROM jyutpingtable WHERE romanization = '\(romanization)' LIMIT 10;"
+                let query = "SELECT word FROM jyutpingtable WHERE romanization = '\(romanization)' LIMIT 11;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }

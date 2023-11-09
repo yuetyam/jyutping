@@ -49,8 +49,13 @@ struct SearchView: View {
                                         fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
                                         gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
                                         let cantoneseLexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
-                                        lexicon = cantoneseLexicon
-                                        cantonese = cantoneseLexicon.text
+                                        if cantoneseLexicon.pronunciations.isEmpty {
+                                                lexicon = nil
+                                                cantonese = trimmedInput
+                                        } else {
+                                                lexicon = cantoneseLexicon
+                                                cantonese = cantoneseLexicon.text
+                                        }
                                 }
                 }
                 if !(cantonese.isEmpty) {
