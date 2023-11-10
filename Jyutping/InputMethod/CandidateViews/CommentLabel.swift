@@ -1,56 +1,48 @@
 import SwiftUI
+import CoreIME
+import CommonExtensions
 
 struct CommentLabel: View {
 
-        init(_ comment: String, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, foreColor: Color) {
+        init(_ comment: String, candidateType: CandidateType, toneStyle: ToneDisplayStyle, toneColor: Color, shouldModifyToneColor: Bool) {
                 self.comment = comment
+                self.candidateType = candidateType
                 self.toneStyle = toneStyle
                 self.toneColor = toneColor
-                self.foreColor = foreColor
-                self.syllables = {
-                        let originalSyllables = comment.split(separator: " ")
-                        let items: [Syllable] = originalSyllables.map { originalSyllableText -> Syllable in
-                                let phone: String = String(originalSyllableText.dropLast())
-                                let tone: String = String(originalSyllableText.last ?? "0")
-                                return Syllable(phone: phone, tone: tone)
-                        }
-                        return items
-                }()
-                self.isLastTone = comment.last?.isCantoneseToneDigit ?? false
-                self.shouldModifyColor = toneColor != .normal
+                self.shouldModifyToneColor = shouldModifyToneColor
         }
 
         private let comment: String
+        private let candidateType: CandidateType
         private let toneStyle: ToneDisplayStyle
-        private let toneColor: ToneDisplayColor
-        private let foreColor: Color
-
-        private let syllables: [Syllable]
-        private let isLastTone: Bool
-        private let shouldModifyColor: Bool
+        private let toneColor: Color
+        private let shouldModifyToneColor: Bool
 
         var body: some View {
-                switch toneStyle {
-                case .normal:
-                        if isLastTone && shouldModifyColor {
-                                ModifiedCommentView(alignment: .center, syllables: syllables, foreColor: foreColor, shouldModifyColor: shouldModifyColor, shouldApplyToneFont: false)
-                        } else {
-                                Text(verbatim: comment).font(.comment)
+                switch candidateType {
+                case .cantonese:
+                        switch toneStyle {
+                        case .normal:
+                                if shouldModifyToneColor {
+                                        ModifiedCommentView(alignment: .center, comment: comment, toneColor: toneColor, shouldApplyToneFont: false)
+                                } else {
+                                        Text(verbatim: comment).font(.comment)
+                                }
+                        case .noTones:
+                                Text(verbatim: comment.filter(\.isLowercaseBasicLatinLetter)).font(.comment)
+                        case .superscript:
+                                ModifiedCommentView(alignment: .top, comment: comment, toneColor: toneColor, shouldApplyToneFont: true)
+                        case .subscript:
+                                ModifiedCommentView(alignment: .bottom, comment: comment, toneColor: toneColor, shouldApplyToneFont: true)
                         }
-                case .noTones:
-                        Text(verbatim: comment.filter({ !($0.isCantoneseToneDigit) })).font(.comment)
-                case .superscript:
-                        if isLastTone {
-                                ModifiedCommentView(alignment: .top, syllables: syllables, foreColor: foreColor, shouldModifyColor: shouldModifyColor, shouldApplyToneFont: true)
-                        } else {
-                                Text(verbatim: comment).font(.comment)
-                        }
-                case .subscript:
-                        if isLastTone {
-                                ModifiedCommentView(alignment: .bottom, syllables: syllables, foreColor: foreColor, shouldModifyColor: shouldModifyColor, shouldApplyToneFont: true)
-                        } else {
-                                Text(verbatim: comment).font(.comment)
-                        }
+                case .specialMark:
+                        Text(verbatim: comment).font(.comment)
+                case .emoji:
+                        Text(verbatim: comment).font(.comment)
+                case .symbol:
+                        Text(verbatim: comment).font(.comment)
+                case .compose:
+                        Text(verbatim: comment).font(.comment)
                 }
         }
 }
@@ -62,12 +54,15 @@ private struct Syllable {
 
 private struct ModifiedCommentView: View {
         let alignment: VerticalAlignment
-        let syllables: [Syllable]
-        let foreColor: Color
-        let shouldModifyColor: Bool
+        let comment: String
+        let toneColor: Color
         let shouldApplyToneFont: Bool
         var body: some View {
-                let toneForeColor: Color = shouldModifyColor ? foreColor.opacity(0.66) : foreColor
+                let syllables = comment.split(separator: " ").map({ text -> Syllable in
+                        let phone = text.filter(\.isLowercaseBasicLatinLetter)
+                        let tone = text.filter(\.isCantoneseToneDigit)
+                        return Syllable(phone: phone, tone: tone)
+                })
                 HStack(alignment: alignment, spacing: 0) {
                         ForEach(0..<syllables.count, id: \.self) { index in
                                 let syllable = syllables[index]
@@ -75,7 +70,7 @@ private struct ModifiedCommentView: View {
                                 Text(verbatim: leadingText).font(.comment)
                                 Text(verbatim: syllable.tone)
                                         .font(shouldApplyToneFont ? .commentTone : .comment)
-                                        .foregroundStyle(toneForeColor)
+                                        .foregroundStyle(toneColor)
                         }
                 }
         }

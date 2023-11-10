@@ -4,14 +4,17 @@ struct CandidateLabel: View {
 
         init(candidate: DisplayCandidate, index: Int, highlightedIndex: Int, toneStyle: ToneDisplayStyle, toneColor: ToneDisplayColor, verticalPadding: CGFloat) {
                 let isHighlighted: Bool = index == highlightedIndex
+                let foreColor: Color = isHighlighted ? Color.white : Color.primary
+                let shouldModifyToneColor: Bool = toneColor != .normal
                 self.candidate = candidate
                 self.label = (index == 9) ? "0" : "\(index + 1)"
                 self.isHighlighted = isHighlighted
                 self.toneStyle = toneStyle
-                self.toneColor = toneColor
+                self.toneColor = shouldModifyToneColor ? foreColor.opacity(0.66) : foreColor
+                self.shouldModifyToneColor = shouldModifyToneColor
                 self.verticalPadding = verticalPadding
                 self.labelForeColor = isHighlighted ? Color.white : Color.secondary
-                self.foreColor = isHighlighted ? Color.white : Color.primary
+                self.foreColor = foreColor
                 self.backColor = isHighlighted ? Color.accentColor : Color.clear
         }
 
@@ -19,7 +22,8 @@ struct CandidateLabel: View {
         private let label: String
         private let isHighlighted: Bool
         private let toneStyle: ToneDisplayStyle
-        private let toneColor: ToneDisplayColor
+        private let toneColor: Color
+        private let shouldModifyToneColor: Bool
         private let verticalPadding: CGFloat
         private let labelForeColor: Color
         private let foreColor: Color
@@ -31,7 +35,7 @@ struct CandidateLabel: View {
                                 Text(verbatim: label).font(.label).foregroundStyle(labelForeColor)
                                 Text(verbatim: candidate.text).font(.candidate)
                                 if let comment = candidate.comment {
-                                        CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, foreColor: foreColor)
+                                        CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
                                 }
                                 if let secondaryComment = candidate.secondaryComment {
                                         Text(verbatim: secondaryComment).font(.comment)
