@@ -119,6 +119,10 @@ struct HotkeysView: View {
                                                 LabelText("Highlight previous Candidate")
                                                 Text.separator
                                                 KeyBlockView("⯅")
+                                                Text.or
+                                                KeyBlockView.shift
+                                                Text.plus
+                                                KeyBlockView.tab
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
@@ -126,7 +130,7 @@ struct HotkeysView: View {
                                                 Text.separator
                                                 KeyBlockView("⯆")
                                                 Text.or
-                                                KeyBlockView("Tab ⇥")
+                                                KeyBlockView.tab
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
@@ -227,6 +231,7 @@ private struct KeyBlockView: View {
         static let number: KeyBlockView = KeyBlockView("number")
         static let space: KeyBlockView = KeyBlockView("Space ␣")
         static let escape: KeyBlockView = KeyBlockView("Esc ⎋")
+        static let tab: KeyBlockView = KeyBlockView("Tab ⇥")
 
         /// Backspace. NOT Forward-Delete.
         static let backwardDelete: KeyBlockView = KeyBlockView("Delete ⌫")

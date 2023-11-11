@@ -371,17 +371,28 @@ extension JyutpingInputController {
                         switch currentInputForm {
                         case .cantonese:
                                 guard inputStage.isBuffering else { return false }
-                                if appContext.isHighlightingEnd {
-                                        updateDisplayCandidates(.nextPage, highlight: .start)
-                                        return true
+                                if isShifting {
+                                        if appContext.isHighlightingStart {
+                                                updateDisplayCandidates(.previousPage, highlight: .end)
+                                        } else {
+                                                appContext.decreaseHighlightedIndex()
+                                        }
                                 } else {
-                                        appContext.increaseHighlightedIndex()
-                                        return true
+                                        if appContext.isHighlightingEnd {
+                                                updateDisplayCandidates(.nextPage, highlight: .start)
+                                        } else {
+                                                appContext.increaseHighlightedIndex()
+                                        }
                                 }
+                                return true
                         case .transparent:
                                 return false
                         case .options:
-                                appContext.increaseOptionsHighlightedIndex()
+                                if isShifting {
+                                        appContext.decreaseOptionsHighlightedIndex()
+                                } else {
+                                        appContext.increaseOptionsHighlightedIndex()
+                                }
                                 return true
                         }
                 case .previousPage:

@@ -35,11 +35,13 @@ extension JyutpingInputController {
                 let about = NSMenuItem(title: aboutTitle, action: #selector(openAboutWindow), keyEquivalent: "")
                 menu.addItem(about)
 
+                /*
                 menu.addItem(.separator())
 
                 let terminateTitle: String = NSLocalizedString("menu.terminate", comment: "")
                 let terminate = NSMenuItem(title: terminateTitle, action: #selector(terminateApp), keyEquivalent: "")
                 menu.addItem(terminate)
+                */
 
                 return menu
         }
