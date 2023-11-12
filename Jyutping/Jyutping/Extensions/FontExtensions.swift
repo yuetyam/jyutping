@@ -4,14 +4,14 @@ extension Font {
 
         static let fixedWidth: Font = Font.body.monospaced()
 
-        #if os(iOS)
-        static let master: Font = Font.body
-        static let significant: Font = Font.body.weight(.medium)
-        static let copilot: Font = Font.subheadline
-        #else
+        #if os(macOS)
         static let master: Font = enhancedFont(size: 14)
         static let significant: Font = enhancedFont(size: 16)
         static let copilot: Font = enhancedFont(size: 12)
+        #else
+        static let master: Font = Font.body
+        static let significant: Font = Font.body.weight(.medium)
+        static let copilot: Font = Font.subheadline
         #endif
 }
 
@@ -33,14 +33,13 @@ private extension Font {
                         }
                 }
                 names.append(Constant.HelveticaNeue)
-                let primaryCJKVQueue: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
-                for name in primaryCJKVQueue {
+                for name in Constant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                let fallbacks: [String] = [Constant.PingFangHK, "Plangothic P1", "Plangothic P2"]
+                let fallbacks: [String] = [Constant.PingFangHK, Constant.PlangothicP1, Constant.PlangothicP2]
                 names.append(contentsOf: fallbacks)
                 let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
                 for name in IMingFonts {

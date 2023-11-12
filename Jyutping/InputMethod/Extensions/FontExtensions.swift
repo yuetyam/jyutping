@@ -30,14 +30,13 @@ extension Font {
                         }
                 }
                 names.append(Constant.HelveticaNeue)
-                let primaryCJKVQueue: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
-                for name in primaryCJKVQueue {
+                for name in Constant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                let fallbacks: [String] = [Constant.PingFangHK, "Plangothic P1", "Plangothic P2"]
+                let fallbacks: [String] = [Constant.PingFangHK, Constant.PlangothicP1, Constant.PlangothicP2]
                 names.append(contentsOf: fallbacks)
                 let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
                 for name in IMingFonts {
@@ -88,14 +87,13 @@ extension Font {
                         }
                 }
                 names.append(Constant.HelveticaNeue)
-                let primaryCJKVQueue: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR"]
-                for name in primaryCJKVQueue {
+                for name in Constant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                let fallbacks: [String] = [Constant.PingFangHK, "Plangothic P1", "Plangothic P2"]
+                let fallbacks: [String] = [Constant.PingFangHK, Constant.PlangothicP1, Constant.PlangothicP2]
                 names.append(contentsOf: fallbacks)
                 let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
                 for name in IMingFonts {
