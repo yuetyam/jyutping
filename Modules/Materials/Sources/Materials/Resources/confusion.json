@@ -50,21 +50,6 @@
     ]
   },
   {
-    "simplified": "郁",
-    "traditional": [
-      {
-        "character": "郁",
-        "romanization": "juk1",
-        "note": "濃郁、馥郁"
-      },
-      {
-        "character": "鬱",
-        "romanization": "wat1",
-        "note": "抑鬱、鬱林、鬱金香"
-      }
-    ]
-  },
-  {
     "simplified": "须",
     "traditional": [
       {
@@ -90,7 +75,22 @@
       {
         "character": "摺",
         "romanization": "zip3",
-        "note": "摺被、摺紙"
+        "note": "摺被、摺紙、摺疊"
+      }
+    ]
+  },
+  {
+    "simplified": "郁",
+    "traditional": [
+      {
+        "character": "郁",
+        "romanization": "juk1",
+        "note": "濃郁、馥郁"
+      },
+      {
+        "character": "鬱",
+        "romanization": "wat1",
+        "note": "抑鬱、鬱林、鬱金香"
       }
     ]
   },
