@@ -46,7 +46,7 @@ struct SpaceKey: View {
                                 .padding(.horizontal, 3)
                         Text(verbatim: isLongPressEngaged ? longPressHint : context.spaceKeyText)
                 }
-                .frame(width: context.widthUnit * 4.5, height: context.heightUnit)
+                .frame(width: context.widthUnit * 4, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { value, touched, transaction in

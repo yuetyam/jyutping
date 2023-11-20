@@ -89,14 +89,14 @@ struct NumericKeyboard: View {
                         case (true, true):
                                 HStack(spacing: 0) {
                                         GlobeKey()
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
+                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         SpaceKey()
                                         RightKey()
                                         ReturnKey()
                                 }
                         case (true, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
+                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         LeftKey()
                                         SpaceKey()
                                         RightKey()
@@ -104,7 +104,7 @@ struct NumericKeyboard: View {
                                 }
                         case (false, true):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
+                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         GlobeKey()
                                         SpaceKey()
                                         RightKey()
@@ -112,7 +112,7 @@ struct NumericKeyboard: View {
                                 }
                         case (false, false):
                                 HStack(spacing: 0) {
-                                        TransformKey(destination: .alphabetic, widthUnitTimes: 1.5)
+                                        TransformKey(destination: .alphabetic, widthUnitTimes: 2)
                                         LeftKey()
                                         SpaceKey()
                                         RightKey()
