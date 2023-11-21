@@ -7,27 +7,40 @@ private extension DataMaster {
         static func matchFanWanCuetYiu(for character: Character) -> [FanWanCuetYiu] {
                 var entries: [FanWanCuetYiu] = []
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
-                let queryString = "SELECT * FROM fanwantable WHERE code = \(code);"
-                var queryStatement: OpaquePointer? = nil
-                defer {
-                        sqlite3_finalize(queryStatement)
-                }
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                let initial: String = String(cString: sqlite3_column_text(queryStatement, 3))
-                                let final: String = String(cString: sqlite3_column_text(queryStatement, 4))
-                                let yamyeung: String = String(cString: sqlite3_column_text(queryStatement, 5))
-                                let tone: String = String(cString: sqlite3_column_text(queryStatement, 6))
-                                let rhyme: String = String(cString: sqlite3_column_text(queryStatement, 7))
-                                let interpretation: String = String(cString: sqlite3_column_text(queryStatement, 8))
-                                let instance: FanWanCuetYiu = FanWanCuetYiu(word: word, romanization: romanization, initial: initial, final: final, yamyeung: yamyeung, tone: tone, rhyme: rhyme, interpretation: interpretation)
-                                entries.append(instance)
-                        }
+                let query: String = "SELECT * FROM fanwantable WHERE code = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return entries }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let initial: String = String(cString: sqlite3_column_text(statement, 3))
+                        let final: String = String(cString: sqlite3_column_text(statement, 4))
+                        let yamyeung: String = String(cString: sqlite3_column_text(statement, 5))
+                        let tone: String = String(cString: sqlite3_column_text(statement, 6))
+                        let rhyme: String = String(cString: sqlite3_column_text(statement, 7))
+                        let interpretation: String = String(cString: sqlite3_column_text(statement, 8))
+                        let instance: FanWanCuetYiu = FanWanCuetYiu(word: word, romanization: romanization, initial: initial, final: final, yamyeung: yamyeung, tone: tone, rhyme: rhyme, interpretation: interpretation)
+                        entries.append(instance)
                 }
                 return entries
+        }
+
+        /// Fetch homophone characters
+        /// - Parameter romanization: Jyutping romanization syllable
+        /// - Returns: Homophone characters
+        static func fetchHomophones(for romanization: String) -> [String] {
+                var homophones: [String] = []
+                let query = "SELECT word FROM fanwantable WHERE romanization = '\(romanization)' LIMIT 11;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let homophone: String = String(cString: sqlite3_column_text(statement, 0))
+                        homophones.append(homophone)
+                }
+                return homophones
         }
 }
 
@@ -52,6 +65,7 @@ public struct FanWanCuetYiu: Hashable {
                 self.abstract = abstract
                 self.ipa = OldCantonese.IPA(for: convertedRomanization)
                 self.jyutping = OldCantonese.jyutping(for: convertedRomanization)
+                self.homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != word })
         }
 
         public let word: String
@@ -66,6 +80,7 @@ public struct FanWanCuetYiu: Hashable {
         public let abstract: String
         public let ipa: String
         public let jyutping: String
+        public let homophones: [String]
 
         public static func match(for character: Character) -> [FanWanCuetYiu] {
                 let originalMatch = fetch(for: character)

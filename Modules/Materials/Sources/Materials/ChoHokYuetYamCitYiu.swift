@@ -7,31 +7,45 @@ private extension DataMaster {
         static func matchChoHokYuetYamCitYiu(for character: Character) -> [ChoHokYuetYamCitYiu] {
                 var entries: [ChoHokYuetYamCitYiu] = []
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
-                let queryString = "SELECT * FROM chohoktable WHERE code = \(code);"
-                var queryStatement: OpaquePointer? = nil
-                defer {
-                        sqlite3_finalize(queryStatement)
-                }
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                let initial: String = String(cString: sqlite3_column_text(queryStatement, 3))
-                                let final: String = String(cString: sqlite3_column_text(queryStatement, 4))
-                                let tone: String = String(cString: sqlite3_column_text(queryStatement, 5))
-                                let faancit: String = String(cString: sqlite3_column_text(queryStatement, 6))
-                                let instance: ChoHokYuetYamCitYiu = ChoHokYuetYamCitYiu(word: word, romanization: romanization, initial: initial, final: final, tone: tone, faancit: faancit)
-                                entries.append(instance)
-                        }
+                let query: String = "SELECT * FROM chohoktable WHERE code = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return entries }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        // // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let initial: String = String(cString: sqlite3_column_text(statement, 3))
+                        let final: String = String(cString: sqlite3_column_text(statement, 4))
+                        let tone: String = String(cString: sqlite3_column_text(statement, 5))
+                        let faancit: String = String(cString: sqlite3_column_text(statement, 6))
+                        let homophones: [String] = fetchHomophones(for: romanization).filter({ $0 != word })
+                        let instance: ChoHokYuetYamCitYiu = ChoHokYuetYamCitYiu(word: word, romanization: romanization, initial: initial, final: final, tone: tone, faancit: faancit, homophones: homophones)
+                        entries.append(instance)
                 }
                 return entries
+        }
+
+        /// Fetch homophone characters
+        /// - Parameter romanization: Jyutping romanization syllable
+        /// - Returns: Homophone characters
+        static func fetchHomophones(for romanization: String) -> [String] {
+                var homophones: [String] = []
+                let query = "SELECT word FROM chohoktable WHERE romanization = '\(romanization)' LIMIT 11;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let homophone: String = String(cString: sqlite3_column_text(statement, 0))
+                        homophones.append(homophone)
+                }
+                return homophones
         }
 }
 
 public struct ChoHokYuetYamCitYiu: Hashable {
 
-        fileprivate init(word: String, romanization: String, initial: String, final: String, tone: String, faancit: String) {
+        fileprivate init(word: String, romanization: String, initial: String, final: String, tone: String, faancit: String, homophones: [String]) {
                 let convertedInitial: String = initial.replacingOccurrences(of: "X", with: "")
                 let pronunciation: String = "\(convertedInitial)\(final)"
                 let faanciText: String = faancit + "切"
@@ -42,6 +56,7 @@ public struct ChoHokYuetYamCitYiu: Hashable {
                 self.romanization = romanization
                 self.ipa = OldCantonese.IPA(for: romanization)
                 self.jyutping = OldCantonese.jyutping(for: romanization)
+                self.homophones = homophones
         }
 
         public let word: String
@@ -51,6 +66,7 @@ public struct ChoHokYuetYamCitYiu: Hashable {
         public let romanization: String
         public let ipa: String
         public let jyutping: String
+        public let homophones: [String]
 
         public static func match(for character: Character) -> [ChoHokYuetYamCitYiu] {
                 let originalMatch = fetch(for: character)

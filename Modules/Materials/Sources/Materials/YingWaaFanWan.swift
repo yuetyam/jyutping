@@ -10,8 +10,9 @@ public struct YingWaaFanWan: Hashable {
         public let interpretation: String?
         public let ipa: String
         public let jyutping: String
+        public let homophones: [String]
 
-        fileprivate init(word: String, romanization: String, pronunciation: String, pronunciationMark: String, interpretation: String) {
+        fileprivate init(word: String, romanization: String, pronunciation: String, pronunciationMark: String, interpretation: String, homophones: [String]) {
                 self.word = word
                 self.romanization = romanization
                 self.pronunciation = pronunciation
@@ -19,6 +20,7 @@ public struct YingWaaFanWan: Hashable {
                 self.interpretation = (interpretation == "X") ? nil : interpretation
                 self.ipa = OldCantonese.IPA(for: romanization)
                 self.jyutping = OldCantonese.jyutping(for: romanization)
+                self.homophones = homophones
         }
 
         public static func match(for character: Character) -> [YingWaaFanWan] {
@@ -30,7 +32,7 @@ public struct YingWaaFanWan: Hashable {
         }
         private static func fetch(for character: Character) -> [YingWaaFanWan] {
                 let items: [YingWaaFanWan] = DataMaster.matchYingWaaFanWan(for: character)
-                guard items.count > 1 else { return items }
+                guard !(items.isEmpty) else { return items }
                 let romanizations = items.map({ $0.romanization }).uniqued()
                 let hasDuplicates: Bool = romanizations.count != items.count
                 guard hasDuplicates else { return items }
@@ -45,7 +47,7 @@ public struct YingWaaFanWan: Hashable {
                                 let example = filtered.first!
                                 let pronunciationMark: String = filtered.map({ $0.pronunciationMark }).compactMap({ $0 }).uniqued().joined(separator: ", ")
                                 let interpretation: String = filtered.map({ $0.interpretation }).compactMap({ $0 }).uniqued().joined(separator: " ")
-                                return YingWaaFanWan(word: example.word, romanization: syllable, pronunciation: example.pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation)
+                                return YingWaaFanWan(word: example.word, romanization: syllable, pronunciation: example.pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation, homophones: example.homophones)
                         }
                 }
                 return entries.compactMap({ $0 })
@@ -58,24 +60,38 @@ private extension DataMaster {
         static func matchYingWaaFanWan(for character: Character) -> [YingWaaFanWan] {
                 var entries: [YingWaaFanWan] = []
                 guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
-                let queryString = "SELECT * FROM yingwaatable WHERE code = \(code);"
-                var queryStatement: OpaquePointer? = nil
-                defer {
-                        sqlite3_finalize(queryStatement)
-                }
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let romanization: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                let pronunciation: String = String(cString: sqlite3_column_text(queryStatement, 3))
-                                let pronunciationMark: String = String(cString: sqlite3_column_text(queryStatement, 4))
-                                let interpretation: String = String(cString: sqlite3_column_text(queryStatement, 5))
-                                let instance: YingWaaFanWan = YingWaaFanWan(word: word, romanization: romanization, pronunciation: pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation)
-                                entries.append(instance)
-                        }
+                let query: String = "SELECT * FROM yingwaatable WHERE code = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return entries }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let pronunciation: String = String(cString: sqlite3_column_text(statement, 3))
+                        let pronunciationMark: String = String(cString: sqlite3_column_text(statement, 4))
+                        let interpretation: String = String(cString: sqlite3_column_text(statement, 5))
+                        let homophones: [String] = fetchHomophones(for: romanization).filter({ $0 != word })
+                        let instance: YingWaaFanWan = YingWaaFanWan(word: word, romanization: romanization, pronunciation: pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation, homophones: homophones)
+                        entries.append(instance)
                 }
                 return entries
+        }
+
+        /// Fetch homophone characters
+        /// - Parameter romanization: Jyutping romanization syllable
+        /// - Returns: Homophone characters
+        static func fetchHomophones(for romanization: String) -> [String] {
+                var homophones: [String] = []
+                let query = "SELECT word FROM yingwaatable WHERE romanization = '\(romanization)' LIMIT 11;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return homophones }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let homophone: String = String(cString: sqlite3_column_text(statement, 0))
+                        homophones.append(homophone)
+                }
+                return homophones
         }
 }
 

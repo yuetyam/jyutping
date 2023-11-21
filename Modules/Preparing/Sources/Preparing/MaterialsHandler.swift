@@ -58,9 +58,16 @@ private extension MaterialsHandler {
                 let commands: [String] = [
                         "CREATE INDEX jyutpingwordindex ON jyutpingtable(word);",
                         "CREATE INDEX jyutpingromanizationindex ON jyutpingtable(romanization);",
+
                         "CREATE INDEX yingwaacodeindex ON yingwaatable(code);",
+                        "CREATE INDEX yingwaaromanizationindex ON yingwaatable(romanization);",
+
                         "CREATE INDEX chohokcodeindex ON chohoktable(code);",
+                        "CREATE INDEX chohokromanizationindex ON chohoktable(romanization);",
+
                         "CREATE INDEX fanwancodeindex ON fanwantable(code);",
+                        "CREATE INDEX fanwanromanizationindex ON fanwantable(romanization);",
+
                         "CREATE INDEX gwongwancodeindex ON gwongwantable(code);",
                 ]
                 for command in commands {

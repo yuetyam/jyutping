@@ -2,10 +2,12 @@
 
 import SwiftUI
 import Materials
+import CommonExtensions
 
 struct FanWanCuetYiuView: View {
         let entry: FanWanCuetYiu
         var body: some View {
+                let homophoneText = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
                 VStack(alignment: .leading) {
                         HStack {
                                 Text(verbatim: "讀音")
@@ -26,6 +28,14 @@ struct FanWanCuetYiuView: View {
                                 Text(verbatim: "釋義")
                                 Text.separator
                                 Text(verbatim: entry.interpretation)
+                        }
+                        if let homophoneText {
+                                HStack {
+                                        Text(verbatim: "同音")
+                                        Text.separator
+                                        Text(verbatim: homophoneText)
+                                }
+                                .padding(.top, 1)
                         }
                 }
         }
