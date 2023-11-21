@@ -33,11 +33,13 @@ public struct CantoneseLexicon: Hashable {
         /// - Parameter text: Cantonese text.
         /// - Returns: Text (converted) and the corresponding CantoneseLexicon.
         public static func search(text: String) -> CantoneseLexicon {
+                let textCount: Int = text.count
                 lazy var fallback: CantoneseLexicon = CantoneseLexicon(text: text)
-                guard !text.isEmpty else { return fallback }
+                guard textCount > 0 else { return fallback }
                 let matched = DataMaster.fetchRomanizations(for: text)
                 guard matched.isEmpty else {
                         let pronunciations = matched.map { romanization -> Pronunciation in
+                                guard textCount == 1 else { return Pronunciation(romanization: romanization) }
                                 let homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != text })
                                 return Pronunciation(romanization: romanization, homophones: homophones)
                         }
@@ -47,12 +49,13 @@ public struct CantoneseLexicon: Hashable {
                 let tryMatched = DataMaster.fetchRomanizations(for: traditionalText)
                 guard tryMatched.isEmpty else {
                         let pronunciations = tryMatched.map { romanization -> Pronunciation in
+                                guard textCount == 1 else { return Pronunciation(romanization: romanization) }
                                 let homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != traditionalText })
                                 return Pronunciation(romanization: romanization, homophones: homophones)
                         }
                         return CantoneseLexicon(text: traditionalText, pronunciations: pronunciations)
                 }
-                guard text.count != 1 else { return fallback }
+                guard textCount != 1 else { return fallback }
                 lazy var chars: String = text
                 lazy var fetches: [String] = []
                 lazy var newText: String = ""
