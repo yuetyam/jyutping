@@ -93,7 +93,7 @@ struct MacExpressionsView: View {
                                                                 Image.warning.foregroundStyle(Color.orange)
                                                         }
                                                         Label {
-                                                                Text(verbatim: "佢 亦作 渠、𠍲")
+                                                                Text(verbatim: "佢 亦作 渠、𠍲{⿰亻渠}")
                                                         } icon: {
                                                                 Image.info.foregroundStyle(Color.primary)
                                                         }
@@ -104,14 +104,14 @@ struct MacExpressionsView: View {
                                 }
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("區分 **係** 同 **喺**").font(.significant)
+                                                Text("區分 **係** 以及 **喺**").font(.significant)
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "係")
                                                         HStack(spacing: 4) {
                                                                 Text(verbatim: "hai6").font(.fixedWidth)
                                                                 Speaker("hai6")
                                                         }
-                                                        Text(verbatim: "謂語，義同是。")
+                                                        Text(verbatim: "謂語，義同「是」。")
                                                 }
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "喺")
@@ -119,7 +119,7 @@ struct MacExpressionsView: View {
                                                                 Text(verbatim: "hai2").font(.fixedWidth)
                                                                 Speaker("hai2")
                                                         }
-                                                        Text(verbatim: "表方位、時間，義同在。")
+                                                        Text(verbatim: "表方位、時間，義同「在」。")
                                                 }
                                                 HStack {
                                                         Text(verbatim: "例：我係曹阿瞞。")
@@ -135,7 +135,7 @@ struct MacExpressionsView: View {
                                 .block()
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("區分 **諗** 同 **冧**").font(.significant)
+                                                Text("區分 **諗** 以及 **冧**").font(.significant)
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "諗")
                                                         HStack(spacing: 4) {
@@ -167,7 +167,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text("區分 **咁** 同 **噉**").font(.significant)
+                                                Text("區分 **咁** 以及 **噉**").font(.significant)
                                                 HStack(spacing: 16) {
                                                         Text(verbatim: "咁")
                                                         HStack(spacing: 4) {

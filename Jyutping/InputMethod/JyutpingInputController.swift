@@ -392,7 +392,7 @@ final class JyutpingInputController: IMKInputController {
                         case PunctuationKey.backquote.shiftingKeyText:
                                 return PunctuationKey.backquote.shiftingSymbols
                         default:
-                                return PunctuationKey.slash.symbols
+                                return []
                         }
                 }()
                 candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })

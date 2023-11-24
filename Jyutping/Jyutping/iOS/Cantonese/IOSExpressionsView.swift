@@ -89,7 +89,7 @@ struct IOSExpressionsView: View {
                                                 Image.info.foregroundStyle(Color.primary)
                                         }
                                         Label {
-                                                Text(verbatim: "佢亦作渠、⿰亻渠")
+                                                Text(verbatim: "佢亦作渠、𠍲{⿰亻渠}")
                                         } icon: {
                                                 Image.info.foregroundStyle(Color.primary)
                                         }
@@ -97,14 +97,14 @@ struct IOSExpressionsView: View {
                         }
                         Group {
                                 Section {
-                                        Text(verbatim: "區分「係」同「喺」").font(.significant)
+                                        Text(verbatim: "區分「係」以及「喺」").font(.significant)
                                         HStack {
                                                 Text(verbatim: "係")
                                                 HStack(spacing: 2) {
                                                         Text(verbatim: "hai6").font(.fixedWidth)
                                                         Speaker("hai6")
                                                 }
-                                                Text(verbatim: "謂語，義同是。")
+                                                Text(verbatim: "謂語，義同「是」。")
                                                 Spacer()
                                         }
                                         HStack {
@@ -113,7 +113,7 @@ struct IOSExpressionsView: View {
                                                         Text(verbatim: "hai2").font(.fixedWidth)
                                                         Speaker("hai2")
                                                 }
-                                                Text(verbatim: "表方位、時間，義同在。")
+                                                Text(verbatim: "表方位、時間，義同「在」。")
                                                 Spacer()
                                         }
                                         HStack {
@@ -128,7 +128,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分「諗」同「冧」").font(.significant)
+                                        Text(verbatim: "區分「諗」以及「冧」").font(.significant)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "諗")
                                                 HStack(spacing: 2) {
@@ -159,7 +159,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分「咁」同「噉」").font(.significant)
+                                        Text(verbatim: "區分「咁」以及「噉」").font(.significant)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "咁")
                                                 HStack(spacing: 2) {
