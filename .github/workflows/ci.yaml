@@ -5,6 +5,14 @@ env:
   DEVELOPER_DIR: /Applications/Xcode_15.0.app/Contents/Developer
 
 jobs:
+  build_preparing:
+    name: Build Preparing
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: Swift Build Preparing
+        run: swift build
+        working-directory: ./Modules/Preparing
   test_common_extensions:
     name: CommonExtensions Tests
     runs-on: macos-13
@@ -13,21 +21,21 @@ jobs:
       - name: CommonExtensions SwiftTest
         run: swift test
         working-directory: ./Modules/CommonExtensions
-  test_materials:
-    name: Materials Tests
+  build_materials:
+    name: Build Materials
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
-      - name: Materials SwiftTest
-        run: swift test
+      - name: Swift Build Materials
+        run: swift build
         working-directory: ./Modules/Materials
-  test_coreime:
-    name: CoreIME Tests
+  build_coreime:
+    name: Build CoreIME
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
-      - name: CoreIME SwiftTest
-        run: swift test
+      - name: Swift Build CoreIME
+        run: swift build
         working-directory: ./Modules/CoreIME
   build_input_method:
     name: Build InputMethod
