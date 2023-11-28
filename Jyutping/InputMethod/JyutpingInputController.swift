@@ -323,7 +323,7 @@ final class JyutpingInputController: IMKInputController {
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 let converted = text.map({ CharacterStandard.cangjie(of: $0) }).compactMap({ $0 })
-                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                let isValidSequence: Bool = !(converted.isEmpty) && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text)
@@ -337,7 +337,7 @@ final class JyutpingInputController: IMKInputController {
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = CharacterStandard.strokeTransform(text)
                 let converted = transformed.map({ CharacterStandard.stroke(of: $0) }).compactMap({ $0 })
-                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                let isValidSequence: Bool = !(converted.isEmpty) && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)

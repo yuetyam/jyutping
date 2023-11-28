@@ -148,7 +148,7 @@ public struct Segmentor {
         }
 
         #if os(macOS)
-        private static let maxCachedCount: Int = 2000
+        private static let maxCachedCount: Int = 1000
         private static var cachedSegmentations: [Int: Segmentation] = Dictionary<Int, Segmentation>.init(minimumCapacity: maxCachedCount)
         private static func cache(key: Int, segmentation: Segmentation) {
                 defer { cachedSegmentations[key] = segmentation }
@@ -156,7 +156,7 @@ public struct Segmentor {
                 cachedSegmentations.removeAll(keepingCapacity: true)
         }
         #else
-        private static let maxCachedCount: Int = 200
+        private static let maxCachedCount: Int = 100
         private static var cachedSegmentations: [Int: Segmentation] = [:]
         private static func cache(key: Int, segmentation: Segmentation) {
                 defer { cachedSegmentations[key] = segmentation }

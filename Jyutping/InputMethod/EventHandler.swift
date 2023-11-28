@@ -497,7 +497,7 @@ extension JyutpingInputController {
                         selectedCandidates = []
                         let leadingCount: Int = candidate.input.count + 1
                         if bufferText.count > leadingCount {
-                                let tail = bufferText.dropFirst(candidate.input.count + 1)
+                                let tail = bufferText.dropFirst(leadingCount)
                                 bufferText = String(character) + tail
                         } else {
                                 clearBufferText()

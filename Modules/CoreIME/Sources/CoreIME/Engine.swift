@@ -56,10 +56,10 @@ extension Engine {
                         let filtered = candidates.filter({ text.hasPrefix($0.romanization) })
                         return filtered
                 case (false, true):
+                        let textTones = text.tones
                         let candidates: [Candidate] = match(segmentation: segmentation)
                         let qualified = candidates.map({ item -> Candidate? in
                                 let continuous = item.romanization.removedSpaces()
-                                let textTones = text.tones
                                 let continuousTones = continuous.tones
                                 switch (textTones.count, continuousTones.count) {
                                 case (1, 1):
@@ -111,15 +111,15 @@ extension Engine {
                         })
                         return qualified.compactMap({ $0 })
                 case (true, false):
+                        let textSeparators = text.filter(\.isSeparator)
+                        let textParts = text.split(separator: "'")
+                        let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
+                        let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
                         let candidates: [Candidate] = match(segmentation: segmentation)
                         let qualified = candidates.map({ item -> Candidate? in
-                                let textParts = text.split(separator: "'")
                                 let syllables = item.romanization.removedTones().split(separator: " ")
                                 guard syllables != textParts else { return Candidate(text: item.text, romanization: item.romanization, input: text) }
-                                let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
-                                let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
-                                guard !isHeadingSeparator else { return nil }
-                                let textSeparators = text.filter(\.isSeparator)
+                                guard !(isHeadingSeparator) else { return nil }
                                 switch textSeparators.count {
                                 case 1 where isTrailingSeparator:
                                         guard syllables.count == 1 else { return nil }
