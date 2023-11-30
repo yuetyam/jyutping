@@ -51,6 +51,8 @@ struct CandidateBoard: View {
                                 rowWidth = length
                         }
                 }
+                let lastRow = Row(identifier: rowID, elements: cache)
+                rows.append(lastRow)
                 return rows
         }
 
@@ -120,7 +122,7 @@ struct CandidateBoard: View {
                         Image.upChevron
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 20, height: 20)
+                                .padding(12)
                                 .frame(width: collapseWidth, height: collapseHeight)
                                 .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                                 .contentShape(Rectangle())
