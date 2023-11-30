@@ -13,11 +13,6 @@ struct PronunciationLabel: View {
                 let isSingular: Bool = romanization.filter({ !($0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit) }).isEmpty
                 self.isSingular = isSingular
                 self.ipa = isSingular ? Syllable2IPA.IPAText(romanization) : nil
-                self.mark = {
-                        guard isSingular else { return nil }
-                        let tail = pronunciation.romanization.suffix(2)
-                        return Self.sandhiTails.contains(String(tail)) ? "變調" : nil
-                }()
         }
 
         private let romanization: String
@@ -26,8 +21,6 @@ struct PronunciationLabel: View {
 
         private let isSingular: Bool
         private let ipa: String?
-        private let mark: String?
-        private static let sandhiTails: Set<String> = ["p2", "t2", "k2"]
 
         var body: some View {
                 VStack(alignment: .leading) {
@@ -39,9 +32,6 @@ struct PronunciationLabel: View {
                                 }
                                 if let ipa {
                                         Text(verbatim: ipa).font(.body).foregroundStyle(Color.secondary)
-                                }
-                                if let mark {
-                                        Text(verbatim: mark).foregroundStyle(Color.secondary)
                                 }
                                 Spacer()
                                 Speaker(romanization)
