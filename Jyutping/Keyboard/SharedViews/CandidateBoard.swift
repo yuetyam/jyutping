@@ -1,6 +1,21 @@
 import SwiftUI
 import CoreIME
 
+private struct Element: Hashable, Identifiable {
+        let identifier: Int
+        let candidate: Candidate
+        var id: Int {
+                return identifier
+        }
+}
+private struct Row: Hashable, Identifiable {
+        let identifier: Int
+        let elements: [Element]
+        var id: Int {
+                return identifier
+        }
+}
+
 struct CandidateBoard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -10,20 +25,29 @@ struct CandidateBoard: View {
         private let collapseWidth: CGFloat = 44
         private let collapseHeight: CGFloat = 44
 
-        private func rows(of candidates: [Candidate]) -> [[Candidate]] {
+        private let minRowIdentifier: Int = 1000
+        private let minElementIdentifier: Int = 5000
+
+        private func rows(of candidates: [Candidate]) -> [Row] {
                 let keyboardWidth: CGFloat = context.keyboardWidth
-                var rows: [[Candidate]] = []
-                var row: [Candidate] = []
+                var rows: [Row] = []
+                var cache: [Element] = []
+                var rowID: Int = minRowIdentifier
                 var rowWidth: CGFloat = 0
-                for candidate in candidates {
+                for index in 0..<candidates.count {
+                        let elementID: Int = index + minElementIdentifier
+                        let candidate = candidates[index]
+                        let element = Element(identifier: elementID, candidate: candidate)
                         let maxWidth: CGFloat = rows.isEmpty ? (keyboardWidth - collapseWidth) : keyboardWidth
                         let length: CGFloat = candidate.width
                         if rowWidth < (maxWidth - length) {
-                                row.append(candidate)
+                                cache.append(element)
                                 rowWidth += length
                         } else {
+                                let row = Row(identifier: rowID, elements: cache)
                                 rows.append(row)
-                                row = [candidate]
+                                cache = [element]
+                                rowID += 1
                                 rowWidth = length
                         }
                 }
@@ -33,17 +57,16 @@ struct CandidateBoard: View {
         var body: some View {
                 let commentStyle: CommentStyle = Options.commentStyle
                 let commentToneStyle: CommentToneStyle = Options.commentToneStyle
-                let candidateRows = rows(of: context.candidates)
+                let rows = rows(of: context.candidates)
                 ZStack(alignment: .topTrailing) {
                         ScrollViewReader { proxy in
                                 ScrollView(.vertical) {
                                         LazyVStack(spacing: 0) {
                                                 EmptyView().id(topID)
-                                                ForEach(0..<candidateRows.count, id: \.self) { index in
-                                                        let rowCandidates: [Candidate] = candidateRows[index]
+                                                ForEach(rows) { row in
                                                         HStack(spacing: 0) {
-                                                                ForEach(0..<rowCandidates.count, id: \.self) { deepIndex in
-                                                                        let candidate = rowCandidates[deepIndex]
+                                                                ForEach(row.elements) { element in
+                                                                        let candidate = element.candidate
                                                                         ScrollViewButton {
                                                                                 AudioFeedback.inputed()
                                                                                 context.triggerSelectionHapticFeedback()
@@ -84,7 +107,7 @@ struct CandidateBoard: View {
                                                                                 .frame(maxWidth: .infinity)
                                                                         }
                                                                 }
-                                                                if index == 0 {
+                                                                if row.identifier == minRowIdentifier {
                                                                         Color.clear.frame(width: collapseWidth)
                                                                 }
                                                         }
