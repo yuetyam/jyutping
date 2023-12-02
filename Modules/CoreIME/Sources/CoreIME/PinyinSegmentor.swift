@@ -21,7 +21,7 @@ public struct PinyinSegmentor {
                 guard !(leadingTokens.isEmpty) else { return [] }
                 let textCount = text.count
                 var segmentation: [[String]] = leadingTokens.map({ [$0] })
-                var previousSegmentation = segmentation
+                var previousSubelementCount = segmentation.subelementCount
                 var shouldContinue: Bool = true
                 while shouldContinue {
                         for scheme in segmentation {
@@ -31,15 +31,17 @@ public struct PinyinSegmentor {
                                 let tailTokens = splitLeading(tailText)
                                 guard !(tailTokens.isEmpty) else { continue }
                                 let newSegmentation: [[String]] = tailTokens.map({ scheme + [$0] })
-                                segmentation = (segmentation + newSegmentation).uniqued()
+                                segmentation += newSegmentation
                         }
-                        if segmentation.subelementCount != previousSegmentation.subelementCount {
-                                previousSegmentation = segmentation
+                        segmentation = segmentation.uniqued()
+                        let currentSubelementCount = segmentation.subelementCount
+                        if currentSubelementCount != previousSubelementCount {
+                                previousSubelementCount = currentSubelementCount
                         } else {
                                 shouldContinue = false
                         }
                 }
-                let sequences: [[String]] = segmentation.uniqued().sorted(by: {
+                let sequences: [[String]] = segmentation.sorted(by: {
                         let lhsLength: Int = $0.summedLength
                         let rhsLength: Int = $1.summedLength
                         if lhsLength == rhsLength {
@@ -54,7 +56,7 @@ public struct PinyinSegmentor {
         private static func splitLeading(_ text: String) -> [String] {
                 let maxLength: Int = min(text.count, 6)
                 guard maxLength > 0 else { return [] }
-                let tokens = (1...maxLength).map({ number -> String? in
+                let tokens = (1...maxLength).reversed().map({ number -> String? in
                         let token = String(text.prefix(number))
                         return syllables.contains(token) ? token : nil
                 })

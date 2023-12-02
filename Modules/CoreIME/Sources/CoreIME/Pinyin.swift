@@ -16,10 +16,29 @@ extension Engine {
         }
 
         private static func search(pinyin text: String, schemes: [[String]]) -> [PinyinLexicon] {
-                let fullProcessed = match(text: text) + shortcut(text: text)
-                guard schemes.subelementCount > 0 else { return fullProcessed.uniqued() }
-                let matches = schemes.map({ match(text: $0.joined()) }).flatMap({ $0 })
-                return (fullProcessed + matches).uniqued()
+                let textCount = text.count
+                let fullMatch = match(text: text)
+                let fullShortcut = shortcut(text: text)
+                let candidates = schemes.map({ match(text: $0.joined()) }).flatMap({ $0 })
+                let perfectCandidates = candidates.filter({ $0.input.count == textCount })
+                let primary: [PinyinLexicon] = (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
+                guard let firstInputCount = primary.first?.input.count else { return [] }
+                guard firstInputCount != textCount else { return primary }
+                let headTexts = primary.map(\.input).uniqued()
+                let concatenated = headTexts.map { headText -> Array<PinyinLexicon>.SubSequence in
+                        let headInputCount = headText.count
+                        let tailText = String(text.dropFirst(headInputCount))
+                        let tailSegmentation = PinyinSegmentor.segment(text: tailText)
+                        let tailCandidates = search(pinyin: tailText, schemes: tailSegmentation)
+                        guard !(tailCandidates.isEmpty) else { return [] }
+                        let qualified = primary.filter({ $0.input == headText }).prefix(3)
+                        let combines = tailCandidates.map { tail -> [PinyinLexicon] in
+                                return qualified.map({ PinyinLexicon(text: $0.text + tail.text, input: $0.input + tail.input) })
+                        }
+                        return combines.flatMap({ $0 }).prefix(4)
+                }
+                let preferredConcatenated = concatenated.flatMap({ $0 }).filter({ $0.input.count > firstInputCount }).uniqued().prefix(5)
+                return preferredConcatenated + primary
         }
 
         private static func match(text: String) -> [PinyinLexicon] {
