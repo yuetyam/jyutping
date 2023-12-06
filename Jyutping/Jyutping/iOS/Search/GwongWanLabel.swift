@@ -1,7 +1,7 @@
 #if os(iOS)
 
 import SwiftUI
-import Materials
+import AppDataSource
 
 struct GwongWanLabel: View {
         let entry: GwongWanCharacter

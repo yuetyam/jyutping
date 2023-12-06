@@ -3,7 +3,7 @@ import SQLite3
 
 struct MaterialsHandler {
 
-        private(set) static var database: OpaquePointer? = nil
+        fileprivate static var database: OpaquePointer? = nil
 
         static func prepare() {
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
@@ -17,7 +17,7 @@ struct MaterialsHandler {
                 sqlite3_close_v2(database)
         }
         private static func backupInMemoryDatabase() {
-                let path: String = "../Materials/Sources/Materials/Resources/appdb.sqlite3"
+                let path: String = "../AppDataSource/Sources/AppDataSource/Resources/appdb.sqlite3"
                 if FileManager.default.fileExists(atPath: path) {
                         try? FileManager.default.removeItem(atPath: path)
                 }

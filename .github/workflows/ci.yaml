@@ -21,14 +21,14 @@ jobs:
       - name: CommonExtensions SwiftTest
         run: swift test
         working-directory: ./Modules/CommonExtensions
-  build_materials:
-    name: Build Materials
+  build_app_data_source:
+    name: Build AppDataSource
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
-      - name: Swift Build Materials
+      - name: Swift Build AppDataSource
         run: swift build
-        working-directory: ./Modules/Materials
+        working-directory: ./Modules/AppDataSource
   build_coreime:
     name: Build CoreIME
     runs-on: macos-13

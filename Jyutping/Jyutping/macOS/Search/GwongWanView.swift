@@ -1,7 +1,7 @@
 #if os(macOS)
 
 import SwiftUI
-import Materials
+import AppDataSource
 
 struct GwongWanView: View {
         let entry: GwongWanCharacter

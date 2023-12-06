@@ -29,6 +29,7 @@
 /Jyutping/Sparkle.framework/** binary
 
 # Swift Package Resources
+/Modules/AppDataSource/Sources/AppDataSource/Resources/** binary
 /Modules/CoreIME/Sources/CoreIME/Resources/** binary
 /Modules/Materials/Sources/Materials/Resources/** binary
 /Modules/Preparing/Sources/Preparing/Resources/** binary

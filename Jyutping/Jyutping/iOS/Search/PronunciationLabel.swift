@@ -2,7 +2,7 @@
 
 import SwiftUI
 import CommonExtensions
-import Materials
+import AppDataSource
 
 struct PronunciationLabel: View {
 

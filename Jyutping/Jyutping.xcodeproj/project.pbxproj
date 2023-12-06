@@ -29,6 +29,7 @@
 		37130A9429A71E94004ECF28 /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */; };
 		371A13A12A49F294001695C1 /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A13A02A49F294001695C1 /* RomanizationLabel.swift */; };
 		371B6CEF29F4DC4E00DBB629 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6CEE29F4DC4E00DBB629 /* AppContext.swift */; };
+		372409352B205FCB00D08112 /* AppDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 372409342B205FCB00D08112 /* AppDataSource */; };
 		3726E43A2999D164003E5842 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726E4392999D164003E5842 /* EventHandler.swift */; };
 		373104D52A0A3D780009BF66 /* EditingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373104D42A0A3D780009BF66 /* EditingPanel.swift */; };
 		373FCEBB29FF962000DC9102 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373FCEB929FF961500DC9102 /* Sparkle.framework */; };
@@ -193,7 +194,6 @@
 		37D7BDB8294CB9F3006A6ADD /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BDAC294CB9F3006A6ADD /* FAQView.swift */; };
 		37D7BDBA294CB9F3006A6ADD /* PrivacyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BDAE294CB9F3006A6ADD /* PrivacyNoticeView.swift */; };
 		37D7BDBC294CC3AB006A6ADD /* CantoneseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */; };
-		37D7BDC0294CC9DA006A6ADD /* Materials in Frameworks */ = {isa = PBXBuildFile; productRef = 37D7BDBF294CC9DA006A6ADD /* Materials */; };
 		37D7BDC3294CCAD8006A6ADD /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 37D7BDC2294CCAD8006A6ADD /* CommonExtensions */; };
 		37DE32882A0216B90066D03A /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32872A0216B90066D03A /* ColorExtensions.swift */; };
 		37DE328A2A02187B0066D03A /* ToolBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37DE32892A02187B0066D03A /* ToolBarItem.swift */; };
@@ -362,6 +362,7 @@
 		37130A9329A71E94004ECF28 /* MacCantonMetroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
 		371A13A02A49F294001695C1 /* RomanizationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		371B6CEE29F4DC4E00DBB629 /* AppContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
+		372409332B205FAC00D08112 /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = ../Modules/AppDataSource; sourceTree = "<group>"; };
 		3726E4392999D164003E5842 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		373104D42A0A3D780009BF66 /* EditingPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
 		373FCEB929FF961500DC9102 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -555,7 +556,6 @@
 		37D7BDAC294CB9F3006A6ADD /* FAQView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
 		37D7BDAE294CB9F3006A6ADD /* PrivacyNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyNoticeView.swift; sourceTree = "<group>"; };
 		37D7BDBB294CC3AB006A6ADD /* CantoneseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseView.swift; sourceTree = "<group>"; };
-		37D7BDBD294CC9BE006A6ADD /* Materials */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Materials; path = ../Modules/Materials; sourceTree = "<group>"; };
 		37D7BDC1294CCAC5006A6ADD /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = ../Modules/CommonExtensions; sourceTree = "<group>"; };
 		37DE32872A0216B90066D03A /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		37DE32892A02187B0066D03A /* ToolBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarItem.swift; sourceTree = "<group>"; };
@@ -686,8 +686,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37D7BDC0294CC9DA006A6ADD /* Materials in Frameworks */,
 				37D7BDC3294CCAD8006A6ADD /* CommonExtensions in Frameworks */,
+				372409352B205FCB00D08112 /* AppDataSource in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -962,9 +962,9 @@
 			isa = PBXGroup;
 			children = (
 				373FCEB929FF961500DC9102 /* Sparkle.framework */,
+				372409332B205FAC00D08112 /* AppDataSource */,
 				37FC1AE3294DF65400D7153F /* CoreIME */,
 				37D7BDC1294CCAC5006A6ADD /* CommonExtensions */,
-				37D7BDBD294CC9BE006A6ADD /* Materials */,
 				37D7BD14294CAADB006A6ADD /* Jyutping */,
 				37D7BD26294CAADC006A6ADD /* JyutpingTests */,
 				37D7BD30294CAADC006A6ADD /* JyutpingUITests */,
@@ -1360,8 +1360,8 @@
 			);
 			name = Jyutping;
 			packageProductDependencies = (
-				37D7BDBF294CC9DA006A6ADD /* Materials */,
 				37D7BDC2294CCAD8006A6ADD /* CommonExtensions */,
+				372409342B205FCB00D08112 /* AppDataSource */,
 			);
 			productName = Jyutping;
 			productReference = 37D7BD12294CAADB006A6ADD /* Jyutping.app */;
@@ -2614,9 +2614,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		37D7BDBF294CC9DA006A6ADD /* Materials */ = {
+		372409342B205FCB00D08112 /* AppDataSource */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Materials;
+			productName = AppDataSource;
 		};
 		37D7BDC2294CCAD8006A6ADD /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;

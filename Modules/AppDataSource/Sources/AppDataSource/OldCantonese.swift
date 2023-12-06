@@ -166,6 +166,6 @@ struct OldCantonese {
                 "yu": "yː",
                 "yun": "yːn",
                 "yut": "yːt̚",
-                "z": "ɿ"
+                "ii": "ɿ"
         ]
 }
