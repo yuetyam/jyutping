@@ -1,3 +1,5 @@
+import SwiftUI
+
 enum WindowPattern: Int {
 
         case regular
@@ -27,6 +29,20 @@ enum WindowPattern: Int {
                         return true
                 case .reversed:
                         return true
+                }
+        }
+
+        /// Candidate window MotherBoard alignment
+        var windowAlignment: Alignment {
+                switch self {
+                case .regular:
+                        return .topLeading
+                case .horizontalReversed:
+                        return .topTrailing
+                case .verticalReversed:
+                        return .bottomLeading
+                case .reversed:
+                        return .bottomTrailing
                 }
         }
 }
