@@ -66,7 +66,7 @@ extension JyutpingInputController {
                                 passBuffer()
                                 Options.updateInputMethodMode(to: .abc)
                                 appContext.updateInputForm(to: .transparent)
-                                window?.setFrame(.zero, display: true)
+                                setWindowFrame(.zero)
                                 return true
                         case .transparent:
                                 Options.updateInputMethodMode(to: .cantonese)
@@ -341,7 +341,7 @@ extension JyutpingInputController {
                                         passBuffer()
                                         Options.updateInputMethodMode(to: .abc)
                                         appContext.updateInputForm(to: .transparent)
-                                        window?.setFrame(.zero, display: true)
+                                        setWindowFrame(.zero)
                                         return true
                                 }
                                 if candidates.isEmpty {
@@ -441,7 +441,7 @@ extension JyutpingInputController {
                 let selectedIndex: Int = index ?? appContext.optionsHighlightedIndex
                 defer {
                         let frame: CGRect = candidates.isEmpty ? .zero : windowFrame
-                        window?.setFrame(frame, display: true)
+                        setWindowFrame(frame)
                         appContext.updateInputForm()
                 }
                 switch selectedIndex {

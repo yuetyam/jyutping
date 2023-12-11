@@ -65,10 +65,12 @@ extension JyutpingInputController {
                 displayPreferencesView()
         }
         private func displayPreferencesView() {
-                let shouldOpenNewWindow: Bool = NSApp.windows.filter({ $0.identifier?.rawValue == Constant.preferencesWindowIdentifier }).isEmpty
+                let windowIdentifiers: [String] = NSApp.windows.map(\.identifier?.rawValue).compactMap({ $0 })
+                let shouldOpenNewWindow: Bool = !(windowIdentifiers.contains(Constant.preferencesWindowIdentifier))
                 guard shouldOpenNewWindow else { return }
                 let frame: CGRect = preferencesWindowFrame()
                 let window = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
+                window.level = .floating
                 window.identifier = NSUserInterfaceItemIdentifier(rawValue: Constant.preferencesWindowIdentifier)
                 window.title = NSLocalizedString("Jyutping Input Method Preferences", comment: "")
                 let visualEffectView = NSVisualEffectView()

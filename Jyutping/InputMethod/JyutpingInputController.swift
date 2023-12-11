@@ -7,6 +7,8 @@ import Sparkle
 @objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
 
+        // MARK: - Sparkle
+
         private let updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
         @objc func checkForUpdates() {
                 if updaterController.updater.canCheckForUpdates {
@@ -17,14 +19,19 @@ final class JyutpingInputController: IMKInputController {
 
         // MARK: - Window, InputClient
 
-        private(set) lazy var window: NSWindow? = nil
+        private lazy var window: NSPanel? = nil
         private func createMasterWindow() {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                window = NSWindow(contentRect: .zero, styleMask: .borderless, backing: .buffered, defer: false)
-                window?.collectionBehavior = .moveToActiveSpace
-                let levelValue: Int = Int(CGShieldingWindowLevel())
+                window = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
+                let maxLevel: CGWindowLevel = max(CGShieldingWindowLevel(), kCGScreenSaverWindowLevel, kCGPopUpMenuWindowLevel)
+                let levelValue: Int = Int(maxLevel) + 2
                 window?.level = NSWindow.Level(levelValue)
+                window?.isFloatingPanel = true
+                window?.worksWhenModal = true
+                window?.hidesOnDeactivate = false
+                window?.collectionBehavior = .moveToActiveSpace
+                window?.hasShadow = false
                 window?.backgroundColor = .clear
                 let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
                 window?.contentView?.addSubview(motherBoard.view)
@@ -46,13 +53,11 @@ final class JyutpingInputController: IMKInputController {
                 window?.orderFrontRegardless()
         }
         private func prepareMasterWindow() {
-                if window == nil {
-                        createMasterWindow()
+                if let isOnActiveSpace: Bool = window?.isOnActiveSpace {
+                        guard !(isOnActiveSpace) else { return }
+                        window?.orderFrontRegardless()
                 } else {
-                        let isOnActiveSpace: Bool = window?.isOnActiveSpace ?? false
-                        if !isOnActiveSpace {
-                                window?.orderFrontRegardless()
-                        }
+                        createMasterWindow()
                 }
         }
         func updateMasterWindow() {
@@ -60,6 +65,9 @@ final class JyutpingInputController: IMKInputController {
                         createMasterWindow()
                 }
                 window?.setFrame(windowFrame, display: true)
+        }
+        func setWindowFrame(_ frame: CGRect) {
+                window?.setFrame(frame, display: true)
         }
 
         var windowFrame: CGRect {
