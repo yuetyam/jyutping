@@ -2,6 +2,12 @@ import SwiftUI
 import CommonExtensions
 import CoreIME
 
+private extension Emoji.Category {
+        var viewID: Int {
+                return self.rawValue + 100
+        }
+}
+
 struct EmojiBoard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
@@ -10,7 +16,7 @@ struct EmojiBoard: View {
         @State private var buffer: Int = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
-        @State private var currentCategory: Emoji.Category = .smileysAndPeople
+        @State private var currentCategory: Emoji.Category = .frequent
 
         private let rows: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
 
@@ -40,7 +46,7 @@ struct EmojiBoard: View {
                                                                         }
                                                                 }
                                                         }
-                                                        .id(category)
+                                                        .id(category.viewID)
                                                 }
                                         }
                                 }
@@ -67,63 +73,63 @@ struct EmojiBoard: View {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .frequent
-                                                proxy.scrollTo(Emoji.Category.frequent)
+                                                proxy.scrollTo(Emoji.Category.frequent.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .frequent) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 1, imageName: "EmojiSmiley") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .smileysAndPeople
-                                                proxy.scrollTo(Emoji.Category.smileysAndPeople)
+                                                proxy.scrollTo(Emoji.Category.smileysAndPeople.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .smileysAndPeople) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 2, imageName: "hare") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .animalsAndNature
-                                                proxy.scrollTo(Emoji.Category.animalsAndNature)
+                                                proxy.scrollTo(Emoji.Category.animalsAndNature.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .animalsAndNature) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 3, imageName: "EmojiCategoryFoodAndDrink") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .foodAndDrink
-                                                proxy.scrollTo(Emoji.Category.foodAndDrink)
+                                                proxy.scrollTo(Emoji.Category.foodAndDrink.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .foodAndDrink) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 4, imageName: footballImageName) {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .activity
-                                                proxy.scrollTo(Emoji.Category.activity)
+                                                proxy.scrollTo(Emoji.Category.activity.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .activity) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 5, imageName: "EmojiCategoryTravelAndPlaces") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .travelAndPlaces
-                                                proxy.scrollTo(Emoji.Category.travelAndPlaces)
+                                                proxy.scrollTo(Emoji.Category.travelAndPlaces.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .travelAndPlaces) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 6, imageName: "lightbulb") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .objects
-                                                proxy.scrollTo(Emoji.Category.objects)
+                                                proxy.scrollTo(Emoji.Category.objects.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .objects) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 7, imageName: "EmojiCategorySymbols") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .symbols
-                                                proxy.scrollTo(Emoji.Category.symbols)
+                                                proxy.scrollTo(Emoji.Category.symbols.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .symbols) ? Color.primary : Color.secondary)
                                         EmojiIndicator(index: 8, imageName: "flag") {
                                                 AudioFeedback.modified()
                                                 context.triggerHapticFeedback()
                                                 currentCategory = .flags
-                                                proxy.scrollTo(Emoji.Category.flags)
+                                                proxy.scrollTo(Emoji.Category.flags.viewID)
                                         }
                                         .foregroundStyle((currentCategory == .flags) ? Color.primary : Color.secondary)
                                 }
