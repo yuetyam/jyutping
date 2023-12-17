@@ -1,8 +1,4 @@
-# SQLite
-*.sqlite binary
-*.sqlite3 binary
-
-# Image
+# Images
 *.png binary
 *.heic binary
 *.jpg binary
@@ -10,16 +6,14 @@
 *.gif binary
 *.webp binary
 *.apng binary
+*.pdf binary
 
-# Video
+# Videos
 *.mp4 binary
 *.mov binary
 *.webm binary
 
-# PDF
-*.pdf binary
-
-# Font
+# Fonts
 *.otf binary
 *.ttf binary
 *.ttc binary
@@ -31,5 +25,4 @@
 # Swift Package Resources
 /Modules/AppDataSource/Sources/AppDataSource/Resources/** binary
 /Modules/CoreIME/Sources/CoreIME/Resources/** binary
-/Modules/Materials/Sources/Materials/Resources/** binary
 /Modules/Preparing/Sources/Preparing/Resources/** binary

@@ -64,10 +64,11 @@ Package.resolved
 
 
 ### Generated Databases ###
+*.sqlite
 *.sqlite3
 
 
 ### Mac IME Packaging ###
-*.zip
-*.pkg
 /packaging/app/
+.pkg
+.zip
