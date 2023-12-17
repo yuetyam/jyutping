@@ -44,7 +44,19 @@ struct PadCantoneseSymbolicKeyboard: View {
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("\u{2014}"), members: [KeyElement("\u{2014}", footer: "2014"), KeyElement("-")]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("+"), members: [KeyElement("+"), KeyElement("＋", header: "全寬")]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("＝", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("·"), members: [KeyElement("·", header: "間隔號", footer: "00B7"), KeyElement("•", header: "Bullet", footer: "2022"), KeyElement("°", header: "度")]))
+                                        PadExpansibleInputKey(
+                                                keyLocale: .leading,
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("·"),
+                                                        members: [
+                                                                KeyElement("·", header: "間隔號", footer: "00B7"),
+                                                                KeyElement("•", header: "Bullet", footer: "2022"),
+                                                                KeyElement("\u{2027}", header: "連字點", footer: "2027"),
+                                                                KeyElement("\u{FF65}", header: "半寬中點", footer: "FF65"),
+                                                                KeyElement("\u{30FB}", header: "全寬中點", footer: "30FB")
+                                                        ]
+                                                )
+                                        )
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("＜")]))
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement("＞")]))
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: "半寬")]))

@@ -166,10 +166,12 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyLocale: .trailing,
                                         keyModel: KeyModel(primary: KeyElement("\u{00B7}"),
                                                            members: [
-                                                                KeyElement("\u{00B7}", header: "間隔", footer: "00B7"),
+                                                                KeyElement("\u{00B7}", header: "間隔號", footer: "00B7"),
                                                                 KeyElement("\u{2022}", header: "Bullet", footer: "2022"),
-                                                                KeyElement("\u{00B0}", header: "度", footer: "00B0"),
-                                                                KeyElement("\u{30FB}", header: "中點", footer: "30FB")
+                                                                KeyElement("\u{00B0}", header: "度"),
+                                                                KeyElement("\u{2027}", header: "連字點", footer: "2027"),
+                                                                KeyElement("\u{FF65}", header: "半寬中點", footer: "FF65"),
+                                                                KeyElement("\u{30FB}", header: "全寬中點", footer: "30FB")
                                                            ])
                                 )
                         }

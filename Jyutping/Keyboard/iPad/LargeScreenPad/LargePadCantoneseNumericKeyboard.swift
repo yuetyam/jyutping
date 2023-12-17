@@ -323,7 +323,10 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                                 KeyElement("\u{FF0D}", header: "全寬", footer: "FF0D"),
                                                                 KeyElement("\u{2013}", footer: "2013"),
                                                                 KeyElement("\u{2014}", footer: "2014"),
-                                                                KeyElement("•", header: "Bullet", footer: "2022")
+                                                                KeyElement("•", header: "Bullet", footer: "2022"),
+                                                                KeyElement("\u{2027}", header: "連字點", footer: "2027"),
+                                                                KeyElement("\u{FF65}", header: "半寬中點", footer: "FF65"),
+                                                                KeyElement("\u{30FB}", header: "全寬中點", footer: "30FB")
                                                         ]
                                                 )
                                         )
