@@ -147,23 +147,13 @@ public struct Segmentor {
                 }
         }
 
-        #if os(macOS)
         private static let maxCachedCount: Int = 1000
-        private static var cachedSegmentations: [Int: Segmentation] = Dictionary<Int, Segmentation>.init(minimumCapacity: maxCachedCount)
-        private static func cache(key: Int, segmentation: Segmentation) {
-                defer { cachedSegmentations[key] = segmentation }
-                guard cachedSegmentations.count > maxCachedCount else { return }
-                cachedSegmentations.removeAll(keepingCapacity: true)
-        }
-        #else
-        private static let maxCachedCount: Int = 100
         private static var cachedSegmentations: [Int: Segmentation] = [:]
         private static func cache(key: Int, segmentation: Segmentation) {
                 defer { cachedSegmentations[key] = segmentation }
                 guard cachedSegmentations.count > maxCachedCount else { return }
                 cachedSegmentations = [:]
         }
-        #endif
 
         private static let letterA: Segmentation = [[SegmentToken(text: "a", origin: "aa")]]
         private static let letterO: Segmentation = [[SegmentToken(text: "o", origin: "o")]]

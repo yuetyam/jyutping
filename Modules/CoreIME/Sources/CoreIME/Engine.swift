@@ -372,7 +372,7 @@ extension Engine {
         }
 }
 
-extension Array where Element == Candidate {
+private extension Array where Element == Candidate {
 
         /// Sort Candidates with input text, input.count and text.count
         /// - Parameter text: Input text
