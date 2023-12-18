@@ -305,13 +305,15 @@ extension Engine {
                 let entries = suggestions.flatMap({ $0 }).sorted { (lhs, rhs) -> Bool in
                         let lhsInputCount: Int = lhs.candidate.input.count
                         let rhsInputCount: Int = rhs.candidate.input.count
-                        if lhsInputCount > rhsInputCount {
-                                return true
-                        } else if lhsInputCount < rhsInputCount {
-                                return false
-                        } else {
-                                return lhs.rowID < rhs.rowID
+                        guard lhsInputCount == rhsInputCount else {
+                                return lhsInputCount > rhsInputCount
                         }
+                        let lhsTextCount: Int = lhs.candidate.text.count
+                        let rhsTextCount: Int = rhs.candidate.text.count
+                        guard lhsTextCount == rhsTextCount else {
+                                return lhsTextCount < rhsTextCount
+                        }
+                        return lhs.rowID < rhs.rowID
                 }
                 return entries.map({ $0.candidate }).uniqued()
         }
@@ -379,11 +381,12 @@ private extension Array where Element == Candidate {
         /// - Returns: Preferred Candidates
         func preferred(with text: String) -> [Candidate] {
                 let sorted = self.sorted { (lhs, rhs) -> Bool in
-                        if (lhs.input.count == rhs.input.count) {
-                                return lhs.text.count < rhs.text.count
-                        } else {
-                                return lhs.input.count > rhs.input.count
+                        let lhsInputCount: Int = lhs.input.count
+                        let rhsInputCount: Int = rhs.input.count
+                        guard lhsInputCount == rhsInputCount else {
+                                return lhsInputCount > rhsInputCount
                         }
+                        return lhs.text.count < rhs.text.count
                 }
                 let matched = sorted.filter({ $0.romanization.removedSpacesTones() == text })
                 return matched.isEmpty ? sorted : matched
