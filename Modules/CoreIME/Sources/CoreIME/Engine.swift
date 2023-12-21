@@ -217,9 +217,9 @@ extension Engine {
                         let combines = tailCandidates.map { tail -> [Candidate] in
                                 return qualified.map({ $0 + tail })
                         }
-                        return combines.flatMap({ $0 }).prefix(6)
+                        return combines.flatMap({ $0 }).prefix(8)
                 }
-                let preferredConcatenated = concatenated.flatMap({ $0 }).filter({ $0.input.count > firstInputCount }).uniqued().preferred(with: text).prefix(6)
+                let preferredConcatenated = concatenated.flatMap({ $0 }).filter({ $0.input.count > firstInputCount }).uniqued().preferred(with: text).prefix(4)
                 return preferredConcatenated + primary
         }
 
