@@ -70,7 +70,6 @@ extension JyutpingInputController {
                 guard shouldOpenNewWindow else { return }
                 let frame: CGRect = preferencesWindowFrame()
                 let window = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
-                window.level = .floating
                 window.identifier = NSUserInterfaceItemIdentifier(rawValue: Constant.preferencesWindowIdentifier)
                 window.title = NSLocalizedString("Jyutping Input Method Preferences", comment: "")
                 let visualEffectView = NSVisualEffectView()

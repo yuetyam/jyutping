@@ -20,18 +20,19 @@ struct AboutView: View {
                                         LinkLabel(icon: "globe.asia.australia", title: "Website", link: "https://jyutping.app")
                                         LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Source Code", link: "https://github.com/yuetyam/jyutping")
                                         LinkLabel(icon: "lock.circle", title: "Privacy Policy", link: "https://jyutping.app/privacy")
+                                        LinkLabel(icon: "questionmark.circle", title: "FAQ", link: "https://jyutping.app/faq")
                                 }
                                 .block()
 
                                 VStack {
                                         LinkLabel(icon: "paperplane", title: "Telegram Group", link: "https://t.me/jyutping")
                                         LinkLabel(icon: "person.2", title: "QQ Group", link: #"https://jq.qq.com/?k=4PR17m3t"#, message: "293148593")
+                                        // TODO: Add Email Feedback
                                 }
                                 .block()
 
                                 VStack {
-                                        // LinkLabel(icon: "t.square", title: "TRUTH Social", link: "https://truthsocial.com/@Cantonese")
-                                        LinkLabel(icon: "at", title: "Twitter", link: "https://twitter.com/JyutpingApp")
+                                        LinkLabel(icon: "at", title: "Twitter", link: "https://x.com/JyutpingApp")
                                         LinkLabel(icon: "circle.square", title: "Instagram", link: "https://www.instagram.com/jyutping_app")
                                 }
                                 .block()
