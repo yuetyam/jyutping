@@ -32,7 +32,7 @@ struct AboutView: View {
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "at", title: "Twitter", link: "https://x.com/JyutpingApp")
+                                        LinkLabel(icon: "at", title: "Twitter", link: "https://twitter.com/JyutpingApp")
                                         LinkLabel(icon: "circle.square", title: "Instagram", link: "https://www.instagram.com/jyutping_app")
                                 }
                                 .block()
