@@ -24,8 +24,6 @@ final class JyutpingInputController: IMKInputController {
                 _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
                 window = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
-                // let maxLevel: CGWindowLevel = max(CGShieldingWindowLevel(), kCGScreenSaverWindowLevel, kCGPopUpMenuWindowLevel)
-                // let levelValue: Int = Int(maxLevel) + 2
                 let levelValue: Int = Int(CGShieldingWindowLevel())
                 window?.level = NSWindow.Level(levelValue)
                 window?.isFloatingPanel = true
@@ -33,6 +31,9 @@ final class JyutpingInputController: IMKInputController {
                 window?.hidesOnDeactivate = false
                 window?.isReleasedWhenClosed = true
                 window?.collectionBehavior = .moveToActiveSpace
+                window?.isMovable = true
+                window?.isMovableByWindowBackground = true
+                window?.isOpaque = false
                 window?.hasShadow = false
                 window?.backgroundColor = .clear
                 let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
@@ -51,7 +52,6 @@ final class JyutpingInputController: IMKInputController {
                         ])
                 }
                 window?.contentViewController?.addChild(motherBoard)
-                window?.setFrame(.zero, display: true)
                 window?.orderFrontRegardless()
         }
         private func prepareMasterWindow() {
