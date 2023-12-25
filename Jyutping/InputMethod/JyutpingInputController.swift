@@ -56,11 +56,20 @@ final class JyutpingInputController: IMKInputController {
         }
         private func prepareMasterWindow() {
                 if let isOnActiveSpace: Bool = window?.isOnActiveSpace {
-                        guard !(isOnActiveSpace) else { return }
-                        window?.orderFrontRegardless()
+                        if !(isOnActiveSpace) {
+                                window?.orderFrontRegardless()
+                        }
                 } else {
                         createMasterWindow()
                 }
+                let idealValue: Int = Int(CGShieldingWindowLevel())
+                let maxValue: Int = idealValue + 2
+                let levelValue: Int = {
+                        guard let clientLevel = currentClient?.windowLevel() else { return idealValue }
+                        let increasedValue: Int = Int(clientLevel) + 1
+                        return min(increasedValue, maxValue)
+                }()
+                window?.level = NSWindow.Level(levelValue)
         }
         func updateMasterWindow() {
                 if window == nil {
