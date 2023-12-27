@@ -47,7 +47,7 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 ## 如何構建（How to build）
 前置要求（Build requirements）
 - macOS 14.0+
-- Xcode 15.0+
+- Xcode 15.1+
 
 倉庫體積比較大，建議加 `--depth` 來 clone。
 ~~~bash
@@ -61,14 +61,12 @@ swift run -c release
 ~~~
 跟住用 Xcode 開啓 `Jyutping.xcodeproj` 即可。
 
-成個工程(project)包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標(target)。
-
+成個工程(project)包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標(target)。  
 `Jyutping` 係正常App，`Keyboard` 係 iOS Keyboard Extension，`InputMethod` 係 macOS 輸入法。
 
 注意事項: 毋好直接 Run `InputMethod`，只可以 Build 或 [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
 
-如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來嘅 Jyutping.app 輸入法程式放入 `/Library/Input\ Methods/` 檔案夾。
-
+如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來嘅 Jyutping.app 輸入法程式放入 `/Library/Input\ Methods/` 檔案夾。  
 如果替換舊有 Jyutping.app 輸入法箇陣，彈提示話佢運行緊、無法替換，可以去 Terminal（終端） 用以下命令將佢結束運行：
 ~~~bash
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
