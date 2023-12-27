@@ -228,6 +228,8 @@
 		371EABE82B385D390075089B /* InputMethodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EABE72B385D390075089B /* InputMethodUITests.swift */; };
 		371EABEA2B385D390075089B /* InputMethodUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */; };
 		371EABF72B38802A0075089B /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371EABF62B38802A0075089B /* CommonExtensions */; };
+		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
+		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
 		37E6AD6B2B3B381700F02279 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD442B3B381600F02279 /* CommentLabel.swift */; };
 		37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD452B3B381600F02279 /* CandidateBoard.swift */; };
 		37E6AD6D2B3B381700F02279 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD462B3B381600F02279 /* CandidateLabel.swift */; };
@@ -602,6 +604,7 @@
 		371EABE72B385D390075089B /* InputMethodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITests.swift; sourceTree = "<group>"; };
 		371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		371EABF42B3880150075089B /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = Modules/CommonExtensions; sourceTree = "<group>"; };
+		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		37E6AD442B3B381600F02279 /* CommentLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		37E6AD452B3B381600F02279 /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
 		37E6AD462B3B381600F02279 /* CandidateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
@@ -691,6 +694,7 @@
 				371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */,
 				37E6ADB32B3B39D000F02279 /* Sparkle.framework in Frameworks */,
 				371B6E3D2B3B3007005BB31C /* CoreIME in Frameworks */,
+				374282502B3CB71400B687D3 /* AboutKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +718,7 @@
 			files = (
 				371EABF72B38802A0075089B /* CommonExtensions in Frameworks */,
 				371B6E382B3B2F86005BB31C /* AppDataSource in Frameworks */,
+				3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1248,7 @@
 			isa = PBXGroup;
 			children = (
 				37E6ADB12B3B39B500F02279 /* Sparkle.framework */,
+				3742824C2B3CB6FD00B687D3 /* AboutKit */,
 				371B6E392B3B2FE1005BB31C /* CoreIME */,
 				371B6E362B3B2F72005BB31C /* AppDataSource */,
 				371EABF42B3880150075089B /* CommonExtensions */,
@@ -1363,6 +1369,7 @@
 			packageProductDependencies = (
 				371B6E342B3B2F55005BB31C /* CommonExtensions */,
 				371B6E3C2B3B3007005BB31C /* CoreIME */,
+				3742824F2B3CB71400B687D3 /* AboutKit */,
 			);
 			productName = InputMethod;
 			productReference = 371EABC92B385D370075089B /* JyutpingInputMethod.app */;
@@ -1422,6 +1429,7 @@
 			packageProductDependencies = (
 				371EABF62B38802A0075089B /* CommonExtensions */,
 				371B6E372B3B2F86005BB31C /* AppDataSource */,
+				3742824D2B3CB70C00B687D3 /* AboutKit */,
 			);
 			productName = Jyutping;
 			productReference = 37EFD7252B3719C10089D346 /* Jyutping.app */;
@@ -2634,6 +2642,14 @@
 		371EABF62B38802A0075089B /* CommonExtensions */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CommonExtensions;
+		};
+		3742824D2B3CB70C00B687D3 /* AboutKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AboutKit;
+		};
+		3742824F2B3CB71400B687D3 /* AboutKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AboutKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -51,7 +51,7 @@ struct ExtendedLinkLabel: View {
                 self.footnote = footnote ?? address
                 self.address = address
                 self.symbol = symbol
-                self.url = URL(string: address) ?? AppMaster.websiteURL
+                self.url = URL(string: address) ?? URL(string: "https://jyutping.app")!
         }
 
         private let icon: String

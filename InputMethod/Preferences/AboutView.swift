@@ -1,4 +1,5 @@
 import SwiftUI
+import AboutKit
 
 struct AboutView: View {
         var body: some View {
@@ -17,23 +18,23 @@ struct AboutView: View {
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "globe.asia.australia", title: "Website", link: "https://jyutping.app")
-                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Source Code", link: "https://github.com/yuetyam/jyutping")
-                                        LinkLabel(icon: "lock.circle", title: "Privacy Policy", link: "https://jyutping.app/privacy")
-                                        LinkLabel(icon: "questionmark.circle", title: "FAQ", link: "https://jyutping.app/faq")
+                                        LinkLabel(icon: "globe.asia.australia", title: "Website", link: About.WebsiteAddress)
+                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Source Code", link: About.SourceCodeAddress)
+                                        LinkLabel(icon: "lock.circle", title: "Privacy Policy", link: About.PrivacyPolicyAddress)
+                                        LinkLabel(icon: "questionmark.circle", title: "FAQ", link: About.FAQAddress)
                                 }
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "paperplane", title: "Telegram Group", link: "https://t.me/jyutping")
-                                        LinkLabel(icon: "person.2", title: "QQ Group", link: #"https://jq.qq.com/?k=4PR17m3t"#, message: "293148593")
+                                        LinkLabel(icon: "paperplane", title: "Telegram Group", link: About.TelegramAddress)
+                                        LinkLabel(icon: "person.2", title: "QQ Group", link: About.QQAddress, message: About.QQGroupID)
                                         // TODO: Add Email Feedback
                                 }
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "at", title: "Twitter", link: "https://twitter.com/JyutpingApp")
-                                        LinkLabel(icon: "circle.square", title: "Instagram", link: "https://www.instagram.com/jyutping_app")
+                                        LinkLabel(icon: "at", title: "Twitter", link: About.TwitterAddress)
+                                        LinkLabel(icon: "circle.square", title: "Instagram", link: About.InstagramAddress)
                                 }
                                 .block()
                         }

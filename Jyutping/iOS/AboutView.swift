@@ -1,12 +1,9 @@
 #if os(iOS)
 
 import SwiftUI
+import AboutKit
 
 struct AboutView: View {
-
-        private let appStoreAddress: String = AppMaster.appStoreAddress
-        private let link2AppStore: URL = URL(string: AppMaster.appStoreAddress)!
-
         var body: some View {
                 NavigationView {
                         List {
@@ -17,116 +14,100 @@ struct AboutView: View {
                                                 }
                                 }
                                 Section {
-                                        SafariLink(AppMaster.websiteAddress) {
+                                        SafariLink(About.WebsiteAddress) {
                                                 EnhancedLabel("Website", icon: "globe.asia.australia", symbol: .safari)
                                         }
-                                        SafariLink(AppMaster.jyutping4MacAddress) {
+                                        SafariLink(About.Jyutping4MacAddress) {
                                                 EnhancedLabel("Jyutping for macOS", icon: "command.square", symbol: .safari)
                                         }
-                                        SafariLink(AppMaster.sourceCodeAddress) {
+                                        SafariLink(About.SourceCodeAddress) {
                                                 EnhancedLabel("Source Code", icon: "chevron.left.forwardslash.chevron.right", symbol: .safari)
                                         }
-                                        SafariLink(AppMaster.privacyPolicyAddress) {
+                                        SafariLink(About.PrivacyPolicyAddress) {
                                                 EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
                                         }
-                                        SafariLink(AppMaster.faqAddress) {
+                                        SafariLink(About.FAQAddress) {
                                                 EnhancedLabel("FAQ", icon: "questionmark.circle", symbol: .safari)
                                         }
                                 }
                                 Section {
                                         Button {
-                                                let appUrl: URL = URL(string: "tg://resolve?domain=jyutping")!
-                                                let webUrl: URL = URL(string: "https://t.me/jyutping")!
+                                                let appUrl: URL = URL(string: About.TelegramAppScheme)!
+                                                let webUrl: URL = URL(string: About.TelegramAddress)!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
                                                 EnhancedLabel("Telegram Group", icon: "paperplane", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                UsernameCopyButton("jyutping")
-                                                URLCopyButton("https://t.me/jyutping")
+                                                UsernameCopyButton(About.TelegramUsername)
+                                                URLCopyButton(About.TelegramAddress)
                                         }
                                         Button {
-                                                let scheme: String = #"mqqapi://card/show_pslcard?src_type=internal&version=1&card_type=group&uin=293148593"#
-                                                let address: String = #"https://jq.qq.com/?k=4PR17m3t"#
-                                                let appUrl: URL = URL(string: scheme)!
-                                                let webUrl: URL = URL(string: address)!
+                                                let appUrl: URL = URL(string: About.QQAppScheme)!
+                                                let webUrl: URL = URL(string: About.QQAddress)!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
                                                 EnhancedLabel("QQ Group", icon: "person.2", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton("293148593", title: "Copy QQ Group ID")
+                                                MenuCopyButton(About.QQGroupID, title: "Copy QQ Group ID")
                                         }
                                 }
                                 Section {
-                                        /*
-                                        Button {
-                                                let appUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
-                                                let webUrl: URL = URL(string: "https://truthsocial.com/@Cantonese")!
-                                                AppMaster.open(appUrl: appUrl, webUrl: webUrl)
-                                        } label: {
-                                                EnhancedLabel("TRUTH Social", icon: "t.square", symbol: .arrowUpForward)
-                                        }
-                                        .contextMenu {
-                                                UsernameCopyButton("Cantonese")
-                                                URLCopyButton("https://truthsocial.com/@Cantonese")
-                                        }
-                                        */
-
                                         // Twitter App supports Universal Links
-                                        Link(destination: URL(string: "https://twitter.com/JyutpingApp")!) {
+                                        Link(destination: URL(string: About.TwitterAddress)!) {
                                                 EnhancedLabel("Twitter", icon: "at", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                UsernameCopyButton("JyutpingApp")
-                                                URLCopyButton("https://twitter.com/JyutpingApp")
+                                                UsernameCopyButton(About.TwitterUsername)
+                                                URLCopyButton(About.TwitterAddress)
                                         }
 
                                         Button {
-                                                let appUrl: URL = URL(string: "instagram://user?username=jyutping_app")!
-                                                let webUrl: URL = URL(string: "https://www.instagram.com/jyutping_app")!
+                                                let appUrl: URL = URL(string: About.InstagramAppScheme)!
+                                                let webUrl: URL = URL(string: About.InstagramAddress)!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
                                                 EnhancedLabel("Instagram", icon: "circle.square", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                UsernameCopyButton("jyutping_app")
-                                                URLCopyButton("https://www.instagram.com/jyutping_app")
+                                                UsernameCopyButton(About.InstagramUsername)
+                                                URLCopyButton(About.InstagramAddress)
                                         }
                                 }
                                 Section {
                                         // GitHub App supports Universal Links
-                                        Link(destination: URL(string: "https://github.com/yuetyam/jyutping/issues")!) {
+                                        Link(destination: URL(string: About.GitHubIssuesAddress)!) {
                                                 EnhancedLabel("GitHub Issues", icon: "smallcircle.filled.circle", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                URLCopyButton("https://github.com/yuetyam/jyutping/issues")
+                                                URLCopyButton(About.GitHubIssuesAddress)
                                         }
                                         EmailFeedbackButton()
                                                 .contextMenu {
-                                                        MenuCopyButton(AppMaster.emailAddress, title: "Copy Email Address")
+                                                        MenuCopyButton(About.EmailAddress, title: "Copy Email Address")
                                                 }
                                 }
                                 Section {
-                                        Link(destination: URL(string: "itms-apps://apple.com/app/id1509367629")!) {
+                                        Link(destination: URL(string: About.AppStoreAppScheme)!) {
                                                 EnhancedLabel("Review on the App Store", icon: "heart", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton(appStoreAddress, title: "Copy App Store link")
+                                                MenuCopyButton(About.AppStoreAddress, title: "Copy App Store link")
                                         }
                                         if #available(iOS 16.0, *) {
-                                                ShareLink(item: link2AppStore) {
+                                                ShareLink(item: About.AppStoreWebURL) {
                                                         EnhancedLabel("Share this App", icon: "square.and.arrow.up")
                                                 }
                                                 .contextMenu {
-                                                        MenuCopyButton(appStoreAddress, title: "Copy App Store link")
+                                                        MenuCopyButton(About.AppStoreAddress, title: "Copy App Store link")
                                                 }
                                         } else {
-                                                ShareSheetView(activityItems: [link2AppStore]) {
+                                                ShareSheetView(activityItems: [About.AppStoreWebURL]) {
                                                         EnhancedLabel("Share this App", icon: "square.and.arrow.up")
                                                 }
                                                 .contextMenu {
-                                                        MenuCopyButton(appStoreAddress, title: "Copy App Store link")
+                                                        MenuCopyButton(About.AppStoreAddress, title: "Copy App Store link")
                                                 }
                                         }
                                 }
@@ -181,7 +162,7 @@ private struct EmailFeedbackButton: View {
                 Device: \(device)
                 System: \(system)
                 """
-                let address: String = AppMaster.emailAddress
+                let address: String = About.EmailAddress
                 let subject: String = "Jyutping Feedback"
                 let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
                 return URL(string: scheme)!

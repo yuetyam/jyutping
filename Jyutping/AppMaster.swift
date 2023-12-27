@@ -29,17 +29,6 @@ struct AppMaster {
                 let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
                 return marketingVersion + " (" + currentProjectVersion + ")"
         }()
-
-        static let websiteAddress: String = "https://jyutping.app"
-        static let websiteURL: URL = URL(string: websiteAddress)!
-
-        static let jyutping4MacAddress: String = "https://jyutping.app/mac"
-        static let privacyPolicyAddress: String = "https://jyutping.app/privacy"
-        static let faqAddress: String = "https://jyutping.app/faq"
-
-        static let sourceCodeAddress: String = "https://github.com/yuetyam/jyutping"
-        static let appStoreAddress: String = "https://apps.apple.com/hk/app/id1509367629"
-        static let emailAddress: String = "support@jyutping.app"
 }
 
 extension AppMaster {

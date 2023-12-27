@@ -1,6 +1,7 @@
 #if os(macOS)
 
 import SwiftUI
+import AboutKit
 
 struct MacInputMethodInstallationView: View {
 
@@ -22,10 +23,10 @@ struct MacInputMethodInstallationView: View {
                                 .block()
 
                                 HStack(spacing: 16) {
-                                        Link("Website", destination: AppMaster.websiteURL).foregroundStyle(Color.accentColor)
-                                        Text(verbatim: AppMaster.websiteAddress).font(.fixedWidth)
+                                        Link("Website", destination: About.WebsiteURL).foregroundStyle(Color.accentColor)
+                                        Text(verbatim: About.WebsiteAddress).font(.fixedWidth)
                                         Button {
-                                                AppMaster.copy(AppMaster.websiteAddress)
+                                                AppMaster.copy(About.WebsiteAddress)
                                                 isWebsiteAddressCopied = true
                                         } label: {
                                                 if isWebsiteAddressCopied {
