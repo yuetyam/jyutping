@@ -1,0 +1,2641 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		371B6E332B3B2F32005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E322B3B2F32005BB31C /* CommonExtensions */; };
+		371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E342B3B2F55005BB31C /* CommonExtensions */; };
+		371B6E382B3B2F86005BB31C /* AppDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E372B3B2F86005BB31C /* AppDataSource */; };
+		371B6E3B2B3B2FF3005BB31C /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E3A2B3B2FF3005BB31C /* CoreIME */; };
+		371B6E3D2B3B3007005BB31C /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E3C2B3B3007005BB31C /* CoreIME */; };
+		371B6E982B3B3108005BB31C /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */; };
+		371B6E992B3B3108005BB31C /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E402B3B3107005BB31C /* MacToneTableView.swift */; };
+		371B6E9A2B3B3108005BB31C /* FinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E412B3B3107005BB31C /* FinalTable.swift */; };
+		371B6E9B2B3B3108005BB31C /* InitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E422B3B3107005BB31C /* InitialTable.swift */; };
+		371B6E9C2B3B3108005BB31C /* SyllableChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E432B3B3107005BB31C /* SyllableChecker.swift */; };
+		371B6E9D2B3B3108005BB31C /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E442B3B3107005BB31C /* Syllable2IPA.swift */; };
+		371B6E9E2B3B3108005BB31C /* IOSToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E452B3B3107005BB31C /* IOSToneTableView.swift */; };
+		371B6E9F2B3B3108005BB31C /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E462B3B3107005BB31C /* SyllableCell.swift */; };
+		371B6EA02B3B3108005BB31C /* ChineseZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E482B3B3107005BB31C /* ChineseZodiacView.swift */; };
+		371B6EA12B3B3108005BB31C /* StemsBranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E492B3B3107005BB31C /* StemsBranchesView.swift */; };
+		371B6EA22B3B3108005BB31C /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4A2B3B3107005BB31C /* NumbersView.swift */; };
+		371B6EA32B3B3108005BB31C /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4B2B3B3107005BB31C /* TermView.swift */; };
+		371B6EA42B3B3108005BB31C /* SolarTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4C2B3B3107005BB31C /* SolarTermsView.swift */; };
+		371B6EA52B3B3108005BB31C /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4D2B3B3107005BB31C /* Term.swift */; };
+		371B6EA62B3B3108005BB31C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4E2B3B3107005BB31C /* Constant.swift */; };
+		371B6EA72B3B3108005BB31C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4F2B3B3107005BB31C /* Device.swift */; };
+		371B6EA82B3B3108005BB31C /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E512B3B3107005BB31C /* ColorExtensions.swift */; };
+		371B6EA92B3B3108005BB31C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E522B3B3107005BB31C /* FontExtensions.swift */; };
+		371B6EAA2B3B3108005BB31C /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E532B3B3107005BB31C /* ViewExtensions.swift */; };
+		371B6EAB2B3B3108005BB31C /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E542B3B3107005BB31C /* ImageExtensions.swift */; };
+		371B6EAC2B3B3108005BB31C /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E552B3B3107005BB31C /* TextExtensions.swift */; };
+		371B6EAD2B3B3108005BB31C /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E572B3B3107005BB31C /* SafariView.swift */; };
+		371B6EAE2B3B3108005BB31C /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E582B3B3107005BB31C /* ShareSheetView.swift */; };
+		371B6EAF2B3B3108005BB31C /* IOSContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E592B3B3107005BB31C /* IOSContentView.swift */; };
+		371B6EB02B3B3108005BB31C /* EnhancedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E5A2B3B3107005BB31C /* EnhancedLabel.swift */; };
+		371B6EB12B3B3108005BB31C /* MenuCopyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E5B2B3B3107005BB31C /* MenuCopyButton.swift */; };
+		371B6EB22B3B3108005BB31C /* IntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E5D2B3B3107005BB31C /* IntroductionsView.swift */; };
+		371B6EB32B3B3108005BB31C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E5E2B3B3107005BB31C /* HomeView.swift */; };
+		371B6EB42B3B3108005BB31C /* FAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E5F2B3B3107005BB31C /* FAQView.swift */; };
+		371B6EB52B3B3108005BB31C /* Text2SpeechView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E602B3B3107005BB31C /* Text2SpeechView.swift */; };
+		371B6EB62B3B3108005BB31C /* PrivacyNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */; };
+		371B6EB72B3B3108005BB31C /* CantoneseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E632B3B3107005BB31C /* CantoneseView.swift */; };
+		371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E642B3B3107005BB31C /* IOSFatshanMetroView.swift */; };
+		371B6EB92B3B3108005BB31C /* IOSSurnamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E652B3B3107005BB31C /* IOSSurnamesView.swift */; };
+		371B6EBA2B3B3108005BB31C /* IOSExpressionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E662B3B3107005BB31C /* IOSExpressionsView.swift */; };
+		371B6EBB2B3B3108005BB31C /* IOSShamChunMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E672B3B3107005BB31C /* IOSShamChunMetroView.swift */; };
+		371B6EBC2B3B3108005BB31C /* IOSConfusionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E682B3B3107005BB31C /* IOSConfusionView.swift */; };
+		371B6EBD2B3B3108005BB31C /* IOSCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E692B3B3107005BB31C /* IOSCantonMetroView.swift */; };
+		371B6EBE2B3B3108005BB31C /* IOSMetroStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6A2B3B3107005BB31C /* IOSMetroStationLabel.swift */; };
+		371B6EBF2B3B3108005BB31C /* IOSCinZiManView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6B2B3B3107005BB31C /* IOSCinZiManView.swift */; };
+		371B6EC02B3B3108005BB31C /* IOSHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6C2B3B3107005BB31C /* IOSHongKongMTRView.swift */; };
+		371B6EC12B3B3108005BB31C /* IOSMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6D2B3B3107005BB31C /* IOSMetroLineView.swift */; };
+		371B6EC22B3B3108005BB31C /* UIDevice+modelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */; };
+		371B6EC32B3B3108005BB31C /* JyutpingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E6F2B3B3107005BB31C /* JyutpingView.swift */; };
+		371B6EC42B3B3108005BB31C /* PronunciationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E712B3B3107005BB31C /* PronunciationLabel.swift */; };
+		371B6EC52B3B3108005BB31C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E722B3B3107005BB31C /* SearchView.swift */; };
+		371B6EC62B3B3108005BB31C /* ChoHokYuetYamCitYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */; };
+		371B6EC72B3B3108005BB31C /* GwongWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E742B3B3107005BB31C /* GwongWanLabel.swift */; };
+		371B6EC82B3B3108005BB31C /* CantoneseTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E752B3B3107005BB31C /* CantoneseTextLabel.swift */; };
+		371B6EC92B3B3108005BB31C /* YingWaaFanWanLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E762B3B3107005BB31C /* YingWaaFanWanLabel.swift */; };
+		371B6ECA2B3B3108005BB31C /* FanWanCuetYiuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E772B3B3107005BB31C /* FanWanCuetYiuLabel.swift */; };
+		371B6ECB2B3B3108005BB31C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E782B3B3107005BB31C /* AboutView.swift */; };
+		371B6ECC2B3B3108005BB31C /* MacStationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E7B2B3B3108005BB31C /* MacStationLabel.swift */; };
+		371B6ECD2B3B3108005BB31C /* MacCantonMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E7C2B3B3108005BB31C /* MacCantonMetroView.swift */; };
+		371B6ECE2B3B3108005BB31C /* MacMetroLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E7D2B3B3108005BB31C /* MacMetroLineView.swift */; };
+		371B6ECF2B3B3108005BB31C /* MacHongKongMTRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E7E2B3B3108005BB31C /* MacHongKongMTRView.swift */; };
+		371B6ED02B3B3108005BB31C /* MacFatshanMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E7F2B3B3108005BB31C /* MacFatshanMetroView.swift */; };
+		371B6ED12B3B3108005BB31C /* MacShamChunMetroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E802B3B3108005BB31C /* MacShamChunMetroView.swift */; };
+		371B6ED22B3B3108005BB31C /* MacAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E812B3B3108005BB31C /* MacAboutView.swift */; };
+		371B6ED32B3B3108005BB31C /* MacContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E822B3B3108005BB31C /* MacContentView.swift */; };
+		371B6ED42B3B3108005BB31C /* MacCinZiManView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E832B3B3108005BB31C /* MacCinZiManView.swift */; };
+		371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E842B3B3108005BB31C /* MacIntroductionsView.swift */; };
+		371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E862B3B3108005BB31C /* CantoneseTextView.swift */; };
+		371B6ED72B3B3108005BB31C /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E872B3B3108005BB31C /* SearchField.swift */; };
+		371B6ED82B3B3108005BB31C /* FanWanCuetYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E882B3B3108005BB31C /* FanWanCuetYiuView.swift */; };
+		371B6ED92B3B3108005BB31C /* PronunciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E892B3B3108005BB31C /* PronunciationView.swift */; };
+		371B6EDA2B3B3108005BB31C /* YingWaaFanWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8A2B3B3108005BB31C /* YingWaaFanWanView.swift */; };
+		371B6EDB2B3B3108005BB31C /* GwongWanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8B2B3B3108005BB31C /* GwongWanView.swift */; };
+		371B6EDC2B3B3108005BB31C /* MacSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8C2B3B3108005BB31C /* MacSearchView.swift */; };
+		371B6EDD2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */; };
+		371B6EDE2B3B3108005BB31C /* MacContentViewMonterey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */; };
+		371B6EDF2B3B3108005BB31C /* MacSurnamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8F2B3B3108005BB31C /* MacSurnamesView.swift */; };
+		371B6EE02B3B3108005BB31C /* MacInputMethodInstallationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E902B3B3108005BB31C /* MacInputMethodInstallationView.swift */; };
+		371B6EE12B3B3108005BB31C /* MacExpressionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E912B3B3108005BB31C /* MacExpressionsView.swift */; };
+		371B6EE22B3B3108005BB31C /* MacConfusionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E922B3B3108005BB31C /* MacConfusionView.swift */; };
+		371B6EE32B3B3108005BB31C /* MacResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E932B3B3108005BB31C /* MacResourcesView.swift */; };
+		371B6EE42B3B3108005BB31C /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E952B3B3108005BB31C /* Speech.swift */; };
+		371B6EE52B3B3108005BB31C /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E962B3B3108005BB31C /* Speaker.swift */; };
+		371B6EE62B3B3108005BB31C /* AppMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E972B3B3108005BB31C /* AppMaster.swift */; };
+		371B6EE82B3B31C4005BB31C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371B6EE72B3B31C4005BB31C /* Assets.xcassets */; };
+		371B6EEA2B3B3206005BB31C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 371B6EE92B3B3206005BB31C /* Settings.bundle */; };
+		371B6F022B3B321D005BB31C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 371B6EEC2B3B321C005BB31C /* InfoPlist.strings */; };
+		371B6F032B3B321D005BB31C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 371B6EEE2B3B321D005BB31C /* Localizable.strings */; };
+		371B6F8A2B3B342F005BB31C /* NumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F062B3B342E005BB31C /* NumericKeyboard.swift */; };
+		371B6F8B2B3B342F005BB31C /* SaamPingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F072B3B342E005BB31C /* SaamPingKeyboard.swift */; };
+		371B6F8C2B3B342F005BB31C /* TransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F082B3B342E005BB31C /* TransformKey.swift */; };
+		371B6F8D2B3B342F005BB31C /* SymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F092B3B342E005BB31C /* SymbolicKeyboard.swift */; };
+		371B6F8E2B3B342F005BB31C /* StrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0A2B3B342E005BB31C /* StrokeInputKey.swift */; };
+		371B6F8F2B3B342F005BB31C /* CantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0B2B3B342E005BB31C /* CantoneseNumericKeyboard.swift */; };
+		371B6F902B3B342F005BB31C /* SymbolInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0C2B3B342E005BB31C /* SymbolInputKey.swift */; };
+		371B6F912B3B342F005BB31C /* GlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0D2B3B342E005BB31C /* GlobeKey.swift */; };
+		371B6F922B3B342F005BB31C /* CangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0E2B3B342E005BB31C /* CangjieInputKey.swift */; };
+		371B6F932B3B342F005BB31C /* ExpansibleInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F0F2B3B342E005BB31C /* ExpansibleInputKey.swift */; };
+		371B6F942B3B342F005BB31C /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F102B3B342E005BB31C /* NumberPad.swift */; };
+		371B6F952B3B342F005BB31C /* ShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F112B3B342E005BB31C /* ShiftKey.swift */; };
+		371B6F962B3B342F005BB31C /* CantoneseSymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F122B3B342E005BB31C /* CantoneseSymbolicKeyboard.swift */; };
+		371B6F972B3B342F005BB31C /* DualLettersInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F132B3B342E005BB31C /* DualLettersInputKey.swift */; };
+		371B6F982B3B342F005BB31C /* CangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F142B3B342E005BB31C /* CangjieKeyboard.swift */; };
+		371B6F992B3B342F005BB31C /* AlphabeticKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F152B3B342E005BB31C /* AlphabeticKeyboard.swift */; };
+		371B6F9A2B3B342F005BB31C /* BackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F162B3B342E005BB31C /* BackspaceKey.swift */; };
+		371B6F9B2B3B342F005BB31C /* SpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F172B3B342E005BB31C /* SpaceKey.swift */; };
+		371B6F9C2B3B342F005BB31C /* ReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F182B3B342E005BB31C /* ReturnKey.swift */; };
+		371B6F9D2B3B342F005BB31C /* StrokeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F192B3B342E005BB31C /* StrokeKeyboard.swift */; };
+		371B6F9E2B3B342F005BB31C /* RightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F1A2B3B342E005BB31C /* RightKey.swift */; };
+		371B6F9F2B3B342F005BB31C /* LeftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F1B2B3B342E005BB31C /* LeftKey.swift */; };
+		371B6FA02B3B342F005BB31C /* TenKeyNumberKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F1D2B3B342E005BB31C /* TenKeyNumberKey.swift */; };
+		371B6FA12B3B342F005BB31C /* TenKeyReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F1E2B3B342E005BB31C /* TenKeyReturnKey.swift */; };
+		371B6FA22B3B342F005BB31C /* TenKeySpecialKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F1F2B3B342E005BB31C /* TenKeySpecialKey.swift */; };
+		371B6FA32B3B342F005BB31C /* TenKeyBackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F202B3B342E005BB31C /* TenKeyBackspaceKey.swift */; };
+		371B6FA42B3B342F005BB31C /* TenKeyInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F212B3B342E005BB31C /* TenKeyInputKey.swift */; };
+		371B6FA52B3B342F005BB31C /* TenKeySymbolsBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F222B3B342E005BB31C /* TenKeySymbolsBar.swift */; };
+		371B6FA62B3B342F005BB31C /* TenKeySpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F232B3B342E005BB31C /* TenKeySpaceKey.swift */; };
+		371B6FA72B3B342F005BB31C /* TenKeyKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F242B3B342E005BB31C /* TenKeyKeyboard.swift */; };
+		371B6FA82B3B342F005BB31C /* Combo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F252B3B342E005BB31C /* Combo.swift */; };
+		371B6FA92B3B342F005BB31C /* TenKeySidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F262B3B342E005BB31C /* TenKeySidebar.swift */; };
+		371B6FAA2B3B342F005BB31C /* TenKeyNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F272B3B342E005BB31C /* TenKeyNumericKeyboard.swift */; };
+		371B6FAB2B3B342F005BB31C /* TenKeyNavigateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F282B3B342E005BB31C /* TenKeyNavigateKey.swift */; };
+		371B6FAC2B3B342F005BB31C /* LetterInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F292B3B342E005BB31C /* LetterInputKey.swift */; };
+		371B6FAD2B3B342F005BB31C /* HiddenKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2A2B3B342E005BB31C /* HiddenKey.swift */; };
+		371B6FAE2B3B342F005BB31C /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */; };
+		371B6FAF2B3B342F005BB31C /* ScrollViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */; };
+		371B6FB02B3B342F005BB31C /* CandidateScrollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */; };
+		371B6FB12B3B342F005BB31C /* SettingsViewIOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */; };
+		371B6FB22B3B342F005BB31C /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F302B3B342E005BB31C /* ToolBar.swift */; };
+		371B6FB32B3B342F005BB31C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F312B3B342E005BB31C /* SettingsView.swift */; };
+		371B6FB42B3B342F005BB31C /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F322B3B342E005BB31C /* CandidateBoard.swift */; };
+		371B6FB52B3B342F005BB31C /* ScrollViewGestureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F332B3B342E005BB31C /* ScrollViewGestureButton.swift */; };
+		371B6FB62B3B342F005BB31C /* ToolBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F342B3B342E005BB31C /* ToolBarItem.swift */; };
+		371B6FB72B3B342F005BB31C /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F352B3B342E005BB31C /* MotherBoard.swift */; };
+		371B6FB82B3B342F005BB31C /* CantoneseABCSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */; };
+		371B6FB92B3B342F005BB31C /* EditingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F372B3B342E005BB31C /* EditingPanel.swift */; };
+		371B6FBA2B3B342F005BB31C /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F382B3B342E005BB31C /* KeyboardViewController.swift */; };
+		371B6FBB2B3B342F005BB31C /* KeyRightExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3A2B3B342E005BB31C /* KeyRightExpansionPath.swift */; };
+		371B6FBC2B3B342F005BB31C /* KeyLeftExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3B2B3B342E005BB31C /* KeyLeftExpansionPath.swift */; };
+		371B6FBD2B3B342F005BB31C /* KeyPreviewPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3C2B3B342E005BB31C /* KeyPreviewPath.swift */; };
+		371B6FBE2B3B342F005BB31C /* PadKeyExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */; };
+		371B6FBF2B3B342F005BB31C /* KeyExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */; };
+		371B6FC02B3B342F005BB31C /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F402B3B342F005BB31C /* CharacterExtensions.swift */; };
+		371B6FC12B3B342F005BB31C /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F412B3B342F005BB31C /* DispatchQueueExtensions.swift */; };
+		371B6FC22B3B342F005BB31C /* UIReturnKeyTypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F422B3B342F005BB31C /* UIReturnKeyTypeExtensions.swift */; };
+		371B6FC32B3B342F005BB31C /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F432B3B342F005BB31C /* ColorExtensions.swift */; };
+		371B6FC42B3B342F005BB31C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F442B3B342F005BB31C /* FontExtensions.swift */; };
+		371B6FC52B3B342F005BB31C /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F452B3B342F005BB31C /* ImageExtensions.swift */; };
+		371B6FC62B3B342F005BB31C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F462B3B342F005BB31C /* StringExtensions.swift */; };
+		371B6FC72B3B342F005BB31C /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F482B3B342F005BB31C /* Operation.swift */; };
+		371B6FC82B3B342F005BB31C /* InputMethodMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F492B3B342F005BB31C /* InputMethodMode.swift */; };
+		371B6FC92B3B342F005BB31C /* KeyboardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F4A2B3B342F005BB31C /* KeyboardLayout.swift */; };
+		371B6FCA2B3B342F005BB31C /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F4B2B3B342F005BB31C /* UserLexicon.swift */; };
+		371B6FCB2B3B342F005BB31C /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F4C2B3B342F005BB31C /* AudioFeedback.swift */; };
+		371B6FCC2B3B342F005BB31C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F4D2B3B342F005BB31C /* Constant.swift */; };
+		371B6FCD2B3B342F005BB31C /* KeyboardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F4E2B3B342F005BB31C /* KeyboardInterface.swift */; };
+		371B6FCE2B3B342F005BB31C /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F4F2B3B342F005BB31C /* Options.swift */; };
+		371B6FCF2B3B342F005BB31C /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F502B3B342F005BB31C /* KeyModel.swift */; };
+		371B6FD02B3B342F005BB31C /* KeyboardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F512B3B342F005BB31C /* KeyboardForm.swift */; };
+		371B6FD12B3B342F005BB31C /* KeyboardCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F522B3B342F005BB31C /* KeyboardCase.swift */; };
+		371B6FD22B3B342F005BB31C /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F532B3B342F005BB31C /* InputStage.swift */; };
+		371B6FD32B3B342F005BB31C /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F542B3B342F005BB31C /* HapticFeedback.swift */; };
+		371B6FD42B3B342F005BB31C /* PadGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F562B3B342F005BB31C /* PadGlobeKey.swift */; };
+		371B6FD52B3B342F005BB31C /* PadExpansibleInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F572B3B342F005BB31C /* PadExpansibleInputKey.swift */; };
+		371B6FD62B3B342F005BB31C /* PadSymbolInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F582B3B342F005BB31C /* PadSymbolInputKey.swift */; };
+		371B6FD72B3B342F005BB31C /* PadStrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F592B3B342F005BB31C /* PadStrokeInputKey.swift */; };
+		371B6FD82B3B342F005BB31C /* LargePadCangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F5B2B3B342F005BB31C /* LargePadCangjieInputKey.swift */; };
+		371B6FD92B3B342F005BB31C /* LargePadExpansibleInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F5C2B3B342F005BB31C /* LargePadExpansibleInputKey.swift */; };
+		371B6FDA2B3B342F005BB31C /* LargePadShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F5D2B3B342F005BB31C /* LargePadShiftKey.swift */; };
+		371B6FDB2B3B342F005BB31C /* LargePadBackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F5E2B3B342F005BB31C /* LargePadBackspaceKey.swift */; };
+		371B6FDC2B3B342F005BB31C /* LargePadUpperLowerInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F5F2B3B342F005BB31C /* LargePadUpperLowerInputKey.swift */; };
+		371B6FDD2B3B342F005BB31C /* LargePadStrokeInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F602B3B342F005BB31C /* LargePadStrokeInputKey.swift */; };
+		371B6FDE2B3B342F005BB31C /* LargePadGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F612B3B342F005BB31C /* LargePadGlobeKey.swift */; };
+		371B6FDF2B3B342F005BB31C /* LargePadNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F622B3B342F005BB31C /* LargePadNumericKeyboard.swift */; };
+		371B6FE02B3B342F005BB31C /* TabKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F632B3B342F005BB31C /* TabKey.swift */; };
+		371B6FE12B3B342F005BB31C /* LargePadCantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F642B3B342F005BB31C /* LargePadCantoneseNumericKeyboard.swift */; };
+		371B6FE22B3B342F005BB31C /* CapsLockKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F652B3B342F005BB31C /* CapsLockKey.swift */; };
+		371B6FE32B3B342F005BB31C /* LargePadDismissKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F662B3B342F005BB31C /* LargePadDismissKey.swift */; };
+		371B6FE42B3B342F005BB31C /* LargePadCantoneseKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F672B3B342F005BB31C /* LargePadCantoneseKeyboard.swift */; };
+		371B6FE52B3B342F005BB31C /* LargePadInstantInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F682B3B342F005BB31C /* LargePadInstantInputKey.swift */; };
+		371B6FE62B3B342F005BB31C /* LargePadTransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F692B3B342F005BB31C /* LargePadTransformKey.swift */; };
+		371B6FE72B3B342F005BB31C /* LargePadReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F6A2B3B342F005BB31C /* LargePadReturnKey.swift */; };
+		371B6FE82B3B342F005BB31C /* LargePadRightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F6B2B3B342F005BB31C /* LargePadRightKey.swift */; };
+		371B6FE92B3B342F005BB31C /* LargePadStrokeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F6C2B3B342F005BB31C /* LargePadStrokeKeyboard.swift */; };
+		371B6FEA2B3B342F005BB31C /* LargePadLetterInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F6D2B3B342F005BB31C /* LargePadLetterInputKey.swift */; };
+		371B6FEB2B3B342F005BB31C /* LargePadCangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F6E2B3B342F005BB31C /* LargePadCangjieKeyboard.swift */; };
+		371B6FEC2B3B342F005BB31C /* LargePadABCKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F6F2B3B342F005BB31C /* LargePadABCKeyboard.swift */; };
+		371B6FED2B3B342F005BB31C /* LargePadSaamPingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F702B3B342F005BB31C /* LargePadSaamPingKeyboard.swift */; };
+		371B6FEE2B3B342F005BB31C /* PadShiftKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F712B3B342F005BB31C /* PadShiftKey.swift */; };
+		371B6FEF2B3B342F005BB31C /* PadUpperLowerInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F722B3B342F005BB31C /* PadUpperLowerInputKey.swift */; };
+		371B6FF02B3B342F005BB31C /* PadCangjieKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F732B3B342F005BB31C /* PadCangjieKeyboard.swift */; };
+		371B6FF12B3B342F005BB31C /* PadSaamPingKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F742B3B342F005BB31C /* PadSaamPingKeyboard.swift */; };
+		371B6FF22B3B342F005BB31C /* PadSymbolicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F752B3B342F005BB31C /* PadSymbolicKeyboard.swift */; };
+		371B6FF32B3B342F005BB31C /* PadCantoneseNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F762B3B342F005BB31C /* PadCantoneseNumericKeyboard.swift */; };
+		371B6FF42B3B342F005BB31C /* PadCantoneseKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F772B3B342F005BB31C /* PadCantoneseKeyboard.swift */; };
+		371B6FF52B3B342F005BB31C /* PadBackspaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F782B3B342F005BB31C /* PadBackspaceKey.swift */; };
+		371B6FF62B3B342F005BB31C /* PadCangjieInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F792B3B342F005BB31C /* PadCangjieInputKey.swift */; };
+		371B6FF72B3B342F005BB31C /* PadSpaceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F7A2B3B342F005BB31C /* PadSpaceKey.swift */; };
+		371B6FF82B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F7B2B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift */; };
+		371B6FF92B3B342F005BB31C /* PadReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F7C2B3B342F005BB31C /* PadReturnKey.swift */; };
+		371B6FFA2B3B342F005BB31C /* PadCompleteInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F7D2B3B342F005BB31C /* PadCompleteInputKey.swift */; };
+		371B6FFB2B3B342F005BB31C /* PadABCKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F7E2B3B342F005BB31C /* PadABCKeyboard.swift */; };
+		371B6FFC2B3B342F005BB31C /* PadDismissKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F7F2B3B342F005BB31C /* PadDismissKey.swift */; };
+		371B6FFD2B3B342F005BB31C /* PadTransformKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F802B3B342F005BB31C /* PadTransformKey.swift */; };
+		371B6FFE2B3B342F005BB31C /* PadLetterInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F812B3B342F005BB31C /* PadLetterInputKey.swift */; };
+		371B6FFF2B3B342F005BB31C /* PadNumericKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F822B3B342F005BB31C /* PadNumericKeyboard.swift */; };
+		371B70002B3B342F005BB31C /* PadStrokeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F832B3B342F005BB31C /* PadStrokeKeyboard.swift */; };
+		371B70012B3B342F005BB31C /* PadPullableInputKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F842B3B342F005BB31C /* PadPullableInputKey.swift */; };
+		371B70022B3B342F005BB31C /* PadRightKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F852B3B342F005BB31C /* PadRightKey.swift */; };
+		371B70032B3B342F005BB31C /* EmojiMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F872B3B342F005BB31C /* EmojiMaster.swift */; };
+		371B70042B3B342F005BB31C /* EmojiBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F882B3B342F005BB31C /* EmojiBoard.swift */; };
+		371B70052B3B342F005BB31C /* EmojiIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F892B3B342F005BB31C /* EmojiIndicator.swift */; };
+		371B70072B3B346D005BB31C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371B70062B3B346D005BB31C /* Images.xcassets */; };
+		371B701F2B3B353C005BB31C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 371B70092B3B353C005BB31C /* InfoPlist.strings */; };
+		371B70202B3B353C005BB31C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 371B700B2B3B353C005BB31C /* Localizable.strings */; };
+		371EABC02B3855820075089B /* Keyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 371EABB92B3855810075089B /* Keyboard.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		371EABD32B385D380075089B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371EABD22B385D380075089B /* Preview Assets.xcassets */; };
+		371EABDE2B385D390075089B /* InputMethodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EABDD2B385D390075089B /* InputMethodTests.swift */; };
+		371EABE82B385D390075089B /* InputMethodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EABE72B385D390075089B /* InputMethodUITests.swift */; };
+		371EABEA2B385D390075089B /* InputMethodUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */; };
+		371EABF72B38802A0075089B /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371EABF62B38802A0075089B /* CommonExtensions */; };
+		37E6AD6B2B3B381700F02279 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD442B3B381600F02279 /* CommentLabel.swift */; };
+		37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD452B3B381600F02279 /* CandidateBoard.swift */; };
+		37E6AD6D2B3B381700F02279 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD462B3B381600F02279 /* CandidateLabel.swift */; };
+		37E6AD6E2B3B381700F02279 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD472B3B381600F02279 /* MotherBoard.swift */; };
+		37E6AD6F2B3B381700F02279 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD492B3B381600F02279 /* Direction.swift */; };
+		37E6AD702B3B381700F02279 /* PunctuationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD4A2B3B381600F02279 /* PunctuationKey.swift */; };
+		37E6AD712B3B381700F02279 /* KeyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD4B2B3B381600F02279 /* KeyCode.swift */; };
+		37E6AD722B3B381700F02279 /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD4C2B3B381600F02279 /* Representative.swift */; };
+		37E6AD732B3B381700F02279 /* InputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD4D2B3B381600F02279 /* InputForm.swift */; };
+		37E6AD742B3B381700F02279 /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD4F2B3B381600F02279 /* CharacterExtensions.swift */; };
+		37E6AD752B3B381700F02279 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD502B3B381600F02279 /* FontExtensions.swift */; };
+		37E6AD762B3B381700F02279 /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD512B3B381600F02279 /* IMKTextInputExtensions.swift */; };
+		37E6AD772B3B381700F02279 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD522B3B381600F02279 /* ViewExtensions.swift */; };
+		37E6AD782B3B381700F02279 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD532B3B381600F02279 /* StringExtensions.swift */; };
+		37E6AD792B3B381700F02279 /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD542B3B381600F02279 /* WindowPattern.swift */; };
+		37E6AD7A2B3B381700F02279 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD552B3B381600F02279 /* Options.swift */; };
+		37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD562B3B381600F02279 /* DisplayCandidate.swift */; };
+		37E6AD7C2B3B381700F02279 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD572B3B381600F02279 /* EventHandler.swift */; };
+		37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD592B3B381600F02279 /* HotkeysView.swift */; };
+		37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5A2B3B381600F02279 /* FontPicker.swift */; };
+		37E6AD7F2B3B381700F02279 /* CandidateLayoutPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5B2B3B381600F02279 /* CandidateLayoutPreferencesView.swift */; };
+		37E6AD802B3B381700F02279 /* CandidateFontPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5C2B3B381600F02279 /* CandidateFontPreferencesView.swift */; };
+		37E6AD812B3B381700F02279 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5D2B3B381600F02279 /* Constant.swift */; };
+		37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5E2B3B381600F02279 /* PreferencesView.swift */; };
+		37E6AD832B3B381700F02279 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5F2B3B381600F02279 /* AboutView.swift */; };
+		37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD602B3B381600F02279 /* AppSettings.swift */; };
+		37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD612B3B381600F02279 /* UserLexicon.swift */; };
+		37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD622B3B381600F02279 /* PageTransformation.swift */; };
+		37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD632B3B381600F02279 /* OptionsView.swift */; };
+		37E6AD882B3B381700F02279 /* InputStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD642B3B381600F02279 /* InputStage.swift */; };
+		37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD652B3B381600F02279 /* VisualEffect.swift */; };
+		37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD662B3B381600F02279 /* JyutpingInputController.swift */; };
+		37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD672B3B381600F02279 /* AppContext.swift */; };
+		37E6AD8C2B3B381700F02279 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD682B3B381700F02279 /* Speech.swift */; };
+		37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD692B3B381700F02279 /* InputMethodApp.swift */; };
+		37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD6A2B3B381700F02279 /* Menu.swift */; };
+		37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD8F2B3B384B00F02279 /* Assets.xcassets */; };
+		37E6AD932B3B386800F02279 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD912B3B386800F02279 /* Release.xcconfig */; };
+		37E6AD942B3B386800F02279 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD922B3B386800F02279 /* Debug.xcconfig */; };
+		37E6AD962B3B389400F02279 /* jyutpingime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD952B3B389400F02279 /* jyutpingime.pdf */; };
+		37E6ADAE2B3B389F00F02279 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD982B3B389E00F02279 /* InfoPlist.strings */; };
+		37E6ADAF2B3B389F00F02279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD9A2B3B389E00F02279 /* Localizable.strings */; };
+		37E6ADB32B3B39D000F02279 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; };
+		37E6ADB42B3B39D000F02279 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EFD7312B3719C20089D346 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37EFD7302B3719C20089D346 /* Preview Assets.xcassets */; };
+		37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD73A2B3719C30089D346 /* JyutpingTests.swift */; };
+		37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7442B3719C30089D346 /* JyutpingUITests.swift */; };
+		37EFD7472B3719C30089D346 /* JyutpingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		371EABBE2B3855820075089B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EFD71D2B3719C10089D346 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 371EABB82B3855810075089B;
+			remoteInfo = Keyboard;
+		};
+		371EABDA2B385D390075089B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EFD71D2B3719C10089D346 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 371EABC82B385D370075089B;
+			remoteInfo = InputMethod;
+		};
+		371EABE42B385D390075089B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EFD71D2B3719C10089D346 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 371EABC82B385D370075089B;
+			remoteInfo = InputMethod;
+		};
+		37EFD7372B3719C30089D346 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EFD71D2B3719C10089D346 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37EFD7242B3719C10089D346;
+			remoteInfo = Jyutping;
+		};
+		37EFD7412B3719C30089D346 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37EFD71D2B3719C10089D346 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37EFD7242B3719C10089D346;
+			remoteInfo = Jyutping;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		371EABC12B3855820075089B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				371EABC02B3855820075089B /* Keyboard.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37E6ADB52B3B39D000F02279 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				37E6ADB42B3B39D000F02279 /* Sparkle.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		371B6E362B3B2F72005BB31C /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = Modules/AppDataSource; sourceTree = "<group>"; };
+		371B6E392B3B2FE1005BB31C /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = Modules/CoreIME; sourceTree = "<group>"; };
+		371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
+		371B6E402B3B3107005BB31C /* MacToneTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
+		371B6E412B3B3107005BB31C /* FinalTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTable.swift; sourceTree = "<group>"; };
+		371B6E422B3B3107005BB31C /* InitialTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialTable.swift; sourceTree = "<group>"; };
+		371B6E432B3B3107005BB31C /* SyllableChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllableChecker.swift; sourceTree = "<group>"; };
+		371B6E442B3B3107005BB31C /* Syllable2IPA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
+		371B6E452B3B3107005BB31C /* IOSToneTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSToneTableView.swift; sourceTree = "<group>"; };
+		371B6E462B3B3107005BB31C /* SyllableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllableCell.swift; sourceTree = "<group>"; };
+		371B6E482B3B3107005BB31C /* ChineseZodiacView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseZodiacView.swift; sourceTree = "<group>"; };
+		371B6E492B3B3107005BB31C /* StemsBranchesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemsBranchesView.swift; sourceTree = "<group>"; };
+		371B6E4A2B3B3107005BB31C /* NumbersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
+		371B6E4B2B3B3107005BB31C /* TermView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
+		371B6E4C2B3B3107005BB31C /* SolarTermsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolarTermsView.swift; sourceTree = "<group>"; };
+		371B6E4D2B3B3107005BB31C /* Term.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
+		371B6E4E2B3B3107005BB31C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		371B6E4F2B3B3107005BB31C /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		371B6E512B3B3107005BB31C /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		371B6E522B3B3107005BB31C /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		371B6E532B3B3107005BB31C /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		371B6E542B3B3107005BB31C /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		371B6E552B3B3107005BB31C /* TextExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
+		371B6E572B3B3107005BB31C /* SafariView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		371B6E582B3B3107005BB31C /* ShareSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
+		371B6E592B3B3107005BB31C /* IOSContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSContentView.swift; sourceTree = "<group>"; };
+		371B6E5A2B3B3107005BB31C /* EnhancedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnhancedLabel.swift; sourceTree = "<group>"; };
+		371B6E5B2B3B3107005BB31C /* MenuCopyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCopyButton.swift; sourceTree = "<group>"; };
+		371B6E5D2B3B3107005BB31C /* IntroductionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionsView.swift; sourceTree = "<group>"; };
+		371B6E5E2B3B3107005BB31C /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		371B6E5F2B3B3107005BB31C /* FAQView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQView.swift; sourceTree = "<group>"; };
+		371B6E602B3B3107005BB31C /* Text2SpeechView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text2SpeechView.swift; sourceTree = "<group>"; };
+		371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyNoticeView.swift; sourceTree = "<group>"; };
+		371B6E632B3B3107005BB31C /* CantoneseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseView.swift; sourceTree = "<group>"; };
+		371B6E642B3B3107005BB31C /* IOSFatshanMetroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSFatshanMetroView.swift; sourceTree = "<group>"; };
+		371B6E652B3B3107005BB31C /* IOSSurnamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSSurnamesView.swift; sourceTree = "<group>"; };
+		371B6E662B3B3107005BB31C /* IOSExpressionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSExpressionsView.swift; sourceTree = "<group>"; };
+		371B6E672B3B3107005BB31C /* IOSShamChunMetroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSShamChunMetroView.swift; sourceTree = "<group>"; };
+		371B6E682B3B3107005BB31C /* IOSConfusionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSConfusionView.swift; sourceTree = "<group>"; };
+		371B6E692B3B3107005BB31C /* IOSCantonMetroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSCantonMetroView.swift; sourceTree = "<group>"; };
+		371B6E6A2B3B3107005BB31C /* IOSMetroStationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSMetroStationLabel.swift; sourceTree = "<group>"; };
+		371B6E6B2B3B3107005BB31C /* IOSCinZiManView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSCinZiManView.swift; sourceTree = "<group>"; };
+		371B6E6C2B3B3107005BB31C /* IOSHongKongMTRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSHongKongMTRView.swift; sourceTree = "<group>"; };
+		371B6E6D2B3B3107005BB31C /* IOSMetroLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSMetroLineView.swift; sourceTree = "<group>"; };
+		371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+modelName.swift"; sourceTree = "<group>"; };
+		371B6E6F2B3B3107005BB31C /* JyutpingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingView.swift; sourceTree = "<group>"; };
+		371B6E712B3B3107005BB31C /* PronunciationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PronunciationLabel.swift; sourceTree = "<group>"; };
+		371B6E722B3B3107005BB31C /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuLabel.swift; sourceTree = "<group>"; };
+		371B6E742B3B3107005BB31C /* GwongWanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GwongWanLabel.swift; sourceTree = "<group>"; };
+		371B6E752B3B3107005BB31C /* CantoneseTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseTextLabel.swift; sourceTree = "<group>"; };
+		371B6E762B3B3107005BB31C /* YingWaaFanWanLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanLabel.swift; sourceTree = "<group>"; };
+		371B6E772B3B3107005BB31C /* FanWanCuetYiuLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuLabel.swift; sourceTree = "<group>"; };
+		371B6E782B3B3107005BB31C /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		371B6E7B2B3B3108005BB31C /* MacStationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacStationLabel.swift; sourceTree = "<group>"; };
+		371B6E7C2B3B3108005BB31C /* MacCantonMetroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacCantonMetroView.swift; sourceTree = "<group>"; };
+		371B6E7D2B3B3108005BB31C /* MacMetroLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacMetroLineView.swift; sourceTree = "<group>"; };
+		371B6E7E2B3B3108005BB31C /* MacHongKongMTRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHongKongMTRView.swift; sourceTree = "<group>"; };
+		371B6E7F2B3B3108005BB31C /* MacFatshanMetroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacFatshanMetroView.swift; sourceTree = "<group>"; };
+		371B6E802B3B3108005BB31C /* MacShamChunMetroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacShamChunMetroView.swift; sourceTree = "<group>"; };
+		371B6E812B3B3108005BB31C /* MacAboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacAboutView.swift; sourceTree = "<group>"; };
+		371B6E822B3B3108005BB31C /* MacContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacContentView.swift; sourceTree = "<group>"; };
+		371B6E832B3B3108005BB31C /* MacCinZiManView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacCinZiManView.swift; sourceTree = "<group>"; };
+		371B6E842B3B3108005BB31C /* MacIntroductionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacIntroductionsView.swift; sourceTree = "<group>"; };
+		371B6E862B3B3108005BB31C /* CantoneseTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseTextView.swift; sourceTree = "<group>"; };
+		371B6E872B3B3108005BB31C /* SearchField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		371B6E882B3B3108005BB31C /* FanWanCuetYiuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanWanCuetYiuView.swift; sourceTree = "<group>"; };
+		371B6E892B3B3108005BB31C /* PronunciationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PronunciationView.swift; sourceTree = "<group>"; };
+		371B6E8A2B3B3108005BB31C /* YingWaaFanWanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YingWaaFanWanView.swift; sourceTree = "<group>"; };
+		371B6E8B2B3B3108005BB31C /* GwongWanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GwongWanView.swift; sourceTree = "<group>"; };
+		371B6E8C2B3B3108005BB31C /* MacSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacSearchView.swift; sourceTree = "<group>"; };
+		371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
+		371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacContentViewMonterey.swift; sourceTree = "<group>"; };
+		371B6E8F2B3B3108005BB31C /* MacSurnamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacSurnamesView.swift; sourceTree = "<group>"; };
+		371B6E902B3B3108005BB31C /* MacInputMethodInstallationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacInputMethodInstallationView.swift; sourceTree = "<group>"; };
+		371B6E912B3B3108005BB31C /* MacExpressionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacExpressionsView.swift; sourceTree = "<group>"; };
+		371B6E922B3B3108005BB31C /* MacConfusionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacConfusionView.swift; sourceTree = "<group>"; };
+		371B6E932B3B3108005BB31C /* MacResourcesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacResourcesView.swift; sourceTree = "<group>"; };
+		371B6E952B3B3108005BB31C /* Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
+		371B6E962B3B3108005BB31C /* Speaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
+		371B6E972B3B3108005BB31C /* AppMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMaster.swift; sourceTree = "<group>"; };
+		371B6EE72B3B31C4005BB31C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		371B6EE92B3B3206005BB31C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		371B6EED2B3B321C005BB31C /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6EEF2B3B321D005BB31C /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6EF02B3B321D005BB31C /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6EF12B3B321D005BB31C /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6EF22B3B321D005BB31C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		371B6EF32B3B321D005BB31C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		371B6EF42B3B321D005BB31C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6EF52B3B321D005BB31C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6EF62B3B321D005BB31C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6EF72B3B321D005BB31C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6EF82B3B321D005BB31C /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6EF92B3B321D005BB31C /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6EFA2B3B321D005BB31C /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6EFB2B3B321D005BB31C /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6EFC2B3B321D005BB31C /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		371B6EFD2B3B321D005BB31C /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
+		371B6EFE2B3B321D005BB31C /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6EFF2B3B321D005BB31C /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6F002B3B321D005BB31C /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B6F012B3B321D005BB31C /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B6F042B3B3288005BB31C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		371B6F062B3B342E005BB31C /* NumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericKeyboard.swift; sourceTree = "<group>"; };
+		371B6F072B3B342E005BB31C /* SaamPingKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaamPingKeyboard.swift; sourceTree = "<group>"; };
+		371B6F082B3B342E005BB31C /* TransformKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformKey.swift; sourceTree = "<group>"; };
+		371B6F092B3B342E005BB31C /* SymbolicKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolicKeyboard.swift; sourceTree = "<group>"; };
+		371B6F0A2B3B342E005BB31C /* StrokeInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeInputKey.swift; sourceTree = "<group>"; };
+		371B6F0B2B3B342E005BB31C /* CantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
+		371B6F0C2B3B342E005BB31C /* SymbolInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolInputKey.swift; sourceTree = "<group>"; };
+		371B6F0D2B3B342E005BB31C /* GlobeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobeKey.swift; sourceTree = "<group>"; };
+		371B6F0E2B3B342E005BB31C /* CangjieInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CangjieInputKey.swift; sourceTree = "<group>"; };
+		371B6F0F2B3B342E005BB31C /* ExpansibleInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpansibleInputKey.swift; sourceTree = "<group>"; };
+		371B6F102B3B342E005BB31C /* NumberPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
+		371B6F112B3B342E005BB31C /* ShiftKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftKey.swift; sourceTree = "<group>"; };
+		371B6F122B3B342E005BB31C /* CantoneseSymbolicKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseSymbolicKeyboard.swift; sourceTree = "<group>"; };
+		371B6F132B3B342E005BB31C /* DualLettersInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DualLettersInputKey.swift; sourceTree = "<group>"; };
+		371B6F142B3B342E005BB31C /* CangjieKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CangjieKeyboard.swift; sourceTree = "<group>"; };
+		371B6F152B3B342E005BB31C /* AlphabeticKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphabeticKeyboard.swift; sourceTree = "<group>"; };
+		371B6F162B3B342E005BB31C /* BackspaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackspaceKey.swift; sourceTree = "<group>"; };
+		371B6F172B3B342E005BB31C /* SpaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceKey.swift; sourceTree = "<group>"; };
+		371B6F182B3B342E005BB31C /* ReturnKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnKey.swift; sourceTree = "<group>"; };
+		371B6F192B3B342E005BB31C /* StrokeKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeKeyboard.swift; sourceTree = "<group>"; };
+		371B6F1A2B3B342E005BB31C /* RightKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightKey.swift; sourceTree = "<group>"; };
+		371B6F1B2B3B342E005BB31C /* LeftKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftKey.swift; sourceTree = "<group>"; };
+		371B6F1D2B3B342E005BB31C /* TenKeyNumberKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyNumberKey.swift; sourceTree = "<group>"; };
+		371B6F1E2B3B342E005BB31C /* TenKeyReturnKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyReturnKey.swift; sourceTree = "<group>"; };
+		371B6F1F2B3B342E005BB31C /* TenKeySpecialKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeySpecialKey.swift; sourceTree = "<group>"; };
+		371B6F202B3B342E005BB31C /* TenKeyBackspaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyBackspaceKey.swift; sourceTree = "<group>"; };
+		371B6F212B3B342E005BB31C /* TenKeyInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyInputKey.swift; sourceTree = "<group>"; };
+		371B6F222B3B342E005BB31C /* TenKeySymbolsBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeySymbolsBar.swift; sourceTree = "<group>"; };
+		371B6F232B3B342E005BB31C /* TenKeySpaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeySpaceKey.swift; sourceTree = "<group>"; };
+		371B6F242B3B342E005BB31C /* TenKeyKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyKeyboard.swift; sourceTree = "<group>"; };
+		371B6F252B3B342E005BB31C /* Combo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Combo.swift; sourceTree = "<group>"; };
+		371B6F262B3B342E005BB31C /* TenKeySidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeySidebar.swift; sourceTree = "<group>"; };
+		371B6F272B3B342E005BB31C /* TenKeyNumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyNumericKeyboard.swift; sourceTree = "<group>"; };
+		371B6F282B3B342E005BB31C /* TenKeyNavigateKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TenKeyNavigateKey.swift; sourceTree = "<group>"; };
+		371B6F292B3B342E005BB31C /* LetterInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LetterInputKey.swift; sourceTree = "<group>"; };
+		371B6F2A2B3B342E005BB31C /* HiddenKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenKey.swift; sourceTree = "<group>"; };
+		371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
+		371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewButton.swift; sourceTree = "<group>"; };
+		371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateScrollBar.swift; sourceTree = "<group>"; };
+		371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewIOS15.swift; sourceTree = "<group>"; };
+		371B6F302B3B342E005BB31C /* ToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
+		371B6F312B3B342E005BB31C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		371B6F322B3B342E005BB31C /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
+		371B6F332B3B342E005BB31C /* ScrollViewGestureButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewGestureButton.swift; sourceTree = "<group>"; };
+		371B6F342B3B342E005BB31C /* ToolBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBarItem.swift; sourceTree = "<group>"; };
+		371B6F352B3B342E005BB31C /* MotherBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
+		371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseABCSwitch.swift; sourceTree = "<group>"; };
+		371B6F372B3B342E005BB31C /* EditingPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
+		371B6F382B3B342E005BB31C /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		371B6F3A2B3B342E005BB31C /* KeyRightExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRightExpansionPath.swift; sourceTree = "<group>"; };
+		371B6F3B2B3B342E005BB31C /* KeyLeftExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyLeftExpansionPath.swift; sourceTree = "<group>"; };
+		371B6F3C2B3B342E005BB31C /* KeyPreviewPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPreviewPath.swift; sourceTree = "<group>"; };
+		371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadKeyExpansionPath.swift; sourceTree = "<group>"; };
+		371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyExpansionPath.swift; sourceTree = "<group>"; };
+		371B6F402B3B342F005BB31C /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
+		371B6F412B3B342F005BB31C /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
+		371B6F422B3B342F005BB31C /* UIReturnKeyTypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIReturnKeyTypeExtensions.swift; sourceTree = "<group>"; };
+		371B6F432B3B342F005BB31C /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		371B6F442B3B342F005BB31C /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		371B6F452B3B342F005BB31C /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		371B6F462B3B342F005BB31C /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		371B6F482B3B342F005BB31C /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		371B6F492B3B342F005BB31C /* InputMethodMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMethodMode.swift; sourceTree = "<group>"; };
+		371B6F4A2B3B342F005BB31C /* KeyboardLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardLayout.swift; sourceTree = "<group>"; };
+		371B6F4B2B3B342F005BB31C /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
+		371B6F4C2B3B342F005BB31C /* AudioFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
+		371B6F4D2B3B342F005BB31C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		371B6F4E2B3B342F005BB31C /* KeyboardInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardInterface.swift; sourceTree = "<group>"; };
+		371B6F4F2B3B342F005BB31C /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		371B6F502B3B342F005BB31C /* KeyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyModel.swift; sourceTree = "<group>"; };
+		371B6F512B3B342F005BB31C /* KeyboardForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardForm.swift; sourceTree = "<group>"; };
+		371B6F522B3B342F005BB31C /* KeyboardCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardCase.swift; sourceTree = "<group>"; };
+		371B6F532B3B342F005BB31C /* InputStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
+		371B6F542B3B342F005BB31C /* HapticFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
+		371B6F562B3B342F005BB31C /* PadGlobeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadGlobeKey.swift; sourceTree = "<group>"; };
+		371B6F572B3B342F005BB31C /* PadExpansibleInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadExpansibleInputKey.swift; sourceTree = "<group>"; };
+		371B6F582B3B342F005BB31C /* PadSymbolInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadSymbolInputKey.swift; sourceTree = "<group>"; };
+		371B6F592B3B342F005BB31C /* PadStrokeInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadStrokeInputKey.swift; sourceTree = "<group>"; };
+		371B6F5B2B3B342F005BB31C /* LargePadCangjieInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadCangjieInputKey.swift; sourceTree = "<group>"; };
+		371B6F5C2B3B342F005BB31C /* LargePadExpansibleInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadExpansibleInputKey.swift; sourceTree = "<group>"; };
+		371B6F5D2B3B342F005BB31C /* LargePadShiftKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadShiftKey.swift; sourceTree = "<group>"; };
+		371B6F5E2B3B342F005BB31C /* LargePadBackspaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadBackspaceKey.swift; sourceTree = "<group>"; };
+		371B6F5F2B3B342F005BB31C /* LargePadUpperLowerInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadUpperLowerInputKey.swift; sourceTree = "<group>"; };
+		371B6F602B3B342F005BB31C /* LargePadStrokeInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadStrokeInputKey.swift; sourceTree = "<group>"; };
+		371B6F612B3B342F005BB31C /* LargePadGlobeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadGlobeKey.swift; sourceTree = "<group>"; };
+		371B6F622B3B342F005BB31C /* LargePadNumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadNumericKeyboard.swift; sourceTree = "<group>"; };
+		371B6F632B3B342F005BB31C /* TabKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabKey.swift; sourceTree = "<group>"; };
+		371B6F642B3B342F005BB31C /* LargePadCantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadCantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
+		371B6F652B3B342F005BB31C /* CapsLockKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapsLockKey.swift; sourceTree = "<group>"; };
+		371B6F662B3B342F005BB31C /* LargePadDismissKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadDismissKey.swift; sourceTree = "<group>"; };
+		371B6F672B3B342F005BB31C /* LargePadCantoneseKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadCantoneseKeyboard.swift; sourceTree = "<group>"; };
+		371B6F682B3B342F005BB31C /* LargePadInstantInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadInstantInputKey.swift; sourceTree = "<group>"; };
+		371B6F692B3B342F005BB31C /* LargePadTransformKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadTransformKey.swift; sourceTree = "<group>"; };
+		371B6F6A2B3B342F005BB31C /* LargePadReturnKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadReturnKey.swift; sourceTree = "<group>"; };
+		371B6F6B2B3B342F005BB31C /* LargePadRightKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadRightKey.swift; sourceTree = "<group>"; };
+		371B6F6C2B3B342F005BB31C /* LargePadStrokeKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadStrokeKeyboard.swift; sourceTree = "<group>"; };
+		371B6F6D2B3B342F005BB31C /* LargePadLetterInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadLetterInputKey.swift; sourceTree = "<group>"; };
+		371B6F6E2B3B342F005BB31C /* LargePadCangjieKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadCangjieKeyboard.swift; sourceTree = "<group>"; };
+		371B6F6F2B3B342F005BB31C /* LargePadABCKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadABCKeyboard.swift; sourceTree = "<group>"; };
+		371B6F702B3B342F005BB31C /* LargePadSaamPingKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargePadSaamPingKeyboard.swift; sourceTree = "<group>"; };
+		371B6F712B3B342F005BB31C /* PadShiftKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadShiftKey.swift; sourceTree = "<group>"; };
+		371B6F722B3B342F005BB31C /* PadUpperLowerInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadUpperLowerInputKey.swift; sourceTree = "<group>"; };
+		371B6F732B3B342F005BB31C /* PadCangjieKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadCangjieKeyboard.swift; sourceTree = "<group>"; };
+		371B6F742B3B342F005BB31C /* PadSaamPingKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadSaamPingKeyboard.swift; sourceTree = "<group>"; };
+		371B6F752B3B342F005BB31C /* PadSymbolicKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadSymbolicKeyboard.swift; sourceTree = "<group>"; };
+		371B6F762B3B342F005BB31C /* PadCantoneseNumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadCantoneseNumericKeyboard.swift; sourceTree = "<group>"; };
+		371B6F772B3B342F005BB31C /* PadCantoneseKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadCantoneseKeyboard.swift; sourceTree = "<group>"; };
+		371B6F782B3B342F005BB31C /* PadBackspaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadBackspaceKey.swift; sourceTree = "<group>"; };
+		371B6F792B3B342F005BB31C /* PadCangjieInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadCangjieInputKey.swift; sourceTree = "<group>"; };
+		371B6F7A2B3B342F005BB31C /* PadSpaceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadSpaceKey.swift; sourceTree = "<group>"; };
+		371B6F7B2B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadCantoneseSymblicKeyboard.swift; sourceTree = "<group>"; };
+		371B6F7C2B3B342F005BB31C /* PadReturnKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadReturnKey.swift; sourceTree = "<group>"; };
+		371B6F7D2B3B342F005BB31C /* PadCompleteInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadCompleteInputKey.swift; sourceTree = "<group>"; };
+		371B6F7E2B3B342F005BB31C /* PadABCKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadABCKeyboard.swift; sourceTree = "<group>"; };
+		371B6F7F2B3B342F005BB31C /* PadDismissKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadDismissKey.swift; sourceTree = "<group>"; };
+		371B6F802B3B342F005BB31C /* PadTransformKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadTransformKey.swift; sourceTree = "<group>"; };
+		371B6F812B3B342F005BB31C /* PadLetterInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadLetterInputKey.swift; sourceTree = "<group>"; };
+		371B6F822B3B342F005BB31C /* PadNumericKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadNumericKeyboard.swift; sourceTree = "<group>"; };
+		371B6F832B3B342F005BB31C /* PadStrokeKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadStrokeKeyboard.swift; sourceTree = "<group>"; };
+		371B6F842B3B342F005BB31C /* PadPullableInputKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadPullableInputKey.swift; sourceTree = "<group>"; };
+		371B6F852B3B342F005BB31C /* PadRightKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadRightKey.swift; sourceTree = "<group>"; };
+		371B6F872B3B342F005BB31C /* EmojiMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiMaster.swift; sourceTree = "<group>"; };
+		371B6F882B3B342F005BB31C /* EmojiBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiBoard.swift; sourceTree = "<group>"; };
+		371B6F892B3B342F005BB31C /* EmojiIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiIndicator.swift; sourceTree = "<group>"; };
+		371B70062B3B346D005BB31C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		371B700A2B3B353C005BB31C /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B700C2B3B353C005BB31C /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B700D2B3B353C005BB31C /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B700E2B3B353C005BB31C /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B700F2B3B353C005BB31C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		371B70102B3B353C005BB31C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		371B70112B3B353C005BB31C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B70122B3B353C005BB31C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B70132B3B353C005BB31C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B70142B3B353C005BB31C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B70152B3B353C005BB31C /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B70162B3B353C005BB31C /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B70172B3B353C005BB31C /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B70182B3B353C005BB31C /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B70192B3B353C005BB31C /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		371B701A2B3B353C005BB31C /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
+		371B701B2B3B353C005BB31C /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B701C2B3B353C005BB31C /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371B701D2B3B353C005BB31C /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		371B701E2B3B353C005BB31C /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		371EABB92B3855810075089B /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		371EABBD2B3855820075089B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		371EABC92B385D370075089B /* JyutpingInputMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JyutpingInputMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		371EABD22B385D380075089B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		371EABD42B385D380075089B /* InputMethod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InputMethod.entitlements; sourceTree = "<group>"; };
+		371EABD92B385D390075089B /* InputMethodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputMethodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		371EABDD2B385D390075089B /* InputMethodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodTests.swift; sourceTree = "<group>"; };
+		371EABE32B385D390075089B /* InputMethodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputMethodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		371EABE72B385D390075089B /* InputMethodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITests.swift; sourceTree = "<group>"; };
+		371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		371EABF42B3880150075089B /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = Modules/CommonExtensions; sourceTree = "<group>"; };
+		37E6AD442B3B381600F02279 /* CommentLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
+		37E6AD452B3B381600F02279 /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
+		37E6AD462B3B381600F02279 /* CandidateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
+		37E6AD472B3B381600F02279 /* MotherBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
+		37E6AD492B3B381600F02279 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		37E6AD4A2B3B381600F02279 /* PunctuationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunctuationKey.swift; sourceTree = "<group>"; };
+		37E6AD4B2B3B381600F02279 /* KeyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCode.swift; sourceTree = "<group>"; };
+		37E6AD4C2B3B381600F02279 /* Representative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
+		37E6AD4D2B3B381600F02279 /* InputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputForm.swift; sourceTree = "<group>"; };
+		37E6AD4F2B3B381600F02279 /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
+		37E6AD502B3B381600F02279 /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		37E6AD512B3B381600F02279 /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
+		37E6AD522B3B381600F02279 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		37E6AD532B3B381600F02279 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		37E6AD542B3B381600F02279 /* WindowPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
+		37E6AD552B3B381600F02279 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		37E6AD562B3B381600F02279 /* DisplayCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCandidate.swift; sourceTree = "<group>"; };
+		37E6AD572B3B381600F02279 /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
+		37E6AD592B3B381600F02279 /* HotkeysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
+		37E6AD5A2B3B381600F02279 /* FontPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
+		37E6AD5B2B3B381600F02279 /* CandidateLayoutPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateLayoutPreferencesView.swift; sourceTree = "<group>"; };
+		37E6AD5C2B3B381600F02279 /* CandidateFontPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateFontPreferencesView.swift; sourceTree = "<group>"; };
+		37E6AD5D2B3B381600F02279 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		37E6AD5E2B3B381600F02279 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		37E6AD5F2B3B381600F02279 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		37E6AD602B3B381600F02279 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		37E6AD612B3B381600F02279 /* UserLexicon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLexicon.swift; sourceTree = "<group>"; };
+		37E6AD622B3B381600F02279 /* PageTransformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageTransformation.swift; sourceTree = "<group>"; };
+		37E6AD632B3B381600F02279 /* OptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		37E6AD642B3B381600F02279 /* InputStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputStage.swift; sourceTree = "<group>"; };
+		37E6AD652B3B381600F02279 /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
+		37E6AD662B3B381600F02279 /* JyutpingInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
+		37E6AD672B3B381600F02279 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
+		37E6AD682B3B381700F02279 /* Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
+		37E6AD692B3B381700F02279 /* InputMethodApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMethodApp.swift; sourceTree = "<group>"; };
+		37E6AD6A2B3B381700F02279 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		37E6AD8F2B3B384B00F02279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37E6AD912B3B386800F02279 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		37E6AD922B3B386800F02279 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		37E6AD952B3B389400F02279 /* jyutpingime.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = jyutpingime.pdf; sourceTree = "<group>"; };
+		37E6AD992B3B389E00F02279 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6AD9B2B3B389E00F02279 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6AD9C2B3B389E00F02279 /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6AD9D2B3B389E00F02279 /* zh-Hant-MO */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-MO"; path = "zh-Hant-MO.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6AD9E2B3B389E00F02279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37E6AD9F2B3B389F00F02279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37E6ADA02B3B389F00F02279 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6ADA12B3B389F00F02279 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6ADA22B3B389F00F02279 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6ADA32B3B389F00F02279 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6ADA42B3B389F00F02279 /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6ADA52B3B389F00F02279 /* zh-Hant-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-CN"; path = "zh-Hant-CN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6ADA62B3B389F00F02279 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6ADA72B3B389F00F02279 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6ADA82B3B389F00F02279 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37E6ADA92B3B389F00F02279 /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
+		37E6ADAA2B3B389F00F02279 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6ADAB2B3B389F00F02279 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6ADAC2B3B389F00F02279 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		37E6ADAD2B3B389F00F02279 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		37E6ADB02B3B38B100F02279 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		37E6ADB12B3B39B500F02279 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		37EFD7252B3719C10089D346 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EFD72E2B3719C20089D346 /* Jyutping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jyutping.entitlements; sourceTree = "<group>"; };
+		37EFD7302B3719C20089D346 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		37EFD7362B3719C30089D346 /* JyutpingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EFD73A2B3719C30089D346 /* JyutpingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingTests.swift; sourceTree = "<group>"; };
+		37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		37EFD7442B3719C30089D346 /* JyutpingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITests.swift; sourceTree = "<group>"; };
+		37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		371EABB62B3855810075089B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371B6E332B3B2F32005BB31C /* CommonExtensions in Frameworks */,
+				371B6E3B2B3B2FF3005BB31C /* CoreIME in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABC62B385D370075089B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */,
+				37E6ADB32B3B39D000F02279 /* Sparkle.framework in Frameworks */,
+				371B6E3D2B3B3007005BB31C /* CoreIME in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABD62B385D390075089B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABE02B385D390075089B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD7222B3719C10089D346 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371EABF72B38802A0075089B /* CommonExtensions in Frameworks */,
+				371B6E382B3B2F86005BB31C /* AppDataSource in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD7332B3719C30089D346 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD73D2B3719C30089D346 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		371B6E3F2B3B3107005BB31C /* Linguistics */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E402B3B3107005BB31C /* MacToneTableView.swift */,
+				371B6E412B3B3107005BB31C /* FinalTable.swift */,
+				371B6E422B3B3107005BB31C /* InitialTable.swift */,
+				371B6E432B3B3107005BB31C /* SyllableChecker.swift */,
+				371B6E442B3B3107005BB31C /* Syllable2IPA.swift */,
+				371B6E452B3B3107005BB31C /* IOSToneTableView.swift */,
+				371B6E462B3B3107005BB31C /* SyllableCell.swift */,
+			);
+			path = Linguistics;
+			sourceTree = "<group>";
+		};
+		371B6E472B3B3107005BB31C /* Materials */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E482B3B3107005BB31C /* ChineseZodiacView.swift */,
+				371B6E492B3B3107005BB31C /* StemsBranchesView.swift */,
+				371B6E4A2B3B3107005BB31C /* NumbersView.swift */,
+				371B6E4B2B3B3107005BB31C /* TermView.swift */,
+				371B6E4C2B3B3107005BB31C /* SolarTermsView.swift */,
+				371B6E4D2B3B3107005BB31C /* Term.swift */,
+			);
+			path = Materials;
+			sourceTree = "<group>";
+		};
+		371B6E502B3B3107005BB31C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E512B3B3107005BB31C /* ColorExtensions.swift */,
+				371B6E522B3B3107005BB31C /* FontExtensions.swift */,
+				371B6E532B3B3107005BB31C /* ViewExtensions.swift */,
+				371B6E542B3B3107005BB31C /* ImageExtensions.swift */,
+				371B6E552B3B3107005BB31C /* TextExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		371B6E562B3B3107005BB31C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E5C2B3B3107005BB31C /* Home */,
+				371B6E572B3B3107005BB31C /* SafariView.swift */,
+				371B6E6F2B3B3107005BB31C /* JyutpingView.swift */,
+				371B6E582B3B3107005BB31C /* ShareSheetView.swift */,
+				371B6E592B3B3107005BB31C /* IOSContentView.swift */,
+				371B6E5A2B3B3107005BB31C /* EnhancedLabel.swift */,
+				371B6E5B2B3B3107005BB31C /* MenuCopyButton.swift */,
+				371B6E622B3B3107005BB31C /* Cantonese */,
+				371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */,
+				371B6E702B3B3107005BB31C /* Search */,
+				371B6E782B3B3107005BB31C /* AboutView.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		371B6E5C2B3B3107005BB31C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E5D2B3B3107005BB31C /* IntroductionsView.swift */,
+				371B6E5E2B3B3107005BB31C /* HomeView.swift */,
+				371B6E5F2B3B3107005BB31C /* FAQView.swift */,
+				371B6E602B3B3107005BB31C /* Text2SpeechView.swift */,
+				371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		371B6E622B3B3107005BB31C /* Cantonese */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E632B3B3107005BB31C /* CantoneseView.swift */,
+				371B6E642B3B3107005BB31C /* IOSFatshanMetroView.swift */,
+				371B6E652B3B3107005BB31C /* IOSSurnamesView.swift */,
+				371B6E662B3B3107005BB31C /* IOSExpressionsView.swift */,
+				371B6E672B3B3107005BB31C /* IOSShamChunMetroView.swift */,
+				371B6E682B3B3107005BB31C /* IOSConfusionView.swift */,
+				371B6E692B3B3107005BB31C /* IOSCantonMetroView.swift */,
+				371B6E6A2B3B3107005BB31C /* IOSMetroStationLabel.swift */,
+				371B6E6B2B3B3107005BB31C /* IOSCinZiManView.swift */,
+				371B6E6C2B3B3107005BB31C /* IOSHongKongMTRView.swift */,
+				371B6E6D2B3B3107005BB31C /* IOSMetroLineView.swift */,
+			);
+			path = Cantonese;
+			sourceTree = "<group>";
+		};
+		371B6E702B3B3107005BB31C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E712B3B3107005BB31C /* PronunciationLabel.swift */,
+				371B6E722B3B3107005BB31C /* SearchView.swift */,
+				371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */,
+				371B6E742B3B3107005BB31C /* GwongWanLabel.swift */,
+				371B6E752B3B3107005BB31C /* CantoneseTextLabel.swift */,
+				371B6E762B3B3107005BB31C /* YingWaaFanWanLabel.swift */,
+				371B6E772B3B3107005BB31C /* FanWanCuetYiuLabel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		371B6E792B3B3108005BB31C /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E822B3B3108005BB31C /* MacContentView.swift */,
+				371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */,
+				371B6E812B3B3108005BB31C /* MacAboutView.swift */,
+				371B6E832B3B3108005BB31C /* MacCinZiManView.swift */,
+				371B6E842B3B3108005BB31C /* MacIntroductionsView.swift */,
+				371B6E8F2B3B3108005BB31C /* MacSurnamesView.swift */,
+				371B6E902B3B3108005BB31C /* MacInputMethodInstallationView.swift */,
+				371B6E912B3B3108005BB31C /* MacExpressionsView.swift */,
+				371B6E922B3B3108005BB31C /* MacConfusionView.swift */,
+				371B6E932B3B3108005BB31C /* MacResourcesView.swift */,
+				371B6E852B3B3108005BB31C /* Search */,
+				371B6E7A2B3B3108005BB31C /* Metro */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		371B6E7A2B3B3108005BB31C /* Metro */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E7B2B3B3108005BB31C /* MacStationLabel.swift */,
+				371B6E7C2B3B3108005BB31C /* MacCantonMetroView.swift */,
+				371B6E7D2B3B3108005BB31C /* MacMetroLineView.swift */,
+				371B6E7E2B3B3108005BB31C /* MacHongKongMTRView.swift */,
+				371B6E7F2B3B3108005BB31C /* MacFatshanMetroView.swift */,
+				371B6E802B3B3108005BB31C /* MacShamChunMetroView.swift */,
+			);
+			path = Metro;
+			sourceTree = "<group>";
+		};
+		371B6E852B3B3108005BB31C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E862B3B3108005BB31C /* CantoneseTextView.swift */,
+				371B6E872B3B3108005BB31C /* SearchField.swift */,
+				371B6E882B3B3108005BB31C /* FanWanCuetYiuView.swift */,
+				371B6E892B3B3108005BB31C /* PronunciationView.swift */,
+				371B6E8A2B3B3108005BB31C /* YingWaaFanWanView.swift */,
+				371B6E8B2B3B3108005BB31C /* GwongWanView.swift */,
+				371B6E8C2B3B3108005BB31C /* MacSearchView.swift */,
+				371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		371B6E942B3B3108005BB31C /* Speech */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E952B3B3108005BB31C /* Speech.swift */,
+				371B6E962B3B3108005BB31C /* Speaker.swift */,
+			);
+			path = Speech;
+			sourceTree = "<group>";
+		};
+		371B6EEB2B3B321C005BB31C /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				371B6EEC2B3B321C005BB31C /* InfoPlist.strings */,
+				371B6EEE2B3B321D005BB31C /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		371B6F052B3B342E005BB31C /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F062B3B342E005BB31C /* NumericKeyboard.swift */,
+				371B6F072B3B342E005BB31C /* SaamPingKeyboard.swift */,
+				371B6F082B3B342E005BB31C /* TransformKey.swift */,
+				371B6F092B3B342E005BB31C /* SymbolicKeyboard.swift */,
+				371B6F0A2B3B342E005BB31C /* StrokeInputKey.swift */,
+				371B6F0B2B3B342E005BB31C /* CantoneseNumericKeyboard.swift */,
+				371B6F0C2B3B342E005BB31C /* SymbolInputKey.swift */,
+				371B6F0D2B3B342E005BB31C /* GlobeKey.swift */,
+				371B6F0E2B3B342E005BB31C /* CangjieInputKey.swift */,
+				371B6F0F2B3B342E005BB31C /* ExpansibleInputKey.swift */,
+				371B6F102B3B342E005BB31C /* NumberPad.swift */,
+				371B6F112B3B342E005BB31C /* ShiftKey.swift */,
+				371B6F122B3B342E005BB31C /* CantoneseSymbolicKeyboard.swift */,
+				371B6F132B3B342E005BB31C /* DualLettersInputKey.swift */,
+				371B6F142B3B342E005BB31C /* CangjieKeyboard.swift */,
+				371B6F152B3B342E005BB31C /* AlphabeticKeyboard.swift */,
+				371B6F162B3B342E005BB31C /* BackspaceKey.swift */,
+				371B6F172B3B342E005BB31C /* SpaceKey.swift */,
+				371B6F182B3B342E005BB31C /* ReturnKey.swift */,
+				371B6F192B3B342E005BB31C /* StrokeKeyboard.swift */,
+				371B6F1A2B3B342E005BB31C /* RightKey.swift */,
+				371B6F1B2B3B342E005BB31C /* LeftKey.swift */,
+				371B6F1C2B3B342E005BB31C /* TenKey */,
+				371B6F292B3B342E005BB31C /* LetterInputKey.swift */,
+				371B6F2A2B3B342E005BB31C /* HiddenKey.swift */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		371B6F1C2B3B342E005BB31C /* TenKey */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F1D2B3B342E005BB31C /* TenKeyNumberKey.swift */,
+				371B6F1E2B3B342E005BB31C /* TenKeyReturnKey.swift */,
+				371B6F1F2B3B342E005BB31C /* TenKeySpecialKey.swift */,
+				371B6F202B3B342E005BB31C /* TenKeyBackspaceKey.swift */,
+				371B6F212B3B342E005BB31C /* TenKeyInputKey.swift */,
+				371B6F222B3B342E005BB31C /* TenKeySymbolsBar.swift */,
+				371B6F232B3B342E005BB31C /* TenKeySpaceKey.swift */,
+				371B6F242B3B342E005BB31C /* TenKeyKeyboard.swift */,
+				371B6F252B3B342E005BB31C /* Combo.swift */,
+				371B6F262B3B342E005BB31C /* TenKeySidebar.swift */,
+				371B6F272B3B342E005BB31C /* TenKeyNumericKeyboard.swift */,
+				371B6F282B3B342E005BB31C /* TenKeyNavigateKey.swift */,
+			);
+			path = TenKey;
+			sourceTree = "<group>";
+		};
+		371B6F2B2B3B342E005BB31C /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */,
+				371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */,
+				371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */,
+				371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */,
+				371B6F302B3B342E005BB31C /* ToolBar.swift */,
+				371B6F312B3B342E005BB31C /* SettingsView.swift */,
+				371B6F322B3B342E005BB31C /* CandidateBoard.swift */,
+				371B6F332B3B342E005BB31C /* ScrollViewGestureButton.swift */,
+				371B6F342B3B342E005BB31C /* ToolBarItem.swift */,
+				371B6F352B3B342E005BB31C /* MotherBoard.swift */,
+				371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */,
+				371B6F372B3B342E005BB31C /* EditingPanel.swift */,
+			);
+			path = SharedViews;
+			sourceTree = "<group>";
+		};
+		371B6F392B3B342E005BB31C /* Paths */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F3A2B3B342E005BB31C /* KeyRightExpansionPath.swift */,
+				371B6F3B2B3B342E005BB31C /* KeyLeftExpansionPath.swift */,
+				371B6F3C2B3B342E005BB31C /* KeyPreviewPath.swift */,
+				371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */,
+				371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */,
+			);
+			path = Paths;
+			sourceTree = "<group>";
+		};
+		371B6F3F2B3B342F005BB31C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F402B3B342F005BB31C /* CharacterExtensions.swift */,
+				371B6F412B3B342F005BB31C /* DispatchQueueExtensions.swift */,
+				371B6F422B3B342F005BB31C /* UIReturnKeyTypeExtensions.swift */,
+				371B6F432B3B342F005BB31C /* ColorExtensions.swift */,
+				371B6F442B3B342F005BB31C /* FontExtensions.swift */,
+				371B6F452B3B342F005BB31C /* ImageExtensions.swift */,
+				371B6F462B3B342F005BB31C /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		371B6F472B3B342F005BB31C /* SharedModels */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F482B3B342F005BB31C /* Operation.swift */,
+				371B6F492B3B342F005BB31C /* InputMethodMode.swift */,
+				371B6F4A2B3B342F005BB31C /* KeyboardLayout.swift */,
+				371B6F4B2B3B342F005BB31C /* UserLexicon.swift */,
+				371B6F4C2B3B342F005BB31C /* AudioFeedback.swift */,
+				371B6F4D2B3B342F005BB31C /* Constant.swift */,
+				371B6F4E2B3B342F005BB31C /* KeyboardInterface.swift */,
+				371B6F4F2B3B342F005BB31C /* Options.swift */,
+				371B6F502B3B342F005BB31C /* KeyModel.swift */,
+				371B6F512B3B342F005BB31C /* KeyboardForm.swift */,
+				371B6F522B3B342F005BB31C /* KeyboardCase.swift */,
+				371B6F532B3B342F005BB31C /* InputStage.swift */,
+				371B6F542B3B342F005BB31C /* HapticFeedback.swift */,
+			);
+			path = SharedModels;
+			sourceTree = "<group>";
+		};
+		371B6F552B3B342F005BB31C /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F562B3B342F005BB31C /* PadGlobeKey.swift */,
+				371B6F572B3B342F005BB31C /* PadExpansibleInputKey.swift */,
+				371B6F582B3B342F005BB31C /* PadSymbolInputKey.swift */,
+				371B6F592B3B342F005BB31C /* PadStrokeInputKey.swift */,
+				371B6F5A2B3B342F005BB31C /* LargeScreenPad */,
+				371B6F712B3B342F005BB31C /* PadShiftKey.swift */,
+				371B6F722B3B342F005BB31C /* PadUpperLowerInputKey.swift */,
+				371B6F732B3B342F005BB31C /* PadCangjieKeyboard.swift */,
+				371B6F742B3B342F005BB31C /* PadSaamPingKeyboard.swift */,
+				371B6F752B3B342F005BB31C /* PadSymbolicKeyboard.swift */,
+				371B6F762B3B342F005BB31C /* PadCantoneseNumericKeyboard.swift */,
+				371B6F772B3B342F005BB31C /* PadCantoneseKeyboard.swift */,
+				371B6F782B3B342F005BB31C /* PadBackspaceKey.swift */,
+				371B6F792B3B342F005BB31C /* PadCangjieInputKey.swift */,
+				371B6F7A2B3B342F005BB31C /* PadSpaceKey.swift */,
+				371B6F7B2B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift */,
+				371B6F7C2B3B342F005BB31C /* PadReturnKey.swift */,
+				371B6F7D2B3B342F005BB31C /* PadCompleteInputKey.swift */,
+				371B6F7E2B3B342F005BB31C /* PadABCKeyboard.swift */,
+				371B6F7F2B3B342F005BB31C /* PadDismissKey.swift */,
+				371B6F802B3B342F005BB31C /* PadTransformKey.swift */,
+				371B6F812B3B342F005BB31C /* PadLetterInputKey.swift */,
+				371B6F822B3B342F005BB31C /* PadNumericKeyboard.swift */,
+				371B6F832B3B342F005BB31C /* PadStrokeKeyboard.swift */,
+				371B6F842B3B342F005BB31C /* PadPullableInputKey.swift */,
+				371B6F852B3B342F005BB31C /* PadRightKey.swift */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		371B6F5A2B3B342F005BB31C /* LargeScreenPad */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F5B2B3B342F005BB31C /* LargePadCangjieInputKey.swift */,
+				371B6F5C2B3B342F005BB31C /* LargePadExpansibleInputKey.swift */,
+				371B6F5D2B3B342F005BB31C /* LargePadShiftKey.swift */,
+				371B6F5E2B3B342F005BB31C /* LargePadBackspaceKey.swift */,
+				371B6F5F2B3B342F005BB31C /* LargePadUpperLowerInputKey.swift */,
+				371B6F602B3B342F005BB31C /* LargePadStrokeInputKey.swift */,
+				371B6F612B3B342F005BB31C /* LargePadGlobeKey.swift */,
+				371B6F622B3B342F005BB31C /* LargePadNumericKeyboard.swift */,
+				371B6F632B3B342F005BB31C /* TabKey.swift */,
+				371B6F642B3B342F005BB31C /* LargePadCantoneseNumericKeyboard.swift */,
+				371B6F652B3B342F005BB31C /* CapsLockKey.swift */,
+				371B6F662B3B342F005BB31C /* LargePadDismissKey.swift */,
+				371B6F672B3B342F005BB31C /* LargePadCantoneseKeyboard.swift */,
+				371B6F682B3B342F005BB31C /* LargePadInstantInputKey.swift */,
+				371B6F692B3B342F005BB31C /* LargePadTransformKey.swift */,
+				371B6F6A2B3B342F005BB31C /* LargePadReturnKey.swift */,
+				371B6F6B2B3B342F005BB31C /* LargePadRightKey.swift */,
+				371B6F6C2B3B342F005BB31C /* LargePadStrokeKeyboard.swift */,
+				371B6F6D2B3B342F005BB31C /* LargePadLetterInputKey.swift */,
+				371B6F6E2B3B342F005BB31C /* LargePadCangjieKeyboard.swift */,
+				371B6F6F2B3B342F005BB31C /* LargePadABCKeyboard.swift */,
+				371B6F702B3B342F005BB31C /* LargePadSaamPingKeyboard.swift */,
+			);
+			path = LargeScreenPad;
+			sourceTree = "<group>";
+		};
+		371B6F862B3B342F005BB31C /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F872B3B342F005BB31C /* EmojiMaster.swift */,
+				371B6F882B3B342F005BB31C /* EmojiBoard.swift */,
+				371B6F892B3B342F005BB31C /* EmojiIndicator.swift */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
+		371B70082B3B353C005BB31C /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				371B70092B3B353C005BB31C /* InfoPlist.strings */,
+				371B700B2B3B353C005BB31C /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		371EABBA2B3855820075089B /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				371B6F382B3B342E005BB31C /* KeyboardViewController.swift */,
+				371B6F2B2B3B342E005BB31C /* SharedViews */,
+				371B6F472B3B342F005BB31C /* SharedModels */,
+				371B6F862B3B342F005BB31C /* Emoji */,
+				371B6F3F2B3B342F005BB31C /* Extensions */,
+				371B6F552B3B342F005BB31C /* iPad */,
+				371B6F052B3B342E005BB31C /* iPhone */,
+				371B6F392B3B342E005BB31C /* Paths */,
+				371B70082B3B353C005BB31C /* Localization */,
+				371B70062B3B346D005BB31C /* Images.xcassets */,
+				371EABBD2B3855820075089B /* Info.plist */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		371EABCA2B385D370075089B /* InputMethod */ = {
+			isa = PBXGroup;
+			children = (
+				37E6ADB02B3B38B100F02279 /* Info.plist */,
+				37E6AD922B3B386800F02279 /* Debug.xcconfig */,
+				37E6AD912B3B386800F02279 /* Release.xcconfig */,
+				37E6AD692B3B381700F02279 /* InputMethodApp.swift */,
+				37E6AD672B3B381600F02279 /* AppContext.swift */,
+				37E6AD432B3B381600F02279 /* CandidateViews */,
+				37E6AD562B3B381600F02279 /* DisplayCandidate.swift */,
+				37E6AD572B3B381600F02279 /* EventHandler.swift */,
+				37E6AD4E2B3B381600F02279 /* Extensions */,
+				37E6AD4D2B3B381600F02279 /* InputForm.swift */,
+				37E6AD642B3B381600F02279 /* InputStage.swift */,
+				37E6AD662B3B381600F02279 /* JyutpingInputController.swift */,
+				37E6AD482B3B381600F02279 /* KeyCode */,
+				37E6AD6A2B3B381700F02279 /* Menu.swift */,
+				37E6AD552B3B381600F02279 /* Options.swift */,
+				37E6AD632B3B381600F02279 /* OptionsView.swift */,
+				37E6AD622B3B381600F02279 /* PageTransformation.swift */,
+				37E6AD582B3B381600F02279 /* Preferences */,
+				37E6AD682B3B381700F02279 /* Speech.swift */,
+				37E6AD612B3B381600F02279 /* UserLexicon.swift */,
+				37E6AD652B3B381600F02279 /* VisualEffect.swift */,
+				37E6AD542B3B381600F02279 /* WindowPattern.swift */,
+				371EABD42B385D380075089B /* InputMethod.entitlements */,
+				37E6AD972B3B389E00F02279 /* Localization */,
+				37E6AD952B3B389400F02279 /* jyutpingime.pdf */,
+				37E6AD8F2B3B384B00F02279 /* Assets.xcassets */,
+				371EABD12B385D380075089B /* Preview Content */,
+			);
+			path = InputMethod;
+			sourceTree = "<group>";
+		};
+		371EABD12B385D380075089B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				371EABD22B385D380075089B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		371EABDC2B385D390075089B /* InputMethodTests */ = {
+			isa = PBXGroup;
+			children = (
+				371EABDD2B385D390075089B /* InputMethodTests.swift */,
+			);
+			path = InputMethodTests;
+			sourceTree = "<group>";
+		};
+		371EABE62B385D390075089B /* InputMethodUITests */ = {
+			isa = PBXGroup;
+			children = (
+				371EABE72B385D390075089B /* InputMethodUITests.swift */,
+				371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */,
+			);
+			path = InputMethodUITests;
+			sourceTree = "<group>";
+		};
+		371EABF52B38802A0075089B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37E6AD432B3B381600F02279 /* CandidateViews */ = {
+			isa = PBXGroup;
+			children = (
+				37E6AD442B3B381600F02279 /* CommentLabel.swift */,
+				37E6AD452B3B381600F02279 /* CandidateBoard.swift */,
+				37E6AD462B3B381600F02279 /* CandidateLabel.swift */,
+				37E6AD472B3B381600F02279 /* MotherBoard.swift */,
+			);
+			path = CandidateViews;
+			sourceTree = "<group>";
+		};
+		37E6AD482B3B381600F02279 /* KeyCode */ = {
+			isa = PBXGroup;
+			children = (
+				37E6AD492B3B381600F02279 /* Direction.swift */,
+				37E6AD4A2B3B381600F02279 /* PunctuationKey.swift */,
+				37E6AD4B2B3B381600F02279 /* KeyCode.swift */,
+				37E6AD4C2B3B381600F02279 /* Representative.swift */,
+			);
+			path = KeyCode;
+			sourceTree = "<group>";
+		};
+		37E6AD4E2B3B381600F02279 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				37E6AD4F2B3B381600F02279 /* CharacterExtensions.swift */,
+				37E6AD502B3B381600F02279 /* FontExtensions.swift */,
+				37E6AD512B3B381600F02279 /* IMKTextInputExtensions.swift */,
+				37E6AD522B3B381600F02279 /* ViewExtensions.swift */,
+				37E6AD532B3B381600F02279 /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		37E6AD582B3B381600F02279 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				37E6AD592B3B381600F02279 /* HotkeysView.swift */,
+				37E6AD5A2B3B381600F02279 /* FontPicker.swift */,
+				37E6AD5B2B3B381600F02279 /* CandidateLayoutPreferencesView.swift */,
+				37E6AD5C2B3B381600F02279 /* CandidateFontPreferencesView.swift */,
+				37E6AD5D2B3B381600F02279 /* Constant.swift */,
+				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
+				37E6AD5F2B3B381600F02279 /* AboutView.swift */,
+				37E6AD602B3B381600F02279 /* AppSettings.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		37E6AD972B3B389E00F02279 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				37E6AD982B3B389E00F02279 /* InfoPlist.strings */,
+				37E6AD9A2B3B389E00F02279 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		37EFD71C2B3719C10089D346 = {
+			isa = PBXGroup;
+			children = (
+				37E6ADB12B3B39B500F02279 /* Sparkle.framework */,
+				371B6E392B3B2FE1005BB31C /* CoreIME */,
+				371B6E362B3B2F72005BB31C /* AppDataSource */,
+				371EABF42B3880150075089B /* CommonExtensions */,
+				37EFD7272B3719C10089D346 /* Jyutping */,
+				37EFD7392B3719C30089D346 /* JyutpingTests */,
+				37EFD7432B3719C30089D346 /* JyutpingUITests */,
+				371EABBA2B3855820075089B /* Keyboard */,
+				371EABCA2B385D370075089B /* InputMethod */,
+				371EABDC2B385D390075089B /* InputMethodTests */,
+				371EABE62B385D390075089B /* InputMethodUITests */,
+				37EFD7262B3719C10089D346 /* Products */,
+				371EABF52B38802A0075089B /* Frameworks */,
+			);
+			indentWidth = 8;
+			sourceTree = "<group>";
+			tabWidth = 8;
+		};
+		37EFD7262B3719C10089D346 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37EFD7252B3719C10089D346 /* Jyutping.app */,
+				37EFD7362B3719C30089D346 /* JyutpingTests.xctest */,
+				37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */,
+				371EABB92B3855810075089B /* Keyboard.appex */,
+				371EABC92B385D370075089B /* JyutpingInputMethod.app */,
+				371EABD92B385D390075089B /* InputMethodTests.xctest */,
+				371EABE32B385D390075089B /* InputMethodUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37EFD7272B3719C10089D346 /* Jyutping */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */,
+				371B6E972B3B3108005BB31C /* AppMaster.swift */,
+				371B6E4E2B3B3107005BB31C /* Constant.swift */,
+				371B6E4F2B3B3107005BB31C /* Device.swift */,
+				371B6E562B3B3107005BB31C /* iOS */,
+				371B6E792B3B3108005BB31C /* macOS */,
+				371B6E472B3B3107005BB31C /* Materials */,
+				371B6E3F2B3B3107005BB31C /* Linguistics */,
+				371B6E942B3B3108005BB31C /* Speech */,
+				371B6E502B3B3107005BB31C /* Extensions */,
+				371B6EEB2B3B321C005BB31C /* Localization */,
+				371B6EE72B3B31C4005BB31C /* Assets.xcassets */,
+				371B6F042B3B3288005BB31C /* Info.plist */,
+				37EFD72E2B3719C20089D346 /* Jyutping.entitlements */,
+				371B6EE92B3B3206005BB31C /* Settings.bundle */,
+				37EFD72F2B3719C20089D346 /* Preview Content */,
+			);
+			path = Jyutping;
+			sourceTree = "<group>";
+		};
+		37EFD72F2B3719C20089D346 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				37EFD7302B3719C20089D346 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		37EFD7392B3719C30089D346 /* JyutpingTests */ = {
+			isa = PBXGroup;
+			children = (
+				37EFD73A2B3719C30089D346 /* JyutpingTests.swift */,
+			);
+			path = JyutpingTests;
+			sourceTree = "<group>";
+		};
+		37EFD7432B3719C30089D346 /* JyutpingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				37EFD7442B3719C30089D346 /* JyutpingUITests.swift */,
+				37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */,
+			);
+			path = JyutpingUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		371EABB82B3855810075089B /* Keyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 371EABC42B3855820075089B /* Build configuration list for PBXNativeTarget "Keyboard" */;
+			buildPhases = (
+				371EABB52B3855810075089B /* Sources */,
+				371EABB62B3855810075089B /* Frameworks */,
+				371EABB72B3855810075089B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Keyboard;
+			packageProductDependencies = (
+				371B6E322B3B2F32005BB31C /* CommonExtensions */,
+				371B6E3A2B3B2FF3005BB31C /* CoreIME */,
+			);
+			productName = Keyboard;
+			productReference = 371EABB92B3855810075089B /* Keyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		371EABC82B385D370075089B /* InputMethod */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 371EABF12B385D390075089B /* Build configuration list for PBXNativeTarget "InputMethod" */;
+			buildPhases = (
+				371EABC52B385D370075089B /* Sources */,
+				371EABC62B385D370075089B /* Frameworks */,
+				371EABC72B385D370075089B /* Resources */,
+				37E6ADB52B3B39D000F02279 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InputMethod;
+			packageProductDependencies = (
+				371B6E342B3B2F55005BB31C /* CommonExtensions */,
+				371B6E3C2B3B3007005BB31C /* CoreIME */,
+			);
+			productName = InputMethod;
+			productReference = 371EABC92B385D370075089B /* JyutpingInputMethod.app */;
+			productType = "com.apple.product-type.application";
+		};
+		371EABD82B385D390075089B /* InputMethodTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 371EABF22B385D390075089B /* Build configuration list for PBXNativeTarget "InputMethodTests" */;
+			buildPhases = (
+				371EABD52B385D390075089B /* Sources */,
+				371EABD62B385D390075089B /* Frameworks */,
+				371EABD72B385D390075089B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				371EABDB2B385D390075089B /* PBXTargetDependency */,
+			);
+			name = InputMethodTests;
+			productName = InputMethodTests;
+			productReference = 371EABD92B385D390075089B /* InputMethodTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		371EABE22B385D390075089B /* InputMethodUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 371EABF32B385D390075089B /* Build configuration list for PBXNativeTarget "InputMethodUITests" */;
+			buildPhases = (
+				371EABDF2B385D390075089B /* Sources */,
+				371EABE02B385D390075089B /* Frameworks */,
+				371EABE12B385D390075089B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				371EABE52B385D390075089B /* PBXTargetDependency */,
+			);
+			name = InputMethodUITests;
+			productName = InputMethodUITests;
+			productReference = 371EABE32B385D390075089B /* InputMethodUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		37EFD7242B3719C10089D346 /* Jyutping */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37EFD74A2B3719C30089D346 /* Build configuration list for PBXNativeTarget "Jyutping" */;
+			buildPhases = (
+				37EFD7212B3719C10089D346 /* Sources */,
+				37EFD7222B3719C10089D346 /* Frameworks */,
+				37EFD7232B3719C10089D346 /* Resources */,
+				371EABC12B3855820075089B /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				371EABBF2B3855820075089B /* PBXTargetDependency */,
+			);
+			name = Jyutping;
+			packageProductDependencies = (
+				371EABF62B38802A0075089B /* CommonExtensions */,
+				371B6E372B3B2F86005BB31C /* AppDataSource */,
+			);
+			productName = Jyutping;
+			productReference = 37EFD7252B3719C10089D346 /* Jyutping.app */;
+			productType = "com.apple.product-type.application";
+		};
+		37EFD7352B3719C30089D346 /* JyutpingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37EFD74D2B3719C30089D346 /* Build configuration list for PBXNativeTarget "JyutpingTests" */;
+			buildPhases = (
+				37EFD7322B3719C30089D346 /* Sources */,
+				37EFD7332B3719C30089D346 /* Frameworks */,
+				37EFD7342B3719C30089D346 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37EFD7382B3719C30089D346 /* PBXTargetDependency */,
+			);
+			name = JyutpingTests;
+			productName = JyutpingTests;
+			productReference = 37EFD7362B3719C30089D346 /* JyutpingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		37EFD73F2B3719C30089D346 /* JyutpingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37EFD7502B3719C30089D346 /* Build configuration list for PBXNativeTarget "JyutpingUITests" */;
+			buildPhases = (
+				37EFD73C2B3719C30089D346 /* Sources */,
+				37EFD73D2B3719C30089D346 /* Frameworks */,
+				37EFD73E2B3719C30089D346 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37EFD7422B3719C30089D346 /* PBXTargetDependency */,
+			);
+			name = JyutpingUITests;
+			productName = JyutpingUITests;
+			productReference = 37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37EFD71D2B3719C10089D346 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					371EABB82B3855810075089B = {
+						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
+					};
+					371EABC82B385D370075089B = {
+						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
+					};
+					371EABD82B385D390075089B = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 371EABC82B385D370075089B;
+					};
+					371EABE22B385D390075089B = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 371EABC82B385D370075089B;
+					};
+					37EFD7242B3719C10089D346 = {
+						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
+					};
+					37EFD7352B3719C30089D346 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 37EFD7242B3719C10089D346;
+					};
+					37EFD73F2B3719C30089D346 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 37EFD7242B3719C10089D346;
+					};
+				};
+			};
+			buildConfigurationList = 37EFD7202B3719C10089D346 /* Build configuration list for PBXProject "Jyutping" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans-CN",
+				"zh-Hant-MO",
+				"zh-Hant",
+				"zh-Hans",
+				"zh-Hant-CN",
+				"zh-HK",
+				yue,
+				"zh-Hant-TW",
+				"zh-Hant-HK",
+			);
+			mainGroup = 37EFD71C2B3719C10089D346;
+			productRefGroup = 37EFD7262B3719C10089D346 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37EFD7242B3719C10089D346 /* Jyutping */,
+				37EFD7352B3719C30089D346 /* JyutpingTests */,
+				37EFD73F2B3719C30089D346 /* JyutpingUITests */,
+				371EABB82B3855810075089B /* Keyboard */,
+				371EABC82B385D370075089B /* InputMethod */,
+				371EABD82B385D390075089B /* InputMethodTests */,
+				371EABE22B385D390075089B /* InputMethodUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		371EABB72B3855810075089B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371B70072B3B346D005BB31C /* Images.xcassets in Resources */,
+				371B70202B3B353C005BB31C /* Localizable.strings in Resources */,
+				371B701F2B3B353C005BB31C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABC72B385D370075089B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37E6AD962B3B389400F02279 /* jyutpingime.pdf in Resources */,
+				37E6ADAE2B3B389F00F02279 /* InfoPlist.strings in Resources */,
+				37E6AD942B3B386800F02279 /* Debug.xcconfig in Resources */,
+				37E6ADAF2B3B389F00F02279 /* Localizable.strings in Resources */,
+				37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */,
+				371EABD32B385D380075089B /* Preview Assets.xcassets in Resources */,
+				37E6AD932B3B386800F02279 /* Release.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABD72B385D390075089B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABE12B385D390075089B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD7232B3719C10089D346 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371B6F032B3B321D005BB31C /* Localizable.strings in Resources */,
+				371B6EE82B3B31C4005BB31C /* Assets.xcassets in Resources */,
+				371B6F022B3B321D005BB31C /* InfoPlist.strings in Resources */,
+				371B6EEA2B3B3206005BB31C /* Settings.bundle in Resources */,
+				37EFD7312B3719C20089D346 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD7342B3719C30089D346 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD73E2B3719C30089D346 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		371EABB52B3855810075089B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371B6FE92B3B342F005BB31C /* LargePadStrokeKeyboard.swift in Sources */,
+				371B6FF02B3B342F005BB31C /* PadCangjieKeyboard.swift in Sources */,
+				371B6FDF2B3B342F005BB31C /* LargePadNumericKeyboard.swift in Sources */,
+				371B6F9D2B3B342F005BB31C /* StrokeKeyboard.swift in Sources */,
+				371B6FFA2B3B342F005BB31C /* PadCompleteInputKey.swift in Sources */,
+				371B6FDE2B3B342F005BB31C /* LargePadGlobeKey.swift in Sources */,
+				371B6FB92B3B342F005BB31C /* EditingPanel.swift in Sources */,
+				371B6FFC2B3B342F005BB31C /* PadDismissKey.swift in Sources */,
+				371B6FD82B3B342F005BB31C /* LargePadCangjieInputKey.swift in Sources */,
+				371B6F972B3B342F005BB31C /* DualLettersInputKey.swift in Sources */,
+				371B6F992B3B342F005BB31C /* AlphabeticKeyboard.swift in Sources */,
+				371B6FCC2B3B342F005BB31C /* Constant.swift in Sources */,
+				371B6FE02B3B342F005BB31C /* TabKey.swift in Sources */,
+				371B6FF52B3B342F005BB31C /* PadBackspaceKey.swift in Sources */,
+				371B6FA52B3B342F005BB31C /* TenKeySymbolsBar.swift in Sources */,
+				371B6FF22B3B342F005BB31C /* PadSymbolicKeyboard.swift in Sources */,
+				371B6FAB2B3B342F005BB31C /* TenKeyNavigateKey.swift in Sources */,
+				371B6F8D2B3B342F005BB31C /* SymbolicKeyboard.swift in Sources */,
+				371B6FA42B3B342F005BB31C /* TenKeyInputKey.swift in Sources */,
+				371B6FEB2B3B342F005BB31C /* LargePadCangjieKeyboard.swift in Sources */,
+				371B6FA82B3B342F005BB31C /* Combo.swift in Sources */,
+				371B6F9F2B3B342F005BB31C /* LeftKey.swift in Sources */,
+				371B6FA32B3B342F005BB31C /* TenKeyBackspaceKey.swift in Sources */,
+				371B6FED2B3B342F005BB31C /* LargePadSaamPingKeyboard.swift in Sources */,
+				371B6FA22B3B342F005BB31C /* TenKeySpecialKey.swift in Sources */,
+				371B6F932B3B342F005BB31C /* ExpansibleInputKey.swift in Sources */,
+				371B6FDB2B3B342F005BB31C /* LargePadBackspaceKey.swift in Sources */,
+				371B6FD02B3B342F005BB31C /* KeyboardForm.swift in Sources */,
+				371B6FE42B3B342F005BB31C /* LargePadCantoneseKeyboard.swift in Sources */,
+				371B6FD62B3B342F005BB31C /* PadSymbolInputKey.swift in Sources */,
+				371B6FCB2B3B342F005BB31C /* AudioFeedback.swift in Sources */,
+				371B6F8C2B3B342F005BB31C /* TransformKey.swift in Sources */,
+				371B6FB62B3B342F005BB31C /* ToolBarItem.swift in Sources */,
+				371B6FC52B3B342F005BB31C /* ImageExtensions.swift in Sources */,
+				371B6FBD2B3B342F005BB31C /* KeyPreviewPath.swift in Sources */,
+				371B6F902B3B342F005BB31C /* SymbolInputKey.swift in Sources */,
+				371B6FAC2B3B342F005BB31C /* LetterInputKey.swift in Sources */,
+				371B6FBE2B3B342F005BB31C /* PadKeyExpansionPath.swift in Sources */,
+				371B6FF12B3B342F005BB31C /* PadSaamPingKeyboard.swift in Sources */,
+				371B6F912B3B342F005BB31C /* GlobeKey.swift in Sources */,
+				371B6FCA2B3B342F005BB31C /* UserLexicon.swift in Sources */,
+				371B6FBF2B3B342F005BB31C /* KeyExpansionPath.swift in Sources */,
+				371B6FFD2B3B342F005BB31C /* PadTransformKey.swift in Sources */,
+				371B6FD42B3B342F005BB31C /* PadGlobeKey.swift in Sources */,
+				371B6FC62B3B342F005BB31C /* StringExtensions.swift in Sources */,
+				371B6FE22B3B342F005BB31C /* CapsLockKey.swift in Sources */,
+				371B6FD92B3B342F005BB31C /* LargePadExpansibleInputKey.swift in Sources */,
+				371B6FC32B3B342F005BB31C /* ColorExtensions.swift in Sources */,
+				371B6FBA2B3B342F005BB31C /* KeyboardViewController.swift in Sources */,
+				371B6FCD2B3B342F005BB31C /* KeyboardInterface.swift in Sources */,
+				371B6FA62B3B342F005BB31C /* TenKeySpaceKey.swift in Sources */,
+				371B6FF82B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift in Sources */,
+				371B6FDA2B3B342F005BB31C /* LargePadShiftKey.swift in Sources */,
+				371B6FEF2B3B342F005BB31C /* PadUpperLowerInputKey.swift in Sources */,
+				371B6FA12B3B342F005BB31C /* TenKeyReturnKey.swift in Sources */,
+				371B6FE72B3B342F005BB31C /* LargePadReturnKey.swift in Sources */,
+				371B70052B3B342F005BB31C /* EmojiIndicator.swift in Sources */,
+				371B6F9E2B3B342F005BB31C /* RightKey.swift in Sources */,
+				371B6F8B2B3B342F005BB31C /* SaamPingKeyboard.swift in Sources */,
+				371B6FA02B3B342F005BB31C /* TenKeyNumberKey.swift in Sources */,
+				371B6FFE2B3B342F005BB31C /* PadLetterInputKey.swift in Sources */,
+				371B6FE52B3B342F005BB31C /* LargePadInstantInputKey.swift in Sources */,
+				371B6FE82B3B342F005BB31C /* LargePadRightKey.swift in Sources */,
+				371B6FEE2B3B342F005BB31C /* PadShiftKey.swift in Sources */,
+				371B6FF92B3B342F005BB31C /* PadReturnKey.swift in Sources */,
+				371B6FD22B3B342F005BB31C /* InputStage.swift in Sources */,
+				371B6FC92B3B342F005BB31C /* KeyboardLayout.swift in Sources */,
+				371B6FC82B3B342F005BB31C /* InputMethodMode.swift in Sources */,
+				371B70022B3B342F005BB31C /* PadRightKey.swift in Sources */,
+				371B6FE32B3B342F005BB31C /* LargePadDismissKey.swift in Sources */,
+				371B6FF42B3B342F005BB31C /* PadCantoneseKeyboard.swift in Sources */,
+				371B6FB52B3B342F005BB31C /* ScrollViewGestureButton.swift in Sources */,
+				371B6FCF2B3B342F005BB31C /* KeyModel.swift in Sources */,
+				371B6FCE2B3B342F005BB31C /* Options.swift in Sources */,
+				371B70042B3B342F005BB31C /* EmojiBoard.swift in Sources */,
+				371B6FFF2B3B342F005BB31C /* PadNumericKeyboard.swift in Sources */,
+				371B6FB32B3B342F005BB31C /* SettingsView.swift in Sources */,
+				371B6FA72B3B342F005BB31C /* TenKeyKeyboard.swift in Sources */,
+				371B70012B3B342F005BB31C /* PadPullableInputKey.swift in Sources */,
+				371B6F8F2B3B342F005BB31C /* CantoneseNumericKeyboard.swift in Sources */,
+				371B70032B3B342F005BB31C /* EmojiMaster.swift in Sources */,
+				371B6FF32B3B342F005BB31C /* PadCantoneseNumericKeyboard.swift in Sources */,
+				371B6FFB2B3B342F005BB31C /* PadABCKeyboard.swift in Sources */,
+				371B6FE62B3B342F005BB31C /* LargePadTransformKey.swift in Sources */,
+				371B6FC42B3B342F005BB31C /* FontExtensions.swift in Sources */,
+				371B6F942B3B342F005BB31C /* NumberPad.swift in Sources */,
+				371B6F952B3B342F005BB31C /* ShiftKey.swift in Sources */,
+				371B6F8A2B3B342F005BB31C /* NumericKeyboard.swift in Sources */,
+				371B6FA92B3B342F005BB31C /* TenKeySidebar.swift in Sources */,
+				371B6FAA2B3B342F005BB31C /* TenKeyNumericKeyboard.swift in Sources */,
+				371B6F9C2B3B342F005BB31C /* ReturnKey.swift in Sources */,
+				371B6FF72B3B342F005BB31C /* PadSpaceKey.swift in Sources */,
+				371B6FD12B3B342F005BB31C /* KeyboardCase.swift in Sources */,
+				371B6F9B2B3B342F005BB31C /* SpaceKey.swift in Sources */,
+				371B6F982B3B342F005BB31C /* CangjieKeyboard.swift in Sources */,
+				371B6FB12B3B342F005BB31C /* SettingsViewIOS15.swift in Sources */,
+				371B6FAF2B3B342F005BB31C /* ScrollViewButton.swift in Sources */,
+				371B6FDC2B3B342F005BB31C /* LargePadUpperLowerInputKey.swift in Sources */,
+				371B6FC72B3B342F005BB31C /* Operation.swift in Sources */,
+				371B6FEC2B3B342F005BB31C /* LargePadABCKeyboard.swift in Sources */,
+				371B6FEA2B3B342F005BB31C /* LargePadLetterInputKey.swift in Sources */,
+				371B70002B3B342F005BB31C /* PadStrokeKeyboard.swift in Sources */,
+				371B6FAD2B3B342F005BB31C /* HiddenKey.swift in Sources */,
+				371B6FB42B3B342F005BB31C /* CandidateBoard.swift in Sources */,
+				371B6FB02B3B342F005BB31C /* CandidateScrollBar.swift in Sources */,
+				371B6F9A2B3B342F005BB31C /* BackspaceKey.swift in Sources */,
+				371B6F8E2B3B342F005BB31C /* StrokeInputKey.swift in Sources */,
+				371B6FC02B3B342F005BB31C /* CharacterExtensions.swift in Sources */,
+				371B6F962B3B342F005BB31C /* CantoneseSymbolicKeyboard.swift in Sources */,
+				371B6FBC2B3B342F005BB31C /* KeyLeftExpansionPath.swift in Sources */,
+				371B6FF62B3B342F005BB31C /* PadCangjieInputKey.swift in Sources */,
+				371B6FB22B3B342F005BB31C /* ToolBar.swift in Sources */,
+				371B6FD72B3B342F005BB31C /* PadStrokeInputKey.swift in Sources */,
+				371B6FE12B3B342F005BB31C /* LargePadCantoneseNumericKeyboard.swift in Sources */,
+				371B6FC22B3B342F005BB31C /* UIReturnKeyTypeExtensions.swift in Sources */,
+				371B6FBB2B3B342F005BB31C /* KeyRightExpansionPath.swift in Sources */,
+				371B6FDD2B3B342F005BB31C /* LargePadStrokeInputKey.swift in Sources */,
+				371B6F922B3B342F005BB31C /* CangjieInputKey.swift in Sources */,
+				371B6FB82B3B342F005BB31C /* CantoneseABCSwitch.swift in Sources */,
+				371B6FD52B3B342F005BB31C /* PadExpansibleInputKey.swift in Sources */,
+				371B6FC12B3B342F005BB31C /* DispatchQueueExtensions.swift in Sources */,
+				371B6FAE2B3B342F005BB31C /* RomanizationLabel.swift in Sources */,
+				371B6FB72B3B342F005BB31C /* MotherBoard.swift in Sources */,
+				371B6FD32B3B342F005BB31C /* HapticFeedback.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABC52B385D370075089B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */,
+				37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */,
+				37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */,
+				37E6AD722B3B381700F02279 /* Representative.swift in Sources */,
+				37E6AD742B3B381700F02279 /* CharacterExtensions.swift in Sources */,
+				37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */,
+				37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */,
+				37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */,
+				37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */,
+				37E6AD6D2B3B381700F02279 /* CandidateLabel.swift in Sources */,
+				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
+				37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */,
+				37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */,
+				37E6AD7F2B3B381700F02279 /* CandidateLayoutPreferencesView.swift in Sources */,
+				37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */,
+				37E6AD732B3B381700F02279 /* InputForm.swift in Sources */,
+				37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */,
+				37E6AD792B3B381700F02279 /* WindowPattern.swift in Sources */,
+				37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */,
+				37E6AD8C2B3B381700F02279 /* Speech.swift in Sources */,
+				37E6AD812B3B381700F02279 /* Constant.swift in Sources */,
+				37E6AD882B3B381700F02279 /* InputStage.swift in Sources */,
+				37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */,
+				37E6AD6B2B3B381700F02279 /* CommentLabel.swift in Sources */,
+				37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */,
+				37E6AD752B3B381700F02279 /* FontExtensions.swift in Sources */,
+				37E6AD772B3B381700F02279 /* ViewExtensions.swift in Sources */,
+				37E6AD6F2B3B381700F02279 /* Direction.swift in Sources */,
+				37E6AD712B3B381700F02279 /* KeyCode.swift in Sources */,
+				37E6AD7C2B3B381700F02279 /* EventHandler.swift in Sources */,
+				37E6AD832B3B381700F02279 /* AboutView.swift in Sources */,
+				37E6AD782B3B381700F02279 /* StringExtensions.swift in Sources */,
+				37E6AD802B3B381700F02279 /* CandidateFontPreferencesView.swift in Sources */,
+				37E6AD762B3B381700F02279 /* IMKTextInputExtensions.swift in Sources */,
+				37E6AD702B3B381700F02279 /* PunctuationKey.swift in Sources */,
+				37E6AD6E2B3B381700F02279 /* MotherBoard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABD52B385D390075089B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371EABDE2B385D390075089B /* InputMethodTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		371EABDF2B385D390075089B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371EABEA2B385D390075089B /* InputMethodUITestsLaunchTests.swift in Sources */,
+				371EABE82B385D390075089B /* InputMethodUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD7212B3719C10089D346 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				371B6ECE2B3B3108005BB31C /* MacMetroLineView.swift in Sources */,
+				371B6EC82B3B3108005BB31C /* CantoneseTextLabel.swift in Sources */,
+				371B6EB92B3B3108005BB31C /* IOSSurnamesView.swift in Sources */,
+				371B6EE52B3B3108005BB31C /* Speaker.swift in Sources */,
+				371B6E982B3B3108005BB31C /* JyutpingApp.swift in Sources */,
+				371B6ED02B3B3108005BB31C /* MacFatshanMetroView.swift in Sources */,
+				371B6EDC2B3B3108005BB31C /* MacSearchView.swift in Sources */,
+				371B6EBE2B3B3108005BB31C /* IOSMetroStationLabel.swift in Sources */,
+				371B6ECB2B3B3108005BB31C /* AboutView.swift in Sources */,
+				371B6EC62B3B3108005BB31C /* ChoHokYuetYamCitYiuLabel.swift in Sources */,
+				371B6EB32B3B3108005BB31C /* HomeView.swift in Sources */,
+				371B6EE42B3B3108005BB31C /* Speech.swift in Sources */,
+				371B6EA22B3B3108005BB31C /* NumbersView.swift in Sources */,
+				371B6EC72B3B3108005BB31C /* GwongWanLabel.swift in Sources */,
+				371B6EC42B3B3108005BB31C /* PronunciationLabel.swift in Sources */,
+				371B6EB02B3B3108005BB31C /* EnhancedLabel.swift in Sources */,
+				371B6EC12B3B3108005BB31C /* IOSMetroLineView.swift in Sources */,
+				371B6EB52B3B3108005BB31C /* Text2SpeechView.swift in Sources */,
+				371B6EC02B3B3108005BB31C /* IOSHongKongMTRView.swift in Sources */,
+				371B6EAE2B3B3108005BB31C /* ShareSheetView.swift in Sources */,
+				371B6EA92B3B3108005BB31C /* FontExtensions.swift in Sources */,
+				371B6ED82B3B3108005BB31C /* FanWanCuetYiuView.swift in Sources */,
+				371B6EE32B3B3108005BB31C /* MacResourcesView.swift in Sources */,
+				371B6EE22B3B3108005BB31C /* MacConfusionView.swift in Sources */,
+				371B6EB12B3B3108005BB31C /* MenuCopyButton.swift in Sources */,
+				371B6EA62B3B3108005BB31C /* Constant.swift in Sources */,
+				371B6EB72B3B3108005BB31C /* CantoneseView.swift in Sources */,
+				371B6EC92B3B3108005BB31C /* YingWaaFanWanLabel.swift in Sources */,
+				371B6E992B3B3108005BB31C /* MacToneTableView.swift in Sources */,
+				371B6EB22B3B3108005BB31C /* IntroductionsView.swift in Sources */,
+				371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */,
+				371B6E9C2B3B3108005BB31C /* SyllableChecker.swift in Sources */,
+				371B6ED12B3B3108005BB31C /* MacShamChunMetroView.swift in Sources */,
+				371B6EA42B3B3108005BB31C /* SolarTermsView.swift in Sources */,
+				371B6EDD2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift in Sources */,
+				371B6ED42B3B3108005BB31C /* MacCinZiManView.swift in Sources */,
+				371B6EB42B3B3108005BB31C /* FAQView.swift in Sources */,
+				371B6EAF2B3B3108005BB31C /* IOSContentView.swift in Sources */,
+				371B6EE62B3B3108005BB31C /* AppMaster.swift in Sources */,
+				371B6EDF2B3B3108005BB31C /* MacSurnamesView.swift in Sources */,
+				371B6EA12B3B3108005BB31C /* StemsBranchesView.swift in Sources */,
+				371B6EDE2B3B3108005BB31C /* MacContentViewMonterey.swift in Sources */,
+				371B6ECA2B3B3108005BB31C /* FanWanCuetYiuLabel.swift in Sources */,
+				371B6EA72B3B3108005BB31C /* Device.swift in Sources */,
+				371B6EBA2B3B3108005BB31C /* IOSExpressionsView.swift in Sources */,
+				371B6EDB2B3B3108005BB31C /* GwongWanView.swift in Sources */,
+				371B6E9A2B3B3108005BB31C /* FinalTable.swift in Sources */,
+				371B6EBD2B3B3108005BB31C /* IOSCantonMetroView.swift in Sources */,
+				371B6EBF2B3B3108005BB31C /* IOSCinZiManView.swift in Sources */,
+				371B6ED72B3B3108005BB31C /* SearchField.swift in Sources */,
+				371B6EBB2B3B3108005BB31C /* IOSShamChunMetroView.swift in Sources */,
+				371B6EE12B3B3108005BB31C /* MacExpressionsView.swift in Sources */,
+				371B6EAC2B3B3108005BB31C /* TextExtensions.swift in Sources */,
+				371B6ED22B3B3108005BB31C /* MacAboutView.swift in Sources */,
+				371B6E9B2B3B3108005BB31C /* InitialTable.swift in Sources */,
+				371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */,
+				371B6EE02B3B3108005BB31C /* MacInputMethodInstallationView.swift in Sources */,
+				371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */,
+				371B6EAD2B3B3108005BB31C /* SafariView.swift in Sources */,
+				371B6EBC2B3B3108005BB31C /* IOSConfusionView.swift in Sources */,
+				371B6ECD2B3B3108005BB31C /* MacCantonMetroView.swift in Sources */,
+				371B6EAA2B3B3108005BB31C /* ViewExtensions.swift in Sources */,
+				371B6EA02B3B3108005BB31C /* ChineseZodiacView.swift in Sources */,
+				371B6EA32B3B3108005BB31C /* TermView.swift in Sources */,
+				371B6EC52B3B3108005BB31C /* SearchView.swift in Sources */,
+				371B6ECF2B3B3108005BB31C /* MacHongKongMTRView.swift in Sources */,
+				371B6E9F2B3B3108005BB31C /* SyllableCell.swift in Sources */,
+				371B6ED32B3B3108005BB31C /* MacContentView.swift in Sources */,
+				371B6EAB2B3B3108005BB31C /* ImageExtensions.swift in Sources */,
+				371B6EB62B3B3108005BB31C /* PrivacyNoticeView.swift in Sources */,
+				371B6EA52B3B3108005BB31C /* Term.swift in Sources */,
+				371B6EC22B3B3108005BB31C /* UIDevice+modelName.swift in Sources */,
+				371B6ECC2B3B3108005BB31C /* MacStationLabel.swift in Sources */,
+				371B6E9D2B3B3108005BB31C /* Syllable2IPA.swift in Sources */,
+				371B6E9E2B3B3108005BB31C /* IOSToneTableView.swift in Sources */,
+				371B6EC32B3B3108005BB31C /* JyutpingView.swift in Sources */,
+				371B6ED92B3B3108005BB31C /* PronunciationView.swift in Sources */,
+				371B6EDA2B3B3108005BB31C /* YingWaaFanWanView.swift in Sources */,
+				371B6EA82B3B3108005BB31C /* ColorExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD7322B3719C30089D346 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EFD73C2B3719C30089D346 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37EFD7472B3719C30089D346 /* JyutpingUITestsLaunchTests.swift in Sources */,
+				37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		371EABBF2B3855820075089B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 371EABB82B3855810075089B /* Keyboard */;
+			targetProxy = 371EABBE2B3855820075089B /* PBXContainerItemProxy */;
+		};
+		371EABDB2B385D390075089B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 371EABC82B385D370075089B /* InputMethod */;
+			targetProxy = 371EABDA2B385D390075089B /* PBXContainerItemProxy */;
+		};
+		371EABE52B385D390075089B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 371EABC82B385D370075089B /* InputMethod */;
+			targetProxy = 371EABE42B385D390075089B /* PBXContainerItemProxy */;
+		};
+		37EFD7382B3719C30089D346 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37EFD7242B3719C10089D346 /* Jyutping */;
+			targetProxy = 37EFD7372B3719C30089D346 /* PBXContainerItemProxy */;
+		};
+		37EFD7422B3719C30089D346 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37EFD7242B3719C10089D346 /* Jyutping */;
+			targetProxy = 37EFD7412B3719C30089D346 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		371B6EEC2B3B321C005BB31C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				371B6EED2B3B321C005BB31C /* zh-Hans-CN */,
+				371B6EF02B3B321D005BB31C /* zh-Hant-MO */,
+				371B6EF22B3B321D005BB31C /* en */,
+				371B6EF42B3B321D005BB31C /* zh-Hant */,
+				371B6EF62B3B321D005BB31C /* zh-Hans */,
+				371B6EF82B3B321D005BB31C /* zh-Hant-CN */,
+				371B6EFA2B3B321D005BB31C /* zh-HK */,
+				371B6EFC2B3B321D005BB31C /* yue */,
+				371B6EFE2B3B321D005BB31C /* zh-Hant-TW */,
+				371B6F002B3B321D005BB31C /* zh-Hant-HK */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		371B6EEE2B3B321D005BB31C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				371B6EEF2B3B321D005BB31C /* zh-Hans-CN */,
+				371B6EF12B3B321D005BB31C /* zh-Hant-MO */,
+				371B6EF32B3B321D005BB31C /* en */,
+				371B6EF52B3B321D005BB31C /* zh-Hant */,
+				371B6EF72B3B321D005BB31C /* zh-Hans */,
+				371B6EF92B3B321D005BB31C /* zh-Hant-CN */,
+				371B6EFB2B3B321D005BB31C /* zh-HK */,
+				371B6EFD2B3B321D005BB31C /* yue */,
+				371B6EFF2B3B321D005BB31C /* zh-Hant-TW */,
+				371B6F012B3B321D005BB31C /* zh-Hant-HK */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		371B70092B3B353C005BB31C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				371B700A2B3B353C005BB31C /* zh-Hans-CN */,
+				371B700D2B3B353C005BB31C /* zh-Hant-MO */,
+				371B700F2B3B353C005BB31C /* en */,
+				371B70112B3B353C005BB31C /* zh-Hant */,
+				371B70132B3B353C005BB31C /* zh-Hans */,
+				371B70152B3B353C005BB31C /* zh-Hant-CN */,
+				371B70172B3B353C005BB31C /* zh-HK */,
+				371B70192B3B353C005BB31C /* yue */,
+				371B701B2B3B353C005BB31C /* zh-Hant-TW */,
+				371B701D2B3B353C005BB31C /* zh-Hant-HK */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		371B700B2B3B353C005BB31C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				371B700C2B3B353C005BB31C /* zh-Hans-CN */,
+				371B700E2B3B353C005BB31C /* zh-Hant-MO */,
+				371B70102B3B353C005BB31C /* en */,
+				371B70122B3B353C005BB31C /* zh-Hant */,
+				371B70142B3B353C005BB31C /* zh-Hans */,
+				371B70162B3B353C005BB31C /* zh-Hant-CN */,
+				371B70182B3B353C005BB31C /* zh-HK */,
+				371B701A2B3B353C005BB31C /* yue */,
+				371B701C2B3B353C005BB31C /* zh-Hant-TW */,
+				371B701E2B3B353C005BB31C /* zh-Hant-HK */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		37E6AD982B3B389E00F02279 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37E6AD992B3B389E00F02279 /* zh-Hans-CN */,
+				37E6AD9C2B3B389E00F02279 /* zh-Hant-MO */,
+				37E6AD9E2B3B389E00F02279 /* en */,
+				37E6ADA02B3B389F00F02279 /* zh-Hant */,
+				37E6ADA22B3B389F00F02279 /* zh-Hans */,
+				37E6ADA42B3B389F00F02279 /* zh-Hant-CN */,
+				37E6ADA62B3B389F00F02279 /* zh-HK */,
+				37E6ADA82B3B389F00F02279 /* yue */,
+				37E6ADAA2B3B389F00F02279 /* zh-Hant-TW */,
+				37E6ADAC2B3B389F00F02279 /* zh-Hant-HK */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		37E6AD9A2B3B389E00F02279 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37E6AD9B2B3B389E00F02279 /* zh-Hans-CN */,
+				37E6AD9D2B3B389E00F02279 /* zh-Hant-MO */,
+				37E6AD9F2B3B389F00F02279 /* en */,
+				37E6ADA12B3B389F00F02279 /* zh-Hant */,
+				37E6ADA32B3B389F00F02279 /* zh-Hans */,
+				37E6ADA52B3B389F00F02279 /* zh-Hant-CN */,
+				37E6ADA72B3B389F00F02279 /* zh-HK */,
+				37E6ADA92B3B389F00F02279 /* yue */,
+				37E6ADAB2B3B389F00F02279 /* zh-Hant-TW */,
+				37E6ADAD2B3B389F00F02279 /* zh-Hant-HK */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		371EABC22B3855820075089B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 106;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Keyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.32.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		371EABC32B3855820075089B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 106;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Keyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.32.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		371EABEB2B385D390075089B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37E6AD922B3B386800F02279 /* Debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = InputMethod/InputMethod.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 106;
+				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = InputMethod/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSBackgroundOnly = NO;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				INFOPLIST_KEY_NSPrincipalClass = "$(PRODUCT_MODULE_NAME).PrincipalApplication";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.32.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		371EABEC2B385D390075089B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37E6AD912B3B386800F02279 /* Release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = InputMethod/InputMethod.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 106;
+				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = InputMethod/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSBackgroundOnly = NO;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				INFOPLIST_KEY_NSPrincipalClass = "$(PRODUCT_MODULE_NAME).PrincipalApplication";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.32.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		371EABED2B385D390075089B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.InputMethodTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InputMethod.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/InputMethod";
+			};
+			name = Debug;
+		};
+		371EABEE2B385D390075089B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.InputMethodTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InputMethod.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/InputMethod";
+			};
+			name = Release;
+		};
+		371EABEF2B385D390075089B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.InputMethodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = InputMethod;
+			};
+			name = Debug;
+		};
+		371EABF02B385D390075089B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.InputMethodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = InputMethod;
+			};
+			name = Release;
+		};
+		37EFD7482B3719C30089D346 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		37EFD7492B3719C30089D346 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		37EFD74B2B3719C30089D346 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 106;
+				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Jyutping/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.32.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		37EFD74C2B3719C30089D346 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 106;
+				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Jyutping/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "CC0 1.0 Public Domain";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.32.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		37EFD74E2B3719C30089D346 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.JyutpingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jyutping.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Jyutping";
+			};
+			name = Debug;
+		};
+		37EFD74F2B3719C30089D346 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.JyutpingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jyutping.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Jyutping";
+			};
+			name = Release;
+		};
+		37EFD7512B3719C30089D346 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.JyutpingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Jyutping;
+			};
+			name = Debug;
+		};
+		37EFD7522B3719C30089D346 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.JyutpingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Jyutping;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		371EABC42B3855820075089B /* Build configuration list for PBXNativeTarget "Keyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				371EABC22B3855820075089B /* Debug */,
+				371EABC32B3855820075089B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		371EABF12B385D390075089B /* Build configuration list for PBXNativeTarget "InputMethod" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				371EABEB2B385D390075089B /* Debug */,
+				371EABEC2B385D390075089B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		371EABF22B385D390075089B /* Build configuration list for PBXNativeTarget "InputMethodTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				371EABED2B385D390075089B /* Debug */,
+				371EABEE2B385D390075089B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		371EABF32B385D390075089B /* Build configuration list for PBXNativeTarget "InputMethodUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				371EABEF2B385D390075089B /* Debug */,
+				371EABF02B385D390075089B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EFD7202B3719C10089D346 /* Build configuration list for PBXProject "Jyutping" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EFD7482B3719C30089D346 /* Debug */,
+				37EFD7492B3719C30089D346 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EFD74A2B3719C30089D346 /* Build configuration list for PBXNativeTarget "Jyutping" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EFD74B2B3719C30089D346 /* Debug */,
+				37EFD74C2B3719C30089D346 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EFD74D2B3719C30089D346 /* Build configuration list for PBXNativeTarget "JyutpingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EFD74E2B3719C30089D346 /* Debug */,
+				37EFD74F2B3719C30089D346 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37EFD7502B3719C30089D346 /* Build configuration list for PBXNativeTarget "JyutpingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37EFD7512B3719C30089D346 /* Debug */,
+				37EFD7522B3719C30089D346 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		371B6E322B3B2F32005BB31C /* CommonExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonExtensions;
+		};
+		371B6E342B3B2F55005BB31C /* CommonExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonExtensions;
+		};
+		371B6E372B3B2F86005BB31C /* AppDataSource */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppDataSource;
+		};
+		371B6E3A2B3B2FF3005BB31C /* CoreIME */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreIME;
+		};
+		371B6E3C2B3B3007005BB31C /* CoreIME */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoreIME;
+		};
+		371EABF62B38802A0075089B /* CommonExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CommonExtensions;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 37EFD71D2B3719C10089D346 /* Project object */;
+}

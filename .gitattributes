@@ -20,7 +20,7 @@
 *.otc binary
 
 # Sparkle
-/Jyutping/Sparkle.framework/** binary
+/Sparkle.framework/** binary
 
 # Swift Package Resources
 /Modules/AppDataSource/Sources/AppDataSource/Resources/** binary

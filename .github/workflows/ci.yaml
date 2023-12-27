@@ -43,25 +43,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build InputMethod Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme InputMethod -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme InputMethod -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_mac_app:
     name: Build macOS App
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
       - name: Build macOS App Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_ios_app:
     name: Build iOS App
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
       - name: Build iOS App Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_keyboard:
     name: Build Keyboard
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
       - name: Build Keyboard Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping/Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty

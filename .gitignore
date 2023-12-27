@@ -70,5 +70,7 @@ Package.resolved
 
 ### Mac IME Packaging ###
 /packaging/app/
-.pkg
-.zip
+/packaging/**/*.pkg
+/packaging/**/*.zip
+/packaging/**/*.gz
+/packaging/**/*.xz
