@@ -21,6 +21,14 @@ jobs:
       - name: CommonExtensions SwiftTest
         run: swift test
         working-directory: ./Modules/CommonExtensions
+  build_aboutkit:
+    name: Build AboutKit
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v3
+      - name: Swift Build AboutKit
+        run: swift build
+        working-directory: ./Modules/AboutKit
   build_app_data_source:
     name: Build AppDataSource
     runs-on: macos-13
