@@ -28,13 +28,18 @@ struct AboutView: View {
                                 VStack {
                                         LinkLabel(icon: "paperplane", title: "Telegram Group", link: About.TelegramAddress)
                                         LinkLabel(icon: "person.2", title: "QQ Group", link: About.QQAddress, message: About.QQGroupID)
-                                        // TODO: Add Email Feedback
                                 }
                                 .block()
 
                                 VStack {
                                         LinkLabel(icon: "at", title: "Twitter", link: About.TwitterAddress)
                                         LinkLabel(icon: "circle.square", title: "Instagram", link: About.InstagramAddress)
+                                }
+                                .block()
+
+                                VStack {
+                                        LinkLabel(icon: "smallcircle.filled.circle", title: "GitHub Issues", link: About.GitHubIssuesAddress)
+                                        LinkLabel(icon: "envelope", title: "Email Feedback", link: mailtoScheme, message: About.EmailAddress)
                                 }
                                 .block()
                         }
@@ -51,6 +56,23 @@ struct AboutView: View {
                 return versionString + " (" + buildString + ")"
         }()
 
+        private let mailtoScheme: String = {
+                let versionString: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
+                let buildString: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
+                let appVersion: String = versionString + " (" + buildString + ")"
+                let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+                let system: String = "macOS \(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+                let messageBody: String = """
+
+
+                Version: \(appVersion)
+                System: \(system)
+                """
+                let address: String = About.EmailAddress
+                let subject: String = "Mac Jyutping Input Method Feedback"
+                let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                return scheme
+        }()
 }
 
 private struct LinkLabel: View {

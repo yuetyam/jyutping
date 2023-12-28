@@ -35,12 +35,32 @@ struct MacAboutView: View {
                                         LinkLabel(icon: "circle.square", title: "Instagram", link: About.InstagramAddress)
                                 }
                                 .block()
+                                VStack {
+                                        LinkLabel(icon: "smallcircle.filled.circle", title: "GitHub Issues", link: About.GitHubIssuesAddress)
+                                        LinkLabel(icon: "envelope", title: "Email Feedback", link: mailtoScheme, message: About.EmailAddress)
+                                }
+                                .block()
                         }
                         .textSelection(.enabled)
                         .padding()
                 }
                 .navigationTitle("About")
         }
+
+        private let mailtoScheme: String = {
+                let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+                let system: String = "macOS \(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+                let messageBody: String = """
+
+
+                Version: \(AppMaster.version)
+                System: \(system)
+                """
+                let address: String = About.EmailAddress
+                let subject: String = "Mac Jyutping App Feedback"
+                let scheme: String = "mailto:\(address)?subject=\(subject)&body=\(messageBody)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                return scheme
+        }()
 }
 
 
