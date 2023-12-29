@@ -6,9 +6,10 @@ login_user=$(/usr/bin/stat -f%Su /dev/console)
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
 /usr/bin/sudo -u "${login_user}" osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to if it is running then quit'
 
-# Delete invalid files
+# Delete old invalid files
 rm -rf /Users/"${login_user}"/Library/Input\ Methods/Jyutping.app
 rm -rf /private/var/root/Library/Application\ Scripts/org.jyutping.inputmethod.Jyutping
+rm -rf /private/var/root/Library/Caches/org.jyutping.inputmethod.Jyutping
 rm -rf /private/var/root/Library/Containers/org.jyutping.inputmethod.Jyutping
 
 exit 0
