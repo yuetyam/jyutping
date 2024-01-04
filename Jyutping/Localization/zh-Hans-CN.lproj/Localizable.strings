@@ -57,6 +57,14 @@
 "tts.notice.3" = "爲提高發音質素，請到 **設置** → **輔助功能** → **旁白** → **語音** 度，添加 **繁體中文(香港)** 語音。";
 "faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
 
+"Change Display Language" = "更改介面顯示語言";
+"title.change_display_language" = "介面顯示語言";
+"Keyboard Display Language" = "鍵盤介面顯示語言";
+"Keyboard Display Language Description" = "鍵盤介面顯示語言跟隨系統語言，無法另外設定。";
+"Main App Display Language" = "主應用程式介面顯示語言";
+"Main App Display Language Description 1" = "請首先確保本設備啓用咗多個語言。";
+"Main App Display Language Description 2" = "跳轉至設定App，然後爲粵拼App選擇偏好語言。";
+
 "FAQ" = "常問問題";
 "Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";

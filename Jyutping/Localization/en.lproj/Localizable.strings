@@ -58,6 +58,14 @@
 "tts.notice.3" = "To improve TTS quality, please go to **Settings** → **Accessibility** → **VioceOver** → **Speech**, then add **Chinese (Hong Kong)** language voice.";
 "faq.heading.tts" = "Why is my TTS not working?";
 
+"Change Display Language" = "Change Display Language";
+"title.change_display_language" = "Display Language";
+"Keyboard Display Language" = "Keyboard Display Language";
+"Keyboard Display Language Description" = "The keyboard display language follows the system language, so it cannot be customized.";
+"Main App Display Language" = "Main App Display Language";
+"Main App Display Language Description 1" = "Make sure you have multiple languages enabled on your device.";
+"Main App Display Language Description 2" = "Jump to Settings app, and select the language you preferred for Jyutping app.";
+
 "FAQ" = "FAQ";
 "Can I use with external keyboards?" = "Can I use with external keyboards?";
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";

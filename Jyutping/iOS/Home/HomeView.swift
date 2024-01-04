@@ -118,6 +118,9 @@ struct HomeView: View {
                                         NavigationLink(destination: Text2SpeechView()) {
                                                 Label("Text to Speech", systemImage: "speaker.wave.2")
                                         }
+                                        NavigationLink(destination: ChangeDisplayLanguageView()) {
+                                                Label("Change Display Language", systemImage: "globe.asia.australia")
+                                        }
                                         NavigationLink(destination: FAQView()) {
                                                 Label("FAQ", systemImage: "questionmark.circle")
                                         }
