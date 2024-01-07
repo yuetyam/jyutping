@@ -7,6 +7,7 @@ struct Constant {
         static let Menlo: String = "Menlo"
         static let PlangothicP1: String = "Plangothic P1"
         static let PlangothicP2: String = "Plangothic P2"
+        static let MiSansL3: String = "MiSans L3"
         static let IMingCP: String = "I.MingCP"
         static let IMing: String = "I.Ming"
         static let HanaMinB: String = "HanaMinB"

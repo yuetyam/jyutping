@@ -39,7 +39,7 @@ private extension Font {
                                 break
                         }
                 }
-                let fallbacks: [String] = [Constant.PingFangHK, Constant.PlangothicP1, Constant.PlangothicP2]
+                let fallbacks: [String] = [Constant.PingFangHK, Constant.PlangothicP1, Constant.PlangothicP2, Constant.MiSansL3]
                 names.append(contentsOf: fallbacks)
                 let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
                 for name in IMingFonts {
