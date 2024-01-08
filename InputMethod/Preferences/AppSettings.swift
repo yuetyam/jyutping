@@ -112,8 +112,12 @@ struct AppSettings {
                 displayCandidatePageSize = newPageSize
         }
         private static func pageSizeValidity(of value: Int) -> Bool {
-                return value > 4 && value < 11
+                return candidatePageSizeRange.contains(value)
         }
+        static let candidatePageSizeRange: Range<Int> = 1..<11
+
+
+        // MARK: - Line Spacing
 
         private(set) static var candidateLineSpacing: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
@@ -127,8 +131,9 @@ struct AppSettings {
                 candidateLineSpacing = newLineSpacing
         }
         private static func lineSpacingValidity(of value: Int) -> Bool {
-                return value > 1 && value < 13
+                return candidateLineSpacingRange.contains(value)
         }
+        static let candidateLineSpacingRange: Range<Int> = 0..<13
 
 
         // MARK: - Tones Display Style

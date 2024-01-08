@@ -7,12 +7,15 @@ struct CandidateLayoutPreferencesView: View {
         @AppStorage(SettingsKey.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
         @AppStorage(SettingsKey.ToneDisplayColor) private var toneDisplayColor: Int = AppSettings.toneDisplayColor.rawValue
 
+        private let pageSizeRange: Range<Int> = AppSettings.candidatePageSizeRange
+        private let lineSpacingRange: Range<Int> = AppSettings.candidateLineSpacingRange
+
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 HStack {
                                         Picker("Candidate Count Per Page", selection: $pageSize) {
-                                                ForEach(5..<11, id: \.self) {
+                                                ForEach(pageSizeRange, id: \.self) {
                                                         Text(verbatim: "\($0)").tag($0)
                                                 }
                                         }
@@ -25,7 +28,7 @@ struct CandidateLayoutPreferencesView: View {
                                 .block()
                                 HStack {
                                         Picker("Candidate Line Spacing", selection: $lineSpacing) {
-                                                ForEach(2..<13, id: \.self) {
+                                                ForEach(lineSpacingRange, id: \.self) {
                                                         Text(verbatim: "\($0)").tag($0)
                                                 }
                                         }
