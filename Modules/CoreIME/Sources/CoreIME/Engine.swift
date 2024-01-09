@@ -193,18 +193,20 @@ extension Engine {
                 let primary: [CoreCandidate] = (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
                 guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: 4) }
                 guard firstInputCount != textCount else { return primary }
-                if segmentation.maxLength != textCount {
+                let prefixes: [CoreCandidate] = {
+                        guard segmentation.maxLength != textCount else { return [] }
                         let anchorsArray: [String] = segmentation.map({ scheme -> String in
                                 let last = text.dropFirst(scheme.length).first
                                 let schemeAnchors = scheme.map(\.text.first)
                                 let anchors = (schemeAnchors + [last]).compactMap({ $0 })
                                 return String(anchors)
                         })
-                        let prefixes: [CoreCandidate] = anchorsArray.uniqued().map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
+                        let prefixCandidates: [CoreCandidate] = anchorsArray.map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
                                 .filter({ $0.romanization.removedSpacesTones().hasPrefix(text) })
                                 .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: text) })
-                        guard prefixes.isEmpty else { return prefixes + primary }
-                }
+                        return prefixCandidates
+                }()
+                guard prefixes.isEmpty else { return prefixes + primary }
                 let headingTexts = primary.map(\.input).uniqued()
                 let concatenated = headingTexts.map { headingText -> Array<Candidate>.SubSequence in
                         let headingInputCount = headingText.count
