@@ -63,7 +63,7 @@ struct EditingPanel: View {
                                                         .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
                                                         Image(systemName: clipboardImageName)
-                                                        Text("Clear Clipboard").font(.caption2)
+                                                        Text("Clear System Clipboard").font(.caption2)
                                                 }
                                         }
                                         .frame(maxWidth: .infinity)

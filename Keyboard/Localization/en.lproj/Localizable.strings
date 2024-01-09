@@ -43,7 +43,7 @@
 
 // MARK: - EditingPanel
 
-"Clear Clipboard" = "Clear Clipboard";
+"Clear System Clipboard" = "Clear System Clipboard";
 "Paste" = "Paste";
 "Back" = "Back";
 "Clear" = "Clear";

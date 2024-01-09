@@ -43,7 +43,7 @@
 
 // MARK: - EditingPanel
 
-"Clear Clipboard" = "清空剪帖板";
+"Clear System Clipboard" = "清空系統剪帖板";
 "Paste" = "帖上";
 "Back" = "返回";
 "Clear" = "清空前文";
