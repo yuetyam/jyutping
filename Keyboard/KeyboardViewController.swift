@@ -88,7 +88,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         ///
         /// So we use `setMarkedText() & unmarkText()`
         ///
-        /// In iOS 17 betas, we may still need to use `insertText()`
+        /// In iOS 17, we may still need to use `insertText()`
         private func input(_ text: String) {
                 canMarkText = false
                 defer {
@@ -96,15 +96,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 canMarkText = true
                         }
                 }
-                let previousLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
+                let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                let previousLength: Int = previousContext.count
                 let location: Int = (text as NSString).length
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
                 guard !(text.isEmpty) else { return }
-                let currentLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
-                let isFailed: Bool = currentLength == previousLength
-                guard isFailed else { return }
+                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                let currentLength: Int = currentContext.count
+                guard currentLength == previousLength else { return }
+                guard currentContext == previousContext else { return }
                 textDocumentProxy.insertText(text)
         }
         private func inputBufferText() {
