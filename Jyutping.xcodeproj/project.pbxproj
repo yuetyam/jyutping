@@ -230,6 +230,7 @@
 		371EABF72B38802A0075089B /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371EABF62B38802A0075089B /* CommonExtensions */; };
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
+		3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
 		37E6AD6B2B3B381700F02279 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD442B3B381600F02279 /* CommentLabel.swift */; };
 		37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD452B3B381600F02279 /* CandidateBoard.swift */; };
@@ -604,6 +605,7 @@
 		371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		371EABF42B3880150075089B /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = Modules/CommonExtensions; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
+		3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablingKeyboardView.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
 		37E6AD442B3B381600F02279 /* CommentLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		37E6AD452B3B381600F02279 /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
@@ -782,16 +784,11 @@
 			isa = PBXGroup;
 			children = (
 				371B6E5C2B3B3107005BB31C /* Home */,
-				371B6E572B3B3107005BB31C /* SafariView.swift */,
-				371B6E6F2B3B3107005BB31C /* JyutpingView.swift */,
-				371B6E582B3B3107005BB31C /* ShareSheetView.swift */,
-				371B6E592B3B3107005BB31C /* IOSContentView.swift */,
-				371B6E5A2B3B3107005BB31C /* EnhancedLabel.swift */,
-				371B6E5B2B3B3107005BB31C /* MenuCopyButton.swift */,
+				3760AA432B4FD0730027EC11 /* Jyutping */,
 				371B6E622B3B3107005BB31C /* Cantonese */,
-				371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */,
+				3760AA422B4FD0570027EC11 /* About */,
 				371B6E702B3B3107005BB31C /* Search */,
-				371B6E782B3B3107005BB31C /* AboutView.swift */,
+				3760AA442B4FD0B40027EC11 /* Components */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -800,6 +797,7 @@
 			isa = PBXGroup;
 			children = (
 				371B6E5E2B3B3107005BB31C /* HomeView.swift */,
+				3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */,
 				371B6E5D2B3B3107005BB31C /* IntroductionsView.swift */,
 				371B6E602B3B3107005BB31C /* Text2SpeechView.swift */,
 				37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */,
@@ -1185,6 +1183,35 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3760AA422B4FD0570027EC11 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E782B3B3107005BB31C /* AboutView.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		3760AA432B4FD0730027EC11 /* Jyutping */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E6F2B3B3107005BB31C /* JyutpingView.swift */,
+			);
+			path = Jyutping;
+			sourceTree = "<group>";
+		};
+		3760AA442B4FD0B40027EC11 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E572B3B3107005BB31C /* SafariView.swift */,
+				371B6E582B3B3107005BB31C /* ShareSheetView.swift */,
+				371B6E592B3B3107005BB31C /* IOSContentView.swift */,
+				371B6E5A2B3B3107005BB31C /* EnhancedLabel.swift */,
+				371B6E5B2B3B3107005BB31C /* MenuCopyButton.swift */,
+				371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		37E6AD432B3B381600F02279 /* CandidateViews */ = {
@@ -1814,6 +1841,7 @@
 				371B6ED02B3B3108005BB31C /* MacFatshanMetroView.swift in Sources */,
 				371B6EDC2B3B3108005BB31C /* MacSearchView.swift in Sources */,
 				371B6EBE2B3B3108005BB31C /* IOSMetroStationLabel.swift in Sources */,
+				3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */,
 				371B6ECB2B3B3108005BB31C /* AboutView.swift in Sources */,
 				371B6EC62B3B3108005BB31C /* ChoHokYuetYamCitYiuLabel.swift in Sources */,
 				371B6EB32B3B3108005BB31C /* HomeView.swift in Sources */,
