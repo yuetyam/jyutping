@@ -126,16 +126,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 textDocumentProxy.insertText(String.zeroWidthSpace)
                         }
                 }
-                let previousLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
-                let location: Int = (bufferText as NSString).length
+                let text: String = bufferText
+                let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                let previousLength: Int = previousContext.count
+                let location: Int = (text as NSString).length
                 let range: NSRange = NSRange(location: location, length: 0)
-                textDocumentProxy.setMarkedText(bufferText, selectedRange: range)
+                textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
-                guard !(bufferText.isEmpty) else { return }
-                let currentLength: Int = textDocumentProxy.documentContextBeforeInput?.count ?? 0
-                let isFailed: Bool = currentLength == previousLength
-                guard isFailed else { return }
-                textDocumentProxy.insertText(bufferText)
+                guard !(text.isEmpty) else { return }
+                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                let currentLength: Int = currentContext.count
+                guard currentLength == previousLength else { return }
+                guard currentContext == previousContext else { return }
+                textDocumentProxy.insertText(text)
         }
 
 
