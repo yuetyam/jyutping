@@ -39,8 +39,14 @@ private extension Font {
                                 break
                         }
                 }
-                let fallbacks: [String] = [Constant.PingFangHK, Constant.PlangothicP1, Constant.PlangothicP2, Constant.MiSansL3]
-                names.append(contentsOf: fallbacks)
+                names.append(Constant.PingFangHK)
+                for name in Constant.supplementaryCJKVQueue {
+                        if found(font: name) {
+                                names.append(name)
+                                break
+                        }
+                }
+                names.append(contentsOf: Constant.fallbackCJKVList)
                 let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
                 for name in IMingFonts {
                         if found(font: name) {

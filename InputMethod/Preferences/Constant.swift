@@ -5,13 +5,12 @@ struct Constant {
         static let HelveticaNeue: String = "Helvetica Neue"
         static let PingFangHK: String = "PingFang HK"
         static let Menlo: String = "Menlo"
-        static let PlangothicP1: String = "Plangothic P1"
-        static let PlangothicP2: String = "Plangothic P2"
-        static let MiSansL3: String = "MiSans L3"
         static let IMingCP: String = "I.MingCP"
         static let IMing: String = "I.Ming"
         static let HanaMinB: String = "HanaMinB"
         static let primaryCJKVQueue: [String] = ["Advocate Ancient Sans", "ChiuKong Gothic CL", "Source Han Sans K", "Noto Sans CJK KR", "Sarasa Gothic CL"]
+        static let supplementaryCJKVQueue: [String] = ["Chiron Hei HK", "Source Han Sans HC", "Noto Sans CJK HK", "Noto Sans HK"]
+        static let fallbackCJKVList: [String] = ["Plangothic P1", "Plangothic P2", "MiSans L3"]
 
         static let preferencesWindowIdentifier: String = "JyutpingInputMethodPreferencesWindowIdentifier"
 }
