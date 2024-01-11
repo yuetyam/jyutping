@@ -26,6 +26,15 @@
 "Haptic Feedback requires Full Access" = "振動回應 Haptic Feedback 需要「全權取用」權限";
 "Go to **Settings**" = "前往 **設定**";
 
+"Problems with enabling keyboard?" = "啓用鍵盤過程中遇到問題？";
+"title.enabling_keyboard" = "啓用鍵盤";
+"Jyutping Keyboard not showing up in Settings app?" = "系統設定App冇列出粵拼鍵盤？";
+"You may need to close the Settings app, then try again." = "可能需要先關閉一次系統設定App，之後再嘗試一次。";
+"How to close an app?" = "如何關閉App？";
+"Jyutping Keyboard not showing up in some other apps?" = "某啲App輸入時冇得揀粵拼鍵盤？";
+"This is a system bug, you may need to restart this device." = "係系統嘅問題，可能需要重啓一下設備。";
+"How to restart device?" = "如何重啓設備？";
+
 "Tones Input" = "聲調輸入";
 "tones.input.description" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
 "tones.input.examples" = "例: sinq = sin3(線), sinqq = sin6(羨)";

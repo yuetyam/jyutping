@@ -27,6 +27,15 @@
 "Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
 "Go to **Settings**" = "Go to **Settings**";
 
+"Problems with enabling keyboard?" = "Problems with enabling keyboard?";
+"title.enabling_keyboard" = "Enable Keyboard";
+"Jyutping Keyboard not showing up in Settings app?" = "Jyutping Keyboard not showing up in Settings app?";
+"You may need to close the Settings app, then try again." = "You may need to close the Settings app, then try again.";
+"How to close an app?" = "How to close an app?";
+"Jyutping Keyboard not showing up in some other apps?" = "Jyutping Keyboard not showing up in some other apps?";
+"This is a system bug, you may need to restart this device." = "This is a system bug, you may need to restart this device.";
+"How to restart device?" = "How to restart device?";
+
 "Tones Input" = "Tones Input";
 "tones.input.description" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
 "tones.input.examples" = "Examples: sinq = sin3(線), sinqq = sin6(羨)";

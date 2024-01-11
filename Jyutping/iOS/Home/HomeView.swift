@@ -66,9 +66,11 @@ struct HomeView: View {
                                                 .accessibilityLabel("accessibility.how_to_enable_this_keyboard")
                                         }
                                 } footer: {
-                                        Text("Haptic Feedback requires Full Access")
-                                                .textCase(nil)
-                                                .opacity(shouldDisplayHapticFeedbackTip ? 1 : 0)
+                                        if shouldDisplayHapticFeedbackTip {
+                                                Text("Haptic Feedback requires Full Access").textCase(nil)
+                                        } else {
+                                                EmptyView()
+                                        }
                                 }
                                 if !isKeyboardEnabled || isGuideViewExpanded {
                                         Section {
@@ -79,6 +81,11 @@ struct HomeView: View {
                                                                 Spacer()
                                                         }
                                                 }
+                                        }
+                                }
+                                Section {
+                                        NavigationLink(destination: EnablingKeyboardView()) {
+                                                Label("Problems with enabling keyboard?", systemImage: "info.circle").labelStyle(.titleOnly)
                                         }
                                 }
 
