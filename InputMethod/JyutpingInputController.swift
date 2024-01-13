@@ -216,10 +216,20 @@ final class JyutpingInputController: IMKInputController {
         }
 
         private func mark(text: String) {
-                currentClient?.mark(text)
+                let markAttributes = mark(forStyle: kTSMHiliteSelectedConvertedText, at: NSRange(location: NSNotFound, length: 0))
+                let fallbackAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.thick.rawValue]
+                let attributes = (markAttributes as? [NSAttributedString.Key: Any]) ?? fallbackAttributes
+                let attributedText = NSAttributedString(string: text, attributes: attributes)
+                let selectionRange = NSRange(location: text.utf16.count, length: 0)
+                currentClient?.setMarkedText(attributedText, selectionRange: selectionRange, replacementRange: NSRange(location: NSNotFound, length: 0))
         }
         private func clearMarkedText() {
-                currentClient?.clearMarkedText()
+                let markAttributes = mark(forStyle: kTSMHiliteSelectedConvertedText, at: NSRange(location: NSNotFound, length: 0))
+                let fallbackAttributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.thick.rawValue]
+                let attributes = (markAttributes as? [NSAttributedString.Key: Any]) ?? fallbackAttributes
+                let attributedText = NSAttributedString(string: String(), attributes: attributes)
+                let selectionRange = NSRange(location: 0, length: 0)
+                currentClient?.setMarkedText(attributedText, selectionRange: selectionRange, replacementRange: NSRange(location: NSNotFound, length: 0))
         }
         func markOptionsViewHintText() {
                 guard !(inputStage.isBuffering) else { return }
