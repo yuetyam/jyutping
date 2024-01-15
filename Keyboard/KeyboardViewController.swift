@@ -774,11 +774,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         func triggerSelectionHapticFeedback() {
                 selectionHapticFeedback?.selectionChanged()
-                prepareSelectionHapticFeedback()
+                selectionHapticFeedback?.prepare()
         }
         func triggerHapticFeedback() {
                 hapticFeedback?.impactOccurred()
-                prepareHapticFeedback()
+                hapticFeedback?.prepare()
         }
         private func releaseHapticFeedbacks() {
                 selectionHapticFeedback = nil

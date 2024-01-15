@@ -141,7 +141,7 @@ private struct IOSToneGridView: View {
                                 .padding(4)
                                 .background(.background, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 .fixedSize()
-                                IOSToneGridCell(character: "蝕", syllable: "sit6", tone: "˨")
+                                IOSToneGridCell(character: "舌", syllable: "sit6", tone: "˨")
                         }
                 }
         }

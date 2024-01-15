@@ -83,7 +83,7 @@ private struct MacToneGridView: View {
                                 MacToneGridCell(character: "時", syllable: "si4", tone: "˩")
                                 MacToneGridCell(character: "市", syllable: "si5", tone: "˩˧")
                                 MacToneGridCell(character: "事", syllable: "si6", tone: "˨")
-                                MacToneGridCell(character: "蝕", syllable: "sit6", tone: "˨")
+                                MacToneGridCell(character: "舌", syllable: "sit6", tone: "˨")
                         }
                 }
                 .font(.master)
