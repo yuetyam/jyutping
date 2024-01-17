@@ -64,10 +64,13 @@ final class JyutpingInputController: IMKInputController {
                 }
                 let idealValue: Int = Int(CGShieldingWindowLevel())
                 let maxValue: Int = idealValue + 2
+                let minValue: Int = NSWindow.Level.floating.rawValue
                 let levelValue: Int = {
                         guard let clientLevel = currentClient?.windowLevel() else { return idealValue }
-                        let increasedValue: Int = Int(clientLevel) + 1
-                        return min(increasedValue, maxValue)
+                        let preferredValue: Int = Int(clientLevel) + 1
+                        guard preferredValue > minValue else { return idealValue }
+                        guard preferredValue < maxValue else { return maxValue }
+                        return preferredValue
                 }()
                 window?.level = NSWindow.Level(levelValue)
         }
@@ -138,12 +141,12 @@ final class JyutpingInputController: IMKInputController {
                 }
                 currentClient = sender as? IMKTextInput
                 currentOrigin = currentClient?.position
-                DispatchQueue.main.async { [weak self] in
-                        self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
-                }
                 prepareMasterWindow()
                 if appContext.inputForm.isOptions {
                         appContext.updateInputForm()
+                }
+                DispatchQueue.main.async { [weak self] in
+                        self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
                 }
         }
         override func deactivateServer(_ sender: Any!) {
