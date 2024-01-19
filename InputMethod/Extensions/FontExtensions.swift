@@ -30,28 +30,24 @@ extension Font {
                         }
                 }
                 names.append(Constant.HelveticaNeue)
+                var shouldConsiderSupplementaryFonts: Bool = true
                 for name in Constant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
+                                shouldConsiderSupplementaryFonts = false
                                 break
                         }
                 }
                 names.append(Constant.PingFangHK)
-                for name in Constant.supplementaryCJKVQueue {
-                        if found(font: name) {
-                                names.append(name)
-                                break
+                if shouldConsiderSupplementaryFonts {
+                        for name in Constant.supplementaryCJKVQueue {
+                                if found(font: name) {
+                                        names.append(name)
+                                        break
+                                }
                         }
                 }
                 names.append(contentsOf: Constant.fallbackCJKVList)
-                let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
-                for name in IMingFonts {
-                        if found(font: name) {
-                                names.append(name)
-                                break
-                        }
-                }
-                names.append(Constant.HanaMinB)
                 return names
         }()
 }
@@ -93,28 +89,24 @@ extension Font {
                         }
                 }
                 names.append(Constant.HelveticaNeue)
+                var shouldConsiderSupplementaryFonts: Bool = true
                 for name in Constant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
+                                shouldConsiderSupplementaryFonts = false
                                 break
                         }
                 }
                 names.append(Constant.PingFangHK)
-                for name in Constant.supplementaryCJKVQueue {
-                        if found(font: name) {
-                                names.append(name)
-                                break
+                if shouldConsiderSupplementaryFonts {
+                        for name in Constant.supplementaryCJKVQueue {
+                                if found(font: name) {
+                                        names.append(name)
+                                        break
+                                }
                         }
                 }
                 names.append(contentsOf: Constant.fallbackCJKVList)
-                let IMingFonts: [String] = [Constant.IMingCP, Constant.IMing]
-                for name in IMingFonts {
-                        if found(font: name) {
-                                names.append(name)
-                                break
-                        }
-                }
-                names.append(Constant.HanaMinB)
                 return names
         }()
 }
