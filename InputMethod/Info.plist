@@ -48,6 +48,8 @@
 	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
 	<key>InputMethodServerDelegateClass</key>
 	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
+	<key>NSPrincipalClass</key>
+	<string>$(PRODUCT_MODULE_NAME).PrincipalApplication</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>SUEnableInstallerLauncherService</key>
