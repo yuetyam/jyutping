@@ -5,7 +5,7 @@ extension DispatchQueue {
         static let preferences: DispatchQueue = DispatchQueue(label: "org.jyutping.inputmethod.Jyutping.Preferences")
 }
 
-final class SettingsViewAppDelegate: NSObject, NSApplicationDelegate {
+final class PreferencesViewAppDelegate: NSObject, NSApplicationDelegate {
         func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
                 return true
         }
@@ -19,7 +19,7 @@ final class SettingsViewAppDelegate: NSObject, NSApplicationDelegate {
 
 struct PreferencesView: View {
 
-        @NSApplicationDelegateAdaptor(SettingsViewAppDelegate.self) var appDelegate
+        @NSApplicationDelegateAdaptor(PreferencesViewAppDelegate.self) var appDelegate
 
         // macOS 13.0+
         @State private var selection: PreferencesRow = Options.selectedPreferencesRow
