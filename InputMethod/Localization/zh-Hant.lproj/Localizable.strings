@@ -59,13 +59,11 @@
 "Open Preferences Window (This Window)" = "開啓設定窗口（即係當前邇個）";
 "Enter/Exit Options View" = "進入／退出快捷設定䈎面";
 "Directly toggle specific option" = "直接選擇某個快捷設定選項";
-"Switch to Cantonese Mode" = "切換至粵語模式";
-"Switch to English Mode" = "切換至英語模式";
-"Remove highlighted Candidate from User Lexicon" = "從用戶詞庫刪除當前高亮(highlighted)候選詞";
-"Clear current Input Buffer" = "清除當前已輸入音節（即 Input Buffer）";
+"Remove highlighted Candidate from User Lexicon" = "從個人詞庫刪除當前高亮候選詞";
+"Clear current pre-edit text" = "清除當前預輸入音節";
 
-"Highlight previous Candidate" = "高亮(Highlight)上一個候選詞";
-"Highlight next Candidate" = "高亮(Highlight)下一個候選詞";
+"Highlight previous Candidate" = "高亮上一個候選詞";
+"Highlight next Candidate" = "高亮下一個候選詞";
 "Backward to previous Candidate page" = "退返到上一䈎候選詞";
 "Forward to next Candidate page" = "翻去到下一䈎候選詞";
 "Jump to the first Candidate page" = "跳到第一䈎候選詞";

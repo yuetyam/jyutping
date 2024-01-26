@@ -108,7 +108,7 @@ struct HotkeysView: View {
                                 }
                                 .block()
                                 HStack(spacing: 4) {
-                                        LabelText("Clear current Input Buffer")
+                                        LabelText("Clear current pre-edit text")
                                         Text.separator
                                         KeyBlockView.escape
                                         Spacer()

@@ -59,10 +59,8 @@
 "Open Preferences Window (This Window)" = "Open Settings Window (This Window)";
 "Enter/Exit Options View" = "Enter/Exit Options View";
 "Directly toggle specific option" = "Directly toggle specific option";
-"Switch to Cantonese Mode" = "Switch to Cantonese Mode";
-"Switch to English Mode" = "Switch to English Mode";
 "Remove highlighted Candidate from User Lexicon" = "Remove highlighted Candidate from User Lexicon";
-"Clear current Input Buffer" = "Clear current Input Buffer";
+"Clear current pre-edit text" = "Clear current pre-edit text";
 
 "Highlight previous Candidate" = "Highlight previous Candidate";
 "Highlight next Candidate" = "Highlight next Candidate";
