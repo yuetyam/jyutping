@@ -2,7 +2,6 @@ import AppKit
 import InputMethodKit
 import CoreIME
 
-@objc(PrincipalApplication)
 final class PrincipalApplication: NSApplication {
 
         private let appDelegate = AppDelegate()
@@ -12,19 +11,21 @@ final class PrincipalApplication: NSApplication {
                 self.delegate = appDelegate
         }
 
-        @available(*, unavailable)
-        required init?(coder: NSCoder) { fatalError() }
+        required init?(coder: NSCoder) {
+                fatalError("init(coder:) has not been implemented")
+        }
 }
 
 @main
-@objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {
+
+        static var server: IMKServer? = nil
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
                 let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org_jyutping_inputmethod_Jyutping_Connection"
                 let identifier = Bundle.main.bundleIdentifier
-                _ = IMKServer(name: name, bundleIdentifier: identifier)
+                Self.server = IMKServer(name: name, bundleIdentifier: identifier)
         }
 
         private func handleCommandLineArguments() {

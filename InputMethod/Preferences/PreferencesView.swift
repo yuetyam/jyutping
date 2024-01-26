@@ -5,15 +5,21 @@ extension DispatchQueue {
         static let preferences: DispatchQueue = DispatchQueue(label: "org.jyutping.inputmethod.Jyutping.Preferences")
 }
 
-final class PreferencesAppDelegate: NSObject, NSApplicationDelegate {
+final class SettingsViewAppDelegate: NSObject, NSApplicationDelegate {
         func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
                 return true
+        }
+        func applicationWillFinishLaunching(_ notification: Notification) {
+                NSWindow.allowsAutomaticWindowTabbing = false
+        }
+        func applicationDidFinishLaunching(_ notification: Notification) {
+                _ = NSApp.windows.map({ $0.tabbingMode = .disallowed })
         }
 }
 
 struct PreferencesView: View {
 
-        @NSApplicationDelegateAdaptor(PreferencesAppDelegate.self) var appDelegate
+        @NSApplicationDelegateAdaptor(SettingsViewAppDelegate.self) var appDelegate
 
         // macOS 13.0+
         @State private var selection: PreferencesRow = Options.selectedPreferencesRow
