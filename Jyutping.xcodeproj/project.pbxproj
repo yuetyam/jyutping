@@ -265,7 +265,6 @@
 		37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD652B3B381600F02279 /* VisualEffect.swift */; };
 		37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD662B3B381600F02279 /* JyutpingInputController.swift */; };
 		37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD672B3B381600F02279 /* AppContext.swift */; };
-		37E6AD8C2B3B381700F02279 /* Speech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD682B3B381700F02279 /* Speech.swift */; };
 		37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD692B3B381700F02279 /* InputMethodApp.swift */; };
 		37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD6A2B3B381700F02279 /* Menu.swift */; };
 		37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD8F2B3B384B00F02279 /* Assets.xcassets */; };
@@ -640,7 +639,6 @@
 		37E6AD652B3B381600F02279 /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		37E6AD662B3B381600F02279 /* JyutpingInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		37E6AD672B3B381600F02279 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
-		37E6AD682B3B381700F02279 /* Speech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Speech.swift; sourceTree = "<group>"; };
 		37E6AD692B3B381700F02279 /* InputMethodApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMethodApp.swift; sourceTree = "<group>"; };
 		37E6AD6A2B3B381700F02279 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		37E6AD8F2B3B384B00F02279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1126,27 +1124,25 @@
 				37E6AD922B3B386800F02279 /* Debug.xcconfig */,
 				37E6AD912B3B386800F02279 /* Release.xcconfig */,
 				37E6AD692B3B381700F02279 /* InputMethodApp.swift */,
-				37E6AD672B3B381600F02279 /* AppContext.swift */,
-				37E6AD432B3B381600F02279 /* CandidateViews */,
-				37E6AD562B3B381600F02279 /* DisplayCandidate.swift */,
+				37E6AD662B3B381600F02279 /* JyutpingInputController.swift */,
 				37E6AD572B3B381600F02279 /* EventHandler.swift */,
-				37E6AD4E2B3B381600F02279 /* Extensions */,
+				37E6AD672B3B381600F02279 /* AppContext.swift */,
+				37E6AD562B3B381600F02279 /* DisplayCandidate.swift */,
 				37E6AD4D2B3B381600F02279 /* InputForm.swift */,
 				37E6AD642B3B381600F02279 /* InputStage.swift */,
-				37E6AD662B3B381600F02279 /* JyutpingInputController.swift */,
-				37E6AD482B3B381600F02279 /* KeyCode */,
-				37E6AD6A2B3B381700F02279 /* Menu.swift */,
 				37E6AD552B3B381600F02279 /* Options.swift */,
 				37E6AD632B3B381600F02279 /* OptionsView.swift */,
 				37E6AD622B3B381600F02279 /* PageTransformation.swift */,
-				37E6AD582B3B381600F02279 /* Preferences */,
-				37E6AD682B3B381700F02279 /* Speech.swift */,
-				37E6AD612B3B381600F02279 /* UserLexicon.swift */,
 				37E6AD652B3B381600F02279 /* VisualEffect.swift */,
 				37E6AD542B3B381600F02279 /* WindowPattern.swift */,
-				371EABD42B385D380075089B /* InputMethod.entitlements */,
+				37E6AD612B3B381600F02279 /* UserLexicon.swift */,
+				37E6AD432B3B381600F02279 /* CandidateViews */,
+				37E6AD582B3B381600F02279 /* Preferences */,
+				37E6AD482B3B381600F02279 /* KeyCode */,
+				37E6AD4E2B3B381600F02279 /* Extensions */,
 				37E6AD972B3B389E00F02279 /* Localization */,
 				37E6AD952B3B389400F02279 /* jyutpingime.pdf */,
+				371EABD42B385D380075089B /* InputMethod.entitlements */,
 				37E6AD8F2B3B384B00F02279 /* Assets.xcassets */,
 				371EABD12B385D380075089B /* Preview Content */,
 			);
@@ -1251,14 +1247,15 @@
 		37E6AD582B3B381600F02279 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				37E6AD592B3B381600F02279 /* HotkeysView.swift */,
-				37E6AD5A2B3B381600F02279 /* FontPicker.swift */,
+				37E6AD6A2B3B381700F02279 /* Menu.swift */,
+				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
 				37E6AD5B2B3B381600F02279 /* CandidateLayoutPreferencesView.swift */,
 				37E6AD5C2B3B381600F02279 /* CandidateFontPreferencesView.swift */,
-				37E6AD5D2B3B381600F02279 /* Constant.swift */,
-				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
+				37E6AD592B3B381600F02279 /* HotkeysView.swift */,
 				37E6AD5F2B3B381600F02279 /* AboutView.swift */,
 				37E6AD602B3B381600F02279 /* AppSettings.swift */,
+				37E6AD5A2B3B381600F02279 /* FontPicker.swift */,
+				37E6AD5D2B3B381600F02279 /* Constant.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -1792,7 +1789,6 @@
 				37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */,
 				37E6AD792B3B381700F02279 /* WindowPattern.swift in Sources */,
 				37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */,
-				37E6AD8C2B3B381700F02279 /* Speech.swift in Sources */,
 				37E6AD812B3B381700F02279 /* Constant.swift in Sources */,
 				37E6AD882B3B381700F02279 /* InputStage.swift in Sources */,
 				37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */,
