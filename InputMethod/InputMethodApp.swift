@@ -2,6 +2,7 @@ import AppKit
 import InputMethodKit
 import CoreIME
 
+@objc(PrincipalApplication)
 final class PrincipalApplication: NSApplication {
 
         private let appDelegate = AppDelegate()
@@ -17,15 +18,16 @@ final class PrincipalApplication: NSApplication {
 }
 
 @main
+@objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-        static var server: IMKServer? = nil
+        var server: IMKServer? = nil
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
-                let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org_jyutping_inputmethod_Jyutping_Connection"
+                let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
                 let identifier = Bundle.main.bundleIdentifier
-                Self.server = IMKServer(name: name, bundleIdentifier: identifier)
+                server = IMKServer(name: name, bundleIdentifier: identifier)
         }
 
         private func handleCommandLineArguments() {

@@ -80,7 +80,7 @@ extension JyutpingInputController {
                 let modifiers = event.modifierFlags
                 let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
                 guard !shouldIgnoreCurrentEvent else { return false }
-                let client: IMKTextInput? = (sender as? IMKTextInput) ?? currentClient
+                let client: InputClient? = (sender as? InputClient) ?? currentClient
                 currentOrigin = client?.position
                 let currentClientID = currentClient?.uniqueClientIdentifierString()
                 let clientID = client?.uniqueClientIdentifierString()

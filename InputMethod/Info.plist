@@ -43,7 +43,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>InputMethodConnectionName</key>
-	<string>org_jyutping_inputmethod_Jyutping_Connection</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
 	<key>InputMethodServerControllerClass</key>
 	<string>$(PRODUCT_MODULE_NAME).JyutpingInputController</string>
 	<key>InputMethodServerDelegateClass</key>
