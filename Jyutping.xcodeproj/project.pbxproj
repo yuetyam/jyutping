@@ -273,6 +273,8 @@
 		37E6ADAF2B3B389F00F02279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD9A2B3B389E00F02279 /* Localizable.strings */; };
 		37E6ADB32B3B39D000F02279 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; };
 		37E6ADB42B3B39D000F02279 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		37EA87D42B66D10000BADC1B /* PinyinReverseLookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA87D32B66D10000BADC1B /* PinyinReverseLookupView.swift */; };
+		37EA87D62B66D91C00BADC1B /* CangjieReverseLookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA87D52B66D91C00BADC1B /* CangjieReverseLookupView.swift */; };
 		37EFD7312B3719C20089D346 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37EFD7302B3719C20089D346 /* Preview Assets.xcassets */; };
 		37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD73A2B3719C30089D346 /* JyutpingTests.swift */; };
 		37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7442B3719C30089D346 /* JyutpingUITests.swift */; };
@@ -667,6 +669,8 @@
 		37E6ADAD2B3B389F00F02279 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37E6ADB02B3B38B100F02279 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		37E6ADB12B3B39B500F02279 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		37EA87D32B66D10000BADC1B /* PinyinReverseLookupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinyinReverseLookupView.swift; sourceTree = "<group>"; };
+		37EA87D52B66D91C00BADC1B /* CangjieReverseLookupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieReverseLookupView.swift; sourceTree = "<group>"; };
 		37EFD7252B3719C10089D346 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD72E2B3719C20089D346 /* Jyutping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jyutping.entitlements; sourceTree = "<group>"; };
 		37EFD7302B3719C20089D346 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -781,12 +785,14 @@
 		371B6E562B3B3107005BB31C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				371B6E592B3B3107005BB31C /* IOSContentView.swift */,
 				371B6E5C2B3B3107005BB31C /* Home */,
 				3760AA432B4FD0730027EC11 /* Jyutping */,
 				371B6E622B3B3107005BB31C /* Cantonese */,
 				3760AA422B4FD0570027EC11 /* About */,
 				371B6E702B3B3107005BB31C /* Search */,
 				3760AA442B4FD0B40027EC11 /* Components */,
+				37EA87D22B66D0AA00BADC1B /* Screenshot */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1202,7 +1208,6 @@
 			children = (
 				371B6E572B3B3107005BB31C /* SafariView.swift */,
 				371B6E582B3B3107005BB31C /* ShareSheetView.swift */,
-				371B6E592B3B3107005BB31C /* IOSContentView.swift */,
 				371B6E5A2B3B3107005BB31C /* EnhancedLabel.swift */,
 				371B6E5B2B3B3107005BB31C /* MenuCopyButton.swift */,
 				371B6E6E2B3B3107005BB31C /* UIDevice+modelName.swift */,
@@ -1267,6 +1272,15 @@
 				37E6AD9A2B3B389E00F02279 /* Localizable.strings */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		37EA87D22B66D0AA00BADC1B /* Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				37EA87D32B66D10000BADC1B /* PinyinReverseLookupView.swift */,
+				37EA87D52B66D91C00BADC1B /* CangjieReverseLookupView.swift */,
+			);
+			path = Screenshot;
 			sourceTree = "<group>";
 		};
 		37EFD71C2B3719C10089D346 = {
@@ -1831,6 +1845,7 @@
 			files = (
 				371B6ECE2B3B3108005BB31C /* MacMetroLineView.swift in Sources */,
 				371B6EC82B3B3108005BB31C /* CantoneseTextLabel.swift in Sources */,
+				37EA87D42B66D10000BADC1B /* PinyinReverseLookupView.swift in Sources */,
 				371B6EB92B3B3108005BB31C /* IOSSurnamesView.swift in Sources */,
 				371B6EE52B3B3108005BB31C /* Speaker.swift in Sources */,
 				371B6E982B3B3108005BB31C /* JyutpingApp.swift in Sources */,
@@ -1880,6 +1895,7 @@
 				371B6EBD2B3B3108005BB31C /* IOSCantonMetroView.swift in Sources */,
 				371B6EBF2B3B3108005BB31C /* IOSCinZiManView.swift in Sources */,
 				371B6ED72B3B3108005BB31C /* SearchField.swift in Sources */,
+				37EA87D62B66D91C00BADC1B /* CangjieReverseLookupView.swift in Sources */,
 				371B6EBB2B3B3108005BB31C /* IOSShamChunMetroView.swift in Sources */,
 				371B6EE12B3B3108005BB31C /* MacExpressionsView.swift in Sources */,
 				371B6EAC2B3B3108005BB31C /* TextExtensions.swift in Sources */,

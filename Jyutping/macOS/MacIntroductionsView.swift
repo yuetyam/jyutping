@@ -3,9 +3,6 @@
 import SwiftUI
 
 struct MacIntroductionsView: View {
-
-        private let tonesInputDescription: String = NSLocalizedString("tones.input.description", comment: "")
-
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
@@ -15,7 +12,7 @@ struct MacIntroductionsView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: tonesInputDescription).font(.fixedWidth).lineSpacing(5)
+                                                Text("tones.input.description").font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                         HStack {
