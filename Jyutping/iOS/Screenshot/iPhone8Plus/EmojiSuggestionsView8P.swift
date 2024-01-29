@@ -2,10 +2,8 @@
 
 import SwiftUI
 
-// For iPhone 15 Pro Max
-
-@available(iOS 17.0, *)
-struct EmojiSuggestionsView: View {
+@available(iOS 16.0, *)
+struct EmojiSuggestionsView8P: View {
         @State private var inputText: String = ""
         var body: some View {
                 List {
@@ -40,14 +38,12 @@ struct EmojiSuggestionsView: View {
                                 TextField("Input Text Field", text: $inputText)
                         }
                 }
-                .listSectionSpacing(.custom(70))
-
         }
 }
 
-@available(iOS 17.0, *)
+@available(iOS 16.0, *)
 #Preview {
-        EmojiSuggestionsView()
+        EmojiSuggestionsView8P()
 }
 
 #endif

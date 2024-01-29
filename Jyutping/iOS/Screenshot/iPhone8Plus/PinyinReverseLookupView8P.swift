@@ -2,33 +2,35 @@
 
 import SwiftUI
 
-// For iPhone 15 Pro Max
-
-@available(iOS 17.0, *)
-struct CantoneseIMEView: View {
+@available(iOS 16.0, *)
+struct PinyinReverseLookupView8P: View {
         @State private var inputText: String = ""
         var body: some View {
                 List {
                         VStack(spacing: 16) {
                                 HStack {
                                         Spacer()
-                                        Text(verbatim: "粵語輸入法")
+                                        Text(verbatim: "普通話拼音反查粵拼")
                                                 .lineLimit(1)
                                                 .minimumScaleFactor(0.5)
-                                                .font(.system(size: 44))
+                                                .font(.system(size: 50))
                                                 .foregroundStyle(Color.accentColor)
                                         Spacer()
                                 }
                                 .padding(.vertical, 24)
                                 HStack(spacing: 0) {
                                         Spacer()
-                                        Text(verbatim: "我手寫我口")
+                                        Text(verbatim: "先輸入 ")
+                                        Text(verbatim: "r")
+                                                .monospaced()
+                                                .foregroundStyle(Color.accentColor)
+                                        Text(verbatim: " 再輸入普通話拼音")
                                         Spacer()
                                 }
                                 .font(.system(size: 26))
                                 HStack(spacing: 0) {
                                         Spacer()
-                                        Text(verbatim: "粵語拼音")
+                                        Text(verbatim: "候選詞會提示對應嘅粵拼")
                                         Spacer()
                                 }
                                 .font(.system(size: 26))
@@ -40,14 +42,12 @@ struct CantoneseIMEView: View {
                                 TextField("Input Text Field", text: $inputText)
                         }
                 }
-                .listSectionSpacing(.custom(70))
-
         }
 }
 
-@available(iOS 17.0, *)
+@available(iOS 16.0, *)
 #Preview {
-        CantoneseIMEView()
+        PinyinReverseLookupView8P()
 }
 
 #endif

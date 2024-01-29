@@ -2,10 +2,8 @@
 
 import SwiftUI
 
-// For iPhone 15 Pro Max
-
 @available(iOS 17.0, *)
-struct DarkModeView: View {
+struct DarkModeView15PM: View {
         @State private var inputText: String = ""
         var body: some View {
                 List {
@@ -47,13 +45,12 @@ struct DarkModeView: View {
                         }
                 }
                 .listSectionSpacing(.custom(70))
-
         }
 }
 
 @available(iOS 17.0, *)
 #Preview {
-        DarkModeView()
+        DarkModeView15PM()
 }
 
 #endif

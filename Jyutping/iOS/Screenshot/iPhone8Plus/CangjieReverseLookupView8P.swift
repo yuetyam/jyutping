@@ -2,58 +2,52 @@
 
 import SwiftUI
 
-// For iPhone 15 Pro Max
-
-@available(iOS 17.0, *)
-struct SchemeView: View {
+@available(iOS 16.0, *)
+struct CangjieReverseLookupView8P: View {
         @State private var inputText: String = ""
         var body: some View {
                 List {
                         VStack(spacing: 16) {
                                 HStack {
                                         Spacer()
-                                        Text(verbatim: "粵語拼音")
+                                        Text(verbatim: "倉頡反查粵拼")
                                                 .lineLimit(1)
                                                 .minimumScaleFactor(0.5)
                                                 .font(.system(size: 44))
                                                 .foregroundStyle(Color.accentColor)
                                         Spacer()
                                 }
-                                .padding(.vertical)
+                                .padding(.vertical, 24)
                                 HStack(spacing: 0) {
                                         Spacer()
-                                        Text(verbatim: "採用「香港語言學學會粵語")
+                                        Text(verbatim: "先輸入 ")
+                                        Text(verbatim: "v")
+                                                .font(.system(size: 30, design: .monospaced))
+                                                .foregroundStyle(Color.accentColor)
+                                        Text(verbatim: "   再輸入倉頡碼")
                                         Spacer()
                                 }
-                                .font(.system(size: 26))
+                                .font(.system(size: 27))
                                 HStack(spacing: 0) {
                                         Spacer()
-                                        Text(verbatim: "拼音方案(粵拼/Jyutping)」")
-                                        Spacer()
-                                }
-                                .font(.system(size: 26))
-                                HStack(spacing: 0) {
-                                        Spacer()
-                                        Text(verbatim: "兼容各種習慣拼寫串法")
+                                        Text(verbatim: "候選詞會提示對應嘅粵拼")
                                         Spacer()
                                 }
                                 .font(.system(size: 26))
                         }
-                        .padding(.bottom)
-                        .padding(.vertical)
+                        .padding(.bottom, 28)
+                        .padding(.vertical, 24)
 
                         Section {
                                 TextField("Input Text Field", text: $inputText)
                         }
                 }
-                .listSectionSpacing(.custom(70))
-
         }
 }
 
-@available(iOS 17.0, *)
+@available(iOS 16.0, *)
 #Preview {
-        SchemeView()
+        CangjieReverseLookupView8P()
 }
 
 #endif
