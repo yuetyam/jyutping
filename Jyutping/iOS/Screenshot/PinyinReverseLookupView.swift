@@ -49,9 +49,9 @@ struct PinyinReverseLookupView: View {
         }
 }
 
-#endif
-
 @available(iOS 17.0, *)
 #Preview {
         PinyinReverseLookupView()
 }
+
+#endif
