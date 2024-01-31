@@ -289,6 +289,7 @@
 		37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD73A2B3719C30089D346 /* JyutpingTests.swift */; };
 		37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7442B3719C30089D346 /* JyutpingUITests.swift */; };
 		37EFD7472B3719C30089D346 /* JyutpingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */; };
+		37F6E4B42B6A6D360060D2E8 /* InputField15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6E4B32B6A6D360060D2E8 /* InputField15PM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -699,6 +700,7 @@
 		37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD7442B3719C30089D346 /* JyutpingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITests.swift; sourceTree = "<group>"; };
 		37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		37F6E4B32B6A6D360060D2E8 /* InputField15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField15PM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1223,6 +1225,7 @@
 		375DD0462B67DBC500257F55 /* iPhone15ProMax */ = {
 			isa = PBXGroup;
 			children = (
+				37F6E4B32B6A6D360060D2E8 /* InputField15PM.swift */,
 				375DD0312B67947300257F55 /* CantoneseIMEView15PM.swift */,
 				375DD0332B67961900257F55 /* DarkModeView15PM.swift */,
 				375DD0352B67981700257F55 /* SchemeView15PM.swift */,
@@ -1935,6 +1938,7 @@
 				371B6EB42B3B3108005BB31C /* FAQView.swift in Sources */,
 				371B6EAF2B3B3108005BB31C /* IOSContentView.swift in Sources */,
 				371B6EE62B3B3108005BB31C /* AppMaster.swift in Sources */,
+				37F6E4B42B6A6D360060D2E8 /* InputField15PM.swift in Sources */,
 				371B6EDF2B3B3108005BB31C /* MacSurnamesView.swift in Sources */,
 				371B6EA12B3B3108005BB31C /* StemsBranchesView.swift in Sources */,
 				371B6EDE2B3B3108005BB31C /* MacContentViewMonterey.swift in Sources */,

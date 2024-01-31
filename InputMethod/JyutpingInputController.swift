@@ -142,8 +142,7 @@ final class JyutpingInputController: IMKInputController {
         }
         override init!(server: IMKServer!, delegate: Any!, client inputClient: Any!) {
                 super.init(server: server, delegate: delegate, client: inputClient)
-                let parameterInputClient = inputClient as? (IMKTextInput & NSObjectProtocol)
-                let currentInputClient = parameterInputClient ?? client()
+                let currentInputClient = (inputClient as? InputClient) ?? client()
                 activateServer(currentInputClient)
         }
         override func activateServer(_ sender: Any!) {
