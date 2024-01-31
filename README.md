@@ -34,7 +34,7 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 ## macOS
 由於第三方輸入法無法上架 Mac App Store，請前往 [網站](https://jyutping.app/mac) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
 
-安裝指引： [macOS 粵拼輸入法下載安裝指引](https://jyutping.app/mac/install)  
+安裝指引： [macOS 粵拼輸入法下載安裝指引](https://jyutping.app/mac)  
 常問問題： [常問問題（FAQ）](https://jyutping.app/faq)  
 兼容系統： macOS 12 Monterey 或者更高
 
