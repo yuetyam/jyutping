@@ -69,7 +69,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
                         textDocumentProxy.unmarkText()
                 } else {
-                        let location: Int = (text2mark as NSString).length
+                        let location: Int = text2mark.utf16.count
                         let range: NSRange = NSRange(location: location, length: 0)
                         textDocumentProxy.setMarkedText(text2mark, selectedRange: range)
                 }
@@ -98,7 +98,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
-                let location: Int = (text as NSString).length
+                let location: Int = text.utf16.count
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
@@ -129,7 +129,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let text: String = bufferText
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
-                let location: Int = (text as NSString).length
+                let location: Int = text.utf16.count
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
@@ -361,7 +361,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputBufferText()
                                 updateReturnKeyText()
                         } else {
-                                textDocumentProxy.insertText("\n")
+                                textDocumentProxy.insertText(String.newLine)
                         }
                 case .shift:
                         let newCase: KeyboardCase = {
@@ -388,7 +388,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }()
                         updateKeyboardCase(to: newCase)
                 case .tab:
-                        textDocumentProxy.insertText("\t")
+                        textDocumentProxy.insertText(String.tab)
                 case .dismiss:
                         dismissKeyboard()
                 case .select(let candidate):
@@ -404,24 +404,29 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .clearLeadingText:
                         textDocumentProxy.deleteBackward() // Delete selectedText
                         for _ in 0..<5 {
-                                guard let textBeforeCursor = textDocumentProxy.documentContextBeforeInput else { break }
-                                _ = (0..<textBeforeCursor.count).map({ _ in
+                                guard let text = textDocumentProxy.documentContextBeforeInput else { break }
+                                let steps = text.utf16.count
+                                for _ in 0..<steps {
                                         textDocumentProxy.deleteBackward()
-                                })
+                                }
                         }
                 case .moveCursorBackward:
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+                        let offset: Int = textDocumentProxy.documentContextBeforeInput?.last?.utf16.count ?? 1
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
                 case .moveCursorForward:
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+                        let offset: Int = textDocumentProxy.documentContextAfterInput?.first?.utf16.count ?? 1
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                 case .jumpToHead:
                         for _ in 0..<5 {
                                 guard let text = textDocumentProxy.documentContextBeforeInput else { break }
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: -(text.count))
+                                let offset: Int = text.utf16.count
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
                         }
                 case .jumpToTail:
                         for _ in 0..<5 {
                                 guard let text = textDocumentProxy.documentContextAfterInput else { break }
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: text.count)
+                                let offset: Int = text.utf16.count
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                         }
                 }
         }
