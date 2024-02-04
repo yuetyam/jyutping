@@ -26,7 +26,13 @@ extension String {
         /// aka. `String.init()`
         public static let empty: String = ""
 
-        /// U+20
+        /// U+0009. `\t`
+        public static let tab: String = "\t"
+
+        /// U+000A. `\n`
+        public static let newLine: String = "\n"
+
+        /// U+0020
         public static let space: String = "\u{20}"
 
         /// U+200B
@@ -34,9 +40,6 @@ extension String {
 
         /// U+3000. Ideographic Space. 全寬空格
         public static let fullWidthSpace: String = "\u{3000}"
-
-        /// U+30FB. 全寬中點
-        public static let centerDot: String = "\u{30FB}"
 }
 
 extension String {
@@ -51,24 +54,24 @@ extension String {
                 var blocks: [TextUnit] = []
                 var ideographicCache: String = ""
                 var otherCache: String = ""
-                var lastWasIdeographic: Bool = true
+                var wasLastIdeographic: Bool = true
                 for character in self {
                         if character.isIdeographic {
-                                if !lastWasIdeographic && !otherCache.isEmpty {
+                                if !wasLastIdeographic && !otherCache.isEmpty {
                                         let newElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
                                         blocks.append(newElement)
                                         otherCache = ""
                                 }
                                 ideographicCache.append(character)
-                                lastWasIdeographic = true
+                                wasLastIdeographic = true
                         } else {
-                                if lastWasIdeographic && !ideographicCache.isEmpty {
+                                if wasLastIdeographic && !ideographicCache.isEmpty {
                                         let newElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
                                         blocks.append(newElement)
                                         ideographicCache = ""
                                 }
                                 otherCache.append(character)
-                                lastWasIdeographic = false
+                                wasLastIdeographic = false
                         }
                 }
                 if !ideographicCache.isEmpty {
