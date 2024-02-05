@@ -19,6 +19,7 @@ struct PadGlobeKey: View {
         }
 
         var body: some View {
+                let width: CGFloat = context.widthUnit * widthUnitTimes
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -26,9 +27,9 @@ struct PadGlobeKey: View {
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(5)
                         Image(systemName: "globe")
-                        PadGlobeButton().frame(width: context.widthUnit, height: context.heightUnit)
+                        PadGlobeButton().frame(width: width, height: context.heightUnit)
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: width, height: context.heightUnit)
         }
 }
 

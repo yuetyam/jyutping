@@ -20,7 +20,7 @@ struct EmojiSuggestionsView8P: View {
                                 .padding(.vertical, 24)
                                 HStack(spacing: 0) {
                                         Spacer()
-                                        Text(verbatim: "更符合粵語嘅 Emoji 建議")
+                                        Text(verbatim: "更契合粵語嘅 Emoji 建議")
                                         Spacer()
                                 }
                                 .font(.system(size: 26))
