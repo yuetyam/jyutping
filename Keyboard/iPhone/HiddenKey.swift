@@ -15,9 +15,10 @@ struct HiddenKey: View {
                                         AudioFeedback.deleted()
                                         context.triggerHapticFeedback()
                                         context.operate(.backspace)
-                                } else if let text = key.letter {
+                                } else if let letter = key.letter {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
+                                        let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
                                         context.operate(.process(text))
                                 }
                         }

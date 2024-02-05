@@ -48,6 +48,8 @@ struct ExpansibleInputKey: View {
         @State private var selectedIndex: Int = 0
 
         var body: some View {
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic)
                 let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
                 ZStack {
                         if isLongPressing {
@@ -67,6 +69,7 @@ struct ExpansibleInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
+                                                                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                                                         .font(.keyFooter)
                                                                                         .foregroundStyle(Color.secondary)
                                                                                         .padding(.top, 1)
@@ -74,11 +77,13 @@ struct ExpansibleInputKey: View {
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
+                                                                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                                                         .font(.keyFooter)
                                                                                         .foregroundStyle(Color.secondary)
                                                                                         .padding(.bottom, 1)
                                                                         }
                                                                         Text(verbatim: element.text)
+                                                                                .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                                                 .font(.title2)
                                                                                 .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
                                                                 }
@@ -98,7 +103,7 @@ struct ExpansibleInputKey: View {
                                         .shadow(color: .black.opacity(0.5), radius: 1)
                                         .overlay {
                                                 Text(verbatim: keyModel.primary.text)
-                                                        .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
+                                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                         .font(keyModel.primary.isTextSingular ? .title : .title2)
                                                         .padding(.bottom, context.heightUnit * 2.0)
                                         }
@@ -113,6 +118,7 @@ struct ExpansibleInputKey: View {
                                 ZStack(alignment: .topTrailing) {
                                         Color.interactiveClear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
+                                                .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                 .font(.keyFooter)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.trailing, 5)
@@ -121,15 +127,16 @@ struct ExpansibleInputKey: View {
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.interactiveClear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
+                                                .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                 .font(.keyFooter)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.trailing, 5)
                                                 .padding(.bottom, 8)
                                 }
                                 Text(verbatim: keyModel.primary.text)
-                                        .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
+                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                         .font(keyModel.primary.isTextSingular ? .letterInputKeyCompact : .dualLettersInputKeyCompact)
-                                        .padding(.bottom, (context.keyboardForm == .alphabetic && context.keyboardCase.isLowercased) ? 3 : 0)
+                                        .padding(.bottom, shouldAdjustKeyTextPosition ? 3 : 0)
                         }
                 }
                 .frame(width: keyWidth, height: context.heightUnit)

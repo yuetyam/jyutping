@@ -60,7 +60,6 @@ struct SymbolInputKey: View {
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                                 Text(verbatim: primary)
-                                        .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
                                         .font(.letterInputKeyCompact)
                         }
                 }

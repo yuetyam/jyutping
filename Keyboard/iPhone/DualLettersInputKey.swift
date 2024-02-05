@@ -35,6 +35,8 @@ struct DualLettersInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic)
                 ZStack {
                         Color.interactiveClear
                         if isTouching {
@@ -43,7 +45,7 @@ struct DualLettersInputKey: View {
                                         .shadow(color: .black.opacity(0.5), radius: 1)
                                         .overlay {
                                                 Text(verbatim: keyText)
-                                                        .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
+                                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                         .font(.title2)
                                                         .padding(.bottom, context.heightUnit * 2.0)
                                         }
@@ -56,9 +58,9 @@ struct DualLettersInputKey: View {
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                                 Text(verbatim: keyText)
-                                        .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
+                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                         .font(.dualLettersInputKeyCompact)
-                                        .padding(.bottom, (context.keyboardForm == .alphabetic && context.keyboardCase.isLowercased) ? 3 : 0)
+                                        .padding(.bottom, shouldAdjustKeyTextPosition ? 3 : 0)
                         }
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)

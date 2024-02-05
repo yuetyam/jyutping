@@ -39,6 +39,7 @@ struct CangjieInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 ZStack {
                         Color.interactiveClear
                         if isTouching {
@@ -61,6 +62,7 @@ struct CangjieInputKey: View {
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
                                         Text(verbatim: letter)
+                                                .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                 .font(.footnote)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(5)
@@ -79,7 +81,8 @@ struct CangjieInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.process(letter))
+                                let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
+                                context.operate(.process(text))
                          }
                 )
         }

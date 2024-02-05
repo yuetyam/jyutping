@@ -40,6 +40,8 @@ struct StrokeInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic)
                 if let stroke {
                         ZStack {
                                 Color.interactiveClear
@@ -63,6 +65,7 @@ struct StrokeInputKey: View {
                                         ZStack(alignment: .topTrailing) {
                                                 Color.clear
                                                 Text(verbatim: letter)
+                                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
                                                         .font(.footnote)
                                                         .foregroundStyle(Color.secondary)
                                                         .padding(5)
@@ -81,7 +84,8 @@ struct StrokeInputKey: View {
                                         }
                                 }
                                 .onEnded { _ in
-                                        context.operate(.process(letter))
+                                        let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
+                                        context.operate(.process(text))
                                 }
                         )
                 } else {
@@ -91,14 +95,18 @@ struct StrokeInputKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                                Text(verbatim: letter).foregroundStyle(Color.secondary)
+                                Text(verbatim: letter)
+                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
+                                        .foregroundStyle(Color.secondary)
+                                        .padding(.bottom, shouldAdjustKeyTextPosition ? 3 : 0)
                         }
                         .frame(width: context.widthUnit, height: context.heightUnit)
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 AudioFeedback.inputed()
                                 context.triggerHapticFeedback()
-                                context.operate(.process(letter))
+                                let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
+                                context.operate(.process(text))
                         }
                 }
         }
