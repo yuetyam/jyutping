@@ -81,6 +81,39 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
         }
 
+        private(set) static var showLowercaseKeys: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyCase)
+                switch savedValue {
+                case 0, 1:
+                        return true
+                case 2:
+                        return false
+                default:
+                        return true
+                }
+        }()
+        static func updateShowLowercaseKeys(to state: Bool) {
+                showLowercaseKeys = state
+                let value: Int = state ? 1 : 2
+                UserDefaults.standard.set(value, forKey: OptionsKey.KeyCase)
+        }
+        private(set) static var keyCharacterPreview: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyCharacterPreview)
+                switch savedValue {
+                case 0, 1:
+                        return true
+                case 2:
+                        return false
+                default:
+                        return true
+                }
+        }()
+        static func updateKeyCharacterPreview(to state: Bool) {
+                keyCharacterPreview = state
+                let value: Int = state ? 1 : 2
+                UserDefaults.standard.set(value, forKey: OptionsKey.KeyCharacterPreview)
+        }
+
         private(set) static var commentStyle: CommentStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
                 switch savedValue {
@@ -147,6 +180,8 @@ struct OptionsKey {
         static let HapticFeedback: String = "haptic_feedback"
         static let EmojiSuggestions: String = "emoji"
         static let KeyboardLayout: String = "keyboard_layout"
+        static let KeyCase: String = "KeyCase"
+        static let KeyCharacterPreview: String = "KeyPreview"
         static let CommentStyle: String = "jyutping_display"
         static let CommentToneStyle: String = "tone_style"
         static let DoubleSpaceShortcut: String = "double_space_shortcut"

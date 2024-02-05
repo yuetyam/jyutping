@@ -12,8 +12,8 @@ struct SettingsView: View {
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
-        @State private var showLowercaseKeys: Bool = true // TODO: Add to Options
-        @State private var keyCharacterPreview: Bool = true // TODO: Add to Options
+        @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
+        @State private var keyCharacterPreview: Bool = Options.keyCharacterPreview
         @State private var selectedCommentStyle: CommentStyle = Options.commentStyle
         @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
@@ -181,17 +181,17 @@ struct SettingsView: View {
                                 }
 
                                 #if DEBUG
-                                // TODO: Sync to SettingsViewIOS15
+                                // TODO: Implement
                                 Section {
                                         Toggle("Show Lowercase Keys", isOn: $showLowercaseKeys)
                                                 .onChange(of: showLowercaseKeys) { newValue in
                                                         AudioFeedback.modified()
-                                                        // TODO: Show Lowercase Keys
+                                                        Options.updateShowLowercaseKeys(to: newValue)
                                                 }
                                         Toggle("Key Character Preview", isOn: $keyCharacterPreview)
                                                 .onChange(of: keyCharacterPreview) { newValue in
                                                         AudioFeedback.modified()
-                                                        // TODO: Key Character Preview
+                                                        Options.updateKeyCharacterPreview(to: newValue)
                                                 }
                                 }
                                 #endif

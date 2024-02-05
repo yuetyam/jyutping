@@ -10,6 +10,8 @@ struct SettingsViewIOS15: View {
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
+        @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
+        @State private var keyCharacterPreview: Bool = Options.keyCharacterPreview
         @State private var selectedCommentStyle: CommentStyle = Options.commentStyle
         @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
@@ -172,6 +174,22 @@ struct SettingsViewIOS15: View {
                                 } header: {
                                         Text("Keyboard Layout").textCase(nil)
                                 }
+
+                                #if DEBUG
+                                // TODO: Implement
+                                Section {
+                                        Toggle("Show Lowercase Keys", isOn: $showLowercaseKeys)
+                                                .onChange(of: showLowercaseKeys) { newValue in
+                                                        AudioFeedback.modified()
+                                                        Options.updateShowLowercaseKeys(to: newValue)
+                                                }
+                                        Toggle("Key Character Preview", isOn: $keyCharacterPreview)
+                                                .onChange(of: keyCharacterPreview) { newValue in
+                                                        AudioFeedback.modified()
+                                                        Options.updateKeyCharacterPreview(to: newValue)
+                                                }
+                                }
+                                #endif
 
                                 Section {
                                         Button {
