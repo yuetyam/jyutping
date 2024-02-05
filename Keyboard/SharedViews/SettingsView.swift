@@ -13,7 +13,7 @@ struct SettingsView: View {
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
-        @State private var keyCharacterPreview: Bool = Options.keyCharacterPreview
+        @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var selectedCommentStyle: CommentStyle = Options.commentStyle
         @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
@@ -188,10 +188,10 @@ struct SettingsView: View {
                                                         AudioFeedback.modified()
                                                         Options.updateShowLowercaseKeys(to: newValue)
                                                 }
-                                        Toggle("Key Character Preview", isOn: $keyCharacterPreview)
-                                                .onChange(of: keyCharacterPreview) { newValue in
+                                        Toggle("Key Text Preview", isOn: $keyTextPreview)
+                                                .onChange(of: keyTextPreview) { newValue in
                                                         AudioFeedback.modified()
-                                                        Options.updateKeyCharacterPreview(to: newValue)
+                                                        Options.updateKeyTextPreview(to: newValue)
                                                 }
                                 }
                                 #endif
