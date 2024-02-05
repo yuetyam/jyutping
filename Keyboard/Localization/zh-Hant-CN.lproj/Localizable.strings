@@ -21,6 +21,9 @@
 "KeyboardLayout.SaamPing" = "三拼";
 "KeyboardLayout.10Key" = "九宮格";
 
+"Show Lowercase Keys" = "鍵帽字母小寫顯示";
+"Key Character Preview" = "鍵文氣泡預覽";
+
 "Jyutping Display" = "粵拼顯示";
 "Above Candidates" = "候選詞之上";
 "Below Candidates" = "候選詞之下";
