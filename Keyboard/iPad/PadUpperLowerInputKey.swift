@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PadUpperLowerInputKey: View {
 
-        /// Create a LargePadUpperLowerInputKey
+        /// Create a PadUpperLowerInputKey
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - upper: Key upper text
@@ -62,6 +62,8 @@ struct PadUpperLowerInputKey: View {
         @State private var isPullingDown: Bool = false
 
         var body: some View {
+                let widthUnit: CGFloat = context.widthUnit
+                let heightUnit: CGFloat = context.heightUnit
                 ZStack {
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
@@ -101,10 +103,10 @@ struct PadUpperLowerInputKey: View {
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: (context.widthUnit - 14) * CGFloat(memberCount), height: context.heightUnit * 0.7)
-                                                .padding(.bottom, context.heightUnit * 1.7)
-                                                .padding(.leading, keyLocale.isLeading ? ((context.widthUnit - 10) * CGFloat(expansions)) : 0)
-                                                .padding(.trailing, keyLocale.isTrailing ? ((context.widthUnit - 10) * CGFloat(expansions)) : 0)
+                                                .frame(width: (widthUnit - 14) * CGFloat(memberCount), height: heightUnit * 0.7)
+                                                .padding(.bottom, heightUnit * 1.7)
+                                                .padding(.leading, keyLocale.isLeading ? ((widthUnit - 10) * CGFloat(expansions)) : 0)
+                                                .padding(.trailing, keyLocale.isTrailing ? ((widthUnit - 10) * CGFloat(expansions)) : 0)
                                         }
                                         .padding(5)
                         } else {
@@ -114,7 +116,8 @@ struct PadUpperLowerInputKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(5)
                                 if isPullingDown {
-                                        Text(verbatim: upper).font(.title2)
+                                        Text(verbatim: upper)
+                                                .font(.title2)
                                 } else {
                                         ZStack(alignment: .top) {
                                                 Color.clear
@@ -129,7 +132,7 @@ struct PadUpperLowerInputKey: View {
                                 }
                         }
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: widthUnit, height: heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -144,7 +147,7 @@ struct PadUpperLowerInputKey: View {
                                         guard memberCount > 1 else { return }
                                         let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                         guard distance > 10 else { return }
-                                        let step: CGFloat = context.widthUnit - 14
+                                        let step: CGFloat = widthUnit - 14
                                         for index in 0..<memberCount {
                                                 let lowPoint: CGFloat = step * CGFloat(index)
                                                 let heightPoint: CGFloat = step * CGFloat(index + 1)

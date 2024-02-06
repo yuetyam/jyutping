@@ -39,6 +39,8 @@ struct PadCangjieInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -48,6 +50,7 @@ struct PadCangjieInputKey: View {
                         ZStack(alignment: .topTrailing) {
                                 Color.clear
                                 Text(verbatim: letter)
+                                        .textCase(textCase)
                                         .font(.footnote)
                                         .foregroundStyle(Color.secondary)
                                         .padding(8)
@@ -64,7 +67,8 @@ struct PadCangjieInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.process(letter))
+                                let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
+                                context.operate(.process(text))
                          }
                 )
         }
