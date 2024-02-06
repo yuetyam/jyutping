@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LargePadExpansibleInputKey: View {
 
-        /// Create a LargePadUpperLowerInputKey
+        /// Create a LargePadExpansibleInputKey
         /// - Parameters:
         ///   - keyLocale: Key location, left half (leading) or right half (trailing).
         ///   - keyModel: KeyElements
@@ -55,6 +55,10 @@ struct LargePadExpansibleInputKey: View {
         @State private var selectedIndex: Int = 0
 
         var body: some View {
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
+                let widthUnit: CGFloat = context.widthUnit
+                let heightUnit: CGFloat = context.heightUnit
                 ZStack {
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
@@ -74,6 +78,7 @@ struct LargePadExpansibleInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
+                                                                                        .textCase(textCase)
                                                                                         .font(.keyFooter)
                                                                                         .padding(.top, 1)
                                                                                         .foregroundStyle(isHighlighted ? Color.white : Color.primary)
@@ -82,22 +87,24 @@ struct LargePadExpansibleInputKey: View {
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
+                                                                                        .textCase(textCase)
                                                                                         .font(.keyFooter)
                                                                                         .padding(.bottom, 1)
                                                                                         .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                                                                                         .opacity(0.8)
                                                                         }
                                                                         Text(verbatim: element.text)
+                                                                                .textCase(textCase)
                                                                                 .font(.title2)
                                                                                 .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: (context.widthUnit - 12) * CGFloat(memberCount), height: context.heightUnit * 0.7)
-                                                .padding(.bottom, context.heightUnit * 1.8)
-                                                .padding(.leading, keyLocale.isLeading ? ((context.widthUnit - 10) * CGFloat(expansions)) : 0)
-                                                .padding(.trailing, keyLocale.isTrailing ? ((context.widthUnit - 10) * CGFloat(expansions)) : 0)
+                                                .frame(width: (widthUnit - 12) * CGFloat(memberCount), height: heightUnit * 0.7)
+                                                .padding(.bottom, heightUnit * 1.8)
+                                                .padding(.leading, keyLocale.isLeading ? ((widthUnit - 10) * CGFloat(expansions)) : 0)
+                                                .padding(.trailing, keyLocale.isTrailing ? ((widthUnit - 10) * CGFloat(expansions)) : 0)
                                         }
                                         .padding(4)
                         } else {
@@ -109,6 +116,7 @@ struct LargePadExpansibleInputKey: View {
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
+                                                .textCase(textCase)
                                                 .font(.keyFooter)
                                                 .opacity(0.8)
                                                 .padding(.trailing, 8)
@@ -117,17 +125,18 @@ struct LargePadExpansibleInputKey: View {
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
+                                                .textCase(textCase)
                                                 .font(.keyFooter)
                                                 .opacity(0.8)
                                                 .padding(.trailing, 8)
                                                 .padding(.bottom, 8)
                                 }
                                 Text(verbatim: keyModel.primary.text)
-                                        .textCase(context.keyboardCase.isLowercased ? .lowercase : .uppercase)
+                                        .textCase(textCase)
                                         .font(.title2)
                         }
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: widthUnit, height: heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
@@ -142,7 +151,7 @@ struct LargePadExpansibleInputKey: View {
                                 guard memberCount > 1 else { return }
                                 let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                 guard distance > 10 else { return }
-                                let step: CGFloat = context.widthUnit - 14
+                                let step: CGFloat = widthUnit - 14
                                 for index in 0..<memberCount {
                                         let lowPoint: CGFloat = step * CGFloat(index)
                                         let heightPoint: CGFloat = step * CGFloat(index + 1)
@@ -160,7 +169,7 @@ struct LargePadExpansibleInputKey: View {
                                 buffer = 0
                                 if isLongPressing {
                                         guard let selectedElement = keyModel.members.fetch(selectedIndex) else { return }
-                                        let text: String = selectedElement.text
+                                        let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         AudioFeedback.inputed()
                                         context.operate(.process(text))
                                         selectedIndex = 0

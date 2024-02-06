@@ -34,6 +34,8 @@ struct LargePadInstantInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -41,6 +43,7 @@ struct LargePadInstantInputKey: View {
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(4)
                         Text(verbatim: keyText)
+                                .textCase(textCase)
                                 .font(.title2)
                 }
                 .frame(width: context.widthUnit, height: context.heightUnit)
@@ -53,7 +56,8 @@ struct LargePadInstantInputKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.input(keyText))
+                                let text: String = context.keyboardCase.isLowercased ? keyText : keyText.uppercased()
+                                context.operate(.input(text))
                          }
                 )
         }
