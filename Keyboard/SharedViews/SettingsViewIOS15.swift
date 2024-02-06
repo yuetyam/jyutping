@@ -175,8 +175,6 @@ struct SettingsViewIOS15: View {
                                         Text("Keyboard Layout").textCase(nil)
                                 }
 
-                                #if DEBUG
-                                // TODO: Implement
                                 Section {
                                         Toggle("Show Lowercase Keys", isOn: $showLowercaseKeys)
                                                 .onChange(of: showLowercaseKeys) { newValue in
@@ -189,7 +187,6 @@ struct SettingsViewIOS15: View {
                                                         Options.updateKeyTextPreview(to: newValue)
                                                 }
                                 }
-                                #endif
 
                                 Section {
                                         Button {

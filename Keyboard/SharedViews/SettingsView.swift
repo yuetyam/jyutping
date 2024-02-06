@@ -180,8 +180,6 @@ struct SettingsView: View {
                                         Text("Keyboard Layout").textCase(nil)
                                 }
 
-                                #if DEBUG
-                                // TODO: Implement
                                 Section {
                                         Toggle("Show Lowercase Keys", isOn: $showLowercaseKeys)
                                                 .onChange(of: showLowercaseKeys) { newValue in
@@ -194,7 +192,6 @@ struct SettingsView: View {
                                                         Options.updateKeyTextPreview(to: newValue)
                                                 }
                                 }
-                                #endif
 
                                 Section {
                                         Button {

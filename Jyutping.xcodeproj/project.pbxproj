@@ -979,18 +979,18 @@
 		371B6F2B2B3B342E005BB31C /* SharedViews */ = {
 			isa = PBXGroup;
 			children = (
+				371B6F352B3B342E005BB31C /* MotherBoard.swift */,
+				371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */,
+				371B6F312B3B342E005BB31C /* SettingsView.swift */,
+				371B6F372B3B342E005BB31C /* EditingPanel.swift */,
+				371B6F322B3B342E005BB31C /* CandidateBoard.swift */,
+				371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */,
+				371B6F302B3B342E005BB31C /* ToolBar.swift */,
+				371B6F342B3B342E005BB31C /* ToolBarItem.swift */,
+				371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */,
 				371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */,
 				371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */,
-				371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */,
-				371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */,
-				371B6F302B3B342E005BB31C /* ToolBar.swift */,
-				371B6F312B3B342E005BB31C /* SettingsView.swift */,
-				371B6F322B3B342E005BB31C /* CandidateBoard.swift */,
 				371B6F332B3B342E005BB31C /* ScrollViewGestureButton.swift */,
-				371B6F342B3B342E005BB31C /* ToolBarItem.swift */,
-				371B6F352B3B342E005BB31C /* MotherBoard.swift */,
-				371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */,
-				371B6F372B3B342E005BB31C /* EditingPanel.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
