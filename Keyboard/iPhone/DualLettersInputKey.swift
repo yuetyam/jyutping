@@ -31,21 +31,34 @@ struct DualLettersInputKey: View {
                         return .light
                 }
         }
+        private var keyActiveColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .lightEmphatic
+                case .dark:
+                        return .darkEmphatic
+                @unknown default:
+                        return .lightEmphatic
+                }
+        }
 
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let shouldPreviewKey: Bool = Options.keyTextPreview
+                let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
+                let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic)
                 ZStack {
                         Color.interactiveClear
-                        if isTouching {
+                        if (isTouching && shouldPreviewKey) {
                                 KeyPreviewPath()
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.5), radius: 1)
                                         .overlay {
                                                 Text(verbatim: keyText)
-                                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
+                                                        .textCase(textCase)
                                                         .font(.title2)
                                                         .padding(.bottom, context.heightUnit * 2.0)
                                         }
@@ -53,12 +66,12 @@ struct DualLettersInputKey: View {
                                         .padding(.horizontal, 3)
                         } else {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(keyColor)
+                                        .fill(isTouching ? activeColor : keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                                 Text(verbatim: keyText)
-                                        .textCase(shouldShowLowercaseKeys ? .lowercase : .uppercase)
+                                        .textCase(textCase)
                                         .font(.dualLettersInputKeyCompact)
                                         .padding(.bottom, shouldAdjustKeyTextPosition ? 3 : 0)
                         }

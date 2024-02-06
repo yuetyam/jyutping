@@ -25,6 +25,16 @@ struct RightKey: View {
                         return .light
                 }
         }
+        private var keyActiveColor: Color {
+                switch colorScheme {
+                case .light:
+                        return .lightEmphatic
+                case .dark:
+                        return .darkEmphatic
+                @unknown default:
+                        return .lightEmphatic
+                }
+        }
 
         @GestureState private var isTouching: Bool = false
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -46,6 +56,8 @@ struct RightKey: View {
         }
 
         var body: some View {
+                let shouldPreviewKey: Bool = Options.keyTextPreview
+                let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
                 ZStack {
                         if isLongPressing {
                                 let symbols: [String] = responsiveSymbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
@@ -74,7 +86,7 @@ struct RightKey: View {
                                         }
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
-                        } else if isTouching {
+                        } else if (isTouching && shouldPreviewKey) {
                                 KeyPreviewPath()
                                         .fill(keyPreviewColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
@@ -88,7 +100,7 @@ struct RightKey: View {
                         } else {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(keyColor)
+                                        .fill(isTouching ? activeColor : keyColor)
                                         .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
