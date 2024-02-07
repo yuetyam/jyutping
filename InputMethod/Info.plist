@@ -11,7 +11,7 @@
 				<key>TISIconLabels</key>
 				<dict>
 					<key>Primary</key>
-					<string>粵拼</string>
+					<string>Jyutping</string>
 				</dict>
 				<key>TISInputSourceID</key>
 				<string>org.jyutping.inputmethod.Jyutping.JyutpingIM</string>

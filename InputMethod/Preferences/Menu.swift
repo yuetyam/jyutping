@@ -48,6 +48,11 @@ extension JyutpingInputController {
                 Options.updateSelectedPreferencesRow(to: .layouts)
                 displayPreferencesView()
         }
+        @objc func checkForUpdates() {
+                let canCheckForUpdates: Bool = AppDelegate.updaterController?.updater.canCheckForUpdates ?? false
+                guard canCheckForUpdates else { return }
+                AppDelegate.updaterController?.updater.checkForUpdates()
+        }
         @objc private func openHelpWindow() {
                 Options.updateSelectedPreferencesRow(to: .hotkeys)
                 displayPreferencesView()
