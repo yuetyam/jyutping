@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370250E02B752F91009CB0AD /* TextView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370250DF2B752F91009CB0AD /* TextView15PM.swift */; };
 		371B6E332B3B2F32005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E322B3B2F32005BB31C /* CommonExtensions */; };
 		371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E342B3B2F55005BB31C /* CommonExtensions */; };
 		371B6E382B3B2F86005BB31C /* AppDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E372B3B2F86005BB31C /* AppDataSource */; };
@@ -354,6 +355,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		370250DF2B752F91009CB0AD /* TextView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView15PM.swift; sourceTree = "<group>"; };
 		371B6E362B3B2F72005BB31C /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = Modules/AppDataSource; sourceTree = "<group>"; };
 		371B6E392B3B2FE1005BB31C /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = Modules/CoreIME; sourceTree = "<group>"; };
 		371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
@@ -1220,12 +1222,13 @@
 			isa = PBXGroup;
 			children = (
 				37F6E4B32B6A6D360060D2E8 /* InputField15PM.swift */,
+				370250DF2B752F91009CB0AD /* TextView15PM.swift */,
 				375DD0312B67947300257F55 /* CantoneseIMEView15PM.swift */,
-				375DD0332B67961900257F55 /* DarkModeView15PM.swift */,
 				375DD0352B67981700257F55 /* SchemeView15PM.swift */,
 				37EA87D32B66D10000BADC1B /* PinyinReverseLookupView15PM.swift */,
 				37EA87D52B66D91C00BADC1B /* CangjieReverseLookupView15PM.swift */,
 				375DD0372B679B2900257F55 /* EmojiSuggestionsView15PM.swift */,
+				375DD0332B67961900257F55 /* DarkModeView15PM.swift */,
 			);
 			path = iPhone15ProMax;
 			sourceTree = "<group>";
@@ -1952,6 +1955,7 @@
 				371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */,
 				371B6EE02B3B3108005BB31C /* MacInputMethodInstallationView.swift in Sources */,
 				371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */,
+				370250E02B752F91009CB0AD /* TextView15PM.swift in Sources */,
 				371B6EAD2B3B3108005BB31C /* SafariView.swift in Sources */,
 				371B6EBC2B3B3108005BB31C /* IOSConfusionView.swift in Sources */,
 				371B6ECD2B3B3108005BB31C /* MacCantonMetroView.swift in Sources */,
