@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		370250E02B752F91009CB0AD /* TextView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370250DF2B752F91009CB0AD /* TextView15PM.swift */; };
 		371B6E332B3B2F32005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E322B3B2F32005BB31C /* CommonExtensions */; };
 		371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E342B3B2F55005BB31C /* CommonExtensions */; };
 		371B6E382B3B2F86005BB31C /* AppDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E372B3B2F86005BB31C /* AppDataSource */; };
@@ -229,16 +228,6 @@
 		371EABF72B38802A0075089B /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371EABF62B38802A0075089B /* CommonExtensions */; };
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
-		375DD0322B67947300257F55 /* CantoneseIMEView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD0312B67947300257F55 /* CantoneseIMEView15PM.swift */; };
-		375DD0342B67961900257F55 /* DarkModeView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD0332B67961900257F55 /* DarkModeView15PM.swift */; };
-		375DD0362B67981700257F55 /* SchemeView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD0352B67981700257F55 /* SchemeView15PM.swift */; };
-		375DD0382B679B2900257F55 /* EmojiSuggestionsView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD0372B679B2900257F55 /* EmojiSuggestionsView15PM.swift */; };
-		375DD03B2B67D83F00257F55 /* CantoneseIMEView8P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD03A2B67D83F00257F55 /* CantoneseIMEView8P.swift */; };
-		375DD03D2B67D91600257F55 /* DarkModeView8P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD03C2B67D91600257F55 /* DarkModeView8P.swift */; };
-		375DD03F2B67D99400257F55 /* SchemeView8P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD03E2B67D99400257F55 /* SchemeView8P.swift */; };
-		375DD0412B67DA0400257F55 /* PinyinReverseLookupView8P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD0402B67DA0400257F55 /* PinyinReverseLookupView8P.swift */; };
-		375DD0432B67DAE800257F55 /* CangjieReverseLookupView8P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD0422B67DAE800257F55 /* CangjieReverseLookupView8P.swift */; };
-		375DD0452B67DB6400257F55 /* EmojiSuggestionsView8P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375DD0442B67DB6400257F55 /* EmojiSuggestionsView8P.swift */; };
 		3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
 		37E6AD6B2B3B381700F02279 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD442B3B381600F02279 /* CommentLabel.swift */; };
@@ -282,13 +271,10 @@
 		37E6ADAF2B3B389F00F02279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD9A2B3B389E00F02279 /* Localizable.strings */; };
 		37E6ADB32B3B39D000F02279 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; };
 		37E6ADB42B3B39D000F02279 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		37EA87D42B66D10000BADC1B /* PinyinReverseLookupView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA87D32B66D10000BADC1B /* PinyinReverseLookupView15PM.swift */; };
-		37EA87D62B66D91C00BADC1B /* CangjieReverseLookupView15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EA87D52B66D91C00BADC1B /* CangjieReverseLookupView15PM.swift */; };
 		37EFD7312B3719C20089D346 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37EFD7302B3719C20089D346 /* Preview Assets.xcassets */; };
 		37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD73A2B3719C30089D346 /* JyutpingTests.swift */; };
 		37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7442B3719C30089D346 /* JyutpingUITests.swift */; };
 		37EFD7472B3719C30089D346 /* JyutpingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */; };
-		37F6E4B42B6A6D360060D2E8 /* InputField15PM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6E4B32B6A6D360060D2E8 /* InputField15PM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -355,7 +341,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		370250DF2B752F91009CB0AD /* TextView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView15PM.swift; sourceTree = "<group>"; };
 		371B6E362B3B2F72005BB31C /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = Modules/AppDataSource; sourceTree = "<group>"; };
 		371B6E392B3B2FE1005BB31C /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = Modules/CoreIME; sourceTree = "<group>"; };
 		371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
@@ -615,16 +600,6 @@
 		371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		371EABF42B3880150075089B /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = Modules/CommonExtensions; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
-		375DD0312B67947300257F55 /* CantoneseIMEView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseIMEView15PM.swift; sourceTree = "<group>"; };
-		375DD0332B67961900257F55 /* DarkModeView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeView15PM.swift; sourceTree = "<group>"; };
-		375DD0352B67981700257F55 /* SchemeView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeView15PM.swift; sourceTree = "<group>"; };
-		375DD0372B679B2900257F55 /* EmojiSuggestionsView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSuggestionsView15PM.swift; sourceTree = "<group>"; };
-		375DD03A2B67D83F00257F55 /* CantoneseIMEView8P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CantoneseIMEView8P.swift; sourceTree = "<group>"; };
-		375DD03C2B67D91600257F55 /* DarkModeView8P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeView8P.swift; sourceTree = "<group>"; };
-		375DD03E2B67D99400257F55 /* SchemeView8P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeView8P.swift; sourceTree = "<group>"; };
-		375DD0402B67DA0400257F55 /* PinyinReverseLookupView8P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinyinReverseLookupView8P.swift; sourceTree = "<group>"; };
-		375DD0422B67DAE800257F55 /* CangjieReverseLookupView8P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieReverseLookupView8P.swift; sourceTree = "<group>"; };
-		375DD0442B67DB6400257F55 /* EmojiSuggestionsView8P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSuggestionsView8P.swift; sourceTree = "<group>"; };
 		3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablingKeyboardView.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
 		37E6AD442B3B381600F02279 /* CommentLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
@@ -688,8 +663,6 @@
 		37E6ADAD2B3B389F00F02279 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37E6ADB02B3B38B100F02279 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		37E6ADB12B3B39B500F02279 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		37EA87D32B66D10000BADC1B /* PinyinReverseLookupView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinyinReverseLookupView15PM.swift; sourceTree = "<group>"; };
-		37EA87D52B66D91C00BADC1B /* CangjieReverseLookupView15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CangjieReverseLookupView15PM.swift; sourceTree = "<group>"; };
 		37EFD7252B3719C10089D346 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD72E2B3719C20089D346 /* Jyutping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jyutping.entitlements; sourceTree = "<group>"; };
 		37EFD7302B3719C20089D346 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -698,7 +671,6 @@
 		37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD7442B3719C30089D346 /* JyutpingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITests.swift; sourceTree = "<group>"; };
 		37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		37F6E4B32B6A6D360060D2E8 /* InputField15PM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField15PM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -812,7 +784,6 @@
 				3760AA422B4FD0570027EC11 /* About */,
 				371B6E702B3B3107005BB31C /* Search */,
 				3760AA442B4FD0B40027EC11 /* Components */,
-				37EA87D22B66D0AA00BADC1B /* Screenshot */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -1205,34 +1176,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		375DD0392B67D80700257F55 /* iPhone8Plus */ = {
-			isa = PBXGroup;
-			children = (
-				375DD03A2B67D83F00257F55 /* CantoneseIMEView8P.swift */,
-				375DD03C2B67D91600257F55 /* DarkModeView8P.swift */,
-				375DD03E2B67D99400257F55 /* SchemeView8P.swift */,
-				375DD0402B67DA0400257F55 /* PinyinReverseLookupView8P.swift */,
-				375DD0422B67DAE800257F55 /* CangjieReverseLookupView8P.swift */,
-				375DD0442B67DB6400257F55 /* EmojiSuggestionsView8P.swift */,
-			);
-			path = iPhone8Plus;
-			sourceTree = "<group>";
-		};
-		375DD0462B67DBC500257F55 /* iPhone15ProMax */ = {
-			isa = PBXGroup;
-			children = (
-				37F6E4B32B6A6D360060D2E8 /* InputField15PM.swift */,
-				370250DF2B752F91009CB0AD /* TextView15PM.swift */,
-				375DD0312B67947300257F55 /* CantoneseIMEView15PM.swift */,
-				375DD0352B67981700257F55 /* SchemeView15PM.swift */,
-				37EA87D32B66D10000BADC1B /* PinyinReverseLookupView15PM.swift */,
-				37EA87D52B66D91C00BADC1B /* CangjieReverseLookupView15PM.swift */,
-				375DD0372B679B2900257F55 /* EmojiSuggestionsView15PM.swift */,
-				375DD0332B67961900257F55 /* DarkModeView15PM.swift */,
-			);
-			path = iPhone15ProMax;
-			sourceTree = "<group>";
-		};
 		3760AA422B4FD0570027EC11 /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -1318,15 +1261,6 @@
 				37E6AD9A2B3B389E00F02279 /* Localizable.strings */,
 			);
 			path = Localization;
-			sourceTree = "<group>";
-		};
-		37EA87D22B66D0AA00BADC1B /* Screenshot */ = {
-			isa = PBXGroup;
-			children = (
-				375DD0392B67D80700257F55 /* iPhone8Plus */,
-				375DD0462B67DBC500257F55 /* iPhone15ProMax */,
-			);
-			path = Screenshot;
 			sourceTree = "<group>";
 		};
 		37EFD71C2B3719C10089D346 = {
@@ -1889,8 +1823,6 @@
 			files = (
 				371B6ECE2B3B3108005BB31C /* MacMetroLineView.swift in Sources */,
 				371B6EC82B3B3108005BB31C /* CantoneseTextLabel.swift in Sources */,
-				37EA87D42B66D10000BADC1B /* PinyinReverseLookupView15PM.swift in Sources */,
-				375DD0322B67947300257F55 /* CantoneseIMEView15PM.swift in Sources */,
 				371B6EB92B3B3108005BB31C /* IOSSurnamesView.swift in Sources */,
 				371B6EE52B3B3108005BB31C /* Speaker.swift in Sources */,
 				371B6E982B3B3108005BB31C /* JyutpingApp.swift in Sources */,
@@ -1904,11 +1836,9 @@
 				371B6EE42B3B3108005BB31C /* Speech.swift in Sources */,
 				371B6EA22B3B3108005BB31C /* NumbersView.swift in Sources */,
 				371B6EC72B3B3108005BB31C /* GwongWanLabel.swift in Sources */,
-				375DD03D2B67D91600257F55 /* DarkModeView8P.swift in Sources */,
 				371B6EC42B3B3108005BB31C /* PronunciationLabel.swift in Sources */,
 				371B6EB02B3B3108005BB31C /* EnhancedLabel.swift in Sources */,
 				371B6EC12B3B3108005BB31C /* IOSMetroLineView.swift in Sources */,
-				375DD0382B679B2900257F55 /* EmojiSuggestionsView15PM.swift in Sources */,
 				371B6EB52B3B3108005BB31C /* Text2SpeechView.swift in Sources */,
 				371B6EC02B3B3108005BB31C /* IOSHongKongMTRView.swift in Sources */,
 				371B6EAE2B3B3108005BB31C /* ShareSheetView.swift in Sources */,
@@ -1925,15 +1855,12 @@
 				371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */,
 				371B6E9C2B3B3108005BB31C /* SyllableChecker.swift in Sources */,
 				371B6ED12B3B3108005BB31C /* MacShamChunMetroView.swift in Sources */,
-				375DD0432B67DAE800257F55 /* CangjieReverseLookupView8P.swift in Sources */,
 				371B6EA42B3B3108005BB31C /* SolarTermsView.swift in Sources */,
 				371B6EDD2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift in Sources */,
-				375DD0412B67DA0400257F55 /* PinyinReverseLookupView8P.swift in Sources */,
 				371B6ED42B3B3108005BB31C /* MacCinZiManView.swift in Sources */,
 				371B6EB42B3B3108005BB31C /* FAQView.swift in Sources */,
 				371B6EAF2B3B3108005BB31C /* IOSContentView.swift in Sources */,
 				371B6EE62B3B3108005BB31C /* AppMaster.swift in Sources */,
-				37F6E4B42B6A6D360060D2E8 /* InputField15PM.swift in Sources */,
 				371B6EDF2B3B3108005BB31C /* MacSurnamesView.swift in Sources */,
 				371B6EA12B3B3108005BB31C /* StemsBranchesView.swift in Sources */,
 				371B6EDE2B3B3108005BB31C /* MacContentViewMonterey.swift in Sources */,
@@ -1945,9 +1872,7 @@
 				371B6EBD2B3B3108005BB31C /* IOSCantonMetroView.swift in Sources */,
 				371B6EBF2B3B3108005BB31C /* IOSCinZiManView.swift in Sources */,
 				371B6ED72B3B3108005BB31C /* SearchField.swift in Sources */,
-				37EA87D62B66D91C00BADC1B /* CangjieReverseLookupView15PM.swift in Sources */,
 				371B6EBB2B3B3108005BB31C /* IOSShamChunMetroView.swift in Sources */,
-				375DD03F2B67D99400257F55 /* SchemeView8P.swift in Sources */,
 				371B6EE12B3B3108005BB31C /* MacExpressionsView.swift in Sources */,
 				371B6EAC2B3B3108005BB31C /* TextExtensions.swift in Sources */,
 				371B6ED22B3B3108005BB31C /* MacAboutView.swift in Sources */,
@@ -1955,14 +1880,12 @@
 				371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */,
 				371B6EE02B3B3108005BB31C /* MacInputMethodInstallationView.swift in Sources */,
 				371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */,
-				370250E02B752F91009CB0AD /* TextView15PM.swift in Sources */,
 				371B6EAD2B3B3108005BB31C /* SafariView.swift in Sources */,
 				371B6EBC2B3B3108005BB31C /* IOSConfusionView.swift in Sources */,
 				371B6ECD2B3B3108005BB31C /* MacCantonMetroView.swift in Sources */,
 				371B6EAA2B3B3108005BB31C /* ViewExtensions.swift in Sources */,
 				371B6EA02B3B3108005BB31C /* ChineseZodiacView.swift in Sources */,
 				371B6EA32B3B3108005BB31C /* TermView.swift in Sources */,
-				375DD0452B67DB6400257F55 /* EmojiSuggestionsView8P.swift in Sources */,
 				371B6EC52B3B3108005BB31C /* SearchView.swift in Sources */,
 				371B6ECF2B3B3108005BB31C /* MacHongKongMTRView.swift in Sources */,
 				371B6E9F2B3B3108005BB31C /* SyllableCell.swift in Sources */,
@@ -1975,13 +1898,10 @@
 				371B6ECC2B3B3108005BB31C /* MacStationLabel.swift in Sources */,
 				371B6E9D2B3B3108005BB31C /* Syllable2IPA.swift in Sources */,
 				371B6E9E2B3B3108005BB31C /* IOSToneTableView.swift in Sources */,
-				375DD03B2B67D83F00257F55 /* CantoneseIMEView8P.swift in Sources */,
 				371B6EC32B3B3108005BB31C /* JyutpingView.swift in Sources */,
-				375DD0342B67961900257F55 /* DarkModeView15PM.swift in Sources */,
 				371B6ED92B3B3108005BB31C /* PronunciationView.swift in Sources */,
 				371B6EDA2B3B3108005BB31C /* YingWaaFanWanView.swift in Sources */,
 				371B6EA82B3B3108005BB31C /* ColorExtensions.swift in Sources */,
-				375DD0362B67981700257F55 /* SchemeView15PM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
