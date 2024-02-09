@@ -118,7 +118,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 defer {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
-                                textDocumentProxy.deleteBackward()
+                                if (textDocumentProxy.documentContextBeforeInput?.hasSuffix(String.zeroWidthSpace) ?? false) {
+                                        textDocumentProxy.deleteBackward()
+                                }
                         }
                 }
                 defer {
