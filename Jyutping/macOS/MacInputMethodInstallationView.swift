@@ -12,7 +12,7 @@ struct MacInputMethodInstallationView: View {
                         LazyVStack(spacing: 16) {
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text(verbatim: "由於各種因素限制，本應用程式並冇包含輸入法本身。請前往網站下載輸入法程式，另行安裝。")
+                                                Text(verbatim: "由於各種因素限制，本應用程式並冇包含輸入法本身。請前往網站下載輸入法程式，另行安裝。").font(.master)
                                                 Spacer()
                                         }
                                         HStack {
@@ -23,7 +23,7 @@ struct MacInputMethodInstallationView: View {
                                 .block()
 
                                 HStack(spacing: 16) {
-                                        Link("Website", destination: About.WebsiteURL).foregroundStyle(Color.accentColor)
+                                        Link("Website", destination: About.WebsiteURL).font(.master).foregroundStyle(Color.accentColor)
                                         Text(verbatim: About.WebsiteAddress).font(.fixedWidth)
                                         Button {
                                                 AppMaster.copy(About.WebsiteAddress)
@@ -32,12 +32,12 @@ struct MacInputMethodInstallationView: View {
                                                 if isWebsiteAddressCopied {
                                                         HStack(spacing: 4) {
                                                                 Image(systemName: "text.badge.checkmark")
-                                                                Text("Copied")
+                                                                Text("Copied").font(.master)
                                                         }
                                                 } else {
                                                         HStack(spacing: 4) {
                                                                 Image(systemName: "doc.on.doc")
-                                                                Text("Copy")
+                                                                Text("Copy").font(.master)
                                                         }
                                                 }
                                         }

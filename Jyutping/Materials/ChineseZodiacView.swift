@@ -49,7 +49,7 @@ struct ChineseZodiacView: View {
                 牛,ngau4,🐃
                 虎,fu2,🐅
                 兔,tou3,🐇
-                龍,lung4,🐲
+                龍,lung4,🐉
                 蛇,se4,🐍
                 馬,maa5,🐎
                 羊,joeng4,🐑
