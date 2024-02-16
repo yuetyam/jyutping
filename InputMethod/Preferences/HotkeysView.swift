@@ -97,7 +97,7 @@ struct HotkeysView: View {
                                 }
                                 .block()
                                 HStack(spacing: 4) {
-                                        LabelText("Remove highlighted Candidate from User Lexicon")
+                                        LabelText("Remove current Candidate from User Lexicon")
                                         Text.separator
                                         KeyBlockView.control
                                         Text.plus
@@ -116,9 +116,9 @@ struct HotkeysView: View {
                                 .block()
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
-                                                LabelText("Highlight previous Candidate")
+                                                LabelText("Move to previous Candidate")
                                                 Text.separator
-                                                KeyBlockView("⯅")
+                                                KeyBlockView("▲")
                                                 Text.or
                                                 KeyBlockView.shift
                                                 Text.plus
@@ -126,9 +126,9 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Highlight next Candidate")
+                                                LabelText("Move to next Candidate")
                                                 Text.separator
-                                                KeyBlockView("⯆")
+                                                KeyBlockView("▼")
                                                 Text.or
                                                 KeyBlockView.tab
                                                 Spacer()
@@ -136,7 +136,7 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Backward to previous Candidate page")
                                                 Text.separator
-                                                KeyBlockView("⯇")
+                                                KeyBlockView("◀")
                                                 Text.or
                                                 KeyBlockView("-")
                                                 Text.or
@@ -146,7 +146,7 @@ struct HotkeysView: View {
                                         HStack(spacing: 4) {
                                                 LabelText("Forward to next Candidate page")
                                                 Text.separator
-                                                KeyBlockView("⯈")
+                                                KeyBlockView("▶")
                                                 Text.or
                                                 KeyBlockView("=")
                                                 Text.or
@@ -154,7 +154,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Jump to the first Candidate page")
+                                                LabelText("Back to the first Candidate page")
                                                 Text.separator
                                                 KeyBlockView("Home ⤒")
                                                 Spacer()

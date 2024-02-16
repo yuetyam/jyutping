@@ -25,12 +25,12 @@ struct DisplayCandidate: Hashable {
                 case .emoji:
                         let comment: String = Converter.convert(candidate.lexiconText, to: Options.characterStandard)
                         self.text = text
-                        self.comment = comment
+                        self.comment = "(" + comment + ")"
                         self.secondaryComment = nil
                 case .symbol:
                         let comment: String = Converter.convert(candidate.lexiconText, to: Options.characterStandard)
                         self.text = text
-                        self.comment = comment
+                        self.comment = "(" + comment + ")"
                         self.secondaryComment = nil
                 case .compose:
                         let cantoneseComment: String = candidate.lexiconText

@@ -55,15 +55,15 @@ extension Font {
 extension Font {
 
         private(set) static var comment: Font = commentFont(size: AppSettings.commentFontSize)
-        private(set) static var commentTone: Font = {
-                let toneFontSize: CGFloat = AppSettings.commentFontSize - 4
-                return commentFont(size: toneFontSize)
-        }()
+        private(set) static var commentTone: Font = commentFont(size: AppSettings.commentFontSize - 4)
+        private(set) static var annotation: Font = commentFont(size: AppSettings.commentFontSize - 2)
         static func updateCommentFont() {
                 let commentFontSize: CGFloat = AppSettings.commentFontSize
                 let toneFontSize: CGFloat = commentFontSize - 4
+                let annotationFontSize: CGFloat = commentFontSize - 2
                 comment = commentFont(size: commentFontSize)
                 commentTone = commentFont(size: toneFontSize)
+                annotation = commentFont(size: annotationFontSize)
         }
 
         private static func commentFont(size: CGFloat) -> Font {

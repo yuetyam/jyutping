@@ -80,7 +80,7 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("｜", comment: fullWidth),
                         PunctuationSymbol("\\", comment: halfWidth),
                         PunctuationSymbol("＼", comment: fullWidth),
-                        PunctuationSymbol("•", comment: "Bullet", secondaryComment: "U+2022"),
+                        PunctuationSymbol("•", comment: "項目符號", secondaryComment: "U+2022"),
                         PunctuationSymbol("·", comment: "間隔號", secondaryComment: "U+00B7"),
                         PunctuationSymbol("‧", comment: "連字點", secondaryComment: "U+2027"),
                         PunctuationSymbol("･", comment: "半寬中點", secondaryComment: "U+FF65"),
@@ -92,7 +92,7 @@ struct PunctuationKey: Hashable {
         static let backquote: PunctuationKey = {
                 let symbols: [PunctuationSymbol] = [
                         PunctuationSymbol("`"),
-                        PunctuationSymbol("•", comment: "Bullet", secondaryComment: "U+2022"),
+                        PunctuationSymbol("•", comment: "項目符號", secondaryComment: "U+2022"),
                         PunctuationSymbol("·", comment: "間隔號", secondaryComment: "U+00B7"),
                         PunctuationSymbol("‧", comment: "連字點", secondaryComment: "U+2027"),
                         PunctuationSymbol("･", comment: "半寬中點", secondaryComment: "U+FF65"),

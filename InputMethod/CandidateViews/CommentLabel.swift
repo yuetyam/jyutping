@@ -38,9 +38,9 @@ struct CommentLabel: View {
                 case .specialMark:
                         Text(verbatim: comment).font(.comment)
                 case .emoji:
-                        Text(verbatim: comment).font(.comment)
+                        Text(verbatim: comment).font(.annotation)
                 case .symbol:
-                        Text(verbatim: comment).font(.comment)
+                        Text(verbatim: comment).font(.annotation)
                 case .compose:
                         Text(verbatim: comment).font(.comment)
                 }

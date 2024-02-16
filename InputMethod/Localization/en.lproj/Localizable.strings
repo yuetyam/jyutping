@@ -59,14 +59,14 @@
 "Open Preferences Window (This Window)" = "Open Settings Window (This Window)";
 "Enter/Exit Options View" = "Enter/Exit Options View";
 "Directly toggle specific option" = "Directly toggle specific option";
-"Remove highlighted Candidate from User Lexicon" = "Remove highlighted Candidate from User Lexicon";
+"Remove current Candidate from User Lexicon" = "Remove current Candidate from User Lexicon";
 "Clear current pre-edit text" = "Clear current pre-edit text";
 
-"Highlight previous Candidate" = "Highlight previous Candidate";
-"Highlight next Candidate" = "Highlight next Candidate";
+"Move to previous Candidate" = "Move to previous Candidate";
+"Move to next Candidate" = "Move to next Candidate";
 "Backward to previous Candidate page" = "Backward to previous Candidate page";
 "Forward to next Candidate page" = "Forward to next Candidate page";
-"Jump to the first Candidate page" = "Jump to the first Candidate page";
+"Back to the first Candidate page" = "Back to the first Candidate page";
 "or" = "or";
 
 "Speak Candidate (Using system's built-in TTS)" = "Speak Candidate (Using system's built-in TTS)";
