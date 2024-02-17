@@ -433,6 +433,10 @@ final class JyutpingInputController: IMKInputController {
                                 return PunctuationKey.period.shiftingSymbols
                         case PunctuationKey.slash.keyText:
                                 return PunctuationKey.slash.symbols
+                        case PunctuationKey.quote.keyText:
+                                return PunctuationKey.quote.symbols
+                        case PunctuationKey.quote.shiftingKeyText:
+                                return PunctuationKey.quote.shiftingSymbols
                         case PunctuationKey.bracketLeft.shiftingKeyText:
                                 return PunctuationKey.bracketLeft.shiftingSymbols
                         case PunctuationKey.bracketRight.shiftingKeyText:
