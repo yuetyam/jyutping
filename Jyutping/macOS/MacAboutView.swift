@@ -28,15 +28,13 @@ struct MacAboutView: View {
                                 VStack {
                                         LinkLabel(icon: "paperplane", title: "Telegram Group", link: About.TelegramAddress)
                                         LinkLabel(icon: "person.2", title: "QQ Group", link: About.QQAddress, message: About.QQGroupID)
-                                }
-                                .block()
-                                VStack {
                                         LinkLabel(icon: "at", title: "Twitter", link: About.TwitterAddress)
                                         LinkLabel(icon: "circle.square", title: "Instagram", link: About.InstagramAddress)
                                 }
                                 .block()
                                 VStack {
-                                        LinkLabel(icon: "smallcircle.filled.circle", title: "GitHub Issues", link: About.GitHubIssuesAddress)
+                                        LinkLabel(icon: "checkmark.message", title: "Google Forms", link: About.GoogleFormsAddress)
+                                        LinkLabel(icon: "checkmark.message", title: "Tencent Survey", link: About.TencentSurveyAddress)
                                         LinkLabel(icon: "envelope", title: "Email Feedback", link: mailtoScheme, message: About.EmailAddress)
                                 }
                                 .block()
@@ -70,13 +68,16 @@ private struct LinkLabel: View {
                 self.icon = icon
                 self.title = title
                 self.link = link
-                self.message = message ?? link
+                let messageText: String = message ?? link
+                self.message = messageText
+                self.isLongMessage = messageText.count > 64
         }
 
         private let icon: String
         private let title: LocalizedStringKey
         private let link: String
         private let message: String
+        private let isLongMessage: Bool
 
         var body: some View {
                 HStack(spacing: 16) {
@@ -90,7 +91,10 @@ private struct LinkLabel: View {
                                 }
                         }
                         .foregroundStyle(Color.accentColor)
-                        Text(verbatim: message).font(.callout.monospaced())
+                        Text(verbatim: message)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                                .font(isLongMessage ? Font.callout : Font.callout.monospaced())
                         Spacer()
                 }
         }

@@ -21,7 +21,8 @@ public struct About {
         public static let InstagramAddress: String = "https://www.instagram.com/jyutping_app"
         public static let InstagramUsername: String = "jyutping_app"
 
-        public static let GitHubIssuesAddress: String = "https://github.com/yuetyam/jyutping/issues"
+        public static let GoogleFormsAddress: String = #"https://docs.google.com/forms/d/e/1FAIpQLSeyw4yiXr3z-XiGrem_ykaDM9VbyTcoNNzgjc7wgtd_b4Nc0Q/viewform"#
+        public static let TencentSurveyAddress: String = "https://wj.qq.com/s2/14037245/fe08"
         public static let EmailAddress: String = "support@jyutping.app"
 
         public static let AppStoreAppScheme: String = "itms-apps://apple.com/app/id1509367629"

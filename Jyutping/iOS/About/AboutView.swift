@@ -42,6 +42,7 @@ struct AboutView: View {
                                                 UsernameCopyButton(About.TelegramUsername)
                                                 URLCopyButton(About.TelegramAddress)
                                         }
+
                                         Button {
                                                 let appUrl: URL = URL(string: About.QQAppScheme)!
                                                 let webUrl: URL = URL(string: About.QQAddress)!
@@ -52,8 +53,7 @@ struct AboutView: View {
                                         .contextMenu {
                                                 MenuCopyButton(About.QQGroupID, title: "Copy QQ Group ID")
                                         }
-                                }
-                                Section {
+
                                         // Twitter App supports Universal Links
                                         Link(destination: URL(string: About.TwitterAddress)!) {
                                                 EnhancedLabel("Twitter", icon: "at", symbol: .arrowUpForward)
@@ -76,13 +76,19 @@ struct AboutView: View {
                                         }
                                 }
                                 Section {
-                                        // GitHub App supports Universal Links
-                                        Link(destination: URL(string: About.GitHubIssuesAddress)!) {
-                                                EnhancedLabel("GitHub Issues", icon: "smallcircle.filled.circle", symbol: .arrowUpForward)
+                                        Link(destination: URL(string: About.GoogleFormsAddress)!) {
+                                                EnhancedLabel("Google Forms", icon: "checkmark.message", symbol: .safari)
                                         }
                                         .contextMenu {
-                                                URLCopyButton(About.GitHubIssuesAddress)
+                                                URLCopyButton(About.GoogleFormsAddress)
                                         }
+                                        Link(destination: URL(string: About.TencentSurveyAddress)!) {
+                                                EnhancedLabel("Tencent Survey", icon: "checkmark.message", symbol: .safari)
+                                        }
+                                        .contextMenu {
+                                                URLCopyButton(About.TencentSurveyAddress)
+                                        }
+
                                         EmailFeedbackButton()
                                                 .contextMenu {
                                                         MenuCopyButton(About.EmailAddress, title: "Copy Email Address")
