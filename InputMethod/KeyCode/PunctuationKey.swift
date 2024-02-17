@@ -88,10 +88,9 @@ struct PunctuationKey: Hashable {
                 ]
                 return PunctuationKey(keyText: "\\", shiftingKeyText: "|", instantSymbol: "、", instantShiftingSymbol: nil, symbols: [.init("、")], shiftingSymbols: shiftingSymbols)
         }()
-
         static let backquote: PunctuationKey = {
                 let symbols: [PunctuationSymbol] = [
-                        PunctuationSymbol("`"),
+                        PunctuationSymbol("`", comment: "重音符", secondaryComment: "U+0060"),
                         PunctuationSymbol("•", comment: "項目符號", secondaryComment: "U+2022"),
                         PunctuationSymbol("·", comment: "間隔號", secondaryComment: "U+00B7"),
                         PunctuationSymbol("‧", comment: "連字點", secondaryComment: "U+2027"),
