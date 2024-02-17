@@ -5,16 +5,16 @@ struct ChineseZodiacView: View {
                 #if os(macOS)
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                HeaderTermView(term: Term(name: "十二生肖", romanization: "sap6 ji6 sang1 ciu3")).block()
+                                TermView(term: Term(name: "十二生肖", romanization: "sap6 ji6 sang1 ciu3")).block()
                                 VStack {
                                         ForEach(terms) {
-                                                TermView(term: $0, placeholder: "joeng4")
+                                                TermView(term: $0)
                                         }
                                 }
                                 .block()
                                 VStack {
                                         ForEach(altTerms) {
-                                                TermView(term: $0, placeholder: "daai6 cung4")
+                                                TermView(term: $0)
                                         }
                                 }
                                 .block()
@@ -25,16 +25,16 @@ struct ChineseZodiacView: View {
                 #else
                 List {
                         Section {
-                                HeaderTermView(term: Term(name: "十二生肖", romanization: "sap6 ji6 sang1 ciu3"))
+                                TermView(term: Term(name: "十二生肖", romanization: "sap6 ji6 sang1 ciu3"))
                         }
                         Section {
                                 ForEach(terms) {
-                                        TermView(term: $0, placeholder: "joeng4")
+                                        TermView(term: $0)
                                 }
                         }
                         Section {
                                 ForEach(altTerms) {
-                                        TermView(term: $0, placeholder: "daai6 cung4")
+                                        TermView(term: $0)
                                 }
                         }
                 }

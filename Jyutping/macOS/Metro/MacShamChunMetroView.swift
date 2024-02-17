@@ -11,14 +11,12 @@ struct MacShamChunMetroView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                HeaderTermView(term: Term(name: "深圳地鐵", romanization: "sam1 zan3 dei6 tit3")).block()
+                                TermView(term: Term(name: "深圳地鐵", romanization: "sam1 zan3 dei6 tit3")).block()
                                 ForEach(0..<lines.count, id: \.self) { index in
                                         MacMetroLineView(line: lines[index], isExpanded: $expanded[index])
                                 }
                         }
                         .animation(.default, value: expanded)
-                        .font(.master)
-                        .textSelection(.enabled)
                         .padding()
                         .task {
                                 guard lines.isEmpty else { return }

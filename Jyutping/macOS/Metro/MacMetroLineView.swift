@@ -22,11 +22,12 @@ struct MacMetroLineView: View {
                                 .onTapGesture {
                                         isExpanded.toggle()
                                 }
-                                ForEach(0..<line.stations.count, id: \.self) { index in
-                                        let station = line.stations[index]
-                                        let placeholder = line.longest ?? station
-                                        MacStationLabel(station: station, placeholder: placeholder)
+                                VStack(alignment: .leading) {
+                                        ForEach(0..<line.stations.count, id: \.self) { index in
+                                                MacStationLabel(station: line.stations[index])
+                                        }
                                 }
+                                .fixedSize(horizontal: true, vertical: false)
                         }
                         .block()
                 } else {

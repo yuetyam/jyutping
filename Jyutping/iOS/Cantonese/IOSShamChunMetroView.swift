@@ -11,7 +11,7 @@ struct IOSShamChunMetroView: View {
         var body: some View {
                 List {
                         Section {
-                                HeaderTermView(term: Term(name: "深圳地鐵", romanization: "sam1 zan3 dei6 tit3"))
+                                TermView(term: Term(name: "深圳地鐵", romanization: "sam1 zan3 dei6 tit3"))
                         }
                         ForEach(0..<lines.count, id: \.self) { index in
                                 Section {

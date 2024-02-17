@@ -5,16 +5,16 @@ struct StemsBranchesView: View {
                 #if os(macOS)
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                HeaderTermView(term: Term(name: "天干地支", romanization: "tin1 gon1 dei6 zi1")).block()
+                                TermView(term: Term(name: "天干地支", romanization: "tin1 gon1 dei6 zi1")).block()
                                 VStack {
                                         ForEach(stems) {
-                                                TermView(term: $0, placeholder: "gaap3")
+                                                TermView(term: $0)
                                         }
                                 }
                                 .block()
                                 VStack {
                                         ForEach(branches) {
-                                                TermView(term: $0, placeholder: "maau5")
+                                                TermView(term: $0)
                                         }
                                 }
                                 .block()
@@ -25,16 +25,16 @@ struct StemsBranchesView: View {
                 #else
                 List {
                         Section {
-                                HeaderTermView(term: Term(name: "天干地支", romanization: "tin1 gon1 dei6 zi1"))
+                                TermView(term: Term(name: "天干地支", romanization: "tin1 gon1 dei6 zi1"))
                         }
                         Section {
                                 ForEach(stems) {
-                                        TermView(term: $0, placeholder: "gaap3")
+                                        TermView(term: $0)
                                 }
                         }
                         Section {
                                 ForEach(branches) {
-                                        TermView(term: $0, placeholder: "maau5")
+                                        TermView(term: $0)
                                 }
                         }
                 }

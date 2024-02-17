@@ -11,7 +11,7 @@ struct MacSurnamesView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(alignment: .leading, spacing: 8) {
-                                HeaderTermView(term: Term(name: "百家姓", romanization: "baak3 gaa1 sing3")).block()
+                                TermView(term: Term(name: "百家姓", romanization: "baak3 gaa1 sing3")).block()
                                 ForEach(0..<surnames.count, id: \.self) { index in
                                         MacLineUnitView(line: surnames[index])
                                 }

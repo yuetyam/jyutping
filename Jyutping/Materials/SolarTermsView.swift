@@ -6,10 +6,10 @@ struct SolarTermsView: View {
                 #if os(macOS)
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                HeaderTermView(term: Term(name: "二十四節氣", romanization: "ji6 sap6 sei3 zit3 hei3")).block()
+                                TermView(term: Term(name: "二十四節氣", romanization: "ji6 sap6 sei3 zit3 hei3")).block()
                                 VStack {
                                         ForEach(terms) {
-                                                TermView(term: $0, placeholder: "soeng1 gong3")
+                                                TermView(term: $0)
                                         }
                                 }
                                 .block()
@@ -20,11 +20,11 @@ struct SolarTermsView: View {
                 #else
                 List {
                         Section {
-                                HeaderTermView(term: Term(name: "二十四節氣", romanization: "ji6 sap6 sei3 zit3 hei3"))
+                                TermView(term: Term(name: "二十四節氣", romanization: "ji6 sap6 sei3 zit3 hei3"))
                         }
                         Section {
                                 ForEach(terms) {
-                                        TermView(term: $0, placeholder: "soeng1 gong3")
+                                        TermView(term: $0)
                                 }
                         }
                 }

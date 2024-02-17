@@ -11,7 +11,7 @@ struct IOSSurnamesView: View {
         var body: some View {
                 List {
                         Section {
-                                HeaderTermView(term: Term(name: "百家姓", romanization: "baak3 gaa1 sing3"))
+                                TermView(term: Term(name: "百家姓", romanization: "baak3 gaa1 sing3"))
                         }
                         ForEach(0..<surnames.count, id: \.self) { index in
                                 Section {

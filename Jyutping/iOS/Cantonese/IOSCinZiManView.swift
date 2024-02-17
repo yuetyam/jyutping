@@ -11,7 +11,7 @@ struct IOSCinZiManView: View {
         var body: some View {
                 List {
                         Section {
-                                HeaderTermView(term: Term(name: "千字文", romanization: "cin1 zi6 man4"))
+                                TermView(term: Term(name: "千字文", romanization: "cin1 zi6 man4"))
                         }
                         ForEach(0..<units.count, id: \.self) { index in
                                 Section {

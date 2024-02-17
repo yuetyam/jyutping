@@ -5,10 +5,10 @@ struct NumbersView: View {
                 #if os(macOS)
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                HeaderTermView(term: Term(name: "數字", romanization: "sou3 zi6")).block()
+                                TermView(term: Term(name: "數字", romanization: "sou3 zi6")).block()
                                 VStack {
                                         ForEach(numbers) {
-                                                TermView(term: $0, placeholder: "loeng5")
+                                                TermView(term: $0)
                                         }
                                 }
                                 .block()
@@ -19,11 +19,11 @@ struct NumbersView: View {
                 #else
                 List {
                         Section {
-                                HeaderTermView(term: Term(name: "數字", romanization: "sou3 zi6"))
+                                TermView(term: Term(name: "數字", romanization: "sou3 zi6"))
                         }
                         Section {
                                 ForEach(numbers) {
-                                        TermView(term: $0, placeholder: "loeng5")
+                                        TermView(term: $0)
                                 }
                         }
                 }
