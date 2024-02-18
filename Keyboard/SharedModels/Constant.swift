@@ -7,6 +7,9 @@ struct Constant {
         static let PingFangTC: String = "PingFang TC"
         static let PingFangSC: String = "PingFang SC"
 
+        static let halfWidth: String = "半寬"
+        static let fullWidth: String = "全寬"
+
         /// Ten-Key Keyboard
         static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
 }

@@ -19,7 +19,8 @@ struct LargePadCangjieKeyboard: View {
                                                         primary: KeyElement("～"),
                                                         members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半寬")
+                                                                KeyElement("~", header: "半寬"),
+                                                                KeyElement("≈")
                                                         ]
                                                 )
                                         )
@@ -166,10 +167,11 @@ struct LargePadCangjieKeyboard: View {
                                                                 KeyElement("·", header: "間隔號", footer: "00B7"),
                                                                 KeyElement("～"),
                                                                 KeyElement("~", header: "半寬"),
-                                                                KeyElement("•", header: "Bullet", footer: "2022"),
-                                                                KeyElement("‧", footer: "2027"),
-                                                                KeyElement("・", header: "中點", footer: "30FB"),
-                                                                KeyElement("`", header: "Backtick", footer: "0060")
+                                                                KeyElement("`", header: "重音符", footer: "0060"),
+                                                                KeyElement("•", header: "項目符號", footer: "2022"),
+                                                                KeyElement("‧", header: "連字點", footer: "2027"),
+                                                                KeyElement("･", header: "半寬中點", footer: "FF65"),
+                                                                KeyElement("・", header: "全寬中點", footer: "30FB")
                                                         ]
                                                 )
                                         )
@@ -357,7 +359,7 @@ struct LargePadCangjieKeyboard: View {
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: "縱書")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬"), KeyElement("､", header: "半寬")]))
                                 }
                         }
                         HStack(spacing: 0) {
@@ -375,10 +377,23 @@ struct LargePadCangjieKeyboard: View {
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: "半寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\"", footer: "0022"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", header: "右", footer: "201D"), KeyElement("\u{201C}", header: "左", footer: "201C")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("：")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "\"", lower: "'", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("\"")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", header: "半寬"), KeyElement(":", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "\"",
+                                                lower: "'",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("'"),
+                                                        members: [
+                                                                KeyElement("'"),
+                                                                KeyElement("\""),
+                                                                KeyElement("\u{2019}", header: "右", footer: "2019"),
+                                                                KeyElement("\u{2018}", header: "左", footer: "2018")
+                                                        ]
+                                                )
+                                        )
                                 }
                                 LargePadReturnKey(widthUnitTimes: 1.75)
                         }

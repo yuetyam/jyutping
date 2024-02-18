@@ -149,7 +149,8 @@ struct CantoneseNumericKeyboard: View {
                                                            members: [
                                                                 KeyElement("/"),
                                                                 KeyElement("／", header: "全寬"),
-                                                                KeyElement("\\")
+                                                                KeyElement("\\"),
+                                                                KeyElement("÷")
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -214,8 +215,8 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement("\u{0022}", footer: "0022"),
                                                                 KeyElement("\u{201C}", footer: "201C"),
                                                                 KeyElement("\u{2018}", footer: "2018"),
-                                                                KeyElement("\u{FE41}"),
-                                                                KeyElement("\u{FE43}")
+                                                                KeyElement("﹁", header: "縱書"),
+                                                                KeyElement("﹃", header: "縱書")
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -227,8 +228,8 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement("\u{0022}", footer: "0022"),
                                                                 KeyElement("\u{201D}", footer: "201D"),
                                                                 KeyElement("\u{2019}", footer: "2019"),
-                                                                KeyElement("\u{FE42}"),
-                                                                KeyElement("\u{FE44}")
+                                                                KeyElement("﹂", header: "縱書"),
+                                                                KeyElement("﹄", header: "縱書")
                                                            ])
                                 )
                         }
@@ -241,6 +242,9 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("。"),
                                                            members: [
                                                                 KeyElement("。"),
+                                                                KeyElement("｡", header: "半寬"),
+                                                                KeyElement("⋯", footer: "22EF"),
+                                                                KeyElement("⋯⋯", footer: "22EF*2"),
                                                                 KeyElement("…", footer: "2026"),
                                                                 KeyElement("……", footer: "2026*2")
                                                            ])
@@ -254,7 +258,15 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement(",", header: "半寬")
                                                            ])
                                 )
-                                SymbolInputKey("、", widthUnitTimes: 1.2)
+                                ExpansibleInputKey(
+                                        keyLocale: .leading,
+                                        widthUnitTimes: 1.2,
+                                        keyModel: KeyModel(primary: KeyElement("、"),
+                                                           members: [
+                                                                KeyElement("、"),
+                                                                KeyElement("､", header: "半寬")
+                                                           ])
+                                )
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
                                         widthUnitTimes: 1.2,

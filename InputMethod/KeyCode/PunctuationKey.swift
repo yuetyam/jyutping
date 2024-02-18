@@ -111,8 +111,8 @@ struct PunctuationKey: Hashable {
                 let symbols: [PunctuationSymbol] = [
                         PunctuationSymbol("`", comment: "重音符", secondaryComment: "U+0060"),
                         PunctuationSymbol("｀", comment: "全寬重音符", secondaryComment: "U+FF40"),
-                        PunctuationSymbol("•", comment: "項目符號", secondaryComment: "U+2022"),
                         PunctuationSymbol("·", comment: "間隔號", secondaryComment: "U+00B7"),
+                        PunctuationSymbol("•", comment: "項目符號", secondaryComment: "U+2022"),
                         PunctuationSymbol("‧", comment: "連字點", secondaryComment: "U+2027"),
                         PunctuationSymbol("･", comment: "半寬中點", secondaryComment: "U+FF65"),
                         PunctuationSymbol("・", comment: "全寬中點", secondaryComment: "U+30FB")

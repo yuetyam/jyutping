@@ -137,9 +137,9 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("《"),
                                                            members: [
                                                                 KeyElement("《"),
-                                                                KeyElement("〈", footer: "3008"),
-                                                                KeyElement("<", footer: "003C"),
-                                                                KeyElement("＜", footer: "FF1C")
+                                                                KeyElement("〈"),
+                                                                KeyElement("<", header: "半寬"),
+                                                                KeyElement("＜", header: "全寬")
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -147,9 +147,9 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("》"),
                                                            members: [
                                                                 KeyElement("》"),
-                                                                KeyElement("〉", footer: "3009"),
-                                                                KeyElement(">", footer: "003E"),
-                                                                KeyElement("＞", footer: "FF1E")
+                                                                KeyElement("〉"),
+                                                                KeyElement(">", header: "半寬"),
+                                                                KeyElement("＞", header: "全寬")
                                                            ])
                                 )
                                 SymbolInputKey("¥")
@@ -167,7 +167,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("\u{00B7}"),
                                                            members: [
                                                                 KeyElement("\u{00B7}", header: "間隔號", footer: "00B7"),
-                                                                KeyElement("\u{2022}", header: "Bullet", footer: "2022"),
+                                                                KeyElement("\u{2022}", header: "項目符號", footer: "2022"),
                                                                 KeyElement("\u{00B0}", header: "度"),
                                                                 KeyElement("\u{2027}", header: "連字點", footer: "2027"),
                                                                 KeyElement("\u{FF65}", header: "半寬中點", footer: "FF65"),
@@ -184,6 +184,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("\u{22EF}"),
                                                            members: [
                                                                 KeyElement("\u{22EF}", footer: "22EF"),
+                                                                KeyElement("\u{22EF}\u{22EF}", footer: "22EF*2"),
                                                                 KeyElement("…", footer: "2026"),
                                                                 KeyElement("……", footer: "2026*2")
                                                            ])
@@ -233,9 +234,9 @@ struct CantoneseSymbolicKeyboard: View {
                                                            members: [
                                                                 KeyElement("\u{0027}", footer: "0027"),
                                                                 KeyElement("\u{FF07}", header: "全寬", footer: "FF07"),
-                                                                KeyElement("\u{2018}", footer: "2018"),
-                                                                KeyElement("\u{2019}", footer: "2019"),
-                                                                KeyElement("\u{0060}", footer: "0060")
+                                                                KeyElement("\u{2019}", header: "右", footer: "2019"),
+                                                                KeyElement("\u{2018}", header: "左", footer: "2018"),
+                                                                KeyElement("\u{0060}", header: "重音符", footer: "0060")
                                                            ])
                                 )
                                 PlaceholderKey()

@@ -1,59 +1,28 @@
 import SwiftUI
 
-struct LargePadSaamPingKeyboard: View {
+struct LargePadABCKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
         var body: some View {
                 VStack(spacing: 0) {
-                        if context.inputStage.isBuffering {
-                                CandidateScrollBar()
-                        } else {
-                                ToolBar()
-                        }
+                        ToolBar()
                         if context.keyboardCase.isUppercased {
                                 HStack(spacing: 0 ) {
-                                        LargePadExpansibleInputKey(
-                                                keyLocale: .leading,
-                                                keyModel: KeyModel(
-                                                        primary: KeyElement("～"),
-                                                        members: [
-                                                                KeyElement("～"),
-                                                                KeyElement("~", header: "半寬")
-                                                        ]
-                                                )
-                                        )
+                                        LargePadInstantInputKey("~")
                                         Group {
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
                                                         keyModel: KeyModel(
-                                                                primary: KeyElement("！"),
+                                                                primary: KeyElement("!"),
                                                                 members: [
-                                                                        KeyElement("！"),
-                                                                        KeyElement("!", header: "半寬")
+                                                                        KeyElement("!"),
+                                                                        KeyElement("¡")
                                                                 ]
                                                         )
                                                 )
-                                                LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyModel(
-                                                                primary: KeyElement("@"),
-                                                                members: [
-                                                                        KeyElement("@"),
-                                                                        KeyElement("＠", header: "全寬")
-                                                                ]
-                                                        )
-                                                )
-                                                LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyModel(
-                                                                primary: KeyElement("#"),
-                                                                members: [
-                                                                        KeyElement("#"),
-                                                                        KeyElement("＃", header: "全寬")
-                                                                ]
-                                                        )
-                                                )
+                                                LargePadInstantInputKey("@")
+                                                LargePadInstantInputKey("#")
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .leading,
                                                         keyModel: KeyModel(
@@ -75,28 +44,17 @@ struct LargePadSaamPingKeyboard: View {
                                                                 primary: KeyElement("%"),
                                                                 members: [
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: "全寬"),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
                                                 )
-                                                LargePadExpansibleInputKey(
-                                                        keyLocale: .leading,
-                                                        keyModel: KeyModel(
-                                                                primary: KeyElement("……"),
-                                                                members: [
-                                                                        KeyElement("……"),
-                                                                        KeyElement("…")
-                                                                ]
-                                                        )
-                                                )
+                                                LargePadInstantInputKey("^")
                                                 LargePadExpansibleInputKey(
                                                         keyLocale: .trailing,
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("&"),
                                                                 members: [
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: "全寬"),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
@@ -107,83 +65,42 @@ struct LargePadSaamPingKeyboard: View {
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: "全寬")
+                                                                        KeyElement("•")
                                                                 ]
                                                         )
                                                 )
-                                                LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyModel(
-                                                                primary: KeyElement("（"),
-                                                                members: [
-                                                                        KeyElement("（"),
-                                                                        KeyElement("(", header: "半寬")
-                                                                ]
-                                                        )
-                                                )
-                                                LargePadExpansibleInputKey(
-                                                        keyLocale: .trailing,
-                                                        keyModel: KeyModel(
-                                                                primary: KeyElement("）"),
-                                                                members: [
-                                                                        KeyElement("）"),
-                                                                        KeyElement(")", header: "半寬")
-                                                                ]
-                                                        )
-                                                )
+                                                LargePadInstantInputKey("(")
+                                                LargePadInstantInputKey(")")
                                         }
-                                        LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyModel(
-                                                        primary: KeyElement("——"),
-                                                        members: [
-                                                                KeyElement("——"),
-                                                                KeyElement("⸺", footer: "2E3A")
-                                                        ]
-                                                )
-                                        )
-                                        LargePadExpansibleInputKey(
-                                                keyLocale: .trailing,
-                                                keyModel: KeyModel(
-                                                        primary: KeyElement("+"),
-                                                        members: [
-                                                                KeyElement("+"),
-                                                                KeyElement("＋", header: "全寬")
-                                                        ]
-                                                )
-                                        )
+                                        LargePadInstantInputKey("_")
+                                        LargePadInstantInputKey("+")
                                         LargePadBackspaceKey(widthUnitTimes: 1.5)
                                 }
                         } else {
                                 HStack(spacing: 0 ) {
                                         LargePadUpperLowerInputKey(
                                                 keyLocale: .leading,
-                                                upper: "～",
-                                                lower: "·",
+                                                upper: "~",
+                                                lower: "`",
                                                 keyModel: KeyModel(
-                                                        primary: KeyElement("·"),
+                                                        primary: KeyElement("`"),
                                                         members: [
-                                                                KeyElement("·", header: "間隔號", footer: "00B7"),
-                                                                KeyElement("～"),
-                                                                KeyElement("~", header: "半寬"),
-                                                                KeyElement("•", header: "Bullet", footer: "2022"),
-                                                                KeyElement("‧", footer: "2027"),
-                                                                KeyElement("・", header: "中點", footer: "30FB"),
-                                                                KeyElement("`", header: "Backtick", footer: "0060")
+                                                                KeyElement("`"),
+                                                                KeyElement("~")
                                                         ]
                                                 )
                                         )
                                         Group {
                                                 LargePadUpperLowerInputKey(
                                                         keyLocale: .leading,
-                                                        upper: "！",
+                                                        upper: "!",
                                                         lower: "1",
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("1"),
                                                                 members: [
                                                                         KeyElement("1"),
-                                                                        KeyElement("！"),
-                                                                        KeyElement("!", header: "半寬")
+                                                                        KeyElement("!"),
+                                                                        KeyElement("¡")
                                                                 ]
                                                         )
                                                 )
@@ -195,8 +112,7 @@ struct LargePadSaamPingKeyboard: View {
                                                                 primary: KeyElement("2"),
                                                                 members: [
                                                                         KeyElement("2"),
-                                                                        KeyElement("@"),
-                                                                        KeyElement("＠", header: "全寬")
+                                                                        KeyElement("@")
                                                                 ]
                                                         )
                                                 )
@@ -208,8 +124,7 @@ struct LargePadSaamPingKeyboard: View {
                                                                 primary: KeyElement("3"),
                                                                 members: [
                                                                         KeyElement("3"),
-                                                                        KeyElement("#"),
-                                                                        KeyElement("＃", header: "全寬")
+                                                                        KeyElement("#")
                                                                 ]
                                                         )
                                                 )
@@ -234,21 +149,19 @@ struct LargePadSaamPingKeyboard: View {
                                                                 members: [
                                                                         KeyElement("5"),
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: "全寬"),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
                                                         keyLocale: .leading,
-                                                        upper: "……",
+                                                        upper: "^",
                                                         lower: "6",
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("6"),
                                                                 members: [
                                                                         KeyElement("6"),
-                                                                        KeyElement("……"),
-                                                                        KeyElement("…")
+                                                                        KeyElement("^")
                                                                 ]
                                                         )
                                                 )
@@ -261,7 +174,6 @@ struct LargePadSaamPingKeyboard: View {
                                                                 members: [
                                                                         KeyElement("7"),
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: "全寬"),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
@@ -275,47 +187,44 @@ struct LargePadSaamPingKeyboard: View {
                                                                 members: [
                                                                         KeyElement("8"),
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: "全寬")
+                                                                        KeyElement("•")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
                                                         keyLocale: .trailing,
-                                                        upper: "（",
+                                                        upper: "(",
                                                         lower: "9",
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("9"),
                                                                 members: [
                                                                         KeyElement("9"),
-                                                                        KeyElement("（"),
-                                                                        KeyElement("(", header: "半寬")
+                                                                        KeyElement("(")
                                                                 ]
                                                         )
                                                 )
                                                 LargePadUpperLowerInputKey(
                                                         keyLocale: .trailing,
-                                                        upper: "）",
+                                                        upper: ")",
                                                         lower: "0",
                                                         keyModel: KeyModel(
                                                                 primary: KeyElement("0"),
                                                                 members: [
                                                                         KeyElement("0"),
-                                                                        KeyElement("）"),
-                                                                        KeyElement(")", header: "半寬")
+                                                                        KeyElement(")")
                                                                 ]
                                                         )
                                                 )
                                         }
                                         LargePadUpperLowerInputKey(
                                                 keyLocale: .trailing,
-                                                upper: "——",
+                                                upper: "_",
                                                 lower: "-",
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("-"),
                                                         members: [
                                                                 KeyElement("-"),
-                                                                KeyElement("——"),
-                                                                KeyElement("⸺", footer: "2E3A")
+                                                                KeyElement("_")
                                                         ]
                                                 )
                                         )
@@ -327,9 +236,7 @@ struct LargePadSaamPingKeyboard: View {
                                                         primary: KeyElement("="),
                                                         members: [
                                                                 KeyElement("="),
-                                                                KeyElement("+"),
-                                                                KeyElement("＋", header: "全寬"),
-                                                                KeyElement("＝", header: "全寬")
+                                                                KeyElement("+")
                                                         ]
                                                 )
                                         )
@@ -339,25 +246,25 @@ struct LargePadSaamPingKeyboard: View {
                         HStack(spacing: 0 ) {
                                 TabKey(widthUnitTimes: 1.5)
                                 Group {
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
+                                        LargePadLetterInputKey("q")
                                         LargePadLetterInputKey("w")
                                         LargePadLetterInputKey("e")
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("oe"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
+                                        LargePadLetterInputKey("r")
                                         LargePadLetterInputKey("t")
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
+                                        LargePadLetterInputKey("y")
                                         LargePadLetterInputKey("u")
                                         LargePadLetterInputKey("i")
                                         LargePadLetterInputKey("o")
                                         LargePadLetterInputKey("p")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: "縱書")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("﹃", header: "縱書")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: "半寬")]))
+                                        LargePadInstantInputKey("{")
+                                        LargePadInstantInputKey("}")
+                                        LargePadInstantInputKey("|")
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "{", lower: "[", keyModel: KeyModel(primary: KeyElement("["), members: [KeyElement("["), KeyElement("{")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "}", lower: "]", keyModel: KeyModel(primary: KeyElement("]"), members: [KeyElement("]"), KeyElement("}")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "|", lower: "\\", keyModel: KeyModel(primary: KeyElement("\\"), members: [KeyElement("\\"), KeyElement("|")]))
                                 }
                         }
                         HStack(spacing: 0) {
@@ -374,33 +281,46 @@ struct LargePadSaamPingKeyboard: View {
                                         LargePadLetterInputKey("l")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: "半寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\"", footer: "0022"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
+                                        LargePadInstantInputKey(":")
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("：")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "\"", lower: "'", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("\"")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ":", lower: ";", keyModel: KeyModel(primary: KeyElement(";"), members: [KeyElement(";"), KeyElement(":")]))
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "\"",
+                                                lower: "'",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("'"),
+                                                        members: [
+                                                                KeyElement("'"),
+                                                                KeyElement("\""),
+                                                                KeyElement("\u{2019}", footer: "2019"),
+                                                                KeyElement("\u{2018}", footer: "2018")
+                                                        ]
+                                                )
+                                        )
                                 }
                                 LargePadReturnKey(widthUnitTimes: 1.75)
                         }
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("z", header: "1"), members: [KeyElement("z"), KeyElement("1", footer: "陰平")]))
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x")]))
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("c", header: "3"), members: [KeyElement("c"), KeyElement("3", footer: "陰去")]))
-                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng", header: "4"), members: [KeyElement("ng"), KeyElement("4", footer: "陽平"), KeyElement("v")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("b", header: "5"), members: [KeyElement("b"), KeyElement("5", footer: "陽上")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("n", header: "6"), members: [KeyElement("n"), KeyElement("6", footer: "陽去")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
+                                        LargePadLetterInputKey("z")
+                                        LargePadLetterInputKey("x")
+                                        LargePadLetterInputKey("c")
+                                        LargePadLetterInputKey("v")
+                                        LargePadLetterInputKey("b")
+                                        LargePadLetterInputKey("n")
+                                        LargePadLetterInputKey("m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: "全寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", header: "全寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半寬")]))
+                                        LargePadInstantInputKey("<")
+                                        LargePadInstantInputKey(">")
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "《", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("《")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "》", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", header: "全寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "<", lower: ",", keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("<")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: ">", lower: ".", keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement(">")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "?", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("?"), KeyElement("¿")]))
                                 }
                                 LargePadShiftKey(keyLocale: .trailing, widthUnitTimes: 2.25)
                         }
@@ -412,7 +332,7 @@ struct LargePadSaamPingKeyboard: View {
                                 }
                                 LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
                                 PadSpaceKey()
-                                LargePadRightKey(widthUnitTimes: 2.125)
+                                LargePadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }
                 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LargePadCantoneseKeyboard: View {
+struct LargePadStrokeKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -19,7 +19,8 @@ struct LargePadCantoneseKeyboard: View {
                                                         primary: KeyElement("～"),
                                                         members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半寬")
+                                                                KeyElement("~", header: "半寬"),
+                                                                KeyElement("≈")
                                                         ]
                                                 )
                                         )
@@ -166,10 +167,11 @@ struct LargePadCantoneseKeyboard: View {
                                                                 KeyElement("·", header: "間隔號", footer: "00B7"),
                                                                 KeyElement("～"),
                                                                 KeyElement("~", header: "半寬"),
-                                                                KeyElement("•", header: "Bullet", footer: "2022"),
-                                                                KeyElement("‧", footer: "2027"),
-                                                                KeyElement("・", header: "中點", footer: "30FB"),
-                                                                KeyElement("`", header: "Backtick", footer: "0060")
+                                                                KeyElement("`", header: "重音符", footer: "0060"),
+                                                                KeyElement("•", header: "項目符號", footer: "2022"),
+                                                                KeyElement("‧", header: "連字點", footer: "2027"),
+                                                                KeyElement("･", header: "半寬中點", footer: "FF65"),
+                                                                KeyElement("・", header: "全寬中點", footer: "30FB")
                                                         ]
                                                 )
                                         )
@@ -339,16 +341,16 @@ struct LargePadCantoneseKeyboard: View {
                         HStack(spacing: 0 ) {
                                 TabKey(widthUnitTimes: 1.5)
                                 Group {
-                                        LargePadLetterInputKey("q")
-                                        LargePadLetterInputKey("w")
-                                        LargePadLetterInputKey("e")
-                                        LargePadLetterInputKey("r")
-                                        LargePadLetterInputKey("t")
-                                        LargePadLetterInputKey("y")
-                                        LargePadLetterInputKey("u")
-                                        LargePadLetterInputKey("i")
-                                        LargePadLetterInputKey("o")
-                                        LargePadLetterInputKey("p")
+                                        LargePadStrokeInputKey("q")
+                                        LargePadStrokeInputKey("w")
+                                        LargePadStrokeInputKey("e")
+                                        LargePadStrokeInputKey("r")
+                                        LargePadStrokeInputKey("t")
+                                        LargePadStrokeInputKey("y")
+                                        LargePadStrokeInputKey("u")
+                                        LargePadStrokeInputKey("i")
+                                        LargePadStrokeInputKey("o")
+                                        LargePadStrokeInputKey("p")
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: "縱書")]))
@@ -357,41 +359,54 @@ struct LargePadCantoneseKeyboard: View {
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: "縱書")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬"), KeyElement("､", header: "半寬")]))
                                 }
                         }
                         HStack(spacing: 0) {
                                 CapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadLetterInputKey("a")
-                                        LargePadLetterInputKey("s")
-                                        LargePadLetterInputKey("d")
-                                        LargePadLetterInputKey("f")
-                                        LargePadLetterInputKey("g")
-                                        LargePadLetterInputKey("h")
-                                        LargePadLetterInputKey("j")
-                                        LargePadLetterInputKey("k")
-                                        LargePadLetterInputKey("l")
+                                        LargePadStrokeInputKey("a")
+                                        LargePadStrokeInputKey("s")
+                                        LargePadStrokeInputKey("d")
+                                        LargePadStrokeInputKey("f")
+                                        LargePadStrokeInputKey("g")
+                                        LargePadStrokeInputKey("h")
+                                        LargePadStrokeInputKey("j")
+                                        LargePadStrokeInputKey("k")
+                                        LargePadStrokeInputKey("l")
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: "半寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\"", footer: "0022"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", header: "右", footer: "201D"), KeyElement("\u{201C}", header: "左", footer: "201C")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("：")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "\"", lower: "'", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("\"")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", header: "半寬"), KeyElement(":", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "\"",
+                                                lower: "'",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("'"),
+                                                        members: [
+                                                                KeyElement("'"),
+                                                                KeyElement("\""),
+                                                                KeyElement("\u{2019}", header: "右", footer: "2019"),
+                                                                KeyElement("\u{2018}", header: "左", footer: "2018")
+                                                        ]
+                                                )
+                                        )
                                 }
                                 LargePadReturnKey(widthUnitTimes: 1.75)
                         }
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadLetterInputKey("z")
-                                        LargePadLetterInputKey("x")
-                                        LargePadLetterInputKey("c")
-                                        LargePadLetterInputKey("v")
-                                        LargePadLetterInputKey("b")
-                                        LargePadLetterInputKey("n")
-                                        LargePadLetterInputKey("m")
+                                        LargePadStrokeInputKey("z")
+                                        LargePadStrokeInputKey("x")
+                                        LargePadStrokeInputKey("c")
+                                        LargePadStrokeInputKey("v")
+                                        LargePadStrokeInputKey("b")
+                                        LargePadStrokeInputKey("n")
+                                        LargePadStrokeInputKey("m")
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: "全寬")]))
@@ -412,7 +427,7 @@ struct LargePadCantoneseKeyboard: View {
                                 }
                                 LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
                                 PadSpaceKey()
-                                LargePadRightKey(widthUnitTimes: 2.125)
+                                LargePadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }
                 }

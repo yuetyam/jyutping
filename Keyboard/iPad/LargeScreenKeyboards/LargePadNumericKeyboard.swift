@@ -123,7 +123,7 @@ struct LargePadNumericKeyboard: View {
                                                 keyModel: KeyModel(
                                                         primary: KeyElement("'"),
                                                         members: [
-                                                                KeyElement("'"),
+                                                                KeyElement("'", footer: "0027"),
                                                                 KeyElement("\u{2019}", footer: "2019"),
                                                                 KeyElement("\u{2018}", footer: "2018")
                                                         ]

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LargePadStrokeKeyboard: View {
+struct LargePadSaamPingKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -19,7 +19,8 @@ struct LargePadStrokeKeyboard: View {
                                                         primary: KeyElement("～"),
                                                         members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半寬")
+                                                                KeyElement("~", header: "半寬"),
+                                                                KeyElement("≈")
                                                         ]
                                                 )
                                         )
@@ -166,10 +167,11 @@ struct LargePadStrokeKeyboard: View {
                                                                 KeyElement("·", header: "間隔號", footer: "00B7"),
                                                                 KeyElement("～"),
                                                                 KeyElement("~", header: "半寬"),
-                                                                KeyElement("•", header: "Bullet", footer: "2022"),
-                                                                KeyElement("‧", footer: "2027"),
-                                                                KeyElement("・", header: "中點", footer: "30FB"),
-                                                                KeyElement("`", header: "Backtick", footer: "0060")
+                                                                KeyElement("`", header: "重音符", footer: "0060"),
+                                                                KeyElement("•", header: "項目符號", footer: "2022"),
+                                                                KeyElement("‧", header: "連字點", footer: "2027"),
+                                                                KeyElement("･", header: "半寬中點", footer: "FF65"),
+                                                                KeyElement("・", header: "全寬中點", footer: "30FB")
                                                         ]
                                                 )
                                         )
@@ -339,16 +341,16 @@ struct LargePadStrokeKeyboard: View {
                         HStack(spacing: 0 ) {
                                 TabKey(widthUnitTimes: 1.5)
                                 Group {
-                                        LargePadStrokeInputKey("q")
-                                        LargePadStrokeInputKey("w")
-                                        LargePadStrokeInputKey("e")
-                                        LargePadStrokeInputKey("r")
-                                        LargePadStrokeInputKey("t")
-                                        LargePadStrokeInputKey("y")
-                                        LargePadStrokeInputKey("u")
-                                        LargePadStrokeInputKey("i")
-                                        LargePadStrokeInputKey("o")
-                                        LargePadStrokeInputKey("p")
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
+                                        LargePadLetterInputKey("w")
+                                        LargePadLetterInputKey("e")
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("oe"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
+                                        LargePadLetterInputKey("t")
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
+                                        LargePadLetterInputKey("u")
+                                        LargePadLetterInputKey("i")
+                                        LargePadLetterInputKey("o")
+                                        LargePadLetterInputKey("p")
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: "縱書")]))
@@ -357,41 +359,54 @@ struct LargePadStrokeKeyboard: View {
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: "縱書")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬"), KeyElement("､", header: "半寬")]))
                                 }
                         }
                         HStack(spacing: 0) {
                                 CapsLockKey(widthUnitTimes: 1.75)
                                 Group {
-                                        LargePadStrokeInputKey("a")
-                                        LargePadStrokeInputKey("s")
-                                        LargePadStrokeInputKey("d")
-                                        LargePadStrokeInputKey("f")
-                                        LargePadStrokeInputKey("g")
-                                        LargePadStrokeInputKey("h")
-                                        LargePadStrokeInputKey("j")
-                                        LargePadStrokeInputKey("k")
-                                        LargePadStrokeInputKey("l")
+                                        LargePadLetterInputKey("a")
+                                        LargePadLetterInputKey("s")
+                                        LargePadLetterInputKey("d")
+                                        LargePadLetterInputKey("f")
+                                        LargePadLetterInputKey("g")
+                                        LargePadLetterInputKey("h")
+                                        LargePadLetterInputKey("j")
+                                        LargePadLetterInputKey("k")
+                                        LargePadLetterInputKey("l")
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: "半寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\"", footer: "0022"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", header: "右", footer: "201D"), KeyElement("\u{201C}", header: "左", footer: "201C")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("：")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "\"", lower: "'", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("\"")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", header: "半寬"), KeyElement(":", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "\"",
+                                                lower: "'",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("'"),
+                                                        members: [
+                                                                KeyElement("'"),
+                                                                KeyElement("\""),
+                                                                KeyElement("\u{2019}", header: "右", footer: "2019"),
+                                                                KeyElement("\u{2018}", header: "左", footer: "2018")
+                                                        ]
+                                                )
+                                        )
                                 }
                                 LargePadReturnKey(widthUnitTimes: 1.75)
                         }
                         HStack(spacing: 0) {
                                 LargePadShiftKey(keyLocale: .leading, widthUnitTimes: 2.25)
                                 Group {
-                                        LargePadStrokeInputKey("z")
-                                        LargePadStrokeInputKey("x")
-                                        LargePadStrokeInputKey("c")
-                                        LargePadStrokeInputKey("v")
-                                        LargePadStrokeInputKey("b")
-                                        LargePadStrokeInputKey("n")
-                                        LargePadStrokeInputKey("m")
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("z", header: "1"), members: [KeyElement("z"), KeyElement("1", footer: "陰平")]))
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x")]))
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("c", header: "3"), members: [KeyElement("c"), KeyElement("3", footer: "陰去")]))
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("ng", header: "4"), members: [KeyElement("ng"), KeyElement("4", footer: "陽平"), KeyElement("v")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("b", header: "5"), members: [KeyElement("b"), KeyElement("5", footer: "陽上")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("n", header: "6"), members: [KeyElement("n"), KeyElement("6", footer: "陽去")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("m"), members: [KeyElement("m"), KeyElement("kw")]))
                                 }
                                 if context.keyboardCase.isUppercased {
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: "全寬")]))
@@ -412,7 +427,7 @@ struct LargePadStrokeKeyboard: View {
                                 }
                                 LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
                                 PadSpaceKey()
-                                LargePadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 2.125)
+                                LargePadRightKey(widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }
                 }

@@ -57,7 +57,22 @@ struct PadCantoneseKeyboard: View {
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半寬")]))
                                 } else {
                                         PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", header: "半寬"), KeyElement("!", header: "半寬")]))
-                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("？"), KeyElement(".", header: "半寬"), KeyElement("?", header: "半寬")]))
+                                        PadUpperLowerInputKey(
+                                                keyLocale: .trailing,
+                                                upper: "？",
+                                                lower: "。",
+                                                keyModel: KeyModel(
+                                                        primary: KeyElement("。"),
+                                                        members: [
+                                                                KeyElement("。"),
+                                                                KeyElement("？"),
+                                                                KeyElement("｡", header: "半寬"),
+                                                                KeyElement("?", header: "半寬"),
+                                                                KeyElement(".", header: "英文半寬"),
+                                                                KeyElement("．", header: "英文全寬")
+                                                        ]
+                                                )
+                                        )
                                 }
                                 PadShiftKey(widthUnitTimes: 1)
                         }

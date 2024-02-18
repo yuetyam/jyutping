@@ -33,7 +33,7 @@ struct PadNumericKeyboard: View {
                                         PadCompleteInputKey(keyLocale: .leading, upper: "^", keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("^")]))
                                         PadCompleteInputKey(keyLocale: .trailing, upper: "[", keyModel: KeyModel(primary: KeyElement("("), members: [KeyElement("("), KeyElement("[")]))
                                         PadCompleteInputKey(keyLocale: .trailing, upper: "]", keyModel: KeyModel(primary: KeyElement(")"), members: [KeyElement(")"), KeyElement("]")]))
-                                        PadCompleteInputKey(keyLocale: .trailing, upper: "{", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("{"), KeyElement("\u{2019}", footer: "2019"), KeyElement("\u{2018}", footer: "2018")]))
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "{", keyModel: KeyModel(primary: KeyElement("'"), members: [KeyElement("'"), KeyElement("{"), KeyElement("\u{2019}", footer: "2019"), KeyElement("\u{2018}", footer: "2018"), KeyElement("\u{0060}", footer: "0060")]))
                                         PadCompleteInputKey(keyLocale: .trailing, upper: "}", keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("}"), KeyElement("\u{201D}", footer: "201D"), KeyElement("\u{201C}", footer: "201C")]))
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)

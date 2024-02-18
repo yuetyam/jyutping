@@ -3,6 +3,8 @@ import CommonExtensions
 
 struct TextPronunciationView: View {
 
+        // TODO: Handle Non-CJKV Characters
+
         init(text: String, romanization: String) {
                 let characters = text.map({ String($0) })
                 let syllables = romanization.split(separator: Character.space).map({ String($0) })
