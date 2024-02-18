@@ -13,7 +13,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("［"),
                                                            members: [
                                                                 KeyElement("［"),
-                                                                KeyElement("[", header: "半寬"),
+                                                                KeyElement("[", header: Constant.halfWidth),
                                                                 KeyElement("【"),
                                                                 KeyElement("〖"),
                                                                 KeyElement("〔")
@@ -24,7 +24,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("］"),
                                                            members: [
                                                                 KeyElement("］"),
-                                                                KeyElement("]", header: "半寬"),
+                                                                KeyElement("]", header: Constant.halfWidth),
                                                                 KeyElement("】"),
                                                                 KeyElement("〗"),
                                                                 KeyElement("〕")
@@ -35,7 +35,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("｛"),
                                                            members: [
                                                                 KeyElement("｛"),
-                                                                KeyElement("{", header: "半寬")
+                                                                KeyElement("{", header: Constant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -43,7 +43,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("｝"),
                                                            members: [
                                                                 KeyElement("｝"),
-                                                                KeyElement("}", header: "半寬")
+                                                                KeyElement("}", header: Constant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -51,7 +51,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("#"),
                                                            members: [
                                                                 KeyElement("#"),
-                                                                KeyElement("＃", header: "全寬")
+                                                                KeyElement("＃", header: Constant.fullWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -59,7 +59,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("%"),
                                                            members: [
                                                                 KeyElement("%"),
-                                                                KeyElement("％", header: "全寬"),
+                                                                KeyElement("％", header: Constant.fullWidth),
                                                                 KeyElement("‰")
                                                            ])
                                 )
@@ -68,7 +68,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("^"),
                                                            members: [
                                                                 KeyElement("^"),
-                                                                KeyElement("＾", header: "全寬"),
+                                                                KeyElement("＾", header: Constant.fullWidth),
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -76,7 +76,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("*"),
                                                            members: [
                                                                 KeyElement("*"),
-                                                                KeyElement("＊", header: "全寬"),
+                                                                KeyElement("＊", header: Constant.fullWidth),
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -84,7 +84,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("+"),
                                                            members: [
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: "全寬"),
+                                                                KeyElement("＋", header: Constant.fullWidth),
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -92,7 +92,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("="),
                                                            members: [
                                                                 KeyElement("="),
-                                                                KeyElement("＝", header: "全寬"),
+                                                                KeyElement("＝", header: Constant.fullWidth),
                                                                 KeyElement("≠"),
                                                                 KeyElement("≈")
                                                            ])
@@ -104,7 +104,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("_"),
                                                            members: [
                                                                 KeyElement("_"),
-                                                                KeyElement("＿", header: "全寬"),
+                                                                KeyElement("＿", header: Constant.fullWidth),
                                                            ])
                                 )
                                 SymbolInputKey("\u{2014}")
@@ -113,7 +113,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("\\"),
                                                            members: [
                                                                 KeyElement("\\"),
-                                                                KeyElement("＼", header: "全寬"),
+                                                                KeyElement("＼", header: Constant.fullWidth),
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -121,7 +121,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("｜"),
                                                            members: [
                                                                 KeyElement("｜"),
-                                                                KeyElement("|", header: "半寬"),
+                                                                KeyElement("|", header: Constant.halfWidth),
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -129,7 +129,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("～"),
                                                            members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半寬"),
+                                                                KeyElement("~", header: Constant.halfWidth),
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -138,8 +138,8 @@ struct CantoneseSymbolicKeyboard: View {
                                                            members: [
                                                                 KeyElement("《"),
                                                                 KeyElement("〈"),
-                                                                KeyElement("<", header: "半寬"),
-                                                                KeyElement("＜", header: "全寬")
+                                                                KeyElement("<", header: Constant.halfWidth),
+                                                                KeyElement("＜", header: Constant.fullWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -148,8 +148,8 @@ struct CantoneseSymbolicKeyboard: View {
                                                            members: [
                                                                 KeyElement("》"),
                                                                 KeyElement("〉"),
-                                                                KeyElement(">", header: "半寬"),
-                                                                KeyElement("＞", header: "全寬")
+                                                                KeyElement(">", header: Constant.halfWidth),
+                                                                KeyElement("＞", header: Constant.fullWidth)
                                                            ])
                                 )
                                 SymbolInputKey("¥")
@@ -158,7 +158,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("&"),
                                                            members: [
                                                                 KeyElement("&"),
-                                                                KeyElement("＆", header: "全寬"),
+                                                                KeyElement("＆", header: Constant.fullWidth),
                                                                 KeyElement("§"),
                                                            ])
                                 )
@@ -195,7 +195,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("，"),
                                                            members: [
                                                                 KeyElement("，"),
-                                                                KeyElement(",", header: "半寬")
+                                                                KeyElement(",", header: Constant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -215,7 +215,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("？"),
                                                            members: [
                                                                 KeyElement("？"),
-                                                                KeyElement("?", header: "半寬")
+                                                                KeyElement("?", header: Constant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -224,7 +224,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("！"),
                                                            members: [
                                                                 KeyElement("！"),
-                                                                KeyElement("!", header: "半寬")
+                                                                KeyElement("!", header: Constant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -233,7 +233,7 @@ struct CantoneseSymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("\u{0027}"),
                                                            members: [
                                                                 KeyElement("\u{0027}", footer: "0027"),
-                                                                KeyElement("\u{FF07}", header: "全寬", footer: "FF07"),
+                                                                KeyElement("\u{FF07}", header: Constant.fullWidth, footer: "FF07"),
                                                                 KeyElement("\u{2019}", header: "右", footer: "2019"),
                                                                 KeyElement("\u{2018}", header: "左", footer: "2018"),
                                                                 KeyElement("\u{0060}", header: "重音符", footer: "0060")

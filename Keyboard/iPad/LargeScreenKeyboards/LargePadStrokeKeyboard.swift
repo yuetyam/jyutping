@@ -19,7 +19,7 @@ struct LargePadStrokeKeyboard: View {
                                                         primary: KeyElement("～"),
                                                         members: [
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半寬"),
+                                                                KeyElement("~", header: Constant.halfWidth),
                                                                 KeyElement("≈")
                                                         ]
                                                 )
@@ -31,7 +31,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("！"),
                                                                 members: [
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", header: "半寬")
+                                                                        KeyElement("!", header: Constant.halfWidth)
                                                                 ]
                                                         )
                                                 )
@@ -41,7 +41,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("@"),
                                                                 members: [
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", header: "全寬")
+                                                                        KeyElement("＠", header: Constant.fullWidth)
                                                                 ]
                                                         )
                                                 )
@@ -51,7 +51,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("#"),
                                                                 members: [
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", header: "全寬")
+                                                                        KeyElement("＃", header: Constant.fullWidth)
                                                                 ]
                                                         )
                                                 )
@@ -76,7 +76,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("%"),
                                                                 members: [
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: "全寬"),
+                                                                        KeyElement("％", header: Constant.fullWidth),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
@@ -97,7 +97,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("&"),
                                                                 members: [
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: "全寬"),
+                                                                        KeyElement("＆", header: Constant.fullWidth),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
@@ -108,7 +108,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("*"),
                                                                 members: [
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: "全寬")
+                                                                        KeyElement("＊", header: Constant.fullWidth)
                                                                 ]
                                                         )
                                                 )
@@ -118,7 +118,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("（"),
                                                                 members: [
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", header: "半寬")
+                                                                        KeyElement("(", header: Constant.halfWidth)
                                                                 ]
                                                         )
                                                 )
@@ -128,7 +128,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 primary: KeyElement("）"),
                                                                 members: [
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", header: "半寬")
+                                                                        KeyElement(")", header: Constant.halfWidth)
                                                                 ]
                                                         )
                                                 )
@@ -149,7 +149,7 @@ struct LargePadStrokeKeyboard: View {
                                                         primary: KeyElement("+"),
                                                         members: [
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: "全寬")
+                                                                KeyElement("＋", header: Constant.fullWidth)
                                                         ]
                                                 )
                                         )
@@ -166,7 +166,7 @@ struct LargePadStrokeKeyboard: View {
                                                         members: [
                                                                 KeyElement("·", header: "間隔號", footer: "00B7"),
                                                                 KeyElement("～"),
-                                                                KeyElement("~", header: "半寬"),
+                                                                KeyElement("~", header: Constant.halfWidth),
                                                                 KeyElement("`", header: "重音符", footer: "0060"),
                                                                 KeyElement("•", header: "項目符號", footer: "2022"),
                                                                 KeyElement("‧", header: "連字點", footer: "2027"),
@@ -185,7 +185,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("1"),
                                                                         KeyElement("！"),
-                                                                        KeyElement("!", header: "半寬")
+                                                                        KeyElement("!", header: Constant.halfWidth)
                                                                 ]
                                                         )
                                                 )
@@ -198,7 +198,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("2"),
                                                                         KeyElement("@"),
-                                                                        KeyElement("＠", header: "全寬")
+                                                                        KeyElement("＠", header: Constant.fullWidth)
                                                                 ]
                                                         )
                                                 )
@@ -211,7 +211,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("3"),
                                                                         KeyElement("#"),
-                                                                        KeyElement("＃", header: "全寬")
+                                                                        KeyElement("＃", header: Constant.fullWidth)
                                                                 ]
                                                         )
                                                 )
@@ -236,7 +236,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("5"),
                                                                         KeyElement("%"),
-                                                                        KeyElement("％", header: "全寬"),
+                                                                        KeyElement("％", header: Constant.fullWidth),
                                                                         KeyElement("‰")
                                                                 ]
                                                         )
@@ -263,7 +263,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("7"),
                                                                         KeyElement("&"),
-                                                                        KeyElement("＆", header: "全寬"),
+                                                                        KeyElement("＆", header: Constant.fullWidth),
                                                                         KeyElement("§")
                                                                 ]
                                                         )
@@ -277,7 +277,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("8"),
                                                                         KeyElement("*"),
-                                                                        KeyElement("＊", header: "全寬")
+                                                                        KeyElement("＊", header: Constant.fullWidth)
                                                                 ]
                                                         )
                                                 )
@@ -290,7 +290,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("9"),
                                                                         KeyElement("（"),
-                                                                        KeyElement("(", header: "半寬")
+                                                                        KeyElement("(", header: Constant.halfWidth)
                                                                 ]
                                                         )
                                                 )
@@ -303,7 +303,7 @@ struct LargePadStrokeKeyboard: View {
                                                                 members: [
                                                                         KeyElement("0"),
                                                                         KeyElement("）"),
-                                                                        KeyElement(")", header: "半寬")
+                                                                        KeyElement(")", header: Constant.halfWidth)
                                                                 ]
                                                         )
                                                 )
@@ -330,8 +330,8 @@ struct LargePadStrokeKeyboard: View {
                                                         members: [
                                                                 KeyElement("="),
                                                                 KeyElement("+"),
-                                                                KeyElement("＋", header: "全寬"),
-                                                                KeyElement("＝", header: "全寬")
+                                                                KeyElement("＋", header: Constant.fullWidth),
+                                                                KeyElement("＝", header: Constant.fullWidth)
                                                         ]
                                                 )
                                         )
@@ -353,13 +353,13 @@ struct LargePadStrokeKeyboard: View {
                                         LargePadStrokeInputKey("p")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: "縱書")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("﹃", header: "縱書")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: "半寬")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: Constant.verticalText)]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("﹃", header: Constant.verticalText)]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: Constant.halfWidth)]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: "縱書")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: "半寬"), KeyElement("､", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "『", lower: "「", keyModel: KeyModel(primary: KeyElement("「"), members: [KeyElement("「"), KeyElement("『"), KeyElement("﹂", header: Constant.verticalText)]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "』", lower: "」", keyModel: KeyModel(primary: KeyElement("」"), members: [KeyElement("」"), KeyElement("』"), KeyElement("﹁", header: Constant.verticalText)]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "｜", lower: "、", keyModel: KeyModel(primary: KeyElement("、"), members: [KeyElement("、"), KeyElement("｜"), KeyElement("|", header: Constant.halfWidth), KeyElement("､", header: Constant.halfWidth)]))
                                 }
                         }
                         HStack(spacing: 0) {
@@ -376,10 +376,10 @@ struct LargePadStrokeKeyboard: View {
                                         LargePadStrokeInputKey("l")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: "半寬")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("："), members: [KeyElement("："), KeyElement(":", header: Constant.halfWidth)]))
                                         LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("\""), members: [KeyElement("\""), KeyElement("\u{201D}", header: "右", footer: "201D"), KeyElement("\u{201C}", header: "左", footer: "201C")]))
                                 } else {
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", header: "半寬"), KeyElement(":", header: "半寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "：", lower: "；", keyModel: KeyModel(primary: KeyElement("；"), members: [KeyElement("；"), KeyElement("："), KeyElement(";", header: Constant.halfWidth), KeyElement(":", header: Constant.halfWidth)]))
                                         LargePadUpperLowerInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "\"",
@@ -409,13 +409,13 @@ struct LargePadStrokeKeyboard: View {
                                         LargePadStrokeInputKey("m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: "全寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", header: "全寬")]))
-                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半寬")]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈"), KeyElement("<"), KeyElement("＜", header: Constant.fullWidth)]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉"), KeyElement(">"), KeyElement("＞", header: Constant.fullWidth)]))
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: Constant.halfWidth)]))
                                 } else {
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "《", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("《")]))
                                         LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "》", lower: "。", keyModel: KeyModel(primary: KeyElement("。"), members: [KeyElement("。"), KeyElement("》")]))
-                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", header: "全寬")]))
+                                        LargePadUpperLowerInputKey(keyLocale: .trailing, upper: "？", lower: "/", keyModel: KeyModel(primary: KeyElement("/"), members: [KeyElement("/"), KeyElement("？"), KeyElement("／", header: Constant.fullWidth)]))
                                 }
                                 LargePadShiftKey(keyLocale: .trailing, widthUnitTimes: 2.25)
                         }

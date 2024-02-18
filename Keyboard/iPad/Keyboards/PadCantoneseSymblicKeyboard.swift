@@ -9,30 +9,30 @@ struct PadCantoneseSymbolicKeyboard: View {
                         ToolBar()
                         HStack(spacing: 0 ) {
                                 Group {
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("^"), members: [KeyElement("^"), KeyElement("＾", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("_"), members: [KeyElement("_"), KeyElement("＿", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: "半寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("\\"), members: [KeyElement("\\"), KeyElement("＼", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("<"), members: [KeyElement("<"), KeyElement("＜", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement(">"), members: [KeyElement(">"), KeyElement("＞", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("{"), members: [KeyElement("{"), KeyElement("｛", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("}"), members: [KeyElement("}"), KeyElement("｝", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("，", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("．", header: "全寬"), KeyElement("…")]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("^"), members: [KeyElement("^"), KeyElement("＾", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("_"), members: [KeyElement("_"), KeyElement("＿", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("｜"), members: [KeyElement("｜"), KeyElement("|", header: Constant.halfWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("\\"), members: [KeyElement("\\"), KeyElement("＼", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("<"), members: [KeyElement("<"), KeyElement("＜", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement(">"), members: [KeyElement(">"), KeyElement("＞", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("{"), members: [KeyElement("{"), KeyElement("｛", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("}"), members: [KeyElement("}"), KeyElement("｝", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement(","), members: [KeyElement(","), KeyElement("，", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("．", header: Constant.fullWidth), KeyElement("…")]))
                                 }
                                 PadBackspaceKey(widthUnitTimes: 1)
                         }
                         HStack(spacing: 0) {
                                 PlaceholderKey()
                                 Group {
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("＆", header: "全寬"), KeyElement("§")]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("&"), members: [KeyElement("&"), KeyElement("＆", header: Constant.fullWidth), KeyElement("§")]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("¥"), members: [KeyElement("¥"), KeyElement("$")]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("€"), members: [KeyElement("€"), KeyElement("£")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("＊", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("【"), members: [KeyElement("【"), KeyElement("〔"), KeyElement("［"), KeyElement("[", header: "半寬")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("】"), members: [KeyElement("】"), KeyElement("〕"), KeyElement("］"), KeyElement("]", header: "半寬")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: "縱書")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("﹃", header: "縱書")]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("*"), members: [KeyElement("*"), KeyElement("＊", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("【"), members: [KeyElement("【"), KeyElement("〔"), KeyElement("［"), KeyElement("[", header: Constant.halfWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("】"), members: [KeyElement("】"), KeyElement("〕"), KeyElement("］"), KeyElement("]", header: Constant.halfWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("『"), members: [KeyElement("『"), KeyElement("﹄", header: Constant.verticalText)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("』"), members: [KeyElement("』"), KeyElement("﹃", header: Constant.verticalText)]))
                                         PadExpansibleInputKey(
                                                 keyLocale: .trailing,
                                                 keyModel: KeyModel(
@@ -41,7 +41,7 @@ struct PadCantoneseSymbolicKeyboard: View {
                                                                 KeyElement("\"", footer: "0022"),
                                                                 KeyElement("\u{201D}", header: "右", footer: "201D"),
                                                                 KeyElement("\u{201C}", header: "左", footer: "201C"),
-                                                                KeyElement("\u{FF02}", header: "全寬", footer: "FF02")
+                                                                KeyElement("\u{FF02}", header: Constant.fullWidth, footer: "FF02")
                                                         ]
                                                 )
                                         )
@@ -53,8 +53,8 @@ struct PadCantoneseSymbolicKeyboard: View {
                                 Group {
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("§"), members: [KeyElement("§"), KeyElement("&")]))
                                         PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("\u{2014}"), members: [KeyElement("\u{2014}", footer: "2014"), KeyElement("-")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("+"), members: [KeyElement("+"), KeyElement("＋", header: "全寬")]))
-                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("＝", header: "全寬")]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("+"), members: [KeyElement("+"), KeyElement("＋", header: Constant.fullWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("="), members: [KeyElement("="), KeyElement("＝", header: Constant.fullWidth)]))
                                         PadExpansibleInputKey(
                                                 keyLocale: .leading,
                                                 keyModel: KeyModel(
@@ -70,8 +70,8 @@ struct PadCantoneseSymbolicKeyboard: View {
                                         )
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("《"), members: [KeyElement("《"), KeyElement("〈")]))
                                         PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("》"), members: [KeyElement("》"), KeyElement("〉")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: "半寬")]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: "半寬")]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: Constant.halfWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: Constant.halfWidth)]))
                                 }
                                 PadTransformKey(destination: .numeric, widthUnitTimes: 1)
                         }
