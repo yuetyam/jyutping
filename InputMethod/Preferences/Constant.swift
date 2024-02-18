@@ -1,4 +1,5 @@
 struct Constant {
+        static let MonaspaceNeon: String = "Monaspace Neon"
         static let SFPro: String = "SF Pro"
         static let SFMono: String = "SF Mono"
         static let Inter: String = "Inter"

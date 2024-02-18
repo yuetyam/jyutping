@@ -19,7 +19,7 @@ struct PunctuationKey: Hashable {
                         PunctuationSymbol("〈"),
                         PunctuationSymbol("<", comment: halfWidth),
                         PunctuationSymbol("＜", comment: fullWidth),
-                        PunctuationSymbol(",", comment: "英文逗號")
+                        PunctuationSymbol(",", comment: "半寬逗號")
                 ]
                 return PunctuationKey(keyText: ",", shiftingKeyText: "<", instantSymbol: "，", instantShiftingSymbol: nil, symbols: [.init("，")], shiftingSymbols: shiftingSymbols)
         }()

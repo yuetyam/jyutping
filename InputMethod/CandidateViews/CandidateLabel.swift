@@ -39,7 +39,7 @@ struct CandidateLabel: View {
                                         CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
                                 }
                                 if let secondaryComment = candidate.secondaryComment {
-                                        Text(verbatim: secondaryComment).font(.comment)
+                                        Text(verbatim: secondaryComment).font(.annotation)
                                 }
                         }
                         Spacer()

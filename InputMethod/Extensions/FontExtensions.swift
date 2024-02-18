@@ -14,16 +14,16 @@ extension Font {
                 case .default:
                         return combine(fonts: preferredCandidateFontNames, size: size) ?? fallback
                 case .system:
-                        return Font.system(size: size)
+                        return fallback
                 case .custom:
                         let names: [String] = AppSettings.customCandidateFonts
-                        return combine(fonts: names, size: size) ?? combine(fonts: preferredCandidateFontNames, size: size) ?? fallback
+                        return combine(fonts: names, size: size) ?? fallback
                 }
         }
         private static let preferredCandidateFontNames: [String] = {
-                var names: [String] = []
-                let primaryQueue: [String] = [Constant.SFPro, Constant.Inter]
-                for name in primaryQueue {
+                var names: [String] = [Constant.MonaspaceNeon]
+                let latinQueue: [String] = [Constant.SFPro, Constant.Inter]
+                for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
@@ -73,16 +73,16 @@ extension Font {
                         guard found(font: Constant.SFMono) else { return fallback }
                         return combine(fonts: preferredCommentFontNames, size: size) ?? fallback
                 case .system:
-                        return Font.system(size: size)
+                        return fallback
                 case .custom:
                         let names: [String] = AppSettings.customCommentFonts
-                        return combine(fonts: names, size: size) ?? combine(fonts: preferredCommentFontNames, size: size) ?? fallback
+                        return combine(fonts: names, size: size) ?? fallback
                 }
         }
         private static let preferredCommentFontNames: [String] = {
                 var names: [String] = [Constant.SFMono]
-                let secondaryQueue: [String] = [Constant.SFPro, Constant.Inter]
-                for name in secondaryQueue {
+                let latinQueue: [String] = [Constant.SFPro, Constant.Inter]
+                for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break

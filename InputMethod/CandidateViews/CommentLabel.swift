@@ -36,13 +36,13 @@ struct CommentLabel: View {
                                 ModifiedCommentView(alignment: .bottom, comment: comment, toneColor: toneColor, shouldApplyToneFont: true)
                         }
                 case .specialMark:
-                        Text(verbatim: comment).font(.comment)
+                        Text(verbatim: comment).font(.annotation)
                 case .emoji:
                         Text(verbatim: comment).font(.annotation)
                 case .symbol:
                         Text(verbatim: comment).font(.annotation)
                 case .compose:
-                        Text(verbatim: comment).font(.comment)
+                        Text(verbatim: comment).font(.annotation)
                 }
         }
 }
