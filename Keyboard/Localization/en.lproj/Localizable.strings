@@ -41,6 +41,9 @@
 "DoubleSpaceShortcut.Option4" = "Insert a Fullwidth Space (U+3000)";
 "DoubleSpaceShortcut.Option2" = "None";
 
+"Version" = "Version";
+"Copy" = "Copy";
+
 "Clear User Lexicon" = "Clear User Lexicon";
 
 

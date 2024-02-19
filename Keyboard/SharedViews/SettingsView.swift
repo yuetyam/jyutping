@@ -7,6 +7,13 @@ struct SettingsView: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
+        /// Example: 1.0.1 (23)
+        private let version: String = {
+                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
+                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
+                return marketingVersion + " (" + currentProjectVersion + ")"
+        }()
+
         @State private var selectedCharacterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
@@ -338,6 +345,23 @@ struct SettingsView: View {
                                         }
                                 } header: {
                                         Text("Space Double Tapping Shortcut").textCase(nil)
+                                }
+
+                                Section {
+                                        Menu {
+                                                Button {
+                                                        UIPasteboard.general.string = version
+                                                } label: {
+                                                        Label("Copy", systemImage: "doc.on.doc")
+                                                }
+                                        } label: {
+                                                HStack {
+                                                        Text("Version")
+                                                        Spacer()
+                                                        Text(verbatim: version)
+                                                }
+                                                .foregroundStyle(Color.primary)
+                                        }
                                 }
 
                                 Section {

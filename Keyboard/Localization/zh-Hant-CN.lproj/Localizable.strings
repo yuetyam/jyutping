@@ -41,6 +41,9 @@
 "DoubleSpaceShortcut.Option4" = "輸入一個全寬空格（U+3000）";
 "DoubleSpaceShortcut.Option2" = "無";
 
+"Version" = "版本";
+"Copy" = "複製";
+
 "Clear User Lexicon" = "清空個人詞庫";
 
 
