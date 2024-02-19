@@ -419,12 +419,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let offset: Int = textDocumentProxy.documentContextAfterInput?.first?.utf16.count ?? 1
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                 case .jumpToHead:
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
                         for _ in 0..<5 {
                                 guard let text = textDocumentProxy.documentContextBeforeInput else { break }
                                 let offset: Int = text.utf16.count
                                 textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
                         }
                 case .jumpToTail:
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
                         for _ in 0..<5 {
                                 guard let text = textDocumentProxy.documentContextAfterInput else { break }
                                 let offset: Int = text.utf16.count
