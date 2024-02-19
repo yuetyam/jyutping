@@ -82,7 +82,6 @@ struct ExpansibleInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .textCase(textCase)
                                                                                         .font(.keyFooter)
                                                                                         .foregroundStyle(Color.secondary)
                                                                                         .padding(.top, 1)
@@ -90,7 +89,6 @@ struct ExpansibleInputKey: View {
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
-                                                                                        .textCase(textCase)
                                                                                         .font(.keyFooter)
                                                                                         .foregroundStyle(Color.secondary)
                                                                                         .padding(.bottom, 1)

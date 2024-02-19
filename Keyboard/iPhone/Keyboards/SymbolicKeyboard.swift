@@ -45,8 +45,8 @@ struct SymbolicKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("\u{0027}"),
                                                            members: [
                                                                 KeyElement("\u{0027}", footer: "0027"),
-                                                                KeyElement("\u{2018}", footer: "2018"),
                                                                 KeyElement("\u{2019}", footer: "2019"),
+                                                                KeyElement("\u{2018}", footer: "2018"),
                                                                 KeyElement("\u{0060}", footer: "0060")
                                                            ])
                                 )

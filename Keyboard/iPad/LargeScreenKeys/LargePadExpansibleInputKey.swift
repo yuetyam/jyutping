@@ -78,7 +78,6 @@ struct LargePadExpansibleInputKey: View {
                                                                         ZStack(alignment: .top) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
-                                                                                        .textCase(textCase)
                                                                                         .font(.keyFooter)
                                                                                         .padding(.top, 1)
                                                                                         .foregroundStyle(isHighlighted ? Color.white : Color.primary)
@@ -87,7 +86,6 @@ struct LargePadExpansibleInputKey: View {
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
-                                                                                        .textCase(textCase)
                                                                                         .font(.keyFooter)
                                                                                         .padding(.bottom, 1)
                                                                                         .foregroundStyle(isHighlighted ? Color.white : Color.primary)
