@@ -3,15 +3,19 @@ import AVFoundation
 struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
+
+        /// For Non-Jyutping texts. REASON: Premium Cantonese voices in iOS 17 are broken for Jyutping.
+        private static let alternativeVoice: AVSpeechSynthesisVoice? = preferredVoice(of: SpeechLanguage.chineseHongKong)
+
         private static let voice: AVSpeechSynthesisVoice? = preferredCantoneseVoice()
 
-        static func speak(_ text: String) {
+        static func speak(_ text: String, isRomanization: Bool = true) {
                 guard isVoiceAvailable else {
                         speakFeedback()
                         return
                 }
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
-                utterance.voice = voice
+                utterance.voice = isRomanization ? voice : alternativeVoice
                 utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
                 DispatchQueue.main.async {
                         synthesizer.speak(utterance)
@@ -22,7 +26,7 @@ struct Speech {
                 let pronunciationKey = NSAttributedString.Key(rawValue: AVSpeechSynthesisIPANotationAttribute)
                 let attributedString = NSMutableAttributedString(string: text, attributes: [pronunciationKey: ipa])
                 let utterance = AVSpeechUtterance(attributedString: attributedString)
-                utterance.voice = voice
+                utterance.voice = alternativeVoice
                 DispatchQueue.main.async {
                         synthesizer.speak(utterance)
                 }

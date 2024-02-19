@@ -40,7 +40,9 @@ struct MacLineUnitView: View {
         var body: some View {
                 HStack(spacing: 24) {
                         HStack {
-                                Speaker(line.text)
+                                Speaker {
+                                        Speech.speak(line.text, isRomanization: false)
+                                }
                                 Text(verbatim: line.text).font(.master)
                         }
                         HStack {

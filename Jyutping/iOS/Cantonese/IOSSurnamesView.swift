@@ -48,7 +48,9 @@ struct IOSLineUnitView: View {
                                         .minimumScaleFactor(0.4)
                                         .lineLimit(1)
                                 Spacer()
-                                Speaker(line.text)
+                                Speaker {
+                                        Speech.speak(line.text, isRomanization: false)
+                                }
                         }
                         Divider()
                         HStack {

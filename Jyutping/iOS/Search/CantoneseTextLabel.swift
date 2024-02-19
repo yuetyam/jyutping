@@ -24,7 +24,9 @@ struct CantoneseTextLabel: View {
                                 Text(verbatim: unicode).font(.footnote.monospaced()).foregroundStyle(Color.secondary)
                         }
                         Spacer()
-                        Speaker(text)
+                        Speaker {
+                                Speech.speak(text, isRomanization: false)
+                        }
                 }
         }
 }
