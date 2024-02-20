@@ -68,6 +68,13 @@
 "tts.notice.3" = "爲提高發音質素，請前往 **設定** → **輔助使用** → **旁白** → **語音**，添加 **繁體中文(香港)** 語音。";
 "faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
 
+"Clipboard Features" = "剪貼板相關功能";
+"ClipboardFeatures.Notice.Row1" = "鍵盤「貼上」掣可以將系統剪貼板嘅文字貼上輸入框。";
+"ClipboardFeatures.Notice.Row2" = "鍵盤「清空系統剪貼板」掣可以將系統剪貼板嘅文字、相片等內容清空。";
+"ClipboardFeatures.Notice.Row3" = "鍵盤本身並毋會儲存系統剪貼板內容。";
+"ClipboardFeatures.Notice.Row4" = "撳「貼上」掣時，系統可能會彈提示，詢問是否允許貼上。";
+"ClipboardFeatures.Notice.Row5" = "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。";
+
 "Change Display Language" = "更改介面顯示語言";
 "title.change_display_language" = "介面顯示語言";
 "Keyboard Display Language" = "鍵盤介面顯示語言";
@@ -80,16 +87,16 @@
 "Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
 "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
 "What does “Allow Full Access” do?" = "開啓「完整取用」作何用？";
-"Enable a button on the keyboard for pasting texts from Clipboard" = "鍵盤個「帖上」掣，需要開啓權限，先可以獲得剪帖板內容";
+"Enable a button on the keyboard for pasting texts from Clipboard" = "鍵盤個「貼上」掣，需要開啓權限，先可以獲得剪貼板內容";
 "Haptic Feedback" = "振動回應（Haptic Feedback）";
-"Paste texts from Clipboard" = "鍵盤個「帖上」掣";
+"Paste texts from Clipboard" = "鍵盤個「貼上」掣";
 "All other features don't require Full Access" = "毋開啓「完整取用」毋會影響使用其他功能";
 
 "Privacy Notice" = "私隱佈告";
 "privacy.notice.1" = "鍵盤全程毋會訪問網絡";
 "privacy.notice.2" = "鍵盤係完全獨立嘅，同主應用程式之間毋會進行任何交流、分享";
 "privacy.notice.3" = "開啓「完整取用」權限係用來提供振動回應";
-"privacy.notice.4" = "鍵盤個「帖上」掣毋會收集任何剪帖板內容";
+"privacy.notice.4" = "鍵盤個「貼上」掣毋會收集任何剪貼板內容";
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 

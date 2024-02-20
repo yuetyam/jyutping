@@ -230,6 +230,8 @@
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
 		375D3A3D2B806C88005F13C1 /* TextPronunciationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D3A3C2B806C88005F13C1 /* TextPronunciationView.swift */; };
 		3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */; };
+		3762EDD02B8538A000C4E9F1 /* ClipboardFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */; };
+		3762EDD22B85496800C4E9F1 /* GoToSettingsLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762EDD12B85496800C4E9F1 /* GoToSettingsLinkView.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
 		37E6AD6B2B3B381700F02279 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD442B3B381600F02279 /* CommentLabel.swift */; };
 		37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD452B3B381600F02279 /* CandidateBoard.swift */; };
@@ -603,6 +605,8 @@
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		375D3A3C2B806C88005F13C1 /* TextPronunciationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPronunciationView.swift; sourceTree = "<group>"; };
 		3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablingKeyboardView.swift; sourceTree = "<group>"; };
+		3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardFeaturesView.swift; sourceTree = "<group>"; };
+		3762EDD12B85496800C4E9F1 /* GoToSettingsLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToSettingsLinkView.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
 		37E6AD442B3B381600F02279 /* CommentLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		37E6AD452B3B381600F02279 /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
@@ -797,6 +801,7 @@
 				3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */,
 				371B6E5D2B3B3107005BB31C /* IntroductionsView.swift */,
 				371B6E602B3B3107005BB31C /* Text2SpeechView.swift */,
+				3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */,
 				37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */,
 				371B6E5F2B3B3107005BB31C /* FAQView.swift */,
 				371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */,
@@ -1245,6 +1250,7 @@
 		3760AA442B4FD0B40027EC11 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				3762EDD12B85496800C4E9F1 /* GoToSettingsLinkView.swift */,
 				371B6E572B3B3107005BB31C /* SafariView.swift */,
 				371B6E582B3B3107005BB31C /* ShareSheetView.swift */,
 				371B6E5A2B3B3107005BB31C /* EnhancedLabel.swift */,
@@ -1901,6 +1907,7 @@
 				371B6EA62B3B3108005BB31C /* Constant.swift in Sources */,
 				371B6EB72B3B3108005BB31C /* CantoneseView.swift in Sources */,
 				371B6EC92B3B3108005BB31C /* YingWaaFanWanLabel.swift in Sources */,
+				3762EDD02B8538A000C4E9F1 /* ClipboardFeaturesView.swift in Sources */,
 				371B6E992B3B3108005BB31C /* MacToneTableView.swift in Sources */,
 				371B6EB22B3B3108005BB31C /* IntroductionsView.swift in Sources */,
 				371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */,
@@ -1911,6 +1918,7 @@
 				371B6ED42B3B3108005BB31C /* MacCinZiManView.swift in Sources */,
 				371B6EB42B3B3108005BB31C /* FAQView.swift in Sources */,
 				371B6EAF2B3B3108005BB31C /* IOSContentView.swift in Sources */,
+				3762EDD22B85496800C4E9F1 /* GoToSettingsLinkView.swift in Sources */,
 				371B6EE62B3B3108005BB31C /* AppMaster.swift in Sources */,
 				371B6EDF2B3B3108005BB31C /* MacSurnamesView.swift in Sources */,
 				371B6EA12B3B3108005BB31C /* StemsBranchesView.swift in Sources */,

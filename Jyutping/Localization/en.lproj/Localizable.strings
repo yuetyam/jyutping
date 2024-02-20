@@ -69,6 +69,13 @@
 "tts.notice.3" = "To improve TTS quality, please go to **Settings** → **Accessibility** → **VioceOver** → **Speech**, then add **Chinese (Hong Kong)** language voice.";
 "faq.heading.tts" = "Why is my TTS not working?";
 
+"Clipboard Features" = "Clipboard Features";
+"ClipboardFeatures.Notice.Row1" = "The **Paste** button on the Keyboard can paste the text from the System Clipboard into the input text field.";
+"ClipboardFeatures.Notice.Row2" = "The **Clear System Clipboard** button on the Keyboard can clear the texts, photos, and other contents on the System Clipboard.";
+"ClipboardFeatures.Notice.Row3" = "The Keyboard itself does not store the contents of the System Clipboard.";
+"ClipboardFeatures.Notice.Row4" = "When you press the **Paste** button on the Keyboard, the system may prompt you to ask if you want to allow the paste.";
+"ClipboardFeatures.Notice.Row5" = "If you find it annoying to have these prompts, you can go to the **Jyutping** in the **Settings** app, and change the setting **Paste from Other Apps** from **Ask** to **Allow**.";
+
 "Change Display Language" = "Change Display Language";
 "title.change_display_language" = "Display Language";
 "Keyboard Display Language" = "Keyboard Display Language";

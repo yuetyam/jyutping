@@ -74,13 +74,7 @@ struct HomeView: View {
                                 }
                                 if !isKeyboardEnabled || isGuideViewExpanded {
                                         Section {
-                                                Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
-                                                        HStack {
-                                                                Spacer()
-                                                                Text("Go to **Settings**")
-                                                                Spacer()
-                                                        }
-                                                }
+                                                GoToSettingsLinkView()
                                         }
                                 }
                                 Section {
@@ -124,6 +118,9 @@ struct HomeView: View {
                                         }
                                         NavigationLink(destination: Text2SpeechView()) {
                                                 Label("Text to Speech", systemImage: "speaker.wave.2")
+                                        }
+                                        NavigationLink(destination: ClipboardFeaturesView()) {
+                                                Label("Clipboard Features", systemImage: "list.clipboard")
                                         }
                                         NavigationLink(destination: ChangeDisplayLanguageView()) {
                                                 Label("Change Display Language", systemImage: "globe.asia.australia")

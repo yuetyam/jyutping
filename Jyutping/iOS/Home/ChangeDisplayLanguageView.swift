@@ -15,13 +15,7 @@ struct ChangeDisplayLanguageView: View {
                                 Label("Main App Display Language Description 2", systemImage: "2.circle")
                         }
                         Section {
-                                Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
-                                        HStack {
-                                                Spacer()
-                                                Text("Go to **Settings**")
-                                                Spacer()
-                                        }
-                                }
+                                GoToSettingsLinkView()
                         }
                 }
                 .textSelection(.enabled)
