@@ -1260,6 +1260,16 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		3762EDD32B8555A600C4E9F1 /* SharedModels */ = {
+			isa = PBXGroup;
+			children = (
+				371B6E972B3B3108005BB31C /* AppMaster.swift */,
+				371B6E4E2B3B3107005BB31C /* Constant.swift */,
+				371B6E4F2B3B3107005BB31C /* Device.swift */,
+			);
+			path = SharedModels;
+			sourceTree = "<group>";
+		};
 		37E6AD432B3B381600F02279 /* CandidateViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1360,9 +1370,7 @@
 			children = (
 				371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */,
 				375D3A3B2B806C75005F13C1 /* SharedViews */,
-				371B6E972B3B3108005BB31C /* AppMaster.swift */,
-				371B6E4E2B3B3107005BB31C /* Constant.swift */,
-				371B6E4F2B3B3107005BB31C /* Device.swift */,
+				3762EDD32B8555A600C4E9F1 /* SharedModels */,
 				371B6E562B3B3107005BB31C /* iOS */,
 				371B6E792B3B3108005BB31C /* macOS */,
 				371B6E472B3B3107005BB31C /* Materials */,
