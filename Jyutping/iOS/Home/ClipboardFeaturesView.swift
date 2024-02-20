@@ -7,6 +7,9 @@ struct ClipboardFeaturesView: View {
         var body: some View {
                 List {
                         Section {
+                                Text("ClipboardFeatures.Notice.Row0")
+                        }
+                        Section {
                                 Text("ClipboardFeatures.Notice.Row1")
                                 Text("ClipboardFeatures.Notice.Row2")
                                 Text("ClipboardFeatures.Notice.Row3")

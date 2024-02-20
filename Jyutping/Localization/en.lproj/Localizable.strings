@@ -70,6 +70,7 @@
 "faq.heading.tts" = "Why is my TTS not working?";
 
 "Clipboard Features" = "Clipboard Features";
+"ClipboardFeatures.Notice.Row0" = "Due to system limitations, the **Paste** button on the Keyboard will only function when the **Allow Full Access** permission is turned on.";
 "ClipboardFeatures.Notice.Row1" = "The **Paste** button on the Keyboard can paste the text from the System Clipboard into the input text field.";
 "ClipboardFeatures.Notice.Row2" = "The **Clear System Clipboard** button on the Keyboard can clear the texts, photos, and other contents on the System Clipboard.";
 "ClipboardFeatures.Notice.Row3" = "The Keyboard itself does not store the contents of the System Clipboard.";

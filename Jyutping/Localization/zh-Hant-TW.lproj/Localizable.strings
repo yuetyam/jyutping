@@ -69,6 +69,7 @@
 "faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
 
 "Clipboard Features" = "剪貼板相關功能";
+"ClipboardFeatures.Notice.Row0" = "由於系統限制，需要開啓「允許完整取用」權限，鍵盤「貼上」掣先可以正常使用。";
 "ClipboardFeatures.Notice.Row1" = "鍵盤「貼上」掣可以將系統剪貼板嘅文字貼上輸入框。";
 "ClipboardFeatures.Notice.Row2" = "鍵盤「清空系統剪貼板」掣可以將系統剪貼板嘅文字、相片等內容清空。";
 "ClipboardFeatures.Notice.Row3" = "鍵盤本身並毋會儲存系統剪貼板內容。";
