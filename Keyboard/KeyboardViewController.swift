@@ -352,9 +352,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         bufferCombos = bufferCombos.dropLast()
                                 } else {
                                         bufferText = String(bufferText.dropLast())
+                                        adjustKeyboard()
                                 }
                         } else {
                                 textDocumentProxy.deleteBackward()
+                                adjustKeyboard()
                         }
                 case .clearBuffer:
                         clearBuffer()
@@ -365,6 +367,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         } else {
                                 textDocumentProxy.insertText(String.newLine)
                         }
+                        adjustKeyboard()
                 case .shift:
                         let newCase: KeyboardCase = {
                                 switch keyboardCase {
@@ -653,6 +656,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let currentHeight = view.frame.size.height
                 if currentHeight > 200 {
                         keyboardHeight = currentHeight
+                }
+                let shouldAdjustKeyboardCase: Bool = (keyboardForm == .alphabetic) && (keyboardCase != .lowercased)
+                if shouldAdjustKeyboardCase {
+                        keyboardCase = .lowercased
                 }
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form

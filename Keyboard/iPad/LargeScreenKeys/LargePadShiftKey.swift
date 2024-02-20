@@ -30,6 +30,7 @@ struct LargePadShiftKey: View {
         }
 
         @GestureState private var isTouching: Bool = false
+        @State private var previousKeyboardCase: KeyboardCase = .lowercased
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -72,10 +73,18 @@ struct LargePadShiftKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                if isInTheMediumOfDoubleTapping {
+                                let currentKeyboardCase: KeyboardCase = context.keyboardCase
+                                let didKeyboardCaseSwitchBack: Bool = currentKeyboardCase == previousKeyboardCase
+                                let shouldPerformDoubleTapping: Bool = isInTheMediumOfDoubleTapping && !didKeyboardCaseSwitchBack
+                                if shouldPerformDoubleTapping {
+                                        doubleTappingBuffer = 0
+                                        isInTheMediumOfDoubleTapping = false
+                                        previousKeyboardCase = currentKeyboardCase
                                         context.operate(.doubleShift)
                                 } else {
+                                        doubleTappingBuffer = 0
                                         isInTheMediumOfDoubleTapping = true
+                                        previousKeyboardCase = currentKeyboardCase
                                         context.operate(.shift)
                                 }
                         }

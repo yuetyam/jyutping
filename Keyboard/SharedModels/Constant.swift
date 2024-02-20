@@ -11,6 +11,8 @@ struct Constant {
         static let fullWidth: String = "全寬"
         static let verticalText: String = "縱書"
 
+        static let spaceKeyLongPressHint: String = "← →"
+
         /// Ten-Key Keyboard
         static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
 }
