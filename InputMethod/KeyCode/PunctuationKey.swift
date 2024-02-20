@@ -39,10 +39,10 @@ struct PunctuationKey: Hashable {
                 let symbols: [PunctuationSymbol] = [
                         PunctuationSymbol("/", comment: halfWidth),
                         PunctuationSymbol("／", comment: fullWidth),
-                        PunctuationSymbol("?", comment: halfWidth),
-                        PunctuationSymbol("!", comment: halfWidth),
                         PunctuationSymbol("÷"),
                         PunctuationSymbol("≠"),
+                        PunctuationSymbol("?", comment: halfWidth),
+                        PunctuationSymbol("!", comment: halfWidth),
                         PunctuationSymbol(String.fullWidthSpace, comment: "全寬空格")
                 ]
                 return PunctuationKey(keyText: "/", shiftingKeyText: "?", instantSymbol: nil, instantShiftingSymbol: "？", symbols: symbols, shiftingSymbols: [.init("？")])
