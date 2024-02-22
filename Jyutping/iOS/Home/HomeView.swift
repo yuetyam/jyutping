@@ -17,6 +17,14 @@ struct HomeView: View {
                 return !isKeyboardEnabled || isGuideViewExpanded
         }
 
+        private let clipboardImageName: String = {
+                if #available(iOS 16.0, *) {
+                        return "list.clipboard"
+                } else {
+                        return "doc.on.doc"
+                }
+        }()
+
         var body: some View {
                 NavigationView {
                         List {
@@ -120,7 +128,7 @@ struct HomeView: View {
                                                 Label("Text to Speech", systemImage: "speaker.wave.2")
                                         }
                                         NavigationLink(destination: ClipboardFeaturesView()) {
-                                                Label("Clipboard Features", systemImage: "list.clipboard")
+                                                Label("Clipboard Features", systemImage: clipboardImageName)
                                         }
                                         NavigationLink(destination: ChangeDisplayLanguageView()) {
                                                 Label("Change Display Language", systemImage: "globe.asia.australia")
