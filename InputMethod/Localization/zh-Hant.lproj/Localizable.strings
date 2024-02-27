@@ -14,7 +14,7 @@
 "PreferencesView.SectionHeader.About" = "關於";
 
 "PreferencesView.NavigationTitle.Preferences" = "設定";
-"PreferencesView.NavigationTitle.Layouts" = "樣式佈局";
+"PreferencesView.NavigationTitle.General" = "一般";
 "PreferencesView.NavigationTitle.Fonts" = "字體";
 "PreferencesView.NavigationTitle.Hotkeys" = "熱鍵";
 "PreferencesView.NavigationTitle.About" = "關於";
@@ -36,6 +36,7 @@
 
 
 // CandidateFontPreferencesView
+"Preferences.General.EmojiSuggestions" = "繪文字(Emoji)候選詞";
 "Candidate Font Size" = "候選詞字號";
 "Comment Font Size" = "候選詞註釋字號";
 "Serial Number Font Size" = "候選詞編號字號";

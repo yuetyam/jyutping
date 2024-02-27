@@ -14,13 +14,14 @@
 "PreferencesView.SectionHeader.About" = "關於";
 
 "PreferencesView.NavigationTitle.Preferences" = "設定";
-"PreferencesView.NavigationTitle.Layouts" = "樣式佈局";
+"PreferencesView.NavigationTitle.General" = "一般";
 "PreferencesView.NavigationTitle.Fonts" = "字體";
 "PreferencesView.NavigationTitle.Hotkeys" = "熱鍵";
 "PreferencesView.NavigationTitle.About" = "關於";
 
 
 // CandidateLayoutPreferencesView
+"Preferences.General.EmojiSuggestions" = "繪文字(Emoji)候選詞";
 "Candidate Count Per Page" = "每䈎候選詞數目";
 "Candidate Line Spacing" = "候選詞行間隔";
 

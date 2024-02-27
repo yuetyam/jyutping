@@ -2,6 +2,8 @@ import SwiftUI
 
 struct CandidateLayoutPreferencesView: View {
 
+        @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+
         @AppStorage(SettingsKey.CandidatePageSize) private var pageSize: Int = AppSettings.displayCandidatePageSize
         @AppStorage(SettingsKey.CandidateLineSpacing) private var lineSpacing: Int = AppSettings.candidateLineSpacing
         @AppStorage(SettingsKey.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
@@ -13,6 +15,16 @@ struct CandidateLayoutPreferencesView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
+                                HStack {
+                                        Toggle("Preferences.General.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
+                                                .toggleStyle(.switch)
+                                                .scaledToFit()
+                                                .onChange(of: isEmojiSuggestionsOn) { newState in
+                                                        Options.updateEmojiSuggestions(to: newState)
+                                                }
+                                        Spacer()
+                                }
+                                .block()
                                 HStack {
                                         Picker("Candidate Count Per Page", selection: $pageSize) {
                                                 ForEach(pageSizeRange, id: \.self) {
@@ -71,6 +83,6 @@ struct CandidateLayoutPreferencesView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .navigationTitle("PreferencesView.NavigationTitle.Layouts")
+                .navigationTitle("PreferencesView.NavigationTitle.General")
         }
 }

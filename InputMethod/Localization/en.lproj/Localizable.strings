@@ -14,13 +14,14 @@
 "PreferencesView.SectionHeader.About" = "About";
 
 "PreferencesView.NavigationTitle.Preferences" = "Settings";
-"PreferencesView.NavigationTitle.Layouts" = "Layouts";
+"PreferencesView.NavigationTitle.General" = "General";
 "PreferencesView.NavigationTitle.Fonts" = "Fonts";
 "PreferencesView.NavigationTitle.Hotkeys" = "Hotkeys";
 "PreferencesView.NavigationTitle.About" = "About";
 
 
 // CandidateLayoutPreferencesView
+"Preferences.General.EmojiSuggestions" = "Emoji Suggestions";
 "Candidate Count Per Page" = "Candidate Count Per Page";
 "Candidate Line Spacing" = "Candidate Line Spacing";
 

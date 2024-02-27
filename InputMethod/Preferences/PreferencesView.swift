@@ -34,7 +34,7 @@ struct PreferencesView: View {
                         NavigationSplitView {
                                 List(selection: $selection) {
                                         Section {
-                                                Label("PreferencesView.NavigationTitle.Layouts", systemImage: "list.number").tag(PreferencesRow.layouts)
+                                                Label("PreferencesView.NavigationTitle.General", systemImage: "list.number").tag(PreferencesRow.layouts)
                                                 Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(PreferencesRow.fonts)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
@@ -69,7 +69,7 @@ struct PreferencesView: View {
                                 List {
                                         Section {
                                                 NavigationLink(destination: CandidateLayoutPreferencesView().visualEffect(), isActive: $isLayoutsViewActive) {
-                                                        Label("PreferencesView.NavigationTitle.Layouts", systemImage: "list.number")
+                                                        Label("PreferencesView.NavigationTitle.General", systemImage: "list.number")
                                                 }
                                                 NavigationLink {
                                                         CandidateFontPreferencesView().visualEffect()
