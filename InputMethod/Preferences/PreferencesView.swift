@@ -22,30 +22,30 @@ struct PreferencesView: View {
         @NSApplicationDelegateAdaptor(PreferencesViewAppDelegate.self) var appDelegate
 
         // macOS 13.0+
-        @State private var selection: PreferencesRow = Options.selectedPreferencesRow
+        @State private var selection: PreferencesSidebarRow = AppSettings.selectedPreferencesSidebarRow
 
         // macOS 12
-        @State private var isLayoutsViewActive: Bool = Options.selectedPreferencesRow == .layouts
-        @State private var isHotkeysViewActive: Bool = Options.selectedPreferencesRow == .hotkeys
-        @State private var isAboutViewActive: Bool = Options.selectedPreferencesRow == .about
+        @State private var isGeneralViewActive: Bool = AppSettings.selectedPreferencesSidebarRow == .general
+        @State private var isHotkeysViewActive: Bool = AppSettings.selectedPreferencesSidebarRow == .hotkeys
+        @State private var isAboutViewActive: Bool = AppSettings.selectedPreferencesSidebarRow == .about
 
         var body: some View {
                 if #available(macOS 13.0, *) {
                         NavigationSplitView {
                                 List(selection: $selection) {
                                         Section {
-                                                Label("PreferencesView.NavigationTitle.General", systemImage: "list.number").tag(PreferencesRow.layouts)
-                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(PreferencesRow.fonts)
+                                                Label("PreferencesView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
+                                                Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(PreferencesSidebarRow.fonts)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
                                         }
                                         Section {
-                                                Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(PreferencesRow.hotkeys)
+                                                Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard").tag(PreferencesSidebarRow.hotkeys)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Hotkeys").textCase(nil)
                                         }
                                         Section {
-                                                Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle").tag(PreferencesRow.about)
+                                                Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle").tag(PreferencesSidebarRow.about)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.About").textCase(nil)
                                         }
@@ -54,10 +54,10 @@ struct PreferencesView: View {
                                 .navigationTitle("PreferencesView.NavigationTitle.Preferences")
                         } detail: {
                                 switch selection {
-                                case .layouts:
-                                        CandidateLayoutPreferencesView().visualEffect()
+                                case .general:
+                                        GeneralPreferencesView().visualEffect()
                                 case .fonts:
-                                        CandidateFontPreferencesView().visualEffect()
+                                        FontPreferencesView().visualEffect()
                                 case .hotkeys:
                                         HotkeysView().visualEffect()
                                 case .about:
@@ -68,11 +68,11 @@ struct PreferencesView: View {
                         NavigationView {
                                 List {
                                         Section {
-                                                NavigationLink(destination: CandidateLayoutPreferencesView().visualEffect(), isActive: $isLayoutsViewActive) {
-                                                        Label("PreferencesView.NavigationTitle.General", systemImage: "list.number")
+                                                NavigationLink(destination: GeneralPreferencesView().visualEffect(), isActive: $isGeneralViewActive) {
+                                                        Label("PreferencesView.NavigationTitle.General", systemImage: "gear")
                                                 }
                                                 NavigationLink {
-                                                        CandidateFontPreferencesView().visualEffect()
+                                                        FontPreferencesView().visualEffect()
                                                 } label: {
                                                         Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat")
                                                 }
@@ -103,13 +103,11 @@ struct PreferencesView: View {
         }
 }
 
-enum PreferencesRow: Int, Hashable, Identifiable {
-
-        case layouts
+enum PreferencesSidebarRow: Int, Identifiable {
+        case general
         case fonts
         case hotkeys
         case about
-
         var id: Int {
                 return rawValue
         }

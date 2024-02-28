@@ -96,12 +96,6 @@ struct Options {
                 let value: Int = mode.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.InputMethodMode)
         }
-
-        /// Preferences Window
-        private(set) static var selectedPreferencesRow: PreferencesRow = .layouts
-        static func updateSelectedPreferencesRow(to row: PreferencesRow) {
-                selectedPreferencesRow = row
-        }
 }
 
 private struct OptionsKey {

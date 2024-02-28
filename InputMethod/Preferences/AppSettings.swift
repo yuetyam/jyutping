@@ -98,6 +98,13 @@ enum ShiftSpaceCombination: Int {
 
 struct AppSettings {
 
+        /// Preferences Window
+        private(set) static var selectedPreferencesSidebarRow: PreferencesSidebarRow = .general
+        static func updateSelectedPreferencesSidebarRow(to row: PreferencesSidebarRow) {
+                selectedPreferencesSidebarRow = row
+        }
+
+
         // MARK: - Page Size
 
         private(set) static var displayCandidatePageSize: Int = {

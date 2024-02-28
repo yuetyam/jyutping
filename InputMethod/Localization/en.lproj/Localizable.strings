@@ -1,13 +1,17 @@
-"menu.title" = "Jyutping";
-"menu.mode.cantonese" = "Cantonese Mode";
-"menu.mode.abc" = "ABC Mode";
-"menu.preferences" = "Settings…";
-"menu.check4updates" = "Check for Updates…";
-"menu.help" = "Help";
-"menu.about" = "About";
-"menu.terminate" = "Quit";
+// MARK: - Input Method Menu
 
-"Jyutping Input Method Preferences" = "Jyutping Input Method Settings";
+"Menu.Title" = "Jyutping";
+"Menu.InputMethodMode.Cantonese" = "Cantonese Mode";
+"Menu.InputMethodMode.ABC" = "ABC Mode";
+"Menu.Preferences" = "Settings…";
+"Menu.CheckForUpdates" = "Check for Updates…";
+"Menu.Help" = "Help";
+"Menu.About" = "About";
+
+
+// MARK: - PreferencesView
+
+"PreferencesView.Window.Title" = "Jyutping Input Method Settings";
 
 "PreferencesView.SectionHeader.Candidates" = "Candidates";
 "PreferencesView.SectionHeader.Hotkeys" = "Hotkeys";
@@ -20,7 +24,8 @@
 "PreferencesView.NavigationTitle.About" = "About";
 
 
-// CandidateLayoutPreferencesView
+// MARK: - GeneralPreferencesView
+
 "Preferences.General.EmojiSuggestions" = "Emoji Suggestions";
 "Candidate Count Per Page" = "Candidate Count Per Page";
 "Candidate Line Spacing" = "Candidate Line Spacing";
@@ -36,7 +41,8 @@
 "CommentToneColor.Shallow" = "Shallow";
 
 
-// CandidateFontPreferencesView
+// MARK: - FontPreferencesView
+
 "Candidate Font Size" = "Candidate Font Size";
 "Comment Font Size" = "Comment Font Size";
 "Serial Number Font Size" = "Serial Number Font Size";
@@ -49,7 +55,8 @@
 "FontPicker.CurrentFont.Change" = "Change…";
 
 
-// HotkeysView
+// MARK: - HotkeysView
+
 "Press **Shift** Once To" = "Press **Shift** Once To";
 "Do Nothing" = "Do Nothing";
 "Switch between Cantonese Mode and ABC Mode" = "Switch between Cantonese Mode and ABC Mode";
@@ -73,7 +80,8 @@
 "Speak Candidate (Using system's built-in TTS)" = "Speak Candidate (Using system's built-in TTS)";
 
 
-// AboutView
+// MARK: - AboutView
+
 "Version" = "Version";
 
 "Website" = "Website";

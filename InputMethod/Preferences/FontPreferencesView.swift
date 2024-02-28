@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct CandidateFontPreferencesView: View {
+struct FontPreferencesView: View {
 
         private let minusImage: Image = Image(systemName: "minus")
         private let plusImage: Image = Image(systemName: "plus")

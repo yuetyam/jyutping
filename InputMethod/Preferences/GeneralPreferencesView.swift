@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CandidateLayoutPreferencesView: View {
+struct GeneralPreferencesView: View {
 
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
 

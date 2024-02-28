@@ -253,8 +253,8 @@
 		37E6AD7C2B3B381700F02279 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD572B3B381600F02279 /* EventHandler.swift */; };
 		37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD592B3B381600F02279 /* HotkeysView.swift */; };
 		37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5A2B3B381600F02279 /* FontPicker.swift */; };
-		37E6AD7F2B3B381700F02279 /* CandidateLayoutPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5B2B3B381600F02279 /* CandidateLayoutPreferencesView.swift */; };
-		37E6AD802B3B381700F02279 /* CandidateFontPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5C2B3B381600F02279 /* CandidateFontPreferencesView.swift */; };
+		37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */; };
+		37E6AD802B3B381700F02279 /* FontPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */; };
 		37E6AD812B3B381700F02279 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5D2B3B381600F02279 /* Constant.swift */; };
 		37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5E2B3B381600F02279 /* PreferencesView.swift */; };
 		37E6AD832B3B381700F02279 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5F2B3B381600F02279 /* AboutView.swift */; };
@@ -628,8 +628,8 @@
 		37E6AD572B3B381600F02279 /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		37E6AD592B3B381600F02279 /* HotkeysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
 		37E6AD5A2B3B381600F02279 /* FontPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
-		37E6AD5B2B3B381600F02279 /* CandidateLayoutPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateLayoutPreferencesView.swift; sourceTree = "<group>"; };
-		37E6AD5C2B3B381600F02279 /* CandidateFontPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateFontPreferencesView.swift; sourceTree = "<group>"; };
+		37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesView.swift; sourceTree = "<group>"; };
+		37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPreferencesView.swift; sourceTree = "<group>"; };
 		37E6AD5D2B3B381600F02279 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		37E6AD5E2B3B381600F02279 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		37E6AD5F2B3B381600F02279 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -1309,8 +1309,8 @@
 			children = (
 				37E6AD6A2B3B381700F02279 /* Menu.swift */,
 				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
-				37E6AD5B2B3B381600F02279 /* CandidateLayoutPreferencesView.swift */,
-				37E6AD5C2B3B381600F02279 /* CandidateFontPreferencesView.swift */,
+				37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */,
+				37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */,
 				37E6AD592B3B381600F02279 /* HotkeysView.swift */,
 				37E6AD5F2B3B381600F02279 /* AboutView.swift */,
 				37E6AD602B3B381600F02279 /* AppSettings.swift */,
@@ -1840,7 +1840,7 @@
 				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
 				37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */,
 				37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */,
-				37E6AD7F2B3B381700F02279 /* CandidateLayoutPreferencesView.swift in Sources */,
+				37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */,
 				37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */,
 				37E6AD732B3B381700F02279 /* InputForm.swift in Sources */,
 				37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */,
@@ -1858,7 +1858,7 @@
 				37E6AD7C2B3B381700F02279 /* EventHandler.swift in Sources */,
 				37E6AD832B3B381700F02279 /* AboutView.swift in Sources */,
 				37E6AD782B3B381700F02279 /* StringExtensions.swift in Sources */,
-				37E6AD802B3B381700F02279 /* CandidateFontPreferencesView.swift in Sources */,
+				37E6AD802B3B381700F02279 /* FontPreferencesView.swift in Sources */,
 				37E6AD762B3B381700F02279 /* IMKTextInputExtensions.swift in Sources */,
 				37E6AD702B3B381700F02279 /* PunctuationKey.swift in Sources */,
 				37E6AD6E2B3B381700F02279 /* MotherBoard.swift in Sources */,

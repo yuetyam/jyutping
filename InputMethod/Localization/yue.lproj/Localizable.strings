@@ -1,13 +1,17 @@
-"menu.title" = "粵拼";
-"menu.mode.cantonese" = "粵拼模式";
-"menu.mode.abc" = "ABC 模式";
-"menu.preferences" = "設定…";
-"menu.check4updates" = "檢查更新…";
-"menu.help" = "輔助說明";
-"menu.about" = "關於";
-"menu.terminate" = "結束運行";
+// MARK: - Input Method Menu
 
-"Jyutping Input Method Preferences" = "粵拼輸入法設定";
+"Menu.Title" = "粵拼";
+"Menu.InputMethodMode.Cantonese" = "粵拼模式";
+"Menu.InputMethodMode.ABC" = "ABC 模式";
+"Menu.Preferences" = "設定…";
+"Menu.CheckForUpdates" = "檢查更新…";
+"Menu.Help" = "輔助說明";
+"Menu.About" = "關於";
+
+
+// MARK: - PreferencesView
+
+"PreferencesView.Window.Title" = "粵拼輸入法設定";
 
 "PreferencesView.SectionHeader.Candidates" = "候選詞";
 "PreferencesView.SectionHeader.Hotkeys" = "熱鍵";
@@ -20,7 +24,9 @@
 "PreferencesView.NavigationTitle.About" = "關於";
 
 
-// CandidateLayoutPreferencesView
+// MARK: - GeneralPreferencesView
+
+"Preferences.General.EmojiSuggestions" = "繪文字(Emoji)候選詞";
 "Candidate Count Per Page" = "每䈎候選詞數目";
 "Candidate Line Spacing" = "候選詞行間隔";
 
@@ -35,8 +41,8 @@
 "CommentToneColor.Shallow" = "相對更淺";
 
 
-// CandidateFontPreferencesView
-"Preferences.General.EmojiSuggestions" = "繪文字(Emoji)候選詞";
+// MARK: - FontPreferencesView
+
 "Candidate Font Size" = "候選詞字號";
 "Comment Font Size" = "候選詞註釋字號";
 "Serial Number Font Size" = "候選詞編號字號";
@@ -49,7 +55,8 @@
 "FontPicker.CurrentFont.Change" = "更改…";
 
 
-// HotkeysView
+// MARK: - HotkeysView
+
 "Press **Shift** Once To" = "撳一下 **Shift** 掣";
 "Do Nothing" = "無";
 "Switch between Cantonese Mode and ABC Mode" = "粵拼 / ABC 模式切換";
@@ -73,7 +80,8 @@
 "Speak Candidate (Using system's built-in TTS)" = "朗讀候選詞（用系統內置嘅語音朗讀TTS）";
 
 
-// AboutView
+// MARK: - AboutView
+
 "Version" = "版本";
 
 "Website" = "網站";
