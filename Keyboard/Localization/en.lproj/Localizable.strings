@@ -35,7 +35,7 @@
 "ToneDisplayStyle.Option3" = "Superscript :  jyut⁶ ping³";
 "ToneDisplayStyle.Option4" = "Subscript    :  jyut₆ ping₃";
 
-"Space Double Tapping Shortcut" = "Space Double Tapping Shortcut";
+"Space Double Tapping Shortcut" = "Space Double Tapping";
 "DoubleSpaceShortcut.Option1" = "Insert a Period (Full Stop)";
 "DoubleSpaceShortcut.Option3" = "Insert an Ideographic Comma";
 "DoubleSpaceShortcut.Option4" = "Insert a Fullwidth Space (U+3000)";

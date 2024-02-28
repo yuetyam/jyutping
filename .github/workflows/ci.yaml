@@ -65,11 +65,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build iOS App Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Jyutping -configuration Debug -destination "platform=iOS Simulator,name=iPhone 15 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
   build_keyboard:
     name: Build Keyboard
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - name: Build Keyboard Scheme
-        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty
+        run: set -o pipefail && xcodebuild clean build -project Jyutping.xcodeproj -scheme Keyboard -configuration Debug -destination "platform=iOS Simulator,name=iPhone 15 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | xcpretty

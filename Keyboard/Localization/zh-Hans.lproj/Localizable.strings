@@ -35,7 +35,7 @@
 "ToneDisplayStyle.Option3" = "上標　 :   jyut⁶ ping³";
 "ToneDisplayStyle.Option4" = "下標　 :   jyut₆ ping₃";
 
-"Space Double Tapping Shortcut" = "雙擊空格掣快捷動作";
+"Space Double Tapping Shortcut" = "雙擊空格掣";
 "DoubleSpaceShortcut.Option1" = "輸入一個句號「。」";
 "DoubleSpaceShortcut.Option3" = "輸入一個頓號「、」";
 "DoubleSpaceShortcut.Option4" = "輸入一個全寬空格（U+3000）";
