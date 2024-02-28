@@ -1,55 +1,55 @@
 // MARK: - SettingsView
 
-"Traditional Characters" = "傳統漢字";
-"Traditional Characters, Hong Kong" = "傳統漢字・香港";
-"Traditional Characters, Taiwan" = "傳統漢字・臺灣";
-"Simplified Characters" = "简化字";
+"CharacterStandard.Traditional" = "傳統漢字";
+"CharacterStandard.TraditionalHongKong" = "傳統漢字・香港";
+"CharacterStandard.TraditionalTaiwan" = "傳統漢字・臺灣";
+"CharacterStandard.Simplified" = "简化字";
 
-"Keyboard Feedback" = "鍵盤回應";
-"Sound" = "聲音";
-"Haptic" = "觸感";
-"Haptic.None" = "無";
-"Haptic.Light" = "輕";
-"Haptic.Medium" = "中";
-"Haptic.Heavy" = "重";
-"Haptic Feedback requires Full Access" = "觸感回應需啓用「完全訪問」";
+"KeyboardFeedback.Header" = "鍵盤回應";
+"KeyboardFeedback.Sound" = "聲音";
+"KeyboardFeedback.Haptic" = "觸感";
+"KeyboardFeedback.Haptic.None" = "無";
+"KeyboardFeedback.Haptic.Light" = "輕";
+"KeyboardFeedback.Haptic.Medium" = "中";
+"KeyboardFeedback.Haptic.Heavy" = "重";
+"KeyboardFeedback.Footer" = "觸感回應需啓用「完全訪問」";
 
-"Emoji Suggestions" = "繪文字(Emoji)候選詞";
+"SettingsView.EmojiSuggestions" = "繪文字(Emoji)候選詞";
 
-"Keyboard Layout" = "鍵盤佈局";
+"KeyboardLayout.Header" = "鍵盤佈局";
 "KeyboardLayout.QWERTY" = "全鍵盤・QWERTY";
 "KeyboardLayout.SaamPing" = "三拼";
 "KeyboardLayout.10Key" = "九宮格";
 
-"Show Lowercase Keys" = "鍵文字母小寫顯示";
-"Key Text Preview" = "鍵文氣泡預覽";
+"SettingsView.ShowLowercaseKeys" = "鍵文字母小寫顯示";
+"SettingsView.KeyTextPreview" = "鍵文氣泡預覽";
 
-"Jyutping Display" = "粵拼顯示";
-"Above Candidates" = "候選詞之上";
-"Below Candidates" = "候選詞之下";
-"No Jyutping" = "無";
+"JyutpingDisplay.Header" = "粵拼顯示";
+"JyutpingDisplay.AboveCandidates" = "候選詞之上";
+"JyutpingDisplay.BelowCandidates" = "候選詞之下";
+"JyutpingDisplay.NoJyutping" = "無";
 
-"Jyutping Tones Display" = "粵拼聲調樣式";
-"ToneDisplayStyle.Option1" = "正常　 :   jyut6 ping3";
-"ToneDisplayStyle.Option2" = "無聲調 :   jyut ping";
-"ToneDisplayStyle.Option3" = "上標　 :   jyut⁶ ping³";
-"ToneDisplayStyle.Option4" = "下標　 :   jyut₆ ping₃";
+"ToneDisplay.Header" = "粵拼聲調樣式";
+"ToneDisplay.Option1" = "正常　 :   jyut6 ping3";
+"ToneDisplay.Option2" = "無聲調 :   jyut ping";
+"ToneDisplay.Option3" = "上標　 :   jyut⁶ ping³";
+"ToneDisplay.Option4" = "下標　 :   jyut₆ ping₃";
 
-"Space Double Tapping Shortcut" = "雙擊空格掣";
-"DoubleSpaceShortcut.Option1" = "輸入一個句號「。」";
-"DoubleSpaceShortcut.Option3" = "輸入一個頓號「、」";
-"DoubleSpaceShortcut.Option4" = "輸入一個全寬空格（U+3000）";
-"DoubleSpaceShortcut.Option2" = "無";
+"SpaceDoubleTapping.Header" = "雙擊空格掣";
+"SpaceDoubleTapping.Option1" = "輸入一個句號「。」";
+"SpaceDoubleTapping.Option3" = "輸入一個頓號「、」";
+"SpaceDoubleTapping.Option4" = "輸入一個全寬空格（U+3000）";
+"SpaceDoubleTapping.Option2" = "無";
 
-"Version" = "版本";
-"Copy" = "複製";
+"SettingsView.Version" = "版本";
+"SettingsView.Copy" = "複製";
 
-"Clear User Lexicon" = "清空個人詞庫";
+"SettingsView.ClearUserLexicon" = "清空個人詞庫";
 
 
 // MARK: - EditingPanel
 
-"Clear System Clipboard" = "清空系統剪貼板";
-"Paste" = "貼上";
-"Back" = "返回";
-"Clear" = "清空前文";
+"EditingPanel.ClearSystemClipboard" = "清空系統剪貼板";
+"EditingPanel.Paste" = "貼上";
+"EditingPanel.Back" = "返回";
+"EditingPanel.Clear" = "清空前文";

@@ -54,7 +54,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCharacterStandard(to: .traditional)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional Characters").foregroundStyle(Color.primary)
+                                                        Text("CharacterStandard.Traditional").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .traditional ? 1: 0)
                                                 }
@@ -66,7 +66,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCharacterStandard(to: .hongkong)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional Characters, Hong Kong").foregroundStyle(Color.primary)
+                                                        Text("CharacterStandard.TraditionalHongKong").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .hongkong ? 1: 0)
                                                 }
@@ -78,7 +78,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCharacterStandard(to: .taiwan)
                                         } label: {
                                                 HStack {
-                                                        Text("Traditional Characters, Taiwan").foregroundStyle(Color.primary)
+                                                        Text("CharacterStandard.TraditionalTaiwan").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .taiwan ? 1: 0)
                                                 }
@@ -90,26 +90,26 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCharacterStandard(to: .simplified)
                                         } label: {
                                                 HStack {
-                                                        Text("Simplified Characters").foregroundStyle(Color.primary)
+                                                        Text("CharacterStandard.Simplified").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCharacterStandard == .simplified ? 1: 0)
                                                 }
                                         }
                                 }
                                 Section {
-                                        Toggle("Sound", isOn: $isAudioFeedbackOn)
+                                        Toggle("KeyboardFeedback.Sound", isOn: $isAudioFeedbackOn)
                                                 .onChange(of: isAudioFeedbackOn) { newValue in
                                                         Options.updateAudioFeedbackStatus(isOn: newValue)
                                                 }
                                         if context.isPhone {
                                                 HStack {
-                                                        Text("Haptic").minimumScaleFactor(0.5).lineLimit(1)
+                                                        Text("KeyboardFeedback.Haptic").minimumScaleFactor(0.5).lineLimit(1)
                                                         Spacer()
                                                         Picker("Haptic Feedback", selection: $hapticFeedback) {
-                                                                Text("Haptic.None").tag(HapticFeedback.disabled)
-                                                                Text("Haptic.Light").tag(HapticFeedback.light)
-                                                                Text("Haptic.Medium").tag(HapticFeedback.medium)
-                                                                Text("Haptic.Heavy").tag(HapticFeedback.heavy)
+                                                                Text("KeyboardFeedback.Haptic.None").tag(HapticFeedback.disabled)
+                                                                Text("KeyboardFeedback.Haptic.Light").tag(HapticFeedback.light)
+                                                                Text("KeyboardFeedback.Haptic.Medium").tag(HapticFeedback.medium)
+                                                                Text("KeyboardFeedback.Haptic.Heavy").tag(HapticFeedback.heavy)
                                                         }
                                                         .labelsHidden()
                                                         .pickerStyle(.segmented)
@@ -125,15 +125,15 @@ struct SettingsViewIOS15: View {
                                                 .disabled(!(context.hasFullAccess))
                                         }
                                 } header: {
-                                        Text("Keyboard Feedback").textCase(nil)
+                                        Text("KeyboardFeedback.Header").textCase(nil)
                                 } footer: {
                                         if context.isPhone && !(context.hasFullAccess) {
-                                                Text("Haptic Feedback requires Full Access").textCase(nil)
+                                                Text("KeyboardFeedback.Footer").textCase(nil)
                                         }
                                 }
 
                                 Section {
-                                        Toggle("Emoji Suggestions", isOn: $isEmojiSuggestionsOn)
+                                        Toggle("SettingsView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
                                                 .onChange(of: isEmojiSuggestionsOn) { newValue in
                                                         Options.updateEmojiSuggestions(to: newValue)
                                                 }
@@ -179,16 +179,16 @@ struct SettingsViewIOS15: View {
                                                 }
                                         }
                                 } header: {
-                                        Text("Keyboard Layout").textCase(nil)
+                                        Text("KeyboardLayout.Header").textCase(nil)
                                 }
 
                                 Section {
-                                        Toggle("Show Lowercase Keys", isOn: $showLowercaseKeys)
+                                        Toggle("SettingsView.ShowLowercaseKeys", isOn: $showLowercaseKeys)
                                                 .onChange(of: showLowercaseKeys) { newValue in
                                                         AudioFeedback.modified()
                                                         Options.updateShowLowercaseKeys(to: newValue)
                                                 }
-                                        Toggle("Key Text Preview", isOn: $keyTextPreview)
+                                        Toggle("SettingsView.KeyTextPreview", isOn: $keyTextPreview)
                                                 .onChange(of: keyTextPreview) { newValue in
                                                         AudioFeedback.modified()
                                                         Options.updateKeyTextPreview(to: newValue)
@@ -203,7 +203,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCommentStyle(to: .aboveCandidates)
                                         } label: {
                                                 HStack {
-                                                        Text("Above Candidates").foregroundStyle(Color.primary)
+                                                        Text("JyutpingDisplay.AboveCandidates").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentStyle == .aboveCandidates ? 1: 0)
                                                 }
@@ -215,7 +215,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCommentStyle(to: .belowCandidates)
                                         } label: {
                                                 HStack {
-                                                        Text("Below Candidates").foregroundStyle(Color.primary)
+                                                        Text("JyutpingDisplay.BelowCandidates").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentStyle == .belowCandidates ? 1: 0)
                                                 }
@@ -227,13 +227,13 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCommentStyle(to: .noComments)
                                         } label: {
                                                 HStack {
-                                                        Text("No Jyutping").foregroundStyle(Color.primary)
+                                                        Text("JyutpingDisplay.NoJyutping").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentStyle == .noComments ? 1: 0)
                                                 }
                                         }
                                 } header: {
-                                        Text("Jyutping Display").textCase(nil)
+                                        Text("JyutpingDisplay.Header").textCase(nil)
                                 }
 
                                 Section {
@@ -244,7 +244,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCommentToneStyle(to: .normal)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option1").foregroundStyle(Color.primary)
+                                                        Text("ToneDisplay.Option1").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .normal ? 1: 0)
                                                 }
@@ -256,7 +256,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCommentToneStyle(to: .noTones)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option2").foregroundStyle(Color.primary)
+                                                        Text("ToneDisplay.Option2").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .noTones ? 1: 0)
                                                 }
@@ -268,7 +268,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCommentToneStyle(to: .superscript)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option3").foregroundStyle(Color.primary)
+                                                        Text("ToneDisplay.Option3").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .superscript ? 1: 0)
                                                 }
@@ -280,13 +280,13 @@ struct SettingsViewIOS15: View {
                                                 Options.updateCommentToneStyle(to: .subscript)
                                         } label: {
                                                 HStack {
-                                                        Text("ToneDisplayStyle.Option4").foregroundStyle(Color.primary)
+                                                        Text("ToneDisplay.Option4").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedCommentToneStyle == .subscript ? 1: 0)
                                                 }
                                         }
                                 } header: {
-                                        Text("Jyutping Tones Display").textCase(nil)
+                                        Text("ToneDisplay.Header").textCase(nil)
                                 }
 
                                 Section {
@@ -297,7 +297,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateDoubleSpaceShortcut(to: .insertPeriod)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option1").foregroundStyle(Color.primary)
+                                                        Text("SpaceDoubleTapping.Option1").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertPeriod ? 1: 0)
                                                 }
@@ -309,7 +309,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateDoubleSpaceShortcut(to: .insertIdeographicComma)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option3").foregroundStyle(Color.primary)
+                                                        Text("SpaceDoubleTapping.Option3").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertIdeographicComma ? 1: 0)
                                                 }
@@ -321,7 +321,7 @@ struct SettingsViewIOS15: View {
                                                 Options.updateDoubleSpaceShortcut(to: .insertFullWidthSpace)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option4").foregroundStyle(Color.primary)
+                                                        Text("SpaceDoubleTapping.Option4").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertFullWidthSpace ? 1: 0)
                                                 }
@@ -333,13 +333,13 @@ struct SettingsViewIOS15: View {
                                                 Options.updateDoubleSpaceShortcut(to: .doNothing)
                                         } label: {
                                                 HStack {
-                                                        Text("DoubleSpaceShortcut.Option2").foregroundStyle(Color.primary)
+                                                        Text("SpaceDoubleTapping.Option2").foregroundStyle(Color.primary)
                                                         Spacer()
                                                         Image.checkmark.opacity(selectedDoubleSpaceShortcut == .doNothing ? 1: 0)
                                                 }
                                         }
                                 } header: {
-                                        Text("Space Double Tapping Shortcut").textCase(nil)
+                                        Text("SpaceDoubleTapping.Header").textCase(nil)
                                 }
 
                                 Section {
@@ -347,11 +347,11 @@ struct SettingsViewIOS15: View {
                                                 Button {
                                                         UIPasteboard.general.string = version
                                                 } label: {
-                                                        Label("Copy", systemImage: "doc.on.doc")
+                                                        Label("SettingsView.Copy", systemImage: "doc.on.doc")
                                                 }
                                         } label: {
                                                 HStack {
-                                                        Text("Version")
+                                                        Text("SettingsView.Version")
                                                         Spacer()
                                                         Text(verbatim: version)
                                                 }
@@ -370,12 +370,12 @@ struct SettingsViewIOS15: View {
                                                                 UserLexicon.deleteAll()
                                                                 EmojiMaster.clearFrequent()
                                                         } label: {
-                                                                Label("Clear User Lexicon", systemImage: "trash")
+                                                                Label("SettingsView.ClearUserLexicon", systemImage: "trash")
                                                         }
                                                 } label: {
                                                         HStack {
                                                                 Spacer()
-                                                                Text("Clear User Lexicon")
+                                                                Text("SettingsView.ClearUserLexicon")
                                                                 Spacer()
                                                         }
                                                         .foregroundStyle(Color.red)

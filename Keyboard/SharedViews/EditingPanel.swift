@@ -63,7 +63,7 @@ struct EditingPanel: View {
                                                         .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
                                                         Image(systemName: clipboardImageName)
-                                                        Text("Clear System Clipboard").font(.caption2)
+                                                        Text("EditingPanel.ClearSystemClipboard").font(.caption2)
                                                 }
                                         }
                                         .frame(maxWidth: .infinity)
@@ -89,7 +89,7 @@ struct EditingPanel: View {
                                                         .padding(.horizontal, 3)
                                                 VStack(spacing: 4) {
                                                         Image(systemName: "doc.on.clipboard")
-                                                        Text("Paste").font(.caption2)
+                                                        Text("EditingPanel.Paste").font(.caption2)
                                                 }
                                                 .opacity(UIPasteboard.general.hasStrings ? 1 : 0.5)
                                         }
@@ -241,7 +241,7 @@ struct EditingPanel: View {
                                                 .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
                                                 Image.upChevron.font(.title3)
-                                                Text("Back").font(.caption2)
+                                                Text("EditingPanel.Back").font(.caption2)
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
@@ -300,8 +300,8 @@ struct EditingPanel: View {
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
-                                                Image(systemName: "clear")
-                                                Text("Clear").font(.caption2)
+                                                Image(systemName: "EditingPanel.Clear")
+                                                Text("EditingPanel.Clear").font(.caption2)
                                         }
                                 }
                                 .frame(maxHeight: .infinity)
