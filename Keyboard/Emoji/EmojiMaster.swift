@@ -42,12 +42,14 @@ struct EmojiMaster {
                 _ = Emoji.Category.allCases.map { category in
                         let matched: [Emoji] = fetched.filter({ $0.category == category })
                         let filtered: [Emoji] = {
-                                if #available(iOSApplicationExtension 16.4, *) {
+                                if #available(iOSApplicationExtension 17.4, *) {
                                         return matched.uniqued()
+                                } else if #available(iOSApplicationExtension 16.4, *) {
+                                        return matched.filter({ !(new_in_iOS_17_4.contains($0.text)) }).uniqued()
                                 } else if #available(iOSApplicationExtension 15.4, *) {
-                                        return matched.filter({ !(new_in_iOS_16_4.contains($0.text)) }).uniqued()
+                                        return matched.filter({ !(new_in_iOS_17_4.contains($0.text) || new_in_iOS_16_4.contains($0.text)) }).uniqued()
                                 } else {
-                                        return matched.filter({ !(new_in_iOS_16_4.contains($0.text) || new_in_iOS_15_4.contains($0.text)) }).uniqued()
+                                        return matched.filter({ !(new_in_iOS_17_4.contains($0.text) || new_in_iOS_16_4.contains($0.text) || new_in_iOS_15_4.contains($0.text)) }).uniqued()
                                 }
                         }()
                         dict[category] = filtered
@@ -58,6 +60,8 @@ struct EmojiMaster {
 
 
         private static let defaultFrequent: [String] = ["👋", "👍", "👌", "✌️", "👏", "🤩", "😍", "😘", "🥰", "😋", "😎", "😇", "🤗", "😏", "🤔", "❤️", "💖", "💕", "💞", "🌹", "🌚", "👀", "🐶", "👻", "🤪", "🍻", "🔥", "✅", "💯", "🎉"]
+
+        private static let new_in_iOS_17_4: Set<String> = ["🙂‍↔️", "🙂‍↕️", "🚶‍➡️", "🚶‍♀️‍➡️", "🚶‍♂️‍➡️", "🧎‍➡️", "🧎‍♀️‍➡️", "🧎‍♂️‍➡️", "🧑‍🦯‍➡️", "👨‍🦯‍➡️", "👩‍🦯‍➡️", "🧑‍🦼‍➡️", "👨‍🦼‍➡️", "👩‍🦼‍➡️", "🧑‍🦽‍➡️", "👨‍🦽‍➡️", "👩‍🦽‍➡️", "🏃‍➡️", "🏃‍♀️‍➡️", "🏃‍♂️‍➡️", "🐦‍🔥", "🍋‍🟩", "🍄‍🟫", "⛓️‍💥"]
 
         private static let new_in_iOS_16_4: Set<String> = ["🫨", "🩷", "🩵", "🩶", "🫷", "🫸", "🫎", "🫏", "🪽", "🐦‍⬛", "🪿", "🪼", "🪻", "🫚", "🫛", "🪭", "🪮", "🪇", "🪈", "🪯", "🛜"]
 
