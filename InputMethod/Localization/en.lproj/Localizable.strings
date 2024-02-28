@@ -27,73 +27,74 @@
 // MARK: - GeneralPreferencesView
 
 "Preferences.General.EmojiSuggestions" = "Emoji Suggestions";
-"Candidate Count Per Page" = "Candidate Count Per Page";
-"Candidate Line Spacing" = "Candidate Line Spacing";
+"Preferences.General.CandidateCountPerPage" = "Candidate Count Per Page";
+"Preferences.General.CandidateLineSpacing" = "Candidate Line Spacing";
 
-"Comment(Jyutping) Tone Style" = "Comment(Jyutping) Tone Style";
-"CommentToneStyle.Normal" = "Normal";
-"CommentToneStyle.NoTones" = "No Tones";
-"CommentToneStyle.Superscript" = "Superscript";
-"CommentToneStyle.Subscript" = "Subscript";
+"Preferences.General.CommentToneStyle" = "Comment(Jyutping) Tone Style";
+"Preferences.General.CommentToneStyle.Normal" = "Normal";
+"Preferences.General.CommentToneStyle.NoTones" = "No Tones";
+"Preferences.General.CommentToneStyle.Superscript" = "Superscript";
+"Preferences.General.CommentToneStyle.Subscript" = "Subscript";
 
-"Comment(Jyutping) Tone Color" = "Comment(Jyutping) Tone Color";
-"CommentToneColor.Normal" = "Normal";
-"CommentToneColor.Shallow" = "Shallow";
+"Preferences.General.CommentToneColor" = "Comment(Jyutping) Tone Color";
+"Preferences.General.CommentToneColor.Normal" = "Normal";
+"Preferences.General.CommentToneColor.Shallow" = "Shallow";
 
 
 // MARK: - FontPreferencesView
 
-"Candidate Font Size" = "Candidate Font Size";
-"Comment Font Size" = "Comment Font Size";
-"Serial Number Font Size" = "Serial Number Font Size";
-"Candidate Font" = "Candidate Font";
-"Comment Font" = "Comment Font";
-"Serial Number Font" = "Serial Number Font";
-"Default" = "Default";
-"System" = "System";
-"Custom" = "Custom";
-"FontPicker.CurrentFont.Change" = "Change…";
+"Preferences.Fonts.CandidateFontSize" = "Candidate Font Size";
+"Preferences.Fonts.CommentFontSize" = "Comment Font Size";
+"Preferences.Fonts.SerialNumberFontSize" = "Serial Number Font Size";
+"Preferences.Fonts.CandidateFont" = "Candidate Font";
+"Preferences.Fonts.CommentFont" = "Comment Font";
+"Preferences.Fonts.SerialNumberFont" = "Serial Number Font";
+"Preferences.Fonts.Default" = "Default";
+"Preferences.Fonts.System" = "System";
+"Preferences.Fonts.Custom" = "Custom";
+"Preferences.FontPicker.ChangeCurrentFont" = "Change…";
 
 
 // MARK: - HotkeysView
 
-"Press **Shift** Once To" = "Press **Shift** Once To";
-"Do Nothing" = "Do Nothing";
-"Switch between Cantonese Mode and ABC Mode" = "Switch between Cantonese Mode and ABC Mode";
+"Preferences.Hotkeys.PressShiftOnceTo" = "Press **Shift** Once To";
+"Preferences.Hotkeys.PressShiftOnceTo.DoNothing" = "Do Nothing";
+"Preferences.Hotkeys.SwitchInputMethodMode" = "Switch between Cantonese Mode and ABC Mode";
 
-"Press **Shift** + **Space** To" = "Press **Shift** + **Space** To";
-"Input a Full-width Space (U+3000)" = "Input a Full-width Space (U+3000)";
+"Preferences.Hotkeys.PressShiftSpaceTo" = "Press **Shift** + **Space** To";
+"Preferences.Hotkeys.PressShiftSpaceTo.InputFullWidthSpace" = "Input a Full-width Space (U+3000)";
 
-"Open Preferences Window (This Window)" = "Open Settings Window (This Window)";
-"Enter/Exit Options View" = "Enter/Exit Options View";
-"Directly toggle specific option" = "Directly toggle specific option";
-"Remove current Candidate from User Lexicon" = "Remove current Candidate from User Lexicon";
-"Clear current pre-edit text" = "Clear current pre-edit text";
+"Preferences.Hotkeys.OpenPreferencesWindow" = "Open Settings Window (This Window)";
+"Preferences.Hotkeys.EnterExitOptionsView" = "Enter/Exit Options View";
+"Preferences.Hotkeys.DirectlyToggleSpecificOption" = "Directly toggle specific Option";
+"Preferences.Hotkeys.RemoveCurrentCandidateFromUserLexicon" = "Remove current Candidate from User Lexicon";
+"Preferences.Hotkeys.ClearCurrentPreEditText" = "Clear current pre-edit text";
 
-"Move to previous Candidate" = "Move to previous Candidate";
-"Move to next Candidate" = "Move to next Candidate";
-"Backward to previous Candidate page" = "Backward to previous Candidate page";
-"Forward to next Candidate page" = "Forward to next Candidate page";
-"Back to the first Candidate page" = "Back to the first Candidate page";
-"or" = "or";
+"Preferences.Hotkeys.MoveToPreviousCandidate" = "Move to previous Candidate";
+"Preferences.Hotkeys.MoveToNextCandidate" = "Move to next Candidate";
+"Preferences.Hotkeys.BackwardToPreviousCandidatePage" = "Backward to previous Candidate page";
+"Preferences.Hotkeys.ForwardToNextCandidatePage" = "Forward to next Candidate page";
+"Preferences.Hotkeys.BackToFirstCandidatePage" = "Back to first Candidate page";
 
-"Speak Candidate (Using system's built-in TTS)" = "Speak Candidate (Using system's built-in TTS)";
+"Preferences.Hotkeys.SpeakCandidate" = "Speak Candidate (Using system's built-in TTS)";
+
+"Preferences.Hotkeys.Or" = "or";
 
 
 // MARK: - AboutView
 
-"Version" = "Version";
+"Preferences.About.Version" = "Version";
 
-"Website" = "Website";
-"Source Code" = "Source Code";
-"Privacy Policy" = "Privacy Policy";
-"FAQ" = "FAQ";
+"Preferences.About.Website" = "Website";
+"Preferences.About.SourceCode" = "Source Code";
+"Preferences.About.PrivacyPolicy" = "Privacy Policy";
+"Preferences.About.FAQ" = "FAQ";
 
-"Telegram Group" = "Telegram Group";
-"QQ Group" = "QQ Group";
-"Twitter" = "X (Twitter)";
-"Instagram" = "Instagram";
+"Preferences.About.TelegramGroup" = "Telegram Group";
+"Preferences.About.QQGroup" = "QQ Group";
+"Preferences.About.Twitter" = "X (Twitter)";
+"Preferences.About.Instagram" = "Instagram";
 
-"Google Forms" = "Google Forms Feedback";
-"Tencent Survey" = "Tencent Survey Feedback";
-"Email Feedback" = "Email Feedback";
+"Preferences.About.GoogleForms" = "Google Forms Feedback";
+"Preferences.About.TencentSurvey" = "Tencent Survey Feedback";
+"Preferences.About.EmailFeedback" = "Email Feedback";

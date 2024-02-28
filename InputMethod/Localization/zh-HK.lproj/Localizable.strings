@@ -27,76 +27,74 @@
 // MARK: - GeneralPreferencesView
 
 "Preferences.General.EmojiSuggestions" = "繪文字(Emoji)候選詞";
-"Candidate Count Per Page" = "每䈎候選詞數目";
-"Candidate Line Spacing" = "候選詞行間隔";
+"Preferences.General.CandidateCountPerPage" = "每䈎候選詞數目";
+"Preferences.General.CandidateLineSpacing" = "候選詞行間隔";
 
-"Comment(Jyutping) Tone Style" = "候選詞註釋(粵拼)聲調樣式";
-"CommentToneStyle.Normal" = "正常";
-"CommentToneStyle.NoTones" = "無聲調";
-"CommentToneStyle.Superscript" = "上標";
-"CommentToneStyle.Subscript" = "下標";
+"Preferences.General.CommentToneStyle" = "候選詞註釋(粵拼)聲調樣式";
+"Preferences.General.CommentToneStyle.Normal" = "正常";
+"Preferences.General.CommentToneStyle.NoTones" = "無聲調";
+"Preferences.General.CommentToneStyle.Superscript" = "上標";
+"Preferences.General.CommentToneStyle.Subscript" = "下標";
 
-"Comment(Jyutping) Tone Color" = "候選詞註釋(粵拼)聲調顏色";
-"CommentToneColor.Normal" = "正常";
-"CommentToneColor.Shallow" = "相對更淺";
+"Preferences.General.CommentToneColor" = "候選詞註釋(粵拼)聲調顏色";
+"Preferences.General.CommentToneColor.Normal" = "正常";
+"Preferences.General.CommentToneColor.Shallow" = "相對更淺";
 
 
 // MARK: - FontPreferencesView
 
-"Candidate Font Size" = "候選詞字號";
-"Comment Font Size" = "候選詞註釋字號";
-"Serial Number Font Size" = "候選詞編號字號";
-"Candidate Font" = "候選詞字體";
-"Comment Font" = "候選詞註釋字體";
-"Serial Number Font" = "候選詞編號字體";
-"Default" = "默認";
-"System" = "系統";
-"Custom" = "自定";
-"FontPicker.CurrentFont.Change" = "更改…";
+"Preferences.Fonts.CandidateFontSize" = "候選詞字號";
+"Preferences.Fonts.CommentFontSize" = "候選詞註釋字號";
+"Preferences.Fonts.SerialNumberFontSize" = "候選詞編號字號";
+"Preferences.Fonts.CandidateFont" = "候選詞字體";
+"Preferences.Fonts.CommentFont" = "候選詞註釋字體";
+"Preferences.Fonts.SerialNumberFont" = "候選詞編號字體";
+"Preferences.Fonts.Default" = "默認";
+"Preferences.Fonts.System" = "系統";
+"Preferences.Fonts.Custom" = "自定";
+"Preferences.FontPicker.ChangeCurrentFont" = "更改…";
 
 
 // MARK: - HotkeysView
 
-"Press **Shift** Once To" = "撳一下 **Shift** 掣";
-"Do Nothing" = "無";
-"Switch between Cantonese Mode and ABC Mode" = "粵拼 / ABC 模式切換";
+"Preferences.Hotkeys.PressShiftOnceTo" = "撳一下 **Shift** 掣";
+"Preferences.Hotkeys.PressShiftOnceTo.DoNothing" = "無";
+"Preferences.Hotkeys.SwitchInputMethodMode" = "粵拼 / ABC 模式切換";
 
-"Press **Shift** + **Space** To" = "撳 **Shift** + **Space**";
-"Input a Full-width Space (U+3000)" = "輸入一個全寬空格（U+3000）";
+"Preferences.Hotkeys.PressShiftSpaceTo" = "撳 **Shift** + **Space**";
+"Preferences.Hotkeys.PressShiftSpaceTo.InputFullWidthSpace" = "輸入一個全寬空格（U+3000）";
 
-"Open Preferences Window (This Window)" = "開啓設定窗口（即係當前邇個）";
-"Enter/Exit Options View" = "進入／退出快捷設定䈎面";
-"Directly toggle specific option" = "直接選擇某個快捷設定選項";
-"Remove current Candidate from User Lexicon" = "從個人詞庫刪除當前候選詞";
-"Clear current pre-edit text" = "清除當前預輸入音節";
+"Preferences.Hotkeys.OpenPreferencesWindow" = "開啓設定窗口（即係當前邇個）";
+"Preferences.Hotkeys.EnterExitOptionsView" = "進入／退出快捷設定䈎面";
+"Preferences.Hotkeys.DirectlyToggleSpecificOption" = "直接選擇某個快捷設定選項";
+"Preferences.Hotkeys.RemoveCurrentCandidateFromUserLexicon" = "從個人詞庫刪除當前候選詞";
+"Preferences.Hotkeys.ClearCurrentPreEditText" = "清除當前預輸入音節";
 
-"Move to previous Candidate" = "移至上一個候選詞";
-"Move to next Candidate" = "移至下一個候選詞";
-"Backward to previous Candidate page" = "退返到上一䈎候選詞";
-"Forward to next Candidate page" = "翻去到下一䈎候選詞";
-"Back to the first Candidate page" = "跳返到第一䈎候選詞";
-"or" = "或";
+"Preferences.Hotkeys.MoveToPreviousCandidate" = "移至上一個候選詞";
+"Preferences.Hotkeys.MoveToNextCandidate" = "移至下一個候選詞";
+"Preferences.Hotkeys.BackwardToPreviousCandidatePage" = "退返到上一䈎候選詞";
+"Preferences.Hotkeys.ForwardToNextCandidatePage" = "翻去到下一䈎候選詞";
+"Preferences.Hotkeys.BackToFirstCandidatePage" = "跳返到第一䈎候選詞";
 
-"Speak Candidate (Using system's built-in TTS)" = "朗讀候選詞（用系統內置嘅語音朗讀TTS）";
+"Preferences.Hotkeys.SpeakCandidate" = "朗讀候選詞（用系統內置嘅語音朗讀TTS）";
+
+"Preferences.Hotkeys.Or" = "或";
 
 
 // MARK: - AboutView
 
-"Version" = "版本";
+"Preferences.About.Version" = "版本";
 
-"Website" = "網站";
-"Source Code" = "源碼";
-"Privacy Policy" = "私隱政策";
-"FAQ" = "常問問題";
+"Preferences.About.Website" = "網站";
+"Preferences.About.SourceCode" = "源碼";
+"Preferences.About.PrivacyPolicy" = "私隱政策";
+"Preferences.About.FAQ" = "常問問題";
 
-"Telegram Group" = "Telegram 交流羣";
-"QQ Group" = "QQ 交流羣";
+"Preferences.About.TelegramGroup" = "Telegram 交流羣";
+"Preferences.About.QQGroup" = "QQ 交流羣";
+"Preferences.About.Twitter" = "X (Twitter)";
+"Preferences.About.Instagram" = "Instagram";
 
-"Telegram Group" = "Telegram 交流羣";
-"QQ Group" = "QQ 交流羣";
-"Twitter" = "X (Twitter)";
-"Instagram" = "Instagram";
-
-"Google Forms" = "Google Forms 反饋";
-"Tencent Survey" = "騰訊問卷反饋";
-"Email Feedback" = "電郵反饋";
+"Preferences.About.GoogleForms" = "Google Forms 反饋";
+"Preferences.About.TencentSurvey" = "騰訊問卷反饋";
+"Preferences.About.EmailFeedback" = "電郵反饋";

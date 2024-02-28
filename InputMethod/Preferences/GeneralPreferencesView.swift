@@ -26,7 +26,7 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Candidate Count Per Page", selection: $pageSize) {
+                                        Picker("Preferences.General.CandidateCountPerPage", selection: $pageSize) {
                                                 ForEach(pageSizeRange, id: \.self) {
                                                         Text(verbatim: "\($0)").tag($0)
                                                 }
@@ -39,7 +39,7 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Candidate Line Spacing", selection: $lineSpacing) {
+                                        Picker("Preferences.General.CandidateLineSpacing", selection: $lineSpacing) {
                                                 ForEach(lineSpacingRange, id: \.self) {
                                                         Text(verbatim: "\($0)").tag($0)
                                                 }
@@ -52,11 +52,11 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Comment(Jyutping) Tone Style", selection: $toneDisplayStyle) {
-                                                Text("CommentToneStyle.Normal").tag(1)
-                                                Text("CommentToneStyle.NoTones").tag(2)
-                                                Text("CommentToneStyle.Superscript").tag(3)
-                                                Text("CommentToneStyle.Subscript").tag(4)
+                                        Picker("Preferences.General.CommentToneStyle", selection: $toneDisplayStyle) {
+                                                Text("Preferences.General.CommentToneStyle.Normal").tag(1)
+                                                Text("Preferences.General.CommentToneStyle.NoTones").tag(2)
+                                                Text("Preferences.General.CommentToneStyle.Superscript").tag(3)
+                                                Text("Preferences.General.CommentToneStyle.Subscript").tag(4)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
@@ -67,9 +67,9 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Comment(Jyutping) Tone Color", selection: $toneDisplayColor) {
-                                                Text("CommentToneColor.Normal").tag(1)
-                                                Text("CommentToneColor.Shallow").tag(2)
+                                        Picker("Preferences.General.CommentToneColor", selection: $toneDisplayColor) {
+                                                Text("Preferences.General.CommentToneColor.Normal").tag(1)
+                                                Text("Preferences.General.CommentToneColor.Shallow").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)

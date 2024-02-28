@@ -30,9 +30,9 @@ struct HotkeysView: View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 HStack {
-                                        Picker("Press **Shift** Once To", selection: $pressShiftOnce) {
-                                                Text("Do Nothing").tag(1)
-                                                Text("Switch between Cantonese Mode and ABC Mode").tag(2)
+                                        Picker("Preferences.Hotkeys.PressShiftOnceTo", selection: $pressShiftOnce) {
+                                                Text("Preferences.Hotkeys.PressShiftOnceTo.DoNothing").tag(1)
+                                                Text("Preferences.Hotkeys.SwitchInputMethodMode").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
@@ -43,9 +43,9 @@ struct HotkeysView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Press **Shift** + **Space** To", selection: $shiftSpaceCombination) {
-                                                Text("Input a Full-width Space (U+3000)").tag(1)
-                                                Text("Switch between Cantonese Mode and ABC Mode").tag(2)
+                                        Picker("Preferences.Hotkeys.PressShiftSpaceTo", selection: $shiftSpaceCombination) {
+                                                Text("Preferences.Hotkeys.PressShiftSpaceTo.InputFullWidthSpace").tag(1)
+                                                Text("Preferences.Hotkeys.SwitchInputMethodMode").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
@@ -57,7 +57,7 @@ struct HotkeysView: View {
                                 .block()
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
-                                                LabelText("Open Preferences Window (This Window)")
+                                                LabelText("Preferences.Hotkeys.OpenPreferencesWindow")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
@@ -67,7 +67,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Enter/Exit Options View")
+                                                LabelText("Preferences.Hotkeys.EnterExitOptionsView")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
@@ -80,7 +80,7 @@ struct HotkeysView: View {
                                 .block()
                                 VStack {
                                         HStack(spacing: 4) {
-                                                LabelText("Directly toggle specific option")
+                                                LabelText("Preferences.Hotkeys.DirectlyToggleSpecificOption")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
@@ -97,7 +97,7 @@ struct HotkeysView: View {
                                 }
                                 .block()
                                 HStack(spacing: 4) {
-                                        LabelText("Remove current Candidate from User Lexicon")
+                                        LabelText("Preferences.Hotkeys.RemoveCurrentCandidateFromUserLexicon")
                                         Text.separator
                                         KeyBlockView.control
                                         Text.plus
@@ -108,7 +108,7 @@ struct HotkeysView: View {
                                 }
                                 .block()
                                 HStack(spacing: 4) {
-                                        LabelText("Clear current pre-edit text")
+                                        LabelText("Preferences.Hotkeys.ClearCurrentPreEditText")
                                         Text.separator
                                         KeyBlockView.escape
                                         Spacer()
@@ -116,7 +116,7 @@ struct HotkeysView: View {
                                 .block()
                                 VStack(spacing: 8) {
                                         HStack(spacing: 4) {
-                                                LabelText("Move to previous Candidate")
+                                                LabelText("Preferences.Hotkeys.MoveToPreviousCandidate")
                                                 Text.separator
                                                 KeyBlockView("▲")
                                                 Text.or
@@ -126,7 +126,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Move to next Candidate")
+                                                LabelText("Preferences.Hotkeys.MoveToNextCandidate")
                                                 Text.separator
                                                 KeyBlockView("▼")
                                                 Text.or
@@ -134,7 +134,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Backward to previous Candidate page")
+                                                LabelText("Preferences.Hotkeys.BackwardToPreviousCandidatePage")
                                                 Text.separator
                                                 KeyBlockView("◀")
                                                 Text.or
@@ -144,7 +144,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Forward to next Candidate page")
+                                                LabelText("Preferences.Hotkeys.ForwardToNextCandidatePage")
                                                 Text.separator
                                                 KeyBlockView("▶")
                                                 Text.or
@@ -154,7 +154,7 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
-                                                LabelText("Back to the first Candidate page")
+                                                LabelText("Preferences.Hotkeys.BackToFirstCandidatePage")
                                                 Text.separator
                                                 KeyBlockView("Home ⤒")
                                                 Spacer()
@@ -164,7 +164,7 @@ struct HotkeysView: View {
                                 /*
                                 VStack {
                                         HStack(spacing: 4) {
-                                                LabelText("Speak Candidate (Using system's built-in TTS)")
+                                                LabelText("Preferences.Hotkeys.SpeakCandidate")
                                                 Text.separator
                                                 KeyBlockView.control
                                                 Text.plus
@@ -241,6 +241,6 @@ private struct KeyBlockView: View {
 private extension Text {
         static let separator: Text = Text(verbatim: ": ").foregroundColor(.secondary)
         static let plus: Text = Text(verbatim: "+")
-        static let or: Text = Text("or")
+        static let or: Text = Text("Preferences.Hotkeys.Or")
 }
 

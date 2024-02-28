@@ -53,7 +53,7 @@ struct FontPicker: View {
                                 NSFontManager.shared.setSelectedFont(font, isMultiple: false)
                                 NSFontPanel.shared.orderBack(nil)
                         } label: {
-                                Text("FontPicker.CurrentFont.Change")
+                                Text("Preferences.FontPicker.ChangeCurrentFont")
                         }
                 }
         }
