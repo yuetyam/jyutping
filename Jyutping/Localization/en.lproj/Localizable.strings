@@ -49,9 +49,13 @@
 "MacSidebar.NavigationTitle.About" = "About";
 
 
-// MARK: - iOS Home
+// MARK: - Text Field & Search
 
-"Input Text Field" = "Input";
+"TextField.InputTextField" = "Input";
+"TextField.SearchPronunciation" = "Search Pronunciation";
+
+
+// MARK: - iOS Home
 
 "How to enable this Keyboard" = "How to enable this Keyboard";
 "accessibility.how_to_enable_this_keyboard" = "Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access";
@@ -137,8 +141,6 @@
 
 
 // MARK: - Jyutping
-
-"Search Pronunciation" = "Search Pronunciation";
 
 "Jyutping Initials" = "Jyutping Initials";
 "Jyutping Finals" = "Jyutping Finals";

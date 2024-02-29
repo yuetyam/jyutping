@@ -15,7 +15,7 @@ struct ClipboardFeaturesView: View {
                                 Text("ClipboardFeatures.Notice.Row3")
                         }
                         Section {
-                                TextField("Input Text Field", text: $inputText)
+                                TextField("TextField.InputTextField", text: $inputText)
                         }
                         Section {
                                 Text("ClipboardFeatures.Notice.Row4")

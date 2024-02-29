@@ -9,7 +9,7 @@ struct CantoneseView: View {
         var body: some View {
                 NavigationView {
                         List {
-                                SearchView(placeholder: "Search Pronunciation", animationState: $animationState)
+                                SearchView(placeholder: "TextField.SearchPronunciation", animationState: $animationState)
 
                                 Section {
                                         NavigationLink(destination: IOSExpressionsView()) {

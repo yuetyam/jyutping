@@ -47,7 +47,7 @@ struct MacSearchView: View {
 
         var body: some View {
                 ScrollViewReader { proxy in
-                        SearchField("Search Pronunciation", submittedText: $submittedText)
+                        SearchField("TextField.SearchPronunciation", submittedText: $submittedText)
                                 .focused($isTextFieldFocused)
                                 .font(.master)
                                 .padding(8)

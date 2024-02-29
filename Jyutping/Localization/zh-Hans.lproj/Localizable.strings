@@ -49,9 +49,13 @@
 "MacSidebar.NavigationTitle.About" = "關於";
 
 
-// MARK: - iOS Home
+// MARK: - Text Field & Search
 
-"Input Text Field" = "輸入框";
+"TextField.InputTextField" = "輸入框";
+"TextField.SearchPronunciation" = "查字音";
+
+
+// MARK: - iOS Home
 
 "How to enable this Keyboard" = "如何啓用鍵盤";
 "accessibility.how_to_enable_this_keyboard" = "一：跳转至「设置」；二：选择「键盘」；三：开启「粤拼」；四：开启「允许完全访问」。";
@@ -137,8 +141,6 @@
 
 
 // MARK: - Jyutping
-
-"Search Pronunciation" = "查字音";
 
 "Jyutping Initials" = "粵拼聲母表";
 "Jyutping Finals" = "粵拼韻母表";
