@@ -13,29 +13,29 @@ struct MacAboutView: View {
                                                 .scaledToFit()
                                                 .frame(width: 16, height: 16)
                                                 .foregroundStyle(Color.accentColor)
-                                        Text("Version").font(.master)
+                                        Text("Shared.About.Version").font(.master)
                                         Text(verbatim: AppMaster.version)
                                         Spacer()
                                 }
                                 .block()
                                 VStack {
-                                        LinkLabel(icon: "globe.asia.australia", title: "Website", link: About.WebsiteAddress)
-                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Source Code", link: About.SourceCodeAddress)
-                                        LinkLabel(icon: "lock.circle", title: "Privacy Policy", link: About.PrivacyPolicyAddress)
-                                        LinkLabel(icon: "questionmark.circle", title: "FAQ", link: About.FAQAddress)
+                                        LinkLabel(icon: "globe.asia.australia", title: "Shared.About.Website", link: About.WebsiteAddress)
+                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Shared.About.SourceCode", link: About.SourceCodeAddress)
+                                        LinkLabel(icon: "lock.circle", title: "Shared.About.PrivacyPolicy", link: About.PrivacyPolicyAddress)
+                                        LinkLabel(icon: "questionmark.circle", title: "Shared.About.FAQ", link: About.FAQAddress)
                                 }
                                 .block()
                                 VStack {
-                                        LinkLabel(icon: "paperplane", title: "Telegram Group", link: About.TelegramAddress)
-                                        LinkLabel(icon: "person.2", title: "QQ Group", link: About.QQAddress, message: About.QQGroupID)
-                                        LinkLabel(icon: "at", title: "Twitter", link: About.TwitterAddress)
-                                        LinkLabel(icon: "circle.square", title: "Instagram", link: About.InstagramAddress)
+                                        LinkLabel(icon: "paperplane", title: "Shared.About.Telegram", link: About.TelegramAddress)
+                                        LinkLabel(icon: "person.2", title: "Shared.About.QQ", link: About.QQAddress, message: About.QQGroupID)
+                                        LinkLabel(icon: "at", title: "Shared.About.Twitter", link: About.TwitterAddress)
+                                        LinkLabel(icon: "circle.square", title: "Shared.About.Instagram", link: About.InstagramAddress)
                                 }
                                 .block()
                                 VStack {
-                                        LinkLabel(icon: "checkmark.message", title: "Google Forms", link: About.GoogleFormsAddress)
-                                        LinkLabel(icon: "checkmark.message", title: "Tencent Survey", link: About.TencentSurveyAddress)
-                                        LinkLabel(icon: "envelope", title: "Email Feedback", link: mailtoScheme, message: About.EmailAddress)
+                                        LinkLabel(icon: "checkmark.message", title: "Shared.About.GoogleForms", link: About.GoogleFormsAddress)
+                                        LinkLabel(icon: "checkmark.message", title: "Shared.About.TencentSurvey", link: About.TencentSurveyAddress)
+                                        LinkLabel(icon: "envelope", title: "Shared.About.Email", link: mailtoScheme, message: About.EmailAddress)
                                 }
                                 .block()
                         }

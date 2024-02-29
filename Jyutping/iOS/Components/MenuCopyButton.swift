@@ -32,7 +32,7 @@ struct URLCopyButton: View {
                 Button {
                         AppMaster.copy(url)
                 } label: {
-                        Label("Copy URL", systemImage: "doc.on.doc")
+                        Label("IOSShared.ContextMenu.CopyURL", systemImage: "doc.on.doc")
                 }
         }
 }
@@ -49,7 +49,7 @@ struct UsernameCopyButton: View {
                 Button {
                         AppMaster.copy(username)
                 } label: {
-                        Label("Copy Username", systemImage: "doc.on.doc")
+                        Label("IOSAboutTab.ContextMenu.CopyUsername", systemImage: "doc.on.doc")
                 }
         }
 }

@@ -8,26 +8,26 @@ struct AboutView: View {
                 NavigationView {
                         List {
                                 Section {
-                                        EnhancedLabel("Version", icon: "info.circle", message: Text(verbatim: AppMaster.version))
+                                        EnhancedLabel("Shared.About.Version", icon: "info.circle", message: Text(verbatim: AppMaster.version))
                                                 .contextMenu {
                                                         MenuCopyButton(AppMaster.version)
                                                 }
                                 }
                                 Section {
                                         SafariLink(About.WebsiteAddress) {
-                                                EnhancedLabel("Website", icon: "globe.asia.australia", symbol: .safari)
+                                                EnhancedLabel("Shared.About.Website", icon: "globe.asia.australia", symbol: .safari)
                                         }
                                         SafariLink(About.Jyutping4MacAddress) {
-                                                EnhancedLabel("Jyutping for macOS", icon: "command.square", symbol: .safari)
+                                                EnhancedLabel("IOSAboutTab.LabelTitle.JyutpingForMac", icon: "command.square", symbol: .safari)
                                         }
                                         SafariLink(About.SourceCodeAddress) {
-                                                EnhancedLabel("Source Code", icon: "chevron.left.forwardslash.chevron.right", symbol: .safari)
+                                                EnhancedLabel("Shared.About.SourceCode", icon: "chevron.left.forwardslash.chevron.right", symbol: .safari)
                                         }
                                         SafariLink(About.PrivacyPolicyAddress) {
-                                                EnhancedLabel("Privacy Policy", icon: "lock.circle", symbol: .safari)
+                                                EnhancedLabel("Shared.About.PrivacyPolicy", icon: "lock.circle", symbol: .safari)
                                         }
                                         SafariLink(About.FAQAddress) {
-                                                EnhancedLabel("FAQ", icon: "questionmark.circle", symbol: .safari)
+                                                EnhancedLabel("Shared.About.FAQ", icon: "questionmark.circle", symbol: .safari)
                                         }
                                 }
                                 Section {
@@ -36,7 +36,7 @@ struct AboutView: View {
                                                 let webUrl: URL = URL(string: About.TelegramAddress)!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("Telegram Group", icon: "paperplane", symbol: .arrowUpForward)
+                                                EnhancedLabel("Shared.About.Telegram", icon: "paperplane", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
                                                 UsernameCopyButton(About.TelegramUsername)
@@ -48,15 +48,15 @@ struct AboutView: View {
                                                 let webUrl: URL = URL(string: About.QQAddress)!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("QQ Group", icon: "person.2", symbol: .arrowUpForward)
+                                                EnhancedLabel("Shared.About.QQ", icon: "person.2", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton(About.QQGroupID, title: "Copy QQ Group ID")
+                                                MenuCopyButton(About.QQGroupID, title: "IOSAboutTab.ContextMenu.CopyQQGroupID")
                                         }
 
                                         // Twitter App supports Universal Links
                                         Link(destination: URL(string: About.TwitterAddress)!) {
-                                                EnhancedLabel("Twitter", icon: "at", symbol: .arrowUpForward)
+                                                EnhancedLabel("Shared.About.Twitter", icon: "at", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
                                                 UsernameCopyButton(About.TwitterUsername)
@@ -68,7 +68,7 @@ struct AboutView: View {
                                                 let webUrl: URL = URL(string: About.InstagramAddress)!
                                                 AppMaster.open(appUrl: appUrl, webUrl: webUrl)
                                         } label: {
-                                                EnhancedLabel("Instagram", icon: "circle.square", symbol: .arrowUpForward)
+                                                EnhancedLabel("Shared.About.Instagram", icon: "circle.square", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
                                                 UsernameCopyButton(About.InstagramUsername)
@@ -77,13 +77,13 @@ struct AboutView: View {
                                 }
                                 Section {
                                         Link(destination: URL(string: About.GoogleFormsAddress)!) {
-                                                EnhancedLabel("Google Forms", icon: "checkmark.message", symbol: .safari)
+                                                EnhancedLabel("Shared.About.GoogleForms", icon: "checkmark.message", symbol: .safari)
                                         }
                                         .contextMenu {
                                                 URLCopyButton(About.GoogleFormsAddress)
                                         }
                                         Link(destination: URL(string: About.TencentSurveyAddress)!) {
-                                                EnhancedLabel("Tencent Survey", icon: "checkmark.message", symbol: .safari)
+                                                EnhancedLabel("Shared.About.TencentSurvey", icon: "checkmark.message", symbol: .safari)
                                         }
                                         .contextMenu {
                                                 URLCopyButton(About.TencentSurveyAddress)
@@ -91,29 +91,29 @@ struct AboutView: View {
 
                                         EmailFeedbackButton()
                                                 .contextMenu {
-                                                        MenuCopyButton(About.EmailAddress, title: "Copy Email Address")
+                                                        MenuCopyButton(About.EmailAddress, title: "IOSAboutTab.ContextMenu.CopyEmailAddress")
                                                 }
                                 }
                                 Section {
                                         Link(destination: URL(string: About.AppStoreAppScheme)!) {
-                                                EnhancedLabel("Review on the App Store", icon: "heart", symbol: .arrowUpForward)
+                                                EnhancedLabel("IOSAboutTab.LabelTitle.ReviewOnTheAppStore", icon: "heart", symbol: .arrowUpForward)
                                         }
                                         .contextMenu {
-                                                MenuCopyButton(About.AppStoreAddress, title: "Copy App Store link")
+                                                MenuCopyButton(About.AppStoreAddress, title: "IOSAboutTab.ContextMenu.CopyAppStoreLink")
                                         }
                                         if #available(iOS 16.0, *) {
                                                 ShareLink(item: About.AppStoreWebURL) {
-                                                        EnhancedLabel("Share this App", icon: "square.and.arrow.up")
+                                                        EnhancedLabel("IOSAboutTab.LabelTitle.ShareThisApp", icon: "square.and.arrow.up")
                                                 }
                                                 .contextMenu {
-                                                        MenuCopyButton(About.AppStoreAddress, title: "Copy App Store link")
+                                                        MenuCopyButton(About.AppStoreAddress, title: "IOSAboutTab.ContextMenu.CopyAppStoreLink")
                                                 }
                                         } else {
                                                 ShareSheetView(activityItems: [About.AppStoreWebURL]) {
-                                                        EnhancedLabel("Share this App", icon: "square.and.arrow.up")
+                                                        EnhancedLabel("IOSAboutTab.LabelTitle.ShareThisApp", icon: "square.and.arrow.up")
                                                 }
                                                 .contextMenu {
-                                                        MenuCopyButton(About.AppStoreAddress, title: "Copy App Store link")
+                                                        MenuCopyButton(About.AppStoreAddress, title: "IOSAboutTab.ContextMenu.CopyAppStoreLink")
                                                 }
                                         }
                                 }
@@ -143,16 +143,16 @@ private struct EmailFeedbackButton: View {
                                 }
                         }
                 } label: {
-                        EnhancedLabel("Email Feedback", icon: "envelope", symbol: Image(systemName: "square.and.pencil"))
+                        EnhancedLabel("Shared.About.Email", icon: "envelope", symbol: Image(systemName: "square.and.pencil"))
                 }
                 .actionSheet(isPresented: $isMailOnPhoneUnavailable) {
-                        ActionSheet(title: Text("Unable to compose mail"),
-                                    message: Text("Mail Unavailable"),
+                        ActionSheet(title: Text("IOSAboutTab.Email.UnableToComposeMail"),
+                                    message: Text("IOSAboutTab.Email.MailUnavailable"),
                                     buttons: [.cancel(Text("General.OK"))])
                 }
                 .alert(isPresented: $isMailOnPadUnavailable) {
-                        Alert(title: Text("Unable to compose mail"),
-                              message: Text("Mail Unavailable"),
+                        Alert(title: Text("IOSAboutTab.Email.UnableToComposeMail"),
+                              message: Text("IOSAboutTab.Email.MailUnavailable"),
                               dismissButton: .cancel(Text("General.OK")))
                 }
         }

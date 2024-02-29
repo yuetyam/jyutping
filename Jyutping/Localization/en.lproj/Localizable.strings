@@ -175,31 +175,31 @@
 
 // MARK: - About
 
-"Resources" = "Resources";
+"Shared.About.Version" = "Version";
 
-"Version" = "Version";
-"Website" = "Website";
-"Jyutping for macOS" = "Jyutping for macOS";
-"Source Code" = "Source Code";
-"Privacy Policy" = "Privacy Policy";
+"Shared.About.Website" = "Website";
+"IOSAboutTab.LabelTitle.JyutpingForMac" = "Jyutping for macOS";
+"Shared.About.SourceCode" = "Source Code";
+"Shared.About.PrivacyPolicy" = "Privacy Policy";
+"Shared.About.FAQ" = "FAQ";
 
-"Telegram Group" = "Join Telegram Group";
-"QQ Group" = "Join QQ Group";
-"Twitter" = "Follow us on X (Twitter)";
-"TRUTH Social" = "Follow us on Truth Social";
-"Instagram" = "Follow us on Instagram";
-"Google Forms" = "Google Forms Feedback";
-"Tencent Survey" = "Tencent Survey Feedback";
+"Shared.About.Telegram" = "Join Telegram Group";
+"Shared.About.QQ" = "Join QQ Group";
+"Shared.About.Twitter" = "Follow us on X (Twitter)";
+"Shared.About.Instagram" = "Follow us on Instagram";
 
-"Copy URL" = "Copy URL";
-"Copy Username" = "Copy Username";
-"Copy QQ Group ID" = "Copy QQ Group ID";
+"Shared.About.GoogleForms" = "Google Forms Feedback";
+"Shared.About.TencentSurvey" = "Tencent Survey Feedback";
 
-"Email Feedback" = "Email Feedback";
-"Unable to compose mail" = "Unable to compose mail";
-"Mail Unavailable" = "Mail Unavailable";
-"Copy Email Address" = "Copy Email Address";
+"IOSShared.ContextMenu.CopyURL" = "Copy URL";
+"IOSAboutTab.ContextMenu.CopyUsername" = "Copy Username";
+"IOSAboutTab.ContextMenu.CopyQQGroupID" = "Copy QQ Group ID";
 
-"Review on the App Store" = "Review on the App Store";
-"Share this App" = "Share this App";
-"Copy App Store link" = "Copy App Store link";
+"Shared.About.Email" = "Email Feedback";
+"IOSAboutTab.Email.UnableToComposeMail" = "Unable to compose mail";
+"IOSAboutTab.Email.MailUnavailable" = "Mail unavailable";
+"IOSAboutTab.ContextMenu.CopyEmailAddress" = "Copy Email Address";
+
+"IOSAboutTab.LabelTitle.ReviewOnTheAppStore" = "Review on the App Store";
+"IOSAboutTab.LabelTitle.ShareThisApp" = "Share this App";
+"IOSAboutTab.ContextMenu.CopyAppStoreLink" = "Copy App Store Link";

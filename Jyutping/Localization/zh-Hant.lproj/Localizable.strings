@@ -175,31 +175,31 @@
 
 // MARK: - About
 
-"Resources" = "資源";
+"Shared.About.Version" = "版本";
 
-"Version" = "版本";
-"Website" = "網站";
-"Jyutping for macOS" = "macOS 粵拼輸入法";
-"Source Code" = "源碼";
-"Privacy Policy" = "私隱政策";
+"Shared.About.Website" = "網站";
+"IOSAboutTab.LabelTitle.JyutpingForMac" = "macOS 粵拼輸入法";
+"Shared.About.SourceCode" = "源碼";
+"Shared.About.PrivacyPolicy" = "私隱政策";
+"Shared.About.FAQ" = "常問問題";
 
-"Telegram Group" = "加入 Telegram 交流羣";
-"QQ Group" = "加入 QQ 交流羣";
-"Twitter" = "關注 X (Twitter)";
-"TRUTH Social" = "關注 Truth Social";
-"Instagram" = "關注 Instagram";
-"Google Forms" = "Google Forms 反饋";
-"Tencent Survey" = "騰訊問卷反饋";
+"Shared.About.Telegram" = "加入 Telegram 交流羣";
+"Shared.About.QQ" = "加入 QQ 交流羣";
+"Shared.About.Twitter" = "關注 X (Twitter)";
+"Shared.About.Instagram" = "關注 Instagram";
 
-"Copy URL" = "複製網址";
-"Copy Username" = "複製戶名";
-"Copy QQ Group ID" = "複製 QQ 羣號";
+"Shared.About.GoogleForms" = "Google Forms 反饋";
+"Shared.About.TencentSurvey" = "騰訊問卷反饋";
 
-"Email Feedback" = "電郵反饋";
-"Unable to compose mail" = "無法編寫郵件";
-"Mail Unavailable" = "電郵不可用";
-"Copy Email Address" = "複製電郵地址";
+"IOSShared.ContextMenu.CopyURL" = "複製網址";
+"IOSAboutTab.ContextMenu.CopyUsername" = "複製戶名";
+"IOSAboutTab.ContextMenu.CopyQQGroupID" = "複製 QQ 羣號";
 
-"Review on the App Store" = "前往 App Store 點評";
-"Share this App" = "分享本應用程式";
-"Copy App Store link" = "複製 App Store 連結";
+"Shared.About.Email" = "電郵反饋";
+"IOSAboutTab.Email.UnableToComposeMail" = "無法編寫郵件";
+"IOSAboutTab.Email.MailUnavailable" = "電郵不可用";
+"IOSAboutTab.ContextMenu.CopyEmailAddress" = "複製電郵地址";
+
+"IOSAboutTab.LabelTitle.ReviewOnTheAppStore" = "前往 App Store 點評";
+"IOSAboutTab.LabelTitle.ShareThisApp" = "分享本應用程式";
+"IOSAboutTab.ContextMenu.CopyAppStoreLink" = "複製 App Store 連結";
