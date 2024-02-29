@@ -23,7 +23,7 @@ struct MacHongKongMTRView: View {
                                 lines = Metro.hongkongMTRLines
                         }
                 }
-                .navigationTitle("Hong Kong MTR")
+                .navigationTitle("MacSidebar.NavigationTitle.HongKongMTR")
         }
 }
 

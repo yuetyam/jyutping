@@ -2,8 +2,10 @@
 
 "General.OK" = "好";
 "General.Copy" = "複製";
+"General.Copied" = "已複製";
 "General.CopyCantoneseText" = "複製文字";
 "General.CopyJyutpingText" = "複製粵拼";
+"General.Search" = "檢索";
 
 
 // MARK: - iOS TabView
@@ -18,11 +20,33 @@
 
 "MacContentView.NavigationTitle.Jyutping" = "粵拼";
 
-"MacSidebar.Header.Jyutping" = "粵拼";
-"MacSidebar.Header.Cantonese" = "粵語";
-"MacSidebar.Header.About" = "關於";
+"MacSidebar.SectionHeader.InputMethod" = "輸入法";
+"MacSidebar.NavigationTitle.InstallInputMethod" = "安裝輸入法";
+"MacSidebar.NavigationTitle.Introductions" = "介紹";
+"MacSidebar.NavigationTitle.CantoneseExpressions" = "粵語用字參攷";
+"MacSidebar.NavigationTitle.SimplifiedCharacterConfusion" = "簡化字常見混亂";
 
-"MacAboutView.NavigationTitle.About" ="關於";
+"MacSidebar.SectionHeader.Jyutping" = "粵拼";
+"MacSidebar.NavigationTitle.Search" = "檢索";
+"MacSidebar.NavigationTitle.JyutpingInitials" = "聲母";
+"MacSidebar.NavigationTitle.JyutpingFinals" = "韻母";
+"MacSidebar.NavigationTitle.JyutpingTones" = "聲調";
+
+"MacSidebar.SectionHeader.Cantonese" = "粵語";
+"MacSidebar.NavigationTitle.Numbers" = "數字";
+"MacSidebar.NavigationTitle.StemsAndBranches" = "天干地支";
+"MacSidebar.NavigationTitle.ChineseZodiac" = "十二生肖";
+"MacSidebar.NavigationTitle.SolarTerms" = "二十四節氣";
+"MacSidebar.NavigationTitle.HundredFamilySurnames" = "百家姓";
+"MacSidebar.NavigationTitle.ThousandCharacterClassic" = "千字文";
+"MacSidebar.NavigationTitle.CantonMetro" = "廣州地鐵";
+"MacSidebar.NavigationTitle.FatshanMetro" = "佛山地鐵";
+"MacSidebar.NavigationTitle.ShamChunMetro" = "深圳地鐵";
+"MacSidebar.NavigationTitle.HongKongMTR" = "港鐵";
+
+"MacSidebar.SectionHeader.About" = "關於";
+"MacSidebar.NavigationTitle.Resources" = "資源";
+"MacSidebar.NavigationTitle.About" = "關於";
 
 
 // MARK: - iOS Home
@@ -173,15 +197,3 @@
 "Review on the App Store" = "前往 App Store 點評";
 "Share this App" = "分享本應用程式";
 "Copy App Store link" = "複製 App Store 連結";
-
-
-// MARK: - macOS
-
-"Input Method" = "輸入法";
-"Install Input Method" = "安裝輸入法";
-"Copied" = "已複製";
-"Introductions" = "介紹";
-"Search" = "檢索";
-"Initials" = "聲母";
-"Finals" = "韻母";
-"Tones" = "聲調";

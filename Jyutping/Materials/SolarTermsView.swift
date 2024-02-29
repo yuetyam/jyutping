@@ -16,7 +16,7 @@ struct SolarTermsView: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Solar Terms")
+                .navigationTitle("MacSidebar.NavigationTitle.SolarTerms")
                 #else
                 List {
                         Section {

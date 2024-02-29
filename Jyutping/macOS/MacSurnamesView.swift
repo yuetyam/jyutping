@@ -29,7 +29,7 @@ struct MacSurnamesView: View {
                         }
                 }
                 .animation(.default, value: surnames.count)
-                .navigationTitle("Hundred Family Surnames")
+                .navigationTitle("MacSidebar.NavigationTitle.HundredFamilySurnames")
         }
 }
 

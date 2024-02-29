@@ -36,7 +36,7 @@ struct MacConfusionView: View {
                                 entries = AppMaster.confusionEntries
                         }
                 }
-                .navigationTitle("Simplified Character Confusion")
+                .navigationTitle("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion")
         }
 }
 

@@ -46,7 +46,7 @@ struct MacIntroductionsView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .navigationTitle("Introductions")
+                .navigationTitle("MacSidebar.NavigationTitle.Introductions")
         }
 }
 

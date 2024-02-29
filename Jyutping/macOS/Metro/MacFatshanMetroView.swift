@@ -23,7 +23,7 @@ struct MacFatshanMetroView: View {
                                 lines = Metro.fatshanMetroLines
                         }
                 }
-                .navigationTitle("Fatshan Metro")
+                .navigationTitle("MacSidebar.NavigationTitle.FatshanMetro")
         }
 }
 

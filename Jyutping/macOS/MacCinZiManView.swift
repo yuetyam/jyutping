@@ -29,7 +29,7 @@ struct MacCinZiManView: View {
                         }
                 }
                 .animation(.default, value: units.count)
-                .navigationTitle("Thousand Character Classic")
+                .navigationTitle("MacSidebar.NavigationTitle.ThousandCharacterClassic")
         }
 }
 

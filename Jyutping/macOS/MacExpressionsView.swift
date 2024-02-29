@@ -309,7 +309,7 @@ struct MacExpressionsView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .navigationTitle("Cantonese Expressions")
+                .navigationTitle("MacSidebar.NavigationTitle.CantoneseExpressions")
         }
 }
 

@@ -3,7 +3,7 @@ import SwiftUI
 /// Workaround for { Cursor always jumps to the end when editing text }
 struct SearchField: View {
 
-        init(_ titleKey: LocalizedStringKey = "Search", submittedText: Binding<String>, submitLabel: SubmitLabel = .search) {
+        init(_ titleKey: LocalizedStringKey = "General.Search", submittedText: Binding<String>, submitLabel: SubmitLabel = .search) {
                 self.titleKey = titleKey
                 self._submittedText = submittedText
                 self.submitLabel = submitLabel

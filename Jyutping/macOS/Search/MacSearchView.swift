@@ -163,7 +163,7 @@ struct MacSearchView: View {
                         }
                         .animation(.default, value: animationState)
                 }
-                .navigationTitle("Search")
+                .navigationTitle("MacSidebar.NavigationTitle.Search")
         }
 }
 

@@ -15,7 +15,7 @@ struct NumbersView: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Numbers")
+                .navigationTitle("MacSidebar.NavigationTitle.Numbers")
                 #else
                 List {
                         Section {

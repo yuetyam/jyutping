@@ -23,7 +23,7 @@ struct MacCantonMetroView: View {
                                 lines = Metro.cantonMetroLines
                         }
                 }
-                .navigationTitle("Canton Metro")
+                .navigationTitle("MacSidebar.NavigationTitle.CantonMetro")
         }
 }
 

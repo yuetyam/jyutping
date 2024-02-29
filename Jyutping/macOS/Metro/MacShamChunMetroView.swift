@@ -23,7 +23,7 @@ struct MacShamChunMetroView: View {
                                 lines = Metro.shamchunMetroLines
                         }
                 }
-                .navigationTitle("Sham Chun Metro")
+                .navigationTitle("MacSidebar.NavigationTitle.ShamChunMetro")
         }
 }
 

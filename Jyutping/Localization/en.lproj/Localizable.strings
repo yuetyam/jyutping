@@ -2,8 +2,10 @@
 
 "General.OK" = "OK";
 "General.Copy" = "Copy";
+"General.Copied" = "Copied";
 "General.CopyCantoneseText" = "Copy Text";
 "General.CopyJyutpingText" = "Copy Jyutping";
+"General.Search" = "Search";
 
 
 // MARK: - iOS TabView
@@ -18,11 +20,33 @@
 
 "MacContentView.NavigationTitle.Jyutping" = "Jyutping";
 
-"MacSidebar.Header.Jyutping" = "Jyutping";
-"MacSidebar.Header.Cantonese" = "Cantonese";
-"MacSidebar.Header.About" = "About";
+"MacSidebar.SectionHeader.InputMethod" = "Input Method";
+"MacSidebar.NavigationTitle.InstallInputMethod" = "Install Input Method";
+"MacSidebar.NavigationTitle.Introductions" = "Introductions";
+"MacSidebar.NavigationTitle.CantoneseExpressions" = "Cantonese Expressions";
+"MacSidebar.NavigationTitle.SimplifiedCharacterConfusion" = "Simplified Character Confusion";
 
-"MacAboutView.NavigationTitle.About" ="About";
+"MacSidebar.SectionHeader.Jyutping" = "Jyutping";
+"MacSidebar.NavigationTitle.Search" = "Search";
+"MacSidebar.NavigationTitle.JyutpingInitials" = "Initials";
+"MacSidebar.NavigationTitle.JyutpingFinals" = "Finals";
+"MacSidebar.NavigationTitle.JyutpingTones" = "Tones";
+
+"MacSidebar.SectionHeader.Cantonese" = "Cantonese";
+"MacSidebar.NavigationTitle.Numbers" = "Numbers";
+"MacSidebar.NavigationTitle.StemsAndBranches" = "Stems & Branches";
+"MacSidebar.NavigationTitle.ChineseZodiac" = "Chinese Zodiac";
+"MacSidebar.NavigationTitle.SolarTerms" = "Solar Terms";
+"MacSidebar.NavigationTitle.HundredFamilySurnames" = "Hundred Family Surnames";
+"MacSidebar.NavigationTitle.ThousandCharacterClassic" = "Thousand Character Classic";
+"MacSidebar.NavigationTitle.CantonMetro" = "Canton Metro";
+"MacSidebar.NavigationTitle.FatshanMetro" = "Fatshan Metro";
+"MacSidebar.NavigationTitle.ShamChunMetro" = "Sham Chun Metro";
+"MacSidebar.NavigationTitle.HongKongMTR" = "Hong Kong MTR";
+
+"MacSidebar.SectionHeader.About" = "About";
+"MacSidebar.NavigationTitle.Resources" = "Resources";
+"MacSidebar.NavigationTitle.About" = "About";
 
 
 // MARK: - iOS Home
@@ -173,15 +197,3 @@
 "Review on the App Store" = "Review on the App Store";
 "Share this App" = "Share this App";
 "Copy App Store link" = "Copy App Store link";
-
-
-// MARK: - macOS
-
-"Input Method" = "Input Method";
-"Install Input Method" = "Install Input Method";
-"Copied" = "Copied";
-"Introductions" = "Introductions";
-"Search" = "Search";
-"Initials" = "Initials";
-"Finals" = "Finals";
-"Tones" = "Tones";

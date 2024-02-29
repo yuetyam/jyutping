@@ -21,7 +21,7 @@ struct ChineseZodiacView: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Chinese Zodiac")
+                .navigationTitle("MacSidebar.NavigationTitle.ChineseZodiac")
                 #else
                 List {
                         Section {

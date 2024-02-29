@@ -27,40 +27,40 @@ struct MacContentView: View {
                 NavigationSplitView {
                         List(selection: $selection) {
                                 Section {
-                                        Label("Install Input Method", systemImage: "laptopcomputer.and.arrow.down").tag(ViewIdentifier.installation)
-                                        Label("Introductions", systemImage: "book").tag(ViewIdentifier.introductions)
-                                        Label("Cantonese Expressions", systemImage: "checkmark.seal").tag(ViewIdentifier.expressions)
-                                        Label("Simplified Character Confusion", systemImage: "character").tag(ViewIdentifier.confusion)
+                                        Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "laptopcomputer.and.arrow.down").tag(ViewIdentifier.installation)
+                                        Label("MacSidebar.NavigationTitle.Introductions", systemImage: "book").tag(ViewIdentifier.introductions)
+                                        Label("MacSidebar.NavigationTitle.CantoneseExpressions", systemImage: "checkmark.seal").tag(ViewIdentifier.expressions)
+                                        Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: "character").tag(ViewIdentifier.confusion)
                                 } header: {
-                                        Text("Input Method").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.InputMethod").textCase(nil)
                                 }
                                 Section {
-                                        Label("Search", systemImage: "magnifyingglass").tag(ViewIdentifier.search)
-                                        Label("Initials", systemImage: "rectangle.leadingthird.inset.filled").tag(ViewIdentifier.initials)
-                                        Label("Finals", systemImage: "rectangle.trailingthird.inset.filled").tag(ViewIdentifier.finals)
-                                        Label("Tones", systemImage: "bell").tag(ViewIdentifier.tones)
+                                        Label("MacSidebar.NavigationTitle.Search", systemImage: "magnifyingglass").tag(ViewIdentifier.search)
+                                        Label("MacSidebar.NavigationTitle.JyutpingInitials", systemImage: "rectangle.leadingthird.inset.filled").tag(ViewIdentifier.initials)
+                                        Label("MacSidebar.NavigationTitle.JyutpingFinals", systemImage: "rectangle.trailingthird.inset.filled").tag(ViewIdentifier.finals)
+                                        Label("MacSidebar.NavigationTitle.JyutpingTones", systemImage: "bell").tag(ViewIdentifier.tones)
                                 } header: {
-                                        Text("MacSidebar.Header.Jyutping").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.Jyutping").textCase(nil)
                                 }
                                 Section {
-                                        Label("Numbers", systemImage: "number").tag(ViewIdentifier.numbers)
-                                        Label("Stems and Branches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
-                                        Label("Chinese Zodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
-                                        Label("Solar Terms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
-                                        Label("title.surnames", systemImage: "person").tag(ViewIdentifier.surnames)
-                                        Label("title.characters", systemImage: "character").tag(ViewIdentifier.cinZiMan)
-                                        Label("Canton Metro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
-                                        Label("Fatshan Metro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
-                                        Label("Sham Chun Metro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)
-                                        Label("Hong Kong MTR", systemImage: "tram.circle").tag(ViewIdentifier.hongkongMTR)
+                                        Label("MacSidebar.NavigationTitle.Numbers", systemImage: "number").tag(ViewIdentifier.numbers)
+                                        Label("MacSidebar.NavigationTitle.StemsAndBranches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
+                                        Label("MacSidebar.NavigationTitle.ChineseZodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
+                                        Label("MacSidebar.NavigationTitle.SolarTerms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
+                                        Label("MacSidebar.NavigationTitle.HundredFamilySurnames", systemImage: "person").tag(ViewIdentifier.surnames)
+                                        Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: "character").tag(ViewIdentifier.cinZiMan)
+                                        Label("MacSidebar.NavigationTitle.CantonMetro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
+                                        Label("MacSidebar.NavigationTitle.FatshanMetro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
+                                        Label("MacSidebar.NavigationTitle.ShamChunMetro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)
+                                        Label("MacSidebar.NavigationTitle.HongKongMTR", systemImage: "tram.circle").tag(ViewIdentifier.hongkongMTR)
                                 } header: {
-                                        Text("MacSidebar.Header.Cantonese").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil)
                                 }
                                 Section {
-                                        Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
-                                        Label("MacAboutView.NavigationTitle.About", systemImage: "info.circle").tag(ViewIdentifier.about)
+                                        Label("MacSidebar.NavigationTitle.Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
+                                        Label("MacSidebar.NavigationTitle.About", systemImage: "info.circle").tag(ViewIdentifier.about)
                                 } header: {
-                                        Text("MacSidebar.Header.About").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.About").textCase(nil)
                                 }
                         }
                         .toolbarBackground(Material.ultraThin, for: .windowToolbar)

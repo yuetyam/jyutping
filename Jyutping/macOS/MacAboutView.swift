@@ -42,7 +42,7 @@ struct MacAboutView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .navigationTitle("MacAboutView.NavigationTitle.About")
+                .navigationTitle("MacSidebar.NavigationTitle.About")
         }
 
         private let mailtoScheme: String = {

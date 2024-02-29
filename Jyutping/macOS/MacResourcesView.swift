@@ -33,7 +33,7 @@ struct MacResourcesView: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Resources")
+                .navigationTitle("MacSidebar.NavigationTitle.Resources")
         }
 }
 

@@ -32,7 +32,7 @@ struct MacInputMethodInstallationView: View {
                                                 if isWebsiteAddressCopied {
                                                         HStack(spacing: 4) {
                                                                 Image(systemName: "text.badge.checkmark")
-                                                                Text("Copied").font(.master)
+                                                                Text("General.Copied").font(.master)
                                                         }
                                                 } else {
                                                         HStack(spacing: 4) {
@@ -48,7 +48,7 @@ struct MacInputMethodInstallationView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .navigationTitle("Install Input Method")
+                .navigationTitle("MacSidebar.NavigationTitle.InstallInputMethod")
         }
 }
 

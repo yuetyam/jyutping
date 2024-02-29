@@ -21,7 +21,7 @@ struct StemsBranchesView: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Stems and Branches")
+                .navigationTitle("MacSidebar.NavigationTitle.StemsAndBranches")
                 #else
                 List {
                         Section {

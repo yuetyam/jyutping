@@ -6,7 +6,7 @@ import CommonExtensions
 
 struct SearchView: View {
 
-        init(placeholder: LocalizedStringKey = "Search", submitLabel: SubmitLabel = .search, animationState: Binding<Int>) {
+        init(placeholder: LocalizedStringKey = "General.Search", submitLabel: SubmitLabel = .search, animationState: Binding<Int>) {
                 self.placeholder = placeholder
                 self.submitLabel = submitLabel
                 self._animationState = animationState
