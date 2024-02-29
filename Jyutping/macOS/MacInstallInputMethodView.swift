@@ -3,7 +3,7 @@
 import SwiftUI
 import AboutKit
 
-struct MacInputMethodInstallationView: View {
+struct MacInstallInputMethodView: View {
 
         @State private var isWebsiteAddressCopied: Bool = false
 

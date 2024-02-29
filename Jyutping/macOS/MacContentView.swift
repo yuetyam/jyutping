@@ -68,7 +68,7 @@ struct MacContentView: View {
                 } detail: {
                         switch selection {
                         case .installation:
-                                MacInputMethodInstallationView().visualEffect()
+                                MacInstallInputMethodView().visualEffect()
                         case .introductions:
                                 MacIntroductionsView().visualEffect()
                         case .expressions:

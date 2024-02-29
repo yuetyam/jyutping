@@ -12,7 +12,7 @@ struct MacContentViewMonterey: View {
                         List {
                                 Section {
                                         NavigationLink {
-                                                MacInputMethodInstallationView().visualEffect()
+                                                MacInstallInputMethodView().visualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "laptopcomputer.and.arrow.down")
                                         }
