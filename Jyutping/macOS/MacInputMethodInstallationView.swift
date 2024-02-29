@@ -37,7 +37,7 @@ struct MacInputMethodInstallationView: View {
                                                 } else {
                                                         HStack(spacing: 4) {
                                                                 Image(systemName: "doc.on.doc")
-                                                                Text("Copy").font(.master)
+                                                                Text("General.Copy").font(.master)
                                                         }
                                                 }
                                         }

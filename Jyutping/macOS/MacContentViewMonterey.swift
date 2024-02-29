@@ -54,7 +54,7 @@ struct MacContentViewMonterey: View {
                                                 Label("Tones", systemImage: "bell")
                                         }
                                 } header: {
-                                        Text("Jyutping").textCase(nil)
+                                        Text("MacSidebar.Header.Jyutping").textCase(nil)
                                 }
                                 Section {
                                         NavigationLink {
@@ -108,7 +108,7 @@ struct MacContentViewMonterey: View {
                                                 Label("Hong Kong MTR", systemImage: "tram.circle")
                                         }
                                 } header: {
-                                        Text("Cantonese").textCase(nil)
+                                        Text("MacSidebar.Header.Cantonese").textCase(nil)
                                 }
                                 Section {
                                         NavigationLink {
@@ -119,10 +119,10 @@ struct MacContentViewMonterey: View {
                                         NavigationLink {
                                                 MacAboutView().visualEffect()
                                         } label: {
-                                                Label("About", systemImage: "info.circle")
+                                                Label("MacAboutView.NavigationTitle.About", systemImage: "info.circle")
                                         }
                                 } header: {
-                                        Text("About").textCase(nil)
+                                        Text("MacSidebar.Header.About").textCase(nil)
                                 }
                         }
                         .toolbar {
@@ -135,7 +135,7 @@ struct MacContentViewMonterey: View {
                                 }
                         }
                         .listStyle(.sidebar)
-                        .navigationTitle("Jyutping")
+                        .navigationTitle("MacContentView.NavigationTitle.Jyutping")
                 }
         }
 }

@@ -1,17 +1,28 @@
 // MARK: - General
 
-"Settings" = "設定";
-"Edit" = "編輯";
-"OK" = "好";
-"Cancel" = "取消";
-"Copy" = "複製";
-"Copy Cantonese Text" = "複製文字";
-"Copy Jyutping Text" = "複製粵拼";
+"General.OK" = "好";
+"General.Copy" = "複製";
+"General.CopyCantoneseText" = "複製文字";
+"General.CopyJyutpingText" = "複製粵拼";
 
-"Home" = "首䈎";
-"Jyutping" = "粵拼";
-"Cantonese" = "粵語";
-"About" = "關於";
+
+// MARK: - iOS TabView
+
+"IOSTabView.NavigationTitle.Home" = "首䈎";
+"IOSTabView.NavigationTitle.Jyutping" = "粵拼";
+"IOSTabView.NavigationTitle.Cantonese" = "粵語";
+"IOSTabView.NavigationTitle.About" = "關於";
+
+
+// MARK: - macOS Sidebar
+
+"MacContentView.NavigationTitle.Jyutping" = "粵拼";
+
+"MacSidebar.Header.Jyutping" = "粵拼";
+"MacSidebar.Header.Cantonese" = "粵語";
+"MacSidebar.Header.About" = "關於";
+
+"MacAboutView.NavigationTitle.About" ="關於";
 
 
 // MARK: - iOS Home

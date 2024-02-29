@@ -43,8 +43,8 @@ struct TextPronunciationView: View {
                         }
                         .contentShape(Rectangle())
                         .contextMenu {
-                                MenuCopyButton(text, title: "Copy Cantonese Text")
-                                MenuCopyButton(romanization, title: "Copy Jyutping Text")
+                                MenuCopyButton(text, title: "General.CopyCantoneseText")
+                                MenuCopyButton(romanization, title: "General.CopyJyutpingText")
                         }
                 } else {
                         FallbackPronunciationView(text: text, romanization: romanization)

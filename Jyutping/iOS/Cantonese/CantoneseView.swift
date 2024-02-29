@@ -62,7 +62,7 @@ struct CantoneseView: View {
                                 }
                         }
                         .animation(.default, value: animationState)
-                        .navigationTitle("Cantonese")
+                        .navigationTitle("IOSTabView.NavigationTitle.Cantonese")
                 }
                 .navigationViewStyle(.stack)
         }

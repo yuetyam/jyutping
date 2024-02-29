@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MenuCopyButton: View {
 
-        init(_ content: String, title: LocalizedStringKey = "Copy") {
+        init(_ content: String, title: LocalizedStringKey = "General.Copy") {
                 self.content = content
                 self.title = title
         }

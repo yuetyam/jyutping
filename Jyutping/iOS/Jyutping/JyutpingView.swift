@@ -37,7 +37,7 @@ struct JyutpingView: View {
                                 }
                         }
                         .animation(.default, value: animationState)
-                        .navigationTitle("Jyutping")
+                        .navigationTitle("IOSTabView.NavigationTitle.Jyutping")
                 }
                 .navigationViewStyle(.stack)
         }

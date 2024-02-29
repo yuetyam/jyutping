@@ -40,7 +40,7 @@ struct MacContentView: View {
                                         Label("Finals", systemImage: "rectangle.trailingthird.inset.filled").tag(ViewIdentifier.finals)
                                         Label("Tones", systemImage: "bell").tag(ViewIdentifier.tones)
                                 } header: {
-                                        Text("Jyutping").textCase(nil)
+                                        Text("MacSidebar.Header.Jyutping").textCase(nil)
                                 }
                                 Section {
                                         Label("Numbers", systemImage: "number").tag(ViewIdentifier.numbers)
@@ -54,17 +54,17 @@ struct MacContentView: View {
                                         Label("Sham Chun Metro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)
                                         Label("Hong Kong MTR", systemImage: "tram.circle").tag(ViewIdentifier.hongkongMTR)
                                 } header: {
-                                        Text("Cantonese").textCase(nil)
+                                        Text("MacSidebar.Header.Cantonese").textCase(nil)
                                 }
                                 Section {
                                         Label("Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
-                                        Label("About", systemImage: "info.circle").tag(ViewIdentifier.about)
+                                        Label("MacAboutView.NavigationTitle.About", systemImage: "info.circle").tag(ViewIdentifier.about)
                                 } header: {
-                                        Text("About").textCase(nil)
+                                        Text("MacSidebar.Header.About").textCase(nil)
                                 }
                         }
                         .toolbarBackground(Material.ultraThin, for: .windowToolbar)
-                        .navigationTitle("Jyutping")
+                        .navigationTitle("MacContentView.NavigationTitle.Jyutping")
                 } detail: {
                         switch selection {
                         case .installation:

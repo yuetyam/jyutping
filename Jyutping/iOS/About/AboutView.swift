@@ -118,7 +118,7 @@ struct AboutView: View {
                                         }
                                 }
                         }
-                        .navigationTitle("About")
+                        .navigationTitle("IOSTabView.NavigationTitle.About")
                 }
                 .navigationViewStyle(.stack)
         }
@@ -148,12 +148,12 @@ private struct EmailFeedbackButton: View {
                 .actionSheet(isPresented: $isMailOnPhoneUnavailable) {
                         ActionSheet(title: Text("Unable to compose mail"),
                                     message: Text("Mail Unavailable"),
-                                    buttons: [.cancel(Text("OK"))])
+                                    buttons: [.cancel(Text("General.OK"))])
                 }
                 .alert(isPresented: $isMailOnPadUnavailable) {
                         Alert(title: Text("Unable to compose mail"),
                               message: Text("Mail Unavailable"),
-                              dismissButton: .cancel(Text("OK")))
+                              dismissButton: .cancel(Text("General.OK")))
                 }
         }
 

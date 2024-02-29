@@ -1,18 +1,28 @@
 // MARK: - General
 
-"Settings" = "Settings";
-"Edit" = "Edit";
-"Back" = "Back";
-"OK" = "OK";
-"Cancel" = "Cancel";
-"Copy" = "Copy";
-"Copy Cantonese Text" = "Copy Text";
-"Copy Jyutping Text" = "Copy Jyutping";
+"General.OK" = "OK";
+"General.Copy" = "Copy";
+"General.CopyCantoneseText" = "Copy Text";
+"General.CopyJyutpingText" = "Copy Jyutping";
 
-"Home" = "Home";
-"Jyutping" = "Jyutping";
-"Cantonese" = "Cantonese";
-"About" = "About";
+
+// MARK: - iOS TabView
+
+"IOSTabView.NavigationTitle.Home" = "Home";
+"IOSTabView.NavigationTitle.Jyutping" = "Jyutping";
+"IOSTabView.NavigationTitle.Cantonese" = "Cantonese";
+"IOSTabView.NavigationTitle.About" = "About";
+
+
+// MARK: - macOS Sidebar
+
+"MacContentView.NavigationTitle.Jyutping" = "Jyutping";
+
+"MacSidebar.Header.Jyutping" = "Jyutping";
+"MacSidebar.Header.Cantonese" = "Cantonese";
+"MacSidebar.Header.About" = "About";
+
+"MacAboutView.NavigationTitle.About" ="About";
 
 
 // MARK: - iOS Home

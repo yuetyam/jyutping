@@ -150,7 +150,7 @@ struct HomeView: View {
                                         isKeyboardEnabled = isContained
                                 }
                         }
-                        .navigationTitle("Home")
+                        .navigationTitle("IOSTabView.NavigationTitle.Home")
                 }
                 .navigationViewStyle(.stack)
         }
