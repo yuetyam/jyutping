@@ -140,11 +140,15 @@
 "privacy.notice.footer" = "TLDR: We do NOT collect or share personal information.";
 
 
-// MARK: - Jyutping
+// MARK: - iOS Jyutping Tab
 
-"Jyutping Initials" = "Jyutping Initials";
-"Jyutping Finals" = "Jyutping Finals";
-"Jyutping Tones" = "Jyutping Tones";
+"IOSJyutpingTab.LabelTitle.JyutpingInitials" = "Jyutping Initials";
+"IOSJyutpingTab.LabelTitle.JyutpingFinals" = "Jyutping Finals";
+"IOSJyutpingTab.LabelTitle.JyutpingTones" = "Jyutping Tones";
+
+"IOSJyutpingTab.NavigationTitle.JyutpingInitials" = "Initials";
+"IOSJyutpingTab.NavigationTitle.JyutpingFinals" = "Finals";
+"IOSJyutpingTab.NavigationTitle.JyutpingTones" = "Tones";
 
 
 // MARK: - Cantonese

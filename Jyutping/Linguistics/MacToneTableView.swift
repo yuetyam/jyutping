@@ -24,7 +24,7 @@ struct MacToneTableView: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Jyutping Tones")
+                .navigationTitle("MacSidebar.NavigationTitle.JyutpingTones")
         }
 }
 

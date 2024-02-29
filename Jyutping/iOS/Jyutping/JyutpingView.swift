@@ -14,13 +14,13 @@ struct JyutpingView: View {
 
                                 Section {
                                         NavigationLink(destination: InitialTable()) {
-                                                Label("Jyutping Initials", systemImage: "rectangle.leadingthird.inset.filled")
+                                                Label("IOSJyutpingTab.LabelTitle.JyutpingInitials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
                                         NavigationLink(destination: FinalTable()) {
-                                                Label("Jyutping Finals", systemImage: "rectangle.trailingthird.inset.filled")
+                                                Label("IOSJyutpingTab.LabelTitle.JyutpingFinals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
                                         NavigationLink(destination: IOSToneTableView()) {
-                                                Label("Jyutping Tones", systemImage: "bell")
+                                                Label("IOSJyutpingTab.LabelTitle.JyutpingTones", systemImage: "bell")
                                         }
                                 }
 

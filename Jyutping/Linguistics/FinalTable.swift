@@ -39,7 +39,7 @@ struct FinalTable: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Jyutping Finals")
+                .navigationTitle("MacSidebar.NavigationTitle.JyutpingFinals")
                 #else
                 let spacing: CGFloat = (horizontalSize == .compact) ? 24 : 32
                 List {
@@ -58,7 +58,7 @@ struct FinalTable: View {
                                 Text(verbatim: "鼻音單獨成韻")
                         }
                 }
-                .navigationTitle("Jyutping Finals")
+                .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingFinals")
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
         }

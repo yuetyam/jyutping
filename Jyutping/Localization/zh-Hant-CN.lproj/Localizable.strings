@@ -70,7 +70,7 @@
 "Problems with enabling keyboard?" = "啓用鍵盤過程中遇到問題？";
 "title.enabling_keyboard" = "啓用鍵盤";
 "Jyutping Keyboard not showing up in Settings app?" = "系統設定App冇列出粵拼鍵盤？";
-"You may need to close the Settings app, then try again." = "可能需要先關閉一次系統設定App，之後再嘗試一次。";
+"You may need to close the Settings app, then try again." = "可能需要先完全關閉一次系統設定App，之後再嘗試一次。";
 "How to close an app?" = "如何關閉App？";
 "Jyutping Keyboard not showing up in some other apps?" = "某啲App輸入時冇得揀粵拼鍵盤？";
 "This is a system bug, you may need to restart this device." = "係系統嘅問題，可能需要重啓一下設備。";
@@ -140,11 +140,15 @@
 "privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 
-// MARK: - Jyutping
+// MARK: - iOS Jyutping Tab
 
-"Jyutping Initials" = "粵拼聲母表";
-"Jyutping Finals" = "粵拼韻母表";
-"Jyutping Tones" = "粵拼聲調表";
+"IOSJyutpingTab.LabelTitle.JyutpingInitials" = "粵拼聲母表";
+"IOSJyutpingTab.LabelTitle.JyutpingFinals" = "粵拼韻母表";
+"IOSJyutpingTab.LabelTitle.JyutpingTones" = "粵拼聲調表";
+
+"IOSJyutpingTab.NavigationTitle.JyutpingInitials" = "粵拼聲母表";
+"IOSJyutpingTab.NavigationTitle.JyutpingFinals" = "粵拼韻母表";
+"IOSJyutpingTab.NavigationTitle.JyutpingTones" = "粵拼聲調表";
 
 
 // MARK: - Cantonese

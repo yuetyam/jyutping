@@ -27,7 +27,7 @@ struct InitialTable: View {
                         }
                         .padding()
                 }
-                .navigationTitle("Jyutping Initials")
+                .navigationTitle("MacSidebar.NavigationTitle.JyutpingInitials")
                 #else
                 let spacing: CGFloat = (horizontalSize == .compact) ? 24 : 32
                 List {
@@ -40,7 +40,7 @@ struct InitialTable: View {
                                 Text(verbatim: footnote)
                         }
                 }
-                .navigationTitle("Jyutping Initials")
+                .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingInitials")
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
         }

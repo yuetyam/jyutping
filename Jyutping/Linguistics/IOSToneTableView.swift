@@ -27,7 +27,7 @@ struct IOSToneTableView: View {
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("Jyutping Tones")
+                .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingTones")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }
