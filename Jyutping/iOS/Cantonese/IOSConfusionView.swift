@@ -39,7 +39,7 @@ struct IOSConfusionView: View {
                                 entries = AppMaster.confusionEntries
                         }
                 }
-                .navigationTitle("title.confusion")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.SimplifiedCharacterConfusion")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

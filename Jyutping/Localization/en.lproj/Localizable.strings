@@ -151,13 +151,13 @@
 "IOSJyutpingTab.NavigationTitle.JyutpingTones" = "Tones";
 
 
-// MARK: - Cantonese
+// MARK: - iOS Cantonese Tab
 
-"Cantonese Expressions" = "Cantonese Expressions";
-"title.expressions" = "Expressions";
+"IOSCantoneseTab.LabelTitle.CantoneseExpressions" = "Cantonese Expressions";
+"IOSCantoneseTab.NavigationTitle.CantoneseExpressions" = "Expressions";
 
-"Simplified Character Confusion" = "Simplified Character Confusion";
-"title.confusion" = "Confusion";
+"IOSCantoneseTab.LabelTitle.SimplifiedCharacterConfusion" = "Simplified Character Confusion";
+"IOSCantoneseTab.NavigationTitle.SimplifiedCharacterConfusion" = "Confusion";
 
 "Numbers" = "Numbers";
 "Stems and Branches" = "Stems & Branches";

@@ -13,10 +13,10 @@ struct CantoneseView: View {
 
                                 Section {
                                         NavigationLink(destination: IOSExpressionsView()) {
-                                                Label("Cantonese Expressions", systemImage: "checkmark.seal")
+                                                Label("IOSCantoneseTab.LabelTitle.CantoneseExpressions", systemImage: "checkmark.seal")
                                         }
                                         NavigationLink(destination: IOSConfusionView()) {
-                                                Label("Simplified Character Confusion", systemImage: "character")
+                                                Label("IOSCantoneseTab.LabelTitle.SimplifiedCharacterConfusion", systemImage: "character")
                                         }
                                 }
 

@@ -153,11 +153,11 @@
 
 // MARK: - Cantonese
 
-"Cantonese Expressions" = "粵語用字參攷";
-"title.expressions" = "粵語用字參攷";
+"IOSCantoneseTab.LabelTitle.CantoneseExpressions" = "粵語用字參攷";
+"IOSCantoneseTab.NavigationTitle.CantoneseExpressions" = "粵語用字參攷";
 
-"Simplified Character Confusion" = "簡化字常見混亂";
-"title.confusion" = "簡化字常見混亂";
+"IOSCantoneseTab.LabelTitle.SimplifiedCharacterConfusion" = "簡化字常見混亂";
+"IOSCantoneseTab.NavigationTitle.SimplifiedCharacterConfusion" = "簡化字常見混亂";
 
 "Numbers" = "數字";
 "Stems and Branches" = "天干地支";

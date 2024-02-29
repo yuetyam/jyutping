@@ -308,7 +308,7 @@ struct IOSExpressionsView: View {
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("title.expressions")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.CantoneseExpressions")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }
