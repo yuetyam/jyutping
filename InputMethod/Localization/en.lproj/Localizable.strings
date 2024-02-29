@@ -26,75 +26,75 @@
 
 // MARK: - GeneralPreferencesView
 
-"Preferences.General.EmojiSuggestions" = "Emoji Suggestions";
-"Preferences.General.CandidateCountPerPage" = "Candidate Count Per Page";
-"Preferences.General.CandidateLineSpacing" = "Candidate Line Spacing";
+"GeneralPreferencesView.EmojiSuggestions" = "Emoji Suggestions";
+"GeneralPreferencesView.CandidateCountPerPage" = "Candidate Count Per Page";
+"GeneralPreferencesView.CandidateLineSpacing" = "Candidate Line Spacing";
 
-"Preferences.General.CommentToneStyle" = "Comment(Jyutping) Tone Style";
-"Preferences.General.CommentToneStyle.Normal" = "Normal";
-"Preferences.General.CommentToneStyle.NoTones" = "No Tones";
-"Preferences.General.CommentToneStyle.Superscript" = "Superscript";
-"Preferences.General.CommentToneStyle.Subscript" = "Subscript";
+"GeneralPreferencesView.CommentToneStyle" = "Comment(Jyutping) Tone Style";
+"GeneralPreferencesView.CommentToneStyle.Normal" = "Normal";
+"GeneralPreferencesView.CommentToneStyle.NoTones" = "No Tones";
+"GeneralPreferencesView.CommentToneStyle.Superscript" = "Superscript";
+"GeneralPreferencesView.CommentToneStyle.Subscript" = "Subscript";
 
-"Preferences.General.CommentToneColor" = "Comment(Jyutping) Tone Color";
-"Preferences.General.CommentToneColor.Normal" = "Normal";
-"Preferences.General.CommentToneColor.Shallow" = "Shallow";
+"GeneralPreferencesView.CommentToneColor" = "Comment(Jyutping) Tone Color";
+"GeneralPreferencesView.CommentToneColor.Normal" = "Normal";
+"GeneralPreferencesView.CommentToneColor.Shallow" = "Shallow";
 
 
 // MARK: - FontPreferencesView
 
-"Preferences.Fonts.CandidateFontSize" = "Candidate Font Size";
-"Preferences.Fonts.CommentFontSize" = "Comment Font Size";
-"Preferences.Fonts.SerialNumberFontSize" = "Serial Number Font Size";
-"Preferences.Fonts.CandidateFont" = "Candidate Font";
-"Preferences.Fonts.CommentFont" = "Comment Font";
-"Preferences.Fonts.SerialNumberFont" = "Serial Number Font";
-"Preferences.Fonts.Default" = "Default";
-"Preferences.Fonts.System" = "System";
-"Preferences.Fonts.Custom" = "Custom";
+"FontPreferencesView.CandidateFontSize" = "Candidate Font Size";
+"FontPreferencesView.CommentFontSize" = "Comment Font Size";
+"FontPreferencesView.SerialNumberFontSize" = "Serial Number Font Size";
+"FontPreferencesView.CandidateFont" = "Candidate Font";
+"FontPreferencesView.CommentFont" = "Comment Font";
+"FontPreferencesView.SerialNumberFont" = "Serial Number Font";
+"FontPreferencesView.Default" = "Default";
+"FontPreferencesView.System" = "System";
+"FontPreferencesView.Custom" = "Custom";
 "Preferences.FontPicker.ChangeCurrentFont" = "Change…";
 
 
 // MARK: - HotkeysView
 
-"Preferences.Hotkeys.PressShiftOnceTo" = "Press **Shift** Once To";
-"Preferences.Hotkeys.PressShiftOnceTo.DoNothing" = "Do Nothing";
-"Preferences.Hotkeys.SwitchInputMethodMode" = "Switch between Cantonese Mode and ABC Mode";
+"HotkeysView.PressShiftOnceTo" = "Press **Shift** Once To";
+"HotkeysView.PressShiftOnceTo.DoNothing" = "Do Nothing";
+"HotkeysView.SwitchInputMethodMode" = "Switch between Cantonese Mode and ABC Mode";
 
-"Preferences.Hotkeys.PressShiftSpaceTo" = "Press **Shift** + **Space** To";
-"Preferences.Hotkeys.PressShiftSpaceTo.InputFullWidthSpace" = "Input a Full-width Space (U+3000)";
+"HotkeysView.PressShiftSpaceTo" = "Press **Shift** + **Space** To";
+"HotkeysView.PressShiftSpaceTo.InputFullWidthSpace" = "Input a Full-width Space (U+3000)";
 
-"Preferences.Hotkeys.OpenPreferencesWindow" = "Open Settings Window (This Window)";
-"Preferences.Hotkeys.EnterExitOptionsView" = "Enter/Exit Options View";
-"Preferences.Hotkeys.DirectlyToggleSpecificOption" = "Directly toggle specific Option";
-"Preferences.Hotkeys.RemoveCurrentCandidateFromUserLexicon" = "Remove current Candidate from User Lexicon";
-"Preferences.Hotkeys.ClearCurrentPreEditText" = "Clear current pre-edit text";
+"HotkeysView.OpenPreferencesWindow" = "Open Settings Window (This Window)";
+"HotkeysView.EnterExitOptionsView" = "Enter/Exit Options View";
+"HotkeysView.DirectlyToggleSpecificOption" = "Directly toggle specific Option";
+"HotkeysView.RemoveCurrentCandidateFromUserLexicon" = "Remove current Candidate from User Lexicon";
+"HotkeysView.ClearCurrentPreEditText" = "Clear current pre-edit text";
 
-"Preferences.Hotkeys.MoveToPreviousCandidate" = "Move to previous Candidate";
-"Preferences.Hotkeys.MoveToNextCandidate" = "Move to next Candidate";
-"Preferences.Hotkeys.BackwardToPreviousCandidatePage" = "Backward to previous Candidate page";
-"Preferences.Hotkeys.ForwardToNextCandidatePage" = "Forward to next Candidate page";
-"Preferences.Hotkeys.BackToFirstCandidatePage" = "Back to first Candidate page";
+"HotkeysView.MoveToPreviousCandidate" = "Move to previous Candidate";
+"HotkeysView.MoveToNextCandidate" = "Move to next Candidate";
+"HotkeysView.BackwardToPreviousCandidatePage" = "Backward to previous Candidate page";
+"HotkeysView.ForwardToNextCandidatePage" = "Forward to next Candidate page";
+"HotkeysView.BackToFirstCandidatePage" = "Back to first Candidate page";
 
-"Preferences.Hotkeys.SpeakCandidate" = "Speak Candidate (Using system's built-in TTS)";
+"HotkeysView.SpeakCandidate" = "Speak Candidate (Using system's built-in TTS)";
 
-"Preferences.Hotkeys.Or" = "or";
+"HotkeysView.Or" = "or";
 
 
 // MARK: - AboutView
 
-"Preferences.About.Version" = "Version";
+"AboutView.Version" = "Version";
 
-"Preferences.About.Website" = "Website";
-"Preferences.About.SourceCode" = "Source Code";
-"Preferences.About.PrivacyPolicy" = "Privacy Policy";
-"Preferences.About.FAQ" = "FAQ";
+"AboutView.Website" = "Website";
+"AboutView.SourceCode" = "Source Code";
+"AboutView.PrivacyPolicy" = "Privacy Policy";
+"AboutView.FAQ" = "FAQ";
 
-"Preferences.About.TelegramGroup" = "Telegram Group";
-"Preferences.About.QQGroup" = "QQ Group";
-"Preferences.About.Twitter" = "X (Twitter)";
-"Preferences.About.Instagram" = "Instagram";
+"AboutView.TelegramGroup" = "Telegram Group";
+"AboutView.QQGroup" = "QQ Group";
+"AboutView.Twitter" = "X (Twitter)";
+"AboutView.Instagram" = "Instagram";
 
-"Preferences.About.GoogleForms" = "Google Forms Feedback";
-"Preferences.About.TencentSurvey" = "Tencent Survey Feedback";
-"Preferences.About.EmailFeedback" = "Email Feedback";
+"AboutView.GoogleForms" = "Google Forms Feedback";
+"AboutView.TencentSurvey" = "Tencent Survey Feedback";
+"AboutView.EmailFeedback" = "Email Feedback";

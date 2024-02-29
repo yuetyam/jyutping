@@ -32,7 +32,7 @@ struct FontPreferencesView: View {
                         LazyVStack(spacing: 16) {
                                 VStack {
                                         HStack {
-                                                Picker("Preferences.Fonts.CandidateFontSize", selection: $candidateFontSize) {
+                                                Picker("FontPreferencesView.CandidateFontSize", selection: $candidateFontSize) {
                                                         ForEach(12..<23, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
@@ -46,10 +46,10 @@ struct FontPreferencesView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Picker("Preferences.Fonts.CandidateFont", selection: $candidateFontMode) {
-                                                        Text("Preferences.Fonts.Default").tag(1)
-                                                        Text("Preferences.Fonts.System").tag(2)
-                                                        Text("Preferences.Fonts.Custom").tag(3)
+                                                Picker("FontPreferencesView.CandidateFont", selection: $candidateFontMode) {
+                                                        Text("FontPreferencesView.Default").tag(1)
+                                                        Text("FontPreferencesView.System").tag(2)
+                                                        Text("FontPreferencesView.Custom").tag(3)
                                                 }
                                                 .pickerStyle(.radioGroup)
                                                 .scaledToFit()
@@ -98,7 +98,7 @@ struct FontPreferencesView: View {
                                 .block()
                                 VStack {
                                         HStack {
-                                                Picker("Preferences.Fonts.CommentFontSize", selection: $commentFontSize) {
+                                                Picker("FontPreferencesView.CommentFontSize", selection: $commentFontSize) {
                                                         ForEach(12..<23, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
@@ -112,10 +112,10 @@ struct FontPreferencesView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Picker("Preferences.Fonts.CommentFont", selection: $commentFontMode) {
-                                                        Text("Preferences.Fonts.Default").tag(1)
-                                                        Text("Preferences.Fonts.System").tag(2)
-                                                        Text("Preferences.Fonts.Custom").tag(3)
+                                                Picker("FontPreferencesView.CommentFont", selection: $commentFontMode) {
+                                                        Text("FontPreferencesView.Default").tag(1)
+                                                        Text("FontPreferencesView.System").tag(2)
+                                                        Text("FontPreferencesView.Custom").tag(3)
                                                 }
                                                 .pickerStyle(.radioGroup)
                                                 .scaledToFit()
@@ -164,7 +164,7 @@ struct FontPreferencesView: View {
                                 .block()
                                 VStack {
                                         HStack {
-                                                Picker("Preferences.Fonts.SerialNumberFontSize", selection: $labelFontSize) {
+                                                Picker("FontPreferencesView.SerialNumberFontSize", selection: $labelFontSize) {
                                                         ForEach(12..<23, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
@@ -178,10 +178,10 @@ struct FontPreferencesView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Picker("Preferences.Fonts.SerialNumberFont", selection: $labelFontMode) {
-                                                        Text("Preferences.Fonts.Default").tag(1)
-                                                        Text("Preferences.Fonts.System").tag(2)
-                                                        Text("Preferences.Fonts.Custom").tag(3)
+                                                Picker("FontPreferencesView.SerialNumberFont", selection: $labelFontMode) {
+                                                        Text("FontPreferencesView.Default").tag(1)
+                                                        Text("FontPreferencesView.System").tag(2)
+                                                        Text("FontPreferencesView.Custom").tag(3)
                                                 }
                                                 .pickerStyle(.radioGroup)
                                                 .scaledToFit()

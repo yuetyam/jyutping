@@ -16,7 +16,7 @@ struct GeneralPreferencesView: View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 HStack {
-                                        Toggle("Preferences.General.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
+                                        Toggle("GeneralPreferencesView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
                                                 .toggleStyle(.switch)
                                                 .scaledToFit()
                                                 .onChange(of: isEmojiSuggestionsOn) { newState in
@@ -26,7 +26,7 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Preferences.General.CandidateCountPerPage", selection: $pageSize) {
+                                        Picker("GeneralPreferencesView.CandidateCountPerPage", selection: $pageSize) {
                                                 ForEach(pageSizeRange, id: \.self) {
                                                         Text(verbatim: "\($0)").tag($0)
                                                 }
@@ -39,7 +39,7 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Preferences.General.CandidateLineSpacing", selection: $lineSpacing) {
+                                        Picker("GeneralPreferencesView.CandidateLineSpacing", selection: $lineSpacing) {
                                                 ForEach(lineSpacingRange, id: \.self) {
                                                         Text(verbatim: "\($0)").tag($0)
                                                 }
@@ -52,11 +52,11 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Preferences.General.CommentToneStyle", selection: $toneDisplayStyle) {
-                                                Text("Preferences.General.CommentToneStyle.Normal").tag(1)
-                                                Text("Preferences.General.CommentToneStyle.NoTones").tag(2)
-                                                Text("Preferences.General.CommentToneStyle.Superscript").tag(3)
-                                                Text("Preferences.General.CommentToneStyle.Subscript").tag(4)
+                                        Picker("GeneralPreferencesView.CommentToneStyle", selection: $toneDisplayStyle) {
+                                                Text("GeneralPreferencesView.CommentToneStyle.Normal").tag(1)
+                                                Text("GeneralPreferencesView.CommentToneStyle.NoTones").tag(2)
+                                                Text("GeneralPreferencesView.CommentToneStyle.Superscript").tag(3)
+                                                Text("GeneralPreferencesView.CommentToneStyle.Subscript").tag(4)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)
@@ -67,9 +67,9 @@ struct GeneralPreferencesView: View {
                                 }
                                 .block()
                                 HStack {
-                                        Picker("Preferences.General.CommentToneColor", selection: $toneDisplayColor) {
-                                                Text("Preferences.General.CommentToneColor.Normal").tag(1)
-                                                Text("Preferences.General.CommentToneColor.Shallow").tag(2)
+                                        Picker("GeneralPreferencesView.CommentToneColor", selection: $toneDisplayColor) {
+                                                Text("GeneralPreferencesView.CommentToneColor.Normal").tag(1)
+                                                Text("GeneralPreferencesView.CommentToneColor.Shallow").tag(2)
                                         }
                                         .scaledToFit()
                                         .pickerStyle(.radioGroup)

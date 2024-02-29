@@ -11,32 +11,32 @@ struct AboutView: View {
                                                 .scaledToFit()
                                                 .frame(width: 16, height: 16)
                                                 .foregroundStyle(Color.accentColor)
-                                        Text("Preferences.About.Version")
+                                        Text("AboutView.Version")
                                         Text(verbatim: version)
                                         Spacer()
                                 }
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "globe.asia.australia", title: "Preferences.About.Website", link: About.WebsiteAddress)
-                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "Preferences.About.SourceCode", link: About.SourceCodeAddress)
-                                        LinkLabel(icon: "lock.circle", title: "Preferences.About.PrivacyPolicy", link: About.PrivacyPolicyAddress)
-                                        LinkLabel(icon: "questionmark.circle", title: "Preferences.About.FAQ", link: About.FAQAddress)
+                                        LinkLabel(icon: "globe.asia.australia", title: "AboutView.Website", link: About.WebsiteAddress)
+                                        LinkLabel(icon: "chevron.left.forwardslash.chevron.right", title: "AboutView.SourceCode", link: About.SourceCodeAddress)
+                                        LinkLabel(icon: "lock.circle", title: "AboutView.PrivacyPolicy", link: About.PrivacyPolicyAddress)
+                                        LinkLabel(icon: "questionmark.circle", title: "AboutView.FAQ", link: About.FAQAddress)
                                 }
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "paperplane", title: "Preferences.About.TelegramGroup", link: About.TelegramAddress)
-                                        LinkLabel(icon: "person.2", title: "Preferences.About.QQGroup", link: About.QQAddress, message: About.QQGroupID)
-                                        LinkLabel(icon: "at", title: "Preferences.About.Twitter", link: About.TwitterAddress)
-                                        LinkLabel(icon: "circle.square", title: "Preferences.About.Instagram", link: About.InstagramAddress)
+                                        LinkLabel(icon: "paperplane", title: "AboutView.TelegramGroup", link: About.TelegramAddress)
+                                        LinkLabel(icon: "person.2", title: "AboutView.QQGroup", link: About.QQAddress, message: About.QQGroupID)
+                                        LinkLabel(icon: "at", title: "AboutView.Twitter", link: About.TwitterAddress)
+                                        LinkLabel(icon: "circle.square", title: "AboutView.Instagram", link: About.InstagramAddress)
                                 }
                                 .block()
 
                                 VStack {
-                                        LinkLabel(icon: "checkmark.message", title: "Preferences.About.GoogleForms", link: About.GoogleFormsAddress)
-                                        LinkLabel(icon: "checkmark.message", title: "Preferences.About.TencentSurvey", link: About.TencentSurveyAddress)
-                                        LinkLabel(icon: "envelope", title: "Preferences.About.EmailFeedback", link: mailtoScheme, message: About.EmailAddress)
+                                        LinkLabel(icon: "checkmark.message", title: "AboutView.GoogleForms", link: About.GoogleFormsAddress)
+                                        LinkLabel(icon: "checkmark.message", title: "AboutView.TencentSurvey", link: About.TencentSurveyAddress)
+                                        LinkLabel(icon: "envelope", title: "AboutView.EmailFeedback", link: mailtoScheme, message: About.EmailAddress)
                                 }
                                 .block()
                         }
