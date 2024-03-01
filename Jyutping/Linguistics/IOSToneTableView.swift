@@ -107,7 +107,7 @@ private struct IOSToneGridView: View {
                         GridRow {
                                 Text(verbatim: "平")
                                 IOSToneGridCell(character: "詩", syllable: "si1", tone: "˥")
-                                IOSToneGridCell(character: "時", syllable: "si4", tone: "˩")
+                                IOSToneGridCell(character: "時", syllable: "si4", tone: "˨˩")
                         }
                         GridRow {
                                 Text(verbatim: "上")

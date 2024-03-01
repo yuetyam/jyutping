@@ -22,7 +22,7 @@ static let toneSourceText: String = """
 芬 fan1,55/53,陰平,1
 粉 fan2,35,陰上,2
 訓 fan3,33,陰去,3
-焚 fan4,11/21,陽平,4
+焚 fan4,21/11,陽平,4
 奮 fan5,13/23,陽上,5
 份 fan6,22,陽去,6
 忽 fat1,5,高陰入,1
