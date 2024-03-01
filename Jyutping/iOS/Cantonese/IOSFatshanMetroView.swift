@@ -25,7 +25,7 @@ struct IOSFatshanMetroView: View {
                         guard lines.isEmpty else { return }
                         lines = Metro.fatshanMetroLines
                 }
-                .navigationTitle("Fatshan Metro")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.FatshanMetro")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

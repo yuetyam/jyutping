@@ -25,7 +25,7 @@ struct IOSHongKongMTRView: View {
                         guard lines.isEmpty else { return }
                         lines = Metro.hongkongMTRLines
                 }
-                .navigationTitle("Hong Kong MTR")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.HongKongMTR")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

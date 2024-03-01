@@ -151,7 +151,7 @@
 "IOSJyutpingTab.NavigationTitle.JyutpingTones" = "粵拼聲調表";
 
 
-// MARK: - Cantonese
+// MARK: - iOS Cantonese Tab
 
 "IOSCantoneseTab.LabelTitle.CantoneseExpressions" = "粵語用字參攷";
 "IOSCantoneseTab.NavigationTitle.CantoneseExpressions" = "粵語用字參攷";
@@ -159,18 +159,35 @@
 "IOSCantoneseTab.LabelTitle.SimplifiedCharacterConfusion" = "簡化字常見混亂";
 "IOSCantoneseTab.NavigationTitle.SimplifiedCharacterConfusion" = "簡化字常見混亂";
 
-"Numbers" = "數字";
-"Stems and Branches" = "天干地支";
-"Chinese Zodiac" = "十二生肖";
-"Solar Terms" = "二十四節氣";
-"Hundred Family Surnames" = "百家姓";
-"title.surnames" = "百家姓";
-"Thousand Character Classic" = "千字文";
-"title.characters" = "千字文";
-"Canton Metro" = "廣州地鐵";
-"Fatshan Metro" = "佛山地鐵";
-"Sham Chun Metro" = "深圳地鐵";
-"Hong Kong MTR" = "港鐵";
+"IOSCantoneseTab.LabelTitle.Numbers" = "數字";
+"IOSCantoneseTab.NavigationTitle.Numbers" = "數字";
+
+"IOSCantoneseTab.LabelTitle.StemsAndBranches" = "天干地支";
+"IOSCantoneseTab.NavigationTitle.StemsAndBranches" = "天干地支";
+
+"IOSCantoneseTab.LabelTitle.ChineseZodiac" = "十二生肖";
+"IOSCantoneseTab.NavigationTitle.ChineseZodiac" = "十二生肖";
+
+"IOSCantoneseTab.LabelTitle.SolarTerms" = "二十四節氣";
+"IOSCantoneseTab.NavigationTitle.SolarTerms" = "二十四節氣";
+
+"IOSCantoneseTab.LabelTitle.HundredFamilySurnames" = "百家姓";
+"IOSCantoneseTab.NavigationTitle.HundredFamilySurnames" = "百家姓";
+
+"IOSCantoneseTab.LabelTitle.ThousandCharacterClassic" = "千字文";
+"IOSCantoneseTab.NavigationTitle.ThousandCharacterClassic" = "千字文";
+
+"IOSCantoneseTab.LabelTitle.CantonMetro" = "廣州地鐵";
+"IOSCantoneseTab.NavigationTitle.CantonMetro" = "廣州地鐵";
+
+"IOSCantoneseTab.LabelTitle.FatshanMetro" = "佛山地鐵";
+"IOSCantoneseTab.NavigationTitle.FatshanMetro" = "佛山地鐵";
+
+"IOSCantoneseTab.LabelTitle.ShamChunMetro" = "深圳地鐵";
+"IOSCantoneseTab.NavigationTitle.ShamChunMetro" = "深圳地鐵";
+
+"IOSCantoneseTab.LabelTitle.HongKongMTR" = "港鐵";
+"IOSCantoneseTab.NavigationTitle.HongKongMTR" = "港鐵";
 
 
 // MARK: - About

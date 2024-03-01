@@ -22,36 +22,36 @@ struct CantoneseView: View {
 
                                 Section {
                                         NavigationLink(destination: NumbersView()) {
-                                                Label("Numbers", systemImage: "number")
+                                                Label("IOSCantoneseTab.LabelTitle.Numbers", systemImage: "number")
                                         }
                                         NavigationLink(destination: StemsBranchesView()) {
-                                                Label("Stems and Branches", systemImage: "timelapse")
+                                                Label("IOSCantoneseTab.LabelTitle.StemsAndBranches", systemImage: "timelapse")
                                         }
                                         NavigationLink(destination: ChineseZodiacView()) {
-                                                Label("Chinese Zodiac", systemImage: "hare")
+                                                Label("IOSCantoneseTab.LabelTitle.ChineseZodiac", systemImage: "hare")
                                         }
                                         NavigationLink(destination: SolarTermsView()) {
-                                                Label("Solar Terms", systemImage: "cloud.sun")
+                                                Label("IOSCantoneseTab.LabelTitle.SolarTerms", systemImage: "cloud.sun")
                                         }
                                         NavigationLink(destination: IOSSurnamesView()) {
-                                                Label("Hundred Family Surnames", systemImage: "person")
+                                                Label("IOSCantoneseTab.LabelTitle.HundredFamilySurnames", systemImage: "person")
                                         }
                                         NavigationLink(destination: IOSCinZiManView()) {
-                                                Label("Thousand Character Classic", systemImage: "character")
+                                                Label("IOSCantoneseTab.LabelTitle.ThousandCharacterClassic", systemImage: "character")
                                         }
                                 }
                                 Section {
                                         NavigationLink(destination: IOSCantonMetroView()) {
-                                                Label("Canton Metro", systemImage: "tram.circle")
+                                                Label("IOSCantoneseTab.LabelTitle.CantonMetro", systemImage: "tram.circle")
                                         }
                                         NavigationLink(destination: IOSFatshanMetroView()) {
-                                                Label("Fatshan Metro", systemImage: "tram.circle")
+                                                Label("IOSCantoneseTab.LabelTitle.FatshanMetro", systemImage: "tram.circle")
                                         }
                                         NavigationLink(destination: IOSShamChunMetroView()) {
-                                                Label("Sham Chun Metro", systemImage: "tram.circle")
+                                                Label("IOSCantoneseTab.LabelTitle.ShamChunMetro", systemImage: "tram.circle")
                                         }
                                         NavigationLink(destination: IOSHongKongMTRView()) {
-                                                Label("Hong Kong MTR", systemImage: "tram.circle")
+                                                Label("IOSCantoneseTab.LabelTitle.HongKongMTR", systemImage: "tram.circle")
                                         }
                                 }
 

@@ -25,7 +25,7 @@ struct IOSShamChunMetroView: View {
                         guard lines.isEmpty else { return }
                         lines = Metro.shamchunMetroLines
                 }
-                .navigationTitle("Sham Chun Metro")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.ShamChunMetro")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

@@ -30,7 +30,7 @@ struct IOSCinZiManView: View {
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("title.characters")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.ThousandCharacterClassic")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

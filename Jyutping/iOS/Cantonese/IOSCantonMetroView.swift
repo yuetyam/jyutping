@@ -25,7 +25,7 @@ struct IOSCantonMetroView: View {
                         guard lines.isEmpty else { return }
                         lines = Metro.cantonMetroLines
                 }
-                .navigationTitle("Canton Metro")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.CantonMetro")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

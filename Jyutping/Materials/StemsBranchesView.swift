@@ -38,7 +38,7 @@ struct StemsBranchesView: View {
                                 }
                         }
                 }
-                .navigationTitle("Stems and Branches")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.StemsAndBranches")
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
         }

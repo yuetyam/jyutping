@@ -28,7 +28,7 @@ struct SolarTermsView: View {
                                 }
                         }
                 }
-                .navigationTitle("Solar Terms")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.SolarTerms")
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
         }

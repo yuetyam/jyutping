@@ -30,7 +30,7 @@ struct IOSSurnamesView: View {
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("title.surnames")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.HundredFamilySurnames")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

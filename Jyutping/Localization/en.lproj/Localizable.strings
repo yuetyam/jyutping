@@ -159,18 +159,35 @@
 "IOSCantoneseTab.LabelTitle.SimplifiedCharacterConfusion" = "Simplified Character Confusion";
 "IOSCantoneseTab.NavigationTitle.SimplifiedCharacterConfusion" = "Confusion";
 
-"Numbers" = "Numbers";
-"Stems and Branches" = "Stems & Branches";
-"Chinese Zodiac" = "Chinese Zodiac";
-"Solar Terms" = "Solar Terms";
-"Hundred Family Surnames" = "Hundred Family Surnames";
-"title.surnames" = "Surnames";
-"Thousand Character Classic" = "Thousand Character Classic";
-"title.characters" = "Characters";
-"Canton Metro" = "Canton Metro";
-"Fatshan Metro" = "Fatshan Metro";
-"Sham Chun Metro" = "Sham Chun Metro";
-"Hong Kong MTR" = "Hong Kong MTR";
+"IOSCantoneseTab.LabelTitle.Numbers" = "Numbers";
+"IOSCantoneseTab.NavigationTitle.Numbers" = "Numbers";
+
+"IOSCantoneseTab.LabelTitle.StemsAndBranches" = "Stems & Branches";
+"IOSCantoneseTab.NavigationTitle.StemsAndBranches" = "Stems & Branches";
+
+"IOSCantoneseTab.LabelTitle.ChineseZodiac" = "Chinese Zodiac";
+"IOSCantoneseTab.NavigationTitle.ChineseZodiac" = "Chinese Zodiac";
+
+"IOSCantoneseTab.LabelTitle.SolarTerms" = "Solar Terms";
+"IOSCantoneseTab.NavigationTitle.SolarTerms" = "Solar Terms";
+
+"IOSCantoneseTab.LabelTitle.HundredFamilySurnames" = "Hundred Family Surnames";
+"IOSCantoneseTab.NavigationTitle.HundredFamilySurnames" = "Surnames";
+
+"IOSCantoneseTab.LabelTitle.ThousandCharacterClassic" = "Thousand Character Classic";
+"IOSCantoneseTab.NavigationTitle.ThousandCharacterClassic" = "Characters";
+
+"IOSCantoneseTab.LabelTitle.CantonMetro" = "Canton Metro";
+"IOSCantoneseTab.NavigationTitle.CantonMetro" = "Canton Metro";
+
+"IOSCantoneseTab.LabelTitle.FatshanMetro" = "Fatshan Metro";
+"IOSCantoneseTab.NavigationTitle.FatshanMetro" = "Fatshan Metro";
+
+"IOSCantoneseTab.LabelTitle.ShamChunMetro" = "Sham Chun Metro";
+"IOSCantoneseTab.NavigationTitle.ShamChunMetro" = "Sham Chun Metro";
+
+"IOSCantoneseTab.LabelTitle.HongKongMTR" = "Hong Kong MTR";
+"IOSCantoneseTab.NavigationTitle.HongKongMTR" = "Hong Kong MTR";
 
 
 // MARK: - About

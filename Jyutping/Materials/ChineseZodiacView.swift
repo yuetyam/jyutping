@@ -38,7 +38,7 @@ struct ChineseZodiacView: View {
                                 }
                         }
                 }
-                .navigationTitle("Chinese Zodiac")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.ChineseZodiac")
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
         }

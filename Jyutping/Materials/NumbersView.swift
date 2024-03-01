@@ -27,7 +27,7 @@ struct NumbersView: View {
                                 }
                         }
                 }
-                .navigationTitle("Numbers")
+                .navigationTitle("IOSCantoneseTab.NavigationTitle.Numbers")
                 .navigationBarTitleDisplayMode(.inline)
                 #endif
         }
