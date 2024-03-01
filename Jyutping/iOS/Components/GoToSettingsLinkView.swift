@@ -7,7 +7,7 @@ struct GoToSettingsLinkView: View {
                 Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
                         HStack {
                                 Spacer()
-                                Text("Go to **Settings**")
+                                Text("IOSShared.ButtonTitle.GoToSettings")
                                 Spacer()
                         }
                 }

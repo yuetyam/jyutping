@@ -55,50 +55,51 @@
 "TextField.SearchPronunciation" = "Search Pronunciation";
 
 
-// MARK: - iOS Home
+// MARK: - iOS Home Tab
 
-"How to enable this Keyboard" = "How to enable this Keyboard";
-"accessibility.how_to_enable_this_keyboard" = "Step one: jump to Settings, step two: select Keyboards, step three: turn on Jyutping, step four: turn on Allow Full Access";
+"IOSHomeTab.Heading.HowToEnableThisKeyboard" = "How to enable this Keyboard";
+"IOSHomeTab.EnablingKeyboard.Step1" = "Jump to **Settings**";
+"IOSHomeTab.EnablingKeyboard.Step2" = "Tap **Keyboards**";
+"IOSHomeTab.EnablingKeyboard.Step3" = "Turn on **Jyutping**";
+"IOSHomeTab.EnablingKeyboard.Step4" = "Turn on **Allow Full Access**";
+"IOSHomeTab.EnablingKeyboard.Footer" = "Haptic Feedback requires Full Access";
+"IOSShared.ButtonTitle.GoToSettings" = "Go to **Settings**";
 
-"Jump to **Settings**" = "Jump to **Settings**";
-"Tap **Keyboards**" = "Tap **Keyboards**";
-"Turn on **Jyutping**" = "Turn on **Jyutping**";
-"Turn on **Allow Full Access**" = "Turn on **Allow Full Access**";
-"Haptic Feedback requires Full Access" = "Haptic Feedback requires Full Access";
-"Go to **Settings**" = "Go to **Settings**";
+"IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard" = "Problems with enabling keyboard?";
+"IOSHomeTab.NavigationTitle.EnableKeyboard" = "Enable Keyboard";
 
-"Problems with enabling keyboard?" = "Problems with enabling keyboard?";
-"title.enabling_keyboard" = "Enable Keyboard";
-"Jyutping Keyboard not showing up in Settings app?" = "Jyutping Keyboard not showing up in Settings app?";
-"You may need to close the Settings app, then try again." = "You may need to close the Settings app, then try again.";
-"How to close an app?" = "How to close an app?";
-"Jyutping Keyboard not showing up in some other apps?" = "Jyutping Keyboard not showing up in some other apps?";
-"This is a system bug, you may need to restart this device." = "This is a system bug, you may need to restart this device.";
-"How to restart device?" = "How to restart device?";
+"IOSHomeTab.EnablingKeyboardView.Question.KeyboardNotFound" = "Jyutping Keyboard not showing up in Settings app?";
+"IOSHomeTab.EnablingKeyboardView.Answer.KeyboardNotFound" = "You may need to close the Settings app, then try again.";
+"IOSHomeTab.EnablingKeyboardView.Guide.CloseApp" = "How to close an app?";
 
-"Tones Input" = "Tones Input";
-"tones.input.description" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
-"tones.input.examples" = "Examples: sinq = sin3(線), sinqq = sin6(羨)";
+"IOSHomeTab.EnablingKeyboardView.Question.KeyboardUnavailable" = "Jyutping Keyboard not showing up in some other apps?";
+"IOSHomeTab.EnablingKeyboardView.Answer.KeyboardUnavailable" = "This is a system bug, you may need to restart this device.";
+"IOSHomeTab.EnablingKeyboardView.Guide.RestartDevice" = "How to restart device?";
 
-"Lookup Jyutping with Cangjie" = "Lookup Jyutping with Cangjie";
-"Cangjie Reverse Lookup Description" = "Start with “v”, then enter Cangjie5 code. For example, enter “vdam”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
+"Shared.Guide.Heading.TonesInput" = "Tones Input";
+"Shared.Guide.Body.TonesInput" = "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)";
+"Shared.Guide.Example.TonesInput" = "Examples: sinq = sin3(線), sinqq = sin6(羨)";
 
-"Lookup Jyutping with Pinyin" = "Lookup Jyutping with Pinyin";
-"Pinyin Reverse Lookup Description" = "Start with “r”, then enter Pinyin code. For example, enter “rcha”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
+"Shared.Guide.Heading.CangjieReverseLookup" = "Lookup Jyutping with Cangjie";
+"Shared.Guide.Body.CangjieReverseLookup" = "Start with “v”, then enter Cangjie5 code. For example, enter “vdam”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
-"Lookup Jyutping with Stroke" = "Lookup Jyutping with Stroke";
-"Stroke Reverse Lookup Description" = "Start with “x”, then enter Stroke code. For example, enter “xwsad”, candidate “木” will appear. Candidates will be displayed with the corresponding Jyutping.";
-"Stroke Key Description" = "w = 橫(waang), Horizontal\ns = 豎(syu), Vertical\na = 撇, Left-falling\nd = 點(dim), Right-falling\nz = 折(zit), Turning";
+"Shared.Guide.Heading.PinyinReverseLookup" = "Lookup Jyutping with Pinyin";
+"Shared.Guide.Body.PinyinReverseLookup" = "Start with “r”, then enter Pinyin code. For example, enter “rcha”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
 
-"Lookup Jyutping with Loengfan" = "Lookup Jyutping with Loengfan";
-"Loengfan Reverse Lookup Description" = "Start with “q”, then enter two components' Jyutping. For example, enter “qmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
+"Shared.Guide.Heading.StrokeReverseLookup" = "Lookup Jyutping with Stroke";
+"Shared.Guide.Body.StrokeReverseLookup" = "Start with “x”, then enter Stroke code. For example, enter “xwsad”, candidate “木” will appear. Candidates will be displayed with the corresponding Jyutping.";
+"Shared.Guide.Example.StrokeReverseLookup" = "w = 橫(waang), Horizontal\ns = 豎(syu), Vertical\na = 撇, Left-falling\nd = 點(dim), Right-falling\nz = 折(zit), Turning";
 
-"More Introductions" = "More Introductions";
-"title.introductions" = "Introductions";
-"Period (Full Stop) Shortcut" = "Period (Full Stop) Shortcut";
-"Double tapping the space bar will insert a period followed by a space" = "Double tapping the space bar will insert a period followed by a space";
-"Clear the input buffer syllables" = "Clear the input buffer syllables";
-"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "Swipe from right to left on the Delete key will clear the pre-edited syllables";
+"Shared.Guide.Heading.ComposeReverseLookup" = "Lookup Jyutping with Loengfan";
+"Shared.Guide.Body.ComposeReverseLookup" = "Start with “q”, then enter two components' Jyutping. For example, enter “qmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping.";
+
+"IOSHomeTab.LabelTitle.MoreIntroductions" = "More Introductions";
+"IOSHomeTab.NavigationTitle.MoreIntroductions" = "Introductions";
+
+"IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping" = "Period (Full Stop) Shortcut";
+"IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping" = "Double tapping the Space bar will insert a period followed by a space.";
+"IOSHomeTab.IntroductionsView.Heading.ClearPreEdit" = "Clear current pre-edit text";
+"IOSHomeTab.IntroductionsView.Body.ClearPreEdit" = "Swipe from right to left on the Delete key will clear current pre-edit syllables.";
 
 "Text to Speech" = "Text to Speech";
 "tts.notice.0" = "This app uses system built-in Text-to-Speech (TTS) service to speak texts.";

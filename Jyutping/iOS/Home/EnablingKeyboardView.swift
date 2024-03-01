@@ -10,22 +10,22 @@ struct EnablingKeyboardView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("Jyutping Keyboard not showing up in Settings app?").font(.significant)
-                                Text("You may need to close the Settings app, then try again.")
+                                Text("IOSHomeTab.EnablingKeyboardView.Question.KeyboardNotFound").font(.significant)
+                                Text("IOSHomeTab.EnablingKeyboardView.Answer.KeyboardNotFound")
                                 SafariLink(closeApp) {
                                         HStack {
-                                                Text("How to close an app?")
+                                                Text("IOSHomeTab.EnablingKeyboardView.Guide.CloseApp")
                                                 Spacer()
                                                 Image(systemName: "safari").foregroundStyle(Color.secondary)
                                         }
                                 }
                         }
                         Section {
-                                Text("Jyutping Keyboard not showing up in some other apps?").font(.significant)
-                                Text("This is a system bug, you may need to restart this device.")
+                                Text("IOSHomeTab.EnablingKeyboardView.Question.KeyboardUnavailable").font(.significant)
+                                Text("IOSHomeTab.EnablingKeyboardView.Answer.KeyboardUnavailable")
                                 SafariLink(restartDevice) {
                                         HStack {
-                                                Text("How to restart device?")
+                                                Text("IOSHomeTab.EnablingKeyboardView.Guide.RestartDevice")
                                                 Spacer()
                                                 Image(systemName: "safari").foregroundStyle(Color.secondary)
                                         }
@@ -33,7 +33,7 @@ struct EnablingKeyboardView: View {
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("title.enabling_keyboard")
+                .navigationTitle("IOSHomeTab.NavigationTitle.EnableKeyboard")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

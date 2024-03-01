@@ -55,50 +55,50 @@
 "TextField.SearchPronunciation" = "查字音";
 
 
-// MARK: - iOS Home
+// MARK: - iOS Home Tab
 
-"How to enable this Keyboard" = "如何啓用鍵盤";
-"accessibility.how_to_enable_this_keyboard" = "一：跳轉至「設定」；二：選擇「鍵盤」；三：開啓「粵拼」；四：開啓「允許全權取用」。";
+"IOSHomeTab.Heading.HowToEnableThisKeyboard" = "如何啓用鍵盤";
+"IOSHomeTab.EnablingKeyboard.Step1" = "跳轉至 **設定**";
+"IOSHomeTab.EnablingKeyboard.Step2" = "點選 **鍵盤**";
+"IOSHomeTab.EnablingKeyboard.Step3" = "開啓 **粵拼**";
+"IOSHomeTab.EnablingKeyboard.Step4" = "開啓 **允許全權取用**";
+"IOSHomeTab.EnablingKeyboard.Footer" = "振動回應 Haptic Feedback 需要「全權取用」權限";
+"IOSShared.ButtonTitle.GoToSettings" = "前往 **設定**";
 
-"Jump to **Settings**" = "跳轉至 **設定**";
-"Tap **Keyboards**" = "點選 **鍵盤**";
-"Turn on **Jyutping**" = "開啓 **粵拼**";
-"Turn on **Allow Full Access**" = "開啓 **允許全權取用**";
-"Haptic Feedback requires Full Access" = "振動回應 Haptic Feedback 需要「全權取用」權限";
-"Go to **Settings**" = "前往 **設定**";
+"IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard" = "啓用鍵盤過程中遇到問題？";
+"IOSHomeTab.NavigationTitle.EnableKeyboard" = "啓用鍵盤";
 
-"Problems with enabling keyboard?" = "啓用鍵盤過程中遇到問題？";
-"title.enabling_keyboard" = "啓用鍵盤";
-"Jyutping Keyboard not showing up in Settings app?" = "系統設定App冇列出粵拼鍵盤？";
-"You may need to close the Settings app, then try again." = "可能需要先完全關閉一次系統設定App，之後再嘗試一次。";
-"How to close an app?" = "如何關閉App？";
-"Jyutping Keyboard not showing up in some other apps?" = "某啲App輸入時冇得揀粵拼鍵盤？";
-"This is a system bug, you may need to restart this device." = "係系統嘅問題，可能需要重啓一下設備。";
-"How to restart device?" = "如何重啓設備？";
+"IOSHomeTab.EnablingKeyboardView.Question.KeyboardNotFound" = "系統設定App冇列出粵拼鍵盤？";
+"IOSHomeTab.EnablingKeyboardView.Answer.KeyboardNotFound" = "可能需要先完全關閉一次系統設定App，之後再嘗試一次。";
+"IOSHomeTab.EnablingKeyboardView.Guide.CloseApp" = "如何關閉App？";
 
-"Tones Input" = "聲調輸入";
-"tones.input.description" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
-"tones.input.examples" = "例: sinq = sin3(線), sinqq = sin6(羨)";
+"IOSHomeTab.EnablingKeyboardView.Question.KeyboardUnavailable" = "某啲App輸入時冇得揀粵拼鍵盤？";
+"IOSHomeTab.EnablingKeyboardView.Answer.KeyboardUnavailable" = "係系統嘅問題，可能需要重啓一下設備。";
+"IOSHomeTab.EnablingKeyboardView.Guide.RestartDevice" = "如何重啓設備？";
 
-"Lookup Jyutping with Cangjie" = "用倉頡反查粵拼";
-"Cangjie Reverse Lookup Description" = "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+"Shared.Guide.Heading.TonesInput" = "聲調輸入";
+"Shared.Guide.Body.TonesInput" = "v = 1 陰平， vv = 4 陽平\nx = 2 陰上， xx = 5 陽上\nq = 3 陰去， qq = 6 陽去";
+"Shared.Guide.Example.TonesInput" = "例: sinq = sin3(線), sinqq = sin6(羨)";
 
-"Lookup Jyutping with Pinyin" = "用普通話拼音反查粵拼";
-"Pinyin Reverse Lookup Description" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+"Shared.Guide.Heading.CangjieReverseLookup" = "用倉頡反查粵拼";
+"Shared.Guide.Body.CangjieReverseLookup" = "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
 
-"Lookup Jyutping with Stroke" = "用筆畫輸入反查粵拼";
-"Stroke Reverse Lookup Description" = "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。";
-"Stroke Key Description" = "w = 橫(waang)\ns = 豎(syu)\na = 撇\nd = 點(dim)\nz = 折(zit)";
+"Shared.Guide.Heading.PinyinReverseLookup" = "用普通話拼音反查粵拼";
+"Shared.Guide.Body.PinyinReverseLookup" = "以 r 開始，再輸入普通話拼音即可。例如輸入 rcha 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
 
-"Lookup Jyutping with Loengfan" = "用兩分反查粵拼";
-"Loengfan Reverse Lookup Description" = "兩分即係將一隻字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+"Shared.Guide.Heading.StrokeReverseLookup" = "用筆畫輸入反查粵拼";
+"Shared.Guide.Body.StrokeReverseLookup" = "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。";
+"Shared.Guide.Example.StrokeReverseLookup" = "w = 橫(waang)\ns = 豎(syu)\na = 撇\nd = 點(dim)\nz = 折(zit)";
 
-"More Introductions" = "更多介紹";
-"title.introductions" = "更多介紹";
-"Period (Full Stop) Shortcut" = "快捷輸入句號";
-"Double tapping the space bar will insert a period followed by a space" = "雙擊空格掣 (space)\n快捷輸入句號「。」";
-"Clear the input buffer syllables" = "一次過清除已輸入音節";
-"Swipe from right to left on the Delete key will clear the pre-edited syllables" = "刪除(Delete)掣度向左滑，即可一次過刪晒已輸入拼寫";
+"Shared.Guide.Heading.ComposeReverseLookup" = "用兩分反查粵拼";
+"Shared.Guide.Body.ComposeReverseLookup" = "兩分即係將一隻字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。";
+
+"IOSHomeTab.LabelTitle.MoreIntroductions" = "更多介紹";
+"IOSHomeTab.NavigationTitle.MoreIntroductions" = "更多介紹";
+"IOSHomeTab.IntroductionsView.Heading.SpaceDoubleTapping" = "雙擊空格掣";
+"IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping" = "雙擊空格掣(Space)可以快捷輸入句號「。」";
+"IOSHomeTab.IntroductionsView.Heading.ClearPreEdit" = "一次過清除已輸入音節";
+"IOSHomeTab.IntroductionsView.Body.ClearPreEdit" = "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。";
 
 "Text to Speech" = "文字語音朗讀";
 "tts.notice.0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";

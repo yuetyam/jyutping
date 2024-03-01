@@ -8,40 +8,40 @@ struct MacIntroductionsView: View {
                         LazyVStack(spacing: 16) {
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Tones Input").font(.significant)
+                                                Text("Shared.Guide.Heading.TonesInput").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("tones.input.description").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.Body.TonesInput").font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("tones.input.examples").font(.master)
+                                                Text("Shared.Guide.Example.TonesInput").font(.master)
                                                 Spacer()
                                         }
                                 }
                                 .block()
 
-                                BlockView(heading: "Lookup Jyutping with Pinyin", content: "Pinyin Reverse Lookup Description")
-                                BlockView(heading: "Lookup Jyutping with Cangjie", content: "Cangjie Reverse Lookup Description")
+                                BlockView(heading: "Shared.Guide.Heading.PinyinReverseLookup", content: "Shared.Guide.Body.PinyinReverseLookup")
+                                BlockView(heading: "Shared.Guide.Heading.CangjieReverseLookup", content: "Shared.Guide.Body.CangjieReverseLookup")
 
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Lookup Jyutping with Stroke").font(.significant)
+                                                Text("Shared.Guide.Heading.StrokeReverseLookup").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Stroke Reverse Lookup Description").lineSpacing(6)
+                                                Text("Shared.Guide.Body.StrokeReverseLookup").lineSpacing(6)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Stroke Key Description").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                 }
                                 .block()
 
-                                BlockView(heading: "Lookup Jyutping with Loengfan", content: "Loengfan Reverse Lookup Description")
+                                BlockView(heading: "Shared.Guide.Heading.ComposeReverseLookup", content: "Shared.Guide.Body.ComposeReverseLookup")
                         }
                         .textSelection(.enabled)
                         .padding()

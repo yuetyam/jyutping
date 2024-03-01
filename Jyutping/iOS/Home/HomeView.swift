@@ -33,7 +33,7 @@ struct HomeView: View {
                                 Section {
                                         if isKeyboardEnabled {
                                                 HStack {
-                                                        Text("How to enable this Keyboard")
+                                                        Text("IOSHomeTab.Heading.HowToEnableThisKeyboard")
                                                         Spacer()
                                                         if isGuideViewExpanded {
                                                                 Image.downChevron
@@ -46,36 +46,35 @@ struct HomeView: View {
                                                         isGuideViewExpanded.toggle()
                                                 }
                                         } else {
-                                                Text("How to enable this Keyboard").font(.significant)
+                                                Text("IOSHomeTab.Heading.HowToEnableThisKeyboard").font(.significant)
                                         }
                                         if !isKeyboardEnabled || isGuideViewExpanded {
                                                 VStack(spacing: 5) {
                                                         HStack {
                                                                 Text.dotMark
-                                                                Text("Jump to **Settings**")
+                                                                Text("IOSHomeTab.EnablingKeyboard.Step1")
                                                                 Spacer()
                                                         }
                                                         HStack {
                                                                 Text.dotMark
-                                                                Text("Tap **Keyboards**")
+                                                                Text("IOSHomeTab.EnablingKeyboard.Step2")
                                                                 Spacer()
                                                         }
                                                         HStack {
                                                                 Text.dotMark
-                                                                Text("Turn on **Jyutping**")
+                                                                Text("IOSHomeTab.EnablingKeyboard.Step3")
                                                                 Spacer()
                                                         }
                                                         HStack {
                                                                 Text.dotMark
-                                                                Text("Turn on **Allow Full Access**")
+                                                                Text("IOSHomeTab.EnablingKeyboard.Step4")
                                                                 Spacer()
                                                         }
                                                 }
-                                                .accessibilityLabel("accessibility.how_to_enable_this_keyboard")
                                         }
                                 } footer: {
                                         if shouldDisplayHapticFeedbackTip {
-                                                Text("Haptic Feedback requires Full Access").textCase(nil)
+                                                Text("IOSHomeTab.EnablingKeyboard.Footer").textCase(nil)
                                         } else {
                                                 EmptyView()
                                         }
@@ -87,42 +86,42 @@ struct HomeView: View {
                                 }
                                 Section {
                                         NavigationLink(destination: EnablingKeyboardView()) {
-                                                Label("Problems with enabling keyboard?", systemImage: "info.circle").labelStyle(.titleOnly)
+                                                Label("IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard", systemImage: "info.circle").labelStyle(.titleOnly)
                                         }
                                 }
 
                                 Group {
                                         Section {
-                                                Text("Tones Input").font(.significant)
-                                                Text("tones.input.description")
+                                                Text("Shared.Guide.Heading.TonesInput").font(.significant)
+                                                Text("Shared.Guide.Body.TonesInput")
                                                         .font(.fixedWidth)
                                                         .lineSpacing(5)
                                                         .fixedSize(horizontal: true, vertical: false)
-                                                Text("tones.input.examples")
+                                                Text("Shared.Guide.Example.TonesInput")
                                         }
                                         Section {
-                                                Text("Lookup Jyutping with Pinyin").font(.significant)
-                                                Text("Pinyin Reverse Lookup Description").lineSpacing(6)
+                                                Text("Shared.Guide.Heading.PinyinReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Body.PinyinReverseLookup").lineSpacing(6)
                                         }
                                         Section {
-                                                Text("Lookup Jyutping with Cangjie").font(.significant)
-                                                Text("Cangjie Reverse Lookup Description").lineSpacing(6)
+                                                Text("Shared.Guide.Heading.CangjieReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Body.CangjieReverseLookup").lineSpacing(6)
                                         }
                                         Section {
-                                                Text("Lookup Jyutping with Stroke").font(.significant)
-                                                Text("Stroke Reverse Lookup Description").lineSpacing(6)
-                                                Text("Stroke Key Description").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.Heading.StrokeReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Body.StrokeReverseLookup").lineSpacing(6)
+                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.fixedWidth).lineSpacing(5)
                                         }
                                         Section {
-                                                Text("Lookup Jyutping with Loengfan").font(.significant)
-                                                Text("Loengfan Reverse Lookup Description").lineSpacing(6)
+                                                Text("Shared.Guide.Heading.ComposeReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Body.ComposeReverseLookup").lineSpacing(6)
                                         }
                                 }
                                 .textSelection(.enabled)
 
                                 Section {
                                         NavigationLink(destination: IntroductionsView()) {
-                                                Label("More Introductions", systemImage: "info.circle")
+                                                Label("IOSHomeTab.LabelTitle.MoreIntroductions", systemImage: "info.circle")
                                         }
                                         NavigationLink(destination: Text2SpeechView()) {
                                                 Label("Text to Speech", systemImage: "speaker.wave.2")
