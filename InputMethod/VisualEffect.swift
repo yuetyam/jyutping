@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct VisualEffect: NSViewRepresentable {
+struct VisualEffectView: NSViewRepresentable {
         func makeNSView(context: Self.Context) -> NSView {
                 let view = NSVisualEffectView()
                 view.material = .sidebar
@@ -23,15 +23,15 @@ struct HUDVisualEffect: NSViewRepresentable {
 }
 
 extension View {
-        func visualEffect() -> some View {
-                return self.background(VisualEffect())
+        func applyVisualEffect() -> some View {
+                return self.background(VisualEffectView())
         }
         func hudVisualEffect() -> some View {
                 return self.background(HUDVisualEffect())
         }
         func roundedVisualEffect() -> some View {
                 return self.background(
-                        VisualEffect()
+                        VisualEffectView()
                                 .cornerRadius(8)
                                 .shadow(radius: 4)
                 )

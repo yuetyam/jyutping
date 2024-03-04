@@ -55,24 +55,24 @@ struct PreferencesView: View {
                         } detail: {
                                 switch selection {
                                 case .general:
-                                        GeneralPreferencesView().visualEffect()
+                                        GeneralPreferencesView().applyVisualEffect()
                                 case .fonts:
-                                        FontPreferencesView().visualEffect()
+                                        FontPreferencesView().applyVisualEffect()
                                 case .hotkeys:
-                                        HotkeysView().visualEffect()
+                                        HotkeysView().applyVisualEffect()
                                 case .about:
-                                        AboutView().visualEffect()
+                                        AboutView().applyVisualEffect()
                                 }
                         }
                 } else {
                         NavigationView {
                                 List {
                                         Section {
-                                                NavigationLink(destination: GeneralPreferencesView().visualEffect(), isActive: $isGeneralViewActive) {
+                                                NavigationLink(destination: GeneralPreferencesView().applyVisualEffect(), isActive: $isGeneralViewActive) {
                                                         Label("PreferencesView.NavigationTitle.General", systemImage: "gear")
                                                 }
                                                 NavigationLink {
-                                                        FontPreferencesView().visualEffect()
+                                                        FontPreferencesView().applyVisualEffect()
                                                 } label: {
                                                         Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat")
                                                 }
@@ -81,7 +81,7 @@ struct PreferencesView: View {
                                         }
 
                                         Section {
-                                                NavigationLink(destination: HotkeysView().visualEffect(), isActive: $isHotkeysViewActive) {
+                                                NavigationLink(destination: HotkeysView().applyVisualEffect(), isActive: $isHotkeysViewActive) {
                                                         Label("PreferencesView.NavigationTitle.Hotkeys", systemImage: "keyboard")
                                                 }
                                         } header: {
@@ -89,7 +89,7 @@ struct PreferencesView: View {
                                         }
 
                                         Section {
-                                                NavigationLink(destination: AboutView().visualEffect(), isActive: $isAboutViewActive) {
+                                                NavigationLink(destination: AboutView().applyVisualEffect(), isActive: $isAboutViewActive) {
                                                         Label("PreferencesView.NavigationTitle.About", systemImage: "info.circle")
                                                 }
                                         } header: {

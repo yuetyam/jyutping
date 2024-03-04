@@ -2,7 +2,7 @@
 
 import SwiftUI
 
-struct VisualEffect: NSViewRepresentable {
+struct VisualEffectView: NSViewRepresentable {
         func makeNSView(context: Self.Context) -> NSView {
                 let view = NSVisualEffectView()
                 view.material = .sidebar
@@ -13,8 +13,8 @@ struct VisualEffect: NSViewRepresentable {
         func updateNSView(_ nsView: NSView, context: Context) { }
 }
 extension View {
-        func visualEffect() -> some View {
-                return self.background(VisualEffect())
+        func applyVisualEffect() -> some View {
+                return self.background(VisualEffectView())
         }
 }
 
@@ -68,45 +68,45 @@ struct MacContentView: View {
                 } detail: {
                         switch selection {
                         case .installation:
-                                MacInstallInputMethodView().visualEffect()
+                                MacInstallInputMethodView().applyVisualEffect()
                         case .introductions:
-                                MacIntroductionsView().visualEffect()
+                                MacIntroductionsView().applyVisualEffect()
                         case .expressions:
-                                MacExpressionsView().visualEffect()
+                                MacExpressionsView().applyVisualEffect()
                         case .confusion:
-                                MacConfusionView().visualEffect()
+                                MacConfusionView().applyVisualEffect()
                         case .search:
-                                MacSearchView().visualEffect()
+                                MacSearchView().applyVisualEffect()
                         case .initials:
-                                InitialTable().visualEffect()
+                                InitialTable().applyVisualEffect()
                         case .finals:
-                                FinalTable().visualEffect()
+                                FinalTable().applyVisualEffect()
                         case .tones:
-                                MacToneTableView().visualEffect()
+                                MacToneTableView().applyVisualEffect()
                         case .numbers:
-                                NumbersView().visualEffect()
+                                NumbersView().applyVisualEffect()
                         case .stemsBranches:
-                                StemsBranchesView().visualEffect()
+                                StemsBranchesView().applyVisualEffect()
                         case .chineseZodiac:
-                                ChineseZodiacView().visualEffect()
+                                ChineseZodiacView().applyVisualEffect()
                         case .solarTerms:
-                                SolarTermsView().visualEffect()
+                                SolarTermsView().applyVisualEffect()
                         case .surnames:
-                                MacSurnamesView().visualEffect()
+                                MacSurnamesView().applyVisualEffect()
                         case .cinZiMan:
-                                MacCinZiManView().visualEffect()
+                                MacCinZiManView().applyVisualEffect()
                         case .cantonMetro:
-                                MacCantonMetroView().visualEffect()
+                                MacCantonMetroView().applyVisualEffect()
                         case .fatshanMetro:
-                                MacFatshanMetroView().visualEffect()
+                                MacFatshanMetroView().applyVisualEffect()
                         case .shamchunMetro:
-                                MacShamChunMetroView().visualEffect()
+                                MacShamChunMetroView().applyVisualEffect()
                         case .hongkongMTR:
-                                MacHongKongMTRView().visualEffect()
+                                MacHongKongMTRView().applyVisualEffect()
                         case .resources:
-                                MacResourcesView().visualEffect()
+                                MacResourcesView().applyVisualEffect()
                         case .about:
-                                MacAboutView().visualEffect()
+                                MacAboutView().applyVisualEffect()
                         }
                 }
         }
