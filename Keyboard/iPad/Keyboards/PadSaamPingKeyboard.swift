@@ -45,7 +45,7 @@ struct PadSaamPingKeyboard: View {
                                 PadShiftKey(widthUnitTimes: 1)
                                 Group {
                                         PadCompleteInputKey(keyLocale: .leading, upper: "%", keyModel: KeyModel(primary: KeyElement("z", header: "1"), members: [KeyElement("z"), KeyElement("1", footer: "陰平")]))
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "-", keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "-", keyModel: KeyModel(primary: KeyElement("gw", header: "2"), members: [KeyElement("gw"), KeyElement("2", footer: "陰上"), KeyElement("x"), KeyElement("kw")]))
                                         PadCompleteInputKey(keyLocale: .leading, upper: "～", keyModel: KeyModel(primary: KeyElement("c", header: "3"), members: [KeyElement("c"), KeyElement("3", footer: "陰去")]))
                                         PadCompleteInputKey(keyLocale: .leading, upper: "…", keyModel: KeyModel(primary: KeyElement("ng", header: "4"), members: [KeyElement("ng"), KeyElement("4", footer: "陽平"), KeyElement("v")]))
                                         PadCompleteInputKey(keyLocale: .trailing, upper: "、", keyModel: KeyModel(primary: KeyElement("b", header: "5"), members: [KeyElement("b"), KeyElement("5", footer: "陽上")]))

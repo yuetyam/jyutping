@@ -95,7 +95,7 @@ struct ExpansibleInputKey: View {
                                                                         }
                                                                         Text(verbatim: element.text)
                                                                                 .textCase(textCase)
-                                                                                .font(.title2)
+                                                                                .font(element.isTextSingular ? .title2 : .title3)
                                                                                 .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
                                                                 }
                                                                 .frame(maxWidth: .infinity)
@@ -115,7 +115,7 @@ struct ExpansibleInputKey: View {
                                         .overlay {
                                                 Text(verbatim: keyModel.primary.text)
                                                         .textCase(textCase)
-                                                        .font(keyModel.primary.isTextSingular ? .title : .title2)
+                                                        .font(keyModel.primary.isTextSingular ? .title : .title3)
                                                         .padding(.bottom, context.heightUnit * 2.0)
                                         }
                                         .padding(.vertical, 6)

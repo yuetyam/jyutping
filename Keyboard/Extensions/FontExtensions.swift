@@ -2,8 +2,6 @@ import SwiftUI
 import CoreIME
 
 extension Font {
-        static let keyFooter: Font = Font.system(size: 9)
-
         private(set) static var candidate: Font = candidateFont()
         static func updateCandidateFont(characterStandard: CharacterStandard? = nil) {
                 candidate = candidateFont(characterStandard: characterStandard)
@@ -25,9 +23,7 @@ extension Font {
         static let romanization: Font = Font.system(size: 12)
         static let tone: Font = Font.system(size: 10)
 
-
-        // MARK: - Input Key
-
         static let letterInputKeyCompact: Font = Font.system(size: 24)
-        static let dualLettersInputKeyCompact: Font = Font.system(size: 18)
+        static let dualLettersInputKeyCompact: Font = Font.system(size: 17)
+        static let keyFooter: Font = Font.system(size: 9)
 }
