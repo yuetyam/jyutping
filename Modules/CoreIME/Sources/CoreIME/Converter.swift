@@ -3,10 +3,10 @@ extension Candidate {
         /// Convert Cantonese Candidate text to the specific variant
         /// - Parameter variant: Character variant
         /// - Returns: Transformed Candidate
-        public func transformed(to variant: Logogram) -> Candidate {
+        public func transformed(to variant: CharacterStandard) -> Candidate {
                 guard self.isCantonese else { return self }
                 let convertedText: String = Converter.convert(text, to: variant)
-                return Candidate(text: convertedText, romanization: romanization, input: input, lexiconText: lexiconText)
+                return Candidate(text: convertedText, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark)
         }
 }
 
@@ -18,7 +18,7 @@ public struct Converter {
         ///   - text: Original (traditional) text
         ///   - variant: Character Variant
         /// - Returns: Converted text
-        public static func convert(_ text: String, to variant: Logogram) -> String {
+        public static func convert(_ text: String, to variant: CharacterStandard) -> String {
                 switch variant {
                 case .traditional:
                         return text

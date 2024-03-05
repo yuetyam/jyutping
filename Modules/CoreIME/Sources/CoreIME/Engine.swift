@@ -30,6 +30,31 @@ public struct Engine {
 }
 
 extension Engine {
+        public static func fastSuggest(text: String, segmentation: Segmentation) -> [Candidate] {
+                switch text.count {
+                case 0:
+                        return []
+                case 1:
+                        switch text {
+                        case "a":
+                                return match(text: text, input: text) + match(text: "aa", input: text) + shortcut(text: text)
+                        case "o", "m", "e":
+                                return match(text: text, input: text) + shortcut(text: text)
+                        default:
+                                return shortcut(text: text)
+                        }
+                default:
+                        guard segmentation.maxLength > 0 else { return processVerbatim(text: text) }
+                        let fullMatch = match(text: text, input: text)
+                        let fullShortcut = shortcut(text: text)
+                        let searches = match(segmentation: segmentation)
+                        let textCount = text.count
+                        let perfectSearches = searches.filter({ $0.input.count == textCount })
+                        let candidates = (fullMatch + perfectSearches + fullShortcut + searches).uniqued()
+                        return candidates.isEmpty ? processVerbatim(text: text) : candidates
+                }
+        }
+
         public static func suggest(text: String, segmentation: Segmentation) -> [Candidate] {
                 switch text.count {
                 case 0:

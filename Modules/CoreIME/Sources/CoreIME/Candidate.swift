@@ -2,22 +2,36 @@ public enum CandidateType: Int {
 
         case cantonese
 
-        /// Examples: iPad, macOS
-        case specialMark
+        /// Plain text. Examples: iPad, macOS
+        case text
 
         case emoji
+
+        case emojiSequence
 
         /// Note that `text.count == 1` not always true
         case symbol
 
-        /// macOS Keyboard composed text
+        case symbolSequence
+
+        /// macOS Keyboard composed text. Mainly for PunctuationKey.
         case compose
 }
 
 public struct Candidate: Hashable {
 
-        /// Displaying Candidate text
+        /// Candidate Type
+        public let type: CandidateType
+
+        /// Candidate text for display.
+        ///
+        /// Corresponds to current CharacterStandard
         public let text: String
+
+        /// Candidate text for UserLexicon.
+        ///
+        /// Always be traditional characters.
+        public let lexiconText: String
 
         /// Jyutping
         public let romanization: String
@@ -25,41 +39,27 @@ public struct Candidate: Hashable {
         /// User input
         public let input: String
 
-        /// Candidate text for UserLexicon.
-        ///
-        /// Always traditional characters. User invisible.
-        public let lexiconText: String
+        /// Formatted user input for pre-edit display
+        public let mark: String
 
-        /// Candidate Type
-        public let type: CandidateType
-
-        /// Create a Cantonese Candidate
+        /// Primary Initializer
         /// - Parameters:
-        ///   - text: Displaying Candidate text.
+        ///   - type: Candidate type.
+        ///   - text: Candidate text for display.
+        ///   - lexiconText: Candidate text for UserLexicon.
         ///   - romanization: Jyutping.
         ///   - input: User input for this Candidate.
-        ///   - lexiconText: Lexicon Candidate text. User invisible.
-        public init(text: String, romanization: String, input: String, lexiconText: String) {
+        ///   - mark: Formatted user input for pre-edit display.
+        public init(type: CandidateType = .cantonese, text: String, lexiconText: String? = nil, romanization: String, input: String, mark: String? = nil) {
+                self.type = type
                 self.text = text
+                self.lexiconText = lexiconText ?? text
                 self.romanization = romanization
                 self.input = input
-                self.lexiconText = lexiconText
-                self.type = .cantonese
+                self.mark = mark ?? input
         }
 
-        /// Create a Candidate with special mark text
-        /// - Parameters:
-        ///   - mark: Special mark text. Examples: iPhone, GitHub
-        ///   - input: User input for this Candidate
-        init(mark: String, input: String) {
-                self.text = mark
-                self.romanization = input
-                self.input = input
-                self.lexiconText = mark
-                self.type = .specialMark
-        }
-
-        /// Create a Candidate with a emoji or a symbol
+        /// Create a Candidate with an emoji or a symbol
         /// - Parameters:
         ///   - symbol: Emoji/Symbol text
         ///   - cantonese: Cantonese word for this Emoji/Symbol
@@ -67,11 +67,12 @@ public struct Candidate: Hashable {
         ///   - input: User input for this Candidate
         ///   - isEmoji: Emoji or symbol
         init(symbol: String, cantonese: String, romanization: String, input: String, isEmoji: Bool) {
+                self.type = isEmoji ? .emoji : .symbol
                 self.text = symbol
+                self.lexiconText = cantonese
                 self.romanization = romanization
                 self.input = input
-                self.lexiconText = cantonese
-                self.type = isEmoji ? .emoji : .symbol
+                self.mark = input
         }
 
         /// Create a Candidate for keyboard compose
@@ -81,13 +82,12 @@ public struct Candidate: Hashable {
         ///   - secondaryComment: Unicode code point
         ///   - input: User input for this Candidate
         public init(text: String, comment: String?, secondaryComment: String?, input: String) {
-                let commentText: String = comment ?? ""
-                let secondaryCommentText: String = secondaryComment ?? ""
-                self.text = text
-                self.romanization = secondaryCommentText
-                self.input = input
-                self.lexiconText = commentText
                 self.type = .compose
+                self.text = text
+                self.lexiconText = comment ?? ""
+                self.romanization = secondaryComment ?? ""
+                self.input = input
+                self.mark = input
         }
 
         /// type == .cantonese
@@ -110,11 +110,15 @@ public struct Candidate: Hashable {
                 case .cantonese:
                         hasher.combine(text)
                         hasher.combine(romanization)
-                case .specialMark:
+                case .text:
                         hasher.combine(text)
                 case .emoji:
                         hasher.combine(text)
+                case .emojiSequence:
+                        hasher.combine(text)
                 case .symbol:
+                        hasher.combine(text)
+                case .symbolSequence:
                         hasher.combine(text)
                 case .compose:
                         hasher.combine(text)
@@ -123,10 +127,10 @@ public struct Candidate: Hashable {
 
         public static func +(lhs: Candidate, rhs: Candidate) -> Candidate {
                 let newText: String = lhs.text + rhs.text
+                let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
                 let newRomanization: String = lhs.romanization + " " + rhs.romanization
                 let newInput: String = lhs.input + rhs.input
-                let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
-                return Candidate(text: newText, romanization: newRomanization, input: newInput, lexiconText: newLexiconText)
+                return Candidate(text: newText, lexiconText: newLexiconText, romanization: newRomanization, input: newInput)
         }
 }
 
@@ -136,27 +140,14 @@ extension Array where Element == Candidate {
         /// - Returns: Single, concatenated Candidate.
         public func joined() -> Candidate {
                 let text: String = map(\.text).joined()
+                let lexiconText: String = map(\.lexiconText).joined()
                 let romanization: String = map(\.romanization).joined(separator: " ")
                 let input: String = map(\.input).joined()
-                let lexiconText: String = map(\.lexiconText).joined()
-                return Candidate(text: text, romanization: romanization, input: input, lexiconText: lexiconText)
+                return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input)
         }
 }
+
+
+// TODO: - Delete this type alias
 
 typealias CoreCandidate = Candidate
-
-extension CoreCandidate {
-
-        /// Create a Cantonese Candidate
-        /// - Parameters:
-        ///   - text: Candidate word, also as lexiconText
-        ///   - romanization: Jyutping
-        ///   - input: Input text for this Candidate
-        init(text: String, romanization: String, input: String) {
-                self.text = text
-                self.romanization = romanization
-                self.input = input
-                self.lexiconText = text
-                self.type = .cantonese
-        }
-}

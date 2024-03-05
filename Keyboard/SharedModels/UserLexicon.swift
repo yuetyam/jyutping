@@ -85,22 +85,25 @@ struct UserLexicon {
         // MARK: - Suggestion
 
         static func suggest(text: String, segmentation: Segmentation) -> [Candidate] {
-                let regularMatch = match(text: text, input: text, isShortcut: false)
-                let regularShortcut = match(text: text, input: text, isShortcut: true)
-                let textCount = text.count
-                let segmentation = segmentation.filter({ $0.length == textCount })
-                guard segmentation.maxLength > 0 else {
-                        return (regularMatch + regularShortcut).uniqued()
-                }
-                let matches = segmentation.map({ scheme -> [Candidate] in
-                        let pingText = scheme.map(\.origin).joined()
-                        return match(text: pingText, input: text, isShortcut: false)
-                })
-                let combined = regularMatch + regularShortcut + matches.flatMap({ $0 })
-                return combined.uniqued()
+                let matches = match(text: text, input: text, isShortcut: false)
+                let shortcuts = match(text: text, input: text, mark: text, isShortcut: true)
+                let searches: [Candidate] = {
+                        let textCount = text.count
+                        let schemes = segmentation.filter({ $0.length == textCount })
+                        guard !(schemes.isEmpty) else { return [] }
+                        let matches = schemes.map({ scheme -> [Candidate] in
+                                let pingText = scheme.map(\.origin).joined()
+                                let matched = match(text: pingText, input: text, isShortcut: false)
+                                let text2mark = scheme.map(\.text).joined(separator: " ")
+                                let syllables = scheme.map(\.origin).joined(separator: " ")
+                                return matched.filter({ $0.mark == syllables }).map({ Candidate(text: $0.text, romanization: $0.romanization, input: $0.input, mark: text2mark) })
+                        })
+                        return matches.flatMap({ $0 })
+                }()
+                return matches + shortcuts + searches
         }
 
-        private static func match(text: String, input: String, isShortcut: Bool) -> [Candidate] {
+        private static func match(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [Candidate] {
                 var candidates: [Candidate] = []
                 let code: Int = isShortcut ? text.replacingOccurrences(of: "y", with: "j").hash : text.hash
                 let column: String = isShortcut ? "shortcut" : "ping"
@@ -111,7 +114,8 @@ struct UserLexicon {
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word = String(cString: sqlite3_column_text(statement, 0))
                         let jyutping = String(cString: sqlite3_column_text(statement, 1))
-                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, lexiconText: word)
+                        let mark: String = mark ?? jyutping.removedTones()
+                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, mark: mark)
                         candidates.append(candidate)
                 }
                 return candidates

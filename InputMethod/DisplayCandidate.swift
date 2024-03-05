@@ -18,7 +18,7 @@ struct DisplayCandidate: Hashable {
                         self.text = text
                         self.comment = candidate.romanization
                         self.secondaryComment = nil
-                case .specialMark:
+                case .text:
                         self.text = text
                         self.comment = nil
                         self.secondaryComment = nil
@@ -27,7 +27,17 @@ struct DisplayCandidate: Hashable {
                         self.text = text
                         self.comment = "(" + comment + ")"
                         self.secondaryComment = nil
+                case .emojiSequence:
+                        let comment: String = Converter.convert(candidate.lexiconText, to: Options.characterStandard)
+                        self.text = text
+                        self.comment = "(" + comment + ")"
+                        self.secondaryComment = nil
                 case .symbol:
+                        let comment: String = Converter.convert(candidate.lexiconText, to: Options.characterStandard)
+                        self.text = text
+                        self.comment = "(" + comment + ")"
+                        self.secondaryComment = nil
+                case .symbolSequence:
                         let comment: String = Converter.convert(candidate.lexiconText, to: Options.characterStandard)
                         self.text = text
                         self.comment = "(" + comment + ")"

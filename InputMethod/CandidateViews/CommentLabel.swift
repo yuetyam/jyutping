@@ -35,11 +35,15 @@ struct CommentLabel: View {
                         case .subscript:
                                 ModifiedCommentView(alignment: .bottom, comment: comment, toneColor: toneColor, shouldApplyToneFont: true)
                         }
-                case .specialMark:
+                case .text:
                         Text(verbatim: comment).font(.annotation)
                 case .emoji:
                         Text(verbatim: comment).font(.annotation)
+                case .emojiSequence:
+                        Text(verbatim: comment).font(.annotation)
                 case .symbol:
+                        Text(verbatim: comment).font(.annotation)
+                case .symbolSequence:
                         Text(verbatim: comment).font(.annotation)
                 case .compose:
                         Text(verbatim: comment).font(.annotation)
