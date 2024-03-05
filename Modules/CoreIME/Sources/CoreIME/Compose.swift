@@ -43,28 +43,28 @@ extension Engine {
                 }
         }
 
-        private static func process(text: String, segmentation: Segmentation) -> [CoreCandidate] {
+        private static func process(text: String, segmentation: Segmentation) -> [Candidate] {
                 let textCount = text.count
                 let segmentation = segmentation.filter({ $0.length == textCount })
                 guard segmentation.maxLength > 0 else {
                         return match(text: text)
                 }
-                let matches = segmentation.map({ scheme -> [CoreCandidate] in
+                let matches = segmentation.map({ scheme -> [Candidate] in
                         let pingText = scheme.map(\.origin).joined()
                         return match(text: pingText)
                 })
                 return match(text: text) + matches.flatMap({ $0 })
         }
 
-        private static func match(text: String) -> [CoreCandidate] {
-                var candidates: [CoreCandidate] = []
+        private static func match(text: String) -> [Candidate] {
+                var candidates: [Candidate] = []
                 let query: String = "SELECT word, romanization FROM composetable WHERE ping = \(text.hash);"
                 var statement: OpaquePointer? = nil
                 if sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK {
                         while sqlite3_step(statement) == SQLITE_ROW {
                                 let word: String = String(cString: sqlite3_column_text(statement, 0))
                                 let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                                let instance = CoreCandidate(text: word, romanization: romanization, input: text)
+                                let instance = Candidate(text: word, romanization: romanization, input: text)
                                 candidates.append(instance)
                         }
                 }

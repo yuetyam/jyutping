@@ -73,7 +73,7 @@ extension Engine {
                 }
         }
 
-        private static func dispatch(text: String, segmentation: Segmentation) -> [CoreCandidate] {
+        private static func dispatch(text: String, segmentation: Segmentation) -> [Candidate] {
                 switch (text.hasSeparators, text.hasTones) {
                 case (true, true):
                         let syllable = text.removedSeparatorsTones()
@@ -199,26 +199,26 @@ extension Engine {
                 }
         }
 
-        private static func processVerbatim(text: String, limit: Int? = nil) -> [CoreCandidate] {
+        private static func processVerbatim(text: String, limit: Int? = nil) -> [Candidate] {
                 guard canProcess(text) else { return [] }
-                let rounds = (0..<text.count).map({ number -> [CoreCandidate] in
+                let rounds = (0..<text.count).map({ number -> [Candidate] in
                         let leading: String = String(text.dropLast(number))
                         return match(text: leading, input: leading, limit: limit) + shortcut(text: leading, limit: limit)
                 })
                 return rounds.flatMap({ $0 }).uniqued()
         }
 
-        private static func process(text: String, segmentation: Segmentation, limit: Int? = nil) -> [CoreCandidate] {
+        private static func process(text: String, segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
                 guard canProcess(text) else { return [] }
                 let textCount = text.count
                 let fullMatch = match(text: text, input: text, limit: limit)
                 let fullShortcut = shortcut(text: text, limit: limit)
                 let candidates = match(segmentation: segmentation, limit: limit)
                 let perfectCandidates = candidates.filter({ $0.input.count == textCount })
-                let primary: [CoreCandidate] = (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
+                let primary: [Candidate] = (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
                 guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: 4) }
                 guard firstInputCount != textCount else { return primary }
-                let prefixes: [CoreCandidate] = {
+                let prefixes: [Candidate] = {
                         guard segmentation.maxLength != textCount else { return [] }
                         let anchorsArray: [String] = segmentation.map({ scheme -> String in
                                 let last = text.dropFirst(scheme.length).first
@@ -226,9 +226,9 @@ extension Engine {
                                 let anchors = (schemeAnchors + [last]).compactMap({ $0 })
                                 return String(anchors)
                         })
-                        let prefixCandidates: [CoreCandidate] = anchorsArray.map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
+                        let prefixCandidates: [Candidate] = anchorsArray.map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
                                 .filter({ $0.romanization.removedSpacesTones().hasPrefix(text) })
-                                .map({ CoreCandidate(text: $0.text, romanization: $0.romanization, input: text) })
+                                .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text) })
                         return prefixCandidates
                 }()
                 guard prefixes.isEmpty else { return prefixes + primary }
@@ -250,8 +250,8 @@ extension Engine {
                 return preferredConcatenated + primary
         }
 
-        private static func match(segmentation: Segmentation, limit: Int? = nil) -> [CoreCandidate] {
-                let matches = segmentation.map({ scheme -> [CoreCandidate] in
+        private static func match(segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
+                let matches = segmentation.map({ scheme -> [Candidate] in
                         let input = scheme.map(\.text).joined()
                         let ping = scheme.map(\.origin).joined()
                         return match(text: ping, input: input, limit: limit)
@@ -262,8 +262,8 @@ extension Engine {
 
         // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
-        private static func shortcut(text: String, limit: Int? = nil) -> [CoreCandidate] {
-                var candidates: [CoreCandidate] = []
+        private static func shortcut(text: String, limit: Int? = nil) -> [Candidate] {
+                var candidates: [Candidate] = []
                 let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 let limit: Int = limit ?? 50
                 let query: String = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
@@ -273,13 +273,13 @@ extension Engine {
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word: String = String(cString: sqlite3_column_text(statement, 0))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                        let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                        let candidate = Candidate(text: word, romanization: romanization, input: text)
                         candidates.append(candidate)
                 }
                 return candidates
         }
-        private static func match(text: String, input: String, limit: Int? = nil) -> [CoreCandidate] {
-                var candidates: [CoreCandidate] = []
+        private static func match(text: String, input: String, limit: Int? = nil) -> [Candidate] {
+                var candidates: [Candidate] = []
                 let limit: Int = limit ?? -1
                 let query: String = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
@@ -288,7 +288,7 @@ extension Engine {
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word: String = String(cString: sqlite3_column_text(statement, 0))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                        let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
+                        let candidate = Candidate(text: word, romanization: romanization, input: input)
                         candidates.append(candidate)
                 }
                 return candidates
@@ -376,7 +376,7 @@ extension Engine {
                         let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = CoreCandidate(text: word, romanization: romanization, input: text)
+                        let candidate = Candidate(text: word, romanization: romanization, input: text)
                         let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
                         candidates.append(instance)
                 }
@@ -393,7 +393,7 @@ extension Engine {
                         let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = CoreCandidate(text: word, romanization: romanization, input: input)
+                        let candidate = Candidate(text: word, romanization: romanization, input: input)
                         let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
                         candidates.append(instance)
                 }

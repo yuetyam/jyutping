@@ -146,8 +146,3 @@ extension Array where Element == Candidate {
                 return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input)
         }
 }
-
-
-// TODO: - Delete this type alias
-
-typealias CoreCandidate = Candidate

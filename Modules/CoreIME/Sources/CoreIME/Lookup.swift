@@ -10,7 +10,7 @@ extension Engine {
         /// - Returns: Candidates
         static func reveresLookup(text: String, input: String) -> [Candidate] {
                 let romanizations: [String] = Engine.lookup(text)
-                return romanizations.map({ CoreCandidate(text: text, romanization: $0, input: input) })
+                return romanizations.map({ Candidate(text: text, romanization: $0, input: input) })
         }
 
         /// Search Romanization for word
