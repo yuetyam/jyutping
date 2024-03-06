@@ -124,19 +124,19 @@ struct HomeView: View {
                                                 Label("IOSHomeTab.LabelTitle.MoreIntroductions", systemImage: "info.circle")
                                         }
                                         NavigationLink(destination: Text2SpeechView()) {
-                                                Label("Text to Speech", systemImage: "speaker.wave.2")
+                                                Label("IOSHomeTab.LabelTitle.TextToSpeech", systemImage: "speaker.wave.2")
                                         }
                                         NavigationLink(destination: ClipboardFeaturesView()) {
-                                                Label("Clipboard Features", systemImage: clipboardImageName)
+                                                Label("IOSHomeTab.LabelTitle.ClipboardFeatures", systemImage: clipboardImageName)
                                         }
                                         NavigationLink(destination: ChangeDisplayLanguageView()) {
-                                                Label("Change Display Language", systemImage: "globe.asia.australia")
+                                                Label("IOSHomeTab.LabelTitle.ChangeDisplayLanguage", systemImage: "globe.asia.australia")
                                         }
                                         NavigationLink(destination: FAQView()) {
-                                                Label("FAQ", systemImage: "questionmark.circle")
+                                                Label("IOSHomeTab.LabelTitle.FAQ", systemImage: "questionmark.circle")
                                         }
                                         NavigationLink(destination: PrivacyNoticeView()) {
-                                                Label("Privacy Notice", systemImage: "lock.circle")
+                                                Label("IOSHomeTab.LabelTitle.PrivacyNotice", systemImage: "lock.circle")
                                         }
                                 }
                         }

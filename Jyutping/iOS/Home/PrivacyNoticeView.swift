@@ -7,18 +7,18 @@ struct PrivacyNoticeView: View {
                 List {
                         Section {
                                 VStack(spacing: 20) {
-                                        NoteView("privacy.notice.1")
-                                        NoteView("privacy.notice.2")
-                                        NoteView("privacy.notice.3")
-                                        NoteView("privacy.notice.4")
+                                        NoteView("IOSHomeTab.PrivacyNotice.Row1")
+                                        NoteView("IOSHomeTab.PrivacyNotice.Row2")
+                                        NoteView("IOSHomeTab.PrivacyNotice.Row3")
+                                        NoteView("IOSHomeTab.PrivacyNotice.Row4")
                                 }
                                 .padding(.vertical)
                         } footer: {
-                                Text("privacy.notice.footer").textCase(nil)
+                                Text("IOSHomeTab.PrivacyNotice.Footer").textCase(nil)
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("Privacy Notice")
+                .navigationTitle("IOSHomeTab.NavigationTitle.PrivacyNotice")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

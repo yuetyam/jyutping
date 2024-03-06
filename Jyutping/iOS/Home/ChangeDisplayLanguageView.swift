@@ -6,20 +6,20 @@ struct ChangeDisplayLanguageView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("Keyboard Display Language").font(.significant)
-                                Text("Keyboard Display Language Description")
+                                Text("IOSHomeTab.ChangeDisplayLanguage.Heading.Keyboard").font(.significant)
+                                Text("IOSHomeTab.ChangeDisplayLanguage.Body.Keyboard")
                         }
                         Section {
-                                Text("Main App Display Language").font(.significant)
-                                Label("Main App Display Language Description 1", systemImage: "1.circle")
-                                Label("Main App Display Language Description 2", systemImage: "2.circle")
+                                Text("IOSHomeTab.ChangeDisplayLanguage.Heading.MainApp").font(.significant)
+                                Label("IOSHomeTab.ChangeDisplayLanguage.Body.MainApp.Row1", systemImage: "1.circle")
+                                Label("IOSHomeTab.ChangeDisplayLanguage.Body.MainApp.Row2", systemImage: "2.circle")
                         }
                         Section {
                                 GoToSettingsLinkView()
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("title.change_display_language")
+                .navigationTitle("IOSHomeTab.NavigationTitle.ChangeDisplayLanguage")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }

@@ -62,7 +62,7 @@
 "IOSHomeTab.EnablingKeyboard.Step2" = "點選 **鍵盤**";
 "IOSHomeTab.EnablingKeyboard.Step3" = "開啓 **粵拼**";
 "IOSHomeTab.EnablingKeyboard.Step4" = "開啓 **允許全權取用**";
-"IOSHomeTab.EnablingKeyboard.Footer" = "振動回應 Haptic Feedback 需要「全權取用」權限";
+"IOSHomeTab.EnablingKeyboard.Footer" = "觸感回應(Haptic Feedback)需要「全權取用」";
 "IOSShared.ButtonTitle.GoToSettings" = "前往 **設定**";
 
 "IOSHomeTab.LabelTitle.ProblemsWithEnablingKeyboard" = "啓用鍵盤過程中遇到問題？";
@@ -98,44 +98,47 @@
 "IOSHomeTab.IntroductionsView.Heading.ClearPreEdit" = "一次過清除已輸入音節";
 "IOSHomeTab.IntroductionsView.Body.ClearPreEdit" = "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。";
 
-"Text to Speech" = "文字語音朗讀";
-"tts.notice.0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
-"tts.notice.1" = "如果本設備處於靜音模式，文字語音朗讀可能會冇聲音。";
-"tts.notice.2" = "爲保證發音質素，請前往 **設定** → **一般** → **語言與地區**，添加 **繁體中文(香港)** 語言。";
-"tts.notice.3" = "爲提高發音質素，請前往 **設定** → **輔助使用** → **旁白** → **語音**，添加 **繁體中文(香港)** 語音。";
-"faq.heading.tts" = "點解我部機嘅文字語音朗讀毋正常？";
+"IOSHomeTab.LabelTitle.TextToSpeech" = "文字語音朗讀";
+"IOSHomeTab.NavigationTitle.TextToSpeech" = "文字語音朗讀";
+"IOSHomeTab.Text2Speech.Notice0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
+"IOSHomeTab.Text2Speech.Notice1" = "如果本設備處於靜音模式，文字語音朗讀可能會冇聲音。";
+"IOSHomeTab.Text2Speech.Notice2" = "爲保證發音質素，請前往 **設定** → **一般** → **語言與地區**，添加 **繁體中文(香港)** 語言。";
+"IOSHomeTab.Text2Speech.Notice3" = "爲提高發音質素，請前往 **設定** → **輔助使用** → **旁白** → **語音**，添加 **繁體中文(香港)** 語音。";
 
-"Clipboard Features" = "剪貼板相關功能";
-"ClipboardFeatures.Notice.Row0" = "由於系統限制，需要開啓「允許全權取用」權限，鍵盤「貼上」掣先可以正常使用。";
-"ClipboardFeatures.Notice.Row1" = "鍵盤「貼上」掣可以將系統剪貼板嘅文字貼上輸入框。";
-"ClipboardFeatures.Notice.Row2" = "鍵盤「清空系統剪貼板」掣可以將系統剪貼板嘅文字、相片等內容清空。";
-"ClipboardFeatures.Notice.Row3" = "鍵盤本身並毋會儲存系統剪貼板內容。";
-"ClipboardFeatures.Notice.Row4" = "撳「貼上」掣時，系統可能會彈提示，詢問是否允許貼上。";
-"ClipboardFeatures.Notice.Row5" = "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。";
+"IOSHomeTab.LabelTitle.ClipboardFeatures" = "剪貼板相關功能";
+"IOSHomeTab.NavigationTitle.ClipboardFeatures" = "剪貼板相關功能";
+"IOSHomeTab.ClipboardFeaturesView.Notice0" = "由於系統限制，需要開啓「允許全權取用」權限，鍵盤「貼上」掣先可以正常使用。";
+"IOSHomeTab.ClipboardFeaturesView.Notice1" = "鍵盤「貼上」掣可以將系統剪貼板嘅文字貼上輸入框。";
+"IOSHomeTab.ClipboardFeaturesView.Notice2" = "鍵盤「清空系統剪貼板」掣可以將系統剪貼板嘅文字、相片等內容清空。";
+"IOSHomeTab.ClipboardFeaturesView.Notice3" = "鍵盤本身並毋會儲存系統剪貼板內容。";
+"IOSHomeTab.ClipboardFeaturesView.Notice4" = "撳「貼上」掣時，系統可能會彈提示，詢問是否允許貼上。";
+"IOSHomeTab.ClipboardFeaturesView.Notice5" = "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。";
 
-"Change Display Language" = "更改介面顯示語言";
-"title.change_display_language" = "介面顯示語言";
-"Keyboard Display Language" = "鍵盤介面顯示語言";
-"Keyboard Display Language Description" = "鍵盤介面顯示語言跟隨系統語言，無法另外設定。";
-"Main App Display Language" = "主應用程式介面顯示語言";
-"Main App Display Language Description 1" = "請首先確保本設備啓用咗多個語言。";
-"Main App Display Language Description 2" = "跳轉至設定App，然後爲粵拼App選擇偏好語言。";
+"IOSHomeTab.LabelTitle.ChangeDisplayLanguage" = "更改介面顯示語言";
+"IOSHomeTab.NavigationTitle.ChangeDisplayLanguage" = "介面顯示語言";
+"IOSHomeTab.ChangeDisplayLanguage.Heading.Keyboard" = "鍵盤介面顯示語言";
+"IOSHomeTab.ChangeDisplayLanguage.Body.Keyboard" = "鍵盤介面顯示語言跟隨系統語言，無法另外設定。";
+"IOSHomeTab.ChangeDisplayLanguage.Heading.MainApp" = "主應用程式介面顯示語言";
+"IOSHomeTab.ChangeDisplayLanguage.Body.MainApp.Row1" = "請首先確保本設備啓用咗多個語言。";
+"IOSHomeTab.ChangeDisplayLanguage.Body.MainApp.Row2" = "跳轉至設定App，然後爲粵拼App選擇偏好語言。";
 
-"FAQ" = "常問問題";
-"Can I use with external keyboards?" = "點解用毋到外置鍵盤？";
-"Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations." = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
-"What does “Allow Full Access” do?" = "開啓「全權取用」作何用？";
-"Enable a button on the keyboard for pasting texts from Clipboard" = "鍵盤個「貼上」掣，需要開啓權限，先可以獲得剪貼板內容";
-"Haptic Feedback" = "振動回應（Haptic Feedback）";
-"Paste texts from Clipboard" = "鍵盤個「貼上」掣";
-"All other features don't require Full Access" = "毋開啓「全權取用」毋會影響使用其他功能";
+"IOSHomeTab.LabelTitle.FAQ" = "常問問題";
+"IOSHomeTab.NavigationTitle.FAQ" = "常問問題";
+"IOSHomeTab.FAQ.Question.ExternalKeyboards" = "點解用毋到外置鍵盤？";
+"IOSHomeTab.FAQ.Answer.ExternalKeyboards" = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
+"IOSHomeTab.FAQ.Question.FullAccess" = "開啓「全權取用」作何用？";
+"IOSHomeTab.FAQ.Answer.FullAccess.Row1.Haptic" = "觸感回應（Haptic Feedback）";
+"IOSHomeTab.FAQ.Answer.FullAccess.Row2.Paste" = "鍵盤個「貼上」掣";
+"IOSHomeTab.FAQ.Footer.FullAccess" = "毋開啓「全權取用」毋會影響使用其他功能";
+"IOSHomeTab.FAQ.Question.TTS" = "點解我部機嘅文字語音朗讀毋正常？";
 
-"Privacy Notice" = "私隱佈告";
-"privacy.notice.1" = "鍵盤全程毋會訪問網絡";
-"privacy.notice.2" = "鍵盤係完全獨立嘅，同主應用程式之間毋會進行任何交流、分享";
-"privacy.notice.3" = "開啓「全權取用」權限係用來提供振動回應";
-"privacy.notice.4" = "鍵盤個「貼上」掣毋會收集任何剪貼板內容";
-"privacy.notice.footer" = "一句話講晒：本輸入法毋會收集個人資訊";
+"IOSHomeTab.LabelTitle.PrivacyNotice" = "私隱佈告";
+"IOSHomeTab.NavigationTitle.PrivacyNotice" = "私隱佈告";
+"IOSHomeTab.PrivacyNotice.Row1" = "鍵盤全程毋會訪問網絡";
+"IOSHomeTab.PrivacyNotice.Row2" = "鍵盤係完全獨立嘅，同主應用程式之間毋會進行任何交流、分享";
+"IOSHomeTab.PrivacyNotice.Row3" = "開啓「全權取用」權限係用來提供觸感回應";
+"IOSHomeTab.PrivacyNotice.Row4" = "鍵盤個「貼上」掣毋會收集任何剪貼板內容";
+"IOSHomeTab.PrivacyNotice.Footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 
 // MARK: - iOS Jyutping Tab

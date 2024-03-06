@@ -7,26 +7,26 @@ struct ClipboardFeaturesView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("ClipboardFeatures.Notice.Row0")
+                                Text("IOSHomeTab.ClipboardFeaturesView.Notice0")
                         }
                         Section {
-                                Text("ClipboardFeatures.Notice.Row1")
-                                Text("ClipboardFeatures.Notice.Row2")
-                                Text("ClipboardFeatures.Notice.Row3")
+                                Text("IOSHomeTab.ClipboardFeaturesView.Notice1")
+                                Text("IOSHomeTab.ClipboardFeaturesView.Notice2")
+                                Text("IOSHomeTab.ClipboardFeaturesView.Notice3")
                         }
                         Section {
                                 TextField("TextField.InputTextField", text: $inputText)
                         }
                         Section {
-                                Text("ClipboardFeatures.Notice.Row4")
-                                Text("ClipboardFeatures.Notice.Row5")
+                                Text("IOSHomeTab.ClipboardFeaturesView.Notice4")
+                                Text("IOSHomeTab.ClipboardFeaturesView.Notice5")
                         }
                         Section {
                                 GoToSettingsLinkView()
                         }
                 }
                 .textSelection(.enabled)
-                .navigationTitle("Clipboard Features")
+                .navigationTitle("IOSHomeTab.NavigationTitle.ClipboardFeatures")
                 .navigationBarTitleDisplayMode(.inline)
         }
 }
