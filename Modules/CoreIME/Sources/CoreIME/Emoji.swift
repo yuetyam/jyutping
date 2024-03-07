@@ -71,11 +71,11 @@ extension Engine {
         }
 
         public static func searchSymbols(text: String, segmentation: Segmentation) -> [Candidate] {
-                let regular: [Candidate] = match(text: text)
+                let regular: [Candidate] = match(text: text, input: text)
                 let textCount = text.count
-                let segmentation = segmentation.filter({ $0.length == textCount })
-                guard segmentation.maxLength > 0 else { return regular }
-                let matches = segmentation.map({ scheme -> [Candidate] in
+                let schemes = segmentation.filter({ $0.length == textCount })
+                guard !(schemes.isEmpty) else { return regular }
+                let matches = schemes.map({ scheme -> [Candidate] in
                         let pingText = scheme.map(\.origin).joined()
                         return match(text: pingText, input: text)
                 })
@@ -83,13 +83,12 @@ extension Engine {
                 return symbols.uniqued()
         }
 
-        private static func match(text: String, input: String? = nil) -> [Candidate] {
-                let inputText: String = input ?? text
+        private static func match(text: String, input: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let query = "SELECT category, codepoint, cantonese, romanization FROM symboltable WHERE ping = \(text.hash);"
+                let command: String = "SELECT category, codepoint, cantonese, romanization FROM symboltable WHERE ping = \(text.hash);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let categoryCode: Int = Int(sqlite3_column_int64(statement, 0))
                         let codepoint: String = String(cString: sqlite3_column_text(statement, 1))
@@ -97,7 +96,7 @@ extension Engine {
                         let romanization: String = String(cString: sqlite3_column_text(statement, 3))
                         if let symbolText = generateSymbol(from: codepoint) {
                                 let isEmoji: Bool = (categoryCode > 0) && (categoryCode < 9)
-                                let instance = Candidate(symbol: symbolText, cantonese: cantonese, romanization: romanization, input: inputText, isEmoji: isEmoji)
+                                let instance = Candidate(symbol: symbolText, cantonese: cantonese, romanization: romanization, input: input, isEmoji: isEmoji)
                                 candidates.append(instance)
                         }
                 }

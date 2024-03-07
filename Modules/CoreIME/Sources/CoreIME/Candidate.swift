@@ -42,6 +42,9 @@ public struct Candidate: Hashable {
         /// Formatted user input for pre-edit display
         public let mark: String
 
+        /// Rank. Smaller is preferred.
+        let order: Int
+
         /// Primary Initializer
         /// - Parameters:
         ///   - type: Candidate type.
@@ -57,6 +60,18 @@ public struct Candidate: Hashable {
                 self.romanization = romanization
                 self.input = input
                 self.mark = mark ?? input
+                self.order = 0
+        }
+
+        /// CoreIME Internal Initializer
+        init(text: String, romanization: String, input: String, mark: String, order: Int) {
+                self.type = .cantonese
+                self.text = text
+                self.lexiconText = text
+                self.romanization = romanization
+                self.input = input
+                self.mark = mark
+                self.order = order
         }
 
         /// Create a Candidate with an emoji or a symbol
@@ -73,6 +88,7 @@ public struct Candidate: Hashable {
                 self.romanization = romanization
                 self.input = input
                 self.mark = input
+                self.order = 0
         }
 
         /// Create a Candidate for keyboard compose
@@ -88,6 +104,7 @@ public struct Candidate: Hashable {
                 self.romanization = secondaryComment ?? ""
                 self.input = input
                 self.mark = input
+                self.order = 0
         }
 
         /// type == .cantonese
@@ -130,7 +147,8 @@ public struct Candidate: Hashable {
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
                 let newRomanization: String = lhs.romanization + " " + rhs.romanization
                 let newInput: String = lhs.input + rhs.input
-                return Candidate(text: newText, lexiconText: newLexiconText, romanization: newRomanization, input: newInput)
+                let newMark: String = lhs.mark + " " + rhs.mark
+                return Candidate(text: newText, lexiconText: newLexiconText, romanization: newRomanization, input: newInput, mark: newMark)
         }
 }
 
@@ -143,6 +161,7 @@ extension Array where Element == Candidate {
                 let lexiconText: String = map(\.lexiconText).joined()
                 let romanization: String = map(\.romanization).joined(separator: " ")
                 let input: String = map(\.input).joined()
-                return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input)
+                let mark: String = map(\.mark).joined(separator: " ")
+                return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark)
         }
 }

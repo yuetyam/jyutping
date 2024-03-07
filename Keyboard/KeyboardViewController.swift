@@ -526,32 +526,23 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let processingText: String = bufferText.toneConverted()
                 let segmentation = Segmentor.segment(text: processingText)
                 let userLexiconCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
+                let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
+                let asap: Bool = !(userLexiconCandidates.isEmpty)
+                let engineCandidates: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
                 let text2mark: String = {
                         if let mark = userLexiconCandidates.first?.mark { return mark }
                         let isLetterOnly: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil
                         guard isLetterOnly else { return processingText.formattedForMark() }
+                        let userInputTextCount: Int = processingText.count
+                        if let firstCandidate = engineCandidates.first, firstCandidate.input.count == userInputTextCount { return firstCandidate.mark }
                         guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
                         let leadingLength: Int = bestScheme.length
                         let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
-                        guard leadingLength != processingText.count else { return leadingText }
+                        guard leadingLength != userInputTextCount else { return leadingText }
                         let tailText = processingText.dropFirst(leadingLength)
                         return leadingText + String.space + tailText
                 }()
                 self.text2mark = text2mark
-                let engineCandidates: [Candidate] = {
-                        let suggestion: [Candidate] = userLexiconCandidates.isEmpty ? Engine.suggest(text: processingText, segmentation: segmentation) : Engine.fastSuggest(text: processingText, segmentation: segmentation)
-                        let shouldContinue: Bool = Options.isEmojiSuggestionsOn && !(suggestion.isEmpty) && selectedCandidates.isEmpty
-                        guard shouldContinue else { return suggestion }
-                        let symbols: [Candidate] = Engine.searchSymbols(text: bufferText, segmentation: segmentation)
-                        guard !(symbols.isEmpty) else { return suggestion }
-                        var items = suggestion
-                        for symbol in symbols.reversed() {
-                                if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
-                                        items.insert(symbol, at: index + 1)
-                                }
-                        }
-                        return items
-                }()
                 candidates = (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
         private func pinyinReverseLookup() {

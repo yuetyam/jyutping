@@ -30,7 +30,15 @@ public struct Engine {
 }
 
 extension Engine {
-        public static func fastSuggest(text: String, segmentation: Segmentation) -> [Candidate] {
+
+        /// Suggestion
+        /// - Parameters:
+        ///   - text: User input text.
+        ///   - segmentation: Segmentation of user input text.
+        ///   - needsSymbols: Needs Emoji/Symbol Candidates.
+        ///   - asap: Should be fast, shouldn't go deep.
+        /// - Returns: Candidates
+        public static func suggest(text: String, segmentation: Segmentation, needsSymbols: Bool, asap: Bool) -> [Candidate] {
                 switch text.count {
                 case 0:
                         return []
@@ -44,36 +52,14 @@ extension Engine {
                                 return shortcut(text: text)
                         }
                 default:
+                        guard asap else { return dispatch(text: text, segmentation: segmentation, needsSymbols: needsSymbols) }
                         guard segmentation.maxLength > 0 else { return processVerbatim(text: text) }
-                        let fullMatch = match(text: text, input: text)
-                        let fullShortcut = shortcut(text: text)
-                        let searches = match(segmentation: segmentation)
-                        let textCount = text.count
-                        let perfectSearches = searches.filter({ $0.input.count == textCount })
-                        let candidates = (fullMatch + perfectSearches + fullShortcut + searches).uniqued()
+                        let candidates = query(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
                         return candidates.isEmpty ? processVerbatim(text: text) : candidates
                 }
         }
 
-        public static func suggest(text: String, segmentation: Segmentation) -> [Candidate] {
-                switch text.count {
-                case 0:
-                        return []
-                case 1:
-                        switch text {
-                        case "a":
-                                return match(text: text, input: text) + match(text: "aa", input: text) + shortcut(text: text)
-                        case "o", "m", "e":
-                                return match(text: text, input: text) + shortcut(text: text)
-                        default:
-                                return shortcut(text: text)
-                        }
-                default:
-                        return dispatch(text: text, segmentation: segmentation)
-                }
-        }
-
-        private static func dispatch(text: String, segmentation: Segmentation) -> [Candidate] {
+        private static func dispatch(text: String, segmentation: Segmentation, needsSymbols: Bool) -> [Candidate] {
                 switch (text.hasSeparators, text.hasTones) {
                 case (true, true):
                         let syllable = text.removedSeparatorsTones()
@@ -82,7 +68,7 @@ extension Engine {
                         return filtered
                 case (false, true):
                         let textTones = text.tones
-                        let candidates: [Candidate] = match(segmentation: segmentation)
+                        let candidates: [Candidate] = search(text: text, segmentation: segmentation)
                         let qualified = candidates.map({ item -> Candidate? in
                                 let continuous = item.romanization.removedSpaces()
                                 let continuousTones = continuous.tones
@@ -140,7 +126,7 @@ extension Engine {
                         let textParts = text.split(separator: "'")
                         let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
                         let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
-                        let candidates: [Candidate] = match(segmentation: segmentation)
+                        let candidates: [Candidate] = search(text: text, segmentation: segmentation)
                         let qualified = candidates.map({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: " ")
                                 guard syllables != textParts else { return Candidate(text: item.text, romanization: item.romanization, input: text) }
@@ -195,8 +181,46 @@ extension Engine {
                         return qualified.compactMap({ $0 })
                 case (false, false):
                         guard segmentation.maxLength > 0 else { return processVerbatim(text: text) }
-                        return process(text: text, segmentation: segmentation)
+                        return process(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
                 }
+        }
+
+        private static func process(text: String, segmentation: Segmentation, needsSymbols: Bool, limit: Int? = nil) -> [Candidate] {
+                guard canProcess(text) else { return [] }
+                let textCount = text.count
+                let primary: [Candidate] = query(text: text, segmentation: segmentation, needsSymbols: needsSymbols, limit: limit)
+                guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: limit) }
+                guard firstInputCount != textCount else { return primary }
+                let prefixes: [Candidate] = {
+                        let shortcuts = segmentation.map({ scheme -> [Candidate] in
+                                let tail = text.dropFirst(scheme.length)
+                                guard let lastAnchor = tail.first else { return [] }
+                                let schemeAnchors = scheme.compactMap(\.text.first)
+                                let anchors: String = String(schemeAnchors + [lastAnchor])
+                                let text2mark: String = scheme.map(\.text).joined(separator: " ") + " " + tail
+                                return shortcut(text: anchors, limit: limit)
+                                        .filter({ $0.romanization.removedTones().hasPrefix(text2mark) })
+                                        .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text, mark: text2mark) })
+                        })
+                        return shortcuts.flatMap({ $0 })
+                }()
+                guard prefixes.isEmpty else { return prefixes + primary }
+                let headingTexts = primary.map(\.input).uniqued()
+                let concatenated = headingTexts.map { headingText -> Array<Candidate>.SubSequence in
+                        let headingInputCount = headingText.count
+                        let tailText = String(text.dropFirst(headingInputCount))
+                        guard canProcess(tailText) else { return [] }
+                        let tailSegmentation = Segmentor.segment(text: tailText)
+                        let tailCandidates = process(text: tailText, segmentation: tailSegmentation, needsSymbols: needsSymbols, limit: 4)
+                        guard !(tailCandidates.isEmpty) else { return [] }
+                        let qualified = primary.filter({ $0.input == headingText }).prefix(3)
+                        let combines = tailCandidates.map { tail -> [Candidate] in
+                                return qualified.map({ $0 + tail })
+                        }
+                        return combines.flatMap({ $0 }).prefix(8)
+                }
+                let preferredConcatenated = concatenated.flatMap({ $0 }).filter({ $0.input.count > firstInputCount }).uniqued().preferred(with: text).prefix(1)
+                return preferredConcatenated + primary
         }
 
         private static func processVerbatim(text: String, limit: Int? = nil) -> [Candidate] {
@@ -208,55 +232,54 @@ extension Engine {
                 return rounds.flatMap({ $0 }).uniqued()
         }
 
-        private static func process(text: String, segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
-                guard canProcess(text) else { return [] }
+        private static func query(text: String, segmentation: Segmentation, needsSymbols: Bool, limit: Int? = nil) -> [Candidate] {
                 let textCount = text.count
-                let fullMatch = match(text: text, input: text, limit: limit)
-                let fullShortcut = shortcut(text: text, limit: limit)
-                let candidates = match(segmentation: segmentation, limit: limit)
-                let perfectCandidates = candidates.filter({ $0.input.count == textCount })
-                let primary: [Candidate] = (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
-                guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: 4) }
-                guard firstInputCount != textCount else { return primary }
-                let prefixes: [Candidate] = {
-                        guard segmentation.maxLength != textCount else { return [] }
-                        let anchorsArray: [String] = segmentation.map({ scheme -> String in
-                                let last = text.dropFirst(scheme.length).first
-                                let schemeAnchors = scheme.map(\.text.first)
-                                let anchors = (schemeAnchors + [last]).compactMap({ $0 })
-                                return String(anchors)
-                        })
-                        let prefixCandidates: [Candidate] = anchorsArray.map({ shortcut(text: $0, limit: limit) }).flatMap({ $0 })
-                                .filter({ $0.romanization.removedSpacesTones().hasPrefix(text) })
-                                .map({ Candidate(text: $0.text, romanization: $0.romanization, input: text) })
-                        return prefixCandidates
-                }()
-                guard prefixes.isEmpty else { return prefixes + primary }
-                let headingTexts = primary.map(\.input).uniqued()
-                let concatenated = headingTexts.map { headingText -> Array<Candidate>.SubSequence in
-                        let headingInputCount = headingText.count
-                        let tailText = String(text.dropFirst(headingInputCount))
-                        guard canProcess(tailText) else { return [] }
-                        let tailSegmentation = Segmentor.segment(text: tailText)
-                        let tailCandidates = process(text: tailText, segmentation: tailSegmentation, limit: 4)
-                        guard !(tailCandidates.isEmpty) else { return [] }
-                        let qualified = primary.filter({ $0.input == headingText }).prefix(3)
-                        let combines = tailCandidates.map { tail -> [Candidate] in
-                                return qualified.map({ $0 + tail })
+                let searches = search(text: text, segmentation: segmentation, limit: limit)
+                let preferredSearches = searches.filter({ $0.input.count == textCount })
+                let matched = match(text: text, input: text, limit: limit)
+                let regularCandidates: [Candidate] = {
+                        var items = matched + preferredSearches
+                        guard !(items.isEmpty) else { return items }
+                        guard limit == nil else { return items }
+                        guard needsSymbols else { return items }
+                        let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
+                        guard !(symbols.isEmpty) else { return items }
+                        for symbol in symbols.reversed() {
+                                if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
+                                        items.insert(symbol, at: index + 1)
+                                }
                         }
-                        return combines.flatMap({ $0 }).prefix(8)
-                }
-                let preferredConcatenated = concatenated.flatMap({ $0 }).filter({ $0.input.count > firstInputCount }).uniqued().preferred(with: text).prefix(4)
-                return preferredConcatenated + primary
+                        return items
+                }()
+                return (regularCandidates + shortcut(text: text, limit: limit) + searches).uniqued()
         }
 
-        private static func match(segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
-                let matches = segmentation.map({ scheme -> [Candidate] in
-                        let input = scheme.map(\.text).joined()
-                        let ping = scheme.map(\.origin).joined()
-                        return match(text: ping, input: input, limit: limit)
-                })
-                return matches.flatMap({ $0 })
+        private static func search(text: String, segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
+                let textCount: Int = text.count
+                let perfectSchemes = segmentation.filter({ $0.length == textCount })
+                if !(perfectSchemes.isEmpty) {
+                        let matches = perfectSchemes.map({ scheme -> [Candidate] in
+                                var queries: [[Candidate]] = []
+                                for number in (0..<scheme.count) {
+                                        let slice = scheme.dropLast(number)
+                                        let pingText = slice.map(\.origin).joined()
+                                        let inputText = slice.map(\.text).joined()
+                                        let text2mark = slice.map(\.text).joined(separator: " ")
+                                        let matched = match(text: pingText, input: inputText, mark: text2mark, limit: limit)
+                                        queries.append(matched)
+                                }
+                                return queries.flatMap({ $0 })
+                        })
+                        return matches.flatMap({ $0 }).ordered(with: textCount)
+                } else {
+                        let matches = segmentation.map({ scheme -> [Candidate] in
+                                let pingText = scheme.map(\.origin).joined()
+                                let inputText = scheme.map(\.text).joined()
+                                let text2mark = scheme.map(\.text).joined(separator: " ")
+                                return match(text: pingText, input: inputText, mark: text2mark, limit: limit)
+                        })
+                        return matches.flatMap({ $0 }).ordered(with: textCount)
+                }
         }
 
 
@@ -278,17 +301,19 @@ extension Engine {
                 }
                 return candidates
         }
-        private static func match(text: String, input: String, limit: Int? = nil) -> [Candidate] {
+        private static func match(text: String, input: String, mark: String? = nil, limit: Int? = nil) -> [Candidate] {
                 var candidates: [Candidate] = []
                 let limit: Int = limit ?? -1
-                let query: String = "SELECT word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
+                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let word: String = String(cString: sqlite3_column_text(statement, 0))
-                        let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                        let candidate = Candidate(text: word, romanization: romanization, input: input)
+                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let mark: String = mark ?? romanization.removedTones()
+                        let candidate = Candidate(text: word, romanization: romanization, input: input, mark: mark, order: order)
                         candidates.append(candidate)
                 }
                 return candidates
@@ -407,7 +432,7 @@ private extension Array where Element == Candidate {
         /// - Parameter text: Input text
         /// - Returns: Preferred Candidates
         func preferred(with text: String) -> [Candidate] {
-                let sorted = self.sorted { (lhs, rhs) -> Bool in
+                let sortedSelf = self.sorted { (lhs, rhs) -> Bool in
                         let lhsInputCount: Int = lhs.input.count
                         let rhsInputCount: Int = rhs.input.count
                         guard lhsInputCount == rhsInputCount else {
@@ -415,7 +440,24 @@ private extension Array where Element == Candidate {
                         }
                         return lhs.text.count < rhs.text.count
                 }
-                let matched = sorted.filter({ $0.romanization.removedSpacesTones() == text })
-                return matched.isEmpty ? sorted : matched
+                let matched = sortedSelf.filter({ $0.romanization.removedSpacesTones() == text })
+                return matched.isEmpty ? sortedSelf : matched
+        }
+
+        /// Sort Candidates with UserInputTextCount and Candidate.order
+        /// - Parameter textCount: User input text count
+        /// - Returns: Sorted Candidates
+        func ordered(with textCount: Int) -> [Candidate] {
+                return self.sorted { (lhs, rhs) -> Bool in
+                        let lhsInputCount: Int = lhs.input.count
+                        let rhsInputCount: Int = rhs.input.count
+                        if lhsInputCount == textCount && rhsInputCount != textCount {
+                                return true
+                        } else if lhs.order < rhs.order - 50000 {
+                                return true
+                        } else {
+                                return lhsInputCount > rhsInputCount
+                        }
+                }
         }
 }
