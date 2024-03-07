@@ -4,10 +4,14 @@ import CoreIME
 
 final class KeyboardViewController: UIInputViewController, ObservableObject {
 
-        override func viewDidLoad() {
-                super.viewDidLoad()
+        private lazy var isKeyboardPrepared: Bool = false
+        private func prepareKeyboard() {
+                guard !isKeyboardPrepared else { return }
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = self.children.map({ $0.removeFromParent() })
+                UserLexicon.prepare()
+                Engine.prepare()
+                instantiateHapticFeedbacks()
                 keyboardInterface = adoptKeyboardInterface()
                 updateKeyboardSize()
                 updateSpaceKeyText()
@@ -23,17 +27,21 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 ])
                 motherBoard.view.backgroundColor = view.backgroundColor
                 self.addChild(motherBoard)
+                isKeyboardPrepared = true
+        }
+        override func viewDidLoad() {
+                super.viewDidLoad()
+                prepareKeyboard()
         }
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
-                UserLexicon.prepare()
-                Engine.prepare()
-                instantiateHapticFeedbacks()
-                updateSpaceKeyText()
-                updateReturnKeyText()
+                prepareKeyboard()
         }
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
+                _ = view.subviews.map({ $0.removeFromSuperview() })
+                _ = self.children.map({ $0.removeFromParent() })
+                isKeyboardPrepared = false
                 releaseHapticFeedbacks()
                 selectedCandidates = []
                 candidates = []
@@ -43,7 +51,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
-                let didUserClearTextFiled: Bool = inputStage.isBuffering && !textDocumentProxy.hasText
+                let didUserClearTextFiled: Bool = inputStage.isBuffering && !(textDocumentProxy.hasText)
                 if didUserClearTextFiled {
                         clearBuffer()
                 }
