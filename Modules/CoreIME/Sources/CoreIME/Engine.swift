@@ -192,6 +192,7 @@ extension Engine {
                 guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: limit) }
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [Candidate] = {
+                        guard segmentation.maxLength < textCount else { return [] }
                         let shortcuts = segmentation.map({ scheme -> [Candidate] in
                                 let tail = text.dropFirst(scheme.length)
                                 guard let lastAnchor = tail.first else { return [] }
@@ -205,21 +206,21 @@ extension Engine {
                         return shortcuts.flatMap({ $0 })
                 }()
                 guard prefixes.isEmpty else { return prefixes + primary }
-                let headingTexts = primary.map(\.input).uniqued()
-                let concatenated = headingTexts.map { headingText -> Array<Candidate>.SubSequence in
-                        let headingInputCount = headingText.count
-                        let tailText = String(text.dropFirst(headingInputCount))
+                let headTexts = primary.map(\.input).uniqued()
+                let concatenated = headTexts.map { headText -> [Candidate] in
+                        let headInputCount = headText.count
+                        let tailText = String(text.dropFirst(headInputCount))
                         guard canProcess(tailText) else { return [] }
                         let tailSegmentation = Segmentor.segment(text: tailText)
-                        let tailCandidates = process(text: tailText, segmentation: tailSegmentation, needsSymbols: needsSymbols, limit: 4)
+                        let tailCandidates = process(text: tailText, segmentation: tailSegmentation, needsSymbols: needsSymbols, limit: 8).prefix(100)
                         guard !(tailCandidates.isEmpty) else { return [] }
-                        let qualified = primary.filter({ $0.input == headingText }).prefix(3)
-                        let combines = tailCandidates.map { tail -> [Candidate] in
-                                return qualified.map({ $0 + tail })
-                        }
-                        return combines.flatMap({ $0 }).prefix(8)
+                        let headCandidates = primary.filter({ $0.input == headText }).prefix(8)
+                        let combines = headCandidates.map({ head -> [Candidate] in
+                                return tailCandidates.map({ head + $0 })
+                        })
+                        return combines.flatMap({ $0 })
                 }
-                let preferredConcatenated = concatenated.flatMap({ $0 }).filter({ $0.input.count > firstInputCount }).uniqued().preferred(with: text).prefix(1)
+                let preferredConcatenated = concatenated.flatMap({ $0 }).uniqued().preferred(with: text).prefix(1)
                 return preferredConcatenated + primary
         }
 
