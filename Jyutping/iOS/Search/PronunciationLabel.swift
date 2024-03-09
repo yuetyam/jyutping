@@ -10,6 +10,7 @@ struct PronunciationLabel: View {
                 self.romanization = pronunciation.romanization
                 self.homophoneText = pronunciation.homophones.isEmpty ? nil : pronunciation.homophones.joined(separator: String.space)
                 self.interpretation = pronunciation.interpretation
+                self.collocationText = pronunciation.collocations.isEmpty ? nil : pronunciation.collocations.prefix(5).joined(separator: String.space)
                 let isSingular: Bool = romanization.filter({ !($0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit) }).isEmpty
                 self.isSingular = isSingular
                 self.ipa = isSingular ? Syllable2IPA.IPAText(romanization) : nil
@@ -18,6 +19,7 @@ struct PronunciationLabel: View {
         private let romanization: String
         private let homophoneText: String?
         private let interpretation: String?
+        private let collocationText: String?
 
         private let isSingular: Bool
         private let ipa: String?
@@ -49,6 +51,14 @@ struct PronunciationLabel: View {
                                         Text.separator
                                         Text(verbatim: interpretation)
                                 }
+                        }
+                        if let collocationText {
+                                HStack {
+                                        Text(verbatim: "例詞")
+                                        Text.separator
+                                        Text(verbatim: collocationText)
+                                }
+                                .padding(.top, 2)
                         }
                 }
                 .font(.copilot)

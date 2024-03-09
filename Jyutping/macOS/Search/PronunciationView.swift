@@ -10,6 +10,7 @@ struct PronunciationView: View {
                 self.romanization = pronunciation.romanization
                 self.homophoneText = pronunciation.homophones.isEmpty ? nil : pronunciation.homophones.joined(separator: String.space)
                 self.interpretation = pronunciation.interpretation
+                self.collocationText = pronunciation.collocations.isEmpty ? nil : pronunciation.collocations.prefix(10).joined(separator: String.space)
                 let isSingular: Bool = romanization.filter({ !($0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit) }).isEmpty
                 self.ipa = isSingular ? Syllable2IPA.IPAText(romanization) : nil
         }
@@ -17,10 +18,11 @@ struct PronunciationView: View {
         private let romanization: String
         private let homophoneText: String?
         private let interpretation: String?
+        private let collocationText: String?
         private let ipa: String?
 
         var body: some View {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 8) {
                         HStack(spacing: 16) {
                                 HStack {
                                         Text(verbatim: "讀音")
@@ -45,6 +47,13 @@ struct PronunciationView: View {
                                         Text(verbatim: "釋義")
                                         Text.separator
                                         Text(verbatim: interpretation)
+                                }
+                        }
+                        if let collocationText {
+                                HStack {
+                                        Text(verbatim: "例詞")
+                                        Text.separator
+                                        Text(verbatim: collocationText)
                                 }
                         }
                 }
