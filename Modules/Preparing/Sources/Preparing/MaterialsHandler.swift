@@ -8,6 +8,7 @@ struct MaterialsHandler {
         static func prepare() {
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createJyutpingTable()
+                createCollocationTable()
                 createYingWaaTable()
                 createChoHokTable()
                 createFanWanTable()
@@ -59,6 +60,9 @@ private extension MaterialsHandler {
                         "CREATE INDEX jyutpingwordindex ON jyutpingtable(word);",
                         "CREATE INDEX jyutpingromanizationindex ON jyutpingtable(romanization);",
 
+                        "CREATE INDEX collocationwordindex ON collocationtable(word);",
+                        "CREATE INDEX collocationromanizationindex ON collocationtable(romanization);",
+
                         "CREATE INDEX yingwaacodeindex ON yingwaatable(code);",
                         "CREATE INDEX yingwaaromanizationindex ON yingwaatable(romanization);",
 
@@ -78,7 +82,32 @@ private extension MaterialsHandler {
                 }
         }
 }
-
+private extension MaterialsHandler {
+        static func createCollocationTable() {
+                let createTable: String = "CREATE TABLE collocationtable(word TEXT NOT NULL, romanization TEXT NOT NULL, collocation TEXT NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                guard let url = Bundle.module.url(forResource: "collocation", withExtension: "txt") else { return }
+                guard let content = try? String(contentsOf: url) else { return }
+                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+                let entries = sourceLines.map { sourceLine -> String? in
+                        let parts = sourceLine.split(separator: "\t")
+                        guard parts.count == 3 else { return nil }
+                        let word = parts[0]
+                        let romanization = parts[1]
+                        let collocation = parts[2]
+                        return "('\(word)', '\(romanization)', '\(collocation)')"
+                }
+                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let insert: String = "INSERT INTO collocationtable (word, romanization, collocation) VALUES \(values);"
+                var insertStatement: OpaquePointer? = nil
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+}
 private extension MaterialsHandler {
         static func createYingWaaTable() {
                 let createTable: String = "CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationmark TEXT NOT NULL, interpretation TEXT NOT NULL);"
