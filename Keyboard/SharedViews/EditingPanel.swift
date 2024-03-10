@@ -300,7 +300,7 @@ struct EditingPanel: View {
                                                 .padding(.vertical, 6)
                                                 .padding(.horizontal, 3)
                                         VStack(spacing: 4) {
-                                                Image(systemName: "EditingPanel.Clear")
+                                                Image(systemName: "clear")
                                                 Text("EditingPanel.Clear").font(.caption2)
                                         }
                                 }

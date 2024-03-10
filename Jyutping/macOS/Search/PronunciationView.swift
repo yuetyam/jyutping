@@ -7,11 +7,16 @@ import CommonExtensions
 struct PronunciationView: View {
 
         init(_ pronunciation: Pronunciation) {
-                self.romanization = pronunciation.romanization
-                self.homophoneText = pronunciation.homophones.isEmpty ? nil : pronunciation.homophones.joined(separator: String.space)
+                let romanization: String = pronunciation.romanization
+                let homophones: [String] = pronunciation.homophones
+                let collocations: [String] = pronunciation.collocations
+                self.romanization = romanization
+                self.homophoneText = homophones.isEmpty ? nil : homophones.joined(separator: String.space)
                 self.interpretation = pronunciation.interpretation
-                self.collocationText = pronunciation.collocations.isEmpty ? nil : pronunciation.collocations.prefix(10).joined(separator: String.space)
-                let isSingular: Bool = romanization.filter({ !($0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit) }).isEmpty
+                self.collocationText = collocations.isEmpty ? nil : collocations.prefix(8).joined(separator: String.space)
+                self.collocationSpeechText = collocations.isEmpty ? nil : collocations.prefix(8).joined(separator: "，")
+                let isSingular: Bool = romanization.filter({ $0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit }).count == romanization.count
+                self.isSingular = isSingular
                 self.ipa = isSingular ? Syllable2IPA.IPAText(romanization) : nil
         }
 
@@ -19,10 +24,12 @@ struct PronunciationView: View {
         private let homophoneText: String?
         private let interpretation: String?
         private let collocationText: String?
+        private let collocationSpeechText: String?
+        private let isSingular: Bool
         private let ipa: String?
 
         var body: some View {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack {
                                         Text(verbatim: "讀音")
@@ -54,6 +61,10 @@ struct PronunciationView: View {
                                         Text(verbatim: "例詞")
                                         Text.separator
                                         Text(verbatim: collocationText)
+                                        Spacer()
+                                        Speaker {
+                                                Speech.speak(collocationSpeechText ?? collocationText, isRomanization: false)
+                                        }
                                 }
                         }
                 }

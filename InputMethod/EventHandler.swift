@@ -200,8 +200,7 @@ extension JyutpingInputController {
                         case .cantonese:
                                 if inputStage.isBuffering {
                                         guard let selectedItem = appContext.displayCandidates.fetch(index) else { return true }
-                                        let text = selectedItem.text
-                                        client?.insert(text)
+                                        client?.insert(selectedItem.text)
                                         aftercareSelection(selectedItem)
                                         return true
                                 } else {
