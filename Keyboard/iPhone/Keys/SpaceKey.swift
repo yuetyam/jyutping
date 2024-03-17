@@ -50,7 +50,7 @@ struct SpaceKey: View {
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { value, touched, transaction in
                                 if !touched {
-                                        AudioFeedback.inputed()
+                                        AudioFeedback.modified()
                                         context.triggerHapticFeedback()
                                         touched = true
                                         context.updateTouchedLocation(to: value.startLocation)
