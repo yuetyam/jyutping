@@ -12,7 +12,7 @@ private extension DataMaster {
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return entries }
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        // // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
+                        // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 2))
                         let initial: String = String(cString: sqlite3_column_text(statement, 3))
@@ -55,7 +55,7 @@ public struct ChoHokYuetYamCitYiu: Hashable {
                 self.faancit = faanciText
                 self.romanization = romanization
                 self.ipa = OldCantonese.IPA(for: romanization)
-                self.jyutping = OldCantonese.jyutping(for: romanization)
+                self.jyutping = romanization
                 self.homophones = homophones
         }
 

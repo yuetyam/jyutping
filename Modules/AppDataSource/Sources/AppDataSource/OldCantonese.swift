@@ -1,11 +1,3 @@
-extension OldCantonese {
-        static func jyutping(for syllable: String) -> String {
-                return syllable.replacingOccurrences(of: "^(z|c|s)h", with: "$1", options: .regularExpression)
-                        .replacingOccurrences(of: "^nj", with: "j", options: .regularExpression)
-                        .replacingOccurrences(of: "o(m|p)$", with: "a$1", options: .regularExpression)
-        }
-}
-
 struct OldCantonese {
 
         static func IPA(for syllable: String) -> String {

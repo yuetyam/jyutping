@@ -101,7 +101,7 @@
 "IOSHomeTab.LabelTitle.TextToSpeech" = "文字語音朗讀";
 "IOSHomeTab.NavigationTitle.TextToSpeech" = "文字語音朗讀";
 "IOSHomeTab.Text2Speech.Notice0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
-"IOSHomeTab.Text2Speech.Notice1" = "如果本設備處於靜音模式，文字語音朗讀可能會冇聲音。";
+"IOSHomeTab.Text2Speech.Notice1" = "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。";
 "IOSHomeTab.Text2Speech.Notice2" = "爲保證發音質素，請前往 **設定** → **一般** → **語言與地區**，添加 **繁體中文(香港)** 語言。";
 "IOSHomeTab.Text2Speech.Notice3" = "爲提高發音質素，請前往 **設定** → **輔助使用** → **旁白** → **語音**，添加 **繁體中文(香港)** 語音。";
 

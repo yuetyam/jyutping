@@ -19,7 +19,7 @@ public struct YingWaaFanWan: Hashable {
                 self.pronunciationMark = YingWaaFanWan.handlePronunciationMark(of: pronunciationMark)
                 self.interpretation = (interpretation == "X") ? nil : interpretation
                 self.ipa = OldCantonese.IPA(for: romanization)
-                self.jyutping = OldCantonese.jyutping(for: romanization)
+                self.jyutping = romanization
                 self.homophones = homophones
         }
 

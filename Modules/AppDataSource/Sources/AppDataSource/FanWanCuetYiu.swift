@@ -49,8 +49,7 @@ public struct FanWanCuetYiu: Hashable {
         fileprivate init(word: String, romanization: String, initial: String, final: String, yamyeung: String, tone: String, rhyme: String, interpretation: String) {
                 let convertedRomanization: String = romanization
                         .replacingOccurrences(of: "7", with: "1", options: [.anchored, .backwards])
-                        .replacingOccurrences(of: "aa(p|t|k)8$", with: "aa$13", options: .regularExpression)
-                        .replacingOccurrences(of: "8", with: "1", options: [.anchored, .backwards])
+                        .replacingOccurrences(of: "8", with: "3", options: [.anchored, .backwards])
                         .replacingOccurrences(of: "9", with: "6", options: [.anchored, .backwards])
                 let processedInterpretation: String = interpretation == "X" ? "(None)" : interpretation
                 let abstract: String = "\(initial)母　\(final)韻　\(yamyeung)\(tone)　\(rhyme)小韻"
@@ -64,7 +63,7 @@ public struct FanWanCuetYiu: Hashable {
                 self.interpretation = processedInterpretation
                 self.abstract = abstract
                 self.ipa = OldCantonese.IPA(for: convertedRomanization)
-                self.jyutping = OldCantonese.jyutping(for: convertedRomanization)
+                self.jyutping = convertedRomanization
                 self.homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != word })
         }
 

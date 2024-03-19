@@ -58,7 +58,7 @@ struct PronunciationView: View {
                         }
                         if let collocationText {
                                 HStack {
-                                        Text(verbatim: "例詞")
+                                        Text(verbatim: "詞例")
                                         Text.separator
                                         Text(verbatim: collocationText)
                                         Spacer()
