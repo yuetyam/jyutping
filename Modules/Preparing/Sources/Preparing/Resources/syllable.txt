@@ -5,10 +5,8 @@
 785660	ai	ai
 785670	ak	ak
 785680	am	am
-785685	an	an
 785695	ap	ap
 785705	ar	aa
-785715	at	at
 785720	au	au
 786905	ba	baa
 786975	bo	bo
@@ -20,7 +18,6 @@
 789495	de	de
 789515	di	di
 789545	do	do
-790800	ei	ei
 792045	fa	faa
 792115	fo	fo
 792145	fu	fu

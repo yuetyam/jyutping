@@ -98,8 +98,6 @@
 40232	鴨	ngaap3	ngáp꜆	OFTEN_PRO	X
 25276	押	aap3	áp꜆	X	X
 25276	押	ngaap3	ngáp꜆	OFTEN_PRO	X
-9675	○	at1	at꜆	X	A colloquial word. To thrust in, to put into, as a purse or drawer; [at꜆ lok꜇] put it in; [at꜆ ꜃k‘ü iú꜄] he must want it; make him take it
-9675	○	ngat1	ngat꜆	OFTEN_PRO	X
 36943	遏	aat3	át꜆	X	X
 36943	遏	ngaat3	ngát꜆	OFTEN_PRO	X
 25276	押	aat3	át꜆	X	X
@@ -1037,7 +1035,6 @@
 22602	塊	faai3	fái꜄	X	X
 20608	傀	faai3	fái꜄	X	X
 22130	噲	faai3	fái꜄	X	X
-9675	○	faak3	fák꜆	X	A colloquial word. Top whip; to beat with a flat board; to beat up, as eggs or jelly; [fák꜆ ꜀kon tseng꜅] thrash it clean, as a carpet; [fák꜆ ꜂t‘ung], the tub into which grain is thrashed
 29071	熏	fan1	꜀fan	X	X
 21234	勲	fan1	꜀fan	X	X
 26331	曛	fan1	꜀fan	X	X
@@ -1183,13 +1180,8 @@
 35513	誹	fi2	꜂fí	X	X
 29394	狒	fi6	fí꜅	X	X
 32737	翡	fi6	fí꜅	X	X
-9675	○	fit1	fít꜆	X	A colloquial word. To whip, to spank, to punish
-9675	○	fik1	fik꜆	X	To brush off (as a fly); [fik꜆ ꜀hoi], brush it off!
 134245	𠱥	fik1	fik꜆	X	A colloquial word. Seems to be a mispronunciation of [fat꜆]; [꜀fá ꜀fá fik꜆ fik꜆] fickle, inconstant, fitful, never finishing anything
 134245	𠱥	jit6	ít꜇	X	Wrangling, noisy
-9675	○	fing1	꜀fing	X	A colloquial word. Confused, tangled; [꜀fing kòm꜄ lün꜅] all in disorder, as one moving; touzled, as hair
-9675	○	fing3	fing꜄	X	A colloquial word. A slap with the hand; [tái꜅] pa2 ~] a smart slap
-9675	○	fing6	fing꜅	X	A colloquial word. To vibrate, to swing, to dandle, as the end of a rope; to sprinkle; to snap away; to shake off, as ink out of a pen; [fing꜅ kwo꜄ ꜁lai] yerk it (as the cue) forward
 25465	捹	fing6	fing꜅	X	To swing; to shake in the wind; [꜁t‘iú ꜁t‘iú fing꜅] to hang and swing; [fing꜅ tik꜆ ꜂shui ꜁lai], sprinkle a little water; [fing꜅ lat꜆] shake it off
 25465	捹	ban3	pan꜄	X	The hands rapidly moving
 31185	科	fo1	꜀fo	X	X
@@ -1526,7 +1518,6 @@
 30218	瘊	hau4	꜁hau	X	X
 183034	𬫺	hau4	꜁hau	X	X
 21475	口	hau2	꜂hau	X	X
-9675	○	hau3	hau꜄	X	A colloquial name for a weaver’s reed or slaie
 24460	後	hau6	hau꜅	X	X
 21518	后	hau6	hau꜅	X	X
 36869	逅	hau6	hau꜅	X	X
@@ -1550,7 +1541,6 @@
 21177	効	haau6	háu꜅	X	X
 24660	恔	haau6	háu꜅	X	X
 26657	校	haau6	háu꜅	X	X
-9675	○	he1	꜀hé	X	A colloquial exclamation, expressing disapproval; [꜀hé]! [꜁’m ꜂hò t‘au꜄] don’t touch it!
 39321	香	hoeng1	꜀héung	X	X
 37141	鄕	hoeng1	꜀héung	X	X
 20139	享	hoeng2	꜂héung	X	X
@@ -1674,7 +1664,6 @@
 26313	曉	hiu2	꜂hiú	X	X
 31429	竅	hiu3	hiú꜄	X	X
 31429	竅	giu3	kiú꜄	CORRECTLY_READ	X
-9675	○	hiu3	hiú꜄	X	A colloquial word, to perk or cock up, as a dog’s tail, a bow lying on its back, or the stern of a junk.
 33499	苛	ho1	꜀ho	X	X
 21621	呵	ho1	꜀ho	X	X
 35382	訶	ho1	꜀ho	X	X
@@ -1876,14 +1865,12 @@
 20517	倥	hung3	hung꜄	X	X
 31354	空	hung3	hung꜄	X	X
 27742	汞	hung3	hung꜄	X	X
-9675	○	hung6	hung꜅	X	A halo; [üt꜇ ꜃yau hung꜅] there is a halo round the moon
 34880	血	hyut1	hüt꜆	X	X
 38357	闕	hyut1	hüt꜆	X	X
 32570	缺	hyut1	hüt꜆	X	X
 32570	缺	kyut1	k‘üt꜆	USUALLY_PRO	X
 35286	觖	hyut1	hüt꜆	X	X
 35286	觖	kyut1	k‘üt꜆	USUALLY_PRO	X
-9675	○	hwe1	꜀hwé	X	An exclamation; halloo, stop! [꜀hwé ꜃ní hü꜄ ꜀p‘ín] halloo! Where are you going?
 34915	衣	ji1	꜀í	X	X
 20381	依	ji1	꜀í	X	X
 20234	伊	ji1	꜀í	X	X
@@ -2183,7 +2170,6 @@
 23622	屆	gaai3	kái꜄	X	X
 29335	犗	gaai3	kái꜄	X	X
 26999	楷	kaai2	꜂k‘ái	X	X
-9675	○	kak1	k‘ak꜆	X	A colloquial word. Uneven, interrupted; [lak꜆ k‘ak꜆] difficult, not smooth; [lò꜅ ꜂hò lak꜆ k‘ak꜆] the road is very rough; [꜂kong tak꜆ lak꜆ lak꜆ k‘ak꜆ k‘ak꜆] to stammer, to hesitate
 38761	革	gaak3	kák꜆	X	X
 32217	緙	gaak3	kák꜆	X	X
 25356	挌	gaak3	kák꜆	X	X
@@ -2391,7 +2377,6 @@
 33276	臼	kau5	꜃k‘au	X	X
 26709	桕	kau5	꜃k‘au	X	X
 21481	叩	kau3	k‘au꜄	X	X
-9675	○	kau3	k‘au꜄	X	A colloquial word, heard in Macao; to cry, to wail or screm, as children do
 25187	扣	kau3	k‘au꜄	X	X
 24384	彀	kau3	k‘au꜄	X	X
 23484	宼	kau3	k‘au꜄	X	X
@@ -2552,8 +2537,6 @@
 14776	㦸	gik1	kik꜆	X	X
 26840	棘	gik1	kik꜆	X	X
 35147	襋	gik1	kik꜆	X	X
-9675	○	gik1	kik꜆	X	A colloquial word; to bind, to take a loop, or tie up with a chain or cord; [kik꜆ chü꜅ ꜃k‘ü] tie it fast, as a boat; [kik꜆ ꜂keng], to fasten by the neck
-9675	○	gek1	kek꜆	ALSO_PRO	X
 20127	亟	gik1	kik꜆	X	X
 26997	極	gik6	kik꜇	X	X
 21127	劇	kik6	k‘ik꜇	X	X
@@ -2906,8 +2889,6 @@
 20322	佢	kyu5	꜃k‘ü	X	X
 25298	拒	kyu5	꜃k‘ü	X	X
 36317	距	kyu5	꜃k‘ü	X	X
-9675	○	goe1	꜀kù	X	To pout; [꜀kù ꜂hí ꜂tsui], to pout out the lips.
-9675	○	koe1	꜀k‘ù	X	To roll up in a hall; to rumple; to rub between the hands, [꜀k‘ù ꜁ün], to roll up in a ball; [mok꜇ ꜀k‘ù ꜁ch‘áu] don’t rumple it; [mat꜆ ꜀k‘ù kòm꜄ lün꜄] why is it so tangled? [꜀k‘ù lù꜅] improperly, troublesome.
 20744	儈	gui2	꜂kúi	X	X
 21130	劊	gui2	꜂kúi	X	X
 27292	檜	gui2	꜂kúi	X	X
@@ -2931,7 +2912,6 @@
 38816	鞠	guk1	kuk꜆	X	X
 38827	鞫	guk1	kuk꜆	X	X
 40628	麴	guk1	kuk꜆	X	X
-9675	○	guk1	kuk꜆	X	A colloquial word. To excite, to swell, to start up, to irritate; [kuk꜆ yat꜆ ꜀shan hon꜅] wrap yourself up to get a sweat; [꜂pí ꜃k‘ü kuk꜆ wái꜅ ꜃ngo], he has greatly angered me; [kuk꜆ tái꜅ ꜀p‘áu ꜀soi], he looked very glum
 23616	局	guk6	kuk꜇	X	X
 36348	跼	guk6	kuk꜇	X	X
 26354	曲	guk1	kuk꜆	X	X
@@ -3174,7 +3154,6 @@
 36891	逛	gwaang3	kwáng꜄	X	X
 32394	纊	gwaang3	kwáng꜄	X	X
 31568	筐	kwaang1	꜀kw‘áng	X	X
-9675	○	kwaang2	꜂kw‘áng	X	A twig,  a sprig, the small stems of herbs and trees; peduncles, stalks of leaves; [꜃lau ꜂kw‘áng], willow twigs; [꜀chí ꜂kw‘áng], twigs, stalks
 39592	骨	gwat1	kwat꜆	X	X
 27752	汨	gwat1	kwat꜆	X	The noise of waves; to confound, to mix; to unstop; to let flow out; to rise, to float; [kwat꜆ ꜀ch‘au], to confuse.
 27752	汨	mat1	mat꜆	X	A river in Hú-nán, called [mat꜆ ꜁lo ꜀kong], which enters TungT’ing Lake on the southeast.
@@ -3207,7 +3186,6 @@
 39369	駉	gwing2	꜂kwing	X	X
 25004	憬	gwing2	꜂kwing	X	X
 25004	憬	ging2	꜂king	FAN_WAN_PRO	X
-9675	○	gwit1	kwít꜆	X	A squeaking noise at night, called [kwít꜆ ꜀sheng], is thought to be the cry of ghosts; the squeaking of mice; clever, astute, sagacious; [kòm꜄ kwít꜆] so smart -- said of chilren.
 25096	戈	gwo1	꜀kwo	X	X
 31803	簻	gwo1	꜀kwo	X	X
 34198	薖	gwo1	꜀kwo	X	X
@@ -3315,7 +3293,6 @@
 33382	艦	laam6	lám꜅	X	X
 164175	𨅏	laam3	lám꜄	X	A colloquial word; see [nám꜄] To overpass, to skip; to leap over; an interval; [lám꜄ yat꜇] every other day; [lám꜄ ch‘ut꜆ ꜁mún ꜂hau], he went out doors; [lám꜄ ꜀kò], to step high; [tái꜅ pò꜅ lám꜄] give a good leap and cross it
 164175	𨅏	laam4	꜁lám	X	To walk fast
-9675	○	lan1	꜀lan	X	A colloquial word; quick, speedy; [꜁p‘an ꜀lan], in a hurry, quick
 27396	欄	laan1	꜀lán	X	A colloquial word; a bazaar or row for the sale of an article; [꜁hám ꜀há ꜀lán], the salt-shrimp row; [꜁au ꜀lán ꜁mún], the Oil-row Gate on the south of Canton, called the Petition Gate; [lok꜇ ꜀lán hü꜅] gone to the bazaar; [꜁mái ꜀lán], to take to the bazaar, to turn peddler; [꜂kwo ꜀lán], the fruit market
 36509	躝	laan1	꜀lán	X	X
 22226	囒	laan1	꜀lán	X	Is used in writing foreign words
@@ -3329,14 +3306,12 @@
 25078	懶	laan5	꜃lán	X	X
 29211	爛	laan6	lán꜅	X	X
 21797	唥	lang1	꜀lang	X	X
-9675	○	lang3	lang꜄	X	A lot of things tied together is called [kwáng꜄ lang꜄]
 20919	冷	laang5	꜃láng	X	X
 20919	冷	lang5	꜃lang	FAN_WAN_PRO	X
 31520	笠	lap1	lap꜆	X	X
 33497	苙	lap1	lap꜆	X	X
 31435	立	lap6	lap꜇	X	X
 31435	立	laap6	láp꜇	OFTEN_PRO	X
-9675	○	lap6	lap꜇	X	A colloquial word. To repeat, to reiterate; [lap꜇ tap꜆ ꜂kong], a needless repetition; …
 14812	㧜	laap3	láp꜆	X	X
 25848	擸	laap6	láp꜇	X	X
 33240	臘	laap6	láp꜇	X	X
@@ -3385,7 +3360,6 @@
 25736	撈	laau1	꜀láu	X	X
 21737	哩	le1	꜀lé	X	X
 21774	唎	le3	lé꜄	X	X
-9675	○	lek6	lek꜇	X	A colloquial word. To rip open, to cut fresh apart; [lek꜇ ꜀hoi ꜀pín], cut off a slice
 28701	瀝	lek6	lek꜇	X	X
 25504	掠	loek6	léuk꜇	X	X
 30055	畧	loek6	léuk꜇	X	X
@@ -3511,8 +3485,6 @@
 37706	鍊	lin6	lín꜅	X	X
 29001	煉	lin6	lín꜅	X	X
 26973	楝	lin6	lín꜅	X	X
-9675	○	ling1	꜀ling	X	A colloquial word. A fender on ships; a buffer
-9675	○	leng1	꜀leng	ALSO_PRO	X
 178943	𫫿	ling1	꜀ling	X	X
 38728	靈	ling4	꜁ling	X	X
 28789	灵	ling4	꜁ling	X	X
@@ -3606,7 +3578,6 @@
 33999	蓏	lo2	꜂lo	X	X
 30256	瘰	lo2	꜂lo	X	X
 25886	攞	lo2	꜂lo	X	X
-9675	○	lo3	lo꜄	X	Smell of burning animal matter; to burn; to singe; [꜂shui ch‘au꜄ ꜂fo lo꜄] the water is smoky.
 37007	邏	lo6	lo꜅	X	X
 142520	𢲸	lou1	꜀lò	X	X
 21214	勞	lou4	꜁lò	X	X
@@ -3702,7 +3673,6 @@
 34571	蜋	long4	꜁long	X	X
 34571	蜋	loeng4	꜁léung	X	X
 38316	閬	long4	꜁long	X	X
-9675	○	long2	꜂long	X	To rinse, as the mouth; to rub around in the water; [꜂long ꜀kon tseng꜅] rinse it clean, as a plate…
 26391	朗	long5	꜃long	X	X
 22641	塱	long5	꜃long	X	X
 22476	埌	long6	long꜅	X	X
@@ -3730,8 +3700,6 @@
 32311	縷	lyu6	lü꜅	X	X
 35128	褸	lyu6	lü꜅	X	X
 28670	濾	lyu6	lü꜅	X	X
-9675	○	loe1	꜀lù	X	A colloquial word, to spit; to spit out of the mouth; [꜀lù ch‘ut꜆ ꜁lai], spit it out
-9675	○	loe3	lù꜄	X	A colloquial word; confused; [꜀kù lù꜄] all in disorder
 24410	彚	leoi5	꜃lui	X	X
 24410	彚	wai6	wai꜅	ALSO_PRO	X
 34849	蠡	leoi5	꜃lui	X	X
@@ -3875,8 +3843,6 @@
 25419	捋	lyut1	lüt꜆	X	X
 37241	酹	lyut1	lüt꜆	X	X
 37241	酹	laai6	lái꜅	OFTEN_PRO	X
-9675	○	lyut1	lüt꜆	X	A colloquial word. To gobble up, as a goose or duck.
-9675	○	lyut6	lüt꜇	X	A colloquial word. To bare the arms or legs; [lüt꜇ ꜁k‘ün], to roll up the sleeves
 21780	唔	m4	꜁’m	X	X
 21780	唔	ng4	꜁ng	X	X
 23382	孖	maa1	꜀má	X	X
@@ -4046,7 +4012,6 @@
 21750	哶	me1	꜀mé	X	X
 27498	歪	me2	꜂mé	X	X
 25816	擘	mek6	mek꜇	X	X
-9675	○	meng4	꜁meng	X	This sound is often heard as a contraction for [꜁’m ꜁ts‘ang], not yet. Also [꜁ts‘ung ꜁meng], rosin, gum of the pine or fir
 13703	㖇	mi1	꜀mí	X	X
 24494	微	mi4	꜁mí	X	X
 28326	溦	mi4	꜁mí	X	X
@@ -4363,7 +4328,6 @@
 38297	閙	naau6	náu꜅	X	X
 28118	淖	naau6	náu꜅	X	X
 178980	𫬤	ne1	꜀né	X	X
-9675	○	neng2	꜂neng	X	A colloquial word; a classifier of garments; [yat꜆ ꜂neng mò꜅] a hat; [yat꜆ ꜂neng ꜀shám] a jacket
 23064	娘	noeng4	꜁néung	X	X
 13686	㕶	ng1	꜀ng	X	X
 21566	吾	ng4	꜁ng	X	X
@@ -4429,7 +4393,6 @@
 38943	頟	ngaak6	ngák꜇	X	X
 134714	𠸺	ngaak6	ngák꜇	X	X
 21765	唅	ngam4	꜁ngam	X	X
-9675	○	ngam3	ngam꜄	X	A colloquial word. Old, feeble, foolish; [yat꜆ ꜁nin yat꜆ ꜁nin ngam꜄ ꜂hí ꜁lai], becoming more and more feeble every year; [꜁ngoi ꜁ngoi ngam꜄ ngam꜄] to be in one’s dotage, to be childish, foolish
 21873	啱	ngaam1	꜀ngám	X	X
 24022	巖	ngaam4	꜁ngám	X	X
 23721	岩	ngaam4	꜁ngám	X	X
@@ -4442,7 +4405,6 @@
 29434	狺	ngan4	꜁ngan	X	X
 22170	嚚	ngan4	꜁ngan	X	X
 29666	珢	ngan4	꜁ngan	X	X
-9675	○	ngan3	ngan꜄	X	A colloquial word. To tread upon; to shake violently; [ngan꜄ ꜀kò kéuk꜆] to stand upon tiptoe; [꜃mai ngan꜄ ꜃t‘ün ko꜄ fái꜄ ꜂pán] don’t break the board in two, by standing upon, or jarring it
 32917	肕	ngan6	ngan꜅	X	X
 38991	顏	ngaan4	꜁ngán	X	X
 30799	硏	ngaan4	꜁ngán	X	X
@@ -4463,7 +4425,6 @@
 23673	屹	ngat6	ngat꜇	X	X
 30715	矻	ngat6	ngat꜇	X	X
 36804	迄	ngat6	ngat꜇	X	X
-9675	○	ngaat3	ngát꜆	X	A colloquial word; the odor of urine, the rank smell of a privy or sty; niggardly, close-fisted; [ngát꜆ ch‘au꜄] stinking
 40807	齧	ngaat6	ngát꜇	X	X
 37476	鉤	ngau1	꜀ngau	X	X
 37476	鉤	gau1	꜀kau	CORRECTLY_READ	X
@@ -4485,9 +4446,6 @@
 21676	咬	gaau1	꜀káu	X	X
 40809	齩	gaau1	꜀káu	X	X
 27138	樂	ngaau6	ngáu꜅	X	X
-9675	○	nge4	꜁ngé	X	A colloquial word. A low tone; [꜁ngé ꜁ngé ꜀sheng] a grumble, indistinct muttering
-9675	○	ngi1	꜀ngí	X	A colloquial word; to lie, to deceive; [chá꜄ ꜀ngí ꜀ngoi], you are deceiving, you fib; -- a child’s phrase
-9675	○	ji1	꜀í	OFTEN_READ_CANTON	X
 40807	齧	ngit6	ngít꜇	X	X
 22227	囓	ngit6	ngít꜇	X	X
 20420	俄	ngo4	꜁ngo	X	X
@@ -4590,7 +4548,6 @@
 40655	黏	zhim1	꜀chím	USUALLY_PRO	X
 31896	粘	zhim1	꜀chím	USUALLY_PRO	X
 24565	念	nim6	ním꜅	X	X
-9675	○	nin1	꜀nín	X	A colloquial word; milk; [꜂yam ꜀nín] to suck; [chüt꜆ ꜀nín], to take the breast
 24180	年	nin4	꜁nín	X	X
 33248	臠	nin2	꜂nín	X	X
 33248	臠	lyun2	꜂lün	X	X
@@ -4607,7 +4564,6 @@
 20318	佞	ning6	ning꜅	X	X
 23511	寗	ning6	ning꜅	X	X
 28632	濘	ning6	ning꜅	X	X
-9675	○	nip1	níp꜆	X	A colloquial word. Lean in the face, lantern-jawed; to press down, to squash, to make thin; [꜀shang tak꜆ níp꜆] he has become so poor; [kam꜅ níp꜆] to press flat
 25423	捏	nip6	níp꜇	X	X
 25553	揑	nip6	níp꜇	X	X
 28284	湼	nip6	níp꜇	X	X
@@ -4617,7 +4573,6 @@
 31819	籋	nip6	níp꜇	X	X
 25467	捻	nip6	níp꜇	X	X
 33526	苶	nip6	níp꜇	X	X
-9675	○	nit6	nít꜇	X	A colloquial word; to seize, to clasp; to play with, to toy with; [꜂nan nít꜇] to play with; [nít꜇ ꜂keng], to seize by the throat
 15170	㭂	niu1	꜀niú	X	X
 40165	鳥	niu5	꜃niú	X	X
 34086	蔦	niu5	꜃niú	X	X
@@ -4793,7 +4748,6 @@
 28227	湃	baai3	pái꜄	X	X
 25943	敗	baai6	pái꜅	X	X
 21764	唄	baai6	pái꜅	X	X
-9675	○	paai1	꜀p‘ái	X	A colloquial word; to brag, to boast, to vaunt one’s self or doings; [꜀shí ꜀p‘ái ꜁yan], to crow over one
 25490	排	paai4	꜁p‘ái	X	X
 20467	俳	paai4	꜁p‘ái	X	X
 29260	牌	paai4	꜁p‘ái	X	X
@@ -4936,7 +4890,6 @@
 30770	砲	paau3	p‘áu꜄	X	Interchanged with 爆 [páu꜄]. A balista, once used in war; a cannon, great guns; fireworks; …
 27873	泡	paau3	p‘áu꜄	X	X
 21860	啤	be1	꜀pé	X	X
-9675	○	be5	꜃pé	X	A colloquial word. The reeling of a tipsy man; [꜁hang tak꜆ ꜃pé ꜃pé ꜃há], reeling and staggering, as he goes
 22154	嚊	be6	pé꜅	X	X
 21329	卑	bi1	꜀pí	X	X
 30865	碑	bi1	꜀pí	X	X
@@ -5262,7 +5215,6 @@
 29854	璞	pok1	p‘ok꜆	X	X
 20166	仆	pok1	p‘ok꜆	X	This is more often pronunced [p‘ok꜆], than [fú꜅], as given on page 61; [꜀tín p‘ok꜆] slipped down; [꜀kéung p‘ok꜆] fell down stiff, as if dead
 31893	粕	pok1	p‘ok꜆	X	X
-9675	○	bom1	꜀pòm	X	A colloquial word. The sound of a cannon; [꜀ping ꜀pòm], a glass toy, so called from its sound when blown upon
 37030	邦	bong1	꜀pong	X	X
 166364	𨧜	bong1	꜀pong	X	X
 22457	垹	bong1	꜀pong	X	X
@@ -5295,7 +5247,6 @@
 32936	肨	pong5	꜃p‘ong	X	X
 34444	蚌	pong5	꜃p‘ong	X	X
 35607	謗	pong3	p‘ong꜄	X	X
-9675	○	bop6	pòp꜇	X	A colloquial word.To blister, as lacquered ware; to raise vesicles;  a thumping, rapping sound, as under a boat; a rap; [pòp꜇ pòp꜇ ꜀sheng], a knocking
 26479	杯	bui1	꜀púi	X	X
 26734	桮	bui1	꜀púi	X	X
 30403	盃	bui1	꜀púi	X	X
@@ -5376,7 +5327,6 @@
 25447	捧	bung2	꜂pung	X	X
 25533	掽	bung3	pung꜄	X	X
 30896	碰	bung3	pung꜄	X	X
-9675	○	bung6	pung꜅	X	A colloquial word. The classifier of walls, cliffs, ledges, &c.; a puff of smoke or smell; [yat꜆ pung꜅ ꜁ts‘ui], a stink; [yat꜆ pung꜅ ꜁ts‘éung], a wall; [yat꜆ pung꜅ ꜀ín ꜁ts‘ui], an offensive smoke, as of burning hair; [yat꜆ pung꜅ hí꜄] a bad odor
 22643	塳	pung1	꜀p‘ung	X	A colloquial word; it is also pronunced [꜀fung]. To fill the eyes with smoke or dust; [꜀ín ꜀p‘ung ꜀p‘ung], the smoke is very smarting
 22643	塳	fung1	꜀fung	X	X
 22643	塳	pung4	꜁p‘ung	X	Dust raised by the wind
@@ -5411,7 +5361,6 @@
 32048	細	sai3	sai꜄	X	X
 22779	壻	sai3	sai꜄	X	X
 23167	婿	sai3	sai꜄	X	X
-9675	○	saai1	꜀sái	X	A colloquial word. To throw away as useless, to waste; [꜀sái t‘át꜆] utterly wasted; [꜃mai ꜀sái ꜃yé] don’t waste things; [mat꜇ ꜀sái ꜃k‘ü] don’t waste it; [꜀sái sái꜄ hai꜅ ꜁lé], all thrown away, it is all used up; [꜀sái fú꜄ ꜀hing mín꜅] a disgrace to one’s family; [pák꜇ pák꜇ ꜀sái], uselessly spent; [꜀sái tak꜆ chung꜅] extravagant, using more than is necessary
 24473	徙	saai2	꜂sái	X	X
 36445	蹝	saai2	꜂sái	X	X
 23651	屣	saai2	꜂sái	X	X
@@ -5492,8 +5441,6 @@
 20905	冩	se2	꜂sé	X	X
 28681	瀉	se3	sé꜄	X	X
 32567	缷	se3	sé꜄	X	X
-9675	○	seng1	꜀seng	X	A colloquial word, often used as a contraction for [꜀sín ꜀shang], a teacher or Sir; [꜁lo ꜀seng], Mr. Lo
-9675	○	seng3	seng꜄	X	A colloquial word, denoting a place, a path; [꜂cho teng꜅ ꜂cho seng꜄] how you are stopping up the way here!
 21066	削	soek1	séuk꜆	X	X
 35140	襄	soeng1	꜀séung	X	X
 38002	鑲	soeng1	꜀séung	X	X
@@ -5534,7 +5481,6 @@
 36893	逝	shai6	shai꜅	X	X
 31598	筮	shai6	shai꜅	X	X
 22124	噬	shai6	shai꜅	X	X
-9675	○	shaai4	꜁shái	X	A colloquial word. A final particle, referring to tastes, denoting intensity; [tám꜅ ꜁shái], flat, unsavory; [꜁shái ꜁shái tik꜆], how rough it tastes!
 33296	舐	shaai5	꜃shái	X	X
 26348	曬	shaai3	shái꜄	X	X
 26194	晒	shaai3	shái꜄	X	X
@@ -6091,7 +6037,6 @@
 26329	曙	syu5	꜃sü	X	X
 37265	醑	syu5	꜃sü	X	X
 23996	嶼	syu5	꜃sü	X	X
-9675	○	soe4	꜁sù	X	A colloquial word. Ignorant of, not knowing how to do things; [꜀ú ꜁sù ꜁sù], all at loose ends, no regularity
 38614	雖	seoi1	꜀sui	X	X
 32143	綏	seoi1	꜀sui	X	X
 34928	衰	seoi1	꜀sui	X	X
@@ -6100,7 +6045,6 @@
 138965	𡻕	seoi3	sui꜄	X	X
 30862	碎	seoi3	sui꜄	X	X
 32320	繀	seoi3	sui꜄	X	X
-9675	○	seoi3	sui꜄	X	A colloquial word. The crop of a fowl; …
 31071	祟	seoi6	sui꜅	X	X
 36930	遂	seoi6	sui꜅	X	X
 16819	䆳	seoi6	sui꜅	X	X
@@ -6344,7 +6288,6 @@
 27893	泵	dam2	꜂tam	X	A colloquial word. To pund, to hammer; to strike with the fist; to rap; to throw at; to throw away...
 27893	泵	dam3	tam꜄	X	A colloquial word. To drop down; to drool, as saliva; to hang down, as a laden pocket; to sound...
 179415	𫳗	dam6	tam꜅	X	A colloquial word. A low place, a bog; to press down, to crush; to stamp on; [꜀tá tam꜅] a low spot, as in a yard…
-9675	○	tam4	꜁t‘am	X	A colloquial word. To revolve, to whirl ;round, rolling over; [꜁t‘am ꜁t‘am ꜂chün], to whirl round and round…
 27705	氹	tam5	꜃t‘am	X	A colloquial word. A cesspool; a pit, a tank; [꜂shui ꜃t‘am], a tank for manure; [꜁nai ꜃t‘am], a hole, dug for transplanting in
 22116	噤	tam3	t‘am꜄	X	A colloquial word. To deceive, to swindle, to play a trick on; to try; an imposition; [꜃k‘ü t‘am꜄ ꜃ní], he is deluding you…
 25812	擔	daam1	꜀tám	X	X
@@ -6444,9 +6387,6 @@
 34276	藤	tang4	꜁t‘ang	X	X
 31824	籐	tang4	꜁t‘ang	X	X
 30140	疼	tang4	꜁t‘ang	X	X
-9675	○	dap1	tap꜆	X	A colloquial word. A little pot like a teapot, used to heat spirits or water in; [꜂tsau tap꜆] a wine-pot; [lap꜇ lap꜇ tap꜆ tap꜆] very dirty; mean and old. To hang the head, to hang down, as an animal’s tail; [tap꜆ ꜀tai] to hang down; [tap꜆ ꜁t‘au ꜀kai], a dropping cock - a man without spank, a dastard
-9675	○	dap6	tap꜇	X	A colloquial word. Driving rain; to be rained on; to throw away; to let fall; [yat꜆ tap꜇ lok꜇ tí꜅ tsai꜅ lán꜅] if it falls it will smash; [꜃mai tap꜇ shap꜆ ꜃k‘ü], don’t let the rain wet it
-9675	○	tap1	t‘ap꜆	X	A colloquial word. Muttering, sulky; [꜂kún tak꜆ ꜃k‘ü t‘ap꜆ t‘ap꜆ ꜀sheng], let him alone in his sulky grumbling
 31572	答	daap3	táp꜆	X	X
 33605	荅	daap3	táp꜆	X	X
 25752	撘	daap3	táp꜆	X	X
@@ -6510,7 +6450,6 @@
 28095	涿	doek1	téuk꜆	X	X
 29730	琢	doek1	téuk꜆	X	X
 26034	斲	doek1	téuk꜆	X	X
-9675	○	di1	꜀tí	X	A colloquial corruption of 的 [tik꜆]; a diminutive adjective, a littke; [꜂hò tak꜆ ꜀tí] a very little better; [꜂pí ꜀tí ꜀t‘ím] give a little more…
 22320	地	di6	tí꜅	X	X
 21707	哋	di6	tí꜅	X	X
 30340	的	dik1	tik꜆	X	X
@@ -7804,7 +7743,6 @@
 26742	桶	tung2	꜂t‘ung	X	X
 32113	統	tung2	꜂t‘ung	X	X
 30171	痛	tung3	t‘ung꜄	X	X
-9675	○	dyut1	tüt꜆	X	A colloquial word. Tapering, conical, to a point; to taper off; [꜁fan tüt꜆], a conical barrow or grave
 22890	奪	dyut6	tüt꜇	X	X
 33067	脫	tyut1	t‘üt꜆	X	X
 28879	烏	wu1	꜀ú	X	X
@@ -8256,7 +8194,6 @@
 32621	罭	wik6	wik꜇	X	X
 34606	蜮	wik6	wik꜇	X	X
 38334	閾	wik6	wik꜇	X	X
-9675	○	wing1	꜀wing	X	A colloquial word. To throw away as useless; to throw aside, to throw down; [꜀wing cho꜅ ꜁’m iú꜅ lok꜆] heave it away! [꜀wing ꜁mái yat꜆ í꜅ kok꜆] throw it into a corner; [꜀wing ꜀hoi], throw it away; [꜀wing ꜁lai ꜀wing hü꜄] taking it up and throwing it down
 27054	榮	wing4	꜁wing	X	X
 29801	瑩	wing4	꜁wing	X	X
 27704	永	wing5	꜃wing	X	X
@@ -8265,7 +8202,6 @@
 27891	泳	wing6	wing꜅	X	X
 31310	穎	wing6	wing꜅	X	X
 38964	頴	wing6	wing꜅	X	X
-9675	○	wit1	wít꜆	X	A colloquial word. The creaking of a door; to call; [wít꜆ ꜂sing ꜃k‘ü], call him to wake up
 22557	堝	wo1	꜀wo	X	X
 31401	窩	wo1	꜀wo	X	X
 23207	媧	wo1	꜀wo	X	X
@@ -8673,7 +8609,6 @@
 26741	桵	jeoi1	꜀yui	X	X
 34123	蕋	jeoi5	꜃yui	X	X
 34122	蕊	jeoi5	꜃yui	X	X
-9675	○	jeoi3	yui꜄	X	X
 34617	蜹	jeoi6	yui꜅	X	X
 34443	蚋	jeoi6	yui꜅	X	X
 27757	汭	jeoi6	yui꜅	X	X
@@ -8709,7 +8644,6 @@
 32946	育	juk6	yuk꜇	X	X
 39739	鬻	juk6	yuk꜇	X	Used for the last; to nourish; to sell; [yuk꜇ mái꜅] to sell
 39739	鬻	zhuk1	chuk꜆	X	Congee, gruel
-9675	○	jeon2	꜂yun	X	A colloquial word. The liver; [꜀chü ꜂yun], a pig’s liver
 28516	潤	jeon6	yun꜅	X	X
 38304	閠	jeon6	yun꜅	X	X
 30628	瞤	jeon6	yun꜅	X	X
