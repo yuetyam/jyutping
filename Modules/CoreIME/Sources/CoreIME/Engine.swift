@@ -68,8 +68,9 @@ extension Engine {
                         return filtered
                 case (false, true):
                         let textTones = text.tones
-                        let candidates: [Candidate] = search(text: text, segmentation: segmentation)
-                        let qualified = candidates.map({ item -> Candidate? in
+                        let rawText: String = text.removedTones()
+                        let candidates: [Candidate] = search(text: rawText, segmentation: segmentation)
+                        let qualified = candidates.compactMap({ item -> Candidate? in
                                 let continuous = item.romanization.removedSpaces()
                                 let continuousTones = continuous.tones
                                 switch (textTones.count, continuousTones.count) {
@@ -120,14 +121,15 @@ extension Engine {
                                         }
                                 }
                         })
-                        return qualified.compactMap({ $0 })
+                        return qualified.preferred(with: text)
                 case (true, false):
                         let textSeparators = text.filter(\.isSeparator)
                         let textParts = text.split(separator: "'")
                         let isHeadingSeparator: Bool = text.first?.isSeparator ?? false
                         let isTrailingSeparator: Bool = text.last?.isSeparator ?? false
-                        let candidates: [Candidate] = search(text: text, segmentation: segmentation)
-                        let qualified = candidates.map({ item -> Candidate? in
+                        let rawText: String = text.removedTones()
+                        let candidates: [Candidate] = search(text: rawText, segmentation: segmentation)
+                        let qualified = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: " ")
                                 guard syllables != textParts else { return Candidate(text: item.text, romanization: item.romanization, input: text) }
                                 guard !(isHeadingSeparator) else { return nil }
@@ -178,7 +180,7 @@ extension Engine {
                                         return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                 }
                         })
-                        return qualified.compactMap({ $0 })
+                        return qualified.preferred(with: text)
                 case (false, false):
                         guard segmentation.maxLength > 0 else { return processVerbatim(text: text) }
                         return process(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
