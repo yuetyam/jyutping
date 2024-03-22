@@ -2,21 +2,30 @@ import SwiftUI
 import CoreIME
 
 extension Font {
-        private(set) static var candidate: Font = candidateFont()
-        static func updateCandidateFont(characterStandard: CharacterStandard? = nil) {
-                candidate = candidateFont(characterStandard: characterStandard)
+
+        private static var isSystemFontPreferred: Bool {
+                let languages = Locale.preferredLanguages
+                let HCIndex = languages.firstIndex(of: "zh-Hant-HK") ?? languages.firstIndex(of: "zh-Hant-MO") ?? 1000
+                let TCIndex = languages.firstIndex(where: { $0 != "zh-Hant-HK" && $0 != "zh-Hant-MO" && $0.hasPrefix("zh-Hant-") }) ?? 1000
+                let SCIndex = languages.firstIndex(where: { $0.hasPrefix("zh-Hans-") }) ?? 1000
+                return min(HCIndex, TCIndex, SCIndex) != TCIndex
         }
-        private static func candidateFont(characterStandard: CharacterStandard? = nil) -> Font {
+
+        private(set) static var candidate: Font = candidateFont(size: 20)
+        static func updateCandidateFont(characterStandard: CharacterStandard? = nil) {
+                candidate = candidateFont(size: 20, characterStandard: characterStandard)
+        }
+        private static func candidateFont(size: CGFloat, characterStandard: CharacterStandard? = nil) -> Font {
                 let standard: CharacterStandard = characterStandard ?? Options.characterStandard
                 switch standard {
                 case .traditional:
-                        return Font.custom(Constant.PingFangHK, fixedSize: 20)
+                        return isSystemFontPreferred ? Font.system(size: size) : Font.custom(Constant.PingFangHK, fixedSize: size)
                 case .hongkong:
-                        return Font.custom(Constant.PingFangHK, fixedSize: 20)
+                        return isSystemFontPreferred ? Font.system(size: size) : Font.custom(Constant.PingFangHK, fixedSize: size)
                 case .taiwan:
-                        return Font.custom(Constant.PingFangTC, fixedSize: 20)
+                        return Font.system(size: size)
                 case .simplified:
-                        return Font.custom(Constant.PingFangSC, fixedSize: 20)
+                        return Font.custom(Constant.PingFangSC, fixedSize: size)
                 }
         }
 
