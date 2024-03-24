@@ -31,7 +31,7 @@ struct MacIntroductionsView: View {
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Body.StrokeReverseLookup").lineSpacing(6)
+                                                Text("Shared.Guide.Body.StrokeReverseLookup").font(.master).lineSpacing(6)
                                                 Spacer()
                                         }
                                         HStack {

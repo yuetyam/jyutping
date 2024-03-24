@@ -93,10 +93,7 @@ struct HomeView: View {
                                 Group {
                                         Section {
                                                 Text("Shared.Guide.Heading.TonesInput").font(.significant)
-                                                Text("Shared.Guide.Body.TonesInput")
-                                                        .font(.fixedWidth)
-                                                        .lineSpacing(5)
-                                                        .fixedSize(horizontal: true, vertical: false)
+                                                Text("Shared.Guide.Body.TonesInput").font(.fixedWidth).lineSpacing(5)
                                                 Text("Shared.Guide.Example.TonesInput")
                                         }
                                         Section {
@@ -144,7 +141,7 @@ struct HomeView: View {
                         .animation(.default, value: isGuideViewExpanded)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }
-                                let isContained: Bool =  keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
+                                let isContained: Bool = keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
                                 if isKeyboardEnabled != isContained {
                                         isKeyboardEnabled = isContained
                                 }
