@@ -32,16 +32,18 @@ struct MacContentView: View {
                                         Label("MacSidebar.NavigationTitle.CantoneseExpressions", systemImage: "checkmark.seal").tag(ViewIdentifier.expressions)
                                         Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: "character").tag(ViewIdentifier.confusion)
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.InputMethod").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.InputMethod").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                                 Section {
                                         Label("MacSidebar.NavigationTitle.Search", systemImage: "magnifyingglass").tag(ViewIdentifier.search)
                                         Label("MacSidebar.NavigationTitle.JyutpingInitials", systemImage: "rectangle.leadingthird.inset.filled").tag(ViewIdentifier.initials)
                                         Label("MacSidebar.NavigationTitle.JyutpingFinals", systemImage: "rectangle.trailingthird.inset.filled").tag(ViewIdentifier.finals)
                                         Label("MacSidebar.NavigationTitle.JyutpingTones", systemImage: "bell").tag(ViewIdentifier.tones)
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.Jyutping").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.Jyutping").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                                 Section {
                                         Label("MacSidebar.NavigationTitle.Numbers", systemImage: "number").tag(ViewIdentifier.numbers)
                                         Label("MacSidebar.NavigationTitle.StemsAndBranches", systemImage: "timelapse").tag(ViewIdentifier.stemsBranches)
@@ -54,14 +56,16 @@ struct MacContentView: View {
                                         Label("MacSidebar.NavigationTitle.ShamChunMetro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)
                                         Label("MacSidebar.NavigationTitle.HongKongMTR", systemImage: "tram.circle").tag(ViewIdentifier.hongkongMTR)
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                                 Section {
                                         Label("MacSidebar.NavigationTitle.Resources", systemImage: "globe.asia.australia").tag(ViewIdentifier.resources)
                                         Label("MacSidebar.NavigationTitle.About", systemImage: "info.circle").tag(ViewIdentifier.about)
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.About").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.About").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                         }
                         .toolbarBackground(Material.ultraThin, for: .windowToolbar)
                         .navigationTitle("MacContentView.NavigationTitle.Jyutping")

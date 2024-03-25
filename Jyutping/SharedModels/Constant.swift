@@ -9,14 +9,6 @@ struct Constant {
         static let supplementaryCJKVQueue: [String] = ["Chiron Hei HK", "Source Han Sans HC", "Noto Sans CJK HK", "Noto Sans HK"]
         static let fallbackCJKVList: [String] = ["Plangothic P1", "Plangothic P2", "MiSans L3"]
 
-static let strokeKeyDefinitions: String = """
-w = 橫(waang)
-s = 豎(syu)
-a = 撇
-d = 點(dim)
-z = 折(zit)
-"""
-
 static let toneSourceText: String = """
 例字,調值,聲調,粵拼
 芬 fan1,55/53,陰平,1

@@ -32,8 +32,9 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: "character")
                                         }
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.InputMethod").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.InputMethod").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                                 Section {
                                         NavigationLink(destination: MacSearchView().applyVisualEffect(), isActive: $isMacSearchViewActive) {
                                                 Label("MacSidebar.NavigationTitle.Search", systemImage: "magnifyingglass")
@@ -54,8 +55,9 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.JyutpingTones", systemImage: "bell")
                                         }
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.Jyutping").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.Jyutping").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                                 Section {
                                         NavigationLink {
                                                 NumbersView().applyVisualEffect()
@@ -108,8 +110,9 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.HongKongMTR", systemImage: "tram.circle")
                                         }
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.Cantonese").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                                 Section {
                                         NavigationLink {
                                                 MacResourcesView().applyVisualEffect()
@@ -122,8 +125,9 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.About", systemImage: "info.circle")
                                         }
                                 } header: {
-                                        Text("MacSidebar.SectionHeader.About").textCase(nil)
+                                        Text("MacSidebar.SectionHeader.About").textCase(nil).font(.copilot)
                                 }
+                                .font(.master)
                         }
                         .toolbar {
                                 ToolbarItem(placement: .navigation) {

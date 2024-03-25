@@ -15,8 +15,6 @@ extension Font {
         #endif
 }
 
-#if os(macOS)
-
 private extension Font {
 
         static func enhancedFont(size: CGFloat) -> Font {
@@ -55,9 +53,14 @@ private extension Font {
         }()
 
         private static func found(font name: String) -> Bool {
+                #if os(macOS)
                 return NSFont(name: name, size: 15) != nil
+                #else
+                return UIFont(name: name, size: 15) != nil
+                #endif
         }
 
+        #if os(macOS)
         private static func combine(fonts names: [String], size: CGFloat) -> Font {
                 let fontNames: [String] = names.filter({ found(font: $0) }).uniqued()
                 guard let primary = fontNames.first, let primaryFont = NSFont(name: primary, size: size) else { return Font.system(size: size) }
@@ -71,6 +74,19 @@ private extension Font {
                 guard let combined: NSFont = NSFont(descriptor: descriptor, size: size) else { return Font.custom(primary, size: size) }
                 return Font(combined)
         }
+        #else
+        private static func combine(fonts names: [String], size: CGFloat) -> Font {
+                let fontNames: [String] = names.filter({ found(font: $0) }).uniqued()
+                guard let primary = fontNames.first, let primaryFont = UIFont(name: primary, size: size) else { return Font.system(size: size) }
+                let fallbacks = fontNames.dropFirst()
+                guard !(fallbacks.isEmpty) else { return Font.custom(primary, size: size) }
+                let primaryDescriptor: UIFontDescriptor = primaryFont.fontDescriptor
+                let descriptors: [UIFontDescriptor] = fallbacks.map { fontName -> UIFontDescriptor in
+                        return primaryDescriptor.addingAttributes([.name: fontName])
+                }
+                let descriptor: UIFontDescriptor = primaryDescriptor.addingAttributes([.cascadeList: descriptors])
+                let combined: UIFont = UIFont(descriptor: descriptor, size: size)
+                return Font(combined)
+        }
+        #endif
 }
-
-#endif
