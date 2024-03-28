@@ -66,7 +66,7 @@ extension JyutpingInputController {
                                 passBuffer()
                                 Options.updateInputMethodMode(to: .abc)
                                 appContext.updateInputForm(to: .transparent)
-                                setWindowFrame(.zero)
+                                updateWindowFrame(.zero)
                                 return true
                         case .transparent:
                                 Options.updateInputMethodMode(to: .cantonese)
@@ -99,8 +99,8 @@ extension JyutpingInputController {
                                 switch currentInputForm {
                                 case .cantonese, .transparent:
                                         markOptionsViewHintText()
-                                        updateMasterWindow()
                                         appContext.updateInputForm(to: .options)
+                                        updateWindowFrame()
                                 case .options:
                                         handleOptions(-1)
                                 }
@@ -346,7 +346,7 @@ extension JyutpingInputController {
                                         passBuffer()
                                         Options.updateInputMethodMode(to: .abc)
                                         appContext.updateInputForm(to: .transparent)
-                                        setWindowFrame(.zero)
+                                        updateWindowFrame(.zero)
                                         return true
                                 }
                                 if candidates.isEmpty {
@@ -446,9 +446,10 @@ extension JyutpingInputController {
                 let selectedIndex: Int = index ?? appContext.optionsHighlightedIndex
                 defer {
                         clearOptionsViewHintText()
-                        let frame: CGRect = candidates.isEmpty ? .zero : windowFrame
-                        setWindowFrame(frame)
                         appContext.updateInputForm()
+                        let isClean: Bool = candidates.isEmpty
+                        let frame: CGRect? = isClean ? .zero : nil
+                        updateWindowFrame(frame, shouldUpdateOrigin: isClean)
                 }
                 switch selectedIndex {
                 case -1:

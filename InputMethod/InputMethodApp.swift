@@ -3,6 +3,7 @@ import InputMethodKit
 import CoreIME
 import Sparkle
 
+@objc(PrincipalApplication)
 final class PrincipalApplication: NSApplication {
 
         private let appDelegate = AppDelegate()
@@ -18,6 +19,7 @@ final class PrincipalApplication: NSApplication {
 }
 
 @main
+@objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
         private(set) static var updaterController: SPUStandardUpdaterController? = nil

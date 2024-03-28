@@ -10,5 +10,6 @@ struct Constant {
         static let supplementaryCJKVQueue: [String] = ["Chiron Hei HK", "Source Han Sans HC", "Noto Sans CJK HK", "Noto Sans HK"]
         static let fallbackCJKVList: [String] = ["Plangothic P1", "Plangothic P2", "MiSans L3"]
 
-        static let preferencesWindowIdentifier: String = "JyutpingInputMethodPreferencesWindowIdentifier"
+        static let systemABCKeyboardName: String = "com.apple.keylayout.ABC"
+        static let preferencesWindowIdentifier: String = "JyutpingInputMethodPreferencesWindow"
 }

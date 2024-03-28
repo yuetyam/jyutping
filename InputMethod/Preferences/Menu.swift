@@ -62,6 +62,11 @@ extension JyutpingInputController {
                 displayPreferencesView()
         }
         private func displayPreferencesView() {
+                DispatchQueue.main.async { [weak self] in
+                        self?.preparePreferencesView()
+                }
+        }
+        private func preparePreferencesView() {
                 let windowIdentifiers: [String] = NSApp.windows.map(\.identifier?.rawValue).compactMap({ $0 })
                 let shouldOpenNewWindow: Bool = !(windowIdentifiers.contains(Constant.preferencesWindowIdentifier))
                 guard shouldOpenNewWindow else { return }
@@ -94,8 +99,8 @@ extension JyutpingInputController {
                 NSApp.activate(ignoringOtherApps: true)
         }
         private func preferencesWindowFrame() -> CGRect {
-                let screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
-                let screenHeight: CGFloat = NSScreen.main?.frame.size.height ?? 1080
+                let screenWidth: CGFloat = NSScreen.main?.visibleFrame.size.width ?? 1920
+                let screenHeight: CGFloat = NSScreen.main?.visibleFrame.size.height ?? 1080
                 let x: CGFloat = screenWidth / 4.0
                 let y: CGFloat = screenHeight / 5.0
                 let width: CGFloat = screenWidth / 2.0

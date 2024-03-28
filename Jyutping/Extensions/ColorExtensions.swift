@@ -27,7 +27,7 @@ extension Color {
         @available(iOS, unavailable)
         static let textBackgroundColor: Color = {
                 #if os(macOS)
-                let color: Color = Color(nsColor: NSColor.textBackgroundColor)
+                let color: Color = Color(nsColor: NSColor.textBackgroundColor).opacity(0.8)
                 return color
                 #else
                 return Color.gray

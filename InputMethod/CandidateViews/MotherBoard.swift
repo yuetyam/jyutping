@@ -15,5 +15,6 @@ struct MotherBoard: View {
                                 CandidateBoard()
                         }
                 }
+                .fixedSize()
         }
 }

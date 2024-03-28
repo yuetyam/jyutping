@@ -8,49 +8,26 @@ final class JyutpingInputController: IMKInputController {
 
         // MARK: - Window, InputClient
 
-        private lazy var window: NSPanel? = nil
-        private func createMasterWindow() {
-                _ = window?.contentView?.subviews.map({ $0.removeFromSuperview() })
-                _ = window?.contentViewController?.children.map({ $0.removeFromParent() })
-                window = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
+        @MainActor
+        private let window: NSPanel = {
+                let panel: NSPanel = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
                 let levelValue: Int = Int(CGShieldingWindowLevel())
-                window?.level = NSWindow.Level(levelValue)
-                window?.isFloatingPanel = true
-                window?.worksWhenModal = true
-                window?.hidesOnDeactivate = false
-                window?.isReleasedWhenClosed = true
-                window?.collectionBehavior = .moveToActiveSpace
-                window?.isMovable = true
-                window?.isMovableByWindowBackground = true
-                window?.isOpaque = false
-                window?.hasShadow = false
-                window?.backgroundColor = .clear
-                let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
-                window?.contentView?.addSubview(motherBoard.view)
-                motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
-                let offset: CGFloat = 10
-                if let topAnchor = window?.contentView?.topAnchor,
-                   let bottomAnchor = window?.contentView?.bottomAnchor,
-                   let leadingAnchor = window?.contentView?.leadingAnchor,
-                   let trailingAnchor = window?.contentView?.trailingAnchor {
-                        NSLayoutConstraint.activate([
-                                motherBoard.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
-                                motherBoard.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
-                                motherBoard.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
-                                motherBoard.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
-                        ])
-                }
-                window?.contentViewController?.addChild(motherBoard)
-                window?.orderFrontRegardless()
-        }
+                panel.level = NSWindow.Level(levelValue)
+                panel.isFloatingPanel = true
+                panel.worksWhenModal = true
+                panel.hidesOnDeactivate = false
+                panel.isReleasedWhenClosed = true
+                panel.collectionBehavior = .moveToActiveSpace
+                panel.isMovable = true
+                panel.isMovableByWindowBackground = true
+                panel.isOpaque = false
+                panel.hasShadow = false
+                panel.backgroundColor = .clear
+                return panel
+        }()
         private func prepareMasterWindow() {
-                if let isOnActiveSpace: Bool = window?.isOnActiveSpace {
-                        if !(isOnActiveSpace) {
-                                window?.orderFrontRegardless()
-                        }
-                } else {
-                        createMasterWindow()
-                }
+                _ = window.contentView?.subviews.map({ $0.removeFromSuperview() })
+                _ = window.contentViewController?.children.map({ $0.removeFromParent() })
                 let idealValue: Int = Int(CGShieldingWindowLevel())
                 let maxValue: Int = idealValue + 2
                 let minValue: Int = NSWindow.Level.floating.rawValue
@@ -61,24 +38,46 @@ final class JyutpingInputController: IMKInputController {
                         guard preferredValue < maxValue else { return maxValue }
                         return preferredValue
                 }()
-                window?.level = NSWindow.Level(levelValue)
+                window.level = NSWindow.Level(levelValue)
+                let motherBoard = NSHostingController(rootView: MotherBoard().environmentObject(appContext))
+                window.contentView?.addSubview(motherBoard.view)
+                motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
+                let offset: CGFloat = 10
+                if let topAnchor = window.contentView?.topAnchor,
+                   let bottomAnchor = window.contentView?.bottomAnchor,
+                   let leadingAnchor = window.contentView?.leadingAnchor,
+                   let trailingAnchor = window.contentView?.trailingAnchor {
+                        NSLayoutConstraint.activate([
+                                motherBoard.view.topAnchor.constraint(equalTo: topAnchor, constant: offset),
+                                motherBoard.view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -offset),
+                                motherBoard.view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: offset),
+                                motherBoard.view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -offset)
+                        ])
+                }
+                window.contentViewController?.addChild(motherBoard)
+                window.orderFrontRegardless()
         }
-        func updateMasterWindow() {
-                if window == nil {
-                        createMasterWindow()
-                        window?.setFrame(windowFrame, display: true)
-                } else {
-                        window?.setFrame(windowFrame, display: true)
+        private func clearMasterWindow() {
+                _ = window.contentView?.subviews.map({ $0.removeFromSuperview() })
+                _ = window.contentViewController?.children.map({ $0.removeFromParent() })
+                window.setFrame(.zero, display: true)
+        }
+        func updateWindowFrame(_ frame: CGRect? = nil, shouldUpdateOrigin: Bool = true) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                        let frame: CGRect = frame ?? self?.windowFrame ?? .zero
+                        if shouldUpdateOrigin {
+                                self?.window.setFrame(frame, display: true)
+                        } else {
+                                self?.window.setContentSize(frame.size)
+                        }
                 }
         }
-        func setWindowFrame(_ frame: CGRect) {
-                window?.setFrame(frame, display: true)
-        }
-
-        var windowFrame: CGRect {
+        private var windowFrame: CGRect {
                 let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
-                let width: CGFloat = 800
-                let height: CGFloat = 500
+                let offset: CGFloat = 10
+                let viewSize: CGSize = window.contentView?.subviews.first?.bounds.size ?? CGSize(width: 800, height: 500)
+                let width: CGFloat = viewSize.width + (offset * 2)
+                let height: CGFloat = viewSize.height + (offset * 2)
                 let x: CGFloat = {
                         if appContext.windowPattern.isReversingHorizontal {
                                 return origin.x - width - 8
@@ -96,7 +95,7 @@ final class JyutpingInputController: IMKInputController {
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
-        private lazy var screenWidth: CGFloat = NSScreen.main?.frame.size.width ?? 1920
+        private lazy var screenWidth: CGFloat = NSScreen.main?.visibleFrame.size.width ?? window.screen?.visibleFrame.size.width ?? 1920
         lazy var currentOrigin: CGPoint? = nil
 
         typealias InputClient = (IMKTextInput & NSObjectProtocol)
@@ -138,21 +137,36 @@ final class JyutpingInputController: IMKInputController {
                 super.activateServer(sender)
                 UserLexicon.prepare()
                 Engine.prepare()
-                screenWidth = NSScreen.main?.frame.size.width ?? 1920
                 if inputStage.isBuffering {
                         clearBufferText()
                 }
-                currentClient = sender as? InputClient
-                currentOrigin = currentClient?.position
-                prepareMasterWindow()
                 if appContext.inputForm.isOptions {
                         appContext.updateInputForm()
                 }
+                screenWidth = NSScreen.main?.visibleFrame.size.width ?? window.screen?.visibleFrame.size.width ?? 1920
+                currentClient = sender as? InputClient
+                currentOrigin = currentClient?.position
                 DispatchQueue.main.async { [weak self] in
-                        self?.currentClient?.overrideKeyboard(withKeyboardNamed: "com.apple.keylayout.ABC")
+                        self?.prepareMasterWindow()
+                }
+                DispatchQueue.main.async { [weak self] in
+                        self?.currentClient?.overrideKeyboard(withKeyboardNamed: Constant.systemABCKeyboardName)
                 }
         }
         override func deactivateServer(_ sender: Any!) {
+                DispatchQueue.main.async { [weak self] in
+                        self?.clearMasterWindow()
+                }
+                let windowCount: Int = NSApp.windows.count
+                if windowCount > 20 {
+                        NSRunningApplication.current.terminate()
+                        NSApp.terminate(self)
+                        exit(1)
+                } else if windowCount > 10 {
+                        _ = NSApp.windows.map({ $0.close() })
+                } else {
+                        _ = NSApp.windows.filter({ $0.identifier != window.identifier && $0.identifier?.rawValue != Constant.preferencesWindowIdentifier}).map({ $0.close() })
+                }
                 selectedCandidates = []
                 if appContext.inputForm.isOptions {
                         clearOptionsViewHintText()
@@ -162,11 +176,6 @@ final class JyutpingInputController: IMKInputController {
                         let text: String = bufferText
                         clearBufferText()
                         (sender as? InputClient)?.insert(text)
-                }
-                if NSApp.windows.count > 5 {
-                        _ = NSApp.windows.map({ $0.close() })
-                } else {
-                        setWindowFrame(.zero)
                 }
                 super.deactivateServer(sender)
         }
@@ -254,31 +263,8 @@ final class JyutpingInputController: IMKInputController {
         lazy var selectedCandidates: [Candidate] = []
 
         private(set) lazy var candidates: [Candidate] = [] {
-                willSet {
-                        switch (candidates.isEmpty, newValue.isEmpty) {
-                        case (true, true):
-                                // Stay empty
-                                setWindowFrame(.zero)
-                        case (true, false):
-                                // Become un-empty
-                                updateMasterWindow()
-                        case (false, true):
-                                // End up to be empty
-                                setWindowFrame(.zero)
-                        case (false, false):
-                                // Ongoing
-                                updateMasterWindow()
-                        }
-                }
                 didSet {
                         updateDisplayCandidates(.establish, highlight: .start)
-                        guard !(candidates.isEmpty) else { return }
-                        let windowWidth: CGFloat = window?.frame.size.width ?? 0
-                        let shouldResetWindow: Bool = windowWidth < 100
-                        guard shouldResetWindow else { return }
-                        window?.close()
-                        createMasterWindow()
-                        setWindowFrame(windowFrame)
                 }
         }
 
@@ -290,6 +276,7 @@ final class JyutpingInputController: IMKInputController {
                 guard candidateCount > 0 else {
                         indices = (0, 0)
                         appContext.resetDisplayContext()
+                        updateWindowFrame(.zero)
                         return
                 }
                 let pageSize: Int = AppSettings.displayCandidatePageSize
@@ -314,7 +301,9 @@ final class JyutpingInputController: IMKInputController {
                 let newDisplayCandidates = (firstIndex..<bound).map({ index -> DisplayCandidate in
                         return DisplayCandidate(candidate: candidates[index], candidateIndex: index)
                 })
+                let shouldUpdateOrigin: Bool = appContext.isClean
                 appContext.update(with: newDisplayCandidates, highlight: highlight)
+                updateWindowFrame(shouldUpdateOrigin: shouldUpdateOrigin)
         }
 
 
