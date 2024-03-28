@@ -5,8 +5,13 @@ extension Candidate {
         /// - Returns: Transformed Candidate
         public func transformed(to variant: CharacterStandard) -> Candidate {
                 guard self.isCantonese else { return self }
-                let convertedText: String = Converter.convert(text, to: variant)
-                return Candidate(text: convertedText, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark)
+                switch variant {
+                case .traditional:
+                        return self
+                default:
+                        let convertedText: String = Converter.convert(text, to: variant)
+                        return Candidate(text: convertedText, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark)
+                }
         }
 }
 
@@ -60,12 +65,11 @@ public struct Converter {
                 return newDictionary
         }()
 
-
 private static let hongkongCharacterVariants: [Character: Character] = [
 "僞": "偽",
 "兌": "兑",
 "叄": "叁",
-"喫": "吃",
+// "喫": "吃",
 "囪": "囱",
 "媼": "媪",
 "嬀": "媯",
@@ -124,11 +128,10 @@ private static let hongkongCharacterVariants: [Character: Character] = [
 "鰮": "鰛"
 ]
 
-
 private static let taiwanCharacterVariants: [Character: Character] = [
 "僞": "偽",
 "啓": "啟",
-"喫": "吃",
+// "喫": "吃",
 "嫺": "嫻",
 "嬀": "媯",
 "峯": "峰",
@@ -167,6 +170,4 @@ private static let taiwanCharacterVariants: [Character: Character] = [
 "齶": "顎"
 ]
 
-
 }
-
