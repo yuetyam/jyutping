@@ -6,7 +6,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         private lazy var isKeyboardPrepared: Bool = false
         private func prepareKeyboard() {
-                guard !isKeyboardPrepared else { return }
                 _ = view.subviews.map({ $0.removeFromSuperview() })
                 _ = self.children.map({ $0.removeFromParent() })
                 UserLexicon.prepare()
@@ -31,11 +30,19 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         override func viewDidLoad() {
                 super.viewDidLoad()
-                prepareKeyboard()
+                if isKeyboardPrepared {
+                        // do something
+                } else {
+                        prepareKeyboard()
+                }
         }
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
-                prepareKeyboard()
+                if isKeyboardPrepared {
+                        updateReturnKeyText()
+                } else {
+                        prepareKeyboard()
+                }
         }
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
