@@ -12,6 +12,9 @@ struct SettingsViewIOS15: View {
                 return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 
+        private let expandImageName: String = "chevron.up.chevron.down"
+        private let collapseImageName: String = "arrow.down"
+
         @State private var selectedCharacterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
@@ -35,16 +38,29 @@ struct SettingsViewIOS15: View {
                                         .scaledToFit()
                                         .padding(12)
                                         .frame(width: 48)
+                                        .frame(maxHeight: .infinity)
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
+                                                context.updateKeyboardForm(to: context.previousKeyboardForm)
+                                        }
                                 Spacer()
+                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(10)
+                                        .frame(width: 48)
+                                        .frame(maxHeight: .infinity)
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
+                                                context.toggleKeyboardHeight()
+                                        }
                         }
-                        .frame(height: context.keyboardInterface.isCompact ? 36 : 44)
                         .background(Material.ultraThin)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                context.updateKeyboardForm(to: context.previousKeyboardForm)
-                        }
+                        .frame(height: context.keyboardInterface.isCompact ? 36 : 44)
                         List {
                                 Section {
                                         Button {
