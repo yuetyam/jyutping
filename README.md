@@ -47,7 +47,7 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 ## 如何構建（How to build）
 前置要求（Build requirements）
 - macOS 14.0+
-- Xcode 15.2+
+- Xcode 15.3+
 
 倉庫體積比較大，建議加 `--depth` 來 clone。
 ~~~bash
