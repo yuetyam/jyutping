@@ -50,9 +50,10 @@ struct OptionsView: View {
                                 OptionLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: !needsEmojiCandidates)
                         }
                 }
-                .padding(8)
+                .padding(4)
                 .roundedHUDVisualEffect()
                 .fixedSize()
+                .padding(10)
         }
 }
 
