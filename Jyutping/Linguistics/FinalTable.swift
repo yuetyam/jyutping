@@ -75,7 +75,7 @@ private let sourceText: String = """
 戛 gaat3,[ aːt̚ ],aat
 格 gaak3,[ aːk̚ ],aak
 .
-嘞 la3,[ ɐ ],a
+㗎 ga3,[ ɐ ],a
 計 gai3,[ ɐi ],ai
 救 gau3,[ ɐu ],au
 禁 gam3,[ ɐm ],am

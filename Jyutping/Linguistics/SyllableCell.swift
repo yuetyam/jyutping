@@ -41,8 +41,8 @@ struct IOSSyllableCell: View {
                                 } else {
                                         Speaker {
                                                 switch syllable {
-                                                case "la3":
-                                                        Speech.speak(text: word, ipa: "lɐ˧")
+                                                case "ga3":
+                                                        Speech.speak(text: word, ipa: "kɐ˧")
                                                 case "pet6":
                                                         Speech.speak(text: word, ipa: "pʰɛːt̚˨")
                                                 default:
