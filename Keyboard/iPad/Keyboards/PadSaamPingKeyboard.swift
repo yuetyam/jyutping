@@ -16,7 +16,7 @@ struct PadSaamPingKeyboard: View {
                                         PadCompleteInputKey(keyLocale: .leading, upper: "1", keyModel: KeyModel(primary: KeyElement("aa"), members: [KeyElement("aa"), KeyElement("q")]))
                                         PadPullableInputKey(upper: "2", lower: "w")
                                         PadPullableInputKey(upper: "3", lower: "e")
-                                        PadCompleteInputKey(keyLocale: .leading, upper: "4", keyModel: KeyModel(primary: KeyElement("oe"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "4", keyModel: KeyModel(primary: KeyElement("oe", header: "eo"), members: [KeyElement("oe"), KeyElement("r"), KeyElement("eo")]))
                                         PadPullableInputKey(upper: "5", lower: "t")
                                         PadCompleteInputKey(keyLocale: .leading, upper: "6", keyModel: KeyModel(primary: KeyElement("yu"), members: [KeyElement("yu"), KeyElement("y")]))
                                         PadPullableInputKey(upper: "7", lower: "u")
