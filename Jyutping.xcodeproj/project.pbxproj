@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3716A7E52BC135CF001F6679 /* SpaceKeyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */; };
 		371B6E332B3B2F32005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E322B3B2F32005BB31C /* CommonExtensions */; };
 		371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E342B3B2F55005BB31C /* CommonExtensions */; };
 		371B6E382B3B2F86005BB31C /* AppDataSource in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E372B3B2F86005BB31C /* AppDataSource */; };
@@ -347,6 +348,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceKeyText.swift; sourceTree = "<group>"; };
 		371B6E362B3B2F72005BB31C /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = Modules/AppDataSource; sourceTree = "<group>"; };
 		371B6E392B3B2FE1005BB31C /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = Modules/CoreIME; sourceTree = "<group>"; };
 		371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
@@ -1001,6 +1003,7 @@
 				371B6F522B3B342F005BB31C /* KeyboardCase.swift */,
 				371B6F532B3B342F005BB31C /* InputStage.swift */,
 				371B6F542B3B342F005BB31C /* HapticFeedback.swift */,
+				3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */,
 			);
 			path = SharedModels;
 			sourceTree = "<group>";
@@ -1762,6 +1765,7 @@
 				371B6FA62B3B342F005BB31C /* TenKeySpaceKey.swift in Sources */,
 				371B6FF82B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift in Sources */,
 				371B6FDA2B3B342F005BB31C /* LargePadShiftKey.swift in Sources */,
+				3716A7E52BC135CF001F6679 /* SpaceKeyText.swift in Sources */,
 				371B6FEF2B3B342F005BB31C /* PadUpperLowerInputKey.swift in Sources */,
 				371B6FA12B3B342F005BB31C /* TenKeyReturnKey.swift in Sources */,
 				371B6FE72B3B342F005BB31C /* LargePadReturnKey.swift in Sources */,

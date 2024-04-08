@@ -39,6 +39,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
                 if isKeyboardPrepared {
+                        updateSpaceKeyText()
                         updateReturnKeyText()
                 } else {
                         prepareKeyboard()
@@ -637,6 +638,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var candidates: [Candidate] = [] {
                 didSet {
                         candidatesState += 1
+                        updateSpaceKeyText()
                 }
         }
 
@@ -697,19 +699,27 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         returnKeyText = newText
                 }
         }
-        @Published private(set) var spaceKeyText: String = "粵拼"
+        @Published private(set) var spaceKeyText: SpaceKeyText = .fallback
         private func updateSpaceKeyText() {
-                let newText: String = {
-                        guard inputMethodMode.isCantonese else { return "space" }
-                        guard keyboardForm != .tenKeyNumeric else { return "空格" }
+                let newText: SpaceKeyText = {
+                        guard inputMethodMode.isCantonese else { return .english }
+                        guard keyboardForm != .tenKeyNumeric else { return .fallback }
                         let isSimplified: Bool = Options.characterStandard.isSimplified
-                        switch keyboardCase {
-                        case .lowercased:
-                                return isSimplified ? "粤拼·简化字" : "粵拼"
-                        case .uppercased:
-                                return isSimplified ? "全宽空格" : "全寬空格"
-                        case .capsLocked:
-                                return isSimplified ? "大写锁定" : "大寫鎖定"
+                        if inputStage.isBuffering {
+                                if candidates.isEmpty {
+                                        return isSimplified ? .confirmSimplified : .confirm
+                                } else {
+                                        return isSimplified ? .selectSimplified : .select
+                                }
+                        } else {
+                                switch keyboardCase {
+                                case .lowercased:
+                                        return isSimplified ? .lowercasedSimplified : .lowercased
+                                case .uppercased:
+                                        return isSimplified ? .uppercasedSimplified : .uppercased
+                                case .capsLocked:
+                                        return isSimplified ? .capsLockedSimplified : .capsLocked
+                                }
                         }
                 }()
                 if spaceKeyText != newText {
