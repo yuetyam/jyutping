@@ -22,16 +22,22 @@ final class PrincipalApplication: NSApplication {
 @objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-        private(set) static var updaterController: SPUStandardUpdaterController? = nil
+        var server: IMKServer?
+
+        private(set) static var updaterController: SPUStandardUpdaterController?
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
-                let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
-                let identifier = Bundle.main.bundleIdentifier
-                _ = IMKServer(name: name, bundleIdentifier: identifier)
+                if server == nil {
+                        let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
+                        let identifier = Bundle.main.bundleIdentifier
+                        server = IMKServer(name: name, bundleIdentifier: identifier)
+                }
                 UserLexicon.prepare()
                 Engine.prepare()
-                Self.updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+                if Self.updaterController == nil {
+                        Self.updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+                }
         }
 
         private func handleCommandLineArguments() {
