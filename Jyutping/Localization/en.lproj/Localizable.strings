@@ -97,6 +97,9 @@
 "IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping" = "Double tapping the Space bar will insert a period followed by a space.";
 "IOSHomeTab.IntroductionsView.Heading.ClearPreEdit" = "Clear current pre-edit text";
 "IOSHomeTab.IntroductionsView.Body.ClearPreEdit" = "Swipe from right to left on the Delete key will clear current pre-edit syllables.";
+"IOSHomeTab.IntroductionsView.Heading.SaamPingKeyboard" = "SaamPing(三拼) Keyboard Layout";
+"IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row1" = "Double tapping the “gw” key will input “kw”.";
+"IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row2" = "Because the nucleus sounds “oe” and “eo” are complementary in most cases, they share the same key and you don't need to tell them apart.";
 
 "IOSHomeTab.LabelTitle.TextToSpeech" = "Text to Speech";
 "IOSHomeTab.NavigationTitle.TextToSpeech" = "Text to Speech";
