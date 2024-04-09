@@ -28,8 +28,10 @@ Cantonese Jyutping Keyboard for iOS & macOS.
 </a>
 <br>
 <br>
-
-兼容： iOS / iPadOS 15.0+
+iOS TestFlight: https://testflight.apple.com/join/AG1Zkx7G
+<br>
+<br>
+兼容系統： iOS / iPadOS 15.0+
 
 ## macOS
 由於第三方輸入法無法上架 Mac App Store，請前往 [網站](https://jyutping.app/mac) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
