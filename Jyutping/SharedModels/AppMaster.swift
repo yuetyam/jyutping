@@ -25,8 +25,8 @@ struct AppMaster {
 
         /// Example: 1.0.1 (23)
         static let version: String = {
-                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.1.0"
-                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "1"
+                let marketingVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "error"
+                let currentProjectVersion: String = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "null"
                 return marketingVersion + " (" + currentProjectVersion + ")"
         }()
 }
@@ -125,13 +125,13 @@ extension AppMaster {
                 confusionEntries = Confusion.fetch()
         }
 
-        private(set) static var surnames: [LineUnit] = []
+        private(set) static var surnames: [TextRomanization] = []
         static func fetchSurnames() {
-                surnames = BaakGaaSing.fetch()
+                surnames = HundredFamilySurnames.fetch()
         }
 
-        private(set) static var cinZiManUnits: [LineUnit] = []
-        static func fetchCinZiManUnits() {
-                cinZiManUnits = CinZiMan.fetch()
+        private(set) static var thousandCharacterClassicEntries: [TextRomanization] = []
+        static func fetchThousandCharacterClassic() {
+                thousandCharacterClassicEntries = ThousandCharacterClassic.fetch()
         }
 }

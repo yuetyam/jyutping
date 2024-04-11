@@ -96,9 +96,9 @@ struct MacContentView: View {
                         case .solarTerms:
                                 SolarTermsView().applyVisualEffect()
                         case .surnames:
-                                MacSurnamesView().applyVisualEffect()
+                                MacHundredFamilySurnamesView().applyVisualEffect()
                         case .cinZiMan:
-                                MacCinZiManView().applyVisualEffect()
+                                MacThousandCharacterClassicView().applyVisualEffect()
                         case .cantonMetro:
                                 MacCantonMetroView().applyVisualEffect()
                         case .fatshanMetro:

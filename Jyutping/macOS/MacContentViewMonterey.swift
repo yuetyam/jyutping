@@ -80,12 +80,12 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.SolarTerms", systemImage: "cloud.sun")
                                         }
                                         NavigationLink {
-                                                MacSurnamesView().applyVisualEffect()
+                                                MacHundredFamilySurnamesView().applyVisualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.HundredFamilySurnames", systemImage: "person")
                                         }
                                         NavigationLink {
-                                                MacCinZiManView().applyVisualEffect()
+                                                MacThousandCharacterClassicView().applyVisualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: "character")
                                         }

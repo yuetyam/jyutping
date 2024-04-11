@@ -14,8 +14,4 @@ struct GoToSettingsLinkView: View {
         }
 }
 
-#Preview {
-        GoToSettingsLinkView()
-}
-
 #endif

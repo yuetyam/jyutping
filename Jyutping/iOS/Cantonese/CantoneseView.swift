@@ -33,10 +33,10 @@ struct CantoneseView: View {
                                         NavigationLink(destination: SolarTermsView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.SolarTerms", systemImage: "cloud.sun")
                                         }
-                                        NavigationLink(destination: IOSSurnamesView()) {
+                                        NavigationLink(destination: IOSHundredFamilySurnamesView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.HundredFamilySurnames", systemImage: "person")
                                         }
-                                        NavigationLink(destination: IOSCinZiManView()) {
+                                        NavigationLink(destination: IOSThousandCharacterClassicView()) {
                                                 Label("IOSCantoneseTab.LabelTitle.ThousandCharacterClassic", systemImage: "character")
                                         }
                                 }

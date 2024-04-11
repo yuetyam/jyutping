@@ -4,7 +4,7 @@ struct TermView: View {
         let term: Term
         var body: some View {
                 HStack(spacing: 18) {
-                        TextPronunciationView(text: term.name, romanization: term.romanization)
+                        TextRomanizationView(text: term.name, romanization: term.romanization)
                         Speaker(term.romanization)
                         if let emoji = term.emoji {
                                 Text(verbatim: emoji)
