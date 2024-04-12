@@ -6,8 +6,6 @@ struct InitialTable: View {
         @Environment(\.horizontalSizeClass) var horizontalSize
         #endif
 
-        private let footnote: String = "註：零聲母無標記"
-
         var body: some View {
                 let dataLines: [String] = sourceText.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines).map({ $0.trimmingCharacters(in: .whitespaces) })
                 #if os(macOS)
@@ -19,11 +17,9 @@ struct InitialTable: View {
                                         }
                                 }
                                 .block()
-                                HStack {
-                                        Text(verbatim: footnote).font(.copilot).textSelection(.enabled)
-                                        Spacer()
-                                }
-                                .block()
+                                MacFootnoteView(text: footnote1)
+                                MacFootnoteView(text: footnote2)
+                                MacFootnoteView(text: footnote3)
                         }
                         .padding()
                 }
@@ -37,7 +33,25 @@ struct InitialTable: View {
                                 }
                         }
                         Section {
-                                Text(verbatim: footnote)
+                                Text(verbatim: footnote1)
+                                        .font(.copilot)
+                                        .textSelection(.enabled)
+                        } header: {
+                                Text(verbatim: "註：").textCase(nil)
+                        }
+                        Section {
+                                Text(verbatim: footnote2)
+                                        .font(.copilot)
+                                        .textSelection(.enabled)
+                        } header: {
+                                Text(verbatim: "註：").textCase(nil)
+                        }
+                        Section {
+                                Text(verbatim: footnote3)
+                                        .font(.copilot)
+                                        .textSelection(.enabled)
+                        } header: {
+                                Text(verbatim: "註：").textCase(nil)
                         }
                 }
                 .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingInitials")
@@ -68,4 +82,35 @@ private let sourceText: String = """
 也 jaa5,[ j ],j
 """
 
+private let footnote1: String = """
+零聲母無標記。
+"""
+
+private let footnote2: String = """
+粵語聲母 h 與普通話聲母 h 有區別。粵語 h 係喉音 [ h ]，與英語 h 類似；而普通話 h 通常係舌根音 [ x ]。
+"""
+
+private let footnote3: String = """
+粵拼毋區分平翹舌，但現實中粵語人羣存在較爲複雜、混亂嘅平翹發音情況。
+"""
+
 }
+
+#if os(macOS)
+private struct MacFootnoteView: View {
+        let text: String
+        var body: some View {
+                HStack(spacing: 1) {
+                        Text(verbatim: "註")
+                                .textSelection(.enabled)
+                        Text.separator
+                                .textSelection(.disabled)
+                        Text(verbatim: text)
+                                .textSelection(.enabled)
+                        Spacer()
+                }
+                .font(.copilot)
+                .block()
+        }
+}
+#endif
