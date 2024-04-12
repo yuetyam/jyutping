@@ -124,22 +124,20 @@ struct UserLexicon {
         /// Delete one lexicon entry
         static func removeItem(candidate: Candidate) {
                 let id: Int64 = Int64((candidate.lexiconText + candidate.romanization).hash)
-                let deleteStatementString = "DELETE FROM lexicon WHERE id = \(id) LIMIT 1;"
-                var deleteStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, deleteStatementString, -1, &deleteStatement, nil) == SQLITE_OK {
-                        if sqlite3_step(deleteStatement) == SQLITE_DONE {}
-                }
-                sqlite3_finalize(deleteStatement)
+                let command: String = "DELETE FROM lexicon WHERE id = \(id) LIMIT 1;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
         /// Clear User Lexicon
         static func deleteAll() {
-                let deleteStatementString = "DELETE FROM lexicon;"
-                var deleteStatement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(database, deleteStatementString, -1, &deleteStatement, nil) == SQLITE_OK {
-                        if sqlite3_step(deleteStatement) == SQLITE_DONE {}
-                }
-                sqlite3_finalize(deleteStatement)
+                let command: String = "DELETE FROM lexicon;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 }
 
