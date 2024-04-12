@@ -6,9 +6,9 @@ struct ScrollViewGestureButton<Label: View>: View {
 
         init(
                 pressAction: @escaping () -> Void = {},
-                doubleTapTimeout: TimeInterval = 0.4,
+                doubleTapTimeout: TimeInterval = 0.3,
                 doubleTapAction: @escaping () -> Void = {},
-                longPressTime: TimeInterval = 0.8,
+                longPressTime: TimeInterval = 0.4,
                 longPressAction: @escaping () -> Void = {},
                 endAction: @escaping () -> Void = {},
                 releaseAction: @escaping () -> Void = {},
@@ -35,7 +35,7 @@ struct ScrollViewGestureButton<Label: View>: View {
         }
 }
 
-struct ScrollViewGestureButtonStyle: ButtonStyle {
+private struct ScrollViewGestureButtonStyle: ButtonStyle {
 
         init(
                 pressAction: @escaping () -> Void,
@@ -86,8 +86,9 @@ struct ScrollViewGestureButtonStyle: ButtonStyle {
         }
         private func tryTriggerLongPressAfterDelay(triggered date: Date) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + longPressTime) {
-                        guard date == longPressDate else { return }
-                        longPressAction()
+                        if date == longPressDate {
+                                longPressAction()
+                        }
                 }
         }
 }

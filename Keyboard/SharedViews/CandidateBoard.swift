@@ -22,6 +22,9 @@ struct CandidateBoard: View {
 
         @Namespace private var topID
 
+        @State private var isLongPressActionTriggered: Bool = false
+        @State private var isReleaseActionTriggered: Bool = false
+
         private let collapseWidth: CGFloat = 44
         private let collapseHeight: CGFloat = 44
 
@@ -69,14 +72,32 @@ struct CandidateBoard: View {
                                                         HStack(spacing: 0) {
                                                                 ForEach(row.elements) { element in
                                                                         let candidate = element.candidate
-                                                                        ScrollViewButton {
-                                                                                AudioFeedback.inputed()
-                                                                                context.triggerSelectionHapticFeedback()
-                                                                                context.operate(.select(candidate))
-                                                                                withAnimation {
-                                                                                        proxy.scrollTo(topID)
+                                                                        ScrollViewButton(
+                                                                                longPressTime: 0.4,
+                                                                                longPressAction: {
+                                                                                        guard !isReleaseActionTriggered else { return }
+                                                                                        defer { isLongPressActionTriggered = true }
+                                                                                        AudioFeedback.deleted()
+                                                                                        context.triggerHapticFeedback()
+                                                                                        UserLexicon.removeItem(candidate: candidate)
+                                                                                },
+                                                                                endAction: {
+                                                                                        withAnimation(.default.delay(0.5)) {
+                                                                                                isLongPressActionTriggered = false
+                                                                                                isReleaseActionTriggered = false
+                                                                                        }
+                                                                                },
+                                                                                releaseAction: {
+                                                                                        guard !isLongPressActionTriggered else { return }
+                                                                                        defer { isReleaseActionTriggered = true }
+                                                                                        AudioFeedback.inputed()
+                                                                                        context.triggerSelectionHapticFeedback()
+                                                                                        context.operate(.select(candidate))
+                                                                                        withAnimation {
+                                                                                                proxy.scrollTo(topID)
+                                                                                        }
                                                                                 }
-                                                                        } label: {
+                                                                        ) {
                                                                                 ZStack {
                                                                                         Color.interactiveClear
                                                                                         switch commentStyle {

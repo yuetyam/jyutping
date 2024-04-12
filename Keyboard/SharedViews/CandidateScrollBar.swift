@@ -13,6 +13,9 @@ struct CandidateScrollBar: View {
 
         @Namespace private var topID
 
+        @State private var isLongPressActionTriggered: Bool = false
+        @State private var isReleaseActionTriggered: Bool = false
+
         private let expanderWidth: CGFloat = 44
 
         var body: some View {
@@ -25,14 +28,32 @@ struct CandidateScrollBar: View {
                                                 EmptyView().id(topID)
                                                 ForEach(0..<context.candidates.count, id: \.self) { index in
                                                         let candidate = context.candidates[index]
-                                                        ScrollViewButton {
-                                                                AudioFeedback.inputed()
-                                                                context.triggerSelectionHapticFeedback()
-                                                                context.operate(.select(candidate))
-                                                                withAnimation {
-                                                                        proxy.scrollTo(topID)
+                                                        ScrollViewButton(
+                                                                longPressTime: 0.4,
+                                                                longPressAction: {
+                                                                        guard !isReleaseActionTriggered else { return }
+                                                                        defer { isLongPressActionTriggered = true }
+                                                                        AudioFeedback.deleted()
+                                                                        context.triggerHapticFeedback()
+                                                                        UserLexicon.removeItem(candidate: candidate)
+                                                                },
+                                                                endAction: {
+                                                                        withAnimation(.default.delay(0.5)) {
+                                                                                isLongPressActionTriggered = false
+                                                                                isReleaseActionTriggered = false
+                                                                        }
+                                                                },
+                                                                releaseAction: {
+                                                                        guard !isLongPressActionTriggered else { return }
+                                                                        defer { isReleaseActionTriggered = true }
+                                                                        AudioFeedback.inputed()
+                                                                        context.triggerSelectionHapticFeedback()
+                                                                        context.operate(.select(candidate))
+                                                                        withAnimation {
+                                                                                proxy.scrollTo(topID)
+                                                                        }
                                                                 }
-                                                        } label: {
+                                                        ) {
                                                                 ZStack {
                                                                         Color.interactiveClear
                                                                         switch commentStyle {
