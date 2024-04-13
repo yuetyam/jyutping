@@ -97,6 +97,8 @@
 "IOSHomeTab.IntroductionsView.Body.SpaceDoubleTapping" = "雙擊空格掣(Space)可以輸入句號「。」";
 "IOSHomeTab.IntroductionsView.Heading.ClearPreEdit" = "一次過清除已輸入音節";
 "IOSHomeTab.IntroductionsView.Body.ClearPreEdit" = "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。";
+"IOSHomeTab.IntroductionsView.Heading.RemoveCandidateFromUserLexicon" = "從個人詞庫刪除某個候選詞";
+"IOSHomeTab.IntroductionsView.Body.RemoveCandidateFromUserLexicon" = "長撳某一個候選詞可以將佢從個人詞庫刪除。";
 "IOSHomeTab.IntroductionsView.Heading.SaamPingKeyboard" = "三拼鍵盤佈局";
 "IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row1" = "雙擊 gw 掣可以輸入 kw。";
 "IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row2" = "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。";
