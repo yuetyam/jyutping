@@ -56,7 +56,7 @@ public struct Segmentor {
         // MARK: - SQLite
 
         private static var storageDatabase: OpaquePointer? = nil
-        private static var database: OpaquePointer? = nil
+        private(set) static var database: OpaquePointer? = nil
         private static var isDatabaseReady: Bool = false
 
         static func prepare() {
@@ -71,11 +71,12 @@ public struct Segmentor {
                 isDatabaseReady = true
         }
 
-        private static func match(_ code: Int) -> SegmentToken? {
-                let query: String = "SELECT token, origin FROM syllabletable WHERE code = \(code);"
+        private static func match<T: StringProtocol>(_ text: T) -> SegmentToken? {
+                guard let code: Int = text.charcode else { return nil }
+                let command: String = "SELECT token, origin FROM syllabletable WHERE code = \(code) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
                 let token: String = String(cString: sqlite3_column_text(statement, 0))
                 let origin: String = String(cString: sqlite3_column_text(statement, 1))
@@ -88,8 +89,8 @@ public struct Segmentor {
         private static func splitLeading<T: StringProtocol>(_ text: T)-> [SegmentToken] {
                 let maxLength: Int = min(text.count, 6)
                 guard maxLength > 0 else { return [] }
-                let tokens = (1...maxLength).reversed().map({ match(text.prefix($0).hash) })
-                return tokens.compactMap({ $0 })
+                let tokens = (1...maxLength).reversed().compactMap({ match(text.prefix($0)) })
+                return tokens
         }
 
         private static func split(text: String) -> Segmentation {

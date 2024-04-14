@@ -8,6 +8,7 @@ public struct SyllableDBHandler {
         public static func prepare() {
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createSyllableTable()
+                createPinyinSyllableTable()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
         }
@@ -44,6 +45,29 @@ public struct SyllableDBHandler {
                 }
                 let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
                 let insertValues: String = "INSERT INTO syllabletable (code, token, origin) VALUES \(values);"
+                var insertStatement: OpaquePointer? = nil
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+        private static func createPinyinSyllableTable() {
+                let createTable: String = "CREATE TABLE pinyinsyllabletable(code INTEGER NOT NULL PRIMARY KEY, syllable TEXT NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                guard let url = Bundle.module.url(forResource: "pinyin-syllable", withExtension: "txt") else { return }
+                guard let content = try? String(contentsOf: url) else { return }
+                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+                let entries = sourceLines.compactMap { line -> String? in
+                        let parts = line.split(separator: "\t")
+                        guard parts.count == 2 else { return nil }
+                        let code = parts[0]
+                        let syllable = parts[1]
+                        return "(\(code), '\(syllable)')"
+                }
+                let values: String = entries.joined(separator: ", ")
+                let insertValues: String = "INSERT INTO pinyinsyllabletable (code, syllable) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
