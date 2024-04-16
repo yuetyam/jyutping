@@ -15,6 +15,7 @@ struct MacResourcesView: View {
                                         LinkView(icon: searchIcon, title: "粵典", url: "https://words.hk")
                                         LinkView(icon: searchIcon, title: "粵語審音配詞字庫", url: "https://humanum.arts.cuhk.edu.hk/Lexis/lexi-can")
                                         LinkView(icon: searchIcon, title: "泛粵典", url: "https://www.jyutdict.org")
+                                        LinkView(icon: searchIcon, title: "羊羊粵語", url: "https://shyyp.net/hant")
                                 }
                                 .block()
 
