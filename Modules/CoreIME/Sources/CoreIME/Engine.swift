@@ -292,10 +292,10 @@ extension Engine {
                 var candidates: [Candidate] = []
                 let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 let limit: Int = limit ?? 50
-                let query: String = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
+                let command: String = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word: String = String(cString: sqlite3_column_text(statement, 0))
                         let romanization: String = String(cString: sqlite3_column_text(statement, 1))
@@ -306,8 +306,9 @@ extension Engine {
         }
         private static func match(text: String, input: String, mark: String? = nil, limit: Int? = nil) -> [Candidate] {
                 var candidates: [Candidate] = []
+                let code: Int = text.hash
                 let limit: Int = limit ?? -1
-                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
+                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
@@ -396,10 +397,10 @@ extension Engine {
                 var candidates: [TenKeyCandidate] = []
                 let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 let limit: Int = limit ?? 50
-                let query: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
+                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
@@ -412,11 +413,12 @@ extension Engine {
         }
         private static func matchWithRowID(text: String, input: String, limit: Int? = nil) -> [TenKeyCandidate] {
                 var candidates: [TenKeyCandidate] = []
+                let code: Int = text.hash
                 let limit: Int = limit ?? -1
-                let query: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(text.hash) LIMIT \(limit);"
+                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let rowID: Int = Int(sqlite3_column_int64(statement, 0))
                         let word: String = String(cString: sqlite3_column_text(statement, 1))

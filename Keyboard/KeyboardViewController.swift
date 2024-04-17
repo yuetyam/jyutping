@@ -569,7 +569,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let schemes: [[String]] = PinyinSegmentor.segment(text: text)
-                let tailMarkedText: String = {
+                let suggestions: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
+                let tailText2Mark: String = {
+                        if let firstCandidate = suggestions.first, firstCandidate.input.count == text.count { return firstCandidate.mark }
                         guard let bestScheme = schemes.first else { return text }
                         let leadingLength: Int = bestScheme.summedLength
                         let leadingText: String = bestScheme.joined(separator: String.space)
@@ -577,13 +579,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let tailText = text.dropFirst(leadingLength)
                         return leadingText + String.space + tailText
                 }()
-                text2mark = "r " + tailMarkedText
-                let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
-                candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                text2mark = "r " + tailText2Mark
+                candidates = suggestions.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
-                let converted = text.map({ Logogram.cangjie(of: $0) }).compactMap({ $0 })
+                let converted = text.compactMap({ Logogram.cangjie(of: $0) })
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         text2mark = String(converted)
@@ -597,7 +598,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func strokeReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = Logogram.strokeTransform(text)
-                let converted = transformed.map({ Logogram.stroke(of: $0) }).compactMap({ $0 })
+                let converted = transformed.compactMap({ Logogram.stroke(of: $0) })
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         text2mark = String(converted)

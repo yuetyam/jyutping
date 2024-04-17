@@ -337,7 +337,9 @@ final class JyutpingInputController: IMKInputController {
                         return
                 }
                 let schemes: [[String]] = PinyinSegmentor.segment(text: text)
-                let tailMarkedText: String = {
+                let suggestions: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
+                let tailText2Mark: String = {
+                        if let firstCandidate = suggestions.first, firstCandidate.input.count == text.count { return firstCandidate.mark }
                         guard let bestScheme = schemes.first else { return text }
                         let leadingLength: Int = bestScheme.summedLength
                         let leadingText: String = bestScheme.joined(separator: " ")
@@ -345,14 +347,13 @@ final class JyutpingInputController: IMKInputController {
                         let tailText = text.dropFirst(leadingLength)
                         return leadingText + " " + tailText
                 }()
-                let text2mark: String = "r " + tailMarkedText
+                let text2mark: String = "r " + tailText2Mark
                 mark(text: text2mark)
-                let lookup: [Candidate] = Engine.pinyinReverseLookup(text: text, schemes: schemes)
-                candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                candidates = suggestions.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
-                let converted = text.map({ CharacterStandard.cangjie(of: $0) }).compactMap({ $0 })
+                let converted = text.compactMap({ CharacterStandard.cangjie(of: $0) })
                 let isValidSequence: Bool = !(converted.isEmpty) && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
@@ -366,7 +367,7 @@ final class JyutpingInputController: IMKInputController {
         private func strokeReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = CharacterStandard.strokeTransform(text)
-                let converted = transformed.map({ CharacterStandard.stroke(of: $0) }).compactMap({ $0 })
+                let converted = transformed.compactMap({ CharacterStandard.stroke(of: $0) })
                 let isValidSequence: Bool = !(converted.isEmpty) && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))

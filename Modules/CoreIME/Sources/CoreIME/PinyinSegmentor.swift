@@ -19,7 +19,6 @@ public struct PinyinSegmentor {
                 }
         }
 
-        // TODO: - Needs improvements
         private static func split(_ text: String) -> [[String]] {
                 let leadingTokens: [String] = splitLeading(text)
                 guard !(leadingTokens.isEmpty) else { return [] }
@@ -29,7 +28,7 @@ public struct PinyinSegmentor {
                 var shouldContinue: Bool = true
                 while shouldContinue {
                         for scheme in segmentation {
-                                let schemeLength = scheme.reduce(0, { $0 + $1.count })
+                                let schemeLength = scheme.summedLength
                                 guard schemeLength < textCount else { continue }
                                 let tailText = String(text.dropFirst(schemeLength))
                                 let tailTokens = splitLeading(tailText)

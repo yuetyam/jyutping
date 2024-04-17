@@ -69,7 +69,7 @@ struct IMEDBHandler {
                         "CREATE INDEX lexiconwordindex ON lexicontable(word);",
                         "CREATE INDEX composepingindex ON composetable(ping);",
                         "CREATE INDEX pinyinshortcutindex ON pinyintable(shortcut);",
-                        "CREATE INDEX pinyinpinindex ON pinyintable(pin);",
+                        "CREATE INDEX pinyinpingindex ON pinyintable(ping);",
                         "CREATE INDEX shapecangjieindex ON shapetable(cangjie);",
                         "CREATE INDEX shapestrokeindex ON shapetable(stroke);",
                         "CREATE INDEX symbolshortcutindex ON symboltable(shortcut);",
@@ -131,7 +131,7 @@ struct IMEDBHandler {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createPinyinTable() {
-                let createTable: String = "CREATE TABLE pinyintable(word TEXT NOT NULL, shortcut INTEGER NOT NULL, pin INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE pinyintable(word TEXT NOT NULL, pinyin TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -140,7 +140,7 @@ struct IMEDBHandler {
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 func insert(values: String) {
-                        let insert: String = "INSERT INTO pinyintable (word, shortcut, pin) VALUES \(values);"
+                        let insert: String = "INSERT INTO pinyintable (word, pinyin, shortcut, ping) VALUES \(values);"
                         var insertStatement: OpaquePointer? = nil
                         defer { sqlite3_finalize(insertStatement) }
                         guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -151,15 +151,16 @@ struct IMEDBHandler {
                 for number in range {
                         let bound: Int = number == 1999 ? sourceLines.count : ((number + 1) * distance)
                         let part = sourceLines[(number * distance)..<bound]
-                        let entries = part.map { line -> String? in
+                        let entries = part.compactMap { line -> String? in
                                 let parts = line.split(separator: "\t")
-                                guard parts.count == 3 else { return nil }
+                                guard parts.count == 4 else { return nil }
                                 let word = parts[0]
-                                let shortcut = parts[1]
-                                let pin = parts[2]
-                                return "('\(word)', \(shortcut), \(pin))"
+                                let pinyin = parts[1]
+                                let shortcut = parts[2]
+                                let ping = parts[3]
+                                return "('\(word)', '\(pinyin)', \(shortcut), \(ping))"
                         }
-                        let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                        let values: String = entries.joined(separator: ", ")
                         insert(values: values)
                 }
         }
