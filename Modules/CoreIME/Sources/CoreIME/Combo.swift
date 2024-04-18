@@ -1,4 +1,5 @@
-enum Combo: Int {
+/// 10 Key keyboard element
+public enum Combo: Int {
 
         case ABC = 2
         case DEF = 3
@@ -9,7 +10,8 @@ enum Combo: Int {
         case TUV = 8
         case WXYZ = 9
 
-        var text: String {
+        /// Key text
+        public var text: String {
                 switch self {
                 case .ABC:
                         return "ABC"
@@ -30,7 +32,8 @@ enum Combo: Int {
                 }
         }
 
-        var keys: [String] {
+        /// Valid key characters
+        public var letters: [String] {
                 switch self {
                 case .ABC:
                         return ["a", "b", "c"]
@@ -50,7 +53,9 @@ enum Combo: Int {
                         return ["w", "y", "z"]
                 }
         }
-        var anchors: [String] {
+
+        /// Key characters that fit Jyutping initial
+        public var anchors: [String] {
                 switch self {
                 case .ABC:
                         return ["b", "c"]

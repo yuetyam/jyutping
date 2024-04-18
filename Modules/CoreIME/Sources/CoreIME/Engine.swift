@@ -1,6 +1,8 @@
 import Foundation
 import SQLite3
 
+// MARK: - Preparing Databases
+
 public struct Engine {
 
         private static var storageDatabase: OpaquePointer? = nil
@@ -30,6 +32,62 @@ public struct Engine {
 }
 
 extension Engine {
+
+        // MARK: - SaamPing / 10-Key
+
+        public static func tenKeySuggest(combos: [Combo], sequences: [String]) -> [Candidate] {
+                guard !(sequences.isEmpty) else { return [] }
+                let suggestions = sequences.map { text -> [Candidate] in
+                        guard canProcess(text) else { return [] }
+                        let textCount = text.count
+                        guard textCount > 1 else { return shortcut(text: text) }
+                        let segmentation = Segmentor.segment(text: text)
+                        return match(text: text, input: text) + shortcut(text: text) + tenKeySearch(text: text, segmentation: segmentation)
+                }
+                return suggestions.flatMap({ $0 }).uniqued().sorted { (lhs, rhs) -> Bool in
+                        let lhsInputCount: Int = lhs.input.count
+                        let rhsInputCount: Int = rhs.input.count
+                        guard lhsInputCount == rhsInputCount else {
+                                return lhsInputCount > rhsInputCount
+                        }
+                        let lhsTextCount: Int = lhs.text.count
+                        let rhsTextCount: Int = rhs.text.count
+                        guard lhsTextCount == rhsTextCount else {
+                                return lhsTextCount < rhsTextCount
+                        }
+                        return lhs.order < rhs.order
+                }
+        }
+        private static func tenKeySearch(text: String, segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
+                let textCount: Int = text.count
+                let perfectSchemes = segmentation.filter({ $0.length == textCount })
+                if !(perfectSchemes.isEmpty) {
+                        let matches = perfectSchemes.map({ scheme -> [Candidate] in
+                                var queries: [[Candidate]] = []
+                                for number in (0..<scheme.count) {
+                                        let slice = scheme.dropLast(number)
+                                        let pingText = slice.map(\.origin).joined()
+                                        let inputText = slice.map(\.text).joined()
+                                        let text2mark = slice.map(\.text).joined(separator: " ")
+                                        let matched = match(text: pingText, input: inputText, mark: text2mark, limit: limit)
+                                        queries.append(matched)
+                                }
+                                return queries.flatMap({ $0 })
+                        })
+                        return matches.flatMap({ $0 })
+                } else {
+                        let matches = segmentation.map({ scheme -> [Candidate] in
+                                let pingText = scheme.map(\.origin).joined()
+                                let inputText = scheme.map(\.text).joined()
+                                let text2mark = scheme.map(\.text).joined(separator: " ")
+                                return match(text: pingText, input: inputText, mark: text2mark, limit: limit)
+                        })
+                        return matches.flatMap({ $0 })
+                }
+        }
+
+
+        // MARK: - Suggestions
 
         /// Suggestion
         /// - Parameters:
@@ -286,8 +344,20 @@ extension Engine {
         }
 
 
+        // MARK: - SQLite
+
         // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
+        private static func canProcess(_ text: String) -> Bool {
+                guard let anchor = text.first else { return false }
+                let code: Int = (anchor == "y") ? "j".hash : String(anchor).hash
+                let query: String = "SELECT rowid FROM lexicontable WHERE shortcut = \(code) LIMIT 1;"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return false }
+                guard sqlite3_step(statement) == SQLITE_ROW else { return false }
+                return true
+        }
         private static func shortcut(text: String, limit: Int? = nil) -> [Candidate] {
                 var candidates: [Candidate] = []
                 let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
@@ -324,112 +394,8 @@ extension Engine {
         }
 }
 
-private extension Engine {
-        static func canProcess(_ text: String) -> Bool {
-                guard let anchor = text.first else { return false }
-                let code: Int = (anchor == "y") ? "j".hash : String(anchor).hash
-                let query: String = "SELECT rowid FROM lexicontable WHERE shortcut = \(code) LIMIT 1;"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return false }
-                guard sqlite3_step(statement) == SQLITE_ROW else { return false }
-                return true
-        }
-}
 
-extension Engine {
-
-        private struct TenKeyCandidate: Hashable {
-                let candidate: Candidate
-                let rowID: Int
-        }
-
-        public static func tenKeySuggest(sequences: [String]) -> [Candidate] {
-                guard !(sequences.isEmpty) else { return [] }
-                let suggestions = sequences.map { text -> [TenKeyCandidate] in
-                        guard canProcess(text) else { return [] }
-                        let textCount = text.count
-                        guard textCount > 1 else { return shortcutWithRowID(text: text) }
-                        let segmentation = Segmentor.segment(text: text)
-                        // guard segmentation.maxLength > 0 else { return tenKeyProcessVerbatim(text: text) }
-                        let fullMatch = matchWithRowID(text: text, input: text)
-                        let fullShortcut = shortcutWithRowID(text: text)
-                        let candidates = tenKenMatch(segmentation: segmentation)
-                        let perfectCandidates = candidates.filter({ $0.candidate.input.count == textCount })
-                        return (fullMatch + perfectCandidates + fullShortcut + candidates).uniqued()
-                }
-                let entries = suggestions.flatMap({ $0 }).sorted { (lhs, rhs) -> Bool in
-                        let lhsInputCount: Int = lhs.candidate.input.count
-                        let rhsInputCount: Int = rhs.candidate.input.count
-                        guard lhsInputCount == rhsInputCount else {
-                                return lhsInputCount > rhsInputCount
-                        }
-                        let lhsTextCount: Int = lhs.candidate.text.count
-                        let rhsTextCount: Int = rhs.candidate.text.count
-                        guard lhsTextCount == rhsTextCount else {
-                                return lhsTextCount < rhsTextCount
-                        }
-                        return lhs.rowID < rhs.rowID
-                }
-                return entries.map({ $0.candidate }).uniqued()
-        }
-
-        private static func tenKeyProcessVerbatim(text: String, limit: Int? = nil) -> [TenKeyCandidate] {
-                let rounds = (0..<text.count).map({ number -> [TenKeyCandidate] in
-                        let leading: String = String(text.dropLast(number))
-                        return matchWithRowID(text: leading, input: leading, limit: limit) + shortcutWithRowID(text: leading, limit: limit)
-                })
-                return rounds.flatMap({ $0 }).uniqued()
-        }
-        private static func tenKenMatch(segmentation: Segmentation, limit: Int? = nil) -> [TenKeyCandidate] {
-                let matches = segmentation.map({ scheme -> [TenKeyCandidate] in
-                        let input = scheme.map(\.text).joined()
-                        let ping = scheme.map(\.origin).joined()
-                        return matchWithRowID(text: ping, input: input, limit: limit)
-                })
-                return matches.flatMap({ $0 })
-        }
-
-
-        // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
-
-        private static func shortcutWithRowID(text: String, limit: Int? = nil) -> [TenKeyCandidate] {
-                var candidates: [TenKeyCandidate] = []
-                let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
-                let limit: Int = limit ?? 50
-                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
-                        let word: String = String(cString: sqlite3_column_text(statement, 1))
-                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = Candidate(text: word, romanization: romanization, input: text)
-                        let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
-                        candidates.append(instance)
-                }
-                return candidates
-        }
-        private static func matchWithRowID(text: String, input: String, limit: Int? = nil) -> [TenKeyCandidate] {
-                var candidates: [TenKeyCandidate] = []
-                let code: Int = text.hash
-                let limit: Int = limit ?? -1
-                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE ping = \(code) LIMIT \(limit);"
-                var statement: OpaquePointer? = nil
-                defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
-                while sqlite3_step(statement) == SQLITE_ROW {
-                        let rowID: Int = Int(sqlite3_column_int64(statement, 0))
-                        let word: String = String(cString: sqlite3_column_text(statement, 1))
-                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
-                        let candidate = Candidate(text: word, romanization: romanization, input: input)
-                        let instance: TenKeyCandidate = TenKeyCandidate(candidate: candidate, rowID: rowID)
-                        candidates.append(instance)
-                }
-                return candidates
-        }
-}
+// MARK: - Sorting Candidates
 
 private extension Array where Element == Candidate {
 

@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct TenKeyInputKey: View {
 

@@ -30,15 +30,24 @@ struct TenKeyNumericKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                TenKeyNavigateKey(destination: .alphabetic)
-                                                TenKeyNumberKey(key: ".")
+                                                if context.needsInputModeSwitchKey {
+                                                        TenKeyGlobeKey()
+                                                        TenKeyNavigateKey(destination: .alphabetic)
+                                                } else {
+                                                        TenKeyNavigateKey(destination: .alphabetic)
+                                                        TenKeyNumberKey(key: ".")
+                                                }
                                                 TenKeyNumberKey(key: "0")
                                                 TenKeySpaceKey()
                                         }
                                 }
                                 VStack(spacing: 0) {
                                         TenKeyBackspaceKey()
-                                        TenKeyNumberKey(key: ".")
+                                        if context.needsInputModeSwitchKey {
+                                                TenKeyNumberKey(key: ".")
+                                        } else {
+                                                TenKeyNavigateKey(destination: .numeric)
+                                        }
                                         TenKeyReturnKey()
                                 }
                         }

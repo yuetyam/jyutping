@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreIME
 
 struct TenKeyKeyboard: View {
 
@@ -34,7 +35,9 @@ struct TenKeyKeyboard: View {
                                                 }
                                         }
                                         HStack(spacing: 0) {
-                                                // TODO: Globe Key
+                                                if context.needsInputModeSwitchKey {
+                                                        TenKeyGlobeKey()
+                                                }
                                                 TenKeyNavigateKey(destination: .tenKeyNumeric)
                                                 TenKeySpaceKey()
                                         }

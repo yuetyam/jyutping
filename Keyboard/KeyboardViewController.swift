@@ -182,13 +182,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         // REASON: Chrome address bar
                                         textDocumentProxy.insertText(String.empty)
                                 }
-                                UserLexicon.prepare()
-                                Engine.prepare()
                                 updateReturnKeyText()
                         case (false, true):
                                 inputStage = .ending
                                 if !(selectedCandidates.isEmpty) {
-                                        let concatenated: Candidate = selectedCandidates.joined()
+                                        let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
                                         selectedCandidates = []
                                         UserLexicon.handle(concatenated)
                                 }
@@ -228,27 +226,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         // REASON: Chrome address bar
                                         textDocumentProxy.insertText(String.empty)
                                 }
-                                UserLexicon.prepare()
-                                Engine.prepare()
-                                if let combo = bufferCombos.first {
-                                        sidebarTexts = combo.keys
-                                }
                                 updateReturnKeyText()
                         case (false, true):
                                 inputStage = .ending
                                 if !(selectedCandidates.isEmpty) {
-                                        // TODO: Uncomment this
-                                        // let concatenated: Candidate = selectedCandidates.joined()
+                                        let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
                                         selectedCandidates = []
-                                        // UserLexicon.handle(concatenated)
+                                        UserLexicon.handle(concatenated)
                                 }
-                                resetSidebarTexts()
                                 updateReturnKeyText()
                         case (false, false):
                                 inputStage = .ongoing
-                                if let combo = bufferCombos.last {
-                                        sidebarTexts = combo.keys
-                                }
                         }
                         tenKeySuggest()
                 }
@@ -459,7 +447,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 let isTenKeyKeyboard: Bool = (Options.keyboardLayout == .tenKey) && keyboardInterface.isCompact
                 guard !isTenKeyKeyboard else {
-                        // TODO: selectedCandidates.append(candidate)
+                        selectedCandidates.append(candidate)
                         let length: Int = bufferCombos.count - candidate.input.count
                         bufferCombos = bufferCombos.suffix(length)
                         return
@@ -520,22 +508,21 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // MARK: - Candidate Suggestions
 
         private func tenKeySuggest() {
-                guard var possibleTexts = bufferCombos.first?.keys else {
+                guard var sequences = bufferCombos.first?.letters else {
                         text2mark = String.empty
-                        if !(candidates.isEmpty) {
-                                candidates = []
-                        }
+                        candidates = []
                         return
                 }
                 for combo in bufferCombos.dropFirst() {
-                        let possibilities = combo.keys.map { key -> [String] in
-                                return possibleTexts.map({ $0 + key })
+                        let appended = combo.letters.map { letter -> [String] in
+                                return sequences.map({ $0 + letter })
                         }
-                        possibleTexts = possibilities.flatMap({ $0 })
+                        sequences = appended.flatMap({ $0 })
                 }
-                let suggestions = Engine.tenKeySuggest(sequences: possibleTexts).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
-                text2mark = suggestions.first?.input ?? String.empty
-                candidates = suggestions
+                let userLexiconCandidates: [Candidate] = UserLexicon.tenKeySuggest(combos: bufferCombos, sequences: sequences)
+                let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: bufferCombos, sequences: sequences)
+                text2mark = userLexiconCandidates.first?.mark ?? engineCandidates.first?.mark ?? String.empty
+                candidates = (userLexiconCandidates.prefix(10) + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
 
         private func suggest() {

@@ -35,6 +35,7 @@ struct TenKeySpecialKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(3)
+                        /*
                         if context.inputStage.isBuffering {
                                 VStack {
                                         Text(verbatim: "'")
@@ -48,6 +49,7 @@ struct TenKeySpecialKey: View {
                                 }
                                 .padding(.top, 8)
                         }
+                        */
                 }
                 .frame(width: context.widthUnit * 2, height: context.heightUnit)
                 .contentShape(Rectangle())
@@ -64,5 +66,6 @@ struct TenKeySpecialKey: View {
                                 context.operate(.process(text))
                          }
                 )
+                .disabled(true)
         }
 }
