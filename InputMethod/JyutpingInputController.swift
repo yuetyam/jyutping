@@ -197,7 +197,7 @@ final class JyutpingInputController: IMKInputController {
                                 inputStage = .ending
                                 let shouldHandleSelectedCandidates: Bool = !(selectedCandidates.isEmpty)
                                 guard shouldHandleSelectedCandidates else { return }
-                                let concatenated: Candidate = selectedCandidates.joined()
+                                let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
                                 selectedCandidates = []
                                 UserLexicon.handle(concatenated)
                         case (false, false):
