@@ -104,59 +104,58 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         ///
         /// So we use `setMarkedText() & unmarkText()`
         ///
-        /// In iOS 17, we may still need to use `insertText()`
+        /// In iOS 17, we may still need to use `insertText()` and do some hacks.
         private func input(_ text: String) {
+                guard !(text.isEmpty) else { return }
                 canMarkText = false
-                defer {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [unowned self] in
-                                canMarkText = true
-                        }
-                }
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
                 let location: Int = text.utf16.count
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
-                guard !(text.isEmpty) else { return }
-                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                let currentLength: Int = currentContext.count
-                guard currentLength == previousLength else { return }
-                guard currentContext == previousContext else { return }
-                textDocumentProxy.insertText(text)
+                let text2insert: String = {
+                        let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                        let currentLength: Int = currentContext.count
+                        guard currentLength == previousLength else { return String.zeroWidthSpace }
+                        guard currentContext == previousContext else { return String.zeroWidthSpace }
+                        return text + String.zeroWidthSpace
+                }()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [unowned self] in
+                        textDocumentProxy.insertText(text2insert)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                        textDocumentProxy.deleteBackward()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) { [unowned self] in
+                        canMarkText = true
+                }
         }
         private func inputBufferText() {
-                // Yes, this's some kind of hack
-                defer {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [unowned self] in
-                                clearBuffer()
-                        }
-                }
-                defer {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
-                                if (textDocumentProxy.documentContextBeforeInput?.hasSuffix(String.zeroWidthSpace) ?? false) {
-                                        textDocumentProxy.deleteBackward()
-                                }
-                        }
-                }
-                defer {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) { [unowned self] in
-                                textDocumentProxy.insertText(String.zeroWidthSpace)
-                        }
-                }
                 let text: String = bufferText
+                guard !(text.isEmpty) else { return }
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
                 let location: Int = text.utf16.count
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
-                guard !(text.isEmpty) else { return }
-                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                let currentLength: Int = currentContext.count
-                guard currentLength == previousLength else { return }
-                guard currentContext == previousContext else { return }
-                textDocumentProxy.insertText(text)
+                let text2insert: String = {
+                        let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                        let currentLength: Int = currentContext.count
+                        guard currentLength == previousLength else { return String.zeroWidthSpace }
+                        guard currentContext == previousContext else { return String.zeroWidthSpace }
+                        return text + String.zeroWidthSpace
+                }()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [unowned self] in
+                        textDocumentProxy.insertText(text2insert)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                        textDocumentProxy.deleteBackward()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) { [unowned self] in
+                        clearBuffer()
+                }
         }
 
 
