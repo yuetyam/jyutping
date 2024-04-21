@@ -6,10 +6,13 @@ extension Image {
         static let leftChevron: Image = Image(systemName: "chevron.left")
         static let rightChevron: Image = Image(systemName: "chevron.right")
 
+        static let checkmark: Image = Image(systemName: "checkmark")
+
         /// Backward delete
         static let backspace: Image = Image(systemName: "delete.backward")
 
-        static let checkmark: Image = Image(systemName: "checkmark")
+        static let `return`: Image = Image(systemName: "return")
+        static let search: Image = Image(systemName: "magnifyingglass")
 }
 
 extension UIImage {

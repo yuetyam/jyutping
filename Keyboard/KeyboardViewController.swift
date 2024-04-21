@@ -14,7 +14,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 keyboardInterface = adoptKeyboardInterface()
                 updateKeyboardSize()
                 updateSpaceKeyText()
-                updateReturnKeyText()
+                updateReturnKey()
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 view.addSubview(motherBoard.view)
                 motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +40,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 super.viewWillAppear(animated)
                 if isKeyboardPrepared {
                         updateSpaceKeyText()
-                        updateReturnKeyText()
+                        updateReturnKey()
                 } else {
                         prepareKeyboard()
                 }
@@ -57,9 +57,18 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 clearBuffer()
         }
 
+        private lazy var hasText: Bool? = nil {
+                didSet {
+                        guard oldValue != nil else { return }
+                        guard hasText != oldValue else { return }
+                        updateReturnKey()
+                }
+        }
         override func textDidChange(_ textInput: UITextInput?) {
                 super.textDidChange(textInput)
-                let didUserClearTextFiled: Bool = inputStage.isBuffering && !(textDocumentProxy.hasText)
+                let hasText: Bool = textInput?.hasText ?? textDocumentProxy.hasText
+                self.hasText = hasText
+                let didUserClearTextFiled: Bool = !hasText && inputStage.isBuffering
                 if didUserClearTextFiled {
                         clearBuffer()
                 }
@@ -181,7 +190,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         // REASON: Chrome address bar
                                         textDocumentProxy.insertText(String.empty)
                                 }
-                                updateReturnKeyText()
+                                updateReturnKey()
                         case (false, true):
                                 inputStage = .ending
                                 if !(selectedCandidates.isEmpty) {
@@ -189,7 +198,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         selectedCandidates = []
                                         UserLexicon.handle(concatenated)
                                 }
-                                updateReturnKeyText()
+                                updateReturnKey()
                         case (false, false):
                                 inputStage = .ongoing
                         }
@@ -225,7 +234,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         // REASON: Chrome address bar
                                         textDocumentProxy.insertText(String.empty)
                                 }
-                                updateReturnKeyText()
+                                updateReturnKey()
                         case (false, true):
                                 inputStage = .ending
                                 if !(selectedCandidates.isEmpty) {
@@ -233,7 +242,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         selectedCandidates = []
                                         UserLexicon.handle(concatenated)
                                 }
-                                updateReturnKeyText()
+                                updateReturnKey()
                         case (false, false):
                                 inputStage = .ongoing
                         }
@@ -250,6 +259,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // MARK: - Operations
 
         func operate(_ operation: Operation) {
+                defer { hasText = textDocumentProxy.hasText }
                 switch operation {
                 case .input(let text):
                         textDocumentProxy.insertText(text)
@@ -301,7 +311,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 aftercareSelected(candidate)
                         } else {
                                 inputBufferText()
-                                updateReturnKeyText()
+                                updateReturnKey()
                                 adjustKeyboard()
                         }
                 case .doubleSpace:
@@ -311,7 +321,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         aftercareSelected(candidate)
                                 } else {
                                         inputBufferText()
-                                        updateReturnKeyText()
+                                        updateReturnKey()
                                         adjustKeyboard()
                                 }
                                 return
@@ -366,7 +376,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .return:
                         if inputStage.isBuffering {
                                 inputBufferText()
-                                updateReturnKeyText()
+                                updateReturnKey()
                         } else {
                                 textDocumentProxy.insertText(String.newLine)
                         }
@@ -639,7 +649,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
                 updateSpaceKeyText()
-                updateReturnKeyText()
+                updateReturnKey()
         }
 
         @Published private(set) var previousKeyboardForm: KeyboardForm = .alphabetic
@@ -660,7 +670,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form
-                updateReturnKeyText()
+                updateReturnKey()
                 updateSpaceKeyText()
                 if isKeyboardHeightExpanded {
                         toggleKeyboardHeight()
@@ -679,9 +689,21 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateSpaceKeyText()
         }
 
-        @Published private(set) var returnKeyText: String = "換行"
-        private func updateReturnKeyText() {
-                let newText: String = textDocumentProxy.returnKeyType.returnKeyText(isABC: inputMethodMode.isABC, isSimplified: Options.characterStandard.isSimplified, isBuffering: inputStage.isBuffering)
+        @Published private(set) var returnKeyType: EnhancedReturnKeyType = .default
+        @Published private(set) var returnKeyState: ReturnKeyState = .standbyTraditional
+        @Published private(set) var returnKeyText: String = EnhancedReturnKeyType.default.text(of: .standbyTraditional)
+        private func updateReturnKey() {
+                let newType: EnhancedReturnKeyType = textDocumentProxy.returnKeyType.enhancedReturnKeyType
+                let enablesReturnKeyAutomatically: Bool = textDocumentProxy.enablesReturnKeyAutomatically ?? false
+                let isAvailable: Bool = !enablesReturnKeyAutomatically || textDocumentProxy.hasText
+                let newState: ReturnKeyState = ReturnKeyState.state(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isSimplified: Options.characterStandard.isSimplified, isBuffering: inputStage.isBuffering)
+                let newText: String = newType.text(of: newState)
+                if returnKeyType != newType {
+                        returnKeyType = newType
+                }
+                if returnKeyState != newState {
+                        returnKeyState = newState
+                }
                 if returnKeyText != newText {
                         returnKeyText = newText
                 }

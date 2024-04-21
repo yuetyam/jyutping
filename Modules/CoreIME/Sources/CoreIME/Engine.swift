@@ -349,8 +349,9 @@ extension Engine {
         // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
         private static func canProcess(_ text: String) -> Bool {
-                guard let anchor = text.first else { return false }
-                let code: Int = (anchor == "y") ? "j".hash : String(anchor).hash
+                guard !(text.isEmpty) else { return false }
+                let value: Int = text.prefix(1).hash
+                let code: Int = (value == 1134) ? 1089 : value
                 let query: String = "SELECT rowid FROM lexicontable WHERE shortcut = \(code) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
