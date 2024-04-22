@@ -32,12 +32,12 @@ struct SettingsView: View {
         @State private var selectedCharacterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
-        @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
         @State private var selectedCommentStyle: CommentStyle = Options.commentStyle
         @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
+        @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
 
         @State private var isPerformingClearUserLexicon: Bool = false
@@ -162,14 +162,6 @@ struct SettingsView: View {
                                         if context.isPhone && !(context.hasFullAccess) {
                                                 Text("KeyboardFeedback.Footer").textCase(nil)
                                         }
-                                }
-
-                                Section {
-                                        Toggle("SettingsView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
-                                                .onChange(of: isEmojiSuggestionsOn) { newValue in
-                                                        AudioFeedback.modified()
-                                                        Options.updateEmojiSuggestions(to: newValue)
-                                                }
                                 }
 
                                 Section {
@@ -320,6 +312,14 @@ struct SettingsView: View {
                                         }
                                 } header: {
                                         Text("ToneDisplay.Header").textCase(nil)
+                                }
+
+                                Section {
+                                        Toggle("SettingsView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
+                                                .onChange(of: isEmojiSuggestionsOn) { newValue in
+                                                        AudioFeedback.modified()
+                                                        Options.updateEmojiSuggestions(to: newValue)
+                                                }
                                 }
 
                                 Section {
