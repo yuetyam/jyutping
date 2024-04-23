@@ -91,12 +91,13 @@ extension Engine {
 
         /// Suggestion
         /// - Parameters:
+        ///   - origin: Original user input text.
         ///   - text: User input text.
         ///   - segmentation: Segmentation of user input text.
         ///   - needsSymbols: Needs Emoji/Symbol Candidates.
         ///   - asap: Should be fast, shouldn't go deep.
         /// - Returns: Candidates
-        public static func suggest(text: String, segmentation: Segmentation, needsSymbols: Bool, asap: Bool) -> [Candidate] {
+        public static func suggest(origin: String, text: String, segmentation: Segmentation, needsSymbols: Bool, asap: Bool) -> [Candidate] {
                 switch text.count {
                 case 0:
                         return []
@@ -110,9 +111,10 @@ extension Engine {
                                 return shortcut(text: text)
                         }
                 default:
-                        guard asap else { return dispatch(text: text, segmentation: segmentation, needsSymbols: needsSymbols) }
-                        guard segmentation.maxLength > 0 else { return processVerbatim(text: text) }
-                        let candidates = query(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
+                        let textMarkCandidates = fetchTextMark(text: origin)
+                        guard asap else { return textMarkCandidates + dispatch(text: text, segmentation: segmentation, needsSymbols: needsSymbols) }
+                        guard segmentation.maxLength > 0 else { return textMarkCandidates + processVerbatim(text: text) }
+                        let candidates = textMarkCandidates + query(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
                         return candidates.isEmpty ? processVerbatim(text: text) : candidates
                 }
         }

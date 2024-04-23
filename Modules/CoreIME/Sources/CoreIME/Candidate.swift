@@ -74,6 +74,20 @@ public struct Candidate: Hashable {
                 self.order = order
         }
 
+        /// Create a Candidate with text
+        /// - Parameters:
+        ///   - input: User input for this Candidate
+        ///   - text: Candidate text
+        init(input: String, text: String) {
+                self.type = .text
+                self.text = text
+                self.lexiconText = text
+                self.romanization = input
+                self.input = input
+                self.mark = input
+                self.order = 0
+        }
+
         /// Create a Candidate with an emoji or a symbol
         /// - Parameters:
         ///   - symbol: Emoji/Symbol text

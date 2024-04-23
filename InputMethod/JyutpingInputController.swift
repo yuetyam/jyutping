@@ -312,7 +312,7 @@ final class JyutpingInputController: IMKInputController {
                 let userLexiconCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let asap: Bool = !(userLexiconCandidates.isEmpty)
-                let engineCandidates: [Candidate] = Engine.suggest(text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
+                let engineCandidates: [Candidate] = Engine.suggest(origin: bufferText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
                 let text2mark: String = {
                         if let mark = userLexiconCandidates.first?.mark { return mark }
                         let isLetterOnly: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil

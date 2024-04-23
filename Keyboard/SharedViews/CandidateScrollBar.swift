@@ -3,7 +3,13 @@ import CoreIME
 
 extension Candidate {
         var width: CGFloat {
-                return CGFloat(self.text.count * 20 + 28)
+                switch self.type {
+                case .cantonese:
+                        return CGFloat(self.text.count * 20 + 28)
+                default:
+                        guard self.text.count > 1 else { return 48 }
+                        return CGFloat(self.text.count * 12)
+                }
         }
 }
 
