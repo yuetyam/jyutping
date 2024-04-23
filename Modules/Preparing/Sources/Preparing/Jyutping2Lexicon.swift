@@ -6,8 +6,8 @@ struct Jyutping2Lexicon {
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
                 guard let sourceContent = try? String(contentsOf: url) else { return [] }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map({ generateEntry(from: $0) })
-                return entries.compactMap({ $0 })
+                let entries = sourceLines.compactMap({ generateEntry(from: $0) })
+                return entries
         }
 
         private static func generateEntry(from text: String) -> String? {
@@ -29,9 +29,10 @@ struct Jyutping2Lexicon {
                         return anchor.hash
                 }
                 let syllables = text.split(separator: " ").map({ $0.trimmingCharacters(in: .controlCharacters) })
-                let anchors = syllables.map({ $0.first }).compactMap({ $0 }).map({ String($0) }).joined()
-                guard !(anchors.isEmpty) else { return nil }
-                return anchors.hash
+                let anchors = syllables.compactMap(\.first)
+                let anchorText = String(anchors)
+                guard !(anchorText.isEmpty) else { return nil }
+                return anchorText.hash
         }
 
         private static func pingCode(of text: String) -> Int? {
@@ -41,4 +42,25 @@ struct Jyutping2Lexicon {
         }
 
         private static let spaceAndTones: Set<Character> = Set("123 456")
+}
+
+struct TextMarkLexicon {
+        static func convert() -> [String] {
+                guard let url = Bundle.module.url(forResource: "mark", withExtension: "yaml") else { return [] }
+                guard let sourceContent = try? String(contentsOf: url) else { return [] }
+                let sourceLines: [String] = sourceContent
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                        .components(separatedBy: .newlines)
+                        .map({ $0.trimmingCharacters(in: .whitespaces) })
+                        .filter({ !($0.isEmpty || $0.hasPrefix("#")) })
+                let entries = sourceLines.compactMap { line -> String? in
+                        let parts = line.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces) })
+                        guard parts.count >= 2 else { return nil }
+                        let token = parts[0]
+                        let text = parts[1]
+                        let code = token.hash
+                        return "\(code)\t\(text)"
+                }
+                return entries
+        }
 }

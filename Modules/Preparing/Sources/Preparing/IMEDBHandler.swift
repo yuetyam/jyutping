@@ -13,6 +13,7 @@ struct IMEDBHandler {
                 createPinyinTable()
                 createShapeTable()
                 createSymbolTable()
+                createTextMarkTable()
                 createIndies()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
@@ -49,7 +50,7 @@ struct IMEDBHandler {
                 for number in range {
                         let bound: Int = number == 1999 ? sourceLines.count : ((number + 1) * distance)
                         let part = sourceLines[(number * distance)..<bound]
-                        let entries = part.map { line -> String? in
+                        let entries = part.compactMap { line -> String? in
                                 let parts = line.split(separator: "\t")
                                 guard parts.count == 4 else { return nil }
                                 let word = parts[0]
@@ -58,7 +59,7 @@ struct IMEDBHandler {
                                 let ping = parts[3]
                                 return "('\(word)', '\(romanization)', \(shortcut), \(ping))"
                         }
-                        let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                        let values: String = entries.joined(separator: ", ")
                         insert(values: values)
                 }
         }
@@ -92,14 +93,14 @@ struct IMEDBHandler {
                 guard let url = Bundle.module.url(forResource: "t2s", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 2 else { return nil }
                         let traditionalCode = parts[0]
                         let simplified = parts[1]
                         return "(\(traditionalCode), '\(simplified)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO t2stable (traditional, simplified) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -115,7 +116,7 @@ struct IMEDBHandler {
                 guard let url = Bundle.module.url(forResource: "compose", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 3 else { return nil }
                         let word = parts[0]
@@ -123,7 +124,7 @@ struct IMEDBHandler {
                         let ping = parts[2]
                         return "('\(word)', '\(romanization)', \(ping))"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO composetable (word, romanization, ping) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -173,7 +174,7 @@ struct IMEDBHandler {
                 guard let url = Bundle.module.url(forResource: "shape", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 4 else { return nil }
                         let word = parts[0]
@@ -182,7 +183,7 @@ struct IMEDBHandler {
                         let stroke = parts[3]
                         return "('\(word)', \(complex), '\(cangjie)', '\(stroke)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO shapetable (word, complex, cangjie, stroke) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -198,7 +199,7 @@ struct IMEDBHandler {
                 guard let url = Bundle.module.url(forResource: "symbol", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 6 else { return nil }
                         let category = parts[0]
@@ -209,8 +210,29 @@ struct IMEDBHandler {
                         let ping = parts[5]
                         return "(\(category), '\(codepoint)', '\(cantonese)', '\(romanization)', \(shortcut), \(ping))"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO symboltable (category, codepoint, cantonese, romanization, shortcut, ping) VALUES \(values);"
+                var insertStatement: OpaquePointer? = nil
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+        private static func createTextMarkTable() {
+                let createTable: String = "CREATE TABLE marktable(code INTEGER NOT NULL PRIMARY KEY, mark TEXT NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                let sourceLines: [String] = TextMarkLexicon.convert()
+                let entries = sourceLines.compactMap { line -> String? in
+                        let parts = line.split(separator: "\t")
+                        guard parts.count == 2 else { return nil }
+                        let code = parts[0]
+                        let text = parts[1]
+                        return "(\(code), '\(text)')"
+                }
+                let values: String = entries.joined(separator: ", ")
+                let insert: String = "INSERT INTO marktable (code, mark) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
