@@ -40,17 +40,17 @@ struct MacContentViewMonterey: View {
                                                 Label("MacSidebar.NavigationTitle.Search", systemImage: "magnifyingglass")
                                         }
                                         NavigationLink {
-                                                InitialTable().applyVisualEffect()
+                                                MacJyutpingInitialTable().applyVisualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.JyutpingInitials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
                                         NavigationLink {
-                                                FinalTable().applyVisualEffect()
+                                                MacJyutpingFinalTable().applyVisualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.JyutpingFinals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
                                         NavigationLink {
-                                                MacToneTableView().applyVisualEffect()
+                                                MacJyutpingToneTable().applyVisualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.JyutpingTones", systemImage: "bell")
                                         }

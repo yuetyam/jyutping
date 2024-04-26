@@ -82,11 +82,11 @@ struct MacContentView: View {
                         case .search:
                                 MacSearchView().applyVisualEffect()
                         case .initials:
-                                InitialTable().applyVisualEffect()
+                                MacJyutpingInitialTable().applyVisualEffect()
                         case .finals:
-                                FinalTable().applyVisualEffect()
+                                MacJyutpingFinalTable().applyVisualEffect()
                         case .tones:
-                                MacToneTableView().applyVisualEffect()
+                                MacJyutpingToneTable().applyVisualEffect()
                         case .numbers:
                                 NumbersView().applyVisualEffect()
                         case .stemsBranches:

@@ -14,13 +14,8 @@
 		371B6E3B2B3B2FF3005BB31C /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E3A2B3B2FF3005BB31C /* CoreIME */; };
 		371B6E3D2B3B3007005BB31C /* CoreIME in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E3C2B3B3007005BB31C /* CoreIME */; };
 		371B6E982B3B3108005BB31C /* JyutpingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */; };
-		371B6E992B3B3108005BB31C /* MacToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E402B3B3107005BB31C /* MacToneTableView.swift */; };
-		371B6E9A2B3B3108005BB31C /* FinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E412B3B3107005BB31C /* FinalTable.swift */; };
-		371B6E9B2B3B3108005BB31C /* InitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E422B3B3107005BB31C /* InitialTable.swift */; };
 		371B6E9C2B3B3108005BB31C /* SyllableChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E432B3B3107005BB31C /* SyllableChecker.swift */; };
 		371B6E9D2B3B3108005BB31C /* Syllable2IPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E442B3B3107005BB31C /* Syllable2IPA.swift */; };
-		371B6E9E2B3B3108005BB31C /* IOSToneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E452B3B3107005BB31C /* IOSToneTableView.swift */; };
-		371B6E9F2B3B3108005BB31C /* SyllableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E462B3B3107005BB31C /* SyllableCell.swift */; };
 		371B6EA02B3B3108005BB31C /* ChineseZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E482B3B3107005BB31C /* ChineseZodiacView.swift */; };
 		371B6EA12B3B3108005BB31C /* StemsBranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E492B3B3107005BB31C /* StemsBranchesView.swift */; };
 		371B6EA22B3B3108005BB31C /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4A2B3B3107005BB31C /* NumbersView.swift */; };
@@ -225,6 +220,8 @@
 		371EABE82B385D390075089B /* InputMethodUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EABE72B385D390075089B /* InputMethodUITests.swift */; };
 		371EABEA2B385D390075089B /* InputMethodUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */; };
 		371EABF72B38802A0075089B /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371EABF62B38802A0075089B /* CommonExtensions */; };
+		37311A3C2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37311A3B2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift */; };
+		37311A3E2BD9099D00B2D948 /* MacJyutpingInitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37311A3D2BD9099D00B2D948 /* MacJyutpingInitialTable.swift */; };
 		3742192B2BD4B63200FCB170 /* EnhancedReturnKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */; };
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
@@ -233,6 +230,10 @@
 		3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */; };
 		3762EDD02B8538A000C4E9F1 /* ClipboardFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */; };
 		3762EDD22B85496800C4E9F1 /* GoToSettingsLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762EDD12B85496800C4E9F1 /* GoToSettingsLinkView.swift */; };
+		379CB1A02BD9FE2A00434190 /* MacJyutpingToneTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB19F2BD9FE2A00434190 /* MacJyutpingToneTable.swift */; };
+		379CB1A22BDA40B900434190 /* IOSJyutpingToneTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A12BDA40B900434190 /* IOSJyutpingToneTable.swift */; };
+		379CB1A42BDA666D00434190 /* IOSJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */; };
+		379CB1A62BDB898700434190 /* MacJyutpingFinalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */; };
 		37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */; };
 		37D1C9362BBF26A200015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9352BBF26A200015FD0 /* PrivacyInfo.xcprivacy */; };
 		37D1C9382BBF288000015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9372BBF288000015FD0 /* PrivacyInfo.xcprivacy */; };
@@ -352,13 +353,8 @@
 		371B6E362B3B2F72005BB31C /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = Modules/AppDataSource; sourceTree = "<group>"; };
 		371B6E392B3B2FE1005BB31C /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = Modules/CoreIME; sourceTree = "<group>"; };
 		371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
-		371B6E402B3B3107005BB31C /* MacToneTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacToneTableView.swift; sourceTree = "<group>"; };
-		371B6E412B3B3107005BB31C /* FinalTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalTable.swift; sourceTree = "<group>"; };
-		371B6E422B3B3107005BB31C /* InitialTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialTable.swift; sourceTree = "<group>"; };
 		371B6E432B3B3107005BB31C /* SyllableChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllableChecker.swift; sourceTree = "<group>"; };
 		371B6E442B3B3107005BB31C /* Syllable2IPA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syllable2IPA.swift; sourceTree = "<group>"; };
-		371B6E452B3B3107005BB31C /* IOSToneTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOSToneTableView.swift; sourceTree = "<group>"; };
-		371B6E462B3B3107005BB31C /* SyllableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyllableCell.swift; sourceTree = "<group>"; };
 		371B6E482B3B3107005BB31C /* ChineseZodiacView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseZodiacView.swift; sourceTree = "<group>"; };
 		371B6E492B3B3107005BB31C /* StemsBranchesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemsBranchesView.swift; sourceTree = "<group>"; };
 		371B6E4A2B3B3107005BB31C /* NumbersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
@@ -605,6 +601,8 @@
 		371EABE72B385D390075089B /* InputMethodUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITests.swift; sourceTree = "<group>"; };
 		371EABE92B385D390075089B /* InputMethodUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputMethodUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		371EABF42B3880150075089B /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = Modules/CommonExtensions; sourceTree = "<group>"; };
+		37311A3B2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingInitialTable.swift; sourceTree = "<group>"; };
+		37311A3D2BD9099D00B2D948 /* MacJyutpingInitialTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingInitialTable.swift; sourceTree = "<group>"; };
 		3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedReturnKeyType.swift; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
@@ -612,6 +610,10 @@
 		3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablingKeyboardView.swift; sourceTree = "<group>"; };
 		3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardFeaturesView.swift; sourceTree = "<group>"; };
 		3762EDD12B85496800C4E9F1 /* GoToSettingsLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToSettingsLinkView.swift; sourceTree = "<group>"; };
+		379CB19F2BD9FE2A00434190 /* MacJyutpingToneTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingToneTable.swift; sourceTree = "<group>"; };
+		379CB1A12BDA40B900434190 /* IOSJyutpingToneTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingToneTable.swift; sourceTree = "<group>"; };
+		379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingFinalTable.swift; sourceTree = "<group>"; };
+		379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingFinalTable.swift; sourceTree = "<group>"; };
 		37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDisplayLanguageView.swift; sourceTree = "<group>"; };
 		37D1C9352BBF26A200015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		37D1C9372BBF288000015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -749,20 +751,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		371B6E3F2B3B3107005BB31C /* Linguistics */ = {
-			isa = PBXGroup;
-			children = (
-				371B6E402B3B3107005BB31C /* MacToneTableView.swift */,
-				371B6E412B3B3107005BB31C /* FinalTable.swift */,
-				371B6E422B3B3107005BB31C /* InitialTable.swift */,
-				371B6E432B3B3107005BB31C /* SyllableChecker.swift */,
-				371B6E442B3B3107005BB31C /* Syllable2IPA.swift */,
-				371B6E452B3B3107005BB31C /* IOSToneTableView.swift */,
-				371B6E462B3B3107005BB31C /* SyllableCell.swift */,
-			);
-			path = Linguistics;
-			sourceTree = "<group>";
-		};
 		371B6E472B3B3107005BB31C /* Materials */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +846,9 @@
 				371B6E842B3B3108005BB31C /* MacIntroductionsView.swift */,
 				371B6E912B3B3108005BB31C /* MacExpressionsView.swift */,
 				371B6E922B3B3108005BB31C /* MacConfusionView.swift */,
+				37311A3D2BD9099D00B2D948 /* MacJyutpingInitialTable.swift */,
+				379CB1A52BDB898700434190 /* MacJyutpingFinalTable.swift */,
+				379CB19F2BD9FE2A00434190 /* MacJyutpingToneTable.swift */,
 				371B6E8F2B3B3108005BB31C /* MacHundredFamilySurnamesView.swift */,
 				371B6E832B3B3108005BB31C /* MacThousandCharacterClassicView.swift */,
 				371B6E932B3B3108005BB31C /* MacResourcesView.swift */,
@@ -1254,6 +1245,9 @@
 			isa = PBXGroup;
 			children = (
 				371B6E6F2B3B3107005BB31C /* JyutpingView.swift */,
+				37311A3B2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift */,
+				379CB1A32BDA666D00434190 /* IOSJyutpingFinalTable.swift */,
+				379CB1A12BDA40B900434190 /* IOSJyutpingToneTable.swift */,
 			);
 			path = Jyutping;
 			sourceTree = "<group>";
@@ -1277,6 +1271,8 @@
 				371B6E972B3B3108005BB31C /* AppMaster.swift */,
 				371B6E4E2B3B3107005BB31C /* Constant.swift */,
 				371B6E4F2B3B3107005BB31C /* Device.swift */,
+				371B6E432B3B3107005BB31C /* SyllableChecker.swift */,
+				371B6E442B3B3107005BB31C /* Syllable2IPA.swift */,
 			);
 			path = SharedModels;
 			sourceTree = "<group>";
@@ -1385,7 +1381,6 @@
 				371B6E562B3B3107005BB31C /* iOS */,
 				371B6E792B3B3108005BB31C /* macOS */,
 				371B6E472B3B3107005BB31C /* Materials */,
-				371B6E3F2B3B3107005BB31C /* Linguistics */,
 				371B6E942B3B3108005BB31C /* Speech */,
 				371B6E502B3B3107005BB31C /* Extensions */,
 				371B6EEB2B3B321C005BB31C /* Localization */,
@@ -1931,8 +1926,8 @@
 				371B6EA62B3B3108005BB31C /* Constant.swift in Sources */,
 				371B6EB72B3B3108005BB31C /* CantoneseView.swift in Sources */,
 				371B6EC92B3B3108005BB31C /* YingWaaFanWanLabel.swift in Sources */,
+				37311A3E2BD9099D00B2D948 /* MacJyutpingInitialTable.swift in Sources */,
 				3762EDD02B8538A000C4E9F1 /* ClipboardFeaturesView.swift in Sources */,
-				371B6E992B3B3108005BB31C /* MacToneTableView.swift in Sources */,
 				371B6EB22B3B3108005BB31C /* IntroductionsView.swift in Sources */,
 				371B6ED52B3B3108005BB31C /* MacIntroductionsView.swift in Sources */,
 				371B6E9C2B3B3108005BB31C /* SyllableChecker.swift in Sources */,
@@ -1950,16 +1945,17 @@
 				371B6ECA2B3B3108005BB31C /* FanWanCuetYiuLabel.swift in Sources */,
 				371B6EA72B3B3108005BB31C /* Device.swift in Sources */,
 				371B6EBA2B3B3108005BB31C /* IOSExpressionsView.swift in Sources */,
+				379CB1A22BDA40B900434190 /* IOSJyutpingToneTable.swift in Sources */,
 				371B6EDB2B3B3108005BB31C /* GwongWanView.swift in Sources */,
-				371B6E9A2B3B3108005BB31C /* FinalTable.swift in Sources */,
 				371B6EBD2B3B3108005BB31C /* IOSCantonMetroView.swift in Sources */,
 				371B6EBF2B3B3108005BB31C /* IOSThousandCharacterClassicView.swift in Sources */,
 				371B6ED72B3B3108005BB31C /* SearchField.swift in Sources */,
 				371B6EBB2B3B3108005BB31C /* IOSShamChunMetroView.swift in Sources */,
 				371B6EE12B3B3108005BB31C /* MacExpressionsView.swift in Sources */,
+				379CB1A02BD9FE2A00434190 /* MacJyutpingToneTable.swift in Sources */,
 				371B6EAC2B3B3108005BB31C /* TextExtensions.swift in Sources */,
 				371B6ED22B3B3108005BB31C /* MacAboutView.swift in Sources */,
-				371B6E9B2B3B3108005BB31C /* InitialTable.swift in Sources */,
+				37311A3C2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift in Sources */,
 				371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */,
 				371B6EE02B3B3108005BB31C /* MacInstallInputMethodView.swift in Sources */,
 				371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */,
@@ -1971,21 +1967,21 @@
 				371B6EA32B3B3108005BB31C /* TermView.swift in Sources */,
 				371B6EC52B3B3108005BB31C /* SearchView.swift in Sources */,
 				371B6ECF2B3B3108005BB31C /* MacHongKongMTRView.swift in Sources */,
-				371B6E9F2B3B3108005BB31C /* SyllableCell.swift in Sources */,
 				371B6ED32B3B3108005BB31C /* MacContentView.swift in Sources */,
 				371B6EAB2B3B3108005BB31C /* ImageExtensions.swift in Sources */,
 				37CC55792B464C78003ED8CE /* ChangeDisplayLanguageView.swift in Sources */,
 				371B6EB62B3B3108005BB31C /* PrivacyNoticeView.swift in Sources */,
+				379CB1A62BDB898700434190 /* MacJyutpingFinalTable.swift in Sources */,
 				371B6EA52B3B3108005BB31C /* Term.swift in Sources */,
 				371B6EC22B3B3108005BB31C /* UIDevice+modelName.swift in Sources */,
 				371B6ECC2B3B3108005BB31C /* MacMetroStationLabel.swift in Sources */,
 				371B6E9D2B3B3108005BB31C /* Syllable2IPA.swift in Sources */,
-				371B6E9E2B3B3108005BB31C /* IOSToneTableView.swift in Sources */,
 				371B6EC32B3B3108005BB31C /* JyutpingView.swift in Sources */,
 				371B6ED92B3B3108005BB31C /* PronunciationView.swift in Sources */,
 				371B6EDA2B3B3108005BB31C /* YingWaaFanWanView.swift in Sources */,
 				371B6EA82B3B3108005BB31C /* ColorExtensions.swift in Sources */,
 				375D3A3D2B806C88005F13C1 /* TextRomanizationView.swift in Sources */,
+				379CB1A42BDA666D00434190 /* IOSJyutpingFinalTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,13 +13,13 @@ struct JyutpingView: View {
                                 SearchView(placeholder: "TextField.SearchPronunciation", animationState: $animationState)
 
                                 Section {
-                                        NavigationLink(destination: InitialTable()) {
+                                        NavigationLink(destination: IOSJyutpingInitialTable()) {
                                                 Label("IOSJyutpingTab.LabelTitle.JyutpingInitials", systemImage: "rectangle.leadingthird.inset.filled")
                                         }
-                                        NavigationLink(destination: FinalTable()) {
+                                        NavigationLink(destination: IOSJyutpingFinalTable()) {
                                                 Label("IOSJyutpingTab.LabelTitle.JyutpingFinals", systemImage: "rectangle.trailingthird.inset.filled")
                                         }
-                                        NavigationLink(destination: IOSToneTableView()) {
+                                        NavigationLink(destination: IOSJyutpingToneTable()) {
                                                 Label("IOSJyutpingTab.LabelTitle.JyutpingTones", systemImage: "bell")
                                         }
                                 }
