@@ -55,17 +55,11 @@ struct MacJyutpingInitialTable: View {
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal)
                                 }
-                                VStack(alignment: .leading, spacing: 2) {
-                                        VStack {
-                                                MacInitialLabel(word: "瓜", syllable: "gwaa1", jyutping: "gw", ipa: "[ kʷ ]")
-                                                MacInitialLabel(word: "夸", syllable: "kwaa1", jyutping: "kw", ipa: "[ kʷʰ ]")
-                                        }
-                                        .block()
-                                        Text(verbatim: "與普通話拼音 gu-, ku- 類似。")
-                                                .font(.copilot)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(.horizontal)
+                                VStack {
+                                        MacInitialLabel(word: "瓜", syllable: "gwaa1", jyutping: "gw", ipa: "[ kʷ ]")
+                                        MacInitialLabel(word: "夸", syllable: "kwaa1", jyutping: "kw", ipa: "[ kʷʰ ]")
                                 }
+                                .block()
                                 VStack(alignment: .leading, spacing: 2) {
                                         VStack {
                                                 MacInitialLabel(word: "渣", syllable: "zaa1", jyutping: "z", ipa: "t͡s ~ t͡ʃ")

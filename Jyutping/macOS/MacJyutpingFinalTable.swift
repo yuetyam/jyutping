@@ -15,7 +15,7 @@ struct MacJyutpingFinalTable: View {
                                                         }
                                                         Speaker().hidden()
                                                 }
-                                                ZStack {
+                                                ZStack(alignment: .leading) {
                                                         Text(verbatim: "gaang").hidden()
                                                         Text(verbatim: "韻母")
                                                 }
@@ -37,24 +37,18 @@ struct MacJyutpingFinalTable: View {
                                         }
                                         .block()
                                 }
-                                VStack(alignment: .leading, spacing: 2) {
-                                        VStack {
-                                                MacFinalLabel(word: "㗎", syllable: "ga3", jyutping: "a", ipa: "[ ɐ ]")
-                                                MacFinalLabel(word: "計", syllable: "gai3", jyutping: "ai", ipa: "[ ɐi ]")
-                                                MacFinalLabel(word: "救", syllable: "gau3", jyutping: "au", ipa: "[ ɐu ]")
-                                                MacFinalLabel(word: "禁", syllable: "gam3", jyutping: "am", ipa: "[ ɐm ]")
-                                                MacFinalLabel(word: "斤", syllable: "gan1", jyutping: "an", ipa: "[ ɐn ]")
-                                                MacFinalLabel(word: "庚", syllable: "gang1", jyutping: "ang", ipa: "[ ɐŋ ]")
-                                                MacFinalLabel(word: "急", syllable: "gap1", jyutping: "ap", ipa: "[ ɐp̚ ]")
-                                                MacFinalLabel(word: "吉", syllable: "gat1", jyutping: "at", ipa: "[ ɐt̚ ]")
-                                                MacFinalLabel(word: "北", syllable: "bak1", jyutping: "ak", ipa: "[ ɐk̚ ]")
-                                        }
-                                        .block()
-                                        Text(verbatim: "韻腹 -aa- 與 -a- 毋單止係長短音區別，主元音亦有區別。無韻尾韻母 -a 通常見於口語語氣詞。")
-                                                .font(.copilot)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(.horizontal)
+                                VStack {
+                                        MacFinalLabel(word: "㗎", syllable: "ga3", pronunciation: "kɐ˧", jyutping: "a", ipa: "[ ɐ ]")
+                                        MacFinalLabel(word: "計", syllable: "gai3", jyutping: "ai", ipa: "[ ɐi ]")
+                                        MacFinalLabel(word: "救", syllable: "gau3", jyutping: "au", ipa: "[ ɐu ]")
+                                        MacFinalLabel(word: "禁", syllable: "gam3", jyutping: "am", ipa: "[ ɐm ]")
+                                        MacFinalLabel(word: "斤", syllable: "gan1", jyutping: "an", ipa: "[ ɐn ]")
+                                        MacFinalLabel(word: "庚", syllable: "gang1", jyutping: "ang", ipa: "[ ɐŋ ]")
+                                        MacFinalLabel(word: "急", syllable: "gap1", jyutping: "ap", ipa: "[ ɐp̚ ]")
+                                        MacFinalLabel(word: "吉", syllable: "gat1", jyutping: "at", ipa: "[ ɐt̚ ]")
+                                        MacFinalLabel(word: "北", syllable: "bak1", jyutping: "ak", ipa: "[ ɐk̚ ]")
                                 }
+                                .block()
                                 VStack(alignment: .leading, spacing: 2) {
                                         VStack {
                                                 MacFinalLabel(word: "嘅", syllable: "ge3", jyutping: "e", ipa: "[ ɛː ]")
@@ -63,7 +57,7 @@ struct MacJyutpingFinalTable: View {
                                                 MacFinalLabel(word: "𦧷", syllable: "lem2", jyutping: "em", ipa: "[ ɛːm ]")
                                                 MacFinalLabel(word: "鏡", syllable: "geng3", jyutping: "eng", ipa: "[ ɛːŋ ]")
                                                 MacFinalLabel(word: "夾", syllable: "gep6", jyutping: "ep", ipa: "[ ɛːp̚ ]")
-                                                MacFinalLabel(word: "坺", syllable: "pet6", jyutping: "et", ipa: "[ ɛːt̚ ]")
+                                                MacFinalLabel(word: "坺", syllable: "pet6", pronunciation: "pʰɛːt̚˨", jyutping: "et", ipa: "[ ɛːt̚ ]")
                                                 MacFinalLabel(word: "踢", syllable: "tek3", jyutping: "ek", ipa: "[ ɛːk̚ ]")
                                         }
                                         .block()
@@ -106,11 +100,11 @@ struct MacJyutpingFinalTable: View {
                                         VStack {
                                                 MacFinalLabel(word: "鋸", syllable: "goe3", jyutping: "oe", ipa: "[ œː ]")
                                                 MacFinalLabel(word: "姜", syllable: "goeng1", jyutping: "oeng", ipa: "[ œːŋ ]")
-                                                MacFinalLabel(word: "*", syllable: "goet4", jyutping: "oet", ipa: "[ œːt̚ ]")
+                                                MacFinalLabel(word: "*", syllable: "goet4", pronunciation: "kœːt̚˨˩", jyutping: "oet", ipa: "[ œːt̚ ]")
                                                 MacFinalLabel(word: "腳", syllable: "goek3", jyutping: "oek", ipa: "[ œːk̚ ]")
                                         }
                                         .block()
-                                        Text(verbatim: "韻母 -oet 通常只見於口語。")
+                                        Text(verbatim: "韻母 -oet 通常只見於口語擬聲詞。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal)
@@ -122,7 +116,7 @@ struct MacJyutpingFinalTable: View {
                                                 MacFinalLabel(word: "術", syllable: "seot6", jyutping: "eot", ipa: "[ ɵt̚ ]")
                                         }
                                         .block()
-                                        Text(verbatim: "韻腹 -oe-, -eo- 通常係音節互補關係，打字時可以混用。其他粵語轉寫方案有時統一寫作 -eu-，粵拼輸入法有做兼容。")
+                                        Text(verbatim: "韻腹 -oe-, -eo- 通常係音節互補關係，打字時可以混用。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal)
@@ -134,14 +128,14 @@ struct MacJyutpingFinalTable: View {
                                                 MacFinalLabel(word: "雪", syllable: "syut3", jyutping: "yut", ipa: "[ yːt̚ ]")
                                         }
                                         .block()
-                                        Text(verbatim: "韻腹 -yu- 其他粵語轉寫方案有時寫作 -ue-，粵拼輸入法有做兼容。粵語 -yu- 發音與普通話拼音 -ü- 類似。")
+                                        Text(verbatim: "粵語 -yu- 發音與普通話拼音 -ü- 類似。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal)
                                 }
                                 VStack(alignment: .leading, spacing: 2) {
                                         VStack {
-                                                MacFinalLabel(word: "唔", syllable: "m4", jyutping: "m", ipa: "[ m̩ ]")
+                                                MacFinalLabel(word: "毋", syllable: "m4", jyutping: "m", ipa: "[ m̩ ]")
                                                 MacFinalLabel(word: "吳", syllable: "ng4", jyutping: "ng", ipa: "[ ŋ̩ ]")
                                         }
                                         .block()
@@ -160,10 +154,19 @@ struct MacJyutpingFinalTable: View {
 
 private struct MacFinalLabel: View {
 
-        let word: String
-        let syllable: String
-        let jyutping: String
-        let ipa: String
+        init(word: String, syllable: String, pronunciation: String? = nil, jyutping: String, ipa: String) {
+                self.word = word
+                self.syllable = syllable
+                self.pronunciation = pronunciation
+                self.jyutping = jyutping
+                self.ipa = ipa
+        }
+
+        private let word: String
+        private let syllable: String
+        private let pronunciation: String?
+        private let jyutping: String
+        private let ipa: String
 
         var body: some View {
                 HStack(spacing: 44) {
@@ -172,9 +175,15 @@ private struct MacFinalLabel: View {
                                         Text(verbatim: "佔 gaang4").hidden()
                                         Text(verbatim: "\(word) \(syllable)")
                                 }
-                                Speaker(syllable)
+                                Speaker {
+                                        if let pronunciation {
+                                                Speech.speak(text: word, ipa: pronunciation)
+                                        } else {
+                                                Speech.speak(syllable)
+                                        }
+                                }
                         }
-                        ZStack {
+                        ZStack(alignment: .leading) {
                                 Text(verbatim: "gaang").hidden()
                                 Text(verbatim: jyutping).font(.fixedWidth)
                         }

@@ -49,8 +49,6 @@ struct IOSJyutpingInitialTable: View {
                         Section {
                                 IOSInitialLabel(word: "瓜", syllable: "gwaa1", jyutping: "gw", ipa: "[ kʷ ]")
                                 IOSInitialLabel(word: "夸", syllable: "kwaa1", jyutping: "kw", ipa: "[ kʷʰ ]")
-                        } footer: {
-                                Text(verbatim: "與普通話拼音 gu-, ku- 類似。").textCase(nil)
                         }
                         Section {
                                 IOSInitialLabel(word: "渣", syllable: "zaa1", jyutping: "z", ipa: "t͡s~t͡ʃ")
