@@ -102,9 +102,13 @@ struct UserLexicon {
                         let matches = schemes.map({ scheme -> [Candidate] in
                                 let pingText = scheme.map(\.origin).joined()
                                 let matched = match(text: pingText, input: text, isShortcut: false)
+                                guard !(matched.isEmpty) else { return [] }
                                 let text2mark = scheme.map(\.text).joined(separator: " ")
                                 let syllables = scheme.map(\.origin).joined(separator: " ")
-                                return matched.filter({ $0.mark == syllables }).map({ Candidate(text: $0.text, romanization: $0.romanization, input: $0.input, mark: text2mark) })
+                                return matched.compactMap({ item -> Candidate? in
+                                        guard item.mark == syllables else { return nil }
+                                        return Candidate(text: item.text, romanization: item.romanization, input: item.input, mark: text2mark)
+                                })
                         })
                         return matches.flatMap({ $0 })
                 }()
@@ -128,12 +132,39 @@ struct UserLexicon {
                 return candidates
         }
 
-        static func tenKeySuggest(combos: [Combo], sequences: [String]) -> [Candidate] {
-                guard !(sequences.isEmpty) else { return [] }
-                let suggestions = sequences.map { text -> [TenKeyLexicon] in
-                        return tenKeyMatch(text: text, input: text, isShortcut: false) + tenKeyMatch(text: text, input: text, mark: text, isShortcut: true)
-                }
-                return suggestions.flatMap({ $0 }).sorted(by: { $0.frequency > $1.frequency }).map(\.candidate)
+        static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) -> [Candidate] {
+                let comboCount = combos.count
+                guard comboCount > 0 else { return [] }
+                let shortcuts: [TenKeyLexicon] = {
+                        guard comboCount < 6 else { return [] }
+                        guard var sequences: [String] = combos.first?.letters.map({ String($0) }) else { return [] }
+                        for combo in combos.dropFirst() {
+                                let appended = combo.letters.compactMap { letter -> [String] in
+                                        return sequences.map({ $0 + [letter] })
+                                }
+                                sequences = appended.flatMap({ $0 })
+                        }
+                        return sequences.map({ tenKeyMatch(text: $0, input: $0, mark: $0, isShortcut: true) }).flatMap({ $0 })
+                }()
+                let matches: [TenKeyLexicon] = {
+                        let schemes = segmentation.filter({ $0.length == comboCount })
+                        guard !(schemes.isEmpty) else { return [] }
+                        return schemes.map({ scheme -> [TenKeyLexicon] in
+                                let pingText = scheme.map(\.origin).joined()
+                                let inputText = scheme.map(\.text).joined()
+                                let matched = tenKeyMatch(text: pingText, input: inputText, isShortcut: false)
+                                guard !(matched.isEmpty) else { return [] }
+                                let text2mark = scheme.map(\.text).joined(separator: " ")
+                                let syllables = scheme.map(\.origin).joined(separator: " ")
+                                return matched.compactMap({ item -> TenKeyLexicon? in
+                                        let candidate = item.candidate
+                                        guard candidate.mark == syllables else { return nil }
+                                        let newCandidate = Candidate(text: candidate.text, romanization: candidate.romanization, input: candidate.input, mark: text2mark)
+                                        return TenKeyLexicon(frequency: item.frequency, candidate: newCandidate)
+                                })
+                        }).flatMap({ $0 })
+                }()
+                return (shortcuts + matches).sorted(by: { $0.frequency > $1.frequency }).prefix(8).map(\.candidate)
         }
         private static func tenKeyMatch(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [TenKeyLexicon] {
                 var items: [TenKeyLexicon] = []

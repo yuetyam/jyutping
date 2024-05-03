@@ -56,8 +56,8 @@ struct NumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("\u{0022}"),
                                                            members: [
                                                                 KeyElement("\u{0022}", footer: "0022"),
-                                                                KeyElement("\u{201C}", footer: "201C"),
                                                                 KeyElement("\u{201D}", footer: "201D"),
+                                                                KeyElement("\u{201C}", footer: "201C"),
                                                                 KeyElement("\u{201E}", footer: "201E"),
                                                                 KeyElement("\u{00BB}", footer: "00BB"),
                                                                 KeyElement("\u{00AB}", footer: "00AB")

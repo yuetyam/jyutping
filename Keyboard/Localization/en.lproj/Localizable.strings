@@ -30,10 +30,10 @@
 "JyutpingDisplay.NoJyutping" = "None";
 
 "ToneDisplay.Header" = "Jyutping Tones Display";
-"ToneDisplay.Option1" = "Normal         :  jyut6 ping3";
-"ToneDisplay.Option2" = "No Tones     :  jyut ping";
-"ToneDisplay.Option3" = "Superscript :  jyut⁶ ping³";
-"ToneDisplay.Option4" = "Subscript    :  jyut₆ ping₃";
+"ToneDisplay.Option1" = "Normal         :  nei5 hou2";
+"ToneDisplay.Option2" = "No Tones     :  nei hou";
+"ToneDisplay.Option3" = "Superscript :  nei⁵ hou²";
+"ToneDisplay.Option4" = "Subscript    :  nei₅ hou₂";
 
 "SpaceDoubleTapping.Header" = "Space Double Tapping";
 "SpaceDoubleTapping.Option1" = "Insert a Period (Full Stop)";
@@ -49,7 +49,19 @@
 
 // MARK: - EditingPanel
 
+"EditingPanel.Copy" = "Copy All";
+"EditingPanel.Cut" = "Cut All";
+"EditingPanel.Clear" = "Clear";
+"EditingPanel.HantHansConversion" = "简↔繁 All";
+
 "EditingPanel.ClearSystemClipboard" = "Clear System Clipboard";
 "EditingPanel.Paste" = "Paste";
+"EditingPanel.MoveBackward" = "Move Backward";
+"EditingPanel.MoveForward" = "Move Forward";
+"EditingPanel.JumpToHead" = "Jump to Head";
+"EditingPanel.JumpToTail" = "Jump to Tail";
+"EditingPanel.Space" = "space";
+
 "EditingPanel.Back" = "Back";
-"EditingPanel.Clear" = "Clear";
+"EditingPanel.Backspace" = "Backward Delete";
+"EditingPanel.ForwardDelete" = "Forward Delete";

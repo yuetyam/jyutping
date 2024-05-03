@@ -412,22 +412,62 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .select(let candidate):
                         input(candidate.text)
                         aftercareSelected(candidate)
+                case .copyAllText:
+                        let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                        let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
+                        let text: String = head + tail
+                        guard !(text.isEmpty) else { return }
+                        UIPasteboard.general.string = text
+                        isClipboardEmpty = false
+                case .cutAllText:
+                        let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                        let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
+                        let text: String = head + tail
+                        guard !(text.isEmpty) else { return }
+                        UIPasteboard.general.string = text
+                        isClipboardEmpty = false
+                        for _ in 0..<head.count {
+                                textDocumentProxy.deleteBackward()
+                        }
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: tail.utf16.count)
+                        for _ in 0..<tail.count {
+                                textDocumentProxy.deleteBackward()
+                        }
+                case .clearLeadingText:
+                        if textDocumentProxy.selectedText != nil {
+                                textDocumentProxy.deleteBackward()
+                        }
+                        if let text = textDocumentProxy.documentContextBeforeInput {
+                                for _ in 0..<text.count {
+                                        textDocumentProxy.deleteBackward()
+                                }
+                        }
+                case .convertAllText:
+                        let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                        let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
+                        let text: String = head + tail
+                        guard !(text.isEmpty) else { return }
+                        for _ in 0..<head.count {
+                                textDocumentProxy.deleteBackward()
+                        }
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: tail.utf16.count)
+                        for _ in 0..<tail.count {
+                                textDocumentProxy.deleteBackward()
+                        }
+                        let convertedText: String = {
+                                let simplified: String = text.traditional2SimplifiedConverted()
+                                guard simplified == text else { return simplified }
+                                return text.simplified2TraditionalConverted()
+                        }()
+                        textDocumentProxy.insertText(convertedText)
+                case .clearClipboard:
+                        UIPasteboard.general.items.removeAll()
+                        isClipboardEmpty = true
                 case .paste:
                         guard UIPasteboard.general.hasStrings else { return }
                         guard let text = UIPasteboard.general.string else { return }
                         guard !(text.isEmpty) else { return }
                         textDocumentProxy.insertText(text)
-                case .clearClipboard:
-                        UIPasteboard.general.items.removeAll()
-                case .clearLeadingText:
-                        textDocumentProxy.deleteBackward() // Delete selectedText
-                        for _ in 0..<5 {
-                                guard let text = textDocumentProxy.documentContextBeforeInput else { break }
-                                let steps = text.utf16.count
-                                for _ in 0..<steps {
-                                        textDocumentProxy.deleteBackward()
-                                }
-                        }
                 case .moveCursorBackward:
                         let offset: Int = textDocumentProxy.documentContextBeforeInput?.last?.utf16.count ?? 1
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
@@ -435,19 +475,23 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let offset: Int = textDocumentProxy.documentContextAfterInput?.first?.utf16.count ?? 1
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
                 case .jumpToHead:
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
-                        for _ in 0..<5 {
-                                guard let text = textDocumentProxy.documentContextBeforeInput else { break }
-                                let offset: Int = text.utf16.count
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
+                        if textDocumentProxy.selectedText != nil {
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
                         }
+                        guard let text = textDocumentProxy.documentContextBeforeInput, !(text.isEmpty) else { break }
+                        let offset: Int = text.utf16.count
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
                 case .jumpToTail:
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-                        for _ in 0..<5 {
-                                guard let text = textDocumentProxy.documentContextAfterInput else { break }
-                                let offset: Int = text.utf16.count
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
+                        if textDocumentProxy.selectedText != nil {
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
                         }
+                        guard let text = textDocumentProxy.documentContextAfterInput, !(text.isEmpty) else { break }
+                        let offset: Int = text.utf16.count
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
+                case .forwardDelete:
+                        guard let offset = textDocumentProxy.documentContextAfterInput?.first?.utf16.count else { return }
+                        textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
+                        textDocumentProxy.deleteBackward()
                 }
         }
         private func aftercareSelected(_ candidate: Candidate) {
@@ -642,6 +686,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Properties
 
+        @Published private(set) var isClipboardEmpty: Bool = false
+
         @Published private(set) var inputMethodMode: InputMethodMode = .cantonese
         func toggleInputMethodMode() {
                 if inputMethodMode.isCantonese && inputStage.isBuffering {
@@ -667,6 +713,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let shouldAdjustKeyboardCase: Bool = (keyboardForm == .alphabetic) && (keyboardCase != .lowercased)
                 if shouldAdjustKeyboardCase {
                         keyboardCase = .lowercased
+                }
+                if form == .editingPanel {
+                        isClipboardEmpty = !(UIPasteboard.general.hasStrings)
                 }
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form

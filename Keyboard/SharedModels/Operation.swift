@@ -16,11 +16,15 @@ enum Operation: Hashable {
         case dismiss
         case select(Candidate)
 
-        case paste
-        case clearClipboard
+        case copyAllText
+        case cutAllText
         case clearLeadingText
+        case convertAllText
+        case clearClipboard
+        case paste
         case moveCursorBackward
         case moveCursorForward
         case jumpToHead
         case jumpToTail
+        case forwardDelete
 }

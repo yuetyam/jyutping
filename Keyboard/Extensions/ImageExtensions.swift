@@ -10,6 +10,7 @@ extension Image {
 
         /// Backward delete
         static let backspace: Image = Image(systemName: "delete.backward")
+        static let forwardDelete: Image = Image(systemName: "delete.forward")
 
         static let `return`: Image = Image(systemName: "return")
         static let search: Image = Image(systemName: "magnifyingglass")

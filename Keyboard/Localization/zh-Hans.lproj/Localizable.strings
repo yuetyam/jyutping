@@ -30,10 +30,10 @@
 "JyutpingDisplay.NoJyutping" = "無";
 
 "ToneDisplay.Header" = "粵拼聲調樣式";
-"ToneDisplay.Option1" = "正常　 :   jyut6 ping3";
-"ToneDisplay.Option2" = "無聲調 :   jyut ping";
-"ToneDisplay.Option3" = "上標　 :   jyut⁶ ping³";
-"ToneDisplay.Option4" = "下標　 :   jyut₆ ping₃";
+"ToneDisplay.Option1" = "正常　 :   nei5 hou2";
+"ToneDisplay.Option2" = "無聲調 :   nei hou";
+"ToneDisplay.Option3" = "上標　 :   nei⁵ hou²";
+"ToneDisplay.Option4" = "下標　 :   nei₅ hou₂";
 
 "SpaceDoubleTapping.Header" = "雙擊空格掣";
 "SpaceDoubleTapping.Option1" = "輸入一個句號「。」";
@@ -49,7 +49,19 @@
 
 // MARK: - EditingPanel
 
+"EditingPanel.Copy" = "複製全文";
+"EditingPanel.Cut" = "剪下全文";
+"EditingPanel.Clear" = "清空前文";
+"EditingPanel.HantHansConversion" = "簡繁轉換全文";
+
 "EditingPanel.ClearSystemClipboard" = "清空系統剪貼板";
 "EditingPanel.Paste" = "貼上";
+"EditingPanel.MoveBackward" = "後退一格";
+"EditingPanel.MoveForward" = "前進一格";
+"EditingPanel.JumpToHead" = "跳至行首";
+"EditingPanel.JumpToTail" = "跳至行末";
+"EditingPanel.Space" = "空格";
+
 "EditingPanel.Back" = "返回";
-"EditingPanel.Clear" = "清空前文";
+"EditingPanel.Backspace" = "向後刪除";
+"EditingPanel.ForwardDelete" = "向前刪除";
