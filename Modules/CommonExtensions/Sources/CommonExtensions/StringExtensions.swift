@@ -44,6 +44,23 @@ extension String {
 
 extension String {
 
+        /// Convert simplified Chinese characters to traditional
+        /// - Returns: Traditional Chinese characters
+        public func simplified2TraditionalConverted() -> String {
+                let transformed: String? = self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false)
+                return transformed ?? self
+        }
+
+        /// Convert traditional Chinese characters to simplified
+        /// - Returns: Simplified Chinese characters
+        public func traditional2SimplifiedConverted() -> String {
+                let transformed: String? = self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true)
+                return transformed ?? self
+        }
+}
+
+extension String {
+
         /// Returns a new String made by removing `.whitespacesAndNewlines` & `.controlCharacters` from both ends of the String.
         public func trimmed() -> String {
                 return self.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
