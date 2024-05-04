@@ -23,16 +23,11 @@ struct Jyutping2Lexicon {
         }
 
         private static func shortcutCode(of text: String) -> Int? {
-                guard text.contains(" ") else {
-                        guard let first = text.first else { return nil }
-                        let anchor: String = String(first)
-                        return anchor.hash
-                }
                 let syllables = text.split(separator: " ").map({ $0.trimmingCharacters(in: .controlCharacters) })
                 let anchors = syllables.compactMap(\.first)
                 let anchorText = String(anchors)
                 guard !(anchorText.isEmpty) else { return nil }
-                return anchorText.hash
+                return anchorText.charcode
         }
 
         private static func pingCode(of text: String) -> Int? {

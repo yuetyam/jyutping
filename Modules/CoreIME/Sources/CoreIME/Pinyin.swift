@@ -23,7 +23,8 @@ extension Engine {
                 guard let firstInputCount = primary.first?.input.count else { return processVerbatim(pinyin: text, limit: limit) }
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [PinyinLexicon] = {
-                        guard schemes.first(where: { $0.summedLength == textCount }) == nil else { return [] }
+                        let hasPrefectSchemes: Bool = schemes.contains(where: { $0.summedLength == textCount })
+                        guard !hasPrefectSchemes else { return [] }
                         let shortcuts = schemes.map({ scheme -> [PinyinLexicon] in
                                 let tail = text.dropFirst(scheme.summedLength)
                                 guard let lastAnchor = tail.first else { return [] }

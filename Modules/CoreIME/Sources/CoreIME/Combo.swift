@@ -33,7 +33,7 @@ public enum Combo: Int {
         }
 
         /// Valid key characters
-        public var letters: [String] {
+        public var letters: [Character] {
                 switch self {
                 case .ABC:
                         return ["a", "b", "c"]
@@ -49,28 +49,6 @@ public enum Combo: Int {
                         return ["p", "s"]
                 case .TUV:
                         return ["t", "u"]
-                case .WXYZ:
-                        return ["w", "y", "z"]
-                }
-        }
-
-        /// Key characters that fit Jyutping initial
-        public var anchors: [String] {
-                switch self {
-                case .ABC:
-                        return ["b", "c"]
-                case .DEF:
-                        return ["d", "f"]
-                case .GHI:
-                        return ["g", "h"]
-                case .JKL:
-                        return ["j", "k", "l"]
-                case .MNO:
-                        return ["m", "n"]
-                case .PQRS:
-                        return ["p", "s"]
-                case .TUV:
-                        return ["t"]
                 case .WXYZ:
                         return ["w", "y", "z"]
                 }

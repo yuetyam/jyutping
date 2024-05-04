@@ -26,7 +26,7 @@ extension Segmentation {
         }
 }
 
-private extension SegmentScheme {
+extension SegmentScheme {
         // REASON: *am => [*aa, m] => *aam
         var isValid: Bool {
                 let originNumber = self.map(\.origin).joined().occurrenceCount(pattern: "aa(m|ng)")
@@ -37,7 +37,7 @@ private extension SegmentScheme {
         }
 }
 
-private extension Segmentation {
+extension Segmentation {
         func descended() -> Segmentation {
                 return self.sorted(by: {
                         let lhsLength = $0.length

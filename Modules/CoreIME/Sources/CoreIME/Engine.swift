@@ -35,31 +35,21 @@ extension Engine {
 
         // MARK: - SaamPing / 10-Key
 
-        public static func tenKeySuggest(combos: [Combo], sequences: [String]) -> [Candidate] {
-                guard !(sequences.isEmpty) else { return [] }
-                let suggestions = sequences.map { text -> [Candidate] in
-                        guard canProcess(text) else { return [] }
-                        let textCount = text.count
-                        guard textCount > 1 else { return shortcut(text: text) }
-                        let segmentation = Segmentor.segment(text: text)
-                        return match(text: text, input: text) + shortcut(text: text) + tenKeySearch(text: text, segmentation: segmentation)
-                }
-                return suggestions.flatMap({ $0 }).uniqued().sorted { (lhs, rhs) -> Bool in
-                        let lhsInputCount: Int = lhs.input.count
-                        let rhsInputCount: Int = rhs.input.count
-                        guard lhsInputCount == rhsInputCount else {
-                                return lhsInputCount > rhsInputCount
-                        }
-                        let lhsTextCount: Int = lhs.text.count
-                        let rhsTextCount: Int = rhs.text.count
-                        guard lhsTextCount == rhsTextCount else {
-                                return lhsTextCount < rhsTextCount
-                        }
-                        return lhs.order < rhs.order
+        public static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) -> [Candidate] {
+                guard segmentation.maxLength > 0 else { return tenKeyDeepProcess(combos: combos) }
+                let search = tenKeySearch(combos: combos, segmentation: segmentation)
+                guard !(search.isEmpty) else { return tenKeyDeepProcess(combos: combos) }
+                let comboCount = combos.count
+                let preferredSearches = search.filter({ $0.input.count == comboCount })
+                let preferredShortcuts = tenKeyProcess(combos: combos)
+                if (preferredSearches.isEmpty && preferredShortcuts.isEmpty) {
+                        return (search + tenKeyDeepProcess(combos: combos)).tenKeySorted()
+                } else {
+                        return (search + preferredShortcuts).tenKeySorted()
                 }
         }
-        private static func tenKeySearch(text: String, segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
-                let textCount: Int = text.count
+        private static func tenKeySearch(combos: [Combo], segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
+                let textCount: Int = combos.count
                 let perfectSchemes = segmentation.filter({ $0.length == textCount })
                 if !(perfectSchemes.isEmpty) {
                         let matches = perfectSchemes.map({ scheme -> [Candidate] in
@@ -84,6 +74,37 @@ extension Engine {
                         })
                         return matches.flatMap({ $0 })
                 }
+        }
+        private static func tenKeyProcess(combos: [Combo]) -> [Candidate] {
+                guard combos.count > 0 && combos.count < 9 else { return [] }
+                let firstCodes = combos.first!.letters.compactMap(\.intercode)
+                guard combos.count > 1 else { return firstCodes.map({ shortcut(code: $0) }).flatMap({ $0 }) }
+                typealias CodeSequence = [Int]
+                var sequences: [CodeSequence] = firstCodes.map({ [$0] })
+                for combo in combos.dropFirst() {
+                        let appended = combo.letters.compactMap(\.intercode).map { code -> [CodeSequence] in
+                                return sequences.map({ $0 + [code] })
+                        }
+                        sequences = appended.flatMap({ $0 })
+                }
+                return sequences.map({ shortcut(codes: $0) }).flatMap({ $0 }).sorted(by: { $0.order < $1.order })
+        }
+        private static func tenKeyDeepProcess(combos: [Combo]) -> [Candidate] {
+                guard let firstCodes = combos.first?.letters.compactMap(\.intercode) else { return [] }
+                guard combos.count > 1 else { return firstCodes.map({ shortcut(code: $0) }).flatMap({ $0 }) }
+                typealias CodeSequence = [Int]
+                var sequences: [CodeSequence] = firstCodes.map({ [$0] })
+                var candidates: [Candidate] = sequences.map({ shortcut(codes: $0) }).flatMap({ $0 })
+                for combo in combos.dropFirst().prefix(8) {
+                        let appended = combo.letters.compactMap(\.intercode).map { code -> [CodeSequence] in
+                                let newSequences: [CodeSequence] = sequences.map({ $0 + [code] })
+                                let newCandidates: [Candidate] = newSequences.map({ shortcut(codes: $0) }).flatMap({ $0 })
+                                candidates.append(contentsOf: newCandidates)
+                                return newSequences
+                        }
+                        sequences = appended.flatMap({ $0 })
+                }
+                return candidates.tenKeySorted()
         }
 
 
@@ -351,9 +372,8 @@ extension Engine {
         // CREATE TABLE lexicontable(word TEXT NOT NULL, romanization TEXT NOT NULL, shortcut INTEGER NOT NULL, ping INTEGER NOT NULL);
 
         private static func canProcess(_ text: String) -> Bool {
-                guard !(text.isEmpty) else { return false }
-                let value: Int = text.prefix(1).hash
-                let code: Int = (value == 1134) ? 1089 : value
+                guard let value: Int = text.first?.intercode else { return false }
+                let code: Int = (value == 44) ? 29 : value // Replace 'y' with 'j'
                 let query: String = "SELECT rowid FROM lexicontable WHERE shortcut = \(code) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -361,18 +381,54 @@ extension Engine {
                 guard sqlite3_step(statement) == SQLITE_ROW else { return false }
                 return true
         }
-        private static func shortcut(text: String, limit: Int? = nil) -> [Candidate] {
+        private static func shortcut(code: Int? = nil, codes: [Int] = [], limit: Int? = nil) -> [Candidate] {
+                let shortcutCode: Int = {
+                        if let code {
+                                return code == 44 ? 29 : code  // Replace 'y' with 'j'
+                        } else if codes.isEmpty {
+                                return 0
+                        } else {
+                                return codes.map({ $0 == 44 ? 29 : $0 }).combined()  // Replace 'y' with 'j'
+                        }
+                }()
+                guard shortcutCode != 0 else { return [] }
+                let input: String = {
+                        if let char = code?.convertedCharacter {
+                                return String(char)
+                        } else {
+                                let chars = codes.compactMap(\.convertedCharacter)
+                                return String(chars)
+                        }
+                }()
                 var candidates: [Candidate] = []
-                let code: Int = text.replacingOccurrences(of: "y", with: "j").hash
                 let limit: Int = limit ?? 50
-                let command: String = "SELECT word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
+                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(shortcutCode) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 while sqlite3_step(statement) == SQLITE_ROW {
-                        let word: String = String(cString: sqlite3_column_text(statement, 0))
-                        let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                        let candidate = Candidate(text: word, romanization: romanization, input: text)
+                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let candidate = Candidate(text: word, romanization: romanization, input: input, mark: input, order: order)
+                        candidates.append(candidate)
+                }
+                return candidates
+        }
+        private static func shortcut(text: String, limit: Int? = nil) -> [Candidate] {
+                let code: Int = text.compactMap(\.intercode).map({ $0 == 44 ? 29 : $0 }).combined() // Replace 'y' with 'j'
+                guard code != 0 else { return [] }
+                var candidates: [Candidate] = []
+                let limit: Int = limit ?? 50
+                let command: String = "SELECT rowid, word, romanization FROM lexicontable WHERE shortcut = \(code) LIMIT \(limit);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let order: Int = Int(sqlite3_column_int64(statement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 2))
+                        let candidate = Candidate(text: word, romanization: romanization, input: text, mark: text, order: order)
                         candidates.append(candidate)
                 }
                 return candidates
@@ -432,6 +488,22 @@ private extension Array where Element == Candidate {
                         } else {
                                 return lhsInputCount > rhsInputCount
                         }
+                }
+        }
+
+        func tenKeySorted() -> [Candidate] {
+                return self.sorted { (lhs, rhs) -> Bool in
+                        let lhsInputCount: Int = lhs.input.count
+                        let rhsInputCount: Int = rhs.input.count
+                        guard lhsInputCount == rhsInputCount else {
+                                return lhsInputCount > rhsInputCount
+                        }
+                        let lhsTextCount: Int = lhs.text.count
+                        let rhsTextCount: Int = rhs.text.count
+                        guard lhsTextCount == rhsTextCount else {
+                                return lhsTextCount < rhsTextCount
+                        }
+                        return lhs.order < rhs.order
                 }
         }
 }

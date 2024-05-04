@@ -9,6 +9,7 @@ public struct SyllableDBHandler {
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createSyllableTable()
                 createPinyinSyllableTable()
+                createIndies()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
         }
@@ -27,7 +28,7 @@ public struct SyllableDBHandler {
         }
 
         private static func createSyllableTable() {
-                let createTable: String = "CREATE TABLE syllabletable(code INTEGER NOT NULL PRIMARY KEY, token TEXT NOT NULL, origin TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE syllabletable(code INTEGER NOT NULL PRIMARY KEY, tenkey INTEGER NOT NULL, token TEXT NOT NULL, origin TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -35,16 +36,17 @@ public struct SyllableDBHandler {
                 guard let url = Bundle.module.url(forResource: "syllable", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { line -> String? in
+                let entries = sourceLines.compactMap { line -> String? in
                         let parts = line.split(separator: "\t")
-                        guard parts.count == 3 else { return nil }
+                        guard parts.count == 4 else { return nil }
                         let code = parts[0]
-                        let token = parts[1]
-                        let origin = parts[2]
-                        return "(\(code), '\(token)', '\(origin)')"
+                        let tenkey = parts[1]
+                        let token = parts[2]
+                        let origin = parts[3]
+                        return "(\(code), \(tenkey), '\(token)', '\(origin)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
-                let insertValues: String = "INSERT INTO syllabletable (code, token, origin) VALUES \(values);"
+                let values: String = entries.joined(separator: ", ")
+                let insertValues: String = "INSERT INTO syllabletable (code, tenkey, token, origin) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
@@ -72,5 +74,17 @@ public struct SyllableDBHandler {
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+
+        private static func createIndies() {
+                let commands: [String] = [
+                        "CREATE INDEX syllabletenkeyindex ON syllabletable(tenkey);"
+                ]
+                for command in commands {
+                        var pointer: OpaquePointer? = nil
+                        defer { sqlite3_finalize(pointer) }
+                        guard sqlite3_prepare_v2(database, command, -1, &pointer, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(pointer) == SQLITE_DONE else { return }
+                }
         }
 }

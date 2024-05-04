@@ -53,7 +53,7 @@ extension String {
 
         /// Contains tone number (1-6)
         var hasTones: Bool {
-                return self.first(where: { $0.isTone }) != nil
+                return self.contains(where: \.isTone)
         }
 }
 

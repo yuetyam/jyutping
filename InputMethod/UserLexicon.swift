@@ -83,9 +83,13 @@ struct UserLexicon {
                         let matches = schemes.map({ scheme -> [Candidate] in
                                 let pingText = scheme.map(\.origin).joined()
                                 let matched = match(text: pingText, input: text, isShortcut: false)
+                                guard !(matched.isEmpty) else { return [] }
                                 let text2mark = scheme.map(\.text).joined(separator: " ")
                                 let syllables = scheme.map(\.origin).joined(separator: " ")
-                                return matched.filter({ $0.mark == syllables }).map({ Candidate(text: $0.text, romanization: $0.romanization, input: $0.input, mark: text2mark) })
+                                return matched.compactMap({ item -> Candidate? in
+                                        guard item.mark == syllables else { return nil }
+                                        return Candidate(text: item.text, romanization: item.romanization, input: item.input, mark: text2mark)
+                                })
                         })
                         return matches.flatMap({ $0 })
                 }()

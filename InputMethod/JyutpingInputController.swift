@@ -315,8 +315,8 @@ final class JyutpingInputController: IMKInputController {
                 let engineCandidates: [Candidate] = Engine.suggest(origin: bufferText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
                 let text2mark: String = {
                         if let mark = userLexiconCandidates.first?.mark { return mark }
-                        let isLetterOnly: Bool = processingText.first(where: { $0.isSeparatorOrTone }) == nil
-                        guard isLetterOnly else { return processingText.formattedForMark() }
+                        let hasSeparatorsOrTones: Bool = processingText.contains(where: \.isSeparatorOrTone)
+                        guard !hasSeparatorsOrTones else { return processingText.formattedForMark() }
                         let userInputTextCount: Int = processingText.count
                         if let firstCandidate = engineCandidates.first, firstCandidate.input.count == userInputTextCount { return firstCandidate.mark }
                         guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
@@ -388,8 +388,8 @@ final class JyutpingInputController: IMKInputController {
                 let text = bufferText.dropFirst().toneConverted()
                 let segmentation = Segmentor.segment(text: text)
                 let tailMarkedText: String = {
-                        let isMarkFree: Bool = text.first(where: { $0.isSeparatorOrTone }) == nil
-                        guard isMarkFree else { return text.formattedForMark() }
+                        let hasSeparatorsOrTones: Bool = text.contains(where: \.isSeparatorOrTone)
+                        guard !hasSeparatorsOrTones else { return text.formattedForMark() }
                         guard let bestScheme = segmentation.first else { return text.formattedForMark() }
                         let leadingLength: Int = bestScheme.length
                         let leadingText: String = bestScheme.map(\.text).joined(separator: " ")
