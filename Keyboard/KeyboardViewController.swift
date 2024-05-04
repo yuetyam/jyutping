@@ -414,12 +414,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         aftercareSelected(candidate)
                 case .copyAllText:
                         let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                        let selected: String = textDocumentProxy.selectedText ?? String.empty
                         let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
-                        let text: String = head + tail
+                        let text: String = head + selected + tail
                         guard !(text.isEmpty) else { return }
                         UIPasteboard.general.string = text
                         isClipboardEmpty = false
                 case .cutAllText:
+                        if textDocumentProxy.selectedText != nil {
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+                        }
                         let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                         let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
                         let text: String = head + tail
@@ -443,6 +447,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         }
                 case .convertAllText:
+                        if textDocumentProxy.selectedText != nil {
+                                textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+                        }
                         let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                         let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
                         let text: String = head + tail
