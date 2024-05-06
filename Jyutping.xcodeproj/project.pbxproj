@@ -298,6 +298,7 @@
 		37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD73A2B3719C30089D346 /* JyutpingTests.swift */; };
 		37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7442B3719C30089D346 /* JyutpingUITests.swift */; };
 		37EFD7472B3719C30089D346 /* JyutpingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */; };
+		37F9C6272BE94F84001B3917 /* UITextDocumentProxyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F9C6262BE94F84001B3917 /* UITextDocumentProxyExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -717,6 +718,7 @@
 		37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JyutpingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD7442B3719C30089D346 /* JyutpingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITests.swift; sourceTree = "<group>"; };
 		37EFD7462B3719C30089D346 /* JyutpingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JyutpingUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		37F9C6262BE94F84001B3917 /* UITextDocumentProxyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextDocumentProxyExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1002,6 +1004,7 @@
 				371B6F442B3B342F005BB31C /* FontExtensions.swift */,
 				371B6F452B3B342F005BB31C /* ImageExtensions.swift */,
 				371B6F462B3B342F005BB31C /* StringExtensions.swift */,
+				37F9C6262BE94F84001B3917 /* UITextDocumentProxyExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1765,6 +1768,7 @@
 				371B6FF02B3B342F005BB31C /* PadCangjieKeyboard.swift in Sources */,
 				379A9E302BE4C86E001AE79E /* EditingPanelCopyKey.swift in Sources */,
 				371B6FDF2B3B342F005BB31C /* LargePadNumericKeyboard.swift in Sources */,
+				37F9C6272BE94F84001B3917 /* UITextDocumentProxyExtensions.swift in Sources */,
 				371B6F9D2B3B342F005BB31C /* StrokeKeyboard.swift in Sources */,
 				371B6FFA2B3B342F005BB31C /* PadCompleteInputKey.swift in Sources */,
 				371B6FDE2B3B342F005BB31C /* LargePadGlobeKey.swift in Sources */,

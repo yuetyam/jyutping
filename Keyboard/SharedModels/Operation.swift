@@ -18,7 +18,7 @@ enum Operation: Hashable {
 
         case copyAllText
         case cutAllText
-        case clearLeadingText
+        case clearAllText
         case convertAllText
         case clearClipboard
         case paste

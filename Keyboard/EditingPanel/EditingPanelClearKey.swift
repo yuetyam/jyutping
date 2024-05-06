@@ -50,7 +50,7 @@ struct EditingPanelClearKey: View {
                                 }
                         }
                         .onEnded { _ in
-                                context.operate(.clearLeadingText)
+                                context.operate(.clearAllText)
                         }
                 )
         }

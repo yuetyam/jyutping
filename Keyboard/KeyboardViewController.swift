@@ -413,60 +413,17 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         input(candidate.text)
                         aftercareSelected(candidate)
                 case .copyAllText:
-                        let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                        let selected: String = textDocumentProxy.selectedText ?? String.empty
-                        let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
-                        let text: String = head + selected + tail
-                        guard !(text.isEmpty) else { return }
-                        UIPasteboard.general.string = text
+                        let didCopyText: Bool = textDocumentProxy.copyAllText()
+                        guard didCopyText else { return }
                         isClipboardEmpty = false
                 case .cutAllText:
-                        if textDocumentProxy.selectedText != nil {
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-                        }
-                        let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                        let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
-                        let text: String = head + tail
-                        guard !(text.isEmpty) else { return }
-                        UIPasteboard.general.string = text
+                        let didCopyText: Bool = textDocumentProxy.cutAllText()
+                        guard didCopyText else { return }
                         isClipboardEmpty = false
-                        for _ in 0..<head.count {
-                                textDocumentProxy.deleteBackward()
-                        }
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: tail.utf16.count)
-                        for _ in 0..<tail.count {
-                                textDocumentProxy.deleteBackward()
-                        }
-                case .clearLeadingText:
-                        if textDocumentProxy.selectedText != nil {
-                                textDocumentProxy.deleteBackward()
-                        }
-                        if let text = textDocumentProxy.documentContextBeforeInput {
-                                for _ in 0..<text.count {
-                                        textDocumentProxy.deleteBackward()
-                                }
-                        }
+                case .clearAllText:
+                        textDocumentProxy.clearAllText()
                 case .convertAllText:
-                        if textDocumentProxy.selectedText != nil {
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-                        }
-                        let head: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                        let tail: String = textDocumentProxy.documentContextAfterInput ?? String.empty
-                        let text: String = head + tail
-                        guard !(text.isEmpty) else { return }
-                        for _ in 0..<head.count {
-                                textDocumentProxy.deleteBackward()
-                        }
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: tail.utf16.count)
-                        for _ in 0..<tail.count {
-                                textDocumentProxy.deleteBackward()
-                        }
-                        let convertedText: String = {
-                                let simplified: String = text.traditional2SimplifiedConverted()
-                                guard simplified == text else { return simplified }
-                                return text.simplified2TraditionalConverted()
-                        }()
-                        textDocumentProxy.insertText(convertedText)
+                        textDocumentProxy.convertAllText()
                 case .clearClipboard:
                         UIPasteboard.general.items.removeAll()
                         isClipboardEmpty = true

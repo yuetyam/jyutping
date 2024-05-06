@@ -63,5 +63,5 @@
 "EditingPanel.Space" = "space";
 
 "EditingPanel.Back" = "Back";
-"EditingPanel.Backspace" = "Backward Delete";
+"EditingPanel.Backspace" = "Delete";
 "EditingPanel.ForwardDelete" = "Forward Delete";

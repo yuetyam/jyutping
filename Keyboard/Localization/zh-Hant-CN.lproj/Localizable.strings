@@ -51,7 +51,7 @@
 
 "EditingPanel.Copy" = "複製全文";
 "EditingPanel.Cut" = "剪下全文";
-"EditingPanel.Clear" = "清空前文";
+"EditingPanel.Clear" = "清空";
 "EditingPanel.HantHansConversion" = "簡繁轉換全文";
 
 "EditingPanel.ClearSystemClipboard" = "清空系統剪貼板";
@@ -63,5 +63,5 @@
 "EditingPanel.Space" = "空格";
 
 "EditingPanel.Back" = "返回";
-"EditingPanel.Backspace" = "向後刪除";
-"EditingPanel.ForwardDelete" = "向前刪除";
+"EditingPanel.Backspace" = "刪除";
+"EditingPanel.ForwardDelete" = "向右刪除";
