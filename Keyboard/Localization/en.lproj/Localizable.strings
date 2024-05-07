@@ -49,10 +49,10 @@
 
 // MARK: - EditingPanel
 
-"EditingPanel.Copy" = "Copy All";
-"EditingPanel.Cut" = "Cut All";
+"EditingPanel.Copy" = "Copy";
+"EditingPanel.Cut" = "Cut";
 "EditingPanel.Clear" = "Clear";
-"EditingPanel.HantHansConversion" = "简↔繁 All";
+"EditingPanel.HantHansConversion" = "简↔繁";
 
 "EditingPanel.ClearSystemClipboard" = "Clear System Clipboard";
 "EditingPanel.Paste" = "Paste";

@@ -49,10 +49,10 @@
 
 // MARK: - EditingPanel
 
-"EditingPanel.Copy" = "複製全文";
-"EditingPanel.Cut" = "剪下全文";
+"EditingPanel.Copy" = "複製";
+"EditingPanel.Cut" = "剪下";
 "EditingPanel.Clear" = "清空";
-"EditingPanel.HantHansConversion" = "簡繁轉換全文";
+"EditingPanel.HantHansConversion" = "简↔繁";
 
 "EditingPanel.ClearSystemClipboard" = "清空系統剪貼板";
 "EditingPanel.Paste" = "貼上";

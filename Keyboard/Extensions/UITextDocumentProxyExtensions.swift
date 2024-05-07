@@ -1,4 +1,6 @@
 import UIKit
+import Combine
+import CommonExtensions
 
 extension UITextDocumentProxy {
 
@@ -8,22 +10,34 @@ extension UITextDocumentProxy {
                 if selectedText != nil {
                         deleteBackward()
                 }
-                for _ in 0..<5 {
-                        guard hasText else { break }
-                        if let text = documentContextBeforeInput {
-                                for _ in 0..<text.count {
-                                        deleteBackward()
-                                }
-                        } else {
+                if let text = documentContextBeforeInput {
+                        for _ in 0..<text.count {
                                 deleteBackward()
                         }
                 }
+                var cancellable: AnyCancellable?
+                var repeatCount: Int = 0
+                cancellable = Timer.publish(every: 0.1, on: .main, in: .common)
+                        .autoconnect()
+                        .sink { _ in
+                                if repeatCount < 3 {
+                                        if let text = self.documentContextBeforeInput {
+                                                for _ in 0..<text.count {
+                                                        self.deleteBackward()
+                                                }
+                                        } else {
+                                                self.deleteBackward()
+                                        }
+                                        repeatCount += 1
+                                } else {
+                                        cancellable?.cancel()
+                                }
+                        }
         }
 
         /// Copy all text to the system clipboard.
         /// - Returns: Did copy text to the system clipboard?
         func copyAllText() -> Bool {
-                guard hasText else { return false }
                 let head: String = documentContextBeforeInput ?? String.empty
                 let selected: String = selectedText ?? String.empty
                 let tail: String = documentContextAfterInput ?? String.empty
@@ -40,52 +54,19 @@ extension UITextDocumentProxy {
                 if selectedText != nil {
                         adjustTextPosition(byCharacterOffset: 1)
                 }
-                let head: String = {
-                        var parts: [String] = []
-                        for _ in 0..<5 {
-                                guard hasText else { break }
-                                if let text = documentContextBeforeInput {
-                                        parts.append(text)
-                                        for _ in 0..<text.count {
-                                                deleteBackward()
-                                        }
-                                } else {
-                                        insertText(String.zeroWidthSpace)
-                                        deleteBackward()
-                                        if let text = documentContextBeforeInput {
-                                                parts.append(text)
-                                                for _ in 0..<text.count {
-                                                        deleteBackward()
-                                                }
-                                        }
-                                }
+                let head: String = documentContextBeforeInput ?? String.empty
+                if !(head.isEmpty) {
+                        for _ in 0..<head.count {
+                                deleteBackward()
                         }
-                        return parts.joined()
-                }()
-                let tail: String = {
-                        var parts: [String] = []
-                        for _ in 0..<5 {
-                                guard hasText else { break }
-                                if let text = documentContextAfterInput {
-                                        parts.append(text)
-                                        adjustTextPosition(byCharacterOffset: text.utf16.count)
-                                        for _ in 0..<text.count {
-                                                deleteBackward()
-                                        }
-                                } else {
-                                        insertText(String.zeroWidthSpace)
-                                        if let text = documentContextAfterInput {
-                                                parts.append(text)
-                                                adjustTextPosition(byCharacterOffset: text.utf16.count)
-                                                for _ in 0..<text.count {
-                                                        deleteBackward()
-                                                }
-                                        }
-                                        deleteBackward()
-                                }
+                }
+                let tail: String = documentContextAfterInput ?? String.empty
+                if !(tail.isEmpty) {
+                        adjustTextPosition(byCharacterOffset: tail.utf16.count)
+                        for _ in 0..<tail.count {
+                                deleteBackward()
                         }
-                        return parts.joined()
-                }()
+                }
                 let text: String = head + tail
                 guard !(text.isEmpty) else { return false }
                 UIPasteboard.general.string = text
@@ -98,58 +79,24 @@ extension UITextDocumentProxy {
                 if selectedText != nil {
                         adjustTextPosition(byCharacterOffset: 1)
                 }
-                let head: String = {
-                        var parts: [String] = []
-                        for _ in 0..<5 {
-                                guard hasText else { break }
-                                if let text = documentContextBeforeInput {
-                                        parts.append(text)
-                                        for _ in 0..<text.count {
-                                                deleteBackward()
-                                        }
-                                } else {
-                                        insertText(String.zeroWidthSpace)
-                                        deleteBackward()
-                                        if let text = documentContextBeforeInput {
-                                                parts.append(text)
-                                                for _ in 0..<text.count {
-                                                        deleteBackward()
-                                                }
-                                        }
-                                }
+                let head: String = documentContextBeforeInput ?? String.empty
+                if !(head.isEmpty) {
+                        for _ in 0..<head.count {
+                                deleteBackward()
                         }
-                        return parts.joined()
-                }()
-                let tail: String = {
-                        var parts: [String] = []
-                        for _ in 0..<5 {
-                                guard hasText else { break }
-                                if let text = documentContextAfterInput {
-                                        parts.append(text)
-                                        adjustTextPosition(byCharacterOffset: text.utf16.count)
-                                        for _ in 0..<text.count {
-                                                deleteBackward()
-                                        }
-                                } else {
-                                        insertText(String.zeroWidthSpace)
-                                        if let text = documentContextAfterInput {
-                                                parts.append(text)
-                                                adjustTextPosition(byCharacterOffset: text.utf16.count)
-                                                for _ in 0..<text.count {
-                                                        deleteBackward()
-                                                }
-                                        }
-                                        deleteBackward()
-                                }
+                }
+                let tail: String = documentContextAfterInput ?? String.empty
+                if !(tail.isEmpty) {
+                        adjustTextPosition(byCharacterOffset: tail.utf16.count)
+                        for _ in 0..<tail.count {
+                                deleteBackward()
                         }
-                        return parts.joined()
-                }()
+                }
                 let text: String = head + tail
                 guard !(text.isEmpty) else { return }
                 let convertedText: String = {
                         let simplified: String = text.traditional2SimplifiedConverted()
-                        guard simplified == text else { return simplified }
-                        return text.simplified2TraditionalConverted()
+                        return (simplified == text) ? text.simplified2TraditionalConverted() : simplified
                 }()
                 insertText(convertedText)
         }
