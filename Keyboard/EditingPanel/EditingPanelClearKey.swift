@@ -44,7 +44,7 @@ struct EditingPanelClearKey: View {
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
                                 if !tapped {
-                                        AudioFeedback.modified()
+                                        AudioFeedback.deleted()
                                         context.triggerHapticFeedback()
                                         tapped = true
                                 }

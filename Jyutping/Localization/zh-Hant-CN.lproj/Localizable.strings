@@ -133,7 +133,7 @@
 "IOSHomeTab.FAQ.Answer.ExternalKeyboards" = "由於系統限制，所有第三方輸入法都冇辦法使用外置鍵盤。並非開發者有意爲之。";
 "IOSHomeTab.FAQ.Question.FullAccess" = "開啓「完全訪問」作何用？";
 "IOSHomeTab.FAQ.Answer.FullAccess.Row1.Haptic" = "觸感回應（Haptic Feedback）";
-"IOSHomeTab.FAQ.Answer.FullAccess.Row2.Paste" = "鍵盤個「貼上」掣";
+"IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard" = "「貼上」掣將系統剪貼板文字內容貼上輸入";
 "IOSHomeTab.FAQ.Footer.FullAccess" = "毋開啓「完全訪問」毋會影響使用其他功能";
 "IOSHomeTab.FAQ.Question.TTS" = "點解我部機嘅文字語音朗讀毋正常？";
 

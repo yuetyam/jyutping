@@ -133,9 +133,9 @@
 "IOSHomeTab.FAQ.Answer.ExternalKeyboards" = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";
 "IOSHomeTab.FAQ.Question.FullAccess" = "What does “Allow Full Access” do?";
 "IOSHomeTab.FAQ.Answer.FullAccess.Row1.Haptic" = "Haptic Feedback";
-"IOSHomeTab.FAQ.Answer.FullAccess.Row2.Paste" = "Paste texts from Clipboard";
+"IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard" = "Paste texts from system clipboard";
 "IOSHomeTab.FAQ.Footer.FullAccess" = "All other features don't require Full Access";
-"IOSHomeTab.FAQ.Question.TTS" = "Why is my TTS not working?";
+"IOSHomeTab.FAQ.Question.TTS" = "Why is the TTS on my device not working?";
 
 "IOSHomeTab.LabelTitle.PrivacyNotice" = "Privacy Notice";
 "IOSHomeTab.NavigationTitle.PrivacyNotice" = "Privacy Notice";

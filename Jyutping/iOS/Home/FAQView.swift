@@ -12,7 +12,7 @@ struct FAQView: View {
                         Section {
                                 Text("IOSHomeTab.FAQ.Question.FullAccess").font(.significant)
                                 if Device.isPad {
-                                        Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Paste")
+                                        Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard")
                                 } else {
                                         HStack {
                                                 Text(verbatim: "1.").font(.system(size: 15, design: .monospaced))
@@ -21,7 +21,7 @@ struct FAQView: View {
                                         }
                                         HStack {
                                                 Text(verbatim: "2.").font(.system(size: 15, design: .monospaced))
-                                                Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Paste")
+                                                Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard")
                                                 Spacer()
                                         }
                                 }
