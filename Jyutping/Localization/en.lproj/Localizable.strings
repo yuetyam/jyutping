@@ -105,19 +105,17 @@
 
 "IOSHomeTab.LabelTitle.TextToSpeech" = "Text to Speech";
 "IOSHomeTab.NavigationTitle.TextToSpeech" = "Text to Speech";
-"IOSHomeTab.Text2Speech.Notice0" = "This app uses system built-in Text-to-Speech (TTS) service to speak texts.";
-"IOSHomeTab.Text2Speech.Notice1" = "Text-to-Speech (TTS) may not work if this device is in silent mode.";
-"IOSHomeTab.Text2Speech.Notice2" = "To ensure TTS functional, please go to **Settings** → **General** → **Language & Region**, then add **Chinese, Traditional (Hong Kong)** language.";
-"IOSHomeTab.Text2Speech.Notice3" = "To improve TTS quality, please go to **Settings** → **Accessibility** → **VioceOver** → **Speech**, then add **Chinese (Hong Kong)** language voice.";
+"IOSHomeTab.Text2Speech.Notice1" = "This app uses system built-in Text-to-Speech (TTS) service to speak texts.";
+"IOSHomeTab.Text2Speech.Notice2" = "Text-to-Speech (TTS) may not work if this device is in silent mode.";
+"IOSHomeTab.Text2Speech.Notice3" = "To ensure TTS functional, please go to **Settings** → **General** → **Language & Region**, then add **Chinese, Traditional (Hong Kong)** language.";
+"IOSHomeTab.Text2Speech.Notice4" = "To improve TTS quality, please go to **Settings** → **Accessibility** → **VioceOver** → **Speech**, then add **Chinese (Hong Kong)** language voice.";
 
 "IOSHomeTab.LabelTitle.ClipboardFeatures" = "Clipboard Features";
 "IOSHomeTab.NavigationTitle.ClipboardFeatures" = "Clipboard Features";
-"IOSHomeTab.ClipboardFeaturesView.Notice0" = "Due to system limitations, the **Paste** button on the Keyboard will only function when the **Allow Full Access** permission is turned on.";
-"IOSHomeTab.ClipboardFeaturesView.Notice1" = "The **Paste** button on the Keyboard can paste text from the System Clipboard into the input text field.";
-"IOSHomeTab.ClipboardFeaturesView.Notice2" = "The **Clear System Clipboard** button on the Keyboard can clear texts, photos, and other contents on the System Clipboard.";
-"IOSHomeTab.ClipboardFeaturesView.Notice3" = "The Keyboard itself would not store any content of the System Clipboard.";
-"IOSHomeTab.ClipboardFeaturesView.Notice4" = "When you press the **Paste** button on the Keyboard, the system may prompt you to ask if you want to allow the paste.";
-"IOSHomeTab.ClipboardFeaturesView.Notice5" = "If you find it annoying to have these prompts, you can go to the **Jyutping** in the **Settings** app, and change the setting **Paste from Other Apps** from **Ask** to **Allow**.";
+"IOSHomeTab.ClipboardFeaturesView.Notice1" = "Due to system limitations, the **Paste** button on the Keyboard will only function when the **Allow Full Access** permission is turned on.";
+"IOSHomeTab.ClipboardFeaturesView.Notice2" = "The Keyboard itself would not store any content of the System Clipboard.";
+"IOSHomeTab.ClipboardFeaturesView.Notice3" = "When you press the **Paste** button on the Keyboard, the system may prompt you to ask if you want to allow the paste.";
+"IOSHomeTab.ClipboardFeaturesView.Notice4" = "If you find it annoying to have these prompts, you can go to the **Jyutping** in the **Settings** app, and change the setting **Paste from Other Apps** from **Ask** to **Allow**.";
 
 "IOSHomeTab.LabelTitle.ChangeDisplayLanguage" = "Change Display Language";
 "IOSHomeTab.NavigationTitle.ChangeDisplayLanguage" = "Display Language";
@@ -133,16 +131,16 @@
 "IOSHomeTab.FAQ.Answer.ExternalKeyboards" = "Unfortunately not. Third-party keyboard apps can't communicate with external keyboards due to system limitations.";
 "IOSHomeTab.FAQ.Question.FullAccess" = "What does “Allow Full Access” do?";
 "IOSHomeTab.FAQ.Answer.FullAccess.Row1.Haptic" = "Haptic Feedback";
-"IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard" = "Paste texts from system clipboard";
+"IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard" = "Paste texts from System Clipboard";
 "IOSHomeTab.FAQ.Footer.FullAccess" = "All other features don't require Full Access";
 "IOSHomeTab.FAQ.Question.TTS" = "Why is the TTS on my device not working?";
 
 "IOSHomeTab.LabelTitle.PrivacyNotice" = "Privacy Notice";
 "IOSHomeTab.NavigationTitle.PrivacyNotice" = "Privacy Notice";
-"IOSHomeTab.PrivacyNotice.Row1" = "This Keyboard will always be offline and never connected to the network.";
-"IOSHomeTab.PrivacyNotice.Row2" = "There is no communication between the Keyboard Extension and the main app.";
+"IOSHomeTab.PrivacyNotice.Row1" = "The Keyboard will always be offline and never connected to the network.";
+"IOSHomeTab.PrivacyNotice.Row2" = "There is no communication between the Keyboard and the main app.";
 "IOSHomeTab.PrivacyNotice.Row3" = "Enabling Haptic Feedback needs Allow Full Access.";
-"IOSHomeTab.PrivacyNotice.Row4" = "The Paste button on the Keyboard would not collect any content of the Clipboard.";
+"IOSHomeTab.PrivacyNotice.Row4" = "The Keyboard itself would not store any content of the System Clipboard.";
 "IOSHomeTab.PrivacyNotice.Footer" = "TLDR: We do NOT collect or share personal information.";
 
 

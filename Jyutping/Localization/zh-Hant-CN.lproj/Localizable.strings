@@ -105,19 +105,17 @@
 
 "IOSHomeTab.LabelTitle.TextToSpeech" = "文字語音朗讀";
 "IOSHomeTab.NavigationTitle.TextToSpeech" = "文字語音朗讀";
-"IOSHomeTab.Text2Speech.Notice0" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
-"IOSHomeTab.Text2Speech.Notice1" = "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。";
-"IOSHomeTab.Text2Speech.Notice2" = "爲保證發音質素，請前往 **設置** → **通用** → **語言與地區**，添加 **繁體中文(香港)** 語言。";
-"IOSHomeTab.Text2Speech.Notice3" = "爲提高發音質素，請前往 **設置** → **輔助功能** → **旁白** → **語音**，添加 **繁體中文(香港)** 語音。";
+"IOSHomeTab.Text2Speech.Notice1" = "本應用程式使用嘅係，系統提供嘅文字語音朗讀（TTS）功能。";
+"IOSHomeTab.Text2Speech.Notice2" = "如果本設備處於靜音狀態，文字語音朗讀可能會冇聲音。";
+"IOSHomeTab.Text2Speech.Notice3" = "爲保證發音質素，請前往 **設置** → **通用** → **語言與地區**，添加 **繁體中文(香港)** 語言。";
+"IOSHomeTab.Text2Speech.Notice4" = "爲提高發音質素，請前往 **設置** → **輔助功能** → **旁白** → **語音**，添加 **繁體中文(香港)** 語音。";
 
 "IOSHomeTab.LabelTitle.ClipboardFeatures" = "剪貼板相關功能";
 "IOSHomeTab.NavigationTitle.ClipboardFeatures" = "剪貼板相關功能";
-"IOSHomeTab.ClipboardFeaturesView.Notice0" = "由於系統限制，需要開啓「允許完全訪問」權限，鍵盤「貼上」掣先可以正常使用。";
-"IOSHomeTab.ClipboardFeaturesView.Notice1" = "鍵盤「貼上」掣可以將系統剪貼板嘅文字貼上輸入框。";
-"IOSHomeTab.ClipboardFeaturesView.Notice2" = "鍵盤「清空系統剪貼板」掣可以將系統剪貼板嘅文字、相片等內容清空。";
-"IOSHomeTab.ClipboardFeaturesView.Notice3" = "鍵盤本身並毋會儲存系統剪貼板內容。";
-"IOSHomeTab.ClipboardFeaturesView.Notice4" = "撳「貼上」掣時，系統可能會彈提示，詢問是否允許貼上。";
-"IOSHomeTab.ClipboardFeaturesView.Notice5" = "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。";
+"IOSHomeTab.ClipboardFeaturesView.Notice1" = "由於系統限制，需要開啓「允許完全訪問」權限，鍵盤「貼上」掣先可以正常使用。";
+"IOSHomeTab.ClipboardFeaturesView.Notice2" = "鍵盤自身並毋會儲存系統剪貼板或者輸入框嘅任何內容。";
+"IOSHomeTab.ClipboardFeaturesView.Notice3" = "撳「貼上」或者「清空系統剪貼板」掣時，系統可能會彈提示，詢問是否允許貼上。";
+"IOSHomeTab.ClipboardFeaturesView.Notice4" = "如果覺得經常彈提示好煩，可以去系統設定App嘅「粵拼」䈎面；將設定項「從其他App貼上」，由「詢問」改爲「允許」。";
 
 "IOSHomeTab.LabelTitle.ChangeDisplayLanguage" = "更改介面顯示語言";
 "IOSHomeTab.NavigationTitle.ChangeDisplayLanguage" = "介面顯示語言";
@@ -139,10 +137,10 @@
 
 "IOSHomeTab.LabelTitle.PrivacyNotice" = "私隱佈告";
 "IOSHomeTab.NavigationTitle.PrivacyNotice" = "私隱佈告";
-"IOSHomeTab.PrivacyNotice.Row1" = "鍵盤全程毋會訪問網絡";
-"IOSHomeTab.PrivacyNotice.Row2" = "鍵盤係完全獨立嘅，同主應用程式之間毋會進行任何交流、分享";
-"IOSHomeTab.PrivacyNotice.Row3" = "開啓「完全訪問」權限係用來提供觸感回應";
-"IOSHomeTab.PrivacyNotice.Row4" = "鍵盤個「貼上」掣毋會收集任何剪貼板內容";
+"IOSHomeTab.PrivacyNotice.Row1" = "鍵盤全程離線，毋會訪問網絡。";
+"IOSHomeTab.PrivacyNotice.Row2" = "鍵盤係完全獨立嘅，同主應用程式之間冇任何交流、分享。";
+"IOSHomeTab.PrivacyNotice.Row3" = "開啓「完全訪問」權限係用來提供觸感回應。";
+"IOSHomeTab.PrivacyNotice.Row4" = "鍵盤毋會儲存系統剪貼板或者輸入框嘅任何內容。";
 "IOSHomeTab.PrivacyNotice.Footer" = "一句話講晒：本輸入法毋會收集個人資訊";
 
 

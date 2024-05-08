@@ -33,11 +33,6 @@ struct FAQView: View {
                                 Text("IOSHomeTab.FAQ.Question.TTS").font(.significant)
                                 HStack {
                                         Text.dotMark
-                                        Text("IOSHomeTab.Text2Speech.Notice0")
-                                        Spacer()
-                                }
-                                HStack {
-                                        Text.dotMark
                                         Text("IOSHomeTab.Text2Speech.Notice1")
                                         Spacer()
                                 }
@@ -49,6 +44,11 @@ struct FAQView: View {
                                 HStack {
                                         Text.dotMark
                                         Text("IOSHomeTab.Text2Speech.Notice3")
+                                        Spacer()
+                                }
+                                HStack {
+                                        Text.dotMark
+                                        Text("IOSHomeTab.Text2Speech.Notice4")
                                         Spacer()
                                 }
                         }

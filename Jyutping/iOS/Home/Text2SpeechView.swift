@@ -6,14 +6,14 @@ struct Text2SpeechView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("IOSHomeTab.Text2Speech.Notice0")
+                                Text("IOSHomeTab.Text2Speech.Notice1")
                         }
                         Section {
-                                VStack(alignment: .leading, spacing: 24) {
-                                        Text("IOSHomeTab.Text2Speech.Notice1")
-                                        Text("IOSHomeTab.Text2Speech.Notice2")
-                                        Text("IOSHomeTab.Text2Speech.Notice3")
-                                }
+                                Text("IOSHomeTab.Text2Speech.Notice2")
+                        }
+                        Section {
+                                Text("IOSHomeTab.Text2Speech.Notice3")
+                                Text("IOSHomeTab.Text2Speech.Notice4")
                         }
                         Section {
                                 HStack {
