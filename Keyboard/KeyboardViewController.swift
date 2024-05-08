@@ -123,22 +123,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
-                let text2insert: String = {
-                        let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                        let currentLength: Int = currentContext.count
-                        guard currentLength == previousLength else { return String.zeroWidthSpace }
-                        guard currentContext == previousContext else { return String.zeroWidthSpace }
-                        return text + String.zeroWidthSpace
-                }()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [unowned self] in
-                        textDocumentProxy.insertText(text2insert)
+                defer {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                                canMarkText = true
+                        }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
-                        textDocumentProxy.deleteBackward()
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) { [unowned self] in
-                        canMarkText = true
-                }
+                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                let currentLength: Int = currentContext.count
+                guard currentLength == previousLength else { return }
+                guard currentContext == previousContext else { return }
+                textDocumentProxy.insertText(text)
         }
         private func inputBufferText() {
                 let text: String = bufferText
@@ -149,22 +143,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let range: NSRange = NSRange(location: location, length: 0)
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
-                let text2insert: String = {
-                        let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
-                        let currentLength: Int = currentContext.count
-                        guard currentLength == previousLength else { return String.zeroWidthSpace }
-                        guard currentContext == previousContext else { return String.zeroWidthSpace }
-                        return text + String.zeroWidthSpace
-                }()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) { [unowned self] in
-                        textDocumentProxy.insertText(text2insert)
+                defer {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                                clearBuffer()
+                        }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
-                        textDocumentProxy.deleteBackward()
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) { [unowned self] in
-                        clearBuffer()
-                }
+                let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
+                let currentLength: Int = currentContext.count
+                guard currentLength == previousLength else { return }
+                guard currentContext == previousContext else { return }
+                textDocumentProxy.insertText(text)
         }
 
 
@@ -186,10 +174,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                if textDocumentProxy.keyboardType == .webSearch {
-                                        // REASON: Chrome address bar
-                                        textDocumentProxy.insertText(String.empty)
-                                }
                                 updateReturnKey()
                         case (false, true):
                                 inputStage = .ending
@@ -433,25 +417,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         guard !(text.isEmpty) else { return }
                         textDocumentProxy.insertText(text)
                 case .moveCursorBackward:
-                        let offset: Int = textDocumentProxy.documentContextBeforeInput?.last?.utf16.count ?? 1
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
+                        textDocumentProxy.moveBackward()
                 case .moveCursorForward:
-                        let offset: Int = textDocumentProxy.documentContextAfterInput?.first?.utf16.count ?? 1
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
+                        textDocumentProxy.moveForward()
                 case .jumpToHead:
-                        if textDocumentProxy.selectedText != nil {
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
-                        }
-                        guard let text = textDocumentProxy.documentContextBeforeInput, !(text.isEmpty) else { break }
-                        let offset: Int = text.utf16.count
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: -offset)
+                        textDocumentProxy.jumpToHead()
                 case .jumpToTail:
-                        if textDocumentProxy.selectedText != nil {
-                                textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-                        }
-                        guard let text = textDocumentProxy.documentContextAfterInput, !(text.isEmpty) else { break }
-                        let offset: Int = text.utf16.count
-                        textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)
+                        textDocumentProxy.jumpToTail()
                 case .forwardDelete:
                         guard let offset = textDocumentProxy.documentContextAfterInput?.first?.utf16.count else { return }
                         textDocumentProxy.adjustTextPosition(byCharacterOffset: offset)

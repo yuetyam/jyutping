@@ -1,38 +1,18 @@
 import UIKit
-import Combine
 import CommonExtensions
 
 extension UITextDocumentProxy {
 
         /// Clear(delete) the text to the left of the cursor.
         func clearAllText() {
-                guard hasText else { return }
                 if selectedText != nil {
                         deleteBackward()
                 }
-                if let text = documentContextBeforeInput {
-                        for _ in 0..<text.count {
+                if let textCount = documentContextBeforeInput?.count, textCount > 0 {
+                        for _ in 0..<textCount {
                                 deleteBackward()
                         }
                 }
-                var cancellable: AnyCancellable?
-                var repeatCount: Int = 0
-                cancellable = Timer.publish(every: 0.1, on: .main, in: .common)
-                        .autoconnect()
-                        .sink { _ in
-                                if repeatCount < 3 {
-                                        if let text = self.documentContextBeforeInput {
-                                                for _ in 0..<text.count {
-                                                        self.deleteBackward()
-                                                }
-                                        } else {
-                                                self.deleteBackward()
-                                        }
-                                        repeatCount += 1
-                                } else {
-                                        cancellable?.cancel()
-                                }
-                        }
         }
 
         /// Copy all text to the system clipboard.
@@ -50,17 +30,16 @@ extension UITextDocumentProxy {
         /// Copy all text to the system clipboard, and clear the text-entry object content.
         /// - Returns: Did copy text to the system clipboard?
         func cutAllText() -> Bool {
-                guard hasText else { return false }
                 if selectedText != nil {
                         adjustTextPosition(byCharacterOffset: 1)
                 }
                 let head: String = documentContextBeforeInput ?? String.empty
+                let tail: String = documentContextAfterInput ?? String.empty
                 if !(head.isEmpty) {
                         for _ in 0..<head.count {
                                 deleteBackward()
                         }
                 }
-                let tail: String = documentContextAfterInput ?? String.empty
                 if !(tail.isEmpty) {
                         adjustTextPosition(byCharacterOffset: tail.utf16.count)
                         for _ in 0..<tail.count {
@@ -75,17 +54,16 @@ extension UITextDocumentProxy {
 
         /// Hant ↔ Hans conversion. 簡繁轉換
         func convertAllText() {
-                guard hasText else { return }
                 if selectedText != nil {
                         adjustTextPosition(byCharacterOffset: 1)
                 }
                 let head: String = documentContextBeforeInput ?? String.empty
+                let tail: String = documentContextAfterInput ?? String.empty
                 if !(head.isEmpty) {
                         for _ in 0..<head.count {
                                 deleteBackward()
                         }
                 }
-                let tail: String = documentContextAfterInput ?? String.empty
                 if !(tail.isEmpty) {
                         adjustTextPosition(byCharacterOffset: tail.utf16.count)
                         for _ in 0..<tail.count {
@@ -99,5 +77,28 @@ extension UITextDocumentProxy {
                         return (simplified == text) ? text.simplified2TraditionalConverted() : simplified
                 }()
                 insertText(convertedText)
+        }
+
+        func moveBackward() {
+                let offset: Int = documentContextBeforeInput?.last?.utf16.count ?? 1
+                adjustTextPosition(byCharacterOffset: -offset)
+        }
+        func moveForward() {
+                let offset: Int = documentContextAfterInput?.first?.utf16.count ?? 1
+                adjustTextPosition(byCharacterOffset: offset)
+        }
+        func jumpToHead() {
+                if selectedText != nil {
+                        adjustTextPosition(byCharacterOffset: -1)
+                }
+                let headOffset: Int = documentContextBeforeInput?.utf16.count ?? 1
+                adjustTextPosition(byCharacterOffset: -headOffset)
+        }
+        func jumpToTail() {
+                if selectedText != nil {
+                        adjustTextPosition(byCharacterOffset: 1)
+                }
+                let tailOffset: Int = documentContextAfterInput?.utf16.count ?? 1
+                adjustTextPosition(byCharacterOffset: tailOffset)
         }
 }
