@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370C951D2BF00FDC00F31358 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370C951B2BF00FD500F31358 /* Sparkle.framework */; };
+		370C951E2BF00FDC00F31358 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 370C951B2BF00FD500F31358 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3716A7E52BC135CF001F6679 /* SpaceKeyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */; };
 		371B6E332B3B2F32005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E322B3B2F32005BB31C /* CommonExtensions */; };
 		371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371B6E342B3B2F55005BB31C /* CommonExtensions */; };
@@ -292,8 +294,6 @@
 		37E6AD962B3B389400F02279 /* jyutpingime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD952B3B389400F02279 /* jyutpingime.pdf */; };
 		37E6ADAE2B3B389F00F02279 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD982B3B389E00F02279 /* InfoPlist.strings */; };
 		37E6ADAF2B3B389F00F02279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD9A2B3B389E00F02279 /* Localizable.strings */; };
-		37E6ADB32B3B39D000F02279 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; };
-		37E6ADB42B3B39D000F02279 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 37E6ADB12B3B39B500F02279 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		37EFD7312B3719C20089D346 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37EFD7302B3719C20089D346 /* Preview Assets.xcassets */; };
 		37EFD73B2B3719C30089D346 /* JyutpingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD73A2B3719C30089D346 /* JyutpingTests.swift */; };
 		37EFD7452B3719C30089D346 /* JyutpingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EFD7442B3719C30089D346 /* JyutpingUITests.swift */; };
@@ -357,7 +357,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				37E6ADB42B3B39D000F02279 /* Sparkle.framework in Embed Frameworks */,
+				370C951E2BF00FDC00F31358 /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +365,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		370C951B2BF00FD500F31358 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceKeyText.swift; sourceTree = "<group>"; };
 		371B6E362B3B2F72005BB31C /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = Modules/AppDataSource; sourceTree = "<group>"; };
 		371B6E392B3B2FE1005BB31C /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = Modules/CoreIME; sourceTree = "<group>"; };
@@ -709,7 +710,6 @@
 		37E6ADAC2B3B389F00F02279 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		37E6ADAD2B3B389F00F02279 /* zh-Hant-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-HK"; path = "zh-Hant-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		37E6ADB02B3B38B100F02279 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		37E6ADB12B3B39B500F02279 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		37EFD7252B3719C10089D346 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37EFD72E2B3719C20089D346 /* Jyutping.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jyutping.entitlements; sourceTree = "<group>"; };
 		37EFD7302B3719C20089D346 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -736,9 +736,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				371B6E352B3B2F55005BB31C /* CommonExtensions in Frameworks */,
-				37E6ADB32B3B39D000F02279 /* Sparkle.framework in Frameworks */,
 				371B6E3D2B3B3007005BB31C /* CoreIME in Frameworks */,
 				374282502B3CB71400B687D3 /* AboutKit in Frameworks */,
+				370C951D2BF00FDC00F31358 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1395,7 +1395,7 @@
 		37EFD71C2B3719C10089D346 = {
 			isa = PBXGroup;
 			children = (
-				37E6ADB12B3B39B500F02279 /* Sparkle.framework */,
+				370C951B2BF00FD500F31358 /* Sparkle.framework */,
 				3742824C2B3CB6FD00B687D3 /* AboutKit */,
 				371B6E392B3B2FE1005BB31C /* CoreIME */,
 				371B6E362B3B2F72005BB31C /* AppDataSource */,
