@@ -137,12 +137,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func inputBufferText() {
                 let text: String = bufferText
                 guard !(text.isEmpty) else { return }
+                textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
+                textDocumentProxy.unmarkText()
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
-                let location: Int = text.utf16.count
-                let range: NSRange = NSRange(location: location, length: 0)
-                textDocumentProxy.setMarkedText(text, selectedRange: range)
-                textDocumentProxy.unmarkText()
+                textDocumentProxy.insertText(text)
                 defer {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
                                 clearBuffer()
@@ -152,7 +151,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let currentLength: Int = currentContext.count
                 guard currentLength == previousLength else { return }
                 guard currentContext == previousContext else { return }
-                textDocumentProxy.insertText(text)
+                let location: Int = text.utf16.count
+                let range: NSRange = NSRange(location: location, length: 0)
+                textDocumentProxy.setMarkedText(text, selectedRange: range)
+                textDocumentProxy.unmarkText()
         }
 
 
