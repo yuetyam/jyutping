@@ -100,8 +100,8 @@ extension Engine {
                 return items
         }
         private static func shortcut(pinyin text: String, limit: Int? = nil) -> [PinyinLexicon] {
+                guard let code: Int = text.charcode else { return [] }
                 var items: [PinyinLexicon] = []
-                let code: Int = text.hash
                 let limit: Int = limit ?? 50
                 let command: String = "SELECT rowid, word, pinyin FROM pinyintable WHERE shortcut = \(code) LIMIT \(limit);"
                 var statement: OpaquePointer? = nil

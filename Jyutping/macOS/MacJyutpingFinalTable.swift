@@ -121,28 +121,22 @@ struct MacJyutpingFinalTable: View {
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal)
                                 }
+                                VStack {
+                                        MacFinalLabel(word: "恕", syllable: "syu3", jyutping: "yu", ipa: "[ yː ]")
+                                        MacFinalLabel(word: "算", syllable: "syun3", jyutping: "yun", ipa: "[ yːn ]")
+                                        MacFinalLabel(word: "雪", syllable: "syut3", jyutping: "yut", ipa: "[ yːt̚ ]")
+                                }
+                                .block()
                                 VStack(alignment: .leading, spacing: 2) {
-                                        VStack {
-                                                MacFinalLabel(word: "恕", syllable: "syu3", jyutping: "yu", ipa: "[ yː ]")
-                                                MacFinalLabel(word: "算", syllable: "syun3", jyutping: "yun", ipa: "[ yːn ]")
-                                                MacFinalLabel(word: "雪", syllable: "syut3", jyutping: "yut", ipa: "[ yːt̚ ]")
-                                        }
-                                        .block()
-                                        Text(verbatim: "粵語 -yu- 發音與普通話拼音 -ü- 類似。")
+                                        Text(verbatim: "鼻音單獨成韻")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
                                                 .padding(.horizontal)
-                                }
-                                VStack(alignment: .leading, spacing: 2) {
                                         VStack {
                                                 MacFinalLabel(word: "毋", syllable: "m4", jyutping: "m", ipa: "[ m̩ ]")
                                                 MacFinalLabel(word: "吳", syllable: "ng4", jyutping: "ng", ipa: "[ ŋ̩ ]")
                                         }
                                         .block()
-                                        Text(verbatim: "音節原本係 mu、ngu，後來韻母 -u 脫落，聲母作元音成韻。")
-                                                .font(.copilot)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(.horizontal)
                                 }
                         }
                         .textSelection(.enabled)

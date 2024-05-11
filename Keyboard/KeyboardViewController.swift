@@ -634,6 +634,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         func updateKeyboardForm(to form: KeyboardForm) {
                 let shouldStayBuffering: Bool = inputMethodMode.isCantonese && (form == .alphabetic || form == .candidateBoard)
                 if inputStage.isBuffering && !shouldStayBuffering {
+                        bufferCombos = []
                         inputBufferText()
                 }
                 let currentHeight = view.frame.size.height

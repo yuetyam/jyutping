@@ -102,14 +102,12 @@ struct IOSJyutpingFinalTable: View {
                                 IOSFinalLabel(word: "恕", syllable: "syu3", jyutping: "yu", ipa: "[ yː ]")
                                 IOSFinalLabel(word: "算", syllable: "syun3", jyutping: "yun", ipa: "[ yːn ]")
                                 IOSFinalLabel(word: "雪", syllable: "syut3", jyutping: "yut", ipa: "[ yːt̚ ]")
-                        } footer: {
-                                Text(verbatim: "粵語 -yu- 發音與普通話拼音 -ü- 類似。").textCase(nil)
                         }
                         Section {
                                 IOSFinalLabel(word: "毋", syllable: "m4", jyutping: "m", ipa: "[ m̩ ]")
                                 IOSFinalLabel(word: "吳", syllable: "ng4", jyutping: "ng", ipa: "[ ŋ̩ ]")
-                        } footer: {
-                                Text(verbatim: "音節原本係 mu、ngu，後來韻母 -u 脫落，聲母作元音成韻。").textCase(nil)
+                        } header: {
+                                Text(verbatim: "鼻音單獨成韻").textCase(nil)
                         }
                 }
                 .navigationTitle("IOSJyutpingTab.NavigationTitle.JyutpingFinals")

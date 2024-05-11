@@ -30,7 +30,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 handleCommandLineArguments()
                 if server == nil {
                         let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
-                        let identifier = Bundle.main.bundleIdentifier
+                        let identifier: String = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
                         server = IMKServer(name: name, bundleIdentifier: identifier)
                 }
                 UserLexicon.prepare()
