@@ -21,7 +21,7 @@
 "MacContentView.NavigationTitle.Jyutping" = "粵拼";
 
 "MacSidebar.SectionHeader.InputMethod" = "輸入法";
-"MacSidebar.NavigationTitle.InstallInputMethod" = "安裝輸入法";
+"MacSidebar.NavigationTitle.InstallInputMethod" = "輸入法";
 "MacSidebar.NavigationTitle.Introductions" = "介紹";
 "MacSidebar.NavigationTitle.CantoneseExpressions" = "粵語用字參攷";
 "MacSidebar.NavigationTitle.SimplifiedCharacterConfusion" = "簡化字常見混亂";

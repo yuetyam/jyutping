@@ -14,7 +14,7 @@ struct MacContentViewMonterey: View {
                                         NavigationLink {
                                                 MacInstallInputMethodView().applyVisualEffect()
                                         } label: {
-                                                Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "laptopcomputer.and.arrow.down")
+                                                Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "sparkles")
                                         }
                                         NavigationLink {
                                                 MacIntroductionsView().applyVisualEffect()

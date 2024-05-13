@@ -27,7 +27,7 @@ struct MacContentView: View {
                 NavigationSplitView {
                         List(selection: $selection) {
                                 Section {
-                                        Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "laptopcomputer.and.arrow.down").tag(ViewIdentifier.installation)
+                                        Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "sparkles").tag(ViewIdentifier.installation)
                                         Label("MacSidebar.NavigationTitle.Introductions", systemImage: "book").tag(ViewIdentifier.introductions)
                                         Label("MacSidebar.NavigationTitle.CantoneseExpressions", systemImage: "checkmark.seal").tag(ViewIdentifier.expressions)
                                         Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: "character").tag(ViewIdentifier.confusion)

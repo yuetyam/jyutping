@@ -12,19 +12,23 @@ struct MacInstallInputMethodView: View {
                         LazyVStack(spacing: 16) {
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text(verbatim: "由於各種因素限制，本應用程式並冇包含輸入法本身。請前往網站下載輸入法程式，另行安裝。").font(.master)
+                                                Text(verbatim: "由於各種因素限制，本應用程式並冇包含輸入法本身。請前往官網瞭解詳情。")
+                                                        .font(.master)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: "Due to various limitations, this App does not contain an Input Method. Please download the Input Method program from our website and install it separately.")
+                                                Text(verbatim: "Due to various limitations, this App does not contain an Input Method. Please visit out website for more details.")
                                                 Spacer()
                                         }
                                 }
                                 .block()
 
                                 HStack(spacing: 16) {
-                                        Link("Shared.About.Website", destination: About.WebsiteURL).font(.master).foregroundStyle(Color.accentColor)
-                                        Text(verbatim: About.WebsiteAddress).font(.fixedWidth)
+                                        Link("Shared.About.Website", destination: About.WebsiteURL)
+                                                .font(.master)
+                                                .foregroundStyle(Color.accentColor)
+                                        Text(verbatim: About.WebsiteAddress)
+                                                .font(.fixedWidth)
                                         Button {
                                                 AppMaster.copy(About.WebsiteAddress)
                                                 isWebsiteAddressCopied = true
@@ -32,12 +36,14 @@ struct MacInstallInputMethodView: View {
                                                 if isWebsiteAddressCopied {
                                                         HStack(spacing: 4) {
                                                                 Image(systemName: "text.badge.checkmark")
-                                                                Text("General.Copied").font(.master)
+                                                                Text("General.Copied")
+                                                                        .font(.master)
                                                         }
                                                 } else {
                                                         HStack(spacing: 4) {
                                                                 Image(systemName: "doc.on.doc")
-                                                                Text("General.Copy").font(.master)
+                                                                Text("General.Copy")
+                                                                        .font(.master)
                                                         }
                                                 }
                                         }

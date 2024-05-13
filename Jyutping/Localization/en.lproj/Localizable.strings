@@ -21,7 +21,7 @@
 "MacContentView.NavigationTitle.Jyutping" = "Jyutping";
 
 "MacSidebar.SectionHeader.InputMethod" = "Input Method";
-"MacSidebar.NavigationTitle.InstallInputMethod" = "Install Input Method";
+"MacSidebar.NavigationTitle.InstallInputMethod" = "Input Method";
 "MacSidebar.NavigationTitle.Introductions" = "Introductions";
 "MacSidebar.NavigationTitle.CantoneseExpressions" = "Cantonese Expressions";
 "MacSidebar.NavigationTitle.SimplifiedCharacterConfusion" = "Simplified Character Confusion";
