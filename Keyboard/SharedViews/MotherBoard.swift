@@ -214,7 +214,7 @@ struct MotherBoard: View {
                                                         LargePadCantoneseKeyboard()
                                                 }
                                         }
-                                case .saamPing:
+                                case .tripleStroke:
                                         switch context.qwertyForm {
                                         case .cangjie:
                                                 switch context.keyboardInterface {
@@ -261,23 +261,23 @@ struct MotherBoard: View {
                                         default:
                                                 switch context.keyboardInterface {
                                                 case .phonePortrait:
-                                                        SaamPingKeyboard()
+                                                        TripleStrokeKeyboard()
                                                 case .phoneLandscape:
-                                                        SaamPingKeyboard()
+                                                        TripleStrokeKeyboard()
                                                 case .padFloating:
-                                                        SaamPingKeyboard()
+                                                        TripleStrokeKeyboard()
                                                 case .padPortraitSmall:
-                                                        PadSaamPingKeyboard()
+                                                        PadTripleStrokeKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadSaamPingKeyboard()
+                                                        PadTripleStrokeKeyboard()
                                                 case .padPortraitLarge:
-                                                        LargePadSaamPingKeyboard()
+                                                        LargePadTripleStrokeKeyboard()
                                                 case .padLandscapeSmall:
-                                                        PadSaamPingKeyboard()
+                                                        PadTripleStrokeKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadSaamPingKeyboard()
+                                                        PadTripleStrokeKeyboard()
                                                 case .padLandscapeLarge:
-                                                        LargePadSaamPingKeyboard()
+                                                        LargePadTripleStrokeKeyboard()
                                                 }
                                         }
                                 case .tenKey:

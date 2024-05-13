@@ -13,14 +13,19 @@ enum KeyboardForm: Int {
 
 enum QwertyForm: Int {
 
+        /// Alphabetic, English
         case abc
+
+        /// Alphabetic, Cantonese (粵拼全鍵盤)
         case jyutping
-        case saamPing
+
+        /// Cantonense SaamPing (粵拼三拼)
+        case tripleStroke
 
         case pinyin
         case cangjie
         case stroke
 
-        /// LoengFan
+        /// LoengFan (粵拼兩分反查)
         case compose
 }

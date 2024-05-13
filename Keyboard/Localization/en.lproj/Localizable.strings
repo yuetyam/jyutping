@@ -18,7 +18,7 @@
 
 "KeyboardLayout.Header" = "Keyboard Layout";
 "KeyboardLayout.QWERTY" = "QWERTY (全鍵盤)";
-"KeyboardLayout.SaamPing" = "SaamPing (三拼)";
+"KeyboardLayout.TripleStroke" = "Triple-Stroke / SaamPing (三拼)";
 "KeyboardLayout.10Key" = "10 Key (九宮格)";
 
 "SettingsView.ShowLowercaseKeys" = "Show Lowercase Keys";

@@ -279,7 +279,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         switch text {
-                        case Constant.kGW where Options.keyboardLayout == .saamPing:
+                        case Constant.kGW where Options.keyboardLayout == .tripleStroke:
                                 if tripleStrokeBuffer.last == Constant.kGW {
                                         tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
                                         tripleStrokeBuffer.append(Constant.kKW)
@@ -290,7 +290,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 bufferText = fullText.replacingOccurrences(of: Constant.kDoubleGW, with: Constant.kKW, options: [.anchored, .backwards])
                         case _ where text.isLetters:
                                 appendBufferText(text)
-                        case _ where (Options.keyboardLayout == .saamPing) && (text.first?.isCantoneseToneDigit ?? false):
+                        case _ where (Options.keyboardLayout == .tripleStroke) && (text.first?.isCantoneseToneDigit ?? false):
                                 appendBufferText(text)
                         case _ where !(inputStage.isBuffering):
                                 textDocumentProxy.insertText(text)
@@ -369,7 +369,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 case .qwerty:
                                         bufferText = String(bufferText.dropLast())
                                         adjustKeyboard()
-                                case .saamPing:
+                                case .tripleStroke:
                                         tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
                                         bufferText = tripleStrokeBuffer.joined()
                                         adjustKeyboard()
@@ -487,7 +487,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         selectedCandidates.append(candidate)
                         let inputCount: Int = {
                                 switch Options.keyboardLayout {
-                                case .saamPing:
+                                case .tripleStroke:
                                         return candidate.input.count
                                 default:
                                         return candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression).count

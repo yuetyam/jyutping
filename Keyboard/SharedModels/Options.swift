@@ -61,14 +61,14 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
         }
 
-        /// Cantonese Keyboard Layout. qwerty / SaamPing / TenKey
+        /// Cantonese Keyboard Layout. Qwerty / TripleStroke / TenKey
         private(set) static var keyboardLayout: KeyboardLayout = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
                 switch savedValue {
                 case KeyboardLayout.qwerty.rawValue:
                         return .qwerty
-                case KeyboardLayout.saamPing.rawValue:
-                        return .saamPing
+                case KeyboardLayout.tripleStroke.rawValue:
+                        return .tripleStroke
                 case KeyboardLayout.tenKey.rawValue:
                         return .tenKey
                 default:

@@ -1,6 +1,7 @@
 import SwiftUI
 
-struct LargePadSaamPingKeyboard: View {
+/// Cantonese SaamPing Layout. 粵拼三拼鍵盤佈局
+struct LargePadTripleStrokeKeyboard: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 

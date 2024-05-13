@@ -18,9 +18,9 @@ struct IntroductionsView: View {
                                 Text("IOSHomeTab.IntroductionsView.Body.RemoveCandidateFromUserLexicon").lineSpacing(6)
                         }
                         Section {
-                                Text("IOSHomeTab.IntroductionsView.Heading.SaamPingKeyboard").font(.significant)
-                                Text("IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row1").lineSpacing(6)
-                                Text("IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row2").lineSpacing(6)
+                                Text("IOSHomeTab.IntroductionsView.Heading.TripleStrokeKeyboard").font(.significant)
+                                Text("IOSHomeTab.IntroductionsView.Body.TripleStrokeKeyboard.Row1").lineSpacing(6)
+                                Text("IOSHomeTab.IntroductionsView.Body.TripleStrokeKeyboard.Row2").lineSpacing(6)
                         }
                 }
                 .textSelection(.enabled)

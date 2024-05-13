@@ -164,13 +164,13 @@ struct SettingsViewIOS15: View {
                                         Button {
                                                 AudioFeedback.modified()
                                                 context.triggerSelectionHapticFeedback()
-                                                selectedKeyboardLayout = .saamPing
-                                                Options.updateKeyboardLayout(to: .saamPing)
+                                                selectedKeyboardLayout = .tripleStroke
+                                                Options.updateKeyboardLayout(to: .tripleStroke)
                                         } label: {
                                                 HStack {
-                                                        Text("KeyboardLayout.SaamPing").foregroundStyle(Color.primary)
+                                                        Text("KeyboardLayout.TripleStroke").foregroundStyle(Color.primary)
                                                         Spacer()
-                                                        Image.checkmark.opacity(selectedKeyboardLayout == .saamPing ? 1: 0)
+                                                        Image.checkmark.opacity(selectedKeyboardLayout == .tripleStroke ? 1: 0)
                                                 }
                                         }
                                         if context.isPhone {

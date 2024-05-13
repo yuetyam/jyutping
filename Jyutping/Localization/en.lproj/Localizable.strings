@@ -99,9 +99,9 @@
 "IOSHomeTab.IntroductionsView.Body.ClearPreEdit" = "Swipe from right to left on the Delete key will clear current pre-edit syllables.";
 "IOSHomeTab.IntroductionsView.Heading.RemoveCandidateFromUserLexicon" = "Remove a Candidate from User Lexicon";
 "IOSHomeTab.IntroductionsView.Body.RemoveCandidateFromUserLexicon" = "Long-press on a Candidate can delete it from User Lexicon.";
-"IOSHomeTab.IntroductionsView.Heading.SaamPingKeyboard" = "SaamPing(三拼) Keyboard Layout";
-"IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row1" = "Double tapping the “gw” key will input “kw”.";
-"IOSHomeTab.IntroductionsView.Body.SaamPingKeyboard.Row2" = "Because the nucleus sounds “oe” and “eo” are complementary in most cases, they share the same key and you don't need to tell them apart.";
+"IOSHomeTab.IntroductionsView.Heading.TripleStrokeKeyboard" = "Triple-Stroke / SaamPing (三拼) Keyboard";
+"IOSHomeTab.IntroductionsView.Body.TripleStrokeKeyboard.Row1" = "Double tapping the “gw” key will input “kw”.";
+"IOSHomeTab.IntroductionsView.Body.TripleStrokeKeyboard.Row2" = "Because the nucleus sounds “oe” and “eo” are complementary in most cases, they share the same key and you don't need to tell them apart.";
 
 "IOSHomeTab.LabelTitle.TextToSpeech" = "Text to Speech";
 "IOSHomeTab.NavigationTitle.TextToSpeech" = "Text to Speech";

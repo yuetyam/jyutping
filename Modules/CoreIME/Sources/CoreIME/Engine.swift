@@ -33,7 +33,7 @@ public struct Engine {
 
 extension Engine {
 
-        // MARK: - SaamPing / 10-Key
+        // MARK: - TenKey
 
         public static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) -> [Candidate] {
                 guard segmentation.maxLength > 0 else { return tenKeyDeepProcess(combos: combos) }

@@ -5,7 +5,7 @@ enum KeyboardLayout: Int {
         case qwerty = 1
 
         /// 26鍵三拼
-        case saamPing = 2
+        case tripleStroke = 2
 
         /// 九宮格
         case tenKey = 3
