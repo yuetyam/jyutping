@@ -134,9 +134,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 guard currentContext == previousContext else { return }
                 textDocumentProxy.insertText(text)
         }
-        private func inputBufferText() {
-                let text: String = bufferText
-                guard !(text.isEmpty) else { return }
+        private func inputBufferText(followedBy text2insert: String? = nil) {
+                guard !(bufferText.isEmpty) else {
+                        guard let text2insert, !(text2insert.isEmpty) else { return }
+                        textDocumentProxy.insertText(text2insert)
+                        return
+                }
+                let text: String = {
+                        guard let text2insert, !(text2insert.isEmpty) else { return bufferText }
+                        return bufferText + text2insert
+                }()
                 textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
                 textDocumentProxy.unmarkText()
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
@@ -164,11 +171,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         func clearBuffer() {
                 bufferCombos = []
+                tripleStrokeBuffer = []
                 bufferText = String.empty
         }
         private func appendBufferText(_ text: String) {
+                tripleStrokeBuffer.append(text)
                 bufferText += text
         }
+
+        /// Cantonese Qwerty and TripleStroke layouts
         private lazy var bufferText: String = String.empty {
                 didSet {
                         switch (oldValue.isEmpty, bufferText.isEmpty) {
@@ -209,6 +220,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
+        /// Cantonese TripleStroke layout
+        private lazy var tripleStrokeBuffer: [String] = []
+
+        /// Cantonese TenKey layout
         private lazy var bufferCombos: [Combo] = [] {
                 didSet {
                         switch (oldValue.isEmpty, bufferCombos.isEmpty) {
@@ -236,6 +251,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 }
         }
 
+        // TenKey layout
         @Published private(set) var sidebarTexts: [String] = Constant.defaultSidebarTexts
         private func resetSidebarTexts() {
                 sidebarTexts = Constant.defaultSidebarTexts
@@ -263,9 +279,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         switch text {
-                        case "gw" where Options.keyboardLayout == .saamPing:
+                        case Constant.kGW where Options.keyboardLayout == .saamPing:
+                                if tripleStrokeBuffer.last == Constant.kGW {
+                                        tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
+                                        tripleStrokeBuffer.append(Constant.kKW)
+                                } else {
+                                        tripleStrokeBuffer.append(text)
+                                }
                                 let fullText: String = bufferText + text
-                                bufferText = fullText.replacingOccurrences(of: "gwgw", with: "kw", options: [.anchored, .backwards])
+                                bufferText = fullText.replacingOccurrences(of: Constant.kDoubleGW, with: Constant.kKW, options: [.anchored, .backwards])
                         case _ where text.isLetters:
                                 appendBufferText(text)
                         case _ where (Options.keyboardLayout == .saamPing) && (text.first?.isCantoneseToneDigit ?? false):
@@ -273,10 +295,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case _ where !(inputStage.isBuffering):
                                 textDocumentProxy.insertText(text)
                         default:
-                                inputBufferText()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) { [unowned self] in
-                                        textDocumentProxy.insertText(text)
-                                }
+                                inputBufferText(followedBy: text)
                         }
                 case .combine(let combo):
                         bufferCombos.append(combo)
@@ -346,12 +365,16 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(shortcutText)
                 case .backspace:
                         if inputStage.isBuffering {
-                                let isTenKeyKeyboard: Bool = (Options.keyboardLayout == .tenKey) && keyboardInterface.isCompact
-                                if isTenKeyKeyboard {
-                                        bufferCombos = bufferCombos.dropLast()
-                                } else {
+                                switch Options.keyboardLayout {
+                                case .qwerty:
                                         bufferText = String(bufferText.dropLast())
                                         adjustKeyboard()
+                                case .saamPing:
+                                        tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
+                                        bufferText = tripleStrokeBuffer.joined()
+                                        adjustKeyboard()
+                                case .tenKey:
+                                        bufferCombos = bufferCombos.dropLast()
                                 }
                         } else {
                                 textDocumentProxy.deleteBackward()

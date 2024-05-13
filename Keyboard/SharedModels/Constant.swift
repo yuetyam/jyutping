@@ -13,6 +13,10 @@ struct Constant {
 
         static let spaceKeyLongPressHint: String = "← →"
 
-        /// Ten-Key Keyboard
+        static let kGW: String = "gw"
+        static let kDoubleGW: String = "gwgw"
+        static let kKW: String = "kw"
+
+        /// TenKey Keyboard
         static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
 }
