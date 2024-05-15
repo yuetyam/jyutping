@@ -18,7 +18,7 @@ Jyutping
 
 Cantonese Keyboard for iOS & macOS.
 
-粵拼輸入法。採用 [香港語言學學會粵語拼音方案](https://jyutping.org/jyutping) (粵拼 / Jyutping)。詞庫碼表來自 CanCLID [Rime-Cantonese](https://github.com/rime/rime-cantonese)
+粵拼輸入法。採用 [香港語言學學會粵語拼音方案](https://jyutping.org/jyutping) (粵拼 / Jyutping)，兼容各種習慣拼寫串法。
 
 ## iOS & iPadOS
 
@@ -58,7 +58,7 @@ Cantonese Keyboard for iOS & macOS.
 ## 如何構建（How to build）
 前置要求（Build requirements）
 - macOS 14.0+
-- Xcode 15.3+
+- Xcode 15.4+
 
 倉庫體積比較大，建議加 `--depth` 來 clone。
 ~~~bash
@@ -85,11 +85,11 @@ osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 
 ## 多謝支持（Support this project）
 <a href="https://ko-fi.com/zheung">
-        <img src="images/buy-me-a-coffee.png" alt="ko-fi, buy me a coffee" width="180"/>
+        <img src="images/buy-me-a-coffee.png" alt="Ko-fi, buy me a coffee" width="180"/>
 </a>
 <br>
 <a href="https://patreon.com/bingzheung">
-        <img src="images/become-a-patron.png" alt="patreon" width="180"/>
+        <img src="images/become-a-patron.png" alt="Patron" width="180"/>
 </a>
 <br>
 <br>
