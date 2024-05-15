@@ -1,23 +1,27 @@
-# Images
-*.png binary
-*.heic binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.webp binary
+# Image
 *.apng binary
+*.avif binary
+*.gif binary
+*.heic binary
+*.heif binary
+*.jpeg binary
+*.jpg binary
 *.pdf binary
+*.png binary
+*.svg binary
+*.webp binary
 
-# Videos
-*.mp4 binary
+# Video
+*.av1 binary
 *.mov binary
+*.mp4 binary
 *.webm binary
 
-# Fonts
-*.otf binary
-*.ttf binary
-*.ttc binary
+# Font
 *.otc binary
+*.otf binary
+*.ttc binary
+*.ttf binary
 
 # Sparkle
 /Sparkle.framework/** binary
