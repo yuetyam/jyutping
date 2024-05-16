@@ -69,10 +69,10 @@
 
 "HotkeysView.PressShiftOnceTo" = "Press **Shift** Once To";
 "HotkeysView.PressShiftOnceTo.DoNothing" = "Do Nothing";
-"HotkeysView.SwitchInputMethodMode" = "Switch between Cantonese Mode and ABC Mode";
+"HotkeysView.SwitchInputMethodMode" = "Switch Input Mode";
 
 "HotkeysView.PressShiftSpaceTo" = "Press **Shift** + **Space** To";
-"HotkeysView.PressShiftSpaceTo.InputFullWidthSpace" = "Input a Full-width Space (U+3000)";
+"HotkeysView.PressShiftSpaceTo.InputFullWidthSpace" = "Input a full-width space";
 
 "HotkeysView.OpenPreferencesWindow" = "Open Settings Window (This Window)";
 "HotkeysView.EnterExitOptionsView" = "Enter/Exit Options View";
@@ -80,6 +80,8 @@
 "HotkeysView.RemoveCurrentCandidateFromUserLexicon" = "Remove current Candidate from User Lexicon";
 "HotkeysView.ClearCurrentPreEditText" = "Clear current pre-edit text";
 
+"HotkeysView.Header.VerticalOrientation" = "Vertical Candidate Page Orientation";
+"HotkeysView.Header.HorizontalOrientation" = "Horizontal Candidate Page Orientation";
 "HotkeysView.MoveToPreviousCandidate" = "Move to previous Candidate";
 "HotkeysView.MoveToNextCandidate" = "Move to next Candidate";
 "HotkeysView.BackwardToPreviousCandidatePage" = "Backward to previous Candidate page";

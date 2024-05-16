@@ -29,30 +29,29 @@ struct HotkeysView: View {
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
-                                HStack {
-                                        Picker("HotkeysView.PressShiftOnceTo", selection: $pressShiftOnce) {
-                                                Text("HotkeysView.PressShiftOnceTo.DoNothing").tag(1)
-                                                Text("HotkeysView.SwitchInputMethodMode").tag(2)
+                                VStack {
+                                        HStack {
+                                                Picker("HotkeysView.PressShiftOnceTo", selection: $pressShiftOnce) {
+                                                        Text("HotkeysView.PressShiftOnceTo.DoNothing").tag(1)
+                                                        Text("HotkeysView.SwitchInputMethodMode").tag(2)
+                                                }
+                                                .scaledToFit()
+                                                .onChange(of: pressShiftOnce) { newValue in
+                                                        AppSettings.updatePressShiftOnce(to: newValue)
+                                                }
+                                                Spacer()
                                         }
-                                        .scaledToFit()
-                                        .pickerStyle(.radioGroup)
-                                        .onChange(of: pressShiftOnce) { newValue in
-                                                AppSettings.updatePressShiftOnce(to: newValue)
+                                        HStack {
+                                                Picker("HotkeysView.PressShiftSpaceTo", selection: $shiftSpaceCombination) {
+                                                        Text("HotkeysView.PressShiftSpaceTo.InputFullWidthSpace").tag(1)
+                                                        Text("HotkeysView.SwitchInputMethodMode").tag(2)
+                                                }
+                                                .scaledToFit()
+                                                .onChange(of: shiftSpaceCombination) { newValue in
+                                                        AppSettings.updateShiftSpaceCombination(to: newValue)
+                                                }
+                                                Spacer()
                                         }
-                                        Spacer()
-                                }
-                                .block()
-                                HStack {
-                                        Picker("HotkeysView.PressShiftSpaceTo", selection: $shiftSpaceCombination) {
-                                                Text("HotkeysView.PressShiftSpaceTo.InputFullWidthSpace").tag(1)
-                                                Text("HotkeysView.SwitchInputMethodMode").tag(2)
-                                        }
-                                        .scaledToFit()
-                                        .pickerStyle(.radioGroup)
-                                        .onChange(of: shiftSpaceCombination) { newValue in
-                                                AppSettings.updateShiftSpaceCombination(to: newValue)
-                                        }
-                                        Spacer()
                                 }
                                 .block()
                                 VStack(spacing: 8) {
@@ -78,7 +77,7 @@ struct HotkeysView: View {
                                         }
                                 }
                                 .block()
-                                VStack {
+                                VStack(spacing: 2) {
                                         HStack(spacing: 4) {
                                                 LabelText("HotkeysView.DirectlyToggleSpecificOption")
                                                 Text.separator
@@ -89,13 +88,12 @@ struct HotkeysView: View {
                                                 KeyBlockView.number
                                                 Spacer()
                                         }
+                                        .block()
                                         HStack {
-                                                Text(verbatim: "number: 1, 2, 3, ... 8, 9, 0")
+                                                Text(verbatim: "number: 1, 2, 3, ... 8, 9, 0").font(.subheadline).padding(.horizontal)
                                                 Spacer()
                                         }
-                                        .font(.subheadline)
                                 }
-                                .block()
                                 HStack(spacing: 4) {
                                         LabelText("HotkeysView.RemoveCurrentCandidateFromUserLexicon")
                                         Text.separator
@@ -114,51 +112,105 @@ struct HotkeysView: View {
                                         Spacer()
                                 }
                                 .block()
-                                VStack(spacing: 8) {
-                                        HStack(spacing: 4) {
-                                                LabelText("HotkeysView.MoveToPreviousCandidate")
-                                                Text.separator
-                                                KeyBlockView("▲")
-                                                Text.or
-                                                KeyBlockView.shift
-                                                Text.plus
-                                                KeyBlockView.tab
+                                VStack(spacing: 2) {
+                                        HStack {
+                                                Text("HotkeysView.Header.VerticalOrientation").font(.subheadline).padding(.horizontal)
                                                 Spacer()
                                         }
-                                        HStack(spacing: 4) {
-                                                LabelText("HotkeysView.MoveToNextCandidate")
-                                                Text.separator
-                                                KeyBlockView("▼")
-                                                Text.or
-                                                KeyBlockView.tab
+                                        VStack(spacing: 8) {
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.MoveToPreviousCandidate")
+                                                        Text.separator
+                                                        KeyBlockView("▲")
+                                                        Text.or
+                                                        KeyBlockView.shift
+                                                        Text.plus
+                                                        KeyBlockView.tab
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.MoveToNextCandidate")
+                                                        Text.separator
+                                                        KeyBlockView("▼")
+                                                        Text.or
+                                                        KeyBlockView.tab
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.BackwardToPreviousCandidatePage")
+                                                        Text.separator
+                                                        KeyBlockView("◀")
+                                                        Text.or
+                                                        KeyBlockView("-")
+                                                        Text.or
+                                                        KeyBlockView("Page Up ↑")
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.ForwardToNextCandidatePage")
+                                                        Text.separator
+                                                        KeyBlockView("▶")
+                                                        Text.or
+                                                        KeyBlockView("=")
+                                                        Text.or
+                                                        KeyBlockView("Page Down ↓")
+                                                        Spacer()
+                                                }
+                                        }
+                                        .block()
+                                }
+                                VStack(spacing: 2) {
+                                        HStack {
+                                                Text("HotkeysView.Header.HorizontalOrientation").font(.subheadline).padding(.horizontal)
                                                 Spacer()
                                         }
-                                        HStack(spacing: 4) {
-                                                LabelText("HotkeysView.BackwardToPreviousCandidatePage")
-                                                Text.separator
-                                                KeyBlockView("◀")
-                                                Text.or
-                                                KeyBlockView("-")
-                                                Text.or
-                                                KeyBlockView("Page Up ↑")
-                                                Spacer()
+                                        VStack(spacing: 8) {
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.MoveToPreviousCandidate")
+                                                        Text.separator
+                                                        KeyBlockView("◀")
+                                                        Text.or
+                                                        KeyBlockView.shift
+                                                        Text.plus
+                                                        KeyBlockView.tab
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.MoveToNextCandidate")
+                                                        Text.separator
+                                                        KeyBlockView("▶")
+                                                        Text.or
+                                                        KeyBlockView.tab
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.BackwardToPreviousCandidatePage")
+                                                        Text.separator
+                                                        KeyBlockView("▲")
+                                                        Text.or
+                                                        KeyBlockView("-")
+                                                        Text.or
+                                                        KeyBlockView("Page Up ↑")
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.ForwardToNextCandidatePage")
+                                                        Text.separator
+                                                        KeyBlockView("▼")
+                                                        Text.or
+                                                        KeyBlockView("=")
+                                                        Text.or
+                                                        KeyBlockView("Page Down ↓")
+                                                        Spacer()
+                                                }
                                         }
-                                        HStack(spacing: 4) {
-                                                LabelText("HotkeysView.ForwardToNextCandidatePage")
-                                                Text.separator
-                                                KeyBlockView("▶")
-                                                Text.or
-                                                KeyBlockView("=")
-                                                Text.or
-                                                KeyBlockView("Page Down ↓")
-                                                Spacer()
-                                        }
-                                        HStack(spacing: 4) {
-                                                LabelText("HotkeysView.BackToFirstCandidatePage")
-                                                Text.separator
-                                                KeyBlockView("Home ⤒")
-                                                Spacer()
-                                        }
+                                        .block()
+                                }
+                                HStack(spacing: 4) {
+                                        LabelText("HotkeysView.BackToFirstCandidatePage")
+                                        Text.separator
+                                        KeyBlockView("Home ⤒")
+                                        Spacer()
                                 }
                                 .block()
                                 /*

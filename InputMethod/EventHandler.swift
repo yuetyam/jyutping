@@ -141,13 +141,17 @@ extension JyutpingInputController {
                                 switch currentInputForm {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
-                                        if appContext.isHighlightingStart {
-                                                updateDisplayCandidates(.previousPage, highlight: .end)
-                                                return true
-                                        } else {
-                                                appContext.decreaseHighlightedIndex()
-                                                return true
+                                        switch AppSettings.candidatePageOrientation {
+                                        case .vertical:
+                                                if appContext.isHighlightingStart {
+                                                        updateDisplayCandidates(.previousPage, highlight: .end)
+                                                } else {
+                                                        appContext.decreaseHighlightedIndex()
+                                                }
+                                        case .horizontal:
+                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
                                         }
+                                        return true
                                 case .transparent:
                                         return false
                                 case .options:
@@ -158,13 +162,17 @@ extension JyutpingInputController {
                                 switch currentInputForm {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
-                                        if appContext.isHighlightingEnd {
-                                                updateDisplayCandidates(.nextPage, highlight: .start)
-                                                return true
-                                        } else {
-                                                appContext.increaseHighlightedIndex()
-                                                return true
+                                        switch AppSettings.candidatePageOrientation {
+                                        case .vertical:
+                                                if appContext.isHighlightingEnd {
+                                                        updateDisplayCandidates(.nextPage, highlight: .start)
+                                                } else {
+                                                        appContext.increaseHighlightedIndex()
+                                                }
+                                        case .horizontal:
+                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
                                         }
+                                        return true
                                 case .transparent:
                                         return false
                                 case .options:
@@ -175,7 +183,16 @@ extension JyutpingInputController {
                                 switch currentInputForm {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
-                                        updateDisplayCandidates(.previousPage, highlight: .unchanged)
+                                        switch AppSettings.candidatePageOrientation {
+                                        case .vertical:
+                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
+                                        case .horizontal:
+                                                if appContext.isHighlightingStart {
+                                                        updateDisplayCandidates(.previousPage, highlight: .end)
+                                                } else {
+                                                        appContext.decreaseHighlightedIndex()
+                                                }
+                                        }
                                         return true
                                 case .transparent:
                                         return false
@@ -186,7 +203,16 @@ extension JyutpingInputController {
                                 switch currentInputForm {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
-                                        updateDisplayCandidates(.nextPage, highlight: .unchanged)
+                                        switch AppSettings.candidatePageOrientation {
+                                        case .vertical:
+                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
+                                        case .horizontal:
+                                                if appContext.isHighlightingEnd {
+                                                        updateDisplayCandidates(.nextPage, highlight: .start)
+                                                } else {
+                                                        appContext.increaseHighlightedIndex()
+                                                }
+                                        }
                                         return true
                                 case .transparent:
                                         return false

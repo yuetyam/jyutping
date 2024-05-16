@@ -12,6 +12,18 @@ struct CandidateBoard: View {
         var body: some View {
                 let highlightedIndex: Int = context.highlightedIndex
                 let orientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
+                let altAlignment: VerticalAlignment = {
+                        switch commentStyle {
+                        case .right:
+                                return .center
+                        case .top:
+                                return .lastTextBaseline
+                        case .bottom:
+                                return .firstTextBaseline
+                        case .noComments:
+                                return .center
+                        }
+                }()
                 switch orientation {
                 case .vertical:
                         VStack(alignment: .leading, spacing: 0) {
@@ -32,7 +44,7 @@ struct CandidateBoard: View {
                         .padding(10)
                         .fixedSize()
                 case .horizontal:
-                        HStack(alignment: .lastTextBaseline, spacing: 0) {
+                        HStack(alignment: altAlignment, spacing: 0) {
                                 ForEach(0..<context.displayCandidates.count, id: \.self) { index in
                                         AltCandidateLabel(
                                                 candidate: context.displayCandidates[index],
