@@ -30,6 +30,16 @@
 "GeneralPreferencesView.CandidateCountPerPage" = "Candidate Count Per Page";
 "GeneralPreferencesView.CandidateLineSpacing" = "Candidate Line Spacing";
 
+"GeneralPreferencesView.CandidatePageOrientation" = "Candidate Page Orientation";
+"GeneralPreferencesView.CandidatePageOrientation.Vertical" = "Vertical";
+"GeneralPreferencesView.CandidatePageOrientation.Horizontal" = "Horizontal";
+
+"GeneralPreferencesView.CommentStyle" = "Comment(Jyutping) Position";
+"GeneralPreferencesView.CommentStyle.Right" = "Right";
+"GeneralPreferencesView.CommentStyle.Top" = "Top";
+"GeneralPreferencesView.CommentStyle.Bottom" = "Bottom";
+"GeneralPreferencesView.CommentStyle.NoComments" = "None";
+
 "GeneralPreferencesView.CommentToneStyle" = "Comment(Jyutping) Tone Style";
 "GeneralPreferencesView.CommentToneStyle.Normal" = "Normal";
 "GeneralPreferencesView.CommentToneStyle.NoTones" = "No Tones";

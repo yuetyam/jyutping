@@ -3,6 +3,8 @@ import SwiftUI
 struct SettingsKey {
         static let CandidatePageSize: String = "CandidatePageSize"
         static let CandidateLineSpacing: String = "CandidateLineSpacing"
+        static let CandidatePageOrientation: String = "CandidatePageOrientation"
+        static let CommentDisplayStyle: String = "CommentDisplayStyle"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
         static let ToneDisplayColor: String = "ToneDisplayColor"
 
@@ -23,6 +25,42 @@ struct SettingsKey {
         static let PressShiftOnce: String = "PressShiftOnce"
         static let ShiftSpaceCombination: String = "ShiftSpaceCombination"
         // static let SpeakCandidate: String = "SpeakCandidate"
+}
+
+enum CandidatePageOrientation: Int {
+        case vertical = 1
+        case horizontal = 2
+        static func orientation(of value: Int) -> CandidatePageOrientation {
+                switch value {
+                case 1:
+                        return .vertical
+                case 2:
+                        return .horizontal
+                default:
+                        return .vertical
+                }
+        }
+}
+
+enum CommentDisplayStyle: Int {
+        case right = 1
+        case top = 2
+        case bottom = 3
+        case noComments = 4
+        static func style(of value: Int) -> CommentDisplayStyle {
+                switch value {
+                case 1:
+                        return .right
+                case 2:
+                        return .top
+                case 3:
+                        return .bottom
+                case 4:
+                        return .noComments
+                default:
+                        return .right
+                }
+        }
 }
 
 enum ToneDisplayStyle: Int {
@@ -143,7 +181,31 @@ struct AppSettings {
         static let candidateLineSpacingRange: Range<Int> = 0..<13
 
 
-        // MARK: - Tones Display Style
+        // MARK: - Orientation
+
+        private(set) static var candidatePageOrientation: CandidatePageOrientation = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageOrientation)
+                return CandidatePageOrientation.orientation(of: savedValue)
+        }()
+        static func updateCandidatePageOrientation(to value: Int) {
+                let newOrientation: CandidatePageOrientation = CandidatePageOrientation.orientation(of: value)
+                candidatePageOrientation = newOrientation
+        }
+
+
+        // MARK: - Comment Display Style
+
+        private(set) static var commentDisplayStyle: CommentDisplayStyle = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentDisplayStyle)
+                return CommentDisplayStyle.style(of: savedValue)
+        }()
+        static func updateCommentDisplayStyle(to value: Int) {
+                let newStyle: CommentDisplayStyle = CommentDisplayStyle.style(of: value)
+                commentDisplayStyle = newStyle
+        }
+
+
+        // MARK: - Tone Display Style
 
         private(set) static var toneDisplayStyle: ToneDisplayStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayStyle)

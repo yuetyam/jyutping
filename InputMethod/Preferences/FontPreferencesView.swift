@@ -51,7 +51,6 @@ struct FontPreferencesView: View {
                                                         Text("FontPreferencesView.System").tag(2)
                                                         Text("FontPreferencesView.Custom").tag(3)
                                                 }
-                                                .pickerStyle(.radioGroup)
                                                 .scaledToFit()
                                                 .onChange(of: candidateFontMode) { newValue in
                                                         let newMode: FontMode = FontMode.mode(of: newValue)
@@ -117,7 +116,6 @@ struct FontPreferencesView: View {
                                                         Text("FontPreferencesView.System").tag(2)
                                                         Text("FontPreferencesView.Custom").tag(3)
                                                 }
-                                                .pickerStyle(.radioGroup)
                                                 .scaledToFit()
                                                 .onChange(of: commentFontMode) { newValue in
                                                         let newMode: FontMode = FontMode.mode(of: newValue)
@@ -183,7 +181,6 @@ struct FontPreferencesView: View {
                                                         Text("FontPreferencesView.System").tag(2)
                                                         Text("FontPreferencesView.Custom").tag(3)
                                                 }
-                                                .pickerStyle(.radioGroup)
                                                 .scaledToFit()
                                                 .onChange(of: labelFontMode) { newValue in
                                                         let newMode: FontMode = FontMode.mode(of: newValue)

@@ -30,6 +30,16 @@
 "GeneralPreferencesView.CandidateCountPerPage" = "每䈎候選詞數目";
 "GeneralPreferencesView.CandidateLineSpacing" = "候選詞行間隔";
 
+"GeneralPreferencesView.CandidatePageOrientation" = "候選詞排列方向";
+"GeneralPreferencesView.CandidatePageOrientation.Vertical" = "縱向";
+"GeneralPreferencesView.CandidatePageOrientation.Horizontal" = "橫向";
+
+"GeneralPreferencesView.CommentStyle" = "候選詞註釋(粵拼)位置";
+"GeneralPreferencesView.CommentStyle.Right" = "右邊";
+"GeneralPreferencesView.CommentStyle.Top" = "上邊";
+"GeneralPreferencesView.CommentStyle.Bottom" = "下邊";
+"GeneralPreferencesView.CommentStyle.NoComments" = "無";
+
 "GeneralPreferencesView.CommentToneStyle" = "候選詞註釋(粵拼)聲調樣式";
 "GeneralPreferencesView.CommentToneStyle.Normal" = "正常";
 "GeneralPreferencesView.CommentToneStyle.NoTones" = "無聲調";
