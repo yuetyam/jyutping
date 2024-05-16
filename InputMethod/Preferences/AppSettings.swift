@@ -61,6 +61,14 @@ enum CommentDisplayStyle: Int {
                         return .right
                 }
         }
+        var isVertical: Bool {
+                switch self {
+                case .top, .bottom:
+                        return true
+                default:
+                        return false
+                }
+        }
 }
 
 enum ToneDisplayStyle: Int {
