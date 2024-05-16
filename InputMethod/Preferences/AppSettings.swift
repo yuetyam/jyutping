@@ -276,7 +276,7 @@ struct AppSettings {
         }
 
         private static func fontSizeValidity(of value: Int) -> Bool {
-                return value > 11 && value < 23
+                return value > 9 && value < 25
         }
 
 

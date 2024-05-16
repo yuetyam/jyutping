@@ -33,7 +33,7 @@ struct FontPreferencesView: View {
                                 VStack {
                                         HStack {
                                                 Picker("FontPreferencesView.CandidateFontSize", selection: $candidateFontSize) {
-                                                        ForEach(12..<23, id: \.self) {
+                                                        ForEach(10..<25, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
                                                 }
@@ -98,7 +98,7 @@ struct FontPreferencesView: View {
                                 VStack {
                                         HStack {
                                                 Picker("FontPreferencesView.CommentFontSize", selection: $commentFontSize) {
-                                                        ForEach(12..<23, id: \.self) {
+                                                        ForEach(10..<25, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
                                                 }
@@ -163,7 +163,7 @@ struct FontPreferencesView: View {
                                 VStack {
                                         HStack {
                                                 Picker("FontPreferencesView.SerialNumberFontSize", selection: $labelFontSize) {
-                                                        ForEach(12..<23, id: \.self) {
+                                                        ForEach(10..<25, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
                                                 }
