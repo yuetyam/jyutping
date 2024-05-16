@@ -45,6 +45,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 guard shouldInstall else { return }
                 register()
                 activate()
+                switchToSystemInputSource()
                 NSRunningApplication.current.terminate()
                 NSApp.terminate(self)
                 exit(0)
@@ -61,21 +62,44 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 let kInputModeID: String = "org.jyutping.inputmethod.Jyutping.JyutpingIM"
                 guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
                 for inputSource in inputSourceList {
-                        guard let pointer = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { return }
+                        guard let pointer = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { continue }
                         let inputSourceID = Unmanaged<CFString>.fromOpaque(pointer).takeUnretainedValue() as String
-                        guard inputSourceID == kInputSourceID || inputSourceID == kInputModeID else { return }
+                        guard inputSourceID == kInputSourceID || inputSourceID == kInputModeID else { continue }
                         TISEnableInputSource(inputSource)
                         TISSelectInputSource(inputSource)
                 }
         }
 
-        /*
-        private func fetchState(of inputSource: TISInputSource) -> (isEnabled: Bool, isSelected: Bool) {
-                guard let pointer2IsEnabled = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsEnabled) else { return (false, false) }
-                let isEnabled = Unmanaged<CFBoolean>.fromOpaque(pointer2IsEnabled).takeRetainedValue()
-                guard let pointer2IsSelected = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsSelected) else { return (CFBooleanGetValue(isEnabled), false) }
-                let isSelected = Unmanaged<CFBoolean>.fromOpaque(pointer2IsSelected).takeRetainedValue()
-                return (CFBooleanGetValue(isEnabled), CFBooleanGetValue(isSelected))
+        private func switchToSystemInputSource() {
+                guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
+                for inputSource in inputSourceList {
+                        if shouldSelect(inputSource) {
+                                TISSelectInputSource(inputSource)
+                                break
+                        }
+                }
         }
-        */
+        private func shouldSelect(_ inputSource: TISInputSource) -> Bool {
+                guard let pointer2ID = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { return false }
+                let inputSourceID = Unmanaged<CFString>.fromOpaque(pointer2ID).takeUnretainedValue() as String
+                guard inputSourceID.hasPrefix("com.apple.keylayout") else { return false }
+                guard let pointer2IsSelectable = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsSelectCapable) else { return false }
+                let isSelectable = Unmanaged<CFBoolean>.fromOpaque(pointer2IsSelectable).takeRetainedValue()
+                return CFBooleanGetValue(isSelectable)
+        }
 }
+
+/*
+extension TISInputSource {
+        var isEnabled: Bool {
+                guard let pointer = TISGetInputSourceProperty(self, kTISPropertyInputSourceIsEnabled) else { return false }
+                let state = Unmanaged<CFBoolean>.fromOpaque(pointer).takeRetainedValue()
+                return CFBooleanGetValue(state)
+        }
+        var isSelected: Bool {
+                guard let pointer = TISGetInputSourceProperty(self, kTISPropertyInputSourceIsSelected) else { return false }
+                let state = Unmanaged<CFBoolean>.fromOpaque(pointer).takeRetainedValue()
+                return CFBooleanGetValue(state)
+        }
+}
+*/

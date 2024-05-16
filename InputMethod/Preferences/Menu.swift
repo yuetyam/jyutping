@@ -107,28 +107,4 @@ extension JyutpingInputController {
                 let height: CGFloat = (screenHeight / 5.0) * 3.0
                 return CGRect(x: x, y: y, width: width, height: height)
         }
-
-        @objc private func terminateApp() {
-                switchInputSource()
-                NSRunningApplication.current.terminate()
-                NSApp.terminate(self)
-                exit(0)
-        }
-        private func switchInputSource() {
-                guard let inputSourceList = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else { return }
-                for inputSource in inputSourceList {
-                        if shouldSelect(inputSource) {
-                                TISSelectInputSource(inputSource)
-                                break
-                        }
-                }
-        }
-        private func shouldSelect(_ inputSource: TISInputSource) -> Bool {
-                guard let pointer2ID = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else { return false }
-                let inputSourceID = Unmanaged<CFString>.fromOpaque(pointer2ID).takeUnretainedValue() as String
-                guard inputSourceID.hasPrefix("com.apple.keylayout") else { return false }
-                guard let pointer2IsSelectable = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceIsSelectCapable) else { return false }
-                let isSelectable = Unmanaged<CFBoolean>.fromOpaque(pointer2IsSelectable).takeRetainedValue()
-                return CFBooleanGetValue(isSelectable)
-        }
 }
