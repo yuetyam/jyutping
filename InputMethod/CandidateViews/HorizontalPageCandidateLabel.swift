@@ -29,7 +29,7 @@ struct HorizontalPageCandidateLabel: View {
                                         Text(verbatim: label).font(.label).foregroundStyle(labelForeColor)
                                         VStack(alignment: .leading, spacing: 2) {
                                                 if let comment = candidate.comment {
-                                                        CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneForeColor, shouldModifyToneColor: shouldModifyToneColor)
+                                                        CommentLabel(comment, toneStyle: toneStyle, toneColor: toneForeColor, shouldModifyToneColor: shouldModifyToneColor)
                                                 }
                                                 Text(verbatim: candidate.text).font(.candidate).tracking(18)
                                         }
@@ -40,7 +40,7 @@ struct HorizontalPageCandidateLabel: View {
                                         VStack(alignment: .leading, spacing: 2) {
                                                 Text(verbatim: candidate.text).font(.candidate).tracking(18)
                                                 if let comment = candidate.comment {
-                                                        CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneForeColor, shouldModifyToneColor: shouldModifyToneColor)
+                                                        CommentLabel(comment, toneStyle: toneStyle, toneColor: toneForeColor, shouldModifyToneColor: shouldModifyToneColor)
                                                 }
                                         }
                                 }
@@ -50,7 +50,7 @@ struct HorizontalPageCandidateLabel: View {
                                         HStack(spacing: 4) {
                                                 Text(verbatim: candidate.text).font(.candidate)
                                                 if let comment = candidate.comment {
-                                                        CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneForeColor, shouldModifyToneColor: shouldModifyToneColor)
+                                                        CommentLabel(comment, toneStyle: toneStyle, toneColor: toneForeColor, shouldModifyToneColor: shouldModifyToneColor)
                                                 }
                                         }
                                 }

@@ -30,7 +30,7 @@ struct VerticalPageCandidateLabel: View {
                                                 Text(verbatim: label).font(.label).foregroundStyle(labelForeColor)
                                                 VStack(alignment: .leading, spacing: 2) {
                                                         if let comment = candidate.comment {
-                                                                CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
+                                                                CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
                                                         }
                                                         Text(verbatim: candidate.text).font(.candidate).tracking(18)
                                                 }
@@ -41,7 +41,7 @@ struct VerticalPageCandidateLabel: View {
                                                 VStack(alignment: .leading, spacing: 2) {
                                                         Text(verbatim: candidate.text).font(.candidate).tracking(18)
                                                         if let comment = candidate.comment {
-                                                                CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
+                                                                CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
                                                         }
                                                 }
                                         }
@@ -50,7 +50,7 @@ struct VerticalPageCandidateLabel: View {
                                                 Text(verbatim: label).font(.label).foregroundStyle(labelForeColor)
                                                 Text(verbatim: candidate.text).font(.candidate)
                                                 if let comment = candidate.comment {
-                                                        CommentLabel(comment, candidateType: candidate.candidate.type, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
+                                                        CommentLabel(comment, toneStyle: toneStyle, toneColor: toneColor, shouldModifyToneColor: shouldModifyToneColor)
                                                 }
                                         }
                                 case .noComments:
