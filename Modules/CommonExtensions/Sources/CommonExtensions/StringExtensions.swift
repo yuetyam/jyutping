@@ -59,12 +59,14 @@ extension String {
         }
 }
 
-extension String {
-
+extension StringProtocol {
         /// Returns a new String made by removing `.whitespacesAndNewlines` & `.controlCharacters` from both ends of the String.
         public func trimmed() -> String {
                 return self.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
         }
+}
+
+extension String {
 
         /// CJKV && !CJKV
         public var textBlocks: [TextUnit] {
