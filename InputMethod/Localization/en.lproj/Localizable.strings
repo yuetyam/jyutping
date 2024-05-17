@@ -31,13 +31,13 @@
 "GeneralPreferencesView.CandidateLineSpacing" = "Candidate Line Spacing";
 
 "GeneralPreferencesView.CandidatePageOrientation" = "Candidate Page Orientation";
-"GeneralPreferencesView.CandidatePageOrientation.Vertical" = "Vertical";
 "GeneralPreferencesView.CandidatePageOrientation.Horizontal" = "Horizontal";
+"GeneralPreferencesView.CandidatePageOrientation.Vertical" = "Vertical";
 
 "GeneralPreferencesView.CommentStyle" = "Comment(Jyutping) Position";
-"GeneralPreferencesView.CommentStyle.Right" = "Right";
 "GeneralPreferencesView.CommentStyle.Top" = "Top";
 "GeneralPreferencesView.CommentStyle.Bottom" = "Bottom";
+"GeneralPreferencesView.CommentStyle.Right" = "Right";
 "GeneralPreferencesView.CommentStyle.NoComments" = "None";
 
 "GeneralPreferencesView.CommentToneStyle" = "Comment(Jyutping) Tone Style";
@@ -80,8 +80,8 @@
 "HotkeysView.RemoveCurrentCandidateFromUserLexicon" = "Remove current Candidate from User Lexicon";
 "HotkeysView.ClearCurrentPreEditText" = "Clear current pre-edit text";
 
-"HotkeysView.Header.VerticalOrientation" = "Vertical Candidate Page Orientation";
 "HotkeysView.Header.HorizontalOrientation" = "Horizontal Candidate Page Orientation";
+"HotkeysView.Header.VerticalOrientation" = "Vertical Candidate Page Orientation";
 "HotkeysView.MoveToPreviousCandidate" = "Move to previous Candidate";
 "HotkeysView.MoveToNextCandidate" = "Move to next Candidate";
 "HotkeysView.BackwardToPreviousCandidatePage" = "Backward to previous Candidate page";

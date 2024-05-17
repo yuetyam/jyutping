@@ -56,8 +56,8 @@ struct GeneralPreferencesView: View {
                                 .block()
                                 HStack {
                                         Picker("GeneralPreferencesView.CandidatePageOrientation", selection: $orientation) {
-                                                Text("GeneralPreferencesView.CandidatePageOrientation.Vertical").tag(1)
-                                                Text("GeneralPreferencesView.CandidatePageOrientation.Horizontal").tag(2)
+                                                Text("GeneralPreferencesView.CandidatePageOrientation.Horizontal").tag(1)
+                                                Text("GeneralPreferencesView.CandidatePageOrientation.Vertical").tag(2)
                                         }
                                         .scaledToFit()
                                         .onChange(of: orientation) { newValue in
@@ -68,10 +68,10 @@ struct GeneralPreferencesView: View {
                                 .block()
                                 HStack {
                                         Picker("GeneralPreferencesView.CommentStyle", selection: $commentDisplayStyle) {
-                                                Text("GeneralPreferencesView.CommentStyle.Right").tag(1)
-                                                Text("GeneralPreferencesView.CommentStyle.Top").tag(2)
-                                                Text("GeneralPreferencesView.CommentStyle.Bottom").tag(3)
-                                                Text("GeneralPreferencesView.CommentStyle.NoComments").tag(4)
+                                                Text("GeneralPreferencesView.CommentStyle.Top").tag(1)
+                                                Text("GeneralPreferencesView.CommentStyle.Bottom").tag(2)
+                                                Text("GeneralPreferencesView.CommentStyle.Right").tag(4)
+                                                Text("GeneralPreferencesView.CommentStyle.NoComments").tag(5)
                                         }
                                         .scaledToFit()
                                         .onChange(of: commentDisplayStyle) { newValue in

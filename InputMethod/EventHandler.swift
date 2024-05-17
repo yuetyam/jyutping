@@ -142,14 +142,14 @@ extension JyutpingInputController {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
                                         switch AppSettings.candidatePageOrientation {
+                                        case .horizontal:
+                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
                                         case .vertical:
                                                 if appContext.isHighlightingStart {
                                                         updateDisplayCandidates(.previousPage, highlight: .end)
                                                 } else {
                                                         appContext.decreaseHighlightedIndex()
                                                 }
-                                        case .horizontal:
-                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
                                         }
                                         return true
                                 case .transparent:
@@ -163,14 +163,14 @@ extension JyutpingInputController {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
                                         switch AppSettings.candidatePageOrientation {
+                                        case .horizontal:
+                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
                                         case .vertical:
                                                 if appContext.isHighlightingEnd {
                                                         updateDisplayCandidates(.nextPage, highlight: .start)
                                                 } else {
                                                         appContext.increaseHighlightedIndex()
                                                 }
-                                        case .horizontal:
-                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
                                         }
                                         return true
                                 case .transparent:
@@ -184,14 +184,14 @@ extension JyutpingInputController {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
                                         switch AppSettings.candidatePageOrientation {
-                                        case .vertical:
-                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
                                         case .horizontal:
                                                 if appContext.isHighlightingStart {
                                                         updateDisplayCandidates(.previousPage, highlight: .end)
                                                 } else {
                                                         appContext.decreaseHighlightedIndex()
                                                 }
+                                        case .vertical:
+                                                updateDisplayCandidates(.previousPage, highlight: .unchanged)
                                         }
                                         return true
                                 case .transparent:
@@ -204,14 +204,14 @@ extension JyutpingInputController {
                                 case .cantonese:
                                         guard inputStage.isBuffering else { return false }
                                         switch AppSettings.candidatePageOrientation {
-                                        case .vertical:
-                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
                                         case .horizontal:
                                                 if appContext.isHighlightingEnd {
                                                         updateDisplayCandidates(.nextPage, highlight: .start)
                                                 } else {
                                                         appContext.increaseHighlightedIndex()
                                                 }
+                                        case .vertical:
+                                                updateDisplayCandidates(.nextPage, highlight: .unchanged)
                                         }
                                         return true
                                 case .transparent:

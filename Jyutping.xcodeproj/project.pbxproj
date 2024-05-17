@@ -255,9 +255,10 @@
 		37D1C9362BBF26A200015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9352BBF26A200015FD0 /* PrivacyInfo.xcprivacy */; };
 		37D1C9382BBF288000015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9372BBF288000015FD0 /* PrivacyInfo.xcprivacy */; };
 		37D1C93A2BBF297000015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */; };
+		37D771A82BF805FA008BC978 /* VerticalPageCandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D771A72BF805FA008BC978 /* VerticalPageCandidateLabel.swift */; };
 		37E6AD6B2B3B381700F02279 /* CommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD442B3B381600F02279 /* CommentLabel.swift */; };
 		37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD452B3B381600F02279 /* CandidateBoard.swift */; };
-		37E6AD6D2B3B381700F02279 /* CandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD462B3B381600F02279 /* CandidateLabel.swift */; };
+		37E6AD6D2B3B381700F02279 /* HorizontalPageCandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD462B3B381600F02279 /* HorizontalPageCandidateLabel.swift */; };
 		37E6AD6E2B3B381700F02279 /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD472B3B381600F02279 /* MotherBoard.swift */; };
 		37E6AD6F2B3B381700F02279 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD492B3B381600F02279 /* Direction.swift */; };
 		37E6AD702B3B381700F02279 /* PunctuationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD4A2B3B381600F02279 /* PunctuationKey.swift */; };
@@ -650,9 +651,10 @@
 		37D1C9352BBF26A200015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		37D1C9372BBF288000015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		37D771A72BF805FA008BC978 /* VerticalPageCandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPageCandidateLabel.swift; sourceTree = "<group>"; };
 		37E6AD442B3B381600F02279 /* CommentLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLabel.swift; sourceTree = "<group>"; };
 		37E6AD452B3B381600F02279 /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
-		37E6AD462B3B381600F02279 /* CandidateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateLabel.swift; sourceTree = "<group>"; };
+		37E6AD462B3B381600F02279 /* HorizontalPageCandidateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalPageCandidateLabel.swift; sourceTree = "<group>"; };
 		37E6AD472B3B381600F02279 /* MotherBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
 		37E6AD492B3B381600F02279 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		37E6AD4A2B3B381600F02279 /* PunctuationKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PunctuationKey.swift; sourceTree = "<group>"; };
@@ -858,13 +860,13 @@
 		371B6E702B3B3107005BB31C /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				371B6E712B3B3107005BB31C /* PronunciationLabel.swift */,
 				371B6E722B3B3107005BB31C /* SearchView.swift */,
-				371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */,
-				371B6E742B3B3107005BB31C /* GwongWanLabel.swift */,
 				371B6E752B3B3107005BB31C /* CantoneseTextLabel.swift */,
+				371B6E712B3B3107005BB31C /* PronunciationLabel.swift */,
 				371B6E762B3B3107005BB31C /* YingWaaFanWanLabel.swift */,
+				371B6E732B3B3107005BB31C /* ChoHokYuetYamCitYiuLabel.swift */,
 				371B6E772B3B3107005BB31C /* FanWanCuetYiuLabel.swift */,
+				371B6E742B3B3107005BB31C /* GwongWanLabel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -1336,10 +1338,11 @@
 		37E6AD432B3B381600F02279 /* CandidateViews */ = {
 			isa = PBXGroup;
 			children = (
-				37E6AD442B3B381600F02279 /* CommentLabel.swift */,
-				37E6AD452B3B381600F02279 /* CandidateBoard.swift */,
-				37E6AD462B3B381600F02279 /* CandidateLabel.swift */,
 				37E6AD472B3B381600F02279 /* MotherBoard.swift */,
+				37E6AD452B3B381600F02279 /* CandidateBoard.swift */,
+				37E6AD462B3B381600F02279 /* HorizontalPageCandidateLabel.swift */,
+				37D771A72BF805FA008BC978 /* VerticalPageCandidateLabel.swift */,
+				37E6AD442B3B381600F02279 /* CommentLabel.swift */,
 			);
 			path = CandidateViews;
 			sourceTree = "<group>";
@@ -1919,7 +1922,7 @@
 				37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */,
 				37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */,
 				37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */,
-				37E6AD6D2B3B381700F02279 /* CandidateLabel.swift in Sources */,
+				37E6AD6D2B3B381700F02279 /* HorizontalPageCandidateLabel.swift in Sources */,
 				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
 				37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */,
 				37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */,
@@ -1944,6 +1947,7 @@
 				37E6AD802B3B381700F02279 /* FontPreferencesView.swift in Sources */,
 				37E6AD762B3B381700F02279 /* IMKTextInputExtensions.swift in Sources */,
 				37E6AD702B3B381700F02279 /* PunctuationKey.swift in Sources */,
+				37D771A82BF805FA008BC978 /* VerticalPageCandidateLabel.swift in Sources */,
 				37E6AD6E2B3B381700F02279 /* MotherBoard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

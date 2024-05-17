@@ -103,10 +103,10 @@ final class JyutpingInputController: IMKInputController {
                         let isRegularHorizontal: Bool = origin.x < (screenWidth - 400)
                         let isRegularVertical: Bool = {
                                 switch AppSettings.candidatePageOrientation {
-                                case .vertical:
-                                        return origin.y > 400
                                 case .horizontal:
                                         return origin.y > 200
+                                case .vertical:
+                                        return origin.y > 400
                                 }
                         }()
                         let newPattern: WindowPattern = {

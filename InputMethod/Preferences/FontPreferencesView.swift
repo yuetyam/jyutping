@@ -27,13 +27,15 @@ struct FontPreferencesView: View {
                 animationState += 1
         }
 
+        private let fontSizeRange: Range<Int> = AppSettings.fontSizeRange
+
         var body: some View {
                 ScrollView {
                         LazyVStack(spacing: 16) {
                                 VStack {
                                         HStack {
                                                 Picker("FontPreferencesView.CandidateFontSize", selection: $candidateFontSize) {
-                                                        ForEach(10..<25, id: \.self) {
+                                                        ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
                                                 }
@@ -98,7 +100,7 @@ struct FontPreferencesView: View {
                                 VStack {
                                         HStack {
                                                 Picker("FontPreferencesView.CommentFontSize", selection: $commentFontSize) {
-                                                        ForEach(10..<25, id: \.self) {
+                                                        ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
                                                 }
@@ -163,7 +165,7 @@ struct FontPreferencesView: View {
                                 VStack {
                                         HStack {
                                                 Picker("FontPreferencesView.SerialNumberFontSize", selection: $labelFontSize) {
-                                                        ForEach(10..<25, id: \.self) {
+                                                        ForEach(fontSizeRange, id: \.self) {
                                                                 Text(verbatim: "\($0)").tag($0)
                                                         }
                                                 }

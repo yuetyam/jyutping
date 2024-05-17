@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct SettingsKey {
         static let CandidatePageSize: String = "CandidatePageSize"
@@ -28,37 +29,40 @@ struct SettingsKey {
 }
 
 enum CandidatePageOrientation: Int {
-        case vertical = 1
-        case horizontal = 2
+        case horizontal = 1
+        case vertical = 2
         static func orientation(of value: Int) -> CandidatePageOrientation {
                 switch value {
                 case 1:
-                        return .vertical
-                case 2:
                         return .horizontal
-                default:
+                case 2:
                         return .vertical
+                default:
+                        return .horizontal
                 }
         }
 }
 
 enum CommentDisplayStyle: Int {
-        case right = 1
-        case top = 2
-        case bottom = 3
-        case noComments = 4
+
+        case top = 1
+        case bottom = 2
+        // case left = 3 // Unwanted
+        case right = 4
+        case noComments = 5
+
         static func style(of value: Int) -> CommentDisplayStyle {
                 switch value {
                 case 1:
-                        return .right
-                case 2:
                         return .top
-                case 3:
+                case 2:
                         return .bottom
                 case 4:
+                        return .right
+                case 5:
                         return .noComments
                 default:
-                        return .right
+                        return .top
                 }
         }
         var isVertical: Bool {
@@ -156,7 +160,7 @@ struct AppSettings {
         private(set) static var displayCandidatePageSize: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageSize)
                 let isSavedValueValid: Bool = pageSizeValidity(of: savedValue)
-                guard isSavedValueValid else { return 10 }
+                guard isSavedValueValid else { return defaultCandidatePageSize }
                 return savedValue
         }()
         static func updateDisplayCandidatePageSize(to newPageSize: Int) {
@@ -167,6 +171,7 @@ struct AppSettings {
         private static func pageSizeValidity(of value: Int) -> Bool {
                 return candidatePageSizeRange.contains(value)
         }
+        private static let defaultCandidatePageSize: Int = 7
         static let candidatePageSizeRange: Range<Int> = 1..<11
 
 
@@ -175,7 +180,7 @@ struct AppSettings {
         private(set) static var candidateLineSpacing: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
                 let isSavedValueValid: Bool = lineSpacingValidity(of: savedValue)
-                guard isSavedValueValid else { return 6 }
+                guard isSavedValueValid else { return defaultCandidateLineSpacing }
                 return savedValue
         }()
         static func updateCandidateLineSpacing(to newLineSpacing: Int) {
@@ -186,6 +191,7 @@ struct AppSettings {
         private static func lineSpacingValidity(of value: Int) -> Bool {
                 return candidateLineSpacingRange.contains(value)
         }
+        private static let defaultCandidateLineSpacing: Int = 6
         static let candidateLineSpacingRange: Range<Int> = 0..<13
 
 
@@ -239,8 +245,8 @@ struct AppSettings {
         private(set) static var candidateFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
-                guard isSavedValueValid else { return 17 }
-                return CGFloat(savedValue)
+                let size: Int = isSavedValueValid ? savedValue : defaultCandidateFontSize
+                return CGFloat(size)
         }()
         static func updateCandidateFontSize(to newFontSize: Int) {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
@@ -252,8 +258,8 @@ struct AppSettings {
         private(set) static var commentFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
-                guard isSavedValueValid else { return 15 }
-                return CGFloat(savedValue)
+                let size: Int = isSavedValueValid ? savedValue : defaultCommentFontSize
+                return CGFloat(size)
         }()
         static func updateCommentFontSize(to newFontSize: Int) {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
@@ -265,8 +271,8 @@ struct AppSettings {
         private(set) static var labelFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
-                guard isSavedValueValid else { return 15 }
-                return CGFloat(savedValue)
+                let size: Int = isSavedValueValid ? savedValue : defaultLabelFontSize
+                return CGFloat(size)
         }()
         static func updateLabelFontSize(to newFontSize: Int) {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
@@ -276,8 +282,12 @@ struct AppSettings {
         }
 
         private static func fontSizeValidity(of value: Int) -> Bool {
-                return value > 9 && value < 25
+                return fontSizeRange.contains(value)
         }
+        private static let defaultCandidateFontSize: Int = 17
+        private static let defaultCommentFontSize: Int = 13
+        private static let defaultLabelFontSize: Int = 13
+        static let fontSizeRange: Range<Int> = 10..<25
 
 
         // MARK: - Font Mode
@@ -316,7 +326,7 @@ struct AppSettings {
                 let fallback: [String] = [Constant.PingFangHK]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCandidateFontList)
                 guard let savedNames else { return fallback }
-                let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
                 return names
         }()
@@ -329,7 +339,7 @@ struct AppSettings {
                 let fallback: [String] = [Constant.HelveticaNeue]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCommentFontList)
                 guard let savedNames else { return fallback }
-                let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
                 return names
         }()
@@ -342,7 +352,7 @@ struct AppSettings {
                 let fallback: [String] = [Constant.Menlo]
                 let savedNames = UserDefaults.standard.string(forKey: SettingsKey.CustomLabelFontList)
                 guard let savedNames else { return fallback }
-                let names: [String] = savedNames.components(separatedBy: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
                 guard !(names.isEmpty) else { return fallback }
                 return names
         }()

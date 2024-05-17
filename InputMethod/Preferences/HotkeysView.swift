@@ -114,53 +114,6 @@ struct HotkeysView: View {
                                 .block()
                                 VStack(spacing: 2) {
                                         HStack {
-                                                Text("HotkeysView.Header.VerticalOrientation").font(.subheadline).padding(.horizontal)
-                                                Spacer()
-                                        }
-                                        VStack(spacing: 8) {
-                                                HStack(spacing: 4) {
-                                                        LabelText("HotkeysView.MoveToPreviousCandidate")
-                                                        Text.separator
-                                                        KeyBlockView("▲")
-                                                        Text.or
-                                                        KeyBlockView.shift
-                                                        Text.plus
-                                                        KeyBlockView.tab
-                                                        Spacer()
-                                                }
-                                                HStack(spacing: 4) {
-                                                        LabelText("HotkeysView.MoveToNextCandidate")
-                                                        Text.separator
-                                                        KeyBlockView("▼")
-                                                        Text.or
-                                                        KeyBlockView.tab
-                                                        Spacer()
-                                                }
-                                                HStack(spacing: 4) {
-                                                        LabelText("HotkeysView.BackwardToPreviousCandidatePage")
-                                                        Text.separator
-                                                        KeyBlockView("◀")
-                                                        Text.or
-                                                        KeyBlockView("-")
-                                                        Text.or
-                                                        KeyBlockView("Page Up ↑")
-                                                        Spacer()
-                                                }
-                                                HStack(spacing: 4) {
-                                                        LabelText("HotkeysView.ForwardToNextCandidatePage")
-                                                        Text.separator
-                                                        KeyBlockView("▶")
-                                                        Text.or
-                                                        KeyBlockView("=")
-                                                        Text.or
-                                                        KeyBlockView("Page Down ↓")
-                                                        Spacer()
-                                                }
-                                        }
-                                        .block()
-                                }
-                                VStack(spacing: 2) {
-                                        HStack {
                                                 Text("HotkeysView.Header.HorizontalOrientation").font(.subheadline).padding(.horizontal)
                                                 Spacer()
                                         }
@@ -197,6 +150,53 @@ struct HotkeysView: View {
                                                         LabelText("HotkeysView.ForwardToNextCandidatePage")
                                                         Text.separator
                                                         KeyBlockView("▼")
+                                                        Text.or
+                                                        KeyBlockView("=")
+                                                        Text.or
+                                                        KeyBlockView("Page Down ↓")
+                                                        Spacer()
+                                                }
+                                        }
+                                        .block()
+                                }
+                                VStack(spacing: 2) {
+                                        HStack {
+                                                Text("HotkeysView.Header.VerticalOrientation").font(.subheadline).padding(.horizontal)
+                                                Spacer()
+                                        }
+                                        VStack(spacing: 8) {
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.MoveToPreviousCandidate")
+                                                        Text.separator
+                                                        KeyBlockView("▲")
+                                                        Text.or
+                                                        KeyBlockView.shift
+                                                        Text.plus
+                                                        KeyBlockView.tab
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.MoveToNextCandidate")
+                                                        Text.separator
+                                                        KeyBlockView("▼")
+                                                        Text.or
+                                                        KeyBlockView.tab
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.BackwardToPreviousCandidatePage")
+                                                        Text.separator
+                                                        KeyBlockView("◀")
+                                                        Text.or
+                                                        KeyBlockView("-")
+                                                        Text.or
+                                                        KeyBlockView("Page Up ↑")
+                                                        Spacer()
+                                                }
+                                                HStack(spacing: 4) {
+                                                        LabelText("HotkeysView.ForwardToNextCandidatePage")
+                                                        Text.separator
+                                                        KeyBlockView("▶")
                                                         Text.or
                                                         KeyBlockView("=")
                                                         Text.or

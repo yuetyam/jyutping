@@ -4,6 +4,7 @@ struct CandidateBoard: View {
 
         @EnvironmentObject private var context: AppContext
 
+        private let pageOrientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
         private let commentStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
         private let toneStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         private let toneColor: ToneDisplayColor = AppSettings.toneDisplayColor
@@ -11,50 +12,55 @@ struct CandidateBoard: View {
 
         var body: some View {
                 let highlightedIndex: Int = context.highlightedIndex
-                let orientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
-                let altAlignment: VerticalAlignment = {
+                let horizontalPageAlignment: VerticalAlignment = {
                         switch commentStyle {
-                        case .right:
-                                return .center
                         case .top:
                                 return .lastTextBaseline
                         case .bottom:
                                 return .firstTextBaseline
+                        case .right:
+                                return .center
                         case .noComments:
                                 return .center
                         }
                 }()
-                switch orientation {
-                case .vertical:
-                        VStack(alignment: .leading, spacing: 0) {
+                switch pageOrientation {
+                case .horizontal:
+                        HStack(alignment: horizontalPageAlignment, spacing: 0) {
                                 ForEach(0..<context.displayCandidates.count, id: \.self) { index in
-                                        CandidateLabel(
-                                                candidate: context.displayCandidates[index],
+                                        HorizontalPageCandidateLabel(
+                                                isHighlighted: index == highlightedIndex,
                                                 index: index,
-                                                highlightedIndex: highlightedIndex,
+                                                candidate: context.displayCandidates[index],
                                                 commentStyle: commentStyle,
                                                 toneStyle: toneStyle,
-                                                toneColor: toneColor,
-                                                lineSpacing: lineSpacing
+                                                toneColor: toneColor
                                         )
+                                        .padding(.vertical, 4)
+                                        .padding(.horizontal, lineSpacing / 2.0)
+                                        .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
+                                        .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
                                 }
                         }
                         .padding(4)
                         .roundedHUDVisualEffect()
                         .padding(10)
                         .fixedSize()
-                case .horizontal:
-                        HStack(alignment: altAlignment, spacing: 0) {
+                case .vertical:
+                        VStack(alignment: .leading, spacing: 0) {
                                 ForEach(0..<context.displayCandidates.count, id: \.self) { index in
-                                        AltCandidateLabel(
-                                                candidate: context.displayCandidates[index],
+                                        VerticalPageCandidateLabel(
+                                                isHighlighted: index == highlightedIndex,
                                                 index: index,
-                                                highlightedIndex: highlightedIndex,
+                                                candidate: context.displayCandidates[index],
                                                 commentStyle: commentStyle,
                                                 toneStyle: toneStyle,
-                                                toneColor: toneColor,
-                                                lineSpacing: lineSpacing
+                                                toneColor: toneColor
                                         )
+                                        .padding(.leading, 4)
+                                        .padding(.vertical, lineSpacing / 2.0)
+                                        .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
+                                        .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
                                 }
                         }
                         .padding(4)

@@ -31,13 +31,13 @@
 "GeneralPreferencesView.CandidateLineSpacing" = "候選詞行間隔";
 
 "GeneralPreferencesView.CandidatePageOrientation" = "候選詞排列方向";
-"GeneralPreferencesView.CandidatePageOrientation.Vertical" = "縱向";
 "GeneralPreferencesView.CandidatePageOrientation.Horizontal" = "橫向";
+"GeneralPreferencesView.CandidatePageOrientation.Vertical" = "縱向";
 
 "GeneralPreferencesView.CommentStyle" = "候選詞註釋(粵拼)位置";
-"GeneralPreferencesView.CommentStyle.Right" = "右邊";
 "GeneralPreferencesView.CommentStyle.Top" = "上邊";
 "GeneralPreferencesView.CommentStyle.Bottom" = "下邊";
+"GeneralPreferencesView.CommentStyle.Right" = "右邊";
 "GeneralPreferencesView.CommentStyle.NoComments" = "無";
 
 "GeneralPreferencesView.CommentToneStyle" = "候選詞註釋(粵拼)聲調樣式";
@@ -80,8 +80,8 @@
 "HotkeysView.RemoveCurrentCandidateFromUserLexicon" = "從個人詞庫刪除當前候選詞";
 "HotkeysView.ClearCurrentPreEditText" = "清除當前預輸入音節";
 
-"HotkeysView.Header.VerticalOrientation" = "候選詞排列方向爲縱向時";
 "HotkeysView.Header.HorizontalOrientation" = "候選詞排列方向爲橫向時";
+"HotkeysView.Header.VerticalOrientation" = "候選詞排列方向爲縱向時";
 "HotkeysView.MoveToPreviousCandidate" = "移至上一個候選詞";
 "HotkeysView.MoveToNextCandidate" = "移至下一個候選詞";
 "HotkeysView.BackwardToPreviousCandidatePage" = "退返到上一䈎候選詞";
