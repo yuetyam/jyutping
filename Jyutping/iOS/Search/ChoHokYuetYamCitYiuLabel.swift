@@ -32,7 +32,7 @@ struct ChoHokYuetYamCitYiuLabel: View {
                                 HStack {
                                         Text(verbatim: "同音")
                                         Text.separator
-                                        Text(verbatim: homophoneText)
+                                        Text(verbatim: homophoneText).font(.body)
                                 }
                         }
                 }

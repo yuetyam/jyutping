@@ -46,21 +46,21 @@ struct PronunciationLabel: View {
                                 HStack {
                                         Text(verbatim: "同音")
                                         Text.separator
-                                        Text(verbatim: homophoneText)
+                                        Text(verbatim: homophoneText).font(.body)
                                 }
                         }
                         if let interpretation {
                                 HStack {
                                         Text(verbatim: "釋義")
                                         Text.separator
-                                        Text(verbatim: interpretation)
+                                        Text(verbatim: interpretation).font(.body)
                                 }
                         }
                         if let collocationText {
                                 HStack {
                                         Text(verbatim: "詞例")
                                         Text.separator
-                                        Text(verbatim: collocationText)
+                                        Text(verbatim: collocationText).font(.body)
                                         Spacer()
                                         Speaker {
                                                 Speech.speak(collocationSpeechText ?? collocationText, isRomanization: false)

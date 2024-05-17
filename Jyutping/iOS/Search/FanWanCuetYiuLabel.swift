@@ -12,7 +12,7 @@ struct FanWanCuetYiuLabel: View {
                         HStack {
                                 Text(verbatim: "讀音")
                                 Text.separator
-                                Text(verbatim: entry.abstract)
+                                Text(verbatim: entry.abstract).font(.body).minimumScaleFactor(0.5).lineLimit(1)
                         }
                         HStack(spacing: 16) {
                                 HStack {
@@ -27,13 +27,13 @@ struct FanWanCuetYiuLabel: View {
                         HStack {
                                 Text(verbatim: "釋義")
                                 Text.separator
-                                Text(verbatim: entry.interpretation)
+                                Text(verbatim: entry.interpretation).font(.body)
                         }
                         if let homophoneText {
                                 HStack {
                                         Text(verbatim: "同音")
                                         Text.separator
-                                        Text(verbatim: homophoneText)
+                                        Text(verbatim: homophoneText).font(.body)
                                 }
                                 .padding(.top, 4)
                         }
