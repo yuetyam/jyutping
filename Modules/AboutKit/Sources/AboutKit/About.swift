@@ -15,7 +15,7 @@ public struct About {
         public static let QQAddress: String = #"https://jq.qq.com/?k=4PR17m3t"#
         public static let QQGroupID: String = "293148593"
 
-        public static let TwitterAddress: String = "https://twitter.com/JyutpingApp"
+        public static let TwitterAddress: String = "https://x.com/JyutpingApp"
         public static let TwitterUsername: String = "JyutpingApp"
         public static let InstagramAppScheme: String = "instagram://user?username=jyutping_app"
         public static let InstagramAddress: String = "https://www.instagram.com/jyutping_app"
