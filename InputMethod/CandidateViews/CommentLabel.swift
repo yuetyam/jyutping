@@ -3,35 +3,32 @@ import CommonExtensions
 
 /// Candidate Romanization(Jyutping) Comment Label
 struct CommentLabel: View {
-        init(_ comment: String, toneStyle: ToneDisplayStyle, toneColor: Color, shouldModifyToneColor: Bool) {
+        init(_ comment: String, toneStyle: ToneDisplayStyle, shouldModifyToneColor: Bool) {
                 self.comment = comment
                 self.toneStyle = toneStyle
-                self.toneColor = toneColor
                 self.shouldModifyToneColor = shouldModifyToneColor
         }
         private let comment: String
         private let toneStyle: ToneDisplayStyle
-        private let toneColor: Color
         private let shouldModifyToneColor: Bool
         var body: some View {
                 switch toneStyle {
                 case .normal where shouldModifyToneColor:
-                        ModifiedToneColorCommentView(comment: comment, toneColor: toneColor)
+                        ModifiedToneColorCommentView(comment: comment)
                 case .normal:
                         Text(verbatim: comment).font(.comment)
                 case .noTones:
                         Text(verbatim: comment.filter(\.isLowercaseBasicLatinLetter)).font(.comment)
                 case .superscript:
-                        ModifiedCommentView(alignment: .top, comment: comment, toneColor: toneColor)
+                        ModifiedCommentView(alignment: .firstTextBaseline, comment: comment, shouldModifyToneColor: shouldModifyToneColor)
                 case .subscript:
-                        ModifiedCommentView(alignment: .bottom, comment: comment, toneColor: toneColor)
+                        ModifiedCommentView(alignment: .lastTextBaseline, comment: comment, shouldModifyToneColor: shouldModifyToneColor)
                 }
         }
 }
 
 private struct ModifiedToneColorCommentView: View {
         let comment: String
-        let toneColor: Color
         var body: some View {
                 let syllables = comment.split(separator: Character.space).map({ text -> Syllable in
                         let phone = text.filter(\.isLowercaseBasicLatinLetter)
@@ -43,7 +40,7 @@ private struct ModifiedToneColorCommentView: View {
                                 let syllable = syllables[index]
                                 let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
                                 Text(verbatim: leadingText)
-                                Text(verbatim: syllable.tone).foregroundStyle(toneColor)
+                                Text(verbatim: syllable.tone).opacity(0.66)
                         }
                 }
                 .font(.comment)
@@ -52,7 +49,7 @@ private struct ModifiedToneColorCommentView: View {
 private struct ModifiedCommentView: View {
         let alignment: VerticalAlignment
         let comment: String
-        let toneColor: Color
+        let shouldModifyToneColor: Bool
         var body: some View {
                 let syllables = comment.split(separator: Character.space).map({ text -> Syllable in
                         let phone = text.filter(\.isLowercaseBasicLatinLetter)
@@ -66,7 +63,7 @@ private struct ModifiedCommentView: View {
                                 Text(verbatim: leadingText)
                                 Text(verbatim: syllable.tone)
                                         .font(.commentTone)
-                                        .foregroundStyle(toneColor)
+                                        .opacity(shouldModifyToneColor ? 0.66 : 1)
                         }
                 }
                 .font(.comment)

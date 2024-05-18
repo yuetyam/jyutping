@@ -37,6 +37,7 @@ struct CandidateBoard: View {
                                                 toneColor: toneColor
                                         )
                                         .padding(.vertical, 4)
+                                        .padding(.trailing, 4)
                                         .padding(.horizontal, lineSpacing / 2.0)
                                         .foregroundStyle(index == highlightedIndex ? Color.white : Color.primary)
                                         .background(index == highlightedIndex ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 5, style: .continuous))
