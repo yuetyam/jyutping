@@ -72,7 +72,7 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Jyutping"
           }
         },
@@ -204,7 +204,7 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "CC0 1.0 Public Domain"
           }
         },
