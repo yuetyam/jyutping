@@ -121,7 +121,7 @@ struct SettingsViewIOS15: View {
                                                 HStack {
                                                         Text("KeyboardFeedback.Haptic").minimumScaleFactor(0.5).lineLimit(1)
                                                         Spacer()
-                                                        Picker("Haptic Feedback", selection: $hapticFeedback) {
+                                                        Picker("KeyboardFeedback.Haptic", selection: $hapticFeedback) {
                                                                 Text("KeyboardFeedback.Haptic.None").tag(HapticFeedback.disabled)
                                                                 Text("KeyboardFeedback.Haptic.Light").tag(HapticFeedback.light)
                                                                 Text("KeyboardFeedback.Haptic.Medium").tag(HapticFeedback.medium)
