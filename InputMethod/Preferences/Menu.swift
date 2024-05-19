@@ -7,17 +7,6 @@ extension JyutpingInputController {
                 let menuTitle: String = String(localized: "Menu.Title")
                 let menu = NSMenu(title: menuTitle)
 
-                let cantoneseModeTitle: String = String(localized: "Menu.InputMethodMode.Cantonese")
-                let abcModeTitle: String = String(localized: "Menu.InputMethodMode.ABC")
-                let cantoneseMode = NSMenuItem(title: cantoneseModeTitle, action: #selector(toggleInputMethodMode), keyEquivalent: "")
-                let abcMode = NSMenuItem(title: abcModeTitle, action: #selector(toggleInputMethodMode), keyEquivalent: "")
-                cantoneseMode.state = Options.inputMethodMode.isCantonese ? .on : .off
-                abcMode.state = Options.inputMethodMode.isABC ? .on : .off
-                menu.addItem(cantoneseMode)
-                menu.addItem(abcMode)
-
-                menu.addItem(.separator())
-
                 let preferencesTitle: String = String(localized: "Menu.Preferences")
                 let preferences = NSMenuItem(title: preferencesTitle, action: #selector(openPreferencesWindow), keyEquivalent: ",")
                 preferences.keyEquivalentModifierMask = [.control, .shift]
@@ -36,12 +25,6 @@ extension JyutpingInputController {
                 menu.addItem(about)
 
                 return menu
-        }
-
-        @objc private func toggleInputMethodMode() {
-                let newMode: InputMethodMode = Options.inputMethodMode.isCantonese ? .abc : .cantonese
-                Options.updateInputMethodMode(to: newMode)
-                appContext.updateInputForm()
         }
 
         @objc private func openPreferencesWindow() {

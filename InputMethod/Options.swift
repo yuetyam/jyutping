@@ -61,6 +61,8 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.PunctuationForm)
         }
 
+
+        // TODO: Maybe AppSettings.isEmojiSuggestionsOn
         /// 候選詞包含 Emoji
         private(set) static var isEmojiSuggestionsOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)

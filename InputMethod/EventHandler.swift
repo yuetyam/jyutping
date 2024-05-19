@@ -473,8 +473,13 @@ extension JyutpingInputController {
                 defer {
                         clearOptionsViewHintText()
                         appContext.updateInputForm()
-                        let frame: CGRect? = candidates.isEmpty ? .zero : nil
-                        updateWindowFrame(frame)
+                        if Options.inputMethodMode.isABC {
+                                passBuffer()
+                                updateWindowFrame(.zero)
+                        } else {
+                                let frame: CGRect? = candidates.isEmpty ? .zero : nil
+                                updateWindowFrame(frame)
+                        }
                 }
                 switch selectedIndex {
                 case -1:
@@ -488,9 +493,9 @@ extension JyutpingInputController {
                 case 7:
                         Options.updatePunctuationForm(to: .english)
                 case 8:
-                        Options.updateEmojiSuggestions(to: true)
+                        Options.updateInputMethodMode(to: .cantonese)
                 case 9:
-                        Options.updateEmojiSuggestions(to: false)
+                        Options.updateInputMethodMode(to: .abc)
                 default:
                         break
                 }

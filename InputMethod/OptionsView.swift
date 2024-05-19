@@ -16,14 +16,14 @@ struct OptionsView: View {
                 "全寬數字",
                 "粵文句讀",
                 "英文標點",
-                "表情符號",
-                "無"
+                "粵語拼音",
+                "ABC"
         ]
 
         private let characterStandard: CharacterStandard = Options.characterStandard
         private let characterForm: CharacterForm = Options.characterForm
         private let punctuationForm: PunctuationForm = Options.punctuationForm
-        private let needsEmojiCandidates: Bool = Options.isEmojiSuggestionsOn
+        private let inputMethodMode: InputMethodMode = Options.inputMethodMode
 
         var body: some View {
                 let highlightedIndex = context.optionsHighlightedIndex
@@ -46,8 +46,8 @@ struct OptionsView: View {
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: needsEmojiCandidates)
-                                OptionLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: !needsEmojiCandidates)
+                                OptionLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode == .cantonese)
+                                OptionLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode == .abc)
                         }
                 }
                 .padding(4)
@@ -69,14 +69,14 @@ private struct OptionLabel: View {
                 let serialNumber: String = (index == 9) ? "0" : "\(index + 1)"
                 let isHighlighted: Bool = index == highlightedIndex
                 HStack(spacing: 0) {
-                        HStack(spacing: 16) {
-                                Text(verbatim: serialNumber).font(.label).foregroundStyle(isHighlighted ? Color.white : Color.secondary)
+                        HStack(spacing: 8) {
+                                Text(verbatim: serialNumber).font(.label).opacity(isHighlighted ? 1 : 0.66)
                                 Text(verbatim: text).font(.candidate)
                         }
                         Spacer()
                         Image(systemName: "checkmark").font(.title3).opacity(checked ? 1 : 0)
                 }
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 4)
                 .padding(.vertical, verticalPadding)
                 .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                 .background(isHighlighted ? Color.accentColor : Color.clear, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
