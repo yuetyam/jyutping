@@ -1,5 +1,5 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-TARGET_NAME = JyutpingInputMethod
-PRODUCT_NAME = JyutpingInputMethod
+TARGET_NAME = InputMethod
+PRODUCT_NAME = InputMethod

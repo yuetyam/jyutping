@@ -576,7 +576,7 @@
 		371B70062B3B346D005BB31C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		371EABB92B3855810075089B /* Keyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Keyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		371EABBD2B3855820075089B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		371EABC92B385D370075089B /* JyutpingInputMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JyutpingInputMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		371EABC92B385D370075089B /* InputMethod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InputMethod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		371EABD22B385D380075089B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		371EABD42B385D380075089B /* InputMethod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InputMethod.entitlements; sourceTree = "<group>"; };
 		371EABD92B385D390075089B /* InputMethodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InputMethodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -654,8 +654,8 @@
 		37E6AD692B3B381700F02279 /* InputMethodApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMethodApp.swift; sourceTree = "<group>"; };
 		37E6AD6A2B3B381700F02279 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		37E6AD8F2B3B384B00F02279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		37E6AD912B3B386800F02279 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		37E6AD922B3B386800F02279 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		37E6AD912B3B386800F02279 /* InputMethodRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = InputMethodRelease.xcconfig; sourceTree = "<group>"; };
+		37E6AD922B3B386800F02279 /* InputMethodDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = InputMethodDebug.xcconfig; sourceTree = "<group>"; };
 		37E6AD952B3B389400F02279 /* jyutpingime.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = jyutpingime.pdf; sourceTree = "<group>"; };
 		37E6ADB02B3B38B100F02279 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		37EFD7252B3719C10089D346 /* Jyutping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jyutping.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1047,8 +1047,8 @@
 				37E6AD582B3B381600F02279 /* Preferences */,
 				37E6AD482B3B381600F02279 /* KeyCode */,
 				37E6AD4E2B3B381600F02279 /* Extensions */,
-				37E6AD922B3B386800F02279 /* Debug.xcconfig */,
-				37E6AD912B3B386800F02279 /* Release.xcconfig */,
+				37E6AD922B3B386800F02279 /* InputMethodDebug.xcconfig */,
+				37E6AD912B3B386800F02279 /* InputMethodRelease.xcconfig */,
 				371EABD42B385D380075089B /* InputMethod.entitlements */,
 				37D1C9352BBF26A200015FD0 /* PrivacyInfo.xcprivacy */,
 				37E6ADB02B3B38B100F02279 /* Info.plist */,
@@ -1345,7 +1345,7 @@
 				37EFD7362B3719C30089D346 /* JyutpingTests.xctest */,
 				37EFD7402B3719C30089D346 /* JyutpingUITests.xctest */,
 				371EABB92B3855810075089B /* Keyboard.appex */,
-				371EABC92B385D370075089B /* JyutpingInputMethod.app */,
+				371EABC92B385D370075089B /* InputMethod.app */,
 				371EABD92B385D390075089B /* InputMethodTests.xctest */,
 				371EABE32B385D390075089B /* InputMethodUITests.xctest */,
 			);
@@ -1444,7 +1444,7 @@
 				3742824F2B3CB71400B687D3 /* AboutKit */,
 			);
 			productName = InputMethod;
-			productReference = 371EABC92B385D370075089B /* JyutpingInputMethod.app */;
+			productReference = 371EABC92B385D370075089B /* InputMethod.app */;
 			productType = "com.apple.product-type.application";
 		};
 		371EABD82B385D390075089B /* InputMethodTests */ = {
@@ -2092,7 +2092,7 @@
 		};
 		371EABEB2B385D390075089B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37E6AD922B3B386800F02279 /* Debug.xcconfig */;
+			baseConfigurationReference = 37E6AD922B3B386800F02279 /* InputMethodDebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2135,7 +2135,7 @@
 		};
 		371EABEC2B385D390075089B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37E6AD912B3B386800F02279 /* Release.xcconfig */;
+			baseConfigurationReference = 37E6AD912B3B386800F02279 /* InputMethodRelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
