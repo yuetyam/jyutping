@@ -140,14 +140,12 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         textDocumentProxy.insertText(text2insert)
                         return
                 }
+                canMarkText = false
                 let text: String = {
                         guard let text2insert, !(text2insert.isEmpty) else { return bufferText }
                         return bufferText + text2insert
                 }()
-                if text == text2mark {
-                        textDocumentProxy.setMarkedText(String.empty, selectedRange: NSRange(location: 0, length: 0))
-                        textDocumentProxy.unmarkText()
-                }
+                clearBuffer()
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
                 let location: Int = text.utf16.count
@@ -155,8 +153,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
                 defer {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) { [unowned self] in
+                                canMarkText = true
+                        }
+                }
+                defer {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
-                                clearBuffer()
+                                let location: Int = String.zeroWidthSpace.utf16.count
+                                let range: NSRange = NSRange(location: location, length: 0)
+                                textDocumentProxy.setMarkedText(String.zeroWidthSpace, selectedRange: range)
                         }
                 }
                 let currentContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
