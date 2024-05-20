@@ -25,7 +25,6 @@ struct SettingsKey {
 
         static let PressShiftOnce: String = "PressShiftOnce"
         static let ShiftSpaceCombination: String = "ShiftSpaceCombination"
-        // static let SpeakCandidate: String = "SpeakCandidate"
 }
 
 enum CandidatePageOrientation: Int {
@@ -421,32 +420,4 @@ struct AppSettings {
                 }()
                 shiftSpaceCombination = newOption
         }
-
-        /*
-        private(set) static var isSpeakCandidateEnabled: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.SpeakCandidate)
-                switch savedValue {
-                case 101:
-                        return true
-                case 102:
-                        return false
-                default:
-                        return false
-                }
-        }()
-        static func updateSpeakCandidateState(to newValue: Int) {
-                let newState: Bool = {
-                        switch newValue {
-                        case 101:
-                                return true
-                        case 102:
-                                return false
-                        default:
-                                return false
-                        }
-                }()
-                isSpeakCandidateEnabled = newState
-        }
-        */
 }
-

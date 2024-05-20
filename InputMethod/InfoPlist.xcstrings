@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "CFBundleDisplayName" : {
+      "comment" : "Bundle display name",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -68,6 +69,7 @@
     },
     "CFBundleName" : {
       "comment" : "Bundle name",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -132,6 +134,7 @@
       }
     },
     "CFBundleSpokenName" : {
+      "comment" : "Accessibility bundle name",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -198,6 +201,7 @@
     },
     "NSHumanReadableCopyright" : {
       "comment" : "Copyright (human-readable)",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -262,6 +266,7 @@
       }
     },
     "org.jyutping.inputmethod.Jyutping" : {
+      "comment" : "Input Source ID",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -327,6 +332,7 @@
       }
     },
     "org.jyutping.inputmethod.Jyutping.JyutpingIM" : {
+      "comment" : "Input Mode ID",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

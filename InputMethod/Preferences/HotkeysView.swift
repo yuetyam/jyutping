@@ -1,30 +1,9 @@
 import SwiftUI
 
-/*
-private extension Int {
-        var isSpeakCandidateOn: Bool {
-                get {
-                        switch self {
-                        case 101:
-                                return true
-                        case 102:
-                                return false
-                        default:
-                                return false
-                        }
-                }
-                set {
-                        self = newValue ? 101 : 102
-                }
-        }
-}
-*/
-
 struct HotkeysView: View {
 
         @AppStorage(SettingsKey.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce.rawValue
         @AppStorage(SettingsKey.ShiftSpaceCombination) private var shiftSpaceCombination: Int = AppSettings.shiftSpaceCombination.rawValue
-        // @AppStorage(SettingsKey.SpeakCandidate) private var speakCandidateState: Int = AppSettings.isSpeakCandidateEnabled ? 101 : 102
 
         var body: some View {
                 ScrollView {
@@ -213,32 +192,6 @@ struct HotkeysView: View {
                                         Spacer()
                                 }
                                 .block()
-                                /*
-                                VStack {
-                                        HStack(spacing: 4) {
-                                                LabelText("HotkeysView.SpeakCandidate")
-                                                Text.separator
-                                                KeyBlockView.control
-                                                Text.plus
-                                                KeyBlockView.shift
-                                                Text.plus
-                                                KeyBlockView.number
-                                                Spacer()
-                                                Toggle("isSpeakCandidateEnabled", isOn: $speakCandidateState.isSpeakCandidateOn)
-                                                        .toggleStyle(.switch)
-                                                        .labelsHidden()
-                                                        .onChange(of: speakCandidateState) { newValue in
-                                                                AppSettings.updateSpeakCandidateState(to: newValue)
-                                                        }
-                                        }
-                                        HStack {
-                                                Text(verbatim: "number: 1, 2, 3, ... 8, 9, 0")
-                                                Spacer()
-                                        }
-                                        .font(.subheadline)
-                                }
-                                .block()
-                                */
                         }
                         .textSelection(.enabled)
                         .padding()
