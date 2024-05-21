@@ -35,7 +35,7 @@ struct VerticalPageCandidateLabel: View {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
                                         Text(verbatim: candidate.text).font(.candidate)
                                         if let comment = candidate.comment {
-                                                CommentLabel(comment, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
+                                                RightCommentLabel(comment: comment, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
                                         }
                                 }
                         case .noComments:

@@ -2,8 +2,8 @@ import SwiftUI
 import CommonExtensions
 
 /// Candidate Romanization(Jyutping) Comment Label
-struct CommentLabel: View {
-        init(_ comment: String, toneStyle: ToneDisplayStyle, shouldModifyToneColor: Bool) {
+struct RightCommentLabel: View {
+        init(comment: String, toneStyle: ToneDisplayStyle, shouldModifyToneColor: Bool) {
                 self.comment = comment
                 self.toneStyle = toneStyle
                 self.shouldModifyToneColor = shouldModifyToneColor
@@ -61,9 +61,7 @@ private struct ModifiedCommentView: View {
                                 let syllable = syllables[index]
                                 let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
                                 Text(verbatim: leadingText)
-                                Text(verbatim: syllable.tone)
-                                        .font(.commentTone)
-                                        .opacity(shouldModifyToneColor ? 0.66 : 1)
+                                Text(verbatim: syllable.tone).font(.commentTone).opacity(shouldModifyToneColor ? 0.66 : 1)
                         }
                 }
                 .font(.comment)
