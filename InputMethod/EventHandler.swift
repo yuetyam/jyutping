@@ -319,6 +319,7 @@ extension JyutpingInputController {
                                         bufferText += "'"
                                         return true
                                 } else {
+                                        guard Options.punctuationForm.isCantoneseMode else { return false }
                                         let text: String = isShifting ? PunctuationKey.quote.shiftingKeyText : PunctuationKey.quote.keyText
                                         bufferText = text
                                         return true
