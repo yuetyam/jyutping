@@ -8,10 +8,12 @@ struct ModifiedToneColorCommentLabel: View {
                 let phone = syllable.filter(\.isLowercaseBasicLatinLetter)
                 let tone = syllable.filter(\.isCantoneseToneDigit)
                 HStack(spacing: 0) {
-                        Text(verbatim: phone).lineLimit(1).minimumScaleFactor(0.4)
+                        Text(verbatim: phone)
                         Text(verbatim: tone).opacity(0.66)
                 }
                 .font(.comment)
+                .lineLimit(1)
+                .minimumScaleFactor(0.4)
         }
 }
 struct SuperscriptCommentLabel: View {
@@ -21,9 +23,11 @@ struct SuperscriptCommentLabel: View {
                 let phone = syllable.filter(\.isLowercaseBasicLatinLetter)
                 let tone = syllable.filter(\.isCantoneseToneDigit)
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
-                        Text(verbatim: phone).font(.comment).lineLimit(1).minimumScaleFactor(0.4)
+                        Text(verbatim: phone).font(.comment)
                         Text(verbatim: tone).font(.commentTone).opacity(shouldModifyToneColor ? 0.66 : 1)
                 }
+                .lineLimit(1)
+                .minimumScaleFactor(0.4)
         }
 }
 struct SubscriptCommentLabel: View {
@@ -33,9 +37,11 @@ struct SubscriptCommentLabel: View {
                 let phone = syllable.filter(\.isLowercaseBasicLatinLetter)
                 let tone = syllable.filter(\.isCantoneseToneDigit)
                 HStack(alignment: .lastTextBaseline, spacing: 0) {
-                        Text(verbatim: phone).font(.comment).lineLimit(1).minimumScaleFactor(0.4)
+                        Text(verbatim: phone).font(.comment)
                         Text(verbatim: tone).font(.commentTone).opacity(shouldModifyToneColor ? 0.66 : 1)
                 }
+                .lineLimit(1)
+                .minimumScaleFactor(0.4)
         }
 }
 
@@ -45,144 +51,134 @@ struct StackUnit {
 }
 
 struct TopCommentStackUnitView: View {
-        init(width: CGFloat, unit: StackUnit, toneStyle: ToneDisplayStyle, shouldModifyToneColor: Bool) {
-                self.width = width
+        init(unit: StackUnit, toneStyle: ToneDisplayStyle, shouldModifyToneColor: Bool, syllableViewSize: CGSize) {
                 self.unit = unit
                 self.toneStyle = toneStyle
                 self.shouldModifyToneColor = shouldModifyToneColor
+                self.syllableViewSize = syllableViewSize
         }
-        private let width: CGFloat
         private let unit: StackUnit
         private let toneStyle: ToneDisplayStyle
         private let shouldModifyToneColor: Bool
+        private let syllableViewSize: CGSize
         var body: some View {
                 switch toneStyle {
                 case .normal where shouldModifyToneColor:
                         VStack(spacing: 2) {
                                 ModifiedToneColorCommentLabel(syllable: unit.syllable)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                         }
-                        .frame(width: width)
                 case .normal:
                         VStack(spacing: 2) {
                                 Text(verbatim: unit.syllable)
                                         .font(.comment)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.4)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                         }
-                        .frame(width: width)
                 case .noTones:
                         VStack(spacing: 2) {
                                 Text(verbatim: unit.syllable.filter(\.isLowercaseBasicLatinLetter))
                                         .font(.comment)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.4)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
+                                        .frame(maxWidth: .infinity)
                         }
-                        .frame(width: width)
                 case .superscript:
                         VStack(spacing: 2) {
                                 SuperscriptCommentLabel(syllable: unit.syllable, shouldModifyToneColor: shouldModifyToneColor)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                         }
-                        .frame(width: width)
                 case .subscript:
                         VStack(spacing: 2) {
                                 SubscriptCommentLabel(syllable: unit.syllable, shouldModifyToneColor: shouldModifyToneColor)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                         }
-                        .frame(width: width)
                 }
         }
 }
 struct BottomCommentStackUnitView: View {
-        init(width: CGFloat, unit: StackUnit, toneStyle: ToneDisplayStyle, shouldModifyToneColor: Bool) {
-                self.width = width
+        init(unit: StackUnit, toneStyle: ToneDisplayStyle, shouldModifyToneColor: Bool, syllableViewSize: CGSize) {
                 self.unit = unit
                 self.toneStyle = toneStyle
                 self.shouldModifyToneColor = shouldModifyToneColor
+                self.syllableViewSize = syllableViewSize
         }
-        private let width: CGFloat
         private let unit: StackUnit
         private let toneStyle: ToneDisplayStyle
         private let shouldModifyToneColor: Bool
+        private let syllableViewSize: CGSize
         var body: some View {
                 switch toneStyle {
                 case .normal where shouldModifyToneColor:
                         VStack(spacing: 2) {
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                                 ModifiedToneColorCommentLabel(syllable: unit.syllable)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                         }
-                        .frame(width: width)
                 case .normal:
                         VStack(spacing: 2) {
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                                 Text(verbatim: unit.syllable)
                                         .font(.comment)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.4)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                         }
-                        .frame(width: width)
                 case .noTones:
                         VStack(spacing: 2) {
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
+                                        .frame(maxWidth: .infinity)
                                 Text(verbatim: unit.syllable.filter(\.isLowercaseBasicLatinLetter))
                                         .font(.comment)
                                         .lineLimit(1)
                                         .minimumScaleFactor(0.4)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                         }
-                        .frame(width: width)
                 case .superscript:
                         VStack(spacing: 2) {
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                                 SuperscriptCommentLabel(syllable: unit.syllable, shouldModifyToneColor: shouldModifyToneColor)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                         }
-                        .frame(width: width)
                 case .subscript:
                         VStack(spacing: 2) {
                                 Text(verbatim: unit.character)
                                         .font(.candidate)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.5)
                                         .padding(.trailing, 2)
+                                        .frame(maxWidth: .infinity)
                                 SubscriptCommentLabel(syllable: unit.syllable, shouldModifyToneColor: shouldModifyToneColor)
+                                        .frame(width: syllableViewSize.width, height: syllableViewSize.height)
                         }
-                        .frame(width: width)
                 }
         }
 }
@@ -202,14 +198,14 @@ struct TopCommentStackView: View {
                 self.toneStyle = toneStyle
                 self.shouldModifyToneColor = shouldModifyToneColor
         }
-        private let unitWidth: CGFloat = 36 // FIXME: Dynamic size
         private let units: [StackUnit]
         private let toneStyle: ToneDisplayStyle
         private let shouldModifyToneColor: Bool
+        private let syllableViewSize: CGSize = AppSettings.syllableViewSize
         var body: some View {
                 HStack(alignment: .lastTextBaseline, spacing: 1) {
                         ForEach(0..<units.count, id: \.self) { index in
-                                TopCommentStackUnitView(width: unitWidth, unit: units[index], toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
+                                TopCommentStackUnitView(unit: units[index], toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor, syllableViewSize: syllableViewSize)
                         }
                 }
         }
@@ -229,14 +225,14 @@ struct BottomCommentStackView: View {
                 self.toneStyle = toneStyle
                 self.shouldModifyToneColor = shouldModifyToneColor
         }
-        private let unitWidth: CGFloat = 36 // FIXME: Dynamic size
         private let units: [StackUnit]
         private let toneStyle: ToneDisplayStyle
         private let shouldModifyToneColor: Bool
+        private let syllableViewSize: CGSize = AppSettings.syllableViewSize
         var body: some View {
                 HStack(alignment: .firstTextBaseline, spacing: 1) {
                         ForEach(0..<units.count, id: \.self) { index in
-                                BottomCommentStackUnitView(width: unitWidth, unit: units[index], toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
+                                BottomCommentStackUnitView(unit: units[index], toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor, syllableViewSize: syllableViewSize)
                         }
                 }
         }
@@ -290,8 +286,8 @@ struct HorizontalPageCandidateLabel: View {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 Text(verbatim: candidate.text).font(.candidate)
                         }
-                        .padding(.top, commentStyle == .top ? 4 : 0)
-                        .padding(.bottom, commentStyle == .bottom ? 4 : 0)
+                        .padding(.top, commentStyle == .top ? 8 : 0)
+                        .padding(.bottom, commentStyle == .bottom ? 8 : 0)
                 case .emoji, .emojiSequence, .symbol, .symbolSequence:
                         HStack(spacing: 4) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
@@ -300,8 +296,8 @@ struct HorizontalPageCandidateLabel: View {
                                         Text(verbatim: comment).font(.annotation)
                                 }
                         }
-                        .padding(.top, commentStyle == .top ? 4 : 0)
-                        .padding(.bottom, commentStyle == .bottom ? 4 : 0)
+                        .padding(.top, commentStyle == .top ? 8 : 0)
+                        .padding(.bottom, commentStyle == .bottom ? 8 : 0)
                 case .compose:
                         HStack(spacing: 4) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)

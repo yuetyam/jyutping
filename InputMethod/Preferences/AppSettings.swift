@@ -264,6 +264,7 @@ struct AppSettings {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 commentFontSize = CGFloat(newFontSize)
+                updateSyllableViewSize()
                 Font.updateCommentFont()
         }
 
@@ -287,6 +288,18 @@ struct AppSettings {
         private static let defaultCommentFontSize: Int = 13
         private static let defaultLabelFontSize: Int = 13
         static let fontSizeRange: Range<Int> = 10..<25
+
+
+        // Candidate StackView syllable text frame
+        private(set) static var syllableViewSize: CGSize = computeSyllableViewSize()
+        private static func updateSyllableViewSize() {
+                syllableViewSize = computeSyllableViewSize()
+        }
+        private static func computeSyllableViewSize() -> CGSize {
+                let width: CGFloat = commentFontSize * 2.0 + 8.0
+                let height: CGFloat = commentFontSize
+                return CGSize(width: width, height: height)
+        }
 
 
         // MARK: - Font Mode

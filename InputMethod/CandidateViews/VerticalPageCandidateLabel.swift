@@ -17,65 +17,61 @@ struct VerticalPageCandidateLabel: View {
         private let toneStyle: ToneDisplayStyle
         private let shouldModifyToneColor: Bool
         var body: some View {
-                HStack(spacing: 0) {
-                        switch candidate.candidate.type {
-                        case .cantonese:
-                                switch commentStyle {
-                                case .top:
-                                        HStack(alignment: .lastTextBaseline, spacing: 4) {
-                                                Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                                TopCommentStackView(text: candidate.text, romanization: candidate.comment!, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
-                                        }
-                                case .bottom:
-                                        HStack(alignment: .firstTextBaseline, spacing: 4) {
-                                                Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                                BottomCommentStackView(text: candidate.text, romanization: candidate.comment!, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
-                                        }
-                                case .right:
-                                        HStack(spacing: 8) {
-                                                Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                                Text(verbatim: candidate.text).font(.candidate)
-                                                if let comment = candidate.comment {
-                                                        CommentLabel(comment, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
-                                                }
-                                        }
-                                case .noComments:
-                                        HStack(spacing: 8) {
-                                                Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                                Text(verbatim: candidate.text).font(.candidate)
-                                        }
-                                }
-                        case .text:
-                                HStack(spacing: 8) {
+                switch candidate.candidate.type {
+                case .cantonese:
+                        switch commentStyle {
+                        case .top:
+                                HStack(alignment: .lastTextBaseline, spacing: 4) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                        Text(verbatim: candidate.text).font(.candidate)
+                                        TopCommentStackView(text: candidate.text, romanization: candidate.comment!, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
                                 }
-                                .padding(.vertical, commentStyle.isVertical ? 4 : 0)
-                        case .emoji, .emojiSequence, .symbol, .symbolSequence:
-                                HStack(spacing: 8) {
+                        case .bottom:
+                                HStack(alignment: .firstTextBaseline, spacing: 4) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
-                                        HStack(spacing: commentStyle.isVertical ? 2 : 10) {
-                                                Text(verbatim: candidate.text).font(.candidate)
-                                                if let comment = candidate.comment {
-                                                        Text(verbatim: comment).font(.annotation)
-                                                }
-                                        }
+                                        BottomCommentStackView(text: candidate.text, romanization: candidate.comment!, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
                                 }
-                                .padding(.vertical, commentStyle.isVertical ? 4 : 0)
-                        case .compose:
+                        case .right:
                                 HStack(spacing: 8) {
                                         Text(verbatim: label).font(.label).opacity(labelOpacity)
                                         Text(verbatim: candidate.text).font(.candidate)
                                         if let comment = candidate.comment {
-                                                Text(verbatim: comment).font(.annotation)
+                                                CommentLabel(comment, toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor)
                                         }
-                                        if let secondaryComment = candidate.secondaryComment {
-                                                Text(verbatim: secondaryComment).font(.annotation)
+                                }
+                        case .noComments:
+                                HStack(spacing: 8) {
+                                        Text(verbatim: label).font(.label).opacity(labelOpacity)
+                                        Text(verbatim: candidate.text).font(.candidate)
+                                }
+                        }
+                case .text:
+                        HStack(spacing: 8) {
+                                Text(verbatim: label).font(.label).opacity(labelOpacity)
+                                Text(verbatim: candidate.text).font(.candidate)
+                        }
+                        .padding(.vertical, commentStyle.isVertical ? 4 : 0)
+                case .emoji, .emojiSequence, .symbol, .symbolSequence:
+                        HStack(spacing: 8) {
+                                Text(verbatim: label).font(.label).opacity(labelOpacity)
+                                HStack(spacing: commentStyle.isVertical ? 2 : 10) {
+                                        Text(verbatim: candidate.text).font(.candidate)
+                                        if let comment = candidate.comment {
+                                                Text(verbatim: comment).font(.annotation)
                                         }
                                 }
                         }
-                        Spacer()
-                        Color.clear.frame(width: 1, height: 1)
+                        .padding(.vertical, commentStyle.isVertical ? 4 : 0)
+                case .compose:
+                        HStack(spacing: 8) {
+                                Text(verbatim: label).font(.label).opacity(labelOpacity)
+                                Text(verbatim: candidate.text).font(.candidate)
+                                if let comment = candidate.comment {
+                                        Text(verbatim: comment).font(.annotation)
+                                }
+                                if let secondaryComment = candidate.secondaryComment {
+                                        Text(verbatim: secondaryComment).font(.annotation)
+                                }
+                        }
                 }
         }
 }
