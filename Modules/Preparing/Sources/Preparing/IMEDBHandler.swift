@@ -11,7 +11,8 @@ struct IMEDBHandler {
                 createT2STable()
                 createComposeTable()
                 createPinyinTable()
-                createShapeTable()
+                createCangjieTable()
+                createStrokeTable()
                 createSymbolTable()
                 createTextMarkTable()
                 createIndies()
@@ -29,6 +30,29 @@ struct IMEDBHandler {
                 let backup = sqlite3_backup_init(destination, "main", database, "main")
                 guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return }
                 guard sqlite3_backup_finish(backup) == SQLITE_OK else { return }
+        }
+
+        private static func createIndies() {
+                let commands: [String] = [
+                        "CREATE INDEX lexiconpingindex ON lexicontable(ping);",
+                        "CREATE INDEX lexiconshortcutindex ON lexicontable(shortcut);",
+                        "CREATE INDEX lexiconwordindex ON lexicontable(word);",
+                        "CREATE INDEX composepingindex ON composetable(ping);",
+                        "CREATE INDEX pinyinshortcutindex ON pinyintable(shortcut);",
+                        "CREATE INDEX pinyinpingindex ON pinyintable(ping);",
+                        "CREATE INDEX cangjiecangjieindex ON cangjietable(cangjie);",
+                        "CREATE INDEX cangjiecodeindex ON cangjietable(code);",
+                        "CREATE INDEX strokestrokeindex ON stroketable(stroke);",
+                        "CREATE INDEX strokecodeindex ON stroketable(code);",
+                        "CREATE INDEX symbolshortcutindex ON symboltable(shortcut);",
+                        "CREATE INDEX symbolpingindex ON symboltable(ping);"
+                ]
+                for command in commands {
+                        var statement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(statement) }
+                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(statement) == SQLITE_DONE else { return }
+                }
         }
 
         private static func createLexiconTable() {
@@ -61,26 +85,6 @@ struct IMEDBHandler {
                         }
                         let values: String = entries.joined(separator: ", ")
                         insert(values: values)
-                }
-        }
-        private static func createIndies() {
-                let commands: [String] = [
-                        "CREATE INDEX lexiconpingindex ON lexicontable(ping);",
-                        "CREATE INDEX lexiconshortcutindex ON lexicontable(shortcut);",
-                        "CREATE INDEX lexiconwordindex ON lexicontable(word);",
-                        "CREATE INDEX composepingindex ON composetable(ping);",
-                        "CREATE INDEX pinyinshortcutindex ON pinyintable(shortcut);",
-                        "CREATE INDEX pinyinpingindex ON pinyintable(ping);",
-                        "CREATE INDEX shapecangjieindex ON shapetable(cangjie);",
-                        "CREATE INDEX shapestrokeindex ON shapetable(stroke);",
-                        "CREATE INDEX symbolshortcutindex ON symboltable(shortcut);",
-                        "CREATE INDEX symbolpingindex ON symboltable(ping);"
-                ]
-                for command in commands {
-                        var statement: OpaquePointer? = nil
-                        guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { sqlite3_finalize(statement); return }
-                        guard sqlite3_step(statement) == SQLITE_DONE else { sqlite3_finalize(statement); return }
-                        sqlite3_finalize(statement)
                 }
         }
 
@@ -165,26 +169,47 @@ struct IMEDBHandler {
                         insert(values: values)
                 }
         }
-        private static func createShapeTable() {
-                let createTable: String = "CREATE TABLE shapetable(word TEXT NOT NULL, complex INTEGER NOT NULL, cangjie TEXT NOT NULL, stroke TEXT NOT NULL);"
+        private static func createCangjieTable() {
+                let createTable: String = "CREATE TABLE cangjietable(word TEXT NOT NULL, cangjie TEXT NOT NULL, complex INTEGER NOT NULL, code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                guard let url = Bundle.module.url(forResource: "shape", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
-                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+                let sourceLines: [String] = Cangjie.generate()
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 4 else { return nil }
                         let word = parts[0]
-                        let complex = parts[1]
-                        let cangjie = parts[2]
-                        let stroke = parts[3]
-                        return "('\(word)', \(complex), '\(cangjie)', '\(stroke)')"
+                        let cangjie = parts[1]
+                        let complex = parts[2]
+                        let code = parts[3]
+                        return "('\(word)', '\(cangjie)', \(complex), \(code))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO shapetable (word, complex, cangjie, stroke) VALUES \(values);"
+                let insert: String = "INSERT INTO cangjietable (word, cangjie, complex, code) VALUES \(values);"
+                var insertStatement: OpaquePointer? = nil
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+        private static func createStrokeTable() {
+                let createTable: String = "CREATE TABLE stroketable(word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, code INTEGER NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                let sourceLines: [String] = Stroke.generate()
+                let entries = sourceLines.compactMap { sourceLine -> String? in
+                        let parts = sourceLine.split(separator: "\t")
+                        guard parts.count == 4 else { return nil }
+                        let word = parts[0]
+                        let stroke = parts[1]
+                        let complex = parts[2]
+                        let code = parts[3]
+                        return "('\(word)', '\(stroke)', \(complex), \(code))"
+                }
+                let values: String = entries.joined(separator: ", ")
+                let insert: String = "INSERT INTO stroketable (word, stroke, complex, code) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
