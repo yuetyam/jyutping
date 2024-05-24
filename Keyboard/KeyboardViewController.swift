@@ -197,11 +197,11 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReturnKey()
                         case (false, true):
                                 inputStage = .ending
-                                if !(selectedCandidates.isEmpty) {
+                                if Options.isInputMemoryOn && !(selectedCandidates.isEmpty) {
                                         let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
-                                        selectedCandidates = []
                                         UserLexicon.handle(concatenated)
                                 }
+                                selectedCandidates = []
                                 updateReturnKey()
                         case (false, false):
                                 inputStage = .ongoing
@@ -238,18 +238,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 inputStage = .standby
                         case (true, false):
                                 inputStage = .starting
-                                if textDocumentProxy.keyboardType == .webSearch {
-                                        // REASON: Chrome address bar
-                                        textDocumentProxy.insertText(String.empty)
-                                }
                                 updateReturnKey()
                         case (false, true):
                                 inputStage = .ending
-                                if !(selectedCandidates.isEmpty) {
+                                if Options.isInputMemoryOn && !(selectedCandidates.isEmpty) {
                                         let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
-                                        selectedCandidates = []
                                         UserLexicon.handle(concatenated)
                                 }
+                                selectedCandidates = []
                                 updateReturnKey()
                         case (false, false):
                                 inputStage = .ongoing
@@ -535,7 +531,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return
                 }
                 let segmentation = Segmentor.segment(combos: bufferCombos)
-                let userLexiconCandidates: [Candidate] = UserLexicon.tenKeySuggest(combos: bufferCombos, segmentation: segmentation)
+                let userLexiconCandidates: [Candidate] = Options.isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: bufferCombos, segmentation: segmentation) : []
                 let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: bufferCombos, segmentation: segmentation)
                 text2mark = userLexiconCandidates.first?.mark ?? engineCandidates.first?.mark ?? String(bufferCombos.compactMap(\.letters.first))
                 candidates = (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
@@ -544,7 +540,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func suggest() {
                 let processingText: String = bufferText.toneConverted()
                 let segmentation = Segmentor.segment(text: processingText)
-                let userLexiconCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
+                let userLexiconCandidates: [Candidate] = Options.isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let asap: Bool = !(userLexiconCandidates.isEmpty)
                 let engineCandidates: [Candidate] = Engine.suggest(origin: bufferText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)

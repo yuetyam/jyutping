@@ -39,6 +39,7 @@ struct SettingsView: View {
         @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
+        @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
         @State private var isPerformingClearUserLexicon: Bool = false
         @State private var clearUserLexiconProgress: Double = 0
@@ -376,23 +377,10 @@ struct SettingsView: View {
                                 }
 
                                 Section {
-                                        Menu {
-                                                Button {
-                                                        UIPasteboard.general.string = version
-                                                } label: {
-                                                        Label("SettingsView.Copy", systemImage: "doc.on.doc")
+                                        Toggle("SettingsView.Toggle.InputMemory", isOn: $isInputMemoryOn)
+                                                .onChange(of: isInputMemoryOn) { newValue in
+                                                        Options.updateInputMemory(to: newValue)
                                                 }
-                                        } label: {
-                                                HStack {
-                                                        Text("SettingsView.Version")
-                                                        Spacer()
-                                                        Text(verbatim: version)
-                                                }
-                                                .foregroundStyle(Color.primary)
-                                        }
-                                }
-
-                                Section {
                                         ZStack {
                                                 Menu {
                                                         Button(role: .destructive) {
@@ -407,12 +395,12 @@ struct SettingsView: View {
                                                         }
                                                 } label: {
                                                         HStack {
-                                                                Spacer()
                                                                 Text("SettingsView.ClearUserLexicon")
                                                                 Spacer()
                                                         }
                                                         .foregroundStyle(Color.red)
                                                 }
+                                                .opacity(isPerformingClearUserLexicon ? 0.5 : 1)
                                                 ProgressView(value: clearUserLexiconProgress).opacity(isPerformingClearUserLexicon ? 1 : 0)
                                         }
                                         .onReceive(timer) { _ in
@@ -423,6 +411,27 @@ struct SettingsView: View {
                                                         clearUserLexiconProgress += 0.1
                                                 }
                                         }
+                                } header: {
+                                        Text("SettingsView.SectionHeader.UserLexicon").textCase(nil)
+                                }
+
+                                Section {
+                                        Menu {
+                                                Button {
+                                                        UIPasteboard.general.string = version
+                                                } label: {
+                                                        Label("SettingsView.Copy", systemImage: "doc.on.doc")
+                                                }
+                                        } label: {
+                                                HStack {
+                                                        Text("SettingsView.Version")
+                                                        Spacer()
+                                                        Text(verbatim: version)
+                                                }
+                                                .foregroundStyle(Color.primary)
+                                        }
+                                } header: {
+                                        Text(verbatim: String.space)
                                 }
                         }
                         .scrollContentBackground(.hidden)

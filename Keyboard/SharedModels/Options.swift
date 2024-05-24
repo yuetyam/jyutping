@@ -43,24 +43,6 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.AudioFeedback)
         }
 
-        /// 候選詞是否包含 Emoji
-        private(set) static var isEmojiSuggestionsOn: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
-                switch savedValue {
-                case 0, 1:
-                        return true
-                case 2:
-                        return false
-                default:
-                        return true
-                }
-        }()
-        static func updateEmojiSuggestions(to state: Bool) {
-                isEmojiSuggestionsOn = state
-                let value: Int = state ? 1 : 2
-                UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
-        }
-
         /// Cantonese Keyboard Layout. Qwerty / TripleStroke / TenKey
         private(set) static var keyboardLayout: KeyboardLayout = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
@@ -152,6 +134,23 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CommentToneStyle)
         }
 
+        private(set) static var isEmojiSuggestionsOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
+                switch savedValue {
+                case 0, 1:
+                        return true
+                case 2:
+                        return false
+                default:
+                        return true
+                }
+        }()
+        static func updateEmojiSuggestions(to isOn: Bool) {
+                isEmojiSuggestionsOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
+        }
+
         private(set) static var doubleSpaceShortcut: DoubleSpaceShortcut = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.DoubleSpaceShortcut)
                 switch savedValue {
@@ -172,19 +171,37 @@ struct Options {
                 let value: Int = shortcut.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.DoubleSpaceShortcut)
         }
+
+        private(set) static var isInputMemoryOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.UserLexiconInputMemory)
+                switch savedValue {
+                case 0, 1:
+                        return true
+                case 2:
+                        return false
+                default:
+                        return true
+                }
+        }()
+        static func updateInputMemory(to isOn: Bool) {
+                isInputMemoryOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: OptionsKey.UserLexiconInputMemory)
+        }
 }
 
 struct OptionsKey {
         static let CharacterStandard: String = "logogram"
         static let AudioFeedback: String = "audio_feedback"
         static let HapticFeedback: String = "haptic_feedback"
-        static let EmojiSuggestions: String = "emoji"
         static let KeyboardLayout: String = "keyboard_layout"
         static let KeyCase: String = "KeyCase"
         static let KeyTextPreview: String = "KeyPreview"
         static let CommentStyle: String = "jyutping_display"
         static let CommentToneStyle: String = "tone_style"
+        static let EmojiSuggestions: String = "emoji"
         static let DoubleSpaceShortcut: String = "double_space_shortcut"
+        static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 }
 
 enum CommentStyle: Int {
