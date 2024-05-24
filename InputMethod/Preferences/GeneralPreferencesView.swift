@@ -118,7 +118,7 @@ struct GeneralPreferencesView: View {
                                                 Text("GeneralPreferencesView.SectionHeader.UserLexicon").font(.subheadline).padding(.horizontal)
                                                 Spacer()
                                         }
-                                        VStack(spacing: 26) {
+                                        VStack(spacing: 20) {
                                                 HStack {
                                                         Toggle("GeneralPreferencesView.Toggle.InputMemory", isOn: $isInputMemoryOn)
                                                                 .toggleStyle(.switch)
@@ -164,7 +164,10 @@ struct GeneralPreferencesView: View {
                                                         Spacer()
                                                 }
                                         }
-                                        .block()
+                                        .padding(.horizontal, 12)
+                                        .padding(.top, 12)
+                                        .padding(.bottom, 1)
+                                        .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 }
                         }
                         .textSelection(.enabled)
