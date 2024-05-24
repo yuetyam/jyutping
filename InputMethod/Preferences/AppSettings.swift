@@ -8,6 +8,7 @@ struct SettingsKey {
         static let CommentDisplayStyle: String = "CommentDisplayStyle"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
         static let ToneDisplayColor: String = "ToneDisplayColor"
+        static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
 
         static let CandidateFontSize: String = "CandidateFontSize"
@@ -236,6 +237,26 @@ struct AppSettings {
         static func updateToneDisplayColor(to value: Int) {
                 let newColor: ToneDisplayColor = ToneDisplayColor.color(of: value)
                 toneDisplayColor = newColor
+        }
+
+
+        // MARK: - User Lexicon
+
+        private(set) static var isInputMemoryOn: Bool = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.UserLexiconInputMemory)
+                switch savedValue {
+                case 0, 1:
+                        return true
+                case 2:
+                        return false
+                default:
+                        return true
+                }
+        }()
+        static func updateInputMemory(to isOn: Bool) {
+                isInputMemoryOn = isOn
+                let value: Int = isOn ? 1 : 2
+                UserDefaults.standard.set(value, forKey: SettingsKey.UserLexiconInputMemory)
         }
 
 

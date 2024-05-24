@@ -202,11 +202,6 @@ final class JyutpingInputController: IMKInputController {
                                 Engine.prepare()
                         case (false, true):
                                 inputStage = .ending
-                                let shouldHandleSelectedCandidates: Bool = !(selectedCandidates.isEmpty)
-                                guard shouldHandleSelectedCandidates else { return }
-                                let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
-                                selectedCandidates = []
-                                UserLexicon.handle(concatenated)
                         case (false, false):
                                 inputStage = .ongoing
                         }
@@ -214,6 +209,11 @@ final class JyutpingInputController: IMKInputController {
                 didSet {
                         switch bufferText.first {
                         case .none:
+                                if AppSettings.isInputMemoryOn && !(selectedCandidates.isEmpty) {
+                                        let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
+                                        UserLexicon.handle(concatenated)
+                                }
+                                selectedCandidates = []
                                 clearMarkedText()
                                 candidates = []
                         case .some("r"):
@@ -316,7 +316,7 @@ final class JyutpingInputController: IMKInputController {
         private func suggest() {
                 let processingText: String = bufferText.toneConverted()
                 let segmentation = Segmentor.segment(text: processingText)
-                let userLexiconCandidates: [Candidate] = UserLexicon.suggest(text: processingText, segmentation: segmentation)
+                let userLexiconCandidates: [Candidate] = AppSettings.isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
                 let asap: Bool = !(userLexiconCandidates.isEmpty)
                 let engineCandidates: [Candidate] = Engine.suggest(origin: bufferText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
