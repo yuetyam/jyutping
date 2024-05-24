@@ -13,7 +13,7 @@ private struct MacToneTipView: View {
                 }
                 .font(.master)
                 .textSelection(.enabled)
-                .padding(.horizontal)
+                .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
@@ -44,7 +44,7 @@ struct MacJyutpingToneTable: View {
                                                 Text(verbatim: "粵拼")
                                                 Spacer()
                                         }
-                                        .padding(.horizontal)
+                                        .padding(.horizontal, 12)
                                         VStack {
                                                 MacToneLabel(word: "芬", syllable: "fan1", value: "55/53", name: "陰平", jyutping: "1")
                                                 MacToneLabel(word: "粉", syllable: "fan2", value: "35", name: "陰上", jyutping: "2")

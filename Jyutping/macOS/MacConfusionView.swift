@@ -12,7 +12,7 @@ struct MacConfusionView: View {
                 ScrollView {
                         LazyVStack(alignment: .leading, spacing: 8) {
                                 HStack {
-                                        Text(verbatim: "簡化字").frame(width: 64)
+                                        Text(verbatim: "簡化字").frame(width: 60)
                                         Text(verbatim: "傳統漢字").frame(width: 96, alignment: .leading).padding(.leading, 32)
                                         Text(verbatim: "備註")
                                         Spacer()
@@ -44,7 +44,7 @@ private struct EntryView: View {
         let entry: ConfusionEntry
         var body: some View {
                 HStack {
-                        Text(verbatim: entry.simplified).frame(width: 64)
+                        Text(verbatim: entry.simplified).frame(width: 60)
                         VStack(alignment: .leading, spacing: 4) {
                                 ForEach(0..<entry.traditional.count, id: \.self) { index in
                                         let unit: ConfusionTraditional = entry.traditional[index]

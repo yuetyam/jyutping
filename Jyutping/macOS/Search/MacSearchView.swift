@@ -52,7 +52,8 @@ struct MacSearchView: View {
                                 .font(.master)
                                 .padding(8)
                                 .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                                .padding()
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
                                 .onAppear {
                                         isTextFieldFocused = true
                                 }

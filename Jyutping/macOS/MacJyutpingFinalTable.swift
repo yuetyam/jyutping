@@ -23,7 +23,7 @@ struct MacJyutpingFinalTable: View {
                                                 Spacer()
                                         }
                                         .font(.master)
-                                        .padding(.horizontal)
+                                        .padding(.horizontal, 12)
                                         VStack {
                                                 MacFinalLabel(word: "駕", syllable: "gaa3", jyutping: "aa", ipa: "[ aː ]")
                                                 MacFinalLabel(word: "界", syllable: "gaai3", jyutping: "aai", ipa: "[ aːi ]")
@@ -64,7 +64,7 @@ struct MacJyutpingFinalTable: View {
                                         Text(verbatim: "韻母 -eu, -em, -ep, -et 通常只見於口語白讀。韻母 -ing/-eng, -ik/-ek 部分字音係文白異讀關係。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
-                                                .padding(.horizontal)
+                                                .padding(.horizontal, 12)
                                 }
                                 VStack {
                                         MacFinalLabel(word: "意", syllable: "ji3", jyutping: "i", ipa: "[ iː ]")
@@ -107,7 +107,7 @@ struct MacJyutpingFinalTable: View {
                                         Text(verbatim: "韻母 -oet 通常只見於口語擬聲詞。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
-                                                .padding(.horizontal)
+                                                .padding(.horizontal, 12)
                                 }
                                 VStack(alignment: .leading, spacing: 2) {
                                         VStack {
@@ -119,7 +119,7 @@ struct MacJyutpingFinalTable: View {
                                         Text(verbatim: "韻腹 -oe-, -eo- 通常係音節互補關係，打字時可以混用。")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
-                                                .padding(.horizontal)
+                                                .padding(.horizontal, 12)
                                 }
                                 VStack {
                                         MacFinalLabel(word: "恕", syllable: "syu3", jyutping: "yu", ipa: "[ yː ]")
@@ -131,7 +131,7 @@ struct MacJyutpingFinalTable: View {
                                         Text(verbatim: "鼻音單獨成韻")
                                                 .font(.copilot)
                                                 .foregroundStyle(Color.secondary)
-                                                .padding(.horizontal)
+                                                .padding(.horizontal, 12)
                                         VStack {
                                                 MacFinalLabel(word: "毋", syllable: "m4", jyutping: "m", ipa: "[ m̩ ]")
                                                 MacFinalLabel(word: "吳", syllable: "ng4", jyutping: "ng", ipa: "[ ŋ̩ ]")

@@ -17,7 +17,7 @@ struct MacMetroLineView: View {
                                         Image(systemName: isExpanded ? "chevron.down" : "chevron.backward")
                                 }
                                 .textSelection(.disabled)
-                                .padding(.vertical)
+                                .padding(.vertical, 12)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                         isExpanded.toggle()
@@ -29,8 +29,8 @@ struct MacMetroLineView: View {
                                 }
                                 .fixedSize(horizontal: true, vertical: false)
                         }
-                        .padding(.bottom)
-                        .padding(.horizontal)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 12)
                         .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                 } else {
                         HStack {
