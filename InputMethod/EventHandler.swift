@@ -81,11 +81,11 @@ extension JyutpingInputController {
                 let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
                 guard !shouldIgnoreCurrentEvent else { return false }
                 let client: InputClient? = (sender as? InputClient) ?? currentClient
-                currentOrigin = client?.position
+                updateCurrentOrigin(to: client?.position)
                 let currentClientID = currentClient?.uniqueClientIdentifierString()
                 let clientID = client?.uniqueClientIdentifierString()
                 if clientID != currentClientID {
-                        currentClient = client
+                        updateCurrentClient(to: client)
                 }
                 lazy var hasControlShiftModifiers: Bool = false
                 let currentInputForm: InputForm = appContext.inputForm

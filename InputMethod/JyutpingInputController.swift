@@ -70,7 +70,7 @@ final class JyutpingInputController: IMKInputController {
                 let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
                 let viewSize: CGSize = {
                         guard let size = window.contentView?.subviews.first?.bounds.size, size.width > 50 else {
-                                return CGSize(width: 800, height: 500)
+                                return CGSize(width: 600, height: 600)
                         }
                         return size
                 }()
@@ -93,20 +93,33 @@ final class JyutpingInputController: IMKInputController {
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
-        private lazy var screenWidth: CGFloat = NSScreen.main?.visibleFrame.size.width ?? window.screen?.visibleFrame.size.width ?? 1920
-        lazy var currentOrigin: CGPoint? = nil
+        private lazy var screenOrigin: CGPoint = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
+        private lazy var screenSize: CGSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1920, height: 1080)
+        private lazy var currentOrigin: CGPoint? = nil
+        func updateCurrentOrigin(to point: CGPoint? ) {
+                guard let point else { return }
+                currentOrigin = point
+        }
 
         typealias InputClient = (IMKTextInput & NSObjectProtocol)
-        lazy var currentClient: InputClient? = nil {
+        private(set) lazy var currentClient: InputClient? = nil {
                 didSet {
                         guard let origin = currentClient?.position else { return }
-                        let isRegularHorizontal: Bool = origin.x < (screenWidth - 400)
-                        let isRegularVertical: Bool = {
-                                switch AppSettings.candidatePageOrientation {
+                        let orientation = AppSettings.candidatePageOrientation
+                        let isRegularHorizontal: Bool = {
+                                switch orientation {
                                 case .horizontal:
-                                        return origin.y > 200
+                                        return (origin.x - screenOrigin.x) < (screenSize.width - 600)
                                 case .vertical:
-                                        return origin.y > 400
+                                        return (origin.x - screenOrigin.x) < (screenSize.width - 400)
+                                }
+                        }()
+                        let isRegularVertical: Bool = {
+                                switch orientation {
+                                case .horizontal:
+                                        return (origin.y - screenOrigin.y) > 300
+                                case .vertical:
+                                        return (origin.y - screenOrigin.y) > 400
                                 }
                         }()
                         let newPattern: WindowPattern = {
@@ -124,6 +137,10 @@ final class JyutpingInputController: IMKInputController {
                         guard newPattern != appContext.windowPattern else { return }
                         appContext.updateWindowPattern(to: newPattern)
                 }
+        }
+        func updateCurrentClient(to inputClient: InputClient?) {
+                guard let inputClient else { return }
+                currentClient = inputClient
         }
 
 
@@ -148,8 +165,9 @@ final class JyutpingInputController: IMKInputController {
                 if appContext.inputForm.isOptions {
                         appContext.updateInputForm()
                 }
-                screenWidth = NSScreen.main?.visibleFrame.size.width ?? window.screen?.visibleFrame.size.width ?? 1920
-                currentClient = sender as? InputClient
+                screenOrigin = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
+                screenSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1920, height: 1080)
+                currentClient = (sender as? InputClient) ?? client()
                 currentOrigin = currentClient?.position
                 DispatchQueue.main.async { [weak self] in
                         self?.prepareWindow()
