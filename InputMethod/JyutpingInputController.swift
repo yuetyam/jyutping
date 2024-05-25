@@ -69,7 +69,7 @@ final class JyutpingInputController: IMKInputController {
         private var windowFrame: CGRect {
                 let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
                 let viewSize: CGSize = {
-                        guard let size = window.contentView?.subviews.first?.bounds.size, size.width > 50 else {
+                        guard let size = window.contentView?.subviews.first?.bounds.size, size.width > 44 else {
                                 return CGSize(width: 600, height: 600)
                         }
                         return size
@@ -111,13 +111,13 @@ final class JyutpingInputController: IMKInputController {
                                 case .horizontal:
                                         return (origin.x - screenOrigin.x) < (screenSize.width - 600)
                                 case .vertical:
-                                        return (origin.x - screenOrigin.x) < (screenSize.width - 400)
+                                        return (origin.x - screenOrigin.x) < (screenSize.width - 300)
                                 }
                         }()
                         let isRegularVertical: Bool = {
                                 switch orientation {
                                 case .horizontal:
-                                        return (origin.y - screenOrigin.y) > 300
+                                        return (origin.y - screenOrigin.y) > 100
                                 case .vertical:
                                         return (origin.y - screenOrigin.y) > 400
                                 }
