@@ -67,6 +67,7 @@ Package.resolved
 ### Generated Databases ###
 *.sqlite
 *.sqlite3
+*.db
 
 
 ### Mac IME Packaging ###

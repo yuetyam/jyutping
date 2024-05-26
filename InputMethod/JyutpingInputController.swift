@@ -109,7 +109,7 @@ final class JyutpingInputController: IMKInputController {
                         let isRegularHorizontal: Bool = {
                                 switch orientation {
                                 case .horizontal:
-                                        return (origin.x - screenOrigin.x) < (screenSize.width - 600)
+                                        return (origin.x - screenOrigin.x) < (screenSize.width - 300)
                                 case .vertical:
                                         return (origin.x - screenOrigin.x) < (screenSize.width - 300)
                                 }
@@ -119,7 +119,7 @@ final class JyutpingInputController: IMKInputController {
                                 case .horizontal:
                                         return (origin.y - screenOrigin.y) > 100
                                 case .vertical:
-                                        return (origin.y - screenOrigin.y) > 400
+                                        return (origin.y - screenOrigin.y) > 300
                                 }
                         }()
                         let newPattern: WindowPattern = {
