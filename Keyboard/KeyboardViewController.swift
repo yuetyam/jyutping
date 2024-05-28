@@ -462,45 +462,72 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 defer {
                         adjustKeyboard()
                 }
-                let isTenKeyKeyboard: Bool = (Options.keyboardLayout == .tenKey) && keyboardInterface.isCompact
-                guard !isTenKeyKeyboard else {
-                        selectedCandidates.append(candidate)
-                        let length: Int = bufferCombos.count - candidate.input.count
-                        bufferCombos = bufferCombos.suffix(length)
-                        return
-                }
-                switch bufferText.first {
-                case .none:
-                        return
-                case .some(let character) where character.isReverseLookupTrigger:
-                        selectedCandidates = []
-                        let leadingCount: Int = candidate.input.count + 1
-                        if bufferText.count > leadingCount {
-                                let tail = bufferText.dropFirst(leadingCount)
-                                bufferText = String(character) + tail
-                        } else {
-                                clearBuffer()
-                        }
-                default:
-                        guard candidate.isCantonese else {
-                                selectedCandidates = []
-                                clearBuffer()
+                switch Options.keyboardLayout {
+                case .qwerty:
+                        switch bufferText.first {
+                        case .none:
                                 return
-                        }
-                        selectedCandidates.append(candidate)
-                        let inputCount: Int = {
-                                switch Options.keyboardLayout {
-                                case .tripleStroke:
-                                        return candidate.input.count
-                                default:
-                                        return candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression).count
+                        case .some(let character) where character.isReverseLookupTrigger:
+                                selectedCandidates = []
+                                let inputCount: Int = candidate.input.count
+                                let leadingCount: Int = inputCount + 1
+                                if bufferText.count > leadingCount {
+                                        let tail = bufferText.dropFirst(leadingCount)
+                                        bufferText = String(character) + tail
+                                } else {
+                                        clearBuffer()
                                 }
-                        }()
-                        var tail = bufferText.dropFirst(inputCount)
-                        while tail.hasPrefix("'") {
-                                tail = tail.dropFirst()
+                        default:
+                                guard candidate.isCantonese else {
+                                        selectedCandidates = []
+                                        clearBuffer()
+                                        return
+                                }
+                                selectedCandidates.append(candidate)
+                                let inputCount: Int = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression).count
+                                var tail = bufferText.dropFirst(inputCount)
+                                while tail.hasPrefix("'") {
+                                        tail = tail.dropFirst()
+                                }
+                                bufferText = String(tail)
                         }
-                        bufferText = String(tail)
+                case .tripleStroke:
+                        // TODO: where keyboardInterface.isCompact ?
+                        switch bufferText.first {
+                        case .none:
+                                return
+                        case .some(let character) where character.isReverseLookupTrigger:
+                                selectedCandidates = []
+                                let inputCount: Int = candidate.input.count
+                                let leadingCount: Int = inputCount + 1
+                                if bufferText.count > leadingCount {
+                                        let tripleStrokeTail = tripleStrokeBuffer.dropFirst(leadingCount)
+                                        let tail = bufferText.dropFirst(leadingCount)
+                                        tripleStrokeBuffer = [String(character)] + tripleStrokeTail
+                                        bufferText = String(character) + tail
+                                } else {
+                                        clearBuffer()
+                                }
+                        default:
+                                guard candidate.isCantonese else {
+                                        selectedCandidates = []
+                                        clearBuffer()
+                                        return
+                                }
+                                selectedCandidates.append(candidate)
+                                let inputCount: Int = candidate.input.count
+                                var tail = bufferText.dropFirst(inputCount)
+                                while tail.hasPrefix("'") {
+                                        tail = tail.dropFirst()
+                                }
+                                tripleStrokeBuffer = tripleStrokeBuffer.suffix(tail.count)
+                                bufferText = String(tail)
+                        }
+                case .tenKey:
+                        selectedCandidates.append(candidate)
+                        let inputCount = candidate.input.count
+                        let tailCount: Int = bufferCombos.count - inputCount
+                        bufferCombos = bufferCombos.suffix(tailCount)
                 }
         }
         private func adjustKeyboard() {
@@ -538,7 +565,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         private func suggest() {
-                let processingText: String = bufferText.toneConverted()
+                let processingText: String = (Options.keyboardLayout == .tripleStroke) ? bufferText : bufferText.toneConverted()
                 let segmentation = Segmentor.segment(text: processingText)
                 let userLexiconCandidates: [Candidate] = Options.isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
