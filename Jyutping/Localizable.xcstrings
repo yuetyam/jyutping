@@ -4300,55 +4300,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過刪晒預輸入拼寫。"
+            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
           }
         }
       }

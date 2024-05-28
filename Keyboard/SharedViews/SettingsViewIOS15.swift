@@ -33,32 +33,35 @@ struct SettingsViewIOS15: View {
 
         var body: some View {
                 VStack(spacing: 0) {
-                        HStack {
-                                Image.upChevron
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding(12)
-                                        .frame(width: 48)
-                                        .frame(maxHeight: .infinity)
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                AudioFeedback.modified()
-                                                context.triggerHapticFeedback()
-                                                context.updateKeyboardForm(to: context.previousKeyboardForm)
-                                        }
-                                Spacer()
-                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding(10)
-                                        .frame(width: 48)
-                                        .frame(maxHeight: .infinity)
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                                AudioFeedback.modified()
-                                                context.triggerHapticFeedback()
-                                                context.toggleKeyboardHeight()
-                                        }
+                        ZStack {
+                                Text("SettingsView.NavigationBar.HintText").font(.footnote).opacity(0.66)
+                                HStack {
+                                        Image.upChevron
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(12)
+                                                .frame(width: 48)
+                                                .frame(maxHeight: .infinity)
+                                                .contentShape(Rectangle())
+                                                .onTapGesture {
+                                                        AudioFeedback.modified()
+                                                        context.triggerHapticFeedback()
+                                                        context.updateKeyboardForm(to: context.previousKeyboardForm)
+                                                }
+                                        Spacer()
+                                        Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(10)
+                                                .frame(width: 48)
+                                                .frame(maxHeight: .infinity)
+                                                .contentShape(Rectangle())
+                                                .onTapGesture {
+                                                        AudioFeedback.modified()
+                                                        context.triggerHapticFeedback()
+                                                        context.toggleKeyboardHeight()
+                                                }
+                                }
                         }
                         .background(Material.ultraThin)
                         .frame(height: context.keyboardInterface.isCompact ? 36 : 44)
