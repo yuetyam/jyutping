@@ -12,12 +12,13 @@ struct MacInstallInputMethodView: View {
                         LazyVStack(spacing: 16) {
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text(verbatim: "由於各種因素限制，本應用程式並冇包含輸入法本身。請前往官網瞭解詳情。")
+                                                Text(verbatim: "由於第三方輸入法無法上架 Mac App Store，所以本應用程式係冇辦法提供輸入法相關功能嘅。詳情可以前往我哋個官網瞭解。")
                                                         .font(.master)
+                                                        .lineSpacing(5)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: "Due to various limitations, this App does not contain an Input Method. Please visit out website for more details.")
+                                                Text(verbatim: "Due to limitations imposed by the Mac App Store on third-party input methods, this app is impossible to provide input method related features. You can find more details on our website.")
                                                 Spacer()
                                         }
                                 }
