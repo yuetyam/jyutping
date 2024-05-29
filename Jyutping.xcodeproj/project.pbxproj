@@ -377,8 +377,6 @@
 		3717DBD02BF9AA0A00DC3DB1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		3717DBD22BF9AF8600DC3DB1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		3717DBD42BF9AF8600DC3DB1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		3717DBD62BF9F67400DC3DB1 /* KeyboardDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KeyboardDebug.xcconfig; sourceTree = "<group>"; };
-		3717DBD82BF9F6C400DC3DB1 /* KeyboardRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = KeyboardRelease.xcconfig; sourceTree = "<group>"; };
 		371B6E362B3B2F72005BB31C /* AppDataSource */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppDataSource; path = Modules/AppDataSource; sourceTree = "<group>"; };
 		371B6E392B3B2FE1005BB31C /* CoreIME */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CoreIME; path = Modules/CoreIME; sourceTree = "<group>"; };
 		371B6E3E2B3B3107005BB31C /* JyutpingApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingApp.swift; sourceTree = "<group>"; };
@@ -1026,8 +1024,6 @@
 				371B6F1C2B3B342E005BB31C /* TenKey */,
 				371B6F392B3B342E005BB31C /* Paths */,
 				371B6F3F2B3B342F005BB31C /* Extensions */,
-				3717DBD62BF9F67400DC3DB1 /* KeyboardDebug.xcconfig */,
-				3717DBD82BF9F6C400DC3DB1 /* KeyboardRelease.xcconfig */,
 				37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */,
 				371EABBD2B3855820075089B /* Info.plist */,
 				3717DBD02BF9AA0A00DC3DB1 /* InfoPlist.xcstrings */,
@@ -2050,7 +2046,6 @@
 /* Begin XCBuildConfiguration section */
 		371EABC22B3855820075089B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3717DBD62BF9F67400DC3DB1 /* KeyboardDebug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2080,7 +2075,6 @@
 		};
 		371EABC32B3855820075089B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3717DBD82BF9F6C400DC3DB1 /* KeyboardRelease.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
