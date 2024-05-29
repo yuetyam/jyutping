@@ -50,7 +50,7 @@ struct MacJyutpingToneTable: View {
                                                 MacToneLabel(word: "粉", syllable: "fan2", value: "35", name: "陰上", jyutping: "2")
                                                 MacToneLabel(word: "訓", syllable: "fan3", value: "33", name: "陰去", jyutping: "3")
                                                 MacToneLabel(word: "焚", syllable: "fan4", value: "21/11", name: "陽平", jyutping: "4")
-                                                MacToneLabel(word: "奮", syllable: "fan5", value: "13/23", name: "陽上", jyutping: "5")
+                                                MacToneLabel(word: "憤", syllable: "fan5", value: "13/23", name: "陽上", jyutping: "5")
                                                 MacToneLabel(word: "份", syllable: "fan6", value: "22", name: "陽去", jyutping: "6")
                                                 MacToneLabel(word: "忽", syllable: "fat1", value: "5", name: "高陰入", jyutping: "1")
                                                 MacToneLabel(word: "法", syllable: "faat3", value: "3", name: "低陰入", jyutping: "3")

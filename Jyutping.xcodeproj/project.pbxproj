@@ -88,7 +88,7 @@
 		371B6EDD2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */; };
 		371B6EDE2B3B3108005BB31C /* MacContentViewMonterey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */; };
 		371B6EDF2B3B3108005BB31C /* MacHundredFamilySurnamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E8F2B3B3108005BB31C /* MacHundredFamilySurnamesView.swift */; };
-		371B6EE02B3B3108005BB31C /* MacInstallInputMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E902B3B3108005BB31C /* MacInstallInputMethodView.swift */; };
+		371B6EE02B3B3108005BB31C /* MacInputMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E902B3B3108005BB31C /* MacInputMethodView.swift */; };
 		371B6EE12B3B3108005BB31C /* MacExpressionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E912B3B3108005BB31C /* MacExpressionsView.swift */; };
 		371B6EE22B3B3108005BB31C /* MacConfusionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E922B3B3108005BB31C /* MacConfusionView.swift */; };
 		371B6EE32B3B3108005BB31C /* MacResourcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E932B3B3108005BB31C /* MacResourcesView.swift */; };
@@ -448,7 +448,7 @@
 		371B6E8D2B3B3108005BB31C /* ChoHokYuetYamCitYiuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoHokYuetYamCitYiuView.swift; sourceTree = "<group>"; };
 		371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacContentViewMonterey.swift; sourceTree = "<group>"; };
 		371B6E8F2B3B3108005BB31C /* MacHundredFamilySurnamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHundredFamilySurnamesView.swift; sourceTree = "<group>"; };
-		371B6E902B3B3108005BB31C /* MacInstallInputMethodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacInstallInputMethodView.swift; sourceTree = "<group>"; };
+		371B6E902B3B3108005BB31C /* MacInputMethodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacInputMethodView.swift; sourceTree = "<group>"; };
 		371B6E912B3B3108005BB31C /* MacExpressionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacExpressionsView.swift; sourceTree = "<group>"; };
 		371B6E922B3B3108005BB31C /* MacConfusionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacConfusionView.swift; sourceTree = "<group>"; };
 		371B6E932B3B3108005BB31C /* MacResourcesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacResourcesView.swift; sourceTree = "<group>"; };
@@ -830,7 +830,7 @@
 			children = (
 				371B6E822B3B3108005BB31C /* MacContentView.swift */,
 				371B6E8E2B3B3108005BB31C /* MacContentViewMonterey.swift */,
-				371B6E902B3B3108005BB31C /* MacInstallInputMethodView.swift */,
+				371B6E902B3B3108005BB31C /* MacInputMethodView.swift */,
 				371B6E842B3B3108005BB31C /* MacIntroductionsView.swift */,
 				371B6E912B3B3108005BB31C /* MacExpressionsView.swift */,
 				371B6E922B3B3108005BB31C /* MacConfusionView.swift */,
@@ -1971,7 +1971,7 @@
 				371B6ED22B3B3108005BB31C /* MacAboutView.swift in Sources */,
 				37311A3C2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift in Sources */,
 				371B6ED62B3B3108005BB31C /* CantoneseTextView.swift in Sources */,
-				371B6EE02B3B3108005BB31C /* MacInstallInputMethodView.swift in Sources */,
+				371B6EE02B3B3108005BB31C /* MacInputMethodView.swift in Sources */,
 				371B6EB82B3B3108005BB31C /* IOSFatshanMetroView.swift in Sources */,
 				371B6EAD2B3B3108005BB31C /* SafariView.swift in Sources */,
 				371B6EBC2B3B3108005BB31C /* IOSConfusionView.swift in Sources */,

@@ -12,7 +12,7 @@ struct MacContentViewMonterey: View {
                         List {
                                 Section {
                                         NavigationLink {
-                                                MacInstallInputMethodView().applyVisualEffect()
+                                                MacInputMethodView().applyVisualEffect()
                                         } label: {
                                                 Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "sparkles")
                                         }
