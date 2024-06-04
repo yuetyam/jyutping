@@ -35,6 +35,7 @@ struct PreferencesView: View {
                                 List(selection: $selection) {
                                         Section {
                                                 Label("PreferencesView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
+                                                Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
                                                 Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(PreferencesSidebarRow.fonts)
                                         } header: {
                                                 Text("PreferencesView.SectionHeader.Candidates").textCase(nil)
@@ -56,6 +57,8 @@ struct PreferencesView: View {
                                 switch selection {
                                 case .general:
                                         GeneralPreferencesView().applyVisualEffect()
+                                case .reverseLookup:
+                                        ReverseLookupView().applyVisualEffect()
                                 case .fonts:
                                         FontPreferencesView().applyVisualEffect()
                                 case .hotkeys:
@@ -70,6 +73,11 @@ struct PreferencesView: View {
                                         Section {
                                                 NavigationLink(destination: GeneralPreferencesView().applyVisualEffect(), isActive: $isGeneralViewActive) {
                                                         Label("PreferencesView.NavigationTitle.General", systemImage: "gear")
+                                                }
+                                                NavigationLink {
+                                                        ReverseLookupView().applyVisualEffect()
+                                                } label: {
+                                                        Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass")
                                                 }
                                                 NavigationLink {
                                                         FontPreferencesView().applyVisualEffect()
@@ -105,6 +113,7 @@ struct PreferencesView: View {
 
 enum PreferencesSidebarRow: Int, Identifiable {
         case general
+        case reverseLookup
         case fonts
         case hotkeys
         case about

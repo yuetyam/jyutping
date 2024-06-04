@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-struct MaterialsHandler {
+struct AppDataPreparer {
 
         fileprivate static var database: OpaquePointer? = nil
 
@@ -31,7 +31,7 @@ struct MaterialsHandler {
         }
 }
 
-private extension MaterialsHandler {
+private extension AppDataPreparer {
         static func createJyutpingTable() {
                 let createTable: String = "CREATE TABLE jyutpingtable(word TEXT NOT NULL, romanization TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
@@ -82,7 +82,7 @@ private extension MaterialsHandler {
                 }
         }
 }
-private extension MaterialsHandler {
+private extension AppDataPreparer {
         static func createCollocationTable() {
                 let createTable: String = "CREATE TABLE collocationtable(word TEXT NOT NULL, romanization TEXT NOT NULL, collocation TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
@@ -108,7 +108,7 @@ private extension MaterialsHandler {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
 }
-private extension MaterialsHandler {
+private extension AppDataPreparer {
         static func createYingWaaTable() {
                 let createTable: String = "CREATE TABLE yingwaatable(code INTEGER NOT NULL, word TEXT NOT NULL, romanization TEXT NOT NULL, pronunciation TEXT NOT NULL, pronunciationmark TEXT NOT NULL, interpretation TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil

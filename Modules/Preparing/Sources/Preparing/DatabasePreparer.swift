@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-struct IMEDBHandler {
+struct DatabasePreparer {
 
         private static var database: OpaquePointer? = nil
 
@@ -12,6 +12,7 @@ struct IMEDBHandler {
                 createComposeTable()
                 createPinyinTable()
                 createCangjieTable()
+                createQuickTable()
                 createStrokeTable()
                 createSymbolTable()
                 createTextMarkTable()
@@ -37,13 +38,25 @@ struct IMEDBHandler {
                         "CREATE INDEX lexiconpingindex ON lexicontable(ping);",
                         "CREATE INDEX lexiconshortcutindex ON lexicontable(shortcut);",
                         "CREATE INDEX lexiconwordindex ON lexicontable(word);",
+
                         "CREATE INDEX composepingindex ON composetable(ping);",
+
                         "CREATE INDEX pinyinshortcutindex ON pinyintable(shortcut);",
                         "CREATE INDEX pinyinpingindex ON pinyintable(ping);",
-                        "CREATE INDEX cangjiecangjieindex ON cangjietable(cangjie);",
-                        "CREATE INDEX cangjiecodeindex ON cangjietable(code);",
+
+                        "CREATE INDEX cangjiecangjie5index ON cangjietable(cangjie5);",
+                        "CREATE INDEX cangjiecj5codeindex ON cangjietable(cj5code);",
+                        "CREATE INDEX cangjiecangjie3index ON cangjietable(cangjie3);",
+                        "CREATE INDEX cangjiecj3codeindex ON cangjietable(cj3code);",
+
+                        "CREATE INDEX quickquick5index ON quicktable(quick5);",
+                        "CREATE INDEX quickq5codeindex ON quicktable(q5code);",
+                        "CREATE INDEX quickquick3index ON quicktable(quick3);",
+                        "CREATE INDEX quickq3codeindex ON quicktable(q3code);",
+
                         "CREATE INDEX strokestrokeindex ON stroketable(stroke);",
                         "CREATE INDEX strokecodeindex ON stroketable(code);",
+
                         "CREATE INDEX symbolshortcutindex ON symboltable(shortcut);",
                         "CREATE INDEX symbolpingindex ON symboltable(ping);"
                 ]
@@ -170,7 +183,7 @@ struct IMEDBHandler {
                 }
         }
         private static func createCangjieTable() {
-                let createTable: String = "CREATE TABLE cangjietable(word TEXT NOT NULL, cangjie TEXT NOT NULL, complex INTEGER NOT NULL, code INTEGER NOT NULL);"
+                let createTable: String = "CREATE TABLE cangjietable(word TEXT NOT NULL, cangjie5 TEXT NOT NULL, cj5complex INTEGER NOT NULL, cj5code INTEGER NOT NULL, cangjie3 TEXT NOT NULL, cj3complex INTEGER NOT NULL, cj3code INTEGER NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
@@ -178,19 +191,57 @@ struct IMEDBHandler {
                 let sourceLines: [String] = Cangjie.generate()
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 4 else { return nil }
+                        guard parts.count == 7 else { return nil }
                         let word = parts[0]
-                        let cangjie = parts[1]
-                        let complex = parts[2]
-                        let code = parts[3]
-                        return "('\(word)', '\(cangjie)', \(complex), \(code))"
+                        let cangjie5 = parts[1]
+                        let cj5complex = parts[2]
+                        let cj5code = parts[3]
+                        let cangjie3 = parts[4]
+                        let cj3complex = parts[5]
+                        let cj3code = parts[6]
+                        return "('\(word)', '\(cangjie5)', \(cj5complex), \(cj5code), '\(cangjie3)', \(cj3complex), \(cj3code))"
                 }
                 let values: String = entries.joined(separator: ", ")
-                let insert: String = "INSERT INTO cangjietable (word, cangjie, complex, code) VALUES \(values);"
+                let insert: String = "INSERT INTO cangjietable (word, cangjie5, cj5complex, cj5code, cangjie3, cj3complex, cj3code) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+        private static func createQuickTable() {
+                let createTable: String = "CREATE TABLE quicktable(word TEXT NOT NULL, quick5 TEXT NOT NULL, q5complex INTEGER NOT NULL, q5code INTEGER NOT NULL, quick3 TEXT NOT NULL, q3complex INTEGER NOT NULL, q3code INTEGER NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                let sourceLines: [String] = Quick.generate()
+                func insert(values: String) {
+                        let insert: String = "INSERT INTO quicktable (word, quick5, q5complex, q5code, quick3, q3complex, q3code) VALUES \(values);"
+                        var insertStatement: OpaquePointer? = nil
+                        defer { sqlite3_finalize(insertStatement) }
+                        guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                        guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+                }
+                let range: Range<Int> = 0..<2000
+                let distance: Int = sourceLines.count / 2000
+                for number in range {
+                        let bound: Int = number == 1999 ? sourceLines.count : ((number + 1) * distance)
+                        let part = sourceLines[(number * distance)..<bound]
+                        let entries = part.compactMap { line -> String? in
+                                let parts = line.split(separator: "\t")
+                                guard parts.count == 7 else { return nil }
+                                let word = parts[0]
+                                let quick5 = parts[1]
+                                let q5complex = parts[2]
+                                let q5code = parts[3]
+                                let quick3 = parts[4]
+                                let q3complex = parts[5]
+                                let q3code = parts[6]
+                                return "('\(word)', '\(quick5)', \(q5complex), \(q5code), '\(quick3)', \(q3complex), \(q3code))"
+                        }
+                        let values: String = entries.joined(separator: ", ")
+                        insert(values: values)
+                }
         }
         private static func createStrokeTable() {
                 let createTable: String = "CREATE TABLE stroketable(word TEXT NOT NULL, stroke TEXT NOT NULL, complex INTEGER NOT NULL, code INTEGER NOT NULL);"

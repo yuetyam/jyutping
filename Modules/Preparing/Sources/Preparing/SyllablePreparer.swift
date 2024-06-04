@@ -1,7 +1,7 @@
 import Foundation
 import SQLite3
 
-public struct SyllableDBHandler {
+public struct SyllablePreparer {
 
         private static var database: OpaquePointer? = nil
 

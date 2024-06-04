@@ -151,6 +151,27 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
         }
 
+        private(set) static var cangjieVariant: CangjieVariant = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CangjieVariant)
+                switch savedValue {
+                case CangjieVariant.cangjie5.rawValue:
+                        return .cangjie5
+                case CangjieVariant.cangjie3.rawValue:
+                        return .cangjie3
+                case CangjieVariant.quick5.rawValue:
+                        return .quick5
+                case CangjieVariant.quick3.rawValue:
+                        return .quick3
+                default:
+                        return .cangjie5
+                }
+        }()
+        static func updateCangjieVariant(to variant: CangjieVariant) {
+                cangjieVariant = variant
+                let value: Int = variant.rawValue
+                UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
+        }
+
         private(set) static var doubleSpaceShortcut: DoubleSpaceShortcut = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.DoubleSpaceShortcut)
                 switch savedValue {
@@ -200,6 +221,7 @@ struct OptionsKey {
         static let CommentStyle: String = "jyutping_display"
         static let CommentToneStyle: String = "tone_style"
         static let EmojiSuggestions: String = "emoji"
+        static let CangjieVariant: String = "CangjieVariant"
         static let DoubleSpaceShortcut: String = "double_space_shortcut"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 }

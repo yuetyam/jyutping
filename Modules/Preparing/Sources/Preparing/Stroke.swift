@@ -57,14 +57,14 @@ struct Stroke {
                 guard let url = Bundle.module.url(forResource: "stroke", withExtension: "txt") else { return }
                 guard let sourceContent = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 2 else { return nil }
                         let word = parts[0]
                         let stroke = parts[1]
                         return "('\(word)', '\(stroke)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let command: String = "INSERT INTO stroketable (word, stroke) VALUES \(values);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }

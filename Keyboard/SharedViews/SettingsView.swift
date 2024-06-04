@@ -38,6 +38,7 @@ struct SettingsView: View {
         @State private var selectedCommentStyle: CommentStyle = Options.commentStyle
         @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
+        @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
@@ -324,6 +325,21 @@ struct SettingsView: View {
                                                         AudioFeedback.modified()
                                                         Options.updateEmojiSuggestions(to: newValue)
                                                 }
+                                }
+
+                                Picker("SettingsView.CangjieVariant.Header", selection: $cangjieVariant) {
+                                        Text("SettingsView.CangjieVariant.Option1").tag(CangjieVariant.cangjie5)
+                                        Text("SettingsView.CangjieVariant.Option2").tag(CangjieVariant.cangjie3)
+                                        Text("SettingsView.CangjieVariant.Option3").tag(CangjieVariant.quick5)
+                                        Text("SettingsView.CangjieVariant.Option4").tag(CangjieVariant.quick3)
+
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: cangjieVariant) { newVariant in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updateCangjieVariant(to: newVariant)
                                 }
 
                                 Section {

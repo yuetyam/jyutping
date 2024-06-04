@@ -1,5 +1,6 @@
 import SwiftUI
 import CommonExtensions
+import CoreIME
 
 struct SettingsKey {
         static let CandidatePageSize: String = "CandidatePageSize"
@@ -8,6 +9,7 @@ struct SettingsKey {
         static let CommentDisplayStyle: String = "CommentDisplayStyle"
         static let ToneDisplayStyle: String = "ToneDisplayStyle"
         static let ToneDisplayColor: String = "ToneDisplayColor"
+        static let CangjieVariant: String = "CangjieVariant"
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
 
@@ -237,6 +239,30 @@ struct AppSettings {
         static func updateToneDisplayColor(to value: Int) {
                 let newColor: ToneDisplayColor = ToneDisplayColor.color(of: value)
                 toneDisplayColor = newColor
+        }
+
+
+        // MARK: - Cangjie / Quick Reverse Lookup
+
+        private(set) static var cangjieVariant: CangjieVariant = {
+                let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CangjieVariant)
+                switch savedValue {
+                case CangjieVariant.cangjie5.rawValue:
+                        return .cangjie5
+                case CangjieVariant.cangjie3.rawValue:
+                        return .cangjie3
+                case CangjieVariant.quick5.rawValue:
+                        return .quick5
+                case CangjieVariant.quick3.rawValue:
+                        return .quick3
+                default:
+                        return .cangjie5
+                }
+        }()
+        static func updateCangjieVariant(to variant: CangjieVariant) {
+                cangjieVariant = variant
+                let value: Int = variant.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.CangjieVariant)
         }
 
 

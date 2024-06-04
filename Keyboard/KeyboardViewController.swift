@@ -614,7 +614,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
                 if isValidSequence {
                         text2mark = String(converted)
-                        let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text)
+                        let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant)
                         candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
                 } else {
                         text2mark = bufferText

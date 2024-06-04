@@ -1,34 +1,52 @@
 import Foundation
 import SQLite3
 
-struct Cangjie {
+struct Quick {
         static func generate() -> [String] {
                 prepare()
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
                 guard let sourceContent = try? String(contentsOf: url) else { return [] }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let characters = sourceLines.compactMap { line -> String.SubSequence? in
+                let words = sourceLines.compactMap { line -> String.SubSequence? in
                         guard let word = line.split(separator: "\t").first else { return nil }
-                        guard word.count == 1 else { return nil }
                         return word
                 }
-                let entries = characters.uniqued().map { item -> [String] in
-                        let cangjie5Matches = match(cangjie5: item)
-                        let cangjie3Matches = match(cangjie3: item)
-                        guard !(cangjie5Matches.isEmpty && cangjie3Matches.isEmpty) else { return [] }
-                        var instances: [String] = []
-                        let upperBound: Int = max(cangjie5Matches.count, cangjie3Matches.count)
-                        for index in 0..<upperBound {
-                                let cangjie5: String = cangjie5Matches.fetch(index) ?? "X"
-                                let cangjie3: String = cangjie3Matches.fetch(index) ?? "X"
-                                let cj5code = cangjie5.charcode ?? 47
-                                let cj3code: Int = cangjie3.charcode ?? 47
-                                let cj5complex = cangjie5.count
-                                let cj3conplex = cangjie3.count
-                                let instance: String = "\(item)\t\(cangjie5)\t\(cj5complex)\t\(cj5code)\t\(cangjie3)\t\(cj3conplex)\t\(cj3code)"
-                                instances.append(instance)
+                let entries = words.uniqued().map { word -> [String] in
+                        switch word.count {
+                        case 1:
+                                let cangjie5Matches = match(cangjie5: word)
+                                let cangjie3Matches = match(cangjie3: word)
+                                guard !(cangjie5Matches.isEmpty && cangjie3Matches.isEmpty) else { return [] }
+                                var instances: [String] = []
+                                let upperBound: Int = max(cangjie5Matches.count, cangjie3Matches.count)
+                                for index in 0..<upperBound {
+                                        let cangjie5: String = cangjie5Matches.fetch(index) ?? "X"
+                                        let cangjie3: String = cangjie3Matches.fetch(index) ?? "X"
+                                        let quick5: String = (cangjie5.count > 2) ? "\(cangjie5.first!)\(cangjie5.last!)" : cangjie5
+                                        let quick3: String = (cangjie3.count > 2) ? "\(cangjie3.first!)\(cangjie3.last!)" : cangjie3
+                                        let q5complex: Int = quick5.count
+                                        let q3complex: Int = quick3.count
+                                        let q5code: Int = quick5.charcode ?? 47
+                                        let q3code: Int = quick3.charcode ?? 47
+                                        let instance: String = "\(word)\t\(quick5)\t\(q5complex)\t\(q5code)\t\(quick3)\t\(q3complex)\t\(q3code)"
+                                        instances.append(instance)
+                                }
+                                return instances
+                        default:
+                                let characters: [String] = word.map({ String($0) })
+                                let cangjie5Sequence: [String] = characters.map({ match(cangjie5: $0).first ?? "X" })
+                                let cangjie3Sequence: [String] = characters.map({ match(cangjie3: $0).first ?? "X" })
+                                let quick5Sequence: [String] = cangjie5Sequence.map({ $0.count > 2 ? "\($0.first!)\($0.last!)" : $0 })
+                                let quick3Sequence: [String] = cangjie3Sequence.map({ $0.count > 2 ? "\($0.first!)\($0.last!)" : $0 })
+                                let quick5 = quick5Sequence.joined()
+                                let quick3 = quick3Sequence.joined()
+                                let q5complex = quick5.count
+                                let q3complex = quick3.count
+                                let q5code: Int = quick5.charcode ?? 47
+                                let q3code: Int = quick3.charcode ?? 47
+                                let instance: String = "\(word)\t\(quick5)\t\(q5complex)\t\(q5code)\t\(quick3)\t\(q3complex)\t\(q3code)"
+                                return [instance]
                         }
-                        return instances
                 }
                 sqlite3_close_v2(database)
                 return entries.flatMap({ $0 }).uniqued()

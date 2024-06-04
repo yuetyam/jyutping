@@ -231,6 +231,7 @@
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
 		375A90B32BD0797B009784BB /* TenKeyGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */; };
 		375D3A3D2B806C88005F13C1 /* TextRomanizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D3A3C2B806C88005F13C1 /* TextRomanizationView.swift */; };
+		375FA76D2C0D5227001ABA39 /* ReverseLookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */; };
 		3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */; };
 		3762EDD02B8538A000C4E9F1 /* ClipboardFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */; };
 		3762EDD22B85496800C4E9F1 /* GoToSettingsLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762EDD12B85496800C4E9F1 /* GoToSettingsLinkView.swift */; };
@@ -594,6 +595,7 @@
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
 		375D3A3C2B806C88005F13C1 /* TextRomanizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRomanizationView.swift; sourceTree = "<group>"; };
+		375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseLookupView.swift; sourceTree = "<group>"; };
 		3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablingKeyboardView.swift; sourceTree = "<group>"; };
 		3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardFeaturesView.swift; sourceTree = "<group>"; };
 		3762EDD12B85496800C4E9F1 /* GoToSettingsLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoToSettingsLinkView.swift; sourceTree = "<group>"; };
@@ -1315,6 +1317,7 @@
 				37E6AD6A2B3B381700F02279 /* Menu.swift */,
 				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
 				37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */,
+				375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */,
 				37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */,
 				37E6AD592B3B381600F02279 /* HotkeysView.swift */,
 				37E6AD5F2B3B381600F02279 /* AboutView.swift */,
@@ -1855,6 +1858,7 @@
 				37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */,
 				37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */,
 				37E6AD6D2B3B381700F02279 /* HorizontalPageCandidateLabel.swift in Sources */,
+				375FA76D2C0D5227001ABA39 /* ReverseLookupView.swift in Sources */,
 				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
 				37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */,
 				37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */,
