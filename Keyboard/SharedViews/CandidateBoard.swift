@@ -127,7 +127,7 @@ struct CandidateBoard: View {
                                                                                                         .padding(4)
                                                                                         }
                                                                                 }
-                                                                                .frame(minWidth: candidate.width, maxWidth: .infinity)
+                                                                                .frame(minWidth: candidate.width, maxWidth: .infinity, minHeight: collapseHeight)
                                                                         }
                                                                 }
                                                                 if row.identifier == minRowIdentifier {
