@@ -438,18 +438,13 @@ struct AppSettings {
                         return .doNothing
                 }
         }()
-        static func updatePressShiftOnce(to newValue: Int) {
-                let newOption: PressShiftOnce = {
-                        switch newValue {
-                        case 0, 1:
-                                return .doNothing
-                        case 2:
-                                return .switchInputMethodMode
-                        default:
-                                return .doNothing
-                        }
-                }()
-                pressShiftOnce = newOption
+        static func updatePressShiftOnce(to option: PressShiftOnce) {
+                pressShiftOnce = option
+                let value: Int = switch option {
+                case .doNothing: 1
+                case .switchInputMethodMode: 2
+                }
+                UserDefaults.standard.set(value, forKey: SettingsKey.PressShiftOnce)
         }
 
         /// Press Shift+Space TO
@@ -467,17 +462,12 @@ struct AppSettings {
                         return .inputFullWidthSpace
                 }
         }()
-        static func updateShiftSpaceCombination(to newValue: Int) {
-                let newOption: ShiftSpaceCombination = {
-                        switch newValue {
-                        case 0, 1:
-                                return .inputFullWidthSpace
-                        case 2:
-                                return .switchInputMethodMode
-                        default:
-                                return .inputFullWidthSpace
-                        }
-                }()
-                shiftSpaceCombination = newOption
+        static func updateShiftSpaceCombination(to option: ShiftSpaceCombination) {
+                shiftSpaceCombination = option
+                let value: Int = switch option {
+                case .inputFullWidthSpace: 1
+                case .switchInputMethodMode: 2
+                }
+                UserDefaults.standard.set(value, forKey: SettingsKey.ShiftSpaceCombination)
         }
 }

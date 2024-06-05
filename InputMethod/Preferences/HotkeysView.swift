@@ -2,8 +2,8 @@ import SwiftUI
 
 struct HotkeysView: View {
 
-        @AppStorage(SettingsKey.PressShiftOnce) private var pressShiftOnce: Int = AppSettings.pressShiftOnce.rawValue
-        @AppStorage(SettingsKey.ShiftSpaceCombination) private var shiftSpaceCombination: Int = AppSettings.shiftSpaceCombination.rawValue
+        @State private var pressShiftOnce: PressShiftOnce = AppSettings.pressShiftOnce
+        @State private var shiftSpaceCombination: ShiftSpaceCombination = AppSettings.shiftSpaceCombination
 
         var body: some View {
                 ScrollView {
@@ -11,23 +11,23 @@ struct HotkeysView: View {
                                 VStack {
                                         HStack {
                                                 Picker("HotkeysView.PressShiftOnceTo", selection: $pressShiftOnce) {
-                                                        Text("HotkeysView.PressShiftOnceTo.DoNothing").tag(1)
-                                                        Text("HotkeysView.SwitchInputMethodMode").tag(2)
+                                                        Text("HotkeysView.PressShiftOnceTo.DoNothing").tag(PressShiftOnce.doNothing)
+                                                        Text("HotkeysView.SwitchInputMethodMode").tag(PressShiftOnce.switchInputMethodMode)
                                                 }
                                                 .scaledToFit()
-                                                .onChange(of: pressShiftOnce) { newValue in
-                                                        AppSettings.updatePressShiftOnce(to: newValue)
+                                                .onChange(of: pressShiftOnce) { newOption in
+                                                        AppSettings.updatePressShiftOnce(to: newOption)
                                                 }
                                                 Spacer()
                                         }
                                         HStack {
                                                 Picker("HotkeysView.PressShiftSpaceTo", selection: $shiftSpaceCombination) {
-                                                        Text("HotkeysView.PressShiftSpaceTo.InputFullWidthSpace").tag(1)
-                                                        Text("HotkeysView.SwitchInputMethodMode").tag(2)
+                                                        Text("HotkeysView.PressShiftSpaceTo.InputFullWidthSpace").tag(ShiftSpaceCombination.inputFullWidthSpace)
+                                                        Text("HotkeysView.SwitchInputMethodMode").tag(ShiftSpaceCombination.switchInputMethodMode)
                                                 }
                                                 .scaledToFit()
-                                                .onChange(of: shiftSpaceCombination) { newValue in
-                                                        AppSettings.updateShiftSpaceCombination(to: newValue)
+                                                .onChange(of: shiftSpaceCombination) { newOption in
+                                                        AppSettings.updateShiftSpaceCombination(to: newOption)
                                                 }
                                                 Spacer()
                                         }
