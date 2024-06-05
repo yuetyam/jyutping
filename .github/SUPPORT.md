@@ -8,6 +8,6 @@
 
 [Instagram](https://www.instagram.com/jyutping_app) : `@jyutping_app`
 
-[Google Forms Feedback](https://docs.google.com/forms/d/e/1FAIpQLSeyw4yiXr3z-XiGrem_ykaDM9VbyTcoNNzgjc7wgtd_b4Nc0Q/viewform)
+[Google Forms Feedback](https://forms.gle/4N9zwpL7KwnfaeXu6)
 
 [Tencent Survey Feedback](https://wj.qq.com/s2/14037245/fe08)

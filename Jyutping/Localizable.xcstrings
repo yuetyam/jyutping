@@ -4742,7 +4742,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Period (Full Stop) Shortcut"
+            "value" : "Period (Full Stop) shortcut"
           }
         },
         "yue" : {
@@ -4806,7 +4806,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Triple-Stroke / SaamPing (三拼) Keyboard"
+            "value" : "Triple-Stroke (三拼) Keyboard"
           }
         },
         "yue" : {
