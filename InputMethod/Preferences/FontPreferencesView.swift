@@ -6,17 +6,14 @@ struct FontPreferencesView: View {
         private let minusImage: Image = Image(systemName: "minus")
         private let plusImage: Image = Image(systemName: "plus")
 
-        @AppStorage(SettingsKey.CandidateFontSize) private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
-        @AppStorage(SettingsKey.CommentFontSize) private var commentFontSize: Int = Int(AppSettings.commentFontSize)
-        @AppStorage(SettingsKey.LabelFontSize) private var labelFontSize: Int = Int(AppSettings.labelFontSize)
+        @State private var candidateFontSize: Int = Int(AppSettings.candidateFontSize)
+        @State private var commentFontSize: Int = Int(AppSettings.commentFontSize)
+        @State private var labelFontSize: Int = Int(AppSettings.labelFontSize)
+        private let fontSizeRange: Range<Int> = AppSettings.fontSizeRange
 
-        @AppStorage(SettingsKey.CandidateFontMode) private var candidateFontMode: Int = AppSettings.candidateFontMode.rawValue
-        @AppStorage(SettingsKey.CommentFontMode) private var commentFontMode: Int = AppSettings.commentFontMode.rawValue
-        @AppStorage(SettingsKey.LabelFontMode) private var labelFontMode: Int = AppSettings.labelFontMode.rawValue
-
-        @AppStorage(SettingsKey.CustomCandidateFontList) private var customCandidateFontList: String = AppSettings.customCandidateFonts.joined(separator: ",")
-        @AppStorage(SettingsKey.CustomCommentFontList) private var customCommentFontList: String = AppSettings.customCommentFonts.joined(separator: ",")
-        @AppStorage(SettingsKey.CustomLabelFontList) private var customLabelFontList: String = AppSettings.customLabelFonts.joined(separator: ",")
+        @State private var candidateFontMode: FontMode = AppSettings.candidateFontMode
+        @State private var commentFontMode: FontMode = AppSettings.commentFontMode
+        @State private var labelFontMode: FontMode = AppSettings.labelFontMode
 
         @State private var customCandidateFonts: [String] = AppSettings.customCandidateFonts
         @State private var customCommentFonts: [String] = AppSettings.customCommentFonts
@@ -26,8 +23,6 @@ struct FontPreferencesView: View {
         private func triggerAnimation() {
                 animationState += 1
         }
-
-        private let fontSizeRange: Range<Int> = AppSettings.fontSizeRange
 
         var body: some View {
                 ScrollView {
@@ -49,20 +44,19 @@ struct FontPreferencesView: View {
                                         }
                                         HStack {
                                                 Picker("FontPreferencesView.CandidateFont", selection: $candidateFontMode) {
-                                                        Text("FontPreferencesView.Default").tag(1)
-                                                        Text("FontPreferencesView.System").tag(2)
-                                                        Text("FontPreferencesView.Custom").tag(3)
+                                                        Text("FontPreferencesView.Default").tag(FontMode.default)
+                                                        Text("FontPreferencesView.System").tag(FontMode.system)
+                                                        Text("FontPreferencesView.Custom").tag(FontMode.custom)
                                                 }
                                                 .scaledToFit()
-                                                .onChange(of: candidateFontMode) { newValue in
-                                                        let newMode: FontMode = FontMode.mode(of: newValue)
+                                                .onChange(of: candidateFontMode) { newMode in
                                                         DispatchQueue.preferences.async {
                                                                 AppSettings.updateCandidateFontMode(to: newMode)
                                                         }
                                                 }
                                                 Spacer()
                                         }
-                                        if candidateFontMode == 3 {
+                                        if candidateFontMode.isCustom {
                                                 VStack {
                                                         ForEach(0..<customCandidateFonts.count, id: \.self) { index in
                                                                 HStack {
@@ -88,10 +82,8 @@ struct FontPreferencesView: View {
                                                         Spacer()
                                                 }
                                                 .onChange(of: customCandidateFonts) { newFontNames in
-                                                        let newList: [String] = newFontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                                                        customCandidateFontList = newList.joined(separator: ",")
                                                         DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomCandidateFonts(to: newList)
+                                                                AppSettings.updateCustomCandidateFonts(to: newFontNames)
                                                         }
                                                 }
                                         }
@@ -114,20 +106,19 @@ struct FontPreferencesView: View {
                                         }
                                         HStack {
                                                 Picker("FontPreferencesView.CommentFont", selection: $commentFontMode) {
-                                                        Text("FontPreferencesView.Default").tag(1)
-                                                        Text("FontPreferencesView.System").tag(2)
-                                                        Text("FontPreferencesView.Custom").tag(3)
+                                                        Text("FontPreferencesView.Default").tag(FontMode.default)
+                                                        Text("FontPreferencesView.System").tag(FontMode.system)
+                                                        Text("FontPreferencesView.Custom").tag(FontMode.custom)
                                                 }
                                                 .scaledToFit()
-                                                .onChange(of: commentFontMode) { newValue in
-                                                        let newMode: FontMode = FontMode.mode(of: newValue)
+                                                .onChange(of: commentFontMode) { newMode in
                                                         DispatchQueue.preferences.async {
                                                                 AppSettings.updateCommentFontMode(to: newMode)
                                                         }
                                                 }
                                                 Spacer()
                                         }
-                                        if commentFontMode == 3 {
+                                        if commentFontMode.isCustom {
                                                 VStack {
                                                         ForEach(0..<customCommentFonts.count, id: \.self) { index in
                                                                 HStack {
@@ -153,10 +144,8 @@ struct FontPreferencesView: View {
                                                         Spacer()
                                                 }
                                                 .onChange(of: customCommentFonts) { newFontNames in
-                                                        let newList: [String] = newFontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                                                        customCommentFontList = newList.joined(separator: ",")
                                                         DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomCommentFonts(to: newList)
+                                                                AppSettings.updateCustomCommentFonts(to: newFontNames)
                                                         }
                                                 }
                                         }
@@ -179,20 +168,19 @@ struct FontPreferencesView: View {
                                         }
                                         HStack {
                                                 Picker("FontPreferencesView.SerialNumberFont", selection: $labelFontMode) {
-                                                        Text("FontPreferencesView.Default").tag(1)
-                                                        Text("FontPreferencesView.System").tag(2)
-                                                        Text("FontPreferencesView.Custom").tag(3)
+                                                        Text("FontPreferencesView.Default").tag(FontMode.default)
+                                                        Text("FontPreferencesView.System").tag(FontMode.system)
+                                                        Text("FontPreferencesView.Custom").tag(FontMode.custom)
                                                 }
                                                 .scaledToFit()
-                                                .onChange(of: labelFontMode) { newValue in
-                                                        let newMode: FontMode = FontMode.mode(of: newValue)
+                                                .onChange(of: labelFontMode) { newMode in
                                                         DispatchQueue.preferences.async {
                                                                 AppSettings.updateLabelFontMode(to: newMode)
                                                         }
                                                 }
                                                 Spacer()
                                         }
-                                        if labelFontMode == 3 {
+                                        if labelFontMode.isCustom {
                                                 VStack {
                                                         ForEach(0..<customLabelFonts.count, id: \.self) { index in
                                                                 HStack {
@@ -218,10 +206,8 @@ struct FontPreferencesView: View {
                                                         Spacer()
                                                 }
                                                 .onChange(of: customLabelFonts) { newFontNames in
-                                                        let newList: [String] = newFontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                                                        customLabelFontList = newList.joined(separator: ",")
                                                         DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomLabelFonts(to: newList)
+                                                                AppSettings.updateCustomLabelFonts(to: newFontNames)
                                                         }
                                                 }
                                         }

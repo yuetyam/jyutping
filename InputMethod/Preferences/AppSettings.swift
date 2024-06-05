@@ -124,13 +124,17 @@ enum FontMode: Int {
         case system = 2
         case custom = 3
 
+        var isCustom: Bool {
+                return self == .custom
+        }
+
         static func mode(of value: Int) -> FontMode {
                 switch value {
-                case 1:
+                case Self.default.rawValue:
                         return .default
-                case 2:
+                case Self.system.rawValue:
                         return .system
-                case 3:
+                case Self.custom.rawValue:
                         return .custom
                 default:
                         return .default
@@ -304,6 +308,7 @@ struct AppSettings {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 candidateFontSize = CGFloat(newFontSize)
+                UserDefaults.standard.set(newFontSize, forKey: SettingsKey.CandidateFontSize)
                 Font.updateCandidateFont()
         }
 
@@ -317,6 +322,7 @@ struct AppSettings {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 commentFontSize = CGFloat(newFontSize)
+                UserDefaults.standard.set(newFontSize, forKey: SettingsKey.CommentFontSize)
                 updateSyllableViewSize()
                 Font.updateCommentFont()
         }
@@ -331,6 +337,7 @@ struct AppSettings {
                 let isNewFontSizeValid: Bool = fontSizeValidity(of: newFontSize)
                 guard isNewFontSizeValid else { return }
                 labelFontSize = CGFloat(newFontSize)
+                UserDefaults.standard.set(newFontSize, forKey: SettingsKey.LabelFontSize)
                 Font.updateLabelFont()
         }
 
@@ -363,6 +370,8 @@ struct AppSettings {
         }()
         static func updateCandidateFontMode(to newMode: FontMode) {
                 candidateFontMode = newMode
+                let value: Int = newMode.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.CandidateFontMode)
                 Font.updateCandidateFont()
         }
 
@@ -372,6 +381,8 @@ struct AppSettings {
         }()
         static func updateCommentFontMode(to newMode: FontMode) {
                 commentFontMode = newMode
+                let value: Int = newMode.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.CommentFontMode)
                 Font.updateCommentFont()
         }
 
@@ -381,6 +392,8 @@ struct AppSettings {
         }()
         static func updateLabelFontMode(to newMode: FontMode) {
                 labelFontMode = newMode
+                let value: Int = newMode.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.LabelFontMode)
                 Font.updateLabelFont()
         }
 
@@ -396,7 +409,10 @@ struct AppSettings {
                 return names
         }()
         static func updateCustomCandidateFonts(to fontNames: [String]) {
-                customCandidateFonts = fontNames
+                let names: [String] = fontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                customCandidateFonts = names
+                let fontList: String = names.joined(separator: ",")
+                UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomCandidateFontList)
                 Font.updateCandidateFont()
         }
 
@@ -409,7 +425,10 @@ struct AppSettings {
                 return names
         }()
         static func updateCustomCommentFonts(to fontNames: [String]) {
-                customCommentFonts = fontNames
+                let names: [String] = fontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                customCommentFonts = names
+                let fontList: String = names.joined(separator: ",")
+                UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomCommentFontList)
                 Font.updateCommentFont()
         }
 
@@ -422,7 +441,10 @@ struct AppSettings {
                 return names
         }()
         static func updateCustomLabelFonts(to fontNames: [String]) {
-                customLabelFonts = fontNames
+                let names: [String] = fontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                customLabelFonts = names
+                let fontList: String = names.joined(separator: ",")
+                UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomLabelFontList)
                 Font.updateLabelFont()
         }
 
