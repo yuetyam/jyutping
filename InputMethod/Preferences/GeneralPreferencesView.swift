@@ -2,12 +2,15 @@ import SwiftUI
 
 struct GeneralPreferencesView: View {
 
-        @AppStorage(SettingsKey.CandidatePageSize) private var pageSize: Int = AppSettings.displayCandidatePageSize
-        @AppStorage(SettingsKey.CandidateLineSpacing) private var lineSpacing: Int = AppSettings.candidateLineSpacing
-        @AppStorage(SettingsKey.CandidatePageOrientation) private var orientation: Int = AppSettings.candidatePageOrientation.rawValue
-        @AppStorage(SettingsKey.CommentDisplayStyle) private var commentDisplayStyle: Int = AppSettings.commentDisplayStyle.rawValue
-        @AppStorage(SettingsKey.ToneDisplayStyle) private var toneDisplayStyle: Int = AppSettings.toneDisplayStyle.rawValue
-        @AppStorage(SettingsKey.ToneDisplayColor) private var toneDisplayColor: Int = AppSettings.toneDisplayColor.rawValue
+        @State private var pageSize: Int = AppSettings.displayCandidatePageSize
+        @State private var lineSpacing: Int = AppSettings.candidateLineSpacing
+        private let pageSizeRange: Range<Int> = AppSettings.candidatePageSizeRange
+        private let lineSpacingRange: Range<Int> = AppSettings.candidateLineSpacingRange
+
+        @State private var orientation: CandidatePageOrientation = AppSettings.candidatePageOrientation
+        @State private var commentDisplayStyle: CommentDisplayStyle = AppSettings.commentDisplayStyle
+        @State private var toneDisplayStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
+        @State private var toneDisplayColor: ToneDisplayColor = AppSettings.toneDisplayColor
 
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
@@ -16,9 +19,6 @@ struct GeneralPreferencesView: View {
         @State private var isPerformingClearUserLexicon: Bool = false
         @State private var clearUserLexiconProgress: Double = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-
-        private let pageSizeRange: Range<Int> = AppSettings.candidatePageSizeRange
-        private let lineSpacingRange: Range<Int> = AppSettings.candidateLineSpacingRange
 
         var body: some View {
                 ScrollView {
@@ -52,26 +52,26 @@ struct GeneralPreferencesView: View {
                                 .block()
                                 HStack {
                                         Picker("GeneralPreferencesView.CandidatePageOrientation", selection: $orientation) {
-                                                Text("GeneralPreferencesView.CandidatePageOrientation.Horizontal").tag(1)
-                                                Text("GeneralPreferencesView.CandidatePageOrientation.Vertical").tag(2)
+                                                Text("GeneralPreferencesView.CandidatePageOrientation.Horizontal").tag(CandidatePageOrientation.horizontal)
+                                                Text("GeneralPreferencesView.CandidatePageOrientation.Vertical").tag(CandidatePageOrientation.vertical)
                                         }
                                         .scaledToFit()
-                                        .onChange(of: orientation) { newValue in
-                                                AppSettings.updateCandidatePageOrientation(to: newValue)
+                                        .onChange(of: orientation) { newOption in
+                                                AppSettings.updateCandidatePageOrientation(to: newOption)
                                         }
                                         Spacer()
                                 }
                                 .block()
                                 HStack {
                                         Picker("GeneralPreferencesView.CommentStyle", selection: $commentDisplayStyle) {
-                                                Text("GeneralPreferencesView.CommentStyle.Top").tag(1)
-                                                Text("GeneralPreferencesView.CommentStyle.Bottom").tag(2)
-                                                Text("GeneralPreferencesView.CommentStyle.Right").tag(4)
-                                                Text("GeneralPreferencesView.CommentStyle.NoComments").tag(5)
+                                                Text("GeneralPreferencesView.CommentStyle.Top").tag(CommentDisplayStyle.top)
+                                                Text("GeneralPreferencesView.CommentStyle.Bottom").tag(CommentDisplayStyle.bottom)
+                                                Text("GeneralPreferencesView.CommentStyle.Right").tag(CommentDisplayStyle.right)
+                                                Text("GeneralPreferencesView.CommentStyle.NoComments").tag(CommentDisplayStyle.noComments)
                                         }
                                         .scaledToFit()
-                                        .onChange(of: commentDisplayStyle) { newValue in
-                                                AppSettings.updateCommentDisplayStyle(to: newValue)
+                                        .onChange(of: commentDisplayStyle) { newStyle in
+                                                AppSettings.updateCommentDisplayStyle(to: newStyle)
                                         }
                                         Spacer()
                                 }
@@ -79,25 +79,25 @@ struct GeneralPreferencesView: View {
                                 VStack {
                                         HStack {
                                                 Picker("GeneralPreferencesView.CommentToneStyle", selection: $toneDisplayStyle) {
-                                                        Text("GeneralPreferencesView.CommentToneStyle.Normal").tag(1)
-                                                        Text("GeneralPreferencesView.CommentToneStyle.NoTones").tag(2)
-                                                        Text("GeneralPreferencesView.CommentToneStyle.Superscript").tag(3)
-                                                        Text("GeneralPreferencesView.CommentToneStyle.Subscript").tag(4)
+                                                        Text("GeneralPreferencesView.CommentToneStyle.Normal").tag(ToneDisplayStyle.normal)
+                                                        Text("GeneralPreferencesView.CommentToneStyle.NoTones").tag(ToneDisplayStyle.noTones)
+                                                        Text("GeneralPreferencesView.CommentToneStyle.Superscript").tag(ToneDisplayStyle.superscript)
+                                                        Text("GeneralPreferencesView.CommentToneStyle.Subscript").tag(ToneDisplayStyle.subscript)
                                                 }
                                                 .scaledToFit()
-                                                .onChange(of: toneDisplayStyle) { newValue in
-                                                        AppSettings.updateToneDisplayStyle(to: newValue)
+                                                .onChange(of: toneDisplayStyle) { newStyle in
+                                                        AppSettings.updateToneDisplayStyle(to: newStyle)
                                                 }
                                                 Spacer()
                                         }
                                         HStack {
                                                 Picker("GeneralPreferencesView.CommentToneColor", selection: $toneDisplayColor) {
-                                                        Text("GeneralPreferencesView.CommentToneColor.Normal").tag(1)
-                                                        Text("GeneralPreferencesView.CommentToneColor.Shallow").tag(2)
+                                                        Text("GeneralPreferencesView.CommentToneColor.Normal").tag(ToneDisplayColor.normal)
+                                                        Text("GeneralPreferencesView.CommentToneColor.Shallow").tag(ToneDisplayColor.shallow)
                                                 }
                                                 .scaledToFit()
-                                                .onChange(of: toneDisplayColor) { newValue in
-                                                        AppSettings.updateToneDisplayColor(to: newValue)
+                                                .onChange(of: toneDisplayColor) { newOption in
+                                                        AppSettings.updateToneDisplayColor(to: newOption)
                                                 }
                                                 Spacer()
                                         }

@@ -35,9 +35,9 @@ enum CandidatePageOrientation: Int {
         case vertical = 2
         static func orientation(of value: Int) -> CandidatePageOrientation {
                 switch value {
-                case 1:
+                case Self.horizontal.rawValue:
                         return .horizontal
-                case 2:
+                case Self.vertical.rawValue:
                         return .vertical
                 default:
                         return .horizontal
@@ -55,13 +55,13 @@ enum CommentDisplayStyle: Int {
 
         static func style(of value: Int) -> CommentDisplayStyle {
                 switch value {
-                case 1:
+                case Self.top.rawValue:
                         return .top
-                case 2:
+                case Self.bottom.rawValue:
                         return .bottom
-                case 4:
+                case Self.right.rawValue:
                         return .right
-                case 5:
+                case Self.noComments.rawValue:
                         return .noComments
                 default:
                         return .top
@@ -86,13 +86,13 @@ enum ToneDisplayStyle: Int {
 
         static func style(of value: Int) -> ToneDisplayStyle {
                 switch value {
-                case 1:
+                case Self.normal.rawValue:
                         return .normal
-                case 2:
+                case Self.noTones.rawValue:
                         return .noTones
-                case 3:
+                case Self.superscript.rawValue:
                         return .superscript
-                case 4:
+                case Self.subscript.rawValue:
                         return .subscript
                 default:
                         return .normal
@@ -108,9 +108,9 @@ enum ToneDisplayColor: Int {
 
         static func color(of value: Int) -> ToneDisplayColor {
                 switch value {
-                case 1:
+                case Self.normal.rawValue:
                         return .normal
-                case 2:
+                case Self.shallow.rawValue:
                         return .shallow
                 default:
                         return .normal
@@ -169,6 +169,7 @@ struct AppSettings {
                 let isNewPageSizeValid: Bool = pageSizeValidity(of: newPageSize)
                 guard isNewPageSizeValid else { return }
                 displayCandidatePageSize = newPageSize
+                UserDefaults.standard.set(newPageSize, forKey: SettingsKey.CandidatePageSize)
         }
         private static func pageSizeValidity(of value: Int) -> Bool {
                 return candidatePageSizeRange.contains(value)
@@ -189,6 +190,7 @@ struct AppSettings {
                 let isNewLineSpacingValid: Bool = lineSpacingValidity(of: newLineSpacing)
                 guard isNewLineSpacingValid else { return }
                 candidateLineSpacing = newLineSpacing
+                UserDefaults.standard.set(newLineSpacing, forKey: SettingsKey.CandidateLineSpacing)
         }
         private static func lineSpacingValidity(of value: Int) -> Bool {
                 return candidateLineSpacingRange.contains(value)
@@ -203,9 +205,10 @@ struct AppSettings {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageOrientation)
                 return CandidatePageOrientation.orientation(of: savedValue)
         }()
-        static func updateCandidatePageOrientation(to value: Int) {
-                let newOrientation: CandidatePageOrientation = CandidatePageOrientation.orientation(of: value)
-                candidatePageOrientation = newOrientation
+        static func updateCandidatePageOrientation(to orientation: CandidatePageOrientation) {
+                candidatePageOrientation = orientation
+                let value: Int = orientation.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.CandidatePageOrientation)
         }
 
 
@@ -215,9 +218,10 @@ struct AppSettings {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentDisplayStyle)
                 return CommentDisplayStyle.style(of: savedValue)
         }()
-        static func updateCommentDisplayStyle(to value: Int) {
-                let newStyle: CommentDisplayStyle = CommentDisplayStyle.style(of: value)
-                commentDisplayStyle = newStyle
+        static func updateCommentDisplayStyle(to style: CommentDisplayStyle) {
+                commentDisplayStyle = style
+                let value: Int = style.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.CommentDisplayStyle)
         }
 
 
@@ -227,18 +231,20 @@ struct AppSettings {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayStyle)
                 return ToneDisplayStyle.style(of: savedValue)
         }()
-        static func updateToneDisplayStyle(to value: Int) {
-                let newStyle: ToneDisplayStyle = ToneDisplayStyle.style(of: value)
-                toneDisplayStyle = newStyle
+        static func updateToneDisplayStyle(to style: ToneDisplayStyle) {
+                toneDisplayStyle = style
+                let value: Int = style.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.ToneDisplayStyle)
         }
 
         private(set) static var toneDisplayColor: ToneDisplayColor = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayColor)
                 return ToneDisplayColor.color(of: savedValue)
         }()
-        static func updateToneDisplayColor(to value: Int) {
-                let newColor: ToneDisplayColor = ToneDisplayColor.color(of: value)
-                toneDisplayColor = newColor
+        static func updateToneDisplayColor(to colorOption: ToneDisplayColor) {
+                toneDisplayColor = colorOption
+                let value: Int = colorOption.rawValue
+                UserDefaults.standard.set(value, forKey: SettingsKey.ToneDisplayColor)
         }
 
 
