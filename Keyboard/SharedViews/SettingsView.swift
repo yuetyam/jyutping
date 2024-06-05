@@ -29,17 +29,17 @@ struct SettingsView: View {
                 }
         }()
 
-        @State private var selectedCharacterStandard: CharacterStandard = Options.characterStandard
+        @State private var characterStandard: CharacterStandard = Options.characterStandard
         @State private var isAudioFeedbackOn: Bool = Options.isAudioFeedbackOn
         @State private var hapticFeedback: HapticFeedback = HapticFeedback.fetchSavedMode()
-        @State private var selectedKeyboardLayout: KeyboardLayout = Options.keyboardLayout
+        @State private var keyboardLayout: KeyboardLayout = Options.keyboardLayout
         @State private var showLowercaseKeys: Bool = Options.showLowercaseKeys
         @State private var keyTextPreview: Bool = Options.keyTextPreview
-        @State private var selectedCommentStyle: CommentStyle = Options.commentStyle
-        @State private var selectedCommentToneStyle: CommentToneStyle = Options.commentToneStyle
+        @State private var commentStyle: CommentStyle = Options.commentStyle
+        @State private var commentToneStyle: CommentToneStyle = Options.commentToneStyle
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
-        @State private var selectedDoubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
+        @State private var doubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
         @State private var isPerformingClearUserLexicon: Bool = false
@@ -81,257 +81,119 @@ struct SettingsView: View {
                         .background(Material.ultraThin)
                         .frame(height: context.keyboardInterface.isCompact ? 36 : 44)
                         List {
-                                Section {
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCharacterStandard = .traditional
-                                                Options.updateCharacterStandard(to: .traditional)
-                                        } label: {
-                                                HStack {
-                                                        Text("CharacterStandard.Traditional").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCharacterStandard == .traditional ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCharacterStandard = .hongkong
-                                                Options.updateCharacterStandard(to: .hongkong)
-                                        } label: {
-                                                HStack {
-                                                        Text("CharacterStandard.TraditionalHongKong").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCharacterStandard == .hongkong ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCharacterStandard = .taiwan
-                                                Options.updateCharacterStandard(to: .taiwan)
-                                        } label: {
-                                                HStack {
-                                                        Text("CharacterStandard.TraditionalTaiwan").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCharacterStandard == .taiwan ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCharacterStandard = .simplified
-                                                Options.updateCharacterStandard(to: .simplified)
-                                        } label: {
-                                                HStack {
-                                                        Text("CharacterStandard.Simplified").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCharacterStandard == .simplified ? 1: 0)
-                                                }
-                                        }
+                                Picker("SettingsView.CharacterStandard.PickerTitle", selection: $characterStandard) {
+                                        Text("SettingsView.CharacterStandard.PickerOption.Traditional").tag(CharacterStandard.traditional)
+                                        Text("SettingsView.CharacterStandard.PickerOption.TraditionalHongKong").tag(CharacterStandard.hongkong)
+                                        Text("SettingsView.CharacterStandard.PickerOption.TraditionalTaiwan").tag(CharacterStandard.taiwan)
+                                        Text("SettingsView.CharacterStandard.PickerOption.Simplified").tag(CharacterStandard.simplified)
                                 }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: characterStandard) { newStandard in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updateCharacterStandard(to: newStandard)
+                                }
+
                                 Section {
-                                        Toggle("KeyboardFeedback.Sound", isOn: $isAudioFeedbackOn)
-                                                .onChange(of: isAudioFeedbackOn) { newValue in
-                                                        Options.updateAudioFeedbackStatus(isOn: newValue)
+                                        Toggle("SettingsView.KeyboardFeedback.Sound.ToggleTitle", isOn: $isAudioFeedbackOn)
+                                                .onChange(of: isAudioFeedbackOn) { newState in
+                                                        Options.updateAudioFeedbackStatus(isOn: newState)
                                                 }
                                         if context.isPhone {
-                                                HStack {
-                                                        Text("KeyboardFeedback.Haptic").minimumScaleFactor(0.5).lineLimit(1)
+                                                HStack(spacing: 0) {
+                                                        Text("SettingsView.KeyboardFeedback.Haptic.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
                                                         Spacer()
-                                                        Picker("KeyboardFeedback.Haptic", selection: $hapticFeedback) {
-                                                                Text("KeyboardFeedback.Haptic.None").tag(HapticFeedback.disabled)
-                                                                Text("KeyboardFeedback.Haptic.Light").tag(HapticFeedback.light)
-                                                                Text("KeyboardFeedback.Haptic.Medium").tag(HapticFeedback.medium)
-                                                                Text("KeyboardFeedback.Haptic.Heavy").tag(HapticFeedback.heavy)
+                                                        Picker("SettingsView.KeyboardFeedback.Haptic.PickerTitle", selection: $hapticFeedback) {
+                                                                Text("SettingsView.KeyboardFeedback.Haptic.PickerOption.None").tag(HapticFeedback.disabled)
+                                                                Text("SettingsView.KeyboardFeedback.Haptic.PickerOption.Light").tag(HapticFeedback.light)
+                                                                Text("SettingsView.KeyboardFeedback.Haptic.PickerOption.Medium").tag(HapticFeedback.medium)
+                                                                Text("SettingsView.KeyboardFeedback.Haptic.PickerOption.Heavy").tag(HapticFeedback.heavy)
                                                         }
-                                                        .labelsHidden()
                                                         .pickerStyle(.segmented)
+                                                        .labelsHidden()
                                                         .fixedSize()
-                                                        .onChange(of: hapticFeedback) { newValue in
+                                                        .onChange(of: hapticFeedback) { newMode in
                                                                 AudioFeedback.modified()
                                                                 context.triggerSelectionHapticFeedback()
-                                                                context.updateHapticFeedbackMode(to: newValue)
+                                                                context.updateHapticFeedbackMode(to: newMode)
                                                         }
-                                                        /*
-                                                        .scaledToFit()
-                                                        .scaleEffect(x: 0.9, y: 0.9, anchor: .trailing)
-                                                        */
                                                 }
                                                 .disabled(!(context.hasFullAccess))
                                         }
                                 } header: {
-                                        Text("KeyboardFeedback.Header").textCase(nil)
+                                        Text("SettingsView.KeyboardFeedback.SectionHeader").textCase(nil)
                                 } footer: {
                                         if context.isPhone && !(context.hasFullAccess) {
-                                                Text("KeyboardFeedback.Footer").textCase(nil)
+                                                Text("SettingsView.KeyboardFeedback.SectionFooter").textCase(nil)
                                         }
                                 }
 
+                                Picker("SettingsView.KeyboardLayout.PickerTitle", selection: $keyboardLayout) {
+                                        Text("SettingsView.KeyboardLayout.PickerOption.QWERTY").tag(KeyboardLayout.qwerty)
+                                        Text("SettingsView.KeyboardLayout.PickerOption.TripleStroke").tag(KeyboardLayout.tripleStroke)
+                                        Text("SettingsView.KeyboardLayout.PickerOption.10Key").tag(KeyboardLayout.tenKey)
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: keyboardLayout) { newLayout in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updateKeyboardLayout(to: newLayout)
+                                }
+
                                 Section {
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedKeyboardLayout = .qwerty
-                                                Options.updateKeyboardLayout(to: .qwerty)
-                                        } label: {
-                                                HStack {
-                                                        Text("KeyboardLayout.QWERTY").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedKeyboardLayout == .qwerty ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedKeyboardLayout = .tripleStroke
-                                                Options.updateKeyboardLayout(to: .tripleStroke)
-                                        } label: {
-                                                HStack {
-                                                        Text("KeyboardLayout.TripleStroke").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedKeyboardLayout == .tripleStroke ? 1: 0)
-                                                }
-                                        }
-                                        if context.isPhone {
-                                                Button {
+                                        Toggle("SettingsView.ShowLowercaseKeys.ToggleTitle", isOn: $showLowercaseKeys)
+                                                .onChange(of: showLowercaseKeys) { newState in
                                                         AudioFeedback.modified()
-                                                        context.triggerSelectionHapticFeedback()
-                                                        selectedKeyboardLayout = .tenKey
-                                                        Options.updateKeyboardLayout(to: .tenKey)
-                                                } label: {
-                                                        HStack {
-                                                                Text("KeyboardLayout.10Key").foregroundStyle(Color.primary)
-                                                                Spacer()
-                                                                Image.checkmark.opacity(selectedKeyboardLayout == .tenKey ? 1: 0)
-                                                        }
+                                                        Options.updateShowLowercaseKeys(to: newState)
                                                 }
-                                        }
-                                } header: {
-                                        Text("KeyboardLayout.Header").textCase(nil)
-                                }
-
-                                Section {
-                                        Toggle("SettingsView.ShowLowercaseKeys", isOn: $showLowercaseKeys)
-                                                .onChange(of: showLowercaseKeys) { newValue in
+                                        Toggle("SettingsView.KeyTextPreview.ToggleTitle", isOn: $keyTextPreview)
+                                                .onChange(of: keyTextPreview) { newState in
                                                         AudioFeedback.modified()
-                                                        Options.updateShowLowercaseKeys(to: newValue)
+                                                        Options.updateKeyTextPreview(to: newState)
                                                 }
-                                        Toggle("SettingsView.KeyTextPreview", isOn: $keyTextPreview)
-                                                .onChange(of: keyTextPreview) { newValue in
+                                }
+
+                                Picker("SettingsView.CommentStyle.PickerTitle", selection: $commentStyle) {
+                                        Text("SettingsView.CommentStyle.PickerOption.Above").tag(CommentStyle.aboveCandidates)
+                                        Text("SettingsView.CommentStyle.PickerOption.Below").tag(CommentStyle.belowCandidates)
+                                        Text("SettingsView.CommentStyle.PickerOption.None").tag(CommentStyle.noComments)
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: commentStyle) { newStyle in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updateCommentStyle(to: newStyle)
+                                }
+                                Picker("SettingsView.CommentToneStyle.PickerTitle", selection: $commentToneStyle) {
+                                        Text("SettingsView.CommentToneStyle.PickerOption1").tag(CommentToneStyle.normal)
+                                        Text("SettingsView.CommentToneStyle.PickerOption2").tag(CommentToneStyle.noTones)
+                                        Text("SettingsView.CommentToneStyle.PickerOption3").tag(CommentToneStyle.superscript)
+                                        Text("SettingsView.CommentToneStyle.PickerOption4").tag(CommentToneStyle.subscript)
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: commentToneStyle) { newStyle in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updateCommentToneStyle(to: newStyle)
+                                }
+
+                                Section {
+                                        Toggle("SettingsView.EmojiSuggestions.ToggleTitle", isOn: $isEmojiSuggestionsOn)
+                                                .onChange(of: isEmojiSuggestionsOn) { newState in
                                                         AudioFeedback.modified()
-                                                        Options.updateKeyTextPreview(to: newValue)
+                                                        Options.updateEmojiSuggestions(to: newState)
                                                 }
                                 }
 
-                                Section {
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentStyle = .aboveCandidates
-                                                Options.updateCommentStyle(to: .aboveCandidates)
-                                        } label: {
-                                                HStack {
-                                                        Text("JyutpingDisplay.AboveCandidates").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentStyle == .aboveCandidates ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentStyle = .belowCandidates
-                                                Options.updateCommentStyle(to: .belowCandidates)
-                                        } label: {
-                                                HStack {
-                                                        Text("JyutpingDisplay.BelowCandidates").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentStyle == .belowCandidates ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentStyle = .noComments
-                                                Options.updateCommentStyle(to: .noComments)
-                                        } label: {
-                                                HStack {
-                                                        Text("JyutpingDisplay.NoJyutping").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentStyle == .noComments ? 1: 0)
-                                                }
-                                        }
-                                } header: {
-                                        Text("JyutpingDisplay.Header").textCase(nil)
-                                }
-
-                                Section {
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentToneStyle = .normal
-                                                Options.updateCommentToneStyle(to: .normal)
-                                        } label: {
-                                                HStack {
-                                                        Text("ToneDisplay.Option1").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentToneStyle == .normal ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentToneStyle = .noTones
-                                                Options.updateCommentToneStyle(to: .noTones)
-                                        } label: {
-                                                HStack {
-                                                        Text("ToneDisplay.Option2").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentToneStyle == .noTones ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentToneStyle = .superscript
-                                                Options.updateCommentToneStyle(to: .superscript)
-                                        } label: {
-                                                HStack {
-                                                        Text("ToneDisplay.Option3").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentToneStyle == .superscript ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedCommentToneStyle = .subscript
-                                                Options.updateCommentToneStyle(to: .subscript)
-                                        } label: {
-                                                HStack {
-                                                        Text("ToneDisplay.Option4").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedCommentToneStyle == .subscript ? 1: 0)
-                                                }
-                                        }
-                                } header: {
-                                        Text("ToneDisplay.Header").textCase(nil)
-                                }
-
-                                Section {
-                                        Toggle("SettingsView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
-                                                .onChange(of: isEmojiSuggestionsOn) { newValue in
-                                                        AudioFeedback.modified()
-                                                        Options.updateEmojiSuggestions(to: newValue)
-                                                }
-                                }
-
-                                Picker("SettingsView.CangjieVariant.Header", selection: $cangjieVariant) {
-                                        Text("SettingsView.CangjieVariant.Option1").tag(CangjieVariant.cangjie5)
-                                        Text("SettingsView.CangjieVariant.Option2").tag(CangjieVariant.cangjie3)
-                                        Text("SettingsView.CangjieVariant.Option3").tag(CangjieVariant.quick5)
-                                        Text("SettingsView.CangjieVariant.Option4").tag(CangjieVariant.quick3)
+                                Picker("SettingsView.CangjieVariant.PickerTitle", selection: $cangjieVariant) {
+                                        Text("SettingsView.CangjieVariant.PickerOption1").tag(CangjieVariant.cangjie5)
+                                        Text("SettingsView.CangjieVariant.PickerOption2").tag(CangjieVariant.cangjie3)
+                                        Text("SettingsView.CangjieVariant.PickerOption3").tag(CangjieVariant.quick5)
+                                        Text("SettingsView.CangjieVariant.PickerOption4").tag(CangjieVariant.quick3)
 
                                 }
                                 .pickerStyle(.inline)
@@ -342,63 +204,24 @@ struct SettingsView: View {
                                         Options.updateCangjieVariant(to: newVariant)
                                 }
 
-                                Section {
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedDoubleSpaceShortcut = .insertPeriod
-                                                Options.updateDoubleSpaceShortcut(to: .insertPeriod)
-                                        } label: {
-                                                HStack {
-                                                        Text("SpaceDoubleTapping.Option1").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertPeriod ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedDoubleSpaceShortcut = .insertIdeographicComma
-                                                Options.updateDoubleSpaceShortcut(to: .insertIdeographicComma)
-                                        } label: {
-                                                HStack {
-                                                        Text("SpaceDoubleTapping.Option3").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertIdeographicComma ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedDoubleSpaceShortcut = .insertFullWidthSpace
-                                                Options.updateDoubleSpaceShortcut(to: .insertFullWidthSpace)
-                                        } label: {
-                                                HStack {
-                                                        Text("SpaceDoubleTapping.Option4").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .insertFullWidthSpace ? 1: 0)
-                                                }
-                                        }
-                                        Button {
-                                                AudioFeedback.modified()
-                                                context.triggerSelectionHapticFeedback()
-                                                selectedDoubleSpaceShortcut = .doNothing
-                                                Options.updateDoubleSpaceShortcut(to: .doNothing)
-                                        } label: {
-                                                HStack {
-                                                        Text("SpaceDoubleTapping.Option2").foregroundStyle(Color.primary)
-                                                        Spacer()
-                                                        Image.checkmark.opacity(selectedDoubleSpaceShortcut == .doNothing ? 1: 0)
-                                                }
-                                        }
-                                } header: {
-                                        Text("SpaceDoubleTapping.Header").textCase(nil)
+                                Picker("SettingsView.SpaceDoubleTapping.PickerTitle", selection: $doubleSpaceShortcut) {
+                                        Text("SettingsView.SpaceDoubleTapping.PickerOption1").tag(DoubleSpaceShortcut.insertPeriod)
+                                        Text("SettingsView.SpaceDoubleTapping.PickerOption3").tag(DoubleSpaceShortcut.insertIdeographicComma)
+                                        Text("SettingsView.SpaceDoubleTapping.PickerOption4").tag(DoubleSpaceShortcut.insertFullWidthSpace)
+                                        Text("SettingsView.SpaceDoubleTapping.PickerOption2").tag(DoubleSpaceShortcut.doNothing)
+                                }
+                                .pickerStyle(.inline)
+                                .textCase(nil)
+                                .onChange(of: doubleSpaceShortcut) { newOption in
+                                        AudioFeedback.modified()
+                                        context.triggerSelectionHapticFeedback()
+                                        Options.updateDoubleSpaceShortcut(to: newOption)
                                 }
 
                                 Section {
-                                        Toggle("SettingsView.Toggle.InputMemory", isOn: $isInputMemoryOn)
-                                                .onChange(of: isInputMemoryOn) { newValue in
-                                                        Options.updateInputMemory(to: newValue)
+                                        Toggle("SettingsView.UserLexicon.InputMemory.ToggleTitle", isOn: $isInputMemoryOn)
+                                                .onChange(of: isInputMemoryOn) { newState in
+                                                        Options.updateInputMemory(to: newState)
                                                 }
                                         ZStack {
                                                 Menu {
@@ -410,11 +233,11 @@ struct SettingsView: View {
                                                                 UserLexicon.deleteAll()
                                                                 EmojiMaster.clearFrequent()
                                                         } label: {
-                                                                Label("SettingsView.ClearUserLexicon", systemImage: "trash")
+                                                                Label("SettingsView.UserLexicon.ClearUserLexicon.ButtonTitle", systemImage: "trash")
                                                         }
                                                 } label: {
                                                         HStack {
-                                                                Text("SettingsView.ClearUserLexicon")
+                                                                Text("SettingsView.UserLexicon.ClearUserLexicon.ButtonTitle")
                                                                 Spacer()
                                                         }
                                                         .foregroundStyle(Color.red)
@@ -431,7 +254,7 @@ struct SettingsView: View {
                                                 }
                                         }
                                 } header: {
-                                        Text("SettingsView.SectionHeader.UserLexicon").textCase(nil)
+                                        Text("SettingsView.UserLexicon.SectionHeader").textCase(nil)
                                 }
 
                                 Section {
@@ -439,11 +262,11 @@ struct SettingsView: View {
                                                 Button {
                                                         UIPasteboard.general.string = version
                                                 } label: {
-                                                        Label("SettingsView.Copy", systemImage: "doc.on.doc")
+                                                        Label("SettingsView.Version.Copy.ButtonTitle", systemImage: "doc.on.doc")
                                                 }
                                         } label: {
                                                 HStack {
-                                                        Text("SettingsView.Version")
+                                                        Text("SettingsView.Version.LabelTitle")
                                                         Spacer()
                                                         Text(verbatim: version)
                                                 }
