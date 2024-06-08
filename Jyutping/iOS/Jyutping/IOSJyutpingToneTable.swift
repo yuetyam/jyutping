@@ -2,23 +2,6 @@
 
 import SwiftUI
 
-private struct IOSToneTipView: View {
-        var body: some View {
-                VStack(spacing: 0) {
-                        HStack {
-                                Text(verbatim: "聲調之「上」應讀上聲 soeng5")
-                                Speaker("soeng5")
-                                Spacer()
-                        }
-                        HStack {
-                                Text(verbatim: "而非去聲 soeng6")
-                                Speaker("soeng6")
-                                Spacer()
-                        }
-                }
-        }
-}
-
 struct IOSJyutpingToneTable: View {
 
         @Environment(\.horizontalSizeClass) var horizontalSize
@@ -26,9 +9,6 @@ struct IOSJyutpingToneTable: View {
         var body: some View {
                 let spacing: CGFloat = (horizontalSize == .compact) ? 18 : 32
                 List {
-                        Section {
-                                IOSToneTipView()
-                        }
                         Section {
                                 IOSToneLabel(spacing: spacing, word: "芬", syllable: "fan1", value: "55/53", name: "陰平", jyutping: "1")
                                 IOSToneLabel(spacing: spacing, word: "粉", syllable: "fan2", value: "35", name: "陰上", jyutping: "2")
@@ -65,6 +45,9 @@ struct IOSJyutpingToneTable: View {
                                         IOSToneGridView()
                                 }
                                 .listRowBackground(Color.clear)
+                        }
+                        Section {
+                                IOSToneTipView()
                         }
                 }
                 .textSelection(.enabled)
@@ -170,6 +153,23 @@ private struct IOSToneGridCell: View {
                 }
                 .padding(8)
                 .background(.background, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+        }
+}
+
+private struct IOSToneTipView: View {
+        var body: some View {
+                VStack(spacing: 0) {
+                        HStack {
+                                Text(verbatim: "聲調之「上」應讀上聲 soeng5")
+                                Speaker("soeng5")
+                                Spacer()
+                        }
+                        HStack {
+                                Text(verbatim: "而非去聲 soeng6")
+                                Speaker("soeng6")
+                                Spacer()
+                        }
+                }
         }
 }
 
