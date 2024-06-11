@@ -238,6 +238,8 @@
 		376B84922BFC2C090029A0CF /* TopCommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84912BFC2C090029A0CF /* TopCommentStackView.swift */; };
 		376B84942BFC2C1C0029A0CF /* BottomCommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84932BFC2C1C0029A0CF /* BottomCommentStackView.swift */; };
 		376B84962BFC2CB50029A0CF /* EnhancedCommentLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84952BFC2CB50029A0CF /* EnhancedCommentLabels.swift */; };
+		3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */; };
+		3797F6E52C188F4D00DE6D0E /* PrincipalApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797F6E42C188F4D00DE6D0E /* PrincipalApplication.swift */; };
 		379A9E2E2BE4C692001AE79E /* EditingPanelReturnKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E2D2BE4C692001AE79E /* EditingPanelReturnKey.swift */; };
 		379A9E302BE4C86E001AE79E /* EditingPanelCopyKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E2F2BE4C86E001AE79E /* EditingPanelCopyKey.swift */; };
 		379A9E322BE4C9D3001AE79E /* EditingPanelCutKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379A9E312BE4C9D3001AE79E /* EditingPanelCutKey.swift */; };
@@ -295,7 +297,6 @@
 		37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD652B3B381600F02279 /* VisualEffect.swift */; };
 		37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD662B3B381600F02279 /* JyutpingInputController.swift */; };
 		37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD672B3B381600F02279 /* AppContext.swift */; };
-		37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD692B3B381700F02279 /* InputMethodApp.swift */; };
 		37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD6A2B3B381700F02279 /* Menu.swift */; };
 		37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD8F2B3B384B00F02279 /* Assets.xcassets */; };
 		37E6AD962B3B389400F02279 /* jyutpingime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD952B3B389400F02279 /* jyutpingime.pdf */; };
@@ -602,6 +603,8 @@
 		376B84912BFC2C090029A0CF /* TopCommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCommentStackView.swift; sourceTree = "<group>"; };
 		376B84932BFC2C1C0029A0CF /* BottomCommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCommentStackView.swift; sourceTree = "<group>"; };
 		376B84952BFC2CB50029A0CF /* EnhancedCommentLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedCommentLabels.swift; sourceTree = "<group>"; };
+		3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3797F6E42C188F4D00DE6D0E /* PrincipalApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalApplication.swift; sourceTree = "<group>"; };
 		379A9E2D2BE4C692001AE79E /* EditingPanelReturnKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelReturnKey.swift; sourceTree = "<group>"; };
 		379A9E2F2BE4C86E001AE79E /* EditingPanelCopyKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelCopyKey.swift; sourceTree = "<group>"; };
 		379A9E312BE4C9D3001AE79E /* EditingPanelCutKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingPanelCutKey.swift; sourceTree = "<group>"; };
@@ -659,7 +662,6 @@
 		37E6AD652B3B381600F02279 /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		37E6AD662B3B381600F02279 /* JyutpingInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		37E6AD672B3B381600F02279 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
-		37E6AD692B3B381700F02279 /* InputMethodApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMethodApp.swift; sourceTree = "<group>"; };
 		37E6AD6A2B3B381700F02279 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		37E6AD8F2B3B384B00F02279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37E6AD912B3B386800F02279 /* InputMethodRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = InputMethodRelease.xcconfig; sourceTree = "<group>"; };
@@ -1038,7 +1040,8 @@
 		371EABCA2B385D370075089B /* InputMethod */ = {
 			isa = PBXGroup;
 			children = (
-				37E6AD692B3B381700F02279 /* InputMethodApp.swift */,
+				3797F6E42C188F4D00DE6D0E /* PrincipalApplication.swift */,
+				3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */,
 				37E6AD662B3B381600F02279 /* JyutpingInputController.swift */,
 				37E6AD572B3B381600F02279 /* EventHandler.swift */,
 				37E6AD672B3B381600F02279 /* AppContext.swift */,
@@ -1851,6 +1854,8 @@
 				37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */,
 				37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */,
 				37E6AD722B3B381700F02279 /* Representative.swift in Sources */,
+				3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */,
+				3797F6E52C188F4D00DE6D0E /* PrincipalApplication.swift in Sources */,
 				37E6AD742B3B381700F02279 /* CharacterExtensions.swift in Sources */,
 				37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */,
 				376B84942BFC2C1C0029A0CF /* BottomCommentStackView.swift in Sources */,
@@ -1861,7 +1866,6 @@
 				375FA76D2C0D5227001ABA39 /* ReverseLookupView.swift in Sources */,
 				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
 				37E6AD872B3B381700F02279 /* OptionsView.swift in Sources */,
-				37E6AD8D2B3B381700F02279 /* InputMethodApp.swift in Sources */,
 				37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */,
 				37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */,
 				37E6AD732B3B381700F02279 /* InputForm.swift in Sources */,

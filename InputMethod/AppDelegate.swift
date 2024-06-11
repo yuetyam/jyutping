@@ -3,35 +3,18 @@ import InputMethodKit
 import CoreIME
 import Sparkle
 
-@objc(PrincipalApplication)
-final class PrincipalApplication: NSApplication {
-
-        private let appDelegate = AppDelegate()
-
-        override init() {
-                super.init()
-                self.delegate = appDelegate
-        }
-
-        required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-        }
-}
-
 @main
-@objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-        var server: IMKServer?
-
+        private static var server: IMKServer?
         private(set) static var updaterController: SPUStandardUpdaterController?
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
-                if server == nil {
+                if Self.server == nil {
                         let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
                         let identifier: String = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
-                        server = IMKServer(name: name, bundleIdentifier: identifier)
+                        Self.server = IMKServer(name: name, bundleIdentifier: identifier)
                 }
                 UserLexicon.prepare()
                 Engine.prepare()

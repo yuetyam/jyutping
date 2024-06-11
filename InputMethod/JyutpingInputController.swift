@@ -3,7 +3,6 @@ import InputMethodKit
 import CommonExtensions
 import CoreIME
 
-@objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
 
         // MARK: - Window, InputClient
@@ -109,7 +108,7 @@ final class JyutpingInputController: IMKInputController {
                         let isRegularHorizontal: Bool = {
                                 switch orientation {
                                 case .horizontal:
-                                        return (origin.x - screenOrigin.x) < (screenSize.width - 300)
+                                        return (origin.x - screenOrigin.x) < (screenSize.width - 480)
                                 case .vertical:
                                         return (origin.x - screenOrigin.x) < (screenSize.width - 300)
                                 }
