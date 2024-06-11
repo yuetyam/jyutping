@@ -39,7 +39,12 @@ private extension Font {
                                 break
                         }
                 }
-                names.append(Constant.PingFangHK)
+                for name in Constant.systemCJKVQueue {
+                        if found(font: name) {
+                                names.append(name)
+                                break
+                        }
+                }
                 if shouldConsiderSupplementaryFonts {
                         for name in Constant.supplementaryCJKVQueue {
                                 if found(font: name) {

@@ -289,7 +289,7 @@ struct MacExpressionsView: View {
 
                                 HStack {
                                         VStack(alignment: .leading, spacing: 10) {
-                                                Text(verbatim: "推薦【而家（而今）】 避免【宜家】").font(.significant).padding(.bottom, 2)
+                                                Text(verbatim: "推薦【而家】 避免【宜家】").font(.significant).padding(.bottom, 2)
                                                 Label {
                                                         Text(verbatim: "我而家食緊飯。")
                                                 } icon: {

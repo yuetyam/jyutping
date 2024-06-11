@@ -23,6 +23,14 @@ struct MacContentView: View {
 
         @State private var selection: ViewIdentifier = .search
 
+        private let characterImageName: String = {
+                if #available(macOS 15.0, *) {
+                        return "character.square"
+                } else {
+                        return "character"
+                }
+        }()
+
         var body: some View {
                 NavigationSplitView {
                         List(selection: $selection) {
@@ -30,7 +38,7 @@ struct MacContentView: View {
                                         Label("MacSidebar.NavigationTitle.InstallInputMethod", systemImage: "sparkles").tag(ViewIdentifier.installation)
                                         Label("MacSidebar.NavigationTitle.Introductions", systemImage: "book").tag(ViewIdentifier.introductions)
                                         Label("MacSidebar.NavigationTitle.CantoneseExpressions", systemImage: "checkmark.seal").tag(ViewIdentifier.expressions)
-                                        Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: "character").tag(ViewIdentifier.confusion)
+                                        Label("MacSidebar.NavigationTitle.SimplifiedCharacterConfusion", systemImage: characterImageName).tag(ViewIdentifier.confusion)
                                 } header: {
                                         Text("MacSidebar.SectionHeader.InputMethod").textCase(nil).font(.copilot)
                                 }
@@ -50,7 +58,7 @@ struct MacContentView: View {
                                         Label("MacSidebar.NavigationTitle.ChineseZodiac", systemImage: "hare").tag(ViewIdentifier.chineseZodiac)
                                         Label("MacSidebar.NavigationTitle.SolarTerms", systemImage: "cloud.sun").tag(ViewIdentifier.solarTerms)
                                         Label("MacSidebar.NavigationTitle.HundredFamilySurnames", systemImage: "person").tag(ViewIdentifier.surnames)
-                                        Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: "character").tag(ViewIdentifier.cinZiMan)
+                                        Label("MacSidebar.NavigationTitle.ThousandCharacterClassic", systemImage: characterImageName).tag(ViewIdentifier.cinZiMan)
                                         Label("MacSidebar.NavigationTitle.CantonMetro", systemImage: "tram.circle").tag(ViewIdentifier.cantonMetro)
                                         Label("MacSidebar.NavigationTitle.FatshanMetro", systemImage: "tram.circle").tag(ViewIdentifier.fatshanMetro)
                                         Label("MacSidebar.NavigationTitle.ShamChunMetro", systemImage: "tram.circle").tag(ViewIdentifier.shamchunMetro)

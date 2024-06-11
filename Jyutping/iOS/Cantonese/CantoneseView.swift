@@ -6,6 +6,14 @@ struct CantoneseView: View {
 
         @State private var animationState: Int = 0
 
+        private let characterImageName: String = {
+                if #available(iOS 18.0, *) {
+                        return "character.square"
+                } else {
+                        return "character"
+                }
+        }()
+
         var body: some View {
                 NavigationView {
                         List {
@@ -16,7 +24,7 @@ struct CantoneseView: View {
                                                 Label("IOSCantoneseTab.LabelTitle.CantoneseExpressions", systemImage: "checkmark.seal")
                                         }
                                         NavigationLink(destination: IOSConfusionView()) {
-                                                Label("IOSCantoneseTab.LabelTitle.SimplifiedCharacterConfusion", systemImage: "character")
+                                                Label("IOSCantoneseTab.LabelTitle.SimplifiedCharacterConfusion", systemImage: characterImageName)
                                         }
                                 }
 
@@ -37,7 +45,7 @@ struct CantoneseView: View {
                                                 Label("IOSCantoneseTab.LabelTitle.HundredFamilySurnames", systemImage: "person")
                                         }
                                         NavigationLink(destination: IOSThousandCharacterClassicView()) {
-                                                Label("IOSCantoneseTab.LabelTitle.ThousandCharacterClassic", systemImage: "character")
+                                                Label("IOSCantoneseTab.LabelTitle.ThousandCharacterClassic", systemImage: characterImageName)
                                         }
                                 }
                                 Section {

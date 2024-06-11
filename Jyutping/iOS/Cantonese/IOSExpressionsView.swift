@@ -263,7 +263,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【而家（而今）】 避免【宜家】").font(.significant)
+                                        Text(verbatim: "推薦【而家】 避免【宜家】").font(.significant)
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
                                         } icon: {
