@@ -3,31 +3,48 @@ import CommonExtensions
 import CoreIME
 
 extension Font {
-        private(set) static var candidate: Font = candidateFont(size: 20)
-        static func updateCandidateFont(characterStandard: CharacterStandard? = nil) {
-                candidate = candidateFont(size: 20, characterStandard: characterStandard)
-        }
-        private static func candidateFont(size: CGFloat, characterStandard: CharacterStandard? = nil) -> Font {
-                let standard: CharacterStandard = characterStandard ?? Options.characterStandard
-                switch standard {
-                case .traditional:
-                        return CJKVStandard.isTCPreferred ? Font.custom(Constant.PingFangHK, fixedSize: size) : Font.system(size: size)
-                case .hongkong:
-                        return CJKVStandard.isHCPreferred ? Font.system(size: size) : Font.custom(Constant.PingFangHK, fixedSize: size)
-                case .taiwan:
-                        return Font.system(size: size)
-                case .simplified:
-                        let isAnyNonSCStandardPreferred: Bool = CJKVStandard.isTCPreferred || CJKVStandard.isHCPreferred
-                        return isAnyNonSCStandardPreferred ? Font.custom(Constant.PingFangSC, fixedSize: size) : Font.system(size: size)
-                }
-        }
-
+        static let candidate: Font = Font.system(size: 20)
         static let romanization: Font = Font.system(size: 12)
         static let tone: Font = Font.system(size: 10)
 
         static let letterInputKeyCompact: Font = Font.system(size: 24)
         static let dualLettersInputKeyCompact: Font = Font.system(size: 17)
         static let keyFooter: Font = Font.system(size: 9)
+}
+
+extension String {
+
+        private static let CNAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hans-CN"]
+        private static let HKAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-HK"]
+        private static let MOAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-MO"]
+        private static let TWAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-TW"]
+
+        private func attributedCN() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.CNAttribute))
+        }
+        private func attributedHK() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.HKAttribute))
+        }
+        private func attributedMO() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.MOAttribute))
+        }
+        private func attributedTW() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.TWAttribute))
+        }
+
+        func attributed(for characterStandard: CharacterStandard) -> AttributedString {
+                switch characterStandard {
+                case .traditional:
+                        return CJKVStandard.isTCPreferred ? attributedHK() : AttributedString(self)
+                case .hongkong:
+                        return CJKVStandard.isHCPreferred ? AttributedString(self) : attributedHK()
+                case .taiwan:
+                        return AttributedString(self)
+                case .simplified:
+                        let isAnyNonSCStandardPreferred: Bool = CJKVStandard.isTCPreferred || CJKVStandard.isHCPreferred
+                        return isAnyNonSCStandardPreferred ? attributedCN() : AttributedString(self)
+                }
+        }
 }
 
 private enum CJKVStandard: Int {

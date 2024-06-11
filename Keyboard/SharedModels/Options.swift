@@ -23,7 +23,6 @@ struct Options {
                 characterStandard = standard
                 let value: Int = standard.rawValue
                 UserDefaults.standard.set(value, forKey: OptionsKey.CharacterStandard)
-                Font.updateCandidateFont(characterStandard: standard)
         }
 
         private(set) static var isAudioFeedbackOn: Bool = {

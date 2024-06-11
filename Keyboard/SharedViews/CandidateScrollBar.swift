@@ -25,6 +25,7 @@ struct CandidateScrollBar: View {
         private let expanderWidth: CGFloat = 44
 
         var body: some View {
+                let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let commentToneStyle: CommentToneStyle = Options.commentToneStyle
                 HStack(spacing: 0) {
@@ -34,6 +35,7 @@ struct CandidateScrollBar: View {
                                                 EmptyView().id(topID)
                                                 ForEach(0..<context.candidates.count, id: \.self) { index in
                                                         let candidate = context.candidates[index]
+                                                        let text: AttributedString = candidate.text.attributed(for: characterStandard)
                                                         ScrollViewButton(
                                                                 longPressTime: 0.4,
                                                                 longPressAction: {
@@ -66,7 +68,7 @@ struct CandidateScrollBar: View {
                                                                         case .aboveCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
-                                                                                        Text(verbatim: candidate.text)
+                                                                                        Text(text)
                                                                                                 .font(.candidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
@@ -75,7 +77,7 @@ struct CandidateScrollBar: View {
                                                                                 .padding(.bottom, 16)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
-                                                                                        Text(verbatim: candidate.text)
+                                                                                        Text(text)
                                                                                                 .font(.candidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
@@ -84,7 +86,7 @@ struct CandidateScrollBar: View {
                                                                                 .padding(.horizontal, 1)
                                                                                 .padding(.bottom, 14)
                                                                         case .noComments:
-                                                                                Text(verbatim: candidate.text)
+                                                                                Text(text)
                                                                                         .font(.candidate)
                                                                                         .minimumScaleFactor(0.4)
                                                                                         .lineLimit(1)

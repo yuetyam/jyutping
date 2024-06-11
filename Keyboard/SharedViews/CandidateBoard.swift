@@ -60,6 +60,7 @@ struct CandidateBoard: View {
         }
 
         var body: some View {
+                let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let commentToneStyle: CommentToneStyle = Options.commentToneStyle
                 let rows = rows(of: context.candidates)
@@ -72,6 +73,7 @@ struct CandidateBoard: View {
                                                         HStack(spacing: 0) {
                                                                 ForEach(row.elements) { element in
                                                                         let candidate = element.candidate
+                                                                        let text: AttributedString = candidate.text.attributed(for: characterStandard)
                                                                         ScrollViewButton(
                                                                                 longPressTime: 0.4,
                                                                                 longPressAction: {
@@ -104,7 +106,7 @@ struct CandidateBoard: View {
                                                                                         case .aboveCandidates:
                                                                                                 VStack(spacing: -2) {
                                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
-                                                                                                        Text(verbatim: candidate.text)
+                                                                                                        Text(text)
                                                                                                                 .font(.candidate)
                                                                                                                 .minimumScaleFactor(0.4)
                                                                                                                 .lineLimit(1)
@@ -112,7 +114,7 @@ struct CandidateBoard: View {
                                                                                                 .padding(2)
                                                                                         case .belowCandidates:
                                                                                                 VStack(spacing: -2) {
-                                                                                                        Text(verbatim: candidate.text)
+                                                                                                        Text(text)
                                                                                                                 .font(.candidate)
                                                                                                                 .minimumScaleFactor(0.4)
                                                                                                                 .lineLimit(1)
@@ -120,7 +122,7 @@ struct CandidateBoard: View {
                                                                                                 }
                                                                                                 .padding(2)
                                                                                         case .noComments:
-                                                                                                Text(verbatim: candidate.text)
+                                                                                                Text(text)
                                                                                                         .font(.candidate)
                                                                                                         .minimumScaleFactor(0.4)
                                                                                                         .lineLimit(1)
