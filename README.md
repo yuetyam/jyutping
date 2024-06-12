@@ -43,11 +43,11 @@ Cantonese Keyboard for iOS & macOS.
 兼容系統： iOS / iPadOS 15.0+
 
 ## macOS
-由於 [第三方輸入法無法上架 Mac App Store](https://developer.apple.com/forums/thread/134115) ，請前往 [網棧](https://jyutping.app/mac) 或者 [Releases](https://github.com/yuetyam/jyutping/releases) 䈎面下載安裝。
+由於 [第三方輸入法無法上架 Mac App Store](https://developer.apple.com/forums/thread/134115) ，請前往 [網棧](https://jyutping.app/mac) 下載安裝，或者用 [Homebrew 安裝](https://jyutping.app/mac/homebrew) 。
 
-安裝指引： [macOS 粵拼輸入法下載安裝指引](https://jyutping.app/mac)  
+選項䈎面： 輸入法撳 <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (esc 下邊箇粒掣) 會顯示一個選項䈎面。  
 常問問題： [常問問題（FAQ）](https://jyutping.app/faq)  
-兼容系統： macOS 12 Monterey 或者更高
+兼容系統： macOS 12 Monterey 或者更高。
 
 ## 擷屏（Screenshots）
 <img src="images/screenshot.png" alt="iPhone screenshots" width="440"/>
