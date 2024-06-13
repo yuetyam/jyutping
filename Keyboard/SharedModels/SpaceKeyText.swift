@@ -1,3 +1,5 @@
+import SwiftUI
+
 enum SpaceKeyText: Int {
 
         case english
@@ -42,5 +44,20 @@ enum SpaceKeyText: Int {
                 case .selectSimplified:
                         return "选定"
                 }
+        }
+        var attributedText: AttributedString {
+                let language: LanguageAttribute = {
+                        switch self {
+                        case .english:
+                                return .enUS
+                        case .fallback:
+                                return .unspecified
+                        case .lowercased, .uppercased, .capsLocked, .confirm, .select:
+                                return .zhHantHK
+                        case .lowercasedSimplified, .uppercasedSimplified, .capsLockedSimplified, .confirmSimplified, .selectSimplified:
+                                return .zhHansCN
+                        }
+                }()
+                return text.languageAttributed(for: language)
         }
 }

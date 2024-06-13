@@ -12,37 +12,74 @@ extension Font {
         static let keyFooter: Font = Font.system(size: 9)
 }
 
+enum LanguageAttribute: Int {
+        case unspecified
+        case zhHantHK
+        case zhHantMO
+        case zhHantTW
+        case zhHansCN
+        case enUS
+        case jaJP
+}
+
 extension String {
 
-        private static let CNAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hans-CN"]
-        private static let HKAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-HK"]
-        private static let MOAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-MO"]
-        private static let TWAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-TW"]
+        private static let HKHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-HK"]
+        private static let MOHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-MO"]
+        private static let TWHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-TW"]
+        private static let CNHansAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hans-CN"]
+        private static let ENAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "en-US"]
+        private static let JAAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "ja-JP"]
 
-        private func attributedCN() -> AttributedString {
-                AttributedString(self, attributes: AttributeContainer(Self.CNAttribute))
+        private func attributedHKHant() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.HKHantAttribute))
         }
-        private func attributedHK() -> AttributedString {
-                AttributedString(self, attributes: AttributeContainer(Self.HKAttribute))
+        private func attributedMOHant() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.MOHantAttribute))
         }
-        private func attributedMO() -> AttributedString {
-                AttributedString(self, attributes: AttributeContainer(Self.MOAttribute))
+        private func attributedTWHant() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.TWHantAttribute))
         }
-        private func attributedTW() -> AttributedString {
-                AttributedString(self, attributes: AttributeContainer(Self.TWAttribute))
+        private func attributedCNHans() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.CNHansAttribute))
+        }
+        private func attributedEN() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.ENAttribute))
+        }
+        private func attributedJA() -> AttributedString {
+                AttributedString(self, attributes: AttributeContainer(Self.JAAttribute))
         }
 
+        func languageAttributed(for language: LanguageAttribute) -> AttributedString {
+                switch language {
+                case .unspecified:
+                        return AttributedString(self)
+                case .zhHantHK:
+                        return CJKVStandard.isTCPreferred ? attributedHKHant() : AttributedString(self)
+                case .zhHantMO:
+                        return CJKVStandard.isTCPreferred ? attributedMOHant() : AttributedString(self)
+                case .zhHantTW:
+                        return AttributedString(self)
+                case .zhHansCN:
+                        let isAnyNonSCStandardPreferred: Bool = CJKVStandard.isTCPreferred || CJKVStandard.isHCPreferred
+                        return isAnyNonSCStandardPreferred ? attributedCNHans() : AttributedString(self)
+                case .enUS:
+                        return AttributedString(self)
+                case .jaJP:
+                        return AttributedString(self)
+                }
+        }
         func attributed(for characterStandard: CharacterStandard) -> AttributedString {
                 switch characterStandard {
                 case .traditional:
-                        return CJKVStandard.isTCPreferred ? attributedHK() : AttributedString(self)
+                        return CJKVStandard.isTCPreferred ? attributedHKHant() : AttributedString(self)
                 case .hongkong:
-                        return CJKVStandard.isHCPreferred ? AttributedString(self) : attributedHK()
+                        return CJKVStandard.isHCPreferred ? AttributedString(self) : attributedHKHant()
                 case .taiwan:
                         return AttributedString(self)
                 case .simplified:
                         let isAnyNonSCStandardPreferred: Bool = CJKVStandard.isTCPreferred || CJKVStandard.isHCPreferred
-                        return isAnyNonSCStandardPreferred ? attributedCN() : AttributedString(self)
+                        return isAnyNonSCStandardPreferred ? attributedCNHans() : AttributedString(self)
                 }
         }
 }
@@ -65,6 +102,10 @@ private enum CJKVStandard: Int {
                         case let code where code.hasPrefix("zh-Hant"):
                                 return .TC
                         case let code where code.hasPrefix("zh-Hans"):
+                                return .SC
+                        case let code where code.hasPrefix("yue-Hant"):
+                                return .HC
+                        case let code where code.hasPrefix("yue-Hans"):
                                 return .SC
                         case let code where code.hasPrefix("ja"):
                                 return .JP

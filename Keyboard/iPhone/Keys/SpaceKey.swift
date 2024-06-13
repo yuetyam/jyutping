@@ -43,7 +43,7 @@ struct SpaceKey: View {
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(.vertical, 6)
                                 .padding(.horizontal, 3)
-                        Text(verbatim: isLongPressEngaged ? Constant.spaceKeyLongPressHint : context.spaceKeyText.text)
+                        Text(isLongPressEngaged ? Constant.spaceKeyLongPressAttributedHint : context.spaceKeyText.attributedText)
                 }
                 .frame(width: context.widthUnit * 4, height: context.heightUnit)
                 .contentShape(Rectangle())
