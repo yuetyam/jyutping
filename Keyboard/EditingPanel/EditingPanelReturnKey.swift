@@ -62,7 +62,7 @@ struct EditingPanelReturnKey: View {
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: isSearchReturn ? "magnifyingglass" : "return")
-                                Text(verbatim: context.returnKeyText).font(.caption2)
+                                Text(context.returnKeyText).font(.caption2)
                         }
                         .foregroundStyle(foreColor)
                 }

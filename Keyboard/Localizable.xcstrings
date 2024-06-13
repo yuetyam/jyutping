@@ -655,55 +655,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "後退一格"
+            "value" : "左移一格"
           }
         }
       }
@@ -720,55 +720,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "前進一格"
+            "value" : "右移一格"
           }
         }
       }

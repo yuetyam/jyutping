@@ -88,7 +88,7 @@ struct LargePadReturnKey: View {
                         .opacity(shouldDisplayKeyImage ? 1 : 0)
                         ZStack(alignment: .topTrailing) {
                                 Color.clear
-                                Text(verbatim: context.returnKeyText)
+                                Text(context.returnKeyText)
                                         .foregroundStyle(foreColor)
                                         .padding(12)
                         }

@@ -1,4 +1,4 @@
-import UIKit
+import SwiftUI
 
 enum ReturnKeyState: Int {
 
@@ -196,5 +196,18 @@ extension EnhancedReturnKeyType {
                                 return "雅虎"
                         }
                 }
+        }
+        func attributedText(of state: ReturnKeyState) -> AttributedString {
+                let language: LanguageAttribute = {
+                        switch state {
+                        case .standbyABC, .unavailableABC:
+                                return .enUS
+                        case .bufferingSimplified, .standbySimplified, .unavailableSimplified:
+                                return .zhHansCN
+                        case .bufferingTraditional, .standbyTraditional, .unavailableTraditional:
+                                return .zhHantHK
+                        }
+                }()
+                return text(of: state).languageAttributed(for: language)
         }
 }

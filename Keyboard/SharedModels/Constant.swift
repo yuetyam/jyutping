@@ -7,8 +7,7 @@ struct Constant {
         static let fullWidth: String = "全寬"
         static let verticalText: String = "縱書"
 
-        static let spaceKeyLongPressHint: String = "← →"
-        static let spaceKeyLongPressAttributedHint: AttributedString = "← →"
+        static let spaceKeyLongPressHint: AttributedString = "← →"
 
         static let kGW: String = "gw"
         static let kDoubleGW: String = "gwgw"

@@ -59,7 +59,7 @@ struct TenKeyReturnKey: View {
                                 .fill(backColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(3)
-                        Text(verbatim: context.returnKeyText)
+                        Text(context.returnKeyText)
                                 .foregroundStyle(foreColor)
                 }
                 .frame(width: context.widthUnit * 2, height: context.heightUnit * 2)

@@ -42,7 +42,7 @@ struct TenKeySpaceKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(3)
-                        Text(isLongPressEngaged ? Constant.spaceKeyLongPressAttributedHint : context.spaceKeyText.attributedText)
+                        Text(isLongPressEngaged ? Constant.spaceKeyLongPressHint : context.spaceKeyText.attributedText)
                 }
                 .frame(height: context.heightUnit)
                 .frame(maxWidth: .infinity)

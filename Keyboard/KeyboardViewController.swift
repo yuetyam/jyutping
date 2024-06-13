@@ -727,13 +727,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         @Published private(set) var returnKeyType: EnhancedReturnKeyType = .default
         @Published private(set) var returnKeyState: ReturnKeyState = .standbyTraditional
-        @Published private(set) var returnKeyText: String = EnhancedReturnKeyType.default.text(of: .standbyTraditional)
+        @Published private(set) var returnKeyText: AttributedString = EnhancedReturnKeyType.default.attributedText(of: .standbyTraditional)
         private func updateReturnKey() {
                 let newType: EnhancedReturnKeyType = textDocumentProxy.returnKeyType.enhancedReturnKeyType
                 let enablesReturnKeyAutomatically: Bool = textDocumentProxy.enablesReturnKeyAutomatically ?? false
                 let isAvailable: Bool = !enablesReturnKeyAutomatically || textDocumentProxy.hasText
                 let newState: ReturnKeyState = ReturnKeyState.state(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isSimplified: Options.characterStandard.isSimplified, isBuffering: inputStage.isBuffering)
-                let newText: String = newType.text(of: newState)
+                let newText: AttributedString = newType.attributedText(of: newState)
                 if returnKeyType != newType {
                         returnKeyType = newType
                 }

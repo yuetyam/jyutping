@@ -72,7 +72,7 @@ struct ReturnKey: View {
                         if shouldDisplayKeyImage {
                                 Image.return.foregroundStyle(foreColor)
                         } else {
-                                Text(verbatim: context.returnKeyText).foregroundStyle(foreColor)
+                                Text(context.returnKeyText).foregroundStyle(foreColor)
                         }
                 }
                 .frame(width: context.widthUnit * 2, height: context.heightUnit)
