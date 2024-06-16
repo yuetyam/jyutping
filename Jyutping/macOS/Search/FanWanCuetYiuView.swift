@@ -24,18 +24,18 @@ struct FanWanCuetYiuView: View {
                                 Spacer()
                                 Speaker(entry.jyutping).opacity(entry.romanization.isValidJyutping ? 1 : 0)
                         }
-                        HStack {
-                                Text(verbatim: "釋義")
-                                Text.separator
-                                Text(verbatim: entry.interpretation)
-                        }
                         if let homophoneText {
                                 HStack {
                                         Text(verbatim: "同音")
                                         Text.separator
                                         Text(verbatim: homophoneText)
                                 }
-                                .padding(.top, 1)
+                                .padding(.bottom, 1)
+                        }
+                        HStack {
+                                Text(verbatim: "釋義")
+                                Text.separator
+                                Text(verbatim: entry.interpretation)
                         }
                 }
         }
