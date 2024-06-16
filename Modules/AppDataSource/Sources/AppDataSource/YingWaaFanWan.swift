@@ -32,7 +32,7 @@ public struct YingWaaFanWan: Hashable {
         }
         private static func fetch(for character: Character) -> [YingWaaFanWan] {
                 let items: [YingWaaFanWan] = DataMaster.matchYingWaaFanWan(for: character)
-                guard !(items.isEmpty) else { return items }
+                guard items.isNotEmpty else { return items }
                 let romanizations = items.map({ $0.romanization }).uniqued()
                 let hasDuplicates: Bool = romanizations.count != items.count
                 guard hasDuplicates else { return items }

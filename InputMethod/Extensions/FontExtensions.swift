@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 extension Font {
 
@@ -152,7 +153,7 @@ private extension Font {
                 let fontNames: [String] = names.filter({ found(font: $0) }).uniqued()
                 guard let primary = fontNames.first, let primaryFont = NSFont(name: primary, size: size) else { return nil }
                 let fallbacks = fontNames.dropFirst()
-                guard !(fallbacks.isEmpty) else { return Font.custom(primary, size: size) }
+                guard fallbacks.isNotEmpty else { return Font.custom(primary, size: size) }
                 let primaryDescriptor: NSFontDescriptor = primaryFont.fontDescriptor
                 let descriptors: [NSFontDescriptor] = fallbacks.map { fontName -> NSFontDescriptor in
                         return primaryDescriptor.addingAttributes([.name: fontName])

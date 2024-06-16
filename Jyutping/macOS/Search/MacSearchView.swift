@@ -22,7 +22,7 @@ struct MacSearchView: View {
                 let trimmedInput: String = text.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
                 guard trimmedInput != cantonese else { return }
                 defer { animationState += 1 }
-                guard !(trimmedInput.isEmpty) else {
+                guard trimmedInput.isNotEmpty else {
                         yingWaaEntries = []
                         choHokEntries = []
                         fanWanEntries = []
@@ -65,7 +65,7 @@ struct MacSearchView: View {
                                 }
                         ScrollView {
                                 LazyVStack(spacing: 24) {
-                                        if !(cantonese.isEmpty) {
+                                        if cantonese.isNotEmpty {
                                                 VStack {
                                                         CantoneseTextView(cantonese)
                                                         if let pronunciations = lexicon?.pronunciations {

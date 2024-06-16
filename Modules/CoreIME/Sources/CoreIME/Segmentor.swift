@@ -95,7 +95,7 @@ public struct Segmentor {
 
         private static func split(text: String) -> Segmentation {
                 let leadingTokens = splitLeading(text)
-                guard !(leadingTokens.isEmpty) else { return [] }
+                guard leadingTokens.isNotEmpty else { return [] }
                 let textCount = text.count
                 var segmentation: Segmentation = leadingTokens.map({ [$0] })
                 var previousSubelementCount = segmentation.subelementCount
@@ -106,7 +106,7 @@ public struct Segmentor {
                                 guard schemeLength < textCount else { continue }
                                 let tailText = text.dropFirst(schemeLength)
                                 let tailTokens = splitLeading(tailText)
-                                guard !(tailTokens.isEmpty) else { continue }
+                                guard tailTokens.isNotEmpty else { continue }
                                 let newSegmentation: Segmentation = tailTokens.map({ scheme + [$0] })
                                 segmentation += newSegmentation
                         }

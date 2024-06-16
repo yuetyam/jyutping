@@ -1,4 +1,5 @@
 import AVFoundation
+import CommonExtensions
 
 struct Speech {
 
@@ -96,7 +97,7 @@ struct Speech {
         private static func preferredCantoneseVoice() -> AVSpeechSynthesisVoice? {
                 let languageCode: String = SpeechLanguage.chineseHongKong.code
                 let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
-                guard !(voices.isEmpty) else { return AVSpeechSynthesisVoice(language: languageCode) }
+                guard voices.isNotEmpty else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
                         if #available(iOS 17.0, macOS 14.0, *) {
                                 // Premium Cantonese voices are broken in iOS 17
@@ -135,7 +136,7 @@ struct Speech {
         private static func preferredVoice(of language: SpeechLanguage) -> AVSpeechSynthesisVoice? {
                 let languageCode: String = language.code
                 let voices = AVSpeechSynthesisVoice.speechVoices().filter({ $0.language == languageCode })
-                guard !(voices.isEmpty) else { return AVSpeechSynthesisVoice(language: languageCode) }
+                guard voices.isNotEmpty else { return AVSpeechSynthesisVoice(language: languageCode) }
                 let preferredVoices = voices.sorted { (lhs, rhs) -> Bool in
                         if #available(iOS 16.0, macOS 13.0, *) {
                                 switch (lhs.quality, rhs.quality) {

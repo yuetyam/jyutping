@@ -38,7 +38,7 @@ extension Engine {
         public static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) -> [Candidate] {
                 guard segmentation.maxLength > 0 else { return tenKeyDeepProcess(combos: combos) }
                 let search = tenKeySearch(combos: combos, segmentation: segmentation)
-                guard !(search.isEmpty) else { return tenKeyDeepProcess(combos: combos) }
+                guard search.isNotEmpty else { return tenKeyDeepProcess(combos: combos) }
                 let comboCount = combos.count
                 let preferredSearches = search.filter({ $0.input.count == comboCount })
                 let preferredShortcuts = tenKeyProcess(combos: combos)
@@ -51,7 +51,7 @@ extension Engine {
         private static func tenKeySearch(combos: [Combo], segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
                 let textCount: Int = combos.count
                 let perfectSchemes = segmentation.filter({ $0.length == textCount })
-                if !(perfectSchemes.isEmpty) {
+                if perfectSchemes.isNotEmpty {
                         let matches = perfectSchemes.map({ scheme -> [Candidate] in
                                 var queries: [[Candidate]] = []
                                 for number in (0..<scheme.count) {
@@ -310,7 +310,7 @@ extension Engine {
                         guard canProcess(tailText) else { return [] }
                         let tailSegmentation = Segmentor.segment(text: tailText)
                         let tailCandidates = process(text: tailText, segmentation: tailSegmentation, needsSymbols: needsSymbols, limit: 8).prefix(100)
-                        guard !(tailCandidates.isEmpty) else { return [] }
+                        guard tailCandidates.isNotEmpty else { return [] }
                         let headCandidates = primary.filter({ $0.input == headText }).prefix(8)
                         let combines = headCandidates.map({ head -> [Candidate] in
                                 return tailCandidates.map({ head + $0 })
@@ -337,11 +337,11 @@ extension Engine {
                 let matched = match(text: text, input: text, limit: limit)
                 let regularCandidates: [Candidate] = {
                         var items = matched + preferredSearches
-                        guard !(items.isEmpty) else { return items }
+                        guard items.isNotEmpty else { return items }
                         guard limit == nil else { return items }
                         guard needsSymbols else { return items }
                         let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
-                        guard !(symbols.isEmpty) else { return items }
+                        guard symbols.isNotEmpty else { return items }
                         for symbol in symbols.reversed() {
                                 if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
                                         items.insert(symbol, at: index + 1)
@@ -355,7 +355,7 @@ extension Engine {
         private static func search(text: String, segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
                 let textCount: Int = text.count
                 let perfectSchemes = segmentation.filter({ $0.length == textCount })
-                if !(perfectSchemes.isEmpty) {
+                if perfectSchemes.isNotEmpty {
                         let matches = perfectSchemes.map({ scheme -> [Candidate] in
                                 var queries: [[Candidate]] = []
                                 for number in (0..<scheme.count) {

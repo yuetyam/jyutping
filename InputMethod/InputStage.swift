@@ -15,7 +15,7 @@ enum InputStage: Int {
         /// BufferText become empty
         case ending
 
-        /// !(bufferText.isEmpty)
+        /// bufferText.isNotEmpty
         var isBuffering: Bool {
                 switch self {
                 case .idle:

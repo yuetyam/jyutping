@@ -44,7 +44,7 @@ extension Engine {
                         let tailText = String(text.dropFirst(headInputCount))
                         let tailSegmentation = PinyinSegmentor.segment(text: tailText)
                         let tailCandidates = process(pinyin: tailText, schemes: tailSegmentation, limit: 8).prefix(100)
-                        guard !(tailCandidates.isEmpty) else { return [] }
+                        guard tailCandidates.isNotEmpty else { return [] }
                         let headCandidates = primary.filter({ $0.input == headText }).prefix(8)
                         let combines = headCandidates.map({ head -> [PinyinLexicon] in
                                 return tailCandidates.map({ head + $0 })
@@ -66,7 +66,7 @@ extension Engine {
         private static func search(pinyin text: String, schemes: [[String]], limit: Int? = nil) -> [PinyinLexicon] {
                 let textCount: Int = text.count
                 let perfectSchemes = schemes.filter({ $0.summedLength == textCount })
-                if !(perfectSchemes.isEmpty) {
+                if perfectSchemes.isNotEmpty {
                         let matches = perfectSchemes.map({ scheme -> [PinyinLexicon] in
                                 var queries: [[PinyinLexicon]] = []
                                 for number in (0..<scheme.count) {

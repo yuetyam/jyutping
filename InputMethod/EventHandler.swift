@@ -108,7 +108,7 @@ extension JyutpingInputController {
                         case KeyCode.Special.VK_BACKWARD_DELETE, KeyCode.Special.VK_FORWARD_DELETE:
                                 switch currentInputForm {
                                 case .cantonese:
-                                        guard !(candidates.isEmpty) else { return false }
+                                        guard candidates.isNotEmpty else { return false }
                                         let index = appContext.highlightedIndex
                                         guard let candidate = appContext.displayCandidates.fetch(index)?.candidate else { return true }
                                         guard candidate.isCantonese else { return true }
@@ -452,7 +452,7 @@ extension JyutpingInputController {
                 case .other:
                         switch event.keyCode {
                         case KeyCode.Special.VK_HOME:
-                                let shouldJump2FirstPage: Bool = currentInputForm.isCantonese && !(candidates.isEmpty)
+                                let shouldJump2FirstPage: Bool = currentInputForm.isCantonese && candidates.isNotEmpty
                                 guard shouldJump2FirstPage else { return false }
                                 updateDisplayCandidates(.establish, highlight: .start)
                                 return true

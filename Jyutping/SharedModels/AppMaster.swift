@@ -40,7 +40,7 @@ extension AppMaster {
                 let filtered: String = text.filter(\.isIdeographic)
                 let search = CantoneseLexicon.search(text: filtered)
                 guard filtered.count != text.count else { return search }
-                guard !(filtered.isEmpty) else { return search }
+                guard filtered.isNotEmpty else { return search }
                 let transformed = text.textBlocks
                 var handledCount: Int = 0
                 var combinedText: String = String.empty

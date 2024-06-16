@@ -16,7 +16,7 @@ extension Segmentor {
         }
         private static func split(combos: [Combo]) -> Segmentation {
                 let leadingTokens = splitLeading(combos: combos)
-                guard !(leadingTokens.isEmpty) else { return [] }
+                guard leadingTokens.isNotEmpty else { return [] }
                 let textCount = combos.count
                 var segmentation: Segmentation = leadingTokens.map({ [$0] })
                 var previousSubelementCount = segmentation.subelementCount
@@ -27,7 +27,7 @@ extension Segmentor {
                                 guard schemeLength < textCount else { continue }
                                 let tailCombos = combos.dropFirst(schemeLength)
                                 let tailTokens = splitLeading(combos: tailCombos)
-                                guard !(tailTokens.isEmpty) else { continue }
+                                guard tailTokens.isNotEmpty else { continue }
                                 let newSegmentation: Segmentation = tailTokens.map({ scheme + [$0] })
                                 segmentation += newSegmentation
                         }

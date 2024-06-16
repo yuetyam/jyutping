@@ -25,7 +25,7 @@ final class AppContext: ObservableObject {
         }
 
         func update(with newDisplayCandidates: [DisplayCandidate], highlight: Highlight) {
-                guard !(newDisplayCandidates.isEmpty) else {
+                guard newDisplayCandidates.isNotEmpty else {
                         resetDisplayContext()
                         return
                 }

@@ -115,7 +115,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         ///
         /// In iOS 17, we may still need to use `insertText()` and do some hacks.
         private func input(_ text: String) {
-                guard !(text.isEmpty) else { return }
+                guard text.isNotEmpty else { return }
                 canMarkText = false
                 let previousContext: String = textDocumentProxy.documentContextBeforeInput ?? String.empty
                 let previousLength: Int = previousContext.count
@@ -135,14 +135,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 textDocumentProxy.insertText(text)
         }
         private func inputBufferText(followedBy text2insert: String? = nil) {
-                guard !(bufferText.isEmpty) else {
-                        guard let text2insert, !(text2insert.isEmpty) else { return }
+                guard bufferText.isNotEmpty else {
+                        guard let text2insert, text2insert.isNotEmpty else { return }
                         textDocumentProxy.insertText(text2insert)
                         return
                 }
                 canMarkText = false
                 let text: String = {
-                        guard let text2insert, !(text2insert.isEmpty) else { return bufferText }
+                        guard let text2insert, text2insert.isNotEmpty else { return bufferText }
                         return bufferText + text2insert
                 }()
                 clearBuffer()
@@ -197,7 +197,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReturnKey()
                         case (false, true):
                                 inputStage = .ending
-                                if Options.isInputMemoryOn && !(selectedCandidates.isEmpty) {
+                                if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
                                         UserLexicon.handle(concatenated)
                                 }
@@ -241,7 +241,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 updateReturnKey()
                         case (false, true):
                                 inputStage = .ending
-                                if Options.isInputMemoryOn && !(selectedCandidates.isEmpty) {
+                                if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
                                         UserLexicon.handle(concatenated)
                                 }
@@ -442,7 +442,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 case .paste:
                         guard UIPasteboard.general.hasStrings else { return }
                         guard let text = UIPasteboard.general.string else { return }
-                        guard !(text.isEmpty) else { return }
+                        guard text.isNotEmpty else { return }
                         textDocumentProxy.insertText(text)
                 case .moveCursorBackward:
                         textDocumentProxy.moveBackward()
@@ -552,7 +552,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         // MARK: - Candidate Suggestions
 
         private func tenKeySuggest() {
-                guard !(bufferCombos.isEmpty) else {
+                guard bufferCombos.isNotEmpty else {
                         text2mark = String.empty
                         candidates = []
                         return
@@ -569,7 +569,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let segmentation = Segmentor.segment(text: processingText)
                 let userLexiconCandidates: [Candidate] = Options.isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
-                let asap: Bool = !(userLexiconCandidates.isEmpty)
+                let asap: Bool = userLexiconCandidates.isNotEmpty
                 let engineCandidates: [Candidate] = Engine.suggest(origin: bufferText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
                 let text2mark: String = {
                         if let mark = userLexiconCandidates.first?.mark { return mark }
@@ -589,7 +589,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
-                guard !(text.isEmpty) else {
+                guard text.isNotEmpty else {
                         text2mark = bufferText
                         candidates = []
                         return

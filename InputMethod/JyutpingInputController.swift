@@ -226,7 +226,7 @@ final class JyutpingInputController: IMKInputController {
                 didSet {
                         switch bufferText.first {
                         case .none:
-                                if AppSettings.isInputMemoryOn && !(selectedCandidates.isEmpty) {
+                                if AppSettings.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
                                         UserLexicon.handle(concatenated)
                                 }
@@ -335,7 +335,7 @@ final class JyutpingInputController: IMKInputController {
                 let segmentation = Segmentor.segment(text: processingText)
                 let userLexiconCandidates: [Candidate] = AppSettings.isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
-                let asap: Bool = !(userLexiconCandidates.isEmpty)
+                let asap: Bool = userLexiconCandidates.isNotEmpty
                 let engineCandidates: [Candidate] = Engine.suggest(origin: bufferText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
                 let text2mark: String = {
                         if let mark = userLexiconCandidates.first?.mark { return mark }
@@ -355,7 +355,7 @@ final class JyutpingInputController: IMKInputController {
         }
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
-                guard !(text.isEmpty) else {
+                guard text.isNotEmpty else {
                         mark(text: bufferText)
                         candidates = []
                         return
@@ -378,7 +378,7 @@ final class JyutpingInputController: IMKInputController {
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 let converted = text.compactMap({ CharacterStandard.cangjie(of: $0) })
-                let isValidSequence: Bool = !(converted.isEmpty) && (converted.count == text.count)
+                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: AppSettings.cangjieVariant)
@@ -392,7 +392,7 @@ final class JyutpingInputController: IMKInputController {
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = CharacterStandard.strokeTransform(text)
                 let converted = transformed.compactMap({ CharacterStandard.stroke(of: $0) })
-                let isValidSequence: Bool = !(converted.isEmpty) && (converted.count == text.count)
+                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         mark(text: String(converted))
                         let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)

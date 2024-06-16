@@ -35,7 +35,7 @@ struct SearchView: View {
                                         let trimmedInput: String = inputText.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
                                         guard trimmedInput != cantonese else { return }
                                         defer { animationState += 1 }
-                                        guard !(trimmedInput.isEmpty) else {
+                                        guard trimmedInput.isNotEmpty else {
                                                 yingWaaEntries = []
                                                 choHokEntries = []
                                                 fanWanEntries = []
@@ -58,7 +58,7 @@ struct SearchView: View {
                                         }
                                 }
                 }
-                if !(cantonese.isEmpty) {
+                if cantonese.isNotEmpty {
                         Section {
                                 CantoneseTextLabel(cantonese)
                                 if let pronunciations = lexicon?.pronunciations {
@@ -69,7 +69,7 @@ struct SearchView: View {
                         }
                         .textSelection(.enabled)
                 }
-                if !(yingWaaEntries.isEmpty) {
+                if yingWaaEntries.isNotEmpty {
                         Section {
                                 ForEach(0..<yingWaaEntries.count, id: \.self) { index in
                                         YingWaaFanWanLabel(entry: yingWaaEntries[index])
@@ -87,7 +87,7 @@ struct SearchView: View {
                         }
                         .textSelection(.enabled)
                 }
-                if !(choHokEntries.isEmpty) {
+                if choHokEntries.isNotEmpty {
                         Section {
                                 ForEach(0..<choHokEntries.count, id: \.self) { index in
                                         ChoHokYuetYamCitYiuLabel(entry: choHokEntries[index])
@@ -105,7 +105,7 @@ struct SearchView: View {
                         }
                         .textSelection(.enabled)
                 }
-                if !(fanWanEntries.isEmpty) {
+                if fanWanEntries.isNotEmpty {
                         Section {
                                 ForEach(0..<fanWanEntries.count, id: \.self) { index in
                                         FanWanCuetYiuLabel(entry: fanWanEntries[index])
@@ -115,7 +115,7 @@ struct SearchView: View {
                         }
                         .textSelection(.enabled)
                 }
-                if !(gwongWanEntries.isEmpty) {
+                if gwongWanEntries.isNotEmpty {
                         Section {
                                 ForEach(0..<gwongWanEntries.count, id: \.self) { index in
                                         GwongWanLabel(entry: gwongWanEntries[index])

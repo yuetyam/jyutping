@@ -1,5 +1,6 @@
 import Foundation
 import CoreIME
+import CommonExtensions
 
 struct EmojiMaster {
 
@@ -7,7 +8,7 @@ struct EmojiMaster {
         private(set) static var frequent: [String] = {
                 let history = UserDefaults.standard.string(forKey: key)
                 guard let history else { return defaultFrequent }
-                guard !(history.isEmpty) else { return defaultFrequent }
+                guard history.isNotEmpty else { return defaultFrequent }
                 guard history.contains(",") else { return [history] }
                 return history.split(separator: ",").map({ $0.trimmingCharacters(in: .whitespaces) })
         }()

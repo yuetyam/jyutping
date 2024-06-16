@@ -1,6 +1,7 @@
 import Foundation
 import SQLite3
 import CoreIME
+import CommonExtensions
 
 struct UserLexicon {
 
@@ -79,11 +80,11 @@ struct UserLexicon {
                 let searches: [Candidate] = {
                         let textCount = text.count
                         let schemes = segmentation.filter({ $0.length == textCount })
-                        guard !(schemes.isEmpty) else { return [] }
+                        guard schemes.isNotEmpty else { return [] }
                         let matches = schemes.map({ scheme -> [Candidate] in
                                 let pingText = scheme.map(\.origin).joined()
                                 let matched = match(text: pingText, input: text, isShortcut: false)
-                                guard !(matched.isEmpty) else { return [] }
+                                guard matched.isNotEmpty else { return [] }
                                 let text2mark = scheme.map(\.text).joined(separator: " ")
                                 let syllables = scheme.map(\.origin).joined(separator: " ")
                                 return matched.compactMap({ item -> Candidate? in

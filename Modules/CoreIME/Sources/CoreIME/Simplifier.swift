@@ -36,19 +36,19 @@ struct Simplifier {
 
         private static func transform(_ text: String) -> String {
                 let roundOne = replace(text, replacement: "W")
-                guard !(roundOne.matched.isEmpty) else {
+                guard roundOne.matched.isNotEmpty else {
                         return text.map(Engine.matchT2S(_:)).joined()
                 }
 
                 let roundTwo = replace(roundOne.modified, replacement: "X")
-                guard !(roundTwo.matched.isEmpty) else {
+                guard roundTwo.matched.isNotEmpty else {
                         let transformed: String = roundTwo.modified.map(Engine.matchT2S(_:)).joined()
                         let reverted: String = transformed.replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         return reverted
                 }
 
                 let roundThree = replace(roundTwo.modified, replacement: "Y")
-                guard !(roundThree.matched.isEmpty) else {
+                guard roundThree.matched.isNotEmpty else {
                         let transformed: String = roundThree.modified.map(Engine.matchT2S(_:)).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
@@ -57,7 +57,7 @@ struct Simplifier {
                 }
 
                 let roundFour = replace(roundThree.modified, replacement: "Z")
-                guard !(roundFour.matched.isEmpty) else {
+                guard roundFour.matched.isNotEmpty else {
                         let transformed: String = roundFour.modified.map(Engine.matchT2S(_:)).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)

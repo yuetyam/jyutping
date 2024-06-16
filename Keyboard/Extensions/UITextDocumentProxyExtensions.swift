@@ -22,7 +22,7 @@ extension UITextDocumentProxy {
                 let selected: String = selectedText ?? String.empty
                 let tail: String = documentContextAfterInput ?? String.empty
                 let text: String = head + selected + tail
-                guard !(text.isEmpty) else { return false }
+                guard text.isNotEmpty else { return false }
                 UIPasteboard.general.string = text
                 return true
         }
@@ -35,19 +35,19 @@ extension UITextDocumentProxy {
                 }
                 let head: String = documentContextBeforeInput ?? String.empty
                 let tail: String = documentContextAfterInput ?? String.empty
-                if !(head.isEmpty) {
+                if head.isNotEmpty {
                         for _ in 0..<head.count {
                                 deleteBackward()
                         }
                 }
-                if !(tail.isEmpty) {
+                if tail.isNotEmpty {
                         adjustTextPosition(byCharacterOffset: tail.utf16.count)
                         for _ in 0..<tail.count {
                                 deleteBackward()
                         }
                 }
                 let text: String = head + tail
-                guard !(text.isEmpty) else { return false }
+                guard text.isNotEmpty else { return false }
                 UIPasteboard.general.string = text
                 return true
         }
@@ -59,19 +59,19 @@ extension UITextDocumentProxy {
                 }
                 let head: String = documentContextBeforeInput ?? String.empty
                 let tail: String = documentContextAfterInput ?? String.empty
-                if !(head.isEmpty) {
+                if head.isNotEmpty {
                         for _ in 0..<head.count {
                                 deleteBackward()
                         }
                 }
-                if !(tail.isEmpty) {
+                if tail.isNotEmpty {
                         adjustTextPosition(byCharacterOffset: tail.utf16.count)
                         for _ in 0..<tail.count {
                                 deleteBackward()
                         }
                 }
                 let text: String = head + tail
-                guard !(text.isEmpty) else { return }
+                guard text.isNotEmpty else { return }
                 let convertedText: String = {
                         let simplified: String = text.traditional2SimplifiedConverted()
                         return (simplified == text) ? text.simplified2TraditionalConverted() : simplified

@@ -404,12 +404,12 @@ struct AppSettings {
                 let fallback: [String] = [Constant.PingFangHK]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCandidateFontList)
                 guard let savedNames else { return fallback }
-                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                guard !(names.isEmpty) else { return fallback }
+                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
+                guard names.isNotEmpty else { return fallback }
                 return names
         }()
         static func updateCustomCandidateFonts(to fontNames: [String]) {
-                let names: [String] = fontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                let names: [String] = fontNames.map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
                 customCandidateFonts = names
                 let fontList: String = names.joined(separator: ",")
                 UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomCandidateFontList)
@@ -420,12 +420,12 @@ struct AppSettings {
                 let fallback: [String] = [Constant.HelveticaNeue]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCommentFontList)
                 guard let savedNames else { return fallback }
-                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                guard !(names.isEmpty) else { return fallback }
+                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
+                guard names.isNotEmpty else { return fallback }
                 return names
         }()
         static func updateCustomCommentFonts(to fontNames: [String]) {
-                let names: [String] = fontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                let names: [String] = fontNames.map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
                 customCommentFonts = names
                 let fontList: String = names.joined(separator: ",")
                 UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomCommentFontList)
@@ -436,12 +436,12 @@ struct AppSettings {
                 let fallback: [String] = [Constant.Menlo]
                 let savedNames = UserDefaults.standard.string(forKey: SettingsKey.CustomLabelFontList)
                 guard let savedNames else { return fallback }
-                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
-                guard !(names.isEmpty) else { return fallback }
+                let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
+                guard names.isNotEmpty else { return fallback }
                 return names
         }()
         static func updateCustomLabelFonts(to fontNames: [String]) {
-                let names: [String] = fontNames.map({ $0.trimmed() }).filter({ !($0.isEmpty) }).uniqued()
+                let names: [String] = fontNames.map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
                 customLabelFonts = names
                 let fontList: String = names.joined(separator: ",")
                 UserDefaults.standard.set(fontList, forKey: SettingsKey.CustomLabelFontList)
