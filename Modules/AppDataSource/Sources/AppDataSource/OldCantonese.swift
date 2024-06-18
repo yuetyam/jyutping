@@ -1,6 +1,8 @@
-struct OldCantonese {
+// TODO: Move to package Linguistics
 
-        static func IPA(for syllable: String) -> String {
+public struct OldCantonese {
+
+        public static func IPA(for syllable: String) -> String {
                 lazy var fallback: String = "[ ? ]"
                 let isFineSyllable: Bool = syllable != "X" || syllable != "?"
                 guard isFineSyllable else { return fallback }

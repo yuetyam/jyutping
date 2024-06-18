@@ -4,48 +4,41 @@ import SQLite3
 private extension DataMaster {
         static func matchGwongWan(for character: Character) -> [GwongWanCharacter] {
                 var entries: [GwongWanCharacter] = []
-                guard let code: UInt32 = character.unicodeScalars.first?.value else { return entries }
-                let queryString = "SELECT * FROM gwongwantable WHERE code = \(code);"
-                var queryStatement: OpaquePointer? = nil
-                defer {
-                        sqlite3_finalize(queryStatement)
-                }
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        while sqlite3_step(queryStatement) == SQLITE_ROW {
-                                // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
-                                let word: String = String(cString: sqlite3_column_text(queryStatement, 1))
-                                let rhyme: String = String(cString: sqlite3_column_text(queryStatement, 2))
-                                let subRime: String = String(cString: sqlite3_column_text(queryStatement, 3))
-                                let subRhymeSerial: Int = Int(sqlite3_column_int64(queryStatement, 4))
-                                let subRhymeNumber: Int = Int(sqlite3_column_int64(queryStatement, 5))
-                                let upper: String = String(cString: sqlite3_column_text(queryStatement, 6))
-                                let lower: String = String(cString: sqlite3_column_text(queryStatement, 7))
-                                let initial: String = String(cString: sqlite3_column_text(queryStatement, 8))
-                                let rounding: String = String(cString: sqlite3_column_text(queryStatement, 9))
-                                let division: String = String(cString: sqlite3_column_text(queryStatement, 10))
-                                let rhymeClass: String = String(cString: sqlite3_column_text(queryStatement, 11))
-                                let repeating: String = String(cString: sqlite3_column_text(queryStatement, 12))
-                                let tone: String = String(cString: sqlite3_column_text(queryStatement, 13))
-                                let interpretation: String = String(cString: sqlite3_column_text(queryStatement, 14))
-                                let instance = GwongWanCharacter(word: word, rhyme: rhyme, subRhyme: subRime, subRhymeSerial: subRhymeSerial, subRhymeNumber: subRhymeNumber, upper: upper, lower: lower, initial: initial, rounding: rounding, division: division, rhymeClass: rhymeClass, repeating: repeating, tone: tone, interpretation: interpretation)
-                                entries.append(instance)
-                        }
+                guard let code: UInt32 = character.unicodeScalars.first?.value else { return [] }
+                let command: String = "SELECT * FROM gwongwantable WHERE code = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        // let code: Int = Int(sqlite3_column_int64(queryStatement, 0))
+                        let word: String = String(cString: sqlite3_column_text(statement, 1))
+                        let rhyme: String = String(cString: sqlite3_column_text(statement, 2))
+                        let subRime: String = String(cString: sqlite3_column_text(statement, 3))
+                        let subRhymeSerial: Int = Int(sqlite3_column_int64(statement, 4))
+                        let subRhymeNumber: Int = Int(sqlite3_column_int64(statement, 5))
+                        let upper: String = String(cString: sqlite3_column_text(statement, 6))
+                        let lower: String = String(cString: sqlite3_column_text(statement, 7))
+                        let initial: String = String(cString: sqlite3_column_text(statement, 8))
+                        let rounding: String = String(cString: sqlite3_column_text(statement, 9))
+                        let division: String = String(cString: sqlite3_column_text(statement, 10))
+                        let rhymeClass: String = String(cString: sqlite3_column_text(statement, 11))
+                        let repeating: String = String(cString: sqlite3_column_text(statement, 12))
+                        let tone: String = String(cString: sqlite3_column_text(statement, 13))
+                        let interpretation: String = String(cString: sqlite3_column_text(statement, 14))
+                        let instance = GwongWanCharacter(word: word, rhyme: rhyme, subRhyme: subRime, subRhymeSerial: subRhymeSerial, subRhymeNumber: subRhymeNumber, upper: upper, lower: lower, initial: initial, rounding: rounding, division: division, rhymeClass: rhymeClass, repeating: repeating, tone: tone, interpretation: interpretation)
+                        entries.append(instance)
                 }
                 return entries
         }
 }
 
 public struct GwongWan {
-
-        public static func match(for character: Character) -> [GwongWanCharacter] {
-                let originalMatch = fetch(for: character)
-                guard originalMatch.isEmpty else { return originalMatch }
-                let traditionalText: String = String(character).convertedS2T()
-                let traditionalCharacter: Character = traditionalText.first ?? character
-                return fetch(for: traditionalCharacter)
-        }
-        private static func fetch(for character: Character) -> [GwongWanCharacter] {
-                return DataMaster.matchGwongWan(for: character).uniqued()
+        public static func match<T: StringProtocol>(text: T) -> [GwongWanCharacter] {
+                guard let character = text.first else { return [] }
+                let matched = DataMaster.matchGwongWan(for: character).uniqued()
+                guard matched.isEmpty else { return matched }
+                let traditionalCharacter: Character = text.convertedS2T().first ?? character
+                return DataMaster.matchGwongWan(for: traditionalCharacter).uniqued()
         }
 }
 

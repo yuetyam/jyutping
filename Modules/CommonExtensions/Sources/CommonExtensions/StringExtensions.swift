@@ -42,24 +42,20 @@ extension String {
         public static let fullWidthSpace: String = "\u{3000}"
 }
 
-extension String {
-
-        /// Convert simplified Chinese characters to traditional
-        /// - Returns: Traditional Chinese characters
-        public func simplified2TraditionalConverted() -> String {
-                let transformed: String? = self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false)
-                return transformed ?? self
-        }
-
-        /// Convert traditional Chinese characters to simplified
-        /// - Returns: Simplified Chinese characters
-        public func traditional2SimplifiedConverted() -> String {
-                let transformed: String? = self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true)
-                return transformed ?? self
-        }
-}
-
 extension StringProtocol {
+
+        /// Convert simplified CJKV characters to traditional
+        /// - Returns: Traditional CJKV characters
+        public func simplified2TraditionalConverted() -> String {
+                return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false) ?? (self as? String) ?? String(self)
+        }
+
+        /// Convert traditional CJKV characters to simplified
+        /// - Returns: Simplified CJKV characters
+        public func traditional2SimplifiedConverted() -> String {
+                return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true) ?? (self as? String) ?? String(self)
+        }
+
         /// Returns a new String made by removing `.whitespacesAndNewlines` & `.controlCharacters` from both ends of the String.
         public func trimmed() -> String {
                 return self.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)

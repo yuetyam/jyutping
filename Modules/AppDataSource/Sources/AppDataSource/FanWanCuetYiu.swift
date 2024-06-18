@@ -62,8 +62,6 @@ public struct FanWanCuetYiu: Hashable {
                 self.rhyme = rhyme
                 self.interpretation = processedInterpretation
                 self.abstract = abstract
-                self.ipa = OldCantonese.IPA(for: convertedRomanization)
-                self.jyutping = convertedRomanization
                 self.homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != word })
         }
 
@@ -77,18 +75,21 @@ public struct FanWanCuetYiu: Hashable {
         public let interpretation: String
 
         public let abstract: String
-        public let ipa: String
-        public let jyutping: String
         public let homophones: [String]
 
-        public static func match(for character: Character) -> [FanWanCuetYiu] {
-                let originalMatch = fetch(for: character)
-                guard originalMatch.isEmpty else { return originalMatch }
-                let traditionalText: String = String(character).convertedS2T()
-                let traditionalCharacter: Character = traditionalText.first ?? character
-                return fetch(for: traditionalCharacter)
+        public static func ==(lhs: FanWanCuetYiu, rhs: FanWanCuetYiu) -> Bool {
+                return lhs.word == rhs.word && lhs.romanization == rhs.romanization
         }
-        private static func fetch(for character: Character) -> [FanWanCuetYiu] {
-                return DataMaster.matchFanWanCuetYiu(for: character).uniqued()
+        public func hash(into hasher: inout Hasher) {
+                hasher.combine(word)
+                hasher.combine(romanization)
+        }
+
+        public static func match<T: StringProtocol>(text: T) -> [FanWanCuetYiu] {
+                guard let character = text.first else { return [] }
+                let match = DataMaster.matchFanWanCuetYiu(for: character).uniqued()
+                guard match.isEmpty else { return match }
+                let traditionalCharacter: Character = text.convertedS2T().first ?? character
+                return DataMaster.matchFanWanCuetYiu(for: traditionalCharacter).uniqued()
         }
 }

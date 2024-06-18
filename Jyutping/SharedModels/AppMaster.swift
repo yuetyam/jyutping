@@ -81,45 +81,6 @@ extension AppMaster {
 }
 
 extension AppMaster {
-
-        /// Lookup YingWaaFanWan for the given text
-        /// - Parameter text: Character to Lookup
-        /// - Returns: An Array of YingWaaFanWan
-        static func lookupYingWaaFanWan(for text: String) -> [YingWaaFanWan] {
-                guard text.count == 1 else { return [] }
-                let character = text.first!
-                return YingWaaFanWan.match(for: character)
-        }
-
-        /// Lookup ChoHokYuetYamCitYiu for the given text
-        /// - Parameter text: Character to Lookup
-        /// - Returns: An Array of ChoHokYuetYamCitYiu
-        static func lookupChoHokYuetYamCitYiu(for text: String) -> [ChoHokYuetYamCitYiu] {
-                guard text.count == 1 else { return [] }
-                let character = text.first!
-                return ChoHokYuetYamCitYiu.match(for: character)
-        }
-
-        /// Lookup FanWanCuetYiu for the given text
-        /// - Parameter text: Character to Lookup
-        /// - Returns: An Array of FanWanCuetYiu
-        static func lookupFanWanCuetYiu(for text: String) -> [FanWanCuetYiu] {
-                guard text.count == 1 else { return [] }
-                let character = text.first!
-                return FanWanCuetYiu.match(for: character)
-        }
-
-        /// Lookup GwongWan for the given text
-        /// - Parameter text: Character to Lookup
-        /// - Returns: An Array of GwongWanCharacter
-        static func lookupGwongWan(for text: String) -> [GwongWanCharacter] {
-                guard text.count == 1 else { return [] }
-                let character = text.first!
-                return GwongWan.match(for: character)
-        }
-}
-
-extension AppMaster {
         private(set) static var confusionEntries: [ConfusionEntry] = []
         static func fetchConfusionEntries() {
                 confusionEntries = Confusion.fetch()

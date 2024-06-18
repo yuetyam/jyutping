@@ -46,16 +46,15 @@ private extension DataMaster {
 public struct ChoHokYuetYamCitYiu: Hashable {
 
         fileprivate init(word: String, romanization: String, initial: String, final: String, tone: String, faancit: String, homophones: [String]) {
-                let convertedInitial: String = initial.replacingOccurrences(of: "X", with: "")
-                let pronunciation: String = "\(convertedInitial)\(final)"
+                let convertedInitial: String = initial == "X" ? "" : initial
+                let convertedFinal: String = final == "X" ? "" : final
+                let pronunciation: String = "\(convertedInitial)\(convertedFinal)"
                 let faanciText: String = faancit + "切"
                 self.word = word
                 self.pronunciation = pronunciation
                 self.tone = tone
                 self.faancit = faanciText
                 self.romanization = romanization
-                self.ipa = OldCantonese.IPA(for: romanization)
-                self.jyutping = romanization
                 self.homophones = homophones
         }
 
@@ -64,18 +63,21 @@ public struct ChoHokYuetYamCitYiu: Hashable {
         public let tone: String
         public let faancit: String
         public let romanization: String
-        public let ipa: String
-        public let jyutping: String
         public let homophones: [String]
 
-        public static func match(for character: Character) -> [ChoHokYuetYamCitYiu] {
-                let originalMatch = fetch(for: character)
-                guard originalMatch.isEmpty else { return originalMatch }
-                let traditionalText: String = String(character).convertedS2T()
-                let traditionalCharacter: Character = traditionalText.first ?? character
-                return fetch(for: traditionalCharacter)
+        public static func ==(lhs: ChoHokYuetYamCitYiu, rhs: ChoHokYuetYamCitYiu) -> Bool {
+                return lhs.word == rhs.word && lhs.romanization == rhs.romanization
         }
-        private static func fetch(for character: Character) -> [ChoHokYuetYamCitYiu] {
-                return DataMaster.matchChoHokYuetYamCitYiu(for: character).uniqued()
+        public func hash(into hasher: inout Hasher) {
+                hasher.combine(word)
+                hasher.combine(romanization)
+        }
+
+        public static func match<T: StringProtocol>(text: T) -> [ChoHokYuetYamCitYiu] {
+                guard let character = text.first else { return [] }
+                let matched = DataMaster.matchChoHokYuetYamCitYiu(for: character).uniqued()
+                guard matched.isEmpty else { return matched }
+                let traditionalCharacter: Character = text.convertedS2T().first ?? character
+                return DataMaster.matchChoHokYuetYamCitYiu(for: traditionalCharacter).uniqued()
         }
 }

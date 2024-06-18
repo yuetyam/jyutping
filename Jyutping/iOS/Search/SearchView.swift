@@ -32,7 +32,7 @@ struct SearchView: View {
                                 .autocorrectionDisabled(true)
                                 .submitLabel(submitLabel)
                                 .onSubmit {
-                                        let trimmedInput: String = inputText.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: .controlCharacters)
+                                        let trimmedInput: String = inputText.trimmed()
                                         guard trimmedInput != cantonese else { return }
                                         defer { animationState += 1 }
                                         guard trimmedInput.isNotEmpty else {
@@ -44,10 +44,10 @@ struct SearchView: View {
                                                 cantonese = String.empty
                                                 return
                                         }
-                                        yingWaaEntries = AppMaster.lookupYingWaaFanWan(for: trimmedInput)
-                                        choHokEntries = AppMaster.lookupChoHokYuetYamCitYiu(for: trimmedInput)
-                                        fanWanEntries = AppMaster.lookupFanWanCuetYiu(for: trimmedInput)
-                                        gwongWanEntries = AppMaster.lookupGwongWan(for: trimmedInput)
+                                        yingWaaEntries = YingWaaFanWan.match(text: trimmedInput)
+                                        choHokEntries = ChoHokYuetYamCitYiu.match(text: trimmedInput)
+                                        fanWanEntries = FanWanCuetYiu.match(text: trimmedInput)
+                                        gwongWanEntries = GwongWan.match(text: trimmedInput)
                                         let cantoneseLexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
                                         if cantoneseLexicon.pronunciations.isEmpty {
                                                 lexicon = nil

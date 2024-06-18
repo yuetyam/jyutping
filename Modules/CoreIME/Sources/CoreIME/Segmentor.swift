@@ -136,6 +136,10 @@ public struct Segmentor {
                         default:
                                 return []
                         }
+                case 4 where text == "mama":
+                        return mama
+                case 4 where text == "mami":
+                        return mami
                 default:
                         let rawText: String = text.filter({ !$0.isSeparatorOrTone })
                         let key: Int = rawText.hash
@@ -160,4 +164,6 @@ public struct Segmentor {
         private static let letterA: Segmentation = [[SegmentToken(text: "a", origin: "aa")]]
         private static let letterO: Segmentation = [[SegmentToken(text: "o", origin: "o")]]
         private static let letterM: Segmentation = [[SegmentToken(text: "m", origin: "m")]]
+        private static let mama: Segmentation = [[SegmentToken(text: "ma", origin: "maa"), SegmentToken(text: "ma", origin: "maa")]]
+        private static let mami: Segmentation = [[SegmentToken(text: "ma", origin: "maa"), SegmentToken(text: "mi", origin: "mi")]]
 }

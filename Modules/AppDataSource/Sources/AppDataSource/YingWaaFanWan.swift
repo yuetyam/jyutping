@@ -8,8 +8,6 @@ public struct YingWaaFanWan: Hashable {
         public let pronunciation: String
         public let pronunciationMark: String?
         public let interpretation: String?
-        public let ipa: String
-        public let jyutping: String
         public let homophones: [String]
 
         fileprivate init(word: String, romanization: String, pronunciation: String, pronunciationMark: String, interpretation: String, homophones: [String]) {
@@ -18,25 +16,31 @@ public struct YingWaaFanWan: Hashable {
                 self.pronunciation = pronunciation
                 self.pronunciationMark = YingWaaFanWan.handlePronunciationMark(of: pronunciationMark)
                 self.interpretation = (interpretation == "X") ? nil : interpretation
-                self.ipa = OldCantonese.IPA(for: romanization)
-                self.jyutping = romanization
                 self.homophones = homophones
         }
 
-        public static func match(for character: Character) -> [YingWaaFanWan] {
-                let originalMatch = fetch(for: character)
-                guard originalMatch.isEmpty else { return originalMatch }
-                let traditionalText: String = String(character).convertedS2T()
-                let traditionalCharacter: Character = traditionalText.first ?? character
+        public static func ==(lhs: YingWaaFanWan, rhs: YingWaaFanWan) -> Bool {
+                return lhs.word == rhs.word && lhs.romanization == rhs.romanization
+        }
+        public func hash(into hasher: inout Hasher) {
+                hasher.combine(word)
+                hasher.combine(romanization)
+        }
+
+        public static func match<T: StringProtocol>(text: T) -> [YingWaaFanWan] {
+                guard let character = text.first else { return [] }
+                let fetched = fetch(for: character)
+                guard fetched.isEmpty else { return fetched }
+                let traditionalCharacter: Character = text.convertedS2T().first ?? character
                 return fetch(for: traditionalCharacter)
         }
         private static func fetch(for character: Character) -> [YingWaaFanWan] {
                 let items: [YingWaaFanWan] = DataMaster.matchYingWaaFanWan(for: character)
                 guard items.isNotEmpty else { return items }
-                let romanizations = items.map({ $0.romanization }).uniqued()
+                let romanizations = items.map(\.romanization).uniqued()
                 let hasDuplicates: Bool = romanizations.count != items.count
                 guard hasDuplicates else { return items }
-                let entries: [YingWaaFanWan?] = romanizations.map { syllable -> YingWaaFanWan? in
+                let entries = romanizations.compactMap { syllable -> YingWaaFanWan? in
                         let filtered = items.filter({ $0.romanization == syllable })
                         switch filtered.count {
                         case 0:
@@ -45,12 +49,12 @@ public struct YingWaaFanWan: Hashable {
                                 return filtered.first!
                         default:
                                 let example = filtered.first!
-                                let pronunciationMark: String = filtered.map({ $0.pronunciationMark }).compactMap({ $0 }).uniqued().joined(separator: ", ")
-                                let interpretation: String = filtered.map({ $0.interpretation }).compactMap({ $0 }).uniqued().joined(separator: " ")
+                                let pronunciationMark: String = filtered.compactMap(\.pronunciationMark).uniqued().joined(separator: ", ")
+                                let interpretation: String = filtered.compactMap(\.interpretation).uniqued().joined(separator: " ")
                                 return YingWaaFanWan(word: example.word, romanization: syllable, pronunciation: example.pronunciation, pronunciationMark: pronunciationMark, interpretation: interpretation, homophones: example.homophones)
                         }
                 }
-                return entries.compactMap({ $0 })
+                return entries
         }
 }
 

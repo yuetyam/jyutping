@@ -7,7 +7,8 @@ import CommonExtensions
 struct FanWanCuetYiuView: View {
         let entry: FanWanCuetYiu
         var body: some View {
-                let homophoneText = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
+                let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
+                let ipaText: String = OldCantonese.IPA(for: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack {
                                 Text(verbatim: "讀音")
@@ -20,9 +21,9 @@ struct FanWanCuetYiuView: View {
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.title3.monospaced())
                                 }
-                                Text(verbatim: entry.ipa).font(.title3).foregroundStyle(Color.secondary)
+                                Text(verbatim: ipaText).font(.title3).foregroundStyle(Color.secondary)
                                 Spacer()
-                                Speaker(entry.jyutping).opacity(entry.romanization.isValidJyutping ? 1 : 0)
+                                Speaker(entry.romanization).opacity(entry.romanization.isValidJyutping ? 1 : 0)
                         }
                         if let homophoneText {
                                 HStack {
