@@ -104,8 +104,8 @@ struct IOSJyutpingFinalTable: View {
                                 IOSFinalLabel(word: "雪", syllable: "syut3", jyutping: "yut", ipa: "[ yːt̚ ]")
                         }
                         Section {
-                                IOSFinalLabel(word: "毋", syllable: "m4", jyutping: "m", ipa: "[ m̩ ]")
-                                IOSFinalLabel(word: "吳", syllable: "ng4", jyutping: "ng", ipa: "[ ŋ̩ ]")
+                                IOSFinalLabel(word: "毋", syllable: "m4", jyutping: "m", ipa: "[ \u{6D}\u{329} ]") // { m̩ }
+                                IOSFinalLabel(word: "吳", syllable: "ng4", jyutping: "ng", ipa: "[ \u{14B}\u{329} ]") // { ŋ̩ }
                         } header: {
                                 Text(verbatim: "鼻音單獨成韻").textCase(nil)
                         }

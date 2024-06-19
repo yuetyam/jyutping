@@ -28,9 +28,9 @@ struct Syllable2IPA {
                 guard phone.isNotEmpty else { return nil }
                 switch phone {
                 case "m":
-                        return "m̩"
+                        return "\u{6D}\u{329}" // { m̩ }
                 case "ng":
-                        return "ŋ̩"
+                        return "\u{14B}\u{329}" // { ŋ̩ }
                 case let text where dualInitialsMap[text.prefix(2)] != nil:
                         guard let initial = dualInitialsMap[text.prefix(2)] else { return nil }
                         guard let final = FinalMap[text.dropFirst(2)] else { return nil }
