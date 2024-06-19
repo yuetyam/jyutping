@@ -8,7 +8,7 @@ struct YingWaaFanWanView: View {
         let entry: YingWaaFanWan
         var body: some View {
                 let homophoneText: String? = entry.homophones.isEmpty ? nil : entry.homophones.joined(separator: String.space)
-                let ipaText: String = OldCantonese.IPA(for: entry.romanization)
+                let ipaText: String = OldCantonese.IPAText(of: entry.romanization)
                 VStack(alignment: .leading) {
                         HStack(spacing: 16) {
                                 HStack {
