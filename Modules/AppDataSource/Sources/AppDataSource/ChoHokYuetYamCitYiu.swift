@@ -48,12 +48,12 @@ public struct ChoHokYuetYamCitYiu: Hashable {
         fileprivate init(word: String, romanization: String, initial: String, final: String, tone: String, faancit: String, homophones: [String]) {
                 let convertedInitial: String = initial == "X" ? "" : initial
                 let convertedFinal: String = final == "X" ? "" : final
-                let pronunciation: String = "\(convertedInitial)\(convertedFinal)"
-                let faanciText: String = faancit + "切"
+                let pronunciation: String = convertedInitial + convertedFinal
+                let faancitText: String = faancit + "切"
                 self.word = word
                 self.pronunciation = pronunciation
                 self.tone = tone
-                self.faancit = faanciText
+                self.faancit = faancitText
                 self.romanization = romanization
                 self.homophones = homophones
         }

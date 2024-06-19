@@ -1,80 +1,55 @@
 // TODO: Move to package Linguistics
+// TODO: (maybe) Rename to Jyutping2IPA
+
+import CommonExtensions
 
 /// Jyutping romanization syllable to IPA
 struct Syllable2IPA {
 
-        static func IPAText(_ syllable: String) -> String {
+        static func IPAText(of syllable: String) -> String {
                 lazy var fallback: String = "[ ? ]"
                 let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
                 guard !isBadFormat else { return fallback }
-                guard let phone: String = IPAPhone(syllable) else { return fallback }
-                guard let tone: String = IPATone(syllable) else { return fallback }
-                return "[ " + phone + " " + tone + " ]"
+                guard let phone = IPAPhone(syllable) else { return fallback }
+                guard let tone = IPATone(syllable) else { return fallback }
+                return "[ \(phone) \(tone) ]"
         }
         static func ipa(of syllable: String) -> String {
-                lazy var fallback: String = ""
+                lazy var fallback: String = "?"
                 let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
                 guard !isBadFormat else { return fallback }
-                guard let phone: String = IPAPhone(syllable) else { return fallback }
-                guard let tone: String = IPATone(syllable) else { return fallback }
+                guard let phone = IPAPhone(syllable) else { return fallback }
+                guard let tone = IPATone(syllable) else { return fallback }
                 return phone + tone
-        }
-
-        private static func IPATone(_ syllable: String) -> String? {
-                guard let tone = syllable.last else { return nil }
-                switch tone {
-                case "1":
-                        return "˥"
-                case "2":
-                        return "˧˥"
-                case "3":
-                        return "˧"
-                case "4":
-                        return "˨˩"
-                case "5":
-                        return "˩˧"
-                case "6":
-                        return "˨"
-                case "7":
-                        return "˥"
-                case "8":
-                        return "˧"
-                case "9":
-                        return "˨"
-                default:
-                        return nil
-                }
         }
 
         private static func IPAPhone(_ syllable: String) -> String? {
                 let phone = syllable.dropLast()
-                guard !phone.isEmpty else { return nil }
+                guard phone.isNotEmpty else { return nil }
                 switch phone {
                 case "m":
                         return "m̩"
                 case "ng":
                         return "ŋ̩"
-                case let text where text.hasPrefix("ng") || text.hasPrefix("gw") || text.hasPrefix("kw"):
-                        let initialText = phone.dropLast(phone.count - 2)
-                        let initial: String = String(initialText)
-                        guard let IPAInitial: String = dualInitialsMap[initial] else { return nil }
-                        let final: String = String(text.dropFirst(2))
-                        guard let IPAFinal: String = FinalMap[final] else { return nil }
-                        return IPAInitial + IPAFinal
+                case let text where dualInitialsMap[text.prefix(2)] != nil:
+                        guard let initial = dualInitialsMap[text.prefix(2)] else { return nil }
+                        guard let final = FinalMap[text.dropFirst(2)] else { return nil }
+                        return initial + final
                 default:
-                        let initial = phone.first!
-                        if let IPAInitial: String = InitialMap[initial] {
-                                let final: String = String(phone.dropFirst())
-                                guard let IPAFinal: String = FinalMap[final] else { return nil }
-                                return IPAInitial + IPAFinal
+                        if let initial = InitialMap[phone.first!] {
+                                guard let final = FinalMap[phone.dropFirst()] else { return nil }
+                                return initial + final
                         } else {
-                                let final: String = String(phone)
-                                return FinalMap[final]
+                                return FinalMap[phone]
                         }
                 }
         }
+        private static func IPATone(_ syllable: String) -> String? {
+                guard let tone = syllable.last else { return nil }
+                return ToneMap[tone]
+        }
 
-        private static let dualInitialsMap: [String: String] = [
+        private static let dualInitialsMap: [String.SubSequence: String] = [
                 "ng": "ŋ",
                 "gw": "kʷ",
                 "kw": "kʷʰ"
@@ -90,17 +65,14 @@ struct Syllable2IPA {
                 "l": "l",
                 "g": "k",
                 "k": "kʰ",
-                // "ng": "ŋ",
                 "h": "h",
-                // "gw": "kʷ",
-                // "kw": "kʷʰ",
                 "w": "w",
                 "z": "t͡s",
                 "c": "t͡sʰ",
                 "s": "s",
                 "j": "j"
         ]
-        private static let FinalMap: [String: String] = [
+        private static let FinalMap: [String.SubSequence: String] = [
                 "aa": "aː",
                 "aai": "aːi",
                 "aau": "aːu",
@@ -161,5 +133,16 @@ struct Syllable2IPA {
                 "yu": "yː",
                 "yun": "yːn",
                 "yut": "yːt̚"
+        ]
+        private static let ToneMap: [Character: String] = [
+                "1": "˥",
+                "2": "˧˥",
+                "3":  "˧",
+                "4": "˨˩",
+                "5": "˩˧",
+                "6": "˨",
+                "7": "˥",
+                "8": "˧",
+                "9": "˨"
         ]
 }

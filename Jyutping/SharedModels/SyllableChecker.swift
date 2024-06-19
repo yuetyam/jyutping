@@ -1,55 +1,38 @@
 // TODO: Move to package Linguistics
 
 import Foundation
+import CommonExtensions
 
 extension String {
         var isValidJyutping: Bool {
-                return SyllableChecker.isValidJyutping(text: self)
+                return SyllableChecker.isValidJyutpingSyllable(text: self)
         }
 }
 
+// TODO: Rename to JyutpingSyllableChecker
 struct SyllableChecker {
 
-        static func isValidJyutping(text: String) -> Bool {
-                let syllable: String = text.filter({ !(tones.contains($0)) })
+        static func isValidJyutpingSyllable(text: String) -> Bool {
+                guard let tone = text.last else { return false }
+                guard tones.contains(tone) else { return false }
+                let syllable = text.dropLast()
+                guard syllable.isNotEmpty else { return false }
                 let isNasal: Bool = (syllable == "m") || (syllable == "ng")
                 guard !isNasal else { return true }
-                let isPluralInitial: Bool = syllable.hasPrefix("ng") || syllable.hasPrefix("gw") || syllable.hasPrefix("kw")
-                if isPluralInitial {
-                        let final = syllable.dropFirst(2)
-                        return finals.contains(String(final))
-                } else {
-                        let isZeroConsonant: Bool = finals.contains(syllable)
-                        guard !isZeroConsonant else { return true }
-                        guard let initial = syllable.first else { return false }
-                        guard singularInitials.contains(initial) else { return false }
-                        let final = syllable.dropFirst()
-                        return finals.contains(String(final))
-                }
+                let isPluralInitial: Bool = pluralInitials.contains(syllable.prefix(2))
+                guard !isPluralInitial else { return finals.contains(syllable.dropFirst(2)) }
+                let isFinalOnly: Bool = finals.contains(syllable)
+                guard !isFinalOnly else { return true }
+                guard initials.contains(syllable.first!) else { return false }
+                return finals.contains(syllable.dropFirst())
         }
 
-        private static let initials: Set<String> = [
-                "b",
-                "p",
-                "m",
-                "f",
-                "d",
-                "t",
-                "n",
-                "l",
-                "g",
-                "k",
+        private static let pluralInitials: Set<String.SubSequence> = [
                 "ng",
-                "h",
                 "gw",
-                "kw",
-                "w",
-                "z",
-                "c",
-                "s",
-                "j",
+                "kw"
         ]
-        private static let singularInitials: Set<Character> = [
+        private static let initials: Set<Character> = [
                 "b",
                 "p",
                 "m",
@@ -67,7 +50,7 @@ struct SyllableChecker {
                 "s",
                 "j",
         ]
-        private static let finals: Set<String> = [
+        private static let finals: Set<String.SubSequence> = [
                 "aa",
                 "aai",
                 "aau",
@@ -137,6 +120,5 @@ struct SyllableChecker {
                 "yun",
                 "yut",
         ]
-
         private static let tones: Set<Character> = ["1", "2", "3", "4", "5", "6"]
 }
