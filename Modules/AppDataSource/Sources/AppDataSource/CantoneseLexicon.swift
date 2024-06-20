@@ -63,7 +63,7 @@ public struct CantoneseLexicon: Hashable {
                 lazy var chars: String = text
                 lazy var fetches: [String] = []
                 lazy var newText: String = ""
-                while !chars.isEmpty {
+                while chars.isNotEmpty {
                         let leading = fetchLeading(for: chars)
                         lazy var traditionalChars: String = chars.convertedS2T()
                         lazy var tryLeading = fetchLeading(for: traditionalChars)

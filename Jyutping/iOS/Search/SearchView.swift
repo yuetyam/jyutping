@@ -133,8 +133,8 @@ struct SearchView: View {
         private let choHokMeta: String = "《初學粵音切要》　湛約翰　1855　香港"
         private let choHokShortMeta: String = "《初學粵音切要》湛約翰 1855 香港"
         private let choHokFullMeta: String = "《初學粵音切要》　湛約翰 (John Chalmers)　香港　1855"
-        private let fanWanMeta: String = "《分韻撮要》"
-        private let gwongWanMeta: String = "《大宋重修廣韻》"
+        private let fanWanMeta: String = "《分韻撮要》　佚名　清初　廣州府"
+        private let gwongWanMeta: String = "《大宋重修廣韻》　陳彭年等　北宋"
 
         private var yingWaaHeader: String {
                 guard let word: String = yingWaaEntries.first?.word else { return yingWaaMeta }

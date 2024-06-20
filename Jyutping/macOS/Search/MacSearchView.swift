@@ -122,7 +122,7 @@ struct MacSearchView: View {
                                                 VStack(spacing: 2) {
                                                         HStack {
                                                                 Text(verbatim: word)
-                                                                Text(verbatim: "《分韻撮要》")
+                                                                Text(verbatim: "《分韻撮要》　佚名　清初　廣州府")
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
@@ -141,7 +141,7 @@ struct MacSearchView: View {
                                                 VStack(spacing: 2) {
                                                         HStack {
                                                                 Text(verbatim: word)
-                                                                Text(verbatim: "《大宋重修廣韻》")
+                                                                Text(verbatim: "《大宋重修廣韻》　陳彭年等　北宋")
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
