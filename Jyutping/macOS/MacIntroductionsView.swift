@@ -21,10 +21,32 @@ struct MacIntroductionsView: View {
                                         }
                                 }
                                 .block()
-
-                                BlockView(heading: "Shared.Guide.Heading.PinyinReverseLookup", content: "Shared.Guide.Body.PinyinReverseLookup")
-                                BlockView(heading: "Shared.Guide.Heading.CangjieReverseLookup", content: "Shared.Guide.Body.CangjieReverseLookup")
-
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("Shared.Guide.Heading.PinyinReverseLookup").font(.significant)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.Body.PinyinReverseLookup").font(.master).lineSpacing(6)
+                                                Spacer()
+                                        }
+                                }
+                                .block()
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("Shared.Guide.Heading.CangjieReverseLookup").font(.significant)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.Body.CangjieReverseLookup").font(.master).lineSpacing(6)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.Body.CangjieReverseLookup.Note").font(.master).lineSpacing(6)
+                                                Spacer()
+                                        }
+                                }
+                                .block()
                                 VStack(spacing: 16) {
                                         HStack {
                                                 Text("Shared.Guide.Heading.StrokeReverseLookup").font(.significant)
@@ -40,34 +62,22 @@ struct MacIntroductionsView: View {
                                         }
                                 }
                                 .block()
-
-                                BlockView(heading: "Shared.Guide.Heading.ComposeReverseLookup", content: "Shared.Guide.Body.ComposeReverseLookup")
+                                VStack(spacing: 16) {
+                                        HStack {
+                                                Text("Shared.Guide.Heading.ComposeReverseLookup").font(.significant)
+                                                Spacer()
+                                        }
+                                        HStack {
+                                                Text("Shared.Guide.Body.ComposeReverseLookup").font(.master).lineSpacing(6)
+                                                Spacer()
+                                        }
+                                }
+                                .block()
                         }
                         .textSelection(.enabled)
                         .padding()
                 }
                 .navigationTitle("MacSidebar.NavigationTitle.Introductions")
-        }
-}
-
-
-private struct BlockView: View {
-
-        let heading: LocalizedStringKey
-        let content: LocalizedStringKey
-
-        var body: some View {
-                VStack(spacing: 16) {
-                        HStack {
-                                Text(heading).font(.significant)
-                                Spacer()
-                        }
-                        HStack {
-                                Text(content).font(.master).lineSpacing(6)
-                                Spacer()
-                        }
-                }
-                .block()
         }
 }
 

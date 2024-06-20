@@ -28,7 +28,7 @@ struct HomeView: View {
         var body: some View {
                 NavigationView {
                         List {
-                                SearchView(placeholder: "TextField.InputTextField", submitLabel: .return, animationState: $animationState)
+                                SearchView(placeholder: "TextField.SearchPronunciation", submitLabel: .return, animationState: $animationState)
 
                                 Section {
                                         if isKeyboardEnabled {
@@ -103,6 +103,7 @@ struct HomeView: View {
                                         Section {
                                                 Text("Shared.Guide.Heading.CangjieReverseLookup").font(.significant)
                                                 Text("Shared.Guide.Body.CangjieReverseLookup").lineSpacing(6)
+                                                Text("Shared.Guide.Body.CangjieReverseLookup.Note").lineSpacing(6)
                                         }
                                         Section {
                                                 Text("Shared.Guide.Heading.StrokeReverseLookup").font(.significant)

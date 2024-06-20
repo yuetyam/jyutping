@@ -9478,61 +9478,125 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start with “v”, then enter Cangjie5 code. For example, enter “vdam”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping."
+            "value" : "Start with “v”, then enter Cangjie or Quick code. For example, enter “vdam”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping."
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以 v 開始，再輸入倉頡(五代)碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+            "value" : "以 v 開始，再輸入倉頡或速成碼即可。例如輸入 vdam 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        }
+      }
+    },
+    "Shared.Guide.Body.CangjieReverseLookup.Note" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can choose Cangjie / Quick version in Input Method / Keyboard's settings page."
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入法／鍵盤設定䈎面可以揀倉頡、速成版本。"
           }
         }
       }
@@ -9926,61 +9990,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lookup Jyutping with Cangjie"
+            "value" : "Lookup Jyutping with Cangjie or Quick(Sucheng)"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用倉頡反查粵拼"
+            "value" : "用倉頡／速成反查粵拼"
           }
         }
       }
