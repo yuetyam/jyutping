@@ -1,18 +1,11 @@
-// TODO: Move to package Linguistics
-
-import Foundation
-import CommonExtensions
-
 extension String {
-        var isValidJyutping: Bool {
-                return SyllableChecker.isValidJyutpingSyllable(text: self)
+        public var isValidJyutpingSyllable: Bool {
+                return JyutpingSyllableChecker.isValidJyutpingSyllable(text: self)
         }
 }
 
-// TODO: Rename to JyutpingSyllableChecker
-struct SyllableChecker {
-
-        static func isValidJyutpingSyllable(text: String) -> Bool {
+public struct JyutpingSyllableChecker {
+        public static func isValidJyutpingSyllable(text: String) -> Bool {
                 guard let tone = text.last else { return false }
                 guard tones.contains(tone) else { return false }
                 let syllable = text.dropLast()

@@ -3,6 +3,7 @@
 import SwiftUI
 import AppDataSource
 import CommonExtensions
+import Linguistics
 
 struct ChoHokYuetYamCitYiuView: View {
         let entry: ChoHokYuetYamCitYiu
@@ -27,7 +28,7 @@ struct ChoHokYuetYamCitYiuView: View {
                                 }
                                 Text(verbatim: ipaText).font(.title3).foregroundStyle(Color.secondary)
                                 Spacer()
-                                Speaker(entry.romanization).opacity(entry.romanization.isValidJyutping ? 1 : 0)
+                                Speaker(entry.romanization).opacity(entry.romanization.isValidJyutpingSyllable ? 1 : 0)
                         }
                         if let homophoneText {
                                 HStack {

@@ -1,11 +1,9 @@
-// TODO: Move to package Linguistics
-
-public struct OldCantonese {
-
+/// Jyutping romanization syllable to IPA
+public struct JyutpingSyllable2IPA {
         public static func IPAText(of syllable: String) -> String {
                 lazy var fallback: String = "[ ? ]"
                 let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
-                guard !isBadFormat else { return fallback }
+                guard !(isBadFormat) else { return fallback }
                 guard let phone = IPAPhone(syllable) else { return fallback }
                 guard let tone = IPATone(syllable) else { return fallback }
                 return "[ \(phone) \(tone) ]"
@@ -13,7 +11,7 @@ public struct OldCantonese {
         public static func ipa(of syllable: String) -> String {
                 lazy var fallback: String = "?"
                 let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
-                guard !isBadFormat else { return fallback }
+                guard !(isBadFormat) else { return fallback }
                 guard let phone = IPAPhone(syllable) else { return fallback }
                 guard let tone = IPATone(syllable) else { return fallback }
                 return phone + tone
@@ -48,11 +46,7 @@ public struct OldCantonese {
         private static let dualInitialsMap: [String.SubSequence: String] = [
                 "ng": "ŋ",
                 "gw": "kʷ",
-                "kw": "kʷʰ",
-                "nj": "ȵ",
-                "zh": "t͡ʃ",
-                "ch": "t͡ʃʰ",
-                "sh": "ʃ"
+                "kw": "kʷʰ"
         ]
         private static let InitialMap: [Character: String] = [
                 "b": "p",
@@ -111,10 +105,8 @@ public struct OldCantonese {
                 "o": "ɔː",
                 "oi": "ɔːi",
                 "ou": "ou",
-                "om": "ɔːm",
                 "on": "ɔːn",
                 "ong": "ɔːŋ",
-                "op": "ɔːp̚",
                 "ot": "ɔːt̚",
                 "ok": "ɔːk̚",
                 "u": "uː",
@@ -134,8 +126,7 @@ public struct OldCantonese {
                 "eot": "ɵt̚",
                 "yu": "yː",
                 "yun": "yːn",
-                "yut": "yːt̚",
-                "ii": "ɿ"
+                "yut": "yːt̚"
         ]
         private static let ToneMap: [Character: String] = [
                 "1": "˥",

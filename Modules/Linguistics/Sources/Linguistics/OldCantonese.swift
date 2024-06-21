@@ -1,12 +1,5 @@
-// TODO: Move to package Linguistics
-// TODO: (maybe) Rename to Jyutping2IPA
-
-import CommonExtensions
-
-/// Jyutping romanization syllable to IPA
-struct Syllable2IPA {
-
-        static func IPAText(of syllable: String) -> String {
+public struct OldCantonese {
+        public static func IPAText(of syllable: String) -> String {
                 lazy var fallback: String = "[ ? ]"
                 let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
                 guard !isBadFormat else { return fallback }
@@ -14,7 +7,7 @@ struct Syllable2IPA {
                 guard let tone = IPATone(syllable) else { return fallback }
                 return "[ \(phone) \(tone) ]"
         }
-        static func ipa(of syllable: String) -> String {
+        public static func ipa(of syllable: String) -> String {
                 lazy var fallback: String = "?"
                 let isBadFormat: Bool = syllable.isEmpty || (syllable == "?") || (syllable == "X") || syllable.contains(" ")
                 guard !isBadFormat else { return fallback }
@@ -52,7 +45,11 @@ struct Syllable2IPA {
         private static let dualInitialsMap: [String.SubSequence: String] = [
                 "ng": "ŋ",
                 "gw": "kʷ",
-                "kw": "kʷʰ"
+                "kw": "kʷʰ",
+                "nj": "ȵ",
+                "zh": "t͡ʃ",
+                "ch": "t͡ʃʰ",
+                "sh": "ʃ"
         ]
         private static let InitialMap: [Character: String] = [
                 "b": "p",
@@ -111,8 +108,10 @@ struct Syllable2IPA {
                 "o": "ɔː",
                 "oi": "ɔːi",
                 "ou": "ou",
+                "om": "ɔːm",
                 "on": "ɔːn",
                 "ong": "ɔːŋ",
+                "op": "ɔːp̚",
                 "ot": "ɔːt̚",
                 "ok": "ɔːk̚",
                 "u": "uː",
@@ -132,7 +131,8 @@ struct Syllable2IPA {
                 "eot": "ɵt̚",
                 "yu": "yː",
                 "yun": "yːn",
-                "yut": "yːt̚"
+                "yut": "yːt̚",
+                "ii": "ɿ"
         ]
         private static let ToneMap: [Character: String] = [
                 "1": "˥",

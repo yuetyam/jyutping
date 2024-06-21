@@ -3,6 +3,7 @@
 import SwiftUI
 import AppDataSource
 import CommonExtensions
+import Linguistics
 
 struct PronunciationView: View {
 
@@ -17,7 +18,7 @@ struct PronunciationView: View {
                 self.collocationSpeechText = collocations.isEmpty ? nil : collocations.prefix(8).joined(separator: "，")
                 let isSingular: Bool = romanization.filter({ $0.isLowercaseBasicLatinLetter || $0.isCantoneseToneDigit }).count == romanization.count
                 self.isSingular = isSingular
-                self.ipa = isSingular ? Syllable2IPA.IPAText(of: romanization) : nil
+                self.ipa = isSingular ? JyutpingSyllable2IPA.IPAText(of: romanization) : nil
         }
 
         private let romanization: String
