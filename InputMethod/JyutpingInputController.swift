@@ -227,7 +227,7 @@ final class JyutpingInputController: IMKInputController {
                         switch bufferText.first {
                         case .none:
                                 if AppSettings.isInputMemoryOn && selectedCandidates.isNotEmpty {
-                                        let concatenated: Candidate = selectedCandidates.filter(\.isCantonese).joined()
+                                        let concatenated = selectedCandidates.filter(\.isCantonese).joined()
                                         UserLexicon.handle(concatenated)
                                 }
                                 selectedCandidates = []

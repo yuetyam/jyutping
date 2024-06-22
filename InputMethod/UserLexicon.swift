@@ -23,7 +23,8 @@ struct UserLexicon {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
-        static func handle(_ candidate: Candidate) {
+        static func handle(_ candidate: Candidate?) {
+                guard let candidate else { return }
                 let id: Int64 = Int64((candidate.lexiconText + candidate.romanization).hash)
                 if let frequency: Int64 = find(by: id) {
                         update(id: id, frequency: frequency + 1)

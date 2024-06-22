@@ -50,7 +50,7 @@ struct VerticalPageCandidateLabel: View {
                                 Text(verbatim: candidate.text).font(.candidate)
                         }
                         .padding(.vertical, commentStyle.isVertical ? 4 : 0)
-                case .emoji, .emojiSequence, .symbol, .symbolSequence:
+                case .emoji, .symbol:
                         HStack(spacing: 8) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 HStack(spacing: commentStyle.isVertical ? 2 : 10) {

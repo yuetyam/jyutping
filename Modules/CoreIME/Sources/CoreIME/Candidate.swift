@@ -5,14 +5,11 @@ public enum CandidateType: Int {
         /// Plain text. Examples: iPad, macOS
         case text
 
+        /// Note that `Candidate.text.count == 1` not always true
         case emoji
 
-        case emojiSequence
-
-        /// Note that `text.count == 1` not always true
+        /// Note that `Candidate.text.count == 1` not always true
         case symbol
-
-        case symbolSequence
 
         /// macOS Keyboard composed text. Mainly for PunctuationKey.
         case compose
@@ -126,8 +123,14 @@ public struct Candidate: Hashable {
                 return self.type == .cantonese
         }
 
+        /// type != .cantonese
+        public var isNotCantonese: Bool {
+                return self.type != .cantonese
+        }
+
         // Equatable
         public static func ==(lhs: Candidate, rhs: Candidate) -> Bool {
+                guard lhs.type == rhs.type else { return false }
                 if lhs.isCantonese && rhs.isCantonese {
                         return lhs.text == rhs.text && lhs.romanization == rhs.romanization
                 } else {
@@ -145,18 +148,15 @@ public struct Candidate: Hashable {
                         hasher.combine(text)
                 case .emoji:
                         hasher.combine(text)
-                case .emojiSequence:
-                        hasher.combine(text)
                 case .symbol:
-                        hasher.combine(text)
-                case .symbolSequence:
                         hasher.combine(text)
                 case .compose:
                         hasher.combine(text)
                 }
         }
 
-        public static func +(lhs: Candidate, rhs: Candidate) -> Candidate {
+        public static func +(lhs: Candidate, rhs: Candidate) -> Candidate? {
+                guard lhs.isCantonese && rhs.isCantonese else { return nil }
                 let newText: String = lhs.text + rhs.text
                 let newLexiconText: String = lhs.lexiconText + rhs.lexiconText
                 let newRomanization: String = lhs.romanization + " " + rhs.romanization
@@ -170,7 +170,9 @@ extension Array where Element == Candidate {
 
         /// Returns a new Candidate by concatenating this Candidate sequence.
         /// - Returns: Single, concatenated Candidate.
-        public func joined() -> Candidate {
+        public func joined() -> Candidate? {
+                let isNotAllCantonese: Bool = self.contains(where: \.isNotCantonese)
+                guard !isNotAllCantonese else { return nil }
                 let text: String = map(\.text).joined()
                 let lexiconText: String = map(\.lexiconText).joined()
                 let romanization: String = map(\.romanization).joined(separator: " ")

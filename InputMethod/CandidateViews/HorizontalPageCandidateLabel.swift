@@ -52,7 +52,7 @@ struct HorizontalPageCandidateLabel: View {
                         }
                         .padding(.top, commentStyle == .top ? 8 : 0)
                         .padding(.bottom, commentStyle == .bottom ? 8 : 0)
-                case .emoji, .emojiSequence, .symbol, .symbolSequence:
+                case .emoji, .symbol:
                         HStack(spacing: 4) {
                                 Text(verbatim: label).font(.label).opacity(labelOpacity)
                                 Text(verbatim: candidate.text).font(.candidate)
