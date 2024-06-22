@@ -19,6 +19,7 @@ struct SearchView: View {
         @State private var inputText: String = String.empty
         @State private var cantonese: String = String.empty
         @State private var lexicon: CantoneseLexicon? = nil
+        @State private var unihanDefinition: UnihanDefinition? = nil
 
         @State private var yingWaaEntries: [YingWaaFanWan] = []
         @State private var choHokEntries: [ChoHokYuetYamCitYiu] = []
@@ -41,6 +42,7 @@ struct SearchView: View {
                                                 fanWanEntries = []
                                                 gwongWanEntries = []
                                                 lexicon = nil
+                                                unihanDefinition = nil
                                                 cantonese = String.empty
                                                 return
                                         }
@@ -49,6 +51,7 @@ struct SearchView: View {
                                         fanWanEntries = FanWanCuetYiu.match(text: trimmedInput)
                                         gwongWanEntries = GwongWan.match(text: trimmedInput)
                                         let cantoneseLexicon = AppMaster.lookupCantoneseLexicon(for: trimmedInput)
+                                        unihanDefinition = UnihanDefinition.match(text: cantoneseLexicon.text)
                                         if cantoneseLexicon.pronunciations.isEmpty {
                                                 lexicon = nil
                                                 cantonese = trimmedInput
@@ -64,6 +67,13 @@ struct SearchView: View {
                                 if let pronunciations = lexicon?.pronunciations {
                                         ForEach(0..<pronunciations.count, id: \.self) { index in
                                                 PronunciationLabel(pronunciations[index])
+                                        }
+                                }
+                                if let definition = unihanDefinition?.definition {
+                                        HStack {
+                                                Text(verbatim: "英文").font(.copilot)
+                                                Text.separator.font(.copilot)
+                                                Text(verbatim: definition).font(.subheadline)
                                         }
                                 }
                         }

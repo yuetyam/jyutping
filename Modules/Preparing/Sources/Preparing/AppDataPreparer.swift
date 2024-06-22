@@ -13,6 +13,7 @@ struct AppDataPreparer {
                 createChoHokTable()
                 createFanWanTable()
                 createGwongWanTable()
+                createDefinitionTable()
                 createIndies()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
@@ -41,14 +42,14 @@ private extension AppDataPreparer {
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 2 else { return nil }
                         let word = parts[0]
                         let romanization = parts[1]
                         return "('\(word)', '\(romanization)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO jyutpingtable (word, romanization) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -92,7 +93,7 @@ private extension AppDataPreparer {
                 guard let url = Bundle.module.url(forResource: "collocation", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 3 else { return nil }
                         let word = parts[0]
@@ -100,7 +101,7 @@ private extension AppDataPreparer {
                         let collocation = parts[2]
                         return "('\(word)', '\(romanization)', '\(collocation)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO collocationtable (word, romanization, collocation) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -118,7 +119,7 @@ private extension AppDataPreparer {
                 sqlite3_finalize(createStatement)
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 6 else { return nil }
                         let code = parts[0]
@@ -129,7 +130,7 @@ private extension AppDataPreparer {
                         let interpretation = parts[5]
                         return "(\(code), '\(word)', '\(romanization)', '\(pronunciation)', '\(pronunciationmark)', '\(interpretation)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO yingwaatable (code, word, romanization, pronunciation, pronunciationmark, interpretation) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -145,7 +146,7 @@ private extension AppDataPreparer {
                 guard let url = Bundle.module.url(forResource: "chohok", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 7 else { return nil }
                         let code = parts[0]
@@ -157,7 +158,7 @@ private extension AppDataPreparer {
                         let faancit = parts[6]
                         return "(\(code), '\(word)', '\(romanization)', '\(initial)', '\(final)', '\(tone)', '\(faancit)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO chohoktable (code, word, romanization, initial, final, tone, faancit) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -173,7 +174,7 @@ private extension AppDataPreparer {
                 guard let url = Bundle.module.url(forResource: "fanwan", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
                         guard parts.count == 9 else { return nil }
                         let code = parts[0]
@@ -187,7 +188,7 @@ private extension AppDataPreparer {
                         let interpretation = parts[8]
                         return "(\(code), '\(word)', '\(romanization)', '\(initial)', '\(final)', '\(yamyeung)', '\(tone)', '\(rhyme)', '\(interpretation)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO fanwantable (code, word, romanization, initial, final, yamyeung, tone, rhyme, interpretation) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
@@ -203,7 +204,7 @@ private extension AppDataPreparer {
                 guard let url = Bundle.module.url(forResource: "gwongwan", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.map { sourceLine -> String? in
+                let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: ",")
                         guard parts.count == 15 else { return nil }
                         let code = parts[0]
@@ -223,8 +224,27 @@ private extension AppDataPreparer {
                         let interpretation = parts[14]
                         return "(\(code), '\(word)', '\(rhyme)', '\(subrhyme)', \(subrhymeserial), \(subrhymenumber), '\(upper)', '\(lower)', '\(initial)', '\(rounding)', '\(division)', '\(rhymeclass)', '\(repeating)', '\(tone)', '\(interpretation)')"
                 }
-                let values: String = entries.compactMap({ $0 }).joined(separator: ", ")
+                let values: String = entries.joined(separator: ", ")
                 let insert: String = "INSERT INTO gwongwantable (code, word, rhyme, subrhyme, subrhymeserial, subrhymenumber, upper, lower, initial, rounding, division, rhymeclass, repeating, tone, interpretation) VALUES \(values);"
+                var insertStatement: OpaquePointer? = nil
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+        private static func createDefinitionTable() {
+                let createTable: String = "CREATE TABLE definitiontable(code INTEGER NOT NULL PRIMARY KEY, definition TEXT NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                let tuples = UnihanDefinition.generate()
+                let entries = tuples.map { tuple -> String in
+                        let code = tuple.0
+                        let definition = tuple.1
+                        return "(\(code), '\(definition)')"
+                }
+                let values: String = entries.joined(separator: ", ")
+                let insert: String = "INSERT INTO definitiontable (code, definition) VALUES \(values);"
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }

@@ -18,7 +18,6 @@ extension Character {
                 self.init(scalar)
         }
 
-
         /// UNICODE code point as decimal code
         public var decimalCode: Int? {
                 guard let scalar = self.unicodeScalars.first else { return nil }
@@ -77,30 +76,18 @@ extension Character {
         public var isIdeographic: Bool {
                 guard let scalarValue: UInt32 = self.unicodeScalars.first?.value else { return false }
                 switch scalarValue {
-                case 0x3007:
-                        return true
-                case 0x4E00...0x9FFF:
-                        return true
-                case 0x3400...0x4DBF:
-                        return true
-                case 0x20000...0x2A6DF:
-                        return true
-                case 0x2A700...0x2B73F:
-                        return true
-                case 0x2B740...0x2B81F:
-                        return true
-                case 0x2B820...0x2CEAF:
-                        return true
-                case 0x2CEB0...0x2EBEF:
-                        return true
-                case 0x30000...0x3134F:
-                        return true
-                case 0x31350...0x323AF:
-                        return true
-                case 0x2EBF0...0x2EE5F:
-                        return true
-                default:
-                        return false
+                case 0x3007: return true
+                case 0x4E00...0x9FFF: return true
+                case 0x3400...0x4DBF: return true
+                case 0x20000...0x2A6DF: return true
+                case 0x2A700...0x2B73F: return true
+                case 0x2B740...0x2B81F: return true
+                case 0x2B820...0x2CEAF: return true
+                case 0x2CEB0...0x2EBEF: return true
+                case 0x30000...0x3134F: return true
+                case 0x31350...0x323AF: return true
+                case 0x2EBF0...0x2EE5F: return true
+                default: return false
                 }
         }
 }

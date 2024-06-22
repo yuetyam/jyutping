@@ -7,7 +7,7 @@ struct CantoneseTextLabel: View {
 
         init(_ text: String) {
                 self.text = text
-                self.unicode = text.count == 1 ? text.first!.codePointsText : nil
+                self.unicode = (text.count == 1) ? text.first!.codePointsText : nil
         }
 
         private let text: String
