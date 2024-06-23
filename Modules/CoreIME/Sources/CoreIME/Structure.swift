@@ -12,7 +12,7 @@ extension Engine {
         public static func structureReverseLookup(text: String, input: String, segmentation: Segmentation) -> [Candidate] {
                 let markFreeText = text.removedSpacesTonesSeparators()
                 let matched = process(text: markFreeText, segmentation: segmentation).uniqued()
-                guard !matched.isEmpty else { return [] }
+                guard matched.isNotEmpty else { return [] }
                 switch (text.hasSeparators, text.hasTones) {
                 case (true, true):
                         let isOneToneOnly: Bool = (text.count - markFreeText.count) == 2
@@ -44,31 +44,28 @@ extension Engine {
         }
 
         private static func process(text: String, segmentation: Segmentation) -> [Candidate] {
+                let matched = match(text: text)
                 let textCount = text.count
-                let segmentation = segmentation.filter({ $0.length == textCount })
-                guard segmentation.maxLength > 0 else {
-                        return match(text: text)
-                }
-                let matches = segmentation.map({ scheme -> [Candidate] in
+                let schemes = segmentation.filter({ $0.length == textCount })
+                guard schemes.maxLength > 0 else { return matched }
+                let matches = schemes.map({ scheme -> [Candidate] in
                         let pingText = scheme.map(\.origin).joined()
                         return match(text: pingText)
                 })
-                return match(text: text) + matches.flatMap({ $0 })
+                return matched + matches.flatMap({ $0 })
         }
-
         private static func match(text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let query: String = "SELECT word, romanization FROM composetable WHERE ping = \(text.hash);"
+                let command: String = "SELECT word, romanization FROM structuretable WHERE ping = \(text.hash);"
                 var statement: OpaquePointer? = nil
-                if sqlite3_prepare_v2(Engine.database, query, -1, &statement, nil) == SQLITE_OK {
-                        while sqlite3_step(statement) == SQLITE_ROW {
-                                let word: String = String(cString: sqlite3_column_text(statement, 0))
-                                let romanization: String = String(cString: sqlite3_column_text(statement, 1))
-                                let instance = Candidate(text: word, romanization: romanization, input: text)
-                                candidates.append(instance)
-                        }
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return [] }
+                while sqlite3_step(statement) == SQLITE_ROW {
+                        let word: String = String(cString: sqlite3_column_text(statement, 0))
+                        let romanization: String = String(cString: sqlite3_column_text(statement, 1))
+                        let instance = Candidate(text: word, romanization: romanization, input: text)
+                        candidates.append(instance)
                 }
-                sqlite3_finalize(statement)
                 return candidates
         }
 }

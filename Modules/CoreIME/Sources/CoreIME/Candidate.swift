@@ -171,8 +171,8 @@ extension Array where Element == Candidate {
         /// Returns a new Candidate by concatenating this Candidate sequence.
         /// - Returns: Single, concatenated Candidate.
         public func joined() -> Candidate? {
-                let isNotAllCantonese: Bool = self.contains(where: \.isNotCantonese)
-                guard !isNotAllCantonese else { return nil }
+                let isAllCantonese: Bool = !(contains(where: \.isNotCantonese))
+                guard isAllCantonese else { return nil }
                 let text: String = map(\.text).joined()
                 let lexiconText: String = map(\.lexiconText).joined()
                 let romanization: String = map(\.romanization).joined(separator: " ")
