@@ -220,7 +220,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 ensureQwertyForm(to: .stroke)
                                 strokeReverseLookup()
                         case .some("q"):
-                                composeReverseLookup()
+                                structureReverseLookup()
                         default:
                                 suggest()
                         }
@@ -635,7 +635,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         candidates = []
                 }
         }
-        private func composeReverseLookup() {
+
+        /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan
+        private func structureReverseLookup() {
                 guard bufferText.count > 2 else {
                         text2mark = bufferText
                         candidates = []
@@ -654,7 +656,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return leadingText + String.space + tailText
                 }()
                 text2mark = "q " + tailMarkedText
-                let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
+                let lookup: [Candidate] = Engine.structureReverseLookup(text: text, input: bufferText, segmentation: segmentation)
                 candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
 

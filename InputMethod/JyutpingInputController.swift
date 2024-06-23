@@ -240,7 +240,7 @@ final class JyutpingInputController: IMKInputController {
                         case .some("x"):
                                 strokeReverseLookup()
                         case .some("q"):
-                                composeReverseLookup()
+                                structureReverseLookup()
                         case .some(let character) where character.isBasicLatinLetter:
                                 suggest()
                         default:
@@ -402,8 +402,9 @@ final class JyutpingInputController: IMKInputController {
                         candidates = []
                 }
         }
-        /// Compose(LoengFan) Reverse Lookup
-        private func composeReverseLookup() {
+
+        /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan
+        private func structureReverseLookup() {
                 guard bufferText.count > 2 else {
                         mark(text: bufferText)
                         candidates = []
@@ -423,7 +424,7 @@ final class JyutpingInputController: IMKInputController {
                 }()
                 let text2mark: String = "q " + tailMarkedText
                 mark(text: text2mark)
-                let lookup: [Candidate] = Engine.composeReverseLookup(text: text, input: bufferText, segmentation: segmentation)
+                let lookup: [Candidate] = Engine.structureReverseLookup(text: text, input: bufferText, segmentation: segmentation)
                 candidates = lookup.map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
 

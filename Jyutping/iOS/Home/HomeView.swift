@@ -111,8 +111,8 @@ struct HomeView: View {
                                                 Text("Shared.Guide.Example.StrokeReverseLookup").font(.fixedWidth).lineSpacing(5)
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.ComposeReverseLookup").font(.significant)
-                                                Text("Shared.Guide.Body.ComposeReverseLookup").lineSpacing(6)
+                                                Text("Shared.Guide.Heading.StructureReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Body.StructureReverseLookup").lineSpacing(6)
                                         }
                                 }
                                 .textSelection(.enabled)

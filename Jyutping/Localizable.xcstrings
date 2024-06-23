@@ -9601,7 +9601,7 @@
         }
       }
     },
-    "Shared.Guide.Body.ComposeReverseLookup" : {
+    "Shared.Guide.Body.StructureReverseLookup" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10049,7 +10049,7 @@
         }
       }
     },
-    "Shared.Guide.Heading.ComposeReverseLookup" : {
+    "Shared.Guide.Heading.StructureReverseLookup" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -46,13 +46,13 @@ extension StringProtocol {
 
         /// Convert simplified CJKV characters to traditional
         /// - Returns: Traditional CJKV characters
-        public func simplified2TraditionalConverted() -> String {
+        public func convertedS2T() -> String {
                 return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: false) ?? (self as? String) ?? String(self)
         }
 
         /// Convert traditional CJKV characters to simplified
         /// - Returns: Simplified CJKV characters
-        public func traditional2SimplifiedConverted() -> String {
+        public func convertedT2S() -> String {
                 return self.applyingTransform(StringTransform("Simplified-Traditional"), reverse: true) ?? (self as? String) ?? String(self)
         }
 

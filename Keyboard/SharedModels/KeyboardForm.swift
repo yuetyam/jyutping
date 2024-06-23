@@ -26,6 +26,6 @@ enum QwertyForm: Int {
         case cangjie
         case stroke
 
-        /// LoengFan (粵拼兩分反查)
-        case compose
+        /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan
+        case structure
 }

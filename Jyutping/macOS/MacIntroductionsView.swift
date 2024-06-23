@@ -64,11 +64,11 @@ struct MacIntroductionsView: View {
                                 .block()
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Shared.Guide.Heading.ComposeReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Heading.StructureReverseLookup").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Body.ComposeReverseLookup").font(.master).lineSpacing(6)
+                                                Text("Shared.Guide.Body.StructureReverseLookup").font(.master).lineSpacing(6)
                                                 Spacer()
                                         }
                                 }

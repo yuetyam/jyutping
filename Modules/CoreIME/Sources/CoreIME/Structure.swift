@@ -3,13 +3,13 @@ import SQLite3
 
 extension Engine {
 
-        /// Compose(LoengFan) Reverse Lookup
+        /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan
         /// - Parameters:
         ///   - text: Text to process
         ///   - input: User input for candidates
         ///   - segmentation: Segmentation
         /// - Returns: Candidates
-        public static func composeReverseLookup(text: String, input: String, segmentation: Segmentation) -> [Candidate] {
+        public static func structureReverseLookup(text: String, input: String, segmentation: Segmentation) -> [Candidate] {
                 let markFreeText = text.removedSpacesTonesSeparators()
                 let matched = process(text: markFreeText, segmentation: segmentation).uniqued()
                 guard !matched.isEmpty else { return [] }

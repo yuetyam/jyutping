@@ -73,8 +73,8 @@ extension UITextDocumentProxy {
                 let text: String = head + tail
                 guard text.isNotEmpty else { return }
                 let convertedText: String = {
-                        let simplified: String = text.traditional2SimplifiedConverted()
-                        return (simplified == text) ? text.simplified2TraditionalConverted() : simplified
+                        let simplified: String = text.convertedT2S()
+                        return (simplified == text) ? text.convertedS2T() : simplified
                 }()
                 insertText(convertedText)
         }
