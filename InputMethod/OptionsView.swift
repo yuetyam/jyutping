@@ -8,16 +8,16 @@ struct OptionsView: View {
         private let verticalPadding: CGFloat = CGFloat(AppSettings.candidateLineSpacing) / 2.0
 
         private let options: [String] = [
-                "傳統漢字",
-                "傳統漢字・香港",
-                "傳統漢字・臺灣",
-                "简化字",
-                "半寬數字",
-                "全寬數字",
-                "粵文句讀",
-                "英文標點",
-                "粵語拼音",
-                "ABC"
+                String(localized: "OptionsView.CharacterStandard.Traditional"),
+                String(localized: "OptionsView.CharacterStandard.TraditionalHongKong"),
+                String(localized: "OptionsView.CharacterStandard.TraditionalTaiwan"),
+                String(localized: "OptionsView.CharacterStandard.Simplified"),
+                String(localized: "OptionsView.CharacterForm.HalfWidth"),
+                String(localized: "OptionsView.CharacterForm.FullWidth"),
+                String(localized: "OptionsView.PunctuationForm.Cantonese"),
+                String(localized: "OptionsView.PunctuationForm.English"),
+                String(localized: "OptionsView.InputMethodMode.Cantonese"),
+                String(localized: "OptionsView.InputMethodMode.ABC")
         ]
 
         private let characterStandard: CharacterStandard = Options.characterStandard
