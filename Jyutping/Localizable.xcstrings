@@ -9793,7 +9793,7 @@
         }
       }
     },
-    "Shared.Guide.Body.TonesInput" : {
+    "Shared.Guide.Body.ToneInput" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -9921,7 +9921,7 @@
         }
       }
     },
-    "Shared.Guide.Example.TonesInput" : {
+    "Shared.Guide.Example.ToneInput" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -10241,12 +10241,12 @@
         }
       }
     },
-    "Shared.Guide.Heading.TonesInput" : {
+    "Shared.Guide.Heading.ToneInput" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tones Input"
+            "value" : "Tone Input"
           }
         },
         "yue" : {

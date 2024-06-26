@@ -8,15 +8,15 @@ struct MacIntroductionsView: View {
                         LazyVStack(spacing: 16) {
                                 VStack(spacing: 16) {
                                         HStack {
-                                                Text("Shared.Guide.Heading.TonesInput").font(.significant)
+                                                Text("Shared.Guide.Heading.ToneInput").font(.significant)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Body.TonesInput").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.Body.ToneInput").font(.fixedWidth).lineSpacing(5)
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text("Shared.Guide.Example.TonesInput").font(.master)
+                                                Text("Shared.Guide.Example.ToneInput").font(.master)
                                                 Spacer()
                                         }
                                 }

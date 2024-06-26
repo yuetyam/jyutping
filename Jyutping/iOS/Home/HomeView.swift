@@ -92,9 +92,9 @@ struct HomeView: View {
 
                                 Group {
                                         Section {
-                                                Text("Shared.Guide.Heading.TonesInput").font(.significant)
-                                                Text("Shared.Guide.Body.TonesInput").font(.fixedWidth).lineSpacing(5)
-                                                Text("Shared.Guide.Example.TonesInput")
+                                                Text("Shared.Guide.Heading.ToneInput").font(.significant)
+                                                Text("Shared.Guide.Body.ToneInput").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.Example.ToneInput")
                                         }
                                         Section {
                                                 Text("Shared.Guide.Heading.PinyinReverseLookup").font(.significant)
