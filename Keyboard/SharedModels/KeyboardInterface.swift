@@ -77,25 +77,29 @@ extension KeyboardInterface {
                         let isSmallPhone: Bool = screen.height < 350
                         return isSmallPhone ? 36 : 40
                 case .phonePortrait:
-                        if screen.width < 350 {
+                        let screenWidth = screen.width
+                        if screenWidth > 300 && screenWidth < 350 {
                                 // iPhone SE1, iPod touch 7 (320 x 480)
                                 return 48
-                        } else if screen.width < 380 {
+                        } else if screenWidth < 380 {
                                 // iPhone 6s, 7, 8, SE2, SE3 (375 x 667)
                                 // iPhone X, Xs, 11 Pro, 12 mini, 13 mini (375 x 812)
                                 return 53
-                        } else if screen.width < 400 {
+                        } else if screenWidth < 400 {
                                 // iPhone 12, 12 Pro, 13, 13 Pro, 14 (390 x 844)
                                 // iPhone 14 Pro, 15, 15 Pro (393 x 852)
                                 return 54
-                        } else if screen.width < 420 {
+                        } else if screenWidth < 420 {
                                 // iPhone 6s Plus, 7 Plus, 8 Plus (414 x 836)
                                 // iPhone Xr, Xs Max, 11, 11 Pro Max (414 x 896)
                                 return 55
-                        } else {
+                        } else if screenWidth < 440 {
                                 // iPhone 12 Pro Max, 13 Pro Max, 14 Plus (428 x 926)
                                 // iPhone 14 Pro Max, 15 Plus, 15 Pro Max (430 x 932)
                                 return 57
+                        } else {
+                                let extras: Int = Int(screenWidth - 300) / 20
+                                return CGFloat(50 + extras)
                         }
                 }
         }

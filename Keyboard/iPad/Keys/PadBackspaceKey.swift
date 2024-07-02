@@ -39,7 +39,7 @@ struct PadBackspaceKey: View {
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(5)
-                        Image.backspace
+                        Image.backspace.symbolVariant(isTouching ? .fill : .none)
                 }
                 .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
                 .contentShape(Rectangle())

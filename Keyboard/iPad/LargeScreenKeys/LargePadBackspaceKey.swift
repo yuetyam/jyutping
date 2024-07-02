@@ -41,7 +41,7 @@ struct LargePadBackspaceKey: View {
                                 .padding(4)
                         ZStack(alignment: .topTrailing) {
                                 Color.clear
-                                Image.backspace
+                                Image.backspace.symbolVariant(isTouching ? .fill : .none)
                                         .padding(12)
                         }
                         ZStack(alignment: .bottomTrailing) {

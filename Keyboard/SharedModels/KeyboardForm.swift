@@ -19,7 +19,7 @@ enum QwertyForm: Int {
         /// Alphabetic, Cantonese (粵拼全鍵盤)
         case jyutping
 
-        /// Cantonense SaamPing (粵拼三拼)
+        /// Cantonese SaamPing (粵拼三拼)
         case tripleStroke
 
         case pinyin

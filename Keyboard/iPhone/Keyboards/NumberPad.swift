@@ -137,7 +137,7 @@ private struct NumberPadBackspaceKey: View {
         var body: some View {
                 ZStack {
                         Color.interactiveClear
-                        Image.backspace
+                        Image.backspace.symbolVariant(isTouching ? .fill : .none)
                 }
                 .frame(width: width, height: height)
                 .contentShape(Rectangle())

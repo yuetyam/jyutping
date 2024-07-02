@@ -38,7 +38,7 @@ struct BackspaceKey: View {
                                 .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
                                 .padding(.vertical, 6)
                                 .padding(.horizontal, 3)
-                        Image.backspace
+                        Image.backspace.symbolVariant(isTouching ? .fill : .none)
                 }
                 .frame(width: context.widthUnit * 1.3, height: context.heightUnit)
                 .contentShape(Rectangle())
