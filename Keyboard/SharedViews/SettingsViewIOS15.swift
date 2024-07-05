@@ -40,7 +40,7 @@ struct SettingsViewIOS15: View {
                                         Image.upChevron
                                                 .resizable()
                                                 .scaledToFit()
-                                                .padding(12)
+                                                .padding(14)
                                                 .frame(width: 48)
                                                 .frame(maxHeight: .infinity)
                                                 .contentShape(Rectangle())
@@ -53,7 +53,7 @@ struct SettingsViewIOS15: View {
                                         Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
                                                 .resizable()
                                                 .scaledToFit()
-                                                .padding(10)
+                                                .padding(14)
                                                 .frame(width: 48)
                                                 .frame(maxHeight: .infinity)
                                                 .contentShape(Rectangle())
@@ -65,7 +65,7 @@ struct SettingsViewIOS15: View {
                                 }
                         }
                         .background(Material.ultraThin)
-                        .frame(height: context.keyboardInterface.isCompact ? 36 : 44)
+                        .frame(height: 44)
                         List {
                                 Picker("SettingsView.CharacterStandard.PickerTitle", selection: $characterStandard) {
                                         Text("SettingsView.CharacterStandard.PickerOption.Traditional").tag(CharacterStandard.traditional)
