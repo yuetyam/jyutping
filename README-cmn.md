@@ -1,4 +1,4 @@
-README in [English](README-en.md) | [官話(Mandarin)](README-cmn.md)
+README in [粵語(Cantonese)](README.md) | [English](README-en.md)
 
 粵拼輸入法
 ======
@@ -23,7 +23,7 @@ README in [English](README-en.md) | [官話(Mandarin)](README-cmn.md)
 
 iOS、iPadOS 及 macOS 粵語拼音輸入法。  
 採用 [香港語言學學會粵語拼音方案](https://jyutping.org/jyutping) (粵拼 / Jyutping)，兼容各種習慣拼寫串法。  
-候選詞會標注對應嘅粵拼。支援簡、繁體漢字。  
+候選詞會標注對應的粵拼。支持簡、繁體漢字。  
 可以用倉頡、速成、筆畫、普通話拼音、拆字等反查粵語拼音。
 
 另有 Android 版: [yuetyam/jyutping-android](https://github.com/yuetyam/jyutping-android)
@@ -53,7 +53,7 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 ## macOS
 由於 [第三方輸入法無法上架 Mac App Store](https://developer.apple.com/forums/thread/134115) ，請前往 [網棧](https://jyutping.app/mac) 下載安裝，或者用 [Homebrew 安裝](https://jyutping.app/mac/homebrew) 。
 
-選項䈎面： 輸入法撳 <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (esc 下邊箇粒掣) 會顯示一個選項䈎面。  
+選項䈎面： 輸入法按 <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (esc 下面那個鍵) 會顯示一個選項䈎面。  
 常問問題： [常問問題（FAQ）](https://jyutping.app/faq)  
 兼容系統： macOS 12 Monterey 或者更高。
 
@@ -77,15 +77,15 @@ git clone --depth 1 https://github.com/yuetyam/jyutping.git
 cd ./Modules/Preparing/
 swift run -c release
 ~~~
-跟住用 Xcode 開啓 `Jyutping.xcodeproj` 即可。
+接着用 Xcode 開啓 `Jyutping.xcodeproj` 即可。
 
-成個工程(project)包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標(target)。  
-`Jyutping` 係正常App，`Keyboard` 係 iOS Keyboard Extension，`InputMethod` 係 macOS 輸入法。
+整個工程(project)包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標(target)。  
+`Jyutping` 是正常App，`Keyboard` 是 iOS Keyboard Extension，`InputMethod` 是 macOS 輸入法。
 
-注意事項: 毋好直接 Run `InputMethod`，只可以 Build 或 [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
+注意事項: 不要直接 Run `InputMethod`，只可以 Build 或 [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
 
-如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來嘅 Jyutping.app 輸入法程式放入 `/Library/Input\ Methods/` 檔案夾。  
-如果替換舊有 Jyutping.app 輸入法箇陣，彈提示話佢運行緊、無法替換，可以去 Terminal（終端） 用以下命令將佢結束運行：
+如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來的 Jyutping.app 輸入法程序放入 `/Library/Input\ Methods/` 文件夾。  
+如果替換舊有 Jyutping.app 輸入法的時候，彈出提示說它正在運行、無法替換，可以去 Terminal（終端） 用以下命令將它結束運行：
 ~~~bash
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 ~~~
@@ -95,7 +95,7 @@ osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 - [OpenCC](https://github.com/BYVoid/OpenCC) (Traditional-Simplified Character Conversion)
 - [JetBrains](https://www.jetbrains.com/) (Licenses for Open Source Development)
 
-## 多謝支持（Support this project）
+## 感謝支持（Support this project）
 <a href="https://ko-fi.com/zheung">
         <img src="images/buy-me-a-coffee.png" alt="Ko-fi, buy me a coffee" width="180"/>
 </a>

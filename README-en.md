@@ -1,6 +1,6 @@
-README in [English](README-en.md) | [官話(Mandarin)](README-cmn.md)
+README in [粵語(Cantonese)](README.md) | [官話(Mandarin)](README-cmn.md)
 
-粵拼輸入法
+Jyutping
 ======
 
 <a href="https://t.me/jyutping">
@@ -21,12 +21,20 @@ README in [English](README-en.md) | [官話(Mandarin)](README-cmn.md)
 <br>
 <br>
 
-iOS、iPadOS 及 macOS 粵語拼音輸入法。  
-採用 [香港語言學學會粵語拼音方案](https://jyutping.org/jyutping) (粵拼 / Jyutping)，兼容各種習慣拼寫串法。  
-候選詞會標注對應嘅粵拼。支援簡、繁體漢字。  
-可以用倉頡、速成、筆畫、普通話拼音、拆字等反查粵語拼音。
+A Cantonese Keyboard for iOS & macOS adopts the [LSHK Jyutping scheme](https://jyutping.org/jyutping) and supports common habitual spellings.
 
-另有 Android 版: [yuetyam/jyutping-android](https://github.com/yuetyam/jyutping-android)
+Feature highlights:
+- Full support for Jyutping input.
+- Abbreviated input with Jyutping initials.
+- Accurate input with Jyutping tones.
+- Traditional / Simplified characters.
+- Reverse Lookup with Cangjie, Quick(Sucheng), Stroke or Mandarin Pinyin.
+- Jyutping hints for candidates.
+- Emoji suggestions.
+- Easy ways to Copy, Cut, Paste and moving cursor backward/forward.
+- Audio and Haptic feedbacks.
+
+Jyutping for Android: [yuetyam/jyutping-android](https://github.com/yuetyam/jyutping-android)
 
 ## iOS & iPadOS
 
@@ -48,54 +56,54 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 </a>
 <br>
 <br>
-兼容系統： iOS / iPadOS 15.0+
+Compatibility: iOS / iPadOS 15.0+
 
 ## macOS
-由於 [第三方輸入法無法上架 Mac App Store](https://developer.apple.com/forums/thread/134115) ，請前往 [網棧](https://jyutping.app/mac) 下載安裝，或者用 [Homebrew 安裝](https://jyutping.app/mac/homebrew) 。
+Due to [limitations imposed by the Mac App Store on third-party input methods](https://developer.apple.com/forums/thread/134115) , it's impossible to distribute this input method through the Mac App Store. Please visit our [website](https://jyutping.app) to download it or install it via [Homebrew](https://jyutping.app/mac/homebrew) .
 
-選項䈎面： 輸入法撳 <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (esc 下邊箇粒掣) 會顯示一個選項䈎面。  
-常問問題： [常問問題（FAQ）](https://jyutping.app/faq)  
-兼容系統： macOS 12 Monterey 或者更高。
+Compatibility: macOS 12 Monterey or higher.  
+Options: Press <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (blow the esc key) will display an options window.  
+FAQ: [FAQ](https://jyutping.app/faq)
 
-## 擷屏（Screenshots）
+## Screenshots
 <img src="images/screenshot.png" alt="iPhone screenshots" width="440"/>
 <br>
 <img src="images/screenshot-mac.png" alt="macOS screenshots" width="440"/>
 
-## 如何構建（How to build）
-前置要求（Build requirements）
+## How to build
+Build requirements
 - macOS 14.0+
 - Xcode 15.4+
 
-倉庫體積比較大，建議加 `--depth` 來 clone。
+Clone with `--depth` to reduce code size:
 ~~~bash
 git clone --depth 1 https://github.com/yuetyam/jyutping.git
 ~~~
-先構建數據庫 (Prepare databases)。
+Prepare databases:
 ~~~bash
 # cd path/to/jyutping
 cd ./Modules/Preparing/
 swift run -c release
 ~~~
-跟住用 Xcode 開啓 `Jyutping.xcodeproj` 即可。
+Then use Xcode to open `Jyutping.xcodeproj` .
 
-成個工程(project)包含 `Jyutping`, `Keyboard`, `InputMethod` 三個目標(target)。  
-`Jyutping` 係正常App，`Keyboard` 係 iOS Keyboard Extension，`InputMethod` 係 macOS 輸入法。
+This project contains three tergets, `Jyutping` (Main App), `Keyboard` (iOS) and `InputMethod` (macOS).
 
-注意事項: 毋好直接 Run `InputMethod`，只可以 Build 或 [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
+**Note**: Do not *Run* `InputMethod` , it can only be *Build* or [Archive](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app)
 
-如果要自己本機測試 Mac 輸入法，請將 Archive & Export 出來嘅 Jyutping.app 輸入法程式放入 `/Library/Input\ Methods/` 檔案夾。  
-如果替換舊有 Jyutping.app 輸入法箇陣，彈提示話佢運行緊、無法替換，可以去 Terminal（終端） 用以下命令將佢結束運行：
+If you want to use your Mac to test the input method, you need to place the *Archive & Export* Jyutping.app to `/Library/Input\ Methods/` .
+
+When replacing the old Jyutping.app, Finder may prompt a message indicating that it's running. You can terminate it using this command:
 ~~~bash
 osascript -e 'tell application id "org.jyutping.inputmethod.Jyutping" to quit'
 ~~~
 
-## 鳴謝（Credits）
+## Credits
 - [Rime-Cantonese](https://github.com/rime/rime-cantonese) (Cantonese Lexicon)
 - [OpenCC](https://github.com/BYVoid/OpenCC) (Traditional-Simplified Character Conversion)
 - [JetBrains](https://www.jetbrains.com/) (Licenses for Open Source Development)
 
-## 多謝支持（Support this project）
+## Thank you for your support
 <a href="https://ko-fi.com/zheung">
         <img src="images/buy-me-a-coffee.png" alt="Ko-fi, buy me a coffee" width="180"/>
 </a>
