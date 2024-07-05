@@ -21,7 +21,7 @@ Jyutping
 <br>
 <br>
 
-A Cantonese Keyboard for iOS & macOS adopts the [LSHK Jyutping scheme](https://jyutping.org/jyutping) and supports common habitual spellings.
+Cantonese Keyboard for iOS & macOS adopts the [LSHK Jyutping scheme](https://jyutping.org/jyutping) and supports common habitual spellings.
 
 Feature highlights:
 - Full support for Jyutping input.
