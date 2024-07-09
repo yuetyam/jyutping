@@ -85,7 +85,7 @@ public struct CantoneseLexicon: Hashable {
                                 chars = String(chars.dropFirst())
                         }
                 }
-                guard !fetches.isEmpty else { return fallback }
+                guard fetches.isNotEmpty else { return fallback }
                 let romanization: String = fetches.joined(separator: " ")
                 let pronunciation = Pronunciation(romanization: romanization)
                 return CantoneseLexicon(text: newText, pronunciations: [pronunciation])

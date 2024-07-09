@@ -18,13 +18,13 @@ extension Engine {
         /// - Parameter text: word
         /// - Returns: Array of Romanization matched the input word
         static func lookup(_ text: String) -> [String] {
-                guard !text.isEmpty else { return [] }
+                guard text.isNotEmpty else { return [] }
                 let matched = match(for: text)
                 guard matched.isEmpty else { return matched }
                 guard text.count != 1 else { return [] }
                 var chars: String = text
                 var fetches: [String] = []
-                while !chars.isEmpty {
+                while chars.isNotEmpty {
                         let leading = fetchLeading(for: chars)
                         if let romanization: String = leading.romanization {
                                 fetches.append(romanization)
@@ -35,7 +35,7 @@ extension Engine {
                                 chars = String(chars.dropFirst())
                         }
                 }
-                guard !fetches.isEmpty else { return [] }
+                guard fetches.isNotEmpty else { return [] }
                 let suggestion: String = fetches.joined(separator: " ")
                 return [suggestion]
         }
@@ -44,7 +44,7 @@ extension Engine {
                 var chars: String = word
                 var romanization: String? = nil
                 var matchedCount: Int = 0
-                while romanization == nil && !chars.isEmpty {
+                while romanization == nil && chars.isNotEmpty {
                         romanization = match(for: chars).first
                         matchedCount = chars.count
                         chars = String(chars.dropLast())

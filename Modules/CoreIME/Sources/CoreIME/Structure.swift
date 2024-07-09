@@ -26,7 +26,7 @@ extension Engine {
                 case (false, true):
                         let isOneToneOnly: Bool = (text.count - markFreeText.count) == 1
                         let filtered = matched.filter({ item -> Bool in
-                                guard !(item.romanization.removedSpaces().hasPrefix(text)) else { return true }
+                                guard item.romanization.removedSpaces().hasPrefix(text).negative else { return true }
                                 guard isOneToneOnly else { return false }
                                 return text.last == item.romanization.last
                         })

@@ -213,7 +213,7 @@ extension Engine {
                         let qualified = candidates.compactMap({ item -> Candidate? in
                                 let syllables = item.romanization.removedTones().split(separator: " ")
                                 guard syllables != textParts else { return Candidate(text: item.text, romanization: item.romanization, input: text) }
-                                guard !(isHeadingSeparator) else { return nil }
+                                guard isHeadingSeparator.negative else { return nil }
                                 switch textSeparators.count {
                                 case 1 where isTrailingSeparator:
                                         guard syllables.count == 1 else { return nil }

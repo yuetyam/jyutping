@@ -60,7 +60,7 @@ public struct Segmentor {
         private static var isDatabaseReady: Bool = false
 
         static func prepare() {
-                guard !isDatabaseReady else { return }
+                guard isDatabaseReady.negative else { return }
                 guard let path: String = Bundle.module.path(forResource: "syllabledb", ofType: "sqlite3") else { return }
                 guard sqlite3_open_v2(path, &storageDatabase, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else { return }
                 guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }

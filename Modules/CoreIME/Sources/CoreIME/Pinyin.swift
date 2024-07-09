@@ -24,7 +24,7 @@ extension Engine {
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [PinyinLexicon] = {
                         let hasPrefectSchemes: Bool = schemes.contains(where: { $0.summedLength == textCount })
-                        guard !hasPrefectSchemes else { return [] }
+                        guard hasPrefectSchemes.negative else { return [] }
                         let shortcuts = schemes.map({ scheme -> [PinyinLexicon] in
                                 let tail = text.dropFirst(scheme.summedLength)
                                 guard let lastAnchor = tail.first else { return [] }
