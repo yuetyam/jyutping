@@ -63,6 +63,7 @@ struct CandidateBoard: View {
                 let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let commentToneStyle: CommentToneStyle = Options.commentToneStyle
+                let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
                 let rows = rows(of: context.candidates)
                 ZStack(alignment: .topTrailing) {
                         ScrollViewReader { proxy in
@@ -107,7 +108,7 @@ struct CandidateBoard: View {
                                                                                                 VStack(spacing: -2) {
                                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                                         Text(text)
-                                                                                                                .font(.candidate)
+                                                                                                                .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                                 .minimumScaleFactor(0.4)
                                                                                                                 .lineLimit(1)
                                                                                                 }
@@ -115,7 +116,7 @@ struct CandidateBoard: View {
                                                                                         case .belowCandidates:
                                                                                                 VStack(spacing: -2) {
                                                                                                         Text(text)
-                                                                                                                .font(.candidate)
+                                                                                                                .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                                 .minimumScaleFactor(0.4)
                                                                                                                 .lineLimit(1)
                                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
@@ -123,7 +124,7 @@ struct CandidateBoard: View {
                                                                                                 .padding(2)
                                                                                         case .noComments:
                                                                                                 Text(text)
-                                                                                                        .font(.candidate)
+                                                                                                        .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                         .minimumScaleFactor(0.4)
                                                                                                         .lineLimit(1)
                                                                                                         .padding(4)

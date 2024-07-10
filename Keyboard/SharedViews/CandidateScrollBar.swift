@@ -28,6 +28,7 @@ struct CandidateScrollBar: View {
                 let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
                 let commentToneStyle: CommentToneStyle = Options.commentToneStyle
+                let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
                 HStack(spacing: 0) {
                         ScrollViewReader { proxy in
                                 ScrollView(.horizontal) {
@@ -69,7 +70,7 @@ struct CandidateScrollBar: View {
                                                                                 VStack(spacing: -2) {
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                         Text(text)
-                                                                                                .font(.candidate)
+                                                                                                .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
                                                                                 }
@@ -78,7 +79,7 @@ struct CandidateScrollBar: View {
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(text)
-                                                                                                .font(.candidate)
+                                                                                                .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
@@ -87,7 +88,7 @@ struct CandidateScrollBar: View {
                                                                                 .padding(.bottom, 14)
                                                                         case .noComments:
                                                                                 Text(text)
-                                                                                        .font(.candidate)
+                                                                                        .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                         .minimumScaleFactor(0.4)
                                                                                         .lineLimit(1)
                                                                                         .padding(.horizontal, 1)

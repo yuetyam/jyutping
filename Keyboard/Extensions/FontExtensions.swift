@@ -4,6 +4,7 @@ import CoreIME
 
 extension Font {
         static let candidate: Font = Font.system(size: 20)
+        static let iPadCandidate: Font = Font.system(size: 22)
         static let romanization: Font = Font.system(size: 12)
         static let tone: Font = Font.system(size: 10)
 
