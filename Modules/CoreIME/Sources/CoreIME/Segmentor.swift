@@ -14,15 +14,19 @@ public typealias SegmentScheme = Array<SegmentToken>
 public typealias Segmentation = Array<SegmentScheme>
 
 extension SegmentScheme {
-        /// All token texts character count
+        /// All token text character count
         public var length: Int {
                 return self.map(\.text).summedLength
         }
 }
 extension Segmentation {
-        /// Longest token text character count
-        public var maxLength: Int {
+        /// Longest scheme token text character count
+        public var maxSchemeLength: Int {
                 return self.first?.length ?? 0
+        }
+        /// All token count
+        public var tokenCount: Int {
+                return self.map(\.count).summation
         }
 }
 

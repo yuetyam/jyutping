@@ -4,9 +4,16 @@ import SQLite3
 extension Engine {
 
         public static func pinyinReverseLookup(text: String, schemes: [[String]]) -> [Candidate] {
-                return process(pinyin: text, schemes: schemes)
-                        .map({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
-                        .flatMap({ $0 })
+                let canSegment: Bool = schemes.subelementCount != 0
+                if canSegment {
+                        return process(pinyin: text, schemes: schemes)
+                                .map({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
+                                .flatMap({ $0 })
+                } else {
+                        return processVerbatim(pinyin: text)
+                                .map({ Engine.reveresLookup(text: $0.text, input: $0.input, mark: $0.mark) })
+                                .flatMap({ $0 })
+                }
         }
 
         private static func processVerbatim(pinyin text: String, limit: Int? = nil) -> [PinyinLexicon] {

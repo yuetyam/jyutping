@@ -47,7 +47,7 @@ extension Engine {
                 let matched = match(text: text)
                 let textCount = text.count
                 let schemes = segmentation.filter({ $0.length == textCount })
-                guard schemes.maxLength > 0 else { return matched }
+                guard schemes.maxSchemeLength > 0 else { return matched }
                 let matches = schemes.map({ scheme -> [Candidate] in
                         let pingText = scheme.map(\.origin).joined()
                         return match(text: pingText)

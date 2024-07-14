@@ -36,7 +36,7 @@ extension Engine {
         // MARK: - TenKey
 
         public static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) -> [Candidate] {
-                guard segmentation.maxLength > 0 else { return tenKeyDeepProcess(combos: combos) }
+                guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos) }
                 let search = tenKeySearch(combos: combos, segmentation: segmentation)
                 guard search.isNotEmpty else { return tenKeyDeepProcess(combos: combos) }
                 let comboCount = combos.count
@@ -134,7 +134,7 @@ extension Engine {
                 default:
                         let textMarkCandidates = fetchTextMark(text: origin)
                         guard asap else { return textMarkCandidates + dispatch(text: text, segmentation: segmentation, needsSymbols: needsSymbols) }
-                        guard segmentation.maxLength > 0 else { return textMarkCandidates + processVerbatim(text: text) }
+                        guard segmentation.maxSchemeLength > 0 else { return textMarkCandidates + processVerbatim(text: text) }
                         let candidates = textMarkCandidates + query(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
                         return candidates.isEmpty ? processVerbatim(text: text) : candidates
                 }
@@ -277,7 +277,7 @@ extension Engine {
                         })
                         return shortcuts.map({ Candidate(text: $0.text, romanization: $0.romanization, input: text) })
                 case (false, false):
-                        guard segmentation.maxLength > 0 else { return processVerbatim(text: text) }
+                        guard segmentation.maxSchemeLength > 0 else { return processVerbatim(text: text) }
                         return process(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
                 }
         }
@@ -289,7 +289,7 @@ extension Engine {
                 guard let firstInputCount = primary.first?.input.count else { return processVerbatim(text: text, limit: limit) }
                 guard firstInputCount != textCount else { return primary }
                 let prefixes: [Candidate] = {
-                        guard segmentation.maxLength < textCount else { return [] }
+                        guard segmentation.maxSchemeLength < textCount else { return [] }
                         let shortcuts = segmentation.map({ scheme -> [Candidate] in
                                 let tail = text.dropFirst(scheme.length)
                                 guard let lastAnchor = tail.first else { return [] }
