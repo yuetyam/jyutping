@@ -1,4 +1,6 @@
 import SwiftUI
+import CommonExtensions
+import CoreIME
 
 struct GeneralPreferencesView: View {
 
@@ -12,6 +14,7 @@ struct GeneralPreferencesView: View {
         @State private var toneDisplayStyle: ToneDisplayStyle = AppSettings.toneDisplayStyle
         @State private var toneDisplayColor: ToneDisplayColor = AppSettings.toneDisplayColor
 
+        @State private var characterStandard: CharacterStandard = Options.characterStandard
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var isInputMemoryOn: Bool = AppSettings.isInputMemoryOn
 
@@ -103,6 +106,43 @@ struct GeneralPreferencesView: View {
                                         }
                                 }
                                 .block()
+                                VStack(spacing: 2) {
+                                        HStack {
+                                                Picker("GeneralPreferencesView.CharacterStandard.PickerTitleKey", selection: $characterStandard) {
+                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.Traditional").tag(CharacterStandard.traditional)
+                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.TraditionalKongKong").tag(CharacterStandard.hongkong)
+                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.TraditionalTaiwan").tag(CharacterStandard.taiwan)
+                                                        Text("GeneralPreferencesView.CharacterStandard.PickerOption.Simplified").tag(CharacterStandard.simplified)
+                                                }
+                                                .scaledToFit()
+                                                .onChange(of: characterStandard) { newStandard in
+                                                        Options.updateCharacterStandard(to: newStandard)
+                                                }
+                                                Spacer()
+                                        }
+                                        .block()
+                                        HStack(spacing: 2) {
+                                                Text("GeneralPreferencesView.CharacterStandard.PickerFooter.LeadingText")
+                                                Text(verbatim: "Control")
+                                                        .padding(.horizontal, 4)
+                                                        .padding(.vertical, 2)
+                                                        .background(Material.ultraThick, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                                Text(verbatim: "+")
+                                                Text(verbatim: "Shift")
+                                                        .padding(.horizontal, 4)
+                                                        .padding(.vertical, 2)
+                                                        .background(Material.ultraThick, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                                Text(verbatim: "+")
+                                                Text(verbatim: "`")
+                                                        .padding(.horizontal, 6)
+                                                        .padding(.vertical, 2)
+                                                        .background(Material.ultraThick, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                                                Text("GeneralPreferencesView.CharacterStandard.PickerFooter.TrailingText").foregroundStyle(Color.secondary)
+                                                Spacer()
+                                        }
+                                        .font(.subheadline)
+                                        .padding(.horizontal, 12)
+                                }
                                 HStack {
                                         Toggle("GeneralPreferencesView.EmojiSuggestions", isOn: $isEmojiSuggestionsOn)
                                                 .toggleStyle(.switch)
@@ -115,9 +155,11 @@ struct GeneralPreferencesView: View {
                                 .block()
                                 VStack(spacing: 2) {
                                         HStack {
-                                                Text("GeneralPreferencesView.SectionHeader.UserLexicon").font(.subheadline).padding(.horizontal)
+                                                Text("GeneralPreferencesView.SectionHeader.UserLexicon")
                                                 Spacer()
                                         }
+                                        .font(.subheadline)
+                                        .padding(.horizontal, 12)
                                         VStack(spacing: 20) {
                                                 HStack {
                                                         Toggle("GeneralPreferencesView.Toggle.InputMemory", isOn: $isInputMemoryOn)

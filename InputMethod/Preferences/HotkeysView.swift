@@ -69,9 +69,11 @@ struct HotkeysView: View {
                                         }
                                         .block()
                                         HStack {
-                                                Text(verbatim: "number: 1, 2, 3, ... 8, 9, 0").font(.subheadline).padding(.horizontal)
+                                                Text(verbatim: "number: 1, 2, 3, ... 8, 9, 0")
                                                 Spacer()
                                         }
+                                        .font(.subheadline)
+                                        .padding(.horizontal, 12)
                                 }
                                 HStack(spacing: 4) {
                                         LabelText("HotkeysView.RemoveCurrentCandidateFromUserLexicon")
@@ -93,9 +95,11 @@ struct HotkeysView: View {
                                 .block()
                                 VStack(spacing: 2) {
                                         HStack {
-                                                Text("HotkeysView.Header.HorizontalOrientation").font(.subheadline).padding(.horizontal)
+                                                Text("HotkeysView.Header.HorizontalOrientation")
                                                 Spacer()
                                         }
+                                        .font(.subheadline)
+                                        .padding(.horizontal, 12)
                                         VStack(spacing: 8) {
                                                 HStack(spacing: 4) {
                                                         LabelText("HotkeysView.MoveToPreviousCandidate")
@@ -140,9 +144,11 @@ struct HotkeysView: View {
                                 }
                                 VStack(spacing: 2) {
                                         HStack {
-                                                Text("HotkeysView.Header.VerticalOrientation").font(.subheadline).padding(.horizontal)
+                                                Text("HotkeysView.Header.VerticalOrientation")
                                                 Spacer()
                                         }
+                                        .font(.subheadline)
+                                        .padding(.horizontal, 12)
                                         VStack(spacing: 8) {
                                                 HStack(spacing: 4) {
                                                         LabelText("HotkeysView.MoveToPreviousCandidate")
