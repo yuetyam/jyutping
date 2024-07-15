@@ -4,7 +4,8 @@ struct ToolBar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
-        private let itemWidth: CGFloat = 50
+        private let buttonWidth: CGFloat = 50
+        private let buttonHeight: CGFloat = Constant.toolBarHeight
 
         private let editingButtonImageName: String = {
                 if #available(iOSApplicationExtension 16.0, *) {
@@ -16,58 +17,91 @@ struct ToolBar: View {
 
         var body: some View {
                 HStack(spacing: 0) {
-                        ToolBarItem(imageName: "gear", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0))
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        context.updateKeyboardForm(to: .settings)
-                                }
+                        ToolBarButton(
+                                imageName: "gear",
+                                width: buttonWidth,
+                                height: buttonHeight,
+                                insets: EdgeInsets(top: 18, leading: 0, bottom: 18, trailing: 0)
+                        ) {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.updateKeyboardForm(to: .settings)
+                        }
 
                         Spacer()
-                        ZStack {
-                                Color.interactiveClear
-                                Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage())
+                        Button {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.updateKeyboardForm(to: .emojiBoard)
+                        } label: {
+                                Image.smiley
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 24, height: 24)
                         }
-                        .frame(width: itemWidth, height: Constant.toolBarHeight)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                context.updateKeyboardForm(to: .emojiBoard)
-                        }
+                        .buttonStyle(.plain)
+                        .background(Color.interactiveClear)
+                        .frame(width: buttonWidth, height: buttonHeight)
 
                         Spacer()
-                        ZStack {
-                                Color.interactiveClear
-                                CantoneseABCSwitch(isCantoneseSelected: context.inputMethodMode.isCantonese)
-                        }
-                        .frame(width: 80, height: Constant.toolBarHeight)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
+                        Button {
                                 AudioFeedback.modified()
                                 context.triggerSelectionHapticFeedback()
                                 context.toggleInputMethodMode()
+                        } label: {
+                                CantoneseABCSwitch(isCantoneseSelected: context.inputMethodMode.isCantonese)
+                        }
+                        .buttonStyle(.plain)
+                        .background(Color.interactiveClear)
+                        .frame(width: 80, height: buttonHeight)
+
+                        Spacer()
+                        ToolBarButton(
+                                imageName: editingButtonImageName,
+                                width: buttonWidth,
+                                height: buttonHeight,
+                                insets: EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0)
+                        ) {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.updateKeyboardForm(to: .editingPanel)
                         }
 
                         Spacer()
-                        ToolBarItem(imageName: editingButtonImageName, width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-                                .onTapGesture {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        context.updateKeyboardForm(to: .editingPanel)
-                                }
-
-                        Spacer()
-                        ToolBarItem(imageName: "keyboard.chevron.compact.down", width: itemWidth, height: Constant.toolBarHeight, insets: EdgeInsets(top: 19, leading: 0, bottom: 20, trailing: 0))
-                                .onTapGesture {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        context.dismissKeyboard()
-                                }
+                        ToolBarButton(
+                                imageName: "keyboard.chevron.compact.down",
+                                width: buttonWidth,
+                                height: buttonHeight,
+                                insets: EdgeInsets(top: 19, leading: 0, bottom: 20, trailing: 0)
+                        ) {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.dismissKeyboard()
+                        }
                 }
+        }
+}
+
+private struct ToolBarButton: View {
+
+        let imageName: String
+        let width: CGFloat
+        let height: CGFloat
+        let insets: EdgeInsets
+        let action: () -> Void
+
+        var body: some View {
+                Button(action: action) {
+                        Image(systemName: imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .padding(.top, insets.top)
+                                .padding(.bottom, insets.bottom)
+                                .padding(.leading, insets.leading)
+                                .padding(.trailing, insets.trailing)
+                }
+                .buttonStyle(.plain)
+                .background(Color.interactiveClear)
+                .frame(width: width, height: height)
         }
 }

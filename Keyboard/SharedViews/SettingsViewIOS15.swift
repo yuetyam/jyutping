@@ -37,31 +37,35 @@ struct SettingsViewIOS15: View {
                         ZStack {
                                 Text("SettingsView.NavigationBar.HintText").font(.footnote).opacity(0.66)
                                 HStack {
-                                        Image.upChevron
-                                                .resizable()
-                                                .scaledToFit()
-                                                .padding(14)
-                                                .frame(width: 48)
-                                                .frame(maxHeight: .infinity)
-                                                .contentShape(Rectangle())
-                                                .onTapGesture {
-                                                        AudioFeedback.modified()
-                                                        context.triggerHapticFeedback()
-                                                        context.updateKeyboardForm(to: context.previousKeyboardForm)
-                                                }
+                                        Button {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
+                                                context.updateKeyboardForm(to: context.previousKeyboardForm)
+                                        } label: {
+                                                Image.upChevron
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(14)
+                                        }
+                                        .buttonStyle(.plain)
+                                        .background(Color.interactiveClear)
+                                        .frame(width: 48)
+                                        .frame(maxHeight: .infinity)
                                         Spacer()
-                                        Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .padding(14)
-                                                .frame(width: 48)
-                                                .frame(maxHeight: .infinity)
-                                                .contentShape(Rectangle())
-                                                .onTapGesture {
-                                                        AudioFeedback.modified()
-                                                        context.triggerHapticFeedback()
-                                                        context.toggleKeyboardHeight()
-                                                }
+                                        Button {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
+                                                context.toggleKeyboardHeight()
+                                        } label: {
+                                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .padding(14)
+                                        }
+                                        .buttonStyle(.plain)
+                                        .background(Color.interactiveClear)
+                                        .frame(width: 48)
+                                        .frame(maxHeight: .infinity)
                                 }
                         }
                         .background(Material.ultraThin)

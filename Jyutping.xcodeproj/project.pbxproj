@@ -137,7 +137,6 @@
 		371B6FB32B3B342F005BB31C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F312B3B342E005BB31C /* SettingsView.swift */; };
 		371B6FB42B3B342F005BB31C /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F322B3B342E005BB31C /* CandidateBoard.swift */; };
 		371B6FB52B3B342F005BB31C /* ScrollViewGestureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F332B3B342E005BB31C /* ScrollViewGestureButton.swift */; };
-		371B6FB62B3B342F005BB31C /* ToolBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F342B3B342E005BB31C /* ToolBarItem.swift */; };
 		371B6FB72B3B342F005BB31C /* MotherBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F352B3B342E005BB31C /* MotherBoard.swift */; };
 		371B6FB82B3B342F005BB31C /* CantoneseABCSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */; };
 		371B6FB92B3B342F005BB31C /* EditingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F372B3B342E005BB31C /* EditingPanel.swift */; };
@@ -497,7 +496,6 @@
 		371B6F312B3B342E005BB31C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		371B6F322B3B342E005BB31C /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
 		371B6F332B3B342E005BB31C /* ScrollViewGestureButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewGestureButton.swift; sourceTree = "<group>"; };
-		371B6F342B3B342E005BB31C /* ToolBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBarItem.swift; sourceTree = "<group>"; };
 		371B6F352B3B342E005BB31C /* MotherBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotherBoard.swift; sourceTree = "<group>"; };
 		371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseABCSwitch.swift; sourceTree = "<group>"; };
 		371B6F372B3B342E005BB31C /* EditingPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
@@ -922,7 +920,6 @@
 				371B6F322B3B342E005BB31C /* CandidateBoard.swift */,
 				371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */,
 				371B6F302B3B342E005BB31C /* ToolBar.swift */,
-				371B6F342B3B342E005BB31C /* ToolBarItem.swift */,
 				371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */,
 				371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */,
 				371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */,
@@ -1741,7 +1738,6 @@
 				371B6FD62B3B342F005BB31C /* PadSymbolInputKey.swift in Sources */,
 				371B6FCB2B3B342F005BB31C /* AudioFeedback.swift in Sources */,
 				371B6F8C2B3B342F005BB31C /* TransformKey.swift in Sources */,
-				371B6FB62B3B342F005BB31C /* ToolBarItem.swift in Sources */,
 				371B6FC52B3B342F005BB31C /* ImageExtensions.swift in Sources */,
 				371B6FBD2B3B342F005BB31C /* KeyPreviewPath.swift in Sources */,
 				371B6F902B3B342F005BB31C /* SymbolInputKey.swift in Sources */,

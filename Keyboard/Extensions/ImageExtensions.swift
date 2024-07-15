@@ -14,10 +14,12 @@ extension Image {
 
         static let `return`: Image = Image(systemName: "return")
         static let search: Image = Image(systemName: "magnifyingglass")
+
+        /// Emoji Smiley Face
+        static let smiley: Image = Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
 }
 
 extension UIImage {
-
         func cropped() -> UIImage? {
                 guard let sourceCGImage = self.cgImage else { return nil }
                 let sourceSize = self.size
