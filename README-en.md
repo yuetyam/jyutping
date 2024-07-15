@@ -1,4 +1,4 @@
-README in [粵語(Cantonese)](README.md) | [官話(Mandarin)](README-cmn.md)
+README in [粵語(Cantonese)](README.md) | [普通話(Mandarin)](README-cmn.md)
 
 Jyutping
 ======

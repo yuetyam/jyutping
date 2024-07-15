@@ -4044,55 +4044,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啓設定窗口（即係當前邇個）"
+            "value" : "開啓設定視窗（即係當前視窗）"
           }
         }
       }

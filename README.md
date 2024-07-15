@@ -1,4 +1,4 @@
-README in [English](README-en.md) | [官話(Mandarin)](README-cmn.md)
+README in [English](README-en.md) | [普通話(Mandarin)](README-cmn.md)
 
 粵拼輸入法
 ======
