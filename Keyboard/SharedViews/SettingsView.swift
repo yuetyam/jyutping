@@ -57,13 +57,15 @@ struct SettingsView: View {
                                                 context.triggerHapticFeedback()
                                                 context.updateKeyboardForm(to: context.previousKeyboardForm)
                                         } label: {
-                                                Image.upChevron
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(14)
+                                                ZStack {
+                                                        Color.interactiveClear
+                                                        Image.upChevron
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .padding(14)
+                                                }
                                         }
                                         .buttonStyle(.plain)
-                                        .background(Color.interactiveClear)
                                         .frame(width: 48)
                                         .frame(maxHeight: .infinity)
                                         Spacer()
@@ -72,13 +74,15 @@ struct SettingsView: View {
                                                 context.triggerHapticFeedback()
                                                 context.toggleKeyboardHeight()
                                         } label: {
-                                                Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .padding(14)
+                                                ZStack {
+                                                        Color.interactiveClear
+                                                        Image(systemName: context.isKeyboardHeightExpanded ? collapseImageName : expandImageName)
+                                                                .resizable()
+                                                                .scaledToFit()
+                                                                .padding(14)
+                                                }
                                         }
                                         .buttonStyle(.plain)
-                                        .background(Color.interactiveClear)
                                         .frame(width: 48)
                                         .frame(maxHeight: .infinity)
                                 }

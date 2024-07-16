@@ -75,7 +75,7 @@ struct CandidateScrollBar: View {
                                                                                                 .lineLimit(1)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 16)
+                                                                                .padding(.bottom, 12)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(text)
@@ -85,7 +85,7 @@ struct CandidateScrollBar: View {
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 14)
+                                                                                .padding(.bottom, 10)
                                                                         case .noComments:
                                                                                 Text(text)
                                                                                         .font(isCompactKeyboard ? .candidate : .iPadCandidate)
@@ -106,24 +106,24 @@ struct CandidateScrollBar: View {
                                         proxy.scrollTo(topID)
                                 }
                         }
-                        ZStack {
-                                Color.interactiveClear
-                                HStack {
-                                        Rectangle().fill(Color.black).opacity(0.3).frame(width: 1, height: 24)
-                                        Spacer()
-                                }
-                                Image.downChevron
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20, height: 20)
-                        }
-                        .frame(width: expanderWidth, height: Constant.toolBarHeight)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
+                        Button {
                                 AudioFeedback.modified()
                                 context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .candidateBoard)
+                        } label: {
+                                ZStack {
+                                        ZStack(alignment: .leading) {
+                                                Color.interactiveClear
+                                                Rectangle().fill(Color.black).opacity(0.3).frame(width: 1, height: 24)
+                                        }
+                                        Image.downChevron
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 20, height: 20)
+                                }
                         }
+                        .buttonStyle(.plain)
+                        .frame(width: expanderWidth, height: Constant.toolBarHeight)
                 }
         }
 }

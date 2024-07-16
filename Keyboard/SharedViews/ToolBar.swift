@@ -34,13 +34,15 @@ struct ToolBar: View {
                                 context.triggerHapticFeedback()
                                 context.updateKeyboardForm(to: .emojiBoard)
                         } label: {
-                                Image.smiley
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 24, height: 24)
+                                ZStack {
+                                        Color.interactiveClear
+                                        Image.smiley
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 24, height: 24)
+                                }
                         }
                         .buttonStyle(.plain)
-                        .background(Color.interactiveClear)
                         .frame(width: buttonWidth, height: buttonHeight)
 
                         Spacer()
@@ -49,10 +51,12 @@ struct ToolBar: View {
                                 context.triggerSelectionHapticFeedback()
                                 context.toggleInputMethodMode()
                         } label: {
-                                CantoneseABCSwitch(isCantoneseSelected: context.inputMethodMode.isCantonese)
+                                ZStack {
+                                        Color.interactiveClear
+                                        CantoneseABCSwitch(isCantoneseSelected: context.inputMethodMode.isCantonese)
+                                }
                         }
                         .buttonStyle(.plain)
-                        .background(Color.interactiveClear)
                         .frame(width: 80, height: buttonHeight)
 
                         Spacer()
@@ -92,16 +96,18 @@ private struct ToolBarButton: View {
 
         var body: some View {
                 Button(action: action) {
-                        Image(systemName: imageName)
-                                .resizable()
-                                .scaledToFit()
-                                .padding(.top, insets.top)
-                                .padding(.bottom, insets.bottom)
-                                .padding(.leading, insets.leading)
-                                .padding(.trailing, insets.trailing)
+                        ZStack {
+                                Color.interactiveClear
+                                Image(systemName: imageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding(.top, insets.top)
+                                        .padding(.bottom, insets.bottom)
+                                        .padding(.leading, insets.leading)
+                                        .padding(.trailing, insets.trailing)
+                        }
                 }
                 .buttonStyle(.plain)
-                .background(Color.interactiveClear)
                 .frame(width: width, height: height)
         }
 }

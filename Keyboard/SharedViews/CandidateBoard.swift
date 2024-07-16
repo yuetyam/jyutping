@@ -143,18 +143,22 @@ struct CandidateBoard: View {
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
-                        Image.upChevron
-                                .resizable()
-                                .scaledToFit()
-                                .padding(12)
-                                .frame(width: collapseWidth, height: collapseHeight)
-                                .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                        AudioFeedback.modified()
-                                        context.triggerHapticFeedback()
-                                        context.updateKeyboardForm(to: context.previousKeyboardForm)
+                        Button {
+                                AudioFeedback.modified()
+                                context.triggerHapticFeedback()
+                                context.updateKeyboardForm(to: context.previousKeyboardForm)
+                        } label: {
+                                ZStack {
+                                        Color.interactiveClear
+                                        Image.upChevron
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(12)
                                 }
+                        }
+                        .buttonStyle(.plain)
+                        .background(Material.ultraThin, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                        .frame(width: collapseWidth, height: collapseHeight)
                 }
         }
 }
