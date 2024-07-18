@@ -1734,7 +1734,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can use this shortcut to toggle options when typing:"
+            "value" : "You can use this shortcut to toggle options:"
           }
         },
         "yue" : {
@@ -3212,55 +3212,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繪文字(Emoji)候選詞"
+            "value" : "表情符號(Emoji)候選詞"
           }
         }
       }

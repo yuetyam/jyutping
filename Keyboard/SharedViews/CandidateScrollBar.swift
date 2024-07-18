@@ -85,14 +85,14 @@ struct CandidateScrollBar: View {
                                                                                         RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 10)
+                                                                                .padding(.bottom, 8)
                                                                         case .noComments:
                                                                                 Text(text)
                                                                                         .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                         .minimumScaleFactor(0.4)
                                                                                         .lineLimit(1)
                                                                                         .padding(.horizontal, 1)
-                                                                                        .padding(.bottom, 10)
+                                                                                        .padding(.bottom, 8)
                                                                         }
                                                                 }
                                                                 .frame(width: candidate.width)
