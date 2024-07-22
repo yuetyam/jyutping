@@ -62,7 +62,7 @@ Compatibility: iOS / iPadOS 15.0+
 Due to [limitations imposed by the Mac App Store on third-party input methods](https://developer.apple.com/forums/thread/134115) , it's impossible to distribute this input method through the Mac App Store. Please visit our [website](https://jyutping.app) to download it or install it via [Homebrew](https://jyutping.app/mac/homebrew) .
 
 Compatibility: macOS 12 Monterey or higher.  
-Options: Press <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (blow the esc key) will display an options window.  
+Options: Press <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (below the esc key) will display an options window.  
 FAQ: [FAQ](https://jyutping.app/faq)
 
 ## Screenshots
