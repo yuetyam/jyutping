@@ -16,6 +16,9 @@ struct Text2SpeechView: View {
                                 Text("IOSHomeTab.Text2Speech.Notice4")
                         }
                         Section {
+                                Text("IOSHomeTab.Text2Speech.Notice5")
+                        }
+                        Section {
                                 HStack {
                                         Text(verbatim: "測試")
                                         Spacer()

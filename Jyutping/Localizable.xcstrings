@@ -3969,6 +3969,70 @@
         }
       }
     },
+    "IOSHomeTab.FAQ.Answer.RestartKeyboard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sometimes the Keyboard may trigger some bugs and it needs to be completely restarted. You can go to the Settings app and toggle the Keyboard's “Allow Full Access” setting twice. The system will then restart the Keyboard."
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許全權取用」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完整取用」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完全訪問」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許全權取用」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許全權取用」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許完整取用」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有時鍵盤出現問題，需要將佢徹底重啓。去系統設定App，將鍵盤嘅「允許全權取用」權限關閉、再開啓。系統就會將鍵盤重啓。 "
+          }
+        }
+      }
+    },
     "IOSHomeTab.FAQ.Footer.FullAccess" : {
       "localizations" : {
         "en" : {
@@ -4157,6 +4221,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "開啓「全權取用」作何用？"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.FAQ.Question.RestartKeyboard" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How to restart the Keyboard?"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如何重啓鍵盤？"
           }
         }
       }
@@ -6333,6 +6461,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "爲提高發音質素，請前往 **設定** → **輔助使用** → **旁白** → **語音**，添加 **繁體中文(香港)** 語音。"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.Text2Speech.Notice5" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If there is occasionally no sound, try to close the this app completely, or restart this device."
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果係偶爾冇聲音，可以試下將本應用程式徹底關閉再繼續，或者重啓一下設備。"
           }
         }
       }
@@ -9601,70 +9793,6 @@
         }
       }
     },
-    "Shared.Guide.Body.StructureReverseLookup" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping."
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
-          }
-        }
-      }
-    },
     "Shared.Guide.Body.PinyinReverseLookup" : {
       "localizations" : {
         "en" : {
@@ -9789,6 +9917,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "以 x 開始，再輸入筆畫碼即可。例如輸入 xwsad 就會出「木」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        }
+      }
+    },
+    "Shared.Guide.Body.StructureReverseLookup" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start with “q”, then enter two components' Jyutping. For example, enter “qmukdaan”, candidate “查” will appear. Candidates will be displayed with the corresponding Jyutping."
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩分即係將一個字分成兩部分。例如「查」字可以分成「木、旦」。\n以 q 開始，再輸入兩個字嘅粵拼即可。例如輸入 qmukdaan 就會出「查」等。候選詞會帶顯示對應嘅粵拼。"
           }
         }
       }
@@ -10049,70 +10241,6 @@
         }
       }
     },
-    "Shared.Guide.Heading.StructureReverseLookup" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lookup Jyutping with Loengfan"
-          }
-        },
-        "yue" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-Hans-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-Hant-CN" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-Hant-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-Hant-MO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-Hant-TW" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        },
-        "zh-HK" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用兩分反查粵拼"
-          }
-        }
-      }
-    },
     "Shared.Guide.Heading.PinyinReverseLookup" : {
       "localizations" : {
         "en" : {
@@ -10237,6 +10365,70 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "用筆畫輸入反查粵拼"
+          }
+        }
+      }
+    },
+    "Shared.Guide.Heading.StructureReverseLookup" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lookup Jyutping with Loengfan"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用兩分反查粵拼"
           }
         }
       }

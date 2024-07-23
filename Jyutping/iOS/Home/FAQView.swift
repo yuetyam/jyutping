@@ -51,6 +51,16 @@ struct FAQView: View {
                                         Text("IOSHomeTab.Text2Speech.Notice4")
                                         Spacer()
                                 }
+                                HStack {
+                                        Text.dotMark
+                                        Text("IOSHomeTab.Text2Speech.Notice5")
+                                        Spacer()
+                                }
+                        }
+
+                        Section {
+                                Text("IOSHomeTab.FAQ.Question.RestartKeyboard").font(.significant)
+                                Text("IOSHomeTab.FAQ.Answer.RestartKeyboard")
                         }
                 }
                 .textSelection(.enabled)
