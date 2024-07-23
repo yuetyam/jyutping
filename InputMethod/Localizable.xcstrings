@@ -1740,55 +1740,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打字時撳組合掣可以揀字符集以及其他選項："
+            "value" : "打字時撳組合鍵可以揀字符集以及其他選項："
           }
         }
       }
@@ -1798,61 +1798,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(blow the esc key)"
+            "value" : "(below the esc key)"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(esc下邊嗰粒掣)"
+            "value" : "(位於 esc 鍵下方)"
           }
         }
       }
@@ -3713,6 +3713,70 @@
         }
       }
     },
+    "HotkeysView.EnterExitOptionsView.Footer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "is located below the esc key"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位於 esc 鍵下方"
+          }
+        }
+      }
+    },
     "HotkeysView.ForwardToNextCandidatePage" : {
       "localizations" : {
         "en" : {
@@ -4097,6 +4161,70 @@
         }
       }
     },
+    "HotkeysView.OpenPreferencesWindow.Footer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "is the comma key"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "係逗號鍵"
+          }
+        }
+      }
+    },
     "HotkeysView.Or" : {
       "localizations" : {
         "en" : {
@@ -4172,55 +4300,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "撳一下 **Shift** 掣"
+            "value" : "撳一下 **Shift** 鍵"
           }
         }
       }

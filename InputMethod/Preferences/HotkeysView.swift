@@ -33,7 +33,7 @@ struct HotkeysView: View {
                                         }
                                 }
                                 .block()
-                                VStack(spacing: 8) {
+                                VStack(spacing: 2) {
                                         HStack(spacing: 4) {
                                                 LabelText("HotkeysView.OpenPreferencesWindow")
                                                 Text.separator
@@ -44,6 +44,15 @@ struct HotkeysView: View {
                                                 KeyBlockView(",")
                                                 Spacer()
                                         }
+                                        .block()
+                                        HStack(spacing: 2) {
+                                                SymbolKeyView(",")
+                                                Text("HotkeysView.OpenPreferencesWindow.Footer").font(.subheadline)
+                                                Spacer()
+                                        }
+                                        .padding(.horizontal, 12)
+                                }
+                                VStack(spacing: 2) {
                                         HStack(spacing: 4) {
                                                 LabelText("HotkeysView.EnterExitOptionsView")
                                                 Text.separator
@@ -54,8 +63,14 @@ struct HotkeysView: View {
                                                 KeyBlockView("`")
                                                 Spacer()
                                         }
+                                        .block()
+                                        HStack(spacing: 2) {
+                                                SymbolKeyView("`")
+                                                Text("HotkeysView.EnterExitOptionsView.Footer").font(.subheadline)
+                                                Spacer()
+                                        }
+                                        .padding(.horizontal, 12)
                                 }
-                                .block()
                                 VStack(spacing: 2) {
                                         HStack(spacing: 4) {
                                                 LabelText("HotkeysView.DirectlyToggleSpecificOption")
@@ -241,13 +256,25 @@ private struct KeyBlockView: View {
         static let shift: KeyBlockView = KeyBlockView("Shift ⇧")
         static let number: KeyBlockView = KeyBlockView("number")
         static let space: KeyBlockView = KeyBlockView("Space ␣")
-        static let escape: KeyBlockView = KeyBlockView("Esc ⎋")
+        static let escape: KeyBlockView = KeyBlockView("esc ⎋")
         static let tab: KeyBlockView = KeyBlockView("Tab ⇥")
 
         /// Backspace. NOT Forward-Delete.
         static let backwardDelete: KeyBlockView = KeyBlockView("Delete ⌫")
 }
 
+private struct SymbolKeyView: View {
+        init(_ keyText: String) {
+                self.keyText = keyText
+        }
+        private let keyText: String
+        var body: some View {
+                Text(verbatim: keyText)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 1)
+                        .background(Material.ultraThick, in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+        }
+}
 
 private extension Text {
         static let separator: Text = Text(verbatim: ": ").foregroundColor(.secondary)
