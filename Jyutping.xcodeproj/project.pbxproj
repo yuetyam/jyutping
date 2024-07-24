@@ -786,8 +786,8 @@
 				371B6E602B3B3107005BB31C /* Text2SpeechView.swift */,
 				3762EDCF2B8538A000C4E9F1 /* ClipboardFeaturesView.swift */,
 				37CC55782B464C78003ED8CE /* ChangeDisplayLanguageView.swift */,
-				371B6E5F2B3B3107005BB31C /* FAQView.swift */,
 				371B6E612B3B3107005BB31C /* PrivacyNoticeView.swift */,
+				371B6E5F2B3B3107005BB31C /* FAQView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

@@ -4428,55 +4428,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除(Delete)掣從右向左滑，即可一次過清空預輸入拼寫。"
+            "value" : "刪除鍵(Delete)從右向左滑，即可一次過清空預輸入拼寫。"
           }
         }
       }
@@ -4486,61 +4486,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Long-press on a Candidate can delete it from User Lexicon."
+            "value" : "Long-press on a Candidate can delete it from Input Memory."
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長撳某一個候選詞可以將佢從個人詞庫刪除。"
+            "value" : "長撳某一個候選詞可以將佢從輸入記憶刪除。"
           }
         }
       }
@@ -4556,55 +4556,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣(Space)可以輸入句號「。」"
+            "value" : "雙擊空格鍵(Space)可以輸入句號「。」"
           }
         }
       }
@@ -4620,55 +4620,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊 gw 掣可以輸入 kw。"
+            "value" : "雙擊 gw 鍵可以輸入 kw。"
           }
         }
       }
@@ -4684,55 +4684,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一掣，無需區分。"
+            "value" : "因爲 oe、eo 兩個韻腹多數情況下係互補嘅，所以共用一鍵，無需區分。"
           }
         }
       }
@@ -4876,55 +4876,55 @@
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "雙擊空格掣"
+            "value" : "雙擊空格鍵"
           }
         }
       }
