@@ -43,25 +43,25 @@ struct EmojiIndicator: View {
         private let action: () -> Void
 
         var body: some View {
-                ZStack {
-                        Color.interactiveClear
-                        if isCustomImage {
-                                Image(uiImage: UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage())
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding(.top, topInset)
-                                        .padding(.bottom, bottomInset)
-                        } else {
-                                Image(systemName: imageName)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding(.top, topInset)
-                                        .padding(.bottom, bottomInset)
+                Button(action: action) {
+                        ZStack {
+                                Color.interactiveClear
+                                if isCustomImage {
+                                        Image(uiImage: UIImage(named: imageName)?.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage())
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(.top, topInset)
+                                                .padding(.bottom, bottomInset)
+                                } else {
+                                        Image(systemName: imageName)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(.top, topInset)
+                                                .padding(.bottom, bottomInset)
+                                }
                         }
                 }
-                .frame(height: 40)
-                .frame(maxWidth: .infinity)
-                .contentShape(Rectangle())
-                .onTapGesture(perform: action)
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
 }

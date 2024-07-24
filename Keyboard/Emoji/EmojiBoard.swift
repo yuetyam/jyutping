@@ -23,13 +23,13 @@ struct EmojiBoard: View {
         var body: some View {
                 ScrollViewReader { proxy in
                         HStack {
-                                Text(verbatim: currentCategory.title)
+                                Text(currentCategory.title)
                                         .font(.footnote)
                                         .foregroundStyle(Color.secondary)
-                                        .padding(.horizontal)
+                                        .padding(.horizontal, 8)
                                 Spacer()
                         }
-                        .frame(height: 22)
+                        .frame(height: 20)
                         ScrollView(.horizontal) {
                                 LazyHGrid(rows: rows) {
                                         ForEach(Emoji.Category.allCases) { category in
@@ -42,8 +42,9 @@ struct EmojiBoard: View {
                                                                                 context.operate(.input(emoji.text))
                                                                                 EmojiMaster.updateFrequent(latest: emoji.text)
                                                                         } label: {
-                                                                                Text(verbatim: emoji.text).font(.largeTitle)
+                                                                                Text(verbatim: emoji.text).font(.emoji)
                                                                         }
+                                                                        .id(emoji.id)
                                                                 }
                                                         }
                                                         .id(category.viewID)
@@ -53,21 +54,21 @@ struct EmojiBoard: View {
                         }
                         .frame(maxHeight: .infinity)
                         HStack(spacing: 0) {
-                                ZStack {
-                                        Color.interactiveClear
-                                        Image(systemName: "abc")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 36, height: 36)
-                                }
-                                .frame(height: 40)
-                                .frame(maxWidth: .infinity)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
+                                Button {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
                                         context.updateKeyboardForm(to: context.previousKeyboardForm)
+                                } label: {
+                                        ZStack {
+                                                Color.interactiveClear
+                                                Image(systemName: "abc")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 36, height: 36)
+                                        }
                                 }
+                                .buttonStyle(.plain)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 Group {
                                         EmojiIndicator(index: 0, imageName: "clock") {
                                                 AudioFeedback.modified()
@@ -140,8 +141,7 @@ struct EmojiBoard: View {
                                                 .scaledToFit()
                                                 .frame(width: 24, height: 24)
                                 }
-                                .frame(height: 40)
-                                .frame(maxWidth: .infinity)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .contentShape(Rectangle())
                                 .gesture(DragGesture(minimumDistance: 0)
                                         .updating($isBackspacing) { _, tapped, _ in
@@ -181,26 +181,26 @@ struct EmojiBoard: View {
 }
 
 private extension Emoji.Category {
-        var title: String {
+        var title: LocalizedStringKey {
                 switch self {
                 case .frequent:
-                        return "Frequently Used"
+                        return "Emoji.Category.FrequentlyUsed"
                 case .smileysAndPeople:
-                        return "Smileys & People"
+                        return "Emoji.Category.SmileysAndPeople"
                 case .animalsAndNature:
-                        return "Animals & Nature"
+                        return "Emoji.Category.AnimalsAndNature"
                 case .foodAndDrink:
-                        return "Food & Drink"
+                        return "Emoji.Category.FoodAndDrink"
                 case .activity:
-                        return "Activity"
+                        return "Emoji.Category.Activity"
                 case .travelAndPlaces:
-                        return "Travel & Places"
+                        return "Emoji.Category.TravelAndPlaces"
                 case .objects:
-                        return "Objects"
+                        return "Emoji.Category.Objects"
                 case .symbols:
-                        return "Symbols"
+                        return "Emoji.Category.Symbols"
                 case .flags:
-                        return "Flags"
+                        return "Emoji.Category.Flags"
                 }
         }
 }

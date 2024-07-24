@@ -11,6 +11,9 @@ extension Font {
         static let letterInputKeyCompact: Font = Font.system(size: 24)
         static let dualLettersInputKeyCompact: Font = Font.system(size: 17)
         static let keyFooter: Font = Font.system(size: 9)
+
+        /// EmojiBoard emoji
+        static let emoji: Font = Font.system(size: 34)
 }
 
 enum LanguageAttribute: Int {

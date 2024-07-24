@@ -6,11 +6,9 @@ struct EmojiMaster {
 
         private static let key: String = "emoji_frequent"
         private(set) static var frequent: [String] = {
-                let history = UserDefaults.standard.string(forKey: key)
-                guard let history else { return defaultFrequent }
+                guard let history = UserDefaults.standard.string(forKey: key) else { return defaultFrequent }
                 guard history.isNotEmpty else { return defaultFrequent }
-                guard history.contains(",") else { return [history] }
-                return history.split(separator: ",").map({ $0.trimmingCharacters(in: .whitespaces) })
+                return history.split(separator: ",").map({ $0.trimmingCharacters(in: .whitespaces) }).filter(\.isNotEmpty)
         }()
         static func updateFrequent(latest emoji: String) {
                 let combined: [String] = ([emoji] + frequent).uniqued()

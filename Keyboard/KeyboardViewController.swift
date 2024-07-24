@@ -484,7 +484,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                         return
                                 }
                                 selectedCandidates.append(candidate)
-                                let inputCount: Int = candidate.input.replacingOccurrences(of: "(4|5|6)", with: "RR", options: .regularExpression).count
+                                let inputCount: Int = candidate.input.replacingOccurrences(of: "[456]", with: "RR", options: .regularExpression).count
                                 var tail = bufferText.dropFirst(inputCount)
                                 while tail.hasPrefix("'") {
                                         tail = tail.dropFirst()
