@@ -67,11 +67,11 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 - macOS 14.0+
 - Xcode 15.4+
 
-倉庫體積比較大，建議加 `--depth` 來 clone。
+倉庫體積比較大，建議加 `--depth` 來 clone：
 ~~~bash
 git clone --depth 1 https://github.com/yuetyam/jyutping.git
 ~~~
-先構建數據庫 (Prepare databases)。
+先構建數據庫 (Prepare databases)：
 ~~~bash
 # cd path/to/jyutping
 cd ./Modules/Preparing/
