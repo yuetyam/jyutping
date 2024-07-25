@@ -58,7 +58,9 @@ struct DatabasePreparer {
                         "CREATE INDEX strokecodeindex ON stroketable(code);",
 
                         "CREATE INDEX symbolshortcutindex ON symboltable(shortcut);",
-                        "CREATE INDEX symbolpingindex ON symboltable(ping);"
+                        "CREATE INDEX symbolpingindex ON symboltable(ping);",
+
+                        "CREATE INDEX markcodeindex ON marktable(code);"
                 ]
                 for command in commands {
                         var statement: OpaquePointer? = nil
@@ -294,7 +296,7 @@ struct DatabasePreparer {
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
         private static func createTextMarkTable() {
-                let createTable: String = "CREATE TABLE marktable(code INTEGER NOT NULL PRIMARY KEY, mark TEXT NOT NULL);"
+                let createTable: String = "CREATE TABLE marktable(code INTEGER NOT NULL, mark TEXT NOT NULL);"
                 var createStatement: OpaquePointer? = nil
                 guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
