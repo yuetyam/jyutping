@@ -144,9 +144,7 @@ extension Engine {
                 switch (text.hasSeparators, text.hasTones) {
                 case (true, true):
                         let syllable = text.removedSeparatorsTones()
-                        let candidates = match(text: syllable, input: text)
-                        let filtered = candidates.filter({ text.hasPrefix($0.romanization) })
-                        return filtered
+                        return match(text: syllable, input: text).filter({ text.hasPrefix($0.romanization) })
                 case (false, true):
                         let textTones = text.tones
                         let rawText: String = text.removedTones()
@@ -202,7 +200,7 @@ extension Engine {
                                         }
                                 }
                         })
-                        return qualified.preferred(with: text)
+                        return qualified
                 case (true, false):
                         let textSeparators = text.filter(\.isSeparator)
                         let textParts = text.split(separator: "'")
@@ -261,21 +259,21 @@ extension Engine {
                                         return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
                                 }
                         })
-                        let sorted = qualified.preferred(with: text)
-                        guard sorted.isEmpty else { return sorted }
+                        guard qualified.isEmpty else { return qualified }
                         let anchors = textParts.compactMap(\.first)
                         let anchorCount = anchors.count
-                        let shortcuts = shortcut(text: String(anchors)).filter({ item -> Bool in
-                                let syllables = item.romanization.split(separator: Character.space).map({ $0.dropLast() })
-                                guard syllables.count == anchorCount else { return false }
-                                let checks = (0..<anchorCount).map({ index -> Bool in
-                                        let part = textParts[index]
-                                        let isAnchorOnly = part.count == 1
-                                        return isAnchorOnly ? syllables[index].hasPrefix(part) : syllables[index] == part
+                        return shortcut(text: String(anchors))
+                                .filter({ item -> Bool in
+                                        let syllables = item.romanization.split(separator: Character.space).map({ $0.dropLast() })
+                                        guard syllables.count == anchorCount else { return false }
+                                        let checks = (0..<anchorCount).map({ index -> Bool in
+                                                let part = textParts[index]
+                                                let isAnchorOnly = part.count == 1
+                                                return isAnchorOnly ? syllables[index].hasPrefix(part) : syllables[index] == part
+                                        })
+                                        return checks.reduce(true, { $0 && $1 })
                                 })
-                                return checks.reduce(true, { $0 && $1 })
-                        })
-                        return shortcuts.map({ Candidate(text: $0.text, romanization: $0.romanization, input: text) })
+                                .map { Candidate(text: $0.text, romanization: $0.romanization, input: text) }
                 case (false, false):
                         guard segmentation.maxSchemeLength > 0 else { return processVerbatim(text: text) }
                         return process(text: text, segmentation: segmentation, needsSymbols: needsSymbols)
