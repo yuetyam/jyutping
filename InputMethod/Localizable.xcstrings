@@ -6081,6 +6081,70 @@
         }
       }
     },
+    "PreferencesView.NavigationTitle.ToneInput" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tones"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調"
+          }
+        }
+      }
+    },
     "PreferencesView.SectionHeader.About" : {
       "localizations" : {
         "en" : {
@@ -7229,6 +7293,198 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "用兩分拆字反查粵拼"
+          }
+        }
+      }
+    },
+    "ToneInputView.ToneInput.Body" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1, High Level (陰平)\nx = 2, Medium Rising (陰上)\nq = 3, Medium Level (陰去)\nvv = 4, Low Falling (陽平)\nxx = 5, Low Rising (陽上)\nqq = 6, Low Level (陽去)"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "v = 1 陰平  vv = 4 陽平\nx = 2 陰上  xx = 5 陽上\nq = 3 陰去  qq = 6 陽去"
+          }
+        }
+      }
+    },
+    "ToneInputView.ToneInput.Example" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Examples: sinq = sin3(線), sinqq = sin6(羨)"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "例: sinq = sin3(線)  sinqq = sin6(羨)"
+          }
+        }
+      }
+    },
+    "ToneInputView.ToneInput.Heading" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tone Input"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聲調輸入"
           }
         }
       }

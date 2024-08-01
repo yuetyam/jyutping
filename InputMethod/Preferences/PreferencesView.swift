@@ -35,6 +35,7 @@ struct PreferencesView: View {
                                 List(selection: $selection) {
                                         Section {
                                                 Label("PreferencesView.NavigationTitle.General", systemImage: "gear").tag(PreferencesSidebarRow.general)
+                                                Label("PreferencesView.NavigationTitle.ToneInput", systemImage: "bell").tag(PreferencesSidebarRow.toneInput)
                                                 Label("PreferencesView.NavigationTitle.ReverseLookup", systemImage: "doc.text.magnifyingglass").tag(PreferencesSidebarRow.reverseLookup)
                                                 Label("PreferencesView.NavigationTitle.Fonts", systemImage: "textformat").tag(PreferencesSidebarRow.fonts)
                                         } header: {
@@ -57,6 +58,8 @@ struct PreferencesView: View {
                                 switch selection {
                                 case .general:
                                         GeneralPreferencesView().applyVisualEffect()
+                                case .toneInput:
+                                        ToneInputView().applyVisualEffect()
                                 case .reverseLookup:
                                         ReverseLookupView().applyVisualEffect()
                                 case .fonts:
@@ -73,6 +76,11 @@ struct PreferencesView: View {
                                         Section {
                                                 NavigationLink(destination: GeneralPreferencesView().applyVisualEffect(), isActive: $isGeneralViewActive) {
                                                         Label("PreferencesView.NavigationTitle.General", systemImage: "gear")
+                                                }
+                                                NavigationLink {
+                                                        ToneInputView().applyVisualEffect()
+                                                } label: {
+                                                        Label("PreferencesView.NavigationTitle.ToneInput", systemImage: "bell")
                                                 }
                                                 NavigationLink {
                                                         ReverseLookupView().applyVisualEffect()
@@ -113,6 +121,7 @@ struct PreferencesView: View {
 
 enum PreferencesSidebarRow: Int, Identifiable {
         case general
+        case toneInput
         case reverseLookup
         case fonts
         case hotkeys
