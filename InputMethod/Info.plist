@@ -60,6 +60,10 @@
 	<true/>
 	<key>TISIntendedLanguage</key>
 	<string>yue</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Mono-Regular.otf</string>
+	</array>
 	<key>tsInputMethodCharacterRepertoireKey</key>
 	<array>
 		<string>Hant</string>
