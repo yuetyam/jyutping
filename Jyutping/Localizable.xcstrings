@@ -10246,7 +10246,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lookup Jyutping with Pinyin"
+            "value" : "Lookup Jyutping with Mandarin Pinyin"
           }
         },
         "yue" : {
@@ -10374,61 +10374,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lookup Jyutping with Loengfan"
+            "value" : "Lookup Jyutping with character components"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "用兩分反查粵拼"
+            "value" : "用兩分拆字反查粵拼"
           }
         }
       }

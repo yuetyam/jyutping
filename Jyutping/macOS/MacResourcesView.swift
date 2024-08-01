@@ -21,11 +21,13 @@ struct MacResourcesView: View {
                                 VStack {
                                         LinkView(icon: globeIcon, title: "粵拼 Jyutping", url: "https://jyutping.org")
                                         LinkView(icon: globeIcon, title: "粵語拼音速遞 - CUHK", url: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
+                                        LinkView(icon: globeIcon, title: "Zidou 粵拼版 Wordle", url: "https://chaaklau.github.io/zidou")
                                 }
                                 .block()
 
                                 VStack {
                                         LinkView(icon: globeIcon, title: "懶音診療室 - PolyU", url: "https://www.polyu.edu.hk/cbs/pronunciation")
+                                        LinkView(icon: globeIcon, title: "中國古詩文精讀", url: "https://www.classicalchineseliterature.org")
                                         LinkView(icon: globeIcon, title: "冚唪唥粵文", url: "https://hambaanglaang.hk")
                                         LinkView(icon: globeIcon, title: "迴響", url: "https://resonate.hk")
                                 }

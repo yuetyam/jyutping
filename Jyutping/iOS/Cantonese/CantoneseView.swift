@@ -65,6 +65,7 @@ struct CantoneseView: View {
 
                                 Section {
                                         ExtendedLinkLabel(title: "懶音診療室 - PolyU", footnote: "polyu.edu.hk/cbs/pronunciation", address: "https://www.polyu.edu.hk/cbs/pronunciation")
+                                        ExtendedLinkLabel(title: "中國古詩文精讀", footnote: "classicalchineseliterature.org", address: "https://www.classicalchineseliterature.org")
                                         ExtendedLinkLabel(title: "冚唪唥粵文", footnote: "hambaanglaang.hk", address: "https://hambaanglaang.hk")
                                         ExtendedLinkLabel(title: "迴響", footnote: "resonate.hk", address: "https://resonate.hk")
                                 }

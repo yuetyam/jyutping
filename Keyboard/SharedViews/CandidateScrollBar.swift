@@ -75,7 +75,7 @@ struct CandidateScrollBar: View {
                                                                                                 .lineLimit(1)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 12)
+                                                                                .padding(.bottom, 14)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(text)

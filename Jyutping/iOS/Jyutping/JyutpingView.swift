@@ -34,6 +34,7 @@ struct JyutpingView: View {
                                 Section {
                                         ExtendedLinkLabel(title: "粵拼 Jyutping", footnote: "jyutping.org", address: "https://jyutping.org")
                                         ExtendedLinkLabel(title: "粵語拼音速遞 - CUHK", footnote: "ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization", address: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
+                                        ExtendedLinkLabel(title: "Zidou 粵拼版 Wordle", footnote: "chaaklau.github.io/zidou", address: "https://chaaklau.github.io/zidou")
                                 }
                         }
                         .animation(.default, value: animationState)
