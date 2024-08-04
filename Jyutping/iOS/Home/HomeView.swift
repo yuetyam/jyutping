@@ -93,26 +93,26 @@ struct HomeView: View {
                                 Group {
                                         Section {
                                                 Text("Shared.Guide.Heading.ToneInput").font(.significant)
-                                                Text("Shared.Guide.Body.ToneInput").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.Body.ToneInput").font(.fixedWidth)
                                                 Text("Shared.Guide.Example.ToneInput")
                                         }
                                         Section {
                                                 Text("Shared.Guide.Heading.PinyinReverseLookup").font(.significant)
-                                                Text("Shared.Guide.Body.PinyinReverseLookup").lineSpacing(6)
+                                                Text("Shared.Guide.Body.PinyinReverseLookup")
                                         }
                                         Section {
                                                 Text("Shared.Guide.Heading.CangjieReverseLookup").font(.significant)
-                                                Text("Shared.Guide.Body.CangjieReverseLookup").lineSpacing(6)
-                                                Text("Shared.Guide.Body.CangjieReverseLookup.Note").lineSpacing(6)
+                                                Text("Shared.Guide.Body.CangjieReverseLookup")
+                                                Text("Shared.Guide.Body.CangjieReverseLookup.Note")
                                         }
                                         Section {
                                                 Text("Shared.Guide.Heading.StrokeReverseLookup").font(.significant)
-                                                Text("Shared.Guide.Body.StrokeReverseLookup").lineSpacing(6)
-                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.fixedWidth).lineSpacing(5)
+                                                Text("Shared.Guide.Body.StrokeReverseLookup")
+                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.fixedWidth)
                                         }
                                         Section {
                                                 Text("Shared.Guide.Heading.StructureReverseLookup").font(.significant)
-                                                Text("Shared.Guide.Body.StructureReverseLookup").lineSpacing(6)
+                                                Text("Shared.Guide.Body.StructureReverseLookup")
                                         }
                                 }
                                 .textSelection(.enabled)
