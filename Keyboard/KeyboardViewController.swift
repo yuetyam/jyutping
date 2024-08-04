@@ -13,7 +13,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 instantiateHapticFeedbacks()
                 keyboardInterface = adoptKeyboardInterface()
                 updateKeyboardSize()
-                updateSpaceKeyText()
+                updateSpaceKeyForm()
                 updateReturnKey()
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
                 view.addSubview(motherBoard.view)
@@ -39,7 +39,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
                 if isKeyboardPrepared {
-                        updateSpaceKeyText()
+                        updateSpaceKeyForm()
                         updateReturnKey()
                 } else {
                         prepareKeyboard()
@@ -667,7 +667,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var candidates: [Candidate] = [] {
                 didSet {
                         candidatesState += 1
-                        updateSpaceKeyText()
+                        updateSpaceKeyForm()
                 }
         }
 
@@ -682,7 +682,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         inputBufferText()
                 }
                 inputMethodMode = inputMethodMode.isABC ? .cantonese : .abc
-                updateSpaceKeyText()
+                updateSpaceKeyForm()
                 updateReturnKey()
         }
 
@@ -709,7 +709,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form
                 updateReturnKey()
-                updateSpaceKeyText()
+                updateSpaceKeyForm()
                 if isKeyboardHeightExpanded {
                         toggleKeyboardHeight()
                 }
@@ -724,7 +724,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var keyboardCase: KeyboardCase = .lowercased
         func updateKeyboardCase(to newCase: KeyboardCase) {
                 keyboardCase = newCase
-                updateSpaceKeyText()
+                updateSpaceKeyForm()
         }
 
         @Published private(set) var returnKeyType: EnhancedReturnKeyType = .default
@@ -746,9 +746,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         returnKeyText = newText
                 }
         }
-        @Published private(set) var spaceKeyText: SpaceKeyText = .fallback
-        private func updateSpaceKeyText() {
-                let newText: SpaceKeyText = {
+        @Published private(set) var spaceKeyForm: SpaceKeyForm = .fallback
+        private func updateSpaceKeyForm() {
+                let newForm: SpaceKeyForm = {
                         guard inputMethodMode.isCantonese else { return .english }
                         guard keyboardForm != .tenKeyNumeric else { return .fallback }
                         let isSimplified: Bool = Options.characterStandard.isSimplified
@@ -769,8 +769,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 }
                         }
                 }()
-                if spaceKeyText != newText {
-                        spaceKeyText = newText
+                if spaceKeyForm != newForm {
+                        spaceKeyForm = newForm
                 }
         }
         @Published private(set) var touchedLocation: CGPoint = .zero

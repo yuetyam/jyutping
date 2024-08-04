@@ -1,6 +1,7 @@
 import SwiftUI
 
-enum SpaceKeyText: Int {
+// TODO: Rename to SpaceKeyForm
+enum SpaceKeyForm: Int {
 
         case english
         case fallback

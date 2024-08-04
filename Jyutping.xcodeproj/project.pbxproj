@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		370C951D2BF00FDC00F31358 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 370C951B2BF00FD500F31358 /* Sparkle.framework */; };
 		370C951E2BF00FDC00F31358 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 370C951B2BF00FD500F31358 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3716A7E52BC135CF001F6679 /* SpaceKeyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */; };
+		3716A7E52BC135CF001F6679 /* SpaceKeyForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3716A7E42BC135CF001F6679 /* SpaceKeyForm.swift */; };
 		3717DBCB2BF9649D00DC3DB1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3717DBCA2BF9649D00DC3DB1 /* Localizable.xcstrings */; };
 		3717DBCD2BF9649D00DC3DB1 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3717DBCC2BF9649D00DC3DB1 /* InfoPlist.xcstrings */; };
 		3717DBCF2BF9AA0A00DC3DB1 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3717DBCE2BF9AA0A00DC3DB1 /* Localizable.xcstrings */; };
@@ -372,7 +372,7 @@
 
 /* Begin PBXFileReference section */
 		370C951B2BF00FD500F31358 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceKeyText.swift; sourceTree = "<group>"; };
+		3716A7E42BC135CF001F6679 /* SpaceKeyForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceKeyForm.swift; sourceTree = "<group>"; };
 		3717DBCA2BF9649D00DC3DB1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		3717DBCC2BF9649D00DC3DB1 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		3717DBCE2BF9AA0A00DC3DB1 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -974,7 +974,7 @@
 				371B6F522B3B342F005BB31C /* KeyboardCase.swift */,
 				371B6F532B3B342F005BB31C /* InputStage.swift */,
 				371B6F542B3B342F005BB31C /* HapticFeedback.swift */,
-				3716A7E42BC135CF001F6679 /* SpaceKeyText.swift */,
+				3716A7E42BC135CF001F6679 /* SpaceKeyForm.swift */,
 				3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */,
 			);
 			path = SharedModels;
@@ -1765,7 +1765,7 @@
 				371B6FA62B3B342F005BB31C /* TenKeySpaceKey.swift in Sources */,
 				371B6FF82B3B342F005BB31C /* PadCantoneseSymblicKeyboard.swift in Sources */,
 				371B6FDA2B3B342F005BB31C /* LargePadShiftKey.swift in Sources */,
-				3716A7E52BC135CF001F6679 /* SpaceKeyText.swift in Sources */,
+				3716A7E52BC135CF001F6679 /* SpaceKeyForm.swift in Sources */,
 				371B6FEF2B3B342F005BB31C /* PadUpperLowerInputKey.swift in Sources */,
 				371B6FA12B3B342F005BB31C /* TenKeyReturnKey.swift in Sources */,
 				371B6FE72B3B342F005BB31C /* LargePadReturnKey.swift in Sources */,
