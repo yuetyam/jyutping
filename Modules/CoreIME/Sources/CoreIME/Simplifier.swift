@@ -2,20 +2,35 @@ import Foundation
 import SQLite3
 
 private extension Engine {
-        static func matchT2S(_ character: Character) -> String {
-                let code: UInt32 = character.unicodeScalars.first?.value ?? 0
-                let queryString = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
-                var queryStatement: OpaquePointer? = nil
-                defer {
-                        sqlite3_finalize(queryStatement)
-                }
-                if sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil) == SQLITE_OK {
-                        if sqlite3_step(queryStatement) == SQLITE_ROW {
-                                let simplified: String = String(cString: sqlite3_column_text(queryStatement, 0))
-                                return simplified
-                        }
-                }
-                return String(character)
+        static func t2s(_ character: Character) -> String {
+                guard let code: UInt32 = character.unicodeScalars.first?.value else { return String(character) }
+                let query: String = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return String(character) }
+                guard sqlite3_step(statement) == SQLITE_ROW else { return String(character) }
+                let simplified: String = String(cString: sqlite3_column_text(statement, 0))
+                return simplified
+        }
+        static func charT2S(_ character: Character) -> Character {
+                guard let code: UInt32 = character.unicodeScalars.first?.value else { return character }
+                let query: String = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return character}
+                guard sqlite3_step(statement) == SQLITE_ROW else { return character }
+                let simplified: String = String(cString: sqlite3_column_text(statement, 0))
+                return simplified.first ?? character
+        }
+        static func textT2S(_ text: String) -> String {
+                guard let code: UInt32 = text.first?.unicodeScalars.first?.value else { return text }
+                let query: String = "SELECT simplified FROM t2stable WHERE traditional = \(code);"
+                var statement: OpaquePointer? = nil
+                defer { sqlite3_finalize(statement) }
+                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return text}
+                guard sqlite3_step(statement) == SQLITE_ROW else { return text }
+                let simplified: String = String(cString: sqlite3_column_text(statement, 0))
+                return simplified
         }
 }
 
@@ -26,9 +41,9 @@ struct Simplifier {
                 case 0:
                         return text
                 case 1:
-                        return Engine.matchT2S(text.first!)
+                        return Engine.textT2S(text)
                 case 2:
-                        return phrases[text] ?? text.map(Engine.matchT2S(_:)).joined()
+                        return phrases[text] ?? String(text.map(Engine.charT2S(_:)))
                 default:
                         return phrases[text] ?? transform(text)
                 }
@@ -37,19 +52,19 @@ struct Simplifier {
         private static func transform(_ text: String) -> String {
                 let roundOne = replace(text, replacement: "W")
                 guard roundOne.matched.isNotEmpty else {
-                        return text.map(Engine.matchT2S(_:)).joined()
+                        return String(text.map(Engine.charT2S(_:)))
                 }
 
                 let roundTwo = replace(roundOne.modified, replacement: "X")
                 guard roundTwo.matched.isNotEmpty else {
-                        let transformed: String = roundTwo.modified.map(Engine.matchT2S(_:)).joined()
+                        let transformed: String = roundTwo.modified.map(Engine.t2s(_:)).joined()
                         let reverted: String = transformed.replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         return reverted
                 }
 
                 let roundThree = replace(roundTwo.modified, replacement: "Y")
                 guard roundThree.matched.isNotEmpty else {
-                        let transformed: String = roundThree.modified.map(Engine.matchT2S(_:)).joined()
+                        let transformed: String = roundThree.modified.map(Engine.t2s(_:)).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                                 .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -58,7 +73,7 @@ struct Simplifier {
 
                 let roundFour = replace(roundThree.modified, replacement: "Z")
                 guard roundFour.matched.isNotEmpty else {
-                        let transformed: String = roundFour.modified.map(Engine.matchT2S(_:)).joined()
+                        let transformed: String = roundFour.modified.map(Engine.t2s(_:)).joined()
                         let reverted: String = transformed
                                 .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                                 .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -66,7 +81,7 @@ struct Simplifier {
                         return reverted
                 }
 
-                let transformed: String = roundFour.modified.map(Engine.matchT2S(_:)).joined()
+                let transformed: String = roundFour.modified.map(Engine.t2s(_:)).joined()
                 let reverted: String = transformed
                         .replacingOccurrences(of: roundOne.replacement, with: roundOne.matched)
                         .replacingOccurrences(of: roundTwo.replacement, with: roundTwo.matched)
@@ -76,7 +91,8 @@ struct Simplifier {
         }
 
         private static func replace(_ text: String, replacement: String) -> (modified: String, matched: String, replacement: String) {
-                let keys: [String] = phrases.keys.filter({ $0.count <= text.count }).sorted(by: { $0.count > $1.count })
+                let textCount: Int = text.count
+                let keys: [String] = phrases.keys.filter({ $0.count <= textCount }).sorted(by: { $0.count > $1.count })
                 lazy var modified: String = text
                 lazy var matched: String = ""
                 for key in keys {
@@ -151,7 +167,7 @@ private static let phrases: [String: String] = [
 "哪吒": "哪吒",
 "回覆": "回复",
 "壺裏乾坤": "壶里乾坤",
-"大目乾連冥間救母變文": "大目乾连冥间救母变文",
+// "大目乾連冥間救母變文": "大目乾连冥间救母变文",
 "宫商角徵羽": "宫商角徵羽",
 "射覆": "射复",
 "尼乾陀": "尼乾陀",
@@ -292,7 +308,7 @@ private static let phrases: [String: String] = [
 "藉資": "借资",
 "衹得": "只得",
 "衹見樹木": "只见树木",
-"衹見樹木不見森林": "只见树木不见森林",
+// "衹見樹木不見森林": "只见树木不见森林",
 "袖裏乾坤": "袖里乾坤",
 "覆上": "复上",
 "覆住": "复住",
@@ -337,7 +353,7 @@ private static let phrases: [String: String] = [
 "躪藉": "躏借",
 "郭子乾": "郭子乾",
 "酒逢知己千鍾少": "酒逢知己千锺少",
-"酒逢知己千鍾少話不投機半句多": "酒逢知己千锺少话不投机半句多",
+// "酒逢知己千鍾少話不投機半句多": "酒逢知己千锺少话不投机半句多",
 "醞藉": "酝借",
 "重覆": "重复",
 "金吒": "金吒",
