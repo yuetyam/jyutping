@@ -36,6 +36,11 @@ Feature highlights:
 
 Jyutping for Android: [yuetyam/jyutping-android](https://github.com/yuetyam/jyutping-android)
 
+## Screenshots
+<img src="images/screenshot.png" alt="iPhone screenshots" width="440"/>
+<br>
+<img src="images/screenshot-mac.png" alt="macOS screenshots" width="440"/>
+
 ## iOS & iPadOS
 
 <a href="https://apps.apple.com/hk/app/id1509367629">
@@ -64,11 +69,6 @@ Due to [limitations imposed by the Mac App Store on third-party input methods](h
 Compatibility: macOS 12 Monterey or higher.  
 Options: Press <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (below the esc key) will display an options window.  
 FAQ: [FAQ](https://jyutping.app/faq)
-
-## Screenshots
-<img src="images/screenshot.png" alt="iPhone screenshots" width="440"/>
-<br>
-<img src="images/screenshot-mac.png" alt="macOS screenshots" width="440"/>
 
 ## How to build
 Build requirements
