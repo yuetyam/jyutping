@@ -2,15 +2,13 @@ import CommonExtensions
 
 extension String {
 
-        var ping: Int64 {
-                return Int64(self.removedSpacesTones().hash)
+        var ping: Int {
+                return self.removedSpacesTones().hash
         }
 
-        var shortcut: Int64 {
-                let syllables = self.split(separator: Character.space)
-                let anchors = syllables.map(\.first).compactMap({ $0 })
-                let text = String(anchors)
-                return Int64(text.hash)
+        var shortcut: Int {
+                let anchors = self.split(separator: Character.space).compactMap(\.first)
+                return String(anchors).hash
         }
 
         /// A subsequence that only contains tones (1-6)

@@ -16,7 +16,7 @@ struct Hant2Hans {
                         guard parts.count == 2 else { fatalError("Bad format in t2s.txt: \(line)") }
                         let traditional = parts[0]
                         let simplified = parts[1]
-                        guard traditional.count == 1 && simplified.count == 1 else { fatalError("Bad format in t2s.txt: \(line)") }
+                        guard (traditional.count == 1) && (simplified.count == 1) && (traditional != simplified) else { fatalError("Bad format in t2s.txt: \(line)") }
                         guard let code = traditional.first?.unicodeScalars.first?.value else { fatalError("Bad code in t2s.txt: \(line)") }
                         return (code, simplified)
                 }

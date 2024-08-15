@@ -25,23 +25,25 @@ struct UserLexicon {
 
         static func handle(_ candidate: Candidate?) {
                 guard let candidate else { return }
-                let id: Int64 = Int64((candidate.lexiconText + candidate.romanization).hash)
-                if let frequency: Int64 = find(by: id) {
+                let id: Int = (candidate.lexiconText + candidate.romanization).hash
+                if let frequency = find(by: id) {
                         update(id: id, frequency: frequency + 1)
                 } else {
-                        let jyutping: String = candidate.romanization
-                        let newEntry: LexiconEntry = LexiconEntry(id: id,
-                                                                  input: Int64(candidate.input.hash),
-                                                                  ping: jyutping.ping,
-                                                                  prefix: jyutping.shortcut,
-                                                                  shortcut: jyutping.shortcut,
-                                                                  frequency: 1,
-                                                                  word: candidate.lexiconText,
-                                                                  jyutping: jyutping)
-                        insert(entry: newEntry)
+                        let romanization: String = candidate.romanization
+                        let entry = LexiconEntry(
+                                id: id,
+                                input: candidate.input.hash,
+                                ping: romanization.ping,
+                                prefix: romanization.shortcut,
+                                shortcut: romanization.shortcut,
+                                frequency: 1,
+                                word: candidate.lexiconText,
+                                jyutping: romanization
+                        )
+                        insert(entry: entry)
                 }
         }
-        private static func find(by id: Int64) -> Int64? {
+        private static func find(by id: Int) -> Int64? {
                 let command: String = "SELECT frequency FROM lexicon WHERE id = \(id) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -50,7 +52,7 @@ struct UserLexicon {
                 let frequency: Int64 = sqlite3_column_int64(statement, 0)
                 return frequency
         }
-        private static func update(id: Int64, frequency: Int64) {
+        private static func update(id: Int, frequency: Int64) {
                 let command: String = "UPDATE lexicon SET frequency = \(frequency) WHERE id = \(id);"
                 var statement: OpaquePointer?
                 defer { sqlite3_finalize(statement) }
@@ -58,26 +60,20 @@ struct UserLexicon {
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
         private static func insert(entry: LexiconEntry) {
-                let command: String = "INSERT INTO lexicon (id, input, ping, prefix, shortcut, frequency, word, jyutping) VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
+                // INSERT INTO lexicon (id, input, ping, prefix, shortcut, frequency, word, jyutping) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+                let leading: String = "INSERT INTO lexicon (id, input, ping, prefix, shortcut, frequency, word, jyutping) VALUES ("
+                let trailing: String = ");"
+                let values: String = "\(entry.id), \(entry.input), \(entry.ping), \(entry.prefix), \(entry.shortcut), \(entry.frequency), '\(entry.word)', '\(entry.jyutping)'"
+                let command: String = leading + values + trailing
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
                 guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return }
-
-                sqlite3_bind_int64(statement, 1, entry.id)
-                sqlite3_bind_int64(statement, 2, entry.input)
-                sqlite3_bind_int64(statement, 3, entry.ping)
-                sqlite3_bind_int64(statement, 4, entry.prefix)
-                sqlite3_bind_int64(statement, 5, entry.shortcut)
-                sqlite3_bind_int64(statement, 6, entry.frequency)
-                sqlite3_bind_text(statement, 7, (entry.word as NSString).utf8String, -1, nil)
-                sqlite3_bind_text(statement, 8, (entry.jyutping as NSString).utf8String, -1, nil)
-
                 guard sqlite3_step(statement) == SQLITE_DONE else { return }
         }
 
         /// Delete one lexicon entry
         static func removeItem(candidate: Candidate) {
-                let id: Int64 = Int64((candidate.lexiconText + candidate.romanization).hash)
+                let id: Int = (candidate.lexiconText + candidate.romanization).hash
                 let command: String = "DELETE FROM lexicon WHERE id = \(id) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
@@ -95,35 +91,34 @@ struct UserLexicon {
         }
 
         static func suggest(text: String, segmentation: Segmentation) -> [Candidate] {
-                let matches = match(text: text, input: text, isShortcut: false)
-                let shortcuts = match(text: text, input: text, mark: text, isShortcut: true)
+                let matches = query(text: text, input: text, isShortcut: false)
+                let shortcuts = query(text: text, input: text, mark: text, isShortcut: true)
                 let searches: [Candidate] = {
                         let textCount = text.count
                         let schemes = segmentation.filter({ $0.length == textCount })
                         guard schemes.isNotEmpty else { return [] }
-                        let matches = schemes.map({ scheme -> [Candidate] in
+                        return schemes.map({ scheme -> [Candidate] in
                                 let pingText = scheme.map(\.origin).joined()
-                                let matched = match(text: pingText, input: text, isShortcut: false)
+                                let matched = query(text: pingText, input: text, isShortcut: false)
                                 guard matched.isNotEmpty else { return [] }
-                                let text2mark = scheme.map(\.text).joined(separator: " ")
-                                let syllables = scheme.map(\.origin).joined(separator: " ")
+                                let text2mark = scheme.map(\.text).joined(separator: String.space)
+                                let syllables = scheme.map(\.origin).joined(separator: String.space)
                                 return matched.compactMap({ item -> Candidate? in
                                         guard item.mark == syllables else { return nil }
                                         return Candidate(text: item.text, romanization: item.romanization, input: item.input, mark: text2mark)
                                 })
-                        })
-                        return matches.flatMap({ $0 })
+                        }).flatMap({ $0 })
                 }()
                 return matches + shortcuts + searches
         }
-        private static func match(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [Candidate] {
+        private static func query(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [Candidate] {
                 var candidates: [Candidate] = []
                 let code: Int = isShortcut ? text.replacingOccurrences(of: "y", with: "j").hash : text.hash
                 let column: String = isShortcut ? "shortcut" : "ping"
-                let query: String = "SELECT word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
+                let command: String = "SELECT word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return candidates }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return candidates }
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let word = String(cString: sqlite3_column_text(statement, 0))
                         let jyutping = String(cString: sqlite3_column_text(statement, 1))
@@ -146,7 +141,7 @@ struct UserLexicon {
                                 }
                                 sequences = appended.flatMap({ $0 })
                         }
-                        return sequences.map({ tenKeyMatch(text: $0, input: $0, mark: $0, isShortcut: true) }).flatMap({ $0 })
+                        return sequences.map({ tenKeyQuery(text: $0, input: $0, mark: $0, isShortcut: true) }).flatMap({ $0 })
                 }()
                 let matches: [TenKeyLexicon] = {
                         let schemes = segmentation.filter({ $0.length == comboCount })
@@ -154,28 +149,27 @@ struct UserLexicon {
                         return schemes.map({ scheme -> [TenKeyLexicon] in
                                 let pingText = scheme.map(\.origin).joined()
                                 let inputText = scheme.map(\.text).joined()
-                                let matched = tenKeyMatch(text: pingText, input: inputText, isShortcut: false)
+                                let matched = tenKeyQuery(text: pingText, input: inputText, isShortcut: false)
                                 guard matched.isNotEmpty else { return [] }
-                                let text2mark = scheme.map(\.text).joined(separator: " ")
-                                let syllables = scheme.map(\.origin).joined(separator: " ")
+                                let text2mark = scheme.map(\.text).joined(separator: String.space)
+                                let syllables = scheme.map(\.origin).joined(separator: String.space)
                                 return matched.compactMap({ item -> TenKeyLexicon? in
-                                        let candidate = item.candidate
-                                        guard candidate.mark == syllables else { return nil }
-                                        let newCandidate = Candidate(text: candidate.text, romanization: candidate.romanization, input: candidate.input, mark: text2mark)
+                                        guard item.candidate.mark == syllables else { return nil }
+                                        let newCandidate = Candidate(text: item.candidate.text, romanization: item.candidate.romanization, input: inputText, mark: text2mark)
                                         return TenKeyLexicon(frequency: item.frequency, candidate: newCandidate)
                                 })
                         }).flatMap({ $0 })
                 }()
                 return (shortcuts + matches).sorted(by: { $0.frequency > $1.frequency }).prefix(8).map(\.candidate)
         }
-        private static func tenKeyMatch(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [TenKeyLexicon] {
+        private static func tenKeyQuery(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [TenKeyLexicon] {
                 var items: [TenKeyLexicon] = []
                 let code: Int = isShortcut ? text.replacingOccurrences(of: "y", with: "j").hash : text.hash
                 let column: String = isShortcut ? "shortcut" : "ping"
-                let query: String = "SELECT frequency, word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
+                let command: String = "SELECT frequency, word, jyutping FROM lexicon WHERE \(column) = \(code) ORDER BY frequency DESC LIMIT 5;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK else { return items }
+                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return items }
                 while sqlite3_step(statement) == SQLITE_ROW {
                         let frequency: Int64 = sqlite3_column_int64(statement, 0)
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
@@ -195,21 +189,21 @@ struct UserLexicon {
 private struct LexiconEntry {
 
         /// (Candidate.lexiconText + Candidate.jyutping).hash
-        let id: Int64
+        let id: Int
 
         /// input.hash
-        let input: Int64
+        let input: Int
 
         /// jyutping.withoutTonesAndSpaces.hash
-        let ping: Int64
+        let ping: Int
 
         /// (deprecated)
-        let prefix: Int64
+        let prefix: Int
 
         /// jyutping.anchors.hash
-        let shortcut: Int64
+        let shortcut: Int
 
-        let frequency: Int64
+        let frequency: Int
 
         /// Candidate.lexiconText
         let word: String
