@@ -68,7 +68,7 @@ struct RightKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
                                                 HStack(spacing: 0) {
-                                                        ForEach(0..<symbols.count, id: \.self) { index in
+                                                        ForEach(symbols.indices, id: \.self) { index in
                                                                 let reversedIndex = (symbolsCount - 1) - index
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: 5, style: .continuous)

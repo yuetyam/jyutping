@@ -23,7 +23,7 @@ struct MacMetroLineView: View {
                                         isExpanded.toggle()
                                 }
                                 VStack(alignment: .leading) {
-                                        ForEach(0..<line.stations.count, id: \.self) { index in
+                                        ForEach(line.stations.indices, id: \.self) { index in
                                                 MacMetroStationLabel(station: line.stations[index])
                                         }
                                 }

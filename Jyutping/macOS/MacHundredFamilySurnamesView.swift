@@ -12,7 +12,7 @@ struct MacHundredFamilySurnamesView: View {
                 ScrollView {
                         LazyVStack(alignment: .leading, spacing: 8) {
                                 TermView(term: Term(name: "百家姓", romanization: "baak3 gaa1 sing3")).block()
-                                ForEach(0..<surnames.count, id: \.self) { index in
+                                ForEach(surnames.indices, id: \.self) { index in
                                         MacTextRomanizationLabel(item: surnames[index])
                                 }
                         }
@@ -39,7 +39,7 @@ struct MacTextRomanizationLabel: View {
                 let texts = item.text.dropLast().split(separator: "，").map({ String($0) })
                 let romanizations = item.romanization.dropLast().split(separator: "，").map({ String($0) })
                 VStack(alignment: .leading, spacing: 12) {
-                        ForEach(0..<texts.count, id: \.self) { index in
+                        ForEach(texts.indices, id: \.self) { index in
                                 let text = texts[index]
                                 let romanization = romanizations[index]
                                 HStack(alignment: .bottom, spacing: 18) {

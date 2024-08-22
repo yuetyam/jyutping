@@ -23,7 +23,10 @@ enum QwertyForm: Int {
         case tripleStroke
 
         case pinyin
+
+        /// Cangjie or Quick(Sucheng)
         case cangjie
+
         case stroke
 
         /// LoengFan Reverse Lookup. 拆字、兩分反查. 例如 木 + 旦 = 查: mukdaan

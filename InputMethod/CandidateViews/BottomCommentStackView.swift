@@ -22,7 +22,7 @@ struct BottomCommentStackView: View {
         private let syllableViewSize: CGSize = AppSettings.syllableViewSize
         var body: some View {
                 HStack(alignment: .firstTextBaseline, spacing: 1) {
-                        ForEach(0..<units.count, id: \.self) { index in
+                        ForEach(units.indices, id: \.self) { index in
                                 BottomCommentUnitView(unit: units[index], toneStyle: toneStyle, shouldModifyToneColor: shouldModifyToneColor, syllableViewSize: syllableViewSize)
                         }
                 }

@@ -65,7 +65,7 @@ struct SearchView: View {
                         Section {
                                 CantoneseTextLabel(cantonese)
                                 if let pronunciations = lexicon?.pronunciations {
-                                        ForEach(0..<pronunciations.count, id: \.self) { index in
+                                        ForEach(pronunciations.indices, id: \.self) { index in
                                                 PronunciationLabel(pronunciations[index])
                                         }
                                 }
@@ -81,7 +81,7 @@ struct SearchView: View {
                 }
                 if yingWaaEntries.isNotEmpty {
                         Section {
-                                ForEach(0..<yingWaaEntries.count, id: \.self) { index in
+                                ForEach(yingWaaEntries.indices, id: \.self) { index in
                                         YingWaaFanWanLabel(entry: yingWaaEntries[index])
                                 }
                         } header: {
@@ -99,7 +99,7 @@ struct SearchView: View {
                 }
                 if choHokEntries.isNotEmpty {
                         Section {
-                                ForEach(0..<choHokEntries.count, id: \.self) { index in
+                                ForEach(choHokEntries.indices, id: \.self) { index in
                                         ChoHokYuetYamCitYiuLabel(entry: choHokEntries[index])
                                 }
                         } header: {
@@ -117,7 +117,7 @@ struct SearchView: View {
                 }
                 if fanWanEntries.isNotEmpty {
                         Section {
-                                ForEach(0..<fanWanEntries.count, id: \.self) { index in
+                                ForEach(fanWanEntries.indices, id: \.self) { index in
                                         FanWanCuetYiuLabel(entry: fanWanEntries[index])
                                 }
                         } header: {
@@ -127,7 +127,7 @@ struct SearchView: View {
                 }
                 if gwongWanEntries.isNotEmpty {
                         Section {
-                                ForEach(0..<gwongWanEntries.count, id: \.self) { index in
+                                ForEach(gwongWanEntries.indices, id: \.self) { index in
                                         GwongWanLabel(entry: gwongWanEntries[index])
                                 }
                         } header: {

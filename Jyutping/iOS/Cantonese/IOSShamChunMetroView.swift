@@ -13,7 +13,7 @@ struct IOSShamChunMetroView: View {
                         Section {
                                 TermView(term: Term(name: "深圳地鐵", romanization: "sam1 zan3 dei6 tit3"))
                         }
-                        ForEach(0..<lines.count, id: \.self) { index in
+                        ForEach(lines.indices, id: \.self) { index in
                                 Section {
                                         IOSMetroLineView(line: lines[index], isExpanded: $expanded[index])
                                 }

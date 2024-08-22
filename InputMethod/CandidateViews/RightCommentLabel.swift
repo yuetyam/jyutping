@@ -36,7 +36,7 @@ private struct ModifiedToneColorCommentView: View {
                         return Syllable(phone: phone, tone: tone)
                 })
                 HStack(spacing: 0) {
-                        ForEach(0..<syllables.count, id: \.self) { index in
+                        ForEach(syllables.indices, id: \.self) { index in
                                 let syllable = syllables[index]
                                 let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
                                 Text(verbatim: leadingText)
@@ -57,7 +57,7 @@ private struct ModifiedCommentView: View {
                         return Syllable(phone: phone, tone: tone)
                 })
                 HStack(alignment: alignment, spacing: 0) {
-                        ForEach(0..<syllables.count, id: \.self) { index in
+                        ForEach(syllables.indices, id: \.self) { index in
                                 let syllable = syllables[index]
                                 let leadingText: String = (index == 0) ? syllable.phone : (String.space + syllable.phone)
                                 Text(verbatim: leadingText)

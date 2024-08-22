@@ -12,7 +12,7 @@ struct MacThousandCharacterClassicView: View {
                 ScrollView {
                         LazyVStack(alignment: .leading, spacing: 8) {
                                 TermView(term: Term(name: "千字文", romanization: "cin1 zi6 man4")).block()
-                                ForEach(0..<entries.count, id: \.self) { index in
+                                ForEach(entries.indices, id: \.self) { index in
                                         MacTextRomanizationLabel(item: entries[index])
                                 }
                         }

@@ -58,7 +58,7 @@ struct FontPreferencesView: View {
                                         }
                                         if candidateFontMode.isCustom {
                                                 VStack {
-                                                        ForEach(0..<customCandidateFonts.count, id: \.self) { index in
+                                                        ForEach(customCandidateFonts.indices, id: \.self) { index in
                                                                 HStack {
                                                                         Button {
                                                                                 customCandidateFonts.remove(at: index)
@@ -120,7 +120,7 @@ struct FontPreferencesView: View {
                                         }
                                         if commentFontMode.isCustom {
                                                 VStack {
-                                                        ForEach(0..<customCommentFonts.count, id: \.self) { index in
+                                                        ForEach(customCommentFonts.indices, id: \.self) { index in
                                                                 HStack {
                                                                         Button {
                                                                                 customCommentFonts.remove(at: index)
@@ -182,7 +182,7 @@ struct FontPreferencesView: View {
                                         }
                                         if labelFontMode.isCustom {
                                                 VStack {
-                                                        ForEach(0..<customLabelFonts.count, id: \.self) { index in
+                                                        ForEach(customLabelFonts.indices, id: \.self) { index in
                                                                 HStack {
                                                                         Button {
                                                                                 customLabelFonts.remove(at: index)

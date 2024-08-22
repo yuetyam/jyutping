@@ -20,7 +20,7 @@ struct IOSMetroLineView: View {
                         isExpanded.toggle()
                 }
                 if isExpanded {
-                        ForEach(0..<line.stations.count, id: \.self) { index in
+                        ForEach(line.stations.indices, id: \.self) { index in
                                 IOSMetroStationLabel(station: line.stations[index])
                         }
                 }

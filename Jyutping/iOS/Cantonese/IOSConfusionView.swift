@@ -12,7 +12,7 @@ struct IOSConfusionView: View {
 
         var body: some View {
                 List {
-                        ForEach(0..<entries.count, id: \.self) { index in
+                        ForEach(entries.indices, id: \.self) { index in
                                 Section {
                                         if index == 0 {
                                                 HStack {
@@ -50,7 +50,7 @@ private struct EntryView: View {
                 HStack {
                         Text(verbatim: entry.simplified).frame(width: 32)
                         VStack(alignment: .leading, spacing: 4) {
-                                ForEach(0..<entry.traditional.count, id: \.self) { index in
+                                ForEach(entry.traditional.indices, id: \.self) { index in
                                         let unit = entry.traditional[index]
                                         if index != 0 {
                                                 Divider()

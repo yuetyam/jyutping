@@ -29,7 +29,7 @@ struct TenKeySymbolsBar: View {
                                 ScrollView(.vertical) {
                                         LazyVStack(spacing: 0) {
                                                 EmptyView().id(topID)
-                                                ForEach(0..<symbols.count, id: \.self) { index in
+                                                ForEach(symbols.indices, id: \.self) { index in
                                                         let symbol: String = symbols[index]
                                                         ScrollViewButton {
                                                                 AudioFeedback.inputed()

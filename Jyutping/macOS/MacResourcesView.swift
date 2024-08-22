@@ -22,6 +22,7 @@ struct MacResourcesView: View {
                                         LinkView(icon: globeIcon, title: "粵拼 Jyutping", url: "https://jyutping.org")
                                         LinkView(icon: globeIcon, title: "粵語拼音速遞 - CUHK", url: "https://www.ilc.cuhk.edu.hk/workshop/Chinese/Cantonese/Romanization")
                                         LinkView(icon: globeIcon, title: "Zidou - 粵拼版 Wordle", url: "https://chaaklau.github.io/zidou")
+                                        LinkView(icon: globeIcon, title: "六合 | 粵拼版 Wordle", url: "https://lukhap.jonathanl.dev")
                                 }
                                 .block()
 

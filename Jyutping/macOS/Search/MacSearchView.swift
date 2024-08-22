@@ -72,7 +72,7 @@ struct MacSearchView: View {
                                                 VStack {
                                                         CantoneseTextView(cantonese)
                                                         if let pronunciations = lexicon?.pronunciations {
-                                                                ForEach(0..<pronunciations.count, id: \.self) { index in
+                                                                ForEach(pronunciations.indices, id: \.self) { index in
                                                                         Divider()
                                                                         PronunciationView(pronunciations[index])
                                                                 }
@@ -100,7 +100,7 @@ struct MacSearchView: View {
                                                         }
                                                         .font(.copilot)
                                                         VStack {
-                                                                ForEach(0..<yingWaaEntries.count, id: \.self) { index in
+                                                                ForEach(yingWaaEntries.indices, id: \.self) { index in
                                                                         if (index != 0) {
                                                                                 Divider()
                                                                         }
@@ -120,7 +120,7 @@ struct MacSearchView: View {
                                                         }
                                                         .font(.copilot)
                                                         VStack {
-                                                                ForEach(0..<choHokEntries.count, id: \.self) { index in
+                                                                ForEach(choHokEntries.indices, id: \.self) { index in
                                                                         if (index != 0) {
                                                                                 Divider()
                                                                         }
@@ -139,7 +139,7 @@ struct MacSearchView: View {
                                                         }
                                                         .font(.copilot)
                                                         VStack {
-                                                                ForEach(0..<fanWanEntries.count, id: \.self) { index in
+                                                                ForEach(fanWanEntries.indices, id: \.self) { index in
                                                                         if (index != 0) {
                                                                                 Divider()
                                                                         }
@@ -158,7 +158,7 @@ struct MacSearchView: View {
                                                         }
                                                         .font(.copilot)
                                                         VStack {
-                                                                ForEach(0..<gwongWanEntries.count, id: \.self) { index in
+                                                                ForEach(gwongWanEntries.indices, id: \.self) { index in
                                                                         if (index != 0) {
                                                                                 Divider()
                                                                         }

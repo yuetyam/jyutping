@@ -611,7 +611,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func cangjieReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
                 let converted = text.compactMap({ Logogram.cangjie(of: $0) })
-                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         text2mark = String(converted)
                         let lookup: [Candidate] = Engine.cangjieReverseLookup(text: text, variant: Options.cangjieVariant)
@@ -625,7 +625,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let text: String = String(bufferText.dropFirst())
                 let transformed: String = Logogram.strokeTransform(text)
                 let converted = transformed.compactMap({ Logogram.stroke(of: $0) })
-                let isValidSequence: Bool = !converted.isEmpty && converted.count == text.count
+                let isValidSequence: Bool = converted.isNotEmpty && (converted.count == text.count)
                 if isValidSequence {
                         text2mark = String(converted)
                         let lookup: [Candidate] = Engine.strokeReverseLookup(text: transformed)

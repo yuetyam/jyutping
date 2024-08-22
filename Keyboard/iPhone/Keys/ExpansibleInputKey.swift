@@ -73,7 +73,7 @@ struct ExpansibleInputKey: View {
                                         .shadow(color: .black.opacity(0.4), radius: 0.5)
                                         .overlay {
                                                 HStack(spacing: 0) {
-                                                        ForEach(0..<memberCount, id: \.self) { index in
+                                                        ForEach(keyModel.members.indices, id: \.self) { index in
                                                                 let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
                                                                 let element: KeyElement = keyModel.members[elementIndex]
                                                                 ZStack {
@@ -167,7 +167,7 @@ struct ExpansibleInputKey: View {
                                 let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                 guard distance > 0 else { return }
                                 let step: CGFloat = keyWidth - 8
-                                for index in 0..<memberCount {
+                                for index in keyModel.members.indices {
                                         let lowPoint: CGFloat = step * CGFloat(index)
                                         let heightPoint: CGFloat = step * CGFloat(index + 1)
                                         let maxLowPoint: CGFloat = step * CGFloat(memberCount)

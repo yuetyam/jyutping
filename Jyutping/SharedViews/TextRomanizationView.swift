@@ -14,7 +14,7 @@ struct TextRomanizationView: View {
                 if isEqual {
                         var pronunciations: [TextRomanization] = []
                         var punctuationCount: Int = 0
-                        for index in 0..<characters.count {
+                        for index in characters.indices {
                                 let character = characters[index]
                                 if character.isIdeographic {
                                         let syllable = syllables[index - punctuationCount]
@@ -46,7 +46,7 @@ struct TextRomanizationView: View {
         var body: some View {
                 if isMatched {
                         HStack(spacing: 1) {
-                                ForEach(0..<pronunciations.count, id: \.self) { index in
+                                ForEach(pronunciations.indices, id: \.self) { index in
                                         CharacterPronunciationView(pronunciation: pronunciations[index])
                                 }
                         }

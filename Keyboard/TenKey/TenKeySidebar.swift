@@ -27,7 +27,7 @@ struct TenKeySidebar: View {
                                 ScrollView(.vertical) {
                                         LazyVStack(spacing: 0) {
                                                 EmptyView().id(topID)
-                                                ForEach(0..<context.sidebarTexts.count, id: \.self) { index in
+                                                ForEach(context.sidebarTexts.indices, id: \.self) { index in
                                                         let text: String = context.sidebarTexts[index]
                                                         ScrollViewButton {
                                                                 AudioFeedback.inputed()

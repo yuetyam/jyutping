@@ -13,7 +13,7 @@ struct IOSHundredFamilySurnamesView: View {
                         Section {
                                 TermView(term: Term(name: "百家姓", romanization: "baak3 gaa1 sing3"))
                         }
-                        ForEach(0..<surnames.count, id: \.self) { index in
+                        ForEach(surnames.indices, id: \.self) { index in
                                 Section {
                                         IOSTextRomanizationLabel(item: surnames[index])
                                 }
@@ -40,7 +40,7 @@ struct IOSTextRomanizationLabel: View {
         var body: some View {
                 let texts = item.text.dropLast().split(separator: "，").map({ String($0) })
                 let romanizations = item.romanization.dropLast().split(separator: "，").map({ String($0) })
-                ForEach(0..<texts.count, id: \.self) { index in
+                ForEach(texts.indices, id: \.self) { index in
                         let text = texts[index]
                         let romanization = romanizations[index]
                         HStack(spacing: 18) {

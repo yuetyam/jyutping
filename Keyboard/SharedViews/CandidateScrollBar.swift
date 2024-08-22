@@ -34,7 +34,7 @@ struct CandidateScrollBar: View {
                                 ScrollView(.horizontal) {
                                         LazyHStack(spacing: 0) {
                                                 EmptyView().id(topID)
-                                                ForEach(0..<context.candidates.count, id: \.self) { index in
+                                                ForEach(context.candidates.indices, id: \.self) { index in
                                                         let candidate = context.candidates[index]
                                                         let text: AttributedString = candidate.text.attributed(for: characterStandard)
                                                         ScrollViewButton(
@@ -75,7 +75,7 @@ struct CandidateScrollBar: View {
                                                                                                 .lineLimit(1)
                                                                                 }
                                                                                 .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 14)
+                                                                                .padding(.bottom, 12)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(text)

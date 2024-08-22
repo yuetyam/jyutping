@@ -27,7 +27,7 @@ struct CandidateBoard: View {
                 switch pageOrientation {
                 case .horizontal:
                         HStack(alignment: horizontalPageAlignment, spacing: 0) {
-                                ForEach(0..<context.displayCandidates.count, id: \.self) { index in
+                                ForEach(context.displayCandidates.indices, id: \.self) { index in
                                         HorizontalPageCandidateLabel(
                                                 isHighlighted: index == highlightedIndex,
                                                 index: index,
@@ -49,7 +49,7 @@ struct CandidateBoard: View {
                         .fixedSize()
                 case .vertical:
                         VStack(alignment: .leading, spacing: 0) {
-                                ForEach(0..<context.displayCandidates.count, id: \.self) { index in
+                                ForEach(context.displayCandidates.indices, id: \.self) { index in
                                         ZStack(alignment: .leading) {
                                                 HStack {
                                                         Color.clear

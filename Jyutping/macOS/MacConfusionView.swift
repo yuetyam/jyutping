@@ -19,7 +19,7 @@ struct MacConfusionView: View {
                                 }
                                 .font(.copilot)
                                 .textSelection(.enabled)
-                                ForEach(0..<entries.count, id: \.self) { index in
+                                ForEach(entries.indices, id: \.self) { index in
                                         EntryView(entry: entries[index])
                                 }
                         }
@@ -46,7 +46,7 @@ private struct EntryView: View {
                 HStack {
                         Text(verbatim: entry.simplified).frame(width: 60)
                         VStack(alignment: .leading, spacing: 4) {
-                                ForEach(0..<entry.traditional.count, id: \.self) { index in
+                                ForEach(entry.traditional.indices, id: \.self) { index in
                                         let unit: ConfusionTraditional = entry.traditional[index]
                                         if index != 0 {
                                                 Divider()
