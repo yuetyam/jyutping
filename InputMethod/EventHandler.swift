@@ -333,7 +333,19 @@ extension JyutpingInputController {
                         switch currentInputForm {
                         case .cantonese:
                                 guard inputStage.isBuffering else { return false }
-                                passBuffer()
+                                let text2pass: String? = {
+                                        guard isShifting && candidates.isNotEmpty else { return nil }
+                                        let index = appContext.highlightedIndex
+                                        guard let candidate = appContext.displayCandidates.fetch(index)?.candidate else { return nil }
+                                        guard candidate.isCantonese else { return nil }
+                                        return candidate.romanization
+                                }()
+                                if let text2pass {
+                                        currentClient?.insert(text2pass)
+                                        clearBufferText()
+                                } else {
+                                        passBuffer()
+                                }
                                 return true
                         case .transparent:
                                 return false
@@ -464,7 +476,7 @@ extension JyutpingInputController {
 
         private func passBuffer() {
                 guard inputStage.isBuffering else { return }
-                let text: String = Options.characterForm == .halfWidth ? bufferText : bufferText.fullWidth()
+                let text: String = Options.characterForm.isHalfWidth ? bufferText : bufferText.fullWidth()
                 currentClient?.insert(text)
                 clearBufferText()
         }

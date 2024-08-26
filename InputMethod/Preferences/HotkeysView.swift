@@ -90,22 +90,43 @@ struct HotkeysView: View {
                                         .font(.subheadline)
                                         .padding(.horizontal, 12)
                                 }
-                                HStack(spacing: 4) {
-                                        LabelText("HotkeysView.RemoveCurrentCandidateFromUserLexicon")
-                                        Text.separator
-                                        KeyBlockView.control
-                                        Text.plus
-                                        KeyBlockView.shift
-                                        Text.plus
-                                        KeyBlockView.backwardDelete
-                                        Spacer()
-                                }
-                                .block()
-                                HStack(spacing: 4) {
-                                        LabelText("HotkeysView.ClearCurrentPreEditText")
-                                        Text.separator
-                                        KeyBlockView.escape
-                                        Spacer()
+                                VStack(spacing: 8) {
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.ClearCurrentPreEditText")
+                                                Text.separator
+                                                KeyBlockView.escape
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.InputCurrentPreEditText")
+                                                Text.separator
+                                                KeyBlockView.returnKey
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.InputCurrentRomanization")
+                                                Text.separator
+                                                KeyBlockView.shift
+                                                Text.plus
+                                                KeyBlockView.returnKey
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.SelectCurrentCandidate")
+                                                Text.separator
+                                                KeyBlockView.space
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.RemoveCurrentCandidateFromUserLexicon")
+                                                Text.separator
+                                                KeyBlockView.control
+                                                Text.plus
+                                                KeyBlockView.shift
+                                                Text.plus
+                                                KeyBlockView.backwardDelete
+                                                Spacer()
+                                        }
                                 }
                                 .block()
                                 VStack(spacing: 2) {
@@ -258,6 +279,7 @@ private struct KeyBlockView: View {
         static let space: KeyBlockView = KeyBlockView("Space ␣")
         static let escape: KeyBlockView = KeyBlockView("esc ⎋")
         static let tab: KeyBlockView = KeyBlockView("Tab ⇥")
+        static let returnKey: KeyBlockView = KeyBlockView("Return ⏎")
 
         /// Backspace. NOT Forward-Delete.
         static let backwardDelete: KeyBlockView = KeyBlockView("Delete ⌫")
