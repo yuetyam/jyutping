@@ -1,5 +1,7 @@
 import AppKit
 
+@MainActor
+@objc(PrincipalApplication)
 final class PrincipalApplication: NSApplication {
 
         private static let appDelegate = AppDelegate()

@@ -113,6 +113,12 @@ private struct OptionsKey {
 enum CharacterForm: Int {
         case halfWidth = 1
         case fullWidth = 2
+        var isHalfWidth: Bool {
+                return self == .halfWidth
+        }
+        var isFullWidth: Bool {
+                return self == .fullWidth
+        }
 }
 
 /// 標點符號形態
@@ -121,6 +127,9 @@ enum PunctuationForm: Int {
         case english = 2
         var isCantoneseMode: Bool {
                 return self == .cantonese
+        }
+        var isEnglishMode: Bool {
+                return self == .english
         }
 }
 

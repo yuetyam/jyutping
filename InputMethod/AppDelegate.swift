@@ -3,11 +3,19 @@ import InputMethodKit
 import CoreIME
 import Sparkle
 
+@MainActor
 @main
+@objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
         private static var server: IMKServer?
-        private(set) static var updaterController: SPUStandardUpdaterController?
+
+        private static var updaterController: SPUStandardUpdaterController?
+        static func checkForUpdates() {
+                let canCheckForUpdates: Bool = Self.updaterController?.updater.canCheckForUpdates ?? false
+                guard canCheckForUpdates else { return }
+                Self.updaterController?.updater.checkForUpdates()
+        }
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()

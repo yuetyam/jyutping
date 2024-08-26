@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension Color {
-        static let interactiveClear   : Color = Color(white: 1, opacity: 0.01)
+        static let interactiveClear   : Color = Color(white: 0.5, opacity: 0.001)
 
         @available(*, deprecated, renamed: "accentColor", message: "Use Color.accentColor instead.")
         static let selection          : Color = Color(.displayP3, red:  52.0 / 255.0, green: 120.0 / 255.0, blue: 246.0 / 255.0)

@@ -45,6 +45,7 @@ extension Logogram {
                 // 撇: a, p   : p = Pit = Piě
                 // 點: d, n   : d = Dim = Diǎn, n = 捺 = Naat = Nà
                 // 折: z      : z = Zit = Zhé
+                //
                 // macOS built-in Stroke: https://support.apple.com/zh-hk/guide/chinese-input-method/cimskt12969/mac
                 // 橫: j, KP_1
                 // 豎: k, KP_2
@@ -52,11 +53,11 @@ extension Logogram {
                 // 點: u, KP_4
                 // 折: i, KP_5
                 return text
-                        .replacingOccurrences(of: "(h|t|j|1)", with: "w", options: .regularExpression)
-                        .replacingOccurrences(of: "(k|2)", with: "s", options: .regularExpression)
-                        .replacingOccurrences(of: "(p|l|3)", with: "a", options: .regularExpression)
-                        .replacingOccurrences(of: "(n|u|4)", with: "d", options: .regularExpression)
-                        .replacingOccurrences(of: "(i|5)", with: "z", options: .regularExpression)
+                        .replacingOccurrences(of: "[htj1]", with: "w", options: .regularExpression)
+                        .replacingOccurrences(of: "[k2]", with: "s", options: .regularExpression)
+                        .replacingOccurrences(of: "[pl3]", with: "a", options: .regularExpression)
+                        .replacingOccurrences(of: "[nu4]", with: "d", options: .regularExpression)
+                        .replacingOccurrences(of: "[i5]", with: "z", options: .regularExpression)
         }
 
         public static func stroke(of letter: Character) -> Character? {

@@ -36,18 +36,18 @@ struct OptionsView: View {
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm == .halfWidth)
-                                OptionLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm == .fullWidth)
+                                OptionLabel(verticalPadding: verticalPadding, index: 4, highlightedIndex: highlightedIndex, text: options[4], checked: characterForm.isHalfWidth)
+                                OptionLabel(verticalPadding: verticalPadding, index: 5, highlightedIndex: highlightedIndex, text: options[5], checked: characterForm.isFullWidth)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm == .cantonese)
-                                OptionLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm == .english)
+                                OptionLabel(verticalPadding: verticalPadding, index: 6, highlightedIndex: highlightedIndex, text: options[6], checked: punctuationForm.isCantoneseMode)
+                                OptionLabel(verticalPadding: verticalPadding, index: 7, highlightedIndex: highlightedIndex, text: options[7], checked: punctuationForm.isEnglishMode)
                         }
                         Divider()
                         Group {
-                                OptionLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode == .cantonese)
-                                OptionLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode == .abc)
+                                OptionLabel(verticalPadding: verticalPadding, index: 8, highlightedIndex: highlightedIndex, text: options[8], checked: inputMethodMode.isCantonese)
+                                OptionLabel(verticalPadding: verticalPadding, index: 9, highlightedIndex: highlightedIndex, text: options[9], checked: inputMethodMode.isABC)
                         }
                 }
                 .padding(4)

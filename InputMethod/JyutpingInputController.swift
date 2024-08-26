@@ -3,6 +3,8 @@ import InputMethodKit
 import CommonExtensions
 import CoreIME
 
+@MainActor
+@objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
 
         // MARK: - Window, InputClient
@@ -24,7 +26,6 @@ final class JyutpingInputController: IMKInputController {
                 panel.backgroundColor = .clear
                 return panel
         }()
-        private lazy var isWindowPrepared: Bool = false
         private func prepareWindow() {
                 _ = window.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window.contentViewController?.children.map({ $0.removeFromParent() })
@@ -62,18 +63,12 @@ final class JyutpingInputController: IMKInputController {
                 window.setFrame(.zero, display: true)
         }
         func updateWindowFrame(_ frame: CGRect? = nil) {
-                if isWindowPrepared.negative {
-                        isWindowPrepared = true
-                        DispatchQueue.main.async { [weak self] in
-                                self?.prepareWindow()
-                        }
-                }
                 DispatchQueue.main.async { [weak self] in
                         self?.window.setFrame(frame ?? self?.windowFrame ?? .zero, display: true)
                 }
         }
         private var windowFrame: CGRect {
-                let origin: CGPoint = currentOrigin ?? currentClient?.position ?? .zero
+                let origin: CGPoint = currentOrigin ?? currentClient?.position ?? screenOrigin
                 let viewSize: CGSize = {
                         guard let size = window.contentView?.subviews.first?.bounds.size, size.width > 44 else {
                                 return CGSize(width: 600, height: 600)
@@ -165,7 +160,6 @@ final class JyutpingInputController: IMKInputController {
                 super.activateServer(sender)
                 UserLexicon.prepare()
                 Engine.prepare()
-                isWindowPrepared = false
                 if inputStage.isBuffering {
                         clearBufferText()
                 }
@@ -176,12 +170,14 @@ final class JyutpingInputController: IMKInputController {
                 screenSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1920, height: 1080)
                 currentClient = (sender as? InputClient) ?? client()
                 currentOrigin = currentClient?.position
+                DispatchQueue.main.async { [weak self] in
+                        self?.prepareWindow()
+                }
         }
         override func deactivateServer(_ sender: Any!) {
                 DispatchQueue.main.async { [weak self] in
                         self?.clearWindow()
                 }
-                isWindowPrepared = false
                 let windowCount: Int = NSApp.windows.count
                 if windowCount > 20 {
                         NSRunningApplication.current.terminate()
@@ -220,12 +216,6 @@ final class JyutpingInputController: IMKInputController {
                                 inputStage = .starting
                                 UserLexicon.prepare()
                                 Engine.prepare()
-                                if isWindowPrepared.negative {
-                                        isWindowPrepared = true
-                                        DispatchQueue.main.async { [weak self] in
-                                                self?.prepareWindow()
-                                        }
-                                }
                         case (false, true):
                                 inputStage = .ending
                         case (false, false):

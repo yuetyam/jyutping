@@ -29,3 +29,9 @@ extension Array {
                 }
         }
 }
+
+extension Array where Element: Equatable {
+        public func notContains(_ element: Element) -> Bool {
+                return !(self.contains(element))
+        }
+}

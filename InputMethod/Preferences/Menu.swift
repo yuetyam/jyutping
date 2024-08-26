@@ -1,5 +1,6 @@
 import SwiftUI
 import InputMethodKit
+import CommonExtensions
 
 extension JyutpingInputController {
 
@@ -32,9 +33,7 @@ extension JyutpingInputController {
                 displayPreferencesView()
         }
         @objc func checkForUpdates() {
-                let canCheckForUpdates: Bool = AppDelegate.updaterController?.updater.canCheckForUpdates ?? false
-                guard canCheckForUpdates else { return }
-                AppDelegate.updaterController?.updater.checkForUpdates()
+                AppDelegate.checkForUpdates()
         }
         @objc private func openHelpWindow() {
                 AppSettings.updateSelectedPreferencesSidebarRow(to: .hotkeys)
@@ -50,8 +49,8 @@ extension JyutpingInputController {
                 }
         }
         private func preparePreferencesView() {
-                let windowIdentifiers: [String] = NSApp.windows.map(\.identifier?.rawValue).compactMap({ $0 })
-                let shouldOpenNewWindow: Bool = !(windowIdentifiers.contains(Constant.preferencesWindowIdentifier))
+                let windowIdentifiers: [String] = NSApp.windows.compactMap(\.identifier?.rawValue)
+                let shouldOpenNewWindow: Bool = windowIdentifiers.notContains(Constant.preferencesWindowIdentifier)
                 guard shouldOpenNewWindow else { return }
                 let frame: CGRect = preferencesWindowFrame()
                 let window = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)

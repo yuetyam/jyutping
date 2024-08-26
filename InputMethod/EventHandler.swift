@@ -390,7 +390,7 @@ extension JyutpingInputController {
                                 }
                                 if candidates.isEmpty {
                                         passBuffer()
-                                        let shouldInsertFullWidthSpace: Bool = isShifting || (Options.characterForm == .fullWidth)
+                                        let shouldInsertFullWidthSpace: Bool = isShifting || Options.characterForm.isFullWidth
                                         let text: String = shouldInsertFullWidthSpace ? String.fullWidthSpace : String.space
                                         client?.insert(text)
                                         return true
