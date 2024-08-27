@@ -26,7 +26,7 @@ enum SpaceKeyForm: Int {
                 case .lowercased:
                         return "粵拼"
                 case .lowercasedSimplified:
-                        return "粤拼·简化字"
+                        return "粤拼·简"
                 case .uppercased:
                         return "全寬空格"
                 case .uppercasedSimplified:
