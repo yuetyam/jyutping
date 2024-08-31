@@ -95,6 +95,12 @@ struct HotkeysView: View {
                                                 LabelText("HotkeysView.ClearCurrentPreEditText")
                                                 Text.separator
                                                 KeyBlockView.escape
+                                                Text.or
+                                                KeyBlockView.control
+                                                Text.plus
+                                                KeyBlockView.shift
+                                                Text.plus
+                                                KeyBlockView("U")
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
@@ -228,7 +234,7 @@ struct HotkeysView: View {
                                         .block()
                                 }
                                 HStack(spacing: 4) {
-                                        LabelText("HotkeysView.BackToFirstCandidatePage")
+                                        LabelText("HotkeysView.BackToTheFirstCandidatePage")
                                         Text.separator
                                         KeyBlockView("Home ⤒")
                                         Spacer()

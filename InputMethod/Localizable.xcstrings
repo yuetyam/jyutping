@@ -3393,12 +3393,12 @@
         }
       }
     },
-    "HotkeysView.BackToFirstCandidatePage" : {
+    "HotkeysView.BackToTheFirstCandidatePage" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Back to first Candidate page"
+            "value" : "Back to the first Candidate page"
           }
         },
         "yue" : {
