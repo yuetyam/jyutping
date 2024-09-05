@@ -9,7 +9,7 @@ struct MacResourcesView: View {
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 VStack {
                                         LinkView(icon: searchIcon, title: "粵音資料集叢", url: "https://jyut.net")
                                         LinkView(icon: searchIcon, title: "粵典", url: "https://words.hk")
@@ -39,7 +39,6 @@ struct MacResourcesView: View {
                 .navigationTitle("MacSidebar.NavigationTitle.Resources")
         }
 }
-
 
 private struct LinkView: View {
 

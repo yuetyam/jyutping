@@ -4,7 +4,7 @@ struct ChineseZodiacView: View {
         var body: some View {
                 #if os(macOS)
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 TermView(term: Term(name: "十二生肖", romanization: "sap6 ji6 sang1 ciu3")).block()
                                 VStack {
                                         ForEach(terms) {

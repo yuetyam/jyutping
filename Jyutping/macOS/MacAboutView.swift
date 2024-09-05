@@ -6,7 +6,7 @@ import AboutKit
 struct MacAboutView: View {
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 HStack(spacing: 16) {
                                         Image.info
                                                 .resizable()

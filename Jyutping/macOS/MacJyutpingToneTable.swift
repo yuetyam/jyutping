@@ -13,8 +13,7 @@ private struct MacToneTipView: View {
                 }
                 .font(.master)
                 .textSelection(.enabled)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
+                .padding(8)
                 .background(Color.textBackgroundColor, in: RoundedRectangle(cornerRadius: 8, style: .continuous))
         }
 }
@@ -22,10 +21,10 @@ private struct MacToneTipView: View {
 struct MacJyutpingToneTable: View {
         var body: some View {
                 ScrollView {
-                        LazyVStack(alignment: .leading, spacing: 20) {
+                        LazyVStack(alignment: .leading, spacing: 16) {
                                 MacToneTipView()
                                 VStack(spacing: 2) {
-                                        HStack(spacing: 44) {
+                                        HStack(spacing: 40) {
                                                 HStack {
                                                         ZStack(alignment: .leading) {
                                                                 Text(verbatim: "法 faat3").hidden()
@@ -44,7 +43,7 @@ struct MacJyutpingToneTable: View {
                                                 Text(verbatim: "粵拼")
                                                 Spacer()
                                         }
-                                        .padding(.horizontal, 12)
+                                        .padding(.horizontal, 8)
                                         VStack {
                                                 MacToneLabel(word: "芬", syllable: "fan1", value: "55/53", name: "陰平", jyutping: "1")
                                                 MacToneLabel(word: "粉", syllable: "fan2", value: "35", name: "陰上", jyutping: "2")
@@ -79,7 +78,7 @@ private struct MacToneLabel: View {
         let jyutping: String
 
         var body: some View {
-                HStack(spacing: 44) {
+                HStack(spacing: 40) {
                         HStack {
                                 ZStack(alignment: .leading) {
                                         Text(verbatim: "法 faat3").hidden()
@@ -104,7 +103,7 @@ private struct MacToneLabel: View {
 @available(macOS 13.0, *)
 private struct MacToneGridView: View {
         var body: some View {
-                Grid(horizontalSpacing: 12, verticalSpacing: 8) {
+                Grid(horizontalSpacing: 8, verticalSpacing: 4) {
                         GridRow {
                                 Text(verbatim: "空").hidden()
                                 Text(verbatim: "平")

@@ -4,7 +4,7 @@ struct NumbersView: View {
         var body: some View {
                 #if os(macOS)
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 TermView(term: Term(name: "數字", romanization: "sou3 zi6")).block()
                                 VStack {
                                         ForEach(numbers) {

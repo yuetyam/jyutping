@@ -10,7 +10,7 @@ struct MacHongKongMTRView: View {
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 TermView(term: Term(name: "港鐵", romanization: "gong2 tit3")).block()
                                 ForEach(lines.indices, id: \.self) { index in
                                         MacMetroLineView(line: lines[index], isExpanded: $expanded[index])

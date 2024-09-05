@@ -4,7 +4,7 @@ struct StemsBranchesView: View {
         var body: some View {
                 #if os(macOS)
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 TermView(term: Term(name: "天干地支", romanization: "tin1 gon1 dei6 zi1")).block()
                                 VStack {
                                         ForEach(stems) {

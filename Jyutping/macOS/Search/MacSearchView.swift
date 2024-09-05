@@ -67,7 +67,7 @@ struct MacSearchView: View {
                                         }
                                 }
                         ScrollView {
-                                LazyVStack(spacing: 24) {
+                                LazyVStack(spacing: 16) {
                                         if cantonese.isNotEmpty {
                                                 VStack {
                                                         CantoneseTextView(cantonese)

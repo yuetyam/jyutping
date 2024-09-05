@@ -5,7 +5,7 @@ import SwiftUI
 struct MacIntroductionsView: View {
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 VStack(spacing: 16) {
                                         HStack {
                                                 Text("Shared.Guide.Heading.ToneInput").font(.significant)

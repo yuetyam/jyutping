@@ -10,7 +10,7 @@ struct MacFatshanMetroView: View {
 
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 TermView(term: Term(name: "佛山地鐵", romanization: "fat6 saan1 dei6 tit3")).block()
                                 ForEach(lines.indices, id: \.self) { index in
                                         MacMetroLineView(line: lines[index], isExpanded: $expanded[index])

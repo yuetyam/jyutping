@@ -5,7 +5,7 @@ import SwiftUI
 struct MacExpressionsView: View {
         var body: some View {
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 Group {
                                         HStack {
                                                 VStack(alignment: .leading, spacing: 10) {

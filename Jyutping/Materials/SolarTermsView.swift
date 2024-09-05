@@ -5,7 +5,7 @@ struct SolarTermsView: View {
         var body: some View {
                 #if os(macOS)
                 ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                                 TermView(term: Term(name: "二十四節氣", romanization: "ji6 sap6 sei3 zit3 hei3")).block()
                                 VStack {
                                         ForEach(terms) {
