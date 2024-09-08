@@ -270,13 +270,14 @@ struct DatabasePreparer {
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
-                        guard parts.count == 6 else { return nil }
+                        guard parts.count == 4 else { return nil }
                         let category = parts[0]
                         let codepoint = parts[1]
                         let cantonese = parts[2]
                         let romanization = parts[3]
-                        let shortcut = parts[4]
-                        let ping = parts[5]
+                        let anchors = romanization.split(separator: " ").compactMap(\.first)
+                        let shortcut = String(anchors).charcode ?? 47
+                        let ping = romanization.filter(\.isLetter).hash
                         return "(\(category), '\(codepoint)', '\(cantonese)', '\(romanization)', \(shortcut), \(ping))"
                 }
                 let values: String = entries.joined(separator: ", ")

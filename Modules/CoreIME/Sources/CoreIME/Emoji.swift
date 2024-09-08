@@ -121,7 +121,7 @@ extension Engine {
         }
 
         /// Create a Character from the given Unicode Code Point String, e.g. 1F600
-        private static func character<S>(from codePoint: S) -> Character? where S: StringProtocol {
+        private static func character<T: StringProtocol>(from codePoint: T) -> Character? {
                 guard let u32 = UInt32(codePoint, radix: 16) else { return nil }
                 guard let scalar = Unicode.Scalar(u32) else { return nil }
                 return Character(scalar)

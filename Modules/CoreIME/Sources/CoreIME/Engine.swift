@@ -168,8 +168,7 @@ extension Engine {
                                                 return Candidate(text: item.text, romanization: item.romanization, input: text)
                                         } else {
                                                 guard continuous.hasPrefix(text) else { return nil }
-                                                let combinedInput = item.input + textTones
-                                                return Candidate(text: item.text, romanization: item.romanization, input: combinedInput)
+                                                return Candidate(text: item.text, romanization: item.romanization, input: text)
                                         }
                                 case (2, 1):
                                         guard textTones.hasPrefix(continuousTones) else { return nil }
@@ -307,7 +306,7 @@ extension Engine {
                         let tailText = String(text.dropFirst(headInputCount))
                         guard canProcess(tailText) else { return [] }
                         let tailSegmentation = Segmentor.segment(text: tailText)
-                        let tailCandidates = process(text: tailText, segmentation: tailSegmentation, needsSymbols: needsSymbols, limit: 8).prefix(100)
+                        let tailCandidates = process(text: tailText, segmentation: tailSegmentation, needsSymbols: false, limit: 8).prefix(100)
                         guard tailCandidates.isNotEmpty else { return [] }
                         let headCandidates = primary.filter({ $0.input == headText }).prefix(8)
                         let combines = headCandidates.map({ head -> [Candidate] in
@@ -332,22 +331,20 @@ extension Engine {
                 let textCount = text.count
                 let searches = search(text: text, segmentation: segmentation, limit: limit)
                 let preferredSearches = searches.filter({ $0.input.count == textCount })
-                let matched = match(text: text, input: text, limit: limit)
-                let regularCandidates: [Candidate] = {
-                        var items = matched + preferredSearches
-                        guard items.isNotEmpty else { return items }
-                        guard limit == nil else { return items }
-                        guard needsSymbols else { return items }
-                        let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
-                        guard symbols.isNotEmpty else { return items }
-                        for symbol in symbols.reversed() {
-                                if let index = items.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
-                                        items.insert(symbol, at: index + 1)
-                                }
+                let matches = match(text: text, input: text, limit: limit)
+                let shortcuts = shortcut(text: text, limit: limit)
+                lazy var fallback = (matches + preferredSearches + shortcuts + searches).uniqued()
+                let shouldContinue: Bool = needsSymbols && (limit == nil) && (matches.isNotEmpty || preferredSearches.isNotEmpty)
+                guard shouldContinue else { return fallback }
+                let symbols: [Candidate] = Engine.searchSymbols(text: text, segmentation: segmentation)
+                guard symbols.isNotEmpty else { return fallback }
+                var regular = matches + preferredSearches
+                for symbol in symbols.reversed() {
+                        if let index = regular.firstIndex(where: { $0.lexiconText == symbol.lexiconText }) {
+                                regular.insert(symbol, at: index + 1)
                         }
-                        return items
-                }()
-                return (regularCandidates + shortcut(text: text, limit: limit) + searches).uniqued()
+                }
+                return (regular + shortcuts + searches).uniqued()
         }
 
         private static func search(text: String, segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
