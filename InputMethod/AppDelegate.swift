@@ -3,31 +3,26 @@ import InputMethodKit
 import CoreIME
 import Sparkle
 
-@MainActor
 @main
 @objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {
 
-        private static var server: IMKServer?
+        static let shared: AppDelegate = AppDelegate()
 
-        private static var updaterController: SPUStandardUpdaterController?
-        static func checkForUpdates() {
-                let canCheckForUpdates: Bool = Self.updaterController?.updater.canCheckForUpdates ?? false
+        private lazy var updaterController: SPUStandardUpdaterController? = nil
+        func checkForUpdates() {
+                let canCheckForUpdates: Bool = updaterController?.updater.canCheckForUpdates ?? false
                 guard canCheckForUpdates else { return }
-                Self.updaterController?.updater.checkForUpdates()
+                updaterController?.updater.checkForUpdates()
         }
 
         func applicationDidFinishLaunching(_ notification: Notification) {
                 handleCommandLineArguments()
-                if Self.server == nil {
-                        let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
-                        let identifier: String = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
-                        Self.server = IMKServer(name: name, bundleIdentifier: identifier)
-                }
-                UserLexicon.prepare()
-                Engine.prepare()
-                if Self.updaterController == nil {
-                        Self.updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+                let name: String = (Bundle.main.infoDictionary?["InputMethodConnectionName"] as? String) ?? "org.jyutping.inputmethod.Jyutping_Connection"
+                let identifier: String = Bundle.main.bundleIdentifier ?? "org.jyutping.inputmethod.Jyutping"
+                _ = IMKServer(name: name, bundleIdentifier: identifier)
+                if updaterController == nil {
+                        updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
                 }
         }
 

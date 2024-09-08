@@ -33,7 +33,7 @@ extension JyutpingInputController {
                 displayPreferencesView()
         }
         @objc func checkForUpdates() {
-                AppDelegate.checkForUpdates()
+                AppDelegate.shared.checkForUpdates()
         }
         @objc private func openHelpWindow() {
                 AppSettings.updateSelectedPreferencesSidebarRow(to: .hotkeys)
@@ -44,11 +44,6 @@ extension JyutpingInputController {
                 displayPreferencesView()
         }
         private func displayPreferencesView() {
-                DispatchQueue.main.async { [weak self] in
-                        self?.preparePreferencesView()
-                }
-        }
-        private func preparePreferencesView() {
                 let windowIdentifiers: [String] = NSApp.windows.compactMap(\.identifier?.rawValue)
                 let shouldOpenNewWindow: Bool = windowIdentifiers.notContains(Constant.preferencesWindowIdentifier)
                 guard shouldOpenNewWindow else { return }

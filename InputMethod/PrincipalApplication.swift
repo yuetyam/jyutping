@@ -1,14 +1,11 @@
 import AppKit
 
-@MainActor
 @objc(PrincipalApplication)
 final class PrincipalApplication: NSApplication {
 
-        private static let appDelegate = AppDelegate()
-
         override init() {
                 super.init()
-                delegate = Self.appDelegate
+                delegate = AppDelegate.shared
         }
 
         required init?(coder: NSCoder) {
