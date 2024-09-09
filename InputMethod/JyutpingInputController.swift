@@ -3,27 +3,14 @@ import InputMethodKit
 import CommonExtensions
 import CoreIME
 
+@MainActor
 @objc(JyutpingInputController)
 final class JyutpingInputController: IMKInputController {
 
         // MARK: - Window, InputClient
 
-        private lazy var window: NSPanel = {
-                let panel: NSPanel = NSPanel(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
-                let levelValue: Int = Int(CGShieldingWindowLevel())
-                panel.level = NSWindow.Level(levelValue)
-                panel.isFloatingPanel = true
-                panel.worksWhenModal = true
-                panel.hidesOnDeactivate = false
-                panel.isReleasedWhenClosed = true
-                panel.collectionBehavior = .moveToActiveSpace
-                panel.isMovable = true
-                panel.isMovableByWindowBackground = true
-                panel.isOpaque = false
-                panel.hasShadow = false
-                panel.backgroundColor = .clear
-                return panel
-        }()
+        /// Window for CandidateBoard and OptionsView
+        private lazy var window: NSPanel = CandidateWindow(level: nil)
         private func prepareWindow() {
                 _ = window.contentView?.subviews.map({ $0.removeFromSuperview() })
                 _ = window.contentViewController?.children.map({ $0.removeFromParent() })
@@ -178,7 +165,7 @@ final class JyutpingInputController: IMKInputController {
                 } else if windowCount > 10 {
                         _ = NSApp.windows.map({ $0.close() })
                 } else {
-                        _ = NSApp.windows.filter({ $0.identifier != window.identifier && $0.identifier?.rawValue != Constant.preferencesWindowIdentifier}).map({ $0.close() })
+                        _ = NSApp.windows.filter({ $0.identifier != window.identifier && $0.identifier?.rawValue != PresetConstant.preferencesWindowIdentifier}).map({ $0.close() })
                 }
                 selectedCandidates = []
                 if appContext.inputForm.isOptions {

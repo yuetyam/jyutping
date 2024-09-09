@@ -45,11 +45,11 @@ extension JyutpingInputController {
         }
         private func displayPreferencesView() {
                 let windowIdentifiers: [String] = NSApp.windows.compactMap(\.identifier?.rawValue)
-                let shouldOpenNewWindow: Bool = windowIdentifiers.notContains(Constant.preferencesWindowIdentifier)
+                let shouldOpenNewWindow: Bool = windowIdentifiers.notContains(PresetConstant.preferencesWindowIdentifier)
                 guard shouldOpenNewWindow else { return }
                 let frame: CGRect = preferencesWindowFrame()
                 let window = NSWindow(contentRect: frame, styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: true)
-                window.identifier = NSUserInterfaceItemIdentifier(rawValue: Constant.preferencesWindowIdentifier)
+                window.identifier = NSUserInterfaceItemIdentifier(rawValue: PresetConstant.preferencesWindowIdentifier)
                 window.title = String(localized: "PreferencesView.Window.Title")
                 let visualEffectView = NSVisualEffectView()
                 visualEffectView.material = .sidebar

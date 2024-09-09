@@ -401,7 +401,7 @@ struct AppSettings {
         // MARK: - Custom Fonts
 
         private(set) static var customCandidateFonts: [String] = {
-                let fallback: [String] = [Constant.PingFangHK]
+                let fallback: [String] = [PresetConstant.PingFangHK]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCandidateFontList)
                 guard let savedNames else { return fallback }
                 let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
@@ -417,7 +417,7 @@ struct AppSettings {
         }
 
         private(set) static var customCommentFonts: [String] = {
-                let fallback: [String] = [Constant.HelveticaNeue]
+                let fallback: [String] = [PresetConstant.HelveticaNeue]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCommentFontList)
                 guard let savedNames else { return fallback }
                 let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()
@@ -433,7 +433,7 @@ struct AppSettings {
         }
 
         private(set) static var customLabelFonts: [String] = {
-                let fallback: [String] = [Constant.Menlo]
+                let fallback: [String] = [PresetConstant.Menlo]
                 let savedNames = UserDefaults.standard.string(forKey: SettingsKey.CustomLabelFontList)
                 guard let savedNames else { return fallback }
                 let names: [String] = savedNames.split(separator: ",").map({ $0.trimmed() }).filter(\.isNotEmpty).uniqued()

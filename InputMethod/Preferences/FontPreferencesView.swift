@@ -66,13 +66,13 @@ struct FontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: Constant.PingFangHK)
+                                                                        FontPicker($customCandidateFonts[index], size: candidateFontSize, fallback: PresetConstant.PingFangHK)
                                                                         Spacer()
                                                                 }
                                                         }
                                                         HStack {
                                                                 Button {
-                                                                        customCandidateFonts.append(Constant.PingFangHK)
+                                                                        customCandidateFonts.append(PresetConstant.PingFangHK)
                                                                         triggerAnimation()
                                                                 } label: {
                                                                         plusImage
@@ -128,13 +128,13 @@ struct FontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        FontPicker($customCommentFonts[index], size: commentFontSize, fallback: Constant.HelveticaNeue)
+                                                                        FontPicker($customCommentFonts[index], size: commentFontSize, fallback: PresetConstant.HelveticaNeue)
                                                                         Spacer()
                                                                 }
                                                         }
                                                         HStack {
                                                                 Button {
-                                                                        customCommentFonts.append(Constant.HelveticaNeue)
+                                                                        customCommentFonts.append(PresetConstant.HelveticaNeue)
                                                                         triggerAnimation()
                                                                 } label: {
                                                                         plusImage
@@ -190,13 +190,13 @@ struct FontPreferencesView: View {
                                                                         } label: {
                                                                                 minusImage
                                                                         }
-                                                                        FontPicker($customLabelFonts[index], size: labelFontSize, fallback: Constant.Menlo)
+                                                                        FontPicker($customLabelFonts[index], size: labelFontSize, fallback: PresetConstant.Menlo)
                                                                         Spacer()
                                                                 }
                                                         }
                                                         HStack {
                                                                 Button {
-                                                                        customLabelFonts.append(Constant.Menlo)
+                                                                        customLabelFonts.append(PresetConstant.Menlo)
                                                                         triggerAnimation()
                                                                 } label: {
                                                                         plusImage

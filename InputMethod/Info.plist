@@ -63,6 +63,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Mono-Regular.otf</string>
+		<string>MonaspaceNeon-Regular.otf</string>
+		<string>Inter-Regular.ttf</string>
 	</array>
 	<key>tsInputMethodCharacterRepertoireKey</key>
 	<array>

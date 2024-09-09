@@ -3,6 +3,7 @@ import InputMethodKit
 import CoreIME
 import Sparkle
 
+@MainActor
 @main
 @objc(AppDelegate)
 final class AppDelegate: NSObject, NSApplicationDelegate {

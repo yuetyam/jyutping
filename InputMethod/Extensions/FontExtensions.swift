@@ -22,38 +22,38 @@ extension Font {
                 }
         }
         private static let preferredCandidateFontNames: [String] = {
-                var names: [String] = [Constant.MonaspaceNeon]
-                let latinQueue: [String] = [Constant.SFPro, Constant.Inter]
+                var names: [String] = [PresetConstant.MonaspaceNeon]
+                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                names.append(Constant.HelveticaNeue)
+                names.append(PresetConstant.HelveticaNeue)
                 var shouldConsiderSupplementaryFonts: Bool = true
-                for name in Constant.primaryCJKVQueue {
+                for name in PresetConstant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 shouldConsiderSupplementaryFonts = false
                                 break
                         }
                 }
-                for name in Constant.systemCJKVQueue {
+                for name in PresetConstant.systemCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
                 if shouldConsiderSupplementaryFonts {
-                        for name in Constant.supplementaryCJKVQueue {
+                        for name in PresetConstant.supplementaryCJKVQueue {
                                 if found(font: name) {
                                         names.append(name)
                                         break
                                 }
                         }
                 }
-                names.append(contentsOf: Constant.fallbackCJKVList)
+                names.append(contentsOf: PresetConstant.fallbackCJKVList)
                 return names
         }()
 }
@@ -76,7 +76,6 @@ extension Font {
                 lazy var fallback: Font = Font.system(size: size, design: .monospaced)
                 switch AppSettings.commentFontMode {
                 case .default:
-                        guard found(font: Constant.SFMono) else { return fallback }
                         return combine(fonts: preferredCommentFontNames, size: size) ?? fallback
                 case .system:
                         return fallback
@@ -86,38 +85,38 @@ extension Font {
                 }
         }
         private static let preferredCommentFontNames: [String] = {
-                var names: [String] = [Constant.SFMono]
-                let latinQueue: [String] = [Constant.SFPro, Constant.Inter]
+                var names: [String] = [PresetConstant.SFMono, PresetConstant.MonaspaceNeon]
+                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                names.append(Constant.HelveticaNeue)
+                names.append(PresetConstant.HelveticaNeue)
                 var shouldConsiderSupplementaryFonts: Bool = true
-                for name in Constant.primaryCJKVQueue {
+                for name in PresetConstant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 shouldConsiderSupplementaryFonts = false
                                 break
                         }
                 }
-                for name in Constant.systemCJKVQueue {
+                for name in PresetConstant.systemCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
                 if shouldConsiderSupplementaryFonts {
-                        for name in Constant.supplementaryCJKVQueue {
+                        for name in PresetConstant.supplementaryCJKVQueue {
                                 if found(font: name) {
                                         names.append(name)
                                         break
                                 }
                         }
                 }
-                names.append(contentsOf: Constant.fallbackCJKVList)
+                names.append(contentsOf: PresetConstant.fallbackCJKVList)
                 return names
         }()
 }

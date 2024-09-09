@@ -235,6 +235,9 @@
 		376B84922BFC2C090029A0CF /* TopCommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84912BFC2C090029A0CF /* TopCommentStackView.swift */; };
 		376B84942BFC2C1C0029A0CF /* BottomCommentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84932BFC2C1C0029A0CF /* BottomCommentStackView.swift */; };
 		376B84962BFC2CB50029A0CF /* EnhancedCommentLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376B84952BFC2CB50029A0CF /* EnhancedCommentLabels.swift */; };
+		3783BB6F2C8DE3600071B892 /* CandidateWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */; };
+		3783BB712C8E1EAE0071B892 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3783BB702C8E1EAE0071B892 /* Inter-Regular.ttf */; };
+		3783BB732C8E1F030071B892 /* MonaspaceNeon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3783BB722C8E1F030071B892 /* MonaspaceNeon-Regular.otf */; };
 		37918A6C2C5B5BBA006C6590 /* ToneInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */; };
 		37918A6E2C5B629B006C6590 /* SF-Mono-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 37918A6D2C5B629B006C6590 /* SF-Mono-Regular.otf */; };
 		3797F6E32C188F2B00DE6D0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */; };
@@ -286,7 +289,7 @@
 		37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5A2B3B381600F02279 /* FontPicker.swift */; };
 		37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */; };
 		37E6AD802B3B381700F02279 /* FontPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */; };
-		37E6AD812B3B381700F02279 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5D2B3B381600F02279 /* Constant.swift */; };
+		37E6AD812B3B381700F02279 /* PresetConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5D2B3B381600F02279 /* PresetConstant.swift */; };
 		37E6AD822B3B381700F02279 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5E2B3B381600F02279 /* PreferencesView.swift */; };
 		37E6AD832B3B381700F02279 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5F2B3B381600F02279 /* AboutView.swift */; };
 		37E6AD842B3B381700F02279 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD602B3B381600F02279 /* AppSettings.swift */; };
@@ -600,6 +603,9 @@
 		376B84912BFC2C090029A0CF /* TopCommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCommentStackView.swift; sourceTree = "<group>"; };
 		376B84932BFC2C1C0029A0CF /* BottomCommentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCommentStackView.swift; sourceTree = "<group>"; };
 		376B84952BFC2CB50029A0CF /* EnhancedCommentLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedCommentLabels.swift; sourceTree = "<group>"; };
+		3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateWindow.swift; sourceTree = "<group>"; };
+		3783BB702C8E1EAE0071B892 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		3783BB722C8E1F030071B892 /* MonaspaceNeon-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MonaspaceNeon-Regular.otf"; sourceTree = "<group>"; };
 		37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToneInputView.swift; sourceTree = "<group>"; };
 		37918A6D2C5B629B006C6590 /* SF-Mono-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Mono-Regular.otf"; sourceTree = "<group>"; };
 		3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -651,7 +657,7 @@
 		37E6AD5A2B3B381600F02279 /* FontPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
 		37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesView.swift; sourceTree = "<group>"; };
 		37E6AD5C2B3B381600F02279 /* FontPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPreferencesView.swift; sourceTree = "<group>"; };
-		37E6AD5D2B3B381600F02279 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		37E6AD5D2B3B381600F02279 /* PresetConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetConstant.swift; sourceTree = "<group>"; };
 		37E6AD5E2B3B381600F02279 /* PreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		37E6AD5F2B3B381600F02279 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		37E6AD602B3B381600F02279 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
@@ -1044,6 +1050,7 @@
 				3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */,
 				37E6AD662B3B381600F02279 /* JyutpingInputController.swift */,
 				37E6AD572B3B381600F02279 /* EventHandler.swift */,
+				3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */,
 				37E6AD672B3B381600F02279 /* AppContext.swift */,
 				37E6AD562B3B381600F02279 /* DisplayCandidate.swift */,
 				37E6AD4D2B3B381600F02279 /* InputForm.swift */,
@@ -1066,6 +1073,8 @@
 				3717DBCC2BF9649D00DC3DB1 /* InfoPlist.xcstrings */,
 				3717DBCA2BF9649D00DC3DB1 /* Localizable.xcstrings */,
 				37E6AD952B3B389400F02279 /* jyutpingime.pdf */,
+				3783BB702C8E1EAE0071B892 /* Inter-Regular.ttf */,
+				3783BB722C8E1F030071B892 /* MonaspaceNeon-Regular.otf */,
 				37918A6D2C5B629B006C6590 /* SF-Mono-Regular.otf */,
 				37E6AD8F2B3B384B00F02279 /* Assets.xcassets */,
 				371EABD12B385D380075089B /* Preview Content */,
@@ -1326,7 +1335,7 @@
 				37E6AD5F2B3B381600F02279 /* AboutView.swift */,
 				37E6AD602B3B381600F02279 /* AppSettings.swift */,
 				37E6AD5A2B3B381600F02279 /* FontPicker.swift */,
-				37E6AD5D2B3B381600F02279 /* Constant.swift */,
+				37E6AD5D2B3B381600F02279 /* PresetConstant.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -1651,10 +1660,12 @@
 			files = (
 				37D1C9362BBF26A200015FD0 /* PrivacyInfo.xcprivacy in Resources */,
 				37E6AD962B3B389400F02279 /* jyutpingime.pdf in Resources */,
+				3783BB732C8E1F030071B892 /* MonaspaceNeon-Regular.otf in Resources */,
 				37918A6E2C5B629B006C6590 /* SF-Mono-Regular.otf in Resources */,
 				37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */,
 				3717DBCB2BF9649D00DC3DB1 /* Localizable.xcstrings in Resources */,
 				3717DBCD2BF9649D00DC3DB1 /* InfoPlist.xcstrings in Resources */,
+				3783BB712C8E1EAE0071B892 /* Inter-Regular.ttf in Resources */,
 				371EABD32B385D380075089B /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1865,6 +1876,7 @@
 				37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */,
 				37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */,
 				37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */,
+				3783BB6F2C8DE3600071B892 /* CandidateWindow.swift in Sources */,
 				37E6AD6D2B3B381700F02279 /* HorizontalPageCandidateLabel.swift in Sources */,
 				375FA76D2C0D5227001ABA39 /* ReverseLookupView.swift in Sources */,
 				37E6AD7A2B3B381700F02279 /* Options.swift in Sources */,
@@ -1875,7 +1887,7 @@
 				37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */,
 				37E6AD792B3B381700F02279 /* WindowPattern.swift in Sources */,
 				37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */,
-				37E6AD812B3B381700F02279 /* Constant.swift in Sources */,
+				37E6AD812B3B381700F02279 /* PresetConstant.swift in Sources */,
 				37E6AD882B3B381700F02279 /* InputStage.swift in Sources */,
 				37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */,
 				37E6AD6B2B3B381700F02279 /* RightCommentLabel.swift in Sources */,
