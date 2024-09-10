@@ -15,6 +15,16 @@ extension StringProtocol {
         }
 }
 
+extension Collection where Element == Character {
+        /// CharCode that replaced 'y' with 'j' for shortcut querying.
+        var shortcutCode: Int? {
+                let charCode: Int = self.compactMap(\.intercode)
+                        .map({ $0 == 44 ? 29 : $0 }) // Replace 'y' with 'j'
+                        .combined()
+                return (charCode == 0) ? nil : charCode
+        }
+}
+
 extension RandomAccessCollection where Element == Int {
         func combined() -> Int {
                 guard self.count < 10 else { return 0 }
