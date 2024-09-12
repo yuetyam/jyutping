@@ -65,7 +65,7 @@ struct LargePadExpansibleInputKey: View {
                                 let expansions: Int = keyModel.members.count - 1
                                 PadKeyExpansionPath(keyLocale: keyLocale, expansions: expansions)
                                         .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.8), radius: 1)
+                                        .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(keyModel.members.indices, id: \.self) { index in
@@ -109,7 +109,7 @@ struct LargePadExpansibleInputKey: View {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeKeyColor : keyColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(4)
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear

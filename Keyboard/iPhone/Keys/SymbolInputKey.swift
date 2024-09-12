@@ -55,7 +55,7 @@ struct SymbolInputKey: View {
                         if (isTouching && shouldPreviewKey) {
                                 KeyPreviewPath()
                                         .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.5), radius: 1)
+                                        .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 Text(verbatim: text)
                                                         .font(.largeTitle)
@@ -66,7 +66,7 @@ struct SymbolInputKey: View {
                         } else {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeColor : keyColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                                 Text(verbatim: text)

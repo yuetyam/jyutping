@@ -70,7 +70,7 @@ struct ExpansibleInputKey: View {
                                 let expansions: Int = keyModel.members.count - 1
                                 KeyExpansionPath(keyLocale: keyLocale, expansions: expansions)
                                         .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5)
+                                        .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(keyModel.members.indices, id: \.self) { index in
@@ -111,7 +111,7 @@ struct ExpansibleInputKey: View {
                         } else if (isTouching && shouldPreviewKey) {
                                 KeyPreviewPath()
                                         .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.5), radius: 1)
+                                        .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 Text(verbatim: keyModel.primary.text)
                                                         .textCase(textCase)
@@ -123,7 +123,7 @@ struct ExpansibleInputKey: View {
                         } else {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeColor : keyColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                                 ZStack(alignment: .topTrailing) {

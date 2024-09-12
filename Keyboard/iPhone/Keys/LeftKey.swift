@@ -56,7 +56,7 @@ struct LeftKey: View {
                                 let expansions: Int = symbolsCount - 1
                                 KeyRightExpansionPath(expansions: expansions)
                                         .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5)
+                                        .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(symbols.indices, id: \.self) { index in
@@ -79,7 +79,7 @@ struct LeftKey: View {
                         } else if (isTouching && shouldPreviewKey) {
                                 KeyPreviewPath()
                                         .fill(keyPreviewColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5)
+                                        .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 LeftKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering)
                                                         .font(.largeTitle)
@@ -91,7 +91,7 @@ struct LeftKey: View {
                                 Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeColor : keyColor)
-                                        .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                         .padding(.vertical, 6)
                                         .padding(.horizontal, 3)
                                 ZStack(alignment: .bottom) {

@@ -33,7 +33,7 @@ struct TenKeySpecialKey: View {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
                         /*
                         if context.inputStage.isBuffering {

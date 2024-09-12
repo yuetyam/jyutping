@@ -24,7 +24,7 @@ struct TenKeySymbolsBar: View {
                 ZStack {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(keyColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         ScrollViewReader { proxy in
                                 ScrollView(.vertical) {
                                         LazyVStack(spacing: 0) {

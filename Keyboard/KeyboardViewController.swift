@@ -198,7 +198,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (false, true):
                                 inputStage = .ending
                                 if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
-                                        let concatenated = selectedCandidates.filter(\.isCantonese).joined()
+                                        let concatenated = selectedCandidates.joined()
                                         UserLexicon.handle(concatenated)
                                 }
                                 selectedCandidates = []

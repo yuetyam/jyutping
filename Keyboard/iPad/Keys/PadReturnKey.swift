@@ -68,7 +68,7 @@ struct PadReturnKey: View {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(backColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(5)
                         if shouldDisplayKeyImage {
                                 Image.return.foregroundStyle(foreColor)

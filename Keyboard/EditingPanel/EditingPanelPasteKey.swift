@@ -34,7 +34,7 @@ struct EditingPanelPasteKey: View {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 6, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: "doc.on.clipboard")
@@ -78,7 +78,7 @@ struct EditingPanelSystemPasteKey: View {
                         Color.clear
                         RoundedRectangle(cornerRadius: 6, style: .continuous)
                                 .fill(keyColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack(spacing: 0) {
                                 PasteButton(payloadType: String.self) { strings in

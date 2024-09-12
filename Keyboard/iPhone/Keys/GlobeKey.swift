@@ -21,7 +21,7 @@ struct GlobeKey: View {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(keyColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, 6)
                                 .padding(.horizontal, 3)
                         Image(systemName: "globe")

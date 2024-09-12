@@ -58,7 +58,7 @@ struct EditingPanelReturnKey: View {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 6, style: .continuous)
                                 .fill(backColor)
-                                .shadow(color: .black.opacity(0.4), radius: 0.5, y: 1)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack(spacing: 4) {
                                 Image(systemName: isSearchReturn ? "magnifyingglass" : "return")
