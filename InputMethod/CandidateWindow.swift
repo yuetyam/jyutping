@@ -5,8 +5,8 @@ import SwiftUI
 final class CandidateWindow: NSPanel {
 
         /// Create a NSPanel with a specified WindowLevel
-        init(level: NSWindow.Level?) {
-                super.init(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: false)
+        init(frame: CGRect? = nil, level: NSWindow.Level?) {
+                super.init(contentRect: frame ?? .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: true)
                 self.level = level ?? NSWindow.Level(Int(CGShieldingWindowLevel()))
                 isFloatingPanel = true
                 worksWhenModal = true
