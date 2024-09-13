@@ -1,8 +1,9 @@
 struct PresetConstant {
         static let MonaspaceNeon: String = "Monaspace Neon"
-        static let SFPro: String = "SF Pro"
         static let SFMono: String = "SF Mono"
+        static let SFPro: String = "SF Pro"
         static let Inter: String = "Inter"
+        static let Roboto: String = "Roboto"
         static let HelveticaNeue: String = "Helvetica Neue"
         static let PingFangHK: String = "PingFang HK"
         static let Menlo: String = "Menlo"

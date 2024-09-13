@@ -23,7 +23,7 @@ extension Font {
         }
         private static let preferredCandidateFontNames: [String] = {
                 var names: [String] = [PresetConstant.MonaspaceNeon]
-                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter]
+                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.Roboto]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
@@ -76,6 +76,7 @@ extension Font {
                 lazy var fallback: Font = Font.system(size: size, design: .monospaced)
                 switch AppSettings.commentFontMode {
                 case .default:
+                        guard found(font: PresetConstant.SFMono) || found(font: PresetConstant.MonaspaceNeon) else { return fallback }
                         return combine(fonts: preferredCommentFontNames, size: size) ?? fallback
                 case .system:
                         return fallback
@@ -86,7 +87,7 @@ extension Font {
         }
         private static let preferredCommentFontNames: [String] = {
                 var names: [String] = [PresetConstant.SFMono, PresetConstant.MonaspaceNeon]
-                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter]
+                let latinQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.Roboto]
                 for name in latinQueue {
                         if found(font: name) {
                                 names.append(name)
