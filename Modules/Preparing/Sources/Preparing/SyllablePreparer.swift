@@ -35,14 +35,18 @@ public struct SyllablePreparer {
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "syllable", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
-                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
+                let sourceLines: [String] = content
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                        .components(separatedBy: .newlines)
+                        .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
+                        .filter({ !($0.isEmpty) })
                 let entries = sourceLines.compactMap { line -> String? in
                         let parts = line.split(separator: "\t")
-                        guard parts.count == 4 else { return nil }
-                        let code = parts[0]
-                        let tenkey = parts[1]
-                        let token = parts[2]
-                        let origin = parts[3]
+                        guard parts.count == 2 else { return nil }
+                        let token = parts[0]
+                        let origin = parts[1]
+                        guard let code = token.charcode else { return nil }
+                        guard let tenkey = token.tenKeyCharcode else { return nil }
                         return "(\(code), \(tenkey), '\(token)', '\(origin)')"
                 }
                 let values: String = entries.joined(separator: ", ")
@@ -60,12 +64,13 @@ public struct SyllablePreparer {
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "pinyin-syllable", withExtension: "txt") else { return }
                 guard let content = try? String(contentsOf: url) else { return }
-                let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
-                let entries = sourceLines.compactMap { line -> String? in
-                        let parts = line.split(separator: "\t")
-                        guard parts.count == 2 else { return nil }
-                        let code = parts[0]
-                        let syllable = parts[1]
+                let sourceLines: [String] = content
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                        .components(separatedBy: .newlines)
+                        .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
+                        .filter({ !($0.isEmpty) })
+                let entries = sourceLines.compactMap { syllable -> String? in
+                        guard let code = syllable.charcode else { return nil }
                         return "(\(code), '\(syllable)')"
                 }
                 let values: String = entries.joined(separator: ", ")

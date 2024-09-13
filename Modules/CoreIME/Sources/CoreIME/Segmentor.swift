@@ -57,8 +57,7 @@ extension Segmentation {
 
 public struct Segmentor {
 
-        // MARK: - SQLite
-
+        #if os(iOS)
         private static var storageDatabase: OpaquePointer? = nil
         private(set) static var database: OpaquePointer? = nil
         private static var isDatabaseReady: Bool = false
@@ -74,21 +73,24 @@ public struct Segmentor {
                 sqlite3_close_v2(storageDatabase)
                 isDatabaseReady = true
         }
+        #endif
+
 
         private static func match<T: StringProtocol>(_ text: T) -> SegmentToken? {
                 guard let code: Int = text.charcode else { return nil }
                 let command: String = "SELECT token, origin FROM syllabletable WHERE code = \(code) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
-                guard sqlite3_prepare_v2(database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #if os(iOS)
+                guard sqlite3_prepare_v2(Self.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #else
+                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #endif
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
                 let token: String = String(cString: sqlite3_column_text(statement, 0))
                 let origin: String = String(cString: sqlite3_column_text(statement, 1))
                 return SegmentToken(text: token, origin: origin)
         }
-
-
-        // MARK: - Split
 
         private static func splitLeading<T: StringProtocol>(_ text: T)-> [SegmentToken] {
                 let maxLength: Int = min(text.count, 6)

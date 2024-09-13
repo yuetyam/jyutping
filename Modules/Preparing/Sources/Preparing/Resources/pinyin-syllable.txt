@@ -1,423 +1,423 @@
-20	a
-24	e
-34	o
-2028	ai
-2033	an
-2034	ao
-2120	ba
-2128	bi
-2134	bo
-2140	bu
-2220	ca
-2224	ce
-2228	ci
-2240	cu
-2320	da
-2324	de
-2328	di
-2340	du
-2427	eh
-2428	ei
-2433	en
-2437	er
-2520	fa
-2534	fo
-2540	fu
-2620	ga
-2624	ge
-2640	gu
-2720	ha
-2724	he
-2740	hu
-2928	ji
-2940	ju
-3020	ka
-3024	ke
-3040	ku
-3120	la
-3124	le
-3128	li
-3134	lo
-3140	lu
-3141	lv
-3220	ma
-3224	me
-3228	mi
-3234	mo
-3240	mu
-3320	na
-3324	ne
-3326	ng
-3328	ni
-3340	nu
-3341	nv
-3440	ou
-3520	pa
-3528	pi
-3534	po
-3540	pu
-3628	qi
-3640	qu
-3724	re
-3728	ri
-3740	ru
-3820	sa
-3824	se
-3828	si
-3840	su
-3920	ta
-3924	te
-3928	ti
-3940	tu
-4220	wa
-4234	wo
-4240	wu
-4328	xi
-4340	xu
-4420	ya
-4424	ye
-4428	yi
-4434	yo
-4440	yu
-4520	za
-4524	ze
-4528	zi
-4540	zu
-203326	ang
-212028	bai
-212033	ban
-212034	bao
-212428	bei
-212433	ben
-212824	bie
-212833	bin
-222028	cai
-222033	can
-222034	cao
-222428	cei
-222433	cen
-222720	cha
-222724	che
-222728	chi
-222740	chu
-223440	cou
-224028	cui
-224033	cun
-224034	cuo
-232028	dai
-232033	dan
-232034	dao
-232428	dei
-232433	den
-232820	dia
-232824	die
-232833	din
-232840	diu
-233440	dou
-234028	dui
-234033	dun
-234034	duo
-243326	eng
-252033	fan
-252428	fei
-252433	fen
-253440	fou
-262028	gai
-262033	gan
-262034	gao
-262428	gei
-262433	gen
-263440	gou
-264020	gua
-264028	gui
-264033	gun
-264034	guo
-272028	hai
-272033	han
-272034	hao
-272428	hei
-272433	hen
-273440	hou
-274020	hua
-274028	hui
-274033	hun
-274034	huo
-292820	jia
-292824	jie
-292833	jin
-292840	jiu
-294024	jue
-294033	jun
-302028	kai
-302033	kan
-302034	kao
-302428	kei
-302433	ken
-303440	kou
-304020	kua
-304028	kui
-304033	kun
-304034	kuo
-312028	lai
-312033	lan
-312034	lao
-312428	lei
-312820	lia
-312824	lie
-312833	lin
-312840	liu
-313440	lou
-314024	lue
-314033	lun
-314034	luo
-322028	mai
-322033	man
-322034	mao
-322428	mei
-322433	men
-322824	mie
-322833	min
-322840	miu
-323440	mou
-332028	nai
-332033	nan
-332034	nao
-332428	nei
-332433	nen
-332820	nia
-332824	nie
-332833	nin
-332840	niu
-333440	nou
-334024	nue
-334033	nun
-334034	nuo
-352028	pai
-352033	pan
-352034	pao
-352428	pei
-352433	pen
-352820	pia
-352824	pie
-352833	pin
-353440	pou
-362820	qia
-362824	qie
-362833	qin
-362840	qiu
-364024	que
-364033	qun
-372033	ran
-372034	rao
-372433	ren
-373440	rou
-374028	rui
-374033	run
-374034	ruo
-382028	sai
-382033	san
-382034	sao
-382428	sei
-382433	sen
-382720	sha
-382724	she
-382728	shi
-382740	shu
-383440	sou
-384028	sui
-384033	sun
-384034	suo
-392028	tai
-392033	tan
-392034	tao
-392428	tei
-392824	tie
-393440	tou
-394028	tui
-394033	tun
-394034	tuo
-422028	wai
-422033	wan
-422428	wei
-422433	wen
-432820	xia
-432824	xie
-432833	xin
-432840	xiu
-434024	xue
-434033	xun
-442028	yai
-442033	yan
-442034	yao
-442833	yin
-443440	you
-444024	yue
-444033	yun
-452028	zai
-452033	zan
-452034	zao
-452428	zei
-452433	zen
-452720	zha
-452724	zhe
-452728	zhi
-452740	zhu
-453440	zou
-454028	zui
-454033	zun
-454034	zuo
-21203326	bang
-21243326	beng
-21282033	bian
-21282034	biao
-21283326	bing
-22203326	cang
-22243326	ceng
-22272028	chai
-22272033	chan
-22272034	chao
-22272433	chen
-22273440	chou
-22274020	chua
-22274028	chui
-22274033	chun
-22274034	chuo
-22343326	cong
-22402033	cuan
-23203326	dang
-23243326	deng
-23282033	dian
-23282034	diao
-23283326	ding
-23343326	dong
-23402033	duan
-25203326	fang
-25243326	feng
-25282034	fiao
-25343326	fong
-26203326	gang
-26243326	geng
-26343326	gong
-26402028	guai
-26402033	guan
-27203326	hang
-27243326	heng
-27343326	hong
-27402028	huai
-27402033	huan
-29282033	jian
-29282034	jiao
-29283326	jing
-29402033	juan
-30203326	kang
-30243326	keng
-30343326	kong
-30402028	kuai
-30402033	kuan
-31203326	lang
-31243326	leng
-31282033	lian
-31282034	liao
-31283326	ling
-31343326	long
-31402033	luan
-32203326	mang
-32243326	meng
-32282033	mian
-32282034	miao
-32283326	ming
-33203326	nang
-33243326	neng
-33282033	nian
-33282034	niao
-33283326	ning
-33343326	nong
-33402033	nuan
-35203326	pang
-35243326	peng
-35282033	pian
-35282034	piao
-35283326	ping
-36282033	qian
-36282034	qiao
-36283326	qing
-36402033	quan
-37203326	rang
-37243326	reng
-37343326	rong
-37402033	ruan
-38203326	sang
-38243326	seng
-38272028	shai
-38272033	shan
-38272034	shao
-38272428	shei
-38272433	shen
-38273440	shou
-38274020	shua
-38274028	shui
-38274033	shun
-38274034	shuo
-38343326	song
-38402033	suan
-39203326	tang
-39243326	teng
-39282033	tian
-39282034	tiao
-39283326	ting
-39343326	tong
-39402033	tuan
-42203326	wang
-42243326	weng
-42343326	wong
-43282033	xian
-43282034	xiao
-43283326	xing
-43402033	xuan
-44203326	yang
-44283326	ying
-44343326	yong
-44402033	yuan
-45203326	zang
-45243326	zeng
-45272028	zhai
-45272033	zhan
-45272034	zhao
-45272428	zhei
-45272433	zhen
-45273440	zhou
-45274020	zhua
-45274028	zhui
-45274033	zhun
-45274034	zhuo
-45343326	zong
-45402033	zuan
-2128203326	biang
-2227203326	chang
-2227243326	cheng
-2227343326	chong
-2227402028	chuai
-2227402033	chuan
-2640203326	guang
-2740203326	huang
-2928203326	jiang
-2928343326	jiong
-3040203326	kuang
-3128203326	liang
-3328203326	niang
-3628203326	qiang
-3628343326	qiong
-3827203326	shang
-3827243326	sheng
-3827402028	shuai
-3827402033	shuan
-4328203326	xiang
-4328343326	xiong
-4527203326	zhang
-4527243326	zheng
-4527343326	zhong
-4527402028	zhuai
-4527402033	zhuan
-222740203326	chuang
-382740203326	shuang
-452740203326	zhuang
+a
+e
+o
+ai
+an
+ao
+ba
+bi
+bo
+bu
+ca
+ce
+ci
+cu
+da
+de
+di
+du
+eh
+ei
+en
+er
+fa
+fo
+fu
+ga
+ge
+gu
+ha
+he
+hu
+ji
+ju
+ka
+ke
+ku
+la
+le
+li
+lo
+lu
+lv
+ma
+me
+mi
+mo
+mu
+na
+ne
+ng
+ni
+nu
+nv
+ou
+pa
+pi
+po
+pu
+qi
+qu
+re
+ri
+ru
+sa
+se
+si
+su
+ta
+te
+ti
+tu
+wa
+wo
+wu
+xi
+xu
+ya
+ye
+yi
+yo
+yu
+za
+ze
+zi
+zu
+ang
+bai
+ban
+bao
+bei
+ben
+bie
+bin
+cai
+can
+cao
+cei
+cen
+cha
+che
+chi
+chu
+cou
+cui
+cun
+cuo
+dai
+dan
+dao
+dei
+den
+dia
+die
+din
+diu
+dou
+dui
+dun
+duo
+eng
+fan
+fei
+fen
+fou
+gai
+gan
+gao
+gei
+gen
+gou
+gua
+gui
+gun
+guo
+hai
+han
+hao
+hei
+hen
+hou
+hua
+hui
+hun
+huo
+jia
+jie
+jin
+jiu
+jue
+jun
+kai
+kan
+kao
+kei
+ken
+kou
+kua
+kui
+kun
+kuo
+lai
+lan
+lao
+lei
+lia
+lie
+lin
+liu
+lou
+lue
+lun
+luo
+mai
+man
+mao
+mei
+men
+mie
+min
+miu
+mou
+nai
+nan
+nao
+nei
+nen
+nia
+nie
+nin
+niu
+nou
+nue
+nun
+nuo
+pai
+pan
+pao
+pei
+pen
+pia
+pie
+pin
+pou
+qia
+qie
+qin
+qiu
+que
+qun
+ran
+rao
+ren
+rou
+rui
+run
+ruo
+sai
+san
+sao
+sei
+sen
+sha
+she
+shi
+shu
+sou
+sui
+sun
+suo
+tai
+tan
+tao
+tei
+tie
+tou
+tui
+tun
+tuo
+wai
+wan
+wei
+wen
+xia
+xie
+xin
+xiu
+xue
+xun
+yai
+yan
+yao
+yin
+you
+yue
+yun
+zai
+zan
+zao
+zei
+zen
+zha
+zhe
+zhi
+zhu
+zou
+zui
+zun
+zuo
+bang
+beng
+bian
+biao
+bing
+cang
+ceng
+chai
+chan
+chao
+chen
+chou
+chua
+chui
+chun
+chuo
+cong
+cuan
+dang
+deng
+dian
+diao
+ding
+dong
+duan
+fang
+feng
+fiao
+fong
+gang
+geng
+gong
+guai
+guan
+hang
+heng
+hong
+huai
+huan
+jian
+jiao
+jing
+juan
+kang
+keng
+kong
+kuai
+kuan
+lang
+leng
+lian
+liao
+ling
+long
+luan
+mang
+meng
+mian
+miao
+ming
+nang
+neng
+nian
+niao
+ning
+nong
+nuan
+pang
+peng
+pian
+piao
+ping
+qian
+qiao
+qing
+quan
+rang
+reng
+rong
+ruan
+sang
+seng
+shai
+shan
+shao
+shei
+shen
+shou
+shua
+shui
+shun
+shuo
+song
+suan
+tang
+teng
+tian
+tiao
+ting
+tong
+tuan
+wang
+weng
+wong
+xian
+xiao
+xing
+xuan
+yang
+ying
+yong
+yuan
+zang
+zeng
+zhai
+zhan
+zhao
+zhei
+zhen
+zhou
+zhua
+zhui
+zhun
+zhuo
+zong
+zuan
+biang
+chang
+cheng
+chong
+chuai
+chuan
+guang
+huang
+jiang
+jiong
+kuang
+liang
+niang
+qiang
+qiong
+shang
+sheng
+shuai
+shuan
+xiang
+xiong
+zhang
+zheng
+zhong
+zhuai
+zhuan
+chuang
+shuang
+zhuang

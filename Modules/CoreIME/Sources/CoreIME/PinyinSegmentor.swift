@@ -68,7 +68,11 @@ public struct PinyinSegmentor {
                 let command: String = "SELECT syllable FROM pinyinsyllabletable WHERE code = \(code) LIMIT 1;"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
+                #if os(iOS)
                 guard sqlite3_prepare_v2(Segmentor.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #else
+                guard sqlite3_prepare_v2(Engine.database, command, -1, &statement, nil) == SQLITE_OK else { return nil }
+                #endif
                 guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
                 let syllable: String = String(cString: sqlite3_column_text(statement, 0))
                 return syllable

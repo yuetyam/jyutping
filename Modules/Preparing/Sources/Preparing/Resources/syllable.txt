@@ -1,1123 +1,1124 @@
-20	2	a	aa
-32	6	m	m
-34	6	o	o
-2020	22	aa	aa
-2028	24	ai	ai
-2030	25	ak	ak
-2032	26	am	am
-2035	27	ap	ap
-2037	27	ar	aa
-2040	28	au	au
-2120	22	ba	baa
-2134	26	bo	bo
-2220	22	ca	caa
-2224	23	ce	ce
-2228	24	ci	ci
-2234	26	co	co
-2320	32	da	daa
-2324	33	de	de
-2328	34	di	di
-2334	36	do	do
-2520	32	fa	faa
-2534	36	fo	fo
-2540	38	fu	fu
-2620	42	ga	gaa
-2624	43	ge	ge
-2634	46	go	go
-2640	48	gu	gu
-2720	42	ha	haa
-2734	46	ho	ho
-2920	52	ja	jaa
-2924	53	je	je
-2928	54	ji	ji
-3020	52	ka	kaa
-3024	53	ke	ke
-3040	58	ku	ku
-3120	52	la	laa
-3124	53	le	le
-3134	56	lo	lo
-3220	62	ma	maa
-3224	63	me	me
-3234	66	mo	mo
-3320	62	na	naa
-3324	63	ne	ne
-3326	64	ng	ng
-3328	64	ni	ni
-3334	66	no	no
-3428	64	oi	oi
-3430	65	ok	ok
-3432	66	om	am
-3433	66	on	on
-3437	67	or	o
-3440	68	ou	ou
-3520	72	pa	paa
-3534	76	po	po
-3820	72	sa	saa
-3824	73	se	se
-3828	74	si	si
-3834	76	so	so
-3920	82	ta	taa
-3934	86	to	to
-4030	85	uk	uk
-4032	86	um	am
-4220	92	wa	waa
-4224	93	we	we
-4234	96	wo	wo
-4240	98	wu	wu
-4420	92	ya	jaa
-4424	93	ye	je
-4428	94	yi	ji
-4440	98	yu	jyu
-4520	92	za	zaa
-4524	93	ze	ze
-4528	94	zi	zi
-4534	96	zo	zo
-202028	224	aai	aai
-202030	225	aak	aak
-202033	226	aan	aan
-202035	227	aap	aap
-202039	228	aat	aat
-202040	228	aau	aau
-203326	264	ang	ang
-212020	222	baa	baa
-212028	224	bai	bai
-212030	225	bak	bak
-212033	226	ban	ban
-212037	227	bar	baa
-212039	228	bat	bat
-212040	228	bau	bau
-212044	229	bay	bei
-212428	234	bei	bei
-212830	245	bik	bik
-212833	246	bin	bin
-212839	248	bit	bit
-212840	248	biu	biu
-213430	265	bok	bok
-213437	267	bor	bo
-213440	268	bou	bou
-214028	284	bui	bui
-214030	285	buk	buk
-214033	286	bun	bun
-214039	288	but	but
-222020	222	caa	caa
-222028	224	cai	cai
-222030	225	cak	cak
-222032	226	cam	cam
-222033	226	can	can
-222035	227	cap	cap
-222037	227	car	caa
-222039	228	cat	cat
-222040	228	cau	cau
-222424	233	cee	ci
-222430	235	cek	cek
-222720	242	cha	caa
-222724	243	che	ce
-222728	244	chi	ci
-222734	246	cho	co
-222740	248	chu	cyu
-222830	245	cik	cik
-222832	246	cim	cim
-222833	246	cin	cin
-222835	247	cip	cip
-222839	248	cit	cit
-222840	248	ciu	ciu
-223428	264	coi	coi
-223430	265	cok	cok
-223437	267	cor	co
-223440	268	cou	cou
-223444	269	coy	coi
-224028	284	cui	ceoi
-224030	285	cuk	cuk
-224032	286	cum	cam
-224035	287	cup	cap
-224440	298	cyu	cyu
-232020	322	daa	daa
-232028	324	dai	dai
-232030	325	dak	dak
-232032	326	dam	dam
-232033	326	dan	dan
-232035	327	dap	dap
-232037	327	dar	daa
-232039	328	dat	dat
-232040	328	dau	dau
-232044	329	day	dei
-232428	334	dei	dei
-232830	345	dik	dik
-232832	346	dim	dim
-232833	346	din	din
-232835	347	dip	dip
-232839	348	dit	dit
-232840	348	diu	diu
-233424	363	doe	doe
-233428	364	doi	doi
-233430	365	dok	dok
-233437	367	dor	do
-233440	368	dou	dou
-233444	369	doy	doi
-234028	384	dui	deoi
-234030	385	duk	duk
-234032	386	dum	dam
-234035	387	dup	dap
-252020	322	faa	faa
-252028	324	fai	fai
-252033	326	fan	fan
-252037	327	far	faa
-252039	328	fat	fat
-252040	328	fau	fau
-252428	334	fei	fei
-253430	365	fok	fok
-253437	367	for	fo
-254028	384	fui	fui
-254030	385	fuk	fuk
-254033	386	fun	fun
-254039	388	fut	fut
-262020	422	gaa	gaa
-262028	424	gai	gai
-262032	426	gam	gam
-262033	426	gan	gan
-262035	427	gap	gap
-262037	427	gar	gaa
-262039	428	gat	gat
-262040	428	gau	gau
-262044	429	gay	gei
-262428	434	gei	gei
-262830	445	gik	gik
-262832	446	gim	gim
-262833	446	gin	gin
-262835	447	gip	gip
-262839	448	git	git
-262840	448	giu	giu
-263424	463	goe	goe
-263428	464	goi	goi
-263430	465	gok	gok
-263432	466	gom	gam
-263433	466	gon	gon
-263435	467	gop	gap
-263437	467	gor	go
-263439	468	got	got
-263440	468	gou	gou
-263444	469	goy	goi
-264028	484	gui	gui
-264030	485	guk	guk
-264032	486	gum	gam
-264033	486	gun	gun
-264035	487	gup	gap
-264220	492	gwa	gwaa
-264234	496	gwo	gwo
-264240	498	gwu	gu
-272020	422	haa	haa
-272028	424	hai	hai
-272030	425	hak	hak
-272032	426	ham	ham
-272033	426	han	han
-272035	427	hap	hap
-272037	427	har	haa
-272039	428	hat	hat
-272040	428	hau	hau
-272428	434	hei	hei
-272430	435	hek	hek
-272444	439	hey	hei
-272830	445	hik	hik
-272832	446	him	him
-272833	446	hin	hin
-272835	447	hip	hip
-272839	448	hit	hit
-272840	448	hiu	hiu
-273424	463	hoe	hoe
-273428	464	hoi	hoi
-273430	465	hok	hok
-273432	466	hom	ham
-273433	466	hon	hon
-273435	467	hop	hap
-273437	467	hor	ho
-273439	468	hot	hot
-273440	468	hou	hou
-273444	469	hoy	hoi
-274028	484	hui	heoi
-274030	485	huk	huk
-274032	486	hum	ham
-274035	487	hup	hap
-292020	522	jaa	jaa
-292028	524	jai	jai
-292032	526	jam	jam
-292033	526	jan	jan
-292035	527	jap	jap
-292039	528	jat	jat
-292040	528	jau	jau
-292424	533	jee	ji
-292830	545	jik	jik
-292832	546	jim	jim
-292833	546	jin	jin
-292835	547	jip	jip
-292839	548	jit	jit
-292840	548	jiu	jiu
-294030	585	juk	juk
-294032	586	jum	jam
-294035	587	jup	jap
-294440	598	jyu	jyu
-302020	522	kaa	kaa
-302028	524	kai	kai
-302032	526	kam	kam
-302033	526	kan	kan
-302035	527	kap	kap
-302037	527	kar	kaa
-302039	528	kat	kat
-302040	528	kau	kau
-302044	529	kay	kei
-302428	534	kei	kei
-302430	535	kek	kek
-302830	545	kik	kik
-302832	546	kim	kim
-302833	546	kin	kin
-302839	548	kit	kit
-302840	548	kiu	kiu
-303428	564	koi	koi
-303430	565	kok	kok
-303444	569	koy	koi
-304028	584	kui	kui
-304030	585	kuk	kuk
-304032	586	kum	kam
-304035	587	kup	kap
-304039	588	kut	kut
-304220	592	kwa	kwaa
-304240	598	kwu	ku
-312020	522	laa	laa
-312028	524	lai	lai
-312030	525	lak	lak
-312032	526	lam	lam
-312033	526	lan	lan
-312035	527	lap	lap
-312037	527	lar	laa
-312039	528	lat	lat
-312040	528	lau	lau
-312044	529	lay	lei
-312428	534	lei	lei
-312430	535	lek	lek
-312830	545	lik	lik
-312832	546	lim	lim
-312833	546	lin	lin
-312835	547	lip	lip
-312839	548	lit	lit
-312840	548	liu	liu
-313424	563	loe	loe
-313428	564	loi	loi
-313430	565	lok	lok
-313437	567	lor	lo
-313440	568	lou	lou
-313444	569	loy	loi
-314028	584	lui	leoi
-314030	585	luk	luk
-314032	586	lum	lam
-314035	587	lup	lap
-322020	622	maa	maa
-322028	624	mai	mai
-322030	625	mak	mak
-322033	626	man	man
-322037	627	mar	maa
-322039	628	mat	mat
-322040	628	mau	mau
-322044	629	may	mei
-322428	634	mei	mei
-322830	645	mik	mik
-322833	646	min	min
-322839	648	mit	mit
-322840	648	miu	miu
-323430	665	mok	mok
-323437	667	mor	mo
-323440	668	mou	mou
-324028	684	mui	mui
-324030	685	muk	muk
-324033	686	mun	mun
-324039	688	mut	mut
-332020	622	naa	naa
-332028	624	nai	nai
-332032	626	nam	nam
-332033	626	nan	nan
-332035	627	nap	nap
-332037	627	nar	naa
-332039	628	nat	nat
-332040	628	nau	nau
-332428	634	nei	nei
-332620	642	nga	ngaa
-332634	646	ngo	ngo
-332830	645	nik	nik
-332832	646	nim	nim
-332833	646	nin	nin
-332835	647	nip	nip
-332839	648	nit	nit
-332840	648	niu	niu
-333428	664	noi	noi
-333430	665	nok	nok
-333437	667	nor	no
-333440	668	nou	nou
-333444	669	noy	noi
-334028	684	nui	neoi
-334030	685	nuk	nuk
-334032	686	num	nam
-334035	687	nup	nap
-343326	664	ong	ong
-352020	722	paa	paa
-352028	724	pai	pai
-352033	726	pan	pan
-352037	727	par	paa
-352039	728	pat	pat
-352040	728	pau	pau
-352044	729	pay	pei
-352428	734	pei	pei
-352430	735	pek	pek
-352830	745	pik	pik
-352833	746	pin	pin
-352839	748	pit	pit
-352840	748	piu	piu
-353430	765	pok	pok
-353437	767	por	po
-353440	768	pou	pou
-354028	784	pui	pui
-354030	785	puk	puk
-354033	786	pun	pun
-354039	788	put	put
-382020	722	saa	saa
-382028	724	sai	sai
-382030	725	sak	sak
-382032	726	sam	sam
-382033	726	san	san
-382035	727	sap	sap
-382037	727	sar	saa
-382039	728	sat	sat
-382040	728	sau	sau
-382044	729	say	sei
-382424	733	see	si
-382428	734	sei	sei
-382430	735	sek	sek
-382720	742	sha	saa
-382724	743	she	se
-382728	744	shi	si
-382734	746	sho	so
-382740	748	shu	syu
-382830	745	sik	sik
-382832	746	sim	sim
-382833	746	sin	sin
-382835	747	sip	sip
-382839	748	sit	sit
-382840	748	siu	siu
-383424	763	soe	soe
-383428	764	soi	soi
-383430	765	sok	sok
-383437	767	sor	so
-383440	768	sou	sou
-383444	769	soy	soi
-384028	784	sui	seoi
-384030	785	suk	suk
-384032	786	sum	sam
-384035	787	sup	sap
-384440	798	syu	syu
-392020	822	taa	taa
-392028	824	tai	tai
-392032	826	tam	tam
-392033	826	tan	tan
-392037	827	tar	taa
-392040	828	tau	tau
-392830	845	tik	tik
-392832	846	tim	tim
-392833	846	tin	tin
-392835	847	tip	tip
-392839	848	tit	tit
-392840	848	tiu	tiu
-393424	863	toe	toe
-393428	864	toi	toi
-393430	865	tok	tok
-393437	867	tor	to
-393440	868	tou	tou
-393444	869	toy	toi
-394028	884	tui	teoi
-394030	885	tuk	tuk
-394032	886	tum	tam
-403326	864	ung	ung
-422020	922	waa	waa
-422028	924	wai	wai
-422033	926	wan	wan
-422037	927	war	waa
-422039	928	wat	wat
-422830	945	wik	wik
-423430	965	wok	wok
-423437	967	wor	wo
-424028	984	wui	wui
-424033	986	wun	wun
-424039	988	wut	wut
-442020	922	yaa	jaa
-442028	924	yai	jai
-442032	926	yam	jam
-442033	926	yan	jan
-442035	927	yap	jap
-442039	928	yat	jat
-442040	928	yau	jau
-442424	933	yee	ji
-442830	945	yik	jik
-442832	946	yim	jim
-442833	946	yin	jin
-442835	947	yip	jip
-442839	948	yit	jit
-442840	948	yiu	jiu
-443432	966	yom	jam
-443435	967	yop	jap
-444028	984	yui	jeoi
-444030	985	yuk	juk
-444032	986	yum	jam
-444033	986	yun	jyun
-444035	987	yup	jap
-444039	988	yut	jyut
-452020	922	zaa	zaa
-452028	924	zai	zai
-452030	925	zak	zak
-452032	926	zam	zam
-452033	926	zan	zan
-452035	927	zap	zap
-452037	927	zar	zaa
-452039	928	zat	zat
-452040	928	zau	zau
-452424	933	zee	zi
-452430	935	zek	zek
-452720	942	zha	zaa
-452724	943	zhe	ze
-452728	944	zhi	zi
-452734	946	zho	zo
-452740	948	zhu	zyu
-452830	945	zik	zik
-452832	946	zim	zim
-452833	946	zin	zin
-452835	947	zip	zip
-452839	948	zit	zit
-452840	948	ziu	ziu
-453428	964	zoi	zoi
-453430	965	zok	zok
-453437	967	zor	zo
-453440	968	zou	zou
-453444	969	zoy	zoi
-454028	984	zui	zeoi
-454030	985	zuk	zuk
-454032	986	zum	zam
-454035	987	zup	zap
-454440	998	zyu	zyu
-21202028	2224	baai	baai
-21202030	2225	baak	baak
-21202033	2226	baan	baan
-21202039	2228	baat	baat
-21202040	2228	baau	baau
-21203326	2264	bang	bang
-21242433	2336	been	bin
-21243326	2364	beng	beng
-21283326	2464	bing	bing
-21343326	2664	bong	bong
-21403326	2864	bung	bung
-22202028	2224	caai	caai
-22202030	2225	caak	caak
-22202032	2226	caam	caam
-22202033	2226	caan	caan
-22202035	2227	caap	caap
-22202039	2228	caat	caat
-22202040	2228	caau	caau
-22203326	2264	cang	cang
-22243326	2364	ceng	ceng
-22243428	2364	ceoi	ceoi
-22243430	2365	ceok	coek
-22243433	2366	ceon	ceon
-22243439	2368	ceot	ceot
-22243444	2369	ceoy	ceoi
-22244028	2384	ceui	ceoi
-22244030	2385	ceuk	coek
-22244033	2386	ceun	ceon
-22244039	2388	ceut	ceot
-22244044	2389	ceuy	ceoi
-22272020	2422	chaa	caa
-22272028	2424	chai	cai
-22272030	2425	chak	cak
-22272032	2426	cham	cam
-22272033	2426	chan	can
-22272035	2427	chap	cap
-22272037	2427	char	caa
-22272039	2428	chat	cat
-22272040	2428	chau	cau
-22272424	2433	chee	ci
-22272430	2435	chek	cek
-22272830	2445	chik	cik
-22272832	2446	chim	cim
-22272833	2446	chin	cin
-22272835	2447	chip	cip
-22272839	2448	chit	cit
-22272840	2448	chiu	ciu
-22273428	2464	choi	coi
-22273430	2465	chok	cok
-22273437	2467	chor	co
-22273440	2468	chou	cou
-22273444	2469	choy	coi
-22274024	2483	chue	cyu
-22274028	2484	chui	ceoi
-22274030	2485	chuk	cuk
-22274032	2486	chum	cam
-22274035	2487	chup	cap
-22274440	2498	chyu	cyu
-22283326	2464	cing	cing
-22342428	2634	coei	ceoi
-22342430	2635	coek	coek
-22342433	2636	coen	ceon
-22342439	2638	coet	ceot
-22342444	2639	coey	ceoi
-22343326	2664	cong	cong
-22402433	2836	cuen	cyun
-22402439	2838	cuet	cyut
-22403326	2864	cung	cung
-22444033	2986	cyun	cyun
-22444039	2988	cyut	cyut
-23202028	3224	daai	daai
-23202032	3226	daam	daam
-23202033	3226	daan	daan
-23202035	3227	daap	daap
-23202039	3228	daat	daat
-23203326	3264	dang	dang
-23243326	3364	deng	deng
-23243428	3364	deoi	deoi
-23243430	3365	deok	doek
-23243433	3366	deon	deon
-23243439	3368	deot	deot
-23243444	3369	deoy	deoi
-23244028	3384	deui	deoi
-23244030	3385	deuk	doek
-23244033	3386	deun	deon
-23244039	3388	deut	deot
-23244044	3389	deuy	deoi
-23283326	3464	ding	ding
-23342428	3634	doei	deoi
-23342430	3635	doek	doek
-23342433	3636	doen	deon
-23342439	3638	doet	deot
-23342444	3639	doey	deoi
-23343326	3664	dong	dong
-23402433	3836	duen	dyun
-23402439	3838	duet	dyut
-23403326	3864	dung	dung
-23444033	3986	dyun	dyun
-23444039	3988	dyut	dyut
-25202028	3224	faai	faai
-25202033	3226	faan	faan
-25202039	3228	faat	faat
-25343326	3664	fong	fong
-25403326	3864	fung	fung
-26202028	4224	gaai	gaai
-26202030	4225	gaak	gaak
-26202032	4226	gaam	gaam
-26202033	4226	gaan	gaan
-26202035	4227	gaap	gaap
-26202039	4228	gaat	gaat
-26202040	4228	gaau	gaau
-26203326	4264	gang	gang
-26243326	4364	geng	geng
-26243428	4364	geoi	geoi
-26243430	4365	geok	goek
-26243444	4369	geoy	geoi
-26244028	4384	geui	geoi
-26244030	4385	geuk	goek
-26244044	4389	geuy	geoi
-26283326	4464	ging	ging
-26342428	4634	goei	geoi
-26342430	4635	goek	goek
-26342444	4639	goey	geoi
-26343326	4664	gong	gong
-26402433	4836	guen	gyun
-26402439	4838	guet	gyut
-26403326	4864	gung	gung
-26422020	4922	gwaa	gwaa
-26422028	4924	gwai	gwai
-26422033	4926	gwan	gwan
-26422039	4928	gwat	gwat
-26422830	4945	gwik	gwik
-26423430	4965	gwok	gwok
-26423437	4967	gwor	gwo
-26424028	4984	gwui	gui
-26424033	4986	gwun	gun
-26444033	4986	gyun	gyun
-26444039	4988	gyut	gyut
-27202028	4224	haai	haai
-27202030	4225	haak	haak
-27202032	4226	haam	haam
-27202033	4226	haan	haan
-27202035	4227	haap	haap
-27202040	4228	haau	haau
-27203326	4264	hang	hang
-27243326	4364	heng	heng
-27243428	4364	heoi	heoi
-27243444	4369	heoy	heoi
-27244028	4384	heui	heoi
-27244044	4389	heuy	heoi
-27283326	4464	hing	hing
-27342428	4634	hoei	heoi
-27342444	4639	hoey	heoi
-27343326	4664	hong	hong
-27402433	4836	huen	hyun
-27402439	4838	huet	hyut
-27403326	4864	hung	hung
-27444033	4986	hyun	hyun
-27444039	4988	hyut	hyut
-29202030	5225	jaak	jaak
-29243428	5364	jeoi	jeoi
-29243430	5365	jeok	joek
-29243433	5366	jeon	jeon
-29243444	5369	jeoy	jeoi
-29244028	5384	jeui	jeoi
-29244030	5385	jeuk	joek
-29244033	5386	jeun	jeon
-29244044	5389	jeuy	jeoi
-29283326	5464	jing	jing
-29342428	5634	joei	jeoi
-29342430	5635	joek	joek
-29342433	5636	joen	jeon
-29342444	5639	joey	jeoi
-29403326	5864	jung	jung
-29444033	5986	jyun	jyun
-29444039	5988	jyut	jyut
-30202028	5224	kaai	kaai
-30202040	5228	kaau	kaau
-30203326	5264	kang	kang
-30243428	5364	keoi	keoi
-30243430	5365	keok	koek
-30243444	5369	keoy	keoi
-30244028	5384	keui	keoi
-30244030	5385	keuk	koek
-30244044	5389	keuy	keoi
-30283326	5464	king	king
-30342428	5634	koei	keoi
-30342430	5635	koek	koek
-30342444	5639	koey	keoi
-30343326	5664	kong	kong
-30402433	5836	kuen	kyun
-30402439	5838	kuet	kyut
-30403326	5864	kung	kung
-30422020	5922	kwaa	kwaa
-30422028	5924	kwai	kwai
-30422033	5926	kwan	kwan
-30422830	5945	kwik	kwik
-30423430	5965	kwok	kwok
-30424028	5984	kwui	kui
-30424039	5988	kwut	kut
-30444033	5986	kyun	kyun
-30444039	5988	kyut	kyut
-31202028	5224	laai	laai
-31202030	5225	laak	laak
-31202032	5226	laam	laam
-31202033	5226	laan	laan
-31202035	5227	laap	laap
-31202039	5228	laat	laat
-31202040	5228	laau	laau
-31243326	5364	leng	leng
-31243428	5364	leoi	leoi
-31243430	5365	leok	loek
-31243433	5366	leon	leon
-31243439	5368	leot	leot
-31243444	5369	leoy	leoi
-31244028	5384	leui	leoi
-31244030	5385	leuk	loek
-31244033	5386	leun	leon
-31244039	5388	leut	leot
-31244044	5389	leuy	leoi
-31283326	5464	ling	ling
-31342428	5634	loei	leoi
-31342430	5635	loek	loek
-31342433	5636	loen	leon
-31342439	5638	loet	leot
-31342444	5639	loey	leoi
-31343326	5664	long	long
-31402433	5836	luen	lyun
-31402439	5838	luet	lyut
-31403326	5864	lung	lung
-31444033	5986	lyun	lyun
-31444039	5988	lyut	lyut
-32202028	6224	maai	maai
-32202030	6225	maak	maak
-32202033	6226	maan	maan
-32202039	6228	maat	maat
-32202040	6228	maau	maau
-32203326	6264	mang	mang
-32243326	6364	meng	meng
-32283326	6464	ming	ming
-32343326	6664	mong	mong
-32403326	6864	mung	mung
-33202028	6224	naai	naai
-33202032	6226	naam	naam
-33202033	6226	naan	naan
-33202035	6227	naap	naap
-33202039	6228	naat	naat
-33202040	6228	naau	naau
-33203326	6264	nang	nang
-33243428	6364	neoi	neoi
-33243439	6368	neot	neot
-33243444	6369	neoy	neoi
-33244028	6384	neui	neoi
-33244039	6388	neut	neot
-33244044	6389	neuy	neoi
-33262020	6422	ngaa	ngaa
-33262028	6424	ngai	ngai
-33262030	6425	ngak	ngak
-33262032	6426	ngam	ngam
-33262033	6426	ngan	ngan
-33262035	6427	ngap	ngap
-33262039	6428	ngat	ngat
-33262040	6428	ngau	ngau
-33263428	6464	ngoi	ngoi
-33263430	6465	ngok	ngok
-33263433	6466	ngon	ngon
-33263437	6467	ngor	ngo
-33263440	6468	ngou	ngou
-33264032	6486	ngum	ngam
-33264035	6487	ngup	ngap
-33283326	6464	ning	ning
-33342428	6634	noei	neoi
-33342439	6638	noet	neot
-33342444	6639	noey	neoi
-33343326	6664	nong	nong
-33402433	6836	nuen	nyun
-33403326	6864	nung	nung
-33444033	6986	nyun	nyun
-35202028	7224	paai	paai
-35202030	7225	paak	paak
-35202033	7226	paan	paan
-35202040	7228	paau	paau
-35203326	7264	pang	pang
-35243326	7364	peng	peng
-35283326	7464	ping	ping
-35343326	7664	pong	pong
-35403326	7864	pung	pung
-38202028	7224	saai	saai
-38202030	7225	saak	saak
-38202032	7226	saam	saam
-38202033	7226	saan	saan
-38202035	7227	saap	saap
-38202039	7228	saat	saat
-38202040	7228	saau	saau
-38203326	7264	sang	sang
-38243326	7364	seng	seng
-38243428	7364	seoi	seoi
-38243430	7365	seok	soek
-38243433	7366	seon	seon
-38243439	7368	seot	seot
-38243444	7369	seoy	seoi
-38244028	7384	seui	seoi
-38244030	7385	seuk	soek
-38244033	7386	seun	seon
-38244039	7388	seut	seot
-38244044	7389	seuy	seoi
-38272020	7422	shaa	saa
-38272028	7424	shai	sai
-38272030	7425	shak	sak
-38272032	7426	sham	sam
-38272033	7426	shan	san
-38272035	7427	shap	sap
-38272037	7427	shar	saa
-38272039	7428	shat	sat
-38272040	7428	shau	sau
-38272044	7429	shay	sei
-38272424	7433	shee	si
-38272428	7434	shei	sei
-38272430	7435	shek	sek
-38272830	7445	shik	sik
-38272832	7446	shim	sim
-38272833	7446	shin	sin
-38272835	7447	ship	sip
-38272839	7448	shit	sit
-38272840	7448	shiu	siu
-38273424	7463	shoe	soe
-38273428	7464	shoi	soi
-38273430	7465	shok	sok
-38273437	7467	shor	so
-38273440	7468	shou	sou
-38273444	7469	shoy	soi
-38274024	7483	shue	syu
-38274028	7484	shui	seoi
-38274030	7485	shuk	suk
-38274032	7486	shum	sam
-38274035	7487	shup	sap
-38274440	7498	shyu	syu
-38283326	7464	sing	sing
-38342428	7634	soei	seoi
-38342430	7635	soek	soek
-38342433	7636	soen	seon
-38342439	7638	soet	seot
-38342444	7639	soey	seoi
-38343326	7664	song	song
-38402433	7836	suen	syun
-38402439	7838	suet	syut
-38403326	7864	sung	sung
-38444033	7986	syun	syun
-38444039	7988	syut	syut
-39202028	8224	taai	taai
-39202032	8226	taam	taam
-39202033	8226	taan	taan
-39202035	8227	taap	taap
-39202039	8228	taat	taat
-39203326	8264	tang	tang
-39242433	8336	teen	tin
-39243326	8364	teng	teng
-39243428	8364	teoi	teoi
-39243433	8366	teon	teon
-39243439	8368	teot	teot
-39243444	8369	teoy	teoi
-39244028	8384	teui	teoi
-39244033	8386	teun	teon
-39244039	8388	teut	teot
-39244044	8389	teuy	teoi
-39283326	8464	ting	ting
-39342428	8634	toei	teoi
-39342433	8636	toen	teon
-39342439	8638	toet	teot
-39342444	8639	toey	teoi
-39343326	8664	tong	tong
-39402433	8836	tuen	tyun
-39402439	8838	tuet	tyut
-39403326	8864	tung	tung
-39444033	8986	tyun	tyun
-39444039	8988	tyut	tyut
-42202028	9224	waai	waai
-42202030	9225	waak	waak
-42202033	9226	waan	waan
-42202039	9228	waat	waat
-42203326	9264	wang	wang
-42283326	9464	wing	wing
-42343326	9664	wong	wong
-44202030	9225	yaak	jaak
-44243428	9364	yeoi	jeoi
-44243430	9365	yeok	joek
-44243433	9366	yeon	jeon
-44243444	9369	yeoy	jeoi
-44244030	9385	yeuk	joek
-44244044	9389	yeuy	jeoi
-44283326	9464	ying	jing
-44342428	9634	yoei	jeoi
-44342430	9635	yoek	joek
-44342433	9636	yoen	jeon
-44342444	9639	yoey	jeoi
-44343326	9664	yong	jung
-44402433	9836	yuen	jyun
-44402439	9838	yuet	jyut
-44403326	9864	yung	jung
-45202028	9224	zaai	zaai
-45202030	9225	zaak	zaak
-45202032	9226	zaam	zaam
-45202033	9226	zaan	zaan
-45202035	9227	zaap	zaap
-45202039	9228	zaat	zaat
-45202040	9228	zaau	zaau
-45203326	9264	zang	zang
-45243326	9364	zeng	zeng
-45243428	9364	zeoi	zeoi
-45243430	9365	zeok	zoek
-45243433	9366	zeon	zeon
-45243439	9368	zeot	zeot
-45243444	9369	zeoy	zeoi
-45244028	9384	zeui	zeoi
-45244030	9385	zeuk	zoek
-45244033	9386	zeun	zeon
-45244039	9388	zeut	zeot
-45244044	9389	zeuy	zeoi
-45272020	9422	zhaa	zaa
-45272028	9424	zhai	zai
-45272030	9425	zhak	zak
-45272032	9426	zham	zam
-45272033	9426	zhan	zan
-45272035	9427	zhap	zap
-45272037	9427	zhar	zaa
-45272039	9428	zhat	zat
-45272040	9428	zhau	zau
-45272424	9433	zhee	zi
-45272430	9435	zhek	zek
-45272830	9445	zhik	zik
-45272832	9446	zhim	zim
-45272833	9446	zhin	zin
-45272835	9447	zhip	zip
-45272839	9448	zhit	zit
-45272840	9448	zhiu	ziu
-45273428	9464	zhoi	zoi
-45273430	9465	zhok	zok
-45273437	9467	zhor	zo
-45273440	9468	zhou	zou
-45273444	9469	zhoy	zoi
-45274024	9483	zhue	zyu
-45274028	9484	zhui	zeoi
-45274030	9485	zhuk	zuk
-45274032	9486	zhum	zam
-45274035	9487	zhup	zap
-45274440	9498	zhyu	zyu
-45283326	9464	zing	zing
-45342428	9634	zoei	zeoi
-45342430	9635	zoek	zoek
-45342433	9636	zoen	zeon
-45342439	9638	zoet	zeot
-45342444	9639	zoey	zeoi
-45343326	9664	zong	zong
-45402433	9836	zuen	zyun
-45402439	9838	zuet	zyut
-45403326	9864	zung	zung
-45444033	9986	zyun	zyun
-45444039	9988	zyut	zyut
-2120203326	22264	baang	baang
-2220203326	22264	caang	caang
-2224343326	23664	ceong	coeng
-2224403326	23864	ceung	coeng
-2227202028	24224	chaai	caai
-2227202030	24225	chaak	caak
-2227202032	24226	chaam	caam
-2227202033	24226	chaan	caan
-2227202035	24227	chaap	caap
-2227202039	24228	chaat	caat
-2227202040	24228	chaau	caau
-2227203326	24264	chang	cang
-2227243326	24364	cheng	ceng
-2227243428	24364	cheoi	ceoi
-2227243430	24365	cheok	coek
-2227243433	24366	cheon	ceon
-2227243439	24368	cheot	ceot
-2227243444	24369	cheoy	ceoi
-2227244028	24384	cheui	ceoi
-2227244030	24385	cheuk	coek
-2227244033	24386	cheun	ceon
-2227244039	24388	cheut	ceot
-2227244044	24389	cheuy	ceoi
-2227283326	24464	ching	cing
-2227342428	24634	choei	ceoi
-2227342430	24635	choek	coek
-2227342433	24636	choen	ceon
-2227342439	24638	choet	ceot
-2227342444	24639	choey	ceoi
-2227343326	24664	chong	cong
-2227402433	24836	chuen	cyun
-2227402439	24838	chuet	cyut
-2227403326	24864	chung	cung
-2227444033	24986	chyun	cyun
-2227444039	24988	chyut	cyut
-2234243326	26364	coeng	coeng
-2324343326	33664	deong	doeng
-2324403326	33864	deung	doeng
-2334243326	36364	doeng	doeng
-2620203326	42264	gaang	gaang
-2624343326	43664	geong	goeng
-2624403326	43864	geung	goeng
-2634243326	46364	goeng	goeng
-2642202028	49224	gwaai	gwaai
-2642202033	49226	gwaan	gwaan
-2642202039	49228	gwaat	gwaat
-2642203326	49264	gwang	gwang
-2642283326	49464	gwing	gwing
-2642343326	49664	gwong	gwong
-2720203326	42264	haang	haang
-2724343326	43664	heong	hoeng
-2724403326	43864	heung	hoeng
-2734243326	46364	hoeng	hoeng
-2924343326	53664	jeong	joeng
-2924403326	53864	jeung	joeng
-2934243326	56364	joeng	joeng
-3024343326	53664	keong	koeng
-3024403326	53864	keung	koeng
-3034243326	56364	koeng	koeng
-3042343326	59664	kwong	kwong
-3120203326	52264	laang	laang
-3124343326	53664	leong	loeng
-3124403326	53864	leung	loeng
-3134243326	56364	loeng	loeng
-3220203326	62264	maang	maang
-3324343326	63664	neong	noeng
-3324403326	63864	neung	noeng
-3326202028	64224	ngaai	ngaai
-3326202030	64225	ngaak	ngaak
-3326202032	64226	ngaam	ngaam
-3326202033	64226	ngaan	ngaan
-3326202039	64228	ngaat	ngaat
-3326202040	64228	ngaau	ngaau
-3326343326	64664	ngong	ngong
-3334243326	66364	noeng	noeng
-3520203326	72264	paang	paang
-3820203326	72264	saang	saang
-3824343326	73664	seong	soeng
-3824403326	73864	seung	soeng
-3827202028	74224	shaai	saai
-3827202030	74225	shaak	saak
-3827202032	74226	shaam	saam
-3827202033	74226	shaan	saan
-3827202035	74227	shaap	saap
-3827202039	74228	shaat	saat
-3827202040	74228	shaau	saau
-3827203326	74264	shang	sang
-3827243326	74364	sheng	seng
-3827243428	74364	sheoi	seoi
-3827243430	74365	sheok	soek
-3827243433	74366	sheon	seon
-3827243439	74368	sheot	seot
-3827243444	74369	sheoy	seoi
-3827244028	74384	sheui	seoi
-3827244030	74385	sheuk	soek
-3827244033	74386	sheun	seon
-3827244039	74388	sheut	seot
-3827244044	74389	sheuy	seoi
-3827283326	74464	shing	sing
-3827342428	74634	shoei	seoi
-3827342430	74635	shoek	soek
-3827342433	74636	shoen	seon
-3827342439	74638	shoet	seot
-3827342444	74639	shoey	seoi
-3827343326	74664	shong	song
-3827402433	74836	shuen	syun
-3827402439	74838	shuet	syut
-3827403326	74864	shung	sung
-3827444033	74986	shyun	syun
-3827444039	74988	shyut	syut
-3834243326	76364	soeng	soeng
-4220203326	92264	waang	waang
-4424343326	93664	yeong	joeng
-4424403326	93864	yeung	joeng
-4434243326	96364	yoeng	joeng
-4520203326	92264	zaang	zaang
-4524343326	93664	zeong	zoeng
-4524403326	93864	zeung	zoeng
-4527202028	94224	zhaai	zaai
-4527202030	94225	zhaak	zaak
-4527202032	94226	zhaam	zaam
-4527202033	94226	zhaan	zaan
-4527202035	94227	zhaap	zaap
-4527202039	94228	zhaat	zaat
-4527202040	94228	zhaau	zaau
-4527203326	94264	zhang	zang
-4527243326	94364	zheng	zeng
-4527243428	94364	zheoi	zeoi
-4527243430	94365	zheok	zoek
-4527243433	94366	zheon	zeon
-4527243439	94368	zheot	zeot
-4527243444	94369	zheoy	zeoi
-4527244028	94384	zheui	zeoi
-4527244030	94385	zheuk	zoek
-4527244033	94386	zheun	zeon
-4527244039	94388	zheut	zeot
-4527244044	94389	zheuy	zeoi
-4527283326	94464	zhing	zing
-4527342428	94634	zhoei	zeoi
-4527342430	94635	zhoek	zoek
-4527342433	94636	zhoen	zeon
-4527342439	94638	zhoet	zeot
-4527342444	94639	zhoey	zeoi
-4527343326	94664	zhong	zong
-4527402433	94836	zhuen	zyun
-4527402439	94838	zhuet	zyut
-4527403326	94864	zhung	zung
-4527444033	94986	zhyun	zyun
-4527444039	94988	zhyut	zyut
-4534243326	96364	zoeng	zoeng
-222720203326	242264	chaang	caang
-222724343326	243664	cheong	coeng
-222724403326	243864	cheung	coeng
-222734243326	246364	choeng	coeng
-264220203326	492264	gwaang	gwaang
-304220203326	592264	kwaang	kwaang
-332620203326	642264	ngaang	ngaang
-382720203326	742264	shaang	saang
-382724343326	743664	sheong	soeng
-382724403326	743864	sheung	soeng
-382734243326	746364	shoeng	soeng
-452720203326	942264	zhaang	zaang
-452724343326	943664	zheong	zoeng
-452724403326	943864	zheung	zoeng
-452734243326	946364	zhoeng	zoeng
+a	aa
+m	m
+o	o
+aa	aa
+ai	ai
+ak	ak
+am	am
+ap	ap
+ar	aa
+au	au
+ba	baa
+bo	bo
+ca	caa
+ce	ce
+ci	ci
+co	co
+da	daa
+de	de
+di	di
+do	do
+fa	faa
+fo	fo
+fu	fu
+ga	gaa
+ge	ge
+go	go
+gu	gu
+ha	haa
+ho	ho
+ja	jaa
+je	je
+ji	ji
+ka	kaa
+ke	ke
+ku	ku
+la	laa
+le	le
+lo	lo
+ma	maa
+me	me
+mo	mo
+na	naa
+ne	ne
+ng	ng
+ni	ni
+no	no
+oi	oi
+ok	ok
+om	am
+on	on
+or	o
+ou	ou
+pa	paa
+po	po
+sa	saa
+se	se
+si	si
+so	so
+ta	taa
+to	to
+uk	uk
+um	am
+wa	waa
+we	we
+wo	wo
+wu	wu
+ya	jaa
+ye	je
+yi	ji
+yu	jyu
+za	zaa
+ze	ze
+zi	zi
+zo	zo
+aai	aai
+aak	aak
+aan	aan
+aap	aap
+aat	aat
+aau	aau
+ang	ang
+baa	baa
+bai	bai
+bak	bak
+ban	ban
+bar	baa
+bat	bat
+bau	bau
+bay	bei
+bei	bei
+bik	bik
+bin	bin
+bit	bit
+biu	biu
+bok	bok
+bor	bo
+bou	bou
+bui	bui
+buk	buk
+bun	bun
+but	but
+caa	caa
+cai	cai
+cak	cak
+cam	cam
+can	can
+cap	cap
+car	caa
+cat	cat
+cau	cau
+cee	ci
+cek	cek
+cha	caa
+che	ce
+chi	ci
+cho	co
+chu	cyu
+cik	cik
+cim	cim
+cin	cin
+cip	cip
+cit	cit
+ciu	ciu
+coi	coi
+cok	cok
+cor	co
+cou	cou
+coy	coi
+cui	ceoi
+cuk	cuk
+cum	cam
+cup	cap
+cyu	cyu
+daa	daa
+dai	dai
+dak	dak
+dam	dam
+dan	dan
+dap	dap
+dar	daa
+dat	dat
+dau	dau
+day	dei
+dei	dei
+dik	dik
+dim	dim
+din	din
+dip	dip
+dit	dit
+diu	diu
+doe	doe
+doi	doi
+dok	dok
+dor	do
+dou	dou
+doy	doi
+dui	deoi
+duk	duk
+dum	dam
+dup	dap
+faa	faa
+fai	fai
+fan	fan
+far	faa
+fat	fat
+fau	fau
+fei	fei
+fok	fok
+for	fo
+fui	fui
+fuk	fuk
+fun	fun
+fut	fut
+gaa	gaa
+gai	gai
+gam	gam
+gan	gan
+gap	gap
+gar	gaa
+gat	gat
+gau	gau
+gay	gei
+gei	gei
+gik	gik
+gim	gim
+gin	gin
+gip	gip
+git	git
+giu	giu
+goe	goe
+goi	goi
+gok	gok
+gom	gam
+gon	gon
+gop	gap
+gor	go
+got	got
+gou	gou
+goy	goi
+gui	gui
+guk	guk
+gum	gam
+gun	gun
+gup	gap
+gwa	gwaa
+gwo	gwo
+gwu	gu
+haa	haa
+hai	hai
+hak	hak
+ham	ham
+han	han
+hap	hap
+har	haa
+hat	hat
+hau	hau
+hei	hei
+hek	hek
+hey	hei
+hik	hik
+him	him
+hin	hin
+hip	hip
+hit	hit
+hiu	hiu
+hoe	hoe
+hoi	hoi
+hok	hok
+hom	ham
+hon	hon
+hop	hap
+hor	ho
+hot	hot
+hou	hou
+hoy	hoi
+hui	heoi
+huk	huk
+hum	ham
+hup	hap
+jaa	jaa
+jai	jai
+jam	jam
+jan	jan
+jap	jap
+jat	jat
+jau	jau
+jik	jik
+jim	jim
+jin	jin
+jip	jip
+jit	jit
+jiu	jiu
+juk	juk
+jum	jam
+jup	jap
+jyu	jyu
+kaa	kaa
+kai	kai
+kam	kam
+kan	kan
+kap	kap
+kar	kaa
+kat	kat
+kau	kau
+kay	kei
+kei	kei
+kek	kek
+kik	kik
+kim	kim
+kin	kin
+kit	kit
+kiu	kiu
+koi	koi
+kok	kok
+koy	koi
+kui	kui
+kuk	kuk
+kum	kam
+kup	kap
+kut	kut
+kwa	kwaa
+kwu	ku
+laa	laa
+lai	lai
+lak	lak
+lam	lam
+lan	lan
+lap	lap
+lar	laa
+lat	lat
+lau	lau
+lay	lei
+lei	lei
+lek	lek
+lik	lik
+lim	lim
+lin	lin
+lip	lip
+lit	lit
+liu	liu
+loe	loe
+loi	loi
+lok	lok
+lor	lo
+lou	lou
+loy	loi
+lui	leoi
+luk	luk
+lum	lam
+lup	lap
+maa	maa
+mai	mai
+mak	mak
+man	man
+mar	maa
+mat	mat
+mau	mau
+may	mei
+mei	mei
+mik	mik
+min	min
+mit	mit
+miu	miu
+mok	mok
+mor	mo
+mou	mou
+mui	mui
+muk	muk
+mun	mun
+mut	mut
+naa	naa
+nai	nai
+nam	nam
+nan	nan
+nap	nap
+nar	naa
+nat	nat
+nau	nau
+nay	nei
+nei	nei
+nga	ngaa
+ngo	ngo
+nik	nik
+nim	nim
+nin	nin
+nip	nip
+nit	nit
+niu	niu
+noi	noi
+nok	nok
+nor	no
+nou	nou
+noy	noi
+nui	neoi
+nuk	nuk
+num	nam
+nup	nap
+ong	ong
+paa	paa
+pai	pai
+pan	pan
+par	paa
+pat	pat
+pau	pau
+pay	pei
+pei	pei
+pek	pek
+pik	pik
+pin	pin
+pit	pit
+piu	piu
+pok	pok
+por	po
+pou	pou
+pui	pui
+puk	puk
+pun	pun
+put	put
+saa	saa
+sai	sai
+sak	sak
+sam	sam
+san	san
+sap	sap
+sar	saa
+sat	sat
+sau	sau
+say	sei
+see	si
+sei	sei
+sek	sek
+sha	saa
+she	se
+shi	si
+sho	so
+shu	syu
+sik	sik
+sim	sim
+sin	sin
+sip	sip
+sit	sit
+siu	siu
+soe	soe
+soi	soi
+sok	sok
+sor	so
+sou	sou
+soy	soi
+sui	seoi
+suk	suk
+sum	sam
+sup	sap
+syu	syu
+taa	taa
+tai	tai
+tam	tam
+tan	tan
+tar	taa
+tau	tau
+tik	tik
+tim	tim
+tin	tin
+tip	tip
+tit	tit
+tiu	tiu
+toe	toe
+toi	toi
+tok	tok
+tor	to
+tou	tou
+toy	toi
+tui	teoi
+tuk	tuk
+tum	tam
+ung	ung
+waa	waa
+wai	wai
+wan	wan
+war	waa
+wat	wat
+wik	wik
+wok	wok
+wor	wo
+wui	wui
+wun	wun
+wut	wut
+yaa	jaa
+yai	jai
+yam	jam
+yan	jan
+yap	jap
+yat	jat
+yau	jau
+yik	jik
+yim	jim
+yin	jin
+yip	jip
+yit	jit
+yiu	jiu
+yom	jam
+yop	jap
+yui	jeoi
+yuk	juk
+yum	jam
+yun	jyun
+yup	jap
+yut	jyut
+zaa	zaa
+zai	zai
+zak	zak
+zam	zam
+zan	zan
+zap	zap
+zar	zaa
+zat	zat
+zau	zau
+zek	zek
+zha	zaa
+zhe	ze
+zhi	zi
+zho	zo
+zhu	zyu
+zik	zik
+zim	zim
+zin	zin
+zip	zip
+zit	zit
+ziu	ziu
+zoi	zoi
+zok	zok
+zor	zo
+zou	zou
+zoy	zoi
+zui	zeoi
+zuk	zuk
+zum	zam
+zup	zap
+zyu	zyu
+baai	baai
+baak	baak
+baan	baan
+baat	baat
+baau	baau
+bang	bang
+been	bin
+beng	beng
+bing	bing
+bong	bong
+bung	bung
+caai	caai
+caak	caak
+caam	caam
+caan	caan
+caap	caap
+caat	caat
+caau	caau
+cang	cang
+ceng	ceng
+ceoi	ceoi
+ceok	coek
+ceon	ceon
+ceot	ceot
+ceoy	ceoi
+ceui	ceoi
+ceuk	coek
+ceun	ceon
+ceut	ceot
+ceuy	ceoi
+chaa	caa
+chai	cai
+chak	cak
+cham	cam
+chan	can
+chap	cap
+char	caa
+chat	cat
+chau	cau
+chee	ci
+chek	cek
+chik	cik
+chim	cim
+chin	cin
+chip	cip
+chit	cit
+chiu	ciu
+choi	coi
+chok	cok
+chor	co
+chou	cou
+choy	coi
+chue	cyu
+chui	ceoi
+chuk	cuk
+chum	cam
+chup	cap
+chyu	cyu
+cing	cing
+coei	ceoi
+coek	coek
+coen	ceon
+coet	ceot
+coey	ceoi
+cong	cong
+cuen	cyun
+cuet	cyut
+cung	cung
+cyun	cyun
+cyut	cyut
+daai	daai
+daam	daam
+daan	daan
+daap	daap
+daat	daat
+dang	dang
+deng	deng
+deoi	deoi
+deok	doek
+deon	deon
+deot	deot
+deoy	deoi
+deui	deoi
+deuk	doek
+deun	deon
+deut	deot
+deuy	deoi
+ding	ding
+doei	deoi
+doek	doek
+doen	deon
+doet	deot
+doey	deoi
+dong	dong
+duen	dyun
+duet	dyut
+dung	dung
+dyun	dyun
+dyut	dyut
+faai	faai
+faan	faan
+faat	faat
+fong	fong
+fung	fung
+gaai	gaai
+gaak	gaak
+gaam	gaam
+gaan	gaan
+gaap	gaap
+gaat	gaat
+gaau	gaau
+gang	gang
+geng	geng
+geoi	geoi
+geok	goek
+geoy	geoi
+geui	geoi
+geuk	goek
+geuy	geoi
+ging	ging
+goei	geoi
+goek	goek
+goey	geoi
+gong	gong
+guen	gyun
+guet	gyut
+gung	gung
+gwaa	gwaa
+gwai	gwai
+gwan	gwan
+gwat	gwat
+gwik	gwik
+gwok	gwok
+gwor	gwo
+gwui	gui
+gwun	gun
+gyun	gyun
+gyut	gyut
+haai	haai
+haak	haak
+haam	haam
+haan	haan
+haap	haap
+haau	haau
+hang	hang
+heng	heng
+heoi	heoi
+heoy	heoi
+heui	heoi
+heuy	heoi
+hing	hing
+hoei	heoi
+hoey	heoi
+hong	hong
+huen	hyun
+huet	hyut
+hung	hung
+hyun	hyun
+hyut	hyut
+jaak	jaak
+jeoi	jeoi
+jeok	joek
+jeon	jeon
+jeoy	jeoi
+jeui	jeoi
+jeuk	joek
+jeun	jeon
+jeuy	jeoi
+jing	jing
+joei	jeoi
+joek	joek
+joen	jeon
+joey	jeoi
+jung	jung
+jyun	jyun
+jyut	jyut
+kaai	kaai
+kaau	kaau
+kang	kang
+keoi	keoi
+keok	koek
+keoy	keoi
+keui	keoi
+keuk	koek
+keuy	keoi
+king	king
+koei	keoi
+koek	koek
+koey	keoi
+kong	kong
+kuen	kyun
+kuet	kyut
+kung	kung
+kwaa	kwaa
+kwai	kwai
+kwan	kwan
+kwik	kwik
+kwok	kwok
+kwui	kui
+kwut	kut
+kyun	kyun
+kyut	kyut
+laai	laai
+laak	laak
+laam	laam
+laan	laan
+laap	laap
+laat	laat
+laau	laau
+leng	leng
+leoi	leoi
+leok	loek
+leon	leon
+leot	leot
+leoy	leoi
+leui	leoi
+leuk	loek
+leun	leon
+leut	leot
+leuy	leoi
+ling	ling
+loei	leoi
+loek	loek
+loen	leon
+loet	leot
+loey	leoi
+long	long
+luen	lyun
+luet	lyut
+lung	lung
+lyun	lyun
+lyut	lyut
+maai	maai
+maak	maak
+maan	maan
+maat	maat
+maau	maau
+mang	mang
+mean	min
+meen	min
+meng	meng
+ming	ming
+mong	mong
+mung	mung
+naai	naai
+naam	naam
+naan	naan
+naap	naap
+naat	naat
+naau	naau
+nang	nang
+neoi	neoi
+neot	neot
+neoy	neoi
+neui	neoi
+neut	neot
+neuy	neoi
+ngaa	ngaa
+ngai	ngai
+ngak	ngak
+ngam	ngam
+ngan	ngan
+ngap	ngap
+ngat	ngat
+ngau	ngau
+ngoi	ngoi
+ngok	ngok
+ngon	ngon
+ngor	ngo
+ngou	ngou
+ngum	ngam
+ngup	ngap
+ning	ning
+noei	neoi
+noet	neot
+noey	neoi
+nong	nong
+nuen	nyun
+nung	nung
+nyun	nyun
+paai	paai
+paak	paak
+paan	paan
+paau	paau
+pang	pang
+peng	peng
+ping	ping
+pong	pong
+pung	pung
+saai	saai
+saak	saak
+saam	saam
+saan	saan
+saap	saap
+saat	saat
+saau	saau
+sang	sang
+seen	sin
+seng	seng
+seoi	seoi
+seok	soek
+seon	seon
+seot	seot
+seoy	seoi
+seui	seoi
+seuk	soek
+seun	seon
+seut	seot
+seuy	seoi
+shaa	saa
+shai	sai
+shak	sak
+sham	sam
+shan	san
+shap	sap
+shar	saa
+shat	sat
+shau	sau
+shay	sei
+shee	si
+shei	sei
+shek	sek
+shik	sik
+shim	sim
+shin	sin
+ship	sip
+shit	sit
+shiu	siu
+shoe	soe
+shoi	soi
+shok	sok
+shor	so
+shou	sou
+shoy	soi
+shue	syu
+shui	seoi
+shuk	suk
+shum	sam
+shup	sap
+shyu	syu
+sing	sing
+soei	seoi
+soek	soek
+soen	seon
+soet	seot
+soey	seoi
+song	song
+suen	syun
+suet	syut
+sung	sung
+syun	syun
+syut	syut
+taai	taai
+taam	taam
+taan	taan
+taap	taap
+taat	taat
+tang	tang
+teen	tin
+teng	teng
+teoi	teoi
+teon	teon
+teot	teot
+teoy	teoi
+teui	teoi
+teun	teon
+teut	teot
+teuy	teoi
+ting	ting
+toei	teoi
+toen	teon
+toet	teot
+toey	teoi
+tong	tong
+tuen	tyun
+tuet	tyut
+tung	tung
+tyun	tyun
+tyut	tyut
+waai	waai
+waak	waak
+waan	waan
+waat	waat
+wang	wang
+wing	wing
+wong	wong
+yaak	jaak
+yeoi	jeoi
+yeok	joek
+yeon	jeon
+yeoy	jeoi
+yeuk	joek
+yeuy	jeoi
+ying	jing
+yoei	jeoi
+yoek	joek
+yoen	jeon
+yoey	jeoi
+yong	jung
+yuen	jyun
+yuet	jyut
+yung	jung
+zaai	zaai
+zaak	zaak
+zaam	zaam
+zaan	zaan
+zaap	zaap
+zaat	zaat
+zaau	zaau
+zang	zang
+zeng	zeng
+zeoi	zeoi
+zeok	zoek
+zeon	zeon
+zeot	zeot
+zeoy	zeoi
+zeui	zeoi
+zeuk	zoek
+zeun	zeon
+zeut	zeot
+zeuy	zeoi
+zhaa	zaa
+zhai	zai
+zhak	zak
+zham	zam
+zhan	zan
+zhap	zap
+zhar	zaa
+zhat	zat
+zhau	zau
+zhek	zek
+zhik	zik
+zhim	zim
+zhin	zin
+zhip	zip
+zhit	zit
+zhiu	ziu
+zhoi	zoi
+zhok	zok
+zhor	zo
+zhou	zou
+zhoy	zoi
+zhue	zyu
+zhui	zeoi
+zhuk	zuk
+zhum	zam
+zhup	zap
+zhyu	zyu
+zing	zing
+zoei	zeoi
+zoek	zoek
+zoen	zeon
+zoet	zeot
+zoey	zeoi
+zong	zong
+zuen	zyun
+zuet	zyut
+zung	zung
+zyun	zyun
+zyut	zyut
+baang	baang
+caang	caang
+ceong	coeng
+ceung	coeng
+chaai	caai
+chaak	caak
+chaam	caam
+chaan	caan
+chaap	caap
+chaat	caat
+chaau	caau
+chang	cang
+cheng	ceng
+cheoi	ceoi
+cheok	coek
+cheon	ceon
+cheot	ceot
+cheoy	ceoi
+cheui	ceoi
+cheuk	coek
+cheun	ceon
+cheut	ceot
+cheuy	ceoi
+ching	cing
+choei	ceoi
+choek	coek
+choen	ceon
+choet	ceot
+choey	ceoi
+chong	cong
+chuen	cyun
+chuet	cyut
+chung	cung
+chyun	cyun
+chyut	cyut
+coeng	coeng
+deong	doeng
+deung	doeng
+doeng	doeng
+gaang	gaang
+geong	goeng
+geung	goeng
+goeng	goeng
+gwaai	gwaai
+gwaan	gwaan
+gwaat	gwaat
+gwang	gwang
+gwing	gwing
+gwong	gwong
+haang	haang
+heong	hoeng
+heung	hoeng
+hoeng	hoeng
+jeong	joeng
+jeung	joeng
+joeng	joeng
+keong	koeng
+keung	koeng
+koeng	koeng
+kwong	kwong
+laang	laang
+leong	loeng
+leung	loeng
+loeng	loeng
+maang	maang
+neong	noeng
+neung	noeng
+ngaai	ngaai
+ngaak	ngaak
+ngaam	ngaam
+ngaan	ngaan
+ngaat	ngaat
+ngaau	ngaau
+ngong	ngong
+noeng	noeng
+paang	paang
+saang	saang
+seong	soeng
+seung	soeng
+shaai	saai
+shaak	saak
+shaam	saam
+shaan	saan
+shaap	saap
+shaat	saat
+shaau	saau
+shang	sang
+sheen	sin
+sheng	seng
+sheoi	seoi
+sheok	soek
+sheon	seon
+sheot	seot
+sheoy	seoi
+sheui	seoi
+sheuk	soek
+sheun	seon
+sheut	seot
+sheuy	seoi
+shing	sing
+shoei	seoi
+shoek	soek
+shoen	seon
+shoet	seot
+shoey	seoi
+shong	song
+shuen	syun
+shuet	syut
+shung	sung
+shyun	syun
+shyut	syut
+soeng	soeng
+waang	waang
+yeong	joeng
+yeung	joeng
+yoeng	joeng
+zaang	zaang
+zeong	zoeng
+zeung	zoeng
+zhaai	zaai
+zhaak	zaak
+zhaam	zaam
+zhaan	zaan
+zhaap	zaap
+zhaat	zaat
+zhaau	zaau
+zhang	zang
+zheng	zeng
+zheoi	zeoi
+zheok	zoek
+zheon	zeon
+zheot	zeot
+zheoy	zeoi
+zheui	zeoi
+zheuk	zoek
+zheun	zeon
+zheut	zeot
+zheuy	zeoi
+zhing	zing
+zhoei	zeoi
+zhoek	zoek
+zhoen	zeon
+zhoet	zeot
+zhoey	zeoi
+zhong	zong
+zhuen	zyun
+zhuet	zyut
+zhung	zung
+zhyun	zyun
+zhyut	zyut
+zoeng	zoeng
+chaang	caang
+cheong	coeng
+cheung	coeng
+choeng	coeng
+gwaang	gwaang
+kwaang	kwaang
+ngaang	ngaang
+shaang	saang
+sheong	soeng
+sheung	soeng
+shoeng	soeng
+zhaang	zaang
+zheong	zoeng
+zheung	zoeng
+zhoeng	zoeng

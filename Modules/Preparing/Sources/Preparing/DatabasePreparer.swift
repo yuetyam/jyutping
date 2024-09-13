@@ -16,6 +16,8 @@ struct DatabasePreparer {
                 createStrokeTable()
                 createSymbolTable()
                 createTextMarkTable()
+                createSyllableTable()
+                createPinyinSyllableTable()
                 createIndies()
                 backupInMemoryDatabase()
                 sqlite3_close_v2(database)
@@ -60,7 +62,9 @@ struct DatabasePreparer {
                         "CREATE INDEX symbolshortcutindex ON symboltable(shortcut);",
                         "CREATE INDEX symbolpingindex ON symboltable(ping);",
 
-                        "CREATE INDEX markcodeindex ON marktable(code);"
+                        "CREATE INDEX markcodeindex ON marktable(code);",
+
+                        "CREATE INDEX syllabletenkeyindex ON syllabletable(tenkey);"
                 ]
                 for command in commands {
                         var statement: OpaquePointer? = nil
@@ -306,6 +310,60 @@ struct DatabasePreparer {
                 var insertStatement: OpaquePointer? = nil
                 defer { sqlite3_finalize(insertStatement) }
                 guard sqlite3_prepare_v2(database, insert, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+
+        private static func createSyllableTable() {
+                let createTable: String = "CREATE TABLE syllabletable(code INTEGER NOT NULL PRIMARY KEY, tenkey INTEGER NOT NULL, token TEXT NOT NULL, origin TEXT NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                guard let url = Bundle.module.url(forResource: "syllable", withExtension: "txt") else { return }
+                guard let content = try? String(contentsOf: url) else { return }
+                let sourceLines: [String] = content
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                        .components(separatedBy: .newlines)
+                        .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
+                        .filter({ !($0.isEmpty) })
+                let entries = sourceLines.compactMap { line -> String? in
+                        let parts = line.split(separator: "\t")
+                        guard parts.count == 2 else { return nil }
+                        let token = parts[0]
+                        let origin = parts[1]
+                        guard let code = token.charcode else { return nil }
+                        guard let tenkey = token.tenKeyCharcode else { return nil }
+                        return "(\(code), \(tenkey), '\(token)', '\(origin)')"
+                }
+                let values: String = entries.joined(separator: ", ")
+                let insertValues: String = "INSERT INTO syllabletable (code, tenkey, token, origin) VALUES \(values);"
+                var insertStatement: OpaquePointer? = nil
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
+                guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
+        }
+        private static func createPinyinSyllableTable() {
+                let createTable: String = "CREATE TABLE pinyinsyllabletable(code INTEGER NOT NULL PRIMARY KEY, syllable TEXT NOT NULL);"
+                var createStatement: OpaquePointer? = nil
+                guard sqlite3_prepare_v2(database, createTable, -1, &createStatement, nil) == SQLITE_OK else { sqlite3_finalize(createStatement); return }
+                guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
+                sqlite3_finalize(createStatement)
+                guard let url = Bundle.module.url(forResource: "pinyin-syllable", withExtension: "txt") else { return }
+                guard let content = try? String(contentsOf: url) else { return }
+                let sourceLines: [String] = content
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                        .components(separatedBy: .newlines)
+                        .map({ $0.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .controlCharacters) })
+                        .filter({ !($0.isEmpty) })
+                let entries = sourceLines.compactMap { syllable -> String? in
+                        guard let code = syllable.charcode else { return nil }
+                        return "(\(code), '\(syllable)')"
+                }
+                let values: String = entries.joined(separator: ", ")
+                let insertValues: String = "INSERT INTO pinyinsyllabletable (code, syllable) VALUES \(values);"
+                var insertStatement: OpaquePointer? = nil
+                defer { sqlite3_finalize(insertStatement) }
+                guard sqlite3_prepare_v2(database, insertValues, -1, &insertStatement, nil) == SQLITE_OK else { return }
                 guard sqlite3_step(insertStatement) == SQLITE_DONE else { return }
         }
 }

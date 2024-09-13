@@ -24,7 +24,7 @@ private extension Font {
 
         private static let fontNames: [String] = {
                 var names: [String] = []
-                let primaryQueue: [String] = [Constant.SFPro, Constant.Inter]
+                let primaryQueue: [String] = [Constant.SFPro, Constant.Inter, Constant.Roboto]
                 for name in primaryQueue {
                         if found(font: name) {
                                 names.append(name)
