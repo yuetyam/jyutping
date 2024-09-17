@@ -192,23 +192,6 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.DoubleSpaceShortcut)
         }
 
-        private(set) static var isSystemPasteButtonPreferred: Bool = {
-                let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.PasteButtonStyle)
-                switch savedValue {
-                case PasteButtonStyle.default.rawValue:
-                        return false
-                case PasteButtonStyle.system.rawValue:
-                        return true
-                default:
-                        return false
-                }
-        }()
-        static func updatePasteButtonStyle(to isSystem: Bool) {
-                isSystemPasteButtonPreferred = isSystem
-                let value: Int = isSystem ? PasteButtonStyle.system.rawValue : PasteButtonStyle.default.rawValue
-                UserDefaults.standard.set(value, forKey: OptionsKey.PasteButtonStyle)
-        }
-
         private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.UserLexiconInputMemory)
                 switch savedValue {
@@ -239,7 +222,10 @@ struct OptionsKey {
         static let EmojiSuggestions: String = "emoji"
         static let CangjieVariant: String = "CangjieVariant"
         static let DoubleSpaceShortcut: String = "double_space_shortcut"
-        static let PasteButtonStyle: String = "PasteButtonStyle"
+
+        // Deprecated
+        // static let PasteButtonStyle: String = "PasteButtonStyle"
+
         static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 }
 
@@ -260,6 +246,10 @@ enum DoubleSpaceShortcut: Int {
         case insertIdeographicComma = 3
         case insertFullWidthSpace = 4
 }
+
+
+// Deprecated
+/*
 enum PasteButtonStyle: Int {
         case `default` = 1
         case system = 2
@@ -267,3 +257,4 @@ enum PasteButtonStyle: Int {
                 return self == .system
         }
 }
+*/

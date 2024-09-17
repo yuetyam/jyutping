@@ -40,7 +40,6 @@ struct SettingsView: View {
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var doubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
-        @State private var isSystemPasteButtonPreferred: Bool = Options.isSystemPasteButtonPreferred
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
         @State private var isPerformingClearUserLexicon: Bool = false
@@ -225,20 +224,6 @@ struct SettingsView: View {
                                         AudioFeedback.modified()
                                         context.triggerSelectionHapticFeedback()
                                         Options.updateDoubleSpaceShortcut(to: newOption)
-                                }
-
-                                if #available(iOSApplicationExtension 16.0, *) {
-                                        Section {
-                                                Toggle("SettingsView.PasteButton.ToggleTitle", isOn: $isSystemPasteButtonPreferred)
-                                                        .onChange(of: isSystemPasteButtonPreferred) { isSystem in
-                                                                AudioFeedback.modified()
-                                                                Options.updatePasteButtonStyle(to: isSystem)
-                                                        }
-                                        } header: {
-                                                Text("SettingsView.PasteButton.SectionHeader").textCase(nil)
-                                        } footer: {
-                                                Text("SettingsView.PasteButton.SectionFooter").textCase(nil)
-                                        }
                                 }
 
                                 Section {
