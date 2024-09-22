@@ -66,8 +66,8 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 
 ## 如何構建（How to build）
 前置要求（Build requirements）
-- macOS 14.0+
-- Xcode 15.4+
+- macOS 15.0+
+- Xcode 16.0+
 
 倉庫體積比較大，建議加 `--depth` 來 clone：
 ~~~bash
