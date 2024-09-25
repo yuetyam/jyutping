@@ -51,7 +51,11 @@ final class JyutpingInputController: IMKInputController {
                 window.setFrame(frame ?? windowFrame, display: true)
         }
         private var windowFrame: CGRect {
-                let origin: CGPoint = currentOrigin ?? currentClient?.position ?? screenOrigin
+                let origin: CGPoint = {
+                        guard let position = (currentPosition ?? currentClient?.position) else { return screenOrigin }
+                        guard (position.x > screenOrigin.x) && (position.x < maxPointX) && (position.y > screenOrigin.y) && (position.y < maxPointY) else { return screenOrigin }
+                        return position
+                }()
                 let viewSize: CGSize = {
                         guard let size = window.contentView?.subviews.first?.bounds.size, size.width > 44 else {
                                 return CGSize(width: 600, height: 600)
@@ -78,24 +82,31 @@ final class JyutpingInputController: IMKInputController {
         }
 
         private lazy var screenOrigin: CGPoint = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
-        private lazy var screenSize: CGSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1920, height: 1080)
-        private lazy var currentOrigin: CGPoint? = nil
-        func updateCurrentOrigin(to point: CGPoint? ) {
+        private lazy var screenSize: CGSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1280, height: 800)
+        private var maxPointX: CGFloat { screenOrigin.x + screenSize.width }
+        private var maxPointY: CGFloat { screenOrigin.y + screenSize.height }
+        private var maxPoint: CGPoint { CGPoint(x: maxPointX, y: maxPointY) }
+        private lazy var currentPosition: CGPoint? = nil
+        func updateCurrentPosition(to point: CGPoint? ) {
                 guard let point else { return }
-                currentOrigin = point
+                currentPosition = point
         }
 
         typealias InputClient = (IMKTextInput & NSObjectProtocol)
         private(set) lazy var currentClient: InputClient? = nil {
                 didSet {
-                        guard let origin = currentClient?.position else { return }
+                        let origin: CGPoint = {
+                                guard let position = currentClient?.position else { return screenOrigin }
+                                guard (position.x > screenOrigin.x) && (position.x < maxPointX) && (position.y > screenOrigin.y) && (position.y < maxPointY) else { return screenOrigin }
+                                return position
+                        }()
                         let orientation = AppSettings.candidatePageOrientation
                         let isRegularHorizontal: Bool = {
                                 switch orientation {
                                 case .horizontal:
-                                        return (origin.x - screenOrigin.x) < (screenSize.width - 480)
+                                        return (maxPointX - origin.x) > 480
                                 case .vertical:
-                                        return (origin.x - screenOrigin.x) < (screenSize.width - 300)
+                                        return (maxPointX - origin.x) > 300
                                 }
                         }()
                         let isRegularVertical: Bool = {
@@ -150,9 +161,9 @@ final class JyutpingInputController: IMKInputController {
                         appContext.updateInputForm()
                 }
                 screenOrigin = NSScreen.main?.visibleFrame.origin ?? window.screen?.visibleFrame.origin ?? .zero
-                screenSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1920, height: 1080)
+                screenSize = NSScreen.main?.visibleFrame.size ?? window.screen?.visibleFrame.size ?? CGSize(width: 1280, height: 800)
                 currentClient = (sender as? InputClient) ?? client()
-                currentOrigin = currentClient?.position
+                currentPosition = currentClient?.position
                 prepareWindow()
         }
         override func deactivateServer(_ sender: Any!) {

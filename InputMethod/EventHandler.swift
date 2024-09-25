@@ -81,7 +81,7 @@ extension JyutpingInputController {
                 let shouldIgnoreCurrentEvent: Bool = modifiers.contains(.command) || modifiers.contains(.option)
                 guard !shouldIgnoreCurrentEvent else { return false }
                 let client: InputClient? = (sender as? InputClient) ?? currentClient
-                updateCurrentOrigin(to: client?.position)
+                updateCurrentPosition(to: client?.position)
                 let currentClientID = currentClient?.uniqueClientIdentifierString()
                 let clientID = client?.uniqueClientIdentifierString()
                 if clientID != currentClientID {

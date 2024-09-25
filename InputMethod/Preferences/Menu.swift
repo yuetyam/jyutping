@@ -77,8 +77,8 @@ extension JyutpingInputController {
         }
         private func preferencesWindowFrame() -> CGRect {
                 let screenOrigin: CGPoint = NSScreen.main?.visibleFrame.origin ?? .zero
-                let screenWidth: CGFloat = NSScreen.main?.visibleFrame.size.width ?? 1920
-                let screenHeight: CGFloat = NSScreen.main?.visibleFrame.size.height ?? 1080
+                let screenWidth: CGFloat = NSScreen.main?.visibleFrame.size.width ?? 1280
+                let screenHeight: CGFloat = NSScreen.main?.visibleFrame.size.height ?? 800
                 let x: CGFloat = screenOrigin.x + (screenWidth / 4.0)
                 let y: CGFloat = screenOrigin.y + (screenHeight / 5.0)
                 let width: CGFloat = screenWidth / 2.0
