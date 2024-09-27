@@ -5,7 +5,7 @@ struct UnihanDefinition {
         static func generate() -> [(UInt32, String)] {
                 prepare()
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
-                guard let sourceContent = try? String(contentsOf: url) else { return [] }
+                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let words = sourceLines.compactMap({ line -> String.SubSequence? in
                         guard let word = line.split(separator: "\t").first else { return nil }
@@ -31,9 +31,13 @@ struct UnihanDefinition {
                 return definition.isEmpty ? "(None)" : definition
         }
 
-        private static var database: OpaquePointer? = nil
+        nonisolated(unsafe) private static let database: OpaquePointer? = {
+                var db: OpaquePointer? = nil
+                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return nil }
+                return db
+        }()
         private static func prepare() {
-                guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
+                // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createTable()
                 insertValues()
                 createIndies()
@@ -47,7 +51,7 @@ struct UnihanDefinition {
         }
         private static func insertValues() {
                 guard let url = Bundle.module.url(forResource: "definition", withExtension: "txt") else { return }
-                guard let sourceContent = try? String(contentsOf: url) else { return }
+                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { line -> String? in
                         let parts = line.split(separator: "\t").map({ $0.trimmingCharacters(in: .whitespaces) }).filter({ !$0.isEmpty })

@@ -3,10 +3,14 @@ import SQLite3
 
 struct AppDataPreparer {
 
-        fileprivate static var database: OpaquePointer? = nil
+        nonisolated(unsafe) fileprivate static let database: OpaquePointer? = {
+                var db: OpaquePointer? = nil
+                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return nil }
+                return db
+        }()
 
         static func prepare() {
-                guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
+                // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createJyutpingTable()
                 createCollocationTable()
                 createYingWaaTable()
@@ -40,7 +44,7 @@ private extension AppDataPreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
@@ -91,7 +95,7 @@ private extension AppDataPreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "collocation", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
@@ -117,7 +121,7 @@ private extension AppDataPreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { return }
                 guard let url = Bundle.module.url(forResource: "yingwaa", withExtension: "txt") else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
@@ -144,7 +148,7 @@ private extension AppDataPreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "chohok", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
@@ -172,7 +176,7 @@ private extension AppDataPreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "fanwan", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: "\t")
@@ -202,7 +206,7 @@ private extension AppDataPreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "gwongwan", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap { sourceLine -> String? in
                         let parts = sourceLine.split(separator: ",")

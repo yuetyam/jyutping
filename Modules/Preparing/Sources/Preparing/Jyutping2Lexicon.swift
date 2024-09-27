@@ -4,7 +4,7 @@ struct Jyutping2Lexicon {
 
         static func convert() -> [String] {
                 guard let url = Bundle.module.url(forResource: "jyutping", withExtension: "txt") else { return [] }
-                guard let sourceContent = try? String(contentsOf: url) else { return [] }
+                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
                 let sourceLines: [String] = sourceContent.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .newlines)
                 let entries = sourceLines.compactMap({ generateEntry(from: $0) })
                 return entries
@@ -42,7 +42,7 @@ struct Jyutping2Lexicon {
 struct TextMarkLexicon {
         static func convert() -> [String] {
                 guard let url = Bundle.module.url(forResource: "mark", withExtension: "yaml") else { return [] }
-                guard let sourceContent = try? String(contentsOf: url) else { return [] }
+                guard let sourceContent = try? String(contentsOf: url, encoding: .utf8) else { return [] }
                 let sourceLines: [String] = sourceContent
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                         .components(separatedBy: .newlines)

@@ -3,10 +3,14 @@ import SQLite3
 
 public struct SyllablePreparer {
 
-        private static var database: OpaquePointer? = nil
+        nonisolated(unsafe) private static let database: OpaquePointer? = {
+                var db: OpaquePointer? = nil
+                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return nil }
+                return db
+        }()
 
         public static func prepare() {
-                guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
+                // guard sqlite3_open_v2(":memory:", &database, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return }
                 createSyllableTable()
                 createPinyinSyllableTable()
                 createIndies()
@@ -34,7 +38,7 @@ public struct SyllablePreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "syllable", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                         .components(separatedBy: .newlines)
@@ -63,7 +67,7 @@ public struct SyllablePreparer {
                 guard sqlite3_step(createStatement) == SQLITE_DONE else { sqlite3_finalize(createStatement); return }
                 sqlite3_finalize(createStatement)
                 guard let url = Bundle.module.url(forResource: "pinyin-syllable", withExtension: "txt") else { return }
-                guard let content = try? String(contentsOf: url) else { return }
+                guard let content = try? String(contentsOf: url, encoding: .utf8) else { return }
                 let sourceLines: [String] = content
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                         .components(separatedBy: .newlines)
