@@ -2,13 +2,13 @@ import Foundation
 
 public struct Metro {
 
-        public struct Station {
+        public struct Station: Sendable {
                 public let lineName: String
                 public let name: String
                 public let romanization: String
         }
 
-        public struct Line {
+        public struct Line: Sendable {
                 init(name: String, stations: [Metro.Station]) {
                         self.name = name
                         self.stations = stations
