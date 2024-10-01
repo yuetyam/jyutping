@@ -52,8 +52,8 @@ struct OptionsView: View {
                 }
                 .padding(4)
                 .roundedHUDVisualEffect()
-                .fixedSize()
                 .padding(10)
+                .fixedSize()
         }
 }
 

@@ -3,9 +3,10 @@ import SQLite3
 import CoreIME
 import CommonExtensions
 
+@MainActor
 struct UserLexicon {
 
-        nonisolated(unsafe) private static let database: OpaquePointer? = {
+        private static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
                 let path: String? = {
                         let fileName: String = "userlexicon.sqlite3"

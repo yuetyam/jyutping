@@ -3265,6 +3265,70 @@
         }
       }
     },
+    "GeneralPreferencesView.NavigationTitle.TitleKey" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jyutping Input Method"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粵拼輸入法"
+          }
+        }
+      }
+    },
     "GeneralPreferencesView.SectionHeader.UserLexicon" : {
       "localizations" : {
         "en" : {
@@ -3590,7 +3654,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Directly toggle specific Option"
+            "value" : "Directly toggle a specific Option"
           }
         },
         "yue" : {

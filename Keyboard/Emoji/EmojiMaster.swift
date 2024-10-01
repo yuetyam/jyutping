@@ -20,7 +20,7 @@ struct EmojiMaster {
         }
         static func clearFrequent() {
                 frequent = defaultFrequent
-                let emptyText: String = ""
+                let emptyText: String = String.empty
                 UserDefaults.standard.set(emptyText, forKey: key)
                 emojis[Emoji.Category.frequent] = transformFrequent()
         }

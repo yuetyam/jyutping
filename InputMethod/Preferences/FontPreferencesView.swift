@@ -36,9 +36,7 @@ struct FontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: candidateFontSize) { newFontSize in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCandidateFontSize(to: newFontSize)
-                                                        }
+                                                        AppSettings.updateCandidateFontSize(to: newFontSize)
                                                 }
                                                 Spacer()
                                         }
@@ -50,9 +48,7 @@ struct FontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: candidateFontMode) { newMode in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCandidateFontMode(to: newMode)
-                                                        }
+                                                        AppSettings.updateCandidateFontMode(to: newMode)
                                                 }
                                                 Spacer()
                                         }
@@ -82,9 +78,7 @@ struct FontPreferencesView: View {
                                                         Spacer()
                                                 }
                                                 .onChange(of: customCandidateFonts) { newFontNames in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomCandidateFonts(to: newFontNames)
-                                                        }
+                                                        AppSettings.updateCustomCandidateFonts(to: newFontNames)
                                                 }
                                         }
                                 }
@@ -98,9 +92,7 @@ struct FontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: commentFontSize) { newFontSize in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCommentFontSize(to: newFontSize)
-                                                        }
+                                                        AppSettings.updateCommentFontSize(to: newFontSize)
                                                 }
                                                 Spacer()
                                         }
@@ -112,9 +104,7 @@ struct FontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: commentFontMode) { newMode in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCommentFontMode(to: newMode)
-                                                        }
+                                                        AppSettings.updateCommentFontMode(to: newMode)
                                                 }
                                                 Spacer()
                                         }
@@ -144,9 +134,7 @@ struct FontPreferencesView: View {
                                                         Spacer()
                                                 }
                                                 .onChange(of: customCommentFonts) { newFontNames in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomCommentFonts(to: newFontNames)
-                                                        }
+                                                        AppSettings.updateCustomCommentFonts(to: newFontNames)
                                                 }
                                         }
                                 }
@@ -160,9 +148,7 @@ struct FontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: labelFontSize) { newFontSize in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateLabelFontSize(to: newFontSize)
-                                                        }
+                                                        AppSettings.updateLabelFontSize(to: newFontSize)
                                                 }
                                                 Spacer()
                                         }
@@ -174,9 +160,7 @@ struct FontPreferencesView: View {
                                                 }
                                                 .scaledToFit()
                                                 .onChange(of: labelFontMode) { newMode in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateLabelFontMode(to: newMode)
-                                                        }
+                                                        AppSettings.updateLabelFontMode(to: newMode)
                                                 }
                                                 Spacer()
                                         }
@@ -206,9 +190,7 @@ struct FontPreferencesView: View {
                                                         Spacer()
                                                 }
                                                 .onChange(of: customLabelFonts) { newFontNames in
-                                                        DispatchQueue.preferences.async {
-                                                                AppSettings.updateCustomLabelFonts(to: newFontNames)
-                                                        }
+                                                        AppSettings.updateCustomLabelFonts(to: newFontNames)
                                                 }
                                         }
                                 }

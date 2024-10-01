@@ -19,10 +19,12 @@ enum Representative: Hashable {
         case number(Int)
         case keypadNumber(Int)
         case arrow(Direction)
+        case backquote
         case punctuation(PunctuationKey)
         case separator
         case `return`
         case backspace
+        case forwardDelete
         case escape
         case clear
         case space
@@ -124,6 +126,8 @@ extension UInt16 {
                         return .return
                 case KeyCode.Special.VK_BACKWARD_DELETE:
                         return .backspace
+                case KeyCode.Special.VK_FORWARD_DELETE:
+                        return .forwardDelete
                 case KeyCode.Arrow.VK_UP:
                         return .arrow(.up)
                 case KeyCode.Arrow.VK_DOWN:
@@ -132,6 +136,8 @@ extension UInt16 {
                         return .arrow(.left)
                 case KeyCode.Arrow.VK_RIGHT:
                         return .arrow(.right)
+                case KeyCode.Symbol.VK_BACKQUOTE:
+                        return .backquote
                 case KeyCode.Symbol.VK_COMMA:
                         return .punctuation(.comma)
                 case KeyCode.Symbol.VK_DOT:
@@ -146,8 +152,6 @@ extension UInt16 {
                         return .punctuation(.bracketRight)
                 case KeyCode.Symbol.VK_BACKSLASH:
                         return .punctuation(.backSlash)
-                case KeyCode.Symbol.VK_BACKQUOTE:
-                        return .punctuation(.backquote)
                 case KeyCode.Symbol.VK_MINUS:
                         return .punctuation(.minus)
                 case KeyCode.Symbol.VK_EQUAL:

@@ -281,7 +281,6 @@
 		37E6AD792B3B381700F02279 /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD542B3B381600F02279 /* WindowPattern.swift */; };
 		37E6AD7A2B3B381700F02279 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD552B3B381600F02279 /* Options.swift */; };
 		37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD562B3B381600F02279 /* DisplayCandidate.swift */; };
-		37E6AD7C2B3B381700F02279 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD572B3B381600F02279 /* EventHandler.swift */; };
 		37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD592B3B381600F02279 /* HotkeysView.swift */; };
 		37E6AD7E2B3B381700F02279 /* FontPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5A2B3B381600F02279 /* FontPicker.swift */; };
 		37E6AD7F2B3B381700F02279 /* GeneralPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */; };
@@ -297,7 +296,6 @@
 		37E6AD892B3B381700F02279 /* VisualEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD652B3B381600F02279 /* VisualEffect.swift */; };
 		37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD662B3B381600F02279 /* JyutpingInputController.swift */; };
 		37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD672B3B381600F02279 /* AppContext.swift */; };
-		37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD6A2B3B381700F02279 /* Menu.swift */; };
 		37E6AD902B3B384B00F02279 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD8F2B3B384B00F02279 /* Assets.xcassets */; };
 		37E6AD962B3B389400F02279 /* jyutpingime.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 37E6AD952B3B389400F02279 /* jyutpingime.pdf */; };
 		37EFD7312B3719C20089D346 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37EFD7302B3719C20089D346 /* Preview Assets.xcassets */; };
@@ -646,7 +644,6 @@
 		37E6AD542B3B381600F02279 /* WindowPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
 		37E6AD552B3B381600F02279 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		37E6AD562B3B381600F02279 /* DisplayCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCandidate.swift; sourceTree = "<group>"; };
-		37E6AD572B3B381600F02279 /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		37E6AD592B3B381600F02279 /* HotkeysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
 		37E6AD5A2B3B381600F02279 /* FontPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPicker.swift; sourceTree = "<group>"; };
 		37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralPreferencesView.swift; sourceTree = "<group>"; };
@@ -662,7 +659,6 @@
 		37E6AD652B3B381600F02279 /* VisualEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffect.swift; sourceTree = "<group>"; };
 		37E6AD662B3B381600F02279 /* JyutpingInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JyutpingInputController.swift; sourceTree = "<group>"; };
 		37E6AD672B3B381600F02279 /* AppContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContext.swift; sourceTree = "<group>"; };
-		37E6AD6A2B3B381700F02279 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		37E6AD8F2B3B384B00F02279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37E6AD912B3B386800F02279 /* InputMethodRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = InputMethodRelease.xcconfig; sourceTree = "<group>"; };
 		37E6AD922B3B386800F02279 /* InputMethodDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = InputMethodDebug.xcconfig; sourceTree = "<group>"; };
@@ -1043,7 +1039,6 @@
 				3797F6E42C188F4D00DE6D0E /* PrincipalApplication.swift */,
 				3797F6E22C188F2B00DE6D0E /* AppDelegate.swift */,
 				37E6AD662B3B381600F02279 /* JyutpingInputController.swift */,
-				37E6AD572B3B381600F02279 /* EventHandler.swift */,
 				3783BB6E2C8DE3560071B892 /* CandidateWindow.swift */,
 				37E6AD672B3B381600F02279 /* AppContext.swift */,
 				37E6AD562B3B381600F02279 /* DisplayCandidate.swift */,
@@ -1316,7 +1311,6 @@
 		37E6AD582B3B381600F02279 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				37E6AD6A2B3B381700F02279 /* Menu.swift */,
 				37E6AD5E2B3B381600F02279 /* PreferencesView.swift */,
 				37E6AD5B2B3B381600F02279 /* GeneralPreferencesView.swift */,
 				37918A6B2C5B5BBA006C6590 /* ToneInputView.swift */,
@@ -1861,7 +1855,6 @@
 				37E6AD742B3B381700F02279 /* CharacterExtensions.swift in Sources */,
 				37E6AD852B3B381700F02279 /* UserLexicon.swift in Sources */,
 				376B84942BFC2C1C0029A0CF /* BottomCommentStackView.swift in Sources */,
-				37E6AD8E2B3B381700F02279 /* Menu.swift in Sources */,
 				37E6AD8A2B3B381700F02279 /* JyutpingInputController.swift in Sources */,
 				37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */,
 				3783BB6F2C8DE3600071B892 /* CandidateWindow.swift in Sources */,
@@ -1884,7 +1877,6 @@
 				37E6AD772B3B381700F02279 /* ViewExtensions.swift in Sources */,
 				37E6AD6F2B3B381700F02279 /* Direction.swift in Sources */,
 				37E6AD712B3B381700F02279 /* KeyCode.swift in Sources */,
-				37E6AD7C2B3B381700F02279 /* EventHandler.swift in Sources */,
 				376B84962BFC2CB50029A0CF /* EnhancedCommentLabels.swift in Sources */,
 				37E6AD832B3B381700F02279 /* AboutView.swift in Sources */,
 				37E6AD782B3B381700F02279 /* StringExtensions.swift in Sources */,
@@ -2058,7 +2050,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 127;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2070,7 +2062,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.48.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.48.3;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2087,7 +2080,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 127;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Keyboard/Info.plist;
@@ -2099,7 +2092,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.48.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 0.48.3;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM.Keyboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -2122,7 +2116,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 127;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2144,13 +2138,14 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.48.0;
+				MARKETING_VERSION = 0.48.3;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -2165,7 +2160,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 127;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"InputMethod/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2187,12 +2182,13 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.48.0;
+				MARKETING_VERSION = 0.48.3;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jyutping.inputmethod.Jyutping;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -2401,7 +2397,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 127;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2424,7 +2420,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.48.0;
+				MARKETING_VERSION = 0.48.3;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -2445,7 +2441,7 @@
 				CODE_SIGN_ENTITLEMENTS = Jyutping/Jyutping.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 122;
+				CURRENT_PROJECT_VERSION = 127;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Jyutping/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
@@ -2468,7 +2464,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 0.48.0;
+				MARKETING_VERSION = 0.48.3;
 				PRODUCT_BUNDLE_IDENTIFIER = im.cantonese.CantoneseIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;

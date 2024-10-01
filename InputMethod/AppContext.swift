@@ -35,7 +35,7 @@ final class AppContext: ObservableObject {
                 let newHighlightedIndex: Int = {
                         switch highlight {
                         case .start:
-                                return 0
+                                return minIndex
                         case .unchanged:
                                 return min(highlightedIndex, maxIndex)
                         case .end:
@@ -45,12 +45,11 @@ final class AppContext: ObservableObject {
                 highlightedIndex = newHighlightedIndex
         }
 
-        func updateInputForm(to form: InputForm? = nil) {
-                let newForm: InputForm = form ?? InputForm.matchInputMethodMode()
-                if newForm.isOptions {
+        func updateInputForm(to form: InputForm) {
+                if form.isOptions {
                         optionsHighlightedIndex = minIndex
                 }
-                inputForm = newForm
+                inputForm = form
         }
         func updateWindowPattern(to pattern: WindowPattern) {
                 windowPattern = pattern
@@ -74,6 +73,9 @@ final class AppContext: ObservableObject {
                 guard highlightedIndex > minIndex else { return }
                 highlightedIndex -= 1
         }
+        func resetHighlightedIndex() {
+                highlightedIndex = minIndex
+        }
 
 
         // MARK: - OptionsView highlighted index
@@ -86,6 +88,9 @@ final class AppContext: ObservableObject {
         func decreaseOptionsHighlightedIndex() {
                 guard optionsHighlightedIndex > minIndex else { return }
                 optionsHighlightedIndex -= 1
+        }
+        func resetOptionsHighlightedIndex() {
+                optionsHighlightedIndex = minIndex
         }
 }
 

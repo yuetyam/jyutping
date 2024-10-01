@@ -4,7 +4,7 @@ import CoreIME
 struct Options {
 
         /// 字形標準
-        private(set) static var characterStandard: CharacterStandard = {
+        nonisolated(unsafe) private(set) static var characterStandard: CharacterStandard = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterStandard)
                 switch savedValue {
                 case 0, 1:
@@ -26,7 +26,7 @@ struct Options {
         }
 
         /// 半寬／全寬數字、字母
-        private(set) static var characterForm: CharacterForm = {
+        nonisolated(unsafe) private(set) static var characterForm: CharacterForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterForm)
                 switch savedValue {
                 case 0, 1:
@@ -44,7 +44,7 @@ struct Options {
         }
 
         /// 標點符號形態. 粵文句讀／英文標點
-        private(set) static var punctuationForm: PunctuationForm = {
+        nonisolated(unsafe) private(set) static var punctuationForm: PunctuationForm = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.PunctuationForm)
                 switch savedValue {
                 case 0, 1:
@@ -64,7 +64,7 @@ struct Options {
 
         // TODO: Maybe AppSettings.isEmojiSuggestionsOn
         /// 候選詞包含 Emoji
-        private(set) static var isEmojiSuggestionsOn: Bool = {
+        nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
                 switch savedValue {
                 case 0, 1:
@@ -82,7 +82,7 @@ struct Options {
         }
 
         /// 輸入法模式. Cantonese / ABC
-        private(set) static var inputMethodMode: InputMethodMode = {
+        nonisolated(unsafe) private(set) static var inputMethodMode: InputMethodMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.InputMethodMode)
                 switch savedValue {
                 case 0, 1:

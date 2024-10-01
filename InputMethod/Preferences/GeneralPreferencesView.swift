@@ -216,6 +216,6 @@ struct GeneralPreferencesView: View {
                         .textSelection(.enabled)
                         .padding()
                 }
-                .navigationTitle("PreferencesView.NavigationTitle.General")
+                .navigationTitle("GeneralPreferencesView.NavigationTitle.TitleKey")
         }
 }

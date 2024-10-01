@@ -222,11 +222,10 @@ struct OptionsKey {
         static let EmojiSuggestions: String = "emoji"
         static let CangjieVariant: String = "CangjieVariant"
         static let DoubleSpaceShortcut: String = "double_space_shortcut"
+        static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 
         // Deprecated
         // static let PasteButtonStyle: String = "PasteButtonStyle"
-
-        static let UserLexiconInputMemory: String = "UserLexiconInputMemory"
 }
 
 enum CommentStyle: Int {

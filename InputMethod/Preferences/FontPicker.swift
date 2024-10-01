@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 private final class FontPickerDelegate {
 
         private var picker: FontPicker
@@ -11,7 +12,6 @@ private final class FontPickerDelegate {
         @objc func changeFont(_ id: Any) {
                 picker.performFontSelection()
         }
-
 }
 
 struct FontPicker: View {

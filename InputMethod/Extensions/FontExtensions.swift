@@ -3,7 +3,7 @@ import CommonExtensions
 
 extension Font {
 
-        private(set) static var candidate: Font = candidateFont()
+        nonisolated(unsafe) private(set) static var candidate: Font = candidateFont()
         static func updateCandidateFont() {
                 candidate = candidateFont()
         }
@@ -60,9 +60,9 @@ extension Font {
 
 extension Font {
 
-        private(set) static var comment: Font = commentFont(size: AppSettings.commentFontSize)
-        private(set) static var commentTone: Font = commentFont(size: AppSettings.commentFontSize - 4)
-        private(set) static var annotation: Font = commentFont(size: AppSettings.commentFontSize - 2)
+        nonisolated(unsafe) private(set) static var comment: Font = commentFont(size: AppSettings.commentFontSize)
+        nonisolated(unsafe) private(set) static var commentTone: Font = commentFont(size: AppSettings.commentFontSize - 4)
+        nonisolated(unsafe) private(set) static var annotation: Font = commentFont(size: AppSettings.commentFontSize - 2)
         static func updateCommentFont() {
                 let commentFontSize: CGFloat = AppSettings.commentFontSize
                 let toneFontSize: CGFloat = commentFontSize - 4
@@ -124,7 +124,7 @@ extension Font {
 
 extension Font {
 
-        private(set) static var label: Font = labelFont(size: AppSettings.labelFontSize)
+        nonisolated(unsafe) private(set) static var label: Font = labelFont(size: AppSettings.labelFontSize)
         static func updateLabelFont() {
                 let size: CGFloat = AppSettings.labelFontSize
                 label = labelFont(size: size)

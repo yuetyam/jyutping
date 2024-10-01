@@ -33,6 +33,8 @@ struct SettingsKey {
 enum CandidatePageOrientation: Int {
         case horizontal = 1
         case vertical = 2
+        var isHorizontal: Bool { self == .horizontal }
+        var isVertical: Bool { self == .vertical }
         static func orientation(of value: Int) -> CandidatePageOrientation {
                 switch value {
                 case Self.horizontal.rawValue:
@@ -155,7 +157,7 @@ enum ShiftSpaceCombination: Int {
 struct AppSettings {
 
         /// Preferences Window
-        private(set) static var selectedPreferencesSidebarRow: PreferencesSidebarRow = .general
+        nonisolated(unsafe) private(set) static var selectedPreferencesSidebarRow: PreferencesSidebarRow = .general
         static func updateSelectedPreferencesSidebarRow(to row: PreferencesSidebarRow) {
                 selectedPreferencesSidebarRow = row
         }
@@ -163,7 +165,7 @@ struct AppSettings {
 
         // MARK: - Page Size
 
-        private(set) static var displayCandidatePageSize: Int = {
+        nonisolated(unsafe) private(set) static var displayCandidatePageSize: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageSize)
                 let isSavedValueValid: Bool = pageSizeValidity(of: savedValue)
                 guard isSavedValueValid else { return defaultCandidatePageSize }
@@ -184,7 +186,7 @@ struct AppSettings {
 
         // MARK: - Line Spacing
 
-        private(set) static var candidateLineSpacing: Int = {
+        nonisolated(unsafe) private(set) static var candidateLineSpacing: Int = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateLineSpacing)
                 let isSavedValueValid: Bool = lineSpacingValidity(of: savedValue)
                 guard isSavedValueValid else { return defaultCandidateLineSpacing }
@@ -200,12 +202,12 @@ struct AppSettings {
                 return candidateLineSpacingRange.contains(value)
         }
         private static let defaultCandidateLineSpacing: Int = 6
-        static let candidateLineSpacingRange: Range<Int> = 0..<13
+        static let candidateLineSpacingRange: Range<Int> = 0..<15
 
 
         // MARK: - Orientation
 
-        private(set) static var candidatePageOrientation: CandidatePageOrientation = {
+        nonisolated(unsafe) private(set) static var candidatePageOrientation: CandidatePageOrientation = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidatePageOrientation)
                 return CandidatePageOrientation.orientation(of: savedValue)
         }()
@@ -218,7 +220,7 @@ struct AppSettings {
 
         // MARK: - Comment Display Style
 
-        private(set) static var commentDisplayStyle: CommentDisplayStyle = {
+        nonisolated(unsafe) private(set) static var commentDisplayStyle: CommentDisplayStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentDisplayStyle)
                 return CommentDisplayStyle.style(of: savedValue)
         }()
@@ -231,7 +233,7 @@ struct AppSettings {
 
         // MARK: - Tone Display Style
 
-        private(set) static var toneDisplayStyle: ToneDisplayStyle = {
+        nonisolated(unsafe) private(set) static var toneDisplayStyle: ToneDisplayStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayStyle)
                 return ToneDisplayStyle.style(of: savedValue)
         }()
@@ -241,7 +243,7 @@ struct AppSettings {
                 UserDefaults.standard.set(value, forKey: SettingsKey.ToneDisplayStyle)
         }
 
-        private(set) static var toneDisplayColor: ToneDisplayColor = {
+        nonisolated(unsafe) private(set) static var toneDisplayColor: ToneDisplayColor = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ToneDisplayColor)
                 return ToneDisplayColor.color(of: savedValue)
         }()
@@ -254,7 +256,7 @@ struct AppSettings {
 
         // MARK: - Cangjie / Quick Reverse Lookup
 
-        private(set) static var cangjieVariant: CangjieVariant = {
+        nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CangjieVariant)
                 switch savedValue {
                 case CangjieVariant.cangjie5.rawValue:
@@ -278,7 +280,7 @@ struct AppSettings {
 
         // MARK: - User Lexicon
 
-        private(set) static var isInputMemoryOn: Bool = {
+        nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.UserLexiconInputMemory)
                 switch savedValue {
                 case 0, 1:
@@ -298,7 +300,7 @@ struct AppSettings {
 
         // MARK: - Font Size
 
-        private(set) static var candidateFontSize: CGFloat = {
+        nonisolated(unsafe) private(set) static var candidateFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 let size: Int = isSavedValueValid ? savedValue : defaultCandidateFontSize
@@ -312,7 +314,7 @@ struct AppSettings {
                 Font.updateCandidateFont()
         }
 
-        private(set) static var commentFontSize: CGFloat = {
+        nonisolated(unsafe) private(set) static var commentFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 let size: Int = isSavedValueValid ? savedValue : defaultCommentFontSize
@@ -327,7 +329,7 @@ struct AppSettings {
                 Font.updateCommentFont()
         }
 
-        private(set) static var labelFontSize: CGFloat = {
+        nonisolated(unsafe) private(set) static var labelFontSize: CGFloat = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelFontSize)
                 let isSavedValueValid: Bool = fontSizeValidity(of: savedValue)
                 let size: Int = isSavedValueValid ? savedValue : defaultLabelFontSize
@@ -351,7 +353,7 @@ struct AppSettings {
 
 
         // Candidate StackView syllable text frame
-        private(set) static var syllableViewSize: CGSize = computeSyllableViewSize()
+        nonisolated(unsafe) private(set) static var syllableViewSize: CGSize = computeSyllableViewSize()
         private static func updateSyllableViewSize() {
                 syllableViewSize = computeSyllableViewSize()
         }
@@ -364,7 +366,7 @@ struct AppSettings {
 
         // MARK: - Font Mode
 
-        private(set) static var candidateFontMode: FontMode = {
+        nonisolated(unsafe) private(set) static var candidateFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CandidateFontMode)
                 return FontMode.mode(of: savedValue)
         }()
@@ -375,7 +377,7 @@ struct AppSettings {
                 Font.updateCandidateFont()
         }
 
-        private(set) static var commentFontMode: FontMode = {
+        nonisolated(unsafe) private(set) static var commentFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.CommentFontMode)
                 return FontMode.mode(of: savedValue)
         }()
@@ -386,7 +388,7 @@ struct AppSettings {
                 Font.updateCommentFont()
         }
 
-        private(set) static var labelFontMode: FontMode = {
+        nonisolated(unsafe) private(set) static var labelFontMode: FontMode = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.LabelFontMode)
                 return FontMode.mode(of: savedValue)
         }()
@@ -400,7 +402,7 @@ struct AppSettings {
 
         // MARK: - Custom Fonts
 
-        private(set) static var customCandidateFonts: [String] = {
+        nonisolated(unsafe) private(set) static var customCandidateFonts: [String] = {
                 let fallback: [String] = [PresetConstant.PingFangHK]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCandidateFontList)
                 guard let savedNames else { return fallback }
@@ -416,7 +418,7 @@ struct AppSettings {
                 Font.updateCandidateFont()
         }
 
-        private(set) static var customCommentFonts: [String] = {
+        nonisolated(unsafe) private(set) static var customCommentFonts: [String] = {
                 let fallback: [String] = [PresetConstant.HelveticaNeue]
                 let savedNames: String? = UserDefaults.standard.string(forKey: SettingsKey.CustomCommentFontList)
                 guard let savedNames else { return fallback }
@@ -432,7 +434,7 @@ struct AppSettings {
                 Font.updateCommentFont()
         }
 
-        private(set) static var customLabelFonts: [String] = {
+        nonisolated(unsafe) private(set) static var customLabelFonts: [String] = {
                 let fallback: [String] = [PresetConstant.Menlo]
                 let savedNames = UserDefaults.standard.string(forKey: SettingsKey.CustomLabelFontList)
                 guard let savedNames else { return fallback }
@@ -455,7 +457,7 @@ struct AppSettings {
         ///
         /// 1. Do Nothing
         /// 2. Switch between Cantonese and English
-        private(set) static var pressShiftOnce: PressShiftOnce = {
+        nonisolated(unsafe) private(set) static var pressShiftOnce: PressShiftOnce = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.PressShiftOnce)
                 switch savedValue {
                 case 0, 1:
@@ -479,7 +481,7 @@ struct AppSettings {
         ///
         /// 1. Input Full-width Space (U+3000)
         /// 2. Switch between Cantonese and English
-        private(set) static var shiftSpaceCombination: ShiftSpaceCombination = {
+        nonisolated(unsafe) private(set) static var shiftSpaceCombination: ShiftSpaceCombination = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: SettingsKey.ShiftSpaceCombination)
                 switch savedValue {
                 case 0, 1:

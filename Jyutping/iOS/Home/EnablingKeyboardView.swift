@@ -4,8 +4,8 @@ import SwiftUI
 
 struct EnablingKeyboardView: View {
 
-        private let closeApp: String = "https://support.apple.com/zh-hk/HT201330"
-        private let restartDevice: String = "https://support.apple.com/zh-hk/HT201559"
+        private let closeApp: String = "https://support.apple.com/zh-hk/109359"
+        private let restartDevice: String = "https://support.apple.com/zh-hk/118259"
 
         var body: some View {
                 List {
