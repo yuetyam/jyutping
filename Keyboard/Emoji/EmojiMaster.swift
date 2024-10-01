@@ -5,7 +5,7 @@ import CommonExtensions
 struct EmojiMaster {
 
         private static let key: String = "emoji_frequent"
-        private(set) static var frequent: [String] = {
+        nonisolated(unsafe) private(set) static var frequent: [String] = {
                 guard let history = UserDefaults.standard.string(forKey: key) else { return defaultFrequent }
                 guard history.isNotEmpty else { return defaultFrequent }
                 return history.split(separator: ",").map({ $0.trimmingCharacters(in: .whitespaces) }).filter(\.isNotEmpty)
@@ -35,7 +35,7 @@ struct EmojiMaster {
                 return list
         }
 
-        private(set) static var emojis: [Emoji.Category: [Emoji]] = {
+        nonisolated(unsafe) private(set) static var emojis: [Emoji.Category: [Emoji]] = {
                 var dict: [Emoji.Category: [Emoji]] = [:]
                 let fetched: [Emoji] = Engine.fetchEmoji()
                 _ = Emoji.Category.allCases.map { category in

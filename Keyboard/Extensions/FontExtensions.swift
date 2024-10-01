@@ -28,12 +28,12 @@ enum LanguageAttribute: Int {
 
 extension String {
 
-        private static let HKHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-HK"]
-        private static let MOHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-MO"]
-        private static let TWHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-TW"]
-        private static let CNHansAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hans-CN"]
-        private static let ENAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "en-US"]
-        private static let JAAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "ja-JP"]
+        nonisolated(unsafe) private static let HKHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-HK"]
+        nonisolated(unsafe) private static let MOHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-MO"]
+        nonisolated(unsafe) private static let TWHantAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hant-TW"]
+        nonisolated(unsafe) private static let CNHansAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "zh-Hans-CN"]
+        nonisolated(unsafe) private static let ENAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "en-US"]
+        nonisolated(unsafe) private static let JAAttribute: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTLanguageAttributeName as String): "ja-JP"]
 
         private func attributedHKHant() -> AttributedString {
                 AttributedString(self, attributes: AttributeContainer(Self.HKHantAttribute))

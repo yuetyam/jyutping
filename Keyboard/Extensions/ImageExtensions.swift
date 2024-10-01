@@ -16,10 +16,13 @@ extension Image {
         static let search: Image = Image(systemName: "magnifyingglass")
 
         /// Emoji Smiley Face
+        @MainActor
         static let smiley: Image = Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
 }
 
 extension UIImage {
+
+        @MainActor
         func cropped() -> UIImage? {
                 guard let sourceCGImage = self.cgImage else { return nil }
                 let sourceSize = self.size

@@ -4,7 +4,7 @@ import CoreIME
 struct Options {
 
         /// 字形標準
-        private(set) static var characterStandard: CharacterStandard = {
+        nonisolated(unsafe) private(set) static var characterStandard: CharacterStandard = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CharacterStandard)
                 switch savedValue {
                 case 0, 1:
@@ -25,7 +25,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CharacterStandard)
         }
 
-        private(set) static var isAudioFeedbackOn: Bool = {
+        nonisolated(unsafe) private(set) static var isAudioFeedbackOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.AudioFeedback)
                 switch savedValue {
                 case 0:
@@ -43,7 +43,7 @@ struct Options {
         }
 
         /// Cantonese Keyboard Layout. Qwerty / TripleStroke / TenKey
-        private(set) static var keyboardLayout: KeyboardLayout = {
+        nonisolated(unsafe) private(set) static var keyboardLayout: KeyboardLayout = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyboardLayout)
                 switch savedValue {
                 case KeyboardLayout.qwerty.rawValue:
@@ -62,7 +62,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.KeyboardLayout)
         }
 
-        private(set) static var showLowercaseKeys: Bool = {
+        nonisolated(unsafe) private(set) static var showLowercaseKeys: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyCase)
                 switch savedValue {
                 case 0, 1:
@@ -78,7 +78,7 @@ struct Options {
                 let value: Int = state ? 1 : 2
                 UserDefaults.standard.set(value, forKey: OptionsKey.KeyCase)
         }
-        private(set) static var keyTextPreview: Bool = {
+        nonisolated(unsafe) private(set) static var keyTextPreview: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.KeyTextPreview)
                 switch savedValue {
                 case 0, 1:
@@ -95,7 +95,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.KeyTextPreview)
         }
 
-        private(set) static var commentStyle: CommentStyle = {
+        nonisolated(unsafe) private(set) static var commentStyle: CommentStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentStyle)
                 switch savedValue {
                 case CommentStyle.aboveCandidates.rawValue:
@@ -114,7 +114,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CommentStyle)
         }
 
-        private(set) static var commentToneStyle: CommentToneStyle = {
+        nonisolated(unsafe) private(set) static var commentToneStyle: CommentToneStyle = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CommentToneStyle)
                 switch savedValue {
                 case CommentToneStyle.normal.rawValue:
@@ -133,7 +133,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CommentToneStyle)
         }
 
-        private(set) static var isEmojiSuggestionsOn: Bool = {
+        nonisolated(unsafe) private(set) static var isEmojiSuggestionsOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.EmojiSuggestions)
                 switch savedValue {
                 case 0, 1:
@@ -150,7 +150,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.EmojiSuggestions)
         }
 
-        private(set) static var cangjieVariant: CangjieVariant = {
+        nonisolated(unsafe) private(set) static var cangjieVariant: CangjieVariant = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.CangjieVariant)
                 switch savedValue {
                 case CangjieVariant.cangjie5.rawValue:
@@ -171,7 +171,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.CangjieVariant)
         }
 
-        private(set) static var doubleSpaceShortcut: DoubleSpaceShortcut = {
+        nonisolated(unsafe) private(set) static var doubleSpaceShortcut: DoubleSpaceShortcut = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.DoubleSpaceShortcut)
                 switch savedValue {
                 case DoubleSpaceShortcut.insertPeriod.rawValue:
@@ -192,7 +192,7 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.DoubleSpaceShortcut)
         }
 
-        private(set) static var isInputMemoryOn: Bool = {
+        nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.UserLexiconInputMemory)
                 switch savedValue {
                 case 0, 1:
