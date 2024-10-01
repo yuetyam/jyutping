@@ -632,6 +632,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case .tab:
                         switch inputForm {
                         case .cantonese:
+                                guard isBuffering else { return false }
                                 isEventHandled = true
                         case .transparent:
                                 return false

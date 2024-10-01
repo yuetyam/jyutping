@@ -32,6 +32,7 @@ struct Device {
         }()
 
         /// Example: iPhone 13 Pro Max
+        @MainActor
         static let modelName: String = {
                 #if os(iOS)
                 return UIDevice.modelName
@@ -41,6 +42,7 @@ struct Device {
         }()
 
         /// Example: iPadOS 15.2
+        @MainActor
         static let system: String = {
                 #if os(iOS)
                 return UIDevice.current.systemName + " " + UIDevice.current.systemVersion

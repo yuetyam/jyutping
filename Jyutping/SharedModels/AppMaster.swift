@@ -5,9 +5,10 @@ import CommonExtensions
 struct AppMaster {
 
         #if os(iOS)
+        @MainActor
         static func open(appUrl: URL, webUrl: URL) {
                 UIApplication.shared.open(appUrl) { success in
-                        if !success {
+                        if success.negative {
                                 UIApplication.shared.open(webUrl)
                         }
                 }
@@ -81,17 +82,17 @@ extension AppMaster {
 }
 
 extension AppMaster {
-        private(set) static var confusionEntries: [ConfusionEntry] = []
+        nonisolated(unsafe) private(set) static var confusionEntries: [ConfusionEntry] = []
         static func fetchConfusionEntries() {
                 confusionEntries = Confusion.fetch()
         }
 
-        private(set) static var surnames: [TextRomanization] = []
+        nonisolated(unsafe) private(set) static var surnames: [TextRomanization] = []
         static func fetchSurnames() {
                 surnames = HundredFamilySurnames.fetch()
         }
 
-        private(set) static var thousandCharacterClassicEntries: [TextRomanization] = []
+        nonisolated(unsafe) private(set) static var thousandCharacterClassicEntries: [TextRomanization] = []
         static func fetchThousandCharacterClassic() {
                 thousandCharacterClassicEntries = ThousandCharacterClassic.fetch()
         }

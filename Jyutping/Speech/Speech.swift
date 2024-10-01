@@ -1,6 +1,7 @@
 import AVFoundation
 import CommonExtensions
 
+@MainActor
 struct Speech {
 
         private static let synthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
@@ -18,9 +19,7 @@ struct Speech {
                 let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                 utterance.voice = isRomanization ? voice : alternativeVoice
                 utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
-                DispatchQueue.main.async {
-                        synthesizer.speak(utterance)
-                }
+                synthesizer.speak(utterance)
         }
 
         static func speak(text: String, ipa: String) {
@@ -28,15 +27,11 @@ struct Speech {
                 let attributedString = NSMutableAttributedString(string: text, attributes: [pronunciationKey: ipa])
                 let utterance = AVSpeechUtterance(attributedString: attributedString)
                 utterance.voice = alternativeVoice
-                DispatchQueue.main.async {
-                        synthesizer.speak(utterance)
-                }
+                synthesizer.speak(utterance)
         }
 
         static func stop() {
-                DispatchQueue.main.async {
-                        synthesizer.stopSpeaking(at: .immediate)
-                }
+                synthesizer.stopSpeaking(at: .immediate)
         }
         static var isSpeaking: Bool {
                 return synthesizer.isSpeaking
@@ -55,37 +50,27 @@ struct Speech {
                         let text: String = "此設備缺少粵語語音，請添加後再試。"
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = mandarinTaiwanVoice
-                        DispatchQueue.main.async {
-                                synthesizer.speak(utterance)
-                        }
+                        synthesizer.speak(utterance)
                 } else if let mandarinPekingVoice = mandarinPekingVoice {
                         let text: String = "此设备缺少粤语语音，请添加后再试。"
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = mandarinPekingVoice
-                        DispatchQueue.main.async {
-                                synthesizer.speak(utterance)
-                        }
+                        synthesizer.speak(utterance)
                 } else if let cantoneseVoice = voice {
                         let text: String = "此設備缺少粵語語音，請添加後再試。"
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = cantoneseVoice
-                        DispatchQueue.main.async {
-                                synthesizer.speak(utterance)
-                        }
+                        synthesizer.speak(utterance)
                 } else if let englishVoice = englishVoice {
                         let text: String = "This device does not contain a Cantonese voice, please add one and try again."
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = englishVoice
-                        DispatchQueue.main.async {
-                                synthesizer.speak(utterance)
-                        }
+                        synthesizer.speak(utterance)
                 } else {
                         let text: String = "No Voice"
                         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
                         utterance.voice = currentDefaultVoice
-                        DispatchQueue.main.async {
-                                synthesizer.speak(utterance)
-                        }
+                        synthesizer.speak(utterance)
                 }
         }
 
