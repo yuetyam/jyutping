@@ -550,7 +550,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 case .number(_):
                         switch inputForm {
                         case .cantonese:
-                                guard hasControlShiftModifiers || isBuffering else { return false }
                                 isEventHandled = true
                         case .transparent:
                                 return false
@@ -711,21 +710,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         let text = selectedItem.candidate.text
                                         insert(text)
                                         aftercareSelection(selectedItem)
+                                } else if hasControlShiftModifiers {
+                                        handleOptions(index)
                                 } else {
-                                        if hasControlShiftModifiers {
-                                                handleOptions(index)
-                                        } else {
-                                                switch Options.characterForm {
-                                                case .halfWidth:
-                                                        let shouldInsertCantoneseSymbol: Bool = isShifting && Options.punctuationForm.isCantoneseMode
-                                                        guard shouldInsertCantoneseSymbol else { return }
-                                                        let text: String = KeyCode.shiftingSymbol(of: number)
-                                                        insert(text)
-                                                case .fullWidth:
-                                                        let text: String = isShifting ? KeyCode.shiftingSymbol(of: number) : "\(number)"
-                                                        let fullWidthText: String = text.fullWidth()
-                                                        insert(fullWidthText)
-                                                }
+                                        let text: String = "\(number)"
+                                        let convertedText: String = Options.characterForm.isHalfWidth ? text : text.fullWidth()
+                                        switch Options.punctuationForm {
+                                        case .cantonese:
+                                                let insertion: String? = isShifting ? Representative.shiftingCantoneseSymbol(of: number) : convertedText
+                                                insertion.flatMap(insert(_:))
+                                        case .english:
+                                                let insertion: String? = isShifting ? Representative.shiftingSymbol(of: number) : convertedText
+                                                insertion.flatMap(insert(_:))
                                         }
                                 }
                         case .transparent:
