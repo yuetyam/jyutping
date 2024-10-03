@@ -147,7 +147,6 @@
 		371B6FBE2B3B342F005BB31C /* PadKeyExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */; };
 		371B6FBF2B3B342F005BB31C /* KeyExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */; };
 		371B6FC02B3B342F005BB31C /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F402B3B342F005BB31C /* CharacterExtensions.swift */; };
-		371B6FC12B3B342F005BB31C /* DispatchQueueExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F412B3B342F005BB31C /* DispatchQueueExtensions.swift */; };
 		371B6FC32B3B342F005BB31C /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F432B3B342F005BB31C /* ColorExtensions.swift */; };
 		371B6FC42B3B342F005BB31C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F442B3B342F005BB31C /* FontExtensions.swift */; };
 		371B6FC52B3B342F005BB31C /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F452B3B342F005BB31C /* ImageExtensions.swift */; };
@@ -506,7 +505,6 @@
 		371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadKeyExpansionPath.swift; sourceTree = "<group>"; };
 		371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyExpansionPath.swift; sourceTree = "<group>"; };
 		371B6F402B3B342F005BB31C /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
-		371B6F412B3B342F005BB31C /* DispatchQueueExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchQueueExtensions.swift; sourceTree = "<group>"; };
 		371B6F432B3B342F005BB31C /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		371B6F442B3B342F005BB31C /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
 		371B6F452B3B342F005BB31C /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
@@ -944,7 +942,6 @@
 			isa = PBXGroup;
 			children = (
 				371B6F402B3B342F005BB31C /* CharacterExtensions.swift */,
-				371B6F412B3B342F005BB31C /* DispatchQueueExtensions.swift */,
 				371B6F432B3B342F005BB31C /* ColorExtensions.swift */,
 				371B6F442B3B342F005BB31C /* FontExtensions.swift */,
 				371B6F452B3B342F005BB31C /* ImageExtensions.swift */,
@@ -1834,7 +1831,6 @@
 				379A9E3E2BE4D292001AE79E /* EditingPanelMoveBackwardKey.swift in Sources */,
 				371B6FB82B3B342F005BB31C /* CantoneseABCSwitch.swift in Sources */,
 				371B6FD52B3B342F005BB31C /* PadExpansibleInputKey.swift in Sources */,
-				371B6FC12B3B342F005BB31C /* DispatchQueueExtensions.swift in Sources */,
 				371B6FAE2B3B342F005BB31C /* RomanizationLabel.swift in Sources */,
 				371B6FB72B3B342F005BB31C /* MotherBoard.swift in Sources */,
 				371B6FD32B3B342F005BB31C /* HapticFeedback.swift in Sources */,

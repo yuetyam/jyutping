@@ -7,7 +7,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private lazy var isKeyboardPrepared: Bool = false
         private func prepareKeyboard() {
                 _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = self.children.map({ $0.removeFromParent() })
+                _ = children.map({ $0.removeFromParent() })
                 UserLexicon.prepare()
                 Engine.prepare()
                 instantiateHapticFeedbacks()
@@ -16,6 +16,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 updateSpaceKeyForm()
                 updateReturnKey()
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
+                addChild(motherBoard)
                 view.addSubview(motherBoard.view)
                 motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -25,7 +26,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         motherBoard.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
                 ])
                 motherBoard.view.backgroundColor = view.backgroundColor
-                self.addChild(motherBoard)
                 isKeyboardPrepared = true
         }
         override func viewDidLoad() {
@@ -48,7 +48,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         override func viewWillDisappear(_ animated: Bool) {
                 super.viewWillDisappear(animated)
                 _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = self.children.map({ $0.removeFromParent() })
+                _ = children.map({ $0.removeFromParent() })
                 isKeyboardPrepared = false
                 releaseHapticFeedbacks()
                 selectedCandidates = []
@@ -124,7 +124,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
                 defer {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                        Task {
+                                try await Task.sleep(nanoseconds: 40_000_000) // 0.04s
                                 canMarkText = true
                         }
                 }
@@ -153,12 +154,14 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 textDocumentProxy.setMarkedText(text, selectedRange: range)
                 textDocumentProxy.unmarkText()
                 defer {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) { [unowned self] in
+                        Task {
+                                try await Task.sleep(nanoseconds: 80_000_000) // 0.08s
                                 canMarkText = true
                         }
                 }
                 defer {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) { [unowned self] in
+                        Task {
+                                try await Task.sleep(nanoseconds: 40_000_000) // 0.04s
                                 let location: Int = String.zeroWidthSpace.utf16.count
                                 let range: NSRange = NSRange(location: location, length: 0)
                                 textDocumentProxy.setMarkedText(String.zeroWidthSpace, selectedRange: range)
@@ -806,14 +809,13 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var isKeyboardHeightExpanded: Bool = false
         func toggleKeyboardHeight() {
                 isKeyboardHeightExpanded.toggle()
-                DispatchQueue.main.async { [unowned self] in
-                        self.reloadKeyboard()
-                }
+                reloadKeyboard()
         }
         private func reloadKeyboard() {
                 _ = view.subviews.map({ $0.removeFromSuperview() })
-                _ = self.children.map({ $0.removeFromParent() })
+                _ = children.map({ $0.removeFromParent() })
                 let motherBoard = UIHostingController(rootView: MotherBoard().environmentObject(self))
+                addChild(motherBoard)
                 view.addSubview(motherBoard.view)
                 motherBoard.view.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
@@ -823,7 +825,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         motherBoard.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
                 ])
                 motherBoard.view.backgroundColor = view.backgroundColor
-                self.addChild(motherBoard)
         }
 
         @Published private(set) var keyboardInterface: KeyboardInterface = .phonePortrait

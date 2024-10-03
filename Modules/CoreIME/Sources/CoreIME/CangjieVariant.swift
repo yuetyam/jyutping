@@ -7,9 +7,9 @@ public enum CangjieVariant: Int {
         /// 倉頡三代
         case cangjie3 = 12
 
-        /// 速成（倉頡五代）
+        /// 速成五代
         case quick5 = 21
 
-        /// 速成（倉頡三代）
+        /// 速成三代
         case quick3 = 22
 }

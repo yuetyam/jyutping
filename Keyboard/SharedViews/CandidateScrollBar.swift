@@ -38,7 +38,7 @@ struct CandidateScrollBar: View {
                                                         let candidate = context.candidates[index]
                                                         let text: AttributedString = candidate.text.attributed(for: characterStandard)
                                                         ScrollViewButton(
-                                                                longPressTime: 0.4,
+                                                                longPressTime: 400_000_000, // 0.4s
                                                                 longPressAction: {
                                                                         guard !isReleaseActionTriggered else { return }
                                                                         defer { isLongPressActionTriggered = true }

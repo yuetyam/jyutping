@@ -4,8 +4,15 @@ import SwiftUI
 
 struct ScrollViewButton<Label: View>: View {
 
+        /// Button for ScrollView
+        /// - Parameters:
+        ///   - longPressTime: Long-press delay in nanosecond
+        ///   - longPressAction: Long-press action
+        ///   - endAction: Ending action
+        ///   - releaseAction: Releasing action
+        ///   - label: View
         init(
-                longPressTime: TimeInterval = 0.4,
+                longPressTime: UInt64 = 400_000_000, // 0.4s
                 longPressAction: @escaping () -> Void = {},
                 endAction: @escaping () -> Void = {},
                 releaseAction: @escaping () -> Void,
@@ -31,8 +38,13 @@ struct ScrollViewButton<Label: View>: View {
 
 private struct ScrollViewButtonStyle: ButtonStyle {
 
+        /// Button Style
+        /// - Parameters:
+        ///   - longPressTime: Long-press delay in nanosecond
+        ///   - longPressAction: Long-press action
+        ///   - endAction: Ending action
         init(
-                longPressTime: TimeInterval,
+                longPressTime: UInt64,
                 longPressAction: @escaping () -> Void,
                 endAction: @escaping () -> Void
         ) {
@@ -41,7 +53,7 @@ private struct ScrollViewButtonStyle: ButtonStyle {
                 self.endAction = endAction
         }
 
-        private let longPressTime: TimeInterval
+        private let longPressTime: UInt64
         private let longPressAction: () -> Void
         private let endAction: () -> Void
 
@@ -60,7 +72,10 @@ private struct ScrollViewButtonStyle: ButtonStyle {
         }
 
         private func tryTriggerLongPressAfterDelay(triggered date: Date) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + longPressTime) {
+                Task {
+                        try await Task.sleep(nanoseconds: longPressTime)
+
+                        // TODO: Better way to compare?
                         if date == longPressDate {
                                 longPressAction()
                         }

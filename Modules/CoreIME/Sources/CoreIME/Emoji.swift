@@ -80,7 +80,7 @@ extension Engine {
                         return match(text: pingText, input: text)
                 })
                 let symbols: [Candidate] = regular + matches.flatMap({ $0 })
-                return symbols.uniqued()
+                return symbols
         }
 
         private static func match(text: String, input: String) -> [Candidate] {
