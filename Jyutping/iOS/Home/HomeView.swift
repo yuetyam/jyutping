@@ -9,7 +9,7 @@ struct HomeView: View {
 
         @State private var isKeyboardEnabled: Bool = {
                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return false }
-                return keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
+                return keyboards.contains(PresetConstant.KeyboardIdentifier)
         }()
         @State private var isGuideViewExpanded: Bool = false
 
@@ -143,7 +143,7 @@ struct HomeView: View {
                         .animation(.default, value: isGuideViewExpanded)
                         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                                 guard let keyboards: [String] = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else { return }
-                                let isContained: Bool = keyboards.contains("im.cantonese.CantoneseIM.Keyboard")
+                                let isContained: Bool = keyboards.contains(PresetConstant.KeyboardIdentifier)
                                 if isKeyboardEnabled != isContained {
                                         isKeyboardEnabled = isContained
                                 }

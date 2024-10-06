@@ -28,7 +28,7 @@
 		371B6EA32B3B3108005BB31C /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4B2B3B3107005BB31C /* TermView.swift */; };
 		371B6EA42B3B3108005BB31C /* SolarTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4C2B3B3107005BB31C /* SolarTermsView.swift */; };
 		371B6EA52B3B3108005BB31C /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4D2B3B3107005BB31C /* Term.swift */; };
-		371B6EA62B3B3108005BB31C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4E2B3B3107005BB31C /* Constant.swift */; };
+		371B6EA62B3B3108005BB31C /* PresetConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4E2B3B3107005BB31C /* PresetConstant.swift */; };
 		371B6EA72B3B3108005BB31C /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E4F2B3B3107005BB31C /* Device.swift */; };
 		371B6EA82B3B3108005BB31C /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E512B3B3107005BB31C /* ColorExtensions.swift */; };
 		371B6EA92B3B3108005BB31C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6E522B3B3107005BB31C /* FontExtensions.swift */; };
@@ -385,7 +385,7 @@
 		371B6E4B2B3B3107005BB31C /* TermView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
 		371B6E4C2B3B3107005BB31C /* SolarTermsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolarTermsView.swift; sourceTree = "<group>"; };
 		371B6E4D2B3B3107005BB31C /* Term.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
-		371B6E4E2B3B3107005BB31C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		371B6E4E2B3B3107005BB31C /* PresetConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetConstant.swift; sourceTree = "<group>"; };
 		371B6E4F2B3B3107005BB31C /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		371B6E512B3B3107005BB31C /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		371B6E522B3B3107005BB31C /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
@@ -1238,7 +1238,7 @@
 			isa = PBXGroup;
 			children = (
 				371B6E972B3B3108005BB31C /* AppMaster.swift */,
-				371B6E4E2B3B3107005BB31C /* Constant.swift */,
+				371B6E4E2B3B3107005BB31C /* PresetConstant.swift */,
 				371B6E4F2B3B3107005BB31C /* Device.swift */,
 			);
 			path = SharedModels;
@@ -1932,7 +1932,7 @@
 				371B6EE32B3B3108005BB31C /* MacResourcesView.swift in Sources */,
 				371B6EE22B3B3108005BB31C /* MacConfusionView.swift in Sources */,
 				371B6EB12B3B3108005BB31C /* MenuCopyButton.swift in Sources */,
-				371B6EA62B3B3108005BB31C /* Constant.swift in Sources */,
+				371B6EA62B3B3108005BB31C /* PresetConstant.swift in Sources */,
 				371B6EB72B3B3108005BB31C /* CantoneseView.swift in Sources */,
 				371B6EC92B3B3108005BB31C /* YingWaaFanWanLabel.swift in Sources */,
 				37311A3E2BD9099D00B2D948 /* MacJyutpingInitialTable.swift in Sources */,

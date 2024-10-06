@@ -24,37 +24,37 @@ private extension Font {
 
         private static let fontNames: [String] = {
                 var names: [String] = []
-                let primaryQueue: [String] = [Constant.SFPro, Constant.Inter, Constant.Roboto]
+                let primaryQueue: [String] = [PresetConstant.SFPro, PresetConstant.Inter, PresetConstant.Roboto]
                 for name in primaryQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
-                names.append(Constant.HelveticaNeue)
+                names.append(PresetConstant.HelveticaNeue)
                 var shouldConsiderSupplementaryFonts: Bool = true
-                for name in Constant.primaryCJKVQueue {
+                for name in PresetConstant.primaryCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 shouldConsiderSupplementaryFonts = false
                                 break
                         }
                 }
-                for name in Constant.systemCJKVQueue {
+                for name in PresetConstant.systemCJKVQueue {
                         if found(font: name) {
                                 names.append(name)
                                 break
                         }
                 }
                 if shouldConsiderSupplementaryFonts {
-                        for name in Constant.supplementaryCJKVQueue {
+                        for name in PresetConstant.supplementaryCJKVQueue {
                                 if found(font: name) {
                                         names.append(name)
                                         break
                                 }
                         }
                 }
-                names.append(contentsOf: Constant.fallbackCJKVList)
+                names.append(contentsOf: PresetConstant.fallbackCJKVList)
                 return names
         }()
 
