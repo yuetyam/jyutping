@@ -42,7 +42,11 @@ struct JyutpingApp: App {
 struct JyutpingApp: App {
         var body: some Scene {
                 WindowGroup {
-                        IOSContentView()
+                        if #available(iOS 18.0, *) {
+                                IOS18ContentView()
+                        } else {
+                                IOSContentView()
+                        }
                 }
         }
 }

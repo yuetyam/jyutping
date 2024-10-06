@@ -6,21 +6,21 @@ struct FAQView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("IOSHomeTab.FAQ.Question.ExternalKeyboards").font(.significant)
+                                Text("IOSHomeTab.FAQ.Question.ExternalKeyboards").font(.headline)
                                 Text("IOSHomeTab.FAQ.Answer.ExternalKeyboards")
                         }
                         Section {
-                                Text("IOSHomeTab.FAQ.Question.FullAccess").font(.significant)
+                                Text("IOSHomeTab.FAQ.Question.FullAccess").font(.headline)
                                 if Device.isPad {
                                         Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard")
                                 } else {
                                         HStack {
-                                                Text(verbatim: "1.").font(.system(size: 15, design: .monospaced))
+                                                Text(verbatim: "1.").font(.subheadline.monospacedDigit())
                                                 Text("IOSHomeTab.FAQ.Answer.FullAccess.Row1.Haptic")
                                                 Spacer()
                                         }
                                         HStack {
-                                                Text(verbatim: "2.").font(.system(size: 15, design: .monospaced))
+                                                Text(verbatim: "2.").font(.subheadline.monospacedDigit())
                                                 Text("IOSHomeTab.FAQ.Answer.FullAccess.Row2.Clipboard")
                                                 Spacer()
                                         }
@@ -30,7 +30,7 @@ struct FAQView: View {
                         }
 
                         Section {
-                                Text("IOSHomeTab.FAQ.Question.TTS").font(.significant)
+                                Text("IOSHomeTab.FAQ.Question.TTS").font(.headline)
                                 HStack {
                                         Text.dotMark
                                         Text("IOSHomeTab.Text2Speech.Notice1")
@@ -59,7 +59,7 @@ struct FAQView: View {
                         }
 
                         Section {
-                                Text("IOSHomeTab.FAQ.Question.RestartKeyboard").font(.significant)
+                                Text("IOSHomeTab.FAQ.Question.RestartKeyboard").font(.headline)
                                 Text("IOSHomeTab.FAQ.Answer.RestartKeyboard")
                         }
                 }

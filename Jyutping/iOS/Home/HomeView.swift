@@ -1,6 +1,7 @@
 #if os(iOS)
 
 import SwiftUI
+import CommonExtensions
 
 struct HomeView: View {
 
@@ -14,7 +15,7 @@ struct HomeView: View {
 
         private var shouldDisplayHapticFeedbackTip: Bool {
                 guard Device.isPhone else { return false }
-                return !isKeyboardEnabled || isGuideViewExpanded
+                return isKeyboardEnabled.negative || isGuideViewExpanded
         }
 
         private let clipboardImageName: String = {
@@ -46,9 +47,9 @@ struct HomeView: View {
                                                         isGuideViewExpanded.toggle()
                                                 }
                                         } else {
-                                                Text("IOSHomeTab.Heading.HowToEnableThisKeyboard").font(.significant)
+                                                Text("IOSHomeTab.Heading.HowToEnableThisKeyboard").font(.headline)
                                         }
-                                        if !isKeyboardEnabled || isGuideViewExpanded {
+                                        if (isKeyboardEnabled.negative || isGuideViewExpanded) {
                                                 VStack(spacing: 5) {
                                                         HStack {
                                                                 Text.dotMark
@@ -79,7 +80,7 @@ struct HomeView: View {
                                                 EmptyView()
                                         }
                                 }
-                                if !isKeyboardEnabled || isGuideViewExpanded {
+                                if (isKeyboardEnabled.negative || isGuideViewExpanded) {
                                         Section {
                                                 GoToSettingsLinkView()
                                         }
@@ -92,26 +93,26 @@ struct HomeView: View {
 
                                 Group {
                                         Section {
-                                                Text("Shared.Guide.Heading.ToneInput").font(.significant)
-                                                Text("Shared.Guide.Body.ToneInput").font(.fixedWidth)
+                                                Text("Shared.Guide.Heading.ToneInput").font(.headline)
+                                                Text("Shared.Guide.Body.ToneInput").font(.body.monospaced())
                                                 Text("Shared.Guide.Example.ToneInput")
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.PinyinReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Heading.PinyinReverseLookup").font(.headline)
                                                 Text("Shared.Guide.Body.PinyinReverseLookup")
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.CangjieReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Heading.CangjieReverseLookup").font(.headline)
                                                 Text("Shared.Guide.Body.CangjieReverseLookup")
                                                 Text("Shared.Guide.Body.CangjieReverseLookup.Note")
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.StrokeReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Heading.StrokeReverseLookup").font(.headline)
                                                 Text("Shared.Guide.Body.StrokeReverseLookup")
-                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.fixedWidth)
+                                                Text("Shared.Guide.Example.StrokeReverseLookup").font(.body.monospaced())
                                         }
                                         Section {
-                                                Text("Shared.Guide.Heading.StructureReverseLookup").font(.significant)
+                                                Text("Shared.Guide.Heading.StructureReverseLookup").font(.headline)
                                                 Text("Shared.Guide.Body.StructureReverseLookup")
                                         }
                                 }

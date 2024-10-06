@@ -11,7 +11,7 @@ extension Font {
         static let copilot: Font = enhancedFont(size: 12)
         #else
         static let master: Font = Font.body
-        static let significant: Font = Font.body.weight(.medium)
+        static let significant: Font = Font.headline
         static let copilot: Font = Font.subheadline
         #endif
 }

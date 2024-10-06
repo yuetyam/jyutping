@@ -7,7 +7,7 @@ struct IOSExpressionsView: View {
                 List {
                         Group {
                                 Section {
-                                        Text(verbatim: "第一人稱代詞").font(.significant)
+                                        Text(verbatim: "第一人稱代詞").font(.headline)
                                         Label {
                                                 HStack {
                                                         Text(verbatim: "單數：我")
@@ -33,7 +33,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "第二人稱代詞").font(.significant)
+                                        Text(verbatim: "第二人稱代詞").font(.headline)
                                         Label {
                                                 HStack {
                                                         Text(verbatim: "單數：你")
@@ -64,7 +64,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "第三人稱代詞").font(.significant)
+                                        Text(verbatim: "第三人稱代詞").font(.headline)
                                         Label {
                                                 HStack {
                                                         Text(verbatim: "單數：佢")
@@ -97,7 +97,7 @@ struct IOSExpressionsView: View {
                         }
                         Group {
                                 Section {
-                                        Text(verbatim: "區分【係】以及【喺】").font(.significant)
+                                        Text(verbatim: "區分【係】以及【喺】").font(.headline)
                                         HStack {
                                                 Text(verbatim: "係")
                                                 HStack(spacing: 2) {
@@ -128,7 +128,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分【諗】以及【冧】").font(.significant)
+                                        Text(verbatim: "區分【諗】以及【冧】").font(.headline)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "諗")
                                                 HStack(spacing: 2) {
@@ -159,7 +159,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "區分【咁】以及【噉】").font(.significant)
+                                        Text(verbatim: "區分【咁】以及【噉】").font(.headline)
                                         HStack(spacing: 16) {
                                                 Text(verbatim: "咁")
                                                 HStack(spacing: 2) {
@@ -192,14 +192,14 @@ struct IOSExpressionsView: View {
                         }
                         Group {
                                 Section {
-                                        Text(verbatim: "推薦【嘅/個得噉】 避免【的得地】").font(.significant)
+                                        Text(verbatim: "推薦【嘅/個得噉】 避免【的得地】").font(.headline)
                                         Text(verbatim: "例：我嘅細佬／我個細佬。")
                                         Text(verbatim: "例：講得好！")
                                         Text(verbatim: "例：細細聲噉講話。")
                                 }
 
                                 Section {
-                                        Text(verbatim: "推薦【啩、啊嘛】 避免【吧】").font(.significant)
+                                        Text(verbatim: "推薦【啩、啊嘛】 避免【吧】").font(.headline)
                                         Label {
                                                 Text(verbatim: "下個禮拜會出啩。")
                                         } icon: {
@@ -222,7 +222,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【啦、嘞】 避免【了】").font(.significant)
+                                        Text(verbatim: "推薦【啦、嘞】 避免【了】").font(.headline)
                                         Label {
                                                 Text(verbatim: "各位，我毋客氣啦。")
                                         } icon: {
@@ -245,7 +245,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【使】 避免【駛、洗】").font(.significant)
+                                        Text(verbatim: "推薦【使】 避免【駛、洗】").font(.headline)
                                         Label {
                                                 Text(verbatim: "毋使驚")
                                         } icon: {
@@ -263,7 +263,7 @@ struct IOSExpressionsView: View {
                                         }
                                 }
                                 Section {
-                                        Text(verbatim: "推薦【而家】 避免【宜家】").font(.significant)
+                                        Text(verbatim: "推薦【而家】 避免【宜家】").font(.headline)
                                         Label {
                                                 Text(verbatim: "我而家食緊飯。")
                                         } icon: {

@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct Speaker: View {
 
@@ -10,10 +11,6 @@ struct Speaker: View {
                 self.action = action
         }
 
-        @Environment(\.colorScheme) private var colorScheme
-        private var background: Color {
-                return Color.backgroundColor(colorScheme: colorScheme)
-        }
         private let length: CGFloat = {
                 #if os(iOS)
                 return 32
@@ -52,13 +49,13 @@ struct Speaker: View {
                                         isSpeaking = false
                                 }
                                 .onReceive(timer) { _ in
-                                        if !(Speech.isSpeaking) {
+                                        if Speech.isSpeaking.negative {
                                                 isSpeaking = false
                                         }
                                 }
                 } else {
                         ZStack {
-                                Circle().foregroundStyle(background)
+                                Circle().fill(Material.regular)
                                 Image.speaker
                                         .resizable()
                                         .scaledToFit()
@@ -69,9 +66,7 @@ struct Speaker: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                                 isSpeaking = true
-                                if let text = text {
-                                        Speech.speak(text)
-                                }
+                                text.flatMap({ Speech.speak($0) })
                                 action?()
                         }
                 }

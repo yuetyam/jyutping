@@ -10,7 +10,7 @@ struct EnablingKeyboardView: View {
         var body: some View {
                 List {
                         Section {
-                                Text("IOSHomeTab.EnablingKeyboardView.Question.KeyboardNotFound").font(.significant)
+                                Text("IOSHomeTab.EnablingKeyboardView.Question.KeyboardNotFound").font(.headline)
                                 Text("IOSHomeTab.EnablingKeyboardView.Answer.KeyboardNotFound")
                                 SafariLink(closeApp) {
                                         HStack {
@@ -21,7 +21,7 @@ struct EnablingKeyboardView: View {
                                 }
                         }
                         Section {
-                                Text("IOSHomeTab.EnablingKeyboardView.Question.KeyboardUnavailable").font(.significant)
+                                Text("IOSHomeTab.EnablingKeyboardView.Question.KeyboardUnavailable").font(.headline)
                                 Text("IOSHomeTab.EnablingKeyboardView.Answer.KeyboardUnavailable")
                                 SafariLink(restartDevice) {
                                         HStack {
