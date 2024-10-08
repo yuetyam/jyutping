@@ -537,6 +537,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 default:
                         guard modifiers.contains(.deviceIndependentFlagsMask).negative else { return false }
                 }
+                let isShifting: Bool = (modifiers == .shift)
                 switch code.representative {
                 case .alphabet(_):
                         switch inputForm {
@@ -627,7 +628,18 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 isEventHandled = true
                         }
                 case .space:
-                        isEventHandled = true
+                        switch inputForm {
+                        case .cantonese:
+                                let shouldHandle: Bool = isBuffering || isShifting
+                                guard shouldHandle else { return false }
+                                isEventHandled = true
+                        case .transparent:
+                                let shouldHandle: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
+                                guard shouldHandle else { return false }
+                                isEventHandled = true
+                        case .options:
+                                isEventHandled = true
+                        }
                 case .tab:
                         switch inputForm {
                         case .cantonese:
@@ -673,7 +685,6 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let selectionRange = NSRange(location: String.zeroWidthSpace.utf16.count, length: 0)
                         client?.setMarkedText(attributedText, selectionRange: selectionRange, replacementRange: replacementRange())
                 }
-                let isShifting: Bool = (modifiers == .shift)
                 Task { @MainActor in
                         process(keyCode: code, client: client, hasControlShiftModifiers: hasControlShiftModifiers, isShifting: isShifting)
                 }
@@ -875,15 +886,15 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         switch currentInputForm {
                         case .cantonese:
                                 guard isBuffering else { return }
-                                let text2pass: String? = {
+                                let romanization: String? = {
                                         guard isShifting && candidates.isNotEmpty else { return nil }
                                         let index = appContext.highlightedIndex
                                         guard let candidate = appContext.displayCandidates.fetch(index)?.candidate else { return nil }
                                         guard candidate.isCantonese else { return nil }
                                         return candidate.romanization
                                 }()
-                                if let text2pass {
-                                        insert(text2pass)
+                                if let romanization {
+                                        insert(romanization)
                                         clearBufferText()
                                 } else {
                                         passBuffer()
@@ -947,25 +958,26 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                         updateWindowFrame(.zero)
                                         return
                                 }
-                                if candidates.isEmpty {
-                                        passBuffer()
-                                        let shouldInsertFullWidthSpace: Bool = isShifting || Options.characterForm.isFullWidth
-                                        let text: String = shouldInsertFullWidthSpace ? String.fullWidthSpace : String.space
-                                        insert(text)
-                                } else {
+                                if candidates.isNotEmpty {
                                         let index = appContext.highlightedIndex
                                         guard let selectedItem = appContext.displayCandidates.fetch(index) else { return }
                                         insert(selectedItem.text)
                                         aftercareSelection(selectedItem)
+                                } else if isBuffering {
+                                        passBuffer()
+                                } else if isShifting || Options.characterForm.isFullWidth {
+                                        insert(String.fullWidthSpace)
+                                } else {
+                                        insert(String.space)
                                 }
                         case .transparent:
                                 let shouldSwitchToCantoneseMode: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
-                                guard shouldSwitchToCantoneseMode else {
+                                if shouldSwitchToCantoneseMode {
+                                        Options.updateInputMethodMode(to: .cantonese)
+                                        updateInputForm(to: .cantonese)
+                                } else {
                                         insert(String.space)
-                                        return
                                 }
-                                Options.updateInputMethodMode(to: .cantonese)
-                                updateInputForm(to: .cantonese)
                         case .options:
                                 handleOptions()
                         }
