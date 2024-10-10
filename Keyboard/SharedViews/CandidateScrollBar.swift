@@ -101,7 +101,7 @@ struct CandidateScrollBar: View {
                                                 }
                                         }
                                 }
-                                .frame(width: context.keyboardWidth - expanderWidth, height: Constant.toolBarHeight)
+                                .frame(width: context.keyboardWidth - expanderWidth, height: PresetConstant.toolBarHeight)
                                 .onChange(of: context.candidatesState) { _ in
                                         proxy.scrollTo(topID)
                                 }
@@ -123,7 +123,7 @@ struct CandidateScrollBar: View {
                                 }
                         }
                         .buttonStyle(.plain)
-                        .frame(width: expanderWidth, height: Constant.toolBarHeight)
+                        .frame(width: expanderWidth, height: PresetConstant.toolBarHeight)
                 }
         }
 }

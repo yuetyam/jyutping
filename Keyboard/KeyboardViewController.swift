@@ -258,9 +258,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         }
 
         // TenKey layout
-        @Published private(set) var sidebarTexts: [String] = Constant.defaultSidebarTexts
+        @Published private(set) var sidebarTexts: [String] = PresetConstant.defaultSidebarTexts
         private func resetSidebarTexts() {
-                sidebarTexts = Constant.defaultSidebarTexts
+                sidebarTexts = PresetConstant.defaultSidebarTexts
         }
 
 
@@ -285,15 +285,15 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         switch text {
-                        case Constant.kGW where Options.keyboardLayout == .tripleStroke:
-                                if tripleStrokeBuffer.last == Constant.kGW {
+                        case PresetConstant.kGW where Options.keyboardLayout == .tripleStroke:
+                                if tripleStrokeBuffer.last == PresetConstant.kGW {
                                         tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
-                                        tripleStrokeBuffer.append(Constant.kKW)
+                                        tripleStrokeBuffer.append(PresetConstant.kKW)
                                 } else {
                                         tripleStrokeBuffer.append(text)
                                 }
                                 let fullText: String = bufferText + text
-                                bufferText = fullText.replacingOccurrences(of: Constant.kDoubleGW, with: Constant.kKW, options: [.anchored, .backwards])
+                                bufferText = fullText.replacingOccurrences(of: PresetConstant.kDoubleGW, with: PresetConstant.kKW, options: [.anchored, .backwards])
                         case _ where text.isLetters:
                                 appendBufferText(text)
                         case _ where (Options.keyboardLayout == .tripleStroke) && (text.first?.isCantoneseToneDigit ?? false):

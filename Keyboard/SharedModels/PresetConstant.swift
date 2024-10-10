@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Constant {
+struct PresetConstant {
         static let toolBarHeight: CGFloat = 60
 
         static let halfWidth: String = "半寬"

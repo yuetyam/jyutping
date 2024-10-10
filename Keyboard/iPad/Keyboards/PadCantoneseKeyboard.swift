@@ -53,10 +53,10 @@ struct PadCantoneseKeyboard: View {
                                         PadPullableInputKey(upper: "：", lower: "m")
                                 }
                                 if context.keyboardCase.isUppercased {
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: Constant.halfWidth)]))
-                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: Constant.halfWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("！"), members: [KeyElement("！"), KeyElement("!", header: PresetConstant.halfWidth)]))
+                                        PadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("？"), members: [KeyElement("？"), KeyElement("?", header: PresetConstant.halfWidth)]))
                                 } else {
-                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", header: Constant.halfWidth), KeyElement("!", header: Constant.halfWidth)]))
+                                        PadUpperLowerInputKey(keyLocale: .trailing, upper: "！", lower: "，", keyModel: KeyModel(primary: KeyElement("，"), members: [KeyElement("，"), KeyElement("！"), KeyElement(",", header: PresetConstant.halfWidth), KeyElement("!", header: PresetConstant.halfWidth)]))
                                         PadUpperLowerInputKey(
                                                 keyLocale: .trailing,
                                                 upper: "？",
@@ -66,8 +66,8 @@ struct PadCantoneseKeyboard: View {
                                                         members: [
                                                                 KeyElement("。"),
                                                                 KeyElement("？"),
-                                                                KeyElement("｡", header: Constant.halfWidth),
-                                                                KeyElement("?", header: Constant.halfWidth),
+                                                                KeyElement("｡", header: PresetConstant.halfWidth),
+                                                                KeyElement("?", header: PresetConstant.halfWidth),
                                                                 KeyElement(".", header: "英文半寬"),
                                                                 KeyElement("．", header: "英文全寬")
                                                         ]

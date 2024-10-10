@@ -5,7 +5,7 @@ struct ToolBar: View {
         @EnvironmentObject private var context: KeyboardViewController
 
         private let buttonWidth: CGFloat = 50
-        private let buttonHeight: CGFloat = Constant.toolBarHeight
+        private let buttonHeight: CGFloat = PresetConstant.toolBarHeight
 
         private let editingButtonImageName: String = {
                 if #available(iOSApplicationExtension 16.0, *) {

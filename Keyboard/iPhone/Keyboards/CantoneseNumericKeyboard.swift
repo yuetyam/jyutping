@@ -13,7 +13,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("1"),
                                                            members: [
                                                                 KeyElement("1"),
-                                                                KeyElement("１", header: Constant.fullWidth),
+                                                                KeyElement("１", header: PresetConstant.fullWidth),
                                                                 KeyElement("壹"),
                                                                 KeyElement("¹", header: "上標"),
                                                                 KeyElement("₁", header: "下標"),
@@ -25,7 +25,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("2"),
                                                            members: [
                                                                 KeyElement("2"),
-                                                                KeyElement("２", header: Constant.fullWidth),
+                                                                KeyElement("２", header: PresetConstant.fullWidth),
                                                                 KeyElement("貳"),
                                                                 KeyElement("²", header: "上標"),
                                                                 KeyElement("₂", header: "下標"),
@@ -37,7 +37,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("3"),
                                                            members: [
                                                                 KeyElement("3"),
-                                                                KeyElement("３", header: Constant.fullWidth),
+                                                                KeyElement("３", header: PresetConstant.fullWidth),
                                                                 KeyElement("叁"),
                                                                 KeyElement("³", header: "上標"),
                                                                 KeyElement("₃", header: "下標"),
@@ -49,7 +49,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("4"),
                                                            members: [
                                                                 KeyElement("4"),
-                                                                KeyElement("４", header: Constant.fullWidth),
+                                                                KeyElement("４", header: PresetConstant.fullWidth),
                                                                 KeyElement("肆"),
                                                                 KeyElement("⁴", header: "上標"),
                                                                 KeyElement("₄", header: "下標"),
@@ -61,7 +61,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("5"),
                                                            members: [
                                                                 KeyElement("5"),
-                                                                KeyElement("５", header: Constant.fullWidth),
+                                                                KeyElement("５", header: PresetConstant.fullWidth),
                                                                 KeyElement("伍"),
                                                                 KeyElement("⁵", header: "上標"),
                                                                 KeyElement("₅", header: "下標"),
@@ -73,7 +73,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("6"),
                                                            members: [
                                                                 KeyElement("6"),
-                                                                KeyElement("６", header: Constant.fullWidth),
+                                                                KeyElement("６", header: PresetConstant.fullWidth),
                                                                 KeyElement("陸"),
                                                                 KeyElement("⁶", header: "上標"),
                                                                 KeyElement("₆", header: "下標"),
@@ -85,7 +85,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("7"),
                                                            members: [
                                                                 KeyElement("7"),
-                                                                KeyElement("７", header: Constant.fullWidth),
+                                                                KeyElement("７", header: PresetConstant.fullWidth),
                                                                 KeyElement("柒"),
                                                                 KeyElement("⁷", header: "上標"),
                                                                 KeyElement("₇", header: "下標"),
@@ -97,7 +97,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("8"),
                                                            members: [
                                                                 KeyElement("8"),
-                                                                KeyElement("８", header: Constant.fullWidth),
+                                                                KeyElement("８", header: PresetConstant.fullWidth),
                                                                 KeyElement("捌"),
                                                                 KeyElement("⁸", header: "上標"),
                                                                 KeyElement("₈", header: "下標"),
@@ -109,7 +109,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("9"),
                                                            members: [
                                                                 KeyElement("9"),
-                                                                KeyElement("９", header: Constant.fullWidth),
+                                                                KeyElement("９", header: PresetConstant.fullWidth),
                                                                 KeyElement("玖"),
                                                                 KeyElement("⁹", header: "上標"),
                                                                 KeyElement("₉", header: "下標"),
@@ -121,7 +121,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("0"),
                                                            members: [
                                                                 KeyElement("0"),
-                                                                KeyElement("０", header: Constant.fullWidth),
+                                                                KeyElement("０", header: PresetConstant.fullWidth),
                                                                 KeyElement("零"),
                                                                 KeyElement("⁰", header: "上標"),
                                                                 KeyElement("₀", header: "下標"),
@@ -137,7 +137,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("-"),
                                                            members: [
                                                                 KeyElement("-"),
-                                                                KeyElement("－", header: Constant.fullWidth, footer: "FF0D"),
+                                                                KeyElement("－", header: PresetConstant.fullWidth, footer: "FF0D"),
                                                                 KeyElement("—", footer: "2014"),
                                                                 KeyElement("–", footer: "2013"),
                                                                 KeyElement("•", footer: "2022")
@@ -148,7 +148,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("/"),
                                                            members: [
                                                                 KeyElement("/"),
-                                                                KeyElement("／", header: Constant.fullWidth),
+                                                                KeyElement("／", header: PresetConstant.fullWidth),
                                                                 KeyElement("\\"),
                                                                 KeyElement("÷")
                                                            ])
@@ -158,7 +158,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("："),
                                                            members: [
                                                                 KeyElement("："),
-                                                                KeyElement(":", header: Constant.halfWidth)
+                                                                KeyElement(":", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -166,7 +166,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("；"),
                                                            members: [
                                                                 KeyElement("；"),
-                                                                KeyElement(";", header: Constant.halfWidth)
+                                                                KeyElement(";", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -174,7 +174,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("（"),
                                                            members: [
                                                                 KeyElement("（"),
-                                                                KeyElement("(", header: Constant.halfWidth)
+                                                                KeyElement("(", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -182,7 +182,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("）"),
                                                            members: [
                                                                 KeyElement("）"),
-                                                                KeyElement(")", header: Constant.halfWidth)
+                                                                KeyElement(")", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -203,7 +203,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("@"),
                                                            members: [
                                                                 KeyElement("@"),
-                                                                KeyElement("＠", header: Constant.fullWidth)
+                                                                KeyElement("＠", header: PresetConstant.fullWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -215,8 +215,8 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement("\u{0022}", footer: "0022"),
                                                                 KeyElement("\u{201C}", footer: "201C"),
                                                                 KeyElement("\u{2018}", footer: "2018"),
-                                                                KeyElement("﹁", header: Constant.verticalText),
-                                                                KeyElement("﹃", header: Constant.verticalText)
+                                                                KeyElement("﹁", header: PresetConstant.verticalText),
+                                                                KeyElement("﹃", header: PresetConstant.verticalText)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -228,8 +228,8 @@ struct CantoneseNumericKeyboard: View {
                                                                 KeyElement("\u{0022}", footer: "0022"),
                                                                 KeyElement("\u{201D}", footer: "201D"),
                                                                 KeyElement("\u{2019}", footer: "2019"),
-                                                                KeyElement("﹂", header: Constant.verticalText),
-                                                                KeyElement("﹄", header: Constant.verticalText)
+                                                                KeyElement("﹂", header: PresetConstant.verticalText),
+                                                                KeyElement("﹄", header: PresetConstant.verticalText)
                                                            ])
                                 )
                         }
@@ -242,7 +242,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("。"),
                                                            members: [
                                                                 KeyElement("。"),
-                                                                KeyElement("｡", header: Constant.halfWidth),
+                                                                KeyElement("｡", header: PresetConstant.halfWidth),
                                                                 KeyElement("⋯", footer: "22EF"),
                                                                 KeyElement("⋯⋯", footer: "22EF*2"),
                                                                 KeyElement("…", footer: "2026"),
@@ -255,7 +255,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("，"),
                                                            members: [
                                                                 KeyElement("，"),
-                                                                KeyElement(",", header: Constant.halfWidth)
+                                                                KeyElement(",", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -264,7 +264,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("、"),
                                                            members: [
                                                                 KeyElement("、"),
-                                                                KeyElement("､", header: Constant.halfWidth)
+                                                                KeyElement("､", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -273,7 +273,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("？"),
                                                            members: [
                                                                 KeyElement("？"),
-                                                                KeyElement("?", header: Constant.halfWidth)
+                                                                KeyElement("?", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -282,7 +282,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("！"),
                                                            members: [
                                                                 KeyElement("！"),
-                                                                KeyElement("!", header: Constant.halfWidth)
+                                                                KeyElement("!", header: PresetConstant.halfWidth)
                                                            ])
                                 )
                                 ExpansibleInputKey(
@@ -291,7 +291,7 @@ struct CantoneseNumericKeyboard: View {
                                         keyModel: KeyModel(primary: KeyElement("."),
                                                            members: [
                                                                 KeyElement("."),
-                                                                KeyElement("．", header: Constant.fullWidth, footer: "FF0E"),
+                                                                KeyElement("．", header: PresetConstant.fullWidth, footer: "FF0E"),
                                                                 KeyElement("…", footer: "2026")
                                                            ])
                                 )
