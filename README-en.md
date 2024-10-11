@@ -37,9 +37,9 @@ Feature highlights:
 Jyutping for Android: [yuetyam/jyutping-android](https://github.com/yuetyam/jyutping-android)
 
 ## Screenshots
-<img src="images/screenshot.png" alt="iPhone screenshots" width="300"/>
+<img src="images/screenshot.png" alt="iPhone screenshots" width="280"/>
 <br>
-<img src="images/screenshot-mac.png" alt="macOS screenshots" width="300"/>
+<img src="images/screenshot-mac.png" alt="macOS screenshots" width="280"/>
 
 ## iOS & iPadOS
 
