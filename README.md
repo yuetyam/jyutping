@@ -31,9 +31,13 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 另有 Android 版: [yuetyam/jyutping-android](https://github.com/yuetyam/jyutping-android)
 
 ## 擷屏（Screenshots）
-<img src="images/screenshot.png" alt="iPhone screenshots" width="280"/>
+<a href="https://apps.apple.com/hk/app/id1509367629">
+        <img src="images/screenshot.png" alt="iPhone screenshots" width="280"/>
+</a>
 <br>
-<img src="images/screenshot-mac.png" alt="macOS screenshots" width="280"/>
+<a href="https://jyutping.app/mac">
+        <img src="images/screenshot-mac.png" alt="macOS screenshots" width="280"/>
+</a>
 
 ## iOS & iPadOS
 
