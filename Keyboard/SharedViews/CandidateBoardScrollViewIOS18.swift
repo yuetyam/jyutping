@@ -1,66 +1,53 @@
 import SwiftUI
+import CommonExtensions
 import CoreIME
 
-extension Candidate {
-        var width: CGFloat {
-                switch self.type {
-                case .cantonese:
-                        return CGFloat(self.text.count * 20 + 28)
-                default:
-                        guard self.text.count > 1 else { return 48 }
-                        return CGFloat(self.text.count * 12)
-                }
-        }
-}
-
-struct CandidateScrollBar: View {
+@available(iOS 18.0, *)
+@available(iOSApplicationExtension 18.0, *)
+struct CandidateBoardScrollViewIOS18: View {
 
         @EnvironmentObject private var context: KeyboardViewController
-
-        @Namespace private var topID
 
         @State private var isLongPressActionTriggered: Bool = false
         @State private var isReleaseActionTriggered: Bool = false
 
-        private let expanderWidth: CGFloat = 44
+        @State private var scrollPosition = ScrollPosition()
 
         var body: some View {
                 let characterStandard: CharacterStandard = Options.characterStandard
                 let commentStyle: CommentStyle = Options.commentStyle
-                let commentToneStyle: CommentToneStyle = Options.commentToneStyle
+                let toneStyle: CommentToneStyle = Options.commentToneStyle
                 let isCompactKeyboard: Bool = context.keyboardInterface.isCompact
-                HStack(spacing: 0) {
-                        ScrollViewReader { proxy in
-                                ScrollView(.horizontal) {
-                                        LazyHStack(spacing: 0) {
-                                                EmptyView().id(topID)
-                                                ForEach(context.candidates.indices, id: \.self) { index in
-                                                        let candidate = context.candidates[index]
+                let rows = context.candidates.boardRows(keyboardWidth: context.keyboardWidth)
+                ScrollView(.vertical) {
+                        LazyVStack(spacing: 0) {
+                                ForEach(rows) { row in
+                                        HStack(spacing: 0) {
+                                                ForEach(row.elements) { element in
+                                                        let candidate = element.candidate
                                                         let text: AttributedString = candidate.text.attributed(for: characterStandard)
                                                         ScrollViewButton(
                                                                 longPressTime: 400_000_000, // 0.4s
                                                                 longPressAction: {
-                                                                        guard !isReleaseActionTriggered else { return }
+                                                                        guard isReleaseActionTriggered.negative else { return }
                                                                         defer { isLongPressActionTriggered = true }
                                                                         AudioFeedback.deleted()
                                                                         context.triggerHapticFeedback()
                                                                         UserLexicon.removeItem(candidate: candidate)
                                                                 },
                                                                 endAction: {
-                                                                        withAnimation(.default.delay(0.5)) {
+                                                                        Task {
+                                                                                try await Task.sleep(nanoseconds: 500_000_000) // 0.5s
                                                                                 isLongPressActionTriggered = false
                                                                                 isReleaseActionTriggered = false
                                                                         }
                                                                 },
                                                                 releaseAction: {
-                                                                        guard !isLongPressActionTriggered else { return }
+                                                                        guard isLongPressActionTriggered.negative else { return }
                                                                         defer { isReleaseActionTriggered = true }
                                                                         AudioFeedback.inputed()
                                                                         context.triggerSelectionHapticFeedback()
                                                                         context.operate(.select(candidate))
-                                                                        withAnimation {
-                                                                                proxy.scrollTo(topID)
-                                                                        }
                                                                 }
                                                         ) {
                                                                 ZStack {
@@ -68,62 +55,50 @@ struct CandidateScrollBar: View {
                                                                         switch commentStyle {
                                                                         case .aboveCandidates:
                                                                                 VStack(spacing: -2) {
-                                                                                        RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
+                                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
                                                                                         Text(text)
                                                                                                 .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
                                                                                 }
-                                                                                .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 12)
+                                                                                .padding(2)
                                                                         case .belowCandidates:
                                                                                 VStack(spacing: -2) {
                                                                                         Text(text)
                                                                                                 .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                                 .minimumScaleFactor(0.4)
                                                                                                 .lineLimit(1)
-                                                                                        RomanizationLabel(candidate: candidate, toneStyle: commentToneStyle)
+                                                                                        RomanizationLabel(candidate: candidate, toneStyle: toneStyle)
                                                                                 }
-                                                                                .padding(.horizontal, 1)
-                                                                                .padding(.bottom, 8)
+                                                                                .padding(2)
                                                                         case .noComments:
                                                                                 Text(text)
                                                                                         .font(isCompactKeyboard ? .candidate : .iPadCandidate)
                                                                                         .minimumScaleFactor(0.4)
                                                                                         .lineLimit(1)
-                                                                                        .padding(.horizontal, 1)
-                                                                                        .padding(.bottom, 8)
+                                                                                        .padding(4)
                                                                         }
                                                                 }
-                                                                .frame(width: candidate.width)
-                                                                .frame(maxHeight: .infinity)
+                                                                .frame(minWidth: candidate.width, maxWidth: .infinity, minHeight: PresetConstant.collapseHeight)
                                                         }
                                                 }
+                                                if row.identifier == CandidateBoardRow.minIdentifier {
+                                                        Color.clear.frame(width: PresetConstant.collapseWidth)
+                                                }
                                         }
-                                }
-                                .frame(width: context.keyboardWidth - expanderWidth, height: PresetConstant.toolBarHeight)
-                                .onChange(of: context.candidatesState) { _ in
-                                        proxy.scrollTo(topID)
+                                        Divider()
                                 }
                         }
-                        Button {
-                                AudioFeedback.modified()
-                                context.triggerHapticFeedback()
-                                context.updateKeyboardForm(to: .candidateBoard)
-                        } label: {
-                                ZStack {
-                                        ZStack(alignment: .leading) {
-                                                Color.interactiveClear
-                                                Rectangle().fill(Color.black).opacity(0.3).frame(width: 1, height: 24)
-                                        }
-                                        Image.downChevron
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 20, height: 20)
-                                }
+                }
+                .scrollPosition($scrollPosition, anchor: .top)
+                .defaultScrollAnchor(.top)
+                .defaultScrollAnchor(.top, for: .initialOffset)
+                .defaultScrollAnchor(.top, for: .alignment)
+                .defaultScrollAnchor(.top, for: .sizeChanges)
+                .onChange(of: context.candidatesState) {
+                        withAnimation {
+                                scrollPosition.scrollTo(edge: .top)
                         }
-                        .buttonStyle(.plain)
-                        .frame(width: expanderWidth, height: PresetConstant.toolBarHeight)
                 }
         }
 }

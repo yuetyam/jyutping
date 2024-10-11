@@ -131,7 +131,7 @@
 		371B6FAD2B3B342F005BB31C /* HiddenKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2A2B3B342E005BB31C /* HiddenKey.swift */; };
 		371B6FAE2B3B342F005BB31C /* RomanizationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */; };
 		371B6FAF2B3B342F005BB31C /* ScrollViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */; };
-		371B6FB02B3B342F005BB31C /* CandidateScrollBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */; };
+		371B6FB02B3B342F005BB31C /* CandidateBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2E2B3B342E005BB31C /* CandidateBar.swift */; };
 		371B6FB12B3B342F005BB31C /* SettingsViewIOS15.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */; };
 		371B6FB22B3B342F005BB31C /* ToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F302B3B342E005BB31C /* ToolBar.swift */; };
 		371B6FB32B3B342F005BB31C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F312B3B342E005BB31C /* SettingsView.swift */; };
@@ -226,6 +226,12 @@
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
 		375A90B32BD0797B009784BB /* TenKeyGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */; };
+		375B855D2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */; };
+		375B855F2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */; };
+		375B85612CB8FC4C000E124E /* CandidateBarScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B85602CB8FC4C000E124E /* CandidateBarScrollView.swift */; };
+		375B85632CB90409000E124E /* CandidateBoardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B85622CB90409000E124E /* CandidateBoardScrollView.swift */; };
+		375B85652CB904FB000E124E /* CandidateBoardScrollViewIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B85642CB904FB000E124E /* CandidateBoardScrollViewIOS18.swift */; };
+		375B85672CB906A7000E124E /* CandidateBoardScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B85662CB906A7000E124E /* CandidateBoardScrollViewIOS17.swift */; };
 		375D3A3D2B806C88005F13C1 /* TextRomanizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375D3A3C2B806C88005F13C1 /* TextRomanizationView.swift */; };
 		375FA76D2C0D5227001ABA39 /* ReverseLookupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */; };
 		3760AA412B4FB9BC0027EC11 /* EnablingKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */; };
@@ -489,7 +495,7 @@
 		371B6F2A2B3B342E005BB31C /* HiddenKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HiddenKey.swift; sourceTree = "<group>"; };
 		371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RomanizationLabel.swift; sourceTree = "<group>"; };
 		371B6F2D2B3B342E005BB31C /* ScrollViewButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewButton.swift; sourceTree = "<group>"; };
-		371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateScrollBar.swift; sourceTree = "<group>"; };
+		371B6F2E2B3B342E005BB31C /* CandidateBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBar.swift; sourceTree = "<group>"; };
 		371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewIOS15.swift; sourceTree = "<group>"; };
 		371B6F302B3B342E005BB31C /* ToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolBar.swift; sourceTree = "<group>"; };
 		371B6F312B3B342E005BB31C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -588,6 +594,12 @@
 		3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedReturnKeyType.swift; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
+		375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS17.swift; sourceTree = "<group>"; };
+		375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS18.swift; sourceTree = "<group>"; };
+		375B85602CB8FC4C000E124E /* CandidateBarScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollView.swift; sourceTree = "<group>"; };
+		375B85622CB90409000E124E /* CandidateBoardScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBoardScrollView.swift; sourceTree = "<group>"; };
+		375B85642CB904FB000E124E /* CandidateBoardScrollViewIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBoardScrollViewIOS18.swift; sourceTree = "<group>"; };
+		375B85662CB906A7000E124E /* CandidateBoardScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBoardScrollViewIOS17.swift; sourceTree = "<group>"; };
 		375D3A3C2B806C88005F13C1 /* TextRomanizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRomanizationView.swift; sourceTree = "<group>"; };
 		375FA76C2C0D5227001ABA39 /* ReverseLookupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseLookupView.swift; sourceTree = "<group>"; };
 		3760AA402B4FB9BC0027EC11 /* EnablingKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnablingKeyboardView.swift; sourceTree = "<group>"; };
@@ -915,8 +927,14 @@
 				371B6F352B3B342E005BB31C /* MotherBoard.swift */,
 				371B6F2F2B3B342E005BB31C /* SettingsViewIOS15.swift */,
 				371B6F312B3B342E005BB31C /* SettingsView.swift */,
+				371B6F2E2B3B342E005BB31C /* CandidateBar.swift */,
+				375B85602CB8FC4C000E124E /* CandidateBarScrollView.swift */,
+				375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */,
+				375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */,
 				371B6F322B3B342E005BB31C /* CandidateBoard.swift */,
-				371B6F2E2B3B342E005BB31C /* CandidateScrollBar.swift */,
+				375B85622CB90409000E124E /* CandidateBoardScrollView.swift */,
+				375B85662CB906A7000E124E /* CandidateBoardScrollViewIOS17.swift */,
+				375B85642CB904FB000E124E /* CandidateBoardScrollViewIOS18.swift */,
 				371B6F302B3B342E005BB31C /* ToolBar.swift */,
 				371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */,
 				371B6F2C2B3B342E005BB31C /* RomanizationLabel.swift */,
@@ -1743,9 +1761,11 @@
 				371B6FF12B3B342F005BB31C /* PadTripleStrokeKeyboard.swift in Sources */,
 				371B6F912B3B342F005BB31C /* GlobeKey.swift in Sources */,
 				371B6FCA2B3B342F005BB31C /* UserLexicon.swift in Sources */,
+				375B85672CB906A7000E124E /* CandidateBoardScrollViewIOS17.swift in Sources */,
 				371B6FBF2B3B342F005BB31C /* KeyExpansionPath.swift in Sources */,
 				371B6FFD2B3B342F005BB31C /* PadTransformKey.swift in Sources */,
 				371B6FD42B3B342F005BB31C /* PadGlobeKey.swift in Sources */,
+				375B855D2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift in Sources */,
 				371B6FC62B3B342F005BB31C /* StringExtensions.swift in Sources */,
 				371B6FE22B3B342F005BB31C /* CapsLockKey.swift in Sources */,
 				371B6FD92B3B342F005BB31C /* LargePadExpansibleInputKey.swift in Sources */,
@@ -1776,9 +1796,11 @@
 				379A9E4A2BE4DBE2001AE79E /* EditingPanelForwardDeleteKey.swift in Sources */,
 				371B6FB52B3B342F005BB31C /* ScrollViewGestureButton.swift in Sources */,
 				371B6FCF2B3B342F005BB31C /* KeyModel.swift in Sources */,
+				375B85632CB90409000E124E /* CandidateBoardScrollView.swift in Sources */,
 				371B6FCE2B3B342F005BB31C /* Options.swift in Sources */,
 				379A9E402BE4D486001AE79E /* EditingPanelMoveForwardKey.swift in Sources */,
 				371B70042B3B342F005BB31C /* EmojiBoard.swift in Sources */,
+				375B85612CB8FC4C000E124E /* CandidateBarScrollView.swift in Sources */,
 				371B6FFF2B3B342F005BB31C /* PadNumericKeyboard.swift in Sources */,
 				371B6FB32B3B342F005BB31C /* SettingsView.swift in Sources */,
 				3742192B2BD4B63200FCB170 /* EnhancedReturnKeyType.swift in Sources */,
@@ -1793,7 +1815,9 @@
 				371B6FE62B3B342F005BB31C /* LargePadTransformKey.swift in Sources */,
 				371B6FC42B3B342F005BB31C /* FontExtensions.swift in Sources */,
 				371B6F942B3B342F005BB31C /* NumberPad.swift in Sources */,
+				375B85652CB904FB000E124E /* CandidateBoardScrollViewIOS18.swift in Sources */,
 				371B6F952B3B342F005BB31C /* ShiftKey.swift in Sources */,
+				375B855F2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift in Sources */,
 				371B6F8A2B3B342F005BB31C /* NumericKeyboard.swift in Sources */,
 				371B6FA92B3B342F005BB31C /* TenKeySidebar.swift in Sources */,
 				371B6FAA2B3B342F005BB31C /* TenKeyNumericKeyboard.swift in Sources */,
@@ -1812,7 +1836,7 @@
 				371B70002B3B342F005BB31C /* PadStrokeKeyboard.swift in Sources */,
 				371B6FAD2B3B342F005BB31C /* HiddenKey.swift in Sources */,
 				371B6FB42B3B342F005BB31C /* CandidateBoard.swift in Sources */,
-				371B6FB02B3B342F005BB31C /* CandidateScrollBar.swift in Sources */,
+				371B6FB02B3B342F005BB31C /* CandidateBar.swift in Sources */,
 				371B6F9A2B3B342F005BB31C /* BackspaceKey.swift in Sources */,
 				371B6F8E2B3B342F005BB31C /* StrokeInputKey.swift in Sources */,
 				371B6FC02B3B342F005BB31C /* CharacterExtensions.swift in Sources */,

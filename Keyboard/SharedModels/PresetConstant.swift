@@ -1,7 +1,14 @@
 import SwiftUI
 
 struct PresetConstant {
+
         static let toolBarHeight: CGFloat = 60
+
+        /// CandidateBoard top-right collapse button
+        static let collapseWidth: CGFloat = 44
+
+        /// CandidateBoard top-right collapse button
+        static let collapseHeight: CGFloat = 44
 
         static let halfWidth: String = "半寬"
         static let fullWidth: String = "全寬"
@@ -13,6 +20,6 @@ struct PresetConstant {
         static let kDoubleGW: String = "gwgw"
         static let kKW: String = "kw"
 
-        /// TenKey Keyboard
+        /// 10-Key Keyboard
         static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
 }

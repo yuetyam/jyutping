@@ -8,7 +8,7 @@ struct LargePadTripleStrokeKeyboard: View {
         var body: some View {
                 VStack(spacing: 0) {
                         if context.inputStage.isBuffering {
-                                CandidateScrollBar()
+                                CandidateBar()
                         } else {
                                 ToolBar()
                         }
