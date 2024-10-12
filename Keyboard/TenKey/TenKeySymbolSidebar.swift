@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TenKeySidebar: View {
+struct TenKeySymbolSidebar: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -22,9 +22,9 @@ struct TenKeySidebar: View {
                                 .fill(keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                         if #available(iOSApplicationExtension 18.0, *) {
-                                TenKeySidebarScrollViewIOS18()
+                                TenKeySymbolSidebarScrollViewIOS18()
                         } else if #available(iOSApplicationExtension 17.0, *) {
-                                TenKeySidebarScrollViewIOS17()
+                                TenKeySymbolSidebarScrollViewIOS17()
                         } else {
                                 TenKeySidebarScrollView()
                         }

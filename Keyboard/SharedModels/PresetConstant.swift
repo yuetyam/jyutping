@@ -22,4 +22,7 @@ struct PresetConstant {
 
         /// 10-Key Keyboard
         static let defaultSidebarTexts: [String] = ["，", "。", "？", "！", "…", "……", "、", "~", "～"]
+
+        /// 10-Key Numeric Keyboard
+        static let symbolSidebarTexts: [String] = ["+", "-", "*", "/", "=", ":", "%", "#", "@"]
 }
