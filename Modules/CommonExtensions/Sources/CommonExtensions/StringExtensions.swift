@@ -1,18 +1,5 @@
 import Foundation
 
-extension Optional where Wrapped == String {
-
-        /// Not nil && not empty
-        public var hasContent: Bool {
-                switch self {
-                case .none:
-                        return false
-                case .some(let value):
-                        return !value.isEmpty
-                }
-        }
-}
-
 extension Array where Element == String {
 
         /// Character count
@@ -23,10 +10,10 @@ extension Array where Element == String {
 
 extension String {
 
-        /// aka. `String.init()`
-        public static let empty: String = ""
+        /// Empty String. `String.init()`
+        public static let empty: String = String.init()
 
-        /// U+0009. `\t`
+        /// U+0009. Horizontal tab. `\t`
         public static let tab: String = "\t"
 
         /// U+000A. `\n`
@@ -67,32 +54,32 @@ extension String {
         /// CJKV && !CJKV
         public var textBlocks: [TextUnit] {
                 var blocks: [TextUnit] = []
-                var ideographicCache: String = ""
-                var otherCache: String = ""
+                var ideographicCache: String = String.empty
+                var otherCache: String = String.empty
                 var wasLastIdeographic: Bool = true
                 for character in self {
                         if character.isIdeographic {
-                                if !wasLastIdeographic && !otherCache.isEmpty {
+                                if wasLastIdeographic.negative && otherCache.isNotEmpty {
                                         let newElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
                                         blocks.append(newElement)
-                                        otherCache = ""
+                                        otherCache = String.empty
                                 }
                                 ideographicCache.append(character)
                                 wasLastIdeographic = true
                         } else {
-                                if wasLastIdeographic && !ideographicCache.isEmpty {
+                                if wasLastIdeographic && ideographicCache.isNotEmpty {
                                         let newElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
                                         blocks.append(newElement)
-                                        ideographicCache = ""
+                                        ideographicCache = String.empty
                                 }
                                 otherCache.append(character)
                                 wasLastIdeographic = false
                         }
                 }
-                if !ideographicCache.isEmpty {
+                if ideographicCache.isNotEmpty {
                         let tailElement: TextUnit = TextUnit(text: ideographicCache, isIdeographic: true)
                         blocks.append(tailElement)
-                } else if !otherCache.isEmpty {
+                } else if otherCache.isNotEmpty {
                         let tailElement: TextUnit = TextUnit(text: otherCache, isIdeographic: false)
                         blocks.append(tailElement)
                 }

@@ -7,7 +7,7 @@ extension Character {
 
         /// UNICODE code points as a String. Example: é = "U+65 U+301"
         public var codePointsText: String {
-                return self.codePoints.joined(separator: " ")
+                return self.codePoints.joined(separator: String.space)
         }
 
         /// Create a Character from the given Unicode Code Point String (U+XXXX)
