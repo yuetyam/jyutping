@@ -15,18 +15,10 @@ struct TenKeyGlobeKey: View {
                         return .lightEmphatic
                 }
         }
-        private var activeKeyColor: Color {
-                switch colorScheme {
-                case .light:
-                        return .light
-                case .dark:
-                        return .dark
-                @unknown default:
-                        return .light
-                }
-        }
 
         var body: some View {
+                let width: CGFloat = context.widthUnit * 2
+                let height: CGFloat = context.heightUnit
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -34,19 +26,20 @@ struct TenKeyGlobeKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(3)
                         Image(systemName: "globe")
-                        GlobeButton().frame(width: context.widthUnit, height: context.heightUnit)
+                        TenKeyGlobeButton()
                 }
-                .frame(width: context.widthUnit * 2, height: context.heightUnit)
+                .frame(width: width, height: height)
         }
 }
 
-private struct GlobeButton: UIViewRepresentable {
+private struct TenKeyGlobeButton: UIViewRepresentable {
 
         @EnvironmentObject private var controller: KeyboardViewController
 
         func makeUIView(context: Context) -> UIButton {
                 let button = UIButton()
                 button.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
+                button.addTarget(controller, action: #selector(controller.globeKeyFeedback), for: .touchDown)
                 return button
         }
         func updateUIView(_ uiView: UIViewType, context: Context) {}

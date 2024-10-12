@@ -904,4 +904,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 UserDefaults.standard.set(value, forKey: OptionsKey.HapticFeedback)
                 instantiateHapticFeedbacks()
         }
+
+        @objc func globeKeyFeedback() {
+                AudioFeedback.modified()
+                triggerHapticFeedback()
+        }
 }

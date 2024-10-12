@@ -17,6 +17,8 @@ struct GlobeKey: View {
         }
 
         var body: some View {
+                let width: CGFloat = context.widthUnit
+                let height: CGFloat = context.heightUnit
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -25,9 +27,9 @@ struct GlobeKey: View {
                                 .padding(.vertical, 6)
                                 .padding(.horizontal, 3)
                         Image(systemName: "globe")
-                        GlobeButton().frame(width: context.widthUnit, height: context.heightUnit)
+                        GlobeButton()
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: width, height: height)
         }
 }
 
@@ -38,6 +40,7 @@ private struct GlobeButton: UIViewRepresentable {
         func makeUIView(context: Context) -> UIButton {
                 let button = UIButton()
                 button.addTarget(controller, action: #selector(controller.handleInputModeList(from:with:)), for: .allTouchEvents)
+                button.addTarget(controller, action: #selector(controller.globeKeyFeedback), for: .touchDown)
                 return button
         }
         func updateUIView(_ uiView: UIViewType, context: Context) {}
