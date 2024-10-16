@@ -151,7 +151,7 @@ public struct Segmentor: Sendable {
                 case 4 where text == "mami":
                         return mami
                 default:
-                        let rawText: String = text.filter({ !$0.isSeparatorOrTone })
+                        let rawText: String = text.filter(\.isSeparatorOrTone.negative)
                         let key: Int = rawText.hash
                         if let cached = cachedSegmentations[key] {
                                 return cached
@@ -163,11 +163,11 @@ public struct Segmentor: Sendable {
                 }
         }
 
-        private static let maxCachedCount: Int = 1000
+        private static let maxCacheCount: Int = 1000
         nonisolated(unsafe) private static var cachedSegmentations: [Int: Segmentation] = [:]
         private static func cache(key: Int, segmentation: Segmentation) {
                 defer { cachedSegmentations[key] = segmentation }
-                guard cachedSegmentations.count > maxCachedCount else { return }
+                guard cachedSegmentations.count > maxCacheCount else { return }
                 cachedSegmentations = [:]
         }
 

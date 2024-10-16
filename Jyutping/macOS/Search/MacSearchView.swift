@@ -61,7 +61,9 @@ struct MacSearchView: View {
                                         isTextFieldFocused = true
                                 }
                                 .onChange(of: submittedText) { newText in
-                                        proxy.scrollTo(topID)
+                                        withAnimation {
+                                                proxy.scrollTo(topID)
+                                        }
                                         Task(priority: .high) {
                                                 handleSubmission(newText)
                                         }

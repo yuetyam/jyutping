@@ -8,7 +8,7 @@ final class AppContext: ObservableObject {
         @Published private(set) var highlightedIndex: Int = 0
         @Published private(set) var optionsHighlightedIndex: Int = 0
         @Published private(set) var inputForm: InputForm = InputForm.matchInputMethodMode()
-        @Published private(set) var windowPattern: WindowPattern = .regular
+        @Published private(set) var quadrant: Quadrant = .upperRight
 
         private let minIndex: Int = 0
         private var maxIndex: Int = 0
@@ -32,16 +32,14 @@ final class AppContext: ObservableObject {
                 isClean = false
                 displayCandidates = newDisplayCandidates
                 maxIndex = newDisplayCandidates.count - 1
-                let newHighlightedIndex: Int = {
-                        switch highlight {
-                        case .start:
-                                return minIndex
-                        case .unchanged:
-                                return min(highlightedIndex, maxIndex)
-                        case .end:
-                                return maxIndex
-                        }
-                }()
+                let newHighlightedIndex: Int = switch highlight {
+                case .start:
+                        minIndex
+                case .unchanged:
+                        min(highlightedIndex, maxIndex)
+                case .end:
+                        maxIndex
+                }
                 highlightedIndex = newHighlightedIndex
         }
 
@@ -51,8 +49,8 @@ final class AppContext: ObservableObject {
                 }
                 inputForm = form
         }
-        func updateWindowPattern(to pattern: WindowPattern) {
-                windowPattern = pattern
+        func updateQuadrant(to newQuadrant: Quadrant) {
+                quadrant = newQuadrant
         }
 
 

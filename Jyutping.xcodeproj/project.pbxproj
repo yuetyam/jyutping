@@ -289,7 +289,7 @@
 		37E6AD762B3B381700F02279 /* IMKTextInputExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD512B3B381600F02279 /* IMKTextInputExtensions.swift */; };
 		37E6AD772B3B381700F02279 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD522B3B381600F02279 /* ViewExtensions.swift */; };
 		37E6AD782B3B381700F02279 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD532B3B381600F02279 /* StringExtensions.swift */; };
-		37E6AD792B3B381700F02279 /* WindowPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD542B3B381600F02279 /* WindowPattern.swift */; };
+		37E6AD792B3B381700F02279 /* Quadrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD542B3B381600F02279 /* Quadrant.swift */; };
 		37E6AD7A2B3B381700F02279 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD552B3B381600F02279 /* Options.swift */; };
 		37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD562B3B381600F02279 /* DisplayCandidate.swift */; };
 		37E6AD7D2B3B381700F02279 /* HotkeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD592B3B381600F02279 /* HotkeysView.swift */; };
@@ -663,7 +663,7 @@
 		37E6AD512B3B381600F02279 /* IMKTextInputExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMKTextInputExtensions.swift; sourceTree = "<group>"; };
 		37E6AD522B3B381600F02279 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		37E6AD532B3B381600F02279 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		37E6AD542B3B381600F02279 /* WindowPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowPattern.swift; sourceTree = "<group>"; };
+		37E6AD542B3B381600F02279 /* Quadrant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quadrant.swift; sourceTree = "<group>"; };
 		37E6AD552B3B381600F02279 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		37E6AD562B3B381600F02279 /* DisplayCandidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayCandidate.swift; sourceTree = "<group>"; };
 		37E6AD592B3B381600F02279 /* HotkeysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotkeysView.swift; sourceTree = "<group>"; };
@@ -1081,7 +1081,7 @@
 				37E6AD632B3B381600F02279 /* OptionsView.swift */,
 				37E6AD622B3B381600F02279 /* PageTransformation.swift */,
 				37E6AD652B3B381600F02279 /* VisualEffect.swift */,
-				37E6AD542B3B381600F02279 /* WindowPattern.swift */,
+				37E6AD542B3B381600F02279 /* Quadrant.swift */,
 				37E6AD612B3B381600F02279 /* UserLexicon.swift */,
 				37E6AD432B3B381600F02279 /* CandidateViews */,
 				37E6AD582B3B381600F02279 /* Preferences */,
@@ -1910,7 +1910,7 @@
 				37E6AD7B2B3B381700F02279 /* DisplayCandidate.swift in Sources */,
 				37E6AD732B3B381700F02279 /* InputForm.swift in Sources */,
 				37E6AD862B3B381700F02279 /* PageTransformation.swift in Sources */,
-				37E6AD792B3B381700F02279 /* WindowPattern.swift in Sources */,
+				37E6AD792B3B381700F02279 /* Quadrant.swift in Sources */,
 				37E6AD8B2B3B381700F02279 /* AppContext.swift in Sources */,
 				37E6AD812B3B381700F02279 /* PresetConstant.swift in Sources */,
 				37E6AD882B3B381700F02279 /* InputStage.swift in Sources */,

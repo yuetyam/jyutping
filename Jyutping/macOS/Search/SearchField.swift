@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 /// Workaround for { Cursor always jumps to the end when editing text }
 struct SearchField: View {
@@ -12,7 +13,7 @@ struct SearchField: View {
         private let titleKey: LocalizedStringKey
         @Binding private var submittedText: String
         private let submitLabel: SubmitLabel
-        @State private var inputText: String = ""
+        @State private var inputText: String = String.empty
 
         var body: some View {
                 TextField(titleKey, text: $inputText)

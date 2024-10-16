@@ -34,18 +34,36 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 window.setFrame(frame ?? windowFrame, display: true)
         }
         private var windowFrame: CGRect {
-                let windowPattern = appContext.windowPattern
+                let quadrant = appContext.quadrant
                 let position: CGPoint = {
                         guard let cursorBlock = currentCursorBlock ?? currentClient?.cursorBlock else { return screenOrigin }
-                        let x: CGFloat = windowPattern.isReversingHorizontal ? cursorBlock.origin.x : cursorBlock.maxX
-                        let y: CGFloat = windowPattern.isReversingVertical ? cursorBlock.maxY : cursorBlock.origin.y
+                        let x: CGFloat = quadrant.isNegativeHorizontal ? cursorBlock.origin.x : cursorBlock.maxX
+                        let y: CGFloat = quadrant.isNegativeVertical ? cursorBlock.origin.y : cursorBlock.maxY
                         guard (x > screenOrigin.x) && (x < maxPointX) && (y > screenOrigin.y) && (y < maxPointY) else { return screenOrigin }
                         return CGPoint(x: x, y: y)
                 }()
-                let width: CGFloat = windowPattern.isReversingHorizontal ? 800 : 44
-                let height: CGFloat = windowPattern.isReversingVertical ? 700 : 44
-                let x: CGFloat = windowPattern.isReversingHorizontal ? (position.x - width) : position.x
-                let y: CGFloat = windowPattern.isReversingVertical ? position.y : (position.y - height)
+                let width: CGFloat = switch quadrant {
+                case .upperRight:
+                        CGFloat.zero
+                case .upperLeft:
+                        800
+                case .bottomLeft:
+                        800
+                case .bottomRight:
+                        44
+                }
+                let height: CGFloat = switch quadrant {
+                case .upperRight:
+                        CGFloat.zero
+                case .upperLeft:
+                        CGFloat.zero
+                case .bottomLeft:
+                        44
+                case .bottomRight:
+                        44
+                }
+                let x: CGFloat = quadrant.isNegativeHorizontal ? (position.x - width) : position.x
+                let y: CGFloat = quadrant.isNegativeVertical ? (position.y - height) : position.y
                 return CGRect(x: x, y: y, width: width, height: height)
         }
 
@@ -70,36 +88,31 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 return point
                         }()
                         let orientation = AppSettings.candidatePageOrientation
-                        let isRegularHorizontal: Bool = {
-                                switch orientation {
-                                case .horizontal:
-                                        return (maxPointX - position.x) > 450
-                                case .vertical:
-                                        return (maxPointX - position.x) > 300
-                                }
-                        }()
-                        let isRegularVertical: Bool = {
-                                switch orientation {
-                                case .horizontal:
-                                        return (position.y - screenOrigin.y) > 100
-                                case .vertical:
-                                        return (position.y - screenOrigin.y) > 300
-                                }
-                        }()
-                        let newPattern: WindowPattern = {
-                                switch (isRegularHorizontal, isRegularVertical) {
-                                case (true, true):
-                                        return .regular
-                                case (false, true):
-                                        return .horizontalReversed
-                                case (true, false):
-                                        return .verticalReversed
-                                case (false, false):
-                                        return .reversed
-                                }
-                        }()
-                        guard newPattern != appContext.windowPattern else { return }
-                        appContext.updateWindowPattern(to: newPattern)
+                        let isPositiveHorizontal: Bool = switch orientation {
+                        case .horizontal:
+                                (maxPointX - position.x) > 450
+                        case .vertical:
+                                (maxPointX - position.x) > 300
+                        }
+                        let isPositiveVertical: Bool = switch orientation {
+                        case .horizontal:
+                                (position.y - screenOrigin.y) < 100
+                        case .vertical:
+                                (position.y - screenOrigin.y) < 300
+                        }
+                        let newQuadrant: Quadrant = switch (isPositiveHorizontal, isPositiveVertical) {
+                        case (true, true):
+                                Quadrant.upperRight
+                        case (false, true):
+                                Quadrant.upperLeft
+                        case (true, false):
+                                Quadrant.bottomRight
+                        case (false, false):
+                                Quadrant.bottomLeft
+                        }
+                        if newQuadrant != appContext.quadrant {
+                                appContext.updateQuadrant(to: newQuadrant)
+                        }
                 }
         }
 
@@ -395,32 +408,30 @@ final class JyutpingInputController: IMKInputController, Sendable {
         }
 
         private func handlePunctuation() {
-                let symbols: [PunctuationSymbol] = {
-                        switch bufferText {
-                        case PunctuationKey.comma.shiftingKeyText:
-                                return PunctuationKey.comma.shiftingSymbols
-                        case PunctuationKey.period.shiftingKeyText:
-                                return PunctuationKey.period.shiftingSymbols
-                        case PunctuationKey.slash.keyText:
-                                return PunctuationKey.slash.symbols
-                        case PunctuationKey.quote.keyText:
-                                return PunctuationKey.quote.symbols
-                        case PunctuationKey.quote.shiftingKeyText:
-                                return PunctuationKey.quote.shiftingSymbols
-                        case PunctuationKey.bracketLeft.shiftingKeyText:
-                                return PunctuationKey.bracketLeft.shiftingSymbols
-                        case PunctuationKey.bracketRight.shiftingKeyText:
-                                return PunctuationKey.bracketRight.shiftingSymbols
-                        case PunctuationKey.backSlash.shiftingKeyText:
-                                return PunctuationKey.backSlash.shiftingSymbols
-                        case PunctuationKey.backquote.keyText:
-                                return PunctuationKey.backquote.symbols
-                        case PunctuationKey.backquote.shiftingKeyText:
-                                return PunctuationKey.backquote.shiftingSymbols
-                        default:
-                                return []
-                        }
-                }()
+                let symbols: [PunctuationSymbol] = switch bufferText {
+                case PunctuationKey.comma.shiftingKeyText:
+                        PunctuationKey.comma.shiftingSymbols
+                case PunctuationKey.period.shiftingKeyText:
+                        PunctuationKey.period.shiftingSymbols
+                case PunctuationKey.slash.keyText:
+                        PunctuationKey.slash.symbols
+                case PunctuationKey.quote.keyText:
+                        PunctuationKey.quote.symbols
+                case PunctuationKey.quote.shiftingKeyText:
+                        PunctuationKey.quote.shiftingSymbols
+                case PunctuationKey.bracketLeft.shiftingKeyText:
+                        PunctuationKey.bracketLeft.shiftingSymbols
+                case PunctuationKey.bracketRight.shiftingKeyText:
+                        PunctuationKey.bracketRight.shiftingSymbols
+                case PunctuationKey.backSlash.shiftingKeyText:
+                        PunctuationKey.backSlash.shiftingSymbols
+                case PunctuationKey.backquote.keyText:
+                        PunctuationKey.backquote.symbols
+                case PunctuationKey.backquote.shiftingKeyText:
+                        PunctuationKey.backquote.shiftingSymbols
+                default:
+                        []
+                }
                 candidates = symbols.map({ Candidate(text: $0.symbol, comment: $0.comment, secondaryComment: $0.secondaryComment, input: bufferText) })
         }
 

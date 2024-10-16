@@ -45,14 +45,17 @@ extension Engine {
                 guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos) }
                 let search = tenKeySearch(combos: combos, segmentation: segmentation)
                 guard search.isNotEmpty else { return tenKeyDeepProcess(combos: combos) }
+                return (search + tenKeyProcess(combos: combos)).tenKeySorted()
+                /*
                 let comboCount = combos.count
-                let preferredSearches = search.filter({ $0.input.count == comboCount })
-                let preferredShortcuts = tenKeyProcess(combos: combos)
-                if (preferredSearches.isEmpty && preferredShortcuts.isEmpty) {
+                let hasFullMatch: Bool = search.contains(where: { $0.input.count == comboCount })
+                let fullShortcuts = tenKeyProcess(combos: combos)
+                if (hasFullMatch.negative && fullShortcuts.isEmpty) {
                         return (search + tenKeyDeepProcess(combos: combos)).tenKeySorted()
                 } else {
-                        return (search + preferredShortcuts).tenKeySorted()
+                        return (search + fullShortcuts).tenKeySorted()
                 }
+                */
         }
         private static func tenKeySearch(combos: [Combo], segmentation: Segmentation, limit: Int? = nil) -> [Candidate] {
                 let textCount: Int = combos.count

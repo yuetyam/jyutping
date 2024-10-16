@@ -175,7 +175,7 @@ struct IOSExpressionsView: View {
                                                         Text(verbatim: "gam2").font(.fixedWidth)
                                                         Speaker("gam2")
                                                 }
-                                                Text(verbatim: "音同「錦」")
+                                                Text(verbatim: "音同「感」")
                                                 Spacer()
                                         }
                                         HStack {
