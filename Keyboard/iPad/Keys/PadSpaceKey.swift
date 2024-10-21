@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct PadSpaceKey: View {
 
@@ -29,6 +30,7 @@ struct PadSpaceKey: View {
         @GestureState private var isTouching: Bool = false
         @State private var isLongPressEngaged: Bool = false
         @State private var longPressBuffer: Int = 0
+        @State private var startPoint: CGPoint = .zero
 
         @State private var isInTheMediumOfDoubleTapping: Bool = false
         @State private var doubleTappingBuffer: Int = 0
@@ -49,15 +51,15 @@ struct PadSpaceKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { value, touched, transaction in
-                                if !touched {
+                                if touched.negative {
                                         AudioFeedback.modified()
                                         context.triggerHapticFeedback()
                                         touched = true
-                                        context.updateTouchedLocation(to: value.startLocation)
+                                        startPoint = value.startLocation
                                 } else if isLongPressEngaged {
-                                        let distance = value.location.x - context.touchedLocation.x
+                                        let distance = value.location.x - startPoint.x
                                         guard abs(distance) > 10 else { return }
-                                        context.updateTouchedLocation(to: value.location)
+                                        startPoint = value.location
                                         if context.inputStage.isBuffering {
                                                 // TODO: Dragging in markedText
                                                 context.operate(.clearBuffer)
@@ -74,7 +76,7 @@ struct PadSpaceKey: View {
                         }
                         .onEnded { value in
                                 longPressBuffer = 0
-                                context.updateTouchedLocation(to: .zero)
+                                startPoint = .zero
                                 if isLongPressEngaged {
                                         isLongPressEngaged = false
                                 } else {
@@ -93,7 +95,9 @@ struct PadSpaceKey: View {
                 .onReceive(timer) { _ in
                         if isTouching {
                                 if longPressBuffer > 3 {
-                                        if !isLongPressEngaged {
+                                        if isLongPressEngaged.negative {
+                                                AudioFeedback.modified()
+                                                context.triggerHapticFeedback()
                                                 isLongPressEngaged = true
                                         }
                                 } else {

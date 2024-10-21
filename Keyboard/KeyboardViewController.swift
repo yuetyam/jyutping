@@ -776,10 +776,6 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         spaceKeyForm = newForm
                 }
         }
-        @Published private(set) var touchedLocation: CGPoint = .zero
-        func updateTouchedLocation(to point: CGPoint) {
-                touchedLocation = point
-        }
 
         private(set) lazy var isPhone: Bool = UITraitCollection.current.userInterfaceIdiom == .phone
         private(set) lazy var isPad: Bool = UITraitCollection.current.userInterfaceIdiom == .pad
