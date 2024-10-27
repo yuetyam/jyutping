@@ -2757,6 +2757,134 @@
         }
       }
     },
+    "SettingsView.KeyboardDisplayLanguage.PickerTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keyboard Display Language"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "鍵盤介面顯示語言"
+          }
+        }
+      }
+    },
+    "SettingsView.KeyboardDisplayLanguage.SectionFooter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To apply this change, toggle Full Access in the system Settings to restart this keyboard."
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「全權取用」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完整取用」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完全訪問」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「全權取用」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「全權取用」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「完整取用」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "然後去系統設定App 開、關一下粵拼鍵盤嘅「全權取用」，鍵盤就會重啓，語言切換先會起效。"
+          }
+        }
+      }
+    },
     "SettingsView.KeyboardFeedback.Haptic.PickerOption.Heavy" : {
       "localizations" : {
         "en" : {

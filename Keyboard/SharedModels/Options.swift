@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct Options {
 
@@ -192,6 +193,32 @@ struct Options {
                 UserDefaults.standard.set(value, forKey: OptionsKey.DoubleSpaceShortcut)
         }
 
+        nonisolated(unsafe) private(set) static var preferredLanguage: PreferredLanguage = {
+                let languages = Locale.preferredLanguages
+                guard languages.isNotEmpty else { return .english }
+                let englishIndex = languages.firstIndex(where: { $0.hasPrefix("en") }) ?? 1000
+                let cantoneseIndex = languages.firstIndex(where: { $0.hasPrefix("yue") || $0.hasPrefix("zh") }) ?? 1000
+                return (englishIndex <= cantoneseIndex) ? .english : .cantonese
+        }()
+        static func updatePreferredLanguage(to language: PreferredLanguage) {
+                preferredLanguage = language
+                let codes: [String] = Locale.preferredLanguages
+                let languageCodes: [String] = {
+                        // TODO: This code block needs more tests
+                        switch language {
+                        case .cantonese:
+                                let nonEnglishCodes: [String] = codes.filter({ $0.hasPrefix("en").negative })
+                                let hasChineseCodes: Bool = nonEnglishCodes.contains(where: { $0.hasPrefix("yue") || $0.hasPrefix("zh") })
+                                let insertCodes: [String] = hasChineseCodes ? [] : ["yue"]
+                                return (nonEnglishCodes + insertCodes + codes).uniqued()
+                        case .english:
+                                let firstEnglish: String = codes.first(where: { $0.hasPrefix("en") }) ?? "en"
+                                return ([firstEnglish] + codes).uniqued()
+                        }
+                }()
+                UserDefaults.standard.set(languageCodes, forKey: "AppleLanguages")
+        }
+
         nonisolated(unsafe) private(set) static var isInputMemoryOn: Bool = {
                 let savedValue: Int = UserDefaults.standard.integer(forKey: OptionsKey.UserLexiconInputMemory)
                 switch savedValue {
@@ -246,6 +273,11 @@ enum DoubleSpaceShortcut: Int {
         case insertFullWidthSpace = 4
 }
 
+/// Keyboard UI Display Language
+enum PreferredLanguage: Int {
+        case cantonese = 1
+        case english = 2
+}
 
 // Deprecated
 /*

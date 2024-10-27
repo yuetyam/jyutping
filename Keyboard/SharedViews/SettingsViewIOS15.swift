@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct SettingsViewIOS15: View {
 
@@ -26,6 +27,7 @@ struct SettingsViewIOS15: View {
         @State private var isEmojiSuggestionsOn: Bool = Options.isEmojiSuggestionsOn
         @State private var cangjieVariant: CangjieVariant = Options.cangjieVariant
         @State private var doubleSpaceShortcut: DoubleSpaceShortcut = Options.doubleSpaceShortcut
+        @State private var preferredLanguage: PreferredLanguage = Options.preferredLanguage
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
         @State private var isPerformingClearUserLexicon: Bool = false
@@ -113,12 +115,12 @@ struct SettingsViewIOS15: View {
                                                                 context.updateHapticFeedbackMode(to: newMode)
                                                         }
                                                 }
-                                                .disabled(!(context.hasFullAccess))
+                                                .disabled(context.hasFullAccess.negative)
                                         }
                                 } header: {
                                         Text("SettingsView.KeyboardFeedback.SectionHeader").textCase(nil)
                                 } footer: {
-                                        if context.isPhone && !(context.hasFullAccess) {
+                                        if context.isPhone && context.hasFullAccess.negative {
                                                 Text("SettingsView.KeyboardFeedback.SectionFooter").textCase(nil)
                                         }
                                 }
@@ -210,6 +212,27 @@ struct SettingsViewIOS15: View {
                                         AudioFeedback.modified()
                                         context.triggerSelectionHapticFeedback()
                                         Options.updateDoubleSpaceShortcut(to: newOption)
+                                }
+
+                                Section {
+                                        HStack(spacing: 0) {
+                                                Text("SettingsView.KeyboardDisplayLanguage.PickerTitle").minimumScaleFactor(0.5).lineLimit(1)
+                                                Spacer()
+                                                Picker("SettingsView.KeyboardDisplayLanguage.PickerTitle", selection: $preferredLanguage) {
+                                                        Text(verbatim: "粵語").tag(PreferredLanguage.cantonese)
+                                                        Text(verbatim: "English").tag(PreferredLanguage.english)
+                                                }
+                                                .pickerStyle(.segmented)
+                                                .labelsHidden()
+                                                .fixedSize()
+                                                .onChange(of: preferredLanguage) { newOption in
+                                                        AudioFeedback.modified()
+                                                        context.triggerSelectionHapticFeedback()
+                                                        Options.updatePreferredLanguage(to: newOption)
+                                                }
+                                        }
+                                } footer: {
+                                        Text("SettingsView.KeyboardDisplayLanguage.SectionFooter").textCase(nil)
                                 }
 
                                 Section {

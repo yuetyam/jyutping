@@ -284,7 +284,7 @@ struct DatabasePreparer {
                         let cantonese = parts[2]
                         let romanization = parts[3]
                         let anchors = romanization.split(separator: " ").compactMap(\.first)
-                        guard let shortcut = anchors.charcode else { return nil }
+                        guard let shortcut = String(anchors).charcode else { return nil }
                         let ping = romanization.filter(\.isLetter).hash
                         return "(\(category), '\(codepoint)', '\(cantonese)', '\(romanization)', \(shortcut), \(ping))"
                 }

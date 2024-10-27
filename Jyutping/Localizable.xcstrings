@@ -2497,66 +2497,130 @@
         }
       }
     },
-    "IOSHomeTab.ChangeDisplayLanguage.Body.Keyboard" : {
+    "IOSHomeTab.ChangeDisplayLanguage.Body.Keyboard.Row1" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The keyboard display language follows the system language, so it cannot be customized."
+            "value" : "Tap the gear button in the top of the keyboard to open settings panel, then select a language from the Keyboard Display Language section."
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "鍵盤介面顯示語言跟隨系統語言，無法另外設定。"
+            "value" : "從鍵盤左上角嘅齒輪入到設定䈎面，搵到「鍵盤介面顯示語言」，然後選擇語言。"
+          }
+        }
+      }
+    },
+    "IOSHomeTab.ChangeDisplayLanguage.Body.Keyboard.Row2" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jump to Settings app, then toggle Full Access for the keyboard. This will restart the keyboard and complete the language switch."
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「全權取用」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完整取用」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完全訪問」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「全權取用」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「全權取用」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「完整取用」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "跳轉至設定App，將「粵拼」鍵盤嘅「全權取用」權限開、關一下。系統就會將鍵盤重啓，語言切換先會起效。"
           }
         }
       }
