@@ -4486,61 +4486,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Touch and hold the Space bar until the keyboard triggers audio and haptic feedback; then, slide your finger left or right."
+            "value" : "Touch and hold the Space bar until the keyboard triggers sound and haptic feedback; then, slide your finger left or right."
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "長按空格鍵直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
+            "value" : "長按空格鍵(Space)直到觸發鍵盤聲音以及觸感回應，然後向左或者向右滑動手指。"
           }
         }
       }

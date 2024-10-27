@@ -21,7 +21,7 @@ public struct Engine {
                 var storageDatabase: OpaquePointer? = nil
                 defer { sqlite3_close_v2(storageDatabase) }
                 guard sqlite3_open_v2(path, &storageDatabase, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else { return nil }
-                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_open_v2(":memory:", &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 let backup = sqlite3_backup_init(db, "main", storageDatabase, "main")
                 guard sqlite3_backup_step(backup, -1) == SQLITE_DONE else { return nil }
                 guard sqlite3_backup_finish(backup) == SQLITE_OK else { return nil }
@@ -31,7 +31,7 @@ public struct Engine {
         nonisolated(unsafe) static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
                 guard let path: String = Bundle.module.path(forResource: "imedb", ofType: "sqlite3") else { return nil }
-                guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 return db
         }()
         #endif
@@ -41,12 +41,20 @@ extension Engine {
 
         // MARK: - TenKey
 
-        public static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) -> [Candidate] {
+        public static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) async -> [Candidate] {
+                guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos) }
+                async let search = tenKeySearch(combos: combos, segmentation: segmentation)
+                async let fullShortcuts = tenKeyProcess(combos: combos)
+                return await (search + fullShortcuts).tenKeySorted()
+                /*
                 guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos) }
                 let search = tenKeySearch(combos: combos, segmentation: segmentation)
                 guard search.isNotEmpty else { return tenKeyDeepProcess(combos: combos) }
                 return (search + tenKeyProcess(combos: combos)).tenKeySorted()
+                */
                 /*
+                guard segmentation.maxSchemeLength > 0 else { return tenKeyDeepProcess(combos: combos) }
+                let search = tenKeySearch(combos: combos, segmentation: segmentation)
                 let comboCount = combos.count
                 let hasFullMatch: Bool = search.contains(where: { $0.input.count == comboCount })
                 let fullShortcuts = tenKeyProcess(combos: combos)
@@ -124,12 +132,12 @@ extension Engine {
         /// Suggestion
         /// - Parameters:
         ///   - origin: Original user input text.
-        ///   - text: User input text.
+        ///   - text: Formatted user input text.
         ///   - segmentation: Segmentation of user input text.
         ///   - needsSymbols: Needs Emoji/Symbol Candidates.
         ///   - asap: Should be fast, shouldn't go deep.
         /// - Returns: Candidates
-        public static func suggest(origin: String, text: String, segmentation: Segmentation, needsSymbols: Bool, asap: Bool) -> [Candidate] {
+        public static func suggest(origin: String, text: String, segmentation: Segmentation, needsSymbols: Bool, asap: Bool = false) -> [Candidate] {
                 switch text.count {
                 case 0:
                         return []

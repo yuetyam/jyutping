@@ -9,4 +9,13 @@ enum KeyboardLayout: Int {
 
         /// 九宮格
         case tenKey = 3
+
+        /// 26鍵全鍵盤
+        var isQwerty: Bool { self == .qwerty }
+
+        /// 26鍵三拼
+        var isTripleStroke: Bool { self == .tripleStroke }
+
+        /// 九宮格
+        var isTenKey: Bool { self == .tenKey }
 }

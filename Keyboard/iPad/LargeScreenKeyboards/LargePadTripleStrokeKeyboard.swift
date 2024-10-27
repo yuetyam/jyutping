@@ -370,10 +370,10 @@ struct LargePadTripleStrokeKeyboard: View {
                                         LargePadLetterInputKey("s")
                                         LargePadLetterInputKey("d")
                                         LargePadLetterInputKey("f")
-                                        LargePadLetterInputKey("g")
+                                        LargePadExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
                                         LargePadLetterInputKey("h")
                                         LargePadLetterInputKey("j")
-                                        LargePadLetterInputKey("k")
+                                        LargePadExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
                                         LargePadLetterInputKey("l")
                                 }
                                 if context.keyboardCase.isUppercased {

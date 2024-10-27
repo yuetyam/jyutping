@@ -68,8 +68,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 super.textDidChange(textInput)
                 let hasText: Bool = textInput?.hasText ?? textDocumentProxy.hasText
                 self.hasText = hasText
-                let didUserClearTextFiled: Bool = !hasText && inputStage.isBuffering
-                if didUserClearTextFiled {
+                let didUserClearTextField: Bool = hasText.negative && inputStage.isBuffering
+                if didUserClearTextField {
                         clearBuffer()
                 }
         }
@@ -139,6 +139,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 guard bufferText.isNotEmpty else {
                         guard let text2insert, text2insert.isNotEmpty else { return }
                         textDocumentProxy.insertText(text2insert)
+                        clearBuffer()
                         return
                 }
                 canMarkText = false
@@ -211,9 +212,10 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         }
                         switch bufferText.first {
                         case .none:
+                                suggestionTask?.cancel()
                                 ensureQwertyForm(to: .jyutping)
-                                text2mark = String.empty
                                 candidates = []
+                                text2mark = String.empty
                         case .some("r"):
                                 pinyinReverseLookup()
                         case .some("v"):
@@ -242,18 +244,22 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         case (true, false):
                                 inputStage = .starting
                                 updateReturnKey()
+                                tenKeySuggest()
                         case (false, true):
                                 inputStage = .ending
+                                suggestionTask?.cancel()
                                 if Options.isInputMemoryOn && selectedCandidates.isNotEmpty {
                                         let concatenated = selectedCandidates.filter(\.isCantonese).joined()
                                         UserLexicon.handle(concatenated)
                                 }
                                 selectedCandidates = []
+                                candidates = []
+                                text2mark = String.empty
                                 updateReturnKey()
                         case (false, false):
                                 inputStage = .ongoing
+                                tenKeySuggest()
                         }
-                        tenKeySuggest()
                 }
         }
 
@@ -285,7 +291,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 return
                         }
                         switch text {
-                        case PresetConstant.kGW where Options.keyboardLayout == .tripleStroke:
+                        case PresetConstant.kGW where Options.keyboardLayout.isTripleStroke:
                                 if tripleStrokeBuffer.last == PresetConstant.kGW {
                                         tripleStrokeBuffer = tripleStrokeBuffer.dropLast()
                                         tripleStrokeBuffer.append(PresetConstant.kKW)
@@ -296,9 +302,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 bufferText = fullText.replacingOccurrences(of: PresetConstant.kDoubleGW, with: PresetConstant.kKW, options: [.anchored, .backwards])
                         case _ where text.isLetters:
                                 appendBufferText(text)
-                        case _ where (Options.keyboardLayout == .tripleStroke) && (text.first?.isCantoneseToneDigit ?? false):
+                        case _ where Options.keyboardLayout.isTripleStroke && (text.first?.isCantoneseToneDigit ?? false):
                                 appendBufferText(text)
-                        case _ where !(inputStage.isBuffering):
+                        case _ where inputStage.isBuffering.negative:
                                 textDocumentProxy.insertText(text)
                         default:
                                 inputBufferText(followedBy: text)
@@ -326,7 +332,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                                 adjustKeyboard()
                         }
                 case .doubleSpace:
-                        guard !(inputStage.isBuffering) else {
+                        guard inputStage.isBuffering.negative else {
                                 if let candidate = candidates.first {
                                         input(candidate.text)
                                         aftercareSelected(candidate)
@@ -530,7 +536,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         selectedCandidates.append(candidate)
                         let inputCount = candidate.input.count
                         let tailCount: Int = bufferCombos.count - inputCount
-                        bufferCombos = bufferCombos.suffix(tailCount)
+                        let suffixLength: Int = max(0, tailCount)
+                        bufferCombos = bufferCombos.suffix(suffixLength)
                 }
         }
         private func adjustKeyboard() {
@@ -554,41 +561,62 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
 
         // MARK: - Candidate Suggestions
 
+        private lazy var suggestionTask: Task<Void, Never>? = nil
         private func tenKeySuggest() {
-                guard bufferCombos.isNotEmpty else {
-                        text2mark = String.empty
-                        candidates = []
-                        return
+                suggestionTask?.cancel()
+                let combos = bufferCombos
+                let isInputMemoryOn: Bool = Options.isInputMemoryOn
+                suggestionTask = Task.detached(priority: .high) {
+                        let segmentation = Segmentor.segment(combos: combos)
+                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos, segmentation: segmentation) : []
+                        async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos, segmentation: segmentation)
+                        let suggestions = await (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                        if Task.isCancelled.negative {
+                                await MainActor.run { [weak self] in
+                                        self?.text2mark = {
+                                                guard let firstCandidate = suggestions.first else { return String(combos.compactMap(\.letters.first)) }
+                                                let userInputCount = combos.count
+                                                let firstInputCount = firstCandidate.input.count
+                                                guard firstInputCount < userInputCount else { return firstCandidate.mark }
+                                                let tailCombos = combos.suffix(userInputCount - firstInputCount)
+                                                let tailText = tailCombos.compactMap(\.letters.first)
+                                                return firstCandidate.mark + String.space + tailText
+                                        }()
+                                        self?.candidates = suggestions
+                                }
+                        }
                 }
-                let segmentation = Segmentor.segment(combos: bufferCombos)
-                let userLexiconCandidates: [Candidate] = Options.isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: bufferCombos, segmentation: segmentation) : []
-                let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: bufferCombos, segmentation: segmentation)
-                text2mark = userLexiconCandidates.first?.mark ?? engineCandidates.first?.mark ?? String(bufferCombos.compactMap(\.letters.first))
-                candidates = (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
         }
-
         private func suggest() {
-                let processingText: String = (Options.keyboardLayout == .tripleStroke) ? bufferText : bufferText.toneConverted()
-                let segmentation = Segmentor.segment(text: processingText)
-                let userLexiconCandidates: [Candidate] = Options.isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
+                suggestionTask?.cancel()
+                let originalText = bufferText
+                let processingText: String = Options.keyboardLayout.isTripleStroke ? bufferText : bufferText.toneConverted()
                 let needsSymbols: Bool = Options.isEmojiSuggestionsOn && selectedCandidates.isEmpty
-                let asap: Bool = userLexiconCandidates.isNotEmpty
-                let engineCandidates: [Candidate] = Engine.suggest(origin: bufferText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols, asap: asap)
-                let text2mark: String = {
-                        if let mark = userLexiconCandidates.first?.mark { return mark }
-                        let hasSeparatorsOrTones: Bool = processingText.contains(where: \.isSeparatorOrTone)
-                        guard !hasSeparatorsOrTones else { return processingText.formattedForMark() }
-                        let userInputTextCount: Int = processingText.count
-                        if let firstCandidate = engineCandidates.first, firstCandidate.input.count == userInputTextCount { return firstCandidate.mark }
-                        guard let bestScheme = segmentation.first else { return processingText.formattedForMark() }
-                        let leadingLength: Int = bestScheme.length
-                        let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
-                        guard leadingLength != userInputTextCount else { return leadingText }
-                        let tailText = processingText.dropFirst(leadingLength)
-                        return leadingText + String.space + tailText
-                }()
-                self.text2mark = text2mark
-                candidates = (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                let isInputMemoryOn: Bool = Options.isInputMemoryOn
+                suggestionTask = Task.detached(priority: .high) {
+                        let segmentation = Segmentor.segment(text: processingText)
+                        let bestScheme = segmentation.first
+                        async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
+                        async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)
+                        let suggestions = await (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                        if Task.isCancelled.negative {
+                                await MainActor.run { [weak self] in
+                                        self?.text2mark = {
+                                                let hasSeparatorsOrTones: Bool = processingText.contains(where: \.isSeparatorOrTone)
+                                                guard hasSeparatorsOrTones.negative else { return processingText.formattedForMark() }
+                                                let userInputTextCount: Int = processingText.count
+                                                if let firstCandidate = suggestions.first, firstCandidate.input.count == userInputTextCount { return firstCandidate.mark }
+                                                guard let bestScheme else { return processingText.formattedForMark() }
+                                                let leadingLength: Int = bestScheme.length
+                                                let leadingText: String = bestScheme.map(\.text).joined(separator: String.space)
+                                                guard leadingLength != userInputTextCount else { return leadingText }
+                                                let tailText = processingText.dropFirst(leadingLength)
+                                                return leadingText + String.space + tailText
+                                        }()
+                                        self?.candidates = suggestions
+                                }
+                        }
+                }
         }
         private func pinyinReverseLookup() {
                 let text: String = String(bufferText.dropFirst())
@@ -693,8 +721,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var keyboardForm: KeyboardForm = .alphabetic
         func updateKeyboardForm(to form: KeyboardForm) {
                 let shouldStayBuffering: Bool = inputMethodMode.isCantonese && (form == .alphabetic || form == .candidateBoard)
-                if inputStage.isBuffering && !shouldStayBuffering {
-                        bufferCombos = []
+                if inputStage.isBuffering && shouldStayBuffering.negative {
                         inputBufferText()
                 }
                 let currentHeight = view.frame.size.height
@@ -707,7 +734,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         keyboardCase = .lowercased
                 }
                 if form == .editingPanel {
-                        isClipboardEmpty = !(UIPasteboard.general.hasStrings)
+                        isClipboardEmpty = UIPasteboard.general.hasStrings.negative
                 }
                 previousKeyboardForm = keyboardForm
                 keyboardForm = form
@@ -736,7 +763,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         private func updateReturnKey() {
                 let newType: EnhancedReturnKeyType = textDocumentProxy.returnKeyType.enhancedReturnKeyType
                 let enablesReturnKeyAutomatically: Bool = textDocumentProxy.enablesReturnKeyAutomatically ?? false
-                let isAvailable: Bool = !enablesReturnKeyAutomatically || textDocumentProxy.hasText
+                let isAvailable: Bool = enablesReturnKeyAutomatically.negative || textDocumentProxy.hasText
                 let newState: ReturnKeyState = ReturnKeyState.state(isAvailable: isAvailable, isABC: inputMethodMode.isABC, isSimplified: Options.characterStandard.isSimplified, isBuffering: inputStage.isBuffering)
                 let newText: AttributedString = newType.attributedText(of: newState)
                 if returnKeyType != newType {

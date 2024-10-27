@@ -1,5 +1,5 @@
 /// 10 Key keyboard element
-public enum Combo: Int {
+public enum Combo: Int, Sendable {
 
         case ABC = 2
         case DEF = 3

@@ -31,10 +31,10 @@ struct TripleStrokeKeyboard: View {
                                         LetterInputKey("s")
                                         LetterInputKey("d")
                                         LetterInputKey("f")
-                                        LetterInputKey("g")
+                                        ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
                                         LetterInputKey("h")
                                         LetterInputKey("j")
-                                        LetterInputKey("k")
+                                        ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
                                         LetterInputKey("l")
                                 }
                                 HiddenKey(key: .letterL)

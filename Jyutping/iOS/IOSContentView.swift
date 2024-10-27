@@ -4,6 +4,11 @@ import SwiftUI
 
 @available(iOS 18.0, *)
 struct IOS18ContentView: View {
+
+        init() {
+                UITextField.appearance().clearButtonMode = .always
+        }
+
         var body: some View {
                 TabView {
                         Tab {
@@ -31,7 +36,13 @@ struct IOS18ContentView: View {
 }
 
 struct IOSContentView: View {
+
+        init() {
+                UITextField.appearance().clearButtonMode = .always
+        }
+
         @State private var selection: Int = 0
+
         var body: some View {
                 TabView(selection: $selection) {
                         HomeView()
@@ -57,9 +68,6 @@ struct IOSContentView: View {
                                         Label("IOSTabView.NavigationTitle.About", systemImage: "info.circle").environment(\.symbolVariants, .none)
                                 }
                                 .tag(3)
-                }
-                .onAppear {
-                        UITextField.appearance().clearButtonMode = .always
                 }
         }
 }

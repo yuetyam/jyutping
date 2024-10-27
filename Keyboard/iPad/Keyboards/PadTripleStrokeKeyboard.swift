@@ -34,10 +34,10 @@ struct PadTripleStrokeKeyboard: View {
                                         PadPullableInputKey(upper: "#", lower: "s")
                                         PadPullableInputKey(upper: "$", lower: "d")
                                         PadPullableInputKey(upper: "/", lower: "f")
-                                        PadPullableInputKey(upper: "（", lower: "g")
+                                        PadCompleteInputKey(keyLocale: .leading, upper: "（", keyModel: KeyModel(primary: KeyElement("g"), members: [KeyElement("g"), KeyElement("gw")]))
                                         PadPullableInputKey(upper: "）", lower: "h")
                                         PadPullableInputKey(upper: "「", lower: "j")
-                                        PadPullableInputKey(upper: "」", lower: "k")
+                                        PadCompleteInputKey(keyLocale: .trailing, upper: "」", keyModel: KeyModel(primary: KeyElement("k"), members: [KeyElement("k"), KeyElement("kw")]))
                                         PadPullableInputKey(upper: "'", lower: "l")
                                 }
                                 PadReturnKey(widthUnitTimes: 1.5)

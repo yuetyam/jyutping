@@ -3,10 +3,9 @@ import SQLite3
 import CoreIME
 import CommonExtensions
 
-@MainActor
 struct UserLexicon {
 
-        private static let database: OpaquePointer? = {
+        nonisolated(unsafe) private static let database: OpaquePointer? = {
                 var db: OpaquePointer? = nil
                 let path: String? = {
                         let fileName: String = "userlexicon.sqlite3"
@@ -18,7 +17,7 @@ struct UserLexicon {
                         }
                 }()
                 guard let path else { return nil }
-                guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nil) == SQLITE_OK else { return nil }
+                guard sqlite3_open_v2(path, &db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX, nil) == SQLITE_OK else { return nil }
                 return db
         }()
 
@@ -136,10 +135,10 @@ struct UserLexicon {
                 return candidates
         }
 
-        static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) -> [Candidate] {
+        static func tenKeySuggest(combos: [Combo], segmentation: Segmentation) async -> [Candidate] {
                 let comboCount = combos.count
                 guard comboCount > 0 else { return [] }
-                let shortcuts: [TenKeyLexicon] = {
+                async let shortcuts: [TenKeyLexicon] = {
                         guard comboCount < 6 else { return [] }
                         guard var sequences: [String] = combos.first?.letters.map({ String($0) }) else { return [] }
                         for combo in combos.dropFirst() {
@@ -150,7 +149,7 @@ struct UserLexicon {
                         }
                         return sequences.map({ tenKeyQuery(text: $0, input: $0, mark: $0, isShortcut: true) }).flatMap({ $0 })
                 }()
-                let matches: [TenKeyLexicon] = {
+                async let matches: [TenKeyLexicon] = {
                         let schemes = segmentation.filter({ $0.length == comboCount })
                         guard schemes.isNotEmpty else { return [] }
                         return schemes.map({ scheme -> [TenKeyLexicon] in
@@ -167,7 +166,7 @@ struct UserLexicon {
                                 })
                         }).flatMap({ $0 })
                 }()
-                return (shortcuts + matches).sorted(by: { $0.frequency > $1.frequency }).prefix(8).map(\.candidate)
+                return await (shortcuts + matches).sorted(by: { $0.frequency > $1.frequency }).prefix(8).map(\.candidate)
         }
         private static func tenKeyQuery(text: String, input: String, mark: String? = nil, isShortcut: Bool) -> [TenKeyLexicon] {
                 var items: [TenKeyLexicon] = []

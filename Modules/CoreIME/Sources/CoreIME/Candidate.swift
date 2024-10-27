@@ -1,4 +1,4 @@
-public enum CandidateType: Int {
+public enum CandidateType: Int, Sendable {
 
         case cantonese
 
@@ -15,7 +15,7 @@ public enum CandidateType: Int {
         case compose
 }
 
-public struct Candidate: Hashable {
+public struct Candidate: Hashable, Sendable {
 
         /// Candidate Type
         public let type: CandidateType

@@ -4,7 +4,7 @@ import SQLite3
 extension Engine {
         static func fetchTextMark(text: String) -> [Candidate] {
                 var candidates: [Candidate] = []
-                let code: Int = text.hash
+                let code: Int = text.lowercased().hash
                 let command: String = "SELECT mark FROM marktable WHERE code = \(code);"
                 var statement: OpaquePointer? = nil
                 defer { sqlite3_finalize(statement) }
