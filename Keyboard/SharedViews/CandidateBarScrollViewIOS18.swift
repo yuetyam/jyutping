@@ -29,7 +29,7 @@ struct CandidateBarScrollViewIOS18: View {
                                                         guard isReleaseActionTriggered.negative else { return }
                                                         defer { isLongPressActionTriggered = true }
                                                         AudioFeedback.deleted()
-                                                        context.triggerHapticFeedback()
+                                                        // context.triggerHapticFeedback()
                                                         UserLexicon.removeItem(candidate: candidate)
                                                 },
                                                 endAction: {
@@ -43,7 +43,7 @@ struct CandidateBarScrollViewIOS18: View {
                                                         guard isLongPressActionTriggered.negative else { return }
                                                         defer { isReleaseActionTriggered = true }
                                                         AudioFeedback.inputed()
-                                                        context.triggerSelectionHapticFeedback()
+                                                        // context.triggerSelectionHapticFeedback()
                                                         context.operate(.select(candidate))
                                                 }
                                         ) {
@@ -95,5 +95,7 @@ struct CandidateBarScrollViewIOS18: View {
                                 scrollPosition.scrollTo(edge: .leading)
                         }
                 }
+                .sensoryFeedback(.success, trigger: isLongPressActionTriggered, condition: { $0.negative && $1 })
+                .sensoryFeedback(.selection, trigger: isReleaseActionTriggered, condition: { $0.negative && $1 })
         }
 }

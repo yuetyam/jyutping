@@ -17,7 +17,7 @@ struct TenKeySidebarScrollViewIOS18: View {
                                         let text: String = sidebarTexts[index]
                                         ScrollViewButton {
                                                 AudioFeedback.inputed()
-                                                context.triggerHapticFeedback()
+                                                context.triggerSelectionHapticFeedback()
                                                 if context.inputStage.isBuffering {
                                                         // FIXME: Handle tapping
                                                         // context.operate(.toggle(text))

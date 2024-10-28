@@ -34,7 +34,7 @@ struct CandidateBoardScrollViewIOS17: View {
                                                                         guard isReleaseActionTriggered.negative else { return }
                                                                         defer { isLongPressActionTriggered = true }
                                                                         AudioFeedback.deleted()
-                                                                        context.triggerHapticFeedback()
+                                                                        // context.triggerHapticFeedback()
                                                                         UserLexicon.removeItem(candidate: candidate)
                                                                 },
                                                                 endAction: {
@@ -48,7 +48,7 @@ struct CandidateBoardScrollViewIOS17: View {
                                                                         guard isLongPressActionTriggered.negative else { return }
                                                                         defer { isReleaseActionTriggered = true }
                                                                         AudioFeedback.inputed()
-                                                                        context.triggerSelectionHapticFeedback()
+                                                                        // context.triggerSelectionHapticFeedback()
                                                                         context.operate(.select(candidate))
                                                                 }
                                                         ) {
@@ -99,5 +99,7 @@ struct CandidateBoardScrollViewIOS17: View {
                                 positionID = topID
                         }
                 }
+                .sensoryFeedback(.success, trigger: isLongPressActionTriggered, condition: { $0.negative && $1 })
+                .sensoryFeedback(.selection, trigger: isReleaseActionTriggered, condition: { $0.negative && $1 })
         }
 }
