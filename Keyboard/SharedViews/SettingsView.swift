@@ -44,6 +44,7 @@ struct SettingsView: View {
         @State private var preferredLanguage: PreferredLanguage = Options.preferredLanguage
         @State private var isInputMemoryOn: Bool = Options.isInputMemoryOn
 
+        @State private var isTryingToClearUserLexicon: Bool = false
         @State private var isPerformingClearUserLexicon: Bool = false
         @State private var clearUserLexiconProgress: Double = 0
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -255,6 +256,11 @@ struct SettingsView: View {
                                                         Options.updateInputMemory(to: newState)
                                                 }
                                         ZStack {
+                                                if #available(iOSApplicationExtension 17.0, *) {
+                                                        Color.clear
+                                                                .sensoryFeedback(.warning, trigger: isTryingToClearUserLexicon, condition: { $0.negative && $1 })
+                                                                .sensoryFeedback(.success, trigger: isPerformingClearUserLexicon, condition: { $0 && $1.negative })
+                                                }
                                                 Menu {
                                                         Button(role: .destructive) {
                                                                 AudioFeedback.modified()
@@ -265,6 +271,10 @@ struct SettingsView: View {
                                                                 EmojiMaster.clearFrequent()
                                                         } label: {
                                                                 Label("SettingsView.UserLexicon.ClearUserLexicon.ButtonTitle", systemImage: "trash")
+                                                        }
+                                                        .onAppear {
+                                                                AudioFeedback.modified()
+                                                                isTryingToClearUserLexicon = true
                                                         }
                                                 } label: {
                                                         HStack {
@@ -277,11 +287,15 @@ struct SettingsView: View {
                                                 ProgressView(value: clearUserLexiconProgress).opacity(isPerformingClearUserLexicon ? 1 : 0)
                                         }
                                         .onReceive(timer) { _ in
-                                                guard isPerformingClearUserLexicon else { return }
-                                                if clearUserLexiconProgress > 1 {
-                                                        isPerformingClearUserLexicon = false
-                                                } else {
-                                                        clearUserLexiconProgress += 0.1
+                                                if isTryingToClearUserLexicon {
+                                                        isTryingToClearUserLexicon = false
+                                                }
+                                                if isPerformingClearUserLexicon {
+                                                        if clearUserLexiconProgress < 1 {
+                                                                clearUserLexiconProgress += 0.1
+                                                        } else {
+                                                                isPerformingClearUserLexicon = false
+                                                        }
                                                 }
                                         }
                                 } header: {
