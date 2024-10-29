@@ -17,7 +17,7 @@ struct TenKeyGlobeKey: View {
         }
 
         var body: some View {
-                let width: CGFloat = context.widthUnit * 2
+                let width: CGFloat = context.tenKeyWidthUnit
                 let height: CGFloat = context.heightUnit
                 ZStack {
                         Color.interactiveClear

@@ -51,7 +51,7 @@ struct TenKeySpecialKey: View {
                         }
                         */
                 }
-                .frame(width: context.widthUnit * 2, height: context.heightUnit)
+                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

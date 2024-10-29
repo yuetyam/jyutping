@@ -810,6 +810,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
         @Published private(set) var keyboardWidth: CGFloat = 375
         @Published private(set) var keyboardHeight: CGFloat = 272
         @Published private(set) var widthUnit: CGFloat = 37.5
+        @Published private(set) var tenKeyWidthUnit: CGFloat = 75
         @Published private(set) var heightUnit: CGFloat = 53
         private func updateKeyboardSize() {
                 let screen: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
@@ -824,7 +825,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         return screen.width - horizontalInset
                 }()
                 keyboardWidth = newKeyboardWidth
-                widthUnit = keyboardWidth / keyboardInterface.widthUnitTimes
+                widthUnit = newKeyboardWidth / keyboardInterface.widthUnitTimes
+                tenKeyWidthUnit = newKeyboardWidth / 5.0
                 heightUnit = keyboardInterface.keyHeightUnit(of: screen)
         }
 

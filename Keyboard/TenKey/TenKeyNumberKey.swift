@@ -39,7 +39,7 @@ struct TenKeyNumberKey: View {
                                 .padding(3)
                         Text(verbatim: key).font(.letterInputKeyCompact)
                 }
-                .frame(width: context.widthUnit * 2, height: context.heightUnit)
+                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

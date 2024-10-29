@@ -62,7 +62,7 @@ struct TenKeyReturnKey: View {
                         Text(context.returnKeyText)
                                 .foregroundStyle(foreColor)
                 }
-                .frame(width: context.widthUnit * 2, height: context.heightUnit * 2)
+                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit * 2)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in

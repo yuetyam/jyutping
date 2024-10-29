@@ -30,6 +30,6 @@ struct TenKeySidebar: View {
                         }
                 }
                 .padding(3)
-                .frame(width: context.widthUnit * 2, height: context.heightUnit * 3)
+                .frame(width: context.tenKeyWidthUnit, height: context.heightUnit * 3)
         }
 }
