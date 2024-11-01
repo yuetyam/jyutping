@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct PadShiftKey: View {
 
@@ -57,31 +58,29 @@ struct PadShiftKey: View {
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, touched, _ in
-                                if !touched {
+                                if touched.negative {
                                         AudioFeedback.modified()
                                         touched = true
                                 }
                         }
                         .onEnded { _ in
                                 let currentKeyboardCase: KeyboardCase = context.keyboardCase
-                                let didKeyboardCaseSwitchBack: Bool = currentKeyboardCase == previousKeyboardCase
-                                let shouldPerformDoubleTapping: Bool = isInTheMediumOfDoubleTapping && !didKeyboardCaseSwitchBack
+                                let didKeyboardCaseSwitchBack: Bool = (currentKeyboardCase == previousKeyboardCase)
+                                let shouldPerformDoubleTapping: Bool = isInTheMediumOfDoubleTapping && didKeyboardCaseSwitchBack.negative
+                                doubleTappingBuffer = 0
+                                previousKeyboardCase = currentKeyboardCase
                                 if shouldPerformDoubleTapping {
-                                        doubleTappingBuffer = 0
                                         isInTheMediumOfDoubleTapping = false
-                                        previousKeyboardCase = currentKeyboardCase
                                         context.operate(.doubleShift)
                                 } else {
-                                        doubleTappingBuffer = 0
                                         isInTheMediumOfDoubleTapping = true
-                                        previousKeyboardCase = currentKeyboardCase
                                         context.operate(.shift)
                                 }
                         }
                 )
                 .onReceive(timer) { _ in
                         if isInTheMediumOfDoubleTapping {
-                                if doubleTappingBuffer > 2 {
+                                if doubleTappingBuffer >= 3 {
                                         doubleTappingBuffer = 0
                                         isInTheMediumOfDoubleTapping = false
                                 } else {
