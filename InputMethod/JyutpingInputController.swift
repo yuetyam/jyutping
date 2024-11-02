@@ -866,16 +866,32 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         guard currentInputForm.isCantonese else { return }
                         guard isBuffering.negative else {
                                 switch punctuationKey {
-                                case .bracketLeft, .comma, .minus:
+                                case .comma, .minus:
                                         updateDisplayCandidates(.previousPage, highlight: .unchanged)
-                                case .bracketRight, .period, .equal:
+                                case .period, .equal:
                                         updateDisplayCandidates(.nextPage, highlight: .unchanged)
+                                case .bracketLeft:
+                                        let index = appContext.highlightedIndex
+                                        guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
+                                        guard let firstCharacter = displayCandidate.candidate.text.first else { return }
+                                        insert(String(firstCharacter))
+                                        aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
+                                case .bracketRight:
+                                        let index = appContext.highlightedIndex
+                                        guard let displayCandidate = appContext.displayCandidates.fetch(index) else { return }
+                                        guard let lastCharacter = displayCandidate.candidate.text.last else { return }
+                                        insert(String(lastCharacter))
+                                        aftercareSelection(displayCandidate, shouldProcessUserLexicon: false)
                                 default:
                                         return
                                 }
                                 return
                         }
-                        guard Options.punctuationForm.isCantoneseMode else { return }
+                        guard Options.punctuationForm.isCantoneseMode else {
+                                let symbol: String = isShifting ? punctuationKey.shiftingKeyText : punctuationKey.keyText
+                                insert(symbol)
+                                return
+                        }
                         if isShifting {
                                 if let symbol = punctuationKey.instantShiftingSymbol {
                                         insert(symbol)
@@ -1117,7 +1133,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 Options.updateCharacterStandard(to: newVariant)
         }
 
-        private func aftercareSelection(_ selected: DisplayCandidate) {
+        private func aftercareSelection(_ selected: DisplayCandidate, shouldProcessUserLexicon: Bool = true) {
                 let candidate = candidates.fetch(selected.candidateIndex) ?? candidates.first(where: { $0 == selected.candidate })
                 guard let candidate, candidate.isCantonese else {
                         selectedCandidates = []
@@ -1127,7 +1143,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                 switch bufferText.first {
                 case .none:
                         return
-                case .some(let character) where !(character.isBasicLatinLetter):
+                case .some(let character) where character.isBasicLatinLetter.negative:
                         selectedCandidates = []
                         clearBufferText()
                 case .some(let character) where character.isReverseLookupTrigger:
@@ -1140,7 +1156,11 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 clearBufferText()
                         }
                 default:
-                        selectedCandidates.append(candidate)
+                        if shouldProcessUserLexicon {
+                                selectedCandidates.append(candidate)
+                        } else {
+                                selectedCandidates = []
+                        }
                         let inputCount: Int = candidate.input.replacingOccurrences(of: "[456]", with: "RR", options: .regularExpression).count
                         var tail = bufferText.dropFirst(inputCount)
                         while tail.hasPrefix("'") {

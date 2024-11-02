@@ -4806,61 +4806,189 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select to input current Candidate"
+            "value" : "Input current Candidate"
           }
         },
         "yue" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-Hans-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-Hant-CN" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-Hant-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-Hant-MO" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-Hant-TW" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選擇當前候選詞輸入"
+            "value" : "輸入當前候選詞"
+          }
+        }
+      }
+    },
+    "HotkeysView.SelectFirstCharacterOfCurrentCandidate" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input current Candidate’s first character"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之首字"
+          }
+        }
+      }
+    },
+    "HotkeysView.SelectLastCharacterOfCurrentCandidate" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input current Candidate’s last character"
+          }
+        },
+        "yue" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-Hans-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-Hant-CN" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-Hant-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-Hant-MO" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-Hant-TW" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "輸入當前候選詞之末字"
           }
         }
       }

@@ -124,6 +124,18 @@ struct HotkeysView: View {
                                                 Spacer()
                                         }
                                         HStack(spacing: 4) {
+                                                LabelText("HotkeysView.SelectFirstCharacterOfCurrentCandidate")
+                                                Text.separator
+                                                KeyBlockView("[")
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
+                                                LabelText("HotkeysView.SelectLastCharacterOfCurrentCandidate")
+                                                Text.separator
+                                                KeyBlockView("]")
+                                                Spacer()
+                                        }
+                                        HStack(spacing: 4) {
                                                 LabelText("HotkeysView.RemoveCurrentCandidateFromUserLexicon")
                                                 Text.separator
                                                 KeyBlockView.control
