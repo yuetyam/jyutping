@@ -15,7 +15,7 @@ public enum CandidateType: Int, Sendable {
         case compose
 }
 
-public struct Candidate: Hashable, Sendable {
+public struct Candidate: Hashable, Comparable, Sendable {
 
         /// Candidate Type
         public let type: CandidateType
@@ -50,24 +50,14 @@ public struct Candidate: Hashable, Sendable {
         ///   - romanization: Jyutping.
         ///   - input: User input for this Candidate.
         ///   - mark: Formatted user input for pre-edit display.
-        public init(type: CandidateType = .cantonese, text: String, lexiconText: String? = nil, romanization: String, input: String, mark: String? = nil) {
+        ///   - Order: Rank. Smaller is preferred.
+        public init(type: CandidateType = .cantonese, text: String, lexiconText: String? = nil, romanization: String, input: String, mark: String? = nil, order: Int = 0) {
                 self.type = type
                 self.text = text
                 self.lexiconText = lexiconText ?? text
                 self.romanization = romanization
                 self.input = input
                 self.mark = mark ?? input
-                self.order = 0
-        }
-
-        /// CoreIME Internal Initializer
-        init(text: String, romanization: String, input: String, mark: String, order: Int) {
-                self.type = .cantonese
-                self.text = text
-                self.lexiconText = text
-                self.romanization = romanization
-                self.input = input
-                self.mark = mark
                 self.order = order
         }
 
@@ -155,6 +145,13 @@ public struct Candidate: Hashable, Sendable {
                 }
         }
 
+        // Comparable
+        public static func < (lhs: Candidate, rhs: Candidate) -> Bool {
+                guard lhs.input.count == rhs.input.count else { return lhs.input.count > rhs.input.count }
+                guard lhs.text.count == rhs.text.count else { return lhs.text.count < rhs.text.count }
+                return lhs.order < rhs.order
+        }
+
         public static func +(lhs: Candidate, rhs: Candidate) -> Candidate? {
                 guard lhs.isCantonese && rhs.isCantonese else { return nil }
                 let newText: String = lhs.text + rhs.text
@@ -162,7 +159,9 @@ public struct Candidate: Hashable, Sendable {
                 let newRomanization: String = lhs.romanization + " " + rhs.romanization
                 let newInput: String = lhs.input + rhs.input
                 let newMark: String = lhs.mark + " " + rhs.mark
-                return Candidate(text: newText, lexiconText: newLexiconText, romanization: newRomanization, input: newInput, mark: newMark)
+                let step: Int = 1_000_000
+                let newOrder: Int = (lhs.order + step) + (rhs.order + step)
+                return Candidate(text: newText, lexiconText: newLexiconText, romanization: newRomanization, input: newInput, mark: newMark, order: newOrder)
         }
 }
 
@@ -178,6 +177,8 @@ extension Array where Element == Candidate {
                 let romanization: String = map(\.romanization).joined(separator: " ")
                 let input: String = map(\.input).joined()
                 let mark: String = map(\.mark).joined(separator: " ")
-                return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark)
+                let step: Int = 1_000_000
+                let order: Int = map(\.order).reduce(0, { $0 + $1 + step })
+                return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark, order: order)
         }
 }
