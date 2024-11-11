@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct ExpansibleInputKey: View {
 
@@ -58,17 +59,31 @@ struct ExpansibleInputKey: View {
         @State private var selectedIndex: Int = 0
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight = context.heightUnit
+                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
+                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
+                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
+                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
+                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
+                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
+                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
+                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 let shouldAdjustKeyTextPosition: Bool = shouldShowLowercaseKeys && (context.keyboardForm == .alphabetic)
-                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyTextBottomInset: CGFloat = shouldAdjustKeyTextPosition ? 3 : 0
                 ZStack {
+                        Color.interactiveClear
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
-                                let expansions: Int = keyModel.members.count - 1
-                                KeyExpansionPath(keyLocale: keyLocale, expansions: expansions)
+                                let expansionCount: Int = memberCount - 1
+                                let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
+                                let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
+                                let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
+                                ExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
@@ -83,15 +98,13 @@ struct ExpansibleInputKey: View {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.header ?? String.space)
                                                                                         .font(.keyFooter)
-                                                                                        .foregroundStyle(Color.secondary)
-                                                                                        .padding(.top, 1)
+                                                                                        .opacity(0.66)
                                                                         }
                                                                         ZStack(alignment: .bottom) {
                                                                                 Color.interactiveClear
                                                                                 Text(verbatim: element.footer ?? String.space)
                                                                                         .font(.keyFooter)
-                                                                                        .foregroundStyle(Color.secondary)
-                                                                                        .padding(.bottom, 1)
+                                                                                        .opacity(0.66)
                                                                         }
                                                                         Text(verbatim: element.text)
                                                                                 .textCase(textCase)
@@ -101,60 +114,60 @@ struct ExpansibleInputKey: View {
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: keyWidth * CGFloat(memberCount), height: context.heightUnit - 8)
-                                                .padding(.bottom, context.heightUnit * 2)
-                                                .padding(.leading, keyLocale.isLeading ? (keyWidth * CGFloat(expansions)) : 0)
-                                                .padding(.trailing, keyLocale.isTrailing ? (keyWidth * CGFloat(expansions)) : 0)
+                                                .frame(width: baseWidth * CGFloat(memberCount), height: baseHeight)
+                                                .padding(.bottom, previewBottomOffset)
+                                                .padding(.leading, leadingOffset)
+                                                .padding(.trailing, trailingOffset)
                                         }
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                         } else if (isTouching && shouldPreviewKey) {
-                                KeyPreviewPath()
+                                BubbleShape()
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 Text(verbatim: keyModel.primary.text)
                                                         .textCase(textCase)
                                                         .font(keyModel.primary.isTextSingular ? .title : .title3)
-                                                        .padding(.bottom, context.heightUnit * 2.0)
+                                                        .padding(.bottom, previewBottomOffset)
                                         }
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                         } else {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeColor : keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .topTrailing) {
-                                        Color.interactiveClear
+                                        Color.clear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(.trailing, 5)
-                                                .padding(.top, 8)
+                                                .opacity(0.66)
                                 }
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding + 2)
                                 ZStack(alignment: .bottomTrailing) {
-                                        Color.interactiveClear
+                                        Color.clear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(.trailing, 5)
-                                                .padding(.bottom, 8)
+                                                .opacity(0.66)
                                 }
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding + 2)
                                 Text(verbatim: keyModel.primary.text)
                                         .textCase(textCase)
                                         .font(keyModel.primary.isTextSingular ? .letterInputKeyCompact : .dualLettersInputKeyCompact)
-                                        .padding(.bottom, shouldAdjustKeyTextPosition ? 3 : 0)
+                                        .padding(.bottom, keyTextBottomInset)
                         }
                 }
-                .frame(width: keyWidth, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         tapped = true
@@ -166,7 +179,7 @@ struct ExpansibleInputKey: View {
                                 guard memberCount > 1 else { return }
                                 let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                 guard distance > 0 else { return }
-                                let step: CGFloat = keyWidth - 8
+                                let step: CGFloat = baseWidth
                                 for index in keyModel.members.indices {
                                         let lowPoint: CGFloat = step * CGFloat(index)
                                         let heightPoint: CGFloat = step * CGFloat(index + 1)
@@ -183,13 +196,15 @@ struct ExpansibleInputKey: View {
                         .onEnded { _ in
                                 buffer = 0
                                 if isLongPressing {
+                                        defer {
+                                                selectedIndex = 0
+                                                isLongPressing = false
+                                        }
                                         guard let selectedElement = keyModel.members.fetch(selectedIndex) else { return }
                                         AudioFeedback.inputed()
                                         context.triggerSelectionHapticFeedback()
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         context.operate(.process(text))
-                                        selectedIndex = 0
-                                        isLongPressing = false
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))
@@ -198,7 +213,7 @@ struct ExpansibleInputKey: View {
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
-                        guard !isLongPressing else { return }
+                        guard isLongPressing.negative else { return }
                         if buffer > 3 {
                                 isLongPressing = true
                         } else {

@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct RightKey: View {
 
@@ -42,7 +43,18 @@ struct RightKey: View {
         @State private var isLongPressing: Bool = false
         @State private var selectedIndex: Int = 0
 
-        private func responsiveSymbols(isABCMode: Bool, needsInputModeSwitchKey: Bool) -> [String] {
+        private func keyText(isABCMode: Bool, isBuffering: Bool, needsInputModeSwitchKey: Bool) -> String {
+                if isABCMode {
+                        return "."
+                } else if isBuffering {
+                        return "'"
+                } else if needsInputModeSwitchKey {
+                        return "，"
+                } else {
+                        return "。"
+                }
+        }
+        private func symbols(isABCMode: Bool, needsInputModeSwitchKey: Bool) -> [String] {
                 switch (isABCMode, needsInputModeSwitchKey) {
                 case (true, true):
                         return [".", ",", "?", "!"]
@@ -56,20 +68,33 @@ struct RightKey: View {
         }
 
         var body: some View {
+                let needsInputModeSwitchKey: Bool = context.needsInputModeSwitchKey
+                let keyWidth: CGFloat = context.widthUnit
+                let keyHeight: CGFloat = context.heightUnit
+                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
+                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
+                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
+                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
+                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
+                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
+                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
+                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
                 ZStack {
+                        Color.interactiveClear
                         if isLongPressing {
-                                let symbols: [String] = responsiveSymbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
-                                let symbolsCount: Int = symbols.count
-                                let expansions: Int = symbolsCount - 1
-                                KeyLeftExpansionPath(expansions: expansions)
+                                let symbols: [String] = symbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: needsInputModeSwitchKey)
+                                let symbolCount: Int = symbols.count
+                                let expansionCount: Int = symbolCount - 1
+                                let trailingOffset: CGFloat = baseWidth * CGFloat(expansionCount)
+                                ExpansiveBubbleShape(keyLocale: .trailing, expansionCount: expansionCount)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 HStack(spacing: 0) {
                                                         ForEach(symbols.indices, id: \.self) { index in
-                                                                let reversedIndex = (symbolsCount - 1) - index
+                                                                let reversedIndex = (symbolCount - 1) - index
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                                                                 .fill(selectedIndex == reversedIndex ? Color.accentColor : Color.clear)
@@ -80,46 +105,45 @@ struct RightKey: View {
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: context.widthUnit * CGFloat(symbolsCount), height: context.heightUnit - 12)
-                                                .padding(.bottom, context.heightUnit * 2)
-                                                .padding(.trailing, context.widthUnit * CGFloat(expansions))
+                                                .frame(width: baseWidth * CGFloat(symbolCount), height: baseHeight)
+                                                .padding(.bottom, previewBottomOffset)
+                                                .padding(.trailing, trailingOffset)
                                         }
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                         } else if (isTouching && shouldPreviewKey) {
-                                KeyPreviewPath()
+                                BubbleShape()
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
-                                                RightKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
+                                                Text(verbatim: keyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: needsInputModeSwitchKey))
                                                         .font(.largeTitle)
-                                                        .padding(.bottom, context.heightUnit * 2)
+                                                        .padding(.bottom, previewBottomOffset)
                                         }
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                         } else {
-                                Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeColor : keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: "分隔")
                                                 .font(.keyFooter)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(.bottom, 8)
+                                                .opacity(context.inputStage.isBuffering ? 0.66 : 0)
                                 }
-                                .opacity(context.inputStage.isBuffering ? 1 : 0)
-                                RightKeyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
+                                .padding(.vertical, verticalPadding + 2)
+                                .padding(.horizontal, horizontalPadding + 2)
+                                Text(verbatim: keyText(isABCMode: context.inputMethodMode.isABC, isBuffering: context.inputStage.isBuffering, needsInputModeSwitchKey: needsInputModeSwitchKey))
                         }
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         tapped = true
@@ -129,7 +153,7 @@ struct RightKey: View {
                                 guard isLongPressing else { return }
                                 let distance: CGFloat = -(state.translation.width)
                                 guard distance > 0 else { return }
-                                let step: CGFloat = context.widthUnit
+                                let step: CGFloat = baseWidth
                                 if distance < step {
                                         selectedIndex = 0
                                 } else if distance < (step * 2) {
@@ -143,13 +167,15 @@ struct RightKey: View {
                         .onEnded { _ in
                                 buffer = 0
                                 if isLongPressing {
-                                        let symbols: [String] = responsiveSymbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: context.needsInputModeSwitchKey)
+                                        defer {
+                                                selectedIndex = 0
+                                                isLongPressing = false
+                                        }
+                                        let symbols: [String] = symbols(isABCMode: context.inputMethodMode.isABC, needsInputModeSwitchKey: needsInputModeSwitchKey)
                                         guard let selectedSymbol: String = symbols.fetch(selectedIndex) else { return }
                                         AudioFeedback.inputed()
                                         context.triggerSelectionHapticFeedback()
                                         context.operate(.input(selectedSymbol))
-                                        selectedIndex = 0
-                                        isLongPressing = false
                                 } else {
                                         if context.inputMethodMode.isABC {
                                                 context.operate(.input("."))
@@ -157,7 +183,7 @@ struct RightKey: View {
                                                 if context.inputStage.isBuffering {
                                                         context.operate(.separate)
                                                 } else {
-                                                        let symbol: String = context.needsInputModeSwitchKey ? "，" : "。"
+                                                        let symbol: String = needsInputModeSwitchKey ? "，" : "。"
                                                         context.operate(.input(symbol))
                                                 }
                                         }
@@ -167,7 +193,7 @@ struct RightKey: View {
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
                         if buffer > 3 {
-                                let shouldPerformLongPress: Bool = !isLongPressing && !(context.inputStage.isBuffering)
+                                let shouldPerformLongPress: Bool = isLongPressing.negative && context.inputStage.isBuffering.negative
                                 if shouldPerformLongPress {
                                         isLongPressing = true
                                 }
@@ -175,28 +201,5 @@ struct RightKey: View {
                                 buffer += 1
                         }
                 }
-        }
-}
-
-private struct RightKeyText: View {
-
-        init(isABCMode: Bool, isBuffering: Bool, needsInputModeSwitchKey: Bool) {
-                self.symbol = {
-                        if isABCMode {
-                                return "."
-                        } else if isBuffering {
-                                return "'"
-                        } else if needsInputModeSwitchKey {
-                                return "，"
-                        } else {
-                                return "。"
-                        }
-                }()
-        }
-
-        private let symbol: String
-
-        var body: some View {
-                Text(verbatim: symbol)
         }
 }

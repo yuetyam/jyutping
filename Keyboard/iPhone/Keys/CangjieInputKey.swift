@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct CangjieInputKey: View {
 
@@ -49,6 +50,16 @@ struct CangjieInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth = context.widthUnit
+                let keyHeight = context.heightUnit
+                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
+                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
+                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
+                // let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
+                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
+                let shapeHeight: CGFloat = isPhoneLandscape ? (baseHeight / (2 / 6.0)) : baseHeight / ((2.5 / 6.0))
+                let curveHeight: CGFloat = isPhoneLandscape ? (shapeHeight / 3.0) : (shapeHeight / 6.0)
+                let previewBottomOffset: CGFloat = (baseHeight * 2) + (curveHeight * 1.5)
                 let shouldPreviewKey: Bool = Options.keyTextPreview
                 let activeColor: Color = shouldPreviewKey ? keyColor : keyActiveColor
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
@@ -56,38 +67,39 @@ struct CangjieInputKey: View {
                 ZStack {
                         Color.interactiveClear
                         if (isTouching && shouldPreviewKey) {
-                                KeyPreviewPath()
+                                BubbleShape()
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
                                                 Text(verbatim: radical)
                                                         .font(.largeTitle)
-                                                        .padding(.bottom, context.heightUnit * 2.0)
+                                                        .padding(.bottom, previewBottomOffset)
                                         }
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                         } else {
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeColor : keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 3)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
                                         Text(verbatim: letter)
                                                 .textCase(textCase)
                                                 .font(.footnote)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(5)
+                                                .opacity(0.66)
                                 }
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding + 2)
                                 Text(verbatim: radical)
                         }
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.inputed()
                                         context.triggerHapticFeedback()
                                         tapped = true

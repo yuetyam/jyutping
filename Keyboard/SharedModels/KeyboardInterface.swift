@@ -73,9 +73,7 @@ extension KeyboardInterface {
                 case .padFloating:
                         return 48
                 case .phoneLandscape:
-                        // iPhone SE1, iPod touch 7 (w480 x h320)
-                        let isSmallPhone: Bool = screen.height < 350
-                        return isSmallPhone ? 36 : 40
+                        return 36
                 case .phonePortrait:
                         let screenWidth = screen.width
                         if screenWidth > 300 && screenWidth < 350 {
@@ -100,8 +98,8 @@ extension KeyboardInterface {
                                 // iPhone 16 Pro Max (440 x 956)
                                 return 56
                         } else {
-                                let extras: Int = Int(screenWidth - 300) / 20
-                                return CGFloat(50 + extras)
+                                let extra: Int = Int(screenWidth - 300) / 20
+                                return CGFloat(50 + extra)
                         }
                 }
         }

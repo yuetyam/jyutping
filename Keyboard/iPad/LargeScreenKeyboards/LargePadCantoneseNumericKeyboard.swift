@@ -462,7 +462,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                                 KeyElement("©"),
                                                                 KeyElement("®"),
                                                                 KeyElement("™"),
-                                                                KeyElement("\u{F8FF}")
+                                                                KeyElement("℠")
                                                         ]
                                                 )
                                         )
@@ -472,8 +472,9 @@ struct LargePadCantoneseNumericKeyboard: View {
                                                         primary: KeyElement("…"),
                                                         members: [
                                                                 KeyElement("…", footer: "2026"),
+                                                                KeyElement("……", footer: "2026*2"),
                                                                 KeyElement("⋯", footer: "22EF"),
-                                                                KeyElement("……", footer: "2026*2")
+                                                                KeyElement("⋯⋯", footer: "22EF*2"),
                                                         ]
                                                 )
                                         )

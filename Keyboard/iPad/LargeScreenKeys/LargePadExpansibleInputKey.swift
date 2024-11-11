@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct LargePadExpansibleInputKey: View {
 
@@ -55,15 +56,25 @@ struct LargePadExpansibleInputKey: View {
         @State private var selectedIndex: Int = 0
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit
+                let keyHeight = context.heightUnit
+                let verticalPadding: CGFloat = 4
+                let horizontalPadding: CGFloat = 4
+                let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
+                let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
+                let extraHeight: CGFloat = 4
+                let previewBottomOffset: CGFloat = (baseHeight + extraHeight) * 2
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                let widthUnit: CGFloat = context.widthUnit
-                let heightUnit: CGFloat = context.heightUnit
                 ZStack {
+                        Color.interactiveClear
                         if isLongPressing {
                                 let memberCount: Int = keyModel.members.count
-                                let expansions: Int = keyModel.members.count - 1
-                                PadKeyExpansionPath(keyLocale: keyLocale, expansions: expansions)
+                                let expansionCount: Int = memberCount - 1
+                                let offsetX: CGFloat = baseWidth * CGFloat(expansionCount)
+                                let leadingOffset: CGFloat = keyLocale.isLeading ? offsetX : 0
+                                let trailingOffset: CGFloat = keyLocale.isTrailing ? offsetX : 0
+                                PadExpansiveBubbleShape(keyLocale: keyLocale, expansionCount: expansionCount)
                                         .fill(keyPreviewColor)
                                         .shadow(color: .shadowGray, radius: 1)
                                         .overlay {
@@ -71,74 +82,73 @@ struct LargePadExpansibleInputKey: View {
                                                         ForEach(keyModel.members.indices, id: \.self) { index in
                                                                 let elementIndex: Int = keyLocale.isLeading ? index : ((memberCount - 1) - index)
                                                                 let element: KeyElement = keyModel.members[elementIndex]
-                                                                let isHighlighted: Bool = selectedIndex == elementIndex
                                                                 ZStack {
                                                                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                                                                 .fill(selectedIndex == elementIndex ? Color.accentColor : Color.clear)
                                                                         ZStack(alignment: .top) {
-                                                                                Color.interactiveClear
+                                                                                Color.clear
                                                                                 Text(verbatim: element.header ?? String.space)
                                                                                         .font(.keyFooter)
-                                                                                        .padding(.top, 1)
-                                                                                        .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                                                                                         .opacity(0.8)
                                                                         }
+                                                                        .padding(2)
                                                                         ZStack(alignment: .bottom) {
-                                                                                Color.interactiveClear
+                                                                                Color.clear
                                                                                 Text(verbatim: element.footer ?? String.space)
                                                                                         .font(.keyFooter)
-                                                                                        .padding(.bottom, 1)
-                                                                                        .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                                                                                         .opacity(0.8)
                                                                         }
+                                                                        .padding(2)
                                                                         Text(verbatim: element.text)
                                                                                 .textCase(textCase)
                                                                                 .font(.title2)
-                                                                                .foregroundStyle(isHighlighted ? Color.white : Color.primary)
                                                                 }
+                                                                .foregroundStyle(selectedIndex == elementIndex ? Color.white : Color.primary)
+                                                                .padding(4)
                                                                 .frame(maxWidth: .infinity)
                                                         }
                                                 }
-                                                .frame(width: (widthUnit - 12) * CGFloat(memberCount), height: heightUnit * 0.7)
-                                                .padding(.bottom, heightUnit * 1.8)
-                                                .padding(.leading, keyLocale.isLeading ? ((widthUnit - 10) * CGFloat(expansions)) : 0)
-                                                .padding(.trailing, keyLocale.isTrailing ? ((widthUnit - 10) * CGFloat(expansions)) : 0)
+                                                .frame(width: baseWidth * CGFloat(memberCount), height: baseHeight)
+                                                .padding(.bottom, previewBottomOffset)
+                                                .padding(.leading, leadingOffset)
+                                                .padding(.trailing, trailingOffset)
                                         }
-                                        .padding(4)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                         } else {
-                                Color.interactiveClear
                                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                                         .fill(isTouching ? activeKeyColor : keyColor)
                                         .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(4)
+                                        .padding(.vertical, verticalPadding)
+                                        .padding(.horizontal, horizontalPadding)
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.header ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
                                                 .opacity(0.8)
-                                                .padding(.trailing, 8)
-                                                .padding(.top, 8)
                                 }
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding + 2)
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
                                         Text(verbatim: keyModel.primary.footer ?? String.space)
                                                 .textCase(textCase)
                                                 .font(.keyFooter)
                                                 .opacity(0.8)
-                                                .padding(.trailing, 8)
-                                                .padding(.bottom, 8)
                                 }
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding + 2)
                                 Text(verbatim: keyModel.primary.text)
                                         .textCase(textCase)
                                         .font(.title2)
                         }
                 }
-                .frame(width: widthUnit, height: heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.inputed()
                                         tapped = true
                                 }
@@ -149,7 +159,7 @@ struct LargePadExpansibleInputKey: View {
                                 guard memberCount > 1 else { return }
                                 let distance: CGFloat = keyLocale.isLeading ? state.translation.width : -(state.translation.width)
                                 guard distance > 10 else { return }
-                                let step: CGFloat = widthUnit - 14
+                                let step: CGFloat = baseWidth
                                 for index in keyModel.members.indices {
                                         let lowPoint: CGFloat = step * CGFloat(index)
                                         let heightPoint: CGFloat = step * CGFloat(index + 1)
@@ -166,12 +176,14 @@ struct LargePadExpansibleInputKey: View {
                         .onEnded { _ in
                                 buffer = 0
                                 if isLongPressing {
+                                        defer {
+                                                selectedIndex = 0
+                                                isLongPressing = false
+                                        }
                                         guard let selectedElement = keyModel.members.fetch(selectedIndex) else { return }
                                         let text: String = context.keyboardCase.isLowercased ? selectedElement.text : selectedElement.text.uppercased()
                                         AudioFeedback.inputed()
                                         context.operate(.process(text))
-                                        selectedIndex = 0
-                                        isLongPressing = false
                                 } else {
                                         let text: String = context.keyboardCase.isLowercased ? keyModel.primary.text : keyModel.primary.text.uppercased()
                                         context.operate(.process(text))
@@ -180,7 +192,7 @@ struct LargePadExpansibleInputKey: View {
                 )
                 .onReceive(timer) { _ in
                         guard isTouching else { return }
-                        guard !isLongPressing else { return }
+                        guard isLongPressing.negative else { return }
                         if buffer > 3 {
                                 isLongPressing = true
                         } else {

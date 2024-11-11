@@ -67,13 +67,14 @@ struct NumericKeyboard: View {
                         HStack(spacing: 0) {
                                 TransformKey(destination: .symbolic, widthUnitTimes: 1.3)
                                 PlaceholderKey()
-                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
-                                SymbolInputKey(",", widthUnitTimes: 1.3)
-                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
-                                ExpansibleInputKey(keyLocale: .trailing, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("¡")]))
+                                ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
+                                SymbolInputKey(",")
+                                ExpansibleInputKey(keyLocale: .leading, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
+                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("¡")]))
+                                ExpansibleInputKey(keyLocale: .trailing, keyModel: KeyModel(primary: KeyElement("%"), members: [KeyElement("%"), KeyElement("‰")]))
+                                SymbolInputKey("*")
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
-                                        widthUnitTimes: 1.3,
                                         keyModel: KeyModel(primary: KeyElement("\u{0027}"),
                                                            members: [
                                                                 KeyElement("\u{0027}", footer: "0027"),

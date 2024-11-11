@@ -35,13 +35,14 @@ struct SymbolicKeyboard: View {
                         HStack(spacing: 0) {
                                 TransformKey(destination: .numeric, widthUnitTimes: 1.3)
                                 PlaceholderKey()
-                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("."), members: [KeyElement("."), KeyElement("…")]))
-                                SymbolInputKey(",", widthUnitTimes: 1.3)
-                                ExpansibleInputKey(keyLocale: .leading, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("?"), members: [KeyElement("?"), KeyElement("¿")]))
-                                ExpansibleInputKey(keyLocale: .trailing, widthUnitTimes: 1.3, keyModel: KeyModel(primary: KeyElement("!"), members: [KeyElement("!"), KeyElement("¡")]))
+                                SymbolInputKey("…")
+                                SymbolInputKey("©")
+                                SymbolInputKey("®")
+                                SymbolInputKey("℗")
+                                SymbolInputKey("™")
+                                SymbolInputKey("℠")
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
-                                        widthUnitTimes: 1.3,
                                         keyModel: KeyModel(primary: KeyElement("\u{0027}"),
                                                            members: [
                                                                 KeyElement("\u{0027}", footer: "0027"),

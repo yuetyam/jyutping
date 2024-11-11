@@ -212,9 +212,6 @@ struct CantoneseNumericKeyboard: View {
                                                            members: [
                                                                 KeyElement("「"),
                                                                 KeyElement("『"),
-                                                                KeyElement("\u{0022}", footer: "0022"),
-                                                                KeyElement("\u{201C}", footer: "201C"),
-                                                                KeyElement("\u{2018}", footer: "2018"),
                                                                 KeyElement("﹁", header: PresetConstant.verticalText),
                                                                 KeyElement("﹃", header: PresetConstant.verticalText)
                                                            ])
@@ -225,9 +222,6 @@ struct CantoneseNumericKeyboard: View {
                                                            members: [
                                                                 KeyElement("」"),
                                                                 KeyElement("』"),
-                                                                KeyElement("\u{0022}", footer: "0022"),
-                                                                KeyElement("\u{201D}", footer: "201D"),
-                                                                KeyElement("\u{2019}", footer: "2019"),
                                                                 KeyElement("﹂", header: PresetConstant.verticalText),
                                                                 KeyElement("﹄", header: PresetConstant.verticalText)
                                                            ])
@@ -238,20 +232,18 @@ struct CantoneseNumericKeyboard: View {
                                 PlaceholderKey()
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
-                                        widthUnitTimes: 1.2,
                                         keyModel: KeyModel(primary: KeyElement("。"),
                                                            members: [
                                                                 KeyElement("。"),
                                                                 KeyElement("｡", header: PresetConstant.halfWidth),
-                                                                KeyElement("⋯", footer: "22EF"),
-                                                                KeyElement("⋯⋯", footer: "22EF*2"),
-                                                                KeyElement("…", footer: "2026"),
-                                                                KeyElement("……", footer: "2026*2")
+                                                                KeyElement("\u{2026}", footer: "2026"),
+                                                                KeyElement("\u{2026}\u{2026}", footer: "2026*2"),
+                                                                KeyElement("\u{22EF}", footer: "22EF"),
+                                                                KeyElement("\u{22EF}\u{22EF}", footer: "22EF*2")
                                                            ])
                                 )
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
-                                        widthUnitTimes: 1.2,
                                         keyModel: KeyModel(primary: KeyElement("，"),
                                                            members: [
                                                                 KeyElement("，"),
@@ -260,7 +252,6 @@ struct CantoneseNumericKeyboard: View {
                                 )
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
-                                        widthUnitTimes: 1.2,
                                         keyModel: KeyModel(primary: KeyElement("、"),
                                                            members: [
                                                                 KeyElement("、"),
@@ -269,7 +260,6 @@ struct CantoneseNumericKeyboard: View {
                                 )
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
-                                        widthUnitTimes: 1.2,
                                         keyModel: KeyModel(primary: KeyElement("？"),
                                                            members: [
                                                                 KeyElement("？"),
@@ -278,7 +268,6 @@ struct CantoneseNumericKeyboard: View {
                                 )
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
-                                        widthUnitTimes: 1.2,
                                         keyModel: KeyModel(primary: KeyElement("！"),
                                                            members: [
                                                                 KeyElement("！"),
@@ -287,12 +276,21 @@ struct CantoneseNumericKeyboard: View {
                                 )
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
-                                        widthUnitTimes: 1.2,
                                         keyModel: KeyModel(primary: KeyElement("."),
                                                            members: [
                                                                 KeyElement("."),
                                                                 KeyElement("．", header: PresetConstant.fullWidth, footer: "FF0E"),
                                                                 KeyElement("…", footer: "2026")
+                                                           ])
+                                )
+                                ExpansibleInputKey(
+                                        keyLocale: .trailing,
+                                        keyModel: KeyModel(primary: KeyElement("\u{0022}"),
+                                                           members: [
+                                                                KeyElement("\u{0022}", footer: "0022"),
+                                                                KeyElement("\u{FF02}", header: PresetConstant.fullWidth, footer: "U+FF02"),
+                                                                KeyElement("\u{201D}", header: "右", footer: "U+201D"),
+                                                                KeyElement("\u{201C}", header: "左", footer: "U+201C")
                                                            ])
                                 )
                                 PlaceholderKey()

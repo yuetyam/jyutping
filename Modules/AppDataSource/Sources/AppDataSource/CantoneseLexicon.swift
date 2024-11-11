@@ -54,12 +54,12 @@ public struct CantoneseLexicon: Hashable {
                         let pronunciations = tryMatched.map { romanization -> Pronunciation in
                                 guard textCount == 1 else { return Pronunciation(romanization: romanization) }
                                 let homophones = DataMaster.fetchHomophones(for: romanization).filter({ $0 != traditionalText })
-                                let collocations = DataMaster.fetchCollocations(word: text, romanization: romanization)
+                                let collocations = DataMaster.fetchCollocations(word: traditionalText, romanization: romanization)
                                 return Pronunciation(romanization: romanization, homophones: homophones, collocations: collocations)
                         }
                         return CantoneseLexicon(text: traditionalText, pronunciations: pronunciations)
                 }
-                guard textCount != 1 else { return fallback }
+                guard textCount > 1 else { return fallback }
                 lazy var chars: String = text
                 lazy var fetches: [String] = []
                 lazy var newText: String = ""

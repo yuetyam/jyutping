@@ -140,11 +140,6 @@
 		371B6FB82B3B342F005BB31C /* CantoneseABCSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */; };
 		371B6FB92B3B342F005BB31C /* EditingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F372B3B342E005BB31C /* EditingPanel.swift */; };
 		371B6FBA2B3B342F005BB31C /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F382B3B342E005BB31C /* KeyboardViewController.swift */; };
-		371B6FBB2B3B342F005BB31C /* KeyRightExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3A2B3B342E005BB31C /* KeyRightExpansionPath.swift */; };
-		371B6FBC2B3B342F005BB31C /* KeyLeftExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3B2B3B342E005BB31C /* KeyLeftExpansionPath.swift */; };
-		371B6FBD2B3B342F005BB31C /* KeyPreviewPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3C2B3B342E005BB31C /* KeyPreviewPath.swift */; };
-		371B6FBE2B3B342F005BB31C /* PadKeyExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */; };
-		371B6FBF2B3B342F005BB31C /* KeyExpansionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */; };
 		371B6FC02B3B342F005BB31C /* CharacterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F402B3B342F005BB31C /* CharacterExtensions.swift */; };
 		371B6FC32B3B342F005BB31C /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F432B3B342F005BB31C /* ColorExtensions.swift */; };
 		371B6FC42B3B342F005BB31C /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371B6F442B3B342F005BB31C /* FontExtensions.swift */; };
@@ -221,6 +216,8 @@
 		371EABF72B38802A0075089B /* CommonExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 371EABF62B38802A0075089B /* CommonExtensions */; };
 		37311A3C2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37311A3B2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift */; };
 		37311A3E2BD9099D00B2D948 /* MacJyutpingInitialTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37311A3D2BD9099D00B2D948 /* MacJyutpingInitialTable.swift */; };
+		373B6ABA2CDF9BBE00C05CD9 /* ExpansiveBubbleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B6AB92CDF9BBD00C05CD9 /* ExpansiveBubbleShape.swift */; };
+		373B6ABC2CE074AD00C05CD9 /* PadExpansiveBubbleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B6ABB2CE074AB00C05CD9 /* PadExpansiveBubbleShape.swift */; };
 		3742192B2BD4B63200FCB170 /* EnhancedReturnKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */; };
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
@@ -275,6 +272,7 @@
 		37D1C93A2BBF297000015FD0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */; };
 		37D757DA2C252F8500915B21 /* Linguistics in Frameworks */ = {isa = PBXBuildFile; productRef = 37D757D92C252F8500915B21 /* Linguistics */; };
 		37D771A82BF805FA008BC978 /* VerticalPageCandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D771A72BF805FA008BC978 /* VerticalPageCandidateLabel.swift */; };
+		37D928782CDD73CD00A06729 /* BubbleShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D928772CDD73C600A06729 /* BubbleShape.swift */; };
 		37E6AD6B2B3B381700F02279 /* RightCommentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD442B3B381600F02279 /* RightCommentLabel.swift */; };
 		37E6AD6C2B3B381700F02279 /* CandidateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD452B3B381600F02279 /* CandidateBoard.swift */; };
 		37E6AD6D2B3B381700F02279 /* HorizontalPageCandidateLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E6AD462B3B381600F02279 /* HorizontalPageCandidateLabel.swift */; };
@@ -510,11 +508,6 @@
 		371B6F362B3B342E005BB31C /* CantoneseABCSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CantoneseABCSwitch.swift; sourceTree = "<group>"; };
 		371B6F372B3B342E005BB31C /* EditingPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingPanel.swift; sourceTree = "<group>"; };
 		371B6F382B3B342E005BB31C /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
-		371B6F3A2B3B342E005BB31C /* KeyRightExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRightExpansionPath.swift; sourceTree = "<group>"; };
-		371B6F3B2B3B342E005BB31C /* KeyLeftExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyLeftExpansionPath.swift; sourceTree = "<group>"; };
-		371B6F3C2B3B342E005BB31C /* KeyPreviewPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPreviewPath.swift; sourceTree = "<group>"; };
-		371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PadKeyExpansionPath.swift; sourceTree = "<group>"; };
-		371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyExpansionPath.swift; sourceTree = "<group>"; };
 		371B6F402B3B342F005BB31C /* CharacterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterExtensions.swift; sourceTree = "<group>"; };
 		371B6F432B3B342F005BB31C /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		371B6F442B3B342F005BB31C /* FontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
@@ -596,6 +589,8 @@
 		371EABF42B3880150075089B /* CommonExtensions */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CommonExtensions; path = Modules/CommonExtensions; sourceTree = "<group>"; };
 		37311A3B2BD8F44C00B2D948 /* IOSJyutpingInitialTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSJyutpingInitialTable.swift; sourceTree = "<group>"; };
 		37311A3D2BD9099D00B2D948 /* MacJyutpingInitialTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacJyutpingInitialTable.swift; sourceTree = "<group>"; };
+		373B6AB92CDF9BBD00C05CD9 /* ExpansiveBubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpansiveBubbleShape.swift; sourceTree = "<group>"; };
+		373B6ABB2CE074AB00C05CD9 /* PadExpansiveBubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadExpansiveBubbleShape.swift; sourceTree = "<group>"; };
 		3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedReturnKeyType.swift; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
@@ -649,6 +644,7 @@
 		37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		37D757D82C252F2500915B21 /* Linguistics */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Linguistics; path = Modules/Linguistics; sourceTree = "<group>"; };
 		37D771A72BF805FA008BC978 /* VerticalPageCandidateLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPageCandidateLabel.swift; sourceTree = "<group>"; };
+		37D928772CDD73C600A06729 /* BubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleShape.swift; sourceTree = "<group>"; };
 		37E6AD442B3B381600F02279 /* RightCommentLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCommentLabel.swift; sourceTree = "<group>"; };
 		37E6AD452B3B381600F02279 /* CandidateBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateBoard.swift; sourceTree = "<group>"; };
 		37E6AD462B3B381600F02279 /* HorizontalPageCandidateLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalPageCandidateLabel.swift; sourceTree = "<group>"; };
@@ -962,18 +958,6 @@
 			path = SharedViews;
 			sourceTree = "<group>";
 		};
-		371B6F392B3B342E005BB31C /* Paths */ = {
-			isa = PBXGroup;
-			children = (
-				371B6F3A2B3B342E005BB31C /* KeyRightExpansionPath.swift */,
-				371B6F3B2B3B342E005BB31C /* KeyLeftExpansionPath.swift */,
-				371B6F3C2B3B342E005BB31C /* KeyPreviewPath.swift */,
-				371B6F3D2B3B342E005BB31C /* PadKeyExpansionPath.swift */,
-				371B6F3E2B3B342E005BB31C /* KeyExpansionPath.swift */,
-			);
-			path = Paths;
-			sourceTree = "<group>";
-		};
 		371B6F3F2B3B342F005BB31C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1055,7 +1039,7 @@
 				371B6F552B3B342F005BB31C /* iPad */,
 				371B6F052B3B342E005BB31C /* iPhone */,
 				371B6F1C2B3B342E005BB31C /* TenKey */,
-				371B6F392B3B342E005BB31C /* Paths */,
+				37D928762CDD73A800A06729 /* Shapes */,
 				371B6F3F2B3B342F005BB31C /* Extensions */,
 				37D1C9392BBF297000015FD0 /* PrivacyInfo.xcprivacy */,
 				371EABBD2B3855820075089B /* Info.plist */,
@@ -1301,6 +1285,16 @@
 				379A9E2D2BE4C692001AE79E /* EditingPanelReturnKey.swift */,
 			);
 			path = EditingPanel;
+			sourceTree = "<group>";
+		};
+		37D928762CDD73A800A06729 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				37D928772CDD73C600A06729 /* BubbleShape.swift */,
+				373B6AB92CDF9BBD00C05CD9 /* ExpansiveBubbleShape.swift */,
+				373B6ABB2CE074AB00C05CD9 /* PadExpansiveBubbleShape.swift */,
+			);
+			path = Shapes;
 			sourceTree = "<group>";
 		};
 		37E6AD432B3B381600F02279 /* CandidateViews */ = {
@@ -1739,6 +1733,8 @@
 				379A9E302BE4C86E001AE79E /* EditingPanelCopyKey.swift in Sources */,
 				371B6FDF2B3B342F005BB31C /* LargePadNumericKeyboard.swift in Sources */,
 				37F9C6272BE94F84001B3917 /* UITextDocumentProxyExtensions.swift in Sources */,
+				373B6ABC2CE074AD00C05CD9 /* PadExpansiveBubbleShape.swift in Sources */,
+				37D928782CDD73CD00A06729 /* BubbleShape.swift in Sources */,
 				371B6F9D2B3B342F005BB31C /* StrokeKeyboard.swift in Sources */,
 				371B6FFA2B3B342F005BB31C /* PadCompleteInputKey.swift in Sources */,
 				371B6FDE2B3B342F005BB31C /* LargePadGlobeKey.swift in Sources */,
@@ -1774,16 +1770,13 @@
 				371B6FCB2B3B342F005BB31C /* AudioFeedback.swift in Sources */,
 				371B6F8C2B3B342F005BB31C /* TransformKey.swift in Sources */,
 				371B6FC52B3B342F005BB31C /* ImageExtensions.swift in Sources */,
-				371B6FBD2B3B342F005BB31C /* KeyPreviewPath.swift in Sources */,
 				371B6F902B3B342F005BB31C /* SymbolInputKey.swift in Sources */,
 				371B6FAC2B3B342F005BB31C /* LetterInputKey.swift in Sources */,
-				371B6FBE2B3B342F005BB31C /* PadKeyExpansionPath.swift in Sources */,
 				371B6FF12B3B342F005BB31C /* PadTripleStrokeKeyboard.swift in Sources */,
 				371B6F912B3B342F005BB31C /* GlobeKey.swift in Sources */,
 				371B6FCA2B3B342F005BB31C /* UserLexicon.swift in Sources */,
 				379C51672CB9DE9900AAB1A3 /* TenKeySymbolSidebarScrollView.swift in Sources */,
 				375B85672CB906A7000E124E /* CandidateBoardScrollViewIOS17.swift in Sources */,
-				371B6FBF2B3B342F005BB31C /* KeyExpansionPath.swift in Sources */,
 				371B6FFD2B3B342F005BB31C /* PadTransformKey.swift in Sources */,
 				371B6FD42B3B342F005BB31C /* PadGlobeKey.swift in Sources */,
 				375B855D2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift in Sources */,
@@ -1867,16 +1860,15 @@
 				379A9E3C2BE4CFA2001AE79E /* EditingPanelBackKey.swift in Sources */,
 				379A9E462BE4DACE001AE79E /* EditingPanelSpaceKey.swift in Sources */,
 				371B6F962B3B342F005BB31C /* CantoneseSymbolicKeyboard.swift in Sources */,
-				371B6FBC2B3B342F005BB31C /* KeyLeftExpansionPath.swift in Sources */,
 				371B6FF62B3B342F005BB31C /* PadCangjieInputKey.swift in Sources */,
 				371B6FB22B3B342F005BB31C /* ToolBar.swift in Sources */,
 				371B6FD72B3B342F005BB31C /* PadStrokeInputKey.swift in Sources */,
 				371B6FE12B3B342F005BB31C /* LargePadCantoneseNumericKeyboard.swift in Sources */,
-				371B6FBB2B3B342F005BB31C /* KeyRightExpansionPath.swift in Sources */,
 				371B6FDD2B3B342F005BB31C /* LargePadStrokeInputKey.swift in Sources */,
 				371B6F922B3B342F005BB31C /* CangjieInputKey.swift in Sources */,
 				375A90B32BD0797B009784BB /* TenKeyGlobeKey.swift in Sources */,
 				379A9E3E2BE4D292001AE79E /* EditingPanelMoveBackwardKey.swift in Sources */,
+				373B6ABA2CDF9BBE00C05CD9 /* ExpansiveBubbleShape.swift in Sources */,
 				371B6FB82B3B342F005BB31C /* CantoneseABCSwitch.swift in Sources */,
 				371B6FD52B3B342F005BB31C /* PadExpansibleInputKey.swift in Sources */,
 				371B6FAE2B3B342F005BB31C /* RomanizationLabel.swift in Sources */,

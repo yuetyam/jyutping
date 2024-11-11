@@ -180,56 +180,21 @@ struct CantoneseSymbolicKeyboard: View {
                                 PlaceholderKey()
                                 ExpansibleInputKey(
                                         keyLocale: .leading,
-                                        widthUnitTimes: 1.2,
-                                        keyModel: KeyModel(primary: KeyElement("\u{22EF}"),
+                                        keyModel: KeyModel(primary: KeyElement("\u{2026}"),
                                                            members: [
+                                                                KeyElement("\u{2026}", footer: "2026"),
+                                                                KeyElement("\u{2026}\u{2026}", footer: "2026*2"),
                                                                 KeyElement("\u{22EF}", footer: "22EF"),
-                                                                KeyElement("\u{22EF}\u{22EF}", footer: "22EF*2"),
-                                                                KeyElement("…", footer: "2026"),
-                                                                KeyElement("……", footer: "2026*2")
+                                                                KeyElement("\u{22EF}\u{22EF}", footer: "22EF*2")
                                                            ])
                                 )
-                                ExpansibleInputKey(
-                                        keyLocale: .leading,
-                                        widthUnitTimes: 1.2,
-                                        keyModel: KeyModel(primary: KeyElement("，"),
-                                                           members: [
-                                                                KeyElement("，"),
-                                                                KeyElement(",", header: PresetConstant.halfWidth)
-                                                           ])
-                                )
-                                ExpansibleInputKey(
-                                        keyLocale: .leading,
-                                        widthUnitTimes: 1.2,
-                                        keyModel: KeyModel(primary: KeyElement("©"),
-                                                           members: [
-                                                                KeyElement("©"),
-                                                                KeyElement("®"),
-                                                                KeyElement("™"),
-                                                                KeyElement("\u{F8FF}")
-                                                           ])
-                                )
+                                SymbolInputKey("©")
+                                SymbolInputKey("®")
+                                SymbolInputKey("℗")
+                                SymbolInputKey("™")
+                                SymbolInputKey("℠")
                                 ExpansibleInputKey(
                                         keyLocale: .trailing,
-                                        widthUnitTimes: 1.2,
-                                        keyModel: KeyModel(primary: KeyElement("？"),
-                                                           members: [
-                                                                KeyElement("？"),
-                                                                KeyElement("?", header: PresetConstant.halfWidth)
-                                                           ])
-                                )
-                                ExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        widthUnitTimes: 1.2,
-                                        keyModel: KeyModel(primary: KeyElement("！"),
-                                                           members: [
-                                                                KeyElement("！"),
-                                                                KeyElement("!", header: PresetConstant.halfWidth)
-                                                           ])
-                                )
-                                ExpansibleInputKey(
-                                        keyLocale: .trailing,
-                                        widthUnitTimes: 1.2,
                                         keyModel: KeyModel(primary: KeyElement("\u{0027}"),
                                                            members: [
                                                                 KeyElement("\u{0027}", footer: "0027"),

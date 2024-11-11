@@ -34,6 +34,8 @@ struct ShiftKey: View {
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
+                let keyWidth = context.widthUnit * 1.3
+                let keyHeight = context.heightUnit
                 let keyImageName: String = {
                         switch context.keyboardCase {
                         case .lowercased:
@@ -44,16 +46,19 @@ struct ShiftKey: View {
                                 return "capslock.fill"
                         }
                 }()
+                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
+                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
+                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(.vertical, 6)
-                                .padding(.horizontal, 3)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         Image(systemName: keyImageName)
                 }
-                .frame(width: context.widthUnit * 1.3, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, touched, _ in
