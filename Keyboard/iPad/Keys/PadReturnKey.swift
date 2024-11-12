@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct PadReturnKey: View {
 
@@ -31,6 +32,11 @@ struct PadReturnKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let isDefaultReturn: Bool = context.returnKeyType.isDefaultReturn
                 let keyState: ReturnKeyState = context.returnKeyState
                 let shouldDisplayKeyImage: Bool = {
@@ -43,7 +49,7 @@ struct PadReturnKey: View {
                         }
                 }()
                 let backColor: Color = {
-                        guard !isTouching else { return activeKeyColor }
+                        guard isTouching.negative else { return activeKeyColor }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
                                 return keyColor
@@ -54,7 +60,7 @@ struct PadReturnKey: View {
                         }
                 }()
                 let foreColor: Color = {
-                        guard !isTouching else { return Color.primary }
+                        guard isTouching.negative else { return Color.primary }
                         switch keyState {
                         case .bufferingSimplified, .bufferingTraditional:
                                 return Color.primary
@@ -69,18 +75,19 @@ struct PadReturnKey: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(backColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(5)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         if shouldDisplayKeyImage {
                                 Image.return.foregroundStyle(foreColor)
                         } else {
                                 Text(context.returnKeyText).foregroundStyle(foreColor)
                         }
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.modified()
                                         tapped = true
                                 }

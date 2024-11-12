@@ -38,15 +38,21 @@ struct PadSpaceKey: View {
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
+                // let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(5)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText)
                 }
-                .frame(height: context.heightUnit)
+                .frame(height: keyHeight)
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)

@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct PadCangjieInputKey: View {
 
@@ -39,6 +40,11 @@ struct PadCangjieInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 ZStack {
@@ -46,22 +52,24 @@ struct PadCangjieInputKey: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(5)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: .topTrailing) {
                                 Color.clear
                                 Text(verbatim: letter)
                                         .textCase(textCase)
                                         .font(.footnote)
-                                        .foregroundStyle(Color.secondary)
-                                        .padding(8)
+                                        .opacity(0.8)
                         }
+                        .padding(.vertical, verticalPadding + 3)
+                        .padding(.horizontal, horizontalPadding + 3)
                         Text(verbatim: radical)
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.inputed()
                                         tapped = true
                                 }

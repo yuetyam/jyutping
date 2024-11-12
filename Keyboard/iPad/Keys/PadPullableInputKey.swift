@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct PadPullableInputKey: View {
 
@@ -43,6 +44,11 @@ struct PadPullableInputKey: View {
         @State private var isPullingDown: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
                 ZStack {
@@ -50,7 +56,8 @@ struct PadPullableInputKey: View {
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(5)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         if isPullingDown {
                                 Text(verbatim: upper)
                                         .textCase(textCase)
@@ -61,36 +68,38 @@ struct PadPullableInputKey: View {
                                         Text(verbatim: upper)
                                                 .textCase(textCase)
                                                 .font(.footnote)
-                                                .padding(.top, 10)
                                                 .opacity(0.3)
                                 }
+                                .padding(.vertical, verticalPadding + 5)
+                                .padding(.horizontal, horizontalPadding + 5)
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: lower)
                                                 .textCase(textCase)
                                                 .font(.title2)
-                                                .padding(.bottom, 12)
                                 }
+                                .padding(.vertical, verticalPadding + 7)
+                                .padding(.horizontal, horizontalPadding + 7)
                         }
                 }
-                .frame(width: context.widthUnit, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.inputed()
                                         tapped = true
                                 }
                         }
                         .onChanged { state in
-                                guard !isPullingDown else { return }
+                                guard isPullingDown.negative else { return }
                                 let distance: CGFloat = state.translation.height
                                 guard distance > 16 else { return }
                                 isPullingDown = true
                         }
                         .onEnded { _ in
                                 if isPullingDown {
-                                        let text: String = upper
+                                        let text: String = context.keyboardCase.isLowercased ? upper : upper.uppercased()
                                         context.operate(.process(text))
                                         isPullingDown = false
                                 } else {

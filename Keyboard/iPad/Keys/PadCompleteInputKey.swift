@@ -62,9 +62,10 @@ struct PadCompleteInputKey: View {
 
         var body: some View {
                 let keyWidth: CGFloat = context.widthUnit
-                let keyHeight = context.heightUnit
-                let verticalPadding: CGFloat = 5
-                let horizontalPadding: CGFloat = 5
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let baseWidth: CGFloat = keyWidth - (horizontalPadding * 2)
                 let baseHeight: CGFloat = keyHeight - (verticalPadding * 2)
                 let extraHeight: CGFloat = 4

@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct PadDismissKey: View {
 
@@ -31,19 +32,25 @@ struct PadDismissKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(5)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         Image(systemName: "keyboard.chevron.compact.down")
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.modified()
                                         tapped = true
                                 }

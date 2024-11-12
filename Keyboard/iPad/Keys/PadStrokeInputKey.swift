@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreIME
+import CommonExtensions
 
 struct PadStrokeInputKey: View {
 
@@ -40,56 +41,50 @@ struct PadStrokeInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 let shouldShowLowercaseKeys: Bool = Options.showLowercaseKeys && context.keyboardCase.isLowercased
                 let textCase: Text.Case = shouldShowLowercaseKeys ? .lowercase : .uppercase
-                if let stroke {
-                        ZStack {
-                                Color.interactiveClear
-                                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(isTouching ? activeKeyColor : keyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(5)
+                ZStack {
+                        Color.interactiveClear
+                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                .fill(isTouching ? activeKeyColor : keyColor)
+                                .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
+                        if let stroke {
                                 ZStack(alignment: .topTrailing) {
                                         Color.clear
                                         Text(verbatim: letter)
                                                 .textCase(textCase)
                                                 .font(.footnote)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding(8)
+                                                .opacity(0.8)
                                 }
+                                .padding(.vertical, verticalPadding + 3)
+                                .padding(.horizontal, horizontalPadding + 3)
                                 Text(verbatim: stroke)
-                        }
-                        .frame(width: context.widthUnit, height: context.heightUnit)
-                        .contentShape(Rectangle())
-                        .gesture(DragGesture(minimumDistance: 0)
-                                .updating($isTouching) { _, tapped, _ in
-                                        if !tapped {
-                                                AudioFeedback.inputed()
-                                                tapped = true
-                                        }
-                                }
-                                .onEnded { _ in
-                                        let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
-                                        context.operate(.process(text))
-                                }
-                        )
-                } else {
-                        ZStack {
-                                RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                        .fill(keyColor)
-                                        .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                        .padding(5)
+                        } else {
                                 Text(verbatim: letter)
                                         .textCase(textCase)
-                                        .foregroundStyle(Color.secondary)
+                                        .opacity(0.8)
                         }
-                        .frame(width: context.widthUnit, height: context.heightUnit)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                                AudioFeedback.inputed()
+                }
+                .frame(width: keyWidth, height: keyHeight)
+                .contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance: 0)
+                        .updating($isTouching) { _, tapped, _ in
+                                if tapped.negative {
+                                        AudioFeedback.inputed()
+                                        tapped = true
+                                }
+                        }
+                        .onEnded { _ in
                                 let text: String = context.keyboardCase.isLowercased ? letter : letter.uppercased()
                                 context.operate(.process(text))
                         }
-                }
+                )
         }
 }

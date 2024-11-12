@@ -19,18 +19,22 @@ struct PadGlobeKey: View {
         }
 
         var body: some View {
-                let width: CGFloat = context.widthUnit * widthUnitTimes
-                let height: CGFloat = context.heightUnit
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 7 : 5
+                let horizontalPadding: CGFloat = isLandscape ? 7 : 5
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(5)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         Image(systemName: "globe")
                         PadGlobeButton()
                 }
-                .frame(width: width, height: height)
+                .frame(width: keyWidth, height: keyHeight)
         }
 }
 
