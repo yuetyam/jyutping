@@ -46,19 +46,16 @@ extension Engine {
                 }()
                 guard prefixes.isEmpty else { return prefixes + primary }
                 let headTexts = primary.map(\.input).uniqued()
-                let concatenated = headTexts.map { headText -> [PinyinLexicon] in
+                let concatenated = headTexts.compactMap { headText -> PinyinLexicon? in
                         let headInputCount = headText.count
                         let tailText = String(text.dropFirst(headInputCount))
                         let tailSegmentation = PinyinSegmentor.segment(text: tailText)
-                        let tailCandidates = process(pinyin: tailText, schemes: tailSegmentation, limit: 8).prefix(100)
-                        guard tailCandidates.isNotEmpty else { return [] }
-                        let headCandidates = primary.filter({ $0.input == headText }).prefix(8)
-                        let combines = headCandidates.map({ head -> [PinyinLexicon] in
-                                return tailCandidates.map({ head + $0 })
-                        })
-                        return combines.flatMap({ $0 })
+                        guard let tail = process(pinyin: tailText, schemes: tailSegmentation, limit: 50).sorted().first else { return nil }
+                        guard let head = primary.filter({ $0.input == headText }).sorted().first else { return nil }
+                        let conjoined = head + tail
+                        return conjoined
                 }
-                let preferredConcatenated = concatenated.flatMap({ $0 }).uniqued().preferred(with: text).prefix(1)
+                let preferredConcatenated = concatenated.uniqued().sorted().prefix(1)
                 return preferredConcatenated + primary
         }
 
@@ -126,34 +123,21 @@ extension Engine {
 }
 
 private extension Array where Element == PinyinLexicon {
-        func preferred(with text: String) -> [PinyinLexicon] {
-                let sortedSelf = self.sorted { (lhs, rhs) -> Bool in
-                        let lhsInputCount: Int = lhs.input.count
-                        let rhsInputCount: Int = rhs.input.count
-                        guard lhsInputCount == rhsInputCount else {
-                                return lhsInputCount > rhsInputCount
-                        }
-                        return lhs.text.count < rhs.text.count
-                }
-                let matched = sortedSelf.filter({ $0.input.count == text.count })
-                return matched.isEmpty ? sortedSelf : matched
-        }
         func ordered(with textCount: Int) -> [PinyinLexicon] {
                 return self.sorted { (lhs, rhs) -> Bool in
-                        let lhsInputCount: Int = lhs.input.count
-                        let rhsInputCount: Int = rhs.input.count
-                        if lhsInputCount == textCount && rhsInputCount != textCount {
-                                return true
-                        } else if lhs.order < rhs.order - 50000 {
-                                return true
-                        } else {
-                                return lhsInputCount > rhsInputCount
+                        switch (lhs.input.count - rhs.input.count) {
+                        case ..<0:
+                                return lhs.order < (rhs.order - 50000) && lhs.text.count == rhs.text.count
+                        case 0:
+                                return lhs.order < rhs.order
+                        default:
+                                return lhs.text.count >= rhs.text.count
                         }
                 }
         }
 }
 
-private struct PinyinLexicon: Hashable {
+private struct PinyinLexicon: Hashable, Comparable {
 
         /// Cantonese Chinese word.
         let text: String
@@ -195,7 +179,13 @@ private struct PinyinLexicon: Hashable {
                 hasher.combine(input)
         }
 
-        static func +(lhs: PinyinLexicon, rhs: PinyinLexicon) -> PinyinLexicon {
+        // Comparable
+        static func < (lhs: PinyinLexicon, rhs: PinyinLexicon) -> Bool {
+                guard lhs.input.count == rhs.input.count else { return lhs.input.count > rhs.input.count }
+                return lhs.text.count < rhs.text.count
+        }
+
+        static func + (lhs: PinyinLexicon, rhs: PinyinLexicon) -> PinyinLexicon {
                 let newText: String = lhs.text + rhs.text
                 let newPinyin: String = lhs.pinyin + " " + rhs.pinyin
                 let newInput: String = lhs.input + rhs.input

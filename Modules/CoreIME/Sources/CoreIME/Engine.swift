@@ -503,10 +503,29 @@ private extension Array where Element == Candidate {
         /// - Returns: Sorted Candidates
         func ordered(with textCount: Int) -> [Candidate] {
                 return self.sorted { (lhs, rhs) -> Bool in
+                        switch (lhs.input.count - rhs.input.count) {
+                        case ..<0:
+                                return lhs.order < (rhs.order - 50000) && lhs.text.count == rhs.text.count
+                        case 0:
+                                return lhs.order < rhs.order
+                        default:
+                                return lhs.text.count >= rhs.text.count
+                        }
+                }
+        }
+}
+
+// deprecated
+/*
+private extension Array where Element == Candidate {
+        func ordered(with textCount: Int) -> [Candidate] {
+                return self.sorted { (lhs, rhs) -> Bool in
                         let lhsInputCount: Int = lhs.input.count
                         let rhsInputCount: Int = rhs.input.count
                         if lhsInputCount == textCount && rhsInputCount != textCount {
                                 return true
+                        } else if lhsInputCount == rhsInputCount || lhs.text.count == rhs.text.count {
+                                return lhs.order < rhs.order
                         } else if lhs.order < (rhs.order - 50000) {
                                 return true
                         } else {
@@ -515,3 +534,4 @@ private extension Array where Element == Candidate {
                 }
         }
 }
+*/
