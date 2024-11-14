@@ -1033,16 +1033,16 @@
 			isa = PBXGroup;
 			children = (
 				375D3A3E2B810156005F13C1 /* Keys */,
-				375D3A3F2B810168005F13C1 /* Keyboards */,
+				375D3A3F2B810168005F13C1 /* SmallPadKeyboards */,
 				37942E292CE421A7005D6536 /* MediumPadKeys */,
 				37942E222CE2F807005D6536 /* MediumPadKeyboards */,
-				375D3A402B8101B6005F13C1 /* LargeScreenKeys */,
-				371B6F5A2B3B342F005BB31C /* LargeScreenKeyboards */,
+				375D3A402B8101B6005F13C1 /* LargePadKeys */,
+				371B6F5A2B3B342F005BB31C /* LargePadKeyboards */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
 		};
-		371B6F5A2B3B342F005BB31C /* LargeScreenKeyboards */ = {
+		371B6F5A2B3B342F005BB31C /* LargePadKeyboards */ = {
 			isa = PBXGroup;
 			children = (
 				371B6F6F2B3B342F005BB31C /* LargePadABCKeyboard.swift */,
@@ -1053,7 +1053,7 @@
 				371B6F6E2B3B342F005BB31C /* LargePadCangjieKeyboard.swift */,
 				371B6F702B3B342F005BB31C /* LargePadTripleStrokeKeyboard.swift */,
 			);
-			path = LargeScreenKeyboards;
+			path = LargePadKeyboards;
 			sourceTree = "<group>";
 		};
 		371B6F862B3B342F005BB31C /* Emoji */ = {
@@ -1185,7 +1185,7 @@
 			path = Keys;
 			sourceTree = "<group>";
 		};
-		375D3A3F2B810168005F13C1 /* Keyboards */ = {
+		375D3A3F2B810168005F13C1 /* SmallPadKeyboards */ = {
 			isa = PBXGroup;
 			children = (
 				371B6F7E2B3B342F005BB31C /* PadABCKeyboard.swift */,
@@ -1198,10 +1198,10 @@
 				371B6F732B3B342F005BB31C /* PadCangjieKeyboard.swift */,
 				371B6F832B3B342F005BB31C /* PadStrokeKeyboard.swift */,
 			);
-			path = Keyboards;
+			path = SmallPadKeyboards;
 			sourceTree = "<group>";
 		};
-		375D3A402B8101B6005F13C1 /* LargeScreenKeys */ = {
+		375D3A402B8101B6005F13C1 /* LargePadKeys */ = {
 			isa = PBXGroup;
 			children = (
 				371B6F5B2B3B342F005BB31C /* LargePadCangjieInputKey.swift */,
@@ -1220,7 +1220,7 @@
 				371B6F6B2B3B342F005BB31C /* LargePadRightKey.swift */,
 				371B6F6D2B3B342F005BB31C /* LargePadLetterInputKey.swift */,
 			);
-			path = LargeScreenKeys;
+			path = LargePadKeys;
 			sourceTree = "<group>";
 		};
 		375D3A412B810253005F13C1 /* Keyboards */ = {
