@@ -63,13 +63,13 @@ extension KeyboardInterface {
         func keyHeightUnit(of screen: CGSize) -> CGFloat {
                 switch self {
                 case .padPortraitSmall:
-                        return 65
+                        return 66
                 case .padPortraitMedium:
-                        return 68
+                        return 66
                 case .padPortraitLarge:
                         return 68
                 case .padLandscapeSmall, .padLandscapeMedium, .padLandscapeLarge:
-                        return 80
+                        return 76
                 case .padFloating:
                         return 48
                 case .phoneLandscape:
@@ -119,13 +119,13 @@ extension KeyboardInterface {
                 case .padPortraitSmall:
                         return 11
                 case .padPortraitMedium:
-                        return 11
+                        return 12
                 case .padPortraitLarge:
                         return 14.5
                 case .padLandscapeSmall:
                         return 11
                 case .padLandscapeMedium:
-                        return 11
+                        return 12
                 case .padLandscapeLarge:
                         return 14.5
                 }

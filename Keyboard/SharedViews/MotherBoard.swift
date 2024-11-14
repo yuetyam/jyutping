@@ -31,13 +31,13 @@ struct MotherBoard: View {
                                 case .padPortraitSmall:
                                         PadCantoneseNumericKeyboard()
                                 case .padPortraitMedium:
-                                        PadCantoneseNumericKeyboard()
+                                        MediumPadCantoneseNumericKeyboard()
                                 case .padPortraitLarge:
                                         LargePadCantoneseNumericKeyboard()
                                 case .padLandscapeSmall:
                                         PadCantoneseNumericKeyboard()
                                 case .padLandscapeMedium:
-                                        PadCantoneseNumericKeyboard()
+                                        MediumPadCantoneseNumericKeyboard()
                                 case .padLandscapeLarge:
                                         LargePadCantoneseNumericKeyboard()
                                 }
@@ -52,13 +52,13 @@ struct MotherBoard: View {
                                 case .padPortraitSmall:
                                         PadNumericKeyboard()
                                 case .padPortraitMedium:
-                                        PadNumericKeyboard()
+                                        MediumPadNumericKeyboard()
                                 case .padPortraitLarge:
                                         LargePadNumericKeyboard()
                                 case .padLandscapeSmall:
                                         PadNumericKeyboard()
                                 case .padLandscapeMedium:
-                                        PadNumericKeyboard()
+                                        MediumPadNumericKeyboard()
                                 case .padLandscapeLarge:
                                         LargePadNumericKeyboard()
                                 }
@@ -66,16 +66,22 @@ struct MotherBoard: View {
                 case .symbolic:
                         switch context.inputMethodMode {
                         case .cantonese:
-                                if context.keyboardInterface.isCompact {
-                                        CantoneseSymbolicKeyboard()
-                                } else {
+                                switch context.keyboardInterface {
+                                case .padPortraitSmall, .padLandscapeSmall:
                                         PadCantoneseSymbolicKeyboard()
+                                case .padPortraitMedium, .padLandscapeMedium:
+                                        MediumPadCantoneseSymbolicKeyboard()
+                                default:
+                                        CantoneseSymbolicKeyboard()
                                 }
                         case .abc:
-                                if context.keyboardInterface.isCompact {
-                                        SymbolicKeyboard()
-                                } else {
+                                switch context.keyboardInterface {
+                                case .padPortraitSmall, .padLandscapeSmall:
                                         PadSymbolicKeyboard()
+                                case .padPortraitMedium, .padLandscapeMedium:
+                                        MediumPadSymbolicKeyboard()
+                                default:
+                                        SymbolicKeyboard()
                                 }
                         }
                 case .numberPad:
@@ -89,13 +95,13 @@ struct MotherBoard: View {
                         case .padPortraitSmall:
                                 PadNumericKeyboard()
                         case .padPortraitMedium:
-                                PadNumericKeyboard()
+                                MediumPadNumericKeyboard()
                         case .padPortraitLarge:
                                 LargePadNumericKeyboard()
                         case .padLandscapeSmall:
                                 PadNumericKeyboard()
                         case .padLandscapeMedium:
-                                PadNumericKeyboard()
+                                MediumPadNumericKeyboard()
                         case .padLandscapeLarge:
                                 LargePadNumericKeyboard()
                         }
@@ -110,13 +116,13 @@ struct MotherBoard: View {
                         case .padPortraitSmall:
                                 PadNumericKeyboard()
                         case .padPortraitMedium:
-                                PadNumericKeyboard()
+                                MediumPadNumericKeyboard()
                         case .padPortraitLarge:
                                 LargePadNumericKeyboard()
                         case .padLandscapeSmall:
                                 PadNumericKeyboard()
                         case .padLandscapeMedium:
-                                PadNumericKeyboard()
+                                MediumPadNumericKeyboard()
                         case .padLandscapeLarge:
                                 LargePadNumericKeyboard()
                         }
@@ -136,13 +142,13 @@ struct MotherBoard: View {
                                 case .padPortraitSmall:
                                         PadABCKeyboard()
                                 case .padPortraitMedium:
-                                        PadABCKeyboard()
+                                        MediumPadABCKeyboard()
                                 case .padPortraitLarge:
                                         LargePadABCKeyboard()
                                 case .padLandscapeSmall:
                                         PadABCKeyboard()
                                 case .padLandscapeMedium:
-                                        PadABCKeyboard()
+                                        MediumPadABCKeyboard()
                                 case .padLandscapeLarge:
                                         LargePadABCKeyboard()
                                 }
@@ -161,13 +167,13 @@ struct MotherBoard: View {
                                                 case .padPortraitSmall:
                                                         PadCangjieKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadCangjieKeyboard()
+                                                        MediumPadCangjieKeyboard()
                                                 case .padPortraitLarge:
                                                         LargePadCangjieKeyboard()
                                                 case .padLandscapeSmall:
                                                         PadCangjieKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadCangjieKeyboard()
+                                                        MediumPadCangjieKeyboard()
                                                 case .padLandscapeLarge:
                                                         LargePadCangjieKeyboard()
                                                 }
@@ -182,13 +188,13 @@ struct MotherBoard: View {
                                                 case .padPortraitSmall:
                                                         PadStrokeKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadStrokeKeyboard()
+                                                        MediumPadStrokeKeyboard()
                                                 case .padPortraitLarge:
                                                         LargePadStrokeKeyboard()
                                                 case .padLandscapeSmall:
                                                         PadStrokeKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadStrokeKeyboard()
+                                                        MediumPadStrokeKeyboard()
                                                 case .padLandscapeLarge:
                                                         LargePadStrokeKeyboard()
                                                 }
@@ -203,13 +209,13 @@ struct MotherBoard: View {
                                                 case .padPortraitSmall:
                                                         PadCantoneseKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadCantoneseKeyboard()
+                                                        MediumPadCantoneseKeyboard()
                                                 case .padPortraitLarge:
                                                         LargePadCantoneseKeyboard()
                                                 case .padLandscapeSmall:
                                                         PadCantoneseKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadCantoneseKeyboard()
+                                                        MediumPadCantoneseKeyboard()
                                                 case .padLandscapeLarge:
                                                         LargePadCantoneseKeyboard()
                                                 }
@@ -227,13 +233,13 @@ struct MotherBoard: View {
                                                 case .padPortraitSmall:
                                                         PadCangjieKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadCangjieKeyboard()
+                                                        MediumPadCangjieKeyboard()
                                                 case .padPortraitLarge:
                                                         LargePadCangjieKeyboard()
                                                 case .padLandscapeSmall:
                                                         PadCangjieKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadCangjieKeyboard()
+                                                        MediumPadCangjieKeyboard()
                                                 case .padLandscapeLarge:
                                                         LargePadCangjieKeyboard()
                                                 }
@@ -248,13 +254,13 @@ struct MotherBoard: View {
                                                 case .padPortraitSmall:
                                                         PadStrokeKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadStrokeKeyboard()
+                                                        MediumPadStrokeKeyboard()
                                                 case .padPortraitLarge:
                                                         LargePadStrokeKeyboard()
                                                 case .padLandscapeSmall:
                                                         PadStrokeKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadStrokeKeyboard()
+                                                        MediumPadStrokeKeyboard()
                                                 case .padLandscapeLarge:
                                                         LargePadStrokeKeyboard()
                                                 }
@@ -269,13 +275,13 @@ struct MotherBoard: View {
                                                 case .padPortraitSmall:
                                                         PadTripleStrokeKeyboard()
                                                 case .padPortraitMedium:
-                                                        PadTripleStrokeKeyboard()
+                                                        MediumPadTripleStrokeKeyboard()
                                                 case .padPortraitLarge:
                                                         LargePadTripleStrokeKeyboard()
                                                 case .padLandscapeSmall:
                                                         PadTripleStrokeKeyboard()
                                                 case .padLandscapeMedium:
-                                                        PadTripleStrokeKeyboard()
+                                                        MediumPadTripleStrokeKeyboard()
                                                 case .padLandscapeLarge:
                                                         LargePadTripleStrokeKeyboard()
                                                 }

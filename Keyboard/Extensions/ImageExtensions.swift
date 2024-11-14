@@ -15,6 +15,10 @@ extension Image {
         static let `return`: Image = Image(systemName: "return")
         static let search: Image = Image(systemName: "magnifyingglass")
 
+        static let tab: Image = Image(systemName: "arrow.right.to.line")
+        static let globe: Image = Image(systemName: "globe")
+        static let dismissKeyboard: Image = Image(systemName: "keyboard.chevron.compact.down")
+
         /// Emoji Smiley Face
         @MainActor
         static let smiley: Image = Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
