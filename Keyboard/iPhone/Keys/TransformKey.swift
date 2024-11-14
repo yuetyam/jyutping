@@ -3,26 +3,8 @@ import CommonExtensions
 
 struct TransformKey: View {
 
-        init(destination: KeyboardForm, widthUnitTimes: CGFloat) {
-                self.destination = destination
-                self.keyText = {
-                        switch destination {
-                        case .alphabetic:
-                                return "ABC"
-                        case .numeric:
-                                return "123"
-                        case .symbolic:
-                                return "#+="
-                        default:
-                                return "???"
-                        }
-                }()
-                self.widthUnitTimes = widthUnitTimes
-        }
-
-        private let destination: KeyboardForm
-        private let keyText: String
-        private let widthUnitTimes: CGFloat
+        let destination: KeyboardForm
+        let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -63,7 +45,7 @@ struct TransformKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Text(verbatim: keyText)
+                        Text(verbatim: destination.compactTransformKeyTex)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())

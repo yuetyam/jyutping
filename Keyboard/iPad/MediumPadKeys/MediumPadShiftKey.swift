@@ -42,16 +42,6 @@ struct MediumPadShiftKey: View {
                 let isLandscape: Bool = context.keyboardInterface.isPadLandscape
                 let verticalPadding: CGFloat = isLandscape ? 7 : 5
                 let horizontalPadding: CGFloat = isLandscape ? 7 : 5
-                let keyImageName: String = {
-                        switch context.keyboardCase {
-                        case .lowercased:
-                                return "shift"
-                        case .uppercased:
-                                return "shift.fill"
-                        case .capsLocked:
-                                return "capslock.fill"
-                        }
-                }()
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -61,7 +51,14 @@ struct MediumPadShiftKey: View {
                                 .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: keyLocale.isLeading ? .topLeading : .topTrailing) {
                                 Color.clear
-                                Image(systemName: keyImageName)
+                                switch context.keyboardCase {
+                                case .lowercased:
+                                        Image.shiftLowercased
+                                case .uppercased:
+                                        Image.shiftUppercased
+                                case .capsLocked:
+                                        Image.shiftCapsLocked
+                                }
                         }
                         .padding(.vertical, verticalPadding + 5)
                         .padding(.horizontal, horizontalPadding + 5)

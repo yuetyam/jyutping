@@ -36,16 +36,6 @@ struct ShiftKey: View {
         var body: some View {
                 let keyWidth = context.widthUnit * 1.3
                 let keyHeight = context.heightUnit
-                let keyImageName: String = {
-                        switch context.keyboardCase {
-                        case .lowercased:
-                                return "shift"
-                        case .uppercased:
-                                return "shift.fill"
-                        case .capsLocked:
-                                return "capslock.fill"
-                        }
-                }()
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
                 let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
@@ -56,7 +46,14 @@ struct ShiftKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Image(systemName: keyImageName)
+                        switch context.keyboardCase {
+                        case .lowercased:
+                                Image.shiftLowercased
+                        case .uppercased:
+                                Image.shiftUppercased
+                        case .capsLocked:
+                                Image.shiftCapsLocked
+                        }
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())

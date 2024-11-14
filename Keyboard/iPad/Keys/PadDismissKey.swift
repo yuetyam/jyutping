@@ -44,7 +44,7 @@ struct PadDismissKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Image(systemName: "keyboard.chevron.compact.down")
+                        Image.dismissKeyboard
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())

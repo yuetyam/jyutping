@@ -11,6 +11,47 @@ enum KeyboardForm: Int {
         case tenKeyNumeric
 }
 
+extension KeyboardForm {
+
+        /// iPad floating and iPhone
+        var compactTransformKeyTex: String {
+                return switch self {
+                case .alphabetic:
+                        "ABC"
+                case .numeric:
+                        "123"
+                case .symbolic:
+                        "#+="
+                default:
+                        "???"
+                }
+        }
+        var padTransformKeyText: String {
+                return switch self {
+                case .alphabetic:
+                        "ABC"
+                case .numeric:
+                        ".?123"
+                case .symbolic:
+                        "#+="
+                default:
+                        "???"
+                }
+        }
+        var tenKeyTransformKeyText: String {
+                return switch self {
+                case .alphabetic:
+                        "ABC"
+                case .numeric:
+                        "#@$"
+                case .tenKeyNumeric:
+                        "123"
+                default:
+                        "???"
+                }
+        }
+}
+
 enum QwertyForm: Int {
 
         /// Alphabetic, English

@@ -53,11 +53,11 @@ struct MediumPadRightKey: View {
                                 }
                                 .padding(.vertical, verticalPadding + 5)
                                 .padding(.horizontal, horizontalPadding + 5)
-                                Text(verbatim: "'")
+                                Text(verbatim: String.separator)
                         } else {
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
-                                        Text(verbatim: ".?123")
+                                        Text(verbatim: KeyboardForm.numeric.padTransformKeyText)
                                 }
                                 .padding(.vertical, verticalPadding + 5)
                                 .padding(.horizontal, horizontalPadding + 5)

@@ -18,6 +18,9 @@ extension Image {
         static let tab: Image = Image(systemName: "arrow.right.to.line")
         static let globe: Image = Image(systemName: "globe")
         static let dismissKeyboard: Image = Image(systemName: "keyboard.chevron.compact.down")
+        static let shiftLowercased: Image = Image(systemName: "shift")
+        static let shiftUppercased: Image = Image(systemName: "shift.fill")
+        static let shiftCapsLocked: Image = Image(systemName: "capslock.fill")
 
         /// Emoji Smiley Face
         @MainActor

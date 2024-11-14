@@ -31,7 +31,7 @@ struct PadGlobeKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(.vertical, verticalPadding)
                                 .padding(.horizontal, horizontalPadding)
-                        Image(systemName: "globe")
+                        Image.globe
                         PadGlobeButton()
                 }
                 .frame(width: keyWidth, height: keyHeight)

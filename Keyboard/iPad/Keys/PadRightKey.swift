@@ -52,7 +52,7 @@ struct PadRightKey: View {
                         .padding(.vertical, verticalPadding + 5)
                         .padding(.horizontal, horizontalPadding + 5)
                         .opacity(context.inputStage.isBuffering ? 0.8 : 0)
-                        Text(verbatim: context.inputStage.isBuffering ? "'" : ".?123")
+                        Text(verbatim: context.inputStage.isBuffering ? String.separator : KeyboardForm.numeric.padTransformKeyText)
                 }
                 .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
