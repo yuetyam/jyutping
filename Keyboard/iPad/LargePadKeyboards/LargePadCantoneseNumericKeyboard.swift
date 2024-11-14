@@ -186,7 +186,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                 LargePadBackspaceKey(widthUnitTimes: 1.5)
                         }
                         HStack(spacing: 0 ) {
-                                TabKey(widthUnitTimes: 1.5)
+                                LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
@@ -330,7 +330,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                 )
                         }
                         HStack(spacing: 0) {
-                                CapsLockKey(widthUnitTimes: 1.75).hidden()
+                                LargePadCapsLockKey(widthUnitTimes: 1.75).hidden()
                                 Group {
                                         LargePadExpansibleInputKey(
                                                 keyLocale: .leading,
@@ -599,7 +599,7 @@ struct LargePadCantoneseNumericKeyboard: View {
                                         LargePadTransformKey(destination: .alphabetic, keyLocale: .leading, widthUnitTimes: 2.125)
                                 }
                                 LargePadTransformKey(destination: .alphabetic, keyLocale: .leading, widthUnitTimes: 2.125)
-                                PadSpaceKey()
+                                LargePadSpaceKey()
                                 LargePadTransformKey(destination: .alphabetic, keyLocale: .trailing, widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }

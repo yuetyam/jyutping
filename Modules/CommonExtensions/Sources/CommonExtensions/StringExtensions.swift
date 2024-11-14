@@ -27,6 +27,9 @@ extension String {
 
         /// U+3000. Ideographic Space. 全寬空格
         public static let fullWidthSpace: String = "\u{3000}"
+
+        /// U+0027 ( ' ) apostrophe
+        public static let separator: String = "\u{27}"
 }
 
 extension StringProtocol {

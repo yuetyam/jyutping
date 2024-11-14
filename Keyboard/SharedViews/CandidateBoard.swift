@@ -77,7 +77,7 @@ struct CandidateBoard: View {
                         } label: {
                                 ZStack {
                                         Color.interactiveClear
-                                        Image.upChevron
+                                        Image.chevronUp
                                                 .resizable()
                                                 .scaledToFit()
                                                 .padding(12)

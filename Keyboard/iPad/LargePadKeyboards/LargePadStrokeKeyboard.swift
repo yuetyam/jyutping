@@ -339,7 +339,7 @@ struct LargePadStrokeKeyboard: View {
                                 }
                         }
                         HStack(spacing: 0 ) {
-                                TabKey(widthUnitTimes: 1.5)
+                                LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
                                         LargePadStrokeInputKey("q")
                                         LargePadStrokeInputKey("w")
@@ -363,7 +363,7 @@ struct LargePadStrokeKeyboard: View {
                                 }
                         }
                         HStack(spacing: 0) {
-                                CapsLockKey(widthUnitTimes: 1.75)
+                                LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
                                         LargePadStrokeInputKey("a")
                                         LargePadStrokeInputKey("s")
@@ -426,7 +426,7 @@ struct LargePadStrokeKeyboard: View {
                                         LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
                                 }
                                 LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
-                                PadSpaceKey()
+                                LargePadSpaceKey()
                                 LargePadTransformKey(destination: .numeric, keyLocale: .trailing, widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }

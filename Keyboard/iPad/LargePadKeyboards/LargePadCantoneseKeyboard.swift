@@ -339,7 +339,7 @@ struct LargePadCantoneseKeyboard: View {
                                 }
                         }
                         HStack(spacing: 0 ) {
-                                TabKey(widthUnitTimes: 1.5)
+                                LargePadTabKey(widthUnitTimes: 1.5)
                                 Group {
                                         LargePadLetterInputKey("q")
                                         LargePadLetterInputKey("w")
@@ -363,7 +363,7 @@ struct LargePadCantoneseKeyboard: View {
                                 }
                         }
                         HStack(spacing: 0) {
-                                CapsLockKey(widthUnitTimes: 1.75)
+                                LargePadCapsLockKey(widthUnitTimes: 1.75)
                                 Group {
                                         LargePadLetterInputKey("a")
                                         LargePadLetterInputKey("s")
@@ -426,7 +426,7 @@ struct LargePadCantoneseKeyboard: View {
                                         LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
                                 }
                                 LargePadTransformKey(destination: .numeric, keyLocale: .leading, widthUnitTimes: 2.125)
-                                PadSpaceKey()
+                                LargePadSpaceKey()
                                 LargePadRightKey(widthUnitTimes: 2.125)
                                 LargePadDismissKey(widthUnitTimes: 2.125)
                         }

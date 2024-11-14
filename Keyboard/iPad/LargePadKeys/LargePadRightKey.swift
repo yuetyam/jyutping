@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct LargePadRightKey: View {
 
@@ -31,34 +32,42 @@ struct LargePadRightKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 5 : 4
+                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         if context.inputStage.isBuffering {
                                 ZStack(alignment: .bottom) {
                                         Color.clear
                                         Text(verbatim: "分隔")
                                                 .font(.keyFooter)
-                                                .padding(.bottom, 12)
+                                                .opacity(0.8)
                                 }
-                                .opacity(0.8)
-                                Text(verbatim: "'")
+                                .padding(.vertical, verticalPadding + 7)
+                                .padding(.horizontal, horizontalPadding + 7)
+                                Text(verbatim: String.separator)
                         } else {
                                 ZStack(alignment: .bottomTrailing) {
                                         Color.clear
-                                        Text(verbatim: ".?123")
-                                                .padding(12)
+                                        Text(verbatim: KeyboardForm.numeric.padTransformKeyText)
                                 }
+                                .padding(.vertical, verticalPadding + 7)
+                                .padding(.horizontal, horizontalPadding + 7)
                         }
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
+                                if tapped.negative {
                                         AudioFeedback.modified()
                                         tapped = true
                                 }

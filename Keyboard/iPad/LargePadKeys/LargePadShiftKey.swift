@@ -37,34 +37,39 @@ struct LargePadShiftKey: View {
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
-                let keyImageName: String = {
-                        switch context.keyboardCase {
-                        case .lowercased:
-                                return "shift"
-                        case .uppercased:
-                                return "shift.fill"
-                        case .capsLocked:
-                                return "capslock.fill"
-                        }
-                }()
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 5 : 4
+                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(context.keyboardCase.isLowercased ? keyColor : activeKeyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: keyLocale.isLeading ? .topLeading : .topTrailing) {
                                 Color.clear
-                                Image(systemName: keyImageName)
-                                        .padding(12)
+                                switch context.keyboardCase {
+                                case .lowercased:
+                                        Image.shiftLowercased
+                                case .uppercased:
+                                        Image.shiftUppercased
+                                case .capsLocked:
+                                        Image.shiftCapsLocked
+                                }
                         }
+                        .padding(.vertical, verticalPadding + 7)
+                        .padding(.horizontal, horizontalPadding + 7)
                         ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
                                 Color.clear
                                 Text(verbatim: "shift")
-                                        .padding(12)
                         }
+                        .padding(.vertical, verticalPadding + 7)
+                        .padding(.horizontal, horizontalPadding + 7)
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, touched, _ in

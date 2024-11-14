@@ -1,7 +1,7 @@
 import SwiftUI
+import CommonExtensions
 
-/// For Large screen iPad Pro only
-struct CapsLockKey: View {
+struct LargePadCapsLockKey: View {
 
         let widthUnitTimes: CGFloat
 
@@ -30,26 +30,34 @@ struct CapsLockKey: View {
         }
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 5 : 4
+                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
-                                .fill((context.keyboardCase == .capsLocked) ? activeKeyColor : keyColor)
+                                .fill(context.keyboardCase.isCapsLocked ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: .topLeading) {
                                 Color.clear
                                 Circle()
-                                        .fill((context.keyboardCase == .capsLocked) ? Color.green : activeKeyColor.opacity(0.8))
+                                        .fill(context.keyboardCase.isCapsLocked ? Color.green : activeKeyColor.opacity(0.8))
                                         .frame(width: 4, height: 4)
-                                        .padding(12)
                         }
+                        .padding(.vertical, verticalPadding + 8)
+                        .padding(.horizontal, horizontalPadding + 8)
                         ZStack(alignment: .bottomLeading) {
                                 Color.clear
                                 Text(verbatim: "caps lock")
-                                        .padding(12)
                         }
+                        .padding(.vertical, verticalPadding + 7)
+                        .padding(.horizontal, horizontalPadding + 7)
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .onTapGesture {
                         AudioFeedback.modified()

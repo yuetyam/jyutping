@@ -3,28 +3,9 @@ import CommonExtensions
 
 struct MediumPadTransformKey: View {
 
-        init(destination: KeyboardForm, keyLocale: HorizontalEdge, widthUnitTimes: CGFloat) {
-                self.destination = destination
-                self.keyLocale = keyLocale
-                self.keyText = {
-                        switch destination {
-                        case .alphabetic:
-                                return "ABC"
-                        case .numeric:
-                                return ".?123"
-                        case .symbolic:
-                                return "#+="
-                        default:
-                                return "???"
-                        }
-                }()
-                self.widthUnitTimes = widthUnitTimes
-        }
-
-        private let destination: KeyboardForm
-        private let keyLocale: HorizontalEdge
-        private let keyText: String
-        private let widthUnitTimes: CGFloat
+        let destination: KeyboardForm
+        let keyLocale: HorizontalEdge
+        let widthUnitTimes: CGFloat
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -67,7 +48,7 @@ struct MediumPadTransformKey: View {
                                 .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: keyLocale.isLeading ? .bottomLeading : .bottomTrailing) {
                                 Color.clear
-                                Text(verbatim: keyText)
+                                Text(verbatim: destination.padTransformKeyText)
                         }
                         .padding(.vertical, verticalPadding + 5)
                         .padding(.horizontal, horizontalPadding + 5)

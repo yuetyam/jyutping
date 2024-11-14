@@ -36,7 +36,7 @@ struct EditingPanelBackKey: View {
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
                                 .padding(4)
                         VStack(spacing: 4) {
-                                Image.upChevron
+                                Image.chevronUp
                                 Text("EditingPanel.Back").font(.caption2)
                         }
                 }

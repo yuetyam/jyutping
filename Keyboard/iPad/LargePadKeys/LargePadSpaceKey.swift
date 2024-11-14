@@ -1,7 +1,7 @@
 import SwiftUI
 import CommonExtensions
 
-struct SpaceKey: View {
+struct LargePadSpaceKey: View {
 
         @EnvironmentObject private var context: KeyboardViewController
 
@@ -38,11 +38,11 @@ struct SpaceKey: View {
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
-                let keyWidth: CGFloat = context.widthUnit * 4
+                // let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
                 let keyHeight: CGFloat = context.heightUnit
-                let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
-                let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
-                let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 5 : 4
+                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -52,7 +52,8 @@ struct SpaceKey: View {
                                 .padding(.horizontal, horizontalPadding)
                         Text(isLongPressEngaged ? PresetConstant.spaceKeyLongPressHint : context.spaceKeyForm.attributedText)
                 }
-                .frame(width: keyWidth, height: keyHeight)
+                .frame(height: keyHeight)
+                .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { value, touched, transaction in

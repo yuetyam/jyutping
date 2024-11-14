@@ -32,8 +32,8 @@ struct BackspaceKey: View {
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
-                let keyWidth = context.widthUnit * 1.3
-                let keyHeight = context.heightUnit
+                let keyWidth: CGFloat = context.widthUnit * 1.3
+                let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
                 let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3

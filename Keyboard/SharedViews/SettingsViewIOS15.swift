@@ -46,7 +46,7 @@ struct SettingsViewIOS15: View {
                                         } label: {
                                                 ZStack {
                                                         Color.interactiveClear
-                                                        Image.upChevron
+                                                        Image.chevronUp
                                                                 .resizable()
                                                                 .scaledToFit()
                                                                 .padding(14)

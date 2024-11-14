@@ -25,7 +25,7 @@ struct CandidateBar: View {
                                                         .fill(Color.primary.opacity(0.3))
                                                         .frame(width: 1, height: 24)
                                         }
-                                        Image.downChevron
+                                        Image.chevronDown
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 20, height: 20)

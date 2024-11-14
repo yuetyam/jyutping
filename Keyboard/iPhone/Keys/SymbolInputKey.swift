@@ -49,8 +49,8 @@ struct SymbolInputKey: View {
         @GestureState private var isTouching: Bool = false
 
         var body: some View {
-                let keyWidth = context.widthUnit * widthUnitTimes
-                let keyHeight = context.heightUnit
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
                 let isPhoneLandscape: Bool = context.keyboardInterface.isPhoneLandscape
                 let verticalPadding: CGFloat = isPhoneLandscape ? 3 : 6
                 let horizontalPadding: CGFloat = isPhoneLandscape ? 6 : 3

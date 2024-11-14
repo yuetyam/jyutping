@@ -1,4 +1,5 @@
 import SwiftUI
+import CommonExtensions
 
 struct LargePadBackspaceKey: View {
 
@@ -33,31 +34,39 @@ struct LargePadBackspaceKey: View {
         private let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
         var body: some View {
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 5 : 4
+                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(isTouching ? activeKeyColor : keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: .topTrailing) {
                                 Color.clear
                                 Image.backspace.symbolVariant(isTouching ? .fill : .none)
-                                        .padding(12)
                         }
+                        .padding(.vertical, verticalPadding + 7)
+                        .padding(.horizontal, horizontalPadding + 7)
                         ZStack(alignment: .bottomTrailing) {
                                 Color.clear
                                 Text(verbatim: "delete")
-                                        .padding(12)
                         }
+                        .padding(.vertical, verticalPadding + 7)
+                        .padding(.horizontal, horizontalPadding + 7)
                 }
-                .frame(width: context.widthUnit * widthUnitTimes, height: context.heightUnit)
+                .frame(width: keyWidth, height: keyHeight)
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0)
                         .updating($isTouching) { _, tapped, _ in
-                                if !tapped {
-                                        AudioFeedback.deleted()
+                                if tapped.negative {
                                         context.triggerHapticFeedback()
                                         context.operate(.backspace)
+                                        AudioFeedback.deleted()
                                         tapped = true
                                 }
                         }

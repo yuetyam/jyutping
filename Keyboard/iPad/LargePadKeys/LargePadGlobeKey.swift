@@ -19,22 +19,27 @@ struct LargePadGlobeKey: View {
         }
 
         var body: some View {
-                let width: CGFloat = context.widthUnit * widthUnitTimes
-                let height: CGFloat = context.heightUnit
+                let keyWidth: CGFloat = context.widthUnit * widthUnitTimes
+                let keyHeight: CGFloat = context.heightUnit
+                let isLandscape: Bool = context.keyboardInterface.isPadLandscape
+                let verticalPadding: CGFloat = isLandscape ? 5 : 4
+                let horizontalPadding: CGFloat = isLandscape ? 5 : 4
                 ZStack {
                         Color.interactiveClear
                         RoundedRectangle(cornerRadius: 5, style: .continuous)
                                 .fill(keyColor)
                                 .shadow(color: .shadowGray, radius: 0.5, y: 0.5)
-                                .padding(4)
+                                .padding(.vertical, verticalPadding)
+                                .padding(.horizontal, horizontalPadding)
                         ZStack(alignment: .bottomLeading) {
                                 Color.clear
-                                Image(systemName: "globe")
-                                        .padding(12)
+                                Image.globe
                         }
+                        .padding(.vertical, verticalPadding + 7)
+                        .padding(.horizontal, horizontalPadding + 7)
                         LargePadGlobeButton()
                 }
-                .frame(width: width, height: height)
+                .frame(width: keyWidth, height: keyHeight)
         }
 }
 

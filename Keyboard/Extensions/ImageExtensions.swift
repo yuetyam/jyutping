@@ -1,10 +1,8 @@
 import SwiftUI
 
 extension Image {
-        static let upChevron: Image = Image(systemName: "chevron.up")
-        static let downChevron: Image = Image(systemName: "chevron.down")
-        static let leftChevron: Image = Image(systemName: "chevron.left")
-        static let rightChevron: Image = Image(systemName: "chevron.right")
+        static let chevronUp: Image = Image(systemName: "chevron.up")
+        static let chevronDown: Image = Image(systemName: "chevron.down")
 
         static let checkmark: Image = Image(systemName: "checkmark")
 
@@ -23,8 +21,7 @@ extension Image {
         static let shiftCapsLocked: Image = Image(systemName: "capslock.fill")
 
         /// Emoji Smiley Face
-        @MainActor
-        static let smiley: Image = Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
+        @MainActor static let smiley: Image = Image(uiImage: UIImage.emojiSmiley.cropped()?.withRenderingMode(.alwaysTemplate) ?? UIImage.emojiSmiley)
 }
 
 extension UIImage {
