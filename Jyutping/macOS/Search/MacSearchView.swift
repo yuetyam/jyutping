@@ -97,7 +97,7 @@ struct MacSearchView: View {
                                                         HStack {
                                                                 Text(verbatim: word)
                                                                 Text(verbatim: "《英華分韻撮要》")
-                                                                Text(verbatim: "衛三畏 (Samuel Wells Williams)　廣州　1856").foregroundStyle(Color.secondary)
+                                                                Text(verbatim: "衛三畏 (Samuel Wells Williams)　廣州　1856").opacity(0.66)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
@@ -117,7 +117,7 @@ struct MacSearchView: View {
                                                         HStack {
                                                                 Text(verbatim: word)
                                                                 Text(verbatim: "《初學粵音切要》")
-                                                                Text(verbatim: "湛約翰 (John Chalmers)　香港　1855").foregroundStyle(Color.secondary)
+                                                                Text(verbatim: "湛約翰 (John Chalmers)　香港　1855").opacity(0.66)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
@@ -136,7 +136,8 @@ struct MacSearchView: View {
                                                 VStack(spacing: 2) {
                                                         HStack {
                                                                 Text(verbatim: word)
-                                                                Text(verbatim: "《分韻撮要》　佚名　清初　廣州府")
+                                                                Text(verbatim: "《分韻撮要》")
+                                                                Text(verbatim: "佚名　清初　廣州府").opacity(0.66)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)
@@ -155,7 +156,8 @@ struct MacSearchView: View {
                                                 VStack(spacing: 2) {
                                                         HStack {
                                                                 Text(verbatim: word)
-                                                                Text(verbatim: "《大宋重修廣韻》　陳彭年等　北宋")
+                                                                Text(verbatim: "《大宋重修廣韻》")
+                                                                Text(verbatim: "陳彭年等　北宋").opacity(0.66)
                                                                 Spacer()
                                                         }
                                                         .font(.copilot)

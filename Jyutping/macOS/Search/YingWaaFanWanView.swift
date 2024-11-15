@@ -30,7 +30,7 @@ struct YingWaaFanWanView: View {
                                         Text.separator
                                         Text(verbatim: entry.romanization).font(.title3.monospaced())
                                 }
-                                Text(verbatim: ipaText).font(.title3).foregroundStyle(Color.secondary)
+                                Text(verbatim: ipaText).font(.title3).opacity(0.66)
                                 Spacer()
                                 Speaker(entry.romanization).opacity(entry.romanization.isValidJyutpingSyllable ? 1 : 0)
                         }

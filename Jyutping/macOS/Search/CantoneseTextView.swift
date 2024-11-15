@@ -21,7 +21,7 @@ struct CantoneseTextView: View {
                                 Text(verbatim: text)
                         }
                         if let unicode {
-                                Text(verbatim: unicode).font(.fixedWidth).foregroundStyle(Color.secondary)
+                                Text(verbatim: unicode).font(.fixedWidth).opacity(0.66)
                         }
                         Spacer()
                         Speaker {

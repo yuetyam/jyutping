@@ -38,7 +38,7 @@ struct PronunciationView: View {
                                         Text(verbatim: romanization).font(.title3.monospaced())
                                 }
                                 if let ipa {
-                                        Text(verbatim: ipa).font(.title3).foregroundStyle(Color.secondary)
+                                        Text(verbatim: ipa).font(.title3).opacity(0.66)
                                 }
                                 Spacer()
                                 Speaker(romanization)
