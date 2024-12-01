@@ -232,9 +232,12 @@ final class JyutpingInputController: IMKInputController, Sendable {
         }
 
         private func insert(_ text: String) {
-                clearMarkedText()
-                // let range = NSRange(location: NSNotFound, length: 0)
+                let shouldClearMarkedText: Bool = inputStage.isBuffering.negative
+                // let replacementRange = NSRange(location: NSNotFound, length: 0)
                 currentClient?.insertText(text as NSString, replacementRange: replacementRange())
+                if shouldClearMarkedText {
+                        clearMarkedText()
+                }
         }
         private func mark(text: String) {
                 let attributedText = NSAttributedString(string: text, attributes: markAttributes)
@@ -324,7 +327,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         let bestScheme = segmentation.first
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.mark(text: {

@@ -118,6 +118,16 @@ public struct Candidate: Hashable, Comparable, Sendable {
                 return self.type != .cantonese
         }
 
+        /// isConcatenated. order > 1_000_000
+        public var isCompound: Bool {
+                return self.order > 1_000_000
+        }
+
+        /// order < 0
+        public var isUserLexicon: Bool {
+                return self.order < 0
+        }
+
         // Equatable
         public static func ==(lhs: Candidate, rhs: Candidate) -> Bool {
                 guard lhs.type == rhs.type else { return false }
@@ -180,5 +190,11 @@ extension Array where Element == Candidate {
                 let step: Int = 1_000_000
                 let order: Int = map(\.order).reduce(0, { $0 + $1 + step })
                 return Candidate(text: text, lexiconText: lexiconText, romanization: romanization, input: input, mark: mark, order: order)
+        }
+}
+
+extension Array where Element == Candidate {
+        public func transformed(with characterStandard: CharacterStandard) -> [Candidate] {
+                return ((self.first?.isUserLexicon ?? false) ? self.filter(\.isCompound.negative) : self).map({ $0.transformed(to: characterStandard) }).uniqued()
         }
 }

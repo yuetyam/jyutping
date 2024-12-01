@@ -111,7 +111,7 @@ struct UserLexicon {
                                 let syllables = scheme.map(\.origin).joined(separator: String.space)
                                 return matched.compactMap({ item -> Candidate? in
                                         guard item.mark == syllables else { return nil }
-                                        return Candidate(text: item.text, romanization: item.romanization, input: item.input, mark: text2mark)
+                                        return Candidate(text: item.text, romanization: item.romanization, input: item.input, mark: text2mark, order: -1)
                                 })
                         }).flatMap({ $0 })
                 }()
@@ -129,7 +129,7 @@ struct UserLexicon {
                         let word = String(cString: sqlite3_column_text(statement, 0))
                         let jyutping = String(cString: sqlite3_column_text(statement, 1))
                         let mark: String = mark ?? jyutping.removedTones()
-                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, mark: mark)
+                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, mark: mark, order: -1)
                         candidates.append(candidate)
                 }
                 return candidates
@@ -161,7 +161,7 @@ struct UserLexicon {
                                 let syllables = scheme.map(\.origin).joined(separator: String.space)
                                 return matched.compactMap({ item -> TenKeyLexicon? in
                                         guard item.candidate.mark == syllables else { return nil }
-                                        let newCandidate = Candidate(text: item.candidate.text, romanization: item.candidate.romanization, input: inputText, mark: text2mark)
+                                        let newCandidate = Candidate(text: item.candidate.text, romanization: item.candidate.romanization, input: inputText, mark: text2mark, order: -1)
                                         return TenKeyLexicon(frequency: item.frequency, candidate: newCandidate)
                                 })
                         }).flatMap({ $0 })
@@ -181,7 +181,7 @@ struct UserLexicon {
                         let word: String = String(cString: sqlite3_column_text(statement, 1))
                         let jyutping: String = String(cString: sqlite3_column_text(statement, 2))
                         let mark: String = mark ?? jyutping.removedTones()
-                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, mark: mark)
+                        let candidate: Candidate = Candidate(text: word, romanization: jyutping, input: input, mark: mark, order: -1)
                         items.append(TenKeyLexicon(frequency: frequency, candidate: candidate))
                 }
                 return items

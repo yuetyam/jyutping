@@ -570,7 +570,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let segmentation = Segmentor.segment(combos: combos)
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.tenKeySuggest(combos: combos, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.tenKeySuggest(combos: combos, segmentation: segmentation)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.text2mark = {
@@ -598,7 +598,7 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                         let bestScheme = segmentation.first
                         async let userLexiconCandidates: [Candidate] = isInputMemoryOn ? UserLexicon.suggest(text: processingText, segmentation: segmentation) : []
                         async let engineCandidates: [Candidate] = Engine.suggest(origin: originalText, text: processingText, segmentation: segmentation, needsSymbols: needsSymbols)
-                        let suggestions = await (userLexiconCandidates + engineCandidates).map({ $0.transformed(to: Options.characterStandard) }).uniqued()
+                        let suggestions = await (userLexiconCandidates + engineCandidates).transformed(with: Options.characterStandard)
                         if Task.isCancelled.negative {
                                 await MainActor.run { [weak self] in
                                         self?.text2mark = {
