@@ -230,6 +230,7 @@
 		3742192B2BD4B63200FCB170 /* EnhancedReturnKeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */; };
 		3742824E2B3CB70C00B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824D2B3CB70C00B687D3 /* AboutKit */; };
 		374282502B3CB71400B687D3 /* AboutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3742824F2B3CB71400B687D3 /* AboutKit */; };
+		374326092CF44C3900AE8B0B /* ABCKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374326082CF44C3900AE8B0B /* ABCKeyboard.swift */; };
 		375A90B32BD0797B009784BB /* TenKeyGlobeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */; };
 		375B855D2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */; };
 		375B855F2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */; };
@@ -621,6 +622,7 @@
 		373B6ABB2CE074AB00C05CD9 /* PadExpansiveBubbleShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadExpansiveBubbleShape.swift; sourceTree = "<group>"; };
 		3742192A2BD4B63200FCB170 /* EnhancedReturnKeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancedReturnKeyType.swift; sourceTree = "<group>"; };
 		3742824C2B3CB6FD00B687D3 /* AboutKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AboutKit; path = Modules/AboutKit; sourceTree = "<group>"; };
+		374326082CF44C3900AE8B0B /* ABCKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABCKeyboard.swift; sourceTree = "<group>"; };
 		375A90B22BD0797B009784BB /* TenKeyGlobeKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenKeyGlobeKey.swift; sourceTree = "<group>"; };
 		375B855C2CB8FBEB000E124E /* CandidateBarScrollViewIOS17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS17.swift; sourceTree = "<group>"; };
 		375B855E2CB8FC1B000E124E /* CandidateBarScrollViewIOS18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateBarScrollViewIOS18.swift; sourceTree = "<group>"; };
@@ -1230,6 +1232,7 @@
 			isa = PBXGroup;
 			children = (
 				371B6F152B3B342E005BB31C /* AlphabeticKeyboard.swift */,
+				374326082CF44C3900AE8B0B /* ABCKeyboard.swift */,
 				371B6F062B3B342E005BB31C /* NumericKeyboard.swift */,
 				371B6F092B3B342E005BB31C /* SymbolicKeyboard.swift */,
 				371B6F0B2B3B342E005BB31C /* CantoneseNumericKeyboard.swift */,
@@ -1825,6 +1828,7 @@
 				371B6FF52B3B342F005BB31C /* PadBackspaceKey.swift in Sources */,
 				371B6FF22B3B342F005BB31C /* PadSymbolicKeyboard.swift in Sources */,
 				371B6FAB2B3B342F005BB31C /* TenKeyNavigateKey.swift in Sources */,
+				374326092CF44C3900AE8B0B /* ABCKeyboard.swift in Sources */,
 				379C51652CB9DE7900AAB1A3 /* TenKeySymbolSidebar.swift in Sources */,
 				371B6F8D2B3B342F005BB31C /* SymbolicKeyboard.swift in Sources */,
 				37942E282CE420C5005D6536 /* MediumPadABCKeyboard.swift in Sources */,

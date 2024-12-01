@@ -134,11 +134,11 @@ struct MotherBoard: View {
                         case .abc:
                                 switch context.keyboardInterface {
                                 case .phonePortrait:
-                                        AlphabeticKeyboard()
+                                        ABCKeyboard()
                                 case .phoneLandscape:
-                                        AlphabeticKeyboard()
+                                        ABCKeyboard()
                                 case .padFloating:
-                                        AlphabeticKeyboard()
+                                        ABCKeyboard()
                                 case .padPortraitSmall:
                                         PadABCKeyboard()
                                 case .padPortraitMedium:
