@@ -19,7 +19,7 @@ struct IOSExpressionsView: View {
                                         }
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "複數：我哋（我等）")
+                                                        Text(verbatim: "複數：我哋")
                                                         Speaker("我哋")
                                                         Spacer()
                                                 }
@@ -45,7 +45,7 @@ struct IOSExpressionsView: View {
                                         }
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "複數：你哋（你等）")
+                                                        Text(verbatim: "複數：你哋")
                                                         Speaker("你哋")
                                                         Spacer()
                                                 }
@@ -76,7 +76,7 @@ struct IOSExpressionsView: View {
                                         }
                                         Label {
                                                 HStack {
-                                                        Text(verbatim: "複數：佢哋（佢等）")
+                                                        Text(verbatim: "複數：佢哋")
                                                         Speaker("佢哋")
                                                         Spacer()
                                                 }

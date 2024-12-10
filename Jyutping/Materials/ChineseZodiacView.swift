@@ -18,6 +18,12 @@ struct ChineseZodiacView: View {
                                         }
                                 }
                                 .block()
+                                VStack {
+                                        ForEach(patchTerms) {
+                                                TermView(term: $0)
+                                        }
+                                }
+                                .block()
                         }
                         .padding()
                 }
@@ -34,6 +40,11 @@ struct ChineseZodiacView: View {
                         }
                         Section {
                                 ForEach(altTerms) {
+                                        TermView(term: $0)
+                                }
+                        }
+                        Section {
+                                ForEach(patchTerms) {
                                         TermView(term: $0)
                                 }
                         }
@@ -64,6 +75,26 @@ struct ChineseZodiacView: View {
         }()
 
         private let altTerms: [Term] = {
+                let textBlock: String = """
+                子鼠,zi2 syu2,🐀
+                丑牛,cau2 ngau4,🐃
+                寅虎,jan4 fu2,🐅
+                卯兔,maau5 tou3,🐇
+                辰龍,san4 lung4,🐉
+                巳蛇,zi6 se4,🐍
+                午馬,ng5 maa5,🐎
+                未羊,mei6 joeng4,🐑
+                申猴,san1 hau4,🐒
+                酉雞,jau5 gai1,🐓
+                戌狗,seot1 gau2,🐶
+                亥豬,hoi6 zyu1,🐖
+                """
+
+                let items: [Term] = Term.array(from: textBlock)
+                return items
+        }()
+
+        private let patchTerms: [Term] = {
                 let textBlock: String = """
                 老鼠,lou5 syu2,🐀
                 水牛,seoi2 ngau4,🐃
