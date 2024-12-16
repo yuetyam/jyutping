@@ -59,14 +59,14 @@ iOS、iPadOS 及 macOS 粵語拼音輸入法。
 </a>
 <br>
 <br>
-兼容系統： iOS / iPadOS 15.0+
+兼容系統： iOS / iPadOS 16.0+
 
 ## macOS
 由於 [第三方輸入法無法上架 Mac App Store](https://developer.apple.com/forums/thread/134115) ，請前往 [網棧](https://jyutping.app/mac) 下載安裝，或者用 [Homebrew 安裝](https://jyutping.app/mac/homebrew) 。
 
 選項䈎面： 輸入法撳 <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>`</kbd> (位於 esc 鍵下方) 會顯示一個選項䈎面。  
 常問問題： [常問問題（FAQ）](https://jyutping.app/faq)  
-兼容系統： macOS 12 Monterey 或者更高。
+兼容系統： macOS 13 Ventura 或者更高。
 
 ## 如何構建（How to build）
 前置要求（Build requirements）
