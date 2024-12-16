@@ -33,7 +33,9 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 if isKeyboardPrepared {
                         // do something
                 } else {
-                        prepareKeyboard()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [unowned self] in
+                                prepareKeyboard()
+                        }
                 }
         }
         override func viewWillAppear(_ animated: Bool) {
@@ -816,12 +818,8 @@ final class KeyboardViewController: UIInputViewController, ObservableObject {
                 let screen: CGSize = view.window?.windowScene?.screen.bounds.size ?? UIScreen.main.bounds.size
                 let newKeyboardWidth: CGFloat = {
                         guard keyboardInterface != .padFloating else { return 320 }
-                        let horizontalInset: CGFloat = {
-                                let isPhoneLandscape: Bool = traitCollection.verticalSizeClass == .compact
-                                guard isPhoneLandscape else { return 0 }
-                                let hasHomeButton: Bool = needsInputModeSwitchKey // FIXME: Not a good way
-                                return hasHomeButton ? 0 : 236
-                        }()
+                        guard keyboardInterface == .phoneLandscape else { return screen.width }
+                        let horizontalInset: CGFloat = needsInputModeSwitchKey ? 0 : 236 // FIXME: Not a good way
                         return screen.width - horizontalInset
                 }()
                 keyboardWidth = newKeyboardWidth
