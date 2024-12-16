@@ -137,6 +137,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         if inputStage.isBuffering {
                                 clearBufferText()
                         }
+                        inputStage = .standby
                         if inputForm.isOptions {
                                 updateInputForm()
                         }
@@ -150,18 +151,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
         override func deactivateServer(_ sender: Any!) {
                 nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
                 Task { @MainActor in
-                        suggestionTask?.cancel()
-                        clearWindow()
-                        selectedCandidates = []
-                        if inputStage.isBuffering {
-                                let text: String = bufferText
-                                clearBufferText()
-                                client?.insertText(text as NSString, replacementRange: replacementRange())
-                        }
-                        if inputForm.isOptions {
-                                updateInputForm()
-                        }
-                        clearMarkedText()
+                        finishInputSession(client: client)
                         let windowCount = NSApp.windows.count
                         if windowCount > 20 {
                                 NSRunningApplication.current.terminate()
@@ -174,6 +164,29 @@ final class JyutpingInputController: IMKInputController, Sendable {
                         }
                 }
                 super.deactivateServer(sender)
+        }
+        override func commitComposition(_ sender: Any!) {
+                nonisolated(unsafe) let client: InputClient? = (sender as? InputClient) ?? client()
+                Task { @MainActor in
+                        finishInputSession(client: client)
+                }
+                super.commitComposition(sender)
+        }
+        private func finishInputSession(client: InputClient? = nil) {
+                guard inputStage != .idle else { return }
+                suggestionTask?.cancel()
+                clearWindow()
+                selectedCandidates = []
+                if inputStage.isBuffering {
+                        let text: String = bufferText
+                        clearBufferText()
+                        client?.insertText(text as NSString, replacementRange: replacementRange())
+                }
+                inputStage = .idle
+                if inputForm.isOptions {
+                        updateInputForm()
+                }
+                clearMarkedText()
         }
 
         private lazy var appContext: AppContext = AppContext()
@@ -995,6 +1008,7 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 let shouldSwitchToABCMode: Bool = isShifting && (AppSettings.shiftSpaceCombination == .switchInputMethodMode)
                                 guard shouldSwitchToABCMode.negative else {
                                         passBuffer()
+                                        clearMarkedText()
                                         Options.updateInputMethodMode(to: .abc)
                                         updateInputForm(to: .transparent)
                                         updateWindowFrame(.zero)
@@ -1008,8 +1022,10 @@ final class JyutpingInputController: IMKInputController, Sendable {
                                 } else if isBuffering {
                                         passBuffer()
                                 } else if isShifting || Options.characterForm.isFullWidth {
+                                        clearMarkedText()
                                         insert(String.fullWidthSpace)
                                 } else {
+                                        clearMarkedText()
                                         insert(String.space)
                                 }
                         case .transparent:
